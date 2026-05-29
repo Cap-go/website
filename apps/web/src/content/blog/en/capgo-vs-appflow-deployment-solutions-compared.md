@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-12T07:21:36.178Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68217b4a5e3fe4823b5fc0bc-1747034661995.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, app deployment, Capgo, Appflow, mobile app security, CI/CD integration, cloud hosting, self-hosted solutions
@@ -167,3 +167,7 @@ On the other hand, while Appflow provides functionality, it lacks the same advan
 
 The article doesn’t delve into the specifics of Capgo's cloud and self-hosted deployment options. To get more detailed information, it’s a good idea to check out Capgo's official resources or reach out to their team directly. They can provide guidance that aligns with your specific needs.
 :::
+
+## Keep going from Capgo vs. Appflow: Deployment Solutions Compared
+
+If you are using **Capgo vs. Appflow: Deployment Solutions Compared** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

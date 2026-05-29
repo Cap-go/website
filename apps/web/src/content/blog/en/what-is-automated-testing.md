@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-22T07:24:57.104Z
-updated_at: 2026-05-22T07:27:22.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/e9d24d14-f4a5-487a-ac31-f4c8f8f2f270/what-is-automated-testing-automated-testing.jpg'
 head_image_alt: 'What Is Automated Testing: Automated Testing Explained'
 keywords: 'automated testing, capacitorjs, electron js, mobile testing, ci/cd'
@@ -287,3 +287,7 @@ The teams that succeed are disciplined about pruning. They delete low-value test
 ---
 
 If your Capacitor or Electron team wants faster recovery from web-layer regressions, [Capgo](https://capgo.app) is one option for shipping signed live updates to users without waiting for app store review. That changes how teams think about release risk, rollback, and what their automated suite should validate before and after deployment.
+
+## Keep going from What Is Automated Testing: Automated Testing Explained
+
+If you are using **What Is Automated Testing: Automated Testing Explained** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

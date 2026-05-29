@@ -8,7 +8,7 @@ author: Rupert Barrow
 author_image_url: 'https://avatars.githubusercontent.com/u/48629751?v=4'
 author_url: 'https://linkedin.com/in/rbarrow'
 created_at: 2024-09-22T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /rapido_cloud_study_case.webp
 head_image_alt: Study case rapido cloud
 keywords: semantic release, semantic-release, Capgo, CapacitorUpdater, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -271,3 +271,7 @@ I have over 22 years' experience of Salesforce, as a client and user, as a partn
 You can find me on LinkedIn at https://linkedin.com/in/rbarrow. 
 
 You can take a look at our Salesforce offerings at https://www.rapido-companion.app and https://www.rapido.cloud (under development).
+
+## Keep going from How Rapido Cloud manage Semantic Release with Capgo CapacitorUpdater
+
+If you are using **How Rapido Cloud manage Semantic Release with Capgo CapacitorUpdater** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

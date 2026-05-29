@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-14T05:48:24.354Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-29T11:31:26.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6824286159ff6128992275a6-1747201776379.jpg
 head_image_alt: Mobile Development
 keywords: version control, mobile CI/CD, branching strategies, security practices, rollback plans, semantic versioning, app updates
@@ -83,7 +83,7 @@ The right strategy depends on your team’s size, workflow, and goals. Whichever
 
 ### Version Numbering System
 
-Pair your branch management strategy with a clear version numbering system. The widely-used **semantic versioning** format (MAJOR.MINOR.PATCH) works well for mobile apps:
+Pair your branch management strategy with a clear version numbering system. The widely-used [**semantic versioning** format](/semver_tester/) (MAJOR.MINOR.PATCH) works well for mobile apps:
 
 -   **MAJOR**: For breaking API changes.
 -   **MINOR**: For backward-compatible feature updates.
@@ -330,3 +330,7 @@ To keep your mobile CI/CD pipeline secure and prepared for quick rollbacks, focu
 
 For fast rollbacks, ensure you have dependable backups of earlier app versions and use tools that allow instant reverts. Tools like Capgo can simplify this process with real-time updates, letting you resolve issues quickly while minimizing user impact. These measures protect your app’s stability and help maintain a smooth experience for your users.
 :::
+
+## Keep going from Version Control Tips for Mobile CI/CD
+
+If you are using **Version Control Tips for Mobile CI/CD** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

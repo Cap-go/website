@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-18T03:25:44.642Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136-1744946761044.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, custom plugins, mobile development, distribution, live updates
@@ -159,3 +159,7 @@ By following these five steps, you can create a [custom Capacitor plugin](https:
 From development and testing to packaging, publishing, integration, and even optional live updates, this structured process ensures your plugins work seamlessly on both iOS and Android platforms.
 
 Keep in mind, successful plugin distribution goes beyond the first release - it’s about maintaining an efficient and reliable process that benefits both developers and users. Use this guide to streamline plugin delivery across platforms.
+
+## Keep going from 5 Steps to Distribute Custom Capacitor Plugins
+
+If you are using **5 Steps to Distribute Custom Capacitor Plugins** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

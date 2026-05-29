@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T06:50:50.952Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6832b835d3b966198180b547-1748155908955.jpg
 head_image_alt: Software Development
 keywords: CI/CD, app security, automated checks, compliance, deployment, vulnerabilities, software development, security workflows
@@ -194,3 +194,7 @@ Capgo's CI/CD integration strengthens adherence to regulations like **GDPR** and
 
 These measures not only keep user data safe but also ensure that updates align with strict regulatory requirements, minimizing the chances of data breaches while keeping app performance smooth and uninterrupted.
 :::
+
+## Keep going from How CI/CD Workflows Improve App Security
+
+If you are using **How CI/CD Workflows Improve App Security** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

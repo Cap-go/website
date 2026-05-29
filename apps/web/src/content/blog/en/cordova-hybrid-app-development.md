@@ -10,7 +10,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-06-02T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /what-is-cordova-phone-gap.webp
 head_image_alt: Diagram explaining the difference between hybrid and native apps.
 keywords: Cordova, hybrid app development, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -113,3 +113,7 @@ Capgo is a comprehensive platform explicitly designed to simplify and enhance th
 ## Why Capgo Exclusively Supports Capacitor for Live Updates
 
 Capgo has made the strategic decision to focus solely on Capacitor, a modern and powerful hybrid app runtime, to deliver the best possible live update experience. Capacitor's modern architecture, deep integration with native SDKs, and commitment to web standards align perfectly with Capgo's vision of providing seamless, reliable, and efficient live updates for hybrid mobile applications.
+
+## Keep going from Ultimate Guide to Apache Cordova: Hybrid App Development Made Easy
+
+If you are using **Ultimate Guide to Apache Cordova: Hybrid App Development Made Easy** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

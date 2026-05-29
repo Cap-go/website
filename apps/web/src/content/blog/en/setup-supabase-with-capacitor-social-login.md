@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-27T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /supabase_social_login.webp
 head_image_alt: Supabase Social Login Integration
 keywords: Supabase, Capacitor, social login, authentication, Google, Apple, Facebook, mobile app development, OAuth
@@ -683,4 +683,8 @@ You now have a complete authentication system combining Supabase's robust backen
 
 The combination of Supabase and the Capgo Social Login plugin offers a powerful, scalable authentication solution for your Capacitor apps.
 
-For more advanced features like **multi-factor authentication** or **custom claims**, check out the [Supabase documentation](https://supabase.com/docs/guides/auth/) and the [Social Login plugin documentation](/docs/plugins/social-login/). 
+For more advanced features like **multi-factor authentication** or **custom claims**, check out the [Supabase documentation](https://supabase.com/docs/guides/auth/) and the [Social Login plugin documentation](/docs/plugins/social-login/).
+
+## Keep going from Setup Supabase Authentication with Capacitor Social Login Plugin
+
+If you are using **Setup Supabase Authentication with Capacitor Social Login Plugin** to plan authentication and account flows, connect it with [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication, and [SSO (Enterprise)](/docs/webapp/enterprise-sso/) for the implementation detail in SSO (Enterprise).

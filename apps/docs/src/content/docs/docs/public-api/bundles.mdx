@@ -10,7 +10,7 @@ Bundles are the core update packages in Capgo. Each bundle contains the web asse
 ## Understanding Bundles
 
 A bundle represents a specific bundle (version) of your app's web content and includes:
-- **Bundle (version)**: Semantic version number for the bundle
+- **Bundle (version)**: [Semantic version number](/semver_tester/) for the bundle
 - **Checksum**: Unique hash to verify bundle integrity
 - **Storage Info**: Details about where and how the bundle is stored
 - **Native Requirements**: Minimum native app version requirements
@@ -205,7 +205,7 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 | Parameter | Description | Required |
 |-----------|-------------|----------|
 | `app_id` | Your app identifier | Yes |
-| `version` | Bundle (version) semantic version (e.g., "1.2.3") | Yes |
+| `version` | Bundle (version) [semantic version](/semver_tester/) (e.g., "1.2.3") | Yes |
 | `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
 | `checksum` | SHA256 checksum of the zip file | Yes |
 
@@ -336,7 +336,7 @@ main();
 
 ## Best Practices
 
-1. **Bundle (version) Management**: Use semantic versioning consistently
+1. **Bundle (version) Management**: Use [semantic versioning](/semver_tester/) consistently
 2. **Storage Optimization**: Remove unused bundles periodically
 3. **Bundle (version) Compatibility**: Set appropriate minimum native version requirements
 4. **Backup Strategy**: Maintain backups of critical bundles (versions)
@@ -637,4 +637,8 @@ Common error scenarios and their responses:
 1. **Retention Policy**: Define how long to keep old bundles
 2. **Size Management**: Monitor bundle sizes and storage usage
 3. **Backup Strategy**: Consider backing up critical bundles (versions)
-4. **Cost Optimization**: Remove unnecessary bundles to optimize storage costs 
+4. **Cost Optimization**: Remove unnecessary bundles to optimize storage costs
+
+## Keep going from Bundles
+
+If you are using **Bundles** to plan storage and file handling, connect it with [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file, and [@capgo/capacitor-uploader](/docs/plugins/uploader/) for the implementation detail in @capgo/capacitor-uploader.

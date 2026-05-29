@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-20T03:57:39.512Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67db8c5296fa813b295022c3-1742443070357.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, Android development, Android Studio, SDK, mobile apps, Node.js, JDK, environment setup
@@ -386,3 +386,7 @@ A well-configured setup ensures efficient updates, with statistics showing 95% o
 Tools like Capgo are making deployment workflows easier, whether you're distributing through app stores or using live update solutions. Double-check your environment variables and SDK components to avoid any hiccups.
 
 With these steps complete, you’re ready to dive into Capacitor app development.
+
+## Keep going from Android Setup for Capacitor Apps
+
+If you are using **Android Setup for Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

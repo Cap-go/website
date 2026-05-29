@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-15T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /nuxt_capgo.webp
 head_image_alt: Nuxt and Capacitor mobile app development
 keywords: Nuxt 4, Capacitor 8, mobile app from scratch, iOS development, Android development, Vue mobile app, native plugins, Tailwind CSS
@@ -564,3 +564,7 @@ Make sure you configured `nitro: { preset: 'static' }` in `nuxt.config.ts` and r
 - [Konsta UI - Mobile UI Components](https://konstaui.com/)
 
 Ready to ship your app? Learn how Capgo can help you deliver updates faster — [sign up for a free account](/register/) today.
+
+## Keep going from Build a Nuxt Mobile App from Scratch with Capacitor 8
+
+If you are using **Build a Nuxt Mobile App from Scratch with Capacitor 8** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

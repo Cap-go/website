@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-27T00:00:00.000Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /secure_upload.webp
 head_image_alt: Secure upload Capgo
 keywords: E2E, code signing, RSA, AES, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -89,3 +89,7 @@ Capgo code signing is available for all customers. To get started, follow the [s
 ## Credits
 
 Thanks a lot to [Ionic](https://ionic.com/), this article is based on [this article](https://ionic.io/blog/introducing-the-ionic-end-to-end-testing-reference-example/) rewrote with chat-gpt-3 and adapted.
+
+## Keep going from E2E Encryption for Capacitor Updater via Code Signing
+
+If you are using **E2E Encryption for Capacitor Updater via Code Signing** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

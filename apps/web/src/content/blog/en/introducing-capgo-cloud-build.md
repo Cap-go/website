@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-11-19T00:00:00.000Z
-updated_at: 2026-05-10T12:53:11.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo_banner.webp
 head_image_alt: Capgo illustration
 keywords: cloud build, native build, capacitor, iOS build, Android build, CI/CD, app store, play store
@@ -297,3 +297,7 @@ Happy building!
 - [iOS Build Configuration](/docs/cli/cloud-build/ios/)
 - [Android Build Configuration](/docs/cli/cloud-build/android/)
 - [Join our Discord](https://discord.com/invite/VnYRvBfgA6)
+
+## Keep going from Introducing Capgo Cloud Build - Build Native Apps Without the Hassle
+
+If you are using **Introducing Capgo Cloud Build - Build Native Apps Without the Hassle** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

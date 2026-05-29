@@ -20,13 +20,15 @@ export interface Plugin extends Action {
 }
 
 const actionDefinitionRows =
-  String.raw`@capgo/native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
+  String.raw`@capgo/capacitor-native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
 @capgo/capacitor-native-navigation|github.com/Cap-go|Render native navbars, tabbars, and transition shells over a full-screen Capacitor WebView|https://github.com/Cap-go/capacitor-native-navigation/|Native Navigation
 @capgo/capacitor-auto|github.com/Cap-go|Bridge Capacitor apps with CarPlay and Android Auto template surfaces for two-way car communication|https://github.com/Cap-go/capacitor-auto/|Auto
 @capgo/capacitor-transitions|github.com/Cap-go|Add Ionic-style page transitions and iOS edge swipe-back gestures without Ionic UI|https://github.com/Cap-go/capacitor-transitions/|Transitions
 @capgo/capacitor-sheets|github.com/Cap-go|Framework-agnostic sheets, drawers, dialogs, and overlay primitives optimized for Capacitor apps|https://github.com/Cap-go/capacitor-sheets/|Sheets
 @capgo/capacitor-native-biometric|github.com/Cap-go|Secure authentication using Face ID, Touch ID, and Android biometric APIs|https://github.com/Cap-go/capacitor-native-biometric/|Native Biometric
 @capgo/camera-preview|github.com/Cap-go|Display live camera feed as overlay with customizable controls and capture capabilities|https://github.com/Cap-go/capacitor-camera-preview/|Camera Preview
+@capgo/capacitor-calendar|github.com/Cap-go|Manage native calendar events on iOS and Android, with iOS Reminders support|https://github.com/Cap-go/capacitor-calendar/|Calendar
+@capgo/capacitor-date-picker|github.com/Cap-go|Native date, time, date-time, year-month, and range picker for iOS, Android, and Web|https://github.com/Cap-go/capacitor-date-picker/|Date Picker
 @capgo/capacitor-updater|github.com/Cap-go|Deploy live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
 @capgo/electron-updater|github.com/Cap-go|OTA live updates for Electron apps with the same API surface as capacitor-updater|https://github.com/Cap-go/electron-updater/|Electron Updater
 @capgo/capacitor-uploader|github.com/Cap-go|Upload large files reliably in background with progress tracking and retry support|https://github.com/Cap-go/capacitor-uploader/|Uploader
@@ -39,10 +41,10 @@ const actionDefinitionRows =
 @capgo/capacitor-contentsquare|github.com/Cap-go|Integrate Contentsquare mobile analytics, consent gating, screen tracking, transactions, and session replay controls in Capacitor|https://github.com/Cap-go/capacitor-contentsquare/|Contentsquare
 @capgo/capacitor-facebook-analytics|github.com/Cap-go|Meta/Facebook App Events analytics with standard events, purchase logging, currency parameters, and advertiser tracking controls|https://github.com/Cap-go/capacitor-facebook-analytics/|Facebook Analytics
 @capgo/capacitor-nativegeocoder|github.com/Cap-go|Convert addresses to coordinates and coordinates to addresses using native geocoding|https://github.com/Cap-go/capacitor-nativegeocoder/|Native Geocoder
-@capgo/inappbrowser|github.com/Cap-go|Open web pages in a customizable in-app browser without leaving your application|https://github.com/Cap-go/capacitor-inappbrowser/|In App Browser
+@capgo/capacitor-inappbrowser|github.com/Cap-go|Open web pages in a customizable in-app browser without leaving your application|https://github.com/Cap-go/capacitor-inappbrowser/|In App Browser
 @capgo/capacitor-mqtt|github.com/Cap-go|MQTT support for real-time messaging across iOS, Android, and Web.|https://github.com/Cap-go/capacitor-mqtt/|MQTT
 @capgo/capacitor-mute|github.com/Cap-go|Detect device mute switch state for iOS devices to handle audio playback appropriately|https://github.com/Cap-go/capacitor-mute/|Mute
-@capgo/native-audio|github.com/Cap-go|Play short audio files with low latency using native audio engine for games and apps|https://github.com/Cap-go/capacitor-native-audio/|Native Audio
+@capgo/capacitor-native-audio|github.com/Cap-go|Play short audio files with low latency using native audio engine for games and apps|https://github.com/Cap-go/capacitor-native-audio/|Native Audio
 @capgo/capacitor-shake|github.com/Cap-go|Detect shake gestures on device for triggering actions like undo or feedback|https://github.com/Cap-go/capacitor-shake/|Shake
 @capgo/capacitor-navigation-bar|github.com/Cap-go|Customize Android navigation bar color and visibility for immersive UI experiences|https://github.com/Cap-go/capacitor-navigation-bar/|Navigation Bar
 @capgo/ivs-player|github.com/Cap-go|Stream ultra-low latency live video using Amazon Interactive Video Service (IVS)|https://github.com/Cap-go/capacitor-ivs-player/|IVS Player
@@ -55,7 +57,7 @@ const actionDefinitionRows =
 @capgo/capacitor-social-login|github.com/Cap-go|Authenticate users with Google, Facebook, and Apple Sign-In for easy social login|https://github.com/Cap-go/capacitor-social-login/|Social Login
 @capgo/capacitor-passkey|github.com/Cap-go|Keep browser-style WebAuthn code in Capacitor while native passkey calls and host patching are handled for you|https://github.com/Cap-go/capacitor-passkey/|Passkey
 @capgo/capacitor-jw-player|github.com/Cap-go|Embed JW Player for professional video streaming with ads and analytics support|https://github.com/Cap-go/capacitor-jw-player/|JW Player
-@capgo/capacitor-ricoh360-camera-plugin|github.com/Cap-go|Control Ricoh Theta 360-degree cameras for immersive panoramic photography|https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/|Ricoh360 Camera
+@capgo/capacitor-ricoh360|github.com/Cap-go|Control Ricoh Theta 360-degree cameras for immersive panoramic photography|https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/|Ricoh360 Camera
 @capgo/capacitor-admob|github.com/Cap-go|Monetize your app with Google AdMob banner, interstitial, and rewarded ads|https://github.com/Cap-go/capacitor-admob/|AdMob
 @capgo/capacitor-alarm|github.com/Cap-go|Schedule native alarms and notifications even when app is closed|https://github.com/Cap-go/capacitor-alarm/|Alarm
 @capgo/capacitor-android-inline-install|github.com/Cap-go|Install app updates directly within the app without leaving to Play Store|https://github.com/Cap-go/capacitor-android-inline-install/|Android Inline Install
@@ -159,13 +161,15 @@ const actionDefinitionRows =
     .split('\n')
 
 const pluginIconsByName: Record<string, string> = {
-  '@capgo/native-market': 'ArchiveBoxArrowDown',
+  '@capgo/capacitor-native-market': 'ArchiveBoxArrowDown',
   '@capgo/capacitor-native-navigation': 'DevicePhoneMobile',
   '@capgo/capacitor-auto': 'Truck',
   '@capgo/capacitor-transitions': 'ArrowsRightLeft',
   '@capgo/capacitor-sheets': 'ArrowsPointingOut',
   '@capgo/capacitor-native-biometric': 'FingerPrint',
   '@capgo/camera-preview': 'Camera',
+  '@capgo/capacitor-calendar': 'CalendarDays',
+  '@capgo/capacitor-date-picker': 'CalendarDays',
   '@capgo/capacitor-updater': 'ArrowPath',
   '@capgo/electron-updater': 'ArrowPath',
   '@capgo/capacitor-uploader': 'ArrowUpOnSquare',
@@ -178,10 +182,10 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-contentsquare': 'ChartBar',
   '@capgo/capacitor-facebook-analytics': 'ChartBar',
   '@capgo/capacitor-nativegeocoder': 'MapPin',
-  '@capgo/inappbrowser': 'GlobeAlt',
+  '@capgo/capacitor-inappbrowser': 'GlobeAlt',
   '@capgo/capacitor-mqtt': 'Signal',
   '@capgo/capacitor-mute': 'SpeakerXMark',
-  '@capgo/native-audio': 'SpeakerWave',
+  '@capgo/capacitor-native-audio': 'SpeakerWave',
   '@capgo/capacitor-shake': 'DevicePhoneMobile',
   '@capgo/capacitor-navigation-bar': 'Bars3',
   '@capgo/ivs-player': 'PlayCircle',
@@ -194,7 +198,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-social-login': 'UserCircle',
   '@capgo/capacitor-passkey': 'Key',
   '@capgo/capacitor-jw-player': 'PlayCircle',
-  '@capgo/capacitor-ricoh360-camera-plugin': 'Camera',
+  '@capgo/capacitor-ricoh360': 'Camera',
   '@capgo/capacitor-admob': 'Megaphone',
   '@capgo/capacitor-alarm': 'Bell',
   '@capgo/capacitor-android-inline-install': 'CloudArrowDown',

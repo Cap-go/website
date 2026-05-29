@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-29T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /react_capacitor.webp
 head_image_alt: React.js and Capacitor illustration
 keywords: React, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -278,3 +278,7 @@ Capacitor offers a seamless means of building native apps based on an existing w
 Thanks to technologies like Capacitor, building mobile applications from React.js web apps has never been easier. Take your web development skills to the next level by crafting impressive native mobile apps. Happy coding!
 
 For more about how you can fast-track your app development process, [sign up for a free account](/register/) today.
+
+## Keep going from Building Mobile Apps with Pure React.js and Capacitor
+
+If you are using **Building Mobile Apps with Pure React.js and Capacitor** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

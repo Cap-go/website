@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-24T04:20:44.227Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68311bb4d3b96619817f3ed6-1748060494048.jpg
 head_image_alt: Mobile Development
 keywords: Capgo, OTA updates, Capacitor, app development, update scheduling, mobile apps, CI/CD integration, app security
@@ -246,3 +246,7 @@ With Capgo's channel system, you can tailor updates for different user groups by
 
 You can also assign roles such as **Admin**, **Developer**, or **Viewer** to manage access and permissions for each channel. This structure streamlines phased testing and ensures updates are deployed gradually and effectively to your users.
 :::
+
+## Keep going from Capgo Plugin: Scheduling Updates Tutorial
+
+If you are using **Capgo Plugin: Scheduling Updates Tutorial** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

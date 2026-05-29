@@ -6,7 +6,7 @@ author: Michael (WcaleNieWolny)
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2025-12-31T00:00:00.000Z
-updated_at: 2026-04-14T16:17:01.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo-2025-recap-blog-post-img.webp
 head_image_alt: Capgo 2025 Year in Review
 keywords: Capgo, year in review, 2025, enterprise features, security, OTA updates, Capacitor, plugins
@@ -362,3 +362,7 @@ Here's to 2025. And here's to what we'll build together in 2026.
 **Need a plugin that doesn't exist yet?** [Let us know](https://github.com/Cap-go/capgo/issues) - 2025 proved we can move fast.
 
 — The Capgo Team
+
+## Keep going from Capgo 2025 Year in Review: From 20 to 78 Plugins and Enterprise-Ready
+
+If you are using **Capgo 2025 Year in Review: From 20 to 78 Plugins and Enterprise-Ready** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

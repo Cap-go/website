@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-17T11:27:03.103Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/680053ff28980901df1e733b-1744889496415.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, debugging tools, platform-specific code, VS Code, Android Studio, Xcode, live updates, web debugging
@@ -309,3 +309,7 @@ Key features of live update systems include real-time error tracking, instant ro
 A well-thought-out mix of [effective debugging](https://capgo.app/docs/plugins/updater/debugging/) tools and efficient live update systems is key to addressing platform-specific challenges. By combining traditional debugging methods with live update platforms like Capgo, developers can implement immediate fixes without waiting for app store approvals. With a global update success rate and the ability to reach most users within 24 hours, these tools make resolving issues faster and easier.
 
 Key elements for success include accurate platform detection, secure update processes with end-to-end encryption, quick rollback options, and actionable analytics.
+
+## Keep going from Top Tools for Debugging Platform-Specific Code in Capacitor
+
+If you are using **Top Tools for Debugging Platform-Specific Code in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

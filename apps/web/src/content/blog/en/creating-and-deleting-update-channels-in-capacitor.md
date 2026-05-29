@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-21T03:02:38.679Z
-updated_at: 2026-05-10T23:28:47.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67dcb1f883b63ee70fa08665-1742526177947.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, update channels, app updates, development, mobile, CI/CD, user management, version control
@@ -277,3 +277,7 @@ To take advantage of these proven results, begin by refining your channel setup:
 -   **Track Performance**: Regularly monitor update success rates and user engagement.
 
 Don't forget to periodically review and remove inactive channels to maintain an efficient workflow. With well-managed channels, developers can deploy updates more quickly while maintaining control and stability.
+
+## Keep going from Creating and Deleting Update Channels in Capacitor
+
+If you are using **Creating and Deleting Update Channels in Capacitor** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

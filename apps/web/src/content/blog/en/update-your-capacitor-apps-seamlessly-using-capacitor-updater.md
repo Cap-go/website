@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-02-27T00:00:00.000Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /update_flow.webp
 head_image_alt: Capacitor Dev looking for alternative
 keywords: Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -152,3 +152,7 @@ Congrats! 🎉 You have successfully deployed your first Live Update. This is ju
 
 > If you need to stop receive in local the update run this command
 `npx @capgo/cli@latest channel set`
+
+## Keep going from Update your Capacitor apps seamlessly using Capacitor-updater
+
+If you are using **Update your Capacitor apps seamlessly using Capacitor-updater** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

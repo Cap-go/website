@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-25T00:59:24.268Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e1f3a47856e801f1f25733-1742864377185.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, version conflicts, mobile development, plugin issues, app stability
@@ -361,3 +361,7 @@ Here’s what successful teams focus on:
 | Version pinning | Keeping dependencies consistent |
 
 Managing app versions goes beyond solving conflicts - it's about ensuring a smooth and reliable user experience. By sticking to these practices and leveraging live update tools, you can keep your Capacitor apps running seamlessly.
+
+## Keep going from 5 Steps for Resolving Version Conflicts in Capacitor Apps
+
+If you are using **5 Steps for Resolving Version Conflicts in Capacitor Apps** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

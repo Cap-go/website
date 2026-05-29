@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-21T11:08:30.579Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67dce66283b63ee70fa0e1e4-1742555321812.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, script automation, CI/CD, mobile updates, performance optimization, security practices
@@ -271,3 +271,7 @@ Real-world data supports these practices, and developers have shared their posit
 Industry leaders like Rodrigo Mantica also emphasize its importance:
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)
+
+## Keep going from Best Practices for Capacitor Script Automation
+
+If you are using **Best Practices for Capacitor Script Automation** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-21T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /app_center.webp
 head_image_alt: Microsoft App Center illustration
 keywords: Microsoft, App Center, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -30,3 +30,7 @@ If you’re interested in learning more about migrating from Microsoft App Cente
 ## Credits
 
 Thanks a lot to [Ionic](https://ionic.com/), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow/) rewrote with chat-gpt-3 and adapted.
+
+## Keep going from Moving from Microsoft App Center to Capgo for Live App Updates
+
+If you are using **Moving from Microsoft App Center to Capgo for Live App Updates** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

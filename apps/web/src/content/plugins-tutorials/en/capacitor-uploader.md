@@ -53,3 +53,7 @@ await Uploader.removeUpload({ id: 'upload-123' });
 
 - GitHub: https://github.com/Cap-go/capacitor-uploader/
 - Docs: /docs/plugins/uploader/
+
+## Keep going from Using @capgo/capacitor-uploader
+
+If you are using **Using @capgo/capacitor-uploader** to plan migration and enterprise operations, connect it with [@capgo/capacitor-uploader](/docs/plugins/uploader/) for the implementation detail in @capgo/capacitor-uploader, [Getting Started](/docs/plugins/uploader/getting-started/) for the implementation detail in Getting Started, [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives.

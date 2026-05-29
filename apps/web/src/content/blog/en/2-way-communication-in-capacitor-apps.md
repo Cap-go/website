@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-26T01:11:37.156Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/680c247c5a08fca89178b068-1745629961179.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, two-way communication, native features, web integration, app updates, performance optimization
@@ -444,3 +444,7 @@ Ensuring data security during two-way communication in Capacitor apps involves i
 
 Capacitor apps can also benefit from secure storage solutions for sensitive information and leveraging HTTPS for all network communication. While the article highlights tools like Capgo for secure live updates, these foundational practices are critical for maintaining robust app security.
 :::
+
+## Keep going from 2-Way Communication in Capacitor Apps
+
+If you are using **2-Way Communication in Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

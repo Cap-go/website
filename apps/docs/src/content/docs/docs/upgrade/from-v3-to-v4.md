@@ -69,3 +69,7 @@ interface BundleInfo {
 ## Contributors
 
 [@lincolnthree](https://github.com/lincolnthree/) Thank you so much for starting this work, it was impossible to make this update work without you.
+
+## Keep going from From V3 to V4
+
+If you are using **From V3 to V4** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

@@ -54,3 +54,7 @@ await CapacitorPersistentAccount.saveAccount({
 
 - GitHub: https://github.com/Cap-go/capacitor-persistent-account/
 - Docs: /docs/plugins/persistent-account/
+
+## Keep going from Using @capgo/capacitor-persistent-account
+
+If you are using **Using @capgo/capacitor-persistent-account** to plan native plugin work, connect it with [@capgo/capacitor-persistent-account](/docs/plugins/persistent-account/) for the implementation detail in @capgo/capacitor-persistent-account, [Getting Started](/docs/plugins/persistent-account/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

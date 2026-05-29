@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-02T03:07:47.047Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776-1743563280473.jpg
 head_image_alt: Mobile Development
 keywords: Privacy Manifest, Capacitor, App Store compliance, user data protection, app development, privacy standards
@@ -283,3 +283,7 @@ You can begin implementing these principles by following these steps:
 > "Capgo is a must-have tool for developers who want to boost productivity. Avoiding review delays for bug fixes is a game changer." - Bessie Cooper
 
 Regular updates and proper tools are key to staying compliant and improving over time.
+
+## Keep going from Privacy Manifest for Capacitor Apps: Guide
+
+If you are using **Privacy Manifest for Capacitor Apps: Guide** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

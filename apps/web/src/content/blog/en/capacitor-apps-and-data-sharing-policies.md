@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-12T03:16:34.140Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292-1744427806390.jpg
 head_image_alt: Mobile Development
 keywords: data privacy, app compliance, user consent, encryption, data sharing policies, mobile development, security measures
@@ -207,3 +207,7 @@ By focusing on these strategies, you can set your app up for ongoing success whi
 Keep an eye on updates from Apple's and Google's developer portals to stay informed about policy changes. Strengthen security by implementing end-to-end encryption to safeguard user data and align with current standards.
 
 Consider using tools like Capgo, which has managed updates for over 750 production apps [\[1\]](https://capgo.app/). This can help ensure your app stays up-to-date and avoids policy violations.
+
+## Keep going from Capacitor Apps and Data Sharing Policies
+
+If you are using **Capacitor Apps and Data Sharing Policies** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

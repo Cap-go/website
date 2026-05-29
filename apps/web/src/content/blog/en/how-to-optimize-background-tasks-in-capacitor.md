@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T05:05:50.854Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68326c08d3b9661981804b2c-1748149611644.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, background tasks, mobile optimization, performance, battery efficiency
@@ -261,3 +261,7 @@ Capgo's over-the-air (OTA) update system streamlines the process of managing upd
 
 One standout feature is its support for background updates. Changes are applied while the app operates in the background, ensuring minimal disruption for users. By leveraging **partial updates** and **end-to-end encryption**, Capgo transmits only the necessary data, which helps conserve memory and reduces CPU usage. With an impressive 95% adoption rate for updates within just 24 hours, Capgo proves to be a dependable tool for maintaining app performance and keeping users satisfied.
 :::
+
+## Keep going from How to Optimize Background Tasks in Capacitor
+
+If you are using **How to Optimize Background Tasks in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

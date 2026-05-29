@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-07T06:25:21.043Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67a55480be11a9ef5f3c1ab9-1738909539340.jpg
 head_image_alt: Mobile Development
 keywords: live updates, app development, OTA technology, CI/CD, security protocols, emergency fixes, mobile updates
@@ -314,3 +314,7 @@ To keep your live updates running smoothly and ensure they meet platform require
 -   Share your documented testing protocols with your team for consistency.
 
 These practices will help maintain your workflow and stay compliant with Apple and Google Play guidelines.
+
+## Keep going from Live Updates FAQ: Answers for App Developers
+
+If you are using **Live Updates FAQ: Answers for App Developers** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

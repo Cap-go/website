@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-26T14:03:03.454Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68346854d3b966198182c7d5-1748275217518.jpg
 head_image_alt: Mobile Development
 keywords: version control, rollbacks, app updates, mobile development, CI/CD integration
@@ -178,3 +178,7 @@ Capgo's rollback system is built to keep your app running smoothly by automatica
 
 On top of that, developers can manually roll back to earlier versions whenever necessary. This setup helps reduce downtime, ensures users experience minimal interruptions, and makes the [update process](https://capgo.app/docs/getting-started/deploy/) far less stressful.
 :::
+
+## Keep going from How Capgo Handles Version Control and Rollbacks
+
+If you are using **How Capgo Handles Version Control and Rollbacks** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

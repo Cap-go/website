@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-14T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /expo_alternative.webp
 head_image_alt: Expo alternative illustration
 keywords: Expo, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -59,3 +59,7 @@ Overall, [Capgo](/register/) is a powerful and flexible alternative to Expo that
 Expo is a great tool for React Native developers, but it's not the only option out there. If you're seeking an alternative to Expo, [Capgo](/register/) is undoubtedly worth considering. [Capgo](/register/) is a cloud-based mobile app development platform that offers many of the same tools and services as [Expo](https://expo.dev/), including live updates, but with one key difference: [Capgo](/register/) can be used with any JavaScript framework, while Expo is limited to apps built using React Native.
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
+
+## Keep going from Alternative to Expo Live Update
+
+If you are using **Alternative to Expo Live Update** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

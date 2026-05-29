@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-15T02:27:20.155Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3-1744684053859.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor CLI, plugin errors, build errors, live updates, network issues, development tools
@@ -198,3 +198,7 @@ The methods and tools mentioned earlier help resolve these issues while supporti
 | Update Distribution | Ensures precise delivery | Channel-based deployment |
 
 These elements tie into earlier strategies for preventing errors and debugging, creating a streamlined update process. Automated and secure update systems are setting new standards for CLI management. Strong CLI practices are essential for staying ahead in app development [\[1\]](https://capgo.app/).
+
+## Keep going from Capacitor CLI Commands: Common Issues and Fixes
+
+If you are using **Capacitor CLI Commands: Common Issues and Fixes** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

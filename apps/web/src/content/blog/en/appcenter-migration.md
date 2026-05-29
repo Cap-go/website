@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-22T00:00:00.000Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /migrate_appcenter.webp
 head_image_alt: Capacitor JS Dev looking for alternative
 keywords: App Center, migration, live updates, OTA updates, continuous integration, mobile app updates
@@ -209,3 +209,7 @@ I have made a second article to allow you to so.
 ## Credits
 
 Thanks a lot to [Ionic](https://ionic.com/), this article is based on [this article](https://ionic.io/blog/moving-from-microsoft-app-center-to-ionic-appflow/) rewrote with chat-gpt-3 and adapted.
+
+## Keep going from Migrating from App Center to Capgo
+
+If you are using **Migrating from App Center to Capgo** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

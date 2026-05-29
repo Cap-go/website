@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-27T00:00:00.000Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /fastlane_android.webp
 head_image_alt: Fastlane Google play GitHub action illustration
 keywords: Fastlane, CI/CD, Android, automatic build, automatic release, mobile app updates, Capacitor
@@ -429,3 +429,7 @@ jobs:
 
 - [GitHub Actions Documentation](https://docs.github.com/en/actions/)
 - [Fastlane Documentation](https://docs.fastlane.tools/)
+
+## Keep going from Automatic Capacitor Android build with GitHub actions
+
+If you are using **Automatic Capacitor Android build with GitHub actions** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

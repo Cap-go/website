@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-27T10:45:18.129Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68354087d3b966198183f9df-1748342797166.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, app updates, staged rollouts, delta updates, network performance, real-time updates, user retention, mobile apps
@@ -225,3 +225,7 @@ Capgo simplifies the update process for Capacitor apps with **instant over-the-a
 
 With a **95% success rate** and global download speeds averaging an impressive 114ms, Capgo ensures updates are delivered quickly and reliably. Developers can target updates to specific user groups or undo changes instantly with one-click rollbacks, offering greater control and adaptability. These tools not only boost deployment efficiency but also ensure a smooth experience for users.
 :::
+
+## Keep going from How to Optimize Capacitor Update Rollouts
+
+If you are using **How to Optimize Capacitor Update Rollouts** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

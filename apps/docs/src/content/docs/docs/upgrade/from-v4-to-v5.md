@@ -28,3 +28,7 @@ That it ! Pretty easy !
 If you were getting yourself the update with getLatest, there are a tiny change.
 Now if you are up-to-date already it will go into catch.
 Any response different than update available will do that.
+
+## Keep going from From V4 to V5
+
+If you are using **From V4 to V5** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

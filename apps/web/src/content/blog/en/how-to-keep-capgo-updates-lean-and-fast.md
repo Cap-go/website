@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-04-14T15:12:19.000Z
-updated_at: 2026-04-14T18:31:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo_lean_updates_hero.webp
 head_image_alt: Capgo lean live updates workflow
 keywords: Capgo, live updates, OTA updates, delta updates, channels, Capacitor, PR previews, mobile performance
@@ -227,3 +227,7 @@ For Capgo teams, "lean and fast" is not just a bundle-size problem.
 It is a release design problem.
 
 Use Delta updates for payload size, channels for rollout size, and rollbacks for failure size. Once you think about OTA that way, your updates stay quick even as the app, team, and user base get bigger.
+
+## Keep going from How to Keep Capgo Updates Lean and Fast
+
+If you are using **How to Keep Capgo Updates Lean and Fast** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

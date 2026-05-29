@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-16T02:24:50.565Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67d61b378b902ec211cf87e9-1742091902582.jpg
 head_image_alt: Mobile Development
 keywords: Capgo, GitHub Actions, CI/CD, Capacitor apps, deployment, automation, updates, security
@@ -298,3 +298,7 @@ To get the most out of your Capgo and GitHub Actions integration, explore these 
 -   **Optimized Performance**: Utilize Capgo's partial updates to reduce bandwidth usage and speed up updates. With 23.5 million updates delivered across 750 production apps [\[1\]](https://capgo.app/), the system has proven its capability to handle large-scale demands.
 
 For even better results, consider using Capgo's self-hosting options or custom API setups. Check earlier sections for detailed setup and testing instructions to fully implement these strategies.
+
+## Keep going from Capgo Integration with GitHub Actions: Guide
+
+If you are using **Capgo Integration with GitHub Actions: Guide** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

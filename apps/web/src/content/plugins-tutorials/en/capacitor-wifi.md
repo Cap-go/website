@@ -77,3 +77,7 @@ networks.forEach(network => {
 
 - GitHub: https://github.com/Cap-go/capacitor-wifi/
 - Docs: /docs/plugins/wifi/
+
+## Keep going from Using @capgo/capacitor-wifi
+
+If you are using **Using @capgo/capacitor-wifi** to plan dashboard and API operations, connect it with [@capgo/capacitor-wifi](/docs/plugins/wifi/) for the implementation detail in @capgo/capacitor-wifi, [Getting Started](/docs/plugins/wifi/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

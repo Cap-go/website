@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-20T01:48:44.409Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6-1745113809661.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, app updates, OTA updates, testing checklist, mobile development
@@ -185,3 +185,7 @@ A strong validation strategy includes systematic testing, real-time monitoring, 
 > "Capgo is a must-have tool for developers who want to be more productive; avoiding app-store review for bug fixes is golden." [\[1\]](https://capgo.app/)
 
 For teams working with OTA updates, finding the right balance between fast deployment and careful validation is essential. With proper testing in place, developers can release updates that meet the high standards users expect. Keep this checklist handy to maintain reliability and user trust with every release.
+
+## Keep going from Checklist for Validating Capacitor App Updates
+
+If you are using **Checklist for Validating Capacitor App Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

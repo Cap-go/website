@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-13T03:37:11.567Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67d22ca8233d3a01105fd278-1741837059847.jpg
 head_image_alt: Mobile Development
 keywords: hotfix deployment, Capgo, app updates, CI/CD tools, mobile development
@@ -221,3 +221,7 @@ Kick off your Capgo integration by adding the Capgo CLI to your project. With **
 > "Capgo is a smart way to make hot code pushes."
 
 For even greater efficiency, integrate Capgo with your CI/CD tools like Azure DevOps, GitLab, or GitHub. This setup enables automated deployments while giving you control over update distribution through user assignment features.
+
+## Keep going from 5 Steps to Deploy Hotfixes with Capgo
+
+If you are using **5 Steps to Deploy Hotfixes with Capgo** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

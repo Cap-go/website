@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-17T12:19:39.963Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/6800eb6a28980901df1efb7c-1744892450543.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Privacy Act, data security, user privacy, end-to-end encryption, compliance, update management
@@ -234,3 +234,7 @@ Follow these steps to put compliance strategies into action:
 > "The Most Secure Live Update System for Capacitor. Built for developers who value security and speed." - Capgo.app
 
 Capgo offers live update security that aligns with these compliance needs.
+
+## Keep going from Checklist for OTA Updates Under Australia's Privacy Act
+
+If you are using **Checklist for OTA Updates Under Australia's Privacy Act** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

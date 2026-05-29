@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-23T02:26:25.949Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36-1745375221230.jpg
 head_image_alt: Mobile Development
 keywords: RBAC, OTA updates, security, mobile apps, end-to-end encryption, role-based access control, deployment permissions
@@ -111,3 +111,7 @@ RBAC ensures secure over-the-air (OTA) updates in Capacitor apps by using detail
 Capgo builds on these ideas with an open-source platform offering true end-to-end encryption and role-based permissions. This allows secure and scalable [update management](https://capgo.app/docs/getting-started/deploy/) across multiple organizations [\[1\]](https://capgo.app/).
 
 > "The only solution with true end-to-end encryption, others just sign updates" [\[1\]](https://capgo.app/)
+
+## Keep going from How RBAC Secures OTA Updates in Capacitor Apps
+
+If you are using **How RBAC Secures OTA Updates in Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

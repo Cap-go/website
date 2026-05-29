@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-27T04:28:18.512Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/683504c5d3b966198183bfc0-1748326956628.jpg
 head_image_alt: Mobile Development
 keywords: token storage, mobile security, iOS Keychain, Android Keystore, secure communication, encryption
@@ -246,3 +246,7 @@ When it comes to storing tokens in mobile apps, using custom encryption can be a
 
 That said, there are situations where custom encryption becomes unavoidable - like when you're dealing with extremely sensitive data or trying to meet strict regulatory requirements that standard tools just can't handle. In these cases, it’s crucial for developers to stick to **best practices** to ensure their [encryption methods](https://capgo.app/docs/cli/migrations/encryption/) are not only secure but also reliable and compliant with industry standards. Carefully consider the trade-offs before diving into a custom encryption approach.
 :::
+
+## Keep going from Secure Token Storage: Best Practices for Mobile Developers
+
+If you are using **Secure Token Storage: Best Practices for Mobile Developers** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-06-15T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /cross-platform-app-dev-2024.webp
 head_image_alt: Cross-platform mobile app development
 keywords: cross-platform, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -104,3 +104,7 @@ Capgo integrates seamlessly with Capacitor, the native runtime that powers Ionic
 By combining cross-platform development in Ionic with live updates in Capgo, you can maximize your agility. Ship new features faster and with less risk.
 
 To get started with Capgo, check out the [official documentation](https://docs.capgo.app/). Capgo is free and fully open source - so you can deploy it however you like!
+
+## Keep going from The Ultimate Guide to Cross-Platform Mobile App Development in 2024
+
+If you are using **The Ultimate Guide to Cross-Platform Mobile App Development in 2024** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

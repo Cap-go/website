@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-24T03:30:15.213Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/6809ac119bd9ce97f26bdef5-1745465426956.jpg
 head_image_alt: Mobile Development
 keywords: merge policies, Capacitor apps, code quality, live updates, branch management
@@ -176,3 +176,7 @@ To ensure your Capacitor app updates are seamless and reliable, use a robust liv
 
 Capgo supports **end-to-end encryption** and complies with Apple and Android guidelines, ensuring updates are secure and meet platform requirements. It also integrates effortlessly with CI/CD systems, making the deployment process efficient and hassle-free. By leveraging these tools, you can minimize potential issues and keep your app users up-to-date with the latest changes in real time.
 :::
+
+## Keep going from Merge Policies for Teams Using Capacitor Apps
+
+If you are using **Merge Policies for Teams Using Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

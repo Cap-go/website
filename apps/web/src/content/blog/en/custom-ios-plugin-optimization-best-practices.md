@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-15T05:25:39.348Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6825647b0209458b3ff370ad-1747287014908.jpg
 head_image_alt: Mobile Development
 keywords: iOS plugins, Capacitor, performance optimization, memory management, Swift code, Xcode tools, bridge communication, app performance
@@ -211,3 +211,7 @@ Xcode’s **debugging tools** also play a crucial role, allowing you to test you
 
 For faster updates and streamlined fixes, platforms like **Capgo** can be a game-changer. They allow you to push live updates directly to users without requiring app store approvals, all while staying within Apple’s guidelines. This approach not only saves time but also keeps your app running at its best.
 :::
+
+## Keep going from Custom iOS Plugin Optimization: Best Practices
+
+If you are using **Custom iOS Plugin Optimization: Best Practices** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

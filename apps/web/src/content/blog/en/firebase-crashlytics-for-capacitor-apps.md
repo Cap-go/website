@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-21T03:55:39.168Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf-1745207775479.jpg
 head_image_alt: Mobile Development
 keywords: Firebase, Crashlytics, mobile apps, Capacitor, app development, crash reporting, error tracking
@@ -354,3 +354,7 @@ Pairing Firebase Crashlytics with Capgo gives you a powerful system for error tr
 3.  Use [Capgo channels](https://capgo.app/docs/webapp/channels/) to test and release fixes step by step.
 
 With Crashlytics and Capgo in place, you’re set to keep your app running smoothly and improving over time.
+
+## Keep going from Firebase Crashlytics for Capacitor Apps
+
+If you are using **Firebase Crashlytics for Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-20T02:15:22.429Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/680454b86000445eb1a68ab2-1745115338258.jpg
 head_image_alt: Mobile Development
 keywords: token signing, Capacitor apps, data integrity, security standards, compliance, JWT, cryptographic library
@@ -155,3 +155,7 @@ Refer to the checklist provided to ensure your implementation adheres to securit
 -   Ensure token signing aligns with U.S. regulations like CCPA and HIPAA, and use strong encryption methods.
 -   Implement version control and allow instant rollbacks for updates to maintain stability.
 -   Monitor and improve the speed of signing and update delivery processes.
+
+## Keep going from Checklist for Token Signing in Capacitor Apps
+
+If you are using **Checklist for Token Signing in Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

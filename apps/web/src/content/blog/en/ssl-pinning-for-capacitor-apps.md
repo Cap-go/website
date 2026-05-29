@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-11T22:40:35.604Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682117615e3fe4823b5f0a24-1747003294262.jpg
 head_image_alt: Mobile Development
 keywords: SSL pinning, Capacitor apps, security, MITM attacks, certificate management, app store compliance, mobile development
@@ -390,3 +390,7 @@ While the article doesn't dive into tools or strategies for automating SSL certi
 
 For managing live updates and simplifying app maintenance, platforms like **Capgo** can be a game-changer. They make it easier to roll out updates while staying within app store regulations, ensuring a smoother experience for both developers and users.
 :::
+
+## Keep going from SSL Pinning for Capacitor Apps
+
+If you are using **SSL Pinning for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

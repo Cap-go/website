@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /native_app_look.webp
 head_image_alt: Native app look illustration
 keywords: tailwind css, css, mobile design, mobile app development
@@ -91,3 +91,7 @@ body {
 - Test your app on various devices and browsers to ensure compatibility and a consistent user experience.
 
 By following these basic JavaScript and CSS configurations, you can create a web app that looks and feels like a native app, providing a seamless and enjoyable user experience.
+
+## Keep going from Basic JS and CSS Configurations for a Native App Look
+
+If you are using **Basic JS and CSS Configurations for a Native App Look** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

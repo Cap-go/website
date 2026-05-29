@@ -68,3 +68,7 @@ await SocialLogin.isLoggedIn({} as isLoggedInOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-social-login/
 - Docs: /docs/plugins/social-login/
+
+## Keep going from Using @capgo/capacitor-social-login
+
+If you are using **Using @capgo/capacitor-social-login** to plan authentication and account flows, connect it with [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [Getting Started](/docs/plugins/social-login/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

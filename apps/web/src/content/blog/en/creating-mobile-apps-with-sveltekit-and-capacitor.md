@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-04T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /sveltekit_capacitor.webp
 head_image_alt: SvelteKit and Capgo illustration
 keywords: SvelteKit, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -372,3 +372,7 @@ And with the addition of [Capgo](https://capgo.app/), it's even easier to add li
 If you would like to learn how to add Capgo to your SvelteKit app, take a look at the next article:
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
+
+## Keep going from Building Mobile Apps with SvelteKit and Capacitor
+
+If you are using **Building Mobile Apps with SvelteKit and Capacitor** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

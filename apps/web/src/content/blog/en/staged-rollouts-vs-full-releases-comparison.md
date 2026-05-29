@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-30T02:25:03.907Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720-1743301515130.jpg
 head_image_alt: Mobile Development
 keywords: staged rollouts, full releases, app updates, risk management, deployment strategies, user feedback
@@ -313,3 +313,7 @@ Follow these steps to get started:
 -   Define clear success metrics to track progress
 
 The right mix of release methods and tools tailored to your app's needs will ensure smoother updates and better results.
+
+## Keep going from Staged Rollouts vs Full Releases: Comparison
+
+If you are using **Staged Rollouts vs Full Releases: Comparison** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

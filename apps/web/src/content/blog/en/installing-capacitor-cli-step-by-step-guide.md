@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-04T02:49:29.961Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ef362eebbb9dc80641f34f-1743734983341.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, CLI, mobile app development, Node.js, Android, iOS, live updates
@@ -361,3 +361,7 @@ Modern tools make app maintenance easier than ever. For example, Capgo now provi
 The [Capacitor ecosystem](https://capgo.app/blog/capacitor-comprehensive-guide/) is constantly improving with new tools and features. Installing the CLI is just the starting point for [building mobile apps](https://capgo.app/blog/angular-mobile-app-capacitor/), and you'll benefit from detailed documentation and an active developer community.
 
 Be sure to keep the Capacitor CLI and its packages up to date to avoid compatibility issues.
+
+## Keep going from Installing Capacitor CLI: Step-by-Step Guide
+
+If you are using **Installing Capacitor CLI: Step-by-Step Guide** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

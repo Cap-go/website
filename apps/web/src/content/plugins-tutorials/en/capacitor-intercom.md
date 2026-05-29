@@ -65,3 +65,7 @@ await CapgoIntercom.updateUser({} as IntercomUserUpdateOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-intercom/
 - Docs: /docs/plugins/intercom/
+
+## Keep going from Using @capgo/capacitor-intercom
+
+If you are using **Using @capgo/capacitor-intercom** to plan native plugin work, connect it with [@capgo/capacitor-intercom](/docs/plugins/intercom/) for the implementation detail in @capgo/capacitor-intercom, [Getting Started](/docs/plugins/intercom/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

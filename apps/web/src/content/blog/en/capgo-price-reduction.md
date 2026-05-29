@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-03-05T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo-feature-image.webp
 head_image_alt: Capgo price reduction announcement
 keywords: capgo, price reduction, live updates, mobile app development, capacitor
@@ -46,3 +46,7 @@ Happy coding!
 Martin ❤️
 
 P.S. Spread the word! 🌍
+
+## Keep going from Capgo Price Reduction: Making Live Updates More Accessible
+
+If you are using **Capgo Price Reduction: Making Live Updates More Accessible** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

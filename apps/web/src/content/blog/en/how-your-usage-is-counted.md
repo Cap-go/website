@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-25T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /usage_explained.webp
 head_image_alt: Capgo usage system explained
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -90,3 +90,7 @@ This data is only related to your download size, the better your Capacitor JS ap
 The best way to stay in your plan is to have a small bundle, and if you can't, show a download bar to your user, and let them know how much they have left to download.
 
 In the future, Capgo will improve the download system to have more chances to download the bundle at one time.
+
+## Keep going from How your usage is counted in Capgo
+
+If you are using **How your usage is counted in Capgo** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

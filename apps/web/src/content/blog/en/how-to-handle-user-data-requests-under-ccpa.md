@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-06T01:02:16.662Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad-1743901348104.jpg
 head_image_alt: Mobile Development
 keywords: CCPA, user data requests, compliance, privacy rights, data access, data deletion, opt-out, data protection
@@ -196,3 +196,7 @@ For mobile apps, strong permission controls are essential. **Capgo** simplifies 
 Speed matters: 95% of users receive updates within 24 hours through **Capgo** [\[1\]](https://capgo.app/), ensuring fast compliance with regulations.
 
 CCPA compliance isn't a one-time task. Regular audits and updates are necessary to keep up with changing rules and protect user privacy.
+
+## Keep going from How to Handle User Data Requests Under CCPA
+
+If you are using **How to Handle User Data Requests Under CCPA** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

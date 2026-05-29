@@ -73,3 +73,7 @@ console.log('Flashlight is on:', value);
 
 - GitHub: https://github.com/Cap-go/capacitor-flash/
 - Docs: /docs/plugins/flash/
+
+## Keep going from Using @capgo/capacitor-flash
+
+If you are using **Using @capgo/capacitor-flash** to plan dashboard and API operations, connect it with [@capgo/capacitor-flash](/docs/plugins/flash/) for the implementation detail in @capgo/capacitor-flash, [Getting Started](/docs/plugins/flash/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

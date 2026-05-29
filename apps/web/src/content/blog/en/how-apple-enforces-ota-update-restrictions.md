@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-26T07:39:34.137Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6833b5d5d3b9661981815dee-1748245233574.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, security, privacy, Apple, MDM, developer guidelines, device management, mobile updates, encryption
@@ -224,3 +224,7 @@ Businesses can simplify OTA updates by using **Mobile Device Management (MDM)** 
 
 By combining MDM with OTA provisioning, organizations enhance security, minimize vulnerabilities, and streamline the update process. Plus, using MDM to manage user consent builds trust and ensures privacy regulations are met. Platforms like **Capgo** support live updates for Capacitor apps, enabling developers to push updates instantly while staying within Apple and Android guidelines.
 :::
+
+## Keep going from How Apple Enforces OTA Update Restrictions
+
+If you are using **How Apple Enforces OTA Update Restrictions** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

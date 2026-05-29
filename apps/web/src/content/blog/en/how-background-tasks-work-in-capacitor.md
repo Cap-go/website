@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-28T08:49:25.514Z
-updated_at: 2026-05-06T12:37:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6836bd7bd3b96619818630a6-1748422253078.jpg
 head_image_alt: Mobile Development
 keywords: background tasks, Capacitor, iOS, Android, app performance, mobile development, battery optimization, lifecycle hooks
@@ -263,3 +263,7 @@ Capgo simplifies handling background tasks in Capacitor apps by allowing **insta
 
 It also boosts app performance and security through **end-to-end encryption** and efficient deployment workflows. By keeping background tasks stable and optimized, Capgo helps deliver a seamless user experience while adhering to Apple and Android guidelines.
 :::
+
+## Keep going from How Background Tasks Work in Capacitor
+
+If you are using **How Background Tasks Work in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

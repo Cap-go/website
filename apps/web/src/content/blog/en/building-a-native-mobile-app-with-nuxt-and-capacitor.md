@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-03T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /nuxt_capgo.webp
 head_image_alt: Nuxt 4 and Capacitor illustration
 keywords: Nuxt 4, Capacitor 8, convert web app to mobile, iOS, Android, mobile app development, static generation, native plugins, Vue
@@ -462,3 +462,7 @@ You've successfully converted your existing Nuxt web application into native iOS
 - [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
+
+## Keep going from Convert Your Nuxt App to iOS & Android with Capacitor 8
+
+If you are using **Convert Your Nuxt App to iOS & Android with Capacitor 8** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

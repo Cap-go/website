@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-24T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://capgo.app/capgo-feature-image.webp
 head_image_alt: Edge-to-Edge Display Configuration
 keywords: Capacitor, edge-to-edge, Android 15, adjustMarginsForEdgeToEdge, mobile development, native configuration
@@ -217,3 +217,7 @@ Edge-to-edge display in Capacitor doesn't require plugins, hacks, or complicated
 Start with `"auto"` for most apps, test thoroughly across devices, and add appropriate safe area CSS. Your app will be ready for Android 15 and beyond with minimal effort.
 
 **Questions or running into issues?** The Capacitor community and [official documentation](https://capacitorjs.com/docs/config) are great resources for additional help.
+
+## Keep going from Edge-to-Edge Display in Capacitor Without Plugins
+
+If you are using **Edge-to-Edge Display in Capacitor Without Plugins** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

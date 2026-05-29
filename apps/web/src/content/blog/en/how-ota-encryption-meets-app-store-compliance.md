@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-14T05:12:26.952Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ae8c28192afc208a60fcea-1739509966039.jpg
 head_image_alt: Mobile Development
 keywords: OTA encryption, app store compliance, app updates security, AES-256, TLS, code signing, mobile security
@@ -202,3 +202,7 @@ For secure over-the-air (OTA) implementation:
 -   Perform regular audits of your [encryption practices](https://capgo.app/docs/cli/migrations/encryption/)
 
 Routine reviews of your encryption methods help ensure compliance with Apple and Google’s security requirements.
+
+## Keep going from How OTA Encryption Meets App Store Compliance
+
+If you are using **How OTA Encryption Meets App Store Compliance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

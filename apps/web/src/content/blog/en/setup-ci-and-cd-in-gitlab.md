@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-14T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /CI_CD_in_Gitlab.webp
 head_image_alt: CI/CD in GitLab
 keywords: GitLab, CI/CD, automatic build, automatic release, mobile app updates
@@ -84,3 +84,7 @@ Customize the build script to match your specific project's build process, such 
 ## Conclusion
 
 Here we are! We took an extra step in our tech journey. In modern software development, CICD is an essential factor to be considered. So that I'm hoping this guideline makes sense to everyone.
+
+## Keep going from Automatic build and release app with GitLab
+
+If you are using **Automatic build and release app with GitLab** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

@@ -1,15 +1,15 @@
 ---
 locale: en
 ---
-# Using @capgo/native-audio
+# Using @capgo/capacitor-native-audio
 
 A native plugin for native audio engine.
 
 ## Install
 
 ```bash
-bun add @capgo/native-audio
-bunx cap sync
+npm install @capgo/capacitor-native-audio
+npx cap sync
 ```
 
 ## What This Plugin Exposes
@@ -26,7 +26,7 @@ bunx cap sync
 Configure the audio player.
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.configure({} as ConfigureOptions);
 ```
@@ -36,7 +36,7 @@ await NativeAudio.configure({} as ConfigureOptions);
 Load an audio file.
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.preload({} as PreloadOptions);
 ```
@@ -46,7 +46,7 @@ await NativeAudio.preload({} as PreloadOptions);
 Play an audio file once with automatic cleanup.
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 // Simple one-shot playback
 await NativeAudio.playOnce({ assetPath: 'audio/notification.mp3' });
@@ -72,7 +72,7 @@ await NativeAudio.stop({ assetId });
 Check if an audio file is preloaded.
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.isPreloaded({} as PreloadOptions);
 ```
@@ -81,3 +81,7 @@ await NativeAudio.isPreloaded({} as PreloadOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-native-audio/
 - Docs: /docs/plugins/native-audio/
+
+## Keep going from Using @capgo/capacitor-native-audio
+
+If you are using **Using @capgo/capacitor-native-audio** to plan native media and interface behavior, connect it with [@capgo/capacitor-native-audio](/docs/plugins/native-audio/) for the implementation detail in @capgo/capacitor-native-audio, [Getting Started](/docs/plugins/native-audio/getting-started/) for the implementation detail in Getting Started, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, and [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player.

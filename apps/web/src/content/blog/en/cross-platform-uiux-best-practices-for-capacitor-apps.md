@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-24T04:45:24.942Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e0c60ea2808c1172f2f7c6-1742791542149.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, UI/UX design, cross-platform apps, mobile development, responsive design, Ionic, app updates, performance optimization
@@ -270,3 +270,7 @@ Thorough testing and active error tracking are also essential to delivering a sm
 | Global API Response | 434ms average |
 | Update Delivery | 114ms for 5MB bundle |
 | Success Rate | 82% worldwide |
+
+## Keep going from Cross-Platform UI/UX: Best Practices for Capacitor Apps
+
+If you are using **Cross-Platform UI/UX: Best Practices for Capacitor Apps** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

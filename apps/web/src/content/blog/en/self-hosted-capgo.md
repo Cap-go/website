@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-20T00:00:00.000Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /self-hosted-capgo.webp
 head_image_alt: self-hosted capgo
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -123,3 +123,6 @@ In conclusion, self-hosting Capgo can be a good option for organizations that ha
 
 If you are considering self-hosting Capgo, I recommend that you start by reading the Capgo [self-hosting documentation](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/). This will give you a good understanding of the requirements and risks of self-hosting.
 
+## Keep going from Self hosted Capgo
+
+If you are using **Self hosted Capgo** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

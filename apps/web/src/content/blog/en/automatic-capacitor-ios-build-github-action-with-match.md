@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-30T00:00:00.000Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /fastlane_ios.webp
 head_image_alt: Fastlane testflight GitHub action illustration
 keywords: Fastlane, CI/CD, iOS, automatic build, automatic release, mobile app updates
@@ -585,3 +585,7 @@ This blog is based on the following articles:
 - [Continuous delivery for IOS using Fastlane and GitHub actions](https://litoarias.medium.com/continuous-delivery-for-ios-using-fastlane-and-github-actions-edf62ee68ecc/)
 - [Fastlane Documentation](https://docs.fastlane.tools/app-store-connect-api/)
 - [This GitHub message from @mrogunlana](https://github.com/fastlane-community/fastlane-plugin-ionic/issues/63/#issuecomment-1074328057)
+
+## Keep going from Automatic Capacitor IOS build with GitHub actions using match
+
+If you are using **Automatic Capacitor IOS build with GitHub actions using match** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-19T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /revenuecat_iap.webp
 head_image_alt: Revenue cat in app purchases
 keywords: Capacitor, in-app purchases, RevenueCat, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -316,3 +316,7 @@ Join use here 👇
 ## Register here to get your account
 
 [Capgo](/register/)
+
+## Keep going from in app purchases for capacitor
+
+If you are using **in app purchases for capacitor** to plan payments and purchases, connect it with [Capgo Pricing](/pricing/) for the product workflow in Capgo Pricing, [Payment system](/docs/webapp/payment/) for the implementation detail in Payment system, [@capgo/native-purchases](/docs/plugins/native-purchases/) for the implementation detail in @capgo/native-purchases, [Getting Started](/docs/plugins/native-purchases/getting-started/) for the implementation detail in Getting Started, and [Revenue Playbook](/docs/plugins/native-purchases/revenue-playbook/) for the implementation detail in Revenue Playbook.

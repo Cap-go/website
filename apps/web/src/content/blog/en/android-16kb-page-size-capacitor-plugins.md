@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-09-12T13:55:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /android-16kb-page-size-capacitor-plugins.webp
 head_image_alt: Android 16 KB page size debugging for Capacitor
 keywords: Capacitor, Android 16KB page size, plugins, troubleshooting, app crashes, maintenance, forking
@@ -102,3 +102,7 @@ If 16 KB devices are breaking your app and a plugin isn’t ready, talk to us:
 - We help you avoid last‑minute rushes as enforcement rolls out.
 
 Tell us which feature is failing and the plugin name (if you know it). We’ll handle the rest. Visit our services page: [Capgo Consulting](/consulting)
+
+## Keep going from Android 16 KB Page Size: Find the Problem Plugin and What to Do Next
+
+If you are using **Android 16 KB Page Size: Find the Problem Plugin and What to Do Next** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

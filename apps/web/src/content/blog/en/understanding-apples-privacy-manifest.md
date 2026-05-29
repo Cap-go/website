@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-18T02:23:31.365Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92-1744943188853.jpg
 head_image_alt: Mobile Development
 keywords: Privacy Manifest, iOS, data collection, App Store, compliance, Capgo, JSON, updates
@@ -134,3 +134,7 @@ With your manifest set up and updates automated, here are some key practices to 
 -   Implement channel systems for controlled update rollouts.
 -   Keep detailed documentation of your data collection processes.
 -   Test and verify privacy compliance on a regular basis.
+
+## Keep going from Understanding Apple's Privacy Manifest
+
+If you are using **Understanding Apple's Privacy Manifest** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

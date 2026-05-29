@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-22T11:11:41.135Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682ef9754fa53d422080b6bb-1747912378288.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, iOS, native bridge, Swift, Objective-C, plugin development, mobile development, testing
@@ -398,3 +398,7 @@ Capgo simplifies the process of updating native bridges in Capacitor apps with *
 
 Setting up Capgo is quick and straightforward. Its comprehensive [auto-update system](https://capgo.app/docs/getting-started/add-an-app/) can be up and running in just minutes. Plus, it ensures your app stays current while adhering to both Apple and Android guidelines.
 :::
+
+## Keep going from Implementing Native Bridge for iOS in Capacitor
+
+If you are using **Implementing Native Bridge for iOS in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

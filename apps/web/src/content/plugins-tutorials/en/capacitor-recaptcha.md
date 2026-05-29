@@ -50,3 +50,7 @@ Send the token to your backend and create a reCAPTCHA assessment before acceptin
 
 - GitHub: https://github.com/Cap-go/capacitor-recaptcha/
 - Docs: /docs/plugins/recaptcha/
+
+## Keep going from Using @capgo/capacitor-recaptcha
+
+If you are using **Using @capgo/capacitor-recaptcha** to plan authentication and account flows, connect it with [@capgo/capacitor-recaptcha](/docs/plugins/recaptcha/) for the implementation detail in @capgo/capacitor-recaptcha, [Getting Started](/docs/plugins/recaptcha/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, and [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric.

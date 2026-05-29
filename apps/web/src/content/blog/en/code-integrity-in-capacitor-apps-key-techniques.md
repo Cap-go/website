@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-09T06:50:58.883Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67a7f90344f489ae95339b05-1739083872712.jpg
 head_image_alt: Mobile Development
 keywords: code integrity, mobile apps, OTA updates, encryption, Play Integrity API, security compliance, cryptographic signatures
@@ -204,3 +204,7 @@ To balance security and app performance, development teams should focus on:
 -   Adhering to **platform-specific guidelines**
 
 This approach ensures strong protection without sacrificing performance, laying the groundwork for reliable updates and secure app maintenance.
+
+## Keep going from Code Integrity in Capacitor Apps: Key Techniques
+
+If you are using **Code Integrity in Capacitor Apps: Key Techniques** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

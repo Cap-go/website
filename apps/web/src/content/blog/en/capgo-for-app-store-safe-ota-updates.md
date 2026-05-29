@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-07T03:24:24.255Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ca3d64c828e2c944a33eb7-1741317877632.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, app development, mobile updates, app store compliance, CI/CD integration
@@ -151,3 +151,7 @@ Here are some strategies that build on these findings:
 For teams moving to a new platform, Capgo offers an easy integration process. Jay (@jaythegeek) noted:
 
 > "Did setup @Capgo and testing out this awesome replacement for @AppFlow! Thank you for the hard work, it has been easy so far" [\[1\]](https://capgo.app/)
+
+## Keep going from Capgo for App Store-Safe OTA Updates
+
+If you are using **Capgo for App Store-Safe OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

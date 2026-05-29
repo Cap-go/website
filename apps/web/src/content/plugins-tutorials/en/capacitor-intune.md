@@ -65,3 +65,7 @@ await IntuneMAM.loginAndEnrollAccount();
 
 - GitHub: https://github.com/Cap-go/capacitor-intune/
 - Docs: /docs/plugins/intune/
+
+## Keep going from Using @capgo/capacitor-intune
+
+If you are using **Using @capgo/capacitor-intune** to plan authentication and account flows, connect it with [@capgo/capacitor-intune](/docs/plugins/intune/) for the implementation detail in @capgo/capacitor-intune, [Getting Started](/docs/plugins/intune/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, and [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric.

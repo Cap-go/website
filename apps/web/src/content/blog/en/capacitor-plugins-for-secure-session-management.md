@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T12:14:04.681Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6827226c0209458b3ff58b06-1747397705731.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, session management, biometric authentication, secure storage, Firebase Auth, Identity Vault, mobile security
@@ -402,3 +402,7 @@ Capgo prioritizes security with **end-to-end encryption** for live updates. This
 
 Updates are handled seamlessly in the background, so users aren’t interrupted while using the app. They’ll only see an update notification when they relaunch the app, keeping the experience smooth and aligning with app store rules.
 :::
+
+## Keep going from Capacitor Plugins for Secure Session Management
+
+If you are using **Capacitor Plugins for Secure Session Management** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

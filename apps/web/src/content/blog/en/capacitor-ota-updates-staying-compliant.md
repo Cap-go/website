@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-28T03:37:02.530Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37-1743133034618.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, app compliance, mobile updates, app store guidelines, security protocols, over-the-air updates
@@ -199,3 +199,7 @@ Even experts in the field emphasize the importance of fast and compliant updates
 > "@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) :-)" [\[1\]](https://capgo.app/)
 
 For developers aiming to balance compliance with timely updates, a solid update management system is crucial. Tools offering features like instant rollbacks, real-time analytics, and channel-based distribution help teams deliver updates efficiently while staying within compliance boundaries.
+
+## Keep going from Capacitor OTA Updates: Staying Compliant
+
+If you are using **Capacitor OTA Updates: Staying Compliant** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

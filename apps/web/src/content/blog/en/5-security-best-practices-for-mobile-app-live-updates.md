@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-01-14T02:36:08.711Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/6785bb5bfc0bf469b705c62a-1736822313233.jpg
 head_image_alt: Technology
 keywords: mobile app security, live updates, data integrity, OTA updates, encryption, security testing
@@ -197,3 +197,7 @@ These efforts also bring measurable improvements across several business areas:
 | Operating Costs | Cuts down expenses tied to security incidents |
 
 For those looking to implement these strategies, tools like [ProGuard](https://www.guardsquare.com/proguard) for Android and secure compilation methods for iOS offer practical solutions to enhance update security. Using HTTPS protocols and [encryption during update delivery](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) ensures both the transmission process and user data remain safe.
+
+## Keep going from 5 Security Best Practices for Mobile App Live Updates
+
+If you are using **5 Security Best Practices for Mobile App Live Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

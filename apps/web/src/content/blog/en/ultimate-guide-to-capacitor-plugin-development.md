@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T06:22:55.260Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6832a665d3b96619818090ef-1748154227922.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, mobile apps, plugin development, iOS, Android, JavaScript, web technologies, security, performance, testing
@@ -426,3 +426,7 @@ Once testing is done, use the Capacitor CLI to build the plugin for both platfor
 
 For quick updates without needing app store approvals, tools like **Capgo** can simplify the process. This allows you to roll out new features and fixes to your users in real-time, keeping your app up to date effortlessly.
 :::
+
+## Keep going from Ultimate Guide to Capacitor Plugin Development
+
+If you are using **Ultimate Guide to Capacitor Plugin Development** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

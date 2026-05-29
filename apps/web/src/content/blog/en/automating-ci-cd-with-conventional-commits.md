@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-19T12:49:26.656Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682a83945642a17d106f059a-1747659038276.jpg
 head_image_alt: Software Development
 keywords: CI/CD, Conventional Commits, automation, versioning, changelog, GitHub Actions, mobile updates
@@ -380,3 +380,7 @@ Capgo streamlines the CI/CD process for mobile apps by offering **instant update
 
 It fits seamlessly into existing CI/CD pipelines, [automating updates](https://capgo.app/docs/live-updates/update-behavior/) while maintaining **secure delivery** through end-to-end encryption. Capgo also supports **partial updates**, which cuts down on bandwidth usage by downloading only the necessary changes. Plus, its **one-click rollback** feature allows developers to quickly address issues by reverting to a previous version. With its focus on speed, security, and adaptability, Capgo is a valuable asset for improving development workflows and enhancing user experience.
 :::
+
+## Keep going from Automating CI/CD with Conventional Commits
+
+If you are using **Automating CI/CD with Conventional Commits** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

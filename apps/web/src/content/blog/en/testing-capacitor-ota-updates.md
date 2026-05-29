@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-12T02:57:37.246Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62-1744426677476.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, testing, Capgo, mobile app deployment, security, performance, version control
@@ -253,3 +253,7 @@ To improve your OTA testing process, keep these practical tips in mind:
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)
 
 > "Capgo streamlines development by eliminating app store delays for bug fixes." [\[1\]](https://capgo.app/)
+
+## Keep going from Testing Capacitor OTA Updates
+
+If you are using **Testing Capacitor OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

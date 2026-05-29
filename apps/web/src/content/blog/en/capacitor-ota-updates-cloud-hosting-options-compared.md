@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-17T03:46:56.267Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67d76b8ea5ba8bcd0fc6ad5f-1742183228777.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, cloud hosting, AWS, Google Cloud, Azure, Capgo, mobile app updates, deployment
@@ -215,3 +215,7 @@ Balancing costs with performance is key, and platforms like Capgo offer competit
 When choosing a platform, make sure it supports your specific **[Capacitor version](https://capgo.app/plugins/capacitor-ivs-player/)** (e.g., Capacitor 8) and offers essential features like analytics, error tracking, rollback options for version control, and seamless CI/CD integration. These features ensure smooth operations as your app scales.
 
 The best platform will strike the right balance between performance, security, and cost. Take advantage of free trials - like Capgo's 15-day trial - to see if the platform aligns with your needs [\[1\]](https://capgo.app/).
+
+## Keep going from Capacitor OTA Updates: Cloud Hosting Options Compared
+
+If you are using **Capacitor OTA Updates: Cloud Hosting Options Compared** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-03T04:48:38.491Z
-updated_at: 2026-05-11T10:43:58.000Z
+updated_at: 2026-05-29T11:31:26.000Z
 head_image: https://assets.seobotai.com/capgo.app/67c4f6356c9ebce91891f4e6-1740977344964.jpg
 head_image_alt: Mobile Development
 keywords: Semantic Versioning, Capgo, OTA updates, Capacitor apps, version control, app updates, deployment, CI/CD
@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want to simplify [app updates](https://capgo.app/plugins/capacitor-updater/) and version control?** Semantic Versioning (SemVer) combined with [Capgo](https://capgo.app/)'s Over-The-Air (OTA) updates makes managing [Capacitor](https://capacitorjs.com/) apps easier and faster. Here's how:
+**Want to simplify [app updates](https://capgo.app/plugins/capacitor-updater/) and version control?** [Semantic Versioning (SemVer)](/semver_tester/) combined with [Capgo](https://capgo.app/)'s Over-The-Air (OTA) updates makes managing [Capacitor](https://capacitorjs.com/) apps easier and faster. Here's how:
 
 -   **Semantic Versioning Basics:** Versions use the format `MAJOR.MINOR.PATCH`:
     
@@ -314,3 +314,7 @@ The MAJOR.MINOR.PATCH versioning system makes it easy to communicate breaking ch
 Capgo’s [encrypted solution](https://capgo.app/docs/cli/migrations/encryption/), integrated with CI/CD tools, is also budget-friendly - cutting costs by up to $26,100 over five years [\[1\]](https://capgo.app/). Its customizable channels ensure updates reach the right users at the right time.
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
+
+## Keep going from How to Use Semantic Versioning with Capgo OTA Updates
+
+If you are using **How to Use Semantic Versioning with Capgo OTA Updates** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

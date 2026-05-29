@@ -80,3 +80,7 @@ packages.forEach(pkg => {
 
 - GitHub: https://github.com/Cap-go/capacitor-android-usagestatsmanager/
 - Docs: /docs/plugins/android-usagestatsmanager/
+
+## Keep going from Using @capgo/capacitor-android-usagestatsmanager
+
+If you are using **Using @capgo/capacitor-android-usagestatsmanager** to plan dashboard and API operations, connect it with [@capgo/capacitor-android-usagestatsmanager](/docs/plugins/android-usagestatsmanager/) for the implementation detail in @capgo/capacitor-android-usagestatsmanager, [Getting Started](/docs/plugins/android-usagestatsmanager/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

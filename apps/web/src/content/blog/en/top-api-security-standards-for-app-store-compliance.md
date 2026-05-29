@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-24T01:52:28.048Z
-updated_at: 2026-05-06T12:37:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/6809811c9bd9ce97f26b7b78-1745459563928.jpg
 head_image_alt: Mobile Development
 keywords: API security, OAuth 2.0, OpenID Connect, TLS, JWT, app store compliance, user data protection
@@ -354,3 +354,7 @@ For effective API security management in your app, consider tools that enable re
 
 Capgo also offers **end-to-end encryption**, integration with CI/CD pipelines, and the ability to assign updates to specific user groups. These features not only enhance security but also streamline the update process, making it easier to maintain compliance with Apple and Google app store requirements.
 :::
+
+## Keep going from Top API Security Standards for App Store Compliance
+
+If you are using **Top API Security Standards for App Store Compliance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

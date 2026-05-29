@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-12T08:03:06.848Z
-updated_at: 2026-05-06T12:08:25.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6821a5b33c68b32f40f8057e-1747037038301.jpg
 head_image_alt: Mobile Development
 keywords: app updates, user segmentation, engagement, retention, behavior tracking, mobile apps, update strategy
@@ -178,3 +178,7 @@ Capgo gives developers the ability to push updates, fixes, and new features to t
 
 Key features like **end-to-end encryption**, **CI/CD integration**, and the option to target updates to specific user groups make Capgo both secure and adaptable. Plus, its **organization management tools** simplify coordination across teams, all while ensuring compliance with Apple and Android guidelines.
 :::
+
+## Keep going from Usage Frequency Segmentation for App Updates
+
+If you are using **Usage Frequency Segmentation for App Updates** to plan monitoring and analytics, connect it with [Statistics](/docs/public-api/statistics/) for the implementation detail in Statistics, [Logs](/docs/webapp/logs/) for the implementation detail in Logs, [@capgo/capacitor-appinsights](/docs/plugins/appinsights/) for the implementation detail in @capgo/capacitor-appinsights, [Using @capgo/capacitor-appinsights](/plugins/capacitor-appinsights/) for the native capability in Using @capgo/capacitor-appinsights, and [@capgo/capacitor-firebase-analytics](/docs/plugins/firebase-analytics/) for the implementation detail in @capgo/capacitor-firebase-analytics.

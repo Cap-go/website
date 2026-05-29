@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T11:24:23.032Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6827d67c5642a17d106c5d28-1747567530513.jpg
 head_image_alt: Mobile Development
 keywords: custom event tracking, analytics, app performance, developer tools, real-time updates
@@ -381,3 +381,7 @@ Running key [Capacitor CLI commands](https://capgo.app/docs/cli/commands/) is an
 
 For a more robust [debugging process](https://capgo.app/docs/plugins/updater/debugging/), you might also integrate error tracking platforms like **Sentry** or **[LogRocket](https://logrocket.com/)**. These tools monitor real-time errors and user interactions, making them especially useful during over-the-air (OTA) updates. By combining these methods, you can streamline the debugging process and improve the performance of your custom event tracking.
 :::
+
+## Keep going from Capgo Plugin for Custom Event Tracking
+
+If you are using **Capgo Plugin for Custom Event Tracking** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

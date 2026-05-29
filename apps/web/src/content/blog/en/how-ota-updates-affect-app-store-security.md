@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-26T02:34:12.739Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78-1745634908381.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, app security, app store compliance, encryption, vulnerabilities
@@ -231,3 +231,7 @@ To ensure secure and seamless app updates, developers should prioritize features
 
 For example, platforms like Capgo are designed to meet compliance requirements for both Apple and Android, offering real-time updates without the need for app store approval. By focusing on security, efficiency, and compliance, developers can confidently deliver updates while minimizing risks.
 :::
+
+## Keep going from How OTA Updates Affect App Store Security
+
+If you are using **How OTA Updates Affect App Store Security** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

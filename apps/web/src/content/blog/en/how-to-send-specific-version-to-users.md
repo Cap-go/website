@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-17T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo_select_update.webp
 head_image_alt: TestFlight alternative illustration
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -174,3 +174,7 @@ const res = await axios.get('https://api.capgo.app/device?app_id=YOUR_APP_ID&dev
 
 console.log('data', res.json())
 ```
+
+## Keep going from How to send specific update to one user or a group
+
+If you are using **How to send specific update to one user or a group** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

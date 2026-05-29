@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-11T03:53:42.225Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67cf83b3179e95469ad527be-1741665244026.jpg
 head_image_alt: Mobile Development
 keywords: phased rollouts, app updates, user segmentation, risk reduction, performance monitoring, CI/CD integration
@@ -219,3 +219,7 @@ Key practices include:
 -   Using tools that allow for quick rollbacks if needed.
 
 Following this approach helps you deliver secure, uninterrupted updates to your Capacitor apps.
+
+## Keep going from Phased Rollouts for Capacitor Live Updates
+
+If you are using **Phased Rollouts for Capacitor Live Updates** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

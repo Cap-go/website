@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-26T04:29:43.897Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-29T11:31:26.000Z
 head_image: https://assets.seobotai.com/capgo.app/67be629d36a1a0b25cc0f4e3-1740544205565.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, versioning, mobile development, app updates, semantic versioning, deployment strategies
@@ -47,7 +47,7 @@ Managing Capacitor OTA updates requires a clear version control strategy. Here's
 
 ### Semantic Versioning Basics
 
-Semantic Versioning (SemVer) is a widely-used method for version numbering, structured as MAJOR.MINOR.PATCH. Each part has a specific role:
+[Semantic Versioning (SemVer)](/semver_tester/) is a widely-used method for version numbering, structured as MAJOR.MINOR.PATCH. Each part has a specific role:
 
 | **Version Component** | **Purpose** | **When to Update** |
 | --- | --- | --- |
@@ -272,3 +272,7 @@ To enhance your OTA update process, consider these actions:
     
 
 Future OTA updates should aim to combine fast deployment with a smooth user experience, ensuring both efficiency and satisfaction.
+
+## Keep going from Capacitor OTA Updates: Versioning Best Practices
+
+If you are using **Capacitor OTA Updates: Versioning Best Practices** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

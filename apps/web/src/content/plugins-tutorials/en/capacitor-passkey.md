@@ -140,3 +140,7 @@ Android Credential Manager can share the same relying party and passkeys as your
 
 - GitHub: https://github.com/Cap-go/capacitor-passkey/
 - Docs: /docs/plugins/passkey/
+
+## Keep going from Using @capgo/capacitor-passkey
+
+If you are using **Using @capgo/capacitor-passkey** to plan authentication and account flows, connect it with [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [Getting Started](/docs/plugins/passkey/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

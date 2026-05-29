@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-19T03:15:19.291Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67da1574cfd1b2222c56b5cd-1742354143434.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, plugin development, developer forums, troubleshooting, community support
@@ -236,3 +236,7 @@ Ready to jump in? Here's how to begin:
 -   **Join key platforms**: Participate in Discord and GitHub Discussions to connect with the community and explore official documentation.
 -   **Share your plugins**: Contribute your work to help others and gain constructive feedback.
 -   **Use tools for efficiency**: Tools like Capgo can simplify updates, testing, and deployment, making your development process smoother.
+
+## Keep going from Capacitor Community Forums for Plugin Developers
+
+If you are using **Capacitor Community Forums for Plugin Developers** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-14T06:50:28.488Z
-updated_at: 2026-05-18T16:36:44.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/414a51cb-b1c9-4d68-91fc-3557db7d8c48/what-is-network-latency-network-latency.jpg'
 head_image_alt: 'What Is Network Latency: A Developer''s 2026 Guide'
 keywords: 'what is network latency, network performance, mobile app speed, live updates, capacitorjs'
@@ -290,3 +290,7 @@ The main trade-off is straightforward. More observability gives you better diagn
 If your team ships CapacitorJS or Electron apps and needs a controlled way to deliver fixes quickly over a global edge network, [Capgo](https://capgo.app) is worth evaluating. It supports signed live updates, differential delivery, rollout controls, rollback protection, and per-device logs so you can see not just that an update was published, but whether users received it.
 
 *Prepared with [Outrank app](https://outrank.so)*
+
+## Keep going from What Is Network Latency: A Developer's 2026 Guide
+
+If you are using **What Is Network Latency: A Developer's 2026 Guide** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

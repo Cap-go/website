@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-23T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: Mobile environment channels
 keywords: mobile app environments, staging, Capgo channels, TestFlight, Capacitor, OTA updates, QA workflow
@@ -146,3 +146,7 @@ This approach removes environment drift, reduces build churn, and speeds fixes:
 - you can push many JS-only fixes through Capgo quickly.
 
 The end result is simpler governance: fewer artifacts, cleaner telemetry, and fewer surprises in release operations.
+
+## Keep going from Capgo Environment Best Practices: Staging with One Mobile App ID
+
+If you are using **Capgo Environment Best Practices: Staging with One Mobile App ID** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

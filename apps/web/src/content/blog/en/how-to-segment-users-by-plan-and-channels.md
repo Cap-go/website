@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-04-15T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo-feature-image.webp
 head_image_alt: Capgo channels feature flags illustration
 keywords: channels, feature flags, a/b testing, capacitor, capgo
@@ -176,4 +176,8 @@ const assignToABTest = async (userId: string) => {
 
 By leveraging Capgo's channel system, you can create more personalized app experiences and run A/B tests. For production use, always prefer the backend assignment method for better security and control.
 
-For more details on channel management, check out our [channels documentation](/docs/live-updates/channels/). 
+For more details on channel management, check out our [channels documentation](/docs/live-updates/channels/).
+
+## Keep going from How to Use Channels for Feature Flags and A/B Testing
+
+If you are using **How to Use Channels for Feature Flags and A/B Testing** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-11T21:28:20.329Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682028f45e3fe4823b5e5a52-1746998980056.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, CLI, app updates, mobile development, iOS, Android, migration, Capgo, plugins
@@ -365,3 +365,7 @@ Before making the leap to the latest version of Capacitor, it's crucial to doubl
 
 You can also test your app in a controlled environment with the updated Capacitor version. This lets you spot and fix any compatibility problems before the update goes live in production. Tools like **Capgo** can be a lifesaver here, allowing you to push updates directly without needing app store approvals. This means you can quickly address plugin-related issues while staying within platform guidelines.
 :::
+
+## Keep going from Capacitor CLI Commands for Version Updates
+
+If you are using **Capacitor CLI Commands for Version Updates** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

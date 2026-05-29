@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-24T08:30:17.609Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67bbc47be5225d66b70936da-1740386039142.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, dependency management, mobile development, plugins, automation
@@ -212,3 +212,7 @@ Modern tools make these tasks easier. For example, Capgo helps teams implement u
 > "Keeping your dependencies up to date will ensure you are using supported and secure products. Ignoring updates will increase your technical debt making it harder to update in the future." - Capacitor Documentation [\[1\]](https://capacitorjs.com/docs/vscode/dependencies)
 
 To maintain stability and security, aim for an SDK update cycle of 6–12 months and perform regular vulnerability scans [\[7\]](https://cap.cloud.sap/docs/node.js/best-practices).
+
+## Keep going from Managing Dependencies in Capacitor Projects
+
+If you are using **Managing Dependencies in Capacitor Projects** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

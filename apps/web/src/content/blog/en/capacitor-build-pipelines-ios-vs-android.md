@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T20:31:21.521Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682a1cea5642a17d106e7413-1747600359936.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, iOS development, Android development, build pipelines, security, deployment, mobile apps, developer accounts
@@ -241,3 +241,7 @@ Another key area to focus on is minimizing **WebView overhead**. You can achieve
 
 For simplifying updates and deployments, tools like Capgo can be incredibly helpful. They provide real-time updates, integrate seamlessly with CI/CD workflows, and ensure compliance with Apple and Android guidelines. By combining these strategies, developers can significantly improve performance and streamline workflows for both platforms.
 :::
+
+## Keep going from Capacitor Build Pipelines: iOS vs. Android
+
+If you are using **Capacitor Build Pipelines: iOS vs. Android** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

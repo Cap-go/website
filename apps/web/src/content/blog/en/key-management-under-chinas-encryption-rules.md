@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-03T02:41:08.008Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67eddf34ebbb9dc806408915-1743648083390.jpg
 head_image_alt: Mobile Development
 keywords: encryption, key management, China, compliance, data residency, encryption standards, audits, government oversight
@@ -138,3 +138,7 @@ Since [Microsoft CodePush](https://microsoft.github.io/code-push/)'s shutdown in
 To stay compliant with China's encryption laws while maintaining development speed, it's crucial to use the right tools, keep documentation up to date, conduct regular audits, and collaborate with experts. These steps are key to navigating China's complex regulatory environment effectively.
 
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
+
+## Keep going from Key Management Under China's Encryption Rules
+
+If you are using **Key Management Under China's Encryption Rules** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

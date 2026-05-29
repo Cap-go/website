@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-20T00:50:40.782Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e-1745110261303.jpg
 head_image_alt: Technology
 keywords: CI/CD, secret management, security, environment variables, automated scanning
@@ -116,3 +116,7 @@ Key points for secure secret management:
 -   **Prepare for incidents**: Set up clear processes for addressing exposed secrets and rolling back changes when necessary.
 
 Effective secret management shifts security from being an obstacle to becoming a support system for continuous delivery.
+
+## Keep going from Managing Secrets in CI/CD Pipelines
+
+If you are using **Managing Secrets in CI/CD Pipelines** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

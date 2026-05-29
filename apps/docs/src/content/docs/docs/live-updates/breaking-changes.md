@@ -199,4 +199,8 @@ npx @capgo/cli bundle upload --channel production
 
 :::tip
 Keep your v1-maintenance branch up to date with bug fixes that are compatible with version 1.x, but never merge breaking changes from main
-::: 
+:::
+
+## Keep going from Breaking Changes
+
+If you are using **Breaking Changes** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

@@ -69,3 +69,7 @@ await CrispPlugin.setUser({
 
 - GitHub: https://github.com/Cap-go/capacitor-crisp/
 - Docs: /docs/plugins/crisp/
+
+## Keep going from Using @capgo/capacitor-crisp
+
+If you are using **Using @capgo/capacitor-crisp** to plan migration and enterprise operations, connect it with [@capgo/capacitor-crisp](/docs/plugins/crisp/) for the implementation detail in @capgo/capacitor-crisp, [Getting Started](/docs/plugins/crisp/getting-started/) for the implementation detail in Getting Started, [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives.

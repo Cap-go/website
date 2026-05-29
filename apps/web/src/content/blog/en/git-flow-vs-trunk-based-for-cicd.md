@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-23T02:55:05.937Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad-1745376919736.jpg
 head_image_alt: Software Development
 keywords: Git Flow, Trunk-Based Development, CI/CD, software development, version control
@@ -178,3 +178,7 @@ Choose your workflow based on your team's size and CI/CD maturity level using th
 -   Maintain consistent code reviews and use feature toggles in both workflows. Align your pipeline configurations with the workflow you select.
 
 Some teams might mix these approaches - using Git Flow for major releases while leveraging Trunk-Based Development for feature delivery. Whichever path you take, success depends on integrating CI/CD properly, automating testing, and keeping the team on the same page.
+
+## Keep going from Git Flow vs Trunk-Based for CI/CD
+
+If you are using **Git Flow vs Trunk-Based for CI/CD** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

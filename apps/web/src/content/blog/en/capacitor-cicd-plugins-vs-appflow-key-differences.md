@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-11T12:47:30.453Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67f89c0a3ac261d346bd63f6-1744375691287.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, CI/CD, Appflow, mobile app updates, development tools, customization, deployment, open-source, cost-effective solutions
@@ -194,3 +194,7 @@ Organizations can cut costs significantly with plugin-based solutions while gain
 These changes highlight the importance of choosing tools that offer strong features and reliable long-term support. For teams that value control and flexibility, Capacitor CI/CD plugins stand out by enabling self-hosting and tailored setups - meeting unique security and deployment needs while maintaining independence.
 
 The decision between these solutions ultimately depends on immediate priorities and long-term goals. The growing preference for open-source, cost-conscious tools underscores their potential to support development efforts well into the future. This trend solidifies the appeal of open-source, flexible CI/CD tools for maintaining sustainable development practices.
+
+## Keep going from Capacitor CI/CD Plugins vs Appflow: Key Differences
+
+If you are using **Capacitor CI/CD Plugins vs Appflow: Key Differences** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

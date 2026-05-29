@@ -90,3 +90,7 @@ await CapacitorTwilioVoice.makeCall({
 
 - GitHub: https://github.com/Cap-go/capacitor-twilio-voice/
 - Docs: /docs/plugins/twilio-voice/
+
+## Keep going from Using @capgo/capacitor-twilio-voice
+
+If you are using **Using @capgo/capacitor-twilio-voice** to plan native plugin work, connect it with [@capgo/capacitor-twilio-voice](/docs/plugins/twilio-voice/) for the implementation detail in @capgo/capacitor-twilio-voice, [Getting Started](/docs/plugins/twilio-voice/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-03T03:02:24.801Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580-1743649359050.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, Apple policies, app compliance, security standards, performance benchmarks, OTA updates, encryption
@@ -144,3 +144,7 @@ Capgo addresses common challenges by offering:
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Capgo also integrates seamlessly with CI/CD workflows, making it easier for developers to maintain consistent update processes - essential for aligning with Apple's 2025 requirements.
+
+## Keep going from Apple Policy Updates for Capacitor Apps 2025
+
+If you are using **Apple Policy Updates for Capacitor Apps 2025** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

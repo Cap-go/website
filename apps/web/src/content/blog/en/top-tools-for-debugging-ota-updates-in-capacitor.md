@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-20T02:05:05.290Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67b67f2eacf635f489c4a234-1740017141105.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, debugging tools, mobile development, app updates
@@ -188,3 +188,7 @@ For additional [debugging options](https://capgo.app/docs/plugins/updater/debugg
 
 -   **Inspect.dev**: A cross-platform debugging tool.
 -   **Capgo**: Helps with live update management, along with built-in security and CI/CD features.
+
+## Keep going from Top Tools for Debugging OTA Updates in Capacitor
+
+If you are using **Top Tools for Debugging OTA Updates in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

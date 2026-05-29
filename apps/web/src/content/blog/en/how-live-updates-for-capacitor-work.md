@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-18T06:14:25.862Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo_banner.webp
 head_image_alt: 'Live Updates Architecture'
 keywords: 'Capgo live updates, OTA updates, Capacitor updates, mobile app development, app updates'
@@ -286,4 +286,8 @@ Perfect for:
 Not suitable for:
 - Native code changes
 - Major version updates
-- Security patches requiring native changes 
+- Security patches requiring native changes
+
+## Keep going from How Live Updates Work in Capgo
+
+If you are using **How Live Updates Work in Capgo** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

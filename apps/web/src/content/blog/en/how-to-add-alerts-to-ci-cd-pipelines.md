@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-23T08:26:42.946Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/683001c0d3b96619817df6c1-1747988887322.jpg
 head_image_alt: Software Development
 keywords: CI/CD, alerts, monitoring, DevOps, integration, performance, security, automation
@@ -223,3 +223,7 @@ To set up effective alerts for your mobile app deployments, start by pinpointing
 
 Leverage tools with **real-time monitoring** capabilities to quickly identify and resolve issues, ensuring your deployments run smoothly. Platforms like **Capgo** can make this even easier by offering **integrated CI/CD solutions** and customized alerts tailored to specific deployment needs, giving you instant updates and greater control over your deployment pipeline.
 :::
+
+## Keep going from How to Add Alerts to CI/CD Pipelines
+
+If you are using **How to Add Alerts to CI/CD Pipelines** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

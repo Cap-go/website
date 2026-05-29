@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /android_app_gitlab.webp
 head_image_alt: Fastlane Google play GitLab illustration
 keywords: Fastlane, CI/CD, Android, automatic build, automatic release, mobile app updates
@@ -276,3 +276,7 @@ Make sure to adjust the paths and dependencies according to your project's struc
 ## Conclusion
 
 By configuring GitLab CI/CD with the mingc/android-build-box Docker image, you can automate the Android app build process, making your development workflow more efficient and reliable. This automation frees up your time to focus on the core aspects of app development, ultimately helping you deliver high-quality Android apps more efficiently.
+
+## Keep going from Automatic Capacitor Android build with GitLab
+
+If you are using **Automatic Capacitor Android build with GitLab** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

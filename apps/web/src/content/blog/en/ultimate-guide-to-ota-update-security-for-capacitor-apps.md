@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-13T08:04:34.421Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ad4d12971060b04c742b83-1739433897515.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, security, encryption, mobile apps, compliance, data protection, update integrity, app store rules
@@ -234,3 +234,7 @@ To address these risks, developers should consider the following measures:
 -   Implement **behavioral monitoring systems** (see Section 5).
 
 For Capacitor apps, following security protocols and incorporating automated CI/CD validation (outlined in Section 6) are critical. These steps complement the encryption methods and compliance frameworks detailed in Sections 3 and 4.
+
+## Keep going from Ultimate Guide to OTA Update Security for Capacitor Apps
+
+If you are using **Ultimate Guide to OTA Update Security for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

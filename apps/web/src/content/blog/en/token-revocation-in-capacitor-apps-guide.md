@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T11:28:05.842Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68268a500209458b3ff4fe45-1747394939679.jpg
 head_image_alt: Mobile Development
 keywords: token revocation, Capacitor apps, security, OAuth 2.0, user data protection, token management
@@ -258,3 +258,7 @@ Regularly monitoring authentication attempts is also critical. It helps identify
 
 By following these practices, your app will remain secure and meet the ever-evolving requirements of app store platforms.
 :::
+
+## Keep going from Token Revocation in Capacitor Apps: Guide
+
+If you are using **Token Revocation in Capacitor Apps: Guide** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

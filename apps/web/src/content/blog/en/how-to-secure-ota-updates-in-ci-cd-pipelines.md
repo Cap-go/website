@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-24T06:53:44.733Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68314a58d3b96619817f6a5c-1748069679190.jpg
 head_image_alt: Security
 keywords: OTA updates, CI/CD security, cryptographic signing, end-to-end encryption, secure pipelines
@@ -281,3 +281,7 @@ To keep credentials and API keys safe in a CI/CD pipeline during OTA updates, he
 
 For those working with Capacitor apps, platforms like Capgo simplify CI/CD integration by offering features such as end-to-end encryption and user-specific update assignments. These tools help ensure your OTA updates are both secure and compliant.
 :::
+
+## Keep going from How to Secure OTA Updates in CI/CD Pipelines
+
+If you are using **How to Secure OTA Updates in CI/CD Pipelines** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

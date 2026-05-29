@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-15T04:38:10.916Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67afe3423823fbac65afe97c-1739594307916.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, App Store, Play Store, compliance, JavaScript updates, security
@@ -245,3 +245,7 @@ Rolling out OTA updates for Capacitor apps involves a mix of technical precision
 By following the compliance steps discussed earlier, teams can benefit from automated checks that simplify adherence to app store rules. Features like end-to-end encryption and controlled rollouts help address critical security and compliance needs.
 
 With Apple and Google continuously updating policies (like those in sections 2.1-2.3), expect more focus on update frequency and stricter security standards. Stay ahead by preparing for these changes while keeping JavaScript and asset update capabilities intact. Don't forget to document and test thoroughly to meet both platform guidelines and user expectations.
+
+## Keep going from Capacitor OTA Updates: App Store Approval Guide
+
+If you are using **Capacitor OTA Updates: App Store Approval Guide** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -120,3 +120,7 @@ if (yearlyProduct && monthlyCommitment) {
 - GitHub: https://github.com/Cap-go/capacitor-native-purchases/
 - Docs: /docs/plugins/native-purchases/
 - iOS monthly commitment guide: /docs/plugins/native-purchases/ios-monthly-commitment/
+
+## Keep going from Using @capgo/native-purchases
+
+If you are using **Using @capgo/native-purchases** to plan payments and purchases, connect it with [@capgo/native-purchases](/docs/plugins/native-purchases/) for the implementation detail in @capgo/native-purchases, [Getting Started](/docs/plugins/native-purchases/getting-started/) for the implementation detail in Getting Started, [Capgo Pricing](/pricing/) for the product workflow in Capgo Pricing, [Payment system](/docs/webapp/payment/) for the implementation detail in Payment system, and [Revenue Playbook](/docs/plugins/native-purchases/revenue-playbook/) for the implementation detail in Revenue Playbook.

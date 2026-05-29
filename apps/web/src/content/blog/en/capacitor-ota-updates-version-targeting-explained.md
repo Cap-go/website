@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-14T03:00:49.720Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67d37b87bca46a2e63b4584d-1741921265630.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, version targeting, Capacitor, mobile app updates, semantic versioning, app stability, bug fixes
@@ -268,3 +268,7 @@ To make the most of version targeting, a solid plan is key for maintaining app c
 -   **Track Deployments**: Monitor update success rates across various app versions.
     
 -   **Support Legacy Versions**: Keep critical older versions functional while nudging users toward updates.
+
+## Keep going from Capacitor OTA Updates: Version Targeting Explained
+
+If you are using **Capacitor OTA Updates: Version Targeting Explained** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

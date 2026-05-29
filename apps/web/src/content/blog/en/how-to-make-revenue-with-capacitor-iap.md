@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-05-01T00:00:00.000Z
-updated_at: 2026-05-01T11:16:21.000Z
+updated_at: 2026-05-28T12:16:38.000Z
 head_image: /native-purchases/revenue-playbook.png
 head_image_alt: Revenue playbook for Capacitor in-app purchases
 keywords: Capacitor revenue, in-app purchases, subscriptions, mobile app monetization, paywall, ASO, app revenue, native purchases
@@ -209,3 +209,7 @@ That loop is how you move from guessing to revenue. Once it works, you can add m
 - Collect churn feedback from the first subscribers.
 
 For the technical setup, use the [Native Purchases getting started guide](/docs/plugins/native-purchases/getting-started/). For the product and revenue workflow, keep the [Native Purchases revenue playbook](/docs/plugins/native-purchases/revenue-playbook/) next to your launch checklist.
+
+## Keep going from How to Make Revenue With a Capacitor App
+
+If you are using **How to Make Revenue With a Capacitor App** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

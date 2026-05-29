@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-21T04:03:25.616Z
-updated_at: 2026-05-21T11:26:04.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67dcd7fb83b63ee70fa0b90f-1742529933736.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, mobile app updates, Capacitor, app deployment, update scheduling, performance monitoring
@@ -226,3 +226,7 @@ OTA updates can boost app performance by delivering updates quickly and securely
     
 
 Since 2022, the landscape of OTA update solutions has grown significantly. For instance, Capgo has managed over 23.5 million updates across 750 production apps [\[1\]](https://capgo.app/). When combined with CI/CD integration and real-time analytics, these practices provide a solid OTA update strategy for your Capacitor app workflow.
+
+## Keep going from How to Schedule OTA Updates for Capacitor Apps
+
+If you are using **How to Schedule OTA Updates for Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

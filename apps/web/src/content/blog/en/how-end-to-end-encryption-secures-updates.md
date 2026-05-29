@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-14T04:10:31.003Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb-1744604001503.jpg
 head_image_alt: Mobile Development
 keywords: end-to-end encryption, OTA updates, app security, data protection, user trust
@@ -193,3 +193,7 @@ Here are some key factors that contribute to successful OTA updates:
 | Update Verification | Confirms the integrity of each update |
 
 The future of app updates depends on systems that combine security with adaptability. As more developers embrace end-to-end encryption, OTA updates will continue to safeguard apps while setting a higher standard for delivery systems.
+
+## Keep going from How End-to-End Encryption Secures Updates
+
+If you are using **How End-to-End Encryption Secures Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

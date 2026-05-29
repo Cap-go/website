@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-13T02:43:03.376Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6822944c3c68b32f40f92f58-1747104241944.jpg
 head_image_alt: Mobile Development
 keywords: China Cybersecurity Law, app updates, data residency, security audits, compliance tracking
@@ -210,3 +210,7 @@ Live update systems give developers the ability to roll out updates, bug fixes, 
 
 Platforms like **Capgo** simplify this process further. Capgo supports live updates for Capacitor apps, offering features like end-to-end encryption and adherence to both Apple and Android guidelines. This allows developers to meet regulatory standards while delivering updates quickly and securely.
 :::
+
+## Keep going from China's Cybersecurity Law: Impact on App Updates
+
+If you are using **China's Cybersecurity Law: Impact on App Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

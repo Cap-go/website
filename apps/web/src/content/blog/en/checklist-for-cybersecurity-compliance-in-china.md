@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-13T05:14:08.592Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6822cd20266b1f3f75203ab9-1747113353909.jpg
 head_image_alt: Mobile Development
 keywords: China cybersecurity, compliance checklist, data protection, personal information law, security regulations
@@ -366,3 +366,7 @@ Failing to follow China's cybersecurity regulations can result in serious reperc
 
 To reduce these risks, businesses must ensure their apps align with all regulatory standards. This includes adhering to **data localization rules**, obtaining **user consent for data collection**, and conducting thorough **security assessments**. Tools like Capgo can simplify the process by helping developers roll out updates and fixes efficiently, ensuring compliance without disrupting app functionality. Keeping up-to-date with regulatory changes and addressing them proactively is essential for avoiding penalties and achieving long-term success in China.
 :::
+
+## Keep going from Checklist for Cybersecurity Compliance in China
+
+If you are using **Checklist for Cybersecurity Compliance in China** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

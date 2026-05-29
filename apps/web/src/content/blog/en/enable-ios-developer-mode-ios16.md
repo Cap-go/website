@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /enable-ios-developer-mode-ios16.webp
 head_image_alt: Enabling iOS Developer Mode on iPhone
 keywords: iOS, Developer Mode, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -61,3 +61,7 @@ Remember, you can disable Developer Mode at any time through the same settings. 
 If you encounter issues with the above method and you have access to a Mac, you can enable Developer Mode by connecting your iOS device to your Mac and following the instructions provided in [Apple's official documentation](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device/).
 
 By following these steps, you'll be ready to test and develop apps effectively on your iOS device running iOS 16 or later.
+
+## Keep going from How to Enable Developer Mode on iOS 16 for App Testing
+
+If you are using **How to Enable Developer Mode on iOS 16 for App Testing** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

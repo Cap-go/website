@@ -102,3 +102,7 @@ For now only the first public channel is in use, in the future, public will chan
 ## Common problems:
 
 * Build problem after upgrade: if you have already opened the source code of the plugin in Android studio or Xcode, sometimes the sync doesn't remove them, that the cause of the issue. Open the native IDE and remove `capacitor-updater` by hands and do `npx cap sync` this should solve.
+
+## Keep going from From V2 to V3
+
+If you are using **From V2 to V3** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

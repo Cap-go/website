@@ -24,6 +24,7 @@ Plugin Background Task|periodic background fetch task plugin for iOS and Android
 Plugin Barometer|barometric pressure sensor plugin|docs/plugins/barometer/**
 Plugin Bluetooth Low Energy|Bluetooth Low Energy (BLE) plugin for device communication|docs/plugins/bluetooth-low-energy/**
 Plugin Brightness|screen brightness control plugin|docs/plugins/brightness/**
+Plugin Calendar|calendar events and reminders plugin for iOS and Android|docs/plugins/calendar/**
 Plugin Camera Preview|camera preview plugin for live camera feed|docs/plugins/camera-preview/**
 Plugin Capacitor+|Capacitor+ enhanced runtime plugin|docs/plugins/capacitor-plus/**
 Plugin Capacitor Patch|hook-only patch catalog plugin for applying Capacitor core, CLI, plugin, and native project fixes during sync and update|docs/plugins/capacitor-patch/**
@@ -33,6 +34,7 @@ Plugin Facebook Analytics|Meta/Facebook App Events analytics plugin|docs/plugins
 Plugin Contacts|contacts access plugin for reading device contacts|docs/plugins/contacts/**
 Plugin Crisp|Crisp chat integration plugin|docs/plugins/crisp/**
 Plugin Data Storage SQLite|SQLite data storage plugin for local database|docs/plugins/data-storage-sqlite/**
+Plugin Date Picker|native date, time, date-time, year-month, and range picker plugin for iOS, Android, and Web|docs/plugins/date-picker/**
 Plugin Document Scanner|document scanning plugin with OCR capabilities|docs/plugins/document-scanner/**
 Plugin Downloader|file download manager plugin|docs/plugins/downloader/**
 Plugin Env|environment variables plugin|docs/plugins/env/**

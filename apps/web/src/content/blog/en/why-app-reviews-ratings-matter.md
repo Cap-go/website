@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2026-05-20T17:38:04.000Z
+updated_at: 2026-05-28T12:16:38.000Z
 head_image: /app-reviews-ratings-guide.webp
 head_image_alt: App Store Reviews and Ratings
 keywords: app reviews, app ratings, app store optimization, ASO, user reviews, app ranking, in-app review, capacitor rating plugin, app store ratings, play store reviews
@@ -665,3 +665,7 @@ Remember, the best way to get great reviews is to build a great app that solves 
 ---
 
 *Looking for a way to update your app instantly without waiting for app store approval? Check out [Capgo's live update solution](/docs/getting-started/) for seamless over-the-air updates that keep your app fresh and your users happy.*
+
+## Keep going from Why App Reviews and Ratings Matter: Success Guide
+
+If you are using **Why App Reviews and Ratings Matter: Success Guide** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

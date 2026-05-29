@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-28T01:52:31.369Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-28T12:16:38.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e5e83da2c14cac42f7f5e4-1743126762355.jpg
 head_image_alt: Mobile Development
 keywords: app store metadata, app optimization, keywords, visuals, localization, mobile apps, app visibility, user engagement, updates
@@ -220,3 +220,7 @@ Here are some critical aspects to focus on for effective metadata management:
 | Distribution | Targeted rollouts | Control how updates are deployed |
 
 The shift in app store metadata management shows the industry's push toward faster, more efficient solutions that prioritize rapid updates while maintaining strong security and compliance. As Bessie Cooper put it: "Capgo is a must-have tool for developers who want to be more productive. Bypassing app review for critical fixes provides a significant advantage." [\[1\]](https://capgo.app/)
+
+## Keep going from App Store Metadata: What Developers Must Know
+
+If you are using **App Store Metadata: What Developers Must Know** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

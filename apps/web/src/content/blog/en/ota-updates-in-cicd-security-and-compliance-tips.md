@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-29T03:24:03.406Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8-1743218655903.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, CI/CD, security, compliance, encryption, app deployment, privacy laws, mobile updates
@@ -238,3 +238,7 @@ Integrate continuous deployment pipelines with robust security measures. Key pra
 -   Gradual rollouts using channel systems
 -   Real-time error tracking and analytics
 -   Version control for seamless updates
+
+## Keep going from OTA Updates in CI/CD: Security and Compliance Tips
+
+If you are using **OTA Updates in CI/CD: Security and Compliance Tips** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

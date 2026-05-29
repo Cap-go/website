@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-12T04:31:38.871Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68214ae55e3fe4823b5f6cab-1747024366276.jpg
 head_image_alt: Software Development
 keywords: token rotation, CI/CD security, refresh tokens, credential management, secure deployments
@@ -290,3 +290,7 @@ When it comes to cost and features, Capgo stands out as a strong contender. It o
 **real-time updates**, all while meeting Apple and Android compliance guidelines. On top of that, Capgo's pricing is designed to be budget-friendly: plans start at $12/month and
 include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits.
 :::
+
+## Keep going from Refresh Token Rotation in CI/CD Workflows
+
+If you are using **Refresh Token Rotation in CI/CD Workflows** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

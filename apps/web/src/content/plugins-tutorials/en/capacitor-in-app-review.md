@@ -33,3 +33,7 @@ await CapgoInAppReview.requestReview();
 
 - GitHub: https://github.com/Cap-go/capacitor-in-app-review/
 - Docs: /docs/plugins/in-app-review/
+
+## Keep going from Using @capgo/capacitor-in-app-review
+
+If you are using **Using @capgo/capacitor-in-app-review** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Getting Started](/docs/plugins/in-app-review/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

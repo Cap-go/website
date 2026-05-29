@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-04T01:27:27.426Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1-1743730059829.jpg
 head_image_alt: Mobile Development
 keywords: consent tracking, privacy compliance, user rights, Capacitor apps, data protection
@@ -476,3 +476,7 @@ NASA's [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team underscores t
 > "Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) :-)" [\[1\]](https://capgo.app/)
 
 When managing consent tracking, focus on encryption and analytics monitoring to stay compliant and foster user trust. This strategy ensures quick responses to regulatory changes and evolving privacy standards.
+
+## Keep going from Automated Consent Tracking for Capacitor Apps
+
+If you are using **Automated Consent Tracking for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

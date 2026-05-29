@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-06T02:16:15.693Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d-1743905786627.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, security, encryption, file verification, access control, mobile app updates, data protection
@@ -230,3 +230,7 @@ End-to-end encryption plays a critical role in protecting OTA updates, blocking 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Maintaining security requires continuous attention and the right tools. With proper monitoring, quick responses to threats, and regularly updated protocols, your OTA system can remain both secure and efficient. This aligns with thorough testing, careful management, and well-planned post-release processes.
+
+## Keep going from Capacitor OTA Updates: Security Tips
+
+If you are using **Capacitor OTA Updates: Security Tips** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

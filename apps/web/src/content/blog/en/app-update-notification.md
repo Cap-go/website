@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-20T07:08:46.263Z
-updated_at: 2026-05-20T07:10:59.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/905a3d30-6284-4122-995c-f7914d9519d8/app-update-notification-strategy-title.jpg'
 head_image_alt: Effective App Update Notification Strategies
 keywords: 'app update notification, capacitorjs, electronjs, capgo, live updates'
@@ -434,3 +434,7 @@ The recurring principle in all of these cases is simple: separate **detection**,
 ---
 
 If your team is shipping Capacitor or Electron apps and you need a controlled update system with channels, signed bundle delivery, rollback protection, and device-level observability, [Capgo](https://capgo.app) is worth evaluating. It fits teams that want live updates to behave like release infrastructure instead of a hand-built side project.
+
+## Keep going from Effective App Update Notification Strategies
+
+If you are using **Effective App Update Notification Strategies** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-16T03:16:07.345Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ff1c0bb0912f75a97f349a-1744775417719.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, debugging, error tracking, app stability, Capgo
@@ -201,3 +201,7 @@ Consider these steps to boost OTA reliability:
     -   Response times (target around 434 ms)
     -   Download speeds (benchmark: 114 ms for a 5 MB bundle)
 -   **Prepare Recovery Plans**: Enable instant rollback features, set up automated error tracking, and establish clear escalation paths. These practices have already supported 1.1 trillion successful updates across more than 1,900 production apps [\[1\]](https://capgo.app/).
+
+## Keep going from Capacitor OTA Updates: Debugging Issues
+
+If you are using **Capacitor OTA Updates: Debugging Issues** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

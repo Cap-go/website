@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-26T01:51:04.423Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e344e910051fda3b61d655-1742953875704.jpg
 head_image_alt: Mobile Development
 keywords: ICP filing, China mobile apps, compliance, registration, documentation, technical requirements, app operation
@@ -289,3 +289,7 @@ Capgo also offers a channel system that lets developers test compliance updates 
 -   **Flexible Hosting**: Choose between cloud-based or self-hosted options to meet localization needs.
 
 These tools make Capgo a valuable resource for developers navigating the Chinese market, where fast responses to regulatory changes are critical to staying compliant.
+
+## Keep going from ICP Filing for Mobile Apps in China: Step-by-Step Guide
+
+If you are using **ICP Filing for Mobile Apps in China: Step-by-Step Guide** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-21T12:35:22.443Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682dbf604fa53d42207ee932-1747830977716.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, latency reduction, network optimization, front-end performance, server-side improvements, live updates, app speed
@@ -423,3 +423,7 @@ Live update tools like **Capgo** have changed the game for app developers, makin
 
 With **secure over-the-air (OTA) updates**, Capgo ensures compliance with app store rules while also minimizing downtime and increasing reliability. Developers can push out multiple updates each week, which not only streamlines their workflow but also enhances the overall user experience. By removing the hassle of manual updates, live update platforms like Capgo help boost user engagement and retention, delivering a seamless and modern app experience.
 :::
+
+## Keep going from Ultimate Guide to Reducing Latency in Capacitor Apps
+
+If you are using **Ultimate Guide to Reducing Latency in Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

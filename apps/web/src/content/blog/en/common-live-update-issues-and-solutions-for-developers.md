@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-06T03:31:58.003Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67a3d9861da6ea6c25fd54e4-1738812730938.jpg
 head_image_alt: Mobile Development
 keywords: live updates, network issues, version conflicts, device compatibility, CI/CD, OTA updates, security, app development
@@ -252,3 +252,7 @@ Here’s how to begin:
 -   Configure updates for specific user groups.
 
 These steps ensure a smoother workflow and faster updates.
+
+## Keep going from Common Live Update Issues and Solutions for Developers
+
+If you are using **Common Live Update Issues and Solutions for Developers** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-19T06:50:10.784Z
-updated_at: 2026-05-19T06:52:38.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/7a780a81-e515-45a3-ac57-80066d1340f2/react-feature-flags-title-card.jpg'
 head_image_alt: 'React Feature Flags: A Complete Implementation Guide'
 keywords: 'react feature flags, reactjs, feature management, devops, capacitorjs'
@@ -425,3 +425,7 @@ Used together, live updates and flags give hybrid teams something closer to web-
 ---
 
 If your team ships Capacitor or Electron apps and needs that release-control layer, [Capgo](https://capgo.app) is one option to look at. It delivers signed web bundles to targeted channels, supports rollback protection and observability, and fits the kind of hybrid-app workflow where feature flags need to work alongside live updates rather than replacing them.
+
+## Keep going from React Feature Flags: A Complete Implementation Guide
+
+If you are using **React Feature Flags: A Complete Implementation Guide** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

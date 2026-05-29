@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T21:23:23.545Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682a44fe5642a17d106eb21b-1747603534475.jpg
 head_image_alt: Mobile Development
 keywords: SSL pinning, mobile app security, MITM attacks, certificate pinning, public key pinning, TrustKit, OkHttp, Capacitor
@@ -258,3 +258,7 @@ Testing plays a vital role here. Tools like **Burp Suite** or **OWASP ZAP** can 
 
 For apps built with Capacitor, tools like **Capgo** can be a game-changer. Capgo not only supports live updates but also integrates securely with your app’s CI/CD pipeline. This makes it easier to roll out fixes or updates quickly while staying compliant with Apple and Android guidelines.
 :::
+
+## Keep going from SSL Pinning Implementation: Tools and Plugins
+
+If you are using **SSL Pinning Implementation: Tools and Plugins** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

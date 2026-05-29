@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-05-01T00:00:00.000Z
-updated_at: 2026-05-18T16:12:40.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /stripe_apple.webp
 head_image_alt: Stripe payment implementation in Capacitor apps
 keywords: capacitor, stripe, payment links, app store guidelines, iOS, digital goods, in-app purchases, external payments
@@ -722,3 +722,7 @@ A: You should implement region detection (as shown in the article) to only offer
 
 **Q: Can I use this for physical goods or services consumed outside the app?**  
 A: Yes, Apple has always allowed external payment methods for physical goods and services consumed outside the app (like ride-sharing or food delivery).
+
+## Keep going from Stripe Payments in Capacitor: New Apple Guidelines
+
+If you are using **Stripe Payments in Capacitor: New Apple Guidelines** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

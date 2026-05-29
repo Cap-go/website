@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-15T01:20:29.530Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd-1744680128983.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, staging environment, app testing, error tracking, network conditions, phased rollouts, app deployment
@@ -229,3 +229,7 @@ To make your OTA updates secure and efficient, consider these steps:
 A well-prepared staging environment, supported by platforms like Capgo, can help you achieve these goals. For instance, 95% of active users can update within 24 hours, with an average global API response time of 434ms [\[1\]](https://capgo.app/).
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)
+
+## Keep going from Staging OTA Updates: Best Practices
+
+If you are using **Staging OTA Updates: Best Practices** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

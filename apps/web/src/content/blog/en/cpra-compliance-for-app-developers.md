@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T12:45:04.405Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68272d340209458b3ff59c4e-1747399564636.jpg
 head_image_alt: Mobile Development
 keywords: CPRA, app developers, data protection, privacy rights, consent management, sensitive personal information, compliance, security measures
@@ -226,3 +226,7 @@ Your app should also make it simple for users to adjust their preferences, inclu
 
 For developers using tools like **Capgo** to deliver live updates in Capacitor apps, integrating consent management is straightforward. This approach not only keeps your app compliant with Apple and Android guidelines but also ensures it stays privacy-focused and user-friendly.
 :::
+
+## Keep going from CPRA Compliance for App Developers
+
+If you are using **CPRA Compliance for App Developers** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

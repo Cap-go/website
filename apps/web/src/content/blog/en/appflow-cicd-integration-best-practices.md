@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-15T02:52:14.301Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4-1744685577460.jpg
 head_image_alt: Mobile Development
 keywords: CI/CD, mobile app development, Appflow, Capgo, OTA updates, build automation, deployment, security
@@ -216,3 +216,7 @@ When implementing CI/CD, three key factors stand out:
 Prioritizing these areas helps teams adapt to the shifting CI/CD environment. With Appflow set to discontinue in 2026, it's crucial to consider not just technical performance, but also cost efficiency, update reliability, and long-term platform stability.
 
 As platforms handle 1,155.1 billion updates globally[\[1\]](https://capgo.app/), efficient and reliable update delivery remains a critical focus for modern mobile app development. Balancing performance and cost is essential when choosing the right CI/CD solution.
+
+## Keep going from Appflow CI/CD Integration: Best Practices
+
+If you are using **Appflow CI/CD Integration: Best Practices** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

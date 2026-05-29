@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-15T06:27:06.154Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682580e10209458b3ff3c0b1-1747290491442.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, CI/CD, build failures, mobile development, troubleshooting, version control, environment variables
@@ -360,3 +360,7 @@ Capgo takes the hassle out of diagnosing and fixing build failures in Capacitor 
 
 On top of that, Capgo simplifies over-the-air (OTA) updates with features such as **rollback options**, **staged rollouts**, and **real-time monitoring**. These tools make deployments smoother and more controlled. Plus, its integration with your existing CI/CD tools enables **automated compliance checks** and **performance tracking**, boosting the reliability and efficiency of your pipeline.
 :::
+
+## Keep going from Fixing Build Failures in Capacitor CI/CD Pipelines
+
+If you are using **Fixing Build Failures in Capacitor CI/CD Pipelines** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

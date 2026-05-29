@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-07T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /migrating-cordova-to-capacitor.webp
 head_image_alt: Cordova to Capacitor migration illustration
 keywords: Cordova, Capacitor, migration, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -88,3 +88,7 @@ To implement Capgo live updates in your Capacitor project, follow these steps:
 ## Conclusion
 
 We hope this guide has helped you migrate your web app from Cordova to Capacitor. If you have any questions or need assistance with the migration process, feel free to contact us on our [discord](https://discord.capgo.app) server.
+
+## Keep going from Migrating a Web App from Cordova to Capacitor: A Step-by-Step Guide
+
+If you are using **Migrating a Web App from Cordova to Capacitor: A Step-by-Step Guide** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

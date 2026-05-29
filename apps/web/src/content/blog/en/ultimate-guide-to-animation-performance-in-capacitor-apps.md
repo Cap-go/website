@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-23T09:22:42.613Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68303244d3b96619817e58e3-1747992221767.jpg
 head_image_alt: Mobile Development
 keywords: animation performance, Capacitor apps, mobile development, hardware acceleration, CSS animations
@@ -334,3 +334,7 @@ Capgo takes animation performance in Capacitor apps to the next level by allowin
 
 Unlike traditional update methods, Capgo stands out with features like **app store policy compliance**, **end-to-end encryption** for secure updates, and the ability to deliver updates to specific user groups. With over **23.5 million updates delivered** across more than **750 apps**, Capgo achieves an impressive 95% user update rate within 24 hours, streamlining releases and boosting user satisfaction.
 :::
+
+## Keep going from Ultimate Guide to Animation Performance in Capacitor Apps
+
+If you are using **Ultimate Guide to Animation Performance in Capacitor Apps** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

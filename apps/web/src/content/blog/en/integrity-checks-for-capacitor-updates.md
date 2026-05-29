@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-25T02:39:56.412Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67bd178e258ce8f57ea75e3e-1740451235493.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, security, integrity checks, encryption, mobile apps, update management
@@ -210,3 +210,7 @@ Here’s an example of a secure configuration for your project:
     -   Use Capgo's analytics dashboard to monitor update performance and statistics.
 
 Following these practices will help you maintain secure OTA updates for Capacitor apps.
+
+## Keep going from Integrity Checks for Capacitor Updates
+
+If you are using **Integrity Checks for Capacitor Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

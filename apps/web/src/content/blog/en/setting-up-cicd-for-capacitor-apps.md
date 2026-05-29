@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-11T06:22:21.536Z
-updated_at: 2026-05-06T12:37:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67aa9923b771216988320bf2-1739254956493.jpg
 head_image_alt: Mobile Development
 keywords: CI/CD, Capacitor apps, mobile development, automation, build process, live updates
@@ -383,3 +383,7 @@ Building a Capacitor app involves a few straightforward steps:
     
 
 The synchronization step is crucial for keeping your app consistent across platforms and ensuring smooth operation in CI/CD pipelines. For more details on setting up your environment, check out the Tools section.
+
+## Keep going from Setting Up CI/CD for Capacitor Apps
+
+If you are using **Setting Up CI/CD for Capacitor Apps** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

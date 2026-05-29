@@ -405,14 +405,14 @@ First, figure out what channel is failing. You can do that by looking at the `mi
 Then go to the failing channel and click on `Bundle number`. This should take you to the bundle page.
 <img src="/fail-channel-show.webp" alt="Locate failing channel"/>
 
-Once there fill the `Minimal update version` field. This should be a [semver](https://devhints.io/semver/).\
+Once there fill the `Minimal update version` field. This should be a [semver](/semver_tester/).\
 If the value you pass is not a semver you will get an error, but if everything goes correctly you should see something like this:
 <img src="/set-min-update-version.webp" alt="Set min version"/>
 
 Now, you likely do not want to set this data manually every time you update. Fortunately, the CLI will prevent you from sending an update without this metadata
 <img src="/cli-fail-no-metadata.webp" alt="CLI fail no metadata"/>
 
-To properly upload a bundle when using the `metadata` option you need to pass the `--min-update-version` with the valid semver. Something like this:
+To properly upload a bundle when using the `metadata` option you need to pass the `--min-update-version` with the [valid semver](/semver_tester/). Something like this:
 <img src="/cli-upload-with-metadata.webp" alt="CLI upload with metadata"/>
 
 The `--min-update-version` is not the ONLY way to do compatibility.
@@ -469,3 +469,7 @@ To automate your work, I recommend you make GitHub action do the job of pushing 
 [GitHub - Cap-go/demo-app](https://github.com/Cap-go/demo-app/)
 
 Don’t forget to configure CI env variable with your API key
+
+## Keep going from Commands
+
+If you are using **Commands** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

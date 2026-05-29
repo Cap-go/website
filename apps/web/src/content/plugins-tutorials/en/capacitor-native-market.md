@@ -1,15 +1,15 @@
 ---
 locale: en
 ---
-# Using @capgo/native-market
+# Using @capgo/capacitor-native-market
 
 Capacitor Native Market Plugin for opening app store listings and pages.
 
 ## Install
 
 ```bash
-bun add @capgo/native-market
-bunx cap sync
+npm install @capgo/capacitor-native-market
+npx cap sync
 ```
 
 ## What This Plugin Exposes
@@ -26,7 +26,7 @@ bunx cap sync
 Launch app listing page in Play Store (Android) or App Store (iOS).
 
 ```typescript
-import { NativeMarket } from '@capgo/native-market';
+import { NativeMarket } from '@capgo/capacitor-native-market';
 
 // Open app in store
 await NativeMarket.openStoreListing({
@@ -45,7 +45,7 @@ await NativeMarket.openStoreListing({
 Deep-link directly to a developer's page in the Play Store. Android only.
 
 ```typescript
-import { NativeMarket } from '@capgo/native-market';
+import { NativeMarket } from '@capgo/capacitor-native-market';
 
 await NativeMarket.openDevPage({
   devId: 'Google+LLC'
@@ -57,7 +57,7 @@ await NativeMarket.openDevPage({
 Link users to a collection or top charts in the Play Store. Android only.
 
 ```typescript
-import { NativeMarket } from '@capgo/native-market';
+import { NativeMarket } from '@capgo/capacitor-native-market';
 
 await NativeMarket.openCollection({
   name: 'featured'
@@ -69,7 +69,7 @@ await NativeMarket.openCollection({
 Link users to Editor's choice page in the Play Store. Android only.
 
 ```typescript
-import { NativeMarket } from '@capgo/native-market';
+import { NativeMarket } from '@capgo/capacitor-native-market';
 
 await NativeMarket.openEditorChoicePage({
   editorChoice: 'editorial_fitness_apps_us'
@@ -80,3 +80,7 @@ await NativeMarket.openEditorChoicePage({
 
 - GitHub: https://github.com/Cap-go/capacitor-native-market/
 - Docs: /docs/plugins/native-market/
+
+## Keep going from Using @capgo/capacitor-native-market
+
+If you are using **Using @capgo/capacitor-native-market** to plan store approval and distribution, connect it with [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Getting Started](/docs/plugins/native-market/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

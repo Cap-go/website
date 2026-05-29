@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-22T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo_ci-cd-illustration.webp
 head_image_alt: Capgo PR preview illustration
 keywords: pr preview, pull request, OTA updates, capacitor, capgo, live updates, QA testing, feature preview, github actions
@@ -304,3 +304,7 @@ PR previews transform how your team reviews and tests mobile features. Instead o
 The setup is minimal - one GitHub Actions workflow file - and the benefits compound across your team. QA stays unblocked, product managers review faster, and developers get quicker feedback.
 
 Start by adding the workflow to one repository and see how it changes your review process.
+
+## Keep going from Turn Every Pull Request Into an Installable Preview
+
+If you are using **Turn Every Pull Request Into an Installable Preview** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

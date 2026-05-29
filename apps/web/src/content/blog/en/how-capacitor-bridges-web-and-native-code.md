@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-26T02:55:05.863Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e35e3910051fda3b61fe9f-1742957721554.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, native bridge, web apps, live updates, plugin system, mobile development
@@ -320,3 +320,7 @@ For teams switching from other platforms, Capgo offers smooth migration options 
 Capacitor's bridge system streamlines hybrid app development by facilitating smooth communication between web and native layers. This makes accessing native features simpler, while also improving deployment processes and enhancing the overall user experience.
 
 Live update platforms like Capgo build on this efficiency. With 23.5 million updates delivered across 750 production apps, Capgo ensures 95% of active users receive updates within 24 hours, achieving an 82% global success rate [\[1\]](https://capgo.app/). The platform consistently delivers updates securely, with impressive speed and reliability [\[1\]](https://capgo.app/).
+
+## Keep going from How Capacitor Bridges Web and Native Code
+
+If you are using **How Capacitor Bridges Web and Native Code** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

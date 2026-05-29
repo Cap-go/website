@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-21T03:04:05.735Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67b7cbc8a97035aabf3ddea3-1740107095515.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, traditional testing, app development, Capacitor, deployment, quality assurance, mobile updates
@@ -149,3 +149,7 @@ Platforms like Capgo demonstrate how secure OTA updates can integrate seamlessly
 OTA updates have changed the way developers address user needs and keep up with market demands. They allow apps to be updated and improved after release without the usual delays.
 
 With tools like Capgo, developers can deploy updates instantly and securely, avoiding the slowdowns of app store approvals. This creates a balance where both OTA updates and traditional testing methods play important roles.
+
+## Keep going from Capacitor OTA Updates vs Traditional Testing Methods
+
+If you are using **Capacitor OTA Updates vs Traditional Testing Methods** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

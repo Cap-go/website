@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-04T03:07:29.101Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ef49e0ebbb9dc806422d61-1743736061198.jpg
 head_image_alt: Mobile Development
 keywords: China Cybersecurity Law, app developers, data localization, security compliance, user privacy, data protection
@@ -213,3 +213,7 @@ Key steps for developers include:
 Using tools designed for compliance can simplify this process. Platforms like Capgo offer live update features with end-to-end encryption, helping developers protect their apps while meeting regulatory standards.
 
 Failing to comply can lead to significant penalties. Building strong compliance systems is essential for long-term success in one of the largest digital markets globally. As China's regulations continue to evolve, developers must stay informed and regularly update their security and data management practices to remain compliant.
+
+## Keep going from How China's Cybersecurity Law Impacts App Developers
+
+If you are using **How China's Cybersecurity Law Impacts App Developers** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

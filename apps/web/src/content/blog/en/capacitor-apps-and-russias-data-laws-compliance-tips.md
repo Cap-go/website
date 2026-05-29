@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-25T03:05:27.312Z
-updated_at: 2026-05-06T12:37:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/680ae0495a08fca891774cdd-1745550383310.jpg
 head_image_alt: Mobile Development
 keywords: Russia data laws, data localization, Capacitor app compliance, privacy policy, user consent
@@ -229,3 +229,7 @@ To maintain compliance with Russia's data localization laws, it's essential to r
 
 Additionally, stay informed about updates to Russian data laws and app store policies, as these can change over time. Using tools like **Capgo** can help streamline app updates, allowing you to implement necessary changes quickly without requiring app store approvals. This ensures your app remains compliant while delivering a seamless user experience.
 :::
+
+## Keep going from Capacitor Apps and Russia's Data Laws: Compliance Tips
+
+If you are using **Capacitor Apps and Russia's Data Laws: Compliance Tips** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

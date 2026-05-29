@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-29T02:39:06.030Z
-updated_at: 2026-05-06T12:08:25.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c-1743215957623.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, Android plugins, development, Java, mobile development, Gradle, plugin testing
@@ -482,3 +482,7 @@ To achieve these results, following key practices is crucial:
 Developers have praised these tools. Bessie Cooper shared, _"Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden."_ [\[1\]](https://capgo.app/)
 
 Features like error tracking, performance monitoring, end-to-end encryption, and seamless CI/CD integration contribute to high update success rates and smooth performance. Together, these tools combine native functionality with fast, reliable updates, showcasing the platform's strengths.
+
+## Keep going from Capacitor Native Bridge: Android Plugin Basics
+
+If you are using **Capacitor Native Bridge: Android Plugin Basics** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

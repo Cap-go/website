@@ -69,3 +69,7 @@ await CapacitorDownloader.stop({} as { id: string });
 
 - GitHub: https://github.com/Cap-go/capacitor-downloader/
 - Docs: /docs/plugins/downloader/
+
+## Keep going from Using @capgo/capacitor-downloader
+
+If you are using **Using @capgo/capacitor-downloader** to plan migration and enterprise operations, connect it with [@capgo/capacitor-downloader](/docs/plugins/downloader/) for the implementation detail in @capgo/capacitor-downloader, [Getting Started](/docs/plugins/downloader/getting-started/) for the implementation detail in Getting Started, [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives.

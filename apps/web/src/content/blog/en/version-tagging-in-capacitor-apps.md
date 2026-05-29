@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-26T03:19:04.753Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-29T11:31:26.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e36d7410051fda3b6230a0-1742959155569.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, version tagging, semantic versioning, app updates, mobile development
@@ -109,7 +109,7 @@ Keeping your Capacitor CLI updated ensures compatibility with version-specific f
 
 ### Semantic Version Basics
 
-Semantic Versioning (SemVer) uses the format **MAJOR.MINOR.PATCH**, where each part indicates a specific type of change:
+[Semantic Versioning (SemVer)](/semver_tester/) uses the format **MAJOR.MINOR.PATCH**, where each part indicates a specific type of change:
 
 | Version Component | Purpose |
 | --- | --- |
@@ -447,3 +447,7 @@ To put these benefits into action, follow these steps:
 -   **Configure distribution channels**: Create separate environments for production, beta, and development.
 
 Finally, consider adding a live update system to ensure deployments are both fast and secure.
+
+## Keep going from Version Tagging in Capacitor Apps
+
+If you are using **Version Tagging in Capacitor Apps** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

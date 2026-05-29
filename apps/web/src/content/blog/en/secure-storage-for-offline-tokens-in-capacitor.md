@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-19T02:09:43.027Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/6802fa419291ae98c5002559-1745028797889.jpg
 head_image_alt: Mobile Development
 keywords: offline tokens, secure storage, AES-256 encryption, biometric authentication, token management
@@ -72,3 +72,7 @@ For cross-platform encryption, tools like **@capacitor-community/secure-storage*
 -   **@capacitor-community/secure-storage**: Encrypted key-value storage for iOS and Android.
 -   **Ionic Identity Vault**: Enterprise-level storage with biometric security.
 -   **Capgo**: Provides live updates with encrypted CI/CD delivery.
+
+## Keep going from Secure Storage for Offline Tokens in Capacitor
+
+If you are using **Secure Storage for Offline Tokens in Capacitor** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

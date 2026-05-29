@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-28T03:11:03.831Z
-updated_at: 2026-05-06T12:37:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e6018fa2c14cac42f82293-1743131474608.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, mobile app development, iOS setup, Android setup, app configuration, web apps, plugins, live updates
@@ -301,3 +301,7 @@ Here’s a breakdown of the key phases:
 | Configuration | Adjust platform settings, add plugins | Follow platform-specific guidelines |
 | Testing | Build and test on devices | Prioritize testing on real devices |
 | Deployment | Manage updates, version control | Use automated pipelines for efficiency |
+
+## Keep going from Capacitor App Initialization: Step-by-Step Guide
+
+If you are using **Capacitor App Initialization: Step-by-Step Guide** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo-birth-story.webp
 head_image_alt: A visual representation of Capgo's evolution from idea to product
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -150,3 +150,7 @@ As Capgo continues to evolve, it stands as a prime example of how identifying a 
 The story of Capgo is more than just the development of a tool; it's a story of perseverance, community, and the exciting unpredictability of life as a solo maker.
 
 You can find the full story on [here](https://github.com/capacitor-community/proposals/issues/43#issuecomment-941017142).
+
+## Keep going from How a GitHub Issue Evolved into a business
+
+If you are using **How a GitHub Issue Evolved into a business** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

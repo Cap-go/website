@@ -170,7 +170,7 @@ npx @capgo/cli bundle upload --channel v3
 
 ## Strategy 2: Semantic Versioning Controls
 
-Use Capgo's built-in semantic versioning controls to prevent updates across version boundaries.
+Use Capgo's built-in [semantic versioning controls](/semver_tester/) to prevent updates across version boundaries.
 
 ### Disable Auto-Update Across Major Versions
 
@@ -198,7 +198,7 @@ npx @capgo/cli channel set stable --disable-auto-update none
 ```
 
 <Aside type="caution" title="Semantic Versioning Required">
-  This strategy only works if you follow semantic versioning (semver) for your app versions. Ensure your version numbers follow the `MAJOR.MINOR.PATCH` format.
+  This strategy only works if you follow [semantic versioning (semver)](/semver_tester/) for your app versions. Ensure your version numbers follow the `MAJOR.MINOR.PATCH` format.
 </Aside>
 
 ## Strategy 3: Native Version Constraints
@@ -612,3 +612,7 @@ For more details on specific features:
 - [Breaking Changes Guide](/docs/live-updates/breaking-changes) - Detailed channel versioning strategy
 - [Channel Management](/docs/live-updates/channels) - Complete channel configuration reference
 - [Update Behavior](/docs/live-updates/update-behavior) - Native version delays and conditions
+
+## Keep going from Version Targeting
+
+If you are using **Version Targeting** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

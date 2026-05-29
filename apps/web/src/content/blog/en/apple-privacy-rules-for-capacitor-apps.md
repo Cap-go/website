@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-31T01:48:03.832Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf-1743385695606.jpg
 head_image_alt: Mobile Development
 keywords: Apple privacy rules, Capacitor apps, data transparency, user consent, App Store compliance, privacy policy
@@ -362,3 +362,7 @@ Follow this checklist to meet Apple's requirements:
     
 
 Capgo's platform provides a reliable way to meet these privacy standards while keeping your app functional and user-focused [\[1\]](https://capgo.app/).
+
+## Keep going from Apple Privacy Rules for Capacitor Apps
+
+If you are using **Apple Privacy Rules for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

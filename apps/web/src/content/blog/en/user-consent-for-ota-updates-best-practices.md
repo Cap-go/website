@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-26T03:12:16.361Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/680c46c45a08fca89178f92d-1745637266325.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, user consent, app security, compliance, mobile updates, data protection, user trust, update notifications
@@ -182,3 +182,7 @@ To safeguard user data during Over-the-Air (OTA) updates, implementing **end-to-
 
 Additionally, it's crucial to comply with platform-specific security guidelines from Apple and Android, regularly audit update mechanisms, and use trusted solutions that prioritize data protection.
 :::
+
+## Keep going from User Consent for OTA Updates: Best Practices
+
+If you are using **User Consent for OTA Updates: Best Practices** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

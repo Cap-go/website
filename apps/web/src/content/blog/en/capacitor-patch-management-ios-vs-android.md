@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-20T08:40:26.161Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682b2ab25642a17d106fc1f4-1747730489188.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, mobile updates, iOS, Android, patch management, app deployment, version control, Capgo
@@ -254,3 +254,7 @@ The difference in how quickly iOS and Android users adopt updates boils down to 
 
 Android, on the other hand, operates in a much more fragmented ecosystem. With numerous manufacturers customizing Android for their devices, updates often face delays. This customization process slows down the rollout, which is why only **4.5% of Android users** had adopted Android 15 by the same time. Another factor is user behavior - iOS users tend to update more quickly, likely driven by Apple’s strong focus on security and performance enhancements in their updates.
 :::
+
+## Keep going from Capacitor Patch Management: iOS vs. Android
+
+If you are using **Capacitor Patch Management: iOS vs. Android** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

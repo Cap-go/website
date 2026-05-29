@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-24T05:10:07.131Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e0e4b5db7797980463f0f3-1742793019156.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, app tracking, user adoption, version management, error monitoring
@@ -380,3 +380,7 @@ These metrics guide the following steps to ensure secure and automated update tr
 Starting with a trial period can help you test and refine these methods for your specific needs.
 
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding reviews for bug fixes is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
+
+## Keep going from How to Track OTA Update Success in Capacitor Apps
+
+If you are using **How to Track OTA Update Success in Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

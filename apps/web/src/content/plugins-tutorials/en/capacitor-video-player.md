@@ -65,3 +65,7 @@ await VideoPlayer.pause({} as capVideoPlayerIdOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-video-player/
 - Docs: /docs/plugins/video-player/
+
+## Keep going from Using @capgo/capacitor-video-player
+
+If you are using **Using @capgo/capacitor-video-player** to plan native media and interface behavior, connect it with [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, [Getting Started](/docs/plugins/video-player/getting-started/) for the implementation detail in Getting Started, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

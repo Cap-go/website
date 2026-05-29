@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-22T03:27:12.915Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67b91e17bfa83cf6a92d5d6e-1740194854799.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, performance optimization, mobile apps, security, incremental updates, background updates
@@ -216,3 +216,7 @@ To maximize the efficiency of OTA updates in your Capacitor app, make sure to:
 -   **Streamline update delivery**: Consider tools like Capgo for smooth, background updates.
     
 -   **Prepare fallback systems**: Ensure the app remains functional even if an update fails [\[9\]](https://dzone.com/articles/why-device-firmware-updates-are-critical-to-produc).
+
+## Keep going from Capacitor OTA Updates: Best Practices for Performance
+
+If you are using **Capacitor OTA Updates: Best Practices for Performance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

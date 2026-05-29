@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-16T02:14:06.413Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67b133684899b66d1dc8f1ac-1739672065689.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, app updates, monitoring tools, performance metrics, user experience, security compliance
@@ -181,3 +181,7 @@ Keep your focus on three key areas: technical performance, user experience, and 
 | Security Compliance | Encryption checks, code signing, platform rules adherence | Keeps apps compliant with store requirements |
 
 Incorporate automated tools into your development process. Real-time metrics and alerts, paired with your CI/CD pipeline, allow for faster issue resolution with minimal disruption to users.
+
+## Keep going from How To Monitor Capacitor App Updates
+
+If you are using **How To Monitor Capacitor App Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

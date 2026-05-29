@@ -6,7 +6,7 @@ author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2024-04-15T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /organization_system_blog.webp
 head_image_alt: Capgo organization system illusatration
 keywords: organization system, capgo, mobile app development, software engineering, backend development
@@ -88,3 +88,7 @@ but there should not be any major changes to this system.
 <br>
 
 Thank you for reading 🚀
+
+## Keep going from A brand new organization system
+
+If you are using **A brand new organization system** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-27T12:26:34.111Z
-updated_at: 2026-05-06T12:37:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/683598e6d3b96619818496d3-1748348849256.jpg
 head_image_alt: Mobile Development
 keywords: OAuth2, Capacitor, authentication, mobile apps, security, token storage, PKCE, app integration
@@ -319,3 +319,7 @@ When testing OAuth2 integration in Capacitor apps, developers might run into a f
 
 To tackle these issues, take the time to review your app's OAuth setup thoroughly. Implement strong error handling to catch and address problems early, and test your authentication flow under different scenarios. Tools like Capgo can make life easier by allowing you to push updates and fixes directly to your app without waiting for app store approvals, keeping development efficient and users happy.
 :::
+
+## Keep going from 5 Steps to Implement OAuth2 in Capacitor Apps
+
+If you are using **5 Steps to Implement OAuth2 in Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -8,7 +8,7 @@ author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2024-10-08T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /social_login_plugin_blog.webp
 head_image_alt: Capgo organization system illusatration
 keywords: Oauth, social login, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -50,3 +50,7 @@ Feel free to check out the [Apple](https://github.com/Cap-go/capacitor-social-lo
 ## Conclusion
 
 In conclusion, the Capacitor Social Login plugin introduces a lot of new and exciting features with more to come in the future 🚀
+
+## Keep going from Release of a brand new Capacitor Social Login plugin
+
+If you are using **Release of a brand new Capacitor Social Login plugin** to plan authentication and account flows, connect it with [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication, and [SSO (Enterprise)](/docs/webapp/enterprise-sso/) for the implementation detail in SSO (Enterprise).

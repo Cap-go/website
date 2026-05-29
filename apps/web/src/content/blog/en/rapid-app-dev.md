@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-23T07:08:33.313Z
-updated_at: 2026-05-23T07:11:03.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/5c10b37f-e2bb-474f-8687-7ae18998f45f/rapid-app-dev-app-development.jpg'
 head_image_alt: 'Master Rapid App Dev: Build Apps Faster'
 keywords: 'rapid app dev, agile development, low-code, application development, ci/cd'
@@ -284,3 +284,7 @@ The point isn't to become "fast" in the abstract. It's to make change routine, s
 ---
 
 If your team builds with Capacitor and needs a safer way to ship post-launch fixes, [Capgo](https://capgo.app) is worth evaluating. It lets teams deliver JavaScript, CSS, copy, config, and asset updates without waiting for full app store review, while keeping release channels, rollback protection, and deployment visibility in place.
+
+## Keep going from Master Rapid App Dev: Build Apps Faster
+
+If you are using **Master Rapid App Dev: Build Apps Faster** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

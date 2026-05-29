@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-18T04:43:56.186Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67b3d6e4147c4c67492d1b20-1739853969789.jpg
 head_image_alt: Mobile Development
 keywords: user data, secure storage, data protection, GDPR, CCPA, data retention, permissions management, mobile apps
@@ -395,3 +395,7 @@ For teams managing OTA updates, Capgo offers built-in security tools that align 
 
 -   **End-to-end encryption** to secure update packages.
 -   **Real-time monitoring** for quickly addressing potential security threats.
+
+## Keep going from How to Handle User Data in Capacitor Apps
+
+If you are using **How to Handle User Data in Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

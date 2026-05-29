@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-18T13:36:18.163Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67d9725755129a55bd6984fe-1742304990097.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, debugging, mobile apps, performance optimization, native tools, error tracking
@@ -388,3 +388,7 @@ You can enhance your debugging process by taking these steps:
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica[\[1\]](https://capgo.app/)
 
 Keep an eye on critical performance metrics to ensure your app runs smoothly.
+
+## Keep going from Ultimate Guide to Debugging Capacitor Apps
+
+If you are using **Ultimate Guide to Debugging Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

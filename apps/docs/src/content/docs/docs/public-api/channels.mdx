@@ -31,7 +31,7 @@ A channel represents a distribution track for your app updates. Each channel can
 1. **Testing Channel**: Maintain a testing channel for internal validation
 2. **Staged Rollout**: Use multiple channels for gradual update deployment
 3. **Platform Separation**: Create separate channels for iOS, Android, and Electron when needed
-4. **Bundle (version) Control**: Use semantic versioning for clear update paths
+4. **Bundle (version) Control**: Use [semantic versioning](/semver_tester/) for clear update paths
 
 ## Endpoints
 
@@ -266,4 +266,8 @@ Common error scenarios and their responses:
   "ios": true,
   "android": false
 }
-``` 
+```
+
+## Keep going from Channels
+
+If you are using **Channels** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution, and [Capgo Environment Best Practices: Staging with One Mobile App ID](/blog/staging-environments-with-capgo-channels/) for the practical context in Capgo Environment Best Practices: Staging with One Mobile App ID.

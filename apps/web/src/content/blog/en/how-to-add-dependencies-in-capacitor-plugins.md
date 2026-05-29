@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-27T02:08:04.837Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e4966a10051fda3b63500a-1743041314795.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, plugin dependencies, iOS, Android, JavaScript, CocoaPods, Gradle, development tools
@@ -525,3 +525,7 @@ Here’s a quick look at Capgo’s performance:
 | Global API Response Time | 434ms |
 | Update Success Rate | 82% |
 | User Update Rate (24 Hours) | 95% |
+
+## Keep going from How to Add Dependencies in Capacitor Plugins
+
+If you are using **How to Add Dependencies in Capacitor Plugins** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

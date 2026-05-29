@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-20T13:51:19.891Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682c74ab4fa53d42207d63fd-1747749175119.jpg
 head_image_alt: Security
 keywords: third-party breaches, data breach response, vendor management, security practices, risk management
@@ -197,3 +197,7 @@ A **zero-trust security model** is designed to guard against third-party data br
 
 By eliminating blind trust, zero-trust reduces the potential entry points for attackers and limits the damage that could come from a compromised third-party connection. It also offers greater visibility into user activities and data movement, making it easier to detect and respond quickly to suspicious actions. This approach is crucial for managing the risks tied to third-party integrations and ensuring adherence to security standards.
 :::
+
+## Keep going from Third-Party Breach Response: Best Practices
+
+If you are using **Third-Party Breach Response: Best Practices** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

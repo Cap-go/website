@@ -64,7 +64,7 @@ The `kill` condition triggers after the first kill event, not the next backgroun
 
 ## Version Blocking (Channel Policy)
 
-Controls which **semver updates** a channel will auto-deliver. Set via `--disable-auto-update` on channels.
+Controls which [**semver updates**](/semver_tester/) a channel will auto-deliver. Set via `--disable-auto-update` on channels.
 
 | Strategy | Blocks | Allows | Use Case |
 |----------|--------|--------|----------|
@@ -118,3 +118,7 @@ When using instant apply modes (`atInstall`, `onLaunch`, or `always`), enable [D
 - [Version Targeting](/docs/live-updates/version-targeting/) — Channel-based version routing
 - [Delta (manifest) Updates](/docs/live-updates/differentials/) — Enable partial downloads
 - [Channels](/docs/live-updates/channels/) — Channel configuration and precedence
+
+## Keep going from Update Types
+
+If you are using **Update Types** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Getting Started](/docs/plugins/updater/getting-started/) for the implementation detail in Getting Started.

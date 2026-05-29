@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-05T02:35:09.479Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5-1743820535214.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor CLI, mobile app updates, app deployment, Capgo, version management
@@ -201,3 +201,7 @@ Key developer priorities include:
 -   **Integration**: Smooth compatibility with CI/CD pipelines.
 
 The future of OTA updates will focus on balancing security, performance, and developer experience while staying compliant with app store policies. Tools that offer features like partial updates, real-time analytics, and flexible deployment options are shaping the next generation of app development workflows.
+
+## Keep going from How to Use Capacitor CLI for OTA Updates
+
+If you are using **How to Use Capacitor CLI for OTA Updates** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-13T01:07:05.331Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266-1744506438251.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, npm scripts, OTA updates, CI/CD, mobile app deployment, automation, app version management, security
@@ -337,3 +337,7 @@ Capgo's performance metrics speak for themselves:
 
 Starting at $12/month with OTA updates and about 15 native builds/month included - and extra build minutes are billed by minute through credits - Capgo offers a secure,
 reliable, and cost-efficient option for managing OTA updates and native build automation [\[1\]](https://capgo.app/).
+
+## Keep going from npm Scripts for Capacitor OTA Updates Explained
+
+If you are using **npm Scripts for Capacitor OTA Updates Explained** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

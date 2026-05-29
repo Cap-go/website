@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-01T03:16:07.896Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae-1743477379769.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Google Play compliance, security, version control, user communication, app updates, testing, performance metrics
@@ -255,3 +255,7 @@ Capgo provides tools designed to streamline compliance with Google Play standard
 | **Performance Tracking** | Real-time monitoring | Analytics dashboard |
 
 Capgo's channel system allows for controlled update distribution, ensuring updates are delivered efficiently while staying compliant with Google Play policies. Features like one-click rollback and error tracking help teams maintain update stability and quickly address any issues that arise.
+
+## Keep going from Checklist for Google Play OTA Compliance
+
+If you are using **Checklist for Google Play OTA Compliance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

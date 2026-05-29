@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-30T01:59:04.033Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9-1743299955207.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, Appflow, mobile development, deployment solutions, app security, update management
@@ -267,3 +267,7 @@ Based on these distinctions, here’s a quick guide to help you pick the right p
 -   **Cost-Conscious Developers**: With its competitive pricing, Capgo is a budget-friendly option compared to Appflow, making it suitable for teams of any size [\[1\]](https://capgo.app/).
     
 -   **Planning for the Future**: Appflow’s scheduled shutdown in 2026 means migration planning is essential. Capgo’s open-source approach, active development, and growing community make it a reliable long-term choice [\[1\]](https://capgo.app/).
+
+## Keep going from Capacitor vs Appflow: OTA Update Solutions Compared
+
+If you are using **Capacitor vs Appflow: OTA Update Solutions Compared** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-21T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /vue_angular_react.webp
 head_image_alt: Image of a person working on a computer
 keywords: Vue, Angular, React, offline screen, network API, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -299,3 +299,7 @@ The Network API provides several methods and interfaces to help you handle the n
 - [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus): Query the current status of the network connection.
 - [`addListener('networkStatusChange', ...)`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange): Listen for changes in the network connection.
 -
+
+## Keep going from Offline Screen in Vue, Angular, React with Capacitor
+
+If you are using **Offline Screen in Vue, Angular, React with Capacitor** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

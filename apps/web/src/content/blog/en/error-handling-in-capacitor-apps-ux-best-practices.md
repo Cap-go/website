@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-14T04:41:14.278Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fc8d0aaf1a45e500bcc0f5-1744605685630.jpg
 head_image_alt: Mobile Development
 keywords: error handling, user experience, mobile apps, bug fixes, input validation, error messages, app development
@@ -256,3 +256,7 @@ Changing market needs push the boundaries of error management. Here are key fact
 These data points show how fast fixes, effective communication, and consistent cross-platform performance strengthen app stability.
 
 As error-handling solutions grow more advanced, developers need to focus on reliable error tracking, transparent communication, and swift updates. This approach ensures high user satisfaction while minimizing disruptions caused by technical challenges.
+
+## Keep going from Error Handling in Capacitor Apps: UX Best Practices
+
+If you are using **Error Handling in Capacitor Apps: UX Best Practices** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

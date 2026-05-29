@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-14T02:12:07.567Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fc5744af1a45e500bc59a4-1744596739629.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, code sharing, mobile development, testing, deployment, security, OTA updates, CI/CD, performance optimization
@@ -226,3 +226,7 @@ Capgo’s features reinforce best practices for code sharing:
 | **Rollback Capability** | Reduces risks | Allows instant version control |
 
 These tools create a secure and efficient code-sharing environment while ensuring compliance with app store guidelines [\[1\]](https://capgo.app/).
+
+## Keep going from Best Practices for Capacitor Code Sharing
+
+If you are using **Best Practices for Capacitor Code Sharing** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

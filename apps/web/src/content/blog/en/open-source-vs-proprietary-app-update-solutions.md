@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-08T03:39:09.600Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67a6a42ecd7a7d94bc55e8db-1738985966262.jpg
 head_image_alt: Mobile Development
 keywords: app updates, open source, proprietary solutions, security, customization, scalability, development tools
@@ -227,3 +227,7 @@ For organizations juggling multiple apps or requiring enterprise-level features,
 To successfully implement your chosen solution, start by assessing your app's specific requirements. Then, select the tool that aligns best with those needs and integrate it into your CI/CD pipeline while ensuring it complies with relevant platform standards. A smooth implementation will depend on how well your choice matches your team’s technical skills, budget, and capacity for long-term maintenance.
 
 The success of your update solution will largely depend on its ability to meet both current demands and future growth. Whether you opt for open-source tools for their customization options or proprietary platforms for their structured support, make sure your choice complements your development process and adheres to platform guidelines.
+
+## Keep going from Open Source vs Proprietary App Update Solutions
+
+If you are using **Open Source vs Proprietary App Update Solutions** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

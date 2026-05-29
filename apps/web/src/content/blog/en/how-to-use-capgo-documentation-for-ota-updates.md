@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-19T03:56:01.854Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67b53306eac600a2c6713dad-1740671704703.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, Capgo, mobile app updates, documentation, app deployment, security features, error handling
@@ -353,3 +353,7 @@ These areas form the backbone of Capgo's update management system.
 Capgo's CLI and analytics tools simplify [managing updates](https://capgo.app/docs/getting-started/deploy/) throughout your app's lifecycle [\[1\]](https://github.com/Cap-go/capacitor-updater).
 
 For further support, you can explore additional resources like **API documentation**, **sample projects**, and **community forums** [\[2\]](https://dev.to/arnosolo/ionic-appflow-live-update-alternative-55c3).
+
+## Keep going from How to Use Capgo Documentation for OTA Updates
+
+If you are using **How to Use Capgo Documentation for OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /react_capacitor.webp
 head_image_alt: React and Capacitor illustration
 keywords: React, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -369,3 +369,7 @@ Capacitor is an excellent option for building native applications based on an ex
 And with the addition of [Capgo](https://capgo.app/), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
 
 If you would like to learn how to add Capgo to your React app, take a look at the next article:
+
+## Keep going from Building Mobile Apps with React and Capacitor
+
+If you are using **Building Mobile Apps with React and Capacitor** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

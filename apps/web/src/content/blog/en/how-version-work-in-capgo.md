@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-25T00:00:00.000Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-29T11:31:26.000Z
 head_image: /versioning.webp
 head_image_alt: Capgo bundle version system
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -31,7 +31,7 @@ All versions choices are decided server side by Capgo.
 
 ## Versioning system
 
-To manage version Capgo use the SemVer system, read more about it [here](https://semver.org/).
+To manage version Capgo use the SemVer system. Read the [SemVer specification](https://semver.org/) or check Capgo update compatibility with the [Semver Tester](/semver_tester/).
 ### Versions
 
 Where Capgo find the version to compare
@@ -117,3 +117,7 @@ Yon can link one deviceID to:
 This will bypass all the settings done above.
 
 Learn more about it in the article below.
+
+## Keep going from How version work in Capgo
+
+If you are using **How version work in Capgo** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

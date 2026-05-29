@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-24T07:15:52.262Z
-updated_at: 2026-05-24T07:18:01.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/39c1730b-fbc4-4f4a-842a-28599592084d/splash-screen-in-react-native-tutorial-guide.jpg'
 head_image_alt: 'Splash Screen in React Native: A Complete Guide for 2026'
 keywords: 'react native, splash screen, expo, react native cli, mobile development'
@@ -415,3 +415,7 @@ Community patterns across recent React Native guides have converged on the same 
 **Fix:** Clean the build, reinstall dependencies if needed, and rebuild the native project fully. If you're in Expo with generated native layers, regenerate carefully and verify plugin config. If you're in a bare app, review `MainActivity`, `AppDelegate`, resource names, and any plist or manifest edits for small mismatches.
 
 The fastest teams treat the splash screen as part of release engineering, not a one-time visual task. That matters even more when startup assets, UI text, or app-shell behavior need to change quickly after launch. [Capgo](https://capgo.app) gives Capacitor and Electron teams a way to ship JavaScript, CSS, copy, config, and asset fixes on the next launch with rollout controls and rollback support, which is useful when the problem is in the app layer rather than the native launch screen itself.
+
+## Keep going from Splash Screen in React Native: A Complete Guide for 2026
+
+If you are using **Splash Screen in React Native: A Complete Guide for 2026** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

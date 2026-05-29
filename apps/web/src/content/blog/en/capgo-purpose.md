@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-10T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo_banner.webp
 head_image_alt: capgo banner
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -71,3 +71,7 @@ Capgo integrates with live update CapacitorJS and Ionic to provide real-time dat
 ## Conclusion
 
 In conclusion, Capgo is a powerful platform that offers a range of benefits for makers and entrepreneurs. Its integration with live update capacitorjs and ionic provides real-time updates, streamlined workflows, enhanced collaboration, real-time analytics, and increased productivity. With Capgo, you can bring your ideas to life, manage your projects efficiently, and make informed business decisions.
+
+## Keep going from Purpose of Capgo
+
+If you are using **Purpose of Capgo** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

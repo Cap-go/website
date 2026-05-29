@@ -53,6 +53,13 @@ Use it when you need:
   This package does not render native UIKit or Android navigation chrome. For native navbars, tabbars, and native transition shells, use <a href="/docs/plugins/native-navigation/">@capgo/native-navigation</a>.
 </Aside>
 
+## Demo
+
+<figure>
+  <img src="/plugins/demo/capacitor-transitions/react-transition-demo.webp" alt="Animated React page transition demo showing forward and back navigation in a Capacitor-style shell" width="300" />
+  <figcaption>React transition flow</figcaption>
+</figure>
+
 ## Core API
 
 - `<cap-router-outlet>` owns the animated route stack.
@@ -70,3 +77,7 @@ Use it when you need:
 `swipe-gesture="auto"` uses Capacitor runtime helpers and enables the edge gesture only in native iOS Capacitor apps. Use `true` to force it on or `false` to disable it.
 
 The gesture is implemented in the web layer. It is designed to feel like Ionic's iOS swipe-back transition by driving animation progress from the pointer position, then finishing or cancelling based on distance and velocity.
+
+## Keep going from @capgo/capacitor-transitions
+
+If you are using **@capgo/capacitor-transitions** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-transitions](/plugins/capacitor-transitions/) for the native capability in Using @capgo/capacitor-transitions, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T17:41:21.786Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6829c4515642a17d106dfe07-1747590142778.jpg
 head_image_alt: Software Development
 keywords: OTA updates, resource allocation, disaster recovery, security, scalability
@@ -287,3 +287,7 @@ Real-time monitoring is another critical piece of the puzzle. By keeping a close
 
 By sticking to these strategies, businesses can lower risks and provide users with a smoother, more reliable OTA update experience.
 :::
+
+## Keep going from Resource Allocation for OTA Updates: Best Practices
+
+If you are using **Resource Allocation for OTA Updates: Best Practices** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

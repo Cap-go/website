@@ -70,3 +70,7 @@ If you encounter any issues during the migration, please:
 1. Check our [documentation](/docs/live-updates/)
 2. Visit our [Discord community](https://discord.com/invite/VnYRvBfgA6)
 3. Open an issue on [GitHub](https://github.com/Cap-go/capacitor-updater/issues)
+
+## Keep going from From V7 to V8
+
+If you are using **From V7 to V8** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

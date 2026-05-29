@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2026-05-20T17:38:04.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /app-review-guide.webp
 head_image_alt: App Review Process
 keywords: app store review, play store review, app submission, privacy policy, terms and conditions, social login, app testing, android review, ios review
@@ -1170,3 +1170,7 @@ Good luck with your app launch! Remember, even if you get rejected, it's a learn
 ---
 
 *Need help with implementing live updates after your app is approved? Check out [Capgo's live update solution](/docs/getting-started/) for seamless app updates without app store review.*
+
+## Keep going from The Complete First-Time App Review Guide for 2026 - iOS and Android
+
+If you are using **The Complete First-Time App Review Guide for 2026 - iOS and Android** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

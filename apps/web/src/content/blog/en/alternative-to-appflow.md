@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-02T00:00:00.000Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /appflow_alt.webp
 head_image_alt: Appflow alternative illustration
 keywords: Ionic Appflow, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -101,3 +101,7 @@ Join us here 👇
 - [How OTA Updates Work](/docs/live-updates/) - Understanding live updates
 - [Getting Started with Capgo](/docs/getting-started/quickstart/) - Quick setup guide
 - [CI/CD Integration](/docs/getting-started/cicd-integration/) - Integrate with your pipeline
+
+## Keep going from Alternative to Ionic Appflow
+
+If you are using **Alternative to Ionic Appflow** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

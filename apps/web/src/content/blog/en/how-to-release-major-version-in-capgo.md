@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo-feature-image.webp
 head_image_alt: Capgo major version system
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -85,3 +85,6 @@ Then you have to wait 100% of your users, have the app or at least 90%, it will 
 While during this time you cannot send any update with Capgo, since old user cannot get the new version.
 You don't have a way to select only some users to receive the update.
 
+## Keep going from How to release major version in capgo
+
+If you are using **How to release major version in capgo** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

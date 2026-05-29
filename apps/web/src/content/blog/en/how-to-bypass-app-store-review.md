@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-28T12:16:38.000Z
 head_image: /bypass_illustration.webp
 head_image_alt: Capacitor bypass illustration
 keywords: Apple App Store, Google Play, Capacitor, Capgo, OTA updates, live updates, app store review
@@ -109,3 +109,7 @@ If yes only to (4), send through Capgo.
 This is the same approach people use on large Capacitor programs in production: fast updates for JS-only fixes, native review only for real binaries.
 
 If you want to go deeper, pair this with a strict environment strategy based on channels so QA never receives production mistakes. That is the Capgo-native way to keep staging, beta, and production clean.
+
+## Keep going from How to update Capacitor JS apps without repeat store review
+
+If you are using **How to update Capacitor JS apps without repeat store review** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

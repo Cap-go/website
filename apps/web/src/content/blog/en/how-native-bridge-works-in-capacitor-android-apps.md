@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-22T02:26:08.446Z
-updated_at: 2026-05-06T12:08:25.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67de087b13cee397379a0b94-1742610380581.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, Android, native bridge, JavaScript, mobile development, app performance, updates, communication
@@ -287,3 +287,7 @@ Ready to implement the native bridge? Here are three steps to get you moving:
 For enterprise apps, consider using channel systems and integrating CI/CD pipelines for controlled rollouts. These practices can help you create Android apps that meet the demands of today's users.
 
 As app development evolves, features like end-to-end encryption and partial updates are becoming standard for maintaining both security and efficiency. With the right approach, you can achieve the same high-performance results that have powered over 23.5 million successful updates across various applications.
+
+## Keep going from How Native Bridge Works in Capacitor Android Apps
+
+If you are using **How Native Bridge Works in Capacitor Android Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

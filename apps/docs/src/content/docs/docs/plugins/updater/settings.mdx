@@ -13,6 +13,9 @@ To have more fine-grained control over the update system, you can configure it w
  Any changes to these settings in capacitor.config file, require syncing the platform and releasing to the store for production apps to receive them.
 </Aside>
 
+<Aside type="note">
+Need EU data residency for Capgo Cloud? Set `updateUrl` to `https://plugin.eu.capgo.app/updates`, `statsUrl` to `https://plugin.eu.capgo.app/stats`, and `channelUrl` to `https://plugin.eu.capgo.app/channel_self`. See [Data Location](/docs/live-updates/data-location/).
+</Aside>
 
 ## `allowModifyUrl`
 
@@ -530,3 +533,7 @@ Default: `undefined`
 <Aside type="tip">
 There are additional settings available in the [Capgo web app](https://console.capgo.app/login) that can be configured per channel without requiring a native app release.
 </Aside>
+
+## Keep going from Settings
+
+If you are using **Settings** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-updater](/plugins/capacitor-updater/) for the native capability in Using @capgo/capacitor-updater, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

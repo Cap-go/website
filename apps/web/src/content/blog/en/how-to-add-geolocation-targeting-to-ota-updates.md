@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-23T04:39:40.995Z
-updated_at: 2026-05-06T12:37:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ba891fbfa83cf6a92e8bd2-1740285846827.jpg
 head_image_alt: Mobile Development
 keywords: geolocation targeting, OTA updates, mobile app updates, user engagement, location-based features, background location tracking, app development, analytics
@@ -306,3 +306,7 @@ Key areas for improvement include:
 -   **Adapting updates** to work seamlessly across varying connectivity levels [\[1\]](https://www.acldigital.com/blogs/ota-updates-in-automotive)
 
 Platforms that focus on encryption and compliance will lead the way in making these advancements more accessible and effective.
+
+## Keep going from How to Add Geolocation Targeting to OTA Updates
+
+If you are using **How to Add Geolocation Targeting to OTA Updates** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

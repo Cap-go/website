@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-13T02:07:29.962Z
-updated_at: 2026-05-21T11:26:04.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fb0f072e221594daf40959-1744510123218.jpg
 head_image_alt: Mobile Development
 keywords: CI/CD, OTA updates, automation, testing, security, deployment strategies, performance tracking, scalability
@@ -134,3 +134,7 @@ Capgo's implementation across 750 apps with over 23.5 million updates [\[1\]](ht
 -   **Staged deployments** for controlled rollouts
 -   **Strong security** with end-to-end encryption
 -   **Real-time monitoring** with detailed analytics
+
+## Keep going from Common CI/CD Bottlenecks in OTA Pipelines
+
+If you are using **Common CI/CD Bottlenecks in OTA Pipelines** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

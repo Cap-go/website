@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-11T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /react_native_vs_react_capacitor.webp
 head_image_alt: React Native vs Capacitor comparison illustration
 keywords: React Native, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -249,3 +249,7 @@ Consider your specific needs, preferences, and goals when choosing the right fra
 
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
+
+## Keep going from Comparing React Native vs Capacitor
+
+If you are using **Comparing React Native vs Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-12T08:43:18.401Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67abf1dcdd71129bfb8de766-1739349815106.jpg
 head_image_alt: Mobile Development
 keywords: CI/CD, OTA updates, automation, app deployment, security, Capgo, Capacitor
@@ -243,3 +243,7 @@ With automated OTA updates integrated into CI/CD pipelines, Capacitor deployment
 For development teams, this approach offers clear advantages. Among [ESP-IDF](https://www.espressif.com/en/products/sdks/esp-idf) users, **73% of teams** now use pre-merge CI checks [\[1\]](https://embeddedartistry.com/blog/2024/01/15/exploring-serverless-ci-cd-for-embedded-devices/)[\[2\]](https://github.com/becem-gharbi/esp-ota-cicd), leading to higher-quality releases before production. These efforts align with the earlier discussion on data-driven deployment strategies.
 
 Automated pipelines also ensure updates are delivered reliably using compressed formats and delta updates. By combining automated testing, phased rollouts, and performance tracking, teams can manage Capacitor app updates with both efficiency and security.
+
+## Keep going from How CI/CD Tools Trigger OTA Updates
+
+If you are using **How CI/CD Tools Trigger OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-22T10:11:36.761Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682e72b04fa53d4220800503-1747908750758.jpg
 head_image_alt: Mobile Development
 keywords: Capgo, Capacitor, app updates, OTA updates, mobile deployment, secure updates, error handling, compliance
@@ -305,3 +305,7 @@ To make updates faster and keep their size manageable with Capgo, developers can
 
 On top of these practices, tracking your app’s performance with tools like [Firebase](https://firebase.google.com/) can highlight areas for improvement. This helps ensure updates are not just smaller but also enhance the user experience. Together, these steps allow developers to provide smooth, real-time updates while keeping the app reliable and efficient.
 :::
+
+## Keep going from Capgo Plugin: Lightweight Deployment for Capacitor Apps
+
+If you are using **Capgo Plugin: Lightweight Deployment for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

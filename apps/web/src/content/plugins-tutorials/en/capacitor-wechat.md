@@ -90,3 +90,7 @@ await CapacitorWechat.share({
 
 - GitHub: https://github.com/Cap-go/capacitor-wechat/
 - Docs: /docs/plugins/wechat/
+
+## Keep going from Using @capgo/capacitor-wechat
+
+If you are using **Using @capgo/capacitor-wechat** to plan authentication and account flows, connect it with [@capgo/capacitor-wechat](/docs/plugins/wechat/) for the implementation detail in @capgo/capacitor-wechat, [Getting Started](/docs/plugins/wechat/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, and [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric.

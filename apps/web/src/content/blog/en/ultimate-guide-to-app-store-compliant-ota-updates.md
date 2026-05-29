@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-28T05:46:14.390Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67c122f35f2cea0ab3a1fd8f-1740721832892.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, app store compliance, mobile app updates, bug fixes, performance improvements
@@ -329,3 +329,7 @@ To succeed with an OTA strategy, focus on:
 -   Using non-intrusive background updates
 -   Monitoring performance and user feedback regularly
 -   Meeting strict security standards
+
+## Keep going from Ultimate Guide to App Store-Compliant OTA Updates
+
+If you are using **Ultimate Guide to App Store-Compliant OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

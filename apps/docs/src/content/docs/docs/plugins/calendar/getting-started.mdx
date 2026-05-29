@@ -1,0 +1,147 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-calendar and start managing native calendar events from a Capacitor app."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+npm install @capgo/capacitor-calendar
+npx cap sync
+```
+
+## iOS Setup
+
+Add the usage descriptions your app needs to `ios/App/App/Info.plist`:
+
+```xml
+<key>NSCalendarsUsageDescription</key>
+<string>This app needs calendar access.</string>
+<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+<string>This app needs permission to add calendar events.</string>
+<key>NSCalendarsFullAccessUsageDescription</key>
+<string>This app needs permission to read and manage calendar events.</string>
+<key>NSRemindersUsageDescription</key>
+<string>This app needs reminders access.</string>
+<key>NSRemindersFullAccessUsageDescription</key>
+<string>This app needs permission to read and manage reminders.</string>
+```
+
+iOS 17 and newer distinguish between write-only and full calendar access. Only include reminder usage descriptions if your app calls the Reminders APIs.
+
+Apple reference: [Migrating to the latest Calendar access levels](https://developer.apple.com/documentation/technotes/tn3152-migrating-to-the-latest-calendar-access-levels).
+
+## Android Setup
+
+Add the calendar permissions your app needs to `android/app/src/main/AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.READ_CALENDAR" />
+<uses-permission android:name="android.permission.WRITE_CALENDAR" />
+```
+
+Android reference: [Calendar Provider user permissions](https://developer.android.com/identity/providers/calendar-provider#manifest).
+
+## Request Calendar Access
+
+```typescript
+import { CapacitorCalendar } from '@capgo/capacitor-calendar';
+
+const permission = await CapacitorCalendar.requestFullCalendarAccess();
+
+if (permission.result !== 'granted') {
+  throw new Error('Calendar permission was not granted');
+}
+```
+
+For apps that only add events, use `requestWriteOnlyCalendarAccess()`. For Android-only read flows, use `requestReadOnlyCalendarAccess()`.
+
+## Create An Event
+
+Dates are Unix timestamps in milliseconds.
+
+```typescript
+import { CapacitorCalendar } from '@capgo/capacitor-calendar';
+
+const startDate = Date.now() + 60 * 60 * 1000;
+const endDate = startDate + 60 * 60 * 1000;
+
+const { id } = await CapacitorCalendar.createEvent({
+  title: 'Product review',
+  location: 'Capgo',
+  startDate,
+  endDate,
+  description: 'Created with @capgo/capacitor-calendar',
+});
+
+console.log('Created event', id);
+```
+
+## Open The Native Event Editor
+
+```typescript
+await CapacitorCalendar.createEventWithPrompt({
+  title: 'Planning session',
+  location: 'Office',
+  startDate: Date.now() + 24 * 60 * 60 * 1000,
+  endDate: Date.now() + 25 * 60 * 60 * 1000,
+});
+```
+
+On Android, prompt-based create and modify calls return `null`. List events afterward if you need to find the created event ID.
+
+## List Upcoming Events
+
+```typescript
+const now = Date.now();
+const oneWeekFromNow = now + 7 * 24 * 60 * 60 * 1000;
+
+const { result: events } = await CapacitorCalendar.listEventsInRange({
+  from: now,
+  to: oneWeekFromNow,
+});
+```
+
+## Choose A Calendar
+
+```typescript
+const { result: calendars } = await CapacitorCalendar.listCalendars();
+const { result: defaultCalendar } = await CapacitorCalendar.getDefaultCalendar();
+
+const calendarId = defaultCalendar?.id ?? calendars[0]?.id;
+```
+
+`selectCalendarsWithPrompt()` is available on iOS when you want to show the system calendar picker.
+
+## Create An iOS Reminder
+
+```typescript
+const permission = await CapacitorCalendar.requestFullRemindersAccess();
+
+if (permission.result === 'granted') {
+  await CapacitorCalendar.createReminder({
+    title: 'Send launch notes',
+    dueDate: Date.now() + 2 * 24 * 60 * 60 * 1000,
+    notes: 'Created with @capgo/capacitor-calendar',
+  });
+}
+```
+
+Reminder APIs are iOS-only.
+
+## Example App
+
+The repository includes a Capacitor example app with permission checks, event creation, native event prompts, calendar listing, and event range listing.
+
+| iOS | Android |
+| :---: | :---: |
+| <img src="/plugins/demo/capacitor-calendar/ios-demo.webp" alt="iOS demo of native calendar event creation" width="280" /> | <img src="/plugins/demo/capacitor-calendar/android-demo.webp" alt="Android demo of native calendar event creation" width="280" /> |
+
+## API Reference
+
+The complete API reference is maintained in the package README and TypeScript definitions:
+
+- [README](https://github.com/Cap-go/capacitor-calendar/#api)
+- [Type definitions](https://github.com/Cap-go/capacitor-calendar/blob/main/src/definitions.ts)

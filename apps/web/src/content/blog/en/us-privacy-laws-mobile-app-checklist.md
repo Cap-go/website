@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-23T05:58:21.536Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67df9ec1ffe25179c9af3a48-1742709514062.jpg
 head_image_alt: Mobile Development
 keywords: privacy compliance, mobile apps, CCPA, data protection, user rights, COPPA, VCDPA, CPA
@@ -260,3 +260,7 @@ Here’s a breakdown of key areas and their metrics for maintaining compliance:
 | Update Speed | Instant deployment | High update success |
 | Security | End-to-end encryption | \-  |
 | Testing | Channel-based rollouts | 750 apps in production [\[1\]](https://capgo.app/) |
+
+## Keep going from U.S. Privacy Laws: Mobile App Checklist
+
+If you are using **U.S. Privacy Laws: Mobile App Checklist** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

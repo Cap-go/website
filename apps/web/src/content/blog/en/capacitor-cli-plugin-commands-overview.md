@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-27T03:14:02.984Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e4be0410051fda3b63a692-1743045267566.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, CLI, plugin management, app development, updates, troubleshooting, Capgo, mobile development
@@ -368,3 +368,7 @@ Here’s what Capgo brings to the table:
 -   Pricing that starts at $12/month for solo developers
 
 With 750 production apps already relying on Capgo, it’s a proven choice. Whether you're fixing bugs or launching new features, pairing Capacitor CLI with Capgo gives you a reliable and efficient toolkit for app development. Start using these tools to streamline your Capacitor projects today.
+
+## Keep going from Capacitor CLI Plugin Commands Overview
+
+If you are using **Capacitor CLI Plugin Commands Overview** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

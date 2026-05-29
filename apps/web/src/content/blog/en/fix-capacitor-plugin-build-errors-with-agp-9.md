@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-02-19T14:30:00.000Z
-updated_at: 2026-05-12T18:55:47.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/680053ff28980901df1e733b-1744889496415.jpg
 head_image_alt: Android Build Compatibility
 keywords: Capacitor plugin build error, AGP 9, Android Gradle Plugin 9, proguard-android.txt not found, proguard-android-optimize.txt, fix AGP 9 build error, Gradle build failed, Capacitor Android build error, R8 ProGuard rules, Capgo plugins, Android plugin migration, Capacitor plugin AGP 9 fix
@@ -266,3 +266,7 @@ If you are documenting this in internal runbooks or support pages, include terms
 This AGP 9 issue is simple, but it is easy to miss in multi-plugin workspaces. Once you replace `proguard-android.txt` with `proguard-android-optimize.txt` everywhere relevant, Android builds become predictable again.
 
 If you use Capgo plugins, this migration is already applied in official repositories so you can upgrade with fewer surprises.
+
+## Keep going from Capacitor Plugin AGP 9 Build Error Fix
+
+If you are using **Capacitor Plugin AGP 9 Build Error Fix** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

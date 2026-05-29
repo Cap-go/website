@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-22T11:56:26.311Z
-updated_at: 2026-05-06T12:08:25.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682f07854fa53d422080d523-1747915054503.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, server setup, mobile app, security, deployment, web server
@@ -372,3 +372,7 @@ To make sure your server can handle heavy traffic and frequent updates smoothly,
 
 These strategies help build a setup that manages high traffic efficiently while enabling seamless updates. If you're looking for a live update solution, platforms like _Capgo_ offer real-time updates and align with Apple and Android standards.
 :::
+
+## Keep going from Server Setup for Capacitor OTA Updates
+
+If you are using **Server Setup for Capacitor OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

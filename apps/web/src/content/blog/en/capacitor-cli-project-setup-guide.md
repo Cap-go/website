@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-18T03:02:50.225Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847-1744945493935.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, CLI, mobile apps, iOS, Android, project setup, live updates, troubleshooting
@@ -257,3 +257,7 @@ Here's how to get started:
 -   Install and set up Capgo with the following command: `npm install --save @capgo/cli && npx capgo init`
 
 For detailed setup instructions or troubleshooting, check out the official Capacitor and Capgo documentation.
+
+## Keep going from Capacitor CLI: Project Setup Guide
+
+If you are using **Capacitor CLI: Project Setup Guide** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.
