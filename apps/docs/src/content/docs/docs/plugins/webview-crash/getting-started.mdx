@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: "Install @capgo/capacitor-webview-crash, enable native WebView restart, and handle recovered crash or scheduled restart markers."
+description: "Install @capgo/capacitor-webview-crash, enable native WebView restart, manually replace the WebView from JavaScript, and handle recovered crash or restart markers."
 sidebar:
   order: 2
 ---
@@ -69,9 +69,19 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Use `restartIntervalMs` for always-on apps where users may keep the same WebView open for days: kiosk screens, control-room dashboards, warehouse scanners, POS terminals, fleet tablets, and digital signage. Scheduled restarts write a pending marker with `reason: 'periodicRestart'`, then Android recreates the host activity and iOS reloads the `WKWebView` from native code.
+Use `restartIntervalMs` for always-on apps where users may keep the same WebView open for days: kiosk screens, control-room dashboards, warehouse scanners, POS terminals, fleet tablets, and digital signage. Scheduled restarts write a pending marker with `reason: 'periodicRestart'`, then Android recreates the host activity and iOS rebuilds the Capacitor bridge view so a new `WKWebView` is created from native code.
 
 Choose an interval your product can tolerate. A restart creates a fresh JavaScript runtime, so persist queued events, unsaved form state, and current navigation state before using aggressive intervals.
+
+## Manual native restart
+
+Call `restartWebView()` when the current JavaScript runtime decides the native WebView should be replaced proactively, for example after a memory-heavy workflow or before entering a long unattended session:
+
+```typescript
+await WebViewCrash.restartWebView();
+```
+
+The method writes a pending marker with `reason: 'manualRestart'`, resolves the current call, then asks native code to create a fresh WebView. Android recreates the host activity. iOS rebuilds the Capacitor bridge view so a new `WKWebView` is created instead of reloading the current page.
 
 ## API overview
 
@@ -103,11 +113,20 @@ const simulated = await WebViewCrash.simulateCrashRecovery();
 console.log(simulated.value);
 ```
 
+### `restartWebView`
+
+Stores a manual restart marker and asks native code to create a fresh WebView.
+
+```typescript
+await WebViewCrash.restartWebView();
+```
+
 ## Platform notes
 
 - Android stores crash metadata from `onRenderProcessGone`, including `didCrash` and `rendererPriorityAtExit` when the platform provides them.
 - iOS stores crash metadata from `webViewWebContentProcessDidTerminate` and adds the current application state when available.
-- Scheduled restarts use `reason: 'periodicRestart'`.
+- Manual and scheduled restarts create a fresh WebView. Android recreates the host activity; iOS rebuilds the Capacitor bridge view.
+- Scheduled restarts use `reason: 'periodicRestart'`; manual restarts use `reason: 'manualRestart'`.
 - Web does not detect real renderer crashes. The web implementation only simulates the behavior with local storage.
 
 ## Type reference
@@ -182,6 +201,7 @@ export type WebViewCrashReason =
   | 'renderProcessGone'
   | 'webContentProcessDidTerminate'
   | 'periodicRestart'
+  | 'manualRestart'
   | 'simulated';
 ```
 

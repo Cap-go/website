@@ -16,6 +16,7 @@ npx cap sync
 
 - Native restart after WebView crashes on iOS and Android.
 - Fixed-interval native WebView restart for kiosk, POS, signage, scanner, and dashboard apps that run for days.
+- `restartWebView` - Lets JavaScript request a fresh native WebView without doing a page reload.
 - `getPendingCrashInfo` - Returns the stored native crash or restart marker, or `null` when nothing is pending.
 - `clearPendingCrashInfo` - Clears the stored marker after your app has restored its state.
 - `simulateCrashRecovery` - Creates a fake crash marker so recovery flows can be tested locally.
@@ -65,6 +66,16 @@ export default config;
 ```
 
 Scheduled restarts write `reason: 'periodicRestart'`. Persist critical app state before using short intervals.
+
+## Manual Native Restart
+
+Call `restartWebView()` when JavaScript decides the native WebView should be replaced proactively, for example after a memory-heavy workflow:
+
+```typescript
+await WebViewCrash.restartWebView();
+```
+
+The method writes `reason: 'manualRestart'` and asks native code to create a fresh WebView. Android recreates the host activity. iOS rebuilds the Capacitor bridge view so a new `WKWebView` is created instead of reloading the current page.
 
 ## Full Reference
 

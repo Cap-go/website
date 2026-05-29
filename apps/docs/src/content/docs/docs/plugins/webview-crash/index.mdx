@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-webview-crash"
-description: "Detect recovered WebView crashes, restart dead WebViews natively, and recycle long-running WebViews on a fixed interval before memory pressure turns into an OOM."
+description: "Detect recovered WebView crashes, restart dead WebViews natively, recycle long-running WebViews on a fixed interval, and let JavaScript request a native WebView replacement before memory pressure turns into an OOM."
 tableOfContents: false
 next: false
 prev: false
@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Native WebView crash recovery and scheduled WebView recycling for long-running Capacitor apps."
+  tagline: "Native WebView crash recovery, manual restart, and scheduled WebView recycling for long-running Capacitor apps."
   actions:
     - text: Get started
       link: /docs/plugins/webview-crash/getting-started/
@@ -22,12 +22,13 @@ hero:
 
 ## Overview
 
-This plugin stores a native marker when the previous Capacitor WebView process dies or is recycled, then exposes that marker to the next JavaScript runtime after the app recovers. It can also restart the WebView from native code after a crash or on a fixed interval, which helps kiosk, POS, dashboard, scanner, and signage apps avoid memory buildup during long sessions.
+This plugin stores a native marker when the previous Capacitor WebView process dies or is recycled, then exposes that marker to the next JavaScript runtime after the app recovers. It can also restart the WebView from native code after a crash, on a fixed interval, or when JavaScript explicitly requests `restartWebView()`, which helps kiosk, POS, dashboard, scanner, and signage apps avoid memory buildup during long sessions.
 
 ## Core Capabilities
 
 - Native crash restart - Restarts the WebView from iOS or Android when the renderer process dies.
 - Scheduled restart - Recycles long-running WebViews on a native timer using `restartIntervalMs`.
+- Manual native restart - Lets JavaScript request a fresh native WebView with `restartWebView()` without doing a page reload.
 - `getPendingCrashInfo` - Returns the stored native crash or restart marker, or `null` when nothing is pending.
 - `clearPendingCrashInfo` - Clears the stored marker after your app has restored its state.
 - `simulateCrashRecovery` - Creates a fake crash marker so recovery flows can be tested locally.
@@ -40,6 +41,7 @@ This plugin stores a native marker when the previous Capacitor WebView process d
 | `getPendingCrashInfo` | Returns the stored native crash or restart marker, or `null` when nothing is pending. |
 | `clearPendingCrashInfo` | Clears the stored marker after your app has restored its state. |
 | `simulateCrashRecovery` | Creates a fake crash marker so recovery flows can be tested locally. |
+| `restartWebView` | Writes `reason: 'manualRestart'` and asks native code to create a fresh WebView. |
 | `addListener` | Fires `webViewRestoredAfterCrash` or `webViewRestoredAfterRestart` when a listener attaches and a matching marker is still pending. |
 | `removeAllListeners` | Removes all plugin listeners. |
 
@@ -47,9 +49,9 @@ This plugin stores a native marker when the previous Capacitor WebView process d
 
 - This plugin detects recovery after a WebView crash. It does not prevent the underlying crash.
 - The recovered JavaScript runtime is new, so any in-memory state from the previous WebView is already gone when this API fires.
-- Scheduled restarts write `reason: 'periodicRestart'`. Persist unsaved state before enabling short restart intervals.
+- Scheduled restarts write `reason: 'periodicRestart'`; manual restarts write `reason: 'manualRestart'`. Persist unsaved state before enabling short restart intervals or calling `restartWebView()`.
 - On Android, extra fields such as `didCrash` and `rendererPriorityAtExit` may be available.
-- On iOS, the plugin records `appState` when the terminated WebView process is observed.
+- On iOS, the plugin records `appState` when the terminated WebView process is observed. Manual and scheduled restarts rebuild the Capacitor bridge view so a new `WKWebView` is created.
 
 ## Source Of Truth
 
