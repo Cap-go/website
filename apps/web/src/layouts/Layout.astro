@@ -8,6 +8,7 @@ import globalStylesHref from '../css/global.css?url'
 
 const content = Astro.props.content ?? {}
 const disableThirdPartyScripts = Astro.props.disableThirdPartyScripts ?? false
+const hideChrome = Astro.props.hideChrome ?? false
 
 const isLocalhost = Astro.url.origin.includes('localhost:')
 const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
@@ -31,11 +32,11 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
       Skip to main content
     </a>
     <div class="min-h-dvh overflow-x-hidden">
-      <Header />
+      {!hideChrome && <Header />}
       <main id="main-content">
         <slot />
       </main>
-      <Footer />
+      {!hideChrome && <Footer />}
     </div>
     {
       enableThirdPartyScripts && (
