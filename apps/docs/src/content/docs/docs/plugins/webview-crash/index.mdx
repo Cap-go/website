@@ -64,7 +64,7 @@ export interface WebViewCrashPluginConfig {
 - This plugin detects recovery after a WebView crash. It does not prevent the underlying crash.
 - The recovered JavaScript runtime is new, so any in-memory state from the previous WebView is already gone when this API fires.
 - Scheduled restarts write `reason: 'periodicRestart'`; manual restarts write `reason: 'manualRestart'`. Persist unsaved state before enabling short restart intervals, cron schedules, or calling `restartWebView()`.
-- `restartCron` uses 5-field cron syntax in the device local timezone, for example `0 3 * * *` for a daily 03:00 restart. When both `restartCron` and `restartIntervalMs` are set, `restartCron` takes precedence.
+- `restartCron` uses 5-field cron syntax in the device local timezone, for example `0 3 * * *` for a daily 03:00 restart. Do not configure both schedules at once: native initialization throws a fatal config error when `restartCron` is set and `restartIntervalMs` is greater than `0`.
 - On Android, extra fields such as `didCrash` and `rendererPriorityAtExit` may be available.
 - On iOS, the plugin records `appState` when the terminated WebView process is observed. Manual and scheduled restarts rebuild the Capacitor bridge view so a new `WKWebView` is created.
 

@@ -56,11 +56,8 @@ const webViewCrash: WebViewCrashPluginConfig = {
   // Enabled by default. Keep this on for long-running apps.
   restartOnCrash: true,
 
-  // Use a fixed interval instead of cron by setting this above 0.
-  restartIntervalMs: 0,
-
   // Use a 5-field cron schedule in the device local timezone.
-  // When set, restartCron takes precedence over restartIntervalMs.
+  // Do not combine restartCron with an active restartIntervalMs.
   restartCron: '0 3 * * *',
 
   // Optional delay before restarting after a crash.
@@ -78,7 +75,7 @@ export default config;
 
 Use `restartIntervalMs` for always-on apps where users may keep the same WebView open for days: kiosk screens, control-room dashboards, warehouse scanners, POS terminals, fleet tablets, and digital signage. Use `restartCron` for wall-clock restarts such as `0 3 * * *` for a daily 03:00 restart in the device local timezone. Scheduled restarts write a pending marker with `reason: 'periodicRestart'`, then Android recreates the host activity and iOS rebuilds the Capacitor bridge view so a new `WKWebView` is created from native code.
 
-Choose an interval or cron schedule your product can tolerate. `restartCron` supports `*`, lists, ranges, and steps, and takes precedence over `restartIntervalMs` when both are set. A restart creates a fresh JavaScript runtime, so persist queued events, unsaved form state, and current navigation state before using aggressive schedules.
+Choose an interval or cron schedule your product can tolerate. `restartCron` supports `*`, lists, ranges, and steps. Do not configure both schedules at once: native initialization throws a fatal config error when `restartCron` is set and `restartIntervalMs` is greater than `0`. A restart creates a fresh JavaScript runtime, so persist queued events, unsaved form state, and current navigation state before using aggressive schedules.
 
 ## Manual native restart
 
@@ -163,7 +160,8 @@ export interface WebViewCrashPluginConfig {
   /**
    * Fixed native interval, in milliseconds, for proactively replacing long-running WebViews.
    *
-   * Set to `0` to disable scheduled restarts.
+   * Set to `0` to disable interval restarts. Do not combine an active interval
+   * with `restartCron`; native initialization fails fast when both schedules are configured.
    *
    * @default 0
    */
@@ -179,7 +177,8 @@ export interface WebViewCrashPluginConfig {
    * - `0 3 * * *` restarts every day at 03:00.
    * - `0,30 * * * *` restarts every 30 minutes.
    *
-   * When set, this takes precedence over `restartIntervalMs`.
+   * Do not combine this with an active `restartIntervalMs`; native initialization
+   * fails fast when both schedules are configured.
    */
   restartCron?: string;
 

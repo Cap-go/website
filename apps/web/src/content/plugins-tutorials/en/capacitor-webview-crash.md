@@ -56,7 +56,6 @@ import type { WebViewCrashPluginConfig } from '@capgo/capacitor-webview-crash';
 
 const webViewCrash: WebViewCrashPluginConfig = {
   restartOnCrash: true,
-  restartIntervalMs: 0,
   restartCron: '0 3 * * *',
   restartAfterCrashDelayMs: 0,
 };
@@ -70,7 +69,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Scheduled restarts write `reason: 'periodicRestart'`. Use `restartIntervalMs` for fixed intervals or `restartCron` for a 5-field cron schedule in the device local timezone, such as `0 3 * * *` for a daily 03:00 restart. When both are set, `restartCron` takes precedence. Persist critical app state before using short schedules.
+Scheduled restarts write `reason: 'periodicRestart'`. Use `restartIntervalMs` for fixed intervals or `restartCron` for a 5-field cron schedule in the device local timezone, such as `0 3 * * *` for a daily 03:00 restart. Do not configure both schedules at once: native initialization throws a fatal config error when `restartCron` is set and `restartIntervalMs` is greater than `0`. Persist critical app state before using short schedules.
 
 ## Manual Native Restart
 
