@@ -69,7 +69,6 @@ const content = {
 }
 
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
-const docsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/getting-started')
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
 
 const heroMeta = [copy('native_build_v2_meta_ios'), copy('native_build_v2_meta_android'), copy('native_build_v2_meta_nosdk'), copy('native_build_v2_meta_speed')]
@@ -2449,7 +2448,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     function restart() {
       gen++
       const myGen = gen
-      clearTimeout(timer)
+      if (timer) clearTimeout(timer)
       buf = ''
       stepIdx = 0
       script = makeScript()
@@ -2500,7 +2499,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
 <span class="ok">━━━ Build completed successfully in 2m 18s ━━━</span>`
 
     function staticFallback() {
-      el.innerHTML = platform === 'android' ? STATIC_ANDROID : STATIC_IOS
+      el!.innerHTML = platform === 'android' ? STATIC_ANDROID : STATIC_IOS
     }
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -2670,10 +2669,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           if (myGen !== gen) return
           if (s.replaceAll) {
             buf = s.html!
-          } else if (s.replaceLastLine) {
-            buf = buf.replace(/\n[^\n]*$/, '') + s.html
           } else {
-            buf += s.html
+            buf += s.html ?? ''
           }
           render()
           next()
