@@ -67,6 +67,6 @@ The plugin does not fetch weather data. Outside temperature and humidity require
 - GitHub: https://github.com/Cap-go/capacitor-device-info/
 - Docs: /docs/plugins/device-info/
 
-## Keep going from Using @capgo/capacitor-device-info
+## Keep Going
 
-If you are using **Using @capgo/capacitor-device-info** to build diagnostics or monitoring screens, connect it with [@capgo/capacitor-device-info](/docs/plugins/device-info/) for the overview, [Getting Started](/docs/plugins/device-info/getting-started/) for install and API examples, [Using @capgo/capacitor-barometer](/plugins/capacitor-barometer/) for dedicated pressure streaming, and [Using @capgo/capacitor-light-sensor](/plugins/capacitor-light-sensor/) for dedicated light readings.
+If you are using **@capgo/capacitor-device-info** to build diagnostics or monitoring screens, connect it with [@capgo/capacitor-device-info](/docs/plugins/device-info/) for the overview, [Getting Started](/docs/plugins/device-info/getting-started/) for install and API examples, [Using @capgo/capacitor-barometer](/plugins/capacitor-barometer/) for dedicated pressure streaming, and [Using @capgo/capacitor-light-sensor](/plugins/capacitor-light-sensor/) for dedicated light readings.
