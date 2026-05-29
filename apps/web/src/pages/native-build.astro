@@ -356,7 +356,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_setup_title')}</span></h3>
             <p class="sub">{copy('native_build_v2_tile_setup_sub')}</p>
             <div class="more">
-              <code class="mono">npx @capgo/cli@latest build init --platform ios|android</code> launches a wizard. iOS: drop a <code class="mono">.p8</code> → CSR, certificate, P12, bundle
+              <code class="mono">bunx @capgo/cli@latest build init --platform ios|android</code> launches a wizard. iOS: drop a <code class="mono">.p8</code> → CSR, certificate, P12, bundle
               ID, provisioning profiles, all auto. Android: one OAuth click → Play Console project, service account, keystore, all auto. Resumable, Ctrl-C-safe, runs the same in CI.
             </div>
           </div>
@@ -386,7 +386,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           <p class="lead">{copy('native_build_v2_wiz_lead')}</p>
           <div class="onboarding-cmd-row">
             <code class="onboarding-cmd"
-              ><span class="ocm-prompt">$</span> npx <span class="ocm-pkg">@capgo/cli@latest</span> build init <span class="ocm-flag">--platform</span> <span class="ocm-val" id="ocm-platform"
+              ><span class="ocm-prompt">$</span> bunx <span class="ocm-pkg">@capgo/cli@latest</span> build init <span class="ocm-flag">--platform</span> <span class="ocm-val" id="ocm-platform"
                 >ios</span
               ></code
             >
@@ -2784,7 +2784,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           {
             title: 'App Store Connect API Key',
             lines: [
-              '<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">ios</span>',
+              '<span class="dim">$ </span><span class="cmd">bunx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">ios</span>',
               '',
               '<span class="ok">◆</span> Native file picker opened',
               '<span class="ok">✔</span> Selected: <span class="kw">AuthKey_ABC123XYZ.p8</span>',
@@ -2831,7 +2831,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           {
             title: 'Keystore',
             lines: [
-              '<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">android</span>',
+              '<span class="dim">$ </span><span class="cmd">bunx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">android</span>',
               '',
               '<span class="ok">◆</span> Generate new keystore <span class="ghost">— or import existing</span>',
               '<span class="ok">✔</span> Alias: <span class="val">acme-release</span>',
