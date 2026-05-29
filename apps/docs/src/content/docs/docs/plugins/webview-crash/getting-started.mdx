@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: "Install @capgo/capacitor-webview-crash and handle recovered WebView crashes in your Capacitor app startup flow."
+description: "Install @capgo/capacitor-webview-crash, enable native WebView restart, manually replace the WebView from JavaScript, and handle recovered crash or restart markers."
 sidebar:
   order: 2
 ---
@@ -8,8 +8,8 @@ sidebar:
 ## Install
 
 ```bash
-bun add @capgo/capacitor-webview-crash
-bunx cap sync
+npm install @capgo/capacitor-webview-crash
+npx cap sync
 ```
 
 ## Import
@@ -20,7 +20,7 @@ import { WebViewCrash } from '@capgo/capacitor-webview-crash';
 
 ## Recommended recovery flow
 
-Attach the listener as early as possible in your app startup so the recovered runtime can react before users continue navigating:
+Attach listeners as early as possible in your app startup so the recovered runtime can react before users continue navigating:
 
 ```typescript
 import { WebViewCrash } from '@capgo/capacitor-webview-crash';
@@ -32,18 +32,66 @@ await WebViewCrash.addListener('webViewRestoredAfterCrash', async (info) => {
   await WebViewCrash.clearPendingCrashInfo();
 });
 
+await WebViewCrash.addListener('webViewRestoredAfterRestart', async (info) => {
+  console.log('Recovered after a native WebView restart', info);
+  await WebViewCrash.clearPendingCrashInfo();
+});
+
 const pending = await WebViewCrash.getPendingCrashInfo();
 // Note: the listener callback may have already cleared the pending marker.
 if (pending.value) {
-  console.log('Pending crash marker', pending.value);
+  console.log('Pending crash or restart marker', pending.value);
 }
 ```
+
+## Native auto restart
+
+Set restart options in `capacitor.config.ts` so the decision stays in native code even when the JavaScript runtime has crashed or has not loaded yet:
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+import type { WebViewCrashPluginConfig } from '@capgo/capacitor-webview-crash';
+
+const webViewCrash: WebViewCrashPluginConfig = {
+  // Enabled by default. Keep this on for long-running apps.
+  restartOnCrash: true,
+
+  // Use a 5-field cron schedule in the device local timezone.
+  // Do not combine restartCron with an active restartIntervalMs.
+  restartCron: '0 3 * * *',
+
+  // Optional delay before restarting after a crash.
+  restartAfterCrashDelayMs: 0,
+};
+
+const config: CapacitorConfig = {
+  plugins: {
+    WebViewCrash: webViewCrash,
+  },
+};
+
+export default config;
+```
+
+Use `restartIntervalMs` for always-on apps where users may keep the same WebView open for days: kiosk screens, control-room dashboards, warehouse scanners, POS terminals, fleet tablets, and digital signage. Use `restartCron` for wall-clock restarts such as `0 3 * * *` for a daily 03:00 restart in the device local timezone. Scheduled restarts write a pending marker with `reason: 'periodicRestart'`, then Android recreates the host activity and iOS rebuilds the Capacitor bridge view so a new `WKWebView` is created from native code.
+
+Choose an interval or cron schedule your product can tolerate. `restartCron` supports `*`, lists, ranges, and steps. Do not configure both schedules at once: native initialization throws a fatal config error when `restartCron` is set and `restartIntervalMs` is greater than `0`. A restart creates a fresh JavaScript runtime, so persist queued events, unsaved form state, and current navigation state before using aggressive schedules.
+
+## Manual native restart
+
+Call `restartWebView()` when the current JavaScript runtime decides the native WebView should be replaced proactively, for example after a memory-heavy workflow or before entering a long unattended session:
+
+```typescript
+await WebViewCrash.restartWebView();
+```
+
+The method writes a pending marker with `reason: 'manualRestart'`, resolves the current call, then asks native code to create a fresh WebView. Android recreates the host activity. iOS rebuilds the Capacitor bridge view so a new `WKWebView` is created instead of reloading the current page.
 
 ## API overview
 
 ### `getPendingCrashInfo`
 
-Returns the stored native crash marker, or `null` when nothing is pending.
+Returns the stored native crash or restart marker, or `null` when nothing is pending.
 
 ```typescript
 const pending = await WebViewCrash.getPendingCrashInfo();
@@ -54,7 +102,7 @@ if (pending.value) {
 
 ### `clearPendingCrashInfo`
 
-Clears the stored crash marker after your recovery handling is finished.
+Clears the stored marker after your recovery handling is finished.
 
 ```typescript
 await WebViewCrash.clearPendingCrashInfo();
@@ -69,10 +117,20 @@ const simulated = await WebViewCrash.simulateCrashRecovery();
 console.log(simulated.value);
 ```
 
+### `restartWebView`
+
+Stores a manual restart marker and asks native code to create a fresh WebView.
+
+```typescript
+await WebViewCrash.restartWebView();
+```
+
 ## Platform notes
 
 - Android stores crash metadata from `onRenderProcessGone`, including `didCrash` and `rendererPriorityAtExit` when the platform provides them.
 - iOS stores crash metadata from `webViewWebContentProcessDidTerminate` and adds the current application state when available.
+- Manual and scheduled restarts create a fresh WebView. Android recreates the host activity; iOS rebuilds the Capacitor bridge view.
+- Scheduled restarts use `reason: 'periodicRestart'`; manual restarts use `reason: 'manualRestart'`.
 - Web does not detect real renderer crashes. The web implementation only simulates the behavior with local storage.
 
 ## Type reference
@@ -82,9 +140,54 @@ console.log(simulated.value);
 ```typescript
 export interface PendingCrashInfoResult {
   /**
-   * Stored crash metadata, or `null` when no marker is pending.
+   * Stored crash or restart metadata, or `null` when no marker is pending.
    */
   value: WebViewCrashInfo | null;
+}
+```
+
+### `WebViewCrashPluginConfig`
+
+```typescript
+export interface WebViewCrashPluginConfig {
+  /**
+   * Restart the WebView from native code when the renderer process dies.
+   *
+   * @default true
+   */
+  restartOnCrash?: boolean;
+
+  /**
+   * Fixed native interval, in milliseconds, for proactively replacing long-running WebViews.
+   *
+   * Set to `0` to disable interval restarts. Do not combine an active interval
+   * with `restartCron`; native initialization fails fast when both schedules are configured.
+   *
+   * @default 0
+   */
+  restartIntervalMs?: number;
+
+  /**
+   * Cron schedule for proactively replacing long-running WebViews.
+   *
+   * Uses standard 5-field cron syntax in the device local timezone:
+   * `minute hour day-of-month month day-of-week`.
+   *
+   * Examples:
+   * - `0 3 * * *` restarts every day at 03:00.
+   * - `0,30 * * * *` restarts every 30 minutes.
+   *
+   * Do not combine this with an active `restartIntervalMs`; native initialization
+   * fails fast when both schedules are configured.
+   */
+  restartCron?: string;
+
+  /**
+   * Delay, in milliseconds, before restarting after a crash.
+   *
+   * @default 0
+   */
+  restartAfterCrashDelayMs?: number;
 }
 ```
 
@@ -93,12 +196,12 @@ export interface PendingCrashInfoResult {
 ```typescript
 export interface WebViewCrashInfo {
   /**
-   * Platform that detected and stored the crash marker.
+   * Platform that detected and stored the marker.
    */
   platform: WebViewCrashPlatform;
 
   /**
-   * Unix timestamp in milliseconds for when the crash marker was written.
+   * Unix timestamp in milliseconds for when the marker was written.
    */
   timestamp: number;
 
@@ -108,12 +211,12 @@ export interface WebViewCrashInfo {
   timestampISO: string;
 
   /**
-   * Platform-specific reason for the crash marker.
+   * Platform-specific reason for the crash or restart marker.
    */
   reason: WebViewCrashReason;
 
   /**
-   * Last known WebView URL when the crash marker was written.
+   * Last known WebView URL when the marker was written.
    */
   url?: string;
 
@@ -143,7 +246,12 @@ export type WebViewCrashPlatform = 'android' | 'ios' | 'web';
 ### `WebViewCrashReason`
 
 ```typescript
-export type WebViewCrashReason = 'renderProcessGone' | 'webContentProcessDidTerminate' | 'simulated';
+export type WebViewCrashReason =
+  | 'renderProcessGone'
+  | 'webContentProcessDidTerminate'
+  | 'periodicRestart'
+  | 'manualRestart'
+  | 'simulated';
 ```
 
 ### `WebViewCrashAppState`
