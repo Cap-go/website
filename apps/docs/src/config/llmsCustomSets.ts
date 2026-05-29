@@ -35,6 +35,7 @@ Plugin Contacts|contacts access plugin for reading device contacts|docs/plugins/
 Plugin Crisp|Crisp chat integration plugin|docs/plugins/crisp/**
 Plugin Data Storage SQLite|SQLite data storage plugin for local database|docs/plugins/data-storage-sqlite/**
 Plugin Date Picker|native date, time, date-time, year-month, and range picker plugin for iOS, Android, and Web|docs/plugins/date-picker/**
+Plugin Device Info|CPU, memory, GPU, storage, thermal, and onboard sensor metrics plugin|docs/plugins/device-info/**
 Plugin Document Scanner|document scanning plugin with OCR capabilities|docs/plugins/document-scanner/**
 Plugin Downloader|file download manager plugin|docs/plugins/downloader/**
 Plugin Env|environment variables plugin|docs/plugins/env/**
