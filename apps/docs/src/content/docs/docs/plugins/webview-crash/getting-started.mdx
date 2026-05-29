@@ -56,8 +56,12 @@ const webViewCrash: WebViewCrashPluginConfig = {
   // Enabled by default. Keep this on for long-running apps.
   restartOnCrash: true,
 
-  // Recycle the WebView every hour. Set to 0 to disable scheduled restarts.
-  restartIntervalMs: 60 * 60 * 1000,
+  // Use a fixed interval instead of cron by setting this above 0.
+  restartIntervalMs: 0,
+
+  // Use a 5-field cron schedule in the device local timezone.
+  // When set, restartCron takes precedence over restartIntervalMs.
+  restartCron: '0 3 * * *',
 
   // Optional delay before restarting after a crash.
   restartAfterCrashDelayMs: 0,
@@ -72,9 +76,9 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Use `restartIntervalMs` for always-on apps where users may keep the same WebView open for days: kiosk screens, control-room dashboards, warehouse scanners, POS terminals, fleet tablets, and digital signage. Scheduled restarts write a pending marker with `reason: 'periodicRestart'`, then Android recreates the host activity and iOS rebuilds the Capacitor bridge view so a new `WKWebView` is created from native code.
+Use `restartIntervalMs` for always-on apps where users may keep the same WebView open for days: kiosk screens, control-room dashboards, warehouse scanners, POS terminals, fleet tablets, and digital signage. Use `restartCron` for wall-clock restarts such as `0 3 * * *` for a daily 03:00 restart in the device local timezone. Scheduled restarts write a pending marker with `reason: 'periodicRestart'`, then Android recreates the host activity and iOS rebuilds the Capacitor bridge view so a new `WKWebView` is created from native code.
 
-Choose an interval your product can tolerate. A restart creates a fresh JavaScript runtime, so persist queued events, unsaved form state, and current navigation state before using aggressive intervals.
+Choose an interval or cron schedule your product can tolerate. `restartCron` supports `*`, lists, ranges, and steps, and takes precedence over `restartIntervalMs` when both are set. A restart creates a fresh JavaScript runtime, so persist queued events, unsaved form state, and current navigation state before using aggressive schedules.
 
 ## Manual native restart
 
@@ -164,6 +168,20 @@ export interface WebViewCrashPluginConfig {
    * @default 0
    */
   restartIntervalMs?: number;
+
+  /**
+   * Cron schedule for proactively replacing long-running WebViews.
+   *
+   * Uses standard 5-field cron syntax in the device local timezone:
+   * `minute hour day-of-month month day-of-week`.
+   *
+   * Examples:
+   * - `0 3 * * *` restarts every day at 03:00.
+   * - `0,30 * * * *` restarts every 30 minutes.
+   *
+   * When set, this takes precedence over `restartIntervalMs`.
+   */
+  restartCron?: string;
 
   /**
    * Delay, in milliseconds, before restarting after a crash.

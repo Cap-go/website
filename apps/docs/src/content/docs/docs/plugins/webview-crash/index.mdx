@@ -22,12 +22,12 @@ hero:
 
 ## Overview
 
-This plugin stores a native marker when the previous Capacitor WebView process dies or is recycled, then exposes that marker to the next JavaScript runtime after the app recovers. It can also restart the WebView from native code after a crash, on a fixed interval, or when JavaScript explicitly requests `restartWebView()`, which helps kiosk, POS, dashboard, scanner, and signage apps avoid memory buildup during long sessions.
+This plugin stores a native marker when the previous Capacitor WebView process dies or is recycled, then exposes that marker to the next JavaScript runtime after the app recovers. It can also restart the WebView from native code after a crash, on a fixed interval, on a cron schedule, or when JavaScript explicitly requests `restartWebView()`, which helps kiosk, POS, dashboard, scanner, and signage apps avoid memory buildup during long sessions.
 
 ## Core Capabilities
 
 - Native crash restart - Restarts the WebView from iOS or Android when the renderer process dies.
-- Scheduled restart - Recycles long-running WebViews on a native timer using `restartIntervalMs`.
+- Scheduled restart - Recycles long-running WebViews on a native timer using `restartIntervalMs` or a wall-clock `restartCron`.
 - Manual native restart - Lets JavaScript request a fresh native WebView with `restartWebView()` without doing a page reload.
 - Typed Capacitor config - Exposes `WebViewCrashPluginConfig` for `plugins.WebViewCrash` in `capacitor.config.ts`.
 - `getPendingCrashInfo` - Returns the stored native crash or restart marker, or `null` when nothing is pending.
@@ -54,6 +54,7 @@ The plugin augments Capacitor's `PluginsConfig` with a typed `WebViewCrash` conf
 export interface WebViewCrashPluginConfig {
   restartOnCrash?: boolean;
   restartIntervalMs?: number;
+  restartCron?: string;
   restartAfterCrashDelayMs?: number;
 }
 ```
@@ -62,7 +63,8 @@ export interface WebViewCrashPluginConfig {
 
 - This plugin detects recovery after a WebView crash. It does not prevent the underlying crash.
 - The recovered JavaScript runtime is new, so any in-memory state from the previous WebView is already gone when this API fires.
-- Scheduled restarts write `reason: 'periodicRestart'`; manual restarts write `reason: 'manualRestart'`. Persist unsaved state before enabling short restart intervals or calling `restartWebView()`.
+- Scheduled restarts write `reason: 'periodicRestart'`; manual restarts write `reason: 'manualRestart'`. Persist unsaved state before enabling short restart intervals, cron schedules, or calling `restartWebView()`.
+- `restartCron` uses 5-field cron syntax in the device local timezone, for example `0 3 * * *` for a daily 03:00 restart. When both `restartCron` and `restartIntervalMs` are set, `restartCron` takes precedence.
 - On Android, extra fields such as `didCrash` and `rendererPriorityAtExit` may be available.
 - On iOS, the plugin records `appState` when the terminated WebView process is observed. Manual and scheduled restarts rebuild the Capacitor bridge view so a new `WKWebView` is created.
 
