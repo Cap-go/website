@@ -47,7 +47,7 @@ Managing Capacitor OTA updates requires a clear version control strategy. Here's
 
 ### Semantic Versioning Basics
 
-Semantic Versioning (SemVer) is a widely-used method for version numbering, structured as MAJOR.MINOR.PATCH. Each part has a specific role:
+[Semantic Versioning (SemVer)](/semver_tester/) is a widely-used method for version numbering, structured as MAJOR.MINOR.PATCH. Each part has a specific role:
 
 | **Version Component** | **Purpose** | **When to Update** |
 | --- | --- | --- |

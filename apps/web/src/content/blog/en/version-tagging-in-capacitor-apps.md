@@ -109,7 +109,7 @@ Keeping your Capacitor CLI updated ensures compatibility with version-specific f
 
 ### Semantic Version Basics
 
-Semantic Versioning (SemVer) uses the format **MAJOR.MINOR.PATCH**, where each part indicates a specific type of change:
+[Semantic Versioning (SemVer)](/semver_tester/) uses the format **MAJOR.MINOR.PATCH**, where each part indicates a specific type of change:
 
 | Version Component | Purpose |
 | --- | --- |
