@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-18T06:45:55.489Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-05-29T11:34:25.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/eeecbac4-7d55-4ee1-8835-d88a29311d6a/app-user-experience-presentation-slide.jpg'
 head_image_alt: 'App User Experience: A Guide for Capacitor & Electron Teams'
 keywords: 'app user experience, capacitorjs, mobile ux, cross-platform apps, user retention'

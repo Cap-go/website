@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-29T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-05-29T11:34:25.000Z
 head_image: /cordova.webp
 head_image_alt: Caorodva Dev looking for update they app
 keywords: Cordova, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

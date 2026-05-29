@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-22T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capgo_ci-cd-illustration.webp
 head_image_alt: Capgo PR preview illustration
 keywords: pr preview, pull request, OTA updates, capacitor, capgo, live updates, QA testing, feature preview, github actions

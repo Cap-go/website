@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-27T07:23:02.972Z
-updated_at: 2026-05-27T07:25:33.000Z
+updated_at: 2026-05-29T11:34:25.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/a14266f1-20a3-4c4c-8ab1-77ba4f707e0a/image.jpg'
 head_image_alt: 'App Quality Assurance: A Practical Guide for 2026'
 keywords: 'app quality assurance, mobile qa, software testing, ci/cd, capacitorjs'

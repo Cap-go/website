@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capgo-birth-story.webp
 head_image_alt: A visual representation of Capgo's evolution from idea to product
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates

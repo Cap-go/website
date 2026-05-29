@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-05-01T00:00:00.000Z
-updated_at: 2026-05-28T12:16:38.000Z
+updated_at: 2026-05-29T11:34:25.000Z
 head_image: /native-purchases/revenue-playbook.png
 head_image_alt: Revenue playbook for Capacitor in-app purchases
 keywords: Capacitor revenue, in-app purchases, subscriptions, mobile app monetization, paywall, ASO, app revenue, native purchases

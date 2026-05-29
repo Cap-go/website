@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-01-13T06:14:25.862Z
-updated_at: 2026-05-28T12:16:38.000Z
+updated_at: 2026-05-29T11:34:25.000Z
 head_image: https://assets.seobotai.com/capgo.app/6784a46a684afc141f72d774-1736748943276.jpg
 head_image_alt: Technology
 keywords: App Store updates, OTA updates, mobile app development, update strategy, developer tools

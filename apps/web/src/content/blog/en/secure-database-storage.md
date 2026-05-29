@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-25T07:12:53.642Z
-updated_at: 2026-05-25T07:15:17.000Z
+updated_at: 2026-05-29T11:34:25.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/3b4963b1-c07f-49b9-85ed-e71bd5e22e39/secure-database-storage-security-guide.jpg'
 head_image_alt: 'Secure Database Storage: A Complete Guide for Developers'
 keywords: 'secure database storage, data encryption, database security, access control, data compliance'

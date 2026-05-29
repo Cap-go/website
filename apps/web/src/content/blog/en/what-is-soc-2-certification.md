@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-26T07:20:25.523Z
-updated_at: 2026-05-26T07:22:41.000Z
+updated_at: 2026-05-29T11:34:25.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/f54eb7f5-22f5-4464-a6e4-b868c291b7f8/image.jpg'
 head_image_alt: 'What Is SOC 2 Certification: Your 2026 Guide'
 keywords: 'soc 2 certification, soc 2 compliance, security audits, saas security, data privacy'
