@@ -1,6 +1,8 @@
 ---
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
+import MetaPixel from '../components/MetaPixel.astro'
+import MetaPixelNoscript from '../components/MetaPixelNoscript.astro'
 import SEO from '../components/SEO.astro'
 import PostHog from '../components/posthog.astro'
 import WebMcpTools from '../components/WebMcpTools.astro'
@@ -21,9 +23,11 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealBold.woff" crossorigin />
     <link rel="stylesheet" href={globalStylesHref} />
     <SEO {...content} />
+    {enableThirdPartyScripts && <MetaPixel />}
     {enableThirdPartyScripts && <PostHog />}
   </head>
   <body class="bg-gray-900 text-pretty text-white antialiased">
+    {enableThirdPartyScripts && <MetaPixelNoscript />}
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
