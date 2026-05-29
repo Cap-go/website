@@ -1,5 +1,5 @@
 {
-  "repositoryCount": 123,
+  "repositoryCount": 124,
   "contributorCount": 540,
   "versionCount": 7673,
   "releaseCount": 3365,
@@ -934,6 +934,15 @@
       "releases": 2,
       "closedIssues": 0,
       "mergedPullRequests": 2
+    },
+    "Cap-go/capacitor-network-diagnostics": {
+      "url": "https://github.com/Cap-go/capacitor-network-diagnostics",
+      "stars": 0,
+      "contributors": 1,
+      "versionTags": 0,
+      "releases": 0,
+      "closedIssues": 0,
+      "mergedPullRequests": 0
     },
     "Cap-go/capacitor-wifi": {
       "url": "https://github.com/Cap-go/capacitor-wifi",

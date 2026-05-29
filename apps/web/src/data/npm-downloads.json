@@ -103,6 +103,7 @@
   "@capgo/capacitor-printer": 27495,
   "@capgo/capacitor-zip": 2396,
   "@capgo/capacitor-zebra-datawedge": 110,
+  "@capgo/capacitor-network-diagnostics": 0,
   "@capgo/capacitor-wifi": 14977,
   "@capgo/capacitor-screen-orientation": 21560,
   "@capgo/capacitor-webview-guardian": 2631,
