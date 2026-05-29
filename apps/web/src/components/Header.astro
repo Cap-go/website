@@ -9,6 +9,7 @@ const locale = Astro.locals.locale
 ---
 
 <header class="relative z-50 py-2">
+  <span id="header-auth-live" class="sr-only" aria-live="polite" aria-atomic="true"></span>
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between">
       <div class="flex shrink-0 items-center">
@@ -369,6 +370,7 @@ const locale = Astro.locals.locale
             <span>{totalStars}+</span>
           </a>
           <a
+            data-guest-auth-link
             href="https://console.capgo.app/login/"
             aria-label={m.login({}, { locale: Astro.locals.locale })}
             target="_blank"
@@ -388,6 +390,7 @@ const locale = Astro.locals.locale
             {m.request_demo({}, { locale: Astro.locals.locale })}
           </a>
           <a
+            data-guest-auth-link
             href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
             target="_blank"
             rel="noopener noreferrer"
@@ -396,6 +399,18 @@ const locale = Astro.locals.locale
             role="button"
           >
             {m.register({}, { locale: Astro.locals.locale })}
+          </a>
+          <a
+            data-console-auth-link
+            hidden
+            href="https://console.capgo.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={m.console({}, { locale: Astro.locals.locale })}
+            class="font-pj flex h-10 items-center rounded-xl border border-slate-600 bg-slate-900/20 px-4 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:outline-none"
+            role="button"
+          >
+            {m.console({}, { locale: Astro.locals.locale })}
           </a>
         </div>
       </div>
@@ -414,6 +429,7 @@ const locale = Astro.locals.locale
           {m.request_demo({}, { locale: Astro.locals.locale })}
         </a>
         <a
+          data-guest-auth-link
           target="_blank"
           rel="noopener noreferrer"
           aria-label={m.register({}, { locale: Astro.locals.locale })}
@@ -421,6 +437,17 @@ const locale = Astro.locals.locale
           class="font-pj mt-2 flex min-h-12 items-center justify-center rounded-xl border border-slate-300/35 bg-slate-700/75 px-4 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-slate-700 focus:ring-2 focus:ring-slate-200 focus:outline-none"
         >
           {m.register({}, { locale: Astro.locals.locale })}
+        </a>
+        <a
+          data-console-auth-link
+          hidden
+          href="https://console.capgo.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={m.console({}, { locale: Astro.locals.locale })}
+          class="font-pj mt-2 flex min-h-12 items-center justify-center rounded-xl border border-slate-300/35 bg-slate-700/75 px-4 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-slate-700 focus:ring-2 focus:ring-slate-200 focus:outline-none"
+        >
+          {m.console({}, { locale: Astro.locals.locale })}
         </a>
         <!-- GitHub Stars -->
         <a
@@ -643,6 +670,7 @@ const locale = Astro.locals.locale
         </a>
         <div class="mt-2 border-t border-slate-500/45 pt-2">
           <a
+            data-guest-auth-link
             href="https://console.capgo.app/login/"
             target="_blank"
             rel="noopener noreferrer"
@@ -666,6 +694,33 @@ const locale = Astro.locals.locale
   const solutionsToggle = document.getElementById('solutions-toggle')
   const solutionsSubmenu = document.getElementById('solutions-submenu')
   const solutionsChevron = document.getElementById('solutions-chevron')
+  const headerAuthLive = document.getElementById('header-auth-live')
+  const websitePaidUserCookieName = 'capgo_paid_user'
+  let previousHeaderPaidAccess: boolean | undefined
+
+  function hasWebsitePaidUserCookie() {
+    return document.cookie.split(';').some((cookie) => cookie.trim() === `${websitePaidUserCookieName}=1`)
+  }
+
+  function announceHeaderAuthLinks(hasPaidAccess: boolean) {
+    if (!headerAuthLive || previousHeaderPaidAccess === hasPaidAccess) return
+
+    headerAuthLive.textContent = hasPaidAccess ? 'Console link available' : 'Login and register links available'
+    previousHeaderPaidAccess = hasPaidAccess
+  }
+
+  function syncHeaderAuthLinks() {
+    const hasPaidAccess = hasWebsitePaidUserCookie()
+    document.querySelectorAll('[data-guest-auth-link]').forEach((element) => {
+      if (hasPaidAccess) element.setAttribute('hidden', '')
+      else element.removeAttribute('hidden')
+    })
+    document.querySelectorAll('[data-console-auth-link]').forEach((element) => {
+      if (hasPaidAccess) element.removeAttribute('hidden')
+      else element.setAttribute('hidden', '')
+    })
+    announceHeaderAuthLinks(hasPaidAccess)
+  }
 
   menuToggle?.addEventListener('click', () => {
     const isOpen = !mobileMenu?.classList.toggle('hidden')
@@ -682,5 +737,11 @@ const locale = Astro.locals.locale
     const isOpen = !solutionsSubmenu?.classList.toggle('hidden')
     solutionsToggle.setAttribute('aria-expanded', String(isOpen))
     solutionsChevron?.classList.toggle('rotate-180', isOpen)
+  })
+
+  syncHeaderAuthLinks()
+  window.addEventListener('focus', syncHeaderAuthLinks)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) syncHeaderAuthLinks()
   })
 </script>

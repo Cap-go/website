@@ -625,6 +625,7 @@ const messages = {
   conditions_for_returns: 'Conditions for Returns',
   connect_your_account: 'Connect Your Account',
   consolidated_invoicing_purchase_orders: 'Consolidated invoicing, purchase orders, and flexible payment terms to meet your procurement requirements.',
+  console: 'Console',
   consulting: 'Consulting',
   consulting_description: 'Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.',
   consulting_forged_plugins_community_embraced: 'Consulting-Forged Plugins, Community Embraced',
