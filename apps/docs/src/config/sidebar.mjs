@@ -80,6 +80,7 @@ const pluginEntries = [
   ['Crisp', 'crisp'],
   ['Data Storage SQLite', 'data-storage-sqlite'],
   ['Date Picker', 'date-picker'],
+  ['Device Info', 'device-info'],
   ['Document Scanner', 'document-scanner'],
   ['Downloader', 'downloader'],
   ['Electron Updater', 'electron-updater'],
