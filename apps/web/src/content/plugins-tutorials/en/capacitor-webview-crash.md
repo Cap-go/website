@@ -17,6 +17,7 @@ npx cap sync
 - Native restart after WebView crashes on iOS and Android.
 - Fixed-interval native WebView restart for kiosk, POS, signage, scanner, and dashboard apps that run for days.
 - `restartWebView` - Lets JavaScript request a fresh native WebView without doing a page reload.
+- `WebViewCrashPluginConfig` - Types `plugins.WebViewCrash` options in `capacitor.config.ts`.
 - `getPendingCrashInfo` - Returns the stored native crash or restart marker, or `null` when nothing is pending.
 - `clearPendingCrashInfo` - Clears the stored marker after your app has restored its state.
 - `simulateCrashRecovery` - Creates a fake crash marker so recovery flows can be tested locally.
@@ -51,14 +52,17 @@ Configure restart behavior in `capacitor.config.ts` so it keeps working when Jav
 
 ```typescript
 import type { CapacitorConfig } from '@capacitor/cli';
+import type { WebViewCrashPluginConfig } from '@capgo/capacitor-webview-crash';
+
+const webViewCrash: WebViewCrashPluginConfig = {
+  restartOnCrash: true,
+  restartIntervalMs: 60 * 60 * 1000,
+  restartAfterCrashDelayMs: 0,
+};
 
 const config: CapacitorConfig = {
   plugins: {
-    WebViewCrash: {
-      restartOnCrash: true,
-      restartIntervalMs: 60 * 60 * 1000,
-      restartAfterCrashDelayMs: 0,
-    },
+    WebViewCrash: webViewCrash,
   },
 };
 

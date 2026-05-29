@@ -29,6 +29,7 @@ This plugin stores a native marker when the previous Capacitor WebView process d
 - Native crash restart - Restarts the WebView from iOS or Android when the renderer process dies.
 - Scheduled restart - Recycles long-running WebViews on a native timer using `restartIntervalMs`.
 - Manual native restart - Lets JavaScript request a fresh native WebView with `restartWebView()` without doing a page reload.
+- Typed Capacitor config - Exposes `WebViewCrashPluginConfig` for `plugins.WebViewCrash` in `capacitor.config.ts`.
 - `getPendingCrashInfo` - Returns the stored native crash or restart marker, or `null` when nothing is pending.
 - `clearPendingCrashInfo` - Clears the stored marker after your app has restored its state.
 - `simulateCrashRecovery` - Creates a fake crash marker so recovery flows can be tested locally.
@@ -44,6 +45,18 @@ This plugin stores a native marker when the previous Capacitor WebView process d
 | `restartWebView` | Writes `reason: 'manualRestart'` and asks native code to create a fresh WebView. |
 | `addListener` | Fires `webViewRestoredAfterCrash` or `webViewRestoredAfterRestart` when a listener attaches and a matching marker is still pending. |
 | `removeAllListeners` | Removes all plugin listeners. |
+
+## Config Type
+
+The plugin augments Capacitor's `PluginsConfig` with a typed `WebViewCrash` config entry:
+
+```typescript
+export interface WebViewCrashPluginConfig {
+  restartOnCrash?: boolean;
+  restartIntervalMs?: number;
+  restartAfterCrashDelayMs?: number;
+}
+```
 
 ## Notes
 

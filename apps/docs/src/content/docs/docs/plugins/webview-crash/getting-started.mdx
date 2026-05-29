@@ -50,19 +50,22 @@ Set restart options in `capacitor.config.ts` so the decision stays in native cod
 
 ```typescript
 import type { CapacitorConfig } from '@capacitor/cli';
+import type { WebViewCrashPluginConfig } from '@capgo/capacitor-webview-crash';
+
+const webViewCrash: WebViewCrashPluginConfig = {
+  // Enabled by default. Keep this on for long-running apps.
+  restartOnCrash: true,
+
+  // Recycle the WebView every hour. Set to 0 to disable scheduled restarts.
+  restartIntervalMs: 60 * 60 * 1000,
+
+  // Optional delay before restarting after a crash.
+  restartAfterCrashDelayMs: 0,
+};
 
 const config: CapacitorConfig = {
   plugins: {
-    WebViewCrash: {
-      // Enabled by default. Keep this on for long-running apps.
-      restartOnCrash: true,
-
-      // Recycle the WebView every hour. Set to 0 to disable scheduled restarts.
-      restartIntervalMs: 60 * 60 * 1000,
-
-      // Optional delay before restarting after a crash.
-      restartAfterCrashDelayMs: 0,
-    },
+    WebViewCrash: webViewCrash,
   },
 };
 
@@ -139,6 +142,35 @@ export interface PendingCrashInfoResult {
    * Stored crash or restart metadata, or `null` when no marker is pending.
    */
   value: WebViewCrashInfo | null;
+}
+```
+
+### `WebViewCrashPluginConfig`
+
+```typescript
+export interface WebViewCrashPluginConfig {
+  /**
+   * Restart the WebView from native code when the renderer process dies.
+   *
+   * @default true
+   */
+  restartOnCrash?: boolean;
+
+  /**
+   * Fixed native interval, in milliseconds, for proactively replacing long-running WebViews.
+   *
+   * Set to `0` to disable scheduled restarts.
+   *
+   * @default 0
+   */
+  restartIntervalMs?: number;
+
+  /**
+   * Delay, in milliseconds, before restarting after a crash.
+   *
+   * @default 0
+   */
+  restartAfterCrashDelayMs?: number;
 }
 ```
 
