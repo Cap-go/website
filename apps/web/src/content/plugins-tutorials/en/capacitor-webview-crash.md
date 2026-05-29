@@ -3,21 +3,24 @@ locale: en
 ---
 # Using @capgo/capacitor-webview-crash
 
-Detect recovered WebView crashes and tell the next JavaScript runtime what happened.
+Detect recovered WebView crashes, restart dead WebViews natively, and recycle long-running WebViews on a fixed interval before memory pressure turns into an OOM.
 
 ## Install
 
 ```bash
-bun add @capgo/capacitor-webview-crash
-bunx cap sync
+npm install @capgo/capacitor-webview-crash
+npx cap sync
 ```
 
 ## What This Plugin Exposes
 
-- `getPendingCrashInfo` - Returns the stored native crash marker, or `null` when nothing is pending.
-- `clearPendingCrashInfo` - Clears the stored crash marker after your app has restored its state.
+- Native restart after WebView crashes on iOS and Android.
+- Fixed-interval native WebView restart for kiosk, POS, signage, scanner, and dashboard apps that run for days.
+- `getPendingCrashInfo` - Returns the stored native crash or restart marker, or `null` when nothing is pending.
+- `clearPendingCrashInfo` - Clears the stored marker after your app has restored its state.
 - `simulateCrashRecovery` - Creates a fake crash marker so recovery flows can be tested locally.
 - `webViewRestoredAfterCrash` - Listener event fired when a crash marker is still pending in the recovered runtime.
+- `webViewRestoredAfterRestart` - Listener event fired when any native restart marker is still pending.
 
 ## Example Usage
 
@@ -29,12 +32,39 @@ await WebViewCrash.addListener('webViewRestoredAfterCrash', async (info) => {
   await WebViewCrash.clearPendingCrashInfo();
 });
 
+await WebViewCrash.addListener('webViewRestoredAfterRestart', async (info) => {
+  console.log('Recovered after a native WebView restart', info);
+  await WebViewCrash.clearPendingCrashInfo();
+});
+
 const pending = await WebViewCrash.getPendingCrashInfo();
 // Note: the listener callback may have already cleared the pending marker.
 if (pending.value) {
-  console.log('Pending crash marker', pending.value);
+  console.log('Pending crash or restart marker', pending.value);
 }
 ```
+
+## Native Auto Restart
+
+Configure restart behavior in `capacitor.config.ts` so it keeps working when JavaScript is unavailable:
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    WebViewCrash: {
+      restartOnCrash: true,
+      restartIntervalMs: 60 * 60 * 1000,
+      restartAfterCrashDelayMs: 0,
+    },
+  },
+};
+
+export default config;
+```
+
+Scheduled restarts write `reason: 'periodicRestart'`. Persist critical app state before using short intervals.
 
 ## Full Reference
 

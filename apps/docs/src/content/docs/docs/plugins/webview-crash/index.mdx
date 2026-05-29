@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-webview-crash"
-description: "Capacitor plugin for detecting recovered WebView crashes and exposing the pending crash marker to the next JavaScript runtime."
+description: "Detect recovered WebView crashes, restart dead WebViews natively, and recycle long-running WebViews on a fixed interval before memory pressure turns into an OOM."
 tableOfContents: false
 next: false
 prev: false
@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Detect recovered WebView crashes and handle lost in-memory state after the WebView restarts."
+  tagline: "Native WebView crash recovery and scheduled WebView recycling for long-running Capacitor apps."
   actions:
     - text: Get started
       link: /docs/plugins/webview-crash/getting-started/
@@ -22,29 +22,32 @@ hero:
 
 ## Overview
 
-This plugin stores a native crash marker when the previous Capacitor WebView process dies, then exposes that marker to the next JavaScript runtime after the app recovers.
+This plugin stores a native marker when the previous Capacitor WebView process dies or is recycled, then exposes that marker to the next JavaScript runtime after the app recovers. It can also restart the WebView from native code after a crash or on a fixed interval, which helps kiosk, POS, dashboard, scanner, and signage apps avoid memory buildup during long sessions.
 
 ## Core Capabilities
 
-- `getPendingCrashInfo` - Returns the stored native crash marker, or `null` when nothing is pending.
-- `clearPendingCrashInfo` - Clears the stored crash marker after your app has restored its state.
+- Native crash restart - Restarts the WebView from iOS or Android when the renderer process dies.
+- Scheduled restart - Recycles long-running WebViews on a native timer using `restartIntervalMs`.
+- `getPendingCrashInfo` - Returns the stored native crash or restart marker, or `null` when nothing is pending.
+- `clearPendingCrashInfo` - Clears the stored marker after your app has restored its state.
 - `simulateCrashRecovery` - Creates a fake crash marker so recovery flows can be tested locally.
-- `addListener` - Fires `webViewRestoredAfterCrash` when a listener attaches and a crash marker is still pending.
+- `addListener` - Fires `webViewRestoredAfterCrash` for crash markers and `webViewRestoredAfterRestart` for any native restart marker.
 
 ## Public API
 
 | Method | Description |
 | --- | --- |
-| `getPendingCrashInfo` | Returns the stored native crash marker, or `null` when nothing is pending. |
-| `clearPendingCrashInfo` | Clears the stored crash marker after your app has restored its state. |
+| `getPendingCrashInfo` | Returns the stored native crash or restart marker, or `null` when nothing is pending. |
+| `clearPendingCrashInfo` | Clears the stored marker after your app has restored its state. |
 | `simulateCrashRecovery` | Creates a fake crash marker so recovery flows can be tested locally. |
-| `addListener` | Fires `webViewRestoredAfterCrash` when a listener attaches and a crash marker is still pending. |
+| `addListener` | Fires `webViewRestoredAfterCrash` or `webViewRestoredAfterRestart` when a listener attaches and a matching marker is still pending. |
 | `removeAllListeners` | Removes all plugin listeners. |
 
 ## Notes
 
 - This plugin detects recovery after a WebView crash. It does not prevent the underlying crash.
 - The recovered JavaScript runtime is new, so any in-memory state from the previous WebView is already gone when this API fires.
+- Scheduled restarts write `reason: 'periodicRestart'`. Persist unsaved state before enabling short restart intervals.
 - On Android, extra fields such as `didCrash` and `rendererPriorityAtExit` may be available.
 - On iOS, the plugin records `appState` when the terminated WebView process is observed.
 

@@ -1371,7 +1371,7 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-webview-crash/">WebView Crash</a></h3>
 <p><code>@capgo/capacitor-webview-crash</code></p>
-<p>Detect recovered WebView crashes and tell the next JavaScript runtime what happened</p>
+<p>Restart crashed WebViews natively and recycle long-running WebViews on a fixed interval</p>
 <p>
 <a href="https://www.npmjs.com/package/@capgo/capacitor-webview-crash"><img src="https://img.shields.io/npm/dw/@capgo/capacitor-webview-crash?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-webview-crash/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-webview-crash?style=flat-square&label=stars" alt="GitHub stars"></a>
