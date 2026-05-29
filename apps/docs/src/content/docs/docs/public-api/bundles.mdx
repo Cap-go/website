@@ -10,7 +10,7 @@ Bundles are the core update packages in Capgo. Each bundle contains the web asse
 ## Understanding Bundles
 
 A bundle represents a specific bundle (version) of your app's web content and includes:
-- **Bundle (version)**: Semantic version number for the bundle
+- **Bundle (version)**: [Semantic version number](/semver_tester/) for the bundle
 - **Checksum**: Unique hash to verify bundle integrity
 - **Storage Info**: Details about where and how the bundle is stored
 - **Native Requirements**: Minimum native app version requirements
@@ -205,7 +205,7 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 | Parameter | Description | Required |
 |-----------|-------------|----------|
 | `app_id` | Your app identifier | Yes |
-| `version` | Bundle (version) semantic version (e.g., "1.2.3") | Yes |
+| `version` | Bundle (version) [semantic version](/semver_tester/) (e.g., "1.2.3") | Yes |
 | `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
 | `checksum` | SHA256 checksum of the zip file | Yes |
 
@@ -336,7 +336,7 @@ main();
 
 ## Best Practices
 
-1. **Bundle (version) Management**: Use semantic versioning consistently
+1. **Bundle (version) Management**: Use [semantic versioning](/semver_tester/) consistently
 2. **Storage Optimization**: Remove unused bundles periodically
 3. **Bundle (version) Compatibility**: Set appropriate minimum native version requirements
 4. **Backup Strategy**: Maintain backups of critical bundles (versions)

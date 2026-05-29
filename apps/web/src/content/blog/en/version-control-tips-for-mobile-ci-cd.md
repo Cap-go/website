@@ -83,7 +83,7 @@ The right strategy depends on your team’s size, workflow, and goals. Whichever
 
 ### Version Numbering System
 
-Pair your branch management strategy with a clear version numbering system. The widely-used **semantic versioning** format (MAJOR.MINOR.PATCH) works well for mobile apps:
+Pair your branch management strategy with a clear version numbering system. The widely-used [**semantic versioning** format](/semver_tester/) (MAJOR.MINOR.PATCH) works well for mobile apps:
 
 -   **MAJOR**: For breaking API changes.
 -   **MINOR**: For backward-compatible feature updates.

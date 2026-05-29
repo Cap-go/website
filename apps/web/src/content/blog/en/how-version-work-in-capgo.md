@@ -31,7 +31,7 @@ All versions choices are decided server side by Capgo.
 
 ## Versioning system
 
-To manage version Capgo use the SemVer system, read more about it [here](https://semver.org/).
+To manage version Capgo use the SemVer system. Read the [SemVer specification](https://semver.org/) or check Capgo update compatibility with the [Semver Tester](/semver_tester/).
 ### Versions
 
 Where Capgo find the version to compare
