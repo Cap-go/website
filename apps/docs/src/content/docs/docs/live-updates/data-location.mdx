@@ -17,10 +17,16 @@ The updater plugin talks to Capgo Cloud through three endpoints:
 - `statsUrl` sends update delivery, install, failure, and rollback statistics.
 - `channelUrl` reads and updates the device channel assignment through `channel_self`.
 
-Set all three endpoints to `plugin.eu.capgo.app` to geo-block this plugin data path to Europe. When the update, stats, and `channel_self` requests use the EU host, Capgo Cloud stores the related live update data in Europe.
+Set these complete endpoint URLs to geo-block this plugin data path to Europe:
+
+- `updateUrl`: `https://plugin.eu.capgo.app/updates`
+- `statsUrl`: `https://plugin.eu.capgo.app/stats`
+- `channelUrl`: `https://plugin.eu.capgo.app/channel_self`
+
+When the update, stats, and `channel_self` requests use the EU URLs, Capgo Cloud stores the related live update data in Europe.
 
 <Aside type="caution">
-Use the EU host for all three endpoints together. Mixing `plugin.capgo.app` and `plugin.eu.capgo.app` can route part of the plugin data path outside Europe.
+Use the EU URLs for all three endpoints together. Mixing `plugin.capgo.app` and `plugin.eu.capgo.app` can route part of the plugin data path outside Europe.
 </Aside>
 
 ## Capacitor updater configuration
