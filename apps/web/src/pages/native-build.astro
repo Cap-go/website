@@ -43,6 +43,13 @@ try {
 const plans = plansAll.filter((plan) => plan.name !== 'Free')
 const buildCredits = credits.filter((credit) => credit.type === 'build_time').sort((a, b) => a.step_min - b.step_min)
 
+// Tiered build-minute credit pricing, normalized to minutes — drives the calculator's price estimate.
+const calcTiers = buildCredits.map((credit) => ({
+  from: credit.step_min / credit.unit_factor,
+  to: credit.step_max ? credit.step_max / credit.unit_factor : 0,
+  price: credit.price_per_unit,
+}))
+
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description,
@@ -61,168 +68,92 @@ const content = {
   ldJSON,
 }
 
-const heroStats = [
-  { value: copy('native_build_builder_stat_command_value'), label: copy('native_build_builder_stat_command_label') },
-  { value: copy('native_build_builder_stat_credentials_value'), label: copy('native_build_builder_stat_credentials_label') },
-  { value: copy('native_build_builder_stat_platforms_value'), label: copy('native_build_builder_stat_platforms_label') },
-  { value: copy('native_build_builder_stat_stores_value'), label: copy('native_build_builder_stat_stores_label') },
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
+const docsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/getting-started')
+const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
+
+const heroMeta = [copy('native_build_v2_meta_ios'), copy('native_build_v2_meta_android'), copy('native_build_v2_meta_nosdk'), copy('native_build_v2_meta_speed')]
+
+const heroStrip = [
+  { k: copy('native_build_v2_strip_ios_k'), v: copy('native_build_v2_strip_ios_v') },
+  { k: copy('native_build_v2_strip_android_k'), v: copy('native_build_v2_strip_android_v') },
+  { k: copy('native_build_v2_strip_build_k'), v: copy('native_build_v2_strip_build_v') },
+  { k: copy('native_build_v2_strip_setup_k'), v: copy('native_build_v2_strip_setup_v') },
 ]
 
-const builderFeatures = [
+const comparisonRows = [
   {
-    title: copy('native_build_builder_feature_no_setup_title'),
-    text: copy('native_build_builder_feature_no_setup_text'),
-    accent: 'text-emerald-300',
+    label: copy('native_build_v2_comp_setup_l'),
+    hook: copy('native_build_v2_comp_setup_capgo_hook'),
+    capgo: copy('native_build_v2_comp_setup_capgo'),
+    diy: copy('native_build_v2_comp_setup_diy'),
+    capa: copy('native_build_v2_comp_setup_capa'),
   },
   {
-    title: copy('native_build_builder_feature_signing_title'),
-    text: copy('native_build_builder_feature_signing_text'),
-    accent: 'text-cyan-300',
+    label: copy('native_build_v2_comp_source_l'),
+    hook: copy('native_build_v2_comp_source_capgo_hook'),
+    capgo: copy('native_build_v2_comp_source_capgo'),
+    diy: copy('native_build_v2_comp_source_diy'),
+    capa: copy('native_build_v2_comp_source_capa'),
   },
   {
-    title: copy('native_build_builder_feature_stores_title'),
-    text: copy('native_build_builder_feature_stores_text'),
-    accent: 'text-amber-300',
+    label: copy('native_build_v2_comp_cred_l'),
+    hook: copy('native_build_v2_comp_cred_capgo_hook'),
+    capgo: copy('native_build_v2_comp_cred_capgo'),
+    diy: copy('native_build_v2_comp_cred_diy'),
+    capa: copy('native_build_v2_comp_cred_capa'),
   },
   {
-    title: copy('native_build_builder_feature_ci_title'),
-    text: copy('native_build_builder_feature_ci_text'),
-    accent: 'text-sky-300',
+    label: copy('native_build_v2_comp_logs_l'),
+    hook: copy('native_build_v2_comp_logs_capgo_hook'),
+    capgo: copy('native_build_v2_comp_logs_capgo'),
+    diy: copy('native_build_v2_comp_logs_diy'),
+    capa: copy('native_build_v2_comp_logs_capa'),
   },
   {
-    title: copy('native_build_builder_feature_logs_title'),
-    text: copy('native_build_builder_feature_logs_text'),
-    accent: 'text-fuchsia-300',
+    label: copy('native_build_v2_comp_try_l'),
+    hook: copy('native_build_v2_comp_try_capgo_hook'),
+    capgo: copy('native_build_v2_comp_try_capgo'),
+    diy: copy('native_build_v2_comp_try_diy'),
+    capa: copy('native_build_v2_comp_try_capa'),
   },
   {
-    title: copy('native_build_builder_feature_artifacts_title'),
-    text: copy('native_build_builder_feature_artifacts_text'),
-    accent: 'text-violet-300',
-  },
-]
-
-const setupSteps = [
-  copy('native_build_builder_setup_step_install'),
-  copy('native_build_builder_setup_step_app'),
-  copy('native_build_builder_setup_step_signing'),
-  copy('native_build_builder_setup_step_logs'),
-]
-
-const infrastructureSpecs = [
-  {
-    label: copy('native_build_builder_infra_spec_model_label'),
-    value: copy('native_build_builder_infra_spec_model_value'),
+    label: copy('native_build_v2_comp_cost_l'),
+    hook: copy('native_build_v2_comp_cost_capgo_hook'),
+    capgo: copy('native_build_v2_comp_cost_capgo'),
+    diy: copy('native_build_v2_comp_cost_diy'),
+    capa: copy('native_build_v2_comp_cost_capa'),
   },
   {
-    label: copy('native_build_builder_infra_spec_cpu_label'),
-    value: copy('native_build_builder_infra_spec_cpu_value'),
+    label: copy('native_build_v2_comp_ota_l'),
+    hook: copy('native_build_v2_comp_ota_capgo_hook'),
+    capgo: copy('native_build_v2_comp_ota_capgo'),
+    diy: copy('native_build_v2_comp_ota_diy'),
+    capa: copy('native_build_v2_comp_ota_capa'),
   },
   {
-    label: copy('native_build_builder_infra_spec_gpu_label'),
-    value: copy('native_build_builder_infra_spec_gpu_value'),
+    label: copy('native_build_v2_comp_maint_l'),
+    hook: copy('native_build_v2_comp_maint_capgo_hook'),
+    capgo: copy('native_build_v2_comp_maint_capgo'),
+    diy: copy('native_build_v2_comp_maint_diy'),
+    capa: copy('native_build_v2_comp_maint_capa'),
   },
   {
-    label: copy('native_build_builder_infra_spec_neural_label'),
-    value: copy('native_build_builder_infra_spec_neural_value'),
-  },
-  {
-    label: copy('native_build_builder_infra_spec_memory_label'),
-    value: copy('native_build_builder_infra_spec_memory_value'),
-  },
-  {
-    label: copy('native_build_builder_infra_spec_os_label'),
-    value: copy('native_build_builder_infra_spec_os_value'),
-  },
-]
-
-const securityFeatures = [
-  {
-    title: copy('native_build_builder_security_credentials_title'),
-    text: copy('native_build_builder_security_credentials_text'),
-  },
-  {
-    title: copy('native_build_builder_security_upload_title'),
-    text: copy('native_build_builder_security_upload_text'),
-  },
-  {
-    title: copy('native_build_builder_security_ephemeral_title'),
-    text: copy('native_build_builder_security_ephemeral_text'),
-  },
-  {
-    title: copy('native_build_builder_security_logs_title'),
-    text: copy('native_build_builder_security_logs_text'),
-  },
-]
-
-const buyerChecks = [
-  {
-    title: copy('native_build_builder_buyer_check_ci_owner_title'),
-    text: copy('native_build_builder_buyer_check_ci_owner_text'),
-  },
-  {
-    title: copy('native_build_builder_buyer_check_existing_ci_title'),
-    text: copy('native_build_builder_buyer_check_existing_ci_text'),
-  },
-  {
-    title: copy('native_build_builder_buyer_check_agencies_title'),
-    text: copy('native_build_builder_buyer_check_agencies_text'),
-  },
-]
-
-const comparisons = [
-  {
-    feature: copy('native_build_builder_compare_setup_feature'),
-    capgo: copy('native_build_builder_compare_setup_capgo'),
-    local: copy('native_build_builder_compare_setup_local'),
-    ci: copy('native_build_builder_compare_setup_ci'),
-  },
-  {
-    feature: copy('native_build_builder_compare_ios_feature'),
-    capgo: copy('native_build_builder_compare_ios_capgo'),
-    local: copy('native_build_builder_compare_ios_local'),
-    ci: copy('native_build_builder_compare_ios_ci'),
-  },
-  {
-    feature: copy('native_build_builder_compare_credentials_feature'),
-    capgo: copy('native_build_builder_compare_credentials_capgo'),
-    local: copy('native_build_builder_compare_credentials_local'),
-    ci: copy('native_build_builder_compare_credentials_ci'),
-  },
-  {
-    feature: copy('native_build_builder_compare_delivery_feature'),
-    capgo: copy('native_build_builder_compare_delivery_capgo'),
-    local: copy('native_build_builder_compare_delivery_local'),
-    ci: copy('native_build_builder_compare_delivery_ci'),
-  },
-  {
-    feature: copy('native_build_builder_compare_fit_feature'),
-    capgo: copy('native_build_builder_compare_fit_capgo'),
-    local: copy('native_build_builder_compare_fit_local'),
-    ci: copy('native_build_builder_compare_fit_ci'),
+    label: copy('native_build_v2_comp_ai_l'),
+    hook: copy('native_build_v2_comp_ai_capgo_hook'),
+    capgo: copy('native_build_v2_comp_ai_capgo'),
+    diy: copy('native_build_v2_comp_ai_diy'),
+    capa: copy('native_build_v2_comp_ai_capa'),
   },
 ]
 
 const faqs = [
-  {
-    question: copy('native_build_builder_faq_live_updates_q'),
-    answer: copy('native_build_builder_faq_live_updates_a'),
-  },
-  {
-    question: copy('native_build_builder_faq_repo_q'),
-    answer: copy('native_build_builder_faq_repo_a'),
-  },
-  {
-    question: copy('native_build_builder_faq_signing_q'),
-    answer: copy('native_build_builder_faq_signing_a'),
-  },
-  {
-    question: copy('native_build_builder_faq_pricing_q'),
-    answer: copy('native_build_builder_faq_pricing_a'),
-  },
-  {
-    question: copy('native_build_builder_faq_platforms_q'),
-    answer: copy('native_build_builder_faq_platforms_a'),
-  },
+  { q: copy('native_build_v2_faq_q1'), a: copy('native_build_v2_faq_a1') },
+  { q: copy('native_build_v2_faq_q2'), a: copy('native_build_v2_faq_a2') },
+  { q: copy('native_build_v2_faq_q3'), a: copy('native_build_v2_faq_a3') },
+  { q: copy('native_build_v2_faq_q4'), a: copy('native_build_v2_faq_a4') },
+  { q: copy('native_build_v2_faq_q5'), a: copy('native_build_v2_faq_a5') },
+  { q: copy('native_build_v2_faq_q6'), a: copy('native_build_v2_faq_a6') },
 ]
 
 function annualMonthlyPrice(plan: Plan) {
@@ -264,63 +195,46 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
 
   return copy('native_build_builder_build_minutes', { count: buildTimeMinutes, suffix })
 }
-
-function compactNumber(value: number) {
-  if (value >= 1000) return `${formatNumber(value / 1000).replace(/\.0$/, '')}k`
-  return formatNumber(value)
-}
-
-function creditStepLabel(credit: Credit, index: number, total: number) {
-  const normalizedMin = credit.step_min / credit.unit_factor
-  const normalizedMax = credit.step_max / credit.unit_factor
-
-  if (index === 0) return copy('native_build_builder_credit_first', { count: compactNumber(normalizedMax) })
-  if (index === total - 1) return copy('native_build_builder_credit_over', { count: compactNumber(normalizedMin) })
-
-  return copy('native_build_builder_credit_next', { count: compactNumber(normalizedMax - normalizedMin) })
-}
-
-function creditPrice(credit: Credit) {
-  return copy('native_build_builder_credit_price', { price: `$${parseFloat(credit.price_per_unit.toFixed(4))}` })
-}
 ---
 
 <Layout content={content}>
-  <main class="bg-[#070d18] text-white">
-    <section class="relative overflow-hidden border-b border-white/10">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,197,94,0.18),transparent_34%),linear-gradient(180deg,rgba(8,18,34,0.4),rgba(7,13,24,1))]"></div>
-      <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-        <div class="mx-auto max-w-3xl text-center">
-          <p class="inline-flex items-center rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-2 text-xs font-semibold text-amber-100 uppercase">
-            {copy('native_build_builder_badge')}
-          </p>
-          <h1 class="mt-6 text-5xl leading-tight font-black text-white sm:text-6xl lg:text-7xl">{builderTitle}</h1>
-          <p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
-            {copy('native_build_builder_hero_subtitle')}
-          </p>
-          <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={getRelativeLocaleUrl(locale, 'register')}
-              class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/40 transition hover:bg-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
-            >
-              {copy('native_build_builder_start_trial')}
-            </a>
-            <a
-              href={getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/getting-started')}
-              class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold text-white transition hover:border-white/30 hover:bg-white/10 focus:ring-2 focus:ring-white/30 focus:outline-none"
-            >
-              {copy('native_build_builder_view_docs')}
-            </a>
-          </div>
-          <p class="mt-4 text-xs text-slate-400">{copy('native_build_builder_no_credit_card_trial')}</p>
+  <div class="nb bg-ad">
+    <!-- ============================================ HERO ============================================ -->
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          {copy('native_build_v2_hero_badge')}
+        </div>
+        <h1 class="hero-banner" aria-label="Capgo Builder">
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">Capgo Builder</span>
+            <span class="hbv-u-rule"></span>
+          </span>
+          <span class="hero-banner-tag">{copy('native_build_v2_hero_tagline')}</span>
+        </h1>
+        <p class="lead hero-lead">{copy('native_build_v2_hero_lead')}</p>
+        <div class="hero-ctas">
+          <a class="btn btn-lg btn-primary" href={registerUrl}>{copy('native_build_builder_start_trial')}</a>
+          <a class="btn btn-lg btn-ghost" href="#how">{copy('native_build_v2_hero_secondary')} ↓</a>
+        </div>
+        <div class="hero-meta">
+          {
+            heroMeta.map((item) => (
+              <span>
+                <span class="check">✓</span>
+                {item}
+              </span>
+            ))
+          }
         </div>
 
-        <div class="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="hero-strip" aria-hidden="true">
           {
-            heroStats.map((item) => (
-              <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4 text-center">
-                <p class="text-sm font-bold text-white">{item.value}</p>
-                <p class="mt-1 text-xs text-slate-400">{item.label}</p>
+            heroStrip.map((cell) => (
+              <div class="hero-strip-cell">
+                <div class="k">{cell.k}</div>
+                <div class="v">{cell.v}</div>
               </div>
             ))
           }
@@ -328,360 +242,476 @@ function creditPrice(credit: Credit) {
       </div>
     </section>
 
-    <section class="border-b border-white/10 bg-[#050911] py-16 sm:py-20">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div>
-            <p class="text-xs font-bold tracking-[0.24em] text-cyan-300 uppercase">{copy('native_build_builder_buyer_guide_eyebrow')}</p>
-            <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_buyer_guide_title')}</h2>
-            <p class="mt-4 text-base leading-7 text-slate-300">
-              {copy('native_build_builder_buyer_guide_text')}
-            </p>
+    <!-- ============================================ REVEAL + DEMO ============================================ -->
+    <section class="section bg-grid grain" id="how">
+      <div class="shell">
+        <div class="rv-one">
+          <div class="rv-one-mark">Capgo Builder</div>
+          <p class="rv-one-line">{copy('native_build_v2_reveal_line')}</p>
+        </div>
+
+        <div class="demo-wrap">
+          <div class="terminal-frame">
+            <div class="terminal-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="title" id="demo-term-title">capgo build request --platform ios</span>
+              <div class="demo-tabs">
+                <button id="demo-tab-ios" class="demo-tab active" type="button">iOS</button>
+                <button id="demo-tab-android" class="demo-tab" type="button">Android</button>
+              </div>
+            </div>
+            <div class="terminal-body" id="demo-term-body" aria-live="polite"></div>
           </div>
-          <div class="grid gap-4 md:grid-cols-3">
-            {
-              buyerChecks.map((item) => (
-                <article class="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-                  <h3 class="text-base font-bold text-white">{item.title}</h3>
-                  <p class="mt-3 text-sm leading-6 text-slate-400">{item.text}</p>
-                </article>
-              ))
-            }
+          <div class="demo-controls">
+            <span>{copy('native_build_v2_demo_hint')}</span>
+            <button class="demo-replay" id="demo-replay" type="button">⟲ {copy('native_build_v2_demo_replay')}</button>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-3xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-emerald-300 uppercase">{copy('native_build_builder_one_command_eyebrow')}</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_one_command_title')}</h2>
-          <p class="mt-4 text-base leading-7 text-slate-300">
-            {copy('native_build_builder_one_command_text')}
-          </p>
+    <!-- ============================================ BENTO ============================================ -->
+    <section class="section" id="features">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow">{copy('native_build_v2_bento_eyebrow')}</div>
+          <h2 class="h2-section">{copy('native_build_v2_bento_title')}</h2>
+          <p class="lead">{copy('native_build_v2_bento_lead')}</p>
         </div>
 
-        <div class="mx-auto mt-12 max-w-4xl overflow-hidden rounded-lg border border-white/10 bg-[#050911] shadow-2xl shadow-blue-950/30">
-          <div class="flex items-center justify-between border-b border-white/10 bg-black/30 px-4 py-3">
-            <div class="flex items-center gap-2">
-              <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+        <div class="bento" id="bento">
+          <div class="tile tile-hero" data-accent="green" aria-label="Capgo Builder">
+            <div>
+              <div class="ttl">
+                <span class="name">Capgo Builder</span><br />
+                <span class="tile-hero-sub-ttl">{copy('native_build_v2_tile_hero_title')}</span>
+              </div>
+              <div class="sub">{copy('native_build_v2_tile_hero_sub')}</div>
             </div>
-            <div class="text-xs text-slate-500">{copy('native_build_builder_terminal_file')}</div>
-          </div>
-          <div class="terminal-animation overflow-x-auto p-5 font-mono text-sm leading-7 text-slate-300 sm:p-8" aria-label={copy('native_build_builder_terminal_aria')}>
-            <div class="terminal-line text-slate-500" style="--delay: 0ms">{copy('native_build_builder_terminal_comment')}</div>
-            <div class="terminal-line min-w-max" style="--delay: 450ms">
-              <span class="text-emerald-300">bunx</span> @capgo/cli build <span class="text-cyan-300">com.example.app</span> \
-            </div>
-            <div class="terminal-line pl-4 text-sky-300" style="--delay: 900ms">--platform <span class="text-slate-300">ios</span> \</div>
-            <div class="terminal-line pl-4 text-sky-300" style="--delay: 1350ms">--build-mode <span class="text-slate-300">release</span> \</div>
-            <div class="terminal-line pl-4 text-sky-300" style="--delay: 1800ms">--submit</div>
-            <div class="terminal-line h-4" style="--delay: 2250ms"></div>
-            <div class="terminal-line" style="--delay: 2700ms"><span class="text-emerald-300">ok</span> {copy('native_build_builder_terminal_create')}</div>
-            <div class="terminal-line" style="--delay: 3300ms"><span class="text-emerald-300">ok</span> {copy('native_build_builder_terminal_upload')}</div>
-            <div class="terminal-line" style="--delay: 3900ms"><span class="text-amber-300">run</span> {copy('native_build_builder_terminal_install')}</div>
-            <div class="terminal-line" style="--delay: 4500ms"><span class="text-amber-300">run</span> {copy('native_build_builder_terminal_build')}</div>
-            <div class="terminal-line" style="--delay: 5100ms"><span class="text-amber-300">run</span> {copy('native_build_builder_terminal_sign')}</div>
-            <div class="terminal-line" style="--delay: 5700ms"><span class="text-emerald-300">ok</span> {copy('native_build_builder_terminal_succeeded')}</div>
-            <div class="terminal-line" style="--delay: 6300ms">
-              <span class="text-emerald-300">ok</span>
-              {copy('native_build_builder_terminal_submitted')}<span class="terminal-cursor ml-1"></span>
-            </div>
-            <div class="mt-6 h-1 overflow-hidden rounded-full bg-white/10" aria-hidden="true">
-              <div class="terminal-progress h-full rounded-full bg-linear-to-r from-emerald-300 via-cyan-300 to-blue-400"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="border-b border-white/10 py-20 sm:py-24">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
-            <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_infra_eyebrow')}</p>
-            <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_infra_title')}</h2>
-            <p class="mt-4 text-base leading-7 text-slate-300">
-              {copy('native_build_builder_infra_text')}
-            </p>
+            <pre class="ascii">$ capgo build request --platform ios      ✔ 2m 41s
+$ capgo build request --platform android  ✔ 1m 22s</pre>
           </div>
 
-          <div class="rounded-lg border border-white/10 bg-white/[0.04] p-5 shadow-2xl shadow-blue-950/20 sm:p-6">
-            <dl class="grid gap-3 sm:grid-cols-2">
-              {
-                infrastructureSpecs.map((spec) => (
-                  <div class="rounded-lg border border-white/10 bg-[#050911] p-4">
-                    <dt class="text-xs font-bold tracking-wide text-slate-500 uppercase">{spec.label}</dt>
-                    <dd class="mt-2 text-sm leading-6 font-semibold text-white">{spec.value}</dd>
-                  </div>
-                ))
-              }
-            </dl>
-            <p class="mt-5 rounded-lg border border-emerald-300/20 bg-emerald-300/10 p-4 text-sm leading-6 text-emerald-100">
-              {copy('native_build_builder_infra_toolchain')}
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="border-b border-white/10 py-20 sm:py-24">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_features_eyebrow')}</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_features_title')}</h2>
-          <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_features_text')}</p>
-        </div>
-
-        <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {
-            builderFeatures.map((feature) => (
-              <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/20 hover:bg-white/[0.06]">
-                <div class:list={['mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-current/30 bg-current/10', feature.accent]}>
-                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </div>
-                <h3 class="text-lg font-bold text-white">{feature.title}</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-400">{feature.text}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <p class="text-xs font-bold tracking-[0.24em] text-emerald-300 uppercase">{copy('native_build_builder_setup_eyebrow')}</p>
-            <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">
-              {copy('native_build_builder_setup_title_prefix')}
-              <span class="text-emerald-300 italic">{copy('native_build_builder_setup_title_time')}</span>.
-            </h2>
-            <p class="mt-4 text-base leading-7 text-slate-300">
-              {copy('native_build_builder_setup_text')}
-            </p>
-            <div class="mt-7 rounded-lg border border-emerald-300/20 bg-emerald-300/10 px-4 py-3 font-mono text-sm text-emerald-100">
-              bunx @capgo/cli build com.example.app --platform android
+          <div class="tile" data-expandable data-accent="cyan">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8l4 4-4 4"/><path d="M13 16h5"/></svg></span>
+            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_cli_title')}</span></h3>
+            <p class="sub">{copy('native_build_v2_tile_cli_sub')}</p>
+            <div class="more">
+              <code class="mono">capgo build request --platform ios</code> archives, signs and uploads to TestFlight. <code class="mono">--platform android</code> assembles, signs with your
+              keystore and uploads to Play. One CLI, identical UX.
             </div>
           </div>
 
-          <div class="rounded-lg border border-white/10 bg-[#050911] p-5">
-            <ol class="space-y-4">
-              {
-                setupSteps.map((step, index) => (
-                  <li class="flex gap-4">
-                    <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm font-bold text-emerald-300">
-                      {index + 1}
-                    </span>
-                    <p class="pt-1 text-sm leading-6 text-slate-300">{step}</p>
-                  </li>
-                ))
-              }
-            </ol>
+          <div class="tile" data-expandable data-accent="yellow">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 7V4M14 7V4M10 20v-3M14 20v-3M7 10H4M7 14H4M20 10h-3M20 14h-3"/></svg></span>
+            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_hw_title')}</span></h3>
+            <p class="sub">{copy('native_build_v2_tile_hw_sub')}</p>
+            <div class="more">
+              iOS jobs run on M-series Mac runners — fast Xcode + Fastlane. Android jobs run on Linux Docker — fast Gradle, roughly half the cost of iOS, no Mac required. You don't
+              pick the runner; we do, by platform flag.
+            </div>
+          </div>
+
+          <div class="tile" data-expandable data-accent="green">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_sec_title')}</span></h3>
+            <p class="sub">{copy('native_build_v2_tile_sec_sub')}</p>
+            <div class="more">
+              Credentials live locally at <code class="mono">~/.capgo-credentials/credentials.json</code>, are sent only to ephemeral build envs over HTTPS, and are wiped the instant
+              the build ends. Logs stream straight to your terminal — never written to Capgo disk.
+            </div>
+          </div>
+
+          <div class="tile" data-expandable data-accent="purple">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5"/><path d="M8 9l4-4 4 4"/><path d="M5 19h14"/></svg></span>
+            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_asc_title')}</span></h3>
+            <p class="sub">{copy('native_build_v2_tile_asc_sub')}</p>
+            <div class="more">
+              Default <code class="mono">app_store</code> distribution uploads straight to App Store Connect / TestFlight via Fastlane; Android bundles go to the Play Console. Pick
+              <code class="mono">ad_hoc</code> for internal-only iOS builds — skips ASC validation.
+            </div>
+          </div>
+
+          <div class="tile" data-expandable data-accent="orange">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h3l2.5-7 5 14 2.5-7H21"/></svg></span>
+            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_logs_title')}</span></h3>
+            <p class="sub">{copy('native_build_v2_tile_logs_sub')}</p>
+            <div class="more">
+              Logs stream over WebSocket with heartbeat + ack. A <code class="mono">qr_download_link</code> message renders a scannable QR + URL for APK / IPA downloads right in your
+              terminal.
+            </div>
+          </div>
+
+          <div class="tile" data-expandable data-accent="pink">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></span>
+            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_flavors_title')}</span></h3>
+            <p class="sub">{copy('native_build_v2_tile_flavors_sub')}</p>
+            <div class="more">
+              <code class="mono">--android-flavor production</code> for any flavor your <code class="mono">build.gradle</code> declares. We auto-detect Cordova plugins from
+              <code class="mono">capacitor-cordova-android-plugins/build.gradle</code> — no manual config. Keystore + Play service-account JSON passed by flag.
+            </div>
+          </div>
+
+          <div class="tile" data-expandable data-accent="sky">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="14" r="7"/><path d="M12 14V10"/><path d="M9.5 3h5"/><path d="M18.5 8l1.4-1.4"/></svg></span>
+            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_setup_title')}</span></h3>
+            <p class="sub">{copy('native_build_v2_tile_setup_sub')}</p>
+            <div class="more">
+              <code class="mono">npx @capgo/cli@latest build init --platform ios|android</code> launches a wizard. iOS: drop a <code class="mono">.p8</code> → CSR, certificate, P12, bundle
+              ID, provisioning profiles, all auto. Android: one OAuth click → Play Console project, service account, keystore, all auto. Resumable, Ctrl-C-safe, runs the same in CI.
+            </div>
+          </div>
+
+          <div class="tile" data-expandable data-accent="violet">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8"/><path d="M20 4v4h-4"/><path d="M20 12a8 8 0 0 1-13.7 5.6L4 16"/><path d="M4 20v-4h4"/></svg></span>
+            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_ci_title')}</span></h3>
+            <p class="sub">{copy('native_build_v2_tile_ci_sub')}</p>
+            <div class="more">
+              Single command, environment-variable-driven. No TTY, no prompts. Drop it into your existing pipeline and the same wizard-generated credentials work non-interactively.
+            </div>
           </div>
         </div>
+
+        <p class="bento-hint">{copy('native_build_v2_bento_hint')}</p>
       </div>
     </section>
 
-    <section class="border-b border-white/10 py-20 sm:py-24">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_security_eyebrow')}</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_security_title')}</h2>
-          <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_security_text')}</p>
+    <!-- ============================================ ONBOARDING WIZARD ============================================ -->
+    <section class="section bg-grid grain" id="onboarding">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--green">{copy('native_build_v2_wiz_eyebrow')}</div>
+          <h2 class="h2-section">
+            {copy('native_build_v2_wiz_title_prefix')}<span class="accent-green">{copy('native_build_v2_wiz_title_time')}.</span>
+          </h2>
+          <p class="lead">{copy('native_build_v2_wiz_lead')}</p>
+          <div class="onboarding-cmd-row">
+            <code class="onboarding-cmd"
+              ><span class="ocm-prompt">$</span> npx <span class="ocm-pkg">@capgo/cli@latest</span> build init <span class="ocm-flag">--platform</span> <span class="ocm-val" id="ocm-platform"
+                >ios</span
+              ></code
+            >
+            <div class="onboarding-platform-toggle" role="tablist" aria-label="Platform">
+              <button class="opt active" data-platform="ios" type="button" role="tab" aria-selected="true">iOS</button>
+              <button class="opt" data-platform="android" type="button" role="tab" aria-selected="false">Android</button>
+            </div>
+          </div>
         </div>
 
-        <div class="mt-12 grid gap-4 md:grid-cols-2">
-          {
-            securityFeatures.map((feature) => (
-              <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
-                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-emerald-300/30 bg-emerald-300/10 text-emerald-300">
-                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M6 11h12v9H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                  </svg>
-                </div>
-                <h3 class="text-lg font-bold text-white">{feature.title}</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-400">{feature.text}</p>
-              </article>
-            ))
-          }
+        <div class="wizard" id="wizard" data-platform="ios">
+          <div class="wizard-steps" role="tablist">
+            <button class="wizard-step active" data-platform="ios" type="button"
+              ><span class="num">1</span><span><span class="lbl">{copy('native_build_v2_wiz_ios_s1_l')}</span><span class="dsc">{copy('native_build_v2_wiz_ios_s1_d')}</span></span></button
+            >
+            <button class="wizard-step" data-platform="ios" type="button"
+              ><span class="num">2</span><span><span class="lbl">{copy('native_build_v2_wiz_ios_s2_l')}</span><span class="dsc">{copy('native_build_v2_wiz_ios_s2_d')}</span></span></button
+            >
+            <button class="wizard-step" data-platform="ios" type="button"
+              ><span class="num">3</span><span><span class="lbl">{copy('native_build_v2_wiz_ios_s3_l')}</span><span class="dsc">{copy('native_build_v2_wiz_ios_s3_d')}</span></span></button
+            >
+            <button class="wizard-step" data-platform="ios" type="button"
+              ><span class="num">4</span><span><span class="lbl">{copy('native_build_v2_wiz_ios_s4_l')}</span><span class="dsc">{copy('native_build_v2_wiz_ios_s4_d')}</span></span></button
+            >
+            <button class="wizard-step active" data-platform="android" type="button" hidden
+              ><span class="num">1</span><span><span class="lbl">{copy('native_build_v2_wiz_and_s1_l')}</span><span class="dsc">{copy('native_build_v2_wiz_and_s1_d')}</span></span></button
+            >
+            <button class="wizard-step" data-platform="android" type="button" hidden
+              ><span class="num">2</span><span><span class="lbl">{copy('native_build_v2_wiz_and_s2_l')}</span><span class="dsc">{copy('native_build_v2_wiz_and_s2_d')}</span></span></button
+            >
+            <button class="wizard-step" data-platform="android" type="button" hidden
+              ><span class="num">3</span><span><span class="lbl">{copy('native_build_v2_wiz_and_s3_l')}</span><span class="dsc">{copy('native_build_v2_wiz_and_s3_d')}</span></span></button
+            >
+            <button class="wizard-step" data-platform="android" type="button" hidden
+              ><span class="num">4</span><span><span class="lbl">{copy('native_build_v2_wiz_and_s4_l')}</span><span class="dsc">{copy('native_build_v2_wiz_and_s4_d')}</span></span></button
+            >
+          </div>
+          <div class="wizard-stage" id="wizard-stage"></div>
+        </div>
+
+        <div class="wizard-before-after">
+          <span class="ba b" id="ba-before">{copy('native_build_v2_wiz_ios_before')}</span>
+          <span class="ba-arrow">→</span>
+          <span class="ba a" id="ba-after">{copy('native_build_v2_wiz_ios_after')}</span>
         </div>
       </div>
     </section>
 
-    <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_comparison_eyebrow')}</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_comparison_title')}</h2>
-          <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_comparison_text')}</p>
+    <!-- ============================================ TRUST ============================================ -->
+    <section class="section bg-grid grain" id="trust">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow">{copy('native_build_v2_trust_eyebrow')}</div>
+          <h2 class="h2-section">{copy('native_build_v2_trust_title')}</h2>
+          <p class="lead">{copy('native_build_v2_trust_lead')}</p>
         </div>
 
-        <div class="mt-12 space-y-4 lg:hidden">
-          {
-            comparisons.map((row) => (
-              <article class="rounded-lg border border-white/10 bg-[#050911] p-5">
-                <h3 class="text-sm font-black text-white">{row.feature}</h3>
-                <dl class="mt-4 space-y-4 text-sm">
-                  <div>
-                    <dt class="text-xs font-bold tracking-wide text-emerald-200 uppercase">{builderTitle}</dt>
-                    <dd class="mt-1 leading-6 text-emerald-100">{row.capgo}</dd>
-                  </div>
-                  <div>
-                    <dt class="text-xs font-bold tracking-wide text-slate-500 uppercase">{copy('native_build_builder_comparison_local_header')}</dt>
-                    <dd class="mt-1 leading-6 text-slate-400">{row.local}</dd>
-                  </div>
-                  <div>
-                    <dt class="text-xs font-bold tracking-wide text-slate-500 uppercase">{copy('native_build_builder_comparison_ci_header')}</dt>
-                    <dd class="mt-1 leading-6 text-slate-400">{row.ci}</dd>
-                  </div>
-                </dl>
-              </article>
-            ))
-          }
+        <div class="trust-grid" id="trust-grid">
+          <div class="trust-cell" data-trust="storage">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="13" width="20" height="14" rx="2"></rect>
+                <path d="M10 13V9a6 6 0 0 1 12 0v4"></path>
+                <circle cx="16" cy="20" r="1.5" fill="currentColor"></circle>
+                <path d="M16 21.5v2.5"></path>
+              </svg>
+            </div>
+            <div class="lbl">{copy('native_build_v2_trust_stor_lbl')}</div>
+            <h3>{copy('native_build_v2_trust_stor_h')}</h3>
+            <p>{copy('native_build_v2_trust_stor_p')}</p>
+            <div class="trust-status" aria-hidden="true">
+              <span class="trust-dot trust-dot--ok"></span>
+              <span>{copy('native_build_v2_trust_stor_s')}</span>
+            </div>
+          </div>
+
+          <div class="trust-cell" data-trust="transit">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 24c0-7 5-12 12-12s12 5 12 12"></path>
+                <path d="M9 24c0-4 3-7 7-7s7 3 7 7"></path>
+                <circle cx="16" cy="24" r="1.5" fill="currentColor"></circle>
+              </svg>
+            </div>
+            <div class="lbl">{copy('native_build_v2_trust_trans_lbl')}</div>
+            <h3>{copy('native_build_v2_trust_trans_h')}</h3>
+            <p>{copy('native_build_v2_trust_trans_p')}</p>
+            <div class="trust-status" aria-hidden="true">
+              <span class="trust-pulse"></span>
+              <span>{copy('native_build_v2_trust_trans_s')}</span>
+            </div>
+          </div>
+
+          <div class="trust-cell" data-trust="logs">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 16c3-5 7-7 12-7s9 2 12 7c-3 5-7 7-12 7s-9-2-12-7z"></path>
+                <circle cx="16" cy="16" r="3"></circle>
+                <path d="M6 6l20 20" stroke-width="2"></path>
+              </svg>
+            </div>
+            <div class="lbl">{copy('native_build_v2_trust_logs_lbl')}</div>
+            <h3>{copy('native_build_v2_trust_logs_h')}</h3>
+            <p>{copy('native_build_v2_trust_logs_p')}</p>
+            <div class="trust-status trust-status--stream" aria-hidden="true">
+              <span class="trust-stream"><span></span><span></span><span></span><span></span></span>
+              <span>{copy('native_build_v2_trust_logs_s')}</span>
+            </div>
+          </div>
+
+          <div class="trust-cell" data-trust="isolation">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4l10 5v9c0 6-4 9-10 10-6-1-10-4-10-10V9l10-5z"></path>
+                <path d="M12 16l3 3 6-6"></path>
+              </svg>
+            </div>
+            <div class="lbl">{copy('native_build_v2_trust_iso_lbl')}</div>
+            <h3>{copy('native_build_v2_trust_iso_h')}</h3>
+            <p>{copy('native_build_v2_trust_iso_p')}</p>
+            <div class="trust-status" aria-hidden="true">
+              <span class="trust-decay"></span>
+              <span>{copy('native_build_v2_trust_iso_s')}</span>
+            </div>
+          </div>
         </div>
 
-        <div class="mt-12 hidden overflow-x-auto rounded-lg border border-white/10 lg:block">
-          <table class="min-w-[860px] divide-y divide-white/10 bg-[#050911] text-left text-sm">
-            <thead class="bg-white/[0.04] text-xs tracking-wide text-slate-400 uppercase">
+      </div>
+    </section>
+
+    <!-- ============================================ COMPARISON ============================================ -->
+    <section class="section" id="compare">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow">{copy('native_build_v2_comp_eyebrow')}</div>
+          <h2 class="h2-section">{copy('native_build_v2_comp_title')}</h2>
+          <p class="lead">{copy('native_build_v2_comp_lead')}</p>
+        </div>
+
+        <div class="comp-wrap">
+          <table class="comp comp-prose">
+            <thead>
               <tr>
-                <th class="px-5 py-4 font-bold">{copy('native_build_builder_comparison_workflow_header')}</th>
-                <th class="px-5 py-4 font-bold text-emerald-200">{builderTitle}</th>
-                <th class="px-5 py-4 font-bold">{copy('native_build_builder_comparison_local_header')}</th>
-                <th class="px-5 py-4 font-bold">{copy('native_build_builder_comparison_ci_header')}</th>
+                <th></th>
+                <th class="us">Capgo Builder</th>
+                <th>
+                  {copy('native_build_v2_comp_h_diy')}
+                  <span class="th-sub">{copy('native_build_v2_comp_h_diy_sub')}</span>
+                </th>
+                <th>{copy('native_build_v2_comp_h_capa')}</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-white/10">
+            <tbody>
               {
-                comparisons.map((row) => (
+                comparisonRows.map((row) => (
                   <tr>
-                    <th class="w-40 px-5 py-5 align-top font-bold text-white">{row.feature}</th>
-                    <td class="px-5 py-5 align-top text-emerald-100">{row.capgo}</td>
-                    <td class="px-5 py-5 align-top text-slate-400">{row.local}</td>
-                    <td class="px-5 py-5 align-top text-slate-400">{row.ci}</td>
+                    <td class="label">{row.label}</td>
+                    <td class="us">
+                      <span class="hook">{row.hook}</span> {row.capgo}
+                    </td>
+                    <td>{row.diy}</td>
+                    <td>{row.capa}</td>
                   </tr>
                 ))
               }
             </tbody>
           </table>
         </div>
+
+        <aside class="comp-callout" role="note">
+          <p>{copy('native_build_v2_comp_callout')}</p>
+        </aside>
+
+        <p class="comp-footnote">{copy('native_build_v2_comp_footnote')}</p>
       </div>
     </section>
 
+    <!-- ============================================ AI DEBUG ============================================ -->
+    <section class="section" id="ai-debug">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--green">{copy('native_build_v2_aidebug_eyebrow')}</div>
+          <h2 class="h2-section">{copy('native_build_v2_aidebug_title')}</h2>
+          <p class="lead">{copy('native_build_v2_aidebug_lead')}</p>
+        </div>
+
+        <div class="aidebug-grid">
+          <div class="aidebug-termcol">
+          <div class="terminal-frame aidebug-term">
+            <div class="terminal-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="title">capgo build request --platform ios</span>
+            </div>
+            <div class="terminal-body aidebug-body" aria-label="Example of an AI-assisted build failure diagnosis">
+              <span class="row"><span class="pain-prompt">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span></span>
+              <span class="row"><span class="dim">[CapApp]</span> Creating App.xcarchive</span>
+              <span class="row"><span class="err">✖ Archive failed — Command CodeSign failed with a nonzero exit code</span></span>
+              <span class="row"><span class="err">&nbsp;&nbsp;error: No profile matching 'com.acme.app' found for team ABC123</span></span>
+              <span class="row ai-head"><span class="kw">?</span> Choose AI analysis <span class="ghost">— optional</span></span>
+              <span class="row" data-menu-selected><span class="ok">✔</span> <span class="val">Capgo AI</span></span>
+              <span class="row menu-extra"><span class="dim">&nbsp;&nbsp;Local AI · write the prompt to a file</span></span>
+              <span class="row menu-extra" data-collapse><span class="dim">&nbsp;&nbsp;Skip</span></span>
+              <span class="row ai-head" data-ai-spin><span class="ok">✔</span> <span class="ghost">Capgo AI finished</span></span>
+              <span class="row"><span class="ok">◆ Likely cause</span></span>
+              <span class="row"><span class="ghost">Your App Store provisioning profile doesn't include the bundle ID com.acme.app.</span></span>
+              <span class="row ai-head"><span class="ok">◆ Fix</span></span>
+              <span class="row"><span class="ghost">Regenerate the profile for that bundle ID, or run </span><span class="cmd">capgo build init --platform ios</span></span>
+              <span class="row"><span class="ghost">to recreate certificate + profile automatically, then re-run the build.</span></span>
+            </div>
+          </div>
+            <div class="demo-controls aidebug-controls">
+              <span>Optional — only runs if you choose Capgo AI</span>
+              <button class="demo-replay" id="aidebug-replay" type="button">⟲ Replay</button>
+            </div>
+          </div>
+
+          <ul class="aidebug-points">
+            <li>
+              <h3>{copy('native_build_v2_aidebug_p1_t')}</h3>
+              <p>{copy('native_build_v2_aidebug_p1_d')}</p>
+            </li>
+            <li>
+              <h3>{copy('native_build_v2_aidebug_p2_t')}</h3>
+              <p>{copy('native_build_v2_aidebug_p2_d')}</p>
+            </li>
+            <li>
+              <h3>{copy('native_build_v2_aidebug_p3_t')}</h3>
+              <p>{copy('native_build_v2_aidebug_p3_d')}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ PRICING (live plans) ============================================ -->
     {
       plans.length > 0 && (
-        <section class="border-b border-white/10 py-20 sm:py-24">
-          <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center">
-              <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_pricing_eyebrow')}</p>
-              <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_pricing_title')}</h2>
-              <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_pricing_text')}</p>
+        <section class="section bg-grid grain" id="pricing">
+          <div class="shell">
+            <div class="section-head">
+              <div class="eyebrow">{copy('native_build_builder_pricing_eyebrow')}</div>
+              <h2 class="h2-section">{copy('native_build_builder_pricing_title')}</h2>
+              <p class="lead">{copy('native_build_builder_pricing_text')}</p>
             </div>
 
-            <div class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <div class="pricing-grid">
               {plans.map((plan) => (
-                <article
-                  class:list={[
-                    'flex rounded-lg border bg-white/[0.04] p-6',
-                    {
-                      'border-blue-400/70 shadow-lg shadow-blue-950/30': plan.name === 'Maker',
-                      'border-white/10': plan.name !== 'Maker',
-                    },
-                  ]}
-                >
-                  <div class="flex w-full flex-col">
-                    {plan.name === 'Maker' && <p class="mb-4 w-fit rounded-md bg-blue-500 px-3 py-1 text-xs font-bold text-white uppercase">{copy('most_popular')}</p>}
-                    <h3 class="text-lg font-black text-white uppercase">{plan.name}</h3>
-                    <p class="mt-2 min-h-10 text-sm leading-5 text-slate-400">{planDescription(plan)}</p>
-                    <div class="mt-6">
-                      <span class="text-4xl font-black text-white">{annualMonthlyPrice(plan)}</span>
-                      <span class="text-sm text-slate-400">/mo</span>
+                <div class:list={['tier', { pop: plan.name === 'Maker' }]}>
+                  <div>
+                    <div class="name">{plan.name === 'Maker' ? `${plan.name} · ${copy('most_popular')}` : plan.name}</div>
+                    <div class="price">
+                      {annualMonthlyPrice(plan)}
+                      <small> / mo</small>
                     </div>
-                    <p class="mt-2 text-xs text-slate-500">{yearlyBilling(plan)}</p>
-                    <p class="mt-1 text-xs text-slate-500">{monthlyPrice(plan)}</p>
-                    <a
-                      href={getRelativeLocaleUrl(locale, 'register')}
-                      class:list={[
-                        'mt-6 inline-flex min-h-10 items-center justify-center rounded-lg px-4 py-2 text-sm font-bold transition focus:ring-2 focus:outline-none',
-                        {
-                          'bg-blue-600 text-white hover:bg-blue-500 focus:ring-blue-300': plan.name === 'Maker',
-                          'border border-white/15 bg-white/5 text-white hover:bg-white/10 focus:ring-white/30': plan.name !== 'Maker',
-                        },
-                      ]}
-                    >
-                      {copy('native_build_builder_plan_trial')}
-                    </a>
-                    <ul class="mt-6 space-y-3 text-sm text-slate-300">
-                      <li class="flex gap-2">
-                        <span class="text-emerald-300">+</span>
-                        <span>{buildTimeDisplay(plan.build_time_unit, plan.name)}</span>
-                      </li>
-                      <li class="flex gap-2">
-                        <span class="text-emerald-300">+</span>
-                        <span>
-                          {formatNumber(plan.mau)} {copy('native_build_builder_monthly_active_users')}
-                        </span>
-                      </li>
-                      <li class="flex gap-2">
-                        <span class="text-emerald-300">+</span>
-                        <span>
-                          {formatNumber(plan.bandwidth)} {copy('native_build_builder_bandwidth_month')}
-                        </span>
-                      </li>
-                      <li class="flex gap-2">
-                        <span class="text-emerald-300">+</span>
-                        <span>
-                          {formatNumber(plan.storage)} {copy('native_build_builder_storage')}
-                        </span>
-                      </li>
-                    </ul>
                   </div>
-                </article>
+                  <p class="what">{planDescription(plan)}</p>
+                  <p class="tier-billing">{yearlyBilling(plan)}</p>
+                  <p class="tier-billing">{monthlyPrice(plan)}</p>
+                  <a class:list={['btn btn-md', plan.name === 'Maker' ? 'btn-primary' : 'btn-ghost']} href={registerUrl}>
+                    {copy('native_build_builder_plan_trial')}
+                  </a>
+                  <ul>
+                    <li>{buildTimeDisplay(plan.build_time_unit, plan.name)}</li>
+                    <li>{copy('native_build_v2_plan_ota')}</li>
+                  </ul>
+                </div>
               ))}
             </div>
 
-            {buildCredits.length > 0 && (
-              <div class="mt-6 rounded-lg border border-cyan-300/20 bg-cyan-300/10 p-4">
-                <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                  <p class="text-sm font-bold text-cyan-100">{copy('native_build_builder_extra_minutes')}</p>
-                  <div class="flex flex-wrap gap-2">
-                    {buildCredits.map((credit, index) => (
-                      <span class="rounded-md border border-cyan-200/20 bg-black/20 px-3 py-1 text-xs text-cyan-100">
-                        {creditStepLabel(credit, index, buildCredits.length)}: {creditPrice(credit)}
-                      </span>
-                    ))}
-                  </div>
+            <div class="build-calc" aria-label="Build minutes calculator" data-tiers={JSON.stringify(calcTiers)}>
+              <div class="build-calc-head">{copy('native_build_v2_calc_title')}</div>
+              <input class="build-calc-range" type="range" min="30" max="600" step="10" value="60" id="bc-range" aria-label={copy('native_build_v2_calc_minutes')} />
+              <div class="build-calc-readout"><span id="bc-min">60</span> {copy('native_build_v2_calc_minutes')}</div>
+              <div class="build-calc-results">
+                <div class="bc-res">
+                  <span class="bc-ico" aria-hidden="true"
+                    ><svg viewBox="0 0 24 24" fill="currentColor"
+                      ><path
+                        d="M16.36 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.74-1.78-3.33-1.8-1.42-.14-2.77.83-3.49.83-.72 0-1.83-.81-3-.79-1.55.02-2.98.9-3.78 2.29-1.61 2.8-.41 6.95 1.16 9.23.77 1.11 1.69 2.36 2.89 2.31 1.16-.05 1.6-.75 3-.75s1.79.75 3.01.72c1.24-.02 2.03-1.13 2.79-2.25.88-1.29 1.24-2.54 1.26-2.6-.03-.01-2.41-.92-2.43-3.66zM14.04 5.5c.64-.78 1.07-1.86.95-2.94-.92.04-2.04.61-2.7 1.39-.59.69-1.11 1.79-.97 2.85 1.03.08 2.08-.52 2.72-1.3z"
+                      /></svg
+                    ></span>
+                  <div><span class="bc-num" id="bc-ios">12</span><span class="bc-lbl">{copy('native_build_v2_calc_ios')}</span></div>
+                </div>
+                <div class="bc-res">
+                  <span class="bc-ico" aria-hidden="true"
+                    ><svg viewBox="0 0 24 24" fill="currentColor"
+                      ><path
+                        d="M17.6 9.48l1.84-3.18a.4.4 0 0 0-.69-.4l-1.86 3.23a11.43 11.43 0 0 0-8.78 0L6.25 5.9a.4.4 0 1 0-.69.4L7.4 9.48A10.78 10.78 0 0 0 2 18h20a10.78 10.78 0 0 0-5.4-8.52zM7 15.25a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm10 0a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"
+                      /></svg
+                    ></span>
+                  <div><span class="bc-num" id="bc-and">24</span><span class="bc-lbl">{copy('native_build_v2_calc_android')}</span></div>
                 </div>
               </div>
-            )}
+              {calcTiers.length > 0 && (
+                <div class="build-calc-price">
+                  ≈ <span id="bc-price">$10</span> {copy('native_build_v2_calc_price_label')}
+                </div>
+              )}
+              <p class="build-calc-note">{copy('native_build_v2_calc_note')}</p>
+            </div>
+
+            <p class="pricing-fineprint">{copy('native_build_v2_pricing_fine')} <a href={pricingUrl}>capgo.app/pricing</a>.</p>
           </div>
         </section>
       )
     }
 
-    <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
-      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_faq_eyebrow')}</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_faq_title')}</h2>
+    <!-- ============================================ FAQ ============================================ -->
+    <section class="section" id="faq">
+      <div class="shell">
+        <div class="section-head section-head--narrow">
+          <div class="eyebrow">{copy('native_build_builder_faq_eyebrow')}</div>
+          <h2 class="h2-section">{copy('native_build_builder_faq_title')}</h2>
         </div>
 
-        <div class="mt-10 divide-y divide-white/10 rounded-lg border border-white/10 bg-[#050911]">
+        <div class="faq">
           {
             faqs.map((item) => (
-              <details class="group p-5">
-                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-bold text-white">
-                  {item.question}
-                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-white/10 text-slate-400 transition group-open:rotate-45">+</span>
+              <details>
+                <summary>
+                  {item.q}
+                  <span class="plus">+</span>
                 </summary>
-                <p class="mt-4 max-w-3xl text-sm leading-6 text-slate-400">{item.answer}</p>
+                <div class="ans">{item.a}</div>
               </details>
             ))
           }
@@ -689,91 +719,2507 @@ function creditPrice(credit: Credit) {
       </div>
     </section>
 
-    <section class="py-20 sm:py-24">
-      <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        <p class="text-2xl font-black text-emerald-300">{builderTitle}</p>
-        <h2 class="mt-3 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_cta_title')}</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300">
-          {copy('native_build_builder_cta_text')}
-        </p>
-        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href={getRelativeLocaleUrl(locale, 'register')}
-            class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/40 transition hover:bg-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
-          >
-            {copy('native_build_builder_start_trial')}
-          </a>
-          <a
-            href={getRelativeLocaleUrl(locale, 'pricing')}
-            class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold text-white transition hover:border-white/30 hover:bg-white/10 focus:ring-2 focus:ring-white/30 focus:outline-none"
-          >
-            {copy('native_build_builder_view_pricing')}
-          </a>
+    <!-- ============================================ FINAL CTA ============================================ -->
+    <section class="section final bg-grid grain" id="cta">
+      <div class="shell">
+        <h2>
+          <span class="name">Capgo Builder</span><br />
+          {copy('native_build_v2_cta_title')}
+        </h2>
+        <p class="tagline">{copy('native_build_v2_cta_tagline')}</p>
+        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{copy('native_build_builder_start_trial')} →</a>
+        <div class="hero-meta hero-meta--cta">
+          <span><span class="check">✓</span> {copy('native_build_v2_cta_meta1')}</span>
+          <span><span class="check">✓</span> {copy('native_build_v2_cta_meta2')}</span>
+          <span><span class="check">✓</span> {copy('native_build_v2_cta_meta3')}</span>
         </div>
       </div>
     </section>
-  </main>
+  </div>
 
-  <style>
-    .terminal-line {
+  <style is:global>
+  /* ============================================================
+     CAPGO BUILDER — /native-build/ redesign
+     All rules scoped under .nb to avoid leaking into Header/Footer.
+     ============================================================ */
+  @font-face {
+    font-family: 'Airbnb Cereal';
+    src: url('/fonts/AirbnbCerealLight.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Airbnb Cereal';
+    src: url('/fonts/AirbnbCerealBook.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Airbnb Cereal';
+    src: url('/fonts/AirbnbCerealMedium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Airbnb Cereal';
+    src: url('/fonts/AirbnbCerealBold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Airbnb Cereal';
+    src: url('/fonts/AirbnbCerealExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Airbnb Cereal';
+    src: url('/fonts/AirbnbCerealBlack.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .nb {
+    /* ---- tokens ---- */
+    --bg-deep: #080e1a;
+    --bg-mid: #0d1525;
+    --bg-near: #1a2a4a;
+    --grid-line: rgba(96, 165, 250, 0.06);
+    --relief-green: #4ade80;
+    --relief-green-glow: rgba(74, 222, 128, 0.4);
+    --accent-cyan: #22d3ee;
+    --accent-yellow: #facc15;
+    --accent-green: #4ade80;
+    --accent-purple: #a78bfa;
+    --accent-orange: #fb923c;
+    --accent-pink: #f472b6;
+    --accent-sky: #38bdf8;
+    --accent-violet: #818cf8;
+    --terminal-bg: #0a0d14;
+    --terminal-fg: #c8d4e6;
+    --terminal-dim: #5a6a82;
+    --terminal-cmd: #93a4bd;
+    --terminal-flag: #93a4bd;
+    --terminal-val: #4ade80;
+    --terminal-kw: #60a5fa;
+    --terminal-err: #f87171;
+    --cap-blue-600: #2563eb;
+    --cap-blue-700: #1d4ed8;
+    --nb-font-display: 'Airbnb Cereal', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --nb-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+    position: relative;
+    color: #fff;
+    font-family: var(--nb-font-display);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  .nb *,
+  .nb *::before,
+  .nb *::after {
+    box-sizing: border-box;
+  }
+  .nb a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .nb button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .nb .mono {
+    font-family: var(--nb-font-mono);
+  }
+  .nb .accent-green {
+    color: var(--relief-green);
+  }
+
+  /* ---- page background ----
+     Painted on <body> so it spans continuously behind the transparent site
+     header AND the page content — no seam at the header/content boundary.
+     Base stays gray-900 (the site's body + footer colour) so the top and
+     bottom blend seamlessly into the rest of the site; only a soft blue halo
+     sits behind the hero for atmosphere. */
+  body:has(.nb) {
+    background-color: var(--color-gray-900);
+    background-image: radial-gradient(1200px 560px at 50% -40px, rgba(59, 130, 246, 0.16) 0%, rgba(59, 130, 246, 0.04) 45%, transparent 72%);
+    background-repeat: no-repeat;
+  }
+  .nb.bg-ad {
+    background: transparent;
+  }
+
+  /* On this page, hide the footer "Power your Capacitor apps…" plugins banner
+     (first block inside the footer container: tagline + Install Plugin CTA). */
+  body:has(.nb) footer > div > div:first-child {
+    display: none !important;
+  }
+  .nb .bg-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
+    pointer-events: none;
+  }
+  .nb .grain {
+    position: relative;
+  }
+  .nb .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.7  0 0 0 0 0.8  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+  }
+
+  /* ---- type ---- */
+  .nb .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+  .nb .eyebrow--green {
+    color: var(--relief-green);
+  }
+  .nb .h2-section {
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    color: #fff;
+    margin: 14px 0 0;
+  }
+  .nb .lead {
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.62);
+    font-weight: 400;
+    margin: 18px 0 0;
+  }
+
+  /* ---- layout ---- */
+  .nb .shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .nb .section {
+    position: relative;
+    padding: 96px 0;
+    overflow: hidden;
+    scroll-margin-top: 84px;
+  }
+  @media (max-width: 720px) {
+    .nb .section {
+      padding: 64px 0;
+    }
+  }
+  .nb .section-head {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .nb .section-head--wide {
+    max-width: 820px;
+  }
+  .nb .section-head--narrow {
+    max-width: 640px;
+  }
+
+  /* ---- buttons ---- */
+  .nb .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: 0;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+  }
+  .nb .btn-lg {
+    padding: 14px 24px;
+    font-size: 16px;
+  }
+  .nb .btn-md {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+  .nb .btn-primary {
+    background: var(--cap-blue-600);
+    color: #fff;
+    box-shadow: 0 0 36px rgba(37, 99, 235, 0.42);
+  }
+  .nb .btn-primary:hover {
+    background: var(--cap-blue-700);
+    box-shadow: 0 0 50px rgba(37, 99, 235, 0.55);
+    transform: translateY(-1px);
+  }
+  .nb .btn-ghost {
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .nb .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* ---- hero ---- */
+  .nb .hero {
+    padding: 96px 0 80px;
+    text-align: center;
+  }
+  @media (max-width: 720px) {
+    .nb .hero {
+      padding: 64px 0 56px;
+    }
+  }
+  .nb .beta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    color: var(--relief-green);
+    border-radius: 999px;
+    margin-bottom: 28px;
+    letter-spacing: 0.04em;
+  }
+  .nb .beta-badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--relief-green);
+    box-shadow: 0 0 10px var(--relief-green);
+  }
+  .nb .hero-banner {
+    margin: 22px 0 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    font-weight: 400;
+  }
+  .nb .hbv-underlined {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .nb .hbv-u-name {
+    font-size: clamp(2.6rem, 9vw, 5.6rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #fff;
+    line-height: 1;
+  }
+  .nb .hbv-u-rule {
+    display: block;
+    height: 4px;
+    width: 100%;
+    margin-top: 14px;
+    background: linear-gradient(90deg, transparent 0%, var(--relief-green) 20%, var(--relief-green) 80%, transparent 100%);
+    box-shadow: 0 0 24px var(--relief-green-glow);
+    border-radius: 2px;
+  }
+  .nb .hero-banner-tag {
+    font-family: var(--nb-font-mono);
+    font-size: clamp(12px, 1.15vw, 14px);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.62);
+    letter-spacing: 0.02em;
+  }
+  .nb .hero-lead {
+    max-width: 640px;
+    margin: 28px auto 36px;
+  }
+  .nb .hero-ctas {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .nb .hero-meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 28px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+  .nb .hero-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nb .hero-meta .check {
+    color: var(--relief-green);
+  }
+  .nb .hero-strip {
+    margin: 56px auto 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 880px;
+  }
+  @media (max-width: 720px) {
+    .nb .hero-strip {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .nb .hero-strip-cell {
+    background: rgba(26, 29, 36, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .nb .hero-strip-cell .k {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nb .hero-strip-cell .v {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 2px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---- terminal (shared) ---- */
+  .nb .terminal-frame {
+    background: var(--terminal-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  }
+  .nb .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: linear-gradient(to bottom, #0e1320, #0a0d14);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .nb .terminal-bar .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .nb .terminal-bar .dot.r {
+    background: #ef4444;
+  }
+  .nb .terminal-bar .dot.y {
+    background: #f59e0b;
+  }
+  .nb .terminal-bar .dot.g {
+    background: #22c55e;
+  }
+  .nb .terminal-bar .title {
+    margin-left: 12px;
+    font-family: var(--nb-font-mono);
+    font-size: 12px;
+    color: #6b7a91;
+  }
+  .nb .terminal-body {
+    font-family: var(--nb-font-mono);
+    font-size: 13px;
+    line-height: 1.65;
+    padding: 18px 20px;
+    color: var(--terminal-fg);
+    white-space: pre-wrap;
+    /* Fixed height, tall enough for the full build log, so it never grows/jumps
+       as lines stream in AND never shows a scrollbar. */
+    height: 560px;
+    overflow: hidden;
+  }
+  .nb .terminal-body .dim {
+    color: var(--terminal-dim);
+  }
+  .nb .terminal-body .cmd {
+    color: var(--terminal-cmd);
+  }
+  .nb .terminal-body .flag {
+    color: var(--terminal-flag);
+  }
+  .nb .terminal-body .val {
+    color: var(--terminal-val);
+  }
+  .nb .terminal-body .kw {
+    color: var(--terminal-kw);
+  }
+  .nb .terminal-body .err {
+    color: var(--terminal-err);
+  }
+  .nb .terminal-body .lock {
+    color: #facc15;
+  }
+  .nb .terminal-body .ok {
+    color: var(--relief-green);
+  }
+  .nb .terminal-body .ghost {
+    opacity: 0.55;
+  }
+  .nb .terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background: var(--terminal-fg);
+    vertical-align: -2px;
+    margin-left: 1px;
+    animation: nbBlink 1s steps(1) infinite;
+  }
+  @keyframes nbBlink {
+    50% {
       opacity: 0;
-      transform: translateY(0.35rem);
-      animation: terminal-line-in 520ms ease forwards;
-      animation-delay: var(--delay);
+    }
+  }
+  .nb .pain-prompt {
+    color: var(--terminal-dim);
+  }
+
+  /* ---- reveal · one-sentence ---- */
+  .nb .rv-one {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 20px 24px 48px;
+    text-align: center;
+  }
+  .nb .rv-one-mark {
+    font-family: var(--nb-font-mono);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--relief-green);
+    margin-bottom: 28px;
+  }
+  .nb .rv-one-line {
+    font-size: clamp(1.6rem, 4.2vw, 2.9rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  /* ---- demo terminal ---- */
+  .nb .demo-wrap {
+    max-width: 920px;
+    margin: 36px auto 0;
+  }
+  .nb .demo-tabs {
+    margin-left: auto;
+    display: inline-flex;
+    gap: 6px;
+  }
+  .nb .demo-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+  }
+  .nb .demo-replay {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 6px 10px;
+  }
+  .nb .demo-replay:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+  .nb .demo-tab {
+    font-family: var(--nb-font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.55);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 3px 10px;
+    transition: all 0.15s;
+  }
+  .nb .demo-tab:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+  .nb .demo-tab.active {
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--relief-green);
+    border-color: rgba(74, 222, 128, 0.4);
+  }
+
+  /* ---- bento ---- */
+  .nb .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 14px;
+    margin-top: 48px;
+  }
+  @media (max-width: 980px) {
+    .nb .bento {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 540px) {
+    .nb .bento {
+      grid-template-columns: 1fr;
+    }
+  }
+  .nb .tile {
+    position: relative;
+    padding: 22px;
+    background: rgba(26, 29, 36, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      border-color 0.2s,
+      transform 0.2s,
+      background 0.2s;
+  }
+  .nb .tile:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+    background: rgba(26, 29, 36, 0.75);
+  }
+  .nb .tile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--tile-c, #fff);
+    opacity: 0.85;
+  }
+  .nb .tile .icon {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    color: var(--tile-c);
+    border: 1px solid color-mix(in oklab, var(--tile-c) 30%, transparent);
+    background: color-mix(in oklab, var(--tile-c) 10%, transparent);
+  }
+  .nb .tile .ttl {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+  .nb .tile .ttl-accent {
+    color: var(--tile-c);
+  }
+  .nb .tile .sub {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.58);
+  }
+  .nb .tile .more {
+    display: none;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .nb .tile.open .more {
+    display: block;
+  }
+  .nb .tile.open {
+    background: rgba(26, 29, 36, 0.85);
+  }
+  .nb .tile .more code,
+  .nb .tile-hero .ascii {
+    font-family: var(--nb-font-mono);
+  }
+  .nb .tile .more code {
+    font-size: 12px;
+    background: rgba(74, 222, 128, 0.08);
+    color: var(--relief-green);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  .nb .tile-hero {
+    grid-column: span 2;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: default;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(74, 222, 128, 0.18) 0%, transparent 60%),
+      rgba(26, 29, 36, 0.85);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+  }
+  .nb .tile-hero::before {
+    background: var(--relief-green);
+    height: 3px;
+  }
+  .nb .tile-hero:hover {
+    transform: none;
+  }
+  .nb .tile-hero .ttl {
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .nb .tile-hero .ttl .name {
+    color: var(--relief-green);
+  }
+  .nb .tile-hero-sub-ttl {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .nb .tile-hero .sub {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 12px;
+    max-width: 38ch;
+  }
+  .nb .tile-hero .ascii {
+    font-size: 11px;
+    color: rgba(74, 222, 128, 0.55);
+    white-space: pre;
+    line-height: 1.2;
+    margin: 14px 0 0;
+    overflow-x: auto;
+  }
+  @media (max-width: 980px) {
+    .nb .tile-hero {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+  }
+  @media (max-width: 540px) {
+    .nb .tile-hero {
+      grid-column: span 1;
+    }
+  }
+  .nb .bento-hint {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  /* ---- bento tile icons ---- */
+  .nb .bento .tile {
+    --tile-c: var(--relief-green);
+  }
+  .nb .bento .tile .icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ---- SPOTLIGHT — the bento's style ----
+     Calm monochrome tiles that light up with a green glow tracking the
+     cursor, plus a lift + green accent on hover. The hero tile keeps its
+     own green fill. */
+  .nb .bento .tile:not(.tile-hero) {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+  }
+  .nb .bento .tile:not(.tile-hero)::before {
+    opacity: 0;
+  }
+  .nb .bento .tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(240px 200px at var(--mx, 50%) var(--my, -20%), rgba(74, 222, 128, 0.07), transparent 72%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .nb .bento .tile:hover::after {
+    opacity: 1;
+  }
+  /* No glow once a tile is expanded */
+  .nb .bento .tile.open::after {
+    opacity: 0 !important;
+  }
+  .nb .bento .tile:not(.tile-hero):hover {
+    border-color: rgba(74, 222, 128, 0.26);
+    transform: translateY(-3px);
+  }
+  .nb .bento .tile.open:not(.tile-hero) {
+    border-color: rgba(74, 222, 128, 0.22);
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .nb .bento .tile .icon {
+    color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    transition:
+      color 0.25s,
+      background 0.25s,
+      border-color 0.25s;
+  }
+  .nb .bento .tile:hover .icon {
+    color: var(--relief-green);
+    border-color: rgba(74, 222, 128, 0.3);
+    background: rgba(74, 222, 128, 0.1);
+  }
+  .nb .bento .tile .ttl-accent {
+    color: #fff;
+  }
+  .nb .bento .tile:hover .ttl-accent {
+    color: var(--relief-green);
+  }
+
+  /* ---- onboarding wizard ---- */
+  .nb .onboarding-cmd-row {
+    margin: 28px auto 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 12px 10px 18px;
+    background: var(--terminal-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow:
+      0 0 0 1px rgba(74, 222, 128, 0.06),
+      0 0 40px rgba(74, 222, 128, 0.06);
+  }
+  .nb .onboarding-cmd {
+    font-family: var(--nb-font-mono);
+    font-size: 15px;
+    color: var(--terminal-fg);
+    letter-spacing: 0.01em;
+  }
+  .nb .onboarding-cmd .ocm-prompt {
+    color: var(--relief-green);
+    margin-right: 8px;
+  }
+  .nb .onboarding-cmd .ocm-pkg {
+    color: #fff;
+  }
+  .nb .onboarding-cmd .ocm-flag {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .nb .onboarding-cmd .ocm-val {
+    color: var(--accent-cyan);
+    transition: color 0.2s;
+  }
+  .nb .onboarding-platform-toggle {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .nb .onboarding-platform-toggle .opt {
+    font-family: var(--nb-font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.55);
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    padding: 6px 12px;
+    letter-spacing: 0.04em;
+    transition:
+      background 0.15s,
+      color 0.15s;
+  }
+  .nb .onboarding-platform-toggle .opt:hover {
+    color: #fff;
+  }
+  .nb .onboarding-platform-toggle .opt.active {
+    background: var(--relief-green);
+    color: #08160d;
+  }
+  @media (max-width: 600px) {
+    .nb .onboarding-cmd {
+      font-size: 13px;
+    }
+    .nb .onboarding-cmd-row {
+      padding: 10px 12px;
+    }
+  }
+  .nb .wizard {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    background: rgba(26, 29, 36, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 24px;
+  }
+  @media (max-width: 880px) {
+    .nb .wizard {
+      grid-template-columns: 1fr;
+    }
+  }
+  .nb .wizard-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .nb .wizard-step {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    align-items: start;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.65);
+    transition:
+      background 0.15s,
+      color 0.15s;
+  }
+  .nb .wizard-step:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .nb .wizard-step[hidden] {
+    display: none;
+  }
+  .nb .wizard-step.active {
+    background: rgba(74, 222, 128, 0.08);
+    color: #fff;
+  }
+  .nb .wizard-step .num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--nb-font-mono);
+  }
+  .nb .wizard-step.active .num {
+    background: var(--relief-green);
+    color: #08160d;
+    border-color: var(--relief-green);
+  }
+  .nb .wizard-step.done .num {
+    background: rgba(74, 222, 128, 0.15);
+    color: var(--relief-green);
+    border-color: rgba(74, 222, 128, 0.4);
+  }
+  .nb .wizard-step .lbl {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .nb .wizard-step .dsc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+    margin-top: 2px;
+    display: block;
+  }
+  .nb .wizard-stage {
+    background: var(--terminal-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 22px 24px;
+    min-height: 280px;
+    font-family: var(--nb-font-mono);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--terminal-fg);
+  }
+  .nb .wizard-stage h4 {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--relief-green);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-family: var(--nb-font-display);
+  }
+  .nb .wizard-stage .row {
+    display: block;
+    margin: 4px 0;
+  }
+  .nb .wizard-stage .dim {
+    color: var(--terminal-dim);
+  }
+  .nb .wizard-stage .cmd {
+    color: var(--terminal-cmd);
+  }
+  .nb .wizard-stage .flag {
+    color: var(--terminal-flag);
+  }
+  .nb .wizard-stage .val {
+    color: var(--terminal-val);
+  }
+  .nb .wizard-stage .kw {
+    color: var(--terminal-kw);
+  }
+  .nb .wizard-stage .ok {
+    color: var(--relief-green);
+  }
+  .nb .wizard-stage .lock {
+    color: #facc15;
+  }
+  .nb .wizard-stage .ghost {
+    opacity: 0.6;
+  }
+  .nb .wizard-before-after {
+    margin-top: 24px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 12px;
+  }
+  .nb .wizard-before-after .ba {
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-weight: 600;
+  }
+  .nb .wizard-before-after .b {
+    background: rgba(248, 113, 113, 0.1);
+    color: #fca5a5;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    text-decoration: line-through;
+  }
+  .nb .wizard-before-after .a {
+    background: rgba(74, 222, 128, 0.1);
+    color: var(--relief-green);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+  }
+  .nb .wizard-before-after .ba-arrow {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
+  }
+
+  /* ---- trust ---- */
+  .nb .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 32px;
+  }
+  @media (max-width: 720px) {
+    .nb .trust-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .nb .trust-cell {
+    position: relative;
+    padding: 22px;
+    background: rgba(26, 29, 36, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition:
+      border-color 0.25s,
+      transform 0.25s,
+      box-shadow 0.25s;
+  }
+  .nb .trust-cell:hover {
+    border-color: rgba(74, 222, 128, 0.3);
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.32),
+      0 0 0 1px rgba(74, 222, 128, 0.08);
+  }
+  .nb .trust-cell::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    /* Static corner glow — no longer follows the cursor. */
+    background: radial-gradient(170px 130px at 18% 0%, rgba(74, 222, 128, 0.12), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .nb .trust-cell.in-view::before,
+  .nb .trust-cell:hover::before {
+    opacity: 1;
+  }
+  .nb .trust-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(74, 222, 128, 0.08);
+    color: var(--relief-green);
+    margin-bottom: 14px;
+    border: 1px solid rgba(74, 222, 128, 0.18);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.28);
+    transition: box-shadow 0.4s ease;
+  }
+  .nb .trust-cell.in-view .trust-icon {
+    animation: nbTrustIconPulse 3.6s ease-in-out infinite;
+  }
+  .nb .trust-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+  @keyframes nbTrustIconPulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
+    }
+  }
+  .nb .trust-cell .lbl {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--relief-green);
+    margin-bottom: 8px;
+  }
+  .nb .trust-cell h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .nb .trust-cell p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .nb .trust-status {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--nb-font-mono);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.04em;
+  }
+  .nb .trust-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--relief-green);
+    box-shadow: 0 0 6px var(--relief-green);
+    flex-shrink: 0;
+  }
+  .nb .trust-cell.in-view .trust-dot--ok {
+    animation: nbTrustBlink 2.4s ease-in-out infinite;
+  }
+  @keyframes nbTrustBlink {
+    0%,
+    92%,
+    100% {
+      opacity: 1;
+    }
+    95% {
+      opacity: 0.25;
+    }
+  }
+  .nb .trust-pulse {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--relief-green);
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px var(--relief-green);
+  }
+  .nb .trust-cell.in-view .trust-pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid var(--relief-green);
+    animation: nbTrustRing 1.8s ease-out infinite;
+  }
+  @keyframes nbTrustRing {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+  .nb .trust-stream {
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .nb .trust-stream span {
+    display: inline-block;
+    width: 3px;
+    height: 12px;
+    background: var(--relief-green);
+    border-radius: 1px;
+    opacity: 0.4;
+  }
+  .nb .trust-cell.in-view .trust-stream span {
+    animation: nbTrustBars 1.4s ease-in-out infinite;
+  }
+  .nb .trust-cell.in-view .trust-stream span:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .nb .trust-cell.in-view .trust-stream span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .nb .trust-cell.in-view .trust-stream span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .nb .trust-cell.in-view .trust-stream span:nth-child(4) {
+    animation-delay: 0.45s;
+  }
+  @keyframes nbTrustBars {
+    0%,
+    100% {
+      opacity: 0.25;
+      transform: scaleY(0.5);
+    }
+    50% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+  .nb .trust-decay {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--relief-green);
+    flex-shrink: 0;
+    box-shadow: 0 0 6px var(--relief-green);
+  }
+  .nb .trust-cell.in-view .trust-decay {
+    animation: nbTrustDecay 2.2s ease-in-out infinite;
+  }
+  @keyframes nbTrustDecay {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+      border-radius: 2px;
+    }
+    60% {
+      transform: scale(0.4);
+      opacity: 0.3;
+      border-radius: 50%;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+      border-radius: 2px;
+    }
+  }
+
+  /* ---- comparison ---- */
+  .nb .comp-wrap {
+    margin-top: 36px;
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .nb table.comp {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+  }
+  .nb table.comp th,
+  .nb table.comp td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .nb table.comp tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .nb table.comp thead th {
+    background: transparent;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  /* Capgo column — clearly the highlighted one */
+  .nb table.comp thead th.us {
+    color: var(--relief-green);
+    background: rgba(74, 222, 128, 0.1);
+    border-bottom-color: rgba(74, 222, 128, 0.4);
+  }
+  .nb table.comp tbody td.us {
+    background: rgba(74, 222, 128, 0.06);
+  }
+  .nb table.comp-prose {
+    min-width: 880px;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .nb table.comp-prose th,
+  .nb table.comp-prose td {
+    vertical-align: top;
+    padding: 18px;
+  }
+  .nb table.comp-prose thead th {
+    padding: 14px 18px;
+  }
+  .nb table.comp-prose thead th .th-sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: var(--nb-font-mono);
+  }
+  .nb table.comp-prose tbody td.label {
+    width: 18%;
+    white-space: nowrap;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 700;
+    padding-top: 22px;
+  }
+  .nb table.comp-prose tbody td {
+    color: rgba(255, 255, 255, 0.65);
+  }
+  .nb table.comp-prose tbody td.us {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .nb table.comp-prose .hook {
+    color: var(--relief-green);
+    font-weight: 700;
+  }
+  @media (max-width: 720px) {
+    .nb table.comp-prose tbody td.label {
+      white-space: normal;
+    }
+    .nb table.comp-prose {
+      min-width: 700px;
+    }
+  }
+  .nb .comp-callout {
+    margin: 36px auto 0;
+    max-width: 880px;
+  }
+  .nb .comp-callout p {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(16px, 1.6vw, 19px);
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.78);
+    letter-spacing: -0.005em;
+  }
+  .nb .comp-footnote {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 14px;
+  }
+
+  /* ---- AI debug section ---- */
+  .nb .aidebug-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: 28px;
+    margin-top: 44px;
+    align-items: start;
+  }
+  @media (max-width: 880px) {
+    .nb .aidebug-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+  /* Static example terminal — override the demo terminal's fixed height */
+  .nb .aidebug-body {
+    white-space: normal;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  .nb .aidebug-body .row {
+    display: block;
+    margin: 3px 0;
+  }
+  .nb .aidebug-body .ai-head {
+    margin-top: 14px;
+  }
+  /* Non-selected select options: hidden by default (collapsed select);
+     the animation reveals them briefly, then collapses back to the chosen one. */
+  .nb .aidebug-body .menu-extra {
+    display: none;
+  }
+  .nb .aidebug-points {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .nb .aidebug-points li {
+    position: relative;
+    padding-left: 28px;
+  }
+  .nb .aidebug-points li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    color: var(--relief-green);
+    font-weight: 700;
+  }
+  .nb .aidebug-points h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .nb .aidebug-points p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ---- pricing ---- */
+  .nb .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 36px;
+  }
+  @media (max-width: 1080px) {
+    .nb .pricing-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .nb .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .nb .tier {
+    padding: 24px;
+    background: rgba(26, 29, 36, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .nb .tier.pop {
+    border-color: rgba(74, 222, 128, 0.4);
+    background: rgba(26, 29, 36, 0.85);
+  }
+  .nb .tier .name {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .nb .tier.pop .name {
+    color: var(--relief-green);
+  }
+  .nb .tier .price {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    color: #fff;
+    line-height: 1;
+    margin-top: 6px;
+  }
+  .nb .tier .price small {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 4px;
+  }
+  .nb .tier .what {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.5;
+    margin: 0;
+    min-height: 3em;
+  }
+  .nb .tier-billing {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0;
+  }
+  .nb .tier ul {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .nb .tier li {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.45;
+    display: flex;
+    gap: 8px;
+  }
+  .nb .tier li::before {
+    content: '✓';
+    color: var(--relief-green);
+    font-weight: 700;
+  }
+  .nb .pricing-fineprint {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: rgba(96, 165, 250, 0.05);
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .nb .pricing-fineprint b {
+    color: var(--accent-sky);
+  }
+  .nb .pricing-fineprint a {
+    color: var(--accent-sky);
+    text-decoration: underline;
+  }
+
+  /* ---- build-minutes calculator ---- */
+  .nb .build-calc {
+    margin-top: 18px;
+    padding: 24px;
+    background: rgba(26, 29, 36, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+  }
+  .nb .build-calc-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .nb .build-calc-range {
+    width: 100%;
+    accent-color: var(--relief-green);
+    cursor: pointer;
+  }
+  .nb .build-calc-readout {
+    margin-top: 10px;
+    font-family: var(--nb-font-mono);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .nb .build-calc-readout span {
+    color: var(--relief-green);
+    font-weight: 700;
+  }
+  .nb .build-calc-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 36px;
+    margin-top: 20px;
+  }
+  .nb .bc-res {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nb .bc-res > div {
+    display: flex;
+    flex-direction: column;
+  }
+  .nb .bc-ico {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: inline-flex;
+    color: #fff; /* Apple logo — neutral white, not green */
+  }
+  .nb .bc-ico svg {
+    width: 100%;
+    height: 100%;
+  }
+  /* Android keeps its actual brand green */
+  .nb .build-calc-results .bc-res:last-child .bc-ico {
+    color: var(--relief-green);
+  }
+  .nb .bc-num {
+    font-size: 34px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .nb .bc-lbl {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 5px;
+  }
+  .nb .build-calc-price {
+    margin-top: 18px;
+    font-family: var(--nb-font-mono);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .nb .build-calc-price span {
+    color: var(--relief-green);
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .nb .build-calc-note {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ---- faq ---- */
+  .nb .faq {
+    margin: 36px auto 0;
+    max-width: 880px;
+  }
+  .nb .faq details {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px 4px;
+  }
+  .nb .faq summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .nb .faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .nb .faq summary .plus {
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1;
+    transition: transform 0.2s;
+  }
+  .nb .faq details[open] summary .plus {
+    transform: rotate(45deg);
+    color: var(--relief-green);
+  }
+  .nb .faq .ans {
+    margin-top: 12px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  /* ---- final cta ---- */
+  .nb .final {
+    text-align: center;
+    padding: 110px 0;
+  }
+  .nb .final h2 {
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    margin: 0 0 8px;
+  }
+  .nb .final h2 .name {
+    color: var(--relief-green);
+    text-shadow: 0 0 40px var(--relief-green-glow);
+  }
+  .nb .final p.tagline {
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 400;
+    margin: 0 auto 32px;
+    max-width: 640px;
+  }
+  .nb .btn-cta {
+    font-size: 17px;
+    padding: 16px 30px;
+  }
+  .nb .hero-meta--cta {
+    margin-top: 24px;
+  }
+
+  /* ---- reduced motion ---- */
+  @media (prefers-reduced-motion: reduce) {
+    .nb *,
+    .nb *::before,
+    .nb *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .nb .terminal-cursor {
+      animation: none;
+      opacity: 1;
+    }
+    .nb .trust-cell .trust-icon,
+    .nb .trust-dot--ok,
+    .nb .trust-pulse::after,
+    .nb .trust-stream span,
+    .nb .trust-decay {
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  // ----------------------------------------------------------------
+  // DEMO TERMINAL — capgo build request --platform ios|android
+  // ----------------------------------------------------------------
+  ;(function reliefTerminal() {
+    const el = document.getElementById('demo-term-body')
+    if (!el) return
+    let paused = false
+    let started = false
+    let gen = 0 // generation token — incremented on every switch/replay; stale callbacks bail
+    let platform = 'ios'
+    const SPINNER = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+
+    function restart() {
+      gen++
+      const myGen = gen
+      clearTimeout(timer)
+      buf = ''
+      stepIdx = 0
+      script = makeScript()
+      render()
+      setTimeout(() => {
+        if (myGen === gen) next()
+      }, 50)
     }
 
-    .terminal-cursor {
-      display: inline-block;
-      width: 0.58ch;
-      height: 1em;
-      background: currentColor;
-      vertical-align: -0.15em;
-      animation: terminal-cursor-blink 900ms steps(1) infinite;
+    const STATIC_IOS = `
+<span class="dim">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span>
+<span class="ok">✔</span> Platform: <span class="val">iOS</span>  ·  App: <span class="val">com.acme.app</span>
+<span class="lock">🔒</span> <span class="ghost">Credentials never stored on Capgo servers — used only during build, then deleted.</span>
+
+<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">9c4f7a</span>
+<span class="ok">✔</span> Project zipped  ·  <span class="kw">12.4 MB</span>
+<span class="ok">✔</span> Upload complete  ·  <span class="val">100%</span>
+
+<span class="dim">[CapApp]</span> Compiling AppDelegate.swift
+<span class="dim">[CapApp]</span> Compiling ContentView.swift
+<span class="dim">[CapApp]</span> Compiling NotificationService.swift  <span class="ghost">(extension)</span>
+<span class="dim">[CapApp]</span> Linking App.framework
+<span class="dim">[CapApp]</span> Signing main + 2 extensions
+<span class="dim">[CapApp]</span> Creating App.xcarchive
+<span class="ok">✔</span> Archive Succeeded
+<span class="ok">✔</span> Successfully uploaded to App Store Connect
+
+<span class="ok">━━━ Build completed successfully in 2m 41s ━━━</span>`
+
+    const STATIC_ANDROID = `
+<span class="dim">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">android</span>
+<span class="ok">✔</span> Platform: <span class="val">Android</span>  ·  App: <span class="val">com.acme.app</span>
+<span class="lock">🔒</span> <span class="ghost">Keystore + service account never stored on Capgo servers — used only during build, then deleted.</span>
+
+<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">b8e2d1</span>
+<span class="ok">✔</span> Project zipped  ·  <span class="kw">9.7 MB</span>
+<span class="ok">✔</span> Upload complete  ·  <span class="val">100%</span>
+
+<span class="dim">[gradle]</span> :app:compileReleaseKotlin
+<span class="dim">[gradle]</span> :app:processReleaseResources
+<span class="dim">[gradle]</span> :app:bundleReleaseJsAndAssets
+<span class="dim">[gradle]</span> :app:packageRelease
+<span class="dim">[gradle]</span> :app:signReleaseBundle
+<span class="dim">[gradle]</span> Producing app-release.aab
+<span class="ok">✔</span> Bundle signed  ·  <span class="kw">app-release.aab</span>
+<span class="ok">✔</span> Uploaded to Play Console (Internal track)
+
+<span class="ok">━━━ Build completed successfully in 2m 18s ━━━</span>`
+
+    function staticFallback() {
+      el.innerHTML = platform === 'android' ? STATIC_ANDROID : STATIC_IOS
     }
 
-    .terminal-progress {
-      width: 100%;
-      transform: scaleX(0);
-      transform-origin: left;
-      animation: terminal-progress-fill 7s ease forwards;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      staticFallback()
+      bindTabs(staticFallback)
+      return
     }
 
-    @keyframes terminal-line-in {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+    function makeScriptIOS() {
+      return [
+        { t: 0, html: `<span class="pain-prompt">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span><span class="terminal-cursor"></span>` },
+        { t: 700, html: `<span class="pain-prompt">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span>\n<span class="ok">✔</span> Platform: <span class="val">iOS</span>`, replaceAll: true },
+        { t: 250, html: `\n<span class="ok">✔</span> App: <span class="val">com.acme.app</span>` },
+        { t: 250, html: `\n<span class="lock">🔒</span> <span class="ghost">Credentials never stored on Capgo servers — used only during build, then deleted.</span>` },
+        { t: 400, html: `\n` },
+        { t: 200, html: `\n<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">9c4f7a</span>` },
+        { t: 250, html: `\n` },
+        { kind: 'spin', label: 'Zipping project', ms: 1100, done: `<span class="ok">✔</span> Project zipped  ·  <span class="kw">12.4 MB</span>` },
+        { kind: 'progress', label: 'Uploading', size: '12.4 MB' },
+        { t: 200, html: `\n` },
+        { t: 200, html: `\n<span class="dim">[CapApp]</span> Compiling AppDelegate.swift` },
+        { t: 220, html: `\n<span class="dim">[CapApp]</span> Compiling ContentView.swift` },
+        { t: 220, html: `\n<span class="dim">[CapApp]</span> Compiling NotificationService.swift  <span class="ghost">(extension)</span>` },
+        { t: 240, html: `\n<span class="dim">[CapApp]</span> Compiling WidgetKitBundle.swift  <span class="ghost">(extension)</span>` },
+        { t: 280, html: `\n<span class="dim">[CapApp]</span> Linking App.framework` },
+        { t: 240, html: `\n<span class="dim">[CapApp]</span> Signing main + 2 extensions` },
+        { t: 260, html: `\n<span class="dim">[CapApp]</span> Creating App.xcarchive` },
+        { t: 320, html: `\n<span class="ok">✔</span> Archive Succeeded` },
+        { t: 380, html: `\n<span class="ok">✔</span> Successfully uploaded to App Store Connect` },
+        { t: 320, html: `\n` },
+        { t: 250, html: `\n<span class="ok">━━━ Build completed successfully in 2m 41s ━━━</span>` },      ]
+    }
+
+    function makeScriptAndroid() {
+      return [
+        { t: 0, html: `<span class="pain-prompt">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">android</span><span class="terminal-cursor"></span>` },
+        { t: 700, html: `<span class="pain-prompt">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">android</span>\n<span class="ok">✔</span> Platform: <span class="val">Android</span>`, replaceAll: true },
+        { t: 250, html: `\n<span class="ok">✔</span> App: <span class="val">com.acme.app</span>` },
+        { t: 250, html: `\n<span class="lock">🔒</span> <span class="ghost">Keystore + service account never stored on Capgo servers — used only during build, then deleted.</span>` },
+        { t: 400, html: `\n` },
+        { t: 200, html: `\n<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">b8e2d1</span>` },
+        { t: 250, html: `\n` },
+        { kind: 'spin', label: 'Zipping project', ms: 1100, done: `<span class="ok">✔</span> Project zipped  ·  <span class="kw">9.7 MB</span>` },
+        { kind: 'progress', label: 'Uploading', size: '9.7 MB' },
+        { t: 200, html: `\n` },
+        { t: 220, html: `\n<span class="dim">[gradle]</span> :app:compileReleaseKotlin` },
+        { t: 220, html: `\n<span class="dim">[gradle]</span> :app:compileReleaseJavaWithJavac` },
+        { t: 220, html: `\n<span class="dim">[gradle]</span> :app:processReleaseResources` },
+        { t: 240, html: `\n<span class="dim">[gradle]</span> :app:bundleReleaseJsAndAssets` },
+        { t: 240, html: `\n<span class="dim">[gradle]</span> :app:packageRelease` },
+        { t: 240, html: `\n<span class="dim">[gradle]</span> :app:signReleaseBundle  <span class="ghost">(keystore)</span>` },
+        { t: 240, html: `\n<span class="dim">[gradle]</span> Producing <span class="val">app-release.aab</span>` },
+        { t: 320, html: `\n<span class="ok">✔</span> Bundle signed  ·  <span class="kw">app-release.aab</span>` },
+        { t: 380, html: `\n<span class="ok">✔</span> Uploaded to Play Console (Internal track)` },
+        { t: 320, html: `\n` },
+        { t: 250, html: `\n<span class="ok">━━━ Build completed successfully in 2m 18s ━━━</span>` },      ]
+    }
+
+    function makeScript() {
+      return platform === 'android' ? makeScriptAndroid() : makeScriptIOS()
+    }
+
+    let buf = ''
+    let timer: ReturnType<typeof setTimeout> | null = null
+    let stepIdx = 0
+    let script = makeScript()
+
+    function render() {
+      el!.innerHTML = buf
+      el!.scrollTop = el!.scrollHeight
+    }
+
+    // Indeterminate spinner for a fixed duration, then swap in a "done" line.
+    function runSpin(label: string, doneHtml: string, ms: number, onDone: () => void) {
+      let frame = 0
+      let elapsed = 0
+      const startBuf = buf
+      const myGen = gen
+      function tick() {
+        if (myGen !== gen) return
+        if (paused) {
+          timer = setTimeout(tick, 100)
+          return
+        }
+        const sp = SPINNER[frame % SPINNER.length]
+        buf = startBuf + `\n<span class="kw">${sp}</span> ${label}…`
+        render()
+        frame++
+        elapsed += 80
+        if (elapsed >= ms) {
+          buf = startBuf + `\n${doneHtml}`
+          render()
+          onDone()
+        } else {
+          timer = setTimeout(tick, 80)
+        }
       }
+      tick()
     }
 
-    @keyframes terminal-cursor-blink {
-      50% {
-        opacity: 0;
+    // Smooth, decelerating progress bar (ease-out toward 100%).
+    function runSpinner(label: string, size: string, onDone: () => void) {
+      let pct = 0
+      let frame = 0
+      const startBuf = buf
+      const myGen = gen
+      function tick() {
+        if (myGen !== gen) return
+        if (paused) {
+          timer = setTimeout(tick, 100)
+          return
+        }
+        const sp = SPINNER[frame % SPINNER.length]
+        const shown = Math.min(100, Math.round(pct))
+        const filled = Math.round((shown * 24) / 100)
+        const bar = '█'.repeat(filled) + '░'.repeat(24 - filled)
+        buf = startBuf + `\n<span class="kw">${sp}</span> ${label}  <span class="dim">[</span><span class="val">${bar}</span><span class="dim">]</span>  <span class="val">${shown}%</span>`
+        render()
+        frame++
+        pct += Math.max(1.6, (100 - pct) * 0.12)
+        if (pct >= 99.5) {
+          buf = startBuf + `\n<span class="ok">✔</span> Upload complete  ·  <span class="val">${size} / ${size}</span>`
+          render()
+          onDone()
+        } else {
+          timer = setTimeout(tick, 55)
+        }
       }
+      tick()
     }
 
-    @keyframes terminal-progress-fill {
-      to {
-        transform: scaleX(1);
+    function next() {
+      const myGen = gen
+      if (paused) {
+        timer = setTimeout(() => {
+          if (myGen === gen) next()
+        }, 150)
+        return
       }
+      if (stepIdx >= script.length) return
+      const s = script[stepIdx++]
+      if (s.kind === 'progress') {
+        runSpinner(s.label || 'Uploading', s.size || '12.4 MB', () => {
+          if (myGen === gen) next()
+        })
+        return
+      }
+      if (s.kind === 'spin') {
+        runSpin(s.label || 'Working', s.done || '', s.ms || 1000, () => {
+          if (myGen === gen) next()
+        })
+        return
+      }
+      if (s.kind === 'restart') {
+        timer = setTimeout(() => {
+          if (myGen !== gen) return
+          buf = ''
+          stepIdx = 0
+          script = makeScript()
+          render()
+          next()
+        }, 0)
+        return
+      }
+      timer = setTimeout(
+        () => {
+          if (myGen !== gen) return
+          if (s.replaceAll) {
+            buf = s.html!
+          } else if (s.replaceLastLine) {
+            buf = buf.replace(/\n[^\n]*$/, '') + s.html
+          } else {
+            buf += s.html
+          }
+          render()
+          next()
+        },
+        s.t || 100,
+      )
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .terminal-line,
-      .terminal-progress,
-      .terminal-cursor {
-        animation: none;
-        opacity: 1;
-        transform: none;
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) paused = true
+      else {
+        const r = el.getBoundingClientRect()
+        const onScreen = r.bottom > 0 && r.top < (window.innerHeight || 0)
+        if (onScreen) paused = false
       }
+    })
+    const replay = document.getElementById('demo-replay')
+    if (replay) replay.addEventListener('click', restart)
+
+    function bindTabs(onSwitch: () => void) {
+      const tabIos = document.getElementById('demo-tab-ios')
+      const tabAnd = document.getElementById('demo-tab-android')
+      const title = document.getElementById('demo-term-title')
+      function setPlatform(p: string) {
+        if (p === platform) return
+        platform = p
+        if (tabIos) tabIos.classList.toggle('active', p === 'ios')
+        if (tabAnd) tabAnd.classList.toggle('active', p === 'android')
+        if (title) title.textContent = `capgo build request --platform ${p}`
+        if (onSwitch) onSwitch()
+      }
+      if (tabIos) tabIos.addEventListener('click', () => setPlatform('ios'))
+      if (tabAnd) tabAnd.addEventListener('click', () => setPlatform('android'))
     }
-  </style>
-  <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
-    <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Native Builds</h2>
-    <p class="mt-4">
-      If you are using native builds to ship signed iOS and Android binaries, connect this page with <a href="/ci_cd/">Capgo CI/CD</a> for automation, <a
-        href="/docs/getting-started/cicd-integration/">CI/CD Integration</a
-      > for setup, <a href="/docs/live-updates/integrations/github-actions/">GitHub Actions</a> for update delivery, <a href="/plugins/">Capgo Plugin Directory</a> for native dependencies,
-      and <a href="/live-update/">Capgo Live Updates</a> for changes that do not need a new binary.
-    </p>
-  </section>
+    bindTabs(restart)
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            paused = false
+            if (!started) {
+              started = true
+              const myGen = gen
+              setTimeout(() => {
+                if (myGen === gen) next()
+              }, 300)
+            }
+          } else {
+            paused = true
+          }
+        })
+      },
+      { threshold: 0.25 },
+    )
+    io.observe(el)
+  })()
+
+  // ----------------------------------------------------------------
+  // BENTO — click to expand
+  // ----------------------------------------------------------------
+  ;(function bento() {
+    document.querySelectorAll<HTMLElement>('.tile[data-expandable]').forEach((tile) => {
+      tile.addEventListener('click', () => tile.classList.toggle('open'))
+      tile.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          tile.classList.toggle('open')
+        }
+      })
+      tile.tabIndex = 0
+    })
+  })()
+
+  // ----------------------------------------------------------------
+  // BENTO PALETTE — preview switcher (remove once a palette is chosen)
+  // ----------------------------------------------------------------
+  ;(function bentoSpotlight() {
+    const bento = document.getElementById('bento')
+    if (!bento) return
+    // Green glow follows the cursor across each tile.
+    bento.querySelectorAll<HTMLElement>('.tile').forEach((tile) => {
+      tile.addEventListener('pointermove', (e: PointerEvent) => {
+        const r = tile.getBoundingClientRect()
+        tile.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%')
+        tile.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%')
+      })
+    })
+  })()
+
+  // ----------------------------------------------------------------
+  // WIZARD — step through onboarding (iOS + Android)
+  // ----------------------------------------------------------------
+  ;(function wizard() {
+    const wizardEl = document.getElementById('wizard')
+    const stage = document.getElementById('wizard-stage')
+    const toggle = document.querySelector('.onboarding-platform-toggle')
+    const platformLabel = document.getElementById('ocm-platform')
+    const baBefore = document.getElementById('ba-before')
+    const baAfter = document.getElementById('ba-after')
+    if (!wizardEl || !stage) return
+
+    type Step = { title: string; lines: string[] }
+    type PlatformData = { before: string; after: string; content: Step[] }
+
+    const PLATFORMS: Record<string, PlatformData> = {
+      ios: {
+        before: 'Before: 10+ Apple Developer Portal steps · CSRs · profiles',
+        after: 'After: drop one .p8',
+        content: [
+          {
+            title: 'App Store Connect API Key',
+            lines: [
+              '<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">ios</span>',
+              '',
+              '<span class="ok">◆</span> Native file picker opened',
+              '<span class="ok">✔</span> Selected: <span class="kw">AuthKey_ABC123XYZ.p8</span>',
+              '<span class="ok">✔</span> Auto-detected Key ID: <span class="val">ABC123XYZ</span>',
+              '<span class="ok">✔</span> Issuer ID: <span class="val">69a6de1f-…</span>',
+              '<span class="ok">✔</span> JWT verified · Team: <span class="kw">Acme Inc</span>',
+            ],
+          },
+          {
+            title: 'Distribution Certificate',
+            lines: [
+              '<span class="dim">→ </span>Generating Certificate Signing Request <span class="ghost">(node-forge, no Keychain)</span>',
+              '<span class="ok">✔</span> CSR created',
+              '<span class="ok">✔</span> iOS Distribution certificate issued',
+              '<span class="ok">✔</span> Packaged into P12',
+              '<span class="ghost dim">  Cert limit hit? We prompt you to revoke an old one — never silently.</span>',
+            ],
+          },
+          {
+            title: 'Provisioning Profile',
+            lines: [
+              '<span class="ok">✔</span> Registered <span class="kw">com.acme.app</span>',
+              '<span class="ok">✔</span> Provisioning profile created (App Store)',
+              '<span class="ghost dim">  Duplicate detected? You decide whether to delete it.</span>',
+              '<span class="ok">✔</span> Profile installed for build env',
+            ],
+          },
+          {
+            title: 'Save & Build',
+            lines: [
+              '<span class="lock">🔒</span> Saved to <span class="kw">~/.capgo-credentials/credentials.json</span>',
+              '<span class="ghost dim">  Capgo servers never see your credentials.</span>',
+              '<span class="dim">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span>',
+              '<span class="ok">✔</span> Build complete in <span class="val">2m 41s</span>',
+              '<span class="ok">✔</span> Uploaded to App Store Connect 🎉',
+            ],
+          },
+        ],
+      },
+      android: {
+        before: 'Before: Play Console · service accounts · keystores · gradle wrangling',
+        after: 'After: one Google sign-in',
+        content: [
+          {
+            title: 'Keystore',
+            lines: [
+              '<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">android</span>',
+              '',
+              '<span class="ok">◆</span> Generate new keystore <span class="ghost">— or import existing</span>',
+              '<span class="ok">✔</span> Alias: <span class="val">acme-release</span>',
+              '<span class="ok">✔</span> Generated PKCS#12 / RSA-2048 <span class="ghost">(node-forge — no JDK needed)</span>',
+            ],
+          },
+          {
+            title: 'Sign in with Google',
+            lines: [
+              '<span class="ok">◆</span> Browser opened: <span class="kw">accounts.google.com/oauth/...</span>',
+              '<span class="dim">  PKCE + loopback HTTP server — no copy/paste codes.</span>',
+              '<span class="ok">✔</span> Authorized · scope: <span class="val">androidpublisher</span>',
+              '<span class="ok">✔</span> Signed in as <span class="val">you@acme.com</span>',
+            ],
+          },
+          {
+            title: 'Play Console + GCP',
+            lines: [
+              '<span class="ok">✔</span> Play Developer ID linked',
+              '<span class="ok">✔</span> Selected GCP project: <span class="kw">acme-prod</span>',
+              '<span class="ok">✔</span> Enabled Android Publisher API',
+              '<span class="ok">✔</span> Service account: <span class="kw">capgo-builder@acme.iam…</span>',
+              '<span class="ok">✔</span> Invited into Play Console as Release Manager',
+            ],
+          },
+          {
+            title: 'Save & Build',
+            lines: [
+              '<span class="lock">🔒</span> Saved to <span class="kw">~/.capgo-credentials/credentials.json</span>',
+              '<span class="ghost dim">  Keystore + service account stay on your machine.</span>',
+              '<span class="dim">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">android</span>',
+              '<span class="ok">✔</span> Build complete in <span class="val">3m 02s</span>',
+              '<span class="ok">✔</span> Uploaded to Play Console (internal) 🎉',
+            ],
+          },
+        ],
+      },
+    }
+
+    let currentPlatform = 'ios'
+    let idx = 0
+    let autoTimer: ReturnType<typeof setInterval> | null = null
+    let started = false
+
+    function getSteps() {
+      return wizardEl!.querySelectorAll<HTMLElement>(`.wizard-step[data-platform="${currentPlatform}"]`)
+    }
+
+    function paint(i: number) {
+      const c = PLATFORMS[currentPlatform].content[i]
+      if (!c) return
+      const total = PLATFORMS[currentPlatform].content.length
+      stage!.innerHTML = `<h4>Step ${i + 1} / ${total} — ${c.title}</h4>${c.lines.map((l) => `<span class="row">${l}</span>`).join('')}`
+      getSteps().forEach((s, j) => {
+        s.classList.toggle('active', j === i)
+        s.classList.toggle('done', j < i)
+      })
+    }
+
+    function setPlatform(p: string) {
+      if (!PLATFORMS[p] || p === currentPlatform) return
+      if (autoTimer) {
+        clearInterval(autoTimer)
+        autoTimer = null
+      }
+      started = true
+      currentPlatform = p
+      wizardEl!.setAttribute('data-platform', p)
+      wizardEl!.querySelectorAll<HTMLElement>('.wizard-step').forEach((s) => {
+        s.hidden = s.getAttribute('data-platform') !== p
+      })
+      if (toggle) {
+        toggle.querySelectorAll('.opt').forEach((b) => {
+          const active = b.getAttribute('data-platform') === p
+          b.classList.toggle('active', active)
+          b.setAttribute('aria-selected', active ? 'true' : 'false')
+        })
+      }
+      if (platformLabel) platformLabel.textContent = p
+      if (baBefore) baBefore.textContent = PLATFORMS[p].before
+      if (baAfter) baAfter.textContent = PLATFORMS[p].after
+      getSteps().forEach((s, j) => {
+        ;(s as HTMLElement).onclick = () => {
+          idx = j
+          paint(idx)
+        }
+      })
+      idx = 0
+      paint(0)
+    }
+
+    wizardEl.querySelectorAll<HTMLElement>('.wizard-step').forEach((s) => {
+      s.hidden = s.getAttribute('data-platform') !== currentPlatform
+    })
+    getSteps().forEach((s, j) => {
+      s.onclick = () => {
+        idx = j
+        paint(idx)
+      }
+    })
+    paint(0)
+
+    if (toggle) {
+      toggle.querySelectorAll('.opt').forEach((b) => {
+        b.addEventListener('click', () => setPlatform(b.getAttribute('data-platform') || 'ios'))
+      })
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !started) {
+            started = true
+            autoTimer = setInterval(() => {
+              idx++
+              const len = PLATFORMS[currentPlatform].content.length
+              if (idx >= len) {
+                if (autoTimer) clearInterval(autoTimer)
+                idx = len - 1
+                return
+              }
+              paint(idx)
+            }, 1700)
+          }
+        })
+      },
+      { threshold: 0.3 },
+    )
+    io.observe(stage)
+  })()
+
+  // ----------------------------------------------------------------
+  // TRUST — toggle in-view animations (glow is static, not cursor-tracked)
+  // ----------------------------------------------------------------
+  ;(function trustInView() {
+    const cells = document.querySelectorAll<HTMLElement>('.trust-cell')
+    if (!cells.length) return
+
+    if (!('IntersectionObserver' in window)) {
+      cells.forEach((c) => c.classList.add('in-view'))
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add('in-view')
+          else e.target.classList.remove('in-view')
+        })
+      },
+      { threshold: 0.2 },
+    )
+    cells.forEach((c) => io.observe(c))
+  })()
+
+  // ----------------------------------------------------------------
+  // BUILD-MINUTES CALCULATOR — rough "minutes → builds" estimate
+  // ----------------------------------------------------------------
+  ;(function buildCalc() {
+    const root = document.querySelector('.build-calc')
+    const range = document.getElementById('bc-range') as HTMLInputElement | null
+    const minEl = document.getElementById('bc-min')
+    const iosEl = document.getElementById('bc-ios')
+    const andEl = document.getElementById('bc-and')
+    const priceEl = document.getElementById('bc-price')
+    if (!root || !range || !minEl || !iosEl || !andEl) return
+    let tiers: { from: number; to: number; price: number }[] = []
+    try {
+      tiers = JSON.parse(root.getAttribute('data-tiers') || '[]')
+    } catch (_) {}
+    // Cost of `minutes` if bought as prepaid credits, summed across volume tiers.
+    function priceFor(minutes: number) {
+      let cost = 0
+      for (const t of tiers) {
+        const to = t.to && t.to > t.from ? t.to : Infinity
+        if (minutes <= t.from) break
+        cost += (Math.min(minutes, to) - t.from) * t.price
+      }
+      return cost
+    }
+    function update() {
+      const m = parseInt(range!.value, 10) || 0
+      minEl!.textContent = String(m)
+      iosEl!.textContent = String(Math.max(0, Math.floor(m / 5))) // iOS ≈ 5 build-min
+      andEl!.textContent = String(Math.max(0, Math.floor(m / 2.5))) // Android ≈ 2.5 build-min
+      if (priceEl) priceEl.textContent = '$' + Math.round(priceFor(m))
+    }
+    range.addEventListener('input', update)
+    update()
+  })()
+
+  // ----------------------------------------------------------------
+  // AI-DEBUG TERMINAL — stream failure → choice → analysis once on view
+  // ----------------------------------------------------------------
+  ;(function aiDebugTerminal() {
+    const body = document.querySelector<HTMLElement>('.aidebug-body')
+    if (!body) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return // leave static
+    const rows = Array.from(body.querySelectorAll<HTMLElement>('.row'))
+    if (!rows.length) return
+    const SPIN = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+    const selected = body.querySelector<HTMLElement>('[data-menu-selected]')
+    const selCheck = selected ? selected.innerHTML : '' // "✔ Capgo AI" — confirmed
+    const selCursor = '<span class="val">❯ Capgo AI</span>' // cursor while the menu is open
+    let started = false
+    let gen = 0
+
+    rows.forEach((r) => {
+      r.style.opacity = '0'
+      r.style.transition = 'opacity 0.25s ease'
+    })
+
+    function run() {
+      gen++
+      const myGen = gen
+      rows.forEach((r) => {
+        r.style.opacity = '0'
+        if (r.classList.contains('menu-extra')) r.style.display = '' // reset to CSS (hidden) for replay
+      })
+      let i = 0
+      function step() {
+        if (myGen !== gen) return
+        if (i >= rows.length) return // pause at end
+        const r = rows[i]
+        // Reveal the other select options during the menu phase.
+        if (r.classList.contains('menu-extra')) r.style.display = 'block'
+        // While the menu is open, the chosen row shows the ❯ cursor (not yet confirmed).
+        if (r.hasAttribute('data-menu-selected')) r.innerHTML = selCursor
+        // The "Capgo AI finished" row plays a spinner first (build log analysis).
+        if (r.hasAttribute('data-ai-spin')) {
+          const finalHTML = r.innerHTML
+          r.style.opacity = '1'
+          let frame = 0
+          const start = Date.now()
+          const spin = () => {
+            if (myGen !== gen) return
+            r.innerHTML = `<span class="kw">${SPIN[frame % SPIN.length]}</span> <span class="ghost">Analyzing build log with Capgo AI…</span>`
+            frame++
+            if (Date.now() - start >= 1500) {
+              r.innerHTML = finalHTML
+              i++
+              setTimeout(step, 320)
+            } else {
+              setTimeout(spin, 90)
+            }
+          }
+          spin()
+          return
+        }
+        r.style.opacity = '1'
+        // After the last option, "submit" the select: collapse back to just the chosen one.
+        if (r.hasAttribute('data-collapse')) {
+          i++
+          setTimeout(() => {
+            if (myGen !== gen) return
+            rows.forEach((x) => {
+              if (x.classList.contains('menu-extra')) {
+                x.style.opacity = '0'
+                x.style.display = 'none'
+              }
+            })
+            // Selection confirmed → ❯ becomes ✔.
+            if (selected) selected.innerHTML = selCheck
+            setTimeout(step, 360)
+          }, 1100)
+          return
+        }
+        i++
+        // A longer beat before each "◆ / ?" heading so the menu + result land deliberately.
+        const delay = r.classList.contains('ai-head') ? 560 : 240
+        setTimeout(step, delay)
+      }
+      step()
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !started) {
+            started = true
+            setTimeout(run, 250)
+          }
+        })
+      },
+      { threshold: 0.35 },
+    )
+    io.observe(body)
+
+    const replay = document.getElementById('aidebug-replay')
+    if (replay) replay.addEventListener('click', run)
+  })()
+</script>
+
+  <!-- ============================================================
+       GSAP entrance animations — EXPERIMENTAL.
+       Scroll-triggered reveals to make the page feel more alive.
+       Loaded from CDN; remove this whole block (and the CDN tags)
+       to ship without animation. Respects prefers-reduced-motion.
+  ============================================================ -->
+  <script
+    is:inline
+    src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt"
+    crossorigin="anonymous"></script>
+  <script
+    is:inline
+    src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
+    crossorigin="anonymous"></script>
+  <script is:inline>
+    ;(function () {
+      var gsap = window.gsap
+      var ST = window.ScrollTrigger
+      if (!gsap || !ST) return
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+      gsap.registerPlugin(ST)
+
+      // Reveal a group on scroll, with optional stagger. Clears inline styles
+      // afterwards so CSS hover transforms keep working.
+      function reveal(sel, opts) {
+        opts = opts || {}
+        var els = gsap.utils.toArray(sel)
+        if (!els.length) return
+        gsap.set(els, { opacity: 0, y: opts.y == null ? 24 : opts.y })
+        ST.batch(els, {
+          start: opts.start || 'top 86%',
+          onEnter: function (b) {
+            gsap.to(b, {
+              opacity: 1,
+              y: 0,
+              duration: opts.duration || 0.6,
+              ease: 'power3.out',
+              stagger: opts.stagger || 0.08,
+              overwrite: true,
+              clearProps: 'opacity,transform',
+            })
+          },
+        })
+      }
+
+      // Hero — animate in on load.
+      var heroEls = gsap.utils.toArray(
+        '.nb .hero .beta-badge, .nb .hero .hero-banner, .nb .hero .hero-lead, .nb .hero .hero-ctas, .nb .hero .hero-meta, .nb .hero .hero-strip',
+      )
+      if (heroEls.length) {
+        gsap.set(heroEls, { opacity: 0, y: 22 })
+        gsap.to(heroEls, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.09, delay: 0.05, clearProps: 'opacity,transform' })
+      }
+
+      // Section headings everywhere.
+      reveal('.nb .section-head', { y: 20, stagger: 0.12 })
+
+      // Reveal sentence + demo terminal.
+      reveal('.nb #how .rv-one', { y: 20 })
+      reveal('.nb #how .demo-wrap', { y: 28 })
+
+      // Bento cards — the attention grabber (staggered pop-in).
+      reveal('.nb #features .bento .tile', { y: 30, stagger: 0.07, duration: 0.55, start: 'top 88%' })
+
+      // Onboarding.
+      reveal('.nb #onboarding .onboarding-cmd-row', { y: 18 })
+      reveal('.nb #onboarding .wizard', { y: 26 })
+
+      // Trust.
+      reveal('.nb #trust .trust-cell', { y: 24, stagger: 0.09 })
+
+      // Comparison.
+      reveal('.nb #compare .comp-wrap', { y: 26 })
+      reveal('.nb #compare .comp-callout', { y: 18 })
+
+      // AI debug — the terminal streams its own rows (see aiDebugTerminal), so only the side points fade in.
+      reveal('.nb #ai-debug .aidebug-points li', { y: 18, stagger: 0.1 })
+
+      // Pricing.
+      reveal('.nb #pricing .tier', { y: 26, stagger: 0.08 })
+      reveal('.nb #pricing .build-calc, .nb #pricing .pricing-fineprint', { y: 16 })
+
+      // FAQ.
+      reveal('.nb #faq .faq details', { y: 16, stagger: 0.06 })
+
+      // Final CTA.
+      reveal('.nb #cta .shell', { y: 24 })
+
+      window.addEventListener('load', function () {
+        ST.refresh()
+      })
+    })()
+  </script>
 </Layout>
