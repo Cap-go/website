@@ -12,19 +12,15 @@ const content = { title, description }
 const subprocessors = [
   {
     name: 'Supabase',
-    purpose: 'Primary database',
+    purpose: 'Primary database in London, United Kingdom',
   },
   {
     name: 'Cloudflare',
     purpose: 'Edge CDN, Workers runtime, Durable Objects, and security services',
   },
   {
-    name: 'PlanetScale',
-    purpose: 'Read replicas for database scaling',
-  },
-  {
     name: 'Google Cloud',
-    purpose: 'Read replicas for database scaling',
+    purpose: 'Database read replicas in Hong Kong, Tokyo, Sydney, Johannesburg, Milan, Jeddah, Mumbai, Sao Paulo, and Columbus',
   },
   {
     name: 'GitHub',
@@ -39,8 +35,8 @@ const subprocessors = [
     purpose: 'Static code analysis and quality checks',
   },
   {
-    name: 'Sentry',
-    purpose: 'Error monitoring and performance tracking',
+    name: 'PostHog',
+    purpose: 'Product analytics, error monitoring, and performance tracking in Europe',
   },
   {
     name: 'Stripe',
@@ -51,8 +47,8 @@ const subprocessors = [
     purpose: 'Email marketing and lifecycle messaging',
   },
   {
-    name: 'Depot',
-    purpose: 'Build acceleration and caching',
+    name: 'Scaleway',
+    purpose: 'Build infrastructure, including macOS build runners in Paris, France',
   },
 ]
 ---
@@ -68,7 +64,7 @@ const subprocessors = [
       )
     }
     <h1>{m.subprocessors_title({}, { locale })}</h1>
-    <p><em>{m.last_update({}, { locale })}: February 15, 2026</em></p>
+    <p><em>{m.last_update({}, { locale })}: May 29, 2026</em></p>
     <p>{m.subprocessors_intro({}, { locale })}</p>
     <div class="overflow-x-auto">
       <table>
