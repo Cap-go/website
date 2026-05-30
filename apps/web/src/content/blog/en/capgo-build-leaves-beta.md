@@ -13,12 +13,12 @@ head_image: /capgo-build-leaves-beta.jpg
 head_image_alt: Capgo Build is out of beta
 keywords: Capgo Build, Capacitor, cloud build, iOS build, Android build, native build, code signing, TestFlight, OTA updates
 tag: Product
-published: true
+published: false
 locale: en
 next_blog: ''
 ---
 
-<!-- DRAFT: contains ‹PLACEHOLDER› markers — do not publish until they are filled. Search this file for "PLACEHOLDER". -->
+<!-- DRAFT — not ready to publish. Pending: confirm Android onboarding has shipped to prod, plus a final copy pass. When ready, set published: true and remove this comment. -->
 
 Hey, I am [WcaleNieWolny](https://github.com/WcaleNieWolny/WcaleNieWolny), Capgo's lead software engineer. Today I get to share something the whole team has been building toward for months: **Capgo Build is officially out of beta.**
 
