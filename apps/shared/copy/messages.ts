@@ -4190,7 +4190,7 @@ const messages = {
   native_build_v2_meta_nosdk: 'No Mac, no Android SDK',
   native_build_v2_meta_speed: 'Avg build 2–3 min',
   native_build_v2_strip_ios_k: 'iOS runners',
-  native_build_v2_strip_ios_v: 'M-series Mac',
+  native_build_v2_strip_ios_v: 'M4 Mac',
   native_build_v2_strip_android_k: 'Android runners',
   native_build_v2_strip_android_v: 'Docker',
   native_build_v2_strip_build_k: 'Avg build',
