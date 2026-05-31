@@ -43,3 +43,7 @@ youre = "youre"  # Legacy copy key kept for runtime compatibility
 
 # OpenSSL command flags
 passin = "passin"  # OpenSSL password input flag
+
+[default.extend-identifiers]
+# Acronym plurals typos otherwise splits and misflags (e.g. "PNGs" -> "PN" -> "ON")
+PNGs = "PNGs"
