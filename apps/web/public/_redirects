@@ -81,5 +81,3 @@
 /.well-known/assetlinks.json /deepLink/assetlinks.json 200
 /en/* /:splat 301
 /docs/plugin/* /docs/plugins/updater/:splat 301
-/docs/cli/cloud-build/ /docs/builder/ 301
-/docs/cli/cloud-build/* /docs/builder/:splat 301

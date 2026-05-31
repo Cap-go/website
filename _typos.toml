@@ -43,3 +43,7 @@ youre = "youre"  # Legacy copy key kept for runtime compatibility
 
 # OpenSSL command flags
 passin = "passin"  # OpenSSL password input flag
+
+[default.extend-identifiers]
+# Keep "PNGs" whole; otherwise typos splits it into "PN" + "Gs" and flags "PN" -> "ON"
+PNGs = "PNGs"
