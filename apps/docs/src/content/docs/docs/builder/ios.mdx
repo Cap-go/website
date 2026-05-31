@@ -20,7 +20,7 @@ Build and submit iOS apps to TestFlight and the App Store using Capgo's dedicate
 
 ## Prerequisites
 
- - A Capgo account with an active subscription
+ - A Capgo account (a free trial is enough to get started)
  - Your app already registered in Capgo (run `bunx @capgo/cli@latest app add` if not)
  - A Mac computer with Xcode installed (it's possible to setup the build on a linux/windows machine, but it's not yet documented)
  - Valid Apple Developer account ($99/year) (You must have admin or owner rights on the Apple Developer account)
@@ -63,6 +63,16 @@ Useful official references:
 Apple updates its minimum SDK requirement regularly. As of **April 28, 2026**, iPhone and iPad apps uploaded to App Store Connect must be built with the **iOS & iPadOS 26 SDK or later**.
 :::
 
+
+:::tip[Recommended: automated onboarding]
+You don't have to do any of this by hand. Capgo's onboarding creates and configures your iOS signing credentials (distribution certificate + provisioning profile) for you — this is the recommended path:
+
+```bash
+bunx @capgo/cli@latest build init --platform ios
+```
+
+The manual walkthrough below is only for those who prefer to set up credentials themselves, or want to understand exactly what Capgo does under the hood.
+:::
 
 ## The first manual build
 
@@ -743,7 +753,7 @@ You need one distribution certificate for all targets — only provisioning prof
 If you previously used `BUILD_PROVISION_PROFILE_BASE64` (single profile), run:
 
 ```bash
-bunx @capgo/cli build credentials migrate --platform ios
+bunx @capgo/cli@latest build credentials migrate --platform ios
 ```
 
 This converts your existing single-profile credentials to the new `CAPGO_IOS_PROVISIONING_MAP` format and removes the legacy keys (`BUILD_PROVISION_PROFILE_BASE64`, `APPLE_PROFILE_NAME`).
@@ -751,7 +761,7 @@ This converts your existing single-profile credentials to the new `CAPGO_IOS_PRO
 After migration, add extension profiles with the `update` command (additive merge):
 
 ```bash
-bunx @capgo/cli build credentials update \
+bunx @capgo/cli@latest build credentials update \
   --platform ios \
   --ios-provisioning-profile "com.example.app.share-extension=./share_ext_profile.mobileprovision"
 ```
@@ -789,7 +799,7 @@ To fix this, you need to regenerate the provisioning profile.
     ![Apple Developer save profile](/native-build-assets/apple-developer-save-profile.webp)
   7. Click on the `Download` button
     ![Apple Developer download profile](/native-build-assets/apple-developer-download-profile.webp)
-  8. [Re-run the Capgo Native Build setup command](/docs/cli/cloud-build/ios/#running-the-configuration-command) with the newly downloaded profile.
+  8. [Re-run the Capgo Native Build setup command](/docs/builder/ios/#running-the-configuration-command) with the newly downloaded profile.
 </Steps>
 
 This should fix the issue.
