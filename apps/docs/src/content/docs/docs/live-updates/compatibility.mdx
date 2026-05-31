@@ -34,7 +34,7 @@ When you upload a bundle — or run the check manually — Capgo compares the **
 ### Check from the CLI
 
 ```bash
-npx @capgo/cli@latest bundle compatibility com.example.app --channel production
+bunx @capgo/cli@latest bundle compatibility com.example.app --channel production
 ```
 
 The CLI prints a table of each native package with its local version, the version live on the channel, and a status:
@@ -55,7 +55,7 @@ Add `--text` to swap the emojis for `OK`/`FAIL` (handy in CI logs), and `--packa
 For pipelines, `bundle releaseType` collapses the check into a single word:
 
 ```bash
-npx @capgo/cli@latest bundle releaseType com.example.app --channel production
+bunx @capgo/cli@latest bundle releaseType com.example.app --channel production
 # → OTA      safe to ship as a live update
 # → native   needs a new app-store build
 ```
@@ -88,10 +88,10 @@ The one strategy that actually looks at your native packages is the `metadata` u
 
 ```bash
 # one-time: switch the channel to the metadata strategy
-npx @capgo/cli channel set production com.example.app --disable-auto-update metadata
+bunx @capgo/cli@latest channel set production com.example.app --disable-auto-update metadata
 
 # from then on, Capgo sets the floor automatically on every upload
-npx @capgo/cli@latest bundle upload --channel production --auto-min-update-version
+bunx @capgo/cli@latest bundle upload --channel production --auto-min-update-version
 ```
 
 <Aside type="caution">
