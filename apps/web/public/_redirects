@@ -43,8 +43,8 @@
 /docs/upgrade/encryption-v1-to-v2/ /docs/cli/migrations/encryption/ 302
 /docs/plugins/electron-updater/migration/ /docs/plugins/electron-updater/getting-started/ 302
 /docs/plugins/capacitor-camera-preview/ /docs/plugins/camera-preview/ 302
-/cloud/native-builds/certificates/android/ /docs/cli/cloud-build/android/ 302
-/cloud/native-builds/certificates/ios/ /docs/cli/cloud-build/ios/ 302
+/cloud/native-builds/certificates/android/ /docs/builder/android/ 302
+/cloud/native-builds/certificates/ios/ /docs/builder/ios/ 302
 /blog/setup-ci-and-cd-gitlab/ /blog/setup-ci-and-cd-in-gitlab/ 302
 /blog/open-source-licecing/ /blog/open-source-licence/ 302
 /blog/release-of-a-brand-new-capacitor-social-login/ /blog/capacitor-social-login-release/ 302
@@ -81,3 +81,5 @@
 /.well-known/assetlinks.json /deepLink/assetlinks.json 200
 /en/* /:splat 301
 /docs/plugin/* /docs/plugins/updater/:splat 301
+/docs/cli/cloud-build/ /docs/builder/ 301
+/docs/cli/cloud-build/* /docs/builder/:splat 301

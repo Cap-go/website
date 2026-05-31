@@ -37,7 +37,7 @@ Solutions to common issues when building native apps with Capgo Cloud Build.
    - If you get an expired URL error, re-run the build command
 
 <Aside type="tip">
-Large projects (>200MB) may hit timeout limits. Contact support for enterprise options.
+Very large projects may hit the build-time limit (see [Known Limitations](#known-limitations)). Contact support for enterprise options.
 </Aside>
 
 ### "Build timeout after 10 minutes"
@@ -82,7 +82,7 @@ Large projects (>200MB) may hit timeout limits. Contact support for enterprise o
 1. **Verify API key is correct**
    ```bash
    # Test with a simple command
-   npx @capgo/cli@latest app list
+   bunx @capgo/cli@latest app list
    ```
 
 2. **Check API key permissions**
@@ -94,13 +94,14 @@ Large projects (>200MB) may hit timeout limits. Contact support for enterprise o
    # Check environment variable
    echo $CAPGO_TOKEN
 
-   # Or verify local .capgo file
-   cat .capgo
+   # Or check your saved credentials file
+   cat ~/.capgo-credentials/credentials.json   # global
+   cat .capgo-credentials.json                 # local (--local)
    ```
 
 4. **Re-authenticate**
    ```bash
-   npx @capgo/cli@latest login
+   bunx @capgo/cli@latest login
    ```
 
 ### "App not found" or "No permission for this app"
@@ -112,7 +113,7 @@ Large projects (>200MB) may hit timeout limits. Contact support for enterprise o
 
 1. **Verify app is registered**
    ```bash
-   npx @capgo/cli@latest app list
+   bunx @capgo/cli@latest app list
    ```
 
 2. **Check app ID matches**
@@ -383,7 +384,7 @@ Large projects (>200MB) may hit timeout limits. Contact support for enterprise o
 
 1. **Run Capacitor sync locally**
    ```bash
-   npx cap sync
+   bunx cap sync
    ```
 
 2. **Ensure all native files are committed**
@@ -419,20 +420,18 @@ Large projects (>200MB) may hit timeout limits. Contact support for enterprise o
 ### GitHub Actions: "Command not found"
 
 **Symptoms:**
-- `npx @capgo/cli` fails in CI
+- `bunx @capgo/cli@latest …` fails in CI with "command not found"
 
 **Solutions:**
 
-1. **Ensure Node.js is installed**
+1. **Set up Bun first** so `bunx` is available:
    ```yaml
-   - uses: actions/setup-node@v6
-     with:
-       node-version: '24'
+   - uses: oven-sh/setup-bun@v2
    ```
 
-2. **Install CLI explicitly**
+2. **Then run the CLI** — `bunx` fetches it on demand, no global install needed:
    ```yaml
-   - run: npm install -g @capgo/cli
+   - run: bunx @capgo/cli@latest build request com.example.app --platform android
    ```
 
 ### GitHub Actions: "Secrets not found"
@@ -462,7 +461,7 @@ Large projects (>200MB) may hit timeout limits. Contact support for enterprise o
 
 ```bash
 # Add debug flag (when available)
-npx @capgo/cli@latest build com.example.app --verbose
+bunx @capgo/cli@latest build request com.example.app --verbose
 ```
 
 ### Collect Build Information
@@ -471,7 +470,7 @@ When contacting support, include:
 
 1. **Build command used**
    ```bash
-   npx @capgo/cli@latest build com.example.app --platform ios
+   bunx @capgo/cli@latest build request com.example.app --platform ios
    ```
 
 2. **Error message** (full output)
@@ -484,7 +483,7 @@ When contacting support, include:
    ```bash
    node --version
    npm --version
-   npx @capgo/cli --version
+   bunx @capgo/cli@latest --version
    ```
 
 ### Contact Support
@@ -506,11 +505,7 @@ These limitations may be adjusted based on feedback.
 
 ## Additional Resources
 
-- [Getting Started](/docs/cli/cloud-build/getting-started/) - Initial setup guide
-- [iOS Builds](/docs/cli/cloud-build/ios/) - iOS-specific configuration
-- [Android Builds](/docs/cli/cloud-build/android/) - Android-specific configuration
+- [Getting Started](/docs/builder/getting-started/) - Initial setup guide
+- [iOS Builds](/docs/builder/ios/) - iOS-specific configuration
+- [Android Builds](/docs/builder/android/) - Android-specific configuration
 - [CLI Reference](/docs/cli/reference/build/) - Complete command documentation
-
-## Keep going from Troubleshooting
-
-If you are using **Troubleshooting** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

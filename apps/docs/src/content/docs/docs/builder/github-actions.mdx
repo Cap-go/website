@@ -35,8 +35,8 @@ Before setting up the workflow, make sure you have:
 
 - A Capgo account with an active subscription and a [Capgo API key](/docs/webapp/api-keys/)
 - Your app registered in Capgo (`bunx @capgo/cli@latest app add` if not)
-- Build credentials configured locally with `bunx @capgo/cli@latest build init` — see [Managing Credentials](/docs/cli/cloud-build/credentials/) for the wizard walkthrough
-- A successful local build (`bunx @capgo/cli@latest build com.example.app --platform android --build-mode debug`) — CI is not the place to debug your first build
+- Build credentials configured locally with `bunx @capgo/cli@latest build init` — see [Managing Credentials](/docs/builder/credentials/) for the wizard walkthrough
+- A successful local build (`bunx @capgo/cli@latest build request com.example.app --platform android --build-mode debug`) — CI is not the place to debug your first build
 - The [GitHub CLI (`gh`)](https://cli.github.com/) installed and authenticated (`gh auth login`)
 
 <Aside>
@@ -173,7 +173,7 @@ jobs:
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
         run: |
-          bunx @capgo/cli@latest build com.example.app \
+          bunx @capgo/cli@latest build request com.example.app \
             --platform ${{ inputs.platform }} \
             --build-mode ${{ inputs.mode }}
 ```
@@ -228,7 +228,7 @@ jobs:
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
         run: |
-          bunx @capgo/cli@latest build com.example.app \
+          bunx @capgo/cli@latest build request com.example.app \
             --platform ${{ matrix.platform }} \
             --build-mode release
 ```
@@ -278,7 +278,7 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
         run: |
-          bunx @capgo/cli@latest build com.example.app \
+          bunx @capgo/cli@latest build request com.example.app \
             --platform android \
             --build-mode debug \
             --no-playstore-upload \
@@ -291,7 +291,7 @@ The `paths` filter ensures the workflow doesn't run on doc-only changes. `--no-p
 
 ### Skip Play Store / TestFlight upload
 
-For test builds, use `--no-playstore-upload` (Android) or `--no-app-store-upload` (iOS) to skip store submission. Combine with `--output-upload` to get a time-limited download URL for the binary.
+For test builds, skip store submission: Android uses `--no-playstore-upload`; for iOS, build in ad-hoc mode with `--ios-distribution ad_hoc` (which never submits to the App Store). Combine either with `--output-upload` to get a time-limited download URL for the binary.
 
 ### Read the build output URL and QR code
 
@@ -303,7 +303,7 @@ Pass `--output-record <path>` to persist the build artifact URL and QR code to d
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
     # ...credentials...
   run: |
-    bunx @capgo/cli@latest build com.example.app \
+    bunx @capgo/cli@latest build request com.example.app \
       --platform android --build-mode debug \
       --output-upload --output-retention 1d \
       --output-record /tmp/build.json
@@ -345,7 +345,7 @@ By default each release build increments the build number. To pin it to a value 
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
     # ...credentials...
   run: |
-    bunx @capgo/cli@latest build com.example.app \
+    bunx @capgo/cli@latest build request com.example.app \
       --platform ios --build-mode release \
       --skip-build-number-bump
 ```
@@ -371,10 +371,10 @@ By default each release build increments the build number. To pin it to a value 
 | `CAPGO_TOKEN is not set` | Secret not added, or job has no access to it (check environment/branch protections) |
 | Missing iOS / Android credential errors | `gh secret set -f` was not run, or was run against a different repo. Verify with `gh secret list` |
 | `cap sync` fails in CI but works locally | A native plugin isn't in `package.json`, or you forgot `bun install` before `cap sync` |
-| Build succeeds but no app appears in App Store Connect | Wrong team ID, or the app record doesn't exist yet in App Store Connect. Verify locally with `bunx @capgo/cli build credentials manage` |
+| Build succeeds but no app appears in App Store Connect | Wrong team ID, or the app record doesn't exist yet in App Store Connect. Verify locally with `bunx @capgo/cli@latest build credentials manage` |
 | Build hangs after "Uploading project" | Project archive is unusually large — check that `node_modules` isn't being uploaded (it shouldn't be by default) |
 | `Provisioning profile doesn't match bundle ID` | The provisioning map points at a different bundle ID than the one Xcode is signing. Re-run `build init` to refresh the profile, then re-export with `build credentials manage` |
-| Credentials changed locally but CI still fails | Don't forget to re-export and re-push: `bunx @capgo/cli build credentials manage` → `gh secret set -f .env.capgo.<appId>` |
+| Credentials changed locally but CI still fails | Don't forget to re-export and re-push: `bunx @capgo/cli@latest build credentials manage` → `gh secret set -f .env.capgo.<appId>` |
 | Manager refuses to write the combined file | Shared config keys differ between platforms — the manager warns and asks for confirmation. Either confirm to overwrite-one-wins, or re-export per-platform with `--platform ios` / `--platform android` |
 | `build last-output` prints an empty URL | The build did not pass `--output-upload`, or it failed before producing an artifact. `outputUrl` will be `null` in the record. Branch on `[ -n "$URL" ]` before using it |
 | `build last-output` errors with `Unsupported record schemaVersion` | The runner is on an older CLI than the one that wrote the record. Pin both producer and reader to the same explicit version (e.g. `bunx @capgo/cli@7.104.0 …` on both sides) rather than `@latest`, which floats and can drift between jobs |
@@ -387,17 +387,17 @@ For platform-specific build failures, see the [Troubleshooting guide](/docs/cli/
   <LinkCard
     title="Credentials Setup"
     description="Full reference for preparing iOS and Android credentials as base64 secrets."
-    href="/docs/cli/cloud-build/credentials/"
+    href="/docs/builder/credentials/"
   />
   <LinkCard
     title="iOS Builds"
     description="Deeper guide to certificates, profiles, and App Store submission."
-    href="/docs/cli/cloud-build/ios/"
+    href="/docs/builder/ios/"
   />
   <LinkCard
     title="Android Builds"
     description="Keystore setup, Play Store service accounts, and flavor handling."
-    href="/docs/cli/cloud-build/android/"
+    href="/docs/builder/android/"
   />
   <LinkCard
     title="Configuration Options"
@@ -406,6 +406,3 @@ For platform-specific build failures, see the [Troubleshooting guide](/docs/cli/
   />
 </CardGrid>
 
-## Keep going from GitHub Actions
-
-If you are using **GitHub Actions** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

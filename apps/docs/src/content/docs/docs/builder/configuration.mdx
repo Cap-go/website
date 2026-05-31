@@ -41,8 +41,7 @@ For CI/CD pipelines, environment variables are usually the most convenient. For 
 | CLI Flag | Env Variable | Credential Key | Default | Description |
 |----------|-------------|----------------|---------|-------------|
 | `--build-certificate-base64 <cert>` | `BUILD_CERTIFICATE_BASE64` | `BUILD_CERTIFICATE_BASE64` | — | Base64-encoded `.p12` distribution certificate |
-| `--build-provision-profile-base64 <profile>` | `BUILD_PROVISION_PROFILE_BASE64` | `BUILD_PROVISION_PROFILE_BASE64` | — | Base64-encoded `.mobileprovision` provisioning profile |
-| `--build-provision-profile-base64-prod <profile>` | `BUILD_PROVISION_PROFILE_BASE64_PROD` | `BUILD_PROVISION_PROFILE_BASE64_PROD` | — | Production provisioning profile (optional, for App Store distribution) |
+| `--ios-provisioning-profile <map>` | `CAPGO_IOS_PROVISIONING_MAP` | `CAPGO_IOS_PROVISIONING_MAP` | — | Provisioning profile as a `path` or `bundleId=path` mapping. Repeatable for multi-target apps (app + extensions); the profile name is auto-extracted. |
 | `--p12-password <password>` | `P12_PASSWORD` | `P12_PASSWORD` | — | Password for the `.p12` certificate (omit if certificate has no password) |
 
 ### App Store Connect Authentication
@@ -52,7 +51,6 @@ For CI/CD pipelines, environment variables are usually the most convenient. For 
 | `--apple-key-id <id>` | `APPLE_KEY_ID` | `APPLE_KEY_ID` | — | App Store Connect API Key ID |
 | `--apple-issuer-id <id>` | `APPLE_ISSUER_ID` | `APPLE_ISSUER_ID` | — | App Store Connect Issuer ID (UUID) |
 | `--apple-key-content <content>` | `APPLE_KEY_CONTENT` | `APPLE_KEY_CONTENT` | — | Base64-encoded App Store Connect API key (`.p8` file) |
-| `--apple-profile-name <name>` | `APPLE_PROFILE_NAME` | `APPLE_PROFILE_NAME` | — | Provisioning profile name as shown in Apple Developer portal |
 | `--app-store-connect-team-id <id>` | `APP_STORE_CONNECT_TEAM_ID` | `APP_STORE_CONNECT_TEAM_ID` | — | App Store Connect Team ID |
 
 <Aside type="note">
@@ -65,6 +63,7 @@ For CI/CD pipelines, environment variables are usually the most convenient. For 
 |----------|-------------|----------------|---------|-------------|
 | `--ios-scheme <scheme>` | `CAPGO_IOS_SCHEME` | `CAPGO_IOS_SCHEME` | `App` | Xcode scheme to build |
 | `--ios-target <target>` | `CAPGO_IOS_TARGET` | `CAPGO_IOS_TARGET` | `App` | Xcode target for reading build settings |
+| `--ios-distribution <mode>` | `CAPGO_IOS_DISTRIBUTION` | `CAPGO_IOS_DISTRIBUTION` | `app_store` | Distribution mode: `app_store` or `ad_hoc` |
 
 ---
 
@@ -87,10 +86,11 @@ For CI/CD pipelines, environment variables are usually the most convenient. For 
 
 ### Android Build Settings
 
-| Env Variable | Default | Description |
-|-------------|---------|-------------|
-| `PLAY_STORE_TRACK` | `internal` | Google Play release track (`internal`, `alpha`, `beta`, `production`) |
-| `PLAY_STORE_RELEASE_STATUS` | `draft` | Release status on Google Play (`draft`, `completed`) |
+| CLI Flag | Default | Description |
+|----------|---------|-------------|
+| `--android-flavor <flavor>` | — | Product flavor to build (e.g. `production`). **Required** if your project defines multiple flavors. |
+| `--in-app-update-priority <0–5>` | — | Google Play in-app update priority for this release (higher = more urgent). |
+| `--no-playstore-upload` | — | Build and sign, but skip the Play Store upload (requires `--output-upload`). |
 
 ---
 
@@ -104,9 +104,9 @@ These options work for both iOS and Android builds.
 |----------|---------|-------------|
 | `--platform <platform>` | — | **Required.** `ios` or `android` |
 | `--build-mode <mode>` | `release` | `debug` or `release` |
-| `--build-config <json>` | — | Additional JSON build configuration |
 | `--path <path>` | `.` | Project directory |
 | `--verbose` | `false` | Enable verbose build logging |
+| `--ai-analytics` | `false` | On build failure, send logs to Capgo AI for diagnosis — see [AI Build Diagnosis](/docs/builder/ai-debug/) |
 
 ### Build Number Control
 
@@ -128,6 +128,7 @@ When `--skip-build-number-bump` is set, the build uses whatever version is alrea
 | `--output-upload` | `BUILD_OUTPUT_UPLOAD_ENABLED` | `BUILD_OUTPUT_UPLOAD_ENABLED` | `false` | Upload build outputs (IPA/APK/AAB) to Capgo storage. When set via env var, use `BUILD_OUTPUT_UPLOAD_ENABLED=true`. |
 | `--no-output-upload` | `BUILD_OUTPUT_UPLOAD_ENABLED` | — | — | Disable output upload. When set via env var, use `BUILD_OUTPUT_UPLOAD_ENABLED=false`. |
 | `--output-retention <duration>` | `BUILD_OUTPUT_RETENTION_SECONDS` | `BUILD_OUTPUT_RETENTION_SECONDS` | `1h` | How long download links remain active |
+| `--output-record <path>` | — | — | — | After a successful build, write a JSON record (job ID, status, download URL, QR code) to `<path>` — read it back with `build last-output`. |
 
 **Retention format:** Use human-readable durations like `1h`, `6h`, `2d`, `7d`. Minimum is 1 hour, maximum is 7 days. When set via env var, use seconds (e.g., `3600` for 1 hour).
 
@@ -150,14 +151,13 @@ Copy-paste ready for your CI/CD pipeline. All variables are optional — only se
 ```bash
 # Code signing (required for iOS builds)
 BUILD_CERTIFICATE_BASE64="<base64-encoded .p12>"
-BUILD_PROVISION_PROFILE_BASE64="<base64-encoded .mobileprovision>"
+CAPGO_IOS_PROVISIONING_MAP="<provisioning map generated by the CLI>"
 P12_PASSWORD="<certificate password>"
 
 # App Store Connect (required for store submission)
 APPLE_KEY_ID="ABC1234567"
 APPLE_ISSUER_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 APPLE_KEY_CONTENT="<base64-encoded .p8 key>"
-APPLE_PROFILE_NAME="My App Distribution Profile"
 APP_STORE_CONNECT_TEAM_ID="TEAM123456"
 
 # Optional iOS settings
@@ -204,19 +204,18 @@ Instead of passing flags or env vars every time, save credentials once:
 
 ```bash
 # Save iOS credentials
-bunx @capgo/cli build credentials save \
+bunx @capgo/cli@latest build credentials save \
   --platform ios \
   --certificate ./dist_cert.p12 \
-  --provisioning-profile ./profile.mobileprovision \
+  --ios-provisioning-profile ./profile.mobileprovision \
   --p12-password "cert-password" \
   --apple-key ./AuthKey.p8 \
   --apple-key-id ABC1234567 \
   --apple-issuer-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-  --apple-profile-name "My App Profile" \
   --apple-team-id TEAM123456
 
 # Save Android credentials
-bunx @capgo/cli build credentials save \
+bunx @capgo/cli@latest build credentials save \
   --platform android \
   --keystore ./release.keystore \
   --keystore-alias my-key \
@@ -242,13 +241,13 @@ Add `.capgo-credentials.json` to your `.gitignore` if using local credentials. N
 
 ```bash
 # List saved credentials
-bunx @capgo/cli build credentials list
+bunx @capgo/cli@latest build credentials list
 
 # Update a specific option without re-entering everything
-bunx @capgo/cli build credentials update --skip-build-number-bump
+bunx @capgo/cli@latest build credentials update --skip-build-number-bump
 
 # Clear saved credentials
-bunx @capgo/cli build credentials clear --platform ios
+bunx @capgo/cli@latest build credentials clear --platform ios
 ```
 
 ---
@@ -271,16 +270,15 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bunx cap sync ios
-      - run: bunx @capgo/cli build request --platform ios
+      - run: bunx @capgo/cli@latest build request --platform ios
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
           BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE }}
-          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROFILE }}
+          CAPGO_IOS_PROVISIONING_MAP: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
           APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
           APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
           APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
-          APPLE_PROFILE_NAME: ${{ secrets.APPLE_PROFILE_NAME }}
           APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
 
   build-android:
@@ -290,7 +288,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bunx cap sync android
-      - run: bunx @capgo/cli build request --platform android
+      - run: bunx @capgo/cli@latest build request --platform android
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
           ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
@@ -304,7 +302,7 @@ jobs:
 
 ```bash
 # Build iOS with all options inline
-bunx @capgo/cli build request \
+bunx @capgo/cli@latest build request \
   --platform ios \
   --build-mode release \
   --skip-build-number-bump \
@@ -312,7 +310,7 @@ bunx @capgo/cli build request \
   --apikey YOUR_API_KEY
 
 # Build Android, skip version bump, no output upload
-bunx @capgo/cli build request \
+bunx @capgo/cli@latest build request \
   --platform android \
   --skip-build-number-bump \
   --no-output-upload \
@@ -325,19 +323,15 @@ Combine saved credentials with CLI overrides:
 
 ```bash
 # Save base credentials once
-bunx @capgo/cli build credentials save --platform ios \
+bunx @capgo/cli@latest build credentials save --platform ios \
   --certificate ./cert.p12 \
-  --provisioning-profile ./profile.mobileprovision \
+  --ios-provisioning-profile ./profile.mobileprovision \
   --output-upload
 
 # Override specific options per-build
-bunx @capgo/cli build request --platform ios \
+bunx @capgo/cli@latest build request --platform ios \
   --skip-build-number-bump \
   --output-retention 2d
 ```
 
 The saved credentials provide signing details while CLI flags override build behavior for this specific run.
-
-## Keep going from Configuration Options
-
-If you are using **Configuration Options** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

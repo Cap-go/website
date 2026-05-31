@@ -1,0 +1,127 @@
+---
+title: Getting Started
+description: Create your first native build with Capgo Cloud Build
+sidebar:
+  order: 1
+---
+
+
+import { Aside } from '@astrojs/starlight/components';
+import MermaidGraph from '@/components/MermaidGraph.astro';
+import BuildCredentialsQuestionnaire from '@/components/BuildCredentialsQuestionnaire.astro';
+
+export const buildProcessFlowGraph = `flowchart LR
+    A[Your Machine] -->|1. Zip Project| B[Local Temp]
+    B -->|2. Upload| C[Capgo Cloud]
+    C -->|3. Build| D[Mac Mini Silicon M4 Build Server]
+    D -->|4. Logs Stream| A
+    D -->|5. Cleanup| E[Auto Delete]`;
+
+Get started with Capgo Cloud Build and create your first iOS or Android native build in minutes.
+
+## What You'll Need
+
+Before you begin, ensure you have:
+
+- A Capacitor app that builds successfully locally
+- Node.js 20 or higher installed
+- A Capgo account (a free trial is enough to get started)
+- Your app already registered in Capgo (run `bunx @capgo/cli@latest app add` if not)
+- *(No need to prepare signing credentials in advance — we'll set them up in the next step.)*
+
+## Configure your signing credentials
+
+Capgo needs signing credentials to build and submit your app — but you don't have to wrangle them by hand. Answer a couple of questions and we'll point you to the exact command to run:
+
+<BuildCredentialsQuestionnaire />
+
+## Run your first build
+
+You need to be authenticated with Capgo to build. If you haven't already:
+
+```bash
+bunx @capgo/cli@latest login
+# or, in CI, set the token directly:
+export CAPGO_TOKEN=your_api_key
+```
+
+If you just ran **`build init`**, you're already set — the onboarding offers to start a build for you at the end, so your first build may already be on its way. 🎉
+
+Otherwise, start a build yourself with `build request` — set `--platform` to whichever you're building:
+
+```bash
+bunx @capgo/cli@latest build request com.example.app --platform <android|ios> --build-mode debug
+```
+
+The CLI uploads your project, streams the build logs live in your terminal, and — once your credentials are configured — submits the result to the store automatically.
+
+## Understanding the Build Process
+
+When you run the build command, here's what happens:
+
+<MermaidGraph graph={buildProcessFlowGraph} ariaLabel="Capgo Cloud Build process flow diagram" />
+
+1. **Local Preparation** - Your project is zipped (excluding `node_modules` and dotfiles)
+2. **Upload** - The zip is uploaded to secure cloud storage (Cloudflare R2)
+3. **Build Execution** - Your app builds on dedicated infrastructure
+4. **Log Streaming** - Real-time logs stream to your terminal via Server-Sent Events
+5. **Automatic Cleanup** - Build artifacts are deleted (Android: instant, iOS: 24 hours)
+
+## What Gets Built
+
+Capgo Build only uploads the **minimum files needed** to compile your native app. Your full source code never leaves your machine.
+
+### What Gets Uploaded
+
+| Included | Description |
+|----------|-------------|
+| `ios/` or `android/` | The native platform folder you're building |
+| `package.json`, `package-lock.json` | Dependency manifest |
+| `capacitor.config.*` | Capacitor configuration |
+| `resources/` | App icons, splash screens |
+| Native plugin code | Only the `ios/` or `android/` subfolder of each Capacitor plugin |
+
+### What's NOT Uploaded
+
+| Excluded | Why |
+|----------|-----|
+| `node_modules/` (most of it) | Only native plugin code is included, not JS dependencies |
+| `src/` | Your web source code stays local |
+| `dist/`, `www/`, `build/` (root level) | Already synced into the native folder via `cap sync` |
+| `.git/` | Version control history |
+| `.gradle/`, `.idea/`, `.swiftpm/` | Build caches and IDE settings |
+| `.env`, secrets | Never uploaded |
+
+<Aside>
+Your built web assets (JS, CSS, HTML) **are** uploaded - but as part of the native folder. When you run `bunx cap sync`, your web build is copied into `ios/App/App/public/` or `android/app/src/main/assets/public/`. That's why running `cap sync` before building is required.
+</Aside>
+
+### Your Responsibilities
+
+Before running `bunx @capgo/cli@latest build`:
+
+1. **Build your web assets** - Run `bun run build` (or your framework's build command)
+2. **Sync to native** - Run `bunx cap sync` to copy web assets into the native project
+3. **Commit dependencies** - Ensure all native plugins are in `package.json`
+
+### What Capgo Build Handles
+
+- Native iOS compilation (Xcode, Fastlane)
+- Native Android compilation (Gradle)
+- Code signing with your credentials
+- App store submission (if configured)
+
+## Next Steps
+
+Now that you've created your first build:
+
+- [Configure iOS builds](/docs/builder/ios/) - Set up certificates and profiles
+- [Configure Android builds](/docs/builder/android/) - Set up keystores and Play Store
+- [Troubleshooting](/docs/cli/cloud-build/troubleshooting/) - Common issues and solutions
+- [CLI Reference](/docs/cli/reference/build/) - Complete command documentation
+
+## Need Help?
+
+- Check the [troubleshooting guide](/docs/cli/cloud-build/troubleshooting/)
+- Join our [Discord community](https://discord.com/invite/VnYRvBfgA6)
+- Email support at support@capgo.app
