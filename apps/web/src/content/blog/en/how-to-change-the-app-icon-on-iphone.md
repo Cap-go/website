@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-31T07:30:18.219Z
-updated_at: 2026-05-31T07:30:19.136Z
+updated_at: 2026-05-31T07:32:45.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/2470284b-bca5-409d-acc7-7ef4c2341ecc/how-to-change-the-app-icon-on-iphone-customization.jpg'
 head_image_alt: 'How to Change the App Icon on iPhone: Customize Your Look'
 keywords: 'how to change app icon on iphone, iphone app icons, capacitor alternate icons, ios developer, ios 18 customization'
