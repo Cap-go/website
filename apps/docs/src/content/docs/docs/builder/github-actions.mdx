@@ -379,7 +379,7 @@ By default each release build increments the build number. To pin it to a value 
 | `build last-output` prints an empty URL | The build did not pass `--output-upload`, or it failed before producing an artifact. `outputUrl` will be `null` in the record. Branch on `[ -n "$URL" ]` before using it |
 | `build last-output` errors with `Unsupported record schemaVersion` | The runner is on an older CLI than the one that wrote the record. Pin both producer and reader to the same explicit version (e.g. `bunx @capgo/cli@7.104.0 …` on both sides) rather than `@latest`, which floats and can drift between jobs |
 
-For platform-specific build failures, see the [Troubleshooting guide](/docs/cli/cloud-build/troubleshooting/).
+For platform-specific build failures, see the [Troubleshooting guide](/docs/builder/troubleshooting/).
 
 ## Next Steps
 
@@ -402,7 +402,7 @@ For platform-specific build failures, see the [Troubleshooting guide](/docs/cli/
   <LinkCard
     title="Configuration Options"
     description="All CLI flags and environment variables for fine-tuning your builds."
-    href="/docs/cli/cloud-build/configuration/"
+    href="/docs/builder/configuration/"
   />
 </CardGrid>
 

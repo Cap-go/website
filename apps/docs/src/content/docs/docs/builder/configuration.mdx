@@ -83,6 +83,8 @@ For CI/CD pipelines, environment variables are usually the most convenient. For 
 | CLI Flag | Env Variable | Credential Key | Default | Description |
 |----------|-------------|----------------|---------|-------------|
 | `--play-config-json <json>` | `PLAY_CONFIG_JSON` | `PLAY_CONFIG_JSON` | — | Base64-encoded Google Play service account JSON key |
+| _(env only)_ | `PLAY_STORE_TRACK` | — | `internal` | Google Play release track (`internal`, `alpha`, `beta`, `production`) |
+| _(env only)_ | `PLAY_STORE_RELEASE_STATUS` | — | `draft` | Release status on the chosen track (`draft`, `completed`, `inProgress`, `halted`) |
 
 ### Android Build Settings
 
