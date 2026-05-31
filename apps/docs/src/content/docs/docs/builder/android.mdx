@@ -24,6 +24,16 @@ Build and submit Android apps to Google Play Store using Capgo's dedicated infra
  I will use the following app for the tutorial: https://github.com/Cap-go/capgo-native-build-tutorial-app
 :::
 
+:::tip[Recommended: automated onboarding]
+You don't have to do any of this by hand. Capgo's onboarding creates and configures your Android signing credentials (keystore + Google Play service account) for you — this is the recommended path:
+
+```bash
+bunx @capgo/cli@latest build init --platform android
+```
+
+The manual walkthrough below is only for those who prefer to set up credentials themselves, or want to understand exactly what Capgo does under the hood.
+:::
+
 ## The first manual build
 
 Before we can start thinking about building the app with Capgo, we should first set it up, and do a first Android build by hand.
@@ -234,7 +244,7 @@ Now, you are ready to start the setup of Capgo Native Build. Congratulations �
 | Google Play service account | `--play-config <path>` | JSON service account file for Play Store uploads. | Yes |
 
 ```bash
-bunx @capgo/cli build credentials save --platform android \
+bunx @capgo/cli@latest build credentials save --platform android \
   --keystore ./path/to/keystore.jks \
   --keystore-alias "your-alias" \
   --keystore-key-password "key-password" \
@@ -248,7 +258,7 @@ If key and store passwords are identical, provide only one of `--keystore-key-pa
 
 ### Keystore, keystore password, keystore key password, keystore alias
 
-If you have followed the [manual build instructions](/docs/cli/cloud-build/android/#building-the-app-manually-with-android-studio), you should have the keystore already generated.
+If you have followed the [manual build instructions](/docs/builder/android/#building-the-app-manually-with-android-studio), you should have the keystore already generated.
 If you have not followed the instructions, please follow them to generate the keystore.
 
 ### Google Play service account
@@ -275,7 +285,6 @@ Let's begin.
       3. Ensure that you are on the right project
           ![Project name showing in the selector indicating correct project selection](/social-login-assets/google_cons_right_proj.png)
   4. Let's click on the search bar and search for `service accounts` and click on it
-      ![Google Console search bar](/social-login-assets/google_cons_search.png)
       ![Google Console search bar](/native-build-assets/google-console-search-bar.webp)
   5. Let's click on `Create service account`
       ![Create Service Account button in Google Console](/native-build-assets/google_cons_create_service_account_btn.webp)
@@ -344,7 +353,7 @@ You are now ready to save the credentials and run your first build.
 You can save the credentials using the following command:
 
 ```bash
-bunx @capgo/cli build credentials save --platform android \
+bunx @capgo/cli@latest build credentials save --platform android \
   --keystore ./path/to/keystore.jks \
   --keystore-alias "your-alias" \
   --keystore-key-password "key-password" \
@@ -409,7 +418,7 @@ jobs:
         with:
           bun-version: latest
       - name: Request Android build with Capgo
-        run: bunx @capgo/cli@latest build ${{ secrets.APP_ID }} --platform android
+        run: bunx @capgo/cli@latest build request ${{ secrets.APP_ID }} --platform android
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
           ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
@@ -429,7 +438,7 @@ Congratulations 🎉! You are now ready to run your first build.
 
 Run:
 ```bash
-bunx @capgo/cli build com.example.app --platform android
+bunx @capgo/cli@latest build request com.example.app --platform android
 ```
 
 And this will start the build process 🍾🥂

@@ -62,8 +62,8 @@ const redirectRows: RedirectRow[] = [
   ['/docs/plugins/capacitor-native-audio/', '/docs/plugins/native-audio/', 302],
   ['/docs/plugins/capacitor-native-market/', '/docs/plugins/native-market/', 302],
   ['/docs/plugins/capacitor-native-purchases/', '/docs/plugins/native-purchases/', 302],
-  ['/docs/cloud/native-builds/certificates/android/', '/docs/cli/cloud-build/android/', 302],
-  ['/docs/cloud/native-builds/certificates/ios/', '/docs/cli/cloud-build/ios/', 302],
+  ['/docs/cloud/native-builds/certificates/android/', '/docs/builder/android/', 302],
+  ['/docs/cloud/native-builds/certificates/ios/', '/docs/builder/ios/', 302],
   ['/docs/CLI/Referencia/Aplicaci%C3%B3n/', '/docs/cli/reference/app/', 302],
   ['/docs/CLI/Referencia/Canal/', '/docs/cli/reference/channel/', 302],
   ['/docs/CLI/Referencia/Paquete/', '/docs/cli/reference/bundle/', 302],
@@ -185,9 +185,16 @@ async function capgoLogoFallback(request: Request, env: Env): Promise<Response> 
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const pathname = new URL(request.url).pathname
+    const url = new URL(request.url)
+    const pathname = url.pathname
     const redirect = redirectMap.get(pathname)
     if (redirect) return redirectResponse(request, redirect)
+    // The Cloud Build docs moved to the Capgo Builder section (/docs/builder/).
+    // Handled here because this worker serves /docs/* and does not apply public/_redirects.
+    if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {
+      const rest = pathname.replace(/^\/docs\/cli\/cloud-build\/?/, '')
+      return Response.redirect(new URL(`/docs/builder/${rest}${url.search}`, request.url).toString(), 301)
+    }
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return capgoLogoFallback(request, env)
     return response

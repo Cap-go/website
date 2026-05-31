@@ -45,5 +45,5 @@ youre = "youre"  # Legacy copy key kept for runtime compatibility
 passin = "passin"  # OpenSSL password input flag
 
 [default.extend-identifiers]
-# Acronym plurals typos otherwise splits and misflags (e.g. "PNGs" -> "PN" -> "ON")
+# Keep "PNGs" whole; otherwise typos splits it into "PN" + "Gs" and flags "PN" -> "ON"
 PNGs = "PNGs"

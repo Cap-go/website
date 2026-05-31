@@ -14,10 +14,20 @@ Capgo Build is a cloud-based native app compilation service for Capacitor apps. 
 
 Capgo Build compiles the **native parts** of your Capacitor app in the cloud:
 
-- **iOS builds** run on dedicated Mac Mini Silicon M4 machines
-- **Android builds** run on the same Mac Mini Silicon M4 build fleet with Android Studio 2025 available
-- **Automatic code signing** handles certificates, provisioning profiles, and keystores
-- **Direct store submission** uploads signed apps to App Store Connect and Google Play
+<CardGrid>
+  <Card title="iOS Builds" icon="laptop">
+    Run on dedicated Mac Mini Silicon M4 machines — no Mac of your own required.
+  </Card>
+  <Card title="Android Builds" icon="setting">
+    Build on the same M4 fleet, with Android Studio 2025 available.
+  </Card>
+  <Card title="Automatic Code Signing" icon="approve-check">
+    Certificates, provisioning profiles, and keystores are all handled for you.
+  </Card>
+  <Card title="Direct Store Submission" icon="rocket">
+    Signed apps upload straight to App Store Connect and Google Play.
+  </Card>
+</CardGrid>
 
 You trigger builds with a single CLI command that works from anywhere - your local machine, GitHub Actions, GitLab CI, or any CI/CD pipeline.
 
@@ -34,7 +44,7 @@ Capgo Build runs native jobs on dedicated Mac Mini Silicon M4 machines:
 | Memory | 16GB of RAM |
 | OS image | macOS Tahoe 26.2 |
 
-The build image supports Xcode 26.2, Android Studio 2025, and .NET 9/.NET 10 SDK workloads for native build pipelines.
+The build image supports Xcode 26.2 and Android Studio 2025 for native build pipelines.
 
 ## When to Use Capgo Build vs Live Updates
 
@@ -104,7 +114,7 @@ Capgo Build is designed with zero credential storage:
 - **Runtime-only credentials** - Certificates and keystores are never stored in Capgo. They are uploaded and removed immediately after the build finishes.
 - **Ephemeral environments** - Each build runs in isolation and is destroyed after completion
 - **No log storage** - Build logs stream to your terminal only, never stored on Capgo servers
-- **Minimal upload** - Only the native platform you request is uploaded, not your full codebase. [See exactly what gets uploaded](/docs/cli/cloud-build/getting-started/#what-gets-built)
+- **Minimal upload** - Only the native platform you request is uploaded, not your full codebase. [See exactly what gets uploaded](/docs/builder/getting-started/#what-gets-built)
 
 ## Pricing
 
@@ -121,25 +131,21 @@ Build time is the only cost:
   <LinkCard 
     title="Getting Started" 
     description="Create your first build and see Capgo Build in action."
-    href="/docs/cli/cloud-build/getting-started/"
+    href="/docs/builder/getting-started/"
   />
   <LinkCard 
     title="Credentials Setup" 
     description="Configure certificates for iOS and keystores for Android."
-    href="/docs/cli/cloud-build/credentials/"
+    href="/docs/builder/credentials/"
   />
   <LinkCard 
     title="iOS Builds" 
     description="Complete guide to building and submitting iOS apps."
-    href="/docs/cli/cloud-build/ios/"
+    href="/docs/builder/ios/"
   />
   <LinkCard 
     title="Android Builds" 
     description="Complete guide to building and submitting Android apps."
-    href="/docs/cli/cloud-build/android/"
+    href="/docs/builder/android/"
   />
 </CardGrid>
-
-## Keep going from Introduction to Capgo Build
-
-If you are using **Introduction to Capgo Build** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.
