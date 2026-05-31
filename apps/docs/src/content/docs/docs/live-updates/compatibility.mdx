@@ -65,7 +65,7 @@ Gate your release pipeline on this: ship a live update when it prints `OTA`, and
 ## What an incompatible update means for your users
 
 <Aside type="caution">
-Detecting incompatibility does **not** block the upload. If you upload a native-incompatible bundle and set it as a channel's active build, Capgo **will deliver it** to devices on that channel.
+By default, detecting incompatibility does **not** block the upload — if you upload a native-incompatible bundle and set it as a channel's active build, Capgo **will deliver it** to devices on that channel. (You can turn this into a hard gate with `--fail-on-incompatible` — see [Prevent incompatible deliveries](#prevent-incompatible-deliveries) below.)
 </Aside>
 
 On devices still running the **older native binary**, the missing native code can cause crashes or broken features — even though the update downloaded and applied "successfully." This is why a live update can be live and delivered yet still break the app for existing users, and why Capgo can warn you when an incompatible bundle goes live.
@@ -82,9 +82,23 @@ When a bundle needs new native code, build and submit a new binary to the App St
 
 If an incompatible bundle is already active on a channel, revert the channel to the last compatible build to stop serving it until the native build is out. See [Rollbacks](/docs/live-updates/rollbacks/).
 
-### Prevent incompatible deliveries automatically
+### Prevent incompatible deliveries
 
-The one strategy that actually looks at your native packages is the `metadata` update strategy combined with `--auto-min-update-version`. Switch the channel to that strategy once, then add the flag to your uploads — Capgo runs the compatibility check on every upload and, when a bundle needs new native code, raises the update floor for you so devices that haven't installed the matching native build simply don't receive it:
+Two complementary guards, both of which actually inspect your native packages:
+
+**Fail the upload in CI — `--fail-on-incompatible`**
+
+Add the flag to your `bundle upload` step. If the bundle's native packages don't match the channel's currently-live version, the upload **fails with a non-zero exit and nothing is shipped** — so your pipeline stops you from silently publishing an OTA update that can't take effect until users install a native build:
+
+```bash
+bunx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible
+```
+
+Compatible uploads — and cases where the check can't run (a new channel, or no remote metadata) — pass through unchanged. In an interactive terminal it offers the Capgo Builder native-build flow instead; declining fails. (Can't be combined with `--ignore-metadata-check`.)
+
+**Gate delivery by native version — `metadata` + `--auto-min-update-version`**
+
+When you _do_ ship the native build and the bundle together, put the channel on the `metadata` strategy and upload with `--auto-min-update-version`. Capgo runs the compatibility check on every upload and, when a bundle needs new native code, raises the update floor so devices that haven't installed the matching native build don't receive it:
 
 ```bash
 # one-time: switch the channel to the metadata strategy
@@ -95,7 +109,7 @@ bunx @capgo/cli@latest bundle upload --channel production --auto-min-update-vers
 ```
 
 <Aside type="caution">
-Version-number rules like `--disable-auto-update major` are **not** a substitute — they only block version jumps and never inspect native code, so a native change shipped in a minor or patch release still goes out. Only `--auto-min-update-version` actually checks your native packages.
+Version-number rules like `--disable-auto-update major` are **not** a substitute — they only block version jumps and never inspect native code, so a native change shipped in a minor or patch release still goes out. Use `--fail-on-incompatible` or `--auto-min-update-version`, which check your native packages.
 </Aside>
 
 See [Version Targeting](/docs/live-updates/version-targeting/) for the full set of targeting options.
