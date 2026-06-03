@@ -11,44 +11,53 @@ const content = { title, description }
 
 const subprocessors = [
   {
-    name: 'Supabase',
-    purpose: 'Primary database in London, United Kingdom',
+    name: 'Supabase, Inc.',
+    purpose: 'Primary database, authentication, account data, application metadata, bundle metadata, and device identifiers.',
+    location: 'London, United Kingdom',
+    transfer: 'UK adequacy for UK hosting; EU Standard Contractual Clauses (SCCs) where applicable',
   },
   {
-    name: 'Cloudflare',
-    purpose: 'Edge CDN, Workers runtime, Durable Objects, and security services',
+    name: 'Cloudflare, Inc.',
+    purpose:
+      'Edge CDN, Workers runtime, Durable Objects, R2 storage, security services, and delivery of live updates. On customer opt-in, AI-assisted build-log diagnostics via Cloudflare Workers AI; logs are processed for the request and are not retained for training.',
+    location: 'Global, including USA',
+    transfer: 'EU-US Data Privacy Framework (DPF-certified); EU Standard Contractual Clauses (SCCs) as fallback',
   },
   {
     name: 'Google Cloud',
-    purpose: 'Database read replicas in Hong Kong, Tokyo, Sydney, Johannesburg, Milan, Jeddah, Mumbai, Sao Paulo, and Columbus',
+    purpose: 'Database read replicas and regional infrastructure for service availability and latency.',
+    location: 'Hong Kong, Tokyo, Sydney, Johannesburg, Milan, Jeddah, Mumbai, Sao Paulo, and Columbus',
+    transfer: 'EU Standard Contractual Clauses (SCCs); adequacy decisions where applicable; EU-US DPF/SCCs for US processing',
   },
   {
-    name: 'GitHub',
-    purpose: 'Source code hosting',
+    name: 'GitHub, Inc.',
+    purpose: 'Source code hosting and repository access when a customer connects GitHub to Capgo build or automation workflows.',
+    location: 'USA',
+    transfer: 'EU-US Data Privacy Framework (DPF-certified); EU Standard Contractual Clauses (SCCs) as fallback',
   },
   {
-    name: 'CodeRabbit',
-    purpose: 'Automated code review',
+    name: 'Scaleway SAS',
+    purpose: 'Build infrastructure, including macOS build runners, build artifacts, source files needed for native builds, and workflow data.',
+    location: 'Paris, France, EU',
+    transfer: 'Adequacy (EU)',
+  },
+]
+
+const controllerSideRecipients = ['Stripe', 'Bento', 'PostHog', 'CodeRabbit', 'SonarCloud']
+
+const changeHistory = [
+  {
+    date: '2026-06-04',
+    change:
+      'Rewrite: sub-processor list scoped to customer data processed by Capgo as processor; controller-side recipients and internal engineering services separated from the DPA sub-processor list.',
   },
   {
-    name: 'SonarCloud',
-    purpose: 'Static code analysis and quality checks',
+    date: '2026-06-04',
+    change: 'Cloudflare scope clarified: opt-in AI-assisted build-log diagnostics via Cloudflare Workers AI.',
   },
   {
-    name: 'PostHog',
-    purpose: 'Product analytics, error monitoring, and performance tracking in Europe',
-  },
-  {
-    name: 'Stripe',
-    purpose: 'Payments and billing',
-  },
-  {
-    name: 'Bento',
-    purpose: 'Email marketing and lifecycle messaging',
-  },
-  {
-    name: 'Scaleway',
-    purpose: 'Build infrastructure, including macOS build runners in Paris, France',
+    date: '2026-05-29',
+    change: 'Previous update: Supabase location clarified, Google Cloud regions listed, PostHog and Scaleway added, PlanetScale, Sentry, and Depot removed.',
   },
 ]
 ---
@@ -64,14 +73,52 @@ const subprocessors = [
       )
     }
     <h1>{m.subprocessors_title({}, { locale })}</h1>
-    <p><em>{m.last_update({}, { locale })}: May 29, 2026</em></p>
-    <p>{m.subprocessors_intro({}, { locale })}</p>
+    <p>
+      <em>{m.last_update({}, { locale })}: June 4, 2026</em><br />
+      <em>Effective Date: July 4, 2026</em>
+    </p>
+
+    <h2>1. Introduction</h2>
+    <p>
+      This list contains the sub-processors engaged by Capgo, operated by Digital Shift OÜ, for the provision of Capgo cloud services. It forms part of the Data Processing
+      Agreement.
+    </p>
+    <p>
+      The listed sub-processors process customer data on behalf of Capgo, including account data, application metadata, bundle metadata, device identifiers, source files submitted
+      for native builds, build artifacts, workflow data, and delivery data transmitted through the cloud services.
+    </p>
+    <p><strong>Not covered by this list:</strong></p>
+    <ul>
+      <li>
+        <strong>Apple and Google:</strong> for app store publishing, Capgo acts as an API pass-through to the customer's own developer accounts. Apple and Google are independent controllers
+        with a direct contractual relationship with the customer, not sub-processors of Capgo.
+      </li>
+      <li>
+        <strong>Controller-side recipients:</strong> services used by Capgo for its own business purposes, such as payments, email, product analytics, support, error monitoring, or internal
+        code quality. Current examples include {controllerSideRecipients.join(', ')}.
+      </li>
+      <li>
+        <strong>Customer-selected integrations:</strong> third-party services connected by the customer, such as external source control, CI/CD, or webhook destinations, are governed
+        by the customer's relationship with those providers unless Capgo explicitly acts as processor for that integration.
+      </li>
+    </ul>
+
+    <h2>2. Change Notification</h2>
+    <p>
+      Capgo will notify customers at least 30 days before the intended engagement of a new sub-processor or a material change to an existing sub-processor, unless an urgent
+      security, availability, or legal requirement requires faster action.
+    </p>
+    <p>Customers may object to a new or changed sub-processor on reasonable data-protection grounds under the Data Processing Agreement.</p>
+
+    <h2>3. Current Sub-processors</h2>
     <div class="overflow-x-auto">
       <table>
         <thead>
           <tr>
-            <th>{m.subprocessors_table_vendor({}, { locale })}</th>
-            <th>{m.subprocessors_table_purpose({}, { locale })}</th>
+            <th>Name</th>
+            <th>Purpose / categories of data processed</th>
+            <th>Processing location</th>
+            <th>Transfer mechanism</th>
           </tr>
         </thead>
         <tbody>
@@ -80,6 +127,30 @@ const subprocessors = [
               <tr>
                 <td>{item.name}</td>
                 <td>{item.purpose}</td>
+                <td>{item.location}</td>
+                <td>{item.transfer}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <h2>4. Change History</h2>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Change</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            changeHistory.map((item) => (
+              <tr>
+                <td>{item.date}</td>
+                <td>{item.change}</td>
               </tr>
             ))
           }
