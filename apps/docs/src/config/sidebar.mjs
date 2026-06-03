@@ -186,6 +186,7 @@ const pluginEntries = [
   ['Capacitor Patch', 'capacitor-patch'],
   ['RealtimeKit', 'realtimekit'],
   ['reCAPTCHA', 'recaptcha', [linkItem('iOS setup', '/docs/plugins/recaptcha/ios'), linkItem('Android setup', '/docs/plugins/recaptcha/android')]],
+  ['Verisoul', 'verisoul', [linkItem('iOS setup', '/docs/plugins/verisoul/ios'), linkItem('Android setup', '/docs/plugins/verisoul/android')]],
   ['Ricoh 360 Camera', 'ricoh360-camera'],
   ['Screen Orientation', 'screen-orientation'],
   ['Screen Recorder', 'screen-recorder'],

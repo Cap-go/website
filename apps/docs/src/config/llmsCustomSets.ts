@@ -92,6 +92,7 @@ Plugin Photo Library|photo library access plugin|docs/plugins/photo-library/**
 Plugin Printer|printing plugin for documents and images|docs/plugins/printer/**
 Plugin RealtimeKit|real-time communication plugin|docs/plugins/realtimekit/**
 Plugin reCAPTCHA|Web reCAPTCHA, Web reCAPTCHA Enterprise, and native Enterprise mobile token plugin|docs/plugins/recaptcha/**
+Plugin Verisoul|native Verisoul fraud-prevention session plugin for Capacitor apps|docs/plugins/verisoul/**
 Plugin Ricoh 360 Camera|Ricoh 360 camera integration plugin|docs/plugins/ricoh360-camera/**
 Plugin Screen Orientation|screen orientation control plugin|docs/plugins/screen-orientation/**
 Plugin Screen Recorder|screen recording plugin|docs/plugins/screen-recorder/**

@@ -67,6 +67,7 @@ const actionDefinitionRows =
 @capgo/capacitor-appinsights|github.com/Cap-go|Track app usage, performance metrics, and user behavior with Apptopia AppInsights|https://github.com/Cap-go/capacitor-appinsights/|AppInsights
 @capgo/capacitor-app-attest|github.com/Cap-go|Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard|https://github.com/Cap-go/capacitor-app-attest/|App Attest
 @capgo/capacitor-recaptcha|github.com/Cap-go|Generate Web reCAPTCHA or reCAPTCHA Enterprise tokens plus native Enterprise mobile tokens|https://github.com/Cap-go/capacitor-recaptcha/|reCAPTCHA
+@capgo/capacitor-verisoul|github.com/Cap-go|Collect Verisoul native fraud-prevention sessions from Capacitor apps on iOS and Android|https://github.com/Cap-go/capacitor-verisoul/|Verisoul
 @capgo/capacitor-audiosession|github.com/Cap-go|Configure iOS audio session for background playback, mixing, and routing control|https://github.com/Cap-go/capacitor-audiosession/|Audio Session
 @capgo/capacitor-background-geolocation|github.com/Cap-go|Accurate background location tracking with native iOS and Android geofencing plus transition webhooks|https://github.com/Cap-go/capacitor-background-geolocation/|Background Geolocation
 @capgo/capacitor-background-task|github.com/Cap-go|Schedule periodic background fetch tasks on iOS and Android with Expo-style task registration|https://github.com/Cap-go/capacitor-background-task/|Background Task
@@ -210,6 +211,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-appinsights': 'ChartBar',
   '@capgo/capacitor-app-attest': 'ShieldCheck',
   '@capgo/capacitor-recaptcha': 'ShieldCheck',
+  '@capgo/capacitor-verisoul': 'ShieldCheck',
   '@capgo/capacitor-audiosession': 'SpeakerWave',
   '@capgo/capacitor-background-geolocation': 'MapPin',
   '@capgo/capacitor-background-task': 'Clock',
