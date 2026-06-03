@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 731" role="img" aria-labelledby="title desc">
+  <title id="title">Apple App Review message saying an app duplicates a saturated category</title>
+  <desc id="desc">A local reproduction of an Apple App Review Design Spam refusal message shared by Adrien with confidential submission information blurred.</desc>
+  <defs>
+    <filter id="redacted-blur">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+  <rect width="2048" height="731" fill="#f8f8f9"/>
+  <text x="47" y="28" font-family="Inter, Arial, sans-serif" font-size="24" fill="#424242">If you have any questions, we are here to help. Reply to this message in App Store Connect and let us know.</text>
+
+  <text x="47" y="105" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800" fill="#111111">Review Environment</text>
+  <text x="47" y="166" font-family="Inter, Arial, sans-serif" font-size="24" fill="#424242">Submission ID:</text>
+  <rect x="206" y="145" width="468" height="29" rx="7" fill="#737373" opacity="0.55" filter="url(#redacted-blur)"/>
+  <text x="47" y="201" font-family="Inter, Arial, sans-serif" font-size="24" fill="#424242">Review date: May 15, 2026</text>
+  <text x="47" y="236" font-family="Inter, Arial, sans-serif" font-size="24" fill="#424242">Review Device: iPad Air 11-inch (M3)</text>
+  <text x="47" y="270" font-family="Inter, Arial, sans-serif" font-size="24" fill="#424242">Version reviewed: 1.0 (2)</text>
+
+  <text x="47" y="345" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="800" fill="#111111">Guideline 4.3(b) - Design - Spam</text>
+  <text x="47" y="439" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#444444">Issue Description</text>
+  <text x="47" y="509" font-family="Inter, Arial, sans-serif" font-size="24" fill="#444444">The app is primarily a fart or burp app that duplicates the content and functionality of similar apps in a saturated category.</text>
+
+  <rect x="46" y="552" width="1903" height="34" fill="#a7d0fb"/>
+  <rect x="46" y="586" width="246" height="34" fill="#a7d0fb"/>
+  <text x="47" y="578" font-family="Inter, Arial, sans-serif" font-size="24" fill="#444444">
+    The app may include features or characteristics that distinguish it as more than just a fart or burp app, but it prominently features that functionality. There are already enough of these
+  </text>
+  <text x="47" y="612" font-family="Inter, Arial, sans-serif" font-size="24" fill="#444444">apps on the App Store.</text>
+
+  <text x="47" y="681" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#444444">Next Steps</text>
+</svg>
