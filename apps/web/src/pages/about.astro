@@ -61,7 +61,7 @@ const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
 // Create about page WebPage schema
 const aboutPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
-  description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet founder Martin Donadieu.',
+  description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet the team building it.',
   url: aboutUrl,
 })
 
@@ -69,7 +69,7 @@ const aboutPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
 const content = {
   title,
   description,
-  image: `${baseUrl}/app_demo.webp`,
+  image: `${baseUrl}/capgo_about_team.png`,
   ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, aboutPage, {
     includeOrganization: false, // We're including the enhanced org as mainEntity
     includeBreadcrumbs: true,
