@@ -73,6 +73,7 @@ Plugin Mux Player|Mux video player integration plugin|docs/plugins/mux-player/**
 Plugin Native Audio|native audio playback plugin|docs/plugins/native-audio/**
 Plugin Native Biometric|biometric authentication plugin for fingerprint and face ID|docs/plugins/native-biometric/**
 Plugin Native Geocoder|native geocoding plugin for address lookup|docs/plugins/nativegeocoder/**
+Plugin Native Loader|native animated loaders, transparent overlays, Lottie assets, and WebView resizing for Capacitor apps|docs/plugins/native-loader/**
 Plugin Native Market|app store deep linking plugin|docs/plugins/native-market/**
 Plugin Native Navigation|native navbar, tabbar, and transition shell plugin for Capacitor WebView apps|docs/plugins/native-navigation/**
 Plugin Network Diagnostics|native network diagnostics plugin for URL reachability, TCP ports, WebSocket handshakes, speed, and packet loss checks|docs/plugins/network-diagnostics/**
