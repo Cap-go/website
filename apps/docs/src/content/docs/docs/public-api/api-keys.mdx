@@ -33,6 +33,38 @@ If an API key has explicit role bindings, **only those bindings** are evaluated 
 Keys without role bindings fall back to a legacy mode-based system (`read`, `upload`, `write`, `all`). These modes are deprecated — use RBAC roles instead.
 :::
 
+## Organization creation permission
+
+Creating organizations with an API key now uses an explicit global permission: `org.create`.
+
+This permission is separate from normal org/app role bindings because a new organization does not exist yet when `POST /organization/` is called. To create organizations with an API key:
+
+- The API key must include `org.create` in `global_permissions`.
+- The same API key must also have a current organization-scoped `org_admin` or `org_super_admin` binding.
+- New API keys do not receive `org.create` by default. Enable **Allow creating organizations** when creating or editing an RBAC API key in the dashboard.
+- Existing write-capable org admin/super admin API keys were backfilled with `org.create` so existing integrations can continue creating organizations.
+
+When an API key creates an organization, Capgo automatically assigns that same API key as `org_super_admin` on the newly created organization. This lets the integration manage the organization it just created without needing a separate manual role binding.
+
+If you create an API key through the API, include `global_permissions` alongside the org admin binding:
+
+```json
+{
+  "name": "Provisioning key",
+  "hashed": true,
+  "bindings": [
+    {
+      "role_name": "org_admin",
+      "scope_type": "org",
+      "org_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "global_permissions": ["org.create"]
+}
+```
+
+`org.create` only applies to creating organizations. Deleting an organization still requires delete permission on the target organization, typically through `org_super_admin`.
+
 ## Secure (Hashed) Keys
 
 When creating a secure key, the server generates the key material and returns the plain-text value once. Only a hash is stored. This means:
@@ -67,6 +99,7 @@ Organization policies can enforce:
 3. **Monitoring Tools**: Create keys with the `app_reader` role for external monitoring integrations
 4. **Admin Access**: Use keys with the `org_admin` role sparingly for administrative tools
 5. **Third-Party Integrations**: Create keys restricted to specific apps with the minimum required role
+6. **Organization Provisioning**: Use an `org_admin` or `org_super_admin` RBAC key with `org.create` only for trusted automation that needs to create organizations
 
 ## Keep going from API Keys
 
