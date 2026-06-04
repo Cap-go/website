@@ -45,6 +45,21 @@ const subprocessors = [
 
 const controllerSideRecipients = ['Stripe', 'Bento', 'PostHog', 'CodeRabbit', 'SonarCloud']
 
+const scopeNotes = [
+  {
+    title: 'Apple and Google',
+    body: "For app store publishing, Capgo acts as an API pass-through to the customer's own developer accounts. Apple and Google are independent controllers with a direct contractual relationship with the customer.",
+  },
+  {
+    title: 'Controller-side recipients',
+    body: `Services used by Capgo for its own business purposes, such as payments, email, product analytics, support, error monitoring, or internal code quality. Current examples include ${controllerSideRecipients.join(', ')}.`,
+  },
+  {
+    title: 'Customer-selected integrations',
+    body: "Third-party services connected by the customer, such as external source control, CI/CD, or webhook destinations, are governed by the customer's relationship with those providers unless Capgo explicitly acts as processor for that integration.",
+  },
+]
+
 const changeHistory = [
   {
     date: '2026-06-04',
@@ -63,99 +78,135 @@ const changeHistory = [
 ---
 
 <Layout content={content}>
-  <div class="prose-sm prose prose-invert m-auto py-8">
-    {
-      locale !== defaultLocale && (
-        <span class="text-xs">
-          Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source for
-          legal matters.
-        </span>
-      )
-    }
-    <h1>{m.subprocessors_title({}, { locale })}</h1>
-    <p>
-      <em>{m.last_update({}, { locale })}: June 4, 2026</em><br />
-      <em>Effective Date: July 4, 2026</em>
-    </p>
-
-    <h2>1. Introduction</h2>
-    <p>
-      This list contains the sub-processors engaged by Capgo, operated by Digital Shift OÜ, for the provision of Capgo cloud services. It forms part of the Data Processing
-      Agreement.
-    </p>
-    <p>
-      The listed sub-processors process customer data on behalf of Capgo, including account data, application metadata, bundle metadata, device identifiers, source files submitted
-      for native builds, build artifacts, workflow data, and delivery data transmitted through the cloud services.
-    </p>
-    <p><strong>Not covered by this list:</strong></p>
-    <ul>
-      <li>
-        <strong>Apple and Google:</strong> for app store publishing, Capgo acts as an API pass-through to the customer's own developer accounts. Apple and Google are independent controllers
-        with a direct contractual relationship with the customer, not sub-processors of Capgo.
-      </li>
-      <li>
-        <strong>Controller-side recipients:</strong> services used by Capgo for its own business purposes, such as payments, email, product analytics, support, error monitoring, or internal
-        code quality. Current examples include {controllerSideRecipients.join(', ')}.
-      </li>
-      <li>
-        <strong>Customer-selected integrations:</strong> third-party services connected by the customer, such as external source control, CI/CD, or webhook destinations, are governed
-        by the customer's relationship with those providers unless Capgo explicitly acts as processor for that integration.
-      </li>
-    </ul>
-
-    <h2>2. Change Notification</h2>
-    <p>
-      Capgo will notify customers at least 30 days before the intended engagement of a new sub-processor or a material change to an existing sub-processor, unless an urgent
-      security, availability, or legal requirement requires faster action.
-    </p>
-    <p>Customers may object to a new or changed sub-processor on reasonable data-protection grounds under the Data Processing Agreement.</p>
-
-    <h2>3. Current Sub-processors</h2>
-    <div class="overflow-x-auto">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Purpose / categories of data processed</th>
-            <th>Processing location</th>
-            <th>Transfer mechanism</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            subprocessors.map((item) => (
-              <tr>
-                <td>{item.name}</td>
-                <td>{item.purpose}</td>
-                <td>{item.location}</td>
-                <td>{item.transfer}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+  <div class="mx-auto w-full max-w-6xl px-4 py-10 text-slate-100 sm:px-6 sm:py-14 lg:px-8">
+    <div class="max-w-3xl">
+      {
+        locale !== defaultLocale && (
+          <p class="mb-5 rounded-md border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-sm leading-6 text-amber-100">
+            Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source
+            for legal matters.
+          </p>
+        )
+      }
+      <p class="text-sm font-semibold tracking-wide text-cyan-300 uppercase">Legal</p>
+      <h1 class="mt-3 text-4xl font-bold tracking-normal text-white sm:text-5xl">{m.subprocessors_title({}, { locale })}</h1>
+      <p class="mt-5 text-lg leading-8 text-slate-300">
+        DPA-scoped sub-processors used to operate Capgo cloud services, with processing purpose, location, and transfer mechanism.
+      </p>
     </div>
 
-    <h2>4. Change History</h2>
-    <div class="overflow-x-auto">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Change</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            changeHistory.map((item) => (
-              <tr>
-                <td>{item.date}</td>
-                <td>{item.change}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-    </div>
+    <dl class="mt-8 grid gap-3 sm:grid-cols-3">
+      <div class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
+        <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">{m.last_update({}, { locale })}</dt>
+        <dd class="mt-1 text-base font-semibold text-white">June 4, 2026</dd>
+      </div>
+      <div class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
+        <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Effective Date</dt>
+        <dd class="mt-1 text-base font-semibold text-white">July 4, 2026</dd>
+      </div>
+      <div class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
+        <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Notice Period</dt>
+        <dd class="mt-1 text-base font-semibold text-white">30 days</dd>
+      </div>
+    </dl>
+
+    <section class="mt-12 max-w-3xl">
+      <h2 class="text-2xl font-semibold text-white">1. Introduction</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <p>
+          This list contains the sub-processors engaged by Capgo, operated by Digital Shift OÜ, for the provision of Capgo cloud services. It forms part of the Data Processing
+          Agreement.
+        </p>
+        <p>
+          The listed sub-processors process customer data on behalf of Capgo, including account data, application metadata, bundle metadata, device identifiers, source files
+          submitted for native builds, build artifacts, workflow data, and delivery data transmitted through the cloud services.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold text-white">2. Not Covered By This List</h2>
+        <p class="mt-4 text-base leading-8 text-slate-300">These services are not treated as Capgo sub-processors for the DPA list unless Capgo explicitly acts as processor.</p>
+      </div>
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {
+          scopeNotes.map((item) => (
+            <article class="rounded-md border border-white/10 bg-slate-950/60 p-5">
+              <h3 class="text-base font-semibold text-white">{item.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-300">{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl">
+      <h2 class="text-2xl font-semibold text-white">3. Change Notification</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <p>
+          Capgo will notify customers at least 30 days before the intended engagement of a new sub-processor or a material change to an existing sub-processor, unless an urgent
+          security, availability, or legal requirement requires faster action.
+        </p>
+        <p>Customers may object to a new or changed sub-processor on reasonable data-protection grounds under the Data Processing Agreement.</p>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold text-white">4. Current Sub-processors</h2>
+        <p class="mt-4 text-base leading-8 text-slate-300">Customer data processed by Capgo as processor may pass through the following vendors.</p>
+      </div>
+      <div class="mt-6 overflow-x-auto rounded-md border border-white/10">
+        <table class="min-w-[960px] border-collapse text-left text-sm">
+          <thead class="bg-white/[0.06] text-xs tracking-wide text-slate-300 uppercase">
+            <tr>
+              <th class="w-48 px-4 py-3 font-semibold">Name</th>
+              <th class="px-4 py-3 font-semibold">Purpose / categories of data processed</th>
+              <th class="w-56 px-4 py-3 font-semibold">Processing location</th>
+              <th class="w-72 px-4 py-3 font-semibold">Transfer mechanism</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10 bg-slate-950/50 text-slate-300">
+            {
+              subprocessors.map((item) => (
+                <tr class="align-top">
+                  <td class="px-4 py-4 font-semibold text-white">{item.name}</td>
+                  <td class="px-4 py-4 leading-6">{item.purpose}</td>
+                  <td class="px-4 py-4 leading-6">{item.location}</td>
+                  <td class="px-4 py-4 leading-6">{item.transfer}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold text-white">5. Change History</h2>
+      </div>
+      <div class="mt-6 overflow-x-auto rounded-md border border-white/10">
+        <table class="min-w-[720px] border-collapse text-left text-sm">
+          <thead class="bg-white/[0.06] text-xs tracking-wide text-slate-300 uppercase">
+            <tr>
+              <th class="w-40 px-4 py-3 font-semibold">Date</th>
+              <th class="px-4 py-3 font-semibold">Change</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10 bg-slate-950/50 text-slate-300">
+            {
+              changeHistory.map((item) => (
+                <tr class="align-top">
+                  <td class="px-4 py-4 font-semibold text-white">{item.date}</td>
+                  <td class="px-4 py-4 leading-6">{item.change}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
 </Layout>
