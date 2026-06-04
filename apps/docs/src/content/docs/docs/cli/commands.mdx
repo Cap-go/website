@@ -307,10 +307,10 @@ Optionally, you can give:
   
 ### **Compatibility** 
 
-`npx @capgo/cli bundle compatibility [appId] -c [channelId]`
+`npx @capgo/cli bundle compatibility [appId] -c [channelName]`
 
 `[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
-`[channelId]` the name of your new channel.
+`[channelName]` the name of the channel to check.
 
 Optionally, you can give:
 
@@ -324,15 +324,15 @@ Optionally, you can give:
 
 ### **Add**
 
-`npx @capgo/cli channel add [channelId] [appId]`
+`npx @capgo/cli channel add [channelName] [appId]`
 
-`[channelId]` the name of your new channel. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
+`[channelName]` the name of your new channel, such as `production` or `beta`. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 ### **Delete**
 
-`npx @capgo/cli channel delete [channelId] [appId]`
+`npx @capgo/cli channel delete [channelName] [appId]`
 
-`[channelId]` the name of your channel you want to delete. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
+`[channelName]` the name of the channel you want to delete. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 ### **List**
 
@@ -346,9 +346,10 @@ Optionally, you can give:
 
 ### **Set**
 
-`npx @capgo/cli channel set [channelId] [appId]`
+`npx @capgo/cli channel set [channelName] [appId]`
 
 `[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
+`[channelName]` the name of the channel you want to configure, such as `production` or `beta`.
 
 Optionally, you can give:
 

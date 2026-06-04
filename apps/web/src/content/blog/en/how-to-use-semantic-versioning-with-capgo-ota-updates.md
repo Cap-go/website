@@ -218,7 +218,7 @@ npx @capgo/cli@latest init [apikey]
 npx @capgo/cli bundle upload [appId]
 
 # Add a new distribution channel
-npx @capgo/cli channel add [channelId] [appId]
+npx @capgo/cli channel add [channelName] [appId]
 ```
 
 Capgo ensures secure deployment with end-to-end encryption and safe key management.
