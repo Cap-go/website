@@ -45,10 +45,10 @@ interface Organization {
 
 ```bash
 # Get all organizations
-curl -H "authorization: your-api-key" https://api.capgo.app/organization/
+curl -H "x-api-key: YOUR_API_KEY" https://api.capgo.app/organization/
 
 # Get specific organization
-curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=org_123
+curl -H "x-api-key: YOUR_API_KEY" https://api.capgo.app/organization/?orgId=org_123
 ```
 
 #### Example Response
@@ -73,11 +73,22 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=
 
 Create a new organization.
 
+When using an API key, the key must have the global `org.create` permission and a current organization-scoped `org_admin` or `org_super_admin` binding. This is required because the target organization does not exist yet, so normal org-scoped RBAC cannot be checked against it.
+
+When the request succeeds, Capgo automatically assigns the same API key as `org_super_admin` on the new organization.
+
+:::note
+`org.create` is not granted to new API keys by default. Enable **Allow creating organizations** in the API key form, or include `"global_permissions": ["org.create"]` when creating the key through the API.
+:::
+
 #### Request Body
 
 ```typescript
 interface OrganizationCreate {
   name: string
+  email?: string
+  estimatedMau?: number
+  website?: string
 }
 ```
 
@@ -85,10 +96,12 @@ interface OrganizationCreate {
 
 ```bash
 curl -X POST \
-  -H "authorization: your-api-key" \
+  -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "New Organization"
+    "name": "New Organization",
+    "email": "admin@example.com",
+    "website": "https://example.com"
   }' \
   https://api.capgo.app/organization/
 ```
@@ -97,8 +110,17 @@ curl -X POST \
 
 ```json
 {
-  "status": "Organization created",
   "id": "org_456"
+}
+```
+
+#### Permission Error
+
+If the API key does not have `org.create`, the API returns:
+
+```json
+{
+  "error": "permission_denied"
 }
 ```
 
@@ -106,7 +128,7 @@ curl -X POST \
 
 `https://api.capgo.app/organization/`
 
-Update an existing organization. Requires admin role.
+Update an existing organization. Requires admin role on the target organization.
 
 #### Request Body
 
@@ -123,7 +145,7 @@ interface OrganizationUpdate {
 
 ```bash
 curl -X PUT \
-  -H "authorization: your-api-key" \
+  -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "orgId": "org_123",
@@ -150,7 +172,9 @@ curl -X PUT \
 
 `https://api.capgo.app/organization/`
 
-Delete an existing organization. Requires admin role. This action is irreversible and will remove all associated apps, bundles (versions), and resources.
+Delete an existing organization. Requires delete permission on the target organization, typically through the `org_super_admin` role. This action is irreversible and will remove all associated apps, bundles (versions), and resources.
+
+The `org.create` global permission does not allow deleting organizations.
 
 #### Query Parameters
 
@@ -160,7 +184,7 @@ Delete an existing organization. Requires admin role. This action is irreversibl
 
 ```bash
 curl -X DELETE \
-  -H "authorization: your-api-key" \
+  -H "x-api-key: YOUR_API_KEY" \
   https://api.capgo.app/organization/?orgId=org_123
 ```
 
@@ -168,8 +192,7 @@ curl -X DELETE \
 
 ```json
 {
-  "status": "Organization deleted",
-  "id": "org_123"
+  "status": "ok"
 }
 ```
 

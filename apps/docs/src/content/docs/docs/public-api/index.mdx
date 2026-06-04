@@ -11,18 +11,21 @@ This is the documentation of the public API of Capgo cloud. The API allows you t
 
 ## Authentication
 
-All API endpoints require authentication. To authenticate your requests, add your API key in the `authorization` header.
+All API endpoints require authentication. To authenticate your requests, add your API key in the `x-api-key` header.
 
 Example:
+
 ```bash
-curl -H "authorization: your-api-key" https://api.capgo.app/organization/
+curl -H "x-api-key: YOUR_API_KEY" https://api.capgo.app/organization/
 ```
 
 <LinkCard
 	title="Get API key"
 	description="Generate your API key in the Capgo dashboard"
-	href="https://console.capgo.app/dashboard/apikeys/"
+	href="https://console.capgo.app/settings/organization/api-keys"
 />
+
+The `authorization` header is still accepted for legacy API keys, but `x-api-key` is the recommended header for all key types, including secure hashed keys.
 
 ## Rate Limiting
 
