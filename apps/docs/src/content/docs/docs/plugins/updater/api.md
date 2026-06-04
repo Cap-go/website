@@ -1009,10 +1009,12 @@ If you don't use backend, you need to provide the URL and version of the bundle.
 
 | Prop                 | Type                 | Description                                     | Since |
 | -------------------- | -------------------- | ----------------------------------------------- | ----- |
-| **`id`**             | <code>string</code>  | The channel ID                                  | 7.5.0 |
+| **`id`**             | <code>number</code>  | The numeric channel ID                          | 7.5.0 |
 | **`name`**           | <code>string</code>  | The channel name                                | 7.5.0 |
 | **`public`**         | <code>boolean</code> | If true, this is a default/fallback channel. Devices cannot self-assign to public channels. Instead, when a device removes its channel override (using `unsetChannel()`), it will automatically receive updates from the matching public channel. | 7.5.0 |
 | **`allow_self_set`** | <code>boolean</code> | If true, devices can explicitly self-assign to this channel using `setChannel()`. This is typically used for beta testing, A/B testing, or opt-in update tracks. | 7.5.0 |
+
+Channel commands use the channel `name`, not this numeric `id`.
 
 
 ### SetCustomIdOptions
