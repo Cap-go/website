@@ -76,6 +76,23 @@ const { id } = await NativeLoader.show({
 await NativeLoader.hide({ id, restoreWebView: true });
 ```
 
+## Siri V2 Edge Loader
+
+Use `siri-v2` for a native full-screen loader that moves color around the screen edge while the WebView remains visible.
+
+```ts
+const { id } = await NativeLoader.show({
+  style: 'siri-v2',
+  placement: 'fullscreen',
+  colors: ['#71f6ff', '#8b5cf6', '#ff4ecd', '#fff7ad'],
+  thickness: 10,
+  scrimColor: 'rgba(3, 7, 18, 0.10)',
+  interactionMode: 'passThrough',
+});
+
+await NativeLoader.hide({ id });
+```
+
 ## Lottie Loader
 
 ```ts
