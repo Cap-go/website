@@ -71,6 +71,23 @@ const { id } = await NativeLoader.show({
 await NativeLoader.hide({ id, restoreWebView: true });
 ```
 
+## Siri V2 Edge Loader
+
+Use `style: 'siri-v2'` when the loading state should be a native full-screen color motion around the app edge instead of a centered card.
+
+```ts
+const { id } = await NativeLoader.show({
+  style: 'siri-v2',
+  placement: 'fullscreen',
+  colors: ['#71f6ff', '#8b5cf6', '#ff4ecd', '#fff7ad'],
+  thickness: 10,
+  scrimColor: 'rgba(3, 7, 18, 0.10)',
+  interactionMode: 'passThrough',
+});
+
+await NativeLoader.hide({ id });
+```
+
 ## Update Progress
 
 ```ts
@@ -188,7 +205,7 @@ NativeLoader.hide(id)
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `style` | `'siri' \| 'chrome' \| 'orbit' \| 'ring' \| 'pulse' \| 'dots' \| 'bars' \| 'wave' \| 'halo' \| 'lottie' \| 'image'` | Loader renderer |
+| `style` | `'siri' \| 'siri-v2' \| 'chrome' \| 'orbit' \| 'ring' \| 'pulse' \| 'dots' \| 'bars' \| 'wave' \| 'halo' \| 'lottie' \| 'image'` | Loader renderer |
 | `placement` | `'center' \| 'top' \| 'bottom' \| 'left' \| 'right' \| 'fullscreen' \| 'around' \| 'custom'` | Native surface position |
 | `interactionMode` | `'passThrough' \| 'block' \| 'loaderOnly'` | Touch handling |
 | `backgroundColor` | `string` | Overlay color, including alpha |
