@@ -1,6 +1,7 @@
 {
   "@capgo/capacitor-native-market": 334,
   "@capgo/capacitor-native-navigation": 8255,
+  "@capgo/capacitor-native-loader": 0,
   "@capgo/capacitor-auto": 79,
   "@capgo/capacitor-transitions": 8393,
   "@capgo/capacitor-sheets": 7101,

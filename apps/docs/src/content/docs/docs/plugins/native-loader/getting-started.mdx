@@ -1,0 +1,201 @@
+---
+title: Getting Started
+description: Install @capgo/capacitor-native-loader and show native loaders from JavaScript, Swift, Kotlin, or another plugin.
+sidebar:
+  order: 2
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+<Steps>
+1. **Install the package**
+
+   ```bash
+   npm install @capgo/capacitor-native-loader
+   npx cap sync
+   ```
+
+2. **Show a native loader from JavaScript**
+
+   ```ts
+   import { NativeLoader } from '@capgo/capacitor-native-loader';
+
+   const { id } = await NativeLoader.show({
+     style: 'siri',
+     placement: 'fullscreen',
+     message: 'Preparing workspace',
+     colors: ['#71f6ff', '#8b5cf6', '#ff4ecd', '#fff7ad'],
+     scrimColor: 'rgba(3, 7, 18, 0.42)',
+     interactionMode: 'block',
+   });
+
+   await doExpensiveWork();
+
+   await NativeLoader.hide({ id });
+   ```
+</Steps>
+
+## Configure Defaults
+
+```ts
+await NativeLoader.configure({
+  defaults: {
+    style: 'orbit',
+    placement: 'center',
+    size: 96,
+    colors: ['#38bdf8', '#a78bfa'],
+    reducedMotion: 'system',
+    interactionMode: 'passThrough',
+  },
+});
+```
+
+## Chrome-Style Top Loader
+
+Use `style: 'chrome'` when you want the familiar browser top progress bar and the WebView should stay usable below it.
+
+```ts
+const { id } = await NativeLoader.show({
+  style: 'chrome',
+  placement: 'top',
+  colors: ['#4285f4', '#34a853', '#fbbc05', '#ea4335'],
+  thickness: 4,
+  interactionMode: 'passThrough',
+  webView: {
+    mode: 'resize',
+    insets: { top: 12 },
+    restoreOnHide: true,
+  },
+});
+
+await NativeLoader.hide({ id, restoreWebView: true });
+```
+
+## Update Progress
+
+```ts
+const { id } = await NativeLoader.show({
+  style: 'ring',
+  message: 'Uploading',
+  progress: 0,
+});
+
+for await (const progress of uploadFile(file)) {
+  await NativeLoader.setProgress({ id, progress });
+}
+
+await NativeLoader.hide({ id });
+```
+
+## Resize The WebView
+
+Use `setWebViewLayout` when a native loader should own part of the screen while web content remains visible and usable.
+
+```ts
+await NativeLoader.setWebViewLayout({
+  mode: 'inset',
+  insets: { top: 96, bottom: 24 },
+  animated: true,
+});
+
+await NativeLoader.show({
+  style: 'wave',
+  placement: 'top',
+  size: 72,
+  message: 'Syncing',
+  interactionMode: 'passThrough',
+});
+```
+
+Restore the original layout when the native surface is gone:
+
+```ts
+await NativeLoader.hideAll({ restoreWebView: true });
+```
+
+## Lottie And Image Loaders
+
+Bundle Lottie JSON or image assets in the native app and reference them from JavaScript.
+
+```ts
+await NativeLoader.show({
+  style: 'lottie',
+  placement: 'center',
+  asset: {
+    type: 'lottie',
+    source: 'rocket-loader.json',
+    loop: true,
+  },
+});
+```
+
+```ts
+await NativeLoader.show({
+  style: 'image',
+  placement: 'bottom',
+  asset: {
+    type: 'image',
+    source: 'loader-frame',
+  },
+});
+```
+
+<Aside type="note">
+  Remote assets are supported, but bundled native assets are better for startup loaders because they are available before networking and JavaScript initialization finish.
+</Aside>
+
+## Native Swift Calls
+
+Other iOS plugins can call the shared loader directly.
+
+```swift
+import CapgoCapacitorNativeLoader
+
+let id = NativeLoader.shared.show(options: [
+  "style": "siri",
+  "placement": "fullscreen",
+  "message": "Opening secure session",
+  "interactionMode": "block"
+])
+
+NativeLoader.shared.setProgress(id: id, progress: 0.6)
+NativeLoader.shared.hide(id: id)
+```
+
+## Native Kotlin Calls
+
+Other Android plugins can call the public object from Kotlin or Java.
+
+```kotlin
+import app.capgo.nativeloader.NativeLoader
+
+val id = NativeLoader.show(
+  activity = activity,
+  options = mapOf(
+    "style" to "orbit",
+    "placement" to "fullscreen",
+    "message" to "Loading profile",
+    "interactionMode" to "block",
+  ),
+  webView = bridge.webView,
+)
+
+NativeLoader.setProgress(id, 0.6)
+NativeLoader.hide(id)
+```
+
+## Common Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `style` | `'siri' \| 'chrome' \| 'orbit' \| 'ring' \| 'pulse' \| 'dots' \| 'bars' \| 'wave' \| 'halo' \| 'lottie' \| 'image'` | Loader renderer |
+| `placement` | `'center' \| 'top' \| 'bottom' \| 'left' \| 'right' \| 'fullscreen' \| 'around' \| 'custom'` | Native surface position |
+| `interactionMode` | `'passThrough' \| 'block' \| 'loaderOnly'` | Touch handling |
+| `backgroundColor` | `string` | Overlay color, including alpha |
+| `scrimColor` | `string` | Fullscreen or around-screen scrim color |
+| `colors` | `string[]` | Loader gradient colors |
+| `progress` | `number` | Determinate value from `0` to `1` |
+| `autoHide` | `number` | Milliseconds before hiding automatically |
+| `asset` | `object` | Lottie or image asset source |
+
+Use `reducedMotion: 'system'` to respect the user's platform motion settings.
