@@ -283,6 +283,11 @@ The bundle must include an `index.html` file at the root level.
 For encrypted bundles, provide the `sessionKey` and `checksum` parameters.
 For multi-file delta updates, provide the `manifest` array.
 
+**Android Background Runner note:** `@capacitor/background-runner` loads its
+configured runner script from native APK assets. Live updates cannot replace
+that runner script. Keep it stable across OTA updates and ship a native app
+update when the runner code changes.
+
 **Parameters**
 
 | Name | Type | Description |
@@ -1008,6 +1013,9 @@ Use this to:
 - Display current channel to users (e.g., "You're on the Beta channel")
 - Check if a device is on a specific channel before showing features
 - Verify channel assignment after calling {@link setChannel}
+
+On native platforms, a successful response also refreshes the locally persisted
+default channel used by update checks.
 
 **Returns**
 
