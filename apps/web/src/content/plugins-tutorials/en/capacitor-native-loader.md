@@ -23,10 +23,9 @@ const { id } = await NativeLoader.show({
   style: 'siri',
   placement: 'fullscreen',
   message: 'Preparing your session',
-  backgroundColor: '#05081699',
-  tintColor: '#7dd3fc',
-  secondaryTintColor: '#a78bfa',
-  interaction: 'block',
+  colors: ['#71f6ff', '#8b5cf6', '#ff4ecd', '#fff7ad'],
+  scrimColor: 'rgba(3, 7, 18, 0.42)',
+  interactionMode: 'block',
 });
 
 await initializeAppData();
@@ -46,7 +45,7 @@ await NativeLoader.show({
   style: 'wave',
   placement: 'top',
   message: 'Syncing changes',
-  interaction: 'passThrough',
+  interactionMode: 'passThrough',
 });
 ```
 
@@ -54,6 +53,27 @@ When loading finishes, restore the WebView:
 
 ```ts
 await NativeLoader.hideAll({ restoreWebView: true });
+```
+
+## Chrome-Style Top Progress
+
+Use the native top progress loader when you want a browser-like loading bar above the WebView without asking CSS to animate during heavy work.
+
+```ts
+const { id } = await NativeLoader.show({
+  style: 'chrome',
+  placement: 'top',
+  colors: ['#4285f4', '#34a853', '#fbbc05', '#ea4335'],
+  thickness: 4,
+  interactionMode: 'passThrough',
+  webView: {
+    mode: 'resize',
+    insets: { top: 12 },
+    restoreOnHide: true,
+  },
+});
+
+await NativeLoader.hide({ id, restoreWebView: true });
 ```
 
 ## Lottie Loader
@@ -65,7 +85,6 @@ await NativeLoader.show({
   asset: {
     type: 'lottie',
     source: 'loader.json',
-    bundle: true,
     loop: true,
   },
 });
@@ -82,7 +101,7 @@ Swift:
 ```swift
 import CapgoCapacitorNativeLoader
 
-let id = NativeLoader.shared.show([
+let id = NativeLoader.shared.show(options: [
   "style": "orbit",
   "placement": "fullscreen",
   "message": "Opening secure session"
@@ -98,12 +117,12 @@ import app.capgo.nativeloader.NativeLoader
 
 val id = NativeLoader.show(
   activity = activity,
-  bridge = bridge,
   options = mapOf(
     "style" to "orbit",
     "placement" to "fullscreen",
     "message" to "Loading profile",
   ),
+  webView = bridge.webView,
 )
 
 NativeLoader.hide(id)

@@ -23,6 +23,7 @@ hero:
 import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 import aroundPreview from './previews/around.webp';
 import barsPreview from './previews/bars.webp';
+import chromePreview from './previews/chrome.webp';
 import dotsPreview from './previews/dots.webp';
 import haloPreview from './previews/halo.webp';
 import imagePreview from './previews/image.webp';
@@ -38,10 +39,10 @@ import wavePreview from './previews/wave.webp';
     Show loaders as UIKit and Android overlay views instead of asking the WebView to animate expensive translucent effects.
   </Card>
   <Card title="Flexible placement" icon="setting">
-    Place loaders fullscreen, centered, pinned to an edge, or around the WebView with safe-area-aware insets.
+    Place loaders fullscreen, centered, pinned to an edge, Chrome-style at the top, or around the WebView with safe-area-aware insets.
   </Card>
   <Card title="Built-in and asset loaders" icon="puzzle">
-    Use native Siri-style, orbit, ring, pulse, dots, bars, wave, halo, image, or Lottie-based loaders.
+    Use native Siri-style, Chrome top progress, orbit, ring, pulse, dots, bars, wave, halo, image, or Lottie-based loaders.
   </Card>
   <Card title="Callable everywhere" icon="pencil">
     Trigger loaders from JavaScript, Swift, Kotlin, or other native plugins through the public native API.
@@ -55,6 +56,7 @@ import wavePreview from './previews/wave.webp';
 Use it when you need:
 
 - transparent full-screen loading layers above web content
+- Chrome-style top progress bars that can resize the WebView instead of covering content
 - edge loaders at the top, bottom, left, or right of the app
 - loaders around a resized WebView while native content owns part of the screen
 - native fallback loaders that survive heavy web rendering, route changes, or startup work
@@ -70,12 +72,13 @@ Use it when you need:
 | Style | Preview |
 | --- | --- |
 | Siri | <img src={siriPreview.src} alt="Siri-style native loader preview" width="180" /> |
-| Orbit | <img src={orbitPreview.src} alt="Orbit native loader preview" width="180" /> |
+| Chrome top | <img src={chromePreview.src} alt="Chrome-style top native loader preview" width="180" /> |
 | Ring | <img src={ringPreview.src} alt="Ring native loader preview" width="180" /> |
-| Pulse | <img src={pulsePreview.src} alt="Pulse native loader preview" width="180" /> |
 | Dots | <img src={dotsPreview.src} alt="Dots native loader preview" width="180" /> |
 | Bars | <img src={barsPreview.src} alt="Bars native loader preview" width="180" /> |
 | Wave | <img src={wavePreview.src} alt="Wave native loader preview" width="180" /> |
+| Orbit | <img src={orbitPreview.src} alt="Orbit native loader preview" width="180" /> |
+| Pulse | <img src={pulsePreview.src} alt="Pulse native loader preview" width="180" /> |
 | Halo | <img src={haloPreview.src} alt="Halo native loader preview" width="180" /> |
 | Around | <img src={aroundPreview.src} alt="Around-screen native loader preview" width="180" /> |
 | Lottie | <img src={lottiePreview.src} alt="Lottie native loader preview" width="180" /> |
@@ -100,10 +103,11 @@ Use it when you need:
 - `fullscreen` covers the whole app, optionally translucent.
 - `center` floats a compact loader over the WebView.
 - `top`, `bottom`, `left`, and `right` pin loaders to a safe-area-aware edge.
+- `chrome` style uses a full-width native top bar and pairs well with `webView.mode: 'resize'`.
 - `around` renders loader motion around the screen frame.
 - `custom` uses an explicit frame for native-plugin or split-view workflows.
 
-Use `interaction: 'passThrough'` when users can keep interacting with the WebView, `block` when loading should prevent taps, or `loaderOnly` when only the loader surface should receive touches.
+Use `interactionMode: 'passThrough'` when users can keep interacting with the WebView, `block` when loading should prevent taps, or `loaderOnly` when only the loader surface should receive touches.
 
 ## Keep going from @capgo/capacitor-native-loader
 

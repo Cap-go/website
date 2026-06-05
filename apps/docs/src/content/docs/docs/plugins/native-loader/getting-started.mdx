@@ -24,9 +24,9 @@ import { Steps, Aside } from '@astrojs/starlight/components';
      style: 'siri',
      placement: 'fullscreen',
      message: 'Preparing workspace',
-     backgroundColor: '#05081699',
-     tintColor: '#7dd3fc',
-     interaction: 'block',
+     colors: ['#71f6ff', '#8b5cf6', '#ff4ecd', '#fff7ad'],
+     scrimColor: 'rgba(3, 7, 18, 0.42)',
+     interactionMode: 'block',
    });
 
    await doExpensiveWork();
@@ -39,14 +39,36 @@ import { Steps, Aside } from '@astrojs/starlight/components';
 
 ```ts
 await NativeLoader.configure({
-  style: 'orbit',
-  placement: 'center',
-  size: 96,
-  tintColor: '#38bdf8',
-  secondaryTintColor: '#a78bfa',
-  reducedMotion: 'system',
-  interaction: 'passThrough',
+  defaults: {
+    style: 'orbit',
+    placement: 'center',
+    size: 96,
+    colors: ['#38bdf8', '#a78bfa'],
+    reducedMotion: 'system',
+    interactionMode: 'passThrough',
+  },
 });
+```
+
+## Chrome-Style Top Loader
+
+Use `style: 'chrome'` when you want the familiar browser top progress bar and the WebView should stay usable below it.
+
+```ts
+const { id } = await NativeLoader.show({
+  style: 'chrome',
+  placement: 'top',
+  colors: ['#4285f4', '#34a853', '#fbbc05', '#ea4335'],
+  thickness: 4,
+  interactionMode: 'passThrough',
+  webView: {
+    mode: 'resize',
+    insets: { top: 12 },
+    restoreOnHide: true,
+  },
+});
+
+await NativeLoader.hide({ id, restoreWebView: true });
 ```
 
 ## Update Progress
@@ -81,7 +103,7 @@ await NativeLoader.show({
   placement: 'top',
   size: 72,
   message: 'Syncing',
-  interaction: 'passThrough',
+  interactionMode: 'passThrough',
 });
 ```
 
@@ -102,7 +124,6 @@ await NativeLoader.show({
   asset: {
     type: 'lottie',
     source: 'rocket-loader.json',
-    bundle: true,
     loop: true,
   },
 });
@@ -115,7 +136,6 @@ await NativeLoader.show({
   asset: {
     type: 'image',
     source: 'loader-frame',
-    bundle: true,
   },
 });
 ```
@@ -131,11 +151,11 @@ Other iOS plugins can call the shared loader directly.
 ```swift
 import CapgoCapacitorNativeLoader
 
-let id = NativeLoader.shared.show([
+let id = NativeLoader.shared.show(options: [
   "style": "siri",
   "placement": "fullscreen",
   "message": "Opening secure session",
-  "interaction": "block"
+  "interactionMode": "block"
 ])
 
 NativeLoader.shared.setProgress(id: id, progress: 0.6)
@@ -151,13 +171,13 @@ import app.capgo.nativeloader.NativeLoader
 
 val id = NativeLoader.show(
   activity = activity,
-  bridge = bridge,
   options = mapOf(
     "style" to "orbit",
     "placement" to "fullscreen",
     "message" to "Loading profile",
-    "interaction" to "block",
+    "interactionMode" to "block",
   ),
+  webView = bridge.webView,
 )
 
 NativeLoader.setProgress(id, 0.6)
@@ -168,14 +188,14 @@ NativeLoader.hide(id)
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `style` | `'siri' \| 'orbit' \| 'ring' \| 'pulse' \| 'dots' \| 'bars' \| 'wave' \| 'halo' \| 'lottie' \| 'image'` | Loader renderer |
+| `style` | `'siri' \| 'chrome' \| 'orbit' \| 'ring' \| 'pulse' \| 'dots' \| 'bars' \| 'wave' \| 'halo' \| 'lottie' \| 'image'` | Loader renderer |
 | `placement` | `'center' \| 'top' \| 'bottom' \| 'left' \| 'right' \| 'fullscreen' \| 'around' \| 'custom'` | Native surface position |
-| `interaction` | `'passThrough' \| 'block' \| 'loaderOnly'` | Touch handling |
+| `interactionMode` | `'passThrough' \| 'block' \| 'loaderOnly'` | Touch handling |
 | `backgroundColor` | `string` | Overlay color, including alpha |
-| `tintColor` | `string` | Primary loader color |
-| `secondaryTintColor` | `string` | Secondary loader color |
+| `scrimColor` | `string` | Fullscreen or around-screen scrim color |
+| `colors` | `string[]` | Loader gradient colors |
 | `progress` | `number` | Determinate value from `0` to `1` |
 | `autoHide` | `number` | Milliseconds before hiding automatically |
 | `asset` | `object` | Lottie or image asset source |
 
-Use `safeArea: true` for edge placements that should avoid system bars, and `reducedMotion: 'system'` to respect the user's platform motion settings.
+Use `reducedMotion: 'system'` to respect the user's platform motion settings.
