@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-06T07:14:58.916Z
-updated_at: 2026-06-06T07:17:20.000Z
+updated_at: 2026-06-07T17:12:56.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/c4833862-3eeb-493d-9604-f7f6e8584394/application-release-notes-guide.jpg'
 head_image_alt: 'Application Release Notes: A Complete Guide for 2026'
 keywords: 'application release notes, software releases, changelog best practices, product communication, CI/CD automation'
