@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-07T07:24:09.210Z
-updated_at: 2026-06-07T07:24:10.270Z
+updated_at: 2026-06-07T07:26:32.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/bb246431-6122-4a45-ae21-ebdb1300ddef/open-source-advantages-software-teams.jpg'
 head_image_alt: Open Source Advantages for Modern Software Teams
 keywords: 'open source advantages, open source software, software development, enterprise software, capacitorjs'
