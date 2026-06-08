@@ -326,6 +326,8 @@ const messages = {
   bug_bounty_out_of_scope_6: 'Denial of service attacks',
   bug_bounty_out_of_scope_7:
     'SSRF or DNS spoofing reports against webhooks or website preview. These features run on serverless infrastructure and cannot be used to reach private Capgo infrastructure, so they are not exploitable in our environment.',
+  bug_bounty_out_of_scope_8:
+    'User-owned application code or project configuration that Capgo does not own, ship, or control, including files such as capacitor.config.ts, config.capacitor.ts, app source code, and environment-specific settings.',
   bug_bounty_out_of_scope_title: 'Out of Scope',
   bug_bounty_supabase_title: 'Supabase and Third-Party Services',
   bug_bounty_supabase_intro:
@@ -2466,6 +2468,8 @@ const messages = {
   security_out_of_scope_11: 'User enumeration',
   security_out_of_scope_12:
     'SSRF or DNS spoofing reports against webhooks or website preview. These features run on serverless infrastructure and cannot be used to reach private Capgo infrastructure, so they are not exploitable in our environment.',
+  security_out_of_scope_13:
+    'User-owned application code or project configuration that Capgo does not own, ship, or control, including files such as capacitor.config.ts, config.capacitor.ts, app source code, and environment-specific settings.',
   security_supabase_limitations_title: 'Known Supabase Auth Limitations',
   security_supabase_limitations_intro:
     'Some findings are repeatedly reported and tied to Supabase Auth behavior. These are only treated as Supabase-side issues when they can be reproduced in a shared Supabase demo project configured like ours and when a Supabase configuration change fixes the behavior without changing Capgo security rules. If the fix requires changing Capgo-owned SQL, RPCs, RLS policies, functions, or app logic, that is a Capgo issue and should be reported to us.',
@@ -4306,7 +4310,8 @@ const messages = {
   native_build_v2_comp_try_capa: '$19/mo minimum — and over-the-air updates are a separate paid add-on. Free tier only by applying to their open-source program.',
   native_build_v2_comp_cost_l: 'Cost per build',
   native_build_v2_comp_cost_capgo_hook: 'Plan minutes, then credits.',
-  native_build_v2_comp_cost_capgo: 'Build minutes are included in your plan; when you need more, top up with prepaid credits priced in volume tiers — no surprise per-minute bills.',
+  native_build_v2_comp_cost_capgo:
+    'Build minutes are included in your plan; when you need more, top up with prepaid credits priced in volume tiers — no surprise per-minute bills.',
   native_build_v2_comp_cost_diy: '~$4–5 in macOS minutes alone on GitHub-hosted runners (macOS-large at $0.08/min × 10× multiplier × ~6 min). Before you count engineer time.',
   native_build_v2_comp_cost_capa: 'Metered against monthly build minutes on your tier; overage policy not publicly listed.',
   native_build_v2_comp_maint_l: 'Time to maintain',
@@ -4326,7 +4331,8 @@ const messages = {
   native_build_v2_comp_trig_capa: 'Built around Git push and the dashboard. A CLI exists but is not the primary mental model.',
   native_build_v2_comp_ai_l: 'AI build debugging',
   native_build_v2_comp_ai_capgo_hook: 'Right in the CLI.',
-  native_build_v2_comp_ai_capgo: "When a build fails, the CLI offers to run Capgo AI on the spot — it reads the log and hands you the cause and the fix, without leaving your terminal.",
+  native_build_v2_comp_ai_capgo:
+    'When a build fails, the CLI offers to run Capgo AI on the spot — it reads the log and hands you the cause and the fix, without leaving your terminal.',
   native_build_v2_comp_ai_diy: 'You read the raw logs yourself and search the errors.',
   native_build_v2_comp_ai_capa: "Capawesome's 'Ask AI' does this too — but as a manual button in the web dashboard, not inline in the CLI where you build.",
   native_build_v2_comp_ota_l: 'Live (OTA) updates',
@@ -4345,13 +4351,15 @@ const messages = {
   native_build_v2_aidebug_p3_t: 'Always optional',
   native_build_v2_aidebug_p3_d: 'On failure you pick: Capgo AI, a prompt for your own AI, or skip. Never forced, never automatic.',
   native_build_v2_comp_callout: 'Capgo Builder is the only Capacitor cloud build that never asks you to hand over your source code, your signing keys, or your build logs.',
-  native_build_v2_comp_footnote: 'Comparison reflects publicly published Capawesome documentation and pricing. GitHub Actions macOS pricing per github.com/pricing. Agent tooling per each project’s public skills / MCP repositories.',
+  native_build_v2_comp_footnote:
+    'Comparison reflects publicly published Capawesome documentation and pricing. GitHub Actions macOS pricing per github.com/pricing. Agent tooling per each project’s public skills / MCP repositories.',
   native_build_v2_plan_ota: 'Capgo over-the-air updates included',
   native_build_v2_calc_title: 'How far do build minutes go?',
   native_build_v2_calc_minutes: 'build minutes / month',
   native_build_v2_calc_ios: 'iOS builds',
   native_build_v2_calc_android: 'Android builds',
-  native_build_v2_calc_note: 'Rough guide: an iOS build uses about 5 build-minutes (Apple Silicon), Android about 2.5 (Linux Docker). Real builds run 2–3 minutes; iOS minutes bill roughly 2× Android. Plan minutes are included free — the price shows what the same minutes would cost as prepaid top-up credits.',
+  native_build_v2_calc_note:
+    'Rough guide: an iOS build uses about 5 build-minutes (Apple Silicon), Android about 2.5 (Linux Docker). Real builds run 2–3 minutes; iOS minutes bill roughly 2× Android. Plan minutes are included free — the price shows what the same minutes would cost as prepaid top-up credits.',
   native_build_v2_calc_price_label: 'in prepaid credits',
   native_build_v2_pricing_fine: 'Build minutes are included in every plan; extra minutes are prepaid credits with volume pricing. Final tiers live at',
 
