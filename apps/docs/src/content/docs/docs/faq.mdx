@@ -41,6 +41,12 @@ For additional security, you have two options:
 
 See also our privacy policy: [https://capgo.app/privacy](https://capgo.app/privacy/)
 
+### Are bundle files private data?[](https://capgo.app/docs/faq/#are-bundle-files-private-data "Direct link to Are bundle files private data?")
+
+No. Bundle files are public web assets intended to be downloaded by your app users. Anyone who knows the bundle URL can fetch those files, and Capgo informs users of this during setup and in the documentation.
+
+Access to bundle files is not considered a data breach. Do not put secrets, credentials, personal data, or regulated data in your app bundle. If you need stronger confidentiality for high-security use cases, use end-to-end encryption, but still treat shipped app code and assets as public from a security-reporting perspective.
+
 ### Can I use Capgo from my CI system?[](https://capgo.app/docs/faq/#can-i-use-capgo-from-my-ci-system "Direct link to Can I use Capgo from my CI system?")
 
 Yes. Capgo is intended to be used from CI systems. We've published a guide for [Android and Github Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/) and [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/), and for [GitLab](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/). Other CI systems should be similar.
