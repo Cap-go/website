@@ -27,4 +27,4 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
       - name: Check for Typos
-        uses: crate-ci/typos@v1.46.3
+        uses: crate-ci/typos@v1.47.2
