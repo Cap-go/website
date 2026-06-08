@@ -353,7 +353,7 @@ const messages = {
   bug_bounty_supabase_limitations_4:
     'If the issue is in this list but you can show a concrete Supabase-side fix in the provided project or a concrete Capgo-owned security defect, we can consider it in scope.',
   bug_bounty_payment_note:
-    'Capgo is a tiny bootstrapped company, so our bounty amounts are lower than large-company programs. Reports without a clear exploit path are paid up to $30 max. Exploits with real, reproducible impact on Capgo are paid up to $300 max. Payments are issued only after we have identified the issue, fixed it, opened a pull request, and you have verified after release that the fix works for you. This process usually takes between 20 and 30 days. Please do not send messages like "to get paid"; payment happens only once the release is live and you\'ve tested and validated the fix.',
+    'Capgo is a tiny bootstrapped company, so our bounty amounts are lower than large-company programs. Reports without a clear exploit path are paid up to $30 max. Exploits with real, reproducible impact on Capgo are paid up to $300 max. We accept and review security reports for Capgo plugins, but paid bounties for plugin code are limited to @capgo/capacitor-updater. Other Capgo plugins are free to use and are not part of our paid product offering, so reports for them are reviewed but unpaid. Payments are issued only after we have identified the issue, fixed it, opened a pull request, and you have verified after release that the fix works for you. This process usually takes between 20 and 30 days. Please do not send messages like "to get paid"; payment happens only once the release is live and you\'ve tested and validated the fix.',
   bug_bounty_program: 'Bug Bounty Program',
   bug_bounty_repo_landing: 'Capgo Backend & Landing',
   bug_bounty_repo_landing_desc: 'Main Capgo repository including backend services and landing website',
@@ -2493,6 +2493,8 @@ const messages = {
   security_policy: 'Security Policy',
   security_reporting_guidelines_1: 'Submit your findings through our GitHub Security Advisory:',
   security_reporting_guidelines_2: 'Do provide sufficient information to reproduce the problem, so we will be able to resolve it as quickly as possible.',
+  security_reporting_guidelines_3:
+    'We accept and review security reports for Capgo plugins, but paid bounties for plugin code are limited to @capgo/capacitor-updater. Other Capgo plugins are free to use and are not part of our paid product offering, so reports for them are reviewed but unpaid.',
   security_reporting_guidelines_title: 'Reporting guidelines:',
   search_plugins_by_name_or_description: 'Search plugins by name or description',
   search_plugins_by_name_or_description_placeholder: 'Search plugins by name or description...',
