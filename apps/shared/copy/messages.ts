@@ -2513,6 +2513,8 @@ const messages = {
   security_what_we_promise_3: 'We will handle your report with strict confidentiality, and not pass on your personal details to third parties without your permission.',
   security_what_we_promise_4: 'We will keep you informed of the progress towards resolving the problem.',
   security_what_we_promise_5: 'In the public information concerning the problem reported, we will give your name as the discoverer of the problem (unless you desire otherwise).',
+  security_what_we_promise_6:
+    'If leaked data appears in logs shared with us, we treat it as debugging information used to fix the issue, never as a reason for retaliation or retribution.',
   security_what_we_promise_title: 'What we promise:',
   see_all_from_our_blog: 'See all from our blog',
   see_in_play_store: 'See in Play store',
