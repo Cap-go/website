@@ -328,6 +328,8 @@ const messages = {
     'SSRF or DNS spoofing reports against webhooks or website preview. These features run on serverless infrastructure and cannot be used to reach private Capgo infrastructure, so they are not exploitable in our environment.',
   bug_bounty_out_of_scope_8:
     'User-owned application code or project configuration that Capgo does not own, ship, or control, including files such as capacitor.config.ts, config.capacitor.ts, app source code, and environment-specific settings.',
+  bug_bounty_out_of_scope_9:
+    'Access to Capgo bundle files or proof that bundle files can be downloaded. Bundle files are public web assets, users are informed of this, and access to them is not considered a data breach.',
   bug_bounty_out_of_scope_title: 'Out of Scope',
   bug_bounty_supabase_title: 'Supabase and Third-Party Services',
   bug_bounty_supabase_intro:
@@ -2470,6 +2472,8 @@ const messages = {
     'SSRF or DNS spoofing reports against webhooks or website preview. These features run on serverless infrastructure and cannot be used to reach private Capgo infrastructure, so they are not exploitable in our environment.',
   security_out_of_scope_13:
     'User-owned application code or project configuration that Capgo does not own, ship, or control, including files such as capacitor.config.ts, config.capacitor.ts, app source code, and environment-specific settings.',
+  security_out_of_scope_14:
+    'Access to Capgo bundle files or proof that bundle files can be downloaded. Bundle files are public web assets, users are informed of this, and access to them is not considered a data breach.',
   security_supabase_limitations_title: 'Known Supabase Auth Limitations',
   security_supabase_limitations_intro:
     'Some findings are repeatedly reported and tied to Supabase Auth behavior. These are only treated as Supabase-side issues when they can be reproduced in a shared Supabase demo project configured like ours and when a Supabase configuration change fixes the behavior without changing Capgo security rules. If the fix requires changing Capgo-owned SQL, RPCs, RLS policies, functions, or app logic, that is a Capgo issue and should be reported to us.',
