@@ -9,7 +9,7 @@ const title = 'iOS UDID Finder | Get an iPhone or iPad UDID Without a Mac'
 const description = 'Find an iPhone or iPad UDID directly on the device. Download a lightweight profile, install it in Settings, and view the UDID, model, serial, and iOS version.'
 
 const certificateLink = (import.meta.env.PUBLIC_IOS_UDID_CERTIFICATE_LINK || '').trim()
-const profileDownloadHref = `/api/tools/ios-udid-finder/profile?locale=${encodeURIComponent(Astro.locals.locale)}`
+const profileDownloadHref = `/api/tools/ios-udid-finder/profile?routeLocale=${encodeURIComponent(Astro.locals.locale)}`
 
 const faqItems = [
   {
