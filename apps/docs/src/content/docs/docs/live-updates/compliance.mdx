@@ -21,7 +21,7 @@ Capgo collects only the data that is necessary to provide the live updates featu
 - **App Version Code**: The version code of the app that is used to determine which updates are compatible with the app
 - **App Version Name**: The version name of the app that is used for display purposes
 - **Platform**: The platform (iOS, Android, Electron) of the app that is used to determine which updates are compatible with the app
-- **Device ID**: A unique identifier for the device that is used to deliver updates to a specific device and for billing purposes. This identifier is a random string that is created when the app is started for the first time. **Starting from plugin version v5.10.0, v6.25.0 and v7.25.0**, the device ID now persists across app reinstalls (stored securely in Keychain on iOS, EncryptedSharedPreferences on Android, and Electron secure storage) to provide better device tracking while maintaining compliance with app store guidelines. Prior to these versions, the device ID was reset with every app installation
+- **Device ID**: A randomly generated, app-scoped device identifier used for live-update operation, update eligibility, de-duplication of monthly active devices, support, abuse prevention, and operational reliability. It is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers. **Starting from plugin version v5.10.0, v6.25.0 and v7.25.0**, the device ID persists across app reinstalls (stored securely in Keychain on iOS, EncryptedSharedPreferences on Android, and Electron secure storage) to support reliable update delivery and monthly active device de-duplication. Prior to these versions, the device ID was reset with every app installation
 - **Bundle ID**: The unique identifier for the bundle that is currently installed on the device
 - **Channel Name**: The name of the channel that is selected to receive updates
 - **OS Version**: The version of the operating system that is used to determine which updates are compatible with the device
@@ -35,7 +35,7 @@ Capgo collects only the data that is necessary to provide the live updates featu
 - IP address (for geolocation and CDN optimization)
 
 <Aside type="note">
-You can verify the data that is collected by inspecting the source code of the @capgo/capacitor-updater plugin, which is open-source and available on [GitHub](https://github.com/Cap-go/capacitor-updater). Capgo does not collect personally identifiable information (PII) such as names, email addresses, phone numbers, or persistent device identifiers that can be used to track individual users across apps.
+You can verify the data that is collected by inspecting the source code of the @capgo/capacitor-updater plugin, which is open-source and available on [GitHub](https://github.com/Cap-go/capacitor-updater). Capgo does not collect direct personal identifiers such as names, email addresses, or phone numbers. We treat the app-scoped device identifier as pseudonymous personal data where GDPR applies; it is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers.
 </Aside>
 
 ### What Data is NOT Collected
@@ -46,7 +46,7 @@ Capgo explicitly does not collect:
 - App usage analytics or user behavior data
 - Content from your app or user-generated data
 - Location data beyond general geographic region
-- Persistent device identifiers for tracking
+- Advertising IDs, hardware-derived identifiers, or identifiers used to track users across apps, websites, or Capgo customers
 - Biometric or sensitive personal data
 
 ## Data Usage and Purpose

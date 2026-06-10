@@ -688,9 +688,10 @@ const messages = {
   custom_pricing: 'Custom pricing',
   custom_webhooks: 'Custom Webhooks',
   audit_logs: 'Audit logs',
-  data_policy_account_deletion: 'You can choose to delete your account and delete your site stats at any time. We provide simple no-questions-asked deletion links.',
+  data_policy_account_deletion:
+    'You can delete your Capgo account and associated service data according to the deletion options available in the product and our retention obligations.',
   data_policy_anonymous_measurement:
-    'By using Capgo, all the site measurement is carried out absolutely anonymously. We measure only the most essential data points and nothing else. All the metrics we do collect fit on one single page.',
+    'Capgo minimizes live-update data collection. We collect the operational data needed to deliver updates, determine eligibility, de-duplicate monthly active devices, provide support, prevent abuse, and keep the service reliable.',
   data_policy_ccpa_categories_intro:
     'We collect information that identifies, relates to, describes, references, is capable of being associated with, or could reasonably be linked, directly or indirectly, with a particular Consumer or Device. The following is a list of categories of personal information which we may collect or may have been collected from California residents within the last twelve (12) months.',
   data_policy_ccpa_categories_note:
@@ -846,10 +847,10 @@ const messages = {
   data_policy_ccpa_your_rights_title: 'Your Rights under the CCPA',
   data_policy_compliance_info:
     "We're happy to provide information on how Capgo is built to help you comply with the different privacy regulations. We encourage you to discuss specific issues with your lawyer to help you decide whether our service allows you to fulfill the legal requirements that apply to you.",
-  data_policy_data_protection_1: 'Your website data is not shared with advertising companies or any other companies in general.',
-  data_policy_data_protection_2: 'Your website data is not sent to any third-parties at all.',
-  data_policy_data_protection_3: 'Your website data is not mined and harvested for personal and behavioral trends.',
-  data_policy_data_protection_4: 'Your website data is not monetized.',
+  data_policy_data_protection_1: 'Your service data is not shared with advertising companies.',
+  data_policy_data_protection_2: 'Your service data is processed by Capgo and approved subprocessors only as needed to provide, secure, and support the service.',
+  data_policy_data_protection_3: 'Your service data is not mined or harvested for advertising profiles or unrelated behavioral trends.',
+  data_policy_data_protection_4: 'Your service data is not monetized.',
   data_policy_gdpr_complaint_right:
     'You have the right to complain to a Data Protection Authority about Our collection and use of Your Personal Data. For more information, if You are in the European Economic Area (EEA), please contact Your local data protection authority in the EEA.',
   data_policy_gdpr_exercising_rights_contact:
@@ -872,14 +873,14 @@ const messages = {
   data_policy_gdpr_rights_title: 'Your Rights under the GDPR',
   data_policy_gdpr_title: 'GDPR Privacy',
   data_policy_goal:
-    "The goal of Capgo is to track overall trends in your website traffic, it is not to track individual visitors. We don't use cookies, we don't generate any persistent identifiers and we don't collect or store any personal or identifiable data. All of the data is aggregated data only and it has no personal information.",
+    'The goal of Capgo is to operate live updates reliably, not to track individual users across apps, websites, or Capgo customers. Capgo uses the data needed for update eligibility, monthly active device de-duplication, support, abuse prevention, and operational reliability.',
   data_policy_intro:
     'A data policy contains a set of rules, principles, and guidelines that provide a framework for different areas of data management throughout the enterprise, including but not limited to data governance, data quality, and data architecture.',
   data_policy_ip_accuracy:
-    'In our testing, using IP addresses to count visitors is remarkably accurate when compared to using a cookie. In some cases it might even be more accurate than using a cookie because some visitors block cookies altogether.',
+    'IP address and User-Agent data help with geolocation, CDN optimization, compatibility checks, support, abuse prevention, and operational reliability. They are not used to create an advertising ID or to track users across apps, websites, or Capgo customers.',
   data_policy_ip_user_agent:
-    "Every single HTTP request sends the IP address and the User-Agent to the server so that's what we use. We generate a daily changing identifier using the visitor's IP address and User-Agent.",
-  data_policy_last_updated: 'Last updated: September 21, 2023',
+    'Live-update requests may include technical data such as IP address, User-Agent, app version, platform, OS version, plugin version, bundle, channel, and the app-scoped device identifier so Capgo can determine update eligibility and deliver the correct bundle.',
+  data_policy_last_updated: 'Last updated: June 10, 2026',
   data_policy_legal_basis_clarification:
     'In any case, the Company will gladly help to clarify the specific legal basis that applies to the processing, and in particular whether the provision of Personal Data is a statutory or contractual requirement, or a requirement necessary to enter into a contract.',
   data_policy_legal_basis_consent: 'Consent: You have given Your consent for processing Personal Data for one or more specific purposes.',
@@ -893,18 +894,18 @@ const messages = {
   data_policy_legal_basis_title: 'Legal Basis for Processing Personal Data under GDPR',
   data_policy_legal_basis_vital_interests: 'Vital interests: Processing Personal Data is necessary in order to protect Your vital interests or of another natural person.',
   data_policy_no_persistent_identifier:
-    "We do not attempt to generate a device-persistent identifier because they are considered personal data under GDPR. We do not use cookies, browser cache nor the local storage. We do not store, retrieve nor extract anything from visitor's devices.",
+    'Capgo uses a randomly generated, app-scoped device identifier for live-update operation, update eligibility, de-duplication of monthly active devices, support, abuse prevention, and operational reliability. It is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers. We treat this identifier as pseudonymous personal data where GDPR applies and protect it through TLS, encryption at rest, access controls, and our DPA/subprocessor controls.',
   data_policy_no_tracking:
-    'We do not track people across their devices and across websites and apps that they visit. All the data is isolated to a single day, single website and single device only. There is no way to know whether the same person visits a site from more than one device or visits another website',
+    'Capgo does not use the app-scoped device identifier for advertising, profiling, or tracking users across apps, websites, or Capgo customers. The identifier is scoped to one app and used only for live-update operation and related reliability, support, billing de-duplication, and security purposes.',
   data_policy_ownership_intro:
-    'When you use our service,Capgo will collect information about your visitors. You entrust us with your site data and we take that trust to heart. The privacy of your site data — and it is your data, not ours! — is a big deal to us.',
+    'When you use our service, Capgo collects and processes service data needed to operate live updates. You entrust us with that data and we take that trust to heart. The privacy of your service data is a big deal to us.',
   data_policy_ownership_rights:
-    'You own all right, title, and interest to your website data. We obtain no rights from you to your website data. We will never sell or share your site data to any third-parties.',
+    'You own all right, title, and interest to your service data. We obtain no rights from you to your service data beyond the rights needed to provide the Capgo service. We will never sell your service data.',
   data_policy_ownership_statement:
-    'By using Capgo, you keep 100% ownership of your website data. Although when using our hosted service, your site analytics are stored on our server in the cloud, you remain completely in control of your site data and you fully own all of your data too.',
-  data_policy_ownership_title: 'Data ownership of your web',
+    'By using Capgo, you keep ownership and control of your app and update data. When using our hosted service, operational live-update data is stored on Capgo infrastructure and handled according to this data policy, our DPA, and our subprocessor controls.',
+  data_policy_ownership_title: 'Data ownership',
   data_policy_permanent_deletion:
-    'All your stats will be permanently deleted immediately when you delete your Capgo account or when you delete your site stats. We cannot recover this information once it has been permanently deleted.',
+    'Service data will be deleted or retained according to your account deletion choices, product retention settings, and applicable legal or operational retention obligations.',
   data_policy_title: 'Data Policy',
   data_policy_trust_importance:
     "This is essential in the market of privacy software. Corporations and proprietary software cannot always be trusted when data is in question. The only way to prove your trust is to allow experts to look into your code and verify that you're actually doing what you're saying you're doing.",
@@ -914,8 +915,8 @@ const messages = {
   data_policy_trust_transparency:
     "We are not a black box. Everything is in the open. Anyone can view, review and inspect the code we're running to verify that we practice what we preach.",
   data_policy_unique_users_intro:
-    'Counting unique visitors is an integral part of web analytics. Capgo attempts to strike a reasonable balance between de-duplicating pageviews and staying respectful of visitor privacy.',
-  data_policy_unique_users_title: 'How we count unique users without cookies',
+    'Counting monthly active devices and determining update eligibility are integral to live updates. Capgo uses an app-scoped random identifier for these operational purposes while avoiding advertising IDs, hardware-derived IDs, and cross-app or cross-customer tracking.',
+  data_policy_unique_users_title: 'How we use app-scoped device identifiers',
   data_policy_what_we_collect_title: 'What we collect and what we use it for',
   data_processing: 'Data processing',
   data_processing_agreement: 'Data Processing Agreement',
@@ -971,9 +972,8 @@ const messages = {
   dpa_contact_2: 'By visiting this page on the website:',
   dpa_contact_title: 'Contact Us',
   dpa_customer_undertakings_1:
-    'Customer warrants that it has all necessary rights to provide to Capgo the visitor data for processing in connection with the provision of the Capgo Services.',
-  dpa_customer_undertakings_2:
-    'Customer shall comply at all times with Data Protection Legislations in respect of all visitor data it provided to Capgo pursuant to the Agreement.',
+    'Customer warrants that it has all necessary rights to provide Capgo with service data for processing in connection with the provision of the Capgo Services.',
+  dpa_customer_undertakings_2: 'Customer shall comply at all times with Data Protection Legislation in respect of all service data it provides to Capgo pursuant to the Agreement.',
   dpa_customer_undertakings_3: 'Customer understands, as a controller, that it is responsible (as between customer and Capgo) for:',
   dpa_customer_undertakings_4:
     'determining the lawfulness of any processing, performing any required data protection impact assessments, and accounting to regulators and individuals, as may be needed;',
@@ -981,59 +981,59 @@ const messages = {
   dpa_customer_undertakings_6: 'implementing your own appropriate technical and organizational measures to ensure and demonstrate processing in accord with this DPA;',
   dpa_customer_undertakings_7: 'notifying any relevant regulators or authorities of any incident as may be required by law in your jurisdiction.',
   dpa_customer_undertakings_title: 'Customer undertakings and Capgo assistance',
-  dpa_definitions_1: 'In the course of providing the Capgo service to user pursuant to the agreement, Capgo may process visitor data on behalf of user.',
+  dpa_definitions_1: 'In the course of providing the Capgo service to user pursuant to the agreement, Capgo may process service data on behalf of user.',
   dpa_definitions_2:
-    'In this Data Processing Agreement ("DPA"), "Data Protection Legislation" means the General Data Protection Regulation (Regulation (EU) 2016/279), and all other applicable laws relating to processing of visitor data and privacy that may exist in any relevant jurisdiction.',
+    'In this Data Processing Agreement ("DPA"), "Data Protection Legislation" means the General Data Protection Regulation (Regulation (EU) 2016/279), and all other applicable laws relating to processing of service data and privacy that may exist in any relevant jurisdiction.',
   dpa_definitions_3:
     '"data controller", "data processor", "data subject", "personal data" and "processing" shall be interpreted in accordance with applicable Data Protection Legislation.',
   dpa_definitions_4:
-    'The parties agree that user is the data controller and that Capgo is its data processor in relation to visitor data that is processed in the course of providing the service.',
+    'The parties agree that user is the data controller and that Capgo is its data processor in relation to service data that is processed in the course of providing the service.',
   dpa_definitions_title: 'Definitions',
-  dpa_last_updated: 'Last updated: September 20, 2023',
+  dpa_last_updated: 'Last updated: June 10, 2026',
   dpa_liability_indemnity_1:
     'Each party indemnifies the other and holds them harmless against all claims, actions, third party claims, losses, damages and expenses incurred by the indemnified party and arising directly or indirectly out of or in connection with a breach of this DPA.',
   dpa_liability_indemnity_title: 'Liability and Indemnity',
   dpa_notification_1: 'No. You are not required to notify us or any third party upon accepting our DPA though, as mentioned above, you are free to do so.',
   dpa_notification_title: 'Do customers need to notify anyone upon accepting our DPA?',
   dpa_privacy_security_1:
-    'We take many measures to protect and secure your data through backups, redundancies, and encryption. When you use our service to measure your website stats, Capgo will collect information about your visitors.',
+    'We take measures to protect and secure your data through backups, redundancies, encryption, and access controls. When you use Capgo live updates, Capgo processes update-related data needed to operate, maintain, and support the service.',
   dpa_privacy_security_2:
-    'You entrust us with your site data and we take that trust to heart. You agree that Capgo may process your data as described in our data policy and for no other purpose. We do our best to deserve that trust by being open about who we are, how we work, and keeping an open door to your feedback.',
+    'You entrust us with your service data and we take that trust to heart. You agree that Capgo may process your data as described in our data policy and for no other purpose. We do our best to deserve that trust by being open about who we are, how we work, and keeping an open door to your feedback.',
   dpa_privacy_security_3:
-    "You own all right, title, and interest to your website data. We obtain no rights from you to your website data. We do not collect and analyze personal information from web users and use these behavioral insights to sell advertisements. When using Capgo, you 100% own and control all of your website data. We don't sell or share your site data to any third-parties, and we don't abuse your visitor's privacy.",
+    "You own all right, title, and interest to your app and update data. We obtain no rights from you to that data. We do not collect and analyze personal information to sell advertisements. We don't sell or share your service data to advertising companies, and we don't abuse your users' privacy.",
   dpa_privacy_security_4:
-    'The purpose of Capgo is updates the Capacitor, this can still be done without tracking, collecting or storing any personal data or personally identifiable information (PII), without using cookies and while respecting the privacy of your website visitors.',
+    'The purpose of Capgo is to deliver Capacitor live updates without advertising tracking, hardware-derived identifiers, or tracking users across apps, websites, or Capgo customers.',
   dpa_privacy_security_5:
-    'By using Capgo, all the site measurement is carried out absolutely anonymously. We minimize data collection in general. We measure only the most essential data points and nothing else. All the metrics we do collect fit on one single page.',
+    'Capgo minimizes data collection. We process only the operational data needed for live-update delivery, update eligibility, monthly active device de-duplication, support, abuse prevention, and operational reliability.',
   dpa_privacy_security_6:
-    "We do not attempt to generate a device-persistent identifier because they are considered personal data under GDPR. We do not use cookies, browser cache nor the local storage. We do not store, retrieve nor extract anything from visitor's devices. The data we process cannot be used to identify any single individual.",
+    'Capgo uses a randomly generated, app-scoped device identifier for live-update operation, update eligibility, de-duplication of monthly active devices, support, abuse prevention, and operational reliability. It is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers. We treat this identifier as pseudonymous personal data where GDPR applies and protect it through TLS, encryption at rest, access controls, and our DPA/subprocessor controls.',
   dpa_privacy_security_7:
-    "The group of data subjects affected by the processing of their data under this agreement includes end-users of the controller's websites which make use of the service provided by the processor.",
+    "The group of data subjects affected by the processing of their data under this agreement includes end-users of the controller's apps or services that make use of the service provided by the processor.",
   dpa_privacy_security_8:
-    'You can find more information about our processing of your visitor data and what types/categories of data we collect on your behalf in our publicly available data policy.',
-  dpa_privacy_security_title: 'Privacy and security of your visitor data',
+    'You can find more information about our processing of your service data and what types/categories of data we collect on your behalf in our publicly available data policy.',
+  dpa_privacy_security_title: 'Privacy and security of your service data',
   dpa_processor_obligations_1:
-    "Capgo will process visitor data only in accordance with instructions from customer through the settings of the service, i.e. (a) to operate, maintain and support the infrastructure used to provide the service; (b) to comply with customer's instructions and processing instructions in their use, management and administration of the service; (c) as otherwise instructed through settings of the service. Capgo will only process visitor data in accordance with the agreement.",
+    "Capgo will process service data only in accordance with instructions from customer through the settings of the service, i.e. (a) to operate, maintain and support the infrastructure used to provide the service; (b) to comply with customer's instructions and processing instructions in their use, management and administration of the service; (c) as otherwise instructed through settings of the service. Capgo will only process service data in accordance with the agreement.",
   dpa_processor_obligations_2:
-    "Capgo shall notify customer without undue delay if, in Capgo's opinion, an instruction for the processing of visitor data given by customer infringes applicable Data Protection Legislation.",
-  dpa_processor_obligations_3: 'Capgo shall guarantee the confidentiality of visitor data processed hereunder.',
+    "Capgo shall notify customer without undue delay if, in Capgo's opinion, an instruction for the processing of service data given by customer infringes applicable Data Protection Legislation.",
+  dpa_processor_obligations_3: 'Capgo shall guarantee the confidentiality of service data processed hereunder.',
   dpa_processor_obligations_4:
-    'We as humans can access your data to help you with support requests you make and to maintain and safeguard Capgo to ensure the security of your data and the service as a whole. Capgo shall ensure that all Capgo personnel required to access the visitor data are trained in GDPR and data privacy, informed of the confidential nature of the data and comply with the obligations sets out in this agreement.',
+    'We as humans can access your data to help you with support requests you make and to maintain and safeguard Capgo to ensure the security of your data and the service as a whole. Capgo shall ensure that all Capgo personnel required to access the service data are trained in GDPR and data privacy, informed of the confidential nature of the data and comply with the obligations sets out in this agreement.',
   dpa_processor_obligations_5:
-    'Capgo shall implement and maintain appropriate technical and organisational security measures designed to protect the visitor data against unauthorised or unlawful processing and against accidental loss, destruction, damage, theft, alteration or disclosure. These measures shall be appropriate to the harm which might result from any unauthorised or unlawful processing, accidental loss, destruction, damage or theft of the visitor data and having regard to the nature of the visitor data which is to be protected.',
+    'Capgo shall implement and maintain appropriate technical and organisational security measures designed to protect the service data against unauthorised or unlawful processing and against accidental loss, destruction, damage, theft, alteration or disclosure. These measures shall be appropriate to the harm which might result from any unauthorised or unlawful processing, accidental loss, destruction, damage or theft of the service data and having regard to the nature of the service data which is to be protected.',
   dpa_processor_obligations_6:
     'We do work with sub-processors. With each vendor, we assess their commitment to privacy and we sign a data processing agreement with them that include the controller-processor Standard Contractual Clauses. Any such subcontractors will be permitted to process data only to deliver the services Capgo has retained them to provide, and they shall be prohibited from using data for any other purpose. Capgo shall notify the controller when modifying the list of subprocessors using our in-app notifications, email and/or blog. The controller is able to legitimately object and may terminate the agreement.',
   dpa_processor_obligations_7:
     'If Capgo becomes aware of any accidental, unauthorised or unlawful security breach, destruction, loss, alteration, or disclosure of the personal data that is processed by Capgo in the course of providing the service, it shall without undue delay (not later than 48 hours after having become aware of it), notify customer by email and provide customer with a description of the incident as well as periodic updates to information about the incident, including its impact on customer content. Capgo shall additionally take action to investigate the incident and reasonably prevent or mitigate the effects of the incident.',
   dpa_processor_obligations_8:
-    'Capgo shall not on its own authority rectify, erase or restrict the processing of visitor data that is being processed on behalf of the controller (unless this is required by law or the Processor Terms of Service), but shall only do so on documented instructions from the controller and in accordance to the data retention rules associated to the controller subscription plan.',
+    'Capgo shall not on its own authority rectify, erase or restrict the processing of service data that is being processed on behalf of the controller (unless this is required by law or the Processor Terms of Service), but shall only do so on documented instructions from the controller and in accordance to the data retention rules associated to the controller subscription plan.',
   dpa_processor_obligations_9:
-    'Capgo shall assist the controller in complying with the obligations concerning the security of personal data. Plausible will also provide assistance to the controller for DPIAs. Where a data subject asserts their rights as a data subject, this request will be forwarded to the controller without delay.',
+    'Capgo shall assist the controller in complying with the obligations concerning the security of personal data. Capgo will also provide assistance to the controller for DPIAs. Where a data subject asserts their rights as a data subject, this request will be forwarded to the controller without delay.',
   dpa_processor_obligations_title: "Processor's obligations with respect to the controller",
   dpa_security_measures_1:
-    "For encryption, we use https in transit and the hashing process at rest. Our hashing process is much stronger than encryption. Encryption implies that there's a key that can decrypt and reveal the raw data. In our database the raw IP address and User Agent are rendered completely inaccessible to anyone, including ourselves. In addition to this, we use strict firewall rules and private encrypted networking. We keep offsite backups with replication including strong bcrypt passwords.",
+    'For security, we use TLS in transit, encryption at rest where applicable, access controls, private networking, backups, and operational safeguards designed to protect service data. Access is limited to authorized personnel who need it for support, abuse prevention, and operational reliability.',
   dpa_security_measures_2:
-    'Capgo is fully open source software which means that our source code is available and accessible on GitHub so anyone can check it out and audit it. You can read it, inspect it and review it to understand how it works and to ensure it keeps the data private and secure. This gives you and everyone else full transparency on how we handle the website traffic data.',
+    'Capgo is fully open source software which means that our source code is available and accessible on GitHub so anyone can check it out and audit it. You can read it, inspect it and review it to understand how it works and to ensure it keeps service data private and secure.',
   dpa_security_measures_3:
     'With more than 500+ GitHub stars, there are a lot of eyes on our code and it is this transparency and openness that means that open source products can be more trustworthy than proprietary and closed source products. Our software is updated several times per week and on our GitHub page we also have a way for people to report any security vulnerabilities.',
   dpa_security_measures_title: 'Organizational and technical security measures',
