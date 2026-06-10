@@ -89,6 +89,7 @@ Plugin Pedometer|step counting pedometer plugin|docs/plugins/pedometer/**
 Plugin Persona|Persona identity verification inquiry plugin|docs/plugins/persona/**
 Plugin Intune|Microsoft Intune MAM and MSAL plugin|docs/plugins/intune/**
 Plugin Persistent Account|persistent account storage plugin|docs/plugins/persistent-account/**
+Plugin Persistent UUID|persistent app-scoped UUID plugin|docs/plugins/persistent-uuid/**
 Plugin Photo Library|photo library access plugin|docs/plugins/photo-library/**
 Plugin Printer|printing plugin for documents and images|docs/plugins/printer/**
 Plugin RealtimeKit|real-time communication plugin|docs/plugins/realtimekit/**

@@ -181,6 +181,7 @@ const pluginEntries = [
   ['Persona', 'persona'],
   ['Intune', 'intune', [linkItem('iOS', '/docs/plugins/intune/ios'), linkItem('Android', '/docs/plugins/intune/android')]],
   ['Persistent Account', 'persistent-account'],
+  ['Persistent UUID', 'persistent-uuid', [linkItem('iOS behavior', '/docs/plugins/persistent-uuid/ios'), linkItem('Android behavior', '/docs/plugins/persistent-uuid/android')]],
   ['Photo Library', 'photo-library'],
   ['Pretty Toast', 'pretty-toast'],
   ['Printer', 'printer'],

@@ -1,0 +1,62 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-persistent-uuid and create a stable app UUID."
+sidebar:
+  order: 2
+---
+
+## Install
+
+~~~bash
+npm install @capgo/capacitor-persistent-uuid
+npx cap sync
+~~~
+
+## Import
+
+~~~typescript
+import { PersistentUuid } from '@capgo/capacitor-persistent-uuid';
+~~~
+
+## Read Or Create The UUID
+
+~~~typescript
+import { PersistentUuid } from '@capgo/capacitor-persistent-uuid';
+
+const result = await PersistentUuid.getId();
+
+console.log(result.id);
+console.log(result.scope);
+console.log(result.created);
+~~~
+
+The first call creates and stores a UUID. Later calls return the same UUID for the same scope.
+
+## Use A Stable Custom Scope
+
+The native default scope is the package name on Android and the bundle identifier on iOS. If debug and production builds use different package identifiers but should share one UUID, pass a shared scope.
+
+~~~typescript
+const result = await PersistentUuid.getId({
+  scope: 'com.example.app',
+});
+~~~
+
+## Reset The UUID
+
+Call resetId when the user logs out, requests a privacy reset, or when automated tests need a new identifier.
+
+~~~typescript
+const replacement = await PersistentUuid.resetId();
+console.log(replacement.id);
+~~~
+
+## Persistence Expectations
+
+- Android can survive uninstall and reinstall, including Android Studio and Play installs with different signing keys, when the package name or custom scope is stable.
+- iOS survives app updates and iOS updates while Keychain access rules remain the same.
+- Web uses localStorage and is only a development fallback.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to add persistent app identity, connect it with [@capgo/capacitor-persistent-uuid](/docs/plugins/persistent-uuid/) for the overview, [Android behavior](/docs/plugins/persistent-uuid/android/) for reinstall behavior, [iOS behavior](/docs/plugins/persistent-uuid/ios/) for Keychain behavior, [Using @capgo/capacitor-persistent-uuid](/plugins/capacitor-persistent-uuid/) for the tutorial, and [Capgo Plugin Directory](/plugins/) for other native plugins.
