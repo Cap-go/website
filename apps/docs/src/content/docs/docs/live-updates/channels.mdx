@@ -19,6 +19,7 @@ When a device checks for an update, Capgo decides which channel to use in this s
 
 1. **Forced device mapping (Dashboard)** – Manually pin a specific device ID to a channel. Use for urgent debugging or controlled testing with a single real user. This always wins.
 2. **Cloud override (per‑device) via Dashboard or API** – Created when you change the device's channel in the dashboard or via API. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device entry does.
+3. **Plugin `setChannel()` local channel** – Created when the app calls `setChannel()` and the backend validates that the target channel allows self-assignment. The selected channel is stored locally on that device, takes effect instantly, and is not shown in the Device Override UI.
 
 <Aside type="tip" title="Instant Channel Switching with setChannel()">
 **Starting from plugin version 5.34.0, 6.34.0, 7.34.0, or 8.0.0** (depending on your major version), `setChannel()` works differently: it contacts the backend to **validate** that the channel is allowed (checking if self-assignment is enabled for that channel), then stores the channel **locally on the device** as `defaultChannel`. This means the new channel takes effect **instantly** for the next update check—no waiting for replication.
@@ -31,17 +32,17 @@ Because `setChannel()` is local-only, it does **not** create a Device Override e
 
 **Important:** When channel changes are made via the Dashboard or API, there is still a replication lag of up to 2 minutes before all edge servers reflect the change. For instant channel switching, use `setChannel()` from your app code—it validates with the backend, then sets the channel locally for immediate effect.
 </Aside>
-3. **Capacitor config `defaultChannel` (test build default)** – If present in `capacitor.config.*` and no force/override exists, the app starts on this channel (e.g. `beta`, `qa`, `pr-123`). Intended for TestFlight / internal builds so testers land on a pre‑release channel automatically. Production builds typically leave this unset.
-4. **Cloud Default Channel (primary path ~99% of users)** – If you mark a default channel in the dashboard, all normal end‑users (no force, no override, no config defaultChannel) attach here. Change it to roll out or roll back instantly—no new binary. If you have platform-specific defaults (for example, one iOS-only, one Android-only, one Electron-only), each device lands on the default matching its platform. Leaving the cloud default unset is allowed; in that case the device must match on steps 1–3 to receive updates.
+4. **Capacitor config `defaultChannel` (test build default)** – If present in `capacitor.config.*` and no force/override/local channel exists, the app starts on this channel (e.g. `beta`, `qa`, `pr-123`). Intended for TestFlight / internal builds so testers land on a pre‑release channel automatically. Production builds typically leave this unset.
+5. **Cloud Default Channel (primary path ~99% of users)** – If you mark a default channel in the dashboard, all normal end‑users (no force, no Dashboard/API override, no plugin local channel, no config defaultChannel) attach here. Change it to roll out or roll back instantly—no new binary. If you have platform-specific defaults (for example, one iOS-only, one Android-only, one Electron-only), each device lands on the default matching its platform. Leaving the cloud default unset is allowed; in that case the device must match on steps 1–4 to receive updates.
 
 Best practice:
-- Treat 1–3 as exception / testing layers; when you set a cloud default, real users should flow into it. If you choose not to set one, be deliberate about how users attach (typically via `defaultChannel` in config or per-device overrides).
+- Treat 1–4 as exception / testing layers; when you set a cloud default, real users should flow into it. If you choose not to set one, be deliberate about how users attach (typically via `defaultChannel` in config or per-device overrides).
 - Only configure `defaultChannel` in binaries you explicitly ship to testers. Leaving it unset keeps production logic centralized in the dashboard.
 - Use `setChannel()` sparingly in production—mainly for QA or targeted diagnostics.
 
 If a channel is disabled for the platform (iOS/Android/Electron toggles) when it would otherwise be chosen, the selection process skips it and continues down the list.
 
-> Summary: Force > Override > Config `defaultChannel` > Cloud Default.
+> Summary: Force > Dashboard/API Override > Plugin `setChannel()` local channel > Config `defaultChannel` > Cloud Default.
 
 ## Default Channel Behavior
 

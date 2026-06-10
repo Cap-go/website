@@ -1119,7 +1119,7 @@ CapacitorUpdater.addListener('channelPrivate', (data) => {
 });
 ```
 
-This sends a request to the Capgo backend linking your device ID to the specified channel.
+This validates the channel with the Capgo backend and, when accepted, stores the selected channel locally on the device.
 
 **Parameters**
 
