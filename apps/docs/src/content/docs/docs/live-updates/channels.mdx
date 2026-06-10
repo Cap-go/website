@@ -25,6 +25,8 @@ When a device checks for an update, Capgo decides which channel to use in this s
 
 Previously, `setChannel()` saved the channel override to the backend database (like Dashboard or API changes), and devices had to wait for data replication (up to 2 minutes) before the new channel was recognized. The new behavior only reads from the backend (for validation) and stores locally, making channel switches instant.
 
+Because `setChannel()` is local-only, it does **not** create a Device Override entry in the Capgo dashboard. The Device Override UI only shows overrides created from the dashboard or the Public API.
+
 **Note:** Even if a channel becomes disallowed after being set locally, the backend will still validate the channel during update checks, so security is maintained.
 
 **Important:** When channel changes are made via the Dashboard or API, there is still a replication lag of up to 2 minutes before all edge servers reflect the change. For instant channel switching, use `setChannel()` from your app code—it validates with the backend, then sets the channel locally for immediate effect.
@@ -90,7 +92,7 @@ const config: CapacitorConfig = {
 Next, build your web app and run `npx cap sync` to copy the updated config file to your iOS, Android, and Electron projects. If you skip this sync step, your native projects will continue to use whichever channel they were previously configured for.
 
 <Aside type="caution">
-Channel selection order: Force > Override (`setChannel` / dashboard) > Config `defaultChannel` > Cloud Default.
+Channel selection order: Force > Dashboard/API device override > Plugin `setChannel()` local channel > Config `defaultChannel` > Cloud Default.
 
 Use `defaultChannel` only in test/internal builds; leave it out for production so users follow the Cloud Default (when set) instead of duplicating the routing in native config.
 
@@ -165,15 +167,17 @@ When `setChannel()` is called:
 
 **Why this matters:** In older versions, `setChannel()` saved the channel override to the backend database (same as Dashboard or API changes). Devices had to wait for backend replication (up to 2 minutes) before the channel change took effect. Now, `setChannel()` only reads from the backend (for validation) and stores locally, making channel switches instant.
 
+**Dashboard visibility:** A channel set with the plugin does not make the device appear as a Device Override in the Capgo UI. Only channel assignments created from the dashboard or the Public API are listed there. Use the dashboard or API when you need an admin-visible override.
+
 **Security note:** Even if a channel's permissions change after being set locally (e.g., self-assignment is disabled), the backend will still validate the channel during update checks, ensuring security is maintained.
 
 **Comparison of channel change methods:**
 
-| Method | Effect Time | Persisted Where | Use Case |
-|--------|-------------|-----------------|----------|
-| `setChannel()` from plugin | **Instant** | Device only (local) | User-initiated channel switching in-app |
-| Dashboard device override | Up to 2 min | Backend database | Admin-initiated changes for specific devices |
-| API channel assignment | Up to 2 min | Backend database | Automated backend integrations |
+| Method | Effect Time | Persisted Where | Shown in Device Override UI | Use Case |
+|--------|-------------|-----------------|------------------------------|----------|
+| `setChannel()` from plugin | **Instant** | Device only (local) | No | User-initiated channel switching in-app |
+| Dashboard device override | Up to 2 min | Backend database | Yes | Admin-initiated changes for specific devices |
+| API channel assignment | Up to 2 min | Backend database | Yes | Automated backend integrations |
 
 For the best user experience when building channel-switching UIs, always use the plugin's `setChannel()` method.
 
