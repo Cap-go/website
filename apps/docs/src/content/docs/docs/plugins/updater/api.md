@@ -454,7 +454,7 @@ unsetChannel(options: UnsetChannelOptions) => Promise<void>
 
 Unset the plugin-managed local channel for this device. This clears only the channel stored locally by `setChannel()`; it does not delete Dashboard or Public API Device Override records.
 
-After calling this method, the device will automatically receive updates from the **public channel** that matches its conditions (platform, device type, build type).
+After calling this method, normal channel precedence applies: an existing Dashboard or Public API Device Override still wins; otherwise the device can fall back to the matching public/default channel for its conditions (platform, device type, build type).
 
 This is useful when:
 - You want to move a device back to the default update track

@@ -816,11 +816,12 @@ This validates the channel with the Capgo backend and, when accepted, stores the
 unsetChannel(options: UnsetChannelOptions) => Promise<void>
 ```
 
-Remove the device's channel assignment and return to the default channel.
+Remove the plugin-managed local channel assignment and continue with normal channel precedence.
 
-This unlinks the device from any specifically assigned channel, causing it to fall back to:
+This clears only the channel stored locally by {@link setChannel}; it does not delete Dashboard or Public API Device Override records. After the local assignment is cleared, normal channel precedence applies:
+- An existing Dashboard or Public API Device Override, if one exists
 - The {@link PluginsConfig.CapacitorUpdater.defaultChannel} if configured, or
-- Your backend's default channel for this app
+- Your backend default channel for this app
 
 Use this when:
 - Users opt out of beta/testing programs
