@@ -54,14 +54,17 @@ Capgo uses a multi-layered approach to match users with compatible updates:
 graph TD
     A[User Opens App] --> B{Check Device Override}
     B -->|Override Set| C[Use Override Channel]
-    B -->|No Override| D{Check defaultChannel in App}
-    D -->|Has defaultChannel| E[Use App's defaultChannel]
-    D -->|No defaultChannel| F[Use Cloud Default Channel]
-    C --> G{Check Version Constraints}
-    E --> G
-    F --> G
-    G -->|Compatible| H[Deliver Update]
-    G -->|Incompatible| I[Skip Update]
+    B -->|No Override| D{Check local plugin channel}
+    D -->|setChannel value| E[Use local setChannel channel]
+    D -->|No local channel| F{Check defaultChannel in App}
+    F -->|Has defaultChannel| G[Use App's defaultChannel]
+    F -->|No defaultChannel| H[Use Cloud Default Channel]
+    C --> I{Check Version Constraints}
+    E --> I
+    G --> I
+    H --> I
+    I -->|Compatible| J[Deliver Update]
+    I -->|Incompatible| K[Skip Update]
 ```
 
 ## Strategy 1: Channel-Based Version Routing
@@ -394,13 +397,15 @@ git branch -d v1-maintenance
 
 When multiple channel configurations exist, Capgo uses this precedence order:
 
-1. **Device Override** (Dashboard or API) - Highest priority
-2. **Cloud Override** via `setChannel()` call
+1. **Device Override** (Dashboard or API) - Highest priority and visible in the Device Override UI
+2. **Local plugin channel** via `setChannel()` - Stored on the device only and not shown in the Device Override UI
 3. **defaultChannel** in capacitor.config.ts
 4. **Default Channel** (Cloud setting) - Lowest priority
 
 <Aside type="note" title="Precedence Example">
   If a user's app has `defaultChannel: 'v2'` but you override their device to `'beta'` in the dashboard, they'll receive updates from the `'beta'` channel.
+
+  The Device Override UI only lists overrides set from the dashboard or Public API. Calling `setChannel()` from the app validates the channel with the backend, then stores it locally on the device.
 </Aside>
 
 ## Best Practices
