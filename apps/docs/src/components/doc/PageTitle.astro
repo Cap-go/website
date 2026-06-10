@@ -2,11 +2,15 @@
 import Default from '@astrojs/starlight/components/PageTitle.astro'
 import CopyPage from './CopyPage.astro'
 import InstallPromptForAI from './InstallPromptForAI.astro'
+import PluginRepositoryLink from './PluginRepositoryLink.astro'
 ---
 
 <div class="page-title-wrapper">
   <Default><slot /></Default>
-  <CopyPage />
+  <div class="page-title-actions">
+    <PluginRepositoryLink />
+    <CopyPage />
+  </div>
 </div>
 <InstallPromptForAI />
 
@@ -22,6 +26,13 @@ import InstallPromptForAI from './InstallPromptForAI.astro'
   .page-title-wrapper :global(h1) {
     flex: 1;
     min-width: 0;
+  }
+
+  .page-title-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   @media (max-width: 768px) {
