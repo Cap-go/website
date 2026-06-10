@@ -425,7 +425,9 @@ Get Latest bundle available from update Url
 setChannel(options: SetChannelOptions) => Promise<ChannelRes>
 ```
 
-Sets the channel for this device. The channel must have `allow_device_self_set` enabled for this to work.
+Sets the plugin-managed local channel for this device. The channel must have `allow_device_self_set` enabled for this to work.
+
+`setChannel()` validates the channel with the backend, then stores the selected channel locally on the device. It does not create or update a backend Device Override, so the device will not appear as overridden in the Capgo dashboard. Only assignments created from the dashboard or the Public API are shown in the Device Override UI.
 
 **Important notes:**
 - Do not use this method to set the channel at boot. Use the `defaultChannel` in your Capacitor config instead.
@@ -450,7 +452,9 @@ Sets the channel for this device. The channel must have `allow_device_self_set` 
 unsetChannel(options: UnsetChannelOptions) => Promise<void>
 ```
 
-Unset the channel override for this device. After calling this method, the device will automatically receive updates from the **public channel** that matches its conditions (platform, device type, build type).
+Unset the plugin-managed local channel for this device. This clears only the channel stored locally by `setChannel()`; it does not delete Dashboard or Public API Device Override records.
+
+After calling this method, the device will automatically receive updates from the **public channel** that matches its conditions (platform, device type, build type).
 
 This is useful when:
 - You want to move a device back to the default update track
