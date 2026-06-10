@@ -1,0 +1,59 @@
+---
+import { actions } from '@/config/plugins'
+import { getPluginDocsSlugCandidates } from '@/services/pluginDocs'
+import { Icon } from '@astrojs/starlight/components'
+import type { StarlightRouteData } from '@astrojs/starlight/route-data'
+
+const getRoute = (): StarlightRouteData | undefined => {
+  try {
+    return Astro.locals.starlightRoute as StarlightRouteData | undefined
+  } catch {
+    return undefined
+  }
+}
+
+const routeId = getRoute()?.id ?? ''
+const pluginSlug = routeId.match(/(?:^|\/)plugins\/([^/]+)(?:\/.*)?$/)?.[1] ?? ''
+const plugin = pluginSlug ? actions.find((action) => getPluginDocsSlugCandidates(action).includes(pluginSlug)) : undefined
+const repositoryUrl = plugin?.href
+const repositoryLabel = plugin?.title ? plugin.title + ' GitHub repository' : 'GitHub repository'
+---
+
+{
+  repositoryUrl && (
+    <a class="plugin-repository-link" href={repositoryUrl} target="_blank" rel="noopener noreferrer" aria-label={repositoryLabel} title={repositoryLabel}>
+      <Icon name="github" class="plugin-repository-link__icon" size="1rem" />
+      <span>GitHub</span>
+    </a>
+  )
+}
+
+<style>
+  .plugin-repository-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+    color: var(--sl-color-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25;
+    text-decoration: none;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+  }
+
+  .plugin-repository-link:hover {
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-4);
+    color: var(--sl-color-text);
+  }
+
+  .plugin-repository-link__icon {
+    flex-shrink: 0;
+  }
+</style>
