@@ -92,6 +92,7 @@ const actionDefinitionRows =
 @capgo/capacitor-proximity|github.com/Cap-go|Enable native proximity monitoring so your app can react when the device is near a face, hand, or surface|https://github.com/Cap-go/capacitor-proximity/|Proximity
 @capgo/capacitor-pdf-generator|github.com/Cap-go|Create PDF documents from HTML templates for invoices, reports, and receipts|https://github.com/Cap-go/capacitor-pdf-generator/|PDF Generator
 @capgo/capacitor-persistent-account|github.com/Cap-go|Preserve user authentication and account data across app reinstalls and updates|https://github.com/Cap-go/capacitor-persistent-account/|Persistent Account
+@capgo/capacitor-persistent-uuid|github.com/Cap-go|Generate and persist one app-scoped UUID across reinstalls, app updates, and OS updates|https://github.com/Cap-go/capacitor-persistent-uuid/|Persistent UUID
 @capgo/capacitor-photo-library|github.com/Cap-go|Browse, save, and manage photos and videos in device photo library with permissions|https://github.com/Cap-go/capacitor-photo-library/|Photo Library
 @capgo/capacitor-sim|github.com/Cap-go|Retrieve SIM card information including carrier name, country code, and phone number|https://github.com/Cap-go/capacitor-sim/|SIM
 @capgo/capacitor-speech-recognition|github.com/Cap-go|Natural, low-latency speech recognition with streaming partial results and cross-platform parity|https://github.com/Cap-go/capacitor-speech-recognition/|Speech Recognition
@@ -236,6 +237,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-privacy-screen': 'EyeSlash',
   '@capgo/capacitor-pdf-generator': 'DocumentText',
   '@capgo/capacitor-persistent-account': 'UserCircle',
+  '@capgo/capacitor-persistent-uuid': 'FingerPrint',
   '@capgo/capacitor-photo-library': 'Photo',
   '@capgo/capacitor-sim': 'Signal',
   '@capgo/capacitor-speech-recognition': 'Microphone',
