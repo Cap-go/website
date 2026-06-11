@@ -37,7 +37,7 @@ export const getTotalStars = (): number => {
   return Object.values(starsMap).reduce((sum, stars) => sum + stars, 0)
 }
 
-// Get total weekly downloads across all plugins
+// Get total monthly downloads across all plugins
 export const getTotalDownloads = (): number => {
   return Object.values(downloadsMap).reduce((sum, downloads) => sum + downloads, 0)
 }

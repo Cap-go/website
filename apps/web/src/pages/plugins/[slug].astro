@@ -162,7 +162,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
               <div class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm text-gray-300">
                 {tutorial ? 'Tutorial' : 'Overview'}
               </div>
-              <div class="text-sm text-gray-500">by {author}</div>
+              <div class="max-w-full truncate font-mono text-sm text-gray-500" title={name ?? author}>{name ?? author}</div>
             </div>
 
             <div class="mt-6 flex items-start gap-4 sm:gap-5">
@@ -184,7 +184,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                 rel="noopener noreferrer"
                 class="cursor-pointer rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
               >
-                <p class="text-sm text-gray-400">{m.downloads({}, { locale })}/week</p>
+                <p class="text-sm text-gray-400">{m.downloads({}, { locale })}/month</p>
                 <p class="mt-2 text-2xl font-semibold text-white tabular-nums sm:text-xl">
                   {formatCount(npmDownloads)}
                 </p>

@@ -4,6 +4,9 @@
  * Fetches npm download stats for all plugins in plugins.ts and saves to a JSON file.
  * Uses official npm API with parallel requests.
  * Run with: bun run scripts/fetch-npm-downloads.ts
+ * Refresh with: NPM_DOWNLOADS_REFRESH=true bun run scripts/fetch-npm-downloads.ts
+ * Strict refresh with: NPM_DOWNLOADS_REFRESH=true NPM_DOWNLOADS_STRICT_REFRESH=true bun run scripts/fetch-npm-downloads.ts
+ * Strict refresh disables cached fallback; packages that still fail after retries are logged and written as 0.
  */
 
 import { actions } from '../apps/web/src/config/plugins'
@@ -15,11 +18,11 @@ const CONCURRENCY = Number.parseInt(process.env.NPM_DOWNLOADS_CONCURRENCY ?? '20
 const outputPath = new URL('../apps/web/src/data/npm-downloads.json', import.meta.url).pathname
 let startTime: number
 
-// Get date range for last 90 days (quarter)
+// Get date range for last 30 days (month)
 const getDateRange = () => {
   const end = new Date()
   const start = new Date()
-  start.setDate(start.getDate() - 90)
+  start.setDate(start.getDate() - 30)
   const format = (d: Date) => d.toISOString().split('T')[0]
   return `${format(start)}:${format(end)}`
 }
@@ -50,7 +53,7 @@ const getRetryDelayMs = (response: Response, attempt: number) => {
   const retryAfter = response.headers.get('retry-after')
   if (retryAfter) {
     const retryAfterSeconds = Number.parseInt(retryAfter, 10)
-    if (Number.isFinite(retryAfterSeconds)) return retryAfterSeconds * 1000
+    if (Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0) return retryAfterSeconds * 1000
   }
 
   return Math.min(30000, attempt * 5000)
@@ -116,7 +119,7 @@ const fetchDownloads = async (packageName: string, cachedDownloads?: number): Pr
     }
   }
 
-  if (cachedDownloads !== undefined) {
+  if (!STRICT_REFRESH && cachedDownloads !== undefined) {
     console.warn(`  ${packageName}: failed after ${attempt} attempts, using cached value`)
     return cachedDownloads
   }
@@ -149,6 +152,9 @@ async function main() {
   }
 
   console.log(`Fetching npm download stats from npm. Will fail if not completed within 5 minutes.`)
+  if (STRICT_REFRESH) {
+    console.warn(`NPM_DOWNLOADS_STRICT_REFRESH=true: cached fallback is disabled; failed package fetches will be saved as 0.`)
+  }
 
   // Fetch packages with concurrency limit to avoid rate limiting
   const concurrency = Math.max(1, Number.isFinite(CONCURRENCY) ? CONCURRENCY : 20)
@@ -161,7 +167,7 @@ async function main() {
     const batchResults = await Promise.all(
       batch.map(async (name) => {
         const count = await fetchDownloads(name, cachedDownloads[name])
-        console.log(`  ${name}: ${count.toLocaleString()} downloads/quarter`)
+        console.log(`  ${name}: ${count.toLocaleString()} downloads/month`)
         return { name, count }
       }),
     )
@@ -182,7 +188,7 @@ async function main() {
   const totalDownloads = Object.values(downloads).reduce((sum, count) => sum + count, 0)
   const elapsed = ((performance.now() - startTime) / 1000).toFixed(2)
   console.log(`\nSaved ${Object.keys(downloads).length} download counts to ${outputPath}`)
-  console.log(`Total quarterly downloads: ${totalDownloads.toLocaleString()}`)
+  console.log(`Total monthly downloads: ${totalDownloads.toLocaleString()}`)
   console.log(`Completed in ${elapsed}s`)
 }
 

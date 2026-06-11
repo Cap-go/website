@@ -76,7 +76,7 @@ const generatePluginCard = (card: CardData): string => {
 
   const badges: string[] = []
   if (npmUrl && npmPackage) {
-    badges.push(`<a href="${npmUrl}"><img src="https://img.shields.io/npm/dw/${npmPackage}?style=flat-square&label=downloads" alt="npm downloads"></a>`)
+    badges.push(`<a href="${npmUrl}"><img src="https://img.shields.io/npm/dm/${npmPackage}?style=flat-square&label=downloads" alt="npm downloads"></a>`)
   }
   badges.push(`<a href="${card.href}"><img src="https://img.shields.io/github/stars/${repoPath}?style=flat-square&label=stars" alt="GitHub stars"></a>`)
 
@@ -177,7 +177,7 @@ ${capgoCloudSection}
 
 A collection of high-quality Capacitor plugins maintained by [Capgo](https://capgo.app).
 
-**Total Plugins:** ${sortedPlugins.length} | **Weekly Downloads:** ${formatNumber(
+**Total Plugins:** ${sortedPlugins.length} | **Monthly Downloads:** ${formatNumber(
   Object.values(npmDownloads).reduce((sum, d) => sum + d, 0),
 )} | **GitHub Stars:** ${formatNumber(Object.values(githubStars).reduce((sum, s) => sum + s, 0))}
 
