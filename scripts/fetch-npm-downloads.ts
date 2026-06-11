@@ -4,6 +4,9 @@
  * Fetches npm download stats for all plugins in plugins.ts and saves to a JSON file.
  * Uses official npm API with parallel requests.
  * Run with: bun run scripts/fetch-npm-downloads.ts
+ * Refresh with: NPM_DOWNLOADS_REFRESH=true bun run scripts/fetch-npm-downloads.ts
+ * Strict refresh with: NPM_DOWNLOADS_REFRESH=true NPM_DOWNLOADS_STRICT_REFRESH=true bun run scripts/fetch-npm-downloads.ts
+ * Strict refresh disables cached fallback; packages that still fail after retries are logged and written as 0.
  */
 
 import { actions } from '../apps/web/src/config/plugins'
@@ -149,6 +152,9 @@ async function main() {
   }
 
   console.log(`Fetching npm download stats from npm. Will fail if not completed within 5 minutes.`)
+  if (STRICT_REFRESH) {
+    console.warn(`NPM_DOWNLOADS_STRICT_REFRESH=true: cached fallback is disabled; failed package fetches will be saved as 0.`)
+  }
 
   // Fetch packages with concurrency limit to avoid rate limiting
   const concurrency = Math.max(1, Number.isFinite(CONCURRENCY) ? CONCURRENCY : 20)
