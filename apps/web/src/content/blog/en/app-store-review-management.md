@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-11T09:07:48.209Z
-updated_at: 2026-06-11T09:07:55.172Z
+updated_at: 2026-06-11T09:10:22.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/eb4dc09b-1980-4a68-842e-31f50d22a24f/app-store-review-management-playbook.jpg'
 head_image_alt: 'App Store Review Management: A Complete Playbook'
 keywords: 'app store review management, mobile app release, capacitorjs, app store submission, live updates'
