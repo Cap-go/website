@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import m from '@/copy/messages'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import type { Database } from '@/services/supabase.types'
 import { createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import { numberWithSpaces } from '@/services/misc'
@@ -584,6 +585,8 @@ const stats = [
       </div>
     </section>
   </main>
+
+  <SolutionAppExample solution="enterprise" />
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
     <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Enterprise</h2>
     <p class="mt-4">
