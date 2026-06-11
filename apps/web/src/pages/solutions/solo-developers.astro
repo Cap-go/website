@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
@@ -512,6 +513,8 @@ const content = { title, description, ldJSON }
     </section>
 
     <!-- Final CTA -->
+
+    <SolutionAppExample solution="solo-developers" />
     <section class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-violet-600 to-purple-700 px-8 py-16 sm:px-16">

@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import m from '@/copy/messages'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = Astro.locals.locale
@@ -318,5 +319,7 @@ Output as a checklist that an engineer can run in 2-3 hours per release candidat
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="cordova-to-capacitor-ai" />
   </main>
 </Layout>

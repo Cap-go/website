@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
@@ -316,6 +317,7 @@ npx @capgo/cli@latest channel set production com.enterprise.app --latest</code><
       </div>
     </section>
 
+    <SolutionAppExample solution="set-and-forget" />
     <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="rounded-2xl border border-amber-300/30 bg-amber-300/10 p-6 sm:p-8 lg:flex lg:items-center lg:justify-between lg:gap-8">
