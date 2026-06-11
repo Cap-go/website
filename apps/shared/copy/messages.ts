@@ -2617,6 +2617,7 @@ const messages = {
   solutions_agencies_cta_subtitle: 'Join agencies that manage client apps without the chaos. Start your free trial.',
   solutions_agencies_cta_title: 'Ready to Simplify Client Management?',
   solutions_agencies_freelancer_description: 'Trusted by the {brand} team for part-time freelance support.',
+  solutions_agencies_freelancer_contact: 'Contact {name}',
   solutions_agencies_freelancer_role: 'Part-time {brand} freelance',
   solutions_agencies_freelancers_label: 'Trusted Freelancers',
   solutions_agencies_freelancers_subtitle: 'Adrien and Jordan support {brand} part-time as freelance contributors.',
