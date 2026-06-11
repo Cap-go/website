@@ -55,6 +55,9 @@ Related docs:
 
 Channel policy is stricter (`minor` or `patch`) than the update being offered.
 
+- `minor` blocks when the target bundle has a different major or minor than the device native baseline (`version_build`).
+- `patch` blocks when the target bundle has a different major, minor, or patch than `version_build`. It only allows prerelease/build metadata changes on the same `MAJOR.MINOR.PATCH` core.
+
 **Fix**
 
 - Upload a bundle compatible with the current policy, or

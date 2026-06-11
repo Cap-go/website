@@ -69,10 +69,12 @@ Controls which [**semver updates**](/semver_tester/) a channel will auto-deliver
 | Strategy | Blocks | Allows | Use Case |
 |----------|--------|--------|----------|
 | **none** | Nothing | All updates | Default; full auto-update |
-| **major** | 0.0.0 → 1.0.0 | Same major (e.g. 1.x → 1.y) | Prevent breaking changes from reaching old native |
-| **minor** | 0.0.0 → 1.1.0, 1.1.0 → 1.2.0 | Same minor (e.g. 1.2.x → 1.2.y) | Stricter control within major |
-| **patch** | Any change except patch bump | Only 0.0.311 → 0.0.314 | Very strict; patch-only updates |
+| **major** | Target major above native baseline | Same major, including minor and patch changes | Prevent breaking changes from reaching old native |
+| **minor** | Different major or minor than native baseline | Same major.minor line, including patch and prerelease changes | Stricter control within major |
+| **patch** | Different major, minor, or patch than native baseline | Same MAJOR.MINOR.PATCH core, including prerelease/build metadata changes | Very strict; same-core updates only |
 | **metadata** | Updates without `min_update_version` | Updates with explicit compatibility metadata | Custom compatibility rules per bundle |
+
+These checks compare the target bundle against the native baseline sent as `version_build`, not the currently installed downloaded bundle sent as `version_name`.
 
 ```bash
 npx @capgo/cli channel set production --disable-auto-update major
