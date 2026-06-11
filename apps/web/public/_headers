@@ -60,6 +60,21 @@
   Access-Control-Expose-Headers: Link, ETag
   Cache-Control: public, max-age=3600
 
+/plugins.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
+  Link: </plugins.json>; rel="alternate"; type="application/json"
+
+/plugins.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+  Link: </plugins.md>; rel="alternate"; type="text/markdown"
+
 /sitemap.xml
   Content-Type: text/xml
 
