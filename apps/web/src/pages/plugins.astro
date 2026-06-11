@@ -62,7 +62,7 @@ const totalStars = getTotalStars()
 const totalDownloads = getTotalDownloads()
 const communityStats = getGitHubCommunityStats()
 const sortOptions = [
-  { value: 'downloads', label: 'Downloads', description: 'Most weekly npm usage' },
+  { value: 'downloads', label: 'Downloads', description: 'Most monthly npm usage' },
   { value: 'stars', label: 'GitHub Stars', description: 'Most community interest' },
   { value: 'alphabetical', label: 'Alphabetical', description: 'A to Z by plugin name' },
 ] as const
@@ -100,7 +100,7 @@ const formatCount = (count: number): string => {
 
 const directoryStats = [
   { label: m.total_plugins({}, { locale }), value: `${plugins.length}+` },
-  { label: m.npm_weekly({}, { locale }), value: formatCount(totalDownloads) },
+  { label: m.npm_monthly({}, { locale }), value: formatCount(totalDownloads) },
   { label: m.github_stars({}, { locale }), value: `${formatCount(totalStars)}+` },
   { label: m.oss_contributors({}, { locale }), value: `${formatCount(communityStats.contributorCount)}+` },
   { label: m.versions_shipped({}, { locale }), value: `${formatCount(communityStats.versionCount)}+` },
@@ -109,7 +109,7 @@ const directoryStats = [
 
 const featuredStats = [
   { label: m.ready_to_use_plugins({}, { locale }), value: `${plugins.length}+`, colorClass: 'text-gray-200' },
-  { label: m.downloads_per_week({}, { locale }), value: formatCount(totalDownloads), colorClass: 'text-emerald-400' },
+  { label: m.downloads_per_month({}, { locale }), value: formatCount(totalDownloads), colorClass: 'text-emerald-400' },
   { label: m.github_stars({}, { locale }), value: `${formatCount(totalStars)}+`, colorClass: 'text-gray-200' },
   { label: m.oss_contributors({}, { locale }), value: `${formatCount(communityStats.contributorCount)}+`, colorClass: 'text-cyan-300' },
   { label: m.versions_shipped({}, { locale }), value: `${formatCount(communityStats.versionCount)}+`, colorClass: 'text-gray-200' },
@@ -281,6 +281,7 @@ const content = {
                 data-title={item.title.toLowerCase()}
                 data-description={item.description.toLowerCase()}
                 data-author={item.author.toLowerCase()}
+                data-package={item.name?.toLowerCase() ?? ''}
                 data-downloads={item.npmDownloads ?? 0}
                 data-stars={item.githubStars ?? 0}
               >
@@ -288,15 +289,17 @@ const content = {
                   {item.icon && <PluginIcon icon={item.icon} name={item.title} className="mb-4" />}
                   <h3 class="font-pj mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
                   <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
-                  <div class="mb-4 flex items-center justify-between">
-                    <span class="text-sm text-gray-500">by {item.author}</span>
-                    <div class="flex gap-3">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="min-w-0 truncate font-mono text-xs text-gray-500" title={item.name ?? item.author}>
+                      {item.name ?? item.author}
+                    </span>
+                    <div class="flex shrink-0 gap-3">
                       {item.npmDownloads !== undefined && (
                         <span class="inline-flex items-center text-sm text-gray-200">
                           <svg class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                           </svg>
-                          {formatCount(item.npmDownloads)}/w
+                          {formatCount(item.npmDownloads)}/m
                         </span>
                       )}
                       <span class="inline-flex items-center text-sm text-gray-200">
@@ -555,8 +558,9 @@ const content = {
           const title = card.getAttribute('data-title') || ''
           const description = card.getAttribute('data-description') || ''
           const author = card.getAttribute('data-author') || ''
+          const packageName = card.getAttribute('data-package') || ''
 
-          const matches = title.includes(searchTerm) || description.includes(searchTerm) || author.includes(searchTerm)
+          const matches = title.includes(searchTerm) || description.includes(searchTerm) || author.includes(searchTerm) || packageName.includes(searchTerm)
 
           if (matches) {
             card.style.display = ''
