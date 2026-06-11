@@ -1,3 +1,4 @@
+import type { MessageKey } from '@/copy/messages'
 import type { SolutionStoreAppId } from './solutionStoreApps'
 
 export type SolutionAppExampleKey =
@@ -24,253 +25,248 @@ export type SolutionAppExampleKey =
 
 export interface SolutionAppReference {
   appId: SolutionStoreAppId
-  note: string
+  noteKey: MessageKey
 }
 
 export interface SolutionAppExample {
-  label: string
-  headline: string
-  useCase: string
+  labelKey: MessageKey
+  headlineKey: MessageKey
+  useCaseKey: MessageKey
   apps: SolutionAppReference[]
-  plays: string[]
+  playKeys: MessageKey[]
 }
 
-export const solutionAppExamples: Record<SolutionAppExampleKey, SolutionAppExample> = {
+export const solutionAppExamples = {
   agencies: {
-    label: 'Agency delivery',
-    headline: 'Marketplace apps need client-safe release lanes',
-    useCase:
-      'Service, marketplace, and booking apps have buyer, seller, messaging, payment, and support journeys changing at different speeds. Agencies can use Capgo channels to review each client request, ship the web-layer change, and keep rollback ready for launch day.',
+    labelKey: 'solution_app_examples_agencies_label',
+    headlineKey: 'solution_app_examples_agencies_headline',
+    useCaseKey: 'solution_app_examples_agencies_use_case',
     apps: [
-      { appId: 'com.freelancer.android.messenger', note: 'Marketplace flows where client-requested fixes can touch hiring, messaging, and account screens.' },
-      { appId: 'com.mushroomcloud.cars', note: 'Vehicle listings and lead flows that benefit from staged feature checks before broad rollout.' },
-      { appId: 'com.kai.kaiticketing', note: 'Booking and ticketing journeys where operational copy and schedule surfaces change often.' },
+      { appId: 'com.freelancer.android.messenger', noteKey: 'solution_app_examples_agencies_app_1_note' },
+      { appId: 'com.mushroomcloud.cars', noteKey: 'solution_app_examples_agencies_app_2_note' },
+      { appId: 'com.kai.kaiticketing', noteKey: 'solution_app_examples_agencies_app_3_note' },
     ],
-    plays: ['Client review channel before production', 'Segmented fixes for marketplace roles', 'Rollback plan for campaign windows'],
+    playKeys: ['solution_app_examples_agencies_play_1', 'solution_app_examples_agencies_play_2', 'solution_app_examples_agencies_play_3'],
   },
   'beta-testing': {
-    label: 'Beta testing',
-    headline: 'Community apps need careful feature exposure',
-    useCase: 'High-usage consumer apps can validate game, learning, or forecast flows with a closed tester group before every user receives the new experience.',
+    labelKey: 'solution_app_examples_beta_testing_label',
+    headlineKey: 'solution_app_examples_beta_testing_headline',
+    useCaseKey: 'solution_app_examples_beta_testing_use_case',
     apps: [
-      { appId: 'org.lichess.mobileapp', note: 'Large community app where tournaments, analysis, and social features need careful validation.' },
-      { appId: 'com.studysmarter', note: 'Education workflows where onboarding and practice changes should be reviewed before release.' },
-      { appId: 'com.windyty.android', note: 'Forecast and map interactions where product changes need confidence before expanding.' },
+      { appId: 'org.lichess.mobileapp', noteKey: 'solution_app_examples_beta_testing_app_1_note' },
+      { appId: 'com.studysmarter', noteKey: 'solution_app_examples_beta_testing_app_2_note' },
+      { appId: 'com.windyty.android', noteKey: 'solution_app_examples_beta_testing_app_3_note' },
     ],
-    plays: ['Internal and public beta channels', 'Fast feedback loops between builds', 'Promotion only after stability signals'],
+    playKeys: ['solution_app_examples_beta_testing_play_1', 'solution_app_examples_beta_testing_play_2', 'solution_app_examples_beta_testing_play_3'],
   },
   'build-without-mac': {
-    label: 'Cloud builds',
-    headline: 'Operational apps should not wait on one local Mac',
-    useCase:
-      'School, transport, and support apps still need signed mobile releases when the team is mostly web, support, or operations. Hosted build workflows remove the single-machine bottleneck while keeping signing steps repeatable.',
+    labelKey: 'solution_app_examples_build_without_mac_label',
+    headlineKey: 'solution_app_examples_build_without_mac_headline',
+    useCaseKey: 'solution_app_examples_build_without_mac_use_case',
     apps: [
-      { appId: 'uk.co.parentmail.parentmail', note: 'School communications app where non-native teams still need reliable signed releases.' },
-      { appId: 'com.kai.kaiticketing', note: 'Transport booking app where release handoff should not depend on one developer machine.' },
-      { appId: 'br.com.oi.tecnicovirtual', note: 'Support utility where operations teams need repeatable mobile build records.' },
+      { appId: 'uk.co.parentmail.parentmail', noteKey: 'solution_app_examples_build_without_mac_app_1_note' },
+      { appId: 'com.kai.kaiticketing', noteKey: 'solution_app_examples_build_without_mac_app_2_note' },
+      { appId: 'br.com.oi.tecnicovirtual', noteKey: 'solution_app_examples_build_without_mac_app_3_note' },
     ],
-    plays: ['Repeatable iOS and Android signing', 'Release handoff without local hardware', 'CI-owned build records'],
+    playKeys: ['solution_app_examples_build_without_mac_play_1', 'solution_app_examples_build_without_mac_play_2', 'solution_app_examples_build_without_mac_play_3'],
   },
   'cordova-to-capacitor': {
-    label: 'Migration',
-    headline: 'Hybrid apps need low-risk migration paths',
-    useCase:
-      'Established Cordova-style apps can modernize their native shell without interrupting the public-facing interface users already know. Capgo helps keep web-layer QA and rollback available during the migration window.',
+    labelKey: 'solution_app_examples_cordova_to_capacitor_label',
+    headlineKey: 'solution_app_examples_cordova_to_capacitor_headline',
+    useCaseKey: 'solution_app_examples_cordova_to_capacitor_use_case',
     apps: [
-      { appId: 'br.jus.tse.resultados', note: 'Public-service utility showing a migration surface with broad device support expectations.' },
-      { appId: 'com.windyty.android', note: 'Weather maps and alerts where a native-shell migration must protect familiar workflows.' },
-      { appId: 'de.burgerking.kingfinder', note: 'Restaurant promotions and finder features that can move through staged hybrid migration.' },
+      { appId: 'br.jus.tse.resultados', noteKey: 'solution_app_examples_cordova_to_capacitor_app_1_note' },
+      { appId: 'com.windyty.android', noteKey: 'solution_app_examples_cordova_to_capacitor_app_2_note' },
+      { appId: 'de.burgerking.kingfinder', noteKey: 'solution_app_examples_cordova_to_capacitor_app_3_note' },
     ],
-    plays: ['Inventory plugin and permission risks', 'Move web code first, native shell second', 'Use live updates during migration QA'],
+    playKeys: ['solution_app_examples_cordova_to_capacitor_play_1', 'solution_app_examples_cordova_to_capacitor_play_2', 'solution_app_examples_cordova_to_capacitor_play_3'],
   },
   'cordova-to-capacitor-ai': {
-    label: 'AI-assisted migration',
-    headline: 'Complex apps expose the hidden migration checklist',
-    useCase:
-      'Marketplace, banking, and ticketing apps combine search, account, media, location, and transaction flows. AI-assisted migration helps turn that feature surface into a Capacitor plugin map, test plan, and staged rollout checklist.',
+    labelKey: 'solution_app_examples_cordova_to_capacitor_ai_label',
+    headlineKey: 'solution_app_examples_cordova_to_capacitor_ai_headline',
+    useCaseKey: 'solution_app_examples_cordova_to_capacitor_ai_use_case',
     apps: [
-      { appId: 'com.mushroomcloud.cars', note: 'Marketplace app with media, search, account, and lead-generation paths to map.' },
-      { appId: 'com.infrasoft.uboi', note: 'Banking app with payments, offers, support, and security-sensitive screens.' },
-      { appId: 'com.kai.kaiticketing', note: 'Ticketing app with booking, rescheduling, and travel-status flows to prioritize.' },
+      { appId: 'com.mushroomcloud.cars', noteKey: 'solution_app_examples_cordova_to_capacitor_ai_app_1_note' },
+      { appId: 'com.infrasoft.uboi', noteKey: 'solution_app_examples_cordova_to_capacitor_ai_app_2_note' },
+      { appId: 'com.kai.kaiticketing', noteKey: 'solution_app_examples_cordova_to_capacitor_ai_app_3_note' },
     ],
-    plays: ['Generate plugin replacement tables', 'Draft QA plans from app features', 'Prioritize risky native flows first'],
+    playKeys: [
+      'solution_app_examples_cordova_to_capacitor_ai_play_1',
+      'solution_app_examples_cordova_to_capacitor_ai_play_2',
+      'solution_app_examples_cordova_to_capacitor_ai_play_3',
+    ],
   },
   'direct-updates': {
-    label: 'Direct updates',
-    headline: 'Public information apps need urgent content fixes',
-    useCase:
-      'Emergency, health, and civic apps cannot wait days to correct a broken checklist, resource link, or location-specific notice. Direct updates let the web layer move as soon as the fix is approved.',
+    labelKey: 'solution_app_examples_direct_updates_label',
+    headlineKey: 'solution_app_examples_direct_updates_headline',
+    useCaseKey: 'solution_app_examples_direct_updates_use_case',
     apps: [
-      { appId: 'gov.fema.mobile.android', note: 'Emergency guidance where small content mistakes can become urgent.' },
-      { appId: 'br.gov.datasus.cnsdigital', note: 'Health records and guidance surfaces where approved copy changes need fast delivery.' },
-      { appId: 'br.jus.tse.eleitoral.etitulo', note: 'Civic identity workflows where version-safe guidance matters across devices.' },
+      { appId: 'gov.fema.mobile.android', noteKey: 'solution_app_examples_direct_updates_app_1_note' },
+      { appId: 'br.gov.datasus.cnsdigital', noteKey: 'solution_app_examples_direct_updates_app_2_note' },
+      { appId: 'br.jus.tse.eleitoral.etitulo', noteKey: 'solution_app_examples_direct_updates_app_3_note' },
     ],
-    plays: ['Push approved guidance immediately', 'Bypass store delay for web fixes', 'Keep rollback available for bad copy'],
+    playKeys: ['solution_app_examples_direct_updates_play_1', 'solution_app_examples_direct_updates_play_2', 'solution_app_examples_direct_updates_play_3'],
   },
   ecommerce: {
-    label: 'Ecommerce',
-    headline: 'Retail apps live on offers, loyalty, and checkout polish',
-    useCase: 'Grocery and loyalty apps can change promotions, rewards entry points, onboarding, and checkout messaging faster than a binary release cycle allows.',
+    labelKey: 'solution_app_examples_ecommerce_label',
+    headlineKey: 'solution_app_examples_ecommerce_headline',
+    useCaseKey: 'solution_app_examples_ecommerce_use_case',
     apps: [
-      { appId: 'com.morrisons.matchandmore.app', note: 'Grocery loyalty app where campaign and rewards surfaces need scheduled updates.' },
-      { appId: 'net.groceryshopping.SproutsFarmersMarket', note: 'Retail shopping app where offer content and browse paths change continuously.' },
-      { appId: 'com.wegmans.wegmansapp', note: 'Grocery app where checkout, list, and loyalty polish can move independently.' },
+      { appId: 'com.morrisons.matchandmore.app', noteKey: 'solution_app_examples_ecommerce_app_1_note' },
+      { appId: 'net.groceryshopping.SproutsFarmersMarket', noteKey: 'solution_app_examples_ecommerce_app_2_note' },
+      { appId: 'com.wegmans.wegmansapp', noteKey: 'solution_app_examples_ecommerce_app_3_note' },
     ],
-    plays: ['Launch campaign UI on schedule', 'Patch checkout friction quickly', 'A/B test loyalty surfaces'],
+    playKeys: ['solution_app_examples_ecommerce_play_1', 'solution_app_examples_ecommerce_play_2', 'solution_app_examples_ecommerce_play_3'],
   },
   enterprise: {
-    label: 'Enterprise',
-    headline: 'Workforce and account apps need governed changes at scale',
-    useCase:
-      'Payroll, carrier, and customer account apps serve many roles and regulated workflows. Enterprise teams need staged rollout, audit-friendly release records, and controlled recovery when an update misbehaves.',
+    labelKey: 'solution_app_examples_enterprise_label',
+    headlineKey: 'solution_app_examples_enterprise_headline',
+    useCaseKey: 'solution_app_examples_enterprise_use_case',
     apps: [
-      { appId: 'com.paylocity.paylocitymobile', note: 'Workforce app where payroll, HR, and employee self-service changes need governance.' },
-      { appId: 'ua.vodafone.myvodafone', note: 'Carrier account app with payments, plan management, support, and device workflows.' },
-      { appId: 'com.orange.miorange', note: 'Telecom self-service app where account and billing surfaces need staged rollout.' },
+      { appId: 'com.paylocity.paylocitymobile', noteKey: 'solution_app_examples_enterprise_app_1_note' },
+      { appId: 'ua.vodafone.myvodafone', noteKey: 'solution_app_examples_enterprise_app_2_note' },
+      { appId: 'com.orange.miorange', noteKey: 'solution_app_examples_enterprise_app_3_note' },
     ],
-    plays: ['Roll out by channel or cohort', 'Track production adoption signals', 'Recover without forcing a store release'],
+    playKeys: ['solution_app_examples_enterprise_play_1', 'solution_app_examples_enterprise_play_2', 'solution_app_examples_enterprise_play_3'],
   },
   fintech: {
-    label: 'Fintech',
-    headline: 'Banking apps need safe, staged interface fixes',
-    useCase:
-      'Banking and money apps with accounts, payments, offers, investments, and support flows have to move quickly while preserving trust. Capgo fits fixes that can be shipped through the approved web layer and expanded gradually.',
+    labelKey: 'solution_app_examples_fintech_label',
+    headlineKey: 'solution_app_examples_fintech_headline',
+    useCaseKey: 'solution_app_examples_fintech_use_case',
     apps: [
-      { appId: 'com.infrasoft.uboi', note: 'Banking app with account, payment, loan, and offer flows that need controlled rollout.' },
-      { appId: 'com.IndianBank.IndOASIS', note: 'Mobile banking surface where reviewed interface changes should expand gradually.' },
-      { appId: 'com.orange.mobile.orangemoney', note: 'Wallet app where support copy and transactional UI changes need caution.' },
+      { appId: 'com.infrasoft.uboi', noteKey: 'solution_app_examples_fintech_app_1_note' },
+      { appId: 'com.IndianBank.IndOASIS', noteKey: 'solution_app_examples_fintech_app_2_note' },
+      { appId: 'com.orange.mobile.orangemoney', noteKey: 'solution_app_examples_fintech_app_3_note' },
     ],
-    plays: ['Stage rollout after compliance review', 'Patch transactional UI copy fast', 'Keep native version rules strict'],
+    playKeys: ['solution_app_examples_fintech_play_1', 'solution_app_examples_fintech_play_2', 'solution_app_examples_fintech_play_3'],
   },
   healthcare: {
-    label: 'Healthcare',
-    headline: 'Patient flows change faster than app review',
-    useCase:
-      'Appointment, health-record, and benefits apps can update intake screens, booking instructions, provider messaging, and patient education without destabilizing the native shell.',
+    labelKey: 'solution_app_examples_healthcare_label',
+    headlineKey: 'solution_app_examples_healthcare_headline',
+    useCaseKey: 'solution_app_examples_healthcare_use_case',
     apps: [
-      { appId: 'au.com.hotdoc.android.hotdoc', note: 'Appointment flow where booking instructions and intake copy can change often.' },
-      { appId: 'br.gov.datasus.cnsdigital', note: 'Health-record app with public guidance and document flows that must stay current.' },
-      { appId: 'br.com.beneficiario.odontoprev', note: 'Benefits app where provider, eligibility, and support journeys need careful patching.' },
+      { appId: 'au.com.hotdoc.android.hotdoc', noteKey: 'solution_app_examples_healthcare_app_1_note' },
+      { appId: 'br.gov.datasus.cnsdigital', noteKey: 'solution_app_examples_healthcare_app_2_note' },
+      { appId: 'br.com.beneficiario.odontoprev', noteKey: 'solution_app_examples_healthcare_app_3_note' },
     ],
-    plays: ['Target updates to care workflows', 'Fix form and booking copy quickly', 'Keep rollback ready for patient impact'],
+    playKeys: ['solution_app_examples_healthcare_play_1', 'solution_app_examples_healthcare_play_2', 'solution_app_examples_healthcare_play_3'],
   },
   'ionic-enterprise-plugins': {
-    label: 'Plugin replacement',
-    headline: 'Enterprise self-service apps depend on native integrations',
-    useCase:
-      'Telecom and account apps touch authentication, device state, notifications, support, and payments. Open Capacitor plugins help replace expensive closed SDK coverage one capability at a time.',
+    labelKey: 'solution_app_examples_ionic_enterprise_plugins_label',
+    headlineKey: 'solution_app_examples_ionic_enterprise_plugins_headline',
+    useCaseKey: 'solution_app_examples_ionic_enterprise_plugins_use_case',
     apps: [
-      { appId: 'ua.vodafone.myvodafone', note: 'Carrier app with account, top-up, support, and notification surfaces.' },
-      { appId: 'com.swisscom.myswisscom', note: 'Self-service app with billing, plan, support, and device-management paths.' },
-      { appId: 'com.orange.miorange', note: 'Telecom account app where native capabilities can be replaced incrementally.' },
+      { appId: 'ua.vodafone.myvodafone', noteKey: 'solution_app_examples_ionic_enterprise_plugins_app_1_note' },
+      { appId: 'com.swisscom.myswisscom', noteKey: 'solution_app_examples_ionic_enterprise_plugins_app_2_note' },
+      { appId: 'com.orange.miorange', noteKey: 'solution_app_examples_ionic_enterprise_plugins_app_3_note' },
     ],
-    plays: ['Map native features to open plugins', 'Replace SDKs incrementally', 'Ship web updates around native capability work'],
+    playKeys: [
+      'solution_app_examples_ionic_enterprise_plugins_play_1',
+      'solution_app_examples_ionic_enterprise_plugins_play_2',
+      'solution_app_examples_ionic_enterprise_plugins_play_3',
+    ],
   },
   'lovable-vibecoding-to-mobile': {
-    label: 'Web-to-mobile',
-    headline: 'Template and learning products are natural mobile candidates',
-    useCase: 'Creation and learning apps show how web-style flows can become store-ready mobile experiences when packaging, signing, and updates are handled cleanly.',
+    labelKey: 'solution_app_examples_lovable_vibecoding_to_mobile_label',
+    headlineKey: 'solution_app_examples_lovable_vibecoding_to_mobile_headline',
+    useCaseKey: 'solution_app_examples_lovable_vibecoding_to_mobile_use_case',
     apps: [
-      { appId: 'com.greetingsisland.sam', note: 'Template-driven design flow that maps naturally from responsive web to mobile.' },
-      { appId: 'com.jernung.infinite.jpn', note: 'Focused learning app where small lesson and onboarding improvements compound.' },
-      { appId: 'com.studysmarter', note: 'Study workflow where web product iteration can continue after app packaging.' },
+      { appId: 'com.greetingsisland.sam', noteKey: 'solution_app_examples_lovable_vibecoding_to_mobile_app_1_note' },
+      { appId: 'com.jernung.infinite.jpn', noteKey: 'solution_app_examples_lovable_vibecoding_to_mobile_app_2_note' },
+      { appId: 'com.studysmarter', noteKey: 'solution_app_examples_lovable_vibecoding_to_mobile_app_3_note' },
     ],
-    plays: ['Wrap responsive web flows in Capacitor', 'Use hosted builds for store packages', 'Improve templates through live updates'],
+    playKeys: [
+      'solution_app_examples_lovable_vibecoding_to_mobile_play_1',
+      'solution_app_examples_lovable_vibecoding_to_mobile_play_2',
+      'solution_app_examples_lovable_vibecoding_to_mobile_play_3',
+    ],
   },
   'pr-preview': {
-    label: 'PR preview',
-    headline: 'Product apps need reviewable mobile changes',
-    useCase:
-      'Learning, event, and community apps can have onboarding, practice, live-session, and subscription changes under review at the same time. PR previews let product, QA, and support inspect a mobile-ready build before merge.',
+    labelKey: 'solution_app_examples_pr_preview_label',
+    headlineKey: 'solution_app_examples_pr_preview_headline',
+    useCaseKey: 'solution_app_examples_pr_preview_use_case',
     apps: [
-      { appId: 'com.studysmarter', note: 'Education app where lesson, course, and subscription changes need stakeholder review.' },
-      { appId: 'com.polleverywhere.mobile', note: 'Live engagement app where event flows should be tested before merge.' },
-      { appId: 'org.lichess.mobileapp', note: 'Community app where tournament and analysis screens benefit from device previews.' },
+      { appId: 'com.studysmarter', noteKey: 'solution_app_examples_pr_preview_app_1_note' },
+      { appId: 'com.polleverywhere.mobile', noteKey: 'solution_app_examples_pr_preview_app_2_note' },
+      { appId: 'org.lichess.mobileapp', noteKey: 'solution_app_examples_pr_preview_app_3_note' },
     ],
-    plays: ['Preview every pull request on device', 'Share review links with stakeholders', 'Catch mobile layout issues pre-merge'],
+    playKeys: ['solution_app_examples_pr_preview_play_1', 'solution_app_examples_pr_preview_play_2', 'solution_app_examples_pr_preview_play_3'],
   },
   'production-updates': {
-    label: 'Production updates',
-    headline: 'High-traffic apps need reliable UI changes in production',
-    useCase:
-      'Forecast and game apps depend on accurate interfaces, events, and navigation. Production updates help ship approved interface fixes while monitoring adoption before expanding further.',
+    labelKey: 'solution_app_examples_production_updates_label',
+    headlineKey: 'solution_app_examples_production_updates_headline',
+    useCaseKey: 'solution_app_examples_production_updates_use_case',
     apps: [
-      { appId: 'com.windyty.android', note: 'Weather app where maps, alerts, and navigation fixes need careful production expansion.' },
-      { appId: 'air.com.playtika.slotomania', note: 'High-traffic game surface where event and promotion UI needs fast recovery.' },
-      { appId: 'com.playtika.caesarscasino', note: 'Casino game app where live content and interface polish move frequently.' },
+      { appId: 'com.windyty.android', noteKey: 'solution_app_examples_production_updates_app_1_note' },
+      { appId: 'air.com.playtika.slotomania', noteKey: 'solution_app_examples_production_updates_app_2_note' },
+      { appId: 'com.playtika.caesarscasino', noteKey: 'solution_app_examples_production_updates_app_3_note' },
     ],
-    plays: ['Start with a small rollout', 'Watch adoption and failure signals', 'Expand only when the update is healthy'],
+    playKeys: ['solution_app_examples_production_updates_play_1', 'solution_app_examples_production_updates_play_2', 'solution_app_examples_production_updates_play_3'],
   },
   qsr: {
-    label: 'QSR',
-    headline: 'Restaurant apps change menus and campaigns constantly',
-    useCase:
-      'Quick-service restaurant apps can update promotions, restaurant finder content, ordering notices, and regional campaign entry points without waiting for store approval.',
+    labelKey: 'solution_app_examples_qsr_label',
+    headlineKey: 'solution_app_examples_qsr_headline',
+    useCaseKey: 'solution_app_examples_qsr_use_case',
     apps: [
-      { appId: 'de.burgerking.kingfinder', note: 'Restaurant app with vouchers, finder content, and campaign surfaces.' },
-      { appId: 'com.jackintheboxinc.JackMobileApp', note: 'Ordering app where menu, rewards, and checkout guidance can change quickly.' },
-      { appId: 'com.dennys.mobile', note: 'Restaurant app where loyalty and food-ordering paths need frequent polish.' },
+      { appId: 'de.burgerking.kingfinder', noteKey: 'solution_app_examples_qsr_app_1_note' },
+      { appId: 'com.jackintheboxinc.JackMobileApp', noteKey: 'solution_app_examples_qsr_app_2_note' },
+      { appId: 'com.dennys.mobile', noteKey: 'solution_app_examples_qsr_app_3_note' },
     ],
-    plays: ['Launch local campaign surfaces', 'Fix ordering copy during rush periods', 'Route changes by region or channel'],
+    playKeys: ['solution_app_examples_qsr_play_1', 'solution_app_examples_qsr_play_2', 'solution_app_examples_qsr_play_3'],
   },
   'set-and-forget': {
-    label: 'Set and forget',
-    headline: 'Account apps need quiet, automatic maintenance',
-    useCase:
-      'Telecom and support apps have billing, plan, support, and device workflows that must stay current without asking users to install a new binary for every small improvement.',
+    labelKey: 'solution_app_examples_set_and_forget_label',
+    headlineKey: 'solution_app_examples_set_and_forget_headline',
+    useCaseKey: 'solution_app_examples_set_and_forget_use_case',
     apps: [
-      { appId: 'com.swisscom.myswisscom', note: 'Account app where support, plan, and billing changes should ship quietly.' },
-      { appId: 'ua.vodafone.myvodafone', note: 'Carrier self-service app where users should not manage every minor update.' },
-      { appId: 'br.com.oi.tecnicovirtual', note: 'Support app where diagnostic and help flows need maintenance without release overhead.' },
+      { appId: 'com.swisscom.myswisscom', noteKey: 'solution_app_examples_set_and_forget_app_1_note' },
+      { appId: 'ua.vodafone.myvodafone', noteKey: 'solution_app_examples_set_and_forget_app_2_note' },
+      { appId: 'br.com.oi.tecnicovirtual', noteKey: 'solution_app_examples_set_and_forget_app_3_note' },
     ],
-    plays: ['Install once, update automatically', 'Keep support flows current', 'Reduce manual release overhead'],
+    playKeys: ['solution_app_examples_set_and_forget_play_1', 'solution_app_examples_set_and_forget_play_2', 'solution_app_examples_set_and_forget_play_3'],
   },
   'solo-developers': {
-    label: 'Solo developers',
-    headline: 'Focused apps reward fast iteration',
-    useCase:
-      'Learning, community, and creator apps can improve lessons, onboarding, templates, and upgrade prompts without a big release process. A solo developer keeps momentum by shipping small, reversible web-layer changes.',
+    labelKey: 'solution_app_examples_solo_developers_label',
+    headlineKey: 'solution_app_examples_solo_developers_headline',
+    useCaseKey: 'solution_app_examples_solo_developers_use_case',
     apps: [
-      { appId: 'com.jernung.infinite.jpn', note: 'Focused language-learning app where small course improvements matter.' },
-      { appId: 'org.lichess.mobileapp', note: 'Open community app where product polish can ship in smaller steps.' },
-      { appId: 'com.greetingsisland.sam', note: 'Creator app where template and onboarding changes can be tested quickly.' },
+      { appId: 'com.jernung.infinite.jpn', noteKey: 'solution_app_examples_solo_developers_app_1_note' },
+      { appId: 'org.lichess.mobileapp', noteKey: 'solution_app_examples_solo_developers_app_2_note' },
+      { appId: 'com.greetingsisland.sam', noteKey: 'solution_app_examples_solo_developers_app_3_note' },
     ],
-    plays: ['Ship course polish without app review', 'Fix onboarding issues quickly', 'Rollback when an experiment misses'],
+    playKeys: ['solution_app_examples_solo_developers_play_1', 'solution_app_examples_solo_developers_play_2', 'solution_app_examples_solo_developers_play_3'],
   },
   startups: {
-    label: 'Startups',
-    headline: 'Audience apps need rapid product iteration',
-    useCase:
-      'Interactive, education, and survey apps can tune onboarding, live event flows, and engagement prompts every week. Startups can use Capgo to learn faster without turning every experiment into a store release.',
+    labelKey: 'solution_app_examples_startups_label',
+    headlineKey: 'solution_app_examples_startups_headline',
+    useCaseKey: 'solution_app_examples_startups_use_case',
     apps: [
-      { appId: 'com.polleverywhere.mobile', note: 'Live audience app where activation and event-flow experiments need quick turns.' },
-      { appId: 'com.studysmarter', note: 'Learning app where onboarding, study paths, and subscription surfaces need iteration.' },
-      { appId: 'net.bitburst.pollpay', note: 'Survey app where rewards and engagement prompts can be adjusted frequently.' },
+      { appId: 'com.polleverywhere.mobile', noteKey: 'solution_app_examples_startups_app_1_note' },
+      { appId: 'com.studysmarter', noteKey: 'solution_app_examples_startups_app_2_note' },
+      { appId: 'net.bitburst.pollpay', noteKey: 'solution_app_examples_startups_app_3_note' },
     ],
-    plays: ['Test activation changes quickly', 'Patch live event friction', 'Move from beta to production channels'],
+    playKeys: ['solution_app_examples_startups_play_1', 'solution_app_examples_startups_play_2', 'solution_app_examples_startups_play_3'],
   },
   'version-targeting': {
-    label: 'Version targeting',
-    headline: 'Public apps must support old and new native versions',
-    useCase:
-      'Civic, health, and forecast apps may support older Android versions and different device generations. Version targeting keeps each native build on the newest compatible web bundle without forcing one update path for everyone.',
+    labelKey: 'solution_app_examples_version_targeting_label',
+    headlineKey: 'solution_app_examples_version_targeting_headline',
+    useCaseKey: 'solution_app_examples_version_targeting_use_case',
     apps: [
-      { appId: 'br.jus.tse.eleitoral.etitulo', note: 'Civic identity app with broad public device compatibility needs.' },
-      { appId: 'br.gov.datasus.cnsdigital', note: 'Health app where older and newer native shells may need different web bundles.' },
-      { appId: 'com.windyty.android', note: 'Weather app where device capability and map performance can vary by version.' },
+      { appId: 'br.jus.tse.eleitoral.etitulo', noteKey: 'solution_app_examples_version_targeting_app_1_note' },
+      { appId: 'br.gov.datasus.cnsdigital', noteKey: 'solution_app_examples_version_targeting_app_2_note' },
+      { appId: 'com.windyty.android', noteKey: 'solution_app_examples_version_targeting_app_3_note' },
     ],
-    plays: ['Serve bundles by native version', 'Protect older devices from incompatible UI', 'Move modern users ahead safely'],
+    playKeys: ['solution_app_examples_version_targeting_play_1', 'solution_app_examples_version_targeting_play_2', 'solution_app_examples_version_targeting_play_3'],
   },
   'white-label': {
-    label: 'White label',
-    headline: 'Regional media and carrier apps share a core but need local control',
-    useCase:
-      'Regional sports, entertainment, and telecom brands can reuse one app foundation while changing schedules, campaigns, support, and market-specific content for each brand or country.',
+    labelKey: 'solution_app_examples_white_label_label',
+    headlineKey: 'solution_app_examples_white_label_headline',
+    useCaseKey: 'solution_app_examples_white_label_use_case',
     apps: [
-      { appId: 'gt.com.tigosports', note: 'Regional sports media app where schedules and local content need market control.' },
-      { appId: 'de.tvspielfilm', note: 'Entertainment guide where content surfaces vary by market and programming window.' },
-      { appId: 'com.orange.miorange', note: 'Carrier app where shared account patterns still need local product and support content.' },
+      { appId: 'gt.com.tigosports', noteKey: 'solution_app_examples_white_label_app_1_note' },
+      { appId: 'de.tvspielfilm', noteKey: 'solution_app_examples_white_label_app_2_note' },
+      { appId: 'com.orange.miorange', noteKey: 'solution_app_examples_white_label_app_3_note' },
     ],
-    plays: ['Separate channels by brand or region', 'Reuse one release workflow', 'Patch market-specific content fast'],
+    playKeys: ['solution_app_examples_white_label_play_1', 'solution_app_examples_white_label_play_2', 'solution_app_examples_white_label_play_3'],
   },
-}
+} as const satisfies Record<SolutionAppExampleKey, SolutionAppExample>
