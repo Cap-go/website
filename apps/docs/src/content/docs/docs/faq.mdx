@@ -298,6 +298,26 @@ Requests sent from the app to Capgo servers include:
 -   device\_id (generated on the device on first run, used to de-duplicate per-device installs and allow us to charge based on users installed to (e.g. monthly active users), rather than total patches or total patch installs)
 -   custom\_id ( optional, set at runtime by the developer, used for you to link a device to a user in your system)
 
+### Can I use Capgo for HIPAA-sensitive apps?[](https://capgo.app/docs/faq/#can-i-use-capgo-for-hipaa-sensitive-apps "Direct link to Can I use Capgo for HIPAA-sensitive apps?")
+
+Yes, but your compliance owner needs to choose the right deployment model. Capgo Cloud is not currently presented as a HIPAA-compliant hosted statistics processor. By default, the updater data is device-scoped and not tied to a known app user, and many teams use that model successfully.
+
+For stricter reviews, you can geo-localize plugin traffic, disable statistics by setting `statsUrl` to an empty string, self-host only the statistics endpoint, or use licensed self-hosting. Do not call `CapacitorUpdater.setCustomId(...)` with an email, user ID, patient ID, employee ID, or any value that maps updater telemetry back to a person.
+
+See [HIPAA Compliance](/docs/live-updates/hipaa-compliance/) for the full technical setup and the observability tradeoffs when statistics are disabled.
+
+### Can I keep Capgo live update data in Europe?[](https://capgo.app/docs/faq/#can-i-keep-capgo-live-update-data-in-europe "Direct link to Can I keep Capgo live update data in Europe?")
+
+Yes. Apps that need EU data residency for Capgo Cloud plugin traffic can set the updater endpoints to the EU host:
+
+- `updateUrl`: `https://plugin.eu.capgo.app/updates`
+- `statsUrl`: `https://plugin.eu.capgo.app/stats`
+- `channelUrl`: `https://plugin.eu.capgo.app/channel_self`
+
+Use all three EU URLs together so update checks, statistics, and channel self-assignment use the same regional data path. Because these values live in `capacitor.config.ts`, production mobile apps need a native release before existing installs use the new endpoints.
+
+See [Data Location](/docs/live-updates/data-location/) for exact Capacitor and Electron examples.
+
 ### What platforms does Capgo support?[](https://capgo.app/docs/faq/#what-platforms-does-capgo-support "Direct link to What platforms does Capgo support?")
 
 Currently, Capgo supports Android, iOS, and Electron. All are production-ready.
