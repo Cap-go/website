@@ -1,5 +1,5 @@
 ---
-import { actions } from '@/config/plugins'
+import { actions, pluginCategories } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import { createItemListLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import m from '@/copy/messages'
@@ -67,6 +67,7 @@ const sortOptions = [
   { value: 'alphabetical', label: 'Alphabetical', description: 'A to Z by plugin name' },
 ] as const
 const defaultSortOption = sortOptions[0]
+const categoryLabelById = new Map(pluginCategories.map((category) => [category.id, category.label]))
 
 // Parse descriptions for all plugins
 const plugins = await Promise.all(
@@ -81,11 +82,20 @@ const plugins = await Promise.all(
     return {
       ...item,
       description: await marked.parse(item.description),
+      categoryLabel: categoryLabelById.get(item.category) ?? 'Plugin',
       docsHref: tutorialHref ?? (docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : item.href),
       hasSiteDocs: hasTutorial || Boolean(docsSlug),
     }
   }),
 )
+const categoryCounts = new Map(pluginCategories.map((category) => [category.id, 0]))
+plugins.forEach((plugin) => {
+  categoryCounts.set(plugin.category, (categoryCounts.get(plugin.category) ?? 0) + 1)
+})
+const categoryFilterOptions = [
+  { id: 'all', label: 'All plugins', count: plugins.length },
+  ...pluginCategories.map((category) => ({ ...category, count: categoryCounts.get(category.id) ?? 0 })).filter((category) => category.count > 0),
+]
 
 // Helper function to format counts
 const formatCount = (count: number): string => {
@@ -271,6 +281,48 @@ const content = {
             </div>
           </div>
         </div>
+
+        <!-- Category Controls -->
+        <div class="mx-auto mb-6 max-w-6xl">
+          <div class="lg:hidden">
+            <label for="plugin-category-select" class="sr-only">Filter plugins by category</label>
+            <select
+              id="plugin-category-select"
+              aria-label="Filter plugins by category"
+              class="h-12 w-full rounded-lg border border-gray-700/80 bg-gray-950/70 px-4 text-base text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none"
+            >
+              {
+                categoryFilterOptions.map((category) => (
+                  <option value={category.id}>
+                    {category.label} ({category.count})
+                  </option>
+                ))
+              }
+            </select>
+          </div>
+          <div class="hidden flex-wrap justify-center gap-2 lg:flex" role="group" aria-label="Filter plugins by category">
+            {
+              categoryFilterOptions.map((category) => (
+                <button
+                  type="button"
+                  class:list={[
+                    'inline-flex h-11 items-center gap-2 rounded-lg border px-4 text-sm font-semibold focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
+                    category.id === 'all'
+                      ? 'border-blue-400/40 bg-blue-500/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                      : 'border-gray-700/70 bg-gray-950/60 text-gray-300 hover:border-gray-500/70 hover:bg-gray-900/70 hover:text-white',
+                  ]}
+                  data-category-filter
+                  data-category={category.id}
+                  data-category-label={category.label}
+                  aria-pressed={category.id === 'all' ? 'true' : 'false'}
+                >
+                  {category.label}
+                  <span class="rounded-full bg-white/10 px-2 py-0.5 text-gray-300 tabular-nums">{category.count}</span>
+                </button>
+              ))
+            }
+          </div>
+        </div>
         <div id="search-results-count" aria-live="polite" aria-atomic="true" class="mb-4 text-center text-sm text-gray-400"></div>
 
         <div id="plugins-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -282,11 +334,16 @@ const content = {
                 data-description={item.description.toLowerCase()}
                 data-author={item.author.toLowerCase()}
                 data-package={item.name?.toLowerCase() ?? ''}
+                data-category={item.category}
+                data-category-label={item.categoryLabel.toLowerCase()}
                 data-downloads={item.npmDownloads ?? 0}
                 data-stars={item.githubStars ?? 0}
               >
                 <div class="relative">
-                  {item.icon && <PluginIcon icon={item.icon} name={item.title} className="mb-4" />}
+                  <div class="mb-4 flex items-start justify-between gap-3 text-sm font-semibold">
+                    {item.icon && <PluginIcon icon={item.icon} name={item.title} className="shrink-0" />}
+                    <span class="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-blue-200">{item.categoryLabel}</span>
+                  </div>
                   <h3 class="font-pj mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
                   <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
                   <div class="mb-4 flex items-center justify-between gap-3">
@@ -477,21 +534,26 @@ const content = {
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('plugin-search') as HTMLInputElement
+      const searchInput = document.getElementById('plugin-search') as HTMLInputElement | null
+      const categorySelect = document.getElementById('plugin-category-select') as HTMLSelectElement | null
+      const categoryFilterButtons = Array.from(document.querySelectorAll('[data-category-filter]')) as HTMLButtonElement[]
       const sortDropdown = document.getElementById('plugin-sort-dropdown') as HTMLDivElement | null
       const sortButton = document.getElementById('plugin-sort-button') as HTMLButtonElement | null
       const sortButtonLabel = document.getElementById('plugin-sort-current-label') as HTMLSpanElement | null
       const sortMenu = document.getElementById('plugin-sort-menu') as HTMLDivElement | null
       const sortChevron = document.getElementById('plugin-sort-chevron') as SVGElement | null
       const sortOptionButtons = Array.from(document.querySelectorAll('[data-sort-option]')) as HTMLButtonElement[]
-      const pluginsGrid = document.getElementById('plugins-grid') as HTMLElement
+      const pluginsGrid = document.getElementById('plugins-grid') as HTMLElement | null
       const pluginCards = document.querySelectorAll('.plugin-card') as NodeListOf<HTMLElement>
       const resultsCount = document.getElementById('search-results-count')
       const totalPlugins = pluginCards.length
       let currentSort = sortButton?.dataset.sortValue || 'downloads'
+      let currentCategory = 'all'
 
       const activeSortClasses = ['border-blue-400/40', 'bg-blue-500/15', 'text-white', 'shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]']
       const inactiveSortClasses = ['border-transparent', 'text-slate-200', 'hover:border-white/10', 'hover:bg-white/5', 'hover:text-white']
+      const activeCategoryClasses = ['border-blue-400/40', 'bg-blue-500/15', 'text-white', 'shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]']
+      const inactiveCategoryClasses = ['border-gray-700/70', 'bg-gray-950/60', 'text-gray-300', 'hover:border-gray-500/70', 'hover:bg-gray-900/70', 'hover:text-white']
 
       function isSortMenuOpen() {
         return sortButton?.getAttribute('aria-expanded') === 'true'
@@ -541,17 +603,19 @@ const content = {
       }
 
       function updateResultsCount(visibleCount: number) {
-        if (resultsCount) {
-          if (searchInput.value.trim() === '') {
-            resultsCount.textContent = ''
-          } else {
-            resultsCount.textContent = `Showing ${visibleCount} of ${totalPlugins} plugins`
-          }
+        if (!resultsCount) return
+
+        const searchTerm = searchInput?.value.trim() ?? ''
+        if (searchTerm === '' && currentCategory === 'all') {
+          resultsCount.textContent = ''
+          return
         }
+
+        resultsCount.textContent = `Showing ${visibleCount} of ${totalPlugins} plugins`
       }
 
       function filterPlugins() {
-        const searchTerm = searchInput.value.toLowerCase().trim()
+        const searchTerm = searchInput?.value.toLowerCase().trim() ?? ''
         let visibleCount = 0
 
         pluginCards.forEach((card) => {
@@ -559,10 +623,18 @@ const content = {
           const description = card.getAttribute('data-description') || ''
           const author = card.getAttribute('data-author') || ''
           const packageName = card.getAttribute('data-package') || ''
+          const category = card.getAttribute('data-category') || ''
+          const categoryLabel = card.getAttribute('data-category-label') || ''
+          const matchesCategory = currentCategory === 'all' || category === currentCategory
+          const matchesSearch =
+            searchTerm === '' ||
+            title.includes(searchTerm) ||
+            description.includes(searchTerm) ||
+            author.includes(searchTerm) ||
+            packageName.includes(searchTerm) ||
+            categoryLabel.includes(searchTerm)
 
-          const matches = title.includes(searchTerm) || description.includes(searchTerm) || author.includes(searchTerm) || packageName.includes(searchTerm)
-
-          if (matches) {
+          if (matchesCategory && matchesSearch) {
             card.style.display = ''
             visibleCount++
           } else {
@@ -573,7 +645,26 @@ const content = {
         updateResultsCount(visibleCount)
       }
 
+      function syncCategorySelection(category: string) {
+        currentCategory = category
+
+        if (categorySelect && categorySelect.value !== category) {
+          categorySelect.value = category
+        }
+
+        categoryFilterButtons.forEach((button) => {
+          const isActive = button.dataset.category === category
+          button.setAttribute('aria-pressed', String(isActive))
+          activeCategoryClasses.forEach((className) => button.classList.toggle(className, isActive))
+          inactiveCategoryClasses.forEach((className) => button.classList.toggle(className, !isActive))
+        })
+
+        filterPlugins()
+      }
+
       function sortPlugins(sortBy: string) {
+        if (!pluginsGrid) return
+
         const cardsArray = Array.from(pluginCards)
 
         cardsArray.sort((a, b) => {
@@ -592,7 +683,6 @@ const content = {
           }
         })
 
-        // Re-append cards in sorted order
         cardsArray.forEach((card) => {
           pluginsGrid.appendChild(card)
         })
@@ -600,8 +690,19 @@ const content = {
 
       if (searchInput) {
         searchInput.addEventListener('input', filterPlugins)
-        updateResultsCount(totalPlugins)
       }
+
+      if (categorySelect) {
+        categorySelect.addEventListener('change', () => {
+          syncCategorySelection(categorySelect.value)
+        })
+      }
+
+      categoryFilterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          syncCategorySelection(button.dataset.category || 'all')
+        })
+      })
 
       if (sortButton && sortMenu && sortDropdown && sortOptionButtons.length > 0) {
         sortButton.addEventListener('click', () => {
@@ -672,6 +773,7 @@ const content = {
 
       syncSortSelection(currentSort)
       sortPlugins(currentSort)
+      syncCategorySelection(currentCategory)
     })
   </script>
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
