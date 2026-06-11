@@ -186,14 +186,15 @@ This configuration means:
 - Users on app version **1.2.3** will receive updates up to **1.9.9**
 - Users will **NOT** receive version **2.0.0** automatically
 - Prevents breaking changes from reaching older native code
+- The comparison uses the native baseline sent as `version_build`
 
 ### Granular Control Options
 
 ```bash
-# Block minor version updates (1.2.x won't get 1.3.0)
+# Block target bundles outside the native major.minor line (1.2.x won't get 1.3.0)
 npx @capgo/cli channel set stable --disable-auto-update minor
 
-# Block patch updates (1.2.3 won't get 1.2.4)
+# Block target bundles outside the exact native MAJOR.MINOR.PATCH core (1.2.3 won't get 1.2.4)
 npx @capgo/cli channel set stable --disable-auto-update patch
 
 # Allow all updates

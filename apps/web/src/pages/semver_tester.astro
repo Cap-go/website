@@ -10,7 +10,7 @@ import Layout from '../layouts/Layout.astro'
       <!-- Header -->
       <div class="mb-8 text-center">
         <h1 class="mb-2 text-4xl font-bold text-gray-900">Capgo Semver Tester</h1>
-        <p class="text-lg text-gray-600">Check semantic versioning compatibility for your Capacitor app updates</p>
+        <p class="text-lg text-gray-600">Check channel policy compatibility against the native baseline sent as version_build</p>
       </div>
 
       <!-- Main comparison tool -->
@@ -20,12 +20,12 @@ import Layout from '../layouts/Layout.astro'
           <div class="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div>
               <div class="mb-2 flex items-center gap-2">
-                <label class="text-sm font-medium text-gray-700" for="version1">Local Version</label>
+                <label class="text-sm font-medium text-gray-700" for="version1">Native Baseline Version</label>
                 <a
                   href="#local-version-guide"
                   class="inline-flex size-8 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
-                  aria-label="Show where Local Version comes from"
-                  title="Where does Local Version come from?"
+                  aria-label="Show where Native Baseline Version comes from"
+                  title="Where does Native Baseline Version come from?"
                 >
                   <AstroIcon name="heroicons:question-mark-circle-solid" class="size-5" aria-hidden="true" />
                 </a>
@@ -37,7 +37,7 @@ import Layout from '../layouts/Layout.astro'
                 aria-describedby="version1-help version1-status"
                 class="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-lg focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
               />
-              <p id="version1-help" class="mt-1 text-xs text-gray-500">The version your installed app reports to Capgo, from config or native app metadata.</p>
+              <p id="version1-help" class="mt-1 text-xs text-gray-500">The native version sent to Capgo as version_build, from config or native app metadata.</p>
               <div id="version1-status" class="mt-1 text-sm" role="status" aria-live="polite" aria-atomic="true"></div>
             </div>
 
@@ -49,6 +49,7 @@ import Layout from '../layouts/Layout.astro'
                 placeholder="1.1.0"
                 class="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-lg focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
               />
+              <p class="mt-1 text-xs text-gray-500">The bundle version assigned to the resolved channel.</p>
               <div id="version2-status" class="mt-1 text-sm" role="status" aria-live="polite" aria-atomic="true"></div>
             </div>
           </div>
@@ -73,7 +74,7 @@ import Layout from '../layouts/Layout.astro'
             <!-- Advanced Settings Panel -->
             <div id="advanced-panel" class="mt-4 hidden">
               <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                <!-- Local Version & App Context -->
+                <!-- Native Baseline & App Context -->
                 <div class="space-y-6">
                   <div class="border-t border-gray-200 pt-4">
                     <h4 class="text-md mb-4 font-semibold text-gray-900">App Context</h4>
@@ -209,18 +210,20 @@ import Layout from '../layouts/Layout.astro'
                           <option value="metadata">Metadata</option>
                           <option value="none">None</option>
                         </select>
-                        <div class="mt-1 text-xs text-gray-500">Controls which version updates are allowed</div>
+                        <div id="strategy-help" class="mt-1 text-xs text-gray-500">
+                          Major: blocks target major greater than version_build. Allows 1.2.3 -> 1.9.0, blocks 1.2.3 -> 2.0.0.
+                        </div>
                       </div>
 
                       <div id="metadata-input-container" class="hidden">
-                        <label class="mb-2 block text-sm font-medium text-gray-700">Metadata Value</label>
+                        <label class="mb-2 block text-sm font-medium text-gray-700">Minimum Update Version</label>
                         <input
                           type="text"
                           id="metadata-value"
                           placeholder="1.0.1"
                           class="w-full rounded-md border border-gray-300 px-3 py-2 font-mono focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
                         />
-                        <div class="mt-1 text-xs text-gray-500">Minimum version requirement for local app</div>
+                        <div class="mt-1 text-xs text-gray-500">Required minimum native baseline version_build</div>
                       </div>
                     </div>
                   </div>
@@ -236,20 +239,27 @@ import Layout from '../layouts/Layout.astro'
         </div>
       </div>
 
-      <!-- Local version guide -->
+      <!-- Native baseline guide -->
       <section id="local-version-guide" class="mb-8 scroll-mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
         <div class="flex">
           <div class="shrink-0">
             <AstroIcon name="heroicons:information-circle-solid" class="size-5 text-blue-500" aria-hidden="true" />
           </div>
           <div class="ml-3">
-            <h2 class="text-sm font-medium text-gray-800">What "Local Version" means</h2>
+            <h2 class="text-sm font-medium text-gray-800">What "Native Baseline Version" means</h2>
             <div class="mt-2 space-y-4 text-sm text-gray-700">
               <p>
-                Local Version is the version already on the device when it asks the update server for a bundle. In a Capacitor app, that value can come from
+                Native Baseline Version is the native app version sent to Capgo as
+                <code class="rounded bg-gray-100 px-1">version_build</code> when the device asks the update server for a bundle. In a Capacitor app, that value can come from
                 <code class="rounded bg-gray-100 px-1">CapacitorUpdater.version</code> in <code class="rounded bg-gray-100 px-1">capacitor.config.*</code>. If that setting is not
                 present, the plugin falls back to the native app version from iOS or Android. Do not assume it is your <code class="rounded bg-gray-100 px-1">package.json</code>
                 version unless your build copies that value into config or native metadata.
+              </p>
+              <p>
+                Capgo still uses <code class="rounded bg-gray-100 px-1">version_name</code> to know which downloaded bundle is currently installed. Channel semver policies such as <code
+                  class="rounded bg-gray-100 px-1">major</code
+                >, <code class="rounded bg-gray-100 px-1">minor</code>, and
+                <code class="rounded bg-gray-100 px-1">patch</code> compare the remote bundle against <code class="rounded bg-gray-100 px-1">version_build</code>.
               </p>
 
               <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
@@ -289,7 +299,8 @@ import Layout from '../layouts/Layout.astro'
               </div>
 
               <p class="text-xs text-gray-600">
-                For this tester, enter the version the device would report as local, then compare it with the remote bundle version you want Capgo to deliver.
+                For this tester, enter the native baseline the device sends as <code class="rounded bg-gray-100 px-1">version_build</code>, then compare it with the remote bundle
+                version you want Capgo to deliver.
               </p>
             </div>
           </div>
@@ -607,21 +618,21 @@ import Layout from '../layouts/Layout.astro'
               <div class="space-y-3 text-sm text-gray-600">
                 <div class="flex items-start">
                   <span class="mr-2 text-green-600">✓</span>
-                  <span>Patch updates are automatically applied (1.0.0 → 1.0.1)</span>
+                  <span>Minor strategy allows patch changes in the same major.minor line, for example 1.0.0 -> 1.0.1</span>
                 </div>
                 <div class="flex items-start">
                   <span class="mr-2 text-green-600">✓</span>
-                  <span>Minor updates require channel configuration (1.0.0 → 1.1.0)</span>
+                  <span>Patch strategy blocks 1.0.0 -> 1.0.1. It only allows suffix changes like 1.0.0-beta.1 -> 1.0.0-beta.2.</span>
                 </div>
               </div>
               <div class="space-y-3 text-sm text-gray-600">
                 <div class="flex items-start">
                   <span class="mr-2 text-red-600">✗</span>
-                  <span>Major updates require native app store release (1.0.0 → 2.0.0)</span>
+                  <span>Major strategy blocks target bundles with a higher major than the native baseline, for example 1.0.0 -> 2.0.0</span>
                 </div>
                 <div class="flex items-start">
                   <span class="mr-2 text-yellow-600">⚠</span>
-                  <span>Pre-release versions require explicit configuration</span>
+                  <span>Downgrade protection uses full semver precedence, so stable 1.0.0 is newer than 1.0.0-beta.2</span>
                 </div>
               </div>
             </div>
@@ -642,6 +653,15 @@ import Layout from '../layouts/Layout.astro'
 
   <script>
     import { parse, canParse, compare } from '@std/semver'
+
+    const strategyDescriptions: Record<string, string> = {
+      major: 'Major: blocks target major greater than version_build. Allows 1.2.3 -> 1.9.0, blocks 1.2.3 -> 2.0.0.',
+      minor: 'Minor: target must keep the same major and minor as version_build. Allows 1.2.3 -> 1.2.4, blocks 1.2.3 -> 1.3.0.',
+      patch:
+        'Patch: target must keep the exact same MAJOR.MINOR.PATCH as version_build. Only suffix changes are allowed, like 1.0.0-beta.1 -> 1.0.0-beta.2 or 1.0.0+build.1 -> 1.0.0+build.2. Blocks 1.0.0 -> 1.0.1.',
+      metadata: 'Metadata: target bundle must define min_update_version, and version_build must be greater than or equal to it.',
+      none: 'None: channel semver policy does not block updates. Downgrade protection and platform settings can still block them.',
+    }
 
     function validateVersion(version: string): { valid: boolean; error?: string } {
       if (!version.trim()) {
@@ -724,12 +744,18 @@ import Layout from '../layouts/Layout.astro'
         let updateInfo = ''
         let canUpdate = false
 
-        if (comparison === 0) {
+        if (version1 === version2) {
           resultIcon = '='
-          resultText = 'Versions are equal'
+          resultText = 'Version strings are equal'
           resultColor = 'text-gray-600'
-          updateInfo = 'No update needed'
+          updateInfo = 'No version jump'
           canUpdate = false
+        } else if (comparison === 0) {
+          resultIcon = '='
+          resultText = 'Versions have equal semver precedence'
+          resultColor = 'text-blue-600'
+          canUpdate = checkUpdateAllowed(version1, version2, updateStrategy) && checkPlatformCompatibility()
+          updateInfo = canUpdate ? 'Channel policy allows this version core' : getBlockReason(version1, version2, updateStrategy)
         } else {
           const isUpgrade = comparison < 0
 
@@ -792,16 +818,16 @@ import Layout from '../layouts/Layout.astro'
 
         switch (strategy) {
           case 'major':
-            return true // Major strategy allows all updates
+            // Backend blocks only when the target bundle major is above the native baseline major.
+            return remoteParsed.major <= localParsed.major
 
           case 'minor':
-            // Allow minor and patch, but not major version changes
-            return localParsed.major === remoteParsed.major
-
-          case 'patch':
-            // Only allow patch updates
+            // Backend requires the target bundle to stay within the same native major.minor line.
             return localParsed.major === remoteParsed.major && localParsed.minor === remoteParsed.minor
 
+          case 'patch':
+            // Backend requires the same native MAJOR.MINOR.PATCH core; prerelease/build metadata may differ.
+            return localParsed.major === remoteParsed.major && localParsed.minor === remoteParsed.minor && localParsed.patch === remoteParsed.patch
           case 'metadata':
             // For metadata strategy, local version must be >= metadata minimum
             const metadataInput = document.getElementById('metadata-value') as HTMLInputElement
@@ -811,7 +837,7 @@ import Layout from '../layouts/Layout.astro'
               return false // Invalid metadata value
             }
 
-            // Local version must be >= metadata minimum
+            // Native baseline version_build must be >= metadata minimum
             const comparison = compare(localParsed, parse(metadataValue))
             return comparison >= 0
 
@@ -833,9 +859,18 @@ import Layout from '../layouts/Layout.astro'
         const remoteParsed = parse(remote)
 
         switch (strategy) {
+          case 'major':
+            if (remoteParsed.major > localParsed.major) {
+              return 'Higher major version blocked by major strategy'
+            }
+            break
+
           case 'minor':
             if (localParsed.major !== remoteParsed.major) {
               return 'Major version change blocked by minor strategy'
+            }
+            if (localParsed.minor !== remoteParsed.minor) {
+              return 'Minor version change blocked by minor strategy'
             }
             break
 
@@ -845,6 +880,9 @@ import Layout from '../layouts/Layout.astro'
             }
             if (localParsed.minor !== remoteParsed.minor) {
               return 'Minor version change blocked by patch strategy'
+            }
+            if (localParsed.patch !== remoteParsed.patch) {
+              return 'Patch version change blocked by patch strategy'
             }
             break
 
@@ -858,7 +896,7 @@ import Layout from '../layouts/Layout.astro'
 
             const comparison = compare(localParsed, parse(metadataValue))
             if (comparison < 0) {
-              return `Local version ${local} below minimum metadata requirement ${metadataValue}`
+              return `Native baseline ${local} below minimum metadata requirement ${metadataValue}`
             }
             break
         }
@@ -910,9 +948,17 @@ import Layout from '../layouts/Layout.astro'
       return null
     }
 
+    function updateStrategyHelp() {
+      const strategy = (document.getElementById('update-strategy') as HTMLSelectElement).value
+      const help = document.getElementById('strategy-help') as HTMLElement
+      if (help) help.textContent = strategyDescriptions[strategy] || ''
+    }
+
     function toggleMetadataInput() {
       const strategy = (document.getElementById('update-strategy') as HTMLSelectElement).value
       const metadataContainer = document.getElementById('metadata-input-container') as HTMLElement
+
+      updateStrategyHelp()
 
       if (strategy === 'metadata') {
         metadataContainer.classList.remove('hidden')
