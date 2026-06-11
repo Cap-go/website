@@ -31,11 +31,13 @@ const trustedFreelancers = [
   {
     name: 'Adrien',
     initials: 'A',
+    clientApp: 'Steplee',
     bookUrl: 'https://book.capgo.app/adrien/',
   },
   {
     name: 'Jordan',
     initials: 'J',
+    clientApp: 'Amawé',
     bookUrl: 'https://book.capgo.app/jordan/',
   },
 ]
@@ -388,7 +390,8 @@ const trustedFreelancers = [
                       <p class="text-sm font-medium text-amber-200">{m.solutions_agencies_freelancer_role({ brand }, { locale })}</p>
                     </div>
                   </div>
-                  <p class="mt-5 text-gray-400">{m.solutions_agencies_freelancer_description({ brand }, { locale })}</p>
+                  <p class="mt-5 text-gray-400">{m.solutions_agencies_freelancer_description({ name: freelancer.name, brand, clientApp: freelancer.clientApp }, { locale })}</p>
+                  <p class="mt-3 text-gray-400">{m.solutions_agencies_freelancer_capgo_work({ brand }, { locale })}</p>
                   <a
                     href={freelancer.bookUrl}
                     target="_blank"
