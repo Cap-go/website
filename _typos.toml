@@ -33,6 +33,7 @@ ITMS = "ITMS"  # iTunes Music Store
 Hashi = "Hashi"  # HashiCorp (brand name)
 formatable = "formatable"  # NFC event literal from upstream API
 jus = "jus"  # Brazilian justice app package namespace
+Programm = "Programm"  # German app-store title term in TV-Programm
 
 # Translation keys/identifiers - these should remain as-is
 udid = "udid"  # iOS device UDID (technical term)
