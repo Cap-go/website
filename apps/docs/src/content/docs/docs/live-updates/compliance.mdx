@@ -38,6 +38,39 @@ Capgo collects only the data that is necessary to provide the live updates featu
 You can verify the data that is collected by inspecting the source code of the @capgo/capacitor-updater plugin, which is open-source and available on [GitHub](https://github.com/Cap-go/capacitor-updater). Capgo does not collect direct personal identifiers such as names, email addresses, or phone numbers. We treat the app-scoped device identifier as pseudonymous personal data where GDPR applies; it is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers.
 </Aside>
 
+### Endpoint Storage Detail
+
+The updater plugin can call two separate Capgo Cloud endpoints:
+
+- `updateUrl` (`/updates`) checks which bundle the device should receive. This endpoint is required for Capgo Cloud live updates.
+- `statsUrl` (`/stats`) sends explicit update lifecycle, health, and failure events. You can set `statsUrl` to an empty string to disable these extra stats reports.
+
+Disabling `statsUrl` does not disable all device data storage. `/updates` still needs a stable, app-scoped `device_id` so Capgo can decide which update applies and count monthly active devices for billing.
+
+When `statsUrl` is enabled, Capgo can store:
+
+| Record | Stored fields |
+| ------ | ------------- |
+| Billing MAU | `device_id`, `app_id`, `org_id`, `timestamp` |
+| Device inventory | `device_id`, `app_id`, `updated_at`, `platform`, `plugin_version`, `os_version`, `version_build`, `version_name`, `is_prod`, `is_emulator`, `default_channel`, `key_id`, optional `custom_id` |
+| Stats event | `device_id`, `app_id`, `action`, `version_name`, `created_at` |
+
+When `statsUrl` is disabled but `updateUrl` remains enabled, Capgo can still store:
+
+| Record | Stored fields |
+| ------ | ------------- |
+| Billing MAU | `device_id`, `app_id`, `org_id`, `timestamp` |
+| Device inventory | `device_id`, `app_id`, `updated_at`, `platform`, `plugin_version`, `os_version`, `version_build`, `version_name`, `is_prod`, `is_emulator`, `default_channel`, `key_id`, optional `custom_id` |
+| Update-decision event | `device_id`, `app_id`, `action`, `version_name`, `created_at`; actions can include `get`, `noNew`, `missingBundle`, `cannotGetBundle`, platform/version blocking actions, and plan or channel errors |
+
+For native-version billing and charts, runtime telemetry can also include `platform` and `version_build` with MAU usage when the deployed billing store supports those fields. Newer stats telemetry can also include optional stats `metadata` when the app sends it.
+
+<Aside type="caution">
+For HIPAA-minimum deployments, do not send `custom_id`, disable `allow_device_custom_id` for the app, and do not send stats `metadata`. If you disable `statsUrl`, remember that `/updates` still stores the billing and update-decision data listed above.
+</Aside>
+
+The absolute minimum needed to bill MAU is a stable anonymous `device_id`, `app_id`, `org_id`, and a timestamp.
+
 ### What Data is NOT Collected
 
 Capgo explicitly does not collect:
