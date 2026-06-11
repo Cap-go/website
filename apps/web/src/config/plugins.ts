@@ -1,3 +1,20 @@
+export const pluginCategories = [
+  { id: 'updates', label: 'Updates' },
+  { id: 'auth-security', label: 'Auth & Security' },
+  { id: 'analytics', label: 'Analytics' },
+  { id: 'commerce', label: 'Commerce' },
+  { id: 'media', label: 'Media' },
+  { id: 'files-storage', label: 'Files & Storage' },
+  { id: 'device-apis', label: 'Device APIs' },
+  { id: 'ui-system', label: 'UI & System' },
+  { id: 'location', label: 'Location' },
+  { id: 'communication', label: 'Communication' },
+  { id: 'integrations', label: 'Integrations' },
+  { id: 'developer-tools', label: 'Developer Tools' },
+] as const
+
+export type PluginCategoryId = (typeof pluginCategories)[number]['id']
+
 export interface Action {
   icon?: string
   href: string
@@ -5,6 +22,7 @@ export interface Action {
   name?: string
   author: string
   description: string
+  category: PluginCategoryId
   iconForeground?: string
   iconBackground?: string
 }
@@ -310,9 +328,165 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-intent-launcher': 'RocketLaunch',
 }
 
+const pluginNamesByCategory = {
+  updates: ['@capgo/capacitor-updater', '@capgo/electron-updater', '@capgo/capacitor-android-inline-install', '@capgo/capacitor-live-reload', '@capgo/capacitor-patch'],
+  'auth-security': [
+    '@capgo/capacitor-native-biometric',
+    '@capgo/capacitor-autofill-save-password',
+    '@capgo/capacitor-social-login',
+    '@capgo/capacitor-passkey',
+    '@capgo/capacitor-app-attest',
+    '@capgo/capacitor-recaptcha',
+    '@capgo/capacitor-verisoul',
+    '@capgo/capacitor-is-root',
+    '@capgo/capacitor-privacy-screen',
+    '@capgo/capacitor-persistent-account',
+    '@capgo/capacitor-persistent-uuid',
+    '@capgo/capacitor-age-range',
+    '@capgo/capacitor-persona',
+    '@capgo/capacitor-intune',
+    '@capgo/capacitor-android-age-signals',
+    '@capgo/capacitor-ssl-pinning',
+    '@capgo/capacitor-firebase-app-check',
+    '@capgo/capacitor-firebase-authentication',
+    '@capgo/capacitor-webview-guardian',
+    '@capgo/capacitor-webview-crash',
+    '@capgo/capacitor-webview-version-checker',
+  ],
+  analytics: [
+    '@capgo/capacitor-appsflyer',
+    '@capgo/capacitor-contentsquare',
+    '@capgo/capacitor-facebook-analytics',
+    '@capgo/capacitor-android-usagestatsmanager',
+    '@capgo/capacitor-appinsights',
+    '@capgo/capacitor-gtm',
+    '@capgo/capacitor-rudderstack',
+    '@capgo/capacitor-app-tracking-transparency',
+    '@capgo/capacitor-install-referrer',
+    '@capgo/capacitor-in-app-review',
+    '@capgo/capacitor-firebase-analytics',
+    '@capgo/capacitor-firebase-crashlytics',
+    '@capgo/capacitor-firebase-performance',
+  ],
+  commerce: ['@capgo/capacitor-native-market', '@revenuecat/purchases-capacitor', '@capgo/native-purchases', '@capgo/capacitor-admob', '@capgo/capacitor-pay'],
+  media: [
+    '@capgo/camera-preview',
+    '@capgo/capacitor-flash',
+    '@capgo/capacitor-screen-recorder',
+    '@capgo/capacitor-native-audio',
+    '@capgo/ivs-player',
+    '@capgo/capacitor-jw-player',
+    '@capgo/capacitor-ricoh360',
+    '@capgo/capacitor-audiosession',
+    '@capgo/capacitor-ffmpeg',
+    '@capgo/capacitor-media-session',
+    '@capgo/capacitor-mux-player',
+    '@capgo/capacitor-photo-library',
+    '@capgo/capacitor-speech-recognition',
+    '@capgo/capacitor-video-player',
+    '@capgo/capacitor-youtube-player',
+    '@capgo/capacitor-audio-recorder',
+    '@capgo/capacitor-file-compressor',
+    '@capgo/capacitor-speech-synthesis',
+    '@capgo/capacitor-video-thumbnails',
+  ],
+  'files-storage': [
+    '@capgo/capacitor-uploader',
+    '@capgo/capacitor-data-storage-sqlite',
+    '@capgo/capacitor-document-scanner',
+    '@capgo/capacitor-downloader',
+    '@capgo/capacitor-pdf-generator',
+    '@capgo/capacitor-fast-sql',
+    '@capgo/capacitor-printer',
+    '@capgo/capacitor-zip',
+    '@capgo/capacitor-firebase-firestore',
+    '@capgo/capacitor-firebase-storage',
+    '@capgo/capacitor-file',
+    '@capgo/capacitor-file-sharer',
+    '@capgo/capacitor-file-picker',
+  ],
+  'device-apis': [
+    '@capgo/capacitor-auto',
+    '@capgo/capacitor-calendar',
+    '@capgo/capacitor-date-picker',
+    '@capgo/capacitor-device-info',
+    '@capgo/capacitor-mute',
+    '@capgo/capacitor-shake',
+    '@capgo/capacitor-alarm',
+    '@capgo/capacitor-android-kiosk',
+    '@capgo/capacitor-background-task',
+    '@capgo/capacitor-health',
+    '@capgo/capacitor-llm',
+    '@capgo/capacitor-proximity',
+    '@capgo/capacitor-sim',
+    '@capgo/capacitor-nfc',
+    '@capgo/capacitor-volume-buttons',
+    '@capgo/capacitor-barometer',
+    '@capgo/capacitor-accelerometer',
+    '@capgo/capacitor-contacts',
+    '@capgo/capacitor-pedometer',
+    '@capgo/capacitor-bluetooth-low-energy',
+    '@capgo/capacitor-keep-awake',
+    '@capgo/capacitor-watch',
+    '@capgo/capacitor-brightness',
+    '@capgo/capacitor-light-sensor',
+    '@capgo/capacitor-screen-orientation',
+    '@capgo/capacitor-intent-launcher',
+    '@capgo/capacitor-zebra-datawedge',
+    '@capgo/capacitor-wifi',
+  ],
+  'ui-system': [
+    '@capgo/capacitor-native-navigation',
+    '@capgo/capacitor-native-loader',
+    '@capgo/capacitor-transitions',
+    '@capgo/capacitor-sheets',
+    '@capgo/capacitor-inappbrowser',
+    '@capgo/capacitor-navigation-bar',
+    '@capgo/home-indicator',
+    '@capgo/capacitor-textinteraction',
+    '@capgo/capacitor-pretty-toast',
+    '@capgo/capacitor-live-activities',
+    '@capgo/capacitor-widget-kit',
+  ],
+  location: [
+    '@capgo/capacitor-nativegeocoder',
+    '@capgo/capacitor-background-geolocation',
+    '@capgo/capacitor-launch-navigator',
+    '@capgo/capacitor-ibeacon',
+    '@capgo/capacitor-compass',
+  ],
+  communication: [
+    '@capgo/capacitor-crisp',
+    '@capgo/capacitor-intercom',
+    '@capgo/capacitor-mqtt',
+    '@capgo/capacitor-streamcall',
+    '@capgo/capacitor-android-sms-retriever',
+    '@capgo/capacitor-twilio-video',
+    '@capgo/capacitor-twilio-voice',
+    '@capgo/capacitor-wechat',
+    '@capgo/capacitor-incoming-call-kit',
+    '@capgo/capacitor-share-target',
+    '@capgo/capacitor-realtimekit',
+    '@capgo/capacitor-firebase-messaging',
+  ],
+  integrations: ['@capgo/capacitor-supabase', '@capgo/capacitor-firebase-app', '@capgo/capacitor-firebase-functions', '@capgo/capacitor-firebase-remote-config'],
+  'developer-tools': [
+    '@capgo/capacitor-env',
+    '@capgo/capacitor-network-diagnostics',
+    '@capacitor-plus/core',
+    '@capacitor-plus/cli',
+    '@capacitor-plus/android',
+    '@capacitor-plus/ios',
+  ],
+} satisfies Record<PluginCategoryId, readonly string[]>
+
+const pluginCategoriesByName = Object.fromEntries(
+  Object.entries(pluginNamesByCategory).flatMap(([category, names]) => names.map((name) => [name, category as PluginCategoryId])),
+) as Record<string, PluginCategoryId>
+
 export const actions: Action[] = actionDefinitionRows.map((row) => {
   const [name, author, description, href, title] = row.split('|')
-  return { name, author, description, href, title, icon: pluginIconsByName[name] }
+  return { name, author, description, href, title, icon: pluginIconsByName[name], category: pluginCategoriesByName[name] ?? 'device-apis' }
 })
 
 export const pluginCount = actions.length
