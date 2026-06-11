@@ -380,10 +380,10 @@ Second is the `minor` strategy. It prevents an update when the target bundle has
 
 Third, the `patch` strategy. It was added into capgo as a very strict mode. It's not recommended to be used unless you fully understand how it works.
 In order for it to accept an update, the following conditions must be met:
- - The major is the same between the new and the old version
- - The minor is the same between the new and the old version
- - The patch is the same between the new and the old version
- - Prerelease and build metadata may differ
+ - The major is the same between the target bundle and `version_build`
+ - The minor is the same between the target bundle and `version_build`
+ - The patch is the same between the target bundle and `version_build`
+ - Only the version suffix may differ, such as prerelease (`-beta.2`) or build metadata (`+build.2`)
 
 Here is an example of which scenarios the update is allowed or denied
 

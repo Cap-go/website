@@ -118,9 +118,9 @@ Channels have several options that control who can receive updates and how updat
 
 Use this to restrict which kinds of updates the channel will automatically deliver. Options:
 
-- major: Block target bundles whose major version is above the device native baseline (`version_build`). Same-major minor and patch updates are still allowed.
-- minor: Block target bundles whose major or minor version differs from the device native baseline. Patch and prerelease/build metadata changes inside the same major.minor line are allowed.
-- patch: Very strict. Block target bundles whose major, minor, or patch number differs from the device native baseline. Only prerelease/build metadata changes on the same `MAJOR.MINOR.PATCH` core are allowed. Examples: `1.0.0-beta.1` -> `1.0.0-beta.2` allowed, `1.0.0` -> `1.0.1` blocked, `1.0.0` -> `1.1.0` blocked.
+- major: Blocks a target bundle whose major version is higher than the device native baseline (`version_build`). Example: `1.2.3 -> 2.0.0` is blocked; `1.2.3 -> 1.9.0` is allowed.
+- minor: Blocks a target bundle whose major or minor version differs from `version_build`. Example: `1.2.3 -> 1.3.0` is blocked; `1.2.3 -> 1.2.4` is allowed.
+- patch: Strictest mode. Blocks any change to major, minor, or patch number. Only suffix changes are allowed while `MAJOR.MINOR.PATCH` stays identical. Examples: `1.0.0-beta.1 -> 1.0.0-beta.2` is allowed, `1.0.0+build.1 -> 1.0.0+build.2` is allowed, `1.0.0 -> 1.0.1` is blocked.
 - metadata: Require a minimum update version metadata on each bundle. Configure via CLI using `--min-update-version` or `--auto-min-update-version`. If missing, the channel is marked misconfigured and updates will be rejected until set.
 - none: Allow all updates according to [semver compatibility](/semver_tester/).
 

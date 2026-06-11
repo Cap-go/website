@@ -210,18 +210,20 @@ import Layout from '../layouts/Layout.astro'
                           <option value="metadata">Metadata</option>
                           <option value="none">None</option>
                         </select>
-                        <div class="mt-1 text-xs text-gray-500">Controls which version updates are allowed</div>
+                        <div id="strategy-help" class="mt-1 text-xs text-gray-500">
+                          Major: blocks target major greater than version_build. Allows 1.2.3 -> 1.9.0, blocks 1.2.3 -> 2.0.0.
+                        </div>
                       </div>
 
                       <div id="metadata-input-container" class="hidden">
-                        <label class="mb-2 block text-sm font-medium text-gray-700">Metadata Value</label>
+                        <label class="mb-2 block text-sm font-medium text-gray-700">Minimum Update Version</label>
                         <input
                           type="text"
                           id="metadata-value"
                           placeholder="1.0.1"
                           class="w-full rounded-md border border-gray-300 px-3 py-2 font-mono focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
                         />
-                        <div class="mt-1 text-xs text-gray-500">Minimum version requirement for local app</div>
+                        <div class="mt-1 text-xs text-gray-500">Required minimum native baseline version_build</div>
                       </div>
                     </div>
                   </div>
@@ -237,7 +239,7 @@ import Layout from '../layouts/Layout.astro'
         </div>
       </div>
 
-      <!-- Local version guide -->
+      <!-- Native baseline guide -->
       <section id="local-version-guide" class="mb-8 scroll-mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
         <div class="flex">
           <div class="shrink-0">
@@ -616,17 +618,17 @@ import Layout from '../layouts/Layout.astro'
               <div class="space-y-3 text-sm text-gray-600">
                 <div class="flex items-start">
                   <span class="mr-2 text-green-600">✓</span>
-                  <span>Minor strategy allows patch changes in the same major.minor line (1.0.0 → 1.0.1)</span>
+                  <span>Minor strategy allows patch changes in the same major.minor line, for example 1.0.0 -> 1.0.1</span>
                 </div>
                 <div class="flex items-start">
                   <span class="mr-2 text-green-600">✓</span>
-                  <span>Patch strategy only allows the same MAJOR.MINOR.PATCH core, including prerelease changes (1.0.0-beta.1 → 1.0.0-beta.2)</span>
+                  <span>Patch strategy blocks 1.0.0 -> 1.0.1. It only allows suffix changes like 1.0.0-beta.1 -> 1.0.0-beta.2.</span>
                 </div>
               </div>
               <div class="space-y-3 text-sm text-gray-600">
                 <div class="flex items-start">
                   <span class="mr-2 text-red-600">✗</span>
-                  <span>Major strategy blocks target bundles with a higher major than the native baseline (1.0.0 → 2.0.0)</span>
+                  <span>Major strategy blocks target bundles with a higher major than the native baseline, for example 1.0.0 -> 2.0.0</span>
                 </div>
                 <div class="flex items-start">
                   <span class="mr-2 text-yellow-600">⚠</span>
@@ -651,6 +653,15 @@ import Layout from '../layouts/Layout.astro'
 
   <script>
     import { parse, canParse, compare } from '@std/semver'
+
+    const strategyDescriptions: Record<string, string> = {
+      major: 'Major: blocks target major greater than version_build. Allows 1.2.3 -> 1.9.0, blocks 1.2.3 -> 2.0.0.',
+      minor: 'Minor: target must keep the same major and minor as version_build. Allows 1.2.3 -> 1.2.4, blocks 1.2.3 -> 1.3.0.',
+      patch:
+        'Patch: target must keep the exact same MAJOR.MINOR.PATCH as version_build. Only suffix changes are allowed, like 1.0.0-beta.1 -> 1.0.0-beta.2 or 1.0.0+build.1 -> 1.0.0+build.2. Blocks 1.0.0 -> 1.0.1.',
+      metadata: 'Metadata: target bundle must define min_update_version, and version_build must be greater than or equal to it.',
+      none: 'None: channel semver policy does not block updates. Downgrade protection and platform settings can still block them.',
+    }
 
     function validateVersion(version: string): { valid: boolean; error?: string } {
       if (!version.trim()) {
@@ -826,7 +837,7 @@ import Layout from '../layouts/Layout.astro'
               return false // Invalid metadata value
             }
 
-            // Local version must be >= metadata minimum
+            // Native baseline version_build must be >= metadata minimum
             const comparison = compare(localParsed, parse(metadataValue))
             return comparison >= 0
 
@@ -885,7 +896,7 @@ import Layout from '../layouts/Layout.astro'
 
             const comparison = compare(localParsed, parse(metadataValue))
             if (comparison < 0) {
-              return `Local version ${local} below minimum metadata requirement ${metadataValue}`
+              return `Native baseline ${local} below minimum metadata requirement ${metadataValue}`
             }
             break
         }
@@ -937,9 +948,17 @@ import Layout from '../layouts/Layout.astro'
       return null
     }
 
+    function updateStrategyHelp() {
+      const strategy = (document.getElementById('update-strategy') as HTMLSelectElement).value
+      const help = document.getElementById('strategy-help') as HTMLElement
+      if (help) help.textContent = strategyDescriptions[strategy] || ''
+    }
+
     function toggleMetadataInput() {
       const strategy = (document.getElementById('update-strategy') as HTMLSelectElement).value
       const metadataContainer = document.getElementById('metadata-input-container') as HTMLElement
+
+      updateStrategyHelp()
 
       if (strategy === 'metadata') {
         metadataContainer.classList.remove('hidden')

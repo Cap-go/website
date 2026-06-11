@@ -68,11 +68,11 @@ Controls which [**semver updates**](/semver_tester/) a channel will auto-deliver
 
 | Strategy | Blocks | Allows | Use Case |
 |----------|--------|--------|----------|
-| **none** | Nothing | All updates | Default; full auto-update |
-| **major** | Target major above native baseline | Same major, including minor and patch changes | Prevent breaking changes from reaching old native |
-| **minor** | Different major or minor than native baseline | Same major.minor line, including patch and prerelease changes | Stricter control within major |
-| **patch** | Different major, minor, or patch than native baseline | Same MAJOR.MINOR.PATCH core, including prerelease/build metadata changes | Very strict; same-core updates only |
-| **metadata** | Updates without `min_update_version` | Updates with explicit compatibility metadata | Custom compatibility rules per bundle |
+| **none** | Nothing | Any target bundle version | Default; full auto-update |
+| **major** | Higher major than `version_build`, for example `1.2.3 -> 2.0.0` | Same major, for example `1.2.3 -> 1.9.0` or `1.2.3 -> 1.2.4` | Prevent breaking changes from reaching old native code |
+| **minor** | Different major or minor than `version_build`, for example `1.2.3 -> 1.3.0` | Same major and minor, for example `1.2.3 -> 1.2.4` | Keep updates inside one native minor line |
+| **patch** | Any major, minor, or patch number change, for example `1.0.0 -> 1.0.1` | Only suffix changes while `MAJOR.MINOR.PATCH` stays identical, for example `1.0.0-beta.1 -> 1.0.0-beta.2` or `1.0.0+build.1 -> 1.0.0+build.2` | Strictest mode: no core version movement |
+| **metadata** | Missing `min_update_version`, or `version_build` below it | Target bundle whose `min_update_version` is less than or equal to `version_build` | Custom compatibility rules per bundle |
 
 These checks compare the target bundle against the native baseline sent as `version_build`, not the currently installed downloaded bundle sent as `version_name`.
 
