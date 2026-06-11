@@ -19,6 +19,23 @@ bunx cap sync
 - `stopVideo` - Stop video playback and cancel loading. Use this sparingly - pauseVideo() is usually preferred.
 - `playVideo` - Play the currently cued or loaded video. Final player state will be PLAYING (1).
 
+## Main WebView Referer Patch
+
+Enable `patchRefererHeader` when YouTube content works in the plugin but fails from Capacitor's main WebView because YouTube expects a browser-like `Referer` header.
+
+```json
+{
+  "plugins": {
+    "YoutubePlayer": {
+      "patchRefererHeader": true,
+      "refererHeader": "https://www.youtube.com"
+    }
+  }
+}
+```
+
+The patch only applies to `youtube.com`, `youtube-nocookie.com`, and `youtu.be` requests. Existing request-level `Referer` headers are preserved, and `refererHeader` defaults to `https://www.youtube.com` when omitted.
+
 ## Example Usage
 
 ### `initialize`
