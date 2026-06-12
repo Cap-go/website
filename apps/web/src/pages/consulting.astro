@@ -182,7 +182,7 @@ const useCases = [
           href="https://book.capgo.app/capacitor-plugin/"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:bg-gray-700 hover:shadow-gray-900/30"
+          class="inline-flex items-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-gray-900 shadow-lg transition-all duration-200 hover:bg-gray-100 hover:shadow-white/20"
         >
           Get Your Custom Plugin Built
           <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -214,7 +214,7 @@ const useCases = [
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mb-16 text-center">
         <h2 class="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
-          Custom Plugin <span class="text-gray-200">Development</span>
+          Custom Plugin <span class="text-gray-700">Development</span>
         </h2>
         <p class="mx-auto max-w-3xl text-xl text-gray-600">
           Access any native iOS or Android functionality from your Capacitor app. We build battle-tested, production-ready plugins tailored to your specific needs.
@@ -330,7 +330,7 @@ const useCases = [
             href="https://book.capgo.app/capacitor-plugin/"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center rounded-xl bg-white px-8 py-4 font-semibold text-gray-200 transition-colors duration-200 hover:bg-gray-100"
+            class="inline-flex items-center rounded-xl bg-white px-8 py-4 font-semibold text-gray-900 transition-colors duration-200 hover:bg-gray-100"
           >
             {m.get_your_custom_plugin_built({}, { locale: Astro.locals.locale })}
             <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -339,7 +339,7 @@ const useCases = [
           </a>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-            class="inline-flex items-center rounded-xl border-2 border-white px-8 py-4 font-semibold text-white transition-colors duration-200 hover:bg-white hover:text-gray-200"
+            class="inline-flex items-center rounded-xl border-2 border-white px-8 py-4 font-semibold text-white transition-colors duration-200 hover:bg-white hover:text-gray-900"
           >
             {m.browse_all_plugins({}, { locale: Astro.locals.locale })}
             <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -357,7 +357,7 @@ const useCases = [
       <div class="mb-16 text-center">
         <h2 class="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
           {m.code_review({}, { locale: Astro.locals.locale })} &
-          <span class="text-gray-200">{m.consulting({}, { locale: Astro.locals.locale })}</span>
+          <span class="text-gray-700">{m.consulting({}, { locale: Astro.locals.locale })}</span>
         </h2>
         <p class="mx-auto max-w-3xl text-xl text-gray-600">
           {m.when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services({}, { locale: Astro.locals.locale })}:
@@ -459,7 +459,7 @@ const useCases = [
         </div>
 
         <div class="text-center">
-          <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-orange-100">
+          <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gray-700">
             <svg class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
@@ -577,7 +577,7 @@ const useCases = [
             href="https://book.capgo.app/capacitor-plugin/"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:bg-gray-700 hover:shadow-gray-900/30"
+            class="inline-flex items-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-gray-900 shadow-lg transition-all duration-200 hover:bg-gray-100 hover:shadow-white/20"
           >
             Get Your Custom Plugin Built
             <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -607,10 +607,13 @@ const useCases = [
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
     <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Consulting</h2>
     <p class="mt-4">
-      If you need Capgo consulting for a custom native feature, connect this page with <a href="/plugins/">Capgo Plugin Directory</a> for existing bridges, <a
-        href="/docs/contributing/adding-plugins/">Adding or Updating Plugins</a
-      > for contribution flow, <a href="/native-build/">Capgo Native Builds</a> for binary delivery, <a href="/enterprise/">Capgo Enterprise</a> for long-term support, and <a
-        href="/blog/capacitor-plugins-what-you-need-to-know/">Capacitor Plugins: What You Need to Know</a
+      If you need Capgo consulting for a custom native feature, connect this page with <a href="/plugins/" class="font-medium text-white underline">Capgo Plugin Directory</a> for existing
+      bridges, <a href="/docs/contributing/adding-plugins/" class="font-medium text-white underline">Adding or Updating Plugins</a> for contribution flow, <a
+        href="/native-build/"
+        class="font-medium text-white underline">Capgo Native Builds</a
+      > for binary delivery, <a href="/enterprise/" class="font-medium text-white underline">Capgo Enterprise</a> for long-term support, and <a
+        href="/blog/capacitor-plugins-what-you-need-to-know/"
+        class="font-medium text-white underline">Capacitor Plugins: What You Need to Know</a
       > for planning native scope.
     </p>
   </section>
