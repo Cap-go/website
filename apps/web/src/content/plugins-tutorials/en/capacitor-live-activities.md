@@ -12,6 +12,44 @@ bun add @capgo/capacitor-live-activities
 bunx cap sync
 ```
 
+## iOS Setup
+
+Installing and syncing the plugin does not create the native Live Activity UI. Before calling `startActivity`, configure ActivityKit in Xcode:
+
+1. Run `bunx cap open ios`.
+2. Add a **Widget Extension** target and enable **Include Live Activity**.
+3. Set the app and Widget Extension deployment targets to iOS 16.1 or later.
+4. Ensure the extension is embedded in the main app.
+5. Keep an `ActivityConfiguration` registered in the extension's `WidgetBundle`, with Lock Screen and all Dynamic Island presentations.
+6. Add `NSSupportsLiveActivities` to the main app target's `Info.plist`.
+
+```xml
+<key>NSSupportsLiveActivities</key>
+<true/>
+```
+
+Adding the target alone is not sufficient. The native app or plugin must call ActivityKit's request, update, and end APIs. The Widget Extension must contain SwiftUI code that can decode and render the same `ActivityAttributes` and content state used by those calls. Include shared ActivityKit models in both the main app and Widget Extension targets. The Xcode-generated Live Activity template does not automatically render the JSON layouts passed to this plugin; the extension also needs a compatible native layout renderer.
+
+### Shared Images
+
+When using the image-management methods, add the **App Groups** capability to the main app and Widget Extension targets. Enable the same group on both targets using the exact identifier expected by the plugin:
+
+```text
+group.<MAIN_APP_BUNDLE_ID>.liveactivities
+```
+
+Live Activity extensions cannot access the network. Download remote images in the main app, save them to the shared App Group with `saveImage`, and then reference the saved image from the layout. Bundled assets must also belong to the Widget Extension target.
+
+### Deep Links and Push Updates
+
+- Register any custom URL scheme used by `behavior.widgetUrl` or `tapUrl` under the main app target's **Info > URL Types** settings.
+- For server-driven updates, add the **Push Notifications** capability and implement ActivityKit push-token handling with APNs.
+- Add `NSSupportsLiveActivitiesFrequentUpdates` only when the app requires frequent ActivityKit push updates.
+
+Enabling the Push Notifications capability alone is not sufficient; server-driven updates require native token handling and an APNs backend.
+
+ActivityKit limits the combined static and dynamic Live Activity data to 4 KB. The Dynamic Island is only visible on supported device models; other devices use the Lock Screen presentation.
+
 ## What This Plugin Exposes
 
 - `areActivitiesSupported` - Check if Live Activities are supported on this device. Requires iOS 16.1+ and device support.
