@@ -42,6 +42,22 @@ const content = { title, description }
           ))
         }
       </div>
+
+      <div class="mt-12 rounded-2xl border border-blue-400/20 bg-blue-500/10 p-8 text-left">
+        <p class="text-sm font-semibold tracking-wide text-blue-200 uppercase">{m.integrations_partners_freelance_badge({}, { locale })}</p>
+        <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
+            <h2 class="text-2xl font-semibold text-white">{m.integrations_partners_freelance_badge_title({}, { locale })}</h2>
+            <p class="mt-3 max-w-2xl text-slate-300">{m.integrations_partners_freelance_badge_desc({}, { locale })}</p>
+          </div>
+          <a
+            href="/integrations/partners/freelance/"
+            class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+          >
+            {m.integrations_partners_freelance_view({}, { locale })}
+          </a>
+        </div>
+      </div>
     </section>
   </div>
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
