@@ -18,6 +18,28 @@ bunx cap sync
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 ```
 
+## Fix YouTube Referer Blocking in the Main WebView
+
+If YouTube works inside the plugin but fails when the same app loads YouTube pages, embeds, or APIs through Capacitor's main WebView, enable `patchRefererHeader` in your Capacitor config.
+
+When enabled, the plugin patches Capacitor during sync/update so intercepted YouTube requests include a valid `Referer` header.
+
+```json
+{
+  "plugins": {
+    "YoutubePlayer": {
+      "patchRefererHeader": true,
+      "refererHeader": "https://www.youtube.com"
+    }
+  }
+}
+```
+
+- Only `youtube.com`, `youtube-nocookie.com`, and `youtu.be` requests are affected.
+- Requests that already define a `Referer` header keep their original value.
+- `refererHeader` is optional and defaults to `https://www.youtube.com`.
+- Supported on Capacitor `8.x` for installed iOS and Android platforms.
+
 ## API Overview
 
 ### `initialize`
