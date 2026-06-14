@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-14T09:50:54.053Z
-updated_at: 2026-06-14T09:50:55.176Z
+updated_at: 2026-06-14T09:53:33.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/c04b1e90-faa6-4368-9eaa-deb3be7a7e73/what-is-a-portrait-orientation-graphic-design.jpg'
 head_image_alt: 'What Is a Portrait Orientation: Guide for 2026'
 keywords: 'portrait orientation, responsive design, mobile ui, capacitorjs, css media queries'
