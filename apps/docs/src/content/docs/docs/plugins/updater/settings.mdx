@@ -372,7 +372,9 @@ Default: `false`
 
 > Configure the URL / endpoint to which update statistics are sent.
 
-Available on Android, iOS, and Electron. Set to "" to disable stats reporting.
+Available on Android, iOS, and Electron. Set to "" to disable explicit stats reporting through `/stats`.
+
+Disabling `statsUrl` does not disable all Capgo device storage. If `updateUrl` remains enabled, `/updates` still stores the billing MAU row, device inventory, and update-decision event data needed to serve updates and count MAU. See [Compliance](/docs/live-updates/compliance/#endpoint-storage-detail) for the field-level breakdown.
 
 Default: `https://plugin.capgo.app/stats`
 
