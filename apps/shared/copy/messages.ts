@@ -4472,9 +4472,6 @@ const messages = {
   integrations_badge: 'Integrations',
   integrations_title: 'Capgo Integrations',
   integrations_subtitle: 'Current Capgo integrations and partner services.',
-  integrations_partners_freelance_badge: 'Partner services',
-  integrations_partners_freelance_badge_desc: 'Trusted freelance mobile help from people already working with Capgo.',
-  integrations_partners_freelance_badge_title: 'Freelance partners',
   integrations_partners_freelance_capgo_work: 'They help {brand} build tools customers need, from Capacitor plugins to product features.',
   integrations_partners_freelance_contact: 'Contact {name}',
   integrations_partners_freelance_description: 'Trusted freelance mobile developers who work with {brand} part-time and ship real apps for their own clients.',
@@ -4484,8 +4481,6 @@ const messages = {
   integrations_partners_freelance_role: 'Part-time {brand} freelance',
   integrations_partners_freelance_trust:
     'We trust them because they work with us directly, understand the Capgo codebase, and keep shipping production mobile work outside Capgo too.',
-  integrations_partners_freelance_title: 'Freelance Partners',
-  integrations_partners_freelance_view: 'View freelance partners',
 
   // ============================================================
   // native-build.astro — "Capgo Builder" redesign (2026)
