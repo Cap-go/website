@@ -422,7 +422,7 @@ const messages = {
   can_i_change_my_plan_at_any_time: 'Can I change my plan at any time?',
   can_i_use_credits_without_subscription: 'Can I use credits without an active subscription?',
   can_i_use_credits_without_subscription_answer:
-    'No. Credits can only be used or purchased with an active subscription. You need an active plan to use credits for covering usage beyond your plan limits. Credits are prepaid and valid for 1 year from the date of purchase.',
+    'Yes. You can buy prepaid credits without an active subscription and use them for usage-based access. Credits are valid for 1 year from the date of purchase.',
   can_i_use_soc2_with_other_plans: 'Can I use SOC 2 compliance with Solo, Maker, or Team plans?',
   cancellation_deadline:
     'The deadline for cancelling an Order is 14 days from the date on which You received the Goods or on which a third party you have appointed, who is not the carrier, takes possession of the product delivered.',
@@ -676,8 +676,9 @@ const messages = {
     "To request a Service Credit, Customer must send an email to Capgo at support@capgo.app within thirty (30) days of the end of the month in which the Uptime Commitment was not met. Customer must include either its account ID or registered email address, and the previously reported dates and times that there was no Service Availability. If Capgo confirms that Customer is eligible for a Service Credit, Capgo will issue a credit to Customer's account within thirty (30) days. Service Credits are not refunds, cannot be exchanged into a cash amount, and may only be used against future billing charges. Except as set forth in Section 4 below, the Service Credits shall be Customer's sole and exclusive remedy, and Capgo's sole and exclusive liability, for any failure by Capgo to meet the Uptime Commitment.",
   credit_requests_payment_title: '3. Credit Requests and Payment',
   credits_cost: 'Credits Cost',
-  credits_usage_info:
-    'Credits are used for usage beyond your plan limits. All plans can use credits. Credits must be prepaid and are valid for 1 year. Credits can only be used or purchased with an active subscription.',
+  credits_usage_info: 'Credits are prepaid, valid for 1 year, and can be used with or without an active subscription. Plans can also use credits for usage beyond included limits.',
+  pricing_credits_cta_desktop: "Don't want a plan? Buy credits instead.",
+  pricing_credits_cta_mobile: 'Buy credits instead.',
   cta_start_free: 'Ship your first fix free',
   cta_start_migration: 'Start your migration',
   custom: 'Custom',
