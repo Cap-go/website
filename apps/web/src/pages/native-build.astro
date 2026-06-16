@@ -3917,7 +3917,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       const q = (s: string) => root.querySelector<HTMLElement>(s)
       const win = q('.asc-win')
       const cursor = q('.asc-cursor')
-      const pane = q('.asc-win')
       const stepNum = q('.asc-stepnum')
       const cl = q('.asc-callout')
       const LABELS: Record<string, string> = {
@@ -3929,7 +3928,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         generate: 'Generate',
         download: 'Download key',
       }
-      if (!win || !cursor || !pane) return { stop() {} }
+      if (!win || !cursor) return { stop() {} }
       const timers: ReturnType<typeof setTimeout>[] = []
       let stopped = false
       const at = (ms: number, fn: () => void) => { timers.push(setTimeout(() => { if (!stopped) fn() }, ms)) }
@@ -3958,11 +3957,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       }
       function moveTo(sel: string) {
         const t = root.querySelector<HTMLElement>(sel)
-        if (!t || !pane) return
+        if (!t || !win) return
         root.querySelectorAll('.hot').forEach(e => e.classList.remove('hot'))
         t.classList.add('hot')
         const tr = t.getBoundingClientRect()
-        const pr = pane.getBoundingClientRect()
+        const pr = win.getBoundingClientRect()
         const isField = !!t.dataset.field
         const targetX = tr.left - pr.left + tr.width / 2
         const cursorX = tr.left - pr.left + (isField ? Math.min(46, tr.width * 0.3) : tr.width / 2)
@@ -4004,7 +4003,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         ORDER.forEach(n => mark(n, 'upcoming'))
         setScreen('login')
         if (stepNum) stepNum.textContent = '1'
-        const pr = pane!.getBoundingClientRect()
+        const pr = win!.getBoundingClientRect()
         cursor!.style.left = (pr.width * 0.55) + 'px'
         cursor!.style.top = (pr.height * 0.55) + 'px'
       }
@@ -4065,10 +4064,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       const total = PLATFORMS[currentPlatform].content.length
       const head = `<h4>Step ${i + 1} / ${total} — ${c.title}</h4>`
       if (c.kind === 'asc') {
-        stage!.innerHTML = `${head}<div class="desk">${termWin(TERM_IDLE, ' behind')}${ASC_HTML}${DOCK_HTML}</div>`
+        stage!.innerHTML = `${head}<div class="desk" aria-hidden="true">${termWin(TERM_IDLE, ' behind')}${ASC_HTML}${DOCK_HTML}</div>`
         if (play) ascAnim = startAscAnim(stage!, onComplete)
       } else {
-        stage!.innerHTML = `${head}<div class="desk">${termWin(terminalLog(i))}${DOCK_HTML}</div>`
+        stage!.innerHTML = `${head}<div class="desk" aria-hidden="true">${termWin(terminalLog(i))}${DOCK_HTML}</div>`
       }
       getSteps().forEach((s, j) => {
         s.classList.toggle('active', j === i)
