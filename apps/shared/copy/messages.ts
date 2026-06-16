@@ -1539,11 +1539,6 @@ const messages = {
   landing_release_intelligence_card_email_title: 'Email summaries after release',
   landing_release_intelligence_description:
     'Capgo helps teams learn from every update. Before upload, during rollout, and after release, you get plain-language signals that explain whether the update is safe, risky, broken, or ready to promote.',
-  landing_release_intelligence_email_metric1: 'Worked: 96.8% installed without retry',
-  landing_release_intelligence_email_metric2: 'Needs attention: 21 devices blocked by native version',
-  landing_release_intelligence_email_metric3: 'Next step: ship native build before widening rollout',
-  landing_release_intelligence_email_title: 'Weekly release email',
-  landing_release_intelligence_panel_footer: 'The goal is not more dashboards. It is a better release decision before users feel the mistake.',
   landing_release_intelligence_subtitle: 'Release intelligence',
   landing_release_intelligence_title: 'Understand what worked, what failed, and what to change next',
   language_label: 'Language',
