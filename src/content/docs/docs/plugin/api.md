@@ -1091,7 +1091,10 @@ Assign this device to a specific update channel at runtime.
 Channels allow you to distribute different bundle versions to different groups of users
 (e.g., "production", "beta", "staging"). This method switches the device to a new channel.
 
-**Device Override UI:** `setChannel()` validates the channel with the backend, then stores the selected channel locally on the device. It does not create or update a backend Device Override, so the device will not appear as overridden in the Capgo dashboard. Only assignments created from the dashboard or the Public API are shown in the Device Override UI.
+**Device Override UI:** `setChannel()` validates the channel with the backend, then stores the
+selected channel locally on the device. It does not create or update a backend Device Override,
+so the device will not appear as overridden in the Capgo dashboard. Only assignments created
+from the dashboard or the Public API are shown in the Device Override UI.
 
 **Requirements:**
 - The target channel must allow self-assignment (configured in your Capgo dashboard or backend)
@@ -1119,7 +1122,8 @@ CapacitorUpdater.addListener('channelPrivate', (data) => {
 });
 ```
 
-This validates the channel with the Capgo backend and, when accepted, stores the selected channel locally on the device.
+This sends a request to the Capgo backend to validate the specified channel, then stores the
+channel locally on the device.
 
 **Parameters**
 
@@ -1145,7 +1149,7 @@ This validates the channel with the Capgo backend and, when accepted, stores the
 unsetChannel(options: UnsetChannelOptions) => Promise<void>
 ```
 
-Remove the plugin-managed local channel assignment and continue with normal channel precedence.
+Remove the plugin-managed local channel assignment and return to the default channel.
 
 This clears only the channel stored locally by {@link setChannel}; it does not delete Dashboard or Public API Device Override records. After the local assignment is cleared, normal channel precedence applies:
 - An existing Dashboard or Public API Device Override, if one exists
@@ -1330,7 +1334,7 @@ It's automatically generated and stored securely by the plugin.
 **Privacy & Security characteristics:**
 - Generated as a UUID (not based on hardware identifiers)
 - Stored securely in platform-specific secure storage
-- Android: Android Keystore (persists across app reinstalls on API 23+)
+- Android: mirrored into backup-restorable app preferences for reinstall restore
 - iOS: Keychain with `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`
 - Not synced to cloud (iOS)
 - Follows Apple and Google privacy best practices
@@ -1338,7 +1342,9 @@ It's automatically generated and stored securely by the plugin.
 
 **Persistence:**
 The device ID persists across app reinstalls to maintain consistent device identity
-for update tracking and analytics.
+for update tracking and analytics when platform storage is preserved. On Android,
+apps with custom backup rules must keep the plugin app preferences eligible for
+backup/restore; disabling Android backup or clearing app data creates a new ID.
 
 Use this to:
 - Debug update delivery issues (check what ID the server sees)
