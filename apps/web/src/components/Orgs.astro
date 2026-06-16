@@ -1,8 +1,6 @@
 ---
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import { Image } from 'astro:assets'
-import orgsGraphic from '@/assets/orgs-graphic.svg'
 
 const features = [
   {
@@ -52,7 +50,13 @@ const features = [
         </div>
         <div class="relative mb-8 flex h-[400px] items-center justify-center">
           <div class="pointer-events-none absolute -top-20 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-blue-500/25 blur-[120px]"></div>
-          <Image src={orgsGraphic} alt="Organization Management" class="relative z-10 w-full max-w-[400px]" />
+          <img
+            src="/landing-demos/team-orgs.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            class="relative z-10 aspect-[16/10] w-full rounded-lg object-cover object-top shadow-2xl shadow-blue-950/30 outline-1 -outline-offset-1 outline-white/10"
+          />
         </div>
 
         <h3 class="relative z-10 mb-4 text-2xl font-semibold text-white">{features[0].title}</h3>
