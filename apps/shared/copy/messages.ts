@@ -4530,7 +4530,7 @@ const messages = {
   native_build_v2_tile_flavors_title: 'Android flavors + Cordova',
   native_build_v2_tile_flavors_sub: 'Product flavors, keystores, Cordova plugins — auto-handled.',
   native_build_v2_tile_setup_title: 'Setup in 60 seconds',
-  native_build_v2_tile_setup_sub: "One .p8 for iOS. One Google sign-in for Android. That's it.",
+  native_build_v2_tile_setup_sub: "One .p8 for iOS — or none; we'll create it for you. One Google sign-in for Android.",
   native_build_v2_tile_ci_title: 'CI/CD ready',
   native_build_v2_tile_ci_sub: 'Works in GitHub Actions, GitLab and Bitbucket. No interactive input.',
 
@@ -4538,9 +4538,9 @@ const messages = {
   native_build_v2_wiz_title_prefix: 'Setup in ',
   native_build_v2_wiz_title_time: '60 seconds',
   native_build_v2_wiz_lead:
-    'Run it once for iOS, once for Android. Drop one .p8 for Apple, sign in once with Google for Play. Capgo handles certs, profiles, keystores and service accounts — everything you would normally do by hand in two consoles.',
+    'Run it once for iOS, once for Android. Drop one .p8 for Apple, sign in once with Google for Play. Capgo handles certs, profiles, keystores and service accounts — everything you would normally do by hand in two consoles. No App Store Connect key yet? On macOS, Capgo can create one for you, guided.',
   native_build_v2_wiz_ios_s1_l: 'App Store Connect API key',
-  native_build_v2_wiz_ios_s1_d: 'Drop your .p8 — Key ID + Issuer auto-detected',
+  native_build_v2_wiz_ios_s1_d: 'Drop your .p8 — or let Capgo create one, guided. Key ID + Issuer auto-detected.',
   native_build_v2_wiz_ios_s2_l: 'Distribution certificate',
   native_build_v2_wiz_ios_s2_d: 'CSR → cert → P12, generated for you',
   native_build_v2_wiz_ios_s3_l: 'Provisioning profile',
@@ -4559,6 +4559,7 @@ const messages = {
   native_build_v2_wiz_ios_after: 'After: drop one .p8',
   native_build_v2_wiz_and_before: 'Before: Play Console · service accounts · keystores · Gradle wrangling',
   native_build_v2_wiz_and_after: 'After: one Google sign-in',
+  native_build_v2_wiz_macos_note: 'Guided App Store Connect key creation runs on macOS.',
 
   native_build_v2_trust_eyebrow: 'Trust model',
   native_build_v2_trust_title: 'Your secrets stay your secrets.',
