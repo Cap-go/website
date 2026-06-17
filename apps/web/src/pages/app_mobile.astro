@@ -1,541 +1,258 @@
 ---
+import ProductAppExamples from '@/components/ProductAppExamples.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
+import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
 import Layout from '@/layouts/Layout.astro'
-import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.Capacitor_Sanbox_App({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.Capacitor_Sanbox_App_description({}, { locale: Astro.locals.locale })
-
+const title = 'Capgo mobile app | Preview builds and manage live updates on the go'
+const description =
+  'Use the Capgo mobile app to preview bundles on real devices, share QR previews with teams or users, follow native build status, and manage release work from your phone.'
 const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-app-mobile.png`,
 }
+
+const storeLinks = [
+  {
+    href: 'https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go',
+    image: '/play-store-button.webp',
+    alt: 'Get Capgo on Google Play',
+  },
+  {
+    href: 'https://apps.apple.com/pt/app/capgo/id1602316563',
+    image: '/app-store-button.webp',
+    alt: 'Download Capgo on the App Store',
+  },
+]
+
+const highlights = [
+  ['Preview', 'Share QR codes or deep links so teammates, QA testers, or users can open previews on their devices.'],
+  ['Test', 'Apply saved previews, update them, or reset to the live app.'],
+  ['Watch', 'Check native build status, duration, output, and errors.'],
+]
+
+const capabilities = [
+  {
+    title: 'Preview a build on the device that will run it',
+    description: 'Open a bundle or channel preview from the dashboard or CLI, scan the QR code, and apply it directly inside the Capgo app for a real-device check.',
+  },
+  {
+    title: 'Keep multiple previews ready for QA',
+    description: 'Saved previews let testers switch between build candidates, update a preview, delete stale ones, and return to the main app without rebuilding.',
+  },
+  {
+    title: 'Follow native builds away from your desk',
+    description: 'The build view shows platform, build mode, status, duration, output details, and errors so you can react before the release window closes.',
+  },
+  {
+    title: 'See compatibility before choosing the release path',
+    description: 'Compatibility events surface dependency changes, unresolved devices, rollback options, and the moment a native rebuild is the safer path.',
+  },
+  {
+    title: 'Manage live updates on the go',
+    description: 'Check apps, channels, bundles, and current release state from your phone when production needs a fast decision.',
+  },
+  {
+    title: 'Share CLI and dashboard QR previews',
+    description: 'Send the same QR code or deep link to your team, QA group, or selected users so they can test the exact build on their own device.',
+  },
+]
+
+const workflow = [
+  ['Create a shareable preview', 'Generate a bundle or channel preview from Capgo, the dashboard, or the CLI QR preview flow.'],
+  ['Share it with testers', 'Send the QR code or deep link to teammates, QA, or selected users, then let them start the preview in the Capgo app.'],
+  ['Test and decide', 'Switch saved previews, inspect compatibility, watch build status, and either ship OTA or prepare a native build.'],
+]
+
+const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysmarter', 'com.polleverywhere.mobile']
 ---
 
 <Layout content={content}>
-  <div>
-    <div class="relative">
-      <!-- Animated background elements -->
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
+  <section class="bg-slate-950 pt-12 pb-16 sm:pt-16 lg:pt-20 lg:pb-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Capgo mobile app</p>
+          <h1 class="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-balance text-white sm:text-6xl lg:text-7xl">Capgo mobile app</h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-pretty text-slate-300 sm:text-xl">
+            Preview builds directly on a real device, share QR tests with teams or users, follow native build status, and manage release decisions from your phone.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            {
+              storeLinks.map((store) => (
+                <a
+                  href={store.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex w-fit transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400"
+                >
+                  <img src={store.image} alt={store.alt} class="h-14 w-auto sm:h-16" loading="eager" decoding="async" />
+                </a>
+              ))
+            }
+          </div>
+
+          <div class="mt-10 grid gap-3 sm:grid-cols-3">
+            {
+              highlights.map(([label, text]) => (
+                <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+                  <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">{label}</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-300">{text}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="relative mx-auto w-full max-w-2xl">
+          <div class="grid gap-5 md:grid-cols-[0.82fr_1fr] md:items-center">
+            <div class="mx-auto w-[min(18rem,78vw)] rounded-[2rem] border border-slate-700 bg-slate-900 p-3 shadow-2xl shadow-black/40">
+              <div
+                class="overflow-hidden rounded-[1.5rem] bg-[#162337]"
+                role="img"
+                aria-label="Capgo mobile app preview QR screen"
+                style="aspect-ratio: 9 / 16; background-image: url(/capgo-mobile-preview-qr.webp); background-size: cover; background-position: center;"
+              >
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="rounded-lg border border-cyan-300/25 bg-cyan-400/10 p-5">
+                <p class="text-sm font-semibold text-cyan-100">Preview ready</p>
+                <p class="mt-2 text-2xl font-semibold tracking-tight text-white">bundle 1.8.4</p>
+                <p class="mt-2 text-sm leading-6 text-cyan-50/80">Apply this preview, keep it saved for QA, or reset to the production bundle.</p>
+              </div>
+              <div class="rounded-lg border border-white/10 bg-white/[0.04] p-5">
+                <div class="flex items-center justify-between gap-4">
+                  <p class="text-sm font-semibold text-slate-200">Native build</p>
+                  <span class="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-200 ring-1 ring-emerald-400/25">success</span>
+                </div>
+                <div class="mt-4 grid grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <p class="text-slate-500">Platform</p>
+                    <p class="mt-1 font-medium text-white">iOS</p>
+                  </div>
+                  <div>
+                    <p class="text-slate-500">Output</p>
+                    <p class="mt-1 font-medium text-white">IPA ready</p>
+                  </div>
+                </div>
+              </div>
+              <div class="rounded-lg border border-white/10 bg-white/[0.04] p-5">
+                <p class="text-sm font-semibold text-slate-200">Compatibility</p>
+                <p class="mt-2 text-sm leading-6 text-slate-300">Dependency change detected. Review affected channels before shipping OTA.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Release control in your pocket</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Built for CapacitorJS apps when a laptop is not open</h2>
+        <p class="mt-5 text-base leading-7 text-pretty text-slate-300">
+          The mobile app is not just a companion view. It is the fastest way to prove a live update on-device, keep QA previews organized, and check whether a native build is still
+          moving.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {
-          Array.from({ length: 15 }).map((_, i) => (
-            <div
-              class="mobile-wave-animation absolute w-full"
-              style={{
-                top: `${i * 7}%`,
-                animationDelay: `${Math.random() * 4}s`,
-                height: `${Math.random() * 2 + 1}px`,
-                opacity: Math.random() * 0.3 + 0.2,
-              }}
-            />
+          capabilities.map((capability) => (
+            <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-200 ring-1 ring-cyan-300/25">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold tracking-tight text-white">{capability.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-300">{capability.description}</p>
+            </article>
           ))
         }
       </div>
-
-      <!-- Hero Section -->
-      <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
-        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="relative z-10 mx-auto max-w-4xl text-center">
-            <p class="font-pj inline-flex rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-2 text-base text-blue-100">
-              <svg class="mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-              </svg>
-              {m.now_available_on_mobile({}, { locale: Astro.locals.locale })}
-            </p>
-            <h1 class="font-pj mt-5 text-3xl leading-tight font-bold text-white sm:text-4xl sm:leading-tight lg:leading-tight xl:text-5xl">
-              {m.manage_your_releases({}, { locale: Astro.locals.locale })}
-              <br />
-              <span class="text-gray-200">
-                {m.on_the_go({}, { locale: Astro.locals.locale })}
-              </span>
-            </h1>
-            <h2 class="font-inter mx-auto mt-6 max-w-2xl text-base leading-7 text-gray-300">
-              {m.test_deploy_and_monitor_your_capacitor_apps({}, { locale: Astro.locals.locale })}
-              <br />
-              <span class="font-bold">{m.directly_from_your_phone({}, { locale: Astro.locals.locale })}</span>
-            </h2>
-
-            <!-- Download buttons -->
-            <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a href="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank" class="transform transition-transform duration-200 hover:scale-105">
-                <img src="/play-store-button.webp" class="h-14 w-auto sm:h-16" alt="Google Play Store download" />
-              </a>
-              <a href="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank" class="transform transition-transform duration-200 hover:scale-105">
-                <img src="/app-store-button.webp" class="h-14 w-auto sm:h-16" alt="Apple App Store download" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Features Grid Section -->
-      <section class="bg-gray-900 py-12 sm:py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="mb-12 text-center">
-            <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
-              {m.everything_you_need_in_your_pocket({}, { locale: Astro.locals.locale })}
-            </h2>
-            <p class="mt-4 text-lg text-gray-300">
-              {m.full_control_of_your_capacitor_apps_from_anywhere({}, { locale: Astro.locals.locale })}
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <!-- Test Releases -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-white/30 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/15 ring-1 ring-blue-300/40">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-blue-100">{m.test_releases_instantly({}, { locale: Astro.locals.locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.install_and_test_any_version_directly({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-
-            <!-- Manage Channels -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-white/30 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700 ring-1 ring-white/15">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-white">{m.manage_channels({}, { locale: Astro.locals.locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.switch_between_development_staging_production({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-
-            <!-- Deploy Updates -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-white/30 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700 ring-1 ring-white/15">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-white">{m.deploy_with_confidence({}, { locale: Astro.locals.locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.push_updates_to_production_from_anywhere({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-
-            <!-- View Statistics -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-white/30 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-emerald-100">{m.real_time_statistics({}, { locale: Astro.locals.locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.monitor_downloads_active_users_success_rates({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-
-            <!-- Team Collaboration -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-white/30 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700 ring-1 ring-white/15">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-white">{m.team_collaboration({}, { locale: Astro.locals.locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.share_test_builds_with_your_team({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-
-            <!-- Instant Rollback -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-white/30 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700 ring-1 ring-white/15">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-white">{m.instant_rollback({}, { locale: Astro.locals.locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.revert_to_previous_version_with_one_tap({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
+  </section>
 
-    <!-- How It Works Section -->
-    <section class="bg-gray-50 py-16 sm:py-20 lg:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto mb-16 max-w-2xl text-center">
-          <h2 class="text-3xl leading-tight font-bold text-black sm:text-4xl xl:text-5xl">
-            {m.how_the_app_works({}, { locale: Astro.locals.locale })}
-          </h2>
-          <p class="mx-auto mt-4 max-w-lg text-base leading-relaxed text-gray-600">
-            {m.seamless_integration_with_your_capgo_account({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <!-- Step 1 -->
-          <div class="text-center">
-            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-300/40 bg-blue-500/15 text-xl font-bold text-blue-600">1</div>
-            <h3 class="mb-2 text-xl font-bold text-gray-900">{m.connect_your_account({}, { locale: Astro.locals.locale })}</h3>
-            <p class="text-gray-600">
-              {m.login_with_your_capgo_credentials({}, { locale: Astro.locals.locale })}
-            </p>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="text-center">
-            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-xl font-bold text-white">2</div>
-            <h3 class="mb-2 text-xl font-bold text-gray-900">{m.select_your_app({}, { locale: Astro.locals.locale })}</h3>
-            <p class="text-gray-600">
-              {m.choose_from_your_capgo_projects({}, { locale: Astro.locals.locale })}
-            </p>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="text-center">
-            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-emerald-300/40 bg-emerald-500/15 text-xl font-bold text-emerald-600">
-              3
-            </div>
-            <h3 class="mb-2 text-xl font-bold text-gray-900">{m.manage_on_the_go({}, { locale: Astro.locals.locale })}</h3>
-            <p class="text-gray-600">
-              {m.test_deploy_monitor_from_anywhere({}, { locale: Astro.locals.locale })}
-            </p>
-          </div>
-        </div>
+  <section class="bg-white py-16 text-slate-950 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="font-mono text-sm font-semibold tracking-wide text-blue-700 uppercase">Preview workflow</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">From release candidate to real-device proof</h2>
+        <p class="mt-5 text-base leading-7 text-pretty text-slate-600">
+          Capgo preview links move from CLI or dashboard to the mobile app without a handoff. Share a QR code, let teammates or selected users test, and decide with the same
+          release context.
+        </p>
       </div>
-    </section>
 
-    <!-- Use Cases Section -->
-    <section class="bg-gray-900 py-16 sm:py-20 lg:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mb-16 text-center">
-          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl xl:text-5xl">
-            {m.perfect_for({}, { locale: Astro.locals.locale })}
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          <!-- QA Teams -->
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-colors duration-300 hover:border-white/30 hover:bg-gray-800/90">
-            <div class="mb-6 flex items-center">
-              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/15 ring-1 ring-purple-300/40">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <h3 class="ml-4 text-2xl font-bold text-purple-100">{m.qa_teams({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <p class="mb-4 text-gray-300">
-              {m.test_different_versions_and_channels({}, { locale: Astro.locals.locale })}
-            </p>
-            <ul class="space-y-2 text-gray-400">
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.instant_version_switching({}, { locale: Astro.locals.locale })}
-              </li>
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.test_on_real_devices({}, { locale: Astro.locals.locale })}
-              </li>
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.report_issues_directly({}, { locale: Astro.locals.locale })}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Product Managers -->
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-colors duration-300 hover:border-white/30 hover:bg-gray-800/90">
-            <div class="mb-6 flex items-center">
-              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700 ring-1 ring-white/20">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="ml-4 text-2xl font-bold text-white">{m.product_managers({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <p class="mb-4 text-gray-300">
-              {m.monitor_adoption_and_performance({}, { locale: Astro.locals.locale })}
-            </p>
-            <ul class="space-y-2 text-gray-400">
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.real_time_analytics({}, { locale: Astro.locals.locale })}
-              </li>
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.update_success_tracking({}, { locale: Astro.locals.locale })}
-              </li>
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.quick_decision_making({}, { locale: Astro.locals.locale })}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Developers -->
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-colors duration-300 hover:border-white/30 hover:bg-gray-800/90">
-            <div class="mb-6 flex items-center">
-              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700 ring-1 ring-white/20">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                </svg>
-              </div>
-              <h3 class="ml-4 text-2xl font-bold text-white">{m.developers({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <p class="mb-4 text-gray-300">
-              {m.deploy_and_test_anywhere_anytime({}, { locale: Astro.locals.locale })}
-            </p>
-            <ul class="space-y-2 text-gray-400">
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.emergency_fixes_on_the_go({}, { locale: Astro.locals.locale })}
-              </li>
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.test_pr_builds({}, { locale: Astro.locals.locale })}
-              </li>
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.channel_management({}, { locale: Astro.locals.locale })}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Support Teams -->
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-colors duration-300 hover:border-white/30 hover:bg-gray-800/90">
-            <div class="mb-6 flex items-center">
-              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-rose-500/15 ring-1 ring-rose-300/40">
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="ml-4 text-2xl font-bold text-rose-100">{m.support_teams({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <p class="mb-4 text-gray-300">
-              {m.help_customers_with_app_issues({}, { locale: Astro.locals.locale })}
-            </p>
-            <ul class="space-y-2 text-gray-400">
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.diagnose_version_issues({}, { locale: Astro.locals.locale })}
-              </li>
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.guide_rollback_process({}, { locale: Astro.locals.locale })}
-              </li>
-              <li class="flex items-start">
-                <svg class="mt-0.5 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {m.verify_fixes_instantly({}, { locale: Astro.locals.locale })}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Mobile App Preview -->
-    <section class="overflow-hidden bg-gray-50 py-16 sm:py-20 lg:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <div>
-            <h2 class="mb-6 text-3xl leading-tight font-bold text-gray-900 sm:text-4xl xl:text-5xl">
-              {m.beautiful_native_experience({}, { locale: Astro.locals.locale })}
-            </h2>
-            <p class="mb-8 text-lg text-gray-600">
-              {m.designed_for_mobile_first({}, { locale: Astro.locals.locale })}
-            </p>
-
-            <div class="space-y-4">
-              <div class="flex items-start">
-                <div class="mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200">
-                  <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                  </svg>
-                </div>
-                <div class="ml-4">
-                  <p class="font-medium text-gray-800">{m.lightning_fast({}, { locale: Astro.locals.locale })}</p>
-                  <p class="text-sm text-gray-500">{m.native_performance_smooth_experience({}, { locale: Astro.locals.locale })}</p>
-                </div>
-              </div>
-
-              <div class="flex items-start">
-                <div class="mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200">
-                  <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                  </svg>
-                </div>
-                <div class="ml-4">
-                  <p class="font-medium text-gray-800">{m.offline_support({}, { locale: Astro.locals.locale })}</p>
-                  <p class="text-sm text-gray-500">{m.work_without_internet_connection({}, { locale: Astro.locals.locale })}</p>
-                </div>
-              </div>
-
-              <div class="flex items-start">
-                <div class="mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200">
-                  <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="ml-4">
-                  <p class="font-medium text-gray-800">{m.push_notifications({}, { locale: Astro.locals.locale })}</p>
-                  <p class="text-sm text-gray-500">{m.get_notified_about_updates({}, { locale: Astro.locals.locale })}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="relative">
-            <!-- Phone mockups -->
-            <div class="flex justify-center gap-4 lg:gap-8">
-              <div
-                class="relative h-104 w-60 -rotate-3 transform overflow-hidden rounded-[3rem] border-10 border-gray-800 bg-gray-900 shadow-2xl transition-transform duration-300 hover:rotate-0 lg:h-128 lg:w-72"
-              >
-                <div class="absolute top-0 left-1/2 h-6 w-32 -translate-x-1/2 transform rounded-b-2xl bg-gray-800"></div>
-                <div class="h-full bg-white">
-                  <img src="/seeit.webp" class="h-full w-full object-cover" alt="Capgo mobile app screen" />
-                </div>
-              </div>
-              <div
-                class="relative h-104 w-60 rotate-3 transform overflow-hidden rounded-[3rem] border-10 border-gray-800 bg-gray-900 shadow-2xl transition-transform duration-300 hover:rotate-0 lg:h-128 lg:w-72"
-              >
-                <div class="absolute top-0 left-1/2 h-6 w-32 -translate-x-1/2 transform rounded-b-2xl bg-gray-800"></div>
-                <div class="h-full bg-white">
-                  <img src="/seeit.webp" class="h-full w-full object-cover" alt="Capgo mobile app screen" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <div class="relative bg-gray-900 py-16 sm:py-20">
-      <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-        <div class="relative overflow-hidden rounded-2xl border border-gray-700 bg-gray-900 px-6 py-12 shadow-xl sm:px-12 sm:py-24">
-          <div aria-hidden="true" class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0">
-            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
-              <path class="text-opacity-40 text-white" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
-              <path class="text-opacity-20 text-white" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
-            </svg>
-          </div>
-          <div class="relative text-center">
-            <h2 class="text-3xl tracking-tight text-white sm:text-4xl xl:text-5xl">
-              {m.ready_to_go_mobile({}, { locale: Astro.locals.locale })}
-            </h2>
-            <p class="mx-auto mt-6 max-w-3xl text-xl text-white opacity-90">
-              {m.download_the_app_and_take_control({}, { locale: Astro.locals.locale })}
-            </p>
-
-            <div class="mt-4 inline-block rounded-lg bg-black/20 px-6 py-4 backdrop-blur-sm">
-              <p class="text-base text-white">
-                {m.requires_capgo_account({}, { locale: Astro.locals.locale })}.
-                <a href={getRelativeLocaleUrl(Astro.locals.locale, 'register')} class="ml-1 font-bold text-white underline transition-colors hover:text-gray-200">
-                  {m.sign_up_for_free({}, { locale: Astro.locals.locale })}
-                </a>
-              </p>
-            </div>
-            <div class="mt-10 mb-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a href="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank" class="transform transition-transform duration-200 hover:scale-105">
-                <img src="/play-store-button.webp" class="h-14 w-auto sm:h-16" alt="Google Play Store download" />
-              </a>
-              <a href="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank" class="transform transition-transform duration-200 hover:scale-105">
-                <img src="/app-store-button.webp" class="h-14 w-auto sm:h-16" alt="Apple App Store download" />
-              </a>
-            </div>
-          </div>
-        </div>
+      <div class="mt-10 grid gap-4 lg:grid-cols-3">
+        {
+          workflow.map(([title, text], index) => (
+            <article class="flex min-h-full flex-col rounded-lg border border-slate-200 bg-slate-50 p-6">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-950 text-sm font-semibold text-white">{index + 1}</div>
+              <h3 class="mt-5 text-lg leading-6 font-semibold tracking-tight">{title}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-600">{text}</p>
+            </article>
+          ))
+        }
       </div>
     </div>
-  </div>
+  </section>
+
+  <ProductAppExamples
+    title="Capacitor apps prove the release loop at real scale"
+    description="Capgo is built for teams shipping Capacitor apps where real-device validation, fast rollback, and clear release state matter before every production move."
+    appIds={appExampleIds}
+  />
+
+  <ProductTestimonials
+    eyebrow="On-device proof"
+    title="Teams use Capgo when releases need real-device testing"
+    description="Short reviews from people using Capgo to preview updates, share test builds, and keep production release decisions moving."
+    testimonials={productTestimonials.mobile}
+  />
+
+  <section class="bg-slate-900 py-16 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
+      <div>
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Start testing on-device</p>
+        <h2 class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Download the app and connect it to your Capgo account.</h2>
+        <p class="mt-5 max-w-2xl text-base leading-7 text-slate-300">
+          Use it with preview QR codes, live update channels, and native build outputs from the rest of your Capgo release flow.
+        </p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+        {
+          storeLinks.map((store) => (
+            <a
+              href={store.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex w-fit transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400"
+            >
+              <img src={store.image} alt={store.alt} class="h-14 w-auto sm:h-16" loading="lazy" decoding="async" />
+            </a>
+          ))
+        }
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+          class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          Create account
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>
-
-<style is:global>
-  /* Mobile wave animation */
-  .mobile-wave-animation {
-    left: -100%;
-    background-color: rgba(68, 188, 255, 0.3);
-    animation: mobile-wave 6s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
-  }
-
-  @keyframes mobile-wave {
-    0% {
-      transform: translateX(0) scaleX(0.1);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.5;
-    }
-    100% {
-      transform: translateX(200%) scaleX(1);
-      opacity: 0;
-    }
-  }
-</style>

@@ -1,4 +1,6 @@
 ---
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import m from '@/copy/messages'
@@ -447,6 +449,13 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
         </div>
       </div>
     </section>
+
+    <ProductTestimonials
+      eyebrow="Plugin migration proof"
+      title="Teams replacing plugin gaps need a release path that keeps working"
+      description="Short reviews from developers using Capgo plugins and updater workflows in production apps."
+      testimonials={productTestimonials.ionicEnterprisePlugins}
+    />
 
     <!-- CTA -->
     <section class="bg-gray-800 py-16 sm:py-20">
