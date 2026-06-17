@@ -8,7 +8,6 @@ interface Env {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
   PERSONAL_ACCESS_TOKEN?: string
-  DATAFAST_AI_CRAWL_WEBSITE_ID?: string
   IOS_UDID_PROFILE_SIGNING_CERT_PEM?: string
   IOS_UDID_PROFILE_SIGNING_KEY_PEM?: string
   IOS_UDID_PROFILE_SIGNING_CHAIN_PEM?: string
@@ -205,11 +204,10 @@ function withGlobalCssCacheHeaders(response: Response): Response {
   })
 }
 
-function trackAICrawler(request: Request, response: Response, env: Env, ctx?: BackgroundContext): Response {
-  const websiteId = env.DATAFAST_AI_CRAWL_WEBSITE_ID?.trim()
-  if (websiteId) {
-    trackAICrawlerResponse(request, response, ctx, { websiteId })
-  }
+const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
+
+function trackAICrawler(request: Request, response: Response, ctx?: BackgroundContext): Response {
+  trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
   return response
 }
 
@@ -253,14 +251,14 @@ export default {
       },
       pathname,
     )
-    if (toolRouteResponse) return trackAICrawler(request, toolRouteResponse, env, ctx)
+    if (toolRouteResponse) return trackAICrawler(request, toolRouteResponse, ctx)
     const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
-    if (routeResponse) return trackAICrawler(request, routeResponse, env, ctx)
+    if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
     const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
-    if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), env, ctx)
+    if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
     if (pathname === '/' || pathname === '/index.html') {
-      return trackAICrawler(request, withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS), env, ctx)
+      return trackAICrawler(request, withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS), ctx)
     }
-    return trackAICrawler(request, assetResponse, env, ctx)
+    return trackAICrawler(request, assetResponse, ctx)
   },
 }
