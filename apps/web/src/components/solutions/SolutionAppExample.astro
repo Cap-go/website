@@ -21,6 +21,9 @@ const appExamples = example.apps.map((appReference) => ({
 }))
 const plays = example.playKeys.map((playKey) => copy(playKey))
 const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.category)).filter(Boolean))].slice(0, 3).join(', ')
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
+const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
+const showExampleCtas = solution === 'enterprise'
 ---
 
 {
@@ -34,6 +37,37 @@ const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.catego
             </p>
             <h2 class="mt-4 max-w-2xl text-3xl leading-tight font-semibold tracking-tight text-balance text-white sm:text-4xl">{copy(example.headlineKey)}</h2>
             <p class="mt-4 max-w-3xl text-base leading-7 text-pretty text-slate-300 sm:text-lg">{copy(example.useCaseKey)}</p>
+            {showExampleCtas && (
+              <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={registerUrl}
+                  class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-950/30 transition hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                >
+                  {copy('solutions_get_started')}
+                  <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.22 14.78a.75.75 0 0 1 0-1.06L12.94 6H8.75a.75.75 0 0 1 0-1.5h6a.75.75 0 0 1 .75.75v6a.75.75 0 0 1-1.5 0V7.06l-7.72 7.72a.75.75 0 0 1-1.06 0Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href={talkToTeamUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={copy('solutions_talk_to_team')}
+                  class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white px-5 py-3 text-sm font-bold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                  <span class="flex -space-x-2" aria-hidden="true">
+                    <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/martin-avatar.png" alt="" width="24" height="24" loading="lazy" />
+                    <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
+                    <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
+                  </span>
+                  <span>{copy('solutions_talk_to_team')}</span>
+                </a>
+              </div>
+            )}
           </div>
 
           <dl class="grid grid-cols-3 overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] text-center shadow-2xl shadow-black/20">
