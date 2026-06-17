@@ -4696,6 +4696,10 @@ const messages = {
   solution_app_examples_view_listing: 'View Google Play listing',
   solution_app_examples_icon_alt: '{title} app icon',
   solution_app_examples_disclaimer: 'Public store and Capgo app data is used as an example only. This is not a current customer, endorsement, or private billing-status claim.',
+  solution_app_examples_cta_kicker: 'Next release lane',
+  solution_app_examples_cta_title: 'Join apps like these. Use Capgo.',
+  solution_app_examples_cta_text: 'Create a controlled rollout channel, publish a small web update, and keep rollback ready from the first release.',
+  solution_app_examples_cta_button: 'Start shipping with Capgo',
   solution_app_examples_agencies_label: 'Agency delivery',
   solution_app_examples_agencies_headline: 'Marketplace apps need client-safe release lanes',
   solution_app_examples_agencies_use_case:

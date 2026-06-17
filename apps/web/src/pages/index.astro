@@ -18,6 +18,7 @@ import BuiltForDevelopers from '@/components/BuiltForDevelopers.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 
 const config = Astro.locals.runtimeConfig
 
@@ -107,6 +108,7 @@ const content = {
     <!-- <CompaniesLogo /> -->
     <ProblemSolution />
     <HowItWorks />
+    <SolutionAppExample solution="production-updates" randomize />
     <MonitoringFeatures />
     <ReleaseIntelligence />
     <DeviceLogs />
