@@ -1763,6 +1763,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
   .nb .term-body .sel-hint {
     opacity: 0.45;
   }
+  .nb .term-body .goog-tcaret {
+    display: inline-block;
+    width: 7px;
+    height: 13px;
+    background: #7d8590;
+    vertical-align: middle;
+    animation: ascCaret 1s step-end infinite;
+  }
   @keyframes ascOpen {
     from { opacity: 0; transform: translateY(12px) scale(0.965); }
     to { opacity: 1; transform: none; }
@@ -1785,6 +1793,16 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     animation: ascGenie 1s cubic-bezier(0.4, 0, 0.68, 0.62) 0.14s forwards;
     transform-origin: 50% 100%;
   }
+  /* Android Play Console window: a clean symmetric scale+fade minimize used for
+     both directions, so un-minimizing never glitches on class removal. */
+  .nb .desk .asc-win.goog {
+    transform-origin: 50% 118%;
+    transition: transform 0.5s cubic-bezier(0.45, 0, 0.32, 1), opacity 0.4s ease;
+  }
+  .nb .desk .asc-win.goog.goog-min {
+    opacity: 0;
+    transform: translateY(58%) scale(0.34);
+  }
   .nb .desk .term-dock {
     position: absolute;
     left: 50%;
@@ -1795,7 +1813,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.3), opacity 0.3s;
     z-index: 5;
   }
-  .nb .desk:has(.asc-win.minimizing) .term-dock {
+  .nb .desk:has(.asc-win.minimizing) .term-dock,
+  .nb .desk:has(.asc-win.goog-min) .term-dock {
     transform: translate(-50%, 0);
     opacity: 1;
   }
@@ -2657,6 +2676,491 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.65); }
     50% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
   }
+  /* ===== Guided Google sign-in window (Android) — reskins .asc-win as Chrome
+     + Google's OAuth consent flow. Inherits all window chrome, cursor, callout,
+     success, opening + minimize animations from the .asc-win rules above. ===== */
+  .nb .asc-win.goog { --asc-accent: #1a73e8; }
+  /* Just a browser tab — no invented sidebar/checklist chrome. */
+  .nb .asc-win.goog .asc-body { grid-template-columns: 1fr; }
+  .nb .asc-win.goog .asc-titlebar { height: 34px; padding-left: 11px; }
+  .nb .goog-tabstrip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 5px;
+  }
+  .nb .goog-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 190px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    background: #dfe1e4;
+    font-size: 11px;
+    font-weight: 500;
+    color: #5f6368;
+  }
+  .nb .goog-tab-t {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .nb .goog-tab2 { display: none; }
+  .nb .asc-win.goog.tab2 .goog-tab2 { display: inline-flex; }
+  .nb .asc-win.goog:not(.tab2) .goog-tab[data-tab="auth"],
+  .nb .asc-win.goog.tab2 .goog-tab[data-tab="console"] {
+    background: #fff;
+    color: #3c4043;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.05);
+  }
+  .nb .goog-tab-fav {
+    flex: none;
+    width: 13px;
+    height: 13px;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23EA4335' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%234285F4' d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23FBBC05' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%2334A853' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3C/svg%3E");
+  }
+  .nb .goog-tab-fav.play {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath fill='%2334A853' d='M2 2l20 20L2 42z'/%3E%3Cpath fill='%23FBBC04' d='M2 2l28 16-8 4z'/%3E%3Cpath fill='%23EA4335' d='M2 42l28-16-8-4z'/%3E%3Cpath fill='%234285F4' d='M30 18l8 4-8 4-8-4z'/%3E%3C/svg%3E");
+  }
+  .nb .goog-ava {
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(#5b8def, #1a73e8);
+    color: #fff;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .nb .goog-ava.sm {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    border-radius: 50%;
+  }
+  .nb .goog-page { background: #fff; }
+  .nb .goog-signin,
+  .nb .goog-verify,
+  .nb .goog-consent,
+  .nb .goog-done { background: #fff; }
+  .nb .goog-card {
+    width: 86%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 26px 24px 18px;
+    border: 1px solid #dadce0;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  .nb .goog-card.wide {
+    max-width: 332px;
+    padding: 22px 22px 16px;
+  }
+  .nb .goog-logo {
+    width: 38px;
+    height: 38px;
+    align-self: flex-start;
+    margin-bottom: 14px;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23EA4335' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%234285F4' d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23FBBC05' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%2334A853' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3C/svg%3E");
+  }
+  .nb .goog-h {
+    font-size: 20px;
+    font-weight: 400;
+    color: #202124;
+    letter-spacing: -0.01em;
+  }
+  .nb .goog-h.sm {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .nb .goog-sub {
+    font-size: 12.5px;
+    color: #202124;
+    margin-top: 6px;
+  }
+  .nb .goog-sub b { font-weight: 500; }
+  .nb .goog-field {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    margin-top: 20px;
+    border: 1px solid #5f6368;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #202124;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .nb .goog-field::before {
+    position: absolute;
+    top: -7px;
+    left: 8px;
+    padding: 0 4px;
+    background: #fff;
+    font-size: 10px;
+    color: #5f6368;
+  }
+  .nb .goog-signin .goog-field::before { content: 'Email or phone'; }
+  .nb .goog-verify .goog-field::before { content: 'Enter your password'; }
+  .nb .goog-field.hot {
+    border-color: #1a73e8;
+    box-shadow: inset 0 0 0 1px #1a73e8;
+    animation: none;
+  }
+  .nb .goog-field.hot::before { color: #1a73e8; }
+  .nb .goog-typed {
+    display: inline-block;
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width 0.75s steps(14, end);
+  }
+  .nb .goog-field.typing .goog-typed,
+  .nb .goog-field.done .goog-typed { max-width: 220px; }
+  .nb .goog-pw { letter-spacing: 2px; color: #5f6368; }
+  .nb .goog-caret {
+    display: inline-block;
+    width: 1.5px;
+    height: 16px;
+    background: #1a73e8;
+    margin-left: 1px;
+    opacity: 0;
+  }
+  .nb .goog-field.typing .goog-caret { opacity: 1; animation: ascCaret 1s step-end infinite; }
+  .nb .goog-createacct {
+    align-self: flex-start;
+    margin-top: 16px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #1a73e8;
+  }
+  .nb .goog-show {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: #202124;
+  }
+  .nb .goog-check {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #5f6368;
+    border-radius: 3px;
+  }
+  .nb .goog-acct-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    align-self: flex-start;
+    margin-top: 12px;
+    padding: 3px 12px 3px 4px;
+    border: 1px solid #dadce0;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #202124;
+  }
+  .nb .goog-acct-pill.center { align-self: center; }
+  .nb .goog-pill-x { color: #5f6368; font-size: 9px; }
+  .nb .goog-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 22px;
+  }
+  .nb .goog-link {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #1a73e8;
+  }
+  .nb .goog-next,
+  .nb .goog-allow {
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    background: #1a73e8;
+    border: none;
+    border-radius: 6px;
+    padding: 9px 22px;
+    box-shadow: none;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .nb .goog-consent-top {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .nb .goog-appicon {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #34d8a6, #1a73e8) center / 18px no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M13 2L4 14h6l-1 8 9-12h-6z'/%3E%3C/svg%3E"), linear-gradient(135deg, #34d8a6, #1a73e8);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 17px, cover;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+  .nb .goog-consent-lab {
+    font-size: 12px;
+    color: #202124;
+    margin-top: 16px;
+  }
+  .nb .goog-scopes {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .nb .goog-scopes li {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    font-size: 12px;
+    color: #3c4043;
+    line-height: 1.35;
+  }
+  .nb .goog-sc-ic {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-top: 1px;
+    background: #e8f0fe center / 10px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath fill='%231a73e8' d='M2 1l6 4-6 4z'/%3E%3C/svg%3E");
+  }
+  .nb .goog-consent-note {
+    font-size: 10.5px;
+    color: #5f6368;
+    margin-top: 14px;
+    line-height: 1.45;
+  }
+  .nb .goog-consent-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .nb .goog-btnghost {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a73e8;
+    background: none;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 6px;
+  }
+  .nb .goog-done {
+    background: radial-gradient(120% 90% at 50% -10%, #f3f6fc, #fff 60%);
+  }
+  .nb .goog-done-card {
+    width: 84%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .nb .goog-done-check {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+    color: #fff;
+    background: #1e8e3e;
+    box-shadow: 0 6px 18px rgba(30, 142, 62, 0.4);
+  }
+  .nb .goog-done-h {
+    margin-top: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #202124;
+  }
+  .nb .goog-done-p {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #5f6368;
+  }
+  .nb .goog-done-host {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: 20px;
+    background: #f1f3f4;
+    font-family: var(--nb-font-mono);
+    font-size: 10.5px;
+    color: #5f6368;
+  }
+  /* Play Console "Choose developer account" page — a centered card like the real
+     chooser (not a dashboard). The cursor picks an account, then copies the
+     developer link the CLI needs. */
+  .nb .goog-console { background: #fff; }
+  .nb .goog-pc-card {
+    width: 90%;
+    max-width: 342px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 22px 22px 16px;
+    border: 1px solid #dadce0;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  .nb .goog-pc-brand { display: flex; align-items: center; gap: 7px; }
+  .nb .goog-pc-mark {
+    width: 20px;
+    height: 20px;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath fill='%2334A853' d='M2 2l20 20L2 42z'/%3E%3Cpath fill='%23FBBC04' d='M2 2l28 16-8 4z'/%3E%3Cpath fill='%23EA4335' d='M2 42l28-16-8-4z'/%3E%3Cpath fill='%234285F4' d='M30 18l8 4-8 4-8-4z'/%3E%3C/svg%3E");
+  }
+  .nb .goog-pc-wm { font-size: 15px; font-weight: 500; color: #5f6368; letter-spacing: -0.01em; }
+  .nb .goog-pc-wm-c { color: #1a73e8; }
+  .nb .goog-pc-h2 {
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #202124;
+  }
+  .nb .goog-pc-list { width: 100%; margin-top: 12px; }
+  .nb .goog-pc-acct {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 6px;
+    border-top: 1px solid #ededf0;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #202124;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .nb .goog-pc-acct:first-child { border-top: none; }
+  .nb .goog-pc-acct.hot { background: #f1f6ff; animation: none; }
+  .nb .goog-pc-acct.sel { background: #e8f0fe; }
+  .nb .goog-pc-name { flex: 1 1 auto; min-width: 0; }
+  .nb .goog-pc-acct.create .goog-pc-name { color: #3c4043; }
+  .nb .goog-pc-plus {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #f1f3f4;
+    color: #5f6368;
+    font-size: 17px;
+  }
+  .nb .goog-team-ic {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(#5b8def, #1a73e8);
+  }
+  .nb .goog-team-ic.beta { background: linear-gradient(#34d399, #059669); }
+  /* Picking an account swaps the chooser card for the developer's dashboard. */
+  .nb .goog-console:not(.picked) .goog-dash { display: none; }
+  .nb .goog-console.picked .goog-pc-card { display: none; }
+  .nb .goog-dash {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    background: #fff;
+  }
+  .nb .goog-dash-nav {
+    flex: none;
+    width: 170px;
+    border-right: 1px solid #e8eaed;
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .nb .goog-dash-wm {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 2px 16px 14px;
+  }
+  .nb .goog-dash-wm .goog-pc-wm { font-size: 13px; }
+  .nb .goog-dn {
+    padding: 9px 16px;
+    font-size: 12px;
+    color: #3c4043;
+    border-radius: 0 20px 20px 0;
+  }
+  .nb .goog-dn.on { background: #e8f0fe; color: #1a73e8; font-weight: 600; }
+  .nb .goog-dash-main { flex: 1 1 auto; padding: 20px 24px; min-width: 0; }
+  .nb .goog-dash-acct { display: flex; align-items: center; gap: 14px; }
+  .nb .goog-team-ic.big { width: 46px; height: 46px; font-size: 18px; }
+  .nb .goog-dash-name { font-size: 19px; font-weight: 600; color: #202124; }
+  .nb .goog-dash-sub { font-size: 11.5px; color: #5f6368; margin-top: 2px; }
+  .nb .goog-dash-sub b { font-family: var(--nb-font-mono); color: #3c4043; font-weight: 600; }
+  .nb .goog-dash-cue {
+    margin-top: 13px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #1a73e8;
+  }
+  .nb .goog-dash-apps-h { margin-top: 20px; font-size: 14px; font-weight: 600; color: #202124; }
+  .nb .goog-dash-app {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 2px;
+    border-bottom: 1px solid #f1f3f4;
+    font-size: 12px;
+    color: #3c4043;
+  }
+  .nb .goog-dash-appn { flex: 1 1 auto; }
+  .nb .goog-dash-appic {
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #4f8cff, #1a4fd6);
+  }
+  .nb .goog-dash-appic.alt { background: linear-gradient(135deg, #34d8a6, #0e9f6e); }
+  .nb .goog-dash-appst { font-size: 11px; color: #5f6368; }
+  /* Copy the developer link straight from the address bar. */
+  .nb .asc-win.goog .asc-url[data-target] { cursor: pointer; }
+  .nb .asc-win.goog .asc-url.hot { border-color: #1a73e8; box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.16); animation: none; }
+  .nb .asc-win.goog .asc-url.sel { background: #b3d2fb; border-color: #1a73e8; color: #10243f; }
+  .nb .goog-url-copied {
+    flex: none;
+    font-size: 10px;
+    font-weight: 700;
+    color: #1e8e3e;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .nb .asc-win.goog.url-copied .goog-url-copied { opacity: 1; }
+  .nb .asc-win.goog[data-screen="signin"] .goog-signin,
+  .nb .asc-win.goog[data-screen="verify"] .goog-verify,
+  .nb .asc-win.goog[data-screen="consent"] .goog-consent,
+  .nb .asc-win.goog[data-screen="done"] .goog-done,
+  .nb .asc-win.goog[data-screen="console"] .goog-console {
+    opacity: 1;
+    pointer-events: auto;
+  }
   @media (prefers-reduced-motion: reduce) {
     .nb .asc-cursor,
     .nb .asc-typed,
@@ -2671,6 +3175,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .term-body,
     .nb .asc-win.minimizing,
     .nb .asc-win.asc-opening,
+    .nb .asc-win.goog,
+    .nb .goog-typed,
+    .nb .goog-caret,
+    .nb .goog-field,
+    .nb .goog-pc-row,
     .nb .asc-win .hot { transition: none !important; animation: none !important; }
   }
   .nb .wizard-before-after {
@@ -3794,42 +4303,50 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         after: 'After: one Google sign-in',
         content: [
           {
-            title: 'Keystore',
+            title: 'Sign in with Google',
+            kind: 'goog',
             lines: [
               '<span class="dim">$ </span><span class="cmd">bunx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">android</span>',
               '',
-              '<span class="ok">◆</span> Generate new keystore <span class="ghost">— or import existing</span>',
-              '<span class="ok">✔</span> Alias: <span class="val">acme-release</span>',
-              '<span class="ok">✔</span> Generated PKCS#12 / RSA-2048 <span class="ghost">(node-forge — no JDK needed)</span>',
+              '<span class="ok">◇</span> Project detected · <span class="kw">com.acme.app</span>',
+              '',
+              '<span class="cmd">?</span> Set up Android signing?',
+              '<span class="ok">❯</span> 🆕 Generate a new keystore <span class="ghost">(recommended)</span>',
+              '<span class="ghost dim">  📥 Import an existing keystore</span>',
+              '<span class="ok">✔</span> Keystore generated · <span class="kw">acme-release</span> <span class="ghost">(RSA-2048, node-forge — no JDK)</span>',
+              '',
+              '<span class="cmd">?</span> Connect Google Play for uploads?',
+              '<span class="ok">❯</span> 🌐 Sign in with Google <span class="ghost">(opens a window)</span>',
+              '<span class="ghost dim">  ⏭  Skip for now</span>',
+              '',
+              '<span class="dim">→ </span>Opening Google sign-in…',
             ],
           },
           {
-            title: 'Sign in with Google',
+            title: 'Play Console linked',
             lines: [
-              '<span class="ok">◆</span> Browser opened: <span class="kw">accounts.google.com/oauth/...</span>',
-              '<span class="dim">  PKCE + loopback HTTP server — no copy/paste codes.</span>',
-              '<span class="ok">✔</span> Authorized · scope: <span class="val">androidpublisher</span>',
-              '<span class="ok">✔</span> Signed in as <span class="val">you@acme.com</span>',
+              '<span class="ok">✔</span> Play Developer ID <span class="kw">5734907884198356768</span> <span class="ghost">(parsed from link)</span>',
+              '<span class="ok">✔</span> Play Console account linked — <span class="kw">Acme Inc</span>',
             ],
           },
           {
-            title: 'Play Console + GCP',
+            title: 'Service account',
             lines: [
-              '<span class="ok">✔</span> Play Developer ID linked',
-              '<span class="ok">✔</span> Selected GCP project: <span class="kw">acme-prod</span>',
-              '<span class="ok">✔</span> Enabled Android Publisher API',
-              '<span class="ok">✔</span> Service account: <span class="kw">capgo-builder@acme.iam…</span>',
-              '<span class="ok">✔</span> Invited into Play Console as Release Manager',
+              '<span class="ok">✔</span> GCP project selected: <span class="kw">acme-prod</span>',
+              '<span class="ok">✔</span> Android Publisher API enabled',
+              '<span class="ok">✔</span> Service account created — <span class="kw">capgo-builder@acme-prod.iam…</span>',
+              '<span class="ok">✔</span> Invited into Play Console as <span class="val">Release Manager</span>',
             ],
           },
           {
-            title: 'Save & Build',
+            title: 'Save & build',
             lines: [
-              '<span class="lock">🔒</span> Saved to <span class="kw">~/.capgo-credentials/credentials.json</span>',
-              '<span class="ghost dim">  Keystore + service account stay on your machine.</span>',
-              '<span class="dim">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">android</span>',
+              '<span class="ok">✔</span> Credentials saved',
+              '',
+              '<span class="cmd">?</span> Start your first cloud build now?  <span class="ok">❯</span> 🚀 Yes, build now',
+              '<span class="dim">→ </span>Requesting build for <span class="kw">com.acme.app</span> (android)…',
               '<span class="ok">✔</span> Build complete in <span class="val">3m 02s</span>',
-              '<span class="ok">✔</span> Uploaded to Play Console (internal) 🎉',
+              '<span class="ok">✔</span> Uploaded to Play Console (Internal track) 🎉  <span class="kw">You’re all set!</span>',
             ],
           },
         ],
@@ -3920,13 +4437,120 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
   <div class="asc-success"><span class="asc-success-check">&#10003;</span><div class="asc-success-t"><b>Key captured</b><span>Returning to your terminal&hellip;</span></div></div>
 </div>`
 
+    // Guided Google sign-in window (Android) — the same desktop window chrome as
+    // ASC, reskinned as Chrome + Google's OAuth consent flow. A cursor signs in,
+    // approves the Play Console / Android Publisher scopes, and the linked
+    // service account is provisioned. Shown on Android wizard step 1.
+    const GOOG_HTML = `
+<div class="asc-win goog" data-screen="signin">
+  <div class="asc-titlebar"><span class="asc-traffic"><i></i><i data-target="minimize"></i><i></i></span><span class="goog-tabstrip"><span class="goog-tab" data-tab="auth"><span class="goog-tab-fav"></span><span class="goog-tab-t">Sign in &ndash; Google Accounts</span></span><span class="goog-tab goog-tab2" data-tab="console"><span class="goog-tab-fav play"></span><span class="goog-tab-t">Play Console</span></span></span></div>
+  <div class="asc-body">
+    <section class="asc-browser">
+      <div class="asc-urlbar"><span class="asc-nav">&#8249;</span><span class="asc-nav">&#8250;</span><span class="asc-nav">&#8635;</span><span class="asc-url" data-target="copyUrl">accounts.google.com/o/oauth2/v2/auth</span><span class="goog-url-copied">&#10003; Copied</span><span class="asc-lock">&#128274;</span></div>
+      <div class="asc-page goog-page">
+        <div class="asc-screen goog-signin">
+          <div class="goog-card">
+            <div class="goog-logo"></div>
+            <div class="goog-h">Sign in</div>
+            <div class="goog-sub">Use your Google Account to continue to <b>Capgo&nbsp;Builder</b></div>
+            <div class="goog-field" data-field="email"><span class="goog-typed">you@acme.com</span><span class="goog-caret"></span></div>
+            <div class="goog-createacct">Create account</div>
+            <div class="goog-row"><span class="goog-link">Forgot email?</span><button class="goog-next" data-target="emailNext">Next</button></div>
+          </div>
+        </div>
+        <div class="asc-screen goog-verify">
+          <div class="goog-card">
+            <div class="goog-logo"></div>
+            <div class="goog-h">Welcome</div>
+            <div class="goog-acct-pill"><span class="goog-ava sm">M</span> you@acme.com <span class="goog-pill-x">&#9662;</span></div>
+            <div class="goog-field" data-field="pw"><span class="goog-typed goog-pw">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span><span class="goog-caret"></span></div>
+            <div class="goog-show"><span class="goog-check"></span> Show password</div>
+            <div class="goog-row"><span class="goog-link">Forgot password?</span><button class="goog-next" data-target="pwNext">Next</button></div>
+          </div>
+        </div>
+        <div class="asc-screen goog-consent">
+          <div class="goog-card wide">
+            <div class="goog-consent-top"><span class="goog-appicon"></span><div class="goog-h sm">Capgo Builder wants to access your Google&nbsp;Account</div></div>
+            <div class="goog-acct-pill center"><span class="goog-ava sm">M</span> you@acme.com</div>
+            <div class="goog-consent-lab">This will allow Capgo Builder to:</div>
+            <ul class="goog-scopes">
+              <li><span class="goog-sc-ic"></span><span>View and manage your Google Play Developer account</span></li>
+              <li><span class="goog-sc-ic"></span><span>Upload and manage app bundles, releases &amp; tracks</span></li>
+            </ul>
+            <div class="goog-consent-note">Make sure you trust Capgo Builder. You can remove access in your Google Account.</div>
+            <div class="goog-consent-actions"><button class="goog-btnghost">Cancel</button><button class="goog-allow" data-target="allow">Allow</button></div>
+          </div>
+        </div>
+        <div class="asc-screen goog-done">
+          <div class="goog-done-card">
+            <div class="goog-done-check">&#10003;</div>
+            <div class="goog-done-h">Authentication complete</div>
+            <div class="goog-done-p">Capgo CLI received your Google authorization. You can return to your terminal.</div>
+            <div class="goog-done-host"><span class="asc-lock">&#128274;</span> localhost:13415 &middot; Capgo CLI</div>
+          </div>
+        </div>
+        <div class="asc-screen goog-console">
+          <div class="goog-pc-card">
+            <div class="goog-pc-brand"><span class="goog-pc-mark"></span><span class="goog-pc-wm">Google Play <span class="goog-pc-wm-c">Console</span></span></div>
+            <div class="goog-acct-pill center"><span class="goog-ava sm">M</span> you@acme.com <span class="goog-pill-x">&#9662;</span></div>
+            <div class="goog-pc-h2">Choose developer account</div>
+            <div class="goog-pc-list">
+              <div class="goog-pc-acct" data-target="teamAcme"><span class="goog-team-ic">A</span><span class="goog-pc-name">Acme Inc</span></div>
+              <div class="goog-pc-acct" data-target="teamBeta"><span class="goog-team-ic beta">B</span><span class="goog-pc-name">Beta LLC</span></div>
+              <div class="goog-pc-acct create"><span class="goog-pc-plus">&#43;</span><span class="goog-pc-name">Create a new developer account</span></div>
+            </div>
+          </div>
+          <div class="goog-dash">
+            <aside class="goog-dash-nav">
+              <div class="goog-dash-wm"><span class="goog-pc-mark"></span><span class="goog-pc-wm">Play <span class="goog-pc-wm-c">Console</span></span></div>
+              <div class="goog-dn on">Home</div>
+              <div class="goog-dn">Policy status</div>
+              <div class="goog-dn">Users and permissions</div>
+              <div class="goog-dn">Developer account</div>
+              <div class="goog-dn">Settings</div>
+            </aside>
+            <div class="goog-dash-main">
+              <div class="goog-dash-acct">
+                <span class="goog-team-ic big">A</span>
+                <div><div class="goog-dash-name">Acme Inc</div><div class="goog-dash-sub">Organization account &middot; Account ID <b>5734907884198356768</b></div></div>
+              </div>
+              <div class="goog-dash-cue">&uarr; Copy the developer link from the address bar</div>
+              <div class="goog-dash-apps-h">3 apps</div>
+              <div class="goog-dash-app"><span class="goog-dash-appic"></span><span class="goog-dash-appn">Acme Mobile</span><span class="goog-dash-appst">Production</span></div>
+              <div class="goog-dash-app"><span class="goog-dash-appic alt"></span><span class="goog-dash-appn">Acme Lite</span><span class="goog-dash-appst">Internal testing</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="asc-cursor"></div>
+  <div class="asc-callout"></div>
+</div>`
+
     const DOCK_HTML = `<div class="term-dock"><span class="dock-ico finder"></span><span class="dock-ico launchpad"></span><span class="dock-ico term active"></span><span class="dock-ico folder"></span></div>`
-    const CMD_LINE = `<span class="row"><span class="dim">$</span> <span class="cmd">capgo build init</span> <span class="flag">--platform</span> <span class="val">ios</span></span>`
+    // Registry of "guided desktop window" step kinds. A guided step mounts a
+    // realistic app window (the same .asc-win chrome + minimize), driven by a
+    // clack-style terminal intro then a cursor animation. iOS → App Store
+    // Connect, Android → Google sign-in / Play Console.
+    type GuidedEntry = {
+      html: string
+      intro: (body: HTMLElement, onDone: () => void) => { stop: () => void }
+      anim: (stageEl: HTMLElement, onComplete?: () => void) => { stop: () => void }
+    }
+    const GUIDED: Record<string, GuidedEntry> = {
+      asc: { html: ASC_HTML, intro: runAscIntro, anim: startAscAnim },
+      goog: { html: GOOG_HTML, intro: runGoogIntro, anim: startGoogAnim },
+    }
+    const guidedFor = (c?: { kind?: string }): GuidedEntry | undefined =>
+      c && c.kind ? GUIDED[c.kind] : undefined
+    const cmdLine = () =>
+      `<span class="row"><span class="dim">$</span> <span class="cmd">capgo build init</span> <span class="flag">--platform</span> <span class="val">${currentPlatform}</span></span>`
     // The terminal is a continuous build log: the init command, then each step's
     // output accumulates beneath it (streamed line-by-line in advanceTerminal).
     function terminalLog(uptoI: number) {
-      const startK = PLATFORMS[currentPlatform].content[0]?.kind === 'asc' ? 1 : 0
-      let rows = startK === 1 ? CMD_LINE : ''
+      const startK = guidedFor(PLATFORMS[currentPlatform].content[0]) ? 1 : 0
+      let rows = startK === 1 ? cmdLine() : ''
       for (let k = startK; k <= uptoI; k++) {
         const c = PLATFORMS[currentPlatform].content[k]
         if (c) rows += c.lines.map((l) => `<span class="row">${l}</span>`).join('')
@@ -4043,7 +4667,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         q('.asc-success')?.classList.add('show')
         cursor.style.display = 'none'
         if (stepNum) stepNum.textContent = '10'
-        return { stop() {} }
+        // Reduced motion still has to hand control back to the terminal, or the
+        // wizard would stall on the App Store Connect screen forever.
+        at(900, () => { if (onComplete) onComplete() })
+        return { stop() { stopped = true; timers.forEach(clearTimeout) } }
       }
 
       function typeStart(field: string) { q(`[data-field="${field}"]`)?.classList.add('typing') }
@@ -4078,9 +4705,177 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       return { stop() { stopped = true; timers.forEach(clearTimeout) } }
     }
 
+    // Cursor walk-through of the Google sign-in window: enter email, password,
+    // approve the Play Console / Android Publisher scopes, then watch the linked
+    // service account get provisioned before the window minimizes to the dock.
+    function startGoogAnim(stageEl: HTMLElement, onComplete?: () => void): { stop: () => void } {
+      const root = stageEl
+      const q = (s: string) => root.querySelector<HTMLElement>(s)
+      const win = q('.asc-win')
+      const cursor = q('.asc-cursor')
+      const cl = q('.asc-callout')
+      const LABELS: Record<string, string> = {
+        emailNext: 'Next',
+        pwNext: 'Next',
+        allow: 'Allow access',
+      }
+      if (!win || !cursor) return { stop() {} }
+      const timers: ReturnType<typeof setTimeout>[] = []
+      let stopped = false
+      const at = (ms: number, fn: () => void) => { timers.push(setTimeout(() => { if (!stopped) fn() }, ms)) }
+      // Just the browser tab: real Google OAuth screens, then the loopback
+      // callback page the CLI's local PKCE server serves. No invented chrome.
+      const URLS: Record<string, string> = {
+        signin: 'accounts.google.com/o/oauth2/v2/auth',
+        verify: 'accounts.google.com/signin/challenge/pwd',
+        consent: 'accounts.google.com/o/oauth2/v2/auth?prompt=consent',
+        done: 'localhost:13415/callback?code=4/0Ad…',
+        console: 'play.google.com/console/u/0/developers',
+      }
+      const urlEl = q('.asc-url')
+      function setScreen(name: string) {
+        win!.dataset.screen = name
+        if (urlEl) urlEl.textContent = URLS[name] ?? urlEl.textContent
+      }
+      function moveTo(sel: string) {
+        const t = root.querySelector<HTMLElement>(sel)
+        if (!t || !win) return
+        root.querySelectorAll('.hot').forEach(e => e.classList.remove('hot'))
+        t.classList.add('hot')
+        const tr = t.getBoundingClientRect()
+        const pr = win.getBoundingClientRect()
+        const isField = !!t.dataset.field
+        const targetX = tr.left - pr.left + tr.width / 2
+        const cursorX = tr.left - pr.left + (isField ? Math.min(46, tr.width * 0.3) : tr.width / 2)
+        const cy = tr.top - pr.top + tr.height / 2
+        cursor!.style.left = cursorX + 'px'
+        cursor!.style.top = cy + 'px'
+        const label = t.dataset.target ? LABELS[t.dataset.target] : ''
+        if (cl && label) {
+          cl.textContent = label
+          cl.classList.add('show')
+          const half = cl.offsetWidth / 2
+          const clampedX = Math.max(half + 6, Math.min(targetX, pr.width - half - 6))
+          cl.style.setProperty('--arrow-x', (targetX - clampedX) + 'px')
+          cl.style.left = clampedX + 'px'
+          cl.style.top = (tr.top - pr.top) + 'px'
+        }
+        else { cl?.classList.remove('show') }
+      }
+      function press(sel: string) {
+        const t = root.querySelector<HTMLElement>(sel)
+        if (t) { t.classList.add('press'); setTimeout(() => t.classList.remove('press'), 240) }
+        cl?.classList.remove('show')
+        cursor!.classList.remove('click')
+        void cursor!.offsetWidth
+        cursor!.classList.add('click')
+      }
+      function termAppend(html: string) {
+        const b = root.querySelector<HTMLElement>('.term-body')
+        if (b) { b.insertAdjacentHTML('beforeend', html); b.scrollTop = b.scrollHeight }
+      }
+      function base() {
+        win!.classList.remove('goog-min', 'tab2', 'url-copied')
+        root.querySelectorAll('.hot').forEach(e => e.classList.remove('hot'))
+        cl?.classList.remove('show')
+        root.querySelectorAll('.goog-field').forEach(f => f.classList.remove('typing', 'done'))
+        root.querySelectorAll('.goog-team-row, .goog-pc-acct').forEach(r => r.classList.remove('sel'))
+        urlEl?.classList.remove('sel')
+        q('.goog-console')?.classList.remove('picked')
+        setScreen('signin')
+        const pr = win!.getBoundingClientRect()
+        cursor!.style.left = (pr.width * 0.55) + 'px'
+        cursor!.style.top = (pr.height * 0.55) + 'px'
+      }
+
+      const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (reduce) {
+        win.classList.add('tab2', 'url-copied')
+        setScreen('console')
+        if (urlEl) urlEl.textContent = 'play.google.com/console/u/0/developers/5734907884198356768/app-list'
+        urlEl?.classList.add('sel')
+        root.querySelector('[data-target="teamAcme"]')?.classList.add('sel')
+        q('.goog-console')?.classList.add('picked')
+        cursor.style.display = 'none'
+        // Reduced motion still has to hand control back to the terminal, or the
+        // wizard would stall on the Play Console screen forever.
+        at(900, () => { if (onComplete) onComplete() })
+        return { stop() { stopped = true; timers.forEach(clearTimeout) } }
+      }
+
+      function typeStart(field: string) { q(`[data-field="${field}"]`)?.classList.add('typing') }
+      function typeDone(field: string) { const f = q(`[data-field="${field}"]`); f?.classList.remove('typing'); f?.classList.add('done') }
+      function run() {
+        if (stopped) return
+        base()
+        // The real CLI offers a tutorial/website/continue select before it
+        // sends you to the browser — replayed clack-style during the beat below.
+        const SEL: IntroPrompt = { q: 'Copy your Play Console developer link', opts: ['🎬 Watch the 60s tutorial', '🌐 Open Play Console in your browser', '⏎ Continue — I already have it'], pick: 1 }
+        const PASTE_Q = 'Paste your Play Console developer account link'
+        const PASTE_LINK = 'play.google.com/console/u/0/developers/5734907884198356768/app-list'
+        const PASTE_WAIT = `<span class="row"><span class="kw">◆</span> ${PASTE_Q}</span><span class="row dim"><span class="ghost">│</span>  <span class="goog-tcaret"></span></span>`
+        const PASTE_FILLED = `<span class="row"><span class="ok">◇</span> ${PASTE_Q}</span><span class="row dim"><span class="ghost">│</span>  <span class="kw">${PASTE_LINK}</span></span>`
+        let beatLog = ''
+        const renderTerm = (html: string) => { const b = root.querySelector<HTMLElement>('.term-body'); if (b) { b.innerHTML = beatLog + html; b.scrollTop = b.scrollHeight } }
+        // Act 1 — Google OAuth sign-in.
+        at(450, () => { moveTo('[data-field="email"]') })
+        at(1250, () => { typeStart('email') })
+        at(2150, () => { typeDone('email'); moveTo('[data-target="emailNext"]') })
+        at(2900, () => { press('[data-target="emailNext"]'); setScreen('verify'); moveTo('[data-field="pw"]') })
+        at(3800, () => { typeStart('pw') })
+        at(4700, () => { typeDone('pw'); moveTo('[data-target="pwNext"]') })
+        at(5450, () => { press('[data-target="pwNext"]'); setScreen('consent') })
+        at(6450, () => { moveTo('[data-target="allow"]') })
+        at(7350, () => { press('[data-target="allow"]'); setScreen('done') })
+        // Minimize the sign-in window once the cursor reaches the button.
+        at(8200, () => { moveTo('[data-target="minimize"]') })
+        at(9150, () => { press('[data-target="minimize"]'); win!.classList.add('goog-min') })
+        // Terminal beat (window minimized): tutorial / website / continue select.
+        at(10200, () => {
+          termAppend('<span class="row"><span class="ok">✔</span> Google sign-in complete · <span class="val">you@acme.com</span></span>')
+          const b = root.querySelector<HTMLElement>('.term-body'); if (b) { b.classList.add('no-anim'); beatLog = b.innerHTML }
+        })
+        at(10650, () => renderTerm(selActive(SEL, 0)))
+        at(11250, () => renderTerm(selActive(SEL, 1)))
+        at(11850, () => renderTerm(selActive(SEL, 2)))
+        at(12450, () => renderTerm(selActive(SEL, 1)))
+        // Select collapses; the CLI now blocks at the paste prompt and waits for
+        // the link — it stays on screen the whole time you're in the browser.
+        at(13050, () => { beatLog += selAnswered(SEL); renderTerm(PASTE_WAIT) })
+        // "Open in your browser" chosen. Prep the Play Console tab while minimized.
+        at(13400, () => { win!.classList.add('tab2'); setScreen('console') })
+        at(13750, () => { win!.classList.remove('goog-min') })
+        // Choose the developer account → land on its Play Console dashboard.
+        at(14900, () => { moveTo('[data-target="teamAcme"]') })
+        at(15800, () => { press('[data-target="teamAcme"]'); root.querySelector('[data-target="teamAcme"]')?.classList.add('sel'); q('.goog-console')?.classList.add('picked'); if (urlEl) urlEl.textContent = PASTE_LINK })
+        // Copy the developer link straight from the address bar.
+        at(17000, () => { moveTo('[data-target="copyUrl"]') })
+        at(17900, () => { press('[data-target="copyUrl"]'); urlEl?.classList.add('sel'); win!.classList.add('url-copied') })
+        // Minimize for good — back at the terminal the paste prompt is waiting.
+        at(19800, () => { moveTo('[data-target="minimize"]') })
+        at(20700, () => { press('[data-target="minimize"]'); win!.classList.add('goog-min') })
+        // Paste the copied link into the waiting prompt (a real paste lands at once).
+        at(21700, () => { renderTerm(PASTE_FILLED) })
+        at(22250, () => { if (onComplete) onComplete() })
+      }
+      run()
+      return { stop() { stopped = true; timers.forEach(clearTimeout) } }
+    }
+
     function getSteps() {
       return wizardEl!.querySelectorAll<HTMLElement>(`.wizard-step[data-platform="${currentPlatform}"]`)
     }
+
+    // Shared clack-style select rendering for the guided-window terminal intros.
+    // `selActive` paints a prompt mid-navigation (a highlighted cursor walking the
+    // options); `selAnswered` collapses it to the single chosen line.
+    type IntroPrompt = { q: string; opts: string[]; pick: number }
+    const selAnswered = (p: IntroPrompt) =>
+      `<span class="row"><span class="ok">◇</span> ${p.q}</span><span class="row dim"><span class="ghost">│</span>  ${p.opts[p.pick]}</span>`
+    const selActive = (p: IntroPrompt, sel: number) =>
+      `<span class="row"><span class="kw">◆</span> ${p.q}</span>` +
+      p.opts.map((o, i) => `<span class="row sel-opt${i === sel ? ' on' : ''}"><span class="ghost">│</span> ${i === sel ? '<span class="opt-ptr">❯</span>' : ' '} ${o}</span>`).join('') +
+      '<span class="row sel-hint"><span class="ghost">│</span>  ↑/↓ move · ↵ select</span>'
 
     // Animate the two opening `build init` selects like the real clack TUI: a
     // highlighted cursor walks the options, then the prompt collapses to a single
@@ -4093,30 +4888,55 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
 
       const CMD = '<span class="row"><span class="dim">$ </span><span class="cmd">bunx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">ios</span></span>'
       const DETECT = '<span class="row"><span class="ok">◇</span> Project detected · <span class="kw">com.acme.app</span></span>'
-      type Prompt = { q: string; opts: string[]; pick: number }
-      const P1: Prompt = { q: 'How do you want to set up iOS credentials?', opts: ['🆕 Create new via App Store Connect API', '📥 Import existing from this Mac (Keychain + Xcode profiles)'], pick: 0 }
-      const P2: Prompt = { q: 'Do you already have an App Store Connect API key (.p8)?', opts: ['✨ No — create one for me <span class="ghost">(guided, opens a window)</span>', '✓  Yes — I have a .p8 file'], pick: 0 }
-      const answered = (p: Prompt) =>
-        `<span class="row"><span class="ok">◇</span> ${p.q}</span><span class="row dim"><span class="ghost">│</span>  ${p.opts[p.pick]}</span>`
-      const active = (p: Prompt, sel: number) =>
-        `<span class="row"><span class="kw">◆</span> ${p.q}</span>` +
-        p.opts.map((o, i) => `<span class="row sel-opt${i === sel ? ' on' : ''}"><span class="ghost">│</span> ${i === sel ? '<span class="opt-ptr">❯</span>' : ' '} ${o}</span>`).join('') +
-        '<span class="row sel-hint"><span class="ghost">│</span>  ↑/↓ move · ↵ select</span>'
+      const P1: IntroPrompt = { q: 'How do you want to set up iOS credentials?', opts: ['🆕 Create new via App Store Connect API', '📥 Import existing from this Mac (Keychain + Xcode profiles)'], pick: 0 }
+      const P2: IntroPrompt = { q: 'Do you already have an App Store Connect API key (.p8)?', opts: ['✨ No — create one for me <span class="ghost">(guided, opens a window)</span>', '✓  Yes — I have a .p8 file'], pick: 0 }
       let log = ''
       const render = (live: string) => { body.innerHTML = log + live }
 
       at(120, () => { log = CMD; render('') })
       at(640, () => { log = CMD + DETECT; render('') })
-      at(1180, () => render(active(P1, 0)))
-      at(1780, () => render(active(P1, 1)))
-      at(2340, () => render(active(P1, 0)))
-      at(2900, () => { log = CMD + DETECT + answered(P1); render('') })
-      at(3380, () => render(active(P2, 0)))
-      at(3980, () => render(active(P2, 1)))
-      at(4540, () => render(active(P2, 0)))
-      at(5100, () => { log = CMD + DETECT + answered(P1) + answered(P2); render('') })
+      at(1180, () => render(selActive(P1, 0)))
+      at(1780, () => render(selActive(P1, 1)))
+      at(2340, () => render(selActive(P1, 0)))
+      at(2900, () => { log = CMD + DETECT + selAnswered(P1); render('') })
+      at(3380, () => render(selActive(P2, 0)))
+      at(3980, () => render(selActive(P2, 1)))
+      at(4540, () => render(selActive(P2, 0)))
+      at(5100, () => { log = CMD + DETECT + selAnswered(P1) + selAnswered(P2); render('') })
       at(5560, () => { log += '<span class="row"><span class="dim">→ </span>Opening guided App Store Connect setup…</span>'; render('') })
       at(6200, () => { body.classList.remove('no-anim'); onDone() })
+
+      return { stop() { stopped = true; timers.forEach(clearTimeout); body.classList.remove('no-anim') } }
+    }
+
+    // Android counterpart: generate the keystore, then choose to sign in with
+    // Google — the second select hands off to the guided browser window.
+    function runGoogIntro(body: HTMLElement, onDone: () => void): { stop: () => void } {
+      const timers: ReturnType<typeof setTimeout>[] = []
+      let stopped = false
+      const at = (ms: number, fn: () => void) => { timers.push(setTimeout(() => { if (!stopped) fn() }, ms)) }
+      body.classList.add('no-anim')
+
+      const CMD = '<span class="row"><span class="dim">$ </span><span class="cmd">bunx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">android</span></span>'
+      const DETECT = '<span class="row"><span class="ok">◇</span> Project detected · <span class="kw">com.acme.app</span></span>'
+      const KEYGEN = '<span class="row"><span class="ok">✔</span> Keystore generated · <span class="kw">acme-release</span> <span class="ghost">(RSA-2048, node-forge — no JDK)</span></span>'
+      const P1: IntroPrompt = { q: 'Set up Android signing?', opts: ['🆕 Generate a new keystore <span class="ghost">(recommended)</span>', '📥 Import an existing keystore'], pick: 0 }
+      const P2: IntroPrompt = { q: 'Connect Google Play for uploads?', opts: ['🌐 Sign in with Google <span class="ghost">(opens a window)</span>', '⏭  Skip for now'], pick: 0 }
+      let log = ''
+      const render = (live: string) => { body.innerHTML = log + live }
+
+      at(120, () => { log = CMD; render('') })
+      at(640, () => { log = CMD + DETECT; render('') })
+      at(1180, () => render(selActive(P1, 0)))
+      at(1780, () => render(selActive(P1, 1)))
+      at(2340, () => render(selActive(P1, 0)))
+      at(2900, () => { log = CMD + DETECT + selAnswered(P1) + KEYGEN; render('') })
+      at(3500, () => render(selActive(P2, 0)))
+      at(4100, () => render(selActive(P2, 1)))
+      at(4660, () => render(selActive(P2, 0)))
+      at(5220, () => { log = CMD + DETECT + selAnswered(P1) + KEYGEN + selAnswered(P2); render('') })
+      at(5680, () => { log += '<span class="row"><span class="dim">→ </span>Opening Google sign-in…</span>'; render('') })
+      at(6320, () => { body.classList.remove('no-anim'); onDone() })
 
       return { stop() { stopped = true; timers.forEach(clearTimeout); body.classList.remove('no-anim') } }
     }
@@ -4128,30 +4948,32 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       if (ascIntro) { ascIntro.stop(); ascIntro = null }
       const total = PLATFORMS[currentPlatform].content.length
       const head = `<h4>Step ${i + 1} / ${total} — ${c.title}</h4>`
-      if (c.kind === 'asc') {
+      const guided = guidedFor(c)
+      if (guided) {
         // Drive the real onboarding the way the CLI actually feels: type the
         // command, play out each interactive select (a highlighted cursor walks
         // the options, Enter collapses it to an answered line — clack-style),
-        // and only then fade in the guided App Store Connect window.
+        // and only then fade in the guided desktop window (App Store Connect on
+        // iOS, Google sign-in on Android).
         stage!.innerHTML = `${head}<div class="desk" aria-hidden="true">${termWin('')}${DOCK_HTML}</div>`
         const body = stage!.querySelector<HTMLElement>('.term-body')
-        const openAscWindow = () => {
+        const openGuidedWindow = () => {
           if (body && !body.isConnected) return
           const desk = stage!.querySelector('.desk')
           const dock = stage!.querySelector('.term-dock')
-          if (dock) dock.insertAdjacentHTML('beforebegin', ASC_HTML)
-          else if (desk) desk.insertAdjacentHTML('beforeend', ASC_HTML)
+          if (dock) dock.insertAdjacentHTML('beforebegin', guided.html)
+          else if (desk) desk.insertAdjacentHTML('beforeend', guided.html)
           stage!.querySelector('.asc-win')?.classList.add('asc-opening')
-          if (play) ascAnim = startAscAnim(stage!, onComplete)
+          if (play) ascAnim = guided.anim(stage!, onComplete)
         }
         const reduceIntro = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
         if (play && !reduceIntro && body) {
-          ascIntro = runAscIntro(body, openAscWindow)
+          ascIntro = guided.intro(body, openGuidedWindow)
         } else {
           // Resting state (off-screen) + reduced motion: show the full log as
           // static text; only surface the guided window when actually playing.
           if (body) body.innerHTML = c.lines.map((l) => `<span class="row">${l}</span>`).join('')
-          if (play) openAscWindow()
+          if (play) openGuidedWindow()
         }
       } else {
         stage!.innerHTML = `${head}<div class="desk" aria-hidden="true">${termWin(terminalLog(i))}${DOCK_HTML}</div>`
@@ -4189,7 +5011,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         ;(s as HTMLElement).onclick = () => {
           if (autoTimer) { clearInterval(autoTimer); autoTimer = null }
           idx = j
-          paint(idx, PLATFORMS[currentPlatform].content[j]?.kind === 'asc')
+          paint(idx, !!guidedFor(PLATFORMS[currentPlatform].content[j]))
         }
       })
       playing = false
@@ -4205,7 +5027,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       s.onclick = () => {
         if (autoTimer) { clearInterval(autoTimer); autoTimer = null }
         idx = j
-        paint(idx, PLATFORMS[currentPlatform].content[j]?.kind === 'asc')
+        paint(idx, !!guidedFor(PLATFORMS[currentPlatform].content[j]))
       }
     })
     paint(0)
@@ -4253,7 +5075,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     function startAutoplay() {
       if (playing || completed || !inView || !pageVisible) return
       idx = 0
-      if (PLATFORMS[currentPlatform].content[0]?.kind === 'asc') {
+      if (guidedFor(PLATFORMS[currentPlatform].content[0])) {
         playing = true
         paint(0, true, () => {
           completed = true
