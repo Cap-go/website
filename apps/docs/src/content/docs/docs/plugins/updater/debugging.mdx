@@ -38,7 +38,42 @@ Capgo logs can include metadata for the event. In the dashboard, use the action 
 | **no_channel** (**NoChannelOrOverride**)                              | No default channel is configured for this app and the device has no specific channel override assigned. At least one must be present for updates to work.                                                                                                   |
 | **rate_limited** (**rateLimited**)                                    | The device has been rate limited due to excessive requests.                                                                                                                                                                                                |
 | **key_id_mismatch** (**keyMismatch**)                                 | The device's encryption public key does not match the public key used to encrypt the bundle. Metadata includes `device_key_id`, `bundle_key_id`, and `version` to help identify the mismatch.                                                              |
+| **disable_prod_build** (**disableProdBuild**)                          | A production build called `/updates` was blocked by channel policy.                                                                                                            |
+| **disable_device** (**disableDevice**)                                 | A normal phone/tablet was blocked because this channel blocks real devices.                                                                                                                  |
+| **disable_platform_electron** (**disablePlatformElectron**)             | Electron is blocked in this channel.                                                                                                                                                                                     |
+| **customIdBlocked**                                                  | A custom device ID was sent, but this app does not accept custom IDs, so it is ignored.                                                                     |
+| **backend_refusal**                                                  | `v4` of the updater is not supported anymore. Upgrade to updater `v5` at least (with Capacitor `v5`), and prefer `v8` because old Capacitor versions can no longer be updated through app store pipelines.                                                                                            |
 
+### Quick fixes for policy / configuration issues
+
+| Code | Why this happens | What to do next |
+| ---- | ---------------- | ------------- |
+| `invalidIp` | Capgo detected traffic that looks like bot traffic (Google/cloud infrastructure IP). | Ignore on real users; retry from real devices and normal networks, or check after some time. |
+| `needPlanUpgrade` | Organization reached plan/device limit. | Upgrade plan in dashboard or wait for next billing cycle. |
+| `semver_error` | Native app version in config is missing or not valid semver (`x.y.z`). | Set `plugins.CapacitorUpdater.version` to valid semver, then verify it in the [SemVer tester](https://capgo.app/semver_tester/) and rebuild the app. |
+| `disablePlatformIos` | iOS is disabled in channel policy. | If this was accidental, enable iOS in that channel and republish routing. If you intentionally block iOS in this track, keep it off and move iOS builds to a separate channel. |
+| `disablePlatformAndroid` | Android is disabled in channel policy. | If this was accidental, enable Android in that channel and republish routing. If you intentionally block Android in this track, keep it off and move Android builds to a separate channel. |
+| `disableAutoUpdate` | Channel auto-update mode blocks this update style. | Change channel auto-update policy (major/minor/patch/metadata/none) to allow your intended rollout. |
+| `disableAutoUpdateUnderNative` | Channel is set to block updates older than the device baseline. | Push a version at or above the native baseline, or disable that under-native protection. |
+| `disableAutoUpdateMetadata` | Channel requires `min_update_version` metadata and the app is older. | Set `min_update_version` for the target bundle or release from a newer native version. |
+| `disableAutoUpdateToMajor` | The channel blocks major version jumps. | Keep major versions in the same channel strategy, or allow major jumps for this track. |
+| `disableAutoUpdateToMinor` | The channel blocks minor version jumps. | Keep minor versions in the same channel strategy, or allow minor jumps for this track. |
+| `disableAutoUpdateToPatch` | The channel blocks patch-level jumps for this flow. | Align your release cadence, or open patch jumps in channel policy for this track. |
+| `disableEmulator` | Emulator updates are not allowed for this channel. | If this was accidental, turn on emulator updates in a test channel where you validate emulators. If intentional, keep this channel emulator-blocked and use another channel for emulator builds. |
+| `disableDevBuild` | Dev builds are blocked for this channel. | If this was accidental, allow dev updates or move this device to a dev-enabled channel. If this is intentional, keep this channel locked to release builds only. |
+| `disableProdBuild` | A device build in production mode called `/updates`, while your channel blocked it. | If this was accidental, allow production updates in that channel and republish. If this is intentional, keep the restriction and send production builds to the proper channel/build. |
+| `cannotGetBundle` | Capgo could not build a valid download URL for the selected bundle. | Re-upload the bundle or regenerate manifests and check R2/public bundle settings. |
+| `cannotUpdateViaPrivateChannel` | App tried to self-switch to a private channel that does not allow self-assignment. | Enable `allow_device_self_set` on the channel or switch to a public/allowed channel. |
+| `channelMisconfigured` | Channel auto-update rule is missing required data (`version_number` without `min_update_version`). | Fill the missing config for that rule or switch to a simpler auto-update mode. |
+| `missingBundle` | Bundle has no downloadable payload (missing `external_url`/`r2_path` and no manifest). | Rebuild/re-upload the version and verify the bundle has real file content. |
+| `NoChannelOrOverride` | No channel matched this device (no cloud default + no config fallback + no override). | Set a channel default in dashboard or keep a test `defaultChannel` in that build. |
+| `rateLimited` | Too many update/channel calls in a short time (often render-loop `setChannel`/`getChannel`). | Stop calling in render. Only call on user action. Use `defaultChannel` in `capacitor.config`. |
+| `keyMismatch` | The app and bundle encryption key IDs differ (`device_key_id` vs `bundle_key_id`). | In the console, compare device and bundle key IDs. If they differ, publish with the same key and matching CLI/plugin version; key encoding can differ between versions. |
+| `disableDevice` | A real phone/tablet was blocked because this channel is set to block real devices. | If accidental, turn on real-device updates in that channel. If intentional, keep it blocked and route real devices to another channel. |
+| `disablePlatformElectron` | Electron is blocked in this channel. | If this was accidental, enable Electron in this channel and republish routing. If intentional, keep it blocked and send Electron users to a dedicated channel. |
+| `customIdBlocked` | A custom device ID was sent, but this app does not accept custom IDs. | Turn off custom ID sending or enable custom IDs only if your workflow requires it. |
+| `blocked_by_server_url` | The app has `server.url` configured, so Capacitor serves remote URL instead of local files. | Remove/clear `server.url` for production builds and keep update payloads local. |
+| `backend_refusal` | The updater is `v4`, which the backend no longer accepts. | Upgrade plugin/CLI to `v5`+ (prefer `v8`), with Capacitor `v5`+, then rebuild and republish bundle metadata. |
 
 ### Sent from the device
 
@@ -50,6 +85,7 @@ Capgo logs can include metadata for the event. In the dashboard, use the action 
 | **set**               | A bundle has been set on the device.                                              |
 | **set_fail**          | The bundle failed to set.                                                         |
 | **reset**             | The device reset to the `builtin` bundle.                                         |
+| **download_0**        | The download sequence started at 0% progress.                                    |
 | **download_XX**       | A new bundle has been downloaded - progress indicated by XX% (increments of 10%). |
 | **download_complete** | The new bundle has finished downloading.                                          |
 | **download_manifest_start** | The device started downloading the update manifest.                             |
@@ -76,14 +112,16 @@ Capgo logs can include metadata for the event. In the dashboard, use the action 
 | **app_killed_excessive_resource_usage** | The OS killed the app for excessive resource use. Metadata can include the resource type or platform reason when available. |
 | **app_initialization_failure** | The updater or app startup flow failed before normal runtime was ready. Metadata can include the failing step and error message. |
 | **app_memory_warning** | iOS reported a memory warning. Metadata can include the active bundle and memory context when available. |
-| **webview_javascript_error** | The WebView reported an uncaught JavaScript error. Metadata can include the message, source URL, line, column, and stack. |
-| **webview_unhandled_rejection** | The WebView reported an unhandled promise rejection. Metadata can include the rejection reason, source URL, and stack. |
-| **webview_resource_error** | A WebView resource failed to load. Metadata can include the URL, status code, resource type, and error message. |
-| **webview_security_policy_violation** | The WebView reported a content security policy violation. Metadata can include the blocked URI, directive, and document URL. |
-| **webview_unclean_restart** | The app detected a previous WebView session that did not shut down cleanly. This can help identify crash loops after an update. |
-| **webview_render_process_gone** | Android reported that the WebView renderer process exited. Metadata can include whether the renderer crashed and the renderer priority. |
-| **webview_content_process_terminated** | iOS reported that the WebView content process terminated. Metadata can include the active bundle and page URL when available. |
+| **webview_javascript_error** | The WebView reported an uncaught JavaScript error. Metadata can include the message, source URL, line, column, and stack. Install Sentry in both places: JS SDK in your web app and native SDK in iOS/Android, then compare sessions to fix the exact line causing the error. |
+| **webview_unhandled_rejection** | The WebView reported an unhandled promise rejection. Metadata can include the rejection reason, source URL, and stack. Install Sentry in both places (JS + native) so async failures are visible with user/device/session context. |
+| **webview_resource_error** | A WebView resource failed to load. Metadata can include the URL, status code, resource type, and error message. Install Sentry (JS + native) to capture the failing URL and environment context, then patch broken asset loading faster. |
+| **webview_security_policy_violation** | The WebView reported a content security policy violation. Metadata can include the blocked URI, directive, and document URL. Install Sentry (JS + native) to see when and where CSP blocks happen in real sessions and update rules safely. |
+| **webview_unclean_restart** | The app detected a previous WebView session that did not shut down cleanly. This can help identify crash loops after an update. Add Sentry in both JS and native sides to connect restart events with surrounding errors. |
+| **webview_render_process_gone** | Android reported that the WebView renderer process exited. Metadata can include whether the renderer crashed and the renderer priority. Install Sentry (JS + native) to tie renderer exits to recent crashes and device logs. |
+| **webview_content_process_terminated** | iOS reported that the WebView content process terminated. Metadata can include the active bundle and page URL when available. Install Sentry on JS and native layers so you get timing, URL, and session context around each content-process end. |
 | **decrypt_fail**        | Failed to decrypt the downloaded bundle.                                          |
+| **os_version_changed** | The device OS version changed between checks. This is used to correlate update behavior with OS-level changes. |
+| **native_app_version_changed** | The native app version changed (for example from a native rollout), helping separate native and web-view behavior changes. |
 | **get_channel** (**getChannel**) | The current channel for the device was queried.                                   |
 | **set_channel** (**setChannel**) | A channel was successfully set for the device.                                    |
 | **uninstall**           | The application was uninstalled or Capgo data cleared.                            |

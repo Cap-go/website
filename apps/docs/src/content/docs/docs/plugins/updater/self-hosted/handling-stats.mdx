@@ -73,8 +73,7 @@ Here is an example of code in JavaScript to save the stats of the plugin:
 ```typescript
 interface AppInfos {
   version_name: string
-  action: 'ping' |
-          'delete' |
+  action: 'delete' |
           'reset' |
           'set' |
           'get' |
@@ -96,13 +95,6 @@ interface AppInfos {
           'download_80' |
           'download_90' |
           'download_complete' |
-          'download_manifest_start' |
-          'download_manifest_complete' |
-          'download_zip_start' |
-          'download_zip_complete' |
-          'download_manifest_file_fail' |
-          'download_manifest_checksum_fail' |
-          'download_manifest_brotli_fail' |
           'decrypt_fail' |
           'app_moved_to_foreground' |
           'app_moved_to_background' |
@@ -121,16 +113,47 @@ interface AppInfos {
           'disableAutoUpdateUnderNative' |
           'disableDevBuild' |
           'disableEmulator' |
+          'disablePlatformElectron' |
+          'disableProdBuild' |
+          'disableDevice' |
+          'customIdBlocked' |
           'cannotGetBundle' |
           'checksum_fail' |
+          'checksum_required' |
           'NoChannelOrOverride' |
           'setChannel' |
           'getChannel' |
           'rateLimited' |
           'disableAutoUpdate' |
-          'InvalidIp' |
           'keyMismatch' |
-          'blocked_by_server_url'
+          'ping' |
+          'InvalidIp' |
+          'blocked_by_server_url' |
+          'download_manifest_start' |
+          'download_manifest_complete' |
+          'download_zip_start' |
+          'download_zip_complete' |
+          'download_manifest_file_fail' |
+          'download_manifest_checksum_fail' |
+          'download_manifest_brotli_fail' |
+          'backend_refusal' |
+          'app_crash' |
+          'app_crash_native' |
+          'app_anr' |
+          'app_killed_low_memory' |
+          'app_killed_excessive_resource_usage' |
+          'app_initialization_failure' |
+          'app_memory_warning' |
+          'webview_javascript_error' |
+          'webview_unhandled_rejection' |
+          'webview_resource_error' |
+          'webview_security_policy_violation' |
+          'webview_unclean_restart' |
+          'webview_render_process_gone' |
+          'webview_content_process_terminated' |
+          'os_version_changed' |
+          'native_app_version_changed' |
+          'download_0'
   version_build: string
   version_code: string
   version_os: string
