@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-17T08:37:56.714Z
-updated_at: 2026-06-17T08:37:57.617Z
+updated_at: 2026-06-17T08:40:34.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/69b9525a-e0b1-46c8-8e85-ec7fe1d08d5a/yarn-clear-cache-guide.jpg'
 head_image_alt: 'How to Yarn Clear Cache: A Guide for V1, Berry, and CI/CD'
 keywords: 'yarn clear cache, yarn cache, yarn berry, node.js, ci/cd'
