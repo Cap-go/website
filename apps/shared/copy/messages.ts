@@ -4693,12 +4693,12 @@ const messages = {
   solution_app_examples_example_type: 'Example type',
   solution_app_examples_store_categories: 'Store categories',
   solution_app_examples_source: 'Source',
-  solution_app_examples_public_store_dataset: 'Public store dataset',
+  solution_app_examples_public_store_dataset: 'Public store and Capgo app dataset',
   solution_app_examples_installs: '{count} installs',
   solution_app_examples_rating: '{score} rating',
   solution_app_examples_view_listing: 'View Google Play listing',
   solution_app_examples_icon_alt: '{title} app icon',
-  solution_app_examples_disclaimer: 'Public app store data is used as an example only. This is not a Capgo customer claim.',
+  solution_app_examples_disclaimer: 'Public store and Capgo app data is used as an example only. This is not a current customer, endorsement, or private billing-status claim.',
   solution_app_examples_agencies_label: 'Agency delivery',
   solution_app_examples_agencies_headline: 'Marketplace apps need client-safe release lanes',
   solution_app_examples_agencies_use_case:
@@ -4773,7 +4773,7 @@ const messages = {
   solution_app_examples_enterprise_headline: 'Workforce and account apps need governed changes at scale',
   solution_app_examples_enterprise_use_case:
     'Payroll, carrier, and customer account apps serve many roles and regulated workflows. Enterprise teams need staged rollout, audit-friendly release records, and controlled recovery when an update misbehaves.',
-  solution_app_examples_enterprise_app_1_note: 'Workforce app where payroll, HR, and employee self-service changes need governance.',
+  solution_app_examples_enterprise_app_1_note: 'Public Capgo app example where discovery, recommendation, and account surfaces need governed production updates.',
   solution_app_examples_enterprise_app_2_note: 'Carrier account app with payments, plan management, support, and device workflows.',
   solution_app_examples_enterprise_app_3_note: 'Telecom self-service app where account and billing surfaces need staged rollout.',
   solution_app_examples_enterprise_app_4_note: 'Telecom account app where billing, plan, and support changes need controlled rollout.',

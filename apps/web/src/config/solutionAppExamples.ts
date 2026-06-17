@@ -123,7 +123,7 @@ export const solutionAppExamples = {
     headlineKey: 'solution_app_examples_enterprise_headline',
     useCaseKey: 'solution_app_examples_enterprise_use_case',
     apps: [
-      { appId: 'com.paylocity.paylocitymobile', noteKey: 'solution_app_examples_enterprise_app_1_note' },
+      { appId: 'com.shelf.app', noteKey: 'solution_app_examples_enterprise_app_1_note' },
       { appId: 'ua.vodafone.myvodafone', noteKey: 'solution_app_examples_enterprise_app_2_note' },
       { appId: 'com.orange.miorange', noteKey: 'solution_app_examples_enterprise_app_3_note' },
       { appId: 'com.swisscom.myswisscom', noteKey: 'solution_app_examples_enterprise_app_4_note' },
