@@ -9,7 +9,7 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = `${brand} | ${m.integrations_title({}, { locale })}`
 const description = m.integrations_subtitle({}, { locale })
 
-const content = { title, description }
+const content = { title, description, image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-integrations.png` }
 
 const trustedFreelancers = [
   {
