@@ -4535,7 +4535,7 @@ const messages = {
   native_build_v2_wiz_lead:
     'Run it once for iOS, once for Android. Drop one .p8 for Apple, sign in once with Google for Play. Capgo handles certs, profiles, keystores and service accounts — everything you would normally do by hand in two consoles. No App Store Connect key yet? On macOS, Capgo can create one for you, guided.',
   native_build_v2_wiz_ios_s1_l: 'App Store Connect API key',
-  native_build_v2_wiz_ios_s1_d: 'Drop your .p8 — or let Capgo create one, guided. Key ID + Issuer auto-detected.',
+  native_build_v2_wiz_ios_s1_d: 'Pick guided creation or drop your own .p8 — Capgo opens App Store Connect, creates the key and captures Key ID + Issuer for you.',
   native_build_v2_wiz_ios_s2_l: 'Distribution certificate',
   native_build_v2_wiz_ios_s2_d: 'CSR → cert → P12, generated for you',
   native_build_v2_wiz_ios_s3_l: 'Provisioning profile',

@@ -1748,6 +1748,28 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
   .nb .term-body .row {
     animation: rowIn 0.3s ease both;
   }
+  .nb .term-body.no-anim .row {
+    animation: none;
+  }
+  .nb .term-body .sel-opt.on {
+    background: rgba(56, 189, 248, 0.14);
+    border-radius: 5px;
+    color: #eaf2ff;
+  }
+  .nb .term-body .opt-ptr {
+    color: #34d8a6;
+    font-weight: 700;
+  }
+  .nb .term-body .sel-hint {
+    opacity: 0.45;
+  }
+  @keyframes ascOpen {
+    from { opacity: 0; transform: translateY(12px) scale(0.965); }
+    to { opacity: 1; transform: none; }
+  }
+  .nb .desk .asc-win.asc-opening {
+    animation: ascOpen 0.44s cubic-bezier(0.2, 0.85, 0.25, 1);
+  }
   @keyframes rowIn {
     from { opacity: 0; transform: translateY(4px); }
     to { opacity: 1; transform: none; }
@@ -2648,6 +2670,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .term-screen.opening .dock-ico.term,
     .nb .term-body,
     .nb .asc-win.minimizing,
+    .nb .asc-win.asc-opening,
     .nb .asc-win .hot { transition: none !important; animation: none !important; }
   }
   .nb .wizard-before-after {
@@ -3726,40 +3749,42 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             lines: [
               '<span class="dim">$ </span><span class="cmd">bunx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">ios</span>',
               '',
-              '<span class="ok">◆</span> Native file picker opened',
-              '<span class="ok">✔</span> Selected: <span class="kw">AuthKey_ABC123XYZ.p8</span>',
-              '<span class="ok">✔</span> Auto-detected Key ID: <span class="val">ABC123XYZ</span>',
-              '<span class="ok">✔</span> Issuer ID: <span class="val">69a6de1f-…</span>',
-              '<span class="ok">✔</span> JWT verified · Team: <span class="kw">Acme Inc</span>',
+              '<span class="ok">◇</span> Project detected · <span class="kw">com.acme.app</span>',
+              '',
+              '<span class="cmd">?</span> How do you want to set up iOS credentials?',
+              '<span class="ok">❯</span> 🆕 Create new via App Store Connect API',
+              '<span class="ghost dim">  📥 Import existing from this Mac (Keychain + Xcode profiles)</span>',
+              '',
+              '<span class="cmd">?</span> Do you already have an App Store Connect API key (.p8)?',
+              '<span class="ok">❯</span> ✨ No — create one for me <span class="ghost">(guided, opens a window)</span>',
+              '<span class="ghost dim">  ✓  Yes — I have a .p8 file</span>',
+              '',
+              '<span class="dim">→ </span>Opening guided App Store Connect setup…',
             ],
           },
           {
             title: 'Distribution Certificate',
             lines: [
-              '<span class="dim">→ </span>Generating Certificate Signing Request <span class="ghost">(node-forge, no Keychain)</span>',
-              '<span class="ok">✔</span> CSR created',
-              '<span class="ok">✔</span> iOS Distribution certificate issued',
-              '<span class="ok">✔</span> Packaged into P12',
-              '<span class="ghost dim">  Cert limit hit? We prompt you to revoke an old one — never silently.</span>',
+              '<span class="ok">✔</span> API key created and verified with Apple — Key ID <span class="val">2X9F4ABC3D</span>',
+              '<span class="ok">✓</span> <span class="kw">"Acme" (com.acme.app)</span> — matches your App Store app.',
+              '<span class="ok">✔</span> Distribution certificate created — Expires <span class="val">Jun 2027</span>',
             ],
           },
           {
             title: 'Provisioning Profile',
             lines: [
-              '<span class="ok">✔</span> Registered <span class="kw">com.acme.app</span>',
-              '<span class="ok">✔</span> Provisioning profile created (App Store)',
-              '<span class="ghost dim">  Duplicate detected? You decide whether to delete it.</span>',
-              '<span class="ok">✔</span> Profile installed for build env',
+              '<span class="ok">✔</span> Provisioning profile created — <span class="kw">"Capgo com.acme.app AppStore"</span>',
             ],
           },
           {
             title: 'Save & Build',
             lines: [
-              '<span class="lock">🔒</span> Saved to <span class="kw">~/.capgo-credentials/credentials.json</span>',
-              '<span class="ghost dim">  Capgo servers never see your credentials.</span>',
-              '<span class="dim">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span>',
+              '<span class="ok">✔</span> Credentials saved',
+              '',
+              '<span class="cmd">?</span> Start your first cloud build now?  <span class="ok">❯</span> 🚀 Yes, build now',
+              '<span class="dim">→ </span>Requesting build for <span class="kw">com.acme.app</span> (ios)…',
               '<span class="ok">✔</span> Build complete in <span class="val">2m 41s</span>',
-              '<span class="ok">✔</span> Uploaded to App Store Connect 🎉',
+              '<span class="ok">✔</span> Uploaded to App Store Connect 🎉  <span class="kw">You’re all set!</span>',
             ],
           },
         ],
@@ -3815,6 +3840,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     let idx = 0
     let autoTimer: ReturnType<typeof setInterval> | null = null
     let ascAnim: { stop: () => void } | null = null
+    let ascIntro: { stop: () => void } | null = null
     let inView = false
     let pageVisible = typeof document !== 'undefined' ? !document.hidden : true
     let playing = false
@@ -3896,7 +3922,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
 
     const DOCK_HTML = `<div class="term-dock"><span class="dock-ico finder"></span><span class="dock-ico launchpad"></span><span class="dock-ico term active"></span><span class="dock-ico folder"></span></div>`
     const CMD_LINE = `<span class="row"><span class="dim">$</span> <span class="cmd">capgo build init</span> <span class="flag">--platform</span> <span class="val">ios</span></span>`
-    const TERM_IDLE = CMD_LINE
     // The terminal is a continuous build log: the init command, then each step's
     // output accumulates beneath it (streamed line-by-line in advanceTerminal).
     function terminalLog(uptoI: number) {
@@ -4057,15 +4082,77 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       return wizardEl!.querySelectorAll<HTMLElement>(`.wizard-step[data-platform="${currentPlatform}"]`)
     }
 
+    // Animate the two opening `build init` selects like the real clack TUI: a
+    // highlighted cursor walks the options, then the prompt collapses to a single
+    // answered line. Returns a stop handle so autoplay can cancel cleanly.
+    function runAscIntro(body: HTMLElement, onDone: () => void): { stop: () => void } {
+      const timers: ReturnType<typeof setTimeout>[] = []
+      let stopped = false
+      const at = (ms: number, fn: () => void) => { timers.push(setTimeout(() => { if (!stopped) fn() }, ms)) }
+      body.classList.add('no-anim')
+
+      const CMD = '<span class="row"><span class="dim">$ </span><span class="cmd">bunx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">ios</span></span>'
+      const DETECT = '<span class="row"><span class="ok">◇</span> Project detected · <span class="kw">com.acme.app</span></span>'
+      type Prompt = { q: string; opts: string[]; pick: number }
+      const P1: Prompt = { q: 'How do you want to set up iOS credentials?', opts: ['🆕 Create new via App Store Connect API', '📥 Import existing from this Mac (Keychain + Xcode profiles)'], pick: 0 }
+      const P2: Prompt = { q: 'Do you already have an App Store Connect API key (.p8)?', opts: ['✨ No — create one for me <span class="ghost">(guided, opens a window)</span>', '✓  Yes — I have a .p8 file'], pick: 0 }
+      const answered = (p: Prompt) =>
+        `<span class="row"><span class="ok">◇</span> ${p.q}</span><span class="row dim"><span class="ghost">│</span>  ${p.opts[p.pick]}</span>`
+      const active = (p: Prompt, sel: number) =>
+        `<span class="row"><span class="kw">◆</span> ${p.q}</span>` +
+        p.opts.map((o, i) => `<span class="row sel-opt${i === sel ? ' on' : ''}"><span class="ghost">│</span> ${i === sel ? '<span class="opt-ptr">❯</span>' : ' '} ${o}</span>`).join('') +
+        '<span class="row sel-hint"><span class="ghost">│</span>  ↑/↓ move · ↵ select</span>'
+      let log = ''
+      const render = (live: string) => { body.innerHTML = log + live }
+
+      at(120, () => { log = CMD; render('') })
+      at(640, () => { log = CMD + DETECT; render('') })
+      at(1180, () => render(active(P1, 0)))
+      at(1780, () => render(active(P1, 1)))
+      at(2340, () => render(active(P1, 0)))
+      at(2900, () => { log = CMD + DETECT + answered(P1); render('') })
+      at(3380, () => render(active(P2, 0)))
+      at(3980, () => render(active(P2, 1)))
+      at(4540, () => render(active(P2, 0)))
+      at(5100, () => { log = CMD + DETECT + answered(P1) + answered(P2); render('') })
+      at(5560, () => { log += '<span class="row"><span class="dim">→ </span>Opening guided App Store Connect setup…</span>'; render('') })
+      at(6200, () => { body.classList.remove('no-anim'); onDone() })
+
+      return { stop() { stopped = true; timers.forEach(clearTimeout); body.classList.remove('no-anim') } }
+    }
+
     function paint(i: number, play = false, onComplete?: () => void) {
       const c = PLATFORMS[currentPlatform].content[i]
       if (!c) return
       if (ascAnim) { ascAnim.stop(); ascAnim = null }
+      if (ascIntro) { ascIntro.stop(); ascIntro = null }
       const total = PLATFORMS[currentPlatform].content.length
       const head = `<h4>Step ${i + 1} / ${total} — ${c.title}</h4>`
       if (c.kind === 'asc') {
-        stage!.innerHTML = `${head}<div class="desk" aria-hidden="true">${termWin(TERM_IDLE, ' behind')}${ASC_HTML}${DOCK_HTML}</div>`
-        if (play) ascAnim = startAscAnim(stage!, onComplete)
+        // Drive the real onboarding the way the CLI actually feels: type the
+        // command, play out each interactive select (a highlighted cursor walks
+        // the options, Enter collapses it to an answered line — clack-style),
+        // and only then fade in the guided App Store Connect window.
+        stage!.innerHTML = `${head}<div class="desk" aria-hidden="true">${termWin('')}${DOCK_HTML}</div>`
+        const body = stage!.querySelector<HTMLElement>('.term-body')
+        const openAscWindow = () => {
+          if (body && !body.isConnected) return
+          const desk = stage!.querySelector('.desk')
+          const dock = stage!.querySelector('.term-dock')
+          if (dock) dock.insertAdjacentHTML('beforebegin', ASC_HTML)
+          else if (desk) desk.insertAdjacentHTML('beforeend', ASC_HTML)
+          stage!.querySelector('.asc-win')?.classList.add('asc-opening')
+          if (play) ascAnim = startAscAnim(stage!, onComplete)
+        }
+        const reduceIntro = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
+        if (play && !reduceIntro && body) {
+          ascIntro = runAscIntro(body, openAscWindow)
+        } else {
+          // Resting state (off-screen) + reduced motion: show the full log as
+          // static text; only surface the guided window when actually playing.
+          if (body) body.innerHTML = c.lines.map((l) => `<span class="row">${l}</span>`).join('')
+          if (play) openAscWindow()
+        }
       } else {
         stage!.innerHTML = `${head}<div class="desk" aria-hidden="true">${termWin(terminalLog(i))}${DOCK_HTML}</div>`
       }
@@ -4078,6 +4165,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     function setPlatform(p: string) {
       if (!PLATFORMS[p] || p === currentPlatform) return
       if (ascAnim) { ascAnim.stop(); ascAnim = null }
+      if (ascIntro) { ascIntro.stop(); ascIntro = null }
       if (autoTimer) {
         clearInterval(autoTimer)
         autoTimer = null
@@ -4182,6 +4270,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     function stopAutoplay() {
       if (ascAnim) { ascAnim.stop(); ascAnim = null }
+      if (ascIntro) { ascIntro.stop(); ascIntro = null }
       if (autoTimer) { clearInterval(autoTimer); autoTimer = null }
       if (!completed) {
         playing = false
