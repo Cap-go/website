@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { Icon } from 'astro-icon/components'
 import m, { type MessageValues } from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
@@ -23,6 +24,74 @@ const config = Astro.locals.runtimeConfig
 function copy(key: string, values: MessageValues = {}) {
   return m[key](values, { locale })
 }
+
+// Per-client MCP setup for the "ask AI" section — the editor pills select a client
+// and the config block swaps to that client's exact file + format. The Copy button
+// copies `code` verbatim. Icons are local astro-icon SVGs in src/icons/ai-*.svg.
+const mcpClients = [
+  {
+    id: 'claude',
+    name: 'Claude Code',
+    icon: 'ai-claude',
+    label: 'run in your terminal',
+    code: 'claude mcp add capgo -- npx -y @capgo/cli mcp',
+  },
+  {
+    id: 'cursor',
+    name: 'Cursor',
+    icon: 'ai-cursor',
+    label: '~/.cursor/mcp.json',
+    code: `{
+  "mcpServers": {
+    "capgo": { "command": "npx", "args": ["-y", "@capgo/cli", "mcp"] }
+  }
+}`,
+  },
+  {
+    id: 'codex',
+    name: 'Codex',
+    icon: 'ai-codex',
+    label: '~/.codex/config.toml',
+    code: `[mcp_servers.capgo]
+command = "npx"
+args = ["-y", "@capgo/cli", "mcp"]`,
+  },
+  {
+    id: 'windsurf',
+    name: 'Windsurf',
+    icon: 'ai-windsurf',
+    label: '~/.codeium/windsurf/mcp_config.json',
+    code: `{
+  "mcpServers": {
+    "capgo": { "command": "npx", "args": ["-y", "@capgo/cli", "mcp"] }
+  }
+}`,
+  },
+  {
+    id: 'vscode',
+    name: 'VS Code',
+    icon: 'ai-vscode',
+    label: '.vscode/mcp.json',
+    code: `{
+  "servers": {
+    "capgo": { "command": "npx", "args": ["-y", "@capgo/cli", "mcp"] }
+  }
+}`,
+  },
+  {
+    id: 'zed',
+    name: 'Zed',
+    icon: 'ai-zed',
+    label: 'settings.json',
+    code: `{
+  "context_servers": {
+    "capgo": {
+      "command": { "path": "npx", "args": ["-y", "@capgo/cli", "mcp"] }
+    }
+  }
+}`,
+  },
+]
 
 const builderTitle = copy('native_build_builder_title')
 const title = `${brand} | ${builderTitle}`
@@ -433,6 +502,72 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           <span class="ba a" id="ba-after">{copy('native_build_v2_wiz_ios_after')}</span>
         </div>
         <p class="wizard-macos-note" style="margin-top:18px;text-align:center;font-size:13px;opacity:.55">{copy('native_build_v2_wiz_macos_note')}</p>
+      </div>
+    </section>
+
+    <!-- ============================================ ASK AI / MCP ============================================ -->
+    <section class="section bg-grid grain" id="ask-ai">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--violet">{copy('native_build_v2_mcp_eyebrow')}</div>
+          <h2 class="h2-section">
+            {copy('native_build_v2_mcp_title_prefix')}<span class="accent-violet">{copy('native_build_v2_mcp_title_accent')}</span>
+          </h2>
+          <p class="lead">{copy('native_build_v2_mcp_lead')}</p>
+        </div>
+
+        <div class="mcp-grid">
+          <div class="mcp-card">
+            <div class="mcp-step"><span class="mcp-step-n">1</span><span>{copy('native_build_v2_mcp_add_title')}</span></div>
+            <div class="mcp-editors" role="tablist" aria-label="MCP client">
+              {
+                mcpClients.map((c, i) => (
+                  <button
+                    class:list={['mcp-ed', i === 0 && 'is-active']}
+                    data-client={c.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={i === 0 ? 'true' : 'false'}
+                  >
+                    <Icon name={c.icon} class="mcp-ed-i" />
+                    {c.name}
+                  </button>
+                ))
+              }
+              <span class="mcp-ed mcp-ed--more">{copy('native_build_v2_mcp_editors_more')}</span>
+            </div>
+            <div class="mcp-configs">
+              {
+                mcpClients.map((c, i) => (
+                  <div class="mcp-config-panel" data-client={c.id} hidden={i !== 0}>
+                    <div class="mcp-code">
+                      <div class="mcp-code-head">
+                        <span class="mcp-code-label">{c.name} <span class="mcp-code-sep">·</span> <span class="mcp-code-path">{c.label}</span></span>
+                        <button class="mcp-copy" type="button" data-copy={c.code} data-copied={copy('native_build_v2_mcp_copied')}>{copy('native_build_v2_mcp_copy')}</button>
+                      </div>
+                      <pre class="mcp-code-pre"><code>{c.code}</code></pre>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="mcp-card">
+            <div class="mcp-step"><span class="mcp-step-n">2</span><span>{copy('native_build_v2_mcp_ask_title')}</span></div>
+            <div class="mcp-ask">
+              <span class="mcp-ask-who">you</span>
+              <span class="mcp-ask-text">{copy('native_build_v2_mcp_ask_prompt')}</span>
+              <button class="mcp-copy mcp-copy--icon" type="button" data-copy={copy('native_build_v2_mcp_ask_prompt')} data-copied={copy('native_build_v2_mcp_copied')} aria-label={copy('native_build_v2_mcp_copy')}>⧉</button>
+            </div>
+            <ul class="mcp-chk">
+              <li>{copy('native_build_v2_mcp_chk_1')}</li>
+              <li>{copy('native_build_v2_mcp_chk_2')}</li>
+              <li>{copy('native_build_v2_mcp_chk_3')}</li>
+            </ul>
+            <p class="mcp-ask-note">{copy('native_build_v2_mcp_ask_note')}</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -3901,9 +4036,267 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       animation: none !important;
     }
   }
+  /* ---- ask AI / MCP section ---- */
+  .nb .eyebrow--violet {
+    color: var(--accent-violet);
+  }
+  .nb .accent-violet {
+    color: var(--accent-violet);
+  }
+  .nb .mcp-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 22px;
+    max-width: 980px;
+    margin: 44px auto 0;
+    text-align: left;
+  }
+  @media (max-width: 860px) {
+    .nb .mcp-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .nb .mcp-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 26px 26px 28px;
+  }
+  .nb .mcp-step {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  .nb .mcp-step-n {
+    flex: 0 0 auto;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    background: rgba(129, 140, 248, 0.16);
+    color: var(--accent-violet);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+  }
+  .nb .mcp-editors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .nb .mcp-ed {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 560;
+    color: rgba(255, 255, 255, 0.86);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9px;
+    padding: 7px 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .nb button.mcp-ed:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #fff;
+  }
+  .nb .mcp-ed.is-active {
+    color: #fff;
+    background: rgba(129, 140, 248, 0.16);
+    border-color: rgba(129, 140, 248, 0.55);
+  }
+  .nb .mcp-ed-i {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .nb .mcp-ed.is-active .mcp-ed-i {
+    color: #fff;
+  }
+  .nb .mcp-ed--more {
+    color: rgba(255, 255, 255, 0.42);
+    background: transparent;
+    border-style: dashed;
+    cursor: default;
+  }
+  .nb .mcp-config-panel[hidden] {
+    display: none;
+  }
+  .nb .mcp-code-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+  .nb .mcp-code-sep {
+    opacity: 0.5;
+  }
+  .nb .mcp-code-path {
+    color: rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .nb .mcp-code {
+    background: var(--terminal-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .nb .mcp-code-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    font-family: var(--nb-font-mono);
+    font-size: 11px;
+    color: var(--terminal-dim);
+  }
+  .nb .mcp-copy {
+    flex: 0 0 auto;
+    font-family: var(--nb-font-mono);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 7px;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .nb .mcp-copy:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .nb .mcp-copy.copied {
+    color: var(--relief-green);
+    border-color: rgba(74, 222, 128, 0.45);
+  }
+  .nb .mcp-code-pre {
+    margin: 0;
+    padding: 14px 15px;
+    overflow: auto;
+    font-family: var(--nb-font-mono);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--terminal-fg);
+  }
+  .nb .mcp-ask {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--terminal-bg);
+    border: 1px solid rgba(129, 140, 248, 0.25);
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 18px;
+  }
+  .nb .mcp-ask-who {
+    flex: 0 0 auto;
+    font-family: var(--nb-font-mono);
+    font-size: 11px;
+    color: #bcd0ff;
+    background: rgba(129, 140, 248, 0.16);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+  .nb .mcp-ask-text {
+    flex: 1;
+    font-family: var(--nb-font-mono);
+    font-size: 14px;
+    color: #fff;
+  }
+  .nb .mcp-copy--icon {
+    font-size: 13px;
+    padding: 4px 9px;
+  }
+  .nb .mcp-chk {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+  }
+  .nb .mcp-chk li {
+    position: relative;
+    padding-left: 24px;
+    margin: 9px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.66);
+    line-height: 1.45;
+  }
+  .nb .mcp-chk li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--relief-green);
+    font-weight: 700;
+  }
+  .nb .mcp-ask-note {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.5;
+    margin: 0;
+  }
 </style>
 
 <script>
+  // ----------------------------------------------------------------
+  // MCP CLIENT SELECTOR — pills swap the per-client config panel
+  // ----------------------------------------------------------------
+  ;(function mcpClientSelector() {
+    const tabs = Array.from(document.querySelectorAll('button.mcp-ed[data-client]'))
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('.mcp-config-panel[data-client]'))
+    if (!tabs.length || !panels.length) return
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = tab.getAttribute('data-client')
+        tabs.forEach((t) => {
+          const on = t === tab
+          t.classList.toggle('is-active', on)
+          t.setAttribute('aria-selected', on ? 'true' : 'false')
+        })
+        panels.forEach((p) => {
+          p.hidden = p.getAttribute('data-client') !== id
+        })
+      })
+    })
+  })()
+
+  // ----------------------------------------------------------------
+  // COPY BUTTONS — MCP "ask AI" section (config + prompt)
+  // ----------------------------------------------------------------
+  ;(function mcpCopyButtons() {
+    document.querySelectorAll('.mcp-copy').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const text = btn.getAttribute('data-copy') || ''
+        try {
+          await navigator.clipboard.writeText(text)
+        } catch (e) {
+          /* clipboard blocked — ignore */
+        }
+        const isIcon = btn.classList.contains('mcp-copy--icon')
+        const prev = btn.textContent
+        btn.classList.add('copied')
+        if (!isIcon) btn.textContent = btn.getAttribute('data-copied') || 'Copied'
+        setTimeout(() => {
+          btn.classList.remove('copied')
+          if (!isIcon) btn.textContent = prev
+        }, 1400)
+      })
+    })
+  })()
   // ----------------------------------------------------------------
   // DEMO TERMINAL — capgo build request --platform ios|android
   // ----------------------------------------------------------------
