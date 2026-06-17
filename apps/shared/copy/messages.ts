@@ -4837,7 +4837,7 @@ const messages = {
   solution_app_examples_production_updates_label: 'Production updates',
   solution_app_examples_production_updates_headline: 'High-traffic apps need reliable UI changes in production',
   solution_app_examples_production_updates_use_case:
-    'Forecast and game apps depend on accurate interfaces, events, and navigation. Production updates help ship approved interface fixes while monitoring adoption before expanding further.',
+    'Weather, public health, and telecom apps depend on accurate interfaces, alerts, and navigation. Production updates help ship approved interface fixes while monitoring adoption before expanding further.',
   solution_app_examples_production_updates_app_1_note: 'Weather app where maps, alerts, and navigation fixes need careful production expansion.',
   solution_app_examples_production_updates_app_2_note: 'Public health app where guidance and service information require fast, trusted updates.',
   solution_app_examples_production_updates_app_3_note: 'Telecom account app where alerts and account surfaces change frequently.',
