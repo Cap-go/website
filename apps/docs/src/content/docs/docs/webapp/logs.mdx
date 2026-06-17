@@ -151,6 +151,7 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `download_manifest_start`, `download_manifest_complete` | Manifest download began / finished (for delta or multi-file bundles) |
 | `download_zip_start`, `download_zip_complete` | Zip archive download began / finished |
 | `download_10` … `download_90` | Download progress milestones |
+| `download_0` | 0% progress marker for the first progress event |
 | `download_complete` | Entire bundle downloaded |
 | `set` | Bundle staged for next launch |
 | `reset` | Device reverted to the builtin bundle |
@@ -167,6 +168,8 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `disableAutoUpdate`, `disableAutoUpdateToMajor`, `disableAutoUpdateToMinor`, `disableAutoUpdateToPatch`, `disableAutoUpdateMetadata`, `disableAutoUpdateUnderNative` | Channel strategy forbids this [semver jump](/semver_tester/) |
 | `disablePlatformIos`, `disablePlatformAndroid` | Platform is disabled on the channel |
 | `disableDevBuild`, `disableEmulator` | Dev builds or emulators not allowed |
+| `disableProdBuild`, `disableDevice`, `disablePlatformElectron` | Additional backend/platform policy blocks (production build policy, real-device block, or Electron disabled). Opposite of this is `disableEmulator`. |
+| `customIdBlocked` | `allow_device_custom_id = false` while `custom_id` is provided in `/stats`; stats still arrive, but `custom_id` is ignored and stored empty. |
 | `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | Channel selection or override failed |
 | `missingBundle`, `cannotGetBundle` | Manifest refers to a bundle Capgo cannot serve |
 | `needPlanUpgrade` | Org hit its plan/device limit |
@@ -184,6 +187,16 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `decrypt_fail` | Decryption failed (encrypted bundle) |
 | `update_fail` | Bundle installed but app never called `notifyAppReady()`; rollback triggered |
 | `download_zip_*` with no subsequent `set` | Download finished but install phase never completed |
+
+### Runtime / platform events
+| Code(s) | Meaning |
+|--------|---------|
+| `app_crash`, `app_crash_native` | Crash events from JavaScript or native runtime layers. Metadata often includes stack, source, and active version info. |
+| `app_anr` | Android reported an Application Not Responding. |
+| `app_killed_low_memory`, `app_killed_excessive_resource_usage` | App process termination due to memory or resource limits. |
+| `app_initialization_failure`, `app_memory_warning` | Startup was interrupted or memory pressure was observed before normal runtime. |
+| `webview_javascript_error`, `webview_unhandled_rejection`, `webview_resource_error`, `webview_security_policy_violation`, `webview_unclean_restart`, `webview_render_process_gone`, `webview_content_process_terminated` | WebView lifecycle and rendering/JS errors. |
+| `os_version_changed`, `native_app_version_changed` | OS or native app version changed; this helps separate platform-level rollout effects from web bundle behavior. |
 
 ➡️ Need deeper per-code guidance? See **[Full Log Code Reference and Debugging Guide](/docs/plugins/updater/debugging/#understanding-cloud-logs)**.
 
