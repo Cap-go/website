@@ -50,7 +50,7 @@ Capgo logs can include metadata for the event. In the dashboard, use the action 
 | ---- | ---------------- | ------------- |
 | `invalidIp` | Capgo detected traffic that looks like bot traffic (Google/cloud infrastructure IP). | Ignore on real users; retry from real devices and normal networks, or check after some time. |
 | `needPlanUpgrade` | Organization reached plan/device limit. | Upgrade plan in dashboard or wait for next billing cycle. |
-| `semver_error` | Native app version in config is missing or not valid semver (`x.y.z`). | Set `plugins.CapacitorUpdater.version` to valid semver and rebuild the app. |
+| `semver_error` | Native app version in config is missing or not valid semver (`x.y.z`). | Set `plugins.CapacitorUpdater.version` to valid semver, then verify it in the [SemVer tester](https://capgo.app/semver_tester/) and rebuild the app. |
 | `disablePlatformIos` | iOS is disabled in channel policy. | Enable iOS in that channel and republish routing. |
 | `disablePlatformAndroid` | Android is disabled in channel policy. | Enable Android in that channel and republish routing. |
 | `disableAutoUpdate` | Channel auto-update mode blocks this update style. | Change channel auto-update policy (major/minor/patch/metadata/none) to allow your intended rollout. |
