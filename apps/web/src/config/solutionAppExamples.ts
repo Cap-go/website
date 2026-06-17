@@ -123,9 +123,12 @@ export const solutionAppExamples = {
     headlineKey: 'solution_app_examples_enterprise_headline',
     useCaseKey: 'solution_app_examples_enterprise_use_case',
     apps: [
-      { appId: 'com.paylocity.paylocitymobile', noteKey: 'solution_app_examples_enterprise_app_1_note' },
+      { appId: 'com.shelf.app', noteKey: 'solution_app_examples_enterprise_app_1_note' },
       { appId: 'ua.vodafone.myvodafone', noteKey: 'solution_app_examples_enterprise_app_2_note' },
       { appId: 'com.orange.miorange', noteKey: 'solution_app_examples_enterprise_app_3_note' },
+      { appId: 'com.swisscom.myswisscom', noteKey: 'solution_app_examples_enterprise_app_4_note' },
+      { appId: 'com.infrasoft.uboi', noteKey: 'solution_app_examples_enterprise_app_5_note' },
+      { appId: 'br.gov.datasus.cnsdigital', noteKey: 'solution_app_examples_enterprise_app_6_note' },
     ],
     playKeys: ['solution_app_examples_enterprise_play_1', 'solution_app_examples_enterprise_play_2', 'solution_app_examples_enterprise_play_3'],
   },

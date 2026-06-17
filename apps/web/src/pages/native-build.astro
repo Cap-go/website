@@ -432,6 +432,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           <span class="ba-arrow">→</span>
           <span class="ba a" id="ba-after">{copy('native_build_v2_wiz_ios_after')}</span>
         </div>
+        <p class="wizard-macos-note" style="margin-top:18px;text-align:center;font-size:13px;opacity:.55">{copy('native_build_v2_wiz_macos_note')}</p>
       </div>
     </section>
 
@@ -1711,6 +1712,944 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
   .nb .wizard-stage .ghost {
     opacity: 0.6;
   }
+
+  /* ===== Guided App Store Connect window (iOS wizard step 1 animation) ===== */
+  .nb .wizard-stage:has(.asc-win) {
+    padding: 14px;
+    background: radial-gradient(130% 110% at 50% -10%, #16294a, #090c13 70%);
+  }
+
+  /* ===== Terminal window + dock (wizard terminal steps 2-4) ===== */
+  .nb .wizard-stage:has(.term-win) {
+    padding: 14px;
+    background: radial-gradient(130% 110% at 50% -10%, #16294a, #090c13 70%);
+  }
+  .nb .desk {
+    position: relative;
+    min-height: 434px;
+    overflow: hidden;
+  }
+  .nb .desk .term-win {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+  .nb .desk .term-win .term-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    animation: none;
+  }
+  .nb .term-body .row {
+    animation: rowIn 0.3s ease both;
+  }
+  @keyframes rowIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+  .nb .desk .asc-win {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
+  .nb .desk .asc-win.minimizing {
+    animation: ascGenie 1s cubic-bezier(0.4, 0, 0.68, 0.62) 0.14s forwards;
+    transform-origin: 50% 100%;
+  }
+  .nb .desk .term-dock {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    margin-top: 0;
+    transform: translate(-50%, 135%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.3), opacity 0.3s;
+    z-index: 5;
+  }
+  .nb .desk:has(.asc-win.minimizing) .term-dock {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  @keyframes ascGenie {
+    0% { opacity: 1; transform: translateY(0%); clip-path: polygon(0% 0%, 100% 0%, 100% 5%, 100% 10%, 100% 15%, 100% 20%, 100% 25%, 100% 30%, 100% 35%, 100% 40%, 100% 45%, 100% 50%, 100% 55%, 100% 60%, 100% 65%, 100% 70%, 100% 75%, 100% 80%, 100% 85%, 100% 90%, 100% 95%, 100% 100%, 0% 95%, 0% 90%, 0% 85%, 0% 80%, 0% 75%, 0% 70%, 0% 65%, 0% 60%, 0% 55%, 0% 50%, 0% 45%, 0% 40%, 0% 35%, 0% 30%, 0% 25%, 0% 20%, 0% 15%, 0% 10%, 0% 5%); }
+    22% { opacity: 1; transform: translateY(3%); clip-path: polygon(0% 0%, 100% 0%, 100% 5%, 99.8% 10%, 99.5% 15%, 98.8% 20%, 97.9% 25%, 96.7% 30%, 95.3% 35%, 93.7% 40%, 91.9% 45%, 90% 50%, 88.1% 55%, 86.3% 60%, 84.7% 65%, 83.3% 70%, 82.1% 75%, 81.2% 80%, 80.5% 85%, 80.2% 90%, 80% 95%, 80% 100%, 20% 95%, 19.8% 90%, 19.5% 85%, 18.8% 80%, 17.9% 75%, 16.7% 70%, 15.3% 65%, 13.7% 60%, 11.9% 55%, 10% 50%, 8.1% 45%, 6.3% 40%, 4.7% 35%, 3.3% 30%, 2.1% 25%, 1.2% 20%, 0.5% 15%, 0.2% 10%, 0% 5%); }
+    46% { opacity: 1; transform: translateY(22%); clip-path: polygon(4% 0%, 96% 0%, 96% 5%, 95.7% 10%, 95.2% 15%, 94.3% 20%, 92.9% 25%, 91.1% 30%, 88.9% 35%, 86.5% 40%, 83.8% 45%, 81% 50%, 78.2% 55%, 75.5% 60%, 73.1% 65%, 70.9% 70%, 69.1% 75%, 67.7% 80%, 66.8% 85%, 66.3% 90%, 66% 95%, 66% 100%, 34% 95%, 33.7% 90%, 33.2% 85%, 32.3% 80%, 30.9% 75%, 29.1% 70%, 26.9% 65%, 24.5% 60%, 21.8% 55%, 19% 50%, 16.2% 45%, 13.5% 40%, 11.1% 35%, 8.9% 30%, 7.1% 25%, 5.7% 20%, 4.8% 15%, 4.3% 10%, 4% 5%); }
+    70% { opacity: 0.9; transform: translateY(58%); clip-path: polygon(16% 0%, 84% 0%, 84% 5%, 83.8% 10%, 83.3% 15%, 82.4% 20%, 81.2% 25%, 79.6% 30%, 77.7% 35%, 75.4% 40%, 73% 45%, 70.5% 50%, 68% 55%, 65.6% 60%, 63.3% 65%, 61.4% 70%, 59.8% 75%, 58.6% 80%, 57.7% 85%, 57.2% 90%, 57% 95%, 57% 100%, 43% 95%, 42.8% 90%, 42.3% 85%, 41.4% 80%, 40.2% 75%, 38.6% 70%, 36.7% 65%, 34.4% 60%, 32% 55%, 29.5% 50%, 27% 45%, 24.6% 40%, 22.3% 35%, 20.4% 30%, 18.8% 25%, 17.6% 20%, 16.7% 15%, 16.2% 10%, 16% 5%); }
+    100% { opacity: 0; transform: translateY(128%); clip-path: polygon(46% 0%, 54% 0%, 54% 5%, 54% 10%, 54% 15%, 53.9% 20%, 53.9% 25%, 53.8% 30%, 53.8% 35%, 53.7% 40%, 53.6% 45%, 53.5% 50%, 53.4% 55%, 53.3% 60%, 53.2% 65%, 53.2% 70%, 53.1% 75%, 53.1% 80%, 53% 85%, 53% 90%, 53% 95%, 53% 100%, 47% 95%, 47% 90%, 47% 85%, 46.9% 80%, 46.9% 75%, 46.8% 70%, 46.8% 65%, 46.7% 60%, 46.6% 55%, 46.5% 50%, 46.4% 45%, 46.3% 40%, 46.2% 35%, 46.2% 30%, 46.1% 25%, 46.1% 20%, 46% 15%, 46% 10%, 46% 5%); }
+  }
+  .nb .term-screen {
+    display: flex;
+    flex-direction: column;
+    min-height: 404px;
+  }
+  .nb .term-win {
+    border-radius: 11px;
+    overflow: hidden;
+    background: var(--terminal-bg);
+    box-shadow: 0 26px 60px -22px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    transform-origin: 50% 130%;
+  }
+  .nb .term-screen.opening .term-win { animation: termGenie 0.62s cubic-bezier(0.2, 0.85, 0.25, 1); }
+  .nb .term-bar {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    background: linear-gradient(#2c303b, #23262f);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+  }
+  .nb .term-lights { display: flex; gap: 7px; }
+  .nb .term-lights i { width: 11px; height: 11px; border-radius: 50%; }
+  .nb .term-lights i:nth-child(1) { background: #ff5f57; }
+  .nb .term-lights i:nth-child(2) { background: #febc2e; }
+  .nb .term-lights i:nth-child(3) { background: #28c840; }
+  .nb .term-title {
+    flex: 1 1 auto;
+    text-align: center;
+    margin-right: 47px;
+    font-size: 11.5px;
+    font-family: var(--nb-font-display);
+    color: #9aa6b8;
+  }
+  .nb .term-body {
+    padding: 14px 16px;
+    min-height: 360px;
+    font-family: var(--nb-font-mono);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--terminal-fg);
+    animation: termBody 0.5s ease both;
+  }
+  .nb .term-dock {
+    margin-top: auto;
+    align-self: center;
+    display: flex;
+    gap: 10px;
+    padding: 6px 11px;
+    border-radius: 17px;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(8px);
+  }
+  .nb .dock-ico {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    position: relative;
+  }
+  .nb .dock-ico.finder { background: linear-gradient(#36a3ff, #1f6fd0); }
+  .nb .dock-ico.launchpad { background: linear-gradient(#8b95a7, #59616f); }
+  .nb .dock-ico.term { background: linear-gradient(#2b2f3a, #11141b); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1); }
+  .nb .dock-ico.term::before {
+    content: '>_';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--nb-font-mono);
+    font-size: 11px;
+    color: var(--relief-green);
+  }
+  .nb .dock-ico.folder { background: linear-gradient(#6fd2ff, #3a9bd8); }
+  .nb .term-screen.opening .dock-ico.term { animation: dockBounce 0.6s ease; }
+  .nb .dock-ico.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+  }
+  @keyframes termGenie {
+    0% { opacity: 0; transform: translateY(60px) scaleX(0.5) scaleY(0.12); }
+    55% { opacity: 1; transform: translateY(-5px) scaleX(1) scaleY(1.03); }
+    100% { transform: translateY(0) scale(1); }
+  }
+  @keyframes termBody {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes dockBounce {
+    0%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-11px); }
+    65% { transform: translateY(-3px); }
+  }
+  .nb .asc-win {
+    --asc-accent: #2563eb;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ececee;
+    color: #1d1d1f;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Airbnb Cereal', system-ui, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    box-shadow: 0 26px 60px -22px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+  .nb .asc-titlebar {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    background: linear-gradient(#f7f7f8, #e8e8ea);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .nb .asc-traffic {
+    display: flex;
+    gap: 7px;
+  }
+  .nb .asc-traffic i {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .nb .asc-traffic i:nth-child(1) { background: #ff5f57; }
+  .nb .asc-traffic i:nth-child(2) { background: #febc2e; }
+  .nb .asc-traffic i:nth-child(3) { background: #28c840; }
+  .nb .asc-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #3a3a3c;
+  }
+  .nb .asc-body {
+    display: grid;
+    grid-template-columns: 188px 1fr;
+    height: 404px;
+  }
+  .nb .asc-side {
+    background: #e6e6e8;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-height: 0;
+  }
+  .nb .asc-side-head {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+  }
+  .nb .asc-keyicon {
+    width: 27px;
+    height: 27px;
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    background: linear-gradient(#3b82f6, #4f46e5);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  .nb .asc-side-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .nb .asc-side-sub {
+    font-size: 10.5px;
+    color: #6e6e73;
+  }
+  .nb .asc-team {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 7px 8px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .nb .asc-mono-badge {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(#a78bfa, #7c3aed);
+  }
+  .nb .asc-team-name {
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .nb .asc-team-sub {
+    font-size: 9.5px;
+    color: #6e6e73;
+  }
+  .nb .asc-steps {
+    list-style: none;
+    margin: 0;
+    padding: 5px;
+    border-radius: 9px;
+    background: rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    scrollbar-width: thin;
+  }
+  .nb .asc-steps li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: background 0.25s;
+  }
+  .nb .asc-steps li.current {
+    background: rgba(37, 99, 235, 0.13);
+  }
+  .nb .asc-badge {
+    flex: 0 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 8px;
+    font-weight: 700;
+    margin-top: 1px;
+    border: 1.3px solid rgba(0, 0, 0, 0.28);
+    color: #86868b;
+    transition: all 0.25s;
+  }
+  .nb .asc-steps li.current .asc-badge {
+    background: var(--asc-accent);
+    border-color: var(--asc-accent);
+    color: #fff;
+  }
+  .nb .asc-steps li.done .asc-badge {
+    background: #28c840;
+    border-color: #28c840;
+    color: #fff;
+  }
+  .nb .asc-steps li.done .asc-badge::after { content: '✓'; }
+  .nb .asc-steps li:not(.done) .asc-badge::after { content: attr(data-n); }
+  .nb .asc-step-t {
+    font-size: 10.6px;
+    color: #3a3a3c;
+  }
+  .nb .asc-steps li.current .asc-step-t { font-weight: 600; }
+  .nb .asc-steps li.upcoming .asc-step-t { color: #9a9aa0; }
+  .nb .asc-captured {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .nb .asc-cap-row {
+    padding: 7px 9px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .nb .asc-cap-row.show {
+    opacity: 1;
+    transform: none;
+  }
+  .nb .asc-cap-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nb .asc-cap-top > span:first-child {
+    font-size: 9.5px;
+    color: #6e6e73;
+  }
+  .nb .asc-cap-badge {
+    font-size: 9px;
+    font-weight: 700;
+    color: #1a8f33;
+  }
+  .nb .asc-cap-row code {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    font-family: var(--nb-font-mono);
+    color: #1d1d1f;
+  }
+  .nb .asc-browser {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .nb .asc-urlbar {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 11px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    background: #f5f5f7;
+  }
+  .nb .asc-nav {
+    color: #8e8e93;
+    font-size: 13px;
+  }
+  .nb .asc-url {
+    flex: 1 1 auto;
+    font-size: 10.5px;
+    color: #6e6e73;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    padding: 3px 9px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .nb .asc-lock { font-size: 10px; }
+  .nb .asc-page {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 14px 16px;
+    min-height: 0;
+    overflow: hidden;
+    background: #fff;
+  }
+  .nb .asc-page-h {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #1d1d1f;
+  }
+  .nb .asc-page-tabs {
+    display: flex;
+    gap: 16px;
+    margin: 8px 0 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .nb .asc-page-tabs span {
+    font-size: 11px;
+    color: #86868b;
+    padding-bottom: 6px;
+  }
+  .nb .asc-page-tabs span.on {
+    color: #1d1d1f;
+    font-weight: 600;
+    box-shadow: inset 0 -2px 0 var(--asc-accent);
+  }
+  .nb .asc-keys-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .nb .asc-keys-title {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .nb .asc-issuer {
+    font-size: 10.5px;
+    color: #6e6e73;
+    margin-top: 3px;
+  }
+  .nb .asc-issuer code {
+    font-family: var(--nb-font-mono);
+    color: #3a3a3c;
+  }
+  .nb .asc-plus {
+    width: 30px;
+    height: 30px;
+    flex: none;
+    border: none;
+    border-radius: 50%;
+    background: var(--asc-accent);
+    color: #fff;
+    font-size: 19px;
+    line-height: 1;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.5);
+    transition: transform 0.15s;
+  }
+  .nb .asc-thead {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .nb .asc-thead span {
+    font-size: 10.5px;
+    color: #86868b;
+  }
+  .nb .asc-thead span.on {
+    color: #1d1d1f;
+    font-weight: 600;
+  }
+  .nb .asc-table { position: relative; }
+  .nb .asc-trow {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 0.7fr auto;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: 11px;
+  }
+  .nb .asc-kname { font-weight: 600; color: #1d1d1f; }
+  .nb .asc-kid { font-family: var(--nb-font-mono); color: #6e6e73; }
+  .nb .asc-krole { color: #6e6e73; }
+  .nb .asc-dl {
+    color: var(--asc-accent);
+    font-weight: 600;
+    text-decoration: none;
+    justify-self: end;
+  }
+  .nb .asc-newkey {
+    opacity: 0;
+    transform: translateY(-4px);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+  .nb .asc-newkey.show {
+    opacity: 1;
+    transform: none;
+    max-height: 46px;
+    padding: 11px 4px;
+    animation: ascRowIn 0.6s ease;
+  }
+  .nb .asc-empty {
+    padding: 20px 4px;
+    font-size: 11px;
+    color: #b0b0b5;
+    text-align: center;
+  }
+  .nb .asc-newkey.show ~ .asc-empty { display: none; }
+  .nb .asc-dialog {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .nb .asc-win.dialog .asc-dialog { opacity: 1; }
+  .nb .asc-dialog-card {
+    width: 78%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    transform: scale(0.94);
+    transition: transform 0.25s;
+  }
+  .nb .asc-win.dialog .asc-dialog-card { transform: none; }
+  .nb .asc-dialog-h {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .nb .asc-lab {
+    font-size: 10px;
+    color: #6e6e73;
+    margin: 8px 0 4px;
+  }
+  .nb .asc-input {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 9px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 7px;
+    background: #fff;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .nb .asc-typed {
+    display: inline-block;
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 12px;
+    transition: max-width 0.7s steps(13, end);
+  }
+  .nb .asc-input.filled .asc-typed { max-width: 130px; }
+  .nb .asc-caret {
+    width: 1.5px;
+    height: 15px;
+    background: var(--asc-accent);
+    margin-left: 1px;
+    animation: ascCaret 1s step-end infinite;
+  }
+  .nb .asc-input.filled .asc-caret { opacity: 0; }
+  .nb .asc-select {
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px 9px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 7px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .nb .asc-ph {
+    font-size: 12px;
+    color: #b0b0b5;
+  }
+  .nb .asc-select.picked .asc-ph { display: none; }
+  .nb .asc-chip {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--asc-accent);
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .nb .asc-select.picked .asc-chip {
+    display: inline-flex;
+    animation: ascPop 0.3s ease;
+  }
+  .nb .asc-chip b {
+    font-weight: 400;
+    opacity: 0.8;
+  }
+  .nb .asc-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .nb .asc-btnghost {
+    font-size: 11px;
+    padding: 6px 13px;
+    border-radius: 7px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: #fff;
+    color: #3a3a3c;
+  }
+  .nb .asc-btnprime {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px;
+    border-radius: 7px;
+    border: none;
+    background: var(--asc-accent);
+    color: #fff;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.5);
+  }
+  .nb .asc-btnghost,
+  .nb .asc-btnprime { transition: transform 0.15s; }
+  .nb .asc-win .press { transform: scale(0.9) !important; }
+  .nb .asc-win .hot {
+    animation: ascPulse 1.3s ease-in-out infinite;
+  }
+  .nb .asc-input.hot,
+  .nb .asc-select.hot,
+  .nb .asc-login-field.hot {
+    border-color: var(--asc-accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+    animation: none;
+  }
+  .nb .asc-cursor {
+    position: absolute;
+    left: 80%;
+    top: 88%;
+    width: 22px;
+    height: 24px;
+    z-index: 8;
+    pointer-events: none;
+    transform: translate(-3px, -2px);
+    transition: left 0.75s cubic-bezier(0.45, 0.05, 0.2, 1), top 0.75s cubic-bezier(0.45, 0.05, 0.2, 1);
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='24' viewBox='0 0 22 24'%3E%3Cpath d='M3 2 L3 19 L7.5 14.5 L10.5 21.5 L13.5 20.2 L10.5 13.5 L17 13.5 Z' fill='white' stroke='black' stroke-width='1.3' stroke-linejoin='round'/%3E%3C/svg%3E");
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+  }
+  .nb .asc-cursor.click::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--asc-accent);
+    transform: translate(-50%, -50%);
+    animation: ascRipple 0.5s ease-out;
+  }
+  .nb .asc-success {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .nb .asc-success.show { opacity: 1; }
+  .nb .asc-success-check {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 26px;
+    color: #fff;
+    background: #28c840;
+    box-shadow: 0 6px 20px rgba(40, 200, 64, 0.5);
+  }
+  .nb .asc-success.show .asc-success-check { animation: ascPop 0.45s ease; }
+  .nb .asc-success-t {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .nb .asc-success-t b {
+    font-size: 14px;
+    color: #1d1d1f;
+  }
+  .nb .asc-success-t span {
+    font-size: 11px;
+    color: #6e6e73;
+  }
+  .nb .asc-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+  }
+  .nb .asc-win[data-screen="login"] .asc-login,
+  .nb .asc-win[data-screen="team"] .asc-team-pick { opacity: 1; }
+  .nb .asc-login { background: radial-gradient(130% 90% at 50% -10%, #eef2f9, #fff 60%); }
+  .nb .asc-login-card {
+    width: 80%;
+    max-width: 290px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .nb .asc-apple {
+    width: 28px;
+    height: 34px;
+    margin-bottom: 14px;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 814 1000'%3E%3Cpath d='M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105.6-57-155.5-127C46.7 790.7 0 663 0 541.8c0-194.4 126.4-297.5 250.8-297.5 66.1 0 121.2 43.4 162.7 43.4 39.5 0 101.1-46 176.3-46 28.5 0 130.9 2.6 198.3 99.2zm-234-181.5c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z'/%3E%3C/svg%3E");
+  }
+  .nb .asc-login-h {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #1d1d1f;
+  }
+  .nb .asc-login-field {
+    width: 100%;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 6px 0 12px;
+    margin-top: 9px;
+    font-size: 12px;
+    color: #1d1d1f;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 9px;
+    background: #fff;
+  }
+  .nb .asc-login-field.on { color: #6e6e73; }
+  .nb .asc-pw { letter-spacing: 2px; color: #6e6e73; }
+  .nb .asc-login-typed {
+    display: inline-block;
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    transition: max-width 0.75s steps(14, end);
+  }
+  .nb .asc-login-field.typing .asc-login-typed,
+  .nb .asc-login-field.done .asc-login-typed { max-width: 200px; }
+  .nb .asc-login-caret {
+    display: inline-block;
+    width: 1.5px;
+    height: 14px;
+    background: var(--asc-accent);
+    margin-left: 1px;
+    vertical-align: middle;
+    opacity: 0;
+  }
+  .nb .asc-login-field.typing .asc-login-caret { opacity: 1; animation: ascCaret 1s step-end infinite; }
+  .nb .asc-signin {
+    margin-left: auto;
+    width: 26px;
+    height: 26px;
+    border: none;
+    border-radius: 50%;
+    background: var(--asc-accent);
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.5);
+    transition: transform 0.15s;
+  }
+  .nb .asc-team-card {
+    width: 82%;
+    max-width: 300px;
+  }
+  .nb .asc-team-h {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1d1d1f;
+  }
+  .nb .asc-team-d {
+    font-size: 10.5px;
+    color: #6e6e73;
+    margin: 4px 0 13px;
+  }
+  .nb .asc-team-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 10px;
+    margin-bottom: 7px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    background: #fff;
+  }
+  .nb .asc-team-row.sel {
+    border-color: var(--asc-accent);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.14);
+  }
+  .nb .asc-mono-badge.sm {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+  .nb .asc-mono-badge.alt { background: linear-gradient(#34d399, #059669); }
+  .nb .asc-team-meta {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .nb .asc-team-meta b {
+    font-size: 12px;
+    color: #1d1d1f;
+  }
+  .nb .asc-team-meta span {
+    font-size: 10px;
+    color: #6e6e73;
+  }
+  .nb .asc-radio {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0, 0, 0, 0.25);
+    flex: none;
+  }
+  .nb .asc-radio.on {
+    border-color: var(--asc-accent);
+    background: radial-gradient(circle, var(--asc-accent) 0 4px, #fff 5px);
+  }
+  .nb .asc-team-go {
+    width: 100%;
+    margin-top: 6px;
+    padding: 9px;
+    border: none;
+    border-radius: 9px;
+    background: var(--asc-accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+  }
+  .nb .asc-callout {
+    position: absolute;
+    z-index: 10;
+    transform: translate(-50%, calc(-100% - 12px));
+    background: #1d1d1f;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 7px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, left 0.5s cubic-bezier(0.45, 0.05, 0.2, 1), top 0.5s cubic-bezier(0.45, 0.05, 0.2, 1);
+  }
+  .nb .asc-callout.show { opacity: 1; }
+  .nb .asc-callout::after {
+    content: '';
+    position: absolute;
+    left: calc(50% + var(--arrow-x, 0px));
+    bottom: -5px;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1d1d1f;
+  }
+  @keyframes ascCaret { 50% { opacity: 0; } }
+  @keyframes ascPop {
+    0% { transform: scale(0.4); opacity: 0; }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes ascRowIn {
+    from { background: rgba(37, 99, 235, 0.12); }
+    to { background: transparent; }
+  }
+  @keyframes ascRipple {
+    from { opacity: 0.7; transform: translate(-50%, -50%) scale(0.3); }
+    to { opacity: 0; transform: translate(-50%, -50%) scale(1.7); }
+  }
+  @keyframes ascPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.65); }
+    50% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nb .asc-cursor,
+    .nb .asc-typed,
+    .nb .asc-newkey,
+    .nb .asc-cap-row,
+    .nb .asc-dialog,
+    .nb .asc-success,
+    .nb .asc-callout,
+    .nb .asc-screen,
+    .nb .term-screen.opening .term-win,
+    .nb .term-screen.opening .dock-ico.term,
+    .nb .term-body,
+    .nb .asc-win.minimizing,
+    .nb .asc-win .hot { transition: none !important; animation: none !important; }
+  }
   .nb .wizard-before-after {
     margin-top: 24px;
     display: flex;
@@ -2773,7 +3712,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     const baAfter = document.getElementById('ba-after')
     if (!wizardEl || !stage) return
 
-    type Step = { title: string; lines: string[] }
+    type Step = { title: string; lines: string[]; kind?: string }
     type PlatformData = { before: string; after: string; content: Step[] }
 
     const PLATFORMS: Record<string, PlatformData> = {
@@ -2783,6 +3722,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         content: [
           {
             title: 'App Store Connect API Key',
+            kind: 'asc',
             lines: [
               '<span class="dim">$ </span><span class="cmd">bunx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">ios</span>',
               '',
@@ -2874,17 +3814,261 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     let currentPlatform = 'ios'
     let idx = 0
     let autoTimer: ReturnType<typeof setInterval> | null = null
-    let started = false
+    let ascAnim: { stop: () => void } | null = null
+    let inView = false
+    let pageVisible = typeof document !== 'undefined' ? !document.hidden : true
+    let playing = false
+    let completed = false
+
+    // Guided App Store Connect window — a faithful, looping recreation of the
+    // macOS asc-key-helper (cli/native/asc-key-helper): left step checklist +
+    // embedded App Store Connect browser, with an animated cursor walking the
+    // real key-creation flow. Shown on iOS wizard step 1 instead of a terminal.
+    const ASC_HTML = `
+<div class="asc-win" data-screen="login">
+  <div class="asc-titlebar"><span class="asc-traffic"><i></i><i data-target="minimize"></i><i></i></span><span class="asc-title">App Store Connect API Key</span></div>
+  <div class="asc-body">
+    <aside class="asc-side">
+      <div class="asc-side-head"><span class="asc-keyicon">&#128273;</span><div><div class="asc-side-title">App Store Connect API Key</div><div class="asc-side-sub">Step <b class="asc-stepnum">5</b> of 10</div></div></div>
+      <div class="asc-team"><span class="asc-mono-badge">A</span><div><div class="asc-team-name">Acme Inc</div><div class="asc-team-sub">Signed in &middot; Admin</div></div></div>
+      <ol class="asc-steps">
+        <li data-step="login" data-n="1"><span class="asc-badge"></span><span class="asc-step-t">Sign in to App Store Connect</span></li>
+        <li data-step="selectTeam" data-n="2"><span class="asc-badge"></span><span class="asc-step-t">Confirm your team</span></li>
+        <li data-step="verifyAccess" data-n="3"><span class="asc-badge"></span><span class="asc-step-t">Check API access</span></li>
+        <li data-step="captureIssuerId" data-n="4"><span class="asc-badge"></span><span class="asc-step-t">Issuer ID captured</span></li>
+        <li data-step="createKey" data-n="5"><span class="asc-badge"></span><span class="asc-step-t">Open the Generate dialog</span></li>
+        <li data-step="nameKey" data-n="6"><span class="asc-badge"></span><span class="asc-step-t">Name the key</span></li>
+        <li data-step="selectRole" data-n="7"><span class="asc-badge"></span><span class="asc-step-t">Set the role to Admin</span></li>
+        <li data-step="generateKey" data-n="8"><span class="asc-badge"></span><span class="asc-step-t">Generate the key</span></li>
+        <li data-step="captureKeyId" data-n="9"><span class="asc-badge"></span><span class="asc-step-t">Key ID captured</span></li>
+        <li data-step="downloadKey" data-n="10"><span class="asc-badge"></span><span class="asc-step-t">Download the API key</span></li>
+      </ol>
+      <div class="asc-captured">
+        <div class="asc-cap-row" data-cap="issuer"><div class="asc-cap-top"><span>Issuer ID</span><span class="asc-cap-badge">&#10003; Captured</span></div><code>69a6de1f-9a1f-&hellip;</code></div>
+        <div class="asc-cap-row" data-cap="key"><div class="asc-cap-top"><span>Key ID</span><span class="asc-cap-badge">&#10003; Captured</span></div><code>2X9F4ABC3D</code></div>
+      </div>
+    </aside>
+    <section class="asc-browser">
+      <div class="asc-urlbar"><span class="asc-nav">&#8249;</span><span class="asc-nav">&#8250;</span><span class="asc-nav">&#8635;</span><span class="asc-url">appstoreconnect.apple.com/access/integrations/api</span><span class="asc-lock">&#128274;</span></div>
+      <div class="asc-page">
+        <div class="asc-page-h">Users and Access</div>
+        <div class="asc-page-tabs"><span>People</span><span>Sandbox</span><span class="on">Integrations</span></div>
+        <div class="asc-keys-bar"><div class="asc-keys-meta"><div class="asc-keys-title">App Store Connect API</div><div class="asc-issuer">Issuer ID&nbsp; <code>69a6de1f-9a1f-4cde-&hellip;</code></div></div><button class="asc-plus" data-target="plus">+</button></div>
+        <div class="asc-thead"><span class="on">Active</span><span>Keys</span></div>
+        <div class="asc-table">
+          <div class="asc-trow asc-newkey" data-row="newkey"><span class="asc-kname">Capgo Builder</span><span class="asc-kid">2X9F4ABC3D</span><span class="asc-krole">Admin</span><a class="asc-dl" data-target="download">Download</a></div>
+          <div class="asc-empty">No active keys yet</div>
+        </div>
+        <div class="asc-dialog">
+          <div class="asc-dialog-card">
+            <div class="asc-dialog-h">Generate API Key</div>
+            <div class="asc-lab">Name</div>
+            <div class="asc-input" data-target="name"><span class="asc-typed">Capgo Builder</span><span class="asc-caret"></span></div>
+            <div class="asc-lab">Access</div>
+            <div class="asc-select" data-target="role"><span class="asc-ph">Select roles&hellip;</span><span class="asc-chip">Admin <b>&times;</b></span></div>
+            <div class="asc-dialog-actions"><button class="asc-btnghost">Cancel</button><button class="asc-btnprime" data-target="generate">Generate</button></div>
+          </div>
+        </div>
+        <div class="asc-screen asc-login">
+          <div class="asc-login-card">
+            <div class="asc-apple"></div>
+            <div class="asc-login-h">Sign in to App Store Connect</div>
+            <div class="asc-login-field" data-field="email"><span class="asc-login-typed">you@acme.com</span><span class="asc-login-caret"></span></div>
+            <div class="asc-login-field" data-field="pw"><span class="asc-login-typed asc-pw">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span><span class="asc-login-caret"></span><button class="asc-signin" data-target="signin">&rsaquo;</button></div>
+          </div>
+        </div>
+        <div class="asc-screen asc-team-pick">
+          <div class="asc-team-card">
+            <div class="asc-team-h">Choose your team</div>
+            <div class="asc-team-d">A key belongs to one team &mdash; and can&rsquo;t be moved later.</div>
+            <div class="asc-team-row sel"><span class="asc-mono-badge sm">A</span><div class="asc-team-meta"><b>Acme Inc</b><span>Admin</span></div><span class="asc-radio on"></span></div>
+            <div class="asc-team-row"><span class="asc-mono-badge sm alt">B</span><div class="asc-team-meta"><b>Beta LLC</b><span>Developer</span></div><span class="asc-radio"></span></div>
+            <button class="asc-team-go" data-target="team">Continue</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="asc-cursor"></div>
+  <div class="asc-callout"></div>
+  <div class="asc-success"><span class="asc-success-check">&#10003;</span><div class="asc-success-t"><b>Key captured</b><span>Returning to your terminal&hellip;</span></div></div>
+</div>`
+
+    const DOCK_HTML = `<div class="term-dock"><span class="dock-ico finder"></span><span class="dock-ico launchpad"></span><span class="dock-ico term active"></span><span class="dock-ico folder"></span></div>`
+    const CMD_LINE = `<span class="row"><span class="dim">$</span> <span class="cmd">capgo build init</span> <span class="flag">--platform</span> <span class="val">ios</span></span>`
+    const TERM_IDLE = CMD_LINE
+    // The terminal is a continuous build log: the init command, then each step's
+    // output accumulates beneath it (streamed line-by-line in advanceTerminal).
+    function terminalLog(uptoI: number) {
+      const startK = PLATFORMS[currentPlatform].content[0]?.kind === 'asc' ? 1 : 0
+      let rows = startK === 1 ? CMD_LINE : ''
+      for (let k = startK; k <= uptoI; k++) {
+        const c = PLATFORMS[currentPlatform].content[k]
+        if (c) rows += c.lines.map((l) => `<span class="row">${l}</span>`).join('')
+      }
+      return rows
+    }
+    function termWin(bodyHtml: string, cls = '') {
+      return `<div class="term-win${cls}"><div class="term-bar"><span class="term-lights"><i></i><i></i><i></i></span><span class="term-title">zsh — capgo · ~/my-app</span></div><div class="term-body">${bodyHtml}</div></div>`
+    }
+
+    function startAscAnim(stageEl: HTMLElement, onComplete?: () => void): { stop: () => void } {
+      const root = stageEl
+      const q = (s: string) => root.querySelector<HTMLElement>(s)
+      const win = q('.asc-win')
+      const cursor = q('.asc-cursor')
+      const stepNum = q('.asc-stepnum')
+      const cl = q('.asc-callout')
+      const LABELS: Record<string, string> = {
+        signin: 'Click to sign in',
+        team: 'Pick your team',
+        plus: 'Add a key',
+        name: 'Name the key',
+        role: 'Choose Admin',
+        generate: 'Generate',
+        download: 'Download key',
+      }
+      if (!win || !cursor) return { stop() {} }
+      const timers: ReturnType<typeof setTimeout>[] = []
+      let stopped = false
+      const at = (ms: number, fn: () => void) => { timers.push(setTimeout(() => { if (!stopped) fn() }, ms)) }
+      const ORDER = ['login', 'selectTeam', 'verifyAccess', 'captureIssuerId', 'createKey', 'nameKey', 'selectRole', 'generateKey', 'captureKeyId', 'downloadKey']
+      const URLS: Record<string, string> = { login: 'account.apple.com/sign-in', team: 'appstoreconnect.apple.com', keys: 'appstoreconnect.apple.com/access/integrations/api' }
+      const urlEl = q('.asc-url')
+      function setScreen(name: string) {
+        win!.dataset.screen = name
+        if (urlEl) urlEl.textContent = URLS[name] ?? urlEl.textContent
+      }
+
+      function mark(name: string, state: 'done' | 'current' | 'upcoming') {
+        const el = root.querySelector<HTMLElement>(`[data-step="${name}"]`)
+        if (!el) return
+        el.classList.remove('done', 'current', 'upcoming')
+        el.classList.add(state)
+        if (state === 'current') {
+          const list = root.querySelector<HTMLElement>('.asc-steps')
+          if (list) {
+            const lr = list.getBoundingClientRect()
+            const er = el.getBoundingClientRect()
+            list.scrollTop += (er.top - lr.top) - (lr.height - er.height) / 2
+          }
+          if (stepNum) stepNum.textContent = String(ORDER.indexOf(name) + 1)
+        }
+      }
+      function moveTo(sel: string) {
+        const t = root.querySelector<HTMLElement>(sel)
+        if (!t || !win) return
+        root.querySelectorAll('.hot').forEach(e => e.classList.remove('hot'))
+        t.classList.add('hot')
+        const tr = t.getBoundingClientRect()
+        const pr = win.getBoundingClientRect()
+        const isField = !!t.dataset.field
+        const targetX = tr.left - pr.left + tr.width / 2
+        const cursorX = tr.left - pr.left + (isField ? Math.min(46, tr.width * 0.3) : tr.width / 2)
+        const cy = tr.top - pr.top + tr.height / 2
+        cursor!.style.left = cursorX + 'px'
+        cursor!.style.top = cy + 'px'
+        const label = t.dataset.target ? LABELS[t.dataset.target] : ''
+        if (cl && label) {
+          cl.textContent = label
+          cl.classList.add('show')
+          const half = cl.offsetWidth / 2
+          const clampedX = Math.max(half + 6, Math.min(targetX, pr.width - half - 6))
+          cl.style.setProperty('--arrow-x', (targetX - clampedX) + 'px')
+          cl.style.left = clampedX + 'px'
+          cl.style.top = (tr.top - pr.top) + 'px'
+        }
+        else { cl?.classList.remove('show') }
+      }
+      function press(sel: string) {
+        const t = root.querySelector<HTMLElement>(sel)
+        if (t) { t.classList.add('press'); setTimeout(() => t.classList.remove('press'), 240) }
+        cl?.classList.remove('show')
+        cursor!.classList.remove('click')
+        void cursor!.offsetWidth
+        cursor!.classList.add('click')
+      }
+      function base() {
+        win!.classList.remove('dialog')
+        win!.classList.remove('minimizing')
+        q('.asc-input')?.classList.remove('filled')
+        q('.asc-select')?.classList.remove('picked')
+        q('[data-row="newkey"]')?.classList.remove('show')
+        q('[data-cap="issuer"]')?.classList.remove('show')
+        q('[data-cap="key"]')?.classList.remove('show')
+        q('.asc-success')?.classList.remove('show')
+        root.querySelectorAll('.hot').forEach(e => e.classList.remove('hot'))
+        cl?.classList.remove('show')
+        root.querySelectorAll('.asc-login-field').forEach(f => f.classList.remove('typing', 'done'))
+        ORDER.forEach(n => mark(n, 'upcoming'))
+        setScreen('login')
+        if (stepNum) stepNum.textContent = '1'
+        const pr = win!.getBoundingClientRect()
+        cursor!.style.left = (pr.width * 0.55) + 'px'
+        cursor!.style.top = (pr.height * 0.55) + 'px'
+      }
+
+      const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (reduce) {
+        ORDER.forEach(n => mark(n, 'done'))
+        setScreen('keys')
+        q('[data-row="newkey"]')?.classList.add('show')
+        q('[data-cap="issuer"]')?.classList.add('show')
+        q('[data-cap="key"]')?.classList.add('show')
+        q('.asc-success')?.classList.add('show')
+        cursor.style.display = 'none'
+        if (stepNum) stepNum.textContent = '10'
+        return { stop() {} }
+      }
+
+      function typeStart(field: string) { q(`[data-field="${field}"]`)?.classList.add('typing') }
+      function typeDone(field: string) { const f = q(`[data-field="${field}"]`); f?.classList.remove('typing'); f?.classList.add('done') }
+      function run() {
+        if (stopped) return
+        base()
+        at(450, () => { mark('login', 'current'); moveTo('[data-field="email"]') })
+        at(1250, () => { typeStart('email') })
+        at(2050, () => { typeDone('email'); moveTo('[data-field="pw"]') })
+        at(2850, () => { typeStart('pw') })
+        at(3650, () => { typeDone('pw'); moveTo('[data-target="signin"]') })
+        at(4450, () => { press('[data-target="signin"]'); mark('login', 'done'); mark('selectTeam', 'current'); setScreen('team'); moveTo('[data-target="team"]') })
+        at(5650, () => { press('[data-target="team"]'); mark('selectTeam', 'done'); mark('verifyAccess', 'done'); mark('captureIssuerId', 'current'); setScreen('keys') })
+        at(6450, () => { q('[data-cap="issuer"]')?.classList.add('show'); mark('captureIssuerId', 'done'); mark('createKey', 'current'); moveTo('[data-target="plus"]') })
+        at(7550, () => { press('[data-target="plus"]'); win!.classList.add('dialog'); mark('createKey', 'done'); mark('nameKey', 'current'); moveTo('[data-target="name"]') })
+        at(8450, () => { q('.asc-input')?.classList.add('filled') })
+        at(9250, () => { mark('nameKey', 'done'); mark('selectRole', 'current'); moveTo('[data-target="role"]') })
+        at(10150, () => { q('.asc-select')?.classList.add('picked') })
+        at(10650, () => { mark('selectRole', 'done'); mark('generateKey', 'current'); moveTo('[data-target="generate"]') })
+        at(11650, () => { press('[data-target="generate"]'); win!.classList.remove('dialog'); mark('generateKey', 'done'); mark('captureKeyId', 'current') })
+        at(12350, () => { q('[data-row="newkey"]')?.classList.add('show'); q('[data-cap="key"]')?.classList.add('show'); mark('captureKeyId', 'done'); mark('downloadKey', 'current') })
+        at(13200, () => { moveTo('[data-target="download"]') })
+        at(14000, () => { press('[data-target="download"]') })
+        at(14400, () => { mark('downloadKey', 'done') })
+        at(15200, () => { q('.asc-success')?.classList.add('show') })
+        at(17150, () => { q('.asc-success')?.classList.remove('show'); moveTo('[data-target="minimize"]') })
+        at(18050, () => { press('[data-target="minimize"]'); win!.classList.add('minimizing') })
+        at(19200, () => { if (onComplete) onComplete() })
+      }
+      run()
+      return { stop() { stopped = true; timers.forEach(clearTimeout) } }
+    }
 
     function getSteps() {
       return wizardEl!.querySelectorAll<HTMLElement>(`.wizard-step[data-platform="${currentPlatform}"]`)
     }
 
-    function paint(i: number) {
+    function paint(i: number, play = false, onComplete?: () => void) {
       const c = PLATFORMS[currentPlatform].content[i]
       if (!c) return
+      if (ascAnim) { ascAnim.stop(); ascAnim = null }
       const total = PLATFORMS[currentPlatform].content.length
-      stage!.innerHTML = `<h4>Step ${i + 1} / ${total} — ${c.title}</h4>${c.lines.map((l) => `<span class="row">${l}</span>`).join('')}`
+      const head = `<h4>Step ${i + 1} / ${total} — ${c.title}</h4>`
+      if (c.kind === 'asc') {
+        stage!.innerHTML = `${head}<div class="desk" aria-hidden="true">${termWin(TERM_IDLE, ' behind')}${ASC_HTML}${DOCK_HTML}</div>`
+        if (play) ascAnim = startAscAnim(stage!, onComplete)
+      } else {
+        stage!.innerHTML = `${head}<div class="desk" aria-hidden="true">${termWin(terminalLog(i))}${DOCK_HTML}</div>`
+      }
       getSteps().forEach((s, j) => {
         s.classList.toggle('active', j === i)
         s.classList.toggle('done', j < i)
@@ -2893,11 +4077,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
 
     function setPlatform(p: string) {
       if (!PLATFORMS[p] || p === currentPlatform) return
+      if (ascAnim) { ascAnim.stop(); ascAnim = null }
       if (autoTimer) {
         clearInterval(autoTimer)
         autoTimer = null
       }
-      started = true
       currentPlatform = p
       wizardEl!.setAttribute('data-platform', p)
       wizardEl!.querySelectorAll<HTMLElement>('.wizard-step').forEach((s) => {
@@ -2915,12 +4099,15 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       if (baAfter) baAfter.textContent = PLATFORMS[p].after
       getSteps().forEach((s, j) => {
         ;(s as HTMLElement).onclick = () => {
+          if (autoTimer) { clearInterval(autoTimer); autoTimer = null }
           idx = j
-          paint(idx)
+          paint(idx, PLATFORMS[currentPlatform].content[j]?.kind === 'asc')
         }
       })
+      playing = false
+      completed = false
       idx = 0
-      paint(0)
+      startAutoplay()
     }
 
     wizardEl.querySelectorAll<HTMLElement>('.wizard-step').forEach((s) => {
@@ -2928,8 +4115,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     })
     getSteps().forEach((s, j) => {
       s.onclick = () => {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null }
         idx = j
-        paint(idx)
+        paint(idx, PLATFORMS[currentPlatform].content[j]?.kind === 'asc')
       }
     })
     paint(0)
@@ -2940,27 +4128,85 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       })
     }
 
+    // Update the already-visible terminal in place (no desk re-render) so steps
+    // flow smoothly without a hard cut.
+    function advanceTerminal(i: number) {
+      const c = PLATFORMS[currentPlatform].content[i]
+      if (!c) return
+      const total = PLATFORMS[currentPlatform].content.length
+      const h4 = stage!.querySelector('h4')
+      if (h4) h4.textContent = `Step ${i + 1} / ${total} — ${c.title}`
+      const body = stage!.querySelector<HTMLElement>('.term-body')
+      if (body) {
+        const rows = c.lines.map((l, k) => `<span class="row" style="animation-delay:${(k * 0.16).toFixed(2)}s">${l}</span>`).join('')
+        body.insertAdjacentHTML('beforeend', rows)
+        body.scrollTop = body.scrollHeight
+      }
+      getSteps().forEach((s, j) => {
+        s.classList.toggle('active', j === i)
+        s.classList.toggle('done', j < i)
+      })
+    }
+    function stepThrough() {
+      const len = PLATFORMS[currentPlatform].content.length
+      autoTimer = setInterval(() => {
+        idx++
+        if (idx >= len) {
+          if (autoTimer) clearInterval(autoTimer)
+          autoTimer = null
+          idx = len - 1
+          return
+        }
+        advanceTerminal(idx)
+      }, 2000)
+    }
+    // Autoplay only while the wizard is on-screen AND the tab is visible; stop
+    // (and replay from the start on return) when the user looks away.
+    function startAutoplay() {
+      if (playing || completed || !inView || !pageVisible) return
+      idx = 0
+      if (PLATFORMS[currentPlatform].content[0]?.kind === 'asc') {
+        playing = true
+        paint(0, true, () => {
+          completed = true
+          idx = 1
+          stage!.querySelector('.asc-win')?.remove()
+          advanceTerminal(idx)
+          stepThrough()
+        })
+      } else {
+        playing = true
+        paint(0)
+        stepThrough()
+      }
+    }
+    function stopAutoplay() {
+      if (ascAnim) { ascAnim.stop(); ascAnim = null }
+      if (autoTimer) { clearInterval(autoTimer); autoTimer = null }
+      if (!completed) {
+        playing = false
+        idx = 0
+        paint(0)
+      }
+    }
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting && !started) {
-            started = true
-            autoTimer = setInterval(() => {
-              idx++
-              const len = PLATFORMS[currentPlatform].content.length
-              if (idx >= len) {
-                if (autoTimer) clearInterval(autoTimer)
-                idx = len - 1
-                return
-              }
-              paint(idx)
-            }, 1700)
-          }
+          inView = e.isIntersecting
+          if (inView) startAutoplay()
+          else stopAutoplay()
         })
       },
-      { threshold: 0.3 },
+      { threshold: 0.1 },
     )
     io.observe(stage)
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', () => {
+        pageVisible = !document.hidden
+        if (pageVisible) startAutoplay()
+        else stopAutoplay()
+      })
+    }
   })()
 
   // ----------------------------------------------------------------

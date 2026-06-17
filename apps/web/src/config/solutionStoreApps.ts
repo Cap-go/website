@@ -310,6 +310,15 @@ const solutionStoreAppRows = [
     4.3332243,
   ],
   [
+    'com.shelf.app',
+    'Shelf: App Curator',
+    'https://play-lh.googleusercontent.com/oqim9MReED2iC6SgJ12qpK5fE2aLwrJ7tVJVZScVc9WksCeaO3T3u0EcKJo42apxfyXQKuJI5zA95iummqu3',
+    'https://play.google.com/store/apps/details?id=com.shelf.app&hl=en&gl=us',
+    'Tools',
+    15338,
+    4.6,
+  ],
+  [
     'ua.vodafone.myvodafone',
     'My Vodafone',
     'https://play-lh.googleusercontent.com/xuGh4YAt0sOfSJJbfd3unyYKWvcgVZ1xxy62UwICVxct9f53kvT0-xnwVvIpOMSRrgg',
