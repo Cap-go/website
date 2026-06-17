@@ -1,0 +1,164 @@
+---
+import CompetitorComparison from '@/components/CompetitorComparison.astro'
+import Layout from '@/layouts/Layout.astro'
+import { createFAQPageLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+
+const faq = [
+  {
+    question: 'Is Expo better than Capgo?',
+    answer:
+      'Expo is the better fit if your app is already React Native. Capgo is the better fit if you have a web app and want to ship it as a mobile app with Capacitor instead of rebuilding the UI in React Native.',
+  },
+  {
+    question: 'Can Capgo update Expo apps?',
+    answer: 'No. Capgo updates Capacitor apps through the Capgo updater plugin. Expo apps should use the Expo update ecosystem, such as EAS Update with expo-updates.',
+  },
+  {
+    question: 'Can EAS Update update Capacitor apps?',
+    answer:
+      'EAS Update serves updates for projects using the expo-updates library. Capacitor apps use a different runtime and plugin model, so Capgo is the direct fit for Capacitor live updates.',
+  },
+  {
+    question: 'Is Capgo cheaper than EAS?',
+    answer:
+      'For paid cloud workflows, Capgo starts cheaper: $12/mo yearly or $14/mo monthly, with native build time included on every plan. Expo paid EAS starts at $19/mo + usage and scales through build credits and usage-based billing.',
+  },
+  {
+    question: 'Which stack should a web team choose?',
+    answer:
+      'If you already have a working web app, Capacitor with Capgo lets you keep that codebase and add iOS, Android, live updates, native builds, and rollback. Expo makes sense when you want a React Native app.',
+  },
+]
+
+const page = {
+  eyebrow: 'Expo comparison',
+  title: 'Expo vs Capgo for web apps',
+  description:
+    'Already have a web app? Compare rebuilding it in React Native with Expo and EAS versus shipping it as a Capacitor mobile app with Capgo live updates and native builds.',
+  subtitle: 'Already React Native? Use Expo. Have a web app? Use Capacitor with Capgo and avoid a rewrite.',
+  competitor: 'Expo',
+  competitorShort: 'Expo',
+  capgoSummary:
+    'Capgo helps web teams turn an existing web app into iOS and Android apps with Capacitor. It starts cheaper than paid EAS, includes native build time on every plan, and adds live updates, rollback, channels, and logs.',
+  competitorSummary:
+    'Expo is a strong React Native framework and service platform. It is the right comparison when you want React Native, not when you want to keep a web app codebase.',
+  verdict: 'Choose Expo when your product is React Native. Choose Capgo when your product is a web app and the business goal is to ship mobile without rewriting everything.',
+  capgoFitTitle: 'Choose Capgo when',
+  competitorFitTitle: 'Choose Expo when',
+  capgoFits: [
+    'You already have a web app and want iOS and Android without rewriting the UI in React Native.',
+    'Your app uses React, Vue, Angular, Svelte, Ionic, or another web UI stack that can run through Capacitor.',
+    'You want to ship allowed web bundle fixes without rebuilding the native binary each time.',
+    'You want native builds, live updates, rollback, channels, device logs, and direct Capacitor plugin control.',
+  ],
+  competitorFits: [
+    'You already have a React Native app or intentionally want React Native for the mobile UI.',
+    'You want Expo SDK, EAS Build, EAS Submit, and EAS Update as one React Native-oriented platform.',
+    'Your team is comfortable with React Native native modules, config plugins, and Expo runtime concepts.',
+    'You accept rebuilding the mobile UI instead of keeping the existing web app UI.',
+  ],
+  differences: [
+    {
+      label: 'Core stack',
+      capgo: 'Existing web apps that run inside native iOS and Android projects through Capacitor.',
+      competitor: 'React Native apps using the Expo framework, Expo SDK, and EAS services.',
+    },
+    {
+      label: 'Update service',
+      capgo: 'Capgo updater plugin plus Capgo cloud or self-hosted infrastructure for Capacitor web bundles.',
+      competitor: 'EAS Update serves updates for projects using the expo-updates library.',
+    },
+    {
+      label: 'Compatibility model',
+      capgo: 'Native-code changes still need a new binary; web bundle updates can be targeted by channel, version, and rollout rules.',
+      competitor: 'Runtime versions guarantee that an update is compatible with the native code in a build.',
+    },
+    {
+      label: 'Native builds',
+      capgo: 'Capgo Build helps produce iOS and Android artifacts for Capacitor projects, with native build time included on every paid plan.',
+      competitor: 'EAS Build compiles and signs Android and iOS apps for Expo and React Native projects.',
+    },
+    {
+      label: 'Price path',
+      capgo: 'Capgo starts at $12/mo yearly or $14/mo monthly, and every plan includes native build time.',
+      competitor: 'Expo paid EAS starts at $19/mo + usage; Production is $199/mo + usage, with build credits and overages.',
+    },
+    {
+      label: 'Native APIs',
+      capgo: 'Capacitor plugins, maintained Capgo plugins, and custom native code in Swift, Kotlin, Java, or Objective-C.',
+      competitor: 'Expo modules, React Native native modules, config plugins, and Expo SDK APIs.',
+    },
+    {
+      label: 'Best migration',
+      capgo: 'Existing web apps that need a mobile app path without a React Native rewrite.',
+      competitor: 'React Native apps, Expo apps, or teams intentionally moving mobile UI to React Native.',
+    },
+  ],
+  narratives: [
+    {
+      title: 'When Expo wins',
+      text: 'Expo is a mature path for React Native teams. If the app is already React Native, this is not a real Capgo comparison; Expo and EAS are built for that stack.',
+      items: ['Best for React Native UI.', 'Strong service bundle around EAS.', 'Runtime-version model for update compatibility.'],
+    },
+    {
+      title: 'When Capgo wins',
+      text: 'Capgo is the direct path when the starting point is a web app. Keep the UI, wrap it with Capacitor, then use Capgo for live updates, rollback, channels, logs, and native builds.',
+      items: ['Avoid a React Native rewrite.', 'Works with web framework output.', 'Adds cheaper paid plans with native build time included.'],
+    },
+    {
+      title: 'How to choose',
+      text: 'Compare the codebase you want to maintain. If you want React Native, pick Expo. If you want to turn a web app into a mobile app, pick Capacitor with Capgo.',
+      items: ['Pick Expo for React Native.', 'Pick Capgo for web app to mobile.', 'Pick by the rewrite you want to avoid.'],
+    },
+  ],
+  faq,
+  sources: [
+    { label: 'Expo EAS Update introduction', href: 'https://docs.expo.dev/eas-update/introduction/' },
+    { label: 'How EAS Update works', href: 'https://docs.expo.dev/eas-update/how-it-works/' },
+    { label: 'EAS Update deployment', href: 'https://docs.expo.dev/eas-update/deployment/' },
+    { label: 'Expo runtime versions', href: 'https://docs.expo.dev/eas-update/runtime-versions/' },
+    { label: 'expo-updates documentation', href: 'https://docs.expo.dev/versions/latest/sdk/updates/' },
+    { label: 'Expo Application Services', href: 'https://expo.dev/services' },
+    { label: 'Expo pricing', href: 'https://expo.dev/pricing' },
+    { label: 'Expo billing docs', href: 'https://docs.expo.dev/billing/plans/' },
+    { label: 'Capgo pricing', href: 'https://capgo.app/pricing/' },
+    { label: 'Capgo live updates', href: 'https://capgo.app/live-update/' },
+    { label: 'Capgo native builds', href: 'https://capgo.app/native-build/' },
+  ],
+  sourceNote: 'Checked against official Expo docs and Capgo product pages on June 17, 2026.',
+}
+
+const content = {
+  title: page.title,
+  description: page.description,
+  canonical: pageUrl,
+  url: pageUrl,
+  image: `${config.baseUrl}/capgo_social.png`,
+  keywords: 'Expo vs Capgo, Expo alternative, EAS Update, Capacitor live updates, Capgo',
+  ldJSON: createLdJsonGraph(
+    config,
+    createWebPageLdJson(config, {
+      name: page.title,
+      description: page.description,
+      url: pageUrl,
+    }),
+    {
+      includeOrganization: true,
+      additionalEntities: [
+        createFAQPageLdJson(config, {
+          url: pageUrl,
+          questions: faq,
+        }),
+      ],
+    },
+  ),
+}
+---
+
+<Layout content={content}>
+  <CompetitorComparison page={page} locale={locale} />
+</Layout>
