@@ -1,4 +1,6 @@
 ---
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
@@ -695,6 +697,13 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         </section>
       )
     }
+    <ProductTestimonials
+      variant="native"
+      eyebrow="Builder proof"
+      title="Native build work gets simpler when the release record stays in one place"
+      description="Short reviews from teams using Capgo for build, signing, and release workflows around Capacitor apps."
+      testimonials={productTestimonials.nativeBuild}
+    />
 
     <!-- ============================================ FAQ ============================================ -->
     <section class="section" id="faq">

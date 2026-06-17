@@ -1,17 +1,18 @@
 ---
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import PluginIcon from '@/components/PluginIcon.astro'
 import { actions, pluginCategories } from '@/config/plugins'
+import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import { createItemListLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import m from '@/copy/messages'
 import { getSlug, getPluginsWithStars, getTotalStars, getTotalDownloads, getGitHubCommunityStats } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
 import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
-import PluginIcon from '@/components/PluginIcon.astro'
 import { Icon as AstroIcon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
-
 const locale = Astro.locals.locale ?? defaultLocale
 const brand = Astro.locals.runtimeConfig.public.brand
 const config = Astro.locals.runtimeConfig.public
@@ -403,6 +404,13 @@ const content = {
         </div>
       </div>
     </section>
+
+    <ProductTestimonials
+      eyebrow="Plugin proof"
+      title="Capacitor teams often start with plugins and stay for the release workflow"
+      description="Short reviews from developers using Capgo plugins and updater workflows in production Capacitor apps."
+      testimonials={productTestimonials.plugins}
+    />
 
     <!-- Hero Section -->
     <section class="relative px-6 pt-24 pb-16 lg:px-8">

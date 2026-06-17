@@ -1,4 +1,6 @@
 ---
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -1267,6 +1269,12 @@ npx @capgo/cli bundle upload <span class="text-cyan-400">--partial</span>
         </div>
       </div>
     </section>
+    <ProductTestimonials
+      eyebrow="Live update proof"
+      title="Capacitor teams use Capgo to move faster without waiting on app review"
+      description="A few short reviews from teams using Capgo for production updates, QA channels, and real-device rollout control."
+      testimonials={productTestimonials.liveUpdate}
+    />
 
     <!-- CTA Section -->
     <div class="relative bg-gray-900 py-16 sm:py-20">

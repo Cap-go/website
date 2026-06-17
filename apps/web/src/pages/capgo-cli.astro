@@ -1,0 +1,318 @@
+---
+import ProductAppExamples from '@/components/ProductAppExamples.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
+import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const title = 'Capgo CLI | Build, preview, and ship Capacitor apps safely'
+const description =
+  'Use the Capgo CLI to initialize Capacitor apps, upload safe live updates, check compatibility, request native builds, run devices, and expose Capgo workflows through MCP.'
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+}
+
+const heroStats = [
+  ['MCP', 'App, bundle, channel, build, stats, and diagnostic tools for AI agents.'],
+  ['Release type', 'Compatibility checks recommend OTA or native before you ship.'],
+  ['Native builds', 'Request signed iOS and Android builds and keep output records for CI.'],
+]
+
+const capabilities = [
+  {
+    title: 'MCP server for AI-assisted release work',
+    description:
+      'Start the CLI MCP server so agents can list and manage apps, upload bundles, manage channels, check compatibility, request native builds, run diagnostics, and generate encryption keys.',
+  },
+  {
+    title: 'Safe live-update uploads',
+    description: 'Upload bundles with compatibility gates, delta updates, encryption, metadata, cleanup, and QR preview links for quick test passes.',
+  },
+  {
+    title: 'OTA or native build decision support',
+    description:
+      'Run compatibility or release-type commands before production. When native dependencies change, the CLI points you toward a native build instead of a risky live update.',
+  },
+  {
+    title: 'Native build requests from the same terminal',
+    description: 'Request cloud builds for iOS or Android, keep output links and QR records for automation, and avoid parking signing credentials permanently on Capgo.',
+  },
+  {
+    title: 'Device and simulator loops',
+    description: 'Initialize the app, run it on physical devices or simulators, and keep the native verification step near the release command.',
+  },
+  {
+    title: 'App, channel, and bundle operations',
+    description: 'Use CLI and MCP commands to add apps, update channels, inspect bundles, clean old releases, probe delivery, and read account or organization state.',
+  },
+]
+
+const commands = [
+  {
+    label: 'Initialize updates, upload, build, and verification flows',
+    command: 'npx @capgo/cli@latest init',
+  },
+  {
+    label: 'Ask whether a release should be OTA or native',
+    command: 'npx @capgo/cli@latest bundle releaseType com.acme.app --channel production',
+  },
+  {
+    label: 'Upload a guarded live update with a preview QR',
+    command: 'npx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible --qr-preview',
+  },
+  {
+    label: 'Request a native build and keep output for CI or PRs',
+    command: 'npx @capgo/cli@latest build request com.acme.app --platform ios --build-mode release --output-upload --output-record .capgo/build.json',
+  },
+  {
+    label: 'Expose Capgo tools to an MCP-compatible agent',
+    command: 'npx @capgo/cli@latest mcp',
+  },
+]
+
+const mcpTools = ['Apps', 'Bundles', 'Channels', 'Compatibility', 'Native builds', 'Stats', 'Doctor', 'Delivery probe']
+const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.miorange', 'ua.vodafone.myvodafone']
+---
+
+<Layout content={content}>
+  <section class="bg-slate-950 pt-12 pb-16 sm:pt-16 lg:pt-20 lg:pb-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+        <div>
+          <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Capgo CLI</p>
+          <h1 class="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-balance text-white sm:text-6xl lg:text-7xl">Capgo CLI</h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-pretty text-slate-300 sm:text-xl">
+            One terminal for live updates, native builds, compatibility checks, device runs, and AI-assisted Capgo automation through MCP.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli')}
+              class="inline-flex min-h-12 items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+            >
+              Read CLI docs
+            </a>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+              class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              Create account
+            </a>
+          </div>
+
+          <div class="mt-10 grid gap-3 sm:grid-cols-3">
+            {
+              heroStats.map(([label, text]) => (
+                <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+                  <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">{label}</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-300">{text}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="rounded-lg border border-white/10 bg-slate-900 shadow-2xl shadow-black/40">
+          <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+            <span class="h-3 w-3 rounded-full bg-rose-400"></span>
+            <span class="h-3 w-3 rounded-full bg-amber-300"></span>
+            <span class="h-3 w-3 rounded-full bg-emerald-400"></span>
+            <p class="ml-3 font-mono text-xs text-slate-500">release-terminal</p>
+          </div>
+          <div class="space-y-5 p-5 font-mono text-sm leading-7 text-slate-200 sm:p-6">
+            <div>
+              <p class="text-slate-500">$ npx @capgo/cli@latest bundle releaseType com.acme.app --channel production</p>
+              <p class="text-emerald-300">Recommendation: OTA update</p>
+              <p class="text-slate-400">No native dependency drift detected for production.</p>
+            </div>
+            <div>
+              <p class="text-slate-500">$ npx @capgo/cli@latest bundle upload --fail-on-incompatible --qr-preview</p>
+              <p class="text-cyan-300">Compatibility gate passed. Delta upload ready.</p>
+              <p class="text-slate-400">Preview QR generated for device testing.</p>
+            </div>
+            <div>
+              <p class="text-slate-500">$ npx @capgo/cli@latest build request com.acme.app --platform ios --output-upload --output-record .capgo/build.json</p>
+              <p class="text-amber-200">Build request queued. Output record saved for CI.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">What the CLI gives your team</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Release automation for CapacitorJS apps with a native safety check built in</h2>
+        <p class="mt-5 text-base leading-7 text-pretty text-slate-300">
+          The CLI is the path from local Capacitor project to production release. It sets up the app, verifies what can ship OTA, and keeps native build work available when
+          dependencies require it.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {
+          capabilities.map((capability) => (
+            <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-200 ring-1 ring-cyan-300/25">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold tracking-tight text-white">{capability.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-300">{capability.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 text-slate-950 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end">
+        <div class="max-w-3xl">
+          <p class="font-mono text-sm font-semibold tracking-wide text-blue-700 uppercase">Command flow</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">From setup to the right release type</h2>
+          <p class="mt-5 text-base leading-7 text-pretty text-slate-600">
+            Capgo CLI commands make the important release fork explicit: live update when the web layer changed, native build when the app binary needs to move.
+          </p>
+        </div>
+
+        <div class="grid gap-3 sm:grid-cols-2">
+          <div class="rounded-lg border border-slate-200 bg-slate-50 p-5">
+            <p class="text-sm font-semibold text-slate-950">OTA path</p>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Use compatibility gates and preview QR links when the web bundle can move safely.</p>
+          </div>
+          <div class="rounded-lg border border-slate-200 bg-slate-50 p-5">
+            <p class="text-sm font-semibold text-slate-950">Native path</p>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Request a signed build when dependencies, permissions, or native code changed.</p>
+          </div>
+        </div>
+      </div>
+
+      <ol class="mt-10 divide-y divide-slate-200 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+        {
+          commands.map((item, index) => (
+            <li class="grid gap-4 p-5 sm:p-6 lg:grid-cols-[minmax(0,0.58fr)_minmax(0,1fr)] lg:items-center">
+              <div class="flex min-w-0 items-start gap-4">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-950 text-sm font-semibold text-white">{index + 1}</div>
+                <h3 class="pt-1 text-base leading-6 font-semibold tracking-tight text-slate-950">{item.label}</h3>
+              </div>
+              <div class="min-w-0 rounded-lg bg-slate-950 p-4">
+                <code class="block text-left font-mono text-[13px] leading-6 break-words whitespace-pre-wrap text-cyan-100">{item.command}</code>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
+      <div>
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Native builds and MCP</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Let the CLI handle the release work your app actually needs</h2>
+        <p class="mt-5 text-base leading-7 text-pretty text-slate-300">
+          When compatibility says the change is OTA-safe, ship a guarded live update. When native code, permissions, or dependencies changed, request a native build and keep the
+          output visible for CI, PRs, and reviewers.
+        </p>
+
+        <div class="mt-8 grid gap-3 sm:grid-cols-2">
+          {mcpTools.map((tool) => <div class="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-slate-100">{tool}</div>)}
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-cyan-300/20 bg-slate-900 p-5 shadow-2xl shadow-black/40 sm:p-6">
+        <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">Build record</p>
+            <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white">iOS release build</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-300">Saved output for CI, PR checks, and mobile review.</p>
+          </div>
+          <span class="inline-flex w-fit items-center rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-200 ring-1 ring-emerald-300/30">ready</span>
+        </div>
+
+        <dl class="mt-5 grid gap-3 sm:grid-cols-2">
+          <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+            <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Platform</dt>
+            <dd class="mt-1 text-sm font-semibold text-white">iOS</dd>
+          </div>
+          <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+            <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Mode</dt>
+            <dd class="mt-1 text-sm font-semibold text-white">release</dd>
+          </div>
+          <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+            <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Output</dt>
+            <dd class="mt-1 text-sm font-semibold text-white">IPA and install QR</dd>
+          </div>
+          <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+            <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Record</dt>
+            <dd class="mt-1 font-mono text-sm font-semibold text-cyan-200">.capgo/build.json</dd>
+          </div>
+        </dl>
+
+        <div class="mt-5 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10">
+          <code class="block font-mono text-[13px] leading-6 break-words whitespace-pre-wrap text-cyan-100"
+            >npx @capgo/cli@latest build request com.acme.app --platform ios --output-upload --output-record .capgo/build.json</code
+          >
+        </div>
+
+        <div class="mt-5 grid gap-3 text-sm leading-6 text-slate-300 sm:grid-cols-3">
+          <p class="rounded-lg border border-emerald-300/20 bg-emerald-400/10 p-3 text-emerald-100">Status is visible before release notes are posted.</p>
+          <p class="rounded-lg border border-cyan-300/20 bg-cyan-400/10 p-3 text-cyan-100">QR output stays available for device validation.</p>
+          <p class="rounded-lg border border-amber-300/20 bg-amber-400/10 p-3 text-amber-100">Errors can fail CI before a risky release ships.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ProductAppExamples
+    title="Capacitor apps need release tooling that respects native boundaries"
+    description="Large Capacitor apps mix web changes with native dependencies. The Capgo CLI keeps that boundary visible before a production release goes out."
+    appIds={appExampleIds}
+  />
+
+  <ProductTestimonials
+    eyebrow="CLI proof"
+    title="Release workflows people trust from terminal to production"
+    description="Short reviews from teams using Capgo for Capacitor updates, native builds, and release control."
+    testimonials={productTestimonials.cli}
+  />
+
+  <section class="bg-slate-900 py-16 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
+      <div>
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Use the CLI today</p>
+        <h2 class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
+          Add Capgo to your release scripts without waiting on a dashboard session.
+        </h2>
+        <p class="mt-5 max-w-2xl text-base leading-7 text-slate-300">
+          Start with the CLI docs, then wire compatibility checks, bundle uploads, native builds, or MCP into the workflow your team already uses.
+        </p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/reference/bundle')}
+          class="inline-flex min-h-12 items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+        >
+          Bundle commands
+        </a>
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/reference/build')}
+          class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          Build commands
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
