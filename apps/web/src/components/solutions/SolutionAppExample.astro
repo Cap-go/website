@@ -3,6 +3,7 @@ import m, { type MessageKey, type MessageValues } from '@/copy/messages'
 import { solutionAppExamples, type SolutionAppExampleKey } from '@/config/solutionAppExamples'
 import { solutionStoreApps } from '@/config/solutionStoreApps'
 import { renameCat, shortNumber } from '@/services/misc'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 interface Props {
   solution: SolutionAppExampleKey
@@ -19,6 +20,9 @@ const appExamples = example.apps.map((appReference) => ({
 }))
 const plays = example.playKeys.map((playKey) => copy(playKey))
 const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.category)).filter(Boolean))].slice(0, 3).join(', ')
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
+const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
+const showExampleCtas = solution === 'enterprise'
 ---
 
 {
@@ -55,6 +59,29 @@ const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.catego
                 </div>
               ))}
             </div>
+            {showExampleCtas && (
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+                <a
+                  href={registerUrl}
+                  class="inline-flex items-center justify-center gap-2 rounded-lg bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                >
+                  {copy('solutions_get_started')}
+                  <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.22 14.78a.75.75 0 0 1 0-1.06L12.94 6H8.75a.75.75 0 0 1 0-1.5h6a.75.75 0 0 1 .75.75v6a.75.75 0 0 1-1.5 0V7.06l-7.72 7.72a.75.75 0 0 1-1.06 0Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href={talkToTeamUrl}
+                  class="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-cyan-300/60 hover:text-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                >
+                  {copy('solutions_talk_to_team')}
+                </a>
+              </div>
+            )}
           </div>
 
           <div class="grid gap-4 md:grid-cols-3">
