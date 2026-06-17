@@ -4667,7 +4667,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         q('.asc-success')?.classList.add('show')
         cursor.style.display = 'none'
         if (stepNum) stepNum.textContent = '10'
-        return { stop() {} }
+        // Reduced motion still has to hand control back to the terminal, or the
+        // wizard would stall on the App Store Connect screen forever.
+        at(900, () => { if (onComplete) onComplete() })
+        return { stop() { stopped = true; timers.forEach(clearTimeout) } }
       }
 
       function typeStart(field: string) { q(`[data-field="${field}"]`)?.classList.add('typing') }
@@ -4794,7 +4797,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         root.querySelector('[data-target="teamAcme"]')?.classList.add('sel')
         q('.goog-console')?.classList.add('picked')
         cursor.style.display = 'none'
-        return { stop() {} }
+        // Reduced motion still has to hand control back to the terminal, or the
+        // wizard would stall on the Play Console screen forever.
+        at(900, () => { if (onComplete) onComplete() })
+        return { stop() { stopped = true; timers.forEach(clearTimeout) } }
       }
 
       function typeStart(field: string) { q(`[data-field="${field}"]`)?.classList.add('typing') }
