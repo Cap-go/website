@@ -201,8 +201,8 @@ export const solutionAppExamples = {
     useCaseKey: 'solution_app_examples_production_updates_use_case',
     apps: [
       { appId: 'com.windyty.android', noteKey: 'solution_app_examples_production_updates_app_1_note' },
-      { appId: 'air.com.playtika.slotomania', noteKey: 'solution_app_examples_production_updates_app_2_note' },
-      { appId: 'com.playtika.caesarscasino', noteKey: 'solution_app_examples_production_updates_app_3_note' },
+      { appId: 'br.gov.datasus.cnsdigital', noteKey: 'solution_app_examples_production_updates_app_2_note' },
+      { appId: 'com.orange.miorange', noteKey: 'solution_app_examples_production_updates_app_3_note' },
     ],
     playKeys: ['solution_app_examples_production_updates_play_1', 'solution_app_examples_production_updates_play_2', 'solution_app_examples_production_updates_play_3'],
   },
