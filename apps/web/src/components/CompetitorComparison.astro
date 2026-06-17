@@ -145,8 +145,14 @@ const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
           page.differences.map((item) => (
             <div class="grid gap-4 bg-gray-950 p-5 md:grid-cols-[0.7fr_1fr_1fr] md:gap-0 md:p-0">
               <div class="font-semibold text-white md:px-5 md:py-4">{item.label}</div>
-              <div class="text-base leading-7 text-gray-300 md:px-5 md:py-4">{item.capgo}</div>
-              <div class="text-base leading-7 text-gray-300 md:px-5 md:py-4">{item.competitor}</div>
+              <div class="text-base leading-7 text-gray-300 md:px-5 md:py-4">
+                <p class="mb-1 text-xs font-semibold tracking-wide text-sky-200 uppercase md:hidden">Capgo</p>
+                {item.capgo}
+              </div>
+              <div class="text-base leading-7 text-gray-300 md:px-5 md:py-4">
+                <p class="mb-1 text-xs font-semibold tracking-wide text-amber-200 uppercase md:hidden">{page.competitorShort}</p>
+                {item.competitor}
+              </div>
             </div>
           ))
         }
