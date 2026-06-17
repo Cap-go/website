@@ -63,7 +63,7 @@ const showExampleCtas = solution === 'enterprise'
               <div class="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
                 <a
                   href={registerUrl}
-                  class="inline-flex items-center justify-center gap-2 rounded-lg bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                  class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-cyan-300 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
                 >
                   {copy('solutions_get_started')}
                   <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -76,9 +76,17 @@ const showExampleCtas = solution === 'enterprise'
                 </a>
                 <a
                   href={talkToTeamUrl}
-                  class="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-cyan-300/60 hover:text-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={copy('solutions_talk_to_team')}
+                  class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 >
-                  {copy('solutions_talk_to_team')}
+                  <span class="flex -space-x-2" aria-hidden="true">
+                    <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/martin-avatar.png" alt="" width="24" height="24" loading="lazy" />
+                    <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
+                    <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
+                  </span>
+                  <span>{copy('solutions_talk_to_team')}</span>
                 </a>
               </div>
             )}
