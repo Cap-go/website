@@ -65,6 +65,7 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
 const content = {
   title,
   description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-native-build.png`,
   ldJSON,
 }
 

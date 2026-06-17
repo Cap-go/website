@@ -29,7 +29,7 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
   includeOrganization: true,
 })
 
-const content = { title, description, ldJSON }
+const content = { title, description, image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-ionic-plugins.png`, ldJSON }
 ---
 
 <Layout content={content}>

@@ -10,7 +10,7 @@ const credentialsDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/c
 const ciCdDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/getting-started/cicd-integration')
 ---
 
-<Layout content={{ title: pageTitle, description: pageDescription }}>
+<Layout content={{ title: pageTitle, description: pageDescription, image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-ci-cd.png` }}>
   <div>
     <!-- Hero Section -->
     <section class="relative overflow-hidden bg-gray-900 py-20 sm:py-24 lg:py-32">
