@@ -161,6 +161,15 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `ping` | Health/heartbeat check from device |
 | `setChannel`, `getChannel` | Channel overridden or fetched via SDK call |
 
+### New policy-block events (quick fix)
+| Code | Why this happens | What to do next |
+|------|------------------|-------------|
+| `disableProdBuild` | A production build called `/updates`, but this channel does not allow production updates. | Allow production updates in that channel, or build your app as non-production. |
+| `disableDevice` | A real phone or tablet used a blocked channel. | Turn on real-device updates for that channel. |
+| `disablePlatformElectron` | The channel does not allow Electron apps. | Turn on Electron in that channel, or move Electron apps to another channel. |
+| `customIdBlocked` | A custom device ID was sent, but this app does not accept custom IDs. | Turn on custom IDs only if you need them. |
+| `backend_refusal` | The updater is `v4`, which the backend no longer accepts. Update to updater `v5` or newer (prefer `v8`) with a Capacitor `v5`+ app, then rebuild and republish bundle metadata. | Update updater plugin/CLI, rebuild, and republish bundle metadata. |
+
 **Configuration or policy blocks**
 
 | Code(s) | Why the update was blocked |
@@ -168,8 +177,8 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `disableAutoUpdate`, `disableAutoUpdateToMajor`, `disableAutoUpdateToMinor`, `disableAutoUpdateToPatch`, `disableAutoUpdateMetadata`, `disableAutoUpdateUnderNative` | Channel strategy forbids this [semver jump](/semver_tester/) |
 | `disablePlatformIos`, `disablePlatformAndroid` | Platform is disabled on the channel |
 | `disableDevBuild`, `disableEmulator` | Dev builds or emulators not allowed |
-| `disableProdBuild`, `disableDevice`, `disablePlatformElectron` | Additional backend/platform policy blocks (production build policy, real-device block, or Electron disabled). Opposite of this is `disableEmulator`. |
-| `customIdBlocked` | `allow_device_custom_id = false` while `custom_id` is provided in `/stats`; stats still arrive, but `custom_id` is ignored and stored empty. |
+| `disableProdBuild`, `disableDevice`, `disablePlatformElectron` | Production builds, real devices, or Electron are blocked for this channel. |
+| `customIdBlocked` | Custom device IDs are not accepted for this app. |
 | `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | Channel selection or override failed |
 | `missingBundle`, `cannotGetBundle` | Manifest refers to a bundle Capgo cannot serve |
 | `needPlanUpgrade` | Org hit its plan/device limit |

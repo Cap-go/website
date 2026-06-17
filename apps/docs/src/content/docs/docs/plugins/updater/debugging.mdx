@@ -38,11 +38,21 @@ Capgo logs can include metadata for the event. In the dashboard, use the action 
 | **no_channel** (**NoChannelOrOverride**)                              | No default channel is configured for this app and the device has no specific channel override assigned. At least one must be present for updates to work.                                                                                                   |
 | **rate_limited** (**rateLimited**)                                    | The device has been rate limited due to excessive requests.                                                                                                                                                                                                |
 | **key_id_mismatch** (**keyMismatch**)                                 | The device's encryption public key does not match the public key used to encrypt the bundle. Metadata includes `device_key_id`, `bundle_key_id`, and `version` to help identify the mismatch.                                                              |
-| **disable_prod_build** (**disableProdBuild**)                          | Updates are blocked for this build profile (production build handling is restricted by channel or key policy).                                                                                                            |
-| **disable_device** (**disableDevice**)                                 | Real devices are explicitly blocked from receiving updates by device-level policy (opposite of `disableEmulator`). |
-| **disable_platform_electron** (**disablePlatformElectron**)             | Electron is currently disabled for this channel or account policy.                                                                                                                                                                                     |
-| **customIdBlocked**                                                  | `allow_device_custom_id = false` and a non-empty `custom_id` were sent in `/stats`; stats are still accepted but `custom_id` is dropped (stored as empty) and this event is emitted.                                                                                                                                                                            |
-| **backend_refusal**                                                  | The backend refused the request before update evaluation could continue. Check the request context and response metadata in logs to identify the gatekeeping rule.                                                                                        |
+| **disable_prod_build** (**disableProdBuild**)                          | A production build called `/updates` was blocked by channel policy.                                                                                                            |
+| **disable_device** (**disableDevice**)                                 | A normal phone/tablet was blocked because this channel blocks real devices.                                                                                                                  |
+| **disable_platform_electron** (**disablePlatformElectron**)             | Electron is blocked in this channel.                                                                                                                                                                                     |
+| **customIdBlocked**                                                  | A custom device ID was sent, but this app does not accept custom IDs, so it is ignored.                                                                     |
+| **backend_refusal**                                                  | `v4` of the updater is not supported anymore. Upgrade to updater `v5` at least (with Capacitor `v5`), and prefer `v8` because old Capacitor versions can no longer be updated through app store pipelines.                                                                                            |
+
+### Quick fixes for new policy blocks
+
+| Code | Why this happens | What to do next |
+| ---- | ---------------- | ------------- |
+| `disableProdBuild` | A production build called `/updates`, but your channel blocked it. | Allow production updates in that channel, or build your app as non-production. |
+| `disableDevice` | A real phone/tablet was blocked because this channel is set to block real devices. | Turn on real-device updates for this channel. |
+| `disablePlatformElectron` | Electron was blocked because this channel does not allow it. | Turn on Electron in this channel or move Electron apps to another channel. |
+| `customIdBlocked` | A custom device ID was sent, but this app does not accept custom IDs. | Turn on custom IDs only if you need them. |
+| `backend_refusal` | The updater is `v4`, which the backend no longer accepts. Update updater `v5` or newer (prefer `v8`) with a Capacitor `v5`+ app, then rebuild and republish. | Update updater plugin/CLI, rebuild, and republish bundle metadata. |
 
 
 ### Sent from the device
