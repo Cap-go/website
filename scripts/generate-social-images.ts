@@ -243,7 +243,7 @@ function chips(items: string[], y: number, accent: string) {
 
 function renderCodePanel(image: SocialImage) {
   const x = 285
-  const y = 910
+  const y = 900
 
   const lines = image.codeLines
     .map((line, index) => {
@@ -277,24 +277,28 @@ function renderCards(image: SocialImage) {
 
 function renderPhone(image: SocialImage) {
   const x = 1695
-  const y = 835
+  const y = 792
+  const phoneHeight = 438
+  const rowHeight = 52
+  const rowGap = 18
+  const rowStart = y + 188
   const rows = image.phoneRows
     .map((row, index) => {
-      const rowY = y + 218 + index * 92
+      const rowY = rowStart + index * (rowHeight + rowGap)
       return `
-        <rect x="${x + 54}" y="${rowY}" width="310" height="64" rx="20" fill="#111827"/>
-        <circle cx="${x + 88}" cy="${rowY + 32}" r="10" fill="${image.accent}"/>
-        ${textLine(row, x + 112, rowY + 42, { size: 24, color: '#e5e7eb', weight: 700 })}`
+        <rect x="${x + 54}" y="${rowY}" width="310" height="${rowHeight}" rx="18" fill="#111827"/>
+        <circle cx="${x + 88}" cy="${rowY + rowHeight / 2}" r="9" fill="${image.accent}"/>
+        ${textLine(row, x + 112, rowY + 35, { size: 23, color: '#e5e7eb', weight: 700 })}`
     })
     .join('')
 
   return `
-    <rect x="${x + 18}" y="${y + 22}" width="430" height="624" rx="78" fill="#0f172a" opacity="0.18"/>
-    <rect x="${x}" y="${y}" width="430" height="624" rx="78" fill="#020617"/>
-    <rect x="${x + 26}" y="${y + 34}" width="378" height="556" rx="54" fill="#f8fbff"/>
-    <rect x="${x + 152}" y="${y + 54}" width="126" height="18" rx="9" fill="#020617" opacity="0.82"/>
-    <rect x="${x + 54}" y="${y + 112}" width="310" height="76" rx="26" fill="${image.accentSoft}"/>
-    ${textLine(image.phoneTitle, x + 76, y + 160, { size: 28, color: '#0f172a', weight: 900 })}
+    <rect x="${x + 18}" y="${y + 18}" width="430" height="${phoneHeight}" rx="66" fill="#0f172a" opacity="0.18"/>
+    <rect x="${x}" y="${y}" width="430" height="${phoneHeight}" rx="66" fill="#020617"/>
+    <rect x="${x + 26}" y="${y + 34}" width="378" height="${phoneHeight - 68}" rx="44" fill="#f8fbff"/>
+    <rect x="${x + 152}" y="${y + 48}" width="126" height="18" rx="9" fill="#020617" opacity="0.82"/>
+    <rect x="${x + 54}" y="${y + 94}" width="310" height="70" rx="24" fill="${image.accentSoft}"/>
+    ${textLine(image.phoneTitle, x + 76, y + 138, { size: 26, color: '#0f172a', weight: 900 })}
     ${rows}`
 }
 
