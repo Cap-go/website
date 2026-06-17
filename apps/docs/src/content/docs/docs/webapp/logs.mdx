@@ -161,15 +161,35 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `ping` | Health/heartbeat check from device |
 | `setChannel`, `getChannel` | Channel overridden or fetched via SDK call |
 
-### New policy-block events (quick fix)
+### New policy-block / throttle quick fix
 | Code | Why this happens | What to do next |
 |------|------------------|-------------|
-| `disableProdBuild` | A production build called `/updates`, but this channel does not allow production updates. | Allow production updates in that channel, or build your app as non-production. |
-| `disableDevice` | A real phone or tablet used a blocked channel. | Turn on real-device updates for that channel. |
-| `disablePlatformElectron` | The channel does not allow Electron apps. | Turn on Electron in that channel, or move Electron apps to another channel. |
-| `customIdBlocked` | A custom device ID was sent, but this app does not accept custom IDs. | Turn on custom IDs only if you need them. |
-| `backend_refusal` | The updater is `v4`, which the backend no longer accepts. Update to updater `v5` or newer (prefer `v8`) with a Capacitor `v5`+ app, then rebuild and republish bundle metadata. | Update updater plugin/CLI, rebuild, and republish bundle metadata. |
-
+| `invalidIp` | Capgo detected traffic that looks like bot traffic (Google/cloud infrastructure IP). | Ignore on real users; retry from real devices and normal networks, or check after some time. |
+| `needPlanUpgrade` | Organization reached plan/device limit. | Upgrade plan in dashboard or wait for next billing cycle. |
+| `semver_error` | Native app version in config is missing or not valid semver (`x.y.z`). | Set `plugins.CapacitorUpdater.version` to valid semver and rebuild the app. |
+| `disablePlatformIos` | iOS is disabled in channel policy. | Enable iOS in that channel and republish routing. |
+| `disablePlatformAndroid` | Android is disabled in channel policy. | Enable Android in that channel and republish routing. |
+| `disableAutoUpdate` | Channel auto-update mode blocks this update style. | Change channel auto-update policy (major/minor/patch/metadata/none) to allow your intended rollout. |
+| `disableAutoUpdateUnderNative` | Channel is set to block updates older than the device baseline. | Push a version at or above the native baseline, or disable that under-native protection. |
+| `disableAutoUpdateMetadata` | Channel requires `min_update_version` metadata and the app is older. | Set `min_update_version` for the target bundle or release from a newer native version. |
+| `disableAutoUpdateToMajor` | The channel blocks major version jumps. | Keep major versions in the same channel strategy, or allow major jumps for this track. |
+| `disableAutoUpdateToMinor` | The channel blocks minor version jumps. | Keep minor versions in the same channel strategy, or allow minor jumps for this track. |
+| `disableAutoUpdateToPatch` | The channel blocks patch-level jumps for this flow. | Align your release cadence, or open patch jumps in channel policy for this track. |
+| `disableEmulator` | Emulator updates are not allowed for this channel. | Turn on emulator updates only if you test emulators in this channel. |
+| `disableDevBuild` | Dev builds are blocked for this channel. | If this is a dev build, allow dev updates or test on a build without this restriction. |
+| `disableProdBuild` | A device build in production mode called `/updates`, while your channel blocked it. | Allow production updates in that channel, or build your app as non-production. |
+| `cannotGetBundle` | Capgo could not build a valid download URL for the selected bundle. | Re-upload the bundle or regenerate manifests and check R2/public bundle settings. |
+| `cannotUpdateViaPrivateChannel` | App tried to self-switch to a private channel that does not allow self-assignment. | Enable `allow_device_self_set` on the channel or switch to a public/allowed channel. |
+| `channelMisconfigured` | Channel auto-update rule is missing required data (`version_number` without `min_update_version`). | Fill the missing config for that rule or switch to a simpler auto-update mode. |
+| `missingBundle` | Bundle has no downloadable payload (missing `external_url`/`r2_path` and no manifest). | Rebuild/re-upload the version and verify the bundle has real file content. |
+| `NoChannelOrOverride` | No channel matched this device (no cloud default + no config fallback + no override). | Set a channel default in dashboard or keep a test `defaultChannel` in that build. |
+| `rateLimited` | Too many update/channel calls in a short time (often render-loop `setChannel`/`getChannel`). | Stop calling in render. Only call on user action. Use `defaultChannel` in `capacitor.config`. |
+| `keyMismatch` | The app and bundle encryption key IDs differ (`device_key_id` vs `bundle_key_id`). | In the console, compare device and bundle key IDs. If they differ, publish with the same key and matching CLI/plugin version; key encoding can differ between versions. |
+| `disableDevice` | A real phone/tablet was blocked because this channel is set to block real devices. | Turn on real-device updates for that channel. |
+| `disablePlatformElectron` | Electron is blocked in this channel. | Enable Electron in this channel or move Electron users to a different channel. |
+| `customIdBlocked` | A custom device ID was sent, but this app does not accept custom IDs. | Turn off custom ID sending or enable custom IDs only if your workflow requires it. |
+| `blocked_by_server_url` | The app has `server.url` configured, so Capacitor serves remote URL instead of local files. | Remove/clear `server.url` for production builds and keep update payloads local. |
+| `backend_refusal` | The updater is `v4`, which the backend no longer accepts. | Upgrade plugin/CLI to `v5`+ (prefer `v8`), with Capacitor `v5`+, then rebuild and republish bundle metadata. |
 **Configuration or policy blocks**
 
 | Code(s) | Why the update was blocked |
@@ -183,7 +203,7 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `missingBundle`, `cannotGetBundle` | Manifest refers to a bundle Capgo cannot serve |
 | `needPlanUpgrade` | Org hit its plan/device limit |
 | `rateLimited` | Too many requests; SDK throttles until restart |
-| `blocked_by_server_url`, `backend_refusal`, `InvalidIp` | Server-side rule blocked the request |
+| `blocked_by_server_url`, `backend_refusal`, `invalidIp` | Server-side rule blocked the request |
 
 **Download / integrity / install failures**
 
@@ -204,7 +224,7 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `app_anr` | Android reported an Application Not Responding. |
 | `app_killed_low_memory`, `app_killed_excessive_resource_usage` | App process termination due to memory or resource limits. |
 | `app_initialization_failure`, `app_memory_warning` | Startup was interrupted or memory pressure was observed before normal runtime. |
-| `webview_javascript_error`, `webview_unhandled_rejection`, `webview_resource_error`, `webview_security_policy_violation`, `webview_unclean_restart`, `webview_render_process_gone`, `webview_content_process_terminated` | WebView lifecycle and rendering/JS errors. |
+| `webview_javascript_error`, `webview_unhandled_rejection`, `webview_resource_error`, `webview_security_policy_violation`, `webview_unclean_restart`, `webview_render_process_gone`, `webview_content_process_terminated` | WebView lifecycle and JS/rendering errors. Install Sentry in both JS and native layers to capture stack traces, session/device context, and URL/state for faster fixes. |
 | `os_version_changed`, `native_app_version_changed` | OS or native app version changed; this helps separate platform-level rollout effects from web bundle behavior. |
 
 ➡️ Need deeper per-code guidance? See **[Full Log Code Reference and Debugging Guide](/docs/plugins/updater/debugging/#understanding-cloud-logs)**.
