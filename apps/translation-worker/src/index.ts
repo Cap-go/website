@@ -1,3 +1,5 @@
+import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
 type Locale = (typeof SUPPORTED_LOCALES)[number]
@@ -86,6 +88,7 @@ interface Env {
   TRANSLATION_STORE: R2BucketBinding
   TRANSLATION_MODEL?: string
   TRANSLATION_TEST_MODE?: string
+  DATAFAST_AI_CRAWL_WEBSITE_ID?: string
 }
 
 declare global {
@@ -142,6 +145,14 @@ type TranslationCoordinatorRecord = {
 }
 type WorkerExecutionContext = {
   waitUntil(promise: Promise<unknown>): void
+}
+
+function trackAICrawler(request: Request, response: Response, env: Env, ctx?: WorkerExecutionContext): Response {
+  const websiteId = env.DATAFAST_AI_CRAWL_WEBSITE_ID?.trim()
+  if (websiteId) {
+    trackAICrawlerResponse(request, response, ctx, { websiteId })
+  }
+  return response
 }
 
 const DEFAULT_LOCALE = 'en'
@@ -2586,26 +2597,26 @@ export default {
   async fetch(request: Request, env: Env, ctx?: WorkerExecutionContext): Promise<Response> {
     const requestUrl = new URL(request.url)
     if (env.TRANSLATION_TEST_MODE === '1' && requestUrl.pathname.startsWith(TRANSLATION_TEST_ROUTE_PREFIX)) {
-      return await handleTranslationTestRequest(request, env, requestUrl)
+      return trackAICrawler(request, await handleTranslationTestRequest(request, env, requestUrl), env, ctx)
     }
 
     const locale = extractLocale(requestUrl.pathname)
 
-    if (!locale) return await fetchEnglishOrigin(request, env, requestUrl)
+    if (!locale) return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), env, ctx)
 
     if (request.method !== 'GET' && request.method !== 'HEAD') {
-      return await fetchEnglishOrigin(request, env, requestUrl)
+      return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), env, ctx)
     }
 
     if (shouldBypassTranslation(requestUrl.pathname)) {
-      return await fetchEnglishOrigin(request, env, requestUrl)
+      return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), env, ctx)
     }
 
     try {
-      return await serveTranslated(request, env, requestUrl, locale, ctx)
+      return trackAICrawler(request, await serveTranslated(request, env, requestUrl, locale, ctx), env, ctx)
     } catch (error) {
       console.error('Translation worker failed', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
-      return temporaryEnglishRedirectResponse(requestUrl, request.method === 'HEAD')
+      return trackAICrawler(request, temporaryEnglishRedirectResponse(requestUrl, request.method === 'HEAD'), env, ctx)
     }
   },
   async queue(batch: MessageBatch<TranslationJob>, env: Env): Promise<void> {
