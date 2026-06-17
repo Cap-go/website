@@ -147,6 +147,7 @@ type WorkerExecutionContext = {
 }
 
 const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
+const SKIP_AI_CRAWLER_TRACKING_HEADER = 'X-Capgo-Skip-AI-Crawler-Tracking'
 
 function trackAICrawler(request: Request, response: Response, ctx?: WorkerExecutionContext): Response {
   trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
@@ -385,6 +386,7 @@ function createOriginRequest(request: Request, originUrl: URL): Request {
   const headers = new Headers(request.headers)
   headers.set('Accept-Language', DEFAULT_LOCALE)
   headers.set('X-Capgo-Translation-Origin', 'english')
+  headers.set(SKIP_AI_CRAWLER_TRACKING_HEADER, '1')
   headers.delete('If-None-Match')
   headers.delete('If-Modified-Since')
 

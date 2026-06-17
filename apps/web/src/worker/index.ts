@@ -205,9 +205,12 @@ function withGlobalCssCacheHeaders(response: Response): Response {
 }
 
 const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
+const SKIP_AI_CRAWLER_TRACKING_HEADER = 'X-Capgo-Skip-AI-Crawler-Tracking'
 
 function trackAICrawler(request: Request, response: Response, ctx?: BackgroundContext): Response {
-  trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
+  if (request.headers.get(SKIP_AI_CRAWLER_TRACKING_HEADER) !== '1') {
+    trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
+  }
   return response
 }
 
