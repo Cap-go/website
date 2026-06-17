@@ -3,6 +3,8 @@ import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
+const nativeBuildUrl = getRelativeLocaleUrl(Astro.locals.locale, 'native-build')
+const teamUrl = 'https://book.capgo.app/demo/'
 ---
 
 <section>
@@ -178,16 +180,26 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           </div>
         </div>
       </div>
-
       <div class="relative z-10 mx-auto max-w-4xl px-4 pt-16 text-center sm:px-6 sm:pt-24 lg:px-0 lg:pt-32">
+        <a
+          href={nativeBuildUrl}
+          class="font-inter mb-8 inline-flex min-h-10 max-w-full items-center gap-2 rounded-full border border-white/15 bg-white/5 px-2 py-1 pr-4 text-sm font-semibold text-slate-300 transition-colors hover:border-blue-400/40 hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none"
+        >
+          <span class="inline-flex min-h-8 items-center rounded-full bg-white px-3 text-slate-950">What's new?</span>
+          <span class="hidden sm:inline">Native builds for CapacitorJS apps</span>
+          <span class="sm:hidden">Native builds</span>
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+
         <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight xl:text-7xl">
-          {m.instant_updates_for_your({}, { locale: Astro.locals.locale })}
+          Everything you need to ship
           <br />
-          <span class="text-azure-500">CapacitorJS app</span>
+          <span class="text-azure-500">CapacitorJS apps</span>
         </h1>
         <p class="font-inter mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl">
-          {m.hero_subtitle_part1({}, { locale: Astro.locals.locale })}
-          {m.hero_subtitle_part2({}, { locale: Astro.locals.locale })}<br />{m.hero_subtitle_line2({}, { locale: Astro.locals.locale })}
+          Live updates, native builds, channels, rollback, and release automation for CapacitorJS apps.
         </p>
         <div class="mt-10 flex flex-col items-center gap-4">
           <div class="flex flex-col items-center gap-4 sm:flex-row">
@@ -204,12 +216,24 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 {m.cta_start_free({}, { locale: Astro.locals.locale })}
               </a>
             </div>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
-              class="font-pj inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:border-white/25 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none active:scale-[0.98]"
-            >
-              {m.hero_secondary_cta({}, { locale: Astro.locals.locale })}
-            </a>
+          </div>
+          <div class="font-inter flex flex-col items-center justify-center gap-3 text-sm text-gray-400 sm:flex-row">
+            <div class="flex -space-x-2" aria-hidden="true">
+              <img src="/martin-avatar.png" alt="" width="36" height="36" class="h-9 w-9 rounded-full border-2 border-gray-950 object-cover shadow-sm" />
+              <img src="/michael-profile.webp" alt="" width="36" height="36" class="h-9 w-9 rounded-full border-2 border-gray-950 object-cover shadow-sm" />
+              <img src="/valeria-avatar.jpg" alt="" width="36" height="36" class="h-9 w-9 rounded-full border-2 border-gray-950 object-cover shadow-sm" />
+            </div>
+            <p>
+              Enterprise needs?
+              <a
+                href={teamUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold text-white underline-offset-4 transition-colors hover:text-blue-300 hover:underline focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none"
+              >
+                Talk to our team
+              </a>
+            </p>
           </div>
           <p class="font-inter text-sm leading-6 text-gray-400">{ctaSubtext}</p>
         </div>

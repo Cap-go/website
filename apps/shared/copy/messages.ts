@@ -679,7 +679,7 @@ const messages = {
   credits_usage_info: 'Credits are prepaid, valid for 1 year, and can be used with or without an active subscription. Plans can also use credits for usage beyond included limits.',
   pricing_credits_cta_desktop: "Don't want a plan? Buy credits instead.",
   pricing_credits_cta_mobile: 'Buy credits instead.',
-  cta_start_free: 'Ship your first fix free',
+  cta_start_free: 'Get started for free',
   cta_start_migration: 'Start your migration',
   custom: 'Custom',
   custom_domain: 'Custom Domain',
