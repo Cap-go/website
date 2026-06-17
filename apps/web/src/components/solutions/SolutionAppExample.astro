@@ -52,11 +52,11 @@ const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.catego
           </dl>
         </div>
 
-        <div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-stretch">
-          <div class="order-2 grid gap-4 md:grid-cols-3 lg:order-1" data-randomize-app-examples={randomize ? 'true' : undefined}>
+        <div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start">
+          <div class="order-2 space-y-3 lg:order-1" data-randomize-app-examples={randomize ? 'true' : undefined}>
             {appExamples.map(({ app, note }) => (
-              <article class="group flex min-h-full flex-col rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/15 transition-colors duration-200 hover:border-cyan-300/35 hover:bg-white/[0.06]">
-                <div class="flex items-start gap-3">
+              <article class="group rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/15 transition-colors duration-200 hover:border-cyan-300/35 hover:bg-white/[0.06]">
+                <div class="grid gap-4 sm:grid-cols-[auto_minmax(0,1fr)_9.5rem] sm:items-start">
                   <img
                     class="h-14 w-14 shrink-0 rounded-lg object-cover outline-1 -outline-offset-1 outline-white/10"
                     src={app.icon}
@@ -66,28 +66,28 @@ const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.catego
                     loading="lazy"
                     decoding="async"
                   />
-                  <div class="min-w-0 flex-1">
+
+                  <div class="min-w-0">
                     <p class="truncate text-xs font-semibold tracking-wide text-cyan-200 uppercase">{renameCat(app.category)}</p>
                     <h3 class="mt-1 text-base leading-6 font-semibold tracking-tight break-words text-white">{app.title}</h3>
+                    <p class="mt-2 text-sm leading-6 text-pretty text-slate-300">{note}</p>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-2 text-sm sm:grid-cols-1">
+                    <span class="rounded-md border border-emerald-400/20 bg-emerald-400/10 px-3 py-2 font-medium text-emerald-100">
+                      {copy('solution_app_examples_installs', { count: shortNumber(app.installs) })}
+                    </span>
+                    <span class="rounded-md border border-amber-300/20 bg-amber-300/10 px-3 py-2 font-medium text-amber-100">
+                      {copy('solution_app_examples_rating', { score: app.score.toFixed(1) })}
+                    </span>
                   </div>
                 </div>
-
-                <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
-                  <span class="rounded-md border border-emerald-400/20 bg-emerald-400/10 px-3 py-2 font-medium text-emerald-100">
-                    {copy('solution_app_examples_installs', { count: shortNumber(app.installs) })}
-                  </span>
-                  <span class="rounded-md border border-amber-300/20 bg-amber-300/10 px-3 py-2 font-medium text-amber-100">
-                    {copy('solution_app_examples_rating', { score: app.score.toFixed(1) })}
-                  </span>
-                </div>
-
-                <p class="mt-4 grow text-sm leading-6 text-pretty text-slate-300">{note}</p>
 
                 <a
                   href={app.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="mt-5 inline-flex min-h-11 w-full items-center justify-between rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold text-cyan-200 transition-colors hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400"
+                  class="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold text-cyan-200 transition-colors hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400 sm:w-fit sm:px-4"
                 >
                   <span>{copy('solution_app_examples_view_listing')}</span>
                   <svg class="h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -104,7 +104,7 @@ const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.catego
 
           <aside
             id="app-examples-cta"
-            class="order-1 flex min-h-full flex-col justify-between rounded-lg border border-cyan-300/20 bg-[linear-gradient(145deg,rgba(34,211,238,0.14),rgba(37,99,235,0.09)_48%,rgba(16,185,129,0.12))] p-6 shadow-2xl ring-1 shadow-cyan-950/25 ring-white/5 lg:order-2"
+            class="order-1 flex flex-col justify-between rounded-lg border border-cyan-300/20 bg-[linear-gradient(145deg,rgba(34,211,238,0.14),rgba(37,99,235,0.09)_48%,rgba(16,185,129,0.12))] p-6 shadow-2xl ring-1 shadow-cyan-950/25 ring-white/5 lg:order-2"
           >
             <div>
               <p class="font-mono text-xs font-semibold tracking-wide text-cyan-200 uppercase">{copy('solution_app_examples_cta_kicker')}</p>
