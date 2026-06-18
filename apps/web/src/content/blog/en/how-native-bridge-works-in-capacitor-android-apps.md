@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-22T02:26:08.446Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T09:58:31.000Z
 head_image: /blog-images/native-bridge-flow.webp
 head_image_alt: Native bridge flow between JavaScript and Android APIs
 keywords: Capacitor, Android, native bridge, JavaScript, mobile development, app performance, updates, communication
