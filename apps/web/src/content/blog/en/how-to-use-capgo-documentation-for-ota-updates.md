@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-19T03:56:01.854Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67b53306eac600a2c6713dad-1740671704703.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/how-to-use-capgo-documentation-for-ota-updates.webp
+head_image_alt: "How to Use Capgo Documentation for OTA Updates Capgo blog illustration"
 keywords: OTA updates, Capacitor, Capgo, mobile app updates, documentation, app deployment, security features, error handling
 tag: Development, Mobile, Updates
 published: true

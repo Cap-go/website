@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-08T02:59:57.580Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67cb94b1fd908bf224e07528-1741402807680.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/capacitor-ota-updates-vs-traditional-versioning.webp
+head_image_alt: "Capacitor OTA Updates vs Traditional Versioning Capgo blog illustration"
 keywords: OTA updates, traditional updates, Capacitor, mobile app development, app deployment
 tag: Development, Mobile, Updates
 published: true
