@@ -134,8 +134,12 @@ if (plans.length > 0) {
         </p>
       </div>
 
-      <div class="mx-auto mb-5 flex max-w-4xl flex-col items-center justify-center gap-3">
-        <fieldset class="grid w-full max-w-xs grid-cols-2 rounded-full bg-gray-100 p-1" aria-label="Billing period">
+      <div class="mx-auto mb-5 grid w-full max-w-5xl grid-cols-1 items-center gap-3 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-4">
+        <div class="flex justify-center md:justify-start">
+          {plans && plans.length > 0 && <PricingCalculator plans={plans} apiBaseUrl={config.public.baseApiUrl} />}
+        </div>
+
+        <fieldset class="mx-auto grid w-full max-w-xs shrink-0 grid-cols-2 justify-self-center rounded-full bg-gray-100 p-1" aria-label="Billing period">
           <legend class="sr-only">Billing period</legend>
           <label
             for="monthly"
@@ -154,25 +158,23 @@ if (plans.length > 0) {
           </label>
         </fieldset>
 
-        <div class="flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center">
-          {plans && plans.length > 0 && <PricingCalculator plans={plans} apiBaseUrl={config.public.baseApiUrl} />}
-
-          {
-            credits && credits.length > 0 && (
+        {
+          credits && credits.length > 0 && (
+            <div class="flex justify-center md:justify-end">
               <a
                 href="#credit-pricing"
-                class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-gray-950 shadow-sm ring-1 ring-blue-100/70 transition-colors hover:border-blue-300 hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none sm:w-auto"
+                class="inline-flex min-h-11 w-full max-w-md items-center justify-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-gray-950 shadow-sm ring-1 ring-blue-100/70 transition-colors hover:border-blue-300 hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none md:w-auto"
               >
-                <span class="hidden sm:inline">{m.pricing_credits_cta_desktop({}, { locale: Astro.locals.locale })}</span>
-                <span class="sm:hidden">{m.pricing_credits_cta_mobile({}, { locale: Astro.locals.locale })}</span>
+                <span class="hidden lg:inline">{m.pricing_credits_cta_desktop({}, { locale: Astro.locals.locale })}</span>
+                <span class="lg:hidden">{m.pricing_credits_cta_mobile({}, { locale: Astro.locals.locale })}</span>
                 <span class="text-blue-700">{m.start_now({}, { locale: Astro.locals.locale })}</span>
                 <svg class="h-4 w-4 shrink-0 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                 </svg>
               </a>
-            )
-          }
-        </div>
+            </div>
+          )
+        }
       </div>
 
       {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
