@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-15T01:43:16.632Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67d4c5e1e479dbdb23f053f1-1742003009662.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/how-to-use-aar-files-in-capacitor-plugins.webp
+head_image_alt: "How to Use AAR Files in Capacitor Plugins Capgo blog illustration"
 keywords: AAR files, Capacitor plugins, Android development, mobile integration, Gradle configuration
 tag: Development, Mobile, Updates
 published: true

@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-16T02:24:50.565Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67d61b378b902ec211cf87e9-1742091902582.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/capgo-integration-with-github-actions-guide.webp
+head_image_alt: "Capgo Integration with GitHub Actions: Guide Capgo blog illustration"
 keywords: Capgo, GitHub Actions, CI/CD, Capacitor apps, deployment, automation, updates, security
 tag: Development, Mobile, Updates
 published: true

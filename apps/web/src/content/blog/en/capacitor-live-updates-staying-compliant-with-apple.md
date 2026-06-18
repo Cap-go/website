@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-12T03:03:33.472Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67d0d3f9cf9d4dc0b2c0bff2-1741748627082.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/capacitor-live-updates-staying-compliant-with-apple.webp
+head_image_alt: "Capacitor Live Updates: Staying Compliant with Apple Capgo blog illustration"
 keywords: Capacitor, live updates, app compliance, Apple guidelines, encryption, bug fixes, mobile development
 tag: Development, Mobile, Updates
 published: true

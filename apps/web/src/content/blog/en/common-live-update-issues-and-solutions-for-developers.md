@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-06T03:31:58.003Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67a3d9861da6ea6c25fd54e4-1738812730938.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/common-live-update-issues-and-solutions-for-developers.webp
+head_image_alt: "Common Live Update Issues and Solutions for Developers Capgo blog illustration"
 keywords: live updates, network issues, version conflicts, device compatibility, CI/CD, OTA updates, security, app development
 tag: Development, Mobile, Updates
 published: true
