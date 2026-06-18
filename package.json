@@ -49,7 +49,8 @@
     "blogs:sync_seobot": "bun run scripts/blogs/sync_seobot.js",
     "clean:unused": "bun run scripts/clean_not_used.tsx",
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts",
-    "generate:blog-images": "bun run scripts/generate-blog-images.ts"
+    "generate:blog-images": "bun run scripts/generate-blog-images.ts",
+    "blogs:normalize_tags": "bun run scripts/blogs/normalize_tags.ts"
   },
   "dependencies": {
     "@astrojs/cloudflare": "13.7.0",

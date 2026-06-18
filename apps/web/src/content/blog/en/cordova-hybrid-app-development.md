@@ -12,9 +12,13 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2024-06-02T00:00:00.000Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /what-is-cordova-phone-gap.webp
-head_image_alt: "'Ultimate Guide to Apache Cordova: Hybrid App Development Made Easy' Capgo blog illustration"
-keywords: Cordova, hybrid app development, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
-tag: cordova
+head_image_alt: >-
+  'Ultimate Guide to Apache Cordova: Hybrid App Development Made Easy' Capgo
+  blog illustration
+keywords: >-
+  Cordova, hybrid app development, mobile app development, live updates, OTA
+  updates, continuous integration, mobile app updates
+tag: Capacitor
 published: true
 locale: en
 next_blog: ''

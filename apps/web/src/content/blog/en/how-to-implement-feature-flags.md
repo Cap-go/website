@@ -1,16 +1,20 @@
 ---
 slug: how-to-implement-feature-flags
 title: 'How to Implement Feature Flags: Dev Workflow in 2026'
-description: 'Learn how to implement feature flags in your dev workflow. Get a 2026 guide on architecture, targeting, rollouts, & CI/CD for JS, Capacitor, & Electron apps.'
+description: >-
+  Learn how to implement feature flags in your dev workflow. Get a 2026 guide on
+  architecture, targeting, rollouts, & CI/CD for JS, Capacitor, & Electron apps.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-13T10:09:53.896Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/how-to-implement-feature-flags.webp
-head_image_alt: "'How to Implement Feature Flags: Dev Workflow in 2026' Capgo blog illustration"
-keywords: 'how to implement feature flags, feature toggles, capacitorjs, ci/cd, live updates'
-tag: 'how to implement feature flags, feature toggles, capacitorjs, ci/cd, live updates'
+head_image_alt: '''How to Implement Feature Flags: Dev Workflow in 2026'' Capgo blog illustration'
+keywords: >-
+  how to implement feature flags, feature toggles, capacitorjs, ci/cd, live
+  updates
+tag: 'Mobile, Updates, Tutorial'
 published: true
 locale: en
 next_blog: ''

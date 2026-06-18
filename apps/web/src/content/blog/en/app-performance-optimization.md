@@ -1,16 +1,21 @@
 ---
 slug: app-performance-optimization
 title: App Performance Optimization for Capacitor & Electron
-description: 'A practical guide to app performance optimization for Capacitor, Ionic, and Electron. Learn to measure, diagnose, and fix performance issues with expert tips.'
+description: >-
+  A practical guide to app performance optimization for Capacitor, Ionic, and
+  Electron. Learn to measure, diagnose, and fix performance issues with expert
+  tips.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-28T07:24:57.222Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/app-performance-optimization.webp
-head_image_alt: "App Performance Optimization for Capacitor & Electron Capgo blog illustration"
-keywords: 'app performance optimization, capacitorjs, electronjs, ionic framework, mobile performance'
-tag: 'app performance optimization, capacitorjs, electronjs, ionic framework, mobile performance'
+head_image_alt: App Performance Optimization for Capacitor & Electron Capgo blog illustration
+keywords: >-
+  app performance optimization, capacitorjs, electronjs, ionic framework, mobile
+  performance
+tag: 'Mobile, Best Practices, Capacitor'
 published: true
 locale: en
 next_blog: ''

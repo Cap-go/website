@@ -1,16 +1,21 @@
 ---
 slug: application-release-notes
 title: 'Application Release Notes: A Complete Guide for 2026'
-description: 'Learn how to write and automate effective application release notes. This guide covers templates, formatting, CI/CD integration, and best practices for any app.'
+description: >-
+  Learn how to write and automate effective application release notes. This
+  guide covers templates, formatting, CI/CD integration, and best practices for
+  any app.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-06T07:14:58.916Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/application-release-notes.webp
-head_image_alt: "'Application Release Notes: A Complete Guide for 2026' Capgo blog illustration"
-keywords: 'application release notes, software releases, changelog best practices, product communication, CI/CD automation'
-tag: 'application release notes, software releases, changelog best practices, product communication, CI/CD automation'
+head_image_alt: '''Application Release Notes: A Complete Guide for 2026'' Capgo blog illustration'
+keywords: >-
+  application release notes, software releases, changelog best practices,
+  product communication, CI/CD automation
+tag: 'Mobile, CI/CD, Product'
 published: true
 locale: en
 next_blog: ''

@@ -1,16 +1,23 @@
 ---
 slug: secure-database-storage
 title: 'Secure Database Storage: A Complete Guide for Developers'
-description: 'A complete guide to secure database storage. Learn best practices for encryption, access control, key management, and compliance to protect your data in 2026.'
+description: >-
+  A complete guide to secure database storage. Learn best practices for
+  encryption, access control, key management, and compliance to protect your
+  data in 2026.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-25T07:12:53.642Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/secure-database-storage.webp
-head_image_alt: "'Secure Database Storage: A Complete Guide for Developers' Capgo blog illustration"
-keywords: 'secure database storage, data encryption, database security, access control, data compliance'
-tag: 'secure database storage, data encryption, database security, access control, data compliance'
+head_image_alt: >-
+  'Secure Database Storage: A Complete Guide for Developers' Capgo blog
+  illustration
+keywords: >-
+  secure database storage, data encryption, database security, access control,
+  data compliance
+tag: 'Mobile, Security, Guides'
 published: true
 locale: en
 next_blog: ''

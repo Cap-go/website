@@ -1,16 +1,18 @@
 ---
 slug: unit-tests-javascript
 title: 'Unit Tests JavaScript: Comprehensive 2026 Guide'
-description: 'Master unit tests javascript with our 2026 guide. Covers Jest, Mocha, setup, mocking, CI, and tips for Capacitor & Electron apps.'
+description: >-
+  Master unit tests javascript with our 2026 guide. Covers Jest, Mocha, setup,
+  mocking, CI, and tips for Capacitor & Electron apps.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-29T07:21:33.612Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/unit-tests-javascript.webp
-head_image_alt: "'Unit Tests JavaScript: Comprehensive 2026 Guide' Capgo blog illustration"
+head_image_alt: '''Unit Tests JavaScript: Comprehensive 2026 Guide'' Capgo blog illustration'
 keywords: 'unit tests javascript, javascript testing, jest, capacitorjs, electronjs'
-tag: 'unit tests javascript, javascript testing, jest, capacitorjs, electronjs'
+tag: 'Mobile, Tutorial, Capacitor'
 published: true
 locale: en
 next_blog: ''

@@ -1,16 +1,20 @@
 ---
 slug: yarn-clear-cache
 title: 'How to Yarn Clear Cache: A Guide for V1, Berry, and CI/CD'
-description: 'Learn how to yarn clear cache for v1 and Berry (v2+). Fix broken builds with step-by-step commands, CI/CD best practices, and troubleshooting tips.'
+description: >-
+  Learn how to yarn clear cache for v1 and Berry (v2+). Fix broken builds with
+  step-by-step commands, CI/CD best practices, and troubleshooting tips.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-17T08:37:56.714Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/yarn-clear-cache.webp
-head_image_alt: "'How to Yarn Clear Cache: A Guide for V1, Berry, and CI/CD' Capgo blog illustration"
+head_image_alt: >-
+  'How to Yarn Clear Cache: A Guide for V1, Berry, and CI/CD' Capgo blog
+  illustration
 keywords: 'yarn clear cache, yarn cache, yarn berry, node.js, ci/cd'
-tag: 'yarn clear cache, yarn cache, yarn berry, node.js, ci/cd'
+tag: 'Mobile, Tutorial, CI/CD'
 published: true
 locale: en
 next_blog: ''
