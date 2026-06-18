@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-24T03:09:18.971Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94-1745464174874.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/capacitor-live-updates-handling-version-conflicts.webp
+head_image_alt: "\"Capacitor Live Updates: Handling Version Conflicts\" Capgo blog illustration"
 keywords: Capacitor, live updates, version conflicts, app performance, error tracking, rollback, mobile development
 tag: Development, Mobile, Updates
 published: true

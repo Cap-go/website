@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-26T02:55:05.863Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e35e3910051fda3b61fe9f-1742957721554.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/how-capacitor-bridges-web-and-native-code.webp
+head_image_alt: "How Capacitor Bridges Web and Native Code Capgo blog illustration"
 keywords: Capacitor, native bridge, web apps, live updates, plugin system, mobile development
 tag: Development, Mobile, Updates
 published: true

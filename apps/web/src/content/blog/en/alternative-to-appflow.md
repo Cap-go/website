@@ -11,7 +11,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-02T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /appflow_alt.webp
-head_image_alt: Appflow alternative illustration
+head_image_alt: "Alternative to Ionic Appflow Capgo blog illustration"
 keywords: Ionic Appflow, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Alternatives
 published: true

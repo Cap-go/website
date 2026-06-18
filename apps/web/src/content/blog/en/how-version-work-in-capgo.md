@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-25T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /versioning.webp
-head_image_alt: Capgo bundle version system
+head_image_alt: "How version work in Capgo Capgo blog illustration"
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true

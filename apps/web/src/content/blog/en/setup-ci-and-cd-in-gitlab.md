@@ -10,7 +10,7 @@ author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-14T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /CI_CD_in_Gitlab.webp
-head_image_alt: CI/CD in GitLab
+head_image_alt: "Automatic build and release app with GitLab Capgo blog illustration"
 keywords: GitLab, CI/CD, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true

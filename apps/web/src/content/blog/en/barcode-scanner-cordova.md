@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-12T09:44:44.975Z
 updated_at: 2026-06-12T09:47:13.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/2ed21fe2-d621-4152-b8ec-40f199928095/barcode-scanner-cordova-guide.jpg'
-head_image_alt: 'Build a Barcode Scanner Cordova App: 2026 Guide'
+head_image: /blog-images/barcode-scanner-cordova.webp
+head_image_alt: "'Build a Barcode Scanner Cordova App: 2026 Guide' Capgo blog illustration"
 keywords: 'barcode scanner cordova, cordova plugins, cross-platform development, mobile barcode scanning, ionic capacitor'
 tag: 'barcode scanner cordova, cordova plugins, cross-platform development, mobile barcode scanning, ionic capacitor'
 published: true

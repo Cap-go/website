@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-28T01:52:31.369Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e5e83da2c14cac42f7f5e4-1743126762355.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/app-store-metadata-what-developers-must-know.webp
+head_image_alt: "\"App Store Metadata: What Developers Must Know\" Capgo blog illustration"
 keywords: app store metadata, app optimization, keywords, visuals, localization, mobile apps, app visibility, user engagement, updates
 tag: Development, Mobile, Updates
 published: true

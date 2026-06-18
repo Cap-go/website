@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-27T02:52:04.098Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e4b3f310051fda3b6385d9-1743043942012.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/capacitor-changelog-management-ultimate-guide.webp
+head_image_alt: "\"Capacitor Changelog Management: Ultimate Guide\" Capgo blog illustration"
 keywords: Capacitor, changelog management, app updates, automation tools, version control
 tag: Development, Mobile, Updates
 published: true

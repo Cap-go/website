@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-03-22T00:36:08.727Z
 updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/google-play-staged-rollouts-how-it-works.webp
-head_image_alt: "Google Play Staged Rollouts: How It Works Capgo blog illustration"
+head_image_alt: "\"Google Play Staged Rollouts: How It Works\" Capgo blog illustration"
 keywords: staged rollouts, Google Play, app updates, risk management, user feedback, update management
 tag: Development, Mobile, Updates
 published: true

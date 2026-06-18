@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-21T03:55:39.168Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf-1745207775479.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/firebase-crashlytics-for-capacitor-apps.webp
+head_image_alt: "Firebase Crashlytics for Capacitor Apps Capgo blog illustration"
 keywords: Firebase, Crashlytics, mobile apps, Capacitor, app development, crash reporting, error tracking
 tag: Development, Mobile, Updates
 published: true

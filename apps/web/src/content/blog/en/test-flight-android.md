@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-30T06:58:17.170Z
 updated_at: 2026-05-30T07:00:42.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/c5bff920-16dd-4b55-9b04-89bb5b85aba7/test-flight-android-beta-testing.jpg'
-head_image_alt: 'Test Flight Android: Alternatives for Beta Testing'
+head_image: /blog-images/test-flight-android.webp
+head_image_alt: "'Test Flight Android: Alternatives for Beta Testing' Capgo blog illustration"
 keywords: 'test flight android, android beta testing, firebase app distribution, google play console, capacitorjs'
 tag: 'test flight android, android beta testing, firebase app distribution, google play console, capacitorjs'
 published: true

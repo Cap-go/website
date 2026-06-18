@@ -8,7 +8,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2025-05-01T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /stripe_apple.webp
-head_image_alt: Stripe payment implementation in Capacitor apps
+head_image_alt: "Stripe Payments in Capacitor: New Apple Guidelines Capgo blog illustration"
 keywords: capacitor, stripe, payment links, app store guidelines, iOS, digital goods, in-app purchases, external payments
 tag: Tutorial
 published: true

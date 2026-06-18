@@ -11,7 +11,7 @@ author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-18T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /open_source_licence.webp
-head_image_alt: Open Source Licence
+head_image_alt: "Understanding Open-Source Software Licenses Capgo blog illustration"
 keywords: Open Source, Capgo, philosophy, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Open Source
 published: true

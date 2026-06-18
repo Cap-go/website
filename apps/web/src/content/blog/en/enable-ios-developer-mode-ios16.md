@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /enable-ios-developer-mode-ios16.webp
-head_image_alt: Enabling iOS Developer Mode on iPhone
+head_image_alt: "How to Enable Developer Mode on iOS 16 for App Testing Capgo blog illustration"
 keywords: iOS, Developer Mode, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: iOS
 published: true

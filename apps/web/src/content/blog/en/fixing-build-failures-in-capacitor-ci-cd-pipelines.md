@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-15T06:27:06.154Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682580e10209458b3ff3c0b1-1747290491442.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/fixing-build-failures-in-capacitor-ci-cd-pipelines.webp
+head_image_alt: "Fixing Build Failures in Capacitor CI/CD Pipelines Capgo blog illustration"
 keywords: Capacitor, CI/CD, build failures, mobile development, troubleshooting, version control, environment variables
 tag: Development, Mobile, Updates
 published: true

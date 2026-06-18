@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /gitlab_ci.webp
-head_image_alt: Gitlab CI illustration
+head_image_alt: "Automatic build and release with Gitlab Capgo blog illustration"
 keywords: Gitlab, CI/CD, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true

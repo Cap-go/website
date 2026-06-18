@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-21T11:49:21.738Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682d66c84fa53d42207e6f25-1747828239357.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/privacy-manifest-for-ios-apps.webp
+head_image_alt: "Privacy Manifest for iOS Apps Capgo blog illustration"
 keywords: Privacy Manifest, iOS apps, data privacy, Apple guidelines, app compliance, developer resources
 tag: Development, Mobile, Security
 published: true

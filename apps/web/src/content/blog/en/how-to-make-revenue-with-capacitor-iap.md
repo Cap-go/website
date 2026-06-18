@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2026-05-01T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /native-purchases/revenue-playbook.png
-head_image_alt: Revenue playbook for Capacitor in-app purchases
+head_image_alt: "How to Make Revenue With a Capacitor App Capgo blog illustration"
 keywords: Capacitor revenue, in-app purchases, subscriptions, mobile app monetization, paywall, ASO, app revenue, native purchases
 tag: Mobile, IAP, Monetization
 published: true

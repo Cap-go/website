@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-25T01:04:25.029Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce-1745543110199.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/why-consent-management-matters-for-app-compliance.webp
+head_image_alt: "Why Consent Management Matters for App Compliance Capgo blog illustration"
 keywords: consent management, GDPR, CCPA, app compliance, user privacy, data protection, live updates, consent tracking
 tag: Development, Security, Updates
 published: true

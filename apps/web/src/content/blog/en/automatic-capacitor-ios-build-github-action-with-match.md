@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-30T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /fastlane_ios.webp
-head_image_alt: Fastlane testflight GitHub action illustration
+head_image_alt: "Automatic Capacitor IOS build with GitHub actions using match Capgo blog illustration"
 keywords: Fastlane, CI/CD, iOS, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true

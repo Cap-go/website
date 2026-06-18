@@ -8,7 +8,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-09-01T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /xcode_cloud.webp
-head_image_alt: Capacitor Xcode cloud build
+head_image_alt: "How to build Ionic Capacitor app in Xcode Cloud Capgo blog illustration"
 keywords: Xcode Cloud, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true

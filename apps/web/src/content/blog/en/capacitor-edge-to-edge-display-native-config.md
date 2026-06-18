@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-10-24T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: https://capgo.app/capgo-feature-image.webp
-head_image_alt: Edge-to-Edge Display Configuration
+head_image_alt: "Edge-to-Edge Display in Capacitor Without Plugins Capgo blog illustration"
 keywords: Capacitor, edge-to-edge, Android 15, adjustMarginsForEdgeToEdge, mobile development, native configuration
 tag: Development, Mobile, Configuration
 published: true

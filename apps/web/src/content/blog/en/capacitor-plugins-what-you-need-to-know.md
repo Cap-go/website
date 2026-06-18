@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-02-10T22:09:04.610Z
 updated_at: 2026-06-18T10:44:00.000Z
 head_image: /blog-images/capacitor-plugins-what-you-need-to-know.webp
-head_image_alt: "Capacitor Plugins: What You Need to Know Capgo blog illustration"
+head_image_alt: "\"Capacitor Plugins: What You Need to Know\" Capgo blog illustration"
 keywords: Capacitor plugins, mobile development, cross-platform apps, native features, custom plugins, community plugins
 tag: Development, Mobile, Updates
 published: true

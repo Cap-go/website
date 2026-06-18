@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-19T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /revenuecat_iap.webp
-head_image_alt: Revenue cat in app purchases
+head_image_alt: "in app purchases for capacitor Capgo blog illustration"
 keywords: Capacitor, in-app purchases, RevenueCat, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true

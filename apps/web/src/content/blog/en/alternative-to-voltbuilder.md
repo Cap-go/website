@@ -11,7 +11,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2024-09-09T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /voltbuilder_alt.webp
-head_image_alt: Voltbuilder alternative illustration
+head_image_alt: "Alternative to Voltbuilder Capgo blog illustration"
 keywords: Voltbuilder, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Alternatives
 published: true

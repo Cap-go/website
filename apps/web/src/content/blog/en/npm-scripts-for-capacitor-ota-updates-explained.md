@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-13T01:07:05.331Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266-1744506438251.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/npm-scripts-for-capacitor-ota-updates-explained.webp
+head_image_alt: "npm Scripts for Capacitor OTA Updates Explained Capgo blog illustration"
 keywords: Capacitor, npm scripts, OTA updates, CI/CD, mobile app deployment, automation, app version management, security
 tag: Development, Mobile, Updates
 published: true

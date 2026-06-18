@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-09T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capacitor-5-update.webp
-head_image_alt: Capacitor 4 to 5 update illustration
+head_image_alt: "'Updating from Capacitor 4 to Capacitor 5: A Step-by-Step Guide' Capgo blog illustration"
 keywords: Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Capacitor
 published: true

@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T21:23:23.545Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682a44fe5642a17d106eb21b-1747603534475.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/ssl-pinning-implementation-tools-and-plugins.webp
+head_image_alt: "\"SSL Pinning Implementation: Tools and Plugins\" Capgo blog illustration"
 keywords: SSL pinning, mobile app security, MITM attacks, certificate pinning, public key pinning, TrustKit, OkHttp, Capacitor
 tag: Development, Mobile, Security
 published: true

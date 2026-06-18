@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-06T01:02:16.662Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad-1743901348104.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/how-to-handle-user-data-requests-under-ccpa.webp
+head_image_alt: "How to Handle User Data Requests Under CCPA Capgo blog illustration"
 keywords: CCPA, user data requests, compliance, privacy rights, data access, data deletion, opt-out, data protection
 tag: Development, Security, Updates
 published: true

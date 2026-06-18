@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-02T07:17:10.119Z
 updated_at: 2026-06-02T07:19:27.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/6fb98bb7-b1d1-432a-8bb1-53e41bd31572/what-is-continuous-deployment-guide.jpg'
-head_image_alt: What Is Continuous Deployment? Your 2026 Guide
+head_image: /blog-images/what-is-continuous-deployment.webp
+head_image_alt: "What Is Continuous Deployment? Your 2026 Guide Capgo blog illustration"
 keywords: 'what is continuous deployment, ci/cd, capacitorjs, electronjs, devops'
 tag: 'what is continuous deployment, ci/cd, capacitorjs, electronjs, devops'
 published: true

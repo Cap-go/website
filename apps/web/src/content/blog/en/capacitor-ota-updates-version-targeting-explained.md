@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-03-14T03:00:49.720Z
 updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/capacitor-ota-updates-version-targeting-explained.webp
-head_image_alt: "Capacitor OTA Updates: Version Targeting Explained Capgo blog illustration"
+head_image_alt: "\"Capacitor OTA Updates: Version Targeting Explained\" Capgo blog illustration"
 keywords: OTA updates, version targeting, Capacitor, mobile app updates, semantic versioning, app stability, bug fixes
 tag: Development, Mobile, Updates
 published: true

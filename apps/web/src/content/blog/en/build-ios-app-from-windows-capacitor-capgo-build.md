@@ -11,7 +11,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-08T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /build_list.webp
-head_image_alt: Capgo Build jobs list
+head_image_alt: "Build an iOS App from Windows with Capacitor and Capgo Build Capgo blog illustration"
 keywords: Windows, iOS, Capacitor, Capgo Build, cloud build, TestFlight, App Store Connect, no Mac
 tag: Tutorial
 published: true

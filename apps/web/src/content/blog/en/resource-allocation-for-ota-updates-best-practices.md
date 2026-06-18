@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T17:41:21.786Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6829c4515642a17d106dfe07-1747590142778.jpg
-head_image_alt: Software Development
+head_image: /blog-images/resource-allocation-for-ota-updates-best-practices.webp
+head_image_alt: "\"Resource Allocation for OTA Updates: Best Practices\" Capgo blog illustration"
 keywords: OTA updates, resource allocation, disaster recovery, security, scalability
 tag: Security, Technology, Updates
 published: true

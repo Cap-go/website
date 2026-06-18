@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-01-13T06:14:25.862Z
 updated_at: 2026-06-18T10:44:00.000Z
 head_image: /blog-images/app-store-vs-direct-updates-what-developers-need-to-know.webp
-head_image_alt: "App Store vs Direct Updates: What Developers Need to Know Capgo blog illustration"
+head_image_alt: "\"App Store vs Direct Updates: What Developers Need to Know\" Capgo blog illustration"
 keywords: App Store updates, OTA updates, mobile app development, update strategy, developer tools
 tag: Development, Mobile, Updates
 published: true

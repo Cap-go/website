@@ -8,7 +8,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-22T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capgo_ci-cd-illustration.webp
-head_image_alt: Capgo PR preview illustration
+head_image_alt: "Turn Every Pull Request Into an Installable Preview Capgo blog illustration"
 keywords: pr preview, pull request, OTA updates, capacitor, capgo, live updates, QA testing, feature preview, github actions
 tag: Tutorial
 published: true

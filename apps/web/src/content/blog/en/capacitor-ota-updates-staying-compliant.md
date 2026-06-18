@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-28T03:37:02.530Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37-1743133034618.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/capacitor-ota-updates-staying-compliant.webp
+head_image_alt: "\"Capacitor OTA Updates: Staying Compliant\" Capgo blog illustration"
 keywords: OTA updates, Capacitor, app compliance, mobile updates, app store guidelines, security protocols, over-the-air updates
 tag: Development, Mobile, Updates
 published: true

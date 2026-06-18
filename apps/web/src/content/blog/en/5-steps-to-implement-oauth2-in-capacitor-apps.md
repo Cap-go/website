@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-27T12:26:34.111Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/683598e6d3b96619818496d3-1748348849256.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/5-steps-to-implement-oauth2-in-capacitor-apps.webp
+head_image_alt: "5 Steps to Implement OAuth2 in Capacitor Apps Capgo blog illustration"
 keywords: OAuth2, Capacitor, authentication, mobile apps, security, token storage, PKCE, app integration
 tag: Development, Mobile, Security
 published: true
