@@ -282,7 +282,7 @@ const content = {
       })
     }
     const consoleUrl = `https://console.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
-    window.open(consoleUrl, '_blank', 'noopener,noreferrer')
-    submitButton.disabled = false
+    await new Promise((resolve) => setTimeout(resolve, 400))
+    window.location.href = consoleUrl
   })
 </script>
