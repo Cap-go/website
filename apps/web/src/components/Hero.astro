@@ -1,6 +1,7 @@
 ---
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import TeamAvatars from '@/components/TeamAvatars.astro'
 
 const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
 const nativeBuildUrl = getRelativeLocaleUrl(Astro.locals.locale, 'native-build')
@@ -219,11 +220,7 @@ const teamUrl = 'https://book.capgo.app/demo/'
             </div>
           </div>
           <div class="font-inter flex flex-col items-center justify-center gap-3 text-sm text-gray-400 sm:flex-row">
-            <div class="flex -space-x-2" aria-hidden="true">
-              <img src="/martin-avatar.png" alt="" width="36" height="36" class="h-9 w-9 rounded-full border-2 border-gray-950 object-cover shadow-sm" />
-              <img src="/michael-profile.webp" alt="" width="36" height="36" class="h-9 w-9 rounded-full border-2 border-gray-950 object-cover shadow-sm" />
-              <img src="/valeria-avatar.jpg" alt="" width="36" height="36" class="h-9 w-9 rounded-full border-2 border-gray-950 object-cover shadow-sm" />
-            </div>
+            <TeamAvatars size="lg" border="border-gray-950" shadow loading={false} />
             <p>
               Enterprise needs?
               <a
