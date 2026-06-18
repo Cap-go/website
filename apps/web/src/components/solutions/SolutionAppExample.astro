@@ -67,14 +67,14 @@ const showExampleCtas = solution === 'enterprise'
             )}
           </div>
 
-          <dl class="grid grid-cols-3 overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] text-center shadow-2xl shadow-black/20">
-            <div class="border-r border-white/10 p-4">
+          <dl class="grid grid-cols-1 overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] text-center shadow-2xl shadow-black/20 sm:grid-cols-3">
+            <div class="border-b border-white/10 p-4 sm:border-r sm:border-b-0">
               <dt class="font-mono text-[0.68rem] font-semibold tracking-wide text-slate-500 uppercase">{copy('solution_app_examples_example_type')}</dt>
               <dd class="mt-2 text-sm font-semibold text-white">{copy(example.labelKey)}</dd>
             </div>
-            <div class="border-r border-white/10 p-4">
+            <div class="border-b border-white/10 p-4 sm:border-r sm:border-b-0">
               <dt class="font-mono text-[0.68rem] font-semibold tracking-wide text-slate-500 uppercase">{copy('solution_app_examples_store_categories')}</dt>
-              <dd class="mt-2 text-sm font-semibold text-white">{categories}</dd>
+              <dd class="mt-2 text-sm font-semibold text-pretty text-white">{categories}</dd>
             </div>
             <div class="p-4">
               <dt class="font-mono text-[0.68rem] font-semibold tracking-wide text-slate-500 uppercase">{copy('solution_app_examples_source')}</dt>
@@ -85,7 +85,7 @@ const showExampleCtas = solution === 'enterprise'
 
         <div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start">
           <div
-            class="order-2 space-y-3 lg:order-1"
+            class="order-1 space-y-3 lg:order-1"
             data-randomize-app-examples={randomize ? 'true' : undefined}
             aria-live={randomize ? 'polite' : undefined}
             aria-atomic={randomize ? 'true' : undefined}
@@ -140,7 +140,7 @@ const showExampleCtas = solution === 'enterprise'
 
           <aside
             id="app-examples-cta"
-            class="order-1 flex flex-col justify-between rounded-lg border border-cyan-300/20 bg-[linear-gradient(145deg,rgba(34,211,238,0.14),rgba(37,99,235,0.09)_48%,rgba(16,185,129,0.12))] p-6 shadow-2xl ring-1 shadow-cyan-950/25 ring-white/5 lg:order-2"
+            class="order-2 flex flex-col justify-between rounded-lg border border-cyan-300/20 bg-[linear-gradient(145deg,rgba(34,211,238,0.14),rgba(37,99,235,0.09)_48%,rgba(16,185,129,0.12))] p-6 shadow-2xl ring-1 shadow-cyan-950/25 ring-white/5 lg:order-2"
           >
             <div>
               <p class="font-mono text-xs font-semibold tracking-wide text-cyan-200 uppercase">{copy('solution_app_examples_cta_kicker')}</p>
