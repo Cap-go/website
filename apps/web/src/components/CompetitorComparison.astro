@@ -182,28 +182,34 @@ const fitCards = [
       </div>
 
       <div class="mt-9 overflow-hidden rounded-lg border border-white/10 bg-white/[0.03]">
-        <div class="hidden grid-cols-[0.72fr_1fr_1fr] border-b border-white/10 bg-white/[0.04] text-sm font-bold text-slate-300 md:grid">
-          <div class="px-5 py-4">Area</div>
-          <div class="px-5 py-4 text-sky-200">Capgo</div>
-          <div class="px-5 py-4 text-amber-200">{page.competitorShort}</div>
-        </div>
-        <div class="divide-y divide-white/10">
-          {
-            page.differences.map((item) => (
-              <div class="grid gap-4 p-5 md:grid-cols-[0.72fr_1fr_1fr] md:gap-0 md:p-0">
-                <div class="font-bold text-white md:px-5 md:py-4">{item.label}</div>
-                <div class="text-base leading-7 text-slate-300 md:border-l md:border-white/10 md:px-5 md:py-4">
-                  <p class="mb-1 text-xs font-bold tracking-[0.18em] text-sky-200 uppercase md:hidden">Capgo</p>
-                  {item.capgo}
-                </div>
-                <div class="text-base leading-7 text-slate-300 md:border-l md:border-white/10 md:px-5 md:py-4">
-                  <p class="mb-1 text-xs font-bold tracking-[0.18em] text-amber-200 uppercase md:hidden">{page.competitorShort}</p>
-                  {item.competitor}
-                </div>
-              </div>
-            ))
-          }
-        </div>
+        <table class="block w-full border-collapse md:table md:table-fixed">
+          <thead class="hidden border-b border-white/10 bg-white/[0.04] text-sm font-bold text-slate-300 md:table-header-group">
+            <tr>
+              <th scope="col" class="px-5 py-4 text-left font-bold md:w-[26%]">Area</th>
+              <th scope="col" class="px-5 py-4 text-left font-bold text-sky-200 md:w-[37%]">Capgo</th>
+              <th scope="col" class="px-5 py-4 text-left font-bold text-amber-200 md:w-[37%]">{page.competitorShort}</th>
+            </tr>
+          </thead>
+          <tbody class="block divide-y divide-white/10 md:table-row-group">
+            {
+              page.differences.map((item) => (
+                <tr class="grid gap-4 p-5 md:table-row md:gap-0 md:p-0">
+                  <th scope="row" class="block text-left font-bold text-white md:table-cell md:px-5 md:py-4">
+                    {item.label}
+                  </th>
+                  <td class="block text-base leading-7 text-slate-300 md:table-cell md:border-l md:border-white/10 md:px-5 md:py-4">
+                    <p class="mb-1 text-xs font-bold tracking-[0.18em] text-sky-200 uppercase md:hidden">Capgo</p>
+                    {item.capgo}
+                  </td>
+                  <td class="block text-base leading-7 text-slate-300 md:table-cell md:border-l md:border-white/10 md:px-5 md:py-4">
+                    <p class="mb-1 text-xs font-bold tracking-[0.18em] text-amber-200 uppercase md:hidden">{page.competitorShort}</p>
+                    {item.competitor}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
