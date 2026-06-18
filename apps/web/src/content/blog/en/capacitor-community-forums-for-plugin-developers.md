@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-19T03:15:19.291Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/capacitor-community-forums-for-plugin-developers.webp
 head_image_alt: "Capacitor Community Forums for Plugin Developers Capgo blog illustration"
 keywords: Capacitor, plugin development, developer forums, troubleshooting, community support

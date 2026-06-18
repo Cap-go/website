@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-23T01:36:38.468Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/how-chinas-data-laws-impact-app-store-submissions.webp
 head_image_alt: "How China's Data Laws Impact App Store Submissions Capgo blog illustration"
 keywords: China, data laws, app store, compliance, local data storage, cybersecurity, personal information protection, data security

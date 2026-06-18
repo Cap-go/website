@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-19T00:43:15.626Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/capacitor-ota-updates-vs-app-store-restrictions.webp
 head_image_alt: "Capacitor OTA Updates vs App Store Restrictions Capgo blog illustration"
 keywords: OTA updates, app store restrictions, mobile development, app deployment, agile development, app updates, Capgo

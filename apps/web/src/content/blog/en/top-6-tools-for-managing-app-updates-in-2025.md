@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-06T06:07:22.508Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/top-6-tools-for-managing-app-updates-in-2025.webp
 head_image_alt: "Top 6 Tools for Managing App Updates in 2025 Capgo blog illustration"
 keywords: app updates, mobile development, software management, security tools, cloud solutions, CI/CD integration

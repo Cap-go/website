@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-06T03:31:58.003Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/common-live-update-issues-and-solutions-for-developers.webp
 head_image_alt: "Common Live Update Issues and Solutions for Developers Capgo blog illustration"
 keywords: live updates, network issues, version conflicts, device compatibility, CI/CD, OTA updates, security, app development

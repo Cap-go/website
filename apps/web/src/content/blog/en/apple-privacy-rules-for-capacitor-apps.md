@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-31T01:48:03.832Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/apple-privacy-rules-for-capacitor-apps.webp
 head_image_alt: "Apple Privacy Rules for Capacitor Apps Capgo blog illustration"
 keywords: Apple privacy rules, Capacitor apps, data transparency, user consent, App Store compliance, privacy policy

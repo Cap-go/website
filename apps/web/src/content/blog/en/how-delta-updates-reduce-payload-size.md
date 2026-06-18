@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-20T03:28:37.844Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/how-delta-updates-reduce-payload-size.webp
 head_image_alt: "How Delta Updates Reduce Payload Size Capgo blog illustration"
 keywords: delta updates, mobile apps, differential patching, app performance, bandwidth savings

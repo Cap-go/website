@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-21T04:03:25.616Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/how-to-schedule-ota-updates-for-capacitor-apps.webp
 head_image_alt: "How to Schedule OTA Updates for Capacitor Apps Capgo blog illustration"
 keywords: OTA updates, mobile app updates, Capacitor, app deployment, update scheduling, performance monitoring

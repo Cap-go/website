@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-11T03:53:42.225Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/phased-rollouts-for-capacitor-live-updates.webp
 head_image_alt: "Phased Rollouts for Capacitor Live Updates Capgo blog illustration"
 keywords: phased rollouts, app updates, user segmentation, risk reduction, performance monitoring, CI/CD integration

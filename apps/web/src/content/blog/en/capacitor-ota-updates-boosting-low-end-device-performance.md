@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-10T01:24:02.744Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/capacitor-ota-updates-boosting-low-end-device-performance.webp
 head_image_alt: "Capacitor OTA Updates: Boosting Low-End Device Performance Capgo blog illustration"
 keywords: OTA updates, low-end devices, app performance, incremental updates, mobile development
