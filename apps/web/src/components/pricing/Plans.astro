@@ -3,6 +3,7 @@ import { numberWithSpaces } from '@/services/misc'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import m from '@/copy/messages'
+import TeamAvatars from '@/components/TeamAvatars.astro'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]
@@ -124,11 +125,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                 class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-4 py-3 text-sm font-semibold whitespace-nowrap text-gray-900 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
                 role="button"
               >
-                <span class="flex -space-x-2" aria-hidden="true">
-                  <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/martin-avatar.png" alt="" width="24" height="24" loading="lazy" />
-                  <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-                  <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-                </span>
+                <TeamAvatars />
                 <span>Talk to our team</span>
               </a>
             )}

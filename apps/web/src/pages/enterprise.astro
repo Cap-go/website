@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import TeamAvatars from '@/components/TeamAvatars.astro'
 import type { Database } from '@/services/supabase.types'
 import { createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import { numberWithSpaces } from '@/services/misc'
@@ -365,11 +366,7 @@ const enterpriseBeforeAfterRows = [
               aria-label={m.enterprise_talk_to_team({}, { locale })}
               class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             >
-              <span class="flex -space-x-2" aria-hidden="true">
-                <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/martin-avatar.png" alt="" width="24" height="24" loading="lazy" />
-                <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-                <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-              </span>
+              <TeamAvatars />
               <span>{m.enterprise_talk_to_team({}, { locale })}</span>
             </a>
             <a
@@ -715,11 +712,7 @@ const enterpriseBeforeAfterRows = [
             aria-label={m.enterprise_talk_to_team({}, { locale })}
             class="inline-flex min-h-11 w-fit items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950 focus:outline-none"
           >
-            <span class="flex -space-x-2" aria-hidden="true">
-              <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/martin-avatar.png" alt="" width="24" height="24" loading="lazy" />
-              <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-              <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-            </span>
+            <TeamAvatars />
             <span>{m.enterprise_talk_to_team({}, { locale })}</span>
           </a>
         </div>

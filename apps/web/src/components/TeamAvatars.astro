@@ -1,0 +1,34 @@
+---
+interface Props {
+  size?: 'sm' | 'lg'
+  border?: string
+  shadow?: boolean
+  loading?: 'lazy' | 'eager' | false
+}
+
+const { size = 'sm', border = 'border-white', shadow = false, loading = 'lazy' } = Astro.props
+
+const members = [
+  { src: '/jordan-avatar.jpg' },
+  { src: '/martin-avatar.png' },
+  { src: '/valeria-avatar.jpg' },
+]
+
+const sizeClasses = size === 'lg' ? 'h-9 w-9' : 'h-6 w-6'
+const pixelSize = size === 'lg' ? 36 : 24
+---
+
+<span class="flex -space-x-2" aria-hidden="true">
+  {
+    members.map((member) => (
+      <img
+        class:list={[sizeClasses, 'rounded-full border-2 object-cover', border, shadow && 'shadow-sm']}
+        src={member.src}
+        alt=""
+        width={pixelSize}
+        height={pixelSize}
+        loading={loading || undefined}
+      />
+    ))
+  }
+</span>
