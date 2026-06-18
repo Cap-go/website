@@ -65,15 +65,16 @@ const workflow: { title: MessageKey; desc: MessageKey }[] = [
 
 const lovableAiPrompt = `I want this Lovable project to become a Capacitor mobile app using Capgo from the start.
 
-Set up the project so an AI agent can use Capgo's public MCP onboarding and release tools:
+Set up the project so an AI agent can use Capgo's MCP release tools through install-mcp:
 
-1. Read and follow Capgo's MCP onboarding from:
+1. Install the Capgo CLI MCP server for the active AI client. For Codex, run:
+   - npx @capgo/cli@latest login
+   - npx install-mcp 'npx @capgo/cli@latest mcp' --client codex
+   Replace codex with cursor, claude-code, gemini-cli, or windsurf if that is the client this project uses.
+2. Read Capgo's public MCP metadata when tool details are needed:
    - https://capgo.app/.well-known/mcp/server-card.json
    - https://capgo.app/.well-known/agent-skills/capgo-cli-mcp/SKILL.md
-2. Add a short docs/agent-mobile-release.md file that tells the agent to use the Capgo CLI MCP server as a local stdio server, not a remote HTTP endpoint.
-3. Include the Capgo MCP setup commands from the onboarding:
-   - bunx @capgo/cli@7.93.1 login
-   - bunx @capgo/cli@7.93.1 mcp
+3. Add a short docs/agent-mobile-release.md file that tells the agent to use the Capgo CLI MCP server as a local stdio server, not a remote HTTP endpoint.
 4. Add Capacitor for iOS and Android using the package manager already used by this project.
 5. Configure capacitor.config.ts with:
    - appName: the current Lovable app name
@@ -91,7 +92,7 @@ Set up the project so an AI agent can use Capgo's public MCP onboarding and rele
    - production for users
    - preview for stakeholder review
    - staging for internal testing
-9. Keep normal docs and README commands copy-pasteable with npm/npx unless this project already uses another package manager. Keep the Capgo MCP commands exactly as shown in the onboarding.
+9. Keep normal docs and README commands copy-pasteable with npm/npx unless this project already uses another package manager. Keep the Capgo MCP install command exactly as shown above.
 10. Do not fake native signing credentials. Leave clear TODOs for the Capgo API key, Apple team details, and bundle ID.
 11. After making changes, summarize exactly what changed and what command I should run next.`
 

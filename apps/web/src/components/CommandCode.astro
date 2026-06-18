@@ -1,0 +1,25 @@
+---
+interface Props {
+  command: string
+  class?: string
+}
+
+const { command, class: className = 'block font-mono text-[13px] leading-6 break-words whitespace-pre-wrap' } = Astro.props
+const tokens = command.match(/'[^']*'|"[^"]*"|\S+/g) ?? []
+
+function tokenClass(token: string, index: number) {
+  if (token === '$') return 'text-slate-500'
+  if (['npx', 'npm', 'bunx', 'bun'].includes(token)) return 'text-emerald-300'
+  if (token.startsWith('--')) return 'text-cyan-300'
+  if (token.startsWith('-')) return 'text-cyan-300'
+  if (token.startsWith("'") || token.startsWith('"')) return 'text-amber-200'
+  if (token.startsWith('@')) return 'text-sky-200'
+  if (token.startsWith('.') || token.includes('/')) return 'text-emerald-200'
+  if (index === 0 || (index === 1 && tokens[0] === '$')) return 'text-sky-200'
+  return 'text-slate-200'
+}
+---
+
+<code class={className}>
+  {tokens.map((token, index) => <span class={tokenClass(token, index)}>{index > 0 ? ` ${token}` : token}</span>)}
+</code>
