@@ -6,6 +6,19 @@ import { dirname, resolve } from 'node:path'
 const width = 1536
 const height = 1024
 
+const layout = {
+  padX: 80,
+  padY: 72,
+  leftWidth: 820,
+  columnGap: 64,
+  panelWidth: 480,
+  panelSidePad: 56,
+} as const
+
+const panelX = layout.padX + layout.leftWidth + layout.columnGap
+const panelY = layout.padY
+const panelH = height - layout.padY * 2
+
 const brand = {
   azure: '#119eff',
   dusk: '#515271',
@@ -168,7 +181,7 @@ function loadPosts() {
     if (!parsed) continue
 
     const slug = parsed.fields.get('slug') ?? name.replace(/\.md$/, '')
-    const title = parsed.fields.get('title') ?? slug
+    const title = (parsed.fields.get('title') ?? slug).replace(/^['"]|['"]$/g, '')
     const tag = parsed.fields.get('tag') ?? ''
     const keywords = parsed.fields.get('keywords') ?? ''
     const headImage = parsed.fields.get('head_image') ?? ''
@@ -185,7 +198,7 @@ function loadPosts() {
 function buildImage(post: BlogPost): BlogImage {
   const theme = detectTheme(post.slug, post.title, post.tag, post.keywords)
   const colors = themeColors(theme)
-  const titleLines = wrapText(post.title, 26).slice(0, 4)
+  const titleLines = wrapText(post.title, 22).slice(0, 3)
 
   return {
     ...post,
@@ -203,9 +216,17 @@ function textLine(
   text: string,
   x: number,
   y: number,
-  options: { size: number; color: string; weight?: number; anchor?: 'start' | 'middle'; opacity?: number },
+  options: {
+    size: number
+    color: string
+    weight?: number
+    anchor?: 'start' | 'middle'
+    opacity?: number
+    hanging?: boolean
+  },
 ) {
-  return `<text x="${x}" y="${y}" text-anchor="${options.anchor ?? 'start'}" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="${options.size}" font-weight="${options.weight ?? 500}" fill="${options.color}" opacity="${options.opacity ?? 1}">${escapeText(text)}</text>`
+  const baseline = options.hanging ? ' dominant-baseline="hanging"' : ''
+  return `<text x="${x}" y="${y}"${baseline} text-anchor="${options.anchor ?? 'start'}" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="${options.size}" font-weight="${options.weight ?? 500}" fill="${options.color}" opacity="${options.opacity ?? 1}">${escapeText(text)}</text>`
 }
 
 function logoTile(x: number, y: number, size: number, accent: string) {
@@ -222,22 +243,36 @@ function logoTile(x: number, y: number, size: number, accent: string) {
     </g>`
 }
 
-function chips(items: string[], x: number, y: number, accent: string) {
+function chips(items: string[], x: number, y: number, maxWidth: number, accent: string) {
   const gap = 16
-  let cursor = x
+  const rowGap = 14
+  const chipHeight = 46
+  let cursorX = x
+  let cursorY = y
+  const parts: string[] = []
 
-  return items
-    .slice(0, 4)
-    .map((item) => {
-      const chipWidth = Math.min(260, 34 + item.length * 13)
-      const output = `
-        <rect x="${cursor}" y="${y}" width="${chipWidth}" height="46" rx="23" fill="#ffffff" stroke="${accent}" stroke-opacity="0.24"/>
-        <circle cx="${cursor + 22}" cy="${y + 23}" r="6" fill="${accent}"/>
-        ${textLine(item, cursor + 38, y + 30, { size: 20, color: '#334155', weight: 700 })}`
-      cursor += chipWidth + gap
-      return output
-    })
-    .join('')
+  for (const item of items.slice(0, 4)) {
+    const chipWidth = Math.min(260, 34 + item.length * 13)
+    if (cursorX > x && cursorX + chipWidth > x + maxWidth) {
+      cursorX = x
+      cursorY += chipHeight + rowGap
+    }
+
+    parts.push(`
+        <rect x="${cursorX}" y="${cursorY}" width="${chipWidth}" height="${chipHeight}" rx="23" fill="#ffffff" stroke="${accent}" stroke-opacity="0.24"/>
+        <circle cx="${cursorX + 22}" cy="${cursorY + 23}" r="6" fill="${accent}"/>
+        ${textLine(item, cursorX + 38, cursorY + 14, { size: 18, color: '#334155', weight: 700, hanging: true })}`)
+    cursorX += chipWidth + gap
+  }
+
+  return parts.join('')
+}
+
+function panelFooterCaptions(x: number, y: number, w: number, h: number, title: string, subtitle: string) {
+  const captionX = x + layout.panelSidePad
+  return `
+    ${textLine(title, captionX, y + h - 88, { size: 24, color: '#0f172a', weight: 800 })}
+    ${textLine(subtitle, captionX, y + h - 52, { size: 20, color: '#64748b', weight: 600 })}`
 }
 
 function panelFrame(x: number, y: number, w: number, h: number) {
@@ -252,37 +287,44 @@ function panelFrame(x: number, y: number, w: number, h: number) {
 }
 
 function renderPhonePanel(image: BlogImage) {
-  const x = 972
-  const y = 168
-  const w = 500
-  const h = 760
+  const x = panelX
+  const y = panelY
+  const w = layout.panelWidth
+  const h = panelH
+  const side = layout.panelSidePad
+  const innerW = w - side * 2
   const rows = ['Production channel', 'Staged rollout', 'Crash guard active', 'Rollback ready']
+
+  const notchW = Math.min(220, innerW - 80)
+  const notchX = x + side + (innerW - notchW) / 2
 
   const rowMarkup = rows
     .map((row, index) => {
       const rowY = y + 250 + index * 96
       return `
-        <rect x="${x + 84}" y="${rowY}" width="${w - 168}" height="68" rx="18" fill="#111827"/>
-        <circle cx="${x + 116}" cy="${rowY + 34}" r="8" fill="${image.accent}"/>
-        ${textLine(row, x + 136, rowY + 42, { size: 22, color: '#e5e7eb', weight: 700 })}`
+        <rect x="${x + side}" y="${rowY}" width="${innerW}" height="68" rx="18" fill="#111827"/>
+        <circle cx="${x + side + 32}" cy="${rowY + 34}" r="8" fill="${image.accent}"/>
+        ${textLine(row, x + side + 52, rowY + 42, { size: 22, color: '#e5e7eb', weight: 700 })}`
     })
     .join('')
 
   return `
     ${panelFrame(x, y, w, h)}
-    <rect x="${x + 150}" y="${y + 108}" width="${w - 300}" height="120" rx="58" fill="#020617"/>
-    <rect x="${x + 168}" y="${y + 126}" width="${w - 336}" height="84" rx="44" fill="#f8fbff"/>
-    <rect x="${x + 248}" y="${y + 142}" width="120" height="16" rx="8" fill="#020617" opacity="0.82"/>
-    <rect x="${x + 84}" y="${y + 188}" width="${w - 168}" height="52" rx="20" fill="${image.accentSoft}"/>
-    ${textLine('Live update control', x + 104, y + 222, { size: 24, color: '#0f172a', weight: 900 })}
+    <rect x="${notchX - 18}" y="${y + 108}" width="${notchW + 36}" height="120" rx="58" fill="#020617"/>
+    <rect x="${notchX}" y="${y + 126}" width="${notchW}" height="84" rx="44" fill="#f8fbff"/>
+    <rect x="${notchX + notchW / 2 - 60}" y="${y + 142}" width="120" height="16" rx="8" fill="#020617" opacity="0.82"/>
+    <rect x="${x + side}" y="${y + 188}" width="${innerW}" height="52" rx="20" fill="${image.accentSoft}"/>
+    ${textLine('Live update control', x + side + 20, y + 222, { size: 24, color: '#0f172a', weight: 900 })}
     ${rowMarkup}`
 }
 
 function renderShieldPanel(image: BlogImage) {
-  const x = 972
-  const y = 168
-  const w = 500
-  const h = 760
+  const x = panelX
+  const y = panelY
+  const w = layout.panelWidth
+  const h = panelH
+  const side = layout.panelSidePad
+  const innerW = w - side * 2
   const cx = x + w / 2
   const cy = y + 360
 
@@ -290,15 +332,16 @@ function renderShieldPanel(image: BlogImage) {
     ${panelFrame(x, y, w, h)}
     <path d="M ${cx} ${cy - 150} L ${cx + 150} ${cy - 78} L ${cx + 150} ${cy + 40} C ${cx + 150} ${cy + 150} ${cx} ${cy + 210} ${cx} ${cy + 210} C ${cx} ${cy + 210} ${cx - 150} ${cy + 150} ${cx - 150} ${cy + 40} L ${cx - 150} ${cy - 78} Z" fill="${image.accentSoft}" stroke="${image.accent}" stroke-width="8"/>
     <path d="M ${cx - 70} ${cy + 10} L ${cx - 18} ${cy + 62} L ${cx + 92} ${cy - 48}" fill="none" stroke="${image.accent}" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-    ${textLine('Encrypted delivery', x + 84, y + 620, { size: 24, color: '#0f172a', weight: 800 })}
-    ${textLine('Signed bundles and audit trail', x + 84, y + 656, { size: 20, color: '#64748b', weight: 600 })}`
+    ${panelFooterCaptions(x, y, w, h, 'Encrypted delivery', 'Signed bundles and audit trail')}`
 }
 
 function renderTerminalPanel(image: BlogImage) {
-  const x = 972
-  const y = 168
-  const w = 500
-  const h = 760
+  const x = panelX
+  const y = panelY
+  const w = layout.panelWidth
+  const h = panelH
+  const side = layout.panelSidePad
+  const innerW = w - side * 2
   const lines = [
     'capgo build ios --profile release',
     'capgo upload --channel production',
@@ -309,61 +352,65 @@ function renderTerminalPanel(image: BlogImage) {
   const lineMarkup = lines
     .map((line, index) => {
       const color = index === 0 ? image.accent : index === 1 ? '#cbd5e1' : '#94a3b8'
-      return textLine(line, x + 56, y + 250 + index * 56, { size: 24, color, weight: index === 0 ? 800 : 600 })
+      return textLine(line, x + side + 12, y + 250 + index * 56, { size: 24, color, weight: index === 0 ? 800 : 600 })
     })
     .join('')
 
   return `
     ${panelFrame(x, y, w, h)}
-    <rect x="${x + 36}" y="${y + 108}" width="${w - 72}" height="${h - 144}" rx="24" fill="#020617"/>
+    <rect x="${x + side}" y="${y + 108}" width="${innerW}" height="${h - 144}" rx="24" fill="#020617"/>
     ${lineMarkup}
-    ${textLine('Automated release pipeline', x + 84, y + 620, { size: 24, color: '#0f172a', weight: 800 })}
-    ${textLine('Build, sign, upload, and promote', x + 84, y + 656, { size: 20, color: '#64748b', weight: 600 })}`
+    ${panelFooterCaptions(x, y, w, h, 'Automated release pipeline', 'Build, sign, upload, and promote')}`
 }
 
 function renderChecklistPanel(image: BlogImage) {
-  const x = 972
-  const y = 168
-  const w = 500
-  const h = 760
+  const x = panelX
+  const y = panelY
+  const w = layout.panelWidth
+  const h = panelH
+  const side = layout.panelSidePad
+  const innerW = w - side * 2
   const items = ['Policy checks', 'Store guidelines', 'Audit evidence', 'Release approval']
 
   const itemMarkup = items
     .map((item, index) => {
       const itemY = y + 250 + index * 88
       return `
-        <rect x="${x + 84}" y="${itemY}" width="34" height="34" rx="8" fill="${image.accentSoft}" stroke="${image.accent}" stroke-width="3"/>
-        <path d="M ${x + 92} ${itemY + 18} L ${x + 102} ${itemY + 28} L ${x + 118} ${itemY + 10}" fill="none" stroke="${image.accent}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        ${textLine(item, x + 136, itemY + 26, { size: 26, color: '#0f172a', weight: 700 })}`
+        <rect x="${x + side}" y="${itemY}" width="34" height="34" rx="8" fill="${image.accentSoft}" stroke="${image.accent}" stroke-width="3"/>
+        <path d="M ${x + side + 8} ${itemY + 18} L ${x + side + 18} ${itemY + 28} L ${x + side + 34} ${itemY + 10}" fill="none" stroke="${image.accent}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        ${textLine(item, x + side + 52, itemY + 26, { size: 26, color: '#0f172a', weight: 700 })}`
     })
     .join('')
 
   return `
     ${panelFrame(x, y, w, h)}
     ${itemMarkup}
-    ${textLine('Compliance-ready releases', x + 84, y + 620, { size: 24, color: '#0f172a', weight: 800 })}
-    ${textLine('Checklists for review and rollout', x + 84, y + 656, { size: 20, color: '#64748b', weight: 600 })}`
+    ${panelFooterCaptions(x, y, w, h, 'Compliance-ready releases', 'Checklists for review and rollout')}`
 }
 
 function renderBridgePanel(image: BlogImage) {
-  const x = 972
-  const y = 168
-  const w = 500
-  const h = 760
-  const leftX = x + 110
-  const rightX = x + 330
+  const x = panelX
+  const y = panelY
+  const w = layout.panelWidth
+  const h = panelH
+  const side = layout.panelSidePad
+  const innerW = w - side * 2
+  const boxSize = 120
+  const bridgeGap = 100
+  const groupWidth = boxSize * 2 + bridgeGap
+  const leftX = x + (w - groupWidth) / 2
+  const rightX = leftX + boxSize + bridgeGap
   const bridgeY = y + 360
 
   return `
     ${panelFrame(x, y, w, h)}
-    <rect x="${leftX}" y="${y + 250}" width="120" height="120" rx="24" fill="${image.accentSoft}" stroke="${image.accent}" stroke-width="4"/>
+    <rect x="${leftX}" y="${y + 250}" width="${boxSize}" height="${boxSize}" rx="24" fill="${image.accentSoft}" stroke="${image.accent}" stroke-width="4"/>
     ${textLine('Web', leftX + 36, y + 322, { size: 24, color: '#0f172a', weight: 800 })}
-    <rect x="${rightX}" y="${y + 250}" width="120" height="120" rx="24" fill="${brand.pumpkinSoft}" stroke="${brand.pumpkin}" stroke-width="4"/>
+    <rect x="${rightX}" y="${y + 250}" width="${boxSize}" height="${boxSize}" rx="24" fill="${brand.pumpkinSoft}" stroke="${brand.pumpkin}" stroke-width="4"/>
     ${textLine('Native', rightX + 20, y + 322, { size: 24, color: '#0f172a', weight: 800 })}
-    <rect x="${leftX + 120}" y="${bridgeY - 10}" width="${rightX - leftX - 120}" height="20" rx="10" fill="${image.accent}"/>
-    <circle cx="${(leftX + rightX + 120) / 2}" cy="${bridgeY}" r="26" fill="#ffffff" stroke="${image.accent}" stroke-width="6"/>
-    ${textLine('Plugin bridge', x + 84, y + 620, { size: 24, color: '#0f172a', weight: 800 })}
-    ${textLine('Capacitor APIs without rewrites', x + 84, y + 656, { size: 20, color: '#64748b', weight: 600 })}`
+    <rect x="${leftX + boxSize}" y="${bridgeY - 10}" width="${bridgeGap}" height="20" rx="10" fill="${image.accent}"/>
+    <circle cx="${leftX + boxSize + bridgeGap / 2}" cy="${bridgeY}" r="26" fill="#ffffff" stroke="${image.accent}" stroke-width="6"/>
+    ${panelFooterCaptions(x, y, w, h, 'Plugin bridge', 'Capacitor APIs without rewrites')}`
 }
 
 function renderThematicPanel(image: BlogImage) {
@@ -383,15 +430,30 @@ function renderThematicPanel(image: BlogImage) {
 }
 
 function renderSvg(image: BlogImage) {
-  const titleSize = image.titleLines.some((line) => line.length > 24) ? 58 : 68
-  const titleStart = 250
-  const titleGap = titleSize + 12
+  const { padX, padY, leftWidth } = layout
+  const logoSize = 80
+  const eyebrowSize = 18
+  const titleSize = image.titleLines.some((line) => line.length > 18) ? 54 : image.titleLines.length > 2 ? 58 : 64
+  const titleLineHeight = titleSize + 14
+
+  const logoBottom = padY + logoSize
+  const eyebrowY = logoBottom + 28
+  const titleY = eyebrowY + eyebrowSize + 36
+  const chipsY = titleY + image.titleLines.length * titleLineHeight + 36
 
   const titleSvg = image.titleLines
-    .map((line, index) => textLine(line, 72, titleStart + index * titleGap, { size: titleSize, color: '#101827', weight: 900 }))
+    .map((line, index) =>
+      textLine(line, padX, titleY + index * titleLineHeight, {
+        size: titleSize,
+        color: '#101827',
+        weight: 900,
+        hanging: true,
+      }),
+    )
     .join('')
-
-  const chipsY = titleStart + image.titleLines.length * titleGap + 36
+  const glowX = panelX + layout.panelWidth / 2
+  const glowY = height / 2
+  const accentBandX = padX + leftWidth
 
   return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -400,7 +462,7 @@ function renderSvg(image: BlogImage) {
       <stop offset="0.55" stop-color="#f7fbff"/>
       <stop offset="1" stop-color="${image.accentSoft}"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1180 520) rotate(90) scale(520 760)">
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(${glowX} ${glowY}) rotate(90) scale(520 ${panelH})">
       <stop stop-color="${image.accent}" stop-opacity="0.22"/>
       <stop offset="0.55" stop-color="${image.accent}" stop-opacity="0.08"/>
       <stop offset="1" stop-color="${image.accent}" stop-opacity="0"/>
@@ -412,12 +474,12 @@ function renderSvg(image: BlogImage) {
   <rect width="${width}" height="${height}" fill="url(#bg)"/>
   <rect width="${width}" height="${height}" fill="url(#dots)"/>
   <rect width="${width}" height="${height}" fill="url(#glow)"/>
-  <rect x="900" y="0" width="636" height="${height}" fill="${image.accent}" opacity="0.05"/>
-  ${logoTile(72, 72, 88, image.accent)}
-  ${textLine('Capgo blog', 188, 118, { size: 22, color: brand.dusk, weight: 800 })}
-  ${textLine(image.eyebrow.toUpperCase(), 72, 188, { size: 22, color: image.accent, weight: 900 })}
+  <rect x="${accentBandX}" y="0" width="${width - accentBandX}" height="${height}" fill="${image.accent}" opacity="0.05"/>
+  ${logoTile(padX, padY, logoSize, image.accent)}
+  ${textLine('Capgo blog', padX + logoSize + 20, padY + 34, { size: 20, color: brand.dusk, weight: 800, hanging: true })}
+  ${textLine(image.eyebrow.toUpperCase(), padX, eyebrowY, { size: eyebrowSize, color: image.accent, weight: 900, hanging: true })}
   ${titleSvg}
-  ${chips(image.chips, 72, chipsY, image.accent)}
+  ${chips(image.chips, padX, chipsY, leftWidth, image.accent)}
   ${renderThematicPanel(image)}
 </svg>`
 }
