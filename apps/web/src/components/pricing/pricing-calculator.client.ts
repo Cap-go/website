@@ -1,10 +1,26 @@
-import { deriveUsage, getIncludedUsage, getOverageUsage, getPlanMonthlyPrice, recommendPlan, usageToCreditPayload, type PricingPlan } from '@/lib/pricingCalculator'
+import {
+  deriveUsage,
+  getIncludedUsage,
+  getOverageUsage,
+  getPlanBillingPrice,
+  getPlanMonthlyPrice,
+  recommendPlan,
+  usageToCreditPayload,
+  type PricingPlan,
+} from '@/lib/pricingCalculator'
 
 type CalculatorCopy = {
   includePlan: string
   creditsOnly: string
   includedInPlan: string
   planSubscription: string
+  estimatedTotal: string
+  estimatedAnnualTotal: string
+  monthlyTotal: string
+  annualTotal: string
+  billedAnnuallyAt: string
+  perMonth: string
+  perYear: string
 }
 
 export type PricingCalculatorConfig = {
@@ -30,6 +46,7 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
   const planSelect = document.querySelector('[data-pricing-calculator-plan-select]')
   const includedLabel = document.querySelector('[data-pricing-calculator-included-label]')
   const planLineLabel = document.querySelector('[data-pricing-calculator-plan-line-label]')
+  const billingInputs = document.querySelectorAll('[data-pricing-calculator-billing]')
 
   if (modal.parentElement !== document.body) {
     document.body.appendChild(modal)
@@ -57,8 +74,36 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
   }
 
   function isYearlyBilling() {
+    const checked = document.querySelector('[data-pricing-calculator-billing]:checked')
+    if (checked instanceof HTMLInputElement) return checked.value === 'yearly'
+
     const yearly = document.getElementById('yearly')
     return yearly instanceof HTMLInputElement && yearly.checked
+  }
+
+  function syncBillingFromPage() {
+    const pageYearly = document.getElementById('yearly')
+    const yearlySelected = pageYearly instanceof HTMLInputElement && pageYearly.checked
+
+    billingInputs.forEach((input) => {
+      if (input instanceof HTMLInputElement) {
+        input.checked = yearlySelected ? input.value === 'yearly' : input.value === 'monthly'
+      }
+    })
+  }
+
+  function formatAmountWithPeriod(amount: number, yearly: boolean) {
+    return `$${formatPrice(amount)}${yearly ? copy.perYear : copy.perMonth}`
+  }
+
+  function updateBillingLabels(yearly: boolean) {
+    setText('[data-pricing-calculator-estimated-total-label]', yearly ? copy.estimatedAnnualTotal : copy.estimatedTotal)
+    setText('[data-pricing-calculator-total-period]', yearly ? copy.annualTotal : copy.monthlyTotal)
+
+    const planPriceNote = document.querySelector('[data-pricing-calculator-plan-price-note]')
+    if (planPriceNote instanceof HTMLElement) {
+      planPriceNote.classList.toggle('hidden', !yearly)
+    }
   }
 
   function includePlanMode() {
@@ -121,9 +166,20 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
       includedLabel.textContent = withPlan ? copy.includedInPlan : '—'
     }
 
+    const yearly = isYearlyBilling()
+    updateBillingLabels(yearly && withPlan)
+
     if (withPlan && plan) {
       setText('[data-pricing-calculator-plan-name]', plan.name)
-      setText('[data-pricing-calculator-plan-price]', `$${formatPrice(getPlanMonthlyPrice(plan, isYearlyBilling()))}/mo`)
+      setText('[data-pricing-calculator-plan-price]', formatAmountWithPeriod(getPlanMonthlyPrice(plan, yearly), false))
+
+      const planPriceNote = document.querySelector('[data-pricing-calculator-plan-price-note]')
+      if (planPriceNote) {
+        planPriceNote.textContent = yearly ? `${copy.billedAnnuallyAt} $${formatPrice(getPlanBillingPrice(plan, yearly))}` : ''
+      }
+    } else {
+      const planPriceNote = document.querySelector('[data-pricing-calculator-plan-price-note]')
+      if (planPriceNote) planPriceNote.textContent = ''
     }
 
     setText('[data-pricing-calculator-usage-mau]', formatNumber(usage.mau))
@@ -149,13 +205,25 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     clearTimeout(debounceTimer)
     debounceTimer = setTimeout(async () => {
       try {
+        const yearly = isYearlyBilling()
         const creditsCost = await fetchCreditCost(billableUsage)
-        const planCost = withPlan && plan ? getPlanMonthlyPrice(plan, isYearlyBilling()) : 0
-        const total = planCost + creditsCost
+        const planCost = withPlan && plan ? getPlanBillingPrice(plan, yearly) : 0
 
-        setText('[data-pricing-calculator-plan-line-value]', withPlan ? `$${formatPrice(planCost)}` : '$0.00')
-        setText('[data-pricing-calculator-credits-value]', `$${formatPrice(creditsCost)}`)
-        setText('[data-pricing-calculator-total-value]', `$${formatPrice(total)}`)
+        setText('[data-pricing-calculator-plan-line-value]', withPlan ? formatAmountWithPeriod(planCost, yearly) : formatAmountWithPeriod(0, yearly))
+        setText('[data-pricing-calculator-credits-value]', formatAmountWithPeriod(creditsCost, false))
+
+        if (yearly && withPlan) {
+          if (creditsCost > 0) {
+            setText('[data-pricing-calculator-total-value]', `${formatAmountWithPeriod(planCost, true)} + ${formatAmountWithPeriod(creditsCost, false)}`)
+          } else {
+            setText('[data-pricing-calculator-total-value]', formatAmountWithPeriod(planCost, true))
+          }
+        } else if (yearly && !withPlan) {
+          setText('[data-pricing-calculator-total-value]', formatAmountWithPeriod(creditsCost, false))
+        } else {
+          const total = (withPlan && plan ? getPlanMonthlyPrice(plan, false) : 0) + creditsCost
+          setText('[data-pricing-calculator-total-value]', formatAmountWithPeriod(total, false))
+        }
       } catch {
         setText('[data-pricing-calculator-credits-value]', '—')
         setText('[data-pricing-calculator-total-value]', '—')
@@ -171,6 +239,7 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
 
   function openModal() {
     userChangedPlan = false
+    syncBillingFromPage()
     if (!modal.open) {
       modal.showModal()
       document.body.style.overflow = 'hidden'
@@ -237,10 +306,11 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     }
   })
 
-  document.getElementById('monthly')?.addEventListener('change', updateCalculator)
-  document.getElementById('yearly')?.addEventListener('change', () => {
-    userChangedPlan = false
-    updateCalculator()
+  billingInputs.forEach((input) => {
+    input.addEventListener('change', () => {
+      userChangedPlan = false
+      updateCalculator()
+    })
   })
 
   updateCalculator()

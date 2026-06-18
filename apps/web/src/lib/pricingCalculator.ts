@@ -58,6 +58,10 @@ export function getPlanMonthlyPrice(plan: PricingPlan, yearly: boolean) {
   return yearly ? plan.price_y / 12 : plan.price_m
 }
 
+export function getPlanBillingPrice(plan: PricingPlan, yearly: boolean) {
+  return yearly ? plan.price_y : plan.price_m
+}
+
 export function usageToCreditPayload(usage: PricingUsage) {
   const gibToBytes = (gib: number) => Math.round(gib * 1024 * 1024 * 1024)
 
