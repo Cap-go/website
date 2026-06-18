@@ -1,3 +1,8 @@
+/**
+ * Generate OG/social preview PNGs for capgo.app and product pages under apps/web/public/social/.
+ * Covers: / (capgo_social.png), live-update, native-build, app_mobile, plugins, ionic-plugins, security-scanner, ci_cd, integrations.
+ * Usage: bun run generate:social-images
+ */
 import { spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -204,8 +209,21 @@ function wrapText(value: string, maxChars: number) {
   return lines
 }
 
-function textLine(text: string, x: number, y: number, options: { size: number; color: string; weight?: number; anchor?: 'start' | 'middle'; opacity?: number }) {
-  return `<text x="${x}" y="${y}" text-anchor="${options.anchor ?? 'start'}" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="${options.size}" font-weight="${options.weight ?? 500}" fill="${options.color}" opacity="${options.opacity ?? 1}">${escapeText(text)}</text>`
+function textLine(
+  text: string,
+  x: number,
+  y: number,
+  options: {
+    size: number
+    color: string
+    weight?: number
+    anchor?: 'start' | 'middle'
+    opacity?: number
+    hanging?: boolean
+  },
+) {
+  const baseline = options.hanging ? ' dominant-baseline="hanging"' : ''
+  return `<text x="${x}" y="${y}"${baseline} text-anchor="${options.anchor ?? 'start'}" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="${options.size}" font-weight="${options.weight ?? 500}" fill="${options.color}" opacity="${options.opacity ?? 1}">${escapeText(text)}</text>`
 }
 
 function logoTile(x: number, y: number, size: number, accent: string) {
@@ -234,16 +252,16 @@ function chips(items: string[], y: number, accent: string) {
       const output = `
         <rect x="${x}" y="${y}" width="${chipWidth}" height="64" rx="32" fill="#ffffff" stroke="${accent}" stroke-opacity="0.22"/>
         <circle cx="${x + 32}" cy="${y + 32}" r="8" fill="${accent}"/>
-        ${textLine(item, x + 56, y + 41, { size: 26, color: '#334155', weight: 700 })}`
+        ${textLine(item, x + 56, y + 20, { size: 24, color: '#334155', weight: 700, hanging: true })}`
       x += chipWidth + gap
       return output
     })
     .join('')
 }
 
-function renderCodePanel(image: SocialImage) {
+function renderCodePanel(image: SocialImage, bodyY = 900, scale = 1) {
   const x = 285
-  const y = 900
+  const y = bodyY + (900 - 836) * scale
 
   const lines = image.codeLines
     .map((line, index) => {
@@ -261,11 +279,11 @@ function renderCodePanel(image: SocialImage) {
     ${lines}`
 }
 
-function renderCards(image: SocialImage) {
+function renderCards(image: SocialImage, bodyY = 900, scale = 1) {
   return image.cards
     .map((card, index) => {
       const x = 1235
-      const y = 914 + index * 176
+      const y = bodyY + (914 - 836) * scale + index * 176 * scale
       return `
         <rect x="${x + 8}" y="${y + 12}" width="392" height="138" rx="30" fill="#0f172a" opacity="0.12"/>
         <rect x="${x}" y="${y}" width="392" height="138" rx="30" fill="#ffffff" stroke="#d8e3f1"/>
@@ -275,10 +293,10 @@ function renderCards(image: SocialImage) {
     .join('')
 }
 
-function renderPhone(image: SocialImage) {
+function renderPhone(image: SocialImage, bodyY = 900, scale = 1) {
   const x = 1695
-  const y = 792
-  const phoneHeight = 438
+  const y = bodyY + (792 - 836) * scale
+  const phoneHeight = 438 * scale
   const rowHeight = 52
   const rowGap = 18
   const rowStart = y + 188
@@ -302,38 +320,74 @@ function renderPhone(image: SocialImage) {
     ${rows}`
 }
 
-function renderBrowserSurface(image: SocialImage) {
+function renderBrowserSurface(image: SocialImage, browserY: number, browserHeight: number) {
+  const x = 178
+  const w = 2044
+  const headerH = 72
+  const chromeY = browserY + 24
+  const toolbarY = browserY + headerH - 8
+  const bodyY = browserY + headerH + 16
+  const bodyH = browserHeight - headerH - 16
+  const scale = bodyH / 532
+
   return `
-    <rect x="182" y="804" width="2036" height="570" rx="42" fill="#cdefff" opacity="0.48"/>
-    <rect x="178" y="778" width="2044" height="590" rx="42" fill="#ffffff" stroke="#dce9f8"/>
-    <rect x="178" y="778" width="2044" height="82" rx="42" fill="#f8fbff"/>
-    <rect x="178" y="836" width="2044" height="532" fill="#f8fbff"/>
-    <circle cx="240" cy="820" r="12" fill="#ef4444"/>
-    <circle cx="278" cy="820" r="12" fill="#f59e0b"/>
-    <circle cx="316" cy="820" r="12" fill="#22c55e"/>
-    <rect x="384" y="797" width="390" height="46" rx="23" fill="#eef6ff"/>
-    ${textLine('capgo.app / ' + image.slug, 424, 828, { size: 22, color: '#64748b', weight: 700 })}
-    <circle cx="2092" cy="820" r="14" fill="${image.accent}" opacity="0.22"/>
-    <circle cx="2134" cy="820" r="14" fill="${image.accent}" opacity="0.42"/>
-    ${renderCodePanel(image)}
-    ${renderCards(image)}
-    ${renderPhone(image)}`
+    <rect x="${x + 4}" y="${browserY + 26}" width="${w}" height="${browserHeight}" rx="42" fill="#cdefff" opacity="0.48"/>
+    <rect x="${x}" y="${browserY}" width="${w}" height="${browserHeight}" rx="42" fill="#ffffff" stroke="#dce9f8"/>
+    <rect x="${x}" y="${browserY}" width="${w}" height="${headerH}" rx="42" fill="#f8fbff"/>
+    <rect x="${x}" y="${bodyY}" width="${w}" height="${bodyH}" fill="#f8fbff"/>
+    <circle cx="${x + 62}" cy="${toolbarY}" r="12" fill="#ef4444"/>
+    <circle cx="${x + 100}" cy="${toolbarY}" r="12" fill="#f59e0b"/>
+    <circle cx="${x + 138}" cy="${toolbarY}" r="12" fill="#22c55e"/>
+    <rect x="${x + 206}" y="${toolbarY - 23}" width="390" height="46" rx="23" fill="#eef6ff"/>
+    ${textLine('capgo.app / ' + image.slug, x + 246, toolbarY + 8, { size: 22, color: '#64748b', weight: 700, hanging: true })}
+    <circle cx="${x + w - 148}" cy="${toolbarY}" r="14" fill="${image.accent}" opacity="0.22"/>
+    <circle cx="${x + w - 106}" cy="${toolbarY}" r="14" fill="${image.accent}" opacity="0.42"/>
+    ${renderCodePanel(image, bodyY, scale)}
+    ${renderCards(image, bodyY, scale)}
+    ${renderPhone(image, bodyY, scale)}`
 }
 
 function renderSvg(image: SocialImage) {
-  const titleSize = image.title.some((line) => line.length > 31) ? 104 : 118
-  const titleLineGap = titleSize + 16
-  const titleStart = image.title.length === 1 ? 486 : 454
-  const titleEnd = titleStart + (image.title.length - 1) * titleLineGap
-  const subtitleLines = wrapText(image.subtitle, 76)
+  const logoSize = 100
+  const logoX = width / 2 - logoSize / 2
+  const logoY = 52
+  const eyebrowSize = 22
+  const titleSize = image.title.some((line) => line.length > 31) ? 96 : 108
+  const titleLineHeight = titleSize + 18
+  const subtitleSize = 30
+  const subtitleLineHeight = 40
+  const subtitleLines = wrapText(image.subtitle, 72).slice(0, 2)
+  const browserHeight = 500
+  const browserY = height - browserHeight - 40
+  const chipsHeight = 64
+  const chipsY = browserY - chipsHeight - 48
+
+  const eyebrowY = logoY + logoSize + 40
+  const titleY = eyebrowY + eyebrowSize + 48
+  const subtitleY = titleY + image.title.length * titleLineHeight + 40
 
   const titleSvg = image.title
-    .map((line, index) => textLine(line, width / 2, titleStart + index * titleLineGap, { size: titleSize, color: '#101827', weight: 950, anchor: 'middle' }))
+    .map((line, index) =>
+      textLine(line, width / 2, titleY + index * titleLineHeight, {
+        size: titleSize,
+        color: '#101827',
+        weight: 950,
+        anchor: 'middle',
+        hanging: true,
+      }),
+    )
     .join('')
 
-  const subtitleStart = titleEnd + 54
   const subtitleSvg = subtitleLines
-    .map((line, index) => textLine(line, width / 2, subtitleStart + index * 44, { size: 32, color: '#475569', weight: 650, anchor: 'middle' }))
+    .map((line, index) =>
+      textLine(line, width / 2, subtitleY + index * subtitleLineHeight, {
+        size: subtitleSize,
+        color: '#475569',
+        weight: 650,
+        anchor: 'middle',
+        hanging: true,
+      }),
+    )
     .join('')
 
   return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -343,7 +397,7 @@ function renderSvg(image: SocialImage) {
       <stop offset="0.58" stop-color="#f7fbff"/>
       <stop offset="1" stop-color="${image.accentSoft}"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1160 880) rotate(90) scale(620 1160)">
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(${width / 2} ${browserY + browserHeight / 2}) rotate(90) scale(620 900)">
       <stop stop-color="${image.accent}" stop-opacity="0.24"/>
       <stop offset="0.55" stop-color="${image.accent}" stop-opacity="0.10"/>
       <stop offset="1" stop-color="${image.accent}" stop-opacity="0"/>
@@ -355,13 +409,12 @@ function renderSvg(image: SocialImage) {
   <rect width="${width}" height="${height}" fill="url(#bg)"/>
   <rect width="${width}" height="${height}" fill="url(#dots)"/>
   <rect width="${width}" height="${height}" fill="url(#glow)"/>
-  ${logoTile(1144, 52, 112, image.accent)}
-  ${textLine(image.eyebrow.toUpperCase(), width / 2, 250, { size: 24, color: image.accent, weight: 900, anchor: 'middle' })}
+  ${logoTile(logoX, logoY, logoSize, image.accent)}
+  ${textLine(image.eyebrow.toUpperCase(), width / 2, eyebrowY, { size: eyebrowSize, color: image.accent, weight: 900, anchor: 'middle', hanging: true })}
   ${titleSvg}
   ${subtitleSvg}
-  ${chips(image.chips, 704, image.accent)}
-  ${chips(image.chips, 704, image.accent)}
-  ${renderBrowserSurface(image)}
+  ${chips(image.chips, chipsY, image.accent)}
+  ${renderBrowserSurface(image, browserY, browserHeight)}
 </svg>`
 }
 

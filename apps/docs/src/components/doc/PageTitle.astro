@@ -41,4 +41,24 @@ import PluginRepositoryLink from './PluginRepositoryLink.astro'
       align-items: flex-start;
     }
   }
+
+  @media (max-width: 480px) {
+    .page-title-actions {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+    }
+
+    .page-title-actions :global(.plugin-repository-link),
+    .page-title-actions :global(.copy-page-container),
+    .page-title-actions :global(.copy-page-button) {
+      width: 100%;
+    }
+
+    .page-title-actions :global(.plugin-repository-link),
+    .page-title-actions :global(.copy-page-button) {
+      justify-content: center;
+    }
+  }
 </style>

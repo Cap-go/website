@@ -1,16 +1,21 @@
 ---
 slug: open-source-advantages
 title: Open Source Advantages for Modern Software Teams
-description: 'Explore the key open source advantages for enterprises. Our guide covers technical flexibility, TCO, security, and how to use open source in production.'
+description: >-
+  Explore the key open source advantages for enterprises. Our guide covers
+  technical flexibility, TCO, security, and how to use open source in
+  production.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-07T07:24:09.210Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/open-source-advantages.webp
-head_image_alt: "Open Source Advantages for Modern Software Teams Capgo blog illustration"
-keywords: 'open source advantages, open source software, software development, enterprise software, capacitorjs'
-tag: 'open source advantages, open source software, software development, enterprise software, capacitorjs'
+head_image_alt: Open Source Advantages for Modern Software Teams Capgo blog illustration
+keywords: >-
+  open source advantages, open source software, software development, enterprise
+  software, capacitorjs
+tag: 'Mobile, Capacitor, Open Source'
 published: true
 locale: en
 next_blog: ''

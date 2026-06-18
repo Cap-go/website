@@ -1,16 +1,20 @@
 ---
 slug: native-applications-vs-web-applications
 title: 'Native Applications vs Web Applications: 2026 Guide'
-description: 'Native applications vs web applications - Deciding between native vs web applications? This 2026 guide compares performance, cost, security, and update'
+description: >-
+  Native applications vs web applications - Deciding between native vs web
+  applications? This 2026 guide compares performance, cost, security, and update
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-09T08:28:06.638Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/native-applications-vs-web-applications.webp
-head_image_alt: "'Native Applications vs Web Applications: 2026 Guide' Capgo blog illustration"
-keywords: 'native vs web apps, mobile app development, capacitorjs, cross-platform apps, application architecture'
-tag: 'native vs web apps, mobile app development, capacitorjs, cross-platform apps, application architecture'
+head_image_alt: '''Native Applications vs Web Applications: 2026 Guide'' Capgo blog illustration'
+keywords: >-
+  native vs web apps, mobile app development, capacitorjs, cross-platform apps,
+  application architecture
+tag: 'Mobile, Technology, Alternatives'
 published: true
 locale: en
 next_blog: ''

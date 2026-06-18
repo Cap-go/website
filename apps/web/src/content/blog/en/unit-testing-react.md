@@ -1,16 +1,20 @@
 ---
 slug: unit-testing-react
 title: 'Unit Testing React: A Practical End-to-End Guide'
-description: 'Master unit testing React from setup to CI/CD. This guide covers Jest, RTL, hooks, async code, mocking, and best practices for robust cross-platform apps.'
+description: >-
+  Master unit testing React from setup to CI/CD. This guide covers Jest, RTL,
+  hooks, async code, mocking, and best practices for robust cross-platform apps.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-08T08:14:55.865Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/unit-testing-react.webp
-head_image_alt: "'Unit Testing React: A Practical End-to-End Guide' Capgo blog illustration"
-keywords: 'unit testing react, react testing library, jest, capacitor testing, ci/cd pipeline'
-tag: 'unit testing react, react testing library, jest, capacitor testing, ci/cd pipeline'
+head_image_alt: '''Unit Testing React: A Practical End-to-End Guide'' Capgo blog illustration'
+keywords: >-
+  unit testing react, react testing library, jest, capacitor testing, ci/cd
+  pipeline
+tag: 'Mobile, Tutorial, CI/CD'
 published: true
 locale: en
 next_blog: ''

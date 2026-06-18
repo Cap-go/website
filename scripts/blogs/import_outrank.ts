@@ -2,6 +2,7 @@ import matter from 'gray-matter'
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve, sep } from 'node:path'
 import { commonReplacements } from '../commonReplacements'
+import { normalizeBlogTags } from '../../apps/web/src/constants/blogTags'
 
 const DEFAULT_BLOG_DIR = 'apps/web/src/content/blog/en'
 const DEFAULT_AUTHOR = 'Martin Donadieu'
@@ -168,10 +169,10 @@ function writeArticle(article: OutrankArticle, payloadTimestamp: Date, blogDirec
   const markdown = normalizeMarkdown(article.content_markdown, title)
   const createdAt = toDate(article.created_at, toDate(existingFrontmatter.created_at as Date | string | undefined, payloadTimestamp))
   const updatedAt = new Date(payloadTimestamp)
-  const tag = tags.length > 0 ? tags.join(', ') : 'Development'
-  const headImage = article.image_url ? normalizeHeadImage(article.image_url) : frontmatterString(existingFrontmatter, 'head_image') || DEFAULT_HEAD_IMAGE
   const keywords = Array.isArray(article.tags) ? tags.join(', ') : existingKeywords || tags.join(', ')
-
+  const tag = normalizeBlogTags(tags, title, keywords || article.meta_description?.trim() || '')
+  const headImage = article.image_url ? normalizeHeadImage(article.image_url) : frontmatterString(existingFrontmatter, 'head_image') || DEFAULT_HEAD_IMAGE
+  
   const frontmatter = {
     slug,
     title,

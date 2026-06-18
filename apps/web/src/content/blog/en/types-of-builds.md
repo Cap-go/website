@@ -1,16 +1,19 @@
 ---
 slug: types-of-builds
 title: 'Types of Builds Explained: From Local to Production'
-description: 'Confused by all the types of builds? This guide explains everything from local, CI, debug, and release builds to signing, distribution, and rollback strategies.'
+description: >-
+  Confused by all the types of builds? This guide explains everything from
+  local, CI, debug, and release builds to signing, distribution, and rollback
+  strategies.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-15T08:08:25.848Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/types-of-builds.webp
-head_image_alt: "'Types of Builds Explained: From Local to Production' Capgo blog illustration"
+head_image_alt: '''Types of Builds Explained: From Local to Production'' Capgo blog illustration'
 keywords: 'types of builds, software builds, ci/cd, app distribution, capacitorjs'
-tag: 'types of builds, software builds, ci/cd, app distribution, capacitorjs'
+tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
 next_blog: ''

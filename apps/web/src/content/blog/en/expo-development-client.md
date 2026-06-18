@@ -1,16 +1,20 @@
 ---
 slug: expo-development-client
 title: Your Guide to the Expo Development Client
-description: 'Create, build, and use the Expo development client with this complete guide. Learn EAS builds, debugging, CI/CD integration, and fixes for common issues.'
+description: >-
+  Create, build, and use the Expo development client with this complete guide.
+  Learn EAS builds, debugging, CI/CD integration, and fixes for common issues.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-03T07:30:28.903Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/expo-development-client.webp
-head_image_alt: "Your Guide to the Expo Development Client Capgo blog illustration"
-keywords: 'expo development client, expo dev client, react native, eas build, mobile development'
-tag: 'expo development client, expo dev client, react native, eas build, mobile development'
+head_image_alt: Your Guide to the Expo Development Client Capgo blog illustration
+keywords: >-
+  expo development client, expo dev client, react native, eas build, mobile
+  development
+tag: 'Mobile, Guides'
 published: true
 locale: en
 next_blog: ''

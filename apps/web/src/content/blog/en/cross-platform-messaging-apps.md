@@ -1,16 +1,21 @@
 ---
 slug: cross-platform-messaging-apps
 title: 10 Best Cross Platform Messaging Apps for 2026
-description: 'Explore the 10 best cross platform messaging apps for developers and enterprise use. Compare SDKs, APIs, security, and pricing to find the right solution.'
+description: >-
+  Explore the 10 best cross platform messaging apps for developers and
+  enterprise use. Compare SDKs, APIs, security, and pricing to find the right
+  solution.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-21T06:51:25.623Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/cross-platform-messaging-apps.webp
-head_image_alt: "10 Best Cross Platform Messaging Apps for 2026 Capgo blog illustration"
-keywords: 'cross platform messaging, messaging sdk, team chat apps, enterprise messaging, chat api'
-tag: 'cross platform messaging, messaging sdk, team chat apps, enterprise messaging, chat api'
+head_image_alt: 10 Best Cross Platform Messaging Apps for 2026 Capgo blog illustration
+keywords: >-
+  cross platform messaging, messaging sdk, team chat apps, enterprise messaging,
+  chat api
+tag: 'Development, Mobile'
 published: true
 locale: en
 next_blog: ''

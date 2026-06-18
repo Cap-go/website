@@ -1,16 +1,21 @@
 ---
 slug: what-is-automated-testing
 title: 'What Is Automated Testing: Automated Testing Explained'
-description: 'Learn what is automated testing, from the testing pyramid to CI/CD. A practical guide for teams on what, when, and how to automate effectively in 2026.'
+description: >-
+  Learn what is automated testing, from the testing pyramid to CI/CD. A
+  practical guide for teams on what, when, and how to automate effectively in
+  2026.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-22T07:24:57.104Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/what-is-automated-testing.webp
-head_image_alt: "'What Is Automated Testing: Automated Testing Explained' Capgo blog illustration"
+head_image_alt: >-
+  'What Is Automated Testing: Automated Testing Explained' Capgo blog
+  illustration
 keywords: 'automated testing, capacitorjs, electron js, mobile testing, ci/cd'
-tag: 'automated testing, capacitorjs, electron js, mobile testing, ci/cd'
+tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
 next_blog: ''

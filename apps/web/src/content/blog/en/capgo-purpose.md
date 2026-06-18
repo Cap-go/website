@@ -8,11 +8,13 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-10T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/capgo-purpose.webp
-head_image_alt: "Purpose of Capgo Capgo blog illustration"
-keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
-tag: SOLUTION
+head_image_alt: Purpose of Capgo Capgo blog illustration
+keywords: >-
+  mobile app development, live updates, OTA updates, continuous integration,
+  mobile app updates
+tag: Solution
 published: true
 locale: en
 next_blog: ''
