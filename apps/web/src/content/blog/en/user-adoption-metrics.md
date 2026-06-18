@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-18T09:04:54.462Z
-updated_at: 2026-06-18T09:05:11.841Z
+updated_at: 2026-06-18T09:07:41.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/dd82d6f3-7e02-4a5c-a2de-7f25865d69a4/user-adoption-metrics-guide-title.jpg'
 head_image_alt: 'User Adoption Metrics: The Definitive Guide for 2026'
 keywords: 'user adoption metrics, product analytics, saas metrics, retention rate, mobile app analytics'
