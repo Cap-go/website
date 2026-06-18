@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Calculator from '@/components/pricing/Calculator.astro'
+import PricingCalculator from '@/components/pricing/PricingCalculator.astro'
 import ComparePlans from '@/components/pricing/ComparePlans.astro'
 import CreditPricing from '@/components/pricing/CreditPricing.astro'
 import Faq from '@/components/pricing/Faq.astro'
@@ -155,18 +155,7 @@ if (plans.length > 0) {
         </fieldset>
 
         <div class="flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center">
-          <a
-            href="#calculator"
-            class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-950 shadow-sm ring-1 ring-gray-100 transition-colors hover:border-gray-300 hover:bg-gray-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none sm:w-auto"
-          >
-            <svg class="h-4 w-4 shrink-0 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-            </svg>
-            {m.pricing_calculator_cta({}, { locale: Astro.locals.locale })}
-          </a>
+          {plans && plans.length > 0 && <PricingCalculator plans={plans} apiBaseUrl={config.public.baseApiUrl} />}
 
           {
             credits && credits.length > 0 && (
@@ -244,7 +233,6 @@ if (plans.length > 0) {
       </div>
       <Enterprise />
       {credits && credits.length > 0 && <CreditPricing credits={credits} />}
-      <Calculator />
       <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-500 md:mt-16">
         {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: Astro.locals.locale })}<br />
         {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: Astro.locals.locale })}

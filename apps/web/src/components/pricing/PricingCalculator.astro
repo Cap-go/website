@@ -1,0 +1,268 @@
+---
+import m from '@/copy/messages'
+import type { Database } from '@/services/supabase.types'
+
+interface Props {
+  plans: Database['public']['Tables']['plans']['Row'][]
+  apiBaseUrl: string
+}
+
+const { plans, apiBaseUrl } = Astro.props
+const locale = Astro.locals.locale
+
+const calculatorPlans = plans
+  .filter((plan) => plan.name !== 'Free')
+  .map((plan) => ({
+    id: plan.id,
+    name: plan.name,
+    mau: plan.mau || 0,
+    bandwidth: plan.bandwidth || 0,
+    storage: plan.storage || 0,
+    price_m: plan.price_m || 0,
+    price_y: plan.price_y || 0,
+  }))
+
+const plansJson = JSON.stringify(calculatorPlans)
+const copy = {
+  title: m.calculate_your_usage({}, { locale }),
+  description: m.calculate_your_usage_description({}, { locale }),
+  cta: m.pricing_calculator_cta({}, { locale }),
+  configuration: m.your_configuration({}, { locale }),
+  mau: m.monthly_active_users_mau({}, { locale }),
+  updatesPerMonth: m.updates_per_month({}, { locale }),
+  updateSize: m.update_size_mb({}, { locale }),
+  includePlan: m.pricing_calculator_include_plan({}, { locale }),
+  creditsOnly: m.pricing_calculator_credits_only({}, { locale }),
+  recommendedPlan: m.pricing_calculator_recommended_plan({}, { locale }),
+  selectPlan: m.pricing_calculator_select_plan({}, { locale }),
+  yourUsage: m.pricing_calculator_your_usage({}, { locale }),
+  includedInPlan: m.pricing_calculator_included_in_plan({}, { locale }),
+  billableOverage: m.pricing_calculator_billable_overage({}, { locale }),
+  planSubscription: m.pricing_calculator_plan_subscription({}, { locale }),
+  overageCredits: m.pricing_calculator_overage_credits({}, { locale }),
+  estimatedTotal: m.pricing_calculator_estimated_total({}, { locale }),
+  creditsCost: m.credits_cost({}, { locale }),
+  monthlyTotal: m.monthly_total({}, { locale }),
+  close: m.pricing_calculator_close({}, { locale }),
+  bandwidth: m.bandwidth({}, { locale }),
+  storage: m.storage({}, { locale }),
+}
+const copyJson = JSON.stringify(copy)
+---
+
+<>
+  <button
+    type="button"
+    data-pricing-calculator-open
+    class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-950 shadow-sm ring-1 ring-gray-100 transition-colors hover:border-gray-300 hover:bg-gray-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none sm:w-auto"
+  >
+    <svg class="h-4 w-4 shrink-0 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+    </svg>
+    {copy.cta}
+  </button>
+
+  <dialog
+    id="pricing-calculator-modal"
+    class="pricing-calculator-modal fixed inset-0 z-[100] m-0 h-dvh max-h-none w-full max-w-none border-0 bg-transparent p-0 backdrop:bg-gray-950/50 open:flex open:items-end open:justify-center sm:open:items-center sm:open:p-4"
+    aria-labelledby="pricing-calculator-title"
+  >
+    <div class="flex max-h-[92dvh] w-full max-w-3xl flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:max-h-[88dvh] sm:rounded-2xl">
+      <div class="flex items-start justify-between gap-4 border-b border-gray-200 px-5 py-4 sm:px-6">
+        <div>
+          <h2 id="pricing-calculator-title" class="text-xl font-semibold text-gray-950">{copy.title}</h2>
+          <p class="mt-1 text-sm text-gray-600">{copy.description}</p>
+        </div>
+        <button
+          type="button"
+          data-pricing-calculator-close
+          class="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-800 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+          aria-label={copy.close}
+        >
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="overflow-y-auto px-5 py-5 sm:px-6">
+        <fieldset class="mb-6">
+          <legend class="mb-3 text-sm font-semibold text-gray-900">{copy.configuration}</legend>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div>
+              <label for="pricing-calculator-mau" class="mb-2 block text-sm font-medium text-gray-700">{copy.mau}</label>
+              <input
+                id="pricing-calculator-mau"
+                data-pricing-calculator-mau
+                type="number"
+                min="0"
+                value="10000"
+                class="min-h-11 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label for="pricing-calculator-updates" class="mb-2 block text-sm font-medium text-gray-700">{copy.updatesPerMonth}</label>
+              <input
+                id="pricing-calculator-updates"
+                data-pricing-calculator-updates
+                type="number"
+                min="0"
+                step="1"
+                value="1"
+                class="min-h-11 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label for="pricing-calculator-size" class="mb-2 block text-sm font-medium text-gray-700">{copy.updateSize}</label>
+              <input
+                id="pricing-calculator-size"
+                data-pricing-calculator-size
+                type="number"
+                min="0"
+                step="0.1"
+                value="4"
+                class="min-h-11 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="mb-6">
+          <legend class="mb-3 text-sm font-semibold text-gray-900">{copy.includePlan}</legend>
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <label class="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-gray-200 px-4 py-3 has-checked:border-blue-600 has-checked:bg-blue-50/50">
+              <input
+                type="radio"
+                name="pricing-calculator-mode"
+                value="plan"
+                data-pricing-calculator-mode
+                checked
+                class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
+              />
+              <span class="text-sm font-medium text-gray-900">{copy.includePlan}</span>
+            </label>
+            <label class="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-gray-200 px-4 py-3 has-checked:border-blue-600 has-checked:bg-blue-50/50">
+              <input type="radio" name="pricing-calculator-mode" value="credits" data-pricing-calculator-mode class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600" />
+              <span class="text-sm font-medium text-gray-900">{copy.creditsOnly}</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div data-pricing-calculator-plan-panel class="mb-6 rounded-xl border border-blue-100 bg-blue-50/40 p-4">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p class="text-xs font-semibold tracking-wide text-blue-700 uppercase">{copy.recommendedPlan}</p>
+              <p data-pricing-calculator-plan-name class="mt-1 text-lg font-semibold text-gray-950">—</p>
+              <p data-pricing-calculator-plan-price class="text-sm text-gray-600">—</p>
+            </div>
+            <div class="w-full sm:max-w-xs">
+              <label for="pricing-calculator-plan-select" class="mb-2 block text-sm font-medium text-gray-700">{copy.selectPlan}</label>
+              <select
+                id="pricing-calculator-plan-select"
+                data-pricing-calculator-plan-select
+                class="min-h-11 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+              ></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6 overflow-hidden rounded-xl border border-gray-200">
+          <div class="grid grid-cols-4 gap-2 border-b border-gray-200 bg-gray-50 px-3 py-2 text-xs font-semibold text-gray-600 sm:px-4">
+            <span></span>
+            <span>{copy.yourUsage}</span>
+            <span data-pricing-calculator-included-label>{copy.includedInPlan}</span>
+            <span>{copy.billableOverage}</span>
+          </div>
+          <div class="divide-y divide-gray-200 text-sm">
+            <div class="grid grid-cols-4 gap-2 px-3 py-3 sm:px-4">
+              <span class="font-medium text-gray-700">MAU</span>
+              <span data-pricing-calculator-usage-mau class="text-gray-900">—</span>
+              <span data-pricing-calculator-included-mau class="text-gray-900">—</span>
+              <span data-pricing-calculator-overage-mau class="font-medium text-gray-900">—</span>
+            </div>
+            <div class="grid grid-cols-4 gap-2 px-3 py-3 sm:px-4">
+              <span class="font-medium text-gray-700">{copy.bandwidth}</span>
+              <span data-pricing-calculator-usage-bandwidth class="text-gray-900">—</span>
+              <span data-pricing-calculator-included-bandwidth class="text-gray-900">—</span>
+              <span data-pricing-calculator-overage-bandwidth class="font-medium text-gray-900">—</span>
+            </div>
+            <div class="grid grid-cols-4 gap-2 px-3 py-3 sm:px-4">
+              <span class="font-medium text-gray-700">{copy.storage}</span>
+              <span data-pricing-calculator-usage-storage class="text-gray-900">—</span>
+              <span data-pricing-calculator-included-storage class="text-gray-900">—</span>
+              <span data-pricing-calculator-overage-storage class="font-medium text-gray-900">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+            <p data-pricing-calculator-plan-line-label class="text-xs font-medium text-gray-500 uppercase">{copy.planSubscription}</p>
+            <p data-pricing-calculator-plan-line-value class="mt-1 text-2xl font-semibold text-gray-950">—</p>
+          </div>
+          <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+            <p class="text-xs font-medium text-gray-500 uppercase">{copy.overageCredits}</p>
+            <p data-pricing-calculator-credits-value class="mt-1 text-2xl font-semibold text-gray-950">—</p>
+          </div>
+          <div class="rounded-xl border border-gray-900 bg-gray-900 p-4 text-white">
+            <p class="text-xs font-medium text-gray-300 uppercase">{copy.estimatedTotal}</p>
+            <p data-pricing-calculator-total-value class="mt-1 text-2xl font-semibold">—</p>
+            <p class="mt-1 text-xs text-gray-400">{copy.monthlyTotal}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</>
+
+<script define:vars={{ plansJson, apiBaseUrl, copyJson }} is:inline>
+  window.__pricingCalculatorConfig = { plansJson, apiBaseUrl, copyJson }
+</script>
+
+<script>
+  import type { PricingCalculatorConfig } from './pricing-calculator.client.ts'
+  import { setupPricingCalculator } from './pricing-calculator.client.ts'
+
+  function initPricingCalculator() {
+    const config = (window as Window & { __pricingCalculatorConfig?: PricingCalculatorConfig }).__pricingCalculatorConfig
+    if (config) setupPricingCalculator(config)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPricingCalculator)
+  } else {
+    initPricingCalculator()
+  }
+</script>
+
+<style>
+  .pricing-calculator-modal::backdrop {
+    background: rgb(3 7 18 / 0.55);
+  }
+  .pricing-calculator-modal:not([open]) {
+    display: none;
+  }
+
+  .pricing-calculator-modal[open] {
+    animation: pricing-calculator-fade-in 180ms ease-out;
+  }
+
+  @keyframes pricing-calculator-fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-calculator-modal[open] {
+      animation: none;
+    }
+  }
+</style>
