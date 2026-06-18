@@ -456,13 +456,13 @@ const skillCount = skills.length
             </div>
             <button
               type="button"
-              onclick={`navigator.clipboard.writeText(${JSON.stringify(quickInstallCommand)})`}
+              data-skills-copy={quickInstallCommand}
               class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none"
               aria-label="Copy generic install command"
               title="Copy generic install command"
             >
               <span class="absolute top-1/2 left-1/2 size-[max(100%,3rem)] -translate-1/2 pointer-fine:hidden" aria-hidden="true"></span>
-              Copy
+              <span data-skills-copy-label>Copy</span>
             </button>
           </div>
           <div class="p-5 sm:p-6">
@@ -497,13 +497,13 @@ const skillCount = skills.length
                       <span class="font-mono text-xs font-semibold tracking-wide text-slate-400 uppercase">{target.name}</span>
                       <button
                         type="button"
-                        onclick={`navigator.clipboard.writeText(${JSON.stringify(target.command)})`}
+                        data-skills-copy={target.command}
                         class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none"
                         aria-label={`Copy ${target.name} install command`}
                         title={`Copy ${target.name} install command`}
                       >
                         <span class="absolute top-1/2 left-1/2 size-[max(100%,3rem)] -translate-1/2 pointer-fine:hidden" aria-hidden="true" />
-                        Copy
+                        <span data-skills-copy-label>Copy</span>
                       </button>
                     </div>
                     <div class="space-y-1 p-3">
@@ -598,13 +598,13 @@ const skillCount = skills.length
                           <span class="font-mono text-xs font-semibold tracking-wide text-cyan-200 uppercase">Generic install</span>
                           <button
                             type="button"
-                            onclick={`navigator.clipboard.writeText(${JSON.stringify(quickInstallCommand)})`}
+                            data-skills-copy={quickInstallCommand}
                             class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none"
                             aria-label={`Copy generic install command for ${skill.name}`}
                             title={`Copy generic install command for ${skill.name}`}
                           >
                             <span class="absolute top-1/2 left-1/2 size-[max(100%,3rem)] -translate-1/2 pointer-fine:hidden" aria-hidden="true" />
-                            Copy
+                            <span data-skills-copy-label>Copy</span>
                           </button>
                         </div>
                         <div class="overflow-x-auto rounded-md bg-slate-950/90 px-3 py-2 ring-1 ring-slate-800/80">
@@ -678,3 +678,60 @@ const skillCount = skills.length
     </section>
   </div>
 </Layout>
+
+<script>
+  function fallbackCopyText(value: string): void {
+    const helper = document.createElement('textarea')
+    helper.value = value
+    helper.setAttribute('readonly', 'true')
+    helper.style.position = 'absolute'
+    helper.style.opacity = '0'
+    document.body.append(helper)
+    helper.select()
+
+    const legacyCopy = Reflect.get(document, 'execCommand')
+    const copied = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
+
+    helper.remove()
+    if (!copied) {
+      throw new Error('Copy failed')
+    }
+  }
+
+  async function copySkillsText(value: string): Promise<void> {
+    if (!navigator.clipboard?.writeText) {
+      fallbackCopyText(value)
+      return
+    }
+
+    try {
+      await navigator.clipboard.writeText(value)
+    } catch {
+      fallbackCopyText(value)
+    }
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-skills-copy]').forEach((button) => {
+    let resetTimer: number | undefined
+
+    button.addEventListener('click', async () => {
+      const value = button.getAttribute('data-skills-copy')
+      if (!value) return
+
+      const label = button.querySelector<HTMLElement>('[data-skills-copy-label]')
+      const originalText = label?.textContent || 'Copy'
+
+      try {
+        await copySkillsText(value)
+        if (label) label.textContent = 'Copied'
+      } catch {
+        if (label) label.textContent = 'Copy failed'
+      }
+
+      if (resetTimer) window.clearTimeout(resetTimer)
+      resetTimer = window.setTimeout(() => {
+        if (label) label.textContent = originalText
+      }, 1600)
+    })
+  })
+</script>
