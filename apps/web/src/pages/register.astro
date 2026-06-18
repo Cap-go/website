@@ -281,6 +281,8 @@ const content = {
         last_name: lastName.value,
       })
     }
-    window.location.href = `https://console.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
+    const consoleUrl = `https://console.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
+    await new Promise((resolve) => setTimeout(resolve, 400))
+    window.location.href = consoleUrl
   })
 </script>
