@@ -1,3 +1,7 @@
+/**
+ * Generate Capgo-styled blog hero images at apps/web/public/blog-images/{slug}.webp (1536x1024).
+ * Usage: bun run generate:blog-images [--slug=<slug>] [--external-only] [--update-frontmatter]
+ */
 import { spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
