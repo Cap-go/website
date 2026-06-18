@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-24T07:15:52.262Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/splash-screen-in-react-native.webp
 head_image_alt: >-
   'Splash Screen in React Native: A Complete Guide for 2026' Capgo blog

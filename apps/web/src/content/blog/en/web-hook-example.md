@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-01T07:11:14.581Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/web-hook-example.webp
 head_image_alt: >-
   'A Practical Web Hook Example: Secure Implementation Guide' Capgo blog

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-10T08:48:45.910Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/how-hard-is-it-to-create-an-app.webp
 head_image_alt: '''How Hard Is It to Create an App: 2026 Reality Check'' Capgo blog illustration'
 keywords: >-

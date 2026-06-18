@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-06-15T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /cross-platform-app-dev-2024.webp
 head_image_alt: >-
   The Ultimate Guide to Cross-Platform Mobile App Development in 2024 Capgo blog

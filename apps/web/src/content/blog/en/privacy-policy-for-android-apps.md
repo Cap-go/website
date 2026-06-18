@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-15T07:07:10.732Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/privacy-policy-for-android-apps.webp
 head_image_alt: '''Privacy Policy for Android Apps: A 2026 Guide'' Capgo blog illustration'
 keywords: >-

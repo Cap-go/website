@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-29T07:21:33.612Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/unit-tests-javascript.webp
 head_image_alt: '''Unit Tests JavaScript: Comprehensive 2026 Guide'' Capgo blog illustration'
 keywords: 'unit tests javascript, javascript testing, jest, capacitorjs, electronjs'

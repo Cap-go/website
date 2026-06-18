@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-26T07:20:25.523Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /blog-images/what-is-soc-2-certification.webp
 head_image_alt: '''What Is SOC 2 Certification: Your 2026 Guide'' Capgo blog illustration'
 keywords: >-
