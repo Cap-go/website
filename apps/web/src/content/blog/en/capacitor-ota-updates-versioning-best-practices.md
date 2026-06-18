@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-26T04:29:43.897Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T10:44:00.000Z
 head_image: /blog-images/capacitor-ota-updates-versioning-best-practices.webp
 head_image_alt: "Capacitor OTA Updates: Versioning Best Practices Capgo blog illustration"
 keywords: Capacitor, OTA updates, versioning, mobile development, app updates, semantic versioning, deployment strategies

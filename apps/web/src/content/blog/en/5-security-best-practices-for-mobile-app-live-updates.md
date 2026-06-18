@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-01-14T02:36:08.711Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T10:44:00.000Z
 head_image: /blog-images/5-security-best-practices-for-mobile-app-live-updates.webp
 head_image_alt: "5 Security Best Practices for Mobile App Live Updates Capgo blog illustration"
 keywords: mobile app security, live updates, data integrity, OTA updates, encryption, security testing

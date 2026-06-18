@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-10T22:09:04.610Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T10:44:00.000Z
 head_image: /blog-images/capacitor-plugins-what-you-need-to-know.webp
 head_image_alt: "Capacitor Plugins: What You Need to Know Capgo blog illustration"
 keywords: Capacitor plugins, mobile development, cross-platform apps, native features, custom plugins, community plugins

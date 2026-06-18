@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-22T03:27:12.915Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T10:44:00.000Z
 head_image: /blog-images/capacitor-ota-updates-best-practices-for-performance.webp
 head_image_alt: "Capacitor OTA Updates: Best Practices for Performance Capgo blog illustration"
 keywords: OTA updates, Capacitor, performance optimization, mobile apps, security, incremental updates, background updates

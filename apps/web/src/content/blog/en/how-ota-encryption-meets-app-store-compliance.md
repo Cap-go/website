@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-14T05:12:26.952Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T10:44:00.000Z
 head_image: /blog-images/how-ota-encryption-meets-app-store-compliance.webp
 head_image_alt: "How OTA Encryption Meets App Store Compliance Capgo blog illustration"
 keywords: OTA encryption, app store compliance, app updates security, AES-256, TLS, code signing, mobile security
