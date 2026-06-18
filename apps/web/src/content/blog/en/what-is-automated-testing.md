@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-22T07:24:57.104Z
-updated_at: 2026-06-07T17:12:56.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/what-is-automated-testing.webp
 head_image_alt: "'What Is Automated Testing: Automated Testing Explained' Capgo blog illustration"
 keywords: 'automated testing, capacitorjs, electron js, mobile testing, ci/cd'

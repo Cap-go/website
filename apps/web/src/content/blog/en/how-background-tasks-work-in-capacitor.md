@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-28T08:49:25.514Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/how-background-tasks-work-in-capacitor.webp
 head_image_alt: "How Background Tasks Work in Capacitor Capgo blog illustration"
 keywords: background tasks, Capacitor, iOS, Android, app performance, mobile development, battery optimization, lifecycle hooks

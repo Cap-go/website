@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-24T03:09:18.971Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/capacitor-live-updates-handling-version-conflicts.webp
 head_image_alt: "\"Capacitor Live Updates: Handling Version Conflicts\" Capgo blog illustration"
 keywords: Capacitor, live updates, version conflicts, app performance, error tracking, rollback, mobile development

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-18T09:04:54.462Z
-updated_at: 2026-06-18T09:07:41.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/user-adoption-metrics.webp
 head_image_alt: "'User Adoption Metrics: The Definitive Guide for 2026' Capgo blog illustration"
 keywords: 'user adoption metrics, product analytics, saas metrics, retention rate, mobile app analytics'

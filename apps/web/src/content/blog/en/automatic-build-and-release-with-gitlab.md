@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /gitlab_ci.webp
 head_image_alt: "Automatic build and release with Gitlab Capgo blog illustration"
 keywords: Gitlab, CI/CD, automatic build, automatic release, mobile app updates

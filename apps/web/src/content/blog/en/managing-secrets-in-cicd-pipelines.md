@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-20T00:50:40.782Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/managing-secrets-in-cicd-pipelines.webp
 head_image_alt: "Managing Secrets in CI/CD Pipelines Capgo blog illustration"
 keywords: CI/CD, secret management, security, environment variables, automated scanning

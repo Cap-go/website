@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-12T02:08:36.971Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/chinas-data-privacy-laws-impact-on-mobile-apps.webp
 head_image_alt: "\"China's Data Privacy Laws: Impact on Mobile Apps\" Capgo blog illustration"
 keywords: China, data privacy, mobile apps, compliance, user consent, Cybersecurity Law, Data Security Law, Personal Information Protection Law

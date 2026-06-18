@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-26T01:51:04.423Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/icp-filing-for-mobile-apps-in-china-step-by-step-guide.webp
 head_image_alt: "\"ICP Filing for Mobile Apps in China: Step-by-Step Guide\" Capgo blog illustration"
 keywords: ICP filing, China mobile apps, compliance, registration, documentation, technical requirements, app operation

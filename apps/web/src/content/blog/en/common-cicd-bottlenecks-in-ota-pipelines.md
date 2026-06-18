@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-13T02:07:29.962Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/common-cicd-bottlenecks-in-ota-pipelines.webp
 head_image_alt: "Common CI/CD Bottlenecks in OTA Pipelines Capgo blog illustration"
 keywords: CI/CD, OTA updates, automation, testing, security, deployment strategies, performance tracking, scalability

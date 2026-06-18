@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-11T14:10:29.790Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/common-mistakes-in-custom-attribute-segmentation.webp
 head_image_alt: "Common Mistakes in Custom Attribute Segmentation Capgo blog illustration"
 keywords: custom attribute segmentation, user engagement, app performance, segmentation mistakes, data compliance

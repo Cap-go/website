@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-13T06:53:18.319Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/monolithic-vs-microservice-architecture.webp
 head_image_alt: "'Monolithic vs Microservice Architecture: 2026 Guide' Capgo blog illustration"
 keywords: 'monolithic vs microservice, software architecture, capacitor, mobile development, backend development'

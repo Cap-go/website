@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-11T21:28:20.329Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/capacitor-cli-commands-for-version-updates.webp
 head_image_alt: "Capacitor CLI Commands for Version Updates Capgo blog illustration"
 keywords: Capacitor, CLI, app updates, mobile development, iOS, Android, migration, Capgo, plugins

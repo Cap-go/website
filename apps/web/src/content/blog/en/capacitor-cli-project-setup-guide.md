@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-18T03:02:50.225Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/capacitor-cli-project-setup-guide.webp
 head_image_alt: "\"Capacitor CLI: Project Setup Guide\" Capgo blog illustration"
 keywords: Capacitor, CLI, mobile apps, iOS, Android, project setup, live updates, troubleshooting

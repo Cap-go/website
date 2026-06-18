@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-25T02:31:25.293Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/ultimate-guide-to-capacitor-ota-updates.webp
 head_image_alt: "Ultimate Guide to Capacitor OTA Updates Capgo blog illustration"
 keywords: Capacitor, OTA updates, mobile app development, app updates, security, deployment, user experience, partial updates

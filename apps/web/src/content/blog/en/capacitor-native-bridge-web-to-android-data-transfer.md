@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-16T01:10:13.731Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/capacitor-native-bridge-web-to-android-data-transfer.webp
 head_image_alt: "\"Capacitor Native Bridge: Web to Android Data Transfer\" Capgo blog illustration"
 keywords: Capacitor, data transfer, JSON serialization, mobile apps, Android, performance optimization, encryption, error handling

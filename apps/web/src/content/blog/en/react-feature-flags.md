@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-19T06:50:10.784Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/react-feature-flags.webp
 head_image_alt: "'React Feature Flags: A Complete Implementation Guide' Capgo blog illustration"
 keywords: 'react feature flags, reactjs, feature management, devops, capacitorjs'

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-03T07:30:28.903Z
-updated_at: 2026-06-03T07:32:54.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/expo-development-client.webp
 head_image_alt: "Your Guide to the Expo Development Client Capgo blog illustration"
 keywords: 'expo development client, expo dev client, react native, eas build, mobile development'

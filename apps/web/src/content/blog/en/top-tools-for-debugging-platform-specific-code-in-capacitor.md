@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-17T11:27:03.103Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/top-tools-for-debugging-platform-specific-code-in-capacitor.webp
 head_image_alt: "Top Tools for Debugging Platform-Specific Code in Capacitor Capgo blog illustration"
 keywords: Capacitor, debugging tools, platform-specific code, VS Code, Android Studio, Xcode, live updates, web debugging

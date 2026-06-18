@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-20T13:51:19.891Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/third-party-breach-response-best-practices.webp
 head_image_alt: "\"Third-Party Breach Response: Best Practices\" Capgo blog illustration"
 keywords: third-party breaches, data breach response, vendor management, security practices, risk management

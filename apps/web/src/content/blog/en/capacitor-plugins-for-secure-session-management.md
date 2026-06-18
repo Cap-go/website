@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T12:14:04.681Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/capacitor-plugins-for-secure-session-management.webp
 head_image_alt: "Capacitor Plugins for Secure Session Management Capgo blog illustration"
 keywords: Capacitor, session management, biometric authentication, secure storage, Firebase Auth, Identity Vault, mobile security

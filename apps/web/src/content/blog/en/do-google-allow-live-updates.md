@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /playstore.webp
 head_image_alt: "Does Google Allow Live Updates Without Store Review? Capgo blog illustration"
 keywords: Google, live updates, OTA updates, continuous integration, mobile app updates

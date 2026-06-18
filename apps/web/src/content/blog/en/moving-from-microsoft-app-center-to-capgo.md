@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-21T00:00:00.000Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /app_center.webp
 head_image_alt: "Moving from Microsoft App Center to Capgo for Live App Updates Capgo blog illustration"
 keywords: Microsoft, App Center, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

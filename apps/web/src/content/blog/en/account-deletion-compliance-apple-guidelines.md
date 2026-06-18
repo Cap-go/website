@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-14T03:15:15.208Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/account-deletion-compliance-apple-guidelines.webp
 head_image_alt: "\"Account Deletion Compliance: Apple Guidelines\" Capgo blog illustration"
 keywords: Apple guidelines, account deletion, user privacy, app compliance, mobile development
