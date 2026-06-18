@@ -32,8 +32,9 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
     `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' ? '+' : ''} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.bandwidth)}${plan.name === 'Enterprise' ? '+' : ''} GiB/${m.month({}, { locale: Astro.locals.locale })} ${m.of_bandwidth({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB storage`,
-    m.unlimited_live_updates({}, { locale: Astro.locals.locale }),
-    m.mcp_server({}, { locale: Astro.locals.locale }),
+    ...(plan.name === 'Enterprise'
+      ? [m.soc2_compliance_short({}, { locale: Astro.locals.locale }), m.enterprise_uptime_sla({}, { locale: Astro.locals.locale })]
+      : [m.unlimited_live_updates({}, { locale: Astro.locals.locale }), m.mcp_server({}, { locale: Astro.locals.locale })]),
   ]
 
   if (plan.build_time_unit && plan.build_time_unit > 0) {
