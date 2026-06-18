@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-13T02:43:03.376Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/chinas-cybersecurity-law-impact-on-app-updates.webp
 head_image_alt: "\"China's Cybersecurity Law: Impact on App Updates\" Capgo blog illustration"
 keywords: China Cybersecurity Law, app updates, data residency, security audits, compliance tracking

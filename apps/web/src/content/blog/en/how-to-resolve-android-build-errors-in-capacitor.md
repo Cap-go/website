@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-29T03:02:04.382Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/how-to-resolve-android-build-errors-in-capacitor.webp
 head_image_alt: "How to Resolve Android Build Errors in Capacitor Capgo blog illustration"
 keywords: Capacitor, Android build errors, ProGuard, dependency conflicts, mobile development, troubleshooting

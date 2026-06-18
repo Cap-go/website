@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-12T08:03:06.848Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/usage-frequency-segmentation-for-app-updates.webp
 head_image_alt: "Usage Frequency Segmentation for App Updates Capgo blog illustration"
 keywords: app updates, user segmentation, engagement, retention, behavior tracking, mobile apps, update strategy

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /app-reviews-ratings-guide.webp
 head_image_alt: "Why App Reviews and Ratings Matter: Success Guide Capgo blog illustration"
 keywords: app reviews, app ratings, app store optimization, ASO, user reviews, app ranking, in-app review, capacitor rating plugin, app store ratings, play store reviews

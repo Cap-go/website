@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T11:28:05.842Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/token-revocation-in-capacitor-apps-guide.webp
 head_image_alt: "\"Token Revocation in Capacitor Apps: Guide\" Capgo blog illustration"
 keywords: token revocation, Capacitor apps, security, OAuth 2.0, user data protection, token management

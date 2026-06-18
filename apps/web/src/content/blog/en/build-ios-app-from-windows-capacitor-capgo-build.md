@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-08T00:00:00.000Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /build_list.webp
 head_image_alt: "Build an iOS App from Windows with Capacitor and Capgo Build Capgo blog illustration"
 keywords: Windows, iOS, Capacitor, Capgo Build, cloud build, TestFlight, App Store Connect, no Mac

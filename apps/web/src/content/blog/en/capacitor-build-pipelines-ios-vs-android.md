@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T20:31:21.521Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/capacitor-build-pipelines-ios-vs-android.webp
 head_image_alt: "\"Capacitor Build Pipelines: iOS vs. Android\" Capgo blog illustration"
 keywords: Capacitor, iOS development, Android development, build pipelines, security, deployment, mobile apps, developer accounts

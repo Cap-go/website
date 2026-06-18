@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-20T07:08:46.263Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/app-update-notification.webp
 head_image_alt: "Effective App Update Notification Strategies Capgo blog illustration"
 keywords: 'app update notification, capacitorjs, electronjs, capgo, live updates'

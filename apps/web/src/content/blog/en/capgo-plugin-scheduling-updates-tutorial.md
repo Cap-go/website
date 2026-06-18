@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-24T04:20:44.227Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/capgo-plugin-scheduling-updates-tutorial.webp
 head_image_alt: "\"Capgo Plugin: Scheduling Updates Tutorial\" Capgo blog illustration"
 keywords: Capgo, OTA updates, Capacitor, app development, update scheduling, mobile apps, CI/CD integration, app security

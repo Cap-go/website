@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-06T01:02:16.662Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/how-to-handle-user-data-requests-under-ccpa.webp
 head_image_alt: "How to Handle User Data Requests Under CCPA Capgo blog illustration"
 keywords: CCPA, user data requests, compliance, privacy rights, data access, data deletion, opt-out, data protection

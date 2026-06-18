@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-15T08:08:25.848Z
-updated_at: 2026-06-15T08:11:01.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/types-of-builds.webp
 head_image_alt: "'Types of Builds Explained: From Local to Production' Capgo blog illustration"
 keywords: 'types of builds, software builds, ci/cd, app distribution, capacitorjs'

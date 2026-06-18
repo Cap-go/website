@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-27T03:14:02.984Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/capacitor-cli-plugin-commands-overview.webp
 head_image_alt: "Capacitor CLI Plugin Commands Overview Capgo blog illustration"
 keywords: Capacitor, CLI, plugin management, app development, updates, troubleshooting, Capgo, mobile development

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-01T04:05:37.460Z
-updated_at: 2026-06-18T10:44:00.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/capacitor-ota-updates-targeting-ios-vs-android.webp
 head_image_alt: "\"Capacitor OTA Updates: Targeting iOS vs Android\" Capgo blog illustration"
 keywords: OTA updates, iOS updates, Android updates, mobile app development, security measures, update strategies

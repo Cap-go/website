@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T06:50:50.952Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/how-cicd-workflows-improve-app-security.webp
 head_image_alt: "How CI/CD Workflows Improve App Security Capgo blog illustration"
 keywords: CI/CD, app security, automated checks, compliance, deployment, vulnerabilities, software development, security workflows

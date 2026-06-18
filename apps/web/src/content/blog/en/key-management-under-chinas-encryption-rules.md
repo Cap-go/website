@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-03T02:41:08.008Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/key-management-under-chinas-encryption-rules.webp
 head_image_alt: "\"Key Management Under China's Encryption Rules\" Capgo blog illustration"
 keywords: encryption, key management, China, compliance, data residency, encryption standards, audits, government oversight

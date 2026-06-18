@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-24T05:10:07.131Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/how-to-track-ota-update-success-in-capacitor-apps.webp
 head_image_alt: "How to Track OTA Update Success in Capacitor Apps Capgo blog illustration"
 keywords: OTA updates, app tracking, user adoption, version management, error monitoring

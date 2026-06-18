@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-18T03:25:44.642Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/5-steps-to-distribute-custom-capacitor-plugins.webp
 head_image_alt: "5 Steps to Distribute Custom Capacitor Plugins Capgo blog illustration"
 keywords: Capacitor, custom plugins, mobile development, distribution, live updates

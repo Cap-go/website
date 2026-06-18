@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-15T03:45:24.364Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/pci-dss-compliance-for-mobile-apps-key-requirements.webp
 head_image_alt: "\"PCI DSS Compliance for Mobile Apps: Key Requirements\" Capgo blog illustration"
 keywords: PCI DSS compliance, mobile apps, payment data security, encryption, access control, security monitoring

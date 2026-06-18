@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-04-29T09:30:00.000Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /build_list.webp
 head_image_alt: "Apple's Xcode 26 Requirement for Capacitor Apps Capgo blog illustration"
 keywords: Apple, Xcode 26, iOS 26 SDK, Capacitor, App Store Connect, Capgo Build, cloud builds

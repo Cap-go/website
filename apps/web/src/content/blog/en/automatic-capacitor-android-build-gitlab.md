@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /android_app_gitlab.webp
 head_image_alt: "Automatic Capacitor Android build with GitLab Capgo blog illustration"
 keywords: Fastlane, CI/CD, Android, automatic build, automatic release, mobile app updates

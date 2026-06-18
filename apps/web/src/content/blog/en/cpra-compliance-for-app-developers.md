@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T12:45:04.405Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/cpra-compliance-for-app-developers.webp
 head_image_alt: "CPRA Compliance for App Developers Capgo blog illustration"
 keywords: CPRA, app developers, data protection, privacy rights, consent management, sensitive personal information, compliance, security measures

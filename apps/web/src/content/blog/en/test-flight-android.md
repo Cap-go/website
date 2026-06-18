@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-30T06:58:17.170Z
-updated_at: 2026-05-30T07:00:42.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/test-flight-android.webp
 head_image_alt: "'Test Flight Android: Alternatives for Beta Testing' Capgo blog illustration"
 keywords: 'test flight android, android beta testing, firebase app distribution, google play console, capacitorjs'

@@ -4,6 +4,7 @@ import { solutionAppExamples, type SolutionAppExampleKey } from '@/config/soluti
 import { solutionStoreApps } from '@/config/solutionStoreApps'
 import { renameCat, shortNumber } from '@/services/misc'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import TeamAvatars from '@/components/TeamAvatars.astro'
 
 interface Props {
   solution: SolutionAppExampleKey
@@ -59,11 +60,7 @@ const showExampleCtas = solution === 'enterprise'
                   aria-label={copy('solutions_talk_to_team')}
                   class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white px-5 py-3 text-sm font-bold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 >
-                  <span class="flex -space-x-2" aria-hidden="true">
-                    <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/martin-avatar.png" alt="" width="24" height="24" loading="lazy" />
-                    <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-                    <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-                  </span>
+                  <TeamAvatars />
                   <span>{copy('solutions_talk_to_team')}</span>
                 </a>
               </div>

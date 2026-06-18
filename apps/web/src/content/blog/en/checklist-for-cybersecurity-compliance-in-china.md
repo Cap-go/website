@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-13T05:14:08.592Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/checklist-for-cybersecurity-compliance-in-china.webp
 head_image_alt: "Checklist for Cybersecurity Compliance in China Capgo blog illustration"
 keywords: China cybersecurity, compliance checklist, data protection, personal information law, security regulations

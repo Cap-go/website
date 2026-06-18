@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-13T02:28:16.443Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/5-common-ota-update-mistakes-to-avoid.webp
 head_image_alt: "5 Common OTA Update Mistakes to Avoid Capgo blog illustration"
 keywords: OTA updates, app store compliance, update security, mobile testing, user experience

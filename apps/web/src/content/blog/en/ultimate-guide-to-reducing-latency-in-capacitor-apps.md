@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-21T12:35:22.443Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/ultimate-guide-to-reducing-latency-in-capacitor-apps.webp
 head_image_alt: "Ultimate Guide to Reducing Latency in Capacitor Apps Capgo blog illustration"
 keywords: Capacitor, latency reduction, network optimization, front-end performance, server-side improvements, live updates, app speed

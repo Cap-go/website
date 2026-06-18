@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-23T00:00:00.000Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: "Capgo Environment Best Practices: Staging with One Mobile App ID Capgo blog illustration"
 keywords: mobile app environments, staging, Capgo channels, TestFlight, Capacitor, OTA updates, QA workflow

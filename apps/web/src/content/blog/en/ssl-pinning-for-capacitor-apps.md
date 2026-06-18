@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-11T22:40:35.604Z
-updated_at: 2026-05-29T11:34:25.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/ssl-pinning-for-capacitor-apps.webp
 head_image_alt: "SSL Pinning for Capacitor Apps Capgo blog illustration"
 keywords: SSL pinning, Capacitor apps, security, MITM attacks, certificate management, app store compliance, mobile development
