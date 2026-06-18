@@ -10,7 +10,7 @@ author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /android_app_gitlab.webp
-head_image_alt: Fastlane Google play GitLab illustration
+head_image_alt: "Automatic Capacitor Android build with GitLab Capgo blog illustration"
 keywords: Fastlane, CI/CD, Android, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true

@@ -12,7 +12,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-08T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /lovable_capacitor.webp
-head_image_alt: Capacitor and AI app illustration
+head_image_alt: "Why Capacitor Is the Best Way to Build AI Mobile Apps Right Now Capgo blog illustration"
 keywords: Capacitor, Capgo, AI mobile apps, LLM apps, live updates, OTA updates, React Native, Flutter, native iOS, native Android
 tag: Development, Mobile, Technology
 published: true

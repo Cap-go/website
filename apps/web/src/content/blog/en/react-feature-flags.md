@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-19T06:50:10.784Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/7a780a81-e515-45a3-ac57-80066d1340f2/react-feature-flags-title-card.jpg'
-head_image_alt: 'React Feature Flags: A Complete Implementation Guide'
+head_image: /blog-images/react-feature-flags.webp
+head_image_alt: "'React Feature Flags: A Complete Implementation Guide' Capgo blog illustration"
 keywords: 'react feature flags, reactjs, feature management, devops, capacitorjs'
 tag: 'react feature flags, reactjs, feature management, devops, capacitorjs'
 published: true

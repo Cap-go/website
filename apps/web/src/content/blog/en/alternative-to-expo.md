@@ -11,7 +11,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-14T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /expo_alternative.webp
-head_image_alt: Expo alternative illustration
+head_image_alt: "Alternative to Expo Live Update Capgo blog illustration"
 keywords: Expo, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Alternatives
 published: true

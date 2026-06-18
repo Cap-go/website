@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-23T02:26:25.949Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36-1745375221230.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/how-rbac-secures-ota-updates-in-capacitor-apps.webp
+head_image_alt: "How RBAC Secures OTA Updates in Capacitor Apps Capgo blog illustration"
 keywords: RBAC, OTA updates, security, mobile apps, end-to-end encryption, role-based access control, deployment permissions
 tag: Mobile, Security, Updates
 published: true

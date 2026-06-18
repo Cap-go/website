@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-21T04:20:03.700Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac-1745209216757.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/capacitor-vs-appflow-versioning-differences.webp
+head_image_alt: "\"Capacitor vs Appflow: Versioning Differences\" Capgo blog illustration"
 keywords: version control, app updates, manual versioning, automated versioning, CI/CD, live updates, mobile development, app release management
 tag: Development, Mobile, Updates
 published: true

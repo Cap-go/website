@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-09T08:28:06.638Z
 updated_at: 2026-06-09T08:30:34.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/0230dc6f-3f46-46fd-8711-c4321e375d93/native-applications-vs-web-applications-comparison.jpg'
-head_image_alt: 'Native Applications vs Web Applications: 2026 Guide'
+head_image: /blog-images/native-applications-vs-web-applications.webp
+head_image_alt: "'Native Applications vs Web Applications: 2026 Guide' Capgo blog illustration"
 keywords: 'native vs web apps, mobile app development, capacitorjs, cross-platform apps, application architecture'
 tag: 'native vs web apps, mobile app development, capacitorjs, cross-platform apps, application architecture'
 published: true

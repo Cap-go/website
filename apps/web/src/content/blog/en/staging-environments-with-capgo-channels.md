@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-23T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capacitor-guide.webp
-head_image_alt: Mobile environment channels
+head_image_alt: "Capgo Environment Best Practices: Staging with One Mobile App ID Capgo blog illustration"
 keywords: mobile app environments, staging, Capgo channels, TestFlight, Capacitor, OTA updates, QA workflow
 tag: Tutorial
 published: true

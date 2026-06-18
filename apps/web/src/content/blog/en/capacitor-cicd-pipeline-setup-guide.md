@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-23T00:48:58.202Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c-1745369349370.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/capacitor-cicd-pipeline-setup-guide.webp
+head_image_alt: "Capacitor CI/CD Pipeline Setup Guide Capgo blog illustration"
 keywords: Capacitor, CI/CD, pipeline setup, app updates, Capgo, deployment automation, mobile development
 tag: Development, Mobile, Updates
 published: true

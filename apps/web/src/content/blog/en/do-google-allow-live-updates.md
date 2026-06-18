@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /playstore.webp
-head_image_alt: Capacitor bypass illustration
+head_image_alt: "Does Google Allow Live Updates Without Store Review? Capgo blog illustration"
 keywords: Google, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true

@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-03-22T02:26:08.446Z
 updated_at: 2026-06-18T09:58:31.000Z
 head_image: /blog-images/native-bridge-flow.webp
-head_image_alt: Native bridge flow between JavaScript and Android APIs
+head_image_alt: "How Native Bridge Works in Capacitor Android Apps Capgo blog illustration"
 keywords: Capacitor, Android, native bridge, JavaScript, mobile development, app performance, updates, communication
 tag: Development, Mobile, Updates
 published: true

@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-26T14:03:03.454Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68346854d3b966198182c7d5-1748275217518.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/how-capgo-handles-version-control-and-rollbacks.webp
+head_image_alt: "How Capgo Handles Version Control and Rollbacks Capgo blog illustration"
 keywords: version control, rollbacks, app updates, mobile development, CI/CD integration
 tag: Development, Mobile, Updates
 published: true

@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-25T03:35:36.644Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c-1745552174598.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/rollback-strategies-for-capacitor-live-updates.webp
+head_image_alt: "Rollback Strategies for Capacitor Live Updates Capgo blog illustration"
 keywords: Capacitor, rollback strategies, live updates, app stability, error tracking, update management
 tag: Development, Security, Updates
 published: true

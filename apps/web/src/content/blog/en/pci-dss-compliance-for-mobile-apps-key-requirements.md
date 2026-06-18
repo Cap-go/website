@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-15T03:45:24.364Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6825360f0209458b3ff338b4-1747280785255.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/pci-dss-compliance-for-mobile-apps-key-requirements.webp
+head_image_alt: "\"PCI DSS Compliance for Mobile Apps: Key Requirements\" Capgo blog illustration"
 keywords: PCI DSS compliance, mobile apps, payment data security, encryption, access control, security monitoring
 tag: Development, Mobile, Security
 published: true

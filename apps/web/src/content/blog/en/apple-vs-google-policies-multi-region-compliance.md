@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-05-20T12:19:20.119Z
 updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/apple-vs-google-policies-multi-region-compliance.webp
-head_image_alt: "Apple vs. Google Policies: Multi-Region Compliance Capgo blog illustration"
+head_image_alt: "\"Apple vs. Google Policies: Multi-Region Compliance\" Capgo blog illustration"
 keywords: app compliance, regional management, privacy policies, app reviews, OTA updates
 tag: Development, Mobile, Updates
 published: true

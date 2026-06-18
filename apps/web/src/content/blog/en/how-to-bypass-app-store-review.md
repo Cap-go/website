@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
 updated_at: 2026-06-18T09:58:31.000Z
 head_image: /blog-images/policy-safe-live-updates.webp
-head_image_alt: Policy-safe live updates inside the approved native app shell
+head_image_alt: "How to update Capacitor JS apps without repeat store review Capgo blog illustration"
 keywords: Apple App Store, Google Play, Capacitor, Capgo, OTA updates, live updates, app store review
 tag: Tutorial
 published: true

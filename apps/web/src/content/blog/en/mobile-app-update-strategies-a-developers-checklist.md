@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-01-15T02:51:44.404Z
 updated_at: 2026-06-18T10:44:00.000Z
 head_image: /blog-images/mobile-app-update-strategies-a-developers-checklist.webp
-head_image_alt: "Mobile App Update Strategies: A Developer's Checklist Capgo blog illustration"
+head_image_alt: "\"Mobile App Update Strategies: A Developer's Checklist\" Capgo blog illustration"
 keywords: mobile app updates, CI/CD pipeline, OTA updates, user engagement, app performance, testing strategies, bug fixes, app security
 tag: Development, Mobile, Updates
 published: true

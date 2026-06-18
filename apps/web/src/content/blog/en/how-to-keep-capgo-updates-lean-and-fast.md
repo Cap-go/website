@@ -11,7 +11,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2026-04-14T15:12:19.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capgo_lean_updates_hero.webp
-head_image_alt: Capgo lean live updates workflow
+head_image_alt: "How to Keep Capgo Updates Lean and Fast Capgo blog illustration"
 keywords: Capgo, live updates, OTA updates, delta updates, channels, Capacitor, PR previews, mobile performance
 tag: Tutorial
 published: true

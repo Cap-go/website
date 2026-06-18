@@ -8,7 +8,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2025-03-05T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capgo-feature-image.webp
-head_image_alt: Capgo price reduction announcement
+head_image_alt: "Capgo Price Reduction: Making Live Updates More Accessible Capgo blog illustration"
 keywords: capgo, price reduction, live updates, mobile app development, capacitor
 tag: News
 published: true

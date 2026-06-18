@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-12T02:57:37.246Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62-1744426677476.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/testing-capacitor-ota-updates.webp
+head_image_alt: "Testing Capacitor OTA Updates Capgo blog illustration"
 keywords: OTA updates, Capacitor, testing, Capgo, mobile app deployment, security, performance, version control
 tag: Development, Security, Updates
 published: true

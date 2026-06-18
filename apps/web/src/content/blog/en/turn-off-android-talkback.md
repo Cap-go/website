@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /android_talkback.webp
-head_image_alt: Android TalkBack Activation
+head_image_alt: "How to Turn off and Use TalkBack on Android Devices Capgo blog illustration"
 keywords: Android, TalkBack, screen reader, visually impaired, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Android
 published: true

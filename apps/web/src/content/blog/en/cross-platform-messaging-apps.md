@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-21T06:51:25.623Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/ab727476-db90-4105-aea4-1ac82e39dd79/cross-platform-messaging-apps-messaging-apps.jpg'
-head_image_alt: 10 Best Cross Platform Messaging Apps for 2026
+head_image: /blog-images/cross-platform-messaging-apps.webp
+head_image_alt: "10 Best Cross Platform Messaging Apps for 2026 Capgo blog illustration"
 keywords: 'cross platform messaging, messaging sdk, team chat apps, enterprise messaging, chat api'
 tag: 'cross platform messaging, messaging sdk, team chat apps, enterprise messaging, chat api'
 published: true

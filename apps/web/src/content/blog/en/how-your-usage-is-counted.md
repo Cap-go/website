@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-25T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /usage_explained.webp
-head_image_alt: Capgo usage system explained
+head_image_alt: "How your usage is counted in Capgo Capgo blog illustration"
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Solution
 published: true

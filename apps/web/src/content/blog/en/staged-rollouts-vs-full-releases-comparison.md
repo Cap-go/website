@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-30T02:25:03.907Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720-1743301515130.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/staged-rollouts-vs-full-releases-comparison.webp
+head_image_alt: "\"Staged Rollouts vs Full Releases: Comparison\" Capgo blog illustration"
 keywords: staged rollouts, full releases, app updates, risk management, deployment strategies, user feedback
 tag: Development, Mobile, Updates
 published: true

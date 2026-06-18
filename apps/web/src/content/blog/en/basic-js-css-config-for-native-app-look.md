@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /native_app_look.webp
-head_image_alt: Native app look illustration
+head_image_alt: "Basic JS and CSS Configurations for a Native App Look Capgo blog illustration"
 keywords: tailwind css, css, mobile design, mobile app development
 tag: Web Development
 published: true

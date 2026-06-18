@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-02-21T03:04:05.735Z
 updated_at: 2026-06-18T09:58:31.000Z
 head_image: /blog-images/ota-updates-vs-testing.webp
-head_image_alt: Comparison of OTA update delivery and traditional QA testing paths
+head_image_alt: "Capacitor OTA Updates vs Traditional Testing Methods Capgo blog illustration"
 keywords: OTA updates, traditional testing, app development, Capacitor, deployment, quality assurance, mobile updates
 tag: Development, Mobile, Updates
 published: true

@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-16T00:00:00.000Z
 updated_at: 2026-06-18T09:58:31.000Z
 head_image: /blog-images/policy-safe-live-updates.webp
-head_image_alt: Policy-safe live updates inside the approved native app shell
+head_image_alt: "Flutter live update Capgo blog illustration"
 keywords: Flutter, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true

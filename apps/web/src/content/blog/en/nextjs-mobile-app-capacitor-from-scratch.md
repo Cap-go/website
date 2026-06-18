@@ -11,7 +11,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-15T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /next_capgo.webp
-head_image_alt: Next.js and Capacitor mobile app development
+head_image_alt: "Build a Next.js Mobile App from Scratch with Capacitor 8 Capgo blog illustration"
 keywords: Next.js 15, Capacitor 8, mobile app from scratch, iOS development, Android development, React mobile app, native plugins, Tailwind CSS
 tag: Tutorial
 published: true

@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-10-29T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /apple_appstore.webp
-head_image_alt: App Store Age Ratings Guide
+head_image_alt: "App Store Age Ratings Guide for iOS and Android Capgo blog illustration"
 keywords: age ratings, app store, google play, content ratings, IARC, parental controls, app classification, ios age ratings, android age ratings
 tag: Development, App Store, Best Practices
 published: true

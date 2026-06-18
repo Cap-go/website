@@ -10,7 +10,7 @@ author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-16T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /open_source_main.webp
-head_image_alt: open source
+head_image_alt: "Learn about what open source is and why it’s important! Capgo blog illustration"
 keywords: Open Source, Capgo, philosophy, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Open Source
 published: true

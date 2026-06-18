@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-08T08:14:55.865Z
 updated_at: 2026-06-08T08:17:50.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/b6169839-a37c-4469-8fcd-30f1531cad31/unit-testing-react-guide-title.jpg'
-head_image_alt: 'Unit Testing React: A Practical End-to-End Guide'
+head_image: /blog-images/unit-testing-react.webp
+head_image_alt: "'Unit Testing React: A Practical End-to-End Guide' Capgo blog illustration"
 keywords: 'unit testing react, react testing library, jest, capacitor testing, ci/cd pipeline'
 tag: 'unit testing react, react testing library, jest, capacitor testing, ci/cd pipeline'
 published: true

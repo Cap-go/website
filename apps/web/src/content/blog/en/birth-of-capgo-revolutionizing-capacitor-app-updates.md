@@ -11,7 +11,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capgo-birth-story.webp
-head_image_alt: A visual representation of Capgo's evolution from idea to product
+head_image_alt: "How a GitHub Issue Evolved into a business Capgo blog illustration"
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: development
 published: true

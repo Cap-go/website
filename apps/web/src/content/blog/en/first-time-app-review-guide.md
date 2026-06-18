@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /app-review-guide.webp
-head_image_alt: App Review Process
+head_image_alt: "The Complete First-Time App Review Guide for 2026 - iOS and Android Capgo blog illustration"
 keywords: app store review, play store review, app submission, privacy policy, terms and conditions, social login, app testing, android review, ios review
 tag: Development, App Store, Best Practices
 published: true

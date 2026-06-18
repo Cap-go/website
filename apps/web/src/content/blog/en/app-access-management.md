@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-04T07:29:46.915Z
 updated_at: 2026-06-04T07:32:17.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/556a9bc0-daa7-45b4-aba8-c7c6815ce313/app-access-management-access-management.jpg'
-head_image_alt: 'Mastering App Access Management: RBAC & SSO in 2026'
+head_image: /blog-images/app-access-management.webp
+head_image_alt: "'Mastering App Access Management: RBAC & SSO in 2026' Capgo blog illustration"
 keywords: 'app access management, identity management, application security, capacitor security, enterprise mobility'
 tag: 'app access management, identity management, application security, capacitor security, enterprise mobility'
 published: true

@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-27T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /secure_upload.webp
-head_image_alt: Secure upload Capgo
+head_image_alt: "E2E Encryption for Capacitor Updater via Code Signing Capgo blog illustration"
 keywords: E2E, code signing, RSA, AES, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Solution
 published: true

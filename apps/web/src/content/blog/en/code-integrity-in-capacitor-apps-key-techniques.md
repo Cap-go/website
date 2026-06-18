@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-02-09T06:50:58.883Z
 updated_at: 2026-06-18T11:13:52.000Z
 head_image: /blog-images/code-integrity-in-capacitor-apps-key-techniques.webp
-head_image_alt: "Code Integrity in Capacitor Apps: Key Techniques Capgo blog illustration"
+head_image_alt: "\"Code Integrity in Capacitor Apps: Key Techniques\" Capgo blog illustration"
 keywords: code integrity, mobile apps, OTA updates, encryption, Play Integrity API, security compliance, cryptographic signatures
 tag: Development, Mobile, Updates
 published: true

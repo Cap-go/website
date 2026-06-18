@@ -11,7 +11,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-21T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /vue_angular_react.webp
-head_image_alt: Image of a person working on a computer
+head_image_alt: "Offline Screen in Vue, Angular, React with Capacitor Capgo blog illustration"
 keywords: Vue, Angular, React, offline screen, network API, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true

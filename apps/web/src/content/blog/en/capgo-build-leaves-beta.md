@@ -10,7 +10,7 @@ author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2026-05-29T00:00:00.000Z
 updated_at: 2026-06-07T17:12:56.000Z
 head_image: /capgo-build-leaves-beta.jpg
-head_image_alt: Capgo Build is out of beta
+head_image_alt: "Capgo Build Leaves Beta Capgo blog illustration"
 keywords: Capgo Build, Capacitor, cloud build, iOS build, Android build, native build, code signing, TestFlight, OTA updates
 tag: Product
 published: false

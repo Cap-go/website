@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-26T01:11:37.156Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/680c247c5a08fca89178b068-1745629961179.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/2-way-communication-in-capacitor-apps.webp
+head_image_alt: "2-Way Communication in Capacitor Apps Capgo blog illustration"
 keywords: Capacitor, two-way communication, native features, web integration, app updates, performance optimization
 tag: Development, Mobile, Updates
 published: true

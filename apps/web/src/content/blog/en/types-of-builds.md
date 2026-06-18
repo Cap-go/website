@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-15T08:08:25.848Z
 updated_at: 2026-06-15T08:11:01.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/302dd4da-1847-4b0c-9570-e36b1293b2ca/types-of-builds-explained.jpg'
-head_image_alt: 'Types of Builds Explained: From Local to Production'
+head_image: /blog-images/types-of-builds.webp
+head_image_alt: "'Types of Builds Explained: From Local to Production' Capgo blog illustration"
 keywords: 'types of builds, software builds, ci/cd, app distribution, capacitorjs'
 tag: 'types of builds, software builds, ci/cd, app distribution, capacitorjs'
 published: true

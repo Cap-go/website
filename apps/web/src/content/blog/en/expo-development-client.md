@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-03T07:30:28.903Z
 updated_at: 2026-06-03T07:32:54.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/69d13467-1ded-48a3-afa8-660e9b56e7f7/expo-development-client-title-slide.jpg'
-head_image_alt: Your Guide to the Expo Development Client
+head_image: /blog-images/expo-development-client.webp
+head_image_alt: "Your Guide to the Expo Development Client Capgo blog illustration"
 keywords: 'expo development client, expo dev client, react native, eas build, mobile development'
 tag: 'expo development client, expo dev client, react native, eas build, mobile development'
 published: true

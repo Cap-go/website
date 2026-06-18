@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-16T07:02:18.525Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/6c6e9c64-e307-477b-8065-41a0d799e10f/developer-experience-tools-office-supplies.jpg'
-head_image_alt: 10 Top Developer Experience Tools for 2026
+head_image: /blog-images/developer-experience-tools.webp
+head_image_alt: "10 Top Developer Experience Tools for 2026 Capgo blog illustration"
 keywords: 'developer experience tools, capacitorjs, electronjs, mobile ci/cd, live updates'
 tag: 'developer experience tools, capacitorjs, electronjs, mobile ci/cd, live updates'
 published: true

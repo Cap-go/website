@@ -8,7 +8,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-21T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capgo_channels_surfing.webp
-head_image_alt: Capgo channel switching illustration
+head_image_alt: "Channel Surfing for Capgo: How to Switch Update Channels at Runtime Capgo blog illustration"
 keywords: channels, channel surfing, OTA updates, capacitor, capgo, live updates, runtime switching, beta testing, QA
 tag: Tutorial
 published: true

@@ -10,7 +10,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /react_capacitor.webp
-head_image_alt: React and Capacitor illustration
+head_image_alt: "Building Mobile Apps with React and Capacitor Capgo blog illustration"
 keywords: React, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true

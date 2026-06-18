@@ -9,8 +9,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-10T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: /capgo_banner.webp
-head_image_alt: capgo banner
+head_image: /blog-images/capgo-purpose.webp
+head_image_alt: "Purpose of Capgo Capgo blog illustration"
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: SOLUTION
 published: true

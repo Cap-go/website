@@ -8,7 +8,7 @@ author_url: https://github.com/riderx
 created_at: 2025-02-15T04:38:10.916Z
 updated_at: 2026-06-18T10:44:00.000Z
 head_image: /blog-images/capacitor-ota-updates-app-store-approval-guide.webp
-head_image_alt: "Capacitor OTA Updates: App Store Approval Guide Capgo blog illustration"
+head_image_alt: "\"Capacitor OTA Updates: App Store Approval Guide\" Capgo blog illustration"
 keywords: OTA updates, Capacitor, App Store, Play Store, compliance, JavaScript updates, security
 tag: Development, Mobile, Updates
 published: true

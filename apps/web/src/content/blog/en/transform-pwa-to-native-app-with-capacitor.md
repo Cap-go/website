@@ -11,7 +11,7 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-23T00:00:00.000Z
 updated_at: 2026-05-29T11:34:25.000Z
 head_image: /capacitor-guide.webp
-head_image_alt: PWA running in a Capacitor native wrapper
+head_image_alt: "Transform Your PWA to a Native App with Capacitor Capgo blog illustration"
 keywords: PWA, Capacitor, native mobile app, iOS, Android, web-to-app migration, web app deployment
 tag: Tutorial
 published: true

@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-29T02:39:06.030Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c-1743215957623.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/capacitor-native-bridge-android-plugin-basics.webp
+head_image_alt: "\"Capacitor Native Bridge: Android Plugin Basics\" Capgo blog illustration"
 keywords: Capacitor, Android plugins, development, Java, mobile development, Gradle, plugin testing
 tag: Development, Mobile, Updates
 published: true

@@ -7,8 +7,8 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-13T10:09:53.896Z
 updated_at: 2026-06-13T10:12:31.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/59004433-0bb6-4d89-ba04-95b58273ec8f/how-to-implement-feature-flags-feature-flags.jpg'
-head_image_alt: 'How to Implement Feature Flags: Dev Workflow in 2026'
+head_image: /blog-images/how-to-implement-feature-flags.webp
+head_image_alt: "'How to Implement Feature Flags: Dev Workflow in 2026' Capgo blog illustration"
 keywords: 'how to implement feature flags, feature toggles, capacitorjs, ci/cd, live updates'
 tag: 'how to implement feature flags, feature toggles, capacitorjs, ci/cd, live updates'
 published: true
