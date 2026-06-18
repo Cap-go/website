@@ -272,7 +272,10 @@ const fitCards = [
           {
             page.sources.map((source) => (
               <li>
-                <a href={source.href} class="text-sky-300 underline-offset-4 hover:underline">
+                <a
+                  href={source.href}
+                  class="text-sky-300 underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-sky-300/70 focus-visible:outline-none"
+                >
                   {source.label}
                 </a>
               </li>
