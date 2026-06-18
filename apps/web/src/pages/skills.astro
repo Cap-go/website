@@ -595,13 +595,13 @@ const skillCount = skills.length
                         <h4 class="text-lg font-bold break-words text-white">{skill.name}</h4>
                       </div>
                       <p class="text-slate-400">{skill.description}</p>
-                      <div class="mt-5 rounded-lg border border-slate-700/70 bg-slate-950/70 p-3">
+                      <div class="mt-5 rounded-lg border border-slate-700/70 bg-slate-950/80 p-3 shadow-inner shadow-black/20">
                         <div class="mb-2 flex items-center justify-between gap-3">
-                          <span class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Install this skill</span>
+                          <span class="font-mono text-xs font-semibold tracking-wide text-slate-400 uppercase">Install this skill</span>
                           <button
                             type="button"
                             onclick={`navigator.clipboard.writeText(${JSON.stringify(skillInstallCommand(skill.name))})`}
-                            class="relative inline-flex min-h-8 items-center rounded-md px-2 text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none"
+                            class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none"
                             aria-label={`Copy ${skill.name} install command`}
                             title={`Copy ${skill.name} install command`}
                           >
@@ -609,7 +609,12 @@ const skillCount = skills.length
                             Copy
                           </button>
                         </div>
-                        <code class="block text-xs leading-relaxed break-words whitespace-pre-wrap text-cyan-200">{skillInstallCommand(skill.name)}</code>
+                        <code class="block overflow-x-auto rounded-md bg-slate-950/90 px-3 py-2 font-mono text-sm leading-relaxed break-words whitespace-normal text-slate-100 ring-1 ring-slate-800/80">
+                          <span class="text-emerald-300">$</span> <span class="text-sky-300">gh</span> <span class="text-slate-100">skill install</span>{' '}
+                          <span class="text-amber-200">Cap-go/capgo-skills</span> <span class="break-all text-cyan-200">skills/{skill.name}</span>{' '}
+                          <span class="text-violet-300">--agent</span> <span class="text-emerald-200">codex</span> <span class="text-violet-300">--scope</span>{' '}
+                          <span class="text-emerald-200">user</span>
+                        </code>
                       </div>
                     </div>
                   ))}
