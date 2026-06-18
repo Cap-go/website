@@ -2,7 +2,6 @@
 import Layout from '@/layouts/Layout.astro'
 import PricingCalculator from '@/components/pricing/PricingCalculator.astro'
 import ComparePlans from '@/components/pricing/ComparePlans.astro'
-import CreditPricing from '@/components/pricing/CreditPricing.astro'
 import Faq from '@/components/pricing/Faq.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import Plans from '@/components/pricing/Plans.astro'
@@ -46,15 +45,10 @@ const config = Astro.locals.runtimeConfig
 
 let yearly = true
 let plansAll: Database['public']['Tables']['plans']['Row'][] = []
-let credits: any[] = []
 
 // Fetch plans data
 const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
 plansAll = await response.json()
-
-// Fetch credits data
-const creditsResponse = await fetch(`${config.public.baseApiUrl}/private/credits`)
-credits = await creditsResponse.json()
 
 // Filter plans
 const plans = plansAll.length ? plansAll.filter((p) => p.name !== 'Free') : []
@@ -158,23 +152,15 @@ if (plans.length > 0) {
           </label>
         </fieldset>
 
-        {
-          credits && credits.length > 0 && (
-            <div class="flex justify-center md:justify-end">
-              <a
-                href="#credit-pricing"
-                class="inline-flex min-h-11 w-full max-w-md shrink-0 flex-nowrap items-center justify-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold whitespace-nowrap text-gray-950 shadow-sm ring-1 ring-blue-100/70 transition-colors hover:border-blue-300 hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none md:w-auto md:max-w-none"
-              >
-                <span class="hidden xl:inline">{m.pricing_credits_cta_desktop({}, { locale: Astro.locals.locale })}</span>
-                <span class="xl:hidden">{m.pricing_credits_cta_mobile({}, { locale: Astro.locals.locale })}</span>
-                <span class="shrink-0 text-blue-700">{m.start_now({}, { locale: Astro.locals.locale })}</span>
-                <svg class="h-4 w-4 shrink-0 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
-              </a>
-            </div>
-          )
-        }
+        <div class="flex justify-center md:justify-end">
+          <button
+            type="button"
+            data-pricing-calculator-open-credits
+            class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-semibold whitespace-nowrap text-gray-950 shadow-sm ring-1 ring-blue-100/70 transition-colors hover:border-blue-300 hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+          >
+            {m.pricing_pay_as_you_go({}, { locale: Astro.locals.locale })}
+          </button>
+        </div>
       </div>
 
       {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
@@ -234,7 +220,6 @@ if (plans.length > 0) {
         </div>
       </div>
       <Enterprise />
-      {credits && credits.length > 0 && <CreditPricing credits={credits} />}
 
       <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-500 md:mt-16">
         {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: Astro.locals.locale })}<br />

@@ -682,6 +682,7 @@ const messages = {
   pricing_credits_cta_desktop: "Don't want a plan? Buy credits instead.",
   pricing_credits_cta_mobile: 'Buy credits instead.',
   pricing_calculator_cta: 'Calculate your price',
+  pricing_pay_as_you_go: 'Pay as you go',
   pricing_calculator_include_plan: 'Include a subscription plan',
   pricing_calculator_credits_only: 'Credits only (no plan)',
   pricing_calculator_recommended_plan: 'Recommended plan',

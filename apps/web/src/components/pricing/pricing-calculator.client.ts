@@ -38,6 +38,7 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
   const modal = modalElement
 
   const openButton = document.querySelector('[data-pricing-calculator-open]')
+  const openCreditsButton = document.querySelector('[data-pricing-calculator-open-credits]')
   const mauInput = document.querySelector('[data-pricing-calculator-mau]')
   const updatesInput = document.querySelector('[data-pricing-calculator-updates]')
   const sizeInput = document.querySelector('[data-pricing-calculator-size]')
@@ -237,9 +238,15 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     planSelect.innerHTML = plans.map((plan) => `<option value="${plan.id}">${plan.name}</option>`).join('')
   }
 
-  function openModal() {
+  function openModal(options?: { creditsOnly?: boolean }) {
     userChangedPlan = false
     syncBillingFromPage()
+
+    if (options?.creditsOnly) {
+      const creditsRadio = document.querySelector('[data-pricing-calculator-mode][value="credits"]')
+      if (creditsRadio instanceof HTMLInputElement) creditsRadio.checked = true
+    }
+
     if (!modal.open) {
       modal.showModal()
       document.body.style.overflow = 'hidden'
@@ -256,6 +263,11 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
   openButton?.addEventListener('click', (event) => {
     event.preventDefault()
     openModal()
+  })
+
+  openCreditsButton?.addEventListener('click', (event) => {
+    event.preventDefault()
+    openModal({ creditsOnly: true })
   })
 
   document.querySelectorAll('[data-pricing-calculator-close]').forEach((button) => {
@@ -316,8 +328,10 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
   updateCalculator()
 
   if (window.location.hash === '#calculator') openModal()
+  if (window.location.hash === '#calculator-credits') openModal({ creditsOnly: true })
 
   window.addEventListener('hashchange', () => {
     if (window.location.hash === '#calculator') openModal()
+    if (window.location.hash === '#calculator-credits') openModal({ creditsOnly: true })
   })
 }
