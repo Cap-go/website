@@ -439,6 +439,8 @@ const messages = {
   capflow_meta_description: 'Compare Ionic Appflow and Capgo for Capacitor live updates, OTA deployments, rollback protection, automation, and migration support.',
   capflow_nav_label: 'Ionic AppFlow vs Capgo',
   capflow_title: 'Ionic AppFlow vs Capgo',
+  expo_nav_label: 'Expo vs Capgo',
+  median_nav_label: 'Median vs Capgo',
   capgo_enables_development_teams_at_some_of_the_most_innovative_companies: 'Capgo enables development teams at some of the most innovative companies.',
   capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: 'Capgo gives you the best insights you need to create a truly professional mobile app.',
   capgo_home: 'Capgo home',
