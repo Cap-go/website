@@ -1,16 +1,18 @@
 ---
 slug: app-quality-assurance
 title: 'App Quality Assurance: A Practical Guide for 2026'
-description: 'A complete guide to app quality assurance. Learn the QA lifecycle, test types, automation strategy, CI/CD integration, key metrics, and recovery patterns.'
+description: >-
+  A complete guide to app quality assurance. Learn the QA lifecycle, test types,
+  automation strategy, CI/CD integration, key metrics, and recovery patterns.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-27T07:23:02.972Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/app-quality-assurance.webp
-head_image_alt: "'App Quality Assurance: A Practical Guide for 2026' Capgo blog illustration"
+head_image_alt: '''App Quality Assurance: A Practical Guide for 2026'' Capgo blog illustration'
 keywords: 'app quality assurance, mobile qa, software testing, ci/cd, capacitorjs'
-tag: 'app quality assurance, mobile qa, software testing, ci/cd, capacitorjs'
+tag: 'Mobile, Tutorial, CI/CD'
 published: true
 locale: en
 next_blog: ''

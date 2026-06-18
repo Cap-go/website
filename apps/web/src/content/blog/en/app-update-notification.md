@@ -1,16 +1,18 @@
 ---
 slug: app-update-notification
 title: Effective App Update Notification Strategies
-description: 'Implement a robust app update notification for Capacitor & Electron. Learn UX patterns, Capgo, silent/forced updates, and CI/CD strategies.'
+description: >-
+  Implement a robust app update notification for Capacitor & Electron. Learn UX
+  patterns, Capgo, silent/forced updates, and CI/CD strategies.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-20T07:08:46.263Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/app-update-notification.webp
-head_image_alt: "Effective App Update Notification Strategies Capgo blog illustration"
+head_image_alt: Effective App Update Notification Strategies Capgo blog illustration
 keywords: 'app update notification, capacitorjs, electronjs, capgo, live updates'
-tag: 'app update notification, capacitorjs, electronjs, capgo, live updates'
+tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
 next_blog: ''

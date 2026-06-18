@@ -1,6 +1,7 @@
 import { glob } from 'astro/loaders'
 import { z } from 'astro/zod'
 import { defineCollection } from 'astro:content'
+import { normalizeBlogTags } from './constants/blogTags'
 import { locales, type Locales } from './services/locale'
 
 const localeSchema = z.custom<Locales>((value) => typeof value === 'string' && locales.includes(value as Locales), { message: 'Invalid locale' })
@@ -19,17 +20,18 @@ const blog = defineCollection({
     head_image: z.string().optional(),
     head_image_alt: z.string().optional(),
     keywords: z.string().optional(),
-    tag: z.string().transform((value) =>
-      value
-        .trim()
-        .split(',')
-        .map((item) => item.trim())
-        .join(','),
-    ),
+    tag: z.string(),
     published: z.boolean().optional(),
     locale: localeSchema,
     next_blog: z.string().optional().nullable(),
-  }),
+  }).transform((data) => ({
+    ...data,
+    tag: normalizeBlogTags(
+      data.tag.split(',').map((item) => item.trim()).filter(Boolean),
+      data.title,
+      data.keywords ?? '',
+    ),
+  })),
 })
 
 const plugin = defineCollection({

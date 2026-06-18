@@ -1,16 +1,20 @@
 ---
 slug: test-flight-android
 title: 'Test Flight Android: Alternatives for Beta Testing'
-description: 'Why doesn''t test flight android exist? Discover top 2026 alternatives like Google Play Tracks, Firebase & Capgo for seamless beta testing.'
+description: >-
+  Why doesn't test flight android exist? Discover top 2026 alternatives like
+  Google Play Tracks, Firebase & Capgo for seamless beta testing.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-30T06:58:17.170Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /blog-images/test-flight-android.webp
-head_image_alt: "'Test Flight Android: Alternatives for Beta Testing' Capgo blog illustration"
-keywords: 'test flight android, android beta testing, firebase app distribution, google play console, capacitorjs'
-tag: 'test flight android, android beta testing, firebase app distribution, google play console, capacitorjs'
+head_image_alt: '''Test Flight Android: Alternatives for Beta Testing'' Capgo blog illustration'
+keywords: >-
+  test flight android, android beta testing, firebase app distribution, google
+  play console, capacitorjs
+tag: 'Mobile, Alternatives, Capacitor'
 published: true
 locale: en
 next_blog: ''

@@ -10,9 +10,11 @@ author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-17T00:00:00.000Z
 updated_at: 2026-06-18T14:21:30.000Z
 head_image: /capgo_select_update.webp
-head_image_alt: "How to send specific update to one user or a group Capgo blog illustration"
-keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
-tag: alternatives
+head_image_alt: How to send specific update to one user or a group Capgo blog illustration
+keywords: >-
+  mobile app development, live updates, OTA updates, continuous integration,
+  mobile app updates
+tag: Alternatives
 published: true
 locale: en
 next_blog: ''
