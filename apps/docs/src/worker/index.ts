@@ -1,3 +1,5 @@
+import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+
 interface Env {
   ASSETS: {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
@@ -183,20 +185,34 @@ async function capgoLogoFallback(request: Request, env: Env): Promise<Response> 
   return env.ASSETS.fetch(new Request(fallbackUrl, request))
 }
 
+type BackgroundContext = {
+  waitUntil(promise: Promise<unknown>): void
+}
+
+const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
+const SKIP_AI_CRAWLER_TRACKING_HEADER = 'X-Capgo-Skip-AI-Crawler-Tracking'
+
+function trackAICrawler(request: Request, response: Response, ctx?: BackgroundContext): Response {
+  if (request.headers.get(SKIP_AI_CRAWLER_TRACKING_HEADER) !== '1') {
+    trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
+  }
+  return response
+}
+
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const url = new URL(request.url)
     const pathname = url.pathname
     const redirect = redirectMap.get(pathname)
-    if (redirect) return redirectResponse(request, redirect)
+    if (redirect) return trackAICrawler(request, redirectResponse(request, redirect), ctx)
     // The Cloud Build docs moved to the Capgo Builder section (/docs/builder/).
     // Handled here because this worker serves /docs/* and does not apply public/_redirects.
     if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {
       const rest = pathname.replace(/^\/docs\/cli\/cloud-build\/?/, '')
-      return Response.redirect(new URL(`/docs/builder/${rest}${url.search}`, request.url).toString(), 301)
+      return trackAICrawler(request, Response.redirect(new URL(`/docs/builder/${rest}${url.search}`, request.url).toString(), 301), ctx)
     }
     const response = await env.ASSETS.fetch(request)
-    if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return capgoLogoFallback(request, env)
-    return response
+    if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
+    return trackAICrawler(request, response, ctx)
   },
 }

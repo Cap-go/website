@@ -10,6 +10,7 @@
         "@astrojs/starlight": "0.39.2",
         "@astrojs/starlight-docsearch": "0.7.0",
         "@astrojs/starlight-tailwind": "5.0.0",
+        "@datafast/ai-crawl": "^1.0.3",
         "@std/semver": "npm:@jsr/std__semver@1.0.8",
         "@supabase/supabase-js": "^2.105.4",
         "@tailwindcss/typography": "^0.5.19",
@@ -250,6 +251,8 @@
     "@cspotcode/source-map-support": ["@cspotcode/source-map-support@0.8.1", "", { "dependencies": { "@jridgewell/trace-mapping": "0.3.9" } }, "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="],
 
     "@ctrl/tinycolor": ["@ctrl/tinycolor@4.2.0", "", {}, "sha512-kzyuwOAQnXJNLS9PSyrk0CWk35nWJW/zl/6KvnTBMFK65gm7U1/Z5BqjxeapjZCIhQcM/DsrEmcbRwDyXyXK4A=="],
+
+    "@datafast/ai-crawl": ["@datafast/ai-crawl@1.0.3", "", {}, "sha512-pf0fmrAzvzH/0CUZwwmrWnG0hLXsEvi9TH46o2wBi2avs4lks+khnK19I+2GtgdpuDwYgfIUOXyUgmi5Av4SWw=="],
 
     "@docsearch/css": ["@docsearch/css@3.9.0", "", {}, "sha512-cQbnVbq0rrBwNAKegIac/t6a8nWoUAn8frnkLFW6YARaRmAQr5/Eoe6Ln2fqkUCZ40KpdrKbpSAmgrkviOxuWA=="],
 
