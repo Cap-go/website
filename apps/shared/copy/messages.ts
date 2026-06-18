@@ -138,6 +138,21 @@ const messages = {
   appflow_credit_p2:
     'Capgo was built to make that workflow independent: open source, affordable, focused on live updates, and flexible enough for teams that need more than the basic Appflow path.',
   appflow_credit_p3: 'So yes, respect to Ionic. But Capgo is not a clone of what is shutting down. It is the mature independent path that others now copy.',
+  appflow_credentials_appflow_label: 'Appflow approach:',
+  appflow_credentials_appflow_li1: 'Requires your Apple ID and an app-specific password stored in Appflow',
+  appflow_credentials_appflow_li2: 'Breaks when someone resets their Apple ID password, rotates 2FA, or revokes the app password',
+  appflow_credentials_appflow_li3: 'Gives a third-party service broad account access instead of a scoped API key with explicit roles',
+  appflow_credentials_appflow_li4: 'A frequent support issue: "Invalid application specific password provided"',
+  appflow_credentials_capgo_label: 'Capgo approach:',
+  appflow_credentials_capgo_li1: 'Native builds use an App Store Connect API key (<code class="text-blue-300">.p8</code>) with Key ID and Issuer ID',
+  appflow_credentials_capgo_li2: 'Keys are scoped in App Store Connect (App Manager, Developer, etc.) and revoked independently',
+  appflow_credentials_capgo_li3: 'Credentials stay on your machine by default; cloud builds stream them into an ephemeral environment and wipe them after the job',
+  appflow_credentials_capgo_li4: '<code class="text-blue-300">capgo build init</code> generates signing assets from a single .p8 file',
+  appflow_credentials_desc:
+    'To upload iOS builds to App Store Connect, Appflow asks for your Apple ID and an <strong class="text-white">app-specific password</strong>. That is the legacy Apple login flow — not the modern App Store Connect API key (<code class="text-blue-300">.p8</code>) that Apple recommends for automation.',
+  appflow_credentials_note:
+    '<a href="https://ionic.io/docs/appflow/destinations/apple" class="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">Appflow\'s Apple destination docs</a> list an app-specific password as a required field. <a href="{url}" class="text-emerald-300 hover:underline">Capgo Builder</a> follows Apple\'s API-key model instead.',
+  appflow_credentials_title: 'App Store credentials: API keys, not app passwords',
   appflow_credit_title: "Let's give credit, then be clear about what changed",
   appflow_cta_book_migration: 'Book migration call',
   appflow_cta_questions:
@@ -167,6 +182,9 @@ const messages = {
   appflow_faq_q2: 'What about native builds?',
   appflow_faq_q3: 'Will this save money?',
   appflow_faq_q4: "How's the reliability?",
+  appflow_faq_q5: 'How do App Store credentials compare for native builds?',
+  appflow_faq_a5:
+    'Appflow stores your Apple ID and app-specific password to upload binaries. Capgo uses App Store Connect API keys (.p8): scoped, revocable, and independent of personal Apple ID password changes. For cloud builds, credentials are only used in ephemeral environments — not parked on a vendor server indefinitely.',
   appflow_faq_title: 'Common questions',
   appflow_focus_desc:
     'Appflow bundled live updates, CI/CD, and native builds. Capgo focuses on the live-update system itself: automatic setup in 5 minutes when you want the easy path, plus manual and half-manual flows when your release logic is more advanced.',
