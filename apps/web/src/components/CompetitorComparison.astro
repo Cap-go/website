@@ -123,7 +123,7 @@ const fitCards = [
         </div>
 
         <aside class="rounded-lg border border-white/10 bg-white/[0.04] p-5 shadow-2xl shadow-black/20">
-          <p class="text-xs font-bold tracking-[0.22em] text-slate-400 uppercase">Decision snapshot</p>
+          <h2 class="text-xs font-bold tracking-[0.22em] text-slate-400 uppercase">Decision snapshot</h2>
           <div class="mt-5 space-y-4">
             {
               summaryCards.map((card) => (
@@ -132,7 +132,7 @@ const fitCards = [
                     <span class={`h-2.5 w-2.5 shrink-0 rounded-full ${card.dot}`} />
                     <p class={`text-xs font-bold tracking-[0.18em] uppercase ${card.accent}`}>{card.label}</p>
                   </div>
-                  <h2 class="mt-3 text-lg font-bold text-white">{card.title}</h2>
+                  <h3 class="mt-3 text-lg font-bold text-white">{card.title}</h3>
                   <p class="mt-2 text-sm leading-6 text-slate-300">{card.text}</p>
                 </article>
               ))
