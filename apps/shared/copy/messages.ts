@@ -3518,7 +3518,7 @@ const messages = {
   solutions_ionic_plugins_hero_title: 'Open source alternatives to Ionic Enterprise Plugins',
   solutions_ionic_plugins_section_desc: 'Start with the direct replacements, then decide where you need support, migration help, or Capgo Builder for native delivery.',
   solutions_ionic_plugins_section_title: 'Plugin replacements and migration guides',
-  solutions_ionic_plugins_short: 'Ionic Enterprise',
+  solutions_ionic_plugins_short: 'Ionic Enterprise Alternatives',
   solutions_ionic_plugins_step1: 'Map each Ionic enterprise plugin to its Capgo replacement.',
   solutions_ionic_plugins_step2: 'Install the new plugins and sync native code.',
   solutions_ionic_plugins_step3: 'Migrate stored data and update auth flows, then remove Ionic dependencies.',

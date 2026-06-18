@@ -66,7 +66,7 @@ const locale = Astro.locals.locale
               </svg>
             </button>
             <div
-              class="invisible absolute left-0 z-50 w-56 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
+              class="invisible absolute left-0 z-50 w-64 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
             >
               <div class="rounded-xl border border-slate-600/60 bg-slate-800/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 <a
@@ -86,6 +86,12 @@ const locale = Astro.locals.locale
                   class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
                 >
                   Capgo CLI
+                </a>
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'skills')}
+                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
+                >
+                  Capgo Skills
                 </a>
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile')}
@@ -564,6 +570,9 @@ const locale = Astro.locals.locale
               class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
             >
               Capgo CLI
+            </a>
+            <a href={getRelativeLocaleUrl(Astro.locals.locale, 'skills')} class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80">
+              Capgo Skills
             </a>
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile')}
