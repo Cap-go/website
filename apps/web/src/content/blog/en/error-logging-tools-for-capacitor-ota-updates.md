@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-18T01:28:12.140Z
-updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67d8bb85beb3268b1c6ac757-1742261302793.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T11:13:52.000Z
+head_image: /blog-images/error-logging-tools-for-capacitor-ota-updates.webp
+head_image_alt: "Error Logging Tools for Capacitor OTA Updates Capgo blog illustration"
 keywords: error logging, OTA updates, mobile development, app stability, user experience
 tag: Development, Mobile, Updates
 published: true

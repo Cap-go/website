@@ -1,4 +1,5 @@
 ---
+import CommandCode from '@/components/CommandCode.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
@@ -27,73 +28,52 @@ function copy(key: string, values: MessageValues = {}) {
   return m[key](values, { locale })
 }
 
-// Per-client MCP setup for the "ask AI" section — the editor pills select a client
-// and the config block swaps to that client's exact file + format. The Copy button
-// copies `code` verbatim. Icons are local astro-icon SVGs in src/icons/ai-*.svg.
+const mcpInstallBaseCommand = "npx install-mcp 'npx @capgo/cli@latest mcp'"
+
+// Per-client MCP setup for the "ask AI" section. The tabs only swap the
+// install-mcp --client value, so users no longer hand-edit client config files.
 const mcpClients = [
   {
-    id: 'claude',
-    name: 'Claude Code',
-    icon: 'ai-claude',
-    label: 'run in your terminal',
-    code: 'claude mcp add capgo -- npx -y @capgo/cli mcp',
+    id: 'codex',
+    name: 'Codex',
+    icon: 'ai-codex',
+    client: 'codex',
   },
   {
     id: 'cursor',
     name: 'Cursor',
     icon: 'ai-cursor',
-    label: '~/.cursor/mcp.json',
-    code: `{
-  "mcpServers": {
-    "capgo": { "command": "npx", "args": ["-y", "@capgo/cli", "mcp"] }
-  }
-}`,
+    client: 'cursor',
   },
   {
-    id: 'codex',
-    name: 'Codex',
-    icon: 'ai-codex',
-    label: '~/.codex/config.toml',
-    code: `[mcp_servers.capgo]
-command = "npx"
-args = ["-y", "@capgo/cli", "mcp"]`,
+    id: 'claude',
+    name: 'Claude Code',
+    icon: 'ai-claude',
+    client: 'claude-code',
   },
   {
     id: 'windsurf',
     name: 'Windsurf',
     icon: 'ai-windsurf',
-    label: '~/.codeium/windsurf/mcp_config.json',
-    code: `{
-  "mcpServers": {
-    "capgo": { "command": "npx", "args": ["-y", "@capgo/cli", "mcp"] }
-  }
-}`,
+    client: 'windsurf',
   },
   {
     id: 'vscode',
     name: 'VS Code',
     icon: 'ai-vscode',
-    label: '.vscode/mcp.json',
-    code: `{
-  "servers": {
-    "capgo": { "command": "npx", "args": ["-y", "@capgo/cli", "mcp"] }
-  }
-}`,
+    client: 'vscode',
   },
   {
     id: 'zed',
     name: 'Zed',
     icon: 'ai-zed',
-    label: 'settings.json',
-    code: `{
-  "context_servers": {
-    "capgo": {
-      "command": { "path": "npx", "args": ["-y", "@capgo/cli", "mcp"] }
-    }
-  }
-}`,
+    client: 'zed',
   },
-]
+].map((client) => ({
+  ...client,
+  label: `--client ${client.client}`,
+  code: `${mcpInstallBaseCommand} --client ${client.client}`,
+}))
 
 const builderTitle = copy('native_build_builder_title')
 const title = `${brand} | ${builderTitle}`
@@ -548,7 +528,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                         <span class="mcp-code-label">{c.name} <span class="mcp-code-sep">·</span> <span class="mcp-code-path">{c.label}</span></span>
                         <button class="mcp-copy" type="button" data-copy={c.code} data-copied={copy('native_build_v2_mcp_copied')}>{copy('native_build_v2_mcp_copy')}</button>
                       </div>
-                      <pre class="mcp-code-pre"><code>{c.code}</code></pre>
+                      <pre class="mcp-code-pre"><CommandCode command={c.code} /></pre>
                     </div>
                   </div>
                 ))

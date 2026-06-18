@@ -1,4 +1,5 @@
 ---
+import CommandCode from '@/components/CommandCode.astro'
 import ProductAppExamples from '@/components/ProductAppExamples.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
@@ -67,12 +68,9 @@ const commands = [
     label: 'Request a native build and keep output for CI or PRs',
     command: 'npx @capgo/cli@latest build request com.acme.app --platform ios --build-mode release --output-upload --output-record .capgo/build.json',
   },
-  {
-    label: 'Expose Capgo tools to an MCP-compatible agent',
-    command: 'npx @capgo/cli@latest mcp',
-  },
 ]
 
+const mcpInstallCommand = "npx install-mcp 'npx @capgo/cli@latest mcp' --client codex"
 const mcpTools = ['Apps', 'Bundles', 'Channels', 'Compatibility', 'Native builds', 'Stats', 'Doctor', 'Delivery probe']
 const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.miorange', 'ua.vodafone.myvodafone']
 ---
@@ -123,17 +121,26 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.
           </div>
           <div class="space-y-5 p-5 font-mono text-sm leading-7 text-slate-200 sm:p-6">
             <div>
-              <p class="text-slate-500">$ npx @capgo/cli@latest bundle releaseType com.acme.app --channel production</p>
+              <CommandCode
+                command="$ npx @capgo/cli@latest bundle releaseType com.acme.app --channel production"
+                class="block font-mono text-sm leading-7 break-words whitespace-pre-wrap"
+              />
               <p class="text-emerald-300">Recommendation: OTA update</p>
               <p class="text-slate-400">No native dependency drift detected for production.</p>
             </div>
             <div>
-              <p class="text-slate-500">$ npx @capgo/cli@latest bundle upload --fail-on-incompatible --qr-preview</p>
+              <CommandCode
+                command="$ npx @capgo/cli@latest bundle upload --fail-on-incompatible --qr-preview"
+                class="block font-mono text-sm leading-7 break-words whitespace-pre-wrap"
+              />
               <p class="text-cyan-300">Compatibility gate passed. Delta upload ready.</p>
               <p class="text-slate-400">Preview QR generated for device testing.</p>
             </div>
             <div>
-              <p class="text-slate-500">$ npx @capgo/cli@latest build request com.acme.app --platform ios --output-upload --output-record .capgo/build.json</p>
+              <CommandCode
+                command="$ npx @capgo/cli@latest build request com.acme.app --platform ios --output-upload --output-record .capgo/build.json"
+                class="block font-mono text-sm leading-7 break-words whitespace-pre-wrap"
+              />
               <p class="text-amber-200">Build request queued. Output record saved for CI.</p>
             </div>
           </div>
@@ -207,7 +214,7 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.
                 <h3 class="pt-1 text-base leading-6 font-semibold tracking-tight text-slate-950">{item.label}</h3>
               </div>
               <div class="min-w-0 rounded-lg bg-slate-950 p-4">
-                <code class="block text-left font-mono text-[13px] leading-6 break-words whitespace-pre-wrap text-cyan-100">{item.command}</code>
+                <CommandCode command={item.command} class="block text-left font-mono text-[13px] leading-6 break-words whitespace-pre-wrap" />
               </div>
             </li>
           ))
@@ -216,8 +223,8 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.
     </div>
   </section>
 
-  <section class="bg-slate-950 py-16 sm:py-20">
-    <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
+  <section id="mcp-install" class="bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-start lg:px-8">
       <div>
         <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Native builds and MCP</p>
         <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Let the CLI handle the release work your app actually needs</h2>
@@ -231,45 +238,67 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.
         </div>
       </div>
 
-      <div class="rounded-lg border border-cyan-300/20 bg-slate-900 p-5 shadow-2xl shadow-black/40 sm:p-6">
-        <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">Build record</p>
-            <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white">iOS release build</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-300">Saved output for CI, PR checks, and mobile review.</p>
+      <div class="space-y-4">
+        <div class="rounded-lg border border-cyan-300/20 bg-slate-900 p-5 shadow-2xl shadow-black/40 sm:p-6">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">MCP install</p>
+              <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white">Install Capgo CLI MCP</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-300">Register the CLI server in Codex, Cursor, Claude Code, Windsurf, VS Code, Zed, or Gemini CLI.</p>
+            </div>
+            <button
+              type="button"
+              class="w-fit rounded-md border border-cyan-300/30 px-3 py-1.5 font-mono text-xs font-semibold text-cyan-100 transition-colors hover:bg-cyan-300/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+              data-cli-mcp-copy={mcpInstallCommand}
+            >
+              Copy
+            </button>
           </div>
-          <span class="inline-flex w-fit items-center rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-200 ring-1 ring-emerald-300/30">ready</span>
+
+          <div class="mt-5 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10">
+            <CommandCode command={mcpInstallCommand} />
+          </div>
+          <p class="mt-4 text-sm leading-6 text-slate-400">Replace <code class="font-mono text-slate-200">codex</code> with the client your team uses.</p>
         </div>
 
-        <dl class="mt-5 grid gap-3 sm:grid-cols-2">
-          <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-            <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Platform</dt>
-            <dd class="mt-1 text-sm font-semibold text-white">iOS</dd>
+        <div class="rounded-lg border border-cyan-300/20 bg-slate-900 p-5 shadow-2xl shadow-black/40 sm:p-6">
+          <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">Build record</p>
+              <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white">iOS release build</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-300">Saved output for CI, PR checks, and mobile review.</p>
+            </div>
+            <span class="inline-flex w-fit items-center rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-200 ring-1 ring-emerald-300/30">ready</span>
           </div>
-          <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-            <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Mode</dt>
-            <dd class="mt-1 text-sm font-semibold text-white">release</dd>
-          </div>
-          <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-            <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Output</dt>
-            <dd class="mt-1 text-sm font-semibold text-white">IPA and install QR</dd>
-          </div>
-          <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-            <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Record</dt>
-            <dd class="mt-1 font-mono text-sm font-semibold text-cyan-200">.capgo/build.json</dd>
-          </div>
-        </dl>
 
-        <div class="mt-5 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10">
-          <code class="block font-mono text-[13px] leading-6 break-words whitespace-pre-wrap text-cyan-100"
-            >npx @capgo/cli@latest build request com.acme.app --platform ios --output-upload --output-record .capgo/build.json</code
-          >
-        </div>
+          <dl class="mt-5 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Platform</dt>
+              <dd class="mt-1 text-sm font-semibold text-white">iOS</dd>
+            </div>
+            <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Mode</dt>
+              <dd class="mt-1 text-sm font-semibold text-white">release</dd>
+            </div>
+            <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Output</dt>
+              <dd class="mt-1 text-sm font-semibold text-white">IPA and install QR</dd>
+            </div>
+            <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Record</dt>
+              <dd class="mt-1 font-mono text-sm font-semibold text-cyan-200">.capgo/build.json</dd>
+            </div>
+          </dl>
 
-        <div class="mt-5 grid gap-3 text-sm leading-6 text-slate-300 sm:grid-cols-3">
-          <p class="rounded-lg border border-emerald-300/20 bg-emerald-400/10 p-3 text-emerald-100">Status is visible before release notes are posted.</p>
-          <p class="rounded-lg border border-cyan-300/20 bg-cyan-400/10 p-3 text-cyan-100">QR output stays available for device validation.</p>
-          <p class="rounded-lg border border-amber-300/20 bg-amber-400/10 p-3 text-amber-100">Errors can fail CI before a risky release ships.</p>
+          <div class="mt-5 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10">
+            <CommandCode command="npx @capgo/cli@latest build request com.acme.app --platform ios --output-upload --output-record .capgo/build.json" />
+          </div>
+
+          <div class="mt-5 grid gap-3 text-sm leading-6 text-slate-300 sm:grid-cols-3">
+            <p class="rounded-lg border border-emerald-300/20 bg-emerald-400/10 p-3 text-emerald-100">Status is visible before release notes are posted.</p>
+            <p class="rounded-lg border border-cyan-300/20 bg-cyan-400/10 p-3 text-cyan-100">QR output stays available for device validation.</p>
+            <p class="rounded-lg border border-amber-300/20 bg-amber-400/10 p-3 text-amber-100">Errors can fail CI before a risky release ships.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -316,3 +345,28 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.
     </div>
   </section>
 </Layout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-cli-mcp-copy]').forEach((button) => {
+    let resetTimer: number | undefined
+
+    button.addEventListener('click', async () => {
+      const value = button.dataset.cliMcpCopy
+      if (!value) return
+
+      const originalText = button.textContent || 'Copy'
+
+      try {
+        await navigator.clipboard.writeText(value)
+        button.textContent = 'Copied'
+      } catch {
+        button.textContent = 'Copy failed'
+      }
+
+      if (resetTimer) window.clearTimeout(resetTimer)
+      resetTimer = window.setTimeout(() => {
+        button.textContent = originalText
+      }, 1800)
+    })
+  })
+</script>

@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-07T06:25:21.043Z
-updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67a55480be11a9ef5f3c1ab9-1738909539340.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T11:13:52.000Z
+head_image: /blog-images/live-updates-faq-answers-for-app-developers.webp
+head_image_alt: "Live Updates FAQ: Answers for App Developers Capgo blog illustration"
 keywords: live updates, app development, OTA technology, CI/CD, security protocols, emergency fixes, mobile updates
 tag: Development, Mobile, Updates
 published: true

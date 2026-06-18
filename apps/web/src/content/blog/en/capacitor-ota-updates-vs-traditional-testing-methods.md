@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-21T03:04:05.735Z
-updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67b7cbc8a97035aabf3ddea3-1740107095515.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T09:58:31.000Z
+head_image: /blog-images/ota-updates-vs-testing.webp
+head_image_alt: Comparison of OTA update delivery and traditional QA testing paths
 keywords: OTA updates, traditional testing, app development, Capacitor, deployment, quality assurance, mobile updates
 tag: Development, Mobile, Updates
 published: true

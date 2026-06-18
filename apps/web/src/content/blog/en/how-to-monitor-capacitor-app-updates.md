@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-16T02:14:06.413Z
-updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67b133684899b66d1dc8f1ac-1739672065689.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T10:44:00.000Z
+head_image: /blog-images/how-to-monitor-capacitor-app-updates.webp
+head_image_alt: "How To Monitor Capacitor App Updates Capgo blog illustration"
 keywords: Capacitor, app updates, monitoring tools, performance metrics, user experience, security compliance
 tag: Development, Mobile, Updates
 published: true

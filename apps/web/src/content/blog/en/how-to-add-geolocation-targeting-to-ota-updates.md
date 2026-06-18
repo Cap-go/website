@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-23T04:39:40.995Z
-updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67ba891fbfa83cf6a92e8bd2-1740285846827.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T10:44:00.000Z
+head_image: /blog-images/how-to-add-geolocation-targeting-to-ota-updates.webp
+head_image_alt: "How to Add Geolocation Targeting to OTA Updates Capgo blog illustration"
 keywords: geolocation targeting, OTA updates, mobile app updates, user engagement, location-based features, background location tracking, app development, analytics
 tag: Development, Mobile, Updates
 published: true

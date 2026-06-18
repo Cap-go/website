@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-20T12:19:20.119Z
-updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682c411a4fa53d42207d0b04-1747743646174.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T11:13:52.000Z
+head_image: /blog-images/apple-vs-google-policies-multi-region-compliance.webp
+head_image_alt: "Apple vs. Google Policies: Multi-Region Compliance Capgo blog illustration"
 keywords: app compliance, regional management, privacy policies, app reviews, OTA updates
 tag: Development, Mobile, Updates
 published: true

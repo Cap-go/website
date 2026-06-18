@@ -8,9 +8,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-22T00:00:00.000Z
-updated_at: 2026-05-29T11:34:25.000Z
-head_image: /migrate_appcenter.webp
-head_image_alt: Capacitor JS Dev looking for alternative
+updated_at: 2026-06-18T10:44:00.000Z
+head_image: /blog-images/appcenter-migration.webp
+head_image_alt: "Migrating from App Center to Capgo Capgo blog illustration"
 keywords: App Center, migration, live updates, OTA updates, continuous integration, mobile app updates
 tag: Migration
 published: true

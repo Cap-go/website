@@ -4563,17 +4563,17 @@ const messages = {
   native_build_v2_mcp_title_prefix: 'Don’t feel like doing the setup yourself? ',
   native_build_v2_mcp_title_accent: 'Just ask AI to do it.',
   native_build_v2_mcp_lead:
-    'Capgo ships an MCP server. Add it to your AI coding tool, then ask in plain language — it runs the whole flow: keystore, signing, Google Play, and your first cloud build. You only approve the one Google sign-in.',
-  native_build_v2_mcp_add_title: 'Add native builds to your AI tool',
-  native_build_v2_mcp_add_config_label: 'add to your editor’s MCP config',
-  native_build_v2_mcp_editors_more: '+ any MCP client',
+    'Capgo ships an MCP server in the CLI. Run one install-mcp command for your AI coding tool, then ask in plain language — it runs the flow: keystore, signing, Google Play, and your first cloud build. You only approve the one Google sign-in.',
+  native_build_v2_mcp_add_title: 'Install Capgo MCP in your AI tool',
+  native_build_v2_mcp_add_config_label: 'install with install-mcp',
+  native_build_v2_mcp_editors_more: '+ any supported MCP client',
   native_build_v2_mcp_copy: 'Copy',
   native_build_v2_mcp_copied: 'Copied',
   native_build_v2_mcp_ask_title: 'Then just ask',
   native_build_v2_mcp_ask_prompt: 'Help me set up Capgo Builder',
-  native_build_v2_mcp_chk_1: 'Conducts keystore, signing, Google Play & your first cloud build — in chat',
+  native_build_v2_mcp_chk_1: 'Runs keystore, signing, Google Play, and your first cloud build from chat',
   native_build_v2_mcp_chk_2: 'Credentials stay on your machine — secrets are never echoed back',
-  native_build_v2_mcp_chk_3: 'It’s the CLI you already trust, exposed as MCP tools — nothing new to install',
+  native_build_v2_mcp_chk_3: 'install-mcp writes the client config; Capgo tools still run through @capgo/cli',
   native_build_v2_mcp_ask_note:
     'Your agent calls Capgo’s tools, stops at the human gates, and won’t fake progress — a build has to really pass to finish. It can debug a failed build, too.',
 
