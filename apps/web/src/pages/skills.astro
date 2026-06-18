@@ -11,7 +11,7 @@ const description = 'Open-source Capacitor and Capgo skills for AI agents. Insta
 const content = { title, description }
 const repositoryUrl = 'https://github.com/Cap-go/capgo-skills'
 const quickInstallCommand = 'bunx skills add Cap-go/capgo-skills'
-const skillInstallCommand = (skillName: string) => `gh skill install Cap-go/capgo-skills skills/${skillName} --agent codex --scope user`
+const codexSkillInstallCommand = (skillName: string) => `gh skill install Cap-go/capgo-skills skills/${skillName} --agent codex --scope user`
 
 const skills = [
   {
@@ -597,13 +597,13 @@ const skillCount = skills.length
                       <p class="text-slate-400">{skill.description}</p>
                       <div class="mt-5 rounded-lg border border-slate-700/70 bg-slate-950/80 p-3 shadow-inner shadow-black/20">
                         <div class="mb-2 flex items-center justify-between gap-3">
-                          <span class="font-mono text-xs font-semibold tracking-wide text-slate-400 uppercase">Install this skill</span>
+                          <span class="font-mono text-xs font-semibold tracking-wide text-slate-400 uppercase">Install in Codex</span>
                           <button
                             type="button"
-                            onclick={`navigator.clipboard.writeText(${JSON.stringify(skillInstallCommand(skill.name))})`}
+                            onclick={`navigator.clipboard.writeText(${JSON.stringify(codexSkillInstallCommand(skill.name))})`}
                             class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none"
-                            aria-label={`Copy ${skill.name} install command`}
-                            title={`Copy ${skill.name} install command`}
+                            aria-label={`Copy Codex install command for ${skill.name}`}
+                            title={`Copy Codex install command for ${skill.name}`}
                           >
                             <span class="absolute top-1/2 left-1/2 size-[max(100%,3rem)] -translate-1/2 pointer-fine:hidden" aria-hidden="true" />
                             Copy
