@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-09T01:28:36.450Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67ccde92fb850c7501c0285a-1741483728634.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/development-vs-production-key-differences-in-capacitor-apps.webp
+head_image_alt: "Development vs. Production: Key Differences in Capacitor Apps Capgo blog illustration"
 keywords: Capacitor, development, production, app performance, security, updates, mobile apps
 tag: Development, Mobile, Updates
 published: true

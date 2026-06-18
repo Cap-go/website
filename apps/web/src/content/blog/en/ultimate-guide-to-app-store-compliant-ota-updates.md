@@ -7,8 +7,8 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-28T05:46:14.390Z
 updated_at: 2026-05-29T11:34:25.000Z
-head_image: https://assets.seobotai.com/capgo.app/67c122f35f2cea0ab3a1fd8f-1740721832892.jpg
-head_image_alt: Mobile Development
+head_image: /blog-images/ultimate-guide-to-app-store-compliant-ota-updates.webp
+head_image_alt: "Ultimate Guide to App Store-Compliant OTA Updates Capgo blog illustration"
 keywords: OTA updates, app store compliance, mobile app updates, bug fixes, performance improvements
 tag: Development, Mobile, Updates
 published: true
