@@ -202,6 +202,17 @@ After migration:
 - [ ] Remove CocoaPods-only caches.
 - [ ] Verify archive and release signing.
 
+## Use Capgo Skills for the migration
+
+If you use AI agents to handle the migration, start from [Capgo Skills](/skills/) instead of a blank prompt. The most useful skills for this work are:
+
+- `capacitor-best-practices` to review the app structure before changing `ios/`.
+- `cocoapods-to-spm` to plan the SPM migration and Xcode follow-up steps.
+- `capacitor-ci-cd` to remove CocoaPods assumptions from build pipelines.
+- `debugging-capacitor` and `ios-android-logs` to investigate device-only issues after migration.
+
+Use them before changing the iOS project so the agent audits native files, CI, and dependency compatibility instead of only running the migration command.
+
 ## Conclusion
 
 Migrating a Capacitor app to Swift Package Manager is mostly an iOS dependency-management change. The safest path is to start from a clean branch, run `npx cap spm-migration-assistant`, finish the manual Xcode steps, sync again, and remove CocoaPods from CI only after the app builds.
