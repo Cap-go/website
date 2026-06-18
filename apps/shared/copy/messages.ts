@@ -683,6 +683,7 @@ const messages = {
   pricing_credits_cta_mobile: 'Buy credits instead.',
   pricing_calculator_cta: 'Calculate your price',
   pricing_pay_as_you_go: 'Pay as you go',
+  pricing_credits_cover_usage: 'Use credits pay-as-you-go with no plan, or on top of your plan when you exceed included limits.',
   pricing_calculator_include_plan: 'Include a subscription plan',
   pricing_calculator_credits_only: 'Credits only (no plan)',
   pricing_calculator_recommended_plan: 'Recommended plan',
