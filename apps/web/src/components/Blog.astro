@@ -11,6 +11,10 @@ const props = Astro.props as {
   loading?: 'eager' | 'lazy'
 }
 
+const MAX_VISIBLE_TAGS = 2
+const tags = props.tag.split(',').map((t) => t.trim()).filter(Boolean)
+const visibleTags = tags.slice(0, MAX_VISIBLE_TAGS)
+const hiddenCount = tags.length - visibleTags.length
 const cannLink = getRelativeLocaleUrl(Astro.locals.locale, `blog/${props.link}`)
 ---
 
@@ -26,10 +30,17 @@ const cannLink = getRelativeLocaleUrl(Astro.locals.locale, `blog/${props.link}`)
         loading={props.loading || 'lazy'}
         class="object-contain w-full h-full text-transparent bg-center bg-no-repeat bg-cover rounded-lg border border-gray-600 z-2 aspect-video bg-linear-to-br from-gray-600/50 to-gray-700/50"
       />
-      <div class="absolute top-4 left-4 pointer-events-none">
-        <span class="py-2 px-4 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg">
-          {props.tag}
-        </span>
+      <div class="absolute top-4 left-4 right-4 flex flex-wrap gap-1.5 pointer-events-none">
+        {visibleTags.map((tag) => (
+          <span class="max-w-full truncate py-1.5 px-3 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg">
+            {tag}
+          </span>
+        ))}
+        {hiddenCount > 0 && (
+          <span class="shrink-0 py-1.5 px-3 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white/90 rounded-full shadow-lg">
+            +{hiddenCount}
+          </span>
+        )}
       </div>
     </div>
     <span class="block px-5 mt-3 text-sm font-semibold tracking-widest text-gray-300 uppercase">
