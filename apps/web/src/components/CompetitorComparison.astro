@@ -49,107 +49,155 @@ interface Props {
 const { locale, page } = Astro.props
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
+
+const summaryCards = [
+  {
+    label: 'Capgo',
+    title: 'Own the mobile path',
+    text: page.capgoSummary,
+    accent: 'text-sky-200',
+    border: 'border-sky-300/25',
+    dot: 'bg-sky-300',
+  },
+  {
+    label: page.competitor,
+    title: `${page.competitorShort} focus`,
+    text: page.competitorSummary,
+    accent: 'text-amber-200',
+    border: 'border-amber-300/25',
+    dot: 'bg-amber-300',
+  },
+  {
+    label: 'Decision',
+    title: 'Pick by architecture',
+    text: page.verdict,
+    accent: 'text-emerald-200',
+    border: 'border-emerald-300/25',
+    dot: 'bg-emerald-300',
+  },
+]
+
+const fitCards = [
+  {
+    title: page.capgoFitTitle,
+    items: page.capgoFits,
+    accent: 'text-sky-200',
+    border: 'border-sky-300/25',
+    dot: 'bg-sky-300',
+  },
+  {
+    title: page.competitorFitTitle,
+    items: page.competitorFits,
+    accent: 'text-amber-200',
+    border: 'border-amber-300/25',
+    dot: 'bg-amber-300',
+  },
+]
 ---
 
-<main class="bg-gray-950 text-white">
-  <section class="bg-gray-900 py-14 sm:py-18 lg:py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <p class="inline-flex rounded-full border border-sky-400/30 bg-sky-500/10 px-4 py-2 text-sm font-semibold text-sky-100">{page.eyebrow}</p>
-      <h1 class="mt-6 max-w-4xl text-4xl leading-tight font-bold tracking-tight text-white sm:text-5xl">{page.title}</h1>
-      <p class="mt-5 max-w-2xl text-lg leading-8 text-gray-300">{page.subtitle}</p>
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a
-          href={registerUrl}
-          class="inline-flex min-h-12 items-center justify-center rounded-lg bg-sky-500 px-5 py-3 text-base font-semibold text-white transition hover:bg-sky-400"
-        >
-          Start with Capgo
-        </a>
-        <a
-          href={liveUpdateUrl}
-          class="inline-flex min-h-12 items-center justify-center rounded-lg border border-gray-600 px-5 py-3 text-base font-semibold text-gray-100 transition hover:bg-gray-800"
-        >
-          See live updates
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-gray-950 py-14 sm:py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-5 lg:grid-cols-3">
-        <article class="rounded-lg border border-sky-500/30 bg-sky-500/5 p-6">
-          <p class="text-sm font-semibold text-sky-200">Capgo</p>
-          <h2 class="mt-3 text-2xl font-bold text-white">Capacitor release control</h2>
-          <p class="mt-4 text-base leading-7 text-gray-300">{page.capgoSummary}</p>
-        </article>
-        <article class="rounded-lg border border-amber-500/30 bg-amber-500/5 p-6">
-          <p class="text-sm font-semibold text-amber-200">{page.competitor}</p>
-          <h2 class="mt-3 text-2xl font-bold text-white">{page.competitorShort} focus</h2>
-          <p class="mt-4 text-base leading-7 text-gray-300">{page.competitorSummary}</p>
-        </article>
-        <article class="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-6">
-          <p class="text-sm font-semibold text-emerald-200">Decision</p>
-          <h2 class="mt-3 text-2xl font-bold text-white">Pick by app architecture</h2>
-          <p class="mt-4 text-base leading-7 text-gray-300">{page.verdict}</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-gray-900 py-14 sm:py-20">
-    <div class="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-      <article class="rounded-lg border border-sky-500/30 bg-gray-950 p-6">
-        <h2 class="text-2xl font-bold text-white">{page.capgoFitTitle}</h2>
-        <ul class="mt-6 space-y-3">
-          {
-            page.capgoFits.map((item) => (
-              <li class="flex gap-3 text-base leading-7 text-gray-300">
-                <span class="mt-3 h-2 w-2 shrink-0 rounded-full bg-sky-300" />
-                <span>{item}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </article>
-      <article class="rounded-lg border border-amber-500/30 bg-gray-950 p-6">
-        <h2 class="text-2xl font-bold text-white">{page.competitorFitTitle}</h2>
-        <ul class="mt-6 space-y-3">
-          {
-            page.competitorFits.map((item) => (
-              <li class="flex gap-3 text-base leading-7 text-gray-300">
-                <span class="mt-3 h-2 w-2 shrink-0 rounded-full bg-amber-300" />
-                <span>{item}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <section class="bg-gray-950 py-14 sm:py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
-        <p class="text-sm font-semibold tracking-wide text-sky-200 uppercase">Side-by-side</p>
-        <h2 class="mt-3 text-3xl font-bold text-white">The practical differences</h2>
-      </div>
-      <div class="mt-8 overflow-hidden rounded-lg border border-gray-800">
-        <div class="hidden grid-cols-[0.7fr_1fr_1fr] bg-gray-900 text-sm font-semibold text-gray-300 md:grid">
-          <div class="px-5 py-4">Area</div>
-          <div class="px-5 py-4">Capgo</div>
-          <div class="px-5 py-4">{page.competitorShort}</div>
+<main class="bg-[#070d18] text-white">
+  <section class="relative overflow-hidden border-b border-white/10">
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.78),rgba(7,13,24,1))]"></div>
+    <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+      <div class="grid gap-10 lg:grid-cols-[1fr_0.86fr] lg:items-start">
+        <div class="max-w-3xl">
+          <p class="inline-flex rounded-full border border-sky-300/30 bg-sky-300/10 px-4 py-2 text-xs font-bold tracking-[0.2em] text-sky-100 uppercase">
+            {page.eyebrow}
+          </p>
+          <h1 class="mt-6 text-4xl leading-tight font-black text-white sm:text-5xl lg:text-6xl">{page.title}</h1>
+          <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{page.subtitle}</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={registerUrl}
+              class="inline-flex min-h-12 items-center justify-center rounded-lg bg-sky-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-sky-950/35 transition hover:bg-sky-400 focus:ring-2 focus:ring-sky-300 focus:outline-none"
+            >
+              Start with Capgo
+            </a>
+            <a
+              href={liveUpdateUrl}
+              class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-bold text-white transition hover:border-white/30 hover:bg-white/[0.08] focus:ring-2 focus:ring-white/30 focus:outline-none"
+            >
+              See live updates
+            </a>
+          </div>
         </div>
-        <div class="divide-y divide-gray-800">
+
+        <aside class="rounded-lg border border-white/10 bg-white/[0.04] p-5 shadow-2xl shadow-black/20">
+          <p class="text-xs font-bold tracking-[0.22em] text-slate-400 uppercase">Decision snapshot</p>
+          <div class="mt-5 space-y-4">
+            {
+              summaryCards.map((card) => (
+                <article class={`rounded-lg border ${card.border} bg-white/[0.035] p-4`}>
+                  <div class="flex items-center gap-3">
+                    <span class={`h-2.5 w-2.5 shrink-0 rounded-full ${card.dot}`} />
+                    <p class={`text-xs font-bold tracking-[0.18em] uppercase ${card.accent}`}>{card.label}</p>
+                  </div>
+                  <h2 class="mt-3 text-lg font-bold text-white">{card.title}</h2>
+                  <p class="mt-2 text-sm leading-6 text-slate-300">{card.text}</p>
+                </article>
+              ))
+            }
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-white/10 bg-[#050911] py-14 sm:py-18">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-xs font-bold tracking-[0.22em] text-sky-300 uppercase">Architecture first</p>
+        <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">Pick the stack you actually have</h2>
+        <p class="mt-4 text-base leading-7 text-slate-300">The useful comparison starts with ownership, runtime, and the codebase your team wants to keep maintaining.</p>
+      </div>
+
+      <div class="mt-9 grid gap-5 lg:grid-cols-2">
+        {
+          fitCards.map((card) => (
+            <article class={`rounded-lg border ${card.border} bg-white/[0.04] p-6`}>
+              <h3 class={`text-xl font-bold ${card.accent}`}>{card.title}</h3>
+              <ul class="mt-6 space-y-4">
+                {card.items.map((item) => (
+                  <li class="flex gap-3 text-base leading-7 text-slate-300">
+                    <span class={`mt-2.5 h-2 w-2 shrink-0 rounded-full ${card.dot}`} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-white/10 bg-[#070d18] py-14 sm:py-18">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-5 lg:grid-cols-[0.7fr_1fr] lg:items-end">
+        <div>
+          <p class="text-xs font-bold tracking-[0.22em] text-sky-300 uppercase">Side-by-side</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">The practical differences</h2>
+        </div>
+        <p class="text-base leading-7 text-slate-300">A direct view of the operating model, update path, pricing path, native APIs, and migration tradeoffs.</p>
+      </div>
+
+      <div class="mt-9 overflow-hidden rounded-lg border border-white/10 bg-white/[0.03]">
+        <div class="hidden grid-cols-[0.72fr_1fr_1fr] border-b border-white/10 bg-white/[0.04] text-sm font-bold text-slate-300 md:grid">
+          <div class="px-5 py-4">Area</div>
+          <div class="px-5 py-4 text-sky-200">Capgo</div>
+          <div class="px-5 py-4 text-amber-200">{page.competitorShort}</div>
+        </div>
+        <div class="divide-y divide-white/10">
           {
             page.differences.map((item) => (
-              <div class="grid gap-4 bg-gray-950 p-5 md:grid-cols-[0.7fr_1fr_1fr] md:gap-0 md:p-0">
-                <div class="font-semibold text-white md:px-5 md:py-4">{item.label}</div>
-                <div class="text-base leading-7 text-gray-300 md:px-5 md:py-4">
-                  <p class="mb-1 text-xs font-semibold tracking-wide text-sky-200 uppercase md:hidden">Capgo</p>
+              <div class="grid gap-4 p-5 md:grid-cols-[0.72fr_1fr_1fr] md:gap-0 md:p-0">
+                <div class="font-bold text-white md:px-5 md:py-4">{item.label}</div>
+                <div class="text-base leading-7 text-slate-300 md:border-l md:border-white/10 md:px-5 md:py-4">
+                  <p class="mb-1 text-xs font-bold tracking-[0.18em] text-sky-200 uppercase md:hidden">Capgo</p>
                   {item.capgo}
                 </div>
-                <div class="text-base leading-7 text-gray-300 md:px-5 md:py-4">
-                  <p class="mb-1 text-xs font-semibold tracking-wide text-amber-200 uppercase md:hidden">{page.competitorShort}</p>
+                <div class="text-base leading-7 text-slate-300 md:border-l md:border-white/10 md:px-5 md:py-4">
+                  <p class="mb-1 text-xs font-bold tracking-[0.18em] text-amber-200 uppercase md:hidden">{page.competitorShort}</p>
                   {item.competitor}
                 </div>
               </div>
@@ -160,36 +208,47 @@ const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
     </div>
   </section>
 
-  <section class="bg-gray-900 py-14 sm:py-20">
-    <div class="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
-      {
-        page.narratives.map((section) => (
-          <article class="rounded-lg border border-gray-800 bg-gray-950 p-6">
-            <h2 class="text-2xl font-bold text-white">{section.title}</h2>
-            <p class="mt-4 text-base leading-7 text-gray-300">{section.text}</p>
-            <ul class="mt-6 space-y-3">
-              {section.items.map((item) => (
-                <li class="flex gap-3 text-base leading-7 text-gray-300">
-                  <span class="mt-3 h-2 w-2 shrink-0 rounded-full bg-emerald-300" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))
-      }
+  <section class="border-b border-white/10 bg-[#050911] py-14 sm:py-18">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-xs font-bold tracking-[0.22em] text-emerald-300 uppercase">Decision guide</p>
+        <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">Choose by the tradeoff that matters</h2>
+      </div>
+
+      <div class="mt-9 grid gap-5 lg:grid-cols-3">
+        {
+          page.narratives.map((section, index) => (
+            <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <p class="text-xs font-bold tracking-[0.2em] text-slate-500 uppercase">0{index + 1}</p>
+              <h3 class="mt-4 text-xl font-bold text-white">{section.title}</h3>
+              <p class="mt-3 text-base leading-7 text-slate-300">{section.text}</p>
+              <ul class="mt-6 space-y-3">
+                {section.items.map((item) => (
+                  <li class="flex gap-3 text-sm leading-6 text-slate-300">
+                    <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-emerald-300" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </section>
 
-  <section class="bg-gray-950 py-14 sm:py-20">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white">Common questions</h2>
-      <dl class="mt-8 space-y-6">
+  <section class="border-b border-white/10 bg-[#070d18] py-14 sm:py-18">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.7fr_1fr] lg:px-8">
+      <div>
+        <p class="text-xs font-bold tracking-[0.22em] text-sky-300 uppercase">FAQ</p>
+        <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">Common questions</h2>
+      </div>
+      <dl class="space-y-4">
         {
           page.faq.map((item) => (
-            <div class="rounded-lg border border-gray-800 bg-gray-900 p-6">
-              <dt class="text-xl font-semibold text-white">{item.question}</dt>
-              <dd class="mt-3 text-base leading-7 text-gray-300">{item.answer}</dd>
+            <div class="rounded-lg border border-white/10 bg-white/[0.04] p-5">
+              <dt class="text-lg font-bold text-white">{item.question}</dt>
+              <dd class="mt-3 text-base leading-7 text-slate-300">{item.answer}</dd>
             </div>
           ))
         }
@@ -197,41 +256,41 @@ const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
     </div>
   </section>
 
-  <section class="bg-gray-900 py-14 sm:py-20">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white">Sources</h2>
-      <p class="mt-4 text-base leading-7 text-gray-300">{page.sourceNote}</p>
-      <ul class="mt-6 grid gap-3 text-base text-gray-300 sm:grid-cols-2">
-        {
-          page.sources.map((source) => (
-            <li>
-              <a href={source.href} class="text-sky-300 hover:underline">
-                {source.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+  <section class="bg-[#050911] py-14 sm:py-18">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+      <div>
+        <p class="text-xs font-bold tracking-[0.22em] text-slate-400 uppercase">Sources</p>
+        <h2 class="mt-4 text-3xl leading-tight font-black text-white">Checked against public docs</h2>
+        <p class="mt-4 text-base leading-7 text-slate-300">{page.sourceNote}</p>
+        <ul class="mt-6 grid gap-3 text-sm leading-6 text-slate-300 sm:grid-cols-2">
+          {
+            page.sources.map((source) => (
+              <li>
+                <a href={source.href} class="text-sky-300 underline-offset-4 hover:underline">
+                  {source.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
 
-  <section class="bg-gray-950 py-14 sm:py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="rounded-lg border border-sky-500/30 bg-sky-500/10 p-6 text-center sm:p-8">
-        <h2 class="text-3xl font-bold text-white">Ship Capacitor updates without waiting on every store review.</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-gray-300">
+      <div class="rounded-lg border border-sky-300/25 bg-sky-300/[0.08] p-6 lg:p-8">
+        <p class="text-xs font-bold tracking-[0.22em] text-sky-200 uppercase">Capgo next step</p>
+        <h2 class="mt-4 text-3xl leading-tight font-black text-white">Ship Capacitor updates without waiting on every store review.</h2>
+        <p class="mt-4 max-w-2xl text-base leading-7 text-slate-300">
           Use Capgo for live updates, rollback, channels, device logs, plugin maintenance, and native builds when your app is built on Capacitor.
         </p>
-        <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
             href={registerUrl}
-            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-base font-semibold text-gray-950 transition hover:bg-gray-200"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-bold text-gray-950 transition hover:bg-slate-200 focus:ring-2 focus:ring-white focus:outline-none"
           >
             Start free trial
           </a>
           <a
             href={liveUpdateUrl}
-            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-sky-300/40 px-5 py-3 text-base font-semibold text-sky-100 transition hover:bg-sky-400/10"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-sky-200/40 bg-sky-300/[0.06] px-5 py-3 text-sm font-bold text-sky-50 transition hover:bg-sky-300/[0.12] focus:ring-2 focus:ring-sky-300 focus:outline-none"
           >
             Read live update guide
           </a>
