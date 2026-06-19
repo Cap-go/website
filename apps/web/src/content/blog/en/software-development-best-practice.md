@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-19T09:45:17.670Z
-updated_at: 2026-06-19T09:45:18.949Z
+updated_at: 2026-06-19T09:47:52.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/832976da-90a7-463a-bb17-dd4598f3993b/software-development-best-practice-graphic-design.jpg'
 head_image_alt: 10 Software Development Best Practice Essentials for 2026
 keywords: 'software development best practice, capacitorjs, ci/cd pipeline, mobile app development, release management'
