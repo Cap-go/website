@@ -99,6 +99,10 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     return `$${formatPrice(amount)}${yearly ? copy.perYear : copy.perMonth}`
   }
 
+  function getCreditsAmount(monthlyCreditsCost: number, yearly: boolean) {
+    return yearly ? monthlyCreditsCost * 12 : monthlyCreditsCost
+  }
+
   function updateBillingLabels(yearly: boolean) {
     setText('[data-pricing-calculator-estimated-total-label]', yearly ? copy.estimatedAnnualTotal : copy.estimatedTotal)
     setText('[data-pricing-calculator-total-period]', yearly ? copy.annualTotal : copy.monthlyTotal)
@@ -170,7 +174,7 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     }
 
     const yearly = isYearlyBilling()
-    updateBillingLabels(yearly && withPlan)
+    updateBillingLabels(yearly)
 
     setText('[data-pricing-calculator-plan-label]', withPlan ? (userChangedPlan ? copy.selectedPlan : copy.recommendedPlan) : copy.recommendedPlan)
 
@@ -211,22 +215,17 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     debounceTimer = setTimeout(async () => {
       try {
         const yearly = isYearlyBilling()
-        const creditsCost = await fetchCreditCost(billableUsage)
+        const creditsCostMonthly = await fetchCreditCost(billableUsage)
+        const creditsCost = getCreditsAmount(creditsCostMonthly, yearly)
         const planCost = withPlan && plan ? getPlanBillingPrice(plan, yearly) : 0
 
         setText('[data-pricing-calculator-plan-line-value]', withPlan ? formatAmountWithPeriod(planCost, yearly) : formatAmountWithPeriod(0, yearly))
-        setText('[data-pricing-calculator-credits-value]', formatAmountWithPeriod(creditsCost, false))
+        setText('[data-pricing-calculator-credits-value]', formatAmountWithPeriod(creditsCost, yearly))
 
-        if (yearly && withPlan) {
-          if (creditsCost > 0) {
-            setText('[data-pricing-calculator-total-value]', `${formatAmountWithPeriod(planCost, true)} + ${formatAmountWithPeriod(creditsCost, false)}`)
-          } else {
-            setText('[data-pricing-calculator-total-value]', formatAmountWithPeriod(planCost, true))
-          }
-        } else if (yearly && !withPlan) {
-          setText('[data-pricing-calculator-total-value]', formatAmountWithPeriod(creditsCost, false))
+        if (yearly) {
+          setText('[data-pricing-calculator-total-value]', formatAmountWithPeriod(planCost + creditsCost, true))
         } else {
-          const total = (withPlan && plan ? getPlanMonthlyPrice(plan, false) : 0) + creditsCost
+          const total = (withPlan && plan ? getPlanMonthlyPrice(plan, false) : 0) + creditsCostMonthly
           setText('[data-pricing-calculator-total-value]', formatAmountWithPeriod(total, false))
         }
       } catch {
