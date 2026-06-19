@@ -34,6 +34,7 @@ const copy = {
   includePlan: m.pricing_calculator_include_plan({}, { locale }),
   creditsOnly: m.pricing_calculator_credits_only({}, { locale }),
   recommendedPlan: m.pricing_calculator_recommended_plan({}, { locale }),
+  selectedPlan: m.pricing_calculator_selected_plan({}, { locale }),
   selectPlan: m.pricing_calculator_select_plan({}, { locale }),
   yourUsage: m.pricing_calculator_your_usage({}, { locale }),
   includedInPlan: m.pricing_calculator_included_in_plan({}, { locale }),
@@ -181,7 +182,7 @@ const copyJson = JSON.stringify(copy)
         <div data-pricing-calculator-plan-panel class="mb-6 rounded-xl border border-blue-100 bg-blue-50/40 p-4">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p class="text-xs font-semibold tracking-wide text-blue-700 uppercase">{copy.recommendedPlan}</p>
+              <p data-pricing-calculator-plan-label class="text-xs font-semibold tracking-wide text-blue-700 uppercase">{copy.recommendedPlan}</p>
               <p data-pricing-calculator-plan-name class="mt-1 text-lg font-semibold text-gray-950">—</p>
               <p data-pricing-calculator-plan-price class="text-sm text-gray-600">—</p>
               <p data-pricing-calculator-plan-price-note class="mt-1 hidden text-xs text-gray-500"></p>

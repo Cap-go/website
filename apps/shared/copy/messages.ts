@@ -705,6 +705,7 @@ const messages = {
   pricing_calculator_include_plan: 'Include a subscription plan',
   pricing_calculator_credits_only: 'Credits only (no plan)',
   pricing_calculator_recommended_plan: 'Recommended plan',
+  pricing_calculator_selected_plan: 'Selected plan',
   pricing_calculator_select_plan: 'Change plan',
   pricing_calculator_your_usage: 'Your usage',
   pricing_calculator_included_in_plan: 'Included in plan',

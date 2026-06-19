@@ -12,6 +12,8 @@ import {
 type CalculatorCopy = {
   includePlan: string
   creditsOnly: string
+  recommendedPlan: string
+  selectedPlan: string
   includedInPlan: string
   planSubscription: string
   estimatedTotal: string
@@ -170,6 +172,8 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     const yearly = isYearlyBilling()
     updateBillingLabels(yearly && withPlan)
 
+    setText('[data-pricing-calculator-plan-label]', withPlan ? (userChangedPlan ? copy.selectedPlan : copy.recommendedPlan) : copy.recommendedPlan)
+
     if (withPlan && plan) {
       setText('[data-pricing-calculator-plan-name]', plan.name)
       setText('[data-pricing-calculator-plan-price]', formatAmountWithPeriod(getPlanMonthlyPrice(plan, yearly), false))
@@ -290,18 +294,9 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     closeModal()
   })
 
-  mauInput?.addEventListener('input', () => {
-    userChangedPlan = false
-    updateCalculator()
-  })
-  updatesInput?.addEventListener('input', () => {
-    userChangedPlan = false
-    updateCalculator()
-  })
-  sizeInput?.addEventListener('input', () => {
-    userChangedPlan = false
-    updateCalculator()
-  })
+  mauInput?.addEventListener('input', updateCalculator)
+  updatesInput?.addEventListener('input', updateCalculator)
+  sizeInput?.addEventListener('input', updateCalculator)
 
   modeInputs.forEach((input) => {
     input.addEventListener('change', () => {
@@ -319,10 +314,7 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
   })
 
   billingInputs.forEach((input) => {
-    input.addEventListener('change', () => {
-      userChangedPlan = false
-      updateCalculator()
-    })
+    input.addEventListener('change', updateCalculator)
   })
 
   updateCalculator()
