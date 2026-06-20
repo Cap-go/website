@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { shortNumber } from '@/services/misc'
+import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
 import Orgs from '@/components/Orgs.astro'
 import ProblemSolution from '@/components/ProblemSolution.astro'
 import Testimonials from '@/components/Testimonials.astro'
@@ -22,21 +22,8 @@ import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 
 const config = Astro.locals.runtimeConfig
 
-const stats = {
-  stars: shortNumber(645),
-  apps: shortNumber(1400),
-  updates: shortNumber(947593631),
-}
-
-const tmp = await fetch(`${config.public.baseApiUrl}/private/website_stats`)
-if (tmp.ok) {
-  const res = await tmp.json()
-  if (res) {
-    if (res.apps) stats.apps = shortNumber(res.apps)
-    if (res.updates) stats.updates = shortNumber(res.updates)
-    if (res.stars) stats.stars = shortNumber(res.stars)
-  }
-}
+const rawStats = await resolveWebsiteStats(config.public.baseApiUrl)
+const stats = formatWebsiteStats(rawStats)
 
 // Create comprehensive homepage content definition
 const title = `${config.public.brand} - ${m.instant_updates_for_capacitor({}, { locale: Astro.locals.locale })}`
@@ -62,7 +49,7 @@ const capgoSoftware = createSoftwareApplicationLdJson(config.public, {
   softwareVersion: '1.0',
   aggregateRating: {
     ratingValue: 4.8,
-    reviewCount: parseInt(stats.apps.replace(/[^\d]/g, '')) || 1400,
+    reviewCount: rawStats.apps,
   },
   offers: {
     price: '0',
@@ -116,7 +103,7 @@ const content = {
     <GlobalInfrastructure />
     <UpdateTypesSection />
     <BuiltForDevelopers />
-    <SharedNumbers />
+    <SharedNumbers stats={stats} />
     <Testimonials />
     <Manifesto />
     <Orgs />

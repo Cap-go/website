@@ -1,10 +1,12 @@
 ---
+import '@/styles/cli-product.css'
 import CommandCode from '@/components/CommandCode.astro'
 import ProductAppExamples from '@/components/ProductAppExamples.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
 import Layout from '@/layouts/Layout.astro'
+import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const title = 'Capgo CLI | Build, preview, and ship Capacitor apps safely'
@@ -16,11 +18,16 @@ const content = {
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
 }
 
-const heroStats = [
-  ['MCP', 'App, bundle, channel, build, stats, and diagnostic tools for AI agents.'],
-  ['Release type', 'Compatibility checks recommend OTA or native before you ship.'],
-  ['Native builds', 'Request signed iOS and Android builds and keep output records for CI.'],
-]
+const locale = Astro.locals.locale
+
+function copy(key: string, values: MessageValues = {}) {
+  return m[key](values, { locale })
+}
+
+const docsUrl = getRelativeLocaleUrl(locale, 'docs/cli')
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
+
+const heroMeta = ['MCP tools for AI agents', 'OTA or native release checks', 'Signed builds from the same terminal']
 
 const capabilities = [
   {
@@ -73,81 +80,184 @@ const commands = [
 const mcpInstallCommand = "npx install-mcp 'npx @capgo/cli@latest mcp' --client codex"
 const mcpTools = ['Apps', 'Bundles', 'Channels', 'Compatibility', 'Native builds', 'Stats', 'Doctor', 'Delivery probe']
 const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.miorange', 'ua.vodafone.myvodafone']
+const comparisonRows = [
+  {
+    label: copy('cli_v2_comp_cli_l'),
+    hook: copy('cli_v2_comp_cli_capgo_hook'),
+    capgo: copy('cli_v2_comp_cli_capgo'),
+    diy: copy('cli_v2_comp_cli_diy'),
+    capa: copy('cli_v2_comp_cli_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_mcp_l'),
+    hook: copy('cli_v2_comp_mcp_capgo_hook'),
+    capgo: copy('cli_v2_comp_mcp_capgo'),
+    diy: copy('cli_v2_comp_mcp_diy'),
+    capa: copy('cli_v2_comp_mcp_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_release_l'),
+    hook: copy('cli_v2_comp_release_capgo_hook'),
+    capgo: copy('cli_v2_comp_release_capgo'),
+    diy: copy('cli_v2_comp_release_diy'),
+    capa: copy('cli_v2_comp_release_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_upload_l'),
+    hook: copy('cli_v2_comp_upload_capgo_hook'),
+    capgo: copy('cli_v2_comp_upload_capgo'),
+    diy: copy('cli_v2_comp_upload_diy'),
+    capa: copy('cli_v2_comp_upload_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_build_l'),
+    hook: copy('cli_v2_comp_build_capgo_hook'),
+    capgo: copy('cli_v2_comp_build_capgo'),
+    diy: copy('cli_v2_comp_build_diy'),
+    capa: copy('cli_v2_comp_build_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_ci_l'),
+    hook: copy('cli_v2_comp_ci_capgo_hook'),
+    capgo: copy('cli_v2_comp_ci_capgo'),
+    diy: copy('cli_v2_comp_ci_diy'),
+    capa: copy('cli_v2_comp_ci_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_compat_l'),
+    hook: copy('cli_v2_comp_compat_capgo_hook'),
+    capgo: copy('cli_v2_comp_compat_capgo'),
+    diy: copy('cli_v2_comp_compat_diy'),
+    capa: copy('cli_v2_comp_compat_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_try_l'),
+    hook: copy('cli_v2_comp_try_capgo_hook'),
+    capgo: copy('cli_v2_comp_try_capgo'),
+    diy: copy('cli_v2_comp_try_diy'),
+    capa: copy('cli_v2_comp_try_capa'),
+  },
+]
 ---
 
 <Layout content={content}>
-  <section class="bg-slate-950 pt-12 pb-16 sm:pt-16 lg:pt-20 lg:pb-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-        <div>
-          <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Capgo CLI</p>
-          <h1 class="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-balance text-white sm:text-6xl lg:text-7xl">Capgo CLI</h1>
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-pretty text-slate-300 sm:text-xl">
-            One terminal for live updates, native builds, compatibility checks, device runs, and AI-assisted Capgo automation through MCP.
-          </p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli')}
-              class="inline-flex min-h-12 items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
-            >
-              Read CLI docs
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-            >
-              Create account
-            </a>
-          </div>
-
-          <div class="mt-10 grid gap-3 sm:grid-cols-3">
-            {
-              heroStats.map(([label, text]) => (
-                <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-                  <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">{label}</p>
-                  <p class="mt-2 text-sm leading-6 text-slate-300">{text}</p>
-                </div>
-              ))
-            }
+  <div class="cli bg-ad">
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          Capgo CLI
+        </div>
+        <h1 class="hero-banner" aria-label="One CLI to rule them all">
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">One CLI to rule them all</span>
+            <span class="hbv-u-rule"></span>
+          </span>
+        </h1>
+        <p class="lead hero-lead">One tool for live updates, native builds, compatibility checks, device runs, and AI-assisted Capgo automation through MCP.</p>
+        <div class="hero-ctas">
+          <div class="hero-cta-buttons">
+            <a class="btn btn-lg btn-primary" href={docsUrl}>Read CLI docs</a>
+            <a class="btn btn-lg btn-ghost" href="#how">See it run ↓</a>
           </div>
         </div>
+        <div class="hero-meta">
+          {
+            heroMeta.map((item) => (
+              <span>
+                <span class="check">✓</span>
+                {item}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </section>
 
-        <div class="rounded-lg border border-white/10 bg-slate-900 shadow-2xl shadow-black/40">
-          <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-            <span class="h-3 w-3 rounded-full bg-rose-400"></span>
-            <span class="h-3 w-3 rounded-full bg-amber-300"></span>
-            <span class="h-3 w-3 rounded-full bg-emerald-400"></span>
-            <p class="ml-3 font-mono text-xs text-slate-500">release-terminal</p>
+    <section class="section bg-grid grain" id="how">
+      <div class="shell">
+        <div class="rv-one">
+          <div class="rv-one-mark">Capgo CLI</div>
+          <p class="rv-one-line">Release checks, guarded uploads, and native builds in one terminal session.</p>
+        </div>
+
+        <div class="demo-wrap">
+          <div class="terminal-frame">
+            <div class="terminal-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="title" id="demo-term-title">npx @capgo/cli bundle releaseType</span>
+              <div class="demo-tabs">
+                <button id="demo-tab-release" class="demo-tab active" type="button">Release</button>
+                <button id="demo-tab-upload" class="demo-tab" type="button">Upload</button>
+                <button id="demo-tab-build" class="demo-tab" type="button">Build</button>
+              </div>
+            </div>
+            <div class="terminal-body" id="demo-term-body" aria-live="polite"></div>
           </div>
-          <div class="space-y-5 p-5 font-mono text-sm leading-7 text-slate-200 sm:p-6">
-            <div>
-              <CommandCode
-                command="$ npx @capgo/cli@latest bundle releaseType com.acme.app --channel production"
-                class="block font-mono text-sm leading-7 break-words whitespace-pre-wrap"
-              />
-              <p class="text-emerald-300">Recommendation: OTA update</p>
-              <p class="text-slate-400">No native dependency drift detected for production.</p>
-            </div>
-            <div>
-              <CommandCode
-                command="$ npx @capgo/cli@latest bundle upload --fail-on-incompatible --qr-preview"
-                class="block font-mono text-sm leading-7 break-words whitespace-pre-wrap"
-              />
-              <p class="text-cyan-300">Compatibility gate passed. Delta upload ready.</p>
-              <p class="text-slate-400">Preview QR generated for device testing.</p>
-            </div>
-            <div>
-              <CommandCode
-                command="$ npx @capgo/cli@latest build request com.acme.app --platform ios --output-upload --output-record .capgo/build.json"
-                class="block font-mono text-sm leading-7 break-words whitespace-pre-wrap"
-              />
-              <p class="text-amber-200">Build request queued. Output record saved for CI.</p>
-            </div>
+          <div class="demo-controls">
+            <span>Animated example — tabs switch the command flow</span>
+            <button class="demo-replay" id="demo-replay" type="button">⟲ Replay</button>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="yellow"
+      eyebrow={copy('cli_v2_proof_eyebrow')}
+      title={copy('cli_v2_proof_title')}
+      description={copy('cli_v2_proof_lead')}
+      testimonials={productTestimonials.cli}
+      maxItems={2}
+    />
+
+    <section class="section" id="compare">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--yellow">{copy('cli_v2_comp_eyebrow')}</div>
+          <h2 class="h2-section">{copy('cli_v2_comp_title')}</h2>
+          <p class="lead">{copy('cli_v2_comp_lead')}</p>
+        </div>
+
+        <div class="comp-wrap">
+          <table class="comp comp-prose">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="us">Capgo CLI</th>
+                <th>
+                  {copy('cli_v2_comp_h_diy')}
+                  <span class="th-sub">{copy('cli_v2_comp_h_diy_sub')}</span>
+                </th>
+                <th>{copy('cli_v2_comp_h_capa')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                comparisonRows.map((row) => (
+                  <tr>
+                    <td class="label">{row.label}</td>
+                    <td class="us">
+                      <span class="hook">{row.hook}</span> {row.capgo}
+                    </td>
+                    <td>{row.diy}</td>
+                    <td>{row.capa}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="comp-callout" role="note">
+          <p>{copy('cli_v2_comp_callout')}</p>
+        </aside>
+
+        <p class="comp-footnote">{copy('cli_v2_comp_footnote')}</p>
+      </div>
+    </section>
+  </div>
 
   <section class="bg-slate-900 py-16 sm:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -310,13 +420,6 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.
     appIds={appExampleIds}
   />
 
-  <ProductTestimonials
-    eyebrow="CLI proof"
-    title="Release workflows people trust from terminal to production"
-    description="Short reviews from teams using Capgo for Capacitor updates, native builds, and release control."
-    testimonials={productTestimonials.cli}
-  />
-
   <section class="bg-slate-900 py-16 sm:py-20">
     <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
       <div>
@@ -345,6 +448,295 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.
     </div>
   </section>
 </Layout>
+
+<script>
+  ;(function cliDemoTerminal() {
+    const el = document.getElementById('demo-term-body')
+    if (!el) return
+
+    let paused = false
+    let started = false
+    let gen = 0
+    let mode: 'release' | 'upload' | 'build' = 'release'
+    const SPINNER = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+
+    const TITLES = {
+      release: 'npx @capgo/cli bundle releaseType',
+      upload: 'npx @capgo/cli bundle upload',
+      build: 'npx @capgo/cli build request',
+    }
+
+    const STATIC = {
+      release: `<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest bundle releaseType</span> <span class="flag">com.acme.app</span> <span class="flag">--channel</span> <span class="val">production</span>
+<span class="ok">✔</span> Channel: <span class="val">production</span>  ·  App: <span class="val">com.acme.app</span>
+<span class="ok">Recommendation:</span> <span class="val">OTA update</span>
+<span class="ghost">No native dependency drift detected for production.</span>
+
+<span class="ok">━━━ Safe to ship as a live update ━━━</span>`,
+      upload: `<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest bundle upload</span> <span class="flag">--channel</span> <span class="val">production</span> <span class="flag">--fail-on-incompatible</span> <span class="flag">--qr-preview</span>
+<span class="ok">✔</span> Compatibility gate passed
+<span class="ok">✔</span> Bundle validated  ·  <span class="kw">2.1 MB</span>
+<span class="ok">✔</span> Delta upload ready  ·  <span class="kw">340 KB</span>
+<span class="ok">✔</span> Published to <span class="val">production</span>
+<span class="lock">QR</span> Preview link generated for device testing
+
+<span class="ok">━━━ Live update rolling out ━━━</span>`,
+      build: `<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest build request</span> <span class="flag">com.acme.app</span> <span class="flag">--platform</span> <span class="val">ios</span> <span class="flag">--output-record</span> <span class="val">.capgo/build.json</span>
+<span class="ok">✔</span> Platform: <span class="val">iOS</span>  ·  Mode: <span class="val">release</span>
+<span class="lock">🔒</span> <span class="ghost">Credentials used only during build, then deleted.</span>
+
+<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">9c4f7a</span>
+<span class="ok">✔</span> Upload complete  ·  <span class="val">100%</span>
+<span class="dim">[CapApp]</span> Archive succeeded
+<span class="ok">✔</span> Output record saved  ·  <span class="val">.capgo/build.json</span>
+
+<span class="ok">━━━ Native build completed in 2m 41s ━━━</span>`,
+    }
+
+    function makeScriptRelease() {
+      return [
+        {
+          t: 0,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest bundle releaseType</span> <span class="flag">com.acme.app</span> <span class="flag">--channel</span> <span class="val">production</span><span class="terminal-cursor"></span>`,
+        },
+        {
+          t: 700,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest bundle releaseType</span> <span class="flag">com.acme.app</span> <span class="flag">--channel</span> <span class="val">production</span>\n<span class="ok">✔</span> Channel: <span class="val">production</span>`,
+          replaceAll: true,
+        },
+        { t: 250, html: `\n<span class="ok">✔</span> App: <span class="val">com.acme.app</span>` },
+        { t: 350, html: `\n<span class="ok">Recommendation:</span> <span class="val">OTA update</span>` },
+        { t: 300, html: `\n<span class="ghost">No native dependency drift detected for production.</span>` },
+        { t: 400, html: `\n` },
+        { t: 300, html: `\n<span class="ok">━━━ Safe to ship as a live update ━━━</span>` },
+      ]
+    }
+
+    function makeScriptUpload() {
+      return [
+        {
+          t: 0,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest bundle upload</span> <span class="flag">--channel</span> <span class="val">production</span> <span class="flag">--fail-on-incompatible</span> <span class="flag">--qr-preview</span><span class="terminal-cursor"></span>`,
+        },
+        {
+          t: 700,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest bundle upload</span> <span class="flag">--channel</span> <span class="val">production</span> <span class="flag">--fail-on-incompatible</span> <span class="flag">--qr-preview</span>\n<span class="ok">✔</span> Compatibility gate passed`,
+          replaceAll: true,
+        },
+        { kind: 'spin', label: 'Validating bundle', ms: 900, done: `<span class="ok">✔</span> Bundle validated  ·  <span class="kw">2.1 MB</span>` },
+        { kind: 'progress', label: 'Uploading delta', size: '340 KB' },
+        { t: 250, html: `\n<span class="ok">✔</span> Published to <span class="val">production</span>` },
+        { t: 250, html: `\n<span class="lock">QR</span> Preview link generated for device testing` },
+        { t: 350, html: `\n` },
+        { t: 300, html: `\n<span class="ok">━━━ Live update rolling out ━━━</span>` },
+      ]
+    }
+
+    function makeScriptBuild() {
+      return [
+        {
+          t: 0,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest build request</span> <span class="flag">com.acme.app</span> <span class="flag">--platform</span> <span class="val">ios</span> <span class="flag">--output-record</span> <span class="val">.capgo/build.json</span><span class="terminal-cursor"></span>`,
+        },
+        {
+          t: 700,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest build request</span> <span class="flag">com.acme.app</span> <span class="flag">--platform</span> <span class="val">ios</span> <span class="flag">--output-record</span> <span class="val">.capgo/build.json</span>\n<span class="ok">✔</span> Platform: <span class="val">iOS</span>`,
+          replaceAll: true,
+        },
+        { t: 250, html: `\n<span class="ok">✔</span> Mode: <span class="val">release</span>` },
+        { t: 300, html: `\n<span class="lock">🔒</span> <span class="ghost">Credentials used only during build, then deleted.</span>` },
+        { t: 350, html: `\n` },
+        { t: 200, html: `\n<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">9c4f7a</span>` },
+        { kind: 'progress', label: 'Uploading project', size: '12.4 MB' },
+        { t: 220, html: `\n<span class="dim">[CapApp]</span> Archive succeeded` },
+        { t: 280, html: `\n<span class="ok">✔</span> Output record saved  ·  <span class="val">.capgo/build.json</span>` },
+        { t: 350, html: `\n` },
+        { t: 300, html: `\n<span class="ok">━━━ Native build completed in 2m 41s ━━━</span>` },
+      ]
+    }
+
+    function makeScript() {
+      if (mode === 'upload') return makeScriptUpload()
+      if (mode === 'build') return makeScriptBuild()
+      return makeScriptRelease()
+    }
+
+    let buf = ''
+    let timer: ReturnType<typeof setTimeout> | null = null
+    let stepIdx = 0
+    let script = makeScript()
+
+    function render() {
+      el!.innerHTML = buf
+      el!.scrollTop = el!.scrollHeight
+    }
+
+    function restart() {
+      gen++
+      const myGen = gen
+      if (timer) clearTimeout(timer)
+      buf = ''
+      stepIdx = 0
+      script = makeScript()
+      render()
+      setTimeout(() => {
+        if (myGen === gen) next()
+      }, 50)
+    }
+
+    function staticFallback() {
+      el!.innerHTML = STATIC[mode]
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      staticFallback()
+      bindTabs(staticFallback)
+      return
+    }
+
+    function runSpin(label: string, doneHtml: string, ms: number, onDone: () => void) {
+      let frame = 0
+      let elapsed = 0
+      const startBuf = buf
+      const myGen = gen
+      function tick() {
+        if (myGen !== gen) return
+        if (paused) {
+          timer = setTimeout(tick, 100)
+          return
+        }
+        const sp = SPINNER[frame % SPINNER.length]
+        buf = startBuf + `\n<span class="kw">${sp}</span> ${label}…`
+        render()
+        frame++
+        elapsed += 80
+        if (elapsed >= ms) {
+          buf = startBuf + `\n${doneHtml}`
+          render()
+          onDone()
+        } else {
+          timer = setTimeout(tick, 80)
+        }
+      }
+      tick()
+    }
+
+    function runSpinner(label: string, size: string, onDone: () => void) {
+      let pct = 0
+      let frame = 0
+      const startBuf = buf
+      const myGen = gen
+      function tick() {
+        if (myGen !== gen) return
+        if (paused) {
+          timer = setTimeout(tick, 100)
+          return
+        }
+        const sp = SPINNER[frame % SPINNER.length]
+        const shown = Math.min(100, Math.round(pct))
+        const filled = Math.round((shown * 24) / 100)
+        const bar = '█'.repeat(filled) + '░'.repeat(24 - filled)
+        buf =
+          startBuf +
+          `\n<span class="kw">${sp}</span> ${label}  <span class="dim">[</span><span class="val">${bar}</span><span class="dim">]</span>  <span class="val">${shown}%</span>`
+        render()
+        frame++
+        pct += Math.max(1.6, (100 - pct) * 0.12)
+        if (pct >= 99.5) {
+          buf = startBuf + `\n<span class="ok">✔</span> Upload complete  ·  <span class="val">${size} / ${size}</span>`
+          render()
+          onDone()
+        } else {
+          timer = setTimeout(tick, 55)
+        }
+      }
+      tick()
+    }
+
+    function next() {
+      const myGen = gen
+      if (paused) {
+        timer = setTimeout(() => {
+          if (myGen === gen) next()
+        }, 150)
+        return
+      }
+      if (stepIdx >= script.length) return
+      const s = script[stepIdx++]
+      if (s.kind === 'progress') {
+        runSpinner(s.label || 'Uploading', s.size || '12.4 MB', () => {
+          if (myGen === gen) next()
+        })
+        return
+      }
+      if (s.kind === 'spin') {
+        runSpin(s.label || 'Working', s.done || '', s.ms || 1000, () => {
+          if (myGen === gen) next()
+        })
+        return
+      }
+      timer = setTimeout(() => {
+        if (myGen !== gen) return
+        if (s.replaceAll) buf = s.html!
+        else buf += s.html ?? ''
+        render()
+        next()
+      }, s.t || 100)
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) paused = true
+      else {
+        const r = el.getBoundingClientRect()
+        if (r.bottom > 0 && r.top < (window.innerHeight || 0)) paused = false
+      }
+    })
+
+    const replay = document.getElementById('demo-replay')
+    if (replay) replay.addEventListener('click', restart)
+
+    function bindTabs(onSwitch: () => void) {
+      const tabRelease = document.getElementById('demo-tab-release')
+      const tabUpload = document.getElementById('demo-tab-upload')
+      const tabBuild = document.getElementById('demo-tab-build')
+      const title = document.getElementById('demo-term-title')
+      function setMode(nextMode: 'release' | 'upload' | 'build') {
+        if (nextMode === mode) return
+        mode = nextMode
+        tabRelease?.classList.toggle('active', nextMode === 'release')
+        tabUpload?.classList.toggle('active', nextMode === 'upload')
+        tabBuild?.classList.toggle('active', nextMode === 'build')
+        if (title) title.textContent = TITLES[nextMode]
+        onSwitch()
+      }
+      tabRelease?.addEventListener('click', () => setMode('release'))
+      tabUpload?.addEventListener('click', () => setMode('upload'))
+      tabBuild?.addEventListener('click', () => setMode('build'))
+    }
+    bindTabs(restart)
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            paused = false
+            if (!started) {
+              started = true
+              const myGen = gen
+              setTimeout(() => {
+                if (myGen === gen) next()
+              }, 300)
+            }
+          } else {
+            paused = true
+          }
+        })
+      },
+      { threshold: 0.25 },
+    )
+    io.observe(el)
+  })()
+</script>
 
 <script>
   document.querySelectorAll<HTMLButtonElement>('[data-cli-mcp-copy]').forEach((button) => {

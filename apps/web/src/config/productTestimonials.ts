@@ -6,7 +6,14 @@ export type ProductTestimonial = {
   rating: number
 }
 
-const defaultAvatar = 'https://ik.imagekit.io/senja/tr:f-jpeg/Avatars/avatar_aOgsMJ-eZ.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657796891741'
+export const DEFAULT_TESTIMONIAL_AVATAR = 'https://ik.imagekit.io/senja/tr:f-jpeg/Avatars/avatar_aOgsMJ-eZ.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657796891741'
+
+const defaultAvatar = DEFAULT_TESTIMONIAL_AVATAR
+
+export function hasRealAvatar(avatar: string | undefined): boolean {
+  if (!avatar) return false
+  return avatar !== DEFAULT_TESTIMONIAL_AVATAR && !avatar.includes('avatar_aOgsMJ-eZ')
+}
 
 const luis: ProductTestimonial = {
   quote: 'Since I started using Capgo everything is faster, and I can give my users the time they deserve without neglecting my daily life.',
@@ -74,7 +81,7 @@ const sergiu: ProductTestimonial = {
 
 export const productTestimonials = {
   liveUpdate: [sergiu, kapil, nate],
-  nativeBuild: [sikafanka, nate],
+  nativeBuild: [sikafanka, mikolaj],
   cli: [nate, noTone, sikafanka],
   mobile: [luis, noTone, kapil],
   plugins: [mikolaj, michael, sergiu],

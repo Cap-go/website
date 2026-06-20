@@ -76,6 +76,12 @@ jobs:
             ${{ runner.os }}-astro-web-
 
       - run: bun install --frozen-lockfile
+      - name: Fetch latest global stats
+        run: |
+          GITHUB_STATS_REFRESH=true bun run fetch:stars
+          WEBSITE_STATS_REFRESH=true bun run fetch:website-stats
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - run: cd apps/web && bun run check
       - run: bun run clean:build-cache
       - run: bun run build:web

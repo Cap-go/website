@@ -324,6 +324,16 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
       </div>
     </section>
 
+    <!-- ============================================ PROOF ============================================ -->
+    <ProductTestimonials
+      variant="builder"
+      eyebrow={copy('native_build_v2_proof_eyebrow')}
+      title={copy('native_build_v2_proof_title')}
+      description={copy('native_build_v2_proof_lead')}
+      testimonials={productTestimonials.nativeBuild}
+      maxItems={2}
+    />
+
     <!-- ============================================ BENTO ============================================ -->
     <section class="section" id="features">
       <div class="shell">
@@ -368,7 +378,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             >
             <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_hw_title')}</span></h3>
             <p class="sub">{copy('native_build_v2_tile_hw_sub')}</p>
-            <div class="more">iOS and Android jobs run on M4 Mac runners — fast Xcode, Gradle, and Fastlane. You don't pick the runner; we do, by platform flag.</div>
+            <div class="more">iOS and Android jobs run on M4 Mac runners with fast Xcode, Gradle, and Fastlane. You don't pick the runner; we do, by platform flag.</div>
           </div>
 
           <div class="tile" data-expandable data-accent="green">
@@ -381,7 +391,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             <p class="sub">{copy('native_build_v2_tile_sec_sub')}</p>
             <div class="more">
               Credentials live locally at <code class="mono">~/.capgo-credentials/credentials.json</code>, are sent only to ephemeral build envs over HTTPS, and are wiped the
-              instant the build ends. Logs stream straight to your terminal — never written to Capgo disk.
+              instant the build ends. Logs stream to your terminal and are never written to Capgo disk.
             </div>
           </div>
 
@@ -395,7 +405,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             <p class="sub">{copy('native_build_v2_tile_asc_sub')}</p>
             <div class="more">
               Default <code class="mono">app_store</code> distribution uploads straight to App Store Connect / TestFlight via Fastlane; Android bundles go to the Play Console. Pick
-              <code class="mono">ad_hoc</code> for internal-only iOS builds — skips ASC validation.
+              <code class="mono">ad_hoc</code> for internal-only iOS builds. Skips ASC validation.
             </div>
           </div>
 
@@ -423,7 +433,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             <p class="sub">{copy('native_build_v2_tile_flavors_sub')}</p>
             <div class="more">
               <code class="mono">--android-flavor production</code> for any flavor your <code class="mono">build.gradle</code> declares. We auto-detect Cordova plugins from
-              <code class="mono">capacitor-cordova-android-plugins/build.gradle</code> — no manual config. Keystore + Play service-account JSON passed by flag.
+              <code class="mono">capacitor-cordova-android-plugins/build.gradle</code>. No manual config. Keystore + Play service-account JSON passed by flag.
             </div>
           </div>
 
@@ -461,7 +471,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     </section>
 
     <!-- ============================================ ONBOARDING WIZARD ============================================ -->
-    <section class="section bg-grid grain" id="onboarding">
+    <section class="section" id="onboarding">
       <div class="shell">
         <div class="section-head section-head--wide">
           <div class="eyebrow eyebrow--green">{copy('native_build_v2_wiz_eyebrow')}</div>
@@ -529,7 +539,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     </section>
 
     <!-- ============================================ ASK AI / MCP ============================================ -->
-    <section class="section bg-grid grain" id="ask-ai">
+    <section class="section" id="ask-ai">
       <div class="shell">
         <div class="section-head section-head--wide">
           <div class="eyebrow eyebrow--violet">{copy('native_build_v2_mcp_eyebrow')}</div>
@@ -601,7 +611,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     </section>
 
     <!-- ============================================ TRUST ============================================ -->
-    <section class="section bg-grid grain" id="trust">
+    <section class="section" id="trust">
       <div class="shell">
         <div class="section-head">
           <div class="eyebrow">{copy('native_build_v2_trust_eyebrow')}</div>
@@ -749,9 +759,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                   ><span class="pain-prompt">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span></span
                 >
                 <span class="row"><span class="dim">[CapApp]</span> Creating App.xcarchive</span>
-                <span class="row"><span class="err">✖ Archive failed — Command CodeSign failed with a nonzero exit code</span></span>
+                <span class="row"><span class="err">✖ Archive failed: Command CodeSign failed with a nonzero exit code</span></span>
                 <span class="row"><span class="err">&nbsp;&nbsp;error: No profile matching 'com.acme.app' found for team ABC123</span></span>
-                <span class="row ai-head"><span class="kw">?</span> Choose AI analysis <span class="ghost">— optional</span></span>
+                <span class="row ai-head"><span class="kw">?</span> Choose AI analysis <span class="ghost">(optional)</span></span>
                 <span class="row" data-menu-selected><span class="ok">✔</span> <span class="val">Capgo AI</span></span>
                 <span class="row menu-extra"><span class="dim">&nbsp;&nbsp;Local AI · write the prompt to a file</span></span>
                 <span class="row menu-extra" data-collapse><span class="dim">&nbsp;&nbsp;Skip</span></span>
@@ -764,7 +774,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
               </div>
             </div>
             <div class="demo-controls aidebug-controls">
-              <span>Optional — only runs if you choose Capgo AI</span>
+              <span>Optional. Only runs if you choose Capgo AI.</span>
               <button class="demo-replay" id="aidebug-replay" type="button">⟲ Replay</button>
             </div>
           </div>
@@ -790,7 +800,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     <!-- ============================================ PRICING (live plans) ============================================ -->
     {
       plans.length > 0 && (
-        <section class="section bg-grid grain" id="pricing">
+        <section class="section" id="pricing">
           <div class="shell">
             <div class="section-head">
               <div class="eyebrow">{copy('native_build_builder_pricing_eyebrow')}</div>
@@ -875,14 +885,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         </section>
       )
     }
-    <ProductTestimonials
-      variant="native"
-      eyebrow="Builder proof"
-      title="Native build work gets simpler when the release record stays in one place"
-      description="Short reviews from teams using Capgo for build, signing, and release workflows around Capacitor apps."
-      testimonials={productTestimonials.nativeBuild}
-    />
-
     <!-- ============================================ FAQ ============================================ -->
     <section class="section" id="faq">
       <div class="shell">
@@ -1054,7 +1056,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       position: absolute;
       inset: 0;
       background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-      background-size: 56px 56px;
+      background-size: 96px 96px;
       mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
       -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
       pointer-events: none;
@@ -4925,7 +4927,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       const STATIC_IOS = `
 <span class="dim">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span>
 <span class="ok">✔</span> Platform: <span class="val">iOS</span>  ·  App: <span class="val">com.acme.app</span>
-<span class="lock">🔒</span> <span class="ghost">Credentials never stored on Capgo servers — used only during build, then deleted.</span>
+<span class="lock">🔒</span> <span class="ghost">Credentials never stored on Capgo servers. Used only during build, then deleted.</span>
 
 <span class="ok">✔</span> Build job created  ·  job_id <span class="kw">9c4f7a</span>
 <span class="ok">✔</span> Project zipped  ·  <span class="kw">12.4 MB</span>
@@ -4945,7 +4947,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       const STATIC_ANDROID = `
 <span class="dim">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">android</span>
 <span class="ok">✔</span> Platform: <span class="val">Android</span>  ·  App: <span class="val">com.acme.app</span>
-<span class="lock">🔒</span> <span class="ghost">Keystore + service account never stored on Capgo servers — used only during build, then deleted.</span>
+<span class="lock">🔒</span> <span class="ghost">Keystore and service account never stored on Capgo servers. Used only during build, then deleted.</span>
 
 <span class="ok">✔</span> Build job created  ·  job_id <span class="kw">b8e2d1</span>
 <span class="ok">✔</span> Project zipped  ·  <span class="kw">9.7 MB</span>
@@ -4984,7 +4986,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             replaceAll: true,
           },
           { t: 250, html: `\n<span class="ok">✔</span> App: <span class="val">com.acme.app</span>` },
-          { t: 250, html: `\n<span class="lock">🔒</span> <span class="ghost">Credentials never stored on Capgo servers — used only during build, then deleted.</span>` },
+          { t: 250, html: `\n<span class="lock">🔒</span> <span class="ghost">Credentials never stored on Capgo servers. Used only during build, then deleted.</span>` },
           { t: 400, html: `\n` },
           { t: 200, html: `\n<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">9c4f7a</span>` },
           { t: 250, html: `\n` },
@@ -5019,7 +5021,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           { t: 250, html: `\n<span class="ok">✔</span> App: <span class="val">com.acme.app</span>` },
           {
             t: 250,
-            html: `\n<span class="lock">🔒</span> <span class="ghost">Keystore + service account never stored on Capgo servers — used only during build, then deleted.</span>`,
+            html: `\n<span class="lock">🔒</span> <span class="ghost">Keystore and service account never stored on Capgo servers. Used only during build, then deleted.</span>`,
           },
           { t: 400, html: `\n` },
           { t: 200, html: `\n<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">b8e2d1</span>` },
@@ -5276,8 +5278,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                 '<span class="ghost dim">  📥 Import existing from this Mac (Keychain + Xcode profiles)</span>',
                 '',
                 '<span class="cmd">?</span> Do you already have an App Store Connect API key (.p8)?',
-                '<span class="ok">❯</span> ✨ No — create one for me <span class="ghost">(guided, opens a window)</span>',
-                '<span class="ghost dim">  ✓  Yes — I have a .p8 file</span>',
+                '<span class="ok">❯</span> ✨ No, create one for me <span class="ghost">(guided, opens a window)</span>',
+                '<span class="ghost dim">  ✓  Yes, I have a .p8 file</span>',
                 '',
                 '<span class="dim">→ </span>Opening guided App Store Connect setup…',
               ],
@@ -5285,14 +5287,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             {
               title: 'Distribution Certificate',
               lines: [
-                '<span class="ok">✔</span> API key created and verified with Apple — Key ID <span class="val">2X9F4ABC3D</span>',
-                '<span class="ok">✓</span> <span class="kw">"Acme" (com.acme.app)</span> — matches your App Store app.',
-                '<span class="ok">✔</span> Distribution certificate created — Expires <span class="val">Jun 2027</span>',
+                '<span class="ok">✔</span> API key created and verified with Apple. Key ID <span class="val">2X9F4ABC3D</span>',
+                '<span class="ok">✓</span> <span class="kw">"Acme" (com.acme.app)</span> matches your App Store app.',
+                '<span class="ok">✔</span> Distribution certificate created. Expires <span class="val">Jun 2027</span>',
               ],
             },
             {
               title: 'Provisioning Profile',
-              lines: ['<span class="ok">✔</span> Provisioning profile created — <span class="kw">"Capgo com.acme.app AppStore"</span>'],
+              lines: ['<span class="ok">✔</span> Provisioning profile created. <span class="kw">"Capgo com.acme.app AppStore"</span>'],
             },
             {
               title: 'Save & Build',
@@ -5322,7 +5324,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                 '<span class="cmd">?</span> Set up Android signing?',
                 '<span class="ok">❯</span> 🆕 Generate a new keystore <span class="ghost">(recommended)</span>',
                 '<span class="ghost dim">  📥 Import an existing keystore</span>',
-                '<span class="ok">✔</span> Keystore generated · <span class="kw">acme-release</span> <span class="ghost">(RSA-2048, node-forge — no JDK)</span>',
+                '<span class="ok">✔</span> Keystore generated · <span class="kw">acme-release</span> <span class="ghost">(RSA-2048, node-forge, no JDK)</span>',
                 '',
                 '<span class="cmd">?</span> Connect Google Play for uploads?',
                 '<span class="ok">❯</span> 🌐 Sign in with Google <span class="ghost">(opens a window)</span>',
@@ -5335,7 +5337,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
               title: 'Play Console linked',
               lines: [
                 '<span class="ok">✔</span> Play Developer ID <span class="kw">5734907884198356768</span> <span class="ghost">(parsed from link)</span>',
-                '<span class="ok">✔</span> Play Console account linked — <span class="kw">Acme Inc</span>',
+                '<span class="ok">✔</span> Play Console account linked. <span class="kw">Acme Inc</span>',
               ],
             },
             {
@@ -5343,7 +5345,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
               lines: [
                 '<span class="ok">✔</span> GCP project selected: <span class="kw">acme-prod</span>',
                 '<span class="ok">✔</span> Android Publisher API enabled',
-                '<span class="ok">✔</span> Service account created — <span class="kw">capgo-builder@acme-prod.iam…</span>',
+                '<span class="ok">✔</span> Service account created. <span class="kw">capgo-builder@acme-prod.iam…</span>',
                 '<span class="ok">✔</span> Invited into Play Console as <span class="val">Release Manager</span>',
               ],
             },
@@ -5948,7 +5950,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           // sends you to the browser — replayed clack-style during the beat below.
           const SEL: IntroPrompt = {
             q: 'Copy your Play Console developer link',
-            opts: ['🎬 Watch the 60s tutorial', '🌐 Open Play Console in your browser', '⏎ Continue — I already have it'],
+            opts: ['🎬 Watch the 60s tutorial', '🌐 Open Play Console in your browser', '⏎ Continue. I already have it'],
             pick: 1,
           }
           const PASTE_Q = 'Paste your Play Console developer account link'
@@ -6118,7 +6120,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         }
         const P2: IntroPrompt = {
           q: 'Do you already have an App Store Connect API key (.p8)?',
-          opts: ['✨ No — create one for me <span class="ghost">(guided, opens a window)</span>', '✓  Yes — I have a .p8 file'],
+          opts: ['✨ No, create one for me <span class="ghost">(guided, opens a window)</span>', '✓  Yes, I have a .p8 file'],
           pick: 0,
         }
         let log = ''
@@ -6184,7 +6186,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           '<span class="row"><span class="dim">$ </span><span class="cmd">bunx @capgo/cli@latest build init</span> <span class="flag">--platform</span> <span class="val">android</span></span>'
         const DETECT = '<span class="row"><span class="ok">◇</span> Project detected · <span class="kw">com.acme.app</span></span>'
         const KEYGEN =
-          '<span class="row"><span class="ok">✔</span> Keystore generated · <span class="kw">acme-release</span> <span class="ghost">(RSA-2048, node-forge — no JDK)</span></span>'
+          '<span class="row"><span class="ok">✔</span> Keystore generated · <span class="kw">acme-release</span> <span class="ghost">(RSA-2048, node-forge, no JDK)</span></span>'
         const P1: IntroPrompt = {
           q: 'Set up Android signing?',
           opts: ['🆕 Generate a new keystore <span class="ghost">(recommended)</span>', '📥 Import an existing keystore'],
@@ -6248,7 +6250,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           ascIntro = null
         }
         const total = PLATFORMS[currentPlatform].content.length
-        const head = `<h4>Step ${i + 1} / ${total} — ${c.title}</h4>`
+        const head = `<h4>Step ${i + 1} / ${total}: ${c.title}</h4>`
         const guided = guidedFor(c)
         if (guided) {
           // Drive the real onboarding the way the CLI actually feels: type the
@@ -6358,7 +6360,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         if (!c) return
         const total = PLATFORMS[currentPlatform].content.length
         const h4 = stage!.querySelector('h4')
-        if (h4) h4.textContent = `Step ${i + 1} / ${total} — ${c.title}`
+        if (h4) h4.textContent = `Step ${i + 1} / ${total}: ${c.title}`
         const body = stage!.querySelector<HTMLElement>('.term-body')
         if (body) {
           const rows = c.lines.map((l, k) => `<span class="row" style="animation-delay:${(k * 0.16).toFixed(2)}s">${l}</span>`).join('')
@@ -6675,6 +6677,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       reveal('.nb #trust .trust-cell', { y: 24, stagger: 0.09 })
 
       // Comparison.
+      reveal('.nb #product-testimonials .proof-grid', { y: 22 })
       reveal('.nb #compare .comp-wrap', { y: 26 })
       reveal('.nb #compare .comp-callout', { y: 18 })
 

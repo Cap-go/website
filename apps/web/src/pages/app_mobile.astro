@@ -1,9 +1,11 @@
 ---
+import '@/styles/mobile-app-product.css'
 import ProductAppExamples from '@/components/ProductAppExamples.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
 import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const title = 'Capgo mobile app | Preview builds and manage live updates on the go'
@@ -71,87 +73,100 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
 ---
 
 <Layout content={content}>
-  <section class="bg-slate-950 pt-12 pb-16 sm:pt-16 lg:pt-20 lg:pb-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div>
-          <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Capgo mobile app</p>
-          <h1 class="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-balance text-white sm:text-6xl lg:text-7xl">Capgo mobile app</h1>
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-pretty text-slate-300 sm:text-xl">
-            Preview builds directly on a real device, share QR tests with teams or users, follow native build status, and manage release decisions from your phone.
-          </p>
-
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+  <div class="ma bg-ad">
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          Capgo mobile app
+        </div>
+        <h1 class="hero-banner" aria-label="Capgo mobile app">
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">Capgo mobile app</span>
+            <span class="hbv-u-rule"></span>
+          </span>
+        </h1>
+        <p class="lead hero-lead">
+          Preview builds directly on a real device, share QR tests with teams or users, follow native build status, and manage release decisions from your phone.
+        </p>
+        <div class="hero-ctas">
+          <div class="store-row">
             {
               storeLinks.map((store) => (
-                <a
-                  href={store.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex w-fit transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400"
-                >
-                  <img src={store.image} alt={store.alt} class="h-14 w-auto sm:h-16" loading="eager" decoding="async" />
+                <a href={store.href} target="_blank" rel="noopener noreferrer">
+                  <img src={store.image} alt={store.alt} loading="eager" decoding="async" />
                 </a>
               ))
             }
           </div>
+          <a class="btn btn-lg btn-ghost" href="#preview">See the app ↓</a>
+        </div>
+        <div class="hero-strip">
+          {
+            highlights.map(([label, text]) => (
+              <div class="hero-strip-cell">
+                <p class="k">{label}</p>
+                <p class="v">{text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
 
-          <div class="mt-10 grid gap-3 sm:grid-cols-3">
-            {
-              highlights.map(([label, text]) => (
-                <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-                  <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">{label}</p>
-                  <p class="mt-2 text-sm leading-6 text-slate-300">{text}</p>
-                </div>
-              ))
-            }
-          </div>
+    <section class="section bg-grid grain" id="preview">
+      <div class="shell">
+        <div class="rv-one">
+          <div class="rv-one-mark">Capgo mobile app</div>
+          <p class="rv-one-line">Scan a preview, test on a real device, and track the release from your phone.</p>
         </div>
 
-        <div class="relative mx-auto w-full max-w-2xl">
-          <div class="grid gap-5 md:grid-cols-[0.82fr_1fr] md:items-center">
-            <div class="mx-auto w-[min(18rem,78vw)] rounded-[2rem] border border-slate-700 bg-slate-900 p-3 shadow-2xl shadow-black/40">
-              <div
-                class="overflow-hidden rounded-[1.5rem] bg-[#162337]"
-                role="img"
-                aria-label="Capgo mobile app preview QR screen"
-                style="aspect-ratio: 9 / 16; background-image: url(/capgo-mobile-preview-qr.webp); background-size: cover; background-position: center;"
-              >
-              </div>
-            </div>
+        <div class="phone-showcase">
+          <div class="phone-frame">
+            <div class="phone-screen" role="img" aria-label="Capgo mobile app preview QR screen" style="background-image: url(/capgo-mobile-preview-qr.webp);"></div>
+          </div>
 
-            <div class="space-y-4">
-              <div class="rounded-lg border border-cyan-300/25 bg-cyan-400/10 p-5">
-                <p class="text-sm font-semibold text-cyan-100">Preview ready</p>
-                <p class="mt-2 text-2xl font-semibold tracking-tight text-white">bundle 1.8.4</p>
-                <p class="mt-2 text-sm leading-6 text-cyan-50/80">Apply this preview, keep it saved for QA, or reset to the production bundle.</p>
+          <div class="phone-cards">
+            <div class="phone-card phone-card--accent">
+              <p class="phone-card-label">Preview ready</p>
+              <p class="phone-card-title">bundle 1.8.4</p>
+              <p class="phone-card-text">Apply this preview, keep it saved for QA, or reset to the production bundle.</p>
+            </div>
+            <div class="phone-card">
+              <div class="phone-card-row">
+                <p class="phone-card-label">Native build</p>
+                <span class="phone-card-badge">success</span>
               </div>
-              <div class="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-                <div class="flex items-center justify-between gap-4">
-                  <p class="text-sm font-semibold text-slate-200">Native build</p>
-                  <span class="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-200 ring-1 ring-emerald-400/25">success</span>
+              <dl class="phone-card-grid">
+                <div>
+                  <dt>Platform</dt>
+                  <dd>iOS</dd>
                 </div>
-                <div class="mt-4 grid grid-cols-2 gap-3 text-sm">
-                  <div>
-                    <p class="text-slate-500">Platform</p>
-                    <p class="mt-1 font-medium text-white">iOS</p>
-                  </div>
-                  <div>
-                    <p class="text-slate-500">Output</p>
-                    <p class="mt-1 font-medium text-white">IPA ready</p>
-                  </div>
+                <div>
+                  <dt>Output</dt>
+                  <dd>IPA ready</dd>
                 </div>
-              </div>
-              <div class="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-                <p class="text-sm font-semibold text-slate-200">Compatibility</p>
-                <p class="mt-2 text-sm leading-6 text-slate-300">Dependency change detected. Review affected channels before shipping OTA.</p>
-              </div>
+              </dl>
+            </div>
+            <div class="phone-card">
+              <p class="phone-card-label">Compatibility</p>
+              <p class="phone-card-text">Dependency change detected. Review affected channels before shipping OTA.</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="cyan"
+      eyebrow={m.mobile_v2_proof_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.mobile_v2_proof_title({}, { locale: Astro.locals.locale })}
+      description={m.mobile_v2_proof_lead({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.mobile}
+      maxItems={2}
+    />
+  </div>
 
   <section class="bg-slate-900 py-16 sm:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -215,13 +230,6 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
     title="Capacitor apps prove the release loop at real scale"
     description="Capgo is built for teams shipping Capacitor apps where real-device validation, fast rollback, and clear release state matter before every production move."
     appIds={appExampleIds}
-  />
-
-  <ProductTestimonials
-    eyebrow="On-device proof"
-    title="Teams use Capgo when releases need real-device testing"
-    description="Short reviews from people using Capgo to preview updates, share test builds, and keep production release decisions moving."
-    testimonials={productTestimonials.mobile}
   />
 
   <section class="bg-slate-900 py-16 sm:py-20">

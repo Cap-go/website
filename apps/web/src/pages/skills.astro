@@ -1,4 +1,5 @@
 ---
+import '@/styles/skills-product.css'
 import Layout from '@/layouts/Layout.astro'
 import CommandCode from '@/components/CommandCode.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -357,85 +358,48 @@ const skillCount = skills.length
 ---
 
 <Layout content={content}>
-  <div class="min-h-screen bg-gray-900">
-    <!-- Hero Section -->
-    <section class="relative py-16 sm:py-24">
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
-        {
-          Array.from({ length: 12 }).map(() => (
-            <div
-              class="absolute h-2 w-2 animate-pulse rounded-full bg-blue-500 opacity-20"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-              }}
-            />
-          ))
-        }
-      </div>
-
-      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl text-center">
-          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-2 text-sm text-blue-100">
-            <span class="h-2 w-2 animate-pulse rounded-full bg-green-400"></span>
-            {skillCount} Skills Available
-          </div>
-
-          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            AI Agent Skills for
-            <span class="bg-linear-to-r from-blue-400 via-cyan-400 to-green-400 bg-clip-text text-transparent"> Capacitor Apps </span>
-          </h1>
-
-          <p class="mx-auto mt-6 max-w-2xl text-xl text-gray-300">
-            Open-source skills that help AI agents build better Capacitor applications with Capgo. Install them in Codex, Claude Code, Cursor, Windsurf, Gemini CLI, and other agent
-            tools.
-          </p>
-
-          <!-- GitHub Link -->
-          <div class="mt-10 flex justify-center gap-4">
-            <a href={repositoryUrl} class="rounded-lg bg-blue-600 px-8 py-3 font-bold text-white transition hover:bg-blue-700"> View on GitHub </a>
-            <a
-              href="https://vercel.com/changelog/introducing-skills-the-open-agent-skills-ecosystem"
-              target="_blank"
-              class="rounded-lg bg-slate-700 px-8 py-3 font-bold text-white transition hover:bg-slate-600"
+  <div class="sk bg-ad">
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          {skillCount} Skills Available
+        </div>
+        <h1 class="hero-banner" aria-label="AI Agent Skills for Capacitor Apps">
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">
+              AI Agent Skills for <span class="hbv-u-gradient">Capacitor Apps</span>
+            </span>
+            <span class="hbv-u-rule"></span>
+          </span>
+        </h1>
+        <p class="lead hero-lead">
+          Open-source skills that help AI agents build better Capacitor applications with Capgo. Install them in Codex, Claude Code, Cursor, Windsurf, Gemini CLI, and other agent
+          tools.
+        </p>
+        <div class="hero-ctas">
+          <div class="hero-cta-buttons">
+            <a class="btn btn-lg btn-primary" href={repositoryUrl}>View on GitHub</a>
+            <a class="btn btn-lg btn-ghost" href="https://vercel.com/changelog/introducing-skills-the-open-agent-skills-ecosystem" target="_blank" rel="noopener noreferrer"
+              >About Skills</a
             >
-              About Skills
-            </a>
           </div>
-
-          <!-- Features Pills -->
-          <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
-            <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              Open Source
-            </div>
-            <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              AI Agent Ready
-            </div>
-            <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              Codex Compatible
-            </div>
-            <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              Claude Plugin Marketplace
-            </div>
-          </div>
+        </div>
+        <div class="hero-meta">
+          {
+            ['Open Source', 'AI Agent Ready', 'Codex Compatible', 'Claude Plugin Marketplace'].map((item) => (
+              <span>
+                <span class="check">✓</span>
+                {item}
+              </span>
+            ))
+          }
         </div>
       </div>
     </section>
+  </div>
 
+  <div class="min-h-screen bg-gray-900">
     <!-- Installation Section -->
     <section id="installation" class="scroll-mt-24 bg-gray-800/50 py-16">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

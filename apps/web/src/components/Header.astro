@@ -439,6 +439,7 @@ const locale = Astro.locals.locale
             {m.login({}, { locale: Astro.locals.locale })}
           </a>
           <a
+            data-guest-auth-link
             href="https://book.capgo.app/demo/"
             target="_blank"
             rel="noopener noreferrer"
@@ -479,6 +480,7 @@ const locale = Astro.locals.locale
     <div class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
       <div class="max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-2xl border border-slate-500/40 bg-slate-800/95 p-3 shadow-2xl shadow-black/45 backdrop-blur-xl">
         <a
+          data-guest-auth-link
           href="https://book.capgo.app/demo/"
           target="_blank"
           rel="noopener noreferrer"
