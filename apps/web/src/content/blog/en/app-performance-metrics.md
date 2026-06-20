@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-20T07:19:49.390Z
-updated_at: 2026-06-20T07:19:50.304Z
+updated_at: 2026-06-20T07:22:27.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/d15a1e3d-fe87-4b24-b95d-6a3b16e8bdfb/app-performance-metrics-performance-mastery.jpg'
 head_image_alt: 'App Performance Metrics: Master Capacitor & Electron in 2026'
 keywords: 'app performance metrics, capacitorjs, electron js, mobile performance, observability'
