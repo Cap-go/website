@@ -460,6 +460,11 @@ const comparisonRows = [
     let mode: 'release' | 'upload' | 'build' = 'release'
     const SPINNER = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
 
+    type ScriptHtmlStep = { t: number; html: string; replaceAll?: boolean }
+    type ScriptSpinStep = { kind: 'spin'; label: string; ms: number; done: string }
+    type ScriptProgressStep = { kind: 'progress'; label: string; size: string }
+    type ScriptStep = ScriptHtmlStep | ScriptSpinStep | ScriptProgressStep
+
     const TITLES = {
       release: 'npx @capgo/cli bundle releaseType',
       upload: 'npx @capgo/cli bundle upload',
@@ -493,7 +498,7 @@ const comparisonRows = [
 <span class="ok">━━━ Native build completed in 2m 41s ━━━</span>`,
     }
 
-    function makeScriptRelease() {
+    function makeScriptRelease(): ScriptStep[] {
       return [
         {
           t: 0,
@@ -512,7 +517,7 @@ const comparisonRows = [
       ]
     }
 
-    function makeScriptUpload() {
+    function makeScriptUpload(): ScriptStep[] {
       return [
         {
           t: 0,
@@ -532,7 +537,7 @@ const comparisonRows = [
       ]
     }
 
-    function makeScriptBuild() {
+    function makeScriptBuild(): ScriptStep[] {
       return [
         {
           t: 0,
@@ -555,7 +560,7 @@ const comparisonRows = [
       ]
     }
 
-    function makeScript() {
+    function makeScript(): ScriptStep[] {
       if (mode === 'upload') return makeScriptUpload()
       if (mode === 'build') return makeScriptBuild()
       return makeScriptRelease()
@@ -564,7 +569,7 @@ const comparisonRows = [
     let buf = ''
     let timer: ReturnType<typeof setTimeout> | null = null
     let stepIdx = 0
-    let script = makeScript()
+    let script: ScriptStep[] = makeScript()
 
     function render() {
       el!.innerHTML = buf
@@ -663,13 +668,13 @@ const comparisonRows = [
       }
       if (stepIdx >= script.length) return
       const s = script[stepIdx++]
-      if (s.kind === 'progress') {
+      if ('kind' in s && s.kind === 'progress') {
         runSpinner(s.label || 'Uploading', s.size || '12.4 MB', () => {
           if (myGen === gen) next()
         })
         return
       }
-      if (s.kind === 'spin') {
+      if ('kind' in s && s.kind === 'spin') {
         runSpin(s.label || 'Working', s.done || '', s.ms || 1000, () => {
           if (myGen === gen) next()
         })
@@ -677,7 +682,7 @@ const comparisonRows = [
       }
       timer = setTimeout(() => {
         if (myGen !== gen) return
-        if (s.replaceAll) buf = s.html!
+        if ('replaceAll' in s && s.replaceAll) buf = s.html
         else buf += s.html ?? ''
         render()
         next()

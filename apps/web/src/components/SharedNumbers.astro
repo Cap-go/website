@@ -2,12 +2,15 @@
 import m from '@/copy/messages'
 import dayjs from 'dayjs'
 import type { WebsiteStatsDisplay } from '@/lib/websiteStats'
+import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
 
 interface Props {
-  stats: WebsiteStatsDisplay
+  stats?: WebsiteStatsDisplay
 }
 
-const { stats } = Astro.props
+const config = Astro.locals.runtimeConfig
+const { stats: statsProp } = Astro.props
+const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.public.baseApiUrl))
 ---
 
 <section class="relative overflow-hidden bg-[#1a1a1a] py-24 sm:py-32">
