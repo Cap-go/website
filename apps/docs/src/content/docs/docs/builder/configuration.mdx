@@ -53,11 +53,11 @@ For CI/CD pipelines, environment variables are usually the most convenient. For 
 | `--apple-key-content <content>` | `APPLE_KEY_CONTENT` | `APPLE_KEY_CONTENT` | — | Base64-encoded App Store Connect API key (`.p8` file) |
 | `--app-store-connect-team-id <id>` | `APP_STORE_CONNECT_TEAM_ID` | `APP_STORE_CONNECT_TEAM_ID` | — | App Store Connect Team ID |
 
-<Aside type="note">
-**Alternative authentication (app-specific password):** Instead of an App Store Connect API key you can upload with an Apple ID + app-specific password. This is the method used by Ionic Appflow, which makes it convenient when migrating from Appflow. API keys remain the recommended option for CI/CD.
+<Aside type="caution" title="Not recommended">
+**App-specific password authentication is discouraged and its use is advised against.** It exists only as a compatibility path for teams migrating from Ionic Appflow (which relied on it). It is tied to a personal Apple ID with no granular permissions, cannot query App Store Connect (so build numbers fall back to a timestamp), and only covers the TestFlight upload itself. Prefer an App Store Connect API key (`.p8`) instead: it is the recommended, more capable, and more secure option for CI/CD.
 </Aside>
 
-#### App-specific password authentication
+#### App-specific password authentication (not recommended)
 
 | CLI Flag | Env Variable | Credential Key | Default | Description |
 |----------|-------------|----------------|---------|-------------|
