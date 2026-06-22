@@ -53,8 +53,20 @@ For CI/CD pipelines, environment variables are usually the most convenient. For 
 | `--apple-key-content <content>` | `APPLE_KEY_CONTENT` | `APPLE_KEY_CONTENT` | — | Base64-encoded App Store Connect API key (`.p8` file) |
 | `--app-store-connect-team-id <id>` | `APP_STORE_CONNECT_TEAM_ID` | `APP_STORE_CONNECT_TEAM_ID` | — | App Store Connect Team ID |
 
-<Aside type="note">
-**Alternative authentication:** You can also use Apple ID + app-specific password instead of API keys. Pass `--apple-id <email>` and `--apple-app-specific-password <password>` (env vars: `APPLE_ID`, `APPLE_APP_SPECIFIC_PASSWORD`). API keys are recommended for CI/CD.
+<Aside type="caution" title="Not recommended">
+**App-specific password authentication is discouraged and its use is advised against.** It exists only as a compatibility path for teams migrating from Ionic Appflow (which relied on it). It is tied to a personal Apple ID with no granular permissions, cannot query App Store Connect (so build numbers fall back to a timestamp), and only covers the TestFlight upload itself. Prefer an App Store Connect API key (`.p8`) instead: it is the recommended, more capable, and more secure option for CI/CD.
+</Aside>
+
+#### App-specific password authentication (not recommended)
+
+| CLI Flag | Env Variable | Credential Key | Default | Description |
+|----------|-------------|----------------|---------|-------------|
+| `--apple-id <email>` | `FASTLANE_USER` | `FASTLANE_USER` | — | Apple ID email of the account that owns the app |
+| `--apple-app-specific-password <password>` | `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` | `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` | — | App-specific password (`xxxx-xxxx-xxxx-xxxx`) generated at [appleid.apple.com](https://appleid.apple.com) |
+| `--apple-app-id <id>` | `APPLE_APP_ID` | `APPLE_APP_ID` | — | Numeric App Store Connect app ID (e.g. `1234567890`) |
+
+<Aside type="caution">
+All three fields are required together. The numeric `APPLE_APP_ID` (found in App Store Connect → your app → App Information → Apple ID) is mandatory: without it fastlane falls back to an interactive 2FA login that cannot complete on the build runner. When this method is used the build number falls back to a timestamp-based value, because App Store Connect is not queried for the latest build number.
 </Aside>
 
 ### iOS Build Settings
@@ -161,6 +173,12 @@ APPLE_KEY_ID="ABC1234567"
 APPLE_ISSUER_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 APPLE_KEY_CONTENT="<base64-encoded .p8 key>"
 APP_STORE_CONNECT_TEAM_ID="TEAM123456"
+
+# Alternative to the App Store Connect API key above: Apple ID + app-specific
+# password (e.g. when migrating from Ionic Appflow). All three are required.
+# FASTLANE_USER="apple-id@example.com"
+# FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD="xxxx-xxxx-xxxx-xxxx"
+# APPLE_APP_ID="1234567890"
 
 # Optional iOS settings
 CAPGO_IOS_SCHEME="App"
