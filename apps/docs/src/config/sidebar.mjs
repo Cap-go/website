@@ -129,7 +129,7 @@ const pluginEntries = [
   ['LLM', 'llm'],
   ['Media Session', 'media-session'],
   ['MQTT', 'mqtt'],
-  ['Mock Location Detector', 'mock-location-detector', [linkItem('iOS setup', '/docs/plugins/mock-location-detector/ios'), linkItem('Android setup', '/docs/plugins/mock-location-detector/android')]],
+  ['Mock Location Detector', 'mock-location-detector'],
   ['Mute', 'mute'],
   ['Native Audio', 'native-audio'],
   ['Native Biometric', 'native-biometric'],
