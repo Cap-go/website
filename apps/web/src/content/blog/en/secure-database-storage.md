@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-25T07:12:53.642Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /blog-images/secure-database-storage.webp
 head_image_alt: >-
   'Secure Database Storage: A Complete Guide for Developers' Capgo blog

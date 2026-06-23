@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-24T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: https://capgo.app/capgo-feature-image.webp
 head_image_alt: "Edge-to-Edge Display in Capacitor Without Plugins Capgo blog illustration"
 keywords: Capacitor, edge-to-edge, Android 15, adjustMarginsForEdgeToEdge, mobile development, native configuration

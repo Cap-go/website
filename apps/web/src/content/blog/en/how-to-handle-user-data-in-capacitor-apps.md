@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-18T04:43:56.186Z
-updated_at: 2026-06-18T10:44:00.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /blog-images/how-to-handle-user-data-in-capacitor-apps.webp
 head_image_alt: "How to Handle User Data in Capacitor Apps Capgo blog illustration"
 keywords: user data, secure storage, data protection, GDPR, CCPA, data retention, permissions management, mobile apps
