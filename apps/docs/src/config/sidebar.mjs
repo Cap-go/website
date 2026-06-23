@@ -197,6 +197,9 @@ const pluginEntries = [
   ['SIM', 'sim'],
   ['Speech Recognition', 'speech-recognition'],
   ['Speech Synthesis', 'speech-synthesis'],
+  ['Stripe', 'stripe'],
+  ['Stripe Identity', 'stripe-identity'],
+  ['Stripe Terminal', 'stripe-terminal'],
   ['SSL Pinning', 'ssl-pinning'],
   section(
     'Social Login',

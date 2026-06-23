@@ -142,6 +142,9 @@ const actionDefinitionRows =
 @capgo/capacitor-pedometer|github.com/Cap-go|Track steps, distance, pace, cadence, and floors with device pedometer sensors|https://github.com/Cap-go/capacitor-pedometer/|Pedometer
 @capgo/capacitor-fast-sql|github.com/Cap-go|High-performance native SQLite with custom protocol for efficient sync operations and IndexedDB replacement|https://github.com/Cap-go/capacitor-fast-sql/|Fast SQL
 @capgo/capacitor-file-compressor|github.com/Cap-go|Capacitor plugin for efficient image compression supporting PNG, JPEG, and WebP formats across iOS, Android, and Web platforms|https://github.com/Cap-go/capacitor-file-compressor/|File Compressor
+@capgo/capacitor-stripe|github.com/Cap-go|Capacitor plugin for Stripe Payment Sheet, Apple Pay, and Google Pay.|https://github.com/Cap-go/capacitor-stripe/|Stripe
+@capgo/capacitor-stripe-identity|github.com/Cap-go|Capacitor plugin for Stripe Identity verification.|https://github.com/Cap-go/capacitor-stripe-identity/|Stripe Identity
+@capgo/capacitor-stripe-terminal|github.com/Cap-go|Capacitor plugin for Stripe Terminal in-person payments.|https://github.com/Cap-go/capacitor-stripe-terminal/|Stripe Terminal
 @capgo/capacitor-speech-synthesis|github.com/Cap-go|Synthesize speech from text with full control over language, voice, pitch, rate, and volume.|https://github.com/Cap-go/capacitor-speech-synthesis/|Speech Synthesis
 @capgo/capacitor-ssl-pinning|github.com/Cap-go|Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android|https://github.com/Cap-go/capacitor-ssl-pinning/|SSL Pinning
 @capgo/capacitor-printer|github.com/Cap-go|Capacitor plugin for printing documents, HTML, PDFs, images and web views|https://github.com/Cap-go/capacitor-printer/|Printer
@@ -288,6 +291,9 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-pedometer': 'Signal',
   '@capgo/capacitor-fast-sql': 'CircleStack',
   '@capgo/capacitor-file-compressor': 'Photo',
+  '@capgo/capacitor-stripe': 'CreditCard',
+  '@capgo/capacitor-stripe-terminal': 'CreditCard',
+  '@capgo/capacitor-stripe-identity': 'ShieldCheck',
   '@capgo/capacitor-speech-synthesis': 'SpeakerWave',
   '@capgo/capacitor-ssl-pinning': 'ShieldCheck',
   '@capgo/capacitor-printer': 'Printer',
@@ -371,7 +377,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-firebase-crashlytics',
     '@capgo/capacitor-firebase-performance',
   ],
-  commerce: ['@capgo/capacitor-native-market', '@revenuecat/purchases-capacitor', '@capgo/native-purchases', '@capgo/capacitor-admob', '@capgo/capacitor-pay'],
+  commerce: ['@capgo/capacitor-native-market', '@revenuecat/purchases-capacitor', '@capgo/native-purchases', '@capgo/capacitor-admob', '@capgo/capacitor-pay', '@capgo/capacitor-stripe', '@capgo/capacitor-stripe-terminal', '@capgo/capacitor-stripe-identity'],
   media: [
     '@capgo/camera-preview',
     '@capgo/capacitor-flash',

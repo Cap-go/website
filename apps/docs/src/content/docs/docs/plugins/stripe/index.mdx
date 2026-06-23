@@ -1,0 +1,51 @@
+---
+title: "@capgo/capacitor-stripe"
+description: "Capacitor plugin for Stripe Payment Sheet, Apple Pay, and Google Pay."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Capacitor plugin for Stripe Payment Sheet, Apple Pay, and Google Pay."
+  actions:
+    - text: Get started
+      link: /docs/plugins/stripe/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-stripe/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Capacitor plugin for Stripe Payment Sheet, Apple Pay, and Google Pay.
+
+## Core Capabilities
+
+- `initialize` - Set the Stripe publishable key and optional Connect account.
+- `createPaymentSheet` - Create a Payment Sheet from your backend client secret.
+- `presentPaymentSheet` - Present the native Stripe Payment Sheet.
+- `updateApplePaySheet` - Update Apple Pay line items after shipping contact selection.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Set the Stripe publishable key and optional Connect account. |
+| `createPaymentSheet` | Create a Payment Sheet from your backend client secret. |
+| `presentPaymentSheet` | Present the native Stripe Payment Sheet. |
+| `updateApplePaySheet` | Update Apple Pay line items after shipping contact selection. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-stripe](https://github.com/Cap-go/capacitor-stripe/).
+
+## Related plugins
+
+- [@capgo/native-purchases](/docs/plugins/native-purchases/) for App Store and Play Store subscriptions
+- [@capgo/capacitor-pay](/docs/plugins/pay/) for wallet-only Apple Pay / Google Pay without Stripe Payment Sheet
