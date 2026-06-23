@@ -18,7 +18,7 @@ next_blog: ''
 
 Revenue does not start with a perfect app. It starts with a useful app, a small group of users, and a purchase flow that helps you learn what people will pay for.
 
-For Capacitor apps, the technical part is straightforward with [`@capgo/native-purchases`](/docs/plugins/native-purchases/). The harder part is deciding what to sell, where to show the paywall, how to price it, and how to get the first users into the funnel.
+For Capacitor apps, the technical part is straightforward with [@capgo/native-purchases](https://capgo.app/plugins/capacitor-native-purchases/). The harder part is deciding what to sell, where to show the paywall, how to price it, and how to get the first users into the funnel.
 
 This guide gives you a practical path from zero revenue to the first meaningful subscription revenue without overbuilding.
 

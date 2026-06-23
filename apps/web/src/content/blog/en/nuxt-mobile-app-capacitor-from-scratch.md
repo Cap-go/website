@@ -515,7 +515,7 @@ You now have a working Nuxt mobile app. Here's what to do next:
 ### Add More Features
 - **Camera:** `bun add @capacitor/camera`
 - **Geolocation:** `bun add @capacitor/geolocation`
-- **Push Notifications:** `bun add @capacitor/push-notifications`
+- **Push Notifications:** `bun add @capacitor/push-notifications` or [@capgo/capacitor-firebase-messaging](https://capgo.app/plugins/capacitor-firebase-messaging/) for Firebase Cloud Messaging on iOS and Android
 - **File System:** `bun add @capacitor/filesystem`
 
 ### Native UI and transitions

@@ -700,7 +700,7 @@ To test your implementation:
 
 The ability to use external payment options for digital goods in iOS apps is a significant change that gives developers more flexibility. While this change currently only applies to apps in the U.S. App Store, it provides an important alternative to Apple's in-app purchase system.
 
-By using Stripe Payment Links with Capacitor, you can quickly implement a streamlined checkout experience while maintaining compliance with Apple's guidelines. This approach also gives you the advantage of Stripe's robust payment infrastructure, lower processing fees (3% vs 30%), and much faster payouts (days instead of months) compared to Apple's in-app purchase system.
+By using Stripe Payment Links with Capacitor, you can quickly implement a streamlined checkout experience while maintaining compliance with Apple's guidelines. For users outside the U.S. where Apple's in-app purchase system still applies, [@capgo/native-purchases](https://capgo.app/plugins/capacitor-native-purchases/) implements StoreKit and Google Play Billing directly. This approach also gives you the advantage of Stripe's robust payment infrastructure, lower processing fees (3% vs 30%), and much faster payouts (days instead of months) compared to Apple's in-app purchase system.
 
 Remember that you'll need to handle all customer support and refund issues directly, as these transactions occur outside of Apple's ecosystem.
 

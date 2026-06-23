@@ -72,9 +72,9 @@ Proper token storage is crucial to safeguard sensitive information. Use platform
 
 For enterprise applications, consider integrating plugins designed for secure storage:
 
--   **Capacitor [Identity Vault](https://ionic.io/products/identity-vault)**: Offers advanced security for sensitive data.
--   **Capacitor Biometrics**: Adds biometric authentication for an extra layer of protection.
--   **Capacitor Secure Preferences**: Ensures secure handling of app preferences and data.
+-   **[@capgo/capacitor-data-storage-sqlite](https://capgo.app/plugins/capacitor-data-storage-sqlite/)**: Encrypted SQLite storage backed by Keychain and Keystore.
+-   **[@capgo/capacitor-native-biometric](https://capgo.app/plugins/capacitor-native-biometric/)**: Biometric unlock for stored credentials.
+-   **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)**: Preserves account state across reinstalls after token revocation.
 
 Finally, avoid embedding sensitive data directly into your app's codebase, as this can expose it to unnecessary risks [\[4\]](https://capacitorjs.com/docs/guides/security). By leveraging these secure storage methods, you can better protect user data and maintain the integrity of your app.
 

@@ -77,7 +77,7 @@ Once you've defined your data collection boundaries, it's crucial to implement m
 
 ### Setting Up Secure Storage
 
-The `@capacitor/secure-storage` plugin uses built-in security features like iOS Keychain and Android Keystore to protect sensitive data [\[1\]](https://capacitorjs.com/docs/guides/storage).
+The `@capacitor/secure-storage` plugin uses built-in security features like iOS Keychain and Android Keystore to protect sensitive data [\[1\]](https://capacitorjs.com/docs/guides/storage). For larger structured datasets, [@capgo/capacitor-data-storage-sqlite](https://capgo.app/plugins/capacitor-data-storage-sqlite/) provides encrypted SQLite storage, and [@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/) can preserve account state across reinstalls. [@capgo/capacitor-privacy-screen](https://capgo.app/plugins/capacitor-privacy-screen/) obscures sensitive UI in the app switcher and recent-apps preview.
 
 ```typescript
 import { SecureStorage } from '@capacitor/secure-storage';

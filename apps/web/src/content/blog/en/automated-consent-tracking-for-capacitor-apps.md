@@ -31,7 +31,7 @@ Automated consent tracking is essential for [Capacitor](https://capacitorjs.com/
     -   **Data Synchronization**: Keep user consent consistent across devices.
 -   **Implementation Steps**:
     
-    1.  Use plugins like `@capacitor/privacy` for managing consent.
+    1.  Use [@capgo/capacitor-app-tracking-transparency](https://capgo.app/plugins/capacitor-app-tracking-transparency/) for iOS ATT prompts and analytics SDKs like [@capgo/capacitor-facebook-analytics](https://capgo.app/plugins/capacitor-facebook-analytics/) or [@capgo/capacitor-gtm](https://capgo.app/plugins/capacitor-gtm/) for consent-gated tracking.
     2.  Build clear and simple consent UI elements.
     3.  [Encrypt and securely store](https://capgo.app/docs/cli/migrations/encryption/) consent data.
     4.  Adjust analytics tracking based on user preferences.

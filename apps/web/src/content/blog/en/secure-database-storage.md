@@ -208,7 +208,7 @@ Minimization is where many teams get their biggest security win for the least en
 
 Store less. Keep it for less time. Copy it to fewer places. If a feature only needs age range, do not store full birth date. If support only needs the last four characters of an identifier, avoid exposing the full field. If test environments do not need live personal data, do not restore production backups into them and call it temporary.
 
-This is also an operational discipline. Retention schedules need enforcement. Old exports need deletion. Downstream systems need review because risk grows every time sensitive fields are replicated into search indexes, caches, data lakes, mobile storage, and ad hoc CSV files. For example, tools such as Capgo's SQLite-based storage plugin for Capacitor can provide app-side persistence, but you still need to decide what should never be stored locally at all.
+This is also an operational discipline. Retention schedules need enforcement. Old exports need deletion. Downstream systems need review because risk grows every time sensitive fields are replicated into search indexes, caches, data lakes, mobile storage, and ad hoc CSV files. For Capacitor apps, [@capgo/capacitor-data-storage-sqlite](https://capgo.app/plugins/capacitor-data-storage-sqlite/) and [@capgo/capacitor-fast-sql](https://capgo.app/plugins/capacitor-fast-sql/) can provide encrypted app-side persistence, but you still need to decide what should never be stored locally at all.
 
 The point of these pillars is not perfection on day one. It is building a storage system that stays defensible after key rotations, staff changes, incident response, backup restores, and product growth. That is where secure database storage usually succeeds or fails.
 
