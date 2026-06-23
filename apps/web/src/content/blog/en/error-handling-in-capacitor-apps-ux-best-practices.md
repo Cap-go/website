@@ -150,7 +150,7 @@ Effective tools simplify error tracking, reporting, and resolution in modern Cap
 
 ### Error Tracking Systems
 
-Error tracking platforms provide detailed insights into app issues. For example, **Sentry**, trusted by millions of developers, offers in-depth error context, including device details, OS versions, app versions, and even the specific code commits causing issues.
+Error tracking platforms provide detailed insights into app issues. For example, **Sentry**, trusted by millions of developers, offers in-depth error context, including device details, OS versions, app versions, and even the specific code commits causing issues. For native crash reporting in Capacitor apps, [@capgo/capacitor-firebase-crashlytics](https://capgo.app/plugins/capacitor-firebase-crashlytics/) complements Sentry with Firebase's release health dashboards.
 
 | Feature | Details |
 | --- | --- |

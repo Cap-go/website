@@ -36,7 +36,7 @@ next_blog: ''
     -   Place the `PrivacyInfo.xcprivacy` file in the correct directory of your project.
     -   Validate it with tools like [Xcode](https://developer.apple.com/xcode/) to avoid errors.
 -   **Tools to simplify the process:**  
-    Use platforms like [Capgo](https://capgo.app/) for automated privacy manifest validation, real-time updates, and error tracking.
+    Use platforms like [Capgo](https://capgo.app/) for automated privacy manifest validation, real-time updates, and error tracking. When your manifest declares tracking or analytics SDKs, [@capgo/capacitor-app-tracking-transparency](https://capgo.app/plugins/capacitor-app-tracking-transparency/) handles iOS ATT prompts and [@capgo/capacitor-firebase-analytics](https://capgo.app/plugins/capacitor-firebase-analytics/) documents Firebase data collection for App Store review.
     
 
 **Stay compliant, protect user privacy, and avoid app store delays by following this guide.**

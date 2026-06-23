@@ -21,7 +21,7 @@ Setting up authentication in mobile apps can be complex, but combining **Supabas
 
 ## Why Use Supabase with Social Login?
 
-**Supabase** provides a robust backend-as-a-service with built-in authentication, while the **@capgo/capacitor-social-login** plugin offers native social authentication across iOS, Android, and web platforms. Together, they provide:
+**Supabase** provides a robust backend-as-a-service with built-in authentication, while the [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/) plugin offers native social authentication across iOS, Android, and web platforms. For tighter Supabase integration, [@capgo/capacitor-supabase](https://capgo.app/plugins/capacitor-supabase/) adds native auth helpers and JWT access. Together, they provide:
 
 - Seamless social authentication
 - Secure token management
@@ -45,6 +45,8 @@ First, install the Capgo Social Login plugin:
 npm install @capgo/capacitor-social-login
 npx cap sync
 ```
+
+See the [Social Login](https://capgo.app/plugins/capacitor-social-login/) and [Supabase](https://capgo.app/plugins/capacitor-supabase/) plugin pages for platform-specific setup.
 
 ## Step 2: Setup Supabase Project
 

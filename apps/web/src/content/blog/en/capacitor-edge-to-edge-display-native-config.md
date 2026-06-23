@@ -165,7 +165,7 @@ After configuring `adjustMarginsForEdgeToEdge`, test your app on:
 
 ### Don't Use Plugins for This
 
-You don't need third-party plugins like `capacitor-edge-to-edge` or similar. The native config handles this cleanly.
+You don't need third-party plugins like `capacitor-edge-to-edge` or similar. The native config handles this cleanly. If you need fine-grained control over system chrome after enabling `adjustMarginsForEdgeToEdge`, [@capgo/capacitor-navigation-bar](https://capgo.app/plugins/capacitor-navigation-bar/) and [@capgo/home-indicator](https://capgo.app/plugins/capacitor-home-indicator/) complement the native config without replacing it.
 
 ### Don't Mix with Manual Implementations
 

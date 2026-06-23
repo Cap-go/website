@@ -149,7 +149,7 @@ This section focuses on how to give users control over tracking and data access,
 
 ### Setting Up Tracking Permissions
 
-To configure App Tracking Transparency (ATT) in your Capacitor app, include the following key in your `Info.plist` file:
+To configure App Tracking Transparency (ATT) in your Capacitor app, use [@capgo/capacitor-app-tracking-transparency](https://capgo.app/plugins/capacitor-app-tracking-transparency/) and include the following key in your `Info.plist` file:
 
 ```xml
 <key>NSUserTrackingUsageDescription</key>
