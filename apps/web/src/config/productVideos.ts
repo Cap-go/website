@@ -4,40 +4,49 @@ export type ProductVideo = {
   description: string
 }
 
+export const productVideoFounder = {
+  eyebrow: 'From Martin',
+  name: 'Martin Donadieu',
+  role: 'Founder, Capgo',
+} as const
+
 export const productVideos = {
   mobileApp: {
     youtubeId: 'rrd61l70G5A',
-    title: 'Test Capgo updates on a real device',
-    description: 'Watch how the Capgo mobile app applies bundle previews, shares QR tests with your team, and keeps native build status visible while you validate a release.',
+    title: 'Why we built the Capgo mobile app',
+    description:
+      'Capgo founder Martin Donadieu on testing bundle previews on real devices, sharing QR tests with your team, and keeping release decisions close when you are away from your laptop.',
   },
   cli: {
     youtubeId: 'LCwaZrCOIGI',
-    title: 'Ship from the Capgo CLI',
-    description: 'See compatibility checks, guarded live-update uploads, native build requests, and MCP automation from the same terminal workflow.',
+    title: 'Why the Capgo CLI matters',
+    description:
+      'Capgo founder Martin Donadieu on shipping Capacitor releases from the terminal, checking compatibility before you push, and keeping native builds in the same workflow.',
   },
   skills: {
     youtubeId: 'M4iWu144Szw',
-    title: 'Use Capgo skills with your AI agent',
-    description: 'See how Capacitor and Capgo skills install in agent tools and guide live updates, plugins, builds, and migrations from natural-language requests.',
+    title: 'Why we open-sourced Capgo skills',
+    description: 'Capgo founder Martin Donadieu on giving AI agents practical Capacitor and Capgo knowledge for live updates, plugins, builds, and migrations.',
   },
   plugins: {
     youtubeId: 'p2hc5pzsHAY',
-    title: 'Explore the Capgo plugin catalog',
-    description: 'See how maintained Capgo plugins cover native capabilities, docs, and production workflows for Capacitor apps.',
+    title: 'Why Capgo maintains production plugins',
+    description:
+      'Capgo founder Martin Donadieu on the native gaps teams hit in production Capacitor apps, and why we keep a maintained plugin catalog instead of leaving you to guess.',
   },
   appflowMigration: {
     youtubeId: '1o2qbkyvlIY',
-    title: 'Migrate from Ionic Appflow to Capgo',
-    description: 'Walk through moving live updates, channels, and release automation off Appflow while keeping your Capacitor app and store credentials under your control.',
+    title: 'Why teams move from Appflow to Capgo',
+    description: 'Capgo founder Martin Donadieu on migrating live updates and release automation while keeping your repo, credentials, and release control in your hands.',
   },
   nativeBuild: {
     youtubeId: 'M_gXaLB-Muc',
-    title: 'Request native iOS and Android builds',
-    description: 'See how Capgo Builder turns a Capacitor project into signed native builds with logs, artifacts, and release records your team can trust.',
+    title: 'Why we built Capgo native builds',
+    description: 'Capgo founder Martin Donadieu on turning Capacitor projects into signed iOS and Android releases without asking you to hand over your App Store credentials.',
   },
   liveUpdate: {
     youtubeId: '7AdzMDR4dKk',
-    title: 'Ship Capgo live updates safely',
-    description: 'See channels, compatibility gates, rollback, and encrypted bundle delivery in a production Capacitor release flow.',
+    title: 'Why Capgo live updates work the way they do',
+    description: 'Capgo founder Martin Donadieu on channels, compatibility checks, rollback, and shipping web bundle changes safely after store approval.',
   },
 } as const satisfies Record<string, ProductVideo>
