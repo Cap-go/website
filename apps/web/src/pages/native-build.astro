@@ -1,6 +1,8 @@
 ---
 import CommandCode from '@/components/CommandCode.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import { Icon } from 'astro-icon/components'
@@ -323,6 +325,14 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         </div>
       </div>
     </section>
+
+    <ProductVideoSection
+      variant="builder"
+      accent="green"
+      youtubeId={productVideos.nativeBuild.youtubeId}
+      title={productVideos.nativeBuild.title}
+      description={productVideos.nativeBuild.description}
+    />
 
     <!-- ============================================ PROOF ============================================ -->
     <ProductTestimonials

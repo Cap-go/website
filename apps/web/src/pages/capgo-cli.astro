@@ -2,6 +2,8 @@
 import '@/styles/cli-product.css'
 import CommandCode from '@/components/CommandCode.astro'
 import ProductAppExamples from '@/components/ProductAppExamples.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
@@ -291,6 +293,8 @@ const comparisonRows = [
       </div>
     </div>
   </section>
+
+  <ProductVideoSection youtubeId={productVideos.cli.youtubeId} title={productVideos.cli.title} description={productVideos.cli.description} />
 
   <section class="bg-white py-16 text-slate-950 sm:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

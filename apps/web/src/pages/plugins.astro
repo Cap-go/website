@@ -1,5 +1,7 @@
 ---
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
 import PluginIcon from '@/components/PluginIcon.astro'
 import { actions, pluginCategories } from '@/config/plugins'
 import { productTestimonials } from '@/config/productTestimonials'
@@ -502,6 +504,9 @@ const content = {
         </div>
       </div>
     </section>
+
+    <ProductVideoSection variant="gray" youtubeId={productVideos.plugins.youtubeId} title={productVideos.plugins.title} description={productVideos.plugins.description} />
+
     <section class="px-6 py-12 lg:px-8">
       <div class="mx-auto max-w-7xl">
         <!-- More Options Section -->
