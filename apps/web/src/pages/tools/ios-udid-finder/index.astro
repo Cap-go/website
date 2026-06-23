@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import ToolCatalog from '@/components/tools/ToolCatalog.astro'
 import ToolFaq from '@/components/tools/ToolFaq.astro'
 import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const title = 'iOS UDID Finder | Get an iPhone or iPad UDID Without a Mac'
 const description = 'Find an iPhone or iPad UDID directly on the device. Download a lightweight profile, install it in Settings, and view the UDID, model, serial, and iOS version.'

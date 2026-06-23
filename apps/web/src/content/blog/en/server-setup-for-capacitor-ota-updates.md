@@ -326,7 +326,7 @@ This backup framework not only protects data but also reinforces earlier securit
 
 A secure and well-structured server setup lies at the heart of reliable Capacitor OTA updates. Ensuring this foundation is solid is crucial for delivering updates seamlessly and efficiently.
 
-Take [Capgo](https://capgo.app), for example. It has successfully facilitated smooth OTA updates for over 5,000 users, enabling near-instant deployment across its entire user base [\[1\]](https://capgo.app/docs/faq).
+Take [Capgo](https://capgo.app), for example. It has successfully facilitated smooth OTA updates for over 5,000 users, enabling near-instant deployment across its entire user base [\[1\]](https://capgo.app/docs/faq/).
 
 ### Key Considerations for OTA Updates
 
@@ -339,9 +339,9 @@ Take [Capgo](https://capgo.app), for example. It has successfully facilitated sm
 
 It’s important to note that OTA updates are limited to web content. Any [native changes](https://capgo.app/plugins/capacitor-native-audio/) still require submission through app stores.
 
-To maintain reliability, robust monitoring and backup systems are indispensable. The Capacitor updater ensures updates are checked and applied during app startup using a background thread, minimizing disruption for users [\[1\]](https://capgo.app/docs/faq).
+To maintain reliability, robust monitoring and backup systems are indispensable. The Capacitor updater ensures updates are checked and applied during app startup using a background thread, minimizing disruption for users [\[1\]](https://capgo.app/docs/faq/).
 
-For efficient [update management](https://capgo.app/docs/getting-started/deploy/), tools like the [Capgo CLI](https://capgo.app/docs/cli/commands) and channel-based distribution allow for streamlined packaging and targeted rollouts. These practices are key to building a resilient and dependable OTA update system.
+For efficient [update management](https://capgo.app/docs/getting-started/deploy/), tools like the [Capgo CLI](https://capgo.app/docs/cli/commands/) and channel-based distribution allow for streamlined packaging and targeted rollouts. These practices are key to building a resilient and dependable OTA update system.
 
 ## FAQs
 

@@ -149,7 +149,7 @@ Despite these advantages, adopting Capgo’s CI/CD workflows requires teams to a
 | **Response Time** | Hours to days | Minutes |
 | **Cost Efficiency** | Variable | From $12/month |
 
-This comparison highlights the trade-offs: traditional deployment methods offer unmatched control, while Capgo’s CI/CD workflows excel in automation, speed, and scalability. In today’s fast-changing security landscape, automated solutions like Capgo’s CI/CD integration with automated security testing[\[11\]](https://capgo.app/docs/getting-started/cicd-integration) are increasingly essential for maintaining strong security practices in dynamic development environments.
+This comparison highlights the trade-offs: traditional deployment methods offer unmatched control, while Capgo’s CI/CD workflows excel in automation, speed, and scalability. In today’s fast-changing security landscape, automated solutions like Capgo’s CI/CD integration with automated security testing[\[11\]](https://capgo.app/docs/getting-started/cicd-integration/) are increasingly essential for maintaining strong security practices in dynamic development environments.
 
 ## Conclusion
 

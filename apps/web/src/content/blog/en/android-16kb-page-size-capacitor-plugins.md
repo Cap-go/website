@@ -20,7 +20,7 @@ Android devices with 16 KB memory pages are rolling out. If a Capacitor plugin (
 
 Important: Starting November 1st, 2025, all new apps and updates to existing apps submitted to Google Play and targeting Android 15+ devices must support 16 KB page sizes on 64-bit devices.
 
-This guide keeps it simple: find the plugin that breaks, check for an easy update, and if the plugin looks unmaintained, ask [Capgo Consulting](/consulting) to fork and maintain it for you.
+This guide keeps it simple: find the plugin that breaks, check for an easy update, and if the plugin looks unmaintained, ask [Capgo Consulting](/consulting/) to fork and maintain it for you.
 
 ## Symptoms on 16 KB Devices
 
@@ -66,7 +66,7 @@ Signs to watch for:
 Your options:
 
 - Replace it with an actively maintained alternative.
-- Or ask [Capgo Consulting](/consulting) to fork and maintain it so your app stays compatible.
+- Or ask [Capgo Consulting](/consulting/) to fork and maintain it so your app stays compatible.
 
 ## Step 6 — Sanity Checks
 
@@ -80,11 +80,11 @@ Before shipping, do quick checks:
 
 - Update: best case — install the latest plugin/app versions and you’re done.
 - Replace: switch to a maintained alternative if one exists.
-- Fork: when you need it working and the plugin isn’t moving, let [Capgo Consulting](/consulting) fork and maintain it for you.
+- Fork: when you need it working and the plugin isn’t moving, let [Capgo Consulting](/consulting/) fork and maintain it for you.
 
 ## Support Bundle (Short and Useful)
 
-Share this to speed up help (with maintainers or [Capgo Consulting](/consulting)):
+Share this to speed up help (with maintainers or [Capgo Consulting](/consulting/)):
 
 - App version/build number
 - Capacitor version
@@ -101,7 +101,7 @@ If 16 KB devices are breaking your app and a plugin isn’t ready, talk to us:
 - We fix it: update, patch, or fork — and keep it maintained.
 - We help you avoid last‑minute rushes as enforcement rolls out.
 
-Tell us which feature is failing and the plugin name (if you know it). We’ll handle the rest. Visit our services page: [Capgo Consulting](/consulting)
+Tell us which feature is failing and the plugin name (if you know it). We’ll handle the rest. Visit our services page: [Capgo Consulting](/consulting/)
 
 ## Keep going from Android 16 KB Page Size: Find the Problem Plugin and What to Do Next
 

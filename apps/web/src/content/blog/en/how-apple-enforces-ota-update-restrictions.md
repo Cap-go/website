@@ -191,7 +191,7 @@ The stakes for compliance are high. Data breaches cost companies an average of $
 
 Navigating Apple's OTA update restrictions requires strict adherence to guidelines and a strong focus on security. Falling short of compliance can result in app rejection or even permanent account suspension [\[3\]](https://patentbusinesslawyer.com/how-to-prevent-app-termination-app-store-compliance-guide-for-developers). To help developers stay on the right track, it’s crucial to understand and implement practices that align with Apple's policies.
 
-Apple's primary rules emphasize that updates must not change the app's core purpose, introduce unauthorized storefronts, or sidestep security measures [\[16\]](https://capgo.app/docs/faq) [\[17\]](https://github.com/Cap-go/capacitor-updater). By following these standards, developers not only maintain compliance but also build user trust and may even position their apps for potential features on the App Store.
+Apple's primary rules emphasize that updates must not change the app's core purpose, introduce unauthorized storefronts, or sidestep security measures [\[16\]](https://capgo.app/docs/faq/) [\[17\]](https://github.com/Cap-go/capacitor-updater). By following these standards, developers not only maintain compliance but also build user trust and may even position their apps for potential features on the App Store.
 
 One effective approach is to implement rigorous testing and staged rollouts. Always validate recovery processes for potential failures and be prepared to pause deployments if any issues arise [\[18\]](https://memfault.com/blog/how-to-test-ota-updates-without-bricking-devices). These steps reduce risks and ensure [smooth updates](https://capgo.app/docs/live-updates/differentials/) for users.
 

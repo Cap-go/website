@@ -55,7 +55,7 @@ Here are the essential tools you'll need for OTA testing:
 
 Start by updating the `capacitor.config.json` file with the appropriate staging server settings and update preferences.
 
-Next, [initialize Capgo configurations](https://capgo.app/docs/cli/commands) by running the following command:
+Next, [initialize Capgo configurations](https://capgo.app/docs/cli/commands/) by running the following command:
 
 ```
 npx @capgo/cli init

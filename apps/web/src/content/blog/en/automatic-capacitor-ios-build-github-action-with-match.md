@@ -24,12 +24,12 @@ Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's wh
 
 ## Recommended for New Builds: Use Capgo Build
 
-> **We now recommend using [Capgo Build with the Capgo CLI](/docs/cli/cloud-build/) for native Capacitor builds.**
+> **We now recommend using [Capgo Build with the Capgo CLI](/docs/builder/) for native Capacitor builds.**
 > This Fastlane Match guide is kept for teams maintaining existing GitHub Actions pipelines, but new iOS builds should use the Capgo CLI so you do not have to maintain Fastlane, Match repositories, Xcode runners, certificates, and upload scripts yourself.
 
 ## Capgo Build for CI/CD by Capgo
 
-Skip the Fastlane Match, Xcode runner, certificate, provisioning profile, and upload-script maintenance. [Capgo Build](/docs/cli/cloud-build/) runs signed native iOS builds from your existing CI/CD pipeline:
+Skip the Fastlane Match, Xcode runner, certificate, provisioning profile, and upload-script maintenance. [Capgo Build](/docs/builder/) runs signed native iOS builds from your existing CI/CD pipeline:
 
 - **Works with your pipeline**: Trigger Capgo Build from GitHub Actions, GitLab CI, Jenkins, or local scripts after your web build and `npx cap sync`.
 - **Signing from CI secrets**: Keep App Store Connect keys, certificates, provisioning profiles, passwords, and team IDs in your own CI secrets.
@@ -42,7 +42,7 @@ Skip the Fastlane Match, Xcode runner, certificate, provisioning profile, and up
 - Includes OTA updates and about 15 native builds per month
 - Extra build minutes are billed by minute through credits
 
-[Set up Capgo Build in CI/CD](/docs/cli/cloud-build/github-actions/)
+[Set up Capgo Build in CI/CD](/docs/builder/github-actions/)
 
 ## Manual Setup Guide
 
@@ -57,7 +57,7 @@ Before continuing with the tutorial…
 -   Make sure you have Fastlane [installed](https://docs.fastlane.tools/) on your development machine.
 -   iOS developer program membership.
 -   Desire to read 😆…
--   A team of many devs, otherwise we recommend to use [fastlane cert](/blog/automatic-capacitor-ios-build-github-action) for simpler workflows.
+-   A team of many devs, otherwise we recommend to use [fastlane cert](/blog/automatic-capacitor-ios-build-github-action/) for simpler workflows.
 
 ## Important about the price
 

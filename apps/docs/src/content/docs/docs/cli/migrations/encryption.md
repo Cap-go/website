@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-This documentation explains how to migrate to the encryption v2 system. Learn more about the encryption v2 system in the [blog post](/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing).
+This documentation explains how to migrate to the encryption v2 system. Learn more about the encryption v2 system in the [blog post](/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/).
 
 ## 1. Create Key Pair
 

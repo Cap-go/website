@@ -306,7 +306,7 @@ To ensure secure deployments, multiple layers of protection are essential. IT Pr
 
 ### App Store Update Rules
 
-While live updates can streamline the process, following app store policies is a must. Both Apple and Google only allow over-the-air (OTA) updates to modify HTML, CSS, and JavaScript files. Any changes to native code still require a new app store submission [\[11\]](https://capgo.app/docs/getting-started/quickstart).
+While live updates can streamline the process, following app store policies is a must. Both Apple and Google only allow over-the-air (OTA) updates to modify HTML, CSS, and JavaScript files. Any changes to native code still require a new app store submission [\[11\]](https://capgo.app/docs/getting-started/quickstart/).
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[10\]](https://capgo.app)
 

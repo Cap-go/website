@@ -37,7 +37,7 @@ Before starting, you'll need to set up:
 
 ## Capgo Build for CI/CD by Capgo
 
-Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capgo Build](/docs/cli/cloud-build/) runs signed native Android builds from your existing CI/CD pipeline:
+Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capgo Build](/docs/builder/) runs signed native Android builds from your existing CI/CD pipeline:
 
 - **Works with your pipeline**: Trigger Capgo Build from GitLab CI, GitHub Actions, Jenkins, or local scripts after your web build and `npx cap sync`.
 - **Signing from CI secrets**: Keep Android keystores, key aliases, passwords, and Play Console service account JSON in your own CI secrets.
@@ -50,7 +50,7 @@ Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capg
 - Includes OTA updates and about 15 native builds per month
 - Extra build minutes are billed by minute through credits
 
-[Set up Capgo Build in CI/CD](/docs/cli/cloud-build/)
+[Set up Capgo Build in CI/CD](/docs/builder/)
 
 ## Manual Setup Guide
 

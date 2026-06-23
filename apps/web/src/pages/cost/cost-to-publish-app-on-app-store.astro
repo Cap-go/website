@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale

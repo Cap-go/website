@@ -664,7 +664,7 @@ Remember, the best way to get great reviews is to build a great app that solves 
 
 ---
 
-*Looking for a way to update your app instantly without waiting for app store approval? Check out [Capgo's live update solution](/docs/getting-started/) for seamless over-the-air updates that keep your app fresh and your users happy.*
+*Looking for a way to update your app instantly without waiting for app store approval? Check out [Capgo's live update solution](/docs/getting-started/quickstart/) for seamless over-the-air updates that keep your app fresh and your users happy.*
 
 ## Keep going from Why App Reviews and Ratings Matter: Success Guide
 

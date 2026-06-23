@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { createLdJsonGraph, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { pluginCountLabel } from '@/config/plugins'
 import type { Thing } from 'schema-dts'

@@ -11,7 +11,7 @@ import { defaultLocale } from '@/services/locale'
 import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
 import { Icon as AstroIcon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { marked } from 'marked'
 
 const locale = Astro.locals.locale ?? defaultLocale

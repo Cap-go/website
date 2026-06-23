@@ -22,6 +22,8 @@ const redirectRows: RedirectRow[] = [
   ['/docs/cli/commands/build/', '/docs/cli/reference/build/', 302],
   ['/docs/tooling/cli/', '/docs/cli/overview/', 302],
   ['/docs/plugin/cloud-mode/getting-started/', '/docs/getting-started/quickstart/', 302],
+  ['/docs/plugin/api', '/docs/plugins/updater/api/', 301],
+  ['/docs/plugin/api/', '/docs/plugins/updater/api/', 301],
   ['/docs/plugin/cloud-mode/auto-update', '/docs/getting-started/add-an-app/', 302],
   ['/docs/plugin/cloud-mode/auto-update/', '/docs/getting-started/add-an-app/', 302],
   ['/docs/plugin/cloud-mode/manual-update', '/docs/getting-started/deploy/', 302],

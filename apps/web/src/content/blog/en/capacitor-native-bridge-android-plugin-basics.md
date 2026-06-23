@@ -289,7 +289,7 @@ Leverage the CPU Profiler to pinpoint performance bottlenecks. Best practices in
 
 ### Streamlining Live Testing and Updates
 
-[Capgo tools](https://capgo.app/docs/cli/commands) can simplify live testing and updates. Use these examples to enhance your workflow:
+[Capgo tools](https://capgo.app/docs/cli/commands/) can simplify live testing and updates. Use these examples to enhance your workflow:
 
 -   **Initialize error tracking**:
     

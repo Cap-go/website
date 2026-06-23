@@ -1245,7 +1245,7 @@ Getting your age rating right is just one part of successful app store submissio
 
 ---
 
-*After your app is approved, keep it updated effortlessly with [Capgo's live update solution](/docs/getting-started/)—push updates to your users without waiting for app store review.*
+*After your app is approved, keep it updated effortlessly with [Capgo's live update solution](/docs/getting-started/quickstart/)—push updates to your users without waiting for app store review.*
 
 ## Keep going from App Store Age Ratings Guide for iOS and Android
 

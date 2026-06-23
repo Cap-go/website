@@ -157,7 +157,7 @@ bunx @capgo/cli@latest build com.example.app --platform ios --submit
 ```
 
 - See everything it does on the [Capgo Build page](/native-build/).
-- Follow the [getting-started guide](/docs/cli/cloud-build/getting-started/) for your first build.
+- Follow the [getting-started guide](/docs/builder/getting-started/) for your first build.
 - New to building from a non-Mac machine? Read [how to build an iOS app from Windows](/blog/build-ios-app-from-windows-capacitor-capgo-build/).
 
 Native builds are included in your Capgo plan, with credit-based billing for extra build minutes. I cannot wait to see what you ship.

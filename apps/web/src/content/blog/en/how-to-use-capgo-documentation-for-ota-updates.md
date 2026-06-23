@@ -28,7 +28,7 @@ next_blog: ''
     -   Use channels like "production" or "beta" for targeted rollouts.
 -   **Advanced Features:** End-to-end encryption, error handling, and CI/CD integration.
 
-Capgo's documentation ([capgo.app/docs](https://capgo.app/docs)) provides step-by-step instructions for setup, security, and troubleshooting. From installation to advanced configurations, it's your go-to guide for seamless updates.
+Capgo's documentation ([capgo.app/docs](https://capgo.app/docs/)) provides step-by-step instructions for setup, security, and troubleshooting. From installation to advanced configurations, it's your go-to guide for seamless updates.
 
 ## [Capgo](https://capgo.app/), CapacitorJs plugin for Live update
 
@@ -42,7 +42,7 @@ Navigating documentation effectively is essential when working with OTA updates.
 
 ### Where to Find the Documentation
 
-You can access Capgo's documentation at [capgo.app/docs](https://capgo.app/docs) [\[1\]](https://github.com/Cap-go/capacitor-updater). It's organized into sections based on specific purposes:
+You can access Capgo's documentation at [capgo.app/docs](https://capgo.app/docs/) [\[1\]](https://github.com/Cap-go/capacitor-updater). It's organized into sections based on specific purposes:
 
 | **Section** | **Purpose** | **Key Topics** |
 | --- | --- | --- |
@@ -128,7 +128,7 @@ Organize your [update channels](https://capgo.app/docs/webapp/channels/) to suit
 | Staging | Pre-release testing | QA team and beta testers |
 | Beta | Feature testing | Early adopters |
 
-To upload an update to a specific channel, use the [Capgo CLI](https://capgo.app/docs/cli/commands):
+To upload an update to a specific channel, use the [Capgo CLI](https://capgo.app/docs/cli/commands/):
 
 ```bash
 npx @capgo/cli upload -c production

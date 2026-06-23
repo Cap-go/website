@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand

@@ -31,6 +31,10 @@ export default defineConfig({
     },
   }),
   redirects: {
+    '/docs/plugin/api/': {
+      status: 301,
+      destination: '/docs/plugins/updater/api/',
+    },
     '/docs/getting-started/': {
       status: 301,
       destination: '/docs/getting-started/quickstart/',

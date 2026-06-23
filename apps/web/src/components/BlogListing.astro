@@ -3,7 +3,7 @@ import Blog from '@/components/Blog.astro'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import type { CollectionEntry } from 'astro:content'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { slug as slugify } from 'github-slugger'
 
 const {

@@ -63,7 +63,7 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater';
 await CapacitorUpdater.setChannel({ channel: 'your-channel' });
 ```
 
-This sets the channel that is used when querying Capgo for updates. [Learn more about the setChannel API](/docs/plugin/api/#setchannel).
+This sets the channel that is used when querying Capgo for updates. [Learn more about the setChannel API](/docs/plugins/updater/api/#setchannel).
 
 ### Instant Channel Switching (v5.34.0+)
 
@@ -334,7 +334,7 @@ For the best user experience when building channel-switching UIs, always use the
 
 - [Capgo Live Updates Documentation](/docs/getting-started/quickstart/)
 - [Channels Documentation](/docs/live-updates/channels/)
-- [Plugin API Reference](/docs/plugin/api/)
+- [Plugin API Reference](/docs/plugins/updater/api/)
 - [Capgo CLI Commands](/docs/cli/commands/)
 
 ## Conclusion

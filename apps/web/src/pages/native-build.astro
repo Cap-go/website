@@ -7,7 +7,7 @@ import { Icon } from 'astro-icon/components'
 import m, { type MessageValues } from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 type Plan = Database['public']['Tables']['plans']['Row']
 

@@ -53,7 +53,7 @@ Here’s what you’ll learn:
 
 Want to learn how to set it up and avoid common mistakes? Keep reading for a step-by-step guide.
 
-## Explore [Capgo](https://capgo.app/plugins)'s Ionic [Capacitor](https://capacitorjs.com/) Live Update Plugin
+## Explore [Capgo](https://capgo.app/plugins/)'s Ionic [Capacitor](https://capacitorjs.com/) Live Update Plugin
 
 **Version Targeting Technical Guide**
 

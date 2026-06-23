@@ -6,7 +6,7 @@ import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import TeamAvatars from '@/components/TeamAvatars.astro'
 import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
@@ -308,7 +308,6 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
       </div>
     </section>
 
-
     <!-- Coverage Boundaries -->
     <section class="bg-gray-800 py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -507,5 +506,4 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
       </div>
     </section>
   </div>
-</Layout>
 </Layout>
