@@ -58,7 +58,7 @@ Configuring SSL pinning in your [Capacitor app](https://capgo.app/capacitor-app/
 
 ### Choosing the Right SSL Pinning Plugin
 
-The first step is selecting a plugin that works well for both iOS and Android while offering strong security features. When comparing plugins, keep these factors in mind:
+The first step is selecting a plugin that works well for both iOS and Android while offering strong security features. For Capacitor apps, [@capgo/capacitor-ssl-pinning](https://capgo.app/plugins/capacitor-ssl-pinning/) pins HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android. When comparing plugins, keep these factors in mind:
 
 -   **Platform Compatibility**: Verify that the plugin functions properly on both iOS and Android devices.
 -   **Certificate Management**: Opt for a plugin that simplifies the process of handling certificates.

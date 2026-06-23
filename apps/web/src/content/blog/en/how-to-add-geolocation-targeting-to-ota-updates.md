@@ -65,7 +65,7 @@ Your app should support both web and native functionalities to enable dynamic OT
 
 ### Setting Up Location Services
 
-To configure the [Capacitor Geolocation plugin](https://capgo.app/plugins/capacitor-nativegeocoder/), follow these steps:
+To configure location services, start with the Capacitor Geolocation API for foreground reads and use [@capgo/capacitor-background-geolocation](https://capgo.app/plugins/capacitor-background-geolocation/) when updates must continue in the background. Follow these steps:
 
 **For iOS:**
 
@@ -89,11 +89,11 @@ npm install @capacitor/geolocation
 npx cap sync
 ```
 
-If you need background location tracking, add:
+If you need background location tracking, add Capgo's background geolocation plugin:
 
 ```bash
-npm install @capacitor-community/background-geolocation
-npx cap update
+bun add @capgo/capacitor-background-geolocation
+bunx cap sync
 ```
 
 Once location services are configured, choose an OTA platform that supports targeted updates based on user location.

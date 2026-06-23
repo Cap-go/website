@@ -20,6 +20,8 @@ next_blog: ''
 
 >> This plugin is now transferred to RevenueCat official repository. Please look at the [official documentation](https://www.revenuecat.com/docs/getting-started/installation/capacitor) for more information.
 
+If you prefer a simpler native API without RevenueCat, [@capgo/native-purchases](https://capgo.app/plugins/capacitor-native-purchases/) implements in-app purchases and subscriptions directly with StoreKit and Google Play Billing.
+
 Capacitor Purchases is a plugin for the Capacitor framework that allows in-app purchases on iOS and Android. It provides a simple and consistent API across multiple platforms, making it easy for developers to implement in-app subscriptions and purchases in their mobile apps.
 
 One of the key features of the Capacitor Purchases plugin is that it integrates with RevenueCat, a platform that provides tools for in-app subscriptions and in-app purchases. RevenueCat simplifies the process of implementing in-app subscriptions and purchases by providing a simple and consistent API across multiple platforms, and automating tasks such as receipt validation and user management.

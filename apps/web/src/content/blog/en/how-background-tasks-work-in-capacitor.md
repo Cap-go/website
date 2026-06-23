@@ -81,7 +81,7 @@ Android also introduces challenges due to manufacturer-specific battery optimiza
 
 ## Setting Up Background Tasks in Capacitor
 
-To enable [background tasks in Capacitor](https://capgo.app/plugins/capacitor-uploader/), you'll need to install specific plugins and tweak native settings for both iOS and Android platforms.
+To enable [background tasks in Capacitor](https://capgo.app/plugins/capacitor-background-task/), you'll need to install specific plugins and tweak native settings for both iOS and Android platforms.
 
 ### Installing and Syncing Required Plugins
 

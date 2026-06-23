@@ -128,7 +128,7 @@ Once these steps are complete, you’re ready to move on to the Plugin Installat
 
 ### Plugin Installation
 
-First, install the plugin and [sync it with Capacitor](https://capgo.app/plugins/capacitor-updater/):
+Then, sync the plugin with your native platforms and see the [@capgo/capacitor-firebase-crashlytics](https://capgo.app/plugins/capacitor-firebase-crashlytics/) plugin page for the full API reference:
 
 ```bash
 npm install @capgo/capacitor-firebase-crashlytics && npx cap sync

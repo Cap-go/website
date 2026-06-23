@@ -481,11 +481,12 @@ In other words: **Capacitor is the bridge between web-native AI tooling and mobi
 
 Most AI apps need some native capabilities:
 
-* Camera access (scan, OCR, image input)
-* Microphone and audio session management (voice)
-* Push notifications
-* Background fetch / background tasks (limited, but important)
-* Share sheets, deep links, biometrics
+* Camera access (scan, OCR, image input) — [@capgo/camera-preview](https://capgo.app/plugins/camera-preview/) and [@capgo/capacitor-document-scanner](https://capgo.app/plugins/capacitor-document-scanner/)
+* Microphone and audio session management (voice) — [@capgo/capacitor-speech-recognition](https://capgo.app/plugins/capacitor-speech-recognition/) and [@capgo/capacitor-audiosession](https://capgo.app/plugins/capacitor-audiosession/)
+* On-device LLM inference — [@capgo/capacitor-llm](https://capgo.app/plugins/capacitor-llm/)
+* Push notifications — [@capgo/capacitor-firebase-messaging](https://capgo.app/plugins/capacitor-firebase-messaging/)
+* Background fetch / background tasks (limited, but important) — [@capgo/capacitor-background-task](https://capgo.app/plugins/capacitor-background-task/)
+* Share sheets, deep links, biometrics — [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/) and [@capgo/capacitor-native-biometric](https://capgo.app/plugins/capacitor-native-biometric/)
 
 With Capacitor, you start web-first and add native plugins only where justified. That keeps your app maintainable and your team focused.
 
@@ -511,7 +512,8 @@ Capacitor’s sweet spot is web-first UX with native escape hatches. That includ
 If you need on-device capabilities (OCR, face detection, speech recognition, custom model inference), the practical pattern is:
 
 * keep your product UI and orchestration in TypeScript
-* implement the device compute in Swift/Kotlin as a Capacitor plugin
+* use Capgo plugins such as [@capgo/capacitor-llm](https://capgo.app/plugins/capacitor-llm/) for on-device inference, [@capgo/capacitor-speech-recognition](https://capgo.app/plugins/capacitor-speech-recognition/) for voice input, and [@capgo/capacitor-document-scanner](https://capgo.app/plugins/capacitor-document-scanner/) for OCR workflows
+* implement any remaining device compute in Swift/Kotlin as a Capacitor plugin
 * expose a small, stable JS API (input in, output out)
 
 This approach is often *cleaner* than trying to force everything into one cross-platform abstraction, because the device AI code is inherently platform-specific anyway (different accelerators, different OS APIs, different constraints).

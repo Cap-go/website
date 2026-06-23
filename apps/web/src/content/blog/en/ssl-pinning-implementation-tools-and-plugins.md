@@ -22,7 +22,7 @@ next_blog: ''
 -   **Top tools for implementation**:
     -   **[TrustKit](https://github.com/datatheorem/TrustKit)**: Supports both iOS and Android, automates certificate management.
     -   **OkHttp**: For Android, manual certificate handling.
-    -   **[Capacitor](https://capacitorjs.com/) Plugin**: `@aalzehla/capacitor-ssl-pinning` for apps built with Capacitor.
+    -   **[Capacitor](https://capacitorjs.com/) Plugin**: [@capgo/capacitor-ssl-pinning](https://capgo.app/plugins/capacitor-ssl-pinning/) for apps built with Capacitor.
 -   **Implementation types**:
     -   **Certificate Pinning**: High security but requires updates for certificate changes.
     -   **Public Key Pinning**: Less maintenance, only needs updates for key changes.
@@ -66,7 +66,7 @@ Capacitor apps also have dedicated plugins designed to handle SSL pinning effect
 
 ![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682a44fe5642a17d106eb21b/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-For Capacitor apps, the `@aalzehla/capacitor-ssl-pinning` plugin is a standout option. This plugin integrates seamlessly by leveraging native configuration files like Android's `network_security_config.xml` and iOS's `Info.plist` for certificate validation [\[5\]](https://www.npmjs.com/package/%40aalzehla%2Fcapacitor-ssl-pinning).
+For Capacitor apps, [@capgo/capacitor-ssl-pinning](https://capgo.app/plugins/capacitor-ssl-pinning/) is the recommended option. This plugin integrates seamlessly by pinning HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android.
 
 ### Tool Comparison
 

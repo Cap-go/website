@@ -100,7 +100,7 @@ The focus should be on performing tasks in short, periodic bursts instead of run
 
 The **`capacitor.config.ts`** file plays a central role in optimizing background tasks. One key setting is the `interval` parameter, which controls how often your background tasks run. To ensure compatibility across platforms, make sure your intervals align with the minimum requirements set by the operating system.
 
-When using the [Background Geolocation plugin](https://capgo.app/plugins/capacitor-nativegeocoder/), the configuration settings can significantly impact resource usage. For example:
+When using the [@capgo/capacitor-background-geolocation](https://capgo.app/plugins/capacitor-background-geolocation/) plugin for location-aware background work, the configuration settings can significantly impact resource usage. For periodic sync tasks that do not need continuous GPS, [@capgo/capacitor-background-task](https://capgo.app/plugins/capacitor-background-task/) offers Expo-style task registration on iOS and Android. For example:
 
 -   Set `desiredAccuracy` to a high level only when absolutely necessary.
 -   Use a `distanceFilter` to limit updates, triggering them only when the user moves beyond a specified distance. This reduces unnecessary location updates and helps save battery.

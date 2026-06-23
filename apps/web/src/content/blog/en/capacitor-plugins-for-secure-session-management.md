@@ -334,7 +334,7 @@ The developer experience with these plugins is influenced by their documentation
 
 ### Real-World Application
 
-For enterprise-level security needs, solutions like Identity Vault and Capgo provide robust features and comprehensive support. On the other hand, community-driven plugins are better suited for smaller projects with less demanding security requirements.
+For enterprise-level security needs, solutions like Identity Vault and Capgo provide robust features and comprehensive support. For encrypted account persistence, [@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/) securely stores account data with AES-256 encryption on iOS Keychain and Android Keystore. On the other hand, community-driven plugins are better suited for smaller projects with less demanding security requirements.
 
 ## Recommendations
 
