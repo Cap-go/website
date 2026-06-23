@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T05:05:50.854Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T21:13:09.000Z
 head_image: /blog-images/how-to-optimize-background-tasks-in-capacitor.webp
 head_image_alt: "How to Optimize Background Tasks in Capacitor Capgo blog illustration"
 keywords: Capacitor, background tasks, mobile optimization, performance, battery efficiency

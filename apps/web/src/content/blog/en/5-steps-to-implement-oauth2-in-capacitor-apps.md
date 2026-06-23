@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-27T12:26:34.111Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T21:13:09.000Z
 head_image: /blog-images/5-steps-to-implement-oauth2-in-capacitor-apps.webp
 head_image_alt: "5 Steps to Implement OAuth2 in Capacitor Apps Capgo blog illustration"
 keywords: OAuth2, Capacitor, authentication, mobile apps, security, token storage, PKCE, app integration
