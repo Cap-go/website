@@ -2,6 +2,8 @@
 import '@/styles/skills-product.css'
 import Layout from '@/layouts/Layout.astro'
 import CommandCode from '@/components/CommandCode.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
@@ -483,6 +485,8 @@ const skillCount = skills.length
         </div>
       </div>
     </section>
+
+    <ProductVideoSection variant="gray" youtubeId={productVideos.skills.youtubeId} title={productVideos.skills.title} description={productVideos.skills.description} />
 
     <!-- Plugin Groups -->
     <section class="py-16">

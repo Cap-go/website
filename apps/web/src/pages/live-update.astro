@@ -1,6 +1,8 @@
 ---
 import '@/styles/lu-product.css'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
@@ -263,6 +265,14 @@ const featureTiles = [
         </div>
       </div>
     </section>
+
+    <ProductVideoSection
+      variant="builder"
+      accent="blue"
+      youtubeId={productVideos.liveUpdate.youtubeId}
+      title={productVideos.liveUpdate.title}
+      description={productVideos.liveUpdate.description}
+    />
 
     <!-- PROOF -->
     <ProductTestimonials

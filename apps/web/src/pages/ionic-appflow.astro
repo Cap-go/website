@@ -1,5 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
@@ -223,6 +225,13 @@ const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
           <p class="text-sm text-gray-400" set:html={m.appflow_migration_stuck({}, { locale })} />
         </div>
       </div>
+
+      <ProductVideoSection
+        variant="gray"
+        youtubeId={productVideos.appflowMigration.youtubeId}
+        title={productVideos.appflowMigration.title}
+        description={productVideos.appflowMigration.description}
+      />
 
       <!-- Enterprise Plugins -->
       <div class="mb-16">
