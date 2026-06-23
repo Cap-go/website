@@ -103,7 +103,7 @@ Plugin Share Target|share target plugin for receiving shared content|docs/plugin
 Plugin SIM|SIM card information plugin|docs/plugins/sim/**
 Plugin Social Login|social authentication plugin for Google, Apple, Facebook login|docs/plugins/social-login/**
 Plugin Speech Recognition|speech-to-text recognition plugin|docs/plugins/speech-recognition/**
-Plugin Stripe|Stripe Payment Sheet, Apple Pay, and Google Pay plugin|docs/plugins/stripe/**
+Plugin Stripe|Stripe Payment Sheet, Apple Pay, and Google Pay plugin|docs/plugins/stripe-pay/**
 Plugin Stripe Identity|Stripe Identity verification plugin|docs/plugins/stripe-identity/**
 Plugin Stripe Terminal|Stripe Terminal in-person payments plugin|docs/plugins/stripe-terminal/**
 Plugin Speech Synthesis|text-to-speech synthesis plugin|docs/plugins/speech-synthesis/**

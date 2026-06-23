@@ -1,14 +1,14 @@
 ---
 locale: en
 ---
-# Using @capgo/capacitor-stripe
+# Using @capgo/capacitor-stripe-pay
 
 Capacitor plugin for Stripe Payment Sheet, Apple Pay, and Google Pay.
 
 ## Install
 
 ```bash
-bun add @capgo/capacitor-stripe
+bun add @capgo/capacitor-stripe-pay
 bunx cap sync
 ```
 
@@ -21,8 +21,8 @@ bunx cap sync
 
 ## Full Reference
 
-- GitHub: https://github.com/Cap-go/capacitor-stripe/
-- Docs: /docs/plugins/stripe/
+- GitHub: https://github.com/Cap-go/capacitor-stripe-pay/
+- Docs: /docs/plugins/stripe-pay/
 
 ## Related plugins
 
