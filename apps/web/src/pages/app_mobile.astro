@@ -123,7 +123,32 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
 
         <div class="phone-showcase">
           <div class="phone-frame">
-            <div class="phone-screen" role="img" aria-label="Capgo mobile app preview QR screen" style="background-image: url(/capgo-mobile-preview-qr.webp);"></div>
+            <div class="phone-screen">
+              <img
+                id="capgo-mobile-preview-demo"
+                src="/capgo-mobile-preview-demo.webp"
+                data-poster="/capgo-mobile-preview-demo-poster.webp"
+                alt="Screen recording of the Capgo mobile app previewing a bundle on a real device"
+                width="720"
+                height="1280"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <script is:inline>
+              ;(() => {
+                const img = document.getElementById('capgo-mobile-preview-demo')
+                if (!img) return
+                const demoSrc = '/capgo-mobile-preview-demo.webp'
+                const posterSrc = img.dataset.poster ?? '/capgo-mobile-preview-demo-poster.webp'
+                const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+                const apply = () => {
+                  img.src = mq.matches ? posterSrc : demoSrc
+                }
+                apply()
+                mq.addEventListener('change', apply)
+              })()
+            </script>
           </div>
 
           <div class="phone-cards">
