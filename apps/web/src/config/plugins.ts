@@ -63,6 +63,7 @@ const actionDefinitionRows =
 @capgo/capacitor-nativegeocoder|github.com/Cap-go|Convert addresses to coordinates and coordinates to addresses using native geocoding|https://github.com/Cap-go/capacitor-nativegeocoder/|Native Geocoder
 @capgo/capacitor-inappbrowser|github.com/Cap-go|Open web pages in a customizable in-app browser without leaving your application|https://github.com/Cap-go/capacitor-inappbrowser/|In App Browser
 @capgo/capacitor-mqtt|github.com/Cap-go|MQTT support for real-time messaging across iOS, Android, and Web.|https://github.com/Cap-go/capacitor-mqtt/|MQTT
+@capgo/capacitor-mock-location-detector|github.com/Cap-go|Detect simulated GPS locations and developer tooling that enables spoofing apps|https://github.com/Cap-go/capacitor-mock-location-detector/|Mock Location Detector
 @capgo/capacitor-mute|github.com/Cap-go|Detect device mute switch state for iOS devices to handle audio playback appropriately|https://github.com/Cap-go/capacitor-mute/|Mute
 @capgo/capacitor-native-audio|github.com/Cap-go|Play short audio files with low latency using native audio engine for games and apps|https://github.com/Cap-go/capacitor-native-audio/|Native Audio
 @capgo/capacitor-shake|github.com/Cap-go|Detect shake gestures on device for triggering actions like undo or feedback|https://github.com/Cap-go/capacitor-shake/|Shake
@@ -209,6 +210,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-nativegeocoder': 'MapPin',
   '@capgo/capacitor-inappbrowser': 'GlobeAlt',
   '@capgo/capacitor-mqtt': 'Signal',
+  '@capgo/capacitor-mock-location-detector': 'MapPin',
   '@capgo/capacitor-mute': 'SpeakerXMark',
   '@capgo/capacitor-native-audio': 'SpeakerWave',
   '@capgo/capacitor-shake': 'DevicePhoneMobile',
@@ -336,8 +338,9 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-social-login',
     '@capgo/capacitor-passkey',
     '@capgo/capacitor-app-attest',
-    '@capgo/capacitor-recaptcha',
-    '@capgo/capacitor-verisoul',
+    '@capgo/capacitor-is-root',
+    '@capgo/capacitor-mock-location-detector',
+    '@capgo/capacitor-privacy-screen',
     '@capgo/capacitor-is-root',
     '@capgo/capacitor-privacy-screen',
     '@capgo/capacitor-persistent-account',
@@ -447,8 +450,9 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-pretty-toast',
     '@capgo/capacitor-live-activities',
     '@capgo/capacitor-widget-kit',
-  ],
-  location: [
+    '@capgo/capacitor-background-geolocation',
+    '@capgo/capacitor-mock-location-detector',
+    '@capgo/capacitor-launch-navigator',
     '@capgo/capacitor-nativegeocoder',
     '@capgo/capacitor-background-geolocation',
     '@capgo/capacitor-launch-navigator',
