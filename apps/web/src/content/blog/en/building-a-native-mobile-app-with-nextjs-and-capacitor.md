@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2026-06-23T00:00:00.000Z
+updated_at: 2026-06-23T19:49:03.000Z
 head_image: /next_capgo.webp
 head_image_alt: "Convert Your Next.js App to iOS & Android with Capacitor 8 Capgo blog illustration"
 keywords: Next.js 15, Capacitor 8, convert web app to mobile, iOS, Android, mobile app development, static export, native plugins

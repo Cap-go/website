@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-15T00:00:00.000Z
-updated_at: 2026-06-23T00:00:00.000Z
+updated_at: 2026-06-23T19:49:03.000Z
 head_image: /next_capgo.webp
 head_image_alt: "Build a Next.js Mobile App from Scratch with Capacitor 8 Capgo blog illustration"
 keywords: Next.js 15, Capacitor 8, mobile app from scratch, iOS development, Android development, React mobile app, native plugins, Tailwind CSS

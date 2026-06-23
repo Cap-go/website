@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-03T00:00:00.000Z
-updated_at: 2026-06-23T00:00:00.000Z
+updated_at: 2026-06-23T19:49:03.000Z
 head_image: /nuxt_capgo.webp
 head_image_alt: "Convert Your Nuxt App to iOS & Android with Capacitor 8 Capgo blog illustration"
 keywords: Nuxt 4, Capacitor 8, convert web app to mobile, iOS, Android, mobile app development, static generation, native plugins, Vue
