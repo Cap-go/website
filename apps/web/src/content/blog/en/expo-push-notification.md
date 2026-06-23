@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-23T08:26:36.407Z
-updated_at: 2026-06-23T08:26:40.370Z
+updated_at: 2026-06-23T08:29:27.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/dae89c53-9e9e-43c0-b2e0-ac2d1e922f96/expo-push-notification-guide-2026.jpg'
 head_image_alt: Master Expo Push Notification Guide 2026
 keywords: 'expo push notification, react native, expo, mobile development, push notifications'
