@@ -176,7 +176,7 @@ Capgo’s performance metrics further highlight its effectiveness:
 -   **114ms average download time** for 5MB bundles [\[11\]](https://capgo.app)
 -   **434ms average API response time** globally [\[11\]](https://capgo.app)
 
-Capgo's system is specifically designed to address Apple’s interpreter-only restriction for iOS updates [\[12\]](https://capgo.app/docs/faq), while also meeting Play Store requirements [\[12\]](https://capgo.app/docs/faq). By integrating these rules, developers can achieve seamless and compliant OTA updates across multiple regions, ensuring a smooth experience for users worldwide.
+Capgo's system is specifically designed to address Apple’s interpreter-only restriction for iOS updates [\[12\]](https://capgo.app/docs/faq/), while also meeting Play Store requirements [\[12\]](https://capgo.app/docs/faq/). By integrating these rules, developers can achieve seamless and compliant OTA updates across multiple regions, ensuring a smooth experience for users worldwide.
 
 ## Regional Laws and Regulations
 

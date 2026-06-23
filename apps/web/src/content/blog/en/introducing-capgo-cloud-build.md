@@ -161,7 +161,7 @@ npx @capgo/cli@latest build credentials clear
 - Keystore store password
 - Optional: Google Play service account JSON (for automated submission)
 
-See our [credentials documentation](/docs/cli/cloud-build/credentials/) for detailed setup instructions.
+See our [credentials documentation](/docs/builder/credentials/) for detailed setup instructions.
 
 ## Privacy & Security First
 
@@ -224,7 +224,7 @@ In CI environments, you can either:
 
 **Option 2: Provide credentials inline** (for advanced use cases)
 
-You can also pass credentials directly in environment variables - see the [credentials documentation](/docs/cli/cloud-build/credentials/) for details.
+You can also pass credentials directly in environment variables - see the [credentials documentation](/docs/builder/credentials/) for details.
 
 No need to configure Mac runners, manage build caches, or install SDKs in your CI environment. Capgo handles all of that in the cloud.
 
@@ -267,12 +267,12 @@ Need help getting started? [Join our Discord](https://discord.com/invite/VnYRvBf
 
 Ready to build without the hassle? Check out the [Cloud Build documentation](/docs/cli/reference/build/) to learn more about:
 
-- [Setting up credentials](/docs/cli/cloud-build/credentials/) - iOS certificates and Android keystores
-- [Getting started guide](/docs/cli/cloud-build/getting-started/) - Your first build in 5 minutes
-- [iOS-specific setup](/docs/cli/cloud-build/ios/) - Certificates, provisioning profiles, and App Store Connect
-- [Android-specific setup](/docs/cli/cloud-build/android/) - Keystores and Play Store configuration
-- [CI/CD integration](/docs/cli/cloud-build/getting-started/#cicd-integration) - Automate builds in your pipeline
-- [Troubleshooting](/docs/cli/cloud-build/troubleshooting/) - Common issues and solutions
+- [Setting up credentials](/docs/builder/credentials/) - iOS certificates and Android keystores
+- [Getting started guide](/docs/builder/getting-started/) - Your first build in 5 minutes
+- [iOS-specific setup](/docs/builder/ios/) - Certificates, provisioning profiles, and App Store Connect
+- [Android-specific setup](/docs/builder/android/) - Keystores and Play Store configuration
+- [CI/CD integration](/docs/builder/getting-started/#cicd-integration) - Automate builds in your pipeline
+- [Troubleshooting](/docs/builder/troubleshooting/) - Common issues and solutions
 
 ## What's Next?
 
@@ -292,10 +292,10 @@ Happy building!
 ## Learn More
 
 - [Cloud Build Overview](/docs/cli/reference/build/)
-- [Credentials Setup Guide](/docs/cli/cloud-build/credentials/)
-- [Getting Started with Cloud Build](/docs/cli/cloud-build/getting-started/)
-- [iOS Build Configuration](/docs/cli/cloud-build/ios/)
-- [Android Build Configuration](/docs/cli/cloud-build/android/)
+- [Credentials Setup Guide](/docs/builder/credentials/)
+- [Getting Started with Cloud Build](/docs/builder/getting-started/)
+- [iOS Build Configuration](/docs/builder/ios/)
+- [Android Build Configuration](/docs/builder/android/)
 - [Join our Discord](https://discord.com/invite/VnYRvBfgA6)
 
 ## Keep going from Introducing Capgo Cloud Build - Build Native Apps Without the Hassle

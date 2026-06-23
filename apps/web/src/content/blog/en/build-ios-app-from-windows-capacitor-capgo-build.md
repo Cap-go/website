@@ -117,8 +117,8 @@ To build iOS you need signing material:
 
 If you still need to generate these files, follow the Capgo documentation:
 
-- [Managing Credentials](/docs/cli/cloud-build/credentials/) (what to save and how)
-- [How to Get iOS Certificates and Provisioning Profiles](/docs/cli/cloud-build/ios/#how-to-get-ios-certificates-and-provisioning-profiles)
+- [Managing Credentials](/docs/builder/credentials/) (what to save and how)
+- [How to Get iOS Certificates and Provisioning Profiles](/docs/builder/ios/#how-to-get-ios-certificates-and-provisioning-profiles)
 
 The easiest path is: create/export these once (often using any available Mac, a teammate, or a one-time rental), then reuse them from Windows for every subsequent build.
 

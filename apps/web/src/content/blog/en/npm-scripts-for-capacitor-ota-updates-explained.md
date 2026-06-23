@@ -46,7 +46,7 @@ Here's how to configure npm scripts to manage [Capacitor OTA updates](https://ca
 
 ### Installing Required Packages
 
-First, install the required packages. The [Capgo CLI tool](https://capgo.app/docs/cli/commands) simplifies this process with built-in commands:
+First, install the required packages. The [Capgo CLI tool](https://capgo.app/docs/cli/commands/) simplifies this process with built-in commands:
 
 ```bash
 npm install @capgo/cli --save-dev

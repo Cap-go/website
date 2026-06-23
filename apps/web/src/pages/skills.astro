@@ -2,7 +2,7 @@
 import '@/styles/skills-product.css'
 import Layout from '@/layouts/Layout.astro'
 import CommandCode from '@/components/CommandCode.astro'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand

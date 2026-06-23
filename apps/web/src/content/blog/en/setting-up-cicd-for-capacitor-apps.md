@@ -193,7 +193,7 @@ Integrating Capgo into your workflow enhances your CI/CD process by enabling pos
 
 ### Capgo Pipeline Configuration
 
-First, install the [Capgo CLI](https://capgo.app/docs/cli/commands) in your pipeline environment:
+First, install the [Capgo CLI](https://capgo.app/docs/cli/commands/) in your pipeline environment:
 
 ```yaml
 steps:

@@ -674,7 +674,7 @@ function SubscriptionOffer() {
       </div>
 
       <div className="legal-links">
-        <a href="/privacy">Privacy Policy</a> |
+        <a href="/privacy/">Privacy Policy</a> |
         <a href="/terms">Terms of Service</a>
       </div>
     </div>
@@ -1169,7 +1169,7 @@ Good luck with your app launch! Remember, even if you get rejected, it's a learn
 
 ---
 
-*Need help with implementing live updates after your app is approved? Check out [Capgo's live update solution](/docs/getting-started/) for seamless app updates without app store review.*
+*Need help with implementing live updates after your app is approved? Check out [Capgo's live update solution](/docs/getting-started/quickstart/) for seamless app updates without app store review.*
 
 ## Keep going from The Complete First-Time App Review Guide for 2026 - iOS and Android
 

@@ -90,7 +90,7 @@ Once you've set up your build and deploy stages, it's time to integrate Capgo. T
 
 After preparing your CI/CD pipeline, follow these steps to add Capgo to your project:
 
-First, install the [Capgo CLI](https://capgo.app/docs/cli/commands):
+First, install the [Capgo CLI](https://capgo.app/docs/cli/commands/):
 
 ```bash
 npx @capgo/cli init

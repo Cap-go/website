@@ -66,7 +66,7 @@ Here’s how you can install and set up Capgo:
     
 -   **Step 3: Set Up Live Updates**
     
-    To enable live updates, install the [Capgo CLI](https://capgo.app/docs/cli/commands) and initialize it:
+    To enable live updates, install the [Capgo CLI](https://capgo.app/docs/cli/commands/) and initialize it:
     
     ```bash
     npm install @capgo/cli

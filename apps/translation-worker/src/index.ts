@@ -327,12 +327,31 @@ function localizedPath(basePath: string, locale: string): string {
   if (locale === DEFAULT_LOCALE) return normalizedBasePath
   return normalizedBasePath === '/' ? `/${locale}/` : `/${locale}${normalizedBasePath}`
 }
-
 function localizedAbsoluteUrl(requestUrl: URL, locale: string, basePath: string): string {
   const url = new URL(requestUrl)
   url.pathname = localizedPath(basePath, locale)
   url.search = ''
   return url.toString()
+}
+
+function rewriteRedirectPath(pathname: string): string {
+  if (pathname === '/docs/cli' || pathname === '/docs/cli/') return '/docs/cli/overview/'
+  if (pathname === '/docs/getting-started' || pathname === '/docs/getting-started/') return '/docs/getting-started/quickstart/'
+  if (pathname === '/docs/plugin/api' || pathname === '/docs/plugin/api/') return '/docs/plugins/updater/api/'
+  if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {
+    return pathname.replace(/^\/docs\/cli\/cloud-build(?=\/|$)/, '/docs/builder')
+  }
+  return pathname
+}
+
+function withTrailingSlash(pathname: string): string {
+  if (pathname === '/' || pathname.endsWith('/')) return pathname
+  if (/\.[a-z0-9]{2,8}$/i.test(pathname) && !pathname.endsWith('.html')) return pathname
+  return `${pathname}/`
+}
+
+function canonicalInternalPathname(pathname: string): string {
+  return withTrailingSlash(rewriteRedirectPath(stripLocalePrefix(pathname)))
 }
 
 function shouldBypassTranslation(pathname: string): boolean {
@@ -375,8 +394,7 @@ function localizeHref(value: string, locale: Locale, requestUrl: URL): string {
   if (url.host !== requestUrl.host) return value
   if (hasExplicitLocalePath(trimmed, url)) return value
   if (shouldBypassTranslation(url.pathname)) return value
-
-  url.pathname = localizedPath(url.pathname, locale)
+  url.pathname = localizedPath(canonicalInternalPathname(url.pathname), locale)
   if (trimmed.startsWith('//')) return `//${url.host}${url.pathname}${url.search}${url.hash}`
   if (isHttpUrl(trimmed)) return url.toString()
   return `${url.pathname}${url.search}${url.hash}`

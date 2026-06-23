@@ -22,7 +22,7 @@ Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's wh
 
 ## Recommended for New Builds: Use Capgo Build
 
-> **We now recommend using [Capgo Build with the Capgo CLI](/docs/cli/cloud-build/) for native Capacitor builds.**
+> **We now recommend using [Capgo Build with the Capgo CLI](/docs/builder/) for native Capacitor builds.**
 > This Fastlane guide is kept for teams maintaining existing GitHub Actions pipelines, but new Android builds should use the Capgo CLI so you do not have to maintain Fastlane, Gradle runners, keystores, and upload scripts yourself.
 
 ## Prerequisites
@@ -40,7 +40,7 @@ Before starting, you'll need to set up:
 
 ## Capgo Build for CI/CD by Capgo
 
-Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capgo Build](/docs/cli/cloud-build/) runs signed native Android builds from your existing CI/CD pipeline:
+Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capgo Build](/docs/builder/) runs signed native Android builds from your existing CI/CD pipeline:
 
 - **Works with your pipeline**: Trigger Capgo Build from GitHub Actions, GitLab CI, Jenkins, or local scripts after your web build and `npx cap sync`.
 - **Signing from CI secrets**: Keep Android keystores, key aliases, passwords, and Play Console service account JSON in your own CI secrets.
@@ -53,7 +53,7 @@ Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capg
 - Includes OTA updates and about 15 native builds per month
 - Extra build minutes are billed by minute through credits
 
-[Set up Capgo Build in CI/CD](/docs/cli/cloud-build/github-actions/)
+[Set up Capgo Build in CI/CD](/docs/builder/github-actions/)
 
 ## Manual Setup Guide
 

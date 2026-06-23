@@ -100,7 +100,7 @@ When you publish your Capacitor JS app on the App Store, what happens is simple.
 
 Your user will get the new version from the store and remove all local updates in their app by default.
 
-If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](/docs/plugin/api#settings)
+If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](/docs/plugins/updater/api/#settings)
 
 This can only be changed on the app side, not from the cloud like other settings.
 

@@ -61,7 +61,7 @@ The difference in update speed is one of the most striking advantages of Capgo O
 
 Apple’s App Store Guidelines state:
 
-> "Interpreted code may be downloaded to an Application, but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store (b) does not create a store or storefront for other code or applications (c) does not bypass signing, sandbox, or other security features of the OS." – Apple App Store Guidelines [\[2\]](https://capgo.app/docs/faq)
+> "Interpreted code may be downloaded to an Application, but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store (b) does not create a store or storefront for other code or applications (c) does not bypass signing, sandbox, or other security features of the OS." – Apple App Store Guidelines [\[2\]](https://capgo.app/docs/faq/)
 
 Capgo adheres to these policies by using a custom Dart interpreter. This ensures updates are compliant while still allowing for rapid deployment, bridging the gap between speed and regulation.
 
@@ -83,7 +83,7 @@ App store guidelines play a critical role in shaping [update strategies](https:/
 
 Capgo's custom Dart interpreter adheres to Apple's strict policies for handling interpreted code. Apple’s guidelines state:
 
-> "Interpreted code may be downloaded to an Application, but only so long as such code: (a) does not change the primary purpose of the Application, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS." [\[2\]](https://capgo.app/docs/faq)
+> "Interpreted code may be downloaded to an Application, but only so long as such code: (a) does not change the primary purpose of the Application, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS." [\[2\]](https://capgo.app/docs/faq/)
 
 Capgo ensures compliance by focusing on the following:
 

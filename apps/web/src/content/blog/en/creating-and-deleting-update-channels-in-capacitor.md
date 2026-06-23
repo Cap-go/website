@@ -54,7 +54,7 @@ Make sure you have the following:
 
 -   **Capacitor CLI**: This is the core tool for handling app updates.
 -   **Node.js**: Version 14.0 or higher is required.
--   **[Capgo CLI](https://capgo.app/docs/cli/commands)**: Used for setting up and managing update channels.
+-   **[Capgo CLI](https://capgo.app/docs/cli/commands/)**: Used for setting up and managing update channels.
 -   **Development Environment**: Choose an IDE that supports Capacitor.
 
 To initialize Capgo CLI, run this command:

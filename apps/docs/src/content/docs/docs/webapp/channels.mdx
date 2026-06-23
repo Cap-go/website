@@ -10,7 +10,7 @@ sidebar:
 When a device asks Capgo for an update, the channel it will use is decided in the following order (highest priority first):
 
 1. **Forced device mapping**: If the device ID is explicitly forced to a channel (see the *Forced devices* list inside the channel settings), that channel always wins.
-2. **Cloud override (created by `setChannel()` or Webapp action)**: Calling [`setChannel`](/docs/plugin/api/#setchannel) (or changing a device's channel in the dashboard) writes a persistent override in the cloud tied to that device ID. That override is consulted after forced mapping but before any defaults. Re‑installing the app does **not** clear it; deleting the device entry does.
+2. **Cloud override (created by `setChannel()` or Webapp action)**: Calling [`setChannel`](/docs/plugins/updater/api/#setchannel) (or changing a device's channel in the dashboard) writes a persistent override in the cloud tied to that device ID. That override is consulted after forced mapping but before any defaults. Re‑installing the app does **not** clear it; deleting the device entry does.
 3. **Capacitor config `defaultChannel` (test build default)**: For internal / beta / test builds you can set `defaultChannel` (legacy key `channel`) in `capacitor.config.*` so test devices start on a pre-release channel (e.g. `beta`, `pr-123`). If absent, the device will proceed to the cloud default. Production builds usually leave this unset.
 4. **Cloud Default Channel (primary strategy for ~99% of users)**: The main production channel virtually all real users land on. Any new device without a force, without an override, and without a config `defaultChannel` uses this. Changing it rolls out (or rolls back) for everyone in seconds—no new binary.
 
@@ -59,7 +59,7 @@ If you later change the dashboard default to `production`, devices already on an
 
 ## Managing channels
 
-First, let's take a look at the channels page. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the channels tab](/docs/webapp/main-app-page).
+First, let's take a look at the channels page. You can access it by [clicking on your app](/docs/webapp/main-page/) and then [clicking on the channels tab](/docs/webapp/main-app-page/).
 
 
 <figure><img src="/channels.webp" alt="channel list" /><figcaption></figcaption></figure>
@@ -106,7 +106,7 @@ As for `Allow development build`. If this is true then development builds will b
 
 Seventh is the `Allow Emulators`. If this is false then Capgo will disallow any update request that comes from an emulator. This is mostly useful for testing purposes.
 
-Eight is the `Allow devices to self associate`. If this is true then the [setChannel](/docs/plugin/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](/docs/plugin/api/#setchannel) method with this channel then the call will fail.
+Eight is the `Allow devices to self associate`. If this is true then the [setChannel](/docs/plugins/updater/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](/docs/plugins/updater/api/#setchannel) method with this channel then the call will fail.
 
 ## Keep going from Channels
 

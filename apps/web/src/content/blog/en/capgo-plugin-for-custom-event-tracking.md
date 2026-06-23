@@ -116,7 +116,7 @@ Once your environment is ready, follow these steps to install and configure the 
     npx @capgo/cli init
     ```
     
-3.  **Verify the [plugin installation](https://capgo.app/docs/getting-started/):**
+3.  **Verify the [plugin installation](https://capgo.app/docs/getting-started/quickstart/):**
     
     Check if the plugin is properly installed by running:
     
@@ -217,7 +217,7 @@ Capgo offers tools to monitor custom events and troubleshoot implementation issu
 
 Keep track of your event streams with these debugging options:
 
-**Using the [Capgo CLI Debug Command](https://capgo.app/docs/cli/commands):**
+**Using the [Capgo CLI Debug Command](https://capgo.app/docs/cli/commands/):**
 
 ```bash
 npx @capgo/cli@latest app debug

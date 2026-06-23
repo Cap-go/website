@@ -9,7 +9,7 @@ import { defaultLocale, locales } from '@/services/locale'
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import striptags from 'striptags'
 import { slug as slugify } from 'github-slugger'
 

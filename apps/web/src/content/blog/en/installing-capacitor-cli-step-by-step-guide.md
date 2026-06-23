@@ -19,7 +19,7 @@ next_blog: ''
 **[Capacitor](https://capacitorjs.com/) CLI helps you transform web apps into native iOS and Android apps with one codebase.** Here's how to set it up quickly:
 
 -   **Prerequisites**: Install [Node.js](https://nodejs.org/en) (v16+), npm, and a web framework (React, Vue, Angular, etc.).
--   **[Install Capacitor CLI](https://capgo.app/docs/cli/commands)**: Run `npm install @capacitor/cli @capacitor/core` and initialize your project with `npx cap init`.
+-   **[Install Capacitor CLI](https://capgo.app/docs/cli/commands/)**: Run `npm install @capacitor/cli @capacitor/core` and initialize your project with `npx cap init`.
 -   **Prepare Platforms**: Add support for iOS (`npx cap add ios`) and Android (`npx cap add android`) platforms.
 -   **Build and Sync**: Use `npm run build` and `npx cap sync` to transfer web assets to native projects.
 -   **Optional Live Updates**: Use tools like [Capgo](https://capgo.app/) to push updates instantly without app store delays.

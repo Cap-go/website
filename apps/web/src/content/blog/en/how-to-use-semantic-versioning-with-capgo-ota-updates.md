@@ -34,7 +34,7 @@ next_blog: ''
     1.  Install Capgo's updater plugin.
     2.  Configure your app's version in `capacitor.config.json` and other files.
     3.  Initialize with your API key.
-    4.  Use [Capgo CLI](https://capgo.app/docs/cli/commands) to bundle and upload updates.
+    4.  Use [Capgo CLI](https://capgo.app/docs/cli/commands/) to bundle and upload updates.
 -   **[Manage Versions and Channels](https://capgo.app/docs/webapp/channels/):**
     
     -   Use separate channels (e.g., "beta" for testing, "production" for stable releases).

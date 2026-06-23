@@ -1,6 +1,6 @@
 ---
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 ---
 
 <section class="bg-[#1a1a1a] py-24 sm:py-32">
@@ -242,7 +242,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
           <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
             <p class="flex-auto">
               {m.built_for_devs_feature_api_desc_part1({}, { locale: Astro.locals.locale })}
-              <a href="/docs/public-api" class="text-white underline hover:text-blue-400">{m.built_for_devs_feature_api_docs({}, { locale: Astro.locals.locale })}</a>
+              <a href="/docs/public-api/" class="text-white underline hover:text-blue-400">{m.built_for_devs_feature_api_docs({}, { locale: Astro.locals.locale })}</a>
             </p>
           </dd>
         </div>
@@ -266,7 +266,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
           <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
             <p class="flex-auto">
               {m.built_for_devs_feature_differential_desc_part1({}, { locale: Astro.locals.locale })}
-              <a href="/docs/live-updates/differentials" class="text-white underline hover:text-blue-400"
+              <a href="/docs/live-updates/differentials/" class="text-white underline hover:text-blue-400"
                 >{m.built_for_devs_feature_differential_learn({}, { locale: Astro.locals.locale })}</a
               >
             </p>
@@ -293,7 +293,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
           <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
             <p class="flex-auto">
               {m.built_for_devs_feature_distribution_desc_part1({}, { locale: Astro.locals.locale })}
-              <a href="/docs/live-updates/channels" class="text-white underline hover:text-blue-400"
+              <a href="/docs/live-updates/channels/" class="text-white underline hover:text-blue-400"
                 >{m.built_for_devs_feature_distribution_learn({}, { locale: Astro.locals.locale })}</a
               >
             </p>
@@ -319,7 +319,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
           <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
             <p class="flex-auto">
               {m.built_for_devs_feature_soc2_desc_part1({}, { locale: Astro.locals.locale })}
-              <a href="/trust" class="text-white underline hover:text-blue-400">{m.built_for_devs_feature_soc2_trust({}, { locale: Astro.locals.locale })}</a>
+              <a href="/trust/" class="text-white underline hover:text-blue-400">{m.built_for_devs_feature_soc2_trust({}, { locale: Astro.locals.locale })}</a>
             </p>
           </dd>
         </div>

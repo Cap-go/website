@@ -13,7 +13,7 @@ import { Icon as AstroIcon } from 'astro-icon/components'
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { marked } from 'marked'
 
 export const getStaticPaths: GetStaticPaths = async () => {

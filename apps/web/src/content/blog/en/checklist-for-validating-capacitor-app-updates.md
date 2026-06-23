@@ -75,7 +75,7 @@ For enterprise use, Capgo offers compatibility with Capacitor 8, and supports bo
 
 ## Main Testing Checklist
 
-Once your environments and [Capgo setup](https://capgo.app/docs/cli/commands) are ready, focus on these key validations:
+Once your environments and [Capgo setup](https://capgo.app/docs/cli/commands/) are ready, focus on these key validations:
 
 ### Feature Testing
 

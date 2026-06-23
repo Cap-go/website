@@ -319,7 +319,7 @@ To ensure secure and efficient updates, follow these best practices:
 -   **Roll out critical changes in phases**: Use phased deployments to minimize risks.
 -   **Maintain strict version control**: Keep track of all changes for better management and rollback if needed.
 
-A great example of Capgo’s capabilities is Rapido Cloud, which successfully integrated the platform in September 2024. This integration highlighted Capgo’s ability to handle complex native bridge updates while ensuring app stability [\[5\]](https://capgo.app/blog).
+A great example of Capgo’s capabilities is Rapido Cloud, which successfully integrated the platform in September 2024. This integration highlighted Capgo’s ability to handle complex native bridge updates while ensuring app stability [\[5\]](https://capgo.app/blog/).
 
 | **Update Type** | **Deployment Strategy** | **Validation Steps** |
 | --- | --- | --- |

@@ -82,11 +82,13 @@ const localizedLinksHtml = __translationWorkerTest.rewriteMetadataAndLinks(
   </head>
   <body>
     <a href="/pricing">Pricing</a>
-    <a href="/es/pricing">Spanish pricing</a>
+    <a href="/es/pricing/">Spanish pricing</a>
     <a href="https://capgo.app/docs/">Docs</a>
     <a href="https://capgo.app/de/docs/">German docs</a>
     <a href="//capgo.app/plugins">Plugins</a>
     <a href="support-policy">Support policy</a>
+    <a href="/docs/cli/">CLI docs</a>
+    <a href="/docs/cli/cloud-build/ios/">iOS build docs</a>
     <a href="/#faq">FAQ</a>
     <a href="#local">Local anchor</a>
     <a href="https://github.com/Cap-go/capgo">GitHub</a>
@@ -100,18 +102,20 @@ const localizedLinksHtml = __translationWorkerTest.rewriteMetadataAndLinks(
 )
 assert(localizedLinksHtml.includes('hreflang="en" href="https://capgo.app/pricing"'), 'Link rewrite changed the English hreflang alternate')
 assert(localizedLinksHtml.includes('hreflang="fr" href="https://capgo.app/fr/pricing"'), 'Link rewrite changed the French hreflang alternate')
-assert(localizedLinksHtml.includes('href="/fr/pricing"'), 'Link rewrite did not localize root-relative internal links')
-assert(localizedLinksHtml.includes('href="/es/pricing"'), 'Link rewrite changed an already localized root-relative link')
+assert(localizedLinksHtml.includes('href="/fr/pricing/"'), 'Link rewrite did not localize root-relative internal links')
+assert(localizedLinksHtml.includes('href="/es/pricing/"'), 'Link rewrite changed an already localized root-relative link')
 assert(localizedLinksHtml.includes('href="https://capgo.app/de/docs/"'), 'Link rewrite changed an already localized absolute same-site link')
 assert(localizedLinksHtml.includes('href="https://capgo.app/fr/docs/"'), 'Link rewrite did not localize absolute same-site links')
-assert(localizedLinksHtml.includes('href="//capgo.app/fr/plugins"'), 'Link rewrite did not localize protocol-relative same-site links')
-assert(localizedLinksHtml.includes('href="/fr/support-policy"'), 'Link rewrite did not localize relative internal links')
+assert(localizedLinksHtml.includes('href="//capgo.app/fr/plugins/"'), 'Link rewrite did not localize protocol-relative same-site links')
+assert(localizedLinksHtml.includes('href="/fr/support-policy/"'), 'Link rewrite did not localize relative internal links')
+assert(localizedLinksHtml.includes('href="/fr/docs/cli/overview/"'), 'Link rewrite did not canonicalize CLI docs links')
+assert(localizedLinksHtml.includes('href="/fr/docs/builder/ios/"'), 'Link rewrite did not canonicalize legacy build docs links')
 assert(localizedLinksHtml.includes('href="/fr/#faq"'), 'Link rewrite did not localize root anchor links')
 assert(localizedLinksHtml.includes('href="#local"'), 'Link rewrite changed same-page anchors')
 assert(localizedLinksHtml.includes('href="https://github.com/Cap-go/capgo"'), 'Link rewrite changed an external URL')
 assert(localizedLinksHtml.includes('href="mailto:hello@capgo.app"'), 'Link rewrite changed a mail link')
 assert(localizedLinksHtml.includes('href="/images/logo.png"'), 'Link rewrite changed an asset URL')
-assert(localizedLinksHtml.includes('action="/fr/register"'), 'Link rewrite did not localize internal form actions')
+assert(localizedLinksHtml.includes('action="/fr/register/"'), 'Link rewrite did not localize internal form actions')
 
 function coordinatorRequest(body: unknown, path = '/enqueue'): Request {
   return new Request(`https://translation-coordinator${path}`, {

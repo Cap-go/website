@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
@@ -75,7 +75,7 @@ const content = { title, description, ldJSON }
               {m.solutions_get_started({}, { locale })}
             </a>
             <a
-              href={getRelativeLocaleUrl(locale, 'docs/plugin/api')}
+              href={getRelativeLocaleUrl(locale, 'docs/plugins/updater/api/')}
               class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
             >
               {m.solutions_view_docs({}, { locale })}
