@@ -45,3 +45,57 @@ bunx @tailwindcss/upgrade --force
 - Register documented plugins in `apps/docs/src/config/llmsCustomSets.ts` so they appear in the docs search and LLM sets.
 - Refresh metadata after adding a plugin with `bun run fetch:stars` and `bun run fetch:downloads`.
 - Validate the change with `bunx prettier --write <touched-files>` and `NODE_OPTIONS=--max-old-space-size=16384 bunx astro check` in both `apps/web` and `apps/docs`, or `bun run check` from the repo root.
+
+## Visual Diff For PRs
+
+Use the visual diff tool whenever a PR changes page layout, styling, components, or marketing copy that affects rendered HTML.
+
+### When To Run
+
+- **Before starting visual work:** capture a `before` baseline from `main` (or the PR base branch).
+- **Before opening the PR:** capture `after`, compare, and paste the report into the PR description.
+- **After each new push** to the PR when the author or reviewer asked for visual verification: rebuild, re-capture `after`, re-compare, and post an updated report as a new PR comment.
+
+### Setup (once per machine)
+
+```bash
+bun install
+bun run visual-diff:setup
+```
+
+Requires ImageMagick (`compare` CLI) for pixel diffs.
+
+### Workflow
+
+```bash
+# 1. Baseline (on main or base branch, before your changes)
+bun run build
+bun run visual-diff:capture:before
+
+# 2. After your visual changes
+bun run build
+bun run visual-diff:capture:after
+
+# 3. Compare + PR markdown
+bun run visual-diff:compare
+bun run visual-diff:report
+```
+
+Paste the `## Visual diff` section from `bun run visual-diff:report` into the PR description. On follow-up pushes with visual changes, run steps 2–3 again and post the updated markdown in a new comment.
+
+### Focused captures
+
+Default routes live in `visual-diff.config.json`. Override for a targeted PR:
+
+```bash
+bun run visual-diff:capture:before -- --suite web --routes /,/pricing/
+bun run visual-diff:capture:after -- --suite web --routes /,/pricing/
+```
+
+### Agent checklist
+
+1. Confirm the PR includes visual/UI changes (or the user explicitly requested visual verification).
+2. Run the workflow above before marking the PR ready.
+3. Include the visual diff markdown in the PR body.
+4. After subsequent pushes that change visuals, re-run `capture:after`, `compare`, and `report`; post the fresh results.
+5. Do not commit `.visual-diff/` artifacts — they are gitignored.

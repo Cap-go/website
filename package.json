@@ -52,7 +52,13 @@
     "clean:unused": "bun run scripts/clean_not_used.tsx",
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts",
     "generate:blog-images": "bun run scripts/generate-blog-images.ts",
-    "blogs:normalize_tags": "bun run scripts/blogs/normalize_tags.ts"
+    "blogs:normalize_tags": "bun run scripts/blogs/normalize_tags.ts",
+    "visual-diff:setup": "bun run scripts/visual-diff.mjs install",
+    "visual-diff:capture:before": "bun run scripts/visual-diff.mjs capture before",
+    "visual-diff:capture:after": "bun run scripts/visual-diff.mjs capture after",
+    "visual-diff:compare": "bun run scripts/visual-diff.mjs compare",
+    "visual-diff:report": "bun run scripts/visual-diff.mjs report",
+    "visual-diff": "bun run scripts/visual-diff.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "13.7.0",
@@ -107,6 +113,7 @@
     "js-yaml": "^4.2.0",
     "linkify-it": "^5.0.1",
     "nanospinner": "^1.2.2",
+    "playwright": "^1.61.0",
     "prettier": "^3.8.4",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",

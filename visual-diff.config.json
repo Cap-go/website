@@ -1,0 +1,42 @@
+{
+  "outputDir": ".visual-diff",
+  "viewports": [
+    { "name": "desktop", "width": 1440, "height": 900 },
+    { "name": "mobile", "width": 390, "height": 844 }
+  ],
+  "suites": [
+    {
+      "name": "web",
+      "distDir": "apps/web/dist",
+      "port": 4173,
+      "routes": [
+        "/",
+        "/pricing/",
+        "/plugins/",
+        "/blog/",
+        "/about/"
+      ]
+    },
+    {
+      "name": "docs",
+      "distDir": "apps/docs/dist",
+      "port": 4174,
+      "routes": [
+        "/docs/",
+        "/docs/getting-started/quickstart/",
+        "/docs/plugins/updater/"
+      ]
+    }
+  ],
+  "capture": {
+    "waitUntil": "load",
+    "settleMs": 1000,
+    "navigationTimeoutMs": 120000,
+    "minScreenshotBytes": 10000
+  },
+  "compare": {
+    "fuzzPercent": 1,
+    "identicalMaxPixels": 0,
+    "minorMaxPixels": 5000
+  }
+}
