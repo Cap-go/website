@@ -5,6 +5,12 @@ locale: en
 
 Capacitor plugin for Stripe Payment Sheet, Apple Pay, and Google Pay.
 
+## Why Capgo?
+
+Capgo maintains official forks of [@capacitor-community/stripe](https://github.com/capacitor-community/stripe). We monitor upstream issues and pull requests, merge relevant fixes, and ship updates on current Stripe SDKs with example apps and documentation.
+
+If you use the community package today, the Capgo Stripe plugins are the maintained path with faster turnaround on bugs and platform changes.
+
 ## Install
 
 ```bash
