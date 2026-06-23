@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-26T14:03:03.454Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /blog-images/how-capgo-handles-version-control-and-rollbacks.webp
 head_image_alt: "How Capgo Handles Version Control and Rollbacks Capgo blog illustration"
 keywords: version control, rollbacks, app updates, mobile development, CI/CD integration

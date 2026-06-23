@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-19T03:56:01.854Z
-updated_at: 2026-06-18T10:44:00.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /blog-images/how-to-use-capgo-documentation-for-ota-updates.webp
 head_image_alt: "How to Use Capgo Documentation for OTA Updates Capgo blog illustration"
 keywords: OTA updates, Capacitor, Capgo, mobile app updates, documentation, app deployment, security features, error handling

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-03T04:48:38.491Z
-updated_at: 2026-06-18T10:44:00.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /blog-images/how-to-use-semantic-versioning-with-capgo-ota-updates.webp
 head_image_alt: "How to Use Semantic Versioning with Capgo OTA Updates Capgo blog illustration"
 keywords: Semantic Versioning, Capgo, OTA updates, Capacitor apps, version control, app updates, deployment, CI/CD

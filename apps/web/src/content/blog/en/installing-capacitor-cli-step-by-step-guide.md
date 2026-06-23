@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-04T02:49:29.961Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /blog-images/installing-capacitor-cli-step-by-step-guide.webp
 head_image_alt: "\"Installing Capacitor CLI: Step-by-Step Guide\" Capgo blog illustration"
 keywords: Capacitor, CLI, mobile app development, Node.js, Android, iOS, live updates

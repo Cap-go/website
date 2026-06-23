@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-21T03:02:38.679Z
-updated_at: 2026-06-18T11:13:52.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /blog-images/creating-and-deleting-update-channels-in-capacitor.webp
 head_image_alt: "Creating and Deleting Update Channels in Capacitor Capgo blog illustration"
 keywords: Capacitor, update channels, app updates, development, mobile, CI/CD, user management, version control

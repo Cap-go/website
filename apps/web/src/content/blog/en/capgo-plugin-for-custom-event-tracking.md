@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T11:24:23.032Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /blog-images/capgo-plugin-for-custom-event-tracking.webp
 head_image_alt: "Capgo Plugin for Custom Event Tracking Capgo blog illustration"
 keywords: custom event tracking, analytics, app performance, developer tools, real-time updates

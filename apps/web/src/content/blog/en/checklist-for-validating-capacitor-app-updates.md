@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-20T01:48:44.409Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /blog-images/checklist-for-validating-capacitor-app-updates.webp
 head_image_alt: "Checklist for Validating Capacitor App Updates Capgo blog illustration"
 keywords: Capacitor, app updates, OTA updates, testing checklist, mobile development

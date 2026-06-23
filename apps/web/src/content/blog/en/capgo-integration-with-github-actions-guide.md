@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-16T02:24:50.565Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /blog-images/capgo-integration-with-github-actions-guide.webp
 head_image_alt: "\"Capgo Integration with GitHub Actions: Guide\" Capgo blog illustration"
 keywords: Capgo, GitHub Actions, CI/CD, Capacitor apps, deployment, automation, updates, security

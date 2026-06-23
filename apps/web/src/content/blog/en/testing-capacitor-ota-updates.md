@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-12T02:57:37.246Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /blog-images/testing-capacitor-ota-updates.webp
 head_image_alt: "Testing Capacitor OTA Updates Capgo blog illustration"
 keywords: OTA updates, Capacitor, testing, Capgo, mobile app deployment, security, performance, version control
