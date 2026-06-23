@@ -18,7 +18,7 @@ Fast, technical, independent. The voice is direct and practical, with enough con
 
 ## Anti-references
 
-Avoid generic SaaS pages with interchangeable feature-card grids, decorative gradient text, soft beige editorial styling, fake enterprise gloss, and abstract promises that are not backed by workflow proof. Avoid overplaying fear around shutdowns or review delays without a concrete migration path. Avoid designs that feel like a copied competitor template, a cyberpunk dashboard costume, or a consumer-app onboarding page.
+Avoid generic SaaS pages with interchangeable feature-card grids, decorative gradient text, soft beige editorial styling, fake enterprise gloss, and abstract promises that are not backed by workflow proof. Do not overplay fear around shutdowns or review delays without a concrete migration path. Designs that feel like a copied competitor template, a cyberpunk dashboard costume, or a consumer-app onboarding page are out of bounds.
 
 ## Design Principles
 
