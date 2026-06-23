@@ -13,13 +13,13 @@ If you get a cloud refusal code and need deeper remediation walkthroughs, see [C
 
 Capgo logs can include metadata for the event. In the dashboard, filter by the snake_case action code, and click the metadata cell to copy the full JSON payload. Metadata is especially useful for crash and WebView events because it can include the error message, source URL, line and column, process state, memory pressure, or platform-specific reason. Older logs can still show legacy camelCase aliases listed in parentheses.
 
-Each code below is a dedicated section so you can link directly from the console logs table of contents on this page.
+Each section title matches the action code shown in the console logs table, so you can link directly to it.
 
 ## Plan limits and normal responses
 
 Backend refusals related to billing, throttling, or non-error states.
 
-### `invalid_ip (InvalidIp)`
+### `InvalidIp`
 
 **What it means**
 
@@ -29,7 +29,7 @@ Capgo detected traffic that looks like it comes from Google or cloud infrastruct
 
 Ignore this on real users. Retry from normal networks and real devices, or wait and check again later.
 
-### `need_plan_upgrade (needPlanUpgrade, needUpgrade)`
+### `needPlanUpgrade`
 
 **What it means**
 
@@ -39,13 +39,13 @@ Your organization reached its plan or device limit. The device will not receive 
 
 Upgrade your plan in the dashboard or wait for the next billing cycle.
 
-### `no_new_version_available (noNew)`
+### `noNew`
 
 **What it means**
 
 The device already has the latest bundle available for its channel. This is a normal state, not a failure.
 
-### `rate_limited (rateLimited)`
+### `rateLimited`
 
 **What it means**
 
@@ -71,7 +71,7 @@ Set `plugins.CapacitorUpdater.version` to valid semver, verify it in the [SemVer
 
 Backend refusals when channel policy blocks a platform, build type, or device class.
 
-### `disabled_platform_ios (disablePlatformIos)`
+### `disablePlatformIos`
 
 **What it means**
 
@@ -81,7 +81,7 @@ The device runs iOS, but iOS updates are disabled for this channel.
 
 Enable iOS in the channel if this was accidental, or route iOS builds to a dedicated channel when blocking is intentional.
 
-### `disabled_platform_android (disablePlatformAndroid)`
+### `disablePlatformAndroid`
 
 **What it means**
 
@@ -91,7 +91,7 @@ The device runs Android, but Android updates are disabled for this channel.
 
 Enable Android in the channel if this was accidental, or route Android builds to a dedicated channel when blocking is intentional.
 
-### `disable_platform_electron (disablePlatformElectron)`
+### `disablePlatformElectron`
 
 **What it means**
 
@@ -101,7 +101,7 @@ The device runs Electron, but Electron updates are disabled for this channel.
 
 Enable Electron in the channel if this was accidental, or route Electron builds to a dedicated channel when blocking is intentional.
 
-### `disable_dev_build (disableDevBuild)`
+### `disableDevBuild`
 
 **What it means**
 
@@ -111,7 +111,7 @@ The device is a development build, but dev builds are blocked for this channel.
 
 Allow dev builds in a test channel, or keep this channel release-only and move dev devices elsewhere.
 
-### `disable_prod_build (disableProdBuild)`
+### `disableProdBuild`
 
 **What it means**
 
@@ -121,7 +121,7 @@ A production build called `/updates`, but production updates are blocked for thi
 
 Allow production updates in the channel if this was accidental, or route production builds to the correct channel.
 
-### `disable_device (disableDevice)`
+### `disableDevice`
 
 **What it means**
 
@@ -131,7 +131,7 @@ A real phone or tablet was blocked because this channel blocks real devices.
 
 Enable real-device updates if this was accidental, or keep the restriction and route real devices to another channel.
 
-### `disable_emulator (disableEmulator)`
+### `disableEmulator`
 
 **What it means**
 
@@ -144,7 +144,7 @@ Enable emulator updates in a test channel, or keep this channel emulator-blocked
 
 Backend refusals when semver or metadata rules block the target bundle.
 
-### `disable_auto_update (disableAutoUpdate)`
+### `disableAutoUpdate`
 
 **What it means**
 
@@ -154,7 +154,7 @@ Auto-update is disabled by channel compatibility policy. Metadata includes `auto
 
 Change the channel auto-update policy to allow your intended rollout.
 
-### `disable_auto_update_under_native (disableAutoUpdateUnderNative)`
+### `disableAutoUpdateUnderNative`
 
 **What it means**
 
@@ -164,7 +164,7 @@ The channel has a bundle older than the device baseline and blocks sending updat
 
 Publish a bundle at or above the native baseline, or disable under-native protection in the channel.
 
-### `disable_auto_update_to_metadata (disableAutoUpdateMetadata)`
+### `disableAutoUpdateMetadata`
 
 **What it means**
 
@@ -174,7 +174,7 @@ The channel requires `min_update_version`, but the device native version is belo
 
 Set `min_update_version` on the target bundle or release from a newer native version.
 
-### `disable_auto_update_to_major (disableAutoUpdateToMajor)`
+### `disableAutoUpdateToMajor`
 
 **What it means**
 
@@ -184,7 +184,7 @@ The channel blocks major version jumps, for example `1.x.x` to `2.x.x`.
 
 Align channel strategy with your major rollout plan, or allow major jumps for this track. See [Common Update Problems](/docs/plugins/updater/commonproblems/#disable_auto_update_to_major).
 
-### `disable_auto_update_to_minor (disableAutoUpdateToMinor)`
+### `disableAutoUpdateToMinor`
 
 **What it means**
 
@@ -194,7 +194,7 @@ The channel blocks minor version jumps relative to the device native baseline (`
 
 Align channel strategy with your minor rollout plan, or allow minor jumps for this track.
 
-### `disable_auto_update_to_patch (disableAutoUpdateToPatch)`
+### `disableAutoUpdateToPatch`
 
 **What it means**
 
@@ -207,7 +207,7 @@ Align release cadence with channel policy, or allow patch jumps for this track.
 
 Backend refusals caused by missing or incompatible channel configuration.
 
-### `cannot_update_via_private_channel (cannotUpdateViaPrivateChannel)`
+### `cannotUpdateViaPrivateChannel`
 
 **What it means**
 
@@ -217,7 +217,7 @@ The device tried to self-associate with a private channel that does not allow de
 
 Enable `allow_device_self_set` on the channel or switch the device to a public or allowed channel.
 
-### `misconfigured_channel (channelMisconfigured)`
+### `channelMisconfigured`
 
 **What it means**
 
@@ -227,7 +227,7 @@ The channel uses `disable_auto_update: "version_number"` but the bundle `min_upd
 
 Fill the missing config for that rule or switch to a simpler auto-update mode.
 
-### `no_channel (NoChannelOrOverride)`
+### `NoChannelOrOverride`
 
 **What it means**
 
@@ -240,7 +240,7 @@ Set a default channel in the dashboard or configure `defaultChannel` in the buil
 
 Backend refusals when Capgo cannot serve or decrypt the bundle.
 
-### `cannot_get_bundle (cannotGetBundle)`
+### `cannotGetBundle`
 
 **What it means**
 
@@ -250,7 +250,7 @@ Capgo failed to generate a valid signed download URL and no manifest fallback wa
 
 Re-upload the bundle, regenerate manifests, and verify R2 or public bundle settings.
 
-### `missing_bundle (missingBundle)`
+### `missingBundle`
 
 **What it means**
 
@@ -260,7 +260,7 @@ The bundle assigned to the channel has no downloadable content: no `external_url
 
 Rebuild and re-upload the version, then confirm the bundle has real file content.
 
-### `key_id_mismatch (keyMismatch)`
+### `keyMismatch`
 
 **What it means**
 
@@ -349,11 +349,65 @@ One bundle was deleted on the device.
 
 Device-side events for download progress, archive validation, and install errors.
 
-### `download_0 to download_90`
+### `download_0`
 
 **What it means**
 
-Download progress events emitted in 10% steps (`download_0`, `download_10`, …, `download_90`).
+The download sequence started at 0% progress.
+
+### `download_10`
+
+**What it means**
+
+A new bundle has been downloaded — progress indicated at 10%.
+
+### `download_20`
+
+**What it means**
+
+A new bundle has been downloaded — progress indicated at 20%.
+
+### `download_30`
+
+**What it means**
+
+A new bundle has been downloaded — progress indicated at 30%.
+
+### `download_40`
+
+**What it means**
+
+A new bundle has been downloaded — progress indicated at 40%.
+
+### `download_50`
+
+**What it means**
+
+A new bundle has been downloaded — progress indicated at 50%.
+
+### `download_60`
+
+**What it means**
+
+A new bundle has been downloaded — progress indicated at 60%.
+
+### `download_70`
+
+**What it means**
+
+A new bundle has been downloaded — progress indicated at 70%.
+
+### `download_80`
+
+**What it means**
+
+A new bundle has been downloaded — progress indicated at 80%.
+
+### `download_90`
+
+**What it means**
+
+A new bundle has been downloaded — progress indicated at 90%.
 
 ### `download_complete`
 
@@ -675,13 +729,13 @@ Device OS version changed between checks.
 
 Native app store version changed, helping separate native vs web bundle changes.
 
-### `get_channel (getChannel)`
+### `getChannel`
 
 **What it means**
 
 The device queried its current channel.
 
-### `set_channel (setChannel)`
+### `setChannel`
 
 **What it means**
 
