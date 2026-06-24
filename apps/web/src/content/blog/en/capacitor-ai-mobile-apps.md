@@ -10,7 +10,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-08T00:00:00.000Z
-updated_at: 2026-06-23T21:13:09.000Z
+updated_at: 2026-06-24T12:00:00.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: "Why Capacitor Is the Best Way to Build AI Mobile Apps Right Now Capgo blog illustration"
 keywords: Capacitor, Capgo, AI mobile apps, LLM apps, live updates, OTA updates, React Native, Flutter, native iOS, native Android
@@ -30,7 +30,7 @@ That is why **Capacitor is the best default choice right now** for most AI mobil
 * You can leverage the AI tooling wave that is overwhelmingly web-first (AI code generators, UI scaffolding, agentic coding tools, “generate a React app” workflows, etc.).
 * You still ship a real iOS/Android app with access to native capabilities through Capacitor plugins (and custom Swift/Kotlin when you need it).
 * With **Capgo Live Updates** you can iterate on the “AI layer” (prompts, UX, copy, guardrails, flows) at web speed without waiting on store review for every small change.
-* With **Capgo Builds**, live updates, channels, rollbacks, and release automation can be managed in one platform and one workflow.
+* With **Capgo Builder**, you can compile signed iOS and Android binaries in the cloud — no Mac required — and manage live updates, channels, rollbacks, and release automation in one workflow.
 
 Capacitor is not magic. If you are doing heavy 3D, ultra-high-performance graphics, deep background processing, or large on-device inference as a primary feature, native or Flutter can be a better fit. But for the majority of AI apps that are essentially “networked products with a fast UI” (chat, voice, image, copilots, agents, workflow automation), **a web-first mobile stack wins**.
 
@@ -617,7 +617,7 @@ Live updates give you a safety valve:
 
 This is the difference between “we can respond” and “we have to wait”.
 
-### Capgo Builds: One Platform to Build and Release
+### Capgo Builder: Ship Native Binaries Without the Mac Tax
 
 The other source of pain is the “native build pipeline tax”:
 
@@ -626,13 +626,24 @@ The other source of pain is the “native build pipeline tax”:
 * CI setup, secrets management, build caching
 * Coordinating releases across platforms
 
-Capgo’s build offering can unify:
+If your app started in Lovable, Bolt.new, Base44, or another vibe-coding tool, you often do not have a Mac on the desk — but you still need signed iOS binaries for TestFlight and the App Store. **[Capgo Builder](https://capgo.app/native-build/)** is the recommended path: compile and sign iOS and Android in the cloud from the same CLI your AI agent can run.
 
-* Native builds
+```bash
+npx @capgo/cli@latest login
+npx @capgo/cli@latest build init --platform ios
+npx @capgo/cli@latest build init --platform android
+npm run build && npx cap sync
+npx @capgo/cli@latest build com.example.app --platform ios --build-mode release
+npx @capgo/cli@latest build com.example.app --platform android --build-mode release
+```
+
+Capgo Builder unifies:
+
+* Cloud native builds (no local Xcode/Android Studio required for release binaries)
 * Live update deployment
 * Release channels and rollout management
 
-For small teams especially, this is a force multiplier: less time fighting CI, more time improving the product.
+For small teams especially, this is a force multiplier: less time fighting CI, more time improving the product. See [Base44 to mobile](/blog/transform-base44-app-to-mobile-with-capacitor/), [Lovable to mobile](/blog/transform-lovable-dev-app-to-mobile-with-capacitor/), and [Bolt.new to mobile](/blog/transform-bolt-new-app-to-mobile-with-capacitor/) for end-to-end vibe-coding walkthroughs.
 
 ---
 

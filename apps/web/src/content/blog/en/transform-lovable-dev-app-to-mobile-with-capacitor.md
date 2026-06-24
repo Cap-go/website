@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-28T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-24T12:00:00.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: "Lovable.dev to Native Mobile Apps with Capacitor Capgo blog illustration"
 keywords: Lovable.dev, Capacitor, mobile app development, Next.js, export project, native mobile apps
@@ -360,7 +360,49 @@ npx cap sync
 
 ![Capacitor sync complete](/capacitor-sync-complete.webp)
 
-## Step 7: Open Native IDEs
+## Step 7: Build Store-Ready Binaries with Capgo Builder (Recommended)
+
+You do not need a Mac or a full local Xcode/Android Studio pipeline to ship to the App Store and Google Play. **[Capgo Builder](https://capgo.app/native-build/)** compiles, signs, and can submit iOS and Android builds from the cloud — the fastest path for vibe-coded apps exported from Lovable.
+
+### Why Capgo Builder?
+
+- **No Mac required for iOS** — build from Windows, Linux, or your AI coding environment
+- **One CLI workflow** — easy to script and hand off to Cursor, Claude Code, or Codex
+- **Pairs with Live Updates** — ship JS/UI fixes over the air; rebuild the native binary only when plugins or permissions change
+
+### Set up Capgo Builder
+
+After your static export and Capacitor sync work locally:
+
+```shell
+npx @capgo/cli@latest login
+npx @capgo/cli@latest init
+npx @capgo/cli@latest build init --platform ios
+npx @capgo/cli@latest build init --platform android
+```
+
+Save signing credentials once (Apple certificates, provisioning profiles, Android keystore). See [Managing Credentials](/docs/builder/credentials/) and [Build iOS from Windows](/blog/build-ios-app-from-windows-capacitor-capgo-build/).
+
+### Request a cloud build
+
+```shell
+npm run static
+npx cap sync
+npx @capgo/cli@latest build com.yourcompany.yourapp --platform ios --build-mode release
+npx @capgo/cli@latest build com.yourcompany.yourapp --platform android --build-mode release
+```
+
+Capgo Builder streams build logs in your terminal. With App Store Connect configured, iOS builds can go straight to TestFlight.
+
+Upload your web bundle for OTA updates:
+
+```shell
+npx @capgo/cli@latest bundle upload --channel production
+```
+
+## Step 8: Open Native IDEs (Optional for Local Testing)
+
+If you have a Mac or want emulator testing before cloud builds, open the native projects locally:
 
 ### For iOS Development
 
@@ -390,7 +432,7 @@ npx cap open android
 
 ![Android Studio opening Lovable project](/android-studio-lovable-project.webp)
 
-## Step 8: Build and Run Your Mobile App
+## Step 9: Build and Run Locally (Optional)
 
 ### Running on iOS
 
@@ -456,7 +498,7 @@ npx cap open android
 
 If you see a white screen, check the terminal for errors.
 
-## Step 9: Enable Live Reload (Development)
+## Step 10: Enable Live Reload (Development)
 
 ### Method 1: Using Cursor AI (Recommended)
 
@@ -503,7 +545,7 @@ npx cap copy
 
 ![Live reload enabled](/capacitor-live-reload.webp)
 
-## Step 10: Add Native Features
+## Step 11: Add Native Features
 
 ### Method 1: Using Cursor AI (Recommended)
 
@@ -557,7 +599,7 @@ Test your new native capabilities:
 
 If features don't work, ensure you've run `npx cap sync` after adding plugins.
 
-## Step 11: Optimize for Production
+## Step 12: Optimize for Production
 
 ### App Icons and Splash Screens
 
@@ -635,7 +677,8 @@ Congratulations! You've successfully transformed your Lovable.dev Next.js app in
 
 ### Next Steps
 
-- **Live Updates**: Consider implementing [Capgo](https://capgo.app/) for over-the-air updates
+- **[Capgo Builder](/native-build/)**: Use cloud native builds for TestFlight and Play Store releases
+- **Live Updates**: Implement [Capgo](https://capgo.app/) for over-the-air updates
 - **Push Notifications**: Add the Capacitor Push Notifications plugin
 - **Analytics**: Integrate mobile analytics to track user behavior
 - **Performance Monitoring**: Monitor your app's performance on mobile devices
@@ -646,7 +689,9 @@ Your Lovable.dev creation is now ready for the mobile world!
 
 - [Lovable.dev Documentation](https://docs.lovable.dev/)
 - [Capacitor Documentation](https://capacitorjs.com/docs)
+- [Capgo Builder — Cloud Native Builds](/native-build/)
 - [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
+- [Base44 to mobile](/blog/transform-base44-app-to-mobile-with-capacitor/)
 - [Next.js Static Export Guide](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)
 
 Learn how Capgo can help you deliver updates to your mobile app instantly, [sign up for a free account](/register/) today.
