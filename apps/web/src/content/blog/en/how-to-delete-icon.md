@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-24T09:01:20.136Z
-updated_at: 2026-06-24T09:01:54.887Z
+updated_at: 2026-06-24T09:04:38.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/9c8e3801-1bfc-4121-a1f0-db92114a3b39/how-to-delete-icon-instructional-guide.jpg'
 head_image_alt: 'How to Delete Icon: The Complete 2026 Guide'
 keywords: 'how to delete icon, remove icon, desktop shortcut, capacitor assets, app development'
