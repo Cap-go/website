@@ -8,8 +8,8 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-06-24T00:00:00.000Z
-updated_at: 2026-06-24T21:41:36.000Z
-head_image: /bolt_capacitor.webp
+updated_at: 2026-06-25T10:57:18.000Z
+head_image: /base44-capacitor.webp
 head_image_alt: "Base44 to Native Mobile Apps with Capacitor Capgo blog illustration"
 keywords: Base44, Capacitor, mobile app development, React, export project, native mobile apps, Capgo Builder, vibe coding
 tag: Tutorial
@@ -99,7 +99,7 @@ npm install
 npm run dev
 ```
 
-![Bolt.new app running locally](/bolt-app-running.webp)
+![Base44 app running locally](/base44-app-running.webp)
 
 Your Base44 app should load at `http://localhost:5173` (Vite) or the port shown in the terminal.
 
@@ -138,7 +138,7 @@ npm run build
 
 Verify a `dist/` folder exists with `index.html` and bundled assets.
 
-![Bolt.new build output](/bolt-build-output.webp)
+![Base44 build output](/base44-build-output.webp)
 
 ## Step 4: Add Capacitor to Your Base44 Project
 
@@ -159,7 +159,7 @@ npx cap add ios
 npx cap add android
 ```
 
-![Capacitor initialization](/capacitor-init-bolt.webp)
+![Capacitor initialization for a Base44 app](/capacitor-init-base44.webp)
 
 Commit the `ios/` and `android/` folders to git. Capgo Builder compiles what is in those directories.
 
@@ -193,7 +193,7 @@ npm run build
 npx cap sync
 ```
 
-![Capacitor sync Bolt complete](/capacitor-sync-bolt.webp)
+![Capacitor sync complete for a Base44 app](/capacitor-sync-base44.webp)
 
 ## Step 7: Build Store-Ready Binaries with Capgo Builder (Recommended)
 
@@ -242,7 +242,7 @@ npx cap open ios      # Xcode + iOS Simulator
 npx cap open android  # Android Studio + emulator
 ```
 
-![Xcode opening Bolt project](/xcode-bolt-project.webp)
+![Xcode opening a Base44 Capacitor project](/xcode-base44-project.webp)
 
 Use local IDEs for day-to-day debugging. Use **Capgo Builder** when you need signed release binaries.
 
@@ -257,7 +257,7 @@ npx cap sync
 
 Ask Cursor to wire Share, Camera, or Push into your React components. After adding plugins, run a new **Capgo Builder** build before store submission.
 
-![Native features added Bolt](/bolt-native-features.webp)
+![Native features added to a Base44 Capacitor app](/base44-native-features.webp)
 
 ## Step 10: Optimize for Production
 
