@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-25T09:27:00.852Z
-updated_at: 2026-06-25T09:27:02.105Z
+updated_at: 2026-06-25T09:29:28.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/65847988-3518-4343-87b0-8ae084aa3a99/lottie-react-native-doodle-illustration.jpg'
 head_image_alt: Lottie React Native
 keywords: 'lottie react native, react native animation, expo lottie, mobile animation, react native guide'
