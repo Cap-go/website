@@ -139,7 +139,7 @@ Default: `false`
 ## `autoUpdate`
 
 > Configure how the plugin checks for, downloads, and applies live updates.
-> The plugin checks for updates when the app moves to the foreground and, if `periodCheckDelay` is set, on a repeating timer while the app stays open.
+> The plugin checks for updates when the app moves to the foreground and on a repeating timer while the app stays open. `periodCheckDelay` controls that timer interval.
 > Boolean values are still supported for backward compatibility: `true` is the same as `"atBackground"` and `false` is the same as `"off"`.
 > String values merge the previous Auto Update and Direct Update configuration.
 
@@ -211,10 +211,10 @@ Default: `undefined`
 > This option remains supported for existing apps.
 
 Options:
-- `false`: Never do direct updates (use default behavior: download on foreground check, apply when backgrounded)
-- `'atInstall'`: Direct update only after app install or native app store update, otherwise act as `directUpdate = false`
-- `'onLaunch'`: Direct update only when the app is brought to the foreground from a killed state, otherwise act as `directUpdate = false`
-- `'always'`: Direct update on every foreground check whenever an update is available, never act as `directUpdate = false`
+- `false`: Never do direct updates
+- `'atInstall'`: Same as `autoUpdate: "atInstall"`
+- `'onLaunch'`: Same as `autoUpdate: "onLaunch"`
+- `'always'`: Same as `autoUpdate: "always"`
 - `true`: (deprecated) Same as `"always"` for backward compatibility
 
 Available on Android, iOS, and Electron.
