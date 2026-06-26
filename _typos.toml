@@ -40,7 +40,6 @@ Programm = "Programm"  # German app-store title term in TV-Programm
 udid = "udid"  # iOS device UDID (technical term)
 UDID = "UDID"  # iOS device UDID (technical term)
 RTO = "RTO"  # Recovery Time Objective
-NDAs = "NDAs"  # Non-disclosure agreements
 Sanbox = "Sanbox"  # Legacy copy key kept for runtime compatibility
 framworks = "framworks"  # Legacy copy key kept for runtime compatibility
 youre = "youre"  # Legacy copy key kept for runtime compatibility

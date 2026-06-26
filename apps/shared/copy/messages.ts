@@ -665,8 +665,9 @@ const messages = {
   consulting_faq_q3: 'How do you price consulting work?',
   consulting_faq_a3:
     'We offer two pricing models for all project sizes: fixed-price projects for well-scoped work (custom plugins, audits, upgrades, migrations) and monthly retainers for ongoing plugin maintenance and multi-phase engagements. You always get a clear proposal with deliverables and timeline before we start — no surprises.',
-  consulting_faq_q4: 'Do you sign NDAs?',
-  consulting_faq_a4: 'Yes. We routinely sign NDAs before the discovery call and are happy to use your template or provide ours.',
+  consulting_faq_q4: 'Do you sign non-disclosure agreements?',
+  consulting_faq_a4:
+    'Yes. We routinely sign non-disclosure agreements before the discovery call and are happy to use your template or provide ours.',
   consulting_faq_q5: 'Who owns the code and IP?',
   consulting_faq_a5:
     'You do. All code, plugins, and documentation we produce for you are assigned to your company on delivery. If we build something that could benefit the wider Capacitor community, we may ask to open-source a generalized version — but that is always your call.',
