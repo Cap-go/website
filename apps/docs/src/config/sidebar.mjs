@@ -60,6 +60,7 @@ const pluginEntries = [
   ['App Tracking Transparency', 'app-tracking-transparency'],
   ['AppInsights', 'appinsights'],
   ['AppsFlyer', 'appsflyer'],
+  ['Asset Cache', 'asset-cache'],
   ['Audio Recorder', 'audio-recorder'],
   ['Audio Session', 'audiosession'],
   ['Auto', 'auto', [linkItem('iOS setup', '/docs/plugins/auto/ios'), linkItem('Android setup', '/docs/plugins/auto/android')]],
