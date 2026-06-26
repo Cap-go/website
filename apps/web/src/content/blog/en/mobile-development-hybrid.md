@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-26T09:38:06.533Z
-updated_at: 2026-06-26T09:38:08.659Z
+updated_at: 2026-06-26T09:40:43.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/9ba1966c-8e17-4b83-8d8c-1c788de18242/mobile-development-hybrid-development-title.jpg'
 head_image_alt: Mobile Development Hybrid
 keywords: 'mobile development hybrid, cross-platform apps, capacitorjs, ionic framework, live updates'
