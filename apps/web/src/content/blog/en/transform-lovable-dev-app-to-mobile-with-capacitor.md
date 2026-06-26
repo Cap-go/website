@@ -41,7 +41,7 @@ We use [Cursor](https://cursor.sh/) throughout — its AI can run most of the te
 | --- | --- |
 | A computer | Mac, Windows, or Linux — cloud builds work from any OS |
 | A code editor | [Cursor](https://cursor.sh/) (recommended) or VS Code |
-| Node.js | Version 20 or newer (22 LTS recommended) |
+| Node.js | 24 LTS (latest — download from [nodejs.org](https://nodejs.org/)) |
 | Git | To clone your Lovable repo from GitHub |
 | Capgo account | [Free signup](/register/) — cloud builds and Live Updates |
 
@@ -175,7 +175,7 @@ npm run dev
 
 **For Windows:**
 
-1. Download Node.js from [nodejs.org](https://nodejs.org/)
+1. Download the **24 LTS** installer from [nodejs.org](https://nodejs.org/)
 2. Run the installer
 3. Open terminal and run:
 
