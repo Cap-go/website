@@ -138,16 +138,18 @@ Default: `false`
 
 ## `autoUpdate`
 
-> Configure how the plugin should use Auto Update via an update server.
+> Configure how the plugin checks for, downloads, and applies live updates.
+> The plugin checks for updates when the app moves to the foreground and, if `periodCheckDelay` is set, on a repeating timer while the app stays open.
 > Boolean values are still supported for backward compatibility: `true` is the same as `"atBackground"` and `false` is the same as `"off"`.
+> String values merge the previous Auto Update and Direct Update configuration.
 
 Options:
-- `"off"` or `false`: Disable Auto Update
-- `"atBackground"` or `true`: Check and download automatically, then apply when the app moves to the background
-- `"atInstall"`: Apply immediately only after a fresh install or native app update, otherwise use `"atBackground"`
-- `"onLaunch"`: Apply immediately on launch, otherwise use `"atBackground"` after the launch check
-- `"always"`: Apply immediately whenever Auto Update runs
-- `"onlyDownload"`: Check and download automatically, emit `updateAvailable`, and never set the next bundle automatically
+- `"off"` or `false`: Disable automatic update checks
+- `"atBackground"` or `true`: Check and download automatically on each foreground check, then apply the update the next time the app moves to background
+- `"atInstall"`: Apply immediately only after a fresh install or native app store update; otherwise use `"atBackground"` behavior
+- `"onLaunch"`: Apply immediately only when the app is brought to the foreground from a killed state (cold start). After that first check, fall back to `"atBackground"` behavior
+- `"always"`: Check on every foreground transition and apply immediately whenever an update is available
+- `"onlyDownload"`: Check and download automatically, emit `updateAvailable`, and never set the next bundle or apply an update automatically
 
 Available on Android, iOS, and Electron.
 
@@ -209,11 +211,11 @@ Default: `undefined`
 > This option remains supported for existing apps.
 
 Options:
-- `false`: Never do direct updates
-- `'atInstall'`: Same as `autoUpdate: "atInstall"`
-- `'onLaunch'`: Same as `autoUpdate: "onLaunch"`
-- `'always'`: Same as `autoUpdate: "always"`
-- `true`: (deprecated) Same as "always" for backward compatibility
+- `false`: Never do direct updates (use default behavior: download on foreground check, apply when backgrounded)
+- `'atInstall'`: Direct update only after app install or native app store update, otherwise act as `directUpdate = false`
+- `'onLaunch'`: Direct update only when the app is brought to the foreground from a killed state, otherwise act as `directUpdate = false`
+- `'always'`: Direct update on every foreground check whenever an update is available, never act as `directUpdate = false`
+- `true`: (deprecated) Same as `"always"` for backward compatibility
 
 Available on Android, iOS, and Electron.
 
