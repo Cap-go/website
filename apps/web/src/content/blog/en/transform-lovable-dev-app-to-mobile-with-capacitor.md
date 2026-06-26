@@ -11,7 +11,7 @@ created_at: 2025-07-28T00:00:00.000Z
 updated_at: 2026-06-27T00:00:00.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: "Convert your Lovable app to iOS and Android with Capacitor Capgo blog illustration"
-keywords: Lovable, Lovable.dev, Capacitor, mobile app development, React, Vite, export project, native mobile apps, Capgo Builder, live updates, vibe coding
+keywords: Lovable, Lovable.dev, Capacitor, mobile app development, React, Vite, export project, native mobile apps, Capgo Builder, live updates, vibe coding, Cursor
 tag: Tutorial
 published: true
 locale: en
@@ -23,6 +23,8 @@ next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
 [Lovable](https://lovable.dev/) is an AI app builder that turns prompts into working React apps in minutes. You can ship in the browser fast — but what if you want your app on the App Store and Google Play, sitting on home screens like every other native app?
 
 This guide walks through the full path: export from Lovable, wrap the web app with [Capacitor](https://capacitorjs.com/), build signed iOS and Android binaries in the cloud with **[Capgo Builder](https://capgo.app/native-build/)** (no Mac required), add a real native feature, and push a layout fix over the air with **Capgo Live Updates**.
+
+We use [Cursor](https://cursor.sh/) throughout — its AI can run most of the terminal commands for you if you prefer not to type them manually.
 
 **Time required:** about 1–2 hours the first time, mostly account setup and waiting on cloud builds.
 
@@ -38,7 +40,7 @@ This guide walks through the full path: export from Lovable, wrap the web app wi
 | Requirement | Details |
 | --- | --- |
 | A computer | Mac, Windows, or Linux — cloud builds work from any OS |
-| A code editor | [Cursor](https://cursor.sh/) or VS Code |
+| A code editor | [Cursor](https://cursor.sh/) (recommended) or VS Code |
 | Node.js | Version 20 or newer (22 LTS recommended) |
 | Git | To clone your Lovable repo from GitHub |
 | Capgo account | [Free signup](/register/) — cloud builds and Live Updates |
@@ -49,6 +51,7 @@ This guide walks through the full path: export from Lovable, wrap the web app wi
 | --- | --- |
 | Apple Developer Program | $99/year |
 | Google Play Console | $25 one-time |
+| Cursor Pro | $20/month (optional but recommended for AI command execution) |
 | Capgo | Free tier available; paid plans for production scale |
 
 **Optional (local simulator only):**
@@ -95,12 +98,88 @@ Lovable keeps your code in its editor until you connect GitHub.
 
 ✅ **Success:** Visiting `github.com/YOUR-USERNAME/your-app` shows your app's code.
 
-## Step 2 — Clone and Run Your App Locally
+## Step 2 — Set Up Cursor and Clone Your Project
 
-Open a terminal in [Cursor](https://cursor.sh/) or VS Code and clone the repo (replace `YOUR-USERNAME`):
+Before we can work with your code locally, you'll need a code editor. We recommend [Cursor](https://cursor.sh/), an AI-powered editor that can run terminal commands for you.
+
+### Download and Install Cursor
+
+1. Visit [cursor.sh](https://cursor.sh/) and download the version for your operating system
+2. Install Cursor following the installation wizard
+3. Once installed, open Cursor
+
+![Start Cursor](/start_in_cursor.webp)
+
+### Configure Cursor for AI Development
+
+For the best experience, configure Cursor before you start:
+
+1. **Buy a Cursor Plan** — While Cursor offers a free tier, a Pro plan ($20/month) gives you unlimited AI completions, access to Claude and GPT-4, and command execution
+2. **Open Cursor Settings** by pressing `Command+,` (Mac) or `Ctrl+,` (Windows)
+
+![Cursor Settings](/cursor_settings.webp)
+
+3. **Enable AI Models** — Make sure AI features are enabled:
+
+![Allow Models](/allow_models.webp)
+
+4. **Select Your Preferred Model** — Choose Claude or GPT-4 for best results:
+
+![Select Cursor Model](/select_cursor_model.webp)
+
+5. **Allow Command Execution** — Enable Cursor to run commands for you:
+
+![Allow Run Commands](/allow_run_commands.webp)
+
+### Clone Your Repository in Cursor
+
+1. In Cursor, press `Shift+Command+P` (Mac) or `Shift+Ctrl+P` (Windows) to open the command palette
+2. Type "clone" and select **Git: Clone"**
+3. Paste your GitHub repository URL: `https://github.com/YOUR-USERNAME/your-lovable-app.git`
+4. Choose a folder where you want to save the project
+
+![Clone in Cursor](/clone_in_cursor.webp)
+
+5. Cursor will clone and open your project
+
+![Open in Cursor](/open_in_cursor.webp)
+
+## Step 3 — Install Dependencies and Run Locally
+
+### Method 1: Using Cursor AI (Recommended)
+
+1. Open Cursor's AI tab by pressing `Command+K` (Mac) or `Ctrl+K` (Windows)
+2. Type the following command:
+
+```
+Install Homebrew, Node.js and npm on my system, then install dependencies and run the dev server
+```
+
+The AI will automatically detect your OS, install Node.js, run `npm install`, and start the dev server with `npm run dev`.
+
+![Install Homebrew](/install_brew.webp)
+
+### Method 2: Manual Installation
+
+Open the terminal in Cursor by pressing `` Shift+Command+T `` (Mac) or `` Shift+Ctrl+T `` (Windows), then:
+
+**For macOS:**
 
 ```shell
-git clone https://github.com/YOUR-USERNAME/your-lovable-app.git
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install node
+cd your-lovable-app
+npm install
+npm run dev
+```
+
+**For Windows:**
+
+1. Download Node.js from [nodejs.org](https://nodejs.org/)
+2. Run the installer
+3. Open terminal and run:
+
+```shell
 cd your-lovable-app
 npm install
 npm run dev
@@ -114,11 +193,21 @@ Press `Ctrl + C` to stop the dev server when you're ready to continue.
 
 ✅ **Success:** Your app opens in the browser with its UI working.
 
-## Step 3 — Prepare the Static Production Build
+## Step 4 — Prepare the Static Production Build
 
 Capacitor needs a production build before you add native platforms.
 
 ### React + Vite (most Lovable apps)
+
+#### Method 1: Using Cursor AI (Recommended)
+
+Press `Command+K` (Mac) or `Ctrl+K` (Windows) and ask:
+
+```
+Configure vite.config for Capacitor mobile deployment with base './' and production build to dist
+```
+
+#### Method 2: Manual Configuration
 
 Confirm `vite.config.ts` uses a relative base so assets load inside the native WebView:
 
@@ -147,13 +236,33 @@ You should see a `dist/` folder with `index.html` at its root.
 
 ### Legacy Next.js Lovable projects
 
-If your repo uses Next.js, configure static export and build to `out/`. See [Convert Your Next.js App to Mobile](/blog/building-a-native-mobile-app-with-nextjs-and-capacitor/) for the full `next.config` setup, then use `webDir: 'out'` in Capacitor instead of `dist`.
+If your repo uses Next.js, ask Cursor:
+
+```
+Add a static export script to package.json and configure next.config.js for mobile export with Capacitor
+```
+
+Or follow [Convert Your Next.js App to Mobile](/blog/building-a-native-mobile-app-with-nextjs-and-capacitor/) for the full `next.config` setup, then use `webDir: 'out'` in Capacitor instead of `dist`.
 
 ✅ **Success:** A static build folder exists (`dist/` or `out/`) with `index.html`.
 
-## Step 4 — Add Capacitor and Native Platforms
+## Step 5 — Add Capacitor and Native Platforms
 
 Capacitor wraps your web app in real iOS and Android shells — no rewrite needed.
+
+### Method 1: Using Cursor AI (Recommended)
+
+Press `Command+K` (Mac) or `Ctrl+K` (Windows) and ask:
+
+```
+Install Capacitor CLI, initialize it for my app with webDir dist, and add iOS and Android platforms
+```
+
+The AI will ask for your **app name** and **bundle ID** (e.g. `com.yourcompany.myapp`).
+
+![Capacitor initialization](/capacitor-init-lovable.webp)
+
+### Method 2: Manual Installation
 
 ```shell
 npm install @capacitor/core @capacitor/cli
@@ -168,7 +277,7 @@ When prompted:
 | App Package ID | com.yourcompany.myapp | Reverse-domain style — **cannot change after store publish** |
 | Web assets directory | `dist` | Use `out` for Next.js static export |
 
-**Pick a Package ID you actually own.** Bundle IDs are globally unique. Use a reverse-domain ID based on a domain you control (e.g. `com.yourcompany.myapp`) from the start — changing it later means find-and-replacing across `ios/` and `android/` and rebuilding.
+**Pick a Package ID you actually own.** Bundle IDs are globally unique. Use a reverse-domain ID based on a domain you control from the start — changing it later means find-and-replacing across `ios/` and `android/` and rebuilding.
 
 ```shell
 npm run build
@@ -178,9 +287,55 @@ npx cap add android
 npx cap sync
 ```
 
-![Capacitor initialization](/capacitor-init-lovable.webp)
-
 ![Capacitor platforms added](/capacitor-platforms-added.webp)
+
+### Configure Capacitor
+
+#### Method 1: Using Cursor AI (Recommended)
+
+Ask Cursor:
+
+```
+Update capacitor.config.ts to use dist as webDir and set up for HTTPS
+```
+
+For Next.js static export, ask it to use `out` instead.
+
+#### Method 2: Manual Configuration
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.yourcompany.myapp',
+  appName: 'My Lovable App',
+  webDir: 'dist',
+  server: {
+    androidScheme: 'https',
+  },
+};
+
+export default config;
+```
+
+### Build and Sync
+
+#### Method 1: Using Cursor AI (Recommended)
+
+Tell Cursor:
+
+```
+Build the production web app and sync it with Capacitor platforms
+```
+
+#### Method 2: Manual Commands
+
+```shell
+npm run build
+npx cap sync
+```
+
+![Capacitor sync complete](/capacitor-sync-complete.webp)
 
 Your project now looks like:
 
@@ -198,7 +353,7 @@ your-lovable-app/
 
 ✅ **Success:** `ios/` and `android/` folders appear and the terminal shows `Sync finished`.
 
-## Step 5 — Check Your `.gitignore`
+## Step 6 — Check Your `.gitignore`
 
 Capgo Builder compiles from your Git repository, so `ios/` and `android/` **must be committed**. A common mistake is ignoring them at the repo root.
 
@@ -207,11 +362,9 @@ Confirm:
 - Root `.gitignore` ignores `node_modules` and `dist` (the cloud rebuilds `dist` during web builds)
 - `ios/` and `android/` themselves are **not** ignored
 
-`npx cap add` already adds platform-level `.gitignore` files that ignore build artifacts but keep the project source.
-
 ✅ **Success:** `git status` shows `ios/` and `android/` ready to commit (not ignored).
 
-## Step 6 — Commit and Push
+## Step 7 — Commit and Push
 
 ```shell
 git add .
@@ -221,7 +374,7 @@ git push
 
 ✅ **Success:** Your GitHub repo shows the `ios/` and `android/` folders.
 
-## Step 7 — Build Store-Ready Binaries with Capgo Builder
+## Step 8 — Build Store-Ready Binaries with Capgo Builder
 
 You do not need a Mac or local Xcode/Android Studio pipeline to ship. **Capgo Builder** compiles, signs, and can submit iOS and Android builds from the cloud.
 
@@ -260,35 +413,134 @@ Build logs stream in your terminal. With App Store Connect configured, iOS build
 
 ✅ **Success:** A signed build completes and you can install it on a real device.
 
-## Step 8 — Optional: Test Locally in Xcode or Android Studio
+## Step 9 — Optional: Test Locally in Xcode or Android Studio
 
-If you have a Mac or want emulator testing:
+If you have a Mac or want emulator testing before cloud builds:
+
+### For iOS
+
+#### Method 1: Using Cursor AI (Recommended)
+
+```
+Open the iOS project in Xcode
+```
+
+#### Method 2: Manual Command
 
 ```shell
-npx cap open ios      # Xcode + iOS Simulator
-npx cap open android  # Android Studio + emulator
+npx cap open ios
 ```
 
 ![Xcode opening Lovable project](/xcode-lovable-project.webp)
 
-![Android Studio opening Lovable project](/android-studio-lovable-project.webp)
+**First-time Xcode setup:**
+
+1. Select a simulator from the device dropdown (e.g. iPhone 15)
+2. For real devices: enable **Automatically manage signing** and select your Apple Developer team
+3. Click the ▶️ Play button — first build takes 5–10 minutes
 
 ![Lovable app running on iOS](/lovable-ios-app.webp)
+
+### For Android
+
+#### Method 1: Using Cursor AI (Recommended)
+
+```
+Open the Android project in Android Studio
+```
+
+#### Method 2: Manual Command
+
+```shell
+npx cap open android
+```
+
+![Android Studio opening Lovable project](/android-studio-lovable-project.webp)
+
+**First-time Android Studio setup:**
+
+1. Install missing SDK packages if prompted
+2. Create an emulator in Device Manager (e.g. Pixel 6, API 33+)
+3. Click the green ▶️ Run button — first build takes 5–15 minutes
 
 ![Lovable app running on Android](/lovable-android-app.webp)
 
 Use local IDEs for day-to-day debugging. Use **Capgo Builder** when you need signed release binaries.
 
-## Step 9 — Add a Native Feature: The Camera
+✅ **Success:** App opens in simulator or emulator showing your Lovable content.
+
+## Step 10 — Enable Live Reload (Development)
+
+Speed up iteration by pointing the native shell at your local dev server.
+
+### Method 1: Using Cursor AI (Recommended)
+
+Tell Cursor:
+
+```
+Set up live reload for Capacitor development with my local IP address
+```
+
+### Method 2: Manual Setup
+
+1. Find your local IP address:
+
+```shell
+# macOS
+ipconfig getifaddr en0
+
+# Windows
+ipconfig
+```
+
+2. Update `capacitor.config.ts`:
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.yourcompany.myapp',
+  appName: 'My Lovable App',
+  webDir: 'dist',
+  server: {
+    url: 'http://YOUR_IP_ADDRESS:5173',
+    cleartext: true,
+  },
+};
+
+export default config;
+```
+
+Use port `8080` or `3000` if that is what `npm run dev` prints.
+
+3. Apply changes:
+
+```shell
+npx cap copy
+```
+
+![Live reload enabled](/capacitor-live-reload.webp)
+
+✅ **Success:** Edits to your web code hot-reload on the device or simulator.
+
+## Step 11 — Add a Native Feature: The Camera
 
 A Capacitor plugin lets JavaScript call real device features. We'll add the Camera plugin so users can snap a photo — something a browser tab cannot do reliably.
+
+### Method 1: Using Cursor AI (Recommended)
+
+Tell Cursor:
+
+```
+Add the Capacitor Camera plugin with iOS and Android permissions and a button to take a photo
+```
+
+### Method 2: Manual Installation
 
 ```shell
 npm install @capacitor/camera
 npx cap sync
 ```
-
-### Declare camera permissions
 
 **iOS** — add to `ios/App/App/Info.plist` inside the top-level `<dict>`:
 
@@ -303,8 +555,6 @@ npx cap sync
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-### Use the camera in your app
-
 ```typescript
 import { Camera, CameraResultType } from '@capacitor/camera';
 
@@ -317,17 +567,15 @@ async function takePhoto() {
 }
 ```
 
-Capacitor shows the system permission dialog the first time — using the message you wrote in `Info.plist`.
-
 ![Native features added](/lovable-native-features.webp)
 
 Adding a plugin requires a **fresh native build** through Capgo Builder before it works on devices.
 
 ✅ **Success:** Camera code compiles and `npx cap sync` finishes without errors.
 
-## Step 10 — Add Capgo Live Updates
+## Step 12 — Add Capgo Live Updates
 
-Every native change — even a typo fix in native config — normally goes through app store review. **Capgo Live Updates** push changes to your app's web layer (HTML, CSS, JS, images) over the air in minutes.
+Every native change normally goes through app store review. **Capgo Live Updates** push changes to your app's web layer (HTML, CSS, JS, images) over the air in minutes.
 
 **Install the updater in your first release** so you're never stuck waiting on review when you need to ship a fix.
 
@@ -376,7 +624,7 @@ See [Capgo Live Updates docs](/docs/live-updates/getting-started/).
 
 ✅ **Success:** Updater plugin is installed and `notifyAppReady()` runs on startup.
 
-## Step 11 — Fix Status Bar Spacing with a Live Update
+## Step 13 — Fix Status Bar Spacing with a Live Update
 
 On a real iPhone, your header may sit **under** the status bar (clock and battery). Modern Capacitor draws edge-to-edge, so your app must respect **safe area insets**: `env(safe-area-inset-top)`, `-bottom`, `-left`, `-right`.
 
@@ -398,7 +646,7 @@ padding-top: 1.5rem;
 padding-top: max(1.5rem, env(safe-area-inset-top));
 ```
 
-In Tailwind, ask Lovable:
+In Cursor or Lovable, ask:
 
 > "The app content runs under the status bar at the top on mobile. Add `env(safe-area-inset-top)` to the top padding of each page header using `max()`, keeping the existing padding as the minimum."
 
@@ -418,7 +666,7 @@ Force-close the app on your device, reopen it, wait ~15–30 seconds, and open a
 
 For deeper layout work, see [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor) and [Capacitor edge-to-edge display](/blog/capacitor-edge-to-edge-display-native-config/).
 
-## Step 12 — Prepare Your Store Listing
+## Step 14 — Prepare Your Store Listing
 
 Your app is built, installable, and you can push instant updates. Going live on the public stores is mostly paperwork:
 
@@ -429,7 +677,13 @@ Your app is built, installable, and you can push instant updates. Going live on 
 - **Age rating** — questionnaire in each console
 - **Data collection disclosures** — Apple Privacy Nutrition Labels and Google Data Safety
 
-Generate icons and splash screens:
+### Method 1: Using Cursor AI (Recommended)
+
+```
+Set up app icons and splash screens for my Capacitor app
+```
+
+### Method 2: Manual Setup
 
 ```shell
 npm install -D @capacitor/assets
@@ -453,7 +707,7 @@ See our [first-time app review guide](/blog/first-time-app-review-guide/) for th
 - **"This App ID … is not available"** — Bundle IDs are globally unique. Pick a reverse-domain ID you control.
 - **iOS build fails after changing the bundle ID** — The ID in your native project must match Apple App Store Connect. Find-and-replace across `ios/` and `android/`, commit, rebuild.
 - **White screen on launch** — Set `base: './'` in Vite config, rebuild, and run `npx cap sync`.
-- **Content under the status bar** — Add `viewport-fit=cover` and `env(safe-area-inset-top)` padding (Step 11).
+- **Content under the status bar** — Add `viewport-fit=cover` and `env(safe-area-inset-top)` padding (Step 13).
 - **APK signed in debug mode** — Google Play rejects debug builds. Use a release build signed with your keystore.
 - **Deployment rejected — version already exists** — Bump version/build number in native projects and rebuild.
 
