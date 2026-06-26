@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-28T00:00:00.000Z
-updated_at: 2026-06-27T00:00:00.000Z
+updated_at: 2026-06-26T23:55:42.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: "Convert your Lovable app to iOS and Android with Capacitor Capgo blog illustration"
 keywords: Lovable, Lovable.dev, Capacitor, mobile app development, React, Vite, export project, native mobile apps, Capgo Builder, live updates, vibe coding, Cursor
