@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-06-24T00:00:00.000Z
-updated_at: 2026-06-25T10:57:18.000Z
+updated_at: 2026-06-26T10:07:08.000Z
 head_image: /base44-capacitor.webp
 head_image_alt: "Base44 to Native Mobile Apps with Capacitor Capgo blog illustration"
 keywords: Base44, Capacitor, mobile app development, React, export project, native mobile apps, Capgo Builder, vibe coding
