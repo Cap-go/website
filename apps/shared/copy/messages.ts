@@ -653,6 +653,39 @@ const messages = {
   consulting: 'Consulting',
   consulting_description: 'Move forward with confidence. Capgo offer multiple levels of protection to keep your intellectual property and sensitive data secure.',
   consulting_forged_plugins_community_embraced: 'Consulting-Forged Plugins, Community Embraced',
+  consulting_faq_title: 'Frequently asked questions',
+  consulting_faq_subtitle:
+    'Still have questions about consulting? <a href="mailto:sales@capgo.app" class="text-gray-200 underline hover:text-white">Email our sales team</a> or <a href="https://discord.gg/VnYRvjUg" class="text-gray-200 underline hover:text-white">join our Discord community</a>.',
+  consulting_faq_q1: 'What does a typical engagement look like?',
+  consulting_faq_a1:
+    'Most engagements fall into one of four buckets: custom Capacitor plugin development, Capacitor version upgrades, Cordova-to-Capacitor migrations, and Ionic Enterprise SDK migrations. We also help teams integrate live updates, debug production native issues, and audit existing apps. Scope ranges from two-week fixed-price projects to multi-month retainers — every project starts with a free discovery call so we can understand your scope and goals before putting together a proposal.',
+  consulting_faq_q2: 'Do you also build full Capacitor apps from scratch?',
+  consulting_faq_a2:
+    'No. We focus on specialist work where deep Capacitor and native expertise is the differentiator — custom plugins, version upgrades, migrations, and production rescue. For greenfield app development, we can recommend trusted partners who focus on full product builds.',
+  consulting_faq_q3: 'How do you price consulting work?',
+  consulting_faq_a3:
+    'We offer two pricing models for all project sizes: fixed-price projects for well-scoped work (custom plugins, audits, upgrades, migrations) and monthly retainers for ongoing plugin maintenance and multi-phase engagements. You always get a clear proposal with deliverables and timeline before we start — no surprises.',
+  consulting_faq_q4: 'Do you sign non-disclosure agreements?',
+  consulting_faq_a4:
+    'Yes. We routinely sign non-disclosure agreements before the discovery call and are happy to use your template or provide ours.',
+  consulting_faq_q5: 'Who owns the code and IP?',
+  consulting_faq_a5:
+    'You do. All code, plugins, and documentation we produce for you are assigned to your company on delivery. If we build something that could benefit the wider Capacitor community, we may ask to open-source a generalized version — but that is always your call.',
+  consulting_faq_q6: 'Are you remote-only?',
+  consulting_faq_a6:
+    'Yes. We work remote-first and async-first, which lets us collaborate smoothly with teams around the world. We can schedule synchronous calls and pairing sessions whenever useful.',
+  consulting_faq_q7: 'What timezones do you cover?',
+  consulting_faq_a7:
+    'Our team is based in Europe (CET/CEST) but we regularly work with teams in North and South America, Asia, and Australia. We adapt our working hours to ensure reasonable overlap for meetings, reviews, and production support.',
+  consulting_faq_q8: 'Can you work alongside our in-house team?',
+  consulting_faq_a8:
+    'Absolutely. Most of our engagements are collaborative — we embed with your engineers for code reviews, architecture guidance, pair programming, and hands-on debugging on the specialist slice. You keep full ownership of the roadmap; we bring Capacitor depth where you need it.',
+  consulting_faq_q9: 'What if we are migrating from Ionic Appflow or another OTA provider?',
+  consulting_faq_a9:
+    'We help teams migrate live update workflows, native build pipelines, and Enterprise plugin dependencies to Capgo and our open-source plugin catalog. Migrations are scoped as fixed-price engagements so you know exactly what to expect.',
+  consulting_faq_q10: 'How do we get started?',
+  consulting_faq_a10:
+    'Book a free discovery call, send us an email, or reach out on Discord. You can also email <a href="mailto:sales@capgo.app" class="text-gray-200 underline hover:text-white">sales@capgo.app</a>.',
   contact: 'Contact',
   contact_link: 'By visiting this page on the website:',
   contact_sales: 'Contact Sales',
