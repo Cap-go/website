@@ -77,7 +77,7 @@ See [Base44 GitHub integration docs](https://docs.base44.com/developers/app-code
 
 ![Start Cursor](/start_in_cursor.webp)
 
-For the best AI-assisted workflow, enable your preferred model and allow command execution in Cursor settings — the same setup described in our [Lovable to mobile guide](/blog/transform-lovable-dev-app-to-mobile-with-capacitor/).
+For the best AI-assisted workflow, enable your preferred model and allow command execution in Cursor settings — enable your preferred model and allow command execution in Cursor settings.
 
 ## Step 2: Set Up Your Development Environment
 
