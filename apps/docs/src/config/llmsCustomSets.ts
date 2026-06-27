@@ -1,5 +1,5 @@
 const llmsCustomSetRows = String.raw`Capgo CLI|full reference documentation for capgo CLI to upload and manage your live updates|docs/cli/**
-Plugin Live updates|full reference documentation for plugin live updates for Capacitor and Electron|docs/live-updates/**|docs/plugins/updater/**|docs/plugins/electron-updater/**
+Plugin Live updates|full reference documentation for plugin live updates for Capacitor, Cordova, and Electron|docs/live-updates/**|docs/plugins/updater/**|docs/plugins/cordova-updater/**|docs/plugins/electron-updater/**
 Console Tutorial|step-by-step tutorial to get started with Capgo Console and live updates|docs/webapp/**
 Public API|full reference documentation for public API|docs/public-api/**
 Plugin Accelerometer|accelerometer sensor plugin for detecting device motion and orientation|docs/plugins/accelerometer/**

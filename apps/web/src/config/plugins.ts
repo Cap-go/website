@@ -52,6 +52,7 @@ const actionDefinitionRows =
 @capgo/capacitor-device-info|github.com/Cap-go|Read CPU, memory, GPU, storage, thermal state, and onboard sensor metrics from Capacitor apps|https://github.com/Cap-go/capacitor-device-info/|Device Info
 @capgo/capacitor-updater|github.com/Cap-go|Deploy live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
 @capgo/electron-updater|github.com/Cap-go|OTA live updates for Electron apps with the same API surface as capacitor-updater|https://github.com/Cap-go/electron-updater/|Electron Updater
+@capgo/cordova-updater|github.com/Cap-go|OTA live updates for Cordova iOS and Android with the same API as capacitor-updater|https://github.com/Cap-go/cordova-updater/|Cordova Updater
 @capgo/capacitor-uploader|github.com/Cap-go|Upload large files reliably in background with progress tracking and retry support|https://github.com/Cap-go/capacitor-uploader/|Uploader
 @revenuecat/purchases-capacitor|github.com/Cap-go|Implement in-app subscriptions and purchases with RevenueCat SDK for cross-platform monetization|https://github.com/RevenueCat/purchases-capacitor/|Purchases
 @capgo/capacitor-flash|github.com/Cap-go|Control device flashlight and torch with simple on/off toggle functionality|https://github.com/Cap-go/capacitor-flash/|Flash
@@ -203,6 +204,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-device-info': 'CpuChip',
   '@capgo/capacitor-updater': 'ArrowPath',
   '@capgo/electron-updater': 'ArrowPath',
+  '@capgo/cordova-updater': 'ArrowPath',
   '@capgo/capacitor-uploader': 'ArrowUpOnSquare',
   '@revenuecat/purchases-capacitor': 'CurrencyDollar',
   '@capgo/capacitor-flash': 'Bolt',
@@ -339,7 +341,7 @@ const pluginIconsByName: Record<string, string> = {
 }
 
 const pluginNamesByCategory = {
-  updates: ['@capgo/capacitor-updater', '@capgo/electron-updater', '@capgo/capacitor-android-inline-install', '@capgo/capacitor-live-reload', '@capgo/capacitor-patch'],
+  updates: ['@capgo/capacitor-updater', '@capgo/cordova-updater', '@capgo/electron-updater', '@capgo/capacitor-android-inline-install', '@capgo/capacitor-live-reload', '@capgo/capacitor-patch'],
   'auth-security': [
     '@capgo/capacitor-native-biometric',
     '@capgo/capacitor-autofill-save-password',
