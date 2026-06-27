@@ -15,6 +15,18 @@ This page explains how Capgo detects native compatibility, what an incompatible 
 Live updates are limited to JavaScript bundle changes. If you need to update native code — adding or removing a plugin, upgrading Capacitor, or changing native project configuration — you'll need to submit a new binary build through the usual app-store distribution process.
 </Aside>
 
+## Client plugins by stack
+
+Capgo ships dedicated updater clients for each hybrid runtime:
+
+| Plugin | Use when |
+| --- | --- |
+| [`@capgo/capacitor-updater`](/docs/plugins/updater/) | Capacitor iOS/Android apps |
+| [`@capgo/cordova-updater`](/docs/plugins/cordova-updater/) | Cordova iOS 7+ / Android 13+ apps |
+| [`@capgo/electron-updater`](/docs/plugins/electron-updater/) | Electron desktop apps |
+
+Native compatibility checks apply regardless of client plugin — they compare the bundle's recorded native dependencies against the installed binary.
+
 ## Why native compatibility matters
 
 Every Capacitor app ships in two layers:
