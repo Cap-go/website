@@ -11,15 +11,15 @@ Capgo supports several types of over-the-air (OTA) updates. This page lists and 
 
 ## Apply Timing
 
-Controls **when** an update is applied after it is downloaded.
+Controls **when** an update is applied after it is downloaded. The plugin checks for updates when the app moves to the foreground and on a repeating timer while the app stays open. `periodCheckDelay` controls that interval (default 10 minutes).
 
 | Type | Description | Use Case |
 |------|-------------|----------|
-| **autoUpdate: `atBackground`** | Download in background, apply when user backgrounds or kills the app | Most apps; minimal disruption |
-| **autoUpdate: `atInstall`** | Apply immediately only on fresh install or app store update | New users get latest; existing users use default flow |
-| **autoUpdate: `onLaunch`** | Apply immediately on install, store update, or after app kill | Balance between freshness and session stability |
-| **autoUpdate: `always`** | Apply immediately whenever an update is downloaded (including on resume) | Critical fixes, apps with simple state |
-| **autoUpdate: `onlyDownload`** | Download automatically and emit `updateAvailable`, but never apply or set the next bundle automatically | Apps that show their own update prompt or control exactly when to call `set()` |
+| **autoUpdate: `atBackground`** | Check and download on each foreground check, apply when the app moves to background | Most apps; minimal disruption |
+| **autoUpdate: `atInstall`** | Apply immediately only after a fresh install or native app store update; otherwise use `atBackground` | New users get latest; existing users use background apply |
+| **autoUpdate: `onLaunch`** | Apply immediately only on cold start (killed → foreground); then fall back to `atBackground` | Balance between freshness and session stability |
+| **autoUpdate: `always`** | Check on every foreground transition and apply immediately whenever an update is available | Critical fixes, apps with simple state |
+| **autoUpdate: `onlyDownload`** | Check and download automatically, emit `updateAvailable`, and never apply automatically | Apps that show their own update prompt or control exactly when to call `set()` |
 
 Configure in `capacitor.config.ts`:
 
