@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-27T08:13:58.353Z
-updated_at: 2026-06-27T08:14:01.057Z
+updated_at: 2026-06-27T08:16:32.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/d266b419-e011-425f-8e8a-fc21275b6b0d/app-authorization-developers-guide.jpg'
 head_image_alt: 'App Authorization: A Developer''s Guide for 2026'
 keywords: 'app authorization, oauth 2.0, capacitorjs, security, access control'
