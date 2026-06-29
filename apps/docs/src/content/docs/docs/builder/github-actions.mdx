@@ -297,7 +297,7 @@ For test builds, skip store submission: Android uses `--no-playstore-upload`; fo
 
 By default, release builds upload the signed artifact and leave the final store action under your control. For CI releases that should move directly into the store review flow, add `--submit-to-store-review`.
 
-Android uses your `PLAY_CONFIG_JSON` service account and submits the Google Play release instead of leaving it inactive. Add `--store-release-name` and `--store-release-notes` when you want the Play release to carry the same tag and changelog as CI:
+Android uses your `PLAY_CONFIG_JSON` service account and submits the Google Play release instead of leaving it inactive. Add `--store-release-name`, `--store-release-notes`, and optional `--store-release-notes-locale` entries when you want the Play release to carry the same tag and localized changelogs as CI:
 
 ```yaml
 - name: Submit Android release for review
@@ -314,13 +314,14 @@ Android uses your `PLAY_CONFIG_JSON` service account and submits the Google Play
       --build-mode release \
       --submit-to-store-review \
       --store-release-name "${GITHUB_REF_NAME}" \
-      --store-release-notes "Release ${GITHUB_REF_NAME}"
+      --store-release-notes "Release ${GITHUB_REF_NAME}" \
+      --store-release-notes-locale "en-US=Release ${GITHUB_REF_NAME}"
 ```
 
-iOS uses the App Store Connect API key path and submits the build to external TestFlight review. It requires `app_store` distribution and at least one external TestFlight group:
+iOS uses the App Store Connect API key path and submits the processed TestFlight build to App Store review. It requires `app_store` distribution; `--ios-testflight-groups` is optional for external beta distribution and is not required for App Store review:
 
 ```yaml
-- name: Submit iOS build to external TestFlight review
+- name: Submit iOS build to App Store review
   env:
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
     BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
@@ -336,8 +337,10 @@ iOS uses the App Store Connect API key path and submits the build to external Te
       --build-mode release \
       --ios-distribution app_store \
       --submit-to-store-review \
-      --ios-testflight-groups "External Testers" \
-      --store-release-notes "Release ${GITHUB_REF_NAME}"
+      --store-release-name "${GITHUB_REF_NAME}" \
+      --store-release-notes "Release ${GITHUB_REF_NAME}" \
+      --store-release-notes-locale "en-US=Release ${GITHUB_REF_NAME}" \
+      --no-ios-automatic-release
 ```
 
 <Aside type="caution">
