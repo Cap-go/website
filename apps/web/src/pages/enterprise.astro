@@ -634,6 +634,7 @@ const enterpriseBeforeAfterRows = [
             <div class="eyebrow eyebrow--blue">{m.global_infrastructure({}, { locale })}</div>
             <h2 class="h2-section">
               {m.global_infrastructure_lowercase({}, { locale })}
+              {' '}
               {m.that_grows_with_you({}, { locale })}
             </h2>
             <p class="lead">{m.powered_by_serverless_edge_computing({}, { locale })}</p>
@@ -653,27 +654,6 @@ const enterpriseBeforeAfterRows = [
     </section>
 
     <SolutionAppExample solution="enterprise" />
-
-    <section class="section final bg-grid grain" id="cta">
-      <div class="shell">
-        <h2>
-          <span class="name">{m.ready_to_scale({}, { locale })}</span><br />
-          {m.ready_to_deliver({}, { locale })}
-          {m.updates_at_scale({}, { locale })}
-        </h2>
-        <p class="tagline">{m.join_leading_enterprises({}, { locale })}</p>
-        <a
-          class="btn btn-lg btn-primary btn-cta"
-          href="https://book.capgo.app/enterprise-inquiry/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={m.enterprise_talk_to_team({}, { locale })}
-        >
-          <TeamAvatars />
-          <span>{m.enterprise_talk_to_team({}, { locale })} &rarr;</span>
-        </a>
-      </div>
-    </section>
   </div>
 </Layout>
 
@@ -684,8 +664,7 @@ const enterpriseBeforeAfterRows = [
   }
   .enterprise-product .hbv-u-name,
   .enterprise-product .hero-banner-tag,
-  .enterprise-product .h2-section,
-  .enterprise-product .final h2 {
+  .enterprise-product .h2-section {
     letter-spacing: 0;
   }
   .enterprise-product .hero-lead {
@@ -980,6 +959,166 @@ const enterpriseBeforeAfterRows = [
   @media (min-width: 640px) {
     .enterprise-product .enterprise-feature-group ul {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .enterprise-product #real-app-examples {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: transparent;
+    padding: 96px 0;
+  }
+  .enterprise-product #real-app-examples::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 96px 96px;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 72%);
+    pointer-events: none;
+  }
+  .enterprise-product #real-app-examples > div {
+    position: relative;
+    max-width: 1200px;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  .enterprise-product #real-app-examples > div > div:first-child {
+    margin-bottom: 48px;
+    align-items: end;
+  }
+  .enterprise-product #real-app-examples p.inline-flex {
+    border-color: rgba(96, 165, 250, 0.3);
+    background: rgba(96, 165, 250, 0.08);
+    color: var(--relief-blue);
+    letter-spacing: 0;
+  }
+  .enterprise-product #real-app-examples h2 {
+    max-width: 760px;
+    margin: 14px 0 0 !important;
+    color: #fff;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: 0 !important;
+  }
+  .enterprise-product #real-app-examples h2 + p {
+    max-width: 760px;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    line-height: 1.55;
+  }
+  .enterprise-product #real-app-examples > div > div:first-child a {
+    border-radius: 12px;
+    transition: all 0.18s ease;
+  }
+  .enterprise-product #real-app-examples > div > div:first-child a:first-child,
+  .enterprise-product #app-examples-cta a {
+    border: 0;
+    background: var(--cap-blue-600);
+    color: #fff;
+    box-shadow: 0 0 36px rgba(37, 99, 235, 0.42);
+  }
+  .enterprise-product #real-app-examples > div > div:first-child a:first-child:hover,
+  .enterprise-product #app-examples-cta a:hover {
+    background: var(--cap-blue-700);
+    box-shadow: 0 0 50px rgba(37, 99, 235, 0.55);
+    transform: translateY(-1px);
+  }
+  .enterprise-product #real-app-examples > div > div:first-child a:nth-child(2) {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+  }
+  .enterprise-product #real-app-examples dl,
+  .enterprise-product #real-app-examples article,
+  .enterprise-product #app-examples-cta {
+    border-radius: 18px;
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    box-shadow: none;
+  }
+  .enterprise-product #real-app-examples dl > div {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  .enterprise-product #real-app-examples dt,
+  .enterprise-product #app-examples-cta p.font-mono {
+    color: var(--relief-blue);
+    font-family: var(--lu-font-display);
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+  .enterprise-product #real-app-examples dd {
+    color: rgba(255, 255, 255, 0.84);
+  }
+  .enterprise-product #real-app-examples > div > div:nth-of-type(2) {
+    gap: 18px;
+  }
+  .enterprise-product #real-app-examples article {
+    padding: 18px;
+    transition:
+      border-color 0.18s ease,
+      background 0.18s ease;
+  }
+  .enterprise-product #real-app-examples article:hover {
+    border-color: rgba(96, 165, 250, 0.22);
+    background: rgba(255, 255, 255, 0.035);
+  }
+  .enterprise-product #real-app-examples article img {
+    border-radius: 12px;
+    outline-color: rgba(255, 255, 255, 0.1);
+  }
+  .enterprise-product #real-app-examples article p.uppercase {
+    color: var(--relief-blue);
+    letter-spacing: 0;
+  }
+  .enterprise-product #real-app-examples article h3,
+  .enterprise-product #app-examples-cta h3 {
+    color: #fff;
+    letter-spacing: 0 !important;
+  }
+  .enterprise-product #real-app-examples article p:not(.uppercase),
+  .enterprise-product #app-examples-cta p:not(.font-mono) {
+    color: rgba(255, 255, 255, 0.62);
+  }
+  .enterprise-product #real-app-examples article .grid-cols-2 span {
+    border-color: rgba(96, 165, 250, 0.18);
+    background: rgba(96, 165, 250, 0.08);
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .enterprise-product #real-app-examples article a {
+    border-color: rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    color: var(--relief-blue);
+  }
+  .enterprise-product #real-app-examples article a:hover {
+    border-color: rgba(96, 165, 250, 0.34);
+    background: rgba(96, 165, 250, 0.08);
+    color: #bfdbfe;
+  }
+  .enterprise-product #app-examples-cta {
+    background: linear-gradient(180deg, rgba(96, 165, 250, 0.07), rgba(255, 255, 255, 0.02));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+  .enterprise-product #app-examples-cta > div:first-child > div {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  .enterprise-product #app-examples-cta span.rounded-full {
+    background: rgba(96, 165, 250, 0.1);
+    color: var(--relief-blue);
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.22);
+  }
+  .enterprise-product #app-examples-cta p:last-child {
+    color: rgba(255, 255, 255, 0.45);
+  }
+  @media (max-width: 720px) {
+    .enterprise-product #real-app-examples {
+      padding: 64px 0;
+    }
+    .enterprise-product #real-app-examples > div > div:first-child {
+      margin-bottom: 36px;
     }
   }
 </style>
