@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-29T13:08:56.203Z
-updated_at: 2026-06-29T13:08:57.029Z
+updated_at: 2026-06-29T13:11:53.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/99df39df-0a7c-45b5-b39a-ff77c00ff821/linear-gradient-react-native-tutorial-slide.jpg'
 head_image_alt: 'Master Linear Gradient React Native: Beautiful UIs in 2026'
 keywords: 'react native, linear gradient, react native ui, mobile ui design, expo'
