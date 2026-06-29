@@ -31,11 +31,11 @@ Damon = "Damon"
 # Acronyms and technical terms
 ASO = "ASO"  # App Store Optimization
 ITMS = "ITMS"  # iTunes Music Store
+SME = "SME"  # Small and midsize enterprise
 Hashi = "Hashi"  # HashiCorp (brand name)
 formatable = "formatable"  # NFC event literal from upstream API
 jus = "jus"  # Brazilian justice app package namespace
 Programm = "Programm"  # German app-store title term in TV-Programm
-
 # Translation keys/identifiers - these should remain as-is
 udid = "udid"  # iOS device UDID (technical term)
 UDID = "UDID"  # iOS device UDID (technical term)
