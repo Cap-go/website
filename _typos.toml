@@ -29,6 +29,7 @@ Damon = "Damon"
 
 # Acronyms and technical terms
 ASO = "ASO"  # App Store Optimization
+SME = "SME"  # Small and medium-sized enterprise
 ITMS = "ITMS"  # iTunes Music Store
 Hashi = "Hashi"  # HashiCorp (brand name)
 formatable = "formatable"  # NFC event literal from upstream API
