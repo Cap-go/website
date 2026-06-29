@@ -1,0 +1,167 @@
+---
+title: After onboarding — one-time setup checklist
+description: "What to configure once after onboarding so Capgo runs smoothly: store release, channels, delta upload, CI, and team access."
+sidebar:
+  order: 3
+next: true
+prev: true
+---
+
+import { Aside, Steps, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+You finished [onboarding](/docs/getting-started/onboarding/) — now configure Capgo **once**. After that, daily work is only **upload → test → deploy**.
+
+<Aside type="caution" title="Ship a new store build first">
+Installing the Capgo plugin in your project is not enough. **OTA updates only work on devices running a native app that already includes the plugin.**
+
+After you add Capgo and call `CapacitorUpdater.notifyAppReady()`:
+
+1. Run `npx cap sync`
+2. Build a new iOS / Android binary
+3. Submit to the App Store, Play Store, TestFlight, or your internal distribution
+
+Users on an older store build **without** the plugin will never receive live updates. Uploading bundles to Capgo only affects devices on a Capgo-enabled binary.
+
+See also [troubleshooting](/docs/getting-started/troubleshooting/).
+</Aside>
+
+**Rule:** channels are release lanes (`development`, `production`), not tickets, features, or developer names.
+
+---
+
+## One-time setup checklist
+
+<Steps>
+
+1. **Create channels** — pick the smallest set that fits (see below).
+
+2. **Set default upload channel** in [app settings](/docs/webapp/main-app-page/):
+   - Solo app → `production`
+   - Team → `development`
+
+3. **Production channel:** public on, device self-set off, block updates under native on, auto-update guard on `major`.
+
+4. **Test channel** (`development` / `staging`): public off, device self-set on for QA.
+
+5. **Upload from CI** with checksum, native deps, and delta:
+
+   ```bash
+   npx @capgo/cli@latest bundle upload \
+     --channel development \
+     --bundle "${APP_VERSION}.${BUILD_NUMBER}" \
+     --comment "commit ${GIT_SHA:0:7} run ${CI_RUN_ID}" \
+     --delta
+   ```
+
+6. **Deploy to production** only after testing — from the [dashboard](/docs/webapp/channels/) or CLI.
+
+7. **Team & security:** invite once, least permissions, [2FA](/docs/webapp/mfa/) for the org, one API key in CI.
+
+</Steps>
+
+Leave encryption, `min_update_version`, metadata, and preview **off** unless you have a clear reason.
+
+---
+
+## Pick your size
+
+**Simple** — 1 app, 1 channel: `production`
+
+**Team** — `development` + `production`. Upload to dev, deploy to prod.
+
+**Native versions** — add channels only when needed, e.g. `production-9.0` + `test-9.0`. Keep store users on the main production channel.
+
+**Many apps** — same simple model per app (usually one `production` each). Do not create extra channels just because the org is big.
+
+**Release train** (optional) — `staging` → `rc` → `production`. Same template on every app that needs it.
+
+<Aside type="caution">
+Do not use channels named after tickets, people, or CI variables like `${inputs_capgo_channel}`.
+</Aside>
+
+---
+
+## Bundle name vs comment
+
+- **Name** = unique version ID from CI → `1.8.0.${BUILD_NUMBER}`
+- **Comment** = what changed → `commit abc1234 run 28059070270`
+
+Never use ticket names or `fix-login-bug` as bundle names. Put release notes in `--comment`, not the name.
+
+---
+
+## Delta upload (recommended)
+
+**Use delta uploads by default.** They send only changed files instead of re-downloading the whole app. Updates are faster, use less data, and work especially well for apps with large assets (images, videos) that rarely change.
+
+Capgo handles checksums and native dependencies automatically. Delta is the third piece you should always enable.
+
+### How to set it up
+
+**1. Add `--delta` to every upload** (local or CI):
+
+```bash
+npx @capgo/cli@latest bundle upload \
+  --channel development \
+  --bundle "${APP_VERSION}.${BUILD_NUMBER}" \
+  --delta
+```
+
+**2. In CI, enforce it** so nobody accidentally uploads a full zip:
+
+```bash
+npx @capgo/cli@latest bundle upload \
+  --channel development \
+  --bundle "${APP_VERSION}.${BUILD_NUMBER}" \
+  --comment "commit ${GIT_SHA:0:7} run ${CI_RUN_ID}" \
+  --delta-only
+```
+
+`--delta-only` means every automated upload is a manifest/delta bundle. Use a normal upload without that flag only when you intentionally need a full bundle.
+
+**3. Nothing to change in the app** — the Capgo plugin on the device reads the manifest and downloads only changed files. No extra plugin config is required for basic delta updates.
+
+<Aside type="tip">
+If `directUpdate` is enabled in `capacitor.config`, the CLI may prompt for delta in local uploads. In CI (non-interactive), delta is used automatically. See [Delta updates](/docs/live-updates/differentials/) for details.
+</Aside>
+
+**What you get:** each file is stored with a checksum → Capgo builds a manifest → devices download only what changed.
+
+---
+
+## Daily workflow
+
+```
+Upload to development (--delta)
+  → test
+  → deploy to production
+  → don't touch channel settings again
+```
+
+---
+
+## Common mistakes
+
+| Mistake | Fix |
+| --- | --- |
+| Expecting OTA before a new store release | Rebuild and ship the native app after adding the plugin |
+| Uploading a bundle but not deploying to a channel | Assign the bundle to a channel (e.g. `production`) |
+| Channel per feature, ticket, or developer | Use permanent release lanes only |
+| Dynamic CI channel names | Fixed names: `development`, `production` |
+| Too many channels for a simple app | Start with 1–2 channels |
+| Device self-set on production | Off for production, on for test channels |
+| Skipping `--delta` | Add `--delta` to every upload; use `--delta-only` in CI |
+| Manual or random bundle names | Automate naming in CI |
+| Changing naming scheme over time | Pick one scheme on day one |
+| Metadata / preview enabled without reason | Leave off by default |
+
+---
+
+## Learn more
+
+<CardGrid stagger>
+  <LinkCard href="/docs/live-updates/channels/" title="Channels" description="Defaults, precedence, and routing." />
+  <LinkCard href="/docs/live-updates/differentials/" title="Delta updates" description="Why and how to use --delta." />
+  <LinkCard href="/docs/getting-started/cicd-integration/" title="CI/CD" description="Automate upload and deploy." />
+  <LinkCard href="/docs/webapp/bundles/" title="Bundles" description="Checksum, dependencies, and metadata." />
+</CardGrid>
