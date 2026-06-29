@@ -289,58 +289,51 @@ const enterpriseTestimonial = {
   role: m.solutions_enterprise_testimonial_role({}, { locale }),
 }
 
-const enterpriseProofNotes = [
-  'One release control plane for live updates, native builds, App Store publishing, plugins, and automation.',
-  'A buying story security, legal, finance, support, and release teams can all approve.',
-  'A practical migration path for teams leaving slow store-only workflows, custom scripts, or Appflow.',
-]
+const enterpriseProofNotes = [m.enterprise_proof_note_1({}, { locale }), m.enterprise_proof_note_2({}, { locale }), m.enterprise_proof_note_3({}, { locale })]
 
 const enterprisePainPoints = [
   {
-    label: 'Incident pressure',
-    title: 'The fix is ready before the release process is.',
-    description:
-      'Enterprise incidents often start as a small web-bundle change: auth copy, account routing, pricing display, onboarding logic, or a support workflow. The old path still makes users wait for a native release.',
+    label: m.enterprise_pain_incident_label({}, { locale }),
+    title: m.enterprise_pain_incident_title({}, { locale }),
+    description: m.enterprise_pain_incident_desc({}, { locale }),
   },
   {
-    label: 'Version drift',
-    title: 'Support keeps debugging bugs engineering already fixed.',
-    description:
-      'Large apps keep old versions alive for weeks. Without channels, adoption signals, and rollback, every support ticket starts with a version mystery instead of a recovery plan.',
+    label: m.enterprise_pain_version_label({}, { locale }),
+    title: m.enterprise_pain_version_title({}, { locale }),
+    description: m.enterprise_pain_version_desc({}, { locale }),
   },
   {
-    label: 'Approval loops',
-    title: 'Security and procurement ask the same questions again.',
-    description: 'Enterprise buyers need evidence for signing, audit logs, SSO, data processing, uptime, payment workflow, and who can approve a production change.',
+    label: m.enterprise_pain_approval_label({}, { locale }),
+    title: m.enterprise_pain_approval_title({}, { locale }),
+    description: m.enterprise_pain_approval_desc({}, { locale }),
   },
   {
-    label: 'Team coordination',
-    title: 'Multiple teams ship into the same mobile surface.',
-    description:
-      'Product, growth, support, and platform teams all need changes live. Without governed release lanes, the safest answer becomes waiting, batching, and slowing every team down.',
+    label: m.enterprise_pain_coordination_label({}, { locale }),
+    title: m.enterprise_pain_coordination_title({}, { locale }),
+    description: m.enterprise_pain_coordination_desc({}, { locale }),
   },
 ]
 
 const enterpriseBeforeAfterRows = [
   {
-    area: 'Critical web fix',
-    before: 'Create a new binary, submit to stores, wait for review, then hope users install the update quickly enough.',
-    after: 'Publish a signed web bundle to an internal channel, expand by cohort, and roll back in seconds if signals move.',
+    area: m.enterprise_before_after_critical_area({}, { locale }),
+    before: m.enterprise_before_after_critical_before({}, { locale }),
+    after: m.enterprise_before_after_critical_after({}, { locale }),
   },
   {
-    area: 'Multi-app portfolio',
-    before: 'Each app, team, and environment invents its own deployment habit and support has to reconstruct what happened.',
-    after: 'Organizations, apps, channels, members, device logs, and audit logs live in one release workflow.',
+    area: m.enterprise_before_after_portfolio_area({}, { locale }),
+    before: m.enterprise_before_after_portfolio_before({}, { locale }),
+    after: m.enterprise_before_after_portfolio_after({}, { locale }),
   },
   {
-    area: 'Security review',
-    before: 'InfoSec gets speed claims but still has to chase evidence for signing, access, uptime, encryption, and data handling.',
-    after: 'SOC 2 controls, signed updates, E2E encrypted updates, SSO, audit logs, and DPAs are part of the enterprise package.',
+    area: m.enterprise_before_after_security_area({}, { locale }),
+    before: m.enterprise_before_after_security_before({}, { locale }),
+    after: m.enterprise_before_after_security_after({}, { locale }),
   },
   {
-    area: 'Vendor risk',
-    before: 'A proprietary roadmap, shutdown, or price change can put your mobile release path back into emergency migration mode.',
-    after: 'Capgo gives teams an open-source platform, hosted enterprise support, and a self-hosting path when control matters more.',
+    area: m.enterprise_before_after_vendor_area({}, { locale }),
+    before: m.enterprise_before_after_vendor_before({}, { locale }),
+    after: m.enterprise_before_after_vendor_after({}, { locale }),
   },
 ]
 ---
@@ -422,7 +415,7 @@ const enterpriseBeforeAfterRows = [
 
         <div class="enterprise-proof-grid">
           <figure class="enterprise-quote">
-            <p class="eyebrow eyebrow--blue">Enterprise testimonial</p>
+            <p class="eyebrow eyebrow--blue">{m.enterprise_testimonial_label({}, { locale })}</p>
             <blockquote>"{enterpriseTestimonial.quote}"</blockquote>
             <figcaption>
               <strong>{enterpriseTestimonial.author}</strong>
@@ -447,12 +440,9 @@ const enterpriseBeforeAfterRows = [
     <section class="section bg-grid grain" id="pain">
       <div class="shell">
         <div class="section-head section-head--wide">
-          <div class="eyebrow eyebrow--blue">Why enterprise teams stall</div>
-          <h2 class="h2-section">The pain repeats every time mobile fixes depend on the store.</h2>
-          <p class="lead">
-            Enterprise teams do not need another speed promise. They need a release path that keeps urgent changes moving while security, support, finance, and platform owners
-            still have control.
-          </p>
+          <div class="eyebrow eyebrow--blue">{m.enterprise_pain_label({}, { locale })}</div>
+          <h2 class="h2-section">{m.enterprise_pain_title({}, { locale })}</h2>
+          <p class="lead">{m.enterprise_pain_desc({}, { locale })}</p>
         </div>
 
         <div class="outcome-grid enterprise-pain-grid">
@@ -525,18 +515,16 @@ const enterpriseBeforeAfterRows = [
     <section class="section" id="comparison">
       <div class="shell">
         <div class="section-head section-head--wide">
-          <div class="eyebrow eyebrow--blue">What changes after Capgo</div>
-          <h2 class="h2-section">The enterprise argument is not faster deploys. It is controlled recovery.</h2>
-          <p class="lead">
-            Speed matters because production pain is expensive. Control matters because enterprise buyers need to prove the faster path is governed, auditable, and reversible.
-          </p>
+          <div class="eyebrow eyebrow--blue">{m.enterprise_comparison_label({}, { locale })}</div>
+          <h2 class="h2-section">{m.enterprise_comparison_title({}, { locale })}</h2>
+          <p class="lead">{m.enterprise_comparison_desc({}, { locale })}</p>
         </div>
 
         <div class="enterprise-table-wrap">
           <div class="enterprise-table enterprise-table-head">
-            <span>Use case</span>
-            <span>Before</span>
-            <span>With Capgo Enterprise</span>
+            <span>{m.enterprise_comparison_use_case({}, { locale })}</span>
+            <span>{m.enterprise_comparison_before({}, { locale })}</span>
+            <span>{m.enterprise_comparison_after({}, { locale })}</span>
           </div>
           {
             enterpriseBeforeAfterRows.map((row) => (
@@ -985,7 +973,7 @@ const enterpriseBeforeAfterRows = [
     padding-right: 24px;
     padding-left: 24px;
   }
-  .enterprise-product #real-app-examples > div > div:first-child {
+  .enterprise-product #real-app-examples .solution-app-examples-header {
     margin-bottom: 48px;
     align-items: end;
   }
@@ -1010,114 +998,117 @@ const enterpriseBeforeAfterRows = [
     font-size: clamp(1rem, 1.4vw, 1.2rem);
     line-height: 1.55;
   }
-  .enterprise-product #real-app-examples > div > div:first-child a {
+  .enterprise-product #real-app-examples .solution-app-examples-actions a {
     border-radius: 12px;
     transition: all 0.18s ease;
   }
-  .enterprise-product #real-app-examples > div > div:first-child a:first-child,
-  .enterprise-product #app-examples-cta a {
+  .enterprise-product #real-app-examples .solution-app-examples-primary,
+  .enterprise-product #real-app-examples .solution-app-examples-cta-link {
     border: 0;
     background: var(--cap-blue-600);
     color: #fff;
     box-shadow: 0 0 36px rgba(37, 99, 235, 0.42);
   }
-  .enterprise-product #real-app-examples > div > div:first-child a:first-child:hover,
-  .enterprise-product #app-examples-cta a:hover {
+  .enterprise-product #real-app-examples .solution-app-examples-primary:hover,
+  .enterprise-product #real-app-examples .solution-app-examples-primary:focus-visible,
+  .enterprise-product #real-app-examples .solution-app-examples-cta-link:hover,
+  .enterprise-product #real-app-examples .solution-app-examples-cta-link:focus-visible {
     background: var(--cap-blue-700);
     box-shadow: 0 0 50px rgba(37, 99, 235, 0.55);
     transform: translateY(-1px);
   }
-  .enterprise-product #real-app-examples > div > div:first-child a:nth-child(2) {
+  .enterprise-product #real-app-examples .solution-app-examples-secondary {
     border: 1px solid rgba(255, 255, 255, 0.18);
     background: rgba(255, 255, 255, 0.04);
     color: #fff;
   }
-  .enterprise-product #real-app-examples dl,
-  .enterprise-product #real-app-examples article,
-  .enterprise-product #app-examples-cta {
+  .enterprise-product #real-app-examples .solution-app-examples-meta,
+  .enterprise-product #real-app-examples .solution-app-example-card,
+  .enterprise-product #real-app-examples .solution-app-examples-cta {
     border-radius: 18px;
     border-color: rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.02);
     box-shadow: none;
   }
-  .enterprise-product #real-app-examples dl > div {
+  .enterprise-product #real-app-examples .solution-app-examples-meta > div {
     border-color: rgba(255, 255, 255, 0.08);
   }
-  .enterprise-product #real-app-examples dt,
-  .enterprise-product #app-examples-cta p.font-mono {
+  .enterprise-product #real-app-examples .solution-app-examples-meta dt,
+  .enterprise-product #real-app-examples .solution-app-examples-cta p.font-mono {
     color: var(--relief-blue);
     font-family: var(--lu-font-display);
     font-size: 11px;
     letter-spacing: 0;
   }
-  .enterprise-product #real-app-examples dd {
+  .enterprise-product #real-app-examples .solution-app-examples-meta dd {
     color: rgba(255, 255, 255, 0.84);
   }
-  .enterprise-product #real-app-examples > div > div:nth-of-type(2) {
+  .enterprise-product #real-app-examples .solution-app-examples-body {
     gap: 18px;
   }
-  .enterprise-product #real-app-examples article {
+  .enterprise-product #real-app-examples .solution-app-example-card {
     padding: 18px;
     transition:
       border-color 0.18s ease,
       background 0.18s ease;
   }
-  .enterprise-product #real-app-examples article:hover {
+  .enterprise-product #real-app-examples .solution-app-example-card:hover {
     border-color: rgba(96, 165, 250, 0.22);
     background: rgba(255, 255, 255, 0.035);
   }
-  .enterprise-product #real-app-examples article img {
+  .enterprise-product #real-app-examples .solution-app-example-card img {
     border-radius: 12px;
     outline-color: rgba(255, 255, 255, 0.1);
   }
-  .enterprise-product #real-app-examples article p.uppercase {
+  .enterprise-product #real-app-examples .solution-app-example-card p.uppercase {
     color: var(--relief-blue);
     letter-spacing: 0;
   }
-  .enterprise-product #real-app-examples article h3,
-  .enterprise-product #app-examples-cta h3 {
+  .enterprise-product #real-app-examples .solution-app-example-card h3,
+  .enterprise-product #real-app-examples .solution-app-examples-cta h3 {
     color: #fff;
     letter-spacing: 0 !important;
   }
-  .enterprise-product #real-app-examples article p:not(.uppercase),
-  .enterprise-product #app-examples-cta p:not(.font-mono) {
+  .enterprise-product #real-app-examples .solution-app-example-card p:not(.uppercase),
+  .enterprise-product #real-app-examples .solution-app-examples-cta p:not(.font-mono) {
     color: rgba(255, 255, 255, 0.62);
   }
-  .enterprise-product #real-app-examples article .grid-cols-2 span {
+  .enterprise-product #real-app-examples .solution-app-example-card .grid-cols-2 span {
     border-color: rgba(96, 165, 250, 0.18);
     background: rgba(96, 165, 250, 0.08);
     color: rgba(255, 255, 255, 0.78);
   }
-  .enterprise-product #real-app-examples article a {
+  .enterprise-product #real-app-examples .solution-app-example-link {
     border-color: rgba(255, 255, 255, 0.14);
     border-radius: 12px;
     color: var(--relief-blue);
   }
-  .enterprise-product #real-app-examples article a:hover {
+  .enterprise-product #real-app-examples .solution-app-example-link:hover,
+  .enterprise-product #real-app-examples .solution-app-example-link:focus-visible {
     border-color: rgba(96, 165, 250, 0.34);
     background: rgba(96, 165, 250, 0.08);
     color: #bfdbfe;
   }
-  .enterprise-product #app-examples-cta {
+  .enterprise-product #real-app-examples .solution-app-examples-cta {
     background: linear-gradient(180deg, rgba(96, 165, 250, 0.07), rgba(255, 255, 255, 0.02));
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
-  .enterprise-product #app-examples-cta > div:first-child > div {
+  .enterprise-product #real-app-examples .solution-app-examples-plays {
     border-color: rgba(255, 255, 255, 0.08);
   }
-  .enterprise-product #app-examples-cta span.rounded-full {
+  .enterprise-product #real-app-examples .solution-app-examples-cta span.rounded-full {
     background: rgba(96, 165, 250, 0.1);
     color: var(--relief-blue);
     box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.22);
   }
-  .enterprise-product #app-examples-cta p:last-child {
+  .enterprise-product #real-app-examples .solution-app-examples-cta p:last-child {
     color: rgba(255, 255, 255, 0.45);
   }
   @media (max-width: 720px) {
     .enterprise-product #real-app-examples {
       padding: 64px 0;
     }
-    .enterprise-product #real-app-examples > div > div:first-child {
+    .enterprise-product #real-app-examples .solution-app-examples-header {
       margin-bottom: 36px;
     }
   }
