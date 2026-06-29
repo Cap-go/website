@@ -1129,6 +1129,54 @@ const messages = {
   enterprise_billing: 'Enterprise Billing',
   enterprise_description:
     'Scale from thousands to millions of users without rewrites. Enterprise-grade security, 99.9% uptime SLA, and dedicated support for mission-critical apps.',
+  enterprise_hero_badge: 'Enterprise mobile release platform',
+  enterprise_hero_title: 'Secure, stable live updates for teams shipping at scale.',
+  enterprise_hero_desc:
+    'Capgo gives enterprise mobile teams signed and encrypted updates, SSO, audit logs, SLA-backed support, procurement-ready paperwork, and a guided rollout path for every app and environment.',
+  enterprise_hero_note: 'Map security, procurement, migration, and support before a production rollout.',
+  enterprise_hero_panel_label: 'Enterprise readiness',
+  enterprise_hero_panel_title: 'The controls buyers ask for are visible before the demo.',
+  enterprise_hero_panel_desc: 'Bring InfoSec, platform, legal, finance, and support into one release story instead of answering every team separately.',
+  enterprise_hero_security_label: 'Security',
+  enterprise_hero_security_value: 'SOC 2',
+  enterprise_hero_security_detail: 'Signed updates, E2E encryption, SSO, audit logs, and DPA support.',
+  enterprise_hero_stability_label: 'Stability',
+  enterprise_hero_stability_value: '99.9%',
+  enterprise_hero_stability_detail: 'Uptime SLA, instant rollback, and global delivery for urgent fixes.',
+  enterprise_hero_scale_label: 'Scale',
+  enterprise_hero_scale_detail: 'Large MAU, bandwidth, storage, teams, and multi-app portfolio limits.',
+  enterprise_hero_personalized_label: 'Personalized rollout',
+  enterprise_hero_personalized_value: 'Dedicated team',
+  enterprise_hero_personalized_detail: 'Private Slack or Teams channel, account manager, onboarding, and custom procurement.',
+  enterprise_faq_label: 'Enterprise FAQ',
+  enterprise_faq_title: 'The questions enterprise teams ask before choosing Capgo.',
+  enterprise_faq_desc: 'Use these answers to bring security, platform, finance, and support teams into the same evaluation.',
+  enterprise_faq_sso_q: 'Can we use our own SSO provider?',
+  enterprise_faq_sso_a:
+    'Yes. Enterprise includes SSO support, organization roles, member management, and audit logs so access can follow your internal identity and review process.',
+  enterprise_faq_data_q: 'Where are bundles and account data hosted?',
+  enterprise_faq_data_a:
+    'Capgo runs on globally replicated infrastructure and supports enterprise data-processing paperwork. We scope hosting, retention, and security expectations during onboarding so your review team has clear answers.',
+  enterprise_faq_self_host_q: 'Can updates be self-hosted or delivered from our infrastructure?',
+  enterprise_faq_self_host_a:
+    'Yes. Capgo is open source and can support hosted, dedicated, hybrid, or self-hosted deployment discussions when control requirements are more important than a standard SaaS setup.',
+  enterprise_faq_sla_q: 'What reliability commitment is available?',
+  enterprise_faq_sla_a:
+    'Enterprise includes a 99.9% uptime SLA, global replication, signed update delivery, and rollback workflows designed for production incidents and regulated release processes.',
+  enterprise_faq_legal_q: 'Can Capgo work with our MSA, DPA, NDA, or PO flow?',
+  enterprise_faq_legal_a:
+    'Yes. Enterprise conversations can include custom payment processes, purchase orders, signed non-disclosure agreements, DPAs, and procurement workflows before rollout.',
+  enterprise_faq_custom_q: 'Can your team build or fix Capacitor plugins for us?',
+  enterprise_faq_custom_a: 'Yes. Enterprise can include priority plugin fixes, migration support, and custom plugin work when your release path depends on native functionality.',
+  enterprise_faq_payment_q: 'What payment and procurement terms do you support?',
+  enterprise_faq_payment_a:
+    'We support Stripe payment options plus custom enterprise payment processes for finance teams that need invoices, purchase orders, or procurement-system workflows.',
+  enterprise_faq_plugins_q: 'Are Capgo plugins included with Enterprise?',
+  enterprise_faq_plugins_a:
+    'Enterprise includes access to the Capgo plugin ecosystem, priority plugin support, and a path to replace proprietary enterprise plugin dependencies where needed.',
+  enterprise_faq_migration_q: 'How do you migrate us from another live-update platform?',
+  enterprise_faq_migration_a:
+    'We plan the migration with your team, map channels and environments, test rollback behavior, and can run both systems side by side until the cutover is safe.',
   enterprise_testimonial_label: 'Enterprise testimonial',
   enterprise_proof_note_1: 'One release control plane for live updates, native builds, App Store publishing, plugins, and automation.',
   enterprise_proof_note_2: 'A buying story security, legal, finance, support, and release teams can all approve.',

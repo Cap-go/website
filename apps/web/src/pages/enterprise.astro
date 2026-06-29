@@ -6,7 +6,7 @@ import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import TeamAvatars from '@/components/TeamAvatars.astro'
 import type { Database } from '@/services/supabase.types'
-import { createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import { numberWithSpaces } from '@/services/misc'
 import { pluginCountLabel } from '@/config/plugins'
 
@@ -112,6 +112,23 @@ const enhancedEnterpriseProduct = {
   },
 }
 
+const enterpriseFaqItems = [
+  { question: m.enterprise_faq_sso_q({}, { locale }), answer: m.enterprise_faq_sso_a({}, { locale }) },
+  { question: m.enterprise_faq_data_q({}, { locale }), answer: m.enterprise_faq_data_a({}, { locale }) },
+  { question: m.enterprise_faq_self_host_q({}, { locale }), answer: m.enterprise_faq_self_host_a({}, { locale }) },
+  { question: m.enterprise_faq_sla_q({}, { locale }), answer: m.enterprise_faq_sla_a({}, { locale }) },
+  { question: m.enterprise_faq_legal_q({}, { locale }), answer: m.enterprise_faq_legal_a({}, { locale }) },
+  { question: m.enterprise_faq_custom_q({}, { locale }), answer: m.enterprise_faq_custom_a({}, { locale }) },
+  { question: m.enterprise_faq_payment_q({}, { locale }), answer: m.enterprise_faq_payment_a({}, { locale }) },
+  { question: m.enterprise_faq_plugins_q({}, { locale }), answer: m.enterprise_faq_plugins_a({}, { locale }) },
+  { question: m.enterprise_faq_migration_q({}, { locale }), answer: m.enterprise_faq_migration_a({}, { locale }) },
+]
+
+const enterpriseFaqLdJson = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+  url: enterpriseUrl,
+  questions: enterpriseFaqItems,
+})
+
 const content = {
   title,
   description,
@@ -129,7 +146,7 @@ const content = {
         url: enterpriseUrl,
       },
     ],
-    additionalEntities: [enterpriseService],
+    additionalEntities: [enterpriseService, enterpriseFaqLdJson],
   }),
 }
 
@@ -139,10 +156,27 @@ const enterpriseMau = `${numberWithSpaces(payg?.mau ?? 1000000)}+`
 const enterpriseBandwidth = `${numberWithSpaces(payg?.bandwidth ?? 5000)}+ GiB/month`
 const enterpriseStorage = `${numberWithSpaces(payg?.storage ?? 100)}+ GiB`
 
-const heroProofPoints = [
-  { label: m.enterprise_audience_label({}, { locale }), value: enterpriseMau, detail: m.enterprise_audience_detail({}, { locale }) },
-  { label: m.enterprise_delivery_label({}, { locale }), value: enterpriseBandwidth, detail: m.enterprise_delivery_detail({}, { locale }) },
-  { label: m.enterprise_artifacts_label({}, { locale }), value: enterpriseStorage, detail: m.enterprise_artifacts_detail({}, { locale }) },
+const enterpriseHeroCards = [
+  {
+    label: m.enterprise_hero_security_label({}, { locale }),
+    value: m.enterprise_hero_security_value({}, { locale }),
+    detail: m.enterprise_hero_security_detail({}, { locale }),
+  },
+  {
+    label: m.enterprise_hero_stability_label({}, { locale }),
+    value: m.enterprise_hero_stability_value({}, { locale }),
+    detail: m.enterprise_hero_stability_detail({}, { locale }),
+  },
+  {
+    label: m.enterprise_hero_scale_label({}, { locale }),
+    value: enterpriseMau,
+    detail: m.enterprise_hero_scale_detail({}, { locale }),
+  },
+  {
+    label: m.enterprise_hero_personalized_label({}, { locale }),
+    value: m.enterprise_hero_personalized_value({}, { locale }),
+    detail: m.enterprise_hero_personalized_detail({}, { locale }),
+  },
 ]
 
 const enterpriseLevers = [
@@ -341,51 +375,54 @@ const enterpriseBeforeAfterRows = [
 <Layout content={content}>
   <div class="lu enterprise-product bg-ad">
     <section class="section hero bg-grid grain" id="top">
-      <div class="shell">
-        <div class="beta-badge">
-          <span class="dot"></span>
-          {m.enterprise_ready({}, { locale })}
-        </div>
-        <h1 class="hero-banner" aria-label={`${m.enterprise_title({}, { locale })}: ${m.deliver_updates({}, { locale })} ${m.at_scale({}, { locale })}`}>
-          <span class="hbv-underlined">
-            <span class="hbv-u-name">{m.enterprise_title({}, { locale })}</span>
-            <span class="hbv-u-rule"></span>
-          </span>
-          <span class="hero-banner-tag">{m.deliver_updates({}, { locale })} {m.at_scale({}, { locale })}</span>
-        </h1>
-        <p class="lead hero-lead">{m.enterprise_hero_platform_desc({ pluginCountLabel }, { locale })}</p>
-        <div class="hero-ctas">
-          <div class="hero-cta-buttons">
-            <a
-              class="btn btn-lg btn-primary"
-              href="https://book.capgo.app/enterprise-inquiry/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={m.enterprise_talk_to_team({}, { locale })}
-            >
-              <TeamAvatars />
-              <span>{m.enterprise_talk_to_team({}, { locale })}</span>
-            </a>
-            <a class="btn btn-lg btn-ghost" href={getRelativeLocaleUrl(locale, 'pricing')}>{m.view_pricing({}, { locale })}</a>
+      <div class="shell enterprise-hero-shell">
+        <div class="enterprise-hero-copy">
+          <div class="beta-badge">
+            <span class="dot"></span>
+            {m.enterprise_hero_badge({}, { locale })}
           </div>
-          <p class="hero-cta-note">{m.enterprise_custom_card_desc({}, { locale })}</p>
+          <h1 class="enterprise-hero-title">{m.enterprise_hero_title({}, { locale })}</h1>
+          <p class="lead hero-lead">{m.enterprise_hero_desc({}, { locale })}</p>
+          <div class="hero-ctas enterprise-hero-ctas">
+            <div class="hero-cta-buttons">
+              <a
+                class="btn btn-lg btn-primary"
+                href="https://book.capgo.app/enterprise-inquiry/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={m.enterprise_talk_to_team({}, { locale })}
+              >
+                <TeamAvatars />
+                <span>{m.enterprise_talk_to_team({}, { locale })}</span>
+              </a>
+              <a class="btn btn-lg btn-ghost" href={getRelativeLocaleUrl(locale, 'pricing')}>{m.view_pricing({}, { locale })}</a>
+            </div>
+            <p class="hero-cta-note">{m.enterprise_hero_note({}, { locale })}</p>
+          </div>
+          <div class="hero-meta enterprise-hero-meta">
+            <span><span class="check">✓</span> {m.enterprise_soc2_certified({}, { locale })}</span>
+            <span><span class="check">✓</span> {m.enterprise_uptime_sla({}, { locale })}</span>
+            <span><span class="check">✓</span> {m.single_sign_on_sso({}, { locale })}</span>
+            <span><span class="check">✓</span> {m.audit_logs({}, { locale })}</span>
+          </div>
         </div>
-        <div class="hero-meta">
-          <span><span class="check">✓</span> {m.enterprise_uptime_sla({}, { locale })}</span>
-          <span><span class="check">✓</span> {m.single_sign_on_sso({}, { locale })}</span>
-          <span><span class="check">✓</span> {m.enterprise_signed_ndas_dpas({}, { locale })}</span>
-        </div>
-        <div class="hero-strip enterprise-hero-strip">
-          {
-            heroProofPoints.map((point) => (
-              <div class="hero-strip-cell">
-                <p class="v">{point.value}</p>
-                <p class="k">{point.label}</p>
-                <p class="enterprise-strip-detail">{point.detail}</p>
-              </div>
-            ))
-          }
-        </div>
+
+        <aside class="enterprise-hero-panel" aria-label={m.enterprise_hero_panel_label({}, { locale })}>
+          <p class="enterprise-card-label">{m.enterprise_hero_panel_label({}, { locale })}</p>
+          <h2>{m.enterprise_hero_panel_title({}, { locale })}</h2>
+          <p>{m.enterprise_hero_panel_desc({}, { locale })}</p>
+          <div class="enterprise-hero-card-grid">
+            {
+              enterpriseHeroCards.map((card) => (
+                <article class="enterprise-hero-card">
+                  <p class="enterprise-hero-card-value">{card.value}</p>
+                  <h3>{card.label}</h3>
+                  <p>{card.detail}</p>
+                </article>
+              ))
+            }
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -641,6 +678,35 @@ const enterpriseBeforeAfterRows = [
       </div>
     </section>
 
+    <section class="section bg-grid grain" id="faq">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.enterprise_faq_label({}, { locale })}</div>
+          <h2 class="h2-section">{m.enterprise_faq_title({}, { locale })}</h2>
+          <p class="lead">{m.enterprise_faq_desc({}, { locale })}</p>
+        </div>
+
+        <div class="enterprise-faq-grid">
+          {
+            enterpriseFaqItems.map((item, index) => (
+              <details class="enterprise-faq-item" open={index === 0}>
+                <summary>
+                  <span class="enterprise-faq-index">{String(index + 1).padStart(2, '0')}</span>
+                  <span>{item.question}</span>
+                  <span class="enterprise-faq-plus" aria-hidden="true">
+                    +
+                  </span>
+                </summary>
+                <div class="enterprise-faq-answer">
+                  <p>{item.answer}</p>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <SolutionAppExample solution="enterprise" />
   </div>
 </Layout>
@@ -650,22 +716,147 @@ const enterpriseBeforeAfterRows = [
     outline: 2px solid var(--relief-blue);
     outline-offset: 4px;
   }
-  .enterprise-product .hbv-u-name,
-  .enterprise-product .hero-banner-tag,
-  .enterprise-product .h2-section {
+  .enterprise-product .h2-section,
+  .enterprise-product .enterprise-hero-title {
     letter-spacing: 0;
   }
-  .enterprise-product .hero-lead {
+  .enterprise-product .hero {
+    padding: 88px 0 72px;
+    text-align: left;
+  }
+  .enterprise-product .enterprise-hero-shell {
+    display: grid;
+    gap: 32px;
+    align-items: center;
+  }
+  @media (min-width: 980px) {
+    .enterprise-product .enterprise-hero-shell {
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+    }
+  }
+  .enterprise-product .enterprise-hero-copy {
     max-width: 760px;
   }
-  .enterprise-product .enterprise-hero-strip {
-    max-width: 1020px;
+  .enterprise-product .enterprise-hero-title {
+    margin: 0;
+    max-width: 820px;
+    color: #fff;
+    font-size: clamp(3rem, 7.4vw, 6.4rem);
+    font-weight: 900;
+    line-height: 0.95;
+    text-wrap: balance;
   }
-  .enterprise-product .enterprise-strip-detail {
-    margin: 6px 0 0;
-    font-size: 12px;
-    line-height: 1.45;
-    color: rgba(255, 255, 255, 0.5);
+  .enterprise-product .hero-lead {
+    max-width: 720px;
+    margin: 28px 0 34px;
+  }
+  .enterprise-product .enterprise-hero-ctas {
+    align-items: flex-start;
+  }
+  .enterprise-product .enterprise-hero-ctas .hero-cta-buttons,
+  .enterprise-product .enterprise-hero-meta {
+    justify-content: flex-start;
+  }
+  .enterprise-product .enterprise-hero-meta {
+    max-width: 760px;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  .enterprise-product .enterprise-hero-meta > span {
+    min-height: 34px;
+    padding: 7px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(96, 165, 250, 0.18);
+    background: rgba(96, 165, 250, 0.07);
+    color: rgba(255, 255, 255, 0.68);
+    letter-spacing: 0;
+  }
+  .enterprise-product .enterprise-hero-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, rgba(96, 165, 250, 0.1), rgba(255, 255, 255, 0.025));
+    padding: 24px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      0 32px 90px rgba(2, 6, 23, 0.42);
+  }
+  .enterprise-product .enterprise-hero-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(circle at 70% 0%, black 0%, transparent 62%);
+    -webkit-mask-image: radial-gradient(circle at 70% 0%, black 0%, transparent 62%);
+    pointer-events: none;
+  }
+  .enterprise-product .enterprise-hero-panel > * {
+    position: relative;
+  }
+  .enterprise-product .enterprise-hero-panel h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+  .enterprise-product .enterprise-hero-panel > p:not(.enterprise-card-label) {
+    margin: 14px 0 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .enterprise-product .enterprise-hero-card-grid {
+    display: grid;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  @media (min-width: 640px) {
+    .enterprise-product .enterprise-hero-card-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .enterprise-product .enterprise-hero-card {
+    min-height: 154px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.035);
+    padding: 16px;
+  }
+  .enterprise-product .enterprise-hero-card-value {
+    margin: 0 0 14px;
+    color: var(--relief-blue);
+    font-size: clamp(1.45rem, 2.4vw, 2rem);
+    font-weight: 900;
+    line-height: 1;
+  }
+  .enterprise-product .enterprise-hero-card h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+  .enterprise-product .enterprise-hero-card p:not(.enterprise-hero-card-value) {
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  @media (max-width: 720px) {
+    .enterprise-product .hero {
+      padding: 64px 0 56px;
+    }
+    .enterprise-product .enterprise-hero-title {
+      font-size: clamp(2.55rem, 14vw, 4.2rem);
+    }
+    .enterprise-product .enterprise-hero-panel {
+      padding: 18px;
+    }
   }
   .enterprise-product .enterprise-logo-grid {
     margin-top: 40px;
@@ -947,6 +1138,83 @@ const enterpriseBeforeAfterRows = [
   @media (min-width: 640px) {
     .enterprise-product .enterprise-feature-group ul {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .enterprise-product .enterprise-faq-grid {
+    display: grid;
+    gap: 12px;
+    margin-top: 44px;
+  }
+  .enterprise-product .enterprise-faq-item {
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .enterprise-product .enterprise-faq-item[open] {
+    border-color: rgba(96, 165, 250, 0.22);
+    background: rgba(96, 165, 250, 0.055);
+  }
+  .enterprise-product .enterprise-faq-item summary {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    min-height: 64px;
+    padding: 18px 20px;
+    color: #fff;
+    font-weight: 800;
+    line-height: 1.35;
+    cursor: pointer;
+    list-style: none;
+  }
+  .enterprise-product .enterprise-faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .enterprise-product .enterprise-faq-item summary:focus-visible {
+    outline: 2px solid var(--relief-blue);
+    outline-offset: -4px;
+  }
+  .enterprise-product .enterprise-faq-index {
+    color: var(--relief-blue);
+    font-family: var(--lu-font-mono);
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .enterprise-product .enterprise-faq-plus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 10px;
+    background: rgba(96, 165, 250, 0.12);
+    color: var(--relief-blue);
+    font-weight: 900;
+    transition: transform 0.18s ease;
+  }
+  .enterprise-product .enterprise-faq-item[open] .enterprise-faq-plus {
+    transform: rotate(45deg);
+  }
+  .enterprise-product .enterprise-faq-answer {
+    padding: 0 20px 20px 56px;
+  }
+  .enterprise-product .enterprise-faq-answer p {
+    margin: 0;
+    max-width: 860px;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  @media (max-width: 640px) {
+    .enterprise-product .enterprise-faq-item summary {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .enterprise-product .enterprise-faq-index {
+      display: none;
+    }
+    .enterprise-product .enterprise-faq-answer {
+      padding-left: 20px;
     }
   }
   .enterprise-product #real-app-examples {
