@@ -156,7 +156,7 @@ const enterpriseMau = `${numberWithSpaces(payg?.mau ?? 1000000)}+`
 const enterpriseBandwidth = `${numberWithSpaces(payg?.bandwidth ?? 5000)}+ GiB/month`
 const enterpriseStorage = `${numberWithSpaces(payg?.storage ?? 100)}+ GiB`
 
-const enterpriseHeroCards = [
+const heroProofPoints = [
   {
     label: m.enterprise_hero_security_label({}, { locale }),
     value: m.enterprise_hero_security_value({}, { locale }),
@@ -171,11 +171,6 @@ const enterpriseHeroCards = [
     label: m.enterprise_hero_scale_label({}, { locale }),
     value: enterpriseMau,
     detail: m.enterprise_hero_scale_detail({}, { locale }),
-  },
-  {
-    label: m.enterprise_hero_personalized_label({}, { locale }),
-    value: m.enterprise_hero_personalized_value({}, { locale }),
-    detail: m.enterprise_hero_personalized_detail({}, { locale }),
   },
 ]
 
@@ -375,54 +370,52 @@ const enterpriseBeforeAfterRows = [
 <Layout content={content}>
   <div class="lu enterprise-product bg-ad">
     <section class="section hero bg-grid grain" id="top">
-      <div class="shell enterprise-hero-shell">
-        <div class="enterprise-hero-copy">
-          <div class="beta-badge">
-            <span class="dot"></span>
-            {m.enterprise_hero_badge({}, { locale })}
-          </div>
-          <h1 class="enterprise-hero-title">{m.enterprise_hero_title({}, { locale })}</h1>
-          <p class="lead hero-lead">{m.enterprise_hero_desc({}, { locale })}</p>
-          <div class="hero-ctas enterprise-hero-ctas">
-            <div class="hero-cta-buttons">
-              <a
-                class="btn btn-lg btn-primary"
-                href="https://book.capgo.app/enterprise-inquiry/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={m.enterprise_talk_to_team({}, { locale })}
-              >
-                <TeamAvatars />
-                <span>{m.enterprise_talk_to_team({}, { locale })}</span>
-              </a>
-              <a class="btn btn-lg btn-ghost" href={getRelativeLocaleUrl(locale, 'pricing')}>{m.view_pricing({}, { locale })}</a>
-            </div>
-            <p class="hero-cta-note">{m.enterprise_hero_note({}, { locale })}</p>
-          </div>
-          <div class="hero-meta enterprise-hero-meta">
-            <span><span class="check">✓</span> {m.enterprise_soc2_certified({}, { locale })}</span>
-            <span><span class="check">✓</span> {m.enterprise_uptime_sla({}, { locale })}</span>
-            <span><span class="check">✓</span> {m.single_sign_on_sso({}, { locale })}</span>
-            <span><span class="check">✓</span> {m.audit_logs({}, { locale })}</span>
-          </div>
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          {m.enterprise_hero_badge({}, { locale })}
         </div>
-
-        <aside class="enterprise-hero-panel" aria-label={m.enterprise_hero_panel_label({}, { locale })}>
-          <p class="enterprise-card-label">{m.enterprise_hero_panel_label({}, { locale })}</p>
-          <h2>{m.enterprise_hero_panel_title({}, { locale })}</h2>
-          <p>{m.enterprise_hero_panel_desc({}, { locale })}</p>
-          <div class="enterprise-hero-card-grid">
-            {
-              enterpriseHeroCards.map((card) => (
-                <article class="enterprise-hero-card">
-                  <p class="enterprise-hero-card-value">{card.value}</p>
-                  <h3>{card.label}</h3>
-                  <p>{card.detail}</p>
-                </article>
-              ))
-            }
+        <h1 class="hero-banner" aria-label={`${m.enterprise_title({}, { locale })}: ${m.enterprise_hero_title({}, { locale })}`}>
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">{m.enterprise_title({}, { locale })}</span>
+            <span class="hbv-u-rule"></span>
+          </span>
+          <span class="hero-banner-tag">{m.enterprise_hero_title({}, { locale })}</span>
+        </h1>
+        <p class="lead hero-lead">{m.enterprise_hero_desc({}, { locale })}</p>
+        <div class="hero-ctas">
+          <div class="hero-cta-buttons">
+            <a
+              class="btn btn-lg btn-primary"
+              href="https://book.capgo.app/enterprise-inquiry/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={m.enterprise_talk_to_team({}, { locale })}
+            >
+              <TeamAvatars />
+              <span>{m.enterprise_talk_to_team({}, { locale })}</span>
+            </a>
+            <a class="btn btn-lg btn-ghost" href={getRelativeLocaleUrl(locale, 'pricing')}>{m.view_pricing({}, { locale })}</a>
           </div>
-        </aside>
+          <p class="hero-cta-note">{m.enterprise_hero_note({}, { locale })}</p>
+        </div>
+        <div class="hero-meta">
+          <span><span class="check">✓</span> {m.enterprise_soc2_certified({}, { locale })}</span>
+          <span><span class="check">✓</span> {m.enterprise_uptime_sla({}, { locale })}</span>
+          <span><span class="check">✓</span> {m.single_sign_on_sso({}, { locale })}</span>
+          <span><span class="check">✓</span> {m.enterprise_hero_personalized_value({}, { locale })}</span>
+        </div>
+        <div class="hero-strip enterprise-hero-strip">
+          {
+            heroProofPoints.map((point) => (
+              <div class="hero-strip-cell">
+                <p class="v">{point.value}</p>
+                <p class="k">{point.label}</p>
+                <p class="enterprise-strip-detail">{point.detail}</p>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </section>
 
@@ -716,147 +709,22 @@ const enterpriseBeforeAfterRows = [
     outline: 2px solid var(--relief-blue);
     outline-offset: 4px;
   }
-  .enterprise-product .h2-section,
-  .enterprise-product .enterprise-hero-title {
+  .enterprise-product .hbv-u-name,
+  .enterprise-product .hero-banner-tag,
+  .enterprise-product .h2-section {
     letter-spacing: 0;
-  }
-  .enterprise-product .hero {
-    padding: 88px 0 72px;
-    text-align: left;
-  }
-  .enterprise-product .enterprise-hero-shell {
-    display: grid;
-    gap: 32px;
-    align-items: center;
-  }
-  @media (min-width: 980px) {
-    .enterprise-product .enterprise-hero-shell {
-      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
-    }
-  }
-  .enterprise-product .enterprise-hero-copy {
-    max-width: 760px;
-  }
-  .enterprise-product .enterprise-hero-title {
-    margin: 0;
-    max-width: 820px;
-    color: #fff;
-    font-size: clamp(3rem, 7.4vw, 6.4rem);
-    font-weight: 900;
-    line-height: 0.95;
-    text-wrap: balance;
   }
   .enterprise-product .hero-lead {
-    max-width: 720px;
-    margin: 28px 0 34px;
-  }
-  .enterprise-product .enterprise-hero-ctas {
-    align-items: flex-start;
-  }
-  .enterprise-product .enterprise-hero-ctas .hero-cta-buttons,
-  .enterprise-product .enterprise-hero-meta {
-    justify-content: flex-start;
-  }
-  .enterprise-product .enterprise-hero-meta {
     max-width: 760px;
-    gap: 10px;
-    margin-top: 30px;
   }
-  .enterprise-product .enterprise-hero-meta > span {
-    min-height: 34px;
-    padding: 7px 10px;
-    border-radius: 10px;
-    border: 1px solid rgba(96, 165, 250, 0.18);
-    background: rgba(96, 165, 250, 0.07);
-    color: rgba(255, 255, 255, 0.68);
-    letter-spacing: 0;
+  .enterprise-product .enterprise-hero-strip {
+    max-width: 1020px;
   }
-  .enterprise-product .enterprise-hero-panel {
-    position: relative;
-    overflow: hidden;
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(180deg, rgba(96, 165, 250, 0.1), rgba(255, 255, 255, 0.025));
-    padding: 24px;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 32px 90px rgba(2, 6, 23, 0.42);
-  }
-  .enterprise-product .enterprise-hero-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(circle at 70% 0%, black 0%, transparent 62%);
-    -webkit-mask-image: radial-gradient(circle at 70% 0%, black 0%, transparent 62%);
-    pointer-events: none;
-  }
-  .enterprise-product .enterprise-hero-panel > * {
-    position: relative;
-  }
-  .enterprise-product .enterprise-hero-panel h2 {
-    margin: 0;
-    color: #fff;
-    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
-    font-weight: 800;
-    line-height: 1.08;
-    letter-spacing: 0;
-    text-wrap: balance;
-  }
-  .enterprise-product .enterprise-hero-panel > p:not(.enterprise-card-label) {
-    margin: 14px 0 0;
-    color: rgba(255, 255, 255, 0.62);
-    font-size: 14px;
-    line-height: 1.65;
-  }
-  .enterprise-product .enterprise-hero-card-grid {
-    display: grid;
-    gap: 12px;
-    margin-top: 22px;
-  }
-  @media (min-width: 640px) {
-    .enterprise-product .enterprise-hero-card-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  .enterprise-product .enterprise-hero-card {
-    min-height: 154px;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.035);
-    padding: 16px;
-  }
-  .enterprise-product .enterprise-hero-card-value {
-    margin: 0 0 14px;
-    color: var(--relief-blue);
-    font-size: clamp(1.45rem, 2.4vw, 2rem);
-    font-weight: 900;
-    line-height: 1;
-  }
-  .enterprise-product .enterprise-hero-card h3 {
-    margin: 0;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 0;
-  }
-  .enterprise-product .enterprise-hero-card p:not(.enterprise-hero-card-value) {
-    margin: 8px 0 0;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 12.5px;
-    line-height: 1.5;
-  }
-  @media (max-width: 720px) {
-    .enterprise-product .hero {
-      padding: 64px 0 56px;
-    }
-    .enterprise-product .enterprise-hero-title {
-      font-size: clamp(2.55rem, 14vw, 4.2rem);
-    }
-    .enterprise-product .enterprise-hero-panel {
-      padding: 18px;
-    }
+  .enterprise-product .enterprise-strip-detail {
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.5);
   }
   .enterprise-product .enterprise-logo-grid {
     margin-top: 40px;
