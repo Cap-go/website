@@ -21,6 +21,13 @@ const localeFlags: Record<string, string> = {
 }
 
 const currentFlag = localeFlags[Astro.locals.locale] || '🇺🇸'
+interface FooterBlogPost {
+  title: string
+  href: string
+  tag?: string
+}
+
+const { blogPosts = [] } = Astro.props as { blogPosts?: FooterBlogPost[] }
 
 interface NavigationItem {
   name: string | (() => string)
@@ -211,6 +218,29 @@ const navigation: Record<string, NavigationItem[]> = {
         ))
       }
     </div>
+
+    {
+      blogPosts.length > 0 && (
+        <section class="mb-12 border-b border-zinc-800 pb-12" aria-labelledby="footer-blog-heading">
+          <div class="grid gap-5 lg:grid-cols-[minmax(0,14rem)_1fr] lg:items-start">
+            <div>
+              <h3 id="footer-blog-heading" class="text-base font-semibold text-white sm:text-sm">
+                Blog
+              </h3>
+              <p class="mt-2 text-base/7 text-zinc-400 sm:text-sm/6">Latest from our blog</p>
+            </div>
+            <div class="grid gap-3 lg:grid-cols-3">
+              {blogPosts.map((post) => (
+                <a href={post.href} class="group rounded-lg border border-zinc-800 bg-white/[0.02] p-4 transition hover:border-blue-500/60 hover:bg-white/[0.04]">
+                  {post.tag && <span class="text-base/6 font-normal text-blue-300 sm:text-sm/6">{post.tag}</span>}
+                  <span class="mt-2 block text-base/6 font-medium text-white transition group-hover:text-blue-100 sm:text-sm/6">{post.title}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
 
     <!-- Links Grid -->
     <div class="mb-12 grid grid-cols-2 gap-8 md:grid-cols-6">

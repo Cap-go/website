@@ -122,6 +122,12 @@ const content = {
   ldJSON,
 }
 
+const nativeBuildFooterBlogSlugs = [
+  'transform-lovable-dev-app-to-mobile-with-capacitor',
+  'transform-base44-app-to-mobile-with-capacitor',
+  'build-ios-app-from-windows-capacitor-capgo-build',
+]
+
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
 
@@ -250,7 +256,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
 }
 ---
 
-<Layout content={content}>
+<Layout content={content} footerBlogSlugs={nativeBuildFooterBlogSlugs}>
   <div class="nb bg-ad">
     <!-- ============================================ HERO ============================================ -->
     <section class="section hero bg-grid grain" id="top">
