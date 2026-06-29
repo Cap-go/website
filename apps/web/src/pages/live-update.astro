@@ -162,6 +162,28 @@ const steps = [
   },
 ]
 
+
+const platformCards = [
+  {
+    title: m.live_update_platform_capacitor_title({}, { locale }),
+    text: m.live_update_platform_capacitor_text({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/updater/getting-started'),
+    readMore: m.live_update_platform_read_more({}, { locale }),
+  },
+  {
+    title: m.live_update_platform_cordova_title({}, { locale }),
+    text: m.live_update_platform_cordova_text({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/cordova-updater/getting-started'),
+    readMore: m.live_update_platform_read_more({}, { locale }),
+  },
+  {
+    title: m.live_update_platform_electron_title({}, { locale }),
+    text: m.live_update_platform_electron_text({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/electron-updater/getting-started'),
+    readMore: m.live_update_platform_read_more({}, { locale }),
+  },
+]
+
 const featureTiles = [
   {
     title: m.live_update_feature_breaking_detection({}, { locale }),
@@ -231,6 +253,32 @@ const featureTiles = [
                 <p class="v">{item.value}</p>
                 <p class="k">{item.label}</p>
               </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SUPPORTED PLATFORMS -->
+    <section class="section" id="platforms">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.live_update_platforms_kicker({}, { locale })}</div>
+          <h2 class="h2-section">{m.live_update_platforms_title({}, { locale })}</h2>
+          <p class="lead">{m.live_update_platforms_desc({}, { locale })}</p>
+        </div>
+
+        <div class="outcome-grid platform-grid">
+          {
+            platformCards.map((card) => (
+              <article class="outcome-card platform-card">
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+                <a class="platform-link" href={card.href}>
+                  {card.readMore} →
+                </a>
+              </article>
             ))
           }
         </div>

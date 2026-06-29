@@ -914,3 +914,25 @@ body:has(.lu) footer > div > div:first-child {
     min-width: 700px;
   }
 }
+
+.lu .platform-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.lu .platform-card p {
+  flex: 1;
+}
+.lu .platform-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #93c5fd;
+  text-decoration: none;
+}
+.lu .platform-link:hover {
+  color: #bfdbfe;
+  text-decoration: underline;
+}

@@ -1842,7 +1842,7 @@ const messages = {
   live_update_lts_capacitor7: 'Capacitor 7',
   live_update_lts_capacitor8: 'Capacitor 8',
   live_update_lts_desc:
-    'No pressure to upgrade immediately. Capgo officially supports Capacitor 8, 7, 6, 5 and Electron - giving you years of support and flexibility to upgrade on your own schedule.',
+    'No pressure to upgrade immediately. Capgo supports Capacitor 8, 7, 6, 5, Cordova iOS/Android, and Electron — giving you years of support and flexibility to upgrade on your own schedule.',
   live_update_proof_card1_desc:
     'Capgo gives Capacitor teams a focused release system for live updates, with open-source SDKs, flexible hosting, and production controls built for real apps.',
   live_update_proof_card1_title: 'First independent path',
@@ -1859,6 +1859,21 @@ const messages = {
   live_update_proof_title: 'Capgo turns live updates into a production release system.',
   live_update_lts_electron: 'Electron',
   live_update_lts_electron_new: 'New',
+  live_update_platforms_kicker: 'Supported runtimes',
+  live_update_platforms_title: 'One Capgo backend for every hybrid stack you ship.',
+  live_update_platforms_desc:
+    'Use the same channels, bundle uploads, rollback protection, and device logs whether your app runs on Capacitor, Cordova, or Electron.',
+  live_update_platform_capacitor_title: 'Capacitor',
+  live_update_platform_capacitor_text:
+    'Native live updates for iOS and Android apps built with Capacitor. Install @capgo/capacitor-updater and ship bundles with @capgo/cli.',
+  live_update_platform_cordova_title: 'Cordova',
+  live_update_platform_cordova_text:
+    'Keep your Cordova toolchain and still get Capgo OTA on iOS 7+ and Android 13+ with @capgo/cordova-updater and the same JavaScript API.',
+  live_update_platform_electron_title: 'Electron',
+  live_update_platform_electron_text:
+    'Push HTML, CSS, and JavaScript updates to desktop apps without rebuilding installers. @capgo/electron-updater mirrors the mobile API.',
+  live_update_platform_read_more: 'Read more',
+
   live_update_lts_supported: 'Fully Supported',
   live_update_lts_title: 'Long-Term Support',
   live_update_outcome_card_control_text: 'Ship to internal, beta, canary, and production channels with rollback ready before a rollout becomes a support incident.',
