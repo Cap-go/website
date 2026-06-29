@@ -1,16 +1,24 @@
 ---
 locale: en
 ---
-# Using @capgo/capacitor-updater
+# Ionic and Capacitor live updates with @capgo/capacitor-updater
 
-Live update for capacitor apps.
+@capgo/capacitor-updater is the open-source updater plugin behind Capgo live updates for Ionic and Capacitor apps. It downloads approved web bundles, applies them with native rollback protection, and keeps binary-only changes on the normal App Store and Play review path.
+
+Use it when you need OTA updates for HTML, CSS, JavaScript, assets, and other web-layer changes after your native shell is already approved.
 
 ## Install
 
 ```bash
-bun add @capgo/capacitor-updater
-bunx cap sync
+npm install @capgo/capacitor-updater
+npx cap sync
 ```
+
+## Where It Fits
+
+For Ionic teams, live updates usually mean the same workflow: ship a new web bundle without forcing every user through a full store release. Capgo handles that workflow for Capacitor apps with channels, compatibility checks, rollout control, device logs, and rollback.
+
+Native plugins, entitlements, Android manifest changes, iOS plist changes, and binary SDK updates still require a normal app store release. Keep those changes in your native build pipeline and use live updates for the approved web layer.
 
 ## What This Plugin Exposes
 
@@ -65,7 +73,8 @@ await CapacitorUpdater.setChannelUrl({} as ChannelUrl);
 
 - GitHub: https://github.com/Cap-go/capacitor-updater/
 - Docs: /docs/plugins/updater/
+- Live update product: /live-update/
 
-## Keep going from Using @capgo/capacitor-updater
+## Keep going from @capgo/capacitor-updater
 
-If you are using **Using @capgo/capacitor-updater** to plan native plugin work, connect it with [@capgo/capacitor-updater](/docs/plugins/updater/) for the implementation detail in @capgo/capacitor-updater, [Getting Started](/docs/plugins/updater/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.
+If you are using **@capgo/capacitor-updater** to plan live updates, connect it with [Live Updates](/live-update/) for the product workflow, [@capgo/capacitor-updater](/docs/plugins/updater/) for implementation details, [Getting Started](/docs/plugins/updater/getting-started/), [Channels](/docs/live-updates/channels/), and [Rollbacks](/docs/live-updates/rollbacks/).
