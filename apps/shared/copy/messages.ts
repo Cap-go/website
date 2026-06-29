@@ -655,7 +655,7 @@ const messages = {
   consulting_forged_plugins_community_embraced: 'Consulting-Forged Plugins, Community Embraced',
   consulting_faq_title: 'Frequently asked questions',
   consulting_faq_subtitle:
-    'Still have questions about consulting? <a href="mailto:sales@capgo.app" class="text-gray-200 underline hover:text-white">Email our sales team</a> or <a href="https://discord.gg/VnYRvjUg" class="text-gray-200 underline hover:text-white">join our Discord community</a>.',
+    'Still have questions about consulting? <a href="mailto:sales@capgo.app" class="font-semibold text-gray-900 underline hover:text-gray-700">Email our sales team</a> or <a href="https://discord.gg/VnYRvjUg" class="font-semibold text-gray-900 underline hover:text-gray-700">join our Discord community</a>.',
   consulting_faq_q1: 'What does a typical engagement look like?',
   consulting_faq_a1:
     'Most engagements fall into one of four buckets: custom Capacitor plugin development, Capacitor version upgrades, Cordova-to-Capacitor migrations, and Ionic Enterprise SDK migrations. We also help teams integrate live updates, debug production native issues, and audit existing apps. Scope ranges from two-week fixed-price projects to multi-month retainers — every project starts with a free discovery call so we can understand your scope and goals before putting together a proposal.',
@@ -666,8 +666,7 @@ const messages = {
   consulting_faq_a3:
     'We offer two pricing models for all project sizes: fixed-price projects for well-scoped work (custom plugins, audits, upgrades, migrations) and monthly retainers for ongoing plugin maintenance and multi-phase engagements. You always get a clear proposal with deliverables and timeline before we start — no surprises.',
   consulting_faq_q4: 'Do you sign non-disclosure agreements?',
-  consulting_faq_a4:
-    'Yes. We routinely sign non-disclosure agreements before the discovery call and are happy to use your template or provide ours.',
+  consulting_faq_a4: 'Yes. We routinely sign non-disclosure agreements before the discovery call and are happy to use your template or provide ours.',
   consulting_faq_q5: 'Who owns the code and IP?',
   consulting_faq_a5:
     'You do. All code, plugins, and documentation we produce for you are assigned to your company on delivery. If we build something that could benefit the wider Capacitor community, we may ask to open-source a generalized version — but that is always your call.',
@@ -685,7 +684,7 @@ const messages = {
     'We help teams migrate live update workflows, native build pipelines, and Enterprise plugin dependencies to Capgo and our open-source plugin catalog. Migrations are scoped as fixed-price engagements so you know exactly what to expect.',
   consulting_faq_q10: 'How do we get started?',
   consulting_faq_a10:
-    'Book a free discovery call, send us an email, or reach out on Discord. You can also email <a href="mailto:sales@capgo.app" class="text-gray-200 underline hover:text-white">sales@capgo.app</a>.',
+    'Book a free discovery call, send us an email, or reach out on Discord. You can also email <a href="mailto:sales@capgo.app" class="font-semibold text-gray-900 underline hover:text-gray-700">sales@capgo.app</a>.',
   contact: 'Contact',
   contact_link: 'By visiting this page on the website:',
   contact_sales: 'Contact Sales',
