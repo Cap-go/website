@@ -1,46 +1,47 @@
 ---
-title: "Cordova"
-description: "Use @capgo/cordova-updater for Capgo live updates in Cordova iOS and Android apps."
+title: "Cordova / Electron"
+description: "Capgo live updates for Cordova and Electron apps with dedicated client plugins and the same cloud backend as Capacitor."
 sidebar:
   order: 8
+  label: "Cordova / Electron"
 ---
 
 import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
 
-Capgo now ships a first-class Cordova client: [`@capgo/cordova-updater`](https://github.com/Cap-go/cordova-updater). It mirrors the `@capgo/capacitor-updater` JavaScript API and connects to the same Capgo Cloud backend, channels, and bundle signing flow.
+Capacitor is the primary path documented in this updater section, but Capgo also ships dedicated clients for **Cordova** and **Electron**. Each plugin uses the same Capgo Cloud backend, channels, bundle signing, and `@capgo/cli` upload flow.
 
 <Aside type="tip">
-  Staying on Cordova does not mean giving up instant updates. Install the Cordova plugin, keep your existing Cordova toolchain, and upload bundles with `@capgo/cli` exactly like a Capacitor app.
+  You can keep the same Capgo app ID and channels when you support multiple runtimes. Only the client plugin package changes per stack.
 </Aside>
 
-## Supported stacks
+## Cordova
 
-| Client plugin | Platforms |
-| --- | --- |
-| `@capgo/capacitor-updater` | Capacitor iOS, Android |
-| `@capgo/cordova-updater` | Cordova iOS 7+, Android 13+ |
-| `@capgo/electron-updater` | Electron desktop |
+`@capgo/cordova-updater` mirrors the `@capgo/capacitor-updater` JavaScript API for Cordova iOS 7+ and Android 13+. Install it with `cordova plugin add`, call `cordova.plugins.Updater.notifyAppReady()` after `deviceready`, and upload bundles the same way you would for Capacitor.
 
-## Quick install
+Do not combine the plugin with `cordova-plugin-ionic-webview` — it bypasses Cordova scheme handlers and downloaded bundles will not apply.
 
-```bash
-cordova plugin add @capgo/cordova-updater --variable APP_ID=YOUR_CAPGO_APP_ID
-cordova prepare android ios
-```
+<LinkCard
+  title="Cordova updater docs"
+  href="/docs/plugins/cordova-updater/getting-started/"
+  description="Install plugin variables, configure iOS/Android WebView requirements, and ship your first bundle."
+/>
 
-Then call `cordova.plugins.Updater.notifyAppReady()` after `deviceready`. See the full guide:
+## Electron
 
-<CardGrid>
-  <LinkCard title="Cordova updater docs" href="/docs/plugins/cordova-updater/getting-started/" description="Install, configure plugin variables, and ship your first bundle." />
-  <LinkCard title="Capacitor updater docs" href="/docs/plugins/updater/getting-started/" description="Use this path when you migrate from Cordova to Capacitor." />
-</CardGrid>
+`@capgo/electron-updater` brings the same live-update model to desktop apps. Initialize the updater in the Electron main process, expose the preload bridge, call `notifyAppReady()` from the renderer, and manage releases from the same Capgo dashboard you use for mobile.
 
-## WebView requirements
+<LinkCard
+  title="Electron updater docs"
+  href="/docs/plugins/electron-updater/getting-started/"
+  description="Wire main process, preload, and renderer setup for OTA on desktop."
+/>
 
-Cordova Android 13+ and Cordova iOS 7+ serve the app through Cordova's built-in schemes. The updater hooks those handlers to swap in downloaded bundles.
+## Capacitor path
 
-Do **not** combine the plugin with `cordova-plugin-ionic-webview` — it bypasses Cordova scheme routing and OTA bundles will not apply.
+If you are on Capacitor already, stay on the main updater guide:
 
-## Considering migration?
-
-If you plan to move to Capacitor, you can keep the same Capgo app ID, channels, and uploaded bundles. Capgo's [Cordova → Capacitor consulting](https://capgo.app/consulting/) can help when you need native project migration, but OTA delivery works on Cordova today without waiting for a rewrite.
+<LinkCard
+  title="Capacitor updater docs"
+  href="/docs/plugins/updater/getting-started/"
+  description="Default install path for Capacitor iOS and Android apps."
+/>
