@@ -27,7 +27,14 @@ interface FooterBlogPost {
   tag?: string
 }
 
-const { blogPosts = [] } = Astro.props as { blogPosts?: FooterBlogPost[] }
+interface FooterBlogCopy {
+  label?: string
+  description?: string
+}
+
+const { blogPosts = [], blogCopy = {} } = Astro.props as { blogPosts?: FooterBlogPost[]; blogCopy?: FooterBlogCopy }
+const footerBlogLabel = blogCopy.label ?? m.blog({}, { locale: Astro.locals.locale })
+const footerBlogDescription = blogCopy.description ?? m.footer_blog_description({}, { locale: Astro.locals.locale })
 
 interface NavigationItem {
   name: string | (() => string)
@@ -225,9 +232,9 @@ const navigation: Record<string, NavigationItem[]> = {
           <div class="grid gap-5 lg:grid-cols-[minmax(0,14rem)_1fr] lg:items-start">
             <div>
               <h3 id="footer-blog-heading" class="text-base font-semibold text-white sm:text-sm">
-                Blog
+                {footerBlogLabel}
               </h3>
-              <p class="mt-2 text-base/7 text-zinc-400 sm:text-sm/6">Latest from our blog</p>
+              <p class="mt-2 text-base/7 text-zinc-400 sm:text-sm/6">{footerBlogDescription}</p>
             </div>
             <div class="grid gap-3 lg:grid-cols-3">
               {blogPosts.map((post) => (

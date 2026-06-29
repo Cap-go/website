@@ -127,6 +127,9 @@ const nativeBuildFooterBlogSlugs = [
   'transform-base44-app-to-mobile-with-capacitor',
   'build-ios-app-from-windows-capacitor-capgo-build',
 ]
+const nativeBuildFooterBlogCopy = {
+  description: copy('footer_blog_builder_description'),
+}
 
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
@@ -256,7 +259,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
 }
 ---
 
-<Layout content={content} footerBlogSlugs={nativeBuildFooterBlogSlugs}>
+<Layout content={content} footerBlogSlugs={nativeBuildFooterBlogSlugs} footerBlogCopy={nativeBuildFooterBlogCopy}>
   <div class="nb bg-ad">
     <!-- ============================================ HERO ============================================ -->
     <section class="section hero bg-grid grain" id="top">
