@@ -655,7 +655,7 @@ const messages = {
   consulting_forged_plugins_community_embraced: 'Consulting-Forged Plugins, Community Embraced',
   consulting_faq_title: 'Frequently asked questions',
   consulting_faq_subtitle:
-    'Still have questions about consulting? <a href="mailto:sales@capgo.app" class="font-semibold text-gray-900 underline hover:text-gray-700">Email our sales team</a> or <a href="https://discord.gg/VnYRvjUg" class="font-semibold text-gray-900 underline hover:text-gray-700">join our Discord community</a>.',
+    'Still have questions about consulting? <a href="mailto:sales@capgo.app">Email our sales team</a> or <a href="https://discord.gg/VnYRvjUg">join our Discord community</a>.',
   consulting_faq_q1: 'What does a typical engagement look like?',
   consulting_faq_a1:
     'Most engagements fall into one of four buckets: custom Capacitor plugin development, Capacitor version upgrades, Cordova-to-Capacitor migrations, and Ionic Enterprise SDK migrations. We also help teams integrate live updates, debug production native issues, and audit existing apps. Scope ranges from two-week fixed-price projects to multi-month retainers — every project starts with a free discovery call so we can understand your scope and goals before putting together a proposal.',
@@ -683,8 +683,7 @@ const messages = {
   consulting_faq_a9:
     'We help teams migrate live update workflows, native build pipelines, and Enterprise plugin dependencies to Capgo and our open-source plugin catalog. Migrations are scoped as fixed-price engagements so you know exactly what to expect.',
   consulting_faq_q10: 'How do we get started?',
-  consulting_faq_a10:
-    'Book a free discovery call, send us an email, or reach out on Discord. You can also email <a href="mailto:sales@capgo.app" class="font-semibold text-gray-900 underline hover:text-gray-700">sales@capgo.app</a>.',
+  consulting_faq_a10: 'Book a free discovery call, send us an email, or reach out on Discord. You can also email <a href="mailto:sales@capgo.app">sales@capgo.app</a>.',
   contact: 'Contact',
   contact_link: 'By visiting this page on the website:',
   contact_sales: 'Contact Sales',
