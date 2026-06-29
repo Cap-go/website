@@ -1,4 +1,5 @@
 ---
+import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
@@ -345,124 +346,97 @@ const enterpriseBeforeAfterRows = [
 ---
 
 <Layout content={content}>
-  <main class="bg-gray-50 text-gray-950">
-    <section class="mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24">
-      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
-        <div class="flex flex-col justify-center">
-          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_ready()}</p>
-          <h1 class="mt-4 max-w-4xl text-4xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
-            {m.deliver_updates({}, { locale })}
-            <span class="block text-gray-500">{m.at_scale({}, { locale })}</span>
-          </h1>
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-            {m.enterprise_hero_platform_desc({ pluginCountLabel }, { locale })}
-          </p>
-
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+  <div class="lu enterprise-product bg-ad">
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          {m.enterprise_ready({}, { locale })}
+        </div>
+        <h1 class="hero-banner" aria-label={`${m.enterprise_title({}, { locale })}: ${m.deliver_updates({}, { locale })} ${m.at_scale({}, { locale })}`}>
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">{m.enterprise_title({}, { locale })}</span>
+            <span class="hbv-u-rule"></span>
+          </span>
+          <span class="hero-banner-tag">{m.deliver_updates({}, { locale })} {m.at_scale({}, { locale })}</span>
+        </h1>
+        <p class="lead hero-lead">{m.enterprise_hero_platform_desc({ pluginCountLabel }, { locale })}</p>
+        <div class="hero-ctas">
+          <div class="hero-cta-buttons">
             <a
+              class="btn btn-lg btn-primary"
               href="https://book.capgo.app/enterprise-inquiry/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={m.enterprise_talk_to_team({}, { locale })}
-              class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             >
               <TeamAvatars />
               <span>{m.enterprise_talk_to_team({}, { locale })}</span>
             </a>
-            <a
-              href={getRelativeLocaleUrl(locale, 'pricing')}
-              class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              {m.view_pricing({}, { locale })}
-            </a>
+            <a class="btn btn-lg btn-ghost" href={getRelativeLocaleUrl(locale, 'pricing')}>{m.view_pricing({}, { locale })}</a>
           </div>
-
-          <div class="mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
-            {
-              heroProofPoints.map((point) => (
-                <div class="rounded-xl border border-gray-200 bg-white px-4 py-4 shadow-sm">
-                  <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">{point.label}</p>
-                  <p class="mt-2 text-2xl font-semibold tracking-tight text-gray-950">{point.value}</p>
-                  <p class="mt-1 text-sm leading-5 text-gray-600">{point.detail}</p>
-                </div>
-              ))
-            }
-          </div>
+          <p class="hero-cta-note">{m.enterprise_custom_card_desc({}, { locale })}</p>
         </div>
-
-        <aside class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-          <div class="border-b border-gray-200 p-6 sm:p-8">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_title({}, { locale })}</p>
-                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950">{m.custom({}, { locale })}</h2>
-                <p class="mt-3 max-w-sm text-sm leading-6 text-gray-600">{m.enterprise_custom_card_desc({}, { locale })}</p>
+        <div class="hero-meta">
+          <span><span class="check">✓</span> {m.enterprise_uptime_sla({}, { locale })}</span>
+          <span><span class="check">✓</span> {m.single_sign_on_sso({}, { locale })}</span>
+          <span><span class="check">✓</span> {m.enterprise_signed_ndas_dpas({}, { locale })}</span>
+        </div>
+        <div class="hero-strip enterprise-hero-strip">
+          {
+            heroProofPoints.map((point) => (
+              <div class="hero-strip-cell">
+                <p class="v">{point.value}</p>
+                <p class="k">{point.label}</p>
+                <p class="enterprise-strip-detail">{point.detail}</p>
               </div>
-              <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">{m.enterprise_for_scale({}, { locale })}</span>
-            </div>
-          </div>
-          <div class="divide-y divide-gray-100">
-            {
-              [
-                m.enterprise_feature_maus({ mau: enterpriseMau }, { locale }),
-                enterpriseBandwidth,
-                enterpriseStorage,
-                m.enterprise_6_concurrent_macos_m4({}, { locale }),
-                m.enterprise_dedicated_slack_teams({}, { locale }),
-                m.enterprise_sso_soc2_iso({}, { locale }),
-                m.enterprise_onboarding_account_management({}, { locale }),
-              ].map((item) => (
-                <div class="flex items-center gap-3 px-6 py-4 text-sm font-medium text-gray-700 sm:px-8">
-                  <svg class="h-5 w-5 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
-                  <span>{item}</span>
-                </div>
-              ))
-            }
-          </div>
-        </aside>
+            ))
+          }
+        </div>
       </div>
     </section>
 
-    <section class="border-y border-gray-200 bg-white py-10">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p class="text-center text-sm font-semibold tracking-wide text-gray-500 uppercase">{m.trusted_by_the_biggest_capacitor_apps({}, { locale })}</p>
-        <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+    <section class="section enterprise-proof" id="proof">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.trusted_by_the_biggest_capacitor_apps({}, { locale })}</div>
+          <h2 class="h2-section">{m.built_for_enterprise_teams({}, { locale })}</h2>
+          <p class="lead">{m.advanced_collaboration_security_compliance({}, { locale })}</p>
+        </div>
+
+        <div class="enterprise-logo-grid">
           {
             customers.map((customer) => (
-              <div class="flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4">
-                <img class="h-10 w-10 rounded-lg object-contain grayscale" src={customer.logo} alt={`${customer.name} logo`} width="40" height="40" loading="lazy" />
+              <div class="enterprise-logo-card">
+                <img src={customer.logo} alt={`${customer.name} logo`} width="40" height="40" loading="lazy" decoding="async" />
                 <div>
-                  <p class="text-sm font-semibold text-gray-950">{customer.name}</p>
-                  <p class="text-xs font-medium text-gray-500">
+                  <p>{customer.name}</p>
+                  <span>
                     {customer.downloads} {m.downloads({}, { locale })}
-                  </p>
+                  </span>
                 </div>
               </div>
             ))
           }
         </div>
 
-        <div class="mt-8 grid gap-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
-          <figure class="rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm sm:p-8">
-            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Enterprise testimonial</p>
-            <blockquote class="mt-4 text-xl leading-8 font-semibold tracking-tight text-gray-950 sm:text-2xl">"{enterpriseTestimonial.quote}"</blockquote>
-            <figcaption class="mt-5 text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-950">{enterpriseTestimonial.author}</span>
-              <span class="block">{enterpriseTestimonial.role}</span>
+        <div class="enterprise-proof-grid">
+          <figure class="enterprise-quote">
+            <p class="eyebrow eyebrow--blue">Enterprise testimonial</p>
+            <blockquote>"{enterpriseTestimonial.quote}"</blockquote>
+            <figcaption>
+              <strong>{enterpriseTestimonial.author}</strong>
+              <span>{enterpriseTestimonial.role}</span>
             </figcaption>
           </figure>
 
-          <div class="grid gap-3">
+          <div class="enterprise-note-list">
             {
               enterpriseProofNotes.map((note) => (
-                <div class="flex gap-3 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-                  <svg class="mt-1 h-5 w-5 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
-                  <p class="text-sm leading-6 font-medium text-gray-700">{note}</p>
-                </div>
+                <p>
+                  <span aria-hidden="true">✓</span>
+                  {note}
+                </p>
               ))
             }
           </div>
@@ -470,24 +444,24 @@ const enterpriseBeforeAfterRows = [
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-      <div class="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-        <div>
-          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Why enterprise teams stall</p>
-          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">The pain repeats every time mobile fixes depend on the store.</h2>
-          <p class="mt-4 text-base leading-7 text-gray-600">
+    <section class="section bg-grid grain" id="pain">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">Why enterprise teams stall</div>
+          <h2 class="h2-section">The pain repeats every time mobile fixes depend on the store.</h2>
+          <p class="lead">
             Enterprise teams do not need another speed promise. They need a release path that keeps urgent changes moving while security, support, finance, and platform owners
             still have control.
           </p>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2">
+        <div class="outcome-grid enterprise-pain-grid">
           {
             enterprisePainPoints.map((pain) => (
-              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                <p class="text-xs font-semibold tracking-wide text-blue-700 uppercase">{pain.label}</p>
-                <h3 class="mt-3 text-lg font-semibold tracking-tight text-gray-950">{pain.title}</h3>
-                <p class="mt-3 text-sm leading-6 text-gray-600">{pain.description}</p>
+              <article class="outcome-card enterprise-pain-card">
+                <p class="enterprise-card-label">{pain.label}</p>
+                <h3>{pain.title}</h3>
+                <p>{pain.description}</p>
               </article>
             ))
           }
@@ -495,52 +469,48 @@ const enterpriseBeforeAfterRows = [
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-      <div class="mx-auto max-w-3xl text-center">
-        <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_scale_label({}, { locale })}</p>
-        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.enterprise_limits_title({}, { locale })}</h2>
-        <p class="mt-4 text-base leading-7 text-gray-600">
-          {m.enterprise_limits_desc({}, { locale })}
-        </p>
-      </div>
+    <section class="section" id="scale">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--blue">{m.enterprise_scale_label({}, { locale })}</div>
+          <h2 class="h2-section">{m.enterprise_limits_title({}, { locale })}</h2>
+          <p class="lead">{m.enterprise_limits_desc({}, { locale })}</p>
+        </div>
 
-      <div class="mt-10 grid gap-4 lg:grid-cols-3">
-        {
-          enterpriseLevers.map((lever) => (
-            <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-              <p class="text-3xl font-semibold tracking-tight text-blue-700">{lever.metric}</p>
-              <h3 class="mt-5 text-xl font-semibold tracking-tight text-gray-950">{lever.title}</h3>
-              <p class="mt-3 text-sm leading-6 text-gray-600">{lever.description}</p>
-            </article>
-          ))
-        }
+        <div class="enterprise-metric-grid">
+          {
+            enterpriseLevers.map((lever) => (
+              <article class="enterprise-metric-card">
+                <p class="enterprise-metric-value">{lever.metric}</p>
+                <h3>{lever.title}</h3>
+                <p>{lever.description}</p>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </section>
 
-    <section class="bg-white py-16 sm:py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+    <section class="section bg-grid grain" id="approval">
+      <div class="shell">
+        <div class="enterprise-split">
           <div>
-            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_approval_label({}, { locale })}</p>
-            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.enterprise_approval_title({}, { locale })}</h2>
-            <p class="mt-4 text-base leading-7 text-gray-600">
-              {m.enterprise_approval_desc({}, { locale })}
-            </p>
+            <div class="eyebrow eyebrow--blue">{m.enterprise_approval_label({}, { locale })}</div>
+            <h2 class="h2-section">{m.enterprise_approval_title({}, { locale })}</h2>
+            <p class="lead">{m.enterprise_approval_desc({}, { locale })}</p>
           </div>
 
-          <div class="grid gap-4 sm:grid-cols-2">
+          <div class="enterprise-track-grid">
             {
               approvalTracks.map((track) => (
-                <article class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
-                  <h3 class="text-lg font-semibold tracking-tight text-gray-950">{track.title}</h3>
-                  <p class="mt-2 text-sm leading-6 text-gray-600">{track.description}</p>
-                  <ul class="mt-5 space-y-3">
+                <article class="enterprise-track-card">
+                  <h3>{track.title}</h3>
+                  <p>{track.description}</p>
+                  <ul>
                     {track.items.map((item) => (
-                      <li class="flex gap-3 text-sm leading-6 font-medium text-gray-700">
-                        <svg class="mt-1 h-4 w-4 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                        </svg>
-                        <span>{item}</span>
+                      <li>
+                        <span aria-hidden="true">✓</span>
+                        {item}
                       </li>
                     ))}
                   </ul>
@@ -552,86 +522,73 @@ const enterpriseBeforeAfterRows = [
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-      <div class="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-        <div>
-          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">What changes after Capgo</p>
-          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">The enterprise argument is not faster deploys. It is controlled recovery.</h2>
-          <p class="mt-4 text-base leading-7 text-gray-600">
+    <section class="section" id="comparison">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">What changes after Capgo</div>
+          <h2 class="h2-section">The enterprise argument is not faster deploys. It is controlled recovery.</h2>
+          <p class="lead">
             Speed matters because production pain is expensive. Control matters because enterprise buyers need to prove the faster path is governed, auditable, and reversible.
           </p>
         </div>
 
-        <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-          <div class="grid border-b border-gray-200 bg-gray-50 px-6 py-4 text-xs font-semibold tracking-wide text-gray-500 uppercase sm:grid-cols-[0.8fr_1fr_1fr]">
+        <div class="enterprise-table-wrap">
+          <div class="enterprise-table enterprise-table-head">
             <span>Use case</span>
-            <span class="mt-2 sm:mt-0">Before</span>
-            <span class="mt-2 sm:mt-0">With Capgo Enterprise</span>
+            <span>Before</span>
+            <span>With Capgo Enterprise</span>
           </div>
-          <div class="divide-y divide-gray-100">
-            {
-              enterpriseBeforeAfterRows.map((row) => (
-                <div class="grid gap-4 px-6 py-5 sm:grid-cols-[0.8fr_1fr_1fr]">
-                  <p class="text-sm font-semibold text-gray-950">{row.area}</p>
-                  <p class="text-sm leading-6 text-gray-600">{row.before}</p>
-                  <p class="text-sm leading-6 font-medium text-gray-800">{row.after}</p>
-                </div>
-              ))
-            }
+          {
+            enterpriseBeforeAfterRows.map((row) => (
+              <div class="enterprise-table">
+                <strong>{row.area}</strong>
+                <p>{row.before}</p>
+                <p class="enterprise-after">{row.after}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-grid grain" id="decision">
+      <div class="shell">
+        <div class="enterprise-split enterprise-split--compact">
+          <div>
+            <div class="eyebrow eyebrow--blue">{m.enterprise_decision_criteria_eyebrow({}, { locale })}</div>
+            <h2 class="h2-section">{m.enterprise_decision_criteria_title({}, { locale })}</h2>
+            <p class="lead">{m.enterprise_decision_criteria_desc({}, { locale })}</p>
+          </div>
+          <div class="decision-box enterprise-decision-box">
+            <h3>{m.enterprise_decision_questions_title({}, { locale })}</h3>
+            <ol class="enterprise-decision-list">
+              {enterpriseDecisionPoints.map((item) => <li>{item}</li>)}
+            </ol>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-      <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div>
-          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_decision_criteria_eyebrow({}, { locale })}</p>
-          <h2 class="mt-3 max-w-2xl text-3xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-4xl">
-            {m.enterprise_decision_criteria_title({}, { locale })}
-          </h2>
-          <p class="mt-4 text-base leading-7 text-gray-600">{m.enterprise_decision_criteria_desc({}, { locale })}</p>
-        </div>
-        <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-          <div class="border-b border-gray-200 px-6 py-4">
-            <h3 class="text-base font-semibold text-gray-950">{m.enterprise_decision_questions_title({}, { locale })}</h3>
-          </div>
-          <div class="divide-y divide-gray-100">
-            {
-              enterpriseDecisionPoints.map((item, index) => (
-                <div class="flex gap-4 px-6 py-5">
-                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-semibold text-blue-700">{index + 1}</span>
-                  <p class="text-sm leading-6 font-medium text-gray-700">{item}</p>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-white py-16 sm:py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-3xl text-center">
-          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.solutions_enterprise_solution_label({}, { locale })}</p>
-          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.solutions_enterprise_solution_title({}, { locale })}</h2>
-          <p class="mt-4 text-base leading-7 text-gray-600">{m.solutions_enterprise_solution_subtitle({}, { locale })}</p>
+    <section class="section" id="solution">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.solutions_enterprise_solution_label({}, { locale })}</div>
+          <h2 class="h2-section">{m.solutions_enterprise_solution_title({}, { locale })}</h2>
+          <p class="lead">{m.solutions_enterprise_solution_subtitle({}, { locale })}</p>
         </div>
 
-        <div class="mt-10 grid gap-4 lg:grid-cols-3">
+        <div class="outcome-grid">
           {
             pillars.map((pillar) => (
-              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                <p class="text-xs font-semibold tracking-wide text-blue-700 uppercase">{pillar.eyebrow}</p>
-                <h3 class="mt-3 text-xl font-semibold tracking-tight text-gray-950">{pillar.title}</h3>
-                <p class="mt-3 text-sm leading-6 text-gray-600">{pillar.description}</p>
-                <ul class="mt-6 space-y-3">
+              <article class="outcome-card enterprise-pillar-card">
+                <p class="enterprise-card-label">{pillar.eyebrow}</p>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.description}</p>
+                <ul>
                   {pillar.points.map((point) => (
-                    <li class="flex gap-3 text-sm leading-6 font-medium text-gray-700">
-                      <svg class="mt-1 h-4 w-4 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                      </svg>
-                      <span>{point}</span>
+                    <li>
+                      <span aria-hidden="true">✓</span>
+                      {point}
                     </li>
                   ))}
                 </ul>
@@ -642,53 +599,51 @@ const enterpriseBeforeAfterRows = [
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-      <div class="mx-auto max-w-3xl text-center">
-        <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_features({}, { locale })}</p>
-        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.built_for_enterprise_teams({}, { locale })}</h2>
-        <p class="mt-4 text-base leading-7 text-gray-600">{m.advanced_collaboration_security_compliance({}, { locale })}</p>
-      </div>
+    <section class="section bg-grid grain" id="features">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--blue">{m.enterprise_features({}, { locale })}</div>
+          <h2 class="h2-section">{m.built_for_enterprise_teams({}, { locale })}</h2>
+          <p class="lead">{m.advanced_collaboration_security_compliance({}, { locale })}</p>
+        </div>
 
-      <div class="mt-10 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-        <div class="grid divide-y divide-gray-200 lg:grid-cols-2 lg:divide-x lg:divide-y-0">
+        <div class="enterprise-feature-grid">
           {
             includedGroups.map((group) => (
-              <div class="p-6 sm:p-8">
-                <h3 class="text-lg font-semibold tracking-tight text-gray-950">{group.title}</h3>
-                <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+              <article class="enterprise-feature-group">
+                <h3>{group.title}</h3>
+                <ul>
                   {group.items.map((item) => (
-                    <li class="flex gap-3 text-sm leading-6 font-medium text-gray-700">
-                      <svg class="mt-1 h-4 w-4 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                      </svg>
-                      <span>{item}</span>
+                    <li>
+                      <span aria-hidden="true">✓</span>
+                      {item}
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))
           }
         </div>
       </div>
     </section>
 
-    <section class="bg-white py-16 sm:py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+    <section class="section" id="infrastructure">
+      <div class="shell">
+        <div class="enterprise-split enterprise-split--compact">
           <div>
-            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.global_infrastructure({}, { locale })}</p>
-            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">
+            <div class="eyebrow eyebrow--blue">{m.global_infrastructure({}, { locale })}</div>
+            <h2 class="h2-section">
               {m.global_infrastructure_lowercase({}, { locale })}
               {m.that_grows_with_you({}, { locale })}
             </h2>
-            <p class="mt-4 text-base leading-7 text-gray-600">{m.powered_by_serverless_edge_computing({}, { locale })}</p>
+            <p class="lead">{m.powered_by_serverless_edge_computing({}, { locale })}</p>
           </div>
-          <div class="grid gap-4 sm:grid-cols-3">
+          <div class="enterprise-stat-grid">
             {
               stats.map((stat) => (
-                <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                  <p class="text-3xl font-semibold tracking-tight text-gray-950">{stat.value}</p>
-                  <p class="mt-2 text-sm leading-6 font-medium text-gray-600">{stat.label}</p>
+                <div class="hero-strip-cell">
+                  <p class="v">{stat.value}</p>
+                  <p class="k">{stat.label}</p>
                 </div>
               ))
             }
@@ -697,28 +652,334 @@ const enterpriseBeforeAfterRows = [
       </div>
     </section>
 
-    <section class="bg-slate-950 pt-14 sm:pt-16">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-6 border-t border-white/10 pt-10 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div>
-            <p class="text-sm font-semibold tracking-wide text-cyan-300 uppercase">{m.ready_to_scale({}, { locale })}</p>
-            <h2 class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">{m.ready_to_deliver({}, { locale })} {m.updates_at_scale({}, { locale })}</h2>
-            <p class="mt-4 max-w-2xl text-base leading-7 text-slate-300">{m.join_leading_enterprises({}, { locale })}</p>
-          </div>
-          <a
-            href="https://book.capgo.app/enterprise-inquiry/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={m.enterprise_talk_to_team({}, { locale })}
-            class="inline-flex min-h-11 w-fit items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950 focus:outline-none"
-          >
-            <TeamAvatars />
-            <span>{m.enterprise_talk_to_team({}, { locale })}</span>
-          </a>
-        </div>
+    <SolutionAppExample solution="enterprise" />
+
+    <section class="section final bg-grid grain" id="cta">
+      <div class="shell">
+        <h2>
+          <span class="name">{m.ready_to_scale({}, { locale })}</span><br />
+          {m.ready_to_deliver({}, { locale })}
+          {m.updates_at_scale({}, { locale })}
+        </h2>
+        <p class="tagline">{m.join_leading_enterprises({}, { locale })}</p>
+        <a
+          class="btn btn-lg btn-primary btn-cta"
+          href="https://book.capgo.app/enterprise-inquiry/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={m.enterprise_talk_to_team({}, { locale })}
+        >
+          <TeamAvatars />
+          <span>{m.enterprise_talk_to_team({}, { locale })} &rarr;</span>
+        </a>
       </div>
     </section>
-
-    <SolutionAppExample solution="enterprise" />
-  </main>
+  </div>
 </Layout>
+
+<style is:global>
+  .enterprise-product .btn:focus-visible {
+    outline: 2px solid var(--relief-blue);
+    outline-offset: 4px;
+  }
+  .enterprise-product .hbv-u-name,
+  .enterprise-product .hero-banner-tag,
+  .enterprise-product .h2-section,
+  .enterprise-product .final h2 {
+    letter-spacing: 0;
+  }
+  .enterprise-product .hero-lead {
+    max-width: 760px;
+  }
+  .enterprise-product .enterprise-hero-strip {
+    max-width: 1020px;
+  }
+  .enterprise-product .enterprise-strip-detail {
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .enterprise-product .enterprise-logo-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media (min-width: 768px) {
+    .enterprise-product .enterprise-logo-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+  .enterprise-product .enterprise-logo-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 76px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .enterprise-product .enterprise-logo-card img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: contain;
+    filter: grayscale(1);
+  }
+  .enterprise-product .enterprise-logo-card p,
+  .enterprise-product .enterprise-logo-card span {
+    margin: 0;
+  }
+  .enterprise-product .enterprise-logo-card p {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .enterprise-product .enterprise-logo-card span {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+  }
+  .enterprise-product .enterprise-proof-grid,
+  .enterprise-product .enterprise-split {
+    display: grid;
+    gap: 24px;
+    margin-top: 48px;
+  }
+  @media (min-width: 960px) {
+    .enterprise-product .enterprise-proof-grid,
+    .enterprise-product .enterprise-split {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+    .enterprise-product .enterprise-split--compact {
+      grid-template-columns: 0.82fr 1.18fr;
+    }
+  }
+  .enterprise-product .enterprise-quote,
+  .enterprise-product .enterprise-note-list p,
+  .enterprise-product .enterprise-metric-card,
+  .enterprise-product .enterprise-track-card,
+  .enterprise-product .enterprise-feature-group {
+    margin: 0;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .enterprise-product .enterprise-quote {
+    padding: 24px;
+  }
+  .enterprise-product .enterprise-quote blockquote {
+    margin: 16px 0 0;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+  .enterprise-product .enterprise-quote figcaption {
+    margin-top: 22px;
+    display: grid;
+    gap: 2px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+  }
+  .enterprise-product .enterprise-quote strong {
+    color: #fff;
+  }
+  .enterprise-product .enterprise-note-list {
+    display: grid;
+    gap: 12px;
+  }
+  .enterprise-product .enterprise-note-list p {
+    display: flex;
+    gap: 10px;
+    padding: 18px 20px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .enterprise-product .enterprise-note-list span,
+  .enterprise-product .enterprise-track-card li span,
+  .enterprise-product .enterprise-pillar-card li span,
+  .enterprise-product .enterprise-feature-group li span {
+    color: var(--relief-blue);
+    font-weight: 700;
+  }
+  .enterprise-product .enterprise-pain-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 720px) {
+    .enterprise-product .enterprise-pain-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .enterprise-product .enterprise-card-label {
+    margin: 0 0 12px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--relief-blue) !important;
+  }
+  .enterprise-product .enterprise-metric-grid,
+  .enterprise-product .enterprise-track-grid,
+  .enterprise-product .enterprise-feature-grid,
+  .enterprise-product .enterprise-stat-grid {
+    display: grid;
+    gap: 14px;
+    margin-top: 40px;
+  }
+  @media (min-width: 768px) {
+    .enterprise-product .enterprise-metric-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .enterprise-product .enterprise-track-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 0;
+    }
+    .enterprise-product .enterprise-feature-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .enterprise-product .enterprise-stat-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 0;
+    }
+  }
+  .enterprise-product .enterprise-metric-card,
+  .enterprise-product .enterprise-track-card,
+  .enterprise-product .enterprise-feature-group {
+    padding: 22px;
+  }
+  .enterprise-product .enterprise-metric-value {
+    margin: 0 0 18px;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 900;
+    letter-spacing: 0;
+    color: var(--relief-blue);
+  }
+  .enterprise-product .enterprise-metric-card h3,
+  .enterprise-product .enterprise-track-card h3,
+  .enterprise-product .enterprise-feature-group h3,
+  .enterprise-product .enterprise-pillar-card h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  .enterprise-product .enterprise-metric-card p:not(.enterprise-metric-value),
+  .enterprise-product .enterprise-track-card p {
+    margin: 10px 0 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.58);
+  }
+  .enterprise-product .enterprise-track-card ul,
+  .enterprise-product .enterprise-pillar-card ul,
+  .enterprise-product .enterprise-feature-group ul,
+  .enterprise-product .enterprise-decision-list {
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .enterprise-product .enterprise-track-card li,
+  .enterprise-product .enterprise-pillar-card li,
+  .enterprise-product .enterprise-feature-group li,
+  .enterprise-product .enterprise-decision-list li {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.66);
+  }
+  .enterprise-product .enterprise-track-card li + li,
+  .enterprise-product .enterprise-pillar-card li + li,
+  .enterprise-product .enterprise-feature-group li + li,
+  .enterprise-product .enterprise-decision-list li + li {
+    margin-top: 10px;
+  }
+  .enterprise-product .enterprise-table-wrap {
+    margin-top: 44px;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .enterprise-product .enterprise-table {
+    display: grid;
+    gap: 14px;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .enterprise-product .enterprise-table:first-child {
+    border-top: 0;
+  }
+  @media (min-width: 820px) {
+    .enterprise-product .enterprise-table {
+      grid-template-columns: 0.8fr 1fr 1fr;
+      align-items: start;
+    }
+  }
+  .enterprise-product .enterprise-table-head {
+    background: rgba(96, 165, 250, 0.06);
+    color: var(--relief-blue);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .enterprise-product .enterprise-table strong {
+    color: #fff;
+    font-size: 14px;
+  }
+  .enterprise-product .enterprise-table p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.58);
+  }
+  .enterprise-product .enterprise-table .enterprise-after {
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 500;
+  }
+  .enterprise-product .enterprise-decision-box {
+    margin-top: 0;
+  }
+  .enterprise-product .enterprise-decision-list {
+    counter-reset: decision;
+  }
+  .enterprise-product .enterprise-decision-list li {
+    counter-increment: decision;
+  }
+  .enterprise-product .enterprise-decision-list li::before {
+    content: counter(decision);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    border-radius: 8px;
+    background: rgba(96, 165, 250, 0.12);
+    color: var(--relief-blue);
+    font-weight: 800;
+    font-size: 12px;
+  }
+  .enterprise-product .enterprise-pillar-card ul {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 16px;
+  }
+  .enterprise-product .enterprise-feature-group ul {
+    display: grid;
+    gap: 10px;
+  }
+  @media (min-width: 640px) {
+    .enterprise-product .enterprise-feature-group ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
