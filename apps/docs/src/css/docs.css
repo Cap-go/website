@@ -23,7 +23,7 @@ body,
   /* Your preferred code font. Starlight uses system monospace fonts by default. */
   --font-mono: 'IBM Plex Mono';
 
-/* Color for documentation */
+  /* Color for documentation */
   --color-accent-50: var(--color-blue-50);
   --color-accent-100: var(--color-blue-100);
   --color-accent-200: var(--color-blue-200);
@@ -191,6 +191,11 @@ body,
   }
 }
 
+@media (min-width: 50rem) {
+  .card-grid.stagger > :nth-child(2n) {
+    transform: translateY(var(--stagger-height));
+  }
+}
 @layer base {
   button:not(:disabled),
   [role='button']:not(:disabled) {
@@ -423,7 +428,7 @@ starlight-theme-select label select:hover {
 /* Make logo background transparent to blend with header */
 .header .site-title img,
 .header .logo img,
-.header img[src*="logo"] {
+.header img[src*='logo'] {
   background-color: transparent !important;
   mix-blend-mode: normal;
   height: 5rem !important;
