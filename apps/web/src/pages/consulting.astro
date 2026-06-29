@@ -30,8 +30,7 @@ const faqSchema = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
     { question: m.consulting_faq_q9({}, { locale }), answer: m.consulting_faq_a9({}, { locale }) },
     {
       question: m.consulting_faq_q10({}, { locale }),
-      answer:
-        'Book a free discovery call at https://book.capgo.app/consulting-services/, email sales@capgo.app, or reach out on Discord.',
+      answer: 'Book a free discovery call at https://book.capgo.app/consulting-services/, email sales@capgo.app, or reach out on Discord.',
     },
   ],
 })
@@ -190,8 +189,8 @@ const useCases = [
       </div>
 
       <h1 class="mb-6 text-5xl font-bold md:text-7xl">
-        <span class="text-white">Custom</span>
-        <span class="text-gray-200">Capacitor Plugins</span>
+        <span class="text-white">Custom </span>
+        <span class="text-gray-200">Capacitor Plugins </span>
         <span class="text-white">& Expert Consulting</span>
       </h1>
 
@@ -587,7 +586,7 @@ const useCases = [
         <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
           {m.consulting_faq_title({}, { locale })}
         </h2>
-        <p class="text-lg text-gray-600" set:html={m.consulting_faq_subtitle({}, { locale })} />
+        <p class="text-lg text-gray-600 [&_a]:font-semibold [&_a]:text-gray-900 [&_a]:underline hover:[&_a]:text-gray-700" set:html={m.consulting_faq_subtitle({}, { locale })} />
       </div>
 
       <dl class="space-y-4">
@@ -629,7 +628,7 @@ const useCases = [
         </div>
         <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
           <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q10({}, { locale })}</dt>
-          <dd class="mt-3 text-gray-600" set:html={m.consulting_faq_a10({}, { locale })} />
+          <dd class="mt-3 text-gray-600 [&_a]:font-semibold [&_a]:text-gray-900 [&_a]:underline hover:[&_a]:text-gray-700" set:html={m.consulting_faq_a10({}, { locale })} />
         </div>
       </dl>
     </div>

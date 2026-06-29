@@ -16,7 +16,7 @@ function copy(key: string, values: MessageValues = {}) {
   return m[key](values, { locale })
 }
 
-const title = `${brand} | ${m.live_update({}, { locale })}`
+const title = `${brand} | Ionic and Capacitor Live Updates`
 const description = m.live_update_description({}, { locale })
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const docsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates')
@@ -453,8 +453,11 @@ const featureTiles = [
     <div class="shell seo-bridge">
       <h2 class="h2-section" style="font-size: 1.5rem; margin-bottom: 12px;">Keep going from Capgo Live Updates</h2>
       <p>
-        Connect this page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
-        <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, and <a href="/native-build/">Capgo Native Builds</a> for releases that still need store review.
+        Connect this Ionic and Capacitor live update page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
+        <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, and <a href="/native-build/"
+          >Capgo Native Builds</a
+        >
+        for releases that still need store review.
       </p>
     </div>
   </div>

@@ -655,7 +655,7 @@ const messages = {
   consulting_forged_plugins_community_embraced: 'Consulting-Forged Plugins, Community Embraced',
   consulting_faq_title: 'Frequently asked questions',
   consulting_faq_subtitle:
-    'Still have questions about consulting? <a href="mailto:sales@capgo.app" class="text-gray-200 underline hover:text-white">Email our sales team</a> or <a href="https://discord.gg/VnYRvjUg" class="text-gray-200 underline hover:text-white">join our Discord community</a>.',
+    'Still have questions about consulting? <a href="mailto:sales@capgo.app">Email our sales team</a> or <a href="https://discord.gg/VnYRvjUg">join our Discord community</a>.',
   consulting_faq_q1: 'What does a typical engagement look like?',
   consulting_faq_a1:
     'Most engagements fall into one of four buckets: custom Capacitor plugin development, Capacitor version upgrades, Cordova-to-Capacitor migrations, and Ionic Enterprise SDK migrations. We also help teams integrate live updates, debug production native issues, and audit existing apps. Scope ranges from two-week fixed-price projects to multi-month retainers — every project starts with a free discovery call so we can understand your scope and goals before putting together a proposal.',
@@ -666,8 +666,7 @@ const messages = {
   consulting_faq_a3:
     'We offer two pricing models for all project sizes: fixed-price projects for well-scoped work (custom plugins, audits, upgrades, migrations) and monthly retainers for ongoing plugin maintenance and multi-phase engagements. You always get a clear proposal with deliverables and timeline before we start — no surprises.',
   consulting_faq_q4: 'Do you sign non-disclosure agreements?',
-  consulting_faq_a4:
-    'Yes. We routinely sign non-disclosure agreements before the discovery call and are happy to use your template or provide ours.',
+  consulting_faq_a4: 'Yes. We routinely sign non-disclosure agreements before the discovery call and are happy to use your template or provide ours.',
   consulting_faq_q5: 'Who owns the code and IP?',
   consulting_faq_a5:
     'You do. All code, plugins, and documentation we produce for you are assigned to your company on delivery. If we build something that could benefit the wider Capacitor community, we may ask to open-source a generalized version — but that is always your call.',
@@ -684,8 +683,7 @@ const messages = {
   consulting_faq_a9:
     'We help teams migrate live update workflows, native build pipelines, and Enterprise plugin dependencies to Capgo and our open-source plugin catalog. Migrations are scoped as fixed-price engagements so you know exactly what to expect.',
   consulting_faq_q10: 'How do we get started?',
-  consulting_faq_a10:
-    'Book a free discovery call, send us an email, or reach out on Discord. You can also email <a href="mailto:sales@capgo.app" class="text-gray-200 underline hover:text-white">sales@capgo.app</a>.',
+  consulting_faq_a10: 'Book a free discovery call, send us an email, or reach out on Discord. You can also email <a href="mailto:sales@capgo.app">sales@capgo.app</a>.',
   contact: 'Contact',
   contact_link: 'By visiting this page on the website:',
   contact_sales: 'Contact Sales',
@@ -1647,7 +1645,7 @@ const messages = {
   instant_ota_updates_capacitor: 'Instant OTA updates for Capacitor apps',
   instant_rollback: 'Instant Rollback',
   instant_updates: 'Push fixes without a store release',
-  instant_updates_for_capacitor: 'Instant Live Updates for CapacitorJS Apps',
+  instant_updates_for_capacitor: 'Live Updates for Ionic and Capacitor Apps',
   instant_updates_for_capacitor_apps: 'Live updates for Capacitor apps',
   instant_updates_for_capacitor_apps_description:
     'When a web-layer bug is live, ship the fix through Capgo instead of waiting days for app store approval. Users get the update in the background while native changes stay in the normal review path.',
@@ -1763,7 +1761,7 @@ const messages = {
 
   live_update_v2_comp_eyebrow: 'Honest comparison',
   live_update_v2_comp_title: 'Capgo Live Updates vs. the alternatives.',
-  live_update_v2_comp_lead: 'Same OTA promise. Different safety model.',
+  live_update_v2_comp_lead: 'Same Ionic and Capacitor OTA promise. Different safety model.',
   live_update_v2_comp_h_diy: 'DIY / self-hosted',
   live_update_v2_comp_h_diy_sub: 'Custom scripts and static hosting',
   live_update_v2_comp_h_capa: 'Competitor cloud',
@@ -1826,7 +1824,7 @@ const messages = {
   live_update_delta_feature3_desc: 'Just add --partial to your upload command to enable delta updates for your bundle.',
   live_update_delta_feature3_title: 'Enable with One Flag',
   live_update_delta_title: 'Delta Updates',
-  live_update_description: 'Capacitor live update platform with automatic setup, advanced manual flows, CLI safety checks, and native rollback protection',
+  live_update_description: 'Ionic and Capacitor live update platform with automatic setup, advanced manual flows, CLI safety checks, and native rollback protection',
   live_update_dynamic_bullet1_prefix: 'Add an in-app “Update Track” menu: list channels and let testers jump from',
   live_update_dynamic_bullet1_suffix: 'in seconds (no reinstall).',
   live_update_dynamic_bullet2: 'Spin up a pull-request channel per feature, route QA or beta users there, then snap them back to prod when approved.',
@@ -1870,9 +1868,9 @@ const messages = {
   live_update_get_started: 'Get Started',
   live_update_hero_badge: 'Capgo Live Updates',
   live_update_hero_headline: 'Skip the wait. Ship the fix.',
-  live_update_hero_tagline: 'OTA updates for web-layer fixes.',
+  live_update_hero_tagline: 'OTA updates for Ionic and Capacitor apps.',
   live_update_hero_cta: 'Start shipping',
-  live_update_hero_subtitle: 'Push web-layer fixes instantly. Skip the App Store wait.',
+  live_update_hero_subtitle: 'Push web-layer fixes instantly for Ionic and Capacitor apps. Skip the App Store wait.',
   live_update_hero_stat_channels_label: 'Canary, beta, support, and production tracks',
   live_update_hero_stat_channels_value: 'Dynamic channels',
   live_update_hero_stat_logs_label: 'Per-device update status and rollback history',
@@ -2814,7 +2812,7 @@ const messages = {
   shared_numbers_success_rate_desc: 'worldwide success rate',
   shared_numbers_uptodate_24h: 'Up-to-date within 24 hours',
   ship_updates_fixes_changes_and_features:
-    'Open-source Appflow alternative for Capacitor apps: live updates, native build delivery, release channels, real-time logs, and analytics in one platform',
+    'Open-source live update platform for Ionic and Capacitor apps: OTA updates, native build delivery, release channels, real-time logs, and analytics',
   sign_in: 'Sign in',
   sign_up_button: 'Sign up',
   sign_up_for_free: 'Sign up for free',

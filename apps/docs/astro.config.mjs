@@ -1,3 +1,4 @@
+import { unified } from '@astrojs/markdown-remark'
 import starlight from '@astrojs/starlight'
 import starlightDocSearch from '@astrojs/starlight-docsearch'
 import { defineConfig } from 'astro/config'
@@ -47,6 +48,9 @@ export default defineConfig({
       status: 301,
       destination: '/docs/plugins/updater/commonproblems/',
     },
+  },
+  markdown: {
+    processor: unified({ gfm: true, smartypants: true }),
   },
   integrations: [
     ...buildSharedIntegrations({

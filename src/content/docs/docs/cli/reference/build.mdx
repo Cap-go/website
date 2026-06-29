@@ -70,6 +70,13 @@ npx @capgo/cli@latest build request com.example.app --platform ios --path .
 | **--play-config-json** | <code>string</code> | Android: Base64-encoded Google Play service account JSON |
 | **--android-flavor** | <code>string</code> | Android: Product flavor to build (e.g. production). Required if your project has multiple flavors. |
 | **--no-playstore-upload** | <code>boolean</code> | Skip Play Store upload for this build (nulls out saved play config). Requires --output-upload. |
+| **--submit-to-store-review** | <code>boolean</code> | Submit the uploaded release for store review: Android completes the Play release; iOS submits the processed TestFlight build to App Store review. |
+| **--store-release-name** | <code>string</code> | Store release name/version. Android uses it as the Google Play release name; iOS uses it as the App Store version. |
+| **--store-release-notes** | <code>string</code> | Default store release notes. Android uses it as the Play changelog; iOS uses it as the fallback App Store What's New text. |
+| **--store-release-notes-locale** | <code>string</code> | Localized store release notes, repeatable as <code>locale=notes</code>, for example <code>--store-release-notes-locale "fr-FR=Corrections"</code>. |
+| **--ios-testflight-groups** | <code>string</code> | iOS only: optional comma-separated TestFlight external group names or IDs for beta distribution. |
+| **--ios-automatic-release** | <code>boolean</code> | iOS only: automatically release the App Store version after Apple approval. Default is manual release. |
+| **--no-ios-automatic-release** | <code>boolean</code> | iOS only: keep the approved App Store version waiting for manual release. |
 | **--output-upload** | <code>boolean</code> | Override output upload behavior for this build only (enable). Precedence: CLI > env > saved credentials |
 | **--no-output-upload** | <code>boolean</code> | Override output upload behavior for this build only (disable). Precedence: CLI > env > saved credentials |
 | **--output-retention** | <code>string</code> | Override output link TTL for this build only (1h to 7d). Examples: 1h, 6h, 2d. Precedence: CLI > env > saved credentials |
@@ -79,6 +86,23 @@ npx @capgo/cli@latest build request com.example.app --platform ios --path .
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
 | **--verbose** | <code>boolean</code> | Enable verbose output with detailed logging |
+
+`--submit-to-store-review`, `--store-release-name`, `--store-release-notes`, and `--store-release-notes-locale` work on both Android and iOS. Use `--store-release-notes` as the fallback text, then repeat `--store-release-notes-locale "locale=notes"` for each store localization:
+
+```bash
+npx @capgo/cli@latest build request com.example.app \
+  --platform ios \
+  --build-mode release \
+  --submit-to-store-review \
+  --store-release-name "1.2.3" \
+  --store-release-notes "General improvements" \
+  --store-release-notes-locale "en-US=General improvements" \
+  --store-release-notes-locale "nl-NL=Algemene verbeteringen" \
+  --store-release-notes-locale "fr-FR=Ameliorations generales" \
+  --no-ios-automatic-release
+```
+
+In CI you can also provide the same localized notes as JSON with `CAPGO_STORE_RELEASE_NOTES_LOCALIZED`, for example `{"en-US":"General improvements","nl-NL":"Algemene verbeteringen"}`.
 
 ### <a id="build-credentials"></a> 🔹 **Credentials**
 

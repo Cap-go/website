@@ -50,7 +50,7 @@ const actionDefinitionRows =
 @capgo/capacitor-calendar|github.com/Cap-go|Manage native calendar events on iOS and Android, with iOS Reminders support|https://github.com/Cap-go/capacitor-calendar/|Calendar
 @capgo/capacitor-date-picker|github.com/Cap-go|Native date, time, date-time, year-month, and range picker for iOS, Android, and Web|https://github.com/Cap-go/capacitor-date-picker/|Date Picker
 @capgo/capacitor-device-info|github.com/Cap-go|Read CPU, memory, GPU, storage, thermal state, and onboard sensor metrics from Capacitor apps|https://github.com/Cap-go/capacitor-device-info/|Device Info
-@capgo/capacitor-updater|github.com/Cap-go|Deploy live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
+@capgo/capacitor-updater|github.com/Cap-go|Deploy Ionic and Capacitor live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
 @capgo/electron-updater|github.com/Cap-go|OTA live updates for Electron apps with the same API surface as capacitor-updater|https://github.com/Cap-go/electron-updater/|Electron Updater
 @capgo/cordova-updater|github.com/Cap-go|OTA live updates for Cordova iOS and Android with the same API as capacitor-updater|https://github.com/Cap-go/cordova-updater/|Cordova Updater
 @capgo/capacitor-uploader|github.com/Cap-go|Upload large files reliably in background with progress tracking and retry support|https://github.com/Cap-go/capacitor-uploader/|Uploader

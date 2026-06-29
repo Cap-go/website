@@ -25,6 +25,7 @@ export function buildSharedAstroBaseConfig({ siteDomain, defaultLocale, cpuCount
     trailingSlash: 'always',
     site: `https://${siteDomain}`,
     output,
+    compressHTML: false,
     i18n: {
       locales: [defaultLocale],
       defaultLocale,
@@ -34,7 +35,6 @@ export function buildSharedAstroBaseConfig({ siteDomain, defaultLocale, cpuCount
     },
     build: {
       concurrency: cpuCount,
-      compressHTML: false,
       inlineStylesheets: 'auto',
       ...buildOptions,
     },
