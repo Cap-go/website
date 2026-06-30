@@ -239,6 +239,38 @@ const procurementProofPoints = [
     description: m.enterprise_procurement_onboarding_desc({}, { locale }),
   },
 ]
+const enterprisePluginProofPoints = [
+  {
+    title: m.enterprise_plugins_sla_title({}, { locale }),
+    description: m.enterprise_plugins_sla_desc({}, { locale }),
+  },
+  {
+    title: m.enterprise_plugins_maintained_title({}, { locale }),
+    description: m.enterprise_plugins_maintained_desc({}, { locale }),
+  },
+  {
+    title: m.enterprise_plugins_replacements_title({}, { locale }),
+    description: m.enterprise_plugins_replacements_desc({}, { locale }),
+  },
+  {
+    title: m.enterprise_plugins_catalog_title({ pluginCountLabel }, { locale }),
+    description: m.enterprise_plugins_catalog_desc({}, { locale }),
+  },
+]
+
+const enterpriseLegacyPluginLabels = [
+  m.enterprise_plugins_legacy_identity({}, { locale }),
+  m.enterprise_plugins_legacy_storage({}, { locale }),
+  m.enterprise_plugins_legacy_device_apis({}, { locale }),
+]
+const enterpriseCapgoPluginLabels = [
+  m.enterprise_plugins_capgo_data_storage({}, { locale }),
+  m.enterprise_plugins_capgo_social_login({}, { locale }),
+  m.enterprise_plugins_capgo_native_purchases({}, { locale }),
+  m.enterprise_plugins_capgo_ble({}, { locale }),
+  m.enterprise_plugins_capgo_nfc({}, { locale }),
+  m.enterprise_plugins_capgo_app_attest({}, { locale }),
+]
 
 const customers = [
   { name: 'Nana', downloads: '2.5M', logo: '/nana-logo-transparent.webp' },
@@ -743,6 +775,52 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
       </div>
     </section>
 
+    <section class="section enterprise-plugin-suite bg-grid grain" id="enterprise-plugins">
+      <div class="shell">
+        <div class="enterprise-plugin-panel">
+          <div class="enterprise-plugin-copy">
+            <div class="eyebrow eyebrow--blue">{m.enterprise_plugins_section_label({}, { locale })}</div>
+            <h2 class="h2-section">{m.enterprise_plugins_section_title({}, { locale })}</h2>
+            <p class="lead">{m.enterprise_plugins_section_desc({ pluginCountLabel }, { locale })}</p>
+            <ul class="enterprise-partnership-list enterprise-plugin-list">
+              {
+                enterprisePluginProofPoints.map((point) => (
+                  <li>
+                    <span class="enterprise-partnership-check" aria-hidden="true">
+                      ✓
+                    </span>
+                    <span>
+                      <strong>{point.title}</strong>
+                      <span class="enterprise-partnership-separator"> - </span>
+                      {point.description}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+            <a class="enterprise-partnership-cta" href={getRelativeLocaleUrl(locale, 'plugins')} aria-label={m.enterprise_plugins_cta({}, { locale })}>
+              <span>{m.enterprise_plugins_cta({}, { locale })}</span>
+              <span aria-hidden="true">-&gt;</span>
+            </a>
+          </div>
+
+          <div class="enterprise-plugin-visual" role="img" aria-label={m.enterprise_plugins_visual_label({}, { locale })}>
+            <div class="enterprise-plugin-map" aria-hidden="true">
+              <p class="enterprise-plugin-map-label enterprise-plugin-map-label--muted">{m.enterprise_plugins_visual_before({}, { locale })}</p>
+              <div class="enterprise-plugin-chip-row enterprise-plugin-chip-row--legacy">
+                {enterpriseLegacyPluginLabels.map((label) => <span class="enterprise-plugin-chip enterprise-plugin-chip--legacy">{label}</span>)}
+              </div>
+              <span class="enterprise-plugin-arrow">↓</span>
+              <p class="enterprise-plugin-map-label">{m.enterprise_plugins_visual_after({}, { locale })}</p>
+              <div class="enterprise-plugin-chip-grid">
+                {enterpriseCapgoPluginLabels.map((label) => <span class="enterprise-plugin-chip enterprise-plugin-chip--capgo">{label}</span>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section bg-grid grain" id="features">
       <div class="shell">
         <div class="section-head">
@@ -1221,6 +1299,136 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
       height: 74px;
       border-width: 3px;
       font-size: 8px;
+    }
+  }
+  .enterprise-product .enterprise-plugin-panel {
+    display: grid;
+    gap: 32px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(96, 165, 250, 0.16);
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(255, 255, 255, 0.025));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  .enterprise-product .enterprise-plugin-copy .lead {
+    max-width: 680px;
+  }
+  .enterprise-product .enterprise-plugin-list {
+    margin-top: 30px;
+  }
+  .enterprise-product .enterprise-plugin-visual {
+    display: grid;
+    place-items: center;
+    min-height: 410px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      radial-gradient(circle at 50% 42%, rgba(96, 165, 250, 0.18), transparent 34%), radial-gradient(circle at 50% 76%, rgba(34, 197, 94, 0.12), transparent 28%),
+      rgba(2, 6, 23, 0.56);
+  }
+  .enterprise-product .enterprise-plugin-map {
+    width: min(100%, 620px);
+  }
+  .enterprise-product .enterprise-plugin-map-label {
+    margin: 0 0 16px;
+    color: var(--relief-blue);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .enterprise-product .enterprise-plugin-map-label--muted {
+    color: rgba(255, 255, 255, 0.42);
+  }
+  .enterprise-product .enterprise-plugin-chip-row,
+  .enterprise-product .enterprise-plugin-chip-grid {
+    display: grid;
+    gap: 12px;
+  }
+  .enterprise-product .enterprise-plugin-chip-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .enterprise-product .enterprise-plugin-chip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .enterprise-product .enterprise-plugin-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 58px;
+    padding: 0 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  .enterprise-product .enterprise-plugin-chip--legacy {
+    border: 1px dashed rgba(148, 163, 184, 0.42);
+    color: rgba(255, 255, 255, 0.38);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    background: rgba(148, 163, 184, 0.06);
+  }
+  .enterprise-product .enterprise-plugin-chip--capgo {
+    border: 1px solid rgba(96, 165, 250, 0.44);
+    color: #bfdbfe;
+    background: rgba(96, 165, 250, 0.1);
+  }
+  .enterprise-product .enterprise-plugin-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    margin: 34px auto 18px;
+    border-radius: 999px;
+    background: var(--cap-blue-600);
+    color: #fff;
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1;
+    box-shadow: 0 24px 70px rgba(37, 99, 235, 0.35);
+  }
+  @media (min-width: 960px) {
+    .enterprise-product .enterprise-plugin-panel {
+      grid-template-columns: 0.92fr 1.08fr;
+      align-items: center;
+      padding: 40px;
+    }
+    .enterprise-product .enterprise-plugin-visual {
+      min-height: 520px;
+    }
+    .enterprise-product .enterprise-plugin-chip-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .enterprise-product .enterprise-plugin-panel {
+      padding: 18px;
+      border-radius: 20px;
+    }
+    .enterprise-product .enterprise-plugin-visual {
+      min-height: 360px;
+      padding: 18px;
+    }
+    .enterprise-product .enterprise-plugin-chip-row {
+      grid-template-columns: 1fr;
+    }
+    .enterprise-product .enterprise-plugin-chip {
+      min-height: 50px;
+      font-size: 13px;
+    }
+    .enterprise-product .enterprise-plugin-arrow {
+      width: 56px;
+      height: 56px;
+      margin-top: 24px;
+      font-size: 28px;
     }
   }
   .enterprise-product .enterprise-logo-grid {
