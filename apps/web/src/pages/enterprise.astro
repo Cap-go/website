@@ -173,6 +173,35 @@ const heroProofPoints = [
     detail: m.enterprise_hero_scale_detail({}, { locale }),
   },
 ]
+const partnershipProofPoints = [
+  {
+    title: m.enterprise_partnership_account_title({}, { locale }),
+    description: m.enterprise_partnership_account_desc({}, { locale }),
+  },
+  {
+    title: m.enterprise_partnership_channel_title({}, { locale }),
+    description: m.enterprise_partnership_channel_desc({}, { locale }),
+  },
+  {
+    title: m.enterprise_partnership_p1_title({}, { locale }),
+    description: m.enterprise_partnership_p1_desc({}, { locale }),
+  },
+  {
+    title: m.enterprise_partnership_custom_title({}, { locale }),
+    description: m.enterprise_partnership_custom_desc({}, { locale }),
+  },
+]
+
+const partnershipYourTeam = [
+  m.enterprise_partnership_your_team_1({}, { locale }),
+  m.enterprise_partnership_your_team_2({}, { locale }),
+  m.enterprise_partnership_your_team_3({}, { locale }),
+]
+const partnershipCapgoTeam = [
+  m.enterprise_partnership_capgo_team_1({}, { locale }),
+  m.enterprise_partnership_capgo_team_2({}, { locale }),
+  m.enterprise_partnership_capgo_team_3({}, { locale }),
+]
 
 const enterpriseLevers = [
   {
@@ -418,6 +447,59 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
               </div>
             ))
           }
+        </div>
+      </div>
+    </section>
+
+    <section class="section enterprise-partnership bg-grid grain" id="partnership">
+      <div class="shell">
+        <div class="enterprise-partnership-panel">
+          <div class="enterprise-partnership-copy">
+            <div class="eyebrow eyebrow--blue">{m.enterprise_partnership_label({}, { locale })}</div>
+            <h2 class="h2-section">{m.enterprise_partnership_title({}, { locale })}</h2>
+            <p class="lead">{m.enterprise_partnership_desc({}, { locale })}</p>
+            <ul class="enterprise-partnership-list">
+              {
+                partnershipProofPoints.map((point) => (
+                  <li>
+                    <span class="enterprise-partnership-check" aria-hidden="true">
+                      ✓
+                    </span>
+                    <span>
+                      <strong>{point.title}</strong>
+                      <span class="enterprise-partnership-separator"> - </span>
+                      {point.description}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+            <a
+              class="enterprise-partnership-cta"
+              href="https://book.capgo.app/enterprise-inquiry/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={m.enterprise_talk_to_team({}, { locale })}
+            >
+              <span>{m.enterprise_talk_to_team({}, { locale })}</span>
+              <span aria-hidden="true">-&gt;</span>
+            </a>
+          </div>
+
+          <div class="enterprise-partnership-visual" role="img" aria-label={m.enterprise_partnership_visual_label({}, { locale })}>
+            <p class="enterprise-visual-label">{m.enterprise_partnership_your_team_label({}, { locale })}</p>
+            <div class="enterprise-avatar-row enterprise-avatar-row--customer" aria-hidden="true">
+              {partnershipYourTeam.map((initial) => <span>{initial}</span>)}
+            </div>
+            <div class="enterprise-channel-wrap" aria-hidden="true">
+              <span class="enterprise-channel-line"></span>
+              <span class="enterprise-channel-pill">{m.enterprise_partnership_channel_pill({}, { locale })}</span>
+            </div>
+            <div class="enterprise-avatar-row enterprise-avatar-row--capgo" aria-hidden="true">
+              {partnershipCapgoTeam.map((initial) => <span>{initial}</span>)}
+            </div>
+            <p class="enterprise-visual-label enterprise-visual-label--brand">{m.enterprise_partnership_capgo_team_label({}, { locale })}</p>
+          </div>
         </div>
       </div>
     </section>
@@ -743,6 +825,173 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
     font-size: 12px;
     line-height: 1.45;
     color: rgba(255, 255, 255, 0.5);
+  }
+  .enterprise-product .enterprise-partnership {
+    padding-top: 72px;
+  }
+  .enterprise-product .enterprise-partnership-panel {
+    display: grid;
+    gap: 32px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(96, 165, 250, 0.16);
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(255, 255, 255, 0.025));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  .enterprise-product .enterprise-partnership-copy .lead {
+    max-width: 680px;
+  }
+  .enterprise-product .enterprise-partnership-list {
+    display: grid;
+    gap: 16px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .enterprise-product .enterprise-partnership-list li {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .enterprise-product .enterprise-partnership-list strong {
+    color: #fff;
+  }
+  .enterprise-product .enterprise-partnership-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: rgba(96, 165, 250, 0.14);
+    color: var(--relief-blue);
+    font-weight: 900;
+  }
+  .enterprise-product .enterprise-partnership-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    margin-top: 28px;
+    color: var(--relief-blue);
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .enterprise-product .enterprise-partnership-cta:hover,
+  .enterprise-product .enterprise-partnership-cta:focus-visible {
+    color: #bfdbfe;
+  }
+  .enterprise-product .enterprise-partnership-cta:focus-visible {
+    outline: 2px solid var(--relief-blue);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+  .enterprise-product .enterprise-partnership-visual {
+    position: relative;
+    display: grid;
+    align-content: center;
+    gap: 18px;
+    min-height: 360px;
+    padding: 28px 18px;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      radial-gradient(circle at 50% 18%, rgba(96, 165, 250, 0.16), transparent 28%), radial-gradient(circle at 50% 78%, rgba(34, 197, 94, 0.12), transparent 28%),
+      rgba(2, 6, 23, 0.56);
+  }
+  .enterprise-product .enterprise-visual-label {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .enterprise-product .enterprise-visual-label--brand {
+    color: var(--relief-blue);
+  }
+  .enterprise-product .enterprise-avatar-row {
+    display: flex;
+    justify-content: center;
+    gap: clamp(10px, 2vw, 18px);
+  }
+  .enterprise-product .enterprise-avatar-row span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(54px, 7vw, 72px);
+    height: clamp(54px, 7vw, 72px);
+    border-radius: 999px;
+    color: #fff;
+    font-size: clamp(14px, 1.7vw, 18px);
+    font-weight: 900;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+  }
+  .enterprise-product .enterprise-avatar-row--customer span {
+    background: linear-gradient(180deg, rgba(96, 165, 250, 0.9), rgba(37, 99, 235, 0.72));
+  }
+  .enterprise-product .enterprise-avatar-row--capgo span {
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.86), rgba(20, 83, 45, 0.78));
+  }
+  .enterprise-product .enterprise-channel-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 34px 0;
+  }
+  .enterprise-product .enterprise-channel-line {
+    position: absolute;
+    top: -26px;
+    bottom: -26px;
+    left: 50%;
+    border-left: 2px dashed rgba(96, 165, 250, 0.5);
+    transform: translateX(-50%);
+  }
+  .enterprise-product .enterprise-channel-pill {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 300px);
+    min-height: 56px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(96, 165, 250, 0.44);
+    background: rgba(15, 23, 42, 0.95);
+    color: #bfdbfe;
+    font-family: var(--lu-font-mono);
+    font-size: clamp(13px, 1.8vw, 16px);
+    font-weight: 900;
+    box-shadow: 0 0 48px rgba(37, 99, 235, 0.2);
+  }
+  @media (min-width: 960px) {
+    .enterprise-product .enterprise-partnership-panel {
+      grid-template-columns: 0.88fr 1.12fr;
+      align-items: center;
+      padding: 40px;
+    }
+    .enterprise-product .enterprise-partnership-visual {
+      min-height: 470px;
+    }
+  }
+  @media (max-width: 640px) {
+    .enterprise-product .enterprise-partnership {
+      padding-top: 56px;
+    }
+    .enterprise-product .enterprise-partnership-panel {
+      padding: 18px;
+      border-radius: 20px;
+    }
+    .enterprise-product .enterprise-partnership-visual {
+      min-height: 320px;
+    }
   }
   .enterprise-product .enterprise-logo-grid {
     margin-top: 40px;
