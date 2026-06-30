@@ -198,9 +198,26 @@ const partnershipYourTeam = [
   m.enterprise_partnership_your_team_3({}, { locale }),
 ]
 const partnershipCapgoTeam = [
-  m.enterprise_partnership_capgo_team_1({}, { locale }),
-  m.enterprise_partnership_capgo_team_2({}, { locale }),
-  m.enterprise_partnership_capgo_team_3({}, { locale }),
+  {
+    name: m.enterprise_partnership_capgo_martin_name({}, { locale }),
+    title: m.enterprise_partnership_capgo_martin_title({}, { locale }),
+    image: '/martin-avatar.png',
+  },
+  {
+    name: m.enterprise_partnership_capgo_valeria_name({}, { locale }),
+    title: m.enterprise_partnership_capgo_valeria_title({}, { locale }),
+    image: '/valeria-avatar.jpg',
+  },
+  {
+    name: m.enterprise_partnership_capgo_michael_name({}, { locale }),
+    title: m.enterprise_partnership_capgo_michael_title({}, { locale }),
+    image: '/michael-profile.webp',
+  },
+  {
+    name: m.enterprise_partnership_capgo_jordan_name({}, { locale }),
+    title: m.enterprise_partnership_capgo_jordan_title({}, { locale }),
+    image: '/jordan-avatar.jpg',
+  },
 ]
 
 const enterpriseLevers = [
@@ -514,7 +531,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
             </a>
           </div>
 
-          <div class="enterprise-partnership-visual" role="img" aria-label={m.enterprise_partnership_visual_label({}, { locale })}>
+          <div class="enterprise-partnership-visual" role="group" aria-label={m.enterprise_partnership_visual_label({}, { locale })}>
             <p class="enterprise-visual-label">{m.enterprise_partnership_your_team_label({}, { locale })}</p>
             <div class="enterprise-avatar-row enterprise-avatar-row--customer" aria-hidden="true">
               {partnershipYourTeam.map((initial) => <span>{initial}</span>)}
@@ -523,10 +540,18 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
               <span class="enterprise-channel-line"></span>
               <span class="enterprise-channel-pill">{m.enterprise_partnership_channel_pill({}, { locale })}</span>
             </div>
-            <div class="enterprise-avatar-row enterprise-avatar-row--capgo" aria-hidden="true">
-              {partnershipCapgoTeam.map((initial) => <span>{initial}</span>)}
-            </div>
             <p class="enterprise-visual-label enterprise-visual-label--brand">{m.enterprise_partnership_capgo_team_label({}, { locale })}</p>
+            <div class="enterprise-team-card-grid">
+              {
+                partnershipCapgoTeam.map((member) => (
+                  <div class="enterprise-team-card">
+                    <img class="enterprise-team-photo" src={member.image} alt={member.name} width="72" height="72" loading="lazy" />
+                    <span class="enterprise-team-name">{member.name}</span>
+                    <span class="enterprise-team-title">{member.title}</span>
+                  </div>
+                ))
+              }
+            </div>
           </div>
         </div>
       </div>
@@ -1023,36 +1048,33 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
   .enterprise-product .enterprise-avatar-row {
     display: flex;
     justify-content: center;
-    gap: clamp(10px, 2vw, 18px);
+    gap: 18px;
   }
   .enterprise-product .enterprise-avatar-row span {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: clamp(54px, 7vw, 72px);
-    height: clamp(54px, 7vw, 72px);
+    width: 72px;
+    height: 72px;
     border-radius: 999px;
     color: #fff;
-    font-size: clamp(14px, 1.7vw, 18px);
+    font-size: 18px;
     font-weight: 900;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
   }
   .enterprise-product .enterprise-avatar-row--customer span {
     background: linear-gradient(180deg, rgba(96, 165, 250, 0.9), rgba(37, 99, 235, 0.72));
   }
-  .enterprise-product .enterprise-avatar-row--capgo span {
-    background: linear-gradient(180deg, rgba(34, 197, 94, 0.86), rgba(20, 83, 45, 0.78));
-  }
   .enterprise-product .enterprise-channel-wrap {
     position: relative;
     display: flex;
     justify-content: center;
-    padding: 34px 0;
+    padding: 34px 0 24px;
   }
   .enterprise-product .enterprise-channel-line {
     position: absolute;
     top: -26px;
-    bottom: -26px;
+    bottom: -18px;
     left: 50%;
     border-left: 2px dashed rgba(96, 165, 250, 0.5);
     transform: translateX(-50%);
@@ -1071,9 +1093,53 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
     background: rgba(15, 23, 42, 0.95);
     color: #bfdbfe;
     font-family: var(--lu-font-mono);
-    font-size: clamp(13px, 1.8vw, 16px);
+    font-size: 15px;
     font-weight: 900;
     box-shadow: 0 0 48px rgba(37, 99, 235, 0.2);
+  }
+  .enterprise-product .enterprise-team-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: min(100%, 430px);
+    margin: 0 auto;
+  }
+  .enterprise-product .enterprise-team-card {
+    display: grid;
+    min-width: 0;
+    justify-items: center;
+    gap: 6px;
+    padding: 14px 10px;
+    border-radius: 16px;
+    border: 1px solid rgba(96, 165, 250, 0.22);
+    background: rgba(15, 23, 42, 0.72);
+    text-align: center;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  .enterprise-product .enterprise-team-photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    border: 2px solid rgba(96, 165, 250, 0.34);
+    background: rgba(15, 23, 42, 0.9);
+    object-fit: cover;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+  }
+  .enterprise-product .enterprise-team-name,
+  .enterprise-product .enterprise-team-title {
+    display: block;
+    overflow-wrap: anywhere;
+    line-height: 1.2;
+  }
+  .enterprise-product .enterprise-team-name {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+  }
+  .enterprise-product .enterprise-team-title {
+    color: #bfdbfe;
+    font-size: 12px;
+    font-weight: 700;
   }
   @media (min-width: 960px) {
     .enterprise-product .enterprise-partnership-panel {
@@ -1082,7 +1148,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
       padding: 40px;
     }
     .enterprise-product .enterprise-partnership-visual {
-      min-height: 470px;
+      min-height: 560px;
     }
   }
   @media (max-width: 640px) {
@@ -1094,7 +1160,29 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
       border-radius: 20px;
     }
     .enterprise-product .enterprise-partnership-visual {
-      min-height: 320px;
+      min-height: 460px;
+      padding: 22px 14px;
+    }
+    .enterprise-product .enterprise-avatar-row {
+      gap: 12px;
+    }
+    .enterprise-product .enterprise-avatar-row span {
+      width: 58px;
+      height: 58px;
+      font-size: 15px;
+    }
+    .enterprise-product .enterprise-channel-pill {
+      font-size: 13px;
+    }
+    .enterprise-product .enterprise-team-card-grid {
+      gap: 10px;
+    }
+    .enterprise-product .enterprise-team-card {
+      padding: 12px 8px;
+    }
+    .enterprise-product .enterprise-team-photo {
+      width: 56px;
+      height: 56px;
     }
   }
   .enterprise-product .enterprise-procurement-panel {
