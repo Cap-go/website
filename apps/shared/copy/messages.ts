@@ -1127,11 +1127,11 @@ const messages = {
   enterprise_billing: 'Enterprise Billing',
   enterprise_description:
     'Scale from thousands to millions of users without rewrites. Enterprise-grade security, 99.9% uptime SLA, and dedicated support for mission-critical apps.',
-  enterprise_hero_badge: 'Enterprise mobile release platform',
-  enterprise_hero_headline: 'Ship mobile updates fast, without losing control.',
-  enterprise_hero_title: 'Secure, stable live updates for teams shipping at scale.',
+  enterprise_hero_badge: 'Capgo for Enterprise',
+  enterprise_hero_headline: 'Live updates your security team can approve.',
+  enterprise_hero_title: 'Ship Capacitor apps at scale without security or procurement friction.',
   enterprise_hero_desc:
-    'Capgo gives enterprise mobile teams signed and encrypted updates, SSO, audit logs, SLA-backed support, procurement-ready paperwork, and a guided rollout path for every app and environment.',
+    'Signed and encrypted bundles, SSO, audit logs, SOC 2, 99.9% SLA, procurement-ready paperwork, and dedicated migration support for every app and environment.',
   enterprise_hero_note: 'Map security, procurement, migration, and support before a production rollout.',
   enterprise_hero_panel_label: 'Enterprise readiness',
   enterprise_hero_panel_title: 'The controls buyers ask for are visible before the demo.',
