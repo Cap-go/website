@@ -221,26 +221,22 @@ const enterpriseLevers = [
   },
 ]
 
-const approvalTracks = [
+const procurementProofPoints = [
   {
-    title: m.enterprise_security_review_title({}, { locale }),
-    description: m.enterprise_security_review_desc({}, { locale }),
-    items: [m.enterprise_soc2_certified_infrastructure({}, { locale }), m.enterprise_iso27001_in_progress({}, { locale }), m.enterprise_audit_signed_e2e({}, { locale })],
+    title: m.enterprise_procurement_contracts_title({}, { locale }),
+    description: m.enterprise_procurement_contracts_desc({}, { locale }),
   },
   {
-    title: m.enterprise_reliability_review_title({}, { locale }),
-    description: m.enterprise_reliability_review_desc({}, { locale }),
-    items: [m.enterprise_uptime_sla({}, { locale }), m.enterprise_updates_under_100ms({}, { locale }), m.enterprise_replication_rollback({}, { locale })],
+    title: m.enterprise_procurement_security_title({}, { locale }),
+    description: m.enterprise_procurement_security_desc({}, { locale }),
   },
   {
-    title: m.enterprise_procurement_review_title({}, { locale }),
-    description: m.enterprise_procurement_review_desc({}, { locale }),
-    items: [m.enterprise_signed_ndas_dpas({}, { locale }), m.enterprise_custom_payment_process({}, { locale }), m.enterprise_sap_po_procurement({}, { locale })],
+    title: m.enterprise_procurement_billing_title({}, { locale }),
+    description: m.enterprise_procurement_billing_desc({}, { locale }),
   },
   {
-    title: m.enterprise_migration_review_title({}, { locale }),
-    description: m.enterprise_migration_review_desc({}, { locale }),
-    items: [m.enterprise_platform_one_place({}, { locale }), m.enterprise_ionic_alternative_plugins({}, { locale }), m.enterprise_onboarding_training_team({}, { locale })],
+    title: m.enterprise_procurement_onboarding_title({}, { locale }),
+    description: m.enterprise_procurement_onboarding_desc({}, { locale }),
   },
 ]
 
@@ -596,32 +592,62 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
       </div>
     </section>
 
-    <section class="section bg-grid grain" id="approval">
+    <section class="section enterprise-procurement bg-grid grain" id="approval">
       <div class="shell">
-        <div class="enterprise-split">
-          <div>
+        <div class="enterprise-procurement-panel">
+          <div class="enterprise-procurement-visual" role="img" aria-label={m.enterprise_procurement_visual_label({}, { locale })}>
+            <div class="enterprise-document-stack" aria-hidden="true">
+              <div class="enterprise-document-card enterprise-document-card--back">
+                <span>{m.enterprise_procurement_visual_dpa({}, { locale })}</span>
+              </div>
+              <div class="enterprise-document-card enterprise-document-card--mid">
+                <span>{m.enterprise_procurement_visual_security({}, { locale })}</span>
+              </div>
+              <div class="enterprise-document-card enterprise-document-card--front">
+                <p>{m.enterprise_procurement_visual_title({}, { locale })}</p>
+                <span>{m.enterprise_procurement_visual_subtitle({}, { locale })}</span>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <strong>{m.enterprise_procurement_visual_signed_by({}, { locale })}</strong>
+                <em>{m.enterprise_procurement_visual_signature({}, { locale })}</em>
+                <small>{m.enterprise_procurement_visual_date({}, { locale })}</small>
+              </div>
+              <div class="enterprise-document-stamp">{m.enterprise_procurement_visual_stamp({}, { locale })}</div>
+            </div>
+          </div>
+
+          <div class="enterprise-procurement-copy">
             <div class="eyebrow eyebrow--blue">{m.enterprise_approval_label({}, { locale })}</div>
             <h2 class="h2-section">{m.enterprise_approval_title({}, { locale })}</h2>
             <p class="lead">{m.enterprise_approval_desc({}, { locale })}</p>
-          </div>
-
-          <div class="enterprise-track-grid">
-            {
-              approvalTracks.map((track) => (
-                <article class="enterprise-track-card">
-                  <h3>{track.title}</h3>
-                  <p>{track.description}</p>
-                  <ul>
-                    {track.items.map((item) => (
-                      <li>
-                        <span aria-hidden="true">✓</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))
-            }
+            <ul class="enterprise-partnership-list enterprise-procurement-list">
+              {
+                procurementProofPoints.map((point) => (
+                  <li>
+                    <span class="enterprise-partnership-check" aria-hidden="true">
+                      ✓
+                    </span>
+                    <span>
+                      <strong>{point.title}</strong>
+                      <span class="enterprise-partnership-separator"> - </span>
+                      {point.description}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+            <a
+              class="enterprise-partnership-cta"
+              href="https://book.capgo.app/enterprise-inquiry/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={m.enterprise_talk_to_team({}, { locale })}
+            >
+              <span>{m.enterprise_talk_to_team({}, { locale })}</span>
+              <span aria-hidden="true">-&gt;</span>
+            </a>
           </div>
         </div>
       </div>
@@ -991,6 +1017,210 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
     }
     .enterprise-product .enterprise-partnership-visual {
       min-height: 320px;
+    }
+  }
+  .enterprise-product .enterprise-procurement-panel {
+    display: grid;
+    gap: 32px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(96, 165, 250, 0.16);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.025), rgba(96, 165, 250, 0.09));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  .enterprise-product .enterprise-procurement-copy .lead {
+    max-width: 650px;
+  }
+  .enterprise-product .enterprise-procurement-list {
+    margin-top: 30px;
+  }
+  .enterprise-product .enterprise-procurement-visual {
+    display: grid;
+    place-items: center;
+    min-height: 360px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      radial-gradient(circle at 38% 42%, rgba(96, 165, 250, 0.18), transparent 34%), radial-gradient(circle at 70% 70%, rgba(34, 197, 94, 0.12), transparent 28%),
+      rgba(2, 6, 23, 0.56);
+  }
+  .enterprise-product .enterprise-document-stack {
+    position: relative;
+    width: min(100%, 430px);
+    aspect-ratio: 1 / 1;
+  }
+  .enterprise-product .enterprise-document-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 72%;
+    height: 78%;
+    padding: 28px;
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.34);
+    background: rgba(248, 250, 252, 0.96);
+    color: #0f172a;
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.24);
+  }
+  .enterprise-product .enterprise-document-card--back {
+    transform: translate(-64%, -44%) rotate(-9deg);
+    opacity: 0.58;
+  }
+  .enterprise-product .enterprise-document-card--mid {
+    transform: translate(-55%, -47%) rotate(-4deg);
+    opacity: 0.74;
+  }
+  .enterprise-product .enterprise-document-card--front {
+    z-index: 2;
+    transform: translate(-45%, -50%);
+  }
+  .enterprise-product .enterprise-document-card span,
+  .enterprise-product .enterprise-document-card strong,
+  .enterprise-product .enterprise-document-card small {
+    display: block;
+    letter-spacing: 0;
+  }
+  .enterprise-product .enterprise-document-card--back span,
+  .enterprise-product .enterprise-document-card--mid span {
+    color: #64748b;
+    font-family: var(--lu-font-mono);
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .enterprise-product .enterprise-document-card--front p {
+    margin: 0;
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.15;
+  }
+  .enterprise-product .enterprise-document-card--front > span {
+    margin-top: 8px;
+    color: #64748b;
+    font-family: var(--lu-font-mono);
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .enterprise-product .enterprise-document-card i {
+    display: block;
+    width: 100%;
+    height: 6px;
+    margin-top: 12px;
+    border-radius: 999px;
+    background: #e2e8f0;
+  }
+  .enterprise-product .enterprise-document-card i:nth-of-type(2) {
+    width: 86%;
+  }
+  .enterprise-product .enterprise-document-card i:nth-of-type(4) {
+    width: 68%;
+    margin-bottom: 28px;
+  }
+  .enterprise-product .enterprise-document-card strong {
+    margin-top: 18px;
+    color: #64748b;
+    font-family: var(--lu-font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+  .enterprise-product .enterprise-document-card em {
+    display: block;
+    max-width: 190px;
+    margin-top: 8px;
+    color: var(--cap-blue-600);
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 800;
+  }
+  .enterprise-product .enterprise-document-card small {
+    margin-top: 10px;
+    color: #94a3b8;
+    font-family: var(--lu-font-mono);
+    font-size: 10px;
+  }
+  .enterprise-product .enterprise-document-stamp {
+    position: absolute;
+    z-index: 3;
+    right: 9%;
+    bottom: 13%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 94px;
+    height: 94px;
+    padding: 14px;
+    border-radius: 999px;
+    border: 4px solid #22c55e;
+    color: #22c55e;
+    font-family: var(--lu-font-mono);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    transform: rotate(-8deg);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.12);
+  }
+  @media (min-width: 960px) {
+    .enterprise-product .enterprise-procurement-panel {
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      padding: 40px;
+    }
+    .enterprise-product .enterprise-procurement-visual {
+      min-height: 500px;
+    }
+  }
+  @media (max-width: 640px) {
+    .enterprise-product .enterprise-procurement-panel {
+      padding: 18px;
+      border-radius: 20px;
+    }
+    .enterprise-product .enterprise-procurement-visual {
+      min-height: 310px;
+      padding: 16px;
+    }
+    .enterprise-product .enterprise-document-card {
+      padding: 20px;
+      border-radius: 14px;
+    }
+    .enterprise-product .enterprise-document-card--front p {
+      font-size: 15px;
+    }
+    .enterprise-product .enterprise-document-card--front > span {
+      margin-top: 6px;
+      font-size: 9px;
+    }
+    .enterprise-product .enterprise-document-card i {
+      height: 5px;
+      margin-top: 9px;
+    }
+    .enterprise-product .enterprise-document-card i:nth-of-type(4) {
+      margin-bottom: 10px;
+    }
+    .enterprise-product .enterprise-document-card strong {
+      margin-top: 8px;
+      font-size: 8px;
+    }
+    .enterprise-product .enterprise-document-card em {
+      max-width: 120px;
+      margin-top: 4px;
+      font-size: 13px;
+      line-height: 1.15;
+    }
+    .enterprise-product .enterprise-document-card small {
+      margin-top: 5px;
+      font-size: 8px;
+    }
+    .enterprise-product .enterprise-document-stamp {
+      width: 74px;
+      height: 74px;
+      border-width: 3px;
+      font-size: 8px;
     }
   }
   .enterprise-product .enterprise-logo-grid {
