@@ -106,9 +106,9 @@ Also Capgo does not support changing native code (e.g. Java/Kotlin on Android or
 
 ### Can I update capacitor.config.ts changes via Capgo?[](https://capgo.app/docs/faq/#can-i-update-capacitorconfigts-changes-via-capgo "Direct link to Can I update capacitor.config.ts changes via Capgo?")
 
-No. Changes to `capacitor.config.ts` cannot be sent through Capgo live updates. The Capacitor configuration file is read at native build time and compiled into the native app binary. This means any changes to `capacitor.config.ts` (such as plugin configurations, app ID, server settings, or native plugin options) require a new native release through the App Store or Google Play.
+No. Short rule: Capgo can send the generated web build folder, including HTML, CSS, JavaScript, assets, and pure-JavaScript package changes bundled into that output. Changes to `capacitor.config.ts`, native plugin configuration, native package installs or upgrades, and anything that must update the iOS or Android project through `npx cap sync` or `npx cap copy` require a native app release.
 
-Capgo can only update web assets (HTML, CSS, JavaScript) that are loaded at runtime. If you need to change your Capacitor configuration, you must:
+The Capacitor configuration file is read at native build time and compiled into the native app binary. If you need to change your Capacitor configuration, you must:
 1. Update `capacitor.config.ts` locally
 2. Rebuild your native app (`npx cap sync` followed by a native build)
 3. Submit the new binary to the app stores

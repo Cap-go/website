@@ -15,6 +15,20 @@ This page explains how Capgo detects native compatibility, what an incompatible 
 Live updates are limited to JavaScript bundle changes. If you need to update native code — adding or removing a plugin, upgrading Capacitor, or changing native project configuration — you'll need to submit a new binary build through the usual app-store distribution process.
 </Aside>
 
+## TLDR: OTA or native?
+
+Capgo can send files from your generated web build folder. If the change only affects HTML, CSS, JavaScript, assets, or pure-JavaScript packages bundled into that output, ship it as a live update.
+
+Use a native app release when a change updates `capacitor.config.ts`, plugin configuration stored in Capacitor config, native plugins or dependencies, Capacitor itself, or iOS/Android project files. A practical check: if the change must update the native project through `npx cap sync` or `npx cap copy` before installed devices can use it, treat it as native.
+
+| Change | Ship with Capgo OTA? | Why |
+| --- | --- | --- |
+| HTML, CSS, app JavaScript, images, fonts, and other web build assets | Yes | They are loaded from the web bundle at runtime. |
+| Pure-JavaScript package changes bundled into your web output | Yes | The generated JavaScript is part of the web bundle. |
+| `capacitor.config.ts` changes | No | Capacitor config is read into the native app at build time. |
+| Adding, removing, or upgrading Capacitor/Cordova plugins | No | The installed native binary must contain the matching native code. |
+| iOS or Android project file changes | No | Existing users need a new binary from the stores. |
+
 ## Client plugins by stack
 
 Capgo ships dedicated updater clients for each hybrid runtime:
