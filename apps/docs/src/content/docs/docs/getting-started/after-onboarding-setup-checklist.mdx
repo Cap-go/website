@@ -43,15 +43,17 @@ See also [troubleshooting](/docs/getting-started/troubleshooting/).
 
 4. **Test channel** (`development` / `staging`): public off, device self-set on for QA.
 
-5. **Upload from CI** with checksum, native deps, and delta:
+5. **Upload from CI** with `--delta` (checksum and native dependencies are automatic):
 
    ```bash
    npx @capgo/cli@latest bundle upload \
      --channel development \
-     --bundle "${APP_VERSION}.${BUILD_NUMBER}" \
+     --bundle "1.8.0-${BUILD_NUMBER}" \
      --comment "commit ${GIT_SHA:0:7} run ${CI_RUN_ID}" \
      --delta
    ```
+
+   The `--bundle` value **must** be valid [semver](https://semver.org/). Check it in the [SemVer tester](https://capgo.app/semver_tester/) before you upload.
 
 6. **Deploy to production** only after testing — from the [dashboard](/docs/webapp/channels/) or CLI.
 
@@ -83,49 +85,53 @@ Do not use channels named after tickets, people, or CI variables like `${inputs_
 
 ## Bundle name vs comment
 
-- **Name** = unique version ID from CI → `1.8.0.${BUILD_NUMBER}`
-- **Comment** = what changed → `commit abc1234 run 28059070270`
+Bundle names are **required** to follow [semver](https://semver.org/). Capgo uses semver for compatibility checks, channel auto-update rules, and rollbacks. Validate every name in the [SemVer tester](https://capgo.app/semver_tester/) before upload.
 
-Never use ticket names or `fix-login-bug` as bundle names. Put release notes in `--comment`, not the name.
+- **Name** = semver from CI, e.g. `1.8.0`, `1.8.0-beta.1`, or `1.8.0-20260629.42`
+- **Comment** = free text for humans → `commit abc1234 run 28059070270`
+
+Use semver **pre-release** labels (the part after `-`) when you ship many builds under the same `MAJOR.MINOR.PATCH`. For example, keep `1.8.0` and add the date or build counter in the pre-release: `1.8.0-20260629.1`, `1.8.0-beta.2`. Do not invent custom formats like `fix-login-bug` or `2.5.2026062306` — they are not valid semver and uploads will fail or behave unpredictably.
+
+Put release notes in `--comment`, not in the bundle name.
+
+See also [version targeting](/docs/live-updates/version-targeting/) and [bundle versioning](/docs/live-updates/channels/#bundle-versioning-and-channels).
 
 ---
 
-## Delta upload (recommended)
+## Delta upload
 
-**Use delta uploads by default.** They send only changed files instead of re-downloading the whole app. Updates are faster, use less data, and work especially well for apps with large assets (images, videos) that rarely change.
+`--delta` uploads a **manifest** so devices download only changed files instead of the full bundle every time. Checksum is always computed automatically — you do not pass a checksum flag.
 
-Capgo handles checksums and native dependencies automatically. Delta is the third piece you should always enable.
-
-### How to set it up
-
-**1. Add `--delta` to every upload** (local or CI):
+### Default: `--delta` (manifest + zip backup)
 
 ```bash
 npx @capgo/cli@latest bundle upload \
   --channel development \
-  --bundle "${APP_VERSION}.${BUILD_NUMBER}" \
+  --bundle "1.8.0-${BUILD_NUMBER}" \
   --delta
 ```
 
-**2. In CI, enforce it** so nobody accidentally uploads a full zip:
+This is the recommended default for most apps. Capgo stores the manifest **and** keeps the full zip as a backup. Good when storage cost is not your main concern.
+
+### Storage saving: `--delta-only`
 
 ```bash
 npx @capgo/cli@latest bundle upload \
   --channel development \
-  --bundle "${APP_VERSION}.${BUILD_NUMBER}" \
+  --bundle "1.8.0-${BUILD_NUMBER}" \
   --comment "commit ${GIT_SHA:0:7} run ${CI_RUN_ID}" \
   --delta-only
 ```
 
-`--delta-only` means every automated upload is a manifest/delta bundle. Use a normal upload without that flag only when you intentionally need a full bundle.
+Use `--delta-only` when you want to **reduce Capgo storage** — only the delta/manifest files are stored, not the full zip. Choose this for large apps or high upload volume where storage adds up.
 
-**3. Nothing to change in the app** — the Capgo plugin on the device reads the manifest and downloads only changed files. No extra plugin config is required for basic delta updates.
+Trade-off: without the zip backup on the server, you rely fully on the manifest path. Skip `--delta-only` unless you actually need the storage savings.
+
+No extra plugin config is required on the device — the updater reads the manifest and fetches changed files only.
 
 <Aside type="tip">
-If `directUpdate` is enabled in `capacitor.config`, the CLI may prompt for delta in local uploads. In CI (non-interactive), delta is used automatically. See [Delta updates](/docs/live-updates/differentials/) for details.
+See [Delta updates](/docs/live-updates/differentials/) for troubleshooting and `directUpdate` behavior.
 </Aside>
-
-**What you get:** each file is stored with a checksum → Capgo builds a manifest → devices download only what changed.
 
 ---
 
@@ -150,9 +156,9 @@ Upload to development (--delta)
 | Dynamic CI channel names | Fixed names: `development`, `production` |
 | Too many channels for a simple app | Start with 1–2 channels |
 | Device self-set on production | Off for production, on for test channels |
-| Skipping `--delta` | Add `--delta` to every upload; use `--delta-only` in CI |
-| Manual or random bundle names | Automate naming in CI |
-| Changing naming scheme over time | Pick one scheme on day one |
+| Skipping `--delta` | Add `--delta` to uploads; use `--delta-only` only when you need to save storage |
+| Non-semver bundle names | Use [semver](https://semver.org/) and validate in the [SemVer tester](https://capgo.app/semver_tester/) |
+| Changing versioning scheme over time | Keep semver; use pre-release labels for extra builds (`1.8.0-20260629.1`) |
 | Metadata / preview enabled without reason | Leave off by default |
 
 ---
