@@ -29,9 +29,9 @@ const showExampleCtas = solution === 'enterprise'
 
 {
   appExamples.length > 0 && (
-    <section id="real-app-examples" class="border-y border-white/10 bg-[#030712] py-14 sm:py-16 lg:py-20">
+    <section id="real-app-examples" data-solution-app-examples={solution} class="solution-app-examples border-y border-white/10 bg-[#030712] py-14 sm:py-16 lg:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mb-8 grid gap-6 lg:mb-10 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-end">
+        <div class="solution-app-examples-header mb-8 grid gap-6 lg:mb-10 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-end">
           <div>
             <p class="inline-flex rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-xs font-semibold tracking-wide text-cyan-200 uppercase">
               {copy('solution_app_examples_eyebrow')}
@@ -39,10 +39,10 @@ const showExampleCtas = solution === 'enterprise'
             <h2 class="mt-4 max-w-2xl text-3xl leading-tight font-semibold tracking-tight text-balance text-white sm:text-4xl">{copy(example.headlineKey)}</h2>
             <p class="mt-4 max-w-3xl text-base leading-7 text-pretty text-slate-300 sm:text-lg">{copy(example.useCaseKey)}</p>
             {showExampleCtas && (
-              <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+              <div class="solution-app-examples-actions mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
                   href={registerUrl}
-                  class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-950/30 transition hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                  class="solution-app-examples-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-950/30 transition hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
                 >
                   {copy('solutions_get_started')}
                   <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -58,7 +58,7 @@ const showExampleCtas = solution === 'enterprise'
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={copy('solutions_talk_to_team')}
-                  class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white px-5 py-3 text-sm font-bold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  class="solution-app-examples-secondary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white px-5 py-3 text-sm font-bold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 >
                   <TeamAvatars />
                   <span>{copy('solutions_talk_to_team')}</span>
@@ -67,7 +67,7 @@ const showExampleCtas = solution === 'enterprise'
             )}
           </div>
 
-          <dl class="grid grid-cols-1 overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] text-center shadow-2xl shadow-black/20 sm:grid-cols-3">
+          <dl class="solution-app-examples-meta grid grid-cols-1 overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] text-center shadow-2xl shadow-black/20 sm:grid-cols-3">
             <div class="border-b border-white/10 p-4 sm:border-r sm:border-b-0">
               <dt class="font-mono text-[0.68rem] font-semibold tracking-wide text-slate-500 uppercase">{copy('solution_app_examples_example_type')}</dt>
               <dd class="mt-2 text-sm font-semibold text-white">{copy(example.labelKey)}</dd>
@@ -83,15 +83,15 @@ const showExampleCtas = solution === 'enterprise'
           </dl>
         </div>
 
-        <div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start">
+        <div class="solution-app-examples-body grid gap-5 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start">
           <div
-            class="order-1 space-y-3 lg:order-1"
+            class="solution-app-examples-list order-1 space-y-3 lg:order-1"
             data-randomize-app-examples={randomize ? 'true' : undefined}
             aria-live={randomize ? 'polite' : undefined}
             aria-atomic={randomize ? 'true' : undefined}
           >
             {appExamples.map(({ app, note }) => (
-              <article class="group rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/15 transition-colors duration-200 hover:border-cyan-300/35 hover:bg-white/[0.06]">
+              <article class="solution-app-example-card group rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/15 transition-colors duration-200 hover:border-cyan-300/35 hover:bg-white/[0.06]">
                 <div class="grid gap-4 sm:grid-cols-[auto_minmax(0,1fr)_9.5rem] sm:items-start">
                   <img
                     class="h-14 w-14 shrink-0 rounded-lg object-cover outline-1 -outline-offset-1 outline-white/10"
@@ -123,7 +123,7 @@ const showExampleCtas = solution === 'enterprise'
                   href={app.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold text-cyan-200 transition-colors hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400 sm:w-fit sm:px-4"
+                  class="solution-app-example-link mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold text-cyan-200 transition-colors hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400 sm:w-fit sm:px-4"
                 >
                   <span>{copy('solution_app_examples_view_listing')}</span>
                   <svg class="h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -140,14 +140,14 @@ const showExampleCtas = solution === 'enterprise'
 
           <aside
             id="app-examples-cta"
-            class="order-2 flex flex-col justify-between rounded-lg border border-cyan-300/20 bg-[linear-gradient(145deg,rgba(34,211,238,0.14),rgba(37,99,235,0.09)_48%,rgba(16,185,129,0.12))] p-6 shadow-2xl ring-1 shadow-cyan-950/25 ring-white/5 lg:order-2"
+            class="solution-app-examples-cta order-2 flex flex-col justify-between rounded-lg border border-cyan-300/20 bg-[linear-gradient(145deg,rgba(34,211,238,0.14),rgba(37,99,235,0.09)_48%,rgba(16,185,129,0.12))] p-6 shadow-2xl ring-1 shadow-cyan-950/25 ring-white/5 lg:order-2"
           >
             <div>
               <p class="font-mono text-xs font-semibold tracking-wide text-cyan-200 uppercase">{copy('solution_app_examples_cta_kicker')}</p>
               <h3 class="mt-3 text-2xl leading-8 font-semibold tracking-tight text-balance text-white">{copy('solution_app_examples_cta_title')}</h3>
               <p class="mt-4 text-base leading-7 text-pretty text-slate-300">{copy('solution_app_examples_cta_text')}</p>
 
-              <div class="mt-6 space-y-3 border-y border-white/10 py-5">
+              <div class="solution-app-examples-plays mt-6 space-y-3 border-y border-white/10 py-5">
                 {plays.map((play) => (
                   <div class="grid grid-cols-[auto_1fr] gap-3 text-sm leading-6 text-slate-200">
                     <span class="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-200 ring-1 ring-emerald-300/25">
@@ -168,7 +168,7 @@ const showExampleCtas = solution === 'enterprise'
             <div class="mt-6">
               <a
                 href={getRelativeLocaleUrl(locale, 'register')}
-                class="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-950/30 transition hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                class="solution-app-examples-cta-link inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-950/30 transition hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
               >
                 {copy('solution_app_examples_cta_button')}
               </a>
