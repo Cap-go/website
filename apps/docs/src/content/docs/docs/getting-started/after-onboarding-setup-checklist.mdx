@@ -1,15 +1,15 @@
 ---
-title: After onboarding — one-time setup checklist
+title: One time setup checklist
 description: "What to configure once after onboarding so Capgo runs smoothly: store release, channels, delta upload, CI, and team access."
 sidebar:
-  order: 3
+  order: 6
 next: true
 prev: true
 ---
 
 import { Aside, Steps, LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-You finished [onboarding](/docs/getting-started/onboarding/) — now configure Capgo **once**. After that, daily work is only **upload → test → deploy**.
+You finished [onboarding](/docs/getting-started/onboarding/). Now configure Capgo **once**. After that, daily work is only **upload → test → deploy**.
 
 <Aside type="caution" title="Ship a new store build first">
 Installing the Capgo plugin in your project is not enough. **OTA updates only work on devices running a native app that already includes the plugin.**
@@ -29,11 +29,11 @@ See also [troubleshooting](/docs/getting-started/troubleshooting/).
 
 ---
 
-## One-time setup checklist
+## One time setup checklist
 
 <Steps>
 
-1. **Create channels** — pick the smallest set that fits (see below).
+1. **Create channels**: pick the smallest set that fits (see below).
 
 2. **Set default upload channel** in [app settings](/docs/webapp/main-app-page/):
    - Solo app → `production`
@@ -55,7 +55,7 @@ See also [troubleshooting](/docs/getting-started/troubleshooting/).
 
    The `--bundle` value **must** be valid [semantic versioning](/docs/live-updates/channels/#bundle-versioning-and-channels). Validate it in the [SemVer tester](/semver_tester/) before you upload.
 
-6. **Deploy to production** only after testing — from the [dashboard](/docs/webapp/channels/) or CLI.
+6. **Deploy to production** only after testing, from the [dashboard](/docs/webapp/channels/) or CLI.
 
 7. **Team & security:** invite once, least permissions, [2FA](/docs/webapp/mfa/) for the org, one API key in CI.
 
@@ -67,15 +67,15 @@ Leave encryption, `min_update_version`, metadata, and preview **off** unless you
 
 ## Pick your size
 
-**Simple** — 1 app, 1 channel: `production`
+**Simple**: 1 app, 1 channel: `production`
 
-**Team** — `development` + `production`. Upload to dev, deploy to prod.
+**Team**: `development` + `production`. Upload to dev, deploy to prod.
 
-**Native versions** — add channels only when needed, e.g. `production-9.0` + `test-9.0`. Keep store users on the main production channel.
+**Native versions**: add channels only when needed, e.g. `production-9.0` + `test-9.0`. Keep store users on the main production channel.
 
-**Many apps** — same simple model per app (usually one `production` each). Do not create extra channels just because the org is big.
+**Many apps**: same simple model per app (usually one `production` each). Do not create extra channels just because the org is big.
 
-**Release train** (optional) — `staging` → `rc` → `production`. Same template on every app that needs it.
+**Release train** (optional): `staging` → `rc` → `production`. Same template on every app that needs it.
 
 <Aside type="caution">
 Do not use channels named after tickets, people, or CI variables like `${inputs_capgo_channel}`.
@@ -90,7 +90,7 @@ Bundle names are **required** to follow [semantic versioning](/docs/live-updates
 - **Name** = semver from CI, e.g. `1.8.0`, `1.8.0-beta.1`, or `1.8.0-20260629.42`
 - **Comment** = free text for humans → `commit abc1234 run 28059070270`
 
-Use semver **pre-release** labels (the part after `-`) when you ship many builds under the same `MAJOR.MINOR.PATCH`. For example, keep `1.8.0` and add the date or build counter in the pre-release: `1.8.0-20260629.1`, `1.8.0-beta.2`. Do not invent custom formats like `fix-login-bug` or `2.5.2026062306` — they are not valid semver and uploads will fail or behave unpredictably.
+Use semver **pre-release** labels (the part after `-`) when you ship many builds under the same `MAJOR.MINOR.PATCH`. For example, keep `1.8.0` and add the date or build counter in the pre-release: `1.8.0-20260629.1`, `1.8.0-beta.2`. Do not invent custom formats like `fix-login-bug` or `2.5.2026062306`. They are not valid semver and uploads will fail or behave unpredictably.
 
 Put release notes in `--comment`, not in the bundle name.
 
@@ -100,7 +100,7 @@ See also [version targeting](/docs/live-updates/version-targeting/) and [bundle 
 
 ## Delta upload
 
-`--delta` uploads a **manifest** so devices download only changed files instead of the full bundle every time. Checksum is always computed automatically — you do not pass a checksum flag.
+`--delta` uploads a **manifest** so devices download only changed files instead of the full bundle every time. Checksum is always computed automatically. You do not pass a checksum flag.
 
 ### Default: `--delta` (manifest + zip backup)
 
@@ -123,11 +123,11 @@ npx @capgo/cli@latest bundle upload \
   --delta-only
 ```
 
-Use `--delta-only` when you want to **reduce Capgo storage** — only the delta/manifest files are stored, not the full zip. Choose this for large apps or high upload volume where storage adds up.
+Use `--delta-only` when you want to **reduce Capgo storage**. Only the delta/manifest files are stored, not the full zip. Choose this for large apps or high upload volume where storage adds up.
 
 Trade-off: without the zip backup on the server, you rely fully on the manifest path. Skip `--delta-only` unless you actually need the storage savings.
 
-No extra plugin config is required on the device — the updater reads the manifest and fetches changed files only.
+No extra plugin config is required on the device. The updater reads the manifest and fetches changed files only.
 
 <Aside type="tip">
 See [Delta updates](/docs/live-updates/differentials/) for troubleshooting and `directUpdate` behavior.
@@ -154,7 +154,7 @@ Upload to development (--delta)
 | Uploading a bundle but not deploying to a channel | Assign the bundle to a channel (e.g. `production`) |
 | Channel per feature, ticket, or developer | Use permanent release lanes only |
 | Dynamic CI channel names | Fixed names: `development`, `production` |
-| Too many channels for a simple app | Start with 1–2 channels |
+| Too many channels for a simple app | Start with 1-2 channels |
 | Device self-set on production | Off for production, on for test channels |
 | Skipping `--delta` | Add `--delta` to uploads; use `--delta-only` only when you need to save storage |
 | Non-semver bundle names | Follow [semantic versioning](/docs/live-updates/channels/#bundle-versioning-and-channels) and validate in the [SemVer tester](/semver_tester/) |
