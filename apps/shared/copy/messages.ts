@@ -451,7 +451,7 @@ const messages = {
   canonical: 'Canonical',
   cant_find_what_you_need: "Can't Find What You Need?",
   capacitor_config_changes_answer:
-    'No, changes to capacitor.config.ts cannot be sent through Capgo live updates. The Capacitor configuration file is read at native build time and compiled into the native app binary. This means any changes to capacitor.config.ts (such as plugin configurations, app ID, server settings, or native plugin options) require a new native release through the App Store or Google Play. Capgo can only update web assets (HTML, CSS, JavaScript) that are loaded at runtime.',
+    'No. Capgo can send the generated web build folder: HTML, CSS, JavaScript, assets, and pure-JavaScript package changes bundled into that output. Changes to capacitor.config.ts, native plugin configuration, native package installs or upgrades, and anything that must update the iOS or Android project through npx cap sync or npx cap copy require a native app release.',
   capacitor_config_changes_question: 'Can I update capacitor.config.ts changes via Capgo?',
   capacitor_power_approximately_1_of_apps_on_google_play_store: 'Capacitor power approximately $1% of apps on Google Play Store',
   capflow_meta_description: 'Compare Ionic Appflow and Capgo for Capacitor live updates, OTA deployments, rollback protection, automation, and migration support.',
@@ -1500,7 +1500,8 @@ const messages = {
     'Build as usual, upload changed JavaScript and assets with the CLI or API, and target the channels that should receive them. Start automatic in 5 minutes or go manual for advanced release logic.',
   home_global_infrastructure_desc: 'Powered by serverless edge computing and distributed databases across 300+ cities and 13,000+ networks for ultra-fast global delivery.',
   home_global_network_label: 'Global Network',
-  home_hero_outcome_compliance_desc: 'Update JavaScript, CSS, copy, configuration, and assets while native code keeps going through normal App Store and Play review.',
+  home_hero_outcome_compliance_desc:
+    'Update JavaScript, CSS, copy, runtime flags, and assets while native code and Capacitor config keep going through normal App Store and Play review.',
   home_hero_outcome_compliance_title: 'Keep store review for native changes',
   home_hero_outcome_observe_desc: 'Track device status, adoption, failures, and bundle history so support and engineering can explain every release.',
   home_hero_outcome_observe_title: 'Prove what shipped',
@@ -1865,7 +1866,8 @@ const messages = {
   live_update_outcome_card_control_title: 'Control risk before everyone gets the build',
   live_update_outcome_card_prove_text: 'Use device logs, update status, bundle history, and adoption metrics to explain releases to engineering, support, and leadership.',
   live_update_outcome_card_prove_title: 'Prove what happened after release',
-  live_update_outcome_card_recover_text: 'Use live updates for JavaScript, CSS, copy, remote configuration, and web asset fixes while native changes continue through the stores.',
+  live_update_outcome_card_recover_text:
+    'Use live updates for JavaScript, CSS, copy, runtime feature flags, and web asset fixes while native and Capacitor config changes continue through the stores.',
   live_update_outcome_card_recover_title: 'Recover production without waiting on review',
   live_update_outcome_desc:
     'Capgo gives mobile teams a release path for urgent web fixes, controlled rollout, and a clear audit trail, so a bad deploy does not become days of store-review waiting.',
