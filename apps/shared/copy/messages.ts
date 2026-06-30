@@ -1128,6 +1128,7 @@ const messages = {
   enterprise_description:
     'Scale from thousands to millions of users without rewrites. Enterprise-grade security, 99.9% uptime SLA, and dedicated support for mission-critical apps.',
   enterprise_hero_badge: 'Enterprise mobile release platform',
+  enterprise_hero_headline: 'Ship mobile updates fast, without losing control.',
   enterprise_hero_title: 'Secure, stable live updates for teams shipping at scale.',
   enterprise_hero_desc:
     'Capgo gives enterprise mobile teams signed and encrypted updates, SSO, audit logs, SLA-backed support, procurement-ready paperwork, and a guided rollout path for every app and environment.',
