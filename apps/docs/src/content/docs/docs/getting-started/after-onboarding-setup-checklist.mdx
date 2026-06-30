@@ -53,7 +53,7 @@ See also [troubleshooting](/docs/getting-started/troubleshooting/).
      --delta
    ```
 
-   The `--bundle` value **must** be valid [semver](https://semver.org/). Check it in the [SemVer tester](https://capgo.app/semver_tester/) before you upload.
+   The `--bundle` value **must** be valid [semantic versioning](/docs/live-updates/channels/#bundle-versioning-and-channels). Validate it in the [SemVer tester](/semver_tester/) before you upload.
 
 6. **Deploy to production** only after testing — from the [dashboard](/docs/webapp/channels/) or CLI.
 
@@ -85,7 +85,7 @@ Do not use channels named after tickets, people, or CI variables like `${inputs_
 
 ## Bundle name vs comment
 
-Bundle names are **required** to follow [semver](https://semver.org/). Capgo uses semver for compatibility checks, channel auto-update rules, and rollbacks. Validate every name in the [SemVer tester](https://capgo.app/semver_tester/) before upload.
+Bundle names are **required** to follow [semantic versioning](/docs/live-updates/channels/#bundle-versioning-and-channels). Capgo uses semver for compatibility checks, channel auto-update rules, and rollbacks. Validate every name in the [SemVer tester](/semver_tester/) before upload.
 
 - **Name** = semver from CI, e.g. `1.8.0`, `1.8.0-beta.1`, or `1.8.0-20260629.42`
 - **Comment** = free text for humans → `commit abc1234 run 28059070270`
@@ -157,7 +157,7 @@ Upload to development (--delta)
 | Too many channels for a simple app | Start with 1–2 channels |
 | Device self-set on production | Off for production, on for test channels |
 | Skipping `--delta` | Add `--delta` to uploads; use `--delta-only` only when you need to save storage |
-| Non-semver bundle names | Use [semver](https://semver.org/) and validate in the [SemVer tester](https://capgo.app/semver_tester/) |
+| Non-semver bundle names | Follow [semantic versioning](/docs/live-updates/channels/#bundle-versioning-and-channels) and validate in the [SemVer tester](/semver_tester/) |
 | Changing versioning scheme over time | Keep semver; use pre-release labels for extra builds (`1.8.0-20260629.1`) |
 | Metadata / preview enabled without reason | Leave off by default |
 
