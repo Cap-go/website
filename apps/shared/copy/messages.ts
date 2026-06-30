@@ -1409,6 +1409,8 @@ const messages = {
   free_mobile_tools: 'Free Mobile Tools',
   footer_tagline_part1: 'Power your Capacitor apps with',
   footer_tagline_part2: '{pluginCountLabel} production-ready plugins',
+  footer_blog_description: 'From our blog',
+  footer_blog_builder_description: 'Builder guides from our blog',
   for_the_pay_as_you_go_plan: 'for any plan with credit-based usage',
   for_ultra_fast_delivery: 'for ultra-fast delivery',
   four_definitions_title: '4. Definitions',
