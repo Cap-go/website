@@ -51,7 +51,7 @@ Plugin RudderStack|RudderStack analytics and identity tracking plugin|docs/plugi
 Plugin Health|health data access plugin for HealthKit and Google Fit|docs/plugins/health/**
 Plugin Home Indicator|iOS home indicator visibility control plugin|docs/plugins/home-indicator/**
 Plugin iBeacon|iBeacon proximity detection plugin|docs/plugins/ibeacon/**
-Plugin InAppBrowser|in-app browser plugin for opening web content|docs/plugins/inappbrowser/**
+Plugin InAppBrowser|managed in-app browser plugin for Capacitor with native WebView layering, partial-screen browsers, private sessions, proxying, downloads, and app messaging|docs/plugins/inappbrowser/**
 Plugin In App Review|in-app review prompt plugin for app store ratings|docs/plugins/in-app-review/**
 Plugin Incoming Call Kit|native incoming call presentation with iOS CallKit and Android full-screen notifications|docs/plugins/incoming-call-kit/**
 Plugin Install Referrer|install attribution plugin for Google Play Install Referrer and Apple AdServices|docs/plugins/install-referrer/**
