@@ -78,7 +78,15 @@ You can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
 
 ## Deleting a channel
 
-Deleting a channel is straight forward. Just click on the trash icon and confirm the deletion. (`2` in the image)
+To delete a channel from the web app, open the **Channels** tab for your app and find the channel row. In the **Action** column, click the trash icon, then click **Delete** in the confirmation dialog.
+
+<figure><img src="/channel-delete-action.webp" alt="Channel row action column showing the delete trash icon" /><figcaption></figcaption></figure>
+
+If the trash icon is not visible, your account does not have the `channel.delete` permission for that app. Ask an organization or app admin to grant a role that can delete channels, or delete the channel with an API key that has permission:
+
+```bash
+npx @capgo/cli@latest channel delete <channel-name> <app-id>
+```
 
 ## Managing a channel
 
