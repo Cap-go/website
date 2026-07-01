@@ -32,6 +32,112 @@ npx cap sync
 import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 ```
 
+## Choose the Browser Mode
+
+Use `open()` when you want the platform browser surface: Chrome Custom Tabs on Android and `SFSafariViewController` on iOS. Use `openWebView()` when your app needs to control the native WebView: custom size, toolbar, app messaging, JavaScript injection, downloads, proxying, popups, hidden instances, or UI layering.
+
+## Common Use Cases
+
+### Show Ionic UI Over a Live Browser Page
+
+Open the managed WebView behind the Capacitor host WebView with `toBack`. Your Ionic UI can then render above the page while the web content stays loaded behind it. Forward gestures to the browser with `dispatchInputEvent()` when the overlay should interact with the page.
+
+```typescript
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+const { id } = await InAppBrowser.openWebView({
+  url: 'https://example.com/checkout',
+  toBack: true,
+  transparentBackground: true,
+});
+
+await InAppBrowser.dispatchInputEvent({
+  id,
+  type: 'click',
+  x: 160,
+  y: 420,
+});
+
+await InAppBrowser.bringToFront({ id });
+```
+
+Make the relevant app background transparent wherever the browser should be visible. When the browser is behind the app, native gestures are still owned by the Capacitor WebView unless you explicitly forward them.
+
+### Build a Partial-Screen Browser or Bottom Sheet
+
+Set `height`, `width`, `x`, and `y` to keep part of the Capacitor app visible around the native browser. On Android and iOS, touches outside the browser frame pass through to the underlying Capacitor WebView.
+
+```typescript
+const bottomGap = 200;
+
+const { id } = await InAppBrowser.openWebView({
+  url: 'https://example.com/offers',
+  height: window.innerHeight - bottomGap,
+  y: 0,
+});
+
+await InAppBrowser.updateDimensions({
+  id,
+  height: window.innerHeight,
+  y: 0,
+});
+```
+
+Use this for mini browsers, offer panels, support widgets, browser-backed bottom sheets, or any flow where native app controls must remain tappable outside the web content.
+
+### Keep Checkout, Auth, or Support Sessions Private
+
+Set `persistWebViewData: false` for managed WebViews that should avoid persistent website data where the platform supports it. Call `clearAllBrowsingData()` after logout, account switching, test sessions, or flows that must clear the default store and opened managed WebViews.
+
+```typescript
+const { id } = await InAppBrowser.openWebView({
+  url: 'https://example.com/login',
+  persistWebViewData: false,
+});
+
+await InAppBrowser.clearAllBrowsingData();
+await InAppBrowser.close({ id });
+```
+
+On Android, cookies use the system WebView cookie store, so `clearAllBrowsingData()` is the cleanup step for cookies and other shared browser data.
+
+### Keep Multiple Browser Instances Ready
+
+Use `hidden`, `hide()`, and `show()` to preload or preserve multiple managed WebViews without keeping each one on screen. Hidden WebViews can still receive `executeScript()`, `postMessage()`, `setUrl()`, and close calls.
+
+```typescript
+const first = await InAppBrowser.openWebView({ url: 'https://example.com/a', hidden: true });
+const second = await InAppBrowser.openWebView({ url: 'https://example.com/b', hidden: true });
+
+await InAppBrowser.show({ id: first.id });
+await InAppBrowser.hide({ id: first.id });
+await InAppBrowser.show({ id: second.id });
+```
+
+### Embed Advanced Web App Flows
+
+Combine proxy rules, `handleDownloads`, `openBlankTargetInWebView`, `hiddenPopupWindow`, `enableGooglePaySupport`, `postMessage()`, and `executeScript()` for document portals, upload flows, payment pages, support desks, and other embedded web apps that need native control without leaving your app.
+
+```typescript
+const { id } = await InAppBrowser.openWebView({
+  url: 'https://example.com/portal',
+  handleDownloads: true,
+  openBlankTargetInWebView: true,
+  hiddenPopupWindow: true,
+  outboundProxyRules: [
+    {
+      urlRegex: '^https://example\\.com/api/',
+      action: 'delegateToJs',
+    },
+  ],
+});
+
+await InAppBrowser.postMessage({
+  id,
+  detail: { source: 'app', action: 'refresh' },
+});
+```
+
 ## API Overview
 
 ### `goBack`
@@ -87,6 +193,16 @@ import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 await InAppBrowser.clearCache();
 ```
 
+### `clearAllBrowsingData`
+
+Clear all browsing data from the default store and opened managed WebViews, including cookies, cache, local storage, session storage, IndexedDB, form data, and HTTP auth data where the platform exposes it.
+
+```typescript
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+await InAppBrowser.clearAllBrowsingData();
+```
+
 ### `getCookies`
 
 Get cookies for a specific URL.
@@ -129,6 +245,41 @@ When `id` is omitted, targets the active webview.
 import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.show();
+```
+
+### `sendToBack`
+
+Moves the native browser behind the Capacitor host WebView. Use this when your Ionic UI should appear above a live browser page.
+
+```typescript
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+await InAppBrowser.sendToBack({ id: 'webview-id', transparentBackground: true });
+```
+
+### `bringToFront`
+
+Moves a browser that was behind the host WebView back to the front. When `id` is omitted, targets the active webview.
+
+```typescript
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+await InAppBrowser.bringToFront({ id: 'webview-id' });
+```
+
+### `dispatchInputEvent`
+
+Dispatches a click, touch, or scroll event to a managed browser. Coordinates are relative to the browser viewport in CSS pixels.
+
+```typescript
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+await InAppBrowser.dispatchInputEvent({
+  id: 'webview-id',
+  type: 'click',
+  x: 160,
+  y: 420,
+});
 ```
 
 ### `openWebView`
@@ -430,6 +581,46 @@ export interface CloseWebviewOptions {
 }
 ```
 
+### `LayerOptions`
+```typescript
+export interface LayerOptions {
+  /**
+   * Target webview id. If omitted, targets the active webview.
+   */
+  id?: string;
+  /**
+   * Makes the Capacitor host WebView transparent while this native webview is behind it.
+   *
+   * @default true
+   */
+  transparentBackground?: boolean;
+}
+```
+
+### `DispatchInputEventOptions`
+```typescript
+export type WebViewPointerInputEventType = 'click' | 'touchstart' | 'touchmove' | 'touchend' | 'touchcancel';
+export type WebViewInputEventType = WebViewPointerInputEventType | 'scroll';
+
+export interface DispatchPointerInputEventOptions {
+  id?: string;
+  type: WebViewPointerInputEventType;
+  x: number;
+  y: number;
+}
+
+export interface DispatchScrollInputEventOptions {
+  id?: string;
+  type: 'scroll';
+  x: number;
+  y: number;
+  deltaX: number;
+  deltaY: number;
+}
+
+export type DispatchInputEventOptions = DispatchPointerInputEventOptions | DispatchScrollInputEventOptions;
+```
+
 ### `OpenWebViewOptions`
 ```typescript
 export interface OpenWebViewOptions {
@@ -542,6 +733,18 @@ export interface OpenWebViewOptions {
    * @since 8.6.0
    */
   captureConsoleLogs?: boolean;
+  /**
+   * Controls whether the webview should persist website data such as cache, cookies, local storage,
+   * IndexedDB, and session data.
+   *
+   * When false, iOS uses a non-persistent `WKWebsiteDataStore`. Android disables per-view cache and
+   * DOM/database storage where the system WebView supports it. Android cookies use the shared
+   * WebView cookie store, so call `clearAllBrowsingData()` to remove cookies and other global data.
+   *
+   * @default true
+   * @since 8.6.36
+   */
+  persistWebViewData?: boolean;
   /**
    * Automatically handles downloads triggered inside the webview without requiring a custom JavaScript bridge.
    *
@@ -1019,6 +1222,22 @@ export interface OpenWebViewOptions {
   y?: number;
 
   /**
+   * Places the native browser behind the Capacitor host WebView.
+   * Make the app background transparent to reveal it, or rely on `transparentBackground` to clear the host WebView.
+   *
+   * @default false
+   */
+  toBack?: boolean;
+
+  /**
+   * When `toBack` is true, makes the Capacitor host WebView transparent so the native browser can be seen behind Ionic content.
+   * Ignored when the browser is in front.
+   *
+   * @default true
+   */
+  transparentBackground?: boolean;
+
+  /**
    * Disables the bounce (overscroll) effect on iOS WebView.
    * When enabled, prevents the rubber band scrolling effect when users scroll beyond content boundaries.
    * This is useful for:
@@ -1096,9 +1315,21 @@ export interface ScreenshotResult {
 export type UrlChangeListener = (state: UrlEvent) => void;
 ```
 
+### `ButtonNearDoneEvent`
+```typescript
+export interface ButtonNearDoneEvent {
+  /**
+   * Webview instance id.
+   *
+   * @since 8.6.36
+   */
+  id: string;
+}
+```
+
 ### `ButtonNearListener`
 ```typescript
-export type ButtonNearListener = (state: object) => void;
+export type ButtonNearListener = (state: ButtonNearDoneEvent) => void;
 ```
 
 ### `ConfirmBtnListener`

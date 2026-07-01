@@ -63,7 +63,7 @@ const actionDefinitionRows =
 @capgo/capacitor-contentsquare|github.com/Cap-go|Integrate Contentsquare mobile analytics, consent gating, screen tracking, transactions, and session replay controls in Capacitor|https://github.com/Cap-go/capacitor-contentsquare/|Contentsquare
 @capgo/capacitor-facebook-analytics|github.com/Cap-go|Meta/Facebook App Events analytics with standard events, purchase logging, currency parameters, and advertiser tracking controls|https://github.com/Cap-go/capacitor-facebook-analytics/|Facebook Analytics
 @capgo/capacitor-nativegeocoder|github.com/Cap-go|Convert addresses to coordinates and coordinates to addresses using native geocoding|https://github.com/Cap-go/capacitor-nativegeocoder/|Native Geocoder
-@capgo/capacitor-inappbrowser|github.com/Cap-go|Open web pages in a customizable in-app browser without leaving your application|https://github.com/Cap-go/capacitor-inappbrowser/|In App Browser
+@capgo/capacitor-inappbrowser|github.com/Cap-go|Open managed in-app WebViews with native UI layering, private sessions, downloads, proxying, and messaging|https://github.com/Cap-go/capacitor-inappbrowser/|In App Browser
 @capgo/capacitor-mqtt|github.com/Cap-go|MQTT support for real-time messaging across iOS, Android, and Web.|https://github.com/Cap-go/capacitor-mqtt/|MQTT
 @capgo/capacitor-mock-location-detector|github.com/Cap-go|Detect simulated GPS locations and developer tooling that enables spoofing apps|https://github.com/Cap-go/capacitor-mock-location-detector/|Mock Location Detector
 @capgo/capacitor-mute|github.com/Cap-go|Detect device mute switch state for iOS devices to handle audio playback appropriately|https://github.com/Cap-go/capacitor-mute/|Mute
