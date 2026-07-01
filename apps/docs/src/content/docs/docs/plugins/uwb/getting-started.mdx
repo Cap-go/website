@@ -60,16 +60,21 @@ See [iOS setup](/docs/plugins/uwb/ios/) for capability and permission requiremen
 
 ## Android Controller / Controlee Session
 
-1. The controller calls `startControllerSession()` and shares the returned `rangingParameters`.
-2. The controlee calls `startControleeSession({ rangingParameters })`.
-3. Optionally pass `peerAddress` to the controller once the controlee address is known.
+1. The controller calls `startControllerSession()` and shares the returned `rangingParameters` and `localAddress`.
+2. The controlee builds its own `rangingParameters`, using the controller `localAddress` as `peerAddress`.
+3. The controlee calls `startControleeSession({ rangingParameters })`.
+4. Optionally pass `peerAddress` to the controller once the controlee address is known.
 
 ```typescript
 const controller = await CapacitorUwb.startControllerSession();
 
 await CapacitorUwb.startControleeSession({
-  rangingParameters: controller.rangingParameters,
+  rangingParameters: {
+    ...controller.rangingParameters,
+    peerAddress: controller.localAddress,
+  },
 });
+```
 ```
 
 See [Android setup](/docs/plugins/uwb/android/) for hardware and permission requirements.
