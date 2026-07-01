@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-01T08:04:58.421Z
-updated_at: 2026-07-01T08:04:59.544Z
+updated_at: 2026-07-01T08:07:06.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/353e0be9-5292-43a2-987c-9fd3b824842f/what-is-gdpr-compliance-developer-guide.jpg'
 head_image_alt: What Is GDPR Compliance? Guide for Developers 2026
 keywords: 'what is gdpr compliance, gdpr for developers, data privacy, mobile app compliance, capgo'
