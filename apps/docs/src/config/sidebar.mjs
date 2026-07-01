@@ -247,6 +247,7 @@ const pluginEntries = [
   ['Twilio Video', 'twilio-video'],
   ['Twilio Voice', 'twilio-voice'],
   ['Uploader', 'uploader'],
+  ['UWB', 'uwb', [linkItem('iOS setup', '/docs/plugins/uwb/ios'), linkItem('Android setup', '/docs/plugins/uwb/android')]],
   ['Video Player', 'video-player'],
   ['Video Thumbnails', 'video-thumbnails'],
   ['Volume Buttons', 'volume-buttons'],

@@ -1,0 +1,102 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-uwb and start UWB ranging on iOS and Android."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-uwb` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-uwb
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorUwb } from '@capgo/capacitor-uwb';
+```
+
+## Check Availability
+
+```typescript
+const availability = await CapacitorUwb.isAvailable();
+
+if (!availability.supported) {
+  console.log('This device does not support UWB.');
+}
+```
+
+## iOS Peer Session
+
+1. Call `getDiscoveryToken()` on both devices.
+2. Exchange the returned base64 tokens out-of-band.
+3. Start ranging with the peer token.
+
+```typescript
+const { discoveryToken } = await CapacitorUwb.getDiscoveryToken();
+
+await CapacitorUwb.startPeerSession({
+  peerDiscoveryToken: '<peer-token-base64>',
+});
+```
+
+See [iOS setup](/docs/plugins/uwb/ios/) for capability and permission requirements.
+
+## Android Controller / Controlee Session
+
+1. The controller calls `startControllerSession()` and shares the returned `rangingParameters` and `localAddress`.
+2. The controlee builds its own `rangingParameters`, using the controller `localAddress` as `peerAddress`.
+3. The controlee calls `startControleeSession({ rangingParameters })`.
+4. Optionally pass `peerAddress` to the controller once the controlee address is known.
+
+```typescript
+const controller = await CapacitorUwb.startControllerSession();
+
+await CapacitorUwb.startControleeSession({
+  rangingParameters: {
+    ...controller.rangingParameters,
+    peerAddress: controller.localAddress,
+  },
+});
+```
+```
+
+See [Android setup](/docs/plugins/uwb/android/) for hardware and permission requirements.
+
+## Listen For Updates
+
+```typescript
+await CapacitorUwb.addListener('rangingUpdate', (event) => {
+  console.log(event.distanceMeters, event.direction);
+});
+
+await CapacitorUwb.addListener('sessionStateChanged', (event) => {
+  console.log(event.state, event.reason);
+});
+```
+
+## Stop The Session
+
+```typescript
+await CapacitorUwb.stopSession();
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Update the TypeScript definitions and run `bun run docgen` in the plugin repository to refresh the generated API docs.
