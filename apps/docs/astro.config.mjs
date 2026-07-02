@@ -84,6 +84,7 @@ export default defineConfig({
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/apps/docs/' },
       components: {
         Head: './src/components/doc/Head.astro',
+        Hero: './src/components/doc/Hero.astro',
         LanguageSelect: './src/components/doc/LanguageSelect.astro',
         PageTitle: './src/components/doc/PageTitle.astro',
       },

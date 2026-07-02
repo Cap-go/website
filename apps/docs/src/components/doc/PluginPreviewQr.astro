@@ -1,0 +1,110 @@
+---
+import { actions } from '@/config/plugins'
+import { getPluginPreviewQr, type PluginPreviewQr } from '@/config/pluginPreviewQrs'
+import { getPluginDocsSlugCandidates } from '@/services/pluginDocs'
+import type { StarlightRouteData } from '@astrojs/starlight/route-data'
+
+const getRoute = (): StarlightRouteData | undefined => {
+  try {
+    return Astro.locals.starlightRoute as StarlightRouteData | undefined
+  } catch {
+    return undefined
+  }
+}
+
+const routeId = getRoute()?.id ?? ''
+const pluginSlug = routeId.match(/(?:^|\/)plugins\/([^/]+)(?:\/.*)?$/)?.[1] ?? ''
+const plugin = pluginSlug ? actions.find((action) => getPluginDocsSlugCandidates(action).includes(pluginSlug)) : undefined
+let preview: PluginPreviewQr | undefined
+
+if (plugin) {
+  for (const candidate of getPluginDocsSlugCandidates(plugin)) {
+    preview = getPluginPreviewQr(candidate)
+    if (preview) break
+  }
+}
+
+const imageAlt = plugin?.title ? `${plugin.title} plugin preview QR code` : 'Plugin preview QR code'
+---
+
+{
+  preview && (
+    <aside class="plugin-preview-qr" aria-label="Plugin example preview">
+      <a class="plugin-preview-qr__image-link" href={preview.webUrl} target="_blank" rel="noopener noreferrer">
+        <img src={preview.qr} alt={imageAlt} loading="lazy" decoding="async" />
+      </a>
+      <div>
+        <p class="plugin-preview-qr__eyebrow">Try the example</p>
+        <p class="plugin-preview-qr__copy">Download or open the Capgo mobile app first, then scan this QR code with your phone to test the live plugin example.</p>
+        <a class="plugin-preview-qr__link" href={preview.webUrl} target="_blank" rel="noopener noreferrer">
+          Open preview
+        </a>
+      </div>
+    </aside>
+  )
+}
+
+<style>
+  .plugin-preview-qr {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem 0 1.5rem;
+    padding: 1rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 28%, transparent);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--sl-color-accent) 8%, var(--sl-color-bg));
+  }
+
+  .plugin-preview-qr__image-link {
+    display: block;
+    width: 7rem;
+    padding: 0.4rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    background: #fff;
+  }
+
+  .plugin-preview-qr__image-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .plugin-preview-qr__eyebrow {
+    margin: 0;
+    color: var(--sl-color-accent-high);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .plugin-preview-qr__copy {
+    margin: 0.4rem 0 0;
+    color: var(--sl-color-gray-2);
+    line-height: 1.55;
+  }
+
+  .plugin-preview-qr__link {
+    display: inline-flex;
+    margin-top: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .plugin-preview-qr__link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 520px) {
+    .plugin-preview-qr {
+      grid-template-columns: 1fr;
+    }
+
+    .plugin-preview-qr__image-link {
+      width: 9rem;
+    }
+  }
+</style>
