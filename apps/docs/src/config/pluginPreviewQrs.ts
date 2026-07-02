@@ -1,1 +1,1 @@
-export { getPluginPreviewQr, pluginPreviewQrs, type PluginPreviewQr } from '../../../web/src/config/pluginPreviewQrs'
+export { getPluginPreviewQr, pluginPreviewQrs, type PluginPreviewQr } from '../../../shared/pluginPreviewQrs'

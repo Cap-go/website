@@ -4,21 +4,27 @@ import { getPluginPreviewQr, type PluginPreviewQr } from '@/config/pluginPreview
 import { getPluginDocsSlugCandidates } from '@/services/pluginDocs'
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 
-const getRoute = (): StarlightRouteData | undefined => {
-  try {
-    return Astro.locals.starlightRoute as StarlightRouteData | undefined
-  } catch {
-    return undefined
-  }
-}
+const getRoute = (): StarlightRouteData | undefined => Astro.locals.starlightRoute as StarlightRouteData | undefined
 
 const routeId = getRoute()?.id ?? ''
 const pluginSlug = routeId.match(/(?:^|\/)plugins\/([^/]+)(?:\/.*)?$/)?.[1] ?? ''
-const plugin = pluginSlug ? actions.find((action) => getPluginDocsSlugCandidates(action).includes(pluginSlug)) : undefined
+let plugin: (typeof actions)[number] | undefined
+let pluginCandidates: string[] = []
 let preview: PluginPreviewQr | undefined
 
+if (pluginSlug) {
+  for (const action of actions) {
+    const candidates = getPluginDocsSlugCandidates(action)
+    if (!candidates.includes(pluginSlug)) continue
+
+    plugin = action
+    pluginCandidates = candidates
+    break
+  }
+}
+
 if (plugin) {
-  for (const candidate of getPluginDocsSlugCandidates(plugin)) {
+  for (const candidate of pluginCandidates) {
     preview = getPluginPreviewQr(candidate)
     if (preview) break
   }
@@ -64,6 +70,12 @@ const imageAlt = plugin?.title ? `${plugin.title} plugin preview QR code` : 'Plu
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 0.5rem;
     background: #fff;
+  }
+
+  .plugin-preview-qr__image-link:focus-visible,
+  .plugin-preview-qr__link:focus-visible {
+    outline: 2px solid var(--sl-color-accent-high);
+    outline-offset: 3px;
   }
 
   .plugin-preview-qr__image-link img {
