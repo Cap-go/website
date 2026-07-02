@@ -247,6 +247,7 @@ const pluginEntries = [
   ['Twilio Video', 'twilio-video'],
   ['Twilio Voice', 'twilio-voice'],
   ['Uploader', 'uploader'],
+  ['UWB', 'uwb'],
   ['Video Player', 'video-player'],
   ['Video Thumbnails', 'video-thumbnails'],
   ['Volume Buttons', 'volume-buttons'],

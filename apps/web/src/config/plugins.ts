@@ -54,6 +54,7 @@ const actionDefinitionRows =
 @capgo/electron-updater|github.com/Cap-go|OTA live updates for Electron apps with the same API surface as capacitor-updater|https://github.com/Cap-go/electron-updater/|Electron Updater
 @capgo/cordova-updater|github.com/Cap-go|OTA live updates for Cordova iOS and Android with the same API as capacitor-updater|https://github.com/Cap-go/cordova-updater/|Cordova Updater
 @capgo/capacitor-uploader|github.com/Cap-go|Upload large files reliably in background with progress tracking and retry support|https://github.com/Cap-go/capacitor-uploader/|Uploader
+@capgo/capacitor-uwb|github.com/Cap-go|Ultra-Wideband ranging for peer distance and direction on iOS Nearby Interaction and Android Jetpack UWB|https://github.com/Cap-go/capacitor-uwb/|UWB
 @revenuecat/purchases-capacitor|github.com/Cap-go|Implement in-app subscriptions and purchases with RevenueCat SDK for cross-platform monetization|https://github.com/RevenueCat/purchases-capacitor/|Purchases
 @capgo/capacitor-flash|github.com/Cap-go|Control device flashlight and torch with simple on/off toggle functionality|https://github.com/Cap-go/capacitor-flash/|Flash
 @capgo/capacitor-screen-recorder|github.com/Cap-go|Capture screen recordings with audio for tutorials, demos, and bug reports|https://github.com/Cap-go/capacitor-screen-recorder/|Screen Recorder
@@ -205,6 +206,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-updater': 'ArrowPath',
   '@capgo/electron-updater': 'ArrowPath',
   '@capgo/cordova-updater': 'ArrowPath',
+  '@capgo/capacitor-uwb': 'Signal',
   '@capgo/capacitor-uploader': 'ArrowUpOnSquare',
   '@revenuecat/purchases-capacitor': 'CurrencyDollar',
   '@capgo/capacitor-flash': 'Bolt',
@@ -430,6 +432,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-android-kiosk',
     '@capgo/capacitor-background-task',
     '@capgo/capacitor-health',
+    '@capgo/capacitor-uwb',
     '@capgo/capacitor-llm',
     '@capgo/capacitor-proximity',
     '@capgo/capacitor-sim',
