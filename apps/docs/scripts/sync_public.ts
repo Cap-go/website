@@ -7,6 +7,7 @@ const sourcePublicDir = resolve(docsDir, '../web/public')
 const targetPublicDir = resolve(docsDir, 'public')
 const trackedFiles = new Map([['.gitignore', '*\n!.gitignore\n']])
 const alwaysCopiedAssets = ['_redirects']
+const alwaysCopiedAssetDirectories = ['plugins/preview-qrs']
 
 const referencePatterns = [/~public\/([^'"`\s)]+)/g, /(?:src|href)=["']\/([^"'?#]+)["']/g, /url\(["']?\/([^)"'?#]+)["']?\)/g, /["'`]\/([^"'`?#]+)["'`]/g]
 
@@ -75,6 +76,17 @@ function addMarkdownReferencedAssets(content: string, referencedAssets: Set<stri
     searchIndex = pathEnd > pathStart ? pathEnd : pathStart
   }
 }
+function addDirectoryAssets(relativeDir: string, referencedAssets: Set<string>) {
+  const directoryPath = resolve(sourcePublicDir, relativeDir)
+  if (!existsSync(directoryPath)) {
+    throw new Error(`Required docs public asset directory "${relativeDir}" is missing in ${sourcePublicDir}.`)
+  }
+
+  for (const filePath of walkFiles(directoryPath)) {
+    const assetPath = resolveReferencedAsset(relative(sourcePublicDir, filePath).replaceAll('\\', '/'))
+    if (assetPath) referencedAssets.add(assetPath)
+  }
+}
 
 function collectReferencedAssets(scanPath: string, referencedAssets: Set<string>) {
   const content = readFileSync(scanPath, 'utf8')
@@ -110,6 +122,9 @@ for (const assetPath of alwaysCopiedAssets) {
     throw new Error(`Required docs public asset "${assetPath}" is missing or invalid in ${sourcePublicDir}.`)
   }
   referencedAssets.add(resolvedAsset)
+}
+for (const assetDirectory of alwaysCopiedAssetDirectories) {
+  addDirectoryAssets(assetDirectory, referencedAssets)
 }
 const scanTargets = [resolve(docsDir, 'astro.config.mjs'), ...walkFiles(resolve(docsDir, 'src'))]
 
