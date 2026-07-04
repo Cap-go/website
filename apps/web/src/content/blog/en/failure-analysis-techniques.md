@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-04T10:18:32.745Z
-updated_at: 2026-07-04T10:18:36.530Z
+updated_at: 2026-07-04T10:20:35.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/1cdcfbc3-7eb3-4be8-a84d-1b0c9a40c631/failure-analysis-techniques-analysis-techniques.jpg'
 head_image_alt: 8 Failure Analysis Techniques to Master in 2026
 keywords: 'failure analysis techniques, root cause analysis, software reliability, sre practices, incident management'
