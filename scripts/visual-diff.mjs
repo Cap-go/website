@@ -14,6 +14,7 @@
  *   bun run visual-diff:capture:before -- --suite web --routes /,/pricing/
  */
 import { spawn, spawnSync } from 'node:child_process'
+import { accessSync } from 'node:fs'
 import { access, mkdir, readdir, readFile, rm, stat } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import path from 'node:path'
@@ -23,6 +24,35 @@ import { chromium } from 'playwright'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 const DEFAULT_CONFIG_PATH = path.join(ROOT, 'visual-diff.config.json')
+const CAPTURE_LABELS = new Set(['before', 'after'])
+const COMPARE_CANDIDATES = [
+  '/opt/homebrew/bin/compare',
+  '/usr/local/bin/compare',
+  '/usr/bin/compare',
+]
+
+function resolveCompareBinary() {
+  for (const candidate of COMPARE_CANDIDATES) {
+    try {
+      accessSync(candidate)
+      return candidate
+    } catch {
+      // try next candidate
+    }
+  }
+
+  throw new Error(
+    'ImageMagick compare not found. Install ImageMagick (brew install imagemagick) before running visual diff compare.',
+  )
+}
+
+function isPathWithinRoot(filePath, rootDir) {
+  const resolvedFile = path.resolve(filePath)
+  const resolvedRoot = path.resolve(rootDir)
+  const relative = path.relative(resolvedRoot, resolvedFile)
+  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative))
+}
+
 
 function parseArgs(argv) {
   const args = {
@@ -131,7 +161,11 @@ async function startStaticServer(distDir, port) {
       const url = new URL(req.url || '/', `http://127.0.0.1:${port}`)
       let pathname = decodeURIComponent(url.pathname)
       if (pathname.endsWith('/')) pathname += 'index.html'
-      const filePath = path.join(absoluteDist, pathname)
+      const filePath = path.resolve(absoluteDist, `.${pathname}`)
+      if (!isPathWithinRoot(filePath, absoluteDist)) {
+        res.writeHead(403).end('Forbidden')
+        return
+      }
       const data = await readFile(filePath)
       res.writeHead(200, { 'Content-Type': contentType(filePath) })
       res.end(data)
@@ -201,7 +235,15 @@ async function captureSuite({ label, suite, config, outputDir }) {
 }
 
 async function capture(label, config, args) {
-  const outputDir = path.join(ROOT, config.outputDir, label)
+  if (!CAPTURE_LABELS.has(label)) {
+    throw new Error(`Invalid capture label: ${label}`)
+  }
+
+  const outputDir = path.resolve(ROOT, config.outputDir, label)
+  if (!isPathWithinRoot(outputDir, path.resolve(ROOT, config.outputDir))) {
+    throw new Error(`Invalid capture output directory for label: ${label}`)
+  }
+
   await rm(outputDir, { recursive: true, force: true })
   await ensureDir(outputDir)
 
@@ -223,19 +265,21 @@ async function capture(label, config, args) {
   console.log(`\nCaptured ${manifest.suites.reduce((n, s) => n + s.captures.length, 0)} screenshots -> ${path.relative(ROOT, outputDir)}`)
 }
 
-function compareImages(beforePath, afterPath, fuzzPercent) {
+function compareImages(compareBinary, beforePath, afterPath, fuzzPercent) {
   const args = ['-metric', 'AE']
   if (fuzzPercent > 0) args.push('-fuzz', `${fuzzPercent}%`)
   args.push(beforePath, afterPath, 'null:')
 
-  const proc = spawnSync('compare', args, { encoding: 'utf8' })
+  const proc = spawnSync(compareBinary, args, { encoding: 'utf8' })
   const stderr = (proc.stderr || '').trim()
   const diffPixels = Number.parseFloat(stderr)
-  return Number.isFinite(diffPixels) ? diffPixels : null
+  if (!Number.isFinite(diffPixels)) {
+    throw new Error(`Image comparison failed: ${stderr || 'no metric output'}`)
+  }
+  return diffPixels
 }
 
 function classifyDiff(diffPixels, compareConfig) {
-  if (diffPixels === null) return 'unknown'
   if (diffPixels <= compareConfig.identicalMaxPixels) return 'identical'
   if (diffPixels <= compareConfig.minorMaxPixels) return 'minor'
   return 'changed'
@@ -254,7 +298,14 @@ async function compare(config, args) {
   }
 
   await ensureDir(diffDir)
-  const files = (await readdir(beforeDir)).filter((file) => file.endsWith('.png')).sort()
+  const beforeFiles = (await readdir(beforeDir)).filter((file) => file.endsWith('.png')).sort()
+  const afterFiles = (await readdir(afterDir)).filter((file) => file.endsWith('.png')).sort()
+  if (beforeFiles.length !== afterFiles.length || beforeFiles.some((file, index) => file !== afterFiles[index])) {
+    throw new Error('Before/after screenshot sets do not match. Re-run capture for both labels.')
+  }
+
+  const compareBinary = resolveCompareBinary()
+  const files = beforeFiles
   const results = []
 
   for (const file of files) {
@@ -267,13 +318,13 @@ async function compare(config, args) {
     }
 
     try {
-      const diffPixels = compareImages(beforePath, afterPath, config.compare.fuzzPercent)
+      const diffPixels = compareImages(compareBinary, beforePath, afterPath, config.compare.fuzzPercent)
       const status = classifyDiff(diffPixels, config.compare)
       results.push({ file, diffPixels, status })
 
       if (status === 'changed' || status === 'minor') {
         const diffPath = path.join(diffDir, file.replace('.png', '-diff.png'))
-        spawnSync('compare', [beforePath, afterPath, diffPath])
+        spawnSync(compareBinary, [beforePath, afterPath, diffPath])
       }
     } catch (error) {
       results.push({ file, diffPixels: null, status: 'error', error: String(error) })
@@ -289,7 +340,8 @@ async function compare(config, args) {
       minor: results.filter((r) => r.status === 'minor').length,
       changed: results.filter((r) => r.status === 'changed').length,
       missingAfter: results.filter((r) => r.status === 'missing-after').length,
-      unknown: results.filter((r) => r.status === 'unknown' || r.status === 'error').length,
+      unknown: results.filter((r) => r.status === 'unknown').length,
+      error: results.filter((r) => r.status === 'error').length,
     },
     results,
   }
@@ -309,7 +361,7 @@ async function compare(config, args) {
     console.log(`  ${row.status}: ${row.file}${row.diffPixels != null ? ` (${row.diffPixels} px)` : ''}`)
   }
 
-  if (args.strict && (report.summary.changed > 0 || report.summary.missingAfter > 0 || report.summary.unknown > 0)) {
+  if (args.strict && (report.summary.changed > 0 || report.summary.missingAfter > 0 || report.summary.unknown > 0 || report.summary.error > 0)) {
     return false
   }
 
@@ -379,7 +431,8 @@ async function report(config) {
 }
 
 async function installBrowsers() {
-  const proc = spawnSync('bunx', ['playwright', 'install', 'chromium'], {
+  const playwrightCli = path.join(ROOT, 'node_modules', 'playwright', 'cli.js')
+  const proc = spawnSync(process.execPath, [playwrightCli, 'install', 'chromium'], {
     cwd: ROOT,
     stdio: 'inherit',
   })
