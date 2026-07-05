@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-15T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /nuxt_capgo.webp
 head_image_alt: "Build a Nuxt Mobile App from Scratch with Capacitor 8 Capgo blog illustration"
 keywords: Nuxt 4, Capacitor 8, mobile app from scratch, iOS development, Android development, Vue mobile app, native plugins, Tailwind CSS
@@ -515,22 +515,120 @@ You now have a working Nuxt mobile app. Here's what to do next:
 ### Add More Features
 - **Camera:** `bun add @capacitor/camera`
 - **Geolocation:** `bun add @capacitor/geolocation`
-- **Push Notifications:** `bun add @capacitor/push-notifications`
+- **Push Notifications:** `bun add @capacitor/push-notifications` or [@capgo/capacitor-firebase-messaging](https://capgo.app/plugins/capacitor-firebase-messaging/) for Firebase Cloud Messaging on iOS and Android
 - **File System:** `bun add @capacitor/filesystem`
 
-### UI Enhancement
-Consider adding [Konsta UI](https://konstaui.com/) for native-looking iOS/Android components:
+### Native UI and transitions
+
+Use Capgo plugins instead of Konsta UI for a native mobile feel:
+
+- **[@capgo/capacitor-native-navigation](https://github.com/Cap-go/capacitor-native-navigation)** — Liquid Glass tab bar and native navbar
+- **[@capgo/capacitor-transitions](https://github.com/Cap-go/capacitor-transitions)** — native-feeling page transitions
 
 ```shell
-bun add konsta
+bun add @capgo/capacitor-native-navigation @capgo/capacitor-transitions
+bunx cap sync
 ```
 
-Then update your CSS to import the theme:
+For Tailwind safe areas, add [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor):
+
+```shell
+bun add -D tailwind-capacitor
+```
+
+See [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/), [Using @capgo/capacitor-transitions](/plugins/capacitor-transitions/), and the [tailwind-capacitor repo](https://github.com/Cap-go/tailwind-capacitor) for Nuxt-specific setup.
+## Fixing iOS Layout Issues (Viewport, Safe Area, and Horizontal Overflow)
+
+If content looks cropped, shifted, or horizontally scrollable on iOS, adding more `overflow-x: hidden` or tweaking the viewport tag alone usually does not fix it. Work through these checks in order.
+
+### Make sure the viewport meta tag is applied correctly
+
+In `nuxt.config.ts`, set the viewport through `app.head`:
+
+```typescript
+export default defineNuxtConfig({
+  app: {
+    head: {
+      meta: [
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, viewport-fit=cover',
+        },
+      ],
+    },
+  },
+});
+```
+
+### Handle iOS safe area from one root wrapper only
+
+Create a single app shell and apply safe area padding there — not in multiple nested components:
 
 ```css
-@import 'tailwindcss';
-@import 'konsta/theme.css';
+html,
+body,
+#__nuxt {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-shell {
+  min-height: 100dvh;
+  width: 100%;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
 ```
+
+Wrap all page content inside `.app-shell`. Duplicated safe-area padding in headers, modals, and layout wrappers often makes the UI look cropped or too large.
+
+With [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor), you can express the same padding with utilities like `pt-safe pb-safe px-safe` on that single shell.
+
+### Set Capacitor iOS `contentInset` to `never` first
+
+In `capacitor.config.ts`, prefer native inset disabled and let CSS (or Native Navigation's `contentInsetMode: 'css'`) own the safe area:
+
+```typescript
+const config: CapacitorConfig = {
+  appId: 'com.example.myapp',
+  appName: 'my-app',
+  webDir: '.output/public',
+  ios: {
+    contentInset: 'never',
+  },
+};
+```
+
+Mixing Capacitor's automatic content inset with CSS `env(safe-area-inset-*)` padding is a common cause of double spacing.
+
+### Find the real overflowing element
+
+The usual culprit is an element using `100vw`, Tailwind `w-screen`, a fixed pixel width, or a large `min-width`.
+
+In Safari Web Inspector, run:
+
+```javascript
+[...document.querySelectorAll('*')]
+  .filter(el => el.scrollWidth > document.documentElement.clientWidth)
+  .map(el => ({
+    el,
+    tag: el.tagName,
+    class: el.className,
+    scrollWidth: el.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+  }));
+```
+
+With Tailwind, replace `w-screen` with `w-full` when possible. Many horizontal overflow issues come from `100vw` / `w-screen`, duplicated safe-area padding, or a fixed-width container — not from the viewport meta tag itself.
 
 ### Over-the-Air Updates
 Set up [Capgo](https://capgo.app/) to push updates without app store resubmission:
@@ -561,7 +659,9 @@ Make sure you configured `nitro: { preset: 'static' }` in `nuxt.config.ts` and r
 - [Capacitor 8 Documentation](https://capacitorjs.com/docs)
 - [Nuxt 4 Documentation](https://nuxt.com/docs)
 - [Capgo - Live Updates](https://capgo.app/)
-- [Konsta UI - Mobile UI Components](https://konstaui.com/)
+- [@capgo/capacitor-native-navigation](https://github.com/Cap-go/capacitor-native-navigation/)
+- [@capgo/capacitor-transitions](https://github.com/Cap-go/capacitor-transitions/)
+- [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor)
 
 Ready to ship your app? Learn how Capgo can help you deliver updates faster — [sign up for a free account](/register/) today.
 

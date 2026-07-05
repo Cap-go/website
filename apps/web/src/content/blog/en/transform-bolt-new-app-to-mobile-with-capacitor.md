@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-28T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-24T21:41:36.000Z
 head_image: /bolt_capacitor.webp
 head_image_alt: ">- Capgo blog illustration"
 keywords: Bolt.new, Capacitor, mobile app development, React, Vue, export project, native mobile apps
@@ -472,7 +472,49 @@ npx cap sync
 
 ![Capacitor sync Bolt complete](/capacitor-sync-bolt.webp)
 
-## Step 9: Open Native IDEs
+## Step 9: Build Store-Ready Binaries with Capgo Builder (Recommended)
+
+You do not need a Mac or a full local Xcode/Android Studio pipeline to ship to the App Store and Google Play. **[Capgo Builder](https://capgo.app/native-build/)** compiles, signs, and can submit iOS and Android builds from the cloud — the fastest path for vibe-coded apps exported from Bolt.new.
+
+### Why Capgo Builder?
+
+- **No Mac required for iOS** — build from Windows, Linux, or your AI coding environment
+- **One CLI workflow** — easy to script and hand off to Cursor, Claude Code, or Codex
+- **Pairs with Live Updates** — ship JS/UI fixes over the air; rebuild the native binary only when plugins or permissions change
+
+### Set up Capgo Builder
+
+After your production build and Capacitor sync work locally:
+
+```shell
+npx @capgo/cli@latest login
+npx @capgo/cli@latest init
+npx @capgo/cli@latest build init --platform ios
+npx @capgo/cli@latest build init --platform android
+```
+
+Save signing credentials once (Apple certificates, provisioning profiles, Android keystore). See [Managing Credentials](/docs/builder/credentials/) and [Build iOS from Windows](/blog/build-ios-app-from-windows-capacitor-capgo-build/).
+
+### Request a cloud build
+
+```shell
+npm run build
+npx cap sync
+npx @capgo/cli@latest build com.yourcompany.yourapp --platform ios --build-mode release
+npx @capgo/cli@latest build com.yourcompany.yourapp --platform android --build-mode release
+```
+
+Capgo Builder streams build logs in your terminal. With App Store Connect configured, iOS builds can go straight to TestFlight.
+
+Upload your web bundle for OTA updates:
+
+```shell
+npx @capgo/cli@latest bundle upload --channel production
+```
+
+## Step 10: Open Native IDEs (Optional for Local Testing)
+
+If you have a Mac or want emulator testing before cloud builds, open the native projects locally:
 
 Access the native development environments for your app.
 
@@ -504,7 +546,7 @@ npx cap open android
 
 ![Android Studio opening Bolt project](/android-studio-bolt-project.webp)
 
-## Step 10: Build and Run Your Mobile App
+## Step 11: Build and Run Locally (Optional)
 
 ### Running on iOS
 
@@ -574,7 +616,7 @@ After successful build, verify:
 
 **Still having issues?** The error messages usually tell you exactly what's wrong - read them carefully!
 
-## Step 11: Enable Live Reload (Development)
+## Step 12: Enable Live Reload (Development)
 
 Speed up your development workflow with hot reloading.
 
@@ -625,7 +667,7 @@ npx cap copy
 
 ![Live reload enabled Bolt](/capacitor-live-reload-bolt.webp)
 
-## Step 12: Add Native Features
+## Step 13: Add Native Features
 
 Enhance your Bolt.new app with device-specific capabilities.
 
@@ -723,7 +765,7 @@ npx cap sync
 
 ![Native features added Bolt](/bolt-native-features.webp)
 
-## Step 13: Optimize for Production
+## Step 14: Optimize for Production
 
 ### App Icons and Splash Screens
 
@@ -846,6 +888,7 @@ Congratulations! You've successfully transformed your Bolt.new project into nati
 
 ### Next Steps
 
+- **[Capgo Builder](/native-build/)**: Use cloud native builds for TestFlight and Play Store releases
 - **Live Updates**: Implement [Capgo](https://capgo.app/) for instant over-the-air updates
 - **Analytics**: Add mobile analytics to track user behavior
 - **Performance**: Monitor and optimize your app's mobile performance
@@ -858,7 +901,9 @@ Your Bolt.new creation is now ready for the mobile ecosystem!
 - [Bolt.new Platform](https://bolt.new/)
 - [Capacitor Documentation](https://capacitorjs.com/docs)
 - [Vite Mobile Deployment Guide](https://vitejs.dev/guide/static-deploy.html)
+- [Capgo Builder — Cloud Native Builds](/native-build/)
 - [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
+- [Base44 to mobile](/blog/transform-base44-app-to-mobile-with-capacitor/)
 
 Learn how Capgo can help you deliver instant updates to your mobile app, [sign up for a free account](/register/) today.
 

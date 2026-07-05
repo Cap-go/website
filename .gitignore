@@ -27,5 +27,6 @@ seo-report.txt
 seo-report.json
 seo-report.sarif
 .wrangler
-# Astro upgrade visual regression artifacts
+
+# Visual regression artifacts (local only)
 .visual-diff/

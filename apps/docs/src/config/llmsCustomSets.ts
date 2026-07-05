@@ -1,5 +1,5 @@
 const llmsCustomSetRows = String.raw`Capgo CLI|full reference documentation for capgo CLI to upload and manage your live updates|docs/cli/**
-Plugin Live updates|full reference documentation for plugin live updates for Capacitor and Electron|docs/live-updates/**|docs/plugins/updater/**|docs/plugins/electron-updater/**
+Plugin Live updates|full reference documentation for plugin live updates for Capacitor, Cordova, and Electron|docs/live-updates/**|docs/plugins/updater/**|docs/plugins/cordova-updater/**|docs/plugins/electron-updater/**
 Console Tutorial|step-by-step tutorial to get started with Capgo Console and live updates|docs/webapp/**
 Public API|full reference documentation for public API|docs/public-api/**
 Plugin Accelerometer|accelerometer sensor plugin for detecting device motion and orientation|docs/plugins/accelerometer/**
@@ -51,7 +51,7 @@ Plugin RudderStack|RudderStack analytics and identity tracking plugin|docs/plugi
 Plugin Health|health data access plugin for HealthKit and Google Fit|docs/plugins/health/**
 Plugin Home Indicator|iOS home indicator visibility control plugin|docs/plugins/home-indicator/**
 Plugin iBeacon|iBeacon proximity detection plugin|docs/plugins/ibeacon/**
-Plugin InAppBrowser|in-app browser plugin for opening web content|docs/plugins/inappbrowser/**
+Plugin InAppBrowser|managed in-app browser plugin for Capacitor with native WebView layering, partial-screen browsers, private sessions, proxying, downloads, and app messaging|docs/plugins/inappbrowser/**
 Plugin In App Review|in-app review prompt plugin for app store ratings|docs/plugins/in-app-review/**
 Plugin Incoming Call Kit|native incoming call presentation with iOS CallKit and Android full-screen notifications|docs/plugins/incoming-call-kit/**
 Plugin Install Referrer|install attribution plugin for Google Play Install Referrer and Apple AdServices|docs/plugins/install-referrer/**
@@ -103,6 +103,9 @@ Plugin Share Target|share target plugin for receiving shared content|docs/plugin
 Plugin SIM|SIM card information plugin|docs/plugins/sim/**
 Plugin Social Login|social authentication plugin for Google, Apple, Facebook login|docs/plugins/social-login/**
 Plugin Speech Recognition|speech-to-text recognition plugin|docs/plugins/speech-recognition/**
+Plugin Stripe|Stripe Payment Sheet, Apple Pay, and Google Pay plugin|docs/plugins/stripe-pay/**
+Plugin Stripe Identity|Stripe Identity verification plugin|docs/plugins/stripe-identity/**
+Plugin Stripe Terminal|Stripe Terminal in-person payments plugin|docs/plugins/stripe-terminal/**
 Plugin Speech Synthesis|text-to-speech synthesis plugin|docs/plugins/speech-synthesis/**
 Plugin SSL Pinning|certificate pinning plugin for CapacitorHttp requests|docs/plugins/ssl-pinning/**
 Plugin StreamCall|Stream video calling plugin|docs/plugins/streamcall/**

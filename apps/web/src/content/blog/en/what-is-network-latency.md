@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-14T06:50:28.488Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /blog-images/what-is-network-latency.webp
 head_image_alt: '''What Is Network Latency: A Developer''''s 2026 Guide'' Capgo blog illustration'
 keywords: >-
@@ -248,7 +248,7 @@ For Capacitor apps, browser-style tooling is still valuable because much of the 
 
 TTFB tells you how long the client waits before the first response data arrives. If TTFB is consistently high, the problem may involve network distance, server response time, or intermediaries between the device and the service. If TTFB is fine but total transfer time is long, payload size is a more likely suspect.
 
-Monitoring needs to connect device behavior to network conditions. For teams building that capability into release workflows, Capgo's write-up on [setting up performance monitoring in Capacitor](https://capgo.app/blog/set-up-performance-monitoring-in-capacitor/) is a useful reference for instrumenting what users experience rather than relying only on server-side metrics.
+Monitoring needs to connect device behavior to network conditions. For teams building that capability into release workflows, Capgo's write-up on [setting up performance monitoring in Capacitor](https://capgo.app/blog/set-up-performance-monitoring-in-capacitor/) is a useful reference for instrumenting what users experience rather than relying only on server-side metrics. When you need native-level diagnostics beyond browser DevTools, [@capgo/capacitor-network-diagnostics](https://capgo.app/plugins/capacitor-network-diagnostics/) can measure reachability, latency, and packet loss from the device.
 
 > Measure from the client side whenever possible. Server dashboards can say “healthy” while the user still waits on a slow path you aren't seeing.
 

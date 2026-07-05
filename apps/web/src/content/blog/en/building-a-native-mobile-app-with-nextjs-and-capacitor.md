@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T19:49:03.000Z
 head_image: /next_capgo.webp
 head_image_alt: "Convert Your Next.js App to iOS & Android with Capacitor 8 Capgo blog illustration"
 keywords: Next.js 15, Capacitor 8, convert web app to mobile, iOS, Android, mobile app development, static export, native plugins
@@ -30,7 +30,8 @@ Capacitor wraps your web app in a native container, giving you access to device 
 - Add Capacitor 8 with essential native plugins
 - Build and test on iOS and Android simulators
 - Enable live reload for faster development
-- Optionally add Konsta UI for native-looking components
+- Fix common iOS layout issues (viewport, safe area, horizontal overflow)
+- Add native-feeling UI with Capgo Native Navigation and Transitions
 
 > Looking to start a new project from scratch? Check out our guide on [Building a Next.js Mobile App from Scratch](/blog/nextjs-mobile-app-capacitor-from-scratch/).
 
@@ -336,122 +337,176 @@ Now, when you click the "Share now!" button, the native share dialog will appear
 <div class="mx-auto" style="width: 50%;">
   <img src="/next-capacitor-share.webp" alt="next-capacitor-share">
 </div>
+Next, you can make the app feel more native on iOS and Android with Capgo navigation and transitions, and fix common iOS layout issues that cause horizontal overflow or cropped safe areas.
+## Native-feeling UI with Capgo Native Navigation and Transitions
 
-To make the button look more mobile-friendly, we can add some styling using my favorite UI component library for web apps - Next.js (no pun intended). 
+I've worked for years with [Ionic](https://ionicframework.com/) to build cross-platform applications, but integrating it with Next.js is hacky and rarely worth it when you already have [Tailwind CSS 4](https://tailwindcss.com/).
 
-## Adding Konsta UI v5 with Tailwind CSS 4
+For a native mobile feel in a Next.js + Capacitor app, use Capgo plugins instead of web-only UI kits like Konsta UI:
 
-I've worked years with [Ionic](https://ionicframework.com/) to build awesome cross platform applications and it was one of the best choices for years.
-But now i don't recommend it anymore it's very hacky to integrate it with Next.js and it's not really worth it when you have already [Tailwind CSS 4](https://tailwindcss.com/).
+- **[@capgo/capacitor-native-navigation](https://github.com/Cap-go/capacitor-native-navigation)** — native navbar, Liquid Glass tab bar on iOS, and a blurred tab bar style on Android. Your Next.js router keeps route state; the plugin owns the native chrome.
+- **[@capgo/capacitor-transitions](https://github.com/Cap-go/capacitor-transitions)** — Ionic-style page transitions and iOS edge swipe-back in the WebView layer, without adopting Ionic UI.
 
-
-if you want a really great looking mobile UI that adapts to iOS and Android specific styling i recommend Konsta UI v5.
-
-You need to have [Tailwind CSS 4 already installed](https://tailwindcss.com/docs/guides/nextjs/) 
-To enhance the mobile UI of your Next.js app, you can use [Konsta UI v5](https://konstaui.com/), a mobile-friendly UI component library that adapts to iOS and Android styling. Follow these steps to integrate Konsta UI v5:
-
-1. Install the required packages (Konsta UI v5):
+Install both:
 
 ```shell
-bun add konsta
+bun add @capgo/capacitor-native-navigation @capgo/capacitor-transitions
+bunx cap sync
 ```
 
-2. Import Konsta UI theme in your main CSS file (e.g., `styles/globals.css`):
+Configure native navigation with CSS inset mode so web content respects the native bars:
+
+```typescript
+import { NativeNavigation } from '@capgo/capacitor-native-navigation';
+
+await NativeNavigation.configure({
+  contentInsetMode: 'css',
+  animationDuration: 360,
+  glass: {
+    effect: 'liquidGlass',
+  },
+});
+```
+
+Render a Liquid Glass tab bar (iOS uses system-owned rendering; Android uses a blurred WebView backdrop):
+
+```typescript
+await NativeNavigation.setTabbar({
+  selectedId: 'home',
+  labelVisibilityMode: 'labeled',
+  icons: true,
+  colors: { dynamic: true },
+  tabs: [
+    { id: 'home', title: 'Home', icon: { svg: '...' } },
+    { id: 'settings', title: 'Settings', icon: { svg: '...' } },
+  ],
+});
+
+await NativeNavigation.addListener('tabSelect', ({ id }) => {
+  router.push(`/${id}`);
+});
+```
+
+Add native page transitions in your app shell:
+
+```typescript
+import '@capgo/capacitor-transitions';
+import { initTransitions, setDirection, setupRouterOutlet } from '@capgo/capacitor-transitions/react';
+
+initTransitions({ platform: 'auto' });
+```
+
+Wrap routed pages in `cap-router-outlet`, `cap-page`, and `cap-content`, and call `setDirection('forward')` or `setDirection('back')` before `router.push()` or `router.back()`. Do not duplicate web headers or footers when native navigation owns those surfaces.
+
+See the full guides: [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) and [Using @capgo/capacitor-transitions](/plugins/capacitor-transitions/).
+
+### Safe areas with Tailwind
+
+For device safe areas in Tailwind CSS, use [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor) (published as `tailwind-capacitor` on npm). It provides `safe-areas` utilities and other Capacitor-friendly Tailwind plugins:
+
+```shell
+bun add -D tailwind-capacitor
+```
+
+In `styles/globals.css`:
 
 ```css
 @import 'tailwindcss';
-/* import Konsta UI v5 theme */
-@import 'konsta/theme.css';
+@plugin "@capgo/tailwind-capacitor/platform";
+@plugin "@capgo/tailwind-capacitor/safe-areas";
 ```
 
-3. Configure Tailwind CSS 4 for Next.js (PostCSS):
+Use utilities such as `pt-safe`, `pb-safe`, and `px-safe` instead of sprinkling `env(safe-area-inset-*)` by hand. The project is actively developed — if something is missing for your Next.js setup, [open a PR on GitHub](https://github.com/Cap-go/tailwind-capacitor/pulls).
 
-Create `postcss.config.mjs` at the project root:
+## Fixing iOS Layout Issues (Viewport, Safe Area, and Horizontal Overflow)
 
-```js
-export default {
-  plugins: {
-    '@tailwindcss/postcss': {},
+If content looks cropped, shifted, or horizontally scrollable on iOS, adding more `overflow-x: hidden` or tweaking the viewport tag alone usually does not fix it. Work through these checks in order.
+
+### Make sure the viewport meta tag is applied correctly
+
+**App Router** (`app/`): export `viewport` from `app/layout.tsx`:
+
+```typescript
+import type { Viewport } from 'next';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+```
+
+**Pages Router** (`pages/`): put the viewport meta tag in `pages/_app.tsx`, not `_document.tsx` (Next.js may not apply tags from `_document.tsx` the way you expect for viewport behavior).
+
+### Handle iOS safe area from one root wrapper only
+
+Create a single app shell and apply safe area padding there — not in multiple nested components:
+
+```css
+html,
+body,
+#__next {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-shell {
+  min-height: 100dvh;
+  width: 100%;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
+```
+
+Wrap all page content inside `.app-shell`. Duplicated safe-area padding in headers, modals, and layout wrappers often makes the UI look cropped or too large.
+
+With [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor), you can express the same padding with utilities like `pt-safe pb-safe px-safe` on that single shell.
+
+### Set Capacitor iOS `contentInset` to `never` first
+
+In `capacitor.config.ts`, prefer native inset disabled and let CSS (or Native Navigation's `contentInsetMode: 'css'`) own the safe area:
+
+```typescript
+const config: CapacitorConfig = {
+  appId: 'com.example.myapp',
+  appName: 'my-app',
+  webDir: 'out',
+  ios: {
+    contentInset: 'never',
   },
-}
+};
 ```
 
-Tailwind v4 uses PostCSS directly in Next.js. Keep your global imports in `styles/globals.css` (already added above).
+Mixing Capacitor's automatic content inset with CSS `env(safe-area-inset-*)` padding is a common cause of double spacing.
 
-4. Wrap your app with the Konsta UI v5 `App` component in `pages/_app.js`:
+### Find the real overflowing element
+
+The usual culprit is an element using `100vw`, Tailwind `w-screen`, a fixed pixel width, or a large `min-width`.
+
+In Safari Web Inspector, run:
 
 ```javascript
-import { App } from 'konsta/react';
-import '../styles/globals.css';
-
-function MyApp({ Component, pageProps }) {
-  return (
-    <App theme="ios">
-      <Component {...pageProps} />
-    </App>
-  );
-}
-
-export default MyApp;
-```
-### Example Page
-
-Now when everything is set up, we can use Konsta UI v5 React components in our Next.js pages.
-
-5. Update the `pages/index.js` file to use Konsta UI v5 components:
-
-```javascript
-import {
-  Page,
-  Navbar,
-  Block,
-  Button,
-  List,
-  ListItem,
-  BlockTitle,
-} from 'konsta/react';
-
-export default function Home() {
-  return (
-    <Page>
-      <Navbar title="My App" />
-
-      <Block strong>
-        <p>
-          Here is your Next.js & Konsta UI app. Let's see what we have here.
-        </p>
-      </Block>
-      <BlockTitle>Navigation</BlockTitle>
-      <List>
-        <ListItem href="/about/" title="About" />
-        <ListItem href="/form/" title="Form" />
-      </List>
-
-      <Block strong className="flex space-x-4">
-        <Button>Button 1</Button>
-        <Button>Button 2</Button>
-      </Block>
-    </Page>
-  );
-}
+[...document.querySelectorAll('*')]
+  .filter(el => el.scrollWidth > document.documentElement.clientWidth)
+  .map(el => ({
+    el,
+    tag: el.tagName,
+    class: el.className,
+    scrollWidth: el.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+  }));
 ```
 
-6. Add Roboto font for Material Design theme (required for Konsta UI v5):
-
-In your `pages/_document.js` or main HTML file, add:
-
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
-  rel="stylesheet"
-/>
-```
-
-7. Restart the development server and rebuild the app.
-
-Your Next.js app should now have a native-looking mobile UI powered by Konsta UI v5 and styled with Tailwind CSS 4.
+With Tailwind, replace `w-screen` with `w-full` when possible. Many horizontal overflow issues come from `100vw` / `w-screen`, duplicated safe-area padding, or a fixed-width container — not from the viewport meta tag itself.
 
 ## Performance Optimization
 
@@ -472,7 +527,8 @@ You've successfully converted your existing Next.js web application into native 
 - Added Capacitor 8 with essential plugins
 - Built and deployed to iOS and Android simulators
 - Enabled live reload for development
-- Optionally added Konsta UI for native-looking components
+- Fixed common iOS layout issues (viewport, safe area, overflow)
+- Added native-feeling UI with Capgo Native Navigation and Transitions
 
 **Next steps:**
 - Set up [Capgo](https://capgo.app/) for over-the-air updates without app store resubmission
@@ -485,8 +541,10 @@ You've successfully converted your existing Next.js web application into native 
 ## Resources
 
 - [Next.js Documentation](https://nextjs.org/docs)
+- [@capgo/capacitor-native-navigation](https://github.com/Cap-go/capacitor-native-navigation/) — Liquid Glass tab bar and native chrome
 - [Capacitor 8 Documentation](https://capacitorjs.com/docs)
-- [Konsta UI v5 Documentation](https://konstaui.com/docs)
+- [@capgo/capacitor-transitions](https://github.com/Cap-go/capacitor-transitions/) — native-feeling page transitions
+- [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor) — Tailwind safe-area utilities for Capacitor
 - [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T12:14:04.681Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T21:13:09.000Z
 head_image: /blog-images/capacitor-plugins-for-secure-session-management.webp
 head_image_alt: "Capacitor Plugins for Secure Session Management Capgo blog illustration"
 keywords: Capacitor, session management, biometric authentication, secure storage, Firebase Auth, Identity Vault, mobile security
@@ -334,7 +334,7 @@ The developer experience with these plugins is influenced by their documentation
 
 ### Real-World Application
 
-For enterprise-level security needs, solutions like Identity Vault and Capgo provide robust features and comprehensive support. On the other hand, community-driven plugins are better suited for smaller projects with less demanding security requirements.
+For enterprise-level security needs, solutions like Identity Vault and Capgo provide robust features and comprehensive support. For encrypted account persistence, [@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/) securely stores account data with AES-256 encryption on iOS Keychain and Android Keystore. On the other hand, community-driven plugins are better suited for smaller projects with less demanding security requirements.
 
 ## Recommendations
 

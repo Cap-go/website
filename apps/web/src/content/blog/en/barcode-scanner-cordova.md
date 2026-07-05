@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-12T09:44:44.975Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-06-23T21:16:25.000Z
 head_image: /blog-images/barcode-scanner-cordova.webp
 head_image_alt: '''Build a Barcode Scanner Cordova App: 2026 Guide'' Capgo blog illustration'
 keywords: >-
@@ -387,7 +387,7 @@ The Android camera preview bug deserves special attention because it wastes a lo
 
 Treat that as a rendering investigation, not only a scanner investigation. Remove decorative overlays. Reduce the page to the preview, one trigger, and one result field. If the preview becomes stable after that, the problem is usually your screen structure or CSS, not decoding.
 
-This is also where a migration to Capacitor starts to justify itself. Capacitor does not remove every camera bug, but it usually gives you a cleaner boundary between native view handling and web UI code. That makes preview-layer problems easier to isolate and fix.
+This is also where a migration to Capacitor starts to justify itself. Capacitor does not remove every camera bug, but it usually gives you a cleaner boundary between native view handling and web UI code. For barcode scanning, [@capgo/camera-preview](https://capgo.app/plugins/camera-preview/) displays a live camera feed as a native overlay with customizable controls, so you can decode frames in JavaScript without the preview sitting behind the webview. For enterprise scanning on Zebra devices, [@capgo/capacitor-zebra-datawedge](https://capgo.app/plugins/capacitor-zebra-datawedge/) manages DataWedge profiles and scan triggers. For NFC tag workflows, [@capgo/capacitor-nfc](https://capgo.app/plugins/capacitor-nfc/) handles native tag discovery, reading, and writing on iOS and Android.
 
 Cordova projects tend to break from plugin age, platform drift, and hidden assumptions inside older integrations. Capacitor projects expose different problems, mostly around lifecycle handling and native layering, but those failures are easier to trace because the native side is more explicit.
 

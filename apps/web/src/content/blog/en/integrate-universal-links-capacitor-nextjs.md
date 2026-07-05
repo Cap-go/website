@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-12-14T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /deeplink_next_capacitor.webp
 head_image_alt: "How to Integrate Universal Links in Next.js with Capacitor Capgo blog illustration"
 keywords: Capacitor, Universal Links, Next.js, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -18,7 +18,7 @@ locale: en
 next_blog: ''
 ---
 
-Universal links on iOS and App Links on Android allow users to be taken directly into your app from a link, bypassing the browser. This is particularly useful for improving user experience and maintaining the context from a web page to an app. In this guide, we'll walk through the process of setting up these deep links for a Next.js app using Capacitor.
+Universal links on iOS and App Links on Android allow users to be taken directly into your app from a link, bypassing the browser. This is particularly useful for improving user experience and maintaining the context from a web page to an app. In this guide, we'll walk through the process of setting up these deep links for a Next.js app using Capacitor. For attribution and deferred deep links, [@capgo/capacitor-appsflyer](https://capgo.app/plugins/capacitor-appsflyer/) can route install campaigns into the correct in-app screen.
 
 Setting up deep links doesn't require a lot of code, but it does involve some configuration. By the end of this guide, you'll be able to click a link like `https://www.capgo.app/details/22` and have your app open to the correct page if it's installed.
 

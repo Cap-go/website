@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-21T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /vue_angular_react.webp
 head_image_alt: "Offline Screen in Vue, Angular, React with Capacitor Capgo blog illustration"
 keywords: Vue, Angular, React, offline screen, network API, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -21,7 +21,7 @@ next_blog: ''
 
 # How to Create an Offline Screen in Vue 3, Angular 14, or React
 
-In this tutorial, we will learn how to create an offline screen in Vue 3, Angular 14, and React applications using the Network API. The Network API provides network and connectivity information, allowing us to handle offline scenarios and provide a better user experience.
+In this tutorial, we will learn how to create an offline screen in Vue 3, Angular 14, and React applications using the Network API. The Network API provides network and connectivity information, allowing us to handle offline scenarios and provide a better user experience. For deeper reachability checks beyond a simple online/offline flag, [@capgo/capacitor-network-diagnostics](https://capgo.app/plugins/capacitor-network-diagnostics/) can test URL reachability, TCP ports, and WebSocket handshakes from native code.
 
 ## Prerequisites
 

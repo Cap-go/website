@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-05-01T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-24T21:41:36.000Z
 head_image: /blog-images/how-easy-is-it-to-make-web-app-into-mobile-app-with-capacitor.webp
 head_image_alt: "How Easy Is It to Turn a Web App into a Mobile App with Capacitor? Capgo blog illustration"
 keywords: Capacitor, web app to mobile app, app store review, Google Play closed testing, iOS app, Android app, mobile app publishing, app wrapper
@@ -68,14 +68,26 @@ bun run build
 bunx cap sync
 ```
 
-Then open the native projects:
+For day-to-day simulator testing, you can open the native projects locally:
 
 ```bash
 bunx cap open ios
 bunx cap open android
 ```
 
-From there, you run the app in Xcode and Android Studio.
+For **signed release binaries** (TestFlight, Play Store internal testing, store submission), you do not need to live inside Xcode or Android Studio. **[Capgo Builder](https://capgo.app/native-build/)** compiles and signs iOS and Android in the cloud — including from Windows or Linux, with no Mac required for iOS:
+
+```bash
+bunx @capgo/cli@latest login
+bunx @capgo/cli@latest build init --platform ios
+bunx @capgo/cli@latest build init --platform android
+bun run build
+bunx cap sync
+bunx @capgo/cli@latest build com.example.myapp --platform ios --build-mode release
+bunx @capgo/cli@latest build com.example.myapp --platform android --build-mode release
+```
+
+See [Build iOS from Windows](/blog/build-ios-app-from-windows-capacitor-capgo-build/) and our vibe-coding guides for [Base44](/blog/transform-base44-app-to-mobile-with-capacitor/), [Lovable](/blog/transform-lovable-dev-app-to-mobile-with-capacitor/), and [Bolt.new](/blog/transform-bolt-new-app-to-mobile-with-capacitor/).
 
 The important setting is `webDir`. It must point to the folder your web framework creates during production build:
 
@@ -232,7 +244,7 @@ So the right expectation is:
 
 ## Where Capgo Helps After the First Release
 
-Once your Capacitor app is in production, [Capgo Live Updates](https://capgo.app/) can help ship web-layer fixes without waiting for a full store review each time.
+Once your Capacitor app is in production, **[Capgo Builder](/native-build/)** handles signed native releases when plugins or permissions change, and [Capgo Live Updates](https://capgo.app/) helps ship web-layer fixes without waiting for a full store review each time.
 
 That is useful for:
 

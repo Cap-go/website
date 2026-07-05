@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T11:28:05.842Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /blog-images/token-revocation-in-capacitor-apps-guide.webp
 head_image_alt: "\"Token Revocation in Capacitor Apps: Guide\" Capgo blog illustration"
 keywords: token revocation, Capacitor apps, security, OAuth 2.0, user data protection, token management
@@ -72,9 +72,9 @@ Proper token storage is crucial to safeguard sensitive information. Use platform
 
 For enterprise applications, consider integrating plugins designed for secure storage:
 
--   **Capacitor [Identity Vault](https://ionic.io/products/identity-vault)**: Offers advanced security for sensitive data.
--   **Capacitor Biometrics**: Adds biometric authentication for an extra layer of protection.
--   **Capacitor Secure Preferences**: Ensures secure handling of app preferences and data.
+-   **[@capgo/capacitor-data-storage-sqlite](https://capgo.app/plugins/capacitor-data-storage-sqlite/)**: Encrypted SQLite storage backed by Keychain and Keystore.
+-   **[@capgo/capacitor-native-biometric](https://capgo.app/plugins/capacitor-native-biometric/)**: Biometric unlock for stored credentials.
+-   **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)**: Preserves account state across reinstalls after token revocation.
 
 Finally, avoid embedding sensitive data directly into your app's codebase, as this can expose it to unnecessary risks [\[4\]](https://capacitorjs.com/docs/guides/security). By leveraging these secure storage methods, you can better protect user data and maintain the integrity of your app.
 

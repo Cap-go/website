@@ -615,6 +615,26 @@ bunx @capgo/cli@latest build request --platform ios
 Congratulations 🎉
 At this point, you have successfully built your app and it is ready to be submitted to the App Store.
 
+### Submit to App Store review
+
+The normal App Store build path uploads the build to App Store Connect/TestFlight. If your CI release should also attach the processed TestFlight build to the App Store version and submit it for App Review, pass `--submit-to-store-review` with a release build:
+
+```bash
+npx @capgo/cli@latest build request com.example.app \
+  --platform ios \
+  --build-mode release \
+  --ios-distribution app_store \
+  --submit-to-store-review \
+  --store-release-name "1.2.3" \
+  --store-release-notes "General improvements" \
+  --store-release-notes-locale "en-US=General improvements" \
+  --store-release-notes-locale "nl-NL=Algemene verbeteringen" \
+  --store-release-notes-locale "fr-FR=Ameliorations generales" \
+  --no-ios-automatic-release
+```
+
+This requires App Store Connect API key credentials (`APPLE_KEY_ID`, `APPLE_ISSUER_ID`, `APPLE_KEY_CONTENT`, and `APP_STORE_CONNECT_TEAM_ID`). App-specific password uploads and `ad_hoc` distribution cannot submit a build for review. `--store-release-name` is the App Store version; if omitted, Capgo reads `MARKETING_VERSION` from the Xcode project. `--store-release-notes` is the fallback App Store What's New text, and each `--store-release-notes-locale "locale=notes"` entry can override it for a store localization. Use `--ios-automatic-release` to release automatically after Apple approval, or `--no-ios-automatic-release` to wait for a manual release. `--ios-testflight-groups` is still available for external beta distribution, but it is not required for App Store review submission.
+
 ## Ad-Hoc Distribution Mode
 
 By default, Capgo builds iOS apps for App Store distribution (TestFlight + App Store). If you need ad-hoc builds instead (for internal testing or CI artifact collection), you can use the `--ios-distribution` flag.

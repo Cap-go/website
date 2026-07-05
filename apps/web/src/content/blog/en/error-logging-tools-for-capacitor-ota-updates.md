@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-18T01:28:12.140Z
-updated_at: 2026-06-18T11:13:52.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /blog-images/error-logging-tools-for-capacitor-ota-updates.webp
 head_image_alt: "Error Logging Tools for Capacitor OTA Updates Capgo blog illustration"
 keywords: error logging, OTA updates, mobile development, app stability, user experience
@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-Error logging tools are essential for managing Capacitor Over-the-Air (OTA) updates. They help developers monitor issues, track update performance, and ensure app stability. This article compares four popular tools - **[Sentry](https://sentry.io/)**, **[LogRocket](https://logrocket.com/)**, **[Bugsnag](https://www.bugsnag.com/)**, and **[Capgo](https://capgo.app/)** - highlighting their features, pricing, and setup ease.
+Error logging tools are essential for managing Capacitor Over-the-Air (OTA) updates. They help developers monitor issues, track update performance, and ensure app stability. Pair third-party tools with [@capgo/capacitor-firebase-crashlytics](https://capgo.app/plugins/capacitor-firebase-crashlytics/) for native crash reporting alongside your OTA pipeline. This article compares four popular tools - **[Sentry](https://sentry.io/)**, **[LogRocket](https://logrocket.com/)**, **[Bugsnag](https://www.bugsnag.com/)**, and **[Capgo](https://capgo.app/)** - highlighting their features, pricing, and setup ease.
 
 ### Key Takeaways:
 

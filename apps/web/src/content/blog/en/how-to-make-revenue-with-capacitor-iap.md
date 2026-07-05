@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-05-01T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /native-purchases/revenue-playbook.png
 head_image_alt: "How to Make Revenue With a Capacitor App Capgo blog illustration"
 keywords: Capacitor revenue, in-app purchases, subscriptions, mobile app monetization, paywall, ASO, app revenue, native purchases
@@ -18,7 +18,7 @@ next_blog: ''
 
 Revenue does not start with a perfect app. It starts with a useful app, a small group of users, and a purchase flow that helps you learn what people will pay for.
 
-For Capacitor apps, the technical part is straightforward with [`@capgo/native-purchases`](/docs/plugins/native-purchases/). The harder part is deciding what to sell, where to show the paywall, how to price it, and how to get the first users into the funnel.
+For Capacitor apps, the technical part is straightforward with [@capgo/native-purchases](https://capgo.app/plugins/capacitor-native-purchases/). The harder part is deciding what to sell, where to show the paywall, how to price it, and how to get the first users into the funnel.
 
 This guide gives you a practical path from zero revenue to the first meaningful subscription revenue without overbuilding.
 

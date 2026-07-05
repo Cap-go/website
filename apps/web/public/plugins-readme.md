@@ -123,7 +123,7 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-inappbrowser/">In App Browser</a></h3>
 <p><code>@capgo/capacitor-inappbrowser</code></p>
-<p>Open web pages in a customizable in-app browser without leaving your application</p>
+<p>Open managed in-app WebViews with native UI layering, private sessions, downloads, proxying, and messaging</p>
 <p>
 <a href="https://www.npmjs.com/package/@capgo/capacitor-inappbrowser"><img src="https://img.shields.io/npm/dm/@capgo/capacitor-inappbrowser?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-inappbrowser/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-inappbrowser?style=flat-square&label=stars" alt="GitHub stars"></a>

@@ -20,6 +20,17 @@ hero:
       variant: minimal
 ---
 
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Also available for Cordova and Electron
+
+Capgo live updates are not limited to Capacitor. Use the same backend and CLI with sibling client plugins:
+
+<CardGrid>
+  <LinkCard title="Cordova updater" href="/docs/plugins/cordova-updater/" description="OTA for Cordova iOS 7+ and Android 13+." />
+  <LinkCard title="Electron updater" href="/docs/plugins/electron-updater/" description="Desktop live updates with the same API." />
+</CardGrid>
+
 ## Overview
 
 Live update for capacitor apps.

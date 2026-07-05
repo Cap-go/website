@@ -1,0 +1,119 @@
+---
+import { productVideoFounder } from '@/config/productVideos'
+
+interface Props {
+  youtubeId: string
+  title: string
+  description?: string
+  eyebrow?: string
+  attribution?: string
+  variant?: 'builder' | 'dark' | 'gray' | 'light'
+  accent?: 'blue' | 'green' | 'cyan'
+}
+
+const {
+  youtubeId,
+  title,
+  description,
+  eyebrow = productVideoFounder.eyebrow,
+  attribution = `${productVideoFounder.name}, ${productVideoFounder.role}`,
+  variant = 'dark',
+  accent = 'blue',
+} = Astro.props
+const src = `https://www.youtube-nocookie.com/embed/${youtubeId}`
+const iframeTitle = `${title} — video message from Martin, Capgo founder`
+const isBuilder = variant === 'builder'
+const isLight = variant === 'light'
+---
+
+{
+  isBuilder ? (
+    <section class="section product-video" id="product-video">
+      <div class="shell">
+        <div class="section-head section-head--narrow">
+          <div class={`eyebrow eyebrow--${accent}`}>{eyebrow}</div>
+          <h2 class="h2-section">{title}</h2>
+          {description && <p class="lead">{description}</p>}
+          <p class="product-video-attribution">{attribution}</p>
+        </div>
+
+        <div class="product-video-frame">
+          <iframe
+            src={src}
+            title={iframeTitle}
+            class="product-video-iframe"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          />
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section
+      id="product-video"
+      class:list={[
+        'scroll-mt-20 py-16 sm:py-20',
+        isLight ? 'border-y border-slate-200 bg-white text-slate-950' : variant === 'gray' ? 'bg-gray-900 text-white' : 'border-y border-white/10 bg-slate-900 text-white',
+      ]}
+    >
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
+          <p class:list={['font-mono text-sm font-semibold tracking-wide uppercase', isLight ? 'text-blue-700' : variant === 'gray' ? 'text-emerald-300' : 'text-cyan-300']}>
+            {eyebrow}
+          </p>
+          <h2 class:list={['mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl', isLight ? 'text-slate-950' : 'text-white']}>{title}</h2>
+          {description && (
+            <p class:list={['mt-5 text-base leading-7 text-pretty', isLight ? 'text-slate-600' : variant === 'gray' ? 'text-gray-300' : 'text-slate-300']}>{description}</p>
+          )}
+          <p class:list={['mt-4 text-sm', isLight ? 'text-slate-500' : variant === 'gray' ? 'text-gray-400' : 'text-slate-400']}>{attribution}</p>
+        </div>
+
+        <div
+          class:list={[
+            'mx-auto mt-10 max-w-5xl overflow-hidden rounded-xl border bg-black shadow-2xl lg:mx-0',
+            isLight ? 'border-slate-200 shadow-slate-200/40' : variant === 'gray' ? 'border-gray-700 shadow-black/30' : 'border-white/10 shadow-black/40',
+          ]}
+        >
+          <div class="aspect-video w-full">
+            <iframe
+              src={src}
+              title={iframeTitle}
+              class="h-full w-full"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style is:global>
+  .product-video .product-video-frame {
+    margin-top: 40px;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #000;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    aspect-ratio: 16 / 9;
+  }
+
+  .product-video .product-video-attribution {
+    margin-top: 16px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .product-video .product-video-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>

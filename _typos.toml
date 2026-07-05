@@ -11,6 +11,7 @@ extend-exclude = [
     "src/components/**",
     "apps/web/src/components/**",
     "apps/docs/src/components/**",
+    "apps/web/src/config/productVideos.ts",
     "public/",
     "apps/web/public/",
     "apps/docs/public/",
@@ -30,11 +31,11 @@ Damon = "Damon"
 # Acronyms and technical terms
 ASO = "ASO"  # App Store Optimization
 ITMS = "ITMS"  # iTunes Music Store
+SME = "SME"  # Small and midsize enterprise
 Hashi = "Hashi"  # HashiCorp (brand name)
 formatable = "formatable"  # NFC event literal from upstream API
 jus = "jus"  # Brazilian justice app package namespace
 Programm = "Programm"  # German app-store title term in TV-Programm
-
 # Translation keys/identifiers - these should remain as-is
 udid = "udid"  # iOS device UDID (technical term)
 UDID = "UDID"  # iOS device UDID (technical term)
@@ -45,6 +46,7 @@ youre = "youre"  # Legacy copy key kept for runtime compatibility
 
 # OpenSSL command flags
 passin = "passin"  # OpenSSL password input flag
+
 
 [default.extend-identifiers]
 # Keep "PNGs" whole; otherwise typos splits it into "PN" + "Gs" and flags "PN" -> "ON"

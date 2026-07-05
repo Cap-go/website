@@ -1,6 +1,8 @@
 ---
 import '@/styles/lu-product.css'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
@@ -14,7 +16,7 @@ function copy(key: string, values: MessageValues = {}) {
   return m[key](values, { locale })
 }
 
-const title = `${brand} | ${m.live_update({}, { locale })}`
+const title = `${brand} | Ionic and Capacitor Live Updates`
 const description = m.live_update_description({}, { locale })
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const docsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates')
@@ -160,6 +162,28 @@ const steps = [
   },
 ]
 
+
+const platformCards = [
+  {
+    title: m.live_update_platform_capacitor_title({}, { locale }),
+    text: m.live_update_platform_capacitor_text({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/updater/getting-started'),
+    readMore: m.live_update_platform_read_more({}, { locale }),
+  },
+  {
+    title: m.live_update_platform_cordova_title({}, { locale }),
+    text: m.live_update_platform_cordova_text({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/cordova-updater/getting-started'),
+    readMore: m.live_update_platform_read_more({}, { locale }),
+  },
+  {
+    title: m.live_update_platform_electron_title({}, { locale }),
+    text: m.live_update_platform_electron_text({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/electron-updater/getting-started'),
+    readMore: m.live_update_platform_read_more({}, { locale }),
+  },
+]
+
 const featureTiles = [
   {
     title: m.live_update_feature_breaking_detection({}, { locale }),
@@ -235,6 +259,32 @@ const featureTiles = [
       </div>
     </section>
 
+
+    <!-- SUPPORTED PLATFORMS -->
+    <section class="section" id="platforms">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.live_update_platforms_kicker({}, { locale })}</div>
+          <h2 class="h2-section">{m.live_update_platforms_title({}, { locale })}</h2>
+          <p class="lead">{m.live_update_platforms_desc({}, { locale })}</p>
+        </div>
+
+        <div class="outcome-grid platform-grid">
+          {
+            platformCards.map((card) => (
+              <article class="outcome-card platform-card">
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+                <a class="platform-link" href={card.href}>
+                  {card.readMore} →
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <!-- OUTCOMES -->
     <section class="section" id="outcomes">
       <div class="shell">
@@ -263,6 +313,14 @@ const featureTiles = [
         </div>
       </div>
     </section>
+
+    <ProductVideoSection
+      variant="builder"
+      accent="blue"
+      youtubeId={productVideos.liveUpdate.youtubeId}
+      title={productVideos.liveUpdate.title}
+      description={productVideos.liveUpdate.description}
+    />
 
     <!-- PROOF -->
     <ProductTestimonials
@@ -443,8 +501,11 @@ const featureTiles = [
     <div class="shell seo-bridge">
       <h2 class="h2-section" style="font-size: 1.5rem; margin-bottom: 12px;">Keep going from Capgo Live Updates</h2>
       <p>
-        Connect this page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
-        <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, and <a href="/native-build/">Capgo Native Builds</a> for releases that still need store review.
+        Connect this Ionic and Capacitor live update page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
+        <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, and <a href="/native-build/"
+          >Capgo Native Builds</a
+        >
+        for releases that still need store review.
       </p>
     </div>
   </div>

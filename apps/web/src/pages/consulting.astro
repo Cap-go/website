@@ -2,10 +2,11 @@
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createServiceLdJson, createLdJsonGraph, createFAQPageLdJson } from '@/lib/ldJson'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.consulting({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.consulting_description({}, { locale: Astro.locals.locale })
+const locale = Astro.locals.locale
+const title = [Astro.locals.runtimeConfig.public.brand, m.consulting({}, { locale })].join(' | ')
+const description = m.consulting_description({}, { locale })
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -15,8 +16,28 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const faqSchema = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  questions: [
+    { question: m.consulting_faq_q1({}, { locale }), answer: m.consulting_faq_a1({}, { locale }) },
+    { question: m.consulting_faq_q2({}, { locale }), answer: m.consulting_faq_a2({}, { locale }) },
+    { question: m.consulting_faq_q3({}, { locale }), answer: m.consulting_faq_a3({}, { locale }) },
+    { question: m.consulting_faq_q4({}, { locale }), answer: m.consulting_faq_a4({}, { locale }) },
+    { question: m.consulting_faq_q5({}, { locale }), answer: m.consulting_faq_a5({}, { locale }) },
+    { question: m.consulting_faq_q6({}, { locale }), answer: m.consulting_faq_a6({}, { locale }) },
+    { question: m.consulting_faq_q7({}, { locale }), answer: m.consulting_faq_a7({}, { locale }) },
+    { question: m.consulting_faq_q8({}, { locale }), answer: m.consulting_faq_a8({}, { locale }) },
+    { question: m.consulting_faq_q9({}, { locale }), answer: m.consulting_faq_a9({}, { locale }) },
+    {
+      question: m.consulting_faq_q10({}, { locale }),
+      answer: 'Book a free discovery call at https://book.capgo.app/consulting-services/, email sales@capgo.app, or reach out on Discord.',
+    },
+  ],
+})
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [faqSchema],
 })
 
 const content = { title, description, ldJSON }
@@ -168,8 +189,8 @@ const useCases = [
       </div>
 
       <h1 class="mb-6 text-5xl font-bold md:text-7xl">
-        <span class="text-white">Custom</span>
-        <span class="text-gray-200">Capacitor Plugins</span>
+        <span class="text-white">Custom </span>
+        <span class="text-gray-200">Capacitor Plugins </span>
         <span class="text-white">& Expert Consulting</span>
       </h1>
 
@@ -555,6 +576,61 @@ const useCases = [
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
+          {m.consulting_faq_title({}, { locale })}
+        </h2>
+        <p class="text-lg text-gray-600 [&_a]:font-semibold [&_a]:text-gray-900 [&_a]:underline hover:[&_a]:text-gray-700" set:html={m.consulting_faq_subtitle({}, { locale })} />
+      </div>
+
+      <dl class="space-y-4">
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q1({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a1({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q2({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a2({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q3({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a3({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q4({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a4({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q5({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a5({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q6({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a6({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q7({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a7({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q8({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a8({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q9({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a9({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q10({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600 [&_a]:font-semibold [&_a]:text-gray-900 [&_a]:underline hover:[&_a]:text-gray-700" set:html={m.consulting_faq_a10({}, { locale })} />
+        </div>
+      </dl>
     </div>
   </section>
 

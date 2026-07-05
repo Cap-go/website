@@ -1,6 +1,8 @@
 ---
 import PluginIcon from '@/components/PluginIcon.astro'
+import PluginPreviewQrCard from '@/components/PluginPreviewQrCard.astro'
 import { pluginDemosBySlug } from '@/config/pluginDemos'
+import { getPluginPreviewQr } from '@/config/pluginPreviewQrs'
 import type { Plugin } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
@@ -15,7 +17,6 @@ import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { marked } from 'marked'
-
 export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPosts: { [k: string]: CollectionEntry<'plugin'>[] } = {}
   await getCollection('plugin', (item) => {
@@ -90,6 +91,7 @@ const packageRenameNotes: Record<string, string> = {
 }
 const packageRenameNote = name ? packageRenameNotes[name] : undefined
 const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : getRelativeLocaleUrl(locale, 'docs/plugins/')
+const previewQr = getPluginPreviewQr(id)
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
@@ -288,6 +290,11 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                 <h2 class="mt-2 text-2xl font-semibold text-white sm:text-3xl">
                   {m.tutorial_on({}, { locale })} {title}
                 </h2>
+                {previewQr && (
+                  <div class="mt-5">
+                    <PluginPreviewQrCard preview={previewQr} title={title} compact />
+                  </div>
+                )}
               </div>
               <div class="prose prose-invert max-w-none px-6 py-8 sm:px-8 lg:px-10" set:html={tutorial} />
             </article>
