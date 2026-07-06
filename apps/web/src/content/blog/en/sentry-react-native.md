@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-06T08:40:18.832Z
-updated_at: 2026-07-06T08:40:20.036Z
+updated_at: 2026-07-06T08:42:18.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/c8a7733c-6d83-449d-a959-cb5bc9fd940f/sentry-react-native-integration-guide.jpg'
 head_image_alt: 'Sentry React Native: 2026 Integration Guide'
 keywords: 'sentry react native, react native monitoring, error tracking, mobile crash reporting, capgo'
