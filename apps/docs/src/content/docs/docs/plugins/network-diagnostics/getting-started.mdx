@@ -1,0 +1,150 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-network-diagnostics and run native network checks from your Capacitor app."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-network-diagnostics` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+npm install @capgo/capacitor-network-diagnostics
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { NetworkDiagnostics } from '@capgo/capacitor-network-diagnostics';
+```
+
+## Run a complete diagnostic report
+
+`runDiagnostics` is the fastest way to collect a support report for a user on a restricted network.
+
+```typescript
+const report = await NetworkDiagnostics.runDiagnostics({
+  urls: [{ url: 'https://api.example.com/health', method: 'HEAD' }],
+  ports: [{ host: 'api.example.com', port: 443 }],
+  websockets: [{ url: 'wss://ws.example.com/socket' }],
+  download: {
+    url: 'https://speed.example.com/5mb.bin',
+    maxBytes: 5 * 1024 * 1024,
+  },
+  packetLoss: {
+    mode: 'tcp',
+    host: 'api.example.com',
+    port: 443,
+    count: 10,
+  },
+});
+
+console.log(report.status.connectionType);
+console.log(report.issues);
+```
+
+## Check current network status
+
+```typescript
+const status = await NetworkDiagnostics.getNetworkStatus();
+
+console.log(status.connected);
+console.log(status.connectionType);
+console.log(status.internetReachable);
+console.log(status.captivePortal);
+```
+
+The exact flags depend on the platform. Android can report validated internet and captive portal state. iOS reports path status, interface type, expensive paths, and constrained paths through `Network.framework`.
+
+## Test API reachability
+
+```typescript
+const result = await NetworkDiagnostics.testUrl({
+  url: 'https://api.example.com/health',
+  method: 'HEAD',
+  timeoutMs: 5000,
+  followRedirects: true,
+});
+
+if (!result.reachable) {
+  console.warn(result.errorCode, result.errorMessage);
+}
+```
+
+Use a real health endpoint from your backend. A browser-only check can be hidden by WebView, CORS, proxy, or captive portal behavior, while this plugin uses native networking.
+
+## Test a TCP port
+
+```typescript
+const port = await NetworkDiagnostics.testPort({
+  host: 'api.example.com',
+  port: 443,
+  timeoutMs: 3000,
+});
+
+console.log(port.open, port.durationMs);
+```
+
+This is useful when a Wi-Fi access point blocks non-standard ports, MQTT, custom gateways, or a private backend while still allowing normal browsing.
+
+## Test WebSocket connectivity
+
+```typescript
+const socket = await NetworkDiagnostics.testWebSocket({
+  url: 'wss://ws.example.com/socket',
+  timeoutMs: 5000,
+});
+
+console.log(socket.open, socket.statusCode);
+```
+
+Use this when proxies or captive portals allow HTTPS pages but block WebSocket upgrade requests.
+
+## Measure download speed
+
+```typescript
+const speed = await NetworkDiagnostics.testDownloadSpeed({
+  url: 'https://speed.example.com/5mb.bin',
+  maxBytes: 5 * 1024 * 1024,
+  timeoutMs: 30000,
+});
+
+console.log(speed.mbps);
+```
+
+Use your own static file endpoint so the result reflects the network path your app needs.
+
+## Estimate packet loss
+
+```typescript
+const loss = await NetworkDiagnostics.testPacketLoss({
+  mode: 'tcp',
+  host: 'api.example.com',
+  port: 443,
+  count: 10,
+  timeoutMs: 3000,
+  intervalMs: 250,
+});
+
+console.log(loss.lossPercent);
+```
+
+Raw ICMP ping is not portable in App Store and Play Store apps. This method measures application-level packet loss by repeating TCP or HTTP probes.
+
+## Web fallback
+
+The web implementation is meant for development. Browsers cannot open raw TCP sockets, and URL checks may be limited by CORS. Use iOS or Android builds for real support diagnostics.

@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-01-13T06:14:25.862Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/6784a46a684afc141f72d774-1736748943276.jpg
-head_image_alt: Technology
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/app-store-vs-direct-updates-what-developers-need-to-know.webp
+head_image_alt: "\"App Store vs Direct Updates: What Developers Need to Know\" Capgo blog illustration"
 keywords: App Store updates, OTA updates, mobile app development, update strategy, developer tools
 tag: Development, Mobile, Updates
 published: true
@@ -208,4 +208,4 @@ Your choice of update strategy plays a big role in your app's performance, user 
 
 ## Keep going from App Store vs Direct Updates: What Developers Need to Know
 
-If you are using **App Store vs Direct Updates: What Developers Need to Know** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.
+If you are using **App Store vs Direct Updates: What Developers Need to Know** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

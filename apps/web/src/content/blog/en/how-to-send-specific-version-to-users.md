@@ -8,11 +8,13 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-17T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-18T15:35:50.000Z
 head_image: /capgo_select_update.webp
-head_image_alt: TestFlight alternative illustration
-keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
-tag: alternatives
+head_image_alt: How to send specific update to one user or a group Capgo blog illustration
+keywords: >-
+  mobile app development, live updates, OTA updates, continuous integration,
+  mobile app updates
+tag: Alternatives
 published: true
 locale: en
 next_blog: ''

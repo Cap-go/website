@@ -6,9 +6,9 @@ author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2024-04-15T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /organization_system_blog.webp
-head_image_alt: Capgo organization system illusatration
+head_image_alt: "A brand new organization system Capgo blog illustration"
 keywords: organization system, capgo, mobile app development, software engineering, backend development
 tag: Story
 published: true

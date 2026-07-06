@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-31T05:02:06.032Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67ea1c64283d21cbd67bff14-1743397338137.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/how-to-secure-ota-updates-with-key-management.webp
+head_image_alt: "How to Secure OTA Updates with Key Management Capgo blog illustration"
 keywords: OTA updates, key management, encryption, app security, update delivery, vulnerabilities, digital signatures, tampering
 tag: Development, Security, Updates
 published: true

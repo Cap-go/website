@@ -1,0 +1,83 @@
+---
+title: Getting Started
+description: Learn how to install and use the Verisoul Capacitor plugin.
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-verisoul` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+npm install @capgo/capacitor-verisoul
+npx cap sync
+```
+
+## Configure Verisoul
+
+Call `configure()` once, early in your app startup. Use `sandbox` for testing and `prod` for production traffic.
+
+```typescript
+import { Verisoul } from '@capgo/capacitor-verisoul';
+
+await Verisoul.configure({
+  environment: 'prod',
+  projectId: 'YOUR_PROJECT_ID',
+});
+```
+
+## Get a session ID
+
+After Verisoul has collected enough native signals, request the session ID and send it to your backend. Your backend should call Verisoul's server-side API for the risk assessment.
+
+```typescript
+const { sessionId } = await Verisoul.getSessionId();
+
+await fetch('/api/risk/verisoul', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ sessionId }),
+});
+```
+
+## Reset on account changes
+
+Call `reinitialize()` when user context changes, such as logout followed by login as another account.
+
+```typescript
+await Verisoul.reinitialize();
+```
+
+## Android touch signals
+
+On Android, forward touch events when your app needs Verisoul touch-pattern collection.
+
+```typescript
+await Verisoul.recordTouchEvent({
+  x: 120,
+  y: 240,
+  action: 'down',
+});
+```
+
+## Platform setup
+
+- [iOS setup](/docs/plugins/verisoul/ios/) covers App Attest entitlement notes.
+- [Android setup](/docs/plugins/verisoul/android/) covers the Verisoul Maven repository and permissions.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to integrate Verisoul sessions, connect it with [@capgo/capacitor-verisoul](/docs/plugins/verisoul/) for the API overview, [iOS setup](/docs/plugins/verisoul/ios/) for App Attest notes, [Android setup](/docs/plugins/verisoul/android/) for Gradle setup, and [Using @capgo/capacitor-verisoul](/plugins/capacitor-verisoul/) for the plugin tutorial.

@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T11:24:23.032Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6827d67c5642a17d106c5d28-1747567530513.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/capgo-plugin-for-custom-event-tracking.webp
+head_image_alt: "Capgo Plugin for Custom Event Tracking Capgo blog illustration"
 keywords: custom event tracking, analytics, app performance, developer tools, real-time updates
 tag: Development, Mobile, Technology
 published: true
@@ -116,7 +116,7 @@ Once your environment is ready, follow these steps to install and configure the 
     npx @capgo/cli init
     ```
     
-3.  **Verify the [plugin installation](https://capgo.app/docs/getting-started/):**
+3.  **Verify the [plugin installation](https://capgo.app/docs/getting-started/quickstart/):**
     
     Check if the plugin is properly installed by running:
     
@@ -217,7 +217,7 @@ Capgo offers tools to monitor custom events and troubleshoot implementation issu
 
 Keep track of your event streams with these debugging options:
 
-**Using the [Capgo CLI Debug Command](https://capgo.app/docs/cli/commands):**
+**Using the [Capgo CLI Debug Command](https://capgo.app/docs/cli/commands/):**
 
 ```bash
 npx @capgo/cli@latest app debug

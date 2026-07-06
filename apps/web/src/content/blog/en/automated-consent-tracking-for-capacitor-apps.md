@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-04T01:27:27.426Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1-1743730059829.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T21:25:40.000Z
+head_image: /blog-images/automated-consent-tracking-for-capacitor-apps.webp
+head_image_alt: "Automated Consent Tracking for Capacitor Apps Capgo blog illustration"
 keywords: consent tracking, privacy compliance, user rights, Capacitor apps, data protection
 tag: Development, Mobile, Security
 published: true
@@ -31,7 +31,7 @@ Automated consent tracking is essential for [Capacitor](https://capacitorjs.com/
     -   **Data Synchronization**: Keep user consent consistent across devices.
 -   **Implementation Steps**:
     
-    1.  Use plugins like `@capacitor/privacy` for managing consent.
+    1.  Use [@capgo/capacitor-app-tracking-transparency](https://capgo.app/plugins/capacitor-app-tracking-transparency/) for iOS ATT prompts and analytics SDKs like [@capgo/capacitor-facebook-analytics](https://capgo.app/plugins/capacitor-facebook-analytics/) or [@capgo/capacitor-gtm](https://capgo.app/plugins/capacitor-gtm/) for consent-gated tracking.
     2.  Build clear and simple consent UI elements.
     3.  [Encrypt and securely store](https://capgo.app/docs/cli/migrations/encryption/) consent data.
     4.  Adjust analytics tracking based on user preferences.

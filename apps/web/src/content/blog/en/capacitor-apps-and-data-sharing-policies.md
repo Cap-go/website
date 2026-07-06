@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-12T03:16:34.140Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292-1744427806390.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/capacitor-apps-and-data-sharing-policies.webp
+head_image_alt: "Capacitor Apps and Data Sharing Policies Capgo blog illustration"
 keywords: data privacy, app compliance, user consent, encryption, data sharing policies, mobile development, security measures
 tag: Development, Mobile, Security
 published: true

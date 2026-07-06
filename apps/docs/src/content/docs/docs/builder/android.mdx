@@ -1,0 +1,466 @@
+---
+title: Android Builds
+description: Configure and build Android apps with Capgo Cloud Build
+sidebar:
+  order: 4
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Build and submit Android apps to Google Play Store using Capgo's dedicated infrastructure.
+
+## What you will learn
+
+ - You will learn how to upload your app via Capgo Native build
+ - You will learn how to configure the credentials for Capgo Native Build
+
+## Prerequisites
+
+  - You need to have an active Google Developer account
+  - You need to have Android Studio installed
+  - Your app must be able to build successfully with Android Studio
+
+:::note
+ I will use the following app for the tutorial: https://github.com/Cap-go/capgo-native-build-tutorial-app
+:::
+
+:::tip[Recommended: automated onboarding]
+You don't have to do any of this by hand. Capgo's onboarding creates and configures your Android signing credentials (keystore + Google Play service account) for you — this is the recommended path:
+
+```bash
+bunx @capgo/cli@latest build init --platform android
+```
+
+The manual walkthrough below is only for those who prefer to set up credentials themselves, or want to understand exactly what Capgo does under the hood.
+:::
+
+## The first manual build
+
+Before we can start thinking about building the app with Capgo, we should first set it up, and do a first Android build by hand.
+There are some advantages to doing a manual build first:
+
+ - You will prepare the credentials for the later Capgo build
+ - You will create a record on the Play Store Console
+
+### Building the app manually with Android Studio
+
+Before we can start building the app with Capgo, we need to build the app manually with Android Studio.
+
+<Steps>
+  1. Open Android Studio
+
+      Run `bunx cap open android` to open the Android Studio project.
+
+  2. Click on `Build` -> `Generate Signed App Bundles / APKs`
+    ![Android Studio generate signed app bundles / APKs](/native-build-assets/android-studio-generate-signed-app-bundles-apks.webp)
+  3. Select `Android App Bundle` and click on `Next`
+    ![Android Studio select Android App Bundle](/native-build-assets/android-studio-select-android-app-bundle.webp)
+</Steps>
+
+### Creating a Keystore
+
+Right now, you are missing the keystore file. This file is used to sign your app, which lets Google know that it's you who built the app.
+To generate it, we will use the GUI method provided by Android Studio.
+There is also a way to do this with the command line, but we will not cover that in this tutorial.
+
+<Steps>
+  1. Click on `Create new`
+    ![Android Studio create new keystore](/native-build-assets/android-studio-create-new-keystore.webp)
+  2. Fill in the Key Store path
+    ![Android Studio fill in key store path](/native-build-assets/android-studio-fill-in-key-store-path.webp)
+
+      :::caution
+      This **IS TO BE SAVED** - it will be used later
+      :::
+  3. Set the Key Store password
+    ![Android Studio set key store password](/native-build-assets/android-studio-set-key-store-password.webp)
+
+      :::note
+      I recommend using the same password for the Key Store and the Key Alias.
+      :::
+
+      :::caution
+      This **IS TO BE SAVED** - it will be used later
+      :::
+  4. Fill the rest of the form
+
+      1. Keep the Key Alias as is (key0)
+      2. Fill the certificate details. I have filled it with fake details, but you should fill it with your own details.
+
+      ![Android Studio fill rest of the form](/native-build-assets/android-studio-fill-rest-of-the-form.webp)
+  5. Click on `OK`
+    ![Android Studio click on OK](/native-build-assets/android-studio-click-on-ok.webp)
+</Steps>
+
+### Finishing the manual build
+
+<Steps>
+  1. Make sure all of the details for the keystore have been filled in correctly and click on `Next`
+    ![Android Studio make sure all of the details for the keystore have been filled in correctly](/native-build-assets/android-studio-make-sure-all-of-the-details-for-the-keystore-have-been-filled-in-correctly.webp)
+  2. Select the `release` build variant and click on `Create`
+    ![Android Studio select release build variant](/native-build-assets/android-studio-select-release-build-variant.webp)
+  3. After the build succeeds, you should see the following screen
+    ![Android Studio after build succeed](/native-build-assets/android-studio-after-build-succeed.webp)
+  
+      1. This popup indicates that the build succeeded.
+      2. Click on the `locate` button - this will open the file explorer and you should see the build there.
+  4. Make sure you can see the build in the file explorer
+    ![Android Studio make sure you can see the build in the file explorer](/native-build-assets/android-studio-make-sure-you-can-see-the-build-in-the-file-explorer.webp)
+</Steps>
+
+### Creating the app on the Play Store Console
+
+<Steps>
+  1. Go to [Google Play Console](https://play.google.com/console/)
+  2. Select the correct developer account
+    ![Google Play Console select correct developer account](/native-build-assets/google-play-console-select-correct-developer-account.webp)
+  3. Click on `Create app`
+    ![Google Play Console create app](/native-build-assets/google-play-console-create-app.webp)
+  4. Choose the app name and the language
+    ![Google Play Console choose the app name and the language](/native-build-assets/google-play-console-choose-the-app-name-and-the-language.webp)
+  5. Select the app category and if the app is paid or free
+    ![Google Play Console select the app category and if the app is paid or free](/native-build-assets/google-play-console-select-the-app-category-and-if-the-app-is-paid-or-free.webp)
+  6. Accept the terms and conditions
+      ![Google Play Console accept the terms and conditions](/native-build-assets/google-play-console-accept-the-terms-and-conditions.webp)
+      
+      :::caution
+      Make sure you read the terms and conditions before accepting them.
+      :::
+  7. Click on `Create`
+    ![Google Play Console click on create](/native-build-assets/google-play-console-click-on-create.webp)
+</Steps>
+
+### Creating the internal testing group
+
+Now that you have created the app, you can create an internal testing group. Since I won't actually publish the app for everyone on Play Store, I will need to create an internal testing group.
+
+:::note
+Internal testing is still the fastest way to smoke-test your Play-distributed build before a real launch.
+
+If your developer account is a personal account created after November 13, 2023, internal testing does **not** replace the closed-testing requirement for production access. You will still need a closed test with at least 12 opted-in testers for 14 consecutive days before production.
+:::
+
+<Steps>
+  1. Go to `internal testing`
+      Click on `Test and release` -> `Testing` -> `Internal testing`
+
+      ![Google Play Console internal testing](/native-build-assets/google-play-console-internal-testing.webp)
+  2. Click on `Testers`
+      ![Google Play Console testers](/native-build-assets/google-play-console-testers.webp)
+  3. Click on `Create email list`
+      ![Google Play Console create email list](/native-build-assets/google-play-console-create-email-list.webp)
+  4. Name the email list 
+      ![Google Play Console name the email list](/native-build-assets/google-play-console-name-the-email-list.webp)
+  5. Add the email addresses of the testers
+      ![Google Play Console add the email addresses of the testers](/native-build-assets/google-play-console-add-the-email-addresses-of-the-testers.webp)
+  6. Press `Enter` and click on `Save`
+      ![Google Play Console press enter and click on save](/native-build-assets/google-play-console-press-enter-and-click-on-save.webp)
+  7. Click on `Create group`
+      ![Google Play Console create group](/native-build-assets/google-play-console-create-group.webp)
+  8. Make sure that the new list is selected and click on `Save`
+      ![Google Play Console make sure that the new list is selected and click on save](/native-build-assets/google-play-console-make-sure-that-the-new-list-is-selected-and-click-on-save.webp)
+</Steps>
+
+### Uploading the app to the internal testing group
+
+Now that you have created the internal testing group, you can upload the app to the internal testing group.
+
+<Steps>
+  1. Go to `Test and release` -> `Testing` -> `Internal testing`
+      ![Google Play Console internal testing](/native-build-assets/google-play-console-internal-testing.webp)
+  2. Click on the `Releases` button
+      ![Google Play Console releases button](/native-build-assets/google-play-console-releases-button.webp)
+  3. Click on `Create new release`
+      ![Google Play Console create new release](/native-build-assets/google-play-console-create-new-release.webp)
+  4. Click on `Upload`
+      ![Google Play Console upload](/native-build-assets/google-play-console-upload.webp)
+  5. Select the AAB file
+        ![Google Play Console select AAB file](/native-build-assets/google-play-console-select-apk-file.webp)
+
+        :::caution
+        Make sure you select the AAB file that you built manually with Android Studio. If this file doesn't use the same keystore as the one you will use for the Capgo build, the Capgo Native Build will fail.
+        :::
+  6. Wait for the AAB file to be uploaded
+  7. Click on `Next`
+      ![Google Play Console next](/native-build-assets/google-play-console-next-step.webp)
+  8. Fix the errors
+
+      Personally, at this stage I see this error
+
+      ![Google Play Console big scary warning](/native-build-assets/google-play-console-big-scary-warning.webp)
+
+      This is because I haven't verified my phone number yet. I will do that and continue the tutorial.
+  9. Click on `Save and publish`
+        This will publish the app to the internal testing group.
+        ![Google Play Console save and publish](/native-build-assets/google-play-console-save-and-publish.webp)
+  10. Confirm the publication
+        ![Google Play Console confirm publication](/native-build-assets/google-play-console-confirm-publication.webp)
+  11. Make sure the app is published
+        ![Google Play Console make sure the app is published](/native-build-assets/google-play-console-make-sure-the-app-is-published.webp)
+  12. Get your temporary app name
+        ![Google Play Console get your temporary app name](/native-build-assets/google-play-console-get-your-temporary-app-name.webp) 
+</Steps>
+
+
+### Accept the invitation to internal testing group
+
+Now that you have uploaded the app to the internal testing group, you can accept the invitation to the internal testing group.
+
+<Steps>
+  1. Go to `Test and release` -> `Testing` -> `Internal testing`
+      ![Google Play Console internal testing](/native-build-assets/google-play-console-internal-testing.webp)
+  2. Click on `Testers`
+      ![Google Play Console testers](/native-build-assets/google-play-console-testers.webp)
+  3. Click on `Copy link`
+      ![Google Play Console copy link](/native-build-assets/google-play-console-copy-link.webp)
+  4. Send the link to your phone, open it in the browser and click on `Accept`
+      ![Google Play Console accept invitation](/native-build-assets/google-play-console-accept-invitation.webp)
+  5. Confirm the invitation has been accepted and click on "download it on Play Store"
+      ![Google Play Console download it on Play Store](/native-build-assets/google-play-console-download-it-on-play-store.webp)
+  6. Install the app
+        1. If you had installed the app before using Android Studio, click on the `uninstall` button
+            ![Google Play Console uninstall app](/native-build-assets/google-play-console-uninstall-app.webp)
+        2. Click on the `install` button
+            ![Google Play Console install app](/native-build-assets/google-play-console-install-app.webp)
+        3. Open the app and confirm it has downloaded successfully
+            <video src="/native-build-assets/screen-20260215-072439-1771136671038.mp4" controls autoPlay muted loop playsInline title="App downloaded successfully from Play Store internal testing" aria-label="Video: confirming the app has downloaded successfully from the Play Store internal testing track" />
+
+
+      :::caution
+      If you do not see the app in Play Store, make sure you have selected the correct account in Play Store.
+      :::
+</Steps>
+
+## Configuring Capgo Native Build (Android)
+
+Now, you are ready to start the setup of Capgo Native Build. Congratulations 🎉!
+
+| Requirement | Flag | Description | Required |
+| --- | --- | --- | --- |
+| Keystore file | `--keystore <path>` | Path to your `.jks`/`.keystore` file used to sign the APK/AAB. | Yes |
+| Keystore alias | `--keystore-alias <alias>` | Alias name of the key inside the keystore. | Yes |
+| Keystore key password | `--keystore-key-password <password>` | Password for the key. If key/store passwords match, you can provide only one. | Look at the note below |
+| Keystore store password | `--keystore-store-password <password>` | Password for the keystore. If key/store passwords match, you can provide only one. | Look at the note below |
+| Google Play service account | `--play-config <path>` | JSON service account file for Play Store uploads. | Yes |
+
+```bash
+bunx @capgo/cli@latest build credentials save --platform android \
+  --keystore ./path/to/keystore.jks \
+  --keystore-alias "your-alias" \
+  --keystore-key-password "key-password" \
+  --keystore-store-password "store-password" \
+  --play-config ./play-store-service-account.json
+```
+
+:::note
+If key and store passwords are identical, provide only one of `--keystore-key-password` or `--keystore-store-password`.
+:::
+
+### Keystore, keystore password, keystore key password, keystore alias
+
+If you have followed the [manual build instructions](/docs/builder/android/#building-the-app-manually-with-android-studio), you should have the keystore already generated.
+If you have not followed the instructions, please follow them to generate the keystore.
+
+### Google Play service account
+
+Generating the Google Play service account is a manual and complex process.
+Yet, it is required to upload your app to Google Play. Please keep in mind the following things:
+ - You **NEED** to be the [owner of the Developer Account](https://support.google.com/googleplay/android-developer/thread/238025575?hl=en&msgid=238033420). Otherwise, you will not be able to setup the service account.
+ - You will need to create a new Google Cloud Project (separate from your Google Play Account)
+
+Let's begin.
+
+<Steps>
+  1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+  2. Click on the project selector
+      ![Google Console Project Selector](/social-login-assets/google_cons_project_selector.png)
+  3. If you already have a project, select it. Otherwise, create a new project:
+      :::note
+      The screenshots below are illustrative - use a name appropriate for your project.
+      :::
+      1. Click on `New project`
+          ![New Project button in Google Console](/social-login-assets/google_cons_new_project_btn.png)
+      2. Name your project and click `Create`
+          ![Project naming screen showing name field and Create button](/social-login-assets/google_cons_name_projec.png)
+      3. Ensure that you are on the right project
+          ![Project name showing in the selector indicating correct project selection](/social-login-assets/google_cons_right_proj.png)
+  4. Let's click on the search bar and search for `service accounts` and click on it
+      ![Google Console search bar](/native-build-assets/google-console-search-bar.webp)
+  5. Let's click on `Create service account`
+      ![Create Service Account button in Google Console](/native-build-assets/google_cons_create_service_account_btn.webp)
+  6. Fill in the form for the service account and click on `Done`
+      1. I recommend setting the name to `Capgo Native Build Service Account`
+      2. For the Service Account ID, I recommend setting it to `capgo-native-build-service-acc`
+      3. As for the description, you don't have to fill it in, but I recommend filling it with `Allows Capgo Native Build to build and submit the app to the Play Store`
+  
+      ![Google Console fill in the form for the service account](/native-build-assets/google-console-fill-in-the-form-for-the-service-account.webp)
+  7. Click on the newly created service account
+      You should now see the newly created service account in the list. Click on it.
+      ![Google Console newly created service account](/native-build-assets/google-console-newly-created-service-account.webp)
+
+
+      :::note
+      Copy this email address as well, you will need it later.
+      :::
+  8. Click on the `Keys` tab
+      ![Keys tab in Google Console](/native-build-assets/google_cons_keys_tab.webp)
+  9. Click on `Add Key` and `Create new key`
+      ![Google Console add key and create new key](/native-build-assets/google-console-add-key-and-create-new-key.webp)
+  10. Click on `JSON` and `Create`
+      ![Create Key button in Google Console](/native-build-assets/google_cons_create_key_btn.webp)
+
+      :::caution
+      Clicking on `Create` will create a new key and it will download the JSON file to your local machine.
+
+      You need to save the JSON file in a safe place. It **WILL** be used later.
+      :::
+  11. Download the JSON file
+      The JSON file should have been downloaded automatically. You can click on `close` to close the window.
+      ![Google Console download key](/native-build-assets/google-console-download-key.webp)
+</Steps>
+
+### Granting Play Store API access to the service account
+
+The newly created service account does not yet have access to the Play Store API. To grant it, head to the Play Store Console.
+
+<Steps>
+  1. Go to [Google Play Console](https://play.google.com/console/)
+  2. Select the correct developer account
+    ![Google Play Console select correct developer account](/native-build-assets/google-play-console-select-correct-developer-account.webp)
+  3. Click on `Users and permissions`
+    ![Google Play Console users and permissions](/native-build-assets/google-play-console-users-and-permissions.webp)
+  4. Click on `Invite new users`
+    ![Google Play Console invite new users](/native-build-assets/google-play-console-invite-new-users.webp)
+  5. Copy the email address of the service account
+    ![Google Play Console copy email address of the service account](/native-build-assets/google-play-console-copy-email-address-of-the-service-account.webp)
+  6. Go to `Account permissions` and grant the minimum required permissions:
+      - In `App permissions`, grant access to your app.
+      - In `Releases`, enable `Create, edit, and roll out releases`.
+      - If your workflow uses Play App Signing, enable the related signing permission.
+      - If you are unsure, use `Admin` only during setup, then reduce permissions afterward.
+    ![Google Play Console grant permissions](/native-build-assets/google-play-console-grant-permissions.webp)
+  7. Click on `Invite user`
+    ![Google Play Console invite user](/native-build-assets/google-play-console-invite-user.webp)
+  8. Confirm the invitation
+    ![Google Play Console confirm invitation](/native-build-assets/google-play-console-confirm-invitation.webp)
+  9. Confirm that the user has been invited
+    ![Google Play Console confirm that the user has been invited](/native-build-assets/google-play-console-confirm-that-the-user-has-been-invited.webp)
+</Steps>
+
+### Saving the credentials
+
+You are now ready to save the credentials and run your first build.
+You can save the credentials using the following command:
+
+```bash
+bunx @capgo/cli@latest build credentials save --platform android \
+  --keystore ./path/to/keystore.jks \
+  --keystore-alias "your-alias" \
+  --keystore-key-password "key-password" \
+  --keystore-store-password "store-password" \
+  --play-config ./play-store-service-account.json
+```
+
+### CI/CD setup (GitHub Actions)
+
+If you already completed [Keystore, keystore password, keystore key password, keystore alias](#keystore-keystore-password-keystore-key-password-keystore-alias) and [Google Play service account](#google-play-service-account), you already have everything needed for CI/CD.
+This section only covers how to pass those values as GitHub Actions secrets and environment variables.
+
+#### 1) Convert credential files to single-line base64
+
+```bash
+# Android keystore (.jks or .keystore)
+base64 -i ./path/to/keystore.jks | tr -d '\n' > keystore_base64.txt
+
+# Google Play service account JSON
+base64 -i ./play-store-service-account.json | tr -d '\n' > play_config_base64.txt
+```
+
+:::tip
+GitHub secrets should be single-line values. `tr -d '\n'` removes line breaks from base64 output.
+:::
+
+#### 2) Create repository secrets
+
+In `GitHub > Repository > Settings > Secrets and variables > Actions`, add:
+
+| Secret name | Value |
+|-----------|-------|
+| `CAPGO_TOKEN` | Your Capgo API token |
+| `APP_ID` | Your Capgo app ID (example: `com.example.app`) |
+| `ANDROID_KEYSTORE_FILE` | Content of `keystore_base64.txt` |
+| `KEYSTORE_KEY_ALIAS` | Keystore alias from [Keystore, keystore password, keystore key password, keystore alias](#keystore-keystore-password-keystore-key-password-keystore-alias) |
+| `KEYSTORE_KEY_PASSWORD` | Keystore key password |
+| `KEYSTORE_STORE_PASSWORD` | Keystore store password |
+| `PLAY_CONFIG_JSON` | Content of `play_config_base64.txt` |
+
+:::note
+If key and store passwords are the same, you can provide just one of `KEYSTORE_KEY_PASSWORD` or `KEYSTORE_STORE_PASSWORD`.
+:::
+
+#### 3) Use env vars in your GitHub Actions workflow
+
+```yaml
+# .github/workflows/android-build.yml
+name: Android Cloud Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  android-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Request Android build with Capgo
+        run: bunx @capgo/cli@latest build request ${{ secrets.APP_ID }} --platform android
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+```
+
+:::tip
+With this setup, CI sends credentials through environment variables only. You do not need to commit signing files or upload them as workflow artifacts.
+:::
+
+### Running the build
+
+Congratulations 🎉! You are now ready to run your first build.
+
+Run:
+```bash
+bunx @capgo/cli@latest build request com.example.app --platform android
+```
+
+And this will start the build process 🍾🥂
+
+### Submit the Play release for review
+
+By default, Android release builds upload to Google Play and can remain inactive until you finish the release in Play Console. If your CI release should submit the Play release automatically, pass `--submit-to-store-review` with a release build:
+
+```bash
+npx @capgo/cli@latest build request com.example.app \
+  --platform android \
+  --build-mode release \
+  --submit-to-store-review \
+  --store-release-name "1.2.3" \
+  --store-release-notes "General improvements" \
+  --store-release-notes-locale "en-US=General improvements" \
+  --store-release-notes-locale "nl-NL=Algemene verbeteringen" \
+  --store-release-notes-locale "fr-FR=Ameliorations generales"
+```
+
+This requires the same Google Play service account setup as the normal upload path (`PLAY_CONFIG_JSON` in CI or saved Android credentials locally). `--store-release-name` is used as the Google Play release name. `--store-release-notes` is the fallback Play changelog, and each `--store-release-notes-locale "locale=notes"` entry writes a localized Play changelog for that locale. Capgo sends the Play release as `completed`; if Managed publishing is enabled in Play Console, Google can still wait for your manual publish after approval.
+
+## Keep going from Android Builds
+
+If you are using **Android Builds** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

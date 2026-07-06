@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-26T04:29:43.897Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67be629d36a1a0b25cc0f4e3-1740544205565.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/capacitor-ota-updates-versioning-best-practices.webp
+head_image_alt: "\"Capacitor OTA Updates: Versioning Best Practices\" Capgo blog illustration"
 keywords: Capacitor, OTA updates, versioning, mobile development, app updates, semantic versioning, deployment strategies
 tag: Development, Mobile, Updates
 published: true
@@ -47,7 +47,7 @@ Managing Capacitor OTA updates requires a clear version control strategy. Here's
 
 ### Semantic Versioning Basics
 
-Semantic Versioning (SemVer) is a widely-used method for version numbering, structured as MAJOR.MINOR.PATCH. Each part has a specific role:
+[Semantic Versioning (SemVer)](/semver_tester/) is a widely-used method for version numbering, structured as MAJOR.MINOR.PATCH. Each part has a specific role:
 
 | **Version Component** | **Purpose** | **When to Update** |
 | --- | --- | --- |

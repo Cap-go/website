@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-20T15:10:20.942Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682c8ab34fa53d42207d8d4e-1747753870852.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/capgo-ota-updates-vs-manual-submissions.webp
+head_image_alt: "Capgo OTA Updates vs Manual Submissions Capgo blog illustration"
 keywords: OTA updates, manual submissions, app development, user experience, deployment speed
 tag: Development, Mobile, Updates
 published: true
@@ -61,7 +61,7 @@ The difference in update speed is one of the most striking advantages of Capgo O
 
 Apple’s App Store Guidelines state:
 
-> "Interpreted code may be downloaded to an Application, but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store (b) does not create a store or storefront for other code or applications (c) does not bypass signing, sandbox, or other security features of the OS." – Apple App Store Guidelines [\[2\]](https://capgo.app/docs/faq)
+> "Interpreted code may be downloaded to an Application, but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store (b) does not create a store or storefront for other code or applications (c) does not bypass signing, sandbox, or other security features of the OS." – Apple App Store Guidelines [\[2\]](https://capgo.app/docs/faq/)
 
 Capgo adheres to these policies by using a custom Dart interpreter. This ensures updates are compliant while still allowing for rapid deployment, bridging the gap between speed and regulation.
 
@@ -83,7 +83,7 @@ App store guidelines play a critical role in shaping [update strategies](https:/
 
 Capgo's custom Dart interpreter adheres to Apple's strict policies for handling interpreted code. Apple’s guidelines state:
 
-> "Interpreted code may be downloaded to an Application, but only so long as such code: (a) does not change the primary purpose of the Application, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS." [\[2\]](https://capgo.app/docs/faq)
+> "Interpreted code may be downloaded to an Application, but only so long as such code: (a) does not change the primary purpose of the Application, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS." [\[2\]](https://capgo.app/docs/faq/)
 
 Capgo ensures compliance by focusing on the following:
 
@@ -268,4 +268,4 @@ Traditional app store submissions, on the other hand, come with recurring expens
 
 ## Keep going from Capgo OTA Updates vs Manual Submissions
 
-If you are using **Capgo OTA Updates vs Manual Submissions** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.
+If you are using **Capgo OTA Updates vs Manual Submissions** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

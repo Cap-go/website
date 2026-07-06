@@ -17,20 +17,20 @@ By default, here's how Capgo handles app updates:
 
 <Steps>
 
-1. On app launch, the Capgo plugin checks to see if a new update is available.
+1. When the app moves to the foreground, the Capgo plugin checks to see if a new update is available. While the app stays open, it also checks again on a repeating timer controlled by `periodCheckDelay` (default 10 minutes).
 
 2. If an update is found, it's downloaded in the background while the user continues using the current version of the app.
 
-3. Once the download completes, Capgo waits for the user to either background the app or kill it entirely.
+3. Once the download completes, Capgo waits for the user to background the app.
 
-4. When the user next launches the app, they'll be running the updated version.
+4. When the user next brings the app to the foreground, they'll be running the updated version.
 
 </Steps>
 
 This flow ensures that users are always running the latest version of your app, without ever being interrupted by update prompts or forced to wait for downloads.
 
 <Aside type="tip">
-Capgo also checks for updates when the app resumes from the background, so users will receive updates even if they don't fully quit the app.
+Capgo checks for updates whenever the app moves to the foreground and on a repeating timer while the app stays open. `periodCheckDelay` controls that interval (default 10 minutes).
 </Aside>
 
 ## Why This Approach?
@@ -115,12 +115,12 @@ Learn more in the [Delta (manifest) Updates documentation](/docs/live-updates/di
 
 `autoUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code. It supports these values:
 
-- `false` or `'off'`: Disable Auto Update
-- `true` or `'atBackground'` (default): Download automatically and apply when the app moves to the background
-- `'atInstall'`: Apply immediately only after a fresh install or native app update, otherwise use the background flow
-- `'onLaunch'`: Apply immediately on app launch, otherwise use the background flow after the launch check
-- `'always'`: Apply immediately whenever Auto Update runs
-- `'onlyDownload'`: Download automatically, emit `updateAvailable`, and never set the next bundle automatically
+- `false` or `'off'`: Disable automatic update checks
+- `true` or `'atBackground'` (default): Check and download automatically on each foreground check, then apply the update the next time the app moves to background
+- `'atInstall'`: Apply immediately only after a fresh install or native app store update; otherwise use `"atBackground"` behavior
+- `'onLaunch'`: Apply immediately only when the app is brought to the foreground from a killed state (cold start). After that first check, fall back to `"atBackground"` behavior
+- `'always'`: Check on every foreground transition and apply immediately whenever an update is available
+- `'onlyDownload'`: Check and download automatically, emit `updateAvailable`, and never set the next bundle or apply an update automatically
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -142,10 +142,10 @@ export default config;
 ```
 
 <Aside type="note">
-**Important**: instant apply modes only apply updates when the app actually checks for them. By default, this happens only at app startup or when resuming from background. Note that `periodCheckDelay` is not compatible with instant apply modes.
+**Important**: instant apply modes only apply updates when the plugin actually checks for them. By default, checks run when the app moves to the foreground and on a repeating timer while the app stays open. `periodCheckDelay` controls that interval (default 10 minutes).
 </Aside>
 
-With `autoUpdate: 'always'`, Capgo will immediately apply an update as soon as the download completes during an update check, even if the user is actively using the app. Without periodic checking enabled, this means updates will only be applied when the app starts or resumes from background.
+With `autoUpdate: 'always'`, Capgo checks on every foreground transition and immediately applies an update as soon as the download completes during that check, even if the user is actively using the app. Periodic checks controlled by `periodCheckDelay` can trigger the same immediate apply behavior while the app stays open.
 
 Note that because `autoUpdate` is a native configuration, instant apply modes require some additional handling in your JavaScript code.
 

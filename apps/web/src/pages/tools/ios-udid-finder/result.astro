@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const content = {
   title: 'iOS UDID Finder Result',
@@ -11,7 +11,7 @@ const content = {
 }
 
 const toolHref = getRelativeLocaleUrl(Astro.locals.locale, 'tools/ios-udid-finder')
-const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/ios')
+const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/builder/ios/')
 ---
 
 <Layout content={content} disableThirdPartyScripts>

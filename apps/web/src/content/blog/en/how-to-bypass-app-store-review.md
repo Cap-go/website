@@ -8,9 +8,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: /bypass_illustration.webp
-head_image_alt: Capacitor bypass illustration
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/policy-safe-live-updates.webp
+head_image_alt: "How to update Capacitor JS apps without repeat store review Capgo blog illustration"
 keywords: Apple App Store, Google Play, Capacitor, Capgo, OTA updates, live updates, app store review
 tag: Tutorial
 published: true
@@ -112,4 +112,4 @@ If you want to go deeper, pair this with a strict environment strategy based on 
 
 ## Keep going from How to update Capacitor JS apps without repeat store review
 
-If you are using **How to update Capacitor JS apps without repeat store review** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.
+If you are using **How to update Capacitor JS apps without repeat store review** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

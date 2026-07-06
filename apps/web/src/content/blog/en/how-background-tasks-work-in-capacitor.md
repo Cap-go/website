@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-28T08:49:25.514Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6836bd7bd3b96619818630a6-1748422253078.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T21:13:09.000Z
+head_image: /blog-images/how-background-tasks-work-in-capacitor.webp
+head_image_alt: "How Background Tasks Work in Capacitor Capgo blog illustration"
 keywords: background tasks, Capacitor, iOS, Android, app performance, mobile development, battery optimization, lifecycle hooks
 tag: Development, Mobile, Updates
 published: true
@@ -81,7 +81,7 @@ Android also introduces challenges due to manufacturer-specific battery optimiza
 
 ## Setting Up Background Tasks in Capacitor
 
-To enable [background tasks in Capacitor](https://capgo.app/plugins/capacitor-uploader/), you'll need to install specific plugins and tweak native settings for both iOS and Android platforms.
+To enable [background tasks in Capacitor](https://capgo.app/plugins/capacitor-background-task/), you'll need to install specific plugins and tweak native settings for both iOS and Android platforms.
 
 ### Installing and Syncing Required Plugins
 

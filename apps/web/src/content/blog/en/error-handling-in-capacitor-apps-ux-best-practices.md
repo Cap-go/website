@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-14T04:41:14.278Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67fc8d0aaf1a45e500bcc0f5-1744605685630.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T21:25:40.000Z
+head_image: /blog-images/error-handling-in-capacitor-apps-ux-best-practices.webp
+head_image_alt: "\"Error Handling in Capacitor Apps: UX Best Practices\" Capgo blog illustration"
 keywords: error handling, user experience, mobile apps, bug fixes, input validation, error messages, app development
 tag: Development, Mobile, Updates
 published: true
@@ -150,7 +150,7 @@ Effective tools simplify error tracking, reporting, and resolution in modern Cap
 
 ### Error Tracking Systems
 
-Error tracking platforms provide detailed insights into app issues. For example, **Sentry**, trusted by millions of developers, offers in-depth error context, including device details, OS versions, app versions, and even the specific code commits causing issues.
+Error tracking platforms provide detailed insights into app issues. For example, **Sentry**, trusted by millions of developers, offers in-depth error context, including device details, OS versions, app versions, and even the specific code commits causing issues. For native crash reporting in Capacitor apps, [@capgo/capacitor-firebase-crashlytics](https://capgo.app/plugins/capacitor-firebase-crashlytics/) complements Sentry with Firebase's release health dashboards.
 
 | Feature | Details |
 | --- | --- |

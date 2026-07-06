@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-19T01:14:33.030Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/6802ea903c6b972ab5077c74-1745025315132.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/configuring-rollback-for-capacitor-updates.webp
+head_image_alt: "Configuring Rollback for Capacitor Updates Capgo blog illustration"
 keywords: Capacitor, rollback, updates, mobile development, app stability
 tag: Development, Mobile, Updates
 published: true

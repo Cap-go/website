@@ -1,16 +1,21 @@
 ---
 slug: what-is-automated-testing
 title: 'What Is Automated Testing: Automated Testing Explained'
-description: 'Learn what is automated testing, from the testing pyramid to CI/CD. A practical guide for teams on what, when, and how to automate effectively in 2026.'
+description: >-
+  Learn what is automated testing, from the testing pyramid to CI/CD. A
+  practical guide for teams on what, when, and how to automate effectively in
+  2026.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-22T07:24:57.104Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/e9d24d14-f4a5-487a-ac31-f4c8f8f2f270/what-is-automated-testing-automated-testing.jpg'
-head_image_alt: 'What Is Automated Testing: Automated Testing Explained'
+updated_at: 2026-06-18T15:35:50.000Z
+head_image: /blog-images/what-is-automated-testing.webp
+head_image_alt: >-
+  'What Is Automated Testing: Automated Testing Explained' Capgo blog
+  illustration
 keywords: 'automated testing, capacitorjs, electron js, mobile testing, ci/cd'
-tag: 'automated testing, capacitorjs, electron js, mobile testing, ci/cd'
+tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
 next_blog: ''
@@ -43,6 +48,8 @@ That's where automated testing stops being an abstract QA term and starts becomi
 ## What Is Automated Testing and Why Does It Matter
 
 A familiar release pattern looks like this. Product wants a fix out today. Engineering says the change is small. Then someone starts the manual checklist and finds out that a “small” change touched auth state, a WebView route, analytics events, and one native permission flow. By the time the team finishes clicking through everything, half a day is gone and nobody fully trusts the result.
+
+Teams often reach a point where release validation takes longer than the actual fix itself, which naturally leads to the question of [what is automated testing](https://www.functionize.com/automated-testing): a way to turn repeated checks into reliable, code-driven validation. Instead of depending on someone to manually confirm the same flows every release, automated tests verify expected behavior whenever the code changes. This helps teams catch regressions earlier and keep release decisions grounded in consistent feedback. That becomes especially valuable for cross-platform apps where one shared code change can impact web, mobile, and desktop experiences at the same time.
 
 **Automated testing** is the practice of writing tests that execute predefined checks against your software without someone manually repeating the same steps every release. In plain terms, you move repeated verification out of a human checklist and into code. That code can validate a function, an API contract, a screen transition, or a full user flow.
 

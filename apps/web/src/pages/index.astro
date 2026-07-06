@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { shortNumber } from '@/services/misc'
+import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
 import Orgs from '@/components/Orgs.astro'
 import ProblemSolution from '@/components/ProblemSolution.astro'
 import Testimonials from '@/components/Testimonials.astro'
@@ -12,29 +12,18 @@ import DeviceLogs from '@/components/landing/DeviceLogs.astro'
 import HowItWorks from '@/components/HowItWorks.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
 import MonitoringFeatures from '@/components/landing/MonitoringFeatures.astro'
+import ReleaseIntelligence from '@/components/landing/ReleaseIntelligence.astro'
 import AutomationFeatures from '@/components/landing/AutomationFeatures.astro'
 import BuiltForDevelopers from '@/components/BuiltForDevelopers.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 
 const config = Astro.locals.runtimeConfig
 
-const stats = {
-  stars: shortNumber(645),
-  apps: shortNumber(1400),
-  updates: shortNumber(947593631),
-}
-
-const tmp = await fetch(`${config.public.baseApiUrl}/private/website_stats`)
-if (tmp.ok) {
-  const res = await tmp.json()
-  if (res) {
-    if (res.apps) stats.apps = shortNumber(res.apps)
-    if (res.updates) stats.updates = shortNumber(res.updates)
-    if (res.stars) stats.stars = shortNumber(res.stars)
-  }
-}
+const rawStats = await resolveWebsiteStats(config.public.baseApiUrl)
+const stats = formatWebsiteStats(rawStats)
 
 // Create comprehensive homepage content definition
 const title = `${config.public.brand} - ${m.instant_updates_for_capacitor({}, { locale: Astro.locals.locale })}`
@@ -42,9 +31,9 @@ const description = m.ship_updates_fixes_changes_and_features({}, { locale: Astr
 
 // Create comprehensive LD+JSON for homepage
 const capgoService = createServiceLdJson(config.public, {
-  name: 'Capgo - Live Updates for Capacitor Apps',
+  name: 'Capgo - Live Updates for Ionic, Capacitor, and Cordova Apps',
   description:
-    'Instant over-the-air / CodePush updates for Capacitor mobile and Electron applications. Deploy OTA, bug fixes, feature updates, and improvements without release delays.',
+    'Instant over-the-air / CodePush updates for Ionic, Capacitor, Cordova, and Electron applications. Deploy OTA, bug fixes, feature updates, and improvements without release delays.',
   url: config.public.baseUrl,
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
@@ -53,14 +42,14 @@ const capgoService = createServiceLdJson(config.public, {
 // Create SoftwareApplication schema for the Capgo platform
 const capgoSoftware = createSoftwareApplicationLdJson(config.public, {
   name: 'Capgo Live Update Platform',
-  description: 'Professional live update platform for Capacitor developers. Deploy updates instantly to iOS, Android, and Electron apps.',
+  description: 'Professional live update platform for Ionic, Capacitor, and hybrid app teams. Deploy updates instantly to iOS, Android, Cordova, and Electron apps.',
   url: config.public.baseUrl,
   applicationCategory: 'DeveloperApplication',
-  operatingSystem: 'Web, iOS, Android, Electron',
+  operatingSystem: 'Web, iOS, Android, Cordova, Electron',
   softwareVersion: '1.0',
   aggregateRating: {
     ratingValue: 4.8,
-    reviewCount: parseInt(stats.apps.replace(/[^\d]/g, '')) || 1400,
+    reviewCount: rawStats.apps,
   },
   offers: {
     price: '0',
@@ -106,13 +95,15 @@ const content = {
     <!-- <CompaniesLogo /> -->
     <ProblemSolution />
     <HowItWorks />
+    <SolutionAppExample solution="production-updates" randomize />
     <MonitoringFeatures />
+    <ReleaseIntelligence />
     <DeviceLogs />
     <AutomationFeatures />
     <GlobalInfrastructure />
     <UpdateTypesSection />
     <BuiltForDevelopers />
-    <SharedNumbers />
+    <SharedNumbers stats={stats} />
     <Testimonials />
     <Manifesto />
     <Orgs />

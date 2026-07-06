@@ -1,0 +1,170 @@
+---
+title: Native Compatibility
+description: "Why Capgo live updates can't change native code, how Capgo detects native-incompatible bundles, and how to ship native changes safely."
+sidebar:
+  order: 3
+---
+
+import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
+
+A Capgo live update replaces your app's **JavaScript bundle** instantly, but it can't change the **native** part of your app — the Capacitor/Cordova plugins, native dependencies, and native project configuration that are compiled into the installed binary. When a new bundle expects native code that the installed binary doesn't have, the bundle is **native-incompatible**: Capgo can still deliver it, but it may crash or misbehave on devices that are still running the older native build.
+
+This page explains how Capgo detects native compatibility, what an incompatible update means for your users, and how to ship native changes safely.
+
+<Aside>
+Live updates are limited to JavaScript bundle changes. If you need to update native code — adding or removing a plugin, upgrading Capacitor, or changing native project configuration — you'll need to submit a new binary build through the usual app-store distribution process.
+</Aside>
+
+## TLDR: OTA or native?
+
+Capgo can send files from your generated web build folder. If the change only affects HTML, CSS, JavaScript, assets, or pure-JavaScript packages bundled into that output, ship it as a live update.
+
+Use a native app release when a change updates `capacitor.config.ts`, plugin configuration stored in Capacitor config, native plugins or dependencies, Capacitor itself, or iOS/Android project files. A practical check: if the change must update the native project through `npx cap sync` or `npx cap copy` before installed devices can use it, treat it as native.
+
+| Change | Ship with Capgo OTA? | Why |
+| --- | --- | --- |
+| HTML, CSS, app JavaScript, images, fonts, and other web build assets | Yes | They are loaded from the web bundle at runtime. |
+| Pure-JavaScript package changes bundled into your web output | Yes | The generated JavaScript is part of the web bundle. |
+| `capacitor.config.ts` changes | No | Capacitor config is read into the native app at build time. |
+| Adding, removing, or upgrading Capacitor/Cordova plugins | No | The installed native binary must contain the matching native code. |
+| iOS or Android project file changes | No | Existing users need a new binary from the stores. |
+
+## Client plugins by stack
+
+Capgo ships dedicated updater clients for each hybrid runtime:
+
+| Plugin | Use when |
+| --- | --- |
+| [`@capgo/capacitor-updater`](/docs/plugins/updater/) | Capacitor iOS/Android apps |
+| [`@capgo/cordova-updater`](/docs/plugins/cordova-updater/) | Cordova iOS 7+ / Android 13+ apps |
+| [`@capgo/electron-updater`](/docs/plugins/electron-updater/) | Electron desktop apps |
+
+Native compatibility checks apply regardless of client plugin — they compare the bundle's recorded native dependencies against the installed binary.
+
+## Why native compatibility matters
+
+Every Capacitor app ships in two layers:
+
+- The **native binary** users install from the App Store / Play Store. It contains Capacitor, your native plugins, and native configuration.
+- The **JavaScript bundle** (your web app) that Capgo can update over the air.
+
+A live update swaps only the JavaScript layer. If that new JavaScript calls a native plugin or API that isn't compiled into the installed binary, the call fails at runtime — which can crash the app or silently break a feature. Put simply: Capgo cannot update native code, so a device running the old native build can't safely run a bundle that was built against new native code.
+
+## How Capgo detects compatibility
+
+When you upload a bundle — or run the check manually — Capgo compares the **native packages** in your local project (your Capacitor/Cordova plugins and their versions) against the native packages recorded for the bundle **currently live on the channel**:
+
+- If they match, the change is JavaScript-only and **safe to ship over the air**.
+- If a plugin was added, removed, or changed version, the bundle is **native-incompatible** — those changes only take effect once users install a new native binary.
+
+### Check from the CLI
+
+```bash
+bunx @capgo/cli@latest bundle compatibility com.example.app --channel production
+```
+
+The CLI prints a table of each native package with its local version, the version live on the channel, and a status:
+
+```text
+Package              Local    Remote   Status
+@capacitor/core      6.1.2    6.1.2    ✅
+@capacitor/share     6.0.0    6.0.0    ✅
+@capacitor/camera    6.1.0    —        ❌  not in the live bundle
+```
+
+<Aside type="tip">
+Add `--text` to swap the emojis for `OK`/`FAIL` (handy in CI logs), and `--package-json` / `--node-modules` to point at the right paths in a monorepo.
+</Aside>
+
+### Get a machine-readable verdict (CI)
+
+For pipelines, `bundle releaseType` collapses the check into a single word:
+
+```bash
+bunx @capgo/cli@latest bundle releaseType com.example.app --channel production
+# → OTA      safe to ship as a live update
+# → native   needs a new app-store build
+```
+
+Gate your release pipeline on this: ship a live update when it prints `OTA`, and trigger a native build when it prints `native`.
+
+## What an incompatible update means for your users
+
+<Aside type="caution">
+By default, detecting incompatibility does **not** block the upload — if you upload a native-incompatible bundle and set it as a channel's active build, Capgo **will deliver it** to devices on that channel. (You can turn this into a hard gate with `--fail-on-incompatible` — see [Prevent incompatible deliveries](#prevent-incompatible-deliveries) below.)
+</Aside>
+
+On devices still running the **older native binary**, the missing native code can cause crashes or broken features — even though the update downloaded and applied "successfully." This is why a live update can be live and delivered yet still break the app for existing users, and why Capgo can warn you when an incompatible bundle goes live.
+
+Capgo's [automatic rollback](/docs/live-updates/rollbacks/#automatic-rollback-protection) can catch a JavaScript error thrown before `notifyAppReady()` runs, but it isn't a substitute for shipping compatible native code — a mismatch that crashes later, or crashes natively, can slip past it.
+
+## How to ship native changes safely
+
+### Publish a new native build (the real fix)
+
+When a bundle needs new native code, build and submit a new binary to the App Store / Play Store (or rebuild with Capgo Cloud Build). Once users update the binary, the bundle's native dependencies line up and the live update runs correctly.
+
+### Roll back if an incompatible bundle is already live
+
+If an incompatible bundle is already active on a channel, revert the channel to the last compatible build to stop serving it until the native build is out. See [Rollbacks](/docs/live-updates/rollbacks/).
+
+### Prevent incompatible deliveries
+
+Two complementary guards, both of which actually inspect your native packages:
+
+**Fail the upload in CI — `--fail-on-incompatible`**
+
+Add the flag to your `bundle upload` step. If the bundle's native packages don't match the channel's currently-live version, the upload **fails with a non-zero exit and nothing is shipped** — so your pipeline stops you from silently publishing an OTA update that can't take effect until users install a native build:
+
+```bash
+bunx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible
+```
+
+Compatible uploads — and cases where the check can't run (a new channel, or no remote metadata) — pass through unchanged. In an interactive terminal it offers the Capgo Builder native-build flow instead; declining fails. (Can't be combined with `--ignore-metadata-check`.)
+
+**Gate delivery by native version — `metadata` + `--auto-min-update-version`**
+
+When you _do_ ship the native build and the bundle together, put the channel on the `metadata` strategy and upload with `--auto-min-update-version`. Capgo runs the compatibility check on every upload and, when a bundle needs new native code, raises the update floor so devices that haven't installed the matching native build don't receive it:
+
+```bash
+# one-time: switch the channel to the metadata strategy
+bunx @capgo/cli@latest channel set production com.example.app --disable-auto-update metadata
+
+# from then on, Capgo sets the floor automatically on every upload
+bunx @capgo/cli@latest bundle upload --channel production --auto-min-update-version
+```
+
+<Aside type="caution">
+Version-number rules like `--disable-auto-update major` are **not** a substitute — they only block version jumps and never inspect native code, so a native change shipped in a minor or patch release still goes out. Use `--fail-on-incompatible` or `--auto-min-update-version`, which check your native packages.
+</Aside>
+
+See [Version Targeting](/docs/live-updates/version-targeting/) for the full set of targeting options.
+
+## Related
+
+<CardGrid>
+  <a href="/docs/live-updates/version-targeting/">
+    <Card title="Version Targeting" icon="bars">
+      Deliver only compatible bundles using channels, semver rules, and the metadata strategy.
+    </Card>
+  </a>
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="Rollbacks" icon="left-arrow">
+      Revert a channel to the last compatible build if an incompatible bundle went live.
+    </Card>
+  </a>
+  <a href="/docs/live-updates/update-types/">
+    <Card title="Update Types" icon="open-book">
+      How apply timing, delay conditions, and version blocking work together.
+    </Card>
+  </a>
+  <a href="/docs/cli/reference/bundle/">
+    <Card title="CLI: bundle" icon="setting">
+      Reference for the bundle compatibility, releaseType, and upload options.
+    </Card>
+  </a>
+</CardGrid>
+
+## Keep going from Native Compatibility
+
+If you are using **Native Compatibility** to keep live updates safe, connect it with [Version Targeting](/docs/live-updates/version-targeting/) to route bundles by native version, [Rollbacks](/docs/live-updates/rollbacks/) to recover when an incompatible bundle ships, [Update Types](/docs/live-updates/update-types/) to understand channel version blocking, and the [Capgo CLI bundle reference](/docs/cli/reference/bundle/) for the compatibility and releaseType commands.

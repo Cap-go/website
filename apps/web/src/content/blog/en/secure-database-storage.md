@@ -1,16 +1,23 @@
 ---
 slug: secure-database-storage
 title: 'Secure Database Storage: A Complete Guide for Developers'
-description: 'A complete guide to secure database storage. Learn best practices for encryption, access control, key management, and compliance to protect your data in 2026.'
+description: >-
+  A complete guide to secure database storage. Learn best practices for
+  encryption, access control, key management, and compliance to protect your
+  data in 2026.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-25T07:12:53.642Z
-updated_at: 2026-05-25T07:15:17.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/3b4963b1-c07f-49b9-85ed-e71bd5e22e39/secure-database-storage-security-guide.jpg'
-head_image_alt: 'Secure Database Storage: A Complete Guide for Developers'
-keywords: 'secure database storage, data encryption, database security, access control, data compliance'
-tag: 'secure database storage, data encryption, database security, access control, data compliance'
+updated_at: 2026-06-23T21:25:40.000Z
+head_image: /blog-images/secure-database-storage.webp
+head_image_alt: >-
+  'Secure Database Storage: A Complete Guide for Developers' Capgo blog
+  illustration
+keywords: >-
+  secure database storage, data encryption, database security, access control,
+  data compliance
+tag: 'Mobile, Security, Guides'
 published: true
 locale: en
 next_blog: ''
@@ -201,7 +208,7 @@ Minimization is where many teams get their biggest security win for the least en
 
 Store less. Keep it for less time. Copy it to fewer places. If a feature only needs age range, do not store full birth date. If support only needs the last four characters of an identifier, avoid exposing the full field. If test environments do not need live personal data, do not restore production backups into them and call it temporary.
 
-This is also an operational discipline. Retention schedules need enforcement. Old exports need deletion. Downstream systems need review because risk grows every time sensitive fields are replicated into search indexes, caches, data lakes, mobile storage, and ad hoc CSV files. For example, tools such as Capgo's SQLite-based storage plugin for Capacitor can provide app-side persistence, but you still need to decide what should never be stored locally at all.
+This is also an operational discipline. Retention schedules need enforcement. Old exports need deletion. Downstream systems need review because risk grows every time sensitive fields are replicated into search indexes, caches, data lakes, mobile storage, and ad hoc CSV files. For Capacitor apps, [@capgo/capacitor-data-storage-sqlite](https://capgo.app/plugins/capacitor-data-storage-sqlite/) and [@capgo/capacitor-fast-sql](https://capgo.app/plugins/capacitor-fast-sql/) can provide encrypted app-side persistence, but you still need to decide what should never be stored locally at all.
 
 The point of these pillars is not perfection on day one. It is building a storage system that stays defensible after key rotations, staff changes, incident response, backup restores, and product growth. That is where secure database storage usually succeeds or fails.
 

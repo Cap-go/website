@@ -1,8 +1,9 @@
 ---
 import { numberWithSpaces } from '@/services/misc'
 import type { Database } from '@/services/supabase.types'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
+import TeamAvatars from '@/components/TeamAvatars.astro'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]
@@ -31,8 +32,9 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
     `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' ? '+' : ''} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.bandwidth)}${plan.name === 'Enterprise' ? '+' : ''} GiB/${m.month({}, { locale: Astro.locals.locale })} ${m.of_bandwidth({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB storage`,
-    m.unlimited_live_updates({}, { locale: Astro.locals.locale }),
-    m.mcp_server({}, { locale: Astro.locals.locale }),
+    ...(plan.name === 'Enterprise'
+      ? [m.soc2_compliance_short({}, { locale: Astro.locals.locale }), m.enterprise_uptime_sla({}, { locale: Astro.locals.locale })]
+      : [m.unlimited_live_updates({}, { locale: Astro.locals.locale }), m.mcp_server({}, { locale: Astro.locals.locale })]),
   ]
 
   if (plan.build_time_unit && plan.build_time_unit > 0) {
@@ -124,11 +126,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                 class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-4 py-3 text-sm font-semibold whitespace-nowrap text-gray-900 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
                 role="button"
               >
-                <span class="flex -space-x-2" aria-hidden="true">
-                  <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/martin-avatar.png" alt="" width="24" height="24" loading="lazy" />
-                  <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-                  <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-                </span>
+                <TeamAvatars />
                 <span>Talk to our team</span>
               </a>
             )}

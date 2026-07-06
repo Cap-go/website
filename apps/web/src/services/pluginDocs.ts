@@ -1,6 +1,8 @@
 import type { Action } from '@/config/plugins'
 import { defaultLocale, locales, type Locales } from '@/services/locale'
 import { globSync } from 'glob'
+import { existsSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 type PluginReference = Pick<Action, 'href' | 'name'>
@@ -10,7 +12,12 @@ type PluginDocsSlugs = {
   docsSlugs: Set<string>
 }
 
-const DOCS_CONTENT_ROOT = fileURLToPath(new URL('../../../docs/src/content/docs/', import.meta.url))
+const docsContentRootCandidates = [
+  fileURLToPath(new URL('../../../docs/src/content/docs/', import.meta.url)),
+  resolve(process.cwd(), '../docs/src/content/docs'),
+  resolve(process.cwd(), 'apps/docs/src/content/docs'),
+]
+const DOCS_CONTENT_ROOT = docsContentRootCandidates.find((path) => existsSync(path)) ?? docsContentRootCandidates[0]
 
 const getPluginDocEntry = (filePath?: string): { locale: Locales; slug: string } | null => {
   if (!filePath) return null

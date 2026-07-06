@@ -1,7 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
@@ -74,7 +75,7 @@ const content = { title, description, ldJSON }
               {m.solutions_get_started({}, { locale })}
             </a>
             <a
-              href={getRelativeLocaleUrl(locale, 'docs/plugin/api')}
+              href={getRelativeLocaleUrl(locale, 'docs/plugins/updater/api/')}
               class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
             >
               {m.solutions_view_docs({}, { locale })}
@@ -313,6 +314,8 @@ App.addListener('appUrlOpen', async (data) => {'{'}
     </section>
 
     <!-- CTA Section -->
+
+    <SolutionAppExample solution="beta-testing" />
     <section class="bg-gray-900 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-amber-600 to-amber-800 px-8 py-16 sm:px-16">

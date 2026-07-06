@@ -1,0 +1,164 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-device-info and stream device metrics into JavaScript."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-device-info` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-device-info
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { DeviceInfo } from '@capgo/capacitor-device-info';
+```
+
+## Read One Snapshot
+
+```typescript
+const snapshot = await DeviceInfo.getInfo();
+
+console.log(snapshot.cpu.cores);
+console.log(snapshot.memory.usedPercent);
+console.log(snapshot.storage.freeBytes);
+console.log(snapshot.sensors?.pressureHpa);
+```
+
+`cpu.usagePercent` is delta-based. The first native sample can omit it; call `getInfo` again later or use monitoring to receive populated CPU usage after the second sample.
+
+## Stream Updates
+
+```typescript
+const handle = await DeviceInfo.addListener('deviceInfoUpdate', (sample) => {
+  console.log(sample.sequence, sample.elapsedMs);
+  console.log(sample.cpu.usagePercent);
+  console.log(sample.sensors?.readings);
+});
+
+await DeviceInfo.startMonitoring({
+  intervalMs: 1000,
+  emitImmediately: true,
+});
+```
+
+## Stop Updates
+
+```typescript
+await DeviceInfo.stopMonitoring();
+await handle.remove();
+```
+
+You can also stop automatically:
+
+```typescript
+await DeviceInfo.startMonitoring({
+  intervalMs: 1000,
+  durationMs: 60_000,
+  sampleCount: 60,
+});
+```
+
+## Check Monitoring State
+
+```typescript
+const state = await DeviceInfo.isMonitoring();
+
+if (state.monitoring) {
+  console.log(state.samplesEmitted);
+}
+```
+
+## Onboard Sensor Fields
+
+```typescript
+const { sensors, cpu, gpu } = await DeviceInfo.getInfo();
+
+console.log(cpu.temperatureCelsius);
+console.log(gpu?.temperatureCelsius);
+console.log(sensors?.batteryTemperatureCelsius);
+console.log(sensors?.ambientTemperatureCelsius);
+console.log(sensors?.relativeHumidityPercent);
+console.log(sensors?.pressureHpa);
+console.log(sensors?.illuminanceLux);
+console.log(sensors?.proximityDistanceCm);
+console.log(sensors?.availableSensors);
+```
+
+Sensor fields are optional. They are present only when the device, OS, and app sandbox expose that metric.
+
+## Platform Notes
+
+- iOS requires no permissions for the exposed metrics. It reports CoreMotion sensor availability but not raw CPU or GPU temperature.
+- Android requires no permissions for the exposed metrics. CPU and GPU temperatures are best-effort thermal-zone reads.
+- Web support is best effort and reports empty onboard sensor arrays because browsers do not expose native device sensors consistently.
+
+## Type Reference
+
+### `DeviceInfoSnapshot`
+
+```typescript
+export interface DeviceInfoSnapshot {
+  timestamp: number;
+  platform: 'ios' | 'android' | 'web';
+  cpu: CpuInfo;
+  memory: MemoryInfo;
+  storage: StorageInfo;
+  gpu?: GpuInfo;
+  thermalState?: ThermalState;
+  lowPowerMode?: boolean;
+  sensors?: OnboardSensorsInfo;
+}
+```
+
+### `OnboardSensorsInfo`
+
+```typescript
+export interface OnboardSensorsInfo {
+  availableSensors?: OnboardSensorDescriptor[];
+  readings?: OnboardSensorReading[];
+  batteryTemperatureCelsius?: number;
+  ambientTemperatureCelsius?: number;
+  relativeHumidityPercent?: number;
+  pressureHpa?: number;
+  illuminanceLux?: number;
+  proximityDistanceCm?: number;
+}
+```
+
+### `MonitoringOptions`
+
+```typescript
+export interface MonitoringOptions {
+  intervalMs?: number;
+  durationMs?: number;
+  sampleCount?: number;
+  emitImmediately?: boolean;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** for device diagnostics, connect it with [@capgo/capacitor-device-info](/docs/plugins/device-info/) for the overview, [Using @capgo/capacitor-device-info](/plugins/capacitor-device-info/) for a tutorial, [@capgo/capacitor-barometer](/docs/plugins/barometer/) for focused pressure readings, and [@capgo/capacitor-light-sensor](/docs/plugins/light-sensor/) for focused light sensor readings.

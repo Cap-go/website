@@ -1,15 +1,19 @@
 ---
-import { actions } from '@/config/plugins'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
+import PluginIcon from '@/components/PluginIcon.astro'
+import { actions, pluginCategories } from '@/config/plugins'
+import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import { createItemListLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import m from '@/copy/messages'
 import { getSlug, getPluginsWithStars, getTotalStars, getTotalDownloads, getGitHubCommunityStats } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
 import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
-import PluginIcon from '@/components/PluginIcon.astro'
 import { Icon as AstroIcon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { marked } from 'marked'
 
 const locale = Astro.locals.locale ?? defaultLocale
@@ -62,11 +66,12 @@ const totalStars = getTotalStars()
 const totalDownloads = getTotalDownloads()
 const communityStats = getGitHubCommunityStats()
 const sortOptions = [
-  { value: 'downloads', label: 'Downloads', description: 'Most weekly npm usage' },
+  { value: 'downloads', label: 'Downloads', description: 'Most monthly npm usage' },
   { value: 'stars', label: 'GitHub Stars', description: 'Most community interest' },
   { value: 'alphabetical', label: 'Alphabetical', description: 'A to Z by plugin name' },
 ] as const
 const defaultSortOption = sortOptions[0]
+const categoryLabelById = new Map(pluginCategories.map((category) => [category.id, category.label]))
 
 // Parse descriptions for all plugins
 const plugins = await Promise.all(
@@ -77,15 +82,23 @@ const plugins = await Promise.all(
     const hasTutorial = Boolean(tutorialLocale)
     const tutorialHref = tutorialLocale ? getRelativeLocaleUrl(tutorialLocale, `plugins/${tutorialSlug}`) : undefined
     const docsLocale = docsSlug && localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
-
     return {
       ...item,
       description: await marked.parse(item.description),
+      categoryLabel: categoryLabelById.get(item.category) ?? 'Plugin',
       docsHref: tutorialHref ?? (docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : item.href),
       hasSiteDocs: hasTutorial || Boolean(docsSlug),
     }
   }),
 )
+const categoryCounts = new Map(pluginCategories.map((category) => [category.id, 0]))
+plugins.forEach((plugin) => {
+  categoryCounts.set(plugin.category, (categoryCounts.get(plugin.category) ?? 0) + 1)
+})
+const categoryFilterOptions = [
+  { id: 'all', label: 'All plugins', count: plugins.length },
+  ...pluginCategories.map((category) => ({ ...category, count: categoryCounts.get(category.id) ?? 0 })).filter((category) => category.count > 0),
+]
 
 // Helper function to format counts
 const formatCount = (count: number): string => {
@@ -100,7 +113,7 @@ const formatCount = (count: number): string => {
 
 const directoryStats = [
   { label: m.total_plugins({}, { locale }), value: `${plugins.length}+` },
-  { label: m.npm_weekly({}, { locale }), value: formatCount(totalDownloads) },
+  { label: m.npm_monthly({}, { locale }), value: formatCount(totalDownloads) },
   { label: m.github_stars({}, { locale }), value: `${formatCount(totalStars)}+` },
   { label: m.oss_contributors({}, { locale }), value: `${formatCount(communityStats.contributorCount)}+` },
   { label: m.versions_shipped({}, { locale }), value: `${formatCount(communityStats.versionCount)}+` },
@@ -109,7 +122,7 @@ const directoryStats = [
 
 const featuredStats = [
   { label: m.ready_to_use_plugins({}, { locale }), value: `${plugins.length}+`, colorClass: 'text-gray-200' },
-  { label: m.downloads_per_week({}, { locale }), value: formatCount(totalDownloads), colorClass: 'text-emerald-400' },
+  { label: m.downloads_per_month({}, { locale }), value: formatCount(totalDownloads), colorClass: 'text-emerald-400' },
   { label: m.github_stars({}, { locale }), value: `${formatCount(totalStars)}+`, colorClass: 'text-gray-200' },
   { label: m.oss_contributors({}, { locale }), value: `${formatCount(communityStats.contributorCount)}+`, colorClass: 'text-cyan-300' },
   { label: m.versions_shipped({}, { locale }), value: `${formatCount(communityStats.versionCount)}+`, colorClass: 'text-gray-200' },
@@ -139,7 +152,7 @@ const content = {
   title,
   description,
   keywords: 'capacitor plugins, mobile plugins, ionic plugins, native plugins, app plugins',
-  image: `${config.baseUrl}/capgo_plugins.png`,
+  image: `${config.baseUrl}/social/capgo-plugins.png`,
   ldJSON,
 }
 ---
@@ -183,166 +196,243 @@ const content = {
           </p>
         </div>
 
-        <!-- Search and Sort Controls -->
-        <div class="mx-auto mb-8 flex max-w-4xl flex-col gap-3 sm:flex-row sm:items-center">
-          <div class="relative w-full flex-1">
-            <input
-              type="text"
-              id="plugin-search"
-              aria-label={m.search_plugins_by_name_or_description({}, { locale })}
-              placeholder={m.search_plugins_by_name_or_description_placeholder({}, { locale })}
-              class="h-12 w-full rounded-lg border border-gray-700/80 bg-gray-950/60 pr-11 pl-4 text-base text-white placeholder-gray-500 transition-colors duration-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none"
-            />
-            <svg
-              aria-hidden="true"
-              class="pointer-events-none absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </div>
-          <div id="plugin-sort-dropdown" class="relative w-full sm:w-60">
-            <button
-              type="button"
-              id="plugin-sort-button"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-controls="plugin-sort-menu"
-              aria-label={m.sort_plugins_by({}, { locale })}
-              data-sort-value={defaultSortOption.value}
-              class="group flex h-12 w-full items-center justify-between gap-3 rounded-lg border border-gray-700/80 bg-gray-950/70 px-4 text-left text-sm text-white transition-colors duration-200 hover:border-blue-400/50 hover:bg-gray-900/80 focus-visible:border-blue-300 focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none"
-            >
-              <span class="flex min-w-0 items-center gap-2">
-                <span class="shrink-0 text-gray-400">{m.sort_by_prefix({}, { locale })}</span>
-                <span id="plugin-sort-current-label" class="block truncate font-semibold text-white" aria-live="polite" aria-atomic="true">
-                  {defaultSortOption.label}
-                </span>
-              </span>
-              <span
-                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/5 text-slate-300 transition-colors duration-200 group-hover:border-blue-300/30 group-hover:text-white"
+        <div class="grid gap-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start">
+          <aside
+            class="sticky top-0 z-20 rounded-lg border border-gray-800/80 bg-gray-900/95 p-2 backdrop-blur-sm lg:top-24 lg:flex lg:max-h-[calc(100vh-7rem)] lg:flex-col lg:overflow-hidden lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none"
+          >
+            <div class="relative">
+              <input
+                type="search"
+                id="plugin-search"
+                name="plugin-search"
+                aria-label={m.search_plugins_by_name_or_description({}, { locale })}
+                placeholder="Search plugins"
+                class="h-12 w-full rounded-lg border border-gray-700/80 bg-gray-950/60 pr-11 pl-4 text-base text-white placeholder-gray-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none"
+              />
+              <svg
+                aria-hidden="true"
+                class="pointer-events-none absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <svg id="plugin-sort-chevron" aria-hidden="true" class="h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </span>
-            </button>
-            <div
-              id="plugin-sort-menu"
-              aria-hidden="true"
-              class="pointer-events-none invisible absolute inset-x-0 top-[calc(100%+0.5rem)] z-40 translate-y-2 rounded-lg border border-gray-700 bg-slate-950/95 p-1 opacity-0 shadow-xl ring-1 ring-white/10 backdrop-blur-xl transition-all duration-200 sm:left-auto sm:min-w-64"
-            >
-              <div class="px-3 py-2 text-xs font-medium text-slate-400">{m.choose_an_order({}, { locale })}</div>
-              <div class="mt-1 space-y-1">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+
+            <div class="relative mt-4 lg:hidden">
+              <label for="plugin-category-select" class="sr-only">Filter plugins by category</label>
+              <select
+                id="plugin-category-select"
+                name="plugin-category-select"
+                aria-label="Filter plugins by category"
+                class="h-12 w-full appearance-none rounded-lg border border-gray-700/80 bg-gray-950/70 px-4 pr-10 text-base text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none"
+              >
                 {
-                  sortOptions.map((option) => (
-                    <button
-                      type="button"
-                      class:list={[
-                        'flex w-full items-center justify-between rounded-md border px-3 py-2.5 text-left transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
-                        option.value === defaultSortOption.value
-                          ? 'border-blue-400/40 bg-blue-500/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
-                          : 'border-transparent text-slate-200 hover:border-white/10 hover:bg-white/5 hover:text-white',
-                      ]}
-                      data-sort-option
-                      data-sort-value={option.value}
-                      data-sort-label={option.label}
-                      aria-pressed={option.value === defaultSortOption.value ? 'true' : 'false'}
-                    >
-                      <span class="min-w-0">
-                        <span class="block text-sm font-semibold">{option.label}</span>
-                        <span class="mt-1 block text-xs text-slate-400">{option.description}</span>
-                      </span>
-                      <svg
-                        aria-hidden="true"
-                        class:list={['h-5 w-5 shrink-0 text-blue-300', option.value === defaultSortOption.value ? 'opacity-100' : 'opacity-0']}
-                        data-sort-check
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </button>
+                  categoryFilterOptions.map((category) => (
+                    <option value={category.id}>
+                      {category.label} ({category.count})
+                    </option>
                   ))
                 }
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="search-results-count" aria-live="polite" aria-atomic="true" class="mb-4 text-center text-sm text-gray-400"></div>
-
-        <div id="plugins-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {
-            plugins.map((item) => (
-              <div
-                class="plugin-card group relative rounded-lg border border-gray-700/80 bg-gray-950/45 p-5 transition-colors duration-200 hover:border-gray-500/70 hover:bg-gray-900/65"
-                data-title={item.title.toLowerCase()}
-                data-description={item.description.toLowerCase()}
-                data-author={item.author.toLowerCase()}
-                data-downloads={item.npmDownloads ?? 0}
-                data-stars={item.githubStars ?? 0}
+              </select>
+              <svg
+                aria-hidden="true"
+                class="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-gray-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <div class="relative">
-                  {item.icon && <PluginIcon icon={item.icon} name={item.title} className="mb-4" />}
-                  <h3 class="font-pj mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
-                  <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
-                  <div class="mb-4 flex items-center justify-between">
-                    <span class="text-sm text-gray-500">by {item.author}</span>
-                    <div class="flex gap-3">
-                      {item.npmDownloads !== undefined && (
-                        <span class="inline-flex items-center text-sm text-gray-200">
-                          <svg class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+
+            <div
+              class="mt-4 hidden min-h-0 flex-1 space-y-1 overflow-y-auto rounded-lg border border-gray-800 bg-gray-950/40 p-2 lg:block"
+              role="group"
+              aria-label="Filter plugins by category"
+            >
+              {
+                categoryFilterOptions.map((category) => (
+                  <button
+                    type="button"
+                    class:list={[
+                      'flex w-full items-center justify-between gap-3 rounded-md px-3 py-2 text-left text-sm font-semibold focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
+                      category.id === 'all' ? 'bg-blue-500/15 text-white' : 'text-gray-300 hover:bg-gray-900/80 hover:text-white',
+                    ]}
+                    data-category-filter
+                    data-category={category.id}
+                    data-category-label={category.label}
+                    aria-pressed={category.id === 'all' ? 'true' : 'false'}
+                  >
+                    <span>{category.label}</span>
+                    <span class="text-xs text-gray-400 tabular-nums">{category.count}</span>
+                  </button>
+                ))
+              }
+            </div>
+          </aside>
+
+          <div class="min-w-0">
+            <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div id="search-results-count" aria-live="polite" aria-atomic="true" class="min-h-5 text-sm text-gray-400"></div>
+
+              <div id="plugin-sort-dropdown" class="relative w-full sm:ml-auto sm:w-60">
+                <button
+                  type="button"
+                  id="plugin-sort-button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="plugin-sort-menu"
+                  aria-label={m.sort_plugins_by({}, { locale })}
+                  data-sort-value={defaultSortOption.value}
+                  class="group flex h-12 w-full items-center justify-between gap-3 rounded-lg border border-gray-700/80 bg-gray-950/70 px-4 text-left text-sm text-white hover:border-blue-400/50 hover:bg-gray-900/80 focus-visible:border-blue-300 focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none"
+                >
+                  <span class="flex min-w-0 items-center gap-2">
+                    <span class="shrink-0 text-gray-400">{m.sort_by_prefix({}, { locale })}</span>
+                    <span id="plugin-sort-current-label" class="block truncate font-semibold text-white" aria-live="polite" aria-atomic="true">
+                      {defaultSortOption.label}
+                    </span>
+                  </span>
+                  <span
+                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/5 text-slate-300 group-hover:border-blue-300/30 group-hover:text-white"
+                  >
+                    <svg id="plugin-sort-chevron" aria-hidden="true" class="h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </span>
+                </button>
+                <div
+                  id="plugin-sort-menu"
+                  aria-hidden="true"
+                  class="pointer-events-none invisible absolute inset-x-0 top-[calc(100%+0.5rem)] z-40 translate-y-2 rounded-lg border border-gray-700 bg-slate-950/95 p-1 opacity-0 shadow-xl ring-1 ring-white/10 backdrop-blur-xl transition-all duration-200 sm:left-auto sm:min-w-64"
+                >
+                  <div class="px-3 py-2 text-xs font-medium text-slate-400">{m.choose_an_order({}, { locale })}</div>
+                  <div class="mt-1 space-y-1">
+                    {
+                      sortOptions.map((option) => (
+                        <button
+                          type="button"
+                          class:list={[
+                            'flex w-full items-center justify-between rounded-md border px-3 py-2.5 text-left focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
+                            option.value === defaultSortOption.value
+                              ? 'border-blue-400/40 bg-blue-500/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                              : 'border-transparent text-slate-200 hover:border-white/10 hover:bg-white/5 hover:text-white',
+                          ]}
+                          data-sort-option
+                          data-sort-value={option.value}
+                          data-sort-label={option.label}
+                          aria-pressed={option.value === defaultSortOption.value ? 'true' : 'false'}
+                        >
+                          <span class="min-w-0">
+                            <span class="block text-sm font-semibold">{option.label}</span>
+                            <span class="mt-1 block text-xs text-slate-400">{option.description}</span>
+                          </span>
+                          <svg
+                            aria-hidden="true"
+                            class:list={['h-5 w-5 shrink-0 text-blue-300', option.value === defaultSortOption.value ? 'opacity-100' : 'opacity-0']}
+                            data-sort-check
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                           </svg>
-                          {formatCount(item.npmDownloads)}/w
-                        </span>
-                      )}
-                      <span class="inline-flex items-center text-sm text-gray-200">
-                        <svg class="mr-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                        {formatCount(item.githubStars ?? 0)}
-                      </span>
-                    </div>
-                  </div>
-                  <div class="flex gap-2">
-                    {item.hasSiteDocs ? (
-                      <a
-                        href={item.docsHref}
-                        class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
-                      >
-                        Documentation
-                      </a>
-                    ) : (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
-                      >
-                        Docs
-                        <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
-                      </a>
-                    )}
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center justify-center rounded-lg border border-gray-600 bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-700"
-                    >
-                      GitHub
-                      <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
-                    </a>
+                        </button>
+                      ))
+                    }
                   </div>
                 </div>
               </div>
-            ))
-          }
+            </div>
+
+            <div id="plugins-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {
+                plugins.map((item) => (
+                  <div
+                    class="plugin-card group relative rounded-lg border border-gray-700/80 bg-gray-950/45 p-5 transition-colors duration-200 hover:border-gray-500/70 hover:bg-gray-900/65"
+                    data-title={item.title.toLowerCase()}
+                    data-description={item.description.toLowerCase()}
+                    data-author={item.author.toLowerCase()}
+                    data-package={item.name?.toLowerCase() ?? ''}
+                    data-category={item.category}
+                    data-category-label={item.categoryLabel.toLowerCase()}
+                    data-downloads={item.npmDownloads ?? 0}
+                    data-stars={item.githubStars ?? 0}
+                  >
+                    <div class="relative">
+                      <div class="mb-4 flex items-start justify-between gap-3 text-sm font-semibold">
+                        {item.icon && <PluginIcon icon={item.icon} name={item.title} className="shrink-0" />}
+                        <span class="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-blue-200">{item.categoryLabel}</span>
+                      </div>
+                      <h3 class="font-pj mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
+                      <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
+                      <div class="mb-4 flex items-center justify-between gap-3">
+                        <span class="min-w-0 truncate font-mono text-xs text-gray-500" title={item.name ?? item.author}>
+                          {item.name ?? item.author}
+                        </span>
+                        <div class="flex shrink-0 gap-3">
+                          {item.npmDownloads !== undefined && (
+                            <span class="inline-flex items-center text-sm text-gray-200">
+                              <svg class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                              </svg>
+                              {formatCount(item.npmDownloads)}/m
+                            </span>
+                          )}
+                          <span class="inline-flex items-center text-sm text-gray-200">
+                            <svg class="mr-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            {formatCount(item.githubStars ?? 0)}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="flex gap-2">
+                        {item.hasSiteDocs ? (
+                          <a
+                            href={item.docsHref}
+                            class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
+                          >
+                            Documentation
+                          </a>
+                        ) : (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
+                          >
+                            Docs
+                            <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
+                          </a>
+                        )}
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center justify-center rounded-lg border border-gray-600 bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-700"
+                        >
+                          GitHub
+                          <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <ProductTestimonials
+      eyebrow="Plugin proof"
+      title="Capacitor teams often start with plugins and stay for the release workflow"
+      description="Short reviews from developers using Capgo plugins and updater workflows in production Capacitor apps."
+      testimonials={productTestimonials.plugins}
+    />
 
     <!-- Hero Section -->
     <section class="relative px-6 pt-24 pb-16 lg:px-8">
@@ -414,6 +504,9 @@ const content = {
         </div>
       </div>
     </section>
+
+    <ProductVideoSection variant="gray" youtubeId={productVideos.plugins.youtubeId} title={productVideos.plugins.title} description={productVideos.plugins.description} />
+
     <section class="px-6 py-12 lg:px-8">
       <div class="mx-auto max-w-7xl">
         <!-- More Options Section -->
@@ -474,21 +567,26 @@ const content = {
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('plugin-search') as HTMLInputElement
+      const searchInput = document.getElementById('plugin-search') as HTMLInputElement | null
+      const categorySelect = document.getElementById('plugin-category-select') as HTMLSelectElement | null
+      const categoryFilterButtons = Array.from(document.querySelectorAll('[data-category-filter]')) as HTMLButtonElement[]
       const sortDropdown = document.getElementById('plugin-sort-dropdown') as HTMLDivElement | null
       const sortButton = document.getElementById('plugin-sort-button') as HTMLButtonElement | null
       const sortButtonLabel = document.getElementById('plugin-sort-current-label') as HTMLSpanElement | null
       const sortMenu = document.getElementById('plugin-sort-menu') as HTMLDivElement | null
       const sortChevron = document.getElementById('plugin-sort-chevron') as SVGElement | null
       const sortOptionButtons = Array.from(document.querySelectorAll('[data-sort-option]')) as HTMLButtonElement[]
-      const pluginsGrid = document.getElementById('plugins-grid') as HTMLElement
+      const pluginsGrid = document.getElementById('plugins-grid') as HTMLElement | null
       const pluginCards = document.querySelectorAll('.plugin-card') as NodeListOf<HTMLElement>
       const resultsCount = document.getElementById('search-results-count')
       const totalPlugins = pluginCards.length
       let currentSort = sortButton?.dataset.sortValue || 'downloads'
+      let currentCategory = 'all'
 
       const activeSortClasses = ['border-blue-400/40', 'bg-blue-500/15', 'text-white', 'shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]']
       const inactiveSortClasses = ['border-transparent', 'text-slate-200', 'hover:border-white/10', 'hover:bg-white/5', 'hover:text-white']
+      const activeCategoryClasses = ['bg-blue-500/15', 'text-white']
+      const inactiveCategoryClasses = ['text-gray-300', 'hover:bg-gray-900/80', 'hover:text-white']
 
       function isSortMenuOpen() {
         return sortButton?.getAttribute('aria-expanded') === 'true'
@@ -538,27 +636,38 @@ const content = {
       }
 
       function updateResultsCount(visibleCount: number) {
-        if (resultsCount) {
-          if (searchInput.value.trim() === '') {
-            resultsCount.textContent = ''
-          } else {
-            resultsCount.textContent = `Showing ${visibleCount} of ${totalPlugins} plugins`
-          }
+        if (!resultsCount) return
+
+        const searchTerm = searchInput?.value.trim() ?? ''
+        if (searchTerm === '' && currentCategory === 'all') {
+          resultsCount.textContent = ''
+          return
         }
+
+        resultsCount.textContent = `Showing ${visibleCount} of ${totalPlugins} plugins`
       }
 
       function filterPlugins() {
-        const searchTerm = searchInput.value.toLowerCase().trim()
+        const searchTerm = searchInput?.value.toLowerCase().trim() ?? ''
         let visibleCount = 0
 
         pluginCards.forEach((card) => {
           const title = card.getAttribute('data-title') || ''
           const description = card.getAttribute('data-description') || ''
           const author = card.getAttribute('data-author') || ''
+          const packageName = card.getAttribute('data-package') || ''
+          const category = card.getAttribute('data-category') || ''
+          const categoryLabel = card.getAttribute('data-category-label') || ''
+          const matchesCategory = currentCategory === 'all' || category === currentCategory
+          const matchesSearch =
+            searchTerm === '' ||
+            title.includes(searchTerm) ||
+            description.includes(searchTerm) ||
+            author.includes(searchTerm) ||
+            packageName.includes(searchTerm) ||
+            categoryLabel.includes(searchTerm)
 
-          const matches = title.includes(searchTerm) || description.includes(searchTerm) || author.includes(searchTerm)
-
-          if (matches) {
+          if (matchesCategory && matchesSearch) {
             card.style.display = ''
             visibleCount++
           } else {
@@ -569,7 +678,26 @@ const content = {
         updateResultsCount(visibleCount)
       }
 
+      function syncCategorySelection(category: string) {
+        currentCategory = category
+
+        if (categorySelect && categorySelect.value !== category) {
+          categorySelect.value = category
+        }
+
+        categoryFilterButtons.forEach((button) => {
+          const isActive = button.dataset.category === category
+          button.setAttribute('aria-pressed', String(isActive))
+          activeCategoryClasses.forEach((className) => button.classList.toggle(className, isActive))
+          inactiveCategoryClasses.forEach((className) => button.classList.toggle(className, !isActive))
+        })
+
+        filterPlugins()
+      }
+
       function sortPlugins(sortBy: string) {
+        if (!pluginsGrid) return
+
         const cardsArray = Array.from(pluginCards)
 
         cardsArray.sort((a, b) => {
@@ -588,7 +716,6 @@ const content = {
           }
         })
 
-        // Re-append cards in sorted order
         cardsArray.forEach((card) => {
           pluginsGrid.appendChild(card)
         })
@@ -596,8 +723,19 @@ const content = {
 
       if (searchInput) {
         searchInput.addEventListener('input', filterPlugins)
-        updateResultsCount(totalPlugins)
       }
+
+      if (categorySelect) {
+        categorySelect.addEventListener('change', () => {
+          syncCategorySelection(categorySelect.value)
+        })
+      }
+
+      categoryFilterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          syncCategorySelection(button.dataset.category || 'all')
+        })
+      })
 
       if (sortButton && sortMenu && sortDropdown && sortOptionButtons.length > 0) {
         sortButton.addEventListener('click', () => {
@@ -668,6 +806,7 @@ const content = {
 
       syncSortSelection(currentSort)
       sortPlugins(currentSort)
+      syncCategorySelection(currentCategory)
     })
   </script>
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">

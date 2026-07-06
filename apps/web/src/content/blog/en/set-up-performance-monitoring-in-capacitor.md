@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-23T05:36:41.635Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67df674387fa49042c75b4e1-1742708253934.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T21:25:40.000Z
+head_image: /blog-images/set-up-performance-monitoring-in-capacitor.webp
+head_image_alt: "Set Up Performance Monitoring in Capacitor Capgo blog illustration"
 keywords: Capacitor, performance monitoring, Firebase, Sentry, mobile app development, error tracking, monitoring tools
 tag: Development, Mobile, Updates
 published: true
@@ -20,7 +20,7 @@ next_blog: ''
 
 -   **Why Monitor Performance**: Identify crashes, optimize resource usage, and improve response times.
 -   **Tools to Use**:
-    -   **Firebase**: Real-time performance data, network monitoring, and custom event tracking.
+    -   **Firebase**: Real-time performance data, network monitoring, and custom event tracking via [@capgo/capacitor-firebase-performance](https://capgo.app/plugins/capacitor-firebase-performance/) and [@capgo/capacitor-firebase-crashlytics](https://capgo.app/plugins/capacitor-firebase-crashlytics/).
     -   **Sentry**: Detailed error tracking, stack trace analysis, and real-time notifications.
 -   **Setup Steps**:
     -   Install Firebase or Sentry SDK.
@@ -81,7 +81,7 @@ Start by adding the Firebase SDK to your project and configuring it for your pla
 
 -   **Install Firebase Dependencies**
 
-Run the following commands to install the necessary Firebase packages:
+Run the following commands to install the necessary Firebase packages. See the [@capgo/capacitor-firebase-performance](https://capgo.app/plugins/capacitor-firebase-performance/) and [@capgo/capacitor-firebase-crashlytics](https://capgo.app/plugins/capacitor-firebase-crashlytics/) plugin pages for full setup details:
 
 ```bash
 npm install @capgo/capacitor-firebase-performance

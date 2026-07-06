@@ -9,17 +9,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const publishedPosts = await getCollection('blog', ({ data }) => data.published !== false)
   const tags: { [k: string]: CollectionEntry<'blog'>[] } = {}
   publishedPosts.forEach((article) =>
-    article.data.tag.split(',').forEach((props) => {
-      if (!tags[props]) tags[props] = []
-      tags[props].push(article)
+    article.data.tag.split(',').forEach((rawTag) => {
+      const tag = rawTag.trim()
+      if (!tag) return
+      if (!tags[tag]) tags[tag] = []
+      tags[tag].push(article)
     }),
   )
-  return Object.entries(tags).map(([slug, posts]) => ({ params: { slug: slugify(slug) }, props: { posts } }))
+  return Object.entries(tags).map(([tag, posts]) => ({ params: { slug: slugify(tag) }, props: { posts, currentCategory: tag } }))
 }
 
 const allPosts = Astro.props.posts as CollectionEntry<'blog'>[]
+const currentCategory = Astro.props.currentCategory as string
+const categorySourcePosts = await getCollection('blog', ({ data }) => data.published !== false && data.locale === Astro.locals.locale)
 // Filter posts by current locale
 const localePosts = allPosts.filter((post) => post.data.locale === Astro.locals.locale)
 ---
 
-<BlogListing allPosts={localePosts} />
+<BlogListing allPosts={localePosts} categorySourcePosts={categorySourcePosts} currentCategory={currentCategory} />

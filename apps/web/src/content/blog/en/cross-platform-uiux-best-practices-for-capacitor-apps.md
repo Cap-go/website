@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-24T04:45:24.942Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e0c60ea2808c1172f2f7c6-1742791542149.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/cross-platform-uiux-best-practices-for-capacitor-apps.webp
+head_image_alt: "\"Cross-Platform UI/UX: Best Practices for Capacitor Apps\" Capgo blog illustration"
 keywords: Capacitor, UI/UX design, cross-platform apps, mobile development, responsive design, Ionic, app updates, performance optimization
 tag: Development, Mobile, Updates
 published: true

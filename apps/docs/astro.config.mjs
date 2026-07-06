@@ -1,3 +1,4 @@
+import { unified } from '@astrojs/markdown-remark'
 import starlight from '@astrojs/starlight'
 import starlightDocSearch from '@astrojs/starlight-docsearch'
 import { defineConfig } from 'astro/config'
@@ -31,6 +32,10 @@ export default defineConfig({
     },
   }),
   redirects: {
+    '/docs/plugin/api/': {
+      status: 301,
+      destination: '/docs/plugins/updater/api/',
+    },
     '/docs/getting-started/': {
       status: 301,
       destination: '/docs/getting-started/quickstart/',
@@ -43,6 +48,9 @@ export default defineConfig({
       status: 301,
       destination: '/docs/plugins/updater/commonproblems/',
     },
+  },
+  markdown: {
+    processor: unified({ gfm: true, smartypants: true }),
   },
   integrations: [
     ...buildSharedIntegrations({
@@ -76,6 +84,7 @@ export default defineConfig({
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/apps/docs/' },
       components: {
         Head: './src/components/doc/Head.astro',
+        Hero: './src/components/doc/Hero.astro',
         LanguageSelect: './src/components/doc/LanguageSelect.astro',
         PageTitle: './src/components/doc/PageTitle.astro',
       },

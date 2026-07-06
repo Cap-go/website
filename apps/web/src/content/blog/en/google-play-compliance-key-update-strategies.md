@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-22T02:40:19.077Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/6806fd96e572faef8699cea8-1745289630520.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/google-play-compliance-key-update-strategies.webp
+head_image_alt: "\"Google Play Compliance: Key Update Strategies\" Capgo blog illustration"
 keywords: Google Play compliance, app updates, data privacy, content policies, account security
 tag: Development, Mobile, Security
 published: true

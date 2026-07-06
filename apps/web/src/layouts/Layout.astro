@@ -1,13 +1,45 @@
 ---
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
+import MetaPixel from '../components/MetaPixel.astro'
+import MetaPixelNoscript from '../components/MetaPixelNoscript.astro'
 import SEO from '../components/SEO.astro'
 import PostHog from '../components/posthog.astro'
 import WebMcpTools from '../components/WebMcpTools.astro'
 import globalStylesHref from '../css/global.css?url'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { getCollection } from 'astro:content'
+
+type FooterBlogPost = {
+  title: string
+  href: string
+  tag?: string
+}
 
 const content = Astro.props.content ?? {}
 const disableThirdPartyScripts = Astro.props.disableThirdPartyScripts ?? false
+const hideChrome = Astro.props.hideChrome ?? false
+const footerBlogCopy = Astro.props.footerBlogCopy
+const defaultFooterBlogSlugs = ['how-live-updates-for-capacitor-work', 'ultimate-guide-to-capacitor-ota-updates', '5-security-best-practices-for-mobile-app-live-updates']
+const footerBlogSlugs = (Astro.props.footerBlogSlugs ?? defaultFooterBlogSlugs) as string[]
+const footerBlogEntries = footerBlogSlugs.length
+  ? await getCollection('blog', ({ data }) => data.published !== false && footerBlogSlugs.includes(data.slug) && (data.locale === Astro.locals.locale || data.locale === 'en'))
+  : []
+
+const footerBlogPosts = footerBlogSlugs
+  .map((slug: string): FooterBlogPost | null => {
+    const entry =
+      footerBlogEntries.find((post) => post.data.slug === slug && post.data.locale === Astro.locals.locale) ??
+      footerBlogEntries.find((post) => post.data.slug === slug && post.data.locale === 'en')
+    if (!entry) return null
+
+    return {
+      title: entry.data.title,
+      href: getRelativeLocaleUrl(entry.data.locale, `blog/${entry.data.slug}`),
+      tag: entry.data.tag?.split(',')[0]?.trim(),
+    }
+  })
+  .filter((post): post is FooterBlogPost => Boolean(post))
 
 const isLocalhost = Astro.url.origin.includes('localhost:')
 const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
@@ -21,21 +53,23 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealBold.woff" crossorigin />
     <link rel="stylesheet" href={globalStylesHref} />
     <SEO {...content} />
+    {enableThirdPartyScripts && <MetaPixel />}
     {enableThirdPartyScripts && <PostHog />}
   </head>
   <body class="bg-gray-900 text-pretty text-white antialiased">
+    {enableThirdPartyScripts && <MetaPixelNoscript />}
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
     >
       Skip to main content
     </a>
-    <div class="min-h-dvh overflow-x-hidden">
-      <Header />
+    <div class="min-h-dvh overflow-x-clip">
+      {!hideChrome && <Header />}
       <main id="main-content">
         <slot />
       </main>
-      <Footer />
+      {!hideChrome && <Footer blogPosts={footerBlogPosts} blogCopy={footerBlogCopy} />}
     </div>
     {
       enableThirdPartyScripts && (
@@ -51,6 +85,17 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     }
     <WebMcpTools />
     {enableThirdPartyScripts && <script is:inline type="text/javascript" src="https://widget.senja.io/js/iframeResizer.min.js" />}
-    {enableThirdPartyScripts && <script is:inline defer data-website-id="66bcb7fa4038d5b1e5ea89eb" data-domain="capgo.app" src="https://datafa.st/js/script.js" />}
+    {
+      enableThirdPartyScripts && (
+        <script
+          is:inline
+          defer
+          data-website-id="dfid_hu0aLqOvk52g6hykzIZei"
+          data-domain="capgo.app"
+          data-api-url="https://dtf.capgo.app/api/events"
+          src="https://dtf.capgo.app/js/script.js"
+        />
+      )
+    }
   </body>
 </html>

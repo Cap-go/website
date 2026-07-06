@@ -180,8 +180,12 @@ function normalizeLocale(locale: string | null): string | null {
   return locales.includes(normalized as (typeof locales)[number]) ? normalized : null
 }
 
-function getUdidResultPath(locale: string | null): string {
-  return locale && locale !== defaultLocale ? `/${locale}${UDID_RESULT_PATH}` : UDID_RESULT_PATH
+function getRouteLocale(searchParams: URLSearchParams): string | null {
+  return normalizeLocale(searchParams.get('routeLocale') ?? searchParams.get('locale'))
+}
+
+function getUdidResultPath(routeLocale: string | null): string {
+  return routeLocale && routeLocale !== defaultLocale ? `/${routeLocale}${UDID_RESULT_PATH}` : UDID_RESULT_PATH
 }
 
 async function parseJsonBody(request: Request): Promise<Record<string, unknown>> {
@@ -223,11 +227,11 @@ async function handleUdidProfile(request: Request, env: ToolApiEnv): Promise<Res
   try {
     const baseUrl = new URL(request.url)
     const challenge = crypto.randomUUID()
-    const locale = normalizeLocale(baseUrl.searchParams.get('locale'))
+    const routeLocale = getRouteLocale(baseUrl.searchParams)
     const callbackUrl = new URL(UDID_CALLBACK_PATH, baseUrl)
     callbackUrl.searchParams.set('challenge', challenge)
-    if (locale) {
-      callbackUrl.searchParams.set('locale', locale)
+    if (routeLocale) {
+      callbackUrl.searchParams.set('routeLocale', routeLocale)
     }
 
     const profile = createUdidMobileconfig({
@@ -264,10 +268,10 @@ async function handleUdidProfile(request: Request, env: ToolApiEnv): Promise<Res
 
 async function handleUdidCallback(request: Request): Promise<Response> {
   const requestUrl = new URL(request.url)
-  const locale = normalizeLocale(requestUrl.searchParams.get('locale'))
+  const routeLocale = getRouteLocale(requestUrl.searchParams)
 
   if (request.method === 'GET') {
-    return redirect(locale && locale !== defaultLocale ? `/${locale}/tools/ios-udid-finder/` : '/tools/ios-udid-finder/')
+    return redirect(routeLocale && routeLocale !== defaultLocale ? `/${routeLocale}/tools/ios-udid-finder/` : '/tools/ios-udid-finder/')
   }
 
   const rawBody = await request.text()
@@ -287,7 +291,7 @@ async function handleUdidCallback(request: Request): Promise<Response> {
   const secure = requestUrl.protocol === 'https:'
   const headers = new Headers({
     ...NO_STORE_HEADERS,
-    Location: getUdidResultPath(locale),
+    Location: getUdidResultPath(routeLocale),
   })
   appendCookie(headers, UDID_RESULT_COOKIE, encodePayload(payload), UDID_RESULT_API_PATH, 300, secure, true)
   appendCookie(headers, UDID_CHALLENGE_COOKIE, '', UDID_CALLBACK_PATH, 0, secure, true)

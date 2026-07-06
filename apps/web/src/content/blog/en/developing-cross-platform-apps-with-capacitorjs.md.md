@@ -8,9 +8,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-12-02T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /create_app_with_js.webp
-head_image_alt: Cross-Platform App Development
+head_image_alt: "'Developing Cross-Platform Apps with CapacitorJS: A Step-by-Step Guide' Capgo blog illustration"
 keywords: Capacitor, cross-platform, PWA, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true

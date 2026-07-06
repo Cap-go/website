@@ -1,3 +1,5 @@
+import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
 type Locale = (typeof SUPPORTED_LOCALES)[number]
@@ -144,6 +146,13 @@ type WorkerExecutionContext = {
   waitUntil(promise: Promise<unknown>): void
 }
 
+const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
+const SKIP_AI_CRAWLER_TRACKING_HEADER = 'X-Capgo-Skip-AI-Crawler-Tracking'
+
+function trackAICrawler(request: Request, response: Response, ctx?: WorkerExecutionContext): Response {
+  trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
+  return response
+}
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
 const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast'
@@ -318,12 +327,31 @@ function localizedPath(basePath: string, locale: string): string {
   if (locale === DEFAULT_LOCALE) return normalizedBasePath
   return normalizedBasePath === '/' ? `/${locale}/` : `/${locale}${normalizedBasePath}`
 }
-
 function localizedAbsoluteUrl(requestUrl: URL, locale: string, basePath: string): string {
   const url = new URL(requestUrl)
   url.pathname = localizedPath(basePath, locale)
   url.search = ''
   return url.toString()
+}
+
+function rewriteRedirectPath(pathname: string): string {
+  if (pathname === '/docs/cli' || pathname === '/docs/cli/') return '/docs/cli/overview/'
+  if (pathname === '/docs/getting-started' || pathname === '/docs/getting-started/') return '/docs/getting-started/quickstart/'
+  if (pathname === '/docs/plugin/api' || pathname === '/docs/plugin/api/') return '/docs/plugins/updater/api/'
+  if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {
+    return pathname.replace(/^\/docs\/cli\/cloud-build(?=\/|$)/, '/docs/builder')
+  }
+  return pathname
+}
+
+function withTrailingSlash(pathname: string): string {
+  if (pathname === '/' || pathname.endsWith('/')) return pathname
+  if (/\.[a-z0-9]{2,8}$/i.test(pathname) && !pathname.endsWith('.html')) return pathname
+  return `${pathname}/`
+}
+
+function canonicalInternalPathname(pathname: string): string {
+  return withTrailingSlash(rewriteRedirectPath(stripLocalePrefix(pathname)))
 }
 
 function shouldBypassTranslation(pathname: string): boolean {
@@ -366,8 +394,7 @@ function localizeHref(value: string, locale: Locale, requestUrl: URL): string {
   if (url.host !== requestUrl.host) return value
   if (hasExplicitLocalePath(trimmed, url)) return value
   if (shouldBypassTranslation(url.pathname)) return value
-
-  url.pathname = localizedPath(url.pathname, locale)
+  url.pathname = localizedPath(canonicalInternalPathname(url.pathname), locale)
   if (trimmed.startsWith('//')) return `//${url.host}${url.pathname}${url.search}${url.hash}`
   if (isHttpUrl(trimmed)) return url.toString()
   return `${url.pathname}${url.search}${url.hash}`
@@ -377,6 +404,7 @@ function createOriginRequest(request: Request, originUrl: URL): Request {
   const headers = new Headers(request.headers)
   headers.set('Accept-Language', DEFAULT_LOCALE)
   headers.set('X-Capgo-Translation-Origin', 'english')
+  headers.set(SKIP_AI_CRAWLER_TRACKING_HEADER, '1')
   headers.delete('If-None-Match')
   headers.delete('If-Modified-Since')
 
@@ -2586,26 +2614,26 @@ export default {
   async fetch(request: Request, env: Env, ctx?: WorkerExecutionContext): Promise<Response> {
     const requestUrl = new URL(request.url)
     if (env.TRANSLATION_TEST_MODE === '1' && requestUrl.pathname.startsWith(TRANSLATION_TEST_ROUTE_PREFIX)) {
-      return await handleTranslationTestRequest(request, env, requestUrl)
+      return trackAICrawler(request, await handleTranslationTestRequest(request, env, requestUrl), ctx)
     }
 
     const locale = extractLocale(requestUrl.pathname)
 
-    if (!locale) return await fetchEnglishOrigin(request, env, requestUrl)
+    if (!locale) return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
 
     if (request.method !== 'GET' && request.method !== 'HEAD') {
-      return await fetchEnglishOrigin(request, env, requestUrl)
+      return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
     }
 
     if (shouldBypassTranslation(requestUrl.pathname)) {
-      return await fetchEnglishOrigin(request, env, requestUrl)
+      return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
     }
 
     try {
-      return await serveTranslated(request, env, requestUrl, locale, ctx)
+      return trackAICrawler(request, await serveTranslated(request, env, requestUrl, locale, ctx), ctx)
     } catch (error) {
       console.error('Translation worker failed', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
-      return temporaryEnglishRedirectResponse(requestUrl, request.method === 'HEAD')
+      return trackAICrawler(request, temporaryEnglishRedirectResponse(requestUrl, request.method === 'HEAD'), ctx)
     }
   },
   async queue(batch: MessageBatch<TranslationJob>, env: Env): Promise<void> {

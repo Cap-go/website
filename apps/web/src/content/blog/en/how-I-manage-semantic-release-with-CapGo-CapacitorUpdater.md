@@ -8,9 +8,9 @@ author: Rupert Barrow
 author_image_url: 'https://avatars.githubusercontent.com/u/48629751?v=4'
 author_url: 'https://linkedin.com/in/rbarrow'
 created_at: 2024-09-22T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /rapido_cloud_study_case.webp
-head_image_alt: Study case rapido cloud
+head_image_alt: "How Rapido Cloud manage Semantic Release with Capgo CapacitorUpdater Capgo blog illustration"
 keywords: semantic release, semantic-release, Capgo, CapacitorUpdater, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Case Study
 published: true

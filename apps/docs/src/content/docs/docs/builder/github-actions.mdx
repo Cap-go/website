@@ -1,0 +1,462 @@
+---
+title: GitHub Actions
+description: Set up CI/CD with Capgo Build using GitHub Actions to automate iOS and Android builds on push, tag, or manual trigger.
+sidebar:
+  order: 5
+---
+
+import { Steps, Card, CardGrid, Aside, LinkCard } from '@astrojs/starlight/components';
+
+Automate your iOS and Android builds directly from your GitHub repository. With one workflow file and a handful of repository secrets, every push, tag, or manual trigger can produce signed, store-ready apps — without anyone on the team needing a Mac, Xcode, or Android Studio installed.
+
+## What You Get
+
+<CardGrid>
+  <Card title="Hands-off Releases" icon="rocket">
+    Tag a release in Git and your signed iOS and Android binaries are submitted to TestFlight and Play Store automatically.
+  </Card>
+
+  <Card title="No Local Setup" icon="laptop">
+    Contributors on Windows or Linux can trigger iOS builds. No Xcode, no provisioning hassles, no shared signing certificates floating around laptops.
+  </Card>
+
+  <Card title="Scoped Secrets" icon="setting">
+    Credentials live in GitHub repository secrets, scoped to your repo and visible only to the workflow runner. Easy to rotate, easy to audit.
+  </Card>
+
+  <Card title="Parallel Builds" icon="list-format">
+    Build iOS and Android at the same time with a matrix job. A typical release finishes in under 10 minutes.
+  </Card>
+</CardGrid>
+
+## Prerequisites
+
+Before setting up the workflow, make sure you have:
+
+- A Capgo account with an active subscription and a [Capgo API key](/docs/webapp/api-keys/)
+- Your app registered in Capgo (`bunx @capgo/cli@latest app add` if not)
+- Build credentials configured locally with `bunx @capgo/cli@latest build init` — see [Managing Credentials](/docs/builder/credentials/) for the wizard walkthrough
+- A successful local build (`bunx @capgo/cli@latest build request com.example.app --platform android --build-mode debug`) — CI is not the place to debug your first build
+- The [GitHub CLI (`gh`)](https://cli.github.com/) installed and authenticated (`gh auth login`)
+
+<Aside>
+The flow below assumes credentials already exist in your local credentials store (from `build init`). If you haven't set them up yet, do that first — the wizard handles certificate creation, provisioning profiles, keystores, and Play Store service accounts interactively.
+</Aside>
+
+## Setup
+
+The Capgo CLI can export your local credentials as a ready-to-use `.env` file. Combined with `gh secret set -f`, this turns the entire CI/CD setup into three commands — no manual base64 encoding, no JSON wrangling, no copy-paste-secret-by-secret.
+
+<Steps>
+
+1. **Add your Capgo API key as a repository secret**
+
+   The API key isn't part of the per-app credential store, so add it once manually:
+
+   ```bash
+   gh secret set CAPGO_TOKEN --body "your_capgo_api_key_here"
+   ```
+
+   Generate the key in the [Capgo dashboard](https://web.capgo.app/app/account/apikeys) with **upload** permissions or higher.
+
+2. **Export your credentials to a `.env` file**
+
+   Run the interactive credentials manager:
+
+   ```bash
+   bunx @capgo/cli@latest build credentials manage --appId com.example.app
+   ```
+
+   In the TUI, select **Export to .env**. The CLI writes `.env.capgo.<appId>` to your current directory with mode `0600` (owner-readable only) — for example, `.env.capgo.com.example.app`. When both iOS and Android are configured, both platforms' secrets land in the same file under `# === IOS ===` and `# === ANDROID ===` section headers. iOS and Android env-var names are disjoint, so combining them is conflict-free.
+
+   <Aside type="tip" title="Need a per-platform file?">
+   Pass `--platform ios` (or `--platform android`) to scope the manager to one platform. The export then produces a per-platform file like `.env.capgo.com.example.app.ios`. Useful when iOS and Android secrets live in different repos or environments.
+   </Aside>
+
+   <Aside type="caution" title="Shared config keys">
+   A handful of config toggles (`BUILD_OUTPUT_UPLOAD_ENABLED`, `BUILD_OUTPUT_RETENTION_SECONDS`, `SKIP_BUILD_NUMBER_BUMP`, `CAPGO_IOS_DISTRIBUTION`) can be stored under each platform independently and may have drifted apart. If the manager finds drift, it prints the conflicting keys, asks for explicit confirmation before writing, and embeds the conflict list as a comment at the top of the file. Re-export with `--platform` if you need to preserve per-platform values.
+   </Aside>
+
+3. **Push the `.env` file to GitHub Actions secrets**
+
+   The `gh secret set -f` command reads a dotenv file and creates one repository secret per `KEY=value` line:
+
+   ```bash
+   gh secret set -f .env.capgo.com.example.app
+   ```
+
+   That's it — every secret your workflow needs is now in GitHub. Verify with `gh secret list`.
+
+   <Aside type="caution" title="Don't commit the .env file">
+   It contains plaintext signing material. Once you've pushed it to GitHub:
+
+   ```bash
+   echo '.env.capgo.*' >> .gitignore
+   rm .env.capgo.*
+   ```
+
+   Re-export anytime you need to rotate credentials — the file isn't a long-lived artifact.
+   </Aside>
+
+4. **Create the workflow file**
+
+   Add `.github/workflows/capgo-build.yml` to your repository. Pick one of the three trigger patterns below depending on how you want to fire builds.
+
+</Steps>
+
+### What ends up in your secrets
+
+For reference, `gh secret set -f` will create these repository secrets (your workflow YAML references them by these exact names):
+
+| Platform | Secrets created |
+|----------|-----------------|
+| iOS | `BUILD_CERTIFICATE_BASE64`, `P12_PASSWORD`, `CAPGO_IOS_PROVISIONING_MAP_BASE64`, `APPLE_KEY_ID`, `APPLE_ISSUER_ID`, `APPLE_KEY_CONTENT`, `APP_STORE_CONNECT_TEAM_ID` |
+| Android | `ANDROID_KEYSTORE_FILE`, `KEYSTORE_KEY_ALIAS`, `KEYSTORE_KEY_PASSWORD`, `KEYSTORE_STORE_PASSWORD`, `PLAY_CONFIG_JSON` |
+| (added manually) | `CAPGO_TOKEN` |
+
+You don't need to memorise these — the workflow examples below already reference all of them.
+
+## Workflow Examples
+
+The three examples below cover the most common patterns. They all use the same shape: check out the repo, install dependencies, build the web assets, sync to native, then call Capgo Build with credentials passed as environment variables.
+
+### 1. Manual Trigger
+
+Lets anyone with write access fire a build from the **Actions** tab in GitHub with a platform dropdown. Useful for ad-hoc test builds or kicking off a release on demand.
+
+```yaml
+# .github/workflows/capgo-build-manual.yml
+name: Capgo Build (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to build'
+        required: true
+        default: 'android'
+        type: choice
+        options: [ios, android, both]
+      mode:
+        description: 'Build mode'
+        required: true
+        default: 'debug'
+        type: choice
+        options: [debug, release]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: bunx cap sync
+
+      - name: Trigger Capgo Build
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          CAPGO_IOS_PROVISIONING_MAP_BASE64: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP_BASE64 }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+        run: |
+          bunx @capgo/cli@latest build request com.example.app \
+            --platform ${{ inputs.platform }} \
+            --build-mode ${{ inputs.mode }}
+```
+
+Replace `com.example.app` with your app ID. Once committed, go to **Actions → Capgo Build (Manual) → Run workflow** to trigger it.
+
+### 2. Release on Tag
+
+Builds and ships both platforms in parallel whenever you push a version tag like `v1.4.0`. This is the most common production setup — `git tag v1.4.0 && git push --tags` becomes your release command.
+
+```yaml
+# .github/workflows/capgo-build-release.yml
+name: Capgo Build (Release)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ios, android]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: bunx cap sync ${{ matrix.platform }}
+
+      - name: Build ${{ matrix.platform }}
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          # iOS
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          CAPGO_IOS_PROVISIONING_MAP_BASE64: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP_BASE64 }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          # Android
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+        run: |
+          bunx @capgo/cli@latest build request com.example.app \
+            --platform ${{ matrix.platform }} \
+            --build-mode release
+```
+
+The matrix runs iOS and Android in parallel on separate runners. Setting `fail-fast: false` means a failed iOS build won't cancel the in-progress Android build (and vice versa) — useful when one platform has a transient signing issue.
+
+<Aside>
+**About the version number:** Capgo Build auto-increments your build number on every release build. If you'd rather pin it to the tag, see [Skip build number bumping](#skip-build-number-bumping) below.
+</Aside>
+
+### 3. Debug Build on Push to Main
+
+Catches native build regressions early by producing a debug Android build on every push to `main`. Cheap to run, fast feedback, and you can skip Play Store upload to keep it purely a smoke test.
+
+```yaml
+# .github/workflows/capgo-build-main.yml
+name: Capgo Build (Main)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'android/**'
+      - 'ios/**'
+      - 'package.json'
+      - 'capacitor.config.*'
+
+jobs:
+  smoke-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: bunx cap sync android
+
+      - name: Smoke build (Android debug)
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+        run: |
+          bunx @capgo/cli@latest build request com.example.app \
+            --platform android \
+            --build-mode debug \
+            --no-playstore-upload \
+            --output-upload
+```
+
+The `paths` filter ensures the workflow doesn't run on doc-only changes. `--no-playstore-upload` skips Play Store submission (no `PLAY_CONFIG_JSON` needed), and `--output-upload` produces a download URL for the resulting APK so you can install it on a test device.
+
+## Common Patterns
+
+### Skip Play Store / TestFlight upload
+
+For test builds, skip store submission: Android uses `--no-playstore-upload`; for iOS, build in ad-hoc mode with `--ios-distribution ad_hoc` (which never submits to the App Store). Combine either with `--output-upload` to get a time-limited download URL for the binary.
+
+### Submit the store release for review
+
+By default, release builds upload the signed artifact and leave the final store action under your control. For CI releases that should move directly into the store review flow, add `--submit-to-store-review`.
+
+Android uses your `PLAY_CONFIG_JSON` service account and submits the Google Play release instead of leaving it inactive. Add `--store-release-name`, `--store-release-notes`, and optional `--store-release-notes-locale` entries when you want the Play release to carry the same tag and localized changelogs as CI:
+
+```yaml
+- name: Submit Android release for review
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+    ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+    KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+    KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+    KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+    PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+  run: |
+    npx @capgo/cli@latest build request com.example.app \
+      --platform android \
+      --build-mode release \
+      --submit-to-store-review \
+      --store-release-name "${GITHUB_REF_NAME}" \
+      --store-release-notes "Release ${GITHUB_REF_NAME}" \
+      --store-release-notes-locale "en-US=Release ${GITHUB_REF_NAME}"
+```
+
+iOS uses the App Store Connect API key path and submits the processed TestFlight build to App Store review. It requires `app_store` distribution; `--ios-testflight-groups` is optional for external beta distribution and is not required for App Store review:
+
+```yaml
+- name: Submit iOS build to App Store review
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+    BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+    P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+    CAPGO_IOS_PROVISIONING_MAP: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP }}
+    APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+    APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+    APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+    APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+  run: |
+    npx @capgo/cli@latest build request com.example.app \
+      --platform ios \
+      --build-mode release \
+      --ios-distribution app_store \
+      --submit-to-store-review \
+      --store-release-name "${GITHUB_REF_NAME}" \
+      --store-release-notes "Release ${GITHUB_REF_NAME}" \
+      --store-release-notes-locale "en-US=Release ${GITHUB_REF_NAME}" \
+      --no-ios-automatic-release
+```
+
+<Aside type="caution">
+This path only submits the build artifact. Store listing metadata, tester groups, review contact details, compliance answers, and rollout choices still need to be ready in App Store Connect or Google Play Console before CI runs it.
+</Aside>
+
+### Read the build output URL and QR code
+
+Pass `--output-record <path>` to persist the build artifact URL and QR code to disk when the build succeeds, then read it back in subsequent steps with `build last-output`. No log scraping, no regex.
+
+```yaml
+- name: Build
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+    # ...credentials...
+  run: |
+    bunx @capgo/cli@latest build request com.example.app \
+      --platform android --build-mode debug \
+      --output-upload --output-retention 1d \
+      --output-record /tmp/build.json
+
+- name: Comment on PR with build URL
+  env:
+    GH_TOKEN: ${{ github.token }}
+  run: |
+    URL=$(bunx @capgo/cli@latest build last-output --path /tmp/build.json --field outputUrl)
+    if [ -n "$URL" ]; then
+      gh pr comment ${{ github.event.pull_request.number }} \
+        --body "Debug build ready: $URL"
+    fi
+```
+
+`--output-record /tmp/build.json` writes a JSON record (with `jobId`, `status`, `outputUrl`, `qrCodeAscii`, `qrCodePngPath`, `finishedAt`) and a PNG QR code alongside at `/tmp/build.json.qr.png`. `build last-output` reads it back:
+
+- `--field outputUrl` prints just the download URL (newline-terminated; safe for `URL=$(...)`).
+- `--field qrCodePngPath` prints the PNG path so you can upload it as a PR attachment.
+- `--qr` prints the rendered ASCII QR — drop it inside a Markdown code fence on the PR comment for inline scannability.
+
+<Aside>
+The record is only written on a successful build. Unsupported `schemaVersion` and unknown `--field` values exit non-zero, so a stale CLI in the runner fails loudly instead of silently emitting an empty URL.
+</Aside>
+
+### Skip build number bumping
+
+By default each release build increments the build number. To pin it to a value you control (for example, the Git tag), pass `--skip-build-number-bump`:
+
+```yaml
+- name: Set version from tag
+  run: |
+    VERSION="${GITHUB_REF#refs/tags/v}"
+    # Update package.json or your version source here
+    bun pm version "$VERSION" --no-git-tag-version
+
+- name: Build
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+    # ...credentials...
+  run: |
+    bunx @capgo/cli@latest build request com.example.app \
+      --platform ios --build-mode release \
+      --skip-build-number-bump
+```
+
+### Cache dependencies
+
+`bun install` is already fast enough that a JS-deps cache rarely pays off, but Capacitor's native dependencies (CocoaPods, Gradle) are worth caching for larger projects:
+
+```yaml
+- uses: actions/cache@v4
+  with:
+    path: |
+      ~/.bun/install/cache
+      ios/App/Pods
+      android/.gradle
+    key: ${{ runner.os }}-capgo-${{ hashFiles('**/bun.lock', '**/Podfile.lock') }}
+```
+
+## Troubleshooting
+
+| Symptom | Likely cause |
+|---------|--------------|
+| `CAPGO_TOKEN is not set` | Secret not added, or job has no access to it (check environment/branch protections) |
+| Missing iOS / Android credential errors | `gh secret set -f` was not run, or was run against a different repo. Verify with `gh secret list` |
+| `cap sync` fails in CI but works locally | A native plugin isn't in `package.json`, or you forgot `bun install` before `cap sync` |
+| Build succeeds but no app appears in App Store Connect | Wrong team ID, or the app record doesn't exist yet in App Store Connect. Verify locally with `bunx @capgo/cli@latest build credentials manage` |
+| Build hangs after "Uploading project" | Project archive is unusually large — check that `node_modules` isn't being uploaded (it shouldn't be by default) |
+| `Provisioning profile doesn't match bundle ID` | The provisioning map points at a different bundle ID than the one Xcode is signing. Re-run `build init` to refresh the profile, then re-export with `build credentials manage` |
+| Credentials changed locally but CI still fails | Don't forget to re-export and re-push: `bunx @capgo/cli@latest build credentials manage` → `gh secret set -f .env.capgo.<appId>` |
+| Manager refuses to write the combined file | Shared config keys differ between platforms — the manager warns and asks for confirmation. Either confirm to overwrite-one-wins, or re-export per-platform with `--platform ios` / `--platform android` |
+| `build last-output` prints an empty URL | The build did not pass `--output-upload`, or it failed before producing an artifact. `outputUrl` will be `null` in the record. Branch on `[ -n "$URL" ]` before using it |
+| `build last-output` errors with `Unsupported record schemaVersion` | The runner is on an older CLI than the one that wrote the record. Pin both producer and reader to the same explicit version (e.g. `bunx @capgo/cli@7.104.0 …` on both sides) rather than `@latest`, which floats and can drift between jobs |
+
+For platform-specific build failures, see the [Troubleshooting guide](/docs/builder/troubleshooting/).
+
+## Next Steps
+
+<CardGrid>
+  <LinkCard
+    title="Credentials Setup"
+    description="Full reference for preparing iOS and Android credentials as base64 secrets."
+    href="/docs/builder/credentials/"
+  />
+  <LinkCard
+    title="iOS Builds"
+    description="Deeper guide to certificates, profiles, and App Store submission."
+    href="/docs/builder/ios/"
+  />
+  <LinkCard
+    title="Android Builds"
+    description="Keystore setup, Play Store service accounts, and flavor handling."
+    href="/docs/builder/android/"
+  />
+  <LinkCard
+    title="Configuration Options"
+    description="All CLI flags and environment variables for fine-tuning your builds."
+    href="/docs/builder/configuration/"
+  />
+</CardGrid>
+

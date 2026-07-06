@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-25T03:05:27.312Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/680ae0495a08fca891774cdd-1745550383310.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/capacitor-apps-and-russias-data-laws-compliance-tips.webp
+head_image_alt: "\"Capacitor Apps and Russia's Data Laws: Compliance Tips\" Capgo blog illustration"
 keywords: Russia data laws, data localization, Capacitor app compliance, privacy policy, user consent
 tag: Development, Security, Updates
 published: true

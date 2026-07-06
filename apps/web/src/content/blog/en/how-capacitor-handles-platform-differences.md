@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-25T02:08:36.160Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e200987856e801f1f26fa8-1742868536741.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/how-capacitor-handles-platform-differences.webp
+head_image_alt: "How Capacitor Handles Platform Differences Capgo blog illustration"
 keywords: Capacitor, mobile development, cross-platform, iOS, Android, custom plugins, UI design, live updates
 tag: Development, Mobile, Updates
 published: true

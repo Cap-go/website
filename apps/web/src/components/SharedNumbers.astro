@@ -1,25 +1,16 @@
 ---
 import m from '@/copy/messages'
-import { shortNumber } from '@/services/misc'
 import dayjs from 'dayjs'
+import type { WebsiteStatsDisplay } from '@/lib/websiteStats'
+import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
+
+interface Props {
+  stats?: WebsiteStatsDisplay
+}
 
 const config = Astro.locals.runtimeConfig
-
-const stats = {
-  stars: shortNumber(645),
-  apps: shortNumber(1400),
-  updates: shortNumber(947593631),
-}
-
-const tmp = await fetch(`${config.public.baseApiUrl}/private/website_stats`)
-if (tmp.ok) {
-  const res = await tmp.json()
-  if (res) {
-    if (res.apps) stats.apps = shortNumber(res.apps)
-    if (res.updates) stats.updates = shortNumber(res.updates)
-    if (res.stars) stats.stars = shortNumber(res.stars)
-  }
-}
+const { stats: statsProp } = Astro.props
+const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.public.baseApiUrl))
 ---
 
 <section class="relative overflow-hidden bg-[#1a1a1a] py-24 sm:py-32">

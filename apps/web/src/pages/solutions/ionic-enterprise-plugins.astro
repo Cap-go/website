@@ -1,7 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
@@ -238,6 +239,8 @@ const content = { title, description, ldJSON }
       </div>
     </section>
   </div>
+
+  <SolutionAppExample solution="ionic-enterprise-plugins" />
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
     <h2 class="text-2xl font-semibold text-white">Keep going from Ionic Enterprise Plugin Solution</h2>
     <p class="mt-4">

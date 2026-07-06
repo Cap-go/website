@@ -1,0 +1,773 @@
+---
+import '@/styles/cli-product.css'
+import CommandCode from '@/components/CommandCode.astro'
+import ProductAppExamples from '@/components/ProductAppExamples.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
+import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
+import Layout from '@/layouts/Layout.astro'
+import m, { type MessageValues } from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const title = 'Capgo CLI | Build, preview, and ship Capacitor apps safely'
+const description =
+  'Use the Capgo CLI to initialize Capacitor apps, upload safe live updates, check compatibility, request native builds, run devices, and expose Capgo workflows through MCP.'
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+}
+
+const locale = Astro.locals.locale
+
+function copy(key: string, values: MessageValues = {}) {
+  return m[key](values, { locale })
+}
+
+const docsUrl = getRelativeLocaleUrl(locale, 'docs/cli')
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
+
+const heroMeta = ['MCP tools for AI agents', 'OTA or native release checks', 'Signed builds from the same terminal']
+
+const capabilities = [
+  {
+    title: 'MCP server for AI-assisted release work',
+    description:
+      'Start the CLI MCP server so agents can list and manage apps, upload bundles, manage channels, check compatibility, request native builds, run diagnostics, and generate encryption keys.',
+  },
+  {
+    title: 'Safe live-update uploads',
+    description: 'Upload bundles with compatibility gates, delta updates, encryption, metadata, cleanup, and QR preview links for quick test passes.',
+  },
+  {
+    title: 'OTA or native build decision support',
+    description:
+      'Run compatibility or release-type commands before production. When native dependencies change, the CLI points you toward a native build instead of a risky live update.',
+  },
+  {
+    title: 'Native build requests from the same terminal',
+    description: 'Request cloud builds for iOS or Android, keep output links and QR records for automation, and avoid parking signing credentials permanently on Capgo.',
+  },
+  {
+    title: 'Device and simulator loops',
+    description: 'Initialize the app, run it on physical devices or simulators, and keep the native verification step near the release command.',
+  },
+  {
+    title: 'App, channel, and bundle operations',
+    description: 'Use CLI and MCP commands to add apps, update channels, inspect bundles, clean old releases, probe delivery, and read account or organization state.',
+  },
+]
+
+const commands = [
+  {
+    label: 'Initialize updates, upload, build, and verification flows',
+    command: 'npx @capgo/cli@latest init',
+  },
+  {
+    label: 'Ask whether a release should be OTA or native',
+    command: 'npx @capgo/cli@latest bundle releaseType com.acme.app --channel production',
+  },
+  {
+    label: 'Upload a guarded live update with a preview QR',
+    command: 'npx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible --qr-preview',
+  },
+  {
+    label: 'Request a native build and keep output for CI or PRs',
+    command: 'npx @capgo/cli@latest build request com.acme.app --platform ios --build-mode release --output-upload --output-record .capgo/build.json',
+  },
+]
+
+const mcpInstallCommand = "npx install-mcp 'npx @capgo/cli@latest mcp' --client codex"
+const mcpTools = ['Apps', 'Bundles', 'Channels', 'Compatibility', 'Native builds', 'Stats', 'Doctor', 'Delivery probe']
+const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.miorange', 'ua.vodafone.myvodafone']
+const comparisonRows = [
+  {
+    label: copy('cli_v2_comp_cli_l'),
+    hook: copy('cli_v2_comp_cli_capgo_hook'),
+    capgo: copy('cli_v2_comp_cli_capgo'),
+    diy: copy('cli_v2_comp_cli_diy'),
+    capa: copy('cli_v2_comp_cli_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_mcp_l'),
+    hook: copy('cli_v2_comp_mcp_capgo_hook'),
+    capgo: copy('cli_v2_comp_mcp_capgo'),
+    diy: copy('cli_v2_comp_mcp_diy'),
+    capa: copy('cli_v2_comp_mcp_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_release_l'),
+    hook: copy('cli_v2_comp_release_capgo_hook'),
+    capgo: copy('cli_v2_comp_release_capgo'),
+    diy: copy('cli_v2_comp_release_diy'),
+    capa: copy('cli_v2_comp_release_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_upload_l'),
+    hook: copy('cli_v2_comp_upload_capgo_hook'),
+    capgo: copy('cli_v2_comp_upload_capgo'),
+    diy: copy('cli_v2_comp_upload_diy'),
+    capa: copy('cli_v2_comp_upload_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_build_l'),
+    hook: copy('cli_v2_comp_build_capgo_hook'),
+    capgo: copy('cli_v2_comp_build_capgo'),
+    diy: copy('cli_v2_comp_build_diy'),
+    capa: copy('cli_v2_comp_build_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_ci_l'),
+    hook: copy('cli_v2_comp_ci_capgo_hook'),
+    capgo: copy('cli_v2_comp_ci_capgo'),
+    diy: copy('cli_v2_comp_ci_diy'),
+    capa: copy('cli_v2_comp_ci_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_compat_l'),
+    hook: copy('cli_v2_comp_compat_capgo_hook'),
+    capgo: copy('cli_v2_comp_compat_capgo'),
+    diy: copy('cli_v2_comp_compat_diy'),
+    capa: copy('cli_v2_comp_compat_capa'),
+  },
+  {
+    label: copy('cli_v2_comp_try_l'),
+    hook: copy('cli_v2_comp_try_capgo_hook'),
+    capgo: copy('cli_v2_comp_try_capgo'),
+    diy: copy('cli_v2_comp_try_diy'),
+    capa: copy('cli_v2_comp_try_capa'),
+  },
+]
+---
+
+<Layout content={content}>
+  <div class="cli bg-ad">
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          Capgo CLI
+        </div>
+        <h1 class="hero-banner" aria-label="One CLI to rule them all">
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">One CLI to rule them all</span>
+            <span class="hbv-u-rule"></span>
+          </span>
+        </h1>
+        <p class="lead hero-lead">One tool for live updates, native builds, compatibility checks, device runs, and AI-assisted Capgo automation through MCP.</p>
+        <div class="hero-ctas">
+          <div class="hero-cta-buttons">
+            <a class="btn btn-lg btn-primary" href={docsUrl}>Read CLI docs</a>
+            <a class="btn btn-lg btn-ghost" href="#how">See it run ↓</a>
+          </div>
+        </div>
+        <div class="hero-meta">
+          {
+            heroMeta.map((item) => (
+              <span>
+                <span class="check">✓</span>
+                {item}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-grid grain" id="how">
+      <div class="shell">
+        <div class="rv-one">
+          <div class="rv-one-mark">Capgo CLI</div>
+          <p class="rv-one-line">Release checks, guarded uploads, and native builds in one terminal session.</p>
+        </div>
+
+        <div class="demo-wrap">
+          <div class="terminal-frame">
+            <div class="terminal-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="title" id="demo-term-title">npx @capgo/cli bundle releaseType</span>
+              <div class="demo-tabs">
+                <button id="demo-tab-release" class="demo-tab active" type="button">Release</button>
+                <button id="demo-tab-upload" class="demo-tab" type="button">Upload</button>
+                <button id="demo-tab-build" class="demo-tab" type="button">Build</button>
+              </div>
+            </div>
+            <div class="terminal-body" id="demo-term-body" aria-live="polite"></div>
+          </div>
+          <div class="demo-controls">
+            <span>Animated example — tabs switch the command flow</span>
+            <button class="demo-replay" id="demo-replay" type="button">⟲ Replay</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="yellow"
+      eyebrow={copy('cli_v2_proof_eyebrow')}
+      title={copy('cli_v2_proof_title')}
+      description={copy('cli_v2_proof_lead')}
+      testimonials={productTestimonials.cli}
+      maxItems={2}
+    />
+
+    <section class="section" id="compare">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--yellow">{copy('cli_v2_comp_eyebrow')}</div>
+          <h2 class="h2-section">{copy('cli_v2_comp_title')}</h2>
+          <p class="lead">{copy('cli_v2_comp_lead')}</p>
+        </div>
+
+        <div class="comp-wrap">
+          <table class="comp comp-prose">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="us">Capgo CLI</th>
+                <th>
+                  {copy('cli_v2_comp_h_diy')}
+                  <span class="th-sub">{copy('cli_v2_comp_h_diy_sub')}</span>
+                </th>
+                <th>{copy('cli_v2_comp_h_capa')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                comparisonRows.map((row) => (
+                  <tr>
+                    <td class="label">{row.label}</td>
+                    <td class="us">
+                      <span class="hook">{row.hook}</span> {row.capgo}
+                    </td>
+                    <td>{row.diy}</td>
+                    <td>{row.capa}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="comp-callout" role="note">
+          <p>{copy('cli_v2_comp_callout')}</p>
+        </aside>
+
+        <p class="comp-footnote">{copy('cli_v2_comp_footnote')}</p>
+      </div>
+    </section>
+  </div>
+
+  <section class="bg-slate-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">What the CLI gives your team</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Release automation for CapacitorJS apps with a native safety check built in</h2>
+        <p class="mt-5 text-base leading-7 text-pretty text-slate-300">
+          The CLI is the path from local Capacitor project to production release. It sets up the app, verifies what can ship OTA, and keeps native build work available when
+          dependencies require it.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {
+          capabilities.map((capability) => (
+            <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-200 ring-1 ring-cyan-300/25">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold tracking-tight text-white">{capability.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-300">{capability.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <ProductVideoSection youtubeId={productVideos.cli.youtubeId} title={productVideos.cli.title} description={productVideos.cli.description} />
+
+  <section class="bg-white py-16 text-slate-950 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end">
+        <div class="max-w-3xl">
+          <p class="font-mono text-sm font-semibold tracking-wide text-blue-700 uppercase">Command flow</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">From setup to the right release type</h2>
+          <p class="mt-5 text-base leading-7 text-pretty text-slate-600">
+            Capgo CLI commands make the important release fork explicit: live update when the web layer changed, native build when the app binary needs to move.
+          </p>
+        </div>
+
+        <div class="grid gap-3 sm:grid-cols-2">
+          <div class="rounded-lg border border-slate-200 bg-slate-50 p-5">
+            <p class="text-sm font-semibold text-slate-950">OTA path</p>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Use compatibility gates and preview QR links when the web bundle can move safely.</p>
+          </div>
+          <div class="rounded-lg border border-slate-200 bg-slate-50 p-5">
+            <p class="text-sm font-semibold text-slate-950">Native path</p>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Request a signed build when dependencies, permissions, or native code changed.</p>
+          </div>
+        </div>
+      </div>
+
+      <ol class="mt-10 divide-y divide-slate-200 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+        {
+          commands.map((item, index) => (
+            <li class="grid gap-4 p-5 sm:p-6 lg:grid-cols-[minmax(0,0.58fr)_minmax(0,1fr)] lg:items-center">
+              <div class="flex min-w-0 items-start gap-4">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-950 text-sm font-semibold text-white">{index + 1}</div>
+                <h3 class="pt-1 text-base leading-6 font-semibold tracking-tight text-slate-950">{item.label}</h3>
+              </div>
+              <div class="min-w-0 rounded-lg bg-slate-950 p-4">
+                <CommandCode command={item.command} class="block text-left font-mono text-[13px] leading-6 break-words whitespace-pre-wrap" />
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="mcp-install" class="bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-start lg:px-8">
+      <div>
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Native builds and MCP</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Let the CLI handle the release work your app actually needs</h2>
+        <p class="mt-5 text-base leading-7 text-pretty text-slate-300">
+          When compatibility says the change is OTA-safe, ship a guarded live update. When native code, permissions, or dependencies changed, request a native build and keep the
+          output visible for CI, PRs, and reviewers.
+        </p>
+
+        <div class="mt-8 grid gap-3 sm:grid-cols-2">
+          {mcpTools.map((tool) => <div class="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-slate-100">{tool}</div>)}
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="rounded-lg border border-cyan-300/20 bg-slate-900 p-5 shadow-2xl shadow-black/40 sm:p-6">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">MCP install</p>
+              <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white">Install Capgo CLI MCP</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-300">Register the CLI server in Codex, Cursor, Claude Code, Windsurf, VS Code, Zed, or Gemini CLI.</p>
+            </div>
+            <button
+              type="button"
+              class="w-fit rounded-md border border-cyan-300/30 px-3 py-1.5 font-mono text-xs font-semibold text-cyan-100 transition-colors hover:bg-cyan-300/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+              data-cli-mcp-copy={mcpInstallCommand}
+            >
+              Copy
+            </button>
+          </div>
+
+          <div class="mt-5 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10">
+            <CommandCode command={mcpInstallCommand} />
+          </div>
+          <p class="mt-4 text-sm leading-6 text-slate-400">Replace <code class="font-mono text-slate-200">codex</code> with the client your team uses.</p>
+        </div>
+
+        <div class="rounded-lg border border-cyan-300/20 bg-slate-900 p-5 shadow-2xl shadow-black/40 sm:p-6">
+          <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">Build record</p>
+              <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white">iOS release build</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-300">Saved output for CI, PR checks, and mobile review.</p>
+            </div>
+            <span class="inline-flex w-fit items-center rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-200 ring-1 ring-emerald-300/30">ready</span>
+          </div>
+
+          <dl class="mt-5 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Platform</dt>
+              <dd class="mt-1 text-sm font-semibold text-white">iOS</dd>
+            </div>
+            <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Mode</dt>
+              <dd class="mt-1 text-sm font-semibold text-white">release</dd>
+            </div>
+            <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Output</dt>
+              <dd class="mt-1 text-sm font-semibold text-white">IPA and install QR</dd>
+            </div>
+            <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Record</dt>
+              <dd class="mt-1 font-mono text-sm font-semibold text-cyan-200">.capgo/build.json</dd>
+            </div>
+          </dl>
+
+          <div class="mt-5 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10">
+            <CommandCode command="npx @capgo/cli@latest build request com.acme.app --platform ios --output-upload --output-record .capgo/build.json" />
+          </div>
+
+          <div class="mt-5 grid gap-3 text-sm leading-6 text-slate-300 sm:grid-cols-3">
+            <p class="rounded-lg border border-emerald-300/20 bg-emerald-400/10 p-3 text-emerald-100">Status is visible before release notes are posted.</p>
+            <p class="rounded-lg border border-cyan-300/20 bg-cyan-400/10 p-3 text-cyan-100">QR output stays available for device validation.</p>
+            <p class="rounded-lg border border-amber-300/20 bg-amber-400/10 p-3 text-amber-100">Errors can fail CI before a risky release ships.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ProductAppExamples
+    title="Capacitor apps need release tooling that respects native boundaries"
+    description="Large Capacitor apps mix web changes with native dependencies. The Capgo CLI keeps that boundary visible before a production release goes out."
+    appIds={appExampleIds}
+  />
+
+  <section class="bg-slate-900 py-16 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
+      <div>
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Use the CLI today</p>
+        <h2 class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
+          Add Capgo to your release scripts without waiting on a dashboard session.
+        </h2>
+        <p class="mt-5 max-w-2xl text-base leading-7 text-slate-300">
+          Start with the CLI docs, then wire compatibility checks, bundle uploads, native builds, or MCP into the workflow your team already uses.
+        </p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/reference/bundle')}
+          class="inline-flex min-h-12 items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+        >
+          Bundle commands
+        </a>
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/reference/build')}
+          class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          Build commands
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  ;(function cliDemoTerminal() {
+    const el = document.getElementById('demo-term-body')
+    if (!el) return
+
+    let paused = false
+    let started = false
+    let gen = 0
+    let mode: 'release' | 'upload' | 'build' = 'release'
+    const SPINNER = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+
+    type ScriptHtmlStep = { t: number; html: string; replaceAll?: boolean }
+    type ScriptSpinStep = { kind: 'spin'; label: string; ms: number; done: string }
+    type ScriptProgressStep = { kind: 'progress'; label: string; size: string }
+    type ScriptStep = ScriptHtmlStep | ScriptSpinStep | ScriptProgressStep
+
+    const TITLES = {
+      release: 'npx @capgo/cli bundle releaseType',
+      upload: 'npx @capgo/cli bundle upload',
+      build: 'npx @capgo/cli build request',
+    }
+
+    const STATIC = {
+      release: `<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest bundle releaseType</span> <span class="flag">com.acme.app</span> <span class="flag">--channel</span> <span class="val">production</span>
+<span class="ok">✔</span> Channel: <span class="val">production</span>  ·  App: <span class="val">com.acme.app</span>
+<span class="ok">Recommendation:</span> <span class="val">OTA update</span>
+<span class="ghost">No native dependency drift detected for production.</span>
+
+<span class="ok">━━━ Safe to ship as a live update ━━━</span>`,
+      upload: `<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest bundle upload</span> <span class="flag">--channel</span> <span class="val">production</span> <span class="flag">--fail-on-incompatible</span> <span class="flag">--qr-preview</span>
+<span class="ok">✔</span> Compatibility gate passed
+<span class="ok">✔</span> Bundle validated  ·  <span class="kw">2.1 MB</span>
+<span class="ok">✔</span> Delta upload ready  ·  <span class="kw">340 KB</span>
+<span class="ok">✔</span> Published to <span class="val">production</span>
+<span class="lock">QR</span> Preview link generated for device testing
+
+<span class="ok">━━━ Live update rolling out ━━━</span>`,
+      build: `<span class="dim">$ </span><span class="cmd">npx @capgo/cli@latest build request</span> <span class="flag">com.acme.app</span> <span class="flag">--platform</span> <span class="val">ios</span> <span class="flag">--output-record</span> <span class="val">.capgo/build.json</span>
+<span class="ok">✔</span> Platform: <span class="val">iOS</span>  ·  Mode: <span class="val">release</span>
+<span class="lock">🔒</span> <span class="ghost">Credentials used only during build, then deleted.</span>
+
+<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">9c4f7a</span>
+<span class="ok">✔</span> Upload complete  ·  <span class="val">100%</span>
+<span class="dim">[CapApp]</span> Archive succeeded
+<span class="ok">✔</span> Output record saved  ·  <span class="val">.capgo/build.json</span>
+
+<span class="ok">━━━ Native build completed in 2m 41s ━━━</span>`,
+    }
+
+    function makeScriptRelease(): ScriptStep[] {
+      return [
+        {
+          t: 0,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest bundle releaseType</span> <span class="flag">com.acme.app</span> <span class="flag">--channel</span> <span class="val">production</span><span class="terminal-cursor"></span>`,
+        },
+        {
+          t: 700,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest bundle releaseType</span> <span class="flag">com.acme.app</span> <span class="flag">--channel</span> <span class="val">production</span>\n<span class="ok">✔</span> Channel: <span class="val">production</span>`,
+          replaceAll: true,
+        },
+        { t: 250, html: `\n<span class="ok">✔</span> App: <span class="val">com.acme.app</span>` },
+        { t: 350, html: `\n<span class="ok">Recommendation:</span> <span class="val">OTA update</span>` },
+        { t: 300, html: `\n<span class="ghost">No native dependency drift detected for production.</span>` },
+        { t: 400, html: `\n` },
+        { t: 300, html: `\n<span class="ok">━━━ Safe to ship as a live update ━━━</span>` },
+      ]
+    }
+
+    function makeScriptUpload(): ScriptStep[] {
+      return [
+        {
+          t: 0,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest bundle upload</span> <span class="flag">--channel</span> <span class="val">production</span> <span class="flag">--fail-on-incompatible</span> <span class="flag">--qr-preview</span><span class="terminal-cursor"></span>`,
+        },
+        {
+          t: 700,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest bundle upload</span> <span class="flag">--channel</span> <span class="val">production</span> <span class="flag">--fail-on-incompatible</span> <span class="flag">--qr-preview</span>\n<span class="ok">✔</span> Compatibility gate passed`,
+          replaceAll: true,
+        },
+        { kind: 'spin', label: 'Validating bundle', ms: 900, done: `<span class="ok">✔</span> Bundle validated  ·  <span class="kw">2.1 MB</span>` },
+        { kind: 'progress', label: 'Uploading delta', size: '340 KB' },
+        { t: 250, html: `\n<span class="ok">✔</span> Published to <span class="val">production</span>` },
+        { t: 250, html: `\n<span class="lock">QR</span> Preview link generated for device testing` },
+        { t: 350, html: `\n` },
+        { t: 300, html: `\n<span class="ok">━━━ Live update rolling out ━━━</span>` },
+      ]
+    }
+
+    function makeScriptBuild(): ScriptStep[] {
+      return [
+        {
+          t: 0,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest build request</span> <span class="flag">com.acme.app</span> <span class="flag">--platform</span> <span class="val">ios</span> <span class="flag">--output-record</span> <span class="val">.capgo/build.json</span><span class="terminal-cursor"></span>`,
+        },
+        {
+          t: 700,
+          html: `<span class="pain-prompt">$ </span><span class="cmd">npx @capgo/cli@latest build request</span> <span class="flag">com.acme.app</span> <span class="flag">--platform</span> <span class="val">ios</span> <span class="flag">--output-record</span> <span class="val">.capgo/build.json</span>\n<span class="ok">✔</span> Platform: <span class="val">iOS</span>`,
+          replaceAll: true,
+        },
+        { t: 250, html: `\n<span class="ok">✔</span> Mode: <span class="val">release</span>` },
+        { t: 300, html: `\n<span class="lock">🔒</span> <span class="ghost">Credentials used only during build, then deleted.</span>` },
+        { t: 350, html: `\n` },
+        { t: 200, html: `\n<span class="ok">✔</span> Build job created  ·  job_id <span class="kw">9c4f7a</span>` },
+        { kind: 'progress', label: 'Uploading project', size: '12.4 MB' },
+        { t: 220, html: `\n<span class="dim">[CapApp]</span> Archive succeeded` },
+        { t: 280, html: `\n<span class="ok">✔</span> Output record saved  ·  <span class="val">.capgo/build.json</span>` },
+        { t: 350, html: `\n` },
+        { t: 300, html: `\n<span class="ok">━━━ Native build completed in 2m 41s ━━━</span>` },
+      ]
+    }
+
+    function makeScript(): ScriptStep[] {
+      if (mode === 'upload') return makeScriptUpload()
+      if (mode === 'build') return makeScriptBuild()
+      return makeScriptRelease()
+    }
+
+    let buf = ''
+    let timer: ReturnType<typeof setTimeout> | null = null
+    let stepIdx = 0
+    let script: ScriptStep[] = makeScript()
+
+    function render() {
+      el!.innerHTML = buf
+      el!.scrollTop = el!.scrollHeight
+    }
+
+    function restart() {
+      gen++
+      const myGen = gen
+      if (timer) clearTimeout(timer)
+      buf = ''
+      stepIdx = 0
+      script = makeScript()
+      render()
+      setTimeout(() => {
+        if (myGen === gen) next()
+      }, 50)
+    }
+
+    function staticFallback() {
+      el!.innerHTML = STATIC[mode]
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      staticFallback()
+      bindTabs(staticFallback)
+      return
+    }
+
+    function runSpin(label: string, doneHtml: string, ms: number, onDone: () => void) {
+      let frame = 0
+      let elapsed = 0
+      const startBuf = buf
+      const myGen = gen
+      function tick() {
+        if (myGen !== gen) return
+        if (paused) {
+          timer = setTimeout(tick, 100)
+          return
+        }
+        const sp = SPINNER[frame % SPINNER.length]
+        buf = startBuf + `\n<span class="kw">${sp}</span> ${label}…`
+        render()
+        frame++
+        elapsed += 80
+        if (elapsed >= ms) {
+          buf = startBuf + `\n${doneHtml}`
+          render()
+          onDone()
+        } else {
+          timer = setTimeout(tick, 80)
+        }
+      }
+      tick()
+    }
+
+    function runSpinner(label: string, size: string, onDone: () => void) {
+      let pct = 0
+      let frame = 0
+      const startBuf = buf
+      const myGen = gen
+      function tick() {
+        if (myGen !== gen) return
+        if (paused) {
+          timer = setTimeout(tick, 100)
+          return
+        }
+        const sp = SPINNER[frame % SPINNER.length]
+        const shown = Math.min(100, Math.round(pct))
+        const filled = Math.round((shown * 24) / 100)
+        const bar = '█'.repeat(filled) + '░'.repeat(24 - filled)
+        buf =
+          startBuf +
+          `\n<span class="kw">${sp}</span> ${label}  <span class="dim">[</span><span class="val">${bar}</span><span class="dim">]</span>  <span class="val">${shown}%</span>`
+        render()
+        frame++
+        pct += Math.max(1.6, (100 - pct) * 0.12)
+        if (pct >= 99.5) {
+          buf = startBuf + `\n<span class="ok">✔</span> Upload complete  ·  <span class="val">${size} / ${size}</span>`
+          render()
+          onDone()
+        } else {
+          timer = setTimeout(tick, 55)
+        }
+      }
+      tick()
+    }
+
+    function next() {
+      const myGen = gen
+      if (paused) {
+        timer = setTimeout(() => {
+          if (myGen === gen) next()
+        }, 150)
+        return
+      }
+      if (stepIdx >= script.length) return
+      const s = script[stepIdx++]
+      if ('kind' in s && s.kind === 'progress') {
+        runSpinner(s.label || 'Uploading', s.size || '12.4 MB', () => {
+          if (myGen === gen) next()
+        })
+        return
+      }
+      if ('kind' in s && s.kind === 'spin') {
+        runSpin(s.label || 'Working', s.done || '', s.ms || 1000, () => {
+          if (myGen === gen) next()
+        })
+        return
+      }
+      timer = setTimeout(() => {
+        if (myGen !== gen) return
+        if ('replaceAll' in s && s.replaceAll) buf = s.html
+        else buf += s.html ?? ''
+        render()
+        next()
+      }, s.t || 100)
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) paused = true
+      else {
+        const r = el.getBoundingClientRect()
+        if (r.bottom > 0 && r.top < (window.innerHeight || 0)) paused = false
+      }
+    })
+
+    const replay = document.getElementById('demo-replay')
+    if (replay) replay.addEventListener('click', restart)
+
+    function bindTabs(onSwitch: () => void) {
+      const tabRelease = document.getElementById('demo-tab-release')
+      const tabUpload = document.getElementById('demo-tab-upload')
+      const tabBuild = document.getElementById('demo-tab-build')
+      const title = document.getElementById('demo-term-title')
+      function setMode(nextMode: 'release' | 'upload' | 'build') {
+        if (nextMode === mode) return
+        mode = nextMode
+        tabRelease?.classList.toggle('active', nextMode === 'release')
+        tabUpload?.classList.toggle('active', nextMode === 'upload')
+        tabBuild?.classList.toggle('active', nextMode === 'build')
+        if (title) title.textContent = TITLES[nextMode]
+        onSwitch()
+      }
+      tabRelease?.addEventListener('click', () => setMode('release'))
+      tabUpload?.addEventListener('click', () => setMode('upload'))
+      tabBuild?.addEventListener('click', () => setMode('build'))
+    }
+    bindTabs(restart)
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            paused = false
+            if (!started) {
+              started = true
+              const myGen = gen
+              setTimeout(() => {
+                if (myGen === gen) next()
+              }, 300)
+            }
+          } else {
+            paused = true
+          }
+        })
+      },
+      { threshold: 0.25 },
+    )
+    io.observe(el)
+  })()
+</script>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-cli-mcp-copy]').forEach((button) => {
+    let resetTimer: number | undefined
+
+    button.addEventListener('click', async () => {
+      const value = button.dataset.cliMcpCopy
+      if (!value) return
+
+      const originalText = button.textContent || 'Copy'
+
+      try {
+        await navigator.clipboard.writeText(value)
+        button.textContent = 'Copied'
+      } catch {
+        button.textContent = 'Copy failed'
+      }
+
+      if (resetTimer) window.clearTimeout(resetTimer)
+      resetTimer = window.setTimeout(() => {
+        button.textContent = originalText
+      }, 1800)
+    })
+  })
+</script>

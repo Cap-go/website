@@ -1,5 +1,5 @@
 const llmsCustomSetRows = String.raw`Capgo CLI|full reference documentation for capgo CLI to upload and manage your live updates|docs/cli/**
-Plugin Live updates|full reference documentation for plugin live updates for Capacitor and Electron|docs/live-updates/**|docs/plugins/updater/**|docs/plugins/electron-updater/**
+Plugin Live updates|full reference documentation for plugin live updates for Capacitor, Cordova, and Electron|docs/live-updates/**|docs/plugins/updater/**|docs/plugins/cordova-updater/**|docs/plugins/electron-updater/**
 Console Tutorial|step-by-step tutorial to get started with Capgo Console and live updates|docs/webapp/**
 Public API|full reference documentation for public API|docs/public-api/**
 Plugin Accelerometer|accelerometer sensor plugin for detecting device motion and orientation|docs/plugins/accelerometer/**
@@ -35,6 +35,7 @@ Plugin Contacts|contacts access plugin for reading device contacts|docs/plugins/
 Plugin Crisp|Crisp chat integration plugin|docs/plugins/crisp/**
 Plugin Data Storage SQLite|SQLite data storage plugin for local database|docs/plugins/data-storage-sqlite/**
 Plugin Date Picker|native date, time, date-time, year-month, and range picker plugin for iOS, Android, and Web|docs/plugins/date-picker/**
+Plugin Device Info|CPU, memory, GPU, storage, thermal, and onboard sensor metrics plugin|docs/plugins/device-info/**
 Plugin Document Scanner|document scanning plugin with OCR capabilities|docs/plugins/document-scanner/**
 Plugin Downloader|file download manager plugin|docs/plugins/downloader/**
 Plugin Env|environment variables plugin|docs/plugins/env/**
@@ -50,7 +51,7 @@ Plugin RudderStack|RudderStack analytics and identity tracking plugin|docs/plugi
 Plugin Health|health data access plugin for HealthKit and Google Fit|docs/plugins/health/**
 Plugin Home Indicator|iOS home indicator visibility control plugin|docs/plugins/home-indicator/**
 Plugin iBeacon|iBeacon proximity detection plugin|docs/plugins/ibeacon/**
-Plugin InAppBrowser|in-app browser plugin for opening web content|docs/plugins/inappbrowser/**
+Plugin InAppBrowser|managed in-app browser plugin for Capacitor with native WebView layering, partial-screen browsers, private sessions, proxying, downloads, and app messaging|docs/plugins/inappbrowser/**
 Plugin In App Review|in-app review prompt plugin for app store ratings|docs/plugins/in-app-review/**
 Plugin Incoming Call Kit|native incoming call presentation with iOS CallKit and Android full-screen notifications|docs/plugins/incoming-call-kit/**
 Plugin Install Referrer|install attribution plugin for Google Play Install Referrer and Apple AdServices|docs/plugins/install-referrer/**
@@ -72,8 +73,10 @@ Plugin Mux Player|Mux video player integration plugin|docs/plugins/mux-player/**
 Plugin Native Audio|native audio playback plugin|docs/plugins/native-audio/**
 Plugin Native Biometric|biometric authentication plugin for fingerprint and face ID|docs/plugins/native-biometric/**
 Plugin Native Geocoder|native geocoding plugin for address lookup|docs/plugins/nativegeocoder/**
+Plugin Native Loader|native animated loaders, transparent overlays, Lottie assets, and WebView resizing for Capacitor apps|docs/plugins/native-loader/**
 Plugin Native Market|app store deep linking plugin|docs/plugins/native-market/**
 Plugin Native Navigation|native navbar, tabbar, and transition shell plugin for Capacitor WebView apps|docs/plugins/native-navigation/**
+Plugin Network Diagnostics|native network diagnostics plugin for URL reachability, TCP ports, WebSocket handshakes, speed, and packet loss checks|docs/plugins/network-diagnostics/**
 Plugin Notifications|native push notifications, badges, campaign stats, device lookup, and silent live-update checks|docs/plugins/notifications/**
 Plugin Native Purchases|in-app purchases, subscriptions, paywalls, revenue playbook, and monetization plugin|docs/plugins/native-purchases/**
 Plugin Navigation Bar|Android navigation bar customization plugin|docs/plugins/navigation-bar/**
@@ -87,10 +90,12 @@ Plugin Pedometer|step counting pedometer plugin|docs/plugins/pedometer/**
 Plugin Persona|Persona identity verification inquiry plugin|docs/plugins/persona/**
 Plugin Intune|Microsoft Intune MAM and MSAL plugin|docs/plugins/intune/**
 Plugin Persistent Account|persistent account storage plugin|docs/plugins/persistent-account/**
+Plugin Persistent UUID|persistent app-scoped UUID plugin|docs/plugins/persistent-uuid/**
 Plugin Photo Library|photo library access plugin|docs/plugins/photo-library/**
 Plugin Printer|printing plugin for documents and images|docs/plugins/printer/**
 Plugin RealtimeKit|real-time communication plugin|docs/plugins/realtimekit/**
 Plugin reCAPTCHA|Web reCAPTCHA, Web reCAPTCHA Enterprise, and native Enterprise mobile token plugin|docs/plugins/recaptcha/**
+Plugin Verisoul|native Verisoul fraud-prevention session plugin for Capacitor apps|docs/plugins/verisoul/**
 Plugin Ricoh 360 Camera|Ricoh 360 camera integration plugin|docs/plugins/ricoh360-camera/**
 Plugin Screen Orientation|screen orientation control plugin|docs/plugins/screen-orientation/**
 Plugin Screen Recorder|screen recording plugin|docs/plugins/screen-recorder/**
@@ -99,6 +104,9 @@ Plugin Share Target|share target plugin for receiving shared content|docs/plugin
 Plugin SIM|SIM card information plugin|docs/plugins/sim/**
 Plugin Social Login|social authentication plugin for Google, Apple, Facebook login|docs/plugins/social-login/**
 Plugin Speech Recognition|speech-to-text recognition plugin|docs/plugins/speech-recognition/**
+Plugin Stripe|Stripe Payment Sheet, Apple Pay, and Google Pay plugin|docs/plugins/stripe-pay/**
+Plugin Stripe Identity|Stripe Identity verification plugin|docs/plugins/stripe-identity/**
+Plugin Stripe Terminal|Stripe Terminal in-person payments plugin|docs/plugins/stripe-terminal/**
 Plugin Speech Synthesis|text-to-speech synthesis plugin|docs/plugins/speech-synthesis/**
 Plugin SSL Pinning|certificate pinning plugin for CapacitorHttp requests|docs/plugins/ssl-pinning/**
 Plugin StreamCall|Stream video calling plugin|docs/plugins/streamcall/**

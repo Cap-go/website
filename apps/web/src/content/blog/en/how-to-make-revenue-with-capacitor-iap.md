@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-05-01T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: /native-purchases/revenue-playbook.png
-head_image_alt: Revenue playbook for Capacitor in-app purchases
+head_image_alt: "How to Make Revenue With a Capacitor App Capgo blog illustration"
 keywords: Capacitor revenue, in-app purchases, subscriptions, mobile app monetization, paywall, ASO, app revenue, native purchases
 tag: Mobile, IAP, Monetization
 published: true
@@ -18,7 +18,7 @@ next_blog: ''
 
 Revenue does not start with a perfect app. It starts with a useful app, a small group of users, and a purchase flow that helps you learn what people will pay for.
 
-For Capacitor apps, the technical part is straightforward with [`@capgo/native-purchases`](/docs/plugins/native-purchases/). The harder part is deciding what to sell, where to show the paywall, how to price it, and how to get the first users into the funnel.
+For Capacitor apps, the technical part is straightforward with [@capgo/native-purchases](https://capgo.app/plugins/capacitor-native-purchases/). The harder part is deciding what to sell, where to show the paywall, how to price it, and how to get the first users into the funnel.
 
 This guide gives you a practical path from zero revenue to the first meaningful subscription revenue without overbuilding.
 
@@ -212,4 +212,4 @@ For the technical setup, use the [Native Purchases getting started guide](/docs/
 
 ## Keep going from How to Make Revenue With a Capacitor App
 
-If you are using **How to Make Revenue With a Capacitor App** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.
+If you are using **How to Make Revenue With a Capacitor App** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

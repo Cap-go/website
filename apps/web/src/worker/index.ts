@@ -1,3 +1,4 @@
+import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
@@ -203,6 +204,16 @@ function withGlobalCssCacheHeaders(response: Response): Response {
   })
 }
 
+const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
+const SKIP_AI_CRAWLER_TRACKING_HEADER = 'X-Capgo-Skip-AI-Crawler-Tracking'
+
+function trackAICrawler(request: Request, response: Response, ctx?: BackgroundContext): Response {
+  if (request.headers.get(SKIP_AI_CRAWLER_TRACKING_HEADER) !== '1') {
+    trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
+  }
+  return response
+}
+
 async function handleRouteRequest(request: Request, env: Env, pathname: string, ctx?: BackgroundContext): Promise<Response | null> {
   const route = routeDefinitions[pathname]
   if (!route) return null
@@ -243,14 +254,14 @@ export default {
       },
       pathname,
     )
-    if (toolRouteResponse) return toolRouteResponse
+    if (toolRouteResponse) return trackAICrawler(request, toolRouteResponse, ctx)
     const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
-    if (routeResponse) return routeResponse
+    if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
     const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
-    if (isGlobalCssPath(pathname)) return withGlobalCssCacheHeaders(assetResponse)
+    if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
     if (pathname === '/' || pathname === '/index.html') {
-      return withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS)
+      return trackAICrawler(request, withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS), ctx)
     }
-    return assetResponse
+    return trackAICrawler(request, assetResponse, ctx)
   },
 }

@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-27T12:26:34.111Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/683598e6d3b96619818496d3-1748348849256.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T21:13:09.000Z
+head_image: /blog-images/5-steps-to-implement-oauth2-in-capacitor-apps.webp
+head_image_alt: "5 Steps to Implement OAuth2 in Capacitor Apps Capgo blog illustration"
 keywords: OAuth2, Capacitor, authentication, mobile apps, security, token storage, PKCE, app integration
 tag: Development, Mobile, Security
 published: true
@@ -18,12 +18,12 @@ next_blog: ''
 
 **Want to add secure [OAuth2](https://en.wikipedia.org/?title=OAuth2&redirect=no) authentication to your [Capacitor](https://capacitorjs.com/) app? Here’s a quick guide to get started.**
 
-OAuth2 is a protocol that lets users share access to their data without sharing passwords. It’s ideal for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) because it works across platforms like iOS, Android, and the web. Plus, it keeps your app secure by using tokens instead of storing sensitive credentials.
+OAuth2 is a protocol that lets users share access to their data without sharing passwords. It’s ideal for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) because it works across platforms like iOS, Android, and the web. For social providers, [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/) handles Google, Apple, and Facebook sign-in with native flows. For passwordless auth, [@capgo/capacitor-passkey](https://capgo.app/plugins/capacitor-passkey/) keeps browser-style WebAuthn code while native passkey calls are handled for you. Plus, it keeps your app secure by using tokens instead of storing sensitive credentials.
 
 Here’s how to integrate OAuth2 into your [Capacitor app](https://capgo.app/capacitor-app/) in just 5 steps:
 
 1.  **Set Up Your OAuth2 Provider**: Choose a provider (e.g., Google, [Auth0](https://auth0.com/)), configure redirect URIs, and manage client credentials securely.
-2.  **Install and Configure the OAuth2 Plugin**: Add the `@byteowls/capacitor-oauth2` plugin and set up platform-specific settings (e.g., `Info.plist` for iOS, `AndroidManifest.xml` for Android).
+2.  **Install and Configure the OAuth2 Plugin**: Add the `@byteowls/capacitor-oauth2` plugin, or use [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/) for Google, Apple, and Facebook, and set up platform-specific settings (e.g., `Info.plist` for iOS, `AndroidManifest.xml` for Android).
 3.  **Build the Authentication Flow**: Use the plugin to handle user login, token storage, and logout securely. Enable [PKCE](https://oauth.net/2/pkce/) for extra protection.
 4.  **Test Across Platforms**: Verify the flow on iOS, Android, and web browsers. Fix common issues like redirect URI mismatches or PKCE errors.
 5.  **Secure Your Implementation**: Store tokens in secure storage ([Keychain](https://en.wikipedia.org/wiki/Keychain_\(software\))/Keystore), use HTTPS, and set up strong [Content Security Policies](https://capgo.app/security/).

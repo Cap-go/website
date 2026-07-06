@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-06T03:14:22.038Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67c8efd008fcceb00021f6ac-1741230902559.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T10:44:00.000Z
+head_image: /blog-images/how-mobile-apps-stay-compliant-with-us-privacy-laws.webp
+head_image_alt: "How Mobile Apps Stay Compliant with U.S. Privacy Laws Capgo blog illustration"
 keywords: mobile apps, privacy compliance, user consent, data management, encryption, app store rules, privacy policies
 tag: Development, Mobile, Updates
 published: true

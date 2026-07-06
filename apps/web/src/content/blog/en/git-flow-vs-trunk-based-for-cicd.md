@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-23T02:55:05.937Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad-1745376919736.jpg
-head_image_alt: Software Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/git-flow-vs-trunk-based-for-cicd.webp
+head_image_alt: "Git Flow vs Trunk-Based for CI/CD Capgo blog illustration"
 keywords: Git Flow, Trunk-Based Development, CI/CD, software development, version control
 tag: Development, Technology, Updates
 published: true

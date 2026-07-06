@@ -13,6 +13,9 @@ To have more fine-grained control over the update system, you can configure it w
  Any changes to these settings in capacitor.config file, require syncing the platform and releasing to the store for production apps to receive them.
 </Aside>
 
+<Aside type="note">
+Need EU data residency for Capgo Cloud? Set `updateUrl` to `https://plugin.eu.capgo.app/updates`, `statsUrl` to `https://plugin.eu.capgo.app/stats`, and `channelUrl` to `https://plugin.eu.capgo.app/channel_self`. See [Data Location](/docs/live-updates/data-location/).
+</Aside>
 
 ## `allowModifyUrl`
 
@@ -135,16 +138,18 @@ Default: `false`
 
 ## `autoUpdate`
 
-> Configure how the plugin should use Auto Update via an update server.
+> Configure how the plugin checks for, downloads, and applies live updates.
+> The plugin checks for updates when the app moves to the foreground and on a repeating timer while the app stays open. `periodCheckDelay` controls that timer interval.
 > Boolean values are still supported for backward compatibility: `true` is the same as `"atBackground"` and `false` is the same as `"off"`.
+> String values merge the previous Auto Update and Direct Update configuration.
 
 Options:
-- `"off"` or `false`: Disable Auto Update
-- `"atBackground"` or `true`: Check and download automatically, then apply when the app moves to the background
-- `"atInstall"`: Apply immediately only after a fresh install or native app update, otherwise use `"atBackground"`
-- `"onLaunch"`: Apply immediately on launch, otherwise use `"atBackground"` after the launch check
-- `"always"`: Apply immediately whenever Auto Update runs
-- `"onlyDownload"`: Check and download automatically, emit `updateAvailable`, and never set the next bundle automatically
+- `"off"` or `false`: Disable automatic update checks
+- `"atBackground"` or `true`: Check and download automatically on each foreground check, then apply the update the next time the app moves to background
+- `"atInstall"`: Apply immediately only after a fresh install or native app store update; otherwise use `"atBackground"` behavior
+- `"onLaunch"`: Apply immediately only when the app is brought to the foreground from a killed state (cold start). After that first check, fall back to `"atBackground"` behavior
+- `"always"`: Check on every foreground transition and apply immediately whenever an update is available
+- `"onlyDownload"`: Check and download automatically, emit `updateAvailable`, and never set the next bundle or apply an update automatically
 
 Available on Android, iOS, and Electron.
 
@@ -210,7 +215,7 @@ Options:
 - `'atInstall'`: Same as `autoUpdate: "atInstall"`
 - `'onLaunch'`: Same as `autoUpdate: "onLaunch"`
 - `'always'`: Same as `autoUpdate: "always"`
-- `true`: (deprecated) Same as "always" for backward compatibility
+- `true`: (deprecated) Same as `"always"` for backward compatibility
 
 Available on Android, iOS, and Electron.
 
@@ -369,7 +374,9 @@ Default: `false`
 
 > Configure the URL / endpoint to which update statistics are sent.
 
-Available on Android, iOS, and Electron. Set to "" to disable stats reporting.
+Available on Android, iOS, and Electron. Set to "" to disable explicit stats reporting through `/stats`.
+
+Disabling `statsUrl` does not disable all Capgo device storage. If `updateUrl` remains enabled, `/updates` still stores the billing MAU row, device inventory, and update-decision event data needed to serve updates and count MAU. See [Compliance](/docs/live-updates/compliance/#endpoint-storage-detail) for the field-level breakdown.
 
 Default: `https://plugin.capgo.app/stats`
 

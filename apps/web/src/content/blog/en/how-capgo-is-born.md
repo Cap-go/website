@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-01T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /capgo_birth.webp
-head_image_alt: Capgo birth illusatration
+head_image_alt: "How Capgo is born Capgo blog illustration"
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Story
 published: true
@@ -45,7 +45,7 @@ That was too manual for most teams, so they asked for a paid service, that was w
 
 The goal was to provide a simple and easy to use solution to push code updates to Capacitor JavaScript apps.
 
-At launch, it was just live updates - no native builds, no big toolbox like Ionic. Just solving the problem they didn't address for makers like us. (Since then, we've added [Cloud Build](/docs/cli/cloud-build/getting-started/) for native iOS/Android builds!)
+At launch, it was just live updates - no native builds, no big toolbox like Ionic. Just solving the problem they didn't address for makers like us. (Since then, we've added [Cloud Build](/docs/builder/getting-started/) for native iOS/Android builds!)
 
 I contacted them to share with them what I was doing, and we found a business friendship agreement.
 

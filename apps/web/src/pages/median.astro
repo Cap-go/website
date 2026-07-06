@@ -1,0 +1,169 @@
+---
+import CompetitorComparison from '@/components/CompetitorComparison.astro'
+import Layout from '@/layouts/Layout.astro'
+import { createFAQPageLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+
+const faq = [
+  {
+    question: 'Is Median a Capgo replacement?',
+    answer:
+      'Not if the goal is ownership. Median is a managed web-to-app platform. Capgo is for Capacitor apps where your app code, plugins, update service, and hosting path can stay portable and open source.',
+  },
+  {
+    question: 'What happens if I want to leave Median later?',
+    answer:
+      'A Median app is built around the Median native shell, App Studio, JavaScript Bridge, native plugins, publishing service, and update workflow. If you later want the Capacitor ecosystem, expect a migration. With Capacitor and Capgo, you can use Capgo Cloud, self-host, move to another provider, or maintain the stack yourself.',
+  },
+  {
+    question: 'Does Capgo offer help if I do not want to do it myself?',
+    answer:
+      'Yes. Capgo has community help through Discord and Premium Support for teams with production needs, hard migration problems, deployment issues, crashes, or native-side work. The difference is that support sits on top of open-source Capacitor and Capgo projects instead of becoming your only path forward.',
+  },
+  {
+    question: 'When should I choose Median?',
+    answer:
+      'Choose Median when you want to hand most of the native app shell, configuration, publishing, and update work to a managed platform and you accept the platform dependency that comes with that convenience.',
+  },
+  {
+    question: 'When should I choose Capgo?',
+    answer:
+      'Choose Capgo when you want a Capacitor app you control, with live updates, rollback, channels, native builds, device logs, open-source code, self-hosting options, Discord community help, and paid expert support when needed.',
+  },
+]
+
+const page = {
+  eyebrow: 'Median comparison',
+  title: 'Median vs Capgo: managed lock-in or open Capacitor?',
+  description:
+    'Compare Median and Capgo for turning a web app into a mobile app. Median is a managed web-to-app platform; Capacitor with Capgo keeps the app path open source, portable, self-hostable, and supported.',
+  subtitle:
+    'Median is convenient when you want to hand the app to a managed platform. Capacitor plus Capgo keeps the mobile app, update path, plugins, and hosting choices in your hands.',
+  competitor: 'Median',
+  competitorShort: 'Median',
+  capgoSummary:
+    'Capgo sits on Capacitor: open-source projects you can inspect, self-host, fork, or replace. Use Capgo Cloud when you want it done for you, Discord for community help, or Premium Support for production work.',
+  competitorSummary:
+    'Median packages web content inside a Median-managed native shell with App Studio, bridge APIs, native plugins, publishing help, and app update plans. That convenience also ties your mobile app path to Median.',
+  verdict:
+    'Choose Median if you want to outsource the mobile shell and accept platform dependency. Choose Capgo with Capacitor if you want web-to-mobile delivery without giving up ownership or exit options.',
+  capgoFitTitle: 'Choose Capgo when',
+  competitorFitTitle: 'Choose Median when',
+  capgoFits: [
+    'You want a web-to-mobile path based on open-source Capacitor and Capgo projects.',
+    'You want to keep native iOS and Android projects, plugins, and the release pipeline portable.',
+    'You need live updates, rollback, channels, native builds, device logs, and direct Capacitor plugin control.',
+    'You want options later: Capgo Cloud, self-hosting, another provider, or maintaining the stack yourself.',
+  ],
+  competitorFits: [
+    'You want Median to handle most native shell, app-build, publishing, and update complexity.',
+    'You prefer App Studio, Median bridge plugins, and managed services over owning a Capacitor project.',
+    'You have budget for a vendor-led web-to-app service and want someone else to package the app.',
+    'You accept that moving away later may require rebuilding or migrating the mobile layer.',
+  ],
+  differences: [
+    {
+      label: 'Core job',
+      capgo: 'Own an open Capacitor app and add live updates, rollback, native builds, logs, and support around it.',
+      competitor: 'Create and maintain a managed native webview app powered by web content.',
+    },
+    {
+      label: 'App architecture',
+      capgo: 'A Capacitor app with web assets, native iOS and Android projects, and Capacitor plugins in your control.',
+      competitor: 'A Median native shell around web content, extended through Median App Studio, JavaScript Bridge, and native plugins.',
+    },
+    {
+      label: 'Ownership',
+      capgo: 'Open-source updater and backend, with Capgo Cloud, self-hosting, source access, and a path to change providers or maintain it yourself.',
+      competitor: 'A managed platform centered on Median app builds, bridge features, app updates, publishing, and support plans.',
+    },
+    {
+      label: 'Support',
+      capgo: 'Discord community help for normal questions, plus Premium Support for teams with budget, deadlines, and hard production needs.',
+      competitor: 'Median support, publishing, app updates, plugin work, and custom services are delivered through the Median platform.',
+    },
+    {
+      label: 'Exit path',
+      capgo: 'If Capgo Cloud is no longer the fit, keep the Capacitor app and choose self-hosting, another provider, or your own maintenance path.',
+      competitor: 'If Median is no longer the fit, plan for a migration from Median shell, bridge, plugins, and workflow into Capacitor or native code.',
+    },
+    {
+      label: 'Native features',
+      capgo: 'Use Capacitor plugins, Capgo-maintained plugins, or your own Swift, Kotlin, Java, and Objective-C code.',
+      competitor: 'Use Median JavaScript Bridge and Median native plugin integrations from the Median platform.',
+    },
+    {
+      label: 'Best migration',
+      capgo: 'Web apps that want a mobile app path without vendor lock-in, plus existing Capacitor teams that need release control.',
+      competitor: 'Websites that value managed packaging and publishing convenience more than long-term portability.',
+    },
+  ],
+  narratives: [
+    {
+      title: 'When Median wins',
+      text: 'Median can be the fast path when the business priority is to hand a website to a managed platform and get an app-store presence with less native engineering work.',
+      items: ['Managed web-to-app packaging.', 'Publishing and update services available.', 'Useful when convenience matters more than ownership.'],
+    },
+    {
+      title: 'When Capgo wins',
+      text: 'Capgo is stronger when tomorrow matters. If you stop liking the cloud service, you still have Capacitor, open-source code, self-hosting, community help, paid support, competitors, and your own engineering path.',
+      items: ['Avoid vendor lock-in.', 'Self-host or change providers later.', 'Get expert help without giving up source control.'],
+    },
+    {
+      title: 'How to choose',
+      text: 'Choose by the exit path. If you want someone else to own the app wrapper, Median is convenient. If you want the app to remain yours, build on Capacitor and use Capgo for delivery, builds, and support.',
+      items: ['Choose by ownership.', 'Choose by support model.', 'Choose by how expensive switching later should be.'],
+    },
+  ],
+  faq,
+  sources: [
+    { label: 'Median homepage', href: 'https://median.co/' },
+    { label: 'Median JavaScript Bridge', href: 'https://docs.median.co/docs/javascript-bridge' },
+    { label: 'Median Native Plugins Overview', href: 'https://docs.median.co/docs/native-plugins-overview' },
+    { label: 'Median App Updates', href: 'https://docs.median.co/docs/app-updates' },
+    { label: 'Median Publishing Overview', href: 'https://docs.median.co/docs/publishing-overview' },
+    { label: 'Capacitor GitHub', href: 'https://github.com/ionic-team/capacitor' },
+    { label: 'Capgo GitHub', href: 'https://github.com/Cap-go/capgo' },
+    { label: 'Capgo updater GitHub', href: 'https://github.com/Cap-go/capacitor-updater' },
+    { label: 'Capgo live updates', href: 'https://capgo.app/live-update/' },
+    { label: 'Capgo plugins', href: 'https://capgo.app/plugins/' },
+    { label: 'Capgo native builds', href: 'https://capgo.app/native-build/' },
+    { label: 'Capgo Premium Support', href: 'https://capgo.app/premium-support/' },
+    { label: 'Capgo Discord', href: 'https://discord.capgo.app' },
+  ],
+  sourceNote: 'Checked against official Median docs and Capgo product pages on June 17, 2026.',
+}
+
+const content = {
+  title: page.title,
+  description: page.description,
+  canonical: pageUrl,
+  url: pageUrl,
+  image: `${config.baseUrl}/capgo_social.png`,
+  keywords: 'Median vs Capgo, Median alternative, webview app builder, Capacitor live updates, Capgo',
+  ldJSON: createLdJsonGraph(
+    config,
+    createWebPageLdJson(config, {
+      name: page.title,
+      description: page.description,
+      url: pageUrl,
+    }),
+    {
+      includeOrganization: true,
+      additionalEntities: [
+        createFAQPageLdJson(config, {
+          url: pageUrl,
+          questions: faq,
+        }),
+      ],
+    },
+  ),
+}
+---
+
+<Layout content={content}>
+  <CompetitorComparison page={page} locale={locale} />
+</Layout>

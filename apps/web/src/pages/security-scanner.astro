@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -8,7 +8,7 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = `${brand} | Capacitor Security Scanner`
 const description = 'Free security scanner for Capacitor & Ionic apps. Detect vulnerabilities, hardcoded secrets, and security misconfigurations with 62+ security rules.'
 
-const content = { title, description }
+const content = { title, description, image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-security-scanner.png` }
 ---
 
 <Layout content={content}>

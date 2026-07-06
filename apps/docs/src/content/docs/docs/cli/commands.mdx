@@ -307,10 +307,10 @@ Optionally, you can give:
   
 ### **Compatibility** 
 
-`npx @capgo/cli bundle compatibility [appId] -c [channelId]`
+`npx @capgo/cli bundle compatibility [appId] -c [channelName]`
 
 `[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
-`[channelId]` the name of your new channel.
+`[channelName]` the name of the channel to check.
 
 Optionally, you can give:
 
@@ -324,15 +324,15 @@ Optionally, you can give:
 
 ### **Add**
 
-`npx @capgo/cli channel add [channelId] [appId]`
+`npx @capgo/cli channel add [channelName] [appId]`
 
-`[channelId]` the name of your new channel. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
+`[channelName]` the name of your new channel, such as `production` or `beta`. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 ### **Delete**
 
-`npx @capgo/cli channel delete [channelId] [appId]`
+`npx @capgo/cli channel delete [channelName] [appId]`
 
-`[channelId]` the name of your channel you want to delete. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
+`[channelName]` the name of the channel you want to delete. `[appId]` your app ID the format `com.test.app` is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
 
 ### **List**
 
@@ -346,9 +346,10 @@ Optionally, you can give:
 
 ### **Set**
 
-`npx @capgo/cli channel set [channelId] [appId]`
+`npx @capgo/cli channel set [channelName] [appId]`
 
 `[appId]` is your app ID, the format is explained [here](https://capacitorjs.com/docs/cli/commands/init/).
+`[channelName]` the name of the channel you want to configure, such as `production` or `beta`.
 
 Optionally, you can give:
 
@@ -365,7 +366,7 @@ Optionally, you can give:
 * `--no-android` disallows the channel to send version to android devices.
 * `--self-assign` allows devices to self assign to this channel.
 * `--no-self-assign` disallows devices to self assign to this channel.
-* `--disable-auto-update STRATEGY`  Disable auto update strategy for this channel. The possible options are: major, minor, metadata, none.
+* `--disable-auto-update STRATEGY`  Disable auto update strategy for this channel. The possible options are: major, minor, patch, metadata, none.
 * `--apikey [key]` API key to link to your account.
 
 ## Disable updates strategy
@@ -374,24 +375,25 @@ There are a few ways to handle disabling updates for too old versions.\
 Capgo cannot update native code thus an update from a version with the old native code to a version with the updated native code should not be possible.
 There are a couple of ways to achieve that.
 
-First, the `major` strategy. It prevents an update from `0.0.0` -> `1.0.0`. The major is the highlighted number (**1**.0.0 and **0**.0.0).\
-Second is the `minor` strategy. It prevents an update from `0.0.0` -> `1.1.0` or an update from `1.1.0` to `1.2.0`. 
-**BE AWARE** this strategy does not prevent an update from `0.1.0` -> `1.1.0`
+First, the `major` strategy. It prevents an update from native baseline `0.0.0` -> target bundle `1.0.0`. The major is the highlighted number (**1**.0.0 and **0**.0.0).\
+Second is the `minor` strategy. It prevents an update when the target bundle has a different major or minor than the device native baseline, such as `0.0.0` -> `1.1.0` or `1.1.0` -> `1.2.0`.
 
 Third, the `patch` strategy. It was added into capgo as a very strict mode. It's not recommended to be used unless you fully understand how it works.
-In order for it to accept a update the following conditions must be meet:
- - The major is the same between the new and the old version
- - The minor is the same between the new and the old version
- - The patch of the new version if greater then the patch of the old version
+In order for it to accept an update, the following conditions must be met:
+ - The major is the same between the target bundle and `version_build`
+ - The minor is the same between the target bundle and `version_build`
+ - The patch is the same between the target bundle and `version_build`
+ - Only the version suffix may differ, such as prerelease (`-beta.2`) or build metadata (`+build.2`)
 
 Here is an example of which scenarios the update is allowed or denied
 
- - 0.0.311 -> 0.0.314 ✅
- - 0.0.0 -> 0.0.314 ✅
- - 0.0.316 -> 0.0.314 ❌
- - 0.1.312 -> 0.0.314 ❌
- - 1.0.312 -> 0.0.314 ❌
+ - 1.0.0-beta.1 -> 1.0.0-beta.2 allowed
+ - 1.0.0+build.1 -> 1.0.0+build.2 allowed
+ - 1.0.0 -> 1.0.1 blocked
+ - 1.0.0 -> 1.1.0 blocked
+ - 1.0.0 -> 2.0.0 blocked
 
+The strategy comparison uses the native baseline sent as `version_build`, not the current downloaded bundle sent as `version_name`.
 
 Lastly the most complicated strategy. The `metadata` strategy.\
 First you need to know that initially after you enable it the updates **WILL** fail as the channel is lacking the required metadata.\
@@ -405,14 +407,14 @@ First, figure out what channel is failing. You can do that by looking at the `mi
 Then go to the failing channel and click on `Bundle number`. This should take you to the bundle page.
 <img src="/fail-channel-show.webp" alt="Locate failing channel"/>
 
-Once there fill the `Minimal update version` field. This should be a [semver](https://devhints.io/semver/).\
+Once there fill the `Minimal update version` field. This should be a [semver](/semver_tester/).\
 If the value you pass is not a semver you will get an error, but if everything goes correctly you should see something like this:
 <img src="/set-min-update-version.webp" alt="Set min version"/>
 
 Now, you likely do not want to set this data manually every time you update. Fortunately, the CLI will prevent you from sending an update without this metadata
 <img src="/cli-fail-no-metadata.webp" alt="CLI fail no metadata"/>
 
-To properly upload a bundle when using the `metadata` option you need to pass the `--min-update-version` with the valid semver. Something like this:
+To properly upload a bundle when using the `metadata` option you need to pass the `--min-update-version` with the [valid semver](/semver_tester/). Something like this:
 <img src="/cli-upload-with-metadata.webp" alt="CLI upload with metadata"/>
 
 The `--min-update-version` is not the ONLY way to do compatibility.

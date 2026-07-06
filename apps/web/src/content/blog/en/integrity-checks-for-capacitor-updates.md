@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-25T02:39:56.412Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67bd178e258ce8f57ea75e3e-1740451235493.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T10:44:00.000Z
+head_image: /blog-images/integrity-checks-for-capacitor-updates.webp
+head_image_alt: "Integrity Checks for Capacitor Updates Capgo blog illustration"
 keywords: OTA updates, Capacitor, security, integrity checks, encryption, mobile apps, update management
 tag: Development, Mobile, Updates
 published: true

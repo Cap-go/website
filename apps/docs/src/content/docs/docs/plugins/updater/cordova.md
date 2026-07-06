@@ -1,28 +1,47 @@
 ---
-title: "Cordova"
-description: "Exploring the potential availability of the capacitor-updater plugin for Cordova and the challenges involved in its development."
+title: "Cordova / Electron"
+description: "Capgo live updates for Cordova and Electron apps with dedicated client plugins and the same cloud backend as Capacitor."
 sidebar:
   order: 8
+  label: "Cordova / Electron"
 ---
 
-You've been wondering if this plugin will ever be available for Cordova.
+import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
 
-We have started a R\&D repository for that, but it's a huge amount of work.
+Capacitor is the primary path documented in this updater section, but Capgo also ships dedicated clients for **Cordova** and **Electron**. Each plugin uses the same Capgo Cloud backend, channels, bundle signing, and `@capgo/cli` upload flow.
 
-## Problems
+<Aside type="tip">
+  You can keep the same Capgo app ID and channels when you support multiple runtimes. Only the client plugin package changes per stack.
+</Aside>
 
-We know we can do it but for that, we have to read all the code of Cordova codebase as we did for Capacitor, to understand how to make it work with ap Capgo features.
+## Cordova
 
-The Android version is easier to do since both use Java, but iOS needs a full rewrite because Swift is still not well-supported in Cordova
+`@capgo/cordova-updater` mirrors the `@capgo/capacitor-updater` JavaScript API for Cordova iOS 7+ and Android 13+. Install it with `cordova plugin add`, call `cordova.plugins.Updater.notifyAppReady()` after `deviceready`, and upload bundles the same way you would for Capacitor.
 
-## Solution
+Do not combine the plugin with `cordova-plugin-ionic-webview` — it bypasses Cordova scheme handlers and downloaded bundles will not apply.
 
-In the mean time heres what you can do:
+<LinkCard
+  title="Cordova updater docs"
+  href="/docs/plugins/cordova-updater/getting-started/"
+  description="Install plugin variables, configure iOS/Android WebView requirements, and ship your first bundle."
+/>
 
-* [Support us](https://github.com/sponsors/cap-go) on GitHub and we can prioritize that. 
-This will need at least 1 month of work.
-* Hire us as a [Consultant](https://capgo.app/consulting/), we are used to help big companies migrate to Capacitor, it usually takes a month, and the [benefit](https://ionic.io/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) is huge for your team
+## Electron
 
-## Keep going from Cordova
+`@capgo/electron-updater` brings the same live-update model to desktop apps. Initialize the updater in the Electron main process, expose the preload bridge, call `notifyAppReady()` from the renderer, and manage releases from the same Capgo dashboard you use for mobile.
 
-If you are using **Cordova** to plan native plugin work, connect it with [Using @capgo/capacitor-updater](/plugins/capacitor-updater/) for the native capability in Using @capgo/capacitor-updater, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.
+<LinkCard
+  title="Electron updater docs"
+  href="/docs/plugins/electron-updater/getting-started/"
+  description="Wire main process, preload, and renderer setup for OTA on desktop."
+/>
+
+## Capacitor path
+
+If you are on Capacitor already, stay on the main updater guide:
+
+<LinkCard
+  title="Capacitor updater docs"
+  href="/docs/plugins/updater/getting-started/"
+  description="Default install path for Capacitor iOS and Android apps."
+/>

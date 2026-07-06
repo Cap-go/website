@@ -8,9 +8,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-24T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /Codemagic_ios.webp
-head_image_alt: Codemagic testflight illustration
+head_image_alt: "Automatic Capacitor IOS build with Codemagic Capgo blog illustration"
 keywords: Codemagic, CI/CD, iOS, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true

@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import ToolCatalog from '@/components/tools/ToolCatalog.astro'
 import ToolFaq from '@/components/tools/ToolFaq.astro'
 import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const title = 'iOS Certificate Generator | Free Apple CSR and Private Key'
 const description = 'Generate an iOS certificate signing request and private key in seconds. Use the CSR for Apple Developer certificates, manual signing, or CI build pipelines.'

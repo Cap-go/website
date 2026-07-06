@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-21T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /capgo_channels_surfing.webp
-head_image_alt: Capgo channel switching illustration
+head_image_alt: "Channel Surfing for Capgo: How to Switch Update Channels at Runtime Capgo blog illustration"
 keywords: channels, channel surfing, OTA updates, capacitor, capgo, live updates, runtime switching, beta testing, QA
 tag: Tutorial
 published: true
@@ -63,7 +63,7 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater';
 await CapacitorUpdater.setChannel({ channel: 'your-channel' });
 ```
 
-This sets the channel that is used when querying Capgo for updates. [Learn more about the setChannel API](/docs/plugin/api/#setchannel).
+This sets the channel that is used when querying Capgo for updates. [Learn more about the setChannel API](/docs/plugins/updater/api/#setchannel).
 
 ### Instant Channel Switching (v5.34.0+)
 
@@ -334,7 +334,7 @@ For the best user experience when building channel-switching UIs, always use the
 
 - [Capgo Live Updates Documentation](/docs/getting-started/quickstart/)
 - [Channels Documentation](/docs/live-updates/channels/)
-- [Plugin API Reference](/docs/plugin/api/)
+- [Plugin API Reference](/docs/plugins/updater/api/)
 - [Capgo CLI Commands](/docs/cli/commands/)
 
 ## Conclusion

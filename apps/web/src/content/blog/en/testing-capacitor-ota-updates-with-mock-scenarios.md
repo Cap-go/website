@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-19T03:53:13.485Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67da3972cfd1b2222c56f23a-1742356439850.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/testing-capacitor-ota-updates-with-mock-scenarios.webp
+head_image_alt: "Testing Capacitor OTA Updates with Mock Scenarios Capgo blog illustration"
 keywords: Capacitor, OTA updates, testing, mock scenarios, app reliability, network conditions, failure recovery, analytics
 tag: Development, Mobile, Updates
 published: true
@@ -44,7 +44,7 @@ To test [Capacitor OTA updates](https://capgo.app/ja/), you'll need the followin
 | --- | --- | --- |
 | **Node.js** | Runtime environment | Latest LTS version |
 | **Capacitor CLI** | App development | Capacitor 8 |
-| **[Capgo CLI](https://capgo.app/docs/cli/commands)** | OTA management | Latest version |
+| **[Capgo CLI](https://capgo.app/docs/cli/commands/)** | OTA management | Latest version |
 
 Install the Capgo CLI by running:
 

@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-15T05:25:39.348Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6825647b0209458b3ff370ad-1747287014908.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/custom-ios-plugin-optimization-best-practices.webp
+head_image_alt: "\"Custom iOS Plugin Optimization: Best Practices\" Capgo blog illustration"
 keywords: iOS plugins, Capacitor, performance optimization, memory management, Swift code, Xcode tools, bridge communication, app performance
 tag: Development, Mobile, Technology
 published: true

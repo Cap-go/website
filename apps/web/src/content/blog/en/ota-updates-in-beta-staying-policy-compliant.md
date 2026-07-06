@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-01T02:04:08.266Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5-1743499666588.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/ota-updates-in-beta-staying-policy-compliant.webp
+head_image_alt: "\"OTA Updates in Beta: Staying Policy-Compliant\" Capgo blog illustration"
 keywords: OTA updates, beta testing, compliance, app store policies, encryption, user communication, quality control
 tag: Development, Security, Updates
 published: true

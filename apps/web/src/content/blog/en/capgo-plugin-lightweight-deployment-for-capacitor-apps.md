@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-22T10:11:36.761Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682e72b04fa53d4220800503-1747908750758.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/capgo-plugin-lightweight-deployment-for-capacitor-apps.webp
+head_image_alt: "\"Capgo Plugin: Lightweight Deployment for Capacitor Apps\" Capgo blog illustration"
 keywords: Capgo, Capacitor, app updates, OTA updates, mobile deployment, secure updates, error handling, compliance
 tag: Development, Mobile, Updates
 published: true
@@ -66,7 +66,7 @@ Here’s how you can install and set up Capgo:
     
 -   **Step 3: Set Up Live Updates**
     
-    To enable live updates, install the [Capgo CLI](https://capgo.app/docs/cli/commands) and initialize it:
+    To enable live updates, install the [Capgo CLI](https://capgo.app/docs/cli/commands/) and initialize it:
     
     ```bash
     npm install @capgo/cli

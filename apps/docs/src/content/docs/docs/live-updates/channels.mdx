@@ -19,27 +19,30 @@ When a device checks for an update, Capgo decides which channel to use in this s
 
 1. **Forced device mapping (Dashboard)** – Manually pin a specific device ID to a channel. Use for urgent debugging or controlled testing with a single real user. This always wins.
 2. **Cloud override (per‑device) via Dashboard or API** – Created when you change the device's channel in the dashboard or via API. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device entry does.
+3. **Plugin `setChannel()` local channel** – Created when the app calls `setChannel()` and the backend validates that the target channel allows self-assignment. The selected channel is stored locally on that device, takes effect instantly, and is not shown in the Device Override UI.
 
 <Aside type="tip" title="Instant Channel Switching with setChannel()">
 **Starting from plugin version 5.34.0, 6.34.0, 7.34.0, or 8.0.0** (depending on your major version), `setChannel()` works differently: it contacts the backend to **validate** that the channel is allowed (checking if self-assignment is enabled for that channel), then stores the channel **locally on the device** as `defaultChannel`. This means the new channel takes effect **instantly** for the next update check—no waiting for replication.
 
 Previously, `setChannel()` saved the channel override to the backend database (like Dashboard or API changes), and devices had to wait for data replication (up to 2 minutes) before the new channel was recognized. The new behavior only reads from the backend (for validation) and stores locally, making channel switches instant.
 
+Because `setChannel()` is local-only, it does **not** create a Device Override entry in the Capgo dashboard. The Device Override UI only shows overrides created from the dashboard or the Public API.
+
 **Note:** Even if a channel becomes disallowed after being set locally, the backend will still validate the channel during update checks, so security is maintained.
 
 **Important:** When channel changes are made via the Dashboard or API, there is still a replication lag of up to 2 minutes before all edge servers reflect the change. For instant channel switching, use `setChannel()` from your app code—it validates with the backend, then sets the channel locally for immediate effect.
 </Aside>
-3. **Capacitor config `defaultChannel` (test build default)** – If present in `capacitor.config.*` and no force/override exists, the app starts on this channel (e.g. `beta`, `qa`, `pr-123`). Intended for TestFlight / internal builds so testers land on a pre‑release channel automatically. Production builds typically leave this unset.
-4. **Cloud Default Channel (primary path ~99% of users)** – If you mark a default channel in the dashboard, all normal end‑users (no force, no override, no config defaultChannel) attach here. Change it to roll out or roll back instantly—no new binary. If you have platform-specific defaults (for example, one iOS-only, one Android-only, one Electron-only), each device lands on the default matching its platform. Leaving the cloud default unset is allowed; in that case the device must match on steps 1–3 to receive updates.
+4. **Capacitor config `defaultChannel` (test build default)** – If present in `capacitor.config.*` and no force/override/local channel exists, the app starts on this channel (e.g. `beta`, `qa`, `pr-123`). Intended for TestFlight / internal builds so testers land on a pre‑release channel automatically. Production builds typically leave this unset.
+5. **Cloud Default Channel (primary path ~99% of users)** – If you mark a default channel in the dashboard, all normal end‑users (no force, no Dashboard/API override, no plugin local channel, no config defaultChannel) attach here. Change it to roll out or roll back instantly—no new binary. If you have platform-specific defaults (for example, one iOS-only, one Android-only, one Electron-only), each device lands on the default matching its platform. Leaving the cloud default unset is allowed; in that case the device must match on steps 1–4 to receive updates.
 
 Best practice:
-- Treat 1–3 as exception / testing layers; when you set a cloud default, real users should flow into it. If you choose not to set one, be deliberate about how users attach (typically via `defaultChannel` in config or per-device overrides).
+- Treat 1–4 as exception / testing layers; when you set a cloud default, real users should flow into it. If you choose not to set one, be deliberate about how users attach (typically via `defaultChannel` in config or per-device overrides).
 - Only configure `defaultChannel` in binaries you explicitly ship to testers. Leaving it unset keeps production logic centralized in the dashboard.
 - Use `setChannel()` sparingly in production—mainly for QA or targeted diagnostics.
 
 If a channel is disabled for the platform (iOS/Android/Electron toggles) when it would otherwise be chosen, the selection process skips it and continues down the list.
 
-> Summary: Force > Override > Config `defaultChannel` > Cloud Default.
+> Summary: Force > Dashboard/API Override > Plugin `setChannel()` local channel > Config `defaultChannel` > Cloud Default.
 
 ## Default Channel Behavior
 
@@ -90,7 +93,7 @@ const config: CapacitorConfig = {
 Next, build your web app and run `npx cap sync` to copy the updated config file to your iOS, Android, and Electron projects. If you skip this sync step, your native projects will continue to use whichever channel they were previously configured for.
 
 <Aside type="caution">
-Channel selection order: Force > Override (`setChannel` / dashboard) > Config `defaultChannel` > Cloud Default.
+Channel selection order: Force > Dashboard/API device override > Plugin `setChannel()` local channel > Config `defaultChannel` > Cloud Default.
 
 Use `defaultChannel` only in test/internal builds; leave it out for production so users follow the Cloud Default (when set) instead of duplicating the routing in native config.
 
@@ -115,11 +118,13 @@ Channels have several options that control who can receive updates and how updat
 
 Use this to restrict which kinds of updates the channel will automatically deliver. Options:
 
-- major: Block cross‑major updates (0.0.0 → 1.0.0). Minor and patch updates still allowed.
-- minor: Block cross‑minor updates (e.g., 1.1.0 → 1.2.0) and majors. Patch updates still allowed. Note: does not block 0.1.0 → 1.1.0.
-- patch: Very strict. Allows only increasing patch versions within the same major and minor. Examples: 0.0.311 → 0.0.314 ✅, 0.1.312 → 0.0.314 ❌, 1.0.312 → 0.0.314 ❌.
+- major: Blocks a target bundle whose major version is higher than the device native baseline (`version_build`). Example: `1.2.3 -> 2.0.0` is blocked; `1.2.3 -> 1.9.0` is allowed.
+- minor: Blocks a target bundle whose major or minor version differs from `version_build`. Example: `1.2.3 -> 1.3.0` is blocked; `1.2.3 -> 1.2.4` is allowed.
+- patch: Strictest mode. Blocks any change to major, minor, or patch number. Only suffix changes are allowed while `MAJOR.MINOR.PATCH` stays identical. Examples: `1.0.0-beta.1 -> 1.0.0-beta.2` is allowed, `1.0.0+build.1 -> 1.0.0+build.2` is allowed, `1.0.0 -> 1.0.1` is blocked.
 - metadata: Require a minimum update version metadata on each bundle. Configure via CLI using `--min-update-version` or `--auto-min-update-version`. If missing, the channel is marked misconfigured and updates will be rejected until set.
-- none: Allow all updates according to semver compatibility.
+- none: Allow all updates according to [semver compatibility](/semver_tester/).
+
+These strategies compare the channel's target bundle against the native baseline sent as `version_build`, not the current downloaded bundle sent as `version_name`.
 
 Learn more details and examples in Disable updates strategy at /docs/cli/commands/#disable-updates-strategy.
 
@@ -165,15 +170,17 @@ When `setChannel()` is called:
 
 **Why this matters:** In older versions, `setChannel()` saved the channel override to the backend database (same as Dashboard or API changes). Devices had to wait for backend replication (up to 2 minutes) before the channel change took effect. Now, `setChannel()` only reads from the backend (for validation) and stores locally, making channel switches instant.
 
+**Dashboard visibility:** A channel set with the plugin does not make the device appear as a Device Override in the Capgo UI. Only channel assignments created from the dashboard or the Public API are listed there. Use the dashboard or API when you need an admin-visible override.
+
 **Security note:** Even if a channel's permissions change after being set locally (e.g., self-assignment is disabled), the backend will still validate the channel during update checks, ensuring security is maintained.
 
 **Comparison of channel change methods:**
 
-| Method | Effect Time | Persisted Where | Use Case |
-|--------|-------------|-----------------|----------|
-| `setChannel()` from plugin | **Instant** | Device only (local) | User-initiated channel switching in-app |
-| Dashboard device override | Up to 2 min | Backend database | Admin-initiated changes for specific devices |
-| API channel assignment | Up to 2 min | Backend database | Automated backend integrations |
+| Method | Effect Time | Persisted Where | Shown in Device Override UI | Use Case |
+|--------|-------------|-----------------|------------------------------|----------|
+| `setChannel()` from plugin | **Instant** | Device only (local) | No | User-initiated channel switching in-app |
+| Dashboard device override | Up to 2 min | Backend database | Yes | Admin-initiated changes for specific devices |
+| API channel assignment | Up to 2 min | Backend database | Yes | Automated backend integrations |
 
 For the best user experience when building channel-switching UIs, always use the plugin's `setChannel()` method.
 
@@ -196,7 +203,7 @@ You can also assign builds to channels from the "Bundles" section of the Capgo d
 
 It's important to note that bundles in Capgo are global to your app, not specific to individual channels. The same bundle can be assigned to multiple channels.
 
-When versioning your bundles, we recommend using semantic versioning [semver](https://semver.org/) with pre-release identifiers for channel-specific builds. For example, a beta release might be versioned as `1.2.3-beta.1`.
+When versioning your bundles, we recommend using [semantic versioning with Capgo's Semver Tester](/semver_tester/) and pre-release identifiers for channel-specific builds. For example, a beta release might be versioned as `1.2.3-beta.1`.
 
 This approach has several benefits:
 
@@ -211,7 +218,7 @@ Here's an example of how you might align your bundle versions with a typical cha
 - `Staging` channel: `1.2.3-rc.1`, `1.2.3-rc.2`, etc.
 - `Production` channel: `1.2.3`, `1.2.4`, etc.
 
-Using semver with pre-release identifiers is a recommended approach, but not strictly required. The key is to find a versioning scheme that clearly communicates the relationships between your builds and aligns with your team's development process.
+Using [semver with pre-release identifiers](/semver_tester/) is a recommended approach, but not strictly required. The key is to find a versioning scheme that clearly communicates the relationships between your builds and aligns with your team's development process.
 
 ## Rolling Back a Live Update
 

@@ -8,9 +8,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-25T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /versioning.webp
-head_image_alt: Capgo bundle version system
+head_image_alt: "How version work in Capgo Capgo blog illustration"
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
@@ -31,7 +31,7 @@ All versions choices are decided server side by Capgo.
 
 ## Versioning system
 
-To manage version Capgo use the SemVer system, read more about it [here](https://semver.org/).
+To manage version Capgo use the SemVer system. Read the [SemVer specification](https://semver.org/) or check Capgo update compatibility with the [Semver Tester](/semver_tester/).
 ### Versions
 
 Where Capgo find the version to compare
@@ -100,7 +100,7 @@ When you publish your Capacitor JS app on the App Store, what happens is simple.
 
 Your user will get the new version from the store and remove all local updates in their app by default.
 
-If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](/docs/plugin/api#settings)
+If you want to change that behavior, you need to set the setting `resetWhenUpdate` read more about it [here](/docs/plugins/updater/api/#settings)
 
 This can only be changed on the app side, not from the cloud like other settings.
 

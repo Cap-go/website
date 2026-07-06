@@ -1,0 +1,116 @@
+---
+title: "@capgo/capacitor-native-loader"
+description: Native animated loaders, transparent overlays, Lottie assets, and WebView resizing for Capacitor apps.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Render polished loaders above, below, around, or instead of the WebView using native iOS and Android views.
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-loader/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-native-loader/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+import aroundPreview from './previews/around.webp';
+import barsPreview from './previews/bars.webp';
+import chromePreview from './previews/chrome.webp';
+import dotsPreview from './previews/dots.webp';
+import haloPreview from './previews/halo.webp';
+import imagePreview from './previews/image.webp';
+import lottiePreview from './previews/lottie.webp';
+import orbitPreview from './previews/orbit.webp';
+import pulsePreview from './previews/pulse.webp';
+import ringPreview from './previews/ring.webp';
+import siriPreview from './previews/siri.webp';
+import siriV2Preview from './previews/siri-v2.webp';
+import wavePreview from './previews/wave.webp';
+
+<CardGrid stagger>
+  <Card title="Native render path" icon="rocket">
+    Show loaders as UIKit and Android overlay views instead of asking the WebView to animate expensive translucent effects.
+  </Card>
+  <Card title="Flexible placement" icon="setting">
+    Place loaders fullscreen, centered, pinned to an edge, Chrome-style at the top, or around the WebView with safe-area-aware insets.
+  </Card>
+  <Card title="Built-in and asset loaders" icon="puzzle">
+    Use native Siri-style, Siri v2 edge, Chrome top progress, orbit, ring, pulse, dots, bars, wave, halo, image, or Lottie-based loaders.
+  </Card>
+  <Card title="Callable everywhere" icon="pencil">
+    Trigger loaders from JavaScript, Swift, Kotlin, or other native plugins through the public native API.
+  </Card>
+</CardGrid>
+
+## When To Use It
+
+`@capgo/capacitor-native-loader` is for loading states that should stay smooth, translucent, and native while the WebView is busy, resizing, navigating, or hidden behind native surfaces.
+
+Use it when you need:
+
+- transparent full-screen loading layers above web content
+- Chrome-style top progress bars that can resize the WebView instead of covering content
+- edge loaders at the top, bottom, left, or right of the app
+- loaders around a resized WebView while native content owns part of the screen
+- native fallback loaders that survive heavy web rendering, route changes, or startup work
+- shared loaders triggered by another native plugin before JavaScript is ready
+- Lottie, bundled image, or remote asset-backed loading animations
+
+<Aside type="note">
+  For web-only route animations, use <a href="/docs/plugins/transitions/">@capgo/capacitor-transitions</a>. Use Native Loader when the loading state itself should be native or when the WebView needs to be resized while loading.
+</Aside>
+
+## Demo Styles
+
+| Style | Preview |
+| --- | --- |
+| Siri | <img src={siriPreview.src} alt="Siri-style native loader preview" width="180" /> |
+| Siri v2 | <img src={siriV2Preview.src} alt="Siri v2 full-screen edge native loader preview" width="180" /> |
+| Chrome top | <img src={chromePreview.src} alt="Chrome-style top native loader preview" width="180" /> |
+| Ring | <img src={ringPreview.src} alt="Ring native loader preview" width="180" /> |
+| Dots | <img src={dotsPreview.src} alt="Dots native loader preview" width="180" /> |
+| Bars | <img src={barsPreview.src} alt="Bars native loader preview" width="180" /> |
+| Wave | <img src={wavePreview.src} alt="Wave native loader preview" width="180" /> |
+| Orbit | <img src={orbitPreview.src} alt="Orbit native loader preview" width="180" /> |
+| Pulse | <img src={pulsePreview.src} alt="Pulse native loader preview" width="180" /> |
+| Halo | <img src={haloPreview.src} alt="Halo native loader preview" width="180" /> |
+| Around | <img src={aroundPreview.src} alt="Around-screen native loader preview" width="180" /> |
+| Lottie | <img src={lottiePreview.src} alt="Lottie native loader preview" width="180" /> |
+| Image | <img src={imagePreview.src} alt="Image native loader preview" width="180" /> |
+
+## Core API
+
+- `show(options)` displays a loader and returns its `id`.
+- `update(options)` changes an existing loader without tearing down the overlay.
+- `setProgress(options)` updates determinate loader progress.
+- `hide(options)` removes one loader.
+- `hideAll(options)` removes all loaders.
+- `setWebViewLayout(options)` resizes or insets the WebView/body so native loaders can sit beside it.
+- `resetWebViewLayout(options?)` restores the original WebView/body layout.
+- `getState()` returns currently visible loader ids.
+- `configure(options)` sets default style, placement, colors, motion, and behavior.
+
+## Placement Model
+
+`placement` controls where the native surface appears:
+
+- `fullscreen` covers the whole app, optionally translucent.
+- `center` floats a compact loader over the WebView.
+- `top`, `bottom`, `left`, and `right` pin loaders to a safe-area-aware edge.
+- `chrome` style uses a full-width native top bar and pairs well with `webView.mode: 'resize'`.
+- `around` renders loader motion around the screen frame.
+- `custom` uses an explicit frame for native-plugin or split-view workflows.
+
+Use `interactionMode: 'passThrough'` when users can keep interacting with the WebView, `block` when loading should prevent taps, or `loaderOnly` when only the loader surface should receive touches.
+
+## Keep going from @capgo/capacitor-native-loader
+
+If you are using **@capgo/capacitor-native-loader** to plan native media and interface behavior, connect it with [Getting Started](/docs/plugins/native-loader/getting-started/) for implementation details, [@capgo/capacitor-native-navigation](/docs/plugins/native-navigation/) for native chrome and WebView layout, [@capgo/capacitor-transitions](/docs/plugins/transitions/) for web route motion, and [Using @capgo/capacitor-native-loader](/plugins/capacitor-native-loader/) for the tutorial.

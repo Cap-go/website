@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-11T13:52:41.166Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67f910732e221594daf2250f-1744379572627.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/ota-security-checklist-for-capacitor-apps.webp
+head_image_alt: "OTA Security Checklist for Capacitor Apps Capgo blog illustration"
 keywords: OTA updates, app security, encryption, user management, compliance, rollback capabilities, mobile app development
 tag: Mobile, Security, Updates
 published: true

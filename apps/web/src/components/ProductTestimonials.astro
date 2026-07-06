@@ -1,0 +1,260 @@
+---
+import { hasRealAvatar, type ProductTestimonial } from '@/config/productTestimonials'
+
+interface Props {
+  eyebrow?: string
+  title: string
+  description?: string
+  testimonials: ProductTestimonial[]
+  variant?: 'dark' | 'light' | 'native' | 'builder'
+  maxItems?: number
+  accent?: 'green' | 'blue' | 'yellow' | 'cyan'
+}
+
+const { eyebrow = 'Customer proof', title, description, testimonials, variant = 'dark', maxItems = 3, accent = 'green' } = Astro.props
+
+const visibleTestimonials = testimonials.slice(0, maxItems)
+
+const isLight = variant === 'light'
+const isBuilder = variant === 'builder'
+const sectionClass = isBuilder
+  ? 'section product-proof'
+  : variant === 'light'
+    ? 'border-y border-slate-200 bg-white text-slate-950'
+    : variant === 'native'
+      ? 'border-y border-white/10 bg-[#070d18] text-white'
+      : 'border-y border-white/10 bg-slate-950 text-white'
+const eyebrowClass = isLight ? 'text-blue-700' : isBuilder ? `eyebrow eyebrow--${accent}` : 'font-mono text-sm font-semibold tracking-wide uppercase text-cyan-300'
+const titleClass = isLight ? 'text-slate-950' : isBuilder ? 'h2-section' : 'text-white'
+const descriptionClass = isLight ? 'text-slate-600' : isBuilder ? 'lead' : 'text-slate-300'
+const cardClass = isLight ? 'border-slate-200 bg-slate-50 shadow-sm' : isBuilder ? 'proof-card' : 'border-white/10 bg-white/[0.04] shadow-2xl shadow-black/20'
+const quoteClass = isLight ? 'text-slate-700' : isBuilder ? 'proof-quote' : 'text-slate-200'
+const roleClass = isLight ? 'text-slate-500' : isBuilder ? 'proof-role' : 'text-slate-400'
+const nameClass = isLight ? 'text-slate-950' : isBuilder ? 'proof-name' : 'text-white'
+const starActiveClass = isLight ? 'text-amber-500' : isBuilder ? 'proof-star-active' : 'text-amber-300'
+const starMutedClass = isLight ? 'text-slate-300' : isBuilder ? 'proof-star-muted' : 'text-slate-700'
+const gridClass = isBuilder
+  ? visibleTestimonials.length === 1
+    ? 'proof-grid proof-grid--one'
+    : 'proof-grid'
+  : visibleTestimonials.length === 1
+    ? 'max-w-3xl'
+    : visibleTestimonials.length === 2
+      ? 'max-w-5xl md:grid-cols-2'
+      : 'lg:grid-cols-3'
+---
+
+{
+  visibleTestimonials.length > 0 && (
+    <section id="product-testimonials" class:list={[isBuilder ? [sectionClass, `product-proof--${accent}`] : ['scroll-mt-20 py-16 sm:py-20', sectionClass]]}>
+      {isBuilder ? (
+        <div class="shell">
+          <div class="section-head section-head--narrow">
+            <div class={eyebrowClass}>{eyebrow}</div>
+            <h2 class={titleClass}>{title}</h2>
+            {description && <p class={descriptionClass}>{description}</p>}
+          </div>
+
+          <div class={gridClass}>
+            {visibleTestimonials.map((item) => {
+              const showAvatar = hasRealAvatar(item.avatar)
+              return (
+                <article class:list={['proof-card-wrap', cardClass]}>
+                  <div class="proof-card-top">
+                    {showAvatar ? (
+                      <img src={item.avatar} alt="" width="40" height="40" loading="lazy" decoding="async" class="proof-avatar" />
+                    ) : (
+                      <span class="proof-mark" aria-hidden="true">
+                        &ldquo;
+                      </span>
+                    )}
+                    <div class="flex shrink-0 gap-0.5" role="img" aria-label={`${item.rating} out of 5 stars`}>
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <svg class:list={['h-3.5 w-3.5', index < item.rating ? starActiveClass : starMutedClass]} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+
+                  <blockquote class="proof-blockquote">
+                    <p class={quoteClass}>{item.quote}</p>
+                  </blockquote>
+
+                  <footer class="proof-footer">
+                    <cite class:list={['not-italic', nameClass]}>{item.name}</cite>
+                    <span class={roleClass}>{item.role}</span>
+                  </footer>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      ) : (
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl">
+            <p class:list={[eyebrowClass]}>{eyebrow}</p>
+            <h2 class:list={['mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl', titleClass]}>{title}</h2>
+            {description && <p class:list={['mt-5 text-base leading-7 text-pretty', descriptionClass]}>{description}</p>}
+          </div>
+
+          <div class:list={['mt-10 grid gap-4', gridClass]}>
+            {visibleTestimonials.map((item) => {
+              const showAvatar = hasRealAvatar(item.avatar)
+              return (
+                <article class:list={['flex min-h-full flex-col rounded-lg border p-5', cardClass]}>
+                  <div class="flex items-start justify-between gap-4">
+                    <div class="flex min-w-0 items-center gap-3">
+                      {showAvatar && (
+                        <img
+                          src={item.avatar}
+                          alt={`Portrait of ${item.name}`}
+                          width="48"
+                          height="48"
+                          loading="lazy"
+                          decoding="async"
+                          class="h-12 w-12 shrink-0 rounded-lg object-cover outline-1 -outline-offset-1 outline-white/10"
+                        />
+                      )}
+                      <div class="min-w-0">
+                        <h3 class:list={['text-sm font-semibold', nameClass]}>{item.name}</h3>
+                        <p class:list={['mt-1 text-xs leading-5', roleClass]}>{item.role}</p>
+                      </div>
+                    </div>
+                    <div class="flex shrink-0 gap-0.5" role="img" aria-label={`${item.rating} out of 5 stars`}>
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <svg class:list={['h-4 w-4', index < item.rating ? starActiveClass : starMutedClass]} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+
+                  <blockquote class="mt-5 flex-1">
+                    <p class:list={['text-sm leading-6', quoteClass]}>&ldquo;{item.quote}&rdquo;</p>
+                  </blockquote>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}
+
+<style is:global>
+  .product-proof .proof-grid {
+    display: grid;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  @media (min-width: 768px) {
+    .product-proof .proof-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .product-proof .proof-grid--one {
+      grid-template-columns: minmax(0, 640px);
+      justify-content: center;
+    }
+  }
+  .product-proof .proof-card-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 22px 22px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    min-height: 100%;
+  }
+  .product-proof .proof-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .product-proof .proof-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .product-proof .proof-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .product-proof--green .proof-mark {
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.22);
+    color: #4ade80;
+  }
+  .product-proof--blue .proof-mark {
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.22);
+    color: #60a5fa;
+  }
+  .product-proof--yellow .proof-mark {
+    background: rgba(253, 224, 71, 0.1);
+    border: 1px solid rgba(253, 224, 71, 0.22);
+    color: #fde047;
+  }
+  .product-proof--cyan .proof-mark {
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid rgba(34, 211, 238, 0.22);
+    color: #22d3ee;
+  }
+  .product-proof .eyebrow--green {
+    color: #4ade80;
+  }
+  .product-proof .eyebrow--blue {
+    color: #60a5fa;
+  }
+  .product-proof .eyebrow--yellow {
+    color: #fde047;
+  }
+  .product-proof .eyebrow--cyan {
+    color: #22d3ee;
+  }
+  .product-proof .proof-star-active {
+    color: #fbbf24;
+  }
+  .product-proof .proof-star-muted {
+    color: rgba(255, 255, 255, 0.18);
+  }
+  .product-proof .proof-blockquote {
+    margin: 0;
+    flex: 1;
+  }
+  .product-proof .proof-quote {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .product-proof .proof-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .product-proof .proof-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .product-proof .proof-role {
+    font-size: 12px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.45);
+  }
+</style>

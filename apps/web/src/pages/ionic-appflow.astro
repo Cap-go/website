@@ -1,6 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
+import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
 
@@ -18,6 +20,7 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
 const enterprisePluginsUrl = getRelativeLocaleUrl(locale, 'ionic-enterprise-plugins')
 const supportUrl = getRelativeLocaleUrl(locale, 'premium-support')
 const migrationServicesUrl = getRelativeLocaleUrl(locale, 'consulting')
+const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
 ---
 
 <Layout content={content}>
@@ -93,6 +96,35 @@ const migrationServicesUrl = getRelativeLocaleUrl(locale, 'consulting')
             <p class="text-sm text-gray-400">
               {m.appflow_pricing_note({}, { locale })}
             </p>
+          </div>
+
+          <!-- App Store Credentials -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-gray-100">
+              {m.appflow_credentials_title({}, { locale })}
+            </h3>
+            <p class="mb-4 text-gray-300" set:html={m.appflow_credentials_desc({}, { locale })} />
+            <div class="grid gap-6 md:grid-cols-2">
+              <div>
+                <p class="mb-2 font-medium text-rose-300">{m.appflow_credentials_appflow_label({}, { locale })}</p>
+                <ul class="ml-6 list-disc space-y-1 text-sm text-gray-400">
+                  <li>{m.appflow_credentials_appflow_li1({}, { locale })}</li>
+                  <li>{m.appflow_credentials_appflow_li2({}, { locale })}</li>
+                  <li>{m.appflow_credentials_appflow_li3({}, { locale })}</li>
+                  <li>{m.appflow_credentials_appflow_li4({}, { locale })}</li>
+                </ul>
+              </div>
+              <div>
+                <p class="mb-2 font-medium text-emerald-300">{m.appflow_credentials_capgo_label({}, { locale })}</p>
+                <ul class="ml-6 list-disc space-y-1 text-sm text-gray-400">
+                  <li set:html={m.appflow_credentials_capgo_li1({}, { locale })} />
+                  <li>{m.appflow_credentials_capgo_li2({}, { locale })}</li>
+                  <li>{m.appflow_credentials_capgo_li3({}, { locale })}</li>
+                  <li set:html={m.appflow_credentials_capgo_li4({}, { locale })} />
+                </ul>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-gray-400" set:html={m.appflow_credentials_note({ url: nativeBuildUrl }, { locale })} />
           </div>
 
           <!-- Open Source -->
@@ -193,6 +225,13 @@ const migrationServicesUrl = getRelativeLocaleUrl(locale, 'consulting')
           <p class="text-sm text-gray-400" set:html={m.appflow_migration_stuck({}, { locale })} />
         </div>
       </div>
+
+      <ProductVideoSection
+        variant="gray"
+        youtubeId={productVideos.appflowMigration.youtubeId}
+        title={productVideos.appflowMigration.title}
+        description={productVideos.appflowMigration.description}
+      />
 
       <!-- Enterprise Plugins -->
       <div class="mb-16">
@@ -353,6 +392,10 @@ const migrationServicesUrl = getRelativeLocaleUrl(locale, 'consulting')
           <div>
             <dt class="text-lg font-semibold text-white">{m.appflow_faq_q4({}, { locale })}</dt>
             <dd class="mt-2 text-gray-300" set:html={m.appflow_faq_a4({}, { locale })} />
+          </div>
+          <div>
+            <dt class="text-lg font-semibold text-white">{m.appflow_faq_q5({}, { locale })}</dt>
+            <dd class="mt-2 text-gray-300">{m.appflow_faq_a5({}, { locale })}</dd>
           </div>
         </dl>
       </div>

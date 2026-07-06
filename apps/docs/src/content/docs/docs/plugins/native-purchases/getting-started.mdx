@@ -9,6 +9,22 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
+## Installation
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/native-purchases` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
 <Steps>
 1. **Install the package**
    <PackageManagers pkg="@capgo/native-purchases" pkgManagers={['bun']} />
@@ -264,4 +280,4 @@ After the purchase flow works, use the [Revenue Playbook](/docs/plugins/native-p
 
 ## Keep going from Getting Started
 
-If you are using **Getting Started** to plan store approval and distribution, connect it with [Using @capgo/native-purchases](/plugins/capacitor-native-purchases/) for the native capability in Using @capgo/native-purchases, [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, and [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market.
+If you are using **Getting Started** to plan store approval and distribution, connect it with [Using @capgo/native-purchases](/plugins/capacitor-native-purchases/) for the native capability in Using @capgo/native-purchases, [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, and [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market.

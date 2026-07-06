@@ -3,7 +3,7 @@ import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
 import { getLocalizedPath } from '@/services/locale-path'
 import { locales } from '@/services/locale'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const year = new Date().getFullYear()
 
@@ -21,6 +21,20 @@ const localeFlags: Record<string, string> = {
 }
 
 const currentFlag = localeFlags[Astro.locals.locale] || '🇺🇸'
+interface FooterBlogPost {
+  title: string
+  href: string
+  tag?: string
+}
+
+interface FooterBlogCopy {
+  label?: string
+  description?: string
+}
+
+const { blogPosts = [], blogCopy = {} } = Astro.props as { blogPosts?: FooterBlogPost[]; blogCopy?: FooterBlogCopy }
+const footerBlogLabel = blogCopy.label ?? m.blog({}, { locale: Astro.locals.locale })
+const footerBlogDescription = blogCopy.description ?? m.footer_blog_description({}, { locale: Astro.locals.locale })
 
 interface NavigationItem {
   name: string | (() => string)
@@ -97,6 +111,10 @@ const navigation: Record<string, NavigationItem[]> = {
       name: 'App store publishing costs',
       href: getRelativeLocaleUrl(Astro.locals.locale, 'cost/cost-to-publish-app-on-app-store'),
     },
+    {
+      name: 'App store refusal stories',
+      href: getRelativeLocaleUrl(Astro.locals.locale, 'app-store-refusal-horror-story'),
+    },
     { name: m.blog({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog') },
     {
       name: () => m.all_systems_normal({}, { locale: Astro.locals.locale }),
@@ -122,11 +140,14 @@ const navigation: Record<string, NavigationItem[]> = {
     { name: m.jobs({}, { locale: Astro.locals.locale }), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
     { name: m.contributing({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'contributing') },
     { name: m.trust({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'trust') },
+    { name: 'HIPAA compliance', href: getRelativeLocaleUrl(Astro.locals.locale, 'hipaa-compliance') },
     { name: m.consulting({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'consulting') },
   ],
   compare: [
     { name: m.alternatives({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives') },
     { name: m.capflow_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'ionic-appflow') },
+    { name: m.median_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'median') },
+    { name: m.expo_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'expo') },
     { name: m.capwesome_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'capwesome') },
   ],
   legal: [
@@ -204,6 +225,29 @@ const navigation: Record<string, NavigationItem[]> = {
         ))
       }
     </div>
+
+    {
+      blogPosts.length > 0 && (
+        <section class="mb-12 border-b border-zinc-800 pb-12" aria-labelledby="footer-blog-heading">
+          <div class="grid gap-5 lg:grid-cols-[minmax(0,14rem)_1fr] lg:items-start">
+            <div>
+              <h3 id="footer-blog-heading" class="text-base font-semibold text-white sm:text-sm">
+                {footerBlogLabel}
+              </h3>
+              <p class="mt-2 text-base/7 text-zinc-400 sm:text-sm/6">{footerBlogDescription}</p>
+            </div>
+            <div class="grid gap-3 lg:grid-cols-3">
+              {blogPosts.map((post) => (
+                <a href={post.href} class="group rounded-lg border border-zinc-800 bg-white/[0.02] p-4 transition hover:border-blue-500/60 hover:bg-white/[0.04]">
+                  {post.tag && <span class="text-base/6 font-normal text-blue-300 sm:text-sm/6">{post.tag}</span>}
+                  <span class="mt-2 block text-base/6 font-medium text-white transition group-hover:text-blue-100 sm:text-sm/6">{post.title}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
 
     <!-- Links Grid -->
     <div class="mb-12 grid grid-cols-2 gap-8 md:grid-cols-6">

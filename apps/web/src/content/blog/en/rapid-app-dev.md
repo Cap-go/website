@@ -1,16 +1,18 @@
 ---
 slug: rapid-app-dev
 title: 'Master Rapid App Dev: Build Apps Faster'
-description: 'Master rapid app dev. Learn principles, methods, & tools to build & update apps faster, without sacrificing quality or control. Get our guide!'
+description: >-
+  Master rapid app dev. Learn principles, methods, & tools to build & update
+  apps faster, without sacrificing quality or control. Get our guide!
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-23T07:08:33.313Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/5c10b37f-e2bb-474f-8687-7ae18998f45f/rapid-app-dev-app-development.jpg'
-head_image_alt: 'Master Rapid App Dev: Build Apps Faster'
+updated_at: 2026-06-18T15:35:50.000Z
+head_image: /blog-images/rapid-app-dev.webp
+head_image_alt: '''Master Rapid App Dev: Build Apps Faster'' Capgo blog illustration'
 keywords: 'rapid app dev, agile development, low-code, application development, ci/cd'
-tag: 'rapid app dev, agile development, low-code, application development, ci/cd'
+tag: 'Mobile, CI/CD'
 published: true
 locale: en
 next_blog: ''

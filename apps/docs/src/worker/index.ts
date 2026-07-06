@@ -1,3 +1,5 @@
+import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+
 interface Env {
   ASSETS: {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
@@ -20,6 +22,8 @@ const redirectRows: RedirectRow[] = [
   ['/docs/cli/commands/build/', '/docs/cli/reference/build/', 302],
   ['/docs/tooling/cli/', '/docs/cli/overview/', 302],
   ['/docs/plugin/cloud-mode/getting-started/', '/docs/getting-started/quickstart/', 302],
+  ['/docs/plugin/api', '/docs/plugins/updater/api/', 301],
+  ['/docs/plugin/api/', '/docs/plugins/updater/api/', 301],
   ['/docs/plugin/cloud-mode/auto-update', '/docs/getting-started/add-an-app/', 302],
   ['/docs/plugin/cloud-mode/auto-update/', '/docs/getting-started/add-an-app/', 302],
   ['/docs/plugin/cloud-mode/manual-update', '/docs/getting-started/deploy/', 302],
@@ -62,8 +66,8 @@ const redirectRows: RedirectRow[] = [
   ['/docs/plugins/capacitor-native-audio/', '/docs/plugins/native-audio/', 302],
   ['/docs/plugins/capacitor-native-market/', '/docs/plugins/native-market/', 302],
   ['/docs/plugins/capacitor-native-purchases/', '/docs/plugins/native-purchases/', 302],
-  ['/docs/cloud/native-builds/certificates/android/', '/docs/cli/cloud-build/android/', 302],
-  ['/docs/cloud/native-builds/certificates/ios/', '/docs/cli/cloud-build/ios/', 302],
+  ['/docs/cloud/native-builds/certificates/android/', '/docs/builder/android/', 302],
+  ['/docs/cloud/native-builds/certificates/ios/', '/docs/builder/ios/', 302],
   ['/docs/CLI/Referencia/Aplicaci%C3%B3n/', '/docs/cli/reference/app/', 302],
   ['/docs/CLI/Referencia/Canal/', '/docs/cli/reference/channel/', 302],
   ['/docs/CLI/Referencia/Paquete/', '/docs/cli/reference/bundle/', 302],
@@ -183,13 +187,34 @@ async function capgoLogoFallback(request: Request, env: Env): Promise<Response> 
   return env.ASSETS.fetch(new Request(fallbackUrl, request))
 }
 
+type BackgroundContext = {
+  waitUntil(promise: Promise<unknown>): void
+}
+
+const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
+const SKIP_AI_CRAWLER_TRACKING_HEADER = 'X-Capgo-Skip-AI-Crawler-Tracking'
+
+function trackAICrawler(request: Request, response: Response, ctx?: BackgroundContext): Response {
+  if (request.headers.get(SKIP_AI_CRAWLER_TRACKING_HEADER) !== '1') {
+    trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
+  }
+  return response
+}
+
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    const pathname = new URL(request.url).pathname
+  async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
+    const url = new URL(request.url)
+    const pathname = url.pathname
     const redirect = redirectMap.get(pathname)
-    if (redirect) return redirectResponse(request, redirect)
+    if (redirect) return trackAICrawler(request, redirectResponse(request, redirect), ctx)
+    // The Cloud Build docs moved to the Capgo Builder section (/docs/builder/).
+    // Handled here because this worker serves /docs/* and does not apply public/_redirects.
+    if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {
+      const rest = pathname.replace(/^\/docs\/cli\/cloud-build\/?/, '')
+      return trackAICrawler(request, Response.redirect(new URL(`/docs/builder/${rest}${url.search}`, request.url).toString(), 301), ctx)
+    }
     const response = await env.ASSETS.fetch(request)
-    if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return capgoLogoFallback(request, env)
-    return response
+    if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
+    return trackAICrawler(request, response, ctx)
   },
 }

@@ -8,9 +8,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-02-09T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /appflow_alt.webp
-head_image_alt: Appflow alternative illustration
+head_image_alt: "Ionic AppFlow Shutdown - What's Next for Your Mobile App Development? Capgo blog illustration"
 keywords: Ionic AppFlow shutdown, mobile app development, live updates, OTA updates, continuous integration, mobile app updates, Capgo alternative
 tag: News
 published: true
@@ -57,7 +57,7 @@ Instead of being locked into a proprietary CI/CD system, Capgo allows you to:
 
 ## Making the Switch
 
-Transitioning from AppFlow to Capgo is straightforward. Follow our [detailed migration guide](/docs/upgrade/from-appflow-to-capgo) to ensure a smooth transition:
+Transitioning from AppFlow to Capgo is straightforward. Follow our [detailed migration guide](/docs/upgrade/from-appflow-to-capgo/) to ensure a smooth transition:
 
 1. [Register for a Capgo account](/register/)
 2. Follow our migration guides

@@ -41,6 +41,12 @@ For additional security, you have two options:
 
 See also our privacy policy: [https://capgo.app/privacy](https://capgo.app/privacy/)
 
+### Are bundle files private data?[](https://capgo.app/docs/faq/#are-bundle-files-private-data "Direct link to Are bundle files private data?")
+
+No. Bundle files are public web assets intended to be downloaded by your app users. Anyone who knows the bundle URL can fetch those files, and Capgo informs users of this during setup and in the documentation.
+
+Access to bundle files is not considered a data breach. Do not put secrets, credentials, personal data, or regulated data in your app bundle. If you need stronger confidentiality for high-security use cases, use end-to-end encryption, but still treat shipped app code and assets as public from a security-reporting perspective.
+
 ### Can I use Capgo from my CI system?[](https://capgo.app/docs/faq/#can-i-use-capgo-from-my-ci-system "Direct link to Can I use Capgo from my CI system?")
 
 Yes. Capgo is intended to be used from CI systems. We've published a guide for [Android and Github Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/) and [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/), and for [GitLab](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/). Other CI systems should be similar.
@@ -100,9 +106,9 @@ Also Capgo does not support changing native code (e.g. Java/Kotlin on Android or
 
 ### Can I update capacitor.config.ts changes via Capgo?[](https://capgo.app/docs/faq/#can-i-update-capacitorconfigts-changes-via-capgo "Direct link to Can I update capacitor.config.ts changes via Capgo?")
 
-No. Changes to `capacitor.config.ts` cannot be sent through Capgo live updates. The Capacitor configuration file is read at native build time and compiled into the native app binary. This means any changes to `capacitor.config.ts` (such as plugin configurations, app ID, server settings, or native plugin options) require a new native release through the App Store or Google Play.
+No. Short rule: Capgo can send the generated web build folder, including HTML, CSS, JavaScript, assets, and pure-JavaScript package changes bundled into that output. Changes to `capacitor.config.ts`, native plugin configuration, native package installs or upgrades, and anything that must update the iOS or Android project through `npx cap sync` or `npx cap copy` require a native app release.
 
-Capgo can only update web assets (HTML, CSS, JavaScript) that are loaded at runtime. If you need to change your Capacitor configuration, you must:
+The Capacitor configuration file is read at native build time and compiled into the native app binary. If you need to change your Capacitor configuration, you must:
 1. Update `capacitor.config.ts` locally
 2. Rebuild your native app (`npx cap sync` followed by a native build)
 3. Submit the new binary to the app stores
@@ -291,6 +297,26 @@ Requests sent from the app to Capgo servers include:
 -   platform (e.g. 'android', needed to send down the right patch) That's it. The code for this is in `updater/library/src/network.rs`
 -   device\_id (generated on the device on first run, used to de-duplicate per-device installs and allow us to charge based on users installed to (e.g. monthly active users), rather than total patches or total patch installs)
 -   custom\_id ( optional, set at runtime by the developer, used for you to link a device to a user in your system)
+
+### Can I use Capgo for HIPAA-sensitive apps?[](https://capgo.app/docs/faq/#can-i-use-capgo-for-hipaa-sensitive-apps "Direct link to Can I use Capgo for HIPAA-sensitive apps?")
+
+Yes, but your compliance owner needs to choose the right deployment model. Capgo Cloud is not currently presented as a HIPAA-compliant hosted statistics processor. By default, the updater data is device-scoped and not tied to a known app user, and many teams use that model successfully.
+
+For stricter reviews, you can geo-localize plugin traffic, disable statistics by setting `statsUrl` to an empty string, self-host only the statistics endpoint, or use licensed self-hosting. Do not call `CapacitorUpdater.setCustomId(...)` with an email, user ID, patient ID, employee ID, or any value that maps updater telemetry back to a person.
+
+See [HIPAA Compliance](/docs/live-updates/hipaa-compliance/) for the full technical setup and the observability tradeoffs when statistics are disabled.
+
+### Can I keep Capgo live update data in Europe?[](https://capgo.app/docs/faq/#can-i-keep-capgo-live-update-data-in-europe "Direct link to Can I keep Capgo live update data in Europe?")
+
+Yes. Apps that need EU data residency for Capgo Cloud plugin traffic can set the updater endpoints to the EU host:
+
+- `updateUrl`: `https://plugin.eu.capgo.app/updates`
+- `statsUrl`: `https://plugin.eu.capgo.app/stats`
+- `channelUrl`: `https://plugin.eu.capgo.app/channel_self`
+
+Use all three EU URLs together so update checks, statistics, and channel self-assignment use the same regional data path. Because these values live in `capacitor.config.ts`, production mobile apps need a native release before existing installs use the new endpoints.
+
+See [Data Location](/docs/live-updates/data-location/) for exact Capacitor and Electron examples.
 
 ### What platforms does Capgo support?[](https://capgo.app/docs/faq/#what-platforms-does-capgo-support "Direct link to What platforms does Capgo support?")
 

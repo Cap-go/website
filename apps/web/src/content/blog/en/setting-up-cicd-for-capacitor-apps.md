@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-11T06:22:21.536Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67aa9923b771216988320bf2-1739254956493.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/setting-up-cicd-for-capacitor-apps.webp
+head_image_alt: "Setting Up CI/CD for Capacitor Apps Capgo blog illustration"
 keywords: CI/CD, Capacitor apps, mobile development, automation, build process, live updates
 tag: Development, Mobile, Updates
 published: true
@@ -193,7 +193,7 @@ Integrating Capgo into your workflow enhances your CI/CD process by enabling pos
 
 ### Capgo Pipeline Configuration
 
-First, install the [Capgo CLI](https://capgo.app/docs/cli/commands) in your pipeline environment:
+First, install the [Capgo CLI](https://capgo.app/docs/cli/commands/) in your pipeline environment:
 
 ```yaml
 steps:

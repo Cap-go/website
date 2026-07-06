@@ -1,0 +1,253 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+
+const title = `${brand} | HIPAA compliance for live updates`
+const description =
+  'How Capgo supports HIPAA-sensitive live update reviews with device-scoped telemetry, regional endpoints, disabled statistics, self-hosted statistics, and licensed self-hosting.'
+
+const pageUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'hipaa-compliance/')}`
+const docsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates/hipaa-compliance/')
+const dataLocationUrl = getRelativeLocaleUrl(locale, 'docs/live-updates/data-location/')
+const selfHostedUrl = getRelativeLocaleUrl(locale, 'docs/plugins/updater/self-hosted/getting-started/')
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo HIPAA-sensitive live update deployments',
+  description,
+  url: pageUrl,
+  serviceType: 'Live update compliance deployment support',
+  areaServed: ['Worldwide'],
+})
+
+const content = {
+  title,
+  description,
+  image: `${baseUrl}/capgo_social.png`,
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: `${baseUrl}${getRelativeLocaleUrl(locale, '/')}` },
+      { name: 'HIPAA compliance', url: pageUrl },
+    ],
+  }),
+}
+
+const telemetryItems = [
+  'app_id - Capacitor app identifier',
+  'device_id - random app-scoped device ID',
+  'platform - iOS, Android, or Electron',
+  'version_name - installed web bundle version',
+  'version_build and version_code - native app version',
+  'version_os and plugin_version',
+  'action - install, download, failure, rollback, app-ready events',
+  'is_emulator and is_prod when available',
+  'IP address for routing, abuse prevention, and CDN optimization',
+  'custom_id only if your app explicitly sets it',
+]
+
+const deploymentOptions = [
+  {
+    label: 'Use Capgo Cloud with EU endpoints',
+    text: 'Route update, statistics, and channel requests through the EU host when your review allows hosted Capgo Cloud with regional data residency.',
+  },
+  {
+    label: 'Disable hosted statistics',
+    text: 'Set statsUrl to an empty string when your process allows Capgo Cloud for update delivery but not for device update statistics.',
+  },
+  {
+    label: 'Self-host statistics',
+    text: 'Send update statistics to your own endpoint so your team owns retention, alerting, and incident review data.',
+  },
+  {
+    label: 'License self-hosting',
+    text: 'Run the updater stack in your controlled environment when hosted paths are not enough for your reviewer or customer contract.',
+  },
+]
+
+const tradeoffs = [
+  'No Capgo failure alerts based on hosted statistics',
+  'Less dashboard visibility into installs, failures, rollbacks, and app-ready events',
+  'Less support context for explaining what happened inside the app after an update',
+  'Your team must replace the missing monitoring if you still need those signals',
+]
+---
+
+<Layout content={content}>
+  <div class="bg-slate-950 text-white">
+    <section class="border-b border-white/10 bg-slate-950">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:py-24">
+        <div>
+          <p class="inline-flex rounded-md border border-blue-300/30 bg-blue-300/10 px-3 py-2 text-sm font-semibold text-blue-100">HIPAA-sensitive live updates</p>
+          <h1 class="mt-6 max-w-4xl text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">Capgo deployment paths for HIPAA review</h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+            Capgo helps teams keep live updates available while reducing or removing hosted telemetry paths that may not fit a HIPAA review. Use hosted Capgo Cloud with regional
+            controls, disable statistics, self-host statistics, or move to a licensed self-hosted setup.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href={docsUrl} class="inline-flex min-h-11 items-center justify-center rounded-md bg-blue-600 px-5 py-3 text-sm font-bold text-white hover:bg-blue-500">
+              Read technical docs
+            </a>
+            <a
+              href="https://support.capgo.app"
+              rel="nofollow"
+              class="inline-flex min-h-11 items-center justify-center rounded-md border border-white/20 px-5 py-3 text-sm font-bold text-white hover:border-white/40 hover:bg-white/10"
+            >
+              Talk to Capgo
+            </a>
+          </div>
+        </div>
+
+        <div class="border border-white/10 bg-white/[0.04] p-3 shadow-2xl shadow-black/30">
+          <img src="/main-app-page.webp" alt="Capgo dashboard showing live update statistics" class="aspect-[4/3] w-full object-cover" loading="eager" />
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-white/10 bg-white py-16 text-slate-950 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <p class="text-sm font-bold text-blue-700">Default hosted data</p>
+            <h2 class="mt-3 text-3xl leading-tight font-bold sm:text-4xl">Device-scoped telemetry, not user analytics</h2>
+            <p class="mt-5 text-base leading-7 text-slate-700">
+              Capgo's updater telemetry is designed for update delivery and operational debugging. The hosted statistics payload is anonymous to the app user by default: no names,
+              emails, credentials, user content, medical record numbers, or behavioral analytics are sent.
+            </p>
+            <p class="mt-4 text-base leading-7 text-slate-700">
+              The only stable identifier is a random, app-scoped <code class="rounded bg-slate-100 px-1 py-0.5">device_id</code>. It is not tied to a known user unless your app
+              explicitly sets a <code class="rounded bg-slate-100 px-1 py-0.5">custom_id</code>. Hosted statistics can be fully disabled by setting <code
+                class="rounded bg-slate-100 px-1 py-0.5">statsUrl: ''</code
+              >.
+            </p>
+          </div>
+
+          <div class="grid gap-3 sm:grid-cols-2">
+            {
+              telemetryItems.map((item) => (
+                <div class="rounded-lg border border-slate-200 bg-slate-50 p-5">
+                  <p class="text-sm font-semibold text-slate-900">{item}</p>
+                </div>
+              ))
+            }
+            <div class="rounded-lg border border-amber-300 bg-amber-50 p-5 sm:col-span-2">
+              <p class="text-sm font-semibold text-amber-950">Do not set a custom ID for HIPAA-sensitive deployments.</p>
+              <p class="mt-2 text-sm leading-6 text-amber-900">
+                <code class="rounded bg-amber-100 px-1 py-0.5 text-amber-950">setCustomId</code> can connect updater telemetry to a user, patient, employee, or account record from your
+                own app. Leave it unset when the review requires device-scoped telemetry.
+              </p>
+            </div>
+            <div class="rounded-lg border border-blue-300 bg-blue-50 p-5 sm:col-span-2">
+              <p class="text-sm font-semibold text-blue-950">Need zero hosted statistics?</p>
+              <p class="mt-2 text-sm leading-6 text-blue-900">
+                Set <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">statsUrl: ''</code> in the updater config. Capgo Cloud will stop receiving updater statistics; update
+                checks can still use <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">updateUrl</code> and <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950"
+                  >channelUrl</code
+                > if you keep them enabled.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-white/10 bg-slate-900 py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-bold text-emerald-300">Control choices</p>
+          <h2 class="mt-3 text-3xl leading-tight font-bold text-white sm:text-4xl">Four paths for stricter review contexts</h2>
+          <p class="mt-5 text-base leading-7 text-slate-300">
+            Start with the least operationally complex option your reviewer accepts. Move toward self-hosting only when hosted controls are not enough.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          {
+            deploymentOptions.map((option) => (
+              <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+                <h3 class="text-lg font-bold text-white">{option.label}</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-300">{option.text}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href={dataLocationUrl}
+            class="inline-flex min-h-11 items-center justify-center rounded-md border border-emerald-300/30 px-5 py-3 text-sm font-bold text-emerald-100 hover:bg-emerald-300/10"
+          >
+            Data location docs
+          </a>
+          <a
+            href={selfHostedUrl}
+            class="inline-flex min-h-11 items-center justify-center rounded-md border border-blue-300/30 px-5 py-3 text-sm font-bold text-blue-100 hover:bg-blue-300/10"
+          >
+            Self-hosting docs
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-white/10 bg-slate-950 py-16 sm:py-20">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <div>
+          <p class="text-sm font-bold text-rose-300">Telemetry tradeoff</p>
+          <h2 class="mt-3 text-3xl leading-tight font-bold text-white sm:text-4xl">What you lose if statistics stop going to Capgo</h2>
+          <p class="mt-5 text-base leading-7 text-slate-300">
+            Disabling or redirecting statistics can be the right compliance decision, but it removes the hosted signal Capgo uses to explain what happened in the app after an
+            update was checked, downloaded, installed, or rolled back.
+          </p>
+        </div>
+
+        <ul class="grid gap-3">
+          {tradeoffs.map((tradeoff) => <li class="rounded-lg border border-white/10 bg-white/[0.04] p-4 text-sm leading-6 text-slate-200">{tradeoff}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="bg-white py-16 text-slate-950 sm:py-20">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_0.8fr] lg:items-center lg:px-8">
+        <div>
+          <p class="text-sm font-bold text-blue-700">When review needs more</p>
+          <h2 class="mt-3 text-3xl leading-tight font-bold sm:text-4xl">We work with teams toward HIPAA compliance</h2>
+          <p class="mt-5 text-base leading-7 text-slate-700">
+            Capgo works with companies going through HIPAA compliance review, including U.S. organizations that use Capgo in HIPAA-compliant programs. If the hosted service, EU
+            data residency, disabled statistics, or self-hosted statistics endpoint is still not enough, we can help you self-host with a licensing model.
+          </p>
+          <p class="mt-4 text-base leading-7 text-slate-700">
+            That path gives your organization control over infrastructure, logs, retention, network boundaries, and review evidence while keeping the Capgo update workflow.
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-slate-200 bg-slate-50 p-6">
+          <img src="/soc2.svg" alt="SOC 2 badge" class="h-16 w-auto" loading="lazy" />
+          <p class="mt-5 text-sm leading-6 text-slate-700">
+            Need security evidence first? Review the public trust center, then use the HIPAA technical docs to choose the deployment model for your app.
+          </p>
+          <div class="mt-6 flex flex-col gap-3">
+            <a
+              href="https://trust.capgo.app"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex min-h-11 items-center justify-center rounded-md bg-slate-950 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800"
+            >
+              View trust center
+            </a>
+            <a
+              href={docsUrl}
+              class="inline-flex min-h-11 items-center justify-center rounded-md border border-slate-300 px-5 py-3 text-sm font-bold text-slate-950 hover:bg-slate-100"
+            >
+              Open HIPAA docs
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

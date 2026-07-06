@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-21T03:02:38.679Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67dcb1f883b63ee70fa08665-1742526177947.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/creating-and-deleting-update-channels-in-capacitor.webp
+head_image_alt: "Creating and Deleting Update Channels in Capacitor Capgo blog illustration"
 keywords: Capacitor, update channels, app updates, development, mobile, CI/CD, user management, version control
 tag: Development, Mobile, Updates
 published: true
@@ -54,7 +54,7 @@ Make sure you have the following:
 
 -   **Capacitor CLI**: This is the core tool for handling app updates.
 -   **Node.js**: Version 14.0 or higher is required.
--   **[Capgo CLI](https://capgo.app/docs/cli/commands)**: Used for setting up and managing update channels.
+-   **[Capgo CLI](https://capgo.app/docs/cli/commands/)**: Used for setting up and managing update channels.
 -   **Development Environment**: Choose an IDE that supports Capacitor.
 
 To initialize Capgo CLI, run this command:

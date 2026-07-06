@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-23T04:59:03.252Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682fcd04d3b96619817dc7fa-1747976396140.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/capacitor-ota-updates-use-cases-explained.webp
+head_image_alt: "\"Capacitor OTA Updates: Use Cases Explained\" Capgo blog illustration"
 keywords: OTA updates, Capacitor apps, app updates, mobile development, security, Capgo, update methods
 tag: Development, Mobile, Updates
 published: true

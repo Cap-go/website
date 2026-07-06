@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-22T11:11:41.135Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682ef9754fa53d422080b6bb-1747912378288.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/implementing-native-bridge-for-ios-in-capacitor.webp
+head_image_alt: "Implementing Native Bridge for iOS in Capacitor Capgo blog illustration"
 keywords: Capacitor, iOS, native bridge, Swift, Objective-C, plugin development, mobile development, testing
 tag: Development, Mobile, Updates
 published: true
@@ -319,7 +319,7 @@ To ensure secure and efficient updates, follow these best practices:
 -   **Roll out critical changes in phases**: Use phased deployments to minimize risks.
 -   **Maintain strict version control**: Keep track of all changes for better management and rollback if needed.
 
-A great example of Capgo’s capabilities is Rapido Cloud, which successfully integrated the platform in September 2024. This integration highlighted Capgo’s ability to handle complex native bridge updates while ensuring app stability [\[5\]](https://capgo.app/blog).
+A great example of Capgo’s capabilities is Rapido Cloud, which successfully integrated the platform in September 2024. This integration highlighted Capgo’s ability to handle complex native bridge updates while ensuring app stability [\[5\]](https://capgo.app/blog/).
 
 | **Update Type** | **Deployment Strategy** | **Validation Steps** |
 | --- | --- | --- |

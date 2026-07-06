@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-24T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T21:25:40.000Z
 head_image: https://capgo.app/capgo-feature-image.webp
-head_image_alt: Edge-to-Edge Display Configuration
+head_image_alt: "Edge-to-Edge Display in Capacitor Without Plugins Capgo blog illustration"
 keywords: Capacitor, edge-to-edge, Android 15, adjustMarginsForEdgeToEdge, mobile development, native configuration
 tag: Development, Mobile, Configuration
 published: true
@@ -165,7 +165,7 @@ After configuring `adjustMarginsForEdgeToEdge`, test your app on:
 
 ### Don't Use Plugins for This
 
-You don't need third-party plugins like `capacitor-edge-to-edge` or similar. The native config handles this cleanly.
+You don't need third-party plugins like `capacitor-edge-to-edge` or similar. The native config handles this cleanly. If you need fine-grained control over system chrome after enabling `adjustMarginsForEdgeToEdge`, [@capgo/capacitor-navigation-bar](https://capgo.app/plugins/capacitor-navigation-bar/) and [@capgo/home-indicator](https://capgo.app/plugins/capacitor-home-indicator/) complement the native config without replacing it.
 
 ### Don't Mix with Manual Implementations
 

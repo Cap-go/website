@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { renameCat, shortNumber } from '@/services/misc'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.top_cordova_apps_title({}, { locale: Astro.locals.locale })].join(' | ')

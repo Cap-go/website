@@ -36,7 +36,11 @@ The page displays two sections:
    - **Member** — Basic read access to the organization.
    - **Admin** — Full administrative access to the organization (inherits access to all apps).
 
-4. If the selected org role is not Admin, you can add **per-app access**:
+4. If the key needs to create organizations through the public API, enable **Allow creating organizations**.
+
+   This adds the global `org.create` permission. It is available when the key has an Admin organization role. When this key creates a new organization, Capgo automatically assigns the key as Super Admin on that new organization.
+
+5. If the selected org role is not Admin, you can add **per-app access**:
    - Click **"+ Add App"** to open the app picker.
    - Select one or more apps, then assign a role to each:
      - **App Reader** — Read-only access to the app.
@@ -47,9 +51,9 @@ The page displays two sections:
 {/* [SCREENSHOT: apikeys-rbac-roles.webp] — The role selection section showing org role radio buttons and the per-app role assignment table */}
 <figure><img src="/apikeys-rbac-roles.webp" alt="RBAC role selection with org-level and per-app roles" /><figcaption></figcaption></figure>
 
-5. Click **"Create"**.
+6. Click **"Create"**.
 
-6. If you checked "Create secure key", a modal will display the plain-text key. **Copy it immediately** — it cannot be retrieved after closing the modal.
+7. If you checked "Create secure key", a modal will display the plain-text key. **Copy it immediately** — it cannot be retrieved after closing the modal.
 
 {/* [SCREENSHOT: apikeys-secret-modal.webp] — The one-time secret modal showing the plain-text key with a copy button */}
 <figure><img src="/apikeys-secret-modal.webp" alt="One-time API key secret modal with copy button" /><figcaption></figcaption></figure>
@@ -60,6 +64,7 @@ Click the **wrench icon** (Manage) on any RBAC key in the list. This opens the k
 
 - Change the key **name**.
 - Update the **organization role**.
+- Enable or disable **Allow creating organizations** when the key has an Admin organization role.
 - Add, remove, or change **per-app roles**.
 
 Click **"Save Changes"** when done.

@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-24T04:20:44.227Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68311bb4d3b96619817f3ed6-1748060494048.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/capgo-plugin-scheduling-updates-tutorial.webp
+head_image_alt: "\"Capgo Plugin: Scheduling Updates Tutorial\" Capgo blog illustration"
 keywords: Capgo, OTA updates, Capacitor, app development, update scheduling, mobile apps, CI/CD integration, app security
 tag: Development, Mobile, Updates
 published: true
@@ -74,11 +74,11 @@ Here are some configuration options to fine-tune auto-update behavior:
 | `directUpdate` | Installs updates directly upon app update/installation | `undefined` |
 | `defaultChannel` | Sets the default update channel | `undefined` |
 
-The `statsUrl` setting, which defaults to `https://api.capgo.app/stats`, allows you to monitor update performance and success rates via Capgo’s analytics dashboard [\[6\]](https://capgo.app/docs/plugins/updater/settings).
+The `statsUrl` setting, which defaults to `https://api.capgo.app/stats`, allows you to monitor update performance and success rates via Capgo’s analytics dashboard [\[6\]](https://capgo.app/docs/plugins/updater/settings/).
 
 For production environments, using CI/CD pipelines to upload new versions is highly recommended. This ensures consistency in your update process and minimizes the risk of manual errors during releases [\[4\]](https://capgo.app/docs/getting-started/add-an-app/).
 
-Finally, remember that over-the-air (OTA) updates are limited to changes in HTML, CSS, and JavaScript files [\[5\]](https://capgo.app/docs/getting-started/quickstart)[\[7\]](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/). Any modifications to native code will require submitting an updated version through the app store.
+Finally, remember that over-the-air (OTA) updates are limited to changes in HTML, CSS, and JavaScript files [\[5\]](https://capgo.app/docs/getting-started/quickstart/)[\[7\]](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/). Any modifications to native code will require submitting an updated version through the app store.
 
 ## How to Schedule and Prioritize Updates
 
@@ -106,7 +106,7 @@ Capgo offers tools to tailor update strategies for various user segments by usin
 | Regular Users | Production Channel | Gradual rollouts prioritizing stability |
 | Low Activity Users | Stable Channel | Updates focused on core functionality |
 
-For even more control, you can implement percentage-based rollouts or allow specific groups to opt in [\[9\]](https://capgo.app/docs/faq). This method works particularly well for QA teams or organizations that require a [controlled update process](https://capgo.app/docs/live-updates/update-behavior/).
+For even more control, you can implement percentage-based rollouts or allow specific groups to opt in [\[9\]](https://capgo.app/docs/faq/). This method works particularly well for QA teams or organizations that require a [controlled update process](https://capgo.app/docs/live-updates/update-behavior/).
 
 For simpler apps, stick to separate channels. For apps with a diverse user base, consider combining multiple strategies to meet various needs effectively.
 
@@ -201,7 +201,7 @@ Finally, keep users informed and engaged. Provide clear notifications about upco
 
 Now that you’ve explored the full range of OTA scheduling tools with Capgo, you’re equipped to manage updates efficiently - balancing speed, safety, and user experience. From installation and configuration to advanced rollout strategies and security measures, these techniques set you up for success.
 
-The key to effective scheduling lies in starting small, monitoring performance metrics, and scaling gradually. For example, achieving a 95% adoption rate within 24 hours is entirely possible when you combine a well-planned rollout with reliable infrastructure [\[1\]](https://capgo.app/blog). These practices ensure [smooth updates](https://capgo.app/docs/live-updates/update-behavior/) while maintaining high performance.
+The key to effective scheduling lies in starting small, monitoring performance metrics, and scaling gradually. For example, achieving a 95% adoption rate within 24 hours is entirely possible when you combine a well-planned rollout with reliable infrastructure [\[1\]](https://capgo.app/blog/). These practices ensure [smooth updates](https://capgo.app/docs/live-updates/update-behavior/) while maintaining high performance.
 
 > "Capgo solves a major problem for Capacitor application developers: how to deploy updates quickly without going through the tedious app store process. And it does it brilliantly, offering a robust solution." - Thomas Sanlis, Uneed Review [\[2\]](https://www.uneed.best/blog/capgo-review)
 
@@ -209,7 +209,7 @@ Capgo’s simplicity is one of its standout features. In April 2025, Thomas Sanl
 
 Ready to roll out your updates? Start with a **15-day free trial** to explore Capgo’s scheduling features and see how they align with your app’s needs [\[2\]](https://www.uneed.best/blog/capgo-review). When you’re prepared to deploy, the CLI command `npx @capgo/cli@latest bundle upload --channel=production` makes the process seamless [\[2\]](https://www.uneed.best/blog/capgo-review).
 
-**Keep an eye on your progress** by tracking update adoption rates, setting up automated error tracking for quick rollbacks, and using staged rollouts to control delivery [\[1\]](https://capgo.app/blog). Make sure your app confirms updates as outlined earlier [\[4\]](https://capgo.app/docs/getting-started/add-an-app/).
+**Keep an eye on your progress** by tracking update adoption rates, setting up automated error tracking for quick rollbacks, and using staged rollouts to control delivery [\[1\]](https://capgo.app/blog/). Make sure your app confirms updates as outlined earlier [\[4\]](https://capgo.app/docs/getting-started/add-an-app/).
 
 In a constantly evolving OTA update landscape, Capgo stands out as a reliable, long-term solution. Its open-source foundation and compliance with both Apple and Android guidelines ensure it’s ready to meet your needs now and in the future.
 

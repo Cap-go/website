@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-01T03:16:07.896Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae-1743477379769.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/checklist-for-google-play-ota-compliance.webp
+head_image_alt: "Checklist for Google Play OTA Compliance Capgo blog illustration"
 keywords: OTA updates, Google Play compliance, security, version control, user communication, app updates, testing, performance metrics
 tag: Development, Security, Updates
 published: true

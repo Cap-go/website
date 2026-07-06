@@ -1,0 +1,837 @@
+---
+title: iOS Builds
+description: Configure and build iOS apps with Capgo Cloud Build
+sidebar:
+  order: 3
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+import appStoreConnectHomeImage from './ios-assets/app-store-connect-home.png';
+import entityTypeImage from './ios-assets/entity-type.png';
+import startEnrollmentImage from './ios-assets/start-enrollment.png';
+import webEnrollmentImage from './ios-assets/web-enrollment.png';
+
+Build and submit iOS apps to TestFlight and the App Store using Capgo's dedicated Mac infrastructure.
+
+## What you will learn
+
+- You will learn how to upload your app via Capgo Native build
+- You will learn how to configure the certificates for Capgo Native Build
+
+## Prerequisites
+
+ - A Capgo account (a free trial is enough to get started)
+ - Your app already registered in Capgo (run `bunx @capgo/cli@latest app add` if not)
+ - A Mac computer with Xcode installed (it's possible to setup the build on a linux/windows machine, but it's not yet documented)
+ - Valid Apple Developer account ($99/year) (You must have admin or owner rights on the Apple Developer account)
+ - Your app must be able to build successfully via Xcode
+ - A Capacitor app
+ - A configured icon for the app. Apps without an icon cannot be uploaded to the App Store.
+ 
+ :::note
+ I will use the following app for the tutorial: https://github.com/Cap-go/capgo-native-build-tutorial-app
+ :::
+
+## Before you start in Apple's portals
+
+Before you set up certificates or trigger your first TestFlight upload, make sure the Apple account and team are ready:
+
+- Turn on two-factor authentication for the Apple Account used for enrollment
+- Choose the right membership type:
+  - **Individual / Sole Proprietor**: your legal personal name becomes the seller name on the App Store
+  - **Organization**: requires a legal entity, a D-U-N-S number, a public company website, a work email on the company domain, and a person with authority to bind the organization to Apple's agreements
+- Use an account that can access both Apple Developer and App Store Connect for certificates, app records, API keys, and TestFlight
+- Lock in your final bundle ID early. Changing it later usually means redoing App Store setup
+- Plan these App Store Connect items before App Review: support URL, privacy policy URL, age rating, screenshots, export compliance, and App Review contact details
+
+:::note
+Useful official references:
+- [Become a member of the Apple Developer Program](https://developer.apple.com/programs/enroll/)
+- [Submit your apps and games](https://developer.apple.com/app-store/submitting/)
+- [Platform version information in App Store Connect](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information)
+:::
+
+<img src={startEnrollmentImage.src} alt="Start Apple Developer enrollment" />
+
+<img src={webEnrollmentImage.src} alt="Continue Apple enrollment on the web" />
+
+<img src={entityTypeImage.src} alt="Select the correct Apple Developer entity type" />
+
+<img src={appStoreConnectHomeImage.src} alt="App Store Connect after enrollment" />
+
+:::caution
+Apple updates its minimum SDK requirement regularly. As of **April 28, 2026**, iPhone and iPad apps uploaded to App Store Connect must be built with the **iOS & iPadOS 26 SDK or later**.
+:::
+
+
+:::tip[Recommended: automated onboarding]
+You don't have to do any of this by hand. Capgo's onboarding creates and configures your iOS signing credentials (distribution certificate + provisioning profile) for you — this is the recommended path:
+
+```bash
+bunx @capgo/cli@latest build init --platform ios
+```
+
+The manual walkthrough below is only for those who prefer to set up credentials themselves, or want to understand exactly what Capgo does under the hood.
+:::
+
+## The first manual build
+
+Before we can start thinking about building the app with Capgo, we should first set it up, and do a first TestFlight build by hand.
+There are some advantages to doing a manual build first:
+
+- You will setup the distribution certificate on your local machine
+- You will create the App Store record if you haven't done it yet
+- You will be able to figure out any issues with the build process linked to your app code
+
+Before we can begin, you must have the distribution certificate installed on your local machine.
+This is quite a bit complex, but I will explain it below.
+
+### Setting up the distribution certificate
+
+<Steps>
+1. Open Xcode
+2. Click on `Xcode` -> `Settings...`
+    Alternatively, you can use the shortcut `Cmd + ,`
+
+    ![Xcode settings](/native-build-assets/xcode-settings.webp)
+3. Go to `Accounts`
+    ![Xcode Accounts tab](/native-build-assets/xcode-apple-accounts.webp)
+4. Find the Apple Account that is added to the Apple Developer Account
+    ![Xcode selected apple account](/native-build-assets/xcode-selected-account.webp)
+5. Find the team that you will use to deploy the app
+    ![Xcode find team](/native-build-assets/xcode-find-team.webp)
+6. Click on the `Manage Certificates...` button
+    ![Xcode manage certificates](/native-build-assets/xcode-manage-certificates.webp)
+7. Make sure you can see the distribution certificate in the list
+    ![Xcode distribution certificate](/native-build-assets/xcode-deployment-certificate.webp)
+8. If you do not, you need to create a new certificate
+
+    :::note
+      Apple limits the number of distribution certificates you can have to 3. If you have more than 3 certificates, you need to delete one in order to create a new one. I will not cover that in the tutorial.
+    :::
+
+    1. Click on the `+` button and then on `Apple Distribution`
+        ![Xcode add certificate](/native-build-assets/xcode-add-certificate.webp)
+    2. The certificate will be created automatically. You can see it in the list. Look at the previous step to confirm that you see it.
+</Steps>
+
+Now that you have the distribution certificate installed, you can begin the build process.
+
+### Manual build to TestFlight
+
+<Steps>
+  1. Open the app in Xcode
+
+      Run `bunx cap open ios` to open the app in Xcode.
+
+  2. Find and click on the `archive` button
+
+      In the Xcode toolbar, find and click on the `product` -> `archive` button.
+
+      ![Xcode toolbar](/native-build-assets/xcode-toolbar.webp)
+  3. Wait for the build to complete
+  4. Click on the `Distribute App` button
+
+      ![Xcode distribute button](/native-build-assets/xcode-distribue-app.webp)
+  5. Select `TestFlight Internal Only` as the distribution method and click on `Distribute` button
+
+      ![Xcode TestFlight internal only distribution method](/native-build-assets/xcode-distribue-testflight-1.webp)
+  6. Configure the app record
+
+      Fill in the following fields:
+        1. Name: The name of your app - visible in the App Store
+        2. SKU - the SKU of your app - this is used to identify your app in the App Store
+        3. The primary language - the primary language of your app
+
+      Then, click on the `next` button
+
+      ![Xcode TestFlight configure app record](/native-build-assets/xcode-configure-app-record-testflight.webp)
+
+    7. If the creation of the app record fails, try to close the window and try to archive the app again.
+
+    8. Wait for the upload to complete
+
+    9. If everything went well, you should see the following screen
+      ![Xcode TestFlight upload complete](/native-build-assets/xcode-upload-complete-testflight.webp)
+    10. Click on the `Done` button
+</Steps>  
+
+
+You may instinctively think that all is good now and that you will be able to see your app in TestFlight now, but there are a few more things still to finish:
+
+  1. Add yourself to TestFlight
+  2. Complete export compliance so the build becomes testable
+  3. Fill in required App Store Connect metadata such as your support URL, privacy policy URL, and age rating
+  4. Prepare screenshots that match the devices you actually support
+  5. Add App Review contact details and any test credentials before the production submission
+
+Let's start with the first one:
+
+### Adding yourself to TestFlight
+
+<Steps>
+  1. Go to the [App Store Connect](https://appstoreconnect.apple.com/) page
+    ![App Store Connect login page](/native-build-assets/appstore-connect-login.webp)
+  2. Sign in with your Apple Developer account
+  3. Select the team that you used when you created the app record. If you are only in one developer account, can skip this step.
+    ![App Store Connect team selection](/native-build-assets/appstore-connect-select-team.webp)
+  4. Click on the `Apps` button
+    ![App Store Connect apps button](/native-build-assets/appstore-connect-apps-button.webp)
+  5. Find the app you created in the previous step and click on it
+    ![App Store Connect app selection](/native-build-assets/appstore-connect-select-app.webp)
+  6. Click on the `TestFlight` button
+    ![App Store Connect testflight button](/native-build-assets/appstore-connect-testflight-button.webp)
+  7. Click on the `Internal Testers plus` button
+    ![App Store Connect internal testers plus button](/native-build-assets/appstore-connect-testflight-internal-testing-plus.webp)
+  8. Create a new group
+
+      I like to name the group "internal". You can name it whatever you want.
+
+      ![App Store Connect create new group](/native-build-assets/appstore-connect-testflight-internal-create-group.webp)
+  9. Click on `Invite testers` button
+    ![App Store Connect invite testers button](/native-build-assets/appstore-connect-testflight-internal-invite-testers.webp)
+  10. Add yourself to the group
+
+      Find yourself in the list and select the checkbox next to your name. (You may need to refresh the page to see yourself)
+      Then, click on the `Add` button.
+
+      ![App Store Connect invite tester checkbox](/native-build-assets/appstore-connect-testflight-internal-invite-tester-checkbox.webp)
+  11. Verify that you are added to the group
+
+      Now, you should see yourself in the group.
+
+      ![App Store Connect verify tester](/native-build-assets/appstore-connect-testflight-internal-verify-tester.webp)
+</Steps>
+
+Congratulations 🎉
+You have added yourself to TestFlight. Now, there is just one more thing 
+you need to do before you can configure Capgo Native Build.
+
+### Setting up the compliance information
+
+You now need to promise Apple that your app doesn't use any non-standard (like a custom algorithm) encryption. If your app does use any non-standard encryption, I suggest reading the [Apple documentation](https://developer.apple.com/help/app-store-connect/manage-app-information/overview-of-export-compliance) on how to handle this.
+There are two ways to do this:
+
+1. You can do this by hand every time you build your app.
+2. You can configure your plist file to automatically set this value to `false`.
+
+Let's start with the first one:
+
+<Steps>
+  1. Follow all the steps from the previous section to find the TestFlight section in App Store Connect
+  2. Click on `Builds -> iOS`
+    ![App Store Connect builds iOS button](/native-build-assets/appstore-connect-builds-ios-button.webp)
+  3. Find the build with missing compliance information and click on `Manage`
+    ![App Store Connect manage build](/native-build-assets/appstore-connect-manage-build.webp)
+  4. Select the option that best describes your app
+
+      For me, this is `none`, but it might be different for you.
+      After, click save
+
+      ![App Store Connect save compliance information](/native-build-assets/appstore-connect-manage-build-compliance.webp)
+  5. Your app should now say `ready to test`
+
+      ![App Store Connect ready to test](/native-build-assets/appstore-connect-ready-to-test.webp)
+</Steps>
+
+As for the second one, here are the steps:
+
+<Steps>
+  1. Open the `Info.plist` file
+  2. Add the following key:
+
+      ```xml
+      <key>ITSAppUsesNonExemptEncryption</key>
+      <false/>
+      ```
+
+  3. Save the file
+</Steps>
+
+:::note
+[Here](https://developer.apple.com/documentation/security/complying-with-encryption-export-regulations) is the official Apple documentation on how to inform Apple of your compliance with encryption export regulations.
+:::
+
+### Installing the TestFlight app and accepting the invitation
+
+Now, you are **ALMOST** ready to test your app in TestFlight.
+Before, you need to do the following things:
+
+1. Download the [TestFlight app](https://apps.apple.com/us/app/testflight/id899247664) from the App Store on your iOS/iPadOS device
+2. Accept the invitation to test your app
+
+I will skip the details of how to install the TestFlight app on your device. If you are not sure how to install an app, Google has some great guides on how to do it.
+
+As for accepting the invitation, you will receive an email from Apple with a link to accept the invitation.
+
+<Steps>
+
+  1. Open the email from Apple with the link to accept the invitation
+  2. Click on `View in TestFlight` button
+    ![TestFlight email button](/native-build-assets/testflight-email-button.webp)
+  3. Click on the `Install` button
+    ![TestFlight install button](/native-build-assets/testflight-install-button.webp)
+  4. Install the app on your device
+
+      If you have installed the app previously using Xcode, you may see the following screen. Please click on the `install` button.
+      ![TestFlight install app](/native-build-assets/testflight-install-app.webp)
+
+  5. Wait for the app to install
+  6. Click on the `Open` button and click it
+
+      <video src="/native-build-assets/testflight-open-app.mp4" controls autoplay loop muted playsinline></video>
+</Steps>
+
+Congratulations 🎉
+You have accepted the invitation to test your app in TestFlight. Now, you can configure Capgo Native Build to build and submit your app to TestFlight.
+
+
+## Configuring Capgo Native Build
+
+There are a few things you need to configure in Capgo Native Build to be able to build and submit your app to TestFlight.
+Here is a list of the things you will pass to the Capgo CLI:
+
+| Parameter | Description |
+|-----------|-------------|
+| `--platform` | The platform to build for (`ios`) |
+| `--apple-team-id` | Your Apple Developer Team ID (found in [Apple Developer Portal](https://developer.apple.com/account)) |
+| `--apple-key` | Path to your App Store Connect API Key file (`.p8` file) |
+| `--apple-key-id` | The Key ID of your App Store Connect API Key |
+| `--apple-issuer-id` | Your App Store Connect Issuer ID |
+| `--certificate` | Path to your distribution certificate (`.p12` file) |
+| `--ios-provisioning-profile` | Provisioning profile mapping (`bundleId=path` or just path for single profile) |
+
+Example command:
+
+```bash
+bunx @capgo/cli@latest build credentials save \
+  --platform ios \
+  --apple-team-id YOUR_TEAM_ID \
+  --apple-key '/path/to/AuthKey_XXXXX.p8' \
+  --apple-key-id YOUR_KEY_ID \
+  --apple-issuer-id YOUR_ISSUER_ID \
+  --certificate '/path/to/certificate.p12' \
+  --ios-provisioning-profile '/path/to/profile.mobileprovision'
+```
+
+
+### Team ID
+
+Let's start with the team ID. Finding it is quite easy.
+
+<Steps>
+   1. Go to [Apple Developer Account](https://developer.apple.com/account/) and scroll down
+   
+   2. Find the `Team ID`
+      <img src="/native-build-assets/apple_dev_team_id.png" alt="Team ID location in developer account" />
+</Steps>
+
+
+### Apple key, Apple key ID and Apple issuer ID
+
+Now, let's move on to the Apple key.
+
+:::tip[macOS: let Capgo create this key for you]
+On macOS, `capgo build init` can create this App Store Connect API key for you. Choose **"No — create one for me"** and a guided window opens App Store Connect, walks you through each step, and captures the key, Key ID and Issuer ID automatically — no copy-paste. The manual steps below are the alternative (and the path on Windows or Linux).
+:::
+
+<Steps>
+   1. Go to [App Store Connect user and access page](https://appstoreconnect.apple.com/access/users/)
+      :::note
+      For me the link sometimes doesn't work. Reload the page if it doesn't work for you.
+      :::
+   2. Select the correct team in the dropdown
+      1. Click on your name in the top right corner
+      2. Click on the team you want to use
+        ![Apple Developer keys team selection](/native-build-assets/apple-developer-select-team.webp)
+  3. Click on the `Integrations` button
+      ![App Store Connect integrations button](/native-build-assets/appstore-connect-integrations-button.webp)
+  4. Find the `issuer`
+      :::caution
+      This **IS TO BE SAVED** - you will need it later
+      :::
+
+      Click on the `copy` button to copy the issuer
+      ![App Store Connect copy issuer](/native-build-assets/appstore-connect-copy-issuer.webp)
+  5. Click on the plus button
+    ![App Store Connect add key button](/native-build-assets/appstore-connect-add-key-button.webp)
+  6. Set the name of the key and set the access to `App manager` and click on the `Generate` button
+    ![App Store Connect add key name, set access to app manager and generate button](/native-build-assets/appstore-connect-add-key-name.webp)
+  7. Save the key ID
+      :::caution
+      This **IS TO BE SAVED** - you will need it later
+      :::
+
+      ![App Store Connect copy key ID](/native-build-assets/appstore-connect-copy-key-id.webp)
+  8. Download the key
+      :::caution
+      This **IS TO BE SAVED** - you will need it later
+      :::
+
+      :::danger
+      **NEVER SHARE THE KEY WITH ANYONE - USE IT ONLY IN THE CAPGO CLI**
+      :::
+
+      ![App Store Connect download key](/native-build-assets/appstore-connect-download-key.webp)
+
+      ![App Store Connect download key warning](/native-build-assets/appstore-connect-download-key-warning.webp)
+</Steps>
+
+Congratulations 🎉
+You have created the Apple key, Apple key ID and Apple issuer ID.
+
+### Certificate
+
+Now, you are ready to export the certificate. As you remember, one of the first steps of this guide was setting up the distribution certificate.
+
+However, Apple in their infinite wisdom, decided that the way you export the certificate is quite different from the way you create them 🙃
+Let's get into setting it up:
+
+<Steps>
+   1. Open Keychain Access
+      1. Click `Command + Space` to open the search bar
+      2. Search for `Keychain Access`
+      3. Click on the `Keychain Access` app
+
+
+      <video 
+        src="/native-build-assets/open-keychain-macos.mp4" 
+        controls 
+        autoplay 
+        loop 
+        muted 
+        playsinline 
+        aria-label="Demonstration of opening Keychain Access on macOS"
+      ></video>
+  2. Select the `login` category and click on the `My Certificates` button
+    ![Keychain Access login category](/native-build-assets/keychain-access-login-category.webp)
+  3. Find your certificate in the list
+    
+      The certificate should be named `Apple Distribution: [Your Name/Company] (your team ID)`
+      ![Keychain Access find certificate](/native-build-assets/keychain-access-find-certificate.webp)
+  4. Right-click on the certificate and select `Export`
+    ![Keychain Access export certificate](/native-build-assets/keychain-access-export-certificate.webp)
+  5. Save the certificate as a `.p12` file
+      :::caution
+      This **IS TO BE SAVED** - you will need it later
+      :::
+
+      1. Make sure to select a good name for the certificate file
+      2. Make sure the file format is set to `Personal Information Exchange (.p12)`
+      3. Click on the `Save` button
+
+      ![Keychain Access save certificate dialog](/native-build-assets/keychain-access-save-certificate.webp)
+  6. When asked for the password, you can either:
+      - Skip the password (recommended for simplicity): Click `OK` without entering a password
+      - Set a password: If you prefer to protect your certificate with a password, you can set one here. Password-protected `.p12` files are fully supported by the Capgo CLI - just provide the password using the `--p12-password` option when running configuration command.
+
+      ![Keychain Access save certificate password dialog](/native-build-assets/keychain-access-save-certificate-password-dialog.webp)
+  7. When asked for the "login keychain password", give the password you use to login to your Mac
+
+      Give the password you use to login to your Mac. Then, click on the `Allow` button.
+
+      ![Keychain Access save certificate login keychain password](/native-build-assets/keychain-access-save-certificate-login-keychain-password.webp)
+</Steps>
+
+Congratulations 🎉
+You have exported the certificate.
+
+### Provisioning profile
+
+Now, you are ready to export the provisioning profile. I promise, this is the last thing you will need to get from Apple.
+
+<Steps>
+   1. Go to [Apple Developer Profiles](https://developer.apple.com/account/resources/profiles/list)
+   2. Select the correct team in the dropdown
+      1. Click on your name in the top right corner
+      2. Click on the team you want to use
+        ![Apple Developer keys team selection](/native-build-assets/apple-developer-select-team.webp)
+  3. Make sure you are on the correct page
+      It should look like this, if it doesn't click on `profiles` in the sidebar
+    
+      ![Apple Developer profiles page](/native-build-assets/apple-developer-profiles-page.webp)
+  4. Click on the `+` button
+    ![Apple Developer add profile button](/native-build-assets/apple-developer-add-profile-button.webp)
+  5. Select the profile type
+      Select `App Store Connect` and click on the `Continue` button
+      
+      ![Apple Developer select profile type](/native-build-assets/apple-developer-select-profile-type.webp)
+  6. Select the app you want to build
+
+      Find your app in the dropdown and click on the `Continue` button
+
+      ![Apple Developer select app](/native-build-assets/apple-developer-select-app.webp)
+7. Select the correct distribution certificate
+
+       Select the certificate you exported in the previous step and click on the `Continue` button
+
+       ![Apple Developer select distribution certificate](/native-build-assets/apple-developer-select-deployment-certificate.webp)
+
+       If you are unsure which certificate to select, come back to Keychain Access and find the certificate you exported. Then look at the expiration date.
+       
+       ![Apple Developer select distribution certificate expiration date](/native-build-assets/apple-developer-select-deployment-certificate-expiration-date.webp)
+  8. Name the profile
+
+      Give the profile a name and click on the `Generate` button
+
+      :::tip
+      The profile name is automatically extracted by the Capgo CLI — you don't need to remember it.
+      :::
+
+      ![Apple Developer name profile](/native-build-assets/apple-developer-name-profile.webp)
+  9. Download the profile
+
+      Click on the `Download` button to download the profile
+
+      :::caution
+      This file **IS TO BE SAVED** - you will need it later
+      :::
+
+      ![Apple Developer download profile](/native-build-assets/apple-developer-name-provisioning-profile.webp)
+</Steps>
+
+Congratulations 🎉
+You have now got everything you need to configure Capgo Native Build.
+
+:::caution
+Never commit the credentials you just created to your repository.
+Keep them safe! 🔒
+:::
+
+### Running the configuration command
+
+You have done it! You have now got everything you need to configure Capgo Native Build.
+
+The command you will need to run is:
+
+```bash
+bunx @capgo/cli@latest build credentials save \
+  --platform ios \
+  --apple-team-id UVTJ336J2D \
+  --apple-key ./capgo-tutorial/AuthKey_66FGQZB566.p8 \
+  --apple-key-id 66FGQZB566 \
+  --apple-issuer-id 0cd4db4a-5598-45b8-9d32-75cdf127d005 \
+  --certificate ./capgo-tutorial/capgo-build-tutorial-certificate.p12 \
+  --ios-provisioning-profile ./capgo-tutorial/capgo_native_build_tutorial.mobileprovision
+```
+
+:::note[Replace placeholder values]
+Replace the placeholder values above with your actual credentials gathered in the previous steps:
+- `--apple-team-id`: Your Apple Team ID
+- `--apple-key`: Path to your downloaded `.p8` key file
+- `--apple-key-id`: Your Apple Key ID
+- `--apple-issuer-id`: Your Apple Issuer ID
+- `--certificate`: Path to your exported `.p12` certificate
+- `--ios-provisioning-profile`: Path to your downloaded `.mobileprovision` file (bundle ID auto-inferred for single profiles)
+:::
+
+If all went well, you will see the following output:
+
+![Capgo CLI credentials save output](/native-build-assets/credentials-save.webp)
+
+### CI/CD setup (GitHub Actions)
+
+If you already completed [Team ID](#team-id), [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id), [Certificate](#certificate), and [Provisioning profile](#provisioning-profile), you already have everything needed for CI/CD.
+This section only covers how to pass those values as GitHub Actions secrets and environment variables.
+
+#### 1) Convert credential files to single-line base64
+
+```bash
+# Distribution certificate (.p12)
+base64 -i ./capgo-tutorial/capgo-build-tutorial-certificate.p12 | tr -d '\n' > certificate_base64.txt
+
+# Provisioning profile (.mobileprovision)
+base64 -i ./capgo-tutorial/capgo_native_build_tutorial.mobileprovision | tr -d '\n' > profile_base64.txt
+
+# App Store Connect API key (.p8)
+base64 -i ./capgo-tutorial/AuthKey_66FGQZB566.p8 | tr -d '\n' > apple_key_base64.txt
+```
+
+:::tip
+GitHub secrets should be single-line values. `tr -d '\n'` removes line breaks from base64 output.
+:::
+
+#### 2) Create repository secrets
+
+In `GitHub > Repository > Settings > Secrets and variables > Actions`, add:
+
+| Secret name | Value |
+|-----------|-------|
+| `CAPGO_TOKEN` | Your Capgo API token |
+| `APP_STORE_CONNECT_TEAM_ID` | Team ID from [Team ID](#team-id) |
+| `APPLE_KEY_ID` | Key ID from [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id) |
+| `APPLE_ISSUER_ID` | Issuer ID from [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id) |
+| `BUILD_CERTIFICATE_BASE64` | Content of `certificate_base64.txt` |
+| `CAPGO_IOS_PROVISIONING_MAP` | Generated by CLI — copy from `.capgo-credentials` file |
+| `APPLE_KEY_CONTENT` | Content of `apple_key_base64.txt` |
+| `P12_PASSWORD` (optional) | Your `.p12` password if set during export |
+
+#### 3) Use env vars in your GitHub Actions workflow
+
+```yaml
+# .github/workflows/ios-build.yml
+name: iOS Cloud Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  ios-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Request iOS build with Capgo
+        run: bunx @capgo/cli@latest build request --platform ios
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          CAPGO_IOS_PROVISIONING_MAP: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+```
+
+<Aside type="tip">
+With this setup, CI sends credentials through environment variables only. You do not need to commit signing files or upload them as workflow artifacts.
+</Aside>
+
+### Running the build
+
+Now, you are ready to run your first build.
+
+Run the following command to build your app:
+
+```bash
+bunx @capgo/cli@latest build request --platform ios
+```
+
+Congratulations 🎉
+At this point, you have successfully built your app and it is ready to be submitted to the App Store.
+
+### Submit to App Store review
+
+The normal App Store build path uploads the build to App Store Connect/TestFlight. If your CI release should also attach the processed TestFlight build to the App Store version and submit it for App Review, pass `--submit-to-store-review` with a release build:
+
+```bash
+npx @capgo/cli@latest build request com.example.app \
+  --platform ios \
+  --build-mode release \
+  --ios-distribution app_store \
+  --submit-to-store-review \
+  --store-release-name "1.2.3" \
+  --store-release-notes "General improvements" \
+  --store-release-notes-locale "en-US=General improvements" \
+  --store-release-notes-locale "nl-NL=Algemene verbeteringen" \
+  --store-release-notes-locale "fr-FR=Ameliorations generales" \
+  --no-ios-automatic-release
+```
+
+This requires App Store Connect API key credentials (`APPLE_KEY_ID`, `APPLE_ISSUER_ID`, `APPLE_KEY_CONTENT`, and `APP_STORE_CONNECT_TEAM_ID`). App-specific password uploads and `ad_hoc` distribution cannot submit a build for review. `--store-release-name` is the App Store version; if omitted, Capgo reads `MARKETING_VERSION` from the Xcode project. `--store-release-notes` is the fallback App Store What's New text, and each `--store-release-notes-locale "locale=notes"` entry can override it for a store localization. Use `--ios-automatic-release` to release automatically after Apple approval, or `--no-ios-automatic-release` to wait for a manual release. `--ios-testflight-groups` is still available for external beta distribution, but it is not required for App Store review submission.
+
+## Ad-Hoc Distribution Mode
+
+By default, Capgo builds iOS apps for App Store distribution (TestFlight + App Store). If you need ad-hoc builds instead (for internal testing or CI artifact collection), you can use the `--ios-distribution` flag.
+
+<Aside type="note">
+Ad-hoc distribution is **not** the same as Enterprise (In-House) distribution. Enterprise distribution requires a separate Apple Developer Enterprise account and uses different provisioning profiles. Capgo currently supports `app_store` and `ad_hoc` modes only.
+</Aside>
+
+### When to use ad-hoc mode
+
+- You want to distribute IPAs directly to registered devices (no TestFlight)
+- You don't have or don't want to use an App Store Connect API key
+- You want to collect build artifacts via `--output-upload` without submitting to the App Store
+
+### Requirements
+
+Ad-hoc builds have **fewer requirements** than App Store builds:
+
+| Credential | Required? |
+|-----------|-----------|
+| Distribution certificate (`.p12`) | Yes |
+| Ad-hoc provisioning profile (`.mobileprovision`) | Yes |
+| Team ID (`--apple-team-id`) | Yes |
+| App Store Connect API key (`.p8`) | **No** |
+| Apple Key ID / Issuer ID | **No** |
+
+<Aside type="note">
+In `ad_hoc` mode, `--apple-key`, `--apple-key-id`, and `--apple-issuer-id` are not supported and are ignored.
+This is why the two App Store Connect rows above do not show ad-hoc CLI flags; these options apply to `app_store` mode only.
+</Aside>
+
+<Aside type="caution">
+Without an App Store Connect API key, build number auto-increment uses a timestamp-based fallback. To suppress the warning, pass `--skip-build-number-bump`.
+</Aside>
+
+### Creating an ad-hoc provisioning profile
+
+Follow the same steps as [Provisioning profile](#provisioning-profile), but in step 5, select **Ad Hoc** instead of **App Store**:
+
+1. Go to [Apple Developer Profiles](https://developer.apple.com/account/resources/profiles/list)
+2. Click the `+` button
+3. Select **Ad Hoc** and click Continue
+4. Select your app and distribution certificate
+5. Select the devices you want to register
+6. Name and download the profile
+
+### Saving ad-hoc credentials
+
+```bash
+bunx @capgo/cli@latest build credentials save \
+  --platform ios \
+  --ios-distribution ad_hoc \
+  --apple-team-id YOUR_TEAM_ID \
+  --certificate './certificate.p12' \
+  --ios-provisioning-profile './adhoc_profile.mobileprovision'
+```
+
+No `--apple-key`, `--apple-key-id`, or `--apple-issuer-id` needed.
+
+### Running an ad-hoc build
+
+```bash
+bunx @capgo/cli@latest build request \
+  --platform ios \
+  --ios-distribution ad_hoc
+```
+
+To collect the IPA as a build artifact, add `--output-upload`:
+
+```bash
+bunx @capgo/cli@latest build request \
+  --platform ios \
+  --ios-distribution ad_hoc \
+  --output-upload
+```
+
+### CI/CD with ad-hoc builds
+
+For GitHub Actions, you need fewer secrets than App Store builds:
+
+```yaml
+# .github/workflows/ios-adhoc-build.yml
+name: iOS Ad-Hoc Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ios-adhoc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Request iOS ad-hoc build
+        run: bunx @capgo/cli@latest build request --platform ios --ios-distribution ad_hoc --output-upload
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          CAPGO_IOS_PROVISIONING_MAP: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP_ADHOC }}
+          CAPGO_IOS_DISTRIBUTION: ad_hoc
+```
+
+<Aside type="tip">
+Notice that `APPLE_KEY_ID`, `APPLE_ISSUER_ID`, and `APPLE_KEY_CONTENT` are not needed for ad-hoc builds.
+</Aside>
+
+## Apps with Extensions (Multi-Target Signing)
+
+If your app includes extensions (share extensions, widgets, notification service extensions, etc.), each extension target needs its own provisioning profile. Capgo supports this via the repeatable `--ios-provisioning-profile` flag.
+
+### Example: App + Share Extension
+
+```bash
+bunx @capgo/cli@latest build credentials save \
+  --platform ios \
+  --apple-team-id YOUR_TEAM_ID \
+  --apple-key '/path/to/AuthKey_XXXXX.p8' \
+  --apple-key-id YOUR_KEY_ID \
+  --apple-issuer-id YOUR_ISSUER_ID \
+  --certificate '/path/to/certificate.p12' \
+  --ios-provisioning-profile "com.example.app=./app_profile.mobileprovision" \
+  --ios-provisioning-profile "com.example.app.share-extension=./share_ext_profile.mobileprovision"
+```
+
+Each `--ios-provisioning-profile` flag maps a bundle ID to its provisioning profile file. The CLI:
+1. Reads each mobileprovision file
+2. Auto-extracts the profile name from the embedded plist
+3. Base64-encodes the file
+4. Stores everything as a single `CAPGO_IOS_PROVISIONING_MAP` credential
+
+<Aside type="tip">
+You need one distribution certificate for all targets — only provisioning profiles differ per target.
+</Aside>
+
+### Migration from Single Profile
+
+If you previously used `BUILD_PROVISION_PROFILE_BASE64` (single profile), run:
+
+```bash
+bunx @capgo/cli@latest build credentials migrate --platform ios
+```
+
+This converts your existing single-profile credentials to the new `CAPGO_IOS_PROVISIONING_MAP` format and removes the legacy keys (`BUILD_PROVISION_PROFILE_BASE64`, `APPLE_PROFILE_NAME`).
+
+After migration, add extension profiles with the `update` command (additive merge):
+
+```bash
+bunx @capgo/cli@latest build credentials update \
+  --platform ios \
+  --ios-provisioning-profile "com.example.app.share-extension=./share_ext_profile.mobileprovision"
+```
+
+<Aside type="tip">
+Use `update` (not `save`) to add profiles to existing credentials. The `update` command merges new profiles with existing ones. Use `save` only when setting up all credentials from scratch.
+</Aside>
+
+## Troubleshooting
+
+
+### Provisioning profile doesn't include the XYZ capability.
+
+Sometimes, you might see the following error:
+```
+Provisioning profile "YOUR_PROVISIONING_PROFILE_NAME" doesn't include the XYZ capability. (in target 'App' from project 'App')"
+```
+
+This happens because you have enabled a new capability after the provisioning profile was created.
+The old provisioning profile does not include the new capability yet.
+
+To fix this, you need to regenerate the provisioning profile.
+
+<Steps>
+   1. Open [Apple Developer Portal](https://developer.apple.com/account/)
+   2. Select the correct team in the dropdown
+      ![Apple Developer keys team selection](/native-build-assets/apple-developer-select-team-2.webp)
+  3. Click on the `Profiles` button
+    ![Apple Developer profiles button](/native-build-assets/apple-developer-profiles-button.webp)
+  4. Find the provisioning profile you want to regenerate
+    ![Apple Developer find profile](/native-build-assets/pple-developer-find-profile.webp)
+  5. Click on the `Edit` button
+    ![Apple Developer edit profile](/native-build-assets/apple-developer-edit-profile.webp)
+  6. Click on the `Save` button
+    ![Apple Developer save profile](/native-build-assets/apple-developer-save-profile.webp)
+  7. Click on the `Download` button
+    ![Apple Developer download profile](/native-build-assets/apple-developer-download-profile.webp)
+  8. [Re-run the Capgo Native Build setup command](/docs/builder/ios/#running-the-configuration-command) with the newly downloaded profile.
+</Steps>
+
+This should fix the issue.
+
+### Other issues
+
+If for whatever reason you are having issues either with Capgo Native Build, configuring the credentials or building the app, please don't hesitate to reach via our [support](https://support.capgo.app/).
+
+## Keep going from iOS Builds
+
+If you are using **iOS Builds** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

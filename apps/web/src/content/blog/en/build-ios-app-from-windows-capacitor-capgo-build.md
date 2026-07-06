@@ -9,9 +9,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-08T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /build_list.webp
-head_image_alt: Capgo Build jobs list
+head_image_alt: "Build an iOS App from Windows with Capacitor and Capgo Build Capgo blog illustration"
 keywords: Windows, iOS, Capacitor, Capgo Build, cloud build, TestFlight, App Store Connect, no Mac
 tag: Tutorial
 published: true
@@ -117,8 +117,8 @@ To build iOS you need signing material:
 
 If you still need to generate these files, follow the Capgo documentation:
 
-- [Managing Credentials](/docs/cli/cloud-build/credentials/) (what to save and how)
-- [How to Get iOS Certificates and Provisioning Profiles](/docs/cli/cloud-build/ios/#how-to-get-ios-certificates-and-provisioning-profiles)
+- [Managing Credentials](/docs/builder/credentials/) (what to save and how)
+- [How to Get iOS Certificates and Provisioning Profiles](/docs/builder/ios/#how-to-get-ios-certificates-and-provisioning-profiles)
 
 The easiest path is: create/export these once (often using any available Mac, a teammate, or a one-time rental), then reuse them from Windows for every subsequent build.
 

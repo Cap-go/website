@@ -1,16 +1,21 @@
 ---
 slug: splash-screen-in-react-native
 title: 'Splash Screen in React Native: A Complete Guide for 2026'
-description: 'Learn how to implement a professional splash screen in React Native for Expo & CLI. This guide covers asset prep, native setup, performance, and common fixes.'
+description: >-
+  Learn how to implement a professional splash screen in React Native for Expo &
+  CLI. This guide covers asset prep, native setup, performance, and common
+  fixes.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-24T07:15:52.262Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/39c1730b-fbc4-4f4a-842a-28599592084d/splash-screen-in-react-native-tutorial-guide.jpg'
-head_image_alt: 'Splash Screen in React Native: A Complete Guide for 2026'
+updated_at: 2026-06-18T15:35:50.000Z
+head_image: /blog-images/splash-screen-in-react-native.webp
+head_image_alt: >-
+  'Splash Screen in React Native: A Complete Guide for 2026' Capgo blog
+  illustration
 keywords: 'react native, splash screen, expo, react native cli, mobile development'
-tag: 'react native, splash screen, expo, react native cli, mobile development'
+tag: 'Mobile, Guides'
 published: true
 locale: en
 next_blog: ''

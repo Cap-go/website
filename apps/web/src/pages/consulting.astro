@@ -1,11 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createServiceLdJson, createLdJsonGraph, createFAQPageLdJson } from '@/lib/ldJson'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.consulting({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.consulting_description({}, { locale: Astro.locals.locale })
+const locale = Astro.locals.locale
+const title = [Astro.locals.runtimeConfig.public.brand, m.consulting({}, { locale })].join(' | ')
+const description = m.consulting_description({}, { locale })
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -15,8 +16,28 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const faqSchema = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  questions: [
+    { question: m.consulting_faq_q1({}, { locale }), answer: m.consulting_faq_a1({}, { locale }) },
+    { question: m.consulting_faq_q2({}, { locale }), answer: m.consulting_faq_a2({}, { locale }) },
+    { question: m.consulting_faq_q3({}, { locale }), answer: m.consulting_faq_a3({}, { locale }) },
+    { question: m.consulting_faq_q4({}, { locale }), answer: m.consulting_faq_a4({}, { locale }) },
+    { question: m.consulting_faq_q5({}, { locale }), answer: m.consulting_faq_a5({}, { locale }) },
+    { question: m.consulting_faq_q6({}, { locale }), answer: m.consulting_faq_a6({}, { locale }) },
+    { question: m.consulting_faq_q7({}, { locale }), answer: m.consulting_faq_a7({}, { locale }) },
+    { question: m.consulting_faq_q8({}, { locale }), answer: m.consulting_faq_a8({}, { locale }) },
+    { question: m.consulting_faq_q9({}, { locale }), answer: m.consulting_faq_a9({}, { locale }) },
+    {
+      question: m.consulting_faq_q10({}, { locale }),
+      answer: 'Book a free discovery call at https://book.capgo.app/consulting-services/, email sales@capgo.app, or reach out on Discord.',
+    },
+  ],
+})
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [faqSchema],
 })
 
 const content = { title, description, ldJSON }
@@ -168,8 +189,8 @@ const useCases = [
       </div>
 
       <h1 class="mb-6 text-5xl font-bold md:text-7xl">
-        <span class="text-white">Custom</span>
-        <span class="text-gray-200">Capacitor Plugins</span>
+        <span class="text-white">Custom </span>
+        <span class="text-gray-200">Capacitor Plugins </span>
         <span class="text-white">& Expert Consulting</span>
       </h1>
 
@@ -182,7 +203,7 @@ const useCases = [
           href="https://book.capgo.app/capacitor-plugin/"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:bg-gray-700 hover:shadow-gray-900/30"
+          class="inline-flex items-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-gray-900 shadow-lg transition-all duration-200 hover:bg-gray-100 hover:shadow-white/20"
         >
           Get Your Custom Plugin Built
           <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -214,7 +235,7 @@ const useCases = [
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mb-16 text-center">
         <h2 class="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
-          Custom Plugin <span class="text-gray-200">Development</span>
+          Custom Plugin <span class="text-gray-700">Development</span>
         </h2>
         <p class="mx-auto max-w-3xl text-xl text-gray-600">
           Access any native iOS or Android functionality from your Capacitor app. We build battle-tested, production-ready plugins tailored to your specific needs.
@@ -330,7 +351,7 @@ const useCases = [
             href="https://book.capgo.app/capacitor-plugin/"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center rounded-xl bg-white px-8 py-4 font-semibold text-gray-200 transition-colors duration-200 hover:bg-gray-100"
+            class="inline-flex items-center rounded-xl bg-white px-8 py-4 font-semibold text-gray-900 transition-colors duration-200 hover:bg-gray-100"
           >
             {m.get_your_custom_plugin_built({}, { locale: Astro.locals.locale })}
             <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -339,7 +360,7 @@ const useCases = [
           </a>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-            class="inline-flex items-center rounded-xl border-2 border-white px-8 py-4 font-semibold text-white transition-colors duration-200 hover:bg-white hover:text-gray-200"
+            class="inline-flex items-center rounded-xl border-2 border-white px-8 py-4 font-semibold text-white transition-colors duration-200 hover:bg-white hover:text-gray-900"
           >
             {m.browse_all_plugins({}, { locale: Astro.locals.locale })}
             <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -357,7 +378,7 @@ const useCases = [
       <div class="mb-16 text-center">
         <h2 class="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
           {m.code_review({}, { locale: Astro.locals.locale })} &
-          <span class="text-gray-200">{m.consulting({}, { locale: Astro.locals.locale })}</span>
+          <span class="text-gray-700">{m.consulting({}, { locale: Astro.locals.locale })}</span>
         </h2>
         <p class="mx-auto max-w-3xl text-xl text-gray-600">
           {m.when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services({}, { locale: Astro.locals.locale })}:
@@ -459,7 +480,7 @@ const useCases = [
         </div>
 
         <div class="text-center">
-          <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-orange-100">
+          <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gray-700">
             <svg class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
@@ -558,6 +579,61 @@ const useCases = [
     </div>
   </section>
 
+  <!-- FAQ Section -->
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
+          {m.consulting_faq_title({}, { locale })}
+        </h2>
+        <p class="text-lg text-gray-600 [&_a]:font-semibold [&_a]:text-gray-900 [&_a]:underline hover:[&_a]:text-gray-700" set:html={m.consulting_faq_subtitle({}, { locale })} />
+      </div>
+
+      <dl class="space-y-4">
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q1({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a1({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q2({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a2({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q3({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a3({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q4({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a4({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q5({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a5({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q6({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a6({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q7({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a7({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q8({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a8({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q9({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600">{m.consulting_faq_a9({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <dt class="text-lg font-semibold text-gray-900">{m.consulting_faq_q10({}, { locale })}</dt>
+          <dd class="mt-3 text-gray-600 [&_a]:font-semibold [&_a]:text-gray-900 [&_a]:underline hover:[&_a]:text-gray-700" set:html={m.consulting_faq_a10({}, { locale })} />
+        </div>
+      </dl>
+    </div>
+  </section>
+
   <!-- Final CTA Section -->
   <section class="bg-gray-900 py-20">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -577,7 +653,7 @@ const useCases = [
             href="https://book.capgo.app/capacitor-plugin/"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:bg-gray-700 hover:shadow-gray-900/30"
+            class="inline-flex items-center rounded-xl bg-white px-8 py-4 text-lg font-semibold text-gray-900 shadow-lg transition-all duration-200 hover:bg-gray-100 hover:shadow-white/20"
           >
             Get Your Custom Plugin Built
             <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -607,10 +683,13 @@ const useCases = [
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
     <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Consulting</h2>
     <p class="mt-4">
-      If you need Capgo consulting for a custom native feature, connect this page with <a href="/plugins/">Capgo Plugin Directory</a> for existing bridges, <a
-        href="/docs/contributing/adding-plugins/">Adding or Updating Plugins</a
-      > for contribution flow, <a href="/native-build/">Capgo Native Builds</a> for binary delivery, <a href="/enterprise/">Capgo Enterprise</a> for long-term support, and <a
-        href="/blog/capacitor-plugins-what-you-need-to-know/">Capacitor Plugins: What You Need to Know</a
+      If you need Capgo consulting for a custom native feature, connect this page with <a href="/plugins/" class="font-medium text-white underline">Capgo Plugin Directory</a> for existing
+      bridges, <a href="/docs/contributing/adding-plugins/" class="font-medium text-white underline">Adding or Updating Plugins</a> for contribution flow, <a
+        href="/native-build/"
+        class="font-medium text-white underline">Capgo Native Builds</a
+      > for binary delivery, <a href="/enterprise/" class="font-medium text-white underline">Capgo Enterprise</a> for long-term support, and <a
+        href="/blog/capacitor-plugins-what-you-need-to-know/"
+        class="font-medium text-white underline">Capacitor Plugins: What You Need to Know</a
       > for planning native scope.
     </p>
   </section>

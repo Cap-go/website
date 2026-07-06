@@ -27,3 +27,6 @@ seo-report.txt
 seo-report.json
 seo-report.sarif
 .wrangler
+
+# Visual regression artifacts (local only)
+.visual-diff/

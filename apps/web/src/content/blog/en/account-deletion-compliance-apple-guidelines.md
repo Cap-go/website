@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-14T03:15:15.208Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6823e678f8b9f5df39f52ef5-1747192562945.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T21:13:09.000Z
+head_image: /blog-images/account-deletion-compliance-apple-guidelines.webp
+head_image_alt: "\"Account Deletion Compliance: Apple Guidelines\" Capgo blog illustration"
 keywords: Apple guidelines, account deletion, user privacy, app compliance, mobile development
 tag: Development, Mobile, Security
 published: true
@@ -56,7 +56,7 @@ Once these steps are in place, focus on ensuring data removal aligns with these 
 | **Data Type** | **Removal Requirements** | **Legal Considerations** |
 | --- | --- | --- |
 | User Content | Complete deletion | Temporary retention may be needed |
-| Authentication Data | Immediate removal | Token revocation required |
+| Authentication Data | Immediate removal | Token revocation required; use [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/) for Sign in with Apple |
 | Third-party Data | Coordinated deletion | Compliance varies by service |
 | Usage History | Full purge | Subject to legal retention rules |
 
@@ -74,7 +74,7 @@ Testing the account deletion process is essential for ensuring compliance and fu
 
 For developers using [Capacitor](https://capacitorjs.com/) with Capgo, live updates can help address compliance issues quickly, bypassing the need to wait for App Store approval. During testing, make sure to verify:
 
--   Token revocation for users who signed in with Apple.
+-   Token revocation for users who signed in with Apple via [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/).
 -   Complete data removal from all connected services.
 -   Proper handling of active subscriptions.
 
@@ -88,7 +88,7 @@ Here’s how to tackle synchronization issues:
 
 -   **Centralized Deletion Handler**: Develop a unified service to manage key tasks like:
     
-    -   Cleaning up [local storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/)
+    -   Cleaning up [@capgo/capacitor-data-storage-sqlite](https://capgo.app/plugins/capacitor-data-storage-sqlite/) and [@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/) data
     -   Purging secure storage
     -   Ending cloud sync processes
     -   Handling token management

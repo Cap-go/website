@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-16T02:50:46.694Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/capacitor-plugin-options-for-ota-updates.webp
+head_image_alt: "Capacitor Plugin Options for OTA Updates Capgo blog illustration"
 keywords: OTA updates, Capacitor, mobile apps, app deployment, Capgo, Appflow, CodePush
 tag: Development, Mobile, Updates
 published: true

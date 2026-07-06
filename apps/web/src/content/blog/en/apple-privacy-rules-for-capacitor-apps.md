@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-31T01:48:03.832Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf-1743385695606.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T21:25:40.000Z
+head_image: /blog-images/apple-privacy-rules-for-capacitor-apps.webp
+head_image_alt: "Apple Privacy Rules for Capacitor Apps Capgo blog illustration"
 keywords: Apple privacy rules, Capacitor apps, data transparency, user consent, App Store compliance, privacy policy
 tag: Development, Mobile, Updates
 published: true
@@ -149,7 +149,7 @@ This section focuses on how to give users control over tracking and data access,
 
 ### Setting Up Tracking Permissions
 
-To configure App Tracking Transparency (ATT) in your Capacitor app, include the following key in your `Info.plist` file:
+To configure App Tracking Transparency (ATT) in your Capacitor app, use [@capgo/capacitor-app-tracking-transparency](https://capgo.app/plugins/capacitor-app-tracking-transparency/) and include the following key in your `Info.plist` file:
 
 ```xml
 <key>NSUserTrackingUsageDescription</key>

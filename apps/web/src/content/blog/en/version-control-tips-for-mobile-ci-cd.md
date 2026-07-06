@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-14T05:48:24.354Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6824286159ff6128992275a6-1747201776379.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/version-control-tips-for-mobile-ci-cd.webp
+head_image_alt: "Version Control Tips for Mobile CI/CD Capgo blog illustration"
 keywords: version control, mobile CI/CD, branching strategies, security practices, rollback plans, semantic versioning, app updates
 tag: Development, Mobile, Security
 published: true
@@ -83,7 +83,7 @@ The right strategy depends on your team’s size, workflow, and goals. Whichever
 
 ### Version Numbering System
 
-Pair your branch management strategy with a clear version numbering system. The widely-used **semantic versioning** format (MAJOR.MINOR.PATCH) works well for mobile apps:
+Pair your branch management strategy with a clear version numbering system. The widely-used [**semantic versioning** format](/semver_tester/) (MAJOR.MINOR.PATCH) works well for mobile apps:
 
 -   **MAJOR**: For breaking API changes.
 -   **MINOR**: For backward-compatible feature updates.

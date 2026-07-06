@@ -1,0 +1,63 @@
+---
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+
+const locale = Astro.locals.locale
+
+const intelligenceCards = [
+  {
+    title: m.landing_release_intelligence_card_cli_title({}, { locale }),
+    text: m.landing_release_intelligence_card_cli_desc({}, { locale }),
+  },
+  {
+    title: m.landing_release_intelligence_card_dashboard_title({}, { locale }),
+    text: m.landing_release_intelligence_card_dashboard_desc({}, { locale }),
+  },
+  {
+    title: m.landing_release_intelligence_card_email_title({}, { locale }),
+    text: m.landing_release_intelligence_card_email_desc({}, { locale }),
+  },
+]
+---
+
+<section class="bg-[#10151f] py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div>
+        <p class="font-mono text-sm leading-7 font-semibold text-[#44BCFF] uppercase">
+          {m.landing_release_intelligence_subtitle({}, { locale })}
+        </p>
+        <h2 class="mt-2 text-3xl leading-tight font-bold tracking-tight text-white sm:text-4xl">
+          {m.landing_release_intelligence_title({}, { locale })}
+        </h2>
+        <p class="mt-6 text-lg leading-8 text-gray-300">
+          {m.landing_release_intelligence_description({}, { locale })}
+        </p>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+          {
+            intelligenceCards.map((card) => (
+              <article class="rounded-xl border border-white/10 bg-white/[0.04] p-5">
+                <h3 class="text-base font-semibold text-white">{card.title}</h3>
+                <p class="mt-2 text-sm leading-6 text-gray-400">{card.text}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="mt-8">
+          <a
+            href={getRelativeLocaleUrl(locale, 'live-update')}
+            class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-950/40 transition hover:bg-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
+          >
+            {m.learn_more({}, { locale })}
+          </a>
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-lg border border-white/10 bg-[#070d18] shadow-2xl shadow-blue-950/30">
+        <img src="/landing-demos/cli-live-update.webp" alt="" loading="lazy" decoding="async" class="block aspect-[16/10] w-full object-cover object-top" />
+      </div>
+    </div>
+  </div>
+</section>

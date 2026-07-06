@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-26T14:03:03.454Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68346854d3b966198182c7d5-1748275217518.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/how-capgo-handles-version-control-and-rollbacks.webp
+head_image_alt: "How Capgo Handles Version Control and Rollbacks Capgo blog illustration"
 keywords: version control, rollbacks, app updates, mobile development, CI/CD integration
 tag: Development, Mobile, Updates
 published: true
@@ -86,13 +86,13 @@ While these automated systems form the backbone of Capgo’s rollback capabiliti
 
 ### Manual Rollback Options
 
-Capgo gives developers full control over rollbacks through its dashboard, offering several manual strategies tailored to different scenarios [\[3\]](https://capgo.app/docs/live-updates/rollbacks).
+Capgo gives developers full control over rollbacks through its dashboard, offering several manual strategies tailored to different scenarios [\[3\]](https://capgo.app/docs/live-updates/rollbacks/).
 
-The simplest method is **reverting to a stable version**. From the dashboard, you can select any previously stable version and roll back with a single click [\[3\]](https://capgo.app/docs/live-updates/rollbacks)[\[2\]](https://www.uneed.best/blog/capgo-review). This is ideal when you know exactly which version worked well and want to restore that state.
+The simplest method is **reverting to a stable version**. From the dashboard, you can select any previously stable version and roll back with a single click [\[3\]](https://capgo.app/docs/live-updates/rollbacks/)[\[2\]](https://www.uneed.best/blog/capgo-review). This is ideal when you know exactly which version worked well and want to restore that state.
 
-If the issue isn’t clear yet, you can **pause updates by disabling the channel**. This stops new updates from being distributed while keeping the current version active [\[3\]](https://capgo.app/docs/live-updates/rollbacks)[\[2\]](https://www.uneed.best/blog/capgo-review). It’s a great option when you need time to investigate whether the problem lies in the latest update or somewhere else in the deployment process.
+If the issue isn’t clear yet, you can **pause updates by disabling the channel**. This stops new updates from being distributed while keeping the current version active [\[3\]](https://capgo.app/docs/live-updates/rollbacks/)[\[2\]](https://www.uneed.best/blog/capgo-review). It’s a great option when you need time to investigate whether the problem lies in the latest update or somewhere else in the deployment process.
 
-For critical issues, the most comprehensive approach is **forcing the integrated bundle**. This action reverts all devices to the original web version embedded in the native app [\[3\]](https://capgo.app/docs/live-updates/rollbacks)[\[2\]](https://www.uneed.best/blog/capgo-review). While drastic, it’s the most reliable method for resolving severe problems.
+For critical issues, the most comprehensive approach is **forcing the integrated bundle**. This action reverts all devices to the original web version embedded in the native app [\[3\]](https://capgo.app/docs/live-updates/rollbacks/)[\[2\]](https://www.uneed.best/blog/capgo-review). While drastic, it’s the most reliable method for resolving severe problems.
 
 ### Maintaining User Experience During Rollbacks
 
@@ -102,7 +102,7 @@ A key part of this process is Capgo’s **staged deployment approach**. Updates 
 
 Capgo’s user assignment tools make phased rollouts easy to manage. You can test updates with specific user segments and gradually expand the rollout as confidence in the update grows. If a problem arises, you can roll back only the affected groups instead of the entire user base.
 
-**Clear communication during rollbacks** is also essential. While Capgo automates the technical side, teams should establish a clear decision-making process for initiating rollbacks and assign responsibility for these actions [\[3\]](https://capgo.app/docs/live-updates/rollbacks). Having this plan in place ensures swift responses when issues arise.
+**Clear communication during rollbacks** is also essential. While Capgo automates the technical side, teams should establish a clear decision-making process for initiating rollbacks and assign responsibility for these actions [\[3\]](https://capgo.app/docs/live-updates/rollbacks/). Having this plan in place ensures swift responses when issues arise.
 
 Finally, Capgo’s real-time monitoring tools allow teams to assess rollback effectiveness immediately. You can track whether the rollback resolves the issue and confirm that user experience metrics return to normal. This feedback loop not only validates the rollback’s success but also helps prevent similar problems in future updates.
 

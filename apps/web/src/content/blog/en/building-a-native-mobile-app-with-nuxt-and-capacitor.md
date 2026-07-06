@@ -9,9 +9,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-03T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T19:49:03.000Z
 head_image: /nuxt_capgo.webp
-head_image_alt: Nuxt 4 and Capacitor illustration
+head_image_alt: "Convert Your Nuxt App to iOS & Android with Capacitor 8 Capgo blog illustration"
 keywords: Nuxt 4, Capacitor 8, convert web app to mobile, iOS, Android, mobile app development, static generation, native plugins, Vue
 tag: Tutorial
 published: true
@@ -30,7 +30,8 @@ Capacitor wraps your web app in a native container, giving you access to device 
 - Add Capacitor 8 with essential native plugins
 - Build and test on iOS and Android simulators
 - Enable live reload for faster development
-- Optionally add Konsta UI for native-looking components
+- Fix common iOS layout issues (viewport, safe area, horizontal overflow)
+- Add native-feeling UI with Capgo Native Navigation and Transitions
 
 > Looking to start a new project from scratch? Check out our guide on [Building a Nuxt Mobile App from Scratch](/blog/nuxt-mobile-app-capacitor-from-scratch/).
 
@@ -321,119 +322,206 @@ bunx cap sync
 
 Now, when you click the "Share now!" button, the native share dialog will appear.
 
-## Adding Konsta UI v5 with Tailwind CSS 4
+Next, you can make the app feel more native on iOS and Android with Capgo navigation and transitions, and fix common iOS layout issues that cause horizontal overflow or cropped safe areas.
 
-To make the button look more mobile-friendly, you can add Konsta UI for native-looking iOS and Android components.
+## Native-feeling UI with Capgo Native Navigation and Transitions
 
-You need to have [Tailwind CSS 4 already installed](https://tailwindcss.com/docs/installation/framework-guides/nuxt).
+I've worked for years with [Ionic](https://ionicframework.com/) to build cross-platform applications, but integrating it with Nuxt is hacky and rarely worth it when you already have [Tailwind CSS](https://tailwindcss.com/).
 
-1. Install the required packages:
+For a native mobile feel in a Nuxt + Capacitor app, use Capgo plugins instead of web-only UI kits like Konsta UI:
+
+- **[@capgo/capacitor-native-navigation](https://github.com/Cap-go/capacitor-native-navigation)** — native navbar, Liquid Glass tab bar on iOS, and a blurred tab bar style on Android. Your Nuxt router keeps route state; the plugin owns the native chrome.
+- **[@capgo/capacitor-transitions](https://github.com/Cap-go/capacitor-transitions)** — Ionic-style page transitions and iOS edge swipe-back in the WebView layer, without adopting Ionic UI.
+
+Install both:
 
 ```shell
-bun add konsta
-bun add tailwindcss @tailwindcss/vite
+bun add @capgo/capacitor-native-navigation @capgo/capacitor-transitions
+bunx cap sync
 ```
 
-2. Configure the Vite plugin in `nuxt.config.ts`:
+Configure native navigation with CSS inset mode so web content respects the native bars:
 
 ```typescript
-import tailwindcss from '@tailwindcss/vite';
+import { NativeNavigation } from '@capgo/capacitor-native-navigation';
 
-export default defineNuxtConfig({
-  compatibilityDate: '2025-01-15',
-  devtools: { enabled: true },
-  css: ['~/assets/css/main.css'],
-  vite: {
-    plugins: [tailwindcss()],
+await NativeNavigation.configure({
+  contentInsetMode: 'css',
+  animationDuration: 360,
+  glass: {
+    effect: 'liquidGlass',
   },
 });
 ```
 
-3. Create `app/assets/css/main.css`:
+Render a Liquid Glass tab bar (iOS uses system-owned rendering; Android uses a blurred WebView backdrop):
+
+```typescript
+await NativeNavigation.setTabbar({
+  selectedId: 'home',
+  labelVisibilityMode: 'labeled',
+  icons: true,
+  colors: { dynamic: true },
+  tabs: [
+    { id: 'home', title: 'Home', icon: { svg: '...' } },
+    { id: 'settings', title: 'Settings', icon: { svg: '...' } },
+  ],
+});
+
+await NativeNavigation.addListener('tabSelect', ({ id }) => {
+  router.push(`/${id}`);
+});
+```
+
+Add native page transitions in your app shell:
+
+```vue
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import '@capgo/capacitor-transitions';
+import { initTransitions, setDirection, setupRouterOutlet } from '@capgo/capacitor-transitions/vue';
+
+initTransitions({ platform: 'auto' });
+
+const router = useRouter();
+const outletRef = ref(null);
+
+onMounted(() => {
+  if (outletRef.value) {
+    setupRouterOutlet(outletRef.value, { platform: 'auto', swipeGesture: 'auto' });
+  }
+});
+
+const openSettings = () => {
+  setDirection('forward');
+  router.push('/settings');
+};
+</script>
+
+<template>
+  <cap-router-outlet ref="outletRef">
+    <router-view />
+  </cap-router-outlet>
+</template>
+```
+
+Wrap routed pages in `cap-router-outlet`, `cap-page`, and `cap-content`, and call `setDirection('forward')` or `setDirection('back')` before navigating. Do not duplicate web headers or footers when native navigation owns those surfaces.
+
+See the full guides: [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) and [Using @capgo/capacitor-transitions](/plugins/capacitor-transitions/).
+
+### Safe areas with Tailwind
+
+For device safe areas in Tailwind CSS, use [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor) (published as `tailwind-capacitor` on npm). It provides `safe-areas` utilities and other Capacitor-friendly Tailwind plugins:
+
+```shell
+bun add -D tailwind-capacitor
+```
+
+In `app/assets/css/main.css`:
 
 ```css
 @import 'tailwindcss';
-@import 'konsta/theme.css';
+@plugin "@capgo/tailwind-capacitor/platform";
+@plugin "@capgo/tailwind-capacitor/safe-areas";
 ```
 
-4. Wrap your app with the Konsta UI `App` component in `app/app.vue`:
+For Nuxt 4 with Tailwind CSS 4, keep this import in the CSS file referenced from `nuxt.config.ts`.
 
-```vue
-<template>
-  <App theme="ios">
-    <NuxtPage />
-  </App>
-</template>
+Use utilities such as `pt-safe`, `pb-safe`, and `px-safe` instead of sprinkling `env(safe-area-inset-*)` by hand. The project is actively developed — if something is missing for your Nuxt setup, [open a PR on GitHub](https://github.com/Cap-go/tailwind-capacitor/pulls).
 
-<script setup>
-import { App } from 'konsta/vue';
-</script>
-```
+## Fixing iOS Layout Issues (Viewport, Safe Area, and Horizontal Overflow)
 
-5. Update your page to use Konsta UI components:
+If content looks cropped, shifted, or horizontally scrollable on iOS, adding more `overflow-x: hidden` or tweaking the viewport tag alone usually does not fix it. Work through these checks in order.
 
-```vue
-<template>
-  <Page>
-    <Navbar title="My App" />
+### Make sure the viewport meta tag is applied correctly
 
-    <Block strong>
-      <p>
-        Here is your Nuxt & Konsta UI app. Let's see what we have here.
-      </p>
-    </Block>
-
-    <BlockTitle>Navigation</BlockTitle>
-    <List>
-      <ListItem href="/about/" title="About" />
-      <ListItem href="/form/" title="Form" />
-    </List>
-
-    <Block strong class="flex space-x-4">
-      <Button>Button 1</Button>
-      <Button>Button 2</Button>
-    </Block>
-  </Page>
-</template>
-
-<script setup>
-import {
-  Page,
-  Navbar,
-  Block,
-  Button,
-  List,
-  ListItem,
-  BlockTitle,
-} from 'konsta/vue';
-</script>
-```
-
-6. Add Roboto font for Material Design theme in `nuxt.config.ts`:
+In `nuxt.config.ts`, set the viewport through `app.head`:
 
 ```typescript
 export default defineNuxtConfig({
   app: {
     head: {
-      link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+      meta: [
         {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, viewport-fit=cover',
         },
       ],
     },
   },
-  // ... rest of config
 });
 ```
 
-Your Nuxt app should now have a native-looking mobile UI:
+### Handle iOS safe area from one root wrapper only
 
-<div class="mx-auto" style="width: 50%;">
-  <img src="/konsta-nuxt.webp" alt="konsta-nuxt">
-</div>
+Create a single app shell and apply safe area padding there — not in multiple nested components:
+
+```css
+html,
+body,
+#__nuxt {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-shell {
+  min-height: 100dvh;
+  width: 100%;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
+```
+
+Wrap all page content inside `.app-shell`. Duplicated safe-area padding in headers, modals, and layout wrappers often makes the UI look cropped or too large.
+
+With [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor), you can express the same padding with utilities like `pt-safe pb-safe px-safe` on that single shell.
+
+### Set Capacitor iOS `contentInset` to `never` first
+
+In `capacitor.config.ts`, prefer native inset disabled and let CSS (or Native Navigation's `contentInsetMode: 'css'`) own the safe area:
+
+```typescript
+const config: CapacitorConfig = {
+  appId: 'com.example.myapp',
+  appName: 'my-app',
+  webDir: 'out',
+  ios: {
+    contentInset: 'never',
+  },
+};
+```
+
+Mixing Capacitor's automatic content inset with CSS `env(safe-area-inset-*)` padding is a common cause of double spacing.
+
+### Find the real overflowing element
+
+The usual culprit is an element using `100vw`, Tailwind `w-screen`, a fixed pixel width, or a large `min-width`.
+
+In Safari Web Inspector, run:
+
+```javascript
+[...document.querySelectorAll('*')]
+  .filter(el => el.scrollWidth > document.documentElement.clientWidth)
+  .map(el => ({
+    el,
+    tag: el.tagName,
+    class: el.className,
+    scrollWidth: el.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+  }));
+```
+
+With Tailwind, replace `w-screen` with `w-full` when possible. Many horizontal overflow issues come from `100vw` / `w-screen`, duplicated safe-area padding, or a fixed-width container — not from the viewport meta tag itself.
 
 ## Conclusion
 
@@ -444,7 +532,8 @@ You've successfully converted your existing Nuxt web application into native iOS
 - Added Capacitor 8 with essential plugins
 - Built and deployed to iOS and Android simulators
 - Enabled live reload for development
-- Optionally added Konsta UI for native-looking components
+- Fixed common iOS layout issues (viewport, safe area, overflow)
+- Added native-feeling UI with Capgo Native Navigation and Transitions
 
 **Next steps:**
 - Set up [Capgo](https://capgo.app/) for over-the-air updates without app store resubmission
@@ -458,7 +547,9 @@ You've successfully converted your existing Nuxt web application into native iOS
 
 - [Nuxt Documentation](https://nuxt.com/docs)
 - [Capacitor 8 Documentation](https://capacitorjs.com/docs)
-- [Konsta UI Vue Documentation](https://konstaui.com/vue)
+- [@capgo/capacitor-native-navigation](https://github.com/Cap-go/capacitor-native-navigation/) — Liquid Glass tab bar and native chrome
+- [@capgo/capacitor-transitions](https://github.com/Cap-go/capacitor-transitions/) — native-feeling page transitions
+- [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor) — Tailwind safe-area utilities for Capacitor
 - [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.

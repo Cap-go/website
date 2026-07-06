@@ -2,7 +2,7 @@
 title: Troubleshooting
 description: "Resolve common issues encountered while using Capgo with detailed troubleshooting steps and advanced options for upload and debugging."
 sidebar:
-  order: 6
+  order: 7
   next: false
   prev: false
 ---
@@ -146,12 +146,12 @@ When troubleshooting a tricky live update problem, it's a good idea to capture b
 ### Updates not applying
 
 If you've uploaded a bundle but aren't seeing the changes on your device:
-- Make sure you've called `CapacitorUpdater.notifyAppReady()` in your app code as shown in the [quickstart](/docs/getting-started/quickstart)  
+- Make sure you've called `CapacitorUpdater.notifyAppReady()` in your app code as shown in the [quickstart](/docs/getting-started/quickstart/)
 - Check that your device is connected to the internet and the Capgo debug logs show the update was downloaded
 - Try fully closing and reopening the app, as updates are only applied on a fresh launch
 - Look for any errors in the native logs that might indicate a problem applying the update
 
-Refer to the [deploying live updates](/docs/getting-started/deploy) guide for more details on the update process. If you're still stuck, use the `npx @capgo/cli@latest app debug` command and native logs to get more visibility into what's happening.
+Refer to the [deploying live updates](/docs/getting-started/deploy/) guide for more details on the update process. If you're still stuck, use the `npx @capgo/cli@latest app debug` command and native logs to get more visibility into what's happening.
 
 ### Common update failure codes
 
@@ -165,7 +165,7 @@ It explains what each common code means, why it happens, and how to fix it.
 
 If you're having trouble installing the Capgo SDK, make sure:
 - Your app is using a supported version of Capacitor (4.0 or newer)
-- You've followed the [quickstart](/docs/getting-started/quickstart) steps in order, including syncing your app after installing the SDK
+- You've followed the [quickstart](/docs/getting-started/quickstart/) steps in order, including syncing your app after installing the SDK
 
 ## CI/CD Integration 
 

@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-03T03:02:24.801Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580-1743649359050.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/apple-policy-updates-for-capacitor-apps-2025.webp
+head_image_alt: "Apple Policy Updates for Capacitor Apps 2025 Capgo blog illustration"
 keywords: Capacitor, Apple policies, app compliance, security standards, performance benchmarks, OTA updates, encryption
 tag: Development, Mobile, Security
 published: true

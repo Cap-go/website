@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import ToolCatalog from '@/components/tools/ToolCatalog.astro'
 import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { toolCatalog } from '@/lib/tools/catalog'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const title = 'Free Mobile App Signing Tools | iOS CSR, UDID, and Android Keystore'
 const description =

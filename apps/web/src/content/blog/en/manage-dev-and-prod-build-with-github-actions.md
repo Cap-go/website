@@ -8,9 +8,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /capgo_ci-cd-illustration.webp
-head_image_alt: Channel builds illustration
+head_image_alt: "Manage development and production build with GitHub actions Capgo blog illustration"
 keywords: GitHub Actions, CI/CD, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: CI/CD
 published: true

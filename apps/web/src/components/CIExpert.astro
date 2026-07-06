@@ -1,5 +1,5 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const buildDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/')
 const githubActionsDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/github-actions/')

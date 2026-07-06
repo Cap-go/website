@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-20T01:48:44.409Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6-1745113809661.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/checklist-for-validating-capacitor-app-updates.webp
+head_image_alt: "Checklist for Validating Capacitor App Updates Capgo blog illustration"
 keywords: Capacitor, app updates, OTA updates, testing checklist, mobile development
 tag: Mobile, Security, Updates
 published: true
@@ -75,7 +75,7 @@ For enterprise use, Capgo offers compatibility with Capacitor 8, and supports bo
 
 ## Main Testing Checklist
 
-Once your environments and [Capgo setup](https://capgo.app/docs/cli/commands) are ready, focus on these key validations:
+Once your environments and [Capgo setup](https://capgo.app/docs/cli/commands/) are ready, focus on these key validations:
 
 ### Feature Testing
 

@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-22T01:09:06.459Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/6806de1de572faef86998587-1745284157740.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/payment-data-security-for-app-store-approval.webp
+head_image_alt: "Payment Data Security for App Store Approval Capgo blog illustration"
 keywords: payment data security, app store approval, end-to-end encryption, compliance, secure updates
 tag: Mobile, Security, Updates
 published: true

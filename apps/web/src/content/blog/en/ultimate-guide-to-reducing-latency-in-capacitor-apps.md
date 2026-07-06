@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-21T12:35:22.443Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682dbf604fa53d42207ee932-1747830977716.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/ultimate-guide-to-reducing-latency-in-capacitor-apps.webp
+head_image_alt: "Ultimate Guide to Reducing Latency in Capacitor Apps Capgo blog illustration"
 keywords: Capacitor, latency reduction, network optimization, front-end performance, server-side improvements, live updates, app speed
 tag: Development, Mobile, Updates
 published: true
@@ -306,7 +306,7 @@ To ensure secure deployments, multiple layers of protection are essential. IT Pr
 
 ### App Store Update Rules
 
-While live updates can streamline the process, following app store policies is a must. Both Apple and Google only allow over-the-air (OTA) updates to modify HTML, CSS, and JavaScript files. Any changes to native code still require a new app store submission [\[11\]](https://capgo.app/docs/getting-started/quickstart).
+While live updates can streamline the process, following app store policies is a must. Both Apple and Google only allow over-the-air (OTA) updates to modify HTML, CSS, and JavaScript files. Any changes to native code still require a new app store submission [\[11\]](https://capgo.app/docs/getting-started/quickstart/).
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[10\]](https://capgo.app)
 

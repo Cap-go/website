@@ -8,9 +8,9 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T15:58:31.000Z
 head_image: /android_app_gitlab.webp
-head_image_alt: Fastlane Google play GitLab illustration
+head_image_alt: "Automatic Capacitor Android build with GitLab Capgo blog illustration"
 keywords: Fastlane, CI/CD, Android, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true
@@ -37,7 +37,7 @@ Before starting, you'll need to set up:
 
 ## Capgo Build for CI/CD by Capgo
 
-Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capgo Build](/docs/cli/cloud-build/) runs signed native Android builds from your existing CI/CD pipeline:
+Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capgo Build](/docs/builder/) runs signed native Android builds from your existing CI/CD pipeline:
 
 - **Works with your pipeline**: Trigger Capgo Build from GitLab CI, GitHub Actions, Jenkins, or local scripts after your web build and `npx cap sync`.
 - **Signing from CI secrets**: Keep Android keystores, key aliases, passwords, and Play Console service account JSON in your own CI secrets.
@@ -50,7 +50,7 @@ Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capg
 - Includes OTA updates and about 15 native builds per month
 - Extra build minutes are billed by minute through credits
 
-[Set up Capgo Build in CI/CD](/docs/cli/cloud-build/)
+[Set up Capgo Build in CI/CD](/docs/builder/)
 
 ## Manual Setup Guide
 

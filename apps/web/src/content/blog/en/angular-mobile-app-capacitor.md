@@ -3,14 +3,14 @@ slug: angular-mobile-app-capacitor
 title: Building Mobile Apps with Angular and Capacitor
 description: >-
   Learn how to create a mobile app with Angular, Capacitor, and enhance the
-  native UI with Konsta UI.
+  Capgo Native Navigation, Transitions, and iOS layout best practices.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-06T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T19:49:03.000Z
 head_image: /angular_capacitor.webp
-head_image_alt: Angular and Capacitor illustration
+head_image_alt: "Building Mobile Apps with Angular and Capacitor Capgo blog illustration"
 keywords: Angular, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
@@ -18,13 +18,13 @@ locale: en
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
-In this tutorial, we'll begin with a new [Angular](https://angular.io/) app and transition into the native mobile app realm using Capacitor. Optionally, you can also add [Konsta UI](https://konstaui.com/) for an improved mobile UI with Tailwind CSS.
+In this tutorial, we'll begin with a new [Angular](https://angular.io/) app and transition into the native mobile app realm using Capacitor. You can also add Capgo Native Navigation and Transitions for a native mobile feel, and use tailwind-capacitor for safe areas.
 
 Capacitor allows you to easily convert your Angular web application into a native mobile app without requiring significant modifications or learning a new skill like React Native.
 
 With just a few simple steps, most Angular applications can be transformed into mobile apps.
 
-This tutorial will guide you through the process, starting with a new Angular app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you can optionally use [Konsta UI](https://konstaui.com/) to enhance your mobile UI with Tailwind CSS.
+This tutorial will guide you through the process, starting with a new Angular app and then incorporating Capacitor to move into the realm of native mobile apps. You can also use Capgo Native Navigation, Transitions, and tailwind-capacitor for safe areas.
 
 ## About Capacitor
 
@@ -237,86 +237,204 @@ npx cap sync
 
 After hitting the button, you can witness the beautiful native share dialog in action!
 
-## Adding Konsta UI
+Next, you can make the app feel more native on iOS and Android with Capgo navigation and transitions, and fix common iOS layout issues that cause horizontal overflow or cropped safe areas.
 
-To use Konsta UI in your Nuxt 3 app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/angular/) and to install the package:
+## Native-feeling UI with Capgo Native Navigation and Transitions
+
+I've worked for years with [Ionic](https://ionicframework.com/) to build cross-platform applications, but integrating it with Angular is hacky and rarely worth it when you already have [Tailwind CSS](https://tailwindcss.com/).
+
+For a native mobile feel in an Angular + Capacitor app, use Capgo plugins instead of web-only UI kits like Konsta UI:
+
+- **[@capgo/capacitor-native-navigation](https://github.com/Cap-go/capacitor-native-navigation)** — native navbar, Liquid Glass tab bar on iOS, and a blurred tab bar style on Android. Your Angular router keeps route state; the plugin owns the native chrome.
+- **[@capgo/capacitor-transitions](https://github.com/Cap-go/capacitor-transitions)** — Ionic-style page transitions and iOS edge swipe-back in the WebView layer, without adopting Ionic UI.
+
+Install both:
 
 ```shell
-npm i konsta
+bun add @capgo/capacitor-native-navigation @capgo/capacitor-transitions
+bunx cap sync
 ```
 
-Additionally, you need to modify your `tailwind.config.js` file:
+Configure native navigation with CSS inset mode so web content respects the native bars:
+
+```typescript
+import { NativeNavigation } from '@capgo/capacitor-native-navigation';
+
+await NativeNavigation.configure({
+  contentInsetMode: 'css',
+  animationDuration: 360,
+  glass: {
+    effect: 'liquidGlass',
+  },
+});
+```
+
+Render a Liquid Glass tab bar (iOS uses system-owned rendering; Android uses a blurred WebView backdrop):
+
+```typescript
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+
+const router = inject(Router);
+
+await NativeNavigation.setTabbar({
+  selectedId: 'home',
+  labelVisibilityMode: 'labeled',
+  icons: true,
+  colors: { dynamic: true },
+  tabs: [
+    { id: 'home', title: 'Home', icon: { svg: '...' } },
+    { id: 'settings', title: 'Settings', icon: { svg: '...' } },
+  ],
+});
+
+await NativeNavigation.addListener('tabSelect', ({ id }) => {
+  router.navigate([`/${id}`]);
+});
+```
+```
+
+Add native page transitions in your app shell:
+
+```typescript
+// app.component.ts
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
+import '@capgo/capacitor-transitions';
+import { initTransitions, setDirection, setupRouterOutlet } from '@capgo/capacitor-transitions';
+
+initTransitions({ platform: 'auto' });
+
+@Component({
+  selector: 'app-root',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <cap-router-outlet #outlet platform="auto" swipe-gesture="auto">
+      <router-outlet></router-outlet>
+    </cap-router-outlet>
+  `,
+})
+export class AppComponent implements AfterViewInit {
+  @ViewChild('outlet') outlet?: ElementRef<HTMLElement>;
+
+  constructor(private router: Router) {}
+
+  ngAfterViewInit() {
+    if (this.outlet?.nativeElement) {
+      setupRouterOutlet(this.outlet.nativeElement, { platform: 'auto', swipeGesture: 'auto' });
+    }
+  }
+
+  openSettings() {
+    setDirection('forward');
+    this.router.navigate(['/settings']);
+  }
+}
+```
+
+Wrap routed pages in `cap-router-outlet`, `cap-page`, and `cap-content`, and call `setDirection('forward')` or `setDirection('back')` before navigating. Do not duplicate web headers or footers when native navigation owns those surfaces.
+
+See the full guides: [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) and [Using @capgo/capacitor-transitions](/plugins/capacitor-transitions/).
+
+### Safe areas with Tailwind
+
+For device safe areas in Tailwind CSS, use [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor) (published as `tailwind-capacitor` on npm). It provides `safe-areas` utilities and other Capacitor-friendly Tailwind plugins:
+
+```shell
+bun add -D tailwind-capacitor
+```
+
+In `src/styles.css`:
+
+```css
+@import 'tailwindcss';
+@plugin "@capgo/tailwind-capacitor/platform";
+@plugin "@capgo/tailwind-capacitor/safe-areas";
+```
+
+Use utilities such as `pt-safe`, `pb-safe`, and `px-safe` instead of sprinkling `env(safe-area-inset-*)` by hand. The project is actively developed — if something is missing for your Angular setup, [open a PR on GitHub](https://github.com/Cap-go/tailwind-capacitor/pulls).
+
+## Fixing iOS Layout Issues (Viewport, Safe Area, and Horizontal Overflow)
+
+If content looks cropped, shifted, or horizontally scrollable on iOS, adding more `overflow-x: hidden` or tweaking the viewport tag alone usually does not fix it. Work through these checks in order.
+
+### Make sure the viewport meta tag is applied correctly
+
+In `src/index.html`, set the viewport meta tag in `<head>`:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+```
+
+### Handle iOS safe area from one root wrapper only
+
+Create a single app shell and apply safe area padding there — not in multiple nested components:
+
+```css
+html,
+body,
+app-root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-shell {
+  min-height: 100dvh;
+  width: 100%;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
+```
+
+Wrap all page content inside `.app-shell`. Duplicated safe-area padding in headers, modals, and layout wrappers often makes the UI look cropped or too large.
+
+With [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor), you can express the same padding with utilities like `pt-safe pb-safe px-safe` on that single shell.
+
+### Set Capacitor iOS `contentInset` to `never` first
+
+In `capacitor.config.ts`, prefer native inset disabled and let CSS (or Native Navigation's `contentInsetMode: 'css'`) own the safe area:
+
+```typescript
+const config: CapacitorConfig = {
+  appId: 'com.example.myapp',
+  appName: 'my-app',
+  webDir: 'www',
+  ios: {
+    contentInset: 'never',
+  },
+};
+```
+
+Mixing Capacitor's automatic content inset with CSS `env(safe-area-inset-*)` padding is a common cause of double spacing.
+
+### Find the real overflowing element
+
+The usual culprit is an element using `100vw`, Tailwind `w-screen`, a fixed pixel width, or a large `min-width`.
+
+In Safari Web Inspector, run:
 
 ```javascript
-// import konstaConfig config
-const konstaConfig = require('konsta/config')
-
-// wrap config with konstaConfig config
-module.exports = konstaConfig({
-  content: [
-    './src/**/*.{html,ts}',
-  ],
-  darkMode: 'media', // or 'class'
-  theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
-})
+[...document.querySelectorAll('*')]
+  .filter(el => el.scrollWidth > document.documentElement.clientWidth)
+  .map(el => ({
+    el,
+    tag: el.tagName,
+    class: el.className,
+    scrollWidth: el.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+  }));
 ```
 
-`konstaConfig` will extend the default (or your custom one) Tailwind CSS config with some extra variants and helper utilities required for Konsta UI.
-
-Now we need to set up the main [App](https://konstaui.com/vue/app/) component so we can set some global parameters (like `theme`).
-
-We need to wrap the whole app with `App` in the `src/app/app.component.html`:
-
-```html
-<app>
-  <h1>Welcome to Angular and Capacitor!</h1>
-  <button (click)="share()">Share now!</button>
-</app>
-```
-
-### Example Page
-
-Now when everything is set up, we can use Konsta UI Vue components in our Angular pages.
-
-For example, let's open `src/app/app.component.html` and change it to the following:
-
-```html
-<app>
-  <page>
-    <navbar title="My App" />
-
-    <block strong>
-      <p>
-        Here is your Angular & Konsta UI app. Let's see what we have here.
-      </p>
-    </block>
-    <block-title>Navigation</block-title>
-    <list>
-      <list-item href="/about/" title="About" />
-      <list-item href="/form/" title="Form" />
-    </list>
-
-    <block strong class="flex space-x-4">
-      <button>Button 1</button>
-      <button>Button 2</button>
-    </block>
-  </page>
-</app>
-```
-
-If the live reload is out of sync after installing all the necessary components, try restarting everything. Once you have done that, you should see a mobile app with a somewhat native look, built with Angular and Capacitor!
-
-You should see the following page as a result:
-
-<div class="mx-auto" style="width: 50%;">
-  <img src="/konsta-next.webp" alt="konsta-angular">
-</div>
+With Tailwind, replace `w-screen` with `w-full` when possible. Many horizontal overflow issues come from `100vw` / `w-screen`, duplicated safe-area padding, or a fixed-width container — not from the viewport meta tag itself.
 
 ## Conclusion
 

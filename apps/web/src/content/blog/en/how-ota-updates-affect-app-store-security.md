@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-26T02:34:12.739Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78-1745634908381.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-18T14:21:30.000Z
+head_image: /blog-images/how-ota-updates-affect-app-store-security.webp
+head_image_alt: "How OTA Updates Affect App Store Security Capgo blog illustration"
 keywords: OTA updates, app security, app store compliance, encryption, vulnerabilities
 tag: Mobile, Security, Updates
 published: true

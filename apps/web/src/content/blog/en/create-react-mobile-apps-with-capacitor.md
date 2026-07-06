@@ -2,15 +2,14 @@
 slug: create-react-mobile-apps-with-capacitor
 title: Building Mobile Apps with React and Capacitor
 description: >-
-  Learn how to build a mobile app using React, Capacitor, and enhance the native
-  UI with Konsta UI.
+  Learn how to build a mobile app using React, Capacitor, and add Capgo Native Navigation, Transitions, and iOS layout best practices.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-23T19:49:03.000Z
 head_image: /react_capacitor.webp
-head_image_alt: React and Capacitor illustration
+head_image_alt: "Building Mobile Apps with React and Capacitor Capgo blog illustration"
 keywords: React, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
@@ -18,13 +17,13 @@ locale: en
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
-In this tutorial, we'll begin with a new [React](https://reactjs.org/) app and transition to native mobile development using Capacitor. Optionally, you can also add [Konsta UI](https://konstaui.com/) for an improved mobile UI with Tailwind CSS.
+In this tutorial, we'll begin with a new [React](https://reactjs.org/) app and transition to native mobile development using Capacitor. You can also add Capgo Native Navigation and Transitions for a native mobile feel, and use tailwind-capacitor for safe areas.
 
 Capacitor allows you to easily convert your React web application into a native mobile app without significant modifications or learning a new skill like React Native.
 
 With just a few simple steps, most React applications can be transformed into mobile apps.
 
-This tutorial will guide you through the process, starting with a new React app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you can optionally use [Konsta UI](https://konstaui.com/) to enhance your mobile UI with Tailwind CSS.
+This tutorial will guide you through the process, starting with a new React app and then incorporating Capacitor to move into the realm of native mobile apps. You can also use Capgo Native Navigation, Transitions, and tailwind-capacitor for safe areas.
 
 ## About Capacitor
 
@@ -248,119 +247,189 @@ After hitting the button, you can witness the beautiful native share dialog in a
   <img src="/next-capacitor-share.webp" alt="react-capacitor-share">
 </div>
 
-To make the button look more mobile-friendly, we can add some styling using my favorite UI component library for web apps - React (no pun intended).
+Next, you can make the app feel more native on iOS and Android with Capgo navigation and transitions, and fix common iOS layout issues that cause horizontal overflow or cropped safe areas.
 
-## Adding Konsta UI
+## Native-feeling UI with Capgo Native Navigation and Transitions
 
-I’ve worked years with [Ionic](https://ionicframework.com/) to build awesome cross-platform applications, and it was one of the best choices for years. But now I don't recommend it anymore; it's very hacky to integrate it with React, and it's not really worth it when you have already [tailwindcss](https://tailwindcss.com/).
+I've worked for years with [Ionic](https://ionicframework.com/) to build cross-platform applications, but integrating it with React is hacky and rarely worth it when you already have [Tailwind CSS](https://tailwindcss.com/).
 
-If you want a great-looking mobile UI that adapts to iOS and Android specific styling, I recommend Konsta UI.
+For a native mobile feel in a React + Capacitor app, use Capgo plugins instead of web-only UI kits like Konsta UI:
 
-You need to have [tailwind already install](https://tailwindcss.com/docs/guides/vite/#react) 
+- **[@capgo/capacitor-native-navigation](https://github.com/Cap-go/capacitor-native-navigation)** — native navbar, Liquid Glass tab bar on iOS, and a blurred tab bar style on Android. Your React router keeps route state; the plugin owns the native chrome.
+- **[@capgo/capacitor-transitions](https://github.com/Cap-go/capacitor-transitions)** — Ionic-style page transitions and iOS edge swipe-back in the WebView layer, without adopting Ionic UI.
 
-To use it, we only need to install the package react package:
+Install both:
 
 ```shell
-npm i konsta
+bun add @capgo/capacitor-native-navigation @capgo/capacitor-transitions
+bunx cap sync
 ```
 
-Additionally, you need to modify your `tailwind.config.js` file:
+Configure native navigation with CSS inset mode so web content respects the native bars:
 
-```javascript
-// import konstaConfig config
-const konstaConfig = require('konsta/config')
+```typescript
+import { NativeNavigation } from '@capgo/capacitor-native-navigation';
 
-// wrap config with konstaConfig config
-module.exports = konstaConfig({
-  content: [
-    './src/**/*.{js,ts,javascript,tsx}',
+await NativeNavigation.configure({
+  contentInsetMode: 'css',
+  animationDuration: 360,
+  glass: {
+    effect: 'liquidGlass',
+  },
+});
+```
+
+Render a Liquid Glass tab bar (iOS uses system-owned rendering; Android uses a blurred WebView backdrop):
+
+```typescript
+await NativeNavigation.setTabbar({
+  selectedId: 'home',
+  labelVisibilityMode: 'labeled',
+  icons: true,
+  colors: { dynamic: true },
+  tabs: [
+    { id: 'home', title: 'Home', icon: { svg: '...' } },
+    { id: 'settings', title: 'Settings', icon: { svg: '...' } },
   ],
-  darkMode: 'media', // or 'class'
-  theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
-})
+});
+
+await NativeNavigation.addListener('tabSelect', ({ id }) => {
+  navigate(`/${id}`);
+});
 ```
 
-`konstaConfig` will extend the default (or your custom one) Tailwind CSS config with some extra variants and helper utilities required for Konsta UI.
+Add native page transitions in your app shell:
 
-Now we need to set up the main [App](https://konstaui.com/react/app/) component so we can set some global parameters (like `theme`).
+```tsx
+import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '@capgo/capacitor-transitions';
+import { initTransitions, setDirection, setupRouterOutlet } from '@capgo/capacitor-transitions/react';
 
-We need to wrap the whole app with `App` in the `src/App.js`:
+initTransitions({ platform: 'auto' });
 
-```javascript
-import { App } from 'konsta/react';
-import './App.css';
+export function AppShell() {
+  const navigate = useNavigate();
+  const outletRef = useRef<HTMLElement>(null);
 
-function MyApp({ Component, pageProps }) {
-  return (
-    // Wrap our app with App component
-    <App theme="ios">
-      <Component {...pageProps} />
-    </App>
-  );
+  useEffect(() => {
+    if (outletRef.current) {
+      setupRouterOutlet(outletRef.current, { platform: 'auto', swipeGesture: 'auto' });
+    }
+  }, []);
+
+  const openSettings = () => {
+    setDirection('forward');
+    navigate('/settings');
+  };
+
+  return <cap-router-outlet ref={outletRef}>{/* routes */}</cap-router-outlet>;
+}
+```
+
+Wrap routed pages in `cap-router-outlet`, `cap-page`, and `cap-content`, and call `setDirection('forward')` or `setDirection('back')` before navigating. Do not duplicate web headers or footers when native navigation owns those surfaces.
+
+See the full guides: [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) and [Using @capgo/capacitor-transitions](/plugins/capacitor-transitions/).
+
+### Safe areas with Tailwind
+
+For device safe areas in Tailwind CSS, use [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor) (published as `tailwind-capacitor` on npm). It provides `safe-areas` utilities and other Capacitor-friendly Tailwind plugins:
+
+```shell
+bun add -D tailwind-capacitor
+```
+
+In `src/index.css`:
+
+```css
+@import 'tailwindcss';
+@plugin "@capgo/tailwind-capacitor/platform";
+@plugin "@capgo/tailwind-capacitor/safe-areas";
+```
+
+Use utilities such as `pt-safe`, `pb-safe`, and `px-safe` instead of sprinkling `env(safe-area-inset-*)` by hand. The project is actively developed — if something is missing for your React setup, [open a PR on GitHub](https://github.com/Cap-go/tailwind-capacitor/pulls).
+
+## Fixing iOS Layout Issues (Viewport, Safe Area, and Horizontal Overflow)
+
+If content looks cropped, shifted, or horizontally scrollable on iOS, adding more `overflow-x: hidden` or tweaking the viewport tag alone usually does not fix it. Work through these checks in order.
+
+### Make sure the viewport meta tag is applied correctly
+
+Add the viewport meta tag in `index.html` inside `<head>`:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+```
+
+### Handle iOS safe area from one root wrapper only
+
+Create a single app shell and apply safe area padding there — not in multiple nested components:
+
+```css
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-export default MyApp;
-```
-
-### Example Page
-
-Now when everything is set up, we can use Konsta UI React components in our React app.
-
-For example, let's open `src/App.js` and change it to the following:
-
-```javascript
-// Konsta UI components
-import {
-  Page,
-  Navbar,
-  Block,
-  Button,
-  List,
-  ListItem,
-  Link,
-  BlockTitle,
-} from 'konsta/react';
-
-function App() {
-  return (
-    <Page>
-      <Navbar title="My App" />
-
-      <Block strong>
-        <p>
-          Here is your React & Konsta UI app. Let's see what we have here.
-        </p>
-      </Block>
-      <BlockTitle>Navigation</BlockTitle>
-      <List>
-        <ListItem href="/about/" title="About" />
-        <ListItem href="/form/" title="Form" />
-      </List>
-
-      <Block strong className="flex space-x-4">
-        <Button>Button 1</Button>
-        <Button>Button 2</Button>
-      </Block>
-    </Page>
-  );
+* {
+  box-sizing: border-box;
 }
 
-export default App;
+.app-shell {
+  min-height: 100dvh;
+  width: 100%;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
 ```
 
-If the live reload is out of sync after installing all the necessary components, try restarting everything. Once you have done that, you should see a mobile app with a somewhat native look, built with React and Capacitor!
+Wrap all page content inside `.app-shell`. Duplicated safe-area padding in headers, modals, and layout wrappers often makes the UI look cropped or too large.
 
-You should see the following page as a result:
+With [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor), you can express the same padding with utilities like `pt-safe pb-safe px-safe` on that single shell.
 
-<div class="mx-auto" style="width: 50%;">
-  <img src="/konsta-next.webp" alt="konsta-react">
-</div>
+### Set Capacitor iOS `contentInset` to `never` first
+
+In `capacitor.config.ts`, prefer native inset disabled and let CSS (or Native Navigation's `contentInsetMode: 'css'`) own the safe area:
+
+```typescript
+const config: CapacitorConfig = {
+  appId: 'com.example.myapp',
+  appName: 'my-app',
+  webDir: 'dist',
+  ios: {
+    contentInset: 'never',
+  },
+};
+```
+
+Mixing Capacitor's automatic content inset with CSS `env(safe-area-inset-*)` padding is a common cause of double spacing.
+
+### Find the real overflowing element
+
+The usual culprit is an element using `100vw`, Tailwind `w-screen`, a fixed pixel width, or a large `min-width`.
+
+In Safari Web Inspector, run:
+
+```javascript
+[...document.querySelectorAll('*')]
+  .filter(el => el.scrollWidth > document.documentElement.clientWidth)
+  .map(el => ({
+    el,
+    tag: el.tagName,
+    class: el.className,
+    scrollWidth: el.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+  }));
+```
+
+With Tailwind, replace `w-screen` with `w-full` when possible. Many horizontal overflow issues come from `100vw` / `w-screen`, duplicated safe-area padding, or a fixed-width container — not from the viewport meta tag itself.
 
 ## Conclusion
 

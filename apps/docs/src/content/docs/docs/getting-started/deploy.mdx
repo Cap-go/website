@@ -4,11 +4,15 @@ description: "Learn how to deploy a live update to your app using Capgo's Live U
 sidebar:
   order: 4
 ---
-import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps, LinkCard, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 Use Capgo's Live Updates feature to update the UI and business logic of your app remotely, in real-time. Push JS bundle updates directly to your users without going through the app store to instantly fix bugs and ship new features.
 
-This guide assumes you've completed the [Capgo Quickstart](/docs/getting-started/quickstart) and have already:
+<Aside type="tip">
+Capgo uploads the generated web build folder. HTML, CSS, JavaScript, assets, and pure-JavaScript package changes can go OTA once they are bundled there. Changes to `capacitor.config.ts`, native plugin configuration, native packages, or iOS/Android project files require a native app release.
+</Aside>
+
+This guide assumes you've completed the [Capgo Quickstart](/docs/getting-started/quickstart/) and have already:
 
 <Steps>
 
@@ -138,16 +142,16 @@ Once your bundle is uploaded, you can test the live update on a device:
 
 6. Close and reopen the app. You should see your live update applied!
 
-Refer back to the [Capgo Quickstart](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) for more details on testing live updates.
+Refer back to the [Capgo Quickstart](/docs/getting-started/quickstart/#receiving-a-live-update-on-a-device) for more details on testing live updates.
 
 ## Next Steps
 
 Congrats on deploying your first live update with Capgo! 🎉 
 
-To learn more, review the rest of the [Capgo Live Updates documentation](/docs/live-updates). Some key topics to check out next:
-- [Targeting Updates with Channels](/docs/live-updates/channels)
-- [Customizing Update Behavior](/docs/live-updates/update-behavior)
-- [Live Update Rollbacks](/docs/live-updates/rollbacks)
+To learn more, review the rest of the [Capgo Live Updates documentation](/docs/live-updates/). Some key topics to check out next:
+- [Targeting Updates with Channels](/docs/live-updates/channels/)
+- [Customizing Update Behavior](/docs/live-updates/update-behavior/)
+- [Live Update Rollbacks](/docs/live-updates/rollbacks/)
 
 ## Keep going from Deploy a Live Update
 

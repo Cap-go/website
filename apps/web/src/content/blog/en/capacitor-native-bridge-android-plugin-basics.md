@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-29T02:39:06.030Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c-1743215957623.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/capacitor-native-bridge-android-plugin-basics.webp
+head_image_alt: "\"Capacitor Native Bridge: Android Plugin Basics\" Capgo blog illustration"
 keywords: Capacitor, Android plugins, development, Java, mobile development, Gradle, plugin testing
 tag: Development, Mobile, Updates
 published: true
@@ -289,7 +289,7 @@ Leverage the CPU Profiler to pinpoint performance bottlenecks. Best practices in
 
 ### Streamlining Live Testing and Updates
 
-[Capgo tools](https://capgo.app/docs/cli/commands) can simplify live testing and updates. Use these examples to enhance your workflow:
+[Capgo tools](https://capgo.app/docs/cli/commands/) can simplify live testing and updates. Use these examples to enhance your workflow:
 
 -   **Initialize error tracking**:
     

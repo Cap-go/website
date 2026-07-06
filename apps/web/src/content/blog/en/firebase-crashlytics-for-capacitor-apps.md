@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-21T03:55:39.168Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf-1745207775479.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T21:13:09.000Z
+head_image: /blog-images/firebase-crashlytics-for-capacitor-apps.webp
+head_image_alt: "Firebase Crashlytics for Capacitor Apps Capgo blog illustration"
 keywords: Firebase, Crashlytics, mobile apps, Capacitor, app development, crash reporting, error tracking
 tag: Development, Mobile, Updates
 published: true
@@ -128,7 +128,7 @@ Once these steps are complete, you’re ready to move on to the Plugin Installat
 
 ### Plugin Installation
 
-First, install the plugin and [sync it with Capacitor](https://capgo.app/plugins/capacitor-updater/):
+Then, sync the plugin with your native platforms and see the [@capgo/capacitor-firebase-crashlytics](https://capgo.app/plugins/capacitor-firebase-crashlytics/) plugin page for the full API reference:
 
 ```bash
 npm install @capgo/capacitor-firebase-crashlytics && npx cap sync

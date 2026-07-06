@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-03-05T00:00:00.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /capgo-feature-image.webp
-head_image_alt: Capgo price reduction announcement
+head_image_alt: "Capgo Price Reduction: Making Live Updates More Accessible Capgo blog illustration"
 keywords: capgo, price reduction, live updates, mobile app development, capacitor
 tag: News
 published: true

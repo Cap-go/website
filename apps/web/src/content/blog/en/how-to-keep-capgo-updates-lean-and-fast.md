@@ -9,9 +9,9 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-04-14T15:12:19.000Z
-updated_at: 2026-05-26T13:03:40.000Z
+updated_at: 2026-06-18T14:21:30.000Z
 head_image: /capgo_lean_updates_hero.webp
-head_image_alt: Capgo lean live updates workflow
+head_image_alt: "How to Keep Capgo Updates Lean and Fast Capgo blog illustration"
 keywords: Capgo, live updates, OTA updates, delta updates, channels, Capacitor, PR previews, mobile performance
 tag: Tutorial
 published: true

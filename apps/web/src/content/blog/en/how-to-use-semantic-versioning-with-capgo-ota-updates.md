@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-03T04:48:38.491Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67c4f6356c9ebce91891f4e6-1740977344964.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/how-to-use-semantic-versioning-with-capgo-ota-updates.webp
+head_image_alt: "How to Use Semantic Versioning with Capgo OTA Updates Capgo blog illustration"
 keywords: Semantic Versioning, Capgo, OTA updates, Capacitor apps, version control, app updates, deployment, CI/CD
 tag: Development, Mobile, Updates
 published: true
@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want to simplify [app updates](https://capgo.app/plugins/capacitor-updater/) and version control?** Semantic Versioning (SemVer) combined with [Capgo](https://capgo.app/)'s Over-The-Air (OTA) updates makes managing [Capacitor](https://capacitorjs.com/) apps easier and faster. Here's how:
+**Want to simplify [app updates](https://capgo.app/plugins/capacitor-updater/) and version control?** [Semantic Versioning (SemVer)](/semver_tester/) combined with [Capgo](https://capgo.app/)'s Over-The-Air (OTA) updates makes managing [Capacitor](https://capacitorjs.com/) apps easier and faster. Here's how:
 
 -   **Semantic Versioning Basics:** Versions use the format `MAJOR.MINOR.PATCH`:
     
@@ -34,7 +34,7 @@ next_blog: ''
     1.  Install Capgo's updater plugin.
     2.  Configure your app's version in `capacitor.config.json` and other files.
     3.  Initialize with your API key.
-    4.  Use [Capgo CLI](https://capgo.app/docs/cli/commands) to bundle and upload updates.
+    4.  Use [Capgo CLI](https://capgo.app/docs/cli/commands/) to bundle and upload updates.
 -   **[Manage Versions and Channels](https://capgo.app/docs/webapp/channels/):**
     
     -   Use separate channels (e.g., "beta" for testing, "production" for stable releases).
@@ -218,7 +218,7 @@ npx @capgo/cli@latest init [apikey]
 npx @capgo/cli bundle upload [appId]
 
 # Add a new distribution channel
-npx @capgo/cli channel add [channelId] [appId]
+npx @capgo/cli channel add [channelName] [appId]
 ```
 
 Capgo ensures secure deployment with end-to-end encryption and safe key management.

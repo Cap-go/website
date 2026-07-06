@@ -1,16 +1,20 @@
 ---
 slug: privacy-policy-for-android-apps
 title: 'Privacy Policy for Android Apps: A 2026 Guide'
-description: 'Create a compliant privacy policy for Android apps. Our guide covers Google Play, GDPR, CCPA, live updates, and provides sample clauses for developers.'
+description: >-
+  Create a compliant privacy policy for Android apps. Our guide covers Google
+  Play, GDPR, CCPA, live updates, and provides sample clauses for developers.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-15T07:07:10.732Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/6190990f-be1e-46f1-b21a-3cb6779ce75c/privacy-policy-for-android-apps-tech-illustration.jpg'
-head_image_alt: 'Privacy Policy for Android Apps: A 2026 Guide'
-keywords: 'privacy policy for android apps, android development, google play policy, gdpr compliance, app privacy'
-tag: 'privacy policy for android apps, android development, google play policy, gdpr compliance, app privacy'
+updated_at: 2026-06-18T15:35:50.000Z
+head_image: /blog-images/privacy-policy-for-android-apps.webp
+head_image_alt: '''Privacy Policy for Android Apps: A 2026 Guide'' Capgo blog illustration'
+keywords: >-
+  privacy policy for android apps, android development, google play policy, gdpr
+  compliance, app privacy
+tag: 'Mobile, Security, Android'
 published: true
 locale: en
 next_blog: ''

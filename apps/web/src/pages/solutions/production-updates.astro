@@ -1,7 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
@@ -225,6 +226,8 @@ const content = { title, description, ldJSON }
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="production-updates" />
 
     <!-- The Solution: How Capgo Works -->
     <section class="bg-gray-900 py-20">
@@ -816,6 +819,7 @@ npx @capgo/cli bundle upload
     </section>
 
     <!-- Final CTA -->
+
     <section class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-blue-600 to-blue-800 px-8 py-16 sm:px-16">

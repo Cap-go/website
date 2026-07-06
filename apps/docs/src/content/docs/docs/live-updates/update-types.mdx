@@ -11,15 +11,15 @@ Capgo supports several types of over-the-air (OTA) updates. This page lists and 
 
 ## Apply Timing
 
-Controls **when** an update is applied after it is downloaded.
+Controls **when** an update is applied after it is downloaded. The plugin checks for updates when the app moves to the foreground and on a repeating timer while the app stays open. `periodCheckDelay` controls that interval (default 10 minutes).
 
 | Type | Description | Use Case |
 |------|-------------|----------|
-| **autoUpdate: `atBackground`** | Download in background, apply when user backgrounds or kills the app | Most apps; minimal disruption |
-| **autoUpdate: `atInstall`** | Apply immediately only on fresh install or app store update | New users get latest; existing users use default flow |
-| **autoUpdate: `onLaunch`** | Apply immediately on install, store update, or after app kill | Balance between freshness and session stability |
-| **autoUpdate: `always`** | Apply immediately whenever an update is downloaded (including on resume) | Critical fixes, apps with simple state |
-| **autoUpdate: `onlyDownload`** | Download automatically and emit `updateAvailable`, but never apply or set the next bundle automatically | Apps that show their own update prompt or control exactly when to call `set()` |
+| **autoUpdate: `atBackground`** | Check and download on each foreground check, apply when the app moves to background | Most apps; minimal disruption |
+| **autoUpdate: `atInstall`** | Apply immediately only after a fresh install or native app store update; otherwise use `atBackground` | New users get latest; existing users use background apply |
+| **autoUpdate: `onLaunch`** | Apply immediately only on cold start (killed → foreground); then fall back to `atBackground` | Balance between freshness and session stability |
+| **autoUpdate: `always`** | Check on every foreground transition and apply immediately whenever an update is available | Critical fixes, apps with simple state |
+| **autoUpdate: `onlyDownload`** | Check and download automatically, emit `updateAvailable`, and never apply automatically | Apps that show their own update prompt or control exactly when to call `set()` |
 
 Configure in `capacitor.config.ts`:
 
@@ -64,15 +64,17 @@ The `kill` condition triggers after the first kill event, not the next backgroun
 
 ## Version Blocking (Channel Policy)
 
-Controls which **semver updates** a channel will auto-deliver. Set via `--disable-auto-update` on channels.
+Controls which [**semver updates**](/semver_tester/) a channel will auto-deliver. Set via `--disable-auto-update` on channels.
 
 | Strategy | Blocks | Allows | Use Case |
 |----------|--------|--------|----------|
-| **none** | Nothing | All updates | Default; full auto-update |
-| **major** | 0.0.0 → 1.0.0 | Same major (e.g. 1.x → 1.y) | Prevent breaking changes from reaching old native |
-| **minor** | 0.0.0 → 1.1.0, 1.1.0 → 1.2.0 | Same minor (e.g. 1.2.x → 1.2.y) | Stricter control within major |
-| **patch** | Any change except patch bump | Only 0.0.311 → 0.0.314 | Very strict; patch-only updates |
-| **metadata** | Updates without `min_update_version` | Updates with explicit compatibility metadata | Custom compatibility rules per bundle |
+| **none** | Nothing | Any target bundle version | Default; full auto-update |
+| **major** | Higher major than `version_build`, for example `1.2.3 -> 2.0.0` | Same major, for example `1.2.3 -> 1.9.0` or `1.2.3 -> 1.2.4` | Prevent breaking changes from reaching old native code |
+| **minor** | Different major or minor than `version_build`, for example `1.2.3 -> 1.3.0` | Same major and minor, for example `1.2.3 -> 1.2.4` | Keep updates inside one native minor line |
+| **patch** | Any major, minor, or patch number change, for example `1.0.0 -> 1.0.1` | Only suffix changes while `MAJOR.MINOR.PATCH` stays identical, for example `1.0.0-beta.1 -> 1.0.0-beta.2` or `1.0.0+build.1 -> 1.0.0+build.2` | Strictest mode: no core version movement |
+| **metadata** | Missing `min_update_version`, or `version_build` below it | Target bundle whose `min_update_version` is less than or equal to `version_build` | Custom compatibility rules per bundle |
+
+These checks compare the target bundle against the native baseline sent as `version_build`, not the currently installed downloaded bundle sent as `version_name`.
 
 ```bash
 npx @capgo/cli channel set production --disable-auto-update major

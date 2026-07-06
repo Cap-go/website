@@ -6,9 +6,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-13T03:37:11.567Z
-updated_at: 2026-05-26T13:03:40.000Z
-head_image: https://assets.seobotai.com/capgo.app/67d22ca8233d3a01105fd278-1741837059847.jpg
-head_image_alt: Mobile Development
+updated_at: 2026-06-23T15:58:31.000Z
+head_image: /blog-images/5-steps-to-deploy-hotfixes-with-capgo.webp
+head_image_alt: "5 Steps to Deploy Hotfixes with Capgo Capgo blog illustration"
 keywords: hotfix deployment, Capgo, app updates, CI/CD tools, mobile development
 tag: Development, Mobile, Updates
 published: true
@@ -19,7 +19,7 @@ next_blog: ''
 [Capgo](https://capgo.app/) makes deploying hotfixes fast and easy, skipping app store delays while keeping updates secure and compliant with Apple and Google guidelines. Here’s a quick overview of the process:
 
 1.  **Create and Test Your Hotfix**: Write precise code changes, test thoroughly on devices, and ensure compatibility.
-2.  **[Set Up Capgo](https://capgo.app/docs/webapp/)**: Install the [Capgo CLI](https://capgo.app/docs/cli/commands) with `npx @capgo/cli init`, configure encryption, and integrate with CI/CD tools.
+2.  **[Set Up Capgo](https://capgo.app/docs/webapp/)**: Install the [Capgo CLI](https://capgo.app/docs/cli/commands/) with `npx @capgo/cli init`, configure encryption, and integrate with CI/CD tools.
 3.  **Upload Your Hotfix**: Use the CLI to securely upload your update, label it clearly, and prepare for deployment.
 4.  **Choose Update Settings**: Target specific users or groups, schedule rollouts, and define version requirements.
 5.  **Track Your Update**: Monitor delivery rates, update speed, and user coverage. Roll back instantly if needed.
