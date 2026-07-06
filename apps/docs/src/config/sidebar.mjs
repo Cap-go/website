@@ -144,6 +144,7 @@ const pluginEntries = [
     'network-diagnostics',
     [linkItem('iOS setup', '/docs/plugins/network-diagnostics/ios'), linkItem('Android setup', '/docs/plugins/network-diagnostics/android')],
   ],
+  ['Notifications', 'notifications', [linkItem('Debugging', '/docs/plugins/notifications/debugging')]],
   section(
     'Native Purchases',
     [

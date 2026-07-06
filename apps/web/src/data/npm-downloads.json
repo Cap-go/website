@@ -11,6 +11,7 @@
   "@capgo/capacitor-date-picker": 4547,
   "@capgo/capacitor-device-info": 881,
   "@capgo/capacitor-updater": 561996,
+  "@capgo/capacitor-notifications": 0,
   "@capgo/electron-updater": 293,
   "@capgo/capacitor-uploader": 28080,
   "@revenuecat/purchases-capacitor": 532403,
