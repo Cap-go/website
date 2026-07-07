@@ -336,6 +336,16 @@ const locale = Astro.locals.locale
                       {m.solutions_build_without_mac_short({}, { locale: Astro.locals.locale })}
                     </a>
                     <a
+                      href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/webapp-to-mobile')}
+                      class="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-white"
+                    >
+                      <svg class="h-5 w-5 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                        ></path>
+                      </svg>
+                      {m.solutions_webapp_to_mobile_short({}, { locale: Astro.locals.locale })}
+                    </a>
+                    <a
                       href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/lovable-vibecoding-to-mobile')}
                       class="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-white"
                     >
@@ -711,6 +721,12 @@ const locale = Astro.locals.locale
               class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
             >
               {m.solutions_build_without_mac_short({}, { locale: Astro.locals.locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/webapp-to-mobile')}
+              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
+            >
+              {m.solutions_webapp_to_mobile_short({}, { locale: Astro.locals.locale })}
             </a>
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/lovable-vibecoding-to-mobile')}
