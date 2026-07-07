@@ -162,7 +162,6 @@ const steps = [
   },
 ]
 
-
 const platformCards = [
   {
     title: m.live_update_platform_capacitor_title({}, { locale }),
@@ -208,6 +207,10 @@ const featureTiles = [
   {
     title: m.live_update_dynamic_title({}, { locale }),
     sub: m.live_update_dynamic_desc({}, { locale }),
+  },
+  {
+    title: 'Push-triggered auto updates',
+    sub: 'Pair Capgo Notifications with Live Updates so a silent push can ask devices to check, download, and queue the latest bundle for the selected channel.',
   },
 ]
 ---
@@ -258,7 +261,6 @@ const featureTiles = [
         </div>
       </div>
     </section>
-
 
     <!-- SUPPORTED PLATFORMS -->
     <section class="section" id="platforms">
@@ -502,10 +504,9 @@ const featureTiles = [
       <h2 class="h2-section" style="font-size: 1.5rem; margin-bottom: 12px;">Keep going from Capgo Live Updates</h2>
       <p>
         Connect this Ionic and Capacitor live update page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
-        <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, and <a href="/native-build/"
-          >Capgo Native Builds</a
-        >
-        for releases that still need store review.
+        <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, <a href="/notifications/">Capgo Notifications</a>, <a href="/plugins/capacitor-updater/"
+          >Capacitor Updater</a
+        >, and <a href="/native-build/">Capgo Native Builds</a> for releases that still need store review.
       </p>
     </div>
   </div>

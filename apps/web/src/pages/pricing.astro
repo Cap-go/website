@@ -130,7 +130,7 @@ if (plans.length > 0) {
           {m.plans_that_scale_with_your_business({}, { locale: Astro.locals.locale })}
         </h1>
         <p class="font-pj mx-auto mt-6 max-w-2xl text-lg leading-8 font-normal text-gray-600 sm:text-xl">
-          Live Updates, Native Builds, App Store Publishing, plugins, and Automations in one platform.
+          Live Updates, Native Builds, Notifications, App Store Publishing, plugins, and Automations in one platform.
         </p>
       </div>
 
@@ -174,6 +174,47 @@ if (plans.length > 0) {
           )
         }
       </div>
+
+      <section class="mx-auto mb-8 max-w-6xl overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">
+        <div class="grid gap-0 lg:grid-cols-[1fr_auto]">
+          <div class="border-b border-blue-100 p-6 sm:p-8 lg:border-r lg:border-b-0 lg:p-10">
+            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">New release control</p>
+            <h2 class="mt-4 text-2xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-3xl">Notifications now trigger live-update checks.</h2>
+            <p class="mt-4 max-w-3xl text-base leading-7 text-gray-600">
+              Send native iOS and Android notifications, update badges, inspect campaign stats, and use silent pushes to ask opted-in devices to download the latest Capgo bundle
+              during a progressive rollout.
+            </p>
+            <dl class="mt-6 grid gap-4 text-sm sm:grid-cols-3">
+              <div>
+                <dt class="font-semibold text-gray-950">Native push</dt>
+                <dd class="mt-1 text-gray-600">Alert, background, badge, and update-check campaigns.</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-gray-950">Auto update companion</dt>
+                <dd class="mt-1 text-gray-600">Silent pushes can trigger the updater for the selected channel.</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-gray-950">Progressive rollout</dt>
+                <dd class="mt-1 text-gray-600">Devices still follow rollout percentage and install-mode rules.</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="flex flex-col justify-center gap-3 bg-blue-50/70 p-6 sm:p-8 lg:min-w-72 lg:p-10">
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'notifications')}
+              class="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-700 bg-blue-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            >
+              Explore notifications
+            </a>
+            <a
+              href="#compare-plans"
+              class="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-200 bg-white px-5 py-3 text-sm font-semibold text-blue-800 transition-colors hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            >
+              Compare included features
+            </a>
+          </div>
+        </div>
+      </section>
 
       {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
 
@@ -298,11 +339,11 @@ if (plans.length > 0) {
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
     <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Pricing</h2>
     <p class="mt-4">
-      If you are comparing Capgo plans, connect pricing with <a href="/live-update/">Capgo Live Updates</a> for the main release workflow, <a href="/native-build/"
-        >Capgo Native Builds</a
-      > for signed binaries, <a href="/plugins/">Capgo Plugin Directory</a> for native features, <a href="/enterprise/">Capgo Enterprise</a> for larger teams, and <a
-        href="/premium-support/">Premium Support</a
-      > for production help.
+      If you are comparing Capgo plans, connect pricing with <a href="/live-update/">Capgo Live Updates</a> for the main release workflow, <a href="/notifications/"
+        >Capgo Notifications</a
+      > for native push and update checks, <a href="/native-build/">Capgo Native Builds</a> for signed binaries, <a href="/plugins/">Capgo Plugin Directory</a> for native features, <a
+        href="/enterprise/">Capgo Enterprise</a
+      > for larger teams, and <a href="/premium-support/">Premium Support</a> for production help.
     </p>
   </section>
 </Layout>
