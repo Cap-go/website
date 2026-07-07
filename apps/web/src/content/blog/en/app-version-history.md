@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-07T08:48:16.772Z
-updated_at: 2026-07-07T08:48:18.453Z
+updated_at: 2026-07-07T08:50:34.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/50167fe7-ca0a-4587-a1b9-b5c58c7fa8cc/app-version-history-developer-guide.jpg'
 head_image_alt: App Version History a Developer Guide to Better Releases
 keywords: 'app version history, mobile CI/CD, live updates, release management, CapacitorJS'
