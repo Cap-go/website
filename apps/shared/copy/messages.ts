@@ -3156,6 +3156,8 @@ const messages = {
   solutions_webapp_to_mobile_code_lead:
     'Paste this into the AI builder after the web app works. It tells the agent to inspect, document, and prepare the mobile handoff without assuming local tooling access.',
   solutions_webapp_to_mobile_code_title: 'Give the AI this exact mobile-release brief',
+  solutions_webapp_to_mobile_prompt_card_title: 'AI mobile-release brief',
+  solutions_webapp_to_mobile_prompt_copy: 'Copy prompt',
   solutions_webapp_to_mobile_cta_primary: 'Open AI instructions',
   solutions_webapp_to_mobile_cta_subtitle:
     'Use the prompt, then review the source requirements and handoff checklist. The output should be a repo and document that a human or release service can continue from.',
