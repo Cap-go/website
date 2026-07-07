@@ -1,7 +1,7 @@
 ---
 title: "@capgo/capacitor-social-login"
-description: "All social logins in one plugin."
-tableOfContents: false
+description: "All social logins in one plugin for Web, iOS, and Android."
+tableOfContents: true
 next: false
 prev: false
 sidebar:
@@ -24,7 +24,40 @@ import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
 
 ## Overview
 
-All social logins in one plugin.
+`@capgo/capacitor-social-login` is the all-in-one social authentication plugin for Web, iOS, and Android.
+
+It implements:
+
+- Google Sign-In with Android Credential Manager
+- Sign in with Apple, including OAuth on Android
+- Facebook Login with the current Facebook SDK
+- Twitter/X through OAuth 2.0
+- Generic OAuth2 and OIDC providers, including GitHub, Microsoft Entra ID, Auth0, Okta, Keycloak, and other compliant servers
+
+It is also the Capgo migration path for apps moving from Ionic Appflow Social Login or Ionic Auth Connect.
+
+## Fork and migration notes
+
+This plugin started as a fork of `@codetrix-studio/capacitor-google-auth`. The original package is effectively archived, so Capgo maintains this plugin as the supported replacement.
+
+If you are still using `@codetrix-studio/capacitor-google-auth`, follow the [legacy Google Auth migration guide](https://github.com/Cap-go/capacitor-social-login/blob/main/MIGRATION_CODETRIX.md).
+
+If you are migrating from Ionic Auth Connect, use the built-in `SocialLoginAuthConnect` wrapper for the `auth0`, `azure`, `cognito`, `okta`, and `onelogin` provider names:
+
+- [Ionic Auth Connect migration](/docs/plugins/social-login/migrations/ionic-auth-connect/)
+- [Auth Connect compatibility guide](https://github.com/Cap-go/capacitor-social-login/blob/main/docs/auth_connect_compatibility.md)
+- [Keycloak setup](/docs/plugins/social-login/integrations/keycloak/)
+
+## Compatibility
+
+| Plugin version | Capacitor compatibility | Maintained |
+| --- | --- | --- |
+| v8.x | v8.x | Yes |
+| v7.x | v7.x | On demand |
+| v6.x | v6.x | No |
+| v5.x | v5.x | No |
+
+The major version of this plugin follows the major version of Capacitor. For example, use plugin v8 with Capacitor 8. Only the latest major version is actively maintained.
 
 ## Video Walkthrough
 
@@ -49,7 +82,7 @@ Watch a quick demo of the plugin setup and login flow in action.
 | `isLoggedIn` | IsLoggedIn. |
 | `getAuthorizationCode` | Get the current authorization code. |
 | `refresh` | Refresh the access token. |
-| `refreshToken` | OAuth2 refresh-token helper (feature parity with Capawesome OAuth). |
+| `refreshToken` | OAuth2 refresh-token helper for the built-in OAuth2 provider. |
 | `handleRedirectCallback` | Web-only: handle the OAuth redirect callback and return the parsed result. |
 | `decodeIdToken` | Decode a JWT (typically an OIDC ID token) into its claims. |
 | `getAccessTokenExpirationDate` | Convert an access token expiration timestamp (milliseconds since epoch) to an ISO date string. |
