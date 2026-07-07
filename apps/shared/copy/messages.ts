@@ -3136,6 +3136,91 @@ const messages = {
   solutions_build_without_mac_workflow4_title: 'Release and keep moving',
   solutions_build_without_mac_workflow_label: 'Workflow',
   solutions_build_without_mac_workflow_title: 'From Capacitor project to signed iOS build',
+  solutions_webapp_to_mobile_badge: 'AI mobile handoff',
+  solutions_webapp_to_mobile_builder_cta: 'Review handoff checklist',
+  solutions_webapp_to_mobile_cap1_desc:
+    'Ask the AI to identify the framework, build output, routing model, environment variables, native plugin needs, and files that determine whether the app can live inside a WebView.',
+  solutions_webapp_to_mobile_cap1_title: 'Inspect the web app first',
+  solutions_webapp_to_mobile_cap2_desc:
+    'Have the AI write the desired app ID, app name, webDir, icon and splash inputs, permissions, plugin needs, and missing native assumptions without pretending secrets exist.',
+  solutions_webapp_to_mobile_cap2_title: 'Prepare mobile configuration',
+  solutions_webapp_to_mobile_cap3_desc:
+    'The AI should separate web-layer changes from native-store work, then document which future updates can move through release channels after the first app is installed.',
+  solutions_webapp_to_mobile_cap3_title: 'Plan update boundaries',
+  solutions_webapp_to_mobile_cap4_desc:
+    'The final output should state what the AI changed, what it could not do in the builder, and what a human or release service must handle next.',
+  solutions_webapp_to_mobile_cap4_title: 'Create a real handoff',
+  solutions_webapp_to_mobile_cap_lead: 'The AI cannot finish the store release alone. It can still prepare the repo and leave a precise checklist for the native release step.',
+  solutions_webapp_to_mobile_cap_title: 'What the AI should prepare before mobile release',
+  solutions_webapp_to_mobile_code_label: 'AI instruction',
+  solutions_webapp_to_mobile_code_lead:
+    'Paste this into the AI builder after the web app works. It tells the agent to inspect, document, and prepare the mobile handoff without assuming local tooling access.',
+  solutions_webapp_to_mobile_code_title: 'Give the AI this exact mobile-release brief',
+  solutions_webapp_to_mobile_prompt_card_title: 'AI mobile-release brief',
+  solutions_webapp_to_mobile_prompt_copy: 'Copy prompt',
+  solutions_webapp_to_mobile_cta_primary: 'Open AI instructions',
+  solutions_webapp_to_mobile_cta_subtitle:
+    'Use the prompt, then review the source requirements and handoff checklist. The output should be a repo and document that a human or release service can continue from.',
+  solutions_webapp_to_mobile_cta_title: 'Use the prompt, then review the handoff',
+  solutions_webapp_to_mobile_description:
+    'Paste-ready AI instructions for turning AI-built and traditional web apps into mobile-ready projects with a clear Capacitor, native signing, and release handoff.',
+  solutions_webapp_to_mobile_guide_cta: 'Check source requirements',
+  solutions_webapp_to_mobile_h1: 'Give your AI builder mobile-release instructions',
+  solutions_webapp_to_mobile_lead:
+    'Lovable, Bolt, Base44, Cursor, and normal web stacks can get the product on screen fast. Mobile still needs a precise handoff: source export, Capacitor settings, native assumptions, signing gaps, and update boundaries the AI must document before anyone builds the app.',
+  solutions_webapp_to_mobile_lovable_cta: 'Review handoff steps',
+  solutions_webapp_to_mobile_pain1_desc:
+    'A responsive web app is not an installable app. The AI must be told to account for app identity, native permissions, icons, splash screens, plugin needs, and device behavior.',
+  solutions_webapp_to_mobile_pain1_title: 'The AI stops at the browser unless you brief it',
+  solutions_webapp_to_mobile_pain2_desc:
+    'Apple signing, Android keystores, store records, native sync, and production build artifacts usually happen outside the AI builder. The AI should document those gaps instead of hiding them.',
+  solutions_webapp_to_mobile_pain2_title: 'Native release work still needs a handoff',
+  solutions_webapp_to_mobile_pain3_desc:
+    'The first binary is only the start. The AI should define what belongs in web-layer updates, what requires a new native build, and how production, staging, and preview updates stay separated.',
+  solutions_webapp_to_mobile_pain3_title: 'Update rules need to be explicit',
+  solutions_webapp_to_mobile_problem_title: 'AI builders can make the demo. They need exact mobile instructions.',
+  solutions_webapp_to_mobile_quote_author: 'Common AI web-to-mobile feedback',
+  solutions_webapp_to_mobile_quote_label: 'User signal',
+  solutions_webapp_to_mobile_quote_text:
+    'The strongest results come when the AI is not asked to magically ship mobile. It is asked to inspect the web app, prepare the configuration, and write the handoff for the release step.',
+  solutions_webapp_to_mobile_short: 'Web App to Mobile',
+  solutions_webapp_to_mobile_source1_desc:
+    'Ask the AI to export or document the project source, identify generated assumptions, and list the assets and app identity still missing for mobile.',
+  solutions_webapp_to_mobile_source1_title: 'Lovable and visual AI builders',
+  solutions_webapp_to_mobile_source2_desc:
+    'Repo-first assistants can change files directly, but they should still return a reviewable mobile handoff instead of assuming native release work is complete.',
+  solutions_webapp_to_mobile_source2_title: 'Bolt, Cursor, and repo-first tools',
+  solutions_webapp_to_mobile_source3_desc:
+    'Existing apps need the same inspection: build output, routing, auth redirects, asset paths, native plugin needs, and release-channel boundaries.',
+  solutions_webapp_to_mobile_source3_title: 'Base44, Next.js, Vite, and existing web apps',
+  solutions_webapp_to_mobile_source_label: 'Source requirements',
+  solutions_webapp_to_mobile_source_lead:
+    'The AI can only prepare a useful mobile handoff when it understands the actual source, build output, assets, and native assumptions of the current app.',
+  solutions_webapp_to_mobile_source_title: 'Start by telling the AI what source it must inspect',
+  solutions_webapp_to_mobile_stat1_label: 'source app to inspect',
+  solutions_webapp_to_mobile_stat1_value: 'Any web stack',
+  solutions_webapp_to_mobile_stat2_label: 'target platforms to plan',
+  solutions_webapp_to_mobile_stat2_value: 'iOS + Android',
+  solutions_webapp_to_mobile_stat3_label: 'handoff output',
+  solutions_webapp_to_mobile_stat3_value: 'Checklist doc',
+  solutions_webapp_to_mobile_title: 'AI Web App to Mobile Instructions',
+  solutions_webapp_to_mobile_visual_from: 'Web app source',
+  solutions_webapp_to_mobile_visual_from_detail: 'Lovable, Bolt, Base44, Cursor, Next.js, Vite',
+  solutions_webapp_to_mobile_visual_to: 'AI mobile handoff',
+  solutions_webapp_to_mobile_visual_to_detail: 'Config, plugin needs, handoff doc, release boundaries',
+  solutions_webapp_to_mobile_workflow1_desc: 'Ask the AI to identify the framework, build output, routing model, assets, environment variables, and native-sensitive features.',
+  solutions_webapp_to_mobile_workflow1_title: 'Inspect the current app',
+  solutions_webapp_to_mobile_workflow2_desc: 'Have it draft app identity, Capacitor config, plugin needs, permissions, icon and splash inputs, and missing native assumptions.',
+  solutions_webapp_to_mobile_workflow2_title: 'Prepare the mobile plan',
+  solutions_webapp_to_mobile_workflow3_desc:
+    'Require a docs/mobile-release-handoff.md file with changed files, open questions, secrets not invented, and tasks outside the AI builder.',
+  solutions_webapp_to_mobile_workflow3_title: 'Write the handoff document',
+  solutions_webapp_to_mobile_workflow4_desc:
+    'Review what can be updated through the web layer, what needs a native build, and which work is still waiting on signing or store access.',
+  solutions_webapp_to_mobile_workflow4_title: 'Check release boundaries',
+  solutions_webapp_to_mobile_workflow_label: 'Handoff checklist',
+  solutions_webapp_to_mobile_workflow_lead: 'The goal is not one-click automation. The goal is a clear, reviewable handoff that a developer or release service can continue from.',
+  solutions_webapp_to_mobile_workflow_title: 'What the AI should give back',
   solutions_lovable_to_mobile_badge: 'Lovable vibe coding to mobile',
   solutions_lovable_to_mobile_code_label: 'Concrete example',
   solutions_lovable_to_mobile_code_lead:
