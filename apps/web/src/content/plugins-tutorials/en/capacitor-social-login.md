@@ -3,13 +3,13 @@ locale: en
 ---
 # Using @capgo/capacitor-social-login
 
-All social logins in one plugin.
+All social logins in one plugin for Web, iOS, and Android. It supports Google, Apple, Facebook, Twitter/X, and generic OAuth2/OIDC providers such as GitHub, Microsoft Entra ID, Auth0, Okta, and Keycloak.
 
 ## Install
 
 ```bash
-bun add @capgo/capacitor-social-login
-bunx cap sync
+npm install @capgo/capacitor-social-login
+npx cap sync
 ```
 
 ## What This Plugin Exposes

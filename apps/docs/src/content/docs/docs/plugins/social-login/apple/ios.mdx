@@ -65,6 +65,25 @@ Let's break down what you are going to need in order to setup Apple login on IOS
 
 That's it! You are all set.
 
+## Initialize Apple login
+
+Call `initialize` with the `apple` provider before login. On iOS, `clientId` is not used by the operating system directly; the plugin uses it to know which provider to initialize.
+
+```typescript
+await SocialLogin.initialize({
+  apple: {
+    clientId: 'your-client-id',
+  },
+});
+
+const res = await SocialLogin.login({
+  provider: 'apple',
+  options: {
+    scopes: ['email', 'name'],
+  },
+});
+```
+
 ## Keep going from Apple login on IOS
 
 If you are using **Apple login on IOS** to plan authentication and account flows, connect it with [Using @capgo/capacitor-social-login](/plugins/capacitor-social-login/) for the native capability in Using @capgo/capacitor-social-login, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

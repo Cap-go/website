@@ -6,32 +6,35 @@ sidebar:
 ---
 
 import { Steps } from '@astrojs/starlight/components';
-import { Code, Card, CardGrid } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
-import MicroCard from '@/components/MicroCard.astro'
 
 ## Installation
 
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+npx skills add https://github.com/cap-go/capacitor-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
 
 ```text
-Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-social-login` plugin in my project.
+Use the `capacitor-plugins` skill from `cap-go/capacitor-skills` to install the `@capgo/capacitor-social-login` plugin in my project.
 ```
 
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['bun']} />
+
+   ```bash
+   npm install @capgo/capacitor-social-login
+   ```
 
 2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
+
+   ```bash
+   npx cap sync
+   ```
 
 3. **Initialize in app startup**
 
@@ -41,7 +44,8 @@ If you prefer Manual Setup, install the plugin by running the following commands
    await SocialLogin.initialize({
      google: {
        webClientId: 'your-google-web-client-id',
-       iOSServerClientId: 'your-google-server-client-id',
+       iOSClientId: 'your-google-ios-client-id',
+       iOSServerClientId: 'your-google-web-client-id',
        mode: 'online',
      },
      apple: {
@@ -138,16 +142,18 @@ Set `useProperTokenExchange: true` for strict token handling and `useBroadcastCh
 
 Use `OAuth2LoginOptions.flow: 'redirect'` for web flows that navigate away from the page.
 
-## Provider configuration in Capacitor
+## Dynamic provider dependencies
 
-You can disable unused providers to reduce native binaries:
+You can configure which providers to include to reduce native app size. This is most useful when your app only needs specific providers.
+
+Add provider configuration to `capacitor.config.ts`:
 
 ```typescript
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.example.app',
-  appName: 'My App',
+  appName: 'MyApp',
   webDir: 'dist',
   plugins: {
     SocialLogin: {
@@ -157,9 +163,41 @@ const config: CapacitorConfig = {
         apple: true,
         twitter: false,
       },
+      logLevel: 1,
     },
   },
 };
+
+export default config;
+```
+
+Provider values mean:
+
+- `true`: the provider is enabled and its native dependencies are bundled.
+- `false`: the provider is disabled and its native dependencies are not bundled.
+
+Important details:
+
+- Run `npx cap sync` after changing provider configuration.
+- If no provider configuration is supplied, all providers default to `true` for backward compatibility.
+- Disabling a provider with `false` makes it unavailable at runtime, even if that provider only uses system APIs.
+- This configuration only affects iOS and Android; it does not affect Web.
+- Apple Sign-In on Android uses OAuth without external SDK dependencies.
+- Twitter/X uses standard OAuth 2.0 without external SDK dependencies.
+
+To include only Google Sign-In and Apple Sign-In:
+
+```typescript
+plugins: {
+  SocialLogin: {
+    providers: {
+      google: true,
+      facebook: false,
+      apple: true,
+      twitter: false,
+    },
+  },
+}
 ```
 
 ## Related documentation
@@ -167,6 +205,8 @@ const config: CapacitorConfig = {
 - [Integrations overview](/docs/plugins/social-login/integrations/)
 - [Better Auth integration](/docs/plugins/social-login/better-auth/)
 - [OAuth2 and OIDC providers](/docs/plugins/social-login/oauth2/)
+- [Troubleshooting](/docs/plugins/social-login/troubleshooting/)
+- [Privacy manifest and iOS URL handlers](/docs/plugins/social-login/privacy-and-ios-handlers/)
 - [Migrate from Ionic Auth Connect](/docs/upgrade/from-ionic-auth-connect/)
 - [Social Login Auth Connect migration guide](/docs/plugins/social-login/migrations/ionic-auth-connect/)
 - [Migrate legacy providers](/docs/plugins/social-login/migrations/google/)
