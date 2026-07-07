@@ -194,7 +194,17 @@ Very large projects may hit the build-time limit (see [Known Limitations](#known
    - Check APPLE_ISSUER_ID (should be UUID format)
    - Verify APPLE_KEY_CONTENT is correctly base64-encoded
 
-2. **Test API key locally**
+2. **Sync your computer clock**
+   - App Store Connect authentication uses short-lived JWTs generated from your local system time
+   - Apple rejects tokens that expire more than 20 minutes in the future, so even small clock drift can make an otherwise valid key fail
+   - On Windows, open **Settings > Time & language > Date & time** and click **Sync now**
+   - On macOS, open **System Settings > General > Date & Time** and enable automatic time
+   - On Linux, check `timedatectl status` and enable NTP if needed
+   - After syncing, re-run the Capgo build or credential command
+
+   See Apple's [Generating Tokens for API Requests](https://developer.apple.com/documentation/appstoreconnectapi/generating-tokens-for-api-requests) documentation for the App Store Connect token lifetime rule.
+
+3. **Test API key locally**
    ```bash
    # Decode key
    echo $APPLE_KEY_CONTENT | base64 -d > AuthKey.p8
@@ -203,11 +213,11 @@ Very large projects may hit the build-time limit (see [Known Limitations](#known
    fastlane pilot list
    ```
 
-3. **Check API key permissions**
+4. **Check API key permissions**
    - Key needs "Developer" role or higher
-   - Verify in App Store Connect → Users and Access → Keys
+   - Verify in App Store Connect -> Users and Access -> Keys
 
-4. **Ensure key is not revoked**
+5. **Ensure key is not revoked**
    - Check in App Store Connect
    - Generate new key if needed
 
