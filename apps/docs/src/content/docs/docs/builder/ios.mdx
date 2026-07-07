@@ -529,6 +529,12 @@ If all went well, you will see the following output:
 
 ![Capgo CLI credentials save output](/native-build-assets/credentials-save.webp)
 
+:::tip[Apple auth failed? Sync your clock]
+If the App Store Connect API key looks correct but authentication still fails, sync your computer clock and retry. Capgo signs Apple's JWT with your local system time, and Apple rejects tokens that expire more than 20 minutes in the future. A clock that is only a few seconds out of sync can be enough to fail this step.
+
+See the [builder troubleshooting guide](/docs/builder/troubleshooting/#app-store-connect-authentication-failed) for clock sync steps.
+:::
+
 ### CI/CD setup (GitHub Actions)
 
 If you already completed [Team ID](#team-id), [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id), [Certificate](#certificate), and [Provisioning profile](#provisioning-profile), you already have everything needed for CI/CD.
