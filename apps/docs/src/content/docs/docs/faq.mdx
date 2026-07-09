@@ -374,19 +374,15 @@ MAU is a better solution than number of installs to price Capgo, as it is more a
 
 The privacy rules are enforced by Apple and Google, and Capgo's implementation complies with their best practices for device identification.
 
-Device ID will not be listed in your device list until they get their first patch installed.
+Device IDs are listed after the app checks in with Capgo through the updater or stats endpoints. A device does not need to install a patch before it can appear in the device list.
 
 ## Why my device number is different than my MAU?[](https://capgo.app/docs/faq/#why-my-device-number-is-different-than-my-mau "Direct link to Why my device number is different than my MAU?")
 
-Currently, the device list is not updated as often as the MAU.
+The device list and MAU are based on different signals.
 
-The device list is updated only when a device installs an update.
+The device list shows the latest known metadata for each device, such as the device ID, platform, plugin version, OS version, native version, channel, and installed bundle. Capgo updates this metadata when the app checks in, but repeated check-ins that report the same metadata may not change the row or its last update time.
 
-While the MAU is updated at every app launch. This is a current limitation of the platform. Our Analytics platform do not support raw updates so we use conventional database for Devices list.
-
-To limit the number of database queries, we do update row only on app update.
-
-This limitation will be removed in the future.
+MAU counts distinct active devices during the billing window. That activity can increase even when the device metadata stays the same, so the device count and MAU can be different.
 
 ## How to have different update by platform?[](https://capgo.app/docs/faq/#how-to-have-different-update-by-platform "Direct link to How to have different update by platform?")
 
