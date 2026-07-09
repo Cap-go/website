@@ -45,6 +45,28 @@ This plugin gives access to the native biometric apis for android and iOS.
 | `isCredentialsSaved` | Checks if credentials are already saved for a given server. |
 | `getPluginVersion` | Get the native Capacitor plugin version. |
 
+
+## Reference Values
+
+Use these values when handling `biometricError` results from `authenticate`.
+
+### Biometric Auth Errors
+
+| Value | Code | Platform | Meaning |
+| --- | --- | --- | --- |
+| `UNKNOWN_ERROR` | `0` | Android, iOS | Unknown error occurred. |
+| `BIOMETRICS_UNAVAILABLE` | `1` | Android, iOS | Biometrics are unavailable because hardware is missing or unavailable. |
+| `USER_LOCKOUT` | `2` | Android, iOS | User is locked out after too many failed attempts. |
+| `BIOMETRICS_NOT_ENROLLED` | `3` | Android, iOS | No biometrics are enrolled on the device. |
+| `USER_TEMPORARY_LOCKOUT` | `4` | Android | User is temporarily locked out, typically for 30 seconds. |
+| `AUTHENTICATION_FAILED` | `10` | Android, iOS | Authentication failed. |
+| `APP_CANCEL` | `11` | iOS | App canceled the authentication flow. |
+| `INVALID_CONTEXT` | `12` | iOS | Authentication context is invalid. |
+| `NOT_INTERACTIVE` | `13` | iOS | Authentication was not interactive. |
+| `PASSCODE_NOT_SET` | `14` | Android, iOS | Device passcode, PIN, or fallback credential is not set. |
+| `SYSTEM_CANCEL` | `15` | Android, iOS | System canceled authentication, for example after screen lock. |
+| `USER_CANCEL` | `16` | Android, iOS | User canceled authentication. |
+| `USER_FALLBACK` | `17` | Android, iOS | User chose fallback authentication. |
 ## Source Of Truth
 
 This reference is synced from `src/definitions.ts` in [capacitor-native-biometric](https://github.com/Cap-go/capacitor-native-biometric/).

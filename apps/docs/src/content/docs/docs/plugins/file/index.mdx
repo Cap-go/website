@@ -64,6 +64,47 @@ Capacitor File Plugin Implements file system operations similar to the Cordova F
 | `checkPermissions` | Check the current permission status for file operations. On Android, this checks for external storage permissions. On iOS and web, this always returns 'granted' as no special permissions are needed. |
 | `requestPermissions` | Request permissions for file operations. On Android, this requests external storage permissions needed for accessing files outside the app's private directories. On iOS and web, this always returns 'granted' as no special permissions are needed. |
 
+
+## Reference Values
+
+Use these values when choosing a storage location, writing encoded text, or handling file errors.
+
+### Directories
+
+| Value | User will find |
+| --- | --- |
+| `DOCUMENTS` | Persistent user-visible documents. On Android this maps to the app files directory. |
+| `DATA` | Persistent private app data. |
+| `LIBRARY` | Persistent app data that is not user-visible. On Android this maps to the app files directory. |
+| `CACHE` | Temporary cache data that the OS may clear. |
+| `EXTERNAL` | Android external storage root, such as an SD card or shared external storage. |
+| `EXTERNAL_STORAGE` | Android external storage data directory. |
+| `APPLICATION` | Read-only application bundle or assets directory. |
+
+### Encodings
+
+| Value | Use |
+| --- | --- |
+| `utf8` | UTF-8 text. |
+| `ascii` | ASCII text. |
+| `utf16` | UTF-16 text. |
+
+### File Error Codes
+
+| Value | Code | Meaning |
+| --- | --- | --- |
+| `NOT_FOUND_ERR` | `1` | File or directory was not found. |
+| `SECURITY_ERR` | `2` | Operation was blocked by security rules or permissions. |
+| `ABORT_ERR` | `3` | Operation was aborted. |
+| `NOT_READABLE_ERR` | `4` | File or directory cannot be read. |
+| `ENCODING_ERR` | `5` | Encoding is invalid or unsupported. |
+| `NO_MODIFICATION_ALLOWED_ERR` | `6` | Target cannot be modified. |
+| `INVALID_STATE_ERR` | `7` | Object is in an invalid state for the operation. |
+| `SYNTAX_ERR` | `8` | Path or input syntax is invalid. |
+| `INVALID_MODIFICATION_ERR` | `9` | Requested change is invalid for the target. |
+| `QUOTA_EXCEEDED_ERR` | `10` | Storage quota was exceeded. |
+| `TYPE_MISMATCH_ERR` | `11` | Value type does not match the expected type. |
+| `PATH_EXISTS_ERR` | `12` | Target path already exists. |
 ## Source Of Truth
 
 This reference is synced from `src/definitions.ts` in [capacitor-file](https://github.com/Cap-go/capacitor-file/).

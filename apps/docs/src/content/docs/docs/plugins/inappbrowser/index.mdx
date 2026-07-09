@@ -92,6 +92,19 @@ Use it when the page needs more than a simple external browser: OAuth and checko
 | `setEnabledSafeBottomMargin` | Sets the enabled safe bottom margin of the webview at runtime. When `id` is omitted, targets the active webview. On Web, this method is a no-op and resolves without changing layout. |
 | `openSecureWindow` | Opens a secure OAuth2 window. On web, return the redirected URL through a `BroadcastChannel`; on mobile, register a custom redirect URI in your app configuration. See the getting-started guide for the full HTML, Info.plist, and AndroidManifest examples. |
 
+
+## Reference Values
+
+Use these values with toolbar options when opening an in-app browser or WebView.
+
+### Toolbar Types
+
+| Value | User will find |
+| --- | --- |
+| `activity` | Simple toolbar with close and share controls. |
+| `compact` | Simple toolbar with a close control. |
+| `navigation` | Full navigation toolbar with back and forward controls. |
+| `blank` | No toolbar. |
 ## Source Of Truth
 
 This reference is synced from `src/definitions.ts` in [capacitor-inappbrowser](https://github.com/Cap-go/capacitor-inappbrowser/).
