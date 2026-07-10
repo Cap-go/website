@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-10T08:09:38.047Z
-updated_at: 2026-07-10T08:09:39.215Z
+updated_at: 2026-07-10T08:11:48.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/dc1b027f-f23a-4977-83c8-e2b173de4cd7/native-base-picker-tutorial-title.jpg'
 head_image_alt: 'Native Base Picker: Setup, Styling & Android Fix'
 keywords: 'native base picker, react native, nativebase, capacitorjs, mobile UI'
