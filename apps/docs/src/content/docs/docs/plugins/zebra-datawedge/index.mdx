@@ -74,6 +74,108 @@ Capacitor plugin for Zebra DataWedge profile management, notifications, queries,
 | `addListener` | See the source definitions for current behavior. |
 | `addListener` | See the source definitions for current behavior. |
 
+
+## Reference Values
+
+Use these values when creating profiles, configuring plugins, listening for scanner state, or handling DataWedge result errors.
+
+### Profile Config Modes
+
+| Value | Use |
+| --- | --- |
+| `CREATE_IF_NOT_EXIST` | Create the profile only when it does not already exist. |
+| `OVERWRITE` | Replace the existing profile configuration. |
+| `REMOVE` | Remove the profile configuration. |
+| `UPDATE` | Update the existing profile configuration. |
+
+### Notification Types
+
+| Value | User will receive |
+| --- | --- |
+| `CONFIGURATION_UPDATE` | DataWedge configuration update events. |
+| `PROFILE_SWITCH` | Active profile switch events. |
+| `SCANNER_STATUS` | Scanner connection and scan-state events. |
+
+### DataWedge Plugins
+
+| Value | Configures |
+| --- | --- |
+| `ADF` | Advanced Data Formatting rules. |
+| `BARCODE` | Barcode scanner input. |
+| `BDF` | Basic Data Formatting rules. |
+| `DCP` | Data Capture Plus integration. |
+| `EKB` | Enterprise Keyboard integration. |
+| `INTENT` | Intent output delivery. |
+| `IP` | IP output delivery. |
+| `KEYSTROKE` | Keystroke output delivery. |
+| `MSR` | Magnetic stripe reader input. |
+| `RFID` | RFID input. |
+| `SERIAL` | Serial input. |
+| `TOKENS` | Token output formatting. |
+| `VOICE` | Voice input. |
+
+### Scanner Identifiers
+
+| Value | Scanner target |
+| --- | --- |
+| `AUTO` | Let DataWedge choose the scanner automatically. |
+| `BLUETOOTH_DS3678` | Bluetooth DS3678 scanner. |
+| `BLUETOOTH_RS6000` | Bluetooth RS6000 scanner. |
+| `BLUETOOTH_SSI` | Bluetooth SSI scanner. |
+| `INTERNAL_CAMERA` | Internal camera scanner. |
+| `INTERNAL_IMAGER` | Internal imager scanner. |
+| `INTERNAL_LASER` | Internal laser scanner. |
+| `PLUGABLE_SSI` | Pluggable SSI scanner. |
+| `PLUGABLE_SSI_RS5000` | Pluggable SSI RS5000 scanner. |
+| `SERIAL_SSI` | Serial SSI scanner. |
+| `USB_SSI_DS3608` | USB SSI DS3608 scanner. |
+
+### Scanner Status Values
+
+| Value | Meaning |
+| --- | --- |
+| `CONNECTED` | Scanner is connected. |
+| `DISABLED` | Scanner is disabled. |
+| `DISCONNECTED` | Scanner is disconnected. |
+| `IDLE` | Scanner is ready and idle. |
+| `SCANNING` | Scanner is actively scanning. |
+| `WAITING` | Scanner is waiting to scan. |
+
+### DataWedge Error Codes
+
+| Value | What user will find there |
+| --- | --- |
+| `APP_ALREADY_ASSOCIATED` | The app is already associated with the profile. |
+| `APP_ALREADY_IN_DISABLED_LIST` | The app is already in the disabled app list. |
+| `BUNDLE_EMPTY` | The supplied config bundle was empty. |
+| `CANNOT_READ_FILE` | DataWedge could not read the supplied file. |
+| `CONFIG_FILE_NOT_EXIST` | The referenced config file does not exist. |
+| `DATAWEDGE_ALREADY_DISABLED` | DataWedge is already disabled. |
+| `DATAWEDGE_ALREADY_ENABLED` | DataWedge is already enabled. |
+| `DATAWEDGE_DISABLED` | DataWedge is disabled. |
+| `DEVICE_NOT_CONNECTED` | The requested scanner device is not connected. |
+| `DEVICE_NOT_SUPPORTED` | The requested scanner device is not supported. |
+| `INPUT_NOT_ENABLED` | The requested input plugin is not enabled. |
+| `INVALID_CONFIG_FILE` | The supplied config file is invalid. |
+| `INVALID_FILE_NAME` | The supplied file name is invalid. |
+| `INVALID_FOLDER_PATH` | The supplied folder path is invalid. |
+| `OPERATION_NOT_ALLOWED` | DataWedge rejected the operation. |
+| `PARAMETER_INVALID` | One or more parameters are invalid. |
+| `PLUGIN_BUNDLE_INVALID` | The supplied plugin bundle is invalid. |
+| `PLUGIN_DISABLED` | The requested plugin is disabled. |
+| `PLUGIN_DISABLED_IN_CONFIG` | The requested plugin is disabled in this config. |
+| `PLUGIN_NOT_SUPPORTED` | The requested plugin is not supported. |
+| `PROFILE_ALREADY_EXISTS` | The target profile already exists. |
+| `PROFILE_ALREADY_SET` | The target profile is already active. |
+| `PROFILE_DISABLED` | The target profile is disabled. |
+| `PROFILE_HAS_APP_ASSOCIATION` | The target profile still has app associations. |
+| `PROFILE_NAME_EMPTY` | The profile name was empty. |
+| `PROFILE_NOT_FOUND` | The target profile was not found. |
+| `SCANNER_ALREADY_DISABLED` | The scanner is already disabled. |
+| `SCANNER_ALREADY_ENABLED` | The scanner is already enabled. |
+| `SCANNER_DISABLE_FAILED` | DataWedge failed to disable the scanner. |
+| `SCANNER_ENABLE_FAILED` | DataWedge failed to enable the scanner. |
+| `UNKNOWN` | DataWedge returned an unknown error. |
 ## Source Of Truth
 
 This reference is synced from `src/definitions.ts` in [capacitor-zebra-datawedge](https://github.com/Cap-go/capacitor-zebra-datawedge/).

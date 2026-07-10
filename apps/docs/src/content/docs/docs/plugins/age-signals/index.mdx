@@ -35,6 +35,25 @@ Capacitor interface for retrieving Play Age Signals.
 | `checkAgeSignals` | Request the current Play Age Signals for the active user. |
 | `getPluginVersion` | Get the native Capacitor plugin version. |
 
+
+## Reference Values
+
+Use these error codes to decide whether to retry, prompt the user to update Google Play components, or treat the device as unsupported.
+
+### Error Codes
+
+| Value | Meaning |
+| --- | --- |
+| `API_NOT_AVAILABLE` | Play Age Signals API is not available, often because the Play Store is outdated. |
+| `PLAY_STORE_NOT_FOUND` | Google Play Store is not installed on the device. |
+| `NETWORK_ERROR` | Network connection failed while requesting the signal. |
+| `PLAY_SERVICES_NOT_FOUND` | Google Play services are missing or unavailable. |
+| `CANNOT_BIND_TO_SERVICE` | The plugin could not bind to the Play Store service. |
+| `PLAY_STORE_VERSION_OUTDATED` | Google Play Store must be updated. |
+| `PLAY_SERVICES_VERSION_OUTDATED` | Google Play services must be updated. |
+| `CLIENT_TRANSIENT_ERROR` | Temporary client-side device error; retry may succeed. |
+| `APP_NOT_OWNED` | The app was not installed through Google Play. |
+| `INTERNAL_ERROR` | Unknown internal error from the API. |
 ## Source Of Truth
 
 This reference is synced from `src/definitions.ts` in [capacitor-android-age-signals](https://github.com/Cap-go/capacitor-android-age-signals/).

@@ -34,6 +34,7 @@ ITMS = "ITMS"  # iTunes Music Store
 SME = "SME"  # Small and midsize enterprise
 Hashi = "Hashi"  # HashiCorp (brand name)
 formatable = "formatable"  # NFC event literal from upstream API
+PLUGABLE = "PLUGABLE"  # Zebra DataWedge enum literal from upstream API
 jus = "jus"  # Brazilian justice app package namespace
 Programm = "Programm"  # German app-store title term in TV-Programm
 BLUTOOTH = "BLUTOOTH"  # Upstream Android intent literal from capacitor-intent-launcher

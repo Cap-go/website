@@ -78,6 +78,22 @@ The main interface for the CameraPreview plugin.
 | `setExposureCompensation` | Sets the exposure compensation (EV bias). Value will be clamped to range. |
 | `getPluginVersion` | Get the native Capacitor plugin version. |
 
+
+## Reference Values
+
+Use these values from `CameraLens.deviceType` or `LensInfo.deviceType` to choose the physical camera lens.
+
+### Device Types
+
+| Value | User will find |
+| --- | --- |
+| `ultraWide` | Ultra-wide camera lens. |
+| `wideAngle` | Standard wide-angle camera lens. |
+| `telephoto` | Telephoto camera lens. |
+| `trueDepth` | TrueDepth front camera. |
+| `dual` | Dual camera system. |
+| `dualWide` | Dual wide camera system. |
+| `triple` | Triple camera system. |
 ## Source Of Truth
 
 This reference is synced from `src/definitions.ts` in [capacitor-camera-preview](https://github.com/Cap-go/capacitor-camera-preview/).
