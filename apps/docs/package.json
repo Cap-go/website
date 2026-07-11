@@ -21,7 +21,7 @@
     "@astrojs/check": "0.9.9",
     "@types/node": "^25.9.3",
     "vite-plugin-static-copy": "^4.1.1",
-    "wrangler": "4.101.0",
+    "wrangler": "4.110.0",
     "zod": "^4"
   },
   "scripts": {
