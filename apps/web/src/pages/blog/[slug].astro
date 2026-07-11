@@ -4,10 +4,12 @@ import BlogAuthorByline from '@/components/BlogAuthorByline.astro'
 import BlogEditorialByline from '@/components/BlogEditorialByline.astro'
 import GetStarted from '@/components/GetStarted.astro'
 import { HUMAN_EDITORIAL_TEAM } from '@/config/blogEditorialTeam'
+import PodcastEpisode from '@/components/PodcastEpisode.astro'
 import { isHumanBlogPost } from '@/lib/blogOrigin'
 import { formatTime } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
-import { createNewsArticleLdJson } from '@/lib/ldJson'
+import { createLdJsonGraph, createNewsArticleLdJson } from '@/lib/ldJson'
+import { createPodcastStructuredData, getPodcastEpisodeForSlug, getPodcastFeedUrl } from '@/lib/podcast'
 import m from '@/copy/messages'
 import { defaultLocale, locales } from '@/services/locale'
 import type { GetStaticPaths } from 'astro'
@@ -88,6 +90,7 @@ const content: {
   description?: string
   image?: string
   author?: string
+  audio?: string
   ldJSON?: Object
   keywords?: string[]
   alternateVersions?: any[]
@@ -118,10 +121,21 @@ if (entry.data.tag) {
   content['articleTags'] = tags
 }
 
-// Create improved ldJSON using helper function
-const articleUrl = getRelativeLocaleUrl(Astro.locals.locale, `/blog/${entry.data.slug}/`)
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const articleUrl = new URL(getRelativeLocaleUrl(Astro.locals.locale, '/blog/' + entry.data.slug + '/'), baseUrl).toString()
+const podcastEpisode = getPodcastEpisodeForSlug(entry.data.slug)
+const podcastStructuredData = podcastEpisode
+  ? createPodcastStructuredData({
+      articleUrl,
+      episode: podcastEpisode,
+      imageUrl: content['image'],
+      siteUrl: baseUrl,
+    })
+  : undefined
 
-content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
+if (podcastEpisode) content['audio'] = podcastEpisode.providerAudioUrl
+
+const articleLdJson = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
   title: entry.data.title,
   description: entry.data.description || '',
   url: articleUrl,
@@ -135,6 +149,17 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
   articleSection: entry.data.tag ? entry.data.tag.split(',')[0]?.trim() : undefined,
   articleBody: striptags(entry.rendered?.html || ''),
   locale: Astro.locals.locale,
+})
+
+if (podcastStructuredData) {
+  ;(articleLdJson as unknown as Record<string, unknown>).audio = { '@id': podcastStructuredData.audioId }
+}
+
+const podcastLdJsonEntities = podcastStructuredData ? ([podcastStructuredData.episode, podcastStructuredData.audio] as unknown as import('schema-dts').Thing[]) : undefined
+
+content['ldJSON'] = createLdJsonGraph(Astro.locals.runtimeConfig.public, articleLdJson, {
+  additionalEntities: podcastLdJsonEntities,
+  includeOrganization: true,
 })
 ---
 
@@ -191,6 +216,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
             src={entry.data.head_image}
             class="rounded border border-white/5 object-cover"
           />
+          {podcastEpisode && <PodcastEpisode episode={podcastEpisode} feedUrl={getPodcastFeedUrl(baseUrl)} />}
           <article class="prose prose-invert blog mt-8 min-w-full">
             <Content />
           </article>

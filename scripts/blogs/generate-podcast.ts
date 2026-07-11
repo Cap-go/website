@@ -20,14 +20,23 @@ export interface BlogPost {
   createdAt: string
   description?: string
   filePath: string
+  keywords: string[]
   slug: string
   sourceArticleUrl: string
+  tags: string[]
   title: string
 }
 
+export interface EpisodeLink {
+  title: string
+  url: string
+}
+
 export interface PodcastEpisode {
+  audioMimeType?: string
   description: string
   durationSeconds?: number
+  episodeGuid?: string
   fileSize?: number
   generatedAt: string
   providerAudioUrl?: string
@@ -150,6 +159,73 @@ function parseDate(value: unknown): string {
   return Number.isNaN(date.getTime()) ? new Date(0).toISOString() : date.toISOString()
 }
 
+function parseOptionalDate(value: unknown): string | undefined {
+  if (typeof value !== 'string' || !value.trim()) return undefined
+
+  const date = new Date(value)
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString()
+}
+
+function parseCommaSeparated(value: unknown): string[] {
+  if (typeof value !== 'string' || !value.trim()) return []
+
+  return [...new Set(value.split(',').map((item) => item.trim().toLowerCase()).filter(Boolean))]
+}
+
+function pageUrl(siteUrl: string, path: string): string {
+  return new URL(path.replace(/^\//, ''), normalizeSiteUrl(siteUrl)).toString()
+}
+
+const CAPGO_RESOURCE_LINKS: Array<{ match: RegExp; title: string; path: string }> = [
+  { match: /ota|live.?update|over-the-air|updater|deployment|rollout/i, title: 'Capgo live updates', path: '/live-update/' },
+  { match: /ota|live.?update|updater|deployment|rollout/i, title: 'Capgo updater docs', path: '/docs/plugins/updater/' },
+  { match: /plugin|capacitor|native.?bridge/i, title: 'Capgo plugin directory', path: '/plugins/' },
+  { match: /ci.?cd|github.?action|gitlab|codemagic|build/i, title: 'Capgo CI/CD', path: '/ci_cd/' },
+  { match: /pricing|cost|subscription|billing/i, title: 'Capgo pricing', path: '/pricing/' },
+  { match: /security|compliance|gdpr|hipaa|privacy|soc.?2/i, title: 'Capgo security', path: '/security/' },
+  { match: /capacitor|ionic|mobile|react.?native|flutter|vue|angular/i, title: 'Capgo quickstart docs', path: '/docs/getting-started/quickstart/' },
+]
+
+export function findRelatedBlogPosts(post: BlogPost, posts: readonly BlogPost[], limit = 3): BlogPost[] {
+  if (post.tags.length === 0) return []
+
+  const tagSet = new Set(post.tags)
+  return posts
+    .filter((candidate) => candidate.slug !== post.slug)
+    .map((candidate) => ({
+      candidate,
+      score: candidate.tags.filter((tag) => tagSet.has(tag)).length,
+    }))
+    .filter(({ score }) => score > 0)
+    .toSorted((left, right) => right.score - left.score || right.candidate.createdAt.localeCompare(left.candidate.createdAt) || left.candidate.slug.localeCompare(right.candidate.slug))
+    .slice(0, limit)
+    .map(({ candidate }) => candidate)
+}
+
+export function getCapgoResourceLinks(post: BlogPost, siteUrl: string, limit = 3): EpisodeLink[] {
+  const haystack = [post.title, post.description || '', post.tags.join(' '), post.keywords.join(' ')].join(' ')
+  const links: EpisodeLink[] = []
+  const seenPaths = new Set<string>()
+
+  for (const resource of CAPGO_RESOURCE_LINKS) {
+    if (links.length >= limit) break
+    if (!resource.match.test(haystack) || seenPaths.has(resource.path)) continue
+
+    seenPaths.add(resource.path)
+    links.push({ title: resource.title, url: pageUrl(siteUrl, resource.path) })
+  }
+
+  if (links.length === 0) {
+    links.push({ title: 'Capgo quickstart docs', url: pageUrl(siteUrl, '/docs/getting-started/quickstart/') })
+  }
+
+  return links
+}
+
+export function buildPodcastEpisodeGuid(slug: string, providerEpisodeId: string | number): string {
+  return 'capgo-blog-podcast:' + slug + ':' + providerEpisodeId
+}
+
 function readBlogPost(filePath: string, siteUrl: string): BlogPost | undefined {
   const parsed = matter(readFileSync(filePath, 'utf8'))
   const frontmatter = parsed.data as Record<string, unknown>
@@ -165,10 +241,19 @@ function readBlogPost(filePath: string, siteUrl: string): BlogPost | undefined {
     createdAt: parseDate(frontmatter.created_at),
     description: asString(frontmatter.description),
     filePath,
+    keywords: parseCommaSeparated(frontmatter.keywords),
     slug,
     sourceArticleUrl: sourceArticleUrl(siteUrl, slug),
+    tags: parseCommaSeparated(frontmatter.tag),
     title,
   }
+}
+
+export function loadAllBlogPosts(siteUrl = DEFAULT_SITE_URL): BlogPost[] {
+  return sortPosts(allBlogFiles().flatMap((filePath) => {
+    const post = readBlogPost(filePath, siteUrl)
+    return post ? [post] : []
+  }))
 }
 
 function sortPosts(posts: BlogPost[]): BlogPost[] {
@@ -230,9 +315,29 @@ export function getEligibleBlogPosts(options: PodcastGenerationOptions, manifest
   return scopedPosts.filter((post) => !publishedSlugs.has(post.slug)).slice(0, options.limit)
 }
 
-export function buildEpisodeDescription(post: BlogPost): string {
+export function buildEpisodeDescription(post: BlogPost, options: { allPosts?: readonly BlogPost[]; siteUrl?: string } = {}): string {
+  const siteUrl = options.siteUrl || DEFAULT_SITE_URL
+  const allPosts = options.allPosts || loadAllBlogPosts(siteUrl)
   const summary = post.description || `A two-host conversation about ${post.title}.`
-  return `${summary}\n\nRead the full article: ${post.sourceArticleUrl}`
+  const relatedPosts = findRelatedBlogPosts(post, allPosts)
+  const resourceLinks = getCapgoResourceLinks(post, siteUrl)
+  const lines = [summary, '', `Read the full article: ${post.sourceArticleUrl}`]
+
+  if (relatedPosts.length > 0) {
+    lines.push('', 'Related articles:')
+    for (const relatedPost of relatedPosts) {
+      lines.push(`- ${relatedPost.title}: ${relatedPost.sourceArticleUrl}`)
+    }
+  }
+
+  if (resourceLinks.length > 0) {
+    lines.push('', 'Explore Capgo:')
+    for (const link of resourceLinks) {
+      lines.push(`- ${link.title}: ${link.url}`)
+    }
+  }
+
+  return lines.join('\n')
 }
 
 function buildPodcastInstructions(post: BlogPost): string {
@@ -367,17 +472,27 @@ function episodeFromProvider(post: BlogPost, providerEpisode: Record<string, unk
   const providerEpisodeId = providerEpisode.episodeId ?? providerEpisode.episode_id ?? providerEpisode.id
   if (typeof providerEpisodeId !== 'string' && typeof providerEpisodeId !== 'number') return undefined
 
+  const providerDate =
+    parseOptionalDate(providerEpisode.generatedAt) ||
+    parseOptionalDate(providerEpisode.generated_at) ||
+    parseOptionalDate(providerEpisode.publishedAt) ||
+    parseOptionalDate(providerEpisode.published_at) ||
+    parseOptionalDate(providerEpisode.createdAt) ||
+    parseOptionalDate(providerEpisode.created_at)
+
   return {
+    audioMimeType: asString(providerEpisode.audioMimeType) || asString(providerEpisode.audio_mime_type) || 'audio/mpeg',
     description: asString(providerEpisode.description) || buildEpisodeDescription(post),
     durationSeconds: asNumber(providerEpisode.audioDuration ?? providerEpisode.audio_duration),
+    episodeGuid: buildPodcastEpisodeGuid(post.slug, providerEpisodeId),
     fileSize: asNumber(providerEpisode.fileSize ?? providerEpisode.file_size),
-    generatedAt: new Date().toISOString(),
+    generatedAt: providerDate || new Date().toISOString(),
     providerAudioUrl: asString(providerEpisode.audioUrl) || asString(providerEpisode.audio_url),
     providerEpisodeId,
     requestId: asString(providerEpisode.requestId) || asString(providerEpisode.request_id),
     slug: post.slug,
     sourceArticleUrl: post.sourceArticleUrl,
-    title: asString(providerEpisode.title) || `Capgo podcast: ${post.title}`,
+    title: asString(providerEpisode.title) || 'Capgo podcast: ' + post.title,
   }
 }
 
@@ -441,8 +556,10 @@ export async function publishCandidates(
   const candidatesToPublish = missingCandidates.slice(0, capacity)
   const publishedEpisodes: PodcastEpisode[] = []
 
+  const allPosts = loadAllBlogPosts(configuration.siteUrl)
+
   for (const candidate of candidatesToPublish) {
-    const description = buildEpisodeDescription(candidate)
+    const description = buildEpisodeDescription(candidate, { allPosts, siteUrl: configuration.siteUrl })
     const { requestId } = await client.createPodcast({
       callbackData: `blog:${candidate.slug}`,
       content: buildPodcastSource(candidate),
@@ -458,8 +575,10 @@ export async function publishCandidates(
     })
 
     publishedEpisodes.push({
+      audioMimeType: 'audio/mpeg',
       description,
       durationSeconds: asNumber(completed.audio_duration),
+      episodeGuid: buildPodcastEpisodeGuid(candidate.slug, episodeId),
       fileSize: asNumber(completed.file_size),
       generatedAt: new Date().toISOString(),
       providerAudioUrl: completed.audio_url,
@@ -467,7 +586,7 @@ export async function publishCandidates(
       requestId,
       slug: candidate.slug,
       sourceArticleUrl: candidate.sourceArticleUrl,
-      title: `Capgo podcast: ${candidate.title}`,
+      title: 'Capgo podcast: ' + candidate.title,
     })
   }
 
@@ -537,8 +656,8 @@ export async function runPodcastGeneration(options: PodcastGenerationOptions, en
   if (result.manifestChanged) writePodcastManifest(result.manifest)
   writeGithubOutputs(result)
 
-  console.log(`Published ${result.publishedCount} podcast episode(s); reconciled ${result.reconciledCount}; deferred ${result.deferredCount}.`)
-  console.log(`RSS feed: ${configuration.apiBaseUrl}/podcast/rss/${configuration.podcastShowId}`)
+  console.log('Published ' + result.publishedCount + ' podcast episode(s); reconciled ' + result.reconciledCount + '; deferred ' + result.deferredCount + '.')
+  console.log('Website RSS feed: ' + new URL('podcast.xml', configuration.siteUrl).toString())
   return result
 }
 

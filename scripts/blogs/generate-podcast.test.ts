@@ -2,6 +2,8 @@ import { describe, expect, test } from 'bun:test'
 import {
   buildEpisodeDescription,
   findProviderEpisodeByArticle,
+  findRelatedBlogPosts,
+  getCapgoResourceLinks,
   HttpAutoContentClient,
   publishCandidates,
   type AutoContentClient,
@@ -15,9 +17,23 @@ const post: BlogPost = {
   createdAt: '2026-07-11T00:00:00.000Z',
   description: 'How Capgo makes live updates safer.',
   filePath: '/tmp/capgo-live-updates.md',
+  keywords: ['capacitor', 'ota updates', 'deployment'],
   slug: 'capgo-live-updates',
   sourceArticleUrl: 'https://capgo.app/blog/capgo-live-updates/',
+  tags: ['development', 'mobile', 'updates'],
   title: 'Capgo Live Updates',
+}
+
+const relatedPost: BlogPost = {
+  content: 'Learn release safety patterns for Capacitor apps.',
+  createdAt: '2026-07-10T00:00:00.000Z',
+  description: 'Release safety for mobile teams.',
+  filePath: '/tmp/release-safety.md',
+  keywords: ['release', 'rollback'],
+  slug: 'release-safety',
+  sourceArticleUrl: 'https://capgo.app/blog/release-safety/',
+  tags: ['development', 'mobile'],
+  title: 'Release safety',
 }
 
 const configuration: PodcastConfiguration = {
@@ -32,8 +48,28 @@ const configuration: PodcastConfiguration = {
 }
 
 describe('blog podcast generation', () => {
-  test('always includes the canonical source article in the provider description', () => {
-    expect(buildEpisodeDescription(post)).toBe('How Capgo makes live updates safer.\n\nRead the full article: https://capgo.app/blog/capgo-live-updates/')
+  test('builds a provider description with the source article, related posts, and Capgo links', () => {
+    const description = buildEpisodeDescription(post, { allPosts: [post, relatedPost], siteUrl: 'https://capgo.app/' })
+
+    expect(description).toContain('How Capgo makes live updates safer.')
+    expect(description).toContain('Read the full article: https://capgo.app/blog/capgo-live-updates/')
+    expect(description).toContain('Related articles:')
+    expect(description).toContain('- Release safety: https://capgo.app/blog/release-safety/')
+    expect(description).toContain('Explore Capgo:')
+    expect(description).toContain('- Capgo live updates: https://capgo.app/live-update/')
+    expect(description).toContain('- Capgo updater docs: https://capgo.app/docs/plugins/updater/')
+  })
+
+  test('finds related posts by shared tags and skips the source article', () => {
+    expect(findRelatedBlogPosts(post, [post, relatedPost]).map((item) => item.slug)).toEqual(['release-safety'])
+  })
+
+  test('maps article topics to real Capgo product and docs URLs', () => {
+    expect(getCapgoResourceLinks(post, 'https://capgo.app/')).toEqual([
+      { title: 'Capgo live updates', url: 'https://capgo.app/live-update/' },
+      { title: 'Capgo updater docs', url: 'https://capgo.app/docs/plugins/updater/' },
+      { title: 'Capgo plugin directory', url: 'https://capgo.app/plugins/' },
+    ])
   })
 
   test('recognizes an already attached provider episode by its source article', () => {
@@ -74,6 +110,8 @@ describe('blog podcast generation', () => {
       attachEpisode: async ({ description, requestId, title }) => {
         calls.push(`attach:${requestId}`)
         expect(description).toContain(post.sourceArticleUrl)
+        expect(description).toContain('Related articles:')
+        expect(description).toContain('Explore Capgo:')
         expect(title).toBe('Capgo podcast: Capgo Live Updates')
         return { episodeId: 42 }
       },
@@ -101,6 +139,8 @@ describe('blog podcast generation', () => {
     expect(result.deferredCount).toBe(0)
     expect(result.manifest.episodes).toHaveLength(1)
     expect(result.manifest.episodes[0]).toMatchObject({
+      audioMimeType: 'audio/mpeg',
+      episodeGuid: 'capgo-blog-podcast:capgo-live-updates:42',
       providerEpisodeId: 42,
       requestId: 'request-1',
       slug: 'capgo-live-updates',
