@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "astro-icon": "1.1.5",
-    "sharp": "^0.35.1"
+    "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "1.2.3"
