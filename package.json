@@ -53,6 +53,7 @@
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts",
     "generate:blog-images": "bun run scripts/generate-blog-images.ts",
     "blogs:normalize_tags": "bun run scripts/blogs/normalize_tags.ts",
+    "blogs:generate_podcast": "bun run scripts/blogs/generate-podcast.ts",
     "visual-diff:setup": "bun run scripts/visual-diff.mjs install",
     "visual-diff:capture:before": "bun run scripts/visual-diff.mjs capture before",
     "visual-diff:capture:after": "bun run scripts/visual-diff.mjs capture after",
