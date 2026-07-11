@@ -101,6 +101,8 @@ describe('blog podcast generation', () => {
     expect(result.deferredCount).toBe(0)
     expect(result.manifest.episodes).toHaveLength(1)
     expect(result.manifest.episodes[0]).toMatchObject({
+      audioMimeType: 'audio/mpeg',
+      episodeGuid: 'capgo-blog-podcast:capgo-live-updates:42',
       providerEpisodeId: 42,
       requestId: 'request-1',
       slug: 'capgo-live-updates',

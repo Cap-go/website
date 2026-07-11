@@ -26,8 +26,10 @@ export interface BlogPost {
 }
 
 export interface PodcastEpisode {
+  audioMimeType?: string
   description: string
   durationSeconds?: number
+  episodeGuid?: string
   fileSize?: number
   generatedAt: string
   providerAudioUrl?: string
@@ -148,6 +150,17 @@ function isInsideDirectory(directory: string, candidate: string): boolean {
 function parseDate(value: unknown): string {
   const date = value instanceof Date ? value : new Date(typeof value === 'string' ? value : 0)
   return Number.isNaN(date.getTime()) ? new Date(0).toISOString() : date.toISOString()
+}
+
+function parseOptionalDate(value: unknown): string | undefined {
+  if (typeof value !== 'string' || !value.trim()) return undefined
+
+  const date = new Date(value)
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString()
+}
+
+export function buildPodcastEpisodeGuid(slug: string, providerEpisodeId: string | number): string {
+  return 'capgo-blog-podcast:' + slug + ':' + providerEpisodeId
 }
 
 function readBlogPost(filePath: string, siteUrl: string): BlogPost | undefined {
@@ -367,17 +380,27 @@ function episodeFromProvider(post: BlogPost, providerEpisode: Record<string, unk
   const providerEpisodeId = providerEpisode.episodeId ?? providerEpisode.episode_id ?? providerEpisode.id
   if (typeof providerEpisodeId !== 'string' && typeof providerEpisodeId !== 'number') return undefined
 
+  const providerDate =
+    parseOptionalDate(providerEpisode.generatedAt) ||
+    parseOptionalDate(providerEpisode.generated_at) ||
+    parseOptionalDate(providerEpisode.publishedAt) ||
+    parseOptionalDate(providerEpisode.published_at) ||
+    parseOptionalDate(providerEpisode.createdAt) ||
+    parseOptionalDate(providerEpisode.created_at)
+
   return {
+    audioMimeType: asString(providerEpisode.audioMimeType) || asString(providerEpisode.audio_mime_type) || 'audio/mpeg',
     description: asString(providerEpisode.description) || buildEpisodeDescription(post),
     durationSeconds: asNumber(providerEpisode.audioDuration ?? providerEpisode.audio_duration),
+    episodeGuid: buildPodcastEpisodeGuid(post.slug, providerEpisodeId),
     fileSize: asNumber(providerEpisode.fileSize ?? providerEpisode.file_size),
-    generatedAt: new Date().toISOString(),
+    generatedAt: providerDate || new Date().toISOString(),
     providerAudioUrl: asString(providerEpisode.audioUrl) || asString(providerEpisode.audio_url),
     providerEpisodeId,
     requestId: asString(providerEpisode.requestId) || asString(providerEpisode.request_id),
     slug: post.slug,
     sourceArticleUrl: post.sourceArticleUrl,
-    title: asString(providerEpisode.title) || `Capgo podcast: ${post.title}`,
+    title: asString(providerEpisode.title) || 'Capgo podcast: ' + post.title,
   }
 }
 
@@ -458,8 +481,10 @@ export async function publishCandidates(
     })
 
     publishedEpisodes.push({
+      audioMimeType: 'audio/mpeg',
       description,
       durationSeconds: asNumber(completed.audio_duration),
+      episodeGuid: buildPodcastEpisodeGuid(candidate.slug, episodeId),
       fileSize: asNumber(completed.file_size),
       generatedAt: new Date().toISOString(),
       providerAudioUrl: completed.audio_url,
@@ -467,7 +492,7 @@ export async function publishCandidates(
       requestId,
       slug: candidate.slug,
       sourceArticleUrl: candidate.sourceArticleUrl,
-      title: `Capgo podcast: ${candidate.title}`,
+      title: 'Capgo podcast: ' + candidate.title,
     })
   }
 
@@ -537,8 +562,8 @@ export async function runPodcastGeneration(options: PodcastGenerationOptions, en
   if (result.manifestChanged) writePodcastManifest(result.manifest)
   writeGithubOutputs(result)
 
-  console.log(`Published ${result.publishedCount} podcast episode(s); reconciled ${result.reconciledCount}; deferred ${result.deferredCount}.`)
-  console.log(`RSS feed: ${configuration.apiBaseUrl}/podcast/rss/${configuration.podcastShowId}`)
+  console.log('Published ' + result.publishedCount + ' podcast episode(s); reconciled ' + result.reconciledCount + '; deferred ' + result.deferredCount + '.')
+  console.log('Website RSS feed: ' + new URL('podcast.xml', configuration.siteUrl).toString())
   return result
 }
 

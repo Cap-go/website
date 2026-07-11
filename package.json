@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "14.0.1",
+    "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.3",
     "@astrojs/starlight": "0.41.1",
     "@astrojs/starlight-docsearch": "0.7.0",
