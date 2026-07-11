@@ -122,6 +122,7 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta name="keywords" content={keywords} />
 
 <link rel="canonical" href={canonicalString} />
+<link rel="alternate" type="application/rss+xml" title="Capgo Podcast" href={new URL('/podcast.xml', baseUrl).toString()} />
 <link rel="apple-touch-icon" href="/capgo.webp?v=2" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

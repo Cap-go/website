@@ -74,6 +74,17 @@ jobs:
         if: steps.import.outputs.files != ''
         run: xargs bunx prettier --write < .outrank-imported-files
 
+      - name: Generate podcasts for imported articles
+        if: steps.import.outputs.files != '' && vars.PODCAST_AUTOMATION_ENABLED == 'true'
+        continue-on-error: true
+        env:
+          AUTOCONTENT_API_KEY: ${{ secrets.AUTOCONTENT_API_KEY }}
+          AUTOCONTENT_PODCAST_SHOW_ID: ${{ secrets.AUTOCONTENT_PODCAST_SHOW_ID }}
+          AUTOCONTENT_PODCAST_VOICE_1: ${{ secrets.AUTOCONTENT_PODCAST_VOICE_1 }}
+          AUTOCONTENT_PODCAST_VOICE_2: ${{ secrets.AUTOCONTENT_PODCAST_VOICE_2 }}
+          PODCAST_SITE_URL: ${{ vars.PODCAST_SITE_URL || 'https://capgo.app' }}
+        run: bun run blogs:generate_podcast -- --changed-files .outrank-imported-files --limit 1
+
       - name: Verify website
         if: steps.import.outputs.files != ''
         run: bun run ci:verify:web
@@ -89,7 +100,7 @@ jobs:
         run: |
           rm -f .outrank-imported-files
 
-          if [[ -z "$(git status --porcelain apps/web/src/content/blog/en)" ]]; then
+          if [[ -z "$(git status --porcelain -- apps/web/src/content/blog/en apps/web/src/data/podcastEpisodes.json)" ]]; then
             echo "No blog changes to publish."
             exit 0
           fi
@@ -97,7 +108,7 @@ jobs:
           default_branch="${{ github.event.repository.default_branch }}"
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
-          git add apps/web/src/content/blog/en
+          git add apps/web/src/content/blog/en apps/web/src/data/podcastEpisodes.json
           git commit -m "chore: import Outrank articles"
           git pull --rebase origin "$default_branch"
           git push origin "HEAD:$default_branch"

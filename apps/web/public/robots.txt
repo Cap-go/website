@@ -3,3 +3,4 @@ Allow: /
 Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 Sitemap: https://capgo.app/sitemap-index.xml
+Sitemap: https://capgo.app/podcast.xml
