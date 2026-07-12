@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-12T09:17:09.719Z
-updated_at: 2026-07-12T09:17:12.892Z
+updated_at: 2026-07-12T09:19:19.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/f32fbd98-2d93-4fd9-84e8-95140caf548a/react-native-alert-api-guide.jpg'
 head_image_alt: 'Master React Native Alert: API Guide & Best Practices'
 keywords: 'react native alert, react native, mobile development, dialogs, cross-platform'
