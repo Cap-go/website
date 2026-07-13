@@ -1,6 +1,7 @@
 ---
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -56,7 +57,7 @@ const screenSignals = [
               Observe puts native app health, launch and WebView timing, version distribution, and release markers on the same operational surface as your Capgo deployments.
             </p>
             <div class="observe-actions">
-              <a class="btn btn-lg btn-primary" href={registerUrl}>Open Capgo</a>
+              <a class="btn btn-lg btn-primary" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
               <a class="observe-link" href="#signals">See what Observe tracks <span aria-hidden="true">↓</span></a>
             </div>
           </div>
@@ -69,7 +70,6 @@ const screenSignals = [
         </div>
 
         <figure class="observe-dashboard">
-          <div class="observe-dashboard-topline"><span>Observe dashboard</span><span>Local demo telemetry</span></div>
           <picture>
             <source media="(max-width: 720px)" srcset="/landing-demos/observe-dashboard-mobile.webp" />
             <img
@@ -81,7 +81,6 @@ const screenSignals = [
               decoding="async"
             />
           </picture>
-          <figcaption>This is the real Capgo dashboard, run locally with injected demo telemetry. No customer data is shown.</figcaption>
         </figure>
       </div>
     </section>
@@ -152,12 +151,26 @@ const screenSignals = [
             <p>Use the health, timing, issue, and version views alongside release markers to decide what deserves investigation.</p>
           </article>
           <article class="observe-logs">
-            <p class="observe-label">Logs</p>
+            <p class="observe-label">Logs Insights</p>
             <h3>Inspect a device’s update journey.</h3>
             <p>Filter update events by time and action, then open a device history to inspect the checks, downloads, installs, policy blocks, or rollbacks behind the signal.</p>
             <a class="observe-link" href={logsDocsUrl}>Read the Logs guide <span aria-hidden="true">→</span></a>
           </article>
         </div>
+
+        <figure class="observe-dashboard observe-insights-dashboard">
+          <picture>
+            <source media="(max-width: 720px)" srcset="/landing-demos/logs-insights-dashboard-mobile.webp" />
+            <img
+              src="/landing-demos/logs-insights-dashboard.webp"
+              alt="Capgo Logs Insights dashboard showing error categories, daily trends, affected versions, and affected devices"
+              width="1440"
+              height="1200"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        </figure>
       </div>
     </section>
 
@@ -166,7 +179,7 @@ const screenSignals = [
         <p class="eyebrow eyebrow--blue">Keep the release loop closed</p>
         <h2><span class="name">Observe the rollout.</span><br />Move with confidence.</h2>
         <p class="tagline">Keep Capgo deployments in view beside native app health and device evidence.</p>
-        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>Open Capgo</a>
+        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">+</span> Native app health</span>
           <span><span class="check">+</span> Release context</span>
@@ -343,22 +356,6 @@ const screenSignals = [
       0 0 0 8px rgba(147, 197, 253, 0.04);
   }
 
-  .observe .observe-dashboard-topline {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 11px 16px;
-    border-bottom: 1px solid rgba(191, 219, 254, 0.18);
-    color: rgba(219, 234, 254, 0.78);
-    font-family: var(--lu-font-mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-  }
-
-  .observe .observe-dashboard-topline span:last-child {
-    color: #86efac;
-  }
-
   .observe .observe-dashboard picture {
     display: block;
   }
@@ -367,13 +364,6 @@ const screenSignals = [
     display: block;
     width: 100%;
     height: auto;
-  }
-
-  .observe .observe-dashboard figcaption {
-    padding: 13px 16px;
-    color: rgba(255, 255, 255, 0.54);
-    font-size: 12px;
-    line-height: 1.45;
   }
 
   .observe .observe-intro {
@@ -449,6 +439,10 @@ const screenSignals = [
     margin-top: 20px;
   }
 
+  .observe .observe-insights-dashboard {
+    margin-top: 32px;
+  }
+
   @media (min-width: 780px) {
     .observe .observe-proof-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -498,6 +492,14 @@ const screenSignals = [
     .observe .observe-dashboard {
       margin-top: 40px;
       border-radius: 12px;
+    }
+
+    .observe .observe-insights-dashboard {
+      margin-top: 28px;
+    }
+
+    .observe .observe-insights-dashboard img {
+      aspect-ratio: 860 / 1100;
     }
 
     .observe .observe-proof {
