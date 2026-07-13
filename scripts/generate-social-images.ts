@@ -1,6 +1,6 @@
 /**
  * Generate OG/social preview PNGs for capgo.app and product pages under apps/web/public/social/.
- * Covers: / (capgo_social.png), live-update, native-build, app_mobile, plugins, ionic-plugins, security-scanner, ci_cd, integrations.
+ * Covers: / (capgo_social.png), live-update, observe, native-build, app_mobile, plugins, ionic-plugins, security-scanner, ci_cd, integrations.
  * Usage: bun run generate:social-images
  */
 import { spawnSync } from 'node:child_process'
@@ -60,6 +60,23 @@ const images: SocialImage[] = [
     ],
     phoneTitle: 'Hotfix channel',
     phoneRows: ['Staged rollout', 'Crash guard', 'Promote when healthy'],
+  },
+  {
+    slug: 'observe',
+    output: 'apps/web/public/social/capgo-observe.png',
+    eyebrow: 'Capgo Observe',
+    title: ['Find the version', 'that needs attention'],
+    subtitle: 'Compare health, timing, and release markers, then inspect Logs Insights.',
+    accent: '#2563eb',
+    accentSoft: '#dbeafe',
+    chips: ['Version health', 'Release markers', 'Logs Insights', 'Raw logs'],
+    codeLines: ['Reported version health', 'Launch and WebView timing', 'Release markers for timing', 'Open Logs Insights evidence'],
+    cards: [
+      { label: 'Version signals', value: 'Reported' },
+      { label: 'Next step', value: 'Investigate' },
+    ],
+    phoneTitle: 'Observe health',
+    phoneRows: ['Version health', 'Release markers', 'Logs Insights'],
   },
   {
     slug: 'native-build',
