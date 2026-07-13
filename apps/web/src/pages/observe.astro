@@ -165,7 +165,7 @@ const screenSignals = [
               alt="Capgo Logs Insights dashboard showing error categories, daily trends, affected versions, and affected devices"
               width="1440"
               height="1200"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
           </picture>
@@ -495,6 +495,10 @@ const screenSignals = [
 
     .observe .observe-insights-dashboard {
       margin-top: 28px;
+    }
+
+    .observe .observe-insights-dashboard img {
+      aspect-ratio: 860 / 1100;
     }
 
     .observe .observe-proof {
