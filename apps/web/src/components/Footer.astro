@@ -49,6 +49,7 @@ const navigation: Record<string, NavigationItem[]> = {
   products: [
     { name: m.live_update({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'live-update') },
     { name: 'Notifications', href: getRelativeLocaleUrl(Astro.locals.locale, 'notifications') },
+    { name: 'Observe', href: getRelativeLocaleUrl(Astro.locals.locale, 'observe') },
     { name: m.native_build({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'native-build') },
     { name: m.app_mobile({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile') },
     { name: m.plugins({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'plugins') },

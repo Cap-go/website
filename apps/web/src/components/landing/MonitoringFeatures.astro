@@ -1,7 +1,10 @@
 ---
 import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
+const observeUrl = getRelativeLocaleUrl(locale, 'observe')
+const logsUrl = getRelativeLocaleUrl(locale, 'docs/webapp/logs')
 ---
 
 <div class="bg-[#1a1a1a] py-24 sm:py-32">
@@ -158,6 +161,21 @@ const locale = Astro.locals.locale
           <div class="w-full rounded-t-sm bg-red-500/80" style="height: 5%"></div>
         </div>
       </div>
+    </div>
+
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a
+        href={observeUrl}
+        class="inline-flex min-h-11 items-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-[background-color,box-shadow,transform] focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:outline-none active:scale-95 [@media(hover:hover)]:hover:bg-blue-700"
+      >
+        Explore Observe <span class="ml-2" aria-hidden="true">→</span>
+      </a>
+      <a
+        href={logsUrl}
+        class="inline-flex min-h-11 items-center rounded-lg border border-white/10 px-5 py-3 text-sm font-semibold text-blue-100 transition-[border-color,color,transform] focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:outline-none active:scale-95 [@media(hover:hover)]:hover:border-blue-400/60 [@media(hover:hover)]:hover:text-white"
+      >
+        Explore Logs <span class="ml-2" aria-hidden="true">→</span>
+      </a>
     </div>
   </div>
 </div>
