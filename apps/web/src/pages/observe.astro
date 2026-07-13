@@ -7,9 +7,9 @@ import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
-const title = brand + ' Observe | Release health for Capacitor apps'
+const title = brand + ' Observe | Version health after a rollout'
 const description =
-  'See native app health, launch and WebView timing, version-by-version signals, and release markers in the Capgo console. Use Logs to investigate device update history.'
+  'Compare reported native app health, launch and WebView timing, and version-level signals with release markers for version, channel, and deployment date. Use Logs Insights to investigate errors, versions, and devices.'
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const logsDocsUrl = getRelativeLocaleUrl(locale, 'docs/webapp/logs')
 const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
@@ -25,20 +25,20 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 const content = {
   title,
   description,
-  image: Astro.locals.runtimeConfig.public.baseUrl + '/social/capgo-live-update.png',
+  image: Astro.locals.runtimeConfig.public.baseUrl + '/social/capgo-observe.png',
   ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, { includeOrganization: true }),
 }
 
 const proofPoints = [
-  ['Native health by version', 'Read the visible version breakdown alongside issue-free device counts, launches, and runtime timing.'],
-  ['Release context built in', 'Keep rollout markers near the signals so your team can read app health and timing alongside recent deployment decisions.'],
-  ['A direct path to Logs', 'Move from a dashboard signal to Logs, update actions, and device diagnostic history.'],
+  ['Read release health', 'See issue-free devices, native issues, launch P90, and WebView P90 for the reported versions in one view.'],
+  ['Keep rollout context', 'Use release markers for version, channel, and deployment date as you read the signals.'],
+  ['Follow the evidence in Logs', 'Use grouped failures, affected versions, devices, and action logs to investigate a trend.'],
 ]
 
 const screenSignals = [
-  ['01', 'Version breakdown', 'Compare device health and timing across the visible native app versions in the selected period.'],
-  ['02', 'Release markers', 'Read performance and issue signals alongside the bundle and channel events shown as context.'],
-  ['03', 'Action breakdown', 'Separate launches, WebView loads, native issues, and update activity before opening a device trail.'],
+  ['01', 'All versions summary', 'Read issue-free devices, native issues, launch P90, and WebView P90 before narrowing your investigation.'],
+  ['02', 'Version breakdown', 'Compare reported app versions when health or timing differs from the overall picture.'],
+  ['03', 'Action breakdown', 'Separate launches, WebView loads, native issues, and update activity while you investigate a trend in Logs Insights.'],
 ]
 ---
 
@@ -49,23 +49,20 @@ const screenSignals = [
         <div class="observe-hero-grid">
           <div>
             <p class="observe-kicker"><span aria-hidden="true"></span> Capgo Observe, beta</p>
-            <h1>Every rollout leaves a signal.</h1>
+            <h1>Find the version that needs attention.</h1>
             <p class="observe-statement">
-              See native app health and timing alongside recent rollout markers, so your team can decide what deserves a closer look before support tickets tell you.
-            </p>
-            <p class="lead observe-lead">
-              Observe puts native app health, launch and WebView timing, version distribution, and release markers on the same operational surface as your Capgo deployments.
+              Compare native health, launch and WebView timing, and version-level signals with release markers for version, channel, and deployment date.
             </p>
             <div class="observe-actions">
               <a class="btn btn-lg btn-primary" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
-              <a class="observe-link" href="#signals">See what Observe tracks <span aria-hidden="true">↓</span></a>
+              <a class="observe-link" href="#signals">See the evidence flow <span aria-hidden="true">↓</span></a>
             </div>
           </div>
 
           <ol class="observe-rail" aria-label="Release health workflow">
-            <li><span>01</span><div><strong>Publish</strong><small>A bundle reaches a channel.</small></div></li>
-            <li><span>02</span><div><strong>Observe</strong><small>Health and timing across the period.</small></div></li>
-            <li><span>03</span><div><strong>Investigate</strong><small>Logs reveal the device-level path.</small></div></li>
+            <li><span>01</span><div><strong>Deploy</strong><small>A bundle is deployed to a channel.</small></div></li>
+            <li><span>02</span><div><strong>Observe</strong><small>Compare reported version health.</small></div></li>
+            <li><span>03</span><div><strong>Investigate</strong><small>Use Logs Insights to investigate a trend.</small></div></li>
           </ol>
         </div>
 
@@ -88,9 +85,9 @@ const screenSignals = [
     <section class="section observe-proof" id="signals">
       <div class="shell">
         <div class="observe-intro">
-          <p class="eyebrow eyebrow--blue">Release health, in context</p>
-          <h2 class="h2-section">Make rollout decisions with evidence, not a hunch.</h2>
-          <p class="lead">Observe is focused on the question that follows every deployment: what changed for the app your users are running?</p>
+          <p class="eyebrow eyebrow--blue">Your rollout context is already here</p>
+          <h2 class="h2-section">Know when a reported version needs attention.</h2>
+          <p class="lead">Compare native health and timing across the selected period and each reported app version.</p>
         </div>
 
         <div class="observe-proof-grid">
@@ -110,12 +107,9 @@ const screenSignals = [
     <section class="section observe-reading bg-grid grain" id="screen">
       <div class="shell observe-reading-grid">
         <div class="observe-intro observe-intro--left">
-          <p class="eyebrow eyebrow--blue">Read the signals</p>
-          <h2 class="h2-section">The dashboard puts release context beside app telemetry.</h2>
-          <p class="lead">
-            Start with the all-version summary, then narrow the selected period and read the visible version breakdown. Every layer stays grounded in native telemetry and the
-            release history your team already manages in Capgo.
-          </p>
+          <p class="eyebrow eyebrow--blue">Compare reported versions</p>
+          <h2 class="h2-section">Find the version that needs attention.</h2>
+          <p class="lead">Start with all-version health, then compare each reported native app version within the selected period.</p>
           <a class="observe-link" href={liveUpdateUrl}>Explore Live Updates <span aria-hidden="true">→</span></a>
         </div>
 
@@ -140,20 +134,22 @@ const screenSignals = [
     <section class="section observe-diagnose" id="logs">
       <div class="shell">
         <div class="observe-diagnose-head">
-          <p class="eyebrow eyebrow--blue">Observe plus Logs</p>
-          <h2 class="h2-section">A chart tells you where to look. Logs tell you what happened.</h2>
+          <p class="eyebrow eyebrow--blue">From signal to evidence</p>
+          <h2 class="h2-section">Find the errors, versions, and devices behind a trend.</h2>
         </div>
 
         <div class="observe-diagnose-grid">
           <article>
             <p class="observe-label">Observe</p>
-            <h3>Read which visible versions differ in health and timing.</h3>
-            <p>Use the health, timing, issue, and version views alongside release markers to decide what deserves investigation.</p>
+            <h3>Compare the reported version that needs attention.</h3>
+            <p>Compare a reported version's health and timing to decide what to investigate.</p>
           </article>
           <article class="observe-logs">
             <p class="observe-label">Logs Insights</p>
-            <h3>Inspect a device’s update journey.</h3>
-            <p>Filter update events by time and action, then open a device history to inspect the checks, downloads, installs, policy blocks, or rollbacks behind the signal.</p>
+            <h3>Identify the errors, versions, and devices behind the trend.</h3>
+            <p>
+              Use Logs Insights to group errors by category, follow the daily trend, and identify affected versions and devices. Then open filtered raw action logs for the details.
+            </p>
             <a class="observe-link" href={logsDocsUrl}>Read the Logs guide <span aria-hidden="true">→</span></a>
           </article>
         </div>
@@ -176,22 +172,23 @@ const screenSignals = [
 
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">
-        <p class="eyebrow eyebrow--blue">Keep the release loop closed</p>
-        <h2><span class="name">Observe the rollout.</span><br />Move with confidence.</h2>
-        <p class="tagline">Keep Capgo deployments in view beside native app health and device evidence.</p>
+        <p class="eyebrow eyebrow--blue">Observe every rollout</p>
+        <h2><span class="name">Start observing</span><br />your next rollout.</h2>
+        <p class="tagline">Keep deployment history, release health, and Logs Insights in one place.</p>
         <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
         <div class="hero-meta hero-meta--cta">
-          <span><span class="check">+</span> Native app health</span>
-          <span><span class="check">+</span> Release context</span>
-          <span><span class="check">+</span> Device diagnostics</span>
+          <span><span class="check">+</span> Deployment history</span>
+          <span><span class="check">+</span> Native health</span>
+          <span><span class="check">+</span> Error and device evidence</span>
         </div>
       </div>
     </section>
 
     <div class="shell seo-bridge">
-      <h2 class="h2-section">Keep going from Observe</h2>
+      <h2 class="h2-section">Go from rollout to evidence</h2>
       <p>
-        Pair <a href={liveUpdateUrl}>Capgo Live Updates</a> with <a href={logsDocsUrl}>Logs</a> to understand the update journey from a rollout signal down to a device's history.
+        Pair <a href={liveUpdateUrl}>Capgo Live Updates</a> with <a href={logsDocsUrl}>Logs Insights</a> to move from reported version health to errors, devices, and filtered raw action
+        logs.
       </p>
     </div>
   </div>
