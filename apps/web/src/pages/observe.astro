@@ -1,6 +1,7 @@
 ---
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -56,7 +57,7 @@ const screenSignals = [
               Observe puts native app health, launch and WebView timing, version distribution, and release markers on the same operational surface as your Capgo deployments.
             </p>
             <div class="observe-actions">
-              <a class="btn btn-lg btn-primary" href={registerUrl}>Open Capgo</a>
+              <a class="btn btn-lg btn-primary" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
               <a class="observe-link" href="#signals">See what Observe tracks <span aria-hidden="true">↓</span></a>
             </div>
           </div>
@@ -178,7 +179,7 @@ const screenSignals = [
         <p class="eyebrow eyebrow--blue">Keep the release loop closed</p>
         <h2><span class="name">Observe the rollout.</span><br />Move with confidence.</h2>
         <p class="tagline">Keep Capgo deployments in view beside native app health and device evidence.</p>
-        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>Open Capgo</a>
+        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">+</span> Native app health</span>
           <span><span class="check">+</span> Release context</span>
