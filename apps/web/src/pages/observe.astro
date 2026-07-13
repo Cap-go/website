@@ -1,0 +1,507 @@
+---
+import '@/styles/lu-product.css'
+import Layout from '@/layouts/Layout.astro'
+import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const title = brand + ' Observe | Release health for Capacitor apps'
+const description =
+  'See native app health, launch and WebView timing, version-by-version signals, and release markers in the Capgo console. Use Logs to investigate device update history.'
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
+const logsDocsUrl = getRelativeLocaleUrl(locale, 'docs/webapp/logs')
+const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const content = {
+  title,
+  description,
+  image: Astro.locals.runtimeConfig.public.baseUrl + '/social/capgo-live-update.png',
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, { includeOrganization: true }),
+}
+
+const proofPoints = [
+  ['Native health by version', 'Read the visible version breakdown alongside issue-free device counts, launches, and runtime timing.'],
+  ['Release context built in', 'Keep rollout markers near the signals so your team can read app health and timing alongside recent deployment decisions.'],
+  ['A direct path to Logs', 'Move from a dashboard signal to Logs, update actions, and device diagnostic history.'],
+]
+
+const screenSignals = [
+  ['01', 'Version breakdown', 'Compare device health and timing across the visible native app versions in the selected period.'],
+  ['02', 'Release markers', 'Read performance and issue signals alongside the bundle and channel events shown as context.'],
+  ['03', 'Action breakdown', 'Separate launches, WebView loads, native issues, and update activity before opening a device trail.'],
+]
+---
+
+<Layout content={content}>
+  <div class="lu observe bg-ad">
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="observe-hero-grid">
+          <div>
+            <p class="observe-kicker"><span aria-hidden="true"></span> Capgo Observe, beta</p>
+            <h1>Every rollout leaves a signal.</h1>
+            <p class="observe-statement">
+              See native app health and timing alongside recent rollout markers, so your team can decide what deserves a closer look before support tickets tell you.
+            </p>
+            <p class="lead observe-lead">
+              Observe puts native app health, launch and WebView timing, version distribution, and release markers on the same operational surface as your Capgo deployments.
+            </p>
+            <div class="observe-actions">
+              <a class="btn btn-lg btn-primary" href={registerUrl}>Open Capgo</a>
+              <a class="observe-link" href="#signals">See what Observe tracks <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+
+          <ol class="observe-rail" aria-label="Release health workflow">
+            <li><span>01</span><div><strong>Publish</strong><small>A bundle reaches a channel.</small></div></li>
+            <li><span>02</span><div><strong>Observe</strong><small>Health and timing across the period.</small></div></li>
+            <li><span>03</span><div><strong>Investigate</strong><small>Logs reveal the device-level path.</small></div></li>
+          </ol>
+        </div>
+
+        <figure class="observe-dashboard">
+          <div class="observe-dashboard-topline"><span>Observe dashboard</span><span>Local demo telemetry</span></div>
+          <picture>
+            <source media="(max-width: 720px)" srcset="/landing-demos/observe-dashboard-mobile.webp" />
+            <img
+              src="/landing-demos/observe-dashboard.webp"
+              alt="Capgo Observe dashboard showing native health, launch timing, WebView timing, version breakdown, and release markers"
+              width="1440"
+              height="1100"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
+          <figcaption>This is the real Capgo dashboard, run locally with injected demo telemetry. No customer data is shown.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section observe-proof" id="signals">
+      <div class="shell">
+        <div class="observe-intro">
+          <p class="eyebrow eyebrow--blue">Release health, in context</p>
+          <h2 class="h2-section">Make rollout decisions with evidence, not a hunch.</h2>
+          <p class="lead">Observe is focused on the question that follows every deployment: what changed for the app your users are running?</p>
+        </div>
+
+        <div class="observe-proof-grid">
+          {
+            proofPoints.map(([title, text], index) => (
+              <article class="observe-proof-item">
+                <span>0{index + 1}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section observe-reading bg-grid grain" id="screen">
+      <div class="shell observe-reading-grid">
+        <div class="observe-intro observe-intro--left">
+          <p class="eyebrow eyebrow--blue">Read the signals</p>
+          <h2 class="h2-section">The dashboard puts release context beside app telemetry.</h2>
+          <p class="lead">
+            Start with the all-version summary, then narrow the selected period and read the visible version breakdown. Every layer stays grounded in native telemetry and the
+            release history your team already manages in Capgo.
+          </p>
+          <a class="observe-link" href={liveUpdateUrl}>Explore Live Updates <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="observe-signal-list">
+          {
+            screenSignals.map(([index, title, text]) => (
+              <article class="observe-signal-item">
+                <span>{index}</span>
+                <div>
+                  <>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section observe-diagnose" id="logs">
+      <div class="shell">
+        <div class="observe-diagnose-head">
+          <p class="eyebrow eyebrow--blue">Observe plus Logs</p>
+          <h2 class="h2-section">A chart tells you where to look. Logs tell you what happened.</h2>
+        </div>
+
+        <div class="observe-diagnose-grid">
+          <article>
+            <p class="observe-label">Observe</p>
+            <h3>Read which visible versions differ in health and timing.</h3>
+            <p>Use the health, timing, issue, and version views alongside release markers to decide what deserves investigation.</p>
+          </article>
+          <article class="observe-logs">
+            <p class="observe-label">Logs</p>
+            <h3>Inspect a device’s update journey.</h3>
+            <p>Filter update events by time and action, then open a device history to inspect the checks, downloads, installs, policy blocks, or rollbacks behind the signal.</p>
+            <a class="observe-link" href={logsDocsUrl}>Read the Logs guide <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final bg-grid grain" id="cta">
+      <div class="shell">
+        <p class="eyebrow eyebrow--blue">Keep the release loop closed</p>
+        <h2><span class="name">Observe the rollout.</span><br />Move with confidence.</h2>
+        <p class="tagline">Keep Capgo deployments in view beside native app health and device evidence.</p>
+        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>Open Capgo</a>
+        <div class="hero-meta hero-meta--cta">
+          <span><span class="check">+</span> Native app health</span>
+          <span><span class="check">+</span> Release context</span>
+          <span><span class="check">+</span> Device diagnostics</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell seo-bridge">
+      <h2 class="h2-section">Keep going from Observe</h2>
+      <p>
+        Pair <a href={liveUpdateUrl}>Capgo Live Updates</a> with <a href={logsDocsUrl}>Logs</a> to understand the update journey from a rollout signal down to a device's history.
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .observe {
+    --observe-line: rgba(255, 255, 255, 0.12);
+    --observe-surface: rgba(255, 255, 255, 0.035);
+  }
+
+  .observe .hero {
+    padding: 84px 0 74px;
+    text-align: left;
+  }
+
+  .observe .observe-hero-grid,
+  .observe .observe-reading-grid {
+    display: grid;
+    gap: 52px;
+    align-items: end;
+  }
+
+  .observe .observe-hero-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.6fr);
+  }
+
+  .observe .observe-kicker,
+  .observe .observe-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    color: var(--relief-blue);
+    font-family: var(--lu-font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .observe .observe-kicker span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #4ade80;
+    box-shadow: 0 0 14px rgba(74, 222, 128, 0.6);
+  }
+
+  .observe h1 {
+    max-width: 760px;
+    margin: 20px 0 0;
+    color: #fff;
+    font-size: clamp(3.2rem, 7.7vw, 6.9rem);
+    font-weight: 900;
+    letter-spacing: -0.052em;
+    line-height: 0.9;
+    text-wrap: balance;
+  }
+
+  .observe .observe-statement {
+    max-width: 590px;
+    margin: 27px 0 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1.3rem, 2.3vw, 1.9rem);
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.16;
+    text-wrap: balance;
+  }
+
+  .observe .observe-lead {
+    max-width: 630px;
+    margin: 20px 0 0;
+  }
+
+  .observe .observe-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 22px;
+    margin-top: 34px;
+  }
+
+  .observe .btn {
+    transition-property: background-color, border-color, box-shadow, color, transform;
+    transition-duration: 180ms;
+  }
+
+  .observe .observe-link {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    color: rgba(191, 219, 254, 0.88);
+    font-size: 14px;
+    font-weight: 700;
+    transition-property: color, transform;
+    transition-duration: 180ms;
+  }
+
+  @media (hover: hover) {
+    .observe .observe-link:hover {
+      color: #fff;
+      transform: translateX(3px);
+    }
+  }
+
+  .observe .observe-rail,
+  .observe .observe-signal-list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--observe-line);
+  }
+
+  .observe .observe-rail li,
+  .observe .observe-signal-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--observe-line);
+  }
+
+  .observe .observe-rail > li > span,
+  .observe .observe-signal-item > span,
+  .observe .observe-proof-item > span {
+    color: var(--relief-blue);
+    font-family: var(--lu-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .observe .observe-rail strong,
+  .observe .observe-rail small {
+    display: block;
+  }
+
+  .observe .observe-rail strong {
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .observe .observe-rail small {
+    margin-top: 3px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .observe .observe-dashboard {
+    margin: 58px 0 0;
+    overflow: hidden;
+    border: 1px solid rgba(191, 219, 254, 0.32);
+    border-radius: 18px;
+    background: #0c1627;
+    box-shadow:
+      0 28px 80px rgba(0, 0, 0, 0.36),
+      0 0 0 8px rgba(147, 197, 253, 0.04);
+  }
+
+  .observe .observe-dashboard-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(191, 219, 254, 0.18);
+    color: rgba(219, 234, 254, 0.78);
+    font-family: var(--lu-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .observe .observe-dashboard-topline span:last-child {
+    color: #86efac;
+  }
+
+  .observe .observe-dashboard picture {
+    display: block;
+  }
+
+  .observe .observe-dashboard img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .observe .observe-dashboard figcaption {
+    padding: 13px 16px;
+    color: rgba(255, 255, 255, 0.54);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .observe .observe-intro {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .observe .observe-intro--left {
+    margin: 0;
+    text-align: left;
+  }
+
+  .observe .observe-proof {
+    padding-top: 108px;
+  }
+
+  .observe .observe-proof-grid,
+  .observe .observe-diagnose-grid {
+    display: grid;
+    margin-top: 50px;
+    border-top: 1px solid var(--observe-line);
+  }
+
+  .observe .observe-proof-item,
+  .observe .observe-diagnose-grid article {
+    padding: 26px;
+    border-bottom: 1px solid var(--observe-line);
+  }
+
+  .observe .observe-proof-item h3,
+  .observe .observe-signal-item h3,
+  .observe .observe-diagnose-grid h3 {
+    margin: 12px 0 0;
+    color: #fff;
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: -0.018em;
+    line-height: 1.15;
+  }
+
+  .observe .observe-proof-item p,
+  .observe .observe-signal-item p,
+  .observe .observe-diagnose-grid p:not(.observe-label) {
+    margin: 10px 0 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .observe .observe-reading {
+    background-color: rgba(13, 21, 37, 0.58);
+  }
+
+  .observe .observe-reading-grid {
+    align-items: start;
+  }
+
+  .observe .observe-signal-item h3 {
+    margin-top: 0;
+  }
+
+  .observe .observe-diagnose-head {
+    max-width: 780px;
+  }
+
+  .observe .observe-logs {
+    background: var(--observe-surface);
+  }
+
+  .observe .observe-logs .observe-link {
+    margin-top: 20px;
+  }
+
+  @media (min-width: 780px) {
+    .observe .observe-proof-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .observe .observe-proof-item {
+      border-right: 1px solid var(--observe-line);
+      border-bottom: 0;
+    }
+
+    .observe .observe-proof-item:last-child {
+      border-right: 0;
+    }
+
+    .observe .observe-reading-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+
+    .observe .observe-diagnose-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .observe .observe-diagnose-grid article {
+      border-right: 1px solid var(--observe-line);
+      border-bottom: 0;
+    }
+
+    .observe .observe-diagnose-grid article:last-child {
+      border-right: 0;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .observe .hero {
+      padding: 56px 0 54px;
+    }
+
+    .observe .observe-hero-grid {
+      gap: 38px;
+      grid-template-columns: 1fr;
+    }
+
+    .observe h1 {
+      font-size: clamp(3.2rem, 18vw, 5rem);
+    }
+
+    .observe .observe-dashboard {
+      margin-top: 40px;
+      border-radius: 12px;
+    }
+
+    .observe .observe-proof {
+      padding-top: 70px;
+    }
+  }
+</style>
