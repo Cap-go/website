@@ -49,20 +49,18 @@ const screenSignals = [
         <div class="observe-hero-grid">
           <div>
             <p class="observe-kicker"><span aria-hidden="true"></span> Capgo Observe, beta</p>
-            <h1>Find the version that needs attention.</h1>
-            <p class="observe-statement">
-              Compare native health, launch and WebView timing, and version-level signals with release markers for version, channel, and deployment date.
-            </p>
+            <h1>Know when a release needs attention.</h1>
+            <p class="observe-statement">See what changed after your rollout, compare health by reported version, and move from a bad signal to the devices and logs behind it.</p>
             <div class="observe-actions">
               <a class="btn btn-lg btn-primary" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
-              <a class="observe-link" href="#signals">See the evidence flow <span aria-hidden="true">↓</span></a>
+              <a class="observe-link" href="#signals">See how Observe works <span aria-hidden="true">↓</span></a>
             </div>
           </div>
 
           <ol class="observe-rail" aria-label="Release health workflow">
-            <li><span>01</span><div><strong>Deploy</strong><small>A bundle is deployed to a channel.</small></div></li>
-            <li><span>02</span><div><strong>Observe</strong><small>Compare reported version health.</small></div></li>
-            <li><span>03</span><div><strong>Investigate</strong><small>Use Logs Insights to investigate a trend.</small></div></li>
+            <li><span>01</span><div><strong>Deploy</strong><small>Mark the version, channel, and deployment date.</small></div></li>
+            <li><span>02</span><div><strong>Observe</strong><small>Compare reported health before support tickets arrive.</small></div></li>
+            <li><span>03</span><div><strong>Investigate</strong><small>Follow the trend into errors, versions, and devices.</small></div></li>
           </ol>
         </div>
 
@@ -85,9 +83,9 @@ const screenSignals = [
     <section class="section observe-proof" id="signals">
       <div class="shell">
         <div class="observe-intro">
-          <p class="eyebrow eyebrow--blue">Your rollout context is already here</p>
-          <h2 class="h2-section">Know when a reported version needs attention.</h2>
-          <p class="lead">Compare native health and timing across the selected period and each reported app version.</p>
+          <p class="eyebrow eyebrow--blue">Stop treating production as a black box</p>
+          <h2 class="h2-section">Your rollout is only done when you know what happened next.</h2>
+          <p class="lead">Observe gives every release a health view, then gives you the evidence to decide what deserves action.</p>
         </div>
 
         <div class="observe-proof-grid">
@@ -107,9 +105,9 @@ const screenSignals = [
     <section class="section observe-reading bg-grid grain" id="screen">
       <div class="shell observe-reading-grid">
         <div class="observe-intro observe-intro--left">
-          <p class="eyebrow eyebrow--blue">Compare reported versions</p>
-          <h2 class="h2-section">Find the version that needs attention.</h2>
-          <p class="lead">Start with all-version health, then compare each reported native app version within the selected period.</p>
+          <p class="eyebrow eyebrow--blue">See the release, not just the metric</p>
+          <h2 class="h2-section">Start broad. Narrow fast. Know where to look next.</h2>
+          <p class="lead">Read all-version health, compare the versions that diverge, and use the release marker to connect the change to the impact.</p>
           <a class="observe-link" href={liveUpdateUrl}>Explore Live Updates <span aria-hidden="true">→</span></a>
         </div>
 
@@ -135,14 +133,14 @@ const screenSignals = [
       <div class="shell">
         <div class="observe-diagnose-head">
           <p class="eyebrow eyebrow--blue">From signal to evidence</p>
-          <h2 class="h2-section">Find the errors, versions, and devices behind a trend.</h2>
+          <h2 class="h2-section">Do not hand your team a chart. Hand them the trail.</h2>
         </div>
 
         <div class="observe-diagnose-grid">
           <article>
             <p class="observe-label">Observe</p>
-            <h3>Compare the reported version that needs attention.</h3>
-            <p>Compare a reported version's health and timing to decide what to investigate.</p>
+            <h3>See which reported version changed the release picture.</h3>
+            <p>Compare health and timing with the context of what you deployed, where, and when.</p>
           </article>
           <article class="observe-logs">
             <p class="observe-label">Logs Insights</p>
@@ -173,8 +171,8 @@ const screenSignals = [
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">
         <p class="eyebrow eyebrow--blue">Observe every rollout</p>
-        <h2><span class="name">Start observing</span><br />your next rollout.</h2>
-        <p class="tagline">Keep deployment history, release health, and Logs Insights in one place.</p>
+        <h2><span class="name">Ship with proof,</span><br />not just hope.</h2>
+        <p class="tagline">Put deployment history, release health, and Logs Insights in one release workflow.</p>
         <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">+</span> Deployment history</span>
@@ -185,7 +183,7 @@ const screenSignals = [
     </section>
 
     <div class="shell seo-bridge">
-      <h2 class="h2-section">Go from rollout to evidence</h2>
+      <h2 class="h2-section">One workflow from rollout to evidence</h2>
       <p>
         Pair <a href={liveUpdateUrl}>Capgo Live Updates</a> with <a href={logsDocsUrl}>Logs Insights</a> to move from reported version health to errors, devices, and filtered raw action
         logs.
