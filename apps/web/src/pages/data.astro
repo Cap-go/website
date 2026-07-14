@@ -1,0 +1,190 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+
+type Metrics = {
+  period_days: number
+  updated_at: string
+  daily: Array<{ date: string, requests: number, failures: number }>
+  failures: Array<{ reason: string, count: number }>
+  platforms: { ios: number, android: number, electron: number }
+  updater_versions: Array<{ date: string, version: string, devices: number }>
+}
+
+const config = Astro.locals.runtimeConfig
+const title = 'Capgo delivery data | Live Update reliability'
+const description = 'Anonymous, aggregate delivery data for Capgo Live Updates: update checks, reported failures, platform mix, and updater version adoption.'
+const content = {
+  title,
+  description,
+  image: `${config.public.baseUrl}/social/capgo-live-update.png`,
+  ldJSON: createLdJsonGraph(config.public, createWebPageLdJson(config.public, { name: title, description, url: Astro.url.href }), { includeOrganization: true }),
+}
+
+let metrics: Metrics = { period_days: 30, updated_at: '', daily: [], failures: [], platforms: { ios: 0, android: 0, electron: 0 }, updater_versions: [] }
+try {
+  const response = await fetch(`${config.public.baseApiUrl}/private/website_stats/live_updates`)
+  if (response.ok) metrics = await response.json() as Metrics
+}
+catch {
+  // The page remains useful during an API deploy or a short-lived data outage.
+}
+
+const number = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 })
+const fullNumber = new Intl.NumberFormat('en-US')
+const totalRequests = metrics.daily.reduce((sum, item) => sum + item.requests, 0)
+const totalFailures = metrics.daily.reduce((sum, item) => sum + item.failures, 0)
+const failureRate = totalRequests ? (totalFailures / totalRequests) * 100 : 0
+const maxDailyRequests = Math.max(1, ...metrics.daily.map(item => item.requests))
+const maxVersionDevices = Math.max(1, ...metrics.updater_versions.map(item => item.devices))
+const totalPlatforms = Object.values(metrics.platforms).reduce((sum, value) => sum + value, 0)
+const platformRows = [
+  ['iOS', metrics.platforms.ios],
+  ['Android', metrics.platforms.android],
+  ['Electron', metrics.platforms.electron],
+] as const
+const readableReason = (reason: string) => reason.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, letter => letter.toUpperCase())
+const topFailureCount = metrics.failures[0]?.count ?? 0
+const leadingVersions = new Map<string, { version: string, devices: number }>()
+for (const item of metrics.updater_versions) {
+  const current = leadingVersions.get(item.date)
+  if (!current || item.devices > current.devices) leadingVersions.set(item.date, { version: item.version, devices: item.devices })
+}
+const versionTrend = [...leadingVersions.entries()].map(([date, value]) => ({ date, ...value })).sort((a, b) => a.date.localeCompare(b.date))
+const updatedLabel = metrics.updated_at ? new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(new Date(metrics.updated_at)) : 'Awaiting data'
+---
+
+<Layout content={content}>
+  <div class="data-page">
+    <section class="data-hero">
+      <div class="data-shell">
+        <p class="data-eyebrow"><span aria-hidden="true"></span> Public aggregate data</p>
+        <h1>Live Update delivery data.</h1>
+        <p class="data-summary">A 30-day view of anonymous update checks, reported failures, active platforms, and updater adoption across Capgo.</p>
+        <p class="data-updated">Updated {updatedLabel} UTC · No app, device, channel, or raw error data is shown.</p>
+      </div>
+    </section>
+
+    <section class="data-section" aria-labelledby="delivery-window">
+      <div class="data-shell">
+        <div class="data-heading">
+          <div>
+            <p class="data-eyebrow">Delivery window</p>
+            <h2 id="delivery-window">Update checks and reported failures</h2>
+          </div>
+          <p>Each bar represents one UTC day. Failures are reports sent by updater clients, not an estimate of affected users.</p>
+        </div>
+
+        <div class="data-kpis" aria-label="30 day delivery summary">
+          <div><p>Update checks</p><strong>{number.format(totalRequests)}</strong></div>
+          <div><p>Reported failures</p><strong>{number.format(totalFailures)}</strong></div>
+          <div><p>Failure reports / checks</p><strong>{failureRate.toFixed(2)}%</strong></div>
+        </div>
+
+        {metrics.daily.length ? (
+          <div class="data-chart" aria-label="Daily update checks chart">
+            <div class="data-chart-legend"><span><i class="requests"></i> Update checks</span><span><i class="failures"></i> Reported failures</span></div>
+            <div class="data-bars">
+              {metrics.daily.map((item) => (
+                <div class="data-bar" title={`${item.date}: ${fullNumber.format(item.requests)} checks, ${fullNumber.format(item.failures)} reported failures`}>
+                  <span class="data-bar-failure" style={`height: ${(item.failures / maxDailyRequests) * 100}%`}></span>
+                  <span class="data-bar-request" style={`height: ${(item.requests / maxDailyRequests) * 100}%`}></span>
+                </div>
+              ))}
+            </div>
+            <div class="data-axis"><span>{metrics.daily[0]?.date}</span><span>{metrics.daily.at(-1)?.date}</span></div>
+          </div>
+        ) : <p class="data-empty">Delivery telemetry is temporarily unavailable. Please check back shortly.</p>}
+      </div>
+    </section>
+
+    <section class="data-section data-section-muted" aria-labelledby="platforms">
+      <div class="data-shell data-split">
+        <div>
+          <p class="data-eyebrow">Active devices</p>
+          <h2 id="platforms">Platform breakdown</h2>
+          <p class="data-copy">Distinct active devices in the reporting window. A device that is active on more than one platform is counted once per platform.</p>
+        </div>
+        <dl class="data-platforms">
+          {platformRows.map(([name, devices]) => (
+            <div>
+              <dt>{name}</dt>
+              <dd>{number.format(devices)} <span>{totalPlatforms ? `${((devices / totalPlatforms) * 100).toFixed(1)}%` : '—'}</span></dd>
+              <div aria-hidden="true"><span style={`width: ${totalPlatforms ? (devices / totalPlatforms) * 100 : 0}%`}></span></div>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="data-section" aria-labelledby="failures">
+      <div class="data-shell data-split">
+        <div>
+          <p class="data-eyebrow">Reported client failures</p>
+          <h2 id="failures">Top failure reasons</h2>
+          <p class="data-copy">Normalized updater actions make recurring failure modes comparable without exposing error payloads.</p>
+        </div>
+        <ol class="data-failures">
+          {metrics.failures.map((item, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div><strong>{readableReason(item.reason)}</strong><small>{fullNumber.format(item.count)} reports</small></div>
+              <b>{totalFailures ? `${((item.count / totalFailures) * 100).toFixed(1)}%` : '—'}</b>
+              <i aria-hidden="true"><em style={`width: ${topFailureCount ? (item.count / topFailureCount) * 100 : 0}%`}></em></i>
+            </li>
+          ))}
+          {!metrics.failures.length && <li class="data-empty">No failure reports in this window.</li>}
+        </ol>
+      </div>
+    </section>
+
+    <section class="data-section data-section-muted" aria-labelledby="updater-versions">
+      <div class="data-shell">
+        <div class="data-heading">
+          <div><p class="data-eyebrow">Adoption context</p><h2 id="updater-versions">Most used updater version over time</h2></div>
+          <p>The leading updater version on each day helps explain broad shifts in delivery behaviour.</p>
+        </div>
+        {versionTrend.length ? (
+          <div class="data-version-chart" aria-label="Most used updater version over time">
+            {versionTrend.map((item) => <div title={`${item.date}: ${item.version} on ${fullNumber.format(item.devices)} devices`}><span style={`height: ${(item.devices / maxVersionDevices) * 100}%`}></span><small>{item.version}</small></div>)}
+          </div>
+        ) : <p class="data-empty">Updater adoption telemetry is temporarily unavailable.</p>}
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .data-page { --line: rgb(255 255 255 / 12%); --muted: rgb(203 213 225); background: #101827; color: white; }
+  .data-shell { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+  .data-hero, .data-section { padding: 72px 0; }
+  .data-hero { background: radial-gradient(circle at 70% 0%, rgb(37 99 235 / 24%), transparent 42%), #0d1524; border-bottom: 1px solid var(--line); }
+  .data-eyebrow { display: flex; gap: 8px; align-items: center; margin: 0 0 16px; color: #93c5fd; font-size: .875rem; font-weight: 600; letter-spacing: .03em; }
+  .data-eyebrow span { width: 8px; height: 8px; border-radius: 999px; background: #34d399; box-shadow: 0 0 0 4px rgb(52 211 153 / 12%); }
+  h1, h2 { margin: 0; font-weight: 600; letter-spacing: -.025em; text-wrap: balance; }
+  h1 { max-width: 22ch; font-size: clamp(2.5rem, 6vw, 4.75rem); }
+  h2 { max-width: 32ch; font-size: clamp(1.75rem, 4vw, 2.5rem); }
+  .data-summary { max-width: 58ch; margin: 20px 0 0; color: var(--muted); font-size: 1.125rem; line-height: 1.6; text-wrap: pretty; }
+  .data-updated { margin: 24px 0 0; color: #94a3b8; font-size: .875rem; }
+  .data-heading, .data-split { display: grid; gap: 36px; }
+  .data-heading { grid-template-columns: minmax(0, 1.3fr) minmax(260px, .7fr); align-items: end; margin-bottom: 40px; }
+  .data-heading > p, .data-copy { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.6; text-wrap: pretty; }
+  .data-kpis { display: grid; grid-template-columns: repeat(3, 1fr); margin-bottom: 36px; border-block: 1px solid var(--line); }
+  .data-kpis div { padding: 20px 24px; } .data-kpis div + div { border-left: 1px solid var(--line); }
+  .data-kpis p { margin: 0 0 8px; color: #94a3b8; font-size: .875rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .data-kpis strong { font-size: clamp(1.35rem, 3vw, 2rem); font-variant-numeric: tabular-nums; }
+  .data-chart { border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+  .data-chart-legend { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; color: var(--muted); font-size: .875rem; }
+  .data-chart-legend span { display: flex; gap: 8px; align-items: center; } .data-chart-legend i { width: 10px; height: 10px; } .requests { background: #60a5fa; } .failures { background: #f87171; }
+  .data-bars, .data-version-chart { display: flex; gap: 3px; align-items: end; height: 230px; }
+  .data-bar { position: relative; flex: 1; min-width: 3px; height: 100%; background: linear-gradient(to top, rgb(255 255 255 / 5%) 1px, transparent 1px); background-size: 100% 25%; }
+  .data-bar span { position: absolute; bottom: 0; left: 0; width: 100%; min-height: 1px; } .data-bar-request { background: #60a5fa; } .data-bar-failure { z-index: 1; background: #f87171; }
+  .data-axis { display: flex; justify-content: space-between; margin-top: 10px; color: #94a3b8; font-size: .75rem; font-variant-numeric: tabular-nums; }
+  .data-section-muted { background: rgb(15 23 42 / 68%); border-block: 1px solid var(--line); }
+  .data-split { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: start; }
+  .data-platforms { display: grid; gap: 22px; margin: 0; } .data-platforms dt { color: #cbd5e1; font-size: .9rem; } .data-platforms dd { display: flex; justify-content: space-between; margin: 4px 0 9px; font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; } .data-platforms dd span { color: #94a3b8; font-size: .875rem; font-weight: 400; } .data-platforms > div > div { height: 5px; overflow: hidden; background: rgb(255 255 255 / 8%); } .data-platforms > div > div span { display: block; height: 100%; background: #60a5fa; }
+  .data-failures { display: grid; gap: 14px; padding: 0; margin: 0; list-style: none; } .data-failures li { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--line); } .data-failures li > span { color: #64748b; font-size: .8rem; font-variant-numeric: tabular-nums; } .data-failures strong, .data-failures small { display: block; } .data-failures strong { font-size: 1rem; font-weight: 600; } .data-failures small { margin-top: 3px; color: #94a3b8; font-size: .8rem; } .data-failures b { color: #cbd5e1; font-size: .875rem; font-variant-numeric: tabular-nums; } .data-failures i { grid-column: 2 / -1; height: 3px; overflow: hidden; background: rgb(255 255 255 / 7%); } .data-failures em { display: block; height: 100%; background: #f87171; }
+  .data-version-chart { overflow-x: auto; gap: 5px; padding-bottom: 26px; } .data-version-chart > div { position: relative; flex: 1; min-width: 22px; height: 100%; background: rgb(255 255 255 / 5%); } .data-version-chart span { position: absolute; inset: auto 0 0; min-height: 1px; background: #a78bfa; } .data-version-chart small { position: absolute; top: calc(100% + 8px); left: 50%; color: #94a3b8; font-size: .65rem; white-space: nowrap; transform: translateX(-50%) rotate(-45deg); transform-origin: top center; }
+  .data-empty { margin: 0; color: #94a3b8; font-size: 1rem; }
+  @media (max-width: 720px) { .data-hero, .data-section { padding: 52px 0; } .data-heading, .data-split { grid-template-columns: 1fr; gap: 24px; } .data-kpis { grid-template-columns: 1fr; } .data-kpis div { padding: 16px 0; } .data-kpis div + div { border-top: 1px solid var(--line); border-left: 0; } .data-bars, .data-version-chart { height: 180px; } .data-updated, .data-chart-legend, .data-kpis p { font-size: .8rem; } }
+</style>
