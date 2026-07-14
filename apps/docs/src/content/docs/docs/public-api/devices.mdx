@@ -1,31 +1,21 @@
 ---
 title: "Devices"
-description: "Docs for managing devices via Capgo API, covering tracking, bundle (version) assignment, and channel management for app installations."
+description: "Retrieve device metadata and manage private channel overrides through the Capgo API."
 sidebar:
   order: 7
 ---
 
-Devices represent individual installations of your app that are managed by Capgo. The Devices API allows you to track and manage devices, including their bundles (versions), channels, and update status.
+Devices are individual app installations that report updater metadata to Capgo. Use this API to retrieve that metadata or set and remove a device-specific private-channel override.
 
-:::note[Data Retention]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
+:::note[Data retention]
+Device data is retained for **90 days** from the last device activity. A device does not need to install an update to appear: updater and stats check-ins can refresh its metadata.
 :::
 
-## Understanding Devices
+## Device metadata
 
-Each device has unique characteristics and states:
-- **Platform**: iOS, Android, or Electron
-- **Bundle (version)**: Current bundle (version) and native build version
-- **Environment**: Production or development, emulator or physical device
-- **Channel**: Current update channel assignment
-- **Custom ID**: Optional identifier for your own tracking purposes
+Each record can include the device ID, platform, updater and OS versions, native build, installed bundle, production and emulator state, custom ID, and channel override.
 
-## Best Practices
-
-1. **Bundle (version) Tracking**: Monitor device bundle (version) adoption to ensure update uptake
-2. **Channel Management**: Assign devices to appropriate channels based on testing needs
-3. **Environment Awareness**: Handle different environments (prod/dev/emulator) appropriately
-4. **Custom Identification**: Use custom IDs to integrate with your existing systems
+When available, `country_code` is the latest valid two-letter ISO 3166-1 country code received from a Cloudflare-handled request for the device. It is not GPS or a location value supplied by your app. It can be `null` when unavailable; use a single-device lookup when you need this field.
 
 ## Endpoints
 
@@ -33,34 +23,35 @@ Each device has unique characteristics and states:
 
 `https://api.capgo.app/device/`
 
-Link a device to a specific bundle (version) or channel.
+Set a device-specific override to a **private** channel. To choose a bundle for a device, assign that bundle to the channel; direct per-device bundle overrides are not supported.
 
-#### Request Body
+#### Request body
 
 ```typescript
-interface DeviceLink {
-  app_id: string
-  device_id: string
-  version_id?: string // bundle (version) name
-  channel?: string    // channel name
+interface DeviceChannelOverride {
+  app_id: string; // reverse-domain app ID, for example com.example.app
+  device_id: string;
+  channel: string; // existing non-public channel name
 }
 ```
 
-#### Example Request
+#### Example request
 
 ```bash
 curl -X POST \
   -H "authorization: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
-    "app_id": "app_123",
+    "app_id": "com.example.app",
     "device_id": "device_456",
     "channel": "beta"
   }' \
   https://api.capgo.app/device/
 ```
 
-#### Success Response
+Public channels cannot be used as device overrides.
+
+#### Success response
 
 ```json
 {
@@ -72,47 +63,51 @@ curl -X POST \
 
 `https://api.capgo.app/device/`
 
-Retrieve device information. Uses cursor-based pagination for efficient retrieval of large device lists.
+Retrieve device metadata. Results are cursor-paginated when you omit `device_id`.
 
-#### Query Parameters
-- `app_id`: Required. The ID of your app
-- `device_id`: Optional. Specific device ID to retrieve a single device
-- `cursor`: Optional. Cursor from previous response for pagination
-- `limit`: Optional. Number of devices per page (default: 50)
+#### Query parameters
 
-#### Example Requests
+- `app_id`: Required reverse-domain app ID, such as `com.example.app`.
+- `device_id`: Optional device ID. When present, the response is a single device rather than a paginated list.
+- `customIdMode`: Optional boolean. Set to `true` to return only devices with a non-empty `custom_id`.
+- `cursor`: Optional cursor from the previous list response.
+- `limit`: Optional number of devices per page.
+
+#### Example requests
 
 ```bash
-# Get all devices (first page)
+# Get the first page
 curl -H "authorization: your-api-key" \
-  "https://api.capgo.app/device/?app_id=app_123"
+  "https://api.capgo.app/device/?app_id=com.example.app"
 
-# Get specific device
+# Get one device, including its request-derived country when available
 curl -H "authorization: your-api-key" \
-  "https://api.capgo.app/device/?app_id=app_123&device_id=device_456"
+  "https://api.capgo.app/device/?app_id=com.example.app&device_id=device_456"
 
-# Get next page using cursor
+# Get only devices with a custom ID
 curl -H "authorization: your-api-key" \
-  "https://api.capgo.app/device/?app_id=app_123&cursor=2024-01-01T00:00:00Z|device_456"
+  "https://api.capgo.app/device/?app_id=com.example.app&customIdMode=true"
+
+# Get the next page
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=com.example.app&cursor=2024-01-01T00:00:00Z%7Cdevice_456"
 ```
 
-#### Response Type (List)
-
-When requesting multiple devices (no `device_id` parameter):
+#### Response types
 
 ```typescript
 interface DeviceListResponse {
   data: Device[];
-  nextCursor?: string;  // Pass this as 'cursor' param to get next page
-  hasMore: boolean;     // true if more pages available
+  nextCursor?: string;
+  hasMore: boolean;
 }
 
 interface Device {
   updated_at: string;
   device_id: string;
   custom_id: string;
-  version?: number; // bundle (version) id
-  version_name: string | null; // bundle (version) name
+  version?: number;
+  version_name: string | null;
   channel?: string;
   app_id: string;
   platform: "ios" | "android" | "electron";
@@ -121,34 +116,15 @@ interface Device {
   version_build: string;
   is_prod: boolean;
   is_emulator: boolean;
-  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
+  key_id: string | null;
+  install_source: string | null;
+  country_code: string | null;
 }
 ```
 
-#### Response Type (Single Device)
+`country_code` is populated by a device-specific lookup when Capgo has stored a valid Cloudflare-derived country code. Requests without a valid country do not clear the last valid value; list responses may return `null` for this field.
 
-When requesting a specific device with `device_id` parameter, returns the device object directly:
-
-```typescript
-interface Device {
-  updated_at: string;
-  device_id: string;
-  custom_id: string;
-  version?: number; // bundle (version) id
-  version_name: string | null; // bundle (version) name
-  channel?: string;
-  app_id: string;
-  platform: "ios" | "android" | "electron";
-  plugin_version: string;
-  os_version: string;
-  version_build: string;
-  is_prod: boolean;
-  is_emulator: boolean;
-  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
-}
-```
-
-#### Example Response (List)
+#### Example response (list)
 
 ```json
 {
@@ -158,13 +134,16 @@ interface Device {
       "custom_id": "test-device-1",
       "version": 1,
       "version_name": "1.0.0",
-      "app_id": "app_123",
+      "app_id": "com.example.app",
       "platform": "ios",
       "plugin_version": "5.0.0",
       "os_version": "17.0",
       "version_build": "1",
       "is_prod": true,
       "is_emulator": false,
+      "key_id": null,
+      "install_source": null,
+      "country_code": null,
       "updated_at": "2024-01-01T00:00:00Z"
     }
   ],
@@ -173,7 +152,7 @@ interface Device {
 }
 ```
 
-#### Example Response (Single Device)
+#### Example response (single device)
 
 ```json
 {
@@ -181,15 +160,18 @@ interface Device {
   "custom_id": "test-device-1",
   "version": 1,
   "version_name": "1.0.0",
-  "app_id": "app_123",
+  "app_id": "com.example.app",
   "platform": "ios",
   "plugin_version": "5.0.0",
   "os_version": "17.0",
   "version_build": "1",
   "is_prod": true,
   "is_emulator": false,
+  "key_id": "MIIB",
+  "install_source": null,
+  "country_code": "FR",
   "updated_at": "2024-01-01T00:00:00Z",
-  "channel": "production"
+  "channel": "beta"
 }
 ```
 
@@ -197,36 +179,31 @@ interface Device {
 
 `https://api.capgo.app/device/`
 
-Unlink a device from its channel override. This resets the device to use its default channel.
+Remove a device's channel override. The device will use its normal channel selection again; this endpoint does not delete its metadata record.
 
-:::note[Delete device]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
-You can't delete a device with this endpoint, it only affect the channel override.
-:::
-
-#### Query Parameters
+#### Request body or query parameters
 
 ```typescript
-interface Device {
-  device_id: string
-  app_id: string
+interface DeviceOverrideRemoval {
+  app_id: string;
+  device_id: string;
 }
 ```
 
-#### Example Request
+#### Example request
 
 ```bash
 curl -X DELETE \
   -H "authorization: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
-    "app_id": "app_123",
+    "app_id": "com.example.app",
     "device_id": "device_456"
   }' \
   https://api.capgo.app/device/
 ```
 
-#### Success Response
+#### Success response
 
 ```json
 {
@@ -234,67 +211,32 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Errors
 
-Common error scenarios and their responses:
+Errors use an HTTP error status and a JSON body with `error` and `message` fields. Common error codes include:
 
-```json
-// Device not found
-{
-  "error": "Device not found",
-  "status": "KO"
-}
+- `invalid_app_id` when `app_id` is not a reverse-domain identifier.
+- `device_not_found` for an unknown device lookup.
+- `channel_not_found` when the requested channel does not exist.
+- `public_channel_override` when attempting to override a device to a public channel.
+- `invalid_version_id` when attempting a direct bundle override; use a channel instead.
+- `cannot_access_app` or `cannot_access_channel` when the API key lacks the required permission.
 
-// Invalid bundle (version)
-{
-  "error": "Version not found",
-  "status": "KO"
-}
+## Common use cases
 
-// Invalid channel
-{
-  "error": "Channel not found",
-  "status": "KO"
-}
+1. **Move a test device to a private beta channel**
 
-// Permission denied
-{
-  "error": "Insufficient permissions to manage devices",
-  "status": "KO"
-}
-```
+   ```json
+   {
+     "app_id": "com.example.app",
+     "device_id": "device_456",
+     "channel": "beta"
+   }
+   ```
 
-## Common Use Cases
+2. **Reset a device to normal channel selection**
 
-1. **Beta Device Registration**
-```typescript
-{
-  "app_id": "app_123",
-  "device_id": "device_456",
-  "channel": "beta"
-}
-```
-
-2. **Version Override**
-```typescript
-{
-  "app_id": "app_123",
-  "device_id": "device_456",
-  "version_id": "1.1.0"
-}
-```
-
-3. **Reset to Default Channel**
-```typescript
-// Use DELETE endpoint to remove overrides
-```
-
-## Tips for Device Management
-
-1. **Monitoring**: Regularly check device status and bundle (version) distribution
-2. **Testing**: Use custom IDs to identify test devices easily
-3. **Troubleshooting**: Track device updates and channel assignments
-4. **Native Version Control**: Monitor native app versions to ensure compatibility
+   Use the `DELETE` endpoint with the app and device IDs.
 
 ## Keep going from Devices
 

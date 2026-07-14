@@ -1,9 +1,13 @@
 ---
 title: Getting Started
-description: "Install @capgo/capacitor-device-info and stream device metrics into JavaScript."
+description: "Install @capgo/capacitor-device-info and read or stream device metrics in JavaScript."
 sidebar:
   order: 2
 ---
+
+## Compatibility
+
+`@capgo/capacitor-device-info` requires Capacitor 8 or later (`@capacitor/core >=8.0.0`).
 
 ## Install
 
@@ -19,11 +23,11 @@ Then use the following prompt:
 Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-device-info` plugin in my project.
 ```
 
-If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+For a manual setup, install the package and sync the native projects:
 
 ```bash
-bun add @capgo/capacitor-device-info
-bunx cap sync
+npm install @capgo/capacitor-device-info
+npx cap sync
 ```
 
 ## Import
@@ -32,7 +36,7 @@ bunx cap sync
 import { DeviceInfo } from '@capgo/capacitor-device-info';
 ```
 
-## Read One Snapshot
+## Read one snapshot
 
 ```typescript
 const snapshot = await DeviceInfo.getInfo();
@@ -43,9 +47,9 @@ console.log(snapshot.storage.freeBytes);
 console.log(snapshot.sensors?.pressureHpa);
 ```
 
-`cpu.usagePercent` is delta-based. The first native sample can omit it; call `getInfo` again later or use monitoring to receive populated CPU usage after the second sample.
+`cpu.usagePercent` is delta-based. The first native sample can omit it; call `getInfo()` again later or use monitoring to receive populated CPU usage after the second sample.
 
-## Stream Updates
+## Stream updates
 
 ```typescript
 const handle = await DeviceInfo.addListener('deviceInfoUpdate', (sample) => {
@@ -54,30 +58,33 @@ const handle = await DeviceInfo.addListener('deviceInfoUpdate', (sample) => {
   console.log(sample.sensors?.readings);
 });
 
-await DeviceInfo.startMonitoring({
+const session = await DeviceInfo.startMonitoring({
   intervalMs: 1000,
   emitImmediately: true,
 });
+
+console.log(session.intervalMs, session.startedAt);
 ```
 
-## Stop Updates
+### Monitoring behavior
+
+- `intervalMs` defaults to `1000` milliseconds. Values below `250` milliseconds are clamped to `250`.
+- `emitImmediately` defaults to `true`.
+- Set `durationMs` or `sampleCount` to stop monitoring automatically.
+- Calling `startMonitoring()` while monitoring is active restarts the session with the new options.
+- Every `deviceInfoUpdate` includes a one-based `sequence`, the session's `startedAt` timestamp, and `elapsedMs`.
+
+## Stop updates and remove listeners
 
 ```typescript
 await DeviceInfo.stopMonitoring();
 await handle.remove();
+
+// Or remove every listener registered on this plugin:
+await DeviceInfo.removeAllListeners();
 ```
 
-You can also stop automatically:
-
-```typescript
-await DeviceInfo.startMonitoring({
-  intervalMs: 1000,
-  durationMs: 60_000,
-  sampleCount: 60,
-});
-```
-
-## Check Monitoring State
+## Check monitoring state
 
 ```typescript
 const state = await DeviceInfo.isMonitoring();
@@ -87,7 +94,7 @@ if (state.monitoring) {
 }
 ```
 
-## Onboard Sensor Fields
+## Onboard sensor fields
 
 ```typescript
 const { sensors, cpu, gpu } = await DeviceInfo.getInfo();
@@ -105,18 +112,69 @@ console.log(sensors?.availableSensors);
 
 Sensor fields are optional. They are present only when the device, OS, and app sandbox expose that metric.
 
-## Platform Notes
+## Platform notes
 
 - iOS requires no permissions for the exposed metrics. It reports CoreMotion sensor availability but not raw CPU or GPU temperature.
 - Android requires no permissions for the exposed metrics. CPU and GPU temperatures are best-effort thermal-zone reads.
 - Web support is best effort and reports empty onboard sensor arrays because browsers do not expose native device sensors consistently.
 
-## Type Reference
+## API reference
 
-### `DeviceInfoSnapshot`
+| Method | Returns | Notes |
+| --- | --- | --- |
+| `getInfo()` | `Promise<DeviceInfoSnapshot>` | Reads one snapshot. |
+| `startMonitoring(options?)` | `Promise<StartMonitoringResult>` | Starts periodic snapshots, or restarts an active session with new options. |
+| `stopMonitoring()` | `Promise<StopMonitoringResult>` | Stops the active session. |
+| `isMonitoring()` | `Promise<MonitoringState>` | Returns current session state. |
+| `addListener('deviceInfoUpdate', listener)` | `Promise<PluginListenerHandle>` | Registers a periodic snapshot listener. |
+| `removeAllListeners()` | `Promise<void>` | Removes every listener registered on the plugin. |
+| `getPluginVersion()` | `Promise<PluginVersionResult>` | Reads the native plugin version. |
+
+`PluginListenerHandle` is provided by Capacitor and has `remove()` for removing that individual listener.
+
+### Snapshot types
 
 ```typescript
-export interface DeviceInfoSnapshot {
+interface CpuInfo {
+  cores: number;
+  activeCores?: number;
+  architecture?: string;
+  model?: string;
+  usagePercent?: number | null;
+  maxFrequencyHz?: number;
+  temperatureCelsius?: number;
+}
+
+interface MemoryInfo {
+  totalBytes?: number;
+  freeBytes?: number;
+  usedBytes?: number;
+  usedPercent?: number;
+  appUsedBytes?: number;
+  appLimitBytes?: number;
+  lowMemory?: boolean;
+  pressure?: 'normal' | 'warning' | 'critical' | 'unknown';
+}
+
+interface StorageInfo {
+  totalBytes?: number;
+  freeBytes?: number;
+  usedBytes?: number;
+  usedPercent?: number;
+}
+
+interface GpuInfo {
+  api?: 'metal' | 'opengl' | 'webgl' | 'unknown';
+  vendor?: string;
+  renderer?: string;
+  version?: string;
+  maxTextureSize?: number;
+  temperatureCelsius?: number;
+}
+
+type ThermalState = 'nominal' | 'fair' | 'serious' | 'critical' | 'unknown';
+
+interface DeviceInfoSnapshot {
   timestamp: number;
   platform: 'ios' | 'android' | 'web';
   cpu: CpuInfo;
@@ -129,10 +187,32 @@ export interface DeviceInfoSnapshot {
 }
 ```
 
-### `OnboardSensorsInfo`
+Sizes are bytes, `maxFrequencyHz` is hertz, and temperature values are Celsius. `usagePercent` can be `null` until the platform has enough samples to calculate it.
+
+### Sensor types
 
 ```typescript
-export interface OnboardSensorsInfo {
+interface OnboardSensorDescriptor {
+  type: string;
+  name?: string;
+  vendor?: string;
+  platformType?: number;
+  maximumRange?: number;
+  resolution?: number;
+  powerMilliamp?: number;
+  minDelayMicroseconds?: number;
+  wakeUp?: boolean;
+}
+
+interface OnboardSensorReading {
+  type: string;
+  unit: string;
+  value: number;
+  name?: string;
+  timestamp?: number;
+}
+
+interface OnboardSensorsInfo {
   availableSensors?: OnboardSensorDescriptor[];
   readings?: OnboardSensorReading[];
   batteryTemperatureCelsius?: number;
@@ -144,21 +224,52 @@ export interface OnboardSensorsInfo {
 }
 ```
 
-### `MonitoringOptions`
+Sensor-reading timestamps are Unix epoch milliseconds. Common units are Celsius, percent, hPa, lux, and centimeters.
+
+### Monitoring types
 
 ```typescript
-export interface MonitoringOptions {
+interface MonitoringOptions {
   intervalMs?: number;
   durationMs?: number;
   sampleCount?: number;
   emitImmediately?: boolean;
 }
+
+interface StartMonitoringResult {
+  monitoring: boolean;
+  intervalMs: number;
+  startedAt: number;
+}
+
+interface StopMonitoringResult {
+  monitoring: boolean;
+}
+
+interface MonitoringState {
+  monitoring: boolean;
+  intervalMs?: number;
+  startedAt?: number;
+  samplesEmitted?: number;
+}
+
+interface DeviceInfoUpdate extends DeviceInfoSnapshot {
+  sequence: number;
+  startedAt: number;
+  elapsedMs: number;
+}
+
+interface PluginVersionResult {
+  version: string;
+}
 ```
 
-## Source Of Truth
+`startedAt`, `timestamp`, and `elapsedMs` are milliseconds. `sequence` starts at `1` for each monitoring session.
 
-This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+## Source of truth
+
+This reference follows the public API in the plugin's [`src/definitions.ts`](https://github.com/Cap-go/capacitor-device-info/blob/main/src/definitions.ts). Update this page when that source changes.
 
 ## Keep going from Getting Started
 
-If you are using **Getting Started** for device diagnostics, connect it with [@capgo/capacitor-device-info](/docs/plugins/device-info/) for the overview, [Using @capgo/capacitor-device-info](/plugins/capacitor-device-info/) for a tutorial, [@capgo/capacitor-barometer](/docs/plugins/barometer/) for focused pressure readings, and [@capgo/capacitor-light-sensor](/docs/plugins/light-sensor/) for focused light sensor readings.
+If you are using **Getting Started** for device diagnostics, connect it with [@capgo/capacitor-device-info](/docs/plugins/device-info/) for the overview, [Using @capgo/capacitor-device-info](/plugins/capacitor-device-info/) for the tutorial page, [@capgo/capacitor-barometer](/docs/plugins/barometer/) for focused pressure readings, and [@capgo/capacitor-light-sensor](/docs/plugins/light-sensor/) for focused light sensor readings.
