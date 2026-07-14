@@ -43,7 +43,7 @@ export const productVideos = {
     description: 'Capgo founder Martin on turning Capacitor projects into signed iOS and Android releases without asking you to hand over your App Store credentials.',
   },
   liveUpdate: {
-    youtubeId: '7AdzMDR4dKk',
+    youtubeId: '9SBpTPjTg3o',
     title: 'Why Capgo live updates work the way they do',
     description: 'Capgo founder Martin on channels, compatibility checks, rollback, and shipping web bundle changes safely after store approval.',
   },
