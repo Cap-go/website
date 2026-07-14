@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-14T08:08:23.942Z
-updated_at: 2026-07-14T08:08:26.000Z
+updated_at: 2026-07-14T08:10:34.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/efcbbb02-69d1-43e0-aa1d-1021bceda413/infrastructure-planning-app-resilience.jpg'
 head_image_alt: 'Effective Infrastructure Planning: Build Resilient Apps 2026'
 keywords: 'infrastructure planning, mobile app infrastructure, devops, capacity planning, application security'
