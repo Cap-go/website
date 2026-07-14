@@ -26,6 +26,7 @@ Capgo collects only the data that is necessary to provide the live updates featu
 - **Channel Name**: The name of the channel that is selected to receive updates
 - **OS Version**: The version of the operating system that is used to determine which updates are compatible with the device
 - **Plugin Version**: The version of the @capgo/capacitor-updater plugin that is used to deliver updates to the device
+- **Request Country**: When available, the latest valid two-letter ISO 3166-1 code received from a Cloudflare-handled request for the device. It is not GPS or a location value supplied by your app.
 
 **Additional Technical Data:**
 - Update check timestamps
@@ -52,7 +53,7 @@ When `statsUrl` is enabled, Capgo can store:
 | Record | Stored fields |
 | ------ | ------------- |
 | Billing MAU | `device_id`, `app_id`, `org_id`, `timestamp` |
-| Device inventory | `device_id`, `app_id`, `updated_at`, `platform`, `plugin_version`, `os_version`, `version_build`, `version_name`, `is_prod`, `is_emulator`, `default_channel`, `key_id`, optional `custom_id` |
+| Device inventory | `device_id`, `app_id`, `updated_at`, `platform`, `plugin_version`, `os_version`, `version_build`, `version_name`, `is_prod`, `is_emulator`, `default_channel`, `key_id`, optional `custom_id`, optional request country code |
 | Stats event | `device_id`, `app_id`, `action`, `version_name`, `created_at` |
 
 When `statsUrl` is disabled but `updateUrl` remains enabled, Capgo can still store:
@@ -60,7 +61,7 @@ When `statsUrl` is disabled but `updateUrl` remains enabled, Capgo can still sto
 | Record | Stored fields |
 | ------ | ------------- |
 | Billing MAU | `device_id`, `app_id`, `org_id`, `timestamp` |
-| Device inventory | `device_id`, `app_id`, `updated_at`, `platform`, `plugin_version`, `os_version`, `version_build`, `version_name`, `is_prod`, `is_emulator`, `default_channel`, `key_id`, optional `custom_id` |
+| Device inventory | `device_id`, `app_id`, `updated_at`, `platform`, `plugin_version`, `os_version`, `version_build`, `version_name`, `is_prod`, `is_emulator`, `default_channel`, `key_id`, optional `custom_id`, optional request country code |
 | Update-decision event | `device_id`, `app_id`, `action`, `version_name`, `created_at`; actions can include `get`, `noNew`, `missingBundle`, `cannotGetBundle`, platform/version blocking actions, and plan or channel errors |
 
 For native-version billing and charts, runtime telemetry can also include `platform` and `version_build` with MAU usage when the deployed billing store supports those fields. Newer stats telemetry can also include optional stats `metadata` when the app sends it.

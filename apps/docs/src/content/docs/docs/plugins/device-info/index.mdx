@@ -24,15 +24,20 @@ hero:
 
 `@capgo/capacitor-device-info` reads device health and hardware metrics from Capacitor apps. It can return one snapshot on demand or stream periodic updates through `deviceInfoUpdate` listeners for charts and operational dashboards.
 
-## Core Capabilities
+## Compatibility
+
+The plugin requires Capacitor 8 or later (`@capacitor/core >=8.0.0`).
+
+## Core capabilities
 
 - `getInfo` - Read CPU, memory, GPU, storage, thermal state, low-power mode, and onboard sensor data.
 - `startMonitoring` - Start interval sampling and emit `deviceInfoUpdate` events.
 - `stopMonitoring` - Stop the active monitoring session.
 - `isMonitoring` - Inspect the active monitoring state and sample count.
+- `removeAllListeners` - Remove all listeners registered on the plugin.
 - `getPluginVersion` - Return the native plugin version.
 
-## Onboard Sensor Data
+## Onboard sensor data
 
 The plugin reports only hardware data exposed by the device or OS. It does not call weather services or fetch outside temperature or humidity from the network.
 
@@ -40,9 +45,9 @@ Android can report available sensors and common readings such as battery tempera
 
 iOS reports CPU, memory, storage, GPU, thermal state, low-power mode, and CoreMotion sensor availability. Public iOS APIs do not expose raw CPU or GPU temperature.
 
-## Source Of Truth
+## Source of truth
 
-This reference is synced from `src/definitions.ts` in [capacitor-device-info](https://github.com/Cap-go/capacitor-device-info/).
+The full API reference follows [`src/definitions.ts`](https://github.com/Cap-go/capacitor-device-info/blob/main/src/definitions.ts) in the plugin repository. See [Getting Started](/docs/plugins/device-info/getting-started/) for install, monitoring behavior, return types, and examples.
 
 ## Keep going from @capgo/capacitor-device-info
 
