@@ -6,6 +6,8 @@ sidebar:
 ---
 import { LinkCard } from '@astrojs/starlight/components';
 
+This page is a guided overview. Use the current command reference for exact flags: [app](/docs/cli/reference/app/), [bundle](/docs/cli/reference/bundle/), [channel](/docs/cli/reference/channel/), and [build](/docs/cli/reference/build/).
+
 ### Usage
 
 All command should be run in your app folder with capacitor project ignited properly.
@@ -83,6 +85,14 @@ Optionally, you can give:
 * `--icon [/path/to/my/icon]` to have a custom icon display in Capgo web app.
 * `--name [test]` to have a custom name in the list.
 * `--retention [retention]` retention period of app bundle in days, 0 by default = infinite.
+* `--expose-metadata [true|false]` to expose bundle metadata (link and comment) to the plugin.
+* `--preview` or `--no-preview` to enable or disable bundle and channel preview QR codes.
+* `--allow-device-custom-id` or `--no-allow-device-custom-id` to control custom device IDs.
+* `--block-provider-infra-requests` or `--no-block-provider-infra-requests` to control blocking of known Google and Apple datacenter requests.
+* `--build-timeout-minutes [5-360]` to set the native build timeout.
+* `--ios-store-url [url]` or `--android-store-url [url]` to set the store URL.
+* `--default-upload-channel [channel]` to set the default upload channel.
+* `--default-download-channel [channel]` to set the default download channel, or `--disable-download-channels` to make all download channels non-public.
 * `--apikey [key]` API key to link to your account.
 
 ### **List**

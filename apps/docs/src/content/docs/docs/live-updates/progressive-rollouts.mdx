@@ -1,0 +1,138 @@
+---
+title: Progressive rollouts
+description: "Release a bundle to a random, sticky subset of a channel before promoting it to every device."
+sidebar:
+  order: 4
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+A progressive rollout keeps a channel's **stable bundle** in place while delivering a separate **rollout target** to a controlled subset of devices. It is useful when you want real production validation without switching the whole channel at once.
+
+<figure><img src="/progressive-rollout.webp" alt="Progressive rollout controls in a Capgo channel" /><figcaption>Configure the rollout target, percentage, cache duration, and auto-pause policy from a channel's Information tab.</figcaption></figure>
+
+## How progressive rollouts work
+
+Each channel can have two bundle links:
+
+- **Stable bundle** — the normal bundle assigned to the channel.
+- **Rollout target** — the candidate bundle that is released gradually.
+
+A rollout needs a stable bundle. In the dashboard, assign the stable bundle before choosing the target; with the Public API, an existing channel can supply `version` and `rolloutVersion` in the same POST request. Capgo makes a random decision for each eligible device, then caches it using a hash of the device ID and the rollout ID. That makes the cohort sticky for the configured cache duration instead of changing on every update check.
+
+<Aside type="tip" title="Sticky does not mean permanent">
+The default rollout-decision cache duration is 30 days. After it expires, a device can be selected again. Changing the rollout target creates a new rollout ID and starts a new cohort. You can set the cache duration from 60 seconds to 365 days.
+</Aside>
+
+### Percentage changes
+
+Capgo preserves existing decisions when it can:
+
+- **Increase a percentage** — devices already selected stay selected; only a random subset of previously unselected devices is added.
+- **Decrease a percentage** — a random subset of the selected cohort returns to the stable bundle.
+- **Set the percentage to 0%** — no new devices are selected. Devices already running the enabled rollout target continue to receive that target until you disable, roll back, or change the target.
+- **Pause** — stops new devices from entering while devices already running the enabled target remain on it.
+- **Disable** — stops resolving the rollout target; update checks use the stable bundle.
+
+## Run a rollout
+
+<Steps>
+
+1. Upload and assign a tested bundle as the channel's stable bundle.
+2. Upload the candidate bundle without replacing the stable bundle.
+3. Open the channel's **Information** tab, set the candidate as the **Target**, choose a small percentage, and enable the rollout.
+4. Monitor the rollout in [Observe](/docs/webapp/observe/), [Log Insights](/docs/webapp/log-insights/), and the channel history. Increase the percentage only after the cohort is healthy.
+5. When it is ready, promote the target to stable. If it is not healthy, pause or roll it back.
+
+</Steps>
+
+### CLI example
+
+Start a rollout for bundle `1.3.0` at 5%:
+
+```bash
+npx @capgo/cli@latest channel set production com.example.app \
+  --rollout-bundle 1.3.0 \
+  --rollout-percentage 5 \
+  --rollout-enable
+```
+
+Increase it without reseating devices already selected:
+
+```bash
+npx @capgo/cli@latest channel set production com.example.app \
+  --rollout-percentage 25
+```
+
+The bundle upload command can set its upload as a rollout target in one step when the channel already has a stable bundle:
+
+```bash
+npx @capgo/cli@latest bundle upload com.example.app \
+  --path ./dist \
+  --channel production \
+  --rollout 5
+```
+
+See the complete [channel CLI reference](/docs/cli/reference/channel/) and [bundle CLI reference](/docs/cli/reference/bundle/) for every rollout option.
+
+## Pause, roll back, or promote
+
+| Action | What it does |
+| --- | --- |
+| **Pause** | Stops new devices from entering the rollout. Devices already on the enabled target stay there. |
+| **Resume** | Allows new eligible devices to enter again. |
+| **Disable** | Stops resolving the rollout target and uses the stable bundle. |
+| **Roll back** | Clears the target, disables the rollout, resets the percentage to 0%, and returns devices to stable. |
+| **Promote** | Makes the rollout target the stable bundle, then clears rollout state. |
+
+Use one terminal action at a time:
+
+```bash
+# Stop adding devices while you investigate
+npx @capgo/cli@latest channel set production com.example.app --rollout-pause
+
+# Make the candidate stable for everyone
+npx @capgo/cli@latest channel set production com.example.app --rollout-promote
+
+# Discard the candidate and return to stable
+npx @capgo/cli@latest channel set production com.example.app --rollout-rollback
+```
+
+Keep the target bundle available until you promote it or roll it back. Bundles linked as a stable bundle or rollout target are protected from deletion.
+## Auto-pause policy
+
+Capgo can evaluate an enabled rollout every five minutes and act when its failure signal crosses your threshold. It measures installs and failures for the rollout target in the selected channel and time window, then uses a Wilson confidence lower bound rather than the raw failure rate alone.
+
+Auto-pause is disabled by default. Configure these fields in the channel's **Information** tab or with `channel set`:
+
+- **Failure rate threshold** in basis points (`500` = 5%). A threshold is required for the policy to trigger.
+- **Window** in minutes (default: 60).
+- **Confidence** between `0` and `1` (default: `0.95`).
+- Optional minimum attempts and failures, to avoid acting on tiny samples.
+- **Cooldown** in minutes (default: 60), which prevents repeated actions.
+- **Action**: `pause`, `rollback`, or `notify`.
+
+`pause` stops new rollout exposure, `rollback` clears the target and returns to stable, and `notify` sends a rollout alert without changing rollout delivery.
+
+```bash
+npx @capgo/cli@latest channel set production com.example.app \
+  --auto-pause-enabled \
+  --auto-pause-failure-rate-bps 500 \
+  --auto-pause-window-minutes 60 \
+  --auto-pause-confidence 0.95 \
+  --auto-pause-min-attempts 100 \
+  --auto-pause-min-failures 5 \
+  --auto-pause-action pause \
+  --auto-pause-cooldown-minutes 120
+```
+
+## API and dashboard controls
+
+You can manage the same feature through the [Public Channels API](/docs/public-api/channels/) or the dashboard:
+
+1. Open an app, then **Channels**.
+2. Choose the channel.
+3. Open **Information**.
+4. Use the **Progressive rollout** section to choose the target, percentage, cache duration, and auto-pause policy.
+
+For general channel routing and device precedence, see [Channels](/docs/live-updates/channels/). For emergency bundle recovery outside a progressive rollout, see [Rolling back a live update](/docs/live-updates/rollbacks/).

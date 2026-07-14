@@ -18,13 +18,13 @@ A channel represents a distribution track for your app updates. Each channel can
 
 ## Channel Configuration Options
 
-- **public**: Set as default channel for new devices
-- **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the update bundle (version) available in the channel (e.g., device is on native app version 1.2.3, but channel has bundle (version) 1.2.2)
-- **disableAutoUpdate**: Control update behavior ("major", "minor", "version_number", "none")
-- **ios/android/electron**: Enable/disable for specific platforms
-- **allow_device_self_set**: Let devices choose their channel
-- **allow_emulator**: Allow updates on emulator devices
-- **allow_dev**: Allow updates on development builds
+- **public**: Set as default channel for new devices.
+- **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the channel's stable bundle.
+- **disableAutoUpdate**: Control update behavior (`major`, `minor`, `metadata`, `patch`, or `none`).
+- **ios/android/electron**: Enable or disable delivery by platform.
+- **allow_device_self_set**: Let devices choose their channel.
+- **allow_emulator**, **allow_device**, **allow_dev**, **allow_prod**: Control which device and build types receive updates.
+- **Progressive rollout**: Keep a stable bundle while exposing a target bundle to a sticky cohort. See [Progressive rollouts](/docs/live-updates/progressive-rollouts/).
 
 ## Best Practices
 
@@ -44,39 +44,72 @@ Create or update a channel configuration.
 #### Request Body
 
 ```typescript
-type disable_update = "major" | "minor" | "version_number" | "none"
+type DisableAutoUpdate = "major" | "minor" | "metadata" | "patch" | "none"
+type AutoPauseAction = "pause" | "rollback" | "notify"
+
 interface ChannelSet {
   app_id: string
   channel: string
-  version?: string // bundle (version) name
+  version?: string | null // stable bundle name
   public?: boolean
   disableAutoUpdateUnderNative?: boolean
-  disableAutoUpdate?: disable_update
+  disableAutoUpdate?: DisableAutoUpdate
   ios?: boolean
   android?: boolean
   electron?: boolean
   allow_device_self_set?: boolean
   allow_emulator?: boolean
+  allow_device?: boolean
   allow_dev?: boolean
+  allow_prod?: boolean
+
+  // Progressive rollout (camelCase is preferred)
+  rolloutVersion?: string | number | null // target bundle name or ID
+  rolloutPercentage?: number // 0–100
+  rolloutPercentageBps?: number // 0–10000; takes precedence when both are set
+  rolloutEnabled?: boolean
+  rolloutPaused?: boolean // input-only convenience flag
+  rolloutPausedAt?: string | null // ISO timestamp or null
+  rolloutPauseReason?: string | null
+  rolloutCacheTtlSeconds?: number // 60–31536000
+  rollback?: boolean
+  promoteToStable?: boolean
+
+  // Rollout auto-pause policy
+  autoPauseEnabled?: boolean
+  autoPauseWindowMinutes?: number
+  autoPauseFailureRateBps?: number | null
+  autoPauseConfidence?: number
+  autoPauseMinAttempts?: number | null
+  autoPauseMinFailures?: number | null
+  autoPauseAction?: AutoPauseAction
+  autoPauseCooldownMinutes?: number
 }
 ```
 
+For rollout and auto-pause fields, the API also accepts the equivalent `snake_case` form, such as `rollout_version` or `auto_pause_enabled`. If both forms are supplied, the camelCase value wins. `rollback` is camelCase only.
+
+A rollout target requires an existing channel. It must have a stable bundle already assigned or receive one through `version` in the same POST request. `rollback` and `promoteToStable` are terminal actions; do not combine them with one another.
+
 #### Example Request
+
+Configure a 5% rollout for an existing `production` channel whose stable bundle is already set:
 
 ```bash
 curl -X POST \
   -H "authorization: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
-    "app_id": "app_123",
-    "channel": "beta",
-    "version": "1.2.0",
-    "public": false,
-    "disableAutoUpdate": "minor",
-    "ios": true,
-    "android": true,
-    "electron": true,
-    "allow_emulator": true
+    "app_id": "com.example.app",
+    "channel": "production",
+    "rolloutVersion": "1.3.0",
+    "rolloutPercentage": 5,
+    "rolloutEnabled": true,
+    "rolloutCacheTtlSeconds": 2592000,
+    "autoPauseEnabled": true,
+    "autoPauseFailureRateBps": 500,
+    "autoPauseMinAttempts": 100,
+    "autoPauseAction": "pause"
   }' \
   https://api.capgo.app/channel/
 ```
@@ -89,11 +122,13 @@ curl -X POST \
 }
 ```
 
+POST is an upsert and returns only its status. Make a GET request to read the resulting channel configuration.
+
 ### GET
 
 `https://api.capgo.app/channel/`
 
-Retrieve channel information. Returns 50 channels per page.
+Retrieve channel information. Returns 50 channels per page. Without `channel`, the response is an array. With `channel`, the response is one channel object.
 
 #### Query Parameters
 - `app_id`: Required. The ID of your app
@@ -105,65 +140,83 @@ Retrieve channel information. Returns 50 channels per page.
 ```bash
 # Get all channels
 curl -H "authorization: your-api-key" \
-  "https://api.capgo.app/channel/?app_id=app_123"
+  "https://api.capgo.app/channel/?app_id=com.example.app"
 
-# Get specific channel
+# Get a specific channel
 curl -H "authorization: your-api-key" \
-  "https://api.capgo.app/channel/?app_id=app_123&channel=beta"
+  "https://api.capgo.app/channel/?app_id=com.example.app&channel=production"
 
-# Get next page
+# Get the next page
 curl -H "authorization: your-api-key" \
-  "https://api.capgo.app/channel/?app_id=app_123&page=1"
+  "https://api.capgo.app/channel/?app_id=com.example.app&page=1"
 ```
 
 #### Response Type
 
 ```typescript
 interface Channel {
-    id: number;
-    created_at: string;
-    name: string;
-    app_id: string;
-    version: { // bundle (version) assigned to the channel
-        id: number,
-        name: string
-    };
-    created_by: string;
-    updated_at: string;
-    public: boolean;
-    disableAutoUpdateUnderNative: boolean;
-    disableAutoUpdate: boolean;
-    allow_emulator: boolean;
-    allow_dev: boolean;
+  id: number
+  created_at: string
+  updated_at: string
+  name: string
+  app_id: string
+  created_by: string
+  public: boolean
+  disableAutoUpdateUnderNative: boolean
+  disableAutoUpdate: DisableAutoUpdate
+  allow_device_self_set: boolean
+  allow_emulator: boolean
+  allow_device: boolean
+  allow_dev: boolean
+  allow_prod: boolean
+  version: { id: number, name: string } | null // stable bundle
+
+  // These three response identifiers intentionally use snake_case.
+  rollout_version: number | null
+  rollout_id: string
+  rollout_version_info: { id: number, name: string } | null
+
+  rolloutPercentageBps: number
+  rolloutEnabled: boolean
+  rolloutPausedAt: string | null
+  rolloutPauseReason: string | null
+  rolloutCacheTtlSeconds: number
+  autoPauseEnabled: boolean
+  autoPauseWindowMinutes: number
+  autoPauseFailureRateBps: number | null
+  autoPauseConfidence: number
+  autoPauseMinAttempts: number | null
+  autoPauseMinFailures: number | null
+  autoPauseAction: AutoPauseAction
+  autoPauseCooldownMinutes: number
+  autoPauseLastTriggeredAt: string | null
+  autoPauseLastCheckedAt: string | null
 }
 ```
 
-In the response below, `version` refers to the bundle (version) assigned to the channel.
+`rolloutPaused` is an input-only shortcut and is not returned. A paused rollout is represented by a non-null `rolloutPausedAt`.
 
 #### Example Response
 
 ```json
-{
-  "data": [
-    {
-      "id": 1,
-      "name": "production",
-      "app_id": "app_123",
-      "version": {
-        "id": 1,
-        "name": "1.0.0"
-      },
-      "created_at": "2024-01-01T00:00:00Z",
-      "updated_at": "2024-01-01T00:00:00Z",
-      "created_by": "user_123",
-      "public": true,
-      "disableAutoUpdateUnderNative": false,
-      "disableAutoUpdate": false,
-      "allow_emulator": false,
-      "allow_dev": false
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "name": "production",
+    "app_id": "com.example.app",
+    "version": { "id": 1, "name": "1.2.0" },
+    "rollout_version": 2,
+    "rollout_id": "e60c19c9-2e65-4e0d-bc06-d1f5b4f96276",
+    "rollout_version_info": { "id": 2, "name": "1.3.0" },
+    "rolloutPercentageBps": 500,
+    "rolloutEnabled": true,
+    "rolloutPausedAt": null,
+    "rolloutCacheTtlSeconds": 2592000,
+    "autoPauseEnabled": true,
+    "autoPauseFailureRateBps": 500,
+    "autoPauseAction": "pause"
+  }
+]
 ```
 
 ### DELETE
@@ -188,7 +241,7 @@ curl -X DELETE \
   -H "authorization: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
-    "app_id": "app_123",
+  "app_id": "com.example.app",
     "channel": "beta"
   }' \
   https://api.capgo.app/channel/
@@ -237,7 +290,7 @@ Common error scenarios and their responses:
 1. **Beta Testing**
 ```typescript
 {
-  "app_id": "app_123",
+  "app_id": "com.example.app",
   "channel": "beta",
   "version": "1.2.0-beta",
   "public": false,
@@ -249,7 +302,7 @@ Common error scenarios and their responses:
 2. **Production Rollout**
 ```typescript
 {
-  "app_id": "app_123",
+  "app_id": "com.example.app",
   "channel": "production",
   "version": "1.2.0",
   "public": true,
@@ -260,7 +313,7 @@ Common error scenarios and their responses:
 3. **Platform-Specific Updates**
 ```typescript
 {
-  "app_id": "app_123",
+  "app_id": "com.example.app",
   "channel": "ios-hotfix",
   "version": "1.2.1",
   "ios": true,

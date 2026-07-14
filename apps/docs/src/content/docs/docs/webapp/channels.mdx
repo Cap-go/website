@@ -116,6 +116,14 @@ Seventh is the `Allow Emulators`. If this is false then Capgo will disallow any 
 
 Eight is the `Allow devices to self associate`. If this is true then the [setChannel](/docs/plugins/updater/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](/docs/plugins/updater/api/#setchannel) method with this channel then the call will fail.
 
+## Progressive rollouts
+
+The channel **Information** tab includes a **Progressive rollout** section. Set a target bundle, choose the percentage and decision-cache duration, then enable the rollout. From the same section you can pause or resume exposure, promote the target to stable, roll it back, or configure an automatic pause, rollback, or notification when failure signals cross a threshold.
+
+<figure><img src="/progressive-rollout.webp" alt="Progressive rollout controls in a Capgo channel" /><figcaption>Progressive rollout controls appear at the top of the channel Information tab.</figcaption></figure>
+
+Read [Progressive rollouts](/docs/live-updates/progressive-rollouts/) before enabling one. It explains sticky cohorts, safe percentage changes, and auto-pause behavior.
+
 ## Keep going from Channels
 
 If you are using **Channels** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution, and [Capgo Environment Best Practices: Staging with One Mobile App ID](/blog/staging-environments-with-capgo-channels/) for the practical context in Capgo Environment Best Practices: Staging with One Mobile App ID.

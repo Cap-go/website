@@ -5,26 +5,30 @@ sidebar:
   order: 10
 ---
 
+## Logs and Log Insights
+
+The app **Logs** tab opens [Log Insights](/docs/webapp/log-insights/) by default. Use Insights to prioritize categories, versions, and devices for a 1, 3, 7, or 30 day period. Switch to the **Logs** subtab when you need the underlying device events, filters, and timestamps described below.
+
 ## Understanding Application Logs
 
-The Logs page provides a detailed history of update events and diagnostic information for your application. This is crucial for monitoring the update process, troubleshooting issues, and understanding how your devices interact with Capgo. You can access it by [clicking on your app](/docs/webapp/main-page/) and then [clicking on the "Logs" tab (previously named "updates" in some older screenshots or documentation)](/docs/webapp/main-app-page/).
+The raw Logs subtab provides a detailed history of update events and diagnostic information for your application. It is useful for confirming the device-level evidence behind an Insight, troubleshooting an update path, and understanding how devices interact with Capgo. Open an app, choose **Logs**, then choose the **Logs** subtab.
 
-From there you should see a page similar to this, displaying a list of log entries:
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="Raw Logs tab overview showing the main interface" /><figcaption>Raw Logs tab</figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="Logs page overview showing the main interface" /><figcaption>Logs Page Overview</figcaption></figure>
+The raw Logs interface includes:
 
-The logs page interface includes:
-1. **Logs Tab** - The navigation tab to access the logs view
-2. **Reload Button** - Refresh the logs list with the latest data
-3. **Time Range & Actions Filters** - Filter logs by date range and action type (see sections below)
+1. **Logs subtab** — the navigation control for individual log rows.
+2. **Reload button** — refreshes the log list with the latest data.
+3. **Time range and action filters** — narrow the event stream by time and action.
 
 Each row shows:
+
 - **Timestamp** (UTC)
 - **Device ID**
 - **Action code** (what happened)
 - **Version name** (bundle or `builtin`)
 
-Click a row to jump to the device detail page for the full history.
+Click a row to jump to the device detail page for its full history.
 
 ### Filtering by Date Range
 
@@ -202,8 +206,6 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | Channel selection or override failed |
 | `missingBundle`, `cannotGetBundle` | Manifest refers to a bundle Capgo cannot serve |
 | `needPlanUpgrade` | Org hit its plan/device limit |
-| `rateLimited` | Too many requests; SDK throttles until restart |
-| `blocked_by_server_url`, `backend_refusal`, `invalidIp` | Server-side rule blocked the request |
 
 **Download / integrity / install failures**
 
