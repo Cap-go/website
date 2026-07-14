@@ -1,42 +1,49 @@
 ---
 title: "Devices"
-description: "A comprehensive guide on utilizing the devices page to manage and configure your devices effectively, including filtering options and detailed configuration settings for individual devices."
+description: "Manage your Capgo device inventory, filters, metadata, and device-specific channel overrides."
 sidebar:
   order: 9
 ---
 
-:::note[Data Retention]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the list. Active devices are continuously tracked as they check for updates.
+:::note[Data retention]
+Device data is retained for **90 days** from the last device activity. Devices that have not connected to Capgo during that period are automatically removed from the list.
 :::
 
 ## Show the list of all devices
-First, let's take a look at the devices page. You can access it by [clicking on your app](/docs/webapp/main-page/) and then [clicking on the devices tab](/docs/webapp/main-app-page/).
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="devices list" /><figcaption></figcaption></figure>
+Open your app, then select the **Devices** tab.
 
-1. **Devices tab** - Click this tab in the navigation bar to access the devices page
-2. **Filters** - Click to filter devices by:
-   - **Override** - Show only devices that have a [custom channel](/docs/plugins/updater/api/#setchannel) or a custom version
-   - **Custom ID** - Show only devices with a custom identifier set
+<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="Capgo devices list" /><figcaption></figcaption></figure>
 
-## Configuring a device
+1. **Devices tab** - Open the device inventory.
+2. **Filters** - Filter devices by:
+   - **Override** - Show devices with a [custom channel](/docs/plugins/updater/api/#setchannel) or custom version.
+   - **Custom ID** - Show devices with a custom identifier.
 
-To configure a specific device click on it in the table and then you should see something like this:
+## Configure a device
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="show one device" /><figcaption></figcaption></figure>
+Select a device in the table to open its detail page.
 
-1. **Information** - View device details including Device ID, Last update, Platform, Plugin version, Version, Version builtin, OS version, and whether it's a Production app
-2. **Deployments** - View the deployment history for this device
-3. **Logs** - View logs associated with this device
-4. **Channel override** - Override the channel for this specific device. If set, this device will not use the public (default) channel and will only receive updates from the selected channel
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-country-code.webp" alt="Capgo device details showing the request-derived country code" /><figcaption>A device detail page can show the latest request-derived country code.</figcaption></figure>
+
+1. **Information** - View the device ID, last update, platform, updater version, installed and native versions, OS version, emulator and production state, encryption-key prefix, and request country when available.
+2. **Deployments** - View the deployment history for this device.
+3. **Logs** - View logs associated with this device.
+4. **Channel override** - Route this device to a specific private channel. When set, it takes precedence over normal channel selection.
+
+### Request country
+
+**Country** is the latest valid two-letter ISO 3166-1 code received from a Cloudflare-handled request for that device. It is not GPS or a location value sent by your app. Requests without a valid country do not clear the last valid value, and the field is absent when Capgo has no valid country for the device.
+
+### How device information is updated
+
+The updater and stats endpoints report device metadata when the app checks in. A device does not need to install an update to appear or refresh its details: an updater check that returns `no_new_version_available` can still record the reported metadata. Capgo skips redundant writes when that metadata has not changed, so **Last update** does not necessarily change after every check-in.
+
+Device metadata and MAU are different signals. See [Why my device number is different than my MAU?](/docs/faq/#why-my-device-number-is-different-than-my-mau) for the billing distinction.
 
 ### Custom ID
 
-The `Custom ID` is a very useful field that helps you connect the device to an ID you can recognize for your own users.
-
-Use it to easily identify which device belongs to which user.
-
-Custom ID can only be set from the device itself using `CapacitorUpdater.setCustomId({ customId: user });`
+The `Custom ID` helps you associate a device with an identifier you recognize for your users. Set it from the device with `CapacitorUpdater.setCustomId({ customId: user })`.
 
 ## Keep going from Devices
 

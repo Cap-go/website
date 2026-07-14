@@ -380,7 +380,7 @@ Device IDs are listed after the app checks in with Capgo through the updater or 
 
 The device list and MAU are based on different signals.
 
-The device list shows the latest known metadata for each device, such as the device ID, platform, plugin version, OS version, native version, channel, and installed bundle. Capgo updates this metadata when the app checks in, but repeated check-ins that report the same metadata may not change the row or its last update time.
+The device list shows the latest known metadata for each device, such as the device ID, platform, plugin version, OS version, native version, channel, installed bundle, and request country when available. The request country is the latest valid two-letter code received from a Cloudflare-handled request for that device, not GPS or app-provided location. Requests without a valid country do not clear the last valid value. Capgo updates this metadata when the app checks in, but repeated check-ins that report the same metadata may not change the row or its last update time.
 
 MAU counts distinct active devices during the billing window. That activity can increase even when the device metadata stays the same, so the device count and MAU can be different.
 
