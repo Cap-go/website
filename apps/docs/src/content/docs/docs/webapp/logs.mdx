@@ -165,6 +165,7 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | Code | Why this happens | What to do next |
 |------|------------------|-------------|
 | `invalidIp` | Capgo detected traffic that looks like bot traffic (Google/cloud infrastructure IP). | Ignore on real users; retry from real devices and normal networks, or check after some time. |
+| `provider_infrastructure_request_blocked` | The app blocks requests from known Google or Apple datacenter IP ranges. | Retry from a physical device on a normal user network. If provider-originated traffic is intentional, temporarily disable **Block provider infrastructure requests** in the app's Information tab. |
 | `needPlanUpgrade` | Organization reached plan/device limit. | Upgrade plan in dashboard or wait for next billing cycle. |
 | `semver_error` | Native app version in config is missing or not valid semver (`x.y.z`). | Set `plugins.CapacitorUpdater.version` to valid semver, then verify it in the [SemVer tester](https://capgo.app/semver_tester/) and rebuild the app. |
 | `disablePlatformIos` | iOS is disabled in channel policy. | If this was accidental, enable iOS in that channel and republish routing. If you intentionally block iOS in this track, keep it off and move iOS builds to a separate channel. |
@@ -202,8 +203,7 @@ These codes come from the `stats_action` enum used by the dashboard API (`capgo/
 | `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | Channel selection or override failed |
 | `missingBundle`, `cannotGetBundle` | Manifest refers to a bundle Capgo cannot serve |
 | `needPlanUpgrade` | Org hit its plan/device limit |
-| `rateLimited` | Too many requests; SDK throttles until restart |
-| `blocked_by_server_url`, `backend_refusal`, `invalidIp` | Server-side rule blocked the request |
+| `blocked_by_server_url`, `backend_refusal`, `invalidIp`, `provider_infrastructure_request_blocked` | Server-side rule blocked the request |
 
 **Download / integrity / install failures**
 

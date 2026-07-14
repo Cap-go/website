@@ -29,6 +29,16 @@ Capgo detected traffic that looks like it comes from Google or cloud infrastruct
 
 Ignore this on real users. Retry from normal networks and real devices, or wait and check again later.
 
+### `provider_infrastructure_request_blocked`
+
+**What it means**
+
+Your app is configured to block requests from known Google and Apple datacenter IP ranges. The protection applies to update checks, stats, and channel-self requests, so cloud-hosted probes and provider runners can receive this response even when the app configuration is otherwise valid.
+
+**What to do**
+
+Retry from a physical device on a normal user network. If the provider-originated traffic is intentional, temporarily disable **Block provider infrastructure requests** in the app's **Information** tab, then enable it again after the test. New apps enable this setting by default; existing apps retain their previous disabled setting until changed.
+
 ### `needPlanUpgrade`
 
 **What it means**

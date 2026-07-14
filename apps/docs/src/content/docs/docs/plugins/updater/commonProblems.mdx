@@ -15,6 +15,20 @@ When an update check fails, Capgo usually returns an `error` code and a `message
 
 ## Common failure codes
 
+### `provider_infrastructure_request_blocked`
+
+**Cause**
+
+The app has **Block provider infrastructure requests** enabled and the request originated from a known Google or Apple datacenter IP range. Capgo blocks these requests on `/updates`, `/stats`, and `/channel_self` to prevent provider-originated traffic from being treated as device traffic.
+
+**Fix**
+
+- Reproduce the update from a physical device on a normal user network.
+- Do not use cloud-hosted probes or provider datacenter runners for updater, stats, or channel-self checks while this protection is enabled.
+- If that traffic is intentional, open your app's **Information** tab and turn off **Block provider infrastructure requests**. Re-enable it when the test is complete.
+
+New apps have this protection enabled by default. Apps created before the setting was introduced keep it disabled until you enable it.
+
 ### `disable_auto_update_to_major`
 
 **Cause**
