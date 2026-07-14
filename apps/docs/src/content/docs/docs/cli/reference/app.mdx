@@ -3,10 +3,11 @@ title: 📱 app
 description: "📱 Manage your Capgo app settings and configurations in Capgo Cloud."
 sidebar_label: app
 sidebar:
-  order: 7
+  order: 9
 ---
 
 📱 Manage your Capgo app settings and configurations in Capgo Cloud.
+
 
 ### <a id="app-add"></a> ➕ **Add**
 
@@ -29,9 +30,9 @@ npx @capgo/cli@latest app add com.example.app --name "My App" --icon ./icon.png
 
 | Param          | Type          | Description          |
 | -------------- | ------------- | -------------------- |
-| **-n,** | <code>string</code> | App name for display in Capgo Cloud |
-| **-i,** | <code>string</code> | App icon path for display in Capgo Cloud |
-| **-a,** | <code>string</code> | API key to link to your account |
+| **-n** | <code>string</code> | App name for display in Capgo Cloud |
+| **-i** | <code>string</code> | App icon path for display in Capgo Cloud |
+| **-a** | <code>string</code> | API key to link to your account |
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
 
@@ -53,7 +54,7 @@ npx @capgo/cli@latest app delete com.example.app
 
 | Param          | Type          | Description          |
 | -------------- | ------------- | -------------------- |
-| **-a,** | <code>string</code> | API key to link to your account |
+| **-a** | <code>string</code> | API key to link to your account |
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
 
@@ -77,7 +78,7 @@ npx @capgo/cli@latest app list
 
 | Param          | Type          | Description          |
 | -------------- | ------------- | -------------------- |
-| **-a,** | <code>string</code> | API key to link to your account |
+| **-a** | <code>string</code> | API key to link to your account |
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
 
@@ -100,8 +101,8 @@ npx @capgo/cli@latest app debug com.example.app --device DEVICE_ID
 
 | Param          | Type          | Description          |
 | -------------- | ------------- | -------------------- |
-| **-a,** | <code>string</code> | API key to link to your account |
-| **-d,** | <code>string</code> | The specific device ID to debug |
+| **-a** | <code>string</code> | API key to link to your account |
+| **-d** | <code>string</code> | The specific device ID to debug |
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
 
@@ -148,14 +149,23 @@ npx @capgo/cli@latest app set com.example.app --name "Updated App" --retention 3
 
 | Param          | Type          | Description          |
 | -------------- | ------------- | -------------------- |
-| **-n,** | <code>string</code> | App name for display in Capgo Cloud |
-| **-i,** | <code>string</code> | App icon path for display in Capgo Cloud |
-| **-a,** | <code>string</code> | API key to link to your account |
-| **-r,** | <code>string</code> | Days to keep old bundles (0 = infinite, default: 0) |
+| **-n** | <code>string</code> | App name for display in Capgo Cloud |
+| **-i** | <code>string</code> | Local image file path (png, jpg, webp, svg) used as the app icon in Capgo Cloud |
+| **-a** | <code>string</code> | API key to link to your account |
+| **-r** | <code>string</code> | Days to keep old bundles (0 = infinite, default: 0) |
 | **--expose-metadata** | <code>string</code> | Expose bundle metadata (link and comment) to the plugin (true/false, default: false) |
+| **--preview** | <code>boolean</code> | Enable bundle and channel preview QR codes for this app |
+| **--no-preview** | <code>boolean</code> | Disable bundle and channel preview QR codes for this app |
+| **--allow-device-custom-id** | <code>boolean</code> | Allow devices to set a custom device ID for this app |
+| **--no-allow-device-custom-id** | <code>boolean</code> | Disallow custom device IDs for this app |
+| **--block-provider-infra-requests** | <code>boolean</code> | Block provider infrastructure requests for this app |
+| **--no-block-provider-infra-requests** | <code>boolean</code> | Allow provider infrastructure requests for this app |
+| **--build-timeout-minutes** | <code>string</code> | Native build timeout in minutes (5-360, default: 15) |
+| **--ios-store-url** | <code>string</code> | iOS App Store URL for this app |
+| **--android-store-url** | <code>string</code> | Google Play Store URL for this app |
+| **--default-upload-channel** | <code>string</code> | Default upload channel name for this app |
+| **--default-download-channel** | <code>string</code> | Default download channel name for this app (sets channel public=true) |
+| **--disable-download-channels** | <code>boolean</code> | Disable Capgo download channels for this app (sets all channels public=false) |
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
 
-## Keep going from app
-
-If you are using **app** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

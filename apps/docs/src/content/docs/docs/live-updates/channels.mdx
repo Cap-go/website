@@ -114,6 +114,10 @@ Channels have several options that control who can receive updates and how updat
 - Allow emulator devices: Permit updates to emulators/simulators (useful for testing).
 - Allow device self‑assignment: Lets the app switch to this channel at runtime using `setChannel`. If disabled, `setChannel` will fail for this channel.
 
+### Progressive rollouts
+
+A channel can keep a stable bundle while gradually exposing a separate rollout target to a sticky device cohort. You can pause, resume, promote, roll back, and configure an automatic failure response without switching the channel for everyone. See [Progressive rollouts](/docs/live-updates/progressive-rollouts/) for the delivery model, dashboard workflow, API fields, and CLI commands.
+
 ### Disable Auto Update strategies
 
 Use this to restrict which kinds of updates the channel will automatically deliver. Options:
