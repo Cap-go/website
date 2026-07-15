@@ -76,6 +76,12 @@ const locale = Astro.locals.locale
                   {m.live_update({}, { locale: Astro.locals.locale })}
                 </a>
                 <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'data')}
+                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
+                >
+                  Live Update data
+                </a>
+                <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'notifications')}
                   class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
                 >
@@ -582,6 +588,9 @@ const locale = Astro.locals.locale
               class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
             >
               {m.live_update({}, { locale: Astro.locals.locale })}
+            </a>
+            <a href={getRelativeLocaleUrl(Astro.locals.locale, 'data')} class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80">
+              Live Update data
             </a>
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'notifications')}
