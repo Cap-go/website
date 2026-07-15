@@ -36,14 +36,14 @@ The page displays two sections:
      - **None** — No organization-wide access.
      - **Member** — Basic read access to the organization.
      - **Admin** — Full administrative access to the organization and all its apps.
-   - **App-only access** — Enable **Limit this key to selected apps**. This mode creates no organization-wide role binding.
+   - **App-only access** — Enable **Limit this key to selected apps**. Each app binding remains linked to that app's owning organization; this mode omits only an organization-wide RBAC role.
 
 4. If the key needs to create organizations through the public API, enable **Allow creating organizations**.
 
    This adds the global `org.create` permission. The key also needs an organization-scoped `org_admin` or `org_super_admin` binding. In the dashboard, selecting **Admin** creates the `org_admin` binding. When this key creates a new organization, Capgo automatically assigns the key as Super Admin on that new organization.
 
 5. To grant app access:
-   - When **Limit this key to selected apps** is enabled, choose an organization under **Organizations to filter apps** to reveal its apps. This filter does not grant organization-wide access.
+   - When **Limit this key to selected apps** is enabled, choose an organization under **Organizations to filter apps** to reveal its apps. The selected app bindings remain associated with their owning organizations; this filter does not grant organization-wide access.
    - Click **"+ Add App"**, select one or more apps, then assign a role to each:
      - **App Reader** — Read-only access to the app.
      - **App Uploader** — Can upload new bundles.
@@ -66,12 +66,12 @@ The page displays two sections:
 Use **App Preview** for CI that creates a temporary preview channel, uploads and promotes a bundle, then removes the channel.
 
 1. Create an RBAC key and enable **Limit this key to selected apps**.
-2. Under **Organizations to filter apps**, select the organization only to reveal its apps.
+2. Under **Organizations to filter apps**, select the organization to reveal its apps; each selected app remains associated with its owning organization.
 3. Add only the app or apps used for preview deployments.
 4. Select **App Preview** for each selected app.
 5. Create a secure key, set an expiration date when appropriate, and store it in your CI secret manager.
 
-This selected-apps-only mode creates no organization-scoped role binding. The key is limited to the selected apps and includes only these permissions:
+This selected-apps-only mode does not grant an organization-wide role. Each selected app binding remains associated with its owning organization, and the key is limited to the selected apps with only these permissions:
 
 - `app.read`, `app.read_bundles`, and `channel.read`
 - `app.upload_bundle`
