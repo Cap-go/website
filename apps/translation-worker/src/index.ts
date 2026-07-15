@@ -160,6 +160,7 @@ const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
+const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
 const TRANSLATION_CACHE_VERSION = '2026-05-10-ahrefs-head-assets-v1'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
@@ -592,6 +593,26 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
     'X-Capgo-Translation-Fallback': 'temporary-english-redirect',
   })
   return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
+}
+
+async function temporaryEnglishRetryResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
+  const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
+  if (isRedirect(originResponse)) return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
+  if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
+
+  const headers = new Headers(originResponse.headers)
+  headers.set('Refresh', String(TRANSLATION_RETRY_SECONDS))
+  headers.set('Retry-After', String(TRANSLATION_RETRY_SECONDS))
+  headers.set('X-Capgo-Translation-Fallback', 'temporary-english-retry')
+  return withResponseHeaders(
+    new Response(isHead ? null : originResponse.body, {
+      status: 503,
+      statusText: 'Translation pending',
+      headers,
+    }),
+    'MISS',
+    isHead,
+  )
 }
 
 function toCachedResponse(response: Response, sourceHash?: string): Response {
@@ -2148,15 +2169,17 @@ async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, rea
   await putTranslationPendingMarkerSafely(requestUrl, locale, reason, priority, sourceHash)
 }
 
-async function enqueueTranslationSafely(env: Env, requestUrl: URL, locale: Locale, reason: TranslationQueueReason, priority: boolean, sourceHash?: string): Promise<void> {
+async function enqueueTranslationSafely(env: Env, requestUrl: URL, locale: Locale, reason: TranslationQueueReason, priority: boolean, sourceHash?: string): Promise<boolean> {
   try {
     await enqueueTranslation(env, requestUrl, locale, reason, priority, sourceHash)
+    return true
   } catch (error) {
     console.error('Failed to enqueue translated page', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
+    return false
   }
 }
 
-function scheduleTranslationBackgroundTask(ctx: WorkerExecutionContext | undefined, task: Promise<void>): void {
+function scheduleTranslationBackgroundTask(ctx: WorkerExecutionContext | undefined, task: Promise<unknown>): void {
   if (ctx) {
     ctx.waitUntil(task)
     return
@@ -2286,12 +2309,9 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     return withResponseHeaders(storedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
-  if (request.method !== 'GET') {
-    return temporaryEnglishRedirectResponse(requestUrl, isHead)
-  }
-
-  await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)
-  return temporaryEnglishRedirectResponse(requestUrl, isHead)
+  const enqueued = await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)
+  if (!enqueued) return temporaryEnglishRedirectResponse(requestUrl, isHead)
+  return await temporaryEnglishRetryResponse(request, env, requestUrl, locale, isHead)
 }
 
 function jsonResponse(body: unknown, status = 200): Response {
