@@ -56,13 +56,13 @@ npx @capgo/cli@latest channel delete production com.example.app
 | Param          | Type          | Description          |
 | -------------- | ------------- | -------------------- |
 | **-a** | <code>string</code> | API key to link to your account |
-| **--delete-bundle** | <code>boolean</code> | Delete the bundle associated with the channel |
+| **--delete-bundle** | <code>boolean</code> | Delete the bundle associated with the channel. With an App Preview key, atomically deletes only the preview channel and bundle owned by that key. |
 | **--success-if-not-found** | <code>boolean</code> | Success if the channel is not found |
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
 
-:::caution
-For least-privilege preview automation, use an app-scoped **App Preview** API key and omit `--delete-bundle`. That flag also requires `bundle.delete`, which **App Preview** intentionally does not grant. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows) for setup.
+:::note
+For least-privilege preview automation, use an organization- and app-bound **App Preview** API key with `--delete-bundle`. The command uses a narrow atomic cleanup route: it succeeds only for the channel and linked bundle that key created. The key cannot use it on a default/main channel, another preview key's channel, or another key's bundle, and it still does not receive general `bundle.delete`. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows) for setup.
 :::
 
 ### <a id="channel-list"></a> 📋 **List**

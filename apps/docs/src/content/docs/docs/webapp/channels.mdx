@@ -88,7 +88,7 @@ If the trash icon is not visible, your account does not have the `channel.delete
 npx @capgo/cli@latest channel delete <channel-name> <app-id>
 ```
 
-For preview CI, an app-scoped **App Preview** key can delete channels in its selected apps but cannot delete the associated bundle. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows) for the least-privilege setup.
+For preview CI, an organization- and app-bound **App Preview** key can atomically delete only the preview channel and bundle it created with `channel delete <preview-channel> <app-id> --delete-bundle`. It cannot change or delete an existing default/main channel, another preview key's channel, or another key's bundle. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows) for the least-privilege setup.
 
 ## Managing a channel
 

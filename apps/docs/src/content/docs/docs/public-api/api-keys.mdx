@@ -28,7 +28,7 @@ If an API key has explicit role bindings, **only those bindings** are evaluated 
 
 ### Preview channel automation
 
-For CI that creates a temporary preview channel, uploads and promotes a bundle, then deletes the channel, bind `app_preview` only to the preview app:
+For CI that creates a temporary preview channel, uploads and promotes a bundle, then deletes both, bind `app_preview` only to the preview app:
 
 ```json
 {
@@ -38,17 +38,21 @@ For CI that creates a temporary preview channel, uploads and promotes a bundle, 
     {
       "role_name": "app_preview",
       "scope_type": "app",
-      "org_id": "00000000-0000-0000-0000-000000000000",
+      "org_id": "<OWNING_ORG_UUID>",
       "app_id": "<APP_UUID>"
     }
   ]
 }
 ```
-`app_id` is the app record’s internal UUID, not the public app or bundle identifier (for example, `com.example.app`).
+`org_id` is the UUID of the app's owning organization. `app_id` is the app record's internal UUID, not the public app identifier used by CLI commands (for example, `com.example.app`). The binding remains organization-bound even when the key has no organization-wide role.
 
-This role includes only `app.read`, `app.read_bundles`, `app.upload_bundle`, `app.create_channel`, `channel.read`, `channel.promote_bundle`, and `channel.delete`. It deliberately does not include `bundle.delete`, so preview cleanup must not use `channel delete --delete-bundle`.
+The app-level `app_preview` role includes only `app.read`, `app.read_bundles`, `app.upload_bundle`, and `app.create_channel`. When that key creates a channel, Capgo automatically adds a `channel_preview` binding on the newly created channel. That child binding grants `channel.read`, `channel.promote_bundle`, and `channel.delete` only for the channel the key created.
 
-The role is scoped to an app, not a pull request or channel name. It can delete any channel in the bound app. For the dashboard setup, see [Use an App Preview key for preview workflows](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows).
+Capgo records the App Preview key that uploaded each bundle. The key can promote only its own bundle to its own preview channel. It has no channel lifecycle access to an existing default/main channel, a channel created by another preview key, or another key's bundle.
+
+Use `channel delete <preview-channel> <public-app-id> --delete-bundle` for cleanup. This is an atomic, ownership-checked preview cleanup route; it removes only the calling key's preview channel and linked bundle. `app_preview` does not grant generic `bundle.delete`.
+
+For the dashboard setup and a complete CLI example, see [Use an App Preview key for preview workflows](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows).
 
 {/* [SCREENSHOT: capgo_apikeys_rbac_diagram.webp] — Diagram showing the RBAC hierarchy: org roles → app roles → API key permissions */}
 <figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_rbac_diagram.webp" alt="A diagram explaining how RBAC API key permissions work" /><figcaption></figcaption></figure>
@@ -119,7 +123,7 @@ Organization policies can enforce:
 ## Common Use Cases
 
 1. **CI/CD Integration**: Create keys scoped to specific apps with the `app_uploader` or `app_developer` role, and set an expiration date.
-2. **PR Preview Channels**: Use `app_preview` on only the preview app or apps when CI needs to upload and promote bundles, then create and delete temporary channels.
+2. **PR Preview Channels**: Use `app_preview` on only the preview app or apps when CI needs to upload a bundle, create a temporary channel, and atomically clean up its own channel and bundle.
 3. **Deployment Automation**: Use keys with the `app_developer` role for automated deployment scripts.
 4. **Monitoring Tools**: Create keys with the `app_reader` role for external monitoring integrations.
 5. **Admin Access**: Use keys with the `org_admin` role sparingly for administrative tools.
