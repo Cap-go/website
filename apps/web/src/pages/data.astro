@@ -4,7 +4,7 @@ import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
 const title = 'Capgo delivery data | Live Update reliability'
-const description = 'Anonymous, aggregate delivery data for Capgo Live Updates: update checks, reported failures, platform mix, and updater version adoption.'
+const description = 'Anonymous, percentage-based reliability data for Capgo Live Updates, grouped by device and UTC day.'
 const content = {
   title,
   description,
@@ -14,98 +14,105 @@ const content = {
 ---
 
 <Layout content={content}>
-  <div class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="true">
+  <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="true">
     <section class="data-hero">
       <div class="data-shell">
         <p class="data-eyebrow"><span aria-hidden="true"></span> Public aggregate data</p>
-        <h1>Live Update delivery data.</h1>
-        <p class="data-summary">A 30-day view of anonymous update checks, reported failures, active platforms, and updater adoption across Capgo.</p>
-        <p class="data-updated" data-updated aria-live="polite">Loading live delivery data…</p>
+        <h1>Live Update reliability, measured clearly.</h1>
+        <p class="data-summary">A privacy-safe 30-day view of install outcomes. Every result is grouped by app, device, and UTC day before percentages are calculated.</p>
+        <p class="data-updated" data-updated aria-live="polite"><span class="data-spinner" aria-hidden="true"></span> Loading current reliability data…</p>
       </div>
     </section>
 
-    <section class="data-section" aria-labelledby="delivery-window">
+    <section class="data-section" aria-labelledby="reliability-title">
       <div class="data-shell">
         <div class="data-heading">
           <div>
-            <p class="data-eyebrow">Delivery window</p>
-            <h2 id="delivery-window">Update checks and reported failures</h2>
+            <p class="data-eyebrow">Install reliability</p>
+            <h2 id="reliability-title">Daily success rate</h2>
           </div>
-          <p>Each bar represents one UTC day. Failures are reports sent by updater clients, not an estimate of affected users.</p>
+          <p>One success and one failure at most are counted for each app, device, and day. Repeated file-level errors cannot inflate the result.</p>
         </div>
 
-        <div class="data-kpis" aria-label="30 day delivery summary">
-          <div><p>Update checks</p><strong data-kpi="requests">—</strong></div>
-          <div><p>Reported failures</p><strong data-kpi="failures">—</strong></div>
-          <div><p>Failure reports / checks</p><strong data-kpi="failure-rate">—</strong></div>
+        <div class="data-kpis" aria-label="Reliability summary">
+          <div><p>30-day success rate</p><strong data-kpi="success-rate">—</strong></div>
+          <div><p>Reporting window</p><strong>30 days</strong></div>
+          <div><p>Counting unit</p><strong>Device / day</strong></div>
         </div>
 
-        <div class="data-chart" data-daily-chart aria-label="Daily update checks chart" hidden>
-          <div class="data-chart-legend"><span><i class="requests"></i> Update checks</span><span><i class="failures"></i> Reported failures</span></div>
-          <div class="data-bars" data-daily-bars role="list" aria-label="Daily delivery data"></div>
+        <div class="data-loading data-chart-skeleton" aria-hidden="true">
+          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        </div>
+        <div class="data-chart" data-daily-chart aria-label="Daily install success rate chart" hidden>
+          <div class="data-chart-scale" aria-hidden="true"><span>100%</span><span>50%</span><span>0%</span></div>
+          <div class="data-bars" data-daily-bars role="list" aria-label="Daily install success rates"></div>
           <div class="data-axis"><span data-daily-start></span><span data-daily-end></span></div>
         </div>
-        <p class="data-empty" data-daily-empty aria-live="polite">Loading live delivery data…</p>
+        <p class="data-empty" data-daily-empty aria-live="polite" hidden></p>
       </div>
     </section>
 
-    <section class="data-section data-section-muted" aria-labelledby="platforms">
+    <section class="data-section data-section-muted" aria-labelledby="platforms-title">
       <div class="data-shell data-split">
         <div>
-          <p class="data-eyebrow">Active devices</p>
-          <h2 id="platforms">Platform breakdown</h2>
-          <p class="data-copy">Distinct active devices in the reporting window. A device that is active on more than one platform is counted once per platform.</p>
+          <p class="data-eyebrow">Platform mix</p>
+          <h2 id="platforms-title">Share of active devices</h2>
+          <p class="data-copy">Only percentage distribution is published. Exact device totals never leave the API.</p>
         </div>
         <dl class="data-platforms">
-          <div data-platform="ios">
-            <dt>iOS</dt>
-            <dd><span data-platform-value>—</span><span data-platform-share>—</span></dd>
-            <div aria-hidden="true"><span data-platform-bar></span></div>
-          </div>
-          <div data-platform="android">
-            <dt>Android</dt>
-            <dd><span data-platform-value>—</span><span data-platform-share>—</span></dd>
-            <div aria-hidden="true"><span data-platform-bar></span></div>
-          </div>
-          <div data-platform="electron">
-            <dt>Electron</dt>
-            <dd><span data-platform-value>—</span><span data-platform-share>—</span></dd>
-            <div aria-hidden="true"><span data-platform-bar></span></div>
-          </div>
+          {
+            (['ios', 'android', 'electron'] as const).map((platform) => (
+              <div data-platform={platform}>
+                <dt>{platform === 'ios' ? 'iOS' : platform[0].toUpperCase() + platform.slice(1)}</dt>
+                <dd data-platform-share>—</dd>
+                <div aria-hidden="true">
+                  <span data-platform-bar />
+                </div>
+              </div>
+            ))
+          }
         </dl>
       </div>
     </section>
 
-    <section class="data-section" aria-labelledby="failures">
+    <section class="data-section" aria-labelledby="failures-title">
       <div class="data-shell data-split">
         <div>
-          <p class="data-eyebrow">Reported client failures</p>
-          <h2 id="failures">Top failure reasons</h2>
-          <p class="data-copy">Normalized updater actions make recurring failure modes comparable without exposing error payloads.</p>
+          <p class="data-eyebrow">Failure distribution</p>
+          <h2 id="failures-title">Top failure reasons</h2>
+          <p class="data-copy">Each reason is deduplicated by app, device, and day. The list shows percentage share only.</p>
         </div>
-        <ol class="data-failures" data-failures aria-live="polite"><li class="data-empty">Loading live delivery data…</li></ol>
+        <ol class="data-failures" data-failures aria-live="polite">
+          <li class="data-loading data-list-skeleton" aria-hidden="true"><span></span><div></div><b></b></li>
+          <li class="data-loading data-list-skeleton" aria-hidden="true"><span></span><div></div><b></b></li>
+          <li class="data-loading data-list-skeleton" aria-hidden="true"><span></span><div></div><b></b></li>
+        </ol>
       </div>
     </section>
 
-    <section class="data-section data-section-muted" aria-labelledby="updater-versions">
+    <section class="data-section data-section-muted" aria-labelledby="versions-title">
       <div class="data-shell">
         <div class="data-heading">
-          <div><p class="data-eyebrow">Adoption context</p><h2 id="updater-versions">Most used updater version over time</h2></div>
-          <p>The leading updater version on each day helps explain broad shifts in delivery behaviour.</p>
+          <div><p class="data-eyebrow">Adoption context</p><h2 id="versions-title">Leading updater version</h2></div>
+          <p>The most-used updater version each day is shown as a percentage, without publishing device totals.</p>
         </div>
-        <div class="data-version-chart" data-version-chart role="list" aria-label="Most used updater version by day" hidden></div>
-        <p class="data-empty" data-version-empty aria-live="polite">Loading live delivery data…</p>
+        <div class="data-loading data-chart-skeleton data-version-skeleton" aria-hidden="true">
+          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        </div>
+        <div class="data-version-chart" data-version-chart role="list" aria-label="Leading updater version share by day" hidden></div>
+        <p class="data-empty" data-version-empty aria-live="polite" hidden></p>
       </div>
     </section>
-  </div>
+  </main>
 </Layout>
 
 <script>
-  type DailyMetric = { date: string; requests: number; failures: number }
-  type FailureMetric = { reason: string; count: number }
-  type VersionMetric = { date: string; version: string; devices: number }
+  type DailyMetric = { date: string; success_rate: number }
+  type FailureMetric = { reason: string; share: number }
+  type VersionMetric = { date: string; version: string; share: number }
   type Metrics = {
     updated_at: string
+    success_rate: number
     daily: DailyMetric[]
     failures: FailureMetric[]
     platforms: { ios: number; android: number; electron: number }
@@ -117,9 +124,7 @@ const content = {
   if (page) {
     const endpoint = page.dataset.metricsEndpoint
     const updated = page.querySelector<HTMLElement>('[data-updated]')
-    const requestsKpi = page.querySelector<HTMLElement>('[data-kpi="requests"]')
-    const failuresKpi = page.querySelector<HTMLElement>('[data-kpi="failures"]')
-    const failureRateKpi = page.querySelector<HTMLElement>('[data-kpi="failure-rate"]')
+    const successRateKpi = page.querySelector<HTMLElement>('[data-kpi="success-rate"]')
     const dailyChart = page.querySelector<HTMLElement>('[data-daily-chart]')
     const dailyBars = page.querySelector<HTMLElement>('[data-daily-bars]')
     const dailyStart = page.querySelector<HTMLElement>('[data-daily-start]')
@@ -128,9 +133,7 @@ const content = {
     const failuresList = page.querySelector<HTMLOListElement>('[data-failures]')
     const versionChart = page.querySelector<HTMLElement>('[data-version-chart]')
     const versionEmpty = page.querySelector<HTMLElement>('[data-version-empty]')
-    const number = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 })
-    const fullNumber = new Intl.NumberFormat('en-US')
-    const styleScopeAttributes = page.getAttributeNames().filter(attribute => attribute.startsWith('data-astro-cid-'))
+    const styleScopeAttributes = page.getAttributeNames().filter((attribute) => attribute.startsWith('data-astro-cid-'))
 
     function createScopedElement<K extends keyof HTMLElementTagNameMap>(tagName: K) {
       const element = document.createElement(tagName)
@@ -142,42 +145,44 @@ const content = {
       return Boolean(value) && typeof value === 'object'
     }
 
-    function positiveNumber(value: unknown) {
-      const number = Number(value)
-      return Number.isFinite(number) && number >= 0 ? number : 0
+    function percentage(value: unknown) {
+      const parsed = Number(value)
+      return Number.isFinite(parsed) ? Math.min(100, Math.max(0, parsed)) : 0
     }
 
     function normalizeMetrics(value: unknown): Metrics | null {
-      if (!isRecord(value) || !Array.isArray(value.daily) || !Array.isArray(value.failures) || !Array.isArray(value.updater_versions) || !isRecord(value.platforms)) return null
+      if (
+        !isRecord(value) ||
+        typeof value.success_rate !== 'number' ||
+        !Array.isArray(value.daily) ||
+        !Array.isArray(value.failures) ||
+        !Array.isArray(value.updater_versions) ||
+        !isRecord(value.platforms)
+      )
+        return null
 
       const daily = value.daily
-        .flatMap((item) => {
-          if (!isRecord(item) || typeof item.date !== 'string') return []
-          return [{ date: item.date, requests: positiveNumber(item.requests), failures: positiveNumber(item.failures) }]
-        })
+        .flatMap((item) =>
+          !isRecord(item) || typeof item.date !== 'string' || typeof item.success_rate !== 'number' ? [] : [{ date: item.date, success_rate: percentage(item.success_rate) }],
+        )
         .sort((a, b) => a.date.localeCompare(b.date))
       const failures = value.failures
-        .flatMap((item) => {
-          if (!isRecord(item) || typeof item.reason !== 'string') return []
-          return [{ reason: item.reason, count: positiveNumber(item.count) }]
-        })
-        .sort((a, b) => b.count - a.count)
+        .flatMap((item) => (!isRecord(item) || typeof item.reason !== 'string' || typeof item.share !== 'number' ? [] : [{ reason: item.reason, share: percentage(item.share) }]))
+        .sort((a, b) => b.share - a.share)
       const updater_versions = value.updater_versions
-        .flatMap((item) => {
-          if (!isRecord(item) || typeof item.date !== 'string' || typeof item.version !== 'string') return []
-          return [{ date: item.date, version: item.version, devices: positiveNumber(item.devices) }]
-        })
-        .sort((a, b) => a.date.localeCompare(b.date) || b.devices - a.devices)
+        .flatMap((item) =>
+          !isRecord(item) || typeof item.date !== 'string' || typeof item.version !== 'string' || typeof item.share !== 'number'
+            ? []
+            : [{ date: item.date, version: item.version, share: percentage(item.share) }],
+        )
+        .sort((a, b) => a.date.localeCompare(b.date) || b.share - a.share)
 
       return {
         updated_at: typeof value.updated_at === 'string' ? value.updated_at : '',
+        success_rate: percentage(value.success_rate),
         daily,
         failures,
-        platforms: {
-          ios: positiveNumber(value.platforms.ios),
-          android: positiveNumber(value.platforms.android),
-          electron: positiveNumber(value.platforms.electron),
-        },
+        platforms: { ios: percentage(value.platforms.ios), android: percentage(value.platforms.android), electron: percentage(value.platforms.electron) },
         updater_versions,
       }
     }
@@ -189,141 +194,106 @@ const content = {
         .replace(/\b\w/g, (letter) => letter.toUpperCase())
     }
 
-    function setPlatform(platform: keyof Metrics['platforms'], value: number, total: number) {
+    function setPlatform(platform: keyof Metrics['platforms'], share: number) {
       const row = page?.querySelector<HTMLElement>(`[data-platform="${platform}"]`)
-      const valueElement = row?.querySelector<HTMLElement>('[data-platform-value]')
       const shareElement = row?.querySelector<HTMLElement>('[data-platform-share]')
       const bar = row?.querySelector<HTMLElement>('[data-platform-bar]')
-      if (!valueElement || !shareElement || !bar) return
-
-      const share = total ? (value / total) * 100 : 0
-      valueElement.textContent = number.format(value)
-      shareElement.textContent = total ? `${share.toFixed(1)}%` : '—'
-      bar.style.width = `${share}%`
+      if (!shareElement || !bar) return
+      shareElement.textContent = `${share.toFixed(1)}%`
+      bar.style.setProperty('--share', `${share}%`)
     }
 
     function renderDaily(metrics: Metrics) {
       if (!dailyChart || !dailyBars || !dailyStart || !dailyEnd || !dailyEmpty) return
-      const maxRequests = Math.max(1, ...metrics.daily.map((item) => item.requests))
       dailyBars.replaceChildren()
-
       for (const item of metrics.daily) {
         const bar = createScopedElement('div')
-        const label = `${item.date}: ${fullNumber.format(item.requests)} checks, ${fullNumber.format(item.failures)} reported failures`
+        const label = `${item.date}: ${item.success_rate.toFixed(1)}% install success`
         bar.className = 'data-bar'
         bar.title = label
         bar.setAttribute('role', 'listitem')
         bar.setAttribute('aria-label', label)
-        const failure = createScopedElement('span')
-        failure.className = 'data-bar-failure'
-        failure.style.height = `${(item.failures / maxRequests) * 100}%`
-        const request = createScopedElement('span')
-        request.className = 'data-bar-request'
-        request.style.height = `${(item.requests / maxRequests) * 100}%`
-        bar.append(failure, request)
+        const fill = createScopedElement('span')
+        fill.style.setProperty('--success-rate', `${item.success_rate}%`)
+        bar.append(fill)
         dailyBars.append(bar)
       }
-
       dailyChart.hidden = metrics.daily.length === 0
       dailyEmpty.hidden = metrics.daily.length > 0
-      dailyEmpty.textContent = 'Delivery telemetry is temporarily unavailable. Please check back shortly.'
+      dailyEmpty.textContent = 'Reliability telemetry is temporarily unavailable.'
       dailyStart.textContent = metrics.daily[0]?.date ?? ''
       dailyEnd.textContent = metrics.daily.at(-1)?.date ?? ''
     }
 
-    function renderFailures(metrics: Metrics, totalFailures: number) {
+    function renderFailures(metrics: Metrics) {
       if (!failuresList) return
       failuresList.replaceChildren()
-      const topFailureCount = metrics.failures[0]?.count ?? 0
-
       for (const [index, item] of metrics.failures.entries()) {
         const row = createScopedElement('li')
         const rank = createScopedElement('span')
         rank.textContent = String(index + 1).padStart(2, '0')
-        const copy = createScopedElement('div')
         const reason = createScopedElement('strong')
         reason.textContent = readableReason(item.reason)
-        const count = createScopedElement('small')
-        count.textContent = `${fullNumber.format(item.count)} reports`
-        copy.append(reason, count)
         const share = createScopedElement('b')
-        share.textContent = totalFailures ? `${((item.count / totalFailures) * 100).toFixed(1)}%` : '—'
+        share.textContent = `${item.share.toFixed(1)}%`
         const track = createScopedElement('i')
         track.setAttribute('aria-hidden', 'true')
         const fill = createScopedElement('em')
-        fill.style.width = `${topFailureCount ? (item.count / topFailureCount) * 100 : 0}%`
+        fill.style.setProperty('--share', `${item.share}%`)
         track.append(fill)
-        row.append(rank, copy, share, track)
+        row.append(rank, reason, share, track)
         failuresList.append(row)
       }
-
-      if (metrics.failures.length === 0) {
-        const empty = createScopedElement('li')
-        empty.className = 'data-empty'
-        empty.textContent = 'No failure reports in this window.'
-        failuresList.append(empty)
-      }
+      if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failure reasons in this window.' }))
     }
 
     function renderVersions(metrics: Metrics) {
       if (!versionChart || !versionEmpty) return
-      const leadingVersions = new Map<string, VersionMetric>()
-      for (const item of metrics.updater_versions) {
-        const current = leadingVersions.get(item.date)
-        if (!current || item.devices > current.devices) leadingVersions.set(item.date, item)
-      }
-      const trend = [...leadingVersions.values()].sort((a, b) => a.date.localeCompare(b.date))
-      const maxDevices = Math.max(1, ...trend.map((item) => item.devices))
+      const leading = new Map<string, VersionMetric>()
+      for (const item of metrics.updater_versions) if (!leading.has(item.date)) leading.set(item.date, item)
+      const trend = [...leading.values()]
       versionChart.replaceChildren()
-
       for (const item of trend) {
         const bar = createScopedElement('div')
-        const label = `${item.date}: ${item.version} on ${fullNumber.format(item.devices)} devices`
+        const label = `${item.date}: ${item.version}, ${item.share.toFixed(1)}% share`
         bar.title = label
         bar.setAttribute('role', 'listitem')
         bar.setAttribute('aria-label', label)
         const fill = createScopedElement('span')
-        fill.style.height = `${(item.devices / maxDevices) * 100}%`
+        fill.style.setProperty('--share', `${item.share}%`)
         const labelElement = createScopedElement('small')
         labelElement.textContent = item.version
         bar.append(fill, labelElement)
         versionChart.append(bar)
       }
-
       versionChart.hidden = trend.length === 0
       versionEmpty.hidden = trend.length > 0
       versionEmpty.textContent = 'Updater adoption telemetry is temporarily unavailable.'
     }
 
     function renderMetrics(metrics: Metrics) {
-      const totalRequests = metrics.daily.reduce((sum, item) => sum + item.requests, 0)
-      const totalFailures = metrics.daily.reduce((sum, item) => sum + item.failures, 0)
-      const totalPlatforms = Object.values(metrics.platforms).reduce((sum, value) => sum + value, 0)
-      if (requestsKpi) requestsKpi.textContent = number.format(totalRequests)
-      if (failuresKpi) failuresKpi.textContent = number.format(totalFailures)
-      if (failureRateKpi) failureRateKpi.textContent = totalRequests ? `${((totalFailures / totalRequests) * 100).toFixed(2)}%` : '0.00%'
-      setPlatform('ios', metrics.platforms.ios, totalPlatforms)
-      setPlatform('android', metrics.platforms.android, totalPlatforms)
-      setPlatform('electron', metrics.platforms.electron, totalPlatforms)
+      if (successRateKpi) successRateKpi.textContent = `${metrics.success_rate.toFixed(1)}%`
+      setPlatform('ios', metrics.platforms.ios)
+      setPlatform('android', metrics.platforms.android)
+      setPlatform('electron', metrics.platforms.electron)
       renderDaily(metrics)
-      renderFailures(metrics, totalFailures)
+      renderFailures(metrics)
       renderVersions(metrics)
-
       if (updated) {
         const timestamp = new Date(metrics.updated_at)
         const formatted = Number.isNaN(timestamp.getTime())
           ? 'Updated moments ago'
           : `Updated ${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(timestamp)} UTC`
-        updated.textContent = `${formatted} · No app, device, channel, or raw error data is shown.`
+        updated.textContent = `${formatted} · Percentage-only public data.`
       }
     }
 
     function renderUnavailable() {
-      if (updated) updated.textContent = 'Live delivery data is temporarily unavailable. Please check back shortly.'
+      if (updated) updated.textContent = 'Live reliability data is temporarily unavailable. Please check back shortly.'
       if (dailyChart) dailyChart.hidden = true
       if (dailyEmpty) {
         dailyEmpty.hidden = false
-        dailyEmpty.textContent = 'Delivery telemetry is temporarily unavailable. Please check back shortly.'
+        dailyEmpty.textContent = 'Reliability telemetry is temporarily unavailable.'
       }
       if (failuresList)
         failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure telemetry is temporarily unavailable.' }))
@@ -337,7 +307,6 @@ const content = {
     async function loadMetrics() {
       const controller = new AbortController()
       const timeoutId = window.setTimeout(() => controller.abort(), 10_000)
-
       try {
         if (!endpoint) throw new Error('Missing metrics endpoint')
         const response = await fetch(endpoint, { headers: { Accept: 'application/json' }, signal: controller.signal })
@@ -357,36 +326,375 @@ const content = {
 </script>
 
 <style>
-  .data-page { --line: rgb(255 255 255 / 12%); --muted: rgb(203 213 225); background: #101827; color: white; }
-  .data-shell { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
-  .data-hero, .data-section { padding: 72px 0; }
-  .data-hero { background: radial-gradient(circle at 70% 0%, rgb(37 99 235 / 24%), transparent 42%), #0d1524; border-bottom: 1px solid var(--line); }
-  .data-eyebrow { display: flex; gap: 8px; align-items: center; margin: 0 0 16px; color: #93c5fd; font-size: .875rem; font-weight: 600; letter-spacing: .03em; }
-  .data-eyebrow span { width: 8px; height: 8px; border-radius: 999px; background: #34d399; box-shadow: 0 0 0 4px rgb(52 211 153 / 12%); }
-  h1, h2 { margin: 0; font-weight: 600; letter-spacing: -.025em; text-wrap: balance; }
-  h1 { max-width: 22ch; font-size: clamp(2.5rem, 6vw, 4.75rem); }
-  h2 { max-width: 32ch; font-size: clamp(1.75rem, 4vw, 2.5rem); }
-  .data-summary { max-width: 58ch; margin: 20px 0 0; color: var(--muted); font-size: 1.125rem; line-height: 1.6; text-wrap: pretty; }
-  .data-updated { margin: 24px 0 0; color: #94a3b8; font-size: .875rem; }
-  .data-heading, .data-split { display: grid; gap: 36px; }
-  .data-heading { grid-template-columns: minmax(0, 1.3fr) minmax(260px, .7fr); align-items: end; margin-bottom: 40px; }
-  .data-heading > p, .data-copy { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.6; text-wrap: pretty; }
-  .data-kpis { display: grid; grid-template-columns: repeat(3, 1fr); margin-bottom: 36px; border-block: 1px solid var(--line); }
-  .data-kpis div { padding: 20px 24px; } .data-kpis div + div { border-left: 1px solid var(--line); }
-  .data-kpis p { margin: 0 0 8px; color: #94a3b8; font-size: .875rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .data-kpis strong { font-size: clamp(1.35rem, 3vw, 2rem); font-variant-numeric: tabular-nums; }
-  .data-chart { border-bottom: 1px solid var(--line); padding-bottom: 12px; }
-  .data-chart-legend { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; color: var(--muted); font-size: .875rem; }
-  .data-chart-legend span { display: flex; gap: 8px; align-items: center; } .data-chart-legend i { width: 10px; height: 10px; } .requests { background: #60a5fa; } .failures { background: #f87171; }
-  .data-bars, .data-version-chart { display: flex; gap: 3px; align-items: end; height: 230px; }
-  .data-bar { position: relative; flex: 1; min-width: 3px; height: 100%; background: linear-gradient(to top, rgb(255 255 255 / 5%) 1px, transparent 1px); background-size: 100% 25%; }
-  .data-bar span { position: absolute; bottom: 0; left: 0; width: 100%; min-height: 1px; } .data-bar-request { background: #60a5fa; } .data-bar-failure { z-index: 1; background: #f87171; }
-  .data-axis { display: flex; justify-content: space-between; margin-top: 10px; color: #94a3b8; font-size: .75rem; font-variant-numeric: tabular-nums; }
-  .data-section-muted { background: rgb(15 23 42 / 68%); border-block: 1px solid var(--line); }
-  .data-split { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: start; }
-  .data-platforms { display: grid; gap: 22px; margin: 0; } .data-platforms dt { color: #cbd5e1; font-size: .9rem; } .data-platforms dd { display: flex; justify-content: space-between; margin: 4px 0 9px; font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; } .data-platforms dd span { color: #94a3b8; font-size: .875rem; font-weight: 400; } .data-platforms > div > div { height: 5px; overflow: hidden; background: rgb(255 255 255 / 8%); } .data-platforms > div > div span { display: block; height: 100%; background: #60a5fa; }
-  .data-failures { display: grid; gap: 14px; padding: 0; margin: 0; list-style: none; } .data-failures li { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--line); } .data-failures li > span { color: #64748b; font-size: .8rem; font-variant-numeric: tabular-nums; } .data-failures strong, .data-failures small { display: block; } .data-failures strong { font-size: 1rem; font-weight: 600; } .data-failures small { margin-top: 3px; color: #94a3b8; font-size: .8rem; } .data-failures b { color: #cbd5e1; font-size: .875rem; font-variant-numeric: tabular-nums; } .data-failures i { grid-column: 2 / -1; height: 3px; overflow: hidden; background: rgb(255 255 255 / 7%); } .data-failures em { display: block; height: 100%; background: #f87171; }
-  .data-version-chart { overflow-x: auto; gap: 5px; padding-bottom: 26px; } .data-version-chart > div { position: relative; flex: 1; min-width: 22px; height: 100%; background: rgb(255 255 255 / 5%); } .data-version-chart span { position: absolute; inset: auto 0 0; min-height: 1px; background: #a78bfa; } .data-version-chart small { position: absolute; top: calc(100% + 8px); left: 50%; color: #94a3b8; font-size: .65rem; white-space: nowrap; transform: translateX(-50%) rotate(-45deg); transform-origin: top center; }
-  .data-empty { margin: 0; color: #94a3b8; font-size: 1rem; }
-  @media (max-width: 720px) { .data-hero, .data-section { padding: 52px 0; } .data-heading, .data-split { grid-template-columns: 1fr; gap: 24px; } .data-kpis { grid-template-columns: 1fr; } .data-kpis div { padding: 16px 0; } .data-kpis div + div { border-top: 1px solid var(--line); border-left: 0; } .data-bars, .data-version-chart { height: 180px; } .data-updated, .data-chart-legend, .data-kpis p { font-size: .8rem; } }
+  .data-page {
+    --line: rgb(255 255 255 / 11%);
+    --muted: #bdc9da;
+    color-scheme: only dark;
+    background: #0b1220;
+    color: white;
+    overflow: clip;
+  }
+  .data-shell {
+    width: min(1120px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+  .data-hero,
+  .data-section {
+    padding-block: 72px;
+  }
+  .data-hero {
+    background: radial-gradient(circle at 76% 8%, rgb(37 99 235 / 20%), transparent 38%), #0b1220;
+    border-bottom: 1px solid var(--line);
+  }
+  .data-eyebrow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0 0 16px;
+    color: #8ec5ff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .data-eyebrow span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #34d399;
+    box-shadow: 0 0 0 4px rgb(52 211 153 / 12%);
+  }
+  h1,
+  h2 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  h1 {
+    max-width: 20ch;
+    font-size: clamp(2.5rem, 6vw, 4.75rem);
+  }
+  h2 {
+    max-width: 32ch;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+  }
+  .data-summary {
+    max-width: 58ch;
+    margin: 20px 0 0;
+    color: var(--muted);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .data-updated {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    margin: 24px 0 0;
+    color: #91a2ba;
+    font-size: 0.875rem;
+  }
+  .data-spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgb(147 197 253 / 25%);
+    border-top-color: #93c5fd;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  .data-heading,
+  .data-split {
+    display: grid;
+    gap: 48px;
+  }
+  .data-heading {
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    align-items: end;
+    margin-bottom: 40px;
+  }
+  .data-heading > p,
+  .data-copy {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .data-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 40px;
+    border-block: 1px solid var(--line);
+  }
+  .data-kpis div {
+    min-width: 0;
+    padding: 20px 24px;
+  }
+  .data-kpis div + div {
+    border-left: 1px solid var(--line);
+  }
+  .data-kpis p {
+    margin: 0 0 8px;
+    color: #91a2ba;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .data-kpis strong {
+    display: block;
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .data-chart {
+    position: relative;
+    padding-left: 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  .data-chart-scale {
+    position: absolute;
+    inset: 0 auto 12px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #6f819b;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .data-bars,
+  .data-version-chart {
+    display: flex;
+    gap: 4px;
+    align-items: end;
+    height: 240px;
+    overflow: hidden;
+  }
+  .data-bars {
+    background: repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px 50%);
+  }
+  .data-bar {
+    position: relative;
+    flex: 1;
+    min-width: 3px;
+    height: 100%;
+  }
+  .data-bar span {
+    position: absolute;
+    inset: auto 0 0;
+    height: var(--success-rate);
+    min-height: 2px;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(to top, #2563eb, #60a5fa);
+  }
+  .data-axis {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 10px 12px;
+    color: #91a2ba;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .data-section-muted {
+    background: rgb(15 23 42 / 72%);
+    border-block: 1px solid var(--line);
+  }
+  .data-split {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: start;
+  }
+  .data-platforms {
+    display: grid;
+    gap: 24px;
+    margin: 0;
+  }
+  .data-platforms dt {
+    color: #d8e1ee;
+    font-size: 1rem;
+  }
+  .data-platforms dd {
+    margin: 5px 0 10px;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .data-platforms > div > div {
+    height: 6px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: rgb(255 255 255 / 8%);
+  }
+  .data-platforms > div > div span {
+    display: block;
+    width: var(--share, 0%);
+    height: 100%;
+    border-radius: inherit;
+    background: #60a5fa;
+  }
+  .data-failures {
+    display: grid;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .data-failures li {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .data-failures li > span {
+    color: #6f819b;
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .data-failures strong {
+    min-width: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .data-failures b {
+    color: #d8e1ee;
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .data-failures i {
+    grid-column: 2 / -1;
+    height: 4px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: rgb(255 255 255 / 7%);
+  }
+  .data-failures em {
+    display: block;
+    width: var(--share, 0%);
+    height: 100%;
+    border-radius: inherit;
+    background: #f59e0b;
+  }
+  .data-version-chart {
+    gap: 5px;
+    padding-bottom: 30px;
+  }
+  .data-version-chart > div {
+    position: relative;
+    flex: 1;
+    min-width: 20px;
+    height: 100%;
+    background: rgb(255 255 255 / 5%);
+  }
+  .data-version-chart span {
+    position: absolute;
+    inset: auto 0 0;
+    height: var(--share);
+    min-height: 2px;
+    background: #a78bfa;
+  }
+  .data-version-chart small {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    color: #91a2ba;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    transform: translateX(-50%);
+  }
+  .data-empty {
+    margin: 0;
+    color: #91a2ba;
+    font-size: 1rem;
+  }
+  .data-chart-skeleton {
+    display: flex;
+    gap: 5px;
+    align-items: end;
+    height: 240px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    background: rgb(255 255 255 / 2%);
+  }
+  .data-chart-skeleton div {
+    flex: 1;
+    height: 68%;
+    border-radius: 4px 4px 0 0;
+    background: rgb(148 163 184 / 12%);
+    animation: pulse 1.4s ease-in-out infinite alternate;
+  }
+  .data-chart-skeleton div:nth-child(3n) {
+    height: 84%;
+  }
+  .data-chart-skeleton div:nth-child(4n) {
+    height: 58%;
+  }
+  .data-list-skeleton span,
+  .data-list-skeleton div,
+  .data-list-skeleton b {
+    height: 14px;
+    border-radius: 99px;
+    background: rgb(148 163 184 / 13%);
+    animation: pulse 1.4s ease-in-out infinite alternate;
+  }
+  .data-list-skeleton div {
+    width: 72%;
+  }
+  .data-list-skeleton b {
+    width: 48px;
+  }
+  [aria-busy='false'] .data-loading {
+    display: none;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes pulse {
+    to {
+      opacity: 0.45;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .data-spinner,
+    .data-chart-skeleton div,
+    .data-list-skeleton * {
+      animation: none;
+    }
+  }
+  @media (max-width: 720px) {
+    .data-hero,
+    .data-section {
+      padding-block: 52px;
+    }
+    .data-heading,
+    .data-split {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .data-kpis {
+      grid-template-columns: 1fr;
+    }
+    .data-kpis div {
+      padding: 16px 0;
+    }
+    .data-kpis div + div {
+      border-top: 1px solid var(--line);
+      border-left: 0;
+    }
+    .data-bars,
+    .data-version-chart,
+    .data-chart-skeleton {
+      height: 190px;
+    }
+    .data-updated,
+    .data-kpis p {
+      font-size: 0.8rem;
+    }
+    .data-chart {
+      padding-left: 42px;
+    }
+  }
 </style>
