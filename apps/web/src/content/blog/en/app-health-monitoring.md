@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-15T08:25:48.156Z
-updated_at: 2026-07-15T08:25:53.506Z
+updated_at: 2026-07-15T08:27:55.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/8a55b7f9-fdfe-4441-84fd-2660d8223ef4/app-health-monitoring-app-monitoring.jpg'
 head_image_alt: 'App Health Monitoring: A Guide for JS & Mobile Apps'
 keywords: 'app health monitoring, mobile app monitoring, capacitorjs, javascript performance, live updates'
