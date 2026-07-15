@@ -2,15 +2,6 @@
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
-type Metrics = {
-  period_days: number
-  updated_at: string
-  daily: Array<{ date: string, requests: number, failures: number }>
-  failures: Array<{ reason: string, count: number }>
-  platforms: { ios: number, android: number, electron: number }
-  updater_versions: Array<{ date: string, version: string, devices: number }>
-}
-
 const config = Astro.locals.runtimeConfig
 const title = 'Capgo delivery data | Live Update reliability'
 const description = 'Anonymous, aggregate delivery data for Capgo Live Updates: update checks, reported failures, platform mix, and updater version adoption.'
@@ -20,48 +11,16 @@ const content = {
   image: `${config.public.baseUrl}/social/capgo-live-update.png`,
   ldJSON: createLdJsonGraph(config.public, createWebPageLdJson(config.public, { name: title, description, url: Astro.url.href }), { includeOrganization: true }),
 }
-
-let metrics: Metrics = { period_days: 30, updated_at: '', daily: [], failures: [], platforms: { ios: 0, android: 0, electron: 0 }, updater_versions: [] }
-try {
-  const response = await fetch(`${config.public.baseApiUrl}/private/website_stats/live_updates`)
-  if (response.ok) metrics = await response.json() as Metrics
-}
-catch {
-  // The page remains useful during an API deploy or a short-lived data outage.
-}
-
-const number = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 })
-const fullNumber = new Intl.NumberFormat('en-US')
-const totalRequests = metrics.daily.reduce((sum, item) => sum + item.requests, 0)
-const totalFailures = metrics.daily.reduce((sum, item) => sum + item.failures, 0)
-const failureRate = totalRequests ? (totalFailures / totalRequests) * 100 : 0
-const maxDailyRequests = Math.max(1, ...metrics.daily.map(item => item.requests))
-const maxVersionDevices = Math.max(1, ...metrics.updater_versions.map(item => item.devices))
-const totalPlatforms = Object.values(metrics.platforms).reduce((sum, value) => sum + value, 0)
-const platformRows = [
-  ['iOS', metrics.platforms.ios],
-  ['Android', metrics.platforms.android],
-  ['Electron', metrics.platforms.electron],
-] as const
-const readableReason = (reason: string) => reason.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, letter => letter.toUpperCase())
-const topFailureCount = metrics.failures[0]?.count ?? 0
-const leadingVersions = new Map<string, { version: string, devices: number }>()
-for (const item of metrics.updater_versions) {
-  const current = leadingVersions.get(item.date)
-  if (!current || item.devices > current.devices) leadingVersions.set(item.date, { version: item.version, devices: item.devices })
-}
-const versionTrend = [...leadingVersions.entries()].map(([date, value]) => ({ date, ...value })).sort((a, b) => a.date.localeCompare(b.date))
-const updatedLabel = metrics.updated_at ? new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(new Date(metrics.updated_at)) : 'Awaiting data'
 ---
 
 <Layout content={content}>
-  <div class="data-page">
+  <div class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="true">
     <section class="data-hero">
       <div class="data-shell">
         <p class="data-eyebrow"><span aria-hidden="true"></span> Public aggregate data</p>
         <h1>Live Update delivery data.</h1>
         <p class="data-summary">A 30-day view of anonymous update checks, reported failures, active platforms, and updater adoption across Capgo.</p>
-        <p class="data-updated">Updated {updatedLabel} UTC · No app, device, channel, or raw error data is shown.</p>
+        <p class="data-updated" data-updated aria-live="polite">Loading live delivery data…</p>
       </div>
     </section>
 
@@ -76,25 +35,17 @@ const updatedLabel = metrics.updated_at ? new Intl.DateTimeFormat('en-US', { dat
         </div>
 
         <div class="data-kpis" aria-label="30 day delivery summary">
-          <div><p>Update checks</p><strong>{number.format(totalRequests)}</strong></div>
-          <div><p>Reported failures</p><strong>{number.format(totalFailures)}</strong></div>
-          <div><p>Failure reports / checks</p><strong>{failureRate.toFixed(2)}%</strong></div>
+          <div><p>Update checks</p><strong data-kpi="requests">—</strong></div>
+          <div><p>Reported failures</p><strong data-kpi="failures">—</strong></div>
+          <div><p>Failure reports / checks</p><strong data-kpi="failure-rate">—</strong></div>
         </div>
 
-        {metrics.daily.length ? (
-          <div class="data-chart" aria-label="Daily update checks chart">
-            <div class="data-chart-legend"><span><i class="requests"></i> Update checks</span><span><i class="failures"></i> Reported failures</span></div>
-            <div class="data-bars">
-              {metrics.daily.map((item) => (
-                <div class="data-bar" title={`${item.date}: ${fullNumber.format(item.requests)} checks, ${fullNumber.format(item.failures)} reported failures`}>
-                  <span class="data-bar-failure" style={`height: ${(item.failures / maxDailyRequests) * 100}%`}></span>
-                  <span class="data-bar-request" style={`height: ${(item.requests / maxDailyRequests) * 100}%`}></span>
-                </div>
-              ))}
-            </div>
-            <div class="data-axis"><span>{metrics.daily[0]?.date}</span><span>{metrics.daily.at(-1)?.date}</span></div>
-          </div>
-        ) : <p class="data-empty">Delivery telemetry is temporarily unavailable. Please check back shortly.</p>}
+        <div class="data-chart" data-daily-chart aria-label="Daily update checks chart" hidden>
+          <div class="data-chart-legend"><span><i class="requests"></i> Update checks</span><span><i class="failures"></i> Reported failures</span></div>
+          <div class="data-bars" data-daily-bars role="list" aria-label="Daily delivery data"></div>
+          <div class="data-axis"><span data-daily-start></span><span data-daily-end></span></div>
+        </div>
+        <p class="data-empty" data-daily-empty aria-live="polite">Loading live delivery data…</p>
       </div>
     </section>
 
@@ -106,13 +57,21 @@ const updatedLabel = metrics.updated_at ? new Intl.DateTimeFormat('en-US', { dat
           <p class="data-copy">Distinct active devices in the reporting window. A device that is active on more than one platform is counted once per platform.</p>
         </div>
         <dl class="data-platforms">
-          {platformRows.map(([name, devices]) => (
-            <div>
-              <dt>{name}</dt>
-              <dd>{number.format(devices)} <span>{totalPlatforms ? `${((devices / totalPlatforms) * 100).toFixed(1)}%` : '—'}</span></dd>
-              <div aria-hidden="true"><span style={`width: ${totalPlatforms ? (devices / totalPlatforms) * 100 : 0}%`}></span></div>
-            </div>
-          ))}
+          <div data-platform="ios">
+            <dt>iOS</dt>
+            <dd><span data-platform-value>—</span><span data-platform-share>—</span></dd>
+            <div aria-hidden="true"><span data-platform-bar></span></div>
+          </div>
+          <div data-platform="android">
+            <dt>Android</dt>
+            <dd><span data-platform-value>—</span><span data-platform-share>—</span></dd>
+            <div aria-hidden="true"><span data-platform-bar></span></div>
+          </div>
+          <div data-platform="electron">
+            <dt>Electron</dt>
+            <dd><span data-platform-value>—</span><span data-platform-share>—</span></dd>
+            <div aria-hidden="true"><span data-platform-bar></span></div>
+          </div>
         </dl>
       </div>
     </section>
@@ -124,17 +83,7 @@ const updatedLabel = metrics.updated_at ? new Intl.DateTimeFormat('en-US', { dat
           <h2 id="failures">Top failure reasons</h2>
           <p class="data-copy">Normalized updater actions make recurring failure modes comparable without exposing error payloads.</p>
         </div>
-        <ol class="data-failures">
-          {metrics.failures.map((item, index) => (
-            <li>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <div><strong>{readableReason(item.reason)}</strong><small>{fullNumber.format(item.count)} reports</small></div>
-              <b>{totalFailures ? `${((item.count / totalFailures) * 100).toFixed(1)}%` : '—'}</b>
-              <i aria-hidden="true"><em style={`width: ${topFailureCount ? (item.count / topFailureCount) * 100 : 0}%`}></em></i>
-            </li>
-          ))}
-          {!metrics.failures.length && <li class="data-empty">No failure reports in this window.</li>}
-        </ol>
+        <ol class="data-failures" data-failures aria-live="polite"><li class="data-empty">Loading live delivery data…</li></ol>
       </div>
     </section>
 
@@ -144,15 +93,268 @@ const updatedLabel = metrics.updated_at ? new Intl.DateTimeFormat('en-US', { dat
           <div><p class="data-eyebrow">Adoption context</p><h2 id="updater-versions">Most used updater version over time</h2></div>
           <p>The leading updater version on each day helps explain broad shifts in delivery behaviour.</p>
         </div>
-        {versionTrend.length ? (
-          <div class="data-version-chart" aria-label="Most used updater version over time">
-            {versionTrend.map((item) => <div title={`${item.date}: ${item.version} on ${fullNumber.format(item.devices)} devices`}><span style={`height: ${(item.devices / maxVersionDevices) * 100}%`}></span><small>{item.version}</small></div>)}
-          </div>
-        ) : <p class="data-empty">Updater adoption telemetry is temporarily unavailable.</p>}
+        <div class="data-version-chart" data-version-chart role="list" aria-label="Most used updater version by day" hidden></div>
+        <p class="data-empty" data-version-empty aria-live="polite">Loading live delivery data…</p>
       </div>
     </section>
   </div>
 </Layout>
+
+<script>
+  type DailyMetric = { date: string; requests: number; failures: number }
+  type FailureMetric = { reason: string; count: number }
+  type VersionMetric = { date: string; version: string; devices: number }
+  type Metrics = {
+    updated_at: string
+    daily: DailyMetric[]
+    failures: FailureMetric[]
+    platforms: { ios: number; android: number; electron: number }
+    updater_versions: VersionMetric[]
+  }
+
+  const page = document.querySelector<HTMLElement>('[data-metrics-endpoint]')
+
+  if (page) {
+    const endpoint = page.dataset.metricsEndpoint
+    const updated = page.querySelector<HTMLElement>('[data-updated]')
+    const requestsKpi = page.querySelector<HTMLElement>('[data-kpi="requests"]')
+    const failuresKpi = page.querySelector<HTMLElement>('[data-kpi="failures"]')
+    const failureRateKpi = page.querySelector<HTMLElement>('[data-kpi="failure-rate"]')
+    const dailyChart = page.querySelector<HTMLElement>('[data-daily-chart]')
+    const dailyBars = page.querySelector<HTMLElement>('[data-daily-bars]')
+    const dailyStart = page.querySelector<HTMLElement>('[data-daily-start]')
+    const dailyEnd = page.querySelector<HTMLElement>('[data-daily-end]')
+    const dailyEmpty = page.querySelector<HTMLElement>('[data-daily-empty]')
+    const failuresList = page.querySelector<HTMLOListElement>('[data-failures]')
+    const versionChart = page.querySelector<HTMLElement>('[data-version-chart]')
+    const versionEmpty = page.querySelector<HTMLElement>('[data-version-empty]')
+    const number = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 })
+    const fullNumber = new Intl.NumberFormat('en-US')
+    const styleScopeAttributes = page.getAttributeNames().filter(attribute => attribute.startsWith('data-astro-cid-'))
+
+    function createScopedElement<K extends keyof HTMLElementTagNameMap>(tagName: K) {
+      const element = document.createElement(tagName)
+      for (const attribute of styleScopeAttributes) element.setAttribute(attribute, '')
+      return element
+    }
+
+    function isRecord(value: unknown): value is Record<string, unknown> {
+      return Boolean(value) && typeof value === 'object'
+    }
+
+    function positiveNumber(value: unknown) {
+      const number = Number(value)
+      return Number.isFinite(number) && number >= 0 ? number : 0
+    }
+
+    function normalizeMetrics(value: unknown): Metrics | null {
+      if (!isRecord(value) || !Array.isArray(value.daily) || !Array.isArray(value.failures) || !Array.isArray(value.updater_versions) || !isRecord(value.platforms)) return null
+
+      const daily = value.daily
+        .flatMap((item) => {
+          if (!isRecord(item) || typeof item.date !== 'string') return []
+          return [{ date: item.date, requests: positiveNumber(item.requests), failures: positiveNumber(item.failures) }]
+        })
+        .sort((a, b) => a.date.localeCompare(b.date))
+      const failures = value.failures
+        .flatMap((item) => {
+          if (!isRecord(item) || typeof item.reason !== 'string') return []
+          return [{ reason: item.reason, count: positiveNumber(item.count) }]
+        })
+        .sort((a, b) => b.count - a.count)
+      const updater_versions = value.updater_versions
+        .flatMap((item) => {
+          if (!isRecord(item) || typeof item.date !== 'string' || typeof item.version !== 'string') return []
+          return [{ date: item.date, version: item.version, devices: positiveNumber(item.devices) }]
+        })
+        .sort((a, b) => a.date.localeCompare(b.date) || b.devices - a.devices)
+
+      return {
+        updated_at: typeof value.updated_at === 'string' ? value.updated_at : '',
+        daily,
+        failures,
+        platforms: {
+          ios: positiveNumber(value.platforms.ios),
+          android: positiveNumber(value.platforms.android),
+          electron: positiveNumber(value.platforms.electron),
+        },
+        updater_versions,
+      }
+    }
+
+    function readableReason(reason: string) {
+      return reason
+        .replace(/_/g, ' ')
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/\b\w/g, (letter) => letter.toUpperCase())
+    }
+
+    function setPlatform(platform: keyof Metrics['platforms'], value: number, total: number) {
+      const row = page?.querySelector<HTMLElement>(`[data-platform="${platform}"]`)
+      const valueElement = row?.querySelector<HTMLElement>('[data-platform-value]')
+      const shareElement = row?.querySelector<HTMLElement>('[data-platform-share]')
+      const bar = row?.querySelector<HTMLElement>('[data-platform-bar]')
+      if (!valueElement || !shareElement || !bar) return
+
+      const share = total ? (value / total) * 100 : 0
+      valueElement.textContent = number.format(value)
+      shareElement.textContent = total ? `${share.toFixed(1)}%` : '—'
+      bar.style.width = `${share}%`
+    }
+
+    function renderDaily(metrics: Metrics) {
+      if (!dailyChart || !dailyBars || !dailyStart || !dailyEnd || !dailyEmpty) return
+      const maxRequests = Math.max(1, ...metrics.daily.map((item) => item.requests))
+      dailyBars.replaceChildren()
+
+      for (const item of metrics.daily) {
+        const bar = createScopedElement('div')
+        const label = `${item.date}: ${fullNumber.format(item.requests)} checks, ${fullNumber.format(item.failures)} reported failures`
+        bar.className = 'data-bar'
+        bar.title = label
+        bar.setAttribute('role', 'listitem')
+        bar.setAttribute('aria-label', label)
+        const failure = createScopedElement('span')
+        failure.className = 'data-bar-failure'
+        failure.style.height = `${(item.failures / maxRequests) * 100}%`
+        const request = createScopedElement('span')
+        request.className = 'data-bar-request'
+        request.style.height = `${(item.requests / maxRequests) * 100}%`
+        bar.append(failure, request)
+        dailyBars.append(bar)
+      }
+
+      dailyChart.hidden = metrics.daily.length === 0
+      dailyEmpty.hidden = metrics.daily.length > 0
+      dailyEmpty.textContent = 'Delivery telemetry is temporarily unavailable. Please check back shortly.'
+      dailyStart.textContent = metrics.daily[0]?.date ?? ''
+      dailyEnd.textContent = metrics.daily.at(-1)?.date ?? ''
+    }
+
+    function renderFailures(metrics: Metrics, totalFailures: number) {
+      if (!failuresList) return
+      failuresList.replaceChildren()
+      const topFailureCount = metrics.failures[0]?.count ?? 0
+
+      for (const [index, item] of metrics.failures.entries()) {
+        const row = createScopedElement('li')
+        const rank = createScopedElement('span')
+        rank.textContent = String(index + 1).padStart(2, '0')
+        const copy = createScopedElement('div')
+        const reason = createScopedElement('strong')
+        reason.textContent = readableReason(item.reason)
+        const count = createScopedElement('small')
+        count.textContent = `${fullNumber.format(item.count)} reports`
+        copy.append(reason, count)
+        const share = createScopedElement('b')
+        share.textContent = totalFailures ? `${((item.count / totalFailures) * 100).toFixed(1)}%` : '—'
+        const track = createScopedElement('i')
+        track.setAttribute('aria-hidden', 'true')
+        const fill = createScopedElement('em')
+        fill.style.width = `${topFailureCount ? (item.count / topFailureCount) * 100 : 0}%`
+        track.append(fill)
+        row.append(rank, copy, share, track)
+        failuresList.append(row)
+      }
+
+      if (metrics.failures.length === 0) {
+        const empty = createScopedElement('li')
+        empty.className = 'data-empty'
+        empty.textContent = 'No failure reports in this window.'
+        failuresList.append(empty)
+      }
+    }
+
+    function renderVersions(metrics: Metrics) {
+      if (!versionChart || !versionEmpty) return
+      const leadingVersions = new Map<string, VersionMetric>()
+      for (const item of metrics.updater_versions) {
+        const current = leadingVersions.get(item.date)
+        if (!current || item.devices > current.devices) leadingVersions.set(item.date, item)
+      }
+      const trend = [...leadingVersions.values()].sort((a, b) => a.date.localeCompare(b.date))
+      const maxDevices = Math.max(1, ...trend.map((item) => item.devices))
+      versionChart.replaceChildren()
+
+      for (const item of trend) {
+        const bar = createScopedElement('div')
+        const label = `${item.date}: ${item.version} on ${fullNumber.format(item.devices)} devices`
+        bar.title = label
+        bar.setAttribute('role', 'listitem')
+        bar.setAttribute('aria-label', label)
+        const fill = createScopedElement('span')
+        fill.style.height = `${(item.devices / maxDevices) * 100}%`
+        const labelElement = createScopedElement('small')
+        labelElement.textContent = item.version
+        bar.append(fill, labelElement)
+        versionChart.append(bar)
+      }
+
+      versionChart.hidden = trend.length === 0
+      versionEmpty.hidden = trend.length > 0
+      versionEmpty.textContent = 'Updater adoption telemetry is temporarily unavailable.'
+    }
+
+    function renderMetrics(metrics: Metrics) {
+      const totalRequests = metrics.daily.reduce((sum, item) => sum + item.requests, 0)
+      const totalFailures = metrics.daily.reduce((sum, item) => sum + item.failures, 0)
+      const totalPlatforms = Object.values(metrics.platforms).reduce((sum, value) => sum + value, 0)
+      if (requestsKpi) requestsKpi.textContent = number.format(totalRequests)
+      if (failuresKpi) failuresKpi.textContent = number.format(totalFailures)
+      if (failureRateKpi) failureRateKpi.textContent = totalRequests ? `${((totalFailures / totalRequests) * 100).toFixed(2)}%` : '0.00%'
+      setPlatform('ios', metrics.platforms.ios, totalPlatforms)
+      setPlatform('android', metrics.platforms.android, totalPlatforms)
+      setPlatform('electron', metrics.platforms.electron, totalPlatforms)
+      renderDaily(metrics)
+      renderFailures(metrics, totalFailures)
+      renderVersions(metrics)
+
+      if (updated) {
+        const timestamp = new Date(metrics.updated_at)
+        const formatted = Number.isNaN(timestamp.getTime())
+          ? 'Updated moments ago'
+          : `Updated ${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(timestamp)} UTC`
+        updated.textContent = `${formatted} · No app, device, channel, or raw error data is shown.`
+      }
+    }
+
+    function renderUnavailable() {
+      if (updated) updated.textContent = 'Live delivery data is temporarily unavailable. Please check back shortly.'
+      if (dailyChart) dailyChart.hidden = true
+      if (dailyEmpty) {
+        dailyEmpty.hidden = false
+        dailyEmpty.textContent = 'Delivery telemetry is temporarily unavailable. Please check back shortly.'
+      }
+      if (failuresList)
+        failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure telemetry is temporarily unavailable.' }))
+      if (versionChart) versionChart.hidden = true
+      if (versionEmpty) {
+        versionEmpty.hidden = false
+        versionEmpty.textContent = 'Updater adoption telemetry is temporarily unavailable.'
+      }
+    }
+
+    async function loadMetrics() {
+      const controller = new AbortController()
+      const timeoutId = window.setTimeout(() => controller.abort(), 10_000)
+
+      try {
+        if (!endpoint) throw new Error('Missing metrics endpoint')
+        const response = await fetch(endpoint, { headers: { Accept: 'application/json' }, signal: controller.signal })
+        const metrics = response.ok ? normalizeMetrics(await response.json()) : null
+        if (!metrics) throw new Error('Invalid metrics response')
+        renderMetrics(metrics)
+      } catch {
+        renderUnavailable()
+      } finally {
+        window.clearTimeout(timeoutId)
+        page?.setAttribute('aria-busy', 'false')
+      }
+    }
+
+    void loadMetrics()
+  }
+</script>
 
 <style>
   .data-page { --line: rgb(255 255 255 / 12%); --muted: rgb(203 213 225); background: #101827; color: white; }
