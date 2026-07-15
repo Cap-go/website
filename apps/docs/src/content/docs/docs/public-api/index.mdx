@@ -35,6 +35,16 @@ The API implements rate limiting to ensure fair usage. Current limits are:
 
 If you exceed these limits, you'll receive a 429 (Too Many Requests) response.
 
+### Device channel changes
+
+Device channel changes use the plugin API and have separate abuse-prevention limits that apply to every plan, including trials:
+
+- A device can make up to 5 requests per second for each channel operation (`set`, `get`, `delete`, or `list`). This limit is scoped to the app, device, and operation.
+- Setting the same device to the same channel more than once within 60 seconds returns a 429 response. Switching to a different channel is allowed after the per-second limit resets.
+- An additional limit of 1000 channel requests per minute applies to each app and IP address.
+
+These limits are not account-wide. If your channel switcher can return to a recently selected channel, wait for the `retryAfterSeconds` duration in the 429 response before retrying.
+
 ## Response Format
 
 All responses are in JSON format. Successful responses typically include either a `data` object or a `status` field. Error responses include an `error` field with a description of what went wrong.
