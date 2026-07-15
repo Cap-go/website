@@ -28,7 +28,7 @@ If an API key has explicit role bindings, **only those bindings** are evaluated 
 
 ### Preview channel automation
 
-For CI that creates a temporary preview channel, uploads and promotes a bundle, then deletes both, bind `app_preview` only to the preview app:
+After the App Preview lifecycle release is deployed to your Capgo Cloud environment, bind `app_preview` only to the preview app for CI that creates a temporary preview channel, uploads and promotes a bundle, then deletes both. Until then, `--delete-bundle` requires the general `bundle.delete` permission and is not available to an App Preview key.
 
 ```json
 {
@@ -47,6 +47,8 @@ For CI that creates a temporary preview channel, uploads and promotes a bundle, 
 `org_id` is the UUID of the app's owning organization. `app_id` is the app record's internal UUID, not the public app identifier used by CLI commands (for example, `com.example.app`). The binding remains organization-bound even when the key has no organization-wide role.
 
 The app-level `app_preview` role includes only `app.read`, `app.read_bundles`, `app.upload_bundle`, and `app.create_channel`. When that key creates a channel, Capgo automatically adds a `channel_preview` binding on the newly created channel. That child binding grants `channel.read`, `channel.promote_bundle`, and `channel.delete` only for the channel the key created.
+
+`app_preview` retains `app.read`, so this is not strict channel-read isolation: the key may enumerate channel metadata in the selected app. The automatic child binding limits **lifecycle mutations** to the channel the key created.
 
 Capgo records the App Preview key that uploaded each bundle. The key can promote only its own bundle to its own preview channel. It has no channel lifecycle access to an existing default/main channel, a channel created by another preview key, or another key's bundle.
 

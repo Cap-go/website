@@ -64,6 +64,10 @@ The page displays two sections:
 
 Use **App Preview** for CI that creates a temporary preview channel, uploads and promotes a bundle, then removes both the channel and bundle. It is designed for PR previews without granting control over the app's default or main channels.
 
+:::caution
+**Availability:** This ownership-bound lifecycle requires the App Preview lifecycle release. Until that release is deployed to your Capgo Cloud environment, `--delete-bundle` requires the general `bundle.delete` permission and an App Preview key cannot use it.
+:::
+
 1. Create an RBAC key and enable **Limit this key to selected apps**.
 2. Under **Organizations to filter apps**, select the organization to reveal its apps; each selected app remains associated with its owning organization.
 3. Add only the app or apps used for preview deployments.
@@ -76,6 +80,8 @@ This selected-apps-only mode omits an organization-wide role; it does **not** re
 | --- | --- |
 | `app_preview` on the selected app | `app.read`, `app.read_bundles`, `app.upload_bundle`, and `app.create_channel`. |
 | Automatic `channel_preview` binding | When this key creates a channel, Capgo automatically gives the key `channel.read`, `channel.promote_bundle`, and `channel.delete` for that channel only. |
+
+`app_preview` retains `app.read`, so the key may enumerate channel metadata in the selected app. The automatic child binding is a **management** boundary: it does not grant lifecycle mutations for channels the key did not create.
 
 Capgo also records which App Preview key uploaded a bundle. The key can set only its own bundle on its own preview channel and can clean up that pair together. It does not receive a channel binding for an existing default or main channel, a channel created by another preview key, or another key's bundle.
 
