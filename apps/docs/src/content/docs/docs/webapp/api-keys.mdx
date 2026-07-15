@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-API keys are managed at the organization level with role-based access control (RBAC). Each key can be assigned an organization-wide role and optional per-app roles, giving you fine-grained control over what each key can access.
+API keys use role-based access control (RBAC). A key can have organization-wide access, app-scoped access, or both. For least privilege, restrict a key to selected apps instead of assigning an organization-wide role.
 
 ## Where are API keys managed?
 
@@ -24,39 +24,68 @@ The page displays two sections:
 1. Click the **"+"** button at the top of the RBAC keys table.
 
 2. Fill in the **Key information**:
-   - **Name** (required) — A descriptive label for the key (e.g. "CI/CD Deploy", "Monitoring Read-Only").
-   - **Create secure key** (optional) — When checked, the key will be hashed server-side. The plain-text key is shown **only once** after creation. You will not be able to retrieve it later.
-   - **Set expiration date** (optional) — Pick a date after which the key will stop working. Some organizations enforce mandatory expiration via policy.
+   - **Name** (required) — A descriptive label for the key (for example, "CI/CD Deploy" or "Monitoring Read-Only").
+   - **Create secure key** (optional) — When checked, the key is hashed server-side. The plain-text key is shown **only once** after creation and cannot be retrieved later.
+   - **Set expiration date** (optional) — Pick a date after which the key stops working. Some organizations enforce mandatory expiration through policy.
 
 {/* [SCREENSHOT: apikeys-create-form.webp] — The creation form showing Name field, "Create secure key" checkbox, and expiration date picker */}
 <figure><img src="/apikeys-create-form.webp" alt="API key creation form with name, secure key option, and expiration" /><figcaption></figcaption></figure>
 
-3. Select an **Organization role** — This defines the key's baseline permissions across the entire organization. Available roles (depending on your own role level):
-   - **None** — No org-wide access; the key only has access to individually assigned apps.
-   - **Member** — Basic read access to the organization.
-   - **Admin** — Full administrative access to the organization (inherits access to all apps).
+3. Choose the key scope:
+   - **Organization-wide access** — Select an **Organization role** to define baseline permissions across the organization. Available roles depend on your own role level:
+     - **None** — No organization-wide access.
+     - **Member** — Basic read access to the organization.
+     - **Admin** — Full administrative access to the organization and all its apps.
+   - **App-only access** — Enable **Limit this key to selected apps**. This mode creates no organization-wide role binding.
 
 4. If the key needs to create organizations through the public API, enable **Allow creating organizations**.
 
-   This adds the global `org.create` permission. It is available when the key has an Admin organization role. When this key creates a new organization, Capgo automatically assigns the key as Super Admin on that new organization.
+   This adds the global `org.create` permission. The key also needs an organization-scoped `org_admin` or `org_super_admin` binding. In the dashboard, selecting **Admin** creates the `org_admin` binding. When this key creates a new organization, Capgo automatically assigns the key as Super Admin on that new organization.
 
-5. If the selected org role is not Admin, you can add **per-app access**:
-   - Click **"+ Add App"** to open the app picker.
-   - Select one or more apps, then assign a role to each:
+5. To grant app access:
+   - When **Limit this key to selected apps** is enabled, choose an organization under **Organizations to filter apps** to reveal its apps. This filter does not grant organization-wide access.
+   - Click **"+ Add App"**, select one or more apps, then assign a role to each:
      - **App Reader** — Read-only access to the app.
      - **App Uploader** — Can upload new bundles.
-     - **App Developer** — Can manage the app configuration and deployments.
+      - **App Developer** — Can upload bundles, manage devices, trigger native builds, and update channel settings.
      - **App Admin** — Full access to the app.
+     - **App Preview** — Preview CI/CD lifecycle: upload and promote bundles, then create and delete channels.
 
 {/* [SCREENSHOT: apikeys-rbac-roles.webp] — The role selection section showing org role radio buttons and the per-app role assignment table */}
 <figure><img src="/apikeys-rbac-roles.webp" alt="RBAC role selection with org-level and per-app roles" /><figcaption></figcaption></figure>
 
 6. Click **"Create"**.
 
-7. If you checked "Create secure key", a modal will display the plain-text key. **Copy it immediately** — it cannot be retrieved after closing the modal.
+7. If you checked **Create secure key**, a modal displays the plain-text key. **Copy it immediately** — it cannot be retrieved after closing the modal.
 
 {/* [SCREENSHOT: apikeys-secret-modal.webp] — The one-time secret modal showing the plain-text key with a copy button */}
 <figure><img src="/apikeys-secret-modal.webp" alt="One-time API key secret modal with copy button" /><figcaption></figcaption></figure>
+
+## Use an App Preview key for preview workflows
+
+Use **App Preview** for CI that creates a temporary preview channel, uploads and promotes a bundle, then removes the channel.
+
+1. Create an RBAC key and enable **Limit this key to selected apps**.
+2. Under **Organizations to filter apps**, select the organization only to reveal its apps.
+3. Add only the app or apps used for preview deployments.
+4. Select **App Preview** for each selected app.
+5. Create a secure key, set an expiration date when appropriate, and store it in your CI secret manager.
+
+This selected-apps-only mode creates no organization-scoped role binding. The key is limited to the selected apps and includes only these permissions:
+
+- `app.read`, `app.read_bundles`, and `channel.read`
+- `app.upload_bundle`
+- `app.create_channel`
+- `channel.promote_bundle`
+- `channel.delete`
+
+It does not include app settings, device or role management, channel settings, rollbacks, forced-device management, or `bundle.delete`. See the [Access Control Reference](/docs/webapp/organization-roles/#app-preview-permission-set) for the full boundary.
+
+:::caution
+**App Preview** is scoped to an app, not to a pull request, channel name, or channel creator. It can delete any channel in each selected app. Keep preview and production channels in separate apps when policy requires a strict preview-only boundary.
+:::
+
+For cleanup, use [`channel delete`](/docs/cli/reference/channel/#channel-delete) without `--delete-bundle`. That option also requires `bundle.delete`, which **App Preview** intentionally does not grant.
 
 ## How to manage (edit) an API key?
 

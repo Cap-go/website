@@ -19,12 +19,36 @@ The `authorization` header is also accepted but is primarily intended for JWT to
 
 ## RBAC Permissions
 
-API keys use the same role-based access control (RBAC) system as user accounts. When creating or managing keys through the web app, you assign roles at two levels:
+API keys use the same role-based access control (RBAC) system as user accounts. When creating or managing keys through the web app or API, you assign roles at two levels:
 
-- **Organization role** — Defines the key's baseline permissions across the entire organization (e.g. `org_admin`, `org_member`).
-- **App roles** — Optional per-app permissions (e.g. `app_admin`, `app_developer`, `app_uploader`, `app_reader`).
+- **Organization role** — Defines the key's baseline permissions across the entire organization (for example, `org_admin` or `org_member`).
+- **App roles** — Per-app permissions (for example, `app_admin`, `app_developer`, `app_uploader`, `app_reader`, or `app_preview`).
 
 If an API key has explicit role bindings, **only those bindings** are evaluated for permission checks. The key owner's personal permissions are not inherited by the key.
+
+### Preview channel automation
+
+For CI that creates a temporary preview channel, uploads and promotes a bundle, then deletes the channel, bind `app_preview` only to the preview app:
+
+```json
+{
+  "name": "PR preview key",
+  "hashed": true,
+  "bindings": [
+    {
+      "role_name": "app_preview",
+      "scope_type": "app",
+      "org_id": "00000000-0000-0000-0000-000000000000",
+      "app_id": "<APP_UUID>"
+    }
+  ]
+}
+```
+`app_id` is the app record’s internal UUID, not the public app or bundle identifier (for example, `com.example.app`).
+
+This role includes only `app.read`, `app.read_bundles`, `app.upload_bundle`, `app.create_channel`, `channel.read`, `channel.promote_bundle`, and `channel.delete`. It deliberately does not include `bundle.delete`, so preview cleanup must not use `channel delete --delete-bundle`.
+
+The role is scoped to an app, not a pull request or channel name. It can delete any channel in the bound app. For the dashboard setup, see [Use an App Preview key for preview workflows](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows).
 
 {/* [SCREENSHOT: capgo_apikeys_rbac_diagram.webp] — Diagram showing the RBAC hierarchy: org roles → app roles → API key permissions */}
 <figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_rbac_diagram.webp" alt="A diagram explaining how RBAC API key permissions work" /><figcaption></figcaption></figure>
@@ -94,12 +118,13 @@ Organization policies can enforce:
 
 ## Common Use Cases
 
-1. **CI/CD Integration**: Create keys scoped to specific apps with the `app_uploader` or `app_developer` role, and set an expiration date
-2. **Deployment Automation**: Use keys with the `app_developer` role for automated deployment scripts
-3. **Monitoring Tools**: Create keys with the `app_reader` role for external monitoring integrations
-4. **Admin Access**: Use keys with the `org_admin` role sparingly for administrative tools
-5. **Third-Party Integrations**: Create keys restricted to specific apps with the minimum required role
-6. **Organization Provisioning**: Use an `org_admin` or `org_super_admin` RBAC key with `org.create` only for trusted automation that needs to create organizations
+1. **CI/CD Integration**: Create keys scoped to specific apps with the `app_uploader` or `app_developer` role, and set an expiration date.
+2. **PR Preview Channels**: Use `app_preview` on only the preview app or apps when CI needs to upload and promote bundles, then create and delete temporary channels.
+3. **Deployment Automation**: Use keys with the `app_developer` role for automated deployment scripts.
+4. **Monitoring Tools**: Create keys with the `app_reader` role for external monitoring integrations.
+5. **Admin Access**: Use keys with the `org_admin` role sparingly for administrative tools.
+6. **Third-Party Integrations**: Create keys restricted to specific apps with the minimum required role.
+7. **Organization Provisioning**: Use an `org_admin` or `org_super_admin` RBAC key with `org.create` only for trusted automation that needs to create organizations.
 
 ## Keep going from API Keys
 

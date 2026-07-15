@@ -61,6 +61,10 @@ npx @capgo/cli@latest channel delete production com.example.app
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
 
+:::caution
+For least-privilege preview automation, use an app-scoped **App Preview** API key and omit `--delete-bundle`. That flag also requires `bundle.delete`, which **App Preview** intentionally does not grant. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows) for setup.
+:::
+
 ### <a id="channel-list"></a> 📋 **List**
 
 **Alias:** `l`

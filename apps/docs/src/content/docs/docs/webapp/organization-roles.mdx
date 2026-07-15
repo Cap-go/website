@@ -69,6 +69,7 @@ Scoped to a single app. Use these when a team member should only work on one app
 | **App Developer** | `app_developer` | Upload bundles, manage devices, trigger native builds, update channel settings. No deletion, no app settings changes, no channel creation. |
 | **App Uploader** | `app_uploader` | Read access + upload new bundle versions. |
 | **App Reader** | `app_reader` | Read-only — stats, bundles, channels, logs, devices. |
+| **App Preview** | `app_preview` | App-scoped preview CI lifecycle: upload and promote bundles, then create and delete channels. |
 
 ### App permission matrix
 
@@ -90,6 +91,26 @@ Scoped to a single app. Use these when a team member should only work on one app
 
 :::note
 `app.delete` and `app.transfer` are **org-level operations** — only `org_super_admin` can perform them, regardless of app-level roles.
+:::
+
+### App Preview permission set
+
+Use **App Preview** (`app_preview`) for an app-scoped CI key that manages the preview lifecycle without broad app or organization access.
+
+| Permission | Allows |
+|------------|--------|
+| `app.read` | Read the selected app |
+| `app.read_bundles` | Read uploaded bundles |
+| `app.upload_bundle` | Upload a bundle |
+| `app.create_channel` | Create a channel |
+| `channel.read` | Read a channel |
+| `channel.promote_bundle` | Set a channel's active bundle |
+| `channel.delete` | Delete a channel |
+
+It does not include `app.update_settings`, device or role management, `channel.update_settings`, `channel.rollback_bundle`, forced-device management, or `bundle.delete`.
+
+:::caution
+**App Preview** is app-scoped, not channel-name or pull-request scoped. A key with this role can delete any channel in an app where it has this role.
 :::
 
 ---
