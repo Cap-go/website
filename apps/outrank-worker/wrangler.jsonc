@@ -5,6 +5,9 @@
   "main": "./src/index.ts",
   "compatibility_date": "2026-05-12",
   "compatibility_flags": ["nodejs_compat"],
+  "dependencies_instrumentation": {
+    "enabled": true,
+  },
   "workers_dev": false,
   "vars": {
     "GITHUB_OWNER": "Cap-go",

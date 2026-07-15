@@ -5,6 +5,9 @@
   "main": "./src/index.ts",
   "compatibility_date": "2026-05-01",
   "compatibility_flags": ["nodejs_compat"],
+  "dependencies_instrumentation": {
+    "enabled": true,
+  },
   "workers_dev": false,
   "limits": {
     "cpu_ms": 300000,
