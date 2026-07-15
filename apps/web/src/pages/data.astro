@@ -195,7 +195,7 @@ const content = {
     }
 
     function setPlatform(platform: keyof Metrics['platforms'], share: number) {
-      const row = page.querySelector<HTMLElement>(`[data-platform="${platform}"]`)
+      const row = page?.querySelector<HTMLElement>(`[data-platform="${platform}"]`)
       const shareElement = row?.querySelector<HTMLElement>('[data-platform-share]')
       const bar = row?.querySelector<HTMLElement>('[data-platform-bar]')
       if (!shareElement || !bar) return
@@ -317,7 +317,7 @@ const content = {
         renderUnavailable()
       } finally {
         window.clearTimeout(timeoutId)
-        page.setAttribute('aria-busy', 'false')
+        page?.setAttribute('aria-busy', 'false')
       }
     }
 
