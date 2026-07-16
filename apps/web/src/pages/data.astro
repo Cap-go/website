@@ -101,6 +101,7 @@ const content = {
         </div>
         <div class="data-version-chart" data-version-chart role="list" aria-label="Leading updater version share by day" hidden></div>
         <p class="data-empty" data-version-empty aria-live="polite" hidden></p>
+        <p class="data-sr-only" data-chart-status role="status" aria-live="polite"></p>
       </div>
     </section>
   </main>
@@ -133,6 +134,7 @@ const content = {
     const failuresList = page.querySelector<HTMLOListElement>('[data-failures]')
     const versionChart = page.querySelector<HTMLElement>('[data-version-chart]')
     const versionEmpty = page.querySelector<HTMLElement>('[data-version-empty]')
+    const chartStatus = page.querySelector<HTMLElement>('[data-chart-status]')
     const styleScopeAttributes = page.getAttributeNames().filter((attribute) => attribute.startsWith('data-astro-cid-'))
 
     function createScopedElement<K extends keyof HTMLElementTagNameMap>(tagName: K) {
@@ -285,6 +287,10 @@ const content = {
       renderDaily(metrics)
       renderFailures(metrics)
       renderVersions(metrics)
+      if (chartStatus) {
+        const readyCharts = [metrics.daily.length ? 'Daily success chart' : '', metrics.updater_versions.length ? 'updater version chart' : ''].filter(Boolean)
+        chartStatus.textContent = readyCharts.length ? readyCharts.join(' and ') + ' ready. Use Tab to focus bars and view values.' : ''
+      }
       if (updated) {
         const timestamp = new Date(metrics.updated_at)
         const formatted = Number.isNaN(timestamp.getTime())
@@ -332,6 +338,17 @@ const content = {
 </script>
 
 <style>
+  .data-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
   .data-page {
     --line: rgb(255 255 255 / 11%);
     --muted: #bdc9da;
