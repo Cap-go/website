@@ -39,6 +39,11 @@ npx @capgo/cli@latest bundle upload --delta
 
 If `autoUpdate` is set to an instant apply mode (`"atInstall"`, `"onLaunch"`, or `"always"`) in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading. Legacy `directUpdate` config is still detected. Use `--no-delta` to force a full bundle upload.
 
+## Delta update limitations
+
+- **Empty files:** The CLI logs `Ignoring empty file...` and excludes zero-byte files from the Delta manifest. It does not fail the upload, so adding an empty file can change the resulting bundle without stopping your deployment. Do not include zero-byte files in Delta bundle paths.
+- **Spaces in paths:** Delta uploads fail before uploading files when a bundle path contains a space. Rename the file or directory to remove spaces before uploading a Delta update.
+
 ## Enforcing Delta (Manifest) Updates
 
 If you want to ensure that all uploads are Delta (manifest) updates and prevent any accidental full bundle uploads, you can use the `--delta-only` flag:

@@ -19,6 +19,15 @@ We use the term "release" to mean preparing a binary for the app stores. In orde
 
 We use the term "bundle" to mean a patch that can be applied to a release to update it to new code. The `npx @capgo/cli@latest bundle upload` command is used to generate a bundle from your new local code which is then shipped to your users.
 
+### Are there Delta update file-path limitations?[](https://capgo.app/docs/faq/#are-there-delta-update-file-path-limitations "Direct link to Are there Delta update file-path limitations?")
+
+Yes:
+
+- **Zero-byte files:** The CLI logs `Ignoring empty file...` and excludes empty files from the Delta manifest. It does not fail the upload, so an empty file can change the resulting bundle without stopping your deployment. Do not include zero-byte files in Delta bundle paths.
+- **Paths with spaces:** Delta uploads fail early with a clear error when a bundle path contains a space. Rename files or directories to remove spaces before uploading a Delta update.
+
+See [Delta updates](/docs/live-updates/differentials/) for setup details.
+
 ### What is the roadmap?[](https://capgo.app/docs/faq/#what-is-the-roadmap "Direct link to What is the roadmap?")
 
 Our project boards are also public and found at: [https://github.com/orgs/Cap-go/projects](https://github.com/orgs/Cap-go/projects/)
