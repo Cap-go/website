@@ -194,12 +194,16 @@ const content = {
         .replace(/\b\w/g, (letter) => letter.toUpperCase())
     }
 
+    function formatPercentage(value: number) {
+      return `${value > 0 ? Math.max(0.1, value).toFixed(1) : '0.0'}%`
+    }
+
     function setPlatform(platform: keyof Metrics['platforms'], share: number) {
       const row = page?.querySelector<HTMLElement>(`[data-platform="${platform}"]`)
       const shareElement = row?.querySelector<HTMLElement>('[data-platform-share]')
       const bar = row?.querySelector<HTMLElement>('[data-platform-bar]')
       if (!shareElement || !bar) return
-      shareElement.textContent = `${share.toFixed(1)}%`
+      shareElement.textContent = formatPercentage(share)
       bar.style.setProperty('--share', `${share}%`)
     }
 
@@ -208,7 +212,7 @@ const content = {
       dailyBars.replaceChildren()
       for (const item of metrics.daily) {
         const bar = createScopedElement('div')
-        const label = `${item.date}: ${item.success_rate.toFixed(1)}% install success`
+        const label = `${item.date}: ${formatPercentage(item.success_rate)} install success`
         bar.className = 'data-bar'
         bar.title = label
         bar.setAttribute('role', 'listitem')
@@ -235,7 +239,7 @@ const content = {
         const reason = createScopedElement('strong')
         reason.textContent = readableReason(item.reason)
         const share = createScopedElement('b')
-        share.textContent = `${item.share.toFixed(1)}%`
+        share.textContent = formatPercentage(item.share)
         const track = createScopedElement('i')
         track.setAttribute('aria-hidden', 'true')
         const fill = createScopedElement('em')
@@ -255,7 +259,7 @@ const content = {
       versionChart.replaceChildren()
       for (const item of trend) {
         const bar = createScopedElement('div')
-        const label = `${item.date}: ${item.version}, ${item.share.toFixed(1)}% share`
+        const label = `${item.date}: ${item.version}, ${formatPercentage(item.share)} share`
         bar.title = label
         bar.setAttribute('role', 'listitem')
         bar.setAttribute('aria-label', label)
@@ -272,7 +276,7 @@ const content = {
     }
 
     function renderMetrics(metrics: Metrics) {
-      if (successRateKpi) successRateKpi.textContent = `${metrics.success_rate.toFixed(1)}%`
+      if (successRateKpi) successRateKpi.textContent = formatPercentage(metrics.success_rate)
       setPlatform('ios', metrics.platforms.ios)
       setPlatform('android', metrics.platforms.android)
       setPlatform('electron', metrics.platforms.electron)
