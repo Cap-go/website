@@ -214,7 +214,8 @@ const content = {
         const bar = createScopedElement('div')
         const label = `${item.date}: ${formatPercentage(item.success_rate)} install success`
         bar.className = 'data-bar'
-        bar.title = label
+        bar.dataset.tooltip = label
+        bar.tabIndex = 0
         bar.setAttribute('role', 'listitem')
         bar.setAttribute('aria-label', label)
         const fill = createScopedElement('span')
@@ -260,7 +261,8 @@ const content = {
       for (const item of trend) {
         const bar = createScopedElement('div')
         const label = `${item.date}: ${item.version}, ${formatPercentage(item.share)} share`
-        bar.title = label
+        bar.dataset.tooltip = label
+        bar.tabIndex = 0
         bar.setAttribute('role', 'listitem')
         bar.setAttribute('aria-label', label)
         const fill = createScopedElement('span')
@@ -472,7 +474,7 @@ const content = {
     gap: 4px;
     align-items: end;
     height: 240px;
-    overflow: hidden;
+    overflow: visible;
   }
   .data-bars {
     background: repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px 50%);
@@ -483,6 +485,65 @@ const content = {
     min-width: 3px;
     height: 100%;
   }
+  .data-bar::after,
+  .data-version-chart > div::after {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    left: 50%;
+    width: max-content;
+    max-width: min(240px, 80vw);
+    padding: 7px 9px;
+    border: 1px solid rgb(147 197 253 / 24%);
+    border-radius: 6px;
+    background: #111c2e;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 28%);
+    color: #f8fafc;
+    content: attr(data-tooltip);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease;
+  }
+  .data-bar:hover::after,
+  .data-bar:focus-visible::after,
+  .data-version-chart > div:hover::after,
+  .data-version-chart > div:focus-visible::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  .data-bar:first-child::after,
+  .data-version-chart > div:first-child::after {
+    left: 0;
+    transform: translate(0, 4px);
+  }
+  .data-bar:first-child:hover::after,
+  .data-bar:first-child:focus-visible::after,
+  .data-version-chart > div:first-child:hover::after,
+  .data-version-chart > div:first-child:focus-visible::after {
+    transform: translate(0, 0);
+  }
+  .data-bar:last-child::after,
+  .data-version-chart > div:last-child::after {
+    right: 0;
+    left: auto;
+    transform: translate(0, 4px);
+  }
+  .data-bar:last-child:hover::after,
+  .data-bar:last-child:focus-visible::after,
+  .data-version-chart > div:last-child:hover::after,
+  .data-version-chart > div:last-child:focus-visible::after {
+    transform: translate(0, 0);
+  }
+  .data-bar:focus-visible,
+  .data-version-chart > div:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+  }
   .data-bar span {
     position: absolute;
     inset: auto 0 0;
@@ -490,6 +551,11 @@ const content = {
     min-height: 2px;
     border-radius: 3px 3px 0 0;
     background: linear-gradient(to top, #2563eb, #60a5fa);
+    transition: filter 120ms ease;
+  }
+  .data-bar:hover span,
+  .data-bar:focus-visible span {
+    filter: brightness(1.22);
   }
   .data-axis {
     display: flex;
@@ -597,6 +663,11 @@ const content = {
     height: var(--share);
     min-height: 2px;
     background: #a78bfa;
+    transition: filter 120ms ease;
+  }
+  .data-version-chart > div:hover span,
+  .data-version-chart > div:focus-visible span {
+    filter: brightness(1.2);
   }
   .data-version-chart small {
     position: absolute;
