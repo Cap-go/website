@@ -298,7 +298,7 @@ const messages = {
   awesome_capacitor: 'Awesome Capacitor',
   bandwidth: 'Bandwidth',
   bandwidth_explanation:
-    'At Capgo, we measure bandwidth by tracking the amount of data transmitted between the storage location and user devices through edge servers. This helps us deliver real-time updates.',
+    'Capgo bandwidth counts user-device downloads that are not served from the edge cache. Cache-served deliveries do not count against your Capgo bandwidth usage.',
   bandwidth_gb: 'Bandwidth (GiB)',
   beautiful_native_experience: 'Beautiful native experience',
   become_a_sponsor: 'Become a sponsor',
@@ -1191,7 +1191,13 @@ const messages = {
     'Yes. Capgo is open source and can support hosted, dedicated, hybrid, or self-hosted deployment discussions when control requirements are more important than a standard SaaS setup.',
   enterprise_faq_sla_q: 'What reliability commitment is available?',
   enterprise_faq_sla_a:
-    'Enterprise includes a 99.9% uptime SLA, global replication, signed update delivery, and rollback workflows designed for production incidents and regulated release processes.',
+    'Enterprise includes a 99.9% monthly availability commitment for the production platform. If the commitment is missed, service credits range from 10% to 30% based on monthly availability. Initial support targets are P1: one hour, 24/7/365; P2: two business hours; P3: one business day; and P4: two business days. Global replication, signed delivery, and rollback workflows support production recovery.',
+  enterprise_faq_replication_q: 'Does regional replication multiply storage or bandwidth?',
+  enterprise_faq_replication_a:
+    'No. Each bundle is counted once for storage, regardless of the delivery regions it serves. Capgo bandwidth counts user-device downloads that are not served from the edge cache. Cache-served deliveries do not count against your Capgo bandwidth usage.',
+  enterprise_faq_flavors_q: 'Should we use channels or separate app IDs for flavors?',
+  enterprise_faq_flavors_a:
+    'Use channels when flavors or environments share the same native app ID. This keeps your release setup simpler and groups those channels under one Capgo app. Use separate app IDs when a flavor needs a distinct native bundle ID, signing identity, entitlement set, or store listing.',
   enterprise_faq_legal_q: 'Can Capgo work with our MSA, DPA, NDA, or PO flow?',
   enterprise_faq_legal_a:
     'Yes. Enterprise conversations can include custom payment processes, purchase orders, signed non-disclosure agreements, DPAs, and procurement workflows before rollout.',
@@ -4410,7 +4416,7 @@ const messages = {
   storage: 'Storage (GiB)',
   storage_calculated_info: '* Storage is calculated per GiB per hour',
   storage_detailed_explanation:
-    'Storage is used to store your app update bundles, which contain web assets (HTML, CSS, JavaScript), version metadata, and checksums. It keeps all uploaded versions to support instant rollbacks, multiple release channels (production, beta, staging), and deployment history. Storage usage grows with each OTA update since every update is stored as a full bundle. Typical usage is 2 GB for a few apps with limited history, and 10–20 GB for multiple apps with frequent releases.',
+    'Storage is used to store your app update bundles, which contain web assets (HTML, CSS, JavaScript), version metadata, and checksums. It keeps all uploaded versions to support instant rollbacks, multiple release channels (production, beta, staging), and deployment history. Storage usage grows with each OTA update since every update is stored as a full bundle. Regional replication does not multiply storage: each bundle is counted once, regardless of the delivery regions it serves. Typical usage is 2 GB for a few apps with limited history, and 10–20 GB for multiple apps with frequent releases.',
   storage_gb: 'Storage (GiB)',
   storage_what_is_it_used_for: 'What is storage used for and how does it work?',
   submitting_a_pr_to_capgo: "Submitting a PR to <a href='https://github.com/Cap-go/capgo'><code>Capgo</code></a>",
@@ -5158,6 +5164,9 @@ const messages = {
   native_build_v2_faq_q6: 'Is Capgo Builder a replacement for live updates?',
   native_build_v2_faq_a6:
     'No. They complement each other. Live Updates for JS, CSS, and assets. Builder when native code, plugins, permissions, icons, or SDKs need a new signed binary.',
+  native_build_v2_faq_q7: 'Can Capgo Build work with our existing CI and private native setup?',
+  native_build_v2_faq_a7:
+    'Yes. Keep private JavaScript dependency setup, web builds, and cap sync in your CI. Capgo Build uploads the prepared native platform folder and its native dependencies, then compiles and signs it; it can also submit the result to app stores when configured. For private CocoaPods, SPM, or Maven dependencies, vendor them into that project before the build. Pass supported build configuration as environment variables when needed.',
 
   native_build_v2_cta_title: 'Native builds without the pain.',
   native_build_v2_cta_tagline: 'One command. iOS and Android, treated as equals. From any machine.',
