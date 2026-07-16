@@ -19,7 +19,7 @@ const content = {
       <div class="data-shell">
         <p class="data-eyebrow"><span aria-hidden="true"></span> Public aggregate data</p>
         <h1>Live Update reliability, measured clearly.</h1>
-        <p class="data-summary">A privacy-safe 30-day view of install outcomes. Every result is grouped by app, device, and UTC day before percentages are calculated.</p>
+        <p class="data-summary">A privacy-safe 30-day view of Live Update reliability. Success rate comes from the same global_stats snapshot as the Capgo admin dashboard.</p>
         <p class="data-updated" data-updated aria-live="polite"><span class="data-spinner" aria-hidden="true"></span> Loading current reliability data…</p>
       </div>
     </section>
@@ -31,13 +31,13 @@ const content = {
             <p class="data-eyebrow">Install reliability</p>
             <h2 id="reliability-title">Daily success rate</h2>
           </div>
-          <p>Counted per app, device, and UTC day. If that combination eventually installs successfully, it counts as success.</p>
+          <p>Success rate matches Capgo global_stats. Failure reasons stay deduplicated by app, device, and UTC day.</p>
         </div>
 
         <div class="data-kpis" aria-label="Reliability summary">
-          <div><p>30-day success rate</p><strong data-kpi="success-rate">—</strong></div>
+          <div><p>Success rate</p><strong data-kpi="success-rate">—</strong></div>
           <div><p>Reporting window</p><strong>30 days</strong></div>
-          <div><p>Counting unit</p><strong>Device / day</strong></div>
+          <div><p>Source</p><strong>global_stats</strong></div>
         </div>
 
         <div class="data-loading data-chart-skeleton" aria-hidden="true">
@@ -304,19 +304,57 @@ const content = {
       }
     }
 
-    async function loadMetrics() {
+    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v1'
+    const METRICS_CACHE_TTL_MS = 5 * 60 * 1000
+
+    function readCachedMetrics(): Metrics | null {
+      try {
+        const raw = sessionStorage.getItem(METRICS_CACHE_KEY)
+        if (!raw) return null
+        const parsed = JSON.parse(raw) as { savedAt?: unknown; payload?: unknown }
+        if (typeof parsed.savedAt !== 'number' || Date.now() - parsed.savedAt > METRICS_CACHE_TTL_MS) return null
+        return normalizeMetrics(parsed.payload)
+      } catch {
+        return null
+      }
+    }
+
+    function writeCachedMetrics(payload: unknown) {
+      try {
+        sessionStorage.setItem(METRICS_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), payload }))
+      } catch {
+        // Ignore quota / private-mode failures.
+      }
+    }
+
+    async function fetchMetrics() {
+      if (!endpoint) throw new Error('Missing metrics endpoint')
       const controller = new AbortController()
       const timeoutId = window.setTimeout(() => controller.abort(), 10_000)
       try {
-        if (!endpoint) throw new Error('Missing metrics endpoint')
         const response = await fetch(endpoint, { headers: { Accept: 'application/json' }, signal: controller.signal })
-        const metrics = response.ok ? normalizeMetrics(await response.json()) : null
+        const payload = response.ok ? await response.json() : null
+        const metrics = normalizeMetrics(payload)
         if (!metrics) throw new Error('Invalid metrics response')
-        renderMetrics(metrics)
-      } catch {
-        renderUnavailable()
+        writeCachedMetrics(payload)
+        return metrics
       } finally {
         window.clearTimeout(timeoutId)
+      }
+    }
+
+    async function loadMetrics() {
+      const cached = readCachedMetrics()
+      if (cached) {
+        renderMetrics(cached)
+        page?.setAttribute('aria-busy', 'false')
+      }
+      try {
+        const metrics = await fetchMetrics()
+        renderMetrics(metrics)
+      } catch {
+        if (!cached) renderUnavailable()
+      } finally {
         page?.setAttribute('aria-busy', 'false')
       }
     }
