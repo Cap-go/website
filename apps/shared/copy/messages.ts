@@ -5166,7 +5166,7 @@ const messages = {
     'No. They complement each other. Live Updates for JS, CSS, and assets. Builder when native code, plugins, permissions, icons, or SDKs need a new signed binary.',
   native_build_v2_faq_q7: 'Can Capgo Build work with our existing CI and private native setup?',
   native_build_v2_faq_a7:
-    'Yes. Keep private dependency setup, web builds, and cap sync in your CI. Capgo Build receives the prepared native iOS or Android project, so it does not need access to your private registries or SSH credentials. It then compiles and signs it; it can also submit the result to app stores when configured. Pass supported build configuration and credentials as environment variables when needed.',
+    'Yes. Keep private JavaScript dependency setup, web builds, and cap sync in your CI. Capgo Build receives the prepared native iOS or Android project, then compiles and signs it; it can also submit the result to app stores when configured. If Xcode or Gradle must resolve private native dependencies during the build, make them available to the build and pass any supported configuration or credentials as environment variables.',
 
   native_build_v2_cta_title: 'Native builds without the pain.',
   native_build_v2_cta_tagline: 'One command. iOS and Android, treated as equals. From any machine.',
