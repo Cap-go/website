@@ -69,6 +69,7 @@ Scoped to a single app. Use these when a team member should only work on one app
 | **App Developer** | `app_developer` | Upload bundles, manage devices, trigger native builds, update channel settings. No deletion, no app settings changes, no channel creation. |
 | **App Uploader** | `app_uploader` | Read access + upload new bundle versions. |
 | **App Reader** | `app_reader` | Read-only — stats, bundles, channels, logs, devices. |
+| **App Preview** | `app_preview` | Organization- and app-bound preview CI lifecycle: upload a bundle and create a preview channel. Creating that channel automatically grants lifecycle rights only for it. |
 
 ### App permission matrix
 
@@ -92,6 +93,41 @@ Scoped to a single app. Use these when a team member should only work on one app
 `app.delete` and `app.transfer` are **org-level operations** — only `org_super_admin` can perform them, regardless of app-level roles.
 :::
 
+### App Preview permission set
+
+Use **App Preview** (`app_preview`) for an organization- and app-bound CI key that manages a PR preview lifecycle without broad app or organization-wide access.
+
+:::caution
+**Availability:** This ownership-bound lifecycle requires the App Preview lifecycle release. Until that release is deployed to your Capgo Cloud environment, `--delete-bundle` requires the general `bundle.delete` permission and an App Preview key cannot use it.
+:::
+
+The `app_preview` binding grants only these app-level permissions:
+
+| Permission | Allows |
+|------------|--------|
+| `app.read` | Read the selected app |
+| `app.read_bundles` | Read uploaded bundles |
+| `app.upload_bundle` | Upload a bundle |
+| `app.create_channel` | Create a channel |
+
+When an App Preview key creates a channel, Capgo automatically gives that key a child `channel_preview` binding for the new channel only:
+
+| Permission | Allows |
+|------------|--------|
+| `channel.read` | Read the channel created by the key |
+| `channel.promote_bundle` | Set the key's own uploaded bundle on that channel |
+| `channel.delete` | Delete that channel |
+
+Because `app_preview` retains `app.read`, the key may enumerate channel metadata in the selected app. The automatic child binding is a **management** boundary: it does not grant lifecycle mutations for a channel the key did not create.
+
+Capgo records the preview key that created each channel and uploaded each bundle. Therefore an App Preview key can create a channel, promote its own bundle, and atomically delete that channel and bundle with `channel delete --delete-bundle`; it cannot do those things to an existing default/main channel, another preview key's channel, or another key's bundle.
+
+It does not include `app.update_settings`, device or role management, `channel.update_settings`, `channel.rollback_bundle`, forced-device management, or generic `bundle.delete`.
+
+:::caution
+Every App Preview binding remains linked to the selected app's owning organization. The role omits an organization-wide role; it does not remove the organization association. Revoking or expiring the app binding removes the key's effective lifecycle access.
+:::
+
 ---
 
 ## Channel roles
@@ -99,27 +135,28 @@ Scoped to a single app. Use these when a team member should only work on one app
 Scoped to a single channel. Useful for giving targeted access to a specific release channel.
 
 :::note
-Channel roles are currently available **via API and CLI only** — there is no UI to assign them in the dashboard. In the dashboard, use [channel permission overrides](/docs/webapp/organization-system/#overriding-channel-permissions) instead to fine-tune channel access per user.
+Channel roles are currently available **via API and CLI only** — there is no UI to assign them in the dashboard. `channel_preview` is an exception: Capgo creates it automatically for an App Preview key when that key creates a channel. In the dashboard, use [channel permission overrides](/docs/webapp/organization-system/#overriding-channel-permissions) instead to fine-tune channel access per user.
 :::
 
 | Role | Internal name | Description |
 |------|---------------|-------------|
 | **Channel Admin** | `channel_admin` | Full control of one channel: settings, promote/rollback bundles, manage forced devices. |
 | **Channel Viewer** | `channel_reader` | Read-only — current bundle, history, forced devices, audit log. |
+| **Channel Preview** | `channel_preview` | System-assigned to the App Preview key that created the channel: read, promote its own bundle, and delete that channel. |
 
 ### Channel permission matrix
 
-| Permission | Description | Channel Admin | Channel Viewer |
-|------------|-------------|:-------------:|:--------------:|
-| `channel.read` | View the channel and its current bundle | ✅ | ✅ |
-| `channel.update_settings` | Edit channel settings (platform toggles, update policy…) | ✅ | ❌ |
-| `channel.delete` | Delete the channel | ✅ | ❌ |
-| `channel.read_history` | View bundle assignment history | ✅ | ✅ |
-| `channel.promote_bundle` | Set the active bundle on the channel | ✅ | ❌ |
-| `channel.rollback_bundle` | Roll back to a previous bundle | ✅ | ❌ |
-| `channel.manage_forced_devices` | Force specific devices to this channel | ✅ | ❌ |
-| `channel.read_forced_devices` | View the list of forced devices | ✅ | ✅ |
-| `channel.read_audit` | View channel activity log | ✅ | ✅ |
+| Permission | Description | Channel Admin | Channel Viewer | Channel Preview |
+|------------|-------------|:-------------:|:--------------:|:---------------:|
+| `channel.read` | View the channel and its current bundle | ✅ | ✅ | ✅ |
+| `channel.update_settings` | Edit channel settings (platform toggles, update policy…) | ✅ | ❌ | ❌ |
+| `channel.delete` | Delete the channel | ✅ | ❌ | ✅ |
+| `channel.read_history` | View bundle assignment history | ✅ | ✅ | ❌ |
+| `channel.promote_bundle` | Set the active bundle on the channel | ✅ | ❌ | ✅ |
+| `channel.rollback_bundle` | Roll back to a previous bundle | ✅ | ❌ | ❌ |
+| `channel.manage_forced_devices` | Force specific devices to this channel | ✅ | ❌ | ❌ |
+| `channel.read_forced_devices` | View the list of forced devices | ✅ | ✅ | ❌ |
+| `channel.read_audit` | View channel activity log | ✅ | ✅ | ❌ |
 
 ---
 

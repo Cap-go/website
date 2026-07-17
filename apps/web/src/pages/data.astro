@@ -153,7 +153,6 @@ const content = {
   </main>
 </Layout>
 
-
 <script>
   type DailyMetric = { date: string; success_rate: number }
   type FailureMetric = { reason: string; share: number }
@@ -190,10 +189,9 @@ const content = {
     const platformsEmpty = page?.querySelector<HTMLElement>('[data-platforms-empty]')
     const versionsBody = page?.querySelector<HTMLElement>('[data-versions]')
     const versionEmpty = page?.querySelector<HTMLElement>('[data-version-empty]')
+    const styleScopeAttributes = page?.getAttributeNames().filter((attribute) => attribute.startsWith('data-astro-cid-')) ?? []
 
-    const countryNames = typeof Intl !== 'undefined' && 'DisplayNames' in Intl
-      ? new Intl.DisplayNames(['en'], { type: 'region' })
-      : null
+    const countryNames = typeof Intl !== 'undefined' && 'DisplayNames' in Intl ? new Intl.DisplayNames(['en'], { type: 'region' }) : null
 
     function isRecord(value: unknown): value is Record<string, unknown> {
       return typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -211,11 +209,16 @@ const content = {
     }
 
     function createScopedElement<K extends keyof HTMLElementTagNameMap>(tag: K) {
-      return document.createElement(tag)
+      const element = document.createElement(tag)
+      for (const attribute of styleScopeAttributes) element.setAttribute(attribute, '')
+      return element
     }
 
     function readableReason(reason: string) {
-      return reason.replaceAll('_', ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+      return reason
+        .replaceAll('_', ' ')
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/\b\w/g, (char) => char.toUpperCase())
     }
 
     function labelForKey(kind: 'country' | 'platform' | 'version', key: string) {
@@ -251,12 +254,7 @@ const content = {
     }
 
     function normalizeMetrics(value: unknown): Metrics | null {
-      if (
-        !isRecord(value) ||
-        typeof value.updated_at !== 'string' ||
-        !Array.isArray(value.daily) ||
-        !Array.isArray(value.failures)
-      ) {
+      if (!isRecord(value) || typeof value.updated_at !== 'string' || !Array.isArray(value.daily) || !Array.isArray(value.failures)) {
         return null
       }
 
@@ -289,33 +287,37 @@ const content = {
           .filter((item) => item.share > 0)
       }
 
-      const countries = Array.isArray(value.countries)
-        ? value.countries.map(normalizeBreakdown).filter((item): item is BreakdownMetric => item !== null)
-        : []
+      const countries = Array.isArray(value.countries) ? value.countries.map(normalizeBreakdown).filter((item): item is BreakdownMetric => item !== null) : []
 
       let updater_versions: BreakdownMetric[] = []
       if (Array.isArray(value.updater_versions)) {
-        const mapped = value.updater_versions.map((item) => {
-          if (!isRecord(item)) return null
-          if (typeof item.key === 'string') return normalizeBreakdown(item)
-          if (typeof item.version === 'string') {
-            return {
-              key: item.version,
-              share: percentage(item.share),
+        const breakdowns = value.updater_versions.map(normalizeBreakdown).filter((item): item is BreakdownMetric => item !== null)
+
+        if (breakdowns.length > 0) {
+          updater_versions = breakdowns
+        } else {
+          const legacyRows = value.updater_versions
+            .map((item) => {
+              if (!isRecord(item) || typeof item.date !== 'string' || typeof item.version !== 'string') return null
+              return { date: item.date, version: item.version, share: percentage(item.share) }
+            })
+            .filter((item): item is { date: string; version: string; share: number } => item !== null)
+          const dayCount = new Set(legacyRows.map((item) => item.date)).size
+          const totals = new Map<string, number>()
+          for (const item of legacyRows) {
+            totals.set(item.version, (totals.get(item.version) ?? 0) + item.share)
+          }
+          // Legacy payloads report a percentage per day; average it across the reporting window.
+          updater_versions = [...totals]
+            .map(([key, share]) => ({
+              key,
+              share: dayCount ? share / dayCount : 0,
               success_rate: null,
               top_failure: null,
-            }
-          }
-          return null
-        })
-        // Legacy payload listed many per-day rows; keep the highest-share row per version.
-        const best = new Map<string, BreakdownMetric>()
-        for (const item of mapped) {
-          if (!item) continue
-          const prev = best.get(item.key)
-          if (!prev || item.share > prev.share) best.set(item.key, item)
+            }))
+            .sort((a, b) => b.share - a.share)
+            .slice(0, 10)
         }
-        updater_versions = [...best.values()].sort((a, b) => b.share - a.share).slice(0, 10)
       }
 
       return {
@@ -355,9 +357,7 @@ const content = {
           success.dataset.tone = item.success_rate >= 85 ? 'good' : item.success_rate >= 70 ? 'ok' : 'poor'
         }
         const failure = createScopedElement('td')
-        failure.textContent = item.top_failure
-          ? `${readableReason(item.top_failure.reason)} (${item.top_failure.share.toFixed(0)}%)`
-          : '—'
+        failure.textContent = item.top_failure ? `${readableReason(item.top_failure.reason)} (${item.top_failure.share.toFixed(0)}%)` : '—'
         tr.append(name, usage, success, failure)
         body.append(tr)
       }
@@ -374,7 +374,9 @@ const content = {
         const bar = createScopedElement('div')
         const label = `${item.date}: ${item.success_rate.toFixed(1)}% install success`
         bar.className = 'data-bar'
+        bar.dataset.tooltip = label
         bar.title = label
+        bar.tabIndex = 0
         bar.setAttribute('role', 'listitem')
         bar.setAttribute('aria-label', label)
         const fill = createScopedElement('span')
@@ -408,8 +410,7 @@ const content = {
         row.append(rank, reason, share, track)
         failuresList.append(row)
       }
-      if (!metrics.failures.length)
-        failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
+      if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
     }
 
     function renderMetrics(metrics: Metrics) {
@@ -434,8 +435,7 @@ const content = {
         dailyEmpty.hidden = false
         dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
       }
-      if (failuresList)
-        failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
+      if (failuresList) failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
       renderBreakdownRows(countriesBody, countriesEmpty, [], 'country', 'Country breakdown is temporarily unavailable.')
       renderBreakdownRows(platformsBody, platformsEmpty, [], 'platform', 'Platform breakdown is temporarily unavailable.')
       renderBreakdownRows(versionsBody, versionEmpty, [], 'version', 'Updater breakdown is temporarily unavailable.')
@@ -504,7 +504,6 @@ const content = {
 </script>
 
 <style>
-
   .data-sr-only {
     position: absolute;
     width: 1px;
@@ -983,7 +982,13 @@ const content = {
     font-weight: 600;
     color: white;
   }
-  .data-table td[data-tone='good'] { color: #7ddea0; }
-  .data-table td[data-tone='ok'] { color: #e7c77b; }
-  .data-table td[data-tone='poor'] { color: #f0a0a0; }
+  .data-table td[data-tone='good'] {
+    color: #7ddea0;
+  }
+  .data-table td[data-tone='ok'] {
+    color: #e7c77b;
+  }
+  .data-table td[data-tone='poor'] {
+    color: #f0a0a0;
+  }
 </style>

@@ -19,12 +19,42 @@ The `authorization` header is also accepted but is primarily intended for JWT to
 
 ## RBAC Permissions
 
-API keys use the same role-based access control (RBAC) system as user accounts. When creating or managing keys through the web app, you assign roles at two levels:
+API keys use the same role-based access control (RBAC) system as user accounts. When creating or managing keys through the web app or API, you assign roles at two levels:
 
-- **Organization role** — Defines the key's baseline permissions across the entire organization (e.g. `org_admin`, `org_member`).
-- **App roles** — Optional per-app permissions (e.g. `app_admin`, `app_developer`, `app_uploader`, `app_reader`).
+- **Organization role** — Defines the key's baseline permissions across the entire organization (for example, `org_admin` or `org_member`).
+- **App roles** — Per-app permissions (for example, `app_admin`, `app_developer`, `app_uploader`, `app_reader`, or `app_preview`).
 
 If an API key has explicit role bindings, **only those bindings** are evaluated for permission checks. The key owner's personal permissions are not inherited by the key.
+
+### Preview channel automation
+
+After the App Preview lifecycle release is deployed to your Capgo Cloud environment, bind `app_preview` only to the preview app for CI that creates a temporary preview channel, uploads and promotes a bundle, then deletes both. Until then, `--delete-bundle` requires the general `bundle.delete` permission and is not available to an App Preview key.
+
+```json
+{
+  "name": "PR preview key",
+  "hashed": true,
+  "bindings": [
+    {
+      "role_name": "app_preview",
+      "scope_type": "app",
+      "org_id": "<OWNING_ORG_UUID>",
+      "app_id": "<APP_UUID>"
+    }
+  ]
+}
+```
+`org_id` is the UUID of the app's owning organization. `app_id` is the app record's internal UUID, not the public app identifier used by CLI commands (for example, `com.example.app`). The binding remains organization-bound even when the key has no organization-wide role.
+
+The app-level `app_preview` role includes only `app.read`, `app.read_bundles`, `app.upload_bundle`, and `app.create_channel`. When that key creates a channel, Capgo automatically adds a `channel_preview` binding on the newly created channel. That child binding grants `channel.read`, `channel.promote_bundle`, and `channel.delete` only for the channel the key created.
+
+`app_preview` retains `app.read`, so this is not strict channel-read isolation: the key may enumerate channel metadata in the selected app. The automatic child binding limits **lifecycle mutations** to the channel the key created.
+
+Capgo records the App Preview key that uploaded each bundle. The key can promote only its own bundle to its own preview channel. It has no channel lifecycle access to an existing default/main channel, a channel created by another preview key, or another key's bundle.
+
+Use `channel delete <preview-channel> <public-app-id> --delete-bundle` for cleanup. This is an atomic, ownership-checked preview cleanup route; it removes only the calling key's preview channel and linked bundle. `app_preview` does not grant generic `bundle.delete`.
+
+For the dashboard setup and a complete CLI example, see [Use an App Preview key for preview workflows](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows).
 
 {/* [SCREENSHOT: capgo_apikeys_rbac_diagram.webp] — Diagram showing the RBAC hierarchy: org roles → app roles → API key permissions */}
 <figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_rbac_diagram.webp" alt="A diagram explaining how RBAC API key permissions work" /><figcaption></figcaption></figure>
@@ -94,12 +124,13 @@ Organization policies can enforce:
 
 ## Common Use Cases
 
-1. **CI/CD Integration**: Create keys scoped to specific apps with the `app_uploader` or `app_developer` role, and set an expiration date
-2. **Deployment Automation**: Use keys with the `app_developer` role for automated deployment scripts
-3. **Monitoring Tools**: Create keys with the `app_reader` role for external monitoring integrations
-4. **Admin Access**: Use keys with the `org_admin` role sparingly for administrative tools
-5. **Third-Party Integrations**: Create keys restricted to specific apps with the minimum required role
-6. **Organization Provisioning**: Use an `org_admin` or `org_super_admin` RBAC key with `org.create` only for trusted automation that needs to create organizations
+1. **CI/CD Integration**: Create keys scoped to specific apps with the `app_uploader` or `app_developer` role, and set an expiration date.
+2. **PR Preview Channels**: Use `app_preview` on only the preview app or apps when CI needs to upload a bundle, create a temporary channel, and atomically clean up its own channel and bundle.
+3. **Deployment Automation**: Use keys with the `app_developer` role for automated deployment scripts.
+4. **Monitoring Tools**: Create keys with the `app_reader` role for external monitoring integrations.
+5. **Admin Access**: Use keys with the `org_admin` role sparingly for administrative tools.
+6. **Third-Party Integrations**: Create keys restricted to specific apps with the minimum required role.
+7. **Organization Provisioning**: Use an `org_admin` or `org_super_admin` RBAC key with `org.create` only for trusted automation that needs to create organizations.
 
 ## Keep going from API Keys
 

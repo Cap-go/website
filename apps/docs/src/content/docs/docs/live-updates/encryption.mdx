@@ -1,6 +1,6 @@
 ---
 title: Encryption
-description: "Learn how Capgo's end-to-end encryption secures your app bundles during transmission and storage, protecting your code and user data."
+description: "Learn how Capgo's end-to-end encryption and signature validation protect app bundle contents during transmission and storage."
 sidebar:
   order: 5
 ---
@@ -237,36 +237,40 @@ npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
 - **Private Key**: Used by CLI for encryption during bundle upload (keep secure)
 - **Public Key**: Stored in app configuration for decryption on device (safe to commit)
 
-### Key Rotation
+### Rotate after a private-key compromise
 
-Regularly rotate your encryption keys for enhanced security:
+Rotate the key pair when the private key is suspected or confirmed compromised. A routine calendar rotation is not required. This is a native-key migration, not an OTA-only change.
 
 <Steps>
 
-1. **Generate new keys:**
+1. **Generate a replacement key pair:**
    ```shell
-   # Navigate to desired directory first, then create keys
-   mkdir ./new-keys && cd ./new-keys
    npx @capgo/cli@latest key create
    ```
 
-2. **Save the new public key to Capacitor config:**
+2. **Save the replacement public key to your Capacitor config:**
    ```shell
-   npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
+   npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
    ```
 
-3. **Update your app configuration** with the new public key
+3. **Sync and ship a native release:** Run `npx cap sync`, then distribute a new native app version containing the replacement public key.
 
-4. **Deploy the updated app** before uploading encrypted bundles with the new key
+4. **Target the new native version:** Devices still running the old native binary cannot decrypt updates encrypted with the replacement key. Use [Version Targeting](/docs/live-updates/version-targeting/) to restrict replacement-key bundles to the new native version while the rest of the fleet updates through the store or MDM.
+
+5. **Switch your upload secret:** As soon as that native release is live, replace the private key in CI and upload only bundles targeted to native versions that contain the replacement public key.
 
 </Steps>
+
+<Aside type="caution">
+If the private key is compromised, stop using it immediately. Existing installs with the old public key need a native store or MDM update before they can receive bundles encrypted with the replacement key.
+</Aside>
 
 ## Security Best Practices
 
 ### Key Security
 - **Never share private keys** between environments or team members
 - **Use different keys** for different environments (dev, staging, production)
-- **Rotate keys regularly** (recommended: every 6-12 months)
+- **Rotate after a compromise**: replace the key pair when the private key is suspected or confirmed compromised; a routine calendar rotation is not required
 - **Store keys securely** using proper key management systems
 
 ### Bundle Security

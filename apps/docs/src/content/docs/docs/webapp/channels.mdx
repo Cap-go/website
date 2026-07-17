@@ -88,6 +88,8 @@ If the trash icon is not visible, your account does not have the `channel.delete
 npx @capgo/cli@latest channel delete <channel-name> <app-id>
 ```
 
+After the App Preview lifecycle release is deployed to your Capgo Cloud environment, an organization- and app-bound **App Preview** key can atomically delete only the preview channel and bundle it created with `channel delete <preview-channel> <app-id> --delete-bundle`. Until that release, `--delete-bundle` requires the general `bundle.delete` permission and is not available to an App Preview key. After release, it cannot change or delete an existing default/main channel, another preview key's channel, or another key's bundle. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows) for the least-privilege setup.
+
 ## Managing a channel
 
 Clicking on the channel name will open a modal where you can manage the channel settings. (`3` in the image)

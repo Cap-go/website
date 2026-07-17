@@ -42,11 +42,17 @@ import m from '@/copy/messages'
                 {m.capgo_usage_explanation({}, { locale: Astro.locals.locale })}
                 <a
                   class="text-blue-400 underline decoration-1 underline-offset-2 transition-colors hover:text-blue-300"
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'blog/how-your-usage-is-counted')}
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates/testing-native-builds-without-live-updates/')}
                 >
                   {m.here({}, { locale: Astro.locals.locale })}
                 </a>
               </p>
+              <a
+                class="inline-block text-blue-400 underline decoration-1 underline-offset-2 transition-colors hover:text-blue-300"
+                href={`${getRelativeLocaleUrl(Astro.locals.locale, 'docs/faq/')}#what-counts-as-a-mau-for-capgo`}
+              >
+                {m.learn_more({}, { locale: Astro.locals.locale })}
+              </a>
             </div>
           </div>
         </details>
@@ -67,7 +73,13 @@ import m from '@/copy/messages'
           </summary>
           <div class="px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
-              {m.storage_detailed_explanation({}, { locale: Astro.locals.locale })}
+              <p>{m.storage_detailed_explanation({}, { locale: Astro.locals.locale })}</p>
+              <a
+                class="mt-3 inline-block text-blue-400 underline decoration-1 underline-offset-2 transition-colors hover:text-blue-300"
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/webapp/bundles/')}
+              >
+                {m.learn_more({}, { locale: Astro.locals.locale })}
+              </a>
             </div>
           </div>
         </details>

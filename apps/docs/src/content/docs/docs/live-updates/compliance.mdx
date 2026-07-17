@@ -21,7 +21,7 @@ Capgo collects only the data that is necessary to provide the live updates featu
 - **App Version Code**: The version code of the app that is used to determine which updates are compatible with the app
 - **App Version Name**: The version name of the app that is used for display purposes
 - **Platform**: The platform (iOS, Android, Electron) of the app that is used to determine which updates are compatible with the app
-- **Device ID**: A randomly generated, app-scoped device identifier used for live-update operation, update eligibility, de-duplication of monthly active devices, support, abuse prevention, and operational reliability. It is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers. **Starting from plugin version v5.10.0, v6.25.0 and v7.25.0**, the device ID persists across app reinstalls (stored securely in Keychain on iOS, EncryptedSharedPreferences on Android, and Electron secure storage) to support reliable update delivery and monthly active device de-duplication. Prior to these versions, the device ID was reset with every app installation
+- **Device ID**: A randomly generated, app-scoped device identifier used for live-update operation, update eligibility, de-duplication of monthly active devices, support, abuse prevention, and operational reliability. It is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers. On iOS, **v7.25.0+** keeps the ID through normal reinstalls using Keychain. On Android, use **v7.50.1+** (or **v5.50.1+** and **v6.50.1+** on those release lines); the ID is restored only when Android Backup/Restore retains the app preferences. Disabling backup, excluding those preferences, or clearing app data generates a new device ID.
 - **Bundle ID**: The unique identifier for the bundle that is currently installed on the device
 - **Channel Name**: The name of the channel that is selected to receive updates
 - **OS Version**: The version of the operating system that is used to determine which updates are compatible with the device
@@ -41,12 +41,13 @@ You can verify the data that is collected by inspecting the source code of the @
 
 ### Endpoint Storage Detail
 
-The updater plugin can call two separate Capgo Cloud endpoints:
+The updater can use up to three configured endpoints for update checks, channel self-assignment, and statistics:
 
 - `updateUrl` (`/updates`) checks which bundle the device should receive. This endpoint is required for Capgo Cloud live updates.
-- `statsUrl` (`/stats`) sends explicit update lifecycle, health, and failure events. You can set `statsUrl` to an empty string to disable these extra stats reports.
+- `channelUrl` (`/channel_self`) reads and updates a device channel assignment.
+- `statsUrl` (`/stats`) sends explicit update lifecycle, health, and failure events. Set `statsUrl` to an empty string to disable these extra stats reports, or point it to a self-hosted endpoint or proxy you control. A proxy keeps statistics out of Capgo only when it terminates the payload instead of forwarding it. See the [self-hosted statistics endpoint contract](/docs/plugins/updater/self-hosted/handling-stats/).
 
-Disabling `statsUrl` does not disable all device data storage. `/updates` still needs a stable, app-scoped `device_id` so Capgo can decide which update applies and count monthly active devices for billing.
+Disabling `statsUrl` changes only the explicit statistics path. `/updates` and `/channel_self` still need a stable, app-scoped `device_id` so Capgo can decide which update and channel apply and count monthly active devices for billing.
 
 When `statsUrl` is enabled, Capgo can store:
 
@@ -114,17 +115,20 @@ The data collected by Capgo is used exclusively for:
 - All data transmission is encrypted using industry-standard protocols (HTTPS/TLS)
 
 ### Data Retention
-- Update check logs are retained for operational purposes (typically 30-90 days)
-- Bundle files are retained as long as they're assigned to active channels
-- Aggregated, non-personal metrics may be retained longer for service improvement
-- Personal data, if any, is deleted according to applicable data protection laws
+
+- Operational records are retained for service operation, security, billing, and support.
+- Bundle retention is configurable for each app in App Settings. Bundles that are linked to an active channel or rollout remain protected; unused bundles become eligible for removal under the app's selected retention rule.
+- Retained historical bundles and Delta assets contribute to storage usage. Regional replication does not multiply storage consumption.
+- Personal data, if any, is deleted according to applicable data protection laws.
 
 ### Data Security
+
 - All data is encrypted in transit and at rest
 - Access to data is restricted to authorized personnel only
 - Regular security audits and monitoring are performed
 - Industry-standard security practices are followed
 - **SOC 2 Certification**: Capgo is currently SOC 2 Type II certified, ensuring the highest standards of security, availability, and confidentiality. View our compliance status at [trust.capgo.app](https://trust.capgo.app)
+- **ISO 27001**: Capgo's ISO 27001 audit is complete; the certificate is pending issuance.
 - **Continuous Code Auditing**: Every commit is automatically audited by [SonarCloud](https://sonarcloud.io/summary/overall?id=Cap-go_capacitor-updater&branch=main) for the [plugin](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main) and [backend](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main), ensuring code quality, security vulnerabilities detection, and maintainability
 - **Vulnerability Scanning**: Additional security scanning is performed by [Snyk](https://snyk.io/test/github/Cap-go/capgo) to detect and remediate security vulnerabilities in dependencies
 - **Infrastructure Security**: Our hosting infrastructure is continuously monitored and verified through [hosting security checks](https://hosting-checker.net/websites/api.capgo.app)
@@ -151,31 +155,36 @@ Your app users benefit from:
 ## Compliance and Legal
 
 ### Data Protection Regulations
-Capgo is designed to comply with major data protection regulations including:
+
+Capgo is designed to support compliance with major data protection regulations, including:
 
 - **GDPR** (General Data Protection Regulation)
 - **CCPA** (California Consumer Privacy Act)
 - **COPPA** (Children's Online Privacy Protection Act)
 - Other applicable regional privacy laws
 
-### App Store Compliance
-Capgo strictly adheres to app store guidelines and policies:
+### Current compliance documents
 
-- **Apple App Store**: Complies with [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) section 3.3.2, ensuring that live updates only modify the app's behavior in ways that are consistent with the submitted app
-- **Google Play Store**: Follows [Google Play Developer Policy](https://play.google.com/about/developer-content-policy/) requirements for dynamic code loading and app updates
-- **Content Restrictions**: Live updates cannot introduce functionality that wasn't present in the original app submission or violate platform-specific content policies
-- **Security Requirements**: All updates maintain the same security posture and permissions as the original app
+- The [sub-processor list](https://capgo.app/subprocessors/) is Capgo's current public source of truth. It is kept up to date and lists each provider's purpose, processing location, transfer mechanism, and change history.
+- The [Data Processing Agreement](https://capgo.app/dpa/) is available for review.
+
+### App Store and Play Store considerations
+
+Capgo updates only the Capacitor web layer: JavaScript, HTML, CSS, and static assets. It does not change your native binary, native plugins, permissions, entitlements, or store metadata. Each app is reviewed on its own merits, so Capgo cannot guarantee an individual App Store or Play Store approval.
+
+Use live updates only for web-layer changes that remain within the store rules and your submitted app's scope. Ship a normal native release for native capabilities or material functionality changes. Review [Apple's App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) (including guideline 2.5.2) and [Google Play's Device and Network Abuse policy](https://support.google.com/googleplay/android-developer/answer/16559646) for your app before release.
 
 ### Your Responsibilities
+
 As an app developer using Capgo, you should:
 
 - Include appropriate privacy disclosures in your app's privacy policy
-- Inform users about the use of live update services
-- Ensure compliance with applicable laws in your jurisdiction
+- Inform users about the use of live update services when required
+- Confirm that each planned update complies with applicable laws and store rules
 - Implement appropriate consent mechanisms if required
 
 <Aside type="tip">
-**No Additional Privacy Implementation Required**: Capgo is designed to be privacy-compliant by default. You don't need to implement any additional privacy controls or data handling mechanisms in your app code. The minimal data collection and privacy-by-design approach means that integrating Capgo typically doesn't require changes to your existing privacy declarations or policies.
+**Review your disclosures**: Capgo provides privacy controls and a documented data inventory, but you remain responsible for your app's privacy declarations and regional compliance requirements.
 </Aside>
 
 ## Privacy by Design
