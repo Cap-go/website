@@ -197,7 +197,7 @@ const content = {
     }
 
     function formatPercentage(value: number) {
-      return `${value > 0 ? Math.max(0.1, value).toFixed(1) : '0.0'}%`
+      return `${Math.ceil(value)}%`
     }
 
     function setPlatform(platform: keyof Metrics['platforms'], share: number) {
@@ -307,8 +307,7 @@ const content = {
         dailyEmpty.hidden = false
         dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
       }
-      if (failuresList)
-        failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
+      if (failuresList) failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
       if (versionChart) versionChart.hidden = true
       if (versionEmpty) {
         versionEmpty.hidden = false
