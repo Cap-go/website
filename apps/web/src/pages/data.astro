@@ -278,10 +278,11 @@ const content = {
       if (Array.isArray(value.platforms)) {
         platforms = value.platforms.map(normalizeBreakdown).filter((item): item is BreakdownMetric => item !== null)
       } else if (isRecord(value.platforms)) {
+        const legacyPlatforms = value.platforms
         platforms = (['ios', 'android', 'electron'] as const)
           .map((key) => ({
             key,
-            share: percentage(value.platforms[key]),
+            share: percentage(legacyPlatforms[key]),
             success_rate: null,
             top_failure: null,
           }))
