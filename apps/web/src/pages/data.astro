@@ -332,7 +332,7 @@ const content = {
     }
 
     function formatPct(value: number | null) {
-      return value === null ? '—' : `${value.toFixed(1)}%`
+      return value === null ? '—' : `${Math.ceil(value)}%`
     }
 
     function renderBreakdownRows(
@@ -357,7 +357,7 @@ const content = {
           success.dataset.tone = item.success_rate >= 85 ? 'good' : item.success_rate >= 70 ? 'ok' : 'poor'
         }
         const failure = createScopedElement('td')
-        failure.textContent = item.top_failure ? `${readableReason(item.top_failure.reason)} (${item.top_failure.share.toFixed(0)}%)` : '—'
+        failure.textContent = item.top_failure ? `${readableReason(item.top_failure.reason)} (${Math.ceil(item.top_failure.share)}%)` : '—'
         tr.append(name, usage, success, failure)
         body.append(tr)
       }
@@ -372,7 +372,7 @@ const content = {
       dailyBars.replaceChildren()
       for (const item of metrics.daily) {
         const bar = createScopedElement('div')
-        const label = `${item.date}: ${item.success_rate.toFixed(1)}% install success`
+        const label = `${item.date}: ${formatPct(item.success_rate)} install success`
         bar.className = 'data-bar'
         bar.dataset.tooltip = label
         bar.title = label
@@ -401,7 +401,7 @@ const content = {
         const reason = createScopedElement('strong')
         reason.textContent = readableReason(item.reason)
         const share = createScopedElement('b')
-        share.textContent = `${item.share.toFixed(1)}%`
+        share.textContent = formatPct(item.share)
         const track = createScopedElement('i')
         track.setAttribute('aria-hidden', 'true')
         const fill = createScopedElement('em')
@@ -414,7 +414,7 @@ const content = {
     }
 
     function renderMetrics(metrics: Metrics) {
-      if (successRateKpi) successRateKpi.textContent = `${metrics.success_rate.toFixed(1)}%`
+      if (successRateKpi) successRateKpi.textContent = formatPct(metrics.success_rate)
       renderDaily(metrics)
       renderFailures(metrics)
       renderBreakdownRows(countriesBody, countriesEmpty, metrics.countries, 'country', 'Country breakdown is temporarily unavailable.')
