@@ -11,11 +11,12 @@ import MermaidGraph from '@/components/MermaidGraph.astro';
 import BuildCredentialsQuestionnaire from '@/components/BuildCredentialsQuestionnaire.astro';
 
 export const buildProcessFlowGraph = `flowchart LR
-    A[Your Machine] -->|1. Zip Project| B[Local Temp]
-    B -->|2. Upload| C[Capgo Cloud]
-    C -->|3. Build| D[Mac Mini Silicon M4 Build Server]
-    D -->|4. Logs Stream| A
-    D -->|5. Cleanup| E[Auto Delete]`;
+    A[Your CI] -->|1. Prepare Native Project| B[Prepared iOS / Android Project]
+    B -->|2. Upload| C[Capgo Build]
+    C -->|3. Compile and Sign| D[Dedicated Build Infrastructure]
+    D -->|4. Stream Logs| E[Your Terminal]
+    D -->|Return Signed Artifact or Store Delivery| F[Output]
+    D -->|5. Clean Temporary Project Data| G[Cleanup]`;
 
 Get started with Capgo Cloud Build and create your first iOS or Android native build in minutes.
 
@@ -121,7 +122,13 @@ Before running `npx @capgo/cli@latest build request`:
 
 Capgo Build does not need access to your private Nexus registry or SSH credentials once your CI has prepared the native project. See [Build Configuration](/docs/builder/configuration/) for supported environment variables and store options.
 
-For a kiosk flavour distributed through MDM, configure the Android project/build to produce an APK. Use `--output-upload` to retrieve the signed output, then distribute that APK through your MDM instead of Google Play.
+For a kiosk flavour distributed through MDM, configure the Android project/build to produce an APK. When requesting the build, use both flags to skip Google Play and retrieve the signed output:
+
+```bash
+npx @capgo/cli@latest build request YOUR_APP_ID --platform android --no-playstore-upload --output-upload
+```
+
+`--no-playstore-upload` prevents Play Store upload even if Play credentials are saved; `--output-upload` provides a time-limited link to the signed output. Distribute that APK through your MDM.
 
 ## Next Steps
 

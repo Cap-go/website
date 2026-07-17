@@ -314,7 +314,7 @@ Default: `undefined`
 ```
 
 <Aside type="caution">
-When `publicKey` is configured, signature validation is fail-closed. The updater rejects any update it cannot decrypt and verify with that key, including Delta updates. An unsigned or invalid update cannot be installed as an unverified fallback.
+`publicKey` configures Encryption V2 and must match the private key used during upload. For Delta updates, use V2 encryption with partial encryption enabled, and enable encrypted-bundle enforcement if your organization requires every upload to be encrypted. Do not rely on `publicKey` alone as a server-side policy preventing an unencrypted Delta from being published.
 </Aside>
 
 ## `resetWhenUpdate`

@@ -98,9 +98,9 @@ A MAU is a Monthly Active Device. A distinct device that contacts Capgo during a
 
 If your flavours differ only in their web layer or update routing, use one native app ID with [channels](/docs/live-updates/channels/). That keeps the flavours under one Capgo app and makes releases simpler. Use separate native app IDs when a flavour needs a distinct bundle ID, signing identity, entitlement set, or store listing.
 
-Starting with plugin version **v5.10.0**, **v6.25.0**, and **v7.25.0**, the device ID persists across app reinstalls. Updating the app does not create a new device ID. Older plugin versions can create a new device ID after reinstall.
+Starting with plugin version **v5.10.0**, **v6.25.0**, and **v7.25.0**, the device ID persists across normal reinstall paths. On Android, persistence depends on Android backup/restore preserving the plugin preferences; if Android backup is disabled, backup rules exclude those preferences, or app data is cleared, a new device ID is generated. Updating the app does not create a new device ID. Older plugin versions can create a new device ID after reinstall.
 
-For test and development builds, turn off development-build and emulator delivery on production channels. See [Test Native Builds Without Live Updates](/docs/live-updates/testing-native-builds-without-live-updates/) for the exact settings.
+For test and development builds, turn off development-build and emulator delivery on production channels. That controls delivery, not MAU: a device can still count when it contacts Capgo. To keep it out of production usage, disable live updates and do not call production Capgo endpoints. See [Test Native Builds Without Live Updates](/docs/live-updates/testing-native-builds-without-live-updates/) for the exact settings.
 
 ### What can't we use Capgo code push for?[](https://capgo.app/docs/faq/#what-cant-we-use-capgo-code-push-for "Direct link to What can't we use Capgo code push for?")
 
@@ -318,7 +318,7 @@ Enterprise includes a 99.9% monthly availability commitment for the production p
 ### Stats and analytics[](https://capgo.app/docs/faq/#stats-and-analytics "Direct link to Stats and analytics")
 
 The stats in your dashboard are updated every midnight UTC.
-The stats are calculated based on the number of [MAU](/docs/faq/#what-counts-as-a-mau-for-capgo) that have been installed on your devices.
+The stats are calculated from distinct [MAUs](/docs/faq/#what-counts-as-a-mau-for-capgo) active during the rolling 30-day period.
 
 ## How device ID is generated[](https://capgo.app/docs/faq/#how-device-id-is-generated "Direct link to How device ID is generated")
 
@@ -327,8 +327,9 @@ The device ID is generated on the device on first run, and is used to de-duplica
 MAU is a better solution than number of installs to price Capgo, as it is more accurate and reflects the actual cost of Capgo per device.
 
 **DeviceID Persistence (Updated in v6.25.0 and v7.25.0)**:
-- **Current behavior**: The deviceID now persists across app reinstalls. It is stored securely in the device's Keychain (iOS) or EncryptedSharedPreferences (Android), allowing us to track the same device even after uninstall/reinstall.
-- **Previous behavior** (before v6.25.0/v7.25.0): For privacy reasons related to Apple and Google store policies, the deviceID was reset on each app reinstall, making it impossible to track the same device across reinstalls.
+- **Current behavior**: The device ID persists across normal reinstall paths. It is stored in Keychain on iOS, secure storage on Electron, and Android plugin preferences that Android can restore from backup.
+- **Android caveat**: If Android backup is disabled, backup rules exclude the plugin preferences, or app data is cleared, Android generates a new device ID.
+- **Previous behavior** (before v6.25.0/v7.25.0): For privacy reasons related to Apple and Google store policies, the device ID was reset on each app reinstall, making it impossible to track the same device across reinstalls.
 
 The privacy rules are enforced by Apple and Google, and Capgo's implementation complies with their best practices for device identification.
 

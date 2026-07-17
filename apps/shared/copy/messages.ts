@@ -466,7 +466,8 @@ const messages = {
     'Capgo is the original independent live update system designed specifically for Capacitor applications.',
   capgo_is_used_to_update_its_own_apps_allowing_us_to_continuously_improve_and_refine_our_product_through_real_world_usage:
     'Capgo is used to update its own apps, allowing us to continuously improve and refine our product through real-world usage.',
-  capgo_usage_explanation: 'You can exclude development builds and emulators from production update channels. Learn more about this',
+  capgo_usage_explanation:
+    'You can exclude development builds and emulators from production update channels. That controls update delivery, not MAU: a build can still count when it contacts Capgo. To keep it out of production usage, build it with live updates disabled and do not call Capgo endpoints. Learn more about this',
   capgo_was_born_from_a_real_need_in_the_developer_community: 'Capgo was born from a real need in the developer community.',
   capwesome_cta_book_demo_btn: 'Book a demo',
   capwesome_cta_questions:
@@ -1185,7 +1186,7 @@ const messages = {
     'Yes. Enterprise includes SSO support, organization roles, member management, and audit logs so access can follow your internal identity and review process.',
   enterprise_faq_data_q: 'Where are bundles and account data hosted?',
   enterprise_faq_data_a:
-    'Capgo runs on globally replicated infrastructure. The public data inventory explains exactly what the updater sends, which records remain when statistics are disabled, and the controls available for regional or self-hosted deployments.',
+    'For standard Capgo Cloud, account data, app metadata, bundle metadata, and device identifiers are processed by Supabase in London, UK. Bundle storage and delivery use Cloudflare’s global infrastructure, including the USA. Enterprise can use regional endpoint routing for the live-update path or a licensed self-hosted deployment when different control is required. The up-to-date sub-processor list contains the full provider, location, and transfer details.',
   enterprise_faq_data_link: 'Read the data collection documentation',
   enterprise_faq_self_host_q: 'Can updates be self-hosted or delivered from our infrastructure?',
   enterprise_faq_self_host_a:

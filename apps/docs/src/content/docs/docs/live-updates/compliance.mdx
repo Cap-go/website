@@ -21,7 +21,7 @@ Capgo collects only the data that is necessary to provide the live updates featu
 - **App Version Code**: The version code of the app that is used to determine which updates are compatible with the app
 - **App Version Name**: The version name of the app that is used for display purposes
 - **Platform**: The platform (iOS, Android, Electron) of the app that is used to determine which updates are compatible with the app
-- **Device ID**: A randomly generated, app-scoped device identifier used for live-update operation, update eligibility, de-duplication of monthly active devices, support, abuse prevention, and operational reliability. It is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers. **Starting from plugin version v5.10.0, v6.25.0 and v7.25.0**, the device ID persists across app reinstalls (stored securely in Keychain on iOS, EncryptedSharedPreferences on Android, and Electron secure storage) to support reliable update delivery and monthly active device de-duplication. Prior to these versions, the device ID was reset with every app installation
+- **Device ID**: A randomly generated, app-scoped device identifier used for live-update operation, update eligibility, de-duplication of monthly active devices, support, abuse prevention, and operational reliability. It is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers. **Starting from plugin version v5.10.0, v6.25.0, and v7.25.0**, the device ID persists across normal reinstall paths. On Android, that persistence depends on Android backup/restore preserving the plugin preferences; if Android backup is disabled, backup rules exclude those preferences, or app data is cleared, a new device ID is generated. Prior to these versions, the device ID was reset with every app installation.
 - **Bundle ID**: The unique identifier for the bundle that is currently installed on the device
 - **Channel Name**: The name of the channel that is selected to receive updates
 - **OS Version**: The version of the operating system that is used to determine which updates are compatible with the device
@@ -41,12 +41,13 @@ You can verify the data that is collected by inspecting the source code of the @
 
 ### Endpoint Storage Detail
 
-The updater plugin can call two separate endpoints:
+The updater can use up to three configured endpoints for update checks, channel self-assignment, and statistics:
 
 - `updateUrl` (`/updates`) checks which bundle the device should receive. This endpoint is required for Capgo Cloud live updates.
-- `statsUrl` (`/stats`) sends explicit update lifecycle, health, and failure events. Set `statsUrl` to an empty string to disable these extra stats reports, or point it to an endpoint or proxy you control to keep those explicit statistics in your infrastructure. See [HIPAA Compliance](/docs/live-updates/hipaa-compliance/#option-3-self-host-the-statistics-endpoint) for the self-hosted endpoint contract.
+- `channelUrl` (`/channel_self`) reads and updates a device channel assignment.
+- `statsUrl` (`/stats`) sends explicit update lifecycle, health, and failure events. Set `statsUrl` to an empty string to disable these extra stats reports, or point it to a self-hosted endpoint or proxy you control. A proxy keeps statistics out of Capgo only when it terminates the payload instead of forwarding it. See the [self-hosted endpoint contract](/docs/live-updates/hipaa-compliance/#option-3-self-host-the-statistics-endpoint).
 
-Disabling `statsUrl` does not disable all device data storage. `/updates` still needs a stable, app-scoped `device_id` so Capgo can decide which update applies and count monthly active devices for billing.
+Disabling `statsUrl` changes only the explicit statistics path. `/updates` and `/channel_self` still need a stable, app-scoped `device_id` so Capgo can decide which update and channel apply and count monthly active devices for billing.
 
 When `statsUrl` is enabled, Capgo can store:
 
