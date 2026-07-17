@@ -316,19 +316,57 @@ const content = {
       }
     }
 
-    async function loadMetrics() {
+    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v1'
+    const METRICS_CACHE_TTL_MS = 5 * 60 * 1000
+
+    function readCachedMetrics(): Metrics | null {
+      try {
+        const raw = sessionStorage.getItem(METRICS_CACHE_KEY)
+        if (!raw) return null
+        const parsed = JSON.parse(raw) as { savedAt?: unknown; payload?: unknown }
+        if (typeof parsed.savedAt !== 'number' || Date.now() - parsed.savedAt > METRICS_CACHE_TTL_MS) return null
+        return normalizeMetrics(parsed.payload)
+      } catch {
+        return null
+      }
+    }
+
+    function writeCachedMetrics(payload: unknown) {
+      try {
+        sessionStorage.setItem(METRICS_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), payload }))
+      } catch {
+        // Ignore quota / private-mode failures.
+      }
+    }
+
+    async function fetchMetrics() {
+      if (!endpoint) throw new Error('Missing metrics endpoint')
       const controller = new AbortController()
       const timeoutId = window.setTimeout(() => controller.abort(), 10_000)
       try {
-        if (!endpoint) throw new Error('Missing metrics endpoint')
         const response = await fetch(endpoint, { headers: { Accept: 'application/json' }, signal: controller.signal })
-        const metrics = response.ok ? normalizeMetrics(await response.json()) : null
+        const payload = response.ok ? await response.json() : null
+        const metrics = normalizeMetrics(payload)
         if (!metrics) throw new Error('Invalid metrics response')
-        renderMetrics(metrics)
-      } catch {
-        renderUnavailable()
+        writeCachedMetrics(payload)
+        return metrics
       } finally {
         window.clearTimeout(timeoutId)
+      }
+    }
+
+    async function loadMetrics() {
+      const cached = readCachedMetrics()
+      if (cached) {
+        renderMetrics(cached)
+        page?.setAttribute('aria-busy', 'false')
+      }
+      try {
+        const metrics = await fetchMetrics()
+        renderMetrics(metrics)
+      } catch {
+        if (!cached) renderUnavailable()
+      } finally {
         page?.setAttribute('aria-busy', 'false')
       }
     }
