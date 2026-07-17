@@ -1186,7 +1186,7 @@ const messages = {
     'Yes. Enterprise includes SSO support, organization roles, member management, and audit logs so access can follow your internal identity and review process.',
   enterprise_faq_data_q: 'Where are bundles and account data hosted?',
   enterprise_faq_data_a:
-    'For standard Capgo Cloud, account data, app metadata, bundle metadata, and device identifiers are processed by Supabase in London, UK. Bundle storage and delivery use Cloudflare’s global infrastructure, including the USA. Enterprise can use regional endpoint routing for the live-update path or a licensed self-hosted deployment when different control is required. The up-to-date sub-processor list contains the full provider, location, and transfer details.',
+    'For standard Capgo Cloud, Supabase processes the primary database, authentication, account data, app and bundle metadata, and device identifiers in London, United Kingdom. Google Cloud provides database read replicas and regional infrastructure in Hong Kong, Tokyo, Sydney, Johannesburg, Milan, Jeddah, Mumbai, Sao Paulo, and Columbus. Bundle storage and live-update delivery use Cloudflare’s global infrastructure, including the USA. Enterprise can use regional endpoint routing for the live-update path or a licensed self-hosted deployment when different control is required. The up-to-date sub-processor list contains the full provider, location, and transfer details.',
   enterprise_faq_data_link: 'Read the data collection documentation',
   enterprise_faq_self_host_q: 'Can updates be self-hosted or delivered from our infrastructure?',
   enterprise_faq_self_host_a:

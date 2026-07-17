@@ -98,7 +98,7 @@ A MAU is a Monthly Active Device. A distinct device that contacts Capgo during a
 
 If your flavours differ only in their web layer or update routing, use one native app ID with [channels](/docs/live-updates/channels/). That keeps the flavours under one Capgo app and makes releases simpler. Use separate native app IDs when a flavour needs a distinct bundle ID, signing identity, entitlement set, or store listing.
 
-Starting with plugin version **v5.10.0**, **v6.25.0**, and **v7.25.0**, the device ID persists across normal reinstall paths. On Android, persistence depends on Android backup/restore preserving the plugin preferences; if Android backup is disabled, backup rules exclude those preferences, or app data is cleared, a new device ID is generated. Updating the app does not create a new device ID. Older plugin versions can create a new device ID after reinstall.
+On iOS, **v7.25.0+** keeps the random, app-scoped device ID through normal reinstalls using Keychain. On Android, use **v7.50.1+** (or **v5.50.1+** and **v6.50.1+** on those release lines); the ID is restored only when Android Backup/Restore retains the app preferences. Disabling backup, excluding those preferences, or clearing app data generates a new device ID. Updating the app does not create a new device ID.
 
 For test and development builds, turn off development-build and emulator delivery on production channels. That controls delivery, not MAU: a device can still count when it contacts Capgo. To keep it out of production usage, disable live updates and do not call production Capgo endpoints. See [Test Native Builds Without Live Updates](/docs/live-updates/testing-native-builds-without-live-updates/) for the exact settings.
 
@@ -326,12 +326,13 @@ The device ID is generated on the device on first run, and is used to de-duplica
 
 MAU is a better solution than number of installs to price Capgo, as it is more accurate and reflects the actual cost of Capgo per device.
 
-**DeviceID Persistence (Updated in v6.25.0 and v7.25.0)**:
-- **Current behavior**: The device ID persists across normal reinstall paths. It is stored in Keychain on iOS, secure storage on Electron, and Android plugin preferences that Android can restore from backup.
-- **Android caveat**: If Android backup is disabled, backup rules exclude the plugin preferences, or app data is cleared, Android generates a new device ID.
-- **Previous behavior** (before v6.25.0/v7.25.0): For privacy reasons related to Apple and Google store policies, the device ID was reset on each app reinstall, making it impossible to track the same device across reinstalls.
+**Device-ID persistence:**
+- **iOS**: From v7.25.0+, the device ID is stored in Keychain and persists through normal reinstalls.
+- **Android**: Use v7.50.1+ (or v5.50.1+/v6.50.1+ on those release lines). The device ID is restored only when Android Backup/Restore keeps the app preferences.
+- **Electron**: The device ID is stored in secure storage.
+- **Android caveat**: Disabling backup, excluding the relevant preferences, or clearing app data generates a new device ID. Android v7.25.0 through v7.50.0 can generate a new device ID after a reinstall even when backup is enabled.
 
-The privacy rules are enforced by Apple and Google, and Capgo's implementation complies with their best practices for device identification.
+The device ID is app-scoped and supports live-update delivery and MAU de-duplication; it is not an advertising or cross-app tracking identifier.
 
 Device IDs are listed after the app checks in with Capgo through the updater or stats endpoints. A device does not need to install a patch before it can appear in the device list.
 
