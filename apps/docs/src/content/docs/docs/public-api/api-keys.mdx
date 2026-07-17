@@ -9,13 +9,13 @@ API keys are used to authenticate requests to the Capgo API. Keys are organizati
 
 ## Using an API key
 
-Pass your API key in the `x-api-key` header of every request:
+Use the authentication header documented by the endpoint. For API-key requests, `authorization` is accepted:
 
 ```bash
-curl -H "x-api-key: YOUR_API_KEY" https://api.capgo.app/...
+curl -H "authorization: YOUR_API_KEY" https://api.capgo.app/...
 ```
 
-The `authorization` header is also accepted but is primarily intended for JWT tokens. When the value is a UUID-formatted API key it works, but `x-api-key` is the recommended header for all key types (including secure/hashed keys).
+Some endpoints also accept a dedicated key header. The [Channels API](/docs/public-api/channels/) accepts `authorization` or `capgkey`; use one of those headers for preview-channel automation.
 
 ## RBAC Permissions
 
@@ -28,7 +28,7 @@ If an API key has explicit role bindings, **only those bindings** are evaluated 
 
 ### Preview channel automation
 
-After the App Preview lifecycle release is deployed to your Capgo Cloud environment, bind `app_preview` only to the preview app for CI that creates a temporary preview channel, uploads and promotes a bundle, then deletes both. Until then, `--delete-bundle` requires the general `bundle.delete` permission and is not available to an App Preview key.
+Bind `app_preview` only to the preview app for CI that creates a temporary, non-public preview channel, uploads and promotes a bundle, then deletes both.
 
 ```json
 {
@@ -50,7 +50,7 @@ The app-level `app_preview` role includes only `app.read`, `app.read_bundles`, `
 
 `app_preview` retains `app.read`, so this is not strict channel-read isolation: the key may enumerate channel metadata in the selected app. The automatic child binding limits **lifecycle mutations** to the channel the key created.
 
-Capgo records the App Preview key that uploaded each bundle. The key can promote only its own bundle to its own preview channel. It has no channel lifecycle access to an existing default/main channel, a channel created by another preview key, or another key's bundle.
+Capgo records the App Preview key that uploaded each bundle. The key can promote only its own bundle to each preview channel it creates. It has no channel lifecycle access to an existing default/main channel, a channel created by another preview key, or another key's bundle. For this workflow, omit `public` and never use `--default`.
 
 Use `channel delete <preview-channel> <public-app-id> --delete-bundle` for cleanup. This is an atomic, ownership-checked preview cleanup route; it removes only the calling key's preview channel and linked bundle. `app_preview` does not grant generic `bundle.delete`.
 

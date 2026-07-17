@@ -50,8 +50,6 @@ The page displays two sections:
       - **App Developer** — Can upload bundles, manage devices, trigger native builds, and update channel settings.
       - **App Admin** — Full access to the app.
       - **App Preview** — Preview CI/CD lifecycle: upload a bundle and create a preview channel. The channel receives automatic, channel-scoped lifecycle rights only for this key.
-{/* [SCREENSHOT: apikeys-rbac-roles.webp] — The role selection section showing org role radio buttons and the per-app role assignment table */}
-<figure><img src="/apikeys-rbac-roles.webp" alt="RBAC role selection with org-level and per-app roles" /><figcaption></figcaption></figure>
 
 6. Click **"Create"**.
 
@@ -62,11 +60,7 @@ The page displays two sections:
 
 ## Use an App Preview key for preview workflows
 
-Use **App Preview** for CI that creates a temporary preview channel, uploads and promotes a bundle, then removes both the channel and bundle. It is designed for PR previews without granting control over the app's default or main channels.
-
-:::caution
-**Availability:** This ownership-bound lifecycle requires the App Preview lifecycle release. Until that release is deployed to your Capgo Cloud environment, `--delete-bundle` requires the general `bundle.delete` permission and an App Preview key cannot use it.
-:::
+Use **App Preview** for CI that creates a temporary, non-public preview channel, uploads and promotes a bundle, then removes both the channel and bundle. It has no lifecycle access to an existing default or main channel.
 
 1. Create an RBAC key and enable **Limit this key to selected apps**.
 2. Under **Organizations to filter apps**, select the organization to reveal its apps; each selected app remains associated with its owning organization.
@@ -83,21 +77,31 @@ This selected-apps-only mode omits an organization-wide role; it does **not** re
 
 `app_preview` retains `app.read`, so the key may enumerate channel metadata in the selected app. The automatic child binding is a **management** boundary: it does not grant lifecycle mutations for channels the key did not create.
 
-Capgo also records which App Preview key uploaded a bundle. The key can set only its own bundle on its own preview channel and can clean up that pair together. It does not receive a channel binding for an existing default or main channel, a channel created by another preview key, or another key's bundle.
+Capgo also records which App Preview key uploaded a bundle. The key can set only its own bundle on each preview channel it creates and can clean up that pair together. It does not receive a channel binding for an existing default or main channel, a channel created by another preview key, or another key's bundle.
 
 For a typical CI job, use a unique channel name per pull request:
 
 ```bash
-npx @capgo/cli@latest channel add "$PREVIEW_CHANNEL" com.example.app -a "$CAPGO_API_KEY"
-npx @capgo/cli@latest bundle upload com.example.app --path ./dist -b "$BUNDLE_VERSION" -a "$CAPGO_API_KEY"
-npx @capgo/cli@latest channel set "$PREVIEW_CHANNEL" com.example.app --bundle "$BUNDLE_VERSION" -a "$CAPGO_API_KEY"
-npx @capgo/cli@latest channel delete "$PREVIEW_CHANNEL" com.example.app --delete-bundle -a "$CAPGO_API_KEY"
+APP_ID="com.example.app"
+PREVIEW_CHANNEL="pr-123"
+BUNDLE_VERSION="1.2.3-pr.123"
+
+npx @capgo/cli@latest bundle upload "$APP_ID" \
+  --apikey "$CAPGO_API_KEY" \
+  --path ./dist \
+  --channel "$PREVIEW_CHANNEL" \
+  --bundle "$BUNDLE_VERSION"
+
+npx @capgo/cli@latest channel delete "$PREVIEW_CHANNEL" "$APP_ID" \
+  --apikey "$CAPGO_API_KEY" \
+  --delete-bundle \
+  --success-if-not-found
 ```
 
-The last command uses a narrow atomic cleanup route: it succeeds only when the key owns the preview channel and its linked bundle. **App Preview** still does not have general `bundle.delete`, so it cannot delete an arbitrary bundle.
+For a new channel, `bundle upload --channel` creates the channel, uploads the bundle, and promotes it in one flow. The last command uses a narrow atomic cleanup route: it succeeds only when the key owns the preview channel and its linked, unshared bundle. **App Preview** still does not have general `bundle.delete`, so it cannot delete an arbitrary bundle.
 
 :::caution
-An **App Preview** key cannot promote, delete, or change an existing default/main channel, another preview key's channel, or another key's bundle. Revoking or expiring the app binding also removes the key's effective lifecycle access.
+Use a new non-public `pr-<number>` channel. Do not pass `--default`, `--self-assign`, rollout options, or `--delete-linked-bundle-on-upload` to this workflow. An **App Preview** key cannot promote, delete, or change an existing default/main channel, another preview key's channel, or another key's bundle. Revoking or expiring the app binding also removes the key's effective lifecycle access.
 :::
 
 See the [Access Control Reference](/docs/webapp/organization-roles/#app-preview-permission-set) for the full boundary.
