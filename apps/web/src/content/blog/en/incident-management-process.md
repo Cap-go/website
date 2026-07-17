@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-17T13:13:25.271Z
-updated_at: 2026-07-17T13:13:26.883Z
+updated_at: 2026-07-17T13:15:49.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/e5e0c2a2-3827-4b5d-9be1-822239c1943e/incident-management-process-cover-design.jpg'
 head_image_alt: Your Guide to the Incident Management Process
 keywords: 'incident management process, devops, sre, incident response, capacitorjs'
