@@ -216,7 +216,12 @@ const faqs = [
   { q: copy('native_build_v2_faq_q4'), a: copy('native_build_v2_faq_a4') },
   { q: copy('native_build_v2_faq_q5'), a: copy('native_build_v2_faq_a5') },
   { q: copy('native_build_v2_faq_q6'), a: copy('native_build_v2_faq_a6') },
-  { q: copy('native_build_v2_faq_q7'), a: copy('native_build_v2_faq_a7') },
+  {
+    q: copy('native_build_v2_faq_q7'),
+    a: copy('native_build_v2_faq_a7'),
+    href: getRelativeLocaleUrl(locale, 'docs/builder/getting-started/'),
+    linkLabel: copy('native_build_v2_faq_a7_link'),
+  },
 ]
 
 function annualMonthlyPrice(plan: Plan) {
@@ -921,7 +926,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                   {item.q}
                   <span class="plus">+</span>
                 </summary>
-                <div class="ans">{item.a}</div>
+                <div class="ans" aria-live="polite">
+                  <p>{item.a}</p>
+                  {item.href && item.linkLabel && (
+                    <a class="faq-doc-link" href={item.href}>
+                      {item.linkLabel} →
+                    </a>
+                  )}
+                </div>
               </details>
             ))
           }
@@ -4605,6 +4617,24 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.65);
       font-size: 14.5px;
       line-height: 1.65;
+    }
+    .nb .faq .ans p {
+      margin: 0;
+    }
+    .nb .faq-doc-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--relief-green);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .nb .faq-doc-link:hover {
+      color: #fff;
+    }
+    .nb .faq-doc-link:focus-visible {
+      outline: 2px solid var(--relief-green);
+      outline-offset: 4px;
     }
 
     /* ---- final cta ---- */

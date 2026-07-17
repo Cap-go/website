@@ -274,7 +274,7 @@ const rows: CompareSection[] = [
       },
       {
         label: 'ISO 27001',
-        value: (plan: Database['public']['Tables']['plans']['Row']) => (plan.name === 'Enterprise' ? 'Ongoing' : false),
+        value: (plan: Database['public']['Tables']['plans']['Row']) => (plan.name === 'Enterprise' ? 'Audit complete — certificate pending issuance' : false),
       },
       {
         label: 'Signed NDAs & DPAs',

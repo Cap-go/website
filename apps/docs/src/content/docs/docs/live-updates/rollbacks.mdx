@@ -104,6 +104,14 @@ Rolling back to a previous build only affects the selected channel. If you have 
 
 After rolling back, devices configured to listen to the updated channel will receive the previous build the next time they check for an update. The rolled-back build will be treated as a new update, so the usual update flow and conditions apply.
 
+## Accelerate a Critical Rollback with Notifications (Private Preview)
+
+Repointing a channel normally takes effect the next time a device checks for an update. The Capgo Notifications integration is currently in private preview and can send a silent update-check notification to a supported app while it is in the background. With the updater integration enabled, the app can check, download, and install the rollback according to its configured update mode.
+
+This is an acceleration path, not a forced fleet command. Delivery remains best-effort and depends on operating-system background scheduling, network availability, and device state. It cannot update an offline or force-quit app, so it cannot promise a fixed time to reach every device.
+
+To request private-preview access or set up this critical path, contact [support@capgo.app](mailto:support@capgo.app). You can also read [Notifications: Enable Silent Update Checks](/docs/plugins/notifications/getting-started/#11-enable-silent-update-checks).
+
 ## Unlinking a Channel
 
 If you want to temporarily halt updates on a channel while you investigate an issue, you can unlink the channel from its current build. 
