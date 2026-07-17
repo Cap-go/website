@@ -45,7 +45,7 @@ The updater can use up to three configured endpoints for update checks, channel 
 
 - `updateUrl` (`/updates`) checks which bundle the device should receive. This endpoint is required for Capgo Cloud live updates.
 - `channelUrl` (`/channel_self`) reads and updates a device channel assignment.
-- `statsUrl` (`/stats`) sends explicit update lifecycle, health, and failure events. Set `statsUrl` to an empty string to disable these extra stats reports, or point it to a self-hosted endpoint or proxy you control. A proxy keeps statistics out of Capgo only when it terminates the payload instead of forwarding it. See the [self-hosted endpoint contract](/docs/live-updates/hipaa-compliance/#option-3-self-host-the-statistics-endpoint).
+- `statsUrl` (`/stats`) sends explicit update lifecycle, health, and failure events. Set `statsUrl` to an empty string to disable these extra stats reports, or point it to a self-hosted endpoint or proxy you control. A proxy keeps statistics out of Capgo only when it terminates the payload instead of forwarding it. See the [self-hosted statistics endpoint contract](/docs/plugins/updater/self-hosted/handling-stats/).
 
 Disabling `statsUrl` changes only the explicit statistics path. `/updates` and `/channel_self` still need a stable, app-scoped `device_id` so Capgo can decide which update and channel apply and count monthly active devices for billing.
 
