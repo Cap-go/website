@@ -97,9 +97,6 @@ Scoped to a single app. Use these when a team member should only work on one app
 
 Use **App Preview** (`app_preview`) for an organization- and app-bound CI key that manages a PR preview lifecycle without broad app or organization-wide access.
 
-:::caution
-**Availability:** This ownership-bound lifecycle requires the App Preview lifecycle release. Until that release is deployed to your Capgo Cloud environment, `--delete-bundle` requires the general `bundle.delete` permission and an App Preview key cannot use it.
-:::
 
 The `app_preview` binding grants only these app-level permissions:
 
@@ -120,7 +117,7 @@ When an App Preview key creates a channel, Capgo automatically gives that key a 
 
 Because `app_preview` retains `app.read`, the key may enumerate channel metadata in the selected app. The automatic child binding is a **management** boundary: it does not grant lifecycle mutations for a channel the key did not create.
 
-Capgo records the preview key that created each channel and uploaded each bundle. Therefore an App Preview key can create a channel, promote its own bundle, and atomically delete that channel and bundle with `channel delete --delete-bundle`; it cannot do those things to an existing default/main channel, another preview key's channel, or another key's bundle.
+Capgo records the preview key that created each channel and uploaded each bundle. Therefore an App Preview key can create each non-public preview channel it needs, promote its own bundle, and atomically delete that channel and bundle with `channel delete --delete-bundle`; it cannot do those things to an existing default/main channel, another preview key's channel, or another key's bundle.
 
 It does not include `app.update_settings`, device or role management, `channel.update_settings`, `channel.rollback_bundle`, forced-device management, or generic `bundle.delete`.
 

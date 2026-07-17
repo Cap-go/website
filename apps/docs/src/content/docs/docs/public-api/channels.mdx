@@ -124,6 +124,14 @@ curl -X POST \
 
 POST is an upsert and returns only its status. Make a GET request to read the resulting channel configuration.
 
+#### App Preview key boundary
+
+For a least-privilege PR preview, authenticate this endpoint with `authorization: $CAPGO_API_KEY` or `capgkey: $CAPGO_API_KEY`. The `x-api-key` header is not accepted by the Channels API.
+
+An `app_preview` key can create a new non-public preview channel. Creation automatically gives that key a channel-scoped lifecycle binding for that channel only. The role does not include `channel.update_settings`, so it cannot use POST to update an existing channel, including an existing default or main channel.
+
+Leave `public` unset (or set it to `false`) for PR preview channels. Use `bundle upload --channel` for the creation and upload flow instead of treating POST as a general preview-channel upsert.
+
 ### GET
 
 `https://api.capgo.app/channel/`
@@ -225,12 +233,13 @@ interface Channel {
 
 Delete a channel. Note that this will affect all devices using this channel.
 
-#### Query Parameters
+#### Request Body
 
 ```typescript
 interface Channel {
   channel: string
   app_id: string
+  delete_bundle?: boolean // also delete the linked bundle
 }
 ```
 
@@ -253,6 +262,22 @@ curl -X DELETE \
 {
   "status": "ok"
 }
+```
+
+#### App Preview cleanup
+
+With `delete_bundle: true`, an `app_preview` key can atomically clean up only a channel it created and its linked, unshared bundle. The key does not receive general `bundle.delete` permission.
+
+```bash
+curl -X DELETE \
+  -H "capgkey: $CAPGO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "com.example.app",
+    "channel": "pr-123",
+    "delete_bundle": true
+  }' \
+  https://api.capgo.app/channel/
 ```
 
 ## Error Handling

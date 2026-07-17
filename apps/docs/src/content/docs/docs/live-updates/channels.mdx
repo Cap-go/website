@@ -245,6 +245,42 @@ For more advanced workflows, you can automate your live update deployments as pa
 
 Check out the [CI/CD Integration](/docs/getting-started/cicd-integration/) docs to learn more about automating Capgo live updates.
 
+### Least-privilege PR previews
+
+Use an **App Preview** API key when CI needs one temporary channel per pull request but must not manage existing main/default channels. The key remains bound to the owning organization and selected app; it simply has no organization-wide role. Each non-public preview channel it creates receives its own automatic, channel-scoped lifecycle permission.
+
+1. Have an organization administrator create a secure API key limited to the preview app and select **App Preview**. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows).
+2. Use a unique, non-public channel such as `pr-123`. Do not pass `--default`, `--self-assign`, rollout options, or `--delete-linked-bundle-on-upload`.
+3. Upload and promote the PR bundle in one command, then delete the owned channel and bundle when the PR closes:
+
+```bash
+APP_ID="com.example.app"
+PREVIEW_CHANNEL="pr-123"
+BUNDLE_VERSION="1.2.3-pr.123"
+
+npx @capgo/cli@latest bundle upload "$APP_ID" \
+  --apikey "$CAPGO_PREVIEW_KEY" \
+  --path ./dist \
+  --channel "$PREVIEW_CHANNEL" \
+  --bundle "$BUNDLE_VERSION"
+
+npx @capgo/cli@latest channel delete "$PREVIEW_CHANNEL" "$APP_ID" \
+  --apikey "$CAPGO_PREVIEW_KEY" \
+  --delete-bundle \
+  --success-if-not-found
+```
+
+`bundle upload --channel` creates a missing channel, uploads the bundle, and promotes it in one flow. Cleanup is atomic and ownership-checked: the key can delete only a channel it created and its linked, unshared bundle. It cannot change, promote, or delete an existing main/default channel, another preview key's channel, or another key's bundle.
+
+If reviewers need a QR code or preview URL, an administrator must enable previews once for the app:
+
+```bash
+npx @capgo/cli@latest app set "$APP_ID" --preview
+npx @capgo/cli@latest get-qr "$APP_ID" --channel "$PREVIEW_CHANNEL" --apikey "$CAPGO_PREVIEW_KEY" --url
+```
+
+An App Preview key cannot enable previews itself because it has no app-settings permission. In GitHub Actions, run secret-bearing preview jobs on `pull_request`, not `pull_request_target`, and restrict them to same-repository PRs with `github.event.pull_request.head.repo.full_name == github.repository`.
+
 ## Deploying to a Device
 
 Now that you understand channels, you're ready to start deploying live updates to real devices. The basic process is:
