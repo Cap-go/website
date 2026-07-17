@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-native-biometric"
-description: "This plugin gives access to the native biometric apis for android and iOS."
+description: "Secure credential storage and biometric-gated access for Android and iOS."
 tableOfContents: false
 next: false
 prev: false
@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "This plugin gives access to the native biometric apis for android and iOS."
+  tagline: "Secure credential storage and biometric-gated access for Android and iOS."
   actions:
     - text: Get started
       link: /docs/plugins/native-biometric/getting-started/
@@ -22,14 +22,14 @@ hero:
 
 ## Overview
 
-This plugin gives access to the native biometric apis for android and iOS.
+Native Biometric is a secure credential vault for iOS and Android. It stores credentials in the native Keychain or Keystore and can require biometric authentication before sensitive values are returned. It is a direct replacement for Ionic Identity Vault credential and app-lock flows.
 
 ## Core Capabilities
 
-- `isAvailable` - Checks if biometric authentication hardware is available.
-- `verifyIdentity` - Prompts the user to authenticate with biometrics.
-- `getCredentials` - Gets the stored credentials for a given server.
-- `setCredentials` - Stores the given credentials for a given server.
+- `setCredentials` and `getCredentials` - Securely store and retrieve credentials for a given server.
+- `getSecureCredentials` - Read credentials only after a native biometric check.
+- `isCredentialsSaved` and `deleteCredentials` - Build onboarding, locked-state, and logout flows.
+- `isAvailable` and `verifyIdentity` - Check authentication availability and prompt the user when needed.
 
 ## Public API
 

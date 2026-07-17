@@ -19,6 +19,8 @@ const pluginsUrl = getRelativeLocaleUrl(locale, 'plugins')
 const pluginDocsUrl = getRelativeLocaleUrl(locale, 'docs/plugins/')
 const builderUrl = getRelativeLocaleUrl(locale, 'native-build')
 const consultingUrl = getRelativeLocaleUrl(locale, 'consulting')
+const nativeBiometricUrl = getRelativeLocaleUrl(locale, 'docs/plugins/native-biometric/')
+const identityVaultMigrationUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-identity-vault/')
 const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -77,11 +79,8 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
             </a>
           </div>
           <p class="mt-6">
-            <a
-              href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-secure-storage/')}
-              class="text-sm font-semibold text-emerald-300 transition-colors hover:text-emerald-200"
-            >
-              {m.solutions_view_docs({}, { locale })} →
+            <a href={identityVaultMigrationUrl} class="text-sm font-semibold text-emerald-300 transition-colors hover:text-emerald-200">
+              See the Identity Vault replacement guide →
             </a>
           </p>
         </div>
@@ -223,14 +222,15 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
               <tr class="transition hover:bg-gray-800/60">
                 <td class="px-6 py-4 font-medium text-gray-100">Ionic Identity Vault</td>
                 <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/native-biometric/')} class="text-emerald-300 hover:underline"> Native Biometric </a>
-                  <span class="mx-2 text-gray-500">+</span>
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/')} class="text-emerald-300 hover:underline"> Fast SQL </a>
-                  <span class="mx-2 text-gray-500">{m.appflow_plugins_or({}, { locale })}</span>
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/')} class="text-emerald-300 hover:underline"> Data Storage SQLite </a>
+                  <a href={nativeBiometricUrl} class="font-semibold text-emerald-300 hover:underline">Native Biometric</a>
+                  <span class="text-gray-300"> — complete Identity Vault replacement</span>
+                  <p class="mt-2 max-w-xl text-xs leading-5 text-gray-400">
+                    Credentials saved with biometric access control can be read only after the native biometric prompt, with device credential fallback where the platform supports
+                    it.
+                  </p>
                 </td>
                 <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-identity-vault/')} class="text-blue-300 hover:underline">
+                  <a href={identityVaultMigrationUrl} class="text-blue-300 hover:underline">
                     {m.appflow_plugins_link_text({}, { locale })}
                   </a>
                 </td>
@@ -281,6 +281,41 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="mt-6 grid gap-8 rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-6 sm:p-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p class="text-sm font-semibold text-emerald-200">Identity Vault coverage</p>
+            <h3 class="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">Native Biometric is a complete Identity Vault replacement</h3>
+            <p class="mt-4 text-sm leading-6 text-gray-200 sm:text-base sm:leading-7">
+              It is not only a biometric prompt. Store access and refresh tokens in the native Keychain or Keystore with biometric access control, then let the platform require
+              authentication before your app can read them.
+            </p>
+            <a href={identityVaultMigrationUrl} class="mt-5 inline-flex font-semibold text-emerald-200 hover:underline">Read the Identity Vault migration guide →</a>
+          </div>
+
+          <dl class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-xl border border-emerald-300/20 bg-gray-950/30 p-4">
+              <dt class="font-semibold text-white">Secure vault credentials</dt>
+              <dd class="mt-2 text-sm leading-6 text-gray-300">Save, retrieve, check, and delete the tokens or credentials your app needs.</dd>
+            </div>
+            <div class="rounded-xl border border-emerald-300/20 bg-gray-950/30 p-4">
+              <dt class="font-semibold text-white">Biometric unlock</dt>
+              <dd class="mt-2 text-sm leading-6 text-gray-300">Protect credential reads with Face ID, Touch ID, or Android biometrics.</dd>
+            </div>
+            <div class="rounded-xl border border-emerald-300/20 bg-gray-950/30 p-4">
+              <dt class="font-semibold text-white">Lock and fallback flows</dt>
+              <dd class="mt-2 text-sm leading-6 text-gray-300">
+                Trigger a protected read when your app resumes, times out, or opens a sensitive area; use the device passcode fallback where available.
+              </dd>
+            </div>
+            <div class="rounded-xl border border-emerald-300/20 bg-gray-950/30 p-4">
+              <dt class="font-semibold text-white">More control when you need it</dt>
+              <dd class="mt-2 text-sm leading-6 text-gray-300">
+                Detect credential state and biometric enrollment changes, and choose the biometric access rule that fits your risk model.
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
     </section>
