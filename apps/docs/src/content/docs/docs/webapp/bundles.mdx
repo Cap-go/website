@@ -41,6 +41,20 @@ It should NEVER be used for bundles that have been used in a public channel.
 It is for this reason that deleting a version unsafely requires "super_admin" privileges
 :::
 
+## Storage, retention, and delivery
+
+### What counts toward storage?
+
+Storage includes the historical bundle versions and Delta assets retained for an app. A bundle linked to more than one channel or served from more than one region is still counted once for storage.
+
+### Can I control how long unused bundles are kept?
+
+Yes. Set the unused-bundle retention period for each app in the [App Information settings](/docs/webapp/main-app-page/). Bundles that are still linked to an active channel or rollout stay protected so they remain available for delivery and rollback.
+
+### Does regional replication multiply storage or bandwidth?
+
+No. Regional replication does not multiply storage. Capgo bandwidth is based on device downloads that are not served from the edge cache; cache-served deliveries do not count against Capgo bandwidth usage.
+
 ## Managing a specific bundle
 
 Once you see the list of all bundles click on the one you want to manage. After you do that you should see something like this:

@@ -313,6 +313,10 @@ Default: `undefined`
 }
 ```
 
+<Aside type="caution">
+When `publicKey` is configured, signature validation is fail-closed. The updater rejects any update it cannot decrypt and verify with that key, including Delta updates. An unsigned or invalid update cannot be installed as an unverified fallback.
+</Aside>
+
 ## `resetWhenUpdate`
 
 > Automatically delete previous downloaded bundles when a newer native app bundle is installed to the device.

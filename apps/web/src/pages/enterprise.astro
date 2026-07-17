@@ -112,13 +112,57 @@ const enhancedEnterpriseProduct = {
   },
 }
 
-const enterpriseFaqItems = [
+type EnterpriseFaqItem = {
+  question: string
+  answer: string
+  href?: string
+  linkLabel?: string
+}
+
+const enterpriseFaqItems: EnterpriseFaqItem[] = [
   { question: m.enterprise_faq_sso_q({}, { locale }), answer: m.enterprise_faq_sso_a({}, { locale }) },
-  { question: m.enterprise_faq_data_q({}, { locale }), answer: m.enterprise_faq_data_a({}, { locale }) },
-  { question: m.enterprise_faq_self_host_q({}, { locale }), answer: m.enterprise_faq_self_host_a({}, { locale }) },
-  { question: m.enterprise_faq_sla_q({}, { locale }), answer: m.enterprise_faq_sla_a({}, { locale }) },
-  { question: m.enterprise_faq_replication_q({}, { locale }), answer: m.enterprise_faq_replication_a({}, { locale }) },
-  { question: m.enterprise_faq_flavors_q({}, { locale }), answer: m.enterprise_faq_flavors_a({}, { locale }) },
+  {
+    question: m.enterprise_faq_data_q({}, { locale }),
+    answer: m.enterprise_faq_data_a({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/live-updates/compliance/'),
+    linkLabel: m.enterprise_faq_data_link({}, { locale }),
+  },
+  {
+    question: m.enterprise_faq_subprocessors_q({}, { locale }),
+    answer: m.enterprise_faq_subprocessors_a({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'subprocessors/'),
+    linkLabel: m.enterprise_faq_subprocessors_link({}, { locale }),
+  },
+  {
+    question: m.enterprise_faq_self_host_q({}, { locale }),
+    answer: m.enterprise_faq_self_host_a({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/updater/self-hosted/getting-started/'),
+    linkLabel: m.enterprise_faq_self_host_link({}, { locale }),
+  },
+  {
+    question: m.enterprise_faq_sla_q({}, { locale }),
+    answer: m.enterprise_faq_sla_a({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'sla/'),
+    linkLabel: m.enterprise_faq_sla_link({}, { locale }),
+  },
+  {
+    question: m.enterprise_faq_replication_q({}, { locale }),
+    answer: m.enterprise_faq_replication_a({}, { locale }),
+    href: `${getRelativeLocaleUrl(locale, 'pricing/')}#faq-storage`,
+    linkLabel: m.enterprise_faq_replication_link({}, { locale }),
+  },
+  {
+    question: m.enterprise_faq_flavors_q({}, { locale }),
+    answer: m.enterprise_faq_flavors_a({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/live-updates/channels/'),
+    linkLabel: m.enterprise_faq_flavors_link({}, { locale }),
+  },
+  {
+    question: m.enterprise_faq_ci_q({}, { locale }),
+    answer: m.enterprise_faq_ci_a({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'native-build/'),
+    linkLabel: m.enterprise_faq_ci_link({}, { locale }),
+  },
   { question: m.enterprise_faq_legal_q({}, { locale }), answer: m.enterprise_faq_legal_a({}, { locale }) },
   { question: m.enterprise_faq_custom_q({}, { locale }), answer: m.enterprise_faq_custom_a({}, { locale }) },
   { question: m.enterprise_faq_payment_q({}, { locale }), answer: m.enterprise_faq_payment_a({}, { locale }) },
@@ -923,6 +967,11 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
                 </summary>
                 <div class="enterprise-faq-answer" aria-live="polite">
                   <p>{item.answer}</p>
+                  {item.href && item.linkLabel && (
+                    <a class="enterprise-faq-link" href={item.href}>
+                      {item.linkLabel} →
+                    </a>
+                  )}
                 </div>
               </details>
             ))
@@ -1908,6 +1957,22 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
     color: rgba(255, 255, 255, 0.62);
     font-size: 14px;
     line-height: 1.65;
+  }
+  .enterprise-product .enterprise-faq-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--relief-blue);
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .enterprise-product .enterprise-faq-link:hover {
+    color: #fff;
+  }
+  .enterprise-product .enterprise-faq-link:focus-visible {
+    outline: 2px solid var(--relief-blue);
+    outline-offset: 4px;
   }
   @media (max-width: 640px) {
     .enterprise-product .enterprise-faq-item summary {

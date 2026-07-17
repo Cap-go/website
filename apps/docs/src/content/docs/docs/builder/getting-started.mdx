@@ -26,7 +26,7 @@ Before you begin, ensure you have:
 - A Capacitor app that builds successfully locally
 - Node.js 20 or higher installed
 - A Capgo account (a free trial is enough to get started)
-- Your app already registered in Capgo (run `bunx @capgo/cli@latest app add` if not)
+- Your app already registered in Capgo (run `npx @capgo/cli@latest app add` if not)
 - *(No need to prepare signing credentials in advance — we'll set them up in the next step.)*
 
 ## Configure your signing credentials
@@ -40,7 +40,7 @@ Capgo needs signing credentials to build and submit your app — but you don't h
 You need to be authenticated with Capgo to build. If you haven't already:
 
 ```bash
-bunx @capgo/cli@latest login
+npx @capgo/cli@latest login
 # or, in CI, set the token directly:
 export CAPGO_TOKEN=your_api_key
 ```
@@ -50,10 +50,10 @@ If you just ran **`build init`**, you're already set — the onboarding offers t
 Otherwise, start a build yourself with `build request` — set `--platform` to whichever you're building:
 
 ```bash
-bunx @capgo/cli@latest build request com.example.app --platform <android|ios> --build-mode debug
+npx @capgo/cli@latest build request com.example.app --platform <android|ios> --build-mode debug
 ```
 
-The CLI uploads your project, streams the build logs live in your terminal, and — once your credentials are configured — submits the result to the store automatically.
+The CLI uploads the prepared native project and streams build logs live in your terminal. Capgo Build can return a signed artifact or submit it to App Store Connect or Google Play when you configure the appropriate release flow.
 
 ## Understanding the Build Process
 
@@ -61,15 +61,21 @@ When you run the build command, here's what happens:
 
 <MermaidGraph graph={buildProcessFlowGraph} ariaLabel="Capgo Cloud Build process flow diagram" />
 
-1. **Local Preparation** - Your project is zipped (excluding `node_modules` and dotfiles)
-2. **Upload** - The zip is uploaded to secure cloud storage (Cloudflare R2)
-3. **Build Execution** - Your app builds on dedicated infrastructure
-4. **Log Streaming** - Real-time logs stream to your terminal via Server-Sent Events
-5. **Automatic Cleanup** - Build artifacts are deleted (Android: instant, iOS: 24 hours)
+1. **Prepare in your CI** - Build the web layer, resolve private dependencies, and synchronize the completed assets into the native project.
+2. **Upload** - The prepared native project is uploaded to secure cloud storage for the build.
+3. **Build Execution** - Capgo compiles and signs the native project on dedicated infrastructure.
+4. **Log Streaming** - Real-time logs stream to your terminal via Server-Sent Events.
+5. **Cleanup** - The build environment and temporary project data are cleaned up after the build; output retention depends on the selected artifact and store-delivery options.
+
+## Use Capgo Build with Bitrise or another CI
+
+Capgo Build does not replace your existing CI. Keep the steps that need your private access in Bitrise or another CI system: install from private registries, resolve private CocoaPods over SSH, run custom native setup, build the web layer, and run `npx cap sync`.
+
+Then call Capgo Build with the prepared native project. Capgo receives the ready `ios/` or `android/` project to compile and sign, so it does not need your private Nexus, CocoaPods SSH, or web-build credentials. The compiled web assets are already inside that prepared native project; they are used for the build rather than retained as a source repository.
 
 ## What Gets Built
 
-Capgo Build only uploads the **minimum files needed** to compile your native app. Your full source code never leaves your machine.
+Capgo Build receives the prepared native project required to compile your app. Your web source code, private dependency installation, and Capacitor sync remain in your CI.
 
 ### What Gets Uploaded
 
@@ -93,23 +99,29 @@ Capgo Build only uploads the **minimum files needed** to compile your native app
 | `.env`, secrets | Never uploaded |
 
 <Aside>
-Your built web assets (JS, CSS, HTML) **are** uploaded - but as part of the native folder. When you run `bunx cap sync`, your web build is copied into `ios/App/App/public/` or `android/app/src/main/assets/public/`. That's why running `cap sync` before building is required.
+Your built web assets (JS, CSS, and HTML) are uploaded only because `npx cap sync` has copied them into the native project. The web source and dependency-installation steps stay in your CI; the prepared native project is used to build the binary and then cleaned up.
 </Aside>
 
 ### Your Responsibilities
 
-Before running `bunx @capgo/cli@latest build`:
+Before running `npx @capgo/cli@latest build request`:
 
-1. **Build your web assets** - Run `bun run build` (or your framework's build command)
-2. **Sync to native** - Run `bunx cap sync` to copy web assets into the native project
-3. **Commit dependencies** - Ensure all native plugins are in `package.json`
+1. **Prepare in your CI** - Resolve private package registries, SSH-based CocoaPods, device SDKs, extensions, and any custom native preparation in Bitrise or your existing CI.
+2. **Build your web assets** - Run `npm run build` (or your framework's build command).
+3. **Sync to native** - Run `npx cap sync` to copy the compiled web assets into the prepared native project.
+4. **Request the native build** - Send the prepared `ios/` or `android/` project to Capgo Build.
 
 ### What Capgo Build Handles
 
 - Native iOS compilation (Xcode, Fastlane)
 - Native Android compilation (Gradle)
 - Code signing with your credentials
-- App store submission (if configured)
+- Optional App Store Connect or Google Play submission
+- Supported native build configuration and credential values passed as environment variables
+
+Capgo Build does not need access to your private Nexus registry or SSH credentials once your CI has prepared the native project. See [Build Configuration](/docs/builder/configuration/) for supported environment variables and store options.
+
+For a kiosk flavour distributed through MDM, configure the Android project/build to produce an APK. Use `--output-upload` to retrieve the signed output, then distribute that APK through your MDM instead of Google Play.
 
 ## Next Steps
 

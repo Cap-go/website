@@ -87,11 +87,13 @@ if (plans.length > 0) {
     questions: [
       {
         question: 'How are MAU counted?',
-        answer: 'MAU (Monthly Active Users) are counted as unique users who open your app at least once in a 30-day period. Each unique device is counted once per month.',
+        answer:
+          'Capgo measures MAU as distinct active devices that contact Capgo in a rolling 30-day period. It is device-based rather than person-based; the same device is counted separately in each distinct native app ID.',
       },
       {
         question: 'What is storage used for?',
-        answer: 'Storage keeps the app bundles and assets you retain for rollout and rollback. Each bundle is counted once, even when replicated across delivery regions.',
+        answer:
+          'Storage keeps the retained app bundles and assets needed for rollout, rollback, and deployment history. Historical bundles and Delta assets count while they are retained. You control unused-bundle retention in app settings; bundles linked to an active channel or rollout stay protected. Each bundle is counted once, even when replicated across delivery regions.',
       },
       {
         question: 'How is bandwidth counted?',

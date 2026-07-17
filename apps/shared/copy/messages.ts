@@ -466,7 +466,7 @@ const messages = {
     'Capgo is the original independent live update system designed specifically for Capacitor applications.',
   capgo_is_used_to_update_its_own_apps_allowing_us_to_continuously_improve_and_refine_our_product_through_real_world_usage:
     'Capgo is used to update its own apps, allowing us to continuously improve and refine our product through real-world usage.',
-  capgo_usage_explanation: "At Capgo, we don't count emulators and dev builds in your usage. Learn more about this",
+  capgo_usage_explanation: 'You can exclude development builds and emulators from production update channels. Learn more about this',
   capgo_was_born_from_a_real_need_in_the_developer_community: 'Capgo was born from a real need in the developer community.',
   capwesome_cta_book_demo_btn: 'Book a demo',
   capwesome_cta_questions:
@@ -1185,19 +1185,32 @@ const messages = {
     'Yes. Enterprise includes SSO support, organization roles, member management, and audit logs so access can follow your internal identity and review process.',
   enterprise_faq_data_q: 'Where are bundles and account data hosted?',
   enterprise_faq_data_a:
-    'Capgo runs on globally replicated infrastructure and supports enterprise data-processing paperwork. We scope hosting, retention, and security expectations during onboarding so your review team has clear answers.',
+    'Capgo runs on globally replicated infrastructure. The public data inventory explains exactly what the updater sends, which records remain when statistics are disabled, and the controls available for regional or self-hosted deployments.',
+  enterprise_faq_data_link: 'Read the data collection documentation',
   enterprise_faq_self_host_q: 'Can updates be self-hosted or delivered from our infrastructure?',
   enterprise_faq_self_host_a:
-    'Yes. Capgo is open source and can support hosted, dedicated, hybrid, or self-hosted deployment discussions when control requirements are more important than a standard SaaS setup.',
+    'Yes. Enterprise supports hosted, dedicated, hybrid, and licensed self-hosted deployment options when control requirements are more important than a standard SaaS setup.',
+  enterprise_faq_self_host_link: 'See self-hosted updater documentation',
   enterprise_faq_sla_q: 'What reliability commitment is available?',
   enterprise_faq_sla_a:
     'Enterprise includes a 99.9% monthly availability commitment for the production platform. If the commitment is missed, service credits range from 10% to 30% based on monthly availability. Initial support targets are P1: one hour, 24/7/365; P2: two business hours; P3: one business day; and P4: two business days. Global replication, signed delivery, and rollback workflows support production recovery.',
+  enterprise_faq_sla_link: 'Read the Enterprise SLA',
   enterprise_faq_replication_q: 'Does regional replication multiply storage or bandwidth?',
   enterprise_faq_replication_a:
     'No. Each bundle is counted once for storage, regardless of the delivery regions it serves. Capgo bandwidth counts user-device downloads that are not served from the edge cache. Cache-served deliveries do not count against your Capgo bandwidth usage.',
+  enterprise_faq_replication_link: 'Read the pricing and usage FAQ',
   enterprise_faq_flavors_q: 'Should we use channels or separate app IDs for flavors?',
   enterprise_faq_flavors_a:
-    'Use channels when flavors or environments share the same native app ID. This keeps your release setup simpler and groups those channels under one Capgo app. Use separate app IDs when a flavor needs a distinct native bundle ID, signing identity, entitlement set, or store listing.',
+    'Use channels when flavors or environments share the same native app ID. This keeps your release setup simpler and groups those channels under one Capgo app. Use separate app IDs when a flavor needs a distinct native bundle ID, signing identity, entitlement set, or store listing; a device is not deduplicated across those app IDs.',
+  enterprise_faq_flavors_link: 'Read channel guidance',
+  enterprise_faq_subprocessors_q: 'Where is the current sub-processor list?',
+  enterprise_faq_subprocessors_a:
+    'Our public sub-processor list is the current source of truth. It is kept up to date and includes each provider’s purpose, processing location, transfer mechanism, and change history.',
+  enterprise_faq_subprocessors_link: 'View the up-to-date sub-processor list',
+  enterprise_faq_ci_q: 'Can we keep our existing CI and use Capgo only for native builds?',
+  enterprise_faq_ci_a:
+    'Yes. Keep private dependency setup, web builds, Capacitor sync, and custom preparation in your CI. Capgo Build receives the prepared native project to compile, sign, and optionally submit to the stores. Supported build configuration can be passed as environment variables.',
+  enterprise_faq_ci_link: 'Read the native-build workflow',
   enterprise_faq_legal_q: 'Can Capgo work with our MSA, DPA, NDA, or PO flow?',
   enterprise_faq_legal_a:
     'Yes. Enterprise conversations can include custom payment processes, purchase orders, signed non-disclosure agreements, DPAs, and procurement workflows before rollout.',
@@ -1298,7 +1311,7 @@ const messages = {
   enterprise_capacity_desc: 'Enterprise gives teams the MAU, bandwidth, and storage bands that actually decide whether a large rollout feels safe.',
   enterprise_capacity_title: 'Capacity that keeps launches moving',
   enterprise_compliance_procurement_desc:
-    'SOC 2 certified controls, ISO 27001 in progress, signed non-disclosure agreements, DPAs, and custom payment workflows are ready for enterprise review.',
+    'SOC 2 certified controls, an ISO 27001 audit complete with certificate issuance pending, signed non-disclosure agreements, DPAs, and custom payment workflows are ready for enterprise review.',
   enterprise_compliance_procurement_group: 'Compliance and procurement',
   enterprise_compliance_procurement_title: 'Compliance before procurement asks',
   enterprise_continents_replicated: 'continents replicated',
@@ -1322,8 +1335,8 @@ const messages = {
     'Live Updates, Native Builds, App Store Publishing, {pluginCountLabel} plugins, and Automations in one platform, with enterprise scale, compliance, and procurement support.',
   enterprise_identity: 'Enterprise Identity',
   enterprise_ionic_alternative_plugins: 'Ionic enterprise alternative plugins',
-  enterprise_iso27001_in_progress: 'ISO 27001 in progress',
-  enterprise_iso27001_ongoing: 'ISO 27001 ongoing',
+  enterprise_iso27001_in_progress: 'ISO 27001 audit complete — certificate pending issuance',
+  enterprise_iso27001_ongoing: 'ISO 27001 audit complete — certificate pending issuance',
   enterprise_large_macos_m4: 'Large build machines (macOS M4)',
   enterprise_limits_desc: 'Enterprise buying usually stalls when scale, release speed, compliance, or procurement is unclear. These are the differences teams ask for first.',
   enterprise_limits_title: 'The limits that matter most are clear before the call.',
@@ -1388,7 +1401,7 @@ const messages = {
   enterprise_soc2_certified: 'SOC 2 certified',
   enterprise_soc2_certified_infrastructure: 'SOC 2 certified infrastructure',
   enterprise_soc2_iso_metric: 'SOC 2 + ISO',
-  enterprise_sso_soc2_iso: 'SSO, SOC 2, ISO 27001 ongoing',
+  enterprise_sso_soc2_iso: 'SSO, SOC 2, ISO 27001 certificate pending issuance',
   enterprise_stripe_payment_options: 'Stripe payment options',
   enterprise_support: 'Enterprise Support',
   enterprise_support_onboarding: 'Support and onboarding',
@@ -2034,17 +2047,13 @@ const messages = {
   live_update_lts_electron_new: 'New',
   live_update_platforms_kicker: 'Supported runtimes',
   live_update_platforms_title: 'One Capgo backend for every hybrid stack you ship.',
-  live_update_platforms_desc:
-    'Use the same channels, bundle uploads, rollback protection, and device logs whether your app runs on Capacitor, Cordova, or Electron.',
+  live_update_platforms_desc: 'Use the same channels, bundle uploads, rollback protection, and device logs whether your app runs on Capacitor, Cordova, or Electron.',
   live_update_platform_capacitor_title: 'Capacitor',
-  live_update_platform_capacitor_text:
-    'Native live updates for iOS and Android apps built with Capacitor. Install @capgo/capacitor-updater and ship bundles with @capgo/cli.',
+  live_update_platform_capacitor_text: 'Native live updates for iOS and Android apps built with Capacitor. Install @capgo/capacitor-updater and ship bundles with @capgo/cli.',
   live_update_platform_cordova_title: 'Cordova',
-  live_update_platform_cordova_text:
-    'Keep your Cordova toolchain and still get Capgo OTA on iOS 7+ and Android 13+ with @capgo/cordova-updater and the same JavaScript API.',
+  live_update_platform_cordova_text: 'Keep your Cordova toolchain and still get Capgo OTA on iOS 7+ and Android 13+ with @capgo/cordova-updater and the same JavaScript API.',
   live_update_platform_electron_title: 'Electron',
-  live_update_platform_electron_text:
-    'Push HTML, CSS, and JavaScript updates to desktop apps without rebuilding installers. @capgo/electron-updater mirrors the mobile API.',
+  live_update_platform_electron_text: 'Push HTML, CSS, and JavaScript updates to desktop apps without rebuilding installers. @capgo/electron-updater mirrors the mobile API.',
   live_update_platform_read_more: 'Read more',
 
   live_update_lts_supported: 'Fully Supported',
@@ -2133,7 +2142,7 @@ const messages = {
   massive_cost_reduction: 'Massive cost reduction',
   mau: 'MAU',
   mau_counting_explanation:
-    'We count MAU (Monthly Active Users) by tracking unique users who open your app within a 30-day period. Each user is counted once, regardless of how many times they engage with the app.',
+    'Capgo measures MAU as distinct active devices that contact Capgo in a rolling 30-day period. It is device-based rather than person-based; the same device is counted separately in each distinct native app ID.',
   mcp_server: 'MCP Server',
   mention_issue_before_working: 'When you work on an issue, mention so in the issue comments <em>before</em> you start working on the issue.',
   migration_guide: 'Migration Guide',
@@ -2990,7 +2999,7 @@ const messages = {
   solutions_agencies_solution_title: 'One Dashboard. All Your Clients.',
   solutions_agencies_tagline: 'Manage multiple client apps',
   solutions_agencies_title: 'Live Updates for Agencies',
-  solutions_app_store_compliant: 'App Store compliant',
+  solutions_app_store_compliant: 'Web-layer updates only',
   solutions_avg_cost_per_bug: 'Average cost per production bug',
   solutions_avg_review_time: 'Average App Store review time',
   solutions_benefit1_desc: 'Updates download while users use your app. No spinners, no loading screens, no interruptions. When they next launch, the new version is simply there.',
@@ -3007,12 +3016,13 @@ const messages = {
   solutions_benefit2_stat: 'Average rollback time when issues detected',
   solutions_benefit2_title: 'Automatic Rollback Protection',
   solutions_benefit3_desc:
-    "Capgo works within Apple and Google's guidelines. You're updating JavaScript and assets - not native code. Both app stores explicitly allow this, and thousands of apps use Capgo in production.",
-  solutions_benefit3_point1: "Apple's 3.3.2 permits JavaScript updates that don't change app functionality",
-  solutions_benefit3_point2: "Google Play allows updates that preserve the app's core purpose",
-  solutions_benefit3_point3: 'Used by Fortune 500 companies without any app store rejections',
-  solutions_benefit3_stat: 'App store compliance rate',
-  solutions_benefit3_title: '100% App Store Compliant',
+    'Capgo delivers the Capacitor web layer: JavaScript, CSS, and assets. It does not change the native binary, plugins, permissions, entitlements, or app-store metadata. Store review is app-specific, so you remain responsible for policy compliance and approval.',
+  solutions_benefit3_point1: 'Use a native store release when native capabilities, plugins, permissions, or app-store metadata change',
+  solutions_benefit3_point2: 'Keep reviewer notes clear about the app’s intended functionality and web-layer update path',
+  solutions_benefit3_point3: 'Review the current Apple and Google policies before each submission',
+  solutions_benefit3_stat: 'Store approval remains app-specific',
+  solutions_benefit3_stat_value: 'App-specific',
+  solutions_benefit3_title: 'Store-review aware delivery',
   solutions_benefits_subtitle: "Every feature exists because production teams told us they needed it. Here's what makes Capgo different.",
   solutions_beta_testing: 'Beta Testing',
   solutions_beta_testing_compare_capgo: 'Capgo Channel Testing',
@@ -4416,7 +4426,7 @@ const messages = {
   storage: 'Storage (GiB)',
   storage_calculated_info: '* Storage is calculated per GiB per hour',
   storage_detailed_explanation:
-    'Storage is used to store your app update bundles, which contain web assets (HTML, CSS, JavaScript), version metadata, and checksums. It keeps all uploaded versions to support instant rollbacks, multiple release channels (production, beta, staging), and deployment history. Storage usage grows with each OTA update since every update is stored as a full bundle. Regional replication does not multiply storage: each bundle is counted once, regardless of the delivery regions it serves. Typical usage is 2 GB for a few apps with limited history, and 10–20 GB for multiple apps with frequent releases.',
+    'Storage keeps the retained app bundles and assets needed for rollout, rollback, and deployment history. Historical bundles and Delta assets count toward storage while they are retained. You control unused-bundle retention in your app settings; bundles linked to an active channel or rollout stay protected. Regional replication does not multiply storage: each bundle is counted once, regardless of delivery regions.',
   storage_gb: 'Storage (GiB)',
   storage_what_is_it_used_for: 'What is storage used for and how does it work?',
   submitting_a_pr_to_capgo: "Submitting a PR to <a href='https://github.com/Cap-go/capgo'><code>Capgo</code></a>",
@@ -5166,7 +5176,8 @@ const messages = {
     'No. They complement each other. Live Updates for JS, CSS, and assets. Builder when native code, plugins, permissions, icons, or SDKs need a new signed binary.',
   native_build_v2_faq_q7: 'Can Capgo Build work with our existing CI and private native setup?',
   native_build_v2_faq_a7:
-    'Yes. Keep private JavaScript dependency setup, web builds, and cap sync in your CI. Capgo Build uploads the prepared native platform folder and its native dependencies, then compiles and signs it; it can also submit the result to app stores when configured. For private CocoaPods, SPM, or Maven dependencies, vendor them into that project before the build. Pass supported build configuration as environment variables when needed.',
+    'Yes. Keep private JavaScript dependency setup, web builds, and Capacitor sync in your CI. Capgo Build receives the prepared native platform folder after that work is complete, then compiles and signs it; it can also submit the result to app stores when configured. Capgo does not need access to your Git repositories, private registries, or SSH credentials. Pass supported build configuration as environment variables when needed.',
+  native_build_v2_faq_a7_link: 'Read the build workflow',
 
   native_build_v2_cta_title: 'Native builds without the pain.',
   native_build_v2_cta_tagline: 'One command. iOS and Android, treated as equals. From any machine.',
