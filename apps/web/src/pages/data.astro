@@ -4,7 +4,7 @@ import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
 const title = 'Capgo Live Update data | Platform insights'
-const description = 'Live Update success by country, platform, and updater version — last 30 days of Capgo delivery data.'
+const description = 'Live Update success by country, platform, and updater version. Rates use app, device, and UTC-day outcomes over the last 30 days.'
 const content = {
   title,
   description,
@@ -19,7 +19,7 @@ const content = {
       <div class="data-shell">
         <p class="data-eyebrow"><span aria-hidden="true"></span> Our data</p>
         <h1>Live Update delivery data</h1>
-        <p class="data-summary">Last 30 days of Capgo install success — overall, and broken down by country, platform, and updater version.</p>
+        <p class="data-summary">Last 30 days of Capgo install success. Each rate uses app, device, and UTC-day outcomes — overall and by country, platform, and updater version.</p>
         <p class="data-updated" data-updated aria-live="polite"><span class="data-spinner" aria-hidden="true"></span> Loading delivery data…</p>
       </div>
     </section>
@@ -31,7 +31,7 @@ const content = {
             <p class="data-eyebrow">Success rate</p>
             <h2 id="reliability-title">Daily install success</h2>
           </div>
-          <p>Install outcomes across Capgo over the reporting window.</p>
+          <p>Each outcome is one app, device, and UTC day. If that combination eventually installs, it counts as success.</p>
         </div>
 
         <div class="data-kpis" aria-label="Reliability summary">
@@ -59,7 +59,7 @@ const content = {
             <p class="data-eyebrow">Geography</p>
             <h2 id="countries-title">Success by country</h2>
           </div>
-          <p>Install share, success rate, and leading failure by country.</p>
+          <p>Share of active devices, success rate, and leading failure by country. Success uses app/device/UTC-day outcomes.</p>
         </div>
         <div class="data-table-wrap">
           <table class="data-table" data-countries-table>
@@ -87,7 +87,7 @@ const content = {
             <p class="data-eyebrow">Platforms</p>
             <h2 id="platforms-title">Success by device type</h2>
           </div>
-          <p>Install share, success rate, and leading failure by platform.</p>
+          <p>Share of active devices, success rate, and leading failure by platform. Success uses app/device/UTC-day outcomes.</p>
         </div>
         <div class="data-table-wrap">
           <table class="data-table" data-platforms-table>
@@ -130,7 +130,7 @@ const content = {
             <p class="data-eyebrow">Updater</p>
             <h2 id="versions-title">Updater versions</h2>
           </div>
-          <p>Install share, success rate, and leading failure by updater version.</p>
+          <p>Share of active devices, success rate, and leading failure by updater version. Success uses app/device/UTC-day outcomes.</p>
         </div>
         <div class="data-table-wrap">
           <table class="data-table" data-versions-table>
