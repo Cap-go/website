@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
-const title = 'Capgo delivery data | Live Update reliability'
-const description = 'Anonymous, percentage-based reliability data for Capgo Live Updates, grouped by device and UTC day.'
+const title = 'Capgo Live Update data | Platform insights'
+const description = 'Live Update success rate, platform mix, and top failure reasons across Capgo — last 30 days.'
 const content = {
   title,
   description,
@@ -17,10 +17,10 @@ const content = {
   <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="true">
     <section class="data-hero">
       <div class="data-shell">
-        <p class="data-eyebrow"><span aria-hidden="true"></span> Public aggregate data</p>
-        <h1>Live Update reliability, measured clearly.</h1>
-        <p class="data-summary">A privacy-safe 30-day view of install outcomes. Every result is grouped by app, device, and UTC day before percentages are calculated.</p>
-        <p class="data-updated" data-updated aria-live="polite"><span class="data-spinner" aria-hidden="true"></span> Loading current reliability data…</p>
+        <p class="data-eyebrow"><span aria-hidden="true"></span> Our data</p>
+        <h1>Live Update delivery data</h1>
+        <p class="data-summary">Last 30 days of Capgo Live Update success, platforms, and failure reasons.</p>
+        <p class="data-updated" data-updated aria-live="polite"><span class="data-spinner" aria-hidden="true"></span> Loading delivery data…</p>
       </div>
     </section>
 
@@ -28,22 +28,22 @@ const content = {
       <div class="data-shell">
         <div class="data-heading">
           <div>
-            <p class="data-eyebrow">Install reliability</p>
-            <h2 id="reliability-title">Daily success rate</h2>
+            <p class="data-eyebrow">Success rate</p>
+            <h2 id="reliability-title">Daily install success</h2>
           </div>
-          <p>Counted per app, device, and UTC day. If that combination eventually installs successfully, it counts as success.</p>
+          <p>Install outcomes across Capgo over the reporting window.</p>
         </div>
 
         <div class="data-kpis" aria-label="Reliability summary">
-          <div><p>30-day success rate</p><strong data-kpi="success-rate">—</strong></div>
-          <div><p>Reporting window</p><strong>30 days</strong></div>
-          <div><p>Counting unit</p><strong>Device / day</strong></div>
+          <div><p>Success rate</p><strong data-kpi="success-rate">—</strong></div>
+          <div><p>Window</p><strong>30 days</strong></div>
+          <div><p>Scope</p><strong>All apps</strong></div>
         </div>
 
         <div class="data-loading data-chart-skeleton" aria-hidden="true">
           <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
         </div>
-        <div class="data-chart" data-daily-chart aria-label="Daily install success rate chart" hidden>
+        <div class="data-chart" data-daily-chart aria-label="Daily install success chart" hidden>
           <div class="data-chart-scale" aria-hidden="true"><span>100%</span><span>50%</span><span>0%</span></div>
           <div class="data-bars" data-daily-bars role="list" aria-label="Daily install success rates"></div>
           <div class="data-axis"><span data-daily-start></span><span data-daily-end></span></div>
@@ -55,9 +55,9 @@ const content = {
     <section class="data-section data-section-muted" aria-labelledby="platforms-title">
       <div class="data-shell data-split">
         <div>
-          <p class="data-eyebrow">Platform mix</p>
-          <h2 id="platforms-title">Share of active devices</h2>
-          <p class="data-copy">Relative share of active devices across iOS, Android, and Electron.</p>
+          <p class="data-eyebrow">Platforms</p>
+          <h2 id="platforms-title">Active device mix</h2>
+          <p class="data-copy">Share of active devices on iOS, Android, and Electron.</p>
         </div>
         <dl class="data-platforms">
           {
@@ -78,9 +78,9 @@ const content = {
     <section class="data-section" aria-labelledby="failures-title">
       <div class="data-shell data-split">
         <div>
-          <p class="data-eyebrow">Failure distribution</p>
+          <p class="data-eyebrow">Failures</p>
           <h2 id="failures-title">Top failure reasons</h2>
-          <p class="data-copy">Each reason is deduplicated by app, device, and day.</p>
+          <p class="data-copy">Normalized categories across all apps.</p>
         </div>
         <ol class="data-failures" data-failures aria-live="polite">
           <li class="data-loading data-list-skeleton" aria-hidden="true"><span></span><div></div><b></b></li>
@@ -93,8 +93,8 @@ const content = {
     <section class="data-section data-section-muted" aria-labelledby="versions-title">
       <div class="data-shell">
         <div class="data-heading">
-          <div><p class="data-eyebrow">Adoption context</p><h2 id="versions-title">Leading updater version</h2></div>
-          <p>The most-used updater version each day, shown as a share of active devices.</p>
+          <div><p class="data-eyebrow">Updater</p><h2 id="versions-title">Leading updater version</h2></div>
+          <p>Most-used Capgo updater version each day, by share of active devices.</p>
         </div>
         <div class="data-loading data-chart-skeleton data-version-skeleton" aria-hidden="true">
           <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
@@ -227,7 +227,7 @@ const content = {
       }
       dailyChart.hidden = metrics.daily.length === 0
       dailyEmpty.hidden = metrics.daily.length > 0
-      dailyEmpty.textContent = 'Reliability telemetry is temporarily unavailable.'
+      dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
       dailyStart.textContent = metrics.daily[0]?.date ?? ''
       dailyEnd.textContent = metrics.daily.at(-1)?.date ?? ''
     }
@@ -251,7 +251,7 @@ const content = {
         row.append(rank, reason, share, track)
         failuresList.append(row)
       }
-      if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failure reasons in this window.' }))
+      if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
     }
 
     function renderVersions(metrics: Metrics) {
@@ -276,7 +276,7 @@ const content = {
       }
       versionChart.hidden = trend.length === 0
       versionEmpty.hidden = trend.length > 0
-      versionEmpty.textContent = 'Updater adoption telemetry is temporarily unavailable.'
+      versionEmpty.textContent = 'Updater data is temporarily unavailable.'
     }
 
     function renderMetrics(metrics: Metrics) {
@@ -296,23 +296,23 @@ const content = {
         const formatted = Number.isNaN(timestamp.getTime())
           ? 'Updated moments ago'
           : `Updated ${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(timestamp)} UTC`
-        updated.textContent = `${formatted} · Percentage-only public data.`
+        updated.textContent = formatted
       }
     }
 
     function renderUnavailable() {
-      if (updated) updated.textContent = 'Live reliability data is temporarily unavailable. Please check back shortly.'
+      if (updated) updated.textContent = 'Delivery data is temporarily unavailable. Check back shortly.'
       if (dailyChart) dailyChart.hidden = true
       if (dailyEmpty) {
         dailyEmpty.hidden = false
-        dailyEmpty.textContent = 'Reliability telemetry is temporarily unavailable.'
+        dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
       }
       if (failuresList)
-        failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure telemetry is temporarily unavailable.' }))
+        failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
       if (versionChart) versionChart.hidden = true
       if (versionEmpty) {
         versionEmpty.hidden = false
-        versionEmpty.textContent = 'Updater adoption telemetry is temporarily unavailable.'
+        versionEmpty.textContent = 'Updater data is temporarily unavailable.'
       }
     }
 
