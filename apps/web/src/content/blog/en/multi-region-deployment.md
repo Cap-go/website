@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-19T13:28:38.996Z
-updated_at: 2026-07-19T13:28:39.947Z
+updated_at: 2026-07-19T13:30:50.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/b8ed76f0-0da8-42ec-b852-7321673e28df/multi-region-deployment-hand-drawn-guide.jpg'
 head_image_alt: 'Multi Region Deployment Done Right: A 2026 Guide'
 keywords: 'multi region deployment, cloud architecture, high availability, disaster recovery, global application'
