@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-21T08:44:00.156Z
-updated_at: 2026-07-21T08:44:01.642Z
+updated_at: 2026-07-21T08:46:03.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/8e28e7ff-7a79-45f3-907e-58417ab79945/gdpr-compliance-checklist-compliance-guide.jpg'
 head_image_alt: 'GDPR Compliance Checklist: Cross-Platform Apps 2026'
 keywords: 'GDPR, GDPR compliance checklist, Cross-platform apps, Software compliance, Capacitor'
