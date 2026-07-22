@@ -1,0 +1,276 @@
+---
+title: Auto Choose Live Update or Native Build
+description: Set up CI/CD that detects whether a change can ship as a Capgo live update or needs a Capgo Build native binary, then runs the right path automatically.
+sidebar:
+  order: 9
+  label: Auto OTA or Native
+---
+
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import MermaidGraph from '@/components/MermaidGraph.astro';
+
+export const releaseDecisionGraph = `flowchart TD
+  A[Push / merge] --> B[Install + web build]
+  B --> C["bundle releaseType"]
+  C -->|OTA| D["bundle upload"]
+  C -->|native| E["build request iOS + Android"]
+  E --> F[Store / TestFlight / Play]
+`;
+
+Most Capacitor releases are JavaScript-only and should ship as a [live update](/docs/live-updates/). Some changes touch native code and need a new binary from [Capgo Build](/docs/builder/). This guide shows how to make GitHub Actions, GitLab CI, or any other CI/CD platform pick the correct path on every push — without a human deciding.
+
+## The Decision
+
+Capgo already knows which path is safe. After your web build (and before you upload or request a native build), run:
+
+```bash
+npx @capgo/cli@latest bundle releaseType com.example.app --channel production
+# → OTA      ship with bundle upload
+# → native   ship with Capgo Build
+```
+
+`OTA` means the native packages match what is already live on the channel. `native` means a plugin, Capacitor version, or other native dependency changed — an over-the-air bundle alone cannot update those devices safely.
+
+See [Native Compatibility](/docs/live-updates/compatibility/) for the full rules and the manual `bundle compatibility` table.
+
+<Aside type="tip">
+Gate every production pipeline on `releaseType`. It is cheaper than guessing, and it avoids shipping a live update that crashes devices still on the older native binary.
+</Aside>
+
+## Prerequisites
+
+- Capgo app registered and a [Capgo API key](/docs/webapp/api-keys/) in CI secrets as `CAPGO_TOKEN`
+- Live Updates upload working (`bundle upload`) — see [CI/CD Integration](/docs/getting-started/cicd-integration/)
+- Capgo Build credentials in CI if you expect native jobs — see [GitHub Actions](/docs/builder/github-actions/) or [Credentials](/docs/builder/credentials/)
+- A channel name that matches production (examples use `production`)
+
+## How the Pipeline Should Work
+
+<MermaidGraph graph={releaseDecisionGraph} ariaLabel="Flowchart of CI deciding between live update and Capgo Build" />
+
+1. Build web assets as usual.
+2. Ask Capgo whether this commit is OTA-safe.
+3. If `OTA`, upload the bundle.
+4. If `native`, run Capgo Build (and optionally still upload a bundle with `--fail-on-incompatible` / `--auto-min-update-version` once the binary is ready — see [Prevent incompatible deliveries](/docs/live-updates/compatibility/#prevent-incompatible-deliveries)).
+
+## GitHub Actions
+
+One workflow that branches on `releaseType`:
+
+```yaml
+# .github/workflows/capgo-release.yml
+name: Capgo Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    outputs:
+      release_type: ${{ steps.verdict.outputs.type }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Decide OTA vs native
+        id: verdict
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+        run: |
+          TYPE=$(npx @capgo/cli@latest bundle releaseType com.example.app --channel production | tr -d '[:space:]')
+          echo "type=$TYPE" >> "$GITHUB_OUTPUT"
+          echo "Capgo release type: $TYPE"
+
+  live_update:
+    needs: decide
+    if: needs.decide.outputs.release_type == 'OTA'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - name: Upload live update
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+        run: |
+          npx @capgo/cli@latest bundle upload com.example.app \
+            --channel production \
+            --fail-on-incompatible
+
+  native_build:
+    needs: decide
+    if: needs.decide.outputs.release_type == 'native'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ios, android]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - run: npx cap sync ${{ matrix.platform }}
+      - name: Capgo Build ${{ matrix.platform }}
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          CAPGO_IOS_PROVISIONING_MAP_BASE64: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP_BASE64 }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+        run: |
+          npx @capgo/cli@latest build request com.example.app \
+            --platform ${{ matrix.platform }} \
+            --build-mode release
+```
+
+Replace `com.example.app` and wire the signing secrets as described in [GitHub Actions for Capgo Build](/docs/builder/github-actions/).
+
+<Aside>
+`--fail-on-incompatible` on the OTA job is a second safety rail: if the verdict ever races with another deploy, the upload still fails closed instead of shipping an incompatible bundle.
+</Aside>
+
+## GitLab CI
+
+GitLab evaluates `rules` when the pipeline is created, so branch with a shell `if` inside one deploy job (or generate a [dynamic child pipeline](https://docs.gitlab.com/ee/ci/pipelines/downstream_pipelines.html#dynamic-child-pipelines) if you need separate native matrix jobs):
+
+```yaml
+# .gitlab-ci.yml
+image: node:24
+
+stages:
+  - build
+  - deploy
+
+variables:
+  APP_ID: com.example.app
+  CHANNEL: production
+
+build_web:
+  stage: build
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+      - node_modules/
+    expire_in: 1 hour
+  only:
+    - main
+
+deploy:
+  stage: deploy
+  needs: [build_web]
+  script:
+    - |
+      TYPE=$(npx @capgo/cli@latest bundle releaseType "$APP_ID" --channel "$CHANNEL" | tr -d '[:space:]')
+      echo "Capgo release type: $TYPE"
+      if [ "$TYPE" = "OTA" ]; then
+        npx @capgo/cli@latest bundle upload "$APP_ID"           --channel "$CHANNEL"           --fail-on-incompatible
+      elif [ "$TYPE" = "native" ]; then
+        npx cap sync
+        npx @capgo/cli@latest build request "$APP_ID" --platform ios --build-mode release
+        npx @capgo/cli@latest build request "$APP_ID" --platform android --build-mode release
+      else
+        echo "Unexpected release type: $TYPE" >&2
+        exit 1
+      fi
+  only:
+    - main
+```
+
+Store `CAPGO_TOKEN` and Capgo Build signing variables as masked/protected CI/CD variables.
+
+## Other CI Platforms
+
+The same three steps work anywhere:
+
+| Step | Command |
+|------|---------|
+| Verdict | `npx @capgo/cli@latest bundle releaseType APP_ID --channel production` |
+| OTA path | `npx @capgo/cli@latest bundle upload APP_ID --channel production --fail-on-incompatible` |
+| Native path | `npx @capgo/cli@latest build request APP_ID --platform ios` (or `android`) `--build-mode release` |
+
+Map the shell exit / stdout into your platform's conditionals:
+
+- **Azure Pipelines** — set an output variable from a script step, then use `condition: eq(variables['releaseType'], 'OTA')`
+- **Bitbucket Pipelines** — write the verdict to a file artifact and branch with separate steps + `condition`
+- **CircleCI** — persist `RELEASE_TYPE` in a workspace and use `when` clauses
+- **Jenkins** — capture stdout into an env var and use `when { environment name: 'RELEASE_TYPE', value: 'OTA' }`
+
+## Paths Filters (Optional Speedup)
+
+`releaseType` is authoritative, but you can skip the job entirely for docs-only commits:
+
+```yaml
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'android/**'
+      - 'ios/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'capacitor.config.*'
+```
+
+Still run `releaseType` for any commit that touches app code — path filters are a cost optimization, not a substitute for the Capgo check.
+
+## After a Native Verdict
+
+When CI chooses native:
+
+1. Capgo Build produces signed binaries and can submit to TestFlight / Play (see [configuration](/docs/builder/configuration/)).
+2. Once users install the new binary, later JavaScript-only commits return to `OTA` again.
+3. If you upload a bundle alongside the native release, use the [metadata strategy + `--auto-min-update-version`](/docs/live-updates/compatibility/#prevent-incompatible-deliveries) so older binaries never receive the incompatible bundle.
+
+## Related Guides
+
+<CardGrid>
+  <LinkCard
+    title="Native Compatibility"
+    description="Why Capgo returns OTA vs native and how to block bad uploads."
+    href="/docs/live-updates/compatibility/"
+  />
+  <LinkCard
+    title="GitHub Actions (Capgo Build)"
+    description="Signing secrets and full native build workflows."
+    href="/docs/builder/github-actions/"
+  />
+  <LinkCard
+    title="Trigger Builds from the CI UI"
+    description="Run a native build on demand from GitHub, GitLab, or Bitbucket."
+    href="/docs/builder/ci-ui-trigger/"
+  />
+  <LinkCard
+    title="Trigger Builds via Webhook"
+    description="Fire Capgo Build from an admin dashboard or any HTTP client."
+    href="/docs/builder/webhooks/"
+  />
+</CardGrid>

@@ -1,0 +1,265 @@
+---
+title: Trigger Native Builds via Webhook
+description: Expose an HTTP webhook that starts a Capgo Build from your admin dashboard, CMS, or any system that can POST a URL.
+sidebar:
+  order: 11
+  label: Build Webhooks
+---
+
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import MermaidGraph from '@/components/MermaidGraph.astro';
+
+export const webhookBuildGraph = `sequenceDiagram
+  participant Admin as Admin dashboard
+  participant Hook as Webhook endpoint
+  participant CI as GitHub / GitLab
+  participant Capgo as Capgo Build
+
+  Admin->>Hook: POST /native-build (secret)
+  Hook->>CI: repository_dispatch / pipeline trigger
+  CI->>CI: checkout, npm ci, cap sync
+  CI->>Capgo: build request
+  Capgo-->>CI: signed binary / store upload
+`;
+
+Capgo Build is normally started from a laptop or CI job. Teams that ship from an **admin dashboard**, CMS, or internal portal often want a single **HTTP webhook**: press a button in their own UI, and a signed native build starts. This guide shows the standard pattern — a thin authenticated HTTP call into your code host, which runs the same Capgo Build workflow you already use.
+
+<Aside>
+Capgo organization webhooks (Dashboard → Organization → Webhooks) notify *your* URLs about Capgo events (bundles, channels, members). This page is the other direction: **your** system calls a URL to **start** a Capgo Build.
+</Aside>
+
+## Architecture
+
+<MermaidGraph graph={webhookBuildGraph} ariaLabel="Sequence diagram of admin webhook triggering Capgo Build through CI" />
+
+You do **not** need Capgo to expose a public “build webhook.” Your CI already has the signing secrets; the webhook's only job is to start that CI job safely.
+
+## Prerequisites
+
+- A Capgo Build workflow that already works from the [CI UI](/docs/builder/ci-ui-trigger/) or on push ([GitHub Actions](/docs/builder/github-actions/))
+- Permission to create a fine-grained GitHub token, GitLab trigger token, or equivalent
+- A shared secret your admin dashboard will send (header or body)
+
+## Option A — GitHub `repository_dispatch` (recommended)
+
+GitHub accepts an authenticated API call that starts a workflow listening for `repository_dispatch`. Any dashboard that can `POST` JSON can fire it.
+
+### 1. Workflow that listens for the webhook
+
+```yaml
+# .github/workflows/capgo-build-webhook.yml
+name: Capgo Build (Webhook)
+
+on:
+  repository_dispatch:
+    types: [capgo-native-build]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJSON(github.event.client_payload.platform == 'both' && '["ios","android"]' || format('["{0}"]', github.event.client_payload.platform || 'android')) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.client_payload.ref || github.event.repository.default_branch }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build
+      - run: npx cap sync ${{ matrix.platform }}
+
+      - name: Capgo Build
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          CAPGO_IOS_PROVISIONING_MAP_BASE64: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP_BASE64 }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+        run: |
+          MODE="${{ github.event.client_payload.mode || 'release' }}"
+          npx @capgo/cli@latest build request com.example.app \
+            --platform ${{ matrix.platform }} \
+            --build-mode "$MODE"
+```
+
+### 2. Create a GitHub token
+
+Create a fine-grained personal access token (or GitHub App installation token) with **Contents: Read and write** on the repository (required for `repository_dispatch`). Store it only in your admin backend — never in the browser.
+
+### 3. Call the webhook from your admin dashboard
+
+Your backend (not the end-user browser) should send:
+
+```bash
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/OWNER/REPO/dispatches \
+  -d '{
+    "event_type": "capgo-native-build",
+    "client_payload": {
+      "platform": "both",
+      "mode": "release",
+      "ref": "main",
+      "requested_by": "admin@example.com"
+    }
+  }'
+```
+
+| Field | Purpose |
+|-------|---------|
+| `event_type` | Must match `types` in the workflow (`capgo-native-build`) |
+| `client_payload.platform` | `ios`, `android`, or `both` |
+| `client_payload.mode` | `debug` or `release` |
+| `client_payload.ref` | Branch or tag to build (optional) |
+
+Wire the same JSON POST to a button in your admin UI ("Build native apps"). The dashboard only needs to reach **your** backend; the backend holds `GITHUB_TOKEN`.
+
+<Aside type="caution">
+Never embed the GitHub token in frontend JavaScript. The admin page should call your server; your server calls GitHub.
+</Aside>
+
+## Option B — Tiny proxy webhook (any host)
+
+If the admin tool can only POST to a URL you control (Zapier, Make, Cloudflare Worker, Express route), put a short proxy in front of GitHub:
+
+```js
+// Example Cloudflare Worker / Node handler (sketch)
+export default {
+  async fetch(request, env) {
+    if (request.method !== 'POST') {
+      return new Response('Method not allowed', { status: 405 })
+    }
+    if (request.headers.get('x-webhook-secret') !== env.WEBHOOK_SECRET) {
+      return new Response('Unauthorized', { status: 401 })
+    }
+    const body = await request.json().catch(() => ({}))
+    const res = await fetch(
+      `https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/vnd.github+json',
+          Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+        body: JSON.stringify({
+          event_type: 'capgo-native-build',
+          client_payload: {
+            platform: body.platform || 'both',
+            mode: body.mode || 'release',
+            ref: body.ref || 'main',
+          },
+        }),
+      },
+    )
+    return new Response(res.status === 204 ? 'Build queued' : await res.text(), {
+      status: res.status === 204 ? 200 : res.status,
+    })
+  },
+}
+```
+
+Then configure the admin product:
+
+| Setting | Value |
+|---------|-------|
+| URL | `https://your-worker.example.com/native-build` |
+| Method | `POST` |
+| Header | `x-webhook-secret: <shared secret>` |
+| Body | `{ "platform": "both", "mode": "release" }` |
+
+This is the usual shape for connecting a webhook to an on-admin dashboard: the dashboard stores one URL and one secret; Capgo credentials stay in GitHub Actions.
+
+## GitLab Pipeline Trigger
+
+GitLab exposes [pipeline trigger tokens](https://docs.gitlab.com/ee/ci/triggers/) that are natural webhook targets.
+
+```yaml
+# .gitlab-ci.yml fragment
+capgo_native_webhook:
+  stage: build
+  script:
+    - npm ci && npm run build
+    - npx cap sync "${PLATFORM:-android}"
+    - npx @capgo/cli@latest build request com.example.app --platform "${PLATFORM:-android}" --build-mode "${BUILD_MODE:-release}"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "trigger"'
+```
+
+Create a trigger token under **Settings → CI/CD → Pipeline trigger tokens**, then from the admin backend:
+
+```bash
+curl -X POST \
+  -F token=$GITLAB_TRIGGER_TOKEN \
+  -F ref=main \
+  -F "variables[PLATFORM]=android" \
+  -F "variables[BUILD_MODE]=release" \
+  https://gitlab.com/api/v4/projects/PROJECT_ID/trigger/pipeline
+```
+
+For both platforms, either fire two triggers or expand the job into a parallel matrix the same way as the GitHub example.
+
+## Bitbucket and Azure
+
+| Platform | Webhook mechanism |
+|----------|-------------------|
+| **Bitbucket** | [Pipeline trigger URL](https://support.atlassian.com/bitbucket-cloud/docs/pipeline-triggers/) or custom pipeline + app password `POST` |
+| **Azure DevOps** | [Pipeline run REST API](https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/runs/run-pipeline) with a PAT; use the manual pipeline from [Trigger from CI UI](/docs/builder/ci-ui-trigger/#azure-devops) |
+
+Pattern is identical: admin → your secret check → host API → Capgo Build job.
+
+## Payload Checklist for Admin Tools
+
+When the dashboard form is built, collect at least:
+
+- **Platform** — ios / android / both
+- **Mode** — debug (QA) or release (store)
+- **Git ref** — branch or tag to build
+- **Actor** — email or user id for audit logs (pass through `client_payload`)
+
+Optional: after the run, have CI post back to the admin API with the download URL from [`--output-record` / `build last-output`](/docs/builder/github-actions/#read-the-build-output-url-and-qr-code).
+
+## Security
+
+- Authenticate every webhook (`x-webhook-secret`, HMAC signature, or mTLS).
+- Keep GitHub/GitLab tokens server-side only.
+- Prefer tokens scoped to a single repository.
+- Rate-limit the proxy; native builds cost build minutes.
+- For store-submitting releases, require an extra confirmation flag in the payload and enforce it in the workflow (`if: github.event.client_payload.confirm_store == true`).
+
+## Related Guides
+
+<CardGrid>
+  <LinkCard
+    title="Trigger from CI UI"
+    description="Same Capgo Build job, started from the Actions / Pipelines tab."
+    href="/docs/builder/ci-ui-trigger/"
+  />
+  <LinkCard
+    title="GitHub Actions setup"
+    description="Credential export and secret names used by these workflows."
+    href="/docs/builder/github-actions/"
+  />
+  <LinkCard
+    title="Auto OTA or Native"
+    description="On git push, choose live update vs native automatically."
+    href="/docs/builder/ci-ota-or-native/"
+  />
+</CardGrid>
