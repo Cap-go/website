@@ -223,14 +223,28 @@ deploy:
   needs: [build_web]
   script:
     - |
-      TYPE=$(npx @capgo/cli@latest bundle releaseType "$APP_ID" --channel "$CHANNEL" | tr -d '[:space:]')
+      BEFORE="${CI_COMMIT_BEFORE_SHA:-}"
+      if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+        BEFORE="$(git rev-parse HEAD~1 2>/dev/null || echo '')"
+      fi
+      if [ -z "$BEFORE" ] || git diff --name-only "$BEFORE" "$CI_COMMIT_SHA" \
+        | grep -qE '^(ios/|android/|capacitor\.config\.)'; then
+        TYPE=native
+      else
+        TYPE=$(npx @capgo/cli@latest bundle releaseType "$APP_ID" --channel "$CHANNEL" | tr -d '[:space:]')
+      fi
       echo "Capgo release type: $TYPE"
       if [ "$TYPE" = "OTA" ]; then
-        npx @capgo/cli@latest bundle upload "$APP_ID"           --channel "$CHANNEL"           --fail-on-incompatible
+        npx @capgo/cli@latest bundle upload "$APP_ID" \
+          --channel "$CHANNEL" \
+          --fail-on-incompatible
       elif [ "$TYPE" = "native" ]; then
         npx cap sync
         npx @capgo/cli@latest build request "$APP_ID" --platform ios --build-mode release
         npx @capgo/cli@latest build request "$APP_ID" --platform android --build-mode release
+        npx @capgo/cli@latest bundle upload "$APP_ID" \
+          --channel "$CHANNEL" \
+          --auto-min-update-version
       else
         echo "Unexpected release type: $TYPE" >&2
         exit 1
