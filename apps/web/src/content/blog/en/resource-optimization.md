@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-22T08:45:01.460Z
-updated_at: 2026-07-22T08:45:03.903Z
+updated_at: 2026-07-22T08:47:30.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/784d58c4-2fdd-457e-b8b4-d99721d4ff69/resource-optimization-cross-platform-apps.jpg'
 head_image_alt: Resource Optimization a Guide for Cross-Platform Apps
 keywords: 'resource optimization, cross-platform apps, capacitorjs, mobile performance, app development'
