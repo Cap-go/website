@@ -17,7 +17,7 @@ Sometimes you need a signed iOS or Android binary without merging a PR or cuttin
     Click Run workflow / Run pipeline. Capgo Build compiles from the branch you pick.
   </Card>
   <Card title="Safe Inputs" icon="setting">
-    Platform, build mode, and channel stay as dropdowns — no secret editing mid-run.
+    Platform and build mode use constrained choices where the host supports them (GitHub / Bitbucket / Azure). GitLab variables remain editable per run unless you define [pipeline inputs](https://docs.gitlab.com/ee/ci/yaml/#specinputs) with `options`.
   </Card>
   <Card title="Same Secrets as CI" icon="approve-check">
     Reuse the Capgo Build credentials already in your repo. Nothing new on laptops.
@@ -63,6 +63,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.mode == 'release' && 'production' || 'build-debug' }}
     strategy:
       fail-fast: false
       matrix:
@@ -83,7 +84,7 @@ jobs:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          CAPGO_IOS_PROVISIONING_MAP_BASE64: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP_BASE64 }}
+          CAPGO_IOS_PROVISIONING_MAP: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP }}
           APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
           APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
           APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
@@ -117,7 +118,7 @@ jobs:
 
 </Steps>
 
-Anyone with write access can start a build. Restrict the workflow with [GitHub Environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) (for example require reviewers before `release` mode) if you need an approval gate.
+Anyone with **write** access can start a build. The sample maps `release` runs to a GitHub Environment named `production` — create that environment and add required reviewers so store builds wait for approval. Without `environment:` on the job, environment protection rules never apply.
 
 <Aside type="tip">
 Prefer the API or another tool to click the button? Use [`gh workflow run`](https://cli.github.com/manual/gh_workflow_run) or see [Trigger Builds via Webhook](/docs/builder/webhooks/) for `repository_dispatch`.
@@ -149,8 +150,12 @@ capgo_native_manual:
         --platform "$PLATFORM" \
         --build-mode "$BUILD_MODE"
   rules:
+    # Actions / Pipelines UI → manual play button
     - if: '$CI_PIPELINE_SOURCE == "web"'
       when: manual
+    # Pipeline trigger token / webhook → run automatically
+    - if: '$CI_PIPELINE_SOURCE == "trigger"'
+      when: on_success
     - when: never
 ```
 
@@ -202,7 +207,8 @@ Run it from **Pipelines → Run pipeline → Custom: capgo-native-build**. Store
 
 ```yaml
 # azure-pipelines-capgo-manual.yml
-trigger: none   # UI / manual only
+trigger: none   # disable CI push triggers
+pr: none        # also disable PR triggers (GitHub/Bitbucket-backed projects)
 
 parameters:
   - name: platform
@@ -239,7 +245,7 @@ steps:
       # map other signing secrets from Library → Variable groups
 ```
 
-`trigger: none` means the pipeline only starts from **Pipelines → Run pipeline** (or a webhook). Add `CAPGO_TOKEN` and signing values to a variable group marked secret.
+`trigger: none` and `pr: none` keep the pipeline off automatic CI/PR runs so it starts from **Pipelines → Run pipeline** (or a webhook). If the project uses Azure Repos branch policies that queue this pipeline, disable that policy separately. Add `CAPGO_TOKEN` and signing values to a variable group marked secret.
 
 ## Recommended Inputs
 
@@ -255,7 +261,7 @@ For downloadable QA artifacts, combine debug Android with `--no-playstore-upload
 
 - Prefer environment protection rules (GitHub) or protected variables (GitLab) for `release` builds that submit to stores.
 - Do not put signing passwords in workflow `inputs` — only in secrets/variables.
-- Limit who can run workflows with branch protections and team permissions on the repo.
+- Limit who can run workflows with repository roles and team permissions (write access is required on GitHub). Branch protection alone does not control **Run workflow**; add an in-workflow authorization check if only a narrower group may start builds.
 
 ## Related Guides
 

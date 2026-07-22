@@ -46,6 +46,8 @@ GitHub accepts an authenticated API call that starts a workflow listening for `r
 
 ### 1. Workflow that listens for the webhook
 
+Validate the payload **before** checkout and before any secret-bearing step. Pass accepted values through job outputs / env vars — never interpolate `client_payload` directly into `run:` scripts ([script injection guidance](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections)).
+
 ```yaml
 # .github/workflows/capgo-build-webhook.yml
 name: Capgo Build (Webhook)
@@ -55,16 +57,59 @@ on:
     types: [capgo-native-build]
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
+    outputs:
+      platform: ${{ steps.check.outputs.platform }}
+      mode: ${{ steps.check.outputs.mode }}
+      ref: ${{ steps.check.outputs.ref }}
+      platforms_json: ${{ steps.check.outputs.platforms_json }}
+    steps:
+      - id: check
+        env:
+          RAW_PLATFORM: ${{ github.event.client_payload.platform }}
+          RAW_MODE: ${{ github.event.client_payload.mode }}
+          RAW_REF: ${{ github.event.client_payload.ref }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          PLATFORM="${RAW_PLATFORM:-android}"
+          MODE="${RAW_MODE:-release}"
+          REF="${RAW_REF:-$DEFAULT_BRANCH}"
+          case "$PLATFORM" in ios|android|both) ;; *)
+            echo "Invalid platform: $PLATFORM" >&2; exit 1;;
+          esac
+          case "$MODE" in debug|release) ;; *)
+            echo "Invalid mode: $MODE" >&2; exit 1;;
+          esac
+          # Allowlist branches / tags / full SHAs only
+          if [[ ! "$REF" =~ ^(main|master|production|release/[A-Za-z0-9._-]+|[0-9a-f]{40})$ ]]; then
+            echo "Ref not allowlisted: $REF" >&2
+            exit 1
+          fi
+          if [ "$PLATFORM" = "both" ]; then
+            PLATFORMS_JSON='["ios","android"]'
+          else
+            PLATFORMS_JSON=$(printf '["%s"]' "$PLATFORM")
+          fi
+          {
+            echo "platform=$PLATFORM"
+            echo "mode=$MODE"
+            echo "ref=$REF"
+            echo "platforms_json=$PLATFORMS_JSON"
+          } >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: validate
+    runs-on: ubuntu-latest
+    environment: ${{ needs.validate.outputs.mode == 'release' && 'production' || 'build-debug' }}
     strategy:
       fail-fast: false
       matrix:
-        platform: ${{ fromJSON(github.event.client_payload.platform == 'both' && '["ios","android"]' || format('["{0}"]', github.event.client_payload.platform || 'android')) }}
+        platform: ${{ fromJSON(needs.validate.outputs.platforms_json) }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.client_payload.ref || github.event.repository.default_branch }}
+          ref: ${{ needs.validate.outputs.ref }}
 
       - uses: actions/setup-node@v6
         with:
@@ -73,14 +118,17 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-      - run: npx cap sync ${{ matrix.platform }}
+      - name: Sync native project
+        env:
+          PLATFORM: ${{ matrix.platform }}
+        run: npx cap sync "$PLATFORM"
 
       - name: Capgo Build
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          CAPGO_IOS_PROVISIONING_MAP_BASE64: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP_BASE64 }}
+          CAPGO_IOS_PROVISIONING_MAP: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP }}
           APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
           APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
           APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
@@ -90,10 +138,11 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+          PLATFORM: ${{ matrix.platform }}
+          MODE: ${{ needs.validate.outputs.mode }}
         run: |
-          MODE="${{ github.event.client_payload.mode || 'release' }}"
           npx @capgo/cli@latest build request com.example.app \
-            --platform ${{ matrix.platform }} \
+            --platform "$PLATFORM" \
             --build-mode "$MODE"
 ```
 
@@ -150,6 +199,18 @@ export default {
       return new Response('Unauthorized', { status: 401 })
     }
     const body = await request.json().catch(() => ({}))
+    const platform = body.platform || 'both'
+    const mode = body.mode || 'release'
+    const ref = body.ref || 'main'
+    if (!['ios', 'android', 'both'].includes(platform)) {
+      return new Response('Invalid platform', { status: 400 })
+    }
+    if (!['debug', 'release'].includes(mode)) {
+      return new Response('Invalid mode', { status: 400 })
+    }
+    if (!/^(main|master|production|release\/[A-Za-z0-9._-]+|[0-9a-f]{40})$/.test(ref)) {
+      return new Response('Ref not allowlisted', { status: 400 })
+    }
     const res = await fetch(
       `https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/dispatches`,
       {
@@ -161,11 +222,7 @@ export default {
         },
         body: JSON.stringify({
           event_type: 'capgo-native-build',
-          client_payload: {
-            platform: body.platform || 'both',
-            mode: body.mode || 'release',
-            ref: body.ref || 'main',
-          },
+          client_payload: { platform, mode, ref },
         }),
       },
     )
@@ -239,10 +296,12 @@ Optional: after the run, have CI post back to the admin API with the download UR
 ## Security
 
 - Authenticate every webhook (`x-webhook-secret`, HMAC signature, or mTLS).
+- Allowlist `platform`, `mode`, and `ref` in both the proxy and the workflow `validate` job — treat `client_payload` as untrusted input.
+- Pass accepted values through env vars / job outputs; do not interpolate payload fields into `run:` scripts.
 - Keep GitHub/GitLab tokens server-side only.
 - Prefer tokens scoped to a single repository.
 - Rate-limit the proxy; native builds cost build minutes.
-- For store-submitting releases, require an extra confirmation flag in the payload and enforce it in the workflow (`if: github.event.client_payload.confirm_store == true`).
+- For store-submitting releases, map `release` to a protected GitHub Environment (as in the sample) or require an extra confirmation flag checked in `validate`.
 
 ## Related Guides
 

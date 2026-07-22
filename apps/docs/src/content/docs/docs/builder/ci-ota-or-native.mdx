@@ -31,6 +31,8 @@ npx @capgo/cli@latest bundle releaseType com.example.app --channel production
 
 `OTA` means the native packages match what is already live on the channel. `native` means a plugin, Capacitor version, or other native dependency changed — an over-the-air bundle alone cannot update those devices safely.
 
+`releaseType` compares **native package metadata** (Capacitor/Cordova plugins and versions). It does **not** see every edit under `ios/`, `android/`, or `capacitor.config.*`. Gate those paths in git first, then use `releaseType` for dependency compatibility — the examples below do both.
+
 See [Native Compatibility](/docs/live-updates/compatibility/) for the full rules and the manual `bundle compatibility` table.
 
 <Aside type="tip">
@@ -49,13 +51,14 @@ Gate every production pipeline on `releaseType`. It is cheaper than guessing, an
 <MermaidGraph graph={releaseDecisionGraph} ariaLabel="Flowchart of CI deciding between live update and Capgo Build" />
 
 1. Build web assets as usual.
-2. Ask Capgo whether this commit is OTA-safe.
-3. If `OTA`, upload the bundle.
-4. If `native`, run Capgo Build (and optionally still upload a bundle with `--fail-on-incompatible` / `--auto-min-update-version` once the binary is ready — see [Prevent incompatible deliveries](/docs/live-updates/compatibility/#prevent-incompatible-deliveries)).
+2. If the commit touches `ios/`, `android/`, or `capacitor.config.*`, force the native path.
+3. Otherwise ask Capgo `releaseType` whether the commit is OTA-safe.
+4. If `OTA`, upload the bundle (with `--fail-on-incompatible` as a safety rail).
+5. If `native`, run Capgo Build, then upload the matching bundle with `--auto-min-update-version` so the channel's native metadata advances (use the [metadata strategy](/docs/live-updates/compatibility/#prevent-incompatible-deliveries)). Do **not** use `--fail-on-incompatible` for that baseline upload — the new native packages are supposed to differ.
 
 ## GitHub Actions
 
-One workflow that branches on `releaseType`:
+One workflow that gates native paths, then branches on `releaseType`:
 
 ```yaml
 # .github/workflows/capgo-release.yml
@@ -72,6 +75,8 @@ jobs:
       release_type: ${{ steps.verdict.outputs.type }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
@@ -85,7 +90,17 @@ jobs:
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
         run: |
-          TYPE=$(npx @capgo/cli@latest bundle releaseType com.example.app --channel production | tr -d '[:space:]')
+          BEFORE="${{ github.event.before }}"
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            BEFORE="$(git rev-parse HEAD~1)"
+          fi
+          if git diff --name-only "$BEFORE" "${{ github.sha }}" \
+            | grep -qE '^(ios/|android/|capacitor\.config\.)'; then
+            TYPE=native
+            echo "Native path or Capacitor config changed — forcing native"
+          else
+            TYPE=$(npx @capgo/cli@latest bundle releaseType com.example.app --channel production | tr -d '[:space:]')
+          fi
           echo "type=$TYPE" >> "$GITHUB_OUTPUT"
           echo "Capgo release type: $TYPE"
 
@@ -131,7 +146,7 @@ jobs:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          CAPGO_IOS_PROVISIONING_MAP_BASE64: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP_BASE64 }}
+          CAPGO_IOS_PROVISIONING_MAP: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP }}
           APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
           APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
           APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
@@ -145,12 +160,33 @@ jobs:
           npx @capgo/cli@latest build request com.example.app \
             --platform ${{ matrix.platform }} \
             --build-mode release
+
+  native_bundle:
+    needs: [decide, native_build]
+    if: needs.decide.outputs.release_type == 'native'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - name: Upload bundle for new native baseline
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+        run: |
+          # One-time: channel set production --disable-auto-update metadata
+          npx @capgo/cli@latest bundle upload com.example.app \
+            --channel production \
+            --auto-min-update-version
 ```
 
 Replace `com.example.app` and wire the signing secrets as described in [GitHub Actions for Capgo Build](/docs/builder/github-actions/).
 
 <Aside>
-`--fail-on-incompatible` on the OTA job is a second safety rail: if the verdict ever races with another deploy, the upload still fails closed instead of shipping an incompatible bundle.
+`--fail-on-incompatible` belongs on the OTA job only. After a native binary ships, upload the matching bundle with `--auto-min-update-version` so later `releaseType` checks see the new native packages.
 </Aside>
 
 ## GitLab CI
@@ -215,40 +251,36 @@ The same three steps work anywhere:
 | OTA path | `npx @capgo/cli@latest bundle upload APP_ID --channel production --fail-on-incompatible` |
 | Native path | `npx @capgo/cli@latest build request APP_ID --platform ios` (or `android`) `--build-mode release` |
 
-Map the shell exit / stdout into your platform's conditionals:
+Map the shell exit / stdout into your platform's conditionals (or keep a single job with a shell `if`, like GitLab above):
 
 - **Azure Pipelines** — set an output variable from a script step, then use `condition: eq(variables['releaseType'], 'OTA')`
-- **Bitbucket Pipelines** — write the verdict to a file artifact and branch with separate steps + `condition`
-- **CircleCI** — persist `RELEASE_TYPE` in a workspace and use `when` clauses
+- **Bitbucket Pipelines** — write `RELEASE_TYPE=…` to `$BITBUCKET_PIPELINES_VARIABLES_PATH`, declare it under `output-variables`, and branch later steps with `condition: state: RELEASE_TYPE == "OTA"` (file artifacts alone cannot drive `condition`)
+- **CircleCI** — `when` is evaluated at config-compile time, so branch with a runtime shell `if` (or dynamic config / continuation), not a workspace value in `when`
 - **Jenkins** — capture stdout into an env var and use `when { environment name: 'RELEASE_TYPE', value: 'OTA' }`
 
 ## Paths Filters (Optional Speedup)
 
-`releaseType` is authoritative, but you can skip the job entirely for docs-only commits:
+Path filters are a cost optimization, not a substitute for the Capgo check. Prefer excluding docs-only paths rather than maintaining a fragile allowlist — web builds often also depend on `vite.config.*`, `tsconfig*.json`, and framework config files:
 
 ```yaml
 on:
   push:
     branches: [main]
-    paths:
-      - 'src/**'
-      - 'public/**'
-      - 'android/**'
-      - 'ios/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'capacitor.config.*'
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.github/**'
 ```
 
-Still run `releaseType` for any commit that touches app code — path filters are a cost optimization, not a substitute for the Capgo check.
+If you use an allowlist instead, include every input your web and native builds read, not only `src/` and `package.json`.
 
 ## After a Native Verdict
 
 When CI chooses native:
 
 1. Capgo Build produces signed binaries and can submit to TestFlight / Play (see [configuration](/docs/builder/configuration/)).
-2. Once users install the new binary, later JavaScript-only commits return to `OTA` again.
-3. If you upload a bundle alongside the native release, use the [metadata strategy + `--auto-min-update-version`](/docs/live-updates/compatibility/#prevent-incompatible-deliveries) so older binaries never receive the incompatible bundle.
+2. Upload the matching JS bundle with `--auto-min-update-version` (metadata strategy) so the channel records the new native packages — otherwise the next JS-only commit still returns `native`.
+3. Once users install the new binary, later JavaScript-only commits return to `OTA` again.
 
 ## Related Guides
 
