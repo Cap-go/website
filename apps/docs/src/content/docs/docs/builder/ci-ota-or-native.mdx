@@ -92,12 +92,12 @@ jobs:
         run: |
           BEFORE="${{ github.event.before }}"
           if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-            BEFORE="$(git rev-parse HEAD~1)"
+            BEFORE="$(git rev-parse HEAD~1 2>/dev/null || echo '')"
           fi
-          if git diff --name-only "$BEFORE" "${{ github.sha }}" \
+          if [ -z "$BEFORE" ] || git diff --name-only "$BEFORE" "${{ github.sha }}" \
             | grep -qE '^(ios/|android/|capacitor\.config\.)'; then
             TYPE=native
-            echo "Native path or Capacitor config changed — forcing native"
+            echo "Native path/config changed (or no prior commit) — forcing native"
           else
             TYPE=$(npx @capgo/cli@latest bundle releaseType com.example.app --channel production | tr -d '[:space:]')
           fi
