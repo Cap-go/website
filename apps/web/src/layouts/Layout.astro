@@ -4,6 +4,7 @@ import Header from '../components/Header.astro'
 import MetaPixel from '../components/MetaPixel.astro'
 import MetaPixelNoscript from '../components/MetaPixelNoscript.astro'
 import SEO from '../components/SEO.astro'
+import Affonso from '../components/Affonso.astro'
 import PostHog from '../components/posthog.astro'
 import WebMcpTools from '../components/WebMcpTools.astro'
 import globalStylesHref from '../css/global.css?url'
@@ -55,6 +56,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <SEO {...content} />
     {enableThirdPartyScripts && <MetaPixel />}
     {enableThirdPartyScripts && <PostHog />}
+    {enableThirdPartyScripts && <Affonso />}
   </head>
   <body class="bg-gray-900 text-pretty text-white antialiased">
     {enableThirdPartyScripts && <MetaPixelNoscript />}
