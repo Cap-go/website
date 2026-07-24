@@ -149,6 +149,12 @@ const navigation: Record<string, NavigationItem[]> = {
     { name: m.trust({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'trust') },
     { name: 'HIPAA compliance', href: getRelativeLocaleUrl(Astro.locals.locale, 'hipaa-compliance') },
     { name: m.consulting({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'consulting') },
+    {
+      name: 'Affiliate program',
+      href: 'https://capgo.affonso.io',
+      target: '_blank',
+      rel: 'noopener noreferrer',
+    },
   ],
   compare: [
     { name: m.alternatives({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives') },
@@ -311,7 +317,7 @@ const navigation: Record<string, NavigationItem[]> = {
           {
             navigation.company.map((item) => (
               <li>
-                <a href={item.href} class="text-sm text-zinc-400 transition-colors hover:text-white">
+                <a href={item.href} target={item.target} rel={item.rel} class="text-sm text-zinc-400 transition-colors hover:text-white">
                   {typeof item.name === 'function' ? item.name() : item.name}
                 </a>
               </li>
