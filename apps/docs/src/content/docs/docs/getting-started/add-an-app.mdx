@@ -81,9 +81,12 @@ npm i @capgo/capacitor-updater@lts-v6
 
 # Capacitor 5
 npm i @capgo/capacitor-updater@lts-v5
+
+# Capacitor 4
+npm i @capgo/capacitor-updater@lts-v4
 ```
 
-Each plugin major version matches the Capacitor major version (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). When the latest line is `8.3.4`, the matching LTS line is `7.3.4` with the same features and bug fixes. The updater receives monthly LTS backports; other Capgo plugins are backported on demand.
+Each plugin major version matches the Capacitor major version (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5, v4 → Capacitor 4). When the latest line is `8.3.4`, the matching LTS line is `7.3.4` with the same features and bug fixes. The updater receives monthly mirrored LTS backports for `v7`/`v6`/`v5`; `lts-v4` remains available for Capacitor 4 outside that cadence. Other Capgo plugins are backported on demand.
 
 The Capgo CLI major does **not** need to match the plugin or Capacitor major — always use `npx @capgo/cli@latest`. See [Capgo versioning](/docs/versioning/) for the full policy.
 </Aside>
