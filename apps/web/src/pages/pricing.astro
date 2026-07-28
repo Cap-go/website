@@ -104,6 +104,11 @@ if (plans.length > 0) {
         answer: 'If you reach your MAU limit, new users will still receive updates but you may need to upgrade your plan to continue tracking all users.',
       },
       {
+        question: 'Do all plans include the same features?',
+        answer:
+          'Yes. Every plan includes all product features — Live Updates, Native Builds, Notifications, Observe, plugins, and Automations. Capgo does not charge per seat and does not gate product features behind higher tiers. Plans differ by usage limits and support. Enterprise covers extras that take more of our time, such as SSO, custom domains, compliance paperwork, and dedicated support.',
+      },
+      {
         question: 'Can I change my plan at any time?',
         answer: 'Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately and billing is prorated.',
       },
@@ -138,7 +143,7 @@ if (plans.length > 0) {
           {m.plans_that_scale_with_your_business({}, { locale: Astro.locals.locale })}
         </h1>
         <p class="font-pj mx-auto mt-6 max-w-2xl text-lg leading-8 font-normal text-gray-600 sm:text-xl">
-          Live Updates, Native Builds, Notifications, App Store Publishing, plugins, and Automations in one platform.
+          Live Updates, Native Builds, Notifications, Observe, App Store Publishing, plugins, and Automations in one platform.
         </p>
       </div>
 
@@ -183,14 +188,23 @@ if (plans.length > 0) {
         }
       </div>
 
-      <section class="mx-auto mb-8 max-w-6xl overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">
+      <p class="font-pj mx-auto mb-8 max-w-3xl text-center text-base leading-7 text-gray-600">
+        Every plan includes all product features — Live Updates, Native Builds, Notifications, Observe, plugins, and Automations. No per-seat pricing and no feature gates between plans.
+        Enterprise only covers extras that take more of our time, like SSO, custom domains, compliance paperwork, and dedicated support.
+      </p>
+
+      {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
+
+      {plans && plans.length > 0 && <ComparePlans pricing={plans} />}
+
+      <section class="mx-auto mt-16 mb-8 max-w-6xl overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">
         <div class="grid gap-0 lg:grid-cols-[1fr_auto]">
           <div class="border-b border-blue-100 p-6 sm:p-8 lg:border-r lg:border-b-0 lg:p-10">
-            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">New release control</p>
-            <h2 class="mt-4 text-2xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-3xl">Notifications now trigger live-update checks.</h2>
+            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Notifications</p>
+            <h2 class="mt-4 text-2xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-3xl">Notifications can trigger live-update checks.</h2>
             <p class="mt-4 max-w-3xl text-base leading-7 text-gray-600">
               Send native iOS and Android notifications, update badges, inspect campaign stats, and use silent pushes to ask opted-in devices to download the latest Capgo bundle
-              during a progressive rollout.
+              during a progressive rollout. Included on every plan.
             </p>
             <dl class="mt-6 grid gap-4 text-sm sm:grid-cols-3">
               <div>
@@ -215,18 +229,14 @@ if (plans.length > 0) {
               Explore notifications
             </a>
             <a
-              href="#compare-plans"
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'observe')}
               class="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-200 bg-white px-5 py-3 text-sm font-semibold text-blue-800 transition-colors hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             >
-              Compare included features
+              Explore Observe
             </a>
           </div>
         </div>
       </section>
-
-      {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
-
-      {plans && plans.length > 0 && <ComparePlans pricing={plans} />}
 
       <div class="pb-24 sm:pb-32">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -349,7 +359,7 @@ if (plans.length > 0) {
     <p class="mt-4">
       If you are comparing Capgo plans, connect pricing with <a href="/live-update/">Capgo Live Updates</a> for the main release workflow, <a href="/notifications/"
         >Capgo Notifications</a
-      > for native push and update checks, <a href="/native-build/">Capgo Native Builds</a> for signed binaries, <a href="/plugins/">Capgo Plugin Directory</a> for native features, <a
+      > for native push and update checks, <a href="/observe/">Capgo Observe</a> for release health, <a href="/native-build/">Capgo Native Builds</a> for signed binaries, <a href="/plugins/">Capgo Plugin Directory</a> for native features, <a
         href="/enterprise/">Capgo Enterprise</a
       > for larger teams, and <a href="/premium-support/">Premium Support</a> for production help.
     </p>

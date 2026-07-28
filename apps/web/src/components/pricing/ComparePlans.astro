@@ -84,8 +84,14 @@ const rows: CompareSection[] = [
         value: () => 'Unlimited',
       },
       {
-        label: 'Native notifications',
-        value: () => true,
+        label: 'Seat-based pricing',
+        faqHref: '#faq-all-features',
+        value: () => 'No — unlimited members on every plan',
+      },
+      {
+        label: 'Product feature gates',
+        faqHref: '#faq-all-features',
+        value: () => 'No — all product features on every plan',
       },
       {
         label: 'Org statistics',
@@ -101,6 +107,50 @@ const rows: CompareSection[] = [
       },
       {
         label: m.mcp_server({}, { locale: Astro.locals.locale }),
+        value: () => true,
+      },
+    ],
+  },
+  {
+    group: 'Notifications',
+    items: [
+      {
+        label: 'Capgo Notifications',
+        href: '/notifications/',
+        value: () => 'Included',
+      },
+      {
+        label: 'Native iOS & Android push',
+        value: () => true,
+      },
+      {
+        label: 'Silent push update checks',
+        value: () => true,
+      },
+      {
+        label: 'Campaign stats & badge updates',
+        value: () => true,
+      },
+    ],
+  },
+  {
+    group: 'Observe',
+    items: [
+      {
+        label: 'Capgo Observe',
+        href: '/observe/',
+        value: () => 'Included',
+      },
+      {
+        label: 'Release health by version',
+        value: () => true,
+      },
+      {
+        label: 'Launch & WebView timing',
+        value: () => true,
+      },
+      {
+        label: 'Logs Insights investigation',
         value: () => true,
       },
     ],
@@ -135,10 +185,6 @@ const rows: CompareSection[] = [
       },
       {
         label: 'Delta updates',
-        value: () => true,
-      },
-      {
-        label: 'Silent push update checks',
         value: () => true,
       },
       {
@@ -293,7 +339,9 @@ const rows: CompareSection[] = [
   <div class="mx-auto max-w-3xl text-center">
     <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Compare plans</p>
     <h2 class="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">All plan differences, in one view.</h2>
-    <p class="mt-4 text-base leading-7 text-gray-600">Use the cards above to pick a starting point. Use this table when you need the exact limits and controls.</p>
+    <p class="mt-4 text-base leading-7 text-gray-600">
+      Every plan gets Live Updates, Notifications, Observe, Native Builds, plugins, and Automations. Plans differ by usage limits and support — not by locking product features. Enterprise adds extras that take more of our time.
+    </p>
     <p class="mt-3 text-xs font-semibold tracking-wide text-gray-500 uppercase sm:hidden">Swipe sideways to compare plans</p>
   </div>
 
