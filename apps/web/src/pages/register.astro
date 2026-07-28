@@ -281,6 +281,14 @@ const content = {
         last_name: lastName.value,
       })
     }
+    if ((window as any).Affonso?.signup) {
+      const fullName = `${firstName.value} ${lastName.value}`.trim()
+      ;(window as any).Affonso.signup({
+        email: email.value,
+        externalUserId: (user as any)?.user?.id,
+        name: fullName || undefined,
+      })
+    }
     const consoleUrl = `https://console.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
     await new Promise((resolve) => setTimeout(resolve, 400))
     window.location.href = consoleUrl
