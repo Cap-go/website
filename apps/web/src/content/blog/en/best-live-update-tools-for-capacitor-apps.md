@@ -113,41 +113,29 @@ It is not the direct fit for Capacitor because Capacitor apps do not normally us
 
 ## FAQ
 
-::: faq
 ### What is the best live update tool for Capacitor apps in 2026?
 
 For most production Capacitor teams, Capgo is the best choice because it combines live updates, rollback, channels, logs, native builds, self-hosting options, and end-to-end encrypted updates in one Capacitor-focused workflow.
-:::
 
-::: faq
 ### Is Expo EAS Update a good choice for Capacitor apps?
 
 Usually no. Expo EAS Update is built around Expo and React Native projects that use `expo-updates`. It is an excellent tool for that ecosystem, but it is not the direct live update platform for a Capacitor app.
-:::
 
-::: faq
 ### Should Appflow users migrate before December 31, 2027?
 
 Yes. Ionic says existing Appflow users have access through December 31, 2027. That gives teams time to migrate, but it is not a reason to delay planning release operations, credentials, CI/CD, and OTA update workflows.
-:::
 
-::: faq
 ### Is Microsoft CodePush still available?
 
 Visual Studio App Center retired on March 31, 2025. Microsoft published standalone CodePush source code as a migration path, but the GitHub repository is archived, so it should be treated as a legacy option rather than a new hosted service.
-:::
 
-::: faq
 ### Should I choose Capgo or Capawesome Cloud?
 
 Choose Capgo if you want a Capacitor-focused release platform with live updates, native builds, rollback, logs, self-hosting options, end-to-end encrypted updates, and migration support. Choose Capawesome Cloud if you are already in that ecosystem and its pricing and operational model fit your team.
-:::
 
-::: faq
 ### When is OtaKit the right choice?
 
 OtaKit is the right choice when you want a lightweight Capacitor OTA tool with an open-source core and do not need native builds, broader plugin coverage, or a complete production release operations platform.
-:::
 
 ## Sources
 

@@ -88,35 +88,25 @@ If your question is "what replaces CodePush for Capacitor?", the answer is not "
 
 ## FAQ
 
-::: faq
 ### What is the best CodePush alternative for Capacitor apps?
 
 Capgo is the best CodePush alternative for Capacitor apps because it provides maintained live updates for web-layer changes plus rollback, channels, device logs, end-to-end encryption, native builds, CI/CD integration, and self-hosting options.
-:::
 
-::: faq
 ### What is the best CodePush alternative for Ionic apps?
 
 If the Ionic app is built with Capacitor or Cordova, Capgo is the best fit for CodePush-style live updates. If the Ionic app still depends on an Appflow workflow, plan the Appflow migration before December 31, 2027.
-:::
 
-::: faq
 ### What is the best CodePush alternative for React Native apps?
 
 For Expo or React Native apps that can use `expo-updates`, evaluate Expo EAS Update. If your team needs a CodePush-shaped self-hosted system, evaluate the standalone CodePush repository with the understanding that it is archived.
-:::
 
-::: faq
 ### Is App Center still available?
 
 Visual Studio App Center retired on March 31, 2025. Microsoft extended Analytics and Diagnostics support separately, but App Center should not be treated as a current hosted CodePush platform.
-:::
 
-::: faq
 ### Is standalone CodePush a safe long-term choice?
 
 Standalone CodePush can work for teams prepared to self-host and maintain it. It is not the easiest long-term path for most teams because the Microsoft repository is archived and all operational responsibility moves to your team.
-:::
 
 ## Sources
 
