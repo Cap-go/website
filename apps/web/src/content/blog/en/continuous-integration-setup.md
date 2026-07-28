@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-28T08:33:33.427Z
-updated_at: 2026-07-28T08:33:34.690Z
+updated_at: 2026-07-28T08:36:06.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/ff72a356-0c7e-4ba0-8c99-b7da9a18b6fa/continuous-integration-setup-ci-setup.jpg'
 head_image_alt: Continuous Integration Setup for Capacitor and Electron Apps
 keywords: 'continuous integration setup, CapacitorJS CI, Electron CI pipeline, Capgo live updates, GitHub Actions mobile'
