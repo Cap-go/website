@@ -106,7 +106,7 @@ if (plans.length > 0) {
       {
         question: 'Do all plans include the same features?',
         answer:
-          'Yes. Every plan includes all product features — Live Updates, Native Builds, Notifications, Observe, plugins, and Automations. Capgo does not charge per seat and does not gate product features behind higher tiers. Plans differ by usage limits and support. Enterprise covers extras that take more of our time, such as SSO, custom domains, compliance paperwork, and dedicated support.',
+          'Yes for core products. Every plan includes Live Updates, Native Builds, Notifications, Observe, Capgo plugins, and Automations. Capgo does not charge per seat or lock those products behind higher tiers. Plans differ by usage limits and support. Enterprise covers extras that take more of our time, such as SSO, custom domains, compliance paperwork, and dedicated support.',
       },
       {
         question: 'Can I change my plan at any time?',
@@ -189,8 +189,8 @@ if (plans.length > 0) {
       </div>
 
       <p class="font-pj mx-auto mb-8 max-w-3xl text-center text-base leading-7 text-gray-600">
-        Every plan includes all product features — Live Updates, Native Builds, Notifications, Observe, plugins, and Automations. No per-seat pricing and no feature gates between plans.
-        Enterprise only covers extras that take more of our time, like SSO, custom domains, compliance paperwork, and dedicated support.
+        Every plan includes Live Updates, Native Builds, Notifications, Observe, Capgo plugins, and Automations. No per-seat pricing, and those core products are not locked behind higher tiers.
+        Enterprise covers extras that take more of our time, like SSO, custom domains, compliance paperwork, and dedicated support.
       </p>
 
       {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
@@ -359,7 +359,7 @@ if (plans.length > 0) {
     <p class="mt-4">
       If you are comparing Capgo plans, connect pricing with <a href="/live-update/">Capgo Live Updates</a> for the main release workflow, <a href="/notifications/"
         >Capgo Notifications</a
-      > for native push and update checks, <a href="/observe/">Capgo Observe</a> for release health, <a href="/native-build/">Capgo Native Builds</a> for signed binaries, <a href="/plugins/">Capgo Plugin Directory</a> for native features, <a
+      > for native push and update checks, <a href={getRelativeLocaleUrl(Astro.locals.locale, 'observe')}>Capgo Observe</a> for release health, <a href="/native-build/">Capgo Native Builds</a> for signed binaries, <a href="/plugins/">Capgo Plugin Directory</a> for native features, <a
         href="/enterprise/">Capgo Enterprise</a
       > for larger teams, and <a href="/premium-support/">Premium Support</a> for production help.
     </p>

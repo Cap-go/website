@@ -95,7 +95,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 
           <div class="mt-6 lg:mt-8">
             <div class="flex items-end gap-1">
-              <p class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl" data-price>
+              <p class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl" data-price aria-live="polite">
                 {priceDisplay(plan.price_m, plan.price_y, plan.name)}
               </p>
               <p class="pb-1 text-xs font-semibold tracking-wide text-gray-500 uppercase">/{m.month({}, { locale: Astro.locals.locale })}</p>

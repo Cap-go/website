@@ -1,5 +1,6 @@
 ---
 import { numberWithSpaces } from '@/services/misc'
+import { getRelativeLocaleUrl } from '@/services/links'
 import type { Database } from '@/services/supabase.types'
 import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { pricing } = Astro.props
+const locale = Astro.locals.locale
 type Plan = Database['public']['Tables']['plans']['Row']
 type CompareValue = string | boolean
 
@@ -89,9 +91,9 @@ const rows: CompareSection[] = [
         value: () => 'No — unlimited members on every plan',
       },
       {
-        label: 'Product feature gates',
+        label: 'Core product features',
         faqHref: '#faq-all-features',
-        value: () => 'No — all product features on every plan',
+        value: () => 'Included on every plan',
       },
       {
         label: 'Org statistics',
@@ -116,7 +118,7 @@ const rows: CompareSection[] = [
     items: [
       {
         label: 'Capgo Notifications',
-        href: '/notifications/',
+        href: getRelativeLocaleUrl(locale, 'notifications'),
         value: () => 'Included',
       },
       {
@@ -138,7 +140,7 @@ const rows: CompareSection[] = [
     items: [
       {
         label: 'Capgo Observe',
-        href: '/observe/',
+        href: getRelativeLocaleUrl(locale, 'observe'),
         value: () => 'Included',
       },
       {
@@ -340,7 +342,7 @@ const rows: CompareSection[] = [
     <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Compare plans</p>
     <h2 class="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">All plan differences, in one view.</h2>
     <p class="mt-4 text-base leading-7 text-gray-600">
-      Every plan gets Live Updates, Notifications, Observe, Native Builds, plugins, and Automations. Plans differ by usage limits and support — not by locking product features. Enterprise adds extras that take more of our time.
+      Every plan includes Live Updates, Notifications, Observe, Native Builds, Capgo plugins, and Automations. Plans differ by usage limits and support level — not by locking those core products. Enterprise and higher-tier plugin support cover extras that take more of our time.
     </p>
     <p class="mt-3 text-xs font-semibold tracking-wide text-gray-500 uppercase sm:hidden">Swipe sideways to compare plans</p>
   </div>
