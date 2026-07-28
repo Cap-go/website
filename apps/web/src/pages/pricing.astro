@@ -26,7 +26,7 @@ const makeSeoTitle = (primary: string, descriptionText: string) => {
   if (base.length >= 50 && base.length <= 60) return base
   if (base.length > 60) return base.slice(0, 60).trimEnd()
 
-  const separator = ' — '
+  const separator = ', '
   const available = 60 - base.length - separator.length
   if (available <= 0) return base
 
@@ -138,11 +138,11 @@ if (plans.length > 0) {
 <Layout content={content}
   ><section class="bg-gray-50 pt-12 sm:pt-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto mb-8 max-w-4xl text-center sm:mb-14">
+      <div class="mx-auto mb-6 max-w-4xl text-center sm:mb-8">
         <h1 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl">
           {m.plans_that_scale_with_your_business({}, { locale: Astro.locals.locale })}
         </h1>
-        <p class="font-pj mx-auto mt-6 max-w-2xl text-lg leading-8 font-normal text-gray-600 sm:text-xl">
+        <p class="font-pj mx-auto mt-4 max-w-2xl text-base leading-7 font-normal text-gray-600 sm:text-lg">
           Live Updates, Native Builds, Notifications, Observe, App Store Publishing, plugins, and Automations in one platform.
         </p>
       </div>
@@ -187,11 +187,6 @@ if (plans.length > 0) {
           )
         }
       </div>
-
-      <p class="font-pj mx-auto mb-8 max-w-3xl text-center text-base leading-7 text-gray-600">
-        Every plan includes Live Updates, Native Builds, Notifications, Observe, Capgo plugins, and Automations. No per-seat pricing, and those core products are not locked behind higher tiers.
-        Enterprise covers extras that take more of our time, like SSO, custom domains, compliance paperwork, and dedicated support.
-      </p>
 
       {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
 
