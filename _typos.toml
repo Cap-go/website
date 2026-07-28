@@ -53,3 +53,6 @@ passin = "passin"  # OpenSSL password input flag
 [default.extend-identifiers]
 # Keep "PNGs" whole; otherwise typos splits it into "PN" + "Gs" and flags "PN" -> "ON"
 PNGs = "PNGs"
+# Keep "OTPs" whole; otherwise typos splits it into "OT" + "Ps" and flags "OT" -> "TO"
+OTPs = "OTPs"
+OTP = "OTP"
