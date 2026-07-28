@@ -11,6 +11,10 @@ import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
 Use Capgo's Live Updates feature to update the JavaScript bundles of your app remotely, in real-time. Push JS updates directly to your users without going through the app store review process to instantly fix bugs and ship new features.
 
+<Aside type="tip" title="Always use the latest CLI">
+Always run Capgo CLI with `@latest` (for example `npx @capgo/cli@latest`). The CLI follows its own versioning and does **not** need to match your plugin major or Capacitor major. The latest CLI stays compatible with any supported updater plugin version. See [Capgo versioning](/docs/versioning/).
+</Aside>
+
 <Aside>
 
 Live Updates are limited to JavaScript bundle changes. If you need to update native code, such as adding or removing a plugin or changing native project configuration, you'll need to submit a new native binary build to the app stores.

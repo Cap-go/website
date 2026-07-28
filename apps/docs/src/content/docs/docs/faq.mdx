@@ -13,6 +13,10 @@ Code push, also referred to as "over-the-air updates" (OTA) is a cloud service e
 
 "Code Push" is a reference to the name of a deploy feature used by the React Native community from [Microsoft](https://appcenter.ms/) and [Expo](https://expo.dev/), neither of which support Capacitor.
 
+### Do Capgo CLI majors need to match my plugin or Capacitor version?
+
+No. Always use the latest Capgo CLI (`npx @capgo/cli@latest`). The CLI and Capgo Console follow their own versioning and stay compatible with any supported updater plugin major. Capgo plugins follow Capacitor majors; see [Capgo versioning](/docs/versioning/) for LTS tags such as `@lts-v7`.
+
 ### What is the difference between a bundle and a release?[](https://capgo.app/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "Direct link to What is the difference between a bundle and a release?")
 
 We use the term "release" to mean preparing a binary for the app stores. In order to later generate a bundle Capgo needs to know the exact binary that was shipped to the app stores.
