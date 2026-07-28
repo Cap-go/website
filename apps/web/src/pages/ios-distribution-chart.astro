@@ -1,0 +1,210 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+import iosDistribution from '@/data/ios-distribution.json'
+
+interface IosRow {
+  version: string
+  released: string
+  cumulativeUsage: number | null
+  lastIosFor: string
+}
+
+interface IosData {
+  updatedAt: string
+  source: string
+  sourceUrl: string
+  fetchedAt: string
+  data: IosRow[]
+}
+
+const data = iosDistribution as IosData
+
+const locale = Astro.locals.locale
+const title = 'iOS Version Distribution Chart'
+const description = `Cumulative usage of each major iOS version. Data from ${data.source}, refreshed automatically.`
+
+const content = {
+  title,
+  description,
+  keywords: 'ios version distribution, ios version market share, ios usage, capacitor ios support',
+  ldJSON: createLdJsonGraph(
+    Astro.locals.runtimeConfig.public,
+    createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+      name: title,
+      description,
+      url: Astro.url.href,
+    }),
+    { includeOrganization: true },
+  ),
+}
+
+const updatedDate = new Date(data.updatedAt)
+const updatedFormatted = updatedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+
+const rowsWithData = data.data.filter((row) => typeof row.cumulativeUsage === 'number')
+const latestVersion = rowsWithData[0]
+
+function formatPercent(value: number | null) {
+  if (value === null) return '—'
+  return `${value.toFixed(value < 1 ? 1 : value % 1 === 0 ? 0 : 1).replace(/\.0$/, '')}%`
+}
+---
+
+<Layout content={content}>
+  <section class="relative overflow-hidden border-b border-white/10 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute top-10 -left-16 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl"></div>
+      <div class="absolute top-0 right-0 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl">
+        <p class="text-sm font-semibold tracking-[0.3em] text-blue-300 uppercase">iOS platform data</p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">{title}</h1>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+          Cumulative usage of each major iOS version. Use it to pick a deployment target for your Capacitor, React Native, Flutter, or native iOS app.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4 text-sm text-slate-400">
+          <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1">
+            Updated {updatedFormatted}
+          </span>
+          <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1">
+            Source:
+            <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer" class="ml-1 text-blue-300 underline underline-offset-4 hover:text-blue-200">
+              {data.source}
+            </a>
+          </span>
+          {
+            latestVersion && (
+              <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                Latest tracked: {latestVersion.version} ({formatPercent(latestVersion.cumulativeUsage)})
+              </span>
+            )
+          }
+        </div>
+
+        <div class="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5 sm:flex sm:items-center sm:justify-between">
+          <div>
+            <p class="text-sm font-semibold text-white">Need the Android version breakdown?</p>
+            <p class="text-sm text-slate-400">Compare Android version market share on the companion page.</p>
+          </div>
+          <a
+            href={getRelativeLocaleUrl(locale, 'android-distribution-chart')}
+            class="mt-4 inline-flex items-center justify-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-green-300/60 hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-green-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none sm:mt-0"
+          >
+            Open Android distribution chart
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="text-sm font-semibold tracking-[0.25em] text-blue-300 uppercase">Cumulative usage</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">iOS version cumulative usage</h2>
+        <p class="mt-3 text-slate-400">Percentage of devices running at least a given iOS version. Higher is better for dropping older releases.</p>
+      </div>
+
+      <div class="space-y-3">
+        {
+          rowsWithData.map((row) => (
+            <div class="group grid items-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:grid-cols-[140px_1fr_80px]">
+              <div>
+                <p class="font-medium text-white">{row.version}</p>
+                <p class="text-xs text-slate-400">Released {row.released}</p>
+              </div>
+              <div class="h-3 w-full overflow-hidden rounded-full bg-white/10">
+                <div
+                  class="h-full rounded-full bg-linear-to-r from-blue-400 to-cyan-400 transition-all duration-700 ease-out"
+                  style={`width: ${Math.min(100, row.cumulativeUsage ?? 0)}%`}
+                />
+              </div>
+              <p class="text-right font-mono text-sm font-semibold text-white">{formatPercent(row.cumulativeUsage)}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-white/10 bg-slate-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Device coverage</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">Last iOS version for devices</h2>
+        <p class="mt-3 text-slate-400">Which devices are capped at each iOS version. Useful when you plan minimum OS support.</p>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-white/10">
+        <table class="w-full text-left text-sm">
+          <thead class="border-b border-white/10 bg-white/5 text-slate-400">
+            <tr>
+              <th class="px-4 py-3 font-medium">Version</th>
+              <th class="px-4 py-3 font-medium">Released</th>
+              <th class="px-4 py-3 font-medium">Cumulative usage</th>
+              <th class="px-4 py-3 font-medium">Last iOS for</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10">
+            {
+              data.data.map((row) => (
+                <tr class="hover:bg-white/[0.03]">
+                  <td class="px-4 py-3 font-medium text-white">{row.version}</td>
+                  <td class="px-4 py-3 text-slate-400">{row.released}</td>
+                  <td class="px-4 py-3">
+                    <div class="flex items-center gap-3">
+                      <span class="font-mono font-semibold text-white">{formatPercent(row.cumulativeUsage)}</span>
+                      {typeof row.cumulativeUsage === 'number' && (
+                        <div class="hidden h-2 w-24 overflow-hidden rounded-full bg-white/10 sm:block sm:w-32">
+                          <div class="h-full rounded-full bg-linear-to-r from-cyan-400 to-blue-500" style={`width: ${Math.min(100, row.cumulativeUsage)}%`} />
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                  <td class="max-w-xs px-4 py-3 text-slate-400">{row.lastIosFor || '—'}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-8 sm:p-10">
+        <h2 class="text-2xl font-bold text-white">How this data is kept current</h2>
+        <p class="mt-4 max-w-3xl text-sm leading-7 text-slate-300">
+          A daily job fetches the latest numbers from the sources above. If the figures changed, the JSON files are committed automatically; if not, the repo stays untouched. The
+          pages read these files at build time, so the charts are always in sync with the latest published data.
+        </p>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={getRelativeLocaleUrl(locale, 'android-distribution-chart')}
+            class="inline-flex items-center justify-center rounded-xl bg-blue-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-blue-300 focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
+          >
+            See Android distribution chart
+          </a>
+          <a
+            href="https://github.com/Cap-go/landing/tree/main/apps/web/src/data"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-blue-300/60 hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
+          >
+            View raw data
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -19,6 +19,7 @@
     "refresh:website-stats": "WEBSITE_STATS_REFRESH=true bun run scripts/fetch-website-stats.ts",
     "refresh:stars": "GITHUB_STATS_REFRESH=true bun run scripts/fetch-github-stars.ts",
     "refresh:downloads": "NPM_DOWNLOADS_REFRESH=true bun run scripts/fetch-npm-downloads.ts",
+    "scrape:distribution-charts": "bun run scripts/scrape-distribution-charts.ts",
     "generate:social-images": "bun run scripts/generate-social-images.ts",
     "just:build": "bun run build",
     "build:web": "cd apps/web && bun run build",

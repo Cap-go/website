@@ -1,0 +1,122 @@
+{
+  "updatedAt": "2026-07-27T21:00:00.000Z",
+  "source": "iOS Ref",
+  "sourceUrl": "https://iosref.com/ios-usage",
+  "fetchedAt": "2026-07-28T17:30:25.916Z",
+  "data": [
+    {
+      "version": "iOS 27",
+      "released": "2026",
+      "cumulativeUsage": null,
+      "lastIosFor": "—"
+    },
+    {
+      "version": "iOS 26",
+      "released": "2025",
+      "cumulativeUsage": 67.8,
+      "lastIosFor": "—"
+    },
+    {
+      "version": "iOS 18",
+      "released": "2024",
+      "cumulativeUsage": 87.2,
+      "lastIosFor": "iPhone XS / XS Max , iPhone XR"
+    },
+    {
+      "version": "iOS 17",
+      "released": "2023",
+      "cumulativeUsage": 90.6,
+      "lastIosFor": "—"
+    },
+    {
+      "version": "iOS 16",
+      "released": "2022",
+      "cumulativeUsage": 94,
+      "lastIosFor": "iPhone X , iPhone 8 / 8 Plus"
+    },
+    {
+      "version": "iOS 15",
+      "released": "2021",
+      "cumulativeUsage": 96,
+      "lastIosFor": "iPhone 7 / 7 Plus ,iPhone SE (gen 1) , iPhone 6s / 6s Plus"
+    },
+    {
+      "version": "iOS 14",
+      "released": "2020",
+      "cumulativeUsage": 96.3,
+      "lastIosFor": "—"
+    },
+    {
+      "version": "iOS 13",
+      "released": "2019",
+      "cumulativeUsage": 96.4,
+      "lastIosFor": ""
+    },
+    {
+      "version": "iOS 12",
+      "released": "2018",
+      "cumulativeUsage": 96.8,
+      "lastIosFor": "iPhone 6 / 6 Plus , iPhone 5s"
+    },
+    {
+      "version": "iOS 11",
+      "released": "2017",
+      "cumulativeUsage": 99.2,
+      "lastIosFor": "—"
+    },
+    {
+      "version": "iOS 10",
+      "released": "2016",
+      "cumulativeUsage": 99.3,
+      "lastIosFor": "iPhone 5c , iPhone 5"
+    },
+    {
+      "version": "iOS 9",
+      "released": "2015",
+      "cumulativeUsage": 99.3,
+      "lastIosFor": "iPhone 4s"
+    },
+    {
+      "version": "iOS 8",
+      "released": "2014",
+      "cumulativeUsage": 99.3,
+      "lastIosFor": "—"
+    },
+    {
+      "version": "iOS 7",
+      "released": "2013",
+      "cumulativeUsage": 99.3,
+      "lastIosFor": "iPhone 4"
+    },
+    {
+      "version": "iOS 6",
+      "released": "2012",
+      "cumulativeUsage": 99.3,
+      "lastIosFor": "iPhone 3GS"
+    },
+    {
+      "version": "iOS 5",
+      "released": "2011",
+      "cumulativeUsage": 99.3,
+      "lastIosFor": "—"
+    },
+    {
+      "version": "iOS 4",
+      "released": "2010",
+      "cumulativeUsage": 99.3,
+      "lastIosFor": "iPhone 3G"
+    },
+    {
+      "version": "iOS 3",
+      "released": "2009",
+      "cumulativeUsage": null,
+      "lastIosFor": "iPhone (gen 1)"
+    },
+    {
+      "version": "iOS 2",
+      "released": "2008",
+      "cumulativeUsage": null,
+      "lastIosFor": ""
+    }
+  ]
+}
