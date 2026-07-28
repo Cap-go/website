@@ -65,6 +65,32 @@ All three URLs must be configured together to ensure full functionality of the C
 
 Due to network performance limitations caused by the Great Firewall of China, we have specific recommendations for apps deployed in mainland China:
 
+
+### Increase API Response Timeout
+
+The Capgo updater plugin aborts API calls when `responseTimeout` is exceeded (value is in **seconds**). Edge infrastructure in front of Capgo also treats about **3 seconds** as a failure budget for some paths.
+
+In mainland China, cross-border latency is often higher. Keep a higher `responseTimeout` so the plugin has enough room to finish update checks and downloads through `updater.capgo.com.cn` instead of failing early:
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'atBackground',
+      // Seconds. Raise above the default (20) for China network conditions.
+      responseTimeout: 60,
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+```
+
+<Aside type="tip">
+Prefer `responseTimeout: 60` (or higher) for China deployments. A low timeout does not make updates faster — it only causes the plugin to give up while the request may still succeed on Capgo's side.
+</Aside>
+
 ### Use Background Updates
 
 We **strongly recommend using `autoUpdate: 'atBackground'`** for apps in China. Network connectivity in China is less performant than in other regions, and instant apply modes can lead to a poor user experience if downloads are interrupted or slow.
@@ -102,6 +128,7 @@ const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
       autoUpdate: 'atBackground', // Recommended for better reliability in China
+      responseTimeout: 60, // Seconds — give China network more room
       updateUrl: 'https://updater.capgo.com.cn/updates',
       statsUrl: 'https://updater.capgo.com.cn/stats',
       channelUrl: 'https://updater.capgo.com.cn/channel_self',
@@ -188,10 +215,11 @@ If you need assistance with multi-region deployment strategies, please contact u
 If you experience issues with updates in China:
 
 1. **Verify your configuration** - Double-check that all three URLs are correctly set in your `capacitor.config.ts`
-2. **Check network connectivity** - Ensure your device can reach the `updater.capgo.com.cn` domain
-3. **Review logs** - Use `npx @capgo/cli@latest app debug` to check for error messages
-4. **Test updates** - Try uploading a new bundle and monitoring the download process
-5. **Contact support** - If issues persist, reach out to us at [support@capgo.app](mailto:support@capgo.app) or join our [Discord community](https://discord.capgo.app) for assistance
+2. **Raise `responseTimeout`** - Use at least `60` seconds in China so the plugin does not abort while the update request is still in flight
+3. **Check network connectivity** - Ensure your device can reach the `updater.capgo.com.cn` domain
+4. **Review logs** - Use `npx @capgo/cli@latest app debug` to check for error messages
+5. **Test updates** - Try uploading a new bundle and monitoring the download process
+6. **Contact support** - If issues persist, reach out to us at [support@capgo.app](mailto:support@capgo.app) or join our [Discord community](https://discord.capgo.app) for assistance
 
 <Aside type="caution">
 Make sure to use the `.cn` domain (`updater.capgo.com.cn`) and not the standard international domain when configuring for China.
