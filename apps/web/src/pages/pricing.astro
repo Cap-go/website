@@ -26,7 +26,7 @@ const makeSeoTitle = (primary: string, descriptionText: string) => {
   if (base.length >= 50 && base.length <= 60) return base
   if (base.length > 60) return base.slice(0, 60).trimEnd()
 
-  const separator = ', '
+  const separator = ' - '
   const available = 60 - base.length - separator.length
   if (available <= 0) return base
 
