@@ -42,7 +42,7 @@ Microsoft also published a standalone CodePush server repository as an alternati
 
 ## Choose by migration scenario
 
-### If you use Capacitor, Ionic, or Cordova
+### If you use Capacitor or Ionic with Capacitor
 
 Use Capgo when you want a maintained CodePush-style OTA workflow for web-layer changes. The practical migration is to move the update workflow, not just the build workflow:
 
@@ -53,6 +53,16 @@ Use Capgo when you want a maintained CodePush-style OTA workflow for web-layer c
 5. Monitor device logs, adoption, failures, and rollback events in the Capgo dashboard.
 
 Start with [Migrating from App Center to Capgo](/blog/appcenter-migration/) if you want the step-by-step migration guide.
+
+### If you use Cordova
+
+Cordova apps should use Capgo's dedicated Cordova updater instead of the Capacitor plugin. The migration shape is similar, but the client plugin and JavaScript API are different:
+
+1. Replace the old CodePush or App Center update dependency with [`@capgo/cordova-updater`](/docs/plugins/cordova-updater/getting-started/).
+2. Configure the app to call `cordova.plugins.Updater.notifyAppReady()` after `deviceready` so failed updates can roll back safely.
+3. Create production, staging, and beta channels.
+4. Upload web bundles from CI/CD with the same Capgo release workflow.
+5. Monitor device logs, adoption, failures, and rollback events in the Capgo dashboard.
 
 ### If you use React Native or Expo
 
@@ -117,6 +127,7 @@ Standalone CodePush can work for teams prepared to self-host and maintain it. It
 - [Ionic announcement about Appflow and other commercial products](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)
 - [Capgo Live Updates](/live-update/)
 - [Capgo getting started guide](/docs/getting-started/quickstart/)
+- [Capgo Cordova updater guide](/docs/plugins/cordova-updater/getting-started/)
 
 ## Keep going
 
