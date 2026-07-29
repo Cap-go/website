@@ -26,7 +26,7 @@ For **Expo or React Native apps**, evaluate **Expo EAS Update** first if you are
 
 ## What changed
 
-Microsoft retired Visual Studio App Center on **March 31, 2025**. After that date, App Center sign-in and API calls stopped for the retired features. Microsoft extended Analytics and Diagnostics support separately, but CodePush as a hosted App Center workflow is not a current production platform.
+Microsoft retired Visual Studio App Center on **March 31, 2025**. After that date, App Center sign-in and API calls stopped for the retired features. Microsoft extended Analytics and Diagnostics support through **March 31, 2027**, but CodePush as a hosted App Center workflow is not a current production platform.
 
 Microsoft also published a standalone CodePush server repository as an alternative migration path. That repository was archived on **May 20, 2025**, so teams choosing it should plan for self-maintenance, security ownership, hosting, and operational support.
 
