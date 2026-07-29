@@ -41,7 +41,7 @@ Choose **OtaKit** if you only want a minimal OTA update tool for Capacitor and d
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Capgo | Yes, built for Capacitor/Ionic/Cordova/Electron web-layer apps | Yes | Yes | Yes | Yes | Yes, enterprise/self-hosted options | Yes | Yes | Active | Plans from $12/month yearly, credit-based overages available |
 | Capawesome Cloud | Yes, for Capacitor, Ionic, and Cordova web-layer apps | Yes | Yes, manual and automatic rollback | Yes | Code signing publicly documented; no public E2EE bundle-encryption claim | Partial: host bundles yourself, metadata stays in Capawesome Cloud | Yes, analytics and audit logs | Yes | Active | Platform plans from $19/month yearly; live updates also sold as an offering |
-| OtaKit | Yes, via `@otakit/capacitor-plugin` | Yes | Yes | Not the main public positioning | Optional E2EE for code | Yes, open-source core | Analytics | No | Active | Free tier, then update-delivered pricing |
+| OtaKit | Yes, via `@otakit/capacitor-plugin` | Yes | Yes | Yes | Optional E2EE for code | Yes, open-source core | Analytics | No | Active | Free tier, then update-delivered pricing |
 | Ionic Appflow | Yes for existing supported projects | Yes | Yes | Not the main public positioning | Update signing, not a public E2EE bundle-encryption claim | No | Appflow analytics/logging depend on plan | Yes | Legacy transition | New commercial sales discontinued; existing users retain access through December 31, 2027 |
 | Microsoft CodePush / App Center | Historically used by hybrid and React Native teams, but not a current Capacitor platform | Legacy only | Legacy only | Yes in CodePush lineage | Public/private key signing, not a current hosted E2EE platform | Standalone code exists, but repo is archived | Legacy App Center capabilities retired | App Center Build retired | Retired | No current hosted App Center/CodePush product |
 | Expo EAS Update | Not a direct Capacitor fit | Yes for Expo/React Native apps using `expo-updates` | Republish a previous update | Platform-specific to EAS Update | Standard Expo/EAS update model | Expo documents a self-hosted update-service path | EAS update insights | Yes, via EAS Build | Active | Expo/EAS pricing, centered on Expo account usage |
@@ -87,7 +87,7 @@ For the migration path, start with [Migrate from Ionic Appflow to Capgo](/docs/u
 
 ## 5. Microsoft CodePush / App Center
 
-Microsoft Visual Studio App Center retired on **March 31, 2025**. Microsoft lists a standalone CodePush repository as a migration path for CodePush users, but that repository was archived on May 20, 2025.
+Microsoft Visual Studio App Center's core features retired on **March 31, 2025**, though Analytics and Diagnostics support was separately extended through March 31, 2027. Microsoft lists a standalone CodePush repository as a migration path for CodePush users, but that repository was archived on May 20, 2025.
 
 That means CodePush belongs in comparison tables because many developers still ask for it, but it is not a current hosted platform choice. If you are maintaining an old CodePush workflow, compare alternatives by app stack:
 
