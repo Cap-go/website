@@ -268,10 +268,21 @@ async function assetExists(env: Env, request: Request, pathname: string): Promis
   return response.ok
 }
 
-function homeRedirect(request: Request, pathname: string): Response | null {
+function redirectToAbsolute(url: string, status = 301): Response {
+  return Response.redirect(url, status)
+}
+
+function staticLegacyRedirect(request: Request, pathname: string): Response | null {
   const { localePrefix, path } = splitLocalePath(pathname)
   if (path === '/home' || path === '/home/') {
     return redirectToPath(request, `${localePrefix}/`)
+  }
+  if (path === '/terms' || path === '/terms/') {
+    return redirectToPath(request, `${localePrefix}/tos/`)
+  }
+  if (path === '/app/apikeys' || path === '/app/apikeys/') {
+    const search = new URL(request.url).search
+    return redirectToAbsolute(`https://console.capgo.app/apikeys${search}`)
   }
   return null
 }
@@ -313,8 +324,8 @@ async function notFoundLegacyRedirect(request: Request, env: Env, pathname: stri
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const pathname = new URL(request.url).pathname
-    const home = homeRedirect(request, pathname)
-    if (home) return trackAICrawler(request, home, ctx)
+    const staticRedirect = staticLegacyRedirect(request, pathname)
+    if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)
     const toolRouteResponse = await handleToolApiRequest(
       request,
       {

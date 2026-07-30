@@ -109,3 +109,25 @@
 /plugins/ricoh360-camera/ /plugins/capacitor-ricoh360-camera-plugin/ 301
 /plugins/ricoh360-camera-plugin /plugins/capacitor-ricoh360-camera-plugin/ 301
 /plugins/ricoh360-camera-plugin/ /plugins/capacitor-ricoh360-camera-plugin/ 301
+
+# Legacy terms + old console app paths
+/terms /tos/ 301
+/terms/ /tos/ 301
+/de/terms /de/tos/ 301
+/de/terms/ /de/tos/ 301
+/es/terms /es/tos/ 301
+/es/terms/ /es/tos/ 301
+/fr/terms /fr/tos/ 301
+/fr/terms/ /fr/tos/ 301
+/id/terms /id/tos/ 301
+/id/terms/ /id/tos/ 301
+/it/terms /it/tos/ 301
+/it/terms/ /it/tos/ 301
+/ja/terms /ja/tos/ 301
+/ja/terms/ /ja/tos/ 301
+/ko/terms /ko/tos/ 301
+/ko/terms/ /ko/tos/ 301
+/zh/terms /zh/tos/ 301
+/zh/terms/ /zh/tos/ 301
+/app/apikeys https://console.capgo.app/apikeys 301
+/app/apikeys/ https://console.capgo.app/apikeys 301
