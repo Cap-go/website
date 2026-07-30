@@ -1,0 +1,46 @@
+---
+import { getRelativeLocaleUrl } from '@/services/links'
+
+interface Props {
+  accent: 'green' | 'blue'
+  companionHref: string
+  companionLabel: string
+  class?: string
+}
+
+const { accent, companionHref, companionLabel, class: className = '' } = Astro.props
+const locale = Astro.locals.locale
+
+const primaryClass =
+  accent === 'green'
+    ? 'bg-green-400 text-neutral-950 hover:bg-green-300 focus-visible:outline-green-300'
+    : 'bg-blue-400 text-neutral-950 hover:bg-blue-300 focus-visible:outline-blue-300'
+---
+
+<section class:list={['bg-slate-950 py-16 sm:py-20', className]}>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="border-t border-white/10 pt-10">
+      <h2 class="max-w-[35ch] text-2xl font-semibold tracking-tight text-balance text-white sm:text-3xl">How this data is kept current</h2>
+      <p class="mt-4 max-w-[56ch] text-base text-pretty text-slate-300 sm:text-sm/6">
+        A daily job fetches the latest numbers from the sources above. If the figures changed, the JSON files are committed automatically; if not, the repo stays untouched. The
+        pages read these files at build time, so the charts stay in sync with the latest published data.
+      </p>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <a
+          href={getRelativeLocaleUrl(locale, companionHref)}
+          class:list={['inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2', primaryClass]}
+        >
+          {companionLabel}
+        </a>
+        <a
+          href="https://github.com/Cap-go/website/tree/main/apps/web/src/data"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white hover:border-white/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          View raw data
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
