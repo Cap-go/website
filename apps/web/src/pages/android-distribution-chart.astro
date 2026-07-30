@@ -1,6 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import DistributionRefreshPanel from '@/components/DistributionRefreshPanel.astro'
+import DistributionTargetChart from '@/components/DistributionTargetChart.astro'
+import { formatPercent } from '@/lib/formatPercent'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import androidDistribution from '@/data/android-distribution.json'
@@ -24,12 +26,12 @@ const data = androidDistribution as AndroidData
 
 const locale = Astro.locals.locale
 const title = 'Android Version Distribution Chart'
-const description = `Market share of every Android version and API level. Data from ${data.source}, refreshed automatically.`
+const description = 'Pick a minimum Android API (or a coverage target like 95%) and see what share of devices your app can reach. Auto-updated market data.'
 
 const content = {
   title,
   description,
-  keywords: 'android version distribution, android market share, android api levels, capacitor android support',
+  keywords: 'android version distribution, android market share, android api levels, min sdk, capacitor android support',
   ldJSON: createLdJsonGraph(
     Astro.locals.runtimeConfig.public,
     createWebPageLdJson(Astro.locals.runtimeConfig.public, {
@@ -41,20 +43,22 @@ const content = {
   ),
 }
 
-const updatedDate = new Date(data.updatedAt)
-const updatedFormatted = updatedDate.toLocaleDateString('en-US', {
+const updatedFormatted = new Date(data.updatedAt).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 })
 
-const sortedByShare = [...data.apiDistribution].sort((a, b) => b.distribution - a.distribution)
-const topVersion = sortedByShare[0]
-const totalShare = data.apiDistribution.reduce((sum, row) => sum + row.distribution, 0)
+const reachRows = [...data.cumulativeDistribution]
+  .filter((row) => typeof row.distribution === 'number')
+  .map((row) => ({
+    id: String(row.api ?? row.version),
+    label: row.version,
+    detail: row.api === null ? undefined : `API ${row.api}+`,
+    reach: row.distribution,
+  }))
 
-function formatPercent(value: number) {
-  return `${value.toFixed(value < 1 ? 1 : value % 1 === 0 ? 0 : 1).replace(/\.0$/, '')}%`
-}
+const shareRows = [...data.apiDistribution].sort((a, b) => b.distribution - a.distribution)
 ---
 
 <Layout content={content}>
@@ -65,10 +69,11 @@ function formatPercent(value: number) {
     </div>
 
     <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <p class="font-mono text-sm font-semibold tracking-wide text-green-300 uppercase">Android platform data</p>
-      <h1 class="mt-4 max-w-[30ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">{title}</h1>
+      <p class="font-mono text-sm font-semibold tracking-wide text-green-300 uppercase">Android support planner</p>
+      <h1 class="mt-4 max-w-[30ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">Choose a min SDK by the users you need to cover</h1>
       <p class="mt-6 max-w-[48ch] text-lg text-pretty text-slate-300">
-        Distribution of Android versions across active devices. Use it to decide your minimum SDK when you ship a Capacitor, React Native, Flutter, or native Android app.
+        Cumulative reach tells you: if this Android version (API) is your floor, what percent of devices can run the app. Use it to set minSdk for Capacitor, React Native, Flutter,
+        or native Android.
       </p>
 
       <dl class="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-base text-slate-400 sm:text-sm">
@@ -85,39 +90,28 @@ function formatPercent(value: number) {
             </a>
           </dd>
         </div>
-        {
-          topVersion && (
-            <div>
-              <dt class="sr-only">Top version</dt>
-              <dd>
-                Top version: {topVersion.version.split('(')[0].trim()} (<span class="tabular-nums">{formatPercent(topVersion.distribution)}</span>)
-              </dd>
-            </div>
-          )
-        }
       </dl>
 
       <p class="mt-8 text-base text-slate-300 sm:text-sm">
-        Need the iOS version breakdown?
-        <a href={getRelativeLocaleUrl(locale, 'ios-distribution-chart')} class="ml-1 font-semibold text-white underline underline-offset-4 hover:text-green-200">
+        Need the iOS deployment target?
+        <a href={getRelativeLocaleUrl(locale, 'ios-distribution-chart')} class="font-semibold text-white underline underline-offset-4 hover:text-green-200">
           Open iOS distribution chart
         </a>
       </p>
     </div>
   </section>
 
-  <section class="border-b border-white/10 bg-slate-950 py-16 sm:py-20">
+  <DistributionTargetChart platform="android" rows={reachRows} versionLabel="Android version / API" targetNoun="Android version" />
+
+  <section class="border-b border-white/10 bg-slate-900 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <p class="font-mono text-sm font-semibold tracking-wide text-green-300 uppercase">Market share</p>
-      <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Android version share</h2>
-      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">
-        Share of devices running each Android version. Total checked versions add up to{' '}
-        <span class="tabular-nums">{formatPercent(Number(totalShare.toFixed(1)))}</span>.
-      </p>
+      <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Share by Android version</h2>
+      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">Individual market share (not cumulative). Sorted from highest share to lowest.</p>
 
       <div class="mt-10 divide-y divide-white/10 border-y border-white/10" role="list">
         {
-          data.apiDistribution.map((row) => (
+          shareRows.map((row) => (
             <div class="grid items-center gap-4 py-4 sm:grid-cols-[220px_1fr_5rem]" role="listitem">
               <div class="min-w-0">
                 <p class="font-medium text-white">{row.version}</p>
@@ -130,45 +124,6 @@ function formatPercent(value: number) {
             </div>
           ))
         }
-      </div>
-    </div>
-  </section>
-
-  <section class="border-b border-white/10 bg-slate-900 py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <p class="font-mono text-sm font-semibold tracking-wide text-blue-300 uppercase">Cumulative reach</p>
-      <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Cumulative distribution</h2>
-      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">Percentage of devices that can run your app if you target a given API level or higher.</p>
-
-      <div class="-mx-4 -my-2 mt-10 overflow-x-auto whitespace-nowrap sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full px-4 py-2 align-middle sm:px-6 lg:px-8">
-          <table class="w-full text-left text-base sm:text-sm">
-            <thead class="border-b border-white/10 text-slate-400">
-              <tr>
-                <th class="py-3 pr-4 font-medium whitespace-nowrap">Version</th>
-                <th class="py-3 pr-4 font-medium whitespace-nowrap">API</th>
-                <th class="py-3 pr-4 font-medium whitespace-nowrap">Cumulative</th>
-                <th class="py-3 font-medium whitespace-nowrap">Reach</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-white/10">
-              {
-                data.cumulativeDistribution.map((row) => (
-                  <tr>
-                    <td class="py-3 pr-4 font-medium whitespace-nowrap text-white">{row.version}</td>
-                    <td class="py-3 pr-4 text-slate-400 tabular-nums">{row.api ?? '—'}</td>
-                    <td class="py-3 pr-4 font-mono font-semibold text-white tabular-nums">{formatPercent(row.distribution)}</td>
-                    <td class="py-3">
-                      <div class="h-2 w-24 overflow-hidden rounded-full bg-white/10 sm:w-32" aria-hidden="true">
-                        <div class="h-full w-(--bar-width) rounded-full bg-linear-to-r from-blue-500 to-cyan-400" style={`--bar-width: ${Math.min(100, row.distribution)}%`} />
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              }
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
   </section>

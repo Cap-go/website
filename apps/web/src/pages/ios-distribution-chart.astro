@@ -1,6 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import DistributionRefreshPanel from '@/components/DistributionRefreshPanel.astro'
+import DistributionTargetChart from '@/components/DistributionTargetChart.astro'
+import { formatPercent } from '@/lib/formatPercent'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import iosDistribution from '@/data/ios-distribution.json'
@@ -24,12 +26,12 @@ const data = iosDistribution as IosData
 
 const locale = Astro.locals.locale
 const title = 'iOS Version Distribution Chart'
-const description = `Cumulative usage of each major iOS version. Data from ${data.source}, refreshed automatically.`
+const description = 'Pick a minimum iOS version (or a coverage target like 95%) and see what share of devices your app can reach. Auto-updated usage data.'
 
 const content = {
   title,
   description,
-  keywords: 'ios version distribution, ios version market share, ios usage, capacitor ios support',
+  keywords: 'ios version distribution, ios deployment target, ios usage, capacitor ios support, min ios version',
   ldJSON: createLdJsonGraph(
     Astro.locals.runtimeConfig.public,
     createWebPageLdJson(Astro.locals.runtimeConfig.public, {
@@ -41,20 +43,26 @@ const content = {
   ),
 }
 
-const updatedDate = new Date(data.updatedAt)
-const updatedFormatted = updatedDate.toLocaleDateString('en-US', {
+const updatedFormatted = new Date(data.updatedAt).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 })
 
-const rowsWithData = data.data.filter((row) => typeof row.cumulativeUsage === 'number')
-const latestVersion = rowsWithData[0]
+const reachRows = data.data
+  .filter((row): row is IosRow & { cumulativeUsage: number } => typeof row.cumulativeUsage === 'number')
+  .map((row) => ({
+    id: row.version,
+    label: row.version,
+    detail: `Released ${row.released}`,
+    reach: row.cumulativeUsage,
+  }))
 
-function formatPercent(value: number | null) {
-  if (value === null) return '—'
-  return `${value.toFixed(value < 1 ? 1 : value % 1 === 0 ? 0 : 1).replace(/\.0$/, '')}%`
-}
+const deviceRows = [...data.data].sort((a, b) => {
+  const aReach = typeof a.cumulativeUsage === 'number' ? a.cumulativeUsage : -1
+  const bReach = typeof b.cumulativeUsage === 'number' ? b.cumulativeUsage : -1
+  return bReach - aReach
+})
 ---
 
 <Layout content={content}>
@@ -65,10 +73,11 @@ function formatPercent(value: number | null) {
     </div>
 
     <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <p class="font-mono text-sm font-semibold tracking-wide text-blue-300 uppercase">iOS platform data</p>
-      <h1 class="mt-4 max-w-[30ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">{title}</h1>
+      <p class="font-mono text-sm font-semibold tracking-wide text-blue-300 uppercase">iOS support planner</p>
+      <h1 class="mt-4 max-w-[30ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">Choose a deployment target by the users you need to cover</h1>
       <p class="mt-6 max-w-[48ch] text-lg text-pretty text-slate-300">
-        Cumulative usage of each major iOS version. Use it to pick a deployment target for your Capacitor, React Native, Flutter, or native iOS app.
+        Cumulative usage tells you: if this iOS version is your floor, what percent of devices can run the app. Use it to set IPHONEOS_DEPLOYMENT_TARGET for Capacitor, React
+        Native, Flutter, or native iOS.
       </p>
 
       <dl class="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-base text-slate-400 sm:text-sm">
@@ -85,59 +94,24 @@ function formatPercent(value: number | null) {
             </a>
           </dd>
         </div>
-        {
-          latestVersion && (
-            <div>
-              <dt class="sr-only">Latest tracked version</dt>
-              <dd>
-                Latest tracked: {latestVersion.version} (<span class="tabular-nums">{formatPercent(latestVersion.cumulativeUsage)}</span>)
-              </dd>
-            </div>
-          )
-        }
       </dl>
 
       <p class="mt-8 text-base text-slate-300 sm:text-sm">
-        Need the Android version breakdown?
-        <a href={getRelativeLocaleUrl(locale, 'android-distribution-chart')} class="ml-1 font-semibold text-white underline underline-offset-4 hover:text-blue-200">
+        Need the Android min SDK?
+        <a href={getRelativeLocaleUrl(locale, 'android-distribution-chart')} class="font-semibold text-white underline underline-offset-4 hover:text-blue-200">
           Open Android distribution chart
         </a>
       </p>
     </div>
   </section>
 
-  <section class="border-b border-white/10 bg-slate-950 py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <p class="font-mono text-sm font-semibold tracking-wide text-blue-300 uppercase">Cumulative usage</p>
-      <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">iOS version cumulative usage</h2>
-      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">
-        Percentage of devices running at least a given iOS version. Higher is better for dropping older releases.
-      </p>
-
-      <div class="mt-10 divide-y divide-white/10 border-y border-white/10" role="list">
-        {
-          rowsWithData.map((row) => (
-            <div class="grid items-center gap-4 py-4 sm:grid-cols-[140px_1fr_5rem]" role="listitem">
-              <div class="min-w-0">
-                <p class="font-medium text-white">{row.version}</p>
-                <p class="mt-1 text-base text-slate-400 sm:text-sm">Released {row.released}</p>
-              </div>
-              <div class="h-3 w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
-                <div class="h-full w-(--bar-width) rounded-full bg-linear-to-r from-blue-400 to-cyan-400" style={`--bar-width: ${Math.min(100, row.cumulativeUsage ?? 0)}%`} />
-              </div>
-              <p class="text-right font-mono text-base font-semibold text-white tabular-nums sm:text-sm">{formatPercent(row.cumulativeUsage)}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <DistributionTargetChart platform="ios" rows={reachRows} versionLabel="iOS version" targetNoun="iOS version" />
 
   <section class="border-b border-white/10 bg-slate-900 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Device coverage</p>
       <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Last iOS version for devices</h2>
-      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">Which devices are capped at each iOS version. Useful when you plan minimum OS support.</p>
+      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">Which devices stop at each iOS version. Sorted by cumulative coverage, highest first.</p>
 
       <div class="-mx-4 -my-2 mt-10 overflow-x-auto whitespace-nowrap sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full px-4 py-2 align-middle sm:px-6 lg:px-8">
@@ -152,23 +126,11 @@ function formatPercent(value: number | null) {
             </thead>
             <tbody class="divide-y divide-white/10">
               {
-                data.data.map((row) => (
+                deviceRows.map((row) => (
                   <tr>
                     <td class="py-3 pr-4 font-medium whitespace-nowrap text-white">{row.version}</td>
                     <td class="py-3 pr-4 text-slate-400 tabular-nums">{row.released}</td>
-                    <td class="py-3 pr-4">
-                      <div class="flex items-center gap-3">
-                        <span class="font-mono font-semibold text-white tabular-nums">{formatPercent(row.cumulativeUsage)}</span>
-                        {typeof row.cumulativeUsage === 'number' && (
-                          <div class="hidden h-2 w-24 overflow-hidden rounded-full bg-white/10 sm:block sm:w-32" aria-hidden="true">
-                            <div
-                              class="h-full w-(--bar-width) rounded-full bg-linear-to-r from-cyan-400 to-blue-500"
-                              style={`--bar-width: ${Math.min(100, row.cumulativeUsage)}%`}
-                            />
-                          </div>
-                        )}
-                      </div>
-                    </td>
+                    <td class="py-3 pr-4 font-mono font-semibold text-white tabular-nums">{formatPercent(row.cumulativeUsage)}</td>
                     <td class="max-w-xs py-3 whitespace-normal text-slate-400">{row.lastIosFor || '—'}</td>
                   </tr>
                 ))

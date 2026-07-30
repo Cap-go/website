@@ -45,10 +45,12 @@ function parsePercent(text: string): number | null {
   return Number.isFinite(value) ? value : null
 }
 
-function parseDate(text: string): string {
-  const date = new Date(text)
-  if (!Number.isNaN(date.getTime())) return date.toISOString()
-  return new Date().toISOString()
+function parseRequiredDate(text: string, label: string): string {
+  const trimmed = text.trim()
+  if (!trimmed) throw new Error(`Missing ${label} update date in source HTML`)
+  const date = new Date(trimmed)
+  if (Number.isNaN(date.getTime())) throw new Error(`Unparseable ${label} update date: ${trimmed}`)
+  return date.toISOString()
 }
 
 async function fetchHtml(url: string): Promise<string> {
@@ -68,6 +70,9 @@ async function scrapeAndroid(): Promise<AndroidData> {
 
   const updatedText = $('.distribution-updated time').text().trim()
   const tables = $('.distribution-table')
+  if (tables.length < 2) {
+    throw new Error(`Expected 2 Android distribution tables, found ${tables.length}`)
+  }
 
   const parseTable = (index: number): AndroidApiRow[] => {
     const rows: AndroidApiRow[] = []
@@ -82,20 +87,26 @@ async function scrapeAndroid(): Promise<AndroidData> {
         const api = /^\d+$/.test(apiText) ? Number(apiText) : null
         const distributionText = cells.eq(2).find('.titleSmall').last().text().trim() || cells.eq(2).text().trim()
         const distribution = parsePercent(distributionText)
-        if (distribution !== null) {
+        if (version && distribution !== null) {
           rows.push({ version, api, distribution })
         }
       })
     return rows
   }
 
+  const apiDistribution = parseTable(0)
+  const cumulativeDistribution = parseTable(1)
+  if (apiDistribution.length === 0 || cumulativeDistribution.length === 0) {
+    throw new Error(`Android tables parsed empty (api=${apiDistribution.length}, cumulative=${cumulativeDistribution.length})`)
+  }
+
   return {
-    updatedAt: parseDate(updatedText || new Date().toDateString()),
+    updatedAt: parseRequiredDate(updatedText, 'Android'),
     source: 'Composables Android Distribution Chart',
     sourceUrl: ANDROID_URL,
     fetchedAt: new Date().toISOString(),
-    apiDistribution: parseTable(0),
-    cumulativeDistribution: parseTable(1),
+    apiDistribution,
+    cumulativeDistribution,
   }
 }
 
@@ -103,7 +114,6 @@ async function scrapeIos(): Promise<IosData> {
   const html = await fetchHtml(IOS_URL)
   const $ = cheerio.load(html)
 
-  // cheerio .text() strips tags, so match plain text like "last updated on June 6, 2026"
   const sourceText = $('#page-content p')
     .filter((_, el) => $(el).text().includes('last updated'))
     .text()
@@ -119,11 +129,17 @@ async function scrapeIos(): Promise<IosData> {
     const usageText = cells.eq(2).find('.titleSmall').last().text().trim() || cells.eq(2).text().trim()
     const cumulativeUsage = parsePercent(usageText)
     const lastIosFor = cells.length >= 4 ? cells.eq(3).text().trim().replace(/\s+/g, ' ') : ''
+    if (!version) return
     rows.push({ version, released, cumulativeUsage, lastIosFor })
   })
 
+  const rowsWithUsage = rows.filter((row) => typeof row.cumulativeUsage === 'number')
+  if (rows.length === 0 || rowsWithUsage.length === 0) {
+    throw new Error(`iOS table parsed empty (rows=${rows.length}, withUsage=${rowsWithUsage.length})`)
+  }
+
   return {
-    updatedAt: parseDate(updatedText || new Date().toDateString()),
+    updatedAt: parseRequiredDate(updatedText, 'iOS'),
     source: 'iOS Ref',
     sourceUrl: IOS_URL,
     fetchedAt: new Date().toISOString(),
@@ -152,15 +168,32 @@ function writeIfChanged(filePath: string, data: { fetchedAt: string }): boolean 
   return true
 }
 
-const changed: string[] = []
+async function scrapeAndWrite(label: string, repoPath: string, filePath: string, scrape: () => Promise<{ fetchedAt: string }>): Promise<{ changed: boolean; ok: boolean }> {
+  try {
+    const data = await scrape()
+    const changed = writeIfChanged(filePath, data)
+    return { changed, ok: true }
+  } catch (err) {
+    console.error(`${label} scrape failed:`, err)
+    return { changed: false, ok: false }
+  }
+}
 
 async function main() {
-  const android = await scrapeAndroid()
-  const ios = await scrapeIos()
-  if (writeIfChanged(ANDROID_FILE, android)) changed.push('apps/web/src/data/android-distribution.json')
-  if (writeIfChanged(IOS_FILE, ios)) changed.push('apps/web/src/data/ios-distribution.json')
+  const [android, ios] = await Promise.all([
+    scrapeAndWrite('Android', 'apps/web/src/data/android-distribution.json', ANDROID_FILE, scrapeAndroid),
+    scrapeAndWrite('iOS', 'apps/web/src/data/ios-distribution.json', IOS_FILE, scrapeIos),
+  ])
 
-  console.log(JSON.stringify({ changed }, null, 2))
+  const changed: string[] = []
+  if (android.changed) changed.push('apps/web/src/data/android-distribution.json')
+  if (ios.changed) changed.push('apps/web/src/data/ios-distribution.json')
+
+  console.log(JSON.stringify({ changed, androidOk: android.ok, iosOk: ios.ok }, null, 2))
+
+  if (!android.ok && !ios.ok) {
+    process.exit(1)
+  }
 }
 
 main().catch((err) => {
