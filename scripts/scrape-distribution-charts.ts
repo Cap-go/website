@@ -103,10 +103,11 @@ async function scrapeIos(): Promise<IosData> {
   const html = await fetchHtml(IOS_URL)
   const $ = cheerio.load(html)
 
+  // cheerio .text() strips tags, so match plain text like "last updated on June 6, 2026"
   const sourceText = $('#page-content p')
     .filter((_, el) => $(el).text().includes('last updated'))
     .text()
-  const updatedMatch = sourceText.match(/last updated on\s*<b>([^<]+)<\/b>/i)
+  const updatedMatch = sourceText.match(/last updated on\s+([^.]+?)(?:\s+using|\.|$)/i)
   const updatedText = updatedMatch ? updatedMatch[1].trim() : ''
 
   const rows: IosRow[] = []
@@ -130,15 +131,21 @@ async function scrapeIos(): Promise<IosData> {
   }
 }
 
-function writeIfChanged(filePath: string, data: unknown): boolean {
-  const next = JSON.stringify(data, null, 2) + '\n'
+function withoutFetchedAt(data: { fetchedAt?: string }): unknown {
+  const { fetchedAt: _fetchedAt, ...rest } = data
+  return rest
+}
+
+function writeIfChanged(filePath: string, data: { fetchedAt: string }): boolean {
+  const nextSemantic = JSON.stringify(withoutFetchedAt(data), null, 2)
   if (fs.existsSync(filePath)) {
-    const current = fs.readFileSync(filePath, 'utf8')
-    if (current === next) {
+    const current = JSON.parse(fs.readFileSync(filePath, 'utf8')) as { fetchedAt?: string }
+    if (JSON.stringify(withoutFetchedAt(current), null, 2) === nextSemantic) {
       console.log(`No change for ${path.basename(filePath)}`)
       return false
     }
   }
+  const next = JSON.stringify(data, null, 2) + '\n'
   fs.mkdirSync(path.dirname(filePath), { recursive: true })
   fs.writeFileSync(filePath, next)
   console.log(`Updated ${path.basename(filePath)}`)

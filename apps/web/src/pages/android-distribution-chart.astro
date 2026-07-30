@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import DistributionRefreshPanel from '@/components/DistributionRefreshPanel.astro'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import androidDistribution from '@/data/android-distribution.json'
@@ -58,77 +59,74 @@ function formatPercent(value: number) {
 
 <Layout content={content}>
   <section class="relative overflow-hidden border-b border-white/10 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20">
-    <div class="pointer-events-none absolute inset-0">
-      <div class="absolute top-10 -left-16 h-72 w-72 rounded-full bg-green-500/10 blur-3xl"></div>
-      <div class="absolute top-0 right-0 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute top-10 -left-16 size-72 rounded-full bg-green-500/10 blur-3xl"></div>
+      <div class="absolute top-0 right-0 size-80 rounded-full bg-blue-500/10 blur-3xl"></div>
     </div>
 
     <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl">
-        <p class="text-sm font-semibold tracking-[0.3em] text-green-300 uppercase">Android platform data</p>
-        <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">{title}</h1>
-        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-          Distribution of Android versions across active devices. Use it to decide your minimum SDK when you ship a Capacitor, React Native, Flutter, or native Android app.
-        </p>
+      <p class="font-mono text-sm font-semibold tracking-wide text-green-300 uppercase">Android platform data</p>
+      <h1 class="mt-4 max-w-[30ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">{title}</h1>
+      <p class="mt-6 max-w-[48ch] text-lg text-pretty text-slate-300">
+        Distribution of Android versions across active devices. Use it to decide your minimum SDK when you ship a Capacitor, React Native, Flutter, or native Android app.
+      </p>
 
-        <div class="mt-8 flex flex-wrap items-center gap-4 text-sm text-slate-400">
-          <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1">
-            Updated {updatedFormatted}
-          </span>
-          <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1">
+      <dl class="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-base text-slate-400 sm:text-sm">
+        <div>
+          <dt class="sr-only">Last updated</dt>
+          <dd>Updated {updatedFormatted}</dd>
+        </div>
+        <div class="min-w-0">
+          <dt class="sr-only">Source</dt>
+          <dd>
             Source:
-            <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer" class="ml-1 text-green-300 underline underline-offset-4 hover:text-green-200">
+            <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer" class="text-green-300 underline underline-offset-4 hover:text-green-200">
               {data.source}
             </a>
-          </span>
-          {
-            topVersion && (
-              <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                Top version: {topVersion.version.split('(')[0].trim()} ({formatPercent(topVersion.distribution)})
-              </span>
-            )
-          }
+          </dd>
         </div>
+        {
+          topVersion && (
+            <div>
+              <dt class="sr-only">Top version</dt>
+              <dd>
+                Top version: {topVersion.version.split('(')[0].trim()} (<span class="tabular-nums">{formatPercent(topVersion.distribution)}</span>)
+              </dd>
+            </div>
+          )
+        }
+      </dl>
 
-        <div class="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5 sm:flex sm:items-center sm:justify-between">
-          <div>
-            <p class="text-sm font-semibold text-white">Need the iOS version breakdown?</p>
-            <p class="text-sm text-slate-400">Compare cumulative iOS adoption on the companion page.</p>
-          </div>
-          <a
-            href={getRelativeLocaleUrl(locale, 'ios-distribution-chart')}
-            class="mt-4 inline-flex items-center justify-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-blue-300/60 hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none sm:mt-0"
-          >
-            Open iOS distribution chart
-          </a>
-        </div>
-      </div>
+      <p class="mt-8 text-base text-slate-300 sm:text-sm">
+        Need the iOS version breakdown?
+        <a href={getRelativeLocaleUrl(locale, 'ios-distribution-chart')} class="ml-1 font-semibold text-white underline underline-offset-4 hover:text-green-200">
+          Open iOS distribution chart
+        </a>
+      </p>
     </div>
   </section>
 
   <section class="border-b border-white/10 bg-slate-950 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="mb-10">
-        <p class="text-sm font-semibold tracking-[0.25em] text-green-300 uppercase">Market share</p>
-        <h2 class="mt-3 text-3xl font-bold text-white">Android version share</h2>
-        <p class="mt-3 text-slate-400">Share of devices running each Android version. Total checked versions add up to {formatPercent(Number(totalShare.toFixed(1)))}.</p>
-      </div>
+      <p class="font-mono text-sm font-semibold tracking-wide text-green-300 uppercase">Market share</p>
+      <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Android version share</h2>
+      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">
+        Share of devices running each Android version. Total checked versions add up to{' '}
+        <span class="tabular-nums">{formatPercent(Number(totalShare.toFixed(1)))}</span>.
+      </p>
 
-      <div class="space-y-3">
+      <div class="mt-10 divide-y divide-white/10 border-y border-white/10" role="list">
         {
           data.apiDistribution.map((row) => (
-            <div class="group grid items-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:grid-cols-[220px_1fr_80px]">
-              <div class="flex items-center justify-between gap-4 sm:block">
+            <div class="grid items-center gap-4 py-4 sm:grid-cols-[220px_1fr_5rem]" role="listitem">
+              <div class="min-w-0">
                 <p class="font-medium text-white">{row.version}</p>
-                <p class="text-xs text-slate-400 sm:mt-1">API {row.api ?? '—'}</p>
+                <p class="mt-1 text-base text-slate-400 sm:text-sm">API {row.api ?? '—'}</p>
               </div>
-              <div class="h-3 w-full overflow-hidden rounded-full bg-white/10">
-                <div
-                  class="h-full rounded-full bg-linear-to-r from-green-400 to-blue-500 transition-all duration-700 ease-out"
-                  style={`width: ${Math.min(100, row.distribution)}%`}
-                />
+              <div class="h-3 w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+                <div class="h-full w-(--bar-width) rounded-full bg-linear-to-r from-green-400 to-blue-500" style={`--bar-width: ${Math.min(100, row.distribution)}%`} />
               </div>
-              <p class="text-right font-mono text-sm font-semibold text-white">{formatPercent(row.distribution)}</p>
+              <p class="text-right font-mono text-base font-semibold text-white tabular-nums sm:text-sm">{formatPercent(row.distribution)}</p>
             </div>
           ))
         }
@@ -138,68 +136,42 @@ function formatPercent(value: number) {
 
   <section class="border-b border-white/10 bg-slate-900 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="mb-10">
-        <p class="text-sm font-semibold tracking-[0.25em] text-blue-300 uppercase">Cumulative reach</p>
-        <h2 class="mt-3 text-3xl font-bold text-white">Cumulative distribution</h2>
-        <p class="mt-3 text-slate-400">Percentage of devices that can run your app if you target a given API level or higher.</p>
-      </div>
+      <p class="font-mono text-sm font-semibold tracking-wide text-blue-300 uppercase">Cumulative reach</p>
+      <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Cumulative distribution</h2>
+      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">Percentage of devices that can run your app if you target a given API level or higher.</p>
 
-      <div class="overflow-x-auto rounded-2xl border border-white/10">
-        <table class="w-full text-left text-sm">
-          <thead class="border-b border-white/10 bg-white/5 text-slate-400">
-            <tr>
-              <th class="px-4 py-3 font-medium">Version</th>
-              <th class="px-4 py-3 font-medium">API</th>
-              <th class="px-4 py-3 font-medium">Cumulative</th>
-              <th class="px-4 py-3 font-medium">Bar</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-white/10">
-            {
-              data.cumulativeDistribution.map((row) => (
-                <tr class="hover:bg-white/[0.03]">
-                  <td class="px-4 py-3 font-medium text-white">{row.version}</td>
-                  <td class="px-4 py-3 text-slate-400">{row.api ?? '—'}</td>
-                  <td class="px-4 py-3 font-mono font-semibold text-white">{formatPercent(row.distribution)}</td>
-                  <td class="px-4 py-3">
-                    <div class="h-2 w-24 overflow-hidden rounded-full bg-white/10 sm:w-32">
-                      <div class="h-full rounded-full bg-linear-to-r from-blue-500 to-cyan-400" style={`width: ${Math.min(100, row.distribution)}%`} />
-                    </div>
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-slate-950 py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="rounded-3xl border border-white/10 bg-white/5 p-8 sm:p-10">
-        <h2 class="text-2xl font-bold text-white">How this data is kept current</h2>
-        <p class="mt-4 max-w-3xl text-sm leading-7 text-slate-300">
-          A daily job fetches the latest numbers from the sources above. If the figures changed, the JSON files are committed automatically; if not, the repo stays untouched. The
-          pages read these files at build time, so the charts are always in sync with the latest published data.
-        </p>
-        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={getRelativeLocaleUrl(locale, 'ios-distribution-chart')}
-            class="inline-flex items-center justify-center rounded-xl bg-green-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-green-300 focus-visible:ring-2 focus-visible:ring-green-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
-          >
-            See iOS distribution chart
-          </a>
-          <a
-            href="https://github.com/Cap-go/landing/tree/main/apps/web/src/data"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-green-300/60 hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-green-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
-          >
-            View raw data
-          </a>
+      <div class="-mx-4 -my-2 mt-10 overflow-x-auto whitespace-nowrap sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full px-4 py-2 align-middle sm:px-6 lg:px-8">
+          <table class="w-full text-left text-base sm:text-sm">
+            <thead class="border-b border-white/10 text-slate-400">
+              <tr>
+                <th class="py-3 pr-4 font-medium whitespace-nowrap">Version</th>
+                <th class="py-3 pr-4 font-medium whitespace-nowrap">API</th>
+                <th class="py-3 pr-4 font-medium whitespace-nowrap">Cumulative</th>
+                <th class="py-3 font-medium whitespace-nowrap">Reach</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/10">
+              {
+                data.cumulativeDistribution.map((row) => (
+                  <tr>
+                    <td class="py-3 pr-4 font-medium whitespace-nowrap text-white">{row.version}</td>
+                    <td class="py-3 pr-4 text-slate-400 tabular-nums">{row.api ?? '—'}</td>
+                    <td class="py-3 pr-4 font-mono font-semibold text-white tabular-nums">{formatPercent(row.distribution)}</td>
+                    <td class="py-3">
+                      <div class="h-2 w-24 overflow-hidden rounded-full bg-white/10 sm:w-32" aria-hidden="true">
+                        <div class="h-full w-(--bar-width) rounded-full bg-linear-to-r from-blue-500 to-cyan-400" style={`--bar-width: ${Math.min(100, row.distribution)}%`} />
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
+
+  <DistributionRefreshPanel accent="green" companionHref="ios-distribution-chart" companionLabel="See iOS distribution chart" />
 </Layout>
