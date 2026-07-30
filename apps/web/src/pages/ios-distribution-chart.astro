@@ -2,8 +2,9 @@
 import Layout from '@/layouts/Layout.astro'
 import DistributionRefreshPanel from '@/components/DistributionRefreshPanel.astro'
 import DistributionTargetChart from '@/components/DistributionTargetChart.astro'
+import ToolFaq from '@/components/tools/ToolFaq.astro'
 import { formatPercent } from '@/lib/formatPercent'
-import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import iosDistribution from '@/data/ios-distribution.json'
 
@@ -23,25 +24,9 @@ interface IosData {
 }
 
 const data = iosDistribution as IosData
-
 const locale = Astro.locals.locale
-const title = 'iOS Version Distribution Chart'
-const description = 'Pick a minimum iOS version (or a coverage target like 95%) and see what share of devices your app can reach. Auto-updated usage data.'
-
-const content = {
-  title,
-  description,
-  keywords: 'ios version distribution, ios deployment target, ios usage, capacitor ios support, min ios version',
-  ldJSON: createLdJsonGraph(
-    Astro.locals.runtimeConfig.public,
-    createWebPageLdJson(Astro.locals.runtimeConfig.public, {
-      name: title,
-      description,
-      url: Astro.url.href,
-    }),
-    { includeOrganization: true },
-  ),
-}
+const publicConfig = Astro.locals.runtimeConfig.public
+const toAbsoluteLocaleUrl = (path: string) => new URL(getRelativeLocaleUrl(locale, path), Astro.url.origin).toString()
 
 const updatedFormatted = new Date(data.updatedAt).toLocaleDateString('en-US', {
   year: 'numeric',
@@ -57,12 +42,113 @@ const reachRows = data.data
     detail: `Released ${row.released}`,
     reach: row.cumulativeUsage,
   }))
+  .sort((a, b) => b.reach - a.reach)
+
+const newestMeeting = (target: number) => [...reachRows].filter((row) => row.reach >= target).sort((a, b) => a.reach - b.reach)[0]
+
+const cover95 = newestMeeting(95)
+const cover99 = newestMeeting(99)
+const cover999 = newestMeeting(99.9)
+const latestTracked = reachRows[reachRows.length - 1]
 
 const deviceRows = [...data.data].sort((a, b) => {
   const aReach = typeof a.cumulativeUsage === 'number' ? a.cumulativeUsage : -1
   const bReach = typeof b.cumulativeUsage === 'number' ? b.cumulativeUsage : -1
   return bReach - aReach
 })
+
+const title = 'iOS Version Distribution Chart | Deployment Target Usage'
+const description = cover95
+  ? `Live iOS version usage chart. As of ${updatedFormatted}, ${cover95.label} covers about ${formatPercent(cover95.reach)} of devices. Pick a deployment target or coverage goal for Capacitor, React Native, Flutter, and native iOS.`
+  : `Live iOS version usage chart. Pick a minimum iOS version or coverage target and see what share of devices your app can reach.`
+
+const faqItems = [
+  {
+    question: 'What is an iOS version distribution chart?',
+    answer:
+      'It shows cumulative iOS usage: the share of devices running at least a given major iOS version. That is the figure to use when you choose IPHONEOS_DEPLOYMENT_TARGET or a minimum supported iOS release.',
+  },
+  {
+    question: 'How do I choose an iOS deployment target from this data?',
+    answer: cover95
+      ? `Pick the coverage you need, then take the newest iOS version that still meets it. On this dataset, ${cover95.label} covers about ${formatPercent(cover95.reach)}. Move toward 99% or 99.9% if you must keep older iPhones, or accept a lower floor to use newer APIs sooner.`
+      : 'Pick the coverage you need, then take the newest iOS version that still meets it. Use the interactive planner above to test 95%, 99%, or 99.9% goals.',
+  },
+  {
+    question: 'Why is cumulative usage more useful than raw version share?',
+    answer: 'A deployment target means “this iOS version or newer.” Cumulative usage matches that rule. Raw share for one release understates how many devices can run the build.',
+  },
+  {
+    question: 'How often is this iOS usage data updated?',
+    answer: `Capgo refreshes the chart from ${data.source} daily. When the published numbers change, the JSON in the repo updates automatically. This page currently reflects data updated ${updatedFormatted}.`,
+  },
+  {
+    question: 'Does this help Capacitor and Ionic iOS apps?',
+    answer:
+      'Yes. Capacitor apps ship as native iOS binaries, so the deployment target controls App Store eligibility and device reach. Check this chart before raising the floor for plugins, Xcode upgrades, or cloud builds.',
+  },
+]
+
+const softwareApplication = createSoftwareApplicationLdJson(publicConfig, {
+  name: 'Capgo iOS Version Distribution Chart',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Web',
+  offers: {
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+})
+
+const faqLdJson = createFAQPageLdJson(publicConfig, {
+  url: Astro.url.href,
+  questions: faqItems,
+})
+
+const webPage = createWebPageLdJson(publicConfig, {
+  name: title,
+  description,
+  url: Astro.url.href,
+})
+
+const itemList = createItemListLdJson(publicConfig, {
+  url: Astro.url.href,
+  name: 'iOS cumulative version usage',
+  description: 'Cumulative share of devices that can run an app for each minimum iOS version.',
+  items: reachRows.slice(0, 12).map((row) => ({
+    name: `${row.label} (${formatPercent(row.reach)} cumulative)`,
+    description: row.detail,
+    url: Astro.url.href,
+  })),
+})
+
+const ldJSON = createLdJsonGraph(publicConfig, softwareApplication, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: 'Home', url: toAbsoluteLocaleUrl('') },
+    { name: 'iOS distribution chart', url: Astro.url.href },
+  ],
+  additionalEntities: [faqLdJson, webPage, itemList],
+})
+
+const content = {
+  title,
+  description,
+  keywords:
+    'ios version distribution, ios version usage, ios market share, ios deployment target, iphoneos deployment target, ios cumulative usage, capacitor ios support, ionic ios version',
+  ldJSON,
+  articleModifiedTime: data.updatedAt,
+}
+
+const relatedLinks = [
+  { name: 'Android version distribution chart', href: getRelativeLocaleUrl(locale, 'android-distribution-chart') },
+  { name: 'iOS certificate generator', href: getRelativeLocaleUrl(locale, 'tools/ios-certificate-generator') },
+  { name: 'iOS UDID finder', href: getRelativeLocaleUrl(locale, 'tools/ios-udid-finder') },
+  { name: 'Capgo native build', href: getRelativeLocaleUrl(locale, 'native-build') },
+]
 ---
 
 <Layout content={content}>
@@ -73,12 +159,41 @@ const deviceRows = [...data.data].sort((a, b) => {
     </div>
 
     <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <p class="font-mono text-sm font-semibold tracking-wide text-blue-300 uppercase">iOS support planner</p>
-      <h1 class="mt-4 max-w-[30ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">Choose a deployment target by the users you need to cover</h1>
-      <p class="mt-6 max-w-[48ch] text-lg text-pretty text-slate-300">
-        Cumulative usage tells you: if this iOS version is your floor, what percent of devices can run the app. Use it to set IPHONEOS_DEPLOYMENT_TARGET for Capacitor, React
-        Native, Flutter, or native iOS.
+      <p class="font-mono text-sm font-semibold tracking-wide text-blue-300 uppercase">iOS version distribution</p>
+      <h1 class="mt-4 max-w-[32ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">iOS version distribution chart for deployment target decisions</h1>
+      <p class="mt-6 max-w-[56ch] text-lg text-pretty text-slate-300">
+        Use this iOS usage chart to choose a deployment target by the users you still need to cover. Cumulative usage answers: if this iOS version is your floor, what percent of
+        iPhone and iPad devices can run your Capacitor, React Native, Flutter, or native app.
       </p>
+
+      <div class="mt-8 max-w-3xl rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+        <p class="text-base text-pretty text-slate-200 sm:text-sm">
+          As of {updatedFormatted}
+          {
+            cover95 && (
+              <>
+                , targeting <strong class="font-semibold text-white">{cover95.label}</strong> covers about{' '}
+                <strong class="font-semibold text-white tabular-nums">{formatPercent(cover95.reach)}</strong> of devices
+              </>
+            )
+          }
+          {
+            cover99 && (
+              <>
+                . A {formatPercent(99)} goal lands near <strong class="font-semibold text-white">{cover99.label}</strong>
+              </>
+            )
+          }
+          {
+            latestTracked && (
+              <>
+                . The newest tracked release with data is <strong class="font-semibold text-white">{latestTracked.label}</strong> at{' '}
+                <strong class="font-semibold text-white tabular-nums">{formatPercent(latestTracked.reach)}</strong>.
+              </>
+            )
+          }
+        </p>
+      </div>
 
       <dl class="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-base text-slate-400 sm:text-sm">
         <div>
@@ -94,24 +209,64 @@ const deviceRows = [...data.data].sort((a, b) => {
             </a>
           </dd>
         </div>
+        {
+          cover999 && (
+            <div>
+              <dt class="sr-only">99.9 percent coverage target</dt>
+              <dd>
+                {formatPercent(99.9)} coverage: {cover999.label}
+              </dd>
+            </div>
+          )
+        }
       </dl>
 
       <p class="mt-8 text-base text-slate-300 sm:text-sm">
-        Need the Android min SDK?
+        Compare with Android min SDK coverage on the{' '}
         <a href={getRelativeLocaleUrl(locale, 'android-distribution-chart')} class="font-semibold text-white underline underline-offset-4 hover:text-blue-200">
-          Open Android distribution chart
+          Android version distribution chart
         </a>
+        .
       </p>
     </div>
   </section>
 
   <DistributionTargetChart platform="ios" rows={reachRows} versionLabel="iOS version" targetNoun="iOS version" />
 
+  <section class="border-b border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <p class="font-mono text-sm font-semibold tracking-wide text-blue-300 uppercase">How to use the chart</p>
+      <h2 class="mt-3 max-w-[40ch] text-3xl font-semibold tracking-tight text-balance text-white">How to pick an iOS deployment target from version usage data</h2>
+      <div class="mt-8 grid gap-8 lg:grid-cols-3">
+        <div>
+          <h3 class="text-xl font-semibold tracking-tight text-white">1. Set a coverage goal</h3>
+          <p class="mt-3 text-base text-pretty text-slate-400 sm:text-sm">
+            Decide how much of the iOS install base you must keep. Teams often start at 95% and only climb to 99% or 99.9% when older iPhones still matter.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold tracking-tight text-white">2. Use cumulative usage</h3>
+          <p class="mt-3 text-base text-pretty text-slate-400 sm:text-sm">
+            A deployment target means that iOS version or newer. Cumulative usage matches that definition and is the number to trust for App Store reach estimates.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold tracking-tight text-white">3. Take the newest safe floor</h3>
+          <p class="mt-3 text-base text-pretty text-slate-400 sm:text-sm">
+            Prefer the newest iOS version that still hits your goal. That unlocks newer APIs and Xcode defaults while protecting the users behind your coverage target.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="border-b border-white/10 bg-slate-900 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Device coverage</p>
-      <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Last iOS version for devices</h2>
-      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">Which devices stop at each iOS version. Sorted by cumulative coverage, highest first.</p>
+      <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Last iOS version by device and cumulative usage</h2>
+      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">
+        See which devices stop at each major iOS release, sorted by cumulative coverage from highest to lowest.
+      </p>
 
       <div class="-mx-4 -my-2 mt-10 overflow-x-auto whitespace-nowrap sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full px-4 py-2 align-middle sm:px-6 lg:px-8">
@@ -139,6 +294,30 @@ const deviceRows = [...data.data].sort((a, b) => {
           </table>
         </div>
       </div>
+    </div>
+  </section>
+
+  <ToolFaq
+    title="iOS distribution FAQ"
+    intro="Answers for teams setting IPHONEOS_DEPLOYMENT_TARGET, planning Xcode upgrades, or reviewing Capacitor iOS support."
+    items={faqItems}
+  />
+
+  <section class="border-b border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Related developer resources</h2>
+      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">Keep going with Android coverage data, Apple signing tools, and Capgo release workflows.</p>
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2" role="list">
+        {
+          relatedLinks.map((link) => (
+            <li>
+              <a href={link.href} class="flex rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base font-semibold text-white hover:border-blue-300/40 sm:text-sm">
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
