@@ -73,25 +73,44 @@ const rootId = `${platform}-target-chart`
       </div>
 
       <div class="flex flex-col gap-2">
-        <label for={`${rootId}-percent`} class="text-base font-medium text-white sm:text-sm">
-          Target coverage
-          <span id={`${rootId}-percent-value`} class="ml-2 font-mono text-slate-300 tabular-nums">{defaultTarget}%</span>
-        </label>
+        <div class="flex items-end justify-between gap-3">
+          <label for={`${rootId}-percent`} class="text-base font-medium text-white sm:text-sm">Target coverage</label>
+          <div class="flex items-center gap-1">
+            <input
+              id={`${rootId}-percent-number`}
+              name="targetCoverageNumber"
+              type="number"
+              min="50"
+              max="99.9"
+              step="0.1"
+              value={String(defaultTarget)}
+              inputmode="decimal"
+              aria-label="Target coverage percent"
+              class:list={[
+                'w-20 rounded-lg border-0 bg-white/5 px-2 py-1.5 text-right font-mono text-base text-white tabular-nums ring-1 ring-white/15 sm:text-sm',
+                ring,
+                'focus-visible:outline-2 focus-visible:-outline-offset-1',
+              ]}
+            />
+            <span class="text-base text-slate-400 sm:text-sm" aria-hidden="true">%</span>
+          </div>
+        </div>
         <input
           id={`${rootId}-percent`}
           name="targetCoverage"
           type="range"
           min="50"
-          max="99"
-          step="1"
+          max="99.9"
+          step="0.1"
           value={String(defaultTarget)}
           class:list={['w-full accent-current', accentText]}
           aria-valuemin={50}
-          aria-valuemax={99}
+          aria-valuemax={99.9}
           aria-valuenow={defaultTarget}
+          aria-label="Target coverage slider"
         />
         <p class="text-base text-slate-400 sm:text-sm">
-          Finds the newest {versionLabel} that still reaches at least this many users.
+          Finds the newest {versionLabel} that still reaches at least this many users. Use tenths for targets like 99.5% or 99.9%.
         </p>
       </div>
     </div>
@@ -138,7 +157,6 @@ const rootId = `${platform}-target-chart`
     const rows = JSON.parse(root.dataset.rows || '[]') as Row[]
     const versionSelect = root.querySelector<HTMLSelectElement>('select[name="minimumVersion"]')
     const percentInput = root.querySelector<HTMLInputElement>('input[name="targetCoverage"]')
-    const percentValue = root.querySelector<HTMLElement>('[id$="-percent-value"]')
     const resultText = root.querySelector<HTMLElement>('[id$="-result-text"]')
     const targetNoun = root.dataset.targetNoun || 'target'
     if (!versionSelect || !percentInput || !resultText) return
@@ -165,19 +183,38 @@ const rootId = `${platform}-target-chart`
       resultText!.textContent = `If you set ${row.label} as your minimum ${targetNoun}, you cover about ${formatPercent(row.reach)} of active devices.`
     }
 
-    function renderFromPercent(target: number) {
-      if (percentValue) percentValue.textContent = `${target}%`
+    const percentNumber = root.querySelector<HTMLInputElement>('input[name="targetCoverageNumber"]')
+    const minTarget = 50
+    const maxTarget = 99.9
+
+    function clampTarget(value: number) {
+      if (!Number.isFinite(value)) return defaultTargetFallback()
+      return Math.min(maxTarget, Math.max(minTarget, Math.round(value * 10) / 10))
+    }
+
+    function defaultTargetFallback() {
+      return Number(root.dataset.defaultTarget || 95)
+    }
+
+    function formatTarget(value: number) {
+      return Number.isInteger(value) ? String(value) : value.toFixed(1)
+    }
+
+    function renderFromPercent(rawTarget: number) {
+      const target = clampTarget(rawTarget)
+      percentInput!.value = String(target)
+      if (percentNumber) percentNumber.value = formatTarget(target)
       percentInput!.setAttribute('aria-valuenow', String(target))
       const row = newestMeeting(target)
       if (!row) {
-        resultText!.textContent = `No ${targetNoun} in this dataset reaches ${target}%. Lower the coverage target.`
+        resultText!.textContent = `No ${targetNoun} in this dataset reaches ${formatTarget(target)}%. Lower the coverage target.`
         return
       }
       syncing = true
       versionSelect!.value = row.id
       syncing = false
       paintSelection(row.id)
-      resultText!.textContent = `To cover at least ${target}% of users, set your minimum ${targetNoun} to ${row.label} (${formatPercent(row.reach)} covered).`
+      resultText!.textContent = `To cover at least ${formatTarget(target)}% of users, set your minimum ${targetNoun} to ${row.label} (${formatPercent(row.reach)} covered).`
     }
 
     versionSelect.addEventListener('change', () => {
@@ -187,6 +224,14 @@ const rootId = `${platform}-target-chart`
 
     percentInput.addEventListener('input', () => {
       renderFromPercent(Number(percentInput.value))
+    })
+
+    percentNumber?.addEventListener('input', () => {
+      renderFromPercent(Number(percentNumber.value))
+    })
+
+    percentNumber?.addEventListener('change', () => {
+      renderFromPercent(Number(percentNumber.value))
     })
 
     root.querySelectorAll<HTMLButtonElement>('[data-row-id]').forEach((button) => {
