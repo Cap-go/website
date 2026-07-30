@@ -49,7 +49,7 @@ function parseRequiredDate(text: string, label: string): string {
   const trimmed = text.trim()
   if (!trimmed) throw new Error(`Missing ${label} update date in source HTML`)
   const date = new Date(trimmed)
-  if (Number.isNaN(date.getTime())) throw new Error(`Unparseable ${label} update date: ${trimmed}`)
+  if (Number.isNaN(date.getTime())) throw new Error(`Unparsable ${label} update date: ${trimmed}`)
   return date.toISOString()
 }
 
