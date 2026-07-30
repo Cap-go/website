@@ -1,4 +1,6 @@
 ---
+import { formatPercent } from '@/lib/formatPercent'
+
 export interface TargetRow {
   id: string
   label: string
@@ -59,7 +61,7 @@ const rootId = `${platform}-target-chart`
             {
               sorted.map((row) => (
                 <option value={row.id} selected={row.id === defaultRow?.id}>
-                  {row.label} — {row.reach.toFixed(row.reach % 1 === 0 ? 0 : 1)}%
+                  {row.label} — {formatPercent(row.reach)}
                 </option>
               ))
             }
@@ -98,39 +100,38 @@ const rootId = `${platform}-target-chart`
       <p id={`${rootId}-result-text`} class="text-base text-pretty text-slate-200 sm:text-sm">Loading target…</p>
     </div>
 
-    <div class="mt-10 divide-y divide-white/10 border-y border-white/10" role="list" id={`${rootId}-list`}>
+    <ul class="mt-10 divide-y divide-white/10 border-y border-white/10" role="list">
       {
         sorted.map((row) => (
-          <button
-            type="button"
-            role="listitem"
-            data-row-id={row.id}
-            data-reach={String(row.reach)}
-            class:list={[
-              'grid w-full items-center gap-4 py-4 text-left sm:grid-cols-[minmax(10rem,220px)_1fr_5rem]',
-              'focus-visible:outline-2 focus-visible:outline-offset-2',
-              ring,
-            ]}
-          >
-            <div class="min-w-0">
-              <p class="font-medium text-white">{row.label}</p>
-              {row.detail && <p class="mt-1 text-base text-slate-400 sm:text-sm">{row.detail}</p>}
-            </div>
-            <div class="h-3 w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
-              <div class:list={['h-full w-(--bar-width) rounded-full bg-linear-to-r', barFrom, barTo]} style={`--bar-width: ${Math.min(100, row.reach)}%`} />
-            </div>
-            <p class="text-right font-mono text-base font-semibold text-white tabular-nums sm:text-sm">{row.reach.toFixed(row.reach % 1 === 0 ? 0 : 1)}%</p>
-          </button>
+          <li>
+            <button
+              type="button"
+              data-row-id={row.id}
+              data-reach={String(row.reach)}
+              class:list={[
+                'grid w-full items-center gap-4 py-4 text-left sm:grid-cols-[minmax(10rem,220px)_1fr_5rem]',
+                'focus-visible:outline-2 focus-visible:outline-offset-2',
+                ring,
+              ]}
+            >
+              <div class="min-w-0">
+                <p class="font-medium text-white">{row.label}</p>
+                {row.detail && <p class="mt-1 text-base text-slate-400 sm:text-sm">{row.detail}</p>}
+              </div>
+              <div class="h-3 w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+                <div class:list={['h-full w-(--bar-width) rounded-full bg-linear-to-r', barFrom, barTo]} style={`--bar-width: ${Math.min(100, row.reach)}%`} />
+              </div>
+              <p class="text-right font-mono text-base font-semibold text-white tabular-nums sm:text-sm">{formatPercent(row.reach)}</p>
+            </button>
+          </li>
         ))
       }
-    </div>
+    </ul>
   </div>
 </section>
 
 <script>
-  function formatPercent(value: number) {
-    return `${value.toFixed(value < 1 ? 1 : value % 1 === 0 ? 0 : 1).replace(/\.0$/, '')}%`
-  }
+  import { formatPercent } from '../lib/formatPercent'
 
   function initTargetChart(root: HTMLElement) {
     type Row = { id: string; label: string; detail?: string; reach: number }
@@ -143,7 +144,6 @@ const rootId = `${platform}-target-chart`
     if (!versionSelect || !percentInput || !resultText) return
 
     let syncing = false
-
     const rowById = new Map(rows.map((row) => [row.id, row]))
 
     function newestMeeting(target: number): Row | undefined {
@@ -166,7 +166,7 @@ const rootId = `${platform}-target-chart`
     }
 
     function renderFromPercent(target: number) {
-      percentValue && (percentValue.textContent = `${target}%`)
+      if (percentValue) percentValue.textContent = `${target}%`
       percentInput!.setAttribute('aria-valuenow', String(target))
       const row = newestMeeting(target)
       if (!row) {
@@ -200,13 +200,9 @@ const rootId = `${platform}-target-chart`
       })
     })
 
-    const initialId = root.dataset.defaultId || versionSelect.value
     const initialTarget = Number(root.dataset.defaultTarget || percentInput.value)
     percentInput.value = String(initialTarget)
     renderFromPercent(initialTarget)
-    if (initialId && versionSelect.value !== initialId) {
-      // keep percent-driven default; already applied
-    }
   }
 
   document.querySelectorAll<HTMLElement>('[data-rows]').forEach(initTargetChart)

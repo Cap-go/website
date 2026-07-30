@@ -59,6 +59,7 @@ async function fetchHtml(url: string): Promise<string> {
       Accept: 'text/html',
       'User-Agent': 'Mozilla/5.0 (compatible; CapgoBot/1.0; +https://capgo.app)',
     },
+    signal: AbortSignal.timeout(30_000),
   })
   if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`)
   return res.text()
@@ -191,7 +192,7 @@ async function main() {
 
   console.log(JSON.stringify({ changed, androidOk: android.ok, iosOk: ios.ok }, null, 2))
 
-  if (!android.ok && !ios.ok) {
+  if (!android.ok || !ios.ok) {
     process.exit(1)
   }
 }

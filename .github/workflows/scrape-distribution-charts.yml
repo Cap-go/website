@@ -5,8 +5,9 @@ on:
     - cron: '0 7 * * *'
   workflow_dispatch:
 
-permissions:
-  contents: write
+concurrency:
+  group: scrape-distribution-charts
+  cancel-in-progress: false
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
@@ -16,8 +17,14 @@ jobs:
     name: Scrape Android and iOS distribution data
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # contents: write required so git-auto-commit can push updated JSON when data changes.
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          # Needed by git-auto-commit-action to push commits.
+          persist-credentials: true
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
@@ -31,6 +38,7 @@ jobs:
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-
+      # --ignore-scripts: avoid running dependency lifecycle scripts during CI install.
       - run: bun install --frozen-lockfile --ignore-scripts
       - run: bun run scrape:distribution-charts
       - name: Commit changes if data differs
