@@ -285,8 +285,16 @@ async function notFoundLegacyRedirect(request: Request, env: Env, pathname: stri
   const pluginMatch = path.match(/^\/plugins\/([^/]+)\/?$/)
   if (pluginMatch) {
     const slug = pluginMatch[1]
+    const pluginTargets: string[] = []
     if (!slug.startsWith('capacitor-')) {
-      const target = `${localePrefix}/plugins/capacitor-${slug}/`
+      pluginTargets.push(`${localePrefix}/plugins/capacitor-${slug}/`)
+      if (!slug.endsWith('-plugin')) {
+        pluginTargets.push(`${localePrefix}/plugins/capacitor-${slug}-plugin/`)
+      }
+    } else if (!slug.endsWith('-plugin')) {
+      pluginTargets.push(`${localePrefix}/plugins/${slug}-plugin/`)
+    }
+    for (const target of pluginTargets) {
       if (await assetExists(env, request, target)) {
         return redirectToPath(request, target)
       }

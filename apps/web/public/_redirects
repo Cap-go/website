@@ -103,3 +103,9 @@
 /ko/home/ /ko/ 301
 /zh/home /zh/ 301
 /zh/home/ /zh/ 301
+
+# Ricoh360 repo slug aliases
+/plugins/ricoh360-camera /plugins/capacitor-ricoh360-camera-plugin/ 301
+/plugins/ricoh360-camera/ /plugins/capacitor-ricoh360-camera-plugin/ 301
+/plugins/ricoh360-camera-plugin /plugins/capacitor-ricoh360-camera-plugin/ 301
+/plugins/ricoh360-camera-plugin/ /plugins/capacitor-ricoh360-camera-plugin/ 301
