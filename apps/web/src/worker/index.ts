@@ -277,9 +277,6 @@ function homeRedirect(request: Request, pathname: string): Response | null {
 }
 
 async function notFoundLegacyRedirect(request: Request, env: Env, pathname: string): Promise<Response | null> {
-  const home = homeRedirect(request, pathname)
-  if (home) return home
-
   const { localePrefix, path } = splitLocalePath(pathname)
 
   const pluginMatch = path.match(/^\/plugins\/([^/]+)\/?$/)
