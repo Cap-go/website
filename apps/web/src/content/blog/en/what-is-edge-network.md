@@ -120,7 +120,7 @@ That distinction matters for app teams:
 - If you want request handling or decision-making close to users, you're entering edge computing territory.
 - If you want the whole path to be geographically closer and lower-latency, you're talking about edge networking.
 
-If you work on release behavior, startup paths, or request timing, this collection of articles on [network performance for app teams](https://capgo.app/blog/category/network-performance/) is a useful companion topic.
+If you work on release behavior, startup paths, or request timing, this collection of articles on [network performance for app teams](https://capgo.app/blog/category/technology/) is a useful companion topic.
 
 <a id="edge-network-vs-cdn-vs-edge-computing-at-a-glance"></a>
 ### Edge Network vs. CDN vs. Edge Computing at a Glance

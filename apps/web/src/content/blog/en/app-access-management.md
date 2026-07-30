@@ -200,7 +200,7 @@ For these stacks, treat access as three separate planes:
 
 Those planes should not share credentials or trust assumptions.
 
-Electron deserves extra caution because it can bridge web code into desktop capabilities. The app should avoid storing privileged long-lived secrets locally. Capacitor apps face a different risk. Teams often rely on backend APIs correctly, then forget that update systems, build tooling, and environment storage need the same rigor. If you're tightening those local data boundaries, Capgo's writing on [secure database storage for mobile apps](https://capgo.app/blog/category/secure-database-storage/) is relevant to the implementation side.
+Electron deserves extra caution because it can bridge web code into desktop capabilities. The app should avoid storing privileged long-lived secrets locally. Capacitor apps face a different risk. Teams often rely on backend APIs correctly, then forget that update systems, build tooling, and environment storage need the same rigor. If you're tightening those local data boundaries, Capgo's guide to [secure database storage for mobile apps](https://capgo.app/blog/secure-database-storage/) is relevant to the implementation side.
 
 > Keep policy decisions server-side. Let the client request. Don't let it decide.
 
