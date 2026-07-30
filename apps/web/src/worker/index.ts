@@ -242,9 +242,74 @@ function withLinkHeaders(response: Response, links: LinkDefinition[]): Response 
   })
 }
 
+const NON_DEFAULT_LOCALES = new Set(['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'])
+
+function splitLocalePath(pathname: string): { localePrefix: string; path: string } {
+  const segments = pathname.split('/').filter(Boolean)
+  if (segments.length > 0 && NON_DEFAULT_LOCALES.has(segments[0])) {
+    const rest = segments.slice(1).join('/')
+    return {
+      localePrefix: `/${segments[0]}`,
+      path: rest ? `/${rest}${pathname.endsWith('/') ? '/' : ''}` : '/',
+    }
+  }
+  return { localePrefix: '', path: pathname }
+}
+
+function redirectToPath(request: Request, pathname: string, status = 301): Response {
+  const url = new URL(request.url)
+  return Response.redirect(new URL(`${pathname}${url.search}`, request.url).toString(), status)
+}
+
+async function assetExists(env: Env, request: Request, pathname: string): Promise<boolean> {
+  const url = new URL(request.url)
+  url.pathname = pathname.endsWith('/') || pathname.includes('.') ? pathname : `${pathname}/`
+  const response = await env.ASSETS.fetch(new Request(url.toString(), { method: 'GET' }))
+  return response.ok
+}
+
+function homeRedirect(request: Request, pathname: string): Response | null {
+  const { localePrefix, path } = splitLocalePath(pathname)
+  if (path === '/home' || path === '/home/') {
+    return redirectToPath(request, `${localePrefix}/`)
+  }
+  return null
+}
+
+async function notFoundLegacyRedirect(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  const home = homeRedirect(request, pathname)
+  if (home) return home
+
+  const { localePrefix, path } = splitLocalePath(pathname)
+
+  const pluginMatch = path.match(/^\/plugins\/([^/]+)\/?$/)
+  if (pluginMatch) {
+    const slug = pluginMatch[1]
+    if (!slug.startsWith('capacitor-')) {
+      const target = `${localePrefix}/plugins/capacitor-${slug}/`
+      if (await assetExists(env, request, target)) {
+        return redirectToPath(request, target)
+      }
+    }
+  }
+
+  const categoryMatch = path.match(/^\/blog\/category\/([^/]+)\/?$/)
+  if (categoryMatch) {
+    const slug = categoryMatch[1]
+    const target = `${localePrefix}/blog/${slug}/`
+    if (await assetExists(env, request, target)) {
+      return redirectToPath(request, target)
+    }
+  }
+
+  return null
+}
+
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const pathname = new URL(request.url).pathname
+    const home = homeRedirect(request, pathname)
+    if (home) return trackAICrawler(request, home, ctx)
     const toolRouteResponse = await handleToolApiRequest(
       request,
       {
@@ -258,6 +323,10 @@ export default {
     const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
     if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
     const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
+    if (assetResponse.status === 404) {
+      const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
+      if (legacyRedirect) return trackAICrawler(request, legacyRedirect, ctx)
+    }
     if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
     if (pathname === '/' || pathname === '/index.html') {
       return trackAICrawler(request, withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS), ctx)

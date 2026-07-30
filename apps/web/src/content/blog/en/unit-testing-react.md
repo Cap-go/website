@@ -390,7 +390,7 @@ Use this rule set:
 
 > If a test passes because all the hard parts were replaced with fakes, it hasn't bought you much release confidence.
 
-For teams that want examples and patterns around runner APIs, the Capgo [Jest category](https://capgo.app/blog/category/jest/) is a practical reference library, especially when onboarding developers who know React but not testing mechanics yet.
+For teams that want examples and patterns around runner APIs, Capgo [testing tutorials](https://capgo.app/blog/category/tutorial/) is a practical reference library, especially when onboarding developers who know React but not testing mechanics yet.
 
 <a id="async-tests-fail-when-timing-is-vague"></a>
 ### Async tests fail when timing is vague

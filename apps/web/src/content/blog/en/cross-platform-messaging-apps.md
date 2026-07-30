@@ -71,7 +71,7 @@ WhatsApp works well when you need outbound notifications, support conversations,
 
 The trade-off is control. Business messaging isn't just “turn on chat.” Template approvals, category rules, and policy enforcement shape what you can send and when. Metadata also has different privacy characteristics than message content, so regulated teams still need a real data review.
 
-If you're building mobile products that need to connect messaging workflows across platforms, it's worth following broader [cross-platform app implementation patterns](https://capgo.app/blog/category/cross-platform-apps/). Start with the official [WhatsApp website](https://www.whatsapp.com).
+If you're building mobile products that need to connect messaging workflows across platforms, it's worth following broader [cross-platform app implementation patterns](https://capgo.app/blog/category/capacitor/). Start with the official [WhatsApp website](https://www.whatsapp.com).
 
 <a id="2-telegram"></a>
 ## 2. Telegram

@@ -81,3 +81,25 @@
 /.well-known/assetlinks.json /deepLink/assetlinks.json 200
 /en/* /:splat 301
 /docs/plugin/* /docs/plugins/updater/:splat 301
+
+
+# Legacy backlink recovery
+# Dynamic /blog/category/* and short /plugins/* recovery lives in apps/web/src/worker/index.ts
+/home / 301
+/home/ / 301
+/de/home /de/ 301
+/de/home/ /de/ 301
+/es/home /es/ 301
+/es/home/ /es/ 301
+/fr/home /fr/ 301
+/fr/home/ /fr/ 301
+/id/home /id/ 301
+/id/home/ /id/ 301
+/it/home /it/ 301
+/it/home/ /it/ 301
+/ja/home /ja/ 301
+/ja/home/ /ja/ 301
+/ko/home /ko/ 301
+/ko/home/ /ko/ 301
+/zh/home /zh/ 301
+/zh/home/ /zh/ 301

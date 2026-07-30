@@ -68,7 +68,7 @@ That matters even more if your product touches regulated workflows, customer rec
 
 This isn't only a founder or GRC problem. Engineering owns much of the underlying evidence. Pull request approvals, access control, incident response records, logging coverage, endpoint security, change tickets, and vendor management all show up sooner or later.
 
-If your team wants a practical starting point, Capgo's [data compliance articles for development teams](https://capgo.app/blog/category/data-compliance/) give a useful lens on how compliance expectations show up inside real product delivery. The important point is simple: SOC 2 often starts as a sales requirement, but maintaining it becomes an engineering discipline.
+If your team wants a practical starting point, Capgo's [security articles for development teams](https://capgo.app/blog/category/security/) give a useful lens on how compliance expectations show up inside real product delivery. The important point is simple: SOC 2 often starts as a sales requirement, but maintaining it becomes an engineering discipline.
 
 <a id="understanding-the-five-trust-services-criteria"></a>
 ## Understanding the Five Trust Services Criteria
