@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { resolveLegacyPathRedirect } from '../../../shared/legacyPathRedirects'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
@@ -283,6 +284,10 @@ function staticLegacyRedirect(request: Request, pathname: string): Response | nu
   if (path === '/app/apikeys' || path === '/app/apikeys/') {
     const search = new URL(request.url).search
     return redirectToAbsolute(`https://console.capgo.app/apikeys${search}`)
+  }
+  const legacyTarget = resolveLegacyPathRedirect(path)
+  if (legacyTarget) {
+    return redirectToPath(request, `${localePrefix}${legacyTarget}`)
   }
   return null
 }

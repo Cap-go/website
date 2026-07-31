@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
@@ -336,6 +337,8 @@ function localizedAbsoluteUrl(requestUrl: URL, locale: string, basePath: string)
 }
 
 function rewriteRedirectPath(pathname: string): string {
+  const legacyTarget = resolveLegacyPathRedirect(pathname)
+  if (legacyTarget) return legacyTarget
   if (pathname === '/docs/cli/overview' || pathname === '/docs/cli/overview/') return '/docs/cli/'
   if (pathname === '/docs/getting-started' || pathname === '/docs/getting-started/') return '/docs/getting-started/quickstart/'
   if (pathname === '/docs/plugin/api' || pathname === '/docs/plugin/api/') return '/docs/plugins/updater/api/'
@@ -2681,6 +2684,23 @@ export default {
 
     if (shouldBypassTranslation(requestUrl.pathname)) {
       return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
+    }
+
+    const englishPath = stripLocalePrefix(requestUrl.pathname)
+    const rewrittenEnglish = rewriteRedirectPath(englishPath)
+    if (withTrailingSlash(rewrittenEnglish) !== withTrailingSlash(englishPath)) {
+      const redirectUrl = new URL(requestUrl)
+      redirectUrl.pathname = localizedPath(withTrailingSlash(rewrittenEnglish), locale)
+      return trackAICrawler(
+        request,
+        new Response(null, {
+          status: 301,
+          headers: {
+            Location: `${redirectUrl.pathname}${redirectUrl.search}${redirectUrl.hash}`,
+          },
+        }),
+        ctx,
+      )
     }
 
     try {
