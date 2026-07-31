@@ -2688,9 +2688,13 @@ export default {
 
     const englishPath = stripLocalePrefix(requestUrl.pathname)
     const rewrittenEnglish = rewriteRedirectPath(englishPath)
-    if (withTrailingSlash(rewrittenEnglish) !== withTrailingSlash(englishPath)) {
+    const rewrittenHashIndex = rewrittenEnglish.indexOf('#')
+    const rewrittenPathOnly = rewrittenHashIndex === -1 ? rewrittenEnglish : rewrittenEnglish.slice(0, rewrittenHashIndex)
+    const rewrittenHash = rewrittenHashIndex === -1 ? '' : rewrittenEnglish.slice(rewrittenHashIndex)
+    if (withTrailingSlash(rewrittenPathOnly) !== withTrailingSlash(englishPath)) {
       const redirectUrl = new URL(requestUrl)
-      redirectUrl.pathname = localizedPath(withTrailingSlash(rewrittenEnglish), locale)
+      redirectUrl.pathname = localizedPath(withTrailingSlash(rewrittenPathOnly), locale)
+      redirectUrl.hash = rewrittenHash.startsWith('#') ? rewrittenHash.slice(1) : rewrittenHash
       return trackAICrawler(
         request,
         new Response(null, {

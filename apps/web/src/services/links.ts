@@ -41,9 +41,13 @@ export function canonicalizeInternalPath(value = ''): string {
 
   const { pathname, suffix } = splitPathSuffix(value)
   const rootedPathname = pathname.startsWith('/') ? pathname : `/${pathname}`
-  const canonicalPathname = withTrailingSlash(rewriteRedirectPath(stripLocalePrefix(rootedPathname)))
+  const rewritten = rewriteRedirectPath(stripLocalePrefix(rootedPathname))
+  const hashIndex = rewritten.indexOf('#')
+  const pathOnly = hashIndex === -1 ? rewritten : rewritten.slice(0, hashIndex)
+  const hash = hashIndex === -1 ? '' : rewritten.slice(hashIndex)
+  const canonicalPathname = withTrailingSlash(pathOnly)
 
-  return `${canonicalPathname}${suffix}`
+  return `${canonicalPathname}${suffix}${hash}`
 }
 
 export function getRelativeLocaleUrl(locale: string, path = ''): string {

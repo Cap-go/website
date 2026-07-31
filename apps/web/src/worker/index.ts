@@ -259,7 +259,10 @@ function splitLocalePath(pathname: string): { localePrefix: string; path: string
 
 function redirectToPath(request: Request, pathname: string, status = 301): Response {
   const url = new URL(request.url)
-  return Response.redirect(new URL(`${pathname}${url.search}`, request.url).toString(), status)
+  const hashIndex = pathname.indexOf('#')
+  const pathOnly = hashIndex === -1 ? pathname : pathname.slice(0, hashIndex)
+  const hash = hashIndex === -1 ? '' : pathname.slice(hashIndex)
+  return Response.redirect(new URL(`${pathOnly}${url.search}${hash}`, request.url).toString(), status)
 }
 
 async function assetExists(env: Env, request: Request, pathname: string): Promise<boolean> {

@@ -10,6 +10,9 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/building-a-native-mobile-app-with-nuxt-3-and-capacitor': '/blog/building-a-native-mobile-app-with-nuxt-and-capacitor/',
   '/blog/alternative-to-capawesome': '/capwesome/',
   '/blog/capgo-vs-capawesome-comparing-ota-update-plugins': '/capwesome/',
+  '/blog/how-to-use-capacitor-with-nextjs': '/blog/nextjs-mobile-app-capacitor-from-scratch/',
+  '/blog/gestione-dei-changelog-di-capacitor-guida-completa':
+    '/blog/capacitor-comprehensive-guide/#is-there-enterprise-specific-support-available',
 }
 
 function normalizeLegacyLookupPath(pathname: string): string {
