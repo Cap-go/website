@@ -273,6 +273,15 @@ function redirectToAbsolute(url: string, status = 301): Response {
   return Response.redirect(url, status)
 }
 
+const PLUGIN_DOCS_REDIRECTS: Record<string, string> = {
+  'capacitor-supabase': '/docs/plugins/supabase/',
+  supabase: '/docs/plugins/supabase/',
+  'capacitor-pretty-toast': '/docs/plugins/pretty-toast/',
+  'pretty-toast': '/docs/plugins/pretty-toast/',
+  'capacitor-sheets': '/docs/plugins/sheets/',
+  sheets: '/docs/plugins/sheets/',
+}
+
 function staticLegacyRedirect(request: Request, pathname: string): Response | null {
   const { localePrefix, path } = splitLocalePath(pathname)
   if (path === '/home' || path === '/home/') {
@@ -284,6 +293,13 @@ function staticLegacyRedirect(request: Request, pathname: string): Response | nu
   if (path === '/app/apikeys' || path === '/app/apikeys/') {
     const search = new URL(request.url).search
     return redirectToAbsolute(`https://console.capgo.app/apikeys${search}`)
+  }
+  const pluginMatch = path.match(/^\/plugins\/([^/]+)\/?$/)
+  if (pluginMatch) {
+    const docsPath = PLUGIN_DOCS_REDIRECTS[pluginMatch[1]]
+    if (docsPath) {
+      return redirectToPath(request, `${localePrefix}${docsPath}`)
+    }
   }
   const legacyTarget = resolveLegacyPathRedirect(path)
   if (legacyTarget) {
@@ -322,15 +338,6 @@ async function brandedNotFoundResponse(request: Request, env: Env, pathname: str
   })
 }
 
-const PLUGIN_DOCS_REDIRECTS: Record<string, string> = {
-  'capacitor-supabase': '/docs/plugins/supabase/',
-  supabase: '/docs/plugins/supabase/',
-  'capacitor-pretty-toast': '/docs/plugins/pretty-toast/',
-  'pretty-toast': '/docs/plugins/pretty-toast/',
-  'capacitor-sheets': '/docs/plugins/sheets/',
-  sheets: '/docs/plugins/sheets/',
-}
-
 async function notFoundLegacyRedirect(request: Request, env: Env, pathname: string): Promise<Response | null> {
   const { localePrefix, path } = splitLocalePath(pathname)
 
@@ -350,11 +357,6 @@ async function notFoundLegacyRedirect(request: Request, env: Env, pathname: stri
       if (await assetExists(env, request, target)) {
         return redirectToPath(request, target)
       }
-    }
-
-    const docsPath = PLUGIN_DOCS_REDIRECTS[slug]
-    if (docsPath) {
-      return redirectToPath(request, `${localePrefix}${docsPath}`)
     }
   }
 
