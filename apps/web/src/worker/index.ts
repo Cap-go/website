@@ -287,6 +287,29 @@ function staticLegacyRedirect(request: Request, pathname: string): Response | nu
   return null
 }
 
+async function brandedNotFoundResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  const { localePrefix } = splitLocalePath(pathname)
+  const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
+  if (!(notFound.ok || notFound.status === 404)) return null
+
+  let body = await notFound.text()
+  if (localePrefix) {
+    body = body
+      .replaceAll('href="/"', `href="${localePrefix}/"`)
+      .replaceAll('href="/docs/"', `href="${localePrefix}/docs/"`)
+      .replaceAll('href="/plugins/"', `href="${localePrefix}/plugins/"`)
+  }
+
+  const headers = new Headers(notFound.headers)
+  headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.delete('Content-Length')
+  return new Response(body, {
+    status: 404,
+    statusText: 'Not Found',
+    headers,
+  })
+}
+
 async function notFoundLegacyRedirect(request: Request, env: Env, pathname: string): Promise<Response | null> {
   const { localePrefix, path } = splitLocalePath(pathname)
 
@@ -342,18 +365,8 @@ export default {
     if (assetResponse.status === 404) {
       const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
       if (legacyRedirect) return trackAICrawler(request, legacyRedirect, ctx)
-      const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
-      if (notFound.ok || notFound.status === 404) {
-        return trackAICrawler(
-          request,
-          new Response(notFound.body, {
-            status: 404,
-            statusText: 'Not Found',
-            headers: notFound.headers,
-          }),
-          ctx,
-        )
-      }
+      const brandedNotFound = await brandedNotFoundResponse(request, env, pathname)
+      if (brandedNotFound) return trackAICrawler(request, brandedNotFound, ctx)
     }
     if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
     if (pathname === '/' || pathname === '/index.html') {

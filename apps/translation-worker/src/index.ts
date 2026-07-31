@@ -598,6 +598,23 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
 async function temporaryEnglishRetryResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
+  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
+    const sourceHtml = await originResponse.text()
+    return withResponseHeaders(
+      createTranslatedHtmlResponse(
+        new Response(isHead ? null : sourceHtml, {
+          status: originResponse.status,
+          statusText: originResponse.statusText,
+          headers: originResponse.headers,
+        }),
+        sourceHtml,
+        requestUrl,
+        locale,
+      ),
+      'BYPASS',
+      isHead,
+    )
+  }
   if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
 
   const headers = new Headers(originResponse.headers)
@@ -1979,6 +1996,23 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale):
 async function loadSourceHtml(request: Request, env: Env, requestUrl: URL, locale: Locale): Promise<SourceHtmlResult> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) return { type: 'response', response: localizeRedirect(originResponse, requestUrl, locale) }
+  // Keep branded 404/410 pages, but localize links/canonicals for the active locale.
+  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
+    const sourceHtml = await originResponse.text()
+    return {
+      type: 'response',
+      response: createTranslatedHtmlResponse(
+        new Response(sourceHtml, {
+          status: originResponse.status,
+          statusText: originResponse.statusText,
+          headers: originResponse.headers,
+        }),
+        sourceHtml,
+        requestUrl,
+        locale,
+      ),
+    }
+  }
   if (!isHtmlResponse(originResponse) || !originResponse.ok) return { type: 'response', response: originResponse }
 
   const contentLength = Number.parseInt(originResponse.headers.get('Content-Length') || '0', 10)
