@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-31T07:53:17.355Z
-updated_at: 2026-07-31T07:53:18.577Z
+updated_at: 2026-07-31T07:55:31.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/bc2cb204-c287-4278-99bd-1434f499a29f/app-observability-presentation-title.jpg'
 head_image_alt: App Observability for Cross-Platform Teams
 keywords: 'app observability, mobile monitoring, capacitor, electron, live updates'
