@@ -270,6 +270,7 @@
 /plugins/ricoh360-camera-plugin/ /plugins/capacitor-ricoh360-camera-plugin/ 301
 
 # Legacy terms + old console app paths
+# Intentional asset-layer fallback; web worker staticLegacyRedirect handles these first.
 /terms /tos/ 301
 /terms/ /tos/ 301
 /de/terms /de/tos/ 301
@@ -292,6 +293,7 @@
 /app/apikeys/ https://console.capgo.app/apikeys 301
 
 # Plugins that only have docs pages (no marketing tutorial yet)
+# Intentional asset-layer fallback; web worker staticLegacyRedirect handles plugin-docs aliases first.
 /plugins/capacitor-supabase /docs/plugins/supabase/ 301
 /plugins/capacitor-supabase/ /docs/plugins/supabase/ 301
 /plugins/supabase /docs/plugins/supabase/ 301

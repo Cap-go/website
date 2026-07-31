@@ -192,7 +192,8 @@ const redirectRows: RedirectRow[] = [
 const redirectMap = new Map<string, RedirectDefinition>(redirectRows.map(([source, destination, status]) => [source, { destination, status }]))
 
 function redirectResponse(request: Request, redirect: RedirectDefinition): Response {
-  return Response.redirect(new URL(redirect.destination, request.url).toString(), redirect.status)
+  const url = new URL(request.url)
+  return Response.redirect(new URL(`${redirect.destination}${url.search}`, request.url).toString(), redirect.status)
 }
 
 function isStaleCapgoLogoAsset(pathname: string): boolean {
