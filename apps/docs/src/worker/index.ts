@@ -17,10 +17,11 @@ const redirectRows: RedirectRow[] = [
   ['/docs/getting-started/', '/docs/getting-started/quickstart/', 301],
   ['/docs/plugins/updater/cloud-mode/getting-started/', '/docs/getting-started/quickstart/', 301],
   ['/docs/plugins/updater/commonProblems/', '/docs/plugins/updater/commonproblems/', 301],
-  ['/docs/cli/', '/docs/cli/overview/', 302],
+  ['/docs/cli/overview/', '/docs/cli/', 301],
+  ['/docs/cli/overview', '/docs/cli/', 301],
   ['/docs/cli/reference/', '/docs/cli/commands/', 302],
   ['/docs/cli/commands/build/', '/docs/cli/reference/build/', 302],
-  ['/docs/tooling/cli/', '/docs/cli/overview/', 302],
+  ['/docs/tooling/cli/', '/docs/cli/', 301],
   ['/docs/plugin/cloud-mode/getting-started/', '/docs/getting-started/quickstart/', 302],
   ['/docs/plugin/api', '/docs/plugins/updater/api/', 301],
   ['/docs/plugin/api/', '/docs/plugins/updater/api/', 301],
@@ -225,6 +226,20 @@ export default {
     }
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
+    if (response.status === 404) {
+      const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
+      if (notFound.ok || notFound.status === 404) {
+        return trackAICrawler(
+          request,
+          new Response(notFound.body, {
+            status: 404,
+            statusText: 'Not Found',
+            headers: notFound.headers,
+          }),
+          ctx,
+        )
+      }
+    }
     return trackAICrawler(request, response, ctx)
   },
 }

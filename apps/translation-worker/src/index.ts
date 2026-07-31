@@ -336,7 +336,7 @@ function localizedAbsoluteUrl(requestUrl: URL, locale: string, basePath: string)
 }
 
 function rewriteRedirectPath(pathname: string): string {
-  if (pathname === '/docs/cli' || pathname === '/docs/cli/') return '/docs/cli/overview/'
+  if (pathname === '/docs/cli/overview' || pathname === '/docs/cli/overview/') return '/docs/cli/'
   if (pathname === '/docs/getting-started' || pathname === '/docs/getting-started/') return '/docs/getting-started/quickstart/'
   if (pathname === '/docs/plugin/api' || pathname === '/docs/plugin/api/') return '/docs/plugins/updater/api/'
   if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {
@@ -1254,7 +1254,7 @@ function protectTranslationTokens(value: string): {
   let text = ''
   const replacements: [string, string][] = []
 
-  for (let index = 0; index < value.length; ) {
+  for (let index = 0; index < value.length;) {
     const token = protectedTokenAt(value, index)
     if (!token) {
       text += value[index]

@@ -1,7 +1,8 @@
-/docs/cli/ /docs/cli/overview/ 302
+/docs/cli/overview/ /docs/cli/ 301
+/docs/cli/overview /docs/cli/ 301
 /docs/cli/reference/ /docs/cli/commands/ 302
 /docs/cli/commands/build/ /docs/cli/reference/build/ 302
-/docs/tooling/cli/ /docs/cli/overview/ 302
+/docs/tooling/cli/ /docs/cli/ 301
 /solutions/enterprise /enterprise/ 302
 /solutions/enterprise/ /enterprise/ 302
 /docs/plugin/auto-update /docs/plugins/updater/settings/ 302

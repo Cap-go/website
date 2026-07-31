@@ -17,7 +17,6 @@ function stripLocalePrefix(pathname: string): string {
 }
 
 function rewriteRedirectPath(pathname: string): string {
-  if (pathname === '/docs/cli' || pathname === '/docs/cli/') return '/docs/cli/overview/'
   if (pathname === '/docs/getting-started' || pathname === '/docs/getting-started/') return '/docs/getting-started/quickstart/'
   if (pathname === '/docs/plugin/api' || pathname === '/docs/plugin/api/') return '/docs/plugins/updater/api/'
   if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {

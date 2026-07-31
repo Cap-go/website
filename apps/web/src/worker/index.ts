@@ -342,6 +342,18 @@ export default {
     if (assetResponse.status === 404) {
       const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
       if (legacyRedirect) return trackAICrawler(request, legacyRedirect, ctx)
+      const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
+      if (notFound.ok || notFound.status === 404) {
+        return trackAICrawler(
+          request,
+          new Response(notFound.body, {
+            status: 404,
+            statusText: 'Not Found',
+            headers: notFound.headers,
+          }),
+          ctx,
+        )
+      }
     }
     if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
     if (pathname === '/' || pathname === '/index.html') {
