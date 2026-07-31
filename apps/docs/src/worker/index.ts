@@ -242,7 +242,7 @@ export default {
       if (notFound.ok || notFound.status === 404) {
         return trackAICrawler(
           request,
-          new Response(notFound.body, {
+          new Response(request.method === 'HEAD' ? null : notFound.body, {
             status: 404,
             statusText: 'Not Found',
             headers: notFound.headers,

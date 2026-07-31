@@ -20,6 +20,7 @@ function stripLocalePrefix(pathname: string): string {
 function rewriteRedirectPath(pathname: string): string {
   const legacyTarget = resolveLegacyPathRedirect(pathname)
   if (legacyTarget) return legacyTarget
+  if (pathname === '/docs/cli/overview' || pathname === '/docs/cli/overview/') return '/docs/cli/'
   if (pathname === '/docs/getting-started' || pathname === '/docs/getting-started/') return '/docs/getting-started/quickstart/'
   if (pathname === '/docs/plugin/api' || pathname === '/docs/plugin/api/') return '/docs/plugins/updater/api/'
   if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {

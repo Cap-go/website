@@ -303,8 +303,9 @@ async function brandedNotFoundResponse(request: Request, env: Env, pathname: str
   const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
   if (!(notFound.ok || notFound.status === 404)) return null
 
-  let body = await notFound.text()
-  if (localePrefix) {
+  const isHead = request.method === 'HEAD'
+  let body = isHead ? null : await notFound.text()
+  if (!isHead && localePrefix && typeof body === 'string') {
     body = body
       .replaceAll('href="/"', `href="${localePrefix}/"`)
       .replaceAll('href="/docs/"', `href="${localePrefix}/docs/"`)
