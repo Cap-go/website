@@ -132,3 +132,17 @@
 /zh/terms/ /zh/tos/ 301
 /app/apikeys https://console.capgo.app/apikeys 301
 /app/apikeys/ https://console.capgo.app/apikeys 301
+
+# Plugins that only have docs pages (no marketing tutorial yet)
+/plugins/capacitor-supabase /docs/plugins/supabase/ 301
+/plugins/capacitor-supabase/ /docs/plugins/supabase/ 301
+/plugins/supabase /docs/plugins/supabase/ 301
+/plugins/supabase/ /docs/plugins/supabase/ 301
+/plugins/capacitor-pretty-toast /docs/plugins/pretty-toast/ 301
+/plugins/capacitor-pretty-toast/ /docs/plugins/pretty-toast/ 301
+/plugins/pretty-toast /docs/plugins/pretty-toast/ 301
+/plugins/pretty-toast/ /docs/plugins/pretty-toast/ 301
+/plugins/capacitor-sheets /docs/plugins/sheets/ 301
+/plugins/capacitor-sheets/ /docs/plugins/sheets/ 301
+/plugins/sheets /docs/plugins/sheets/ 301
+/plugins/sheets/ /docs/plugins/sheets/ 301

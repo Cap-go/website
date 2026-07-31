@@ -310,6 +310,15 @@ async function brandedNotFoundResponse(request: Request, env: Env, pathname: str
   })
 }
 
+const PLUGIN_DOCS_REDIRECTS: Record<string, string> = {
+  'capacitor-supabase': '/docs/plugins/supabase/',
+  supabase: '/docs/plugins/supabase/',
+  'capacitor-pretty-toast': '/docs/plugins/pretty-toast/',
+  'pretty-toast': '/docs/plugins/pretty-toast/',
+  'capacitor-sheets': '/docs/plugins/sheets/',
+  sheets: '/docs/plugins/sheets/',
+}
+
 async function notFoundLegacyRedirect(request: Request, env: Env, pathname: string): Promise<Response | null> {
   const { localePrefix, path } = splitLocalePath(pathname)
 
@@ -329,6 +338,11 @@ async function notFoundLegacyRedirect(request: Request, env: Env, pathname: stri
       if (await assetExists(env, request, target)) {
         return redirectToPath(request, target)
       }
+    }
+
+    const docsPath = PLUGIN_DOCS_REDIRECTS[slug]
+    if (docsPath) {
+      return redirectToPath(request, `${localePrefix}${docsPath}`)
     }
   }
 
