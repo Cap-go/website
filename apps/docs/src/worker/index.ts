@@ -218,6 +218,11 @@ function trackAICrawler(request: Request, response: Response, ctx?: BackgroundCo
   return response
 }
 
+function shouldServeBrandedNotFound(pathname: string): boolean {
+  if (/\.[a-z0-9]{2,8}$/i.test(pathname) && !pathname.endsWith('.html')) return false
+  return true
+}
+
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const url = new URL(request.url)
@@ -232,7 +237,7 @@ export default {
     }
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
-    if (response.status === 404) {
+    if (response.status === 404 && shouldServeBrandedNotFound(pathname)) {
       const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
       if (notFound.ok || notFound.status === 404) {
         return trackAICrawler(

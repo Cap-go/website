@@ -292,6 +292,12 @@ function staticLegacyRedirect(request: Request, pathname: string): Response | nu
   return null
 }
 
+function shouldServeBrandedNotFound(pathname: string): boolean {
+  // Keep normal asset 404s for missing build artifacts, images, fonts, etc.
+  if (/\.[a-z0-9]{2,8}$/i.test(pathname) && !pathname.endsWith('.html')) return false
+  return true
+}
+
 async function brandedNotFoundResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
   const { localePrefix } = splitLocalePath(pathname)
   const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
@@ -384,8 +390,10 @@ export default {
     if (assetResponse.status === 404) {
       const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
       if (legacyRedirect) return trackAICrawler(request, legacyRedirect, ctx)
-      const brandedNotFound = await brandedNotFoundResponse(request, env, pathname)
-      if (brandedNotFound) return trackAICrawler(request, brandedNotFound, ctx)
+      if (shouldServeBrandedNotFound(pathname)) {
+        const brandedNotFound = await brandedNotFoundResponse(request, env, pathname)
+        if (brandedNotFound) return trackAICrawler(request, brandedNotFound, ctx)
+      }
     }
     if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
     if (pathname === '/' || pathname === '/index.html') {
