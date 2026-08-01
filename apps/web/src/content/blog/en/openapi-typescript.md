@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-01T08:15:08.551Z
-updated_at: 2026-08-01T08:15:09.503Z
+updated_at: 2026-08-01T08:17:39.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/2be4bf4e-fccd-428f-b932-429424ad81ae/openapi-typescript-presentation-slide.jpg'
 head_image_alt: 'OpenAPI TypeScript: Generate Types, Clients, and Validation'
 keywords: 'openapi typescript, type-safe api, openapi codegen, tsc validation, contract testing'
