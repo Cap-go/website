@@ -355,7 +355,11 @@ function withTrailingSlash(pathname: string): string {
 }
 
 function canonicalInternalPathname(pathname: string): string {
-  return withTrailingSlash(rewriteRedirectPath(stripLocalePrefix(pathname)))
+  const rewritten = rewriteRedirectPath(stripLocalePrefix(pathname))
+  const hashIndex = rewritten.indexOf('#')
+  const pathOnly = hashIndex === -1 ? rewritten : rewritten.slice(0, hashIndex)
+  const hash = hashIndex === -1 ? '' : rewritten.slice(hashIndex)
+  return `${withTrailingSlash(pathOnly)}${hash}`
 }
 
 function shouldBypassTranslation(pathname: string): boolean {
@@ -398,7 +402,12 @@ function localizeHref(value: string, locale: Locale, requestUrl: URL): string {
   if (url.host !== requestUrl.host) return value
   if (hasExplicitLocalePath(trimmed, url)) return value
   if (shouldBypassTranslation(url.pathname)) return value
-  url.pathname = localizedPath(canonicalInternalPathname(url.pathname), locale)
+  const canonical = canonicalInternalPathname(url.pathname)
+  const canonicalHashIndex = canonical.indexOf('#')
+  const canonicalPath = canonicalHashIndex === -1 ? canonical : canonical.slice(0, canonicalHashIndex)
+  const canonicalHash = canonicalHashIndex === -1 ? '' : canonical.slice(canonicalHashIndex)
+  url.pathname = localizedPath(canonicalPath, locale)
+  if (canonicalHash) url.hash = canonicalHash.startsWith('#') ? canonicalHash.slice(1) : canonicalHash
   if (trimmed.startsWith('//')) return `//${url.host}${url.pathname}${url.search}${url.hash}`
   if (isHttpUrl(trimmed)) return url.toString()
   return `${url.pathname}${url.search}${url.hash}`
