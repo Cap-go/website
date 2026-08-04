@@ -354,12 +354,20 @@ function withTrailingSlash(pathname: string): string {
   return `${pathname}/`
 }
 
+function splitPathAndHash(value: string): { path: string; hash: string } {
+  const hashIndex = value.indexOf('#')
+  if (hashIndex === -1) return { path: value, hash: '' }
+  return { path: value.slice(0, hashIndex), hash: value.slice(hashIndex) }
+}
+
+function canonicalInternalPathParts(pathname: string): { path: string; hash: string } {
+  const { path, hash } = splitPathAndHash(rewriteRedirectPath(stripLocalePrefix(pathname)))
+  return { path: withTrailingSlash(path), hash }
+}
+
 function canonicalInternalPathname(pathname: string): string {
-  const rewritten = rewriteRedirectPath(stripLocalePrefix(pathname))
-  const hashIndex = rewritten.indexOf('#')
-  const pathOnly = hashIndex === -1 ? rewritten : rewritten.slice(0, hashIndex)
-  const hash = hashIndex === -1 ? '' : rewritten.slice(hashIndex)
-  return `${withTrailingSlash(pathOnly)}${hash}`
+  const { path, hash } = canonicalInternalPathParts(pathname)
+  return `${path}${hash}`
 }
 
 function shouldBypassTranslation(pathname: string): boolean {
@@ -402,10 +410,7 @@ function localizeHref(value: string, locale: Locale, requestUrl: URL): string {
   if (url.host !== requestUrl.host) return value
   if (hasExplicitLocalePath(trimmed, url)) return value
   if (shouldBypassTranslation(url.pathname)) return value
-  const canonical = canonicalInternalPathname(url.pathname)
-  const canonicalHashIndex = canonical.indexOf('#')
-  const canonicalPath = canonicalHashIndex === -1 ? canonical : canonical.slice(0, canonicalHashIndex)
-  const canonicalHash = canonicalHashIndex === -1 ? '' : canonical.slice(canonicalHashIndex)
+  const { path: canonicalPath, hash: canonicalHash } = canonicalInternalPathParts(url.pathname)
   url.pathname = localizedPath(canonicalPath, locale)
   if (canonicalHash) url.hash = canonicalHash.startsWith('#') ? canonicalHash.slice(1) : canonicalHash
   if (trimmed.startsWith('//')) return `//${url.host}${url.pathname}${url.search}${url.hash}`
