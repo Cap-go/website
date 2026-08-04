@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
@@ -336,7 +337,9 @@ function localizedAbsoluteUrl(requestUrl: URL, locale: string, basePath: string)
 }
 
 function rewriteRedirectPath(pathname: string): string {
-  if (pathname === '/docs/cli' || pathname === '/docs/cli/') return '/docs/cli/overview/'
+  const legacyTarget = resolveLegacyPathRedirect(pathname)
+  if (legacyTarget) return legacyTarget
+  if (pathname === '/docs/cli/overview' || pathname === '/docs/cli/overview/') return '/docs/cli/'
   if (pathname === '/docs/getting-started' || pathname === '/docs/getting-started/') return '/docs/getting-started/quickstart/'
   if (pathname === '/docs/plugin/api' || pathname === '/docs/plugin/api/') return '/docs/plugins/updater/api/'
   if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {
@@ -351,8 +354,20 @@ function withTrailingSlash(pathname: string): string {
   return `${pathname}/`
 }
 
+function splitPathAndHash(value: string): { path: string; hash: string } {
+  const hashIndex = value.indexOf('#')
+  if (hashIndex === -1) return { path: value, hash: '' }
+  return { path: value.slice(0, hashIndex), hash: value.slice(hashIndex) }
+}
+
+function canonicalInternalPathParts(pathname: string): { path: string; hash: string } {
+  const { path, hash } = splitPathAndHash(rewriteRedirectPath(stripLocalePrefix(pathname)))
+  return { path: withTrailingSlash(path), hash }
+}
+
 function canonicalInternalPathname(pathname: string): string {
-  return withTrailingSlash(rewriteRedirectPath(stripLocalePrefix(pathname)))
+  const { path, hash } = canonicalInternalPathParts(pathname)
+  return `${path}${hash}`
 }
 
 function shouldBypassTranslation(pathname: string): boolean {
@@ -395,7 +410,9 @@ function localizeHref(value: string, locale: Locale, requestUrl: URL): string {
   if (url.host !== requestUrl.host) return value
   if (hasExplicitLocalePath(trimmed, url)) return value
   if (shouldBypassTranslation(url.pathname)) return value
-  url.pathname = localizedPath(canonicalInternalPathname(url.pathname), locale)
+  const { path: canonicalPath, hash: canonicalHash } = canonicalInternalPathParts(url.pathname)
+  url.pathname = localizedPath(canonicalPath, locale)
+  if (canonicalHash) url.hash = canonicalHash.startsWith('#') ? canonicalHash.slice(1) : canonicalHash
   if (trimmed.startsWith('//')) return `//${url.host}${url.pathname}${url.search}${url.hash}`
   if (isHttpUrl(trimmed)) return url.toString()
   return `${url.pathname}${url.search}${url.hash}`
@@ -598,6 +615,23 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
 async function temporaryEnglishRetryResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
+  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
+    const sourceHtml = await originResponse.text()
+    return withResponseHeaders(
+      createTranslatedHtmlResponse(
+        new Response(isHead ? null : sourceHtml, {
+          status: originResponse.status,
+          statusText: originResponse.statusText,
+          headers: originResponse.headers,
+        }),
+        sourceHtml,
+        requestUrl,
+        locale,
+      ),
+      'BYPASS',
+      isHead,
+    )
+  }
   if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
 
   const headers = new Headers(originResponse.headers)
@@ -1254,7 +1288,7 @@ function protectTranslationTokens(value: string): {
   let text = ''
   const replacements: [string, string][] = []
 
-  for (let index = 0; index < value.length; ) {
+  for (let index = 0; index < value.length;) {
     const token = protectedTokenAt(value, index)
     if (!token) {
       text += value[index]
@@ -1979,6 +2013,23 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale):
 async function loadSourceHtml(request: Request, env: Env, requestUrl: URL, locale: Locale): Promise<SourceHtmlResult> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) return { type: 'response', response: localizeRedirect(originResponse, requestUrl, locale) }
+  // Keep branded 404/410 pages, but localize links/canonicals for the active locale.
+  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
+    const sourceHtml = await originResponse.text()
+    return {
+      type: 'response',
+      response: createTranslatedHtmlResponse(
+        new Response(sourceHtml, {
+          status: originResponse.status,
+          statusText: originResponse.statusText,
+          headers: originResponse.headers,
+        }),
+        sourceHtml,
+        requestUrl,
+        locale,
+      ),
+    }
+  }
   if (!isHtmlResponse(originResponse) || !originResponse.ok) return { type: 'response', response: originResponse }
 
   const contentLength = Number.parseInt(originResponse.headers.get('Content-Length') || '0', 10)
@@ -2647,6 +2698,27 @@ export default {
 
     if (shouldBypassTranslation(requestUrl.pathname)) {
       return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
+    }
+
+    const englishPath = stripLocalePrefix(requestUrl.pathname)
+    const rewrittenEnglish = rewriteRedirectPath(englishPath)
+    const rewrittenHashIndex = rewrittenEnglish.indexOf('#')
+    const rewrittenPathOnly = rewrittenHashIndex === -1 ? rewrittenEnglish : rewrittenEnglish.slice(0, rewrittenHashIndex)
+    const rewrittenHash = rewrittenHashIndex === -1 ? '' : rewrittenEnglish.slice(rewrittenHashIndex)
+    if (withTrailingSlash(rewrittenPathOnly) !== withTrailingSlash(englishPath)) {
+      const redirectUrl = new URL(requestUrl)
+      redirectUrl.pathname = localizedPath(withTrailingSlash(rewrittenPathOnly), locale)
+      redirectUrl.hash = rewrittenHash.startsWith('#') ? rewrittenHash.slice(1) : rewrittenHash
+      return trackAICrawler(
+        request,
+        new Response(null, {
+          status: 301,
+          headers: {
+            Location: `${redirectUrl.pathname}${redirectUrl.search}${redirectUrl.hash}`,
+          },
+        }),
+        ctx,
+      )
     }
 
     try {

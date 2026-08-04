@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { resolveLegacyPathRedirect } from '../../../shared/legacyPathRedirects'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
@@ -258,7 +259,10 @@ function splitLocalePath(pathname: string): { localePrefix: string; path: string
 
 function redirectToPath(request: Request, pathname: string, status = 301): Response {
   const url = new URL(request.url)
-  return Response.redirect(new URL(`${pathname}${url.search}`, request.url).toString(), status)
+  const hashIndex = pathname.indexOf('#')
+  const pathOnly = hashIndex === -1 ? pathname : pathname.slice(0, hashIndex)
+  const hash = hashIndex === -1 ? '' : pathname.slice(hashIndex)
+  return Response.redirect(new URL(`${pathOnly}${url.search}${hash}`, request.url).toString(), status)
 }
 
 async function assetExists(env: Env, request: Request, pathname: string): Promise<boolean> {
@@ -268,12 +272,73 @@ async function assetExists(env: Env, request: Request, pathname: string): Promis
   return response.ok
 }
 
-function homeRedirect(request: Request, pathname: string): Response | null {
+function redirectToAbsolute(url: string, status = 301): Response {
+  return Response.redirect(url, status)
+}
+
+const PLUGIN_DOCS_REDIRECTS: Record<string, string> = {
+  'capacitor-supabase': '/docs/plugins/supabase/',
+  supabase: '/docs/plugins/supabase/',
+  'capacitor-pretty-toast': '/docs/plugins/pretty-toast/',
+  'pretty-toast': '/docs/plugins/pretty-toast/',
+  'capacitor-sheets': '/docs/plugins/sheets/',
+  sheets: '/docs/plugins/sheets/',
+}
+
+function staticLegacyRedirect(request: Request, pathname: string): Response | null {
   const { localePrefix, path } = splitLocalePath(pathname)
   if (path === '/home' || path === '/home/') {
     return redirectToPath(request, `${localePrefix}/`)
   }
+  if (path === '/terms' || path === '/terms/') {
+    return redirectToPath(request, `${localePrefix}/tos/`)
+  }
+  if (path === '/app/apikeys' || path === '/app/apikeys/') {
+    const search = new URL(request.url).search
+    return redirectToAbsolute(`https://console.capgo.app/apikeys${search}`)
+  }
+  const pluginMatch = path.match(/^\/plugins\/([^/]+)\/?$/)
+  if (pluginMatch) {
+    const docsPath = PLUGIN_DOCS_REDIRECTS[pluginMatch[1]]
+    if (docsPath) {
+      return redirectToPath(request, `${localePrefix}${docsPath}`)
+    }
+  }
+  const legacyTarget = resolveLegacyPathRedirect(path)
+  if (legacyTarget) {
+    return redirectToPath(request, `${localePrefix}${legacyTarget}`)
+  }
   return null
+}
+
+function shouldServeBrandedNotFound(pathname: string): boolean {
+  // Keep normal asset 404s for missing build artifacts, images, fonts, etc.
+  if (/\.[a-z0-9]{2,8}$/i.test(pathname) && !pathname.endsWith('.html')) return false
+  return true
+}
+
+async function brandedNotFoundResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  const { localePrefix } = splitLocalePath(pathname)
+  const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
+  if (!(notFound.ok || notFound.status === 404)) return null
+
+  const isHead = request.method === 'HEAD'
+  let body = isHead ? null : await notFound.text()
+  if (!isHead && localePrefix && typeof body === 'string') {
+    body = body
+      .replaceAll('href="/"', `href="${localePrefix}/"`)
+      .replaceAll('href="/docs/"', `href="${localePrefix}/docs/"`)
+      .replaceAll('href="/plugins/"', `href="${localePrefix}/plugins/"`)
+  }
+
+  const headers = new Headers(notFound.headers)
+  headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.delete('Content-Length')
+  return new Response(body, {
+    status: 404,
+    statusText: 'Not Found',
+    headers,
+  })
 }
 
 async function notFoundLegacyRedirect(request: Request, env: Env, pathname: string): Promise<Response | null> {
@@ -313,8 +378,8 @@ async function notFoundLegacyRedirect(request: Request, env: Env, pathname: stri
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const pathname = new URL(request.url).pathname
-    const home = homeRedirect(request, pathname)
-    if (home) return trackAICrawler(request, home, ctx)
+    const staticRedirect = staticLegacyRedirect(request, pathname)
+    if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)
     const toolRouteResponse = await handleToolApiRequest(
       request,
       {
@@ -331,6 +396,10 @@ export default {
     if (assetResponse.status === 404) {
       const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
       if (legacyRedirect) return trackAICrawler(request, legacyRedirect, ctx)
+      if (shouldServeBrandedNotFound(pathname)) {
+        const brandedNotFound = await brandedNotFoundResponse(request, env, pathname)
+        if (brandedNotFound) return trackAICrawler(request, brandedNotFound, ctx)
+      }
     }
     if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
     if (pathname === '/' || pathname === '/index.html') {
