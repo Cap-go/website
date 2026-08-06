@@ -69,6 +69,9 @@
         "zod": "^4.4.3",
       },
     },
+    "apps/distrib-worker": {
+      "name": "@capgo/distrib-worker",
+    },
     "apps/docs": {
       "name": "@capgo/docs",
       "dependencies": {
@@ -90,7 +93,7 @@
         "@astrojs/check": "0.9.9",
         "@types/node": "^26.1.1",
         "vite-plugin-static-copy": "^4.1.1",
-        "wrangler": "^4.111.0",
+        "wrangler": "4.111.0",
         "zod": "^4.4.3",
       },
     },
@@ -233,6 +236,8 @@
     "@bruits/satteri-win32-arm64-msvc": ["@bruits/satteri-win32-arm64-msvc@0.9.3", "", { "os": "win32", "cpu": "arm64" }, "sha512-VnwjBHiAra/PNNEza8eSZdQiG4A3PtTJJwUDtOPAc6iTs0BWZwZX8+OPUZE7//yQCBhgvEMcI8vpwsAwCb6qGQ=="],
 
     "@bruits/satteri-win32-x64-msvc": ["@bruits/satteri-win32-x64-msvc@0.9.3", "", { "os": "win32", "cpu": "x64" }, "sha512-Dsoe4reWe69MyILmMwU6iISIceTW7YIFqbyym7haf9DhUvqkYfMAyp7GMM21JzV0SpG9A2BwzFVP7iq9mmxrpA=="],
+
+    "@capgo/distrib-worker": ["@capgo/distrib-worker@workspace:apps/distrib-worker"],
 
     "@capgo/docs": ["@capgo/docs@workspace:apps/docs"],
 
