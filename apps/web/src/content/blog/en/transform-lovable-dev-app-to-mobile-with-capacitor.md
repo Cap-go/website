@@ -622,6 +622,8 @@ npx @capgo/cli@latest bundle upload --channel production
 
 See [Capgo Live Updates docs](/docs/live-updates/getting-started/).
 
+To automate this upload every time someone clicks **Publish** in Lovable, follow [Automate Capgo Live Updates from Lovable with GitHub Actions](/blog/automate-capgo-live-updates-from-lovable-github-actions/).
+
 ✅ **Success:** Updater plugin is installed and `notifyAppReady()` runs on startup.
 
 ## Step 13 — Fix Status Bar Spacing with a Live Update
