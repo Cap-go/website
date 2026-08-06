@@ -26,7 +26,7 @@ npx @capgo/cli@latest bundle upload --channel=production
 
 The missing piece is not another terminal command inside Lovable. **Lovable cannot run Capgo on Publish.** When GitHub sync is enabled, **Publish pushes a commit to your repo**. GitHub Actions runs the build and `bundle upload` for you.
 
-This guide covers the only manual setup your client must do once: add `CAPGO_TOKEN` as a GitHub secret. Everything else can be added with a Lovable prompt or a small workflow file.
+This guide covers the only manual setup your client must do once: add `CAPGO_TOKEN` as a GitHub secret. For the workflow file, copy-paste the ready AI instruction into Lovable (Step 3).
 
 ## How the pipeline works
 
@@ -69,31 +69,15 @@ GitHub injects the secret into workflows as `${{ secrets.CAPGO_TOKEN }}`. The wo
 
 If the repo is under your client's organization, they must add the secret on **their** repo. You only need the key in GitHub, not in Lovable settings.
 
-## Step 3 — Add the GitHub Actions workflow
+## Step 3 — Paste this prompt into Lovable
 
-### Option A — Ask Lovable to create the file
-
-Paste this into Lovable chat (adjust branch name if your default is not `main`):
+Copy the block below into the Lovable chat. Do not change it unless your default branch is not `main` (then replace `main` with your branch name).
 
 ```text
-Create `.github/workflows/capgo-live-updates.yml` that runs on every push to `main`:
+Add Capgo Live Updates CI with GitHub Actions.
 
-1. Checkout code
-2. Setup Node.js 24 with npm cache
-3. Run `npm ci` and `npm run build`
-4. Run `npx @capgo/cli@latest bundle upload --channel=production`
-5. Use environment variable `CAPGO_TOKEN` from GitHub Actions secrets (do not hardcode the API key)
+Create exactly this file at `.github/workflows/capgo-live-updates.yml` (create folders if needed):
 
-Use `actions/checkout@v6` and `actions/setup-node@v6`. Commit the workflow file to the repo.
-```
-
-Lovable will add the YAML and push it on the next Publish.
-
-### Option B — Add the file yourself
-
-Create `.github/workflows/capgo-live-updates.yml`:
-
-```yaml
 name: Capgo Live Updates
 
 on:
@@ -123,11 +107,23 @@ jobs:
         run: npx @capgo/cli@latest bundle upload --channel=production
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+
+Rules:
+- Do not hardcode any Capgo API key in the repo or in chat.
+- The workflow must read CAPGO_TOKEN only from GitHub Actions secrets (`${{ secrets.CAPGO_TOKEN }}`).
+- Keep our existing build command if package.json uses a different script than `npm run build` (for example `vite build`). Prefer the project's real production build script.
+- If package-lock.json is missing, use `npm install` instead of `npm ci`.
+- Do not modify app UI or Capacitor config for this task.
+- Commit the workflow file so the next Publish pushes it to GitHub.
 ```
 
-Commit and push. The first run starts as soon as GitHub receives the push.
+After Lovable applies the change, click **Publish** so the workflow lands on GitHub.
 
-**Vite `base` path:** Lovable Vite apps often need `base: './'` in `vite.config.ts` so assets load inside the native shell. If users see a white screen after an OTA update, fix `base`, publish again, and let the workflow redeploy.
+### Manual alternative
+
+If you prefer not to use the Lovable chat, create `.github/workflows/capgo-live-updates.yml` with the same YAML as in the prompt above, then commit and push.
+
+**Vite `base` path:** Lovable Vite apps often need `base: './'` in `vite.config.ts` so assets load inside the native shell. If users see a white screen after an OTA update, ask Lovable to set `base: './'`, publish again, and let the workflow redeploy.
 
 **Encrypted bundles:** If you use [Capgo encryption](/docs/live-updates/encryption/), add `CAPGO_PRIVATE_KEY` as a second GitHub secret and pass `--key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"` on the upload step.
 
