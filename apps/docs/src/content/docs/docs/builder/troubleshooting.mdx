@@ -513,9 +513,21 @@ Current limitations:
 
 These limitations may be adjusted based on feedback.
 
+## Prescan blocked my build
+
+Capgo runs a local **prescan** before upload. Fix the reported finding, or ignore only that check id:
+
+```bash
+npx @capgo/cli@latest build request <appId> --platform ios \
+  --prescan-skip ios/capacitor-server-url-shipped
+```
+
+See the full catalog: [Prescan checks](/docs/builder/prescan/).
+
 ## Additional Resources
 
 - [Getting Started](/docs/builder/getting-started/) - Initial setup guide
 - [iOS Builds](/docs/builder/ios/) - iOS-specific configuration
 - [Android Builds](/docs/builder/android/) - Android-specific configuration
+- [Prescan checks](/docs/builder/prescan/) - Full list of pre-build checks and ignore flags
 - [CLI Reference](/docs/cli/reference/build/) - Complete command documentation
