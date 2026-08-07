@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-07T09:22:02.646Z
-updated_at: 2026-08-07T09:22:04.356Z
+updated_at: 2026-08-07T09:24:33.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/864cc317-a231-495d-8716-871b9f998a5b/log-analysis-tools-log-analysis.jpg'
 head_image_alt: Top 10 Log Analysis Tools for Dev Teams in 2026
 keywords: 'log analysis tools, observability, devops tools, log management, application monitoring'
