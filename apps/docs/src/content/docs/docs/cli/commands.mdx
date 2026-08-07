@@ -173,6 +173,7 @@ Optionally, you can give:
 * `--no-code-check` Ignore checking if notifyAppReady() is called in source code and index present in root folder.
 * `--display-iv-session` Show in the console the IV and session key used to encrypt the update.
 * `--bundle <bundle>` Bundle version number of the bundle to upload.
+* `--auto-bump [level]` Auto-increment from the channel's linked bundle, else the latest remote app version. Level: `major`, `minor` (default), `patch` (alias `fix`), or `metadata`. Bumps until a free name is found (deleted names stay occupied). Cannot be combined with `--bundle`.
 * `--min-update-version <minUpdateVersion>` Minimal version required to update to this version. Used only if the disable auto update is set to metadata in channel.
 * `--auto-min-update-version` Set the min update version based on native packages.
 * `--ignore-metadata-check` Ignores the metadata (node_modules) check when uploading.
