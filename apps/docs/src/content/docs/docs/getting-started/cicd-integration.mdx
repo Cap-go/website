@@ -158,7 +158,10 @@ npx @capgo/cli@latest bundle upload --auto-bump major
 npx @capgo/cli@latest bundle upload --auto-bump minor   # default when the flag has no value
 npx @capgo/cli@latest bundle upload --auto-bump patch   # alias: fix
 npx @capgo/cli@latest bundle upload --auto-bump metadata
+npx @capgo/cli@latest bundle upload --channel=production --auto-bump ai
 ```
+
+`--auto-bump ai` uses Capgo Cloudflare Workers AI to compare local bundle files against the previous Capgo/channel delta manifest, pick `major` | `minor` | `patch` | `metadata`, and print a short reason. With no previous Capgo version, AI is skipped and the bump is **patch**.
 
 Do not combine `--auto-bump` with `--bundle` / `-b`. See the [`bundle upload` reference](/docs/cli/reference/bundle/#bundle-upload) for the full option list.
 
