@@ -1,0 +1,32 @@
+---
+import m from '@/copy/messages'
+
+interface Props {
+  class?: string
+  tone?: 'dark' | 'light' | 'muted'
+  size?: 'sm' | 'md'
+  align?: 'center' | 'start'
+}
+
+const { class: className = '', tone = 'dark', size = 'md', align = 'center' } = Astro.props
+
+const toneClass = tone === 'light' ? 'text-gray-600' : tone === 'muted' ? 'text-gray-500' : 'text-gray-400'
+const sizeClass = size === 'sm' ? 'text-sm gap-1.5' : 'text-base sm:text-lg gap-2'
+const alignClass = align === 'start' ? 'justify-start' : 'justify-center'
+const avatarClass = size === 'sm' ? 'h-5 w-5' : 'h-7 w-7'
+const avatarPx = size === 'sm' ? 20 : 28
+---
+
+<p class:list={['font-inter inline-flex items-center', sizeClass, toneClass, alignClass, className]}>
+  <span>{m.home_hero_human_support({}, { locale: Astro.locals.locale })}</span>
+  <img
+    src="/martin-avatar.png"
+    alt=""
+    width={avatarPx}
+    height={avatarPx}
+    class:list={[avatarClass, 'rounded-full object-cover ring-2 ring-white/15']}
+    loading="lazy"
+    decoding="async"
+    aria-hidden="true"
+  />
+</p>

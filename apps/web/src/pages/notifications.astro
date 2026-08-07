@@ -3,6 +3,7 @@ import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -147,6 +148,7 @@ const guidanceChecks = [
           instead of leaving release teams to stitch it together.
         </p>
         <div class="hero-ctas">
+          <HumanSupport class="mb-3" size="sm" align="start" />
           <div class="hero-cta-buttons">
             <a class="btn btn-lg btn-primary" href={registerUrl}>Start with Capgo</a>
             <a class="btn btn-lg btn-ghost" href={liveUpdateUrl}>See live updates</a>
@@ -305,6 +307,7 @@ provider ready | recipients linked | update check enabled</pre>
               {guidanceChecks.map((check) => <li>{check}</li>)}
             </ul>
             <div class="hero-ctas" style="margin-top: 28px; align-items: flex-start;">
+              <HumanSupport class="mb-3" size="sm" align="start" />
               <div class="hero-cta-buttons">
                 <a class="btn btn-md btn-primary" href={pricingUrl}>Compare plans</a>
                 <a class="btn btn-md btn-ghost" href={pluginUrl}>View plugin page</a>
@@ -337,6 +340,7 @@ provider ready | recipients linked | update check enabled</pre>
           Reach users and move releases forward.
         </h2>
         <p class="tagline">Add native push, badge control, campaign stats, and silent update checks to your Capacitor release workflow.</p>
+        <HumanSupport class="mb-4" size="sm" />
         <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>Start with Capgo</a>
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">+</span> Native iOS and Android push</span>

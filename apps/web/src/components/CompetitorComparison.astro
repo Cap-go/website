@@ -1,5 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from '@/services/links'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 interface Difference {
   label: string
@@ -106,7 +107,9 @@ const fitCards = [
           </p>
           <h1 class="mt-6 text-4xl leading-tight font-black text-white sm:text-5xl lg:text-6xl">{page.title}</h1>
           <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{page.subtitle}</p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div class="mt-8 flex flex-col gap-3">
+            <HumanSupport size="sm" align="start" />
+            <div class="flex flex-col gap-3 sm:flex-row">
             <a
               href={registerUrl}
               class="inline-flex min-h-12 items-center justify-center rounded-lg bg-sky-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-sky-950/35 transition hover:bg-sky-400 focus:ring-2 focus:ring-sky-300 focus:outline-none"
@@ -119,6 +122,7 @@ const fitCards = [
             >
               See live updates
             </a>
+            </div>
           </div>
         </div>
 
@@ -290,7 +294,9 @@ const fitCards = [
         <p class="mt-4 max-w-2xl text-base leading-7 text-slate-300">
           Use Capgo for live updates, rollback, channels, device logs, plugin maintenance, and native builds when your app is built on Capacitor.
         </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div class="mt-8 flex flex-col gap-3">
+          <HumanSupport size="sm" align="start" />
+          <div class="flex flex-col gap-3 sm:flex-row">
           <a
             href={registerUrl}
             class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-bold text-gray-950 transition hover:bg-slate-200 focus:ring-2 focus:ring-white focus:outline-none"
@@ -303,6 +309,7 @@ const fitCards = [
           >
             Read live update guide
           </a>
+          </div>
         </div>
       </div>
     </div>

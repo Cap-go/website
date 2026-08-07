@@ -4,6 +4,7 @@ import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 import TeamAvatars from '@/components/TeamAvatars.astro'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]
@@ -109,6 +110,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
           </div>
 
           <div class="mt-6 space-y-3">
+            <HumanSupport tone="light" size="sm" align="start" class="mb-1" />
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
               target="_blank"

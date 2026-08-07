@@ -4,6 +4,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const title = m.alternatives_title({}, { locale })
@@ -309,7 +310,8 @@ const content = {
       <p class="mb-8 text-gray-300">
         {m.alternatives_cta_subtitle({}, { locale })}
       </p>
-      <a href={getRelativeLocaleUrl(locale, 'register')} class="inline-block rounded-lg bg-emerald-600 px-8 py-3 text-lg font-medium text-white hover:bg-emerald-700">
+      <HumanSupport class="mb-4" size="sm" />
+      <a href={getRelativeLocaleUrl(locale, 'register')} class="inline-block rounded-lg bg-emerald-600 px-8 py-3 text-lg font-medium text-white hover:bg-emerald-700">      <a href={getRelativeLocaleUrl(locale, 'register')} class="inline-block rounded-lg bg-emerald-600 px-8 py-3 text-lg font-medium text-white hover:bg-emerald-700">
         {m.alternatives_cta_button({}, { locale })}
       </a>
       <p class="mt-4 text-sm text-gray-400" set:html={m.alternatives_cta_questions({}, { locale })} />

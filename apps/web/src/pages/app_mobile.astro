@@ -9,6 +9,7 @@ import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const title = 'Capgo mobile app | Preview builds and manage live updates on the go'
 const description =
@@ -283,7 +284,10 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
             </a>
           ))
         }
+        <HumanSupport class="mb-3" size="sm" />
         <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+          class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-slate-950        <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
           class="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
