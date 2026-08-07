@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
+import HumanSupport from '@/components/HumanSupport.astro'
 import { createLdJsonGraph, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { pluginCountLabel } from '@/config/plugins'
 import type { Thing } from 'schema-dts'
@@ -196,7 +197,9 @@ const timeline = [
             hands-on, and focused on the release path between your code and your users.
           </p>
 
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div class="mt-8 flex flex-col gap-3">
+            <HumanSupport tone="light" size="sm" align="start" />
+            <div class="flex flex-col gap-3 sm:flex-row">
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
               class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
@@ -209,6 +212,7 @@ const timeline = [
             >
               Read the docs
             </a>
+            </div>
           </div>
         </div>
 
@@ -338,7 +342,9 @@ const timeline = [
             </div>
           </div>
 
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div class="mt-8 flex flex-col gap-3">
+            <HumanSupport tone="light" size="sm" align="start" />
+            <div class="flex flex-col gap-3 sm:flex-row">
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
               class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
@@ -351,6 +357,7 @@ const timeline = [
             >
               Read the full story
             </a>
+            </div>
           </div>
         </div>
       </div>

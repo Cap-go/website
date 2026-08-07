@@ -5,6 +5,7 @@ import { productVideos } from '@/config/productVideos'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const title = m.capflow_title({}, { locale })
@@ -412,6 +413,7 @@ const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
             <p class="mx-auto mb-8 max-w-2xl text-gray-300">
               {m.appflow_cta_subtitle({}, { locale })}
             </p>
+            <HumanSupport class="mb-4" size="sm" />
             <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
                 href={getRelativeLocaleUrl(locale, 'register')}

@@ -10,6 +10,7 @@ import m, { type MessageValues } from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from '@/services/links'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 type Plan = Database['public']['Tables']['plans']['Row']
 
@@ -283,6 +284,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         </h1>
         <p class="lead hero-lead">{copy('native_build_v2_hero_lead')}</p>
         <div class="hero-ctas">
+          <HumanSupport class="mb-3" size="sm" align="start" />
           <div class="hero-cta-buttons">
             <a class="btn btn-lg btn-primary" href={registerUrl}>{copy('native_build_v2_hero_cta')}</a>
             <a class="btn btn-lg btn-ghost" href="#how">{copy('native_build_v2_hero_secondary')} ↓</a>
@@ -949,6 +951,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           {copy('native_build_v2_cta_title')}
         </h2>
         <p class="tagline">{copy('native_build_v2_cta_tagline')}</p>
+        <HumanSupport class="mb-4" size="sm" />
         <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{copy('native_build_builder_start_trial')} →</a>
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">✓</span> {copy('native_build_v2_cta_meta1')}</span>

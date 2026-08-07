@@ -9,6 +9,7 @@ import type { Database } from '@/services/supabase.types'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import { numberWithSpaces } from '@/services/misc'
 import { pluginCountLabel } from '@/config/plugins'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig
@@ -507,6 +508,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </h1>
         <p class="lead hero-lead">{m.enterprise_hero_desc({}, { locale })}</p>
         <div class="hero-ctas">
+          <HumanSupport class="mb-3" size="sm" align="start" />
           <div class="hero-cta-buttons">
             <a
               class="btn btn-lg btn-primary"
@@ -565,6 +567,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
                 ))
               }
             </ul>
+            <HumanSupport class="mb-4" size="sm" />
             <a
               class="enterprise-partnership-cta"
               href="https://book.capgo.app/enterprise-inquiry/"
@@ -741,6 +744,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
                 ))
               }
             </ul>
+            <HumanSupport class="mb-4" size="sm" />
             <a
               class="enterprise-partnership-cta"
               href="https://book.capgo.app/enterprise-inquiry/"

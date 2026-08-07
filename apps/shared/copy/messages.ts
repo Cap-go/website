@@ -1686,6 +1686,7 @@ const messages = {
     'Build as usual, upload changed JavaScript and assets with the CLI or API, and target the channels that should receive them. Start automatic in 5 minutes or go manual for advanced release logic.',
   home_global_infrastructure_desc: 'Powered by serverless edge computing and distributed databases across 300+ cities and 13,000+ networks for ultra-fast global delivery.',
   home_global_network_label: 'Global Network',
+  home_hero_human_support: 'human support from Martin',
   home_hero_outcome_compliance_desc:
     'Update JavaScript, CSS, copy, runtime flags, and assets while native code and Capacitor config keep going through normal App Store and Play review.',
   home_hero_outcome_compliance_title: 'Keep store review for native changes',
