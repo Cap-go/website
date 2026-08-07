@@ -36,7 +36,10 @@ npx @capgo/cli@latest bundle upload --auto-bump major
 npx @capgo/cli@latest bundle upload --auto-bump minor   # default when the flag has no value
 npx @capgo/cli@latest bundle upload --auto-bump patch   # alias: fix
 npx @capgo/cli@latest bundle upload --auto-bump metadata
+npx @capgo/cli@latest bundle upload --channel=production --auto-bump ai
 ```
+
+With `--auto-bump ai`, Capgo Cloudflare Workers AI compares local bundle files to the previous Capgo/channel delta manifest, infers `major` | `minor` | `patch` | `metadata`, and prints a short reason in the CLI log. If no previous Capgo version exists, AI is skipped and the bump defaults to **patch**.
 
 **Options:**
 
@@ -64,7 +67,7 @@ npx @capgo/cli@latest bundle upload --auto-bump metadata
 | **--no-code-check** | <code>boolean</code> | Ignore checking if notifyAppReady() is called in source code and index present in root folder |
 | **--display-iv-session** | <code>boolean</code> | Show in the console the IV and session key used to encrypt the update |
 | **-b** | <code>string</code> | Bundle version number of the bundle to upload |
-| **--auto-bump** | <code>string</code> | Auto-increment from the channel's linked bundle, else the latest remote app version. Level: major, minor (default), patch (alias fix), or metadata. Bumps until a free name is found (deleted names stay occupied). Cannot be combined with --bundle (-b) |
+| **--auto-bump** | <code>string</code> | Auto-increment from the channel's linked bundle, else the latest remote app version. Level: major, minor (default), patch (alias fix), metadata, or ai (Workers AI infers level from local vs previous delta manifest; falls back to patch with no previous Capgo version). Bumps until a free name is found (deleted names stay occupied). Cannot be combined with --bundle (-b) |
 | **--link** | <code>string</code> | Link to external resource (e.g. GitHub release) |
 | **--comment** | <code>string</code> | Comment about this version, could be a release note, a commit hash, a commit message, etc. |
 | **--min-update-version** | <code>string</code> | Minimal version required to update to this version. Used only if the disable auto update is set to metadata in channel |
