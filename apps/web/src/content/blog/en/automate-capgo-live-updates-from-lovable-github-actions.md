@@ -71,12 +71,12 @@ If the repo is under your client's organization, they must add the secret on **t
 
 ## Step 3 — Paste this prompt into Lovable
 
-Copy the block below into the Lovable chat. Do not change it unless your default branch is not `main` (then replace `main` with your branch name).
+Copy the block below into the Lovable chat. If your default branch is not `main`, replace `main` in the workflow with your branch name.
 
 ```text
 Add Capgo Live Updates CI with GitHub Actions.
 
-Create exactly this file at `.github/workflows/capgo-live-updates.yml` (create folders if needed):
+Create `.github/workflows/capgo-live-updates.yml` (create folders if needed). Start from this YAML, then adapt install/build to this project while keeping Capgo upload + CAPGO_TOKEN secret behavior:
 
 name: Capgo Live Updates
 
@@ -111,7 +111,7 @@ jobs:
 Rules:
 - Do not hardcode any Capgo API key in the repo or in chat.
 - The workflow must read CAPGO_TOKEN only from GitHub Actions secrets (`${{ secrets.CAPGO_TOKEN }}`).
-- Keep our existing build command if package.json uses a different script than `npm run build` (for example `vite build`). Prefer the project's real production build script.
+- Prefer the project's real production build script from package.json (for example `npm run build` or `vite build`).
 - If package-lock.json is missing, use `npm install` instead of `npm ci`.
 - Do not modify app UI or Capacitor config for this task.
 - Commit the workflow file so the next Publish pushes it to GitHub.
@@ -121,7 +121,39 @@ After Lovable applies the change, click **Publish** so the workflow lands on Git
 
 ### Manual alternative
 
-If you prefer not to use the Lovable chat, create `.github/workflows/capgo-live-updates.yml` with the same YAML as in the prompt above, then commit and push.
+If you prefer not to use the Lovable chat, create `.github/workflows/capgo-live-updates.yml` with this YAML only (not the prompt prose). Adapt the install/build steps the same way as the rules above if your project differs, then commit and push.
+
+```yaml
+name: Capgo Live Updates
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload bundle to Capgo
+        run: npx @capgo/cli@latest bundle upload --channel=production
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+```
 
 **Vite `base` path:** Lovable Vite apps often need `base: './'` in `vite.config.ts` so assets load inside the native shell. If users see a white screen after an OTA update, ask Lovable to set `base: './'`, publish again, and let the workflow redeploy.
 
