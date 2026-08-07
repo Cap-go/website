@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-08-06T00:00:00.000Z
-updated_at: 2026-08-07T13:12:06.000Z
+updated_at: 2026-08-07T15:35:00.000Z
 head_image: /github_actions.webp
 head_image_alt: "Automate Capgo Live Updates from Lovable with GitHub Actions Capgo blog illustration"
 keywords: Lovable, Lovable.dev, Capgo, GitHub Actions, live updates, OTA, CI/CD, CAPGO_TOKEN, bundle upload, Capacitor
@@ -21,7 +21,7 @@ next_blog: automatic-build-and-release-with-github-actions
 Your client wants a single button in Lovable that ships changes to every active user. You already proved the update path works manually:
 
 ```bash
-npx @capgo/cli@latest bundle upload --channel=production
+npx @capgo/cli@latest bundle upload --channel=production --auto-bump
 ```
 
 The missing piece is not another terminal command inside Lovable. **Lovable cannot run Capgo on Publish.** When GitHub sync is enabled, **Publish pushes a commit to your repo**. GitHub Actions runs the build and `bundle upload` for you.
@@ -34,7 +34,7 @@ This guide covers the only manual setup your client must do once: add `CAPGO_TOK
 | --- | --- | --- |
 | 1 | Client | Edits the app in Lovable and clicks **Publish** |
 | 2 | Lovable | Commits and pushes to GitHub (usually `main`) |
-| 3 | GitHub Actions | `npm ci`, `npm run build`, `bundle upload` to Capgo |
+| 3 | GitHub Actions | `npm ci`, `npm run build`, `bundle upload --auto-bump` to Capgo |
 | 4 | Capgo | Active devices on the `production` channel receive the update |
 
 No SSH, no local CLI, no extra click after the secret is configured.
@@ -45,6 +45,12 @@ No SSH, no local CLI, no extra click after the secret is configured.
 - Capacitor + `@capgo/capacitor-updater` in the repo ([Lovable to mobile guide](/blog/transform-lovable-dev-app-to-mobile-with-capacitor/#step-12--add-capgo-live-updates))
 - App registered in Capgo with `capacitor.config.ts` pointing at the correct `appId`
 - `production` channel exists and is linked to the builds your users run
+
+## Why `--auto-bump`
+
+Every Capgo upload needs a **new unique bundle version**. Lovable Publish does not bump `package.json` for you, so CI would fail on the second deploy if you reuse the same version.
+
+`--auto-bump` reads the latest version on the channel (or app) and increments it. Default level is `minor`. You can pass `--auto-bump patch` or `--auto-bump major` if you prefer.
 
 ## Step 1 — Create a Capgo API key
 
@@ -104,13 +110,14 @@ jobs:
           npm run build
 
       - name: Upload bundle to Capgo
-        run: npx @capgo/cli@latest bundle upload --channel=production
+        run: npx @capgo/cli@latest bundle upload --channel=production --auto-bump
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 
 Rules:
 - Do not hardcode any Capgo API key in the repo or in chat.
 - The workflow must read CAPGO_TOKEN only from GitHub Actions secrets (`${{ secrets.CAPGO_TOKEN }}`).
+- Keep `--auto-bump` on the upload command so each Publish gets a new unique bundle version.
 - Prefer the project's real production build script from package.json (for example `npm run build` or `vite build`).
 - If package-lock.json is missing, use `npm install` instead of `npm ci`.
 - Do not modify app UI or Capacitor config for this task.
@@ -150,7 +157,7 @@ jobs:
           npm run build
 
       - name: Upload bundle to Capgo
-        run: npx @capgo/cli@latest bundle upload --channel=production
+        run: npx @capgo/cli@latest bundle upload --channel=production --auto-bump
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 ```
@@ -175,6 +182,7 @@ jobs:
 | --- | --- | --- |
 | Workflow never runs | Push went to a branch other than `main` | Change `branches` in the workflow or publish to `main` |
 | `CAPGO_TOKEN` / auth error | Secret missing or wrong name | Secret must be exactly `CAPGO_TOKEN` under Actions secrets |
+| Version already exists | Upload reused the same bundle version | Keep `--auto-bump` on the upload step (or pass `--auto-bump patch`) |
 | Build fails on `npm ci` | Lockfile out of sync | Run `npm install` locally, commit `package-lock.json`, publish again |
 | Upload succeeds, white screen | Wrong `webDir` or Vite `base` | Match `capacitor.config.ts` `webDir` to build output (`dist` for Vite) and set `base: './'` |
 | Users do not see the update | Channel not linked to their build | In Capgo, link the device build to `production` or set the channel to public |
