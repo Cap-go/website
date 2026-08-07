@@ -148,6 +148,20 @@ This configuration does the following:
 
 Make sure to run semantic-release before building your app so that the updated version from `package.json` is included in your build through the capacitor.config.
 
+### Auto-bump when the local version is already on Capgo
+
+Bundle names must be unique (deleted versions still occupy their name). If CI keeps uploading the same `package.json` version, the upload fails. Prefer bumping `package.json` (for example with semantic-release). When that is not practical, let the CLI pick the next free semver from the channel's linked bundle, or else the latest remote app version:
+
+```bash
+npx @capgo/cli@latest bundle upload --channel=production --auto-bump
+npx @capgo/cli@latest bundle upload --auto-bump major
+npx @capgo/cli@latest bundle upload --auto-bump minor   # default when the flag has no value
+npx @capgo/cli@latest bundle upload --auto-bump patch   # alias: fix
+npx @capgo/cli@latest bundle upload --auto-bump metadata
+```
+
+Do not combine `--auto-bump` with `--bundle` / `-b`. See the [`bundle upload` reference](/docs/cli/reference/bundle/#bundle-upload) for the full option list.
+
 ## Troubleshooting
 
 If you encounter issues with your Capgo CI/CD integration, here are a few things to check:

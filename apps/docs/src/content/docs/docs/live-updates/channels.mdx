@@ -209,6 +209,8 @@ It's important to note that bundles in Capgo are global to your app, not specifi
 
 When versioning your bundles, we recommend using [semantic versioning with Capgo's Semver Tester](/semver_tester/) and pre-release identifiers for channel-specific builds. For example, a beta release might be versioned as `1.2.3-beta.1`.
 
+In CI, if the local version was already uploaded, use `npx @capgo/cli@latest bundle upload --auto-bump` (optionally `major`, `minor`, `patch`/`fix`, or `metadata`) so the CLI bumps from the channel's linked bundle until a free name is found. You cannot combine it with `--bundle`. See [CI/CD Integration](/docs/getting-started/cicd-integration/#auto-bump-when-the-local-version-is-already-on-capgo) and the [CLI reference](/docs/cli/reference/bundle/#bundle-upload).
+
 This approach has several benefits:
 
 - It clearly communicates the relationship between builds. `1.2.3-beta.1` is obviously a pre-release of `1.2.3`.
