@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-08-09T08:00:00.000Z
-updated_at: 2026-08-09T08:00:00.000Z
+updated_at: 2026-08-09T08:59:00.000Z
 head_image: /blog-images/best-live-updates-system-for-mobile-app.webp
 head_image_alt: "Best Live Updates System for Mobile Apps in 2026 Capgo blog illustration"
 keywords: best live updates system for mobile app, OTA updates mobile, Capgo, Expo EAS Update, Shorebird, Capawesome Cloud, CodePush alternative, Capacitor live updates
@@ -42,10 +42,10 @@ If a tool only uploads a bundle and has no rollback story, it is not ready for p
 | Stack | Best live updates system | Why |
 | --- | --- | --- |
 | Capacitor / Ionic / Cordova / Electron web layer | [Capgo](https://capgo.app/) | Built for Capacitor OTA, with channels, rollback, delta updates, end-to-end encryption, device logs, native builds, and self-hosting options |
-| Expo / React Native with `expo-updates` | [Expo EAS Update](https://docs.expo.dev/eas-update/introduction/) | Native Expo workflow with runtime versions, insights, and republish |
-| Flutter | [Shorebird](https://shorebird.dev/) | Dart code push with rollback, patch signing, and Flutter-focused CI |
-| Capawesome ecosystem already in use | [Capawesome Cloud](https://capawesome.io/cloud/live-updates/) | Live updates plus builds and publishing inside that vendor stack |
-| Lightweight Capacitor OTA only | [OtaKit](https://www.otakit.app/) | Open-source core and simple update delivery without a full release platform |
+| Expo / React Native with `expo-updates` | Expo EAS Update | Native Expo workflow with runtime versions, insights, and republish |
+| Flutter | Shorebird | Dart code push with rollback, patch signing, and Flutter-focused CI |
+| Capawesome ecosystem already in use | Capawesome Cloud | Live updates plus builds and publishing inside that vendor stack |
+| Lightweight Capacitor OTA only | OtaKit | Open-source core and simple update delivery without a full release platform |
 | Existing Appflow customers | Migrate before Dec 31, 2027 | New Appflow commercial sales are discontinued |
 | Legacy CodePush / App Center | Capgo or EAS Update by stack | Hosted App Center CodePush is retired |
 
@@ -189,18 +189,6 @@ Yes. Existing Appflow access runs through December 31, 2027. Migration planning 
 ### Do live updates replace App Store and Google Play releases?
 
 No. Live updates accelerate compatible web or Dart changes. Native binary changes still need store submissions.
-
-## Sources
-
-- [Ionic announcement about the future of commercial products](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)
-- [Microsoft Visual Studio App Center retirement notice](https://learn.microsoft.com/en-us/appcenter/retirement)
-- [Microsoft standalone CodePush server repository](https://github.com/microsoft/code-push-server)
-- [Expo EAS Update introduction](https://docs.expo.dev/eas-update/introduction/)
-- [Shorebird Code Push overview](https://docs.shorebird.dev/code-push/)
-- [Capawesome Cloud Live Updates](https://capawesome.io/cloud/live-updates/)
-- [OtaKit](https://www.otakit.app/)
-- [Capgo Live Updates](/live-update/)
-- [Capgo pricing](/pricing/)
 
 ## Keep going
 
