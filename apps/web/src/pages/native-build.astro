@@ -1899,19 +1899,36 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     @media (max-width: 960px) {
       .nb .share-flow {
-        grid-template-columns: 1fr 1fr;
-        gap: 18px 14px;
+        grid-template-columns: 1fr;
+        gap: 0;
+        max-width: 320px;
+        margin: 0 auto;
       }
       .nb .share-connector {
-        display: none;
+        width: 2px;
+        height: 28px;
+        margin: 2px auto;
+        justify-self: center;
       }
-      .nb .share-node--qr {
-        grid-column: 1 / -1;
+      .nb .share-connector span {
+        inset: 0 0 auto 0;
+        width: 100%;
+        height: 42%;
+        background: linear-gradient(180deg, transparent, var(--relief-green), transparent);
+        animation-name: sharePulseY;
       }
-    }
-    @media (max-width: 560px) {
-      .nb .share-flow {
-        grid-template-columns: 1fr;
+      @keyframes sharePulseY {
+        0% {
+          top: -40%;
+          opacity: 0.2;
+        }
+        40% {
+          opacity: 1;
+        }
+        100% {
+          top: 100%;
+          opacity: 0.2;
+        }
       }
     }
     .nb .share-node {
