@@ -5,7 +5,7 @@ import HumanSupport from '@/components/HumanSupport.astro'
 const featureGroups = [
   {
     title: m.security_and_compliance(),
-    items: [m.single_sign_on_sso(), m.advanced_access_levels(), m.extended_security(), m.enterprise_security_automations(), m.soc2_compliance_short()],
+    items: [m.single_sign_on_sso(), m.advanced_access_levels(), m.extended_security(), m.enterprise_security_automations(), m.soc2_compliance_short(), m.compliance_iso27001()],
   },
   {
     title: m.integration_and_api(),
@@ -31,6 +31,10 @@ const stats = [
     value: 'SOC 2',
     label: m.type_ii_certified(),
   },
+  {
+    value: 'ISO',
+    label: m.compliance_iso27001(),
+  },
 ]
 ---
 
@@ -48,20 +52,20 @@ const stats = [
       <div class="mt-8 flex flex-col gap-3">
         <HumanSupport tone="light" size="sm" align="start" />
         <div class="flex flex-col gap-3 sm:flex-row">
-        <a
-          href="https://book.capgo.app/enterprise-inquiry/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-        >
-          {m.get_enterprise_quote()}
-        </a>
-        <a
-          href="#compare-plans"
-          class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-200 bg-gray-50 px-6 py-3 text-sm font-semibold text-gray-900 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-        >
-          View enterprise features
-        </a>
+          <a
+            href="https://book.capgo.app/enterprise-inquiry/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+          >
+            {m.get_enterprise_quote()}
+          </a>
+          <a
+            href="#compare-plans"
+            class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-200 bg-gray-50 px-6 py-3 text-sm font-semibold text-gray-900 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+          >
+            View enterprise features
+          </a>
         </div>
       </div>
 
