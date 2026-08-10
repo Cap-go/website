@@ -208,7 +208,7 @@ function collectUsages(): Map<string, string[]> {
       }
       if (!/\.(astro|ts|tsx|js|mjs)$/.test(entry.name)) continue
       const content = readFileSync(path, 'utf8')
-      if (!content.includes('m.')) continue
+      if (!/\b(?:m|copy)(?:\.|\s*\(|\s*\[)/.test(content)) continue
       const relative = path.slice(ROOT.length + 1)
       for (const match of content.matchAll(/\b(?:m|copy)\.([A-Za-z0-9_]+)\s*\(/g)) {
         const key = match[1]
@@ -390,6 +390,11 @@ const source = readFileSync(MESSAGES_PATH, 'utf8')
 const messages = extractMessages(source)
 const usages = collectUsages()
 const overrides = loadContextOverrides()
+for (const key of Object.keys(overrides)) {
+  if (!Object.prototype.hasOwnProperty.call(messages, key)) {
+    throw new Error(`Unknown message context override key: ${key}`)
+  }
+}
 const contexts: Record<string, string> = {}
 
 for (const [key, text] of Object.entries(messages)) {
