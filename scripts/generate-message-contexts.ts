@@ -1,20 +1,56 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import ts from 'typescript'
 
 const ROOT = join(import.meta.dirname, '..')
 const MESSAGES_PATH = join(ROOT, 'apps/shared/copy/messages.ts')
 const CONTEXTS_PATH = join(ROOT, 'apps/shared/copy/messageContexts.ts')
-const LOOKUP_PATH = join(ROOT, 'apps/shared/copy/translationContextLookup.ts')
+const DATA_PATH = join(ROOT, 'apps/shared/copy/translationContextByText.ts')
 
 type MessageMap = Record<string, string>
 
+function unwrapExpression(node: ts.Expression): ts.Expression {
+  let current = node
+  while (ts.isAsExpression(current) || ts.isSatisfiesExpression(current) || ts.isParenthesizedExpression(current)) {
+    current = current.expression
+  }
+  return current
+}
+
 function extractMessages(source: string): MessageMap {
-  const start = source.indexOf('const messages = {')
-  const end = source.indexOf('} as const', start)
-  if (start < 0 || end < 0) throw new Error('messages block not found')
-  const objectLiteral = source.slice(start + 'const messages = '.length, end + 1)
-  // Evaluate the object literal in isolation. Messages are plain string values only.
-  const messages = new Function(`return (${objectLiteral})`)() as MessageMap
+  const sourceFile = ts.createSourceFile(MESSAGES_PATH, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
+  const messages: MessageMap = {}
+
+  function readStringLiteral(node: ts.Expression): string | null {
+    const value = unwrapExpression(node)
+    if (ts.isStringLiteral(value) || ts.isNoSubstitutionTemplateLiteral(value)) return value.text
+    return null
+  }
+
+  function visit(node: ts.Node): void {
+    if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.name.text === 'messages' && node.initializer) {
+      const initializer = unwrapExpression(node.initializer)
+      if (!ts.isObjectLiteralExpression(initializer)) {
+        throw new Error('messages initializer must be an object literal')
+      }
+      for (const property of initializer.properties) {
+        if (!ts.isPropertyAssignment(property)) {
+          throw new Error(`Unsupported messages entry near ${property.getStart(sourceFile)}: expected property assignment`)
+        }
+        const key = ts.isIdentifier(property.name) || ts.isStringLiteral(property.name) || ts.isNumericLiteral(property.name) ? property.name.text : null
+        const value = readStringLiteral(property.initializer)
+        if (!key || value === null) {
+          throw new Error(`Unsupported messages entry near ${property.getStart(sourceFile)}: keys and values must be string literals`)
+        }
+        messages[key] = value
+      }
+      return
+    }
+    ts.forEachChild(node, visit)
+  }
+
+  visit(sourceFile)
+  if (Object.keys(messages).length === 0) throw new Error('messages object not found or empty')
   return messages
 }
 
@@ -221,6 +257,30 @@ function escapeTsString(value: string): string {
   return value.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '\\r')
 }
 
+function normalizeLookupText(value: string): string {
+  return value.replace(/\s+/g, ' ').trim()
+}
+
+function stripHtml(value: string): string {
+  return normalizeLookupText(value.replace(/<[^>]+>/g, ' '))
+}
+
+function htmlTextFragments(value: string): string[] {
+  if (!/<[^>]+>/.test(value)) return []
+  return value
+    .split(/<[^>]+>/g)
+    .map((part) => normalizeLookupText(part))
+    .filter((part) => part.length > 0)
+}
+
+function addLookupEntry(byText: Map<string, Set<string>>, text: string, context: string): void {
+  const normalized = normalizeLookupText(text)
+  if (!normalized) return
+  const set = byText.get(normalized) ?? new Set<string>()
+  set.add(context)
+  byText.set(normalized, set)
+}
+
 function writeContextsFile(contexts: Record<string, string>): void {
   const keys = Object.keys(contexts).sort((a, b) => a.localeCompare(b))
   const lines = [
@@ -242,65 +302,38 @@ function writeContextsFile(contexts: Record<string, string>): void {
   writeFileSync(CONTEXTS_PATH, `${lines.join('\n')}\n`)
 }
 
-function writeLookupFile(messages: MessageMap, contexts: Record<string, string>): void {
-  const byText = new Map<string, Array<{ key: string; context: string }>>()
+function writeDataFile(messages: MessageMap, contexts: Record<string, string>): void {
+  const byText = new Map<string, Set<string>>()
 
   for (const [key, text] of Object.entries(messages)) {
-    const normalized = text.replace(/\s+/g, ' ').trim()
-    if (!normalized) continue
     const context = contexts[key]
     if (!context) continue
-    const list = byText.get(normalized) ?? []
-    list.push({ key, context })
-    byText.set(normalized, list)
+
+    addLookupEntry(byText, text, context)
+    const plain = stripHtml(text)
+    if (plain !== normalizeLookupText(text)) addLookupEntry(byText, plain, context)
+
+    for (const fragment of htmlTextFragments(text)) {
+      addLookupEntry(byText, fragment, `HTML text fragment from a longer Capgo UI string (parent key \`${key}\`). ${context}`)
+    }
   }
 
   const entries = [...byText.entries()].sort((a, b) => a[0].localeCompare(b[0]))
   const lines = [
-    '// Auto-generated English-text → translator-context lookup for the translation worker.',
+    '// Auto-generated English-text → translator-context lookup data for the translation worker.',
     '// Regenerate with: bun run scripts/generate-message-contexts.ts',
+    '// Resolver lives in ./translationContextLookup.ts',
     '',
-    'const translationContextByText: Record<string, string> = {',
+    'export const translationContextByText: Record<string, string> = {',
   ]
 
-  for (const [text, items] of entries) {
-    const exactKey = text
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '_')
-      .replace(/^_+|_+$/g, '')
-    const preferred = items.find((item) => item.key === exactKey) ?? items.find((item) => item.key.endsWith(`_${exactKey}`))
-    const merged = preferred
-      ? preferred.context
-      : [...new Set(items.map((item) => item.context))].sort().join(' | ')
+  for (const [text, contextSet] of entries) {
+    const merged = [...contextSet].sort().join(' | ')
     lines.push(`  '${escapeTsString(text)}': '${escapeTsString(merged)}',`)
   }
 
   lines.push('}', '')
-  lines.push('export function normalizeTranslationLookupText(value: string): string {')
-  lines.push("  return value.replace(/\\s+/g, ' ').trim()")
-  lines.push('}', '')
-  lines.push('function escapeRegExp(value: string): string {')
-  lines.push("  return value.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')")
-  lines.push('}', '')
-  lines.push('export function resolveTranslationContext(text: string): string | undefined {')
-  lines.push('  const normalized = normalizeTranslationLookupText(text)')
-  lines.push('  if (!normalized) return undefined')
-  lines.push('  const exact = translationContextByText[normalized]')
-  lines.push('  if (exact) return exact')
-  lines.push('')
-  lines.push('  for (const [source, context] of Object.entries(translationContextByText)) {')
-  lines.push("    if (!source.includes('{')) continue")
-  lines.push("    const pattern = escapeRegExp(source).replace(/\\\\{[A-Za-z0-9_]+\\\\}/g, '.+?')")
-  lines.push('    if (new RegExp(`^${pattern}$`).test(normalized)) return context')
-  lines.push('  }')
-  lines.push('')
-  lines.push('  return undefined')
-  lines.push('}', '')
-  lines.push('export function resolveTranslationContexts(texts: readonly string[]): Array<string | undefined> {')
-  lines.push('  return texts.map((text) => resolveTranslationContext(text))')
-  lines.push('}', '')
-
-  writeFileSync(LOOKUP_PATH, `${lines.join('\n')}\n`)
+  writeFileSync(DATA_PATH, `${lines.join('\n')}\n`)
 }
 
 const source = readFileSync(MESSAGES_PATH, 'utf8')
@@ -313,19 +346,13 @@ for (const [key, text] of Object.entries(messages)) {
 }
 
 writeContextsFile(contexts)
-writeLookupFile(messages, contexts)
+writeDataFile(messages, contexts)
 
-const uniqueTexts = new Set(
-  Object.values(messages)
-    .map((text) => text.replace(/\s+/g, ' ').trim())
-    .filter(Boolean),
-)
 console.log(
   JSON.stringify(
     {
       messages: Object.keys(messages).length,
       contexts: Object.keys(contexts).length,
-      uniqueTexts: uniqueTexts.size,
       usedKeys: usages.size,
     },
     null,

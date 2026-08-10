@@ -68,8 +68,21 @@ const aboutContext = __translationWorkerTest.resolveTranslationContexts(['About'
 assert(typeof aboutContext === 'string' && aboutContext.includes('navigation'), 'Missing translation context for About')
 const pricingContext = __translationWorkerTest.resolveTranslationContexts(['Pricing'])[0]
 assert(typeof pricingContext === 'string' && pricingContext.toLowerCase().includes('pricing'), 'Missing translation context for Pricing')
-const channelContext = __translationWorkerTest.resolveTranslationContexts(['Channels'])[0]
-assert(!channelContext || channelContext.toLowerCase().includes('channel') || channelContext.toLowerCase().includes('release'), 'Unexpected translation context for Channels')
+const updatesContext = __translationWorkerTest.resolveTranslationContexts(['Updates'])[0]
+assert(
+  typeof updatesContext === 'string' && updatesContext.includes('updates_by_month'),
+  'HTML-split Updates segment did not keep parent pricing calculator context',
+)
+const supportContext = __translationWorkerTest.resolveTranslationContexts(['Support'])[0]
+assert(
+  typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'),
+  'Duplicate Support text dropped one of its contexts',
+)
+const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
+assert(
+  typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'),
+  'Empty placeholder suffix did not resolve build-hour context',
+)
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
 
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
