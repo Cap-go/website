@@ -9,8 +9,6 @@ The plugin is built for the Capgo notification pipeline. Capgo stores platform c
 
 ## Install
 
-This package is currently in private preview. Capgo must enable package access for your npm account before installation works.
-
 Use the Capgo CLI for a guided setup:
 
 ```bash
