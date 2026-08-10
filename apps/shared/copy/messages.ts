@@ -1,4 +1,7 @@
 // Static English copy used by the site build. Runtime translation is handled by the edge translation worker.
+// Translator usage context for each key lives in ./messageContexts.ts.
+// The edge worker loads English→context via ./translationContextLookup.ts.
+// When adding a string here, refresh context with: bun run generate:message-contexts (then refine the generated entry).
 
 export type MessageValues = Record<string, string | number | boolean | null | undefined>
 

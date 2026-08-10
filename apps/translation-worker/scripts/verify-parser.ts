@@ -64,6 +64,14 @@ assert(
   'Renderer did not preserve the source title when a translated title was empty',
 )
 
+const aboutContext = __translationWorkerTest.resolveTranslationContexts(['About'])[0]
+assert(typeof aboutContext === 'string' && aboutContext.includes('navigation'), 'Missing translation context for About')
+const pricingContext = __translationWorkerTest.resolveTranslationContexts(['Pricing'])[0]
+assert(typeof pricingContext === 'string' && pricingContext.toLowerCase().includes('pricing'), 'Missing translation context for Pricing')
+const channelContext = __translationWorkerTest.resolveTranslationContexts(['Channels'])[0]
+assert(!channelContext || channelContext.toLowerCase().includes('channel') || channelContext.toLowerCase().includes('release'), 'Unexpected translation context for Channels')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
+
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
   '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',
   'ja',
@@ -214,10 +222,21 @@ try {
     AI: {
       run: async (_model: string, input: { messages: Array<{ content: string }> }) => {
         const lastMessage = input.messages[input.messages.length - 1]
-        const payload = JSON.parse(lastMessage?.content ?? '{}') as { texts?: string[] }
+        const payload = JSON.parse(lastMessage?.content ?? '{}') as {
+          texts?: string[]
+          text?: string
+          items?: Array<{ text: string; context?: string }>
+        }
+        const sourceTexts = payload.items?.map((item) => item.text) ?? payload.texts ?? (typeof payload.text === 'string' ? [payload.text] : [])
+        if (sourceTexts.length === 1 && !payload.items && !payload.texts) {
+          const text = sourceTexts[0]
+          if (text.includes('Read our guides')) return { response: 'Leggi le nostre guide' }
+          if (text.includes('Docs title')) return { response: 'Titolo documentazione' }
+          return { response: 'IT ' + text }
+        }
         return {
           response: JSON.stringify({
-            translations: (payload.texts ?? []).map((text) => {
+            translations: sourceTexts.map((text) => {
               if (text.includes('Read our guides')) return 'Leggi le nostre guide'
               if (text.includes('Docs title')) return 'Titolo documentazione'
               return 'IT ' + text
