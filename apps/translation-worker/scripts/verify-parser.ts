@@ -69,20 +69,11 @@ assert(typeof aboutContext === 'string' && aboutContext.includes('navigation'), 
 const pricingContext = __translationWorkerTest.resolveTranslationContexts(['Pricing'])[0]
 assert(typeof pricingContext === 'string' && pricingContext.toLowerCase().includes('pricing'), 'Missing translation context for Pricing')
 const updatesContext = __translationWorkerTest.resolveTranslationContexts(['Updates'])[0]
-assert(
-  typeof updatesContext === 'string' && updatesContext.includes('updates_by_month'),
-  'HTML-split Updates segment did not keep parent pricing calculator context',
-)
+assert(typeof updatesContext === 'string' && updatesContext.includes('updates_by_month'), 'HTML-split Updates segment did not keep parent pricing calculator context')
 const supportContext = __translationWorkerTest.resolveTranslationContexts(['Support'])[0]
-assert(
-  typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'),
-  'Duplicate Support text dropped one of its contexts',
-)
+assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
-assert(
-  typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'),
-  'Empty placeholder suffix did not resolve build-hour context',
-)
+assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
 
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
@@ -230,28 +221,40 @@ Object.defineProperty(globalThis, 'caches', {
 try {
   const storedTranslations = new Map<string, string>()
   const translationJobs: Array<Record<string, unknown>> = []
-  const sourceHtml = '<!doctype html><html lang="en"><head><title>Docs title</title></head><body><main><h1>Read our guides</h1></main></body></html>'
+  const sourceHtml = '<!doctype html><html lang="en"><head><title>Docs title</title></head><body><main><h1>Read our guides</h1><p>About</p></main></body></html>'
+  let capturedAiPayload: {
+    pagePath?: string
+    texts?: string[]
+    text?: string
+    items?: Array<{ text: string; context?: string }>
+  } | null = null
   const env = {
     AI: {
       run: async (_model: string, input: { messages: Array<{ content: string }> }) => {
         const lastMessage = input.messages[input.messages.length - 1]
         const payload = JSON.parse(lastMessage?.content ?? '{}') as {
+          pagePath?: string
           texts?: string[]
           text?: string
           items?: Array<{ text: string; context?: string }>
         }
-        const sourceTexts = payload.items?.map((item) => item.text) ?? payload.texts ?? (typeof payload.text === 'string' ? [payload.text] : [])
-        if (sourceTexts.length === 1 && !payload.items && !payload.texts) {
-          const text = sourceTexts[0]
-          if (text.includes('Read our guides')) return { response: 'Leggi le nostre guide' }
-          if (text.includes('Docs title')) return { response: 'Titolo documentazione' }
-          return { response: 'IT ' + text }
+        capturedAiPayload = payload
+        assert(Array.isArray(payload.items), 'Translation AI request did not send items[] with context support')
+        assert(typeof payload.pagePath === 'string' && payload.pagePath.length > 0, 'Translation AI request missed pagePath')
+        assert(!payload.texts, 'Translation AI request still used legacy texts[] payload')
+
+        const aboutItem = payload.items.find((item) => item.text === 'About')
+        if (aboutItem) {
+          assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
         }
+
+        const sourceTexts = payload.items.map((item) => item.text)
         return {
           response: JSON.stringify({
             translations: sourceTexts.map((text) => {
               if (text.includes('Read our guides')) return 'Leggi le nostre guide'
               if (text.includes('Docs title')) return 'Titolo documentazione'
+              if (text === 'About') return 'Chi siamo'
               return 'IT ' + text
             }),
           }),
@@ -307,11 +310,19 @@ try {
   assert(translationJobs.length === 1, 'A HEAD translation cache miss enqueued a duplicate localized document')
 
   await worker.queue({ messages: [{ body: translationJobs[0] as any }] }, env as any)
+  assert(capturedAiPayload !== null, 'Translation AI mock never received a request payload')
+  assert(Array.isArray(capturedAiPayload.items), 'Queued translation did not send items[]')
+  assert(capturedAiPayload.pagePath === '/it/docs/', 'Queued translation used the wrong pagePath')
+  const aboutItem = capturedAiPayload.items?.find((item) => item.text === 'About')
+  assert(aboutItem?.context?.includes('navigation'), 'Queued translation missed About context')
+
   const translatedResponse = await worker.fetch(request, env as any)
+  const translatedHtml = await translatedResponse.text()
 
   assert(translatedResponse.status === 200, 'A completed cache-miss translation was not served successfully')
   assert(translatedResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A completed cache-miss translation was not cached')
-  assert((await translatedResponse.text()).includes('Leggi le nostre guide'), 'A completed cache-miss translation did not contain the translated document')
+  assert(translatedHtml.includes('Leggi le nostre guide'), 'A completed cache-miss translation did not contain the translated document')
+  assert(translatedHtml.includes('Chi siamo'), 'A completed cache-miss translation did not keep context-backed About copy')
 
   const originalConsoleError = console.error
   let enqueueFailureResponse: Response | null = null
