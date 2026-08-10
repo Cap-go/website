@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-10T09:36:12.071Z
-updated_at: 2026-08-10T09:36:13.173Z
+updated_at: 2026-08-10T09:38:35.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/7cde93e8-b3d0-4003-ba0b-33144fdc9600/disaster-recovery-illustration.jpg'
 head_image_alt: 'Disaster Recovery for Apps: 2026 Implementation Guide'
 keywords: 'disaster recovery, mobile apps, desktop apps, runbooks, backup strategies'
