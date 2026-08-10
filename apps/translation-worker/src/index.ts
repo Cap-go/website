@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
@@ -163,7 +164,7 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-05-10-ahrefs-head-assets-v1'
+const TRANSLATION_CACHE_VERSION = '2026-08-10-message-context-v1'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
@@ -1345,14 +1346,24 @@ function translationBatchJsonSchema(batchLength: number): Record<string, unknown
   }
 }
 
-async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+function translationContextSystemHint(): string {
+  return 'When an item includes a "context" field, use that UI/page context to disambiguate short or overloaded English words (for example Home, Support, Channel, Bundle, Update, Open, Free) and keep tone appropriate for that surface.'
+}
+
+async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const protectedBatch = batch.map((text) => protectTranslationTokens(text))
+  const contexts = resolveTranslationContexts(batch)
 
   for (let attempt = 1; attempt <= TRANSLATION_MODEL_ATTEMPTS; attempt += 1) {
     let payload: unknown = ''
     try {
+      const items = protectedBatch.map((item, index) => {
+        const context = contexts[index]
+        return context ? { text: item.text, context } : { text: item.text }
+      })
+
       const result = await env.AI.run(model, {
         temperature: 0,
         max_tokens: 8192,
@@ -1367,6 +1378,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'You translate Capgo website copy for the target locale.',
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
+              translationContextSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
@@ -1378,7 +1390,12 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           },
           {
             role: 'user',
-            content: JSON.stringify({ targetLanguage, protectedTokens: PROTECTED_TRANSLATION_TOKENS, texts: protectedBatch.map((item) => item.text) }),
+            content: JSON.stringify({
+              targetLanguage,
+              pagePath: pagePath || undefined,
+              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              items,
+            }),
           },
         ],
       })
@@ -1423,9 +1440,9 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
   throw new Error(`Translation JSON mode failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
-async function translateBatch(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+async function translateBatch(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   try {
-    return await translateBatchWithJsonMode(env, targetLanguage, batch)
+    return await translateBatchWithJsonMode(env, targetLanguage, batch, pagePath)
   } catch (error) {
     const message = errorMessage(error)
     console.warn('Translation batch JSON failed; falling back to single-text translation', {
@@ -1435,13 +1452,14 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
     })
   }
 
-  return await translateBatchIndividually(env, targetLanguage, batch)
+  return await translateBatchIndividually(env, targetLanguage, batch, pagePath)
 }
 
-async function translateSingleText(env: Env, targetLanguage: string, text: string): Promise<string> {
+async function translateSingleText(env: Env, targetLanguage: string, text: string, pagePath = ''): Promise<string> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const protectedText = protectTranslationTokens(text)
+  const context = resolveTranslationContexts([text])[0]
 
   for (let attempt = 1; attempt <= TRANSLATION_SINGLE_TEXT_ATTEMPTS; attempt += 1) {
     let payload: unknown = ''
@@ -1455,6 +1473,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
             content: [
               'You translate one Capgo website string for the target locale.',
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
+              translationContextSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
@@ -1463,7 +1482,13 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
           },
           {
             role: 'user',
-            content: JSON.stringify({ targetLanguage, protectedTokens: PROTECTED_TRANSLATION_TOKENS, text: protectedText.text }),
+            content: JSON.stringify({
+              targetLanguage,
+              pagePath: pagePath || undefined,
+              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              text: protectedText.text,
+              context: context || undefined,
+            }),
           },
         ],
       })
@@ -1497,10 +1522,10 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
   throw new Error(`Single-text translation failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
-async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   const translated: string[] = []
   for (const text of batch) {
-    translated.push(await translateSingleText(env, targetLanguage, text))
+    translated.push(await translateSingleText(env, targetLanguage, text, pagePath))
   }
   assertTranslatedBatch(targetLanguage, batch, translated)
   return translated
@@ -2140,7 +2165,7 @@ async function refreshCacheIncrementally(
   let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
 
   while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB) {
-    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex])
+    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex], requestUrl.pathname)
     translatedBatches[batchIndex] = translatedBatch
     translatedInThisJob += 1
     batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
@@ -2536,7 +2561,7 @@ async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Reco
 
   const translatedBatchMap = new Map<number, string[]>()
   for (const batchIndex of [...selectedBatchIndexes].sort((left, right) => left - right)) {
-    translatedBatchMap.set(batchIndex, await translateBatchWithJsonMode(env, targetLanguage, batches[batchIndex]))
+    translatedBatchMap.set(batchIndex, await translateBatchWithJsonMode(env, targetLanguage, batches[batchIndex], path))
   }
 
   const sourceTexts = [...translatedBatchMap.keys()].flatMap((batchIndex) => batches[batchIndex])
@@ -2585,11 +2610,12 @@ async function handleTranslationTestRequest(request: Request, env: Env, requestU
     if (requestUrl.pathname !== `${TRANSLATION_TEST_ROUTE_PREFIX}/real-runtime`) return jsonResponse({ ok: false, error: 'Not found' }, 404)
 
     const storage = await probeRuntimeStorage(env, requestUrl)
-    const translations = await translateBatchWithJsonMode(env, 'Spanish', [
-      'Ship updates instantly',
-      'Pricing',
-      'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.',
-    ])
+    const translations = await translateBatchWithJsonMode(
+      env,
+      'Spanish',
+      ['Ship updates instantly', 'Pricing', 'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.'],
+      '/',
+    )
 
     return jsonResponse({
       ok: true,
@@ -2679,6 +2705,7 @@ export const __translationWorkerTest = {
   renderTranslatedHtml,
   expandShortMetaDescriptions,
   rewriteMetadataAndLinks,
+  resolveTranslationContexts,
 }
 
 export default {

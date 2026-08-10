@@ -28,6 +28,7 @@
     "build:after": "bun run repair_sitemap && bun run seo:check",
     "ci:verify:web": "cd apps/web && bun run check && cd ../.. && bun run clean:build-cache && bun run build:web && bun run build:after",
     "ci:verify:docs": "bun run check:docs-mirror && cd apps/docs && bun run check && cd ../.. && bun run build:docs",
+    "generate:message-contexts": "bun run scripts/generate-message-contexts.ts",
     "ci:verify:translation": "cd apps/translation-worker && bun run check",
     "ci:verify:outrank": "cd apps/outrank-worker && bun run check",
     "verify:real-translation": "cd apps/translation-worker && bun run test:real",
