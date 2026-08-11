@@ -166,6 +166,7 @@ const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('fr-elision'), 'Cache version was not bumped for French elision polish')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('length-translate-no'), 'Cache version was not bumped for length + translate=no support')
 assert(
   __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === 'Évitez l\u2019attente. Livrez la correction.',
   'French elision did not fix "la attente"',
@@ -182,6 +183,66 @@ assert(__translationWorkerTest.polishTranslatedText('French', 'Évitez la attent
 assert(__translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.', 'Non-French polish path should leave text unchanged')
 const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Skip the wait. Ship the fix.'])[0]
 assert(typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('hotfix'), 'Missing marketing context override for live update hero headline')
+
+const noTranslateHtml = `<!doctype html>
+<html lang="en">
+  <body>
+    <h1>Live Update delivery data</h1>
+    <p>Translate this chrome copy.</p>
+    <tbody translate="no"><tr><td>United States</td><td title="A long failure explanation that must stay intact">Download failure (46%)</td></tr></tbody>
+    <div class="notranslate"><p>Keep metrics English</p></div>
+    <p>Translate the trailing chrome too.</p>
+  </body>
+</html>`
+const noTranslateParsed = __translationWorkerTest.collectSegments(noTranslateHtml)
+const noTranslateBody = noTranslateParsed.segments.filter((segment) => segment.inBody).map((segment) => segment.text)
+assert(
+  noTranslateBody.some((text) => text.includes('Translate this chrome copy')),
+  'Parser skipped normal body copy near translate=no',
+)
+assert(
+  noTranslateBody.some((text) => text.includes('Translate the trailing chrome too')),
+  'Parser did not resume after translate=no',
+)
+assert(
+  noTranslateBody.every((text) => !text.includes('United States') && !text.includes('Download failure') && !text.includes('Keep metrics English')),
+  'Parser collected text from translate=no / notranslate regions',
+)
+assert(
+  noTranslateParsed.parts.some((part) => typeof part === 'string' && part.includes('United States') && part.includes('Download failure (46%)')),
+  'Parser did not preserve translate=no markup as raw HTML',
+)
+assert(
+  noTranslateParsed.parts.some(
+    (part) => typeof part === 'string' && part.includes('class="notranslate"') && part.includes('Keep metrics English'),
+  ),
+  'Parser did not preserve notranslate opening tag as raw HTML',
+)
+assert(
+  noTranslateParsed.parts.some((part) => typeof part === 'string' && part.includes('</div>') && part.includes('Keep metrics English')),
+  'Parser did not preserve notranslate closing tag as raw HTML',
+)
+
+const skipAttrHtml = `<!doctype html><html><body><section translate="no" title="Metric region label"><p>99%</p></section></body></html>`
+const skipAttrParsed = __translationWorkerTest.collectSegments(skipAttrHtml)
+assert(
+  !skipAttrParsed.segments.some((segment) => segment.mode === 'attribute' && segment.text.includes('Metric region label')),
+  'Parser collected translatable attributes from translate=no element',
+)
+
+assert(
+  __translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', 'Deploy updates safely to every device with detailed guidance for all supported environments and release channels'),
+  'Length guard did not flag an overlong translation',
+)
+assert(
+  __translationWorkerTest.guardTranslationLength('Deploy updates safely to every device', 'Deploy updates safely to every device with detailed guidance for all supported environments and release channels') === 'Deploy updates safely to every device',
+  'Length guard did not fall back to source for overlong translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', 'Déployez les mises à jour en toute sécurité'),
+  'Length guard flagged a reasonably sized translation',
+)
+
 
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
   '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',
