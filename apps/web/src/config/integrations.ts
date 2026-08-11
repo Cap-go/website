@@ -10,7 +10,7 @@ export interface IntegrationEntry {
 export const integrations: IntegrationEntry[] = [
   {
     name: 'viaSocket',
-    href: 'https://viasocket.com/integrations/capgo',
+    href: 'https://viasocket.com/integrations/capgo?utm_source=capgo&utm_medium=marketplace&utm_campaign=capgo_listing',
     logo: '/logo_viaSocket.svg',
     target: '_blank',
     rel: 'noopener noreferrer',
