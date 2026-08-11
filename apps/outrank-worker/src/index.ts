@@ -172,7 +172,7 @@ export default {
       return jsonResponse({ status: 'ok' })
     }
 
-    if (url.pathname !== '/webhook') return jsonResponse({ error: 'not_found' }, 404)
+    if (url.pathname !== '/webhook' && url.pathname !== '/webhook/') return jsonResponse({ error: 'not_found' }, 404)
     if (request.method !== 'POST') return jsonResponse({ error: 'method_not_allowed' }, 405)
     if (!env.OUTRANK_ACCESS_TOKEN) return jsonResponse({ error: 'missing_outrank_access_token' }, 500)
 
