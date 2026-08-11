@@ -17,6 +17,8 @@
     "fetch:downloads": "bun run scripts/fetch-npm-downloads.ts",
     "fetch:website-stats": "bun run scripts/fetch-website-stats.ts",
     "refresh:website-stats": "WEBSITE_STATS_REFRESH=true bun run scripts/fetch-website-stats.ts",
+    "fetch:live-update-metrics": "bun run scripts/fetch-live-update-metrics.ts",
+    "refresh:live-update-metrics": "LIVE_UPDATE_METRICS_REFRESH=true bun run scripts/fetch-live-update-metrics.ts",
     "refresh:stars": "GITHUB_STATS_REFRESH=true bun run scripts/fetch-github-stars.ts",
     "refresh:downloads": "NPM_DOWNLOADS_REFRESH=true bun run scripts/fetch-npm-downloads.ts",
     "scrape:distribution-charts": "bun run scripts/scrape-distribution-charts.ts",
