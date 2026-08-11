@@ -56,7 +56,9 @@ function formatPct(value: number | null) {
 <Layout content={content}>
   <link slot="head" rel="preconnect" href={apiOrigin} crossorigin="anonymous" />
   <link slot="head" rel="dns-prefetch" href={apiOrigin} />
-  <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} data-initial-metrics={JSON.stringify(metrics)} aria-busy="false">
+  {/* Keep bootstrap metrics out of attributes so the edge translator cannot mangle JSON / inflate SSR tables. */}
+  <script type="application/json" id="capgo-live-update-metrics-bootstrap" set:html={JSON.stringify(metrics)} />
+  <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="false">
     <section class="data-hero">
       <div class="data-shell">
         <p class="data-eyebrow"><span aria-hidden="true"></span> Our data</p>
@@ -65,7 +67,7 @@ function formatPct(value: number | null) {
           Last 30 days of Capgo install success. Each rate uses app, device, and UTC-day outcomes — overall and by country, platform, and updater version. We publish failures too,
           with plain-language explanations from our docs.
         </p>
-        <p class="data-updated" data-updated aria-live="polite">{updatedLabel}</p>
+        <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
       </div>
     </section>
 
@@ -80,7 +82,7 @@ function formatPct(value: number | null) {
         </div>
 
         <div class="data-kpis" aria-label="Reliability summary">
-          <div><p>Success rate</p><strong data-kpi="success-rate">{Math.ceil(metrics.success_rate)}%</strong></div>
+          <div><p>Success rate</p><strong data-kpi="success-rate" translate="no">{Math.ceil(metrics.success_rate)}%</strong></div>
           <div><p>Window</p><strong>30 days</strong></div>
           <div><p>Scope</p><strong>All apps</strong></div>
         </div>
@@ -88,7 +90,7 @@ function formatPct(value: number | null) {
         <div class="data-chart-skeleton" data-daily-skeleton aria-hidden="true">
           <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
         </div>
-        <div class="data-chart" data-daily-chart aria-label="Daily install success chart" hidden>
+        <div class="data-chart" data-daily-chart aria-label="Daily install success chart" hidden translate="no">
           <div class="data-chart-scale" aria-hidden="true"><span>100%</span><span>50%</span><span>0%</span></div>
           <div class="data-bars" data-daily-bars role="list" aria-label="Daily install success rates"></div>
           <div class="data-axis"><span data-daily-start></span><span data-daily-end></span></div>
@@ -116,7 +118,7 @@ function formatPct(value: number | null) {
                 <th scope="col">Top failure</th>
               </tr>
             </thead>
-            <tbody data-countries>
+            <tbody data-countries translate="no">
               {
                 metrics.countries.map((item) => {
                   const failure = item.top_failure ? getFailureReasonInfo(item.top_failure.reason) : null
@@ -159,7 +161,7 @@ function formatPct(value: number | null) {
                 <th scope="col">Top failure</th>
               </tr>
             </thead>
-            <tbody data-platforms>
+            <tbody data-platforms translate="no">
               {
                 metrics.platforms.map((item) => {
                   const failure = item.top_failure ? getFailureReasonInfo(item.top_failure.reason) : null
@@ -188,7 +190,7 @@ function formatPct(value: number | null) {
         <div>
           <p class="data-eyebrow">Failures</p>
           <h2 id="failures-title">Top failure reasons</h2>
-          <p class="data-copy" data-failures-lead>{topFailureLead}</p>
+          <p class="data-copy" data-failures-lead translate="no">{topFailureLead}</p>
           <p class="data-copy data-copy-secondary">
             Many failures are normal on real devices — flaky networks, intentional channel policies, and automatic rollbacks all show up here. We keep the list public so you can
             trust the numbers.
@@ -197,7 +199,7 @@ function formatPct(value: number | null) {
             Code meanings follow our <a class="data-inline-link" href="/docs/webapp/logs/">logs docs</a>.
           </p>
         </div>
-        <ol class="data-failures" data-failures aria-live="polite">
+        <ol class="data-failures" data-failures aria-live="polite" translate="no">
           {
             metrics.failures.length
               ? metrics.failures.map((item, index) => {
@@ -241,7 +243,7 @@ function formatPct(value: number | null) {
                 <th scope="col">Top failure</th>
               </tr>
             </thead>
-            <tbody data-versions>
+            <tbody data-versions translate="no">
               {
                 metrics.updater_versions.map((item) => {
                   const failure = item.top_failure ? getFailureReasonInfo(item.top_failure.reason) : null
@@ -480,7 +482,7 @@ function formatPct(value: number | null) {
 
     function readBootstrapMetrics(): LiveUpdateMetrics | null {
       try {
-        const raw = page?.dataset.initialMetrics
+        const raw = document.getElementById('capgo-live-update-metrics-bootstrap')?.textContent?.trim()
         if (!raw) return null
         return normalizeLiveUpdateMetrics(JSON.parse(raw))
       } catch {
