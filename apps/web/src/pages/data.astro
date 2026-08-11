@@ -57,7 +57,11 @@ function formatPct(value: number | null) {
   <link slot="head" rel="preconnect" href={apiOrigin} crossorigin="anonymous" />
   <link slot="head" rel="dns-prefetch" href={apiOrigin} />
   {/* Keep bootstrap metrics out of attributes so the edge translator cannot mangle JSON / inflate SSR tables. */}
+<<<<<<< HEAD
   <script type="application/json" id="capgo-live-update-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
+=======
+  <script is:inline type="application/json" id="capgo-live-update-metrics-bootstrap" set:html={jsonForInlineScript(metrics)} />
+>>>>>>> 5b2a42855 (fix: escape /data metrics JSON for inline script embeds)
   <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="false">
     <section class="data-hero">
       <div class="data-shell">
