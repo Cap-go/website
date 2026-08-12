@@ -75,6 +75,28 @@ assert(typeof supportContext === 'string' && supportContext.includes('support') 
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('fr-elision'), 'Cache version was not bumped for French elision polish')
+assert(
+  __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === "Évitez l'attente. Livrez la correction.",
+  'French elision did not fix "la attente"',
+)
+assert(
+  __translationWorkerTest.applyFrenchArticleElision("Évitez la attente de l'App Store.") === "Évitez l'attente de l'App Store.",
+  'French elision did not fix subtitle "la attente"',
+)
+assert(
+  __translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === "Évitez l'attente.",
+  'French polish path did not apply article elision',
+)
+assert(
+  __translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.',
+  'Non-French polish path should leave text unchanged',
+)
+const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Skip the wait. Ship the fix.'])[0]
+assert(
+  typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('hotfix'),
+  'Missing marketing context override for live update hero headline',
+)
 
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
   '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',
