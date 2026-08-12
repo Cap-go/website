@@ -77,15 +77,19 @@ assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('na
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('fr-elision'), 'Cache version was not bumped for French elision polish')
 assert(
-  __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === "Évitez l'attente. Livrez la correction.",
+  __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === 'Évitez l\u2019attente. Livrez la correction.',
   'French elision did not fix "la attente"',
 )
 assert(
-  __translationWorkerTest.applyFrenchArticleElision("Évitez la attente de l'App Store.") === "Évitez l'attente de l'App Store.",
+  __translationWorkerTest.applyFrenchArticleElision('Évitez la attente de l\u2019App Store.') === 'Évitez l\u2019attente de l\u2019App Store.',
   'French elision did not fix subtitle "la attente"',
 )
 assert(
-  __translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === "Évitez l'attente.",
+  __translationWorkerTest.applyFrenchArticleElision('la haute disponibilité et le héros') === 'la haute disponibilité et le héros',
+  'French elision must not touch aspirate-h words',
+)
+assert(
+  __translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === 'Évitez l\u2019attente.',
   'French polish path did not apply article elision',
 )
 assert(

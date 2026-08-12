@@ -1351,12 +1351,13 @@ function translationContextSystemHint(): string {
 }
 
 function translationGrammarSystemHint(): string {
-  return 'Prefer natural native phrasing over literal calques. Apply correct target-language grammar and morphology. For French, always elide singular articles before a vowel or mute h (l\'attente, not la attente; l\'App Store when the article would be le/la).'
+  return 'Prefer natural native phrasing over literal calques. Apply correct target-language grammar and morphology. For French, always elide singular articles before a vowel (l’attente, not la attente). Do not elide before aspirate h (la haute, le héros).'
 }
 
-/** Fix unelided French le/la before a vowel or mute h (e.g. "la attente" → "l'attente"). */
+/** Fix unelided French le/la before a vowel (e.g. "la attente" → "l’attente").
+ * Vowels only — aspirate-h words (haute, héros, haricot…) must keep le/la. */
 function applyFrenchArticleElision(text: string): string {
-  return text.replace(/\b([Ll])([ae])\s+([aeiouàâäæéèêëïîôœùûühAEIOUÀÂÄÆÉÈÊËÏÎÔŒÙÛÜH])/gu, "$1'$3")
+  return text.replace(/\b([Ll])([ae])\s+([aeiouàâäæéèêëïîôœùûüAEIOUÀÂÄÆÉÈÊËÏÎÔŒÙÛÜ])/gu, '$1\u2019$3')
 }
 
 function polishTranslatedText(targetLanguage: string, text: string): string {
