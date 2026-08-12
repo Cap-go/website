@@ -261,6 +261,9 @@ npx @capgo/cli@latest bundle upload \
 
 3. **Gradual Migration**
    ```bash
+   # one-time: enable metadata gating on beta
+   npx @capgo/cli@latest channel set beta --disable-auto-update metadata
+
    # Test bundle only on latest native version
    npx @capgo/cli@latest bundle upload \
      --channel beta \
