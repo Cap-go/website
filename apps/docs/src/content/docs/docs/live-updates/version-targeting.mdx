@@ -473,11 +473,15 @@ v1-maintenance (v1.x)
 ### 4. Test Before Rollout
 
 ```bash
-# Test on beta channel first
-npx @capgo/cli bundle upload --channel beta
+# Test on beta channel first (beta must use metadata strategy)
+npx @capgo/cli@latest bundle upload \
+  --channel beta \
+  --auto-min-update-version
 
 # Monitor for issues, then promote to production
-npx @capgo/cli bundle upload --channel production
+npx @capgo/cli@latest bundle upload \
+  --channel production \
+  --auto-min-update-version
 ```
 
 ### 5. Monitor Version Distribution
