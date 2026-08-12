@@ -164,7 +164,7 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-08-10-message-context-v1'
+const TRANSLATION_CACHE_VERSION = '2026-08-11-length-and-translate-no-v1'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
@@ -176,7 +176,7 @@ const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
 const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
 const AI_OUTPUT_PREVIEW_CHARS = 240
 const TRANSLATION_TEST_ROUTE_PREFIX = '/__translation-test__'
-const PROTECTED_TRANSLATION_TOKENS = ['Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
+const PROTECTED_TRANSLATION_TOKENS = ['Live Update', 'Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -796,8 +796,20 @@ function languageSelectorTargetLocale(tag: string): string | null {
   return isSupportedLanguagePath(idLocale) ? idLocale : null
 }
 
+function hasNoTranslateClass(className: string | null): boolean {
+  if (!className) return false
+  return className
+    .split(/\s+/)
+    .filter(Boolean)
+    .some((item) => item.toLowerCase() === 'notranslate')
+}
+
 function shouldSkipElementText(tag: string, tagName: string): boolean {
   if (SKIP_TEXT_TAGS.has(tagName)) return true
+
+  const translate = readAttributeValue(tag, 'translate')
+  if (translate?.trim().toLowerCase() === 'no') return true
+  if (hasNoTranslateClass(readAttributeValue(tag, 'class'))) return true
 
   const id = readAttributeValue(tag, 'id')
   if (id && (LANGUAGE_SELECTOR_SKIP_IDS.has(id) || id.startsWith('language_'))) return true
@@ -1350,6 +1362,10 @@ function translationContextSystemHint(): string {
   return 'When an item includes a "context" field, use that UI/page context to disambiguate short or overloaded English words (for example Home, Support, Channel, Bundle, Update, Open, Free) and keep tone appropriate for that surface.'
 }
 
+function translationLengthSystemHint(): string {
+  return 'Keep each translation about the same length as the source (similar character count, roughly within ±30%). Do not expand short UI labels, buttons, nav items, table headers, or headings into longer sentences. Over-long translations break Capgo page layouts and UI spacing.'
+}
+
 async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
@@ -1379,8 +1395,9 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
               translationContextSystemHint(),
+              translationLengthSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
-              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
+              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
               `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${batch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
               attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON object matching the schema.' : '',
@@ -1474,8 +1491,9 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
               'You translate one Capgo website string for the target locale.',
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               translationContextSystemHint(),
+              translationLengthSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
-              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
+              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
               'Return only the translated text. Do not return JSON, Markdown, labels, explanations, quotes around the whole answer, or extra lines.',
             ].join(' '),

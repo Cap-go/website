@@ -74,7 +74,36 @@ const supportContext = __translationWorkerTest.resolveTranslationContexts(['Supp
 assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('length-and-translate-no'), 'Cache version was not bumped for length + translate=no support')
+
+const noTranslateHtml = `<!doctype html>
+<html lang="en">
+  <body>
+    <h1>Live Update delivery data</h1>
+    <p>Translate this chrome copy.</p>
+    <tbody translate="no"><tr><td>United States</td><td title="A long failure explanation that must stay intact">Download failure (46%)</td></tr></tbody>
+    <div class="notranslate"><p>Keep metrics English</p></div>
+    <p>Translate the trailing chrome too.</p>
+  </body>
+</html>`
+const noTranslateParsed = __translationWorkerTest.collectSegments(noTranslateHtml)
+const noTranslateBody = noTranslateParsed.segments.filter((segment) => segment.inBody).map((segment) => segment.text)
+assert(
+  noTranslateBody.some((text) => text.includes('Translate this chrome copy')),
+  'Parser skipped normal body copy near translate=no',
+)
+assert(
+  noTranslateBody.some((text) => text.includes('Translate the trailing chrome too')),
+  'Parser did not resume after translate=no',
+)
+assert(
+  noTranslateBody.every((text) => !text.includes('United States') && !text.includes('Download failure') && !text.includes('Keep metrics English')),
+  'Parser collected text from translate=no / notranslate regions',
+)
+assert(
+  noTranslateParsed.parts.some((part) => typeof part === 'string' && part.includes('United States') && part.includes('Download failure (46%)')),
+  'Parser did not preserve translate=no markup as raw HTML',
+)
 
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
   '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',

@@ -150,3 +150,13 @@ export async function resolveLiveUpdateMetrics(baseApiUrl: string): Promise<Live
   const live = await fetchLiveUpdateMetrics(baseApiUrl)
   return live ?? getCachedLiveUpdateMetrics()
 }
+
+/** JSON safe to embed inside <script> via set:html (blocks </script> breakouts). */
+export function jsonForInlineScript(value: unknown): string {
+  return JSON.stringify(value)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029')
+}
