@@ -322,6 +322,15 @@ Android uses your `PLAY_CONFIG_JSON` service account. **Without an explicit trac
 For an internal completed release instead of production:
 
 ```yaml
+- name: Submit Android internal release
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+    ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+    KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+    KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+    KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+    PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+  run: |
     npx @capgo/cli@latest build request com.example.app \
       --platform android \
       --build-mode release \
