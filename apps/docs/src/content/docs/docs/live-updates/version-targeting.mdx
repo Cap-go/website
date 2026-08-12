@@ -207,21 +207,38 @@ npx @capgo/cli channel set stable --disable-auto-update none
 
 ## Strategy 3: Native Version Constraints
 
-Specify minimum native version requirements for bundles to prevent delivery to incompatible devices.
+Specify a minimum native app version (`min_update_version`) on each bundle so Capgo only delivers it to devices whose native binary is new enough.
 
-### Using nativeVersion Delay Condition
+This uses the channel **metadata** strategy (`--disable-auto-update metadata`) plus `--min-update-version` or `--auto-min-update-version` on upload. There is no `--native-version` CLI flag.
 
-When uploading a bundle, you can specify a minimum native version:
+### Enable metadata targeting on the channel
+
+```bash
+# one-time: require min_update_version metadata on uploads to this channel
+npx @capgo/cli@latest channel set production --disable-auto-update metadata
+```
+
+### Set a minimum native version on upload
+
+When uploading a bundle, pass the lowest native version that may receive it:
 
 ```bash
 # This bundle requires native version 2.0.0 or higher
-npx @capgo/cli bundle upload \
+npx @capgo/cli@latest bundle upload \
   --channel production \
-  --native-version "2.0.0"
+  --min-update-version "2.0.0"
+```
+
+Or let Capgo set the floor from native package compatibility:
+
+```bash
+npx @capgo/cli@latest bundle upload \
+  --channel production \
+  --auto-min-update-version
 ```
 
 <Aside type="note" title="How It Works">
-  Devices on native version 1.x will NOT receive this bundle. Only devices on 2.0.0+ will get it. This is perfect for updates that require new native APIs or plugins.
+  With the metadata strategy, devices whose native baseline (`version_build`) is below the bundle's `min_update_version` skip the update. Only devices on that version or higher receive it. See [Compatibility](/docs/live-updates/compatibility/) for `--auto-min-update-version` details.
 </Aside>
 
 ### Use Cases
@@ -229,21 +246,25 @@ npx @capgo/cli bundle upload \
 1. **New Native Plugin Required**
    ```bash
    # Bundle needs Camera plugin added in v2.0.0
-   npx @capgo/cli bundle upload --native-version "2.0.0"
+   npx @capgo/cli@latest bundle upload \
+     --channel production \
+     --min-update-version "2.0.0"
    ```
 
 2. **Breaking Native API Changes**
    ```bash
    # Bundle uses new Capacitor 6 APIs
-   npx @capgo/cli bundle upload --native-version "3.0.0"
+   npx @capgo/cli@latest bundle upload \
+     --channel production \
+     --min-update-version "3.0.0"
    ```
 
 3. **Gradual Migration**
    ```bash
    # Test bundle only on latest native version
-   npx @capgo/cli bundle upload \
+   npx @capgo/cli@latest bundle upload \
      --channel beta \
-     --native-version "2.5.0"
+     --min-update-version "2.5.0"
    ```
 
 ## Strategy 4: Auto-Downgrade Prevention
@@ -259,7 +280,7 @@ In the Capgo dashboard:
 
 Or via CLI:
 ```bash
-npx @capgo/cli channel set production --disable-downgrade
+npx @capgo/cli@latest channel set production --no-downgrade
 ```
 
 ### Example
@@ -312,10 +333,11 @@ Here's a complete example combining all strategies:
 ### 1. Initial Setup (App v1.0.0)
 
 ```bash
-# Create production channel with semver controls
-npx @capgo/cli channel create production \
-  --disable-auto-update major \
-  --disable-downgrade
+# Create production channel, then enable metadata min-version gating
+npx @capgo/cli@latest channel add production
+npx @capgo/cli@latest channel set production \
+  --disable-auto-update metadata \
+  --no-downgrade
 ```
 
 ```typescript
@@ -334,9 +356,10 @@ const config: CapacitorConfig = {
 
 ```bash
 # Create v2 channel for new version
-npx @capgo/cli channel create v2 \
-  --disable-auto-update major \
-  --disable-downgrade \
+npx @capgo/cli@latest channel add v2
+npx @capgo/cli@latest channel set v2 \
+  --disable-auto-update metadata \
+  --no-downgrade \
   --self-assign
 
 # Create git branch for v1 maintenance
@@ -362,16 +385,16 @@ const config: CapacitorConfig = {
 # Update v1.x users (bug fix)
 git checkout v1-maintenance
 # Make changes
-npx @capgo/cli bundle upload \
+npx @capgo/cli@latest bundle upload \
   --channel production \
-  --native-version "1.0.0"
+  --min-update-version "1.0.0"
 
 # Update v2.x users (new feature)
 git checkout main
 # Make changes
-npx @capgo/cli bundle upload \
+npx @capgo/cli@latest bundle upload \
   --channel v2 \
-  --native-version "2.0.0"
+  --min-update-version "2.0.0"
 ```
 
 ### 4. Monitor Version Distribution
@@ -469,10 +492,10 @@ For teams migrating from **Ionic AppFlow**, here's how Capgo's version targeting
 |---------|---------------|-------|
 | **Version-based routing** | Automatic based on native version | Automatic via `defaultChannel` + multiple strategies |
 | **Semantic versioning** | Basic support | Advanced with `--disable-auto-update` (major/minor/patch) |
-| **Native version constraints** | Manual configuration in AppFlow dashboard | Built-in `--native-version` flag in CLI |
+| **Native version constraints** | Manual configuration in AppFlow dashboard | Built-in `--min-update-version` / `--auto-min-update-version` with metadata channels |
 | **Channel management** | Web UI + CLI | Web UI + CLI + API |
 | **Device overrides** | Limited device-level control | Full control via Dashboard/API |
-| **Auto-downgrade prevention** | Yes | Yes via `--disable-downgrade` |
+| **Auto-downgrade prevention** | Yes | Yes via `--no-downgrade` |
 | **Multi-version maintenance** | Manual branch/channel management | Automated with channel precedence |
 | **Self-hosting** | No | Yes (full control) |
 | **Version analytics** | Basic | Detailed per-version metrics |
@@ -508,7 +531,7 @@ Check the following:
 
 1. **Review defaultChannel**: Ensure correct channel in `capacitor.config.ts`
 2. **Check Bundle Upload**: Verify bundle was uploaded to intended channel
-3. **Inspect Native Version**: Confirm `--native-version` flag was used correctly
+3. **Inspect min update version**: Confirm `--min-update-version` (or `--auto-min-update-version`) was set and the channel uses `--disable-auto-update metadata`
 
 ### Breaking Changes Affecting Old Versions
 
@@ -526,7 +549,7 @@ If you're migrating from **Ionic AppFlow**, version targeting works very similar
 | AppFlow Concept | Capgo Equivalent | Notes |
 |-----------------|------------------|-------|
 | **Deploy Channel** | Capgo Channel | Same concept, more powerful |
-| **Native Version Lock** | `--native-version` flag | More granular control |
+| **Native Version Lock** | `--min-update-version` / `--auto-min-update-version` | More granular control |
 | **Channel Priority** | Channel precedence (override → cloud → default) | More transparent precedence |
 | **Deployment Target** | Channel + semver controls | Multiple strategies available |
 | **Production Channel** | `production` channel (or any name) | Flexible naming |
@@ -545,7 +568,7 @@ If you're migrating from **Ionic AppFlow**, version targeting works very similar
 1. **Map your AppFlow channels** to Capgo channels (usually 1:1)
 2. **Set `defaultChannel`** in `capacitor.config.ts` for each major version
 3. **Configure semver rules** if you want automatic blocking at version boundaries
-4. **Upload version-specific bundles** using `--native-version` flag
+4. **Upload version-specific bundles** using `--min-update-version` (channel must use metadata strategy)
 5. **Monitor version distribution** in Capgo dashboard
 
 <Aside type="tip" title="Complete Migration Guide">
