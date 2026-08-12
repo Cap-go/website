@@ -473,7 +473,10 @@ v1-maintenance (v1.x)
 ### 4. Test Before Rollout
 
 ```bash
-# Test on beta channel first (beta must use metadata strategy)
+# one-time: enable metadata gating on beta (production is set up in the workflow above)
+npx @capgo/cli@latest channel set beta --disable-auto-update metadata
+
+# Test on beta channel first
 npx @capgo/cli@latest bundle upload \
   --channel beta \
   --auto-min-update-version
