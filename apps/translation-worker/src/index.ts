@@ -164,7 +164,7 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-08-10-message-context-v1'
+const TRANSLATION_CACHE_VERSION = '2026-08-12-message-context-fr-elision-v1'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
@@ -1350,6 +1350,21 @@ function translationContextSystemHint(): string {
   return 'When an item includes a "context" field, use that UI/page context to disambiguate short or overloaded English words (for example Home, Support, Channel, Bundle, Update, Open, Free) and keep tone appropriate for that surface.'
 }
 
+function translationGrammarSystemHint(): string {
+  return 'Prefer natural native phrasing over literal calques. Apply correct target-language grammar and morphology. For French, always elide singular articles before a vowel (l’attente, not la attente). Do not elide before aspirate h (la haute, le héros).'
+}
+
+/** Fix unelided French le/la before a vowel (e.g. "la attente" → "l’attente").
+ * Vowels only — aspirate-h words (haute, héros, haricot…) must keep le/la. */
+function applyFrenchArticleElision(text: string): string {
+  return text.replace(/\b([Ll])([ae])\s+([aeiouàâäæéèêëïîôœùûüAEIOUÀÂÄÆÉÈÊËÏÎÔŒÙÛÜ])/gu, '$1\u2019$3')
+}
+
+function polishTranslatedText(targetLanguage: string, text: string): string {
+  if (targetLanguage === 'French') return applyFrenchArticleElision(text)
+  return text
+}
+
 async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
@@ -1379,6 +1394,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
               translationContextSystemHint(),
+              translationGrammarSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
@@ -1418,7 +1434,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               outputPreview: aiPayloadPreview(text),
             })
           }
-          return result.text
+          return polishTranslatedText(targetLanguage, result.text)
         })
         assertTranslatedBatch(targetLanguage, batch, restored)
         return restored
@@ -1474,6 +1490,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
               'You translate one Capgo website string for the target locale.',
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               translationContextSystemHint(),
+              translationGrammarSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
@@ -1495,7 +1512,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
 
       payload = extractAiPayload(result)
       const translated = plainTranslationFromUnknown(payload)
-      if (translated) return protectedText.restore(translated)
+      if (translated) return polishTranslatedText(targetLanguage, protectedText.restore(translated))
       lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
@@ -2699,6 +2716,8 @@ export class TranslationCoordinator {
 
 export const __translationWorkerTest = {
   TRANSLATION_CACHE_VERSION,
+  applyFrenchArticleElision,
+  polishTranslatedText,
   bodyTranslationStats,
   buildBatches,
   collectSegments,
