@@ -452,6 +452,7 @@ npx @capgo/cli@latest build request com.example.app \
   --platform android \
   --build-mode release \
   --submit-to-store-review \
+  --android-track production \
   --store-release-name "1.2.3" \
   --store-release-notes "General improvements" \
   --store-release-notes-locale "en-US=General improvements" \
@@ -459,7 +460,11 @@ npx @capgo/cli@latest build request com.example.app \
   --store-release-notes-locale "fr-FR=Ameliorations generales"
 ```
 
-This requires the same Google Play service account setup as the normal upload path (`PLAY_CONFIG_JSON` in CI or saved Android credentials locally). `--store-release-name` is used as the Google Play release name. `--store-release-notes` is the fallback Play changelog, and each `--store-release-notes-locale "locale=notes"` entry writes a localized Play changelog for that locale. Capgo sends the Play release as `completed`; if Managed publishing is enabled in Play Console, Google can still wait for your manual publish after approval.
+:::caution
+On Android, `--submit-to-store-review` defaults to the **production** track with `release_status: completed` when you do not set a track. That can go live to 100% of users. Pass `--android-track internal` (or `alpha` / `beta`) — or set `PLAY_STORE_TRACK` in CI — to keep the completed release on a non-production track. Use `--android-release-status` / `PLAY_STORE_RELEASE_STATUS` when you need a different status than `completed`.
+:::
+
+This requires the same Google Play service account setup as the normal upload path (`PLAY_CONFIG_JSON` in CI or saved Android credentials locally). `--store-release-name` is used as the Google Play release name. `--store-release-notes` is the fallback Play changelog, and each `--store-release-notes-locale "locale=notes"` entry writes a localized Play changelog for that locale. Capgo sends the Play release as `completed` unless you override `--android-release-status`; if Managed publishing is enabled in Play Console, Google can still wait for your manual publish after approval.
 
 ## Keep going from Android Builds
 
