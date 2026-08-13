@@ -1,31 +1,51 @@
 ---
 import CompetitorComparison from '@/components/CompetitorComparison.astro'
 import Layout from '@/layouts/Layout.astro'
-import { createFAQPageLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
 const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
+const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
+const ciCdUrl = getRelativeLocaleUrl(locale, 'ci_cd')
+const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
 
 const faq = [
+  {
+    question: 'What is an EAS alternative for Capacitor?',
+    answer:
+      'An EAS alternative is a cloud stack that covers the same jobs as Expo Application Services: native builds, store submit, CI/CD, and over-the-air updates. Capgo is that stack for Capacitor apps. Keep EAS if the app is React Native.',
+  },
   {
     question: 'Is Expo better than Capgo?',
     answer:
       'Expo is the better fit if your app is already React Native. Capgo is the better fit if you have a web app and want to ship it as a mobile app with Capacitor instead of rebuilding the UI in React Native.',
   },
   {
-    question: 'Can Capgo update Expo apps?',
-    answer: 'No. Capgo updates Capacitor apps through the Capgo updater plugin. Expo apps should use the Expo update ecosystem, such as EAS Update with expo-updates.',
+    question: 'Does Capgo replace EAS Update?',
+    answer:
+      'For Capacitor apps, yes: Capgo Live Updates is the EAS Update analog. It ships web-bundle fixes with channels, rollback, and device logs. Capgo cannot update Expo apps. Expo apps should keep expo-updates.',
   },
   {
-    question: 'Can EAS Update update Capacitor apps?',
+    question: 'Does Capgo replace EAS Build and EAS Submit?',
     answer:
-      'EAS Update serves updates for projects using the expo-updates library. Capacitor apps use a different runtime and plugin model, so Capgo is the direct fit for Capacitor live updates.',
+      'For Capacitor projects, Capgo Builder compiles and signs iOS and Android binaries and can submit them to the stores. EAS Build and EAS Submit stay the path for Expo and React Native apps.',
+  },
+  {
+    question: 'Does Capgo replace EAS Workflows?',
+    answer:
+      'Capgo runs signed native builds from GitHub Actions, GitLab CI, Jenkins, and similar CI. It is not a hosted React Native CI like EAS Workflows. Keep your existing CI and call Capgo Build from it.',
+  },
+  {
+    question: 'Can Capgo host Expo Router web apps?',
+    answer: 'No. EAS Hosting deploys Expo Router websites and API routes. Capgo does not offer web hosting. Use Capgo for Capacitor live updates and native builds only.',
   },
   {
     question: 'Is Capgo cheaper than EAS?',
     answer:
-      'For paid cloud workflows, Capgo starts cheaper: $12/mo yearly or $14/mo monthly, with native build time included on every plan. Expo paid EAS starts at $19/mo + usage and scales through build credits and usage-based billing.',
+      'For paid cloud workflows, Capgo starts cheaper: $12/mo yearly or $14/mo monthly, with native build time included on every plan. Expo paid EAS starts at $19/mo plus usage, and Production is $199/mo plus usage.',
   },
   {
     question: 'Which stack should a web team choose?',
@@ -35,115 +55,160 @@ const faq = [
 ]
 
 const page = {
-  eyebrow: 'Expo comparison',
-  title: 'Expo vs Capgo for web apps',
-  description:
-    'Already have a web app? Compare rebuilding it in React Native with Expo and EAS versus shipping it as a Capacitor mobile app with Capgo live updates and native builds.',
-  subtitle: 'Already React Native? Use Expo. Have a web app? Use Capacitor with Capgo and avoid a rewrite.',
-  competitor: 'Expo',
-  competitorShort: 'Expo',
+  eyebrow: 'Expo Application Services',
+  title: 'Expo alternative for web apps',
+  description: 'Compare Expo Application Services (EAS Build, Submit, Workflows, Update) with Capgo for Capacitor. An Expo alternative if you already have a web app.',
+  subtitle: 'Already React Native? Use Expo and EAS. Have a web app? Use Capacitor with Capgo and skip a React Native rewrite.',
+  competitor: 'Expo Application Services',
+  competitorShort: 'EAS',
   capgoSummary:
-    'Capgo helps web teams turn an existing web app into iOS and Android apps with Capacitor. It starts cheaper than paid EAS, includes native build time on every plan, and adds live updates, rollback, channels, and logs.',
+    'Capgo is the EAS analog for Capacitor: live updates, native builds, store submit, and CI/CD from an existing web app. Paid plans start at $12/mo yearly, with native build time included.',
   competitorSummary:
-    'Expo is a strong React Native framework and service platform. It is the right comparison when you want React Native, not when you want to keep a web app codebase.',
-  verdict: 'Choose Expo when your product is React Native. Choose Capgo when your product is a web app and the business goal is to ship mobile without rewriting everything.',
+    'Expo Application Services (EAS) is the cloud platform for Expo and React Native: EAS Build, EAS Submit, EAS Workflows, EAS Update, and EAS Hosting. It is the right stack when the mobile UI is React Native.',
+  verdict: 'Choose EAS when the product is React Native. Choose Capgo when the product is a web app and the goal is iOS and Android without rewriting the UI.',
   capgoFitTitle: 'Choose Capgo when',
-  competitorFitTitle: 'Choose Expo when',
+  competitorFitTitle: 'Choose Expo and EAS when',
   capgoFits: [
     'You already have a web app and want iOS and Android without rewriting the UI in React Native.',
     'Your app uses React, Vue, Angular, Svelte, Ionic, or another web UI stack that can run through Capacitor.',
-    'You want to ship allowed web bundle fixes without rebuilding the native binary each time.',
-    'You want native builds, live updates, rollback, channels, device logs, and direct Capacitor plugin control.',
+    'You want EAS-style live updates, native builds, and store submit for Capacitor instead of Expo.',
+    'You want rollback, channels, device logs, and direct Capacitor plugin control.',
   ],
   competitorFits: [
     'You already have a React Native app or intentionally want React Native for the mobile UI.',
-    'You want Expo SDK, EAS Build, EAS Submit, and EAS Update as one React Native-oriented platform.',
-    'Your team is comfortable with React Native native modules, config plugins, and Expo runtime concepts.',
+    'You want EAS Build, EAS Submit, EAS Workflows, and EAS Update as one React Native platform.',
+    'Your team is comfortable with Expo modules, config plugins, and Expo runtime versions.',
     'You accept rebuilding the mobile UI instead of keeping the existing web app UI.',
   ],
   differences: [
     {
       label: 'Core stack',
       capgo: 'Existing web apps that run inside native iOS and Android projects through Capacitor.',
-      competitor: 'React Native apps using the Expo framework, Expo SDK, and EAS services.',
+      competitor: 'React Native apps using the Expo framework, Expo SDK, and Expo Application Services.',
     },
     {
-      label: 'Update service',
-      capgo: 'Capgo updater plugin plus Capgo cloud or self-hosted infrastructure for Capacitor web bundles.',
-      competitor: 'EAS Update serves updates for projects using the expo-updates library.',
+      label: 'EAS Update',
+      capgo: 'Capgo Live Updates ships Capacitor web bundles with channels, rollback, and device logs.',
+      competitor: 'EAS Update serves JavaScript updates for projects using the expo-updates library.',
     },
     {
-      label: 'Compatibility model',
-      capgo: 'Native-code changes still need a new binary; web bundle updates can be targeted by channel, version, and rollout rules.',
-      competitor: 'Runtime versions guarantee that an update is compatible with the native code in a build.',
+      label: 'EAS Build',
+      capgo: 'Capgo Builder compiles and signs iOS and Android artifacts for Capacitor, with native build time included on every paid plan.',
+      competitor: 'EAS Build compiles and signs Android and iOS apps for Expo and React Native projects, billed with build credits.',
     },
     {
-      label: 'Native builds',
-      capgo: 'Capgo Build helps produce iOS and Android artifacts for Capacitor projects, with native build time included on every paid plan.',
-      competitor: 'EAS Build compiles and signs Android and iOS apps for Expo and React Native projects.',
+      label: 'EAS Submit',
+      capgo: 'Capgo Builder can upload signed binaries to App Store Connect and Google Play after a clean build.',
+      competitor: 'EAS Submit uploads finished builds to the Play Store or App Store from the cloud.',
+    },
+    {
+      label: 'EAS Workflows',
+      capgo: 'Trigger Capgo Build from GitHub Actions, GitLab CI, Jenkins, or any CI you already run.',
+      competitor: 'EAS Workflows is a React Native CI/CD with Expo-packaged jobs, M4 workers, and usage-based minutes.',
+    },
+    {
+      label: 'EAS Hosting',
+      capgo: 'Capgo does not host websites or API routes. Keep your current web host.',
+      competitor: 'EAS Hosting deploys Expo Router web apps and API routes.',
     },
     {
       label: 'Price path',
       capgo: 'Capgo starts at $12/mo yearly or $14/mo monthly, and every plan includes native build time.',
-      competitor: 'Expo paid EAS starts at $19/mo + usage; Production is $199/mo + usage, with build credits and overages.',
+      competitor: 'Expo paid EAS starts at $19/mo plus usage. Production is $199/mo plus usage, with build credits and overages.',
     },
     {
       label: 'Native APIs',
       capgo: 'Capacitor plugins, maintained Capgo plugins, and custom native code in Swift, Kotlin, Java, or Objective-C.',
       competitor: 'Expo modules, React Native native modules, config plugins, and Expo SDK APIs.',
     },
-    {
-      label: 'Best migration',
-      capgo: 'Existing web apps that need a mobile app path without a React Native rewrite.',
-      competitor: 'React Native apps, Expo apps, or teams intentionally moving mobile UI to React Native.',
-    },
   ],
+  serviceMap: {
+    eyebrow: 'Mapped to Expo Application Services',
+    title: 'Capgo vs EAS Build, Submit, Workflows, and Update',
+    lead: 'expo.dev/services lists five cloud jobs. Capgo covers the four that matter for a Capacitor app. EAS Hosting is Expo Router web deploy, which Capgo does not offer.',
+    items: [
+      {
+        easLabel: 'EAS Update',
+        capgoLabel: 'Capgo Live Updates',
+        text: 'Push web-bundle fixes, channels, and rollback to Capacitor apps without a store review. This is the EAS Update analog for teams that kept their web UI.',
+        href: liveUpdateUrl,
+        linkLabel: 'Open Capacitor live updates',
+      },
+      {
+        easLabel: 'EAS Build',
+        capgoLabel: 'Capgo Builder',
+        text: 'Compile and sign iOS and Android binaries in the cloud from any machine. Native build minutes ship with every paid Capgo plan.',
+        href: nativeBuildUrl,
+        linkLabel: 'Open Capgo Builder',
+      },
+      {
+        easLabel: 'EAS Submit',
+        capgoLabel: 'Store submission',
+        text: 'Upload a signed IPA or AAB to App Store Connect or Google Play after the build finishes. Same job as EAS Submit, for Capacitor artifacts.',
+        href: nativeBuildUrl,
+        linkLabel: 'See store submit on Builder',
+      },
+      {
+        easLabel: 'EAS Workflows',
+        capgoLabel: 'CI/CD with Capgo Build',
+        text: 'Keep GitHub Actions or GitLab CI. Call Capgo Build on each commit for signed native binaries instead of adopting Expo-only workflow YAML.',
+        href: ciCdUrl,
+        linkLabel: 'Open Capacitor CI/CD',
+      },
+    ],
+  },
   narratives: [
     {
-      title: 'When Expo wins',
-      text: 'Expo is a mature path for React Native teams. If the app is already React Native, this is not a real Capgo comparison; Expo and EAS are built for that stack.',
-      items: ['Best for React Native UI.', 'Strong service bundle around EAS.', 'Runtime-version model for update compatibility.'],
+      title: 'When Expo and EAS win',
+      text: 'Expo is a mature path for React Native teams. If the app is already React Native, this is not a real Capgo comparison. EAS Build, Submit, Workflows, and Update are built for that stack.',
+      items: ['Best for React Native UI.', 'One service bundle around EAS.', 'Runtime-version model for update compatibility.'],
     },
     {
       title: 'When Capgo wins',
-      text: 'Capgo is the direct path when the starting point is a web app. Keep the UI, wrap it with Capacitor, then use Capgo for live updates, rollback, channels, logs, and native builds.',
-      items: ['Avoid a React Native rewrite.', 'Works with web framework output.', 'Adds cheaper paid plans with native build time included.'],
+      text: 'Capgo is the direct path when the starting point is a web app. Keep the UI, wrap it with Capacitor, then use Capgo for live updates, rollback, channels, logs, native builds, and store submit.',
+      items: ['Avoid a React Native rewrite.', 'Works with web framework output.', 'Paid plans include native build time.'],
     },
     {
       title: 'How to choose',
-      text: 'Compare the codebase you want to maintain. If you want React Native, pick Expo. If you want to turn a web app into a mobile app, pick Capacitor with Capgo.',
-      items: ['Pick Expo for React Native.', 'Pick Capgo for web app to mobile.', 'Pick by the rewrite you want to avoid.'],
+      text: 'Compare the codebase you want to maintain. If you want React Native, pick Expo and EAS. If you want to turn a web app into a mobile app, pick Capacitor with Capgo.',
+      items: ['Pick EAS for React Native.', 'Pick Capgo for web app to mobile.', 'Pick by the rewrite you want to avoid.'],
     },
   ],
   faq,
   sources: [
-    { label: 'Expo EAS Update introduction', href: 'https://docs.expo.dev/eas-update/introduction/' },
-    { label: 'How EAS Update works', href: 'https://docs.expo.dev/eas-update/how-it-works/' },
-    { label: 'EAS Update deployment', href: 'https://docs.expo.dev/eas-update/deployment/' },
-    { label: 'Expo runtime versions', href: 'https://docs.expo.dev/eas-update/runtime-versions/' },
-    { label: 'expo-updates documentation', href: 'https://docs.expo.dev/versions/latest/sdk/updates/' },
     { label: 'Expo Application Services', href: 'https://expo.dev/services' },
+    { label: 'EAS documentation hub', href: 'https://docs.expo.dev/eas/' },
+    { label: 'EAS Build introduction', href: 'https://docs.expo.dev/build/introduction/' },
+    { label: 'EAS Submit to app stores', href: 'https://docs.expo.dev/deploy/submit-to-app-stores/' },
+    { label: 'EAS Workflows introduction', href: 'https://docs.expo.dev/eas/workflows/introduction/' },
+    { label: 'EAS Update introduction', href: 'https://docs.expo.dev/eas-update/introduction/' },
+    { label: 'How EAS Update works', href: 'https://docs.expo.dev/eas-update/how-it-works/' },
+    { label: 'Expo runtime versions', href: 'https://docs.expo.dev/eas-update/runtime-versions/' },
+    { label: 'EAS Hosting introduction', href: 'https://docs.expo.dev/eas/hosting/introduction/' },
     { label: 'Expo pricing', href: 'https://expo.dev/pricing' },
-    { label: 'Expo billing docs', href: 'https://docs.expo.dev/billing/plans/' },
-    { label: 'Capgo pricing', href: 'https://capgo.app/pricing/' },
-    { label: 'Capgo live updates', href: 'https://capgo.app/live-update/' },
-    { label: 'Capgo native builds', href: 'https://capgo.app/native-build/' },
+    { label: 'Capgo pricing', href: pricingUrl },
+    { label: 'Capgo live updates', href: liveUpdateUrl },
+    { label: 'Capgo native builds', href: nativeBuildUrl },
+    { label: 'Capgo CI/CD', href: ciCdUrl },
   ],
-  sourceNote: 'Checked against official Expo docs and Capgo product pages on June 17, 2026.',
+  sourceNote: 'Checked against official Expo docs, expo.dev/services, expo.dev/pricing, and Capgo product pages on August 13, 2026.',
 }
 
+const metaTitle = 'Expo Alternative for Capacitor | EAS vs Capgo'
+const metaDescription = page.description
+
 const content = {
-  title: page.title,
-  description: page.description,
+  title: metaTitle,
+  description: metaDescription,
   canonical: pageUrl,
   url: pageUrl,
   image: `${config.baseUrl}/capgo_social.png`,
-  keywords: 'Expo vs Capgo, Expo alternative, EAS Update, Capacitor live updates, Capgo',
+  keywords: 'Expo alternative, EAS alternative, Expo Application Services, EAS Update, EAS Build, EAS Submit, EAS Workflows, Capacitor live updates, Capgo',
   ldJSON: createLdJsonGraph(
     config,
     createWebPageLdJson(config, {
-      name: page.title,
-      description: page.description,
+      name: metaTitle,
+      description: metaDescription,
       url: pageUrl,
     }),
     {
@@ -152,6 +217,16 @@ const content = {
         createFAQPageLdJson(config, {
           url: pageUrl,
           questions: faq,
+        }),
+        createItemListLdJson(config, {
+          url: pageUrl,
+          name: 'Capgo services compared with Expo Application Services',
+          description: 'Capgo analogs for EAS Update, EAS Build, EAS Submit, and EAS Workflows.',
+          items: page.serviceMap.items.map((item) => ({
+            name: `${item.easLabel} analog: ${item.capgoLabel}`,
+            url: new URL(item.href, config.baseUrl).href,
+            description: item.text,
+          })),
         }),
       ],
     },

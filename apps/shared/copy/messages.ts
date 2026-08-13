@@ -83,6 +83,18 @@ const messages = {
   alternatives_codepush_why_different_li2: 'Built specifically for Capacitor',
   alternatives_codepush_why_different_li3: 'Real humans fixing bugs and adding features',
   alternatives_codepush_why_different_li4: 'Still affordable: $12/month (not VC-subsidized free, but sustainable)',
+  alternatives_expo_credit:
+    'Credit where it is due: Expo Application Services is the standard cloud stack for React Native. Capgo is the Capacitor analog, not a React Native replacement.',
+  alternatives_expo_full_comparison: 'Full EAS comparison →',
+  alternatives_expo_reality:
+    'Expo Application Services (EAS) covers EAS Build, EAS Submit, EAS Workflows, EAS Update, and EAS Hosting for Expo and React Native apps. It is the right comparison when the mobile UI is React Native, not when you want to keep a web app.',
+  alternatives_expo_status: 'Active React Native platform',
+  alternatives_expo_when_good:
+    'Choose EAS if the app is already React Native, or if the team wants Expo SDK, config plugins, and a React Native rewrite. Choose Capgo if the starting point is a web app you can wrap with Capacitor.',
+  alternatives_expo_why_different_li1: 'Capgo Live Updates is the EAS Update analog for Capacitor web bundles',
+  alternatives_expo_why_different_li2: 'Capgo Builder covers EAS Build and EAS Submit for iOS and Android Capacitor binaries',
+  alternatives_expo_why_different_li3: 'Trigger Capgo Build from GitHub Actions or GitLab instead of adopting EAS Workflows',
+  alternatives_expo_why_different_li4: 'Paid Capgo plans start at $12/mo yearly with native build time included; paid EAS starts at $19/mo plus usage',
   alternatives_cta_button: 'Start free trial',
   alternatives_cta_questions:
     'Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Ask us on Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email support@capgo.app</a>',
@@ -99,7 +111,7 @@ const messages = {
   alternatives_human_support_desc: 'No chatbots. No "AI assistants." No ticket systems that lose your message.',
   alternatives_human_support_note: "You get Martin or someone from the family. Usually within hours. Sometimes within minutes. Yes, even on weekends (we can't help ourselves 😅).",
   alternatives_human_support_title: '🙋 Only human support',
-  alternatives_meta_description: 'Compare Capacitor live update platforms for OTA updates, rollbacks, channels, CI/CD automation, and Appflow migration support.',
+  alternatives_meta_description: 'Compare Capacitor live updates with Appflow, Expo EAS, and CodePush. OTA, rollback, channels, CI/CD, and migration paths in one place.',
   alternatives_not_good_at_ci_cd:
     "Unlike Appflow's bundled approach, we give you flexibility. Use our Cloud Build for native iOS/Android builds, or integrate with your own CI/CD (GitHub Actions, GitLab CI, etc). Your choice - both work great.",
   alternatives_not_good_at_ci_cd_label: 'All-in-one CI/CD:',
@@ -461,7 +473,7 @@ const messages = {
   capflow_meta_description: 'Compare Ionic Appflow and Capgo for Capacitor live updates, OTA deployments, rollback protection, automation, and migration support.',
   capflow_nav_label: 'Ionic AppFlow vs Capgo',
   capflow_title: 'Ionic AppFlow vs Capgo',
-  expo_nav_label: 'Expo vs Capgo',
+  expo_nav_label: 'EAS vs Capgo',
   median_nav_label: 'Median vs Capgo',
   capgo_enables_development_teams_at_some_of_the_most_innovative_companies: 'Capgo enables development teams at some of the most innovative companies.',
   capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: 'Capgo gives you the best insights you need to create a truly professional mobile app.',
@@ -1911,6 +1923,11 @@ const messages = {
   live_update_v2_comp_try_capa: 'Tiered plans. Trials vary by vendor.',
   live_update_v2_comp_callout: 'Capgo is built so a JavaScript bug cannot take down your update system.',
   live_update_v2_comp_footnote: 'Comparison reflects typical DIY/self-hosted setups and public competitor cloud documentation.',
+  live_update_eas_eyebrow: 'EAS Update analog',
+  live_update_eas_title: 'Capacitor live updates if you compared EAS Update',
+  live_update_eas_lead:
+    'EAS Update ships JavaScript fixes for Expo and React Native apps. Capgo does the same job for Capacitor web bundles: channels, rollback, and device logs. Stay on EAS if the app is React Native. Use Capgo if you kept the web UI.',
+  live_update_eas_cta: 'Compare Capgo with Expo Application Services',
 
   live_update_decision_1: 'You need a recovery path for production bugs that does not depend on App Store or Play review time.',
   live_update_decision_2: 'Your app has multiple customer cohorts, white-label deployments, beta testers, or support-only debug channels.',
@@ -1928,7 +1945,7 @@ const messages = {
   live_update_delta_feature3_desc: 'Just add --partial to your upload command to enable delta updates for your bundle.',
   live_update_delta_feature3_title: 'Enable with One Flag',
   live_update_delta_title: 'Delta Updates',
-  live_update_description: 'Ionic and Capacitor live update platform with automatic setup, advanced manual flows, CLI safety checks, and native rollback protection',
+  live_update_description: 'Capacitor live updates with channels, rollback, and CLI checks. The EAS Update analog if you have a web app instead of React Native.',
   live_update_dynamic_bullet1_prefix: 'Add an in-app “Update Track” menu: list channels and let testers jump from',
   live_update_dynamic_bullet1_suffix: 'in seconds (no reinstall).',
   live_update_dynamic_bullet2: 'Spin up a pull-request channel per feature, route QA or beta users there, then snap them back to prod when approved.',
@@ -2294,7 +2311,7 @@ const messages = {
   native_build_builder_credit_price: '{price}/min',
   native_build_builder_cta_text: "Build signed iOS and Android releases from your machine or CI while keeping Capgo's existing site header, docs, and pricing flow.",
   native_build_builder_cta_title: 'Native builds without the pain.',
-  native_build_builder_description: 'Build signed iOS and Android apps from any machine with Capgo Builder.',
+  native_build_builder_description: 'Signed iOS and Android Capacitor builds plus store submit. The EAS Build and EAS Submit analog for web apps, not React Native.',
   native_build_builder_extra_minutes: 'Extra build minutes use prepaid credits.',
   native_build_builder_faq_eyebrow: 'FAQ',
   native_build_builder_faq_live_updates_a:
@@ -5224,6 +5241,14 @@ const messages = {
   native_build_v2_faq_a8:
     'Yes. Keep private JavaScript dependency setup, web builds, and Capacitor sync in your CI. Capgo Build receives the prepared native platform folder after that work is complete, then compiles and signs it; it can also submit the result to app stores when configured. Capgo does not need access to your Git repositories, private registries, or SSH credentials. Pass supported build configuration as environment variables when needed.',
   native_build_v2_faq_a8_link: 'Read the build workflow',
+  native_build_v2_faq_q9: 'Is Capgo Builder an EAS Build alternative?',
+  native_build_v2_faq_a9:
+    'For Capacitor apps, yes: Capgo Builder compiles, signs, and can submit iOS and Android binaries, which is the EAS Build plus EAS Submit analog. EAS Build stays the path for Expo and React Native apps. Capgo cannot build Expo projects.',
+  native_build_v2_eas_eyebrow: 'EAS Build analog',
+  native_build_v2_eas_title: 'Cloud builds if you compared EAS Build and EAS Submit',
+  native_build_v2_eas_lead:
+    'EAS Build compiles React Native binaries. EAS Submit uploads them to the stores. Capgo Builder does both jobs for Capacitor projects, with native build time on every paid plan. Keep EAS if the app is Expo.',
+  native_build_v2_eas_cta: 'Compare Capgo with Expo Application Services',
 
   native_build_v2_cta_title: 'Native builds without the pain.',
   native_build_v2_cta_tagline: 'One command. iOS and Android, treated as equals. From any machine.',

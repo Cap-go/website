@@ -22,6 +22,7 @@ const description = m.live_update_description({}, { locale })
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const docsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates')
 const dataUrl = getRelativeLocaleUrl(locale, 'data')
+const expoUrl = getRelativeLocaleUrl(locale, 'expo')
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -39,6 +40,7 @@ const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-live-update.png`,
+  keywords: 'Capacitor live updates, EAS Update analog, Expo alternative, OTA updates, Capgo',
   ldJSON,
 }
 
@@ -489,6 +491,17 @@ const featureTiles = [
       </div>
     </section>
 
+    <section class="section" id="eas-update">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{copy('live_update_eas_eyebrow')}</div>
+          <h2 class="h2-section">{copy('live_update_eas_title')}</h2>
+          <p class="lead">{copy('live_update_eas_lead')}</p>
+        </div>
+        <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('live_update_eas_cta')}</a>
+      </div>
+    </section>
+
     <!-- FINAL CTA -->
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">
@@ -512,7 +525,8 @@ const featureTiles = [
       <p>
         Connect this Ionic and Capacitor live update page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
         <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, <a href={dataUrl}>Live Update delivery data</a>, <a href="/notifications/">Capgo Notifications</a>,
-        <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, and <a href="/native-build/">Capgo Native Builds</a> for releases that still need store review.
+        <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, <a href="/native-build/">Capgo Native Builds</a>, and <a href={expoUrl}>EAS vs Capgo</a> for the Expo Application
+        Services comparison.
       </p>
     </div>
   </div>
