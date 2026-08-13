@@ -19,8 +19,8 @@ If you need the background on why Capgo compares native packages, start with [Na
 This guide assumes the `dev` and `production` channels already exist. Create them first if needed:
 
 ```bash
-npx @capgo/cli@latest channel create production com.example.app
-npx @capgo/cli@latest channel create dev com.example.app
+npx @capgo/cli@latest channel add production com.example.app
+npx @capgo/cli@latest channel add dev com.example.app
 ```
 
 | Channel | Who gets it | Typical upload |
