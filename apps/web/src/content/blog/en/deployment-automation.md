@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-13T08:31:23.838Z
-updated_at: 2026-08-13T08:31:25.090Z
+updated_at: 2026-08-13T08:33:35.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/0790ff8b-5a30-4884-a3e9-40e737994108/deployment-automation-sketch-illustration.jpg'
 head_image_alt: 'Deployment Automation: The Complete Guide for 2026'
 keywords: 'deployment automation, CI/CD pipeline, release automation, mobile app updates, Capgo live updates'
