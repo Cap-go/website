@@ -2,139 +2,78 @@
 import heroLogoSlotsData from '@/data/hero-logo-slots.json'
 import { formatHeroUsers, type AssignedHeroApp, type HeroLogoSlotsFile } from '@/lib/heroClientApps'
 
-type SlotKind = 'empty' | 'logo'
-type HeroSlot = {
-  kind: SlotKind
-  col: 'col-start-1' | 'col-start-2' | 'col-start-3' | 'col-start-4' | 'col-start-9' | 'col-start-10' | 'col-start-11' | 'col-start-12'
-  class: string
-}
-
-const tile = 'h-16 w-16 2xl:h-20 2xl:w-20 rounded-2xl backdrop-blur-sm'
-const emptyTile = `flex ${tile} items-center justify-center overflow-hidden bg-[#1a1d24]/30`
-const shiftLeft = '-translate-x-12 2xl:-translate-x-28'
-const shiftRight = 'translate-x-12 2xl:translate-x-28'
-
-const rows: HeroSlot[][] = [
-  [
-    { kind: 'empty', col: 'col-start-1', class: `${emptyTile} opacity-20` },
-    { kind: 'logo', col: 'col-start-2', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-3', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-4', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-9', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-10', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-11', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'empty', col: 'col-start-12', class: `${emptyTile} opacity-20` },
-  ],
-  [
-    { kind: 'logo', col: 'col-start-1', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-2', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-3', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-4', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-9', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-10', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-11', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-12', class: `${tile} bg-[#1a1d24]/30` },
-  ],
-  [
-    { kind: 'logo', col: 'col-start-1', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-2', class: `${tile} ${shiftLeft} bg-[#1a1d24]/80` },
-    { kind: 'logo', col: 'col-start-3', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-10', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-11', class: `${tile} ${shiftRight} bg-[#1a1d24]/80` },
-    { kind: 'logo', col: 'col-start-12', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
-  ],
-  [
-    { kind: 'logo', col: 'col-start-1', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-2', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-3', class: `${tile} bg-[#1a1d24]/80` },
-    { kind: 'logo', col: 'col-start-4', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-9', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-10', class: `${tile} bg-[#1a1d24]/80` },
-    { kind: 'logo', col: 'col-start-11', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-12', class: `${tile} bg-[#1a1d24]/30` },
-  ],
-  [
-    { kind: 'logo', col: 'col-start-1', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-2', class: `${tile} ${shiftLeft} bg-[#1a1d24]/80` },
-    { kind: 'logo', col: 'col-start-3', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-10', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-11', class: `${tile} ${shiftRight} bg-[#1a1d24]/80` },
-    { kind: 'logo', col: 'col-start-12', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
-  ],
-  [
-    { kind: 'logo', col: 'col-start-1', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-2', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-3', class: `${tile} bg-[#1a1d24]/80` },
-    { kind: 'logo', col: 'col-start-4', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-9', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-10', class: `${tile} bg-[#1a1d24]/80` },
-    { kind: 'logo', col: 'col-start-11', class: `${tile} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-12', class: `${tile} bg-[#1a1d24]/30` },
-  ],
-  [
-    { kind: 'empty', col: 'col-start-1', class: `${emptyTile} ${shiftLeft} opacity-40` },
-    { kind: 'logo', col: 'col-start-2', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-3', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-4', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-9', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-10', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
-    { kind: 'logo', col: 'col-start-11', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
-    { kind: 'empty', col: 'col-start-12', class: `${emptyTile} ${shiftRight} opacity-40` },
-  ],
-]
-
 const selectedApps = (heroLogoSlotsData as HeroLogoSlotsFile).apps as AssignedHeroApp[]
+const rowSizes = [12, 10, 8, 6]
 let logoIndex = 0
-const takeApp = (): AssignedHeroApp | undefined => {
-  const app = selectedApps[logoIndex]
-  logoIndex += 1
-  return app
-}
+const rows = rowSizes.map((size) => {
+  const slice = selectedApps.slice(logoIndex, logoIndex + size)
+  logoIndex += size
+  return slice
+})
 ---
 
-<div class="pointer-events-none absolute inset-0 flex w-full flex-col justify-start gap-4 blur-sm select-none sm:blur-none" aria-hidden="true">
-  {
-    rows.map((row) => (
-      <div class="grid w-full grid-cols-12 gap-4 2xl:gap-6">
-        {row.map((slot) => {
-          if (slot.kind === 'empty') {
-            return <div class={`${slot.col} ${slot.class}`} />
-          }
-
-          const app = takeApp()
-          if (!app) return <div class={`${slot.col} ${slot.class}`} />
-          const usersLabel = formatHeroUsers(app.users)
-
-          return (
-            <div class={`relative ${slot.col} ${slot.class}`} data-hero-logo>
-              <div class="h-full w-full overflow-hidden rounded-2xl">
-                <img
-                  src={app.icon}
-                  alt=""
-                  width="80"
-                  height="80"
-                  decoding="async"
-                  class="hero-logo-img max-h-full max-w-full object-contain"
-                  onerror="this.closest('[data-hero-logo]')?.replaceChildren()"
-                />
+<div class="hero-logo-cloud relative z-0 mx-auto mt-5 w-full max-w-4xl px-3 sm:mt-6" aria-hidden="true">
+  <div class="flex flex-col items-center gap-1">
+    {
+      rows.map((row) => (
+        <div class="flex justify-center gap-1">
+          {row.map((app) => {
+            const usersLabel = formatHeroUsers(app.users)
+            return (
+              <div class="hero-logo-tile relative" data-hero-logo>
+                <img src={app.icon} alt="" width="80" height="80" decoding="async" class="hero-logo-img" onerror="this.closest('[data-hero-logo]')?.replaceChildren()" />
+                {usersLabel && <span class="hero-logo-users">{usersLabel}</span>}
               </div>
-              {usersLabel && <span class="hero-logo-users">{usersLabel}</span>}
-            </div>
-          )
-        })}
-      </div>
-    ))
-  }
+            )
+          })}
+        </div>
+      ))
+    }
+  </div>
+  <div class="hero-logo-blur"></div>
 </div>
 
 <style>
+  .hero-logo-cloud {
+    container-type: inline-size;
+    --hero-logo-gap: 0.25rem;
+    --hero-logo-cols: 12;
+    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.72) 0%, black 24%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.72) 0%, black 24%, black 100%);
+  }
+
+  .hero-logo-tile {
+    width: calc((100cqi - (var(--hero-logo-cols) - 1) * var(--hero-logo-gap)) / var(--hero-logo-cols));
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 0.9rem;
+  }
+
+  .hero-logo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .hero-logo-blur {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    mask-image: radial-gradient(ellipse 85% 48% at 50% 0%, black 0%, rgb(0 0 0 / 0.4) 36%, transparent 68%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 48% at 50% 0%, black 0%, rgb(0 0 0 / 0.4) 36%, transparent 68%);
+  }
+
   .hero-logo-users {
     position: absolute;
-    top: 0.1rem;
-    right: 0.1rem;
+    top: 0.12rem;
+    right: 0.12rem;
     z-index: 1;
     border-radius: 999px;
-    background: rgb(4 6 12 / 0.38);
+    background: rgb(4 6 12 / 0.32);
     padding: 0.08rem 0.22rem;
     font-size: 0.5rem;
     font-weight: 500;
@@ -145,10 +84,10 @@ const takeApp = (): AssignedHeroApp | undefined => {
     pointer-events: none;
   }
 
-  .hero-logo-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    opacity: 0.3;
+  @media (max-width: 639px) {
+    .hero-logo-blur {
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
   }
 </style>
