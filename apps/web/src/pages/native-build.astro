@@ -120,6 +120,7 @@ const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-native-build.png`,
+  keywords: 'Capgo Builder, EAS Build analog, EAS Submit analog, Capacitor cloud build, Capgo',
   ldJSON,
 }
 
@@ -134,6 +135,7 @@ const nativeBuildFooterBlogCopy = {
 
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
+const expoUrl = getRelativeLocaleUrl(locale, 'expo')
 
 const heroMeta = [copy('native_build_v2_meta_ios'), copy('native_build_v2_meta_android'), copy('native_build_v2_meta_nosdk'), copy('native_build_v2_meta_speed')]
 
@@ -226,6 +228,7 @@ const faqs = [
     href: getRelativeLocaleUrl(locale, 'docs/builder/getting-started/'),
     linkLabel: copy('native_build_v2_faq_a8_link'),
   },
+  { q: copy('native_build_v2_faq_q9'), a: copy('native_build_v2_faq_a9') },
 ]
 
 function annualMonthlyPrice(plan: Plan) {
@@ -883,6 +886,17 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         </aside>
 
         <p class="comp-footnote">{copy('native_build_v2_comp_footnote')}</p>
+      </div>
+    </section>
+
+    <section class="section" id="eas-build">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow">{copy('native_build_v2_eas_eyebrow')}</div>
+          <h2 class="h2-section">{copy('native_build_v2_eas_title')}</h2>
+          <p class="lead">{copy('native_build_v2_eas_lead')}</p>
+        </div>
+        <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('native_build_v2_eas_cta')}</a>
       </div>
     </section>
 
