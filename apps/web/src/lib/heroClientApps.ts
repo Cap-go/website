@@ -22,7 +22,7 @@ export type HeroLogoSlotsFile = {
   apps: AssignedHeroApp[]
 }
 
-export const HERO_LOGO_SLOT_COUNT = 28
+export const HERO_LOGO_SLOT_COUNT = 48
 
 const compareAppIds = (left: string, right: string) => (left < right ? -1 : left > right ? 1 : 0)
 
