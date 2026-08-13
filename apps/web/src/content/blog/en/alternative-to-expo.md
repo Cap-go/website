@@ -36,7 +36,7 @@ The full service-by-service comparison lives on [EAS vs Capgo](/expo/). This pos
 | EAS Workflows | [CI/CD with Capgo Build](/ci_cd/) | Keep GitHub Actions or GitLab CI. Call Capgo Build from your pipeline. |
 | EAS Hosting | None | Capgo does not host Expo Router websites or API routes. |
 
-Paid Capgo starts at $12/mo yearly or $14/mo monthly. Paid EAS starts at $19/mo plus usage. Production EAS is $199/mo plus usage. Check [Capgo pricing](/pricing/) and [Expo pricing](https://expo.dev/pricing) before you model a team.
+Paid Capgo starts at $12/month billed yearly, or $14/month billed monthly. Paid EAS starts at $19/month plus usage. Production EAS is $199/month plus usage. Check [Capgo pricing](/pricing/) and [Expo pricing](https://expo.dev/pricing) before you model a team.
 
 ## Features
 

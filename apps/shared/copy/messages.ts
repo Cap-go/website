@@ -94,7 +94,7 @@ const messages = {
   alternatives_expo_why_different_li1: 'Capgo Live Updates is the EAS Update analog for Capacitor web bundles',
   alternatives_expo_why_different_li2: 'Capgo Builder covers EAS Build and EAS Submit for iOS and Android Capacitor binaries',
   alternatives_expo_why_different_li3: 'Trigger Capgo Build from GitHub Actions or GitLab instead of adopting EAS Workflows',
-  alternatives_expo_why_different_li4: 'Paid Capgo plans start at $12/mo yearly with native build time included; paid EAS starts at $19/mo plus usage',
+  alternatives_expo_why_different_li4: 'Paid Capgo plans start at $12/month billed yearly with native build time included; paid EAS starts at $19/month plus usage',
   alternatives_cta_button: 'Start free trial',
   alternatives_cta_questions:
     'Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Ask us on Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email support@capgo.app</a>',
