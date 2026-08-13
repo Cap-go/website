@@ -98,9 +98,9 @@ const takeApp = (): AssignedHeroApp | undefined => {
           const usersLabel = formatHeroUsers(app.users)
 
           return (
-            <div class={`relative ${slot.col} ${slot.class}`}>
+            <div class={`relative ${slot.col} ${slot.class}`} data-hero-logo>
               <div class="h-full w-full overflow-hidden rounded-2xl">
-                <img src={app.icon} alt="" width="80" height="80" decoding="async" class="hero-logo-img max-h-full max-w-full object-contain" onerror="this.remove()" />
+                <img src={app.icon} alt="" width="80" height="80" decoding="async" class="hero-logo-img max-h-full max-w-full object-contain" onerror="this.closest('[data-hero-logo]')?.replaceChildren()" />
               </div>
               {usersLabel && <span class="hero-logo-users">{usersLabel}</span>}
             </div>
