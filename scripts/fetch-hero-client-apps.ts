@@ -99,7 +99,4 @@ async function main() {
   await writeCatalog(live)
 }
 
-main().catch((error) => {
-  console.error(error)
-  process.exit(1)
-})
+await main()

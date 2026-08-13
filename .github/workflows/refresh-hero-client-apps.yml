@@ -44,7 +44,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bun-
 
-      - run: bun install --frozen-lockfile
+      - run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Refresh committed hero logo catalog
         run: bun run refresh:hero-apps
