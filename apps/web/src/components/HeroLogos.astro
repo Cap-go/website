@@ -100,7 +100,7 @@ const takeApp = (): AssignedHeroApp | undefined => {
           return (
             <div class={`relative ${slot.col} ${slot.class}`}>
               <div class="h-full w-full overflow-hidden rounded-2xl">
-                <img src={app.icon} alt="" width="80" height="80" decoding="async" class="hero-logo-img max-h-full max-w-full object-contain" />
+                <img src={app.icon} alt="" width="80" height="80" decoding="async" class="hero-logo-img max-h-full max-w-full object-contain" onerror="this.remove()" />
               </div>
               {usersLabel && <span class="hero-logo-users">{usersLabel}</span>}
             </div>

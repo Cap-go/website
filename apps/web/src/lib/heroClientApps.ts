@@ -18,23 +18,24 @@ export type HeroClientAppsFile = {
 }
 
 export type HeroLogoSlotsFile = {
-  fetchedAt: string
   source: string
   apps: AssignedHeroApp[]
 }
 
 export const HERO_LOGO_SLOT_COUNT = 28
 
+const compareAppIds = (left: string, right: string) => (left < right ? -1 : left > right ? 1 : 0)
+
 export const formatHeroUsers = (users: number): string | null => {
   if (users < 1_000) return null
-  if (users >= 1_000_000_000) return `${Math.round(users / 1_000_000_000)}B`
-  if (users >= 1_000_000) return `${Math.round(users / 1_000_000)}M`
+  if (users >= 999_500_000) return `${Math.round(users / 1_000_000_000)}B`
+  if (users >= 999_500) return `${Math.round(users / 1_000_000)}M`
   if (users >= 10_000) return `${Math.round(users / 1_000)}K`
   return `${(users / 1_000).toFixed(1).replace(/\.0$/, '')}K`
 }
 
 export const splitHeroClientPool = (apps: HeroClientApp[]) => {
-  const ranked = [...apps].filter((app) => app.icon && app.title).sort((left, right) => right.users - left.users || left.id.localeCompare(right.id))
+  const ranked = [...apps].filter((app) => app.icon && app.title).sort((left, right) => right.users - left.users || compareAppIds(left.id, right.id))
   const splitAt = Math.ceil(ranked.length / 2)
   return {
     biggest: ranked.slice(0, splitAt),

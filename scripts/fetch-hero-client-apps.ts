@@ -12,7 +12,7 @@ import { HERO_LOGO_SLOT_COUNT, pickStableMixedHeroApps, type HeroClientAppsFile,
 const REFRESH = process.env.HERO_APPS_REFRESH === 'true'
 const POOL_PATH = new URL('../apps/web/src/data/hero-client-apps.json', import.meta.url).pathname
 const SLOTS_PATH = new URL('../apps/web/src/data/hero-logo-slots.json', import.meta.url).pathname
-const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID ?? '9ee3d7479a3c359681e3fab2c8cb22c0'
+const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID?.trim() || '9ee3d7479a3c359681e3fab2c8cb22c0'
 const DATABASE_NAME = 'capgo_prod_storeapp'
 const SQL = `SELECT app_id, title, icon, installs FROM store_apps WHERE capgo = 1 AND icon != '' AND title != '' AND installs > 0 ORDER BY installs DESC LIMIT 200`
 
@@ -36,7 +36,6 @@ const readCached = async (path: string): Promise<HeroClientAppsFile | null> => {
 
 const writeCatalog = async (pool: HeroClientAppsFile) => {
   const slots: HeroLogoSlotsFile = {
-    fetchedAt: pool.fetchedAt,
     source: pool.source,
     apps: pickStableMixedHeroApps(pool.apps, HERO_LOGO_SLOT_COUNT),
   }
