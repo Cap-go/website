@@ -3,7 +3,7 @@ import heroLogoSlotsData from '@/data/hero-logo-slots.json'
 import { formatHeroUsers, type AssignedHeroApp, type HeroLogoSlotsFile } from '@/lib/heroClientApps'
 
 const selectedApps = (heroLogoSlotsData as HeroLogoSlotsFile).apps as AssignedHeroApp[]
-const rowSizes = [12, 10, 8, 6]
+const rowSizes = [12, 12, 10, 10, 8, 6, 4, 2]
 let logoIndex = 0
 const rows = rowSizes.map((size) => {
   const slice = selectedApps.slice(logoIndex, logoIndex + size)
@@ -12,11 +12,11 @@ const rows = rowSizes.map((size) => {
 })
 ---
 
-<div class="hero-logo-cloud relative z-0 mx-auto mt-5 w-full max-w-4xl px-3 sm:mt-6" aria-hidden="true">
-  <div class="flex flex-col items-center gap-1">
+<div class="hero-logo-cloud pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+  <div class="flex h-full flex-col items-center gap-1">
     {
       rows.map((row) => (
-        <div class="flex justify-center gap-1">
+        <div class="flex flex-nowrap justify-center gap-1">
           {row.map((app) => {
             const usersLabel = formatHeroUsers(app.users)
             return (
@@ -35,16 +35,19 @@ const rows = rowSizes.map((size) => {
 
 <style>
   .hero-logo-cloud {
-    container-type: inline-size;
+    container-type: size;
     --hero-logo-gap: 0.25rem;
     --hero-logo-cols: 12;
-    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.72) 0%, black 24%, black 100%);
-    -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.72) 0%, black 24%, black 100%);
+    --hero-logo-rows: 8;
+    --hero-logo-size: min(
+      calc((100cqi - (var(--hero-logo-cols) - 1) * var(--hero-logo-gap)) / var(--hero-logo-cols)),
+      calc((100cqb - (var(--hero-logo-rows) - 1) * var(--hero-logo-gap)) / var(--hero-logo-rows))
+    );
   }
 
   .hero-logo-tile {
-    width: calc((100cqi - (var(--hero-logo-cols) - 1) * var(--hero-logo-gap)) / var(--hero-logo-cols));
-    aspect-ratio: 1;
+    width: var(--hero-logo-size);
+    height: var(--hero-logo-size);
     flex-shrink: 0;
     overflow: hidden;
     border-radius: 0.9rem;
@@ -61,10 +64,11 @@ const rows = rowSizes.map((size) => {
     pointer-events: none;
     position: absolute;
     inset: 0;
+    background: radial-gradient(ellipse 70% 48% at 50% 42%, rgb(3 7 18 / 0.55) 0%, transparent 72%);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    mask-image: radial-gradient(ellipse 85% 48% at 50% 0%, black 0%, rgb(0 0 0 / 0.4) 36%, transparent 68%);
-    -webkit-mask-image: radial-gradient(ellipse 85% 48% at 50% 0%, black 0%, rgb(0 0 0 / 0.4) 36%, transparent 68%);
+    mask-image: radial-gradient(ellipse 75% 52% at 50% 42%, black 0%, rgb(0 0 0 / 0.45) 38%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 52% at 50% 42%, black 0%, rgb(0 0 0 / 0.45) 38%, transparent 72%);
   }
 
   .hero-logo-users {
