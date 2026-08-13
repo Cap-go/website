@@ -1,0 +1,139 @@
+---
+title: Native + OTA Channel Workflow
+description: "How to use --fail-on-incompatible with dev and production channels, and what to do when you intentionally ship a bundle that needs new native code."
+sidebar:
+  order: 3
+  label: Native + OTA Workflow
+---
+
+import { Aside, CardGrid, Card, Steps } from '@astrojs/starlight/components';
+
+A common Capgo setup uses a **dev** channel and a **production** channel. CI uploads every OTA bundle to `dev`, then promotes to `production` when you are ready. Teams often add `--fail-on-incompatible` so CI cannot ship a live update that needs new native code by accident.
+
+This page answers the follow-up: **what do you do when you *intentionally* need a bundle that is incompatible with the channel's current native packages?**
+
+If you need the background on why Capgo compares native packages, start with [Native Compatibility](/docs/live-updates/compatibility/). For a full CI branch that picks OTA vs Capgo Build automatically, see [Auto OTA or Native](/docs/builder/ci-ota-or-native/).
+
+## Recommended channel layout
+
+| Channel | Who gets it | Typical upload |
+| --- | --- | --- |
+| `dev` | Internal / QA builds | Every CI push of JS (and intentional native baselines) |
+| `production` | Store users | Promoted or uploaded only when release-ready |
+
+`--fail-on-incompatible` is a good default on both channels for **everyday OTA uploads**. It compares the native packages in the bundle you are uploading against the bundle **currently live on that channel**. If they differ, the upload exits non-zero and nothing ships.
+
+## Everyday OTA (keep the flag)
+
+When the change is JavaScript-only and native packages match the channel:
+
+```bash
+npx @capgo/cli@latest bundle upload com.example.app \
+  --channel production \
+  --fail-on-incompatible
+```
+
+Optional CI gate before upload:
+
+```bash
+npx @capgo/cli@latest bundle releaseType com.example.app --channel production
+# → OTA      safe to upload with --fail-on-incompatible
+# → native   stop; ship a native binary first (see below)
+```
+
+## Intentional native bump (drop the flag once)
+
+You **cannot** upload a bundle that needs new native code while keeping `--fail-on-incompatible`. That flag exists to block exactly that case. When a plugin, Capacitor version, or other native dependency changed on purpose:
+
+1. Ship the matching **native binary** (App Store / Play Store, or [Capgo Build](/docs/builder/)).
+2. Upload the matching JS bundle **without** `--fail-on-incompatible`.
+3. Prefer `--auto-min-update-version` with the channel on the `metadata` strategy so devices still on the old binary do not receive the new bundle until they install the new app.
+4. After that baseline upload, put `--fail-on-incompatible` back on normal OTA CI.
+
+<Steps>
+
+1. **One-time per channel: enable metadata gating**
+
+   ```bash
+   npx @capgo/cli@latest channel set production com.example.app --disable-auto-update metadata
+   ```
+
+   Repeat for `dev` if that channel also receives intentional native baselines.
+
+2. **Ship the native binary**
+
+   Build and submit the iOS/Android app that includes the new plugins or native changes. Until users install that binary, they cannot safely run a bundle that depends on those native packages.
+
+3. **Upload the matching OTA baseline (no `--fail-on-incompatible`)**
+
+   ```bash
+   npx @capgo/cli@latest bundle upload com.example.app \
+     --channel production \
+     --auto-min-update-version
+   ```
+
+   This records the new native packages on the channel. Later `bundle releaseType` / `--fail-on-incompatible` checks use that baseline.
+
+4. **Resume guarded OTA uploads**
+
+   Subsequent JS-only releases keep using `--fail-on-incompatible` again.
+
+</Steps>
+
+<Aside type="tip">
+Treat the native-baseline upload as a **dedicated CI job** (or a manual release step), not as an exception you sprinkle into the default OTA job. The default job should always keep `--fail-on-incompatible`.
+</Aside>
+
+## FAQ
+
+### Can I keep `--fail-on-incompatible` and still push a native-incompatible bundle?
+
+No. If the upload's native packages differ from the channel's live bundle, the flag fails the command on purpose. For an intentional native bump, omit the flag on that one upload (and use `--auto-min-update-version` when you can).
+
+### Is a one-time upload without the flag the right approach?
+
+Yes. That is the supported way to advance the channel's native baseline after you ship a new binary. Keep the flag on every other OTA upload so accidental native drift still fails CI.
+
+### Do I upload to `dev` first, then `production`?
+
+Yes, if that matches your process. Run the same rules **per channel**: the compatibility check is against whatever is live on the target channel. Promote or re-upload to `production` only after `dev` looks good, and use a native-baseline upload (no `--fail-on-incompatible`) on each channel that needs the new native packages recorded.
+
+### What if I upload the new native bundle with the flag still on?
+
+CI fails and Capgo does not ship that upload. That is the expected outcome. Either the change was accidental (fix the native packages and retry as OTA), or it was intentional (use the native path above).
+
+### Which flag goes on which job?
+
+| Path | When | Upload flags |
+| --- | --- | --- |
+| OTA | JS-only; native packages match the channel | `--fail-on-incompatible` |
+| Native baseline | New native binary + matching JS bundle | **No** `--fail-on-incompatible`; use `--auto-min-update-version` (metadata strategy) |
+
+## Related
+
+<CardGrid>
+  <a href="/docs/live-updates/compatibility/">
+    <Card title="Native Compatibility" icon="approve-check">
+      How Capgo detects native package drift and what incompatible means for devices.
+    </Card>
+  </a>
+  <a href="/docs/builder/ci-ota-or-native/">
+    <Card title="Auto OTA or Native" icon="rocket">
+      Wire `bundle releaseType` into GitHub Actions or GitLab so CI picks the right path.
+    </Card>
+  </a>
+  <a href="/docs/live-updates/version-targeting/">
+    <Card title="Version Targeting" icon="bars">
+      Channels, semver rules, and the metadata strategy for delivery floors.
+    </Card>
+  </a>
+  <a href="/docs/cli/reference/bundle/">
+    <Card title="CLI: bundle" icon="setting">
+      Reference for upload, compatibility, releaseType, and related flags.
+    </Card>
+  </a>
+</CardGrid>
+
+## Keep going from Native + OTA Channel Workflow
+
+If you are using **Native + OTA Channel Workflow** to keep live updates safe across native releases, connect it with [Native Compatibility](/docs/live-updates/compatibility/) for the package comparison rules, [Auto OTA or Native](/docs/builder/ci-ota-or-native/) for CI branching, [Version Targeting](/docs/live-updates/version-targeting/) for metadata floors, and the [Capgo CLI bundle reference](/docs/cli/reference/bundle/) for upload flags.

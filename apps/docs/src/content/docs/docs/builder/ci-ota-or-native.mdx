@@ -54,7 +54,7 @@ Gate every production pipeline on `releaseType`. It is cheaper than guessing, an
 2. If the commit touches `ios/`, `android/`, or `capacitor.config.*`, force the native path.
 3. Otherwise ask Capgo `releaseType` whether the commit is OTA-safe.
 4. If `OTA`, upload the bundle (with `--fail-on-incompatible` as a safety rail).
-5. If `native`, run Capgo Build, then upload the matching bundle with `--auto-min-update-version` so the channel's native metadata advances (use the [metadata strategy](/docs/live-updates/compatibility/#prevent-incompatible-deliveries)). Do **not** use `--fail-on-incompatible` for that baseline upload — the new native packages are supposed to differ.
+5. If `native`, run Capgo Build, then upload the matching bundle with `--auto-min-update-version` so the channel's native metadata advances (use the [metadata strategy](/docs/live-updates/compatibility/#prevent-incompatible-deliveries)). Do **not** use `--fail-on-incompatible` for that baseline upload — the new native packages are supposed to differ. See [Native + OTA Channel Workflow](/docs/live-updates/native-ota-channel-workflow/) for the channel-level FAQ.
 
 ## GitHub Actions
 
@@ -303,6 +303,11 @@ When CI chooses native:
     title="Native Compatibility"
     description="Why Capgo returns OTA vs native and how to block bad uploads."
     href="/docs/live-updates/compatibility/"
+  />
+  <LinkCard
+    title="Native + OTA Channel Workflow"
+    description="Dev/production channels and when to drop --fail-on-incompatible for an intentional native baseline."
+    href="/docs/live-updates/native-ota-channel-workflow/"
   />
   <LinkCard
     title="GitHub Actions (Capgo Build)"
