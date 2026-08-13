@@ -1,0 +1,202 @@
+{
+  "fetchedAt": "2026-08-13T13:36:41Z",
+  "source": "capgo_store_apps",
+  "apps": [
+    {
+      "id": "ir.rightel.myrightel",
+      "title": "MyRightel",
+      "icon": "https://play-lh.googleusercontent.com/o2ya4fzawHSMcOdJ2DsPRj1Z5f7_bwKe6BE2IZRBbmVomODSF8nd0Iggfe_Mgfo0Tko",
+      "users": 3986832,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.wnetwork.app",
+      "title": "WXS ONE",
+      "icon": "https://play-lh.googleusercontent.com/_vatDrWF2BJIIi58ziwnlVZayiltaOTpIOV9Blg5p47gXJAjGvscj1N-WIGdz8oBc3r1",
+      "users": 1979,
+      "bucket": "other"
+    },
+    {
+      "id": "com.magroove.app",
+      "title": "Magroove - Music Discovery",
+      "icon": "https://play-lh.googleusercontent.com/AqI1NB8Pr4zqC6QWTqAmkQ5zzljqzW3RP_eZAD_PG8R_vcI0O3FsLM2xs2v721LKX-Q",
+      "users": 739695,
+      "bucket": "biggest"
+    },
+    {
+      "id": "in.agrizy.app",
+      "title": "Agrizy: Smart agri-processing",
+      "icon": "https://play-lh.googleusercontent.com/qEewMb0G3oeQwOhTTaHXHVRMnzIJcoSryWc1xiKI_gZc6vtJrlrksRyXc77rgZ6qEA",
+      "users": 1564,
+      "bucket": "other"
+    },
+    {
+      "id": "com.nextcare.app",
+      "title": "MyNextcare",
+      "icon": "https://play-lh.googleusercontent.com/-m-py2bxjAXdSIFeO3fWYZZukQh-zlYHl1ULp_YGLNtMbzC2i5_U0aRsN37icQOWmA",
+      "users": 736712,
+      "bucket": "biggest"
+    },
+    {
+      "id": "ro.ialoc.ialocBusiness",
+      "title": "ialoc Business - carnet de rez",
+      "icon": "https://play-lh.googleusercontent.com/lTqPj_9CILI0Vmln_SCDXV9nW_mK4IE2RK0eRSaf3QQPNXu4KX2MSZD1jDB046Cl7g",
+      "users": 1072,
+      "bucket": "other"
+    },
+    {
+      "id": "com.codmon2",
+      "title": "コドモン - 保育園の連絡をアプリで簡単に",
+      "icon": "https://play-lh.googleusercontent.com/ciiErmz8SsC0Yi2rLBbEPFpkPSbyzTDE93GUwbTPVGC5Gxnzdh8j-5TPj65F5uel2nZg",
+      "users": 668356,
+      "bucket": "biggest"
+    },
+    {
+      "id": "alhasif.gudaam.project",
+      "title": "Qudaam-قدام",
+      "icon": "https://play-lh.googleusercontent.com/PLvE8VmCaKGyrRzkfmARAgPPCw0JGx3eYgwFjbNKzk-_rb-4Cj7037NEmBZrrqMh9g",
+      "users": 820,
+      "bucket": "other"
+    },
+    {
+      "id": "nl.airmiles.app",
+      "title": "Air Miles",
+      "icon": "https://play-lh.googleusercontent.com/PUMpc-s90ETxC0ryOrkwqIDX3CNE69XfLXbGSkQUufCrXCAo4ydOYDD9Rlc8U9LFbVE",
+      "users": 613633,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.selectsc.app",
+      "title": "SELECT SC",
+      "icon": "https://play-lh.googleusercontent.com/nVnGJ5wkXJG1ydjFu4WSHdxPM8RY4F6zyuYzIkUt1fT4WRLo9tdBjs_GTM9UCafrBCQ",
+      "users": 678,
+      "bucket": "other"
+    },
+    {
+      "id": "com.triangleleft.innawoods",
+      "title": "Innawoods",
+      "icon": "https://play-lh.googleusercontent.com/qB3qnth7SonhuQqbB3gL7MuCrhLgE444wBvYqSQcSNjESRcIi8SogVyr-6tBu2hBbh0",
+      "users": 583944,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.eightysixdegrees.returnit",
+      "title": "Return It",
+      "icon": "https://play-lh.googleusercontent.com/ybRGCAFV3daphnhqyYPJWn_0SWjJ2bkZv3L_nWKmx-aotNu5E2zSxcgGSUTKA9rMOg",
+      "users": 487,
+      "bucket": "other"
+    },
+    {
+      "id": "com.incomm.otc",
+      "title": "OTC Network",
+      "icon": "https://play-lh.googleusercontent.com/H0KdU62Fzc1KC4g1iLKt7Kir2BT0Ty8kx-ugN3tGIpReMW7ZDWzt098ChW8bc7TV-ZM",
+      "users": 572846,
+      "bucket": "biggest"
+    },
+    {
+      "id": "bricks.mandoby.android",
+      "title": "Bricks Rep",
+      "icon": "https://play-lh.googleusercontent.com/-1i1o-S_o2TT3RQKq7JOcv1jPK-frTOd2xk0shgzSGCKj48MidFupwzgC2ALw1j2Pg",
+      "users": 351,
+      "bucket": "other"
+    },
+    {
+      "id": "systems.self.robotsns",
+      "title": "SELF：AIがあなたを理解し、メンタルや生活をサポート",
+      "icon": "https://play-lh.googleusercontent.com/10B7zt5GzePBR7gp_FksMTB4fTvJWY2JhCRpBEo0YxDbn1wn1gSrZkOZQvselKWVjQ",
+      "users": 518007,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.yourlocalstrata.app",
+      "title": "Your Local Strata",
+      "icon": "https://play-lh.googleusercontent.com/rsC_WLVjitBgDB7U0xBwBexsUjSsnKbxZBruG5DpTqTN3NzH-lhBTEhnNh0zxTFmU-w",
+      "users": 286,
+      "bucket": "other"
+    },
+    {
+      "id": "com.FourLife",
+      "title": "4Life",
+      "icon": "https://play-lh.googleusercontent.com/RkPQA8RCL6pk17qYNFHZypg-QALcIGfPcQgtFSM4hqzW14RP4q8X1DZ7yddAQeox0g",
+      "users": 459395,
+      "bucket": "biggest"
+    },
+    {
+      "id": "io.codeu.togethair",
+      "title": "Togethair Poland",
+      "icon": "https://play-lh.googleusercontent.com/1-0Vbq40m4uimwGtFwlirZPnhM5aE1PcTR7WTC36F82ywFQXCb0s3u4mYjJibu6Jjus",
+      "users": 237,
+      "bucket": "other"
+    },
+    {
+      "id": "com.mange.kimambi.app.tz",
+      "title": "Mange Kimambi",
+      "icon": "https://play-lh.googleusercontent.com/yA637wUiRe5nE2SfDR-uWqP-vyASTnWtProYqEM3Io0TJbYxUMMIW9XB7Xql-Y-95zM",
+      "users": 441395,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.rapor.app",
+      "title": "NarBOSS",
+      "icon": "https://play-lh.googleusercontent.com/i39cGu81K17JvP3JJ7R0KGeRDpCY7m3GMgpBN16GDmJDYe9KW_H1WHJW1c-p0rLHWlN-",
+      "users": 174,
+      "bucket": "other"
+    },
+    {
+      "id": "app.hexanetwork.co",
+      "title": "Hexa Network",
+      "icon": "https://play-lh.googleusercontent.com/fDcK3vjzAVjUsP3JnbT992uTp8nctsFTFr67XeyI2ccus8pJFirM-NZZj8kGWDdM8-8",
+      "users": 429483,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.thiess.mythiess",
+      "title": "My Thiess",
+      "icon": "https://play-lh.googleusercontent.com/Lm230JSiVRIBvh3YSdbweSJcrJE-QuYptzXNRC76vak0z-euLFT14U6kYePkRufEums",
+      "users": 157,
+      "bucket": "other"
+    },
+    {
+      "id": "ru.snowqueen.twa",
+      "title": "Снежная Королева",
+      "icon": "https://play-lh.googleusercontent.com/9e2zculYUm_JSTgeNdyc4sag7FBMFNXo0g6FPIp0fOUPzpS3MDUiFz1m_uLFYPl8SYmQ",
+      "users": 411490,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.bigshooter.golf",
+      "title": "Big Shooter Golf",
+      "icon": "https://play-lh.googleusercontent.com/Uz83--Z8flH_MEqo3fW9kPLui5sjaJj8vAYVgW21lB2k5GiSYGNSSspi-rVBz-DuZQ",
+      "users": 108,
+      "bucket": "other"
+    },
+    {
+      "id": "io.ionic.seed2spoon",
+      "title": "Seed to Spoon - Growing Food",
+      "icon": "https://play-lh.googleusercontent.com/KjH1sV4wAgS1uZZLJds4xBDR3JOG9znNuxYdFvSSCR4WjzV67o8e1SuWlJ8up8vnoQ",
+      "users": 339084,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.dfadev.app",
+      "title": "Frava",
+      "icon": "https://play-lh.googleusercontent.com/YaBIibEHMhowJ8xXwt052x9Jz6vkiJY9uQthag8rizNWEydC8SCP4t9FPbpWuseklpE",
+      "users": 89,
+      "bucket": "other"
+    },
+    {
+      "id": "com.nianticlabs.campfire",
+      "title": "Niantic Campfire",
+      "icon": "https://play-lh.googleusercontent.com/KhqdW3avC1V1m1D-X66lcCusrjE5yDn4oDg1OihXFvwLrBoeXFb9juRLnewft_lcXw",
+      "users": 316873,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.peetsunbae.app",
+      "title": "수능선배",
+      "icon": "https://play-lh.googleusercontent.com/2mpbiZnO9N0sHWLAohx5YoSW94f4tx67oJ4J3IZcQKbR6Klcsq4RQ7izrFxBwQ6qR5ko",
+      "users": 72,
+      "bucket": "other"
+    }
+  ]
+}

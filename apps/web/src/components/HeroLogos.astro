@@ -1,0 +1,138 @@
+---
+import heroLogoSlotsData from '@/data/hero-logo-slots.json'
+import { formatHeroUsers, type AssignedHeroApp, type HeroLogoSlotsFile } from '@/lib/heroClientApps'
+
+type SlotKind = 'empty' | 'logo'
+type HeroSlot = {
+  kind: SlotKind
+  col: 'col-start-1' | 'col-start-2' | 'col-start-3' | 'col-start-4' | 'col-start-9' | 'col-start-10' | 'col-start-11' | 'col-start-12'
+  class: string
+}
+
+const tile = 'h-16 w-16 2xl:h-20 2xl:w-20 rounded-2xl backdrop-blur-sm'
+const emptyTile = `flex ${tile} items-center justify-center overflow-hidden bg-[#1a1d24]/30`
+const shiftLeft = '-translate-x-12 2xl:-translate-x-28'
+const shiftRight = 'translate-x-12 2xl:translate-x-28'
+
+const rows: HeroSlot[][] = [
+  [
+    { kind: 'empty', col: 'col-start-1', class: `${emptyTile} opacity-20` },
+    { kind: 'empty', col: 'col-start-2', class: `${emptyTile} opacity-20` },
+    { kind: 'empty', col: 'col-start-3', class: `${emptyTile} opacity-40` },
+    { kind: 'empty', col: 'col-start-4', class: `${emptyTile} opacity-60` },
+    { kind: 'empty', col: 'col-start-9', class: `${emptyTile} opacity-70` },
+    { kind: 'empty', col: 'col-start-10', class: `${emptyTile} opacity-60` },
+    { kind: 'empty', col: 'col-start-11', class: `${emptyTile} opacity-40` },
+    { kind: 'empty', col: 'col-start-12', class: `${emptyTile} opacity-20` },
+  ],
+  [
+    { kind: 'logo', col: 'col-start-1', class: `${tile} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-2', class: `${tile} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-11', class: `${tile} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-12', class: `${tile} bg-[#1a1d24]/30` },
+  ],
+  [
+    { kind: 'empty', col: 'col-start-1', class: `${emptyTile} ${shiftLeft} opacity-60` },
+    { kind: 'logo', col: 'col-start-2', class: `${tile} ${shiftLeft} bg-[#1a1d24]/80` },
+    { kind: 'logo', col: 'col-start-3', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-10', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-11', class: `${tile} ${shiftRight} bg-[#1a1d24]/80` },
+    { kind: 'empty', col: 'col-start-12', class: `${emptyTile} ${shiftRight} opacity-60` },
+  ],
+  [
+    { kind: 'logo', col: 'col-start-1', class: `${tile} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-2', class: `${tile} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-3', class: `${tile} bg-[#1a1d24]/80` },
+    { kind: 'logo', col: 'col-start-10', class: `${tile} bg-[#1a1d24]/80` },
+    { kind: 'logo', col: 'col-start-11', class: `${tile} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-12', class: `${tile} bg-[#1a1d24]/30` },
+  ],
+  [
+    { kind: 'empty', col: 'col-start-1', class: `${emptyTile} ${shiftLeft} opacity-60` },
+    { kind: 'logo', col: 'col-start-2', class: `${tile} ${shiftLeft} bg-[#1a1d24]/80` },
+    { kind: 'logo', col: 'col-start-3', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-10', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-11', class: `${tile} ${shiftRight} bg-[#1a1d24]/80` },
+    { kind: 'empty', col: 'col-start-12', class: `${emptyTile} ${shiftRight} opacity-60` },
+  ],
+  [
+    { kind: 'logo', col: 'col-start-1', class: `${tile} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-2', class: `${tile} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-3', class: `${tile} bg-[#1a1d24]/80` },
+    { kind: 'logo', col: 'col-start-10', class: `${tile} bg-[#1a1d24]/80` },
+    { kind: 'logo', col: 'col-start-11', class: `${tile} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-12', class: `${tile} bg-[#1a1d24]/30` },
+  ],
+  [
+    { kind: 'empty', col: 'col-start-1', class: `${emptyTile} ${shiftLeft} opacity-40` },
+    { kind: 'empty', col: 'col-start-2', class: `${emptyTile} ${shiftLeft} opacity-60` },
+    { kind: 'logo', col: 'col-start-3', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-4', class: `${tile} ${shiftLeft} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-9', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
+    { kind: 'logo', col: 'col-start-10', class: `${tile} ${shiftRight} bg-[#1a1d24]/30` },
+    { kind: 'empty', col: 'col-start-11', class: `${emptyTile} ${shiftRight} opacity-60` },
+    { kind: 'empty', col: 'col-start-12', class: `${emptyTile} ${shiftRight} opacity-40` },
+  ],
+]
+
+const selectedApps = (heroLogoSlotsData as HeroLogoSlotsFile).apps as AssignedHeroApp[]
+let logoIndex = 0
+const takeApp = (): AssignedHeroApp | undefined => {
+  const app = selectedApps[logoIndex]
+  logoIndex += 1
+  return app
+}
+---
+
+<div class="pointer-events-none absolute inset-0 flex w-full flex-col justify-start gap-4 blur-sm select-none sm:blur-none" aria-hidden="true">
+  {
+    rows.map((row) => (
+      <div class="grid w-full grid-cols-12 gap-4 2xl:gap-6">
+        {row.map((slot) => {
+          if (slot.kind === 'empty') {
+            return <div class={`${slot.col} ${slot.class}`} />
+          }
+
+          const app = takeApp()
+          if (!app) return <div class={`${slot.col} ${slot.class}`} />
+          const usersLabel = formatHeroUsers(app.users)
+
+          return (
+            <div class={`relative ${slot.col} ${slot.class}`}>
+              <div class="h-full w-full overflow-hidden rounded-2xl">
+                <img src={app.icon} alt="" width="80" height="80" decoding="async" class="hero-logo-img max-h-full max-w-full object-contain" />
+              </div>
+              {usersLabel && <span class="hero-logo-users">{usersLabel}</span>}
+            </div>
+          )
+        })}
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .hero-logo-users {
+    position: absolute;
+    top: 0.12rem;
+    right: 0.12rem;
+    z-index: 1;
+    border-radius: 999px;
+    background: rgb(4 6 12 / 0.78);
+    padding: 0.14rem 0.34rem;
+    font-size: 0.625rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: rgb(255 255 255 / 0.82);
+    pointer-events: none;
+  }
+
+  .hero-logo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+  }
+</style>

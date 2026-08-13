@@ -1,0 +1,75 @@
+name: Refresh Hero Client Logos
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-hero-client-apps
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  refresh:
+    name: Snapshot hero client logos
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.repository.default_branch }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN || github.token }}
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.3.14
+
+      - name: Cache bun modules
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - run: bun install --frozen-lockfile
+
+      - name: Refresh committed hero logo catalog
+        run: bun run refresh:hero-apps
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Commit catalog if it changed
+        shell: bash
+        run: |
+          default_branch="${{ github.event.repository.default_branch }}"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+          git add apps/web/src/data/hero-logo-slots.json
+          if git diff --staged --quiet; then
+            echo "Hero logo catalog is unchanged."
+            exit 0
+          fi
+
+          git commit -m "$(cat <<'EOF'
+          chore: refresh homepage hero client logos
+
+          Weekly snapshot of Capgo client icons for the static hero grid.
+          EOF
+          )"
+          git pull --rebase origin "$default_branch"
+          git push origin "HEAD:$default_branch"
