@@ -26,12 +26,21 @@ export const HERO_LOGO_SLOT_COUNT = 28
 
 const compareAppIds = (left: string, right: string) => (left < right ? -1 : left > right ? 1 : 0)
 
+const HERO_USER_UNITS = [
+  { size: 1_000, suffix: 'K' },
+  { size: 1_000_000, suffix: 'M' },
+  { size: 1_000_000_000, suffix: 'B' },
+] as const
+
 export const formatHeroUsers = (users: number): string | null => {
-  if (users < 1_000) return null
-  if (users >= 999_500_000) return `${Math.round(users / 1_000_000_000)}B`
-  if (users >= 999_500) return `${Math.round(users / 1_000_000)}M`
-  if (users >= 10_000) return `${Math.round(users / 1_000)}K`
-  return `${(users / 1_000).toFixed(1).replace(/\.0$/, '')}K`
+  if (users <= 0) return null
+
+  for (const { size, suffix } of HERO_USER_UNITS) {
+    const value = Math.ceil(users / size)
+    if (value < 100) return `${value}${suffix}`
+  }
+
+  return `${Math.ceil(users / 1_000_000_000_000)}T`
 }
 
 export const splitHeroClientPool = (apps: HeroClientApp[]) => {

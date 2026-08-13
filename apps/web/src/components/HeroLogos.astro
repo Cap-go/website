@@ -100,7 +100,15 @@ const takeApp = (): AssignedHeroApp | undefined => {
           return (
             <div class={`relative ${slot.col} ${slot.class}`} data-hero-logo>
               <div class="h-full w-full overflow-hidden rounded-2xl">
-                <img src={app.icon} alt="" width="80" height="80" decoding="async" class="hero-logo-img max-h-full max-w-full object-contain" onerror="this.closest('[data-hero-logo]')?.replaceChildren()" />
+                <img
+                  src={app.icon}
+                  alt=""
+                  width="80"
+                  height="80"
+                  decoding="async"
+                  class="hero-logo-img max-h-full max-w-full object-contain"
+                  onerror="this.closest('[data-hero-logo]')?.replaceChildren()"
+                />
               </div>
               {usersLabel && <span class="hero-logo-users">{usersLabel}</span>}
             </div>
@@ -114,18 +122,18 @@ const takeApp = (): AssignedHeroApp | undefined => {
 <style>
   .hero-logo-users {
     position: absolute;
-    top: 0.12rem;
-    right: 0.12rem;
+    top: 0.1rem;
+    right: 0.1rem;
     z-index: 1;
     border-radius: 999px;
-    background: rgb(4 6 12 / 0.78);
-    padding: 0.14rem 0.34rem;
-    font-size: 0.625rem;
-    font-weight: 600;
+    background: rgb(4 6 12 / 0.38);
+    padding: 0.08rem 0.22rem;
+    font-size: 0.5rem;
+    font-weight: 500;
     font-variant-numeric: tabular-nums;
     line-height: 1.1;
     letter-spacing: 0.02em;
-    color: rgb(255 255 255 / 0.82);
+    color: rgb(255 255 255 / 0.38);
     pointer-events: none;
   }
 
