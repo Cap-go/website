@@ -30,8 +30,11 @@ When the change is JavaScript-only and native packages match the channel:
 ```bash
 npx @capgo/cli@latest bundle upload com.example.app \
   --channel production \
-  --fail-on-incompatible
+  --fail-on-incompatible \
+  --auto-min-update-version
 ```
+
+`--fail-on-incompatible` blocks accidental native drift. `--auto-min-update-version` is required on every upload once the channel uses the `metadata` strategy (recommended below). If the channel is not on `metadata` yet, you can omit `--auto-min-update-version` until you switch.
 
 Optional CI gate before upload:
 
@@ -48,7 +51,7 @@ You **cannot** upload a bundle that needs new native code while keeping `--fail-
 1. Ship the matching **native binary** (App Store / Play Store, or [Capgo Build](/docs/builder/)).
 2. Upload the matching JS bundle **without** `--fail-on-incompatible`.
 3. Prefer `--auto-min-update-version` with the channel on the `metadata` strategy so devices still on the old binary do not receive the new bundle until they install the new app.
-4. After that baseline upload, put `--fail-on-incompatible` back on normal OTA CI.
+4. After that baseline upload, put `--fail-on-incompatible` back on normal OTA CI (and keep `--auto-min-update-version` while the channel stays on `metadata`).
 
 <Steps>
 
@@ -58,7 +61,7 @@ You **cannot** upload a bundle that needs new native code while keeping `--fail-
    npx @capgo/cli@latest channel set production com.example.app --disable-auto-update metadata
    ```
 
-   Repeat for `dev` if that channel also receives intentional native baselines.
+   Repeat for `dev` if that channel also receives intentional native baselines. After this switch, every upload to the channel must include `--auto-min-update-version` or `--min-update-version`.
 
 2. **Ship the native binary**
 
@@ -76,12 +79,19 @@ You **cannot** upload a bundle that needs new native code while keeping `--fail-
 
 4. **Resume guarded OTA uploads**
 
-   Subsequent JS-only releases keep using `--fail-on-incompatible` again.
+   Subsequent JS-only releases use both flags again:
+
+   ```bash
+   npx @capgo/cli@latest bundle upload com.example.app \
+     --channel production \
+     --fail-on-incompatible \
+     --auto-min-update-version
+   ```
 
 </Steps>
 
 <Aside type="tip">
-Treat the native-baseline upload as a **dedicated CI job** (or a manual release step), not as an exception you sprinkle into the default OTA job. The default job should always keep `--fail-on-incompatible`.
+Treat the native-baseline upload as a **dedicated CI job** (or a manual release step), not as an exception you sprinkle into the default OTA job. The default job should always keep `--fail-on-incompatible`, and on a `metadata` channel it should also keep `--auto-min-update-version`.
 </Aside>
 
 ## FAQ
@@ -106,8 +116,8 @@ CI fails and Capgo does not ship that upload. That is the expected outcome. Eith
 
 | Path | When | Upload flags |
 | --- | --- | --- |
-| OTA | JS-only; native packages match the channel | `--fail-on-incompatible` |
-| Native baseline | New native binary + matching JS bundle | **No** `--fail-on-incompatible`; use `--auto-min-update-version` (metadata strategy) |
+| OTA | JS-only; native packages match the channel | `--fail-on-incompatible` + `--auto-min-update-version` (required if the channel is on `metadata`) |
+| Native baseline | New native binary + matching JS bundle | **No** `--fail-on-incompatible`; keep `--auto-min-update-version` |
 
 ## Related
 

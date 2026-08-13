@@ -53,7 +53,7 @@ Gate every production pipeline on `releaseType`. It is cheaper than guessing, an
 1. Build web assets as usual.
 2. If the commit touches `ios/`, `android/`, or `capacitor.config.*`, force the native path.
 3. Otherwise ask Capgo `releaseType` whether the commit is OTA-safe.
-4. If `OTA`, upload the bundle (with `--fail-on-incompatible` as a safety rail).
+4. If `OTA`, upload the bundle with `--fail-on-incompatible` (and `--auto-min-update-version` if the channel uses the `metadata` strategy).
 5. If `native`, run Capgo Build, then upload the matching bundle with `--auto-min-update-version` so the channel's native metadata advances (use the [metadata strategy](/docs/live-updates/compatibility/#prevent-incompatible-deliveries)). Do **not** use `--fail-on-incompatible` for that baseline upload — the new native packages are supposed to differ. See [Native + OTA Channel Workflow](/docs/live-updates/native-ota-channel-workflow/) for the channel-level FAQ.
 
 ## GitHub Actions
@@ -122,7 +122,8 @@ jobs:
         run: |
           npx @capgo/cli@latest bundle upload com.example.app \
             --channel production \
-            --fail-on-incompatible
+            --fail-on-incompatible \
+            --auto-min-update-version
 
   native_build:
     needs: decide
@@ -186,7 +187,7 @@ jobs:
 Replace `com.example.app` and wire the signing secrets as described in [GitHub Actions for Capgo Build](/docs/builder/github-actions/).
 
 <Aside>
-`--fail-on-incompatible` belongs on the OTA job only. After a native binary ships, upload the matching bundle with `--auto-min-update-version` so later `releaseType` checks see the new native packages.
+`--fail-on-incompatible` belongs on the OTA job only. After you put the channel on the `metadata` strategy, keep `--auto-min-update-version` on every upload (OTA and native baseline). After a native binary ships, upload the matching bundle with `--auto-min-update-version` and without `--fail-on-incompatible` so later `releaseType` checks see the new native packages.
 </Aside>
 
 ## GitLab CI
@@ -237,7 +238,8 @@ deploy:
       if [ "$TYPE" = "OTA" ]; then
         npx @capgo/cli@latest bundle upload "$APP_ID" \
           --channel "$CHANNEL" \
-          --fail-on-incompatible
+          --fail-on-incompatible \
+          --auto-min-update-version
       elif [ "$TYPE" = "native" ]; then
         npx cap sync
         npx @capgo/cli@latest build request "$APP_ID" --platform ios --build-mode release
@@ -262,7 +264,7 @@ The same three steps work anywhere:
 | Step | Command |
 |------|---------|
 | Verdict | `npx @capgo/cli@latest bundle releaseType APP_ID --channel production` |
-| OTA path | `npx @capgo/cli@latest bundle upload APP_ID --channel production --fail-on-incompatible` |
+| OTA path | `npx @capgo/cli@latest bundle upload APP_ID --channel production --fail-on-incompatible --auto-min-update-version` |
 | Native path | `npx @capgo/cli@latest build request APP_ID --platform ios` (or `android`) `--build-mode release` |
 
 Map the shell exit / stdout into your platform's conditionals (or keep a single job with a shell `if`, like GitLab above):
