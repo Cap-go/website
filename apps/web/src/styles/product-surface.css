@@ -49,49 +49,49 @@
 
 .lu.bg-ad .decision-box,
 .nb.bg-ad .decision-box {
-  border-color: rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
+  border-color: #2a2a2a;
+  background: #202020;
 }
 
 .lu.bg-ad .step-num,
 .nb.bg-ad .step-num {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.88);
+  border-color: #2e2e2e;
+  background: #232323;
+  color: #ffffff;
 }
 
 .lu.bg-ad .tile-hero,
 .nb.bg-ad .tile-hero {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: #232323;
+  border-color: #2e2e2e;
 }
 
 .lu.bg-ad .bento .tile:not(.tile-hero):hover,
 .nb.bg-ad .bento .tile:not(.tile-hero):hover {
   transform: none;
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: #3a3a3a;
 }
 
 :is(.lu, .nb, .cli).bg-ad table.comp thead th.us {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.04);
-  border-bottom-color: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  background: #232323;
+  border-bottom-color: #3a3a3a;
 }
 
 :is(.lu, .nb, .cli).bg-ad table.comp tbody td.us {
-  background: rgba(255, 255, 255, 0.03);
+  background: #202020;
 }
 
 .lu.bg-ad .enterprise-partnership-panel {
-  border-color: rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border-color: #2a2a2a;
+  background: #202020;
   box-shadow: none;
   border-radius: 16px;
 }
 
 .lu.bg-ad .enterprise-partnership-check {
-  background: rgba(255, 255, 255, 0.06);
-  color: #93c5fd;
+  background: #272727;
+  color: #bfdbfe;
 }
 
 .lu.bg-ad .observe-reading,
@@ -113,7 +113,7 @@
 
 .sk.bg-ad .hero-meta .check {
   background: none;
-  color: #93c5fd;
+  color: #bfdbfe;
   -webkit-background-clip: unset;
   background-clip: unset;
 }
