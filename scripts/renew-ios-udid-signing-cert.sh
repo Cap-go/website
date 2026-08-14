@@ -107,17 +107,21 @@ require_issue_credentials() {
   CLOUDFLARE_API_TOKEN="$(strip "${CLOUDFLARE_API_TOKEN:-}")"
   CLOUDFLARE_ACCOUNT_ID="$(strip "${CLOUDFLARE_ACCOUNT_ID:-}")"
   PERSONAL_ACCESS_TOKEN="$(strip "${PERSONAL_ACCESS_TOKEN:-}")"
-  export CLOUDFLARE_DNS_API_TOKEN CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID PERSONAL_ACCESS_TOKEN
+  GH_TOKEN="$(strip "${GH_TOKEN:-}")"
+  if [[ -z "$PERSONAL_ACCESS_TOKEN" ]]; then
+    PERSONAL_ACCESS_TOKEN="$GH_TOKEN"
+  fi
+  export CLOUDFLARE_DNS_API_TOKEN CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID PERSONAL_ACCESS_TOKEN GH_TOKEN
 
   if [[ -z "${CLOUDFLARE_DNS_API_TOKEN}" ]]; then
     echo "CLOUDFLARE_DNS_API_TOKEN is required for DNS-01 (Zone.DNS Edit on capgo.app)." >&2
     exit 1
   fi
-  if [[ -z "${CLOUDFLARE_API_TOKEN:-}" || -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]]; then
+  if [[ -z "${CLOUDFLARE_API_TOKEN}" || -z "${CLOUDFLARE_ACCOUNT_ID}" ]]; then
     echo "CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID are required to update Worker secrets." >&2
     exit 1
   fi
-  if [[ -z "${PERSONAL_ACCESS_TOKEN:-${GH_TOKEN:-}}" ]]; then
+  if [[ -z "$PERSONAL_ACCESS_TOKEN" ]]; then
     echo "PERSONAL_ACCESS_TOKEN is required to persist GitHub secrets after a successful Worker update." >&2
     exit 1
   fi
