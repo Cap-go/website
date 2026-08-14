@@ -17,7 +17,7 @@ function copy(key: string, values: MessageValues = {}) {
   return m[key](values, { locale })
 }
 
-const title = `${brand} | Skip store delays for Capacitor live updates`
+const title = `${brand} | Ionic and Capacitor Live Updates`
 const description = m.live_update_description({}, { locale })
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const docsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates')
@@ -525,8 +525,8 @@ const featureTiles = [
       <p>
         Connect this Ionic and Capacitor live update page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
         <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, <a href={dataUrl}>Live Update delivery data</a>, <a href="/notifications/">Capgo Notifications</a>,
-        <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, and <a href="/native-build/">Capgo Native Builds</a> when a native binary still has to go through the stores. See
-        also <a href={expoUrl}>EAS vs Capgo</a> for the Expo Application Services comparison.
+        <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, <a href="/native-build/">Capgo Native Builds</a>, and <a href={expoUrl}>EAS vs Capgo</a> for the Expo Application
+        Services comparison.
       </p>
     </div>
   </div>

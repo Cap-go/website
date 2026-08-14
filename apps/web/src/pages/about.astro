@@ -62,7 +62,7 @@ const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
 // Create about page WebPage schema
 const aboutPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
-  description,
+  description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet the team building it.',
   url: aboutUrl,
 })
 
@@ -137,7 +137,7 @@ const companyStats = [
 const principles = [
   {
     title: 'Self-funded by design',
-    body: 'Capgo is profitable and customer-funded. We ship a different path than store-process theater: shortcuts teams actually use.',
+    body: 'Capgo is profitable and customer-funded. Product decisions stay tied to reliability, support, and what shipping teams actually need.',
   },
   {
     title: 'Open source foundation',
@@ -178,7 +178,7 @@ const timeline = [
   {
     year: 'Now',
     title: 'Infrastructure for Capacitor teams',
-    body: 'The focus is still narrow: skip store delays, keep shipping simple, and make app updates faster for teams building mobile apps from web technology.',
+    body: 'The focus is still narrow: make app updates faster, safer, and more understandable for teams building mobile apps from web technology.',
   },
 ]
 ---
@@ -189,27 +189,29 @@ const timeline = [
       <div class="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center">
         <div>
           <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">About Capgo</p>
-          <h1 class="mt-5 max-w-4xl text-4xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">We don't copy the store process. We skip it.</h1>
+          <h1 class="mt-5 max-w-4xl text-4xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
+            We build the open update infrastructure Capacitor teams can trust.
+          </h1>
           <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-            Capgo started in December 2022 because teams needed a different path. Live updates skip store review for JS and web assets. Native builds still go through Apple or
-            Google when the binary changes.
+            Capgo started in December 2022 with one goal: make live updates fast, affordable, and understandable for teams shipping Capacitor apps in production. We stay small,
+            hands-on, and focused on the release path between your code and your users.
           </p>
 
           <div class="mt-8 flex flex-col gap-3">
             <HumanSupport tone="light" size="sm" align="start" />
             <div class="flex flex-col gap-3 sm:flex-row">
-              <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-                class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              >
-                {m.start_now({}, { locale: Astro.locals.locale })}
-              </a>
-              <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
-                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              >
-                Read the docs
-              </a>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+              class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            >
+              {m.start_now({}, { locale: Astro.locals.locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
+              class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            >
+              Read the docs
+            </a>
             </div>
           </div>
         </div>
@@ -343,18 +345,18 @@ const timeline = [
           <div class="mt-8 flex flex-col gap-3">
             <HumanSupport tone="light" size="sm" align="start" />
             <div class="flex flex-col gap-3 sm:flex-row">
-              <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-                class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              >
-                {m.start_now({}, { locale: Astro.locals.locale })}
-              </a>
-              <a
-                href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
-                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              >
-                Read the full story
-              </a>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+              class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            >
+              {m.start_now({}, { locale: Astro.locals.locale })}
+            </a>
+            <a
+              href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
+              class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            >
+              Read the full story
+            </a>
             </div>
           </div>
         </div>
