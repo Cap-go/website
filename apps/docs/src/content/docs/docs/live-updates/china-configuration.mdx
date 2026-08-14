@@ -210,6 +210,10 @@ If you prefer to optimize differently for each region, you can also consider:
 
 If you need assistance with multi-region deployment strategies, please contact us at [support@capgo.app](mailto:support@capgo.app) or join our [Discord community](https://discord.capgo.app) for help.
 
+## Monitoring China Infrastructure
+
+You can monitor the health and status of Capgo's China-specific endpoints at [status.capgo.com.cn](https://status.capgo.com.cn/). Use this page to check for incidents, latency, and uptime of the China OST URLs before troubleshooting your app.
+
 ## Troubleshooting
 
 If you experience issues with updates in China:
@@ -217,9 +221,10 @@ If you experience issues with updates in China:
 1. **Verify your configuration** - Double-check that all three URLs are correctly set in your `capacitor.config.ts`
 2. **Raise `responseTimeout`** - Use at least `60` seconds in China so the plugin does not abort while the update request is still in flight
 3. **Check network connectivity** - Ensure your device can reach the `updater.capgo.com.cn` domain
-4. **Review logs** - Use `npx @capgo/cli@latest app debug` to check for error messages
-5. **Test updates** - Try uploading a new bundle and monitoring the download process
-6. **Contact support** - If issues persist, reach out to us at [support@capgo.app](mailto:support@capgo.app) or join our [Discord community](https://discord.capgo.app) for assistance
+4. **Check the China status page** - Review [status.capgo.com.cn](https://status.capgo.com.cn/) for any ongoing incidents or degraded performance
+5. **Review logs** - Use `npx @capgo/cli@latest app debug` to check for error messages
+6. **Test updates** - Try uploading a new bundle and monitoring the download process
+7. **Contact support** - If issues persist, reach out to us at [support@capgo.app](mailto:support@capgo.app) or join our [Discord community](https://discord.capgo.app) for assistance
 
 <Aside type="caution">
 Make sure to use the `.cn` domain (`updater.capgo.com.cn`) and not the standard international domain when configuring for China.

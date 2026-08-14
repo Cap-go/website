@@ -1,4 +1,6 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
+import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
@@ -162,7 +164,7 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-05-10-ahrefs-head-assets-v1'
+const TRANSLATION_CACHE_VERSION = '2026-08-12-message-context-fr-elision-v1'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
@@ -336,7 +338,9 @@ function localizedAbsoluteUrl(requestUrl: URL, locale: string, basePath: string)
 }
 
 function rewriteRedirectPath(pathname: string): string {
-  if (pathname === '/docs/cli' || pathname === '/docs/cli/') return '/docs/cli/overview/'
+  const legacyTarget = resolveLegacyPathRedirect(pathname)
+  if (legacyTarget) return legacyTarget
+  if (pathname === '/docs/cli/overview' || pathname === '/docs/cli/overview/') return '/docs/cli/'
   if (pathname === '/docs/getting-started' || pathname === '/docs/getting-started/') return '/docs/getting-started/quickstart/'
   if (pathname === '/docs/plugin/api' || pathname === '/docs/plugin/api/') return '/docs/plugins/updater/api/'
   if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {
@@ -351,8 +355,20 @@ function withTrailingSlash(pathname: string): string {
   return `${pathname}/`
 }
 
+function splitPathAndHash(value: string): { path: string; hash: string } {
+  const hashIndex = value.indexOf('#')
+  if (hashIndex === -1) return { path: value, hash: '' }
+  return { path: value.slice(0, hashIndex), hash: value.slice(hashIndex) }
+}
+
+function canonicalInternalPathParts(pathname: string): { path: string; hash: string } {
+  const { path, hash } = splitPathAndHash(rewriteRedirectPath(stripLocalePrefix(pathname)))
+  return { path: withTrailingSlash(path), hash }
+}
+
 function canonicalInternalPathname(pathname: string): string {
-  return withTrailingSlash(rewriteRedirectPath(stripLocalePrefix(pathname)))
+  const { path, hash } = canonicalInternalPathParts(pathname)
+  return `${path}${hash}`
 }
 
 function shouldBypassTranslation(pathname: string): boolean {
@@ -395,7 +411,9 @@ function localizeHref(value: string, locale: Locale, requestUrl: URL): string {
   if (url.host !== requestUrl.host) return value
   if (hasExplicitLocalePath(trimmed, url)) return value
   if (shouldBypassTranslation(url.pathname)) return value
-  url.pathname = localizedPath(canonicalInternalPathname(url.pathname), locale)
+  const { path: canonicalPath, hash: canonicalHash } = canonicalInternalPathParts(url.pathname)
+  url.pathname = localizedPath(canonicalPath, locale)
+  if (canonicalHash) url.hash = canonicalHash.startsWith('#') ? canonicalHash.slice(1) : canonicalHash
   if (trimmed.startsWith('//')) return `//${url.host}${url.pathname}${url.search}${url.hash}`
   if (isHttpUrl(trimmed)) return url.toString()
   return `${url.pathname}${url.search}${url.hash}`
@@ -598,6 +616,23 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
 async function temporaryEnglishRetryResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
+  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
+    const sourceHtml = await originResponse.text()
+    return withResponseHeaders(
+      createTranslatedHtmlResponse(
+        new Response(isHead ? null : sourceHtml, {
+          status: originResponse.status,
+          statusText: originResponse.statusText,
+          headers: originResponse.headers,
+        }),
+        sourceHtml,
+        requestUrl,
+        locale,
+      ),
+      'BYPASS',
+      isHead,
+    )
+  }
   if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
 
   const headers = new Headers(originResponse.headers)
@@ -1254,7 +1289,7 @@ function protectTranslationTokens(value: string): {
   let text = ''
   const replacements: [string, string][] = []
 
-  for (let index = 0; index < value.length; ) {
+  for (let index = 0; index < value.length;) {
     const token = protectedTokenAt(value, index)
     if (!token) {
       text += value[index]
@@ -1311,14 +1346,39 @@ function translationBatchJsonSchema(batchLength: number): Record<string, unknown
   }
 }
 
-async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+function translationContextSystemHint(): string {
+  return 'When an item includes a "context" field, use that UI/page context to disambiguate short or overloaded English words (for example Home, Support, Channel, Bundle, Update, Open, Free) and keep tone appropriate for that surface.'
+}
+
+function translationGrammarSystemHint(): string {
+  return 'Prefer natural native phrasing over literal calques. Apply correct target-language grammar and morphology. For French, always elide singular articles before a vowel (l’attente, not la attente). Do not elide before aspirate h (la haute, le héros).'
+}
+
+/** Fix unelided French le/la before a vowel (e.g. "la attente" → "l’attente").
+ * Vowels only — aspirate-h words (haute, héros, haricot…) must keep le/la. */
+function applyFrenchArticleElision(text: string): string {
+  return text.replace(/\b([Ll])([ae])\s+([aeiouàâäæéèêëïîôœùûüAEIOUÀÂÄÆÉÈÊËÏÎÔŒÙÛÜ])/gu, '$1\u2019$3')
+}
+
+function polishTranslatedText(targetLanguage: string, text: string): string {
+  if (targetLanguage === 'French') return applyFrenchArticleElision(text)
+  return text
+}
+
+async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const protectedBatch = batch.map((text) => protectTranslationTokens(text))
+  const contexts = resolveTranslationContexts(batch)
 
   for (let attempt = 1; attempt <= TRANSLATION_MODEL_ATTEMPTS; attempt += 1) {
     let payload: unknown = ''
     try {
+      const items = protectedBatch.map((item, index) => {
+        const context = contexts[index]
+        return context ? { text: item.text, context } : { text: item.text }
+      })
+
       const result = await env.AI.run(model, {
         temperature: 0,
         max_tokens: 8192,
@@ -1333,6 +1393,8 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'You translate Capgo website copy for the target locale.',
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
+              translationContextSystemHint(),
+              translationGrammarSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
@@ -1344,7 +1406,12 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           },
           {
             role: 'user',
-            content: JSON.stringify({ targetLanguage, protectedTokens: PROTECTED_TRANSLATION_TOKENS, texts: protectedBatch.map((item) => item.text) }),
+            content: JSON.stringify({
+              targetLanguage,
+              pagePath: pagePath || undefined,
+              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              items,
+            }),
           },
         ],
       })
@@ -1367,7 +1434,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               outputPreview: aiPayloadPreview(text),
             })
           }
-          return result.text
+          return polishTranslatedText(targetLanguage, result.text)
         })
         assertTranslatedBatch(targetLanguage, batch, restored)
         return restored
@@ -1389,9 +1456,9 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
   throw new Error(`Translation JSON mode failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
-async function translateBatch(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+async function translateBatch(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   try {
-    return await translateBatchWithJsonMode(env, targetLanguage, batch)
+    return await translateBatchWithJsonMode(env, targetLanguage, batch, pagePath)
   } catch (error) {
     const message = errorMessage(error)
     console.warn('Translation batch JSON failed; falling back to single-text translation', {
@@ -1401,13 +1468,14 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
     })
   }
 
-  return await translateBatchIndividually(env, targetLanguage, batch)
+  return await translateBatchIndividually(env, targetLanguage, batch, pagePath)
 }
 
-async function translateSingleText(env: Env, targetLanguage: string, text: string): Promise<string> {
+async function translateSingleText(env: Env, targetLanguage: string, text: string, pagePath = ''): Promise<string> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const protectedText = protectTranslationTokens(text)
+  const context = resolveTranslationContexts([text])[0]
 
   for (let attempt = 1; attempt <= TRANSLATION_SINGLE_TEXT_ATTEMPTS; attempt += 1) {
     let payload: unknown = ''
@@ -1421,6 +1489,8 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
             content: [
               'You translate one Capgo website string for the target locale.',
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
+              translationContextSystemHint(),
+              translationGrammarSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
@@ -1429,14 +1499,20 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
           },
           {
             role: 'user',
-            content: JSON.stringify({ targetLanguage, protectedTokens: PROTECTED_TRANSLATION_TOKENS, text: protectedText.text }),
+            content: JSON.stringify({
+              targetLanguage,
+              pagePath: pagePath || undefined,
+              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              text: protectedText.text,
+              context: context || undefined,
+            }),
           },
         ],
       })
 
       payload = extractAiPayload(result)
       const translated = plainTranslationFromUnknown(payload)
-      if (translated) return protectedText.restore(translated)
+      if (translated) return polishTranslatedText(targetLanguage, protectedText.restore(translated))
       lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
@@ -1463,10 +1539,10 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
   throw new Error(`Single-text translation failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
-async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   const translated: string[] = []
   for (const text of batch) {
-    translated.push(await translateSingleText(env, targetLanguage, text))
+    translated.push(await translateSingleText(env, targetLanguage, text, pagePath))
   }
   assertTranslatedBatch(targetLanguage, batch, translated)
   return translated
@@ -1979,6 +2055,23 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale):
 async function loadSourceHtml(request: Request, env: Env, requestUrl: URL, locale: Locale): Promise<SourceHtmlResult> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) return { type: 'response', response: localizeRedirect(originResponse, requestUrl, locale) }
+  // Keep branded 404/410 pages, but localize links/canonicals for the active locale.
+  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
+    const sourceHtml = await originResponse.text()
+    return {
+      type: 'response',
+      response: createTranslatedHtmlResponse(
+        new Response(sourceHtml, {
+          status: originResponse.status,
+          statusText: originResponse.statusText,
+          headers: originResponse.headers,
+        }),
+        sourceHtml,
+        requestUrl,
+        locale,
+      ),
+    }
+  }
   if (!isHtmlResponse(originResponse) || !originResponse.ok) return { type: 'response', response: originResponse }
 
   const contentLength = Number.parseInt(originResponse.headers.get('Content-Length') || '0', 10)
@@ -2089,7 +2182,7 @@ async function refreshCacheIncrementally(
   let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
 
   while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB) {
-    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex])
+    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex], requestUrl.pathname)
     translatedBatches[batchIndex] = translatedBatch
     translatedInThisJob += 1
     batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
@@ -2485,7 +2578,7 @@ async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Reco
 
   const translatedBatchMap = new Map<number, string[]>()
   for (const batchIndex of [...selectedBatchIndexes].sort((left, right) => left - right)) {
-    translatedBatchMap.set(batchIndex, await translateBatchWithJsonMode(env, targetLanguage, batches[batchIndex]))
+    translatedBatchMap.set(batchIndex, await translateBatchWithJsonMode(env, targetLanguage, batches[batchIndex], path))
   }
 
   const sourceTexts = [...translatedBatchMap.keys()].flatMap((batchIndex) => batches[batchIndex])
@@ -2534,11 +2627,12 @@ async function handleTranslationTestRequest(request: Request, env: Env, requestU
     if (requestUrl.pathname !== `${TRANSLATION_TEST_ROUTE_PREFIX}/real-runtime`) return jsonResponse({ ok: false, error: 'Not found' }, 404)
 
     const storage = await probeRuntimeStorage(env, requestUrl)
-    const translations = await translateBatchWithJsonMode(env, 'Spanish', [
-      'Ship updates instantly',
-      'Pricing',
-      'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.',
-    ])
+    const translations = await translateBatchWithJsonMode(
+      env,
+      'Spanish',
+      ['Ship updates instantly', 'Pricing', 'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.'],
+      '/',
+    )
 
     return jsonResponse({
       ok: true,
@@ -2622,12 +2716,15 @@ export class TranslationCoordinator {
 
 export const __translationWorkerTest = {
   TRANSLATION_CACHE_VERSION,
+  applyFrenchArticleElision,
+  polishTranslatedText,
   bodyTranslationStats,
   buildBatches,
   collectSegments,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
   rewriteMetadataAndLinks,
+  resolveTranslationContexts,
 }
 
 export default {
@@ -2647,6 +2744,27 @@ export default {
 
     if (shouldBypassTranslation(requestUrl.pathname)) {
       return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
+    }
+
+    const englishPath = stripLocalePrefix(requestUrl.pathname)
+    const rewrittenEnglish = rewriteRedirectPath(englishPath)
+    const rewrittenHashIndex = rewrittenEnglish.indexOf('#')
+    const rewrittenPathOnly = rewrittenHashIndex === -1 ? rewrittenEnglish : rewrittenEnglish.slice(0, rewrittenHashIndex)
+    const rewrittenHash = rewrittenHashIndex === -1 ? '' : rewrittenEnglish.slice(rewrittenHashIndex)
+    if (withTrailingSlash(rewrittenPathOnly) !== withTrailingSlash(englishPath)) {
+      const redirectUrl = new URL(requestUrl)
+      redirectUrl.pathname = localizedPath(withTrailingSlash(rewrittenPathOnly), locale)
+      redirectUrl.hash = rewrittenHash.startsWith('#') ? rewrittenHash.slice(1) : rewrittenHash
+      return trackAICrawler(
+        request,
+        new Response(null, {
+          status: 301,
+          headers: {
+            Location: `${redirectUrl.pathname}${redirectUrl.search}${redirectUrl.hash}`,
+          },
+        }),
+        ctx,
+      )
     }
 
     try {

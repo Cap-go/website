@@ -8,6 +8,7 @@ import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -517,7 +518,8 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
           <p class="mt-4 text-lg text-emerald-100">
             {m.solutions_ionic_plugins_cta_subtitle({}, { locale })}
           </p>
-          <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <HumanSupport class="mt-6" size="sm" />
+          <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
               href={getRelativeLocaleUrl(locale, 'register')}
               class="rounded-xl bg-emerald-600 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-emerald-700"

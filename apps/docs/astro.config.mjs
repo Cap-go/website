@@ -72,7 +72,7 @@ export default defineConfig({
           details: 'The canonical source documentation is English. Translated language paths are served at request time by the Capgo edge translation worker.',
         }),
       ],
-      disable404Route: true,
+      disable404Route: false,
       logo: {
         src: '~public/capgo_logo.webp',
         alt: 'Capgo - Live Updates for Capacitor Apps',

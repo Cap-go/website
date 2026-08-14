@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
+import HumanSupport from '@/components/HumanSupport.astro'
 import { createLdJsonGraph, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { pluginCountLabel } from '@/config/plugins'
 import type { Thing } from 'schema-dts'
@@ -194,19 +195,22 @@ const timeline = [
             company life simpler when you push mobile apps.
           </p>
 
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              {m.start_now({}, { locale: Astro.locals.locale })}
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
-              class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              Read the docs
-            </a>
+          <div class="mt-8 flex flex-col gap-3">
+            <HumanSupport tone="light" size="sm" align="start" />
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                {m.start_now({}, { locale: Astro.locals.locale })}
+              </a>
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
+                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                Read the docs
+              </a>
+            </div>
           </div>
         </div>
 
@@ -336,19 +340,22 @@ const timeline = [
             </div>
           </div>
 
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              {m.start_now({}, { locale: Astro.locals.locale })}
-            </a>
-            <a
-              href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
-              class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              Read the full story
-            </a>
+          <div class="mt-8 flex flex-col gap-3">
+            <HumanSupport tone="light" size="sm" align="start" />
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                {m.start_now({}, { locale: Astro.locals.locale })}
+              </a>
+              <a
+                href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
+                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                Read the full story
+              </a>
+            </div>
           </div>
         </div>
       </div>

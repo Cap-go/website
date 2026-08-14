@@ -1,4 +1,5 @@
 import { getRelativeLocaleUrl as getAstroRelativeLocaleUrl } from 'astro:i18n'
+import { resolveLegacyPathRedirect } from '../../../shared/legacyPathRedirects'
 
 const localePrefixPattern = /^\/(?:de|es|fr|id|it|ja|ko|zh)(?=\/|$)/
 
@@ -17,7 +18,9 @@ function stripLocalePrefix(pathname: string): string {
 }
 
 function rewriteRedirectPath(pathname: string): string {
-  if (pathname === '/docs/cli' || pathname === '/docs/cli/') return '/docs/cli/overview/'
+  const legacyTarget = resolveLegacyPathRedirect(pathname)
+  if (legacyTarget) return legacyTarget
+  if (pathname === '/docs/cli/overview' || pathname === '/docs/cli/overview/') return '/docs/cli/'
   if (pathname === '/docs/getting-started' || pathname === '/docs/getting-started/') return '/docs/getting-started/quickstart/'
   if (pathname === '/docs/plugin/api' || pathname === '/docs/plugin/api/') return '/docs/plugins/updater/api/'
   if (pathname === '/docs/cli/cloud-build' || pathname.startsWith('/docs/cli/cloud-build/')) {
@@ -37,10 +40,17 @@ export function canonicalizeInternalPath(value = ''): string {
   if (value.startsWith('#')) return value
 
   const { pathname, suffix } = splitPathSuffix(value)
+  const sourceHashIndex = suffix.indexOf('#')
+  const query = sourceHashIndex === -1 ? suffix : suffix.slice(0, sourceHashIndex)
+  const sourceHash = sourceHashIndex === -1 ? '' : suffix.slice(sourceHashIndex)
   const rootedPathname = pathname.startsWith('/') ? pathname : `/${pathname}`
-  const canonicalPathname = withTrailingSlash(rewriteRedirectPath(stripLocalePrefix(rootedPathname)))
+  const rewritten = rewriteRedirectPath(stripLocalePrefix(rootedPathname))
+  const hashIndex = rewritten.indexOf('#')
+  const pathOnly = hashIndex === -1 ? rewritten : rewritten.slice(0, hashIndex)
+  const hash = hashIndex === -1 ? '' : rewritten.slice(hashIndex)
+  const canonicalPathname = withTrailingSlash(pathOnly)
 
-  return `${canonicalPathname}${suffix}`
+  return `${canonicalPathname}${query}${hash || sourceHash}`
 }
 
 export function getRelativeLocaleUrl(locale: string, path = ''): string {

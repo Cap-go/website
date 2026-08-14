@@ -120,9 +120,11 @@ npx @capgo/cli@latest build request com.example.app --platform ios --path .
 | **--keystore-store-password** | <code>string</code> | Android: Keystore store password |
 | **--play-config-json** | <code>string</code> | Android: Base64-encoded Google Play service account JSON |
 | **--android-flavor** | <code>string</code> | Android: Product flavor to build (e.g. production). Required if your project has multiple flavors. |
+| **--android-track** | <code>string</code> | Android: Google Play track for this upload (internal, alpha, beta, production). Default without --submit-to-store-review: internal. With --submit-to-store-review and no track set: production. Precedence: CLI > env > saved credentials |
+| **--android-release-status** | <code>string</code> | Android: Google Play release status (draft, completed, inProgress, halted). Default without --submit-to-store-review: draft. With --submit-to-store-review and no status set: completed. Precedence: CLI > env > saved credentials |
 | **--in-app-update-priority** | <code>string</code> | Android: Google Play in-app update priority for this release (integer 0–5; higher = more urgent). See https://developer.android.com/guide/playcore/in-app-updates. Precedence: CLI > env > saved credentials |
 | **--no-playstore-upload** | <code>boolean</code> | Skip Play Store upload for this build (nulls out saved play config). Requires --output-upload. |
-| **--submit-to-store-review** | <code>boolean</code> | After upload, submit the store release for review instead of leaving it as a draft/inactive build. Android marks the Play release completed; iOS submits the processed TestFlight build to App Store review. |
+| **--submit-to-store-review** | <code>boolean</code> | After upload, submit the store release for review instead of leaving it as a draft/inactive build. On Android this defaults to the production track with release_status completed (override with --android-track / PLAY_STORE_TRACK and --android-release-status / PLAY_STORE_RELEASE_STATUS). On iOS this submits the processed TestFlight build to App Store review. |
 | **--store-release-name** | <code>string</code> | Store release name/version label. Android sends this as the Google Play version_name; iOS uses it as the App Store version when creating or reusing the editable version. |
 | **--store-release-notes** | <code>string</code> | Default store release notes. Android uses this as the Play changelog; iOS uses it as the fallback App Store What's New text. |
 | **--store-release-notes-locale** | <code>string</code> | Localized store release notes (repeatable), for example --store-release-notes-locale en-US="Bug fixes" --store-release-notes-locale fr-FR="Corrections". |
@@ -139,6 +141,8 @@ npx @capgo/cli@latest build request com.example.app --platform ios --path .
 | **--ai-analytics** | <code>boolean</code> | On build failure, send logs to Capgo AI for diagnosis. In interactive terminals this skips the upfront confirmation; in CI this auto-uploads and prints the analysis to stderr. |
 | **--no-prescan** | <code>boolean</code> | Skip the automatic pre-build scan |
 | **--prescan-ignore-fatal** | <code>boolean</code> | Run the pre-build scan but never block the build (report only) |
+| **--prescan-skip** | <code>string</code> | Skip specific prescan check(s) by id (repeatable or comma-separated). Other checks still run. |
+| **--prescan-warn** | <code>string</code> | Downgrade specific prescan check(s) to warning by id (repeatable or comma-separated). Check still runs. |
 | **--fail-on-warnings** | <code>boolean</code> | Treat prescan warnings as fatal |
 | **--send-logs-to-support** | <code>boolean</code> | On a CI/CD build failure, automatically upload the build logs to Capgo support (no email required). Capgo support is notified and will follow up by email. Additive to --ai-analytics. |
 | **--send-logs** | <code>boolean</code> | Deprecated alias for --send-logs-to-support |
@@ -176,6 +180,7 @@ npx @capgo/cli@latest build prescan
 
 Scan your project and saved credentials for problems that would fail a cloud build — before uploading anything.
 Checks credentials (expiry, passwords, profile pairing), project state (cap sync, node_modules layout), and platform config. Runs automatically inside `build request`; this command runs it standalone (e.g. in CI).
+See [Prescan checks](/docs/builder/prescan/) for the full check catalog and how to `--skip` / `--warn` individual rules.
 
 **Options:**
 
@@ -189,6 +194,8 @@ Checks credentials (expiry, passwords, profile pairing), project state (cap sync
 | **--json** | <code>boolean</code> | Output a machine-readable JSON report |
 | **--fail-on-warnings** | <code>boolean</code> | Exit non-zero when warnings are found (CI) |
 | **--ignore-fatal** | <code>boolean</code> | Diagnostic mode: report everything but always exit 0 |
+| **--skip** | <code>string</code> | Skip specific check(s) by id (repeatable or comma-separated) |
+| **--warn** | <code>string</code> | Downgrade specific check(s) to warning by id (repeatable or comma-separated) |
 | **--verbose** | <code>boolean</code> | Enable verbose output with detailed logging |
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |

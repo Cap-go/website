@@ -297,7 +297,7 @@ For test builds, skip store submission: Android uses `--no-playstore-upload`; fo
 
 By default, release builds upload the signed artifact and leave the final store action under your control. For CI releases that should move directly into the store review flow, add `--submit-to-store-review`.
 
-Android uses your `PLAY_CONFIG_JSON` service account and submits the Google Play release instead of leaving it inactive. Add `--store-release-name`, `--store-release-notes`, and optional `--store-release-notes-locale` entries when you want the Play release to carry the same tag and localized changelogs as CI:
+Android uses your `PLAY_CONFIG_JSON` service account. **Without an explicit track, `--submit-to-store-review` defaults to the production track with `release_status: completed`.** Prefer stating the track at the call site with `--android-track` (or `PLAY_STORE_TRACK`), and override status with `--android-release-status` / `PLAY_STORE_RELEASE_STATUS` when needed:
 
 ```yaml
 - name: Submit Android release for review
@@ -313,9 +313,30 @@ Android uses your `PLAY_CONFIG_JSON` service account and submits the Google Play
       --platform android \
       --build-mode release \
       --submit-to-store-review \
+      --android-track production \
       --store-release-name "${GITHUB_REF_NAME}" \
       --store-release-notes "Release ${GITHUB_REF_NAME}" \
       --store-release-notes-locale "en-US=Release ${GITHUB_REF_NAME}"
+```
+
+For an internal completed release instead of production:
+
+```yaml
+- name: Submit Android internal release
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+    ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+    KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+    KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+    KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+    PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+  run: |
+    npx @capgo/cli@latest build request com.example.app \
+      --platform android \
+      --build-mode release \
+      --submit-to-store-review \
+      --android-track internal \
+      --store-release-name "${GITHUB_REF_NAME}"
 ```
 
 iOS uses the App Store Connect API key path and submits the processed TestFlight build to App Store review. It requires `app_store` distribution; `--ios-testflight-groups` is optional for external beta distribution and is not required for App Store review:

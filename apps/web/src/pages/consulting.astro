@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 import { createServiceLdJson, createLdJsonGraph, createFAQPageLdJson } from '@/lib/ldJson'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const title = [Astro.locals.runtimeConfig.public.brand, m.consulting({}, { locale })].join(' | ')
@@ -198,6 +199,7 @@ const useCases = [
         Need a native feature that doesn't exist? We build custom Capacitor plugins and provide expert consulting to bring any native functionality to your app.
       </p>
 
+      <HumanSupport class="mb-4" size="sm" />
       <div class="flex flex-col justify-center gap-4 sm:flex-row">
         <a
           href="https://book.capgo.app/capacitor-plugin/"
@@ -648,6 +650,7 @@ const useCases = [
           Whether you need a custom plugin built or expert consulting for your Capacitor app, we're here to make it happen.
         </p>
 
+        <HumanSupport class="mb-4" size="sm" />
         <div class="flex flex-col justify-center gap-4 sm:flex-row">
           <a
             href="https://book.capgo.app/capacitor-plugin/"

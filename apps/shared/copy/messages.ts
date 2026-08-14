@@ -1,4 +1,8 @@
 // Static English copy used by the site build. Runtime translation is handled by the edge translation worker.
+// Translator usage context for each key lives in ./messageContexts.ts.
+// Durable manual refinements go in ./messageContextOverrides.ts.
+// The edge worker loads English→context via ./translationContextLookup.ts.
+// When adding a string here, refresh context with: bun run generate:message-contexts
 
 export type MessageValues = Record<string, string | number | boolean | null | undefined>
 
@@ -80,6 +84,18 @@ const messages = {
   alternatives_codepush_why_different_li2: 'Built specifically for Capacitor',
   alternatives_codepush_why_different_li3: 'Real humans fixing bugs and adding features',
   alternatives_codepush_why_different_li4: 'Still affordable: $12/month (not VC-subsidized free, but sustainable)',
+  alternatives_expo_credit:
+    'Credit where it is due: Expo Application Services is the standard cloud stack for React Native. Capgo is the Capacitor analog, not a React Native replacement.',
+  alternatives_expo_full_comparison: 'Full EAS comparison →',
+  alternatives_expo_reality:
+    'Expo Application Services (EAS) covers EAS Build, EAS Submit, EAS Workflows, EAS Update, and EAS Hosting for Expo and React Native apps. It is the right comparison when the mobile UI is React Native, not when you want to keep a web app.',
+  alternatives_expo_status: 'Active React Native platform',
+  alternatives_expo_when_good:
+    'Choose EAS if the app is already React Native, or if the team wants Expo SDK, config plugins, and a React Native rewrite. Choose Capgo if the starting point is a web app you can wrap with Capacitor.',
+  alternatives_expo_why_different_li1: 'Capgo Live Updates is the EAS Update analog for Capacitor web bundles',
+  alternatives_expo_why_different_li2: 'Capgo Builder covers EAS Build and EAS Submit for iOS and Android Capacitor binaries',
+  alternatives_expo_why_different_li3: 'Trigger Capgo Build from GitHub Actions or GitLab instead of adopting EAS Workflows',
+  alternatives_expo_why_different_li4: 'Paid Capgo plans start at $12/month billed yearly with native build time included; paid EAS starts at $19/month plus usage',
   alternatives_cta_button: 'Start free trial',
   alternatives_cta_questions:
     'Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Ask us on Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email support@capgo.app</a>',
@@ -96,7 +112,7 @@ const messages = {
   alternatives_human_support_desc: 'No chatbots. No "AI assistants." No ticket systems that lose your message.',
   alternatives_human_support_note: "You get Martin or someone from the family. Usually within hours. Sometimes within minutes. Yes, even on weekends (we can't help ourselves 😅).",
   alternatives_human_support_title: '🙋 Only human support',
-  alternatives_meta_description: 'Compare Capacitor live update platforms for OTA updates, rollbacks, channels, CI/CD automation, and Appflow migration support.',
+  alternatives_meta_description: 'Compare Capacitor live updates with Appflow, Expo EAS, and CodePush. OTA, rollback, channels, CI/CD, and migration paths in one place.',
   alternatives_not_good_at_ci_cd:
     "Unlike Appflow's bundled approach, we give you flexibility. Use our Cloud Build for native iOS/Android builds, or integrate with your own CI/CD (GitHub Actions, GitLab CI, etc). Your choice - both work great.",
   alternatives_not_good_at_ci_cd_label: 'All-in-one CI/CD:',
@@ -458,7 +474,7 @@ const messages = {
   capflow_meta_description: 'Compare Ionic Appflow and Capgo for Capacitor live updates, OTA deployments, rollback protection, automation, and migration support.',
   capflow_nav_label: 'Ionic AppFlow vs Capgo',
   capflow_title: 'Ionic AppFlow vs Capgo',
-  expo_nav_label: 'Expo vs Capgo',
+  expo_nav_label: 'EAS vs Capgo',
   median_nav_label: 'Median vs Capgo',
   capgo_enables_development_teams_at_some_of_the_most_innovative_companies: 'Capgo enables development teams at some of the most innovative companies.',
   capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app: 'Capgo gives you the best insights you need to create a truly professional mobile app.',
@@ -625,8 +641,8 @@ const messages = {
   companies_logo_downloads_revel: '250K+',
   companies_logo_downloads_suez: '3.2M',
   companies_logo_downloads_vella: '400K+',
-  companies_logo_stat_companies_label: 'Companies',
-  companies_logo_stat_companies_value: '3500+',
+  companies_logo_stat_companies_label: 'Customers',
+  companies_logo_stat_companies_value: '7,800+',
   companies_logo_stat_devices_label: 'Devices tracked',
   companies_logo_stat_devices_value: '50M+',
   companies_logo_stat_uptime_label: 'Uptime',
@@ -646,6 +662,7 @@ const messages = {
   compare: 'Compare',
   complete_documentation: 'Complete documentation',
   compliance_gdpr: 'GDPR Compliant',
+  compliance_iso27001: 'ISO 27001 Certified',
   compliance_soc1: 'SOC 2 Type I Compliant',
   compliant_with_apple_and_android_requirements: 'Skip store review for JavaScript and assets. Native code still goes through Apple or Google only when the binary changes.',
   conditions_for_returns: 'Conditions for Returns',
@@ -1313,7 +1330,7 @@ const messages = {
   enterprise_capacity_desc: 'Enterprise gives teams the MAU, bandwidth, and storage bands that actually decide whether a large rollout feels safe.',
   enterprise_capacity_title: 'Capacity that keeps launches moving',
   enterprise_compliance_procurement_desc:
-    'SOC 2 certified controls, an ISO 27001 audit complete with certificate issuance pending, signed non-disclosure agreements, DPAs, and custom payment workflows are ready for enterprise review.',
+    'SOC 2 and ISO 27001 certified controls, signed non-disclosure agreements, DPAs, and custom payment workflows are ready for enterprise review.',
   enterprise_compliance_procurement_group: 'Compliance and procurement',
   enterprise_compliance_procurement_title: 'Compliance before procurement asks',
   enterprise_continents_replicated: 'continents replicated',
@@ -1337,8 +1354,9 @@ const messages = {
     'Live Updates, Native Builds, App Store Publishing, {pluginCountLabel} plugins, and Automations in one platform, with enterprise scale, compliance, and procurement support.',
   enterprise_identity: 'Enterprise Identity',
   enterprise_ionic_alternative_plugins: 'Ionic enterprise alternative plugins',
-  enterprise_iso27001_in_progress: 'ISO 27001 audit complete — certificate pending issuance',
-  enterprise_iso27001_ongoing: 'ISO 27001 audit complete — certificate pending issuance',
+  enterprise_iso27001_certified: 'ISO 27001 certified',
+  enterprise_iso27001_in_progress: 'ISO 27001 certified',
+  enterprise_iso27001_ongoing: 'ISO 27001 certified',
   enterprise_large_macos_m4: 'Large build machines (macOS M4)',
   enterprise_limits_desc: 'Enterprise buying usually stalls when scale, release speed, compliance, or procurement is unclear. These are the differences teams ask for first.',
   enterprise_limits_title: 'The limits that matter most are clear before the call.',
@@ -1403,7 +1421,7 @@ const messages = {
   enterprise_soc2_certified: 'SOC 2 certified',
   enterprise_soc2_certified_infrastructure: 'SOC 2 certified infrastructure',
   enterprise_soc2_iso_metric: 'SOC 2 + ISO',
-  enterprise_sso_soc2_iso: 'SSO, SOC 2, ISO 27001 certificate pending issuance',
+  enterprise_sso_soc2_iso: 'SSO, SOC 2, ISO 27001 certified',
   enterprise_stripe_payment_options: 'Stripe payment options',
   enterprise_support: 'Enterprise Support',
   enterprise_support_onboarding: 'Support and onboarding',
@@ -1616,6 +1634,7 @@ const messages = {
   full_control_of_your_capacitor_apps_from_anywhere: 'Full control of your Capacitor apps from anywhere',
   full_source_code_included: 'Full source code included',
   gdpr_compliant: 'GDPR Compliant',
+  iso27001_compliant: 'ISO 27001 Compliant',
   general_service_exclusion_1:
     '(i) Caused by factors outside of our reasonable control, including but not limited to any force majeure event or Internet access, ISP provider issues, and/or related problems beyond the demarcation point of Capgo.',
   general_service_exclusion_2: '(ii) That result from any voluntary actions or inactions from you.',
@@ -1687,6 +1706,7 @@ const messages = {
     'Build as usual, upload changed JavaScript and assets with the CLI or API, and target the channels that should receive them. Start automatic in 5 minutes or go manual for advanced release logic.',
   home_global_infrastructure_desc: 'Powered by serverless edge computing and distributed databases across 300+ cities and 13,000+ networks for ultra-fast global delivery.',
   home_global_network_label: 'Global Network',
+  home_hero_human_support: 'human support from Martin',
   home_hero_outcome_compliance_desc:
     'Push JavaScript, CSS, copy, and features without waiting on Apple or Google. Native binary changes still go through the stores only when they have to.',
   home_hero_outcome_compliance_title: 'Skip store review for web updates',
@@ -1908,6 +1928,11 @@ const messages = {
   live_update_v2_comp_try_capa: 'Tiered plans. Trials vary by vendor.',
   live_update_v2_comp_callout: 'Capgo is built so a JavaScript bug cannot take down your update system.',
   live_update_v2_comp_footnote: 'Comparison reflects typical DIY/self-hosted setups and public competitor cloud documentation.',
+  live_update_eas_eyebrow: 'EAS Update analog',
+  live_update_eas_title: 'Capacitor live updates if you compared EAS Update',
+  live_update_eas_lead:
+    'EAS Update ships JavaScript fixes for Expo and React Native apps. Capgo does the same job for Capacitor web bundles: channels, rollback, and device logs. Stay on EAS if the app is React Native. Use Capgo if you kept the web UI.',
+  live_update_eas_cta: 'Compare Capgo with Expo Application Services',
 
   live_update_decision_1: 'You need a recovery path for production bugs that does not depend on App Store or Play review time.',
   live_update_decision_2: 'Your app has multiple customer cohorts, white-label deployments, beta testers, or support-only debug channels.',
@@ -1925,7 +1950,8 @@ const messages = {
   live_update_delta_feature3_desc: 'Just add --partial to your upload command to enable delta updates for your bundle.',
   live_update_delta_feature3_title: 'Enable with One Flag',
   live_update_delta_title: 'Delta Updates',
-  live_update_description: 'Skip App Store and Google Play review for Ionic and Capacitor web updates. Instant OTA, channels, rollback, and CLI safety checks.',
+  live_update_description:
+    'Skip App Store and Google Play review for Capacitor web updates. Instant OTA, channels, rollback, and CLI checks. The EAS Update analog if you have a web app instead of React Native.',
   live_update_dynamic_bullet1_prefix: 'Add an in-app “Update Track” menu: list channels and let testers jump from',
   live_update_dynamic_bullet1_suffix: 'in seconds (no reinstall).',
   live_update_dynamic_bullet2: 'Spin up a pull-request channel per feature, route QA or beta users there, then snap them back to prod when approved.',
@@ -2292,7 +2318,7 @@ const messages = {
   native_build_builder_credit_price: '{price}/min',
   native_build_builder_cta_text: "Build signed iOS and Android releases from your machine or CI while keeping Capgo's existing site header, docs, and pricing flow.",
   native_build_builder_cta_title: 'Native builds without the pain.',
-  native_build_builder_description: 'Build signed iOS and Android apps from any machine with Capgo Builder.',
+  native_build_builder_description: 'Signed iOS and Android Capacitor builds plus store submit. The EAS Build and EAS Submit analog for web apps, not React Native.',
   native_build_builder_extra_minutes: 'Extra build minutes use prepaid credits.',
   native_build_builder_faq_eyebrow: 'FAQ',
   native_build_builder_faq_live_updates_a:
@@ -4917,8 +4943,8 @@ const messages = {
   // ============================================================
   native_build_v2_hero_badge: 'Capgo Builder',
   native_build_v2_hero_headline: 'Ship without the Mac',
-  native_build_v2_hero_tagline: 'One command. Straight to the stores.',
-  native_build_v2_hero_lead: 'Signed iOS and Android CapacitorJs builds from any machine.',
+  native_build_v2_hero_tagline: 'One command. Stores optional.',
+  native_build_v2_hero_lead: 'Signed iOS and Android CapacitorJs builds from any machine. Share with a QR from CI, or upload to the stores.',
   native_build_v2_hero_cta: 'Start building',
   native_build_v2_hero_secondary: 'See how it works',
   native_build_v2_meta_ios: 'iOS · Apple Silicon',
@@ -4934,7 +4960,7 @@ const messages = {
   native_build_v2_strip_setup_k: 'Setup',
   native_build_v2_strip_setup_v: '~60 sec',
 
-  native_build_v2_reveal_line: 'One command, from any machine, straight to the stores',
+  native_build_v2_reveal_line: 'One command, from any machine — to the stores or straight to your users',
 
   native_build_v2_proof_eyebrow: 'Builder proof',
   native_build_v2_proof_title: 'Teams already shipping with Builder',
@@ -4955,16 +4981,49 @@ const messages = {
   native_build_v2_tile_hw_sub: 'M4 Mac runners for iOS and Android. Fast, consistent builds.',
   native_build_v2_tile_sec_title: 'Zero-trust security',
   native_build_v2_tile_sec_sub: 'Credentials never stored. Deleted after every build.',
-  native_build_v2_tile_asc_title: 'Direct store upload',
-  native_build_v2_tile_asc_sub: 'Straight to App Store Connect / TestFlight and Play Console.',
-  native_build_v2_tile_logs_title: 'Live build logs',
-  native_build_v2_tile_logs_sub: 'Stream build output in real time over WebSocket.',
+  native_build_v2_tile_asc_title: 'Stores when you want',
+  native_build_v2_tile_asc_sub: 'Upload to TestFlight and Play — or skip and share a Capgo QR instead.',
+  native_build_v2_tile_logs_title: 'QR share + live logs',
+  native_build_v2_tile_logs_sub: 'Stream logs, then hand testers a scannable QR download.',
   native_build_v2_tile_flavors_title: 'Android flavors + Cordova',
   native_build_v2_tile_flavors_sub: 'Flavors, keystores, and Cordova plugins handled automatically.',
   native_build_v2_tile_setup_title: 'Setup in 60 seconds',
   native_build_v2_tile_setup_sub: 'Optional .p8 for iOS, or we create one for you. One Google sign-in for Android.',
   native_build_v2_tile_ci_title: 'CI/CD ready',
   native_build_v2_tile_ci_sub: 'Works in GitHub Actions, GitLab and Bitbucket. No interactive input.',
+
+  native_build_v2_share_eyebrow: 'Direct distribution',
+  native_build_v2_share_title: 'Share the build with a QR code.',
+  native_build_v2_share_title_accent: 'No TestFlight. No App Store.',
+  native_build_v2_share_lead:
+    'From your CI/CD, Capgo Builder signs the binary and hands you a scannable QR plus download link. Send it to customers, QA, or stakeholders. Publishing to TestFlight or the App Store stays optional.',
+  native_build_v2_share_flow_ci: 'Your CI/CD',
+  native_build_v2_share_flow_ci_sub: 'GitHub · GitLab · Bitbucket',
+  native_build_v2_share_flow_build: 'Capgo Builder',
+  native_build_v2_share_flow_build_sub: 'Sign · package · host',
+  native_build_v2_share_flow_qr: 'QR + link',
+  native_build_v2_share_flow_qr_sub: 'Time-limited download',
+  native_build_v2_share_flow_user: 'Customers & users',
+  native_build_v2_share_flow_user_sub: 'Scan and install',
+  native_build_v2_share_vs_old_label: 'Store beta path',
+  native_build_v2_share_vs_old_1: 'Wait for TestFlight processing',
+  native_build_v2_share_vs_old_2: 'Manage tester invites and groups',
+  native_build_v2_share_vs_old_3: 'App Store Connect required',
+  native_build_v2_share_vs_new_label: 'Capgo QR path',
+  native_build_v2_share_vs_new_1: 'Build finishes → QR is ready',
+  native_build_v2_share_vs_new_2: 'Share one link or QR code',
+  native_build_v2_share_vs_new_3: 'No store publish required',
+  native_build_v2_share_step1_t: 'Trigger from CI',
+  native_build_v2_share_step1_d: 'Call capgo build request with --output-upload. Same command in any pipeline.',
+  native_build_v2_share_step2_t: 'Get a QR from Capgo',
+  native_build_v2_share_step2_d: 'Capgo returns a download URL and QR. Persist it with --output-record for PR comments.',
+  native_build_v2_share_step3_t: 'Hand it to users',
+  native_build_v2_share_step3_d: 'Customers, QA, or stakeholders scan and install. Stores stay optional for release day.',
+  native_build_v2_share_badge: 'Stores stay optional',
+  native_build_v2_share_note: 'iOS ad-hoc or Android APK with --no-playstore-upload. Keep App Store / Play for when you actually want to publish.',
+  native_build_v2_share_docs: 'See CI QR output docs',
+  native_build_v2_share_scan_label: 'Scan to install',
+  native_build_v2_share_ttl: 'Link TTL 1h–7d',
 
   native_build_v2_wiz_eyebrow: '60 seconds, both platforms',
   native_build_v2_wiz_title_prefix: 'Setup in ',
@@ -5173,17 +5232,29 @@ const messages = {
   native_build_v2_faq_q3: 'Can I build Android product flavors?',
   native_build_v2_faq_a3: 'Yes. Pass --android-flavor production or any declared flavor. Keystore and Play JSON via flags.',
   native_build_v2_faq_q4: 'I want internal-only iOS builds without TestFlight. How?',
-  native_build_v2_faq_a4: 'Use --ios-distribution ad_hoc. Skips App Store Connect validation. IPA for MDM or token download (1h-7d TTL).',
-  native_build_v2_faq_q5: "What's your retention policy on logs and artifacts?",
+  native_build_v2_faq_a4:
+    'Use --ios-distribution ad_hoc with --output-upload. Capgo skips App Store Connect, hosts a time-limited IPA download (1h–7d TTL), and returns a QR code you can share with registered devices, MDM, QA, or customers.',
+  native_build_v2_faq_q5: 'Can I share Android builds without Play Store?',
   native_build_v2_faq_a5:
-    'Logs never stay on Capgo servers. They stream to your terminal, then disappear. Artifacts default to 1-hour TTL (up to 7 days). Credentials wiped when the build ends.',
-  native_build_v2_faq_q6: 'Is Capgo Builder a replacement for live updates?',
+    'Yes. Pass --no-playstore-upload --output-upload. Capgo hosts the signed APK/AAB behind a download URL and QR. Read them back in CI with --output-record and build last-output.',
+  native_build_v2_faq_q6: "What's your retention policy on logs and artifacts?",
   native_build_v2_faq_a6:
-    'No. They complement each other. Live Updates for JS, CSS, and assets. Builder when native code, plugins, permissions, icons, or SDKs need a new signed binary.',
-  native_build_v2_faq_q7: 'Can Capgo Build work with our existing CI and private native setup?',
+    'Logs never stay on Capgo servers. They stream to your terminal, then disappear. Artifacts default to 1-hour TTL (up to 7 days). Credentials wiped when the build ends.',
+  native_build_v2_faq_q7: 'Is Capgo Builder a replacement for live updates?',
   native_build_v2_faq_a7:
+    'No. They complement each other. Live Updates for JS, CSS, and assets. Builder when native code, plugins, permissions, icons, or SDKs need a new signed binary.',
+  native_build_v2_faq_q8: 'Can Capgo Build work with our existing CI and private native setup?',
+  native_build_v2_faq_a8:
     'Yes. Keep private JavaScript dependency setup, web builds, and Capacitor sync in your CI. Capgo Build receives the prepared native platform folder after that work is complete, then compiles and signs it; it can also submit the result to app stores when configured. Capgo does not need access to your Git repositories, private registries, or SSH credentials. Pass supported build configuration as environment variables when needed.',
-  native_build_v2_faq_a7_link: 'Read the build workflow',
+  native_build_v2_faq_a8_link: 'Read the build workflow',
+  native_build_v2_faq_q9: 'Is Capgo Builder an EAS Build alternative?',
+  native_build_v2_faq_a9:
+    'For Capacitor apps, yes: Capgo Builder compiles, signs, and can submit iOS and Android binaries, which is the EAS Build plus EAS Submit analog. EAS Build stays the path for Expo and React Native apps. Capgo cannot build Expo projects.',
+  native_build_v2_eas_eyebrow: 'EAS Build analog',
+  native_build_v2_eas_title: 'Cloud builds if you compared EAS Build and EAS Submit',
+  native_build_v2_eas_lead:
+    'EAS Build compiles React Native binaries. EAS Submit uploads them to the stores. Capgo Builder does both jobs for Capacitor projects, with native build time on every paid plan. Keep EAS if the app is Expo.',
+  native_build_v2_eas_cta: 'Compare Capgo with Expo Application Services',
 
   native_build_v2_cta_title: 'Native builds without the pain.',
   native_build_v2_cta_tagline: 'One command. iOS and Android, treated as equals. From any machine.',

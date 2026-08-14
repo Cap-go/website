@@ -1,0 +1,390 @@
+{
+  "period_days": 30,
+  "updated_at": "2026-08-11T06:50:23.257Z",
+  "success_rate": 67.6,
+  "daily": [
+    {
+      "date": "2026-07-12",
+      "success_rate": 64.6
+    },
+    {
+      "date": "2026-07-13",
+      "success_rate": 67.5
+    },
+    {
+      "date": "2026-07-14",
+      "success_rate": 67.9
+    },
+    {
+      "date": "2026-07-15",
+      "success_rate": 72.6
+    },
+    {
+      "date": "2026-07-16",
+      "success_rate": 73.2
+    },
+    {
+      "date": "2026-07-17",
+      "success_rate": 70.4
+    },
+    {
+      "date": "2026-07-18",
+      "success_rate": 67.3
+    },
+    {
+      "date": "2026-07-19",
+      "success_rate": 63
+    },
+    {
+      "date": "2026-07-20",
+      "success_rate": 66.5
+    },
+    {
+      "date": "2026-07-21",
+      "success_rate": 66
+    },
+    {
+      "date": "2026-07-22",
+      "success_rate": 67.2
+    },
+    {
+      "date": "2026-07-23",
+      "success_rate": 70.2
+    },
+    {
+      "date": "2026-07-24",
+      "success_rate": 70.6
+    },
+    {
+      "date": "2026-07-25",
+      "success_rate": 65.7
+    },
+    {
+      "date": "2026-07-26",
+      "success_rate": 64.9
+    },
+    {
+      "date": "2026-07-27",
+      "success_rate": 62.3
+    },
+    {
+      "date": "2026-07-28",
+      "success_rate": 62.1
+    },
+    {
+      "date": "2026-07-29",
+      "success_rate": 63.5
+    },
+    {
+      "date": "2026-07-30",
+      "success_rate": 67.4
+    },
+    {
+      "date": "2026-07-31",
+      "success_rate": 68.3
+    },
+    {
+      "date": "2026-08-01",
+      "success_rate": 69.3
+    },
+    {
+      "date": "2026-08-02",
+      "success_rate": 66.1
+    },
+    {
+      "date": "2026-08-03",
+      "success_rate": 67.1
+    },
+    {
+      "date": "2026-08-04",
+      "success_rate": 65.8
+    },
+    {
+      "date": "2026-08-05",
+      "success_rate": 67.8
+    },
+    {
+      "date": "2026-08-06",
+      "success_rate": 69.7
+    },
+    {
+      "date": "2026-08-07",
+      "success_rate": 72
+    },
+    {
+      "date": "2026-08-08",
+      "success_rate": 66.1
+    },
+    {
+      "date": "2026-08-09",
+      "success_rate": 65.5
+    },
+    {
+      "date": "2026-08-10",
+      "success_rate": 69
+    }
+  ],
+  "failures": [
+    {
+      "reason": "download_manifest_file_fail",
+      "share": 37.7
+    },
+    {
+      "reason": "download_fail",
+      "share": 29.3
+    },
+    {
+      "reason": "backend_refusal",
+      "share": 16.4
+    },
+    {
+      "reason": "update_fail",
+      "share": 7.3
+    },
+    {
+      "reason": "finish_download_fail",
+      "share": 3.4
+    },
+    {
+      "reason": "checksum_fail",
+      "share": 3.3
+    },
+    {
+      "reason": "unzip_fail",
+      "share": 1.9
+    },
+    {
+      "reason": "set_fail",
+      "share": 0.2
+    }
+  ],
+  "platforms": [
+    {
+      "key": "ios",
+      "share": 66.8,
+      "success_rate": 75,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 45.9
+      }
+    },
+    {
+      "key": "android",
+      "share": 33.2,
+      "success_rate": 53.7,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 67.7
+      }
+    },
+    {
+      "key": "electron",
+      "share": 0,
+      "success_rate": 99.7,
+      "top_failure": {
+        "reason": "set_fail",
+        "share": 100
+      }
+    }
+  ],
+  "countries": [
+    {
+      "key": "US",
+      "share": 28.6,
+      "success_rate": 77.9,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 45.7
+      }
+    },
+    {
+      "key": "KR",
+      "share": 13.3,
+      "success_rate": 91,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 54.2
+      }
+    },
+    {
+      "key": "FR",
+      "share": 7.6,
+      "success_rate": 58.3,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 39.5
+      }
+    },
+    {
+      "key": "BR",
+      "share": 5.2,
+      "success_rate": 64.4,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 46.7
+      }
+    },
+    {
+      "key": "DE",
+      "share": 4.2,
+      "success_rate": 66.5,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 64.5
+      }
+    },
+    {
+      "key": "RU",
+      "share": 3.8,
+      "success_rate": 37,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 91.7
+      }
+    },
+    {
+      "key": "MX",
+      "share": 2.9,
+      "success_rate": 42.4,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 72.6
+      }
+    },
+    {
+      "key": "JP",
+      "share": 2.5,
+      "success_rate": 90.7,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 76.6
+      }
+    },
+    {
+      "key": "ES",
+      "share": 2.4,
+      "success_rate": 46.3,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 69.5
+      }
+    },
+    {
+      "key": "NL",
+      "share": 2.3,
+      "success_rate": 71.2,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 48.4
+      }
+    },
+    {
+      "key": "TH",
+      "share": 2.2,
+      "success_rate": 41.6,
+      "top_failure": {
+        "reason": "backend_refusal",
+        "share": 94.4
+      }
+    },
+    {
+      "key": "AR",
+      "share": 2.1,
+      "success_rate": 53.7,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 75.4
+      }
+    }
+  ],
+  "updater_versions": [
+    {
+      "key": "8.49.1",
+      "share": 22.6,
+      "success_rate": 85.3,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 49.9
+      }
+    },
+    {
+      "key": "8.45.8",
+      "share": 8.6,
+      "success_rate": 96.5,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 86.8
+      }
+    },
+    {
+      "key": "5.9.5",
+      "share": 5.3,
+      "success_rate": 39.4,
+      "top_failure": {
+        "reason": "decrypt_fail",
+        "share": 100
+      }
+    },
+    {
+      "key": "8.50.2",
+      "share": 4.3,
+      "success_rate": 39.8,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 83.6
+      }
+    },
+    {
+      "key": "8.45.0",
+      "share": 2.9,
+      "success_rate": 52.6,
+      "top_failure": {
+        "reason": "download_manifest_file_fail",
+        "share": 84
+      }
+    },
+    {
+      "key": "8.43.2",
+      "share": 2.8,
+      "success_rate": 72.5,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 90.2
+      }
+    },
+    {
+      "key": "8.43.10",
+      "share": 2.8,
+      "success_rate": 92.8,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 81.6
+      }
+    },
+    {
+      "key": "7.7.0",
+      "share": 2.7,
+      "success_rate": null,
+      "top_failure": null
+    },
+    {
+      "key": "5.45.10",
+      "share": 2.5,
+      "success_rate": null,
+      "top_failure": {
+        "reason": "update_fail",
+        "share": 100
+      }
+    },
+    {
+      "key": "7.42.3",
+      "share": 2.4,
+      "success_rate": 84.9,
+      "top_failure": {
+        "reason": "download_fail",
+        "share": 87.4
+      }
+    }
+  ],
+  "source": "api"
+}

@@ -46,6 +46,13 @@ bunx @tailwindcss/upgrade --force
 - Refresh metadata after adding a plugin with `bun run fetch:stars` and `bun run fetch:downloads`.
 - Validate the change with `bunx prettier --write <touched-files>` and `NODE_OPTIONS=--max-old-space-size=16384 bunx astro check` in both `apps/web` and `apps/docs`, or `bun run check` from the repo root.
 
+## Blog And Page Slugs
+
+- Never change an existing public URL slug (blog posts, pages, docs) once it has been published and indexed.
+- If a slug must change, add redirects for the old path in the same change: `apps/shared/legacyPathRedirects.ts`, `apps/web/public/_redirects` (with locale variants), and worker/translation rewrite paths as needed.
+- Preserve locale prefixes (`/de/`, `/fr/`, etc.) so each language keeps working backlinks.
+- Prefer permanent (301) redirects so earned backlinks are not lost.
+
 ## Visual Diff For PRs
 
 Use the visual diff tool whenever a PR changes page layout, styling, components, or marketing copy that affects rendered HTML.

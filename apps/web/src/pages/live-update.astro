@@ -8,6 +8,7 @@ import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -21,6 +22,7 @@ const description = m.live_update_description({}, { locale })
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const docsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates')
 const dataUrl = getRelativeLocaleUrl(locale, 'data')
+const expoUrl = getRelativeLocaleUrl(locale, 'expo')
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -38,6 +40,7 @@ const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-live-update.png`,
+  keywords: 'Capacitor live updates, EAS Update analog, Expo alternative, OTA updates, Capgo',
   ldJSON,
 }
 
@@ -234,6 +237,7 @@ const featureTiles = [
         </h1>
         <p class="lead hero-lead">{m.live_update_hero_subtitle({}, { locale })}</p>
         <div class="hero-ctas">
+          <HumanSupport class="mb-3" size="sm" align="start" />
           <div class="hero-cta-buttons">
             <a class="btn btn-lg btn-primary" href={registerUrl}>{m.live_update_hero_cta({}, { locale })}</a>
             <a class="btn btn-lg btn-ghost" href={docsUrl}>{m.live_update_view_docs({}, { locale })}</a>
@@ -387,6 +391,7 @@ const featureTiles = [
               {guidanceChecks.map((check) => <li>{check}</li>)}
             </ul>
             <div class="hero-ctas" style="margin-top: 28px; align-items: flex-start;">
+              <HumanSupport class="mb-3" size="sm" align="start" />
               <div class="hero-cta-buttons">
                 <a class="btn btn-md btn-primary" href={getRelativeLocaleUrl(locale, 'docs/live-updates/compatibility')}>
                   {m.live_update_guidance_docs_cta({}, { locale })}
@@ -486,6 +491,17 @@ const featureTiles = [
       </div>
     </section>
 
+    <section class="section" id="eas-update">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{copy('live_update_eas_eyebrow')}</div>
+          <h2 class="h2-section">{copy('live_update_eas_title')}</h2>
+          <p class="lead">{copy('live_update_eas_lead')}</p>
+        </div>
+        <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('live_update_eas_cta')}</a>
+      </div>
+    </section>
+
     <!-- FINAL CTA -->
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">
@@ -494,6 +510,7 @@ const featureTiles = [
           {m.live_update_cta_title({}, { locale })}
         </h2>
         <p class="tagline">{m.live_update_cta_subtitle({}, { locale })}</p>
+        <HumanSupport class="mb-4" size="sm" />
         <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{m.live_update_hero_cta({}, { locale })} →</a>
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">✓</span> {copy('live_update_v2_cta_meta1')}</span>
@@ -508,7 +525,8 @@ const featureTiles = [
       <p>
         Connect this Ionic and Capacitor live update page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
         <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, <a href={dataUrl}>Live Update delivery data</a>, <a href="/notifications/">Capgo Notifications</a>,
-        <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, and <a href="/native-build/">Capgo Native Builds</a> when a native binary still has to go through the stores.
+        <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, and <a href="/native-build/">Capgo Native Builds</a> when a native binary still has to go through the stores. See
+        also <a href={expoUrl}>EAS vs Capgo</a> for the Expo Application Services comparison.
       </p>
     </div>
   </div>

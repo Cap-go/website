@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-21T06:51:25.623Z
-updated_at: 2026-06-23T21:25:40.000Z
+updated_at: 2026-07-30T23:40:43.000Z
 head_image: /blog-images/cross-platform-messaging-apps.webp
 head_image_alt: 10 Best Cross Platform Messaging Apps for 2026 Capgo blog illustration
 keywords: >-
@@ -71,7 +71,7 @@ WhatsApp works well when you need outbound notifications, support conversations,
 
 The trade-off is control. Business messaging isn't just “turn on chat.” Template approvals, category rules, and policy enforcement shape what you can send and when. Metadata also has different privacy characteristics than message content, so regulated teams still need a real data review.
 
-If you're building mobile products that need to connect messaging workflows across platforms, it's worth following broader [cross-platform app implementation patterns](https://capgo.app/blog/category/cross-platform-apps/). Start with the official [WhatsApp website](https://www.whatsapp.com).
+If you're building mobile products that need to connect messaging workflows across platforms, it's worth following broader [cross-platform app implementation patterns](https://capgo.app/blog/category/capacitor/). Start with the official [WhatsApp website](https://www.whatsapp.com).
 
 <a id="2-telegram"></a>
 ## 2. Telegram

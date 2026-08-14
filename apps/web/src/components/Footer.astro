@@ -49,6 +49,8 @@ const navigation: Record<string, NavigationItem[]> = {
   products: [
     { name: m.live_update({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'live-update') },
     { name: 'Live Update data', href: getRelativeLocaleUrl(Astro.locals.locale, 'data') },
+    { name: 'Android distribution chart', href: getRelativeLocaleUrl(Astro.locals.locale, 'android-distribution-chart') },
+    { name: 'iOS distribution chart', href: getRelativeLocaleUrl(Astro.locals.locale, 'ios-distribution-chart') },
     { name: 'Notifications', href: getRelativeLocaleUrl(Astro.locals.locale, 'notifications') },
     { name: 'Observe', href: getRelativeLocaleUrl(Astro.locals.locale, 'observe') },
     { name: m.native_build({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'native-build') },
@@ -369,6 +371,7 @@ const navigation: Record<string, NavigationItem[]> = {
         <div class="flex gap-4">
           <img src="/soc2.svg" alt={m.soc2_compliant({}, { locale: Astro.locals.locale })} class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
           <img src="/soc1.svg" alt={m.soc1_compliant({}, { locale: Astro.locals.locale })} class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
+          <img src="/iso27001.svg" alt={m.iso27001_compliant({}, { locale: Astro.locals.locale })} class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
           <img src="/gdpr.svg" alt={m.gdpr_compliant({}, { locale: Astro.locals.locale })} class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
         </div>
         <p class="max-w-md text-xs text-zinc-500">

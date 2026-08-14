@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-08T08:14:55.865Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-07-30T23:40:43.000Z
 head_image: /blog-images/unit-testing-react.webp
 head_image_alt: '''Unit Testing React: A Practical End-to-End Guide'' Capgo blog illustration'
 keywords: >-
@@ -390,7 +390,7 @@ Use this rule set:
 
 > If a test passes because all the hard parts were replaced with fakes, it hasn't bought you much release confidence.
 
-For teams that want examples and patterns around runner APIs, the Capgo [Jest category](https://capgo.app/blog/category/jest/) is a practical reference library, especially when onboarding developers who know React but not testing mechanics yet.
+For teams that want examples and patterns around runner APIs, Capgo [testing tutorials](https://capgo.app/blog/category/tutorial/) is a practical reference library, especially when onboarding developers who know React but not testing mechanics yet.
 
 <a id="async-tests-fail-when-timing-is-vague"></a>
 ### Async tests fail when timing is vague

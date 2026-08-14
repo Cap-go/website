@@ -54,6 +54,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealBold.woff" crossorigin />
     <link rel="stylesheet" href={globalStylesHref} />
     <SEO {...content} />
+    <slot name="head" />
     {enableThirdPartyScripts && <MetaPixel />}
     {enableThirdPartyScripts && <PostHog />}
     {enableThirdPartyScripts && <Affonso />}
