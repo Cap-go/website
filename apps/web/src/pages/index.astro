@@ -33,7 +33,7 @@ const description = m.ship_updates_fixes_changes_and_features({}, { locale: Astr
 const capgoService = createServiceLdJson(config.public, {
   name: 'Capgo - Live Updates for Ionic, Capacitor, and Cordova Apps',
   description:
-    'Instant over-the-air / CodePush updates for Ionic, Capacitor, Cordova, and Electron applications. Deploy OTA, bug fixes, feature updates, and improvements without release delays.',
+    'Skip App Store and Google Play delays for Ionic, Capacitor, Cordova, and Electron apps. Ship JS fixes and live updates in minutes instead of waiting on store review.',
   url: config.public.baseUrl,
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
@@ -42,7 +42,8 @@ const capgoService = createServiceLdJson(config.public, {
 // Create SoftwareApplication schema for the Capgo platform
 const capgoSoftware = createSoftwareApplicationLdJson(config.public, {
   name: 'Capgo Live Update Platform',
-  description: 'Professional live update platform for Ionic, Capacitor, and hybrid app teams. Deploy updates instantly to iOS, Android, Cordova, and Electron apps.',
+  description:
+    'The shortcut for Ionic and Capacitor teams: live updates that skip store review, plus native builds, channels, and rollback for iOS, Android, Cordova, and Electron.',
   url: config.public.baseUrl,
   applicationCategory: 'DeveloperApplication',
   operatingSystem: 'Web, iOS, Android, Cordova, Electron',

@@ -61,7 +61,7 @@ const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
 // Create about page WebPage schema
 const aboutPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
-  description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet the team building it.',
+  description: 'Learn about Capgo, the shortcuts Capacitor teams use to skip App Store and Google Play delays, and meet the team building them.',
   url: aboutUrl,
 })
 
@@ -136,7 +136,7 @@ const companyStats = [
 const principles = [
   {
     title: 'Self-funded by design',
-    body: 'Capgo is profitable and customer-funded. Product decisions stay tied to reliability, support, and what shipping teams actually need.',
+    body: 'Capgo is profitable and customer-funded. We ship shortcuts teams actually use, not store-process theater that makes shipping slower.',
   },
   {
     title: 'Open source foundation',
@@ -177,7 +177,7 @@ const timeline = [
   {
     year: 'Now',
     title: 'Infrastructure for Capacitor teams',
-    body: 'The focus is still narrow: make app updates faster, safer, and more understandable for teams building mobile apps from web technology.',
+    body: 'The focus is still narrow: skip store delays, keep shipping simple, and make app updates faster for teams building mobile apps from web technology.',
   },
 ]
 ---
@@ -189,11 +189,11 @@ const timeline = [
         <div>
           <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">About Capgo</p>
           <h1 class="mt-5 max-w-4xl text-4xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
-            We build the open update infrastructure Capacitor teams can trust.
+            We build the shortcuts Capacitor teams use to skip store delays.
           </h1>
           <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-            Capgo started in December 2022 with one goal: make live updates fast, affordable, and understandable for teams shipping Capacitor apps in production. We stay small,
-            hands-on, and focused on the release path between your code and your users.
+            Capgo started in December 2022 so teams could ship without living inside Apple or Google review. Live updates, native builds, and plugins that make company life simpler
+            when you push mobile apps.
           </p>
 
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
