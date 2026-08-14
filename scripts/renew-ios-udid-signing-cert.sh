@@ -24,7 +24,8 @@ write_pem() {
 }
 
 cert_expiry() {
-  openssl x509 -in "$1" -noout -enddate 2>/dev/null | sed 's/^notAfter=//'
+  local cert_file="$1"
+  openssl x509 -in "$cert_file" -noout -enddate 2>/dev/null | sed 's/^notAfter=//'
 }
 
 cert_is_fresh() {
@@ -78,7 +79,7 @@ install_lego() {
   esac
 
   local url="https://github.com/go-acme/lego/releases/download/v${LEGO_VERSION}/lego_v${LEGO_VERSION}_linux_${arch}.tar.gz"
-  curl -fsSL "$url" | tar -xz -C "$dest" lego
+  curl --proto '=https' --tlsv1.2 -fsSL "$url" | tar -xz -C "$dest" lego
 }
 
 restore_existing_material() {
