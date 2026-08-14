@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+@import '../styles/product-surface.css';
 
 @font-face {
   font-family: AirbnbCerealLight;

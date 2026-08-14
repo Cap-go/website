@@ -401,29 +401,29 @@ const skillCount = skills.length
     </section>
   </div>
 
-  <div class="min-h-screen bg-gray-900">
+  <div class="min-h-screen bg-[#1a1a1a]">
     <!-- Installation Section -->
-    <section id="installation" class="scroll-mt-24 bg-gray-800/50 py-16">
+    <section id="installation" class="scroll-mt-24 bg-[#1a1a1a] py-16">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-12 text-center">
           <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Installation</h2>
           <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-400">Use the generic installer first. Tool-specific commands below are optional.</p>
         </div>
 
-        <div class="mx-auto mb-10 max-w-4xl overflow-hidden rounded-lg border border-cyan-400/40 bg-slate-950 shadow-2xl shadow-cyan-950/30">
-          <div class="flex min-h-11 items-center justify-between gap-3 border-b border-slate-800 bg-slate-900/90 px-4 py-2">
+        <div class="mx-auto mb-10 max-w-4xl overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
+          <div class="flex min-h-11 items-center justify-between gap-3 border-b border-white/10 bg-white/[0.02] px-4 py-2">
             <div class="flex items-center gap-3">
               <span class="flex gap-1.5" aria-hidden="true">
                 <span class="size-2.5 rounded-full bg-red-400"></span>
                 <span class="size-2.5 rounded-full bg-amber-300"></span>
                 <span class="size-2.5 rounded-full bg-emerald-400"></span>
               </span>
-              <span class="font-mono text-xs font-semibold tracking-wide text-cyan-200 uppercase">Recommended install</span>
+              <span class="font-mono text-xs font-semibold tracking-wide text-gray-400 uppercase">Recommended install</span>
             </div>
             <button
               type="button"
               data-skills-copy={quickInstallCommand}
-              class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none"
+              class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-gray-300 transition hover:bg-white/5 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
               aria-label="Copy generic install command"
               title="Copy generic install command"
             >
@@ -432,12 +432,12 @@ const skillCount = skills.length
             </button>
           </div>
           <div class="p-5 sm:p-6">
-            <p class="mb-4 text-base text-slate-300 sm:text-sm">Install the whole Capgo skills repo once, then let the agent load the skill it needs.</p>
-            <div class="rounded-lg bg-slate-950/90 p-4 ring-1 ring-cyan-400/20">
+            <p class="mb-4 text-base text-gray-400 sm:text-sm">Install the whole Capgo skills repo once, then let the agent load the skill it needs.</p>
+            <div class="rounded-lg bg-black/40 p-4 ring-1 ring-white/10">
               <CommandCode command={`$ ${quickInstallCommand}`} class="block overflow-x-auto font-mono text-base leading-7 break-words whitespace-pre-wrap sm:text-[15px]" />
             </div>
             <div class="mt-4 flex flex-wrap gap-2">
-              {genericInstallAgents.map((agent) => <span class="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-sm font-medium text-cyan-100">{agent}</span>)}
+              {genericInstallAgents.map((agent) => <span class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm font-medium text-gray-300">{agent}</span>)}
             </div>
           </div>
         </div>
@@ -445,26 +445,24 @@ const skillCount = skills.length
         <div class="mx-auto max-w-7xl">
           <div class="mb-5">
             <h3 class="text-lg font-semibold text-white">Optional tool-specific commands</h3>
-            <p class="mt-2 text-base text-slate-400 sm:text-sm">
-              Use these only when your agent tool needs its own installer. The generic command above is still the default path.
-            </p>
+            <p class="mt-2 text-base text-gray-400 sm:text-sm">Use these only when your agent tool needs its own installer. The generic command above is still the default path.</p>
           </div>
           <div class="grid gap-5 md:grid-cols-2">
             {
               installTargets.map((target) => (
-                <div class="rounded-lg border border-slate-800 bg-slate-900/70 p-5">
+                <div class="rounded-xl border border-white/10 bg-white/[0.03] p-5">
                   <div class="mb-4 flex flex-wrap items-center gap-3">
                     <h3 class="text-xl font-semibold text-white">{target.name}</h3>
-                    <span class="rounded-full border border-slate-700 bg-slate-800 px-2 py-1 text-xs font-semibold text-slate-300">{target.badge}</span>
+                    <span class="rounded-full border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-gray-300">{target.badge}</span>
                   </div>
-                  <p class="mb-4 text-slate-400">{target.description}</p>
-                  <div class="overflow-hidden rounded-lg border border-slate-800 bg-slate-950/90">
-                    <div class="flex min-h-10 items-center justify-between gap-3 border-b border-slate-800 bg-slate-900/80 px-3 py-2">
-                      <span class="font-mono text-xs font-semibold tracking-wide text-slate-400 uppercase">{target.name}</span>
+                  <p class="mb-4 text-gray-400">{target.description}</p>
+                  <div class="overflow-hidden rounded-lg border border-white/10 bg-black/30">
+                    <div class="flex min-h-10 items-center justify-between gap-3 border-b border-white/10 bg-white/[0.02] px-3 py-2">
+                      <span class="font-mono text-xs font-semibold tracking-wide text-gray-400 uppercase">{target.name}</span>
                       <button
                         type="button"
                         data-skills-copy={target.command}
-                        class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none"
+                        class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-gray-300 transition hover:bg-white/5 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         aria-label={`Copy ${target.name} install command`}
                         title={`Copy ${target.name} install command`}
                       >
@@ -499,10 +497,10 @@ const skillCount = skills.length
         <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {
             pluginGroups.map(([name, groupDescription]) => (
-              <div class="rounded-lg border border-slate-800 bg-slate-900 p-5">
-                <code class="text-sm font-semibold text-cyan-300">{name}</code>
-                <p class="mt-3 text-sm text-slate-400">{groupDescription}</p>
-                <div class="mt-4 overflow-x-auto rounded-lg bg-slate-950 p-3 ring-1 ring-slate-800/80">
+              <div class="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+                <code class="text-sm font-semibold text-blue-400">{name}</code>
+                <p class="mt-3 text-sm text-gray-400">{groupDescription}</p>
+                <div class="mt-4 overflow-x-auto rounded-lg bg-black/30 p-3 ring-1 ring-white/10">
                   <CommandCode command={`$ claude plugin install ${name}@capgo-skills`} class="block font-mono text-[13px] leading-6 break-words whitespace-pre-wrap" />
                 </div>
               </div>
@@ -513,7 +511,7 @@ const skillCount = skills.length
     </section>
 
     <!-- Usage Examples -->
-    <section class="bg-gray-800/50 py-16">
+    <section class="bg-[#1a1a1a] py-16">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-12 text-center">
           <h2 class="text-3xl font-bold text-white sm:text-4xl">Usage Examples</h2>
@@ -523,14 +521,14 @@ const skillCount = skills.length
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {
             usageExamples.map((group) => (
-              <div class="rounded-lg border border-slate-800 bg-slate-900 p-6">
+              <div class="rounded-xl border border-white/10 bg-white/[0.03] p-6">
                 <h3 class="mb-4 text-lg font-bold text-white">{group.title}</h3>
                 <ul class="space-y-3">
                   {group.examples.map((example) => (
-                    <li class="text-sm text-slate-400">
-                      <span class="text-cyan-300">"</span>
+                    <li class="text-sm text-gray-400">
+                      <span class="text-blue-400">"</span>
                       {example}
-                      <span class="text-cyan-300">"</span>
+                      <span class="text-blue-400">"</span>
                     </li>
                   ))}
                 </ul>
@@ -555,19 +553,19 @@ const skillCount = skills.length
                 {skills
                   .filter((s) => s.category === category)
                   .map((skill) => (
-                    <div class="rounded-lg border border-slate-800 bg-slate-900 p-6 transition hover:border-blue-500/50">
+                    <div class="rounded-xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-white/20">
                       <div class="mb-3 flex items-center gap-3">
-                        <span class="flex h-9 min-w-9 items-center justify-center rounded-md bg-cyan-500/10 px-2 text-xs font-semibold text-cyan-200">{skill.icon}</span>
+                        <span class="flex h-9 min-w-9 items-center justify-center rounded-md bg-white/[0.06] px-2 text-xs font-semibold text-gray-200">{skill.icon}</span>
                         <h4 class="text-lg font-bold break-words text-white">{skill.name}</h4>
                       </div>
-                      <p class="text-slate-400">{skill.description}</p>
-                      <div class="mt-5 rounded-lg border border-cyan-400/15 bg-slate-950/80 p-3 shadow-inner shadow-black/20">
+                      <p class="text-gray-400">{skill.description}</p>
+                      <div class="mt-5 rounded-lg border border-white/10 bg-black/20 p-3">
                         <div class="mb-2 flex items-center justify-between gap-3">
-                          <span class="font-mono text-xs font-semibold tracking-wide text-cyan-200 uppercase">Generic install</span>
+                          <span class="font-mono text-xs font-semibold tracking-wide text-gray-400 uppercase">Generic install</span>
                           <button
                             type="button"
                             data-skills-copy={quickInstallCommand}
-                            class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none"
+                            class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-gray-300 transition hover:bg-white/5 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
                             aria-label={`Copy generic install command for ${skill.name}`}
                             title={`Copy generic install command for ${skill.name}`}
                           >
@@ -575,7 +573,7 @@ const skillCount = skills.length
                             <span data-skills-copy-label>Copy</span>
                           </button>
                         </div>
-                        <div class="overflow-x-auto rounded-md bg-slate-950/90 px-3 py-2 ring-1 ring-slate-800/80">
+                        <div class="overflow-x-auto rounded-md bg-black/30 px-3 py-2 ring-1 ring-white/10">
                           <CommandCode command={`$ ${quickInstallCommand}`} class="block font-mono text-[13px] leading-6 break-words whitespace-pre-wrap" />
                         </div>
                       </div>
@@ -597,35 +595,35 @@ const skillCount = skills.length
         </div>
 
         <div class="grid gap-8 md:grid-cols-3">
-          <div class="rounded-lg border border-slate-800 bg-slate-900 p-8 text-center">
-            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500/20">
+          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-8 text-center">
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]">
               <span class="text-3xl">1</span>
             </div>
             <h3 class="mb-3 text-xl font-bold text-white">Ask Your Agent</h3>
-            <p class="text-slate-400">Ask about Capacitor development, debugging, plugins, or best practices</p>
+            <p class="text-gray-400">Ask about Capacitor development, debugging, plugins, or best practices</p>
           </div>
 
-          <div class="rounded-lg border border-slate-800 bg-slate-900 p-8 text-center">
-            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500/20">
+          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-8 text-center">
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]">
               <span class="text-3xl">2</span>
             </div>
             <h3 class="mb-3 text-xl font-bold text-white">Skills Activate</h3>
-            <p class="text-slate-400">Relevant skills are loaded with up-to-date guidance and code examples</p>
+            <p class="text-gray-400">Relevant skills are loaded with up-to-date guidance and code examples</p>
           </div>
 
-          <div class="rounded-lg border border-slate-800 bg-slate-900 p-8 text-center">
-            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500/20">
+          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-8 text-center">
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]">
               <span class="text-3xl">3</span>
             </div>
             <h3 class="mb-3 text-xl font-bold text-white">Get Expert Help</h3>
-            <p class="text-slate-400">Receive accurate, Capacitor-specific guidance tailored to your needs</p>
+            <p class="text-gray-400">Receive accurate, Capacitor-specific guidance tailored to your needs</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="bg-gray-800/50 py-16">
+    <section class="bg-[#1a1a1a] py-16">
       <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-white sm:text-4xl">Contribute to Capacitor Skills</h2>
         <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-400">Help improve AI-assisted Capacitor development. Add new skills, update existing ones, or report issues.</p>
@@ -637,9 +635,9 @@ const skillCount = skills.length
     </section>
 
     <!-- Footer Note -->
-    <section class="border-t border-slate-800 py-8">
+    <section class="border-t border-white/10 py-8">
       <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        <p class="text-sm text-slate-500">
+        <p class="text-sm text-gray-500">
           Built with love by the <a href={getRelativeLocaleUrl(locale, '')} class="text-blue-400 hover:underline">Capgo</a> team
         </p>
       </div>

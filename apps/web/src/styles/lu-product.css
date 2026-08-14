@@ -79,7 +79,7 @@
 }
 body:has(.lu) {
   background-color: var(--color-gray-900);
-  background-image: radial-gradient(1200px 560px at 50% -40px, rgba(59, 130, 246, 0.16) 0%, rgba(59, 130, 246, 0.04) 45%, transparent 72%);
+  background-image: radial-gradient(900px 420px at 50% -40px, rgba(59, 130, 246, 0.08) 0%, transparent 68%);
   background-repeat: no-repeat;
 }
 .lu.bg-ad {

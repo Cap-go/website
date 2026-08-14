@@ -122,9 +122,9 @@ const directoryStats = [
 
 const featuredStats = [
   { label: m.ready_to_use_plugins({}, { locale }), value: `${plugins.length}+`, colorClass: 'text-gray-200' },
-  { label: m.downloads_per_month({}, { locale }), value: formatCount(totalDownloads), colorClass: 'text-emerald-400' },
+  { label: m.downloads_per_month({}, { locale }), value: formatCount(totalDownloads), colorClass: 'text-gray-200' },
   { label: m.github_stars({}, { locale }), value: `${formatCount(totalStars)}+`, colorClass: 'text-gray-200' },
-  { label: m.oss_contributors({}, { locale }), value: `${formatCount(communityStats.contributorCount)}+`, colorClass: 'text-cyan-300' },
+  { label: m.oss_contributors({}, { locale }), value: `${formatCount(communityStats.contributorCount)}+`, colorClass: 'text-gray-200' },
   { label: m.versions_shipped({}, { locale }), value: `${formatCount(communityStats.versionCount)}+`, colorClass: 'text-gray-200' },
   { label: m.prs_issues_resolved({}, { locale }), value: `${formatCount(communityStats.resolvedItemCount)}+`, colorClass: 'text-gray-200' },
 ]
@@ -158,9 +158,9 @@ const content = {
 ---
 
 <Layout content={content}>
-  <div class="relative min-h-screen">
+  <div class="relative min-h-screen bg-[#1a1a1a]">
     <!-- Plugins Directory -->
-    <section class="px-6 pt-12 pb-8 lg:px-8 lg:pt-16 lg:pb-8">
+    <section class="bg-gray-900 px-6 pt-12 pb-8 lg:px-8 lg:pt-16 lg:pb-8">
       <div class="mx-auto max-w-7xl">
         <div class="mb-12">
           <div class="mb-6 inline-flex items-center rounded-full border border-gray-600/40 bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200">

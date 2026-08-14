@@ -53,27 +53,20 @@ const isLight = variant === 'light'
   ) : (
     <section
       id="product-video"
-      class:list={[
-        'scroll-mt-20 py-16 sm:py-20',
-        isLight ? 'border-y border-slate-200 bg-white text-slate-950' : variant === 'gray' ? 'bg-gray-900 text-white' : 'border-y border-white/10 bg-slate-900 text-white',
-      ]}
+      class:list={['scroll-mt-20 py-16 sm:py-20', isLight ? 'border-y border-slate-200 bg-white text-slate-950' : 'border-y border-white/10 bg-[#1a1a1a] text-white']}
     >
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
-          <p class:list={['font-mono text-sm font-semibold tracking-wide uppercase', isLight ? 'text-blue-700' : variant === 'gray' ? 'text-emerald-300' : 'text-cyan-300']}>
-            {eyebrow}
-          </p>
+          <p class:list={['text-sm font-semibold tracking-wide uppercase', isLight ? 'text-blue-700' : 'text-blue-400']}>{eyebrow}</p>
           <h2 class:list={['mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl', isLight ? 'text-slate-950' : 'text-white']}>{title}</h2>
-          {description && (
-            <p class:list={['mt-5 text-base leading-7 text-pretty', isLight ? 'text-slate-600' : variant === 'gray' ? 'text-gray-300' : 'text-slate-300']}>{description}</p>
-          )}
-          <p class:list={['mt-4 text-sm', isLight ? 'text-slate-500' : variant === 'gray' ? 'text-gray-400' : 'text-slate-400']}>{attribution}</p>
+          {description && <p class:list={['mt-5 text-base leading-7 text-pretty', isLight ? 'text-slate-600' : 'text-gray-400']}>{description}</p>}
+          <p class:list={['mt-4 text-sm', isLight ? 'text-slate-500' : 'text-gray-400']}>{attribution}</p>
         </div>
 
         <div
           class:list={[
             'mx-auto mt-10 max-w-5xl overflow-hidden rounded-xl border bg-black shadow-2xl lg:mx-0',
-            isLight ? 'border-slate-200 shadow-slate-200/40' : variant === 'gray' ? 'border-gray-700 shadow-black/30' : 'border-white/10 shadow-black/40',
+            isLight ? 'border-slate-200 shadow-slate-200/40' : 'border-white/10',
           ]}
         >
           <div class="aspect-video w-full">

@@ -1,0 +1,143 @@
+/* After-fold product surfaces match the homepage: #1a1a1a, quieter color, less texture. */
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .section:not(.hero) {
+  background-color: #1a1a1a;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .section:not(.hero).bg-grid::before,
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .section:not(.hero).grain::after {
+  opacity: 0;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .hero.grain::after {
+  opacity: 0.16;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .hero.bg-grid::before {
+  opacity: 0.4;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .btn-primary {
+  box-shadow: none;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .btn-primary:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .hbv-u-rule {
+  height: 2px;
+  box-shadow: none;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .h2-section {
+  font-weight: 700;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .final h2 {
+  font-weight: 700;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .final h2 .name {
+  text-shadow: none;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .beta-badge .dot {
+  box-shadow: none;
+}
+
+.lu.bg-ad .decision-box,
+.nb.bg-ad .decision-box {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.lu.bg-ad .step-num,
+.nb.bg-ad .step-num {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.lu.bg-ad .tile-hero,
+.nb.bg-ad .tile-hero {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.lu.bg-ad .bento .tile:not(.tile-hero):hover,
+.nb.bg-ad .bento .tile:not(.tile-hero):hover {
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+:is(.lu, .nb, .cli).bg-ad table.comp thead th.us {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+:is(.lu, .nb, .cli).bg-ad table.comp tbody td.us {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.lu.bg-ad .enterprise-partnership-panel {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: none;
+  border-radius: 16px;
+}
+
+.lu.bg-ad .enterprise-partnership-check {
+  background: rgba(255, 255, 255, 0.06);
+  color: #93c5fd;
+}
+
+.lu.bg-ad .observe-reading,
+.lu.bg-ad .observe-logs {
+  background: #1a1a1a;
+}
+
+.lu.bg-ad .notification-dashboard-shot,
+.lu.bg-ad .notification-mobile-shot {
+  box-shadow: none;
+}
+
+.sk.bg-ad .hbv-u-gradient {
+  background: none;
+  color: #fff;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+.sk.bg-ad .hero-meta .check {
+  background: none;
+  color: #93c5fd;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+.sk.bg-ad .hbv-u-rule {
+  background: linear-gradient(90deg, transparent 0%, #60a5fa 20%, #60a5fa 80%, transparent 100%);
+  box-shadow: none;
+}
+
+.product-video .product-video-frame {
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.product-proof .proof-card-wrap {
+  border-radius: 12px;
+}
+
+main.data-page,
+main.data-page .data-hero,
+main.data-page .data-section {
+  background: #1a1a1a;
+}
+
+main.data-page .data-hero {
+  background: #1a1a1a;
+}
