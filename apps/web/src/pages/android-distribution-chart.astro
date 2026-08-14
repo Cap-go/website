@@ -1,0 +1,311 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import DistributionRefreshPanel from '@/components/DistributionRefreshPanel.astro'
+import DistributionTargetChart from '@/components/DistributionTargetChart.astro'
+import ToolFaq from '@/components/tools/ToolFaq.astro'
+import { formatPercent } from '@/lib/formatPercent'
+import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+import androidDistribution from '@/data/android-distribution.json'
+
+interface DistributionRow {
+  version: string
+  api: number | null
+  distribution: number
+}
+
+interface AndroidData {
+  updatedAt: string
+  source: string
+  sourceUrl: string
+  fetchedAt: string
+  apiDistribution: DistributionRow[]
+  cumulativeDistribution: DistributionRow[]
+}
+
+const data = androidDistribution as AndroidData
+const locale = Astro.locals.locale
+const publicConfig = Astro.locals.runtimeConfig.public
+const toAbsoluteLocaleUrl = (path: string) => new URL(getRelativeLocaleUrl(locale, path), Astro.url.origin).toString()
+
+const updatedFormatted = new Date(data.updatedAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+
+const reachRows = [...data.cumulativeDistribution]
+  .filter((row) => typeof row.distribution === 'number')
+  .map((row) => ({
+    id: String(row.api ?? row.version),
+    label: row.version,
+    detail: row.api === null ? undefined : `API ${row.api}+`,
+    reach: row.distribution,
+  }))
+  .sort((a, b) => b.reach - a.reach)
+
+const newestMeeting = (target: number) => [...reachRows].filter((row) => row.reach >= target).sort((a, b) => a.reach - b.reach)[0]
+
+const cover95 = newestMeeting(95)
+const cover99 = newestMeeting(99)
+const cover999 = newestMeeting(99.9)
+const topShare = [...data.apiDistribution].sort((a, b) => b.distribution - a.distribution)[0]
+const shareRows = [...data.apiDistribution].sort((a, b) => b.distribution - a.distribution)
+
+const title = 'Android Version Distribution Chart | Min SDK Market Share'
+const description = cover95
+  ? `Live Android version distribution chart. As of ${updatedFormatted}, ${cover95.label} (API ${cover95.id}+) covers about ${formatPercent(cover95.reach)} of devices. Pick a min SDK or coverage target for Capacitor, React Native, Flutter, and native Android.`
+  : `Live Android version distribution chart. Pick a minimum SDK or coverage target and see what share of devices your app can reach.`
+
+const faqItems = [
+  {
+    question: 'What is an Android version distribution chart?',
+    answer:
+      'It shows how Android versions are split across active devices. Cumulative reach answers the practical question: if this API level is your minimum SDK, what percentage of the market can install your app.',
+  },
+  {
+    question: 'How do I choose a minSdkVersion from this chart?',
+    answer: cover95
+      ? `Set a coverage goal first (many teams use 95%). Then pick the newest Android version that still meets that goal. On this dataset, ${cover95.label} reaches about ${formatPercent(cover95.reach)}. Raise the target toward 99% if you need broader support, or lower it if you can drop older APIs.`
+      : 'Set a coverage goal first, then pick the newest Android version that still meets that goal. Use the interactive planner above to test targets like 95%, 99%, or 99.9%.',
+  },
+  {
+    question: 'What is the difference between market share and cumulative reach?',
+    answer:
+      'Market share is the percent of devices on one exact Android version. Cumulative reach is the percent of devices on that version or newer. For min SDK decisions, use cumulative reach.',
+  },
+  {
+    question: 'How often is this Android distribution data updated?',
+    answer: `Capgo refreshes the chart from ${data.source} daily. If the published figures change, the JSON in the repo is updated automatically. This page currently reflects data updated ${updatedFormatted}.`,
+  },
+  {
+    question: 'Does this help Capacitor and Ionic apps?',
+    answer:
+      'Yes. Capacitor apps still compile to native Android projects, so minSdkVersion affects which devices can install your release. Use this chart before you raise the floor for a plugin, Live Update baseline, or Play Store build.',
+  },
+]
+
+const softwareApplication = createSoftwareApplicationLdJson(publicConfig, {
+  name: 'Capgo Android Version Distribution Chart',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Web',
+  offers: {
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+})
+
+const faqLdJson = createFAQPageLdJson(publicConfig, {
+  url: Astro.url.href,
+  questions: faqItems,
+})
+
+const webPage = createWebPageLdJson(publicConfig, {
+  name: title,
+  description,
+  url: Astro.url.href,
+})
+
+const itemList = createItemListLdJson(publicConfig, {
+  url: Astro.url.href,
+  name: 'Android cumulative version reach',
+  description: 'Cumulative share of devices that can run an app for each minimum Android API level.',
+  items: reachRows.slice(0, 12).map((row) => ({
+    name: `${row.label} (${formatPercent(row.reach)} cumulative)`,
+    description: row.detail,
+    url: Astro.url.href,
+  })),
+})
+
+const ldJSON = createLdJsonGraph(publicConfig, softwareApplication, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: 'Home', url: toAbsoluteLocaleUrl('') },
+    { name: 'Android distribution chart', url: Astro.url.href },
+  ],
+  additionalEntities: [faqLdJson, webPage, itemList],
+})
+
+const content = {
+  title,
+  description,
+  keywords:
+    'android version distribution, android version market share, android api distribution, android cumulative distribution, minSdkVersion, min sdk android, android device coverage, capacitor android min sdk, ionic android support',
+  ldJSON,
+  articleModifiedTime: data.updatedAt,
+}
+
+const relatedLinks = [
+  { name: 'iOS version distribution chart', href: getRelativeLocaleUrl(locale, 'ios-distribution-chart') },
+  { name: 'Capgo native build', href: getRelativeLocaleUrl(locale, 'native-build') },
+  { name: 'Android keystore generator', href: getRelativeLocaleUrl(locale, 'tools/android-keystore-generator') },
+  { name: 'Live updates for Capacitor', href: getRelativeLocaleUrl(locale, 'live-update') },
+]
+---
+
+<Layout content={content}>
+  <section class="relative overflow-hidden border-b border-white/10 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute top-10 -left-16 size-72 rounded-full bg-green-500/10 blur-3xl"></div>
+      <div class="absolute top-0 right-0 size-80 rounded-full bg-blue-500/10 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <p class="font-mono text-sm font-semibold tracking-wide text-green-300 uppercase">Android version distribution</p>
+      <h1 class="mt-4 max-w-[32ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">Android version distribution chart for min SDK decisions</h1>
+      <p class="mt-6 max-w-[56ch] text-lg text-pretty text-slate-300">
+        Use this Android API market-share chart to choose a minimum SDK by the users you still need to cover. Cumulative reach answers: if this Android version is your floor, what
+        percent of devices can install your Capacitor, React Native, Flutter, or native app.
+      </p>
+
+      <div class="mt-8 max-w-3xl rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+        <p class="text-base text-pretty text-slate-200 sm:text-sm">
+          As of {updatedFormatted}
+          {
+            cover95 && (
+              <>
+                , targeting <strong class="font-semibold text-white">{cover95.label}</strong> covers about{' '}
+                <strong class="font-semibold text-white tabular-nums">{formatPercent(cover95.reach)}</strong> of devices
+              </>
+            )
+          }
+          {
+            cover99 && (
+              <>
+                . A {formatPercent(99)} goal lands near <strong class="font-semibold text-white">{cover99.label}</strong>
+              </>
+            )
+          }
+          {
+            topShare && (
+              <>
+                . The largest single version share today is <strong class="font-semibold text-white">{topShare.version}</strong> at{' '}
+                <strong class="font-semibold text-white tabular-nums">{formatPercent(topShare.distribution)}</strong>.
+              </>
+            )
+          }
+        </p>
+      </div>
+
+      <dl class="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-base text-slate-400 sm:text-sm">
+        <div>
+          <dt class="sr-only">Last updated</dt>
+          <dd>Updated {updatedFormatted}</dd>
+        </div>
+        <div class="min-w-0">
+          <dt class="sr-only">Source</dt>
+          <dd>
+            Source:
+            <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer" class="text-green-300 underline underline-offset-4 hover:text-green-200">
+              {data.source}
+            </a>
+          </dd>
+        </div>
+        {
+          cover999 && (
+            <div>
+              <dt class="sr-only">99.9 percent coverage target</dt>
+              <dd>
+                {formatPercent(99.9)} coverage: {cover999.label}
+              </dd>
+            </div>
+          )
+        }
+      </dl>
+
+      <p class="mt-8 text-base text-slate-300 sm:text-sm">
+        Compare with iOS deployment targets on the{' '}
+        <a href={getRelativeLocaleUrl(locale, 'ios-distribution-chart')} class="font-semibold text-white underline underline-offset-4 hover:text-green-200">
+          iOS version distribution chart
+        </a>
+        .
+      </p>
+    </div>
+  </section>
+
+  <DistributionTargetChart platform="android" rows={reachRows} versionLabel="Android version / API" targetNoun="Android version" />
+
+  <section class="border-b border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <p class="font-mono text-sm font-semibold tracking-wide text-green-300 uppercase">How to use the chart</p>
+      <h2 class="mt-3 max-w-[40ch] text-3xl font-semibold tracking-tight text-balance text-white">How to pick an Android min SDK from version distribution data</h2>
+      <div class="mt-8 grid gap-8 lg:grid-cols-3">
+        <div>
+          <h3 class="text-xl font-semibold tracking-tight text-white">1. Set a coverage goal</h3>
+          <p class="mt-3 text-base text-pretty text-slate-400 sm:text-sm">
+            Decide what percent of the Android install base you must keep. Common goals are 95%, 99%, or 99.9% when you still support older phones.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold tracking-tight text-white">2. Read cumulative reach</h3>
+          <p class="mt-3 text-base text-pretty text-slate-400 sm:text-sm">
+            Cumulative distribution is the right metric for minSdkVersion. It measures devices on that API level or newer, not only devices stuck on one release.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold tracking-tight text-white">3. Choose the newest safe floor</h3>
+          <p class="mt-3 text-base text-pretty text-slate-400 sm:text-sm">
+            Prefer the newest Android version that still meets your goal. That maximizes modern APIs and Play policy headroom while protecting the users you care about.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-white/10 bg-slate-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <p class="font-mono text-sm font-semibold tracking-wide text-green-300 uppercase">Market share</p>
+      <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Android version market share by API level</h2>
+      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">
+        Individual Android version share, sorted highest to lowest. Use this when you need the current mix of OS versions, not the cumulative install floor.
+      </p>
+
+      <div class="mt-10 divide-y divide-white/10 border-y border-white/10" role="list">
+        {
+          shareRows.map((row) => (
+            <div class="grid items-center gap-4 py-4 sm:grid-cols-[220px_1fr_5rem]" role="listitem">
+              <div class="min-w-0">
+                <p class="font-medium text-white">{row.version}</p>
+                <p class="mt-1 text-base text-slate-400 sm:text-sm">API {row.api ?? '—'}</p>
+              </div>
+              <div class="h-3 w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+                <div class="h-full w-(--bar-width) rounded-full bg-linear-to-r from-green-400 to-blue-500" style={`--bar-width: ${Math.min(100, row.distribution)}%`} />
+              </div>
+              <p class="text-right font-mono text-base font-semibold text-white tabular-nums sm:text-sm">{formatPercent(row.distribution)}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <ToolFaq
+    title="Android distribution FAQ"
+    intro="Answers for teams setting minSdkVersion, reviewing Play Store support, or planning Capacitor Android upgrades."
+    items={faqItems}
+  />
+
+  <section class="border-b border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">Related developer resources</h2>
+      <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">Keep going with iOS coverage data, signing tools, and Capgo release workflows.</p>
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2" role="list">
+        {
+          relatedLinks.map((link) => (
+            <li>
+              <a href={link.href} class="flex rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base font-semibold text-white hover:border-green-300/40 sm:text-sm">
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <DistributionRefreshPanel accent="green" companionHref="ios-distribution-chart" companionLabel="See iOS distribution chart" />
+</Layout>

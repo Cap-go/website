@@ -9,6 +9,7 @@ import type { Database } from '@/services/supabase.types'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import { numberWithSpaces } from '@/services/misc'
 import { pluginCountLabel } from '@/config/plugins'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig
@@ -360,7 +361,7 @@ const pillars = [
     eyebrow: m.enterprise_audit_trail_label({}, { locale }),
     title: m.solutions_enterprise_sol3_title({}, { locale }),
     description: m.solutions_enterprise_sol3_desc({}, { locale }),
-    points: [m.solutions_enterprise_sol3_point1({}, { locale }), m.enterprise_soc2_certified_infrastructure({}, { locale }), m.enterprise_iso27001_in_progress({}, { locale })],
+    points: [m.solutions_enterprise_sol3_point1({}, { locale }), m.enterprise_soc2_certified_infrastructure({}, { locale }), m.enterprise_iso27001_certified({}, { locale })],
   },
 ]
 
@@ -405,7 +406,7 @@ const includedGroups = [
     title: m.enterprise_compliance_procurement_group({}, { locale }),
     items: [
       m.enterprise_soc2_certified({}, { locale }),
-      m.enterprise_iso27001_ongoing({}, { locale }),
+      m.enterprise_iso27001_certified({}, { locale }),
       m.enterprise_signed_ndas_dpas({}, { locale }),
       m.enterprise_custom_payment_process({}, { locale }),
       m.enterprise_sap_procurement_workflows({}, { locale }),
@@ -507,6 +508,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </h1>
         <p class="lead hero-lead">{m.enterprise_hero_desc({}, { locale })}</p>
         <div class="hero-ctas">
+          <HumanSupport class="mb-3" size="sm" align="start" />
           <div class="hero-cta-buttons">
             <a
               class="btn btn-lg btn-primary"
@@ -565,6 +567,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
                 ))
               }
             </ul>
+            <HumanSupport class="mb-4" size="sm" />
             <a
               class="enterprise-partnership-cta"
               href="https://book.capgo.app/enterprise-inquiry/"
@@ -741,6 +744,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
                 ))
               }
             </ul>
+            <HumanSupport class="mb-4" size="sm" />
             <a
               class="enterprise-partnership-cta"
               href="https://book.capgo.app/enterprise-inquiry/"

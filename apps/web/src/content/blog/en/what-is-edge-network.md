@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-16T08:21:18.437Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-07-30T23:40:43.000Z
 head_image: /blog-images/what-is-edge-network.webp
 head_image_alt: '''What Is Edge Network: A 2026 Guide to Faster Apps'' Capgo blog illustration'
 keywords: 'what is edge network, edge network, edge computing, cdn vs edge, low latency'
@@ -120,7 +120,7 @@ That distinction matters for app teams:
 - If you want request handling or decision-making close to users, you're entering edge computing territory.
 - If you want the whole path to be geographically closer and lower-latency, you're talking about edge networking.
 
-If you work on release behavior, startup paths, or request timing, this collection of articles on [network performance for app teams](https://capgo.app/blog/category/network-performance/) is a useful companion topic.
+If you work on release behavior, startup paths, or request timing, this collection of articles on [network performance for app teams](https://capgo.app/blog/category/technology/) is a useful companion topic.
 
 <a id="edge-network-vs-cdn-vs-edge-computing-at-a-glance"></a>
 ### Edge Network vs. CDN vs. Edge Computing at a Glance

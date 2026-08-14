@@ -56,6 +56,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <link rel="stylesheet" href={globalStylesHref} />
     <link rel="stylesheet" href={productSurfaceHref} />
     <SEO {...content} />
+    <slot name="head" />
     {enableThirdPartyScripts && <MetaPixel />}
     {enableThirdPartyScripts && <PostHog />}
     {enableThirdPartyScripts && <Affonso />}

@@ -5,6 +5,7 @@ import { solutionStoreApps } from '@/config/solutionStoreApps'
 import { renameCat, shortNumber } from '@/services/misc'
 import { getRelativeLocaleUrl } from '@/services/links'
 import TeamAvatars from '@/components/TeamAvatars.astro'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 interface Props {
   solution: SolutionAppExampleKey
@@ -39,7 +40,9 @@ const showExampleCtas = solution === 'enterprise'
             <h2 class="mt-4 max-w-2xl text-3xl leading-tight font-semibold tracking-tight text-balance text-white sm:text-4xl">{copy(example.headlineKey)}</h2>
             <p class="mt-4 max-w-3xl text-base leading-7 text-pretty text-slate-300 sm:text-lg">{copy(example.useCaseKey)}</p>
             {showExampleCtas && (
-              <div class="solution-app-examples-actions mt-6 flex flex-col gap-3 sm:flex-row">
+              <div class="solution-app-examples-actions mt-6 flex flex-col gap-3">
+                <HumanSupport size="sm" align="start" />
+                <div class="flex flex-col gap-3 sm:flex-row">
                 <a
                   href={registerUrl}
                   class="solution-app-examples-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-950/30 transition hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
@@ -63,6 +66,7 @@ const showExampleCtas = solution === 'enterprise'
                   <TeamAvatars />
                   <span>{copy('solutions_talk_to_team')}</span>
                 </a>
+                </div>
               </div>
             )}
           </div>
@@ -165,14 +169,15 @@ const showExampleCtas = solution === 'enterprise'
               </div>
             </div>
 
-            <div class="mt-6">
+            <div class="mt-6 flex flex-col gap-3">
+              <HumanSupport size="sm" align="start" />
               <a
                 href={getRelativeLocaleUrl(locale, 'register')}
                 class="solution-app-examples-cta-link inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-950/30 transition hover:bg-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
               >
                 {copy('solution_app_examples_cta_button')}
               </a>
-              <p class="mt-4 text-xs leading-5 text-slate-400">{copy('solution_app_examples_disclaimer')}</p>
+              <p class="mt-1 text-xs leading-5 text-slate-400">{copy('solution_app_examples_disclaimer')}</p>
             </div>
           </aside>
         </div>

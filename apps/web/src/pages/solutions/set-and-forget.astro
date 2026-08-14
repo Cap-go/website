@@ -4,6 +4,7 @@ import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -118,7 +119,8 @@ const boundaries = [
             <p class="mt-6 max-w-[64ch] text-lg text-pretty text-slate-300 sm:text-xl">
               {m.solutions_set_and_forget_hero_subtitle({}, { locale })}
             </p>
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <HumanSupport class="mt-6" size="sm" />
+            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
               <a
                 href="https://book.capgo.app/demo/"
                 target="_blank"

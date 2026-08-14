@@ -148,6 +148,23 @@ This configuration does the following:
 
 Make sure to run semantic-release before building your app so that the updated version from `package.json` is included in your build through the capacitor.config.
 
+### Auto-bump when the local version is already on Capgo
+
+Bundle names must be unique (deleted versions still occupy their name). If CI keeps uploading the same `package.json` version, the upload fails. Prefer bumping `package.json` (for example with semantic-release). When that is not practical, let the CLI pick the next free semver from the channel's linked bundle, or else the latest remote app version:
+
+```bash
+npx @capgo/cli@latest bundle upload --channel=production --auto-bump
+npx @capgo/cli@latest bundle upload --auto-bump major
+npx @capgo/cli@latest bundle upload --auto-bump minor   # default when the flag has no value
+npx @capgo/cli@latest bundle upload --auto-bump patch   # alias: fix
+npx @capgo/cli@latest bundle upload --auto-bump metadata
+npx @capgo/cli@latest bundle upload --channel=production --auto-bump ai
+```
+
+`--auto-bump ai` uses Capgo Cloudflare Workers AI to compare local bundle files against the previous Capgo/channel delta manifest, pick `major` | `minor` | `patch` | `metadata`, and print a short reason. With no previous Capgo version, AI is skipped and the bump is **patch**.
+
+Do not combine `--auto-bump` with `--bundle` / `-b`. See the [`bundle upload` reference](/docs/cli/reference/bundle/#bundle-upload) for the full option list.
+
 ## Troubleshooting
 
 If you encounter issues with your Capgo CI/CD integration, here are a few things to check:
@@ -168,7 +185,7 @@ Integrating Capgo into your CI/CD pipeline with proper version management can gr
 
 The recommended approach of setting the version in your `capacitor.config.ts` file and using semantic-release to update `package.json` provides a robust and reliable deployment process that allows you to focus on building great features rather than worrying about manual release steps.
 
-For more details on the Capgo CLI commands and options, check out the [CLI reference](/docs/cli/overview/). And for a deeper dive into semantic-release configuration, see the [semantic-release docs](https://github.com/semantic-release/semantic-release).
+For more details on the Capgo CLI commands and options, check out the [CLI reference](/docs/cli/). And for a deeper dive into semantic-release configuration, see the [semantic-release docs](https://github.com/semantic-release/semantic-release).
 
 Happy deploying!
 

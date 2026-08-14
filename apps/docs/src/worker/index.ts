@@ -17,10 +17,11 @@ const redirectRows: RedirectRow[] = [
   ['/docs/getting-started/', '/docs/getting-started/quickstart/', 301],
   ['/docs/plugins/updater/cloud-mode/getting-started/', '/docs/getting-started/quickstart/', 301],
   ['/docs/plugins/updater/commonProblems/', '/docs/plugins/updater/commonproblems/', 301],
-  ['/docs/cli/', '/docs/cli/overview/', 302],
+  ['/docs/cli/overview/', '/docs/cli/', 301],
+  ['/docs/cli/overview', '/docs/cli/', 301],
   ['/docs/cli/reference/', '/docs/cli/commands/', 302],
   ['/docs/cli/commands/build/', '/docs/cli/reference/build/', 302],
-  ['/docs/tooling/cli/', '/docs/cli/overview/', 302],
+  ['/docs/tooling/cli/', '/docs/cli/', 301],
   ['/docs/plugin/cloud-mode/getting-started/', '/docs/getting-started/quickstart/', 302],
   ['/docs/plugin/api', '/docs/plugins/updater/api/', 301],
   ['/docs/plugin/api/', '/docs/plugins/updater/api/', 301],
@@ -61,6 +62,22 @@ const redirectRows: RedirectRow[] = [
   ['/docs/plugins/electron-updater/migration/', '/docs/plugins/electron-updater/getting-started/', 302],
   ['/docs/plugins/updater/auto-update', '/docs/plugins/updater/notify-app-ready/', 302],
   ['/docs/plugins/capacitor-camera-preview/', '/docs/plugins/camera-preview/', 302],
+  ['/docs/plugins/ricoh360-camera-plugin', '/docs/plugins/ricoh360-camera/', 301],
+  ['/docs/plugins/capacitor-supabase', '/docs/plugins/supabase/', 301],
+  ['/docs/plugins/capacitor-supabase/', '/docs/plugins/supabase/', 301],
+  ['/docs/plugins/capacitor-pretty-toast', '/docs/plugins/pretty-toast/', 301],
+  ['/docs/plugins/capacitor-pretty-toast/', '/docs/plugins/pretty-toast/', 301],
+  ['/docs/plugins/capacitor-sheets', '/docs/plugins/sheets/', 301],
+  ['/docs/plugins/capacitor-sheets/', '/docs/plugins/sheets/', 301],
+  ['/docs/plugins/ricoh360-camera-plugin/', '/docs/plugins/ricoh360-camera/', 301],
+  ['/docs/plugins/ricoh360-camera-plugin/getting-started/', '/docs/plugins/ricoh360-camera/getting-started/', 301],
+  ['/docs/plugins/capacitor-ricoh360', '/docs/plugins/ricoh360-camera/', 301],
+  ['/docs/plugins/capacitor-ricoh360/', '/docs/plugins/ricoh360-camera/', 301],
+  ['/docs/plugins/capacitor-ricoh360-camera-plugin', '/docs/plugins/ricoh360-camera/', 301],
+  ['/docs/plugins/capacitor-ricoh360-camera-plugin/', '/docs/plugins/ricoh360-camera/', 301],
+  ['/docs/plugins/capacitor-ricoh360-camera-plugin/getting-started/', '/docs/plugins/ricoh360-camera/getting-started/', 301],
+  ['/docs/Plugins/ricoh360-camera-plugin/', '/docs/plugins/ricoh360-camera/', 301],
+  ['/docs/Plugins/capacitor-ricoh360-camera-plugin/', '/docs/plugins/ricoh360-camera/', 301],
   ['/docs/plugins/capacitor-home-indicator/', '/docs/plugins/home-indicator/', 302],
   ['/docs/plugins/capacitor-ivs-player/', '/docs/plugins/ivs-player/', 302],
   ['/docs/plugins/capacitor-native-audio/', '/docs/plugins/native-audio/', 302],
@@ -175,7 +192,8 @@ const redirectRows: RedirectRow[] = [
 const redirectMap = new Map<string, RedirectDefinition>(redirectRows.map(([source, destination, status]) => [source, { destination, status }]))
 
 function redirectResponse(request: Request, redirect: RedirectDefinition): Response {
-  return Response.redirect(new URL(redirect.destination, request.url).toString(), redirect.status)
+  const url = new URL(request.url)
+  return Response.redirect(new URL(`${redirect.destination}${url.search}`, request.url).toString(), redirect.status)
 }
 
 function isStaleCapgoLogoAsset(pathname: string): boolean {
@@ -201,6 +219,11 @@ function trackAICrawler(request: Request, response: Response, ctx?: BackgroundCo
   return response
 }
 
+function shouldServeBrandedNotFound(pathname: string): boolean {
+  if (/\.[a-z0-9]{2,8}$/i.test(pathname) && !pathname.endsWith('.html')) return false
+  return true
+}
+
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const url = new URL(request.url)
@@ -215,6 +238,20 @@ export default {
     }
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
+    if (response.status === 404 && shouldServeBrandedNotFound(pathname)) {
+      const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
+      if (notFound.ok || notFound.status === 404) {
+        return trackAICrawler(
+          request,
+          new Response(request.method === 'HEAD' ? null : notFound.body, {
+            status: 404,
+            statusText: 'Not Found',
+            headers: notFound.headers,
+          }),
+          ctx,
+        )
+      }
+    }
     return trackAICrawler(request, response, ctx)
   },
 }

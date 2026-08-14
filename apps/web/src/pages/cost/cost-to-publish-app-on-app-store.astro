@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -194,6 +195,7 @@ const resources = [
           <p class="text-lg text-slate-300 max-w-2xl">
             Get a clean breakdown of developer fees, revenue share, and launch expenses for Apple and Google. Plan your release budget and avoid surprises before you submit.
           </p>
+          <HumanSupport class="mb-2" size="sm" align="start" />
           <div class="flex flex-wrap items-center gap-4">
             <a
               href={getRelativeLocaleUrl(locale, '/register/')}
@@ -487,7 +489,8 @@ const resources = [
             <p class="mt-4 text-base text-slate-200">
               Every store update adds review time. Capgo helps you deliver web updates instantly while keeping native releases for the moments that truly need them.
             </p>
-            <div class="flex flex-wrap items-center gap-4 mt-6">
+            <HumanSupport class="mt-6 mb-2" size="sm" align="start" />
+            <div class="flex flex-wrap items-center gap-4 mt-4">
               <a
                 href={getRelativeLocaleUrl(locale, '/register/')}
                 class="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-950 bg-white rounded-xl transition hover:-translate-y-0.5 hover:bg-slate-100"
@@ -550,7 +553,8 @@ const resources = [
         <p class="mt-4 text-base text-slate-300">
           Start with Capgo to move faster after approval and keep your release costs predictable.
         </p>
-        <div class="flex flex-col items-center justify-center gap-4 mt-6 sm:flex-row">
+        <HumanSupport class="mt-6" size="sm" />
+        <div class="flex flex-col items-center justify-center gap-4 mt-4 sm:flex-row">
           <a
             href={getRelativeLocaleUrl(locale, '/register/')}
             class="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-950 bg-white rounded-xl transition hover:-translate-y-0.5 hover:bg-slate-100"

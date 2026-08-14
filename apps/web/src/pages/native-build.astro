@@ -10,6 +10,7 @@ import m, { type MessageValues } from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from '@/services/links'
+import HumanSupport from '@/components/HumanSupport.astro'
 
 type Plan = Database['public']['Tables']['plans']['Row']
 
@@ -119,6 +120,7 @@ const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-native-build.png`,
+  keywords: 'Capgo Builder, EAS Build analog, EAS Submit analog, Capacitor cloud build, Capgo',
   ldJSON,
 }
 
@@ -133,6 +135,7 @@ const nativeBuildFooterBlogCopy = {
 
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
+const expoUrl = getRelativeLocaleUrl(locale, 'expo')
 
 const heroMeta = [copy('native_build_v2_meta_ios'), copy('native_build_v2_meta_android'), copy('native_build_v2_meta_nosdk'), copy('native_build_v2_meta_speed')]
 
@@ -209,6 +212,8 @@ const comparisonRows = [
   },
 ]
 
+const docsShareUrl = getRelativeLocaleUrl(locale, 'docs/builder/github-actions/')
+
 const faqs = [
   { q: copy('native_build_v2_faq_q1'), a: copy('native_build_v2_faq_a1') },
   { q: copy('native_build_v2_faq_q2'), a: copy('native_build_v2_faq_a2') },
@@ -216,12 +221,14 @@ const faqs = [
   { q: copy('native_build_v2_faq_q4'), a: copy('native_build_v2_faq_a4') },
   { q: copy('native_build_v2_faq_q5'), a: copy('native_build_v2_faq_a5') },
   { q: copy('native_build_v2_faq_q6'), a: copy('native_build_v2_faq_a6') },
+  { q: copy('native_build_v2_faq_q7'), a: copy('native_build_v2_faq_a7') },
   {
-    q: copy('native_build_v2_faq_q7'),
-    a: copy('native_build_v2_faq_a7'),
+    q: copy('native_build_v2_faq_q8'),
+    a: copy('native_build_v2_faq_a8'),
     href: getRelativeLocaleUrl(locale, 'docs/builder/getting-started/'),
-    linkLabel: copy('native_build_v2_faq_a7_link'),
+    linkLabel: copy('native_build_v2_faq_a8_link'),
   },
+  { q: copy('native_build_v2_faq_q9'), a: copy('native_build_v2_faq_a9') },
 ]
 
 function annualMonthlyPrice(plan: Plan) {
@@ -283,6 +290,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         </h1>
         <p class="lead hero-lead">{copy('native_build_v2_hero_lead')}</p>
         <div class="hero-ctas">
+          <HumanSupport class="mb-3" size="sm" align="start" />
           <div class="hero-cta-buttons">
             <a class="btn btn-lg btn-primary" href={registerUrl}>{copy('native_build_v2_hero_cta')}</a>
             <a class="btn btn-lg btn-ghost" href="#how">{copy('native_build_v2_hero_secondary')} ↓</a>
@@ -429,8 +437,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_asc_title')}</span></h3>
             <p class="sub">{copy('native_build_v2_tile_asc_sub')}</p>
             <div class="more">
-              Default <code class="mono">app_store</code> distribution uploads straight to App Store Connect / TestFlight via Fastlane; Android bundles go to the Play Console. Pick
-              <code class="mono">ad_hoc</code> for internal-only iOS builds. Skips ASC validation.
+              Default <code class="mono">app_store</code> distribution uploads to App Store Connect / TestFlight via Fastlane; Android goes to Play. Prefer a Capgo QR instead? Use
+              <code class="mono">ad_hoc</code> on iOS or <code class="mono">--no-playstore-upload</code> on Android with <code class="mono">--output-upload</code>. Stores stay
+              optional.
             </div>
           </div>
 
@@ -443,8 +452,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_logs_title')}</span></h3>
             <p class="sub">{copy('native_build_v2_tile_logs_sub')}</p>
             <div class="more">
-              Logs stream over WebSocket with heartbeat + ack. A <code class="mono">qr_download_link</code> message renders a scannable QR + URL for APK / IPA downloads right in your
-              terminal.
+              Logs stream over WebSocket with heartbeat + ack. A <code class="mono">qr_download_link</code> message renders a scannable QR + URL for APK / IPA downloads — share it from
+              CI to customers without TestFlight or Play.
             </div>
           </div>
 
@@ -492,6 +501,123 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         </div>
 
         <p class="bento-hint">{copy('native_build_v2_bento_hint')}</p>
+      </div>
+    </section>
+
+    <!-- ============================================ QR SHARE ============================================ -->
+    <section class="section bg-grid grain" id="share">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--green">{copy('native_build_v2_share_eyebrow')}</div>
+          <h2 class="h2-section">
+            {copy('native_build_v2_share_title')}
+            <span class="accent-green">{copy('native_build_v2_share_title_accent')}</span>
+          </h2>
+          <p class="lead">{copy('native_build_v2_share_lead')}</p>
+        </div>
+
+        <div class="share-stage" aria-hidden="true">
+          <div class="share-flow">
+            <div class="share-node share-node--ci">
+              <div class="share-node-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                  ><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><rect x="4" y="7" width="16" height="14" rx="2"></rect><path d="M9 12h6M9 16h4"></path></svg
+                >
+              </div>
+              <div class="share-node-label">{copy('native_build_v2_share_flow_ci')}</div>
+              <div class="share-node-sub">{copy('native_build_v2_share_flow_ci_sub')}</div>
+            </div>
+            <div class="share-connector"><span></span></div>
+            <div class="share-node share-node--build">
+              <div class="share-node-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                  ><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"></path><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"></path></svg
+                >
+              </div>
+              <div class="share-node-label">{copy('native_build_v2_share_flow_build')}</div>
+              <div class="share-node-sub">{copy('native_build_v2_share_flow_build_sub')}</div>
+            </div>
+            <div class="share-connector"><span></span></div>
+            <div class="share-node share-node--qr">
+              <div class="share-qr">
+                <div class="share-qr-grid">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <div class="share-qr-scan"></div>
+              </div>
+              <div class="share-node-label">{copy('native_build_v2_share_flow_qr')}</div>
+              <div class="share-node-sub">{copy('native_build_v2_share_flow_qr_sub')}</div>
+              <div class="share-ttl">{copy('native_build_v2_share_ttl')}</div>
+            </div>
+            <div class="share-connector"><span></span></div>
+            <div class="share-node share-node--user">
+              <div class="share-phone">
+                <div class="share-phone-notch"></div>
+                <div class="share-phone-screen">
+                  <span class="share-phone-check">✓</span>
+                  <span class="share-phone-text">{copy('native_build_v2_share_scan_label')}</span>
+                </div>
+              </div>
+              <div class="share-node-label">{copy('native_build_v2_share_flow_user')}</div>
+              <div class="share-node-sub">{copy('native_build_v2_share_flow_user_sub')}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="share-vs">
+          <div class="share-vs-col share-vs-col--old">
+            <div class="share-vs-label">{copy('native_build_v2_share_vs_old_label')}</div>
+            <ul>
+              <li>{copy('native_build_v2_share_vs_old_1')}</li>
+              <li>{copy('native_build_v2_share_vs_old_2')}</li>
+              <li>{copy('native_build_v2_share_vs_old_3')}</li>
+            </ul>
+          </div>
+          <div class="share-vs-col share-vs-col--new">
+            <div class="share-vs-label">{copy('native_build_v2_share_vs_new_label')}</div>
+            <ul>
+              <li>{copy('native_build_v2_share_vs_new_1')}</li>
+              <li>{copy('native_build_v2_share_vs_new_2')}</li>
+              <li>{copy('native_build_v2_share_vs_new_3')}</li>
+            </ul>
+          </div>
+        </div>
+
+        <ol class="share-steps">
+          <li>
+            <span class="share-step-num">1</span>
+            <div>
+              <h3>{copy('native_build_v2_share_step1_t')}</h3>
+              <p>{copy('native_build_v2_share_step1_d')}</p>
+            </div>
+          </li>
+          <li>
+            <span class="share-step-num">2</span>
+            <div>
+              <h3>{copy('native_build_v2_share_step2_t')}</h3>
+              <p>{copy('native_build_v2_share_step2_d')}</p>
+            </div>
+          </li>
+          <li>
+            <span class="share-step-num">3</span>
+            <div>
+              <h3>{copy('native_build_v2_share_step3_t')}</h3>
+              <p>{copy('native_build_v2_share_step3_d')}</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="share-foot">
+          <span class="share-badge">{copy('native_build_v2_share_badge')}</span>
+          <p>{copy('native_build_v2_share_note')}</p>
+          <a class="share-docs" href={docsShareUrl}>{copy('native_build_v2_share_docs')} →</a>
+        </div>
       </div>
     </section>
 
@@ -763,6 +889,17 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       </div>
     </section>
 
+    <section class="section" id="eas-build">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow">{copy('native_build_v2_eas_eyebrow')}</div>
+          <h2 class="h2-section">{copy('native_build_v2_eas_title')}</h2>
+          <p class="lead">{copy('native_build_v2_eas_lead')}</p>
+        </div>
+        <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('native_build_v2_eas_cta')}</a>
+      </div>
+    </section>
+
     <!-- ============================================ AI DEBUG ============================================ -->
     <section class="section" id="ai-debug">
       <div class="shell">
@@ -949,6 +1086,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           {copy('native_build_v2_cta_title')}
         </h2>
         <p class="tagline">{copy('native_build_v2_cta_tagline')}</p>
+        <HumanSupport class="mb-4" size="sm" />
         <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{copy('native_build_builder_start_trial')} →</a>
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">✓</span> {copy('native_build_v2_cta_meta1')}</span>
@@ -1743,6 +1881,436 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .bento .tile:hover .ttl-accent {
       color: var(--relief-green);
+    }
+
+    /* ---- QR share / direct distribution ---- */
+    .nb #share .section-head .h2-section {
+      max-width: 18ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (min-width: 720px) {
+      .nb #share .section-head .h2-section {
+        max-width: 22ch;
+      }
+    }
+    .nb .share-stage {
+      margin-top: 48px;
+      position: relative;
+      border: 1px solid rgba(96, 165, 250, 0.14);
+      border-radius: 24px;
+      background:
+        radial-gradient(600px 220px at 70% 20%, rgba(74, 222, 128, 0.1), transparent 60%), radial-gradient(500px 200px at 20% 80%, rgba(59, 130, 246, 0.12), transparent 55%),
+        linear-gradient(180deg, rgba(13, 21, 37, 0.9), rgba(8, 14, 26, 0.95));
+      padding: 36px 28px 32px;
+      overflow: hidden;
+    }
+    .nb .share-flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1.15fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+    }
+    @media (max-width: 960px) {
+      .nb .share-flow {
+        grid-template-columns: 1fr;
+        gap: 0;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .nb .share-connector {
+        width: 2px;
+        height: 28px;
+        margin: 2px auto;
+        justify-self: center;
+      }
+      .nb .share-connector span {
+        inset: 0 0 auto 0;
+        width: 100%;
+        height: 42%;
+        background: linear-gradient(180deg, transparent, var(--relief-green), transparent);
+        animation-name: sharePulseY;
+      }
+      @keyframes sharePulseY {
+        0% {
+          top: -40%;
+          opacity: 0.2;
+        }
+        40% {
+          opacity: 1;
+        }
+        100% {
+          top: 100%;
+          opacity: 0.2;
+        }
+      }
+    }
+    .nb .share-node {
+      text-align: center;
+      padding: 8px 6px;
+    }
+    .nb .share-node-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 12px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(96, 165, 250, 0.22);
+    }
+    .nb .share-node-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+    .nb .share-node--build .share-node-icon {
+      color: var(--relief-green);
+      background: rgba(74, 222, 128, 0.12);
+      border-color: rgba(74, 222, 128, 0.28);
+      box-shadow: 0 0 28px rgba(74, 222, 128, 0.12);
+    }
+    .nb .share-node-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .nb .share-node-sub {
+      margin-top: 4px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.48);
+      line-height: 1.35;
+    }
+    .nb .share-connector {
+      height: 2px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.18);
+    }
+    .nb .share-connector span {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 42%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, transparent, var(--relief-green), transparent);
+      animation: sharePulse 2.4s ease-in-out infinite;
+    }
+    .nb .share-connector:nth-of-type(2) span {
+      animation-delay: 0.35s;
+    }
+    .nb .share-connector:nth-of-type(3) span {
+      animation-delay: 0.7s;
+    }
+    @keyframes sharePulse {
+      0% {
+        left: -40%;
+        opacity: 0.2;
+      }
+      40% {
+        opacity: 1;
+      }
+      100% {
+        left: 100%;
+        opacity: 0.2;
+      }
+    }
+    .nb .share-qr {
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      background: #f8fafc;
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(74, 222, 128, 0.35),
+        0 18px 40px rgba(74, 222, 128, 0.18);
+    }
+    .nb .share-qr-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      gap: 2px;
+      width: 100%;
+      height: 100%;
+    }
+    .nb .share-qr-grid i {
+      display: block;
+      border-radius: 1px;
+      background: transparent;
+    }
+    .nb .share-qr-grid i:nth-child(1),
+    .nb .share-qr-grid i:nth-child(2),
+    .nb .share-qr-grid i:nth-child(3),
+    .nb .share-qr-grid i:nth-child(5),
+    .nb .share-qr-grid i:nth-child(7),
+    .nb .share-qr-grid i:nth-child(8),
+    .nb .share-qr-grid i:nth-child(10),
+    .nb .share-qr-grid i:nth-child(12),
+    .nb .share-qr-grid i:nth-child(14),
+    .nb .share-qr-grid i:nth-child(15),
+    .nb .share-qr-grid i:nth-child(16),
+    .nb .share-qr-grid i:nth-child(17),
+    .nb .share-qr-grid i:nth-child(19),
+    .nb .share-qr-grid i:nth-child(21),
+    .nb .share-qr-grid i:nth-child(23),
+    .nb .share-qr-grid i:nth-child(25),
+    .nb .share-qr-grid i:nth-child(26),
+    .nb .share-qr-grid i:nth-child(28),
+    .nb .share-qr-grid i:nth-child(30),
+    .nb .share-qr-grid i:nth-child(31),
+    .nb .share-qr-grid i:nth-child(33),
+    .nb .share-qr-grid i:nth-child(35),
+    .nb .share-qr-grid i:nth-child(36),
+    .nb .share-qr-grid i:nth-child(37),
+    .nb .share-qr-grid i:nth-child(39),
+    .nb .share-qr-grid i:nth-child(42),
+    .nb .share-qr-grid i:nth-child(43),
+    .nb .share-qr-grid i:nth-child(45),
+    .nb .share-qr-grid i:nth-child(47),
+    .nb .share-qr-grid i:nth-child(49) {
+      background: #0b1220;
+    }
+    .nb .share-qr-scan {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #22c55e, transparent);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+      animation: shareScan 2.8s ease-in-out infinite;
+    }
+    @keyframes shareScan {
+      0%,
+      100% {
+        top: 12%;
+        opacity: 0.35;
+      }
+      50% {
+        top: 82%;
+        opacity: 1;
+      }
+    }
+    .nb .share-ttl {
+      display: inline-flex;
+      margin-top: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(74, 222, 128, 0.95);
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.22);
+    }
+    .nb .share-phone {
+      width: 72px;
+      height: 118px;
+      margin: 0 auto 12px;
+      border-radius: 16px;
+      border: 2px solid rgba(148, 163, 184, 0.45);
+      background: #0a1220;
+      padding: 8px 6px 6px;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+    }
+    .nb .share-phone-notch {
+      width: 28px;
+      height: 4px;
+      margin: 0 auto 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.35);
+    }
+    .nb .share-phone-screen {
+      height: calc(100% - 12px);
+      border-radius: 10px;
+      background: linear-gradient(160deg, rgba(74, 222, 128, 0.18), rgba(37, 99, 235, 0.18));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px;
+    }
+    .nb .share-phone-check {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(74, 222, 128, 0.2);
+      color: var(--relief-green);
+      font-size: 14px;
+      font-weight: 800;
+      animation: shareCheck 2.6s ease-in-out infinite;
+    }
+    @keyframes shareCheck {
+      0%,
+      100% {
+        transform: scale(0.92);
+        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.25);
+      }
+      50% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(74, 222, 128, 0);
+      }
+    }
+    .nb .share-phone-text {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: rgba(255, 255, 255, 0.78);
+      text-align: center;
+      line-height: 1.2;
+    }
+    .nb .share-vs {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 720px) {
+      .nb .share-vs {
+        grid-template-columns: 1fr;
+      }
+    }
+    .nb .share-vs-col {
+      border-radius: 18px;
+      padding: 22px 22px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      background: rgba(15, 23, 42, 0.55);
+    }
+    .nb .share-vs-col--old {
+      border-color: rgba(248, 113, 113, 0.22);
+      background: linear-gradient(180deg, rgba(127, 29, 29, 0.18), rgba(15, 23, 42, 0.4));
+    }
+    .nb .share-vs-col--new {
+      border-color: rgba(74, 222, 128, 0.28);
+      background: linear-gradient(180deg, rgba(20, 83, 45, 0.28), rgba(15, 23, 42, 0.45));
+      box-shadow: 0 0 40px rgba(74, 222, 128, 0.06);
+    }
+    .nb .share-vs-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .nb .share-vs-col--old .share-vs-label {
+      color: #fca5a5;
+    }
+    .nb .share-vs-col--new .share-vs-label {
+      color: var(--relief-green);
+    }
+    .nb .share-vs-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .nb .share-vs-col li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 14px;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.72);
+    }
+    .nb .share-vs-col li::before {
+      content: '×';
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 800;
+      color: #f87171;
+    }
+    .nb .share-vs-col--new li::before {
+      content: '✓';
+      color: var(--relief-green);
+    }
+    .nb .share-steps {
+      list-style: none;
+      margin: 36px 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 840px) {
+      .nb .share-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+    .nb .share-steps li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px 18px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(96, 165, 250, 0.12);
+      background: rgba(15, 23, 42, 0.45);
+    }
+    .nb .share-step-num {
+      flex: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #0b1220;
+      background: var(--relief-green);
+      box-shadow: 0 0 18px rgba(74, 222, 128, 0.35);
+    }
+    .nb .share-steps h3 {
+      margin: 2px 0 6px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: #fff;
+    }
+    .nb .share-steps p {
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.58);
+    }
+    .nb .share-foot {
+      margin-top: 28px;
+      text-align: center;
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+    }
+    .nb .share-badge {
+      display: inline-flex;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--relief-green);
+      border: 1px solid rgba(74, 222, 128, 0.28);
+      background: rgba(74, 222, 128, 0.08);
+    }
+    .nb .share-foot p {
+      margin: 0;
+      max-width: 640px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.58);
+    }
+    .nb .share-docs {
+      font-size: 14px;
+      font-weight: 700;
+      color: #93c5fd;
+      transition: color 0.15s ease;
+    }
+    .nb .share-docs:hover {
+      color: #fff;
     }
 
     /* ---- onboarding wizard ---- */
