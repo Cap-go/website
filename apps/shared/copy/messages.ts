@@ -14,7 +14,7 @@ const messages = {
   about: 'About',
   about_capgo: 'About Capgo',
   about_capgo_description:
-    'Capgo builds the shortcuts Capacitor teams use to skip App Store and Google Play delays. Live updates, native builds, and plugins that make shipping simpler.',
+    'Capgo takes a different path than store-process tooling: shortcuts Capacitor teams use to skip App Store and Google Play delays. Live updates, native builds, and plugins that make shipping simpler.',
   access_maintain_enterprise_plugins: 'Access and maintain our enterprise-grade Capacitor plugins with priority support and dedicated maintenance.',
   ach_available_for_enterprise_annual_payments: 'ACH is available only for annual payments from Enterprise plan customers. Contact us for more information.',
   active_users_up_to_date: 'of active users receive updates within 24 hours',
@@ -427,8 +427,8 @@ const messages = {
   built_for_devs_feature_ts_desc: 'TypeScript definitions make update checks, channel changes, and rollback handling predictable.',
   built_for_devs_phone_time: '2s ago...',
   built_for_devs_phone_update: '✓ Capgo Update Applied V1.0.11',
-  built_for_devs_subtitle: 'Install once, publish from your existing workflow, and skip days of Apple and Google review for web-layer changes.',
-  built_for_devs_title: 'Ship live updates without the store process',
+  built_for_devs_subtitle: 'Other tools still wait on store review. Install once, publish from your workflow, and skip days of Apple and Google review for web-layer changes.',
+  built_for_devs_title: 'A different way to ship live updates',
   built_for_enterprise_teams: 'Built for enterprise teams',
   built_with_supabase: 'Built with Supabase',
   business_hours_note: 'Business hours are from 6am to 6pm (local time), except where otherwise stated.',
@@ -1695,7 +1695,7 @@ const messages = {
   home_hero_outcome_recover_desc: 'Push urgent fixes without waiting days for review, then roll back fast if a rollout does not behave as expected.',
   home_hero_outcome_recover_title: 'Fix production in minutes',
   home_hero_subtitle:
-    'Capgo is the shortcut for teams shipping Capacitor apps. Live updates skip App Store and Google Play delays, so a JS fix goes live in minutes instead of days.',
+    'Most tools copy the store process. Capgo does the opposite: live updates skip App Store and Google Play delays, so a JS fix goes live in minutes instead of days.',
   home_hero_title_line1: 'Skip the store wait.',
   home_hero_title_line2: 'Ship Capacitor apps.',
   home_important_update_badge: 'Important Update',
@@ -1971,7 +1971,8 @@ const messages = {
   live_update_hero_headline: 'Skip the wait. Ship the fix.',
   live_update_hero_tagline: 'Skip the stores. Keep shipping.',
   live_update_hero_cta: 'Start shipping',
-  live_update_hero_subtitle: 'The shortcut around App Store and Google Play delays. Push web-layer fixes instantly for Ionic and Capacitor apps.',
+  live_update_hero_subtitle:
+    'Other tools still wait on the stores. Capgo is the shortcut around App Store and Google Play delays. Push web-layer fixes instantly for Ionic and Capacitor apps.',
   live_update_hero_stat_channels_label: 'Canary, beta, support, and production tracks',
   live_update_hero_stat_channels_value: 'Dynamic channels',
   live_update_hero_stat_logs_label: 'Per-device update status and rollback history',
@@ -2072,8 +2073,8 @@ const messages = {
     'Push JavaScript, CSS, copy, and web asset fixes without waiting on review. Native and Capacitor config changes still go through the stores only when they must.',
   live_update_outcome_card_recover_title: 'Recover production without waiting on review',
   live_update_outcome_desc:
-    'Capgo is the shortcut around store delays: ship the JS fix now, roll it out on your terms, and only go through Apple or Google when the native binary actually changes.',
-  live_update_outcome_kicker: 'Shortcuts for shipping teams',
+    'The usual path waits on a store reviewer. Ours does not: ship the JS fix now, roll it out on your terms, and only go through Apple or Google when the native binary actually changes.',
+  live_update_outcome_kicker: 'A different release path',
   live_update_outcome_title: 'When production breaks, you should not wait on a store reviewer.',
   live_update_sdk_open_source: 'Our Live Update SDK is open source, providing transparency and community-driven development.',
   live_update_sla_exclusions_title: 'Live Update SLA Exclusions',
@@ -2140,11 +2141,11 @@ const messages = {
   managed_solutions: 'Managed Solutions',
   mandatory_mfa_integration: 'Mandatory MFA and integration with enterprise identity providers for secure access control',
   manifesto_behind_every_movie:
-    'Skip the queue. Ship the fix. Let your team stay on the product while Capgo handles the painful native parts only when a store binary actually needs to change.',
+    'That is the difference. Skip the queue. Ship the fix. Stay on the product, and only touch the painful native parts when a store binary actually needs to change.',
   manifesto_full_ecosystem:
-    'Live updates skip App Store and Google Play review for JavaScript, CSS, and web assets. Native builds, plugins, channels, and rollback keep the rest of shipping simple. We exist to make team life easier, not to recreate store bureaucracy.',
+    'Others wrap store review, certificates, and native ceremony as if that were the product. Live updates skip App Store and Google Play review for JavaScript, CSS, and web assets. Native builds, plugins, channels, and rollback keep the rest of shipping simple.',
   manifesto_home_for_developers:
-    "Your team should ship product, not live inside Apple's process. Capgo is the shortcut between your web code and your users: open source, fast, and built so companies skip the store wait.",
+    "Most mobile tools try to make Apple's process nicer. We skip it. Capgo is the shortcut between your web code and your users: open source, fast, and built so teams ship instead of waiting.",
   massive_cost_reduction: 'Massive cost reduction',
   mau: 'MAU',
   mau_counting_explanation:
@@ -2658,7 +2659,7 @@ const messages = {
   problem_solution_capgo_time: 'Few min',
   problem_solution_old_way_time: 'Days',
   problem_solution_subtitle:
-    'The store process is built to slow you down. Capgo is the shortcut: ship the JS fix in minutes, and wait on Apple or Google only when a native change actually needs it.',
+    'A web bug is already live. The old way waits days for Apple or Google review. Capgo ships the fix in minutes, while native changes still go through the stores.',
   problem_solution_time_label: 'Time to live',
   problem_solution_title: 'App Store review delays',
   problem_solution_velocity: 'production fixes',
