@@ -40,6 +40,24 @@ function normalizePem(value: string | undefined): string {
     .trim()
 }
 
+function readViteEnv(name: string): string | undefined {
+  try {
+    const env = (import.meta as ImportMeta & { env?: Record<string, string | undefined> }).env
+    return env?.[name]
+  } catch {
+    return undefined
+  }
+}
+
+function derBytesToArrayBuffer(derBytes: string): ArrayBuffer {
+  const buffer = new ArrayBuffer(derBytes.length)
+  const bytes = new Uint8Array(buffer)
+  for (let i = 0; i < derBytes.length; i++) {
+    bytes[i] = derBytes.charCodeAt(i) & 0xff
+  }
+  return buffer
+}
+
 export function createUdidMobileconfig(options: UdidProfileOptions): string {
   const payloadUuid = crypto.randomUUID().toUpperCase()
   const challengeBlock = options.challenge ? `<key>Challenge</key>\n      <string>${escapeXml(options.challenge)}</string>` : ''
@@ -82,16 +100,16 @@ export function createUdidMobileconfig(options: UdidProfileOptions): string {
 </plist>`
 }
 
-export async function signMobileconfig(profileXml: string, credentials?: UdidSigningCredentials): Promise<Buffer | null> {
-  const certificatePem = normalizePem(credentials?.certificatePem ?? import.meta.env.IOS_UDID_PROFILE_SIGNING_CERT_PEM)
-  const privateKeyPem = normalizePem(credentials?.privateKeyPem ?? import.meta.env.IOS_UDID_PROFILE_SIGNING_KEY_PEM)
-  const chainPem = normalizePem(credentials?.chainPem ?? import.meta.env.IOS_UDID_PROFILE_SIGNING_CHAIN_PEM)
-
-  if (!certificatePem || !privateKeyPem) {
-    return null
-  }
-
+export async function signMobileconfig(profileXml: string, credentials?: UdidSigningCredentials): Promise<ArrayBuffer | null> {
   try {
+    const certificatePem = normalizePem(credentials?.certificatePem ?? readViteEnv('IOS_UDID_PROFILE_SIGNING_CERT_PEM'))
+    const privateKeyPem = normalizePem(credentials?.privateKeyPem ?? readViteEnv('IOS_UDID_PROFILE_SIGNING_KEY_PEM'))
+    const chainPem = normalizePem(credentials?.chainPem ?? readViteEnv('IOS_UDID_PROFILE_SIGNING_CHAIN_PEM'))
+
+    if (!certificatePem || !privateKeyPem) {
+      return null
+    }
+
     const forge = await getForge()
     const signingCertificate = forge.pki.certificateFromPem(certificatePem)
     const privateKey = forge.pki.privateKeyFromPem(privateKeyPem)
@@ -126,7 +144,7 @@ export async function signMobileconfig(profileXml: string, credentials?: UdidSig
     })
 
     signedData.sign({ detached: false })
-    return Buffer.from(forge.asn1.toDer(signedData.toAsn1()).getBytes(), 'binary')
+    return derBytesToArrayBuffer(forge.asn1.toDer(signedData.toAsn1()).getBytes())
   } catch {
     return null
   }

@@ -16,11 +16,48 @@ on:
       - 'configs.json'
       - 'package.json'
       - 'bun.lock'
+      - '.github/workflows/deploy-web.yml'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
+  ios-udid-signing-cert:
+    name: iOS UDID signing cert
+    if: github.repository == 'Cap-go/website'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - name: Check whether Let's Encrypt renewal is due
+        id: cert
+        env:
+          IOS_UDID_PROFILE_SIGNING_CERT_PEM: ${{ secrets.IOS_UDID_PROFILE_SIGNING_CERT_PEM }}
+          IOS_UDID_PROFILE_SIGNING_KEY_PEM: ${{ secrets.IOS_UDID_PROFILE_SIGNING_KEY_PEM }}
+        run: bash scripts/renew-ios-udid-signing-cert.sh check
+      - if: steps.cert.outputs.renew == 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - if: steps.cert.outputs.renew == 'true'
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.3.14
+      - name: Issue or renew UDID signing cert
+        if: steps.cert.outputs.renew == 'true'
+        env:
+          IOS_UDID_PROFILE_SIGNING_CERT_PEM: ${{ secrets.IOS_UDID_PROFILE_SIGNING_CERT_PEM }}
+          IOS_UDID_PROFILE_SIGNING_KEY_PEM: ${{ secrets.IOS_UDID_PROFILE_SIGNING_KEY_PEM }}
+          IOS_UDID_PROFILE_SIGNING_CHAIN_PEM: ${{ secrets.IOS_UDID_PROFILE_SIGNING_CHAIN_PEM }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_DNS_API_TOKEN: ${{ secrets.CLOUDFLARE_DNS_API_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: bash scripts/renew-ios-udid-signing-cert.sh issue
+
   typos:
     name: Check for Typos
     runs-on: ubuntu-latest
