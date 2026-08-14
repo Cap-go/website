@@ -49,12 +49,13 @@ function readViteEnv(name: string): string | undefined {
   }
 }
 
-function derBytesToUint8Array(derBytes: string): Uint8Array {
-  const bytes = new Uint8Array(derBytes.length)
+function derBytesToArrayBuffer(derBytes: string): ArrayBuffer {
+  const buffer = new ArrayBuffer(derBytes.length)
+  const bytes = new Uint8Array(buffer)
   for (let i = 0; i < derBytes.length; i++) {
     bytes[i] = derBytes.charCodeAt(i) & 0xff
   }
-  return bytes
+  return buffer
 }
 
 export function createUdidMobileconfig(options: UdidProfileOptions): string {
@@ -99,7 +100,7 @@ export function createUdidMobileconfig(options: UdidProfileOptions): string {
 </plist>`
 }
 
-export async function signMobileconfig(profileXml: string, credentials?: UdidSigningCredentials): Promise<Uint8Array | null> {
+export async function signMobileconfig(profileXml: string, credentials?: UdidSigningCredentials): Promise<ArrayBuffer | null> {
   try {
     const certificatePem = normalizePem(credentials?.certificatePem ?? readViteEnv('IOS_UDID_PROFILE_SIGNING_CERT_PEM'))
     const privateKeyPem = normalizePem(credentials?.privateKeyPem ?? readViteEnv('IOS_UDID_PROFILE_SIGNING_KEY_PEM'))
@@ -143,7 +144,7 @@ export async function signMobileconfig(profileXml: string, credentials?: UdidSig
     })
 
     signedData.sign({ detached: false })
-    return derBytesToUint8Array(forge.asn1.toDer(signedData.toAsn1()).getBytes())
+    return derBytesToArrayBuffer(forge.asn1.toDer(signedData.toAsn1()).getBytes())
   } catch {
     return null
   }

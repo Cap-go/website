@@ -256,14 +256,7 @@ async function handleUdidProfile(request: Request, env: ToolApiEnv): Promise<Res
     })
     appendCookie(headers, UDID_CHALLENGE_COOKIE, challenge, UDID_CALLBACK_PATH, 300, secure, true)
 
-    if (signedProfile) {
-      return new Response(new Blob([signedProfile]), {
-        status: 200,
-        headers,
-      })
-    }
-
-    return new Response(profile, {
+    return new Response(signedProfile ?? profile, {
       status: 200,
       headers,
     })
