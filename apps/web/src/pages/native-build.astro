@@ -6613,6 +6613,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           entries.forEach((e) => {
             if (e.isIntersecting && !started) {
               started = true
+              io.disconnect()
               run()
             }
           })
