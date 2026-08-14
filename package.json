@@ -69,7 +69,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "14.1.2",
     "@astrojs/sitemap": "3.7.3",
-    "@astrojs/starlight": "0.41.3",
+    "@astrojs/starlight": "0.41.7",
     "@astrojs/starlight-docsearch": "0.7.0",
     "@astrojs/starlight-tailwind": "5.0.0",
     "@datafast/ai-crawl": "^1.0.7",
