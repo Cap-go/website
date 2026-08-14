@@ -123,21 +123,16 @@
   box-shadow: none;
 }
 
-.product-video .product-video-frame {
+section.product-video .product-video-frame {
   border-radius: 12px;
   box-shadow: none;
 }
 
-.product-proof .proof-card-wrap {
+section.product-proof .proof-card-wrap {
   border-radius: 12px;
 }
 
 main.data-page,
-main.data-page .data-hero,
 main.data-page .data-section {
-  background: #1a1a1a;
-}
-
-main.data-page .data-hero {
   background: #1a1a1a;
 }
