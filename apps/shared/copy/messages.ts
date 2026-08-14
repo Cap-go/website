@@ -18,7 +18,7 @@ const messages = {
   about: 'About',
   about_capgo: 'About Capgo',
   about_capgo_description:
-    'Capgo takes a different path than store-process tooling: shortcuts Capacitor teams use to skip App Store and Google Play delays. Live updates, native builds, and plugins that make shipping simpler.',
+    'Capgo takes a different path than store-process tooling: shortcuts Capacitor teams use to skip App Store and Google Play delays. Live updates, native builds, and plugins make shipping simpler.',
   access_maintain_enterprise_plugins: 'Access and maintain our enterprise-grade Capacitor plugins with priority support and dedicated maintenance.',
   ach_available_for_enterprise_annual_payments: 'ACH is available only for annual payments from Enterprise plan customers. Contact us for more information.',
   active_users_up_to_date: 'of active users receive updates within 24 hours',
@@ -2815,7 +2815,7 @@ const messages = {
   plugins_custom_plugin_title: 'Need a custom SDK bridge?',
   plugins_directory: 'Capacitor Plugins & SDK Bridges',
   plugins_directory_description:
-    'Native features without living in Apple or Google process. Production-ready Capacitor plugins and SDK wrappers backed by real npm usage, GitHub signal, and open-source maintenance.',
+    'Plugins that simplify native work. Production-ready Capacitor plugins and SDK wrappers backed by real npm usage, GitHub signal, and open-source maintenance.',
   plugins_more_plugins_cta: 'Browse Capgo GitHub',
   plugins_more_plugins_description: 'Check the Capgo GitHub org for more open-source bridges, experiments, and community-maintained plugin work.',
   plugins_more_plugins_title: 'Need a plugin we have not listed yet?',

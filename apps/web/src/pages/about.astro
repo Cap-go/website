@@ -62,7 +62,7 @@ const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
 // Create about page WebPage schema
 const aboutPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
-  description: 'Learn about Capgo, the shortcuts Capacitor teams use to skip App Store and Google Play delays, and meet the team building them.',
+  description,
   url: aboutUrl,
 })
 
@@ -191,8 +191,8 @@ const timeline = [
           <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">About Capgo</p>
           <h1 class="mt-5 max-w-4xl text-4xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">We don't copy the store process. We skip it.</h1>
           <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-            Capgo started in December 2022 because teams needed a different path: ship without living inside Apple or Google review. Live updates, native builds, and plugins make
-            company life simpler when you push mobile apps.
+            Capgo started in December 2022 because teams needed a different path. Live updates skip store review for JS and web assets. Native builds still go through Apple or
+            Google when the binary changes.
           </p>
 
           <div class="mt-8 flex flex-col gap-3">
