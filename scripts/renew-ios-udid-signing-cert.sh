@@ -49,9 +49,9 @@ cert_is_fresh() {
   fi
 
   local cert_modulus key_modulus
-  cert_modulus="$(openssl x509 -noout -modulus -in "$cert_file" 2>/dev/null | openssl md5)"
-  key_modulus="$(openssl rsa -noout -modulus -in "$key_file" 2>/dev/null | openssl md5)"
-  if [[ -z "$cert_modulus" || "$cert_modulus" != "$key_modulus" ]]; then
+  cert_modulus="$(openssl x509 -noout -modulus -in "$cert_file" 2>/dev/null || true)"
+  key_modulus="$(openssl rsa -noout -modulus -in "$key_file" 2>/dev/null || true)"
+  if [[ -z "$cert_modulus" || -z "$key_modulus" || "$cert_modulus" != "$key_modulus" ]]; then
     echo "UDID signing cert and private key do not match."
     rm -f "$cert_file" "$key_file"
     return 1
@@ -95,8 +95,21 @@ install_lego() {
   curl --proto '=https' --tlsv1.2 -fsSL "$url" | tar -xz -C "$dest" lego
 }
 
+strip() {
+  local value="${1-}"
+  value="${value#"${value%%[![:space:]]*}"}"
+  value="${value%"${value##*[![:space:]]}"}"
+  printf '%s' "$value"
+}
+
 require_issue_credentials() {
-  if [[ -z "${CLOUDFLARE_DNS_API_TOKEN:-}" ]]; then
+  CLOUDFLARE_DNS_API_TOKEN="$(strip "${CLOUDFLARE_DNS_API_TOKEN:-}")"
+  CLOUDFLARE_API_TOKEN="$(strip "${CLOUDFLARE_API_TOKEN:-}")"
+  CLOUDFLARE_ACCOUNT_ID="$(strip "${CLOUDFLARE_ACCOUNT_ID:-}")"
+  PERSONAL_ACCESS_TOKEN="$(strip "${PERSONAL_ACCESS_TOKEN:-}")"
+  export CLOUDFLARE_DNS_API_TOKEN CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID PERSONAL_ACCESS_TOKEN
+
+  if [[ -z "${CLOUDFLARE_DNS_API_TOKEN}" ]]; then
     echo "CLOUDFLARE_DNS_API_TOKEN is required for DNS-01 (Zone.DNS Edit on capgo.app)." >&2
     exit 1
   fi
