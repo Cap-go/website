@@ -4335,7 +4335,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .aidebug-body .row {
       display: block;
       margin: 3px 0;
-      opacity: 0;
     }
     .nb .aidebug-body .ai-head {
       margin-top: 14px;
@@ -6539,7 +6538,12 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       const selected = body.querySelector<HTMLElement>('[data-menu-selected]')
       const selCheck = selected ? selected.innerHTML : '' // "✔ Capgo AI" — confirmed
       const selCursor = '<span class="val">❯ Capgo AI</span>' // cursor while the menu is open
+      let started = false
       let gen = 0
+
+      rows.forEach((r) => {
+        r.style.opacity = '0'
+      })
 
       function run() {
         gen++
@@ -6604,7 +6608,18 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         step()
       }
 
-      run()
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting && !started) {
+              started = true
+              run()
+            }
+          })
+        },
+        { threshold: 0.35 },
+      )
+      io.observe(body)
 
       const replay = document.getElementById('aidebug-replay')
       if (replay) replay.addEventListener('click', run)
