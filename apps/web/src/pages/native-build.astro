@@ -4020,11 +4020,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       pointer-events: none;
       /* Static corner glow — no longer follows the cursor. */
       background: radial-gradient(170px 130px at 18% 0%, rgba(74, 222, 128, 0.12), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.35s;
-    }
-    .nb .trust-cell.in-view::before,
-    .nb .trust-cell:hover::before {
       opacity: 1;
     }
     .nb .trust-icon {
@@ -4041,7 +4036,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.28);
       transition: box-shadow 0.4s ease;
     }
-    .nb .trust-cell.in-view .trust-icon {
+    .nb .trust-cell .trust-icon {
       animation: nbTrustIconPulse 3.6s ease-in-out infinite;
     }
     .nb .trust-icon svg {
@@ -4095,7 +4090,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       box-shadow: 0 0 6px var(--relief-green);
       flex-shrink: 0;
     }
-    .nb .trust-cell.in-view .trust-dot--ok {
+    .nb .trust-cell .trust-dot--ok {
       animation: nbTrustBlink 2.4s ease-in-out infinite;
     }
     @keyframes nbTrustBlink {
@@ -4117,7 +4112,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       flex-shrink: 0;
       box-shadow: 0 0 8px var(--relief-green);
     }
-    .nb .trust-cell.in-view .trust-pulse::after {
+    .nb .trust-cell .trust-pulse::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -4149,19 +4144,19 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border-radius: 1px;
       opacity: 0.4;
     }
-    .nb .trust-cell.in-view .trust-stream span {
+    .nb .trust-cell .trust-stream span {
       animation: nbTrustBars 1.4s ease-in-out infinite;
     }
-    .nb .trust-cell.in-view .trust-stream span:nth-child(1) {
+    .nb .trust-cell .trust-stream span:nth-child(1) {
       animation-delay: 0s;
     }
-    .nb .trust-cell.in-view .trust-stream span:nth-child(2) {
+    .nb .trust-cell .trust-stream span:nth-child(2) {
       animation-delay: 0.15s;
     }
-    .nb .trust-cell.in-view .trust-stream span:nth-child(3) {
+    .nb .trust-cell .trust-stream span:nth-child(3) {
       animation-delay: 0.3s;
     }
-    .nb .trust-cell.in-view .trust-stream span:nth-child(4) {
+    .nb .trust-cell .trust-stream span:nth-child(4) {
       animation-delay: 0.45s;
     }
     @keyframes nbTrustBars {
@@ -4183,7 +4178,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       flex-shrink: 0;
       box-shadow: 0 0 6px var(--relief-green);
     }
-    .nb .trust-cell.in-view .trust-decay {
+    .nb .trust-cell .trust-decay {
       animation: nbTrustDecay 2.2s ease-in-out infinite;
     }
     @keyframes nbTrustDecay {
@@ -4340,6 +4335,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .aidebug-body .row {
       display: block;
       margin: 3px 0;
+      opacity: 0;
     }
     .nb .aidebug-body .ai-head {
       margin-top: 14px;
@@ -6495,29 +6491,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     })()
 
     // ----------------------------------------------------------------
-    // TRUST — toggle in-view animations (glow is static, not cursor-tracked)
-    // ----------------------------------------------------------------
-    ;(function trustInView() {
-      const cells = document.querySelectorAll<HTMLElement>('.trust-cell')
-      if (!cells.length) return
-
-      if (!('IntersectionObserver' in window)) {
-        cells.forEach((c) => c.classList.add('in-view'))
-        return
-      }
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) e.target.classList.add('in-view')
-            else e.target.classList.remove('in-view')
-          })
-        },
-        { threshold: 0.2 },
-      )
-      cells.forEach((c) => io.observe(c))
-    })()
-
-    // ----------------------------------------------------------------
     // BUILD-MINUTES CALCULATOR — rough "minutes → builds" estimate
     // ----------------------------------------------------------------
     ;(function buildCalc() {
@@ -6566,13 +6539,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       const selected = body.querySelector<HTMLElement>('[data-menu-selected]')
       const selCheck = selected ? selected.innerHTML : '' // "✔ Capgo AI" — confirmed
       const selCursor = '<span class="val">❯ Capgo AI</span>' // cursor while the menu is open
-      let started = false
       let gen = 0
-
-      rows.forEach((r) => {
-        r.style.opacity = '0'
-        r.style.transition = 'opacity 0.25s ease'
-      })
 
       function run() {
         gen++
@@ -6637,110 +6604,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         step()
       }
 
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting && !started) {
-              started = true
-              setTimeout(run, 250)
-            }
-          })
-        },
-        { threshold: 0.35 },
-      )
-      io.observe(body)
+      run()
 
       const replay = document.getElementById('aidebug-replay')
       if (replay) replay.addEventListener('click', run)
-    })()
-  </script>
-
-  <script
-    is:inline
-    src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
-    integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt"
-    crossorigin="anonymous"></script>
-  <script
-    is:inline
-    src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
-    integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
-    crossorigin="anonymous"></script>
-  <script is:inline>
-    ;(function () {
-      var gsap = window.gsap
-      var ST = window.ScrollTrigger
-      if (!gsap || !ST) return
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-      gsap.registerPlugin(ST)
-
-      // Reveal a group on scroll, with optional stagger. Clears inline styles
-      // afterwards so CSS hover transforms keep working.
-      function reveal(sel, opts) {
-        opts = opts || {}
-        var els = gsap.utils.toArray(sel)
-        if (!els.length) return
-        gsap.set(els, { opacity: 0, y: opts.y == null ? 24 : opts.y })
-        ST.batch(els, {
-          start: opts.start || 'top 86%',
-          onEnter: function (b) {
-            gsap.to(b, {
-              opacity: 1,
-              y: 0,
-              duration: opts.duration || 0.6,
-              ease: 'power3.out',
-              stagger: opts.stagger || 0.08,
-              overwrite: true,
-              clearProps: 'opacity,transform',
-            })
-          },
-        })
-      }
-
-      // Hero — animate in on load.
-      var heroEls = gsap.utils.toArray('.nb .hero .beta-badge, .nb .hero .hero-banner, .nb .hero .hero-lead, .nb .hero .hero-ctas, .nb .hero .hero-meta, .nb .hero .hero-strip')
-      if (heroEls.length) {
-        gsap.set(heroEls, { opacity: 0, y: 22 })
-        gsap.to(heroEls, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.09, delay: 0.05, clearProps: 'opacity,transform' })
-      }
-
-      // Section headings everywhere.
-      reveal('.nb .section-head', { y: 20, stagger: 0.12 })
-
-      // Reveal sentence + demo terminal.
-      reveal('.nb #how .rv-one', { y: 20 })
-      reveal('.nb #how .demo-wrap', { y: 28 })
-
-      // Bento cards — the attention grabber (staggered pop-in).
-      reveal('.nb #features .bento .tile', { y: 30, stagger: 0.07, duration: 0.55, start: 'top 88%' })
-
-      // Onboarding.
-      reveal('.nb #onboarding .onboarding-cmd-row', { y: 18 })
-      reveal('.nb #onboarding .wizard', { y: 26 })
-
-      // Trust.
-      reveal('.nb #trust .trust-cell', { y: 24, stagger: 0.09 })
-
-      // Comparison.
-      reveal('.nb #product-testimonials .proof-grid', { y: 22 })
-      reveal('.nb #compare .comp-wrap', { y: 26 })
-      reveal('.nb #compare .comp-callout', { y: 18 })
-
-      // AI debug — the terminal streams its own rows (see aiDebugTerminal), so only the side points fade in.
-      reveal('.nb #ai-debug .aidebug-points li', { y: 18, stagger: 0.1 })
-
-      // Pricing.
-      reveal('.nb #pricing .tier', { y: 26, stagger: 0.08 })
-      reveal('.nb #pricing .build-calc, .nb #pricing .pricing-fineprint', { y: 16 })
-
-      // FAQ.
-      reveal('.nb #faq .faq details', { y: 16, stagger: 0.06 })
-
-      // Final CTA.
-      reveal('.nb #cta .shell', { y: 24 })
-
-      window.addEventListener('load', function () {
-        ST.refresh()
-      })
     })()
   </script>
 </Layout>
