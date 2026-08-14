@@ -27,6 +27,7 @@ extend-ignore-re = [
 # These are proper names, not typos
 Longe = "Longe"
 Damon = "Damon"
+Synopsys = "Synopsys"
 
 # Acronyms and technical terms
 ASO = "ASO"  # App Store Optimization
