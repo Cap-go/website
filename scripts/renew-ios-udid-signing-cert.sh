@@ -30,22 +30,35 @@ cert_expiry() {
 
 cert_is_fresh() {
   local pem="${IOS_UDID_PROFILE_SIGNING_CERT_PEM:-}"
-  if [[ -z "${pem//[[:space:]]/}" ]]; then
-    echo "No existing UDID signing cert in GitHub secrets."
+  local key="${IOS_UDID_PROFILE_SIGNING_KEY_PEM:-}"
+  if [[ -z "${pem//[[:space:]]/}" || -z "${key//[[:space:]]/}" ]]; then
+    echo "No existing UDID signing cert/key in GitHub secrets."
     return 1
   fi
 
-  local tmp
-  tmp="$(mktemp)"
-  write_pem "$pem" "$tmp"
-  if ! openssl x509 -in "$tmp" -noout -checkend "$((RENEW_DAYS * 86400))" >/dev/null 2>&1; then
-    echo "UDID signing cert missing, invalid, or expiring within ${RENEW_DAYS} days ($(cert_expiry "$tmp" || echo unknown))."
-    rm -f "$tmp"
+  local cert_file key_file
+  cert_file="$(mktemp)"
+  key_file="$(mktemp)"
+  write_pem "$pem" "$cert_file"
+  write_pem "$key" "$key_file"
+
+  if ! openssl x509 -in "$cert_file" -noout -checkend "$((RENEW_DAYS * 86400))" >/dev/null 2>&1; then
+    echo "UDID signing cert missing, invalid, or expiring within ${RENEW_DAYS} days ($(cert_expiry "$cert_file" || echo unknown))."
+    rm -f "$cert_file" "$key_file"
     return 1
   fi
 
-  echo "UDID signing cert is valid until $(cert_expiry "$tmp"). Skipping Let's Encrypt."
-  rm -f "$tmp"
+  local cert_modulus key_modulus
+  cert_modulus="$(openssl x509 -noout -modulus -in "$cert_file" 2>/dev/null | openssl md5)"
+  key_modulus="$(openssl rsa -noout -modulus -in "$key_file" 2>/dev/null | openssl md5)"
+  if [[ -z "$cert_modulus" || "$cert_modulus" != "$key_modulus" ]]; then
+    echo "UDID signing cert and private key do not match."
+    rm -f "$cert_file" "$key_file"
+    return 1
+  fi
+
+  echo "UDID signing cert is valid until $(cert_expiry "$cert_file"). Skipping Let's Encrypt."
+  rm -f "$cert_file" "$key_file"
   return 0
 }
 
@@ -82,34 +95,29 @@ install_lego() {
   curl --proto '=https' --tlsv1.2 -fsSL "$url" | tar -xz -C "$dest" lego
 }
 
-restore_existing_material() {
-  local lego_path="$1"
-  local cert_dir="${lego_path}/certificates"
-  mkdir -p "$cert_dir"
-
-  if [[ -z "${IOS_UDID_PROFILE_SIGNING_CERT_PEM:-}" || -z "${IOS_UDID_PROFILE_SIGNING_KEY_PEM:-}" ]]; then
-    return 0
-  fi
-
-  write_pem "$IOS_UDID_PROFILE_SIGNING_CERT_PEM" "${cert_dir}/${DOMAIN}.crt"
-  write_pem "$IOS_UDID_PROFILE_SIGNING_KEY_PEM" "${cert_dir}/${DOMAIN}.key"
-  if [[ -n "${IOS_UDID_PROFILE_SIGNING_CHAIN_PEM:-}" ]]; then
-    write_pem "$IOS_UDID_PROFILE_SIGNING_CHAIN_PEM" "${cert_dir}/${DOMAIN}.issuer.crt"
-  fi
-}
-
-issue_or_renew() {
+require_issue_credentials() {
   if [[ -z "${CLOUDFLARE_DNS_API_TOKEN:-}" ]]; then
     echo "CLOUDFLARE_DNS_API_TOKEN is required for DNS-01 (Zone.DNS Edit on capgo.app)." >&2
     exit 1
   fi
+  if [[ -z "${CLOUDFLARE_API_TOKEN:-}" || -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]]; then
+    echo "CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID are required to update Worker secrets." >&2
+    exit 1
+  fi
+  if [[ -z "${PERSONAL_ACCESS_TOKEN:-${GH_TOKEN:-}}" ]]; then
+    echo "PERSONAL_ACCESS_TOKEN is required to persist GitHub secrets after a successful Worker update." >&2
+    exit 1
+  fi
+}
+
+issue_or_renew() {
+  require_issue_credentials
 
   local work
   work="$(mktemp -d)"
   trap 'rm -rf "$work"' EXIT
 
   install_lego "$work"
-  restore_existing_material "$work"
 
   local lego_bin="${work}/lego"
   local cert_file="${work}/certificates/${DOMAIN}.crt"
@@ -123,13 +131,8 @@ issue_or_renew() {
     --path "$work"
   )
 
-  if [[ -f "$cert_file" && -f "$key_file" ]]; then
-    echo "Renewing ${DOMAIN} via DNS-01 (threshold ${RENEW_DAYS} days)."
-    "$lego_bin" "${common_args[@]}" renew --days "$RENEW_DAYS" --no-random-sleep
-  else
-    echo "Creating ${DOMAIN} via DNS-01."
-    "$lego_bin" "${common_args[@]}" run
-  fi
+  echo "Creating ${DOMAIN} via DNS-01."
+  "$lego_bin" "${common_args[@]}" run
 
   if [[ ! -f "$cert_file" || ! -f "$key_file" ]]; then
     echo "lego did not write ${DOMAIN} certificate files." >&2
@@ -143,13 +146,13 @@ issue_or_renew() {
     : >"$chain"
   fi
 
-  push_github_secret "$CERT_SECRET_NAME" "$leaf"
-  push_github_secret "$KEY_SECRET_NAME" "$key_file"
-  push_github_secret "$CHAIN_SECRET_NAME" "$chain"
-
   push_worker_secret "$CERT_SECRET_NAME" "$leaf"
   push_worker_secret "$KEY_SECRET_NAME" "$key_file"
   push_worker_secret "$CHAIN_SECRET_NAME" "$chain"
+
+  push_github_secret "$CERT_SECRET_NAME" "$leaf"
+  push_github_secret "$KEY_SECRET_NAME" "$key_file"
+  push_github_secret "$CHAIN_SECRET_NAME" "$chain"
 
   echo "UDID signing cert updated. Valid until $(cert_expiry "$leaf")."
 }

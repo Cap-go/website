@@ -36,6 +36,7 @@ jobs:
         id: cert
         env:
           IOS_UDID_PROFILE_SIGNING_CERT_PEM: ${{ secrets.IOS_UDID_PROFILE_SIGNING_CERT_PEM }}
+          IOS_UDID_PROFILE_SIGNING_KEY_PEM: ${{ secrets.IOS_UDID_PROFILE_SIGNING_KEY_PEM }}
         run: bash scripts/renew-ios-udid-signing-cert.sh check
       - if: steps.cert.outputs.renew == 'true'
         uses: actions/setup-node@v6
