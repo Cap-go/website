@@ -19,14 +19,15 @@ import m from '@/copy/messages'
     src="https://senja.io/p/capgo/love-embed?hideNavigation=true&embed=true"
     title="Customer testimonials and reviews for Capgo"
     aria-label="Wall of Love - Customer testimonials"
-    allowtransparency="true"
     loading="lazy"
-    class="mt-16 block w-full bg-[#1a1a1a]"
+    class="mt-16 block w-full"
     style="overflow: hidden; color-scheme: dark; background-color: #1a1a1a;"
     width="100%"></iframe>
   <script is:inline>
     document.addEventListener('DOMContentLoaded', function () {
-      iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-eEqRvoc')
+      if (typeof iFrameResize === 'function') {
+        iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-eEqRvoc')
+      }
     })
   </script>
 </section>
