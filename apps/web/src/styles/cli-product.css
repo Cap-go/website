@@ -1,4 +1,4 @@
-/* Capgo CLI — builder design language (yellow accent) */
+/* Capgo CLI — builder design language (Capgo blue chrome, yellow in terminal) */
 @font-face {
   font-family: 'Airbnb Cereal';
   src: url('/fonts/AirbnbCerealLight.woff') format('woff');
@@ -43,9 +43,12 @@
 }
 .cli {
   --bg-deep: #080e1a;
-  --grid-line: rgba(253, 224, 71, 0.06);
+  --grid-line: rgba(96, 165, 250, 0.06);
+  --relief-blue: #60a5fa;
+  --relief-blue-glow: rgba(96, 165, 250, 0.4);
+  --cap-blue-600: #2563eb;
+  --cap-blue-700: #1d4ed8;
   --relief-yellow: #fde047;
-  --relief-yellow-glow: rgba(253, 224, 71, 0.45);
   --terminal-bg: #0a0d14;
   --terminal-fg: #c8d4e6;
   --terminal-dim: #5a6a82;
@@ -149,13 +152,13 @@ body:has(.cli) footer > div > div:first-child {
   font-size: 16px;
 }
 .cli .btn-primary {
-  background: var(--relief-yellow);
-  color: #0f172a;
-  box-shadow: 0 0 36px rgba(253, 224, 71, 0.35);
+  background: var(--cap-blue-600);
+  color: #fff;
+  box-shadow: 0 0 36px rgba(37, 99, 235, 0.42);
 }
 .cli .btn-primary:hover {
-  background: #facc15;
-  box-shadow: 0 0 50px rgba(253, 224, 71, 0.5);
+  background: var(--cap-blue-700);
+  box-shadow: 0 0 50px rgba(37, 99, 235, 0.55);
   transform: translateY(-1px);
 }
 .cli .btn-ghost {
@@ -170,6 +173,7 @@ body:has(.cli) footer > div > div:first-child {
 .cli .hero {
   padding: 96px 0 80px;
   text-align: center;
+  background: transparent;
 }
 @media (max-width: 720px) {
   .cli .hero {
@@ -183,9 +187,9 @@ body:has(.cli) footer > div > div:first-child {
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 600;
-  background: rgba(253, 224, 71, 0.08);
-  border: 1px solid rgba(253, 224, 71, 0.35);
-  color: var(--relief-yellow);
+  background: rgba(96, 165, 250, 0.08);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  color: var(--relief-blue);
   border-radius: 999px;
   margin-bottom: 28px;
   letter-spacing: 0.04em;
@@ -195,8 +199,8 @@ body:has(.cli) footer > div > div:first-child {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--relief-yellow);
-  box-shadow: 0 0 10px var(--relief-yellow);
+  background: var(--relief-blue);
+  box-shadow: 0 0 10px var(--relief-blue);
 }
 .cli .hero-banner {
   margin: 22px 0 18px;
@@ -224,8 +228,8 @@ body:has(.cli) footer > div > div:first-child {
   height: 4px;
   width: 100%;
   margin-top: 14px;
-  background: linear-gradient(90deg, transparent 0%, var(--relief-yellow) 20%, var(--relief-yellow) 80%, transparent 100%);
-  box-shadow: 0 0 24px var(--relief-yellow-glow);
+  background: linear-gradient(90deg, transparent 0%, var(--relief-blue) 20%, var(--relief-blue) 80%, transparent 100%);
+  box-shadow: 0 0 24px var(--relief-blue-glow);
   border-radius: 2px;
 }
 .cli .hero-lead {
@@ -268,7 +272,7 @@ body:has(.cli) footer > div > div:first-child {
   gap: 6px;
 }
 .cli .hero-meta .check {
-  color: var(--relief-yellow);
+  color: var(--relief-blue);
 }
 .cli .rv-one {
   max-width: 920px;
@@ -281,7 +285,7 @@ body:has(.cli) footer > div > div:first-child {
   font-size: 12px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--relief-yellow);
+  color: var(--relief-blue);
   margin-bottom: 28px;
 }
 .cli .rv-one-line {
@@ -438,9 +442,9 @@ body:has(.cli) footer > div > div:first-child {
   border-color: rgba(255, 255, 255, 0.25);
 }
 .cli .demo-tab.active {
-  background: rgba(253, 224, 71, 0.12);
-  color: var(--relief-yellow);
-  border-color: rgba(253, 224, 71, 0.4);
+  background: rgba(96, 165, 250, 0.12);
+  color: var(--relief-blue);
+  border-color: rgba(96, 165, 250, 0.4);
 }
 @media (prefers-reduced-motion: reduce) {
   .cli *,
@@ -464,7 +468,10 @@ body:has(.cli) footer > div > div:first-child {
   color: rgba(255, 255, 255, 0.45);
 }
 .cli .eyebrow--yellow {
-  color: var(--relief-yellow);
+  color: var(--relief-blue);
+}
+.cli .eyebrow--blue {
+  color: var(--relief-blue);
 }
 .cli .h2-section {
   font-weight: 800;
@@ -529,12 +536,12 @@ body:has(.cli) footer > div > div:first-child {
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 .cli table.comp thead th.us {
-  color: var(--relief-yellow);
-  background: rgba(253, 224, 71, 0.1);
-  border-bottom-color: rgba(253, 224, 71, 0.4);
+  color: var(--relief-blue);
+  background: rgba(96, 165, 250, 0.1);
+  border-bottom-color: rgba(96, 165, 250, 0.4);
 }
 .cli table.comp tbody td.us {
-  background: rgba(253, 224, 71, 0.06);
+  background: rgba(96, 165, 250, 0.06);
 }
 .cli table.comp-prose {
   min-width: 880px;
@@ -576,7 +583,7 @@ body:has(.cli) footer > div > div:first-child {
   color: rgba(255, 255, 255, 0.85);
 }
 .cli table.comp-prose .hook {
-  color: var(--relief-yellow);
+  color: var(--relief-blue);
   font-weight: 700;
 }
 @media (max-width: 720px) {
