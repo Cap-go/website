@@ -367,8 +367,17 @@ function normalizeLegacyLookupPath(pathname: string): string {
   return pathname
 }
 
+function decodePathnameForLookup(pathname: string): string {
+  try {
+    return decodeURIComponent(pathname)
+  } catch {
+    return pathname
+  }
+}
+
 /** Returns a canonical target path when `pathname` is a known legacy alias. */
 export function resolveLegacyPathRedirect(pathname: string): string | null {
-  const key = normalizeLegacyLookupPath(pathname)
+  // URL.pathname is percent-encoded; map keys use decoded Unicode / spaces.
+  const key = normalizeLegacyLookupPath(decodePathnameForLookup(pathname))
   return LEGACY_PATH_REDIRECTS[key] ?? null
 }
