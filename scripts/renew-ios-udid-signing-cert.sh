@@ -111,10 +111,12 @@ require_issue_credentials() {
   if [[ -z "$PERSONAL_ACCESS_TOKEN" ]]; then
     PERSONAL_ACCESS_TOKEN="$GH_TOKEN"
   fi
-  export CLOUDFLARE_DNS_API_TOKEN CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID PERSONAL_ACCESS_TOKEN GH_TOKEN
+  # Lego reads CF_DNS_API_TOKEN or CLOUDFLARE_DNS_API_TOKEN; export both.
+  CF_DNS_API_TOKEN="$CLOUDFLARE_DNS_API_TOKEN"
+  export CLOUDFLARE_DNS_API_TOKEN CF_DNS_API_TOKEN CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID PERSONAL_ACCESS_TOKEN GH_TOKEN
 
   if [[ -z "${CLOUDFLARE_DNS_API_TOKEN}" ]]; then
-    echo "CLOUDFLARE_DNS_API_TOKEN is required for DNS-01 (Zone.DNS Edit on capgo.app)." >&2
+    echo "CLOUDFLARE_DNS_API_TOKEN is required for DNS-01 (Zone.Zone:Read and Zone.DNS:Edit on ${DOMAIN})." >&2
     exit 1
   fi
   if [[ -z "${CLOUDFLARE_API_TOKEN}" || -z "${CLOUDFLARE_ACCOUNT_ID}" ]]; then
@@ -127,8 +129,58 @@ require_issue_credentials() {
   fi
 }
 
+dns_token_hint() {
+  local zone="${1:-$DOMAIN}"
+  echo "Create a Cloudflare API token with Zone.Zone:Read and Zone.DNS:Edit on ${zone}, then set GitHub secret CLOUDFLARE_DNS_API_TOKEN. The Worker deploy token cannot create _acme-challenge TXT records."
+}
+
+verify_cloudflare_dns() {
+  local body code zone
+  zone="${UDID_CERT_ZONE:-$DOMAIN}"
+  body="$(mktemp)"
+  code="$(
+    printf 'Authorization: Bearer %s\n' "$CLOUDFLARE_DNS_API_TOKEN" |
+      curl --proto '=https' --tlsv1.2 -sS -o "$body" -w '%{http_code}' \
+        -H @- \
+        "https://api.cloudflare.com/client/v4/zones?name=${zone}&per_page=1" || true
+  )"
+
+  if ! HTTP_CODE="$code" BODY_FILE="$body" DOMAIN="$DOMAIN" ZONE="$zone" HINT="$(dns_token_hint "$zone")" python3 <<'PY'
+import json
+import os
+import sys
+
+code = os.environ["HTTP_CODE"]
+domain = os.environ["DOMAIN"]
+zone = os.environ["ZONE"]
+hint = os.environ["HINT"]
+try:
+    with open(os.environ["BODY_FILE"], encoding="utf-8") as fh:
+        data = json.load(fh)
+except Exception:
+    data = {}
+errors = data.get("errors") or []
+err_txt = "; ".join(
+    f"{item.get('code')}: {item.get('message')}" for item in errors if isinstance(item, dict)
+) or "no Cloudflare error body"
+if code != "200":
+    print(f"Cloudflare zone lookup for {zone} failed: HTTP {code} ({err_txt}). {hint}", file=sys.stderr)
+    sys.exit(1)
+if not (data.get("result") or []):
+    print(f"Cloudflare token cannot see zone {zone} (cert domain {domain}). Set UDID_CERT_ZONE to the apex zone if needed. {hint}", file=sys.stderr)
+    sys.exit(1)
+print(f"Cloudflare DNS token can read zone {zone}.")
+PY
+  then
+    rm -f "$body"
+    exit 1
+  fi
+  rm -f "$body"
+}
+
 issue_or_renew() {
   require_issue_credentials
+  verify_cloudflare_dns
 
   local work
   work="$(mktemp -d)"
@@ -150,7 +202,11 @@ issue_or_renew() {
   )
 
   echo "Creating ${DOMAIN} via DNS-01."
-  "$lego_bin" "${common_args[@]}" run
+  if ! "$lego_bin" "${common_args[@]}" run; then
+    echo "Let's Encrypt DNS-01 failed. If Cloudflare returned 403/10000, the token lacks Zone.DNS:Edit on ${UDID_CERT_ZONE:-$DOMAIN}." >&2
+    dns_token_hint "${UDID_CERT_ZONE:-$DOMAIN}" >&2
+    exit 1
+  fi
 
   if [[ ! -f "$cert_file" || ! -f "$key_file" ]]; then
     echo "lego did not write ${DOMAIN} certificate files." >&2
