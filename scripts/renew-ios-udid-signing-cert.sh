@@ -131,7 +131,7 @@ require_issue_credentials() {
 
 dns_token_hint() {
   local zone="${1:-$DOMAIN}"
-  echo "Create a Cloudflare API token with Zone.Zone:Read and Zone.DNS:Edit on ${zone}, then set GitHub secret CLOUDFLARE_DNS_API_TOKEN. The Worker deploy token cannot create _acme-challenge TXT records."
+  echo "Create a Cloudflare API token with Zone.Zone:Read and Zone.DNS:Edit on ${zone} under My Profile → API Tokens, then set GitHub org/repo secret CLOUDFLARE_DNS_API_TOKEN to that value. Do not reuse CLOUDFLARE_API_TOKEN (Worker deploy)."
 }
 
 verify_cloudflare_dns() {
@@ -177,9 +177,15 @@ def err_txt(body):
 
 
 if token == worker:
-    print("CLOUDFLARE_DNS_API_TOKEN is the same value as CLOUDFLARE_API_TOKEN (Worker deploy token).")
-else:
-    print("CLOUDFLARE_DNS_API_TOKEN is distinct from CLOUDFLARE_API_TOKEN.")
+    print(
+        "CLOUDFLARE_DNS_API_TOKEN is the same value as CLOUDFLARE_API_TOKEN (Worker deploy token). "
+        "GitHub is not using the DNS token. Set org/repo secret CLOUDFLARE_DNS_API_TOKEN to the "
+        "My Profile token (Zone.Zone:Read + Zone.DNS:Edit). Empty DNS secrets used to fall back "
+        "to the Worker token.",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+print("CLOUDFLARE_DNS_API_TOKEN is distinct from CLOUDFLARE_API_TOKEN.")
 
 verify_code, verify_body = cf("GET", "https://api.cloudflare.com/client/v4/user/tokens/verify")
 status = (verify_body.get("result") or {}).get("status")
