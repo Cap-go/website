@@ -169,7 +169,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
             />
             <div class="flex flex-col">
               <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
-              <p class="text-sm text-gray-500">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
+              <p class="text-sm text-gray-400">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
             </div>
           </a>
         </div>
@@ -194,7 +194,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
         </div>
         <div class="right-0 hidden px-10 sm:block">
           <div class="relative flex flex-col gap-y-4 pb-5">
-            <p class="text-sm text-gray-600">{m.written_by({}, { locale: Astro.locals.locale })}</p>
+            <p class="text-sm text-gray-400">{m.written_by({}, { locale: Astro.locals.locale })}</p>
             <a class="group flex items-center space-x-3" href={entry.data.author_url}>
               <img
                 width="36"
@@ -207,7 +207,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
               />
               <div class="flex flex-col">
                 <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
-                <p class="text-sm text-gray-500">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
+                <p class="text-sm text-gray-400">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
               </div>
             </a>
           </div>
@@ -215,7 +215,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
             headings?.length > 0 && (
               <div id="staticToc" class="sticky top-16 pt-4 pb-8">
                 <div>
-                  <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-500">
+                  <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-400">
                     <svg
                       width="24"
                       height="24"
@@ -236,7 +236,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
                   </p>
                   <div class="mt-4 grid gap-4 border-l border-gray-600">
                     {headings.map((k) => (
-                      <a id={`${k.slug}-link`} class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-500`} href={`#${k.slug}`}>
+                      <a id={`${k.slug}-link`} class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-400`} href={`#${k.slug}`}>
                         {k.text}
                       </a>
                     ))}
