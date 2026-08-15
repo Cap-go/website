@@ -2164,7 +2164,7 @@ const messages = {
   manifesto_full_ecosystem:
     "We're your dedicated native partner, offering live updates, Capgo Build, custom plugin development, and ongoing maintenance services. Need a specific native feature? We'll build it. App store rejections giving you headaches? We'll handle the submissions. Think of us as your mobile development team.",
   manifesto_home_for_developers:
-    "Your team excels at web development - you shouldn't need native mobile experts. We're the bridge between your web expertise and mobile success. Open source, transparent, and built by developers who understand the web-to-mobile journey.",
+    "Most mobile tools try to make Apple's process nicer. We skip it. Capgo is the shortcut between your web code and your users: open source, fast, and built so teams ship instead of waiting.",
   massive_cost_reduction: 'Massive cost reduction',
   mau: 'MAU',
   mau_counting_explanation:
