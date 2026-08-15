@@ -132,6 +132,23 @@ for (const scanTarget of scanTargets) {
   collectReferencedAssets(scanTarget, referencedAssets)
 }
 
+/** Docs only needs /docs* static redirects; copying the full web _redirects blows CF's dynamic-rule cap. */
+function filterDocsRedirects(content: string): string {
+  const kept: string[] = [
+    '# Filtered from apps/web/public/_redirects for capgo-docs (docs paths only, no splats).',
+    '# Splat /docs/plugin/* is handled in apps/docs/src/worker/index.ts.',
+  ]
+  for (const line of content.split(/\r?\n/)) {
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith('#')) continue
+    const source = trimmed.split(/\s+/)[0] ?? ''
+    if (!source.startsWith('/docs')) continue
+    if (source.includes('*') || source.includes(':')) continue
+    kept.push(trimmed)
+  }
+  return `${kept.join('\n')}\n`
+}
+
 let copiedBytes = 0
 let copiedCount = 0
 
@@ -144,8 +161,14 @@ for (const assetPath of [...referencedAssets].sort((left, right) => left.localeC
   const outputPath = resolve(targetPublicDir, assetPath)
   if (!isWithinRoot(targetPublicDir, outputPath)) continue
   mkdirSync(dirname(outputPath), { recursive: true })
-  copyFileSync(sourcePath, outputPath)
-  copiedBytes += sourceMetadata.size
+  if (assetPath === '_redirects') {
+    const filtered = filterDocsRedirects(readFileSync(sourcePath, 'utf8'))
+    writeFileSync(outputPath, filtered, 'utf8')
+    copiedBytes += Buffer.byteLength(filtered)
+  } else {
+    copyFileSync(sourcePath, outputPath)
+    copiedBytes += sourceMetadata.size
+  }
   copiedCount += 1
 }
 

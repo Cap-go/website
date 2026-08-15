@@ -286,6 +286,14 @@ const PLUGIN_DOCS_REDIRECTS: Record<string, string> = {
 }
 
 function staticLegacyRedirect(request: Request, pathname: string): Response | null {
+  // Former _redirects splat: /en/* → /:splat (must stay out of _redirects; CF dynamic-rule cap)
+  if (pathname === '/en' || pathname === '/en/') {
+    return redirectToPath(request, '/')
+  }
+  if (pathname.startsWith('/en/')) {
+    return redirectToPath(request, pathname.slice(3) || '/')
+  }
+
   const { localePrefix, path } = splitLocalePath(pathname)
   if (path === '/home' || path === '/home/') {
     return redirectToPath(request, `${localePrefix}/`)

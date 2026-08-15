@@ -242,6 +242,16 @@ export default {
       const rest = pathname.replace(/^\/docs\/cli\/cloud-build\/?/, '')
       return trackAICrawler(request, Response.redirect(new URL(`/docs/builder/${rest}${url.search}`, request.url).toString(), 301), ctx)
     }
+    // Former _redirects splat: /docs/plugin/* → /docs/plugins/updater/:splat
+    // Kept in code so CF never classifies later static _redirects as dynamic.
+    if (pathname.startsWith('/docs/plugin/')) {
+      const rest = pathname.slice('/docs/plugin/'.length)
+      return trackAICrawler(
+        request,
+        Response.redirect(new URL(`/docs/plugins/updater/${rest}${url.search}`, request.url).toString(), 301),
+        ctx,
+      )
+    }
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
     if (response.status === 404 && shouldServeBrandedNotFound(pathname)) {
