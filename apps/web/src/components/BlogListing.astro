@@ -38,7 +38,7 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
 ---
 
 <Layout {content}>
-  <div class="flex w-full flex-col items-center py-8">
+  <div class="product-hero flex w-full flex-col items-center py-8">
     <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
       <header class="max-w-3xl">
         <h1 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">{m.latest_from_the_blog({}, { locale: Astro.locals.locale })}</h1>
