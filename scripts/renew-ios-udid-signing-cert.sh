@@ -130,7 +130,8 @@ require_issue_credentials() {
 }
 
 dns_token_hint() {
-  echo "Create a Cloudflare API token with Zone.Zone:Read and Zone.DNS:Edit on ${DOMAIN}, then set GitHub secret CLOUDFLARE_DNS_API_TOKEN. The Worker deploy token cannot create _acme-challenge TXT records."
+  local zone="${1:-$DOMAIN}"
+  echo "Create a Cloudflare API token with Zone.Zone:Read and Zone.DNS:Edit on ${zone}, then set GitHub secret CLOUDFLARE_DNS_API_TOKEN. The Worker deploy token cannot create _acme-challenge TXT records."
 }
 
 verify_cloudflare_dns() {
@@ -144,7 +145,7 @@ verify_cloudflare_dns() {
         "https://api.cloudflare.com/client/v4/zones?name=${zone}&per_page=1" || true
   )"
 
-  if ! HTTP_CODE="$code" BODY_FILE="$body" DOMAIN="$DOMAIN" ZONE="$zone" HINT="$(dns_token_hint)" python3 <<'PY'
+  if ! HTTP_CODE="$code" BODY_FILE="$body" DOMAIN="$DOMAIN" ZONE="$zone" HINT="$(dns_token_hint "$zone")" python3 <<'PY'
 import json
 import os
 import sys
@@ -202,8 +203,8 @@ issue_or_renew() {
 
   echo "Creating ${DOMAIN} via DNS-01."
   if ! "$lego_bin" "${common_args[@]}" run; then
-    echo "Let's Encrypt DNS-01 failed. If Cloudflare returned 403/10000, the token lacks Zone.DNS:Edit on ${DOMAIN}." >&2
-    dns_token_hint >&2
+    echo "Let's Encrypt DNS-01 failed. If Cloudflare returned 403/10000, the token lacks Zone.DNS:Edit on ${UDID_CERT_ZONE:-$DOMAIN}." >&2
+    dns_token_hint "${UDID_CERT_ZONE:-$DOMAIN}" >&2
     exit 1
   fi
 
