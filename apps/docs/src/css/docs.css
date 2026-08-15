@@ -25,7 +25,7 @@ body,
     radial-gradient(1100px 640px at 50% -80px, rgba(59, 130, 246, 0.22) 0%, transparent 72%), linear-gradient(180deg, #0d1525 0%, #0d1525 58vh, #1a1a1a 100vh);
 }
 
-:root:not([data-theme='light']) html,
+:root:not([data-theme='light']),
 :root:not([data-theme='light']) body {
   background-color: #1a1a1a;
 }
