@@ -1,4 +1,187 @@
-/* After-fold product surfaces match the homepage: #1a1a1a, quieter color, less texture. */
+/* After-fold product surfaces match the homepage: #1a1a1a, quieter color, less texture.
+   Hero stays on the shared body blue; grey fade starts lower so header and hero share one wash. */
+
+body:has(:is(.lu, .nb, .cli, .ma, .sk, .product-hero, main.data-page)) {
+  background-color: #1a1a1a;
+  background-image: radial-gradient(1100px 640px at 50% -80px, rgba(59, 130, 246, 0.22) 0%, transparent 72%), linear-gradient(180deg, #0d1525 0%, #0d1525 58vh, #1a1a1a 100vh);
+  background-repeat: no-repeat;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad,
+.product-hero {
+  background: transparent;
+}
+
+.product-hero > section:first-of-type {
+  background-color: transparent;
+  background-image: none;
+}
+
+.product-hero [class*='bg-linear-to-']:not(.bg-clip-text),
+.product-hero [class*='bg-gradient-to-']:not(.bg-clip-text) {
+  background-image: none;
+}
+
+.product-hero .blur-3xl {
+  display: none;
+}
+
+.product-hero > section:first-of-type > .pointer-events-none .animate-pulse.rounded-full {
+  display: none;
+}
+
+.product-hero > section:not(:first-of-type) {
+  background-color: transparent;
+  background-image: none;
+}
+
+/* Unique per-page skins → Capgo blue + charcoal. Keep window traffic lights and clip-text. */
+.product-hero
+  :is(
+    [class*='bg-amber-'],
+    [class*='bg-orange-'],
+    [class*='bg-rose-'],
+    [class*='bg-pink-'],
+    [class*='bg-purple-'],
+    [class*='bg-violet-'],
+    [class*='bg-emerald-'],
+    [class*='bg-green-'],
+    [class*='bg-cyan-'],
+    [class*='bg-teal-'],
+    [class*='bg-sky-'],
+    [class*='bg-red-'],
+    [class*='bg-yellow-']
+  ):not(a, button, .bg-clip-text, .bg-red-500, .bg-yellow-500, .bg-green-500) {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.product-hero
+  :is(a, button):is(
+    [class*='bg-amber-'],
+    [class*='bg-orange-'],
+    [class*='bg-rose-'],
+    [class*='bg-pink-'],
+    [class*='bg-purple-'],
+    [class*='bg-violet-'],
+    [class*='bg-emerald-'],
+    [class*='bg-green-'],
+    [class*='bg-cyan-'],
+    [class*='bg-teal-'],
+    [class*='bg-sky-'],
+    [class*='bg-red-'],
+    [class*='bg-yellow-']
+  ) {
+  background-color: #2563eb;
+  color: #fff;
+  box-shadow: none;
+}
+
+.product-hero
+  :is(a, button):is(
+    [class*='bg-amber-'],
+    [class*='bg-orange-'],
+    [class*='bg-rose-'],
+    [class*='bg-pink-'],
+    [class*='bg-purple-'],
+    [class*='bg-violet-'],
+    [class*='bg-emerald-'],
+    [class*='bg-green-'],
+    [class*='bg-cyan-'],
+    [class*='bg-teal-'],
+    [class*='bg-sky-'],
+    [class*='bg-red-'],
+    [class*='bg-yellow-']
+  ):hover {
+  background-color: #3b82f6;
+}
+
+.product-hero
+  :is(
+    [class*='text-amber-'],
+    [class*='text-orange-'],
+    [class*='text-rose-'],
+    [class*='text-pink-'],
+    [class*='text-purple-'],
+    [class*='text-violet-'],
+    [class*='text-red-'],
+    [class*='text-yellow-']
+  ) {
+  color: #d1d5dc;
+}
+
+.product-hero :is([class*='text-emerald-'], [class*='text-green-'], [class*='text-cyan-'], [class*='text-teal-'], [class*='text-sky-']) {
+  color: #93c5fd;
+}
+
+.product-hero
+  :is(
+    [class*='border-amber-'],
+    [class*='border-orange-'],
+    [class*='border-rose-'],
+    [class*='border-pink-'],
+    [class*='border-purple-'],
+    [class*='border-violet-'],
+    [class*='border-emerald-'],
+    [class*='border-green-'],
+    [class*='border-cyan-'],
+    [class*='border-teal-'],
+    [class*='border-sky-'],
+    [class*='border-red-'],
+    [class*='border-yellow-']
+  ) {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.product-hero
+  :is(
+    [class*='shadow-amber-'],
+    [class*='shadow-orange-'],
+    [class*='shadow-rose-'],
+    [class*='shadow-pink-'],
+    [class*='shadow-purple-'],
+    [class*='shadow-violet-'],
+    [class*='shadow-emerald-'],
+    [class*='shadow-green-'],
+    [class*='shadow-cyan-'],
+    [class*='shadow-teal-'],
+    [class*='shadow-sky-'],
+    [class*='shadow-red-'],
+    [class*='shadow-yellow-']
+  ) {
+  box-shadow: none;
+}
+
+.product-hero
+  :is(
+    [class*='ring-amber-'],
+    [class*='ring-orange-'],
+    [class*='ring-rose-'],
+    [class*='ring-pink-'],
+    [class*='ring-purple-'],
+    [class*='ring-violet-'],
+    [class*='ring-emerald-'],
+    [class*='ring-green-'],
+    [class*='ring-cyan-'],
+    [class*='ring-teal-'],
+    [class*='ring-sky-'],
+    [class*='ring-red-'],
+    [class*='ring-yellow-']
+  ) {
+  --tw-ring-color: rgb(96 165 250 / 0.45);
+}
+
+.product-hero :is(.bg-gray-800, .bg-gray-900, .bg-slate-800, .bg-slate-900, .bg-gray-950, .bg-slate-950) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.product-hero a[class*='hover:bg-gray-']:hover,
+.product-hero a[class*='hover:bg-slate-']:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .hero {
+  background: transparent;
+}
 
 :is(.lu, .nb, .cli, .ma, .sk).bg-ad .section:not(.hero) {
   background-color: #1a1a1a;
@@ -133,6 +316,10 @@ section.product-proof .proof-card-wrap {
 }
 
 main.data-page,
+main.data-page .data-hero {
+  background: transparent;
+}
+
 main.data-page .data-section {
   background: #1a1a1a;
 }
