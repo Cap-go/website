@@ -467,9 +467,6 @@ body:has(.cli) footer > div > div:first-child {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.45);
 }
-.cli .eyebrow--yellow {
-  color: var(--relief-blue);
-}
 .cli .eyebrow--blue {
   color: var(--relief-blue);
 }
