@@ -42,14 +42,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
   <div class="product-hero">
     <!-- Hero Section -->
     <section class="relative overflow-hidden py-16 sm:py-20 lg:py-28">
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
-        <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
-          <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"></div>
-          <div class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"></div>
-        </div>
-      </div>
-
-      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <p class="inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-gray-200">
             {m.solutions_ionic_plugins_badge({}, { locale })}
@@ -89,7 +82,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
     </section>
 
     <!-- Value Proposition -->
-    <section class="bg-[#1a1a1a] py-16 sm:py-20">
+    <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
           <h2 class="text-3xl font-bold text-white sm:text-4xl">Why Capgo is different from an enterprise plugin contract</h2>
@@ -175,7 +168,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
     </section>
 
     <!-- Plugin Table -->
-    <section id="plugin-migration" class="bg-[#1a1a1a] py-16 sm:py-20">
+    <section id="plugin-migration" class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
           <h2 class="text-3xl font-bold text-white sm:text-4xl">
@@ -188,7 +181,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
 
         <div class="mt-10 overflow-x-auto rounded-xl border border-white/10 bg-white/[0.02]">
           <table class="w-full min-w-[720px] text-left text-sm text-gray-300">
-            <thead class="bg-gray-900/70 text-gray-400">
+            <thead class="bg-white/[0.04] text-gray-400">
               <tr>
                 <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_ionic({}, { locale })}</th>
                 <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_capgo({}, { locale })}</th>
@@ -196,7 +189,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-700">
-              <tr class="transition hover:bg-gray-800/60">
+              <tr class="transition hover:bg-white/5">
                 <td class="px-6 py-4 font-medium text-gray-100">Ionic Secure Storage</td>
                 <td class="px-6 py-4">
                   <a href={getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/')} class="text-blue-400 hover:underline"> Fast SQL </a>
@@ -209,7 +202,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                   </a>
                 </td>
               </tr>
-              <tr class="transition hover:bg-gray-800/60">
+              <tr class="transition hover:bg-white/5">
                 <td class="px-6 py-4 font-medium text-gray-100">Ionic Auth Connect</td>
                 <td class="px-6 py-4">
                   <a href={getRelativeLocaleUrl(locale, 'docs/plugins/social-login/')} class="text-blue-400 hover:underline"> Social Login </a>
@@ -220,7 +213,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                   </a>
                 </td>
               </tr>
-              <tr class="transition hover:bg-gray-800/60">
+              <tr class="transition hover:bg-white/5">
                 <td class="px-6 py-4 font-medium text-gray-100">Ionic Identity Vault</td>
                 <td class="px-6 py-4">
                   <a href={nativeBiometricUrl} class="font-semibold text-blue-400 hover:underline">Native Biometric</a>
@@ -233,7 +226,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                   </a>
                 </td>
               </tr>
-              <tr class="transition hover:bg-gray-800/60">
+              <tr class="transition hover:bg-white/5">
                 <td class="px-6 py-4 font-medium text-gray-100">Ionic Intune</td>
                 <td class="px-6 py-4">
                   <a href={getRelativeLocaleUrl(locale, 'docs/plugins/intune/')} class="text-blue-400 hover:underline"> Intune </a>
@@ -244,7 +237,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                   </a>
                 </td>
               </tr>
-              <tr class="transition hover:bg-gray-800/60">
+              <tr class="transition hover:bg-white/5">
                 <td class="px-6 py-4 font-medium text-gray-100">Ionic Payments</td>
                 <td class="px-6 py-4">
                   <a href={getRelativeLocaleUrl(locale, 'docs/plugins/pay/')} class="text-blue-400 hover:underline"> @capgo/capacitor-pay </a>
@@ -255,7 +248,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                   </a>
                 </td>
               </tr>
-              <tr class="transition hover:bg-gray-800/60">
+              <tr class="transition hover:bg-white/5">
                 <td class="px-6 py-4 font-medium text-gray-100">Ionic Zebra Scanner</td>
                 <td class="px-6 py-4">
                   <a href={getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/')} class="text-blue-400 hover:underline"> Zebra DataWedge </a>
@@ -266,7 +259,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                   </a>
                 </td>
               </tr>
-              <tr class="transition hover:bg-gray-800/60">
+              <tr class="transition hover:bg-white/5">
                 <td class="px-6 py-4 font-medium text-gray-100">@ionic-enterprise/ssl-pinning</td>
                 <td class="px-6 py-4">
                   <a href="https://github.com/mchl18/Capacitor-SSL-Pinning" class="text-blue-400 hover:underline" target="_blank" rel="noreferrer"> capacitor-ssl-pinning </a>
@@ -320,7 +313,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
     </section>
 
     <!-- Migration Steps -->
-    <section class="bg-[#1a1a1a] py-16 sm:py-20">
+    <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-white sm:text-4xl">
           {m.solutions_ionic_plugins_steps_title({}, { locale })}
@@ -343,7 +336,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
     </section>
 
     <!-- Coverage Boundaries -->
-    <section class="bg-[#1a1a1a] py-16 sm:py-20">
+    <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-8 lg:grid-cols-[0.95fr_1.45fr] lg:items-start">
           <div>
@@ -410,7 +403,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
     </section>
 
     <!-- Open Source + Optional Support -->
-    <section class="bg-[#1a1a1a] py-16 sm:py-20">
+    <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div>
@@ -447,7 +440,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
     />
 
     <!-- Next step -->
-    <section class="bg-[#1a1a1a] py-16 sm:py-20">
+    <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
@@ -459,7 +452,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
           </div>
 
           <div class="divide-y divide-white/10 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
-            <a href={pluginsUrl} class="block p-6 transition hover:bg-gray-800 sm:p-7">
+            <a href={pluginsUrl} class="block p-6 transition hover:bg-white/5 sm:p-7">
               <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <h3 class="text-lg font-semibold tracking-tight text-white sm:text-xl">Find the replacement plugin</h3>
@@ -470,7 +463,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                 <span class="shrink-0 text-sm font-medium text-blue-400">Browse plugins</span>
               </div>
             </a>
-            <a href={pluginDocsUrl} class="block p-6 transition hover:bg-gray-800 sm:p-7">
+            <a href={pluginDocsUrl} class="block p-6 transition hover:bg-white/5 sm:p-7">
               <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <h3 class="text-lg font-semibold tracking-tight text-white sm:text-xl">Install and migrate safely</h3>
@@ -481,7 +474,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                 <span class="shrink-0 text-sm font-medium text-blue-400">Open docs</span>
               </div>
             </a>
-            <a href={builderUrl} class="block p-6 transition hover:bg-gray-800 sm:p-7">
+            <a href={builderUrl} class="block p-6 transition hover:bg-white/5 sm:p-7">
               <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <h3 class="text-lg font-semibold tracking-tight text-white sm:text-xl">Build the native release</h3>
@@ -492,7 +485,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                 <span class="shrink-0 text-sm font-medium text-blue-400">See Builder</span>
               </div>
             </a>
-            <a href={consultingUrl} class="block p-6 transition hover:bg-gray-800 sm:p-7">
+            <a href={consultingUrl} class="block p-6 transition hover:bg-white/5 sm:p-7">
               <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <h3 class="text-lg font-semibold tracking-tight text-white sm:text-xl">Bring Capgo in when it is critical</h3>
@@ -509,7 +502,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
     </section>
 
     <!-- CTA -->
-    <section class="bg-[#1a1a1a] py-16 sm:py-20">
+    <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="rounded-xl border border-white/10 bg-white/[0.03] p-10 text-center">
           <h2 class="text-3xl font-bold text-white sm:text-4xl">
@@ -533,7 +526,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
               aria-label={m.enterprise_talk_to_team({}, { locale })}
               class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 px-8 py-4 text-base font-semibold text-gray-200 transition-all duration-200 hover:bg-white/5"
             >
-              <TeamAvatars border="border-emerald-950" />
+              <TeamAvatars border="border-gray-950" />
               <span>{m.enterprise_talk_to_team({}, { locale })}</span>
             </a>
           </div>
