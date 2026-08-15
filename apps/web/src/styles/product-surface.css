@@ -26,7 +26,7 @@ body:has(:is(.lu, .nb, .cli, .ma, .sk, .product-hero, main.data-page)) {
   display: none;
 }
 
-.product-hero .animate-pulse.rounded-full {
+.product-hero > section:first-of-type > .pointer-events-none .animate-pulse.rounded-full {
   display: none;
 }
 
@@ -177,11 +177,6 @@ body:has(:is(.lu, .nb, .cli, .ma, .sk, .product-hero, main.data-page)) {
 .product-hero a[class*='hover:bg-gray-']:hover,
 .product-hero a[class*='hover:bg-slate-']:hover {
   background-color: rgba(255, 255, 255, 0.05);
-}
-
-.product-hero
-  :is([class*='fill-amber-'], [class*='fill-orange-'], [class*='fill-rose-'], [class*='fill-red-'], [class*='fill-yellow-'], [class*='fill-green-'], [class*='fill-emerald-']) {
-  fill: #6b7280;
 }
 
 :is(.lu, .nb, .cli, .ma, .sk).bg-ad .hero {
