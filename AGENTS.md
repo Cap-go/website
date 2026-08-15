@@ -49,7 +49,7 @@ bunx @tailwindcss/upgrade --force
 ## Blog And Page Slugs
 
 - Never change an existing public URL slug (blog posts, pages, docs) once it has been published and indexed.
-- If a slug must change, add redirects for the old path in the same change: `apps/shared/legacyPathRedirects.ts`, `apps/web/public/_redirects` (with locale variants), and worker/translation rewrite paths as needed.
+- If a slug must change, add redirects for the old path in the same change: prefer `apps/shared/legacyPathRedirects.ts` (web + translation workers) and docs worker code for `/docs/*`. Use `apps/web/public/_redirects` only for a small set of static exact-path rules — never re-add bulk blog renames or splat/`*` rules there (Cloudflare caps dynamic `_redirects` at 100, and any splat makes later rules count as dynamic).
 - Preserve locale prefixes (`/de/`, `/fr/`, etc.) so each language keeps working backlinks.
 - Prefer permanent (301) redirects so earned backlinks are not lost.
 
