@@ -132,7 +132,8 @@ issue_or_renew() {
 
   local work
   work="$(mktemp -d)"
-  trap 'rm -rf "$work"' EXIT
+  # EXIT runs after locals are unset; expand the path now so `set -u` cannot trip.
+  trap 'rm -rf -- '"$(printf '%q' "$work")" EXIT
 
   install_lego "$work"
 
@@ -144,7 +145,7 @@ issue_or_renew() {
     --email "$EMAIL"
     --dns cloudflare
     --domains "$DOMAIN"
-    --key-type rsa
+    --key-type rsa2048
     --path "$work"
   )
 
