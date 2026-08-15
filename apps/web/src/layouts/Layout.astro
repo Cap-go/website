@@ -8,6 +8,7 @@ import Affonso from '../components/Affonso.astro'
 import PostHog from '../components/posthog.astro'
 import WebMcpTools from '../components/WebMcpTools.astro'
 import globalStylesHref from '../css/global.css?url'
+import productSurfaceHref from '../styles/product-surface.css?url'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { getCollection } from 'astro:content'
 
@@ -53,6 +54,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealMedium.woff" crossorigin />
     <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealBold.woff" crossorigin />
     <link rel="stylesheet" href={globalStylesHref} />
+    <link rel="stylesheet" href={productSurfaceHref} />
     <SEO {...content} />
     <slot name="head" />
     {enableThirdPartyScripts && <MetaPixel />}

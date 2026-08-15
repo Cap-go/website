@@ -28,7 +28,7 @@ const trustedFreelancers = [
 ---
 
 <Layout content={content}>
-  <div class="min-h-screen bg-gray-900">
+  <div class="min-h-screen bg-[#1a1a1a]">
     <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
       <div class="space-y-8 text-center">
         <p class="inline-flex rounded-full border border-zinc-700 bg-zinc-800/80 px-4 py-2 text-xs font-medium text-zinc-300">{m.integrations_badge({}, { locale })}</p>
@@ -107,14 +107,14 @@ const trustedFreelancers = [
         </div>
       </section>
     </section>
+    <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
+      <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Integrations</h2>
+      <p class="mt-4">
+        If you are connecting Capgo to your release stack, pair this page with <a href="/docs/live-updates/integrations/github-actions/">GitHub Actions</a> for automated deploys, <a
+          href="/docs/live-updates/integrations/gitlab-ci/">GitLab CI/CD</a
+        > for pipeline setup, <a href="/docs/live-updates/integrations/bitbucket-pipeline/">Bitbucket Pipelines</a> for repository automation, <a href="/ci_cd/">Capgo CI/CD</a> for the
+        product workflow, and <a href="/native-build/">Capgo Native Builds</a> when native signing is part of the same pipeline.
+      </p>
+    </section>
   </div>
-  <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
-    <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Integrations</h2>
-    <p class="mt-4">
-      If you are connecting Capgo to your release stack, pair this page with <a href="/docs/live-updates/integrations/github-actions/">GitHub Actions</a> for automated deploys, <a
-        href="/docs/live-updates/integrations/gitlab-ci/">GitLab CI/CD</a
-      > for pipeline setup, <a href="/docs/live-updates/integrations/bitbucket-pipeline/">Bitbucket Pipelines</a> for repository automation, <a href="/ci_cd/">Capgo CI/CD</a> for the
-      product workflow, and <a href="/native-build/">Capgo Native Builds</a> when native signing is part of the same pipeline.
-    </p>
-  </section>
 </Layout>

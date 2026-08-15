@@ -67,7 +67,7 @@
 }
 body:has(.sk) {
   background-color: var(--color-gray-900);
-  background-image: radial-gradient(1200px 560px at 50% -40px, rgba(96, 165, 250, 0.14) 0%, rgba(34, 211, 238, 0.08) 38%, rgba(74, 222, 128, 0.05) 58%, transparent 72%);
+  background-image: radial-gradient(900px 420px at 50% -40px, rgba(96, 165, 250, 0.07) 0%, transparent 68%);
   background-repeat: no-repeat;
 }
 .sk.bg-ad {
