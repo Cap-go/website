@@ -135,47 +135,99 @@ dns_token_hint() {
 }
 
 verify_cloudflare_dns() {
-  local body code zone
-  zone="${UDID_CERT_ZONE:-$DOMAIN}"
-  body="$(mktemp)"
-  code="$(
-    printf 'Authorization: Bearer %s\n' "$CLOUDFLARE_DNS_API_TOKEN" |
-      curl --proto '=https' --tlsv1.2 -sS -o "$body" -w '%{http_code}' \
-        -H @- \
-        "https://api.cloudflare.com/client/v4/zones?name=${zone}&per_page=1" || true
-  )"
-
-  if ! HTTP_CODE="$code" BODY_FILE="$body" DOMAIN="$DOMAIN" ZONE="$zone" HINT="$(dns_token_hint "$zone")" python3 <<'PY'
+  local zone="${UDID_CERT_ZONE:-$DOMAIN}"
+  if ! DOMAIN="$DOMAIN" ZONE="$zone" HINT="$(dns_token_hint "$zone")" python3 <<'PY'
 import json
 import os
+import ssl
 import sys
+import urllib.error
+import urllib.request
 
-code = os.environ["HTTP_CODE"]
+token = os.environ["CLOUDFLARE_DNS_API_TOKEN"]
+worker = os.environ.get("CLOUDFLARE_API_TOKEN", "")
 domain = os.environ["DOMAIN"]
 zone = os.environ["ZONE"]
 hint = os.environ["HINT"]
-try:
-    with open(os.environ["BODY_FILE"], encoding="utf-8") as fh:
-        data = json.load(fh)
-except Exception:
-    data = {}
-errors = data.get("errors") or []
-err_txt = "; ".join(
-    f"{item.get('code')}: {item.get('message')}" for item in errors if isinstance(item, dict)
-) or "no Cloudflare error body"
-if code != "200":
-    print(f"Cloudflare zone lookup for {zone} failed: HTTP {code} ({err_txt}). {hint}", file=sys.stderr)
+ctx = ssl.create_default_context()
+
+
+def cf(method, url, payload=None):
+    data = None if payload is None else json.dumps(payload).encode()
+    req = urllib.request.Request(url, data=data, method=method)
+    req.add_header("Authorization", "Bearer " + token)
+    req.add_header("Content-Type", "application/json")
+    try:
+        with urllib.request.urlopen(req, context=ctx, timeout=30) as resp:
+            raw = resp.read().decode()
+            return resp.status, json.loads(raw) if raw else {}
+    except urllib.error.HTTPError as exc:
+        raw = exc.read().decode()
+        try:
+            return exc.code, json.loads(raw)
+        except Exception:
+            return exc.code, {"raw": raw}
+
+
+def err_txt(body):
+    errors = body.get("errors") or []
+    return "; ".join(
+        f"{item.get('code')}: {item.get('message')}" for item in errors if isinstance(item, dict)
+    ) or "no Cloudflare error body"
+
+
+if token == worker:
+    print("CLOUDFLARE_DNS_API_TOKEN is the same value as CLOUDFLARE_API_TOKEN (Worker deploy token).")
+else:
+    print("CLOUDFLARE_DNS_API_TOKEN is distinct from CLOUDFLARE_API_TOKEN.")
+
+verify_code, verify_body = cf("GET", "https://api.cloudflare.com/client/v4/user/tokens/verify")
+status = (verify_body.get("result") or {}).get("status")
+if verify_code == 200 and status == "active":
+    print("GitHub CLOUDFLARE_DNS_API_TOKEN is a user API token (active).")
+else:
+    print(
+        f"GitHub CLOUDFLARE_DNS_API_TOKEN failed /user/tokens/verify HTTP {verify_code} ({err_txt(verify_body)}). "
+        "Account API tokens fail this endpoint. Create the token under My Profile → API Tokens.",
+        file=sys.stderr,
+    )
+
+zones_code, zones_body = cf(
+    "GET", f"https://api.cloudflare.com/client/v4/zones?name={zone}&per_page=1"
+)
+if zones_code != 200:
+    print(f"Cloudflare zone lookup for {zone} failed: HTTP {zones_code} ({err_txt(zones_body)}). {hint}", file=sys.stderr)
     sys.exit(1)
-if not (data.get("result") or []):
-    print(f"Cloudflare token cannot see zone {zone} (cert domain {domain}). Set UDID_CERT_ZONE to the apex zone if needed. {hint}", file=sys.stderr)
+results = zones_body.get("result") or []
+if not results:
+    print(f"Cloudflare token cannot see zone {zone} (cert domain {domain}). {hint}", file=sys.stderr)
     sys.exit(1)
-print(f"Cloudflare DNS token can read zone {zone}.")
+
+zone_info = results[0]
+zone_id = zone_info.get("id")
+perms = zone_info.get("permissions") or []
+print(f"Cloudflare DNS token can read zone {zone} id={zone_id} permissions={perms}")
+
+create_code, create_body = cf(
+    "POST",
+    f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records",
+    {"type": "TXT", "name": f"_capgo-udid-probe.{zone}", "content": "ok", "ttl": 120},
+)
+if create_code // 100 != 2:
+    print(
+        f"Cloudflare TXT create failed: HTTP {create_code} ({err_txt(create_body)}). {hint}",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+record_id = (create_body.get("result") or {}).get("id")
+if record_id:
+    cf("DELETE", f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records/{record_id}")
+print(f"Cloudflare DNS token can create TXT records on {zone}.")
 PY
   then
-    rm -f "$body"
     exit 1
   fi
-  rm -f "$body"
 }
 
 issue_or_renew() {
@@ -202,7 +254,7 @@ issue_or_renew() {
   )
 
   echo "Creating ${DOMAIN} via DNS-01."
-  if ! "$lego_bin" "${common_args[@]}" run; then
+  if ! env -u CLOUDFLARE_API_TOKEN "$lego_bin" "${common_args[@]}" run; then
     echo "Let's Encrypt DNS-01 failed. If Cloudflare returned 403/10000, the token lacks Zone.DNS:Edit on ${UDID_CERT_ZONE:-$DOMAIN}." >&2
     dns_token_hint "${UDID_CERT_ZONE:-$DOMAIN}" >&2
     exit 1
