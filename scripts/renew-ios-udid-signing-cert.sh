@@ -134,19 +134,24 @@ dns_token_hint() {
 }
 
 verify_cloudflare_dns() {
-  local body code
+  local body code zone
+  zone="${UDID_CERT_ZONE:-$DOMAIN}"
   body="$(mktemp)"
-  code="$(curl --proto '=https' --tlsv1.2 -sS -o "$body" -w '%{http_code}' \
-    -H "Authorization: Bearer ${CLOUDFLARE_DNS_API_TOKEN}" \
-    "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&per_page=1" || true)"
+  code="$(
+    printf 'Authorization: Bearer %s\n' "$CLOUDFLARE_DNS_API_TOKEN" |
+      curl --proto '=https' --tlsv1.2 -sS -o "$body" -w '%{http_code}' \
+        -H @- \
+        "https://api.cloudflare.com/client/v4/zones?name=${zone}&per_page=1" || true
+  )"
 
-  if ! HTTP_CODE="$code" BODY_FILE="$body" DOMAIN="$DOMAIN" HINT="$(dns_token_hint)" python3 <<'PY'
+  if ! HTTP_CODE="$code" BODY_FILE="$body" DOMAIN="$DOMAIN" ZONE="$zone" HINT="$(dns_token_hint)" python3 <<'PY'
 import json
 import os
 import sys
 
 code = os.environ["HTTP_CODE"]
 domain = os.environ["DOMAIN"]
+zone = os.environ["ZONE"]
 hint = os.environ["HINT"]
 try:
     with open(os.environ["BODY_FILE"], encoding="utf-8") as fh:
@@ -158,12 +163,12 @@ err_txt = "; ".join(
     f"{item.get('code')}: {item.get('message')}" for item in errors if isinstance(item, dict)
 ) or "no Cloudflare error body"
 if code != "200":
-    print(f"Cloudflare zone lookup for {domain} failed: HTTP {code} ({err_txt}). {hint}", file=sys.stderr)
+    print(f"Cloudflare zone lookup for {zone} failed: HTTP {code} ({err_txt}). {hint}", file=sys.stderr)
     sys.exit(1)
 if not (data.get("result") or []):
-    print(f"Cloudflare token cannot see zone {domain}. Scope it to that zone. {hint}", file=sys.stderr)
+    print(f"Cloudflare token cannot see zone {zone} (cert domain {domain}). Set UDID_CERT_ZONE to the apex zone if needed. {hint}", file=sys.stderr)
     sys.exit(1)
-print(f"Cloudflare DNS token can read zone {domain}.")
+print(f"Cloudflare DNS token can read zone {zone}.")
 PY
   then
     rm -f "$body"
