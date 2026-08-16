@@ -5,8 +5,8 @@ description: 'Compare Ionic live update services for Capacitor apps. Check secur
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
-created_at: 2026-08-14T11:10:07.000Z
-updated_at: 2026-08-16T21:47:42.000Z
+created_at: 2026-08-16T21:45:36.000Z
+updated_at: 2026-08-16T22:00:18.000Z
 head_image: /capgo_banner.png
 head_image_alt: Secure differential Ionic live update deployment workflow
 keywords: ''
