@@ -150,11 +150,6 @@ export async function signMobileconfig(profileXml: string, credentials?: UdidSig
   }
 }
 
-export function extractPlistXml(rawBody: string): string | null {
-  const match = rawBody.match(/<plist[\s\S]*<\/plist>/i)
-  return match ? match[0] : null
-}
-
 export function extractPlistXmlFromDeviceBody(rawBytes: Uint8Array): string | null {
   const latin1 = new TextDecoder('latin1').decode(rawBytes)
   const match = latin1.match(/<plist[\s\S]*<\/plist>/i)
