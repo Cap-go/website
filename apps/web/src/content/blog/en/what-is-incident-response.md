@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-16T07:51:37.634Z
-updated_at: 2026-08-16T07:51:39.554Z
+updated_at: 2026-08-16T07:54:08.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/5da394a1-a6ce-4a56-88cd-1a3792d1726c/what-is-incident-response-incident-response.jpg'
 head_image_alt: What Is Incident Response and Why It Matters in 2026
 keywords: 'incident response, cybersecurity, NIST 800-61, Capacitor live updates, DevOps'
