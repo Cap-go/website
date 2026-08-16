@@ -150,9 +150,11 @@ export async function signMobileconfig(profileXml: string, credentials?: UdidSig
   }
 }
 
-export function extractPlistXml(rawBody: string): string | null {
-  const match = rawBody.match(/<plist[\s\S]*<\/plist>/i)
-  return match ? match[0] : null
+export function extractPlistXmlFromDeviceBody(rawBytes: Uint8Array): string | null {
+  const latin1 = new TextDecoder('latin1').decode(rawBytes)
+  const match = latin1.match(/<plist[\s\S]*<\/plist>/i)
+  if (!match || match.index == null) return null
+  return new TextDecoder('utf-8').decode(rawBytes.subarray(match.index, match.index + match[0].length))
 }
 
 function decodeXml(value: string): string {
@@ -164,7 +166,7 @@ export function parseUdidDevicePayload(plistXml: string): UdidDevicePayload {
   const matcher = /<key>([\s\S]*?)<\/key>\s*(?:<string>([\s\S]*?)<\/string>|<integer>([\s\S]*?)<\/integer>|<data>([\s\S]*?)<\/data>|<(true|false)\s*\/>)/gi
 
   for (const match of plistXml.matchAll(matcher)) {
-    const key = decodeXml((match[1] || '').trim())
+    const key = decodeXml((match[1] || '').trim()).toUpperCase()
     const stringValue = match[2] ?? match[3] ?? match[4] ?? match[5] ?? ''
     values[key] = decodeXml(stringValue.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim())
   }
