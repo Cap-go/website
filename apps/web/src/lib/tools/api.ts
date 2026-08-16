@@ -1,6 +1,6 @@
 import { defaultLocale, locales } from '../../services/locale'
 import { ToolInputError, createAndroidKeystoreBundle, createIosCertificateBundle, normalizeAndroidKeystoreInput, normalizeIosCertificateInput } from './signing'
-import { createUdidMobileconfig, decodePayload, encodePayload, extractPlistXml, parseUdidDevicePayload, signMobileconfig } from './udid'
+import { createUdidMobileconfig, decodePayload, encodePayload, extractPlistXmlFromDeviceBody, parseUdidDevicePayload, signMobileconfig } from './udid'
 
 export interface ToolApiEnv {
   IOS_UDID_PROFILE_SIGNING_CERT_PEM?: string
@@ -270,12 +270,12 @@ async function handleUdidCallback(request: Request): Promise<Response> {
     return redirect(routeLocale && routeLocale !== defaultLocale ? `/${routeLocale}/tools/ios-udid-finder/` : '/tools/ios-udid-finder/')
   }
 
-  const rawBody = new TextDecoder('latin1').decode(new Uint8Array(await request.arrayBuffer()))
-  const plistXml = extractPlistXml(rawBody)
+  const rawBytes = new Uint8Array(await request.arrayBuffer())
+  const plistXml = extractPlistXmlFromDeviceBody(rawBytes)
   if (!plistXml) {
     console.warn('udid_callback_reject', {
       reason: 'no_plist',
-      bodyLength: rawBody.length,
+      bodyLength: rawBytes.byteLength,
       contentType: request.headers.get('content-type') ?? '',
     })
     return webJson({ error: 'The device response did not include a plist payload.' }, 400)

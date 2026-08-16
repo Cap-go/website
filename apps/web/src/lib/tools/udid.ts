@@ -155,6 +155,13 @@ export function extractPlistXml(rawBody: string): string | null {
   return match ? match[0] : null
 }
 
+export function extractPlistXmlFromDeviceBody(rawBytes: Uint8Array): string | null {
+  const latin1 = new TextDecoder('latin1').decode(rawBytes)
+  const match = latin1.match(/<plist[\s\S]*<\/plist>/i)
+  if (!match || match.index == null) return null
+  return new TextDecoder('utf-8').decode(rawBytes.subarray(match.index, match.index + match[0].length))
+}
+
 function decodeXml(value: string): string {
   return value.replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&quot;', '"').replaceAll('&apos;', "'").replaceAll('&amp;', '&')
 }

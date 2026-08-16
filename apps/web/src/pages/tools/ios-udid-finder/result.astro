@@ -127,10 +127,16 @@ const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/builder/
     if (!value) return null
 
     try {
-      const json = atob(value.replaceAll('-', '+').replaceAll('_', '/'))
-      const parsed = JSON.parse(json) as Record<string, unknown>
+      const bytes = Uint8Array.from(atob(value.replaceAll('-', '+').replaceAll('_', '/')), (char) => char.charCodeAt(0))
+      const parsed = JSON.parse(new TextDecoder().decode(bytes)) as Record<string, unknown>
       if (!parsed || typeof parsed !== 'object' || typeof parsed.udid !== 'string' || !parsed.udid) {
         return null
+      }
+
+      const url = new URL(window.location.href)
+      if (url.searchParams.has('p')) {
+        url.searchParams.delete('p')
+        window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`)
       }
 
       return {
