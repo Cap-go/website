@@ -2,7 +2,7 @@ import Bowser from 'bowser'
 
 export function getRegistrationDevice(userAgent: string, maxTouchPoints: number) {
   const parsed = Bowser.parse(userAgent)
-  const isIPadOS = /Macintosh/.test(userAgent) && maxTouchPoints > 1
+  const isIPadOS = /iPad/.test(userAgent) || (/Macintosh/.test(userAgent) && maxTouchPoints > 1)
 
   return {
     registration_device_type: isIPadOS ? 'tablet' : (parsed.platform.type ?? 'unknown'),
