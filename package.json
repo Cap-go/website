@@ -79,6 +79,7 @@
     "@tailwindcss/vite": "^4.3.2",
     "astro": "7.0.3",
     "astro-icon": "1.1.5",
+    "bowser": "^2.14.1",
     "github-slugger": "^2.0.0",
     "glob": "^13.0.6",
     "marked": "^18.0.6",

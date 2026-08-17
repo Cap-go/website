@@ -151,6 +151,7 @@ const content = {
 </Layout>
 
 <script>
+  import { getRegistrationDevice } from '@/services/registration-device'
   import { getRemoteConfig, useSupabase } from '@/services/supabase'
   import Toastify from 'toastify-js'
 
@@ -229,6 +230,7 @@ const content = {
       }).showToast()
     }
     submitButton.disabled = true
+    const registrationDevice = getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)
     const { data: user, error } = await supabase.auth.signUp({
       email: email.value,
       password: password.value,
@@ -237,6 +239,7 @@ const content = {
         data: {
           first_name: firstName.value,
           last_name: lastName.value,
+          ...registrationDevice,
         },
       },
     })
