@@ -640,7 +640,7 @@ const messages = {
   companies_logo_downloads_revel: '250K+',
   companies_logo_downloads_suez: '3.2M',
   companies_logo_downloads_vella: '400K+',
-  companies_logo_stat_companies_label: 'Customers',
+  companies_logo_stat_companies_label: 'Companies',
   companies_logo_stat_companies_value: '7,800+',
   companies_logo_stat_devices_label: 'Devices tracked',
   companies_logo_stat_devices_value: '50M+',
