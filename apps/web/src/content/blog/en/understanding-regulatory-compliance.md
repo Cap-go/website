@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-18T09:29:38.043Z
-updated_at: 2026-08-18T09:29:39.773Z
+updated_at: 2026-08-18T09:32:23.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/9e81c10a-d1fa-4a71-8ba1-f63c6ade9747/understanding-regulatory-compliance-compliance-shield.jpg'
 head_image_alt: Understanding Regulatory Compliance for Mobile Apps
 keywords: 'regulatory compliance, mobile app compliance, GDPR mobile, SOC 2 apps, Capgo live updates'
