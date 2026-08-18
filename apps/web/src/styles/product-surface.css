@@ -12,11 +12,6 @@ body:has(:is(.lu, .nb, .cli, .ma, .sk, .product-hero, main.data-page)) {
   background: transparent;
 }
 
-.product-hero > section:first-of-type {
-  background-color: transparent;
-  background-image: none;
-}
-
 .product-hero [class*='bg-linear-to-']:not(.bg-clip-text),
 .product-hero [class*='bg-gradient-to-']:not(.bg-clip-text) {
   background-image: none;
