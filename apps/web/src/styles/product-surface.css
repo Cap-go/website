@@ -362,8 +362,7 @@ section:is([class*='from-slate-9'], [class*='via-slate-9'], [class*='to-slate-9'
 }
 
 .product-hero > section:first-of-type > .absolute.inset-0,
-.hero-wash > section:first-of-type > .absolute.inset-0,
-.hero-wash > .absolute.inset-0 {
+.hero-wash > section:first-of-type > .absolute.inset-0 {
   background-color: transparent;
 }
 
