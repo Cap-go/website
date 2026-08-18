@@ -343,12 +343,23 @@ main.data-page .data-section-muted {
 }
 
 /* Dark bands outside .product-hero still used unique slate/navy fills.
-   Exact classes only: skip /50 washes and full-page canvases such as /register/. */
-:is(section, main > div):is(.bg-gray-800, .bg-gray-900, .bg-gray-950, .bg-slate-700, .bg-slate-800, .bg-slate-900, .bg-slate-950):not([class*='min-h-screen']) {
+   Exact classes only: skip /50 washes and full-page canvases such as /register/.
+   Keep `section` and `main > div` as separate rules so :is() does not inflate
+   section specificity past `.product-hero > section:first-of-type`. */
+section:is(.bg-gray-800, .bg-gray-900, .bg-gray-950, .bg-slate-700, .bg-slate-800, .bg-slate-900, .bg-slate-950):not([class*='min-h-screen']) {
+  background-color: #1a1a1a;
+}
+
+main > div:is(.bg-gray-800, .bg-gray-900, .bg-gray-950, .bg-slate-700, .bg-slate-800, .bg-slate-900, .bg-slate-950):not([class*='min-h-screen']) {
   background-color: #1a1a1a;
 }
 
 section:is([class*='from-slate-9'], [class*='via-slate-9'], [class*='to-slate-9']):not([class*='min-h-screen']) {
   background-image: none;
   background-color: #1a1a1a;
+}
+
+.product-hero > section:first-of-type {
+  background-color: transparent;
+  background-image: none;
 }
