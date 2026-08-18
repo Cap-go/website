@@ -152,10 +152,8 @@ const navigation: Record<string, NavigationItem[]> = {
     { name: 'HIPAA compliance', href: getRelativeLocaleUrl(Astro.locals.locale, 'hipaa-compliance') },
     { name: m.consulting({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'consulting') },
     {
-      name: 'Affiliate program',
-      href: 'https://capgo.affonso.io',
-      target: '_blank',
-      rel: 'noopener noreferrer',
+      name: m.affiliate_kicker({}, { locale: Astro.locals.locale }),
+      href: getRelativeLocaleUrl(Astro.locals.locale, 'affiliate'),
     },
   ],
   compare: [
