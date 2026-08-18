@@ -5,7 +5,7 @@ import HumanSupport from '@/components/HumanSupport.astro'
 ---
 
 <!-- Ionic Appflow Shutdown Notice Section -->
-<section class="relative overflow-hidden bg-slate-700 py-16 sm:py-20 lg:py-24">
+<section class="relative overflow-hidden bg-[#1a1a1a] py-16 sm:py-20 lg:py-24">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto text-center">
       <!-- Notice Badge -->
@@ -206,18 +206,18 @@ import HumanSupport from '@/components/HumanSupport.astro'
       <div class="flex flex-col items-center justify-center gap-4">
         <HumanSupport tone="light" size="sm" />
         <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a
-          href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-          class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
-        >
-          {m.cta_start_migration({}, { locale: Astro.locals.locale })}
-        </a>
-        <a
-          href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/upgrade/from-appflow-to-capgo')}
-          class="inline-flex items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 hover:border-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
-        >
-          {m.migration_guide({}, { locale: Astro.locals.locale })}
-        </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+            class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+          >
+            {m.cta_start_migration({}, { locale: Astro.locals.locale })}
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/upgrade/from-appflow-to-capgo')}
+            class="inline-flex items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 hover:border-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+          >
+            {m.migration_guide({}, { locale: Astro.locals.locale })}
+          </a>
         </div>
       </div>
     </div>

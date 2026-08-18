@@ -337,6 +337,25 @@ main.data-page .data-hero {
   background: transparent;
 }
 
-main.data-page .data-section {
+main.data-page .data-section,
+main.data-page .data-section-muted {
   background: #1a1a1a;
+}
+
+/* Dark bands outside .product-hero still used unique slate/navy fills. */
+:is(section, main > div):is(
+  [class*='bg-gray-800'],
+  [class*='bg-gray-900'],
+  [class*='bg-gray-950'],
+  [class*='bg-slate-700'],
+  [class*='bg-slate-800'],
+  [class*='bg-slate-900'],
+  [class*='bg-slate-950']
+) {
+  background-color: #1a1a1a;
+}
+
+section:is([class*='from-slate-9'], [class*='via-slate-9'], [class*='to-slate-9']) {
+  background-image: none;
+  background-color: #1a1a1a;
 }
