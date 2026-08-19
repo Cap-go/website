@@ -17,14 +17,38 @@ const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
 const applyUrl = 'https://capgo.affonso.io'
 const COMMISSION = 0.2
 const PLAN_ORDER = ['Solo', 'Maker', 'Team', 'Enterprise'] as const
-const FALLBACK_PLANS = [
-  { name: 'Solo', price_m: 14 },
-  { name: 'Maker', price_m: 39 },
-  { name: 'Team', price_m: 99 },
-  { name: 'Enterprise', price_m: 249 },
+type PlanName = (typeof PLAN_ORDER)[number]
+type AffiliatePlan = { name: PlanName; price_m: number; price_y: number }
+
+const FALLBACK_PLANS: AffiliatePlan[] = [
+  { name: 'Solo', price_m: 14, price_y: 146 },
+  { name: 'Maker', price_m: 39, price_y: 396 },
+  { name: 'Team', price_m: 99, price_y: 998 },
+  { name: 'Enterprise', price_m: 249, price_y: 2490 },
 ]
 
-type AffiliatePlan = { name: string; price_m: number }
+function isFiniteNonNegative(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0
+}
+
+function parseLivePlans(payload: unknown): AffiliatePlan[] | null {
+  if (!Array.isArray(payload)) return null
+
+  const byName = new Map<PlanName, AffiliatePlan>()
+  for (const plan of payload) {
+    if (!plan || typeof plan !== 'object') continue
+    const name = 'name' in plan ? plan.name : undefined
+    const price_m = 'price_m' in plan ? plan.price_m : undefined
+    const price_y = 'price_y' in plan ? plan.price_y : undefined
+    if (typeof name !== 'string' || !PLAN_ORDER.includes(name as PlanName)) continue
+    if (!isFiniteNonNegative(price_m) || !isFiniteNonNegative(price_y)) continue
+    if (byName.has(name as PlanName)) return null
+    byName.set(name as PlanName, { name: name as PlanName, price_m, price_y })
+  }
+
+  if (byName.size !== PLAN_ORDER.length) return null
+  return PLAN_ORDER.map((name) => byName.get(name)!)
+}
 
 let plans: AffiliatePlan[] = FALLBACK_PLANS
 try {
@@ -32,17 +56,8 @@ try {
     signal: AbortSignal.timeout(3000),
   })
   if (response.ok) {
-    const payload = await response.json()
-    if (Array.isArray(payload)) {
-      const live = payload
-        .filter(
-          (plan: { name?: string; price_m?: number }) =>
-            typeof plan?.name === 'string' && PLAN_ORDER.includes(plan.name as (typeof PLAN_ORDER)[number]) && typeof plan.price_m === 'number',
-        )
-        .map((plan: { name: string; price_m: number }) => ({ name: plan.name, price_m: plan.price_m }))
-        .sort((a: AffiliatePlan, b: AffiliatePlan) => PLAN_ORDER.indexOf(a.name as (typeof PLAN_ORDER)[number]) - PLAN_ORDER.indexOf(b.name as (typeof PLAN_ORDER)[number]))
-      if (live.length) plans = live
-    }
+    const live = parseLivePlans(await response.json())
+    if (live) plans = live
   }
 } catch {
   plans = FALLBACK_PLANS
@@ -56,25 +71,32 @@ function usd(value: number) {
   }).format(value)
 }
 
+function cut(price: number) {
+  return price * COMMISSION
+}
+
 const rows = plans.map((plan) => {
-  const monthly = plan.price_m * COMMISSION
+  const month = cut(plan.price_m)
+  const year = cut(plan.price_y)
   return {
     name: plan.name,
     price: usd(plan.price_m),
-    month: usd(monthly),
-    year: usd(monthly * 12),
-    three: usd(monthly * 36),
-    monthly,
+    month: usd(month),
+    year: usd(year),
+    three: usd(year * 3),
   }
 })
 
 const maker = plans.find((plan) => plan.name === 'Maker') ?? FALLBACK_PLANS[1]
 const solo = plans.find((plan) => plan.name === 'Solo') ?? FALLBACK_PLANS[0]
 const team = plans.find((plan) => plan.name === 'Team') ?? FALLBACK_PLANS[2]
-const makerCut = maker.price_m * COMMISSION
+const makerCut = cut(maker.price_m)
+const makerYear = cut(maker.price_y)
 const tenMakers = makerCut * 10
+const tenMakersYear = makerYear * 10
 const fiveApps = makerCut * 5
-const mix = solo.price_m * COMMISSION * 5 + makerCut * 3 + team.price_m * COMMISSION
+const mix = cut(solo.price_m) * 5 + makerCut * 3 + cut(team.price_m)
+const mixYear = cut(solo.price_y) * 5 + makerYear * 3 + cut(team.price_y)
 
 const faqItems = [
   { question: m.affiliate_faq_q1({}, { locale }), answer: m.affiliate_faq_a1({}, { locale }) },
@@ -193,7 +215,7 @@ const easyPoints = [m.affiliate_easy_speed({}, { locale }), m.affiliate_easy_rol
           <p class="text-azure-400 text-sm font-semibold tracking-wide uppercase">{m.affiliate_lifetime_label({}, { locale })}</p>
           <p class="mt-6 text-4xl font-bold text-white">{usd(makerCut)}{m.affiliate_per_month({}, { locale })}</p>
           <p class="mt-3 text-gray-300">{m.affiliate_lifetime_maker({ month: usd(makerCut) }, { locale })}</p>
-          <p class="text-azure-400 mt-2 font-medium">{m.affiliate_lifetime_year({ year: usd(makerCut * 12) }, { locale })}</p>
+          <p class="text-azure-400 mt-2 font-medium">{m.affiliate_lifetime_year({ year: usd(makerYear) }, { locale })}</p>
         </article>
       </div>
       <p class="mt-6 text-center text-sm text-gray-500">{m.affiliate_vs_note({}, { locale })}</p>
@@ -242,7 +264,7 @@ const easyPoints = [m.affiliate_easy_speed({}, { locale }), m.affiliate_easy_rol
         <article class="rounded-2xl border border-gray-700 bg-gray-800/60 p-6">
           <h4 class="text-lg font-semibold text-white">{m.affiliate_scenario_10_title({}, { locale })}</h4>
           <p class="text-azure-400 mt-3 text-2xl font-bold">{usd(tenMakers)}{m.affiliate_per_month({}, { locale })}</p>
-          <p class="mt-2 text-sm leading-6 text-gray-400">{m.affiliate_scenario_10_desc({ month: usd(tenMakers), year: usd(tenMakers * 12) }, { locale })}</p>
+          <p class="mt-2 text-sm leading-6 text-gray-400">{m.affiliate_scenario_10_desc({ month: usd(tenMakers), year: usd(tenMakersYear) }, { locale })}</p>
         </article>
         <article class="rounded-2xl border border-gray-700 bg-gray-800/60 p-6">
           <h4 class="text-lg font-semibold text-white">{m.affiliate_scenario_agency_title({}, { locale })}</h4>
@@ -252,7 +274,7 @@ const easyPoints = [m.affiliate_easy_speed({}, { locale }), m.affiliate_easy_rol
         <article class="rounded-2xl border border-gray-700 bg-gray-800/60 p-6">
           <h4 class="text-lg font-semibold text-white">{m.affiliate_scenario_mix_title({}, { locale })}</h4>
           <p class="text-azure-400 mt-3 text-2xl font-bold">{usd(mix)}{m.affiliate_per_month({}, { locale })}</p>
-          <p class="mt-2 text-sm leading-6 text-gray-400">{m.affiliate_scenario_mix_desc({ month: usd(mix), year: usd(mix * 12) }, { locale })}</p>
+          <p class="mt-2 text-sm leading-6 text-gray-400">{m.affiliate_scenario_mix_desc({ month: usd(mix), year: usd(mixYear) }, { locale })}</p>
         </article>
       </div>
     </div>
