@@ -1,0 +1,388 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+import { createFAQPageLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import HumanSupport from '@/components/HumanSupport.astro'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const title = `${brand} | ${m.affiliate_title({}, { locale })}`
+const description = m.affiliate_description({}, { locale })
+const config = Astro.locals.runtimeConfig
+
+const baseUrl = config.public.baseUrl
+const pageUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'affiliate/')}`
+const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
+const applyUrl = 'https://capgo.affonso.io'
+const COMMISSION = 0.2
+const PLAN_ORDER = ['Solo', 'Maker', 'Team', 'Enterprise'] as const
+type PlanName = (typeof PLAN_ORDER)[number]
+type AffiliatePlan = { name: PlanName; price_m: number; price_y: number }
+
+const FALLBACK_PLANS: AffiliatePlan[] = [
+  { name: 'Solo', price_m: 14, price_y: 146 },
+  { name: 'Maker', price_m: 39, price_y: 396 },
+  { name: 'Team', price_m: 99, price_y: 998 },
+  { name: 'Enterprise', price_m: 249, price_y: 2490 },
+]
+
+function isFiniteNonNegative(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0
+}
+
+function parseLivePlans(payload: unknown): AffiliatePlan[] | null {
+  if (!Array.isArray(payload)) return null
+
+  const byName = new Map<PlanName, AffiliatePlan>()
+  for (const plan of payload) {
+    if (!plan || typeof plan !== 'object') continue
+    const name = 'name' in plan ? plan.name : undefined
+    const price_m = 'price_m' in plan ? plan.price_m : undefined
+    const price_y = 'price_y' in plan ? plan.price_y : undefined
+    if (typeof name !== 'string' || !PLAN_ORDER.includes(name as PlanName)) continue
+    if (!isFiniteNonNegative(price_m) || !isFiniteNonNegative(price_y)) continue
+    if (byName.has(name as PlanName)) return null
+    byName.set(name as PlanName, { name: name as PlanName, price_m, price_y })
+  }
+
+  if (byName.size !== PLAN_ORDER.length) return null
+  return PLAN_ORDER.map((name) => byName.get(name)!)
+}
+
+let plans: AffiliatePlan[] = FALLBACK_PLANS
+try {
+  const response = await fetch(`${config.public.baseApiUrl}/private/plans`, {
+    signal: AbortSignal.timeout(3000),
+  })
+  if (response.ok) {
+    const live = parseLivePlans(await response.json())
+    if (live) plans = live
+  }
+} catch {
+  plans = FALLBACK_PLANS
+}
+
+function usd(value: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: value % 1 === 0 ? 0 : 2,
+  }).format(value)
+}
+
+function cut(price: number) {
+  return price * COMMISSION
+}
+
+const rows = plans.map((plan) => {
+  const month = cut(plan.price_m)
+  const year = cut(plan.price_y)
+  return {
+    name: plan.name,
+    price: usd(plan.price_m),
+    month: usd(month),
+    year: usd(year),
+    three: usd(year * 3),
+  }
+})
+
+const maker = plans.find((plan) => plan.name === 'Maker') ?? FALLBACK_PLANS[1]
+const solo = plans.find((plan) => plan.name === 'Solo') ?? FALLBACK_PLANS[0]
+const team = plans.find((plan) => plan.name === 'Team') ?? FALLBACK_PLANS[2]
+const makerCut = cut(maker.price_m)
+const makerYear = cut(maker.price_y)
+const tenMakers = makerCut * 10
+const tenMakersYear = makerYear * 10
+const fiveApps = makerCut * 5
+const mix = cut(solo.price_m) * 5 + makerCut * 3 + cut(team.price_m)
+const mixYear = cut(solo.price_y) * 5 + makerYear * 3 + cut(team.price_y)
+
+const faqItems = [
+  { question: m.affiliate_faq_q1({}, { locale }), answer: m.affiliate_faq_a1({}, { locale }) },
+  { question: m.affiliate_faq_q2({}, { locale }), answer: m.affiliate_faq_a2({}, { locale }) },
+  { question: m.affiliate_faq_q3({}, { locale }), answer: m.affiliate_faq_a3({}, { locale }) },
+  { question: m.affiliate_faq_q4({}, { locale }), answer: m.affiliate_faq_a4({}, { locale }) },
+  { question: m.affiliate_faq_q5({}, { locale }), answer: m.affiliate_faq_a5({}, { locale }) },
+]
+
+const pageLdJson = createWebPageLdJson(config.public, {
+  name: title,
+  description,
+  url: pageUrl,
+})
+
+const faqSchema = createFAQPageLdJson(config.public, {
+  url: pageUrl,
+  questions: faqItems,
+})
+
+const content = {
+  title,
+  description,
+  ldJSON: createLdJsonGraph(config.public, pageLdJson, {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: m.home({}, { locale }), url: homeUrl },
+      { name: m.affiliate_kicker({}, { locale }), url: pageUrl },
+    ],
+    additionalEntities: [faqSchema],
+  }),
+}
+
+const steps = [
+  { title: m.affiliate_step1_title({}, { locale }), description: m.affiliate_step1_desc({}, { locale }) },
+  { title: m.affiliate_step2_title({}, { locale }), description: m.affiliate_step2_desc({}, { locale }) },
+  { title: m.affiliate_step3_title({}, { locale }), description: m.affiliate_step3_desc({}, { locale }) },
+]
+
+const audiences = [
+  { title: m.affiliate_audience_devs_title({}, { locale }), description: m.affiliate_audience_devs({}, { locale }) },
+  { title: m.affiliate_audience_agencies_title({}, { locale }), description: m.affiliate_audience_agencies({}, { locale }) },
+  { title: m.affiliate_audience_saas_title({}, { locale }), description: m.affiliate_audience_saas({}, { locale }) },
+]
+
+const easyPoints = [m.affiliate_easy_speed({}, { locale }), m.affiliate_easy_rollback({}, { locale }), m.affiliate_easy_stack({}, { locale })]
+---
+
+<Layout content={content}>
+  <section class="relative overflow-hidden py-20 sm:py-28">
+    <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div class="bg-azure-500/10 absolute top-1/4 left-1/4 h-96 w-96 rounded-full blur-3xl"></div>
+      <div class="bg-dusk-500/20 absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+      <p class="border-azure-500/30 bg-azure-500/10 text-azure-400 mb-6 inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">
+        {m.affiliate_kicker({}, { locale })}
+      </p>
+      <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
+        {m.affiliate_hero_title({}, { locale })}
+      </h1>
+      <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-gray-300">
+        {m.affiliate_hero_subtitle({}, { locale })}
+      </p>
+      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href={applyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-azure-500 shadow-azure-500/25 hover:bg-azure-600 inline-flex items-center rounded-xl px-8 py-4 text-base font-semibold text-white shadow-lg transition-colors"
+        >
+          {m.affiliate_apply({}, { locale })}
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+        <p class="text-sm text-gray-400">
+          {m.affiliate_already({}, { locale })}
+          <a href={applyUrl} target="_blank" rel="noopener noreferrer" class="hover:text-azure-400 ml-1 font-semibold text-white">
+            {m.affiliate_sign_in({}, { locale })}
+          </a>
+        </p>
+      </div>
+      <dl class="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-white/10 bg-white/5 px-5 py-6">
+          <dt class="text-sm text-gray-400">{m.affiliate_stat_rate_label({}, { locale })}</dt>
+          <dd class="mt-2 text-3xl font-bold text-white">{m.affiliate_stat_rate({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 px-5 py-6">
+          <dt class="text-sm text-gray-400">{m.affiliate_stat_lifetime_label({}, { locale })}</dt>
+          <dd class="text-azure-400 mt-2 text-3xl font-bold">{m.affiliate_stat_lifetime({}, { locale })}</dd>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 px-5 py-6">
+          <dt class="text-sm text-gray-400">{m.affiliate_stat_all_label({}, { locale })}</dt>
+          <dd class="mt-2 text-3xl font-bold text-white">{m.affiliate_all_plans({}, { locale })}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="bg-gray-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-12 max-w-3xl text-center">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.affiliate_compare_title({}, { locale })}</h2>
+        <p class="mt-4 text-lg text-gray-400">{m.affiliate_compare_subtitle({}, { locale })}</p>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-2">
+        <article class="rounded-2xl border border-gray-700 bg-gray-900 p-8">
+          <p class="text-sm font-semibold tracking-wide text-gray-500 uppercase">{m.affiliate_typical_label({}, { locale })}</p>
+          <p class="mt-6 text-4xl font-bold text-gray-300">{usd(makerCut)}</p>
+          <p class="mt-3 text-gray-400">{m.affiliate_typical_maker({ amount: usd(makerCut) }, { locale })}</p>
+        </article>
+        <article class="border-azure-500/40 rounded-2xl border bg-gray-900 p-8 shadow-[0_0_0_1px_rgba(17,158,255,0.15)]">
+          <p class="text-azure-400 text-sm font-semibold tracking-wide uppercase">{m.affiliate_lifetime_label({}, { locale })}</p>
+          <p class="mt-6 text-4xl font-bold text-white">{usd(makerCut)}{m.affiliate_per_month({}, { locale })}</p>
+          <p class="mt-3 text-gray-300">{m.affiliate_lifetime_maker({ month: usd(makerCut) }, { locale })}</p>
+          <p class="text-azure-400 mt-2 font-medium">{m.affiliate_lifetime_year({ year: usd(makerYear) }, { locale })}</p>
+        </article>
+      </div>
+      <p class="mt-6 text-center text-sm text-gray-500">{m.affiliate_vs_note({}, { locale })}</p>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-12 max-w-3xl text-center">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.affiliate_examples_title({}, { locale })}</h2>
+        <p class="mt-4 text-lg text-gray-400">{m.affiliate_examples_subtitle({}, { locale })}</p>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-gray-700">
+        <table class="min-w-full divide-y divide-gray-700 text-left">
+          <thead class="bg-gray-800">
+            <tr>
+              <th class="px-4 py-4 text-sm font-semibold text-gray-300 sm:px-6">{m.affiliate_col_plan({}, { locale })}</th>
+              <th class="px-4 py-4 text-sm font-semibold text-gray-300 sm:px-6">{m.affiliate_col_price({}, { locale })}</th>
+              <th class="px-4 py-4 text-sm font-semibold text-gray-300 sm:px-6">{m.affiliate_col_month({}, { locale })}</th>
+              <th class="hidden px-4 py-4 text-sm font-semibold text-gray-300 sm:table-cell sm:px-6">{m.affiliate_col_year({}, { locale })}</th>
+              <th class="hidden px-4 py-4 text-sm font-semibold text-gray-300 md:table-cell md:px-6">{m.affiliate_col_three({}, { locale })}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-800 bg-gray-900">
+            {
+              rows.map((row) => (
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-white sm:px-6">{row.name}</td>
+                  <td class="px-4 py-4 text-gray-300 sm:px-6">
+                    {row.price}
+                    {m.affiliate_per_month({}, { locale })}
+                  </td>
+                  <td class="text-azure-400 px-4 py-4 font-semibold sm:px-6">{row.month}</td>
+                  <td class="hidden px-4 py-4 text-gray-300 sm:table-cell sm:px-6">{row.year}</td>
+                  <td class="hidden px-4 py-4 text-gray-300 md:table-cell md:px-6">{row.three}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm text-gray-500">{m.affiliate_examples_note({}, { locale })}</p>
+
+      <h3 class="mt-14 text-2xl font-bold text-white">{m.affiliate_scenario_title({}, { locale })}</h3>
+      <div class="mt-6 grid gap-6 md:grid-cols-3">
+        <article class="rounded-2xl border border-gray-700 bg-gray-800/60 p-6">
+          <h4 class="text-lg font-semibold text-white">{m.affiliate_scenario_10_title({}, { locale })}</h4>
+          <p class="text-azure-400 mt-3 text-2xl font-bold">{usd(tenMakers)}{m.affiliate_per_month({}, { locale })}</p>
+          <p class="mt-2 text-sm leading-6 text-gray-400">{m.affiliate_scenario_10_desc({ month: usd(tenMakers), year: usd(tenMakersYear) }, { locale })}</p>
+        </article>
+        <article class="rounded-2xl border border-gray-700 bg-gray-800/60 p-6">
+          <h4 class="text-lg font-semibold text-white">{m.affiliate_scenario_agency_title({}, { locale })}</h4>
+          <p class="text-azure-400 mt-3 text-2xl font-bold">{usd(fiveApps)}{m.affiliate_per_month({}, { locale })}</p>
+          <p class="mt-2 text-sm leading-6 text-gray-400">{m.affiliate_scenario_agency_desc({ month: usd(fiveApps) }, { locale })}</p>
+        </article>
+        <article class="rounded-2xl border border-gray-700 bg-gray-800/60 p-6">
+          <h4 class="text-lg font-semibold text-white">{m.affiliate_scenario_mix_title({}, { locale })}</h4>
+          <p class="text-azure-400 mt-3 text-2xl font-bold">{usd(mix)}{m.affiliate_per_month({}, { locale })}</p>
+          <p class="mt-2 text-sm leading-6 text-gray-400">{m.affiliate_scenario_mix_desc({ month: usd(mix), year: usd(mixYear) }, { locale })}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2">
+        <div>
+          <h2 class="text-3xl font-bold text-white">{m.affiliate_problem_title({}, { locale })}</h2>
+          <p class="mt-4 text-lg leading-8 text-gray-300">{m.affiliate_problem({}, { locale })}</p>
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold text-white">{m.affiliate_product_title({}, { locale })}</h2>
+          <p class="mt-4 text-lg leading-8 text-gray-300">{m.affiliate_product({}, { locale })}</p>
+        </div>
+      </div>
+      <div class="mt-12 rounded-2xl border border-gray-700 bg-gray-900 p-8">
+        <h3 class="text-xl font-semibold text-white">{m.affiliate_easy_title({}, { locale })}</h3>
+        <ul class="mt-6 space-y-3">
+          {
+            easyPoints.map((point) => (
+              <li class="flex gap-3 text-gray-300">
+                <span class="bg-azure-400 mt-1 h-2 w-2 shrink-0 rounded-full" />
+                <span>{point}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl font-bold text-white sm:text-4xl">{m.affiliate_audience_title({}, { locale })}</h2>
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          audiences.map((audience) => (
+            <article class="rounded-2xl border border-gray-700 bg-gray-800/60 p-8">
+              <h3 class="text-xl font-semibold text-white">{audience.title}</h3>
+              <p class="mt-3 leading-relaxed text-gray-400">{audience.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.affiliate_how_title({}, { locale })}</h2>
+        <p class="mt-4 text-lg text-gray-400">{m.affiliate_how_subtitle({}, { locale })}</p>
+      </div>
+      <div class="grid gap-8 md:grid-cols-3">
+        {
+          steps.map((step, index) => (
+            <article class="rounded-2xl border border-gray-700 bg-gray-900 p-8">
+              <div class="bg-azure-500/15 text-azure-400 mb-4 flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold">{index + 1}</div>
+              <h3 class="text-xl font-semibold text-white">{step.title}</h3>
+              <p class="mt-3 leading-relaxed text-gray-400">{step.description}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="mt-10 rounded-2xl border border-gray-700 bg-gray-900 p-6 sm:p-8">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h3 class="text-lg font-semibold text-white">{m.affiliate_rewards({}, { locale })}</h3>
+            <p class="mt-2 text-gray-400">{m.affiliate_all_plans({}, { locale })}</p>
+          </div>
+          <p class="text-xl font-bold text-white">{m.affiliate_commission({}, { locale })}</p>
+        </div>
+        <p class="mt-6 text-sm leading-6 text-gray-400">{m.affiliate_payouts({}, { locale })}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-bold text-white">{m.affiliate_faq_title({}, { locale })}</h2>
+      <div class="space-y-4">
+        {
+          faqItems.map((item) => (
+            <article class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+              <h3 class="text-lg font-semibold text-white">{item.question}</h3>
+              <p class="mt-2 leading-relaxed text-gray-400">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-gray-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.affiliate_cta_title({}, { locale })}</h2>
+      <p class="mt-4 text-lg text-gray-400">{m.affiliate_cta_subtitle({}, { locale })}</p>
+      <HumanSupport class="mt-8" size="sm" />
+      <a
+        href={applyUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-azure-500 shadow-azure-500/25 hover:bg-azure-600 mt-6 inline-flex items-center rounded-xl px-8 py-4 text-base font-semibold text-white shadow-lg transition-colors"
+      >
+        {m.affiliate_apply({}, { locale })}
+      </a>
+    </div>
+  </section>
+</Layout>
