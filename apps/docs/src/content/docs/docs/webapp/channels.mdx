@@ -112,11 +112,41 @@ Fifth is the `Disable auto downgrade under native` setting. If this is true then
 
 Sixth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
 
+Next is the `Update package` setting. It chooses whether devices download a full zip, a delta of changed files, or both. See [Update package](#update-package).
+
 As for `Allow development build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has the `prod` set to false will be rejected. This is mostly useful for testing purposes.
 
 Seventh is the `Allow Emulators`. If this is false then Capgo will disallow any update request that comes from an emulator. This is mostly useful for testing purposes.
 
 Eight is the `Allow devices to self associate`. If this is true then the [setChannel](/docs/plugins/updater/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](/docs/plugins/updater/api/#setchannel) method with this channel then the call will fail.
+
+## Update package
+
+Open a channel and stay on the **Information** tab. **Update package** is in the settings list, under Disable auto update.
+
+<figure><img src="/channel-update-package.webp" alt="Update package dropdown on a Capgo channel showing Zip and delta, Zip only, Delta only, Zip only from builtin, and Delta only from builtin" /><figcaption>Update package on the channel Information tab. New channels default to Zip and delta.</figcaption></figure>
+
+This setting chooses what Capgo sends when a device on this channel checks for an update. Leave **Zip and delta** unless you need to force one type.
+
+| Label in the console | CLI / API value | What devices download |
+| --- | --- | --- |
+| **Zip and delta** | `all` | A full zip and a delta when both exist. This is the default. |
+| **Zip only** | `zip` | Only the full zip. |
+| **Delta only** | `delta` | Only the changed files. Plugins that cannot apply a delta still receive a zip. |
+| **Zip only from builtin** | `zip_from_builtin` | Zip only while the device is still on the store binary. After the first live update, Capgo serves zip and delta again. |
+| **Delta only from builtin** | `delta_from_builtin` | Delta only while the device is still on the store binary. After the first live update, Capgo serves zip and delta again. |
+
+**Builtin** is the web assets shipped inside the App Store or Play Store binary, before any Capgo update. Use a `from builtin` mode when the first update off the store build should be zip-only or delta-only, and later updates can use both.
+
+Capgo will not pair a zip-only channel with a delta-only bundle, or the reverse. The console, CLI, and [Channels API](/docs/public-api/channels/) refuse the save and tell you to upload the missing package or switch the mode.
+
+You can set the same value from the CLI:
+
+```bash
+npx @capgo/cli@latest channel set production com.example.app --update-package zip
+```
+
+Valid values: `all`, `zip`, `delta`, `zip_from_builtin`, `delta_from_builtin`.
 
 ## Progressive rollouts
 

@@ -21,6 +21,7 @@ A channel represents a distribution track for your app updates. Each channel can
 - **public**: Set as default channel for new devices.
 - **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the channel's stable bundle.
 - **disableAutoUpdate**: Control update behavior (`major`, `minor`, `metadata`, `patch`, or `none`).
+- **updatePackage**: Control whether devices download a zip, a delta, or both (`all`, `zip`, `delta`, `zip_from_builtin`, or `delta_from_builtin`). See [Update package](/docs/webapp/channels/#update-package).
 - **ios/android/electron**: Enable or disable delivery by platform.
 - **allow_device_self_set**: Let devices choose their channel.
 - **allow_emulator**, **allow_device**, **allow_dev**, **allow_prod**: Control which device and build types receive updates.
@@ -54,6 +55,7 @@ interface ChannelSet {
   public?: boolean
   disableAutoUpdateUnderNative?: boolean
   disableAutoUpdate?: DisableAutoUpdate
+  updatePackage?: "all" | "zip" | "delta" | "zip_from_builtin" | "delta_from_builtin"
   ios?: boolean
   android?: boolean
   electron?: boolean
@@ -87,7 +89,7 @@ interface ChannelSet {
 }
 ```
 
-For rollout and auto-pause fields, the API also accepts the equivalent `snake_case` form, such as `rollout_version` or `auto_pause_enabled`. If both forms are supplied, the camelCase value wins. `rollback` is camelCase only.
+For rollout and auto-pause fields, the API also accepts the equivalent `snake_case` form, such as `rollout_version` or `auto_pause_enabled`. `updatePackage` also accepts `update_package`. If both forms are supplied, the camelCase value wins. `rollback` is camelCase only.
 
 A rollout target requires an existing channel. It must have a stable bundle already assigned or receive one through `version` in the same POST request. `rollback` and `promoteToStable` are terminal actions; do not combine them with one another.
 
@@ -172,6 +174,7 @@ interface Channel {
   public: boolean
   disableAutoUpdateUnderNative: boolean
   disableAutoUpdate: DisableAutoUpdate
+  updatePackage: "all" | "zip" | "delta" | "zip_from_builtin" | "delta_from_builtin"
   allow_device_self_set: boolean
   allow_emulator: boolean
   allow_device: boolean
