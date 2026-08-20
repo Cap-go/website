@@ -110,9 +110,9 @@ When you change the default channel:
 - **New devices** will immediately start receiving updates from the new default
 - **Existing devices** that already have a channel assignment (via override or force) will NOT automatically switch
 - To move existing devices, you need to either:
-  - Use `setChannel()` to override them programmatically
-  - Force them to the new channel in the dashboard
-  - Delete their device entries (they'll re-register with the new default)
+  - Use `setChannel()` (or `unsetChannel()`) from the app. Deleting the backend device record does not clear a local `setChannel()` assignment.
+  - Force them to the new channel in the dashboard (console/API override; expires after 90 days)
+  - Delete their console/API override so they fall through precedence. Devices with only the cloud default then pick up the new default.
 
 > **Tip**: Always test your new default channel with a small group of forced devices before making it the default for all users.
 
