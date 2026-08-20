@@ -10,7 +10,7 @@ Devices are individual app installations that report updater metadata to Capgo. 
 :::note[Two 90-day policies]
 **Device inventory:** device records are retained for **90 days** from the last device activity. A device does not need to install an update to appear: updater and stats check-ins can refresh its metadata.
 
-**Channel overrides:** a POST override is removed **90 days after the last override write**, even if the device still checks in. Checking in does not reset that clock. For a lasting assignment, set `defaultChannel` in Capacitor config or call `setChannel()` from the app. See [Console and API overrides expire after 90 days](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
+**Channel overrides:** a POST override is removed **90 days after the last override write**, even if the device still checks in. Checking in does not reset that clock. To avoid that cleanup, set `defaultChannel` in Capacitor config (survives reinstall) or call `setChannel()` from the app (cleared on reinstall, so call it again after install). See [Console and API overrides expire after 90 days](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
 :::
 
 ## Device metadata

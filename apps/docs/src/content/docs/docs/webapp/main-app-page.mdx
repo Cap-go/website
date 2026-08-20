@@ -73,9 +73,10 @@ The **Default Download Channel** is one of the most important settings for your 
 When a device requests an update from Capgo, the system determines which channel to use based on the following precedence (highest priority first):
 
 1. **Forced device mapping**: If the device ID is explicitly forced to a channel in the channel settings, that channel always wins.
-2. **Cloud override**: If the device has been assigned to a channel from the dashboard or Public API, that override is used. Plugin [`setChannel()`](/docs/plugins/updater/api/#setchannel) on current versions is local and is a separate step. See [How a device picks a channel](/docs/live-updates/channels/#how-a-device-picks-a-channel-precedence).
-3. **Capacitor config `defaultChannel`**: If set in your `capacitor.config.*` file, this is used for test/beta builds.
-4. **Default Download Channel**: The setting configured here—this is what ~99% of your production users will use.
+2. **Cloud override**: If the device has been assigned to a channel from the dashboard or Public API, that override is used.
+3. **Plugin `setChannel()`**: On current plugin versions this is a local assignment, not a dashboard override. See [How a device picks a channel](/docs/live-updates/channels/#how-a-device-picks-a-channel-precedence).
+4. **Capacitor config `defaultChannel`**: If set in your `capacitor.config.*` file, this is used for test/beta builds.
+5. **Default Download Channel**: The setting configured here. This is what ~99% of your production users will use.
 
 ### Platform-Specific Default Channels
 

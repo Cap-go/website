@@ -50,10 +50,10 @@ Forced mappings and Dashboard or Public API channel overrides are stored as per-
 
 This is not the same as [device inventory retention](/docs/webapp/devices/). Inventory removes devices that have not connected to Capgo for 90 days. Override cleanup removes the mapping even if the device is still active.
 
-For a lasting assignment:
+For an assignment that is not removed by this cleanup:
 
-- Set `defaultChannel` in `capacitor.config.*` (requires a new native binary to change later).
-- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup.
+- Set `defaultChannel` in `capacitor.config.*` (survives reinstall; requires a new native binary to change later).
+- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup. Reinstalling the app clears it, so the app must call `setChannel()` again if you still want that channel.
 
 The channel **Devices** tab and the device Override UI only list console and Public API assignments. They do not list every device on the channel, and they do not list local `setChannel()` assignments.
 
