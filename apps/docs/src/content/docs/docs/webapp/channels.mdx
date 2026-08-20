@@ -140,7 +140,7 @@ This setting chooses what Capgo sends when a device on this channel checks for a
 
 Capgo will not pair a zip-only channel with a delta-only bundle, or the reverse. The console, CLI, and [Channels API](/docs/public-api/channels/) refuse the save and tell you to upload the missing package or switch the mode.
 
-You can set the same value from the CLI:
+You can set the same value from the CLI. The channel must already exist:
 
 ```bash
 npx @capgo/cli@latest channel set production com.example.app --update-package zip
