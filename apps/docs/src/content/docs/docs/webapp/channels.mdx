@@ -112,13 +112,13 @@ Fifth is the `Disable auto downgrade under native` setting. If this is true then
 
 Sixth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
 
-Next is the `Update package` setting. It chooses whether devices download a full zip, a delta of changed files, or both. See [Update package](#update-package).
+Seventh is the `Update package` setting. It chooses whether devices download a full zip, a delta of changed files, or both. See [Update package](#update-package).
 
-As for `Allow development build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has the `prod` set to false will be rejected. This is mostly useful for testing purposes.
+Eighth is `Allow development build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has the `prod` set to false will be rejected. This is mostly useful for testing purposes.
 
-Seventh is the `Allow Emulators`. If this is false then Capgo will disallow any update request that comes from an emulator. This is mostly useful for testing purposes.
+Ninth is the `Allow Emulators`. If this is false then Capgo will disallow any update request that comes from an emulator. This is mostly useful for testing purposes.
 
-Eight is the `Allow devices to self associate`. If this is true then the [setChannel](/docs/plugins/updater/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](/docs/plugins/updater/api/#setchannel) method with this channel then the call will fail.
+Tenth is the `Allow devices to self-associate`. If this is true then the [setChannel](/docs/plugins/updater/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](/docs/plugins/updater/api/#setchannel) method with this channel then the call will fail.
 
 ## Update package
 
