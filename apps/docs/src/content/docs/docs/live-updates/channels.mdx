@@ -17,8 +17,8 @@ Channels control update eligibility, not bundle secrecy. Even if a channel is pr
 
 When a device checks for an update, Capgo decides which channel to use in this strict order (highest priority first):
 
-1. **Forced device mapping (Dashboard)** – Manually pin a specific device ID to a channel. Use for urgent debugging or controlled testing with a single real user. This always wins.
-2. **Cloud override (per‑device) via Dashboard or API** – Created when you change the device's channel in the dashboard or via API. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device entry does.
+1. **Forced device mapping (Dashboard)** – Manually pin a specific device ID to a channel. Use for urgent debugging or controlled testing with a single real user. This always wins. Capgo removes the mapping 90 days after the last override write. See [Console and API overrides expire after 90 days](#console-and-api-overrides-expire-after-90-days).
+2. **Cloud override (per-device) via Dashboard or API** – Created when you change the device's channel in the dashboard or via API. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device override does. The same 90-day retention applies.
 3. **Plugin `setChannel()` local channel** – Created when the app calls `setChannel()` and the backend validates that the target channel allows self-assignment. The selected channel is stored locally on that device, takes effect instantly, and is not shown in the Device Override UI.
 
 <Aside type="tip" title="Instant Channel Switching with setChannel()">
@@ -44,6 +44,21 @@ If a channel is disabled for the platform (iOS/Android/Electron toggles) when it
 
 > Summary: Force > Dashboard/API Override > Plugin `setChannel()` local channel > Config `defaultChannel` > Cloud Default.
 
+## Console and API overrides expire after 90 days
+
+Forced mappings and Dashboard or Public API channel overrides are stored as per-device assignments in Capgo. A cleanup job deletes those assignments **90 days after the last override write**. Checking in for an update does not reset that clock. Only writing the override again (or deleting it yourself) changes the timestamp.
+
+This is not the same as [device inventory retention](/docs/webapp/devices/). Inventory removes devices that have not connected to Capgo for 90 days. Override cleanup removes the mapping even if the device is still active.
+
+For a lasting assignment:
+
+- Set `defaultChannel` in `capacitor.config.*` (requires a new native binary to change later).
+- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup.
+
+The channel **Devices** tab and the device Override UI only list console and Public API assignments. They do not list every device on the channel, and they do not list local `setChannel()` assignments.
+
+<figure><img src="/channel-override-retention.webp" alt="Capgo channel Devices tab showing the Override retention popover: console overrides expire after 90 days" /><figcaption>Override retention notice on the channel Devices tab.</figcaption></figure>
+
 ## Default Channel Behavior
 
 Setting a cloud default is optional, but it usually serves as the catch-all path for new devices. Without one, only devices that match on forced mappings, overrides, or a `defaultChannel` in the Capacitor config will receive updates. When you do choose to mark defaults, keep these patterns in mind:
@@ -53,7 +68,7 @@ Setting a cloud default is optional, but it usually serves as the catch-all path
 
 Remember that the cloud default and `defaultChannel` in `capacitor.config.*` both occupy the same decision layer. If you set a cloud default, you don't need to duplicate the value in your Capacitor config—leave `defaultChannel` empty for production builds. Reserve `defaultChannel` for binaries you intentionally ship to testers or QA when you want them to start on a non-production channel even if the cloud default is different.
 
-You can change defaults at any time in the dashboard. When you swap a default, new devices obey the new routing immediately and existing devices follow the normal precedence rules the next time they check in.
+You can change defaults at any time in the dashboard. Open the channel, then **Manage in App settings**, which takes you to [App Information](/docs/webapp/main-app-page/#default-channel-configuration). The default is no longer a toggle on the channel page. When you swap a default, new devices obey the new routing immediately and existing devices follow the normal precedence rules the next time they check in.
 
 ## Setting up a Channel
 
@@ -107,12 +122,14 @@ You can still force (pin) a device or apply an override later—those immediatel
 
 Channels have several options that control who can receive updates and how updates are delivered. The most important ones are below. You can configure these from the web app, the CLI, or the Public API.
 
-- Default channel: Optionally mark the channel or platform-specific channels that new devices attach to. See "Default Channel Behavior" for routing scenarios.
+- Default channel: Optionally mark the channel or platform-specific channels that new devices attach to. In the console this lives on App Information (**Manage in App settings** from the channel page). See "Default Channel Behavior" for routing scenarios.
 - Platform filters: Enable or disable delivery to `iOS`, `Android`, or `Electron` devices per channel.
 - Disable auto downgrade under native: Prevents sending an update when the device’s native app version is newer than the channel’s bundle (for example, device on 1.2.3 while channel has 1.2.2).
-- Allow development builds: Permit updates to development builds (useful for testing).
-- Allow emulator devices: Permit updates to emulators/simulators (useful for testing).
-- Allow device self‑assignment: Lets the app switch to this channel at runtime using `setChannel`. If disabled, `setChannel` will fail for this channel.
+- Allow development builds: Permit updates to development builds (useful for testing). CLI: `--dev` / `--no-dev`.
+- Allow production builds: Permit updates to production (store) builds. Leave this on for channels that serve real users. CLI: `--prod` / `--no-prod`.
+- Allow emulator devices: Permit updates to emulators/simulators (useful for testing). CLI: `--emulator` / `--no-emulator`.
+- Allow physical devices: Permit updates to real phones and tablets. Leave this on for production channels. CLI: `--device` / `--no-device`.
+- Allow device self-assignment: Lets the app switch to this channel at runtime using `setChannel`. If disabled, `setChannel` will fail for this channel. CLI: `--self-assign` / `--no-self-assign`.
 - Update package: Choose whether devices download a full zip, a delta of changed files, or both (`all`, `zip`, `delta`, `zip_from_builtin`, `delta_from_builtin`). See [Update package](/docs/webapp/channels/#update-package) for the console dropdown and when each mode is useful.
 
 ### Progressive rollouts
@@ -142,6 +159,9 @@ npx @capgo/cli@latest channel set production com.example.app \
 
 # Allow devices to self-assign to the Beta channel
 npx @capgo/cli@latest channel set beta com.example.app --self-assign
+
+# Production channel: store builds on real devices, no emulators
+npx @capgo/cli@latest channel set production com.example.app --prod --device --no-emulator
 ```
 
 ### Using setChannel() from Your App
@@ -181,11 +201,11 @@ When `setChannel()` is called:
 
 **Comparison of channel change methods:**
 
-| Method | Effect Time | Persisted Where | Shown in Device Override UI | Use Case |
-|--------|-------------|-----------------|------------------------------|----------|
-| `setChannel()` from plugin | **Instant** | Device only (local) | No | User-initiated channel switching in-app |
-| Dashboard device override | Up to 2 min | Backend database | Yes | Admin-initiated changes for specific devices |
-| API channel assignment | Up to 2 min | Backend database | Yes | Automated backend integrations |
+| Method | Effect Time | Persisted Where | Shown in Device Override UI | Expires | Use Case |
+|--------|-------------|-----------------|------------------------------|---------|----------|
+| `setChannel()` from plugin | **Instant** | Device only (local) | No | No (until you change it or reinstall) | User-initiated channel switching in-app |
+| Dashboard device override | Up to 2 min | Backend database | Yes | 90 days after last override write | Admin-initiated changes for specific devices |
+| API channel assignment | Up to 2 min | Backend database | Yes | 90 days after last override write | Automated backend integrations |
 
 For the best user experience when building channel-switching UIs, always use the plugin's `setChannel()` method.
 

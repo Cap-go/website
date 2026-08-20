@@ -56,7 +56,7 @@ Here's a breakdown of the available fields and actions:
 *   **App ID (3):** A unique identifier for your application within Capgo. This ID is not editable.
 *   **App Name (4):** The display name for your application. You can modify this as needed.
 *   **Default Upload Channel (5):** Specifies the default channel to which new bundles will be uploaded. You can click the edit icon to select a different default channel.
-*   **Default Download Channel (6):** Specifies the default channel from which devices will download updates. You can click the edit icon to select a different default channel. See the [Default Channel Configuration](#default-channel-configuration) section below for detailed information.
+*   **Default Download Channel (6):** Specifies the default channel from which devices will download updates. You can click the edit icon to select a different default channel. The channel page shows whether a channel is the default, but you change it here, not with a toggle on the channel. Open a channel and click **Manage in App settings** to jump to this field. See the [Default Channel Configuration](#default-channel-configuration) section below for detailed information.
 *   **Auto Delete Bundles Not Used (after x seconds) (7):** This setting allows you to automatically delete old bundles that haven't been used for a specified duration (in seconds). Set to `0` to disable auto-deletion. This helps manage storage and keep your bundle list clean.
 *   **Expose Bundle Metadata to Plugin (8):** When enabled, bundle link and comment fields will be sent to the Capacitor Updater plugin. This feature requires plugin version 7.35.0 or higher.
 *   **Block Provider Infrastructure Requests:** When enabled, Capgo rejects update, stats, and channel-self requests from known Google and Apple datacenter IP ranges. Leave it enabled for normal production traffic. Disable it temporarily only when you intentionally test from provider infrastructure. New apps enable this protection by default; existing apps retain their previous disabled setting until you change it.
@@ -73,7 +73,7 @@ The **Default Download Channel** is one of the most important settings for your 
 When a device requests an update from Capgo, the system determines which channel to use based on the following precedence (highest priority first):
 
 1. **Forced device mapping**: If the device ID is explicitly forced to a channel in the channel settings, that channel always wins.
-2. **Cloud override**: If the device has been assigned to a channel via `setChannel()` or manually in the dashboard, that override is used.
+2. **Cloud override**: If the device has been assigned to a channel from the dashboard or Public API, that override is used. Plugin [`setChannel()`](/docs/plugins/updater/api/#setchannel) on current versions is local and is a separate step. See [How a device picks a channel](/docs/live-updates/channels/#how-a-device-picks-a-channel-precedence).
 3. **Capacitor config `defaultChannel`**: If set in your `capacitor.config.*` file, this is used for test/beta builds.
 4. **Default Download Channel**: The setting configured here—this is what ~99% of your production users will use.
 
@@ -88,7 +88,7 @@ You can configure platform-specific default channels—for example one for iOS, 
 To set up platform-specific defaults:
 1. Create separate channels for each platform (for example `production-ios`, `production-android`, and `production-electron`)
 2. In each channel's settings, enable only the relevant platform (iOS, Android, or Electron toggle)
-3. Mark both channels as "Default" - Capgo allows this when channels target different platforms
+3. On [App Information](#app-information), set each of those channels as the Default Download Channel for its platform. Capgo allows more than one default when the channels target different platforms.
 
 When a device requests an update:
 - iOS devices will receive updates from the iOS-enabled default channel
@@ -99,7 +99,7 @@ When a device requests an update:
 For most applications, a single default channel that supports all three core platforms is the simplest approach:
 1. Create one channel (e.g., `production`)
 2. Ensure iOS, Android, and Electron toggles are enabled
-3. Mark it as the default channel
+3. Set it as the Default Download Channel on [App Information](#app-information)
 
 This ensures consistent behavior across all platforms and simplifies your release workflow.
 

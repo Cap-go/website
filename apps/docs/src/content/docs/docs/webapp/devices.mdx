@@ -5,8 +5,10 @@ sidebar:
   order: 9
 ---
 
-:::note[Data retention]
-Device data is retained for **90 days** from the last device activity. Devices that have not connected to Capgo during that period are automatically removed from the list.
+:::note[Two 90-day policies]
+**Device inventory:** devices that have not connected to Capgo for 90 days are removed from this list.
+
+**Channel overrides:** a forced mapping or dashboard/API channel override is removed 90 days after it was last written, even if the device still checks in. See [Console and API overrides expire after 90 days](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
 :::
 
 ## Show the list of all devices
@@ -17,7 +19,7 @@ Open your app, then select the **Devices** tab.
 
 1. **Devices tab** - Open the device inventory.
 2. **Filters** - Filter devices by:
-   - **Override** - Show devices with a [custom channel](/docs/plugins/updater/api/#setchannel) or custom version.
+   - **Override** - Show devices with a dashboard or Public API channel override, or a custom version. Local [`setChannel()`](/docs/plugins/updater/api/#setchannel) assignments are not listed here.
    - **Custom ID** - Show devices with a custom identifier.
 
 ## Configure a device
@@ -29,7 +31,7 @@ Select a device in the table to open its detail page.
 1. **Information** - View the device ID, last update, platform, updater version, installed and native versions, OS version, emulator and production state, encryption-key prefix, and request country when available.
 2. **Deployments** - View the deployment history for this device.
 3. **Logs** - View logs associated with this device.
-4. **Channel override** - Route this device to a specific private channel. When set, it takes precedence over normal channel selection.
+4. **Channel override** - Route this device to a specific private channel from the dashboard. When set, it takes precedence over normal channel selection. Console and API overrides expire after 90 days. [`setChannel()`](/docs/plugins/updater/api/#setchannel) on current plugin versions is local and does not appear here.
 
 ### Request country
 
