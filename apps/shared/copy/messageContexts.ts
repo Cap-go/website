@@ -2550,6 +2550,7 @@ export const messageContexts = {
   pricing_credits_cta_desktop: 'Page/area: Pricing page or plan calculator UI. Role: Website copy sentence. Message key `pricing_credits_cta_desktop` (Pricing Credits CTA Desktop).',
   pricing_credits_cta_mobile: 'Page/area: Pricing page or plan calculator UI. Role: Website copy sentence. Message key `pricing_credits_cta_mobile` (Pricing Credits CTA Mobile).',
   pricing_description: 'Page/area: Pricing page or plan calculator UI. Role: Supporting description paragraph or meta description. Seen in: page pricing.astro. Preserve Capgo product/brand and developer terms exactly. Message key `pricing_description` (Pricing Description).',
+  pricing_seo_tagline: 'Page/area: Pricing page SEO title suffix. Role: Short phrase appended to the pricing page title tag. Seen in: page pricing.astro. Message key `pricing_seo_tagline` (Pricing Seo Tagline).',
   pricing_pay_as_you_go: 'Page/area: Pricing page or plan calculator UI. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro, page pricing.astro. Message key `pricing_pay_as_you_go` (Pricing Pay As You Go).',
   pricing_proof_risk_text: 'Page/area: Pricing page or plan calculator UI. Role: Website copy sentence. Message key `pricing_proof_risk_text` (Pricing Proof Risk Text).',
   pricing_proof_risk_title: 'Page/area: Pricing page or plan calculator UI. Role: Section or page heading. Message key `pricing_proof_risk_title` (Pricing Proof Risk Title).',
