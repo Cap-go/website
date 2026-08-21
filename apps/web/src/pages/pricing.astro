@@ -10,34 +10,12 @@ import { createLdJsonGraph, createProductLdJson, createFAQPageLdJson } from '@/l
 import type { Database } from '@/services/supabase.types'
 import m from '@/copy/messages'
 import Enterprise from '@/components/enterprise.astro'
+import { planDescriptionToText, planMonthlyPrice } from '@/lib/planCopy'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
 const description = m.pricing_description({}, { locale })
-
-const makeSeoTitle = (primary: string, descriptionText: string) => {
-  const normalizedPrimary = primary.replace(/\s+/g, ' ').trim()
-  const normalizedDescription = descriptionText
-    .replace(/\s+/g, ' ')
-    .trim()
-    .replace(/[.!?]\s*$/, '')
-  const base = `${brand} | ${normalizedPrimary}`
-
-  if (base.length >= 50 && base.length <= 60) return base
-  if (base.length > 60) return base.slice(0, 60).trimEnd()
-
-  const separator = ' - '
-  const available = 60 - base.length - separator.length
-  if (available <= 0) return base
-
-  const snippetRaw = normalizedDescription.slice(0, available)
-  const lastSpace = snippetRaw.lastIndexOf(' ')
-  const snippet = (lastSpace > available * 0.6 ? snippetRaw.slice(0, lastSpace) : snippetRaw).trim().replace(/[,:;\-–—]\s*$/, '')
-
-  return snippet ? `${base}${separator}${snippet}` : base
-}
-
-const title = makeSeoTitle(m.pricing({}, { locale }), description)
+const title = `${brand} | ${m.pricing({}, { locale })} - ${m.pricing_seo_tagline({}, { locale })}`
 
 const content: { title: string; description: string; ldJSON?: any } = { title, description }
 const serviceDisruptionPolicyUrl = `${getRelativeLocaleUrl(locale, 'support-policy')}#service-disruption-and-ending`
@@ -67,12 +45,12 @@ if (plans.length > 0) {
   const planProducts = plans.map((plan) =>
     createProductLdJson(Astro.locals.runtimeConfig.public, {
       name: plan.name,
-      description: plan.description || `Capgo ${plan.name} plan`,
+      description: planDescriptionToText(plan.description, locale) || `Capgo ${plan.name} plan`,
       url: pricingUrl,
       sku: plan.id.toString(),
       offers: [
         {
-          price: plan.price_m?.toString() || '0',
+          price: planMonthlyPrice(plan).toString(),
           priceCurrency: 'USD',
           availability: 'https://schema.org/InStock',
           priceValidUntil: (plan as any).trial_days ? new Date(Date.now() + (plan as any).trial_days * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : undefined,
