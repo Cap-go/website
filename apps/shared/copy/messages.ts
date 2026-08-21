@@ -744,7 +744,6 @@ const messages = {
   complete_documentation: 'Complete documentation',
   compliance_gdpr: 'GDPR Compliant',
   compliance_iso27001: 'ISO 27001 Certified',
-  compliance_soc1: 'SOC 2 Type I Compliant',
   compliance_soc3: 'SOC 3 Compliant',
   compliant_with_apple_and_android_requirements: 'Update JavaScript and assets while native code still goes through normal store review.',
   conditions_for_returns: 'Conditions for Returns',
