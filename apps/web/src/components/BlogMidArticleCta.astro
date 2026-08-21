@@ -1,0 +1,46 @@
+---
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+interface Props {
+  docsPath?: string
+}
+
+const { docsPath = 'docs/live-updates/china-configuration/' } = Astro.props
+const locale = Astro.locals.locale
+---
+
+<div class="not-content blog-mid-article-cta my-10 sm:my-12">
+  <div class="relative mx-auto max-w-4xl p-4 sm:p-6 md:p-8">
+    <div class="absolute inset-0 rounded-[20px] border border-gray-700 sm:rounded-[40px]"></div>
+
+    <div class="relative">
+      <h3 class="mb-3 text-2xl leading-tight font-normal text-white sm:mb-4 sm:text-3xl">
+        {m.blog_mid_article_china_cta_heading({}, { locale })}
+      </h3>
+
+      <p class="mb-5 max-w-3xl text-base leading-relaxed font-normal text-gray-300 sm:mb-6 sm:text-lg">
+        {m.blog_mid_article_china_cta_body({}, { locale })}
+      </p>
+
+      <div class="flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap">
+        <a
+          href={getRelativeLocaleUrl(locale, docsPath)}
+          class="inline-flex w-full items-center justify-center rounded-lg bg-black px-6 py-3 text-base text-white transition-colors duration-200 hover:bg-gray-800 sm:w-auto sm:px-8 sm:py-3 sm:text-lg"
+        >
+          {m.blog_mid_article_china_cta_docs_button({}, { locale })}
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, 'pricing')}
+          class="inline-flex w-full items-center justify-center rounded-lg border border-gray-600 px-6 py-3 text-base text-white transition-colors duration-200 hover:border-gray-400 hover:bg-gray-900 sm:w-auto sm:px-8 sm:py-3 sm:text-lg"
+        >
+          {m.blog_mid_article_china_cta_pricing_button({}, { locale })}
+        </a>
+      </div>
+
+      <p class="mt-4 text-sm text-gray-400">
+        {m.blog_mid_article_china_cta_footnote({}, { locale })}
+      </p>
+    </div>
+  </div>
+</div>
