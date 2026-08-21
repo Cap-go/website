@@ -690,6 +690,7 @@ export const messageContexts = {
   compliance_gdpr: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component Hero.astro, component companies-logo.astro. Message key `compliance_gdpr` (Compliance GDPR).',
   compliance_iso27001: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component Hero.astro, component companies-logo.astro, component enterprise.astro. Message key `compliance_iso27001` (Compliance Iso27001).',
   compliance_soc1: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: component Hero.astro, component companies-logo.astro. Message key `compliance_soc1` (Compliance Soc1).',
+  compliance_soc3: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: component Hero.astro, component companies-logo.astro, component pricing/ComparePlans.astro. Message key `compliance_soc3` (Compliance Soc3).',
   compliant_with_apple_and_android_requirements: 'Page/area: Capgo marketing website. Role: Website copy sentence. Message key `compliant_with_apple_and_android_requirements` (Compliant With Apple And Android Requirements).',
   conditions_for_returns: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page return.astro. Message key `conditions_for_returns` (Conditions For Returns).',
   connect_your_account: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `connect_your_account` (Connect Your Account).',

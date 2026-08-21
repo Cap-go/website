@@ -321,6 +321,10 @@ const rows: CompareSection[] = [
         value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
       },
       {
+        label: m.compliance_soc3({}, { locale: Astro.locals.locale }),
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+      {
         label: m.compliance_iso27001({}, { locale: Astro.locals.locale }),
         value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
       },

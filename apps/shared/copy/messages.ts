@@ -515,7 +515,8 @@ const messages = {
   built_for_devs_feature_rollback: 'Recover from bad web releases',
   built_for_devs_feature_rollback_desc: 'Pin a known-good version or roll back instantly when a release misbehaves.',
   built_for_devs_feature_soc2: 'SOC 2 Certification',
-  built_for_devs_feature_soc2_desc_part1: 'Capgo is SOC 2 Type II and ISO 27001 certified, with independent verification of our security controls. View reports in our',
+  built_for_devs_feature_soc2_desc_part1:
+    'Capgo is SOC 2 Type II, SOC 3, and ISO 27001 certified, with independent verification of our security controls. View reports in our',
   built_for_devs_feature_soc2_trust: 'Trust center',
   built_for_devs_feature_support: 'Lightning Fast Support',
   built_for_devs_feature_support_desc: 'Email or Discord support. Enterprise plan users get dedicated Slack shared channel access.',
@@ -744,6 +745,7 @@ const messages = {
   compliance_gdpr: 'GDPR Compliant',
   compliance_iso27001: 'ISO 27001 Certified',
   compliance_soc1: 'SOC 2 Type I Compliant',
+  compliance_soc3: 'SOC 3 Compliant',
   compliant_with_apple_and_android_requirements: 'Update JavaScript and assets while native code still goes through normal store review.',
   conditions_for_returns: 'Conditions for Returns',
   connect_your_account: 'Connect Your Account',
