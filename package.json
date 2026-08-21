@@ -16,6 +16,8 @@
     "fetch:stars": "bun run scripts/fetch-github-stars.ts",
     "fetch:downloads": "bun run scripts/fetch-npm-downloads.ts",
     "fetch:website-stats": "bun run scripts/fetch-website-stats.ts",
+    "fetch:hero-apps": "bun run scripts/fetch-hero-client-apps.ts",
+    "refresh:hero-apps": "HERO_APPS_REFRESH=true bun run scripts/fetch-hero-client-apps.ts",
     "refresh:website-stats": "WEBSITE_STATS_REFRESH=true bun run scripts/fetch-website-stats.ts",
     "fetch:live-update-metrics": "bun run scripts/fetch-live-update-metrics.ts",
     "refresh:live-update-metrics": "LIVE_UPDATE_METRICS_REFRESH=true bun run scripts/fetch-live-update-metrics.ts",

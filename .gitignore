@@ -30,3 +30,6 @@ seo-report.sarif
 
 # Visual regression artifacts (local only)
 .visual-diff/
+
+# Full client catalog for hero refresh (local/CI only; homepage uses committed slots)
+apps/web/src/data/hero-client-apps.json
