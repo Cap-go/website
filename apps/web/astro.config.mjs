@@ -1,3 +1,4 @@
+import mdx from '@astrojs/mdx'
 import { defineConfig } from 'astro/config'
 import { fileURLToPath } from 'node:url'
 import config from '../../configs.json'
@@ -26,9 +27,12 @@ export default defineConfig({
       output: 'static',
     },
   }),
-  integrations: buildSharedIntegrations({
-    pluginIcons,
-    pageLastModDates,
-  }),
+  integrations: [
+    ...buildSharedIntegrations({
+      pluginIcons,
+      pageLastModDates,
+    }),
+    mdx(),
+  ],
   vite: viteConfig,
 })
