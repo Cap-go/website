@@ -839,8 +839,12 @@ const locale = Astro.locals.locale
   const websitePaidUserCookieName = 'capgo_paid_user'
   let previousHeaderPaidAccess: boolean | undefined
 
-  function hasWebsitePaidUserCookie() {
-    return document.cookie.split(';').some((cookie) => cookie.trim() === `${websitePaidUserCookieName}=1`)
+  function safeHasWebsitePaidUserCookie(): boolean {
+    try {
+      return document.cookie.split(';').some((cookie) => cookie.trim() === `${websitePaidUserCookieName}=1`)
+    } catch {
+      return false
+    }
   }
 
   function announceHeaderAuthLinks(hasPaidAccess: boolean) {
@@ -851,16 +855,20 @@ const locale = Astro.locals.locale
   }
 
   function syncHeaderAuthLinks() {
-    const hasPaidAccess = hasWebsitePaidUserCookie()
-    document.querySelectorAll('[data-guest-auth-link]').forEach((element) => {
-      if (hasPaidAccess) element.setAttribute('hidden', '')
-      else element.removeAttribute('hidden')
-    })
-    document.querySelectorAll('[data-console-auth-link]').forEach((element) => {
-      if (hasPaidAccess) element.removeAttribute('hidden')
-      else element.setAttribute('hidden', '')
-    })
-    announceHeaderAuthLinks(hasPaidAccess)
+    try {
+      const hasPaidAccess = safeHasWebsitePaidUserCookie()
+      document.querySelectorAll('[data-guest-auth-link]').forEach((element) => {
+        if (hasPaidAccess) element.setAttribute('hidden', '')
+        else element.removeAttribute('hidden')
+      })
+      document.querySelectorAll('[data-console-auth-link]').forEach((element) => {
+        if (hasPaidAccess) element.removeAttribute('hidden')
+        else element.setAttribute('hidden', '')
+      })
+      announceHeaderAuthLinks(hasPaidAccess)
+    } catch {
+      // Best-effort: restricted browsing contexts can block cookie/DOM access.
+    }
   }
 
   menuToggle?.addEventListener('click', () => {
