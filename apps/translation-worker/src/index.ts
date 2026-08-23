@@ -1070,9 +1070,11 @@ function unusedScriptIndexes(scripts: HtmlScript[], used: Set<number>, include: 
   return indexes
 }
 
-function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): string {
-  if (extras.length === 0) return html
-
+function groupExtraEnglishScripts(
+  extras: HtmlScript[],
+  englishScripts: HtmlScript[],
+  pairedEnglish: Set<HtmlScript>,
+): Array<{ marker?: string; mode: 'after' | 'before' | 'body'; html: string[] }> {
   const paired = (script: HtmlScript): boolean => pairedEnglish.has(script)
   const groups = new Map<string, { marker?: string; mode: 'after' | 'before' | 'body'; html: string[] }>()
 
@@ -1087,10 +1089,14 @@ function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishS
     groups.set(key, anchor ? { ...anchor, html: [extra.outerHtml] } : { mode: 'body', html: [extra.outerHtml] })
   }
 
+  return [...groups.values()]
+}
+
+function applyAnchoredScriptInsertions(html: string, groups: Array<{ marker?: string; mode: 'after' | 'before' | 'body'; html: string[] }>): string {
   let rewritten = html
   const placements: Array<{ index: number; value: string }> = []
 
-  for (const group of groups.values()) {
+  for (const group of groups) {
     const value = group.html.join('\n')
     const found = group.marker ? rewritten.indexOf(group.marker) : -1
     if (!group.marker || found === -1) {
@@ -1108,6 +1114,11 @@ function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishS
     rewritten = `${rewritten.slice(0, placement.index)}\n${placement.value}${rewritten.slice(placement.index)}`
   }
   return rewritten
+}
+
+function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): string {
+  if (extras.length === 0) return html
+  return applyAnchoredScriptInsertions(html, groupExtraEnglishScripts(extras, englishScripts, pairedEnglish))
 }
 
 function syncExecutableScriptsFromEnglish(translatedHtml: string, englishHtml: string): string {

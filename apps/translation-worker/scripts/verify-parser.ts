@@ -110,6 +110,20 @@ assert(
 )
 assert(!syncedFromEnglish.includes('Keep the English source article body'), 'Script sync leaked current English visible copy')
 
+const extraTranslatedInline = __translationWorkerTest.syncExecutableScriptsFromEnglish(
+  `<!doctype html><html lang="de"><body><h1>Bleibt Deutsch</h1><script>window.staleExtra=1</script></body></html>`,
+  `<!doctype html><html lang="en"><body><h1>English only</h1></body></html>`,
+)
+assert(extraTranslatedInline.includes('Bleibt Deutsch'), 'Extra-inline fixture wiped translated copy')
+assert(extraTranslatedInline.includes('window.staleExtra=1'), 'Script sync removed an unmatched translated inline script')
+
+const extraEnglishInline = __translationWorkerTest.syncExecutableScriptsFromEnglish(
+  `<!doctype html><html lang="de"><body><h1>Bleibt Deutsch</h1></body></html>`,
+  `<!doctype html><html lang="en"><body><h1>English only</h1><script>window.capgoNewInline=1</script></body></html>`,
+)
+assert(extraEnglishInline.includes('Bleibt Deutsch'), 'Extra English inline fixture wiped translated copy')
+assert(extraEnglishInline.includes('window.capgoNewInline=1'), 'Script sync did not insert an unmatched English inline script before </body>')
+
 const titleSegmentIndex = segments.findIndex((segment) => segment.text.includes('Capgo - Live Updates for Capacitor Apps'))
 assert(titleSegmentIndex >= 0, 'Parser did not collect the title segment')
 const emptyTitleTranslations = segments.map((segment, index) => (index === titleSegmentIndex ? '' : segment.text))
@@ -475,6 +489,24 @@ try {
   assert(freshBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A fresh localized blog did not report HIT')
   assert(freshBlogResponse.headers.get('X-Capgo-Translation-Scripts') !== 'synced', 'A fresh HIT synced scripts on the response path')
   assert(freshBlogBody.includes('querySelector(`#${i}-link`)'), 'A fresh HIT should keep cached scripts inside the source-check window')
+
+  const agedHitUrl = new URL('https://capgo.app/de/blog/aged-hit-script-sync/')
+  cacheEntries.set(
+    __translationWorkerTest.cacheKeyFor(agedHitUrl, 'de').url,
+    new Response(staleBlogHtml, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Capgo-Translated-At': String(Date.now() - 10 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': 'd'.repeat(64),
+      },
+    }),
+  )
+  const agedHitResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
+  const agedHitBody = await agedHitResponse.text()
+  assert(agedHitResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A 10-minute HIT did not report HIT')
+  assert(agedHitResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A 10-minute HIT with a source-hash mismatch did not sync scripts')
+  assert(agedHitBody.includes('getElementById(`${t}-link`)'), 'A 10-minute HIT did not receive the current English TOC helper')
+  assert(!agedHitBody.includes('querySelector(`#${i}-link`)'), 'A 10-minute HIT kept the stale TOC querySelector')
   await new Promise((resolve) => setTimeout(resolve, 25))
 
   const originalConsoleError = console.error
