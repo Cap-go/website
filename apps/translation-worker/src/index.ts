@@ -971,6 +971,9 @@ type HtmlScript = {
   external: boolean
 }
 
+type ScriptInsertionMode = 'after' | 'before' | 'body'
+type ScriptInsertionGroup = { marker?: string; mode: ScriptInsertionMode; html: string[] }
+
 function normalizeScriptType(type: string | null): string {
   return (type ?? '').trim().toLowerCase()
 }
@@ -1070,13 +1073,9 @@ function unusedScriptIndexes(scripts: HtmlScript[], used: Set<number>, include: 
   return indexes
 }
 
-function groupExtraEnglishScripts(
-  extras: HtmlScript[],
-  englishScripts: HtmlScript[],
-  pairedEnglish: Set<HtmlScript>,
-): Array<{ marker?: string; mode: 'after' | 'before' | 'body'; html: string[] }> {
+function groupExtraEnglishScripts(extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): ScriptInsertionGroup[] {
   const paired = (script: HtmlScript): boolean => pairedEnglish.has(script)
-  const groups = new Map<string, { marker?: string; mode: 'after' | 'before' | 'body'; html: string[] }>()
+  const groups = new Map<string, ScriptInsertionGroup>()
 
   for (const extra of extras) {
     const anchor = findPairedScriptAnchor(englishScripts, englishScripts.indexOf(extra), paired)
@@ -1092,7 +1091,7 @@ function groupExtraEnglishScripts(
   return [...groups.values()]
 }
 
-function applyAnchoredScriptInsertions(html: string, groups: Array<{ marker?: string; mode: 'after' | 'before' | 'body'; html: string[] }>): string {
+function applyAnchoredScriptInsertions(html: string, groups: ScriptInsertionGroup[]): string {
   let rewritten = html
   const placements: Array<{ index: number; value: string }> = []
 
