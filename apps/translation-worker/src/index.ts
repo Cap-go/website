@@ -1030,7 +1030,7 @@ function syncableScripts(html: string): HtmlScript[] {
 function normalizeScriptSrc(src: string): string {
   try {
     const url = new URL(src, 'https://capgo.app')
-    const pathname = url.pathname.replace(/\/([^/]+)\.[A-Za-z0-9_-]{6,}\.((?:m)?js)$/i, '/$1.$2')
+    const pathname = url.pathname.replace(/\/([^/]+)\.[a-z0-9_-]{6,}\.((?:m)?js)$/i, '/$1.$2')
     return `${url.origin}${pathname}`
   } catch {
     return src
@@ -1052,40 +1052,39 @@ function applyHtmlRangeReplacements(html: string, replacements: Array<{ start: n
   return rewritten
 }
 
+function findPairedScriptAnchor(englishScripts: HtmlScript[], englishIndex: number, paired: (script: HtmlScript) => boolean): { marker: string; mode: 'after' | 'before' } | null {
+  for (let index = englishIndex - 1; index >= 0; index -= 1) {
+    if (paired(englishScripts[index])) return { marker: englishScripts[index].outerHtml, mode: 'after' }
+  }
+  for (let index = englishIndex + 1; index < englishScripts.length; index += 1) {
+    if (paired(englishScripts[index])) return { marker: englishScripts[index].outerHtml, mode: 'before' }
+  }
+  return null
+}
+
+function unusedScriptIndexes(scripts: HtmlScript[], used: Set<number>, include: (script: HtmlScript) => boolean): number[] {
+  const indexes: number[] = []
+  for (const [index, script] of scripts.entries()) {
+    if (!used.has(index) && include(script)) indexes.push(index)
+  }
+  return indexes
+}
+
 function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): string {
   if (extras.length === 0) return html
 
   const paired = (script: HtmlScript): boolean => pairedEnglish.has(script)
-  const groups = new Map<string, { marker: string; mode: 'after' | 'before'; html: string[] } | { mode: 'body'; html: string[] }>()
+  const groups = new Map<string, { marker?: string; mode: 'after' | 'before' | 'body'; html: string[] }>()
 
   for (const extra of extras) {
-    const englishIndex = englishScripts.indexOf(extra)
-    let marker: string | null = null
-    let mode: 'after' | 'before' | 'body' = 'body'
-
-    for (let index = englishIndex - 1; index >= 0; index -= 1) {
-      if (!paired(englishScripts[index])) continue
-      marker = englishScripts[index].outerHtml
-      mode = 'after'
-      break
-    }
-
-    if (!marker) {
-      for (let index = englishIndex + 1; index < englishScripts.length; index += 1) {
-        if (!paired(englishScripts[index])) continue
-        marker = englishScripts[index].outerHtml
-        mode = 'before'
-        break
-      }
-    }
-
-    const key = marker ? `${mode}:${marker}` : 'body'
+    const anchor = findPairedScriptAnchor(englishScripts, englishScripts.indexOf(extra), paired)
+    const key = anchor ? `${anchor.mode}:${anchor.marker}` : 'body'
     const existing = groups.get(key)
     if (existing) {
       existing.html.push(extra.outerHtml)
       continue
     }
-    groups.set(key, marker ? { marker, mode, html: [extra.outerHtml] } : { mode: 'body', html: [extra.outerHtml] })
+    groups.set(key, anchor ? { ...anchor, html: [extra.outerHtml] } : { mode: 'body', html: [extra.outerHtml] })
   }
 
   let rewritten = html
@@ -1093,17 +1092,11 @@ function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishS
 
   for (const group of groups.values()) {
     const value = group.html.join('\n')
-    if (group.mode === 'body') {
+    const found = group.marker ? rewritten.indexOf(group.marker) : -1
+    if (!group.marker || found === -1) {
       rewritten = insertBeforeClosingTag(rewritten, 'body', value)
       continue
     }
-
-    const found = rewritten.indexOf(group.marker)
-    if (found === -1) {
-      rewritten = insertBeforeClosingTag(rewritten, 'body', value)
-      continue
-    }
-
     placements.push({
       index: group.mode === 'after' ? found + group.marker.length : found,
       value,
@@ -1148,15 +1141,8 @@ function syncExecutableScriptsFromEnglish(translatedHtml: string, englishHtml: s
     takePair(translatedIndex, englishIndex)
   }
 
-  const remainingTranslatedInline: number[] = []
-  const remainingEnglishInline: number[] = []
-  for (const [index, script] of translatedScripts.entries()) {
-    if (!script.external && !translatedUsed.has(index)) remainingTranslatedInline.push(index)
-  }
-  for (const [index, script] of englishScripts.entries()) {
-    if (!script.external && !englishUsed.has(index)) remainingEnglishInline.push(index)
-  }
-
+  const remainingTranslatedInline = unusedScriptIndexes(translatedScripts, translatedUsed, (script) => !script.external)
+  const remainingEnglishInline = unusedScriptIndexes(englishScripts, englishUsed, (script) => !script.external)
   const inlineShared = Math.min(remainingTranslatedInline.length, remainingEnglishInline.length)
   for (let index = 0; index < inlineShared; index += 1) {
     takePair(remainingTranslatedInline[index], remainingEnglishInline[index])
