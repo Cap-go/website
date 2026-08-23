@@ -52,8 +52,13 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
             <div class="flex items-center gap-3 rounded-lg bg-linear-to-r from-slate-800 to-slate-900 px-6 py-4">
               <span class="text-slate-400">$</span>
               <code class="text-cyan-400">bunx @capgo/capgo-sec scan</code>
-              <button onclick="navigator.clipboard.writeText('bunx @capgo/capgo-sec scan')" class="ml-auto text-slate-400 transition hover:text-white">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <button
+                type="button"
+                data-scanner-copy="bunx @capgo/capgo-sec scan"
+                class="ml-auto text-slate-400 transition hover:text-white"
+                aria-label="Copy command"
+              >
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -312,3 +317,61 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
     </p>
   </section>
 </Layout>
+
+<script>
+  function fallbackCopyText(value: string): void {
+    const helper = document.createElement('textarea')
+    helper.value = value
+    helper.setAttribute('readonly', 'true')
+    helper.style.position = 'absolute'
+    helper.style.opacity = '0'
+    document.body.append(helper)
+    helper.select()
+
+    const legacyCopy = Reflect.get(document, 'execCommand')
+    const copied = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
+
+    helper.remove()
+    if (!copied) {
+      throw new Error('Copy failed')
+    }
+  }
+
+  async function copyScannerText(value: string): Promise<void> {
+    if (!navigator.clipboard?.writeText) {
+      fallbackCopyText(value)
+      return
+    }
+
+    try {
+      await navigator.clipboard.writeText(value)
+    } catch {
+      fallbackCopyText(value)
+    }
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-scanner-copy]').forEach((button) => {
+    let resetTimer: number | undefined
+    const originalHtml = button.innerHTML
+
+    button.addEventListener('click', async () => {
+      const value = button.getAttribute('data-scanner-copy')
+      if (!value) return
+
+      try {
+        await copyScannerText(value)
+        button.textContent = 'Copied'
+        button.setAttribute('aria-label', 'Copied')
+      } catch {
+        button.textContent = 'Copy failed'
+        button.setAttribute('aria-label', 'Copy failed')
+      }
+
+      if (resetTimer) window.clearTimeout(resetTimer)
+      resetTimer = window.setTimeout(() => {
+        button.innerHTML = originalHtml
+        button.setAttribute('aria-label', 'Copy command')
+      }, 1600)
+    })
+  })
+</script>
