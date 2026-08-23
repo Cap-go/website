@@ -10,11 +10,24 @@ interface CapgoConfig {
   supbaseId: string
 }
 
-const getLocalConfig = (): CapgoConfig => ({
-  supaHost: import.meta.env.VITE_SUPABASE_URL as string,
-  supaKey: import.meta.env.VITE_SUPABASE_ANON_KEY as string,
-  supbaseId: import.meta.env.VITE_SUPABASE_URL?.split('//')[1].split('.')[0].split(':')[0] as string,
-})
+export function parseSupabaseProjectId(supaHost?: string): string {
+  if (!supaHost) return ''
+  return supaHost.split('//')[1]?.split('.')[0]?.split(':')[0] || ''
+}
+
+export function isSupabaseConfigured(config: Pick<CapgoConfig, 'supaHost' | 'supaKey'>): boolean {
+  return Boolean(config.supaHost?.trim() && config.supaKey?.trim())
+}
+
+const getLocalConfig = (): CapgoConfig => {
+  const supaHost = (import.meta.env.VITE_SUPABASE_URL as string | undefined)?.trim() || ''
+  const supaKey = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined)?.trim() || ''
+  return {
+    supaHost,
+    supaKey,
+    supbaseId: parseSupabaseProjectId(supaHost),
+  }
+}
 
 let config: CapgoConfig = getLocalConfig()
 
@@ -34,6 +47,9 @@ export async function getRemoteConfig() {
 }
 
 export function useSupabase() {
+  if (!isSupabaseConfigured(config)) {
+    throw new Error('Supabase is not configured')
+  }
   const options = {
     auth: {
       autoRefreshToken: true,
