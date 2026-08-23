@@ -1095,6 +1095,41 @@ function scriptTokenOverlap(left: HtmlScript, right: HtmlScript): number {
   return shared / Math.min(leftTokens.size, rightTokens.size)
 }
 
+function pairInlineScriptsByIndex(translatedGroup: number[], englishGroup: number[], takePair: (translatedIndex: number, englishIndex: number) => void): void {
+  for (let index = 0; index < englishGroup.length; index += 1) {
+    takePair(translatedGroup[index], englishGroup[index])
+  }
+}
+
+function findBestOverlappingInlineIndex(translatedScripts: HtmlScript[], englishScript: HtmlScript, translatedGroup: number[], usedTranslated: Set<number>): number | undefined {
+  let bestIndex: number | undefined
+  let bestScore = 0.3
+  for (const translatedIndex of translatedGroup) {
+    if (usedTranslated.has(translatedIndex)) continue
+    const score = scriptTokenOverlap(translatedScripts[translatedIndex], englishScript)
+    if (score <= bestScore) continue
+    bestScore = score
+    bestIndex = translatedIndex
+  }
+  return bestIndex
+}
+
+function pairInlineScriptsByOverlap(
+  translatedScripts: HtmlScript[],
+  englishScripts: HtmlScript[],
+  translatedGroup: number[],
+  englishGroup: number[],
+  takePair: (translatedIndex: number, englishIndex: number) => void,
+): void {
+  const usedTranslated = new Set<number>()
+  for (const englishIndex of englishGroup) {
+    const bestIndex = findBestOverlappingInlineIndex(translatedScripts, englishScripts[englishIndex], translatedGroup, usedTranslated)
+    if (bestIndex === undefined) continue
+    usedTranslated.add(bestIndex)
+    takePair(bestIndex, englishIndex)
+  }
+}
+
 function pairRemainingInlineScripts(
   translatedScripts: HtmlScript[],
   englishScripts: HtmlScript[],
@@ -1110,27 +1145,10 @@ function pairRemainingInlineScripts(
   for (const [type, englishGroup] of englishByType) {
     const translatedGroup = translatedByType.get(type) ?? []
     if (translatedGroup.length === englishGroup.length) {
-      for (let index = 0; index < englishGroup.length; index += 1) {
-        takePair(translatedGroup[index], englishGroup[index])
-      }
+      pairInlineScriptsByIndex(translatedGroup, englishGroup, takePair)
       continue
     }
-
-    const usedTranslated = new Set<number>()
-    for (const englishIndex of englishGroup) {
-      let bestIndex: number | undefined
-      let bestScore = 0.3
-      for (const translatedIndex of translatedGroup) {
-        if (usedTranslated.has(translatedIndex)) continue
-        const score = scriptTokenOverlap(translatedScripts[translatedIndex], englishScripts[englishIndex])
-        if (score <= bestScore) continue
-        bestScore = score
-        bestIndex = translatedIndex
-      }
-      if (bestIndex === undefined) continue
-      usedTranslated.add(bestIndex)
-      takePair(bestIndex, englishIndex)
-    }
+    pairInlineScriptsByOverlap(translatedScripts, englishScripts, translatedGroup, englishGroup, takePair)
   }
 }
 
