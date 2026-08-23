@@ -525,6 +525,14 @@ function cacheKeyFor(requestUrl: URL, locale: Locale): Request {
   return new Request(cacheUrl.toString(), { method: 'GET' })
 }
 
+function englishSourceHtmlKeyFor(requestUrl: URL): Request {
+  const cacheUrl = new URL(requestUrl)
+  cacheUrl.pathname = withTrailingSlash(stripLocalePrefix(cacheUrl.pathname))
+  applyNormalizedTranslationSearch(cacheUrl, requestUrl)
+  cacheUrl.searchParams.set('__capgo_translation_english_source', TRANSLATION_CACHE_VERSION)
+  return new Request(cacheUrl.toString(), { method: 'GET' })
+}
+
 function pendingKeyFor(requestUrl: URL, locale: Locale): Request {
   const pendingUrl = new URL(requestUrl)
   pendingUrl.pathname = localizedPath(pendingUrl.pathname, locale)
@@ -1019,6 +1027,22 @@ function syncableScripts(html: string): HtmlScript[] {
   return collectHtmlScripts(html).filter((script) => script.executable && !script.workerOwned)
 }
 
+function normalizeScriptSrc(src: string): string {
+  try {
+    const url = new URL(src, 'https://capgo.app')
+    const pathname = url.pathname.replace(/\/([^/]+)\.[A-Za-z0-9_-]{6,}\.((?:m)?js)$/i, '/$1.$2')
+    return `${url.origin}${pathname}`
+  } catch {
+    return src
+  }
+}
+
+function scriptIdentityKey(script: HtmlScript): string | null {
+  if (script.id) return `id:${script.id}`
+  if (script.src) return `src:${normalizeScriptSrc(script.src)}`
+  return null
+}
+
 function applyHtmlRangeReplacements(html: string, replacements: Array<{ start: number; end: number; value: string }>): string {
   const ordered = [...replacements].sort((left, right) => right.start - left.start)
   let rewritten = html
@@ -1028,33 +1052,122 @@ function applyHtmlRangeReplacements(html: string, replacements: Array<{ start: n
   return rewritten
 }
 
+function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): string {
+  if (extras.length === 0) return html
+
+  const paired = (script: HtmlScript): boolean => pairedEnglish.has(script)
+  const groups = new Map<string, { marker: string; mode: 'after' | 'before'; html: string[] } | { mode: 'body'; html: string[] }>()
+
+  for (const extra of extras) {
+    const englishIndex = englishScripts.indexOf(extra)
+    let marker: string | null = null
+    let mode: 'after' | 'before' | 'body' = 'body'
+
+    for (let index = englishIndex - 1; index >= 0; index -= 1) {
+      if (!paired(englishScripts[index])) continue
+      marker = englishScripts[index].outerHtml
+      mode = 'after'
+      break
+    }
+
+    if (!marker) {
+      for (let index = englishIndex + 1; index < englishScripts.length; index += 1) {
+        if (!paired(englishScripts[index])) continue
+        marker = englishScripts[index].outerHtml
+        mode = 'before'
+        break
+      }
+    }
+
+    const key = marker ? `${mode}:${marker}` : 'body'
+    const existing = groups.get(key)
+    if (existing) {
+      existing.html.push(extra.outerHtml)
+      continue
+    }
+    groups.set(key, marker ? { marker, mode, html: [extra.outerHtml] } : { mode: 'body', html: [extra.outerHtml] })
+  }
+
+  let rewritten = html
+  const placements: Array<{ index: number; value: string }> = []
+
+  for (const group of groups.values()) {
+    const value = group.html.join('\n')
+    if (group.mode === 'body') {
+      rewritten = insertBeforeClosingTag(rewritten, 'body', value)
+      continue
+    }
+
+    const found = rewritten.indexOf(group.marker)
+    if (found === -1) {
+      rewritten = insertBeforeClosingTag(rewritten, 'body', value)
+      continue
+    }
+
+    placements.push({
+      index: group.mode === 'after' ? found + group.marker.length : found,
+      value,
+    })
+  }
+
+  placements.sort((left, right) => right.index - left.index)
+  for (const placement of placements) {
+    rewritten = `${rewritten.slice(0, placement.index)}\n${placement.value}${rewritten.slice(placement.index)}`
+  }
+  return rewritten
+}
+
 function syncExecutableScriptsFromEnglish(translatedHtml: string, englishHtml: string): string {
   const translatedScripts = syncableScripts(translatedHtml)
   const englishScripts = syncableScripts(englishHtml)
-  const replacements: Array<{ start: number; end: number; value: string }> = []
-  const extraEnglish: string[] = []
+  const translatedUsed = new Set<number>()
+  const englishUsed = new Set<number>()
+  const pairs: Array<{ translated: HtmlScript; english: HtmlScript }> = []
 
-  for (const kind of ['inline', 'external'] as const) {
-    const wantsExternal = kind === 'external'
-    const translatedGroup = translatedScripts.filter((script) => script.external === wantsExternal)
-    const englishGroup = englishScripts.filter((script) => script.external === wantsExternal)
-    const sharedCount = Math.min(translatedGroup.length, englishGroup.length)
-
-    for (let index = 0; index < sharedCount; index += 1) {
-      if (translatedGroup[index].outerHtml === englishGroup[index].outerHtml) continue
-      replacements.push({
-        start: translatedGroup[index].start,
-        end: translatedGroup[index].end,
-        value: englishGroup[index].outerHtml,
-      })
-    }
-
-    extraEnglish.push(...englishGroup.slice(sharedCount).map((script) => script.outerHtml))
+  const takePair = (translatedIndex: number, englishIndex: number): void => {
+    if (translatedUsed.has(translatedIndex) || englishUsed.has(englishIndex)) return
+    translatedUsed.add(translatedIndex)
+    englishUsed.add(englishIndex)
+    pairs.push({ translated: translatedScripts[translatedIndex], english: englishScripts[englishIndex] })
   }
 
-  let rewritten = applyHtmlRangeReplacements(translatedHtml, replacements)
-  if (extraEnglish.length > 0) rewritten = insertBeforeClosingTag(rewritten, 'body', extraEnglish.join('\n'))
-  return rewritten
+  const translatedByKey = new Map<string, number[]>()
+  for (const [index, script] of translatedScripts.entries()) {
+    const key = scriptIdentityKey(script)
+    if (!key) continue
+    const list = translatedByKey.get(key)
+    if (list) list.push(index)
+    else translatedByKey.set(key, [index])
+  }
+
+  for (const [englishIndex, script] of englishScripts.entries()) {
+    const key = scriptIdentityKey(script)
+    if (!key) continue
+    const translatedIndex = translatedByKey.get(key)?.find((index) => !translatedUsed.has(index))
+    if (translatedIndex === undefined) continue
+    takePair(translatedIndex, englishIndex)
+  }
+
+  const remainingTranslatedInline: number[] = []
+  const remainingEnglishInline: number[] = []
+  for (const [index, script] of translatedScripts.entries()) {
+    if (!script.external && !translatedUsed.has(index)) remainingTranslatedInline.push(index)
+  }
+  for (const [index, script] of englishScripts.entries()) {
+    if (!script.external && !englishUsed.has(index)) remainingEnglishInline.push(index)
+  }
+
+  const inlineShared = Math.min(remainingTranslatedInline.length, remainingEnglishInline.length)
+  for (let index = 0; index < inlineShared; index += 1) {
+    takePair(remainingTranslatedInline[index], remainingEnglishInline[index])
+  }
+
+  const replacements = pairs
+    .filter((pair) => pair.translated.outerHtml !== pair.english.outerHtml)
+    .map((pair) => ({ start: pair.translated.start, end: pair.translated.end, value: pair.english.outerHtml }))
+  const rewritten = applyHtmlRangeReplacements(translatedHtml, replacements)
+  const extras = englishScripts.filter((_, index) => !englishUsed.has(index))
+  return insertSyncedEnglishScripts(rewritten, extras, englishScripts, new Set(pairs.map((pair) => pair.english)))
 }
 
 function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[] } {
@@ -2405,6 +2518,44 @@ async function checkTranslatedSourceFreshness(env: Env, requestUrl: URL, locale:
     }),
   )
 
+  const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
+  if (!englishHtml) return
+
+  const currentSourceHash = await translationSourceHash(locale, englishHtml)
+  if (knownSourceHash === currentSourceHash) return
+
+  await enqueueTranslation(env, requestUrl, locale, 'stale', priority, currentSourceHash)
+}
+
+async function readCachedEnglishSourceHtml(requestUrl: URL): Promise<string | null> {
+  try {
+    const cached = await caches.default.match(englishSourceHtmlKeyFor(requestUrl))
+    return cached ? await cached.text() : null
+  } catch {
+    return null
+  }
+}
+
+async function writeCachedEnglishSourceHtmlSafely(requestUrl: URL, sourceHtml: string): Promise<void> {
+  try {
+    await caches.default.put(
+      englishSourceHtmlKeyFor(requestUrl),
+      new Response(sourceHtml, {
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': `public, max-age=${TRANSLATION_SOURCE_CHECK_SECONDS}`,
+        },
+      }),
+    )
+  } catch (error) {
+    console.error('Failed to cache current English source HTML', { pathname: requestUrl.pathname, error: errorMessage(error) })
+  }
+}
+
+async function loadCurrentEnglishSourceHtml(env: Env, requestUrl: URL, locale: Locale): Promise<string | null> {
+  const cached = await readCachedEnglishSourceHtml(requestUrl)
+  if (cached) return cached
+
   const renderRequest = new Request(requestUrl.toString(), {
     method: 'GET',
     headers: {
@@ -2412,12 +2563,9 @@ async function checkTranslatedSourceFreshness(env: Env, requestUrl: URL, locale:
     },
   })
   const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
-  if (source.type !== 'html') return
-
-  const currentSourceHash = await translationSourceHash(locale, source.sourceHtml)
-  if (knownSourceHash === currentSourceHash) return
-
-  await enqueueTranslation(env, requestUrl, locale, 'stale', priority, currentSourceHash)
+  if (source.type !== 'html') return null
+  await writeCachedEnglishSourceHtmlSafely(requestUrl, source.sourceHtml)
+  return source.sourceHtml
 }
 
 async function checkTranslatedSourceFreshnessSafely(env: Env, requestUrl: URL, locale: Locale, translatedResponse: Response, priority: boolean): Promise<void> {
@@ -2432,27 +2580,24 @@ function scheduleTranslatedSourceCheck(ctx: WorkerExecutionContext | undefined, 
   scheduleTranslationBackgroundTask(ctx, checkTranslatedSourceFreshnessSafely(env, new URL(requestUrl), locale, translatedResponse, priority))
 }
 
-async function serveTranslatedCachedPage(
-  request: Request,
-  env: Env,
-  requestUrl: URL,
-  locale: Locale,
-  translatedResponse: Response,
-  cacheState: 'HIT' | 'STALE',
-  isHead: boolean,
-): Promise<Response> {
+async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Locale, translatedResponse: Response, cacheState: 'HIT' | 'STALE', isHead: boolean): Promise<Response> {
   if (isHead) return withResponseHeaders(translatedResponse, cacheState, true)
 
   const status = translatedResponse.status
   const statusText = translatedResponse.statusText
   const responseHeaders = new Headers(translatedResponse.headers)
+  const translatedAt = readTranslatedAt(translatedResponse)
+  const knownSourceHash = readTranslationSourceHash(translatedResponse)
   const translatedHtml = await translatedResponse.text()
 
+  if (cacheState === 'HIT' && Date.now() - translatedAt < TRANSLATION_SOURCE_CHECK_SECONDS * 1000) {
+    return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, false)
+  }
+
   try {
-    const renderRequest = request.method === 'GET' ? request : new Request(request, { method: 'GET' })
-    const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
-    if (source.type === 'html') {
-      let syncedHtml = syncExecutableScriptsFromEnglish(translatedHtml, source.sourceHtml)
+    const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
+    if (englishHtml && knownSourceHash !== (await translationSourceHash(locale, englishHtml))) {
+      let syncedHtml = syncExecutableScriptsFromEnglish(translatedHtml, englishHtml)
       if (!syncedHtml.includes('capgo-edge-language-selector-hash')) {
         syncedHtml = insertBeforeClosingTag(syncedHtml, 'body', languageSelectorHashScript())
       }
@@ -2533,7 +2678,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     } else {
       scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, cachedResponse, priority)
     }
-    return await serveTranslatedCachedPage(request, env, requestUrl, locale, cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
+    return await serveTranslatedCachedPage(env, requestUrl, locale, cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
   const storedResponse = await readStoredTranslatedResponse(env, requestUrl, locale)
@@ -2546,7 +2691,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     } else {
       scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, storedResponse, priority)
     }
-    return await serveTranslatedCachedPage(request, env, requestUrl, locale, storedResponse, isStale ? 'STALE' : 'HIT', isHead)
+    return await serveTranslatedCachedPage(env, requestUrl, locale, storedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
   const enqueued = await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)

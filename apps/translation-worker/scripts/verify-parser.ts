@@ -60,7 +60,8 @@ const staleTocTranslated = `<!doctype html>
   <head>
     <title>App-Initialisierung</title>
     <script type="application/ld+json" id="seo-schema-graph">{"headline":"App-Initialisierung","inLanguage":"de"}</script>
-    <script src="https://aff.capgo.app/r/pixel.js"></script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js/v-stale" type="module"></script>
+    <script src="/_astro/page.old1234.js"></script>
   </head>
   <body>
     <h1>App-Initialisierung Schritt für Schritt</h1>
@@ -69,7 +70,6 @@ const staleTocTranslated = `<!doctype html>
       document.addEventListener("DOMContentLoaded",()=>{const l=()=>{const e=document.querySelectorAll("h1,h2,h3");for(const c of e){const i=c.getAttribute("id");i&&document.querySelector(\`#\${i}-link\`)?.classList.remove("text-white")}history.replaceState(null,"",window.location.hash)}});
     </script>
     <p>Übersetzter Anleitungstext bleibt erhalten.</p>
-    <script src="https://static.cloudflareinsights.com/beacon.min.js/v-stale" type="module"></script>
   </body>
 </html>`
 const currentEnglish = `<!doctype html>
@@ -77,7 +77,8 @@ const currentEnglish = `<!doctype html>
   <head>
     <title>App initialization</title>
     <script type="application/ld+json" id="seo-schema-graph">{"headline":"App initialization","inLanguage":"en"}</script>
-    <script src="https://aff.capgo.app/r/pixel.js"></script>
+    <script src="/_astro/extra.aaa111.js"></script>
+    <script src="/_astro/page.new5678.js"></script>
   </head>
   <body>
     <h1>Capacitor app initialization step by step</h1>
@@ -95,7 +96,18 @@ assert(syncedFromEnglish.includes('id="capgo-edge-language-selector-hash"'), 'Sc
 assert(syncedFromEnglish.includes('getElementById(`${t}-link`)'), 'Script sync did not copy the current English TOC helper')
 assert(syncedFromEnglish.includes('setTimeout(') && syncedFromEnglish.includes('150'), 'Script sync did not copy the current English replaceState debounce')
 assert(!syncedFromEnglish.includes('querySelector(`#${i}-link`)'), 'Script sync left the stale digit-leading TOC querySelector')
+assert(syncedFromEnglish.includes('src="/_astro/page.new5678.js"'), 'Script sync did not replace the stale hashed English script src')
+assert(!syncedFromEnglish.includes('src="/_astro/page.old1234.js"'), 'Script sync left the stale hashed English script src')
 assert(syncedFromEnglish.includes('https://static.cloudflareinsights.com/beacon.min.js/v-stale'), 'Script sync removed an unmatched third-party script from the translated page')
+assert(syncedFromEnglish.includes('src="/_astro/extra.aaa111.js"'), 'Script sync dropped a newly added English script')
+assert(
+  syncedFromEnglish.indexOf('src="/_astro/extra.aaa111.js"') < syncedFromEnglish.indexOf('src="/_astro/page.new5678.js"'),
+  'Script sync appended a new English head script after code that should follow it',
+)
+assert(
+  syncedFromEnglish.includes('https://static.cloudflareinsights.com/beacon.min.js/v-stale') && syncedFromEnglish.includes('src="/_astro/extra.aaa111.js"'),
+  'Script sync replaced an unmatched third-party script with a newly added English script',
+)
 assert(!syncedFromEnglish.includes('Keep the English source article body'), 'Script sync leaked current English visible copy')
 
 const titleSegmentIndex = segments.findIndex((segment) => segment.text.includes('Capgo - Live Updates for Capacitor Apps'))
@@ -446,6 +458,24 @@ try {
   const staleBlogHead = await worker.fetch(new Request(staleBlogUrl, { method: 'HEAD' }), blogEnv as any)
   assert((await staleBlogHead.text()) === '', 'A HEAD stale localized blog returned a body')
   assert(staleBlogHead.headers.get('X-Capgo-Translation-Cache') === 'STALE', 'A HEAD stale localized blog lost its cache state')
+
+  const freshBlogUrl = new URL('https://capgo.app/de/blog/fresh-hit-script-skip/')
+  cacheEntries.set(
+    __translationWorkerTest.cacheKeyFor(freshBlogUrl, 'de').url,
+    new Response(staleBlogHtml, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Capgo-Translated-At': String(Date.now()),
+        'X-Capgo-Translation-Source-Hash': 'c'.repeat(64),
+      },
+    }),
+  )
+  const freshBlogResponse = await worker.fetch(new Request(freshBlogUrl), blogEnv as any)
+  const freshBlogBody = await freshBlogResponse.text()
+  assert(freshBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A fresh localized blog did not report HIT')
+  assert(freshBlogResponse.headers.get('X-Capgo-Translation-Scripts') !== 'synced', 'A fresh HIT synced scripts on the response path')
+  assert(freshBlogBody.includes('querySelector(`#${i}-link`)'), 'A fresh HIT should keep cached scripts inside the source-check window')
+  await new Promise((resolve) => setTimeout(resolve, 25))
 
   const originalConsoleError = console.error
   let enqueueFailureResponse: Response | null = null
