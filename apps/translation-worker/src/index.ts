@@ -2652,6 +2652,7 @@ function scheduleTranslatedSourceCheck(ctx: WorkerExecutionContext | undefined, 
 
 async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Locale, translatedResponse: Response, cacheState: 'HIT' | 'STALE', isHead: boolean): Promise<Response> {
   if (isHead) return withResponseHeaders(translatedResponse, cacheState, true)
+  if (!isHtmlResponse(translatedResponse)) return withResponseHeaders(translatedResponse, cacheState, false)
 
   const status = translatedResponse.status
   const statusText = translatedResponse.statusText

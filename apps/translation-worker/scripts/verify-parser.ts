@@ -555,6 +555,26 @@ try {
   const agedHitReuseResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
   assert(agedHitReuseResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A repeated 10-minute HIT lost script sync')
   assert(blogOriginFetches === fetchesAfterAgedHit, 'A repeated 10-minute HIT did not reuse the cached English source')
+
+  const jsonHitUrl = new URL('https://capgo.app/de/blog/json-hit-skip-script-sync/')
+  cacheEntries.set(__translationWorkerTest.sourceCheckKeyFor(jsonHitUrl, 'de').url, new Response('already-checked'))
+  cacheEntries.set(
+    __translationWorkerTest.cacheKeyFor(jsonHitUrl, 'de').url,
+    new Response('{"ok":true}', {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Capgo-Translated-At': String(Date.now() - 10 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': 'e'.repeat(64),
+      },
+    }),
+  )
+  const fetchesBeforeJsonHit = blogOriginFetches
+  const jsonHitResponse = await worker.fetch(new Request(jsonHitUrl), blogEnv as any)
+  const jsonHitBody = await jsonHitResponse.text()
+  assert(jsonHitResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A cached JSON HIT did not report HIT')
+  assert(jsonHitResponse.headers.get('X-Capgo-Translation-Scripts') !== 'synced', 'A cached JSON HIT entered HTML script sync')
+  assert(jsonHitBody === '{"ok":true}', 'A cached JSON HIT was rewritten as HTML')
+  assert(fetchesBeforeJsonHit === blogOriginFetches, 'A cached JSON HIT fetched the English origin')
   await new Promise((resolve) => setTimeout(resolve, 25))
 
   const originalConsoleError = console.error
