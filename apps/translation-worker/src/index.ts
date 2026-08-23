@@ -166,7 +166,10 @@ const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
 const TRANSLATION_CACHE_VERSION = '2026-08-12-message-context-fr-elision-v1'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
+const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
+const EXECUTABLE_SCRIPT_TYPES = new Set(['', 'module', 'text/javascript', 'application/javascript', 'text/ecmascript', 'application/ecmascript'])
+const WORKER_OWNED_SCRIPT_IDS = new Set(['capgo-edge-language-selector-hash'])
 const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 1_500
 const MAX_BATCH_ITEMS = 12
@@ -946,6 +949,112 @@ function findClosingTag(html: string, startIndex: number, tagName: string): { in
   }
 
   return null
+}
+
+type HtmlScript = {
+  start: number
+  end: number
+  outerHtml: string
+  id: string | null
+  src: string | null
+  type: string
+  executable: boolean
+  workerOwned: boolean
+  external: boolean
+}
+
+function normalizeScriptType(type: string | null): string {
+  return (type ?? '').trim().toLowerCase()
+}
+
+function isExecutableScriptType(type: string): boolean {
+  return EXECUTABLE_SCRIPT_TYPES.has(type)
+}
+
+function collectHtmlScripts(html: string): HtmlScript[] {
+  const scripts: HtmlScript[] = []
+  let cursor = 0
+
+  while (cursor < html.length) {
+    const nextTag = findNextHtmlTag(html, cursor)
+    if (!nextTag) break
+
+    if (tagNameOf(nextTag.tag) !== 'script' || isClosingTag(nextTag.tag)) {
+      cursor = nextTag.end
+      continue
+    }
+
+    const type = normalizeScriptType(readAttributeValue(nextTag.tag, 'type'))
+    const id = readAttributeValue(nextTag.tag, 'id')
+    const src = readAttributeValue(nextTag.tag, 'src')
+    let end = nextTag.end
+
+    if (!isSelfClosingTag(nextTag.tag, 'script')) {
+      const closing = findClosingTag(html, nextTag.end, 'script')
+      if (!closing) {
+        cursor = nextTag.end
+        continue
+      }
+      end = closing.end
+    }
+
+    scripts.push({
+      start: nextTag.index,
+      end,
+      outerHtml: html.slice(nextTag.index, end),
+      id,
+      src,
+      type,
+      executable: isExecutableScriptType(type),
+      workerOwned: Boolean(id && WORKER_OWNED_SCRIPT_IDS.has(id)),
+      external: Boolean(src),
+    })
+    cursor = end
+  }
+
+  return scripts
+}
+
+function syncableScripts(html: string): HtmlScript[] {
+  return collectHtmlScripts(html).filter((script) => script.executable && !script.workerOwned)
+}
+
+function applyHtmlRangeReplacements(html: string, replacements: Array<{ start: number; end: number; value: string }>): string {
+  const ordered = [...replacements].sort((left, right) => right.start - left.start)
+  let rewritten = html
+  for (const replacement of ordered) {
+    rewritten = `${rewritten.slice(0, replacement.start)}${replacement.value}${rewritten.slice(replacement.end)}`
+  }
+  return rewritten
+}
+
+function syncExecutableScriptsFromEnglish(translatedHtml: string, englishHtml: string): string {
+  const translatedScripts = syncableScripts(translatedHtml)
+  const englishScripts = syncableScripts(englishHtml)
+  const replacements: Array<{ start: number; end: number; value: string }> = []
+  const extraEnglish: string[] = []
+
+  for (const kind of ['inline', 'external'] as const) {
+    const wantsExternal = kind === 'external'
+    const translatedGroup = translatedScripts.filter((script) => script.external === wantsExternal)
+    const englishGroup = englishScripts.filter((script) => script.external === wantsExternal)
+    const sharedCount = Math.min(translatedGroup.length, englishGroup.length)
+
+    for (let index = 0; index < sharedCount; index += 1) {
+      if (translatedGroup[index].outerHtml === englishGroup[index].outerHtml) continue
+      replacements.push({
+        start: translatedGroup[index].start,
+        end: translatedGroup[index].end,
+        value: englishGroup[index].outerHtml,
+      })
+    }
+
+    extraEnglish.push(...englishGroup.slice(sharedCount).map((script) => script.outerHtml))
+  }
+
+  let rewritten = applyHtmlRangeReplacements(translatedHtml, replacements)
+  if (extraEnglish.length > 0) rewritten = insertBeforeClosingTag(rewritten, 'body', extraEnglish.join('\n'))
+  return rewritten
 }
 
 function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[] } {
@@ -2323,6 +2432,44 @@ function scheduleTranslatedSourceCheck(ctx: WorkerExecutionContext | undefined, 
   scheduleTranslationBackgroundTask(ctx, checkTranslatedSourceFreshnessSafely(env, new URL(requestUrl), locale, translatedResponse, priority))
 }
 
+async function serveTranslatedCachedPage(
+  request: Request,
+  env: Env,
+  requestUrl: URL,
+  locale: Locale,
+  translatedResponse: Response,
+  cacheState: 'HIT' | 'STALE',
+  isHead: boolean,
+): Promise<Response> {
+  if (isHead) return withResponseHeaders(translatedResponse, cacheState, true)
+
+  const status = translatedResponse.status
+  const statusText = translatedResponse.statusText
+  const responseHeaders = new Headers(translatedResponse.headers)
+  const translatedHtml = await translatedResponse.text()
+
+  try {
+    const renderRequest = request.method === 'GET' ? request : new Request(request, { method: 'GET' })
+    const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
+    if (source.type === 'html') {
+      let syncedHtml = syncExecutableScriptsFromEnglish(translatedHtml, source.sourceHtml)
+      if (!syncedHtml.includes('capgo-edge-language-selector-hash')) {
+        syncedHtml = insertBeforeClosingTag(syncedHtml, 'body', languageSelectorHashScript())
+      }
+      if (syncedHtml !== translatedHtml) responseHeaders.set(TRANSLATION_SCRIPTS_HEADER, 'synced')
+      return withResponseHeaders(new Response(syncedHtml, { status, statusText, headers: responseHeaders }), cacheState, false)
+    }
+  } catch (error) {
+    console.error('Failed to sync executable scripts from current English source', {
+      pathname: requestUrl.pathname,
+      locale,
+      error: errorMessage(error),
+    })
+  }
+
+  return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, false)
+}
+
 async function processTranslationJob(job: TranslationJob, env: Env): Promise<void> {
   if (job.cacheVersion !== TRANSLATION_CACHE_VERSION || !isSupportedLocale(job.locale)) return
 
@@ -2386,7 +2533,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     } else {
       scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, cachedResponse, priority)
     }
-    return withResponseHeaders(cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
+    return await serveTranslatedCachedPage(request, env, requestUrl, locale, cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
   const storedResponse = await readStoredTranslatedResponse(env, requestUrl, locale)
@@ -2399,7 +2546,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     } else {
       scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, storedResponse, priority)
     }
-    return withResponseHeaders(storedResponse, isStale ? 'STALE' : 'HIT', isHead)
+    return await serveTranslatedCachedPage(request, env, requestUrl, locale, storedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
   const enqueued = await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)
@@ -2720,11 +2867,13 @@ export const __translationWorkerTest = {
   polishTranslatedText,
   bodyTranslationStats,
   buildBatches,
+  cacheKeyFor,
   collectSegments,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
   rewriteMetadataAndLinks,
   resolveTranslationContexts,
+  syncExecutableScriptsFromEnglish,
 }
 
 export default {

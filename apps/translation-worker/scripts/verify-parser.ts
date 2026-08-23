@@ -55,6 +55,49 @@ const rendered = __translationWorkerTest.renderTranslatedHtml(parts, segments, t
 assert(rendered.includes('FR: Ship mobile updates instantly to every user'), 'Renderer did not write translated body text')
 assert(rendered.includes('current < total'), 'Renderer changed skipped script content')
 
+const staleTocTranslated = `<!doctype html>
+<html lang="de">
+  <head>
+    <title>App-Initialisierung</title>
+    <script type="application/ld+json" id="seo-schema-graph">{"headline":"App-Initialisierung","inLanguage":"de"}</script>
+    <script src="https://aff.capgo.app/r/pixel.js"></script>
+  </head>
+  <body>
+    <h1>App-Initialisierung Schritt für Schritt</h1>
+    <script id="capgo-edge-language-selector-hash">(() => { /* keep worker script */ })();</script>
+    <script type="module">
+      document.addEventListener("DOMContentLoaded",()=>{const l=()=>{const e=document.querySelectorAll("h1,h2,h3");for(const c of e){const i=c.getAttribute("id");i&&document.querySelector(\`#\${i}-link\`)?.classList.remove("text-white")}history.replaceState(null,"",window.location.hash)}});
+    </script>
+    <p>Übersetzter Anleitungstext bleibt erhalten.</p>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js/v-stale" type="module"></script>
+  </body>
+</html>`
+const currentEnglish = `<!doctype html>
+<html lang="en">
+  <head>
+    <title>App initialization</title>
+    <script type="application/ld+json" id="seo-schema-graph">{"headline":"App initialization","inLanguage":"en"}</script>
+    <script src="https://aff.capgo.app/r/pixel.js"></script>
+  </head>
+  <body>
+    <h1>Capacitor app initialization step by step</h1>
+    <script type="module">
+      document.addEventListener("DOMContentLoaded",()=>{const r=t=>document.getElementById(\`\${t}-link\`);let l=window.location.hash,i;const d=t=>{t!==l&&(i&&clearTimeout(i),i=setTimeout(()=>{history.replaceState(null,"",t)},150))}});
+    </script>
+    <p>Keep the English source article body out of the localized page.</p>
+  </body>
+</html>`
+const syncedFromEnglish = __translationWorkerTest.syncExecutableScriptsFromEnglish(staleTocTranslated, currentEnglish)
+assert(syncedFromEnglish.includes('App-Initialisierung Schritt für Schritt'), 'Script sync wiped translated visible copy')
+assert(syncedFromEnglish.includes('Übersetzter Anleitungstext bleibt erhalten.'), 'Script sync wiped translated body copy')
+assert(syncedFromEnglish.includes('"headline":"App-Initialisierung"'), 'Script sync replaced locale-specific JSON-LD')
+assert(syncedFromEnglish.includes('id="capgo-edge-language-selector-hash"'), 'Script sync dropped the worker-owned language selector script')
+assert(syncedFromEnglish.includes('getElementById(`${t}-link`)'), 'Script sync did not copy the current English TOC helper')
+assert(syncedFromEnglish.includes('setTimeout(') && syncedFromEnglish.includes('150'), 'Script sync did not copy the current English replaceState debounce')
+assert(!syncedFromEnglish.includes('querySelector(`#${i}-link`)'), 'Script sync left the stale digit-leading TOC querySelector')
+assert(syncedFromEnglish.includes('https://static.cloudflareinsights.com/beacon.min.js/v-stale'), 'Script sync removed an unmatched third-party script from the translated page')
+assert(!syncedFromEnglish.includes('Keep the English source article body'), 'Script sync leaked current English visible copy')
+
 const titleSegmentIndex = segments.findIndex((segment) => segment.text.includes('Capgo - Live Updates for Capacitor Apps'))
 assert(titleSegmentIndex >= 0, 'Parser did not collect the title segment')
 const emptyTitleTranslations = segments.map((segment, index) => (index === titleSegmentIndex ? '' : segment.text))
@@ -88,19 +131,10 @@ assert(
   __translationWorkerTest.applyFrenchArticleElision('la haute disponibilité et le héros') === 'la haute disponibilité et le héros',
   'French elision must not touch aspirate-h words',
 )
-assert(
-  __translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === 'Évitez l\u2019attente.',
-  'French polish path did not apply article elision',
-)
-assert(
-  __translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.',
-  'Non-French polish path should leave text unchanged',
-)
+assert(__translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === 'Évitez l\u2019attente.', 'French polish path did not apply article elision')
+assert(__translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.', 'Non-French polish path should leave text unchanged')
 const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Skip the wait. Ship the fix.'])[0]
-assert(
-  typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('hotfix'),
-  'Missing marketing context override for live update hero headline',
-)
+assert(typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('hotfix'), 'Missing marketing context override for live update hero headline')
 
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
   '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',
@@ -349,6 +383,69 @@ try {
   assert(translatedResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A completed cache-miss translation was not cached')
   assert(translatedHtml.includes('Leggi le nostre guide'), 'A completed cache-miss translation did not contain the translated document')
   assert(translatedHtml.includes('Chi siamo'), 'A completed cache-miss translation did not keep context-backed About copy')
+
+  const staleBlogUrl = new URL('https://capgo.app/de/blog/capacitor-app-initialization-step-by-step-guide/')
+  const staleBlogCacheKey = __translationWorkerTest.cacheKeyFor(staleBlogUrl, 'de')
+  const staleBlogHtml = `<!doctype html>
+<html lang="de">
+  <head>
+    <title>App-Initialisierung</title>
+    <script type="application/ld+json" id="seo-schema-graph">{"headline":"App-Initialisierung"}</script>
+  </head>
+  <body>
+    <h1>App-Initialisierung Schritt für Schritt</h1>
+    <script type="module">document.querySelector(\`#\${i}-link\`);history.replaceState(null,"",window.location.hash);</script>
+    <p>Übersetzter Anleitungstext bleibt erhalten.</p>
+  </body>
+</html>`
+  const currentBlogHtml = `<!doctype html>
+<html lang="en">
+  <head>
+    <title>App initialization</title>
+    <script type="application/ld+json" id="seo-schema-graph">{"headline":"App initialization"}</script>
+  </head>
+  <body>
+    <h1>Capacitor app initialization step by step</h1>
+    <script type="module">const r=t=>document.getElementById(\`\${t}-link\`);setTimeout(()=>history.replaceState(null,"",t),150);</script>
+    <p>English source copy must stay off the localized response.</p>
+  </body>
+</html>`
+  cacheEntries.set(
+    staleBlogCacheKey.url,
+    new Response(staleBlogHtml, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Capgo-Translated-At': String(Date.now() - 48 * 60 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': 'b'.repeat(64),
+      },
+    }),
+  )
+  const blogEnv = {
+    ...env,
+    WEB: {
+      fetch: async () => new Response(currentBlogHtml, { headers: { 'Content-Type': 'text/html; charset=utf-8' } }),
+    },
+    DOCS: {
+      fetch: async () => {
+        throw new Error('The blog request unexpectedly used the docs origin')
+      },
+    },
+  }
+  const staleBlogResponse = await worker.fetch(new Request(staleBlogUrl), blogEnv as any)
+  const staleBlogBody = await staleBlogResponse.text()
+  assert(staleBlogResponse.status === 200, 'A stale localized blog was not served successfully')
+  assert(staleBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'STALE', 'A stale localized blog did not report STALE')
+  assert(staleBlogResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A stale localized blog did not sync current English scripts')
+  assert(staleBlogBody.includes('App-Initialisierung Schritt für Schritt'), 'Script sync on STALE wipe translated heading')
+  assert(staleBlogBody.includes('Übersetzter Anleitungstext bleibt erhalten.'), 'Script sync on STALE wipe translated paragraph')
+  assert(staleBlogBody.includes('"headline":"App-Initialisierung"'), 'Script sync on STALE replaced translated JSON-LD')
+  assert(staleBlogBody.includes('getElementById(`${t}-link`)'), 'STALE localized blog did not receive the current English TOC helper')
+  assert(staleBlogBody.includes('150'), 'STALE localized blog did not receive the current English replaceState debounce')
+  assert(!staleBlogBody.includes('querySelector(`#${i}-link`)'), 'STALE localized blog kept the stale TOC querySelector')
+  assert(!staleBlogBody.includes('English source copy must stay off the localized response.'), 'STALE script sync leaked current English copy')
+  const staleBlogHead = await worker.fetch(new Request(staleBlogUrl, { method: 'HEAD' }), blogEnv as any)
+  assert((await staleBlogHead.text()) === '', 'A HEAD stale localized blog returned a body')
+  assert(staleBlogHead.headers.get('X-Capgo-Translation-Cache') === 'STALE', 'A HEAD stale localized blog lost its cache state')
 
   const originalConsoleError = console.error
   let enqueueFailureResponse: Response | null = null
