@@ -48,7 +48,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
           </p>
 
           <!-- CLI Command -->
-          <div class="mx-auto mt-10 max-w-md">
+          <div class="relative mx-auto mt-10 max-w-md">
             <div class="flex items-center gap-3 rounded-lg bg-linear-to-r from-slate-800 to-slate-900 px-6 py-4">
               <span class="text-slate-400">$</span>
               <code class="text-cyan-400">bunx @capgo/capgo-sec scan</code>
@@ -62,6 +62,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                 </svg>
               </button>
             </div>
+            <p data-scanner-copy-status class="pointer-events-none absolute inset-x-0 top-full mt-2 text-sm text-slate-400" aria-live="polite"></p>
           </div>
 
           <!-- Features Pills -->
@@ -324,9 +325,12 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
     helper.select()
 
     const legacyCopy = Reflect.get(document, 'execCommand')
-    const copied = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
-
-    helper.remove()
+    let copied = false
+    try {
+      copied = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
+    } finally {
+      helper.remove()
+    }
     if (!copied) {
       throw new Error('Copy failed')
     }
@@ -347,7 +351,12 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
 
   document.querySelectorAll<HTMLButtonElement>('[data-scanner-copy]').forEach((button) => {
     let resetTimer: number | undefined
-    const originalHtml = button.innerHTML
+    const status = document.querySelector<HTMLElement>('[data-scanner-copy-status]')
+
+    const setStatus = (message: string): void => {
+      if (status) status.textContent = message
+      button.setAttribute('aria-label', message || 'Copy command')
+    }
 
     button.addEventListener('click', async () => {
       const value = button.getAttribute('data-scanner-copy')
@@ -355,17 +364,14 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
 
       try {
         await copyScannerText(value)
-        button.textContent = 'Copied'
-        button.setAttribute('aria-label', 'Copied')
+        setStatus('Copied')
       } catch {
-        button.textContent = 'Copy failed'
-        button.setAttribute('aria-label', 'Copy failed')
+        setStatus('Copy failed')
       }
 
       if (resetTimer) window.clearTimeout(resetTimer)
       resetTimer = window.setTimeout(() => {
-        button.innerHTML = originalHtml
-        button.setAttribute('aria-label', 'Copy command')
+        setStatus('')
       }, 1600)
     })
   })
