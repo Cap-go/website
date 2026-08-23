@@ -289,6 +289,9 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Heading slugs may start with a digit (e.g. "1-foo"); getElementById avoids invalid CSS selectors.
+    const getTocLink = (headingId: string) => document.getElementById(`${headingId}-link`)
+
     const observeArticleTitles = () => {
       const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
       let activeHeading = null
@@ -296,7 +299,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
       for (let i = 0; i < headings.length; i++) {
         const heading = headings[i]
         const tmp = heading.getAttribute('id')
-        if (tmp) document.querySelector(`#${tmp}-link`)?.classList.remove('text-white')
+        if (tmp) getTocLink(tmp)?.classList.remove('text-white')
         const rect = heading.getBoundingClientRect()
         if (rect.top <= 50) activeHeading = heading
         else if (rect.top > 50 && activeHeading) break
@@ -305,7 +308,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
       if (activeHeading) {
         const tmp = activeHeading.getAttribute('id')
         if (tmp) {
-          document.querySelector(`#${tmp}-link`)?.classList.add('text-white')
+          getTocLink(tmp)?.classList.add('text-white')
           history.replaceState(null, '', `#${tmp}`)
         }
       }
