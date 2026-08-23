@@ -100,10 +100,11 @@ assert(syncedFromEnglish.includes('src="/_astro/page.new5678.js"'), 'Script sync
 assert(!syncedFromEnglish.includes('src="/_astro/page.old1234.js"'), 'Script sync left the stale hashed English script src')
 assert(syncedFromEnglish.includes('https://static.cloudflareinsights.com/beacon.min.js/v-stale'), 'Script sync removed an unmatched third-party script from the translated page')
 assert(syncedFromEnglish.includes('src="/_astro/extra.aaa111.js"'), 'Script sync dropped a newly added English script')
-assert(
-  syncedFromEnglish.indexOf('src="/_astro/extra.aaa111.js"') < syncedFromEnglish.indexOf('src="/_astro/page.new5678.js"'),
-  'Script sync appended a new English head script after code that should follow it',
-)
+const syncedHead = syncedFromEnglish.slice(0, syncedFromEnglish.indexOf('</head>'))
+const syncedHeadSrcs = [...syncedHead.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map((match) => match[1])
+const extraHeadIndex = syncedHeadSrcs.indexOf('/_astro/extra.aaa111.js')
+const pageHeadIndex = syncedHeadSrcs.indexOf('/_astro/page.new5678.js')
+assert(extraHeadIndex >= 0 && pageHeadIndex === extraHeadIndex + 1, 'Script sync did not insert the new English head script immediately before page.new5678.js')
 assert(
   syncedFromEnglish.includes('https://static.cloudflareinsights.com/beacon.min.js/v-stale') && syncedFromEnglish.includes('src="/_astro/extra.aaa111.js"'),
   'Script sync replaced an unmatched third-party script with a newly added English script',
@@ -122,7 +123,27 @@ const extraEnglishInline = __translationWorkerTest.syncExecutableScriptsFromEngl
   `<!doctype html><html lang="en"><body><h1>English only</h1><script>window.capgoNewInline=1</script></body></html>`,
 )
 assert(extraEnglishInline.includes('Bleibt Deutsch'), 'Extra English inline fixture wiped translated copy')
-assert(extraEnglishInline.includes('window.capgoNewInline=1'), 'Script sync did not insert an unmatched English inline script before </body>')
+assert(
+  extraEnglishInline.includes('window.capgoNewInline=1') && extraEnglishInline.indexOf('window.capgoNewInline=1') < extraEnglishInline.indexOf('</body>'),
+  'Script sync did not insert an unmatched English inline script before </body>',
+)
+
+const extraBeforeEnglishInline = __translationWorkerTest.syncExecutableScriptsFromEnglish(
+  `<!doctype html><html lang="de"><body><h1>Bleibt Deutsch</h1><script>window.staleExtra=1</script><script type="module">document.querySelector(\`#\${i}-link\`)</script></body></html>`,
+  `<!doctype html><html lang="en"><body><h1>English only</h1><script type="module">document.getElementById(\`\${t}-link\`)</script></body></html>`,
+)
+assert(extraBeforeEnglishInline.includes('Bleibt Deutsch'), 'Preceding inline fixture wiped translated copy')
+assert(extraBeforeEnglishInline.includes('window.staleExtra=1'), 'Script sync replaced an unmatched translated inline that precedes the English TOC script')
+assert(extraBeforeEnglishInline.includes('getElementById(`${t}-link`)'), 'Script sync did not pair the English TOC script past a preceding unmatched inline')
+assert(!extraBeforeEnglishInline.includes('querySelector(`#${i}-link`)'), 'Script sync left the stale TOC script after a preceding unmatched inline')
+
+const sameTypeExtraBeforeEnglishInline = __translationWorkerTest.syncExecutableScriptsFromEnglish(
+  `<!doctype html><html lang="de"><body><h1>Bleibt Deutsch</h1><script>window.staleExtra=1</script><script>document.querySelector(\`#\${i}-link\`)</script></body></html>`,
+  `<!doctype html><html lang="en"><body><h1>English only</h1><script>document.getElementById(\`\${t}-link\`)</script></body></html>`,
+)
+assert(sameTypeExtraBeforeEnglishInline.includes('window.staleExtra=1'), 'Same-type leftover pairing dropped the unmatched translated inline')
+assert(sameTypeExtraBeforeEnglishInline.includes('getElementById(`${t}-link`)'), 'Same-type leftover pairing did not update the matching TOC script')
+assert(!sameTypeExtraBeforeEnglishInline.includes('querySelector(`#${i}-link`)'), 'Same-type leftover pairing left the stale TOC script')
 
 const titleSegmentIndex = segments.findIndex((segment) => segment.text.includes('Capgo - Live Updates for Capacitor Apps'))
 assert(titleSegmentIndex >= 0, 'Parser did not collect the title segment')
@@ -446,10 +467,14 @@ try {
       },
     }),
   )
+  let blogOriginFetches = 0
   const blogEnv = {
     ...env,
     WEB: {
-      fetch: async () => new Response(currentBlogHtml, { headers: { 'Content-Type': 'text/html; charset=utf-8' } }),
+      fetch: async () => {
+        blogOriginFetches += 1
+        return new Response(currentBlogHtml, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+      },
     },
     DOCS: {
       fetch: async () => {
@@ -484,11 +509,28 @@ try {
       },
     }),
   )
-  const freshBlogResponse = await worker.fetch(new Request(freshBlogUrl), blogEnv as any)
+  cacheEntries.set(__translationWorkerTest.sourceCheckKeyFor(freshBlogUrl, 'de').url, new Response('already-checked'))
+  let freshOriginFetches = 0
+  const freshBlogEnv = {
+    ...env,
+    WEB: {
+      fetch: async () => {
+        freshOriginFetches += 1
+        throw new Error('A fresh HIT unexpectedly fetched the English origin')
+      },
+    },
+    DOCS: {
+      fetch: async () => {
+        throw new Error('A fresh HIT unexpectedly used the docs origin')
+      },
+    },
+  }
+  const freshBlogResponse = await worker.fetch(new Request(freshBlogUrl), freshBlogEnv as any)
   const freshBlogBody = await freshBlogResponse.text()
   assert(freshBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A fresh localized blog did not report HIT')
   assert(freshBlogResponse.headers.get('X-Capgo-Translation-Scripts') !== 'synced', 'A fresh HIT synced scripts on the response path')
   assert(freshBlogBody.includes('querySelector(`#${i}-link`)'), 'A fresh HIT should keep cached scripts inside the source-check window')
+  assert(freshOriginFetches === 0, 'A fresh HIT fetched the English origin on the response path')
 
   const agedHitUrl = new URL('https://capgo.app/de/blog/aged-hit-script-sync/')
   cacheEntries.set(
@@ -501,12 +543,18 @@ try {
       },
     }),
   )
+  const fetchesBeforeAgedHit = blogOriginFetches
   const agedHitResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
   const agedHitBody = await agedHitResponse.text()
   assert(agedHitResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A 10-minute HIT did not report HIT')
   assert(agedHitResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A 10-minute HIT with a source-hash mismatch did not sync scripts')
   assert(agedHitBody.includes('getElementById(`${t}-link`)'), 'A 10-minute HIT did not receive the current English TOC helper')
   assert(!agedHitBody.includes('querySelector(`#${i}-link`)'), 'A 10-minute HIT kept the stale TOC querySelector')
+  assert(blogOriginFetches > fetchesBeforeAgedHit, 'A 10-minute HIT did not load the current English source')
+  const fetchesAfterAgedHit = blogOriginFetches
+  const agedHitReuseResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
+  assert(agedHitReuseResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A repeated 10-minute HIT lost script sync')
+  assert(blogOriginFetches === fetchesAfterAgedHit, 'A repeated 10-minute HIT did not reuse the cached English source')
   await new Promise((resolve) => setTimeout(resolve, 25))
 
   const originalConsoleError = console.error

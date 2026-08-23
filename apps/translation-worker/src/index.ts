@@ -1073,6 +1073,67 @@ function unusedScriptIndexes(scripts: HtmlScript[], used: Set<number>, include: 
   return indexes
 }
 
+function groupScriptIndexesByType(scripts: HtmlScript[], indexes: number[]): Map<string, number[]> {
+  const groups = new Map<string, number[]>()
+  for (const index of indexes) {
+    const type = scripts[index].type
+    const list = groups.get(type)
+    if (list) list.push(index)
+    else groups.set(type, [index])
+  }
+  return groups
+}
+
+function scriptTokenOverlap(left: HtmlScript, right: HtmlScript): number {
+  const leftTokens = new Set(left.outerHtml.match(/[A-Za-z_$][\w$]{3,}/g) ?? [])
+  const rightTokens = new Set(right.outerHtml.match(/[A-Za-z_$][\w$]{3,}/g) ?? [])
+  if (leftTokens.size === 0 || rightTokens.size === 0) return 0
+  let shared = 0
+  for (const token of leftTokens) {
+    if (rightTokens.has(token)) shared += 1
+  }
+  return shared / Math.min(leftTokens.size, rightTokens.size)
+}
+
+function pairRemainingInlineScripts(
+  translatedScripts: HtmlScript[],
+  englishScripts: HtmlScript[],
+  translatedUsed: Set<number>,
+  englishUsed: Set<number>,
+  takePair: (translatedIndex: number, englishIndex: number) => void,
+): void {
+  const remainingTranslated = unusedScriptIndexes(translatedScripts, translatedUsed, (script) => !script.external)
+  const remainingEnglish = unusedScriptIndexes(englishScripts, englishUsed, (script) => !script.external)
+  const translatedByType = groupScriptIndexesByType(translatedScripts, remainingTranslated)
+  const englishByType = groupScriptIndexesByType(englishScripts, remainingEnglish)
+
+  for (const [type, englishGroup] of englishByType) {
+    const translatedGroup = translatedByType.get(type) ?? []
+    if (translatedGroup.length === englishGroup.length) {
+      for (let index = 0; index < englishGroup.length; index += 1) {
+        takePair(translatedGroup[index], englishGroup[index])
+      }
+      continue
+    }
+
+    const usedTranslated = new Set<number>()
+    for (const englishIndex of englishGroup) {
+      let bestIndex: number | undefined
+      let bestScore = 0.3
+      for (const translatedIndex of translatedGroup) {
+        if (usedTranslated.has(translatedIndex)) continue
+        const score = scriptTokenOverlap(translatedScripts[translatedIndex], englishScripts[englishIndex])
+        if (score <= bestScore) continue
+        bestScore = score
+        bestIndex = translatedIndex
+      }
+      if (bestIndex === undefined) continue
+      usedTranslated.add(bestIndex)
+      takePair(bestIndex, englishIndex)
+    }
+  }
+}
+
 function groupExtraEnglishScripts(extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): ScriptInsertionGroup[] {
   const paired = (script: HtmlScript): boolean => pairedEnglish.has(script)
   const groups = new Map<string, ScriptInsertionGroup>()
@@ -1151,12 +1212,7 @@ function syncExecutableScriptsFromEnglish(translatedHtml: string, englishHtml: s
     takePair(translatedIndex, englishIndex)
   }
 
-  const remainingTranslatedInline = unusedScriptIndexes(translatedScripts, translatedUsed, (script) => !script.external)
-  const remainingEnglishInline = unusedScriptIndexes(englishScripts, englishUsed, (script) => !script.external)
-  const inlineShared = Math.min(remainingTranslatedInline.length, remainingEnglishInline.length)
-  for (let index = 0; index < inlineShared; index += 1) {
-    takePair(remainingTranslatedInline[index], remainingEnglishInline[index])
-  }
+  pairRemainingInlineScripts(translatedScripts, englishScripts, translatedUsed, englishUsed, takePair)
 
   const replacements = pairs
     .filter((pair) => pair.translated.outerHtml !== pair.english.outerHtml)
@@ -3009,6 +3065,7 @@ export const __translationWorkerTest = {
   bodyTranslationStats,
   buildBatches,
   cacheKeyFor,
+  sourceCheckKeyFor,
   collectSegments,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
