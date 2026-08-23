@@ -25,6 +25,26 @@ export type LdJsonType = WithContext<Organization | Person | NewsArticle | WebPa
 // Type for graph items (Thing without @context requirement)
 export type GraphItem = Thing
 
+const SCHEMA_ORG_CONTEXT = 'https://schema.org' as const
+
+/**
+ * Ensure ld+json has schema.org @context before serialization.
+ * Handles standalone schemas, @graph bundles, and arrays.
+ */
+export function ensureLdJsonContext(data: unknown): unknown {
+  if (data == null || typeof data !== 'object') return data
+
+  if (Array.isArray(data)) return data.map((item) => ensureLdJsonContext(item))
+
+  const obj = data as Record<string, unknown>
+  if (obj['@context']) return data
+
+  return {
+    '@context': SCHEMA_ORG_CONTEXT,
+    ...obj,
+  }
+}
+
 /**
  * Create a complete Organization schema for Capgo
  */
