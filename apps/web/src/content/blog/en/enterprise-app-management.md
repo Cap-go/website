@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-23T08:03:00.530Z
-updated_at: 2026-08-23T08:03:01.909Z
+updated_at: 2026-08-23T08:05:38.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/913a4a26-1a1c-46f7-a45b-66ea3078630b/enterprise-app-management-guide.jpg'
 head_image_alt: 'Enterprise App Management: A Complete Guide for Mobile Teams'
 keywords: 'enterprise app management, mobile app deployment, app lifecycle management, enterprise mobility, app security governance'
