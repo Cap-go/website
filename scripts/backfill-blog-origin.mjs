@@ -3,11 +3,10 @@
  * Backfill `origin: human | ai` on blog post frontmatter.
  *
  * Heuristics (prefer false negatives → default `ai`):
- * - human: known team/guest authors (WcaleNieWolny, Anik Dhabal Babu, Rupert Barrow, …)
- * - human: Story or Company tags
- * - human: legacy /public root images (not /blog-images/, not cdnimg.co)
- * - human: Martin posts with x.com/martindonadieu author_url (older hand-written posts)
- * - ai: everything else (bulk SEO pipeline, cdnimg.co covers, /blog-images/ mass content)
+ * - ai (override): rebelgrowth S3 images, "supplied research" boilerplate, chat-gpt credits
+ * - human: known team/guest authors; Story/Company tags; legacy /public root images (when not ai)
+ * - human: Martin posts with x.com/martindonadieu author_url; capgo.app head_image; explicit slug list
+ * - ai: everything else (bulk SEO pipeline, cdnimg.co, /blog-images/ mass content)
  */
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
@@ -17,19 +16,42 @@ const BLOG_DIR = join(import.meta.dirname, '../apps/web/src/content/blog/en')
 const HUMAN_AUTHORS = new Set(['WcaleNieWolny', 'Michael (WcaleNieWolny)', 'Anik Dhabal Babu', 'Rupert Barrow'])
 const HUMAN_TAGS = new Set(['Story', 'Company'])
 
+/** Hand-written Martin/founder posts that lack stronger automated signals. */
+const HUMAN_SLUGS = new Set([
+  'android-emulator-terminal',
+  'barcode-scanner-cordova',
+  'benefits-of-continuous-integration',
+  'capacitor-edge-to-edge-display-native-config',
+  'capgo-integration-with-github-actions-guide',
+  'how-capgo-handles-version-control-and-rollbacks',
+])
+
+function hasAiPipelineBody(body) {
+  return body.includes('rebelgrowth.s3') || /supplied research/i.test(body) || /chat-gpt|chatgpt/i.test(body)
+}
+
 function classifyOrigin(frontmatter, rawContent) {
+  const body = rawContent.replace(/^---[\s\S]*?---/, '')
+  const slug = frontmatter.slug ?? ''
   const author = frontmatter.author ?? ''
   const tag = frontmatter.tag ?? ''
   const headImage = frontmatter.head_image ?? ''
+  const authorUrl = frontmatter.author_url ?? ''
+
+  if (hasAiPipelineBody(body)) return 'ai'
+
+  if (HUMAN_SLUGS.has(slug)) return 'human'
 
   if (HUMAN_AUTHORS.has(author)) return 'human'
 
   const tags = tag.split(',').map((item) => item.trim())
   if (tags.some((item) => HUMAN_TAGS.has(item))) return 'human'
 
-  if (headImage.startsWith('/') && !headImage.startsWith('/blog-images/')) return 'human'
+  if (authorUrl.includes('x.com/martindonadieu') || rawContent.includes('x.com/martindonadieu')) return 'human'
 
-  if (rawContent.includes('x.com/martindonadieu')) return 'human'
+  if (/capgo\.app/i.test(headImage)) return 'human'
+
+  if (headImage.startsWith('/') && !headImage.startsWith('/blog-images/')) return 'human'
 
   return 'ai'
 }

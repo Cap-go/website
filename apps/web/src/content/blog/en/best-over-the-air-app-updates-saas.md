@@ -13,7 +13,7 @@ keywords: ''
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 OTA updates can fix JavaScript, HTML, CSS, and asset bugs without waiting for a new store build. But the platform you choose must handle more than upload and download. I use five checks: Capacitor fit, update scope, rollout control, rollback safety, and CI/CD access.

@@ -15,7 +15,7 @@ keywords: E2E, code signing, RSA, AES, mobile app development, live updates, OTA
 tag: Solution
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

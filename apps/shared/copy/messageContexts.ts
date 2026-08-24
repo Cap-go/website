@@ -641,6 +641,11 @@ export const messageContexts = {
   billed_monthly:
     'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/Plans.astro. Message key `billed_monthly` (Billed Monthly).',
   blog: 'Short navigation label for the Blog section. Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: site footer, site header. Message key `blog` (Blog).',
+  blog_ai: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: site footer. Message key `blog_ai` (Blog Ai).',
+  blog_ai_description:
+    'Page/area: Capgo marketing website. Role: Supporting description paragraph or meta description. Seen in: component BlogListing.astro. Preserve Capgo product/brand and developer terms exactly. Message key `blog_ai_description` (Blog Ai Description).',
+  blog_ai_title:
+    'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: component BlogListing.astro. Preserve Capgo product/brand and developer terms exactly. Message key `blog_ai_title` (Blog Ai Title).',
   blog_mid_article_china_cta_body:
     'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: component BlogMidArticleCta.astro. Preserve Capgo product/brand and developer terms exactly. Message key `blog_mid_article_china_cta_body` (Blog Mid Article China CTA Body).',
   blog_mid_article_china_cta_docs_button:
@@ -2699,6 +2704,8 @@ export const messageContexts = {
     'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page top_flutter_app.astro. Message key `flutter_power_approximately_1_of_apps_on_google_play_store` (Flutter Power Approximately 1 Of Apps On Google Play Store).',
   footer:
     'Landmark/section name for the site footer; keep short. Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: site footer. Message key `footer` (Footer).',
+  footer_blog_ai_description:
+    'Page/area: Site footer navigation or footer blurb. Role: Supporting description paragraph or meta description. Message key `footer_blog_ai_description` (Footer Blog Ai Description).',
   footer_blog_builder_description:
     'Page/area: Site footer navigation or footer blurb. Role: Supporting description paragraph or meta description. Seen in: page native-build.astro. Message key `footer_blog_builder_description` (Footer Blog Builder Description).',
   footer_blog_description:
@@ -3071,6 +3078,8 @@ export const messageContexts = {
   last_updated: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page return.astro. Message key `last_updated` (Last Updated).',
   latest_from_news:
     'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page blog/[slug].astro. Message key `latest_from_news` (Latest From News).',
+  latest_from_the_ai_blog:
+    'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component BlogListing.astro. Message key `latest_from_the_ai_blog` (Latest From The Ai Blog).',
   latest_from_the_blog:
     'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component BlogListing.astro. Message key `latest_from_the_blog` (Latest From The Blog).',
   learn_more:
