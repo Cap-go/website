@@ -550,7 +550,7 @@ try {
   assert(agedHitResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A 10-minute HIT with a source-hash mismatch did not sync scripts')
   assert(agedHitBody.includes('getElementById(`${t}-link`)'), 'A 10-minute HIT did not receive the current English TOC helper')
   assert(!agedHitBody.includes('querySelector(`#${i}-link`)'), 'A 10-minute HIT kept the stale TOC querySelector')
-  assert(blogOriginFetches > fetchesBeforeAgedHit, 'A 10-minute HIT did not load the current English source')
+  assert(blogOriginFetches === fetchesBeforeAgedHit + 1, 'A 10-minute HIT loaded the English source more than once')
   const fetchesAfterAgedHit = blogOriginFetches
   const agedHitReuseResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
   assert(agedHitReuseResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A repeated 10-minute HIT lost script sync')

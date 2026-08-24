@@ -1084,9 +1084,13 @@ function groupScriptIndexesByType(scripts: HtmlScript[], indexes: number[]): Map
   return groups
 }
 
+function executableScriptBody(script: HtmlScript): string {
+  return script.outerHtml.replace(/^<script\b[^>]*>/i, '').replace(/<\/script>\s*$/i, '')
+}
+
 function scriptTokenOverlap(left: HtmlScript, right: HtmlScript): number {
-  const leftTokens = new Set(left.outerHtml.match(/[A-Za-z_$][\w$]{3,}/g) ?? [])
-  const rightTokens = new Set(right.outerHtml.match(/[A-Za-z_$][\w$]{3,}/g) ?? [])
+  const leftTokens = new Set(executableScriptBody(left).match(/[A-Za-z_$][\w$]{3,}/g) ?? [])
+  const rightTokens = new Set(executableScriptBody(right).match(/[A-Za-z_$][\w$]{3,}/g) ?? [])
   if (leftTokens.size === 0 || rightTokens.size === 0) return 0
   let shared = 0
   for (const token of leftTokens) {
@@ -2622,20 +2626,35 @@ async function writeCachedEnglishSourceHtmlSafely(requestUrl: URL, sourceHtml: s
   }
 }
 
-async function loadCurrentEnglishSourceHtml(env: Env, requestUrl: URL, locale: Locale): Promise<string | null> {
-  const cached = await readCachedEnglishSourceHtml(requestUrl)
-  if (cached) return cached
+const inflightEnglishSourceHtml = new Map<string, Promise<string | null>>()
 
-  const renderRequest = new Request(requestUrl.toString(), {
-    method: 'GET',
-    headers: {
-      Accept: 'text/html',
-    },
-  })
-  const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
-  if (source.type !== 'html') return null
-  await writeCachedEnglishSourceHtmlSafely(requestUrl, source.sourceHtml)
-  return source.sourceHtml
+async function loadCurrentEnglishSourceHtml(env: Env, requestUrl: URL, locale: Locale): Promise<string | null> {
+  const cacheKey = englishSourceHtmlKeyFor(requestUrl).url
+  const inflight = inflightEnglishSourceHtml.get(cacheKey)
+  if (inflight) return inflight
+
+  const load = (async () => {
+    const cached = await readCachedEnglishSourceHtml(requestUrl)
+    if (cached) return cached
+
+    const renderRequest = new Request(requestUrl.toString(), {
+      method: 'GET',
+      headers: {
+        Accept: 'text/html',
+      },
+    })
+    const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
+    if (source.type !== 'html') return null
+    await writeCachedEnglishSourceHtmlSafely(requestUrl, source.sourceHtml)
+    return source.sourceHtml
+  })()
+
+  inflightEnglishSourceHtml.set(cacheKey, load)
+  try {
+    return await load
+  } finally {
+    inflightEnglishSourceHtml.delete(cacheKey)
+  }
 }
 
 async function checkTranslatedSourceFreshnessSafely(env: Env, requestUrl: URL, locale: Locale, translatedResponse: Response, priority: boolean): Promise<void> {
