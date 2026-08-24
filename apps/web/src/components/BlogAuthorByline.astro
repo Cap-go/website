@@ -5,15 +5,16 @@ interface Props {
   author: string
   authorUrl: string
   authorImageUrl: string
+  showLabel?: boolean
   class?: string
 }
 
-const { author, authorUrl, authorImageUrl, class: className } = Astro.props
+const { author, authorUrl, authorImageUrl, showLabel = true, class: className } = Astro.props
 const locale = Astro.locals.locale
 ---
 
 <div class:list={['flex flex-col gap-y-4', className]}>
-  <p class="text-sm text-gray-400">{m.written_by({}, { locale })}</p>
+  {showLabel && <p class="text-sm text-gray-400">{m.written_by({}, { locale })}</p>}
   <a class="group flex items-center space-x-3" href={authorUrl}>
     <img width="36" height="36" loading="lazy" decoding="async" alt={author} src={authorImageUrl} class="blur-0 rounded-full transition-all group-hover:brightness-90" />
     <div class="flex flex-col">

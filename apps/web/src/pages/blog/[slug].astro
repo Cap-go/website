@@ -166,7 +166,13 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
             showEditorialByline ? (
               <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="mt-6 md:hidden" />
             ) : (
-              <BlogAuthorByline author={entry.data.author} authorUrl={entry.data.author_url} authorImageUrl={entry.data.author_image_url} class="mt-6 md:hidden" />
+              <BlogAuthorByline
+                author={entry.data.author}
+                authorUrl={entry.data.author_url}
+                authorImageUrl={entry.data.author_image_url}
+                showLabel={false}
+                class="mt-6 md:hidden"
+              />
             )
           }
         </div>
@@ -189,7 +195,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
             <Content />
           </article>
         </div>
-        <div class="right-0 hidden px-10 sm:block">
+        <div class="right-0 hidden px-10 md:block">
           {
             showEditorialByline ? (
               <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="relative pb-5" />
