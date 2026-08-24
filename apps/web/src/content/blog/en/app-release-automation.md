@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-24T08:21:36.285Z
-updated_at: 2026-08-24T08:21:37.742Z
+updated_at: 2026-08-24T08:24:02.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/b5ad9d11-b379-48a6-9edb-e91cd33e5393/app-release-automation-text-graphic.jpg'
 head_image_alt: 'App Release Automation: Ship Faster'
 keywords: 'app release automation, mobile CI/CD, live updates, Capacitor deployment, release pipeline'
