@@ -25,6 +25,8 @@ const blog = defineCollection({
       published: z.boolean().optional(),
       locale: localeSchema,
       next_blog: z.string().optional().nullable(),
+      /** When `ai`, the article page keeps the single-author byline. Defaults to human editorial credits. */
+      origin: z.enum(['human', 'ai']).optional(),
     })
     .transform((data) => ({
       ...data,
