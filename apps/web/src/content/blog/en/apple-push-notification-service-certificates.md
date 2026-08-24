@@ -13,6 +13,7 @@ keywords: 'apple push notifications, APNs certificates, iOS push, Capacitor push
 tag: 'Mobile, Tutorial, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Apple Push Notification service certificates are valid for one year and must be renewed annually in the Apple Developer Portal to avoid interrupting device communication. If you're responsible for a Capacitor app, an expired or revoked credential can stop notifications even while the app itself appears healthy.

@@ -20,6 +20,7 @@ keywords: >-
 tag: 'Mobile, Security, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've got a service that needs to react when something happens somewhere else. A payment clears. A customer record changes. A repo gets a push. You could poll an API every minute and waste cycles asking “anything new?” over and over, or you can let the source system call you when the event happens.

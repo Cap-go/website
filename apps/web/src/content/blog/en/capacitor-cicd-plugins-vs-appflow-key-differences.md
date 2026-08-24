@@ -13,6 +13,7 @@ keywords: Capacitor, CI/CD, Appflow, mobile app updates, development tools, cust
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

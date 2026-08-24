@@ -13,6 +13,7 @@ keywords: OTA updates, mobile app updates, Capacitor, app deployment, update sch
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: Capacitor, OTA updates, testing, mock scenarios, app reliability, netw
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

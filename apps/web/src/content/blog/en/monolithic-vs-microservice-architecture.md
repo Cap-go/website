@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Technology, Alternatives'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're likely in the same position many mobile teams reach just before a major build begins. The product roadmap is clear enough, the app shell is coming together in Capacitor, and someone asks the backend question that shapes everything after launch: do we keep this simple with a monolith, or do we split the system into microservices from day one?

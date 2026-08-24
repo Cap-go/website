@@ -13,6 +13,7 @@ keywords: Git Flow, Trunk-Based Development, CI/CD, software development, versio
 tag: Development, Technology, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

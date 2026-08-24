@@ -15,6 +15,7 @@ keywords: mobile app development, live updates, OTA updates, continuous integrat
 tag: Optimisation
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

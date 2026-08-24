@@ -15,6 +15,7 @@ keywords: Capgo Build, Capacitor, cloud build, iOS build, Android build, native 
 tag: Product
 published: false
 locale: en
+origin: human
 next_blog: ''
 ---
 

@@ -15,6 +15,7 @@ keywords: Expo alternative, EAS Update, EAS Build, live updates, OTA updates, Ca
 tag: Alternatives
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

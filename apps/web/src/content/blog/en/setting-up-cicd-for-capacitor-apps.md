@@ -13,6 +13,7 @@ keywords: CI/CD, Capacitor apps, mobile development, automation, build process, 
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

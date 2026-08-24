@@ -13,6 +13,7 @@ keywords: Capacitor, mobile app development, iOS setup, Android setup, app confi
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: app compliance, regional management, privacy policies, app reviews, OT
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

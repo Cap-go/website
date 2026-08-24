@@ -15,6 +15,7 @@ keywords: GitLab, CI/CD, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

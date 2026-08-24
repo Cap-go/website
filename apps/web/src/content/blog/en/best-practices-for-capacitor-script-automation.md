@@ -13,6 +13,7 @@ keywords: Capacitor, script automation, CI/CD, mobile updates, performance optim
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, CI/CD, Product'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Release day is close, the build is green, QA has signed off, and someone asks the question every team eventually hears too late: “Who's writing the release notes?”

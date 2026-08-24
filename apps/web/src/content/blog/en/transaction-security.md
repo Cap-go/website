@@ -13,6 +13,7 @@ keywords: 'transaction security, payment security, API security, fraud preventio
 tag: 'Mobile, Security, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Most transaction security advice still boils down to “turn on TLS and MFA.” That's a shallow answer. In production, the failures that hurt real money usually sit somewhere else, in **key custody**, **authorization logic**, **fraud screening**, and the human workflows around payment changes, approvals, and updates.

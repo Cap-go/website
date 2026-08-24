@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, Capacitor, Open Source'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two situations right now. Either your team is choosing between a polished proprietary tool and an open-source stack that looks powerful but harder to operate, or you're already using open source everywhere and need a clearer answer to a tougher question: when does it prove advantageous, and when does it shift responsibilities to your team?

@@ -13,6 +13,7 @@ keywords: Capacitor, latency reduction, network optimization, front-end performa
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

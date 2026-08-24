@@ -13,6 +13,7 @@ keywords: 'ci cd integration, ci cd pipeline, cicd tools, live updates, capacito
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 CI/CD integration is the wiring that connects your code repository to an automated pipeline so every change moves through build, test, and release stages without manual handoffs. By 2024, **83% of developers** were involved in DevOps-related activities, and CI/CD tool use was linked to better delivery performance across deployment frequency, lead time, change failure rate, and time to restore service [according to the Cloud Native Computing Foundation's State of CI/CD Report](https://cd.foundation/state-of-cicd-2024/).

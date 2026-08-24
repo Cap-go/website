@@ -13,6 +13,7 @@ keywords: 'release management process, release management, CI/CD release, softwa
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Friday afternoon is when release managers earn their coffee. The build passed, the deploy job finished cleanly, and the dashboard says the new version is live. Then support pings the channel because users are still seeing the old behavior on mobile, or only a slice of users got the change because the actual release path sits behind app-store review, feature flags, or an OTA channel nobody outside engineering thinks about until it breaks.

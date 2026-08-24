@@ -13,6 +13,7 @@ keywords: 'log analysis tools, observability, devops tools, log management, appl
 tag: 'Mobile, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your app's logs are piling up faster than anyone on the team can read them. Backend services emit one stream, containers add another, and client devices from Capacitor or Electron apps create a third, often with the most useful clues trapped on the endpoint instead of in your server stack. Tailing files and running `grep` still works for a one-off incident, but it breaks down the moment you need correlation, retention, alerting, or a clean path from device logs to backend traces.

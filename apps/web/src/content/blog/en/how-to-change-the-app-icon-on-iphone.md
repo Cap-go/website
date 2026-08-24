@@ -19,6 +19,7 @@ keywords: >-
 tag: 'Mobile, Tutorial, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably looking at your Home Screen right now thinking one of two things. Either the default icons feel messy next to the wallpaper and widgets you like, or you build apps and want to give users a cleaner, more intentional way to personalize them.

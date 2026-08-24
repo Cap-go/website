@@ -13,6 +13,7 @@ keywords: 'developer experience, DX metrics, Capacitor, live updates, mobile CI/
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You already know the pattern. Monday starts with a flaky CI run, someone re-triggers the pipeline, and half the team loses the first hour to waiting. By Wednesday, a copy tweak sits in App Review while support asks why the onboarding message still says the old thing. On Thursday, an Electron renderer bug reaches a customer before anyone notices, and now engineering, support, and product are all in the same thread trying to reconstruct what changed.

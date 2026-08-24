@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Updates, Best Practices'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You ship a hotfix, watch CI go green, and expect the support queue to calm down. Instead, users still report the old bug. Some devices update on the next launch. Others stay behind. A few users open the app in a weak mobile network and never seem to pick up the patch at all.

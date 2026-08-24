@@ -13,6 +13,7 @@ keywords: Capacitor, version mismatch, troubleshooting, mobile development, soft
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

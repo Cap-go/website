@@ -13,6 +13,7 @@ keywords: Capacitor, update channels, app updates, development, mobile, CI/CD, u
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

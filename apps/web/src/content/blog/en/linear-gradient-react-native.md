@@ -13,6 +13,7 @@ keywords: 'react native, linear gradient, react native ui, mobile ui design, exp
 tag: 'Development, Mobile'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've probably hit one of two situations.

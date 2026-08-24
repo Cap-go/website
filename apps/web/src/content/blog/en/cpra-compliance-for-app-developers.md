@@ -13,6 +13,7 @@ keywords: CPRA, app developers, data protection, privacy rights, consent managem
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

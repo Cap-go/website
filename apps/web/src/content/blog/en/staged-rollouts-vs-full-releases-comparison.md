@@ -13,6 +13,7 @@ keywords: staged rollouts, full releases, app updates, risk management, deployme
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, Best Practices, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You probably know the trigger. A tester says the app feels “janky.” Support forwards a review calling startup slow. Product asks why a simple list scroll stutters on one Android device but looks fine on your iPhone and desktop build. Nothing is fully broken, yet the app feels heavier than it should.

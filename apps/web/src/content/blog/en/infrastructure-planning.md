@@ -13,6 +13,7 @@ keywords: 'infrastructure planning, mobile app infrastructure, devops, capacity 
 tag: 'Mobile, Security, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Launch week goes well in staging. The API is fast, push notifications arrive, QA signs off, and the team finally exhales. Then production traffic hits from a new campaign, mobile clients start retrying requests on unstable networks, image downloads spike in a few regions, and a harmless-looking config mistake turns a partial outage into a support queue fire.

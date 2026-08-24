@@ -13,6 +13,7 @@ keywords: 'certificate management, app security, code signing, live updates, dev
 tag: 'Mobile, Updates, Security'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A production outage caused by an expired certificate feels unfair. Nothing is wrong with your feature code, nothing is wrong with the database, and yet users can't log in, updates won't download, or your API client starts rejecting every request. One forgotten credential in the trust chain can block the whole app.

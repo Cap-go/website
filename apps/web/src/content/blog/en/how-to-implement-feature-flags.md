@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Updates, Tutorial'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A risky release usually looks the same. The code passed review, the build succeeded, and the team merged with confidence. Then production traffic hits the new path all at once, support starts seeing errors, and your only rollback option is another deploy under pressure.

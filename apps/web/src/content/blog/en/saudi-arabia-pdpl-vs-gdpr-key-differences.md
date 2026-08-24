@@ -13,6 +13,7 @@ keywords: PDPL, GDPR, data privacy, consent requirements, cross-border data tran
 tag: Security, Technology, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

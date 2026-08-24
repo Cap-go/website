@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You probably have the same starting point most app projects have. A strong idea, a rough sketch of the screens, and a deceptively simple question: **how hard is it to create an app**?

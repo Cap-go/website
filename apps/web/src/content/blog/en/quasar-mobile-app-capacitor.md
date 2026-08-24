@@ -13,6 +13,7 @@ keywords: Quasar, Capacitor, mobile app development, live updates, OTA updates, 
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 In this tutorial, we will begin with creating a new web app using [Quasar](https://quasar.dev/). Later on, we'll learn how to turn it into a mobile app using Capacitor. If you want to make your app look better on mobile.

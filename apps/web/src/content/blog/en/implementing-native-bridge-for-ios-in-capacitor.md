@@ -13,6 +13,7 @@ keywords: Capacitor, iOS, native bridge, Swift, Objective-C, plugin development,
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: 'expo image picker, react native, expo, mobile development, image uplo
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably at the point where the UI is ready, the profile screen has an “Upload photo” button, and now the easy part suddenly isn't easy. The actual image selection flow touches native permissions, OS-controlled interfaces, different return shapes than many developers expect, and a handful of build-time details that only show up after you ship a real build.

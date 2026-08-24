@@ -15,6 +15,7 @@ keywords: Capacitor, mobile app development, live updates, OTA updates, continuo
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

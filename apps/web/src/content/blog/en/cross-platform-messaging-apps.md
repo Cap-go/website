@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Development, Mobile'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two situations right now. Either your team needs a messaging layer that works across iPhone, Android, desktop, and web without turning support and engineering into chaos, or you're reevaluating a stack that looked fine at pilot stage and now has to survive compliance reviews, API changes, and real user volume.

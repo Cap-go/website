@@ -13,6 +13,7 @@ keywords: RBAC, OTA updates, security, mobile apps, end-to-end encryption, role-
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

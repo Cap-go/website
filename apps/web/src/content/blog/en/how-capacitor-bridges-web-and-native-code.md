@@ -13,6 +13,7 @@ keywords: Capacitor, native bridge, web apps, live updates, plugin system, mobil
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

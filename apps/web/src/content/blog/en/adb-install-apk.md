@@ -13,6 +13,7 @@ keywords: 'adb install apk, android debug bridge, sideload apk, capacitor develo
 tag: 'Mobile, Capacitor, Android'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've got a fresh Android build sitting on disk, the browser version looks fine, and now you need it on a real device. Not after an internal testing upload. Not after Android Studio finishes indexing. Right now.

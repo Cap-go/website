@@ -13,6 +13,7 @@ keywords: 'operational efficiency, software engineering, mobile engineering, eff
 tag: 'Mobile, Product'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Software teams often treat inefficiency like background noise. It isn't. According to [global research supported by McKinsey, Bain & Company, PwC, Gartner, and Okta](https://crebos.online/resource-center/the-true-cost-of-operational-inefficiency/), **20–30% of operational expenditure is lost each year** to rework, miscommunication, repetitive tasks, fragmented systems, friction, and misaligned processes.

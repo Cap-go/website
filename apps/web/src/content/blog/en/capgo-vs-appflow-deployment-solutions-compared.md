@@ -13,6 +13,7 @@ keywords: OTA updates, app deployment, Capgo, Appflow, mobile app security, CI/C
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

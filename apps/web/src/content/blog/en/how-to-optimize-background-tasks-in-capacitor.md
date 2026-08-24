@@ -13,6 +13,7 @@ keywords: Capacitor, background tasks, mobile optimization, performance, battery
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

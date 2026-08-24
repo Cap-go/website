@@ -13,6 +13,7 @@ keywords: Capacitor, data transfer, JSON serialization, mobile apps, Android, pe
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: 'regulatory compliance, mobile app compliance, GDPR mobile, SOC 2 apps
 tag: 'Mobile, Updates, Security'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A mobile team can do everything right in development and still get trapped at release time. A consent screen changes after the JavaScript bundle has shipped, a production bug needs an immediate fix, the App Store review queue is moving slowly, and an auditor is asking which users received which version. Product wants speed, security wants proof, and legal wants confidence that the change won't create a new exposure.

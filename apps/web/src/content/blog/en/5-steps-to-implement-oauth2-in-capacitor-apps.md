@@ -13,6 +13,7 @@ keywords: OAuth2, Capacitor, authentication, mobile apps, security, token storag
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: 'app health monitoring, mobile app monitoring, capacitorjs, javascript
 tag: 'Mobile, Updates, Best Practices'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Support has three tickets about the same bug. One user says checkout freezes after tapping Pay. Another says the screen goes blank after login. A third reports that the app updated, then started crashing on launch. Nobody on the team can reproduce it locally. QA can't hit it on a test device. Analytics shows a dip, but not why.

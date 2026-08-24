@@ -1,8 +1,12 @@
 ---
 import BlogListing from '@/components/BlogListing.astro'
+import { filterBlogPosts } from '@/lib/blog'
 import { getCollection } from 'astro:content'
 
-const allPosts = await getCollection('blog', ({ data }) => data.published !== false && data.locale === Astro.locals.locale)
+const allPosts = filterBlogPosts(await getCollection('blog'), {
+  origin: 'human',
+  locale: Astro.locals.locale,
+})
 ---
 
-<BlogListing {allPosts} />
+<BlogListing {allPosts} listingOrigin="human" />

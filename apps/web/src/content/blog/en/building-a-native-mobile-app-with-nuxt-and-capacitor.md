@@ -16,6 +16,7 @@ keywords: Nuxt 4, Capacitor 8, convert web app to mobile, iOS, Android, mobile a
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 

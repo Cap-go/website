@@ -13,6 +13,7 @@ keywords: Capacitor, npm scripts, OTA updates, CI/CD, mobile app deployment, aut
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

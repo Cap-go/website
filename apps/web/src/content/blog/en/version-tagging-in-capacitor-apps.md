@@ -13,6 +13,7 @@ keywords: Capacitor, version tagging, semantic versioning, app updates, mobile d
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

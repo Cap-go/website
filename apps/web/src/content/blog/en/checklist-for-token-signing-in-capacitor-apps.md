@@ -13,6 +13,7 @@ keywords: token signing, Capacitor apps, data integrity, security standards, com
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

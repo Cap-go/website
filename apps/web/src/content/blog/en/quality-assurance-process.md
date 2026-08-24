@@ -13,6 +13,7 @@ keywords: 'quality assurance process, mobile app testing, CI/CD pipeline, Capaci
 tag: 'Mobile, Tutorial, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You can have a green CI run and still ship a broken app. The build passes, QA signs off, the release goes out, and then the first real users hit a permission prompt that never returns, a stale JavaScript bundle, or a crash that only shows up on one Android skin. That's the part most quality assurance process guides skip, and it's the part mobile teams usually learn the hard way.

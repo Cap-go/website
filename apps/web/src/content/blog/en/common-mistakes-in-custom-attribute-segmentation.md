@@ -13,6 +13,7 @@ keywords: custom attribute segmentation, user engagement, app performance, segme
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

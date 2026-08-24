@@ -13,6 +13,7 @@ keywords: 'react native alert, react native, mobile development, dialogs, cross-
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You trigger `Alert.alert()` in React Native, test on iPhone and Android, and it feels done. Then someone opens the web build and nothing appears. Or Android ignores the prompt flow you used on iOS. Or two parts of the app fire alerts at once and the user gets trapped in a messy stack of dialogs.

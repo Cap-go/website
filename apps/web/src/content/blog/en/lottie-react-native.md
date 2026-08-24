@@ -13,6 +13,7 @@ keywords: 'lottie react native, react native animation, expo lottie, mobile anim
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two spots right now. Either you have a designer handing you a Lottie JSON and asking, “Can we get this into the app today?”, or you already wired it up and noticed the animation works in development but starts feeling expensive once real devices, startup time, and release builds enter the picture.

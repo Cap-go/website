@@ -13,6 +13,7 @@ keywords: 'plugin architecture, extensible software, Capacitor plugins, API desi
 tag: 'Mobile, Technology, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your app starts as a clean monolith. Then customers request a new payment provider, a desktop team needs a different file integration, and mobile releases accumulate platform-specific workarounds. Soon, every feature touches the same core modules, every upgrade risks an unrelated regression, and nobody can explain which team owns the integration boundary.

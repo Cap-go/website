@@ -13,6 +13,7 @@ keywords: offline tokens, secure storage, AES-256 encryption, biometric authenti
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: 'ci cd integration testing, integration testing, ci cd pipeline, devop
 tag: 'Mobile, CI/CD, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A payment service change can pass thousands of unit tests and still break production because the billing API interprets an idempotency key differently than the service expects. The failure may sit unnoticed until a nightly integration job reaches the interface, long after the commit has moved through the fast part of the pipeline.

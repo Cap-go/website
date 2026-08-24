@@ -13,6 +13,7 @@ keywords: Semantic Versioning, Capgo, OTA updates, Capacitor apps, version contr
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

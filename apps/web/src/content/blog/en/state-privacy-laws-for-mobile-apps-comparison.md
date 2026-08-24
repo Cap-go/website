@@ -13,6 +13,7 @@ keywords: mobile apps, privacy laws, CCPA, VCDPA, CPA, data protection, user rig
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

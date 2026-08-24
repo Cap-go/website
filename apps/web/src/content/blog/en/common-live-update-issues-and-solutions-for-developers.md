@@ -13,6 +13,7 @@ keywords: live updates, network issues, version conflicts, device compatibility,
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

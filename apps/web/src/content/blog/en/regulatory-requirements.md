@@ -13,6 +13,7 @@ keywords: 'regulatory requirements, app compliance, capacitorjs, electron js, gd
 tag: 'Mobile, Security, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your team has a fix ready. QA signed off. Support is waiting because the bug is hurting real users. Then someone from legal, security, or procurement asks a question that stops the release cold: “Can we prove this update is compliant?”

@@ -13,6 +13,7 @@ keywords: code integrity, mobile apps, OTA updates, encryption, Play Integrity A
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

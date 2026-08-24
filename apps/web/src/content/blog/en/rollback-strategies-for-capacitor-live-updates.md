@@ -13,6 +13,7 @@ keywords: Capacitor, rollback strategies, live updates, app stability, error tra
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

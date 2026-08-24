@@ -13,6 +13,7 @@ keywords: Capacitor plugin build error, AGP 9, Android Gradle Plugin 9, proguard
 tag: Development, Android, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

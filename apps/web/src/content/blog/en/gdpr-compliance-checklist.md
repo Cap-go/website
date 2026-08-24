@@ -13,6 +13,7 @@ keywords: 'GDPR, GDPR compliance checklist, Cross-platform apps, Software compli
 tag: 'Mobile, Security, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You pushed a hotfix through Capacitor, Electron, or Ionic. It went live fast, users got the fix, and then a customer security questionnaire landed in your inbox asking who processes update telemetry, where logs are stored, how consent is captured, and what happens if an EU user asks for deletion. That's the moment when GDPR stops being a legal abstraction and becomes an engineering workflow problem.

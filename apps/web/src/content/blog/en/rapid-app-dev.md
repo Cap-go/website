@@ -15,6 +15,7 @@ keywords: 'rapid app dev, agile development, low-code, application development, 
 tag: 'Mobile, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Teams asking about rapid app dev often aren't dealing with a blank slate. They're dealing with a backlog that keeps growing, a mobile release that missed its window, product requests that changed halfway through implementation, and a support queue full of small fixes that somehow take longer to ship than the original feature.

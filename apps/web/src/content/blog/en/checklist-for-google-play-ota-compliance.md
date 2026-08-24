@@ -13,6 +13,7 @@ keywords: OTA updates, Google Play compliance, security, version control, user c
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

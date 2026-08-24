@@ -13,6 +13,7 @@ keywords: CI/CD, app security, automated checks, compliance, deployment, vulnera
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

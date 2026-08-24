@@ -15,6 +15,7 @@ keywords: Android, TalkBack, screen reader, visually impaired, mobile app develo
 tag: Android
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

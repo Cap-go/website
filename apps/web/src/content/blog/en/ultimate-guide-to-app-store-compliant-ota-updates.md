@@ -13,6 +13,7 @@ keywords: OTA updates, app store compliance, mobile app updates, bug fixes, perf
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

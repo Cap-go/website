@@ -13,6 +13,7 @@ keywords: best Capacitor OTA updates
 tag: Mobile
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 Capacitor OTA updates can fix web-layer bugs without waiting for a store review. The hard part is choosing a service that keeps releases small, safe, and easy to watch. Here are six named options, with [Capgo](<https://capgo.app>) first for teams that want one command, channel control, rollback, analytics, and CI/CD support.

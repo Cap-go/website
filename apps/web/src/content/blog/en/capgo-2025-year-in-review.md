@@ -13,6 +13,7 @@ keywords: Capgo, year in review, 2025, enterprise features, security, OTA update
 tag: Company, Updates, Security
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

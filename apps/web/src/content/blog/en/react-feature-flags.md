@@ -16,6 +16,7 @@ keywords: 'react feature flags, reactjs, feature management, devops, capacitorjs
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've finished the feature. The pull request is clean. QA says it looks good. And you still don't want to ship it to everyone at once.

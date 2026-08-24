@@ -13,6 +13,7 @@ keywords: 'app health check, capacitor, electron, live updates, ci monitoring'
 tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A routine JavaScript update goes live on Friday afternoon. The app opens, authentication looks normal, and crash counters remain unremarkable. Then checkout starts failing for a subset of devices, while the App Store and Play Console dashboards remain too far behind to support a confident rollback decision.

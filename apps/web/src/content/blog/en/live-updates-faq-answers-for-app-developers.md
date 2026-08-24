@@ -13,6 +13,7 @@ keywords: live updates, app development, OTA technology, CI/CD, security protoco
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

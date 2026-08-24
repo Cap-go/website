@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, Updates, App Store'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You push a release to fix a bug that's already annoying users. QA passed. Support is waiting. Then App Review rejects it for something that feels minor, or worse, something the team thought was obvious. A day later, public reviews start sliding because the old issue is still live.

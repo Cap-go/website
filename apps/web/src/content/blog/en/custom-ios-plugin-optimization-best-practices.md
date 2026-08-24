@@ -13,6 +13,7 @@ keywords: iOS plugins, Capacitor, performance optimization, memory management, S
 tag: Development, Mobile, Technology
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

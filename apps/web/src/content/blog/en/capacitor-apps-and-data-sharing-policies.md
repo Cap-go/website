@@ -13,6 +13,7 @@ keywords: data privacy, app compliance, user consent, encryption, data sharing p
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

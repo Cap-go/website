@@ -13,6 +13,7 @@ keywords: Apple, Xcode 26, iOS 26 SDK, Capacitor, App Store Connect, Capgo Build
 tag: Development, Mobile, Cloud
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

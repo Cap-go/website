@@ -13,6 +13,7 @@ keywords: background tasks, Capacitor, iOS, Android, app performance, mobile dev
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

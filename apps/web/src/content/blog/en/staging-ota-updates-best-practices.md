@@ -13,6 +13,7 @@ keywords: OTA updates, staging environment, app testing, error tracking, network
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

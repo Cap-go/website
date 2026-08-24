@@ -13,6 +13,7 @@ keywords: 'incident management process, devops, sre, incident response, capacito
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A mobile checkout starts failing during a peak campaign. Support sees vague complaints first. Then monitoring lights up, leadership wants updates, and the engineer on call is trying to figure out whether this is a backend outage, a bad config push, or a frontend bug shipped hours earlier.

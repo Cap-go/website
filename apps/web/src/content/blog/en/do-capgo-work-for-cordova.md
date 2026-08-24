@@ -13,6 +13,7 @@ keywords: Cordova, mobile app development, live updates, OTA updates, continuous
 tag: Migration
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: SSL pinning, mobile app security, MITM attacks, certificate pinning, p
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

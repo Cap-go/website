@@ -13,6 +13,7 @@ keywords: 'expo push notification, react native, expo, mobile development, push 
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably at the point where the app works, users have signed in, and product now wants re-engagement flows that feel native. Cart reminders. Review prompts. New message alerts. Release announcements. The first instinct is often to “just wire up push,” then a week later you're debugging why one device gets alerts, the simulator appears to register fine, and nobody can explain why taps don't open the right screen.

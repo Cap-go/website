@@ -13,6 +13,7 @@ keywords: Capacitor, app updates, OTA updates, testing checklist, mobile develop
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

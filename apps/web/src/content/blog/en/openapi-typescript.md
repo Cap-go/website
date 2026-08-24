@@ -13,6 +13,7 @@ keywords: 'openapi typescript, type-safe api, openapi codegen, tsc validation, c
 tag: 'Development, Mobile'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You can usually spot the moment an API pipeline starts lying to the team. A schema changes, the generated types update without complaints, the PR goes green, and then somebody in the front end keeps reading the old response shape because the wrapper cast the error away. That's the OpenAPI TypeScript problem, not whether a generator can spit out interfaces.

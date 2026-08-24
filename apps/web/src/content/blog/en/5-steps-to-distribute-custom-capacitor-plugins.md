@@ -13,6 +13,7 @@ keywords: Capacitor, custom plugins, mobile development, distribution, live upda
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

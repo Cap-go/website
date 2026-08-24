@@ -13,6 +13,7 @@ keywords: update tracking, app performance, metrics monitoring, user experience,
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

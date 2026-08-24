@@ -15,6 +15,7 @@ keywords: Capacitor, cross-platform, PWA, mobile app development, live updates, 
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

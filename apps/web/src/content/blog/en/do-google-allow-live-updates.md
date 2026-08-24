@@ -15,6 +15,7 @@ keywords: Google, live updates, OTA updates, continuous integration, mobile app 
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 

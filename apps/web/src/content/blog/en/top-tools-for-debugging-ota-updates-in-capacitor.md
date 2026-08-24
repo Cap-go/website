@@ -13,6 +13,7 @@ keywords: Capacitor, OTA updates, debugging tools, mobile development, app updat
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

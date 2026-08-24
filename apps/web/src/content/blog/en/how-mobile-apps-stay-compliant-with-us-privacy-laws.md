@@ -13,6 +13,7 @@ keywords: mobile apps, privacy compliance, user consent, data management, encryp
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

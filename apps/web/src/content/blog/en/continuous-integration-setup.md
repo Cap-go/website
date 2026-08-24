@@ -13,6 +13,7 @@ keywords: 'continuous integration setup, CapacitorJS CI, Electron CI pipeline, C
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You can usually tell when a hybrid app team has outgrown its build process. Someone is still logging into a Mac, clicking through Xcode, exporting an Android artifact, signing an Electron package by hand, and then trying to remember which branch matches the build that got uploaded. The release works, but only because one or two people know every step by heart, and that stops scaling the minute those people get busy.

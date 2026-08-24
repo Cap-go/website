@@ -13,6 +13,7 @@ keywords: 'resource optimization, cross-platform apps, capacitorjs, mobile perfo
 tag: 'Mobile, Best Practices, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You know the feeling. The app works, but it feels heavy. Screens hesitate on weak networks, batteries drain faster than users expect, and every release turns into a full-package download that punishes anyone on mobile data. On the engineering side, the pain is just as real, because every extra asset, every wasted API call, and every manual release step steals time from the team that has to keep the app moving.

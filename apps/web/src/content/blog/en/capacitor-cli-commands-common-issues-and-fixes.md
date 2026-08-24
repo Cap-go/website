@@ -13,6 +13,7 @@ keywords: Capacitor CLI, plugin errors, build errors, live updates, network issu
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

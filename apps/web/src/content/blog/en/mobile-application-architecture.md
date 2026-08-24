@@ -13,6 +13,7 @@ keywords: 'mobile architecture, app design, MVVM, offline sync, live updates'
 tag: 'Mobile, Updates, Technology'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your team's app is shipping, but every release feels heavier than the last. A hotfix goes out on Monday, then support starts seeing weird behavior on two unrelated screens because the same business rule was copied into three view controllers, one store, and a helper that nobody trusts anymore. That's usually the moment a team lead stops thinking about mobile application architecture as a code style debate and starts seeing it for what it is, a delivery system that shapes cost, speed, and recovery.

@@ -15,6 +15,7 @@ keywords: Ionic AppFlow shutdown, mobile app development, live updates, OTA upda
 tag: News
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

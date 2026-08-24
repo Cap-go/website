@@ -13,6 +13,7 @@ keywords: Capacitor, build scripts, mobile development, deployment automation, e
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

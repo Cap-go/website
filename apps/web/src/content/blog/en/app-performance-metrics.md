@@ -13,6 +13,7 @@ keywords: 'app performance metrics, capacitorjs, electron js, mobile performance
 tag: 'Mobile, Best Practices, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You shipped the release. QA signed off. The store listing looks clean. Then the messages start.

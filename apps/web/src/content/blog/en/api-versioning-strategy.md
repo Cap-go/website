@@ -13,6 +13,7 @@ keywords: 'api versioning, api versioning strategy, semver api, rest api, mobile
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You usually don't notice an **API versioning strategy** until a release breaks something that was working yesterday. A mobile app ships, a backend field gets renamed, the store review cycle drags, and support starts seeing the same complaint from users who haven't updated in weeks. That's the moment when “we'll just avoid breaking changes” stops being a plan and starts being an expense.

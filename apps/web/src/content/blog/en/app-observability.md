@@ -13,6 +13,7 @@ keywords: 'app observability, mobile monitoring, capacitor, electron, live updat
 tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your app ships cleanly, QA signs off, and the first support ticket lands before lunch. A customer says checkout froze on one device, another says the desktop app never reached the payment screen, and the only signal you have is a generic error banner from the server side. That's the gap **app observability** has to close for cross-platform teams, not just telling you that something broke, but helping you prove what happened on a specific device, in a specific release, for a specific user path.

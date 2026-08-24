@@ -13,6 +13,7 @@ keywords: CI/CD, compliance checks, Capacitor apps, mobile security, automated t
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

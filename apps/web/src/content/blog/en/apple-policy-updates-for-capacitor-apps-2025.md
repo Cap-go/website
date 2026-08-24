@@ -13,6 +13,7 @@ keywords: Capacitor, Apple policies, app compliance, security standards, perform
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

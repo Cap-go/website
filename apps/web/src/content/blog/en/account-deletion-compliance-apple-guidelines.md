@@ -13,6 +13,7 @@ keywords: Apple guidelines, account deletion, user privacy, app compliance, mobi
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

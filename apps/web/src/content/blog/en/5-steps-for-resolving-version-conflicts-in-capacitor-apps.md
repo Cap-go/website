@@ -13,6 +13,7 @@ keywords: Capacitor, version conflicts, mobile development, plugin issues, app s
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: 'hybrid mobile applications, capacitorjs, cross-platform development, 
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your team is probably in a familiar spot. Product wants iOS and Android at the same time. Engineering doesn't want two separate codebases. Support wants fast bug fixes after launch, not another round of store review every time copy, logic, or UI needs to change.

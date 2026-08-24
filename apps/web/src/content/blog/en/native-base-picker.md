@@ -13,6 +13,7 @@ keywords: 'native base picker, react native, nativebase, capacitorjs, mobile UI'
 tag: 'Mobile, Capacitor, Android'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've probably hit the same wall many React Native teams hit with the NativeBase Picker. The dropdown renders, it looks fine, iOS behaves, and then Android ignores your `onValueChange` logic. No crash. No warning. Just a picker that appears functional while your business logic never runs.

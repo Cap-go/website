@@ -18,6 +18,7 @@ keywords: 'react native, splash screen, expo, react native cli, mobile developme
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You tap your app icon on a real device, and for a split second the user gets a white flash, a stretched logo, or a frozen launch screen that disappears before anything useful is ready. That's usually the moment a React Native app stops feeling production-grade.

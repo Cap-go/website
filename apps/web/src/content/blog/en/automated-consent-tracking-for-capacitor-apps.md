@@ -13,6 +13,7 @@ keywords: consent tracking, privacy compliance, user rights, Capacitor apps, dat
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

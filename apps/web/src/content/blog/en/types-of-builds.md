@@ -16,6 +16,7 @@ keywords: 'types of builds, software builds, ci/cd, app distribution, capacitorj
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You open a project and see `build:ios:dev`, `build:android:qa`, `build:staging`, `build:release`, `build:prod`, plus a few shell scripts nobody wants to touch. Then someone says, “Can you make a staging build for the client by end of day?” If you're a mid-level mobile developer, that request often feels annoyingly vague. Which config? Which signing identity? Which backend? Which distribution path?

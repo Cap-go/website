@@ -13,6 +13,7 @@ keywords: 'new deal pwa, progressive web app, capacitorjs, hybrid apps, app deve
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 When teams say they need an app, are they really choosing between web and native, or are they choosing what kind of maintenance burden they'll live with for the next few years?

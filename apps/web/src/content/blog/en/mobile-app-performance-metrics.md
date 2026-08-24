@@ -13,6 +13,7 @@ keywords: 'mobile app performance metrics, app performance, capacitorjs, mobile 
 tag: 'Mobile, Best Practices, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're staring at a dashboard that looks fine, yet support tickets keep piling up and the App Store reviews say the same thing in different words, **“slow,” “buggy,” “freezes,”** and **“won't load.”** That's the trap with mobile apps, the user only feels the pain, while the team has to turn that feeling into signals they can act on.

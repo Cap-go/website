@@ -13,6 +13,7 @@ keywords: OTA updates, app security, encryption, user management, compliance, ro
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

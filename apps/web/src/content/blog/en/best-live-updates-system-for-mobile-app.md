@@ -13,6 +13,7 @@ keywords: best live updates system for mobile app, OTA updates mobile, Capgo, Ex
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: best-live-update-tools-for-capacitor-apps
 ---
 

@@ -13,6 +13,7 @@ keywords: CI/CD, OTA updates, automation, testing, security, deployment strategi
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

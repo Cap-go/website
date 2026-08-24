@@ -13,6 +13,7 @@ keywords: mobile app updates, CI/CD pipeline, OTA updates, user engagement, app 
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

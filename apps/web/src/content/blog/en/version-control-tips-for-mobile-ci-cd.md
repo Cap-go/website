@@ -13,6 +13,7 @@ keywords: version control, mobile CI/CD, branching strategies, security practice
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

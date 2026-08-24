@@ -16,6 +16,7 @@ tag: Capacitor
 published: true
 next_blog: ''
 locale: en
+origin: human
 ---
 
 ## Introduction

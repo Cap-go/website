@@ -13,6 +13,7 @@ keywords: Capacitor, development, production, app performance, security, updates
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: Capacitor, CLI, plugin management, app development, updates, troublesh
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

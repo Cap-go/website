@@ -13,6 +13,7 @@ keywords: Privacy Manifest, iOS, data collection, App Store, compliance, Capgo, 
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

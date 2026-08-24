@@ -15,6 +15,7 @@ keywords: Ionic, Capacitor, push notifications, Firebase, mobile app development
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

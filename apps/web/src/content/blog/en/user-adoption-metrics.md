@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Product, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your dashboard says the launch worked. Signups came in, logins spiked, and the team feels relieved.

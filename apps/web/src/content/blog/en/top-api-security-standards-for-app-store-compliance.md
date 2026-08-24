@@ -13,6 +13,7 @@ keywords: API security, OAuth 2.0, OpenID Connect, TLS, JWT, app store complianc
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

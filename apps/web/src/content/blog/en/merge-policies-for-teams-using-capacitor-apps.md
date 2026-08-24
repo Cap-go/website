@@ -13,6 +13,7 @@ keywords: merge policies, Capacitor apps, code quality, live updates, branch man
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

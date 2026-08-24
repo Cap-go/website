@@ -15,6 +15,7 @@ keywords: iOS, Developer Mode, mobile app development, live updates, OTA updates
 tag: iOS
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

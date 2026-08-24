@@ -13,6 +13,7 @@ keywords: Capacitor, third-party plugins, mobile app development, plugin install
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

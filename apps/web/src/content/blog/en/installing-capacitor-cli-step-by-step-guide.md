@@ -13,6 +13,7 @@ keywords: Capacitor, CLI, mobile app development, Node.js, Android, iOS, live up
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

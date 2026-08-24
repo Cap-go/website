@@ -13,6 +13,7 @@ keywords: 'redundancy failover, high availability, CI/CD resilience, mobile upda
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in the middle of a release when this problem shows up. The build is green, the mobile team is ready to push, and one edge node starts dropping traffic or a backend path gets weird enough to make the rollout unsafe. At that point, having “a backup” isn't the same as having a system that can keep serving users.

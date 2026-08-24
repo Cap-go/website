@@ -13,6 +13,7 @@ keywords: Capacitor, app updates, staged rollouts, delta updates, network perfor
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

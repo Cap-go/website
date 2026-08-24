@@ -14,6 +14,7 @@ keywords: React, Capacitor, mobile app development, live updates, OTA updates, c
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 

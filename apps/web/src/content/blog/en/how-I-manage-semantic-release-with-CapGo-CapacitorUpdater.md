@@ -15,6 +15,7 @@ keywords: semantic release, semantic-release, Capgo, CapacitorUpdater, mobile ap
 tag: Case Study
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

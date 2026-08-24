@@ -13,6 +13,7 @@ keywords: Capacitor, session management, biometric authentication, secure storag
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

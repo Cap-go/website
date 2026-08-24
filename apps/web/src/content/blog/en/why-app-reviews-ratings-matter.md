@@ -13,6 +13,7 @@ keywords: app reviews, app ratings, app store optimization, ASO, user reviews, a
 tag: Marketing, ASO, Best Practices
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

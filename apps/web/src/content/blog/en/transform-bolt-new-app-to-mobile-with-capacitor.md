@@ -15,6 +15,7 @@ keywords: Bolt.new, Capacitor, mobile app development, React, Vue, export projec
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
 ---
 
