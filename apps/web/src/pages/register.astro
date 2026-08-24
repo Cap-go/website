@@ -171,12 +171,20 @@ const content = {
 
   configReady
     .then((cfg) => {
-      if (!isSubmitting && submitButton && isSupabaseConfigured(cfg)) {
-        submitButton.disabled = false
+      if (isSupabaseConfigured(cfg)) {
+        if (!isSubmitting && submitButton) {
+          submitButton.disabled = false
+        }
+        return
+      }
+      if (!isSubmitting) {
+        showConfigError()
       }
     })
     .catch(() => {
-      // Keep submit disabled when remote config cannot be loaded.
+      if (!isSubmitting) {
+        showConfigError()
+      }
     })
 
   function showConfigError() {
@@ -210,7 +218,7 @@ const content = {
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault()
-    if (submitButton.disabled) return
+    if (isSubmitting || submitButton.disabled) return
 
     // Validate email format
     if (!isValidEmail(email.value.trim())) {
@@ -242,8 +250,12 @@ const content = {
       }).showToast()
     }
 
+    isSubmitting = true
+    submitButton.disabled = true
+
     const cfg = await configReady
     if (!isSupabaseConfigured(cfg)) {
+      isSubmitting = false
       return showConfigError()
     }
 
@@ -251,11 +263,24 @@ const content = {
     try {
       supabase = useSupabase()
     } catch {
+      isSubmitting = false
       return showConfigError()
     }
     const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
-    if (errorDeleted) console.error(errorDeleted)
+    if (errorDeleted) {
+      console.error(errorDeleted)
+      isSubmitting = false
+      submitButton.disabled = false
+      return Toastify({
+        text: 'Unable to verify account status. Please try again.',
+        style: {
+          background: '#e7000b',
+        },
+      }).showToast()
+    }
     if (!deleted) {
+      isSubmitting = false
+      submitButton.disabled = false
       return Toastify({
         text: 'Account is in error, please contact support at support@capgo.app',
         style: {
@@ -263,8 +288,6 @@ const content = {
         },
       }).showToast()
     }
-    isSubmitting = true
-    submitButton.disabled = true
     const registrationDevice = getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)
     const { data: user, error } = await supabase.auth.signUp({
       email: email.value,

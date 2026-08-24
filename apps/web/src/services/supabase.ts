@@ -31,11 +31,15 @@ const getLocalConfig = (): CapgoConfig => {
 
 let config: CapgoConfig = getLocalConfig()
 
+const remoteConfigTimeoutMs = 10_000
+
 export async function getRemoteConfig() {
   const runtimeConfig = useRuntimeConfig()
   const localConfig = getLocalConfig()
   try {
-    const res = await fetch(`${runtimeConfig.public.baseApiUrl}/private/config`)
+    const res = await fetch(`${runtimeConfig.public.baseApiUrl}/private/config`, {
+      signal: AbortSignal.timeout(remoteConfigTimeoutMs),
+    })
     if (!res.ok) throw new Error('Failed to fetch config')
     const remoteConfig = await res.json() as CapgoConfig
     config = { ...localConfig, ...remoteConfig }
