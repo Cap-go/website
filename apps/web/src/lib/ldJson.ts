@@ -78,6 +78,28 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
   }
 }
 
+export function createAboutOrganization(config: RuntimeConfig['public'], founder: Person): Thing {
+  return Object.assign(createCapgoOrganization(config), {
+    founder,
+    foundingDate: '2022-12-01',
+    numberOfEmployees: {
+      '@type': 'QuantitativeValue',
+      minValue: 1,
+      maxValue: 10,
+    },
+    location: {
+      '@type': 'Place',
+      name: 'Madeira, Portugal',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '32.6669',
+        longitude: '-16.9241',
+      },
+    },
+    knowsAbout: ['Capacitor Development', 'Mobile App Updates', 'Over-the-Air Updates', 'JavaScript', 'TypeScript', 'iOS Development', 'Android Development'],
+  }) as unknown as Thing
+}
+
 /**
  * Create a Person schema for blog authors
  */
