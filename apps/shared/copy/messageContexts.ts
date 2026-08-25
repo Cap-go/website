@@ -15,6 +15,8 @@ export const messageContexts = {
     'Page/area: About Capgo page. Role: Short UI label or navigation item. Seen in: page about.astro. Preserve Capgo product/brand and developer terms exactly. Message key `about_capgo` (About Capgo).',
   about_capgo_description:
     'Page/area: About Capgo page. Role: Supporting description paragraph or meta description. Seen in: page about.astro. Preserve Capgo product/brand and developer terms exactly. Message key `about_capgo_description` (About Capgo Description).',
+  article_credits:
+    'Page/area: Capgo marketing website blog article byline. Role: Section heading above writer, reviewer, and editor credits. Seen in: component BlogEditorialByline.astro. Message key `article_credits` (Article Credits).',
   access_maintain_enterprise_plugins:
     'Page/area: Capgo marketing website. Role: Website copy sentence. Preserve Capgo product/brand and developer terms exactly. Message key `access_maintain_enterprise_plugins` (Access Maintain Enterprise Plugins).',
   ach_available_for_enterprise_annual_payments:
@@ -651,6 +653,12 @@ export const messageContexts = {
     'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: component BlogMidArticleCta.astro. Message key `blog_mid_article_china_cta_heading` (Blog Mid Article China CTA Heading).',
   blog_mid_article_china_cta_pricing_button:
     'Navigation/label for the Pricing page. Page/area: Capgo marketing website. Role: Call-to-action button or link label. Seen in: component BlogMidArticleCta.astro. Message key `blog_mid_article_china_cta_pricing_button` (Blog Mid Article China CTA Pricing Button).',
+  blog_role_editor:
+    'Page/area: Capgo marketing website blog article byline. Role: Short editorial credit label for the editor. Seen in: component BlogEditorialByline.astro. Message key `blog_role_editor` (Blog Role Editor).',
+  blog_role_reviewer:
+    'Page/area: Capgo marketing website blog article byline. Role: Short editorial credit label for the reviewer. Seen in: component BlogEditorialByline.astro. Message key `blog_role_reviewer` (Blog Role Reviewer).',
+  blog_role_writer:
+    'Page/area: Capgo marketing website blog article byline. Role: Short editorial credit label for the writer. Seen in: component BlogEditorialByline.astro. Message key `blog_role_writer` (Blog Role Writer).',
   book_a_consultation:
     'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page consulting.astro. Message key `book_a_consultation` (Book A Consultation).',
   browse_all_plugins:
