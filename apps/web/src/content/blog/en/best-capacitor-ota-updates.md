@@ -5,8 +5,8 @@ description: 'Compare the best Capacitor OTA updates platforms for Ionic apps, w
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
-created_at: 2026-08-25T05:59:39.000Z
-updated_at: 2026-08-25T05:59:39.000Z
+created_at: 2026-08-25T06:04:55.000Z
+updated_at: 2026-08-25T06:04:55.000Z
 head_image: /capgo_banner.png
 head_image_alt: 'Editorial illustration for Capacitor OTA Updates: 6 Options'
 keywords: best Capacitor OTA updates
