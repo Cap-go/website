@@ -13,7 +13,7 @@ keywords: 'continuous integration, devops, ci/cd, mobile development, capacitorj
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 Release day often looks the same. Someone is watching the CI logs, someone else is checking if the signing step still works, a developer is trying to untangle a last-minute merge conflict, and product is asking whether the bug fix can make today's build. If you ship mobile apps, there's one more layer of anxiety. Even after the code is ready, you may still wait days for store review before users see the fix.

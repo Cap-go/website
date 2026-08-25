@@ -15,7 +15,7 @@ keywords: Base44, Capacitor, mobile app development, React, export project, nati
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: transform-lovable-dev-app-to-mobile-with-capacitor
 ---
 

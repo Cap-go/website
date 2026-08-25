@@ -14,7 +14,7 @@ keywords: Swift Package Manager, SPM, CocoaPods, Capacitor, iOS, migration, depe
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

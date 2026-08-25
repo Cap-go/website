@@ -15,7 +15,7 @@ keywords: Gitlab, CI/CD, automatic build, automatic release, mobile app updates
 tag: CI/CD
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 This tutorial focuses on the GitLab CI, but you can adapt it with a little tweak to any other CI/CD platform.

@@ -13,7 +13,7 @@ keywords: app store review, play store review, app submission, privacy policy, t
 tag: Development, App Store, Best Practices
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

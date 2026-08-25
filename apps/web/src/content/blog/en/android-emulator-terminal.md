@@ -13,7 +13,7 @@ keywords: 'android emulator, terminal, adb shell, emulator console, android debu
 tag: 'Mobile, Android, Guides'
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 Your emulator is open, the app is stuck on a black screen, and the GUI controls aren't helping. Or maybe you're staring at a CI job that has no display at all, and the only thing left is a terminal prompt and a virtual device that needs to boot, accept commands, and behave the same way every run. That's where the Android Emulator Terminal stops being a convenience and becomes the control plane you depend on.

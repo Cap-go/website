@@ -19,7 +19,7 @@ keywords: >-
 tag: Mobile
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: top-cross-platform-frameworks-compared-2024
 ---
 

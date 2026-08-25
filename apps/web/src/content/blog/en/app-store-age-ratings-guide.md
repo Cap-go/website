@@ -13,7 +13,7 @@ keywords: age ratings, app store, google play, content ratings, IARC, parental c
 tag: Development, App Store, Best Practices
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

@@ -4,6 +4,8 @@
  * Keep old public paths working so earned backlinks are not lost.
  */
 const LEGACY_PATH_REDIRECTS: Record<string, string> = {
+  '/blog/ai': '/articles/',
+  '/blog/ai/': '/articles/',
   '/blog/setup-ci-and-cd-gitlab': '/blog/setup-ci-and-cd-in-gitlab/',
   '/blog/open-source-licecing': '/blog/open-source-licence/',
   '/blog/release-of-a-brand-new-capacitor-social-login': '/blog/capacitor-social-login-release/',

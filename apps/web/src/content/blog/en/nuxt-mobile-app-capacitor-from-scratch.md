@@ -16,7 +16,7 @@ keywords: Nuxt 4, Capacitor 8, mobile app from scratch, iOS development, Android
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 

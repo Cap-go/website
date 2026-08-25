@@ -16,7 +16,7 @@ keywords: Vue, Angular, React, offline screen, network API, Capacitor, mobile ap
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

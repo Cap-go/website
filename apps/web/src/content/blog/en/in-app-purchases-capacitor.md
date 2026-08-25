@@ -15,7 +15,7 @@ keywords: Capacitor, in-app purchases, RevenueCat, mobile app development, live 
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

@@ -22,11 +22,7 @@ const content = Astro.props.content ?? {}
 const disableThirdPartyScripts = Astro.props.disableThirdPartyScripts ?? false
 const hideChrome = Astro.props.hideChrome ?? false
 const footerBlogCopy = Astro.props.footerBlogCopy
-const defaultFooterBlogSlugs = [
-  'birth-of-capgo-revolutionizing-capacitor-app-updates',
-  'how-capgo-is-born',
-  'introducing-end-to-end-security-to-capacitor-updater-with-code-signing',
-]
+const defaultFooterBlogSlugs = ['a-brand-new-organization-system', 'capgo-2025-year-in-review', 'capacitor-social-login-release']
 const footerBlogSlugs = (Astro.props.footerBlogSlugs ?? defaultFooterBlogSlugs) as string[]
 const footerBlogEntries = footerBlogSlugs.length
   ? await getCollection(

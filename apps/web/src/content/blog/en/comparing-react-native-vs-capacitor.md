@@ -16,7 +16,7 @@ keywords: React Native, Capacitor, mobile app development, live updates, OTA upd
 tag: Alternatives
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

@@ -13,7 +13,7 @@ keywords: version control, rollbacks, app updates, mobile development, CI/CD int
 tag: Development, Mobile, Updates
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

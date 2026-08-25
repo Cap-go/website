@@ -14,7 +14,7 @@ keywords: Swift Package Manager, SPM, CocoaPods, Capacitor app, iOS app, Xcode, 
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

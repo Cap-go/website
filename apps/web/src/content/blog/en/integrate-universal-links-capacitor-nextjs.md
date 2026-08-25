@@ -15,7 +15,7 @@ keywords: Capacitor, Universal Links, Next.js, mobile app development, live upda
 tag: DeepLinking
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

@@ -16,7 +16,7 @@ keywords: Capgo, live updates, OTA updates, delta updates, channels, Capacitor, 
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: staging-environments-with-capgo-channels
 ---
 

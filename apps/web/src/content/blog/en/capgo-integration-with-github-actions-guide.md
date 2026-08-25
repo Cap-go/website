@@ -13,7 +13,7 @@ keywords: Capgo, GitHub Actions, CI/CD, Capacitor apps, deployment, automation, 
 tag: Development, Mobile, Updates
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

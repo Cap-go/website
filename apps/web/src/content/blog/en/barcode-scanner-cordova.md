@@ -18,7 +18,7 @@ keywords: >-
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two situations. Either you've inherited a Cordova app that still matters to the business, or you're keeping a stable hybrid app alive while the team slowly shifts toward newer tooling. Then a product request lands: scan inventory labels, tickets, parcels, or shelf tags with the phone camera.

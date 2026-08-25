@@ -15,7 +15,7 @@ keywords: Github actions, CI/CD, automatic build, automatic release, mobile app 
 tag: CI/CD
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: automatic-capacitor-ios-build-github-action
 ---
 This tutorial focuses on the GitHub hosting, but you can adapt it with little tweak to any other CI/CD platform.

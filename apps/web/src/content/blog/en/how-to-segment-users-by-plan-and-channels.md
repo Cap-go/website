@@ -13,7 +13,7 @@ keywords: channels, feature flags, a/b testing, capacitor, capgo
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

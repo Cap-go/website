@@ -21,7 +21,7 @@ keywords: >-
 tag: Capacitor
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

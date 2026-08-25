@@ -15,7 +15,7 @@ keywords: GitHub Actions, CI/CD, mobile app development, live updates, OTA updat
 tag: CI/CD
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: how-to-send-specific-version-to-users
 ---
 This tutorial focuses on the GitHub hosting, but you can adapt it with a little tweak to any other CI/CD platform.

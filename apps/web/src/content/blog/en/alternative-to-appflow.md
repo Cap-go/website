@@ -16,7 +16,7 @@ keywords: Ionic Appflow, mobile app development, live updates, OTA updates, cont
 tag: Alternatives
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 

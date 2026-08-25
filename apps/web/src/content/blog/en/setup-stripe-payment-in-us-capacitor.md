@@ -13,7 +13,7 @@ keywords: capacitor, stripe, payment links, app store guidelines, iOS, digital g
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 ---
 
 # Implementing Stripe Payment Links in Capacitor Apps Following New Apple Guidelines

@@ -13,7 +13,7 @@ keywords: Xcode Cloud, Capacitor, mobile app development, live updates, OTA upda
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 ---
 
 ## Prerequisites

@@ -16,5 +16,5 @@ export function filterBlogPosts(posts: CollectionEntry<'blog'>[], options: { ori
 }
 
 export function getBlogListingBasePath(origin: BlogOrigin): string {
-  return origin === 'ai' ? 'blog/ai' : 'blog'
+  return origin === 'ai' ? 'articles' : 'blog'
 }

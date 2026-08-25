@@ -16,7 +16,7 @@ keywords: Capacitor, web app to mobile app, app store review, Google Play closed
 tag: Tutorial, Mobile, App Store
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: transform-pwa-to-native-app-with-capacitor
 ---
 

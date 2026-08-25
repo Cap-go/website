@@ -15,7 +15,7 @@ keywords: Codemagic, CI/CD, iOS, automatic build, automatic release, mobile app 
 tag: CI/CD
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: automatic-capacitor-android-build-codemagic
 ---
 

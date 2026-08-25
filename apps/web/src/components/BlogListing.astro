@@ -23,7 +23,7 @@ const {
 const config = Astro.locals.runtimeConfig
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
 const listingBasePath = getBlogListingBasePath(listingOrigin)
-const isAiListing = listingOrigin === 'ai'
+const isArticlesListing = listingOrigin === 'ai'
 
 const posts = [...allPosts].sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
 
@@ -38,17 +38,17 @@ categorySourcePosts.forEach((article) =>
 const categories = Array.from(tagCounts.entries()).sort(([a], [b]) => a.localeCompare(b))
 const currentCategorySlug = currentCategory ? slugify(currentCategory) : undefined
 
-if (isAiListing) {
-  content.title = m.blog_ai_title({}, { locale: Astro.locals.locale })
-  content.description = m.blog_ai_description({}, { locale: Astro.locals.locale })
+if (isArticlesListing) {
+  content.title = m.articles_title({}, { locale: Astro.locals.locale })
+  content.description = m.articles_description({}, { locale: Astro.locals.locale })
 } else {
   if (Astro.locals.runtimeConfig.public.blog_title) content.title = Astro.locals.runtimeConfig.public.blog_title
   if (Astro.locals.runtimeConfig.public.blog_keywords) content.keywords = Astro.locals.runtimeConfig.public.blog_keywords
   if (Astro.locals.runtimeConfig.public.blog_description) content.description = Astro.locals.runtimeConfig.public.blog_description
 }
 
-const pageHeading = isAiListing ? m.latest_from_the_ai_blog({}, { locale: Astro.locals.locale }) : m.latest_from_the_blog({}, { locale: Astro.locals.locale })
-const pageDescription = isAiListing ? m.blog_ai_description({}, { locale: Astro.locals.locale }) : config.public.blog_description
+const pageHeading = isArticlesListing ? m.latest_from_articles({}, { locale: Astro.locals.locale }) : m.latest_from_the_blog({}, { locale: Astro.locals.locale })
+const pageDescription = isArticlesListing ? m.articles_description({}, { locale: Astro.locals.locale }) : config.public.blog_description
 ---
 
 <Layout {content}>

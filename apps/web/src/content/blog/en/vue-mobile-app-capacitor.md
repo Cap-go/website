@@ -15,7 +15,7 @@ keywords: Vue, Capacitor, mobile app development, live updates, OTA updates, con
 tag: Tutorial
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 

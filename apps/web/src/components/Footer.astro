@@ -125,7 +125,7 @@ const navigation: Record<string, NavigationItem[]> = {
       href: getRelativeLocaleUrl(Astro.locals.locale, 'app-store-refusal-horror-story'),
     },
     { name: m.blog({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog') },
-    { name: m.blog_ai({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog/ai') },
+    { name: m.articles({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'articles') },
     {
       name: () => m.all_systems_normal({}, { locale: Astro.locals.locale }),
       href: 'https://status.capgo.app/',

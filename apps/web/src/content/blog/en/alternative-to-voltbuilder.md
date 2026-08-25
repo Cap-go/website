@@ -16,7 +16,7 @@ keywords: Voltbuilder, mobile app development, live updates, OTA updates, contin
 tag: Alternatives
 published: true
 locale: en
-origin: human
+origin: ai
 next_blog: ''
 ---
 
