@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-25T08:45:22.833Z
-updated_at: 2026-08-25T08:45:24.438Z
+updated_at: 2026-08-25T08:47:43.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/afd318b2-c157-4cd0-ba39-5d5d445cf694/app-troubleshooting-capacitorjs-electron.jpg'
 head_image_alt: App Troubleshooting Playbook for CapacitorJS and Electron
 keywords: 'app troubleshooting, CapacitorJS, live updates, mobile debugging, Electron apps'
