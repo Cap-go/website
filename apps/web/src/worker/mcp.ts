@@ -122,18 +122,38 @@ function handleRpc(payload: JsonRpcRequest): { status: number; body: unknown } |
   return { status: 200, body: rpcError(id, -32601, `Method not found: ${method}`) }
 }
 
-function isJsonRpcRequest(item: unknown): item is JsonRpcRequest {
-  return Boolean(item && typeof item === 'object' && !Array.isArray(item) && typeof (item as JsonRpcRequest).method === 'string')
+function isJsonRpcObject(item: unknown): item is Record<string, unknown> {
+  return Boolean(item && typeof item === 'object' && !Array.isArray(item))
+}
+
+function isJsonRpcCall(item: Record<string, unknown>): boolean {
+  return typeof item.method === 'string'
+}
+
+function hasJsonRpcId(item: Record<string, unknown>): boolean {
+  return 'id' in item && item.id !== undefined && item.id !== null
 }
 
 function handlePostPayload(payload: unknown): Response {
   if (Array.isArray(payload)) {
-    if (!payload.length || !payload.every((item) => item && typeof item === 'object' && !Array.isArray(item))) {
+    if (!payload.length || !payload.every(isJsonRpcObject)) {
       return jsonResponse(rpcError(null, -32600, 'Invalid request'), 400)
     }
-    const requests = payload.filter(isJsonRpcRequest)
-    if (!requests.length) return new Response(null, { status: 202, headers: CORS_HEADERS })
-    const bodies = requests.map((item) => handleRpc(item).body).filter((body) => body !== null)
+    const bodies: unknown[] = []
+    for (const item of payload) {
+      if (!isJsonRpcCall(item)) {
+        if ('result' in item || 'error' in item) continue
+        bodies.push(rpcError(null, -32600, 'Invalid request'))
+        continue
+      }
+      if (!hasJsonRpcId(item)) {
+        handleRpc(item as JsonRpcRequest)
+        continue
+      }
+      const result = handleRpc(item as JsonRpcRequest)
+      if (result.body !== null) bodies.push(result.body)
+    }
+    if (!bodies.length) return new Response(null, { status: 202, headers: CORS_HEADERS })
     return jsonResponse(bodies)
   }
 

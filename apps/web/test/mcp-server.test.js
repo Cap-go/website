@@ -77,6 +77,33 @@ test('POST JSON-RPC batch returns result array', async () => {
   expect(body[1].result.tools.length).toBeGreaterThan(0)
 })
 
+test('POST JSON-RPC batch rejects invalid members with -32600', async () => {
+  const response = await handleMcpRequest(
+    new Request('https://capgo.app/mcp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify([{ jsonrpc: '2.0', id: 1, method: 'ping', params: {} }, { jsonrpc: '2.0', id: 2 }]),
+    }),
+  )
+  expect(response.status).toBe(200)
+  const body = await response.json()
+  expect(body).toHaveLength(2)
+  expect(body[0].result).toEqual({})
+  expect(body[1].error.code).toBe(-32600)
+})
+
+test('POST JSON-RPC batch notifications return 202 without body', async () => {
+  const response = await handleMcpRequest(
+    new Request('https://capgo.app/mcp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify([{ jsonrpc: '2.0', method: 'notifications/initialized', params: {} }]),
+    }),
+  )
+  expect(response.status).toBe(202)
+  expect(await response.text()).toBe('')
+})
+
 test('POST null JSON-RPC body is invalid request', async () => {
   const response = await handleMcpRequest(
     new Request('https://capgo.app/mcp', {
