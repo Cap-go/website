@@ -154,17 +154,9 @@ export async function resolveLiveUpdateMetrics(baseApiUrl: string): Promise<Live
 /** JSON safe to embed inside <script> via set:html (blocks </script> breakouts). */
 export function jsonForInlineScript(value: unknown): string {
   return JSON.stringify(value)
-<<<<<<< HEAD
     .replaceAll('<', String.raw`\u003c`)
     .replaceAll('>', String.raw`\u003e`)
     .replaceAll('&', String.raw`\u0026`)
     .replaceAll('\u2028', String.raw`\u2028`)
     .replaceAll('\u2029', String.raw`\u2029`)
-=======
-    .replace(/</g, '\\u003c')
-    .replace(/>/g, '\\u003e')
-    .replace(/&/g, '\\u0026')
-    .replace(/\u2028/g, '\\u2028')
-    .replace(/\u2029/g, '\\u2029')
->>>>>>> 5b2a42855 (fix: escape /data metrics JSON for inline script embeds)
 }

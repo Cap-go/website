@@ -57,11 +57,7 @@ function formatPct(value: number | null) {
   <link slot="head" rel="preconnect" href={apiOrigin} crossorigin="anonymous" />
   <link slot="head" rel="dns-prefetch" href={apiOrigin} />
   {/* Keep bootstrap metrics out of attributes so the edge translator cannot mangle JSON / inflate SSR tables. */}
-<<<<<<< HEAD
   <script type="application/json" id="capgo-live-update-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
-=======
-  <script is:inline type="application/json" id="capgo-live-update-metrics-bootstrap" set:html={jsonForInlineScript(metrics)} />
->>>>>>> 5b2a42855 (fix: escape /data metrics JSON for inline script embeds)
   <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="false">
     <section class="data-hero">
       <div class="data-shell">
@@ -405,9 +401,7 @@ function formatPct(value: number | null) {
       dailyStart.textContent = metrics.daily[0]?.date ?? ''
       dailyEnd.textContent = metrics.daily.at(-1)?.date ?? ''
       if (dailyStatus) {
-        dailyStatus.textContent = metrics.daily.length
-          ? `Daily install success chart updated with ${metrics.daily.length} days of data`
-          : 'Daily install success chart unavailable'
+        dailyStatus.textContent = metrics.daily.length ? `Daily install success chart updated with ${metrics.daily.length} days of data` : 'Daily install success chart unavailable'
       }
     }
 
@@ -424,9 +418,7 @@ function formatPct(value: number | null) {
         }
       }
       if (failuresStatus) {
-        failuresStatus.textContent = metrics.failures.length
-          ? `Top failure reasons updated with ${metrics.failures.length} categories`
-          : 'No failures in this window'
+        failuresStatus.textContent = metrics.failures.length ? `Top failure reasons updated with ${metrics.failures.length} categories` : 'No failures in this window'
       }
       for (const [index, item] of metrics.failures.entries()) {
         const info = getFailureReasonInfo(item.reason)

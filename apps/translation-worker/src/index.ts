@@ -1541,10 +1541,15 @@ function shouldCheckUnchangedTranslation(value: string): boolean {
   return true
 }
 
+function shouldEnforceTranslationLength(source: string): boolean {
+  return source.trim().length > 0
+}
+
 function translationLengthViolation(source: string, translated: string): boolean {
+  if (!shouldEnforceTranslationLength(source)) return false
   const sourceLen = source.length
-  if (sourceLen === 0) return false
   const translatedLen = translated.length
+  if (sourceLen < 12) return translatedLen > sourceLen + 8
   return translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO || translatedLen < sourceLen * TRANSLATION_LENGTH_MIN_RATIO
 }
 
@@ -1552,16 +1557,8 @@ function guardTranslationLength(source: string, translated: string): string {
   return translationLengthViolation(source, translated) ? source : translated
 }
 
-function assertTranslationLengths(targetLanguage: string, batch: string[], translated: string[]): void {
-  for (let index = 0; index < batch.length; index += 1) {
-    const source = batch[index]
-    const target = translated[index] ?? ''
-    if (translationLengthViolation(source, target)) {
-      throw new Error(
-        `Translation length out of bounds for ${targetLanguage} at index ${index}: ${target.length} chars vs source ${source.length}`,
-      )
-    }
-  }
+function guardTranslatedBatchLengths(batch: string[], translated: string[]): string[] {
+  return batch.map((source, index) => guardTranslationLength(source, translated[index] ?? source))
 }
 
 function assertTranslatedBatch(targetLanguage: string, batch: string[], translated: string[]): void {
@@ -1779,9 +1776,21 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           }
           return polishTranslatedText(targetLanguage, result.text)
         })
-        assertTranslationLengths(targetLanguage, batch, restored)
-        assertTranslatedBatch(targetLanguage, batch, restored)
-        return restored
+        const guarded = guardTranslatedBatchLengths(batch, restored).map((text, index) => {
+          if (text === batch[index] && translationLengthViolation(batch[index], restored[index])) {
+            console.warn('Translation kept source after length bound violation', {
+              targetLanguage,
+              index,
+              sourceLength: batch[index].length,
+              translatedLength: restored[index].length,
+              sourcePreview: aiPayloadPreview(batch[index]),
+              outputPreview: aiPayloadPreview(restored[index]),
+            })
+          }
+          return text
+        })
+        assertTranslatedBatch(targetLanguage, batch, guarded)
+        return guarded
       }
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
@@ -3172,6 +3181,7 @@ export const __translationWorkerTest = {
   sourceCheckKeyFor,
   collectSegments,
   guardTranslationLength,
+  guardTranslatedBatchLengths,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
   rewriteMetadataAndLinks,

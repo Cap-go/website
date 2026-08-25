@@ -212,15 +212,10 @@ assert(
   noTranslateParsed.parts.some((part) => typeof part === 'string' && part.includes('United States') && part.includes('Download failure (46%)')),
   'Parser did not preserve translate=no markup as raw HTML',
 )
+const noTranslateRaw = noTranslateParsed.parts.filter((part): part is string => typeof part === 'string').join('')
 assert(
-  noTranslateParsed.parts.some(
-    (part) => typeof part === 'string' && part.includes('class="notranslate"') && part.includes('Keep metrics English'),
-  ),
-  'Parser did not preserve notranslate opening tag as raw HTML',
-)
-assert(
-  noTranslateParsed.parts.some((part) => typeof part === 'string' && part.includes('</div>') && part.includes('Keep metrics English')),
-  'Parser did not preserve notranslate closing tag as raw HTML',
+  noTranslateRaw.includes('class="notranslate"') && noTranslateRaw.includes('<p>Keep metrics English</p>') && noTranslateRaw.includes('</div>'),
+  'Parser did not preserve notranslate fragment as raw HTML',
 )
 
 const skipAttrHtml = `<!doctype html><html><body><section translate="no" title="Metric region label"><p>99%</p></section></body></html>`
@@ -231,18 +226,23 @@ assert(
 )
 
 assert(
-  __translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', 'Deploy updates safely to every device with detailed guidance for all supported environments and release channels'),
+  __translationWorkerTest.translationLengthViolation(
+    'Deploy updates safely to every device',
+    'Deploy updates safely to every device with detailed guidance for all supported environments and release channels',
+  ),
   'Length guard did not flag an overlong translation',
 )
 assert(
-  __translationWorkerTest.guardTranslationLength('Deploy updates safely to every device', 'Deploy updates safely to every device with detailed guidance for all supported environments and release channels') === 'Deploy updates safely to every device',
-  'Length guard did not fall back to source for overlong translation',
+  __translationWorkerTest.guardTranslatedBatchLengths(
+    ['Deploy updates safely to every device'],
+    ['Deploy updates safely to every device with detailed guidance for all supported environments and release channels'],
+  )[0] === 'Deploy updates safely to every device',
+  'Batch length guard did not fall back to source for overlong translation',
 )
 assert(
   !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', 'Déployez les mises à jour en toute sécurité'),
   'Length guard flagged a reasonably sized translation',
 )
-
 
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
   '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',
@@ -416,15 +416,17 @@ try {
           assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
         }
 
+        const translateText = (text: string) => {
+          if (text.includes('Read our guides')) return 'Leggi le guide'
+          if (text.includes('Docs title')) return 'Titolo doc'
+          if (text === 'About') return 'Chi siamo'
+          return 'IT ' + text
+        }
+
         const sourceTexts = payload.items.map((item) => item.text)
         return {
           response: JSON.stringify({
-            translations: sourceTexts.map((text) => {
-              if (text.includes('Read our guides')) return 'Leggi le nostre guide'
-              if (text.includes('Docs title')) return 'Titolo documentazione'
-              if (text === 'About') return 'Chi siamo'
-              return 'IT ' + text
-            }),
+            translations: sourceTexts.map((text) => translateText(text)),
           }),
         }
       },
@@ -489,7 +491,7 @@ try {
 
   assert(translatedResponse.status === 200, 'A completed cache-miss translation was not served successfully')
   assert(translatedResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A completed cache-miss translation was not cached')
-  assert(translatedHtml.includes('Leggi le nostre guide'), 'A completed cache-miss translation did not contain the translated document')
+  assert(translatedHtml.includes('Leggi le guide'), 'A completed cache-miss translation did not contain the translated document')
   assert(translatedHtml.includes('Chi siamo'), 'A completed cache-miss translation did not keep context-backed About copy')
 
   const staleBlogUrl = new URL('https://capgo.app/de/blog/capacitor-app-initialization-step-by-step-guide/')
