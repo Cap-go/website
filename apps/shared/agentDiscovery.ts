@@ -136,7 +136,7 @@ function mediaQuality(accept: string, typePattern: RegExp): { q: number; index: 
       const match = param.trim().match(/^q=([0-9.]+)$/i)
       if (match) q = Number(match[1])
     }
-    if (Number.isNaN(q)) q = 1
+    if (Number.isNaN(q) || q < 0 || q > 1) continue
     if (!best || q > best.q || (q === best.q && index < best.index)) {
       best = { q, index }
     }
@@ -149,9 +149,15 @@ export function prefersMarkdown(request: Request): boolean {
   const markdown = mediaQuality(accept, /^text\/(?:x-)?markdown$/i)
   if (!markdown || markdown.q <= 0) return false
   const html = mediaQuality(accept, /^text\/html$/i)
-  if (!html || html.q <= 0) return true
-  if (markdown.q !== html.q) return markdown.q > html.q
-  return markdown.index < html.index
+  const textStar = mediaQuality(accept, /^text\/\*$/i)
+  const starStar = mediaQuality(accept, /^\*\/\*$/)
+  const competitors = [html, textStar, starStar].filter((item): item is { q: number; index: number } => Boolean(item && item.q > 0))
+  if (!competitors.length) return true
+  const best = competitors.reduce((winner, item) => (item.q > winner.q || (item.q === winner.q && item.index < winner.index) ? item : winner))
+  if (markdown.q !== best.q) return markdown.q > best.q
+  const bestIsWildcard = best === textStar || best === starStar
+  if (bestIsWildcard) return true
+  return markdown.index < best.index
 }
 
 export function markdownNotFoundResponse(request?: Request): Response {
@@ -170,7 +176,9 @@ export function markdownNotFoundResponse(request?: Request): Response {
 export function stripRewrittenAssetHeaders(headers: Headers): Headers {
   headers.delete('Content-Length')
   headers.delete('Content-MD5')
+  headers.delete('Content-Encoding')
   headers.delete('ETag')
+  headers.delete('Last-Modified')
   return headers
 }
 
@@ -184,6 +192,8 @@ export function withLlmsWhenToUse(body: string): string {
   const rest = body.slice(insertAt).replace(/^\n+/, '\n\n')
   return `${body.slice(0, insertAt)}\n\n${WHEN_TO_USE_MARKDOWN}${rest}`
 }
+
+export { mediaQuality }
 
 export function docsIndexForTopic(topic?: string): string {
   const normalized = (topic || '').trim().toLowerCase()

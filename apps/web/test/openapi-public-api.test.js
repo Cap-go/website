@@ -19,6 +19,9 @@ test('public API OpenAPI spec is complete enough for function calling', () => {
       expect((operation.description || '').length).toBeGreaterThan(20)
       const ok = operation.responses?.['200']
       expect(ok?.content?.['application/json']?.schema).toBeDefined()
+      if (method === 'post' || method === 'put' || method === 'patch') {
+        expect(operation.requestBody?.content?.['application/json']?.schema).toBeDefined()
+      }
     }
   }
   expect(operationIds.size).toBeGreaterThan(10)

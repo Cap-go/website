@@ -1,4 +1,4 @@
-import { CAPGO_API_ORIGIN, CAPGO_ORIGIN, MCP_TOOLS, WHEN_TO_USE_MARKDOWN, docsIndexForTopic, mcpManifest } from '../../../shared/agentDiscovery'
+import { CAPGO_API_ORIGIN, CAPGO_ORIGIN, MCP_TOOLS, WHEN_TO_USE_MARKDOWN, docsIndexForTopic, mcpManifest, mediaQuality } from '../../../shared/agentDiscovery'
 
 const PROTOCOL_VERSION = '2025-03-26'
 const SERVER_INFO = {
@@ -129,7 +129,8 @@ export async function handleMcpRequest(request: Request): Promise<Response> {
 
   if (request.method === 'GET' || request.method === 'HEAD') {
     const accept = request.headers.get('Accept') || ''
-    if (/text\/event-stream/i.test(accept)) {
+    const sse = mediaQuality(accept, /^text\/event-stream$/i)
+    if (sse && sse.q > 0) {
       return new Response(request.method === 'HEAD' ? null : ':\n\n', {
         status: 200,
         headers: {
@@ -139,8 +140,14 @@ export async function handleMcpRequest(request: Request): Promise<Response> {
         },
       })
     }
-    return jsonResponse({ error: 'Use POST for JSON-RPC. The MCP manifest is at /.well-known/mcp.json.' }, 405, {
-      Allow: 'GET, HEAD, POST, OPTIONS',
+    return new Response(request.method === 'HEAD' ? null : JSON.stringify({ error: 'Use POST for JSON-RPC. The MCP manifest is at /.well-known/mcp.json.' }), {
+      status: 405,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Cache-Control': 'no-store',
+        ...CORS_HEADERS,
+        Allow: 'GET, HEAD, POST, OPTIONS',
+      },
     })
   }
 
