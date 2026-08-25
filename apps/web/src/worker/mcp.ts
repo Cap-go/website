@@ -130,8 +130,8 @@ function isJsonRpcCall(item: Record<string, unknown>): boolean {
   return typeof item.method === 'string'
 }
 
-function hasJsonRpcId(item: Record<string, unknown>): boolean {
-  return 'id' in item && item.id !== undefined && item.id !== null
+function expectsJsonRpcResponse(item: Record<string, unknown>): boolean {
+  return 'id' in item
 }
 
 function handlePostPayload(payload: unknown): Response {
@@ -146,7 +146,7 @@ function handlePostPayload(payload: unknown): Response {
         bodies.push(rpcError(null, -32600, 'Invalid request'))
         continue
       }
-      if (!hasJsonRpcId(item)) {
+      if (!expectsJsonRpcResponse(item)) {
         handleRpc(item as JsonRpcRequest)
         continue
       }

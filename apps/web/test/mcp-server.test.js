@@ -104,6 +104,21 @@ test('POST JSON-RPC batch notifications return 202 without body', async () => {
   expect(await response.text()).toBe('')
 })
 
+test('POST JSON-RPC batch with null id returns a response entry', async () => {
+  const response = await handleMcpRequest(
+    new Request('https://capgo.app/mcp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify([{ jsonrpc: '2.0', id: null, method: 'ping', params: {} }]),
+    }),
+  )
+  expect(response.status).toBe(200)
+  const body = await response.json()
+  expect(body).toHaveLength(1)
+  expect(body[0].id).toBeNull()
+  expect(body[0].result).toEqual({})
+})
+
 test('POST null JSON-RPC body is invalid request', async () => {
   const response = await handleMcpRequest(
     new Request('https://capgo.app/mcp', {
