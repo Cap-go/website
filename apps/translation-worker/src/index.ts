@@ -1806,6 +1806,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           }
           return polishTranslatedText(targetLanguage, result.text)
         })
+        assertTranslatedBatch(targetLanguage, batch, restored)
         const guarded = guardTranslatedBatchLengths(batch, restored, targetLanguage).map((text, index) => {
           if (text === batch[index] && translationLengthViolation(batch[index], restored[index], targetLanguage)) {
             console.warn('Translation kept source after length bound violation', {
@@ -1819,7 +1820,6 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           }
           return text
         })
-        assertTranslatedBatch(targetLanguage, batch, guarded)
         return guarded
       }
     } catch (error) {
@@ -1945,7 +1945,6 @@ async function translateBatchIndividually(env: Env, targetLanguage: string, batc
   for (const text of batch) {
     translated.push(await translateSingleText(env, targetLanguage, text, pagePath))
   }
-  assertTranslatedBatch(targetLanguage, batch, translated)
   return translated
 }
 
