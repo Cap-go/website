@@ -793,7 +793,10 @@ function collectQuotedAttributes(tag: string): AttributeMatch[] {
 
     const valueStart = quoteIndex
     let valueEnd = valueStart
-    while (valueEnd < tag.length && !isWhitespace(tag[valueEnd]) && tag[valueEnd] !== '>' && tag[valueEnd] !== '/') {
+    while (valueEnd < tag.length) {
+      const char = tag[valueEnd]
+      if (isWhitespace(char) || char === '>') break
+      if (char === '/' && tag[valueEnd + 1] === '>') break
       valueEnd += 1
     }
     if (valueEnd === valueStart) {
@@ -891,9 +894,11 @@ function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText
   for (const attribute of collectQuotedAttributes(tag)) {
     if (!shouldTranslateAttribute(tag, tagName, attribute.name, attribute.value)) continue
 
+    const outputQuote = attribute.quote || '"'
     parts.push(tag.slice(lastIndex, attribute.start), tag.slice(attribute.start, attribute.valueStart))
-    addSegment(parts, segments, attribute.value, 'attribute', inBody, attribute.quote)
-    parts.push(attribute.quote)
+    if (!attribute.quote) parts.push(outputQuote)
+    addSegment(parts, segments, attribute.value, 'attribute', inBody, outputQuote)
+    parts.push(outputQuote)
     lastIndex = attribute.end
     matched = true
   }

@@ -268,6 +268,27 @@ assert(
   quotedAttrFalsePositiveParsed.segments.some((segment) => segment.inBody && segment.text.includes('Translate this paragraph')),
   'Parser skipped translatable text after translate=no substring inside quoted attribute value',
 )
+
+const unquotedHrefHtml = `<!doctype html><html><body><a href=/pricing/ tier>Plans</a></body></html>`
+const unquotedHrefParsed = __translationWorkerTest.collectSegments(unquotedHrefHtml)
+assert(
+  unquotedHrefParsed.parts.some((part) => typeof part === 'string' && part.includes('href=/pricing/')),
+  'Unquoted attribute scanner truncated / inside attribute values',
+)
+
+const unquotedTitleHtml = `<!doctype html><html><body><section title=Overview><p>99%</p></section></body></html>`
+const unquotedTitleParsed = __translationWorkerTest.collectSegments(unquotedTitleHtml)
+const unquotedTitleSegmentIndex = unquotedTitleParsed.segments.findIndex((segment) => segment.mode === 'attribute' && segment.text === 'Overview')
+assert(unquotedTitleSegmentIndex >= 0, 'Parser did not collect unquoted translatable title attribute')
+const unquotedTitleRendered = __translationWorkerTest.renderTranslatedHtml(
+  unquotedTitleParsed.parts,
+  unquotedTitleParsed.segments,
+  unquotedTitleParsed.segments.map((segment, index) => (index === unquotedTitleSegmentIndex ? 'Vue d\u2019ensemble' : segment.text)),
+)
+assert(
+  unquotedTitleRendered.includes('title="Vue d\u2019ensemble"'),
+  'Rendered translation of unquoted attribute must quote values containing spaces',
+)
 assert(
   __translationWorkerTest.guardTranslatedBatchLengths(
     ['Deploy updates safely to every device'],
