@@ -127,23 +127,25 @@ export function mcpManifest() {
   }
 }
 
+function parseAcceptQuality(params: string[]): number {
+  let q = 1
+  for (const param of params) {
+    const trimmed = param.trim()
+    if (!/^q=/i.test(trimmed)) continue
+    const raw = trimmed.slice(trimmed.indexOf('=') + 1)
+    if (!/^(?:0(?:\.\d{0,3})?|1(?:\.0{0,3})?)$/.test(raw)) return Number.NaN
+    q = Number(raw)
+  }
+  return q
+}
+
 function mediaQuality(accept: string, typePattern: RegExp): { q: number; index: number } | null {
   let best: { q: number; index: number } | null = null
   for (const [index, part] of accept.split(',').entries()) {
     const [rawType, ...params] = part.trim().split(';')
     const type = rawType.trim()
     if (!typePattern.test(type)) continue
-    let q = 1
-    for (const param of params) {
-      const trimmed = param.trim()
-      if (!/^q=/i.test(trimmed)) continue
-      const raw = trimmed.slice(trimmed.indexOf('=') + 1)
-      if (!/^(?:0(?:\.[0-9]{0,3})?|1(?:\.0{0,3})?)$/.test(raw)) {
-        q = Number.NaN
-        break
-      }
-      q = Number(raw)
-    }
+    const q = parseAcceptQuality(params)
     if (Number.isNaN(q) || q < 0 || q > 1) continue
     if (!best || q > best.q || (q === best.q && index < best.index)) {
       best = { q, index }

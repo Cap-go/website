@@ -84,7 +84,7 @@ const content = {
         url: `${config.public.baseUrl}/docs/`,
       },
     ],
-    additionalEntities: [capgoSoftware, createWebSiteLdJson(config.public)],
+    additionalEntities: [capgoSoftware, createWebSiteLdJson(config.public, { inLanguage: Astro.locals.locale })],
   }),
 }
 ---

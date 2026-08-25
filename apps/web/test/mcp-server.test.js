@@ -58,6 +58,25 @@ test('GET /.well-known/mcp.json returns the streamable-http manifest', async () 
   expect(body.tools.length).toBeGreaterThan(0)
 })
 
+test('POST JSON-RPC batch returns result array', async () => {
+  const response = await handleMcpRequest(
+    new Request('https://capgo.app/mcp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify([
+        { jsonrpc: '2.0', id: 1, method: 'ping', params: {} },
+        { jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} },
+      ]),
+    }),
+  )
+  expect(response.status).toBe(200)
+  const body = await response.json()
+  expect(Array.isArray(body)).toBe(true)
+  expect(body).toHaveLength(2)
+  expect(body[0].result).toEqual({})
+  expect(body[1].result.tools.length).toBeGreaterThan(0)
+})
+
 test('POST null JSON-RPC body is invalid request', async () => {
   const response = await handleMcpRequest(
     new Request('https://capgo.app/mcp', {

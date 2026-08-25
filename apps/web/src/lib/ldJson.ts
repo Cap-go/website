@@ -360,6 +360,7 @@ export function createWebSiteLdJson(
   options?: {
     hasSearchAction?: boolean
     searchUrl?: string
+    inLanguage?: string
   },
 ): WebSite {
   const schema: WebSite = {
@@ -368,7 +369,7 @@ export function createWebSiteLdJson(
     url: config.baseUrl,
     name: config.brand,
     description: config.blog_description,
-    inLanguage: 'en',
+    inLanguage: options?.inLanguage || 'en',
   }
 
   if (options?.hasSearchAction && options.searchUrl) {

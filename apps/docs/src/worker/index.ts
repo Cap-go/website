@@ -251,13 +251,14 @@ export default {
     }
     if (LLMS_TXT_PATHS.has(pathname) && (request.method === 'GET' || request.method === 'HEAD')) {
       const llms = await env.ASSETS.fetch(request)
-      if (llms.ok) {
+      if (llms.status === 200) {
         if (request.method === 'HEAD') return trackAICrawler(request, llms, ctx)
         const body = withLlmsWhenToUse(await llms.text())
         const headers = stripRewrittenAssetHeaders(new Headers(llms.headers))
         headers.set('Content-Type', 'text/plain; charset=utf-8')
         return trackAICrawler(request, new Response(body, { status: 200, headers }), ctx)
       }
+      if (llms.ok) return trackAICrawler(request, llms, ctx)
     }
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)

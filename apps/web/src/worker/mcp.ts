@@ -122,6 +122,32 @@ function handleRpc(payload: JsonRpcRequest): { status: number; body: unknown } |
   return { status: 200, body: rpcError(id, -32601, `Method not found: ${method}`) }
 }
 
+function isJsonRpcRequest(item: unknown): item is JsonRpcRequest {
+  return Boolean(item && typeof item === 'object' && !Array.isArray(item) && typeof (item as JsonRpcRequest).method === 'string')
+}
+
+function handlePostPayload(payload: unknown): Response {
+  if (Array.isArray(payload)) {
+    if (!payload.length || !payload.every((item) => item && typeof item === 'object' && !Array.isArray(item))) {
+      return jsonResponse(rpcError(null, -32600, 'Invalid request'), 400)
+    }
+    const requests = payload.filter(isJsonRpcRequest)
+    if (!requests.length) return new Response(null, { status: 202, headers: CORS_HEADERS })
+    const bodies = requests.map((item) => handleRpc(item).body).filter((body) => body !== null)
+    return jsonResponse(bodies)
+  }
+
+  if (!payload || typeof payload !== 'object') {
+    return jsonResponse(rpcError(null, -32600, 'Invalid request'), 400)
+  }
+
+  const result = handleRpc(payload as JsonRpcRequest)
+  if (result.body === null) {
+    return new Response(null, { status: result.status, headers: CORS_HEADERS })
+  }
+  return jsonResponse(result.body, result.status)
+}
+
 export async function handleMcpRequest(request: Request): Promise<Response> {
   if (request.method === 'OPTIONS') {
     return new Response(null, { status: 204, headers: CORS_HEADERS })
@@ -161,15 +187,7 @@ export async function handleMcpRequest(request: Request): Promise<Response> {
   } catch {
     return jsonResponse(rpcError(null, -32700, 'Parse error'), 400)
   }
-  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
-    return jsonResponse(rpcError(null, -32600, 'Invalid request'), 400)
-  }
-
-  const result = handleRpc(payload as JsonRpcRequest)
-  if (result.body === null) {
-    return new Response(null, { status: result.status, headers: CORS_HEADERS })
-  }
-  return jsonResponse(result.body, result.status)
+  return handlePostPayload(payload)
 }
 
 export function handleMcpManifestRequest(request: Request): Response {
