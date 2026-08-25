@@ -18,6 +18,8 @@ export const CAPGO_POSTAL_ADDRESS = {
   addressCountry: 'EE',
 }
 
+export const CAPGO_LEGAL_NAME = 'Digital Shift OÜ'
+
 export const WHEN_TO_USE_MARKDOWN = `## When to use Capgo
 
 Use Capgo when the job is Capacitor, Ionic, Cordova, or Electron **live updates**, or Capgo **native iOS/Android builds**:

@@ -3,9 +3,8 @@ import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
-import { createLdJsonGraph, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { createLdJsonGraph, createCapgoOrganization, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { pluginCountLabel } from '@/config/plugins'
-import { CAPGO_POSTAL_ADDRESS } from '../../../shared/agentDiscovery'
 import type { Thing } from 'schema-dts'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.about_capgo({}, { locale: Astro.locals.locale })].join(' | ')
@@ -18,29 +17,7 @@ const founder = createPersonLdJson('Martin Donadieu', 'https://x.com/martindonad
 
 // Create enhanced organization with all properties as a plain object
 const enhancedOrg: Thing = {
-  '@type': 'Organization',
-  '@id': `${config.baseUrl}/#organization`,
-  name: 'Capgo',
-  url: config.baseUrl,
-  logo: {
-    '@type': 'ImageObject',
-    url: `${config.baseUrl}/capgo.webp`,
-    contentUrl: `${config.baseUrl}/capgo.webp`,
-    width: '1024',
-    height: '1024',
-  },
-  sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
-  description: config.blog_description,
-  legalName: 'Digital Shift OÜ',
-  email: 'support@capgo.app',
-  address: CAPGO_POSTAL_ADDRESS,
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'technical support',
-    email: 'support@capgo.app',
-    url: `${config.baseUrl}/contact/`,
-    availableLanguage: ['English'],
-  },
+  ...createCapgoOrganization(config),
   founder: founder,
   foundingDate: '2022-12-01',
   numberOfEmployees: {

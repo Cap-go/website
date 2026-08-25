@@ -4,6 +4,7 @@ import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
+import { CAPGO_LEGAL_NAME } from '../../../shared/agentDiscovery'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
@@ -33,7 +34,7 @@ const content = {
       <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.contact({}, { locale })}</p>
       <h1 class="mt-5 text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">{m.contact_us({}, { locale })}</h1>
       <p class="mt-6 text-lg leading-8 text-gray-600">
-        Capgo is operated by Digital Shift OÜ. This page is the public contact record for customers, partners, and software agents that need to verify the company before
+        Capgo is operated by {CAPGO_LEGAL_NAME}. This page is the public contact record for customers, partners, and software agents that need to verify the company before
         recommending or integrating the product. Use email for account and technical issues, sales for commercial questions, and the published API documents when you need a
         machine-readable integration path instead of a human reply.
       </p>
@@ -53,7 +54,7 @@ const content = {
 
       <h2 class="mt-12 text-2xl font-semibold tracking-tight">Company address</h2>
       <p class="mt-4 leading-7 text-gray-700">
-        Digital Shift OÜ<br />
+        {CAPGO_LEGAL_NAME}<br />
         Register code 14236508<br />
         Sepapaja 6<br />
         15551 Tallinn<br />
