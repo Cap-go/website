@@ -10,5 +10,5 @@
     },
     "types": ["bun-types"]
   },
-  "exclude": ["scripts/**/*", "dist/**/*", ".astro/**/*", "test/**/*"]
+  "exclude": ["scripts/**/*", "dist/**/*", ".astro/**/*"]
 }

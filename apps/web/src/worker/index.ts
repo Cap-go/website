@@ -1,14 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
-import {
-  LLMS_TXT_PATHS,
-  MCP_ENDPOINT_PATHS,
-  MCP_MANIFEST_PATHS,
-  OPENAPI_ALIAS_PATHS,
-  OPENAPI_ASSET_PATH,
-  markdownNotFoundResponse,
-  prefersMarkdown,
-  withLlmsWhenToUse,
-} from '../../../shared/agentDiscovery'
+import { MCP_ENDPOINT_PATHS, MCP_MANIFEST_PATHS, OPENAPI_ALIAS_PATHS, OPENAPI_ASSET_PATH, markdownNotFoundResponse, prefersMarkdown } from '../../../shared/agentDiscovery'
 import { resolveLegacyPathRedirect } from '../../../shared/legacyPathRedirects'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
@@ -342,7 +333,7 @@ function shouldServeBrandedNotFound(pathname: string): boolean {
 }
 
 async function brandedNotFoundResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
-  if (prefersMarkdown(request)) return markdownNotFoundResponse()
+  if (prefersMarkdown(request)) return markdownNotFoundResponse(request)
 
   const { localePrefix } = splitLocalePath(pathname)
   const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
@@ -416,28 +407,12 @@ async function openApiAliasResponse(request: Request, env: Env): Promise<Respons
   })
 }
 
-async function llmsTxtResponse(request: Request, env: Env): Promise<Response | null> {
-  if (request.method !== 'GET' && request.method !== 'HEAD') return null
-  const asset = await env.ASSETS.fetch(request)
-  if (!asset.ok) return null
-  if (request.method === 'HEAD') return asset
-  const body = withLlmsWhenToUse(await asset.text())
-  const headers = new Headers(asset.headers)
-  headers.set('Content-Type', 'text/plain; charset=utf-8')
-  headers.set('Cache-Control', 'public, max-age=3600')
-  return new Response(body, { status: 200, headers })
-}
-
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const pathname = new URL(request.url).pathname
     if (MCP_ENDPOINT_PATHS.has(pathname)) return trackAICrawler(request, await handleMcpRequest(request), ctx)
     if (MCP_MANIFEST_PATHS.has(pathname)) return trackAICrawler(request, handleMcpManifestRequest(request), ctx)
     if (OPENAPI_ALIAS_PATHS.has(pathname)) return trackAICrawler(request, await openApiAliasResponse(request, env), ctx)
-    if (LLMS_TXT_PATHS.has(pathname)) {
-      const llmsResponse = await llmsTxtResponse(request, env)
-      if (llmsResponse) return trackAICrawler(request, llmsResponse, ctx)
-    }
     const staticRedirect = staticLegacyRedirect(request, pathname)
     if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)
     const toolRouteResponse = await handleToolApiRequest(

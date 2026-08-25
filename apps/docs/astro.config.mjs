@@ -70,7 +70,7 @@ export default defineConfig({
         starlightLlmsTxt({
           customSets: docsLlmsCustomSets,
           details:
-            'Use Capgo for Capacitor, Ionic, Cordova, and Electron live updates and Capgo native iOS/Android builds. Do not use it as a generic CMS or a React Native OTA host. Agents should read /openapi.json, connect to https://capgo.app/mcp, or run `npx @capgo/cli@latest mcp` for authenticated account tools. The canonical source documentation is English; translated language paths are served at request time by the Capgo edge translation worker.',
+            'Use Capgo for Capacitor, Ionic, Cordova, and Electron live updates and Capgo native iOS and Android builds. Do not use it as a generic CMS or a React Native OTA host. Agents should read https://capgo.app/openapi.json, connect to https://capgo.app/mcp, or run `npx @capgo/cli@latest mcp` for authenticated account tools. The canonical source documentation is English; translated language paths are served at request time by the Capgo edge translation worker.',
         }),
       ],
       disable404Route: false,

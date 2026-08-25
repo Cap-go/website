@@ -1,10 +1,10 @@
 import { expect, test } from 'bun:test'
-import { callTool, handleMcpRequest, handleRpc, listTools } from '../src/worker/mcp.ts'
+import { callTool, handleMcpManifestRequest, handleMcpRequest, handleRpc, listTools } from '../src/worker/mcp.ts'
 
 test('MCP initialize returns Streamable HTTP protocol metadata', () => {
   const result = handleRpc({ jsonrpc: '2.0', id: 1, method: 'initialize', params: {} })
   expect(result.status).toBe(200)
-  const body = result.body as { result: { protocolVersion: string; serverInfo: { name: string }; capabilities: { tools: unknown } } }
+  const body = result.body
   expect(body.result.protocolVersion).toBe('2025-03-26')
   expect(body.result.serverInfo.name).toBe('capgo')
   expect(body.result.capabilities.tools).toBeDefined()
@@ -26,13 +26,39 @@ test('capgo_get_openapi returns conventional spec URL and x-api-key auth', () =>
   expect(result.text).toContain('x-api-key')
 })
 
-test('GET /mcp returns the manifest with streamable-http transport', async () => {
+test('GET /mcp without SSE is 405 and points at the manifest', async () => {
   const response = await handleMcpRequest(new Request('https://capgo.app/mcp', { method: 'GET' }))
+  expect(response.status).toBe(405)
+  const body = await response.json()
+  expect(body.error).toContain('/.well-known/mcp.json')
+})
+
+test('GET /mcp with text/event-stream returns an SSE stream', async () => {
+  const response = await handleMcpRequest(new Request('https://capgo.app/mcp', { method: 'GET', headers: { Accept: 'text/event-stream' } }))
+  expect(response.status).toBe(200)
+  expect(response.headers.get('Content-Type')).toContain('text/event-stream')
+})
+
+test('GET /.well-known/mcp.json returns the streamable-http manifest', async () => {
+  const response = handleMcpManifestRequest(new Request('https://capgo.app/.well-known/mcp.json', { method: 'GET' }))
   expect(response.status).toBe(200)
   const body = await response.json()
   expect(body.transport.type).toBe('streamable-http')
   expect(body.transport.url).toBe('https://capgo.app/mcp')
   expect(body.tools.length).toBeGreaterThan(0)
+})
+
+test('POST null JSON-RPC body is invalid request', async () => {
+  const response = await handleMcpRequest(
+    new Request('https://capgo.app/mcp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: 'null',
+    }),
+  )
+  expect(response.status).toBe(400)
+  const body = await response.json()
+  expect(body.error.code).toBe(-32600)
 })
 
 test('POST tools/call returns JSON-RPC tool content', async () => {

@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test'
-import { AGENT_NOT_FOUND_MARKDOWN, MCP_TOOLS, OPENAPI_ALIAS_PATHS, prefersMarkdown, withLlmsWhenToUse } from '../../shared/agentDiscovery'
+import { AGENT_NOT_FOUND_MARKDOWN, MCP_TOOLS, OPENAPI_ALIAS_PATHS, markdownNotFoundResponse, prefersMarkdown, withLlmsWhenToUse } from '../../shared/agentDiscovery'
 import { createCapgoOrganization } from '../src/lib/ldJson.ts'
 
 test('markdown 404 body points agents at sitemap, llms.txt, openapi, and docs', () => {
@@ -15,6 +15,15 @@ test('prefers markdown only when Accept ranks markdown over HTML', () => {
   expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/markdown' } }))).toBe(true)
   expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/html,text/markdown' } }))).toBe(false)
   expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: '*/*' } }))).toBe(false)
+  expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/markdown;q=0.2, text/html' } }))).toBe(false)
+  expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/html;q=0.8, text/markdown' } }))).toBe(true)
+  expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/markdown;q=0' } }))).toBe(false)
+})
+
+test('markdown 404 HEAD responses have no body', async () => {
+  const response = markdownNotFoundResponse(new Request('https://capgo.app/missing', { method: 'HEAD', headers: { Accept: 'text/markdown' } }))
+  expect(response.status).toBe(404)
+  expect(await response.text()).toBe('')
 })
 
 test('llms.txt injector adds a when-to-use section once', () => {

@@ -732,6 +732,8 @@ export const messageContexts = {
   consulting_faq_subtitle: 'Page/area: Consulting services page. Role: Section subtitle or tagline. Seen in: page consulting.astro. Preserve Capgo product/brand and developer terms exactly. Message key `consulting_faq_subtitle` (Consulting FAQ Subtitle).',
   consulting_faq_title: 'Page/area: Consulting services page. Role: Section or page heading. Seen in: page consulting.astro. Message key `consulting_faq_title` (Consulting FAQ Title).',
   consulting_forged_plugins_community_embraced: 'Page/area: Consulting services page. Role: Website copy sentence. Seen in: page consulting.astro. Message key `consulting_forged_plugins_community_embraced` (Consulting Forged Plugins Community Embraced).',
+  agent_recovery_intro: 'Page/area: 404 page. Role: Helper text for software agents. Seen in: page 404.astro. Message key `agent_recovery_intro` (Agent Recovery Intro).',
+  agent_recovery_label: 'Page/area: 404 page. Role: Accessible navigation label. Seen in: page 404.astro. Message key `agent_recovery_label` (Agent Recovery Label).',
   contact: 'Navigation or form label meaning contact Capgo. Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page security.astro, page contact.astro, site footer. Message key `contact` (Contact).',
   contact_link: 'Page/area: Capgo marketing website. Role: Call-to-action button or link label. Seen in: page return.astro. Message key `contact_link` (Contact Link).',
   contact_page_description:

@@ -1,5 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
-import { LLMS_TXT_PATHS, markdownNotFoundResponse, prefersMarkdown, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
+import { LLMS_TXT_PATHS, markdownNotFoundResponse, prefersMarkdown, stripRewrittenAssetHeaders, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
 
 interface Env {
   ASSETS: {
@@ -254,7 +254,7 @@ export default {
       if (llms.ok) {
         if (request.method === 'HEAD') return trackAICrawler(request, llms, ctx)
         const body = withLlmsWhenToUse(await llms.text())
-        const headers = new Headers(llms.headers)
+        const headers = stripRewrittenAssetHeaders(new Headers(llms.headers))
         headers.set('Content-Type', 'text/plain; charset=utf-8')
         return trackAICrawler(request, new Response(body, { status: 200, headers }), ctx)
       }
@@ -262,7 +262,7 @@ export default {
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
     if (response.status === 404 && prefersMarkdown(request)) {
-      return trackAICrawler(request, markdownNotFoundResponse(), ctx)
+      return trackAICrawler(request, markdownNotFoundResponse(request), ctx)
     }
     if (response.status === 404 && shouldServeBrandedNotFound(pathname)) {
       const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))

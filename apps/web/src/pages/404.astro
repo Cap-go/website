@@ -36,8 +36,8 @@ const contactHref = getRelativeLocaleUrl(locale, 'contact')
           {m.contact({}, { locale })}
         </a>
       </div>
-      <nav class="mt-12 text-left text-sm leading-7 text-gray-300" aria-label="Agent recovery links">
-        <p class="font-semibold text-white">If you are an agent, continue from:</p>
+      <nav class="mt-12 text-left text-sm leading-7 text-gray-300" aria-label={m.agent_recovery_label({}, { locale })}>
+        <p class="font-semibold text-white">{m.agent_recovery_intro({}, { locale })}</p>
         <ul class="mt-3 list-disc space-y-1 pl-5">
           <li><a class="text-blue-300 underline" href="/llms.txt">llms.txt</a></li>
           <li><a class="text-blue-300 underline" href="/openapi.json">openapi.json</a></li>

@@ -28,7 +28,7 @@ const content = {
 ---
 
 <Layout content={content}>
-  <main class="bg-gray-50 text-gray-950">
+  <div class="bg-gray-50 text-gray-950">
     <section class="mx-auto max-w-3xl px-4 pt-16 pb-20 sm:px-6 sm:pt-20 lg:px-8">
       <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.contact({}, { locale })}</p>
       <h1 class="mt-5 text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">{m.contact_us({}, { locale })}</h1>
@@ -77,5 +77,5 @@ const content = {
         <a class="text-blue-700 underline" href={getRelativeLocaleUrl(locale, 'docs/public-api')}>/docs/public-api/</a>.
       </p>
     </section>
-  </main>
+  </div>
 </Layout>

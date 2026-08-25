@@ -128,28 +128,37 @@ export async function handleMcpRequest(request: Request): Promise<Response> {
   }
 
   if (request.method === 'GET' || request.method === 'HEAD') {
-    const body = request.method === 'HEAD' ? null : JSON.stringify(mcpManifest())
-    return new Response(body, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        ...CORS_HEADERS,
-      },
+    const accept = request.headers.get('Accept') || ''
+    if (/text\/event-stream/i.test(accept)) {
+      return new Response(request.method === 'HEAD' ? null : ':\n\n', {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/event-stream; charset=utf-8',
+          'Cache-Control': 'no-store',
+          ...CORS_HEADERS,
+        },
+      })
+    }
+    return jsonResponse({ error: 'Use POST for JSON-RPC. The MCP manifest is at /.well-known/mcp.json.' }, 405, {
+      Allow: 'GET, HEAD, POST, OPTIONS',
     })
   }
 
   if (request.method !== 'POST') {
-    return jsonResponse({ error: 'Method not allowed. Use POST for JSON-RPC or GET for the MCP manifest.' }, 405, { Allow: 'GET, HEAD, POST, OPTIONS' })
+    return jsonResponse({ error: 'Method not allowed. Use POST for JSON-RPC.' }, 405, { Allow: 'GET, HEAD, POST, OPTIONS' })
   }
 
-  let payload: JsonRpcRequest
+  let payload: unknown
   try {
-    payload = (await request.json()) as JsonRpcRequest
+    payload = await request.json()
   } catch {
     return jsonResponse(rpcError(null, -32700, 'Parse error'), 400)
   }
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+    return jsonResponse(rpcError(null, -32600, 'Invalid request'), 400)
+  }
 
-  const result = handleRpc(payload)
+  const result = handleRpc(payload as JsonRpcRequest)
   if (result.body === null) {
     return new Response(null, { status: result.status, headers: CORS_HEADERS })
   }

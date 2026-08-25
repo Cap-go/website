@@ -125,18 +125,37 @@ export function mcpManifest() {
   }
 }
 
-export function prefersMarkdown(request: Request): boolean {
-  const accept = request.headers.get('Accept') || ''
-  if (!/\btext\/(?:x-)?markdown\b/i.test(accept)) return false
-  const lower = accept.toLowerCase()
-  const markdownIndex = lower.search(/text\/(?:x-)?markdown/)
-  const htmlIndex = lower.indexOf('text/html')
-  if (htmlIndex === -1) return true
-  return markdownIndex !== -1 && markdownIndex < htmlIndex
+function mediaQuality(accept: string, typePattern: RegExp): { q: number; index: number } | null {
+  let best: { q: number; index: number } | null = null
+  for (const [index, part] of accept.split(',').entries()) {
+    const [rawType, ...params] = part.trim().split(';')
+    const type = rawType.trim()
+    if (!typePattern.test(type)) continue
+    let q = 1
+    for (const param of params) {
+      const match = param.trim().match(/^q=([0-9.]+)$/i)
+      if (match) q = Number(match[1])
+    }
+    if (Number.isNaN(q)) q = 1
+    if (!best || q > best.q || (q === best.q && index < best.index)) {
+      best = { q, index }
+    }
+  }
+  return best
 }
 
-export function markdownNotFoundResponse(): Response {
-  return new Response(AGENT_NOT_FOUND_MARKDOWN, {
+export function prefersMarkdown(request: Request): boolean {
+  const accept = request.headers.get('Accept') || ''
+  const markdown = mediaQuality(accept, /^text\/(?:x-)?markdown$/i)
+  if (!markdown || markdown.q <= 0) return false
+  const html = mediaQuality(accept, /^text\/html$/i)
+  if (!html || html.q <= 0) return true
+  if (markdown.q !== html.q) return markdown.q > html.q
+  return markdown.index < html.index
+}
+
+export function markdownNotFoundResponse(request?: Request): Response {
+  return new Response(request?.method === 'HEAD' ? null : AGENT_NOT_FOUND_MARKDOWN, {
     status: 404,
     statusText: 'Not Found',
     headers: {
@@ -146,6 +165,13 @@ export function markdownNotFoundResponse(): Response {
       'X-Robots-Tag': 'noindex',
     },
   })
+}
+
+export function stripRewrittenAssetHeaders(headers: Headers): Headers {
+  headers.delete('Content-Length')
+  headers.delete('Content-MD5')
+  headers.delete('ETag')
+  return headers
 }
 
 export function withLlmsWhenToUse(body: string): string {

@@ -21,48 +21,12 @@
   Link: <https://api.capgo.app/>; rel="item"
   Link: <https://capgo.app/api/tools/>; rel="item"
 
-/openapi.json
-  Content-Type: application/openapi+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, HEAD
-  Access-Control-Expose-Headers: Link, ETag
-  Cache-Control: public, max-age=3600
-
-/.well-known/openapi.json
-  Content-Type: application/openapi+json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, HEAD
-  Access-Control-Expose-Headers: Link, ETag
-  Cache-Control: public, max-age=3600
-
 /.well-known/capgo-public-api-openapi.json
   Content-Type: application/openapi+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Methods: GET, HEAD
   Access-Control-Expose-Headers: Link, ETag
   Cache-Control: public, max-age=3600
-
-/mcp.json
-  Content-Type: application/json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, HEAD, POST, OPTIONS
-  Access-Control-Allow-Headers: Content-Type, Accept, MCP-Protocol-Version, Mcp-Session-Id
-  Cache-Control: public, max-age=3600
-
-/.well-known/mcp.json
-  Content-Type: application/json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, HEAD, POST, OPTIONS
-  Access-Control-Allow-Headers: Content-Type, Accept, MCP-Protocol-Version, Mcp-Session-Id
-  Cache-Control: public, max-age=3600
-
-/mcp
-  Content-Type: application/json; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, HEAD, POST, OPTIONS
-  Access-Control-Allow-Headers: Content-Type, Accept, MCP-Protocol-Version, Mcp-Session-Id
-  Cache-Control: no-store
-
 
 /.well-known/capgo-tools-openapi.json
   Content-Type: application/openapi+json; charset=utf-8
