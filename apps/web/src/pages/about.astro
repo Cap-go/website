@@ -17,7 +17,7 @@ const founder = createPersonLdJson('Martin Donadieu', 'https://x.com/martindonad
 
 // Create enhanced organization with all properties as a plain object
 const enhancedOrg: Thing = {
-  ...createCapgoOrganization(config),
+  ...(createCapgoOrganization(config) as Thing),
   founder: founder,
   foundingDate: '2022-12-01',
   numberOfEmployees: {
