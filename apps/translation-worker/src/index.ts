@@ -164,9 +164,10 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-08-12-message-context-fr-elision-length-translate-no-v1'
+const TRANSLATION_CACHE_VERSION = '2026-08-13-message-context-fr-elision-length-translate-no-unquoted-cjk-v1'
 const TRANSLATION_LENGTH_MAX_RATIO = 1.3
 const TRANSLATION_LENGTH_MIN_RATIO = 0.7
+const COMPACT_TRANSLATION_LOCALES = new Set<Locale>(['ja', 'ko', 'zh'])
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
@@ -788,10 +789,17 @@ function collectQuotedAttributes(tag: string): AttributeMatch[] {
   return attributes
 }
 
+function readUnquotedAttributeValue(tag: string, attrName: string): string | null {
+  const normalizedAttr = attrName.toLowerCase()
+  const pattern = new RegExp(`\\b${normalizedAttr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*=\\s*([^\\s>/"']+)`, 'i')
+  const match = pattern.exec(tag)
+  return match?.[1] ?? null
+}
+
 function readAttributeValue(tag: string, attrName: string): string | null {
   const normalizedAttr = attrName.toLowerCase()
   const attribute = collectQuotedAttributes(tag).find((item) => item.name.toLowerCase() === normalizedAttr)
-  return attribute?.value ?? null
+  return attribute?.value ?? readUnquotedAttributeValue(tag, normalizedAttr)
 }
 
 function isSupportedLanguagePath(value: string): boolean {
@@ -1545,20 +1553,22 @@ function shouldEnforceTranslationLength(source: string): boolean {
   return source.trim().length > 0
 }
 
-function translationLengthViolation(source: string, translated: string): boolean {
+function translationLengthViolation(source: string, translated: string, targetLanguage = ''): boolean {
   if (!shouldEnforceTranslationLength(source)) return false
   const sourceLen = source.length
   const translatedLen = translated.length
   if (sourceLen < 12) return translatedLen > sourceLen + 8
-  return translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO || translatedLen < sourceLen * TRANSLATION_LENGTH_MIN_RATIO
+  if (translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO) return true
+  if (COMPACT_TRANSLATION_LOCALES.has(targetLanguage as Locale)) return false
+  return translatedLen < sourceLen * TRANSLATION_LENGTH_MIN_RATIO
 }
 
-function guardTranslationLength(source: string, translated: string): string {
-  return translationLengthViolation(source, translated) ? source : translated
+function guardTranslationLength(source: string, translated: string, targetLanguage = ''): string {
+  return translationLengthViolation(source, translated, targetLanguage) ? source : translated
 }
 
-function guardTranslatedBatchLengths(batch: string[], translated: string[]): string[] {
-  return batch.map((source, index) => guardTranslationLength(source, translated[index] ?? source))
+function guardTranslatedBatchLengths(batch: string[], translated: string[], targetLanguage = ''): string[] {
+  return batch.map((source, index) => guardTranslationLength(source, translated[index] ?? source, targetLanguage))
 }
 
 function assertTranslatedBatch(targetLanguage: string, batch: string[], translated: string[]): void {
@@ -1776,8 +1786,8 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           }
           return polishTranslatedText(targetLanguage, result.text)
         })
-        const guarded = guardTranslatedBatchLengths(batch, restored).map((text, index) => {
-          if (text === batch[index] && translationLengthViolation(batch[index], restored[index])) {
+        const guarded = guardTranslatedBatchLengths(batch, restored, targetLanguage).map((text, index) => {
+          if (text === batch[index] && translationLengthViolation(batch[index], restored[index], targetLanguage)) {
             console.warn('Translation kept source after length bound violation', {
               targetLanguage,
               index,
@@ -1868,7 +1878,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
       const translated = plainTranslationFromUnknown(payload)
       if (translated) {
         const restored = polishTranslatedText(targetLanguage, protectedText.restore(translated))
-        if (translationLengthViolation(text, restored)) {
+        if (translationLengthViolation(text, restored, targetLanguage)) {
           lastError = new Error(`Translation length out of bounds for ${targetLanguage}: ${restored.length} chars vs source ${text.length}`)
         } else {
           return restored

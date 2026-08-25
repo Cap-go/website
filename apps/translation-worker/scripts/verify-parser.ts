@@ -167,6 +167,7 @@ assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('na
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('fr-elision'), 'Cache version was not bumped for French elision polish')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('length-translate-no'), 'Cache version was not bumped for length + translate=no support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('unquoted-cjk'), 'Cache version was not bumped for unquoted attrs + CJK length support')
 assert(
   __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === 'Évitez l\u2019attente. Livrez la correction.',
   'French elision did not fix "la attente"',
@@ -225,12 +226,32 @@ assert(
   'Parser collected translatable attributes from translate=no element',
 )
 
+const unquotedSkipHtml = `<!doctype html><html><body><section translate=no class=notranslate><p>Keep KPI English</p></section><p>Translate this chrome.</p></body></html>`
+const unquotedSkipParsed = __translationWorkerTest.collectSegments(unquotedSkipHtml)
+const unquotedSkipBody = unquotedSkipParsed.segments.filter((segment) => segment.inBody).map((segment) => segment.text)
+assert(
+  unquotedSkipBody.some((text) => text.includes('Translate this chrome')),
+  'Parser did not resume after unquoted translate=no',
+)
+assert(
+  unquotedSkipBody.every((text) => !text.includes('Keep KPI English')),
+  'Parser collected text from unquoted translate=no / notranslate regions',
+)
+
 assert(
   __translationWorkerTest.translationLengthViolation(
     'Deploy updates safely to every device',
     'Deploy updates safely to every device with detailed guidance for all supported environments and release channels',
   ),
   'Length guard did not flag an overlong translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '全デバイスへ安全に配信', 'ja'),
+  'Length guard flagged a valid shorter Japanese translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '모든 기기에 안전하게 배포', 'ko'),
+  'Length guard flagged a valid shorter Korean translation',
 )
 assert(
   __translationWorkerTest.guardTranslatedBatchLengths(
