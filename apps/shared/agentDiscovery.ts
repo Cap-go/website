@@ -153,7 +153,10 @@ export function prefersMarkdown(request: Request): boolean {
   const starStar = mediaQuality(accept, /^\*\/\*$/)
   const competitors = [html, textStar, starStar].filter((item): item is { q: number; index: number } => Boolean(item && item.q > 0))
   if (!competitors.length) return true
-  const best = competitors.reduce((winner, item) => (item.q > winner.q || (item.q === winner.q && item.index < winner.index) ? item : winner))
+  let best = competitors[0]
+  for (const item of competitors) {
+    if (item.q > best.q || (item.q === best.q && item.index < best.index)) best = item
+  }
   if (markdown.q !== best.q) return markdown.q > best.q
   const bestIsWildcard = best === textStar || best === starStar
   if (bestIsWildcard) return true
