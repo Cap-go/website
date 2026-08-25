@@ -268,7 +268,7 @@ export default {
       const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
       if (notFound.ok || notFound.status === 404) {
         const headers = new Headers(notFound.headers)
-        headers.set('Vary', 'Accept')
+        headers.append('Vary', 'Accept')
         return trackAICrawler(
           request,
           new Response(request.method === 'HEAD' ? null : notFound.body, {

@@ -350,7 +350,7 @@ async function brandedNotFoundResponse(request: Request, env: Env, pathname: str
 
   const headers = new Headers(notFound.headers)
   headers.set('Content-Type', 'text/html; charset=utf-8')
-  headers.set('Vary', 'Accept')
+  headers.append('Vary', 'Accept')
   headers.delete('Content-Length')
   return new Response(body, {
     status: 404,
@@ -407,12 +407,18 @@ async function openApiAliasResponse(request: Request, env: Env): Promise<Respons
   })
 }
 
+async function agentSurfaceResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  if (MCP_ENDPOINT_PATHS.has(pathname)) return handleMcpRequest(request)
+  if (MCP_MANIFEST_PATHS.has(pathname)) return handleMcpManifestRequest(request)
+  if (OPENAPI_ALIAS_PATHS.has(pathname)) return openApiAliasResponse(request, env)
+  return null
+}
+
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const pathname = new URL(request.url).pathname
-    if (MCP_ENDPOINT_PATHS.has(pathname)) return trackAICrawler(request, await handleMcpRequest(request), ctx)
-    if (MCP_MANIFEST_PATHS.has(pathname)) return trackAICrawler(request, handleMcpManifestRequest(request), ctx)
-    if (OPENAPI_ALIAS_PATHS.has(pathname)) return trackAICrawler(request, await openApiAliasResponse(request, env), ctx)
+    const agentSurface = await agentSurfaceResponse(request, env, pathname)
+    if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
     const staticRedirect = staticLegacyRedirect(request, pathname)
     if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)
     const toolRouteResponse = await handleToolApiRequest(

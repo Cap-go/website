@@ -20,6 +20,8 @@ test('prefers markdown only when Accept ranks markdown over HTML', () => {
   expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/markdown;q=0' } }))).toBe(false)
   expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/markdown;q=0.1, */*' } }))).toBe(false)
   expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/markdown;q=2' } }))).toBe(false)
+  expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/markdown;q=bogus' } }))).toBe(false)
+  expect(prefersMarkdown(new Request('https://capgo.app/missing', { headers: { Accept: 'text/html;q=0.2, text/markdown;q=0.8, */*;q=1' } }))).toBe(true)
 })
 
 test('markdown 404 HEAD responses have no body', async () => {

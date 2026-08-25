@@ -133,8 +133,14 @@ function mediaQuality(accept: string, typePattern: RegExp): { q: number; index: 
     if (!typePattern.test(type)) continue
     let q = 1
     for (const param of params) {
-      const match = param.trim().match(/^q=([0-9.]+)$/i)
-      if (match) q = Number(match[1])
+      const trimmed = param.trim()
+      if (!/^q=/i.test(trimmed)) continue
+      const match = trimmed.match(/^q=([0-9.]+)$/i)
+      if (!match) {
+        q = Number.NaN
+        break
+      }
+      q = Number(match[1])
     }
     if (Number.isNaN(q) || q < 0 || q > 1) continue
     if (!best || q > best.q || (q === best.q && index < best.index)) {
@@ -151,16 +157,12 @@ export function prefersMarkdown(request: Request): boolean {
   const html = mediaQuality(accept, /^text\/html$/i)
   const textStar = mediaQuality(accept, /^text\/\*$/i)
   const starStar = mediaQuality(accept, /^\*\/\*$/)
-  const competitors = [html, textStar, starStar].filter((item): item is { q: number; index: number } => Boolean(item && item.q > 0))
-  if (!competitors.length) return true
-  let best = competitors[0]
-  for (const item of competitors) {
-    if (item.q > best.q || (item.q === best.q && item.index < best.index)) best = item
-  }
-  if (markdown.q !== best.q) return markdown.q > best.q
-  const bestIsWildcard = best === textStar || best === starStar
-  if (bestIsWildcard) return true
-  return markdown.index < best.index
+  const competitor = html || textStar || starStar
+  if (!competitor || competitor.q <= 0) return true
+  if (markdown.q !== competitor.q) return markdown.q > competitor.q
+  const competitorIsWildcard = competitor === textStar || competitor === starStar
+  if (competitorIsWildcard) return true
+  return markdown.index < competitor.index
 }
 
 export function markdownNotFoundResponse(request?: Request): Response {

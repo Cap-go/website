@@ -44,6 +44,11 @@ test('GET /mcp with text/event-stream;q=0 is not an SSE stream', async () => {
   expect(response.status).toBe(405)
 })
 
+test('GET /mcp with text/event-stream;q=bogus is not an SSE stream', async () => {
+  const response = await handleMcpRequest(new Request('https://capgo.app/mcp', { method: 'GET', headers: { Accept: 'text/event-stream;q=bogus' } }))
+  expect(response.status).toBe(405)
+})
+
 test('GET /.well-known/mcp.json returns the streamable-http manifest', async () => {
   const response = handleMcpManifestRequest(new Request('https://capgo.app/.well-known/mcp.json', { method: 'GET' }))
   expect(response.status).toBe(200)
