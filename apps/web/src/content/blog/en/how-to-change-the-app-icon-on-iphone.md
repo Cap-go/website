@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-31T07:30:18.219Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/how-to-change-the-app-icon-on-iphone.webp
 head_image_alt: >-
   'How to Change the App Icon on iPhone: Customize Your Look' Capgo blog

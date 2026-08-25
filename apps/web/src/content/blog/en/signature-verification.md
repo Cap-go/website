@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-21T09:03:49.909Z
-updated_at: 2026-08-21T09:06:01.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/1daba6cc-c9a6-4ef1-b619-a86539918c39/signature-verification-app-security.jpg'
 head_image_alt: 'Signature Verification: Securing App Updates in 2026'
 keywords: 'signature verification, code signing, app security, Capacitor updates, key management'

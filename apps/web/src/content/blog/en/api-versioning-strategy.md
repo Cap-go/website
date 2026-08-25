@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-04T07:46:12.555Z
-updated_at: 2026-08-04T07:48:19.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/f4d68ff8-3865-4e6b-a68c-b2d99aaaf2f2/api-versioning-strategy-title-slide.jpg'
 head_image_alt: 'API Versioning Strategy: A Complete Decision Guide'
 keywords: 'api versioning, api versioning strategy, semver api, rest api, mobile api'

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-08-06T00:00:00.000Z
-updated_at: 2026-08-07T15:54:15.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /github_actions.webp
 head_image_alt: "Automate Capgo Live Updates from Lovable with GitHub Actions Capgo blog illustration"
 keywords: Lovable, Lovable.dev, Capgo, GitHub Actions, live updates, OTA, CI/CD, CAPGO_TOKEN, bundle upload, Capacitor

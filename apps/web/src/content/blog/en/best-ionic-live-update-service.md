@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-16T21:45:36.000Z
-updated_at: 2026-08-16T22:02:38.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /capgo_banner.png
 head_image_alt: Secure differential Ionic live update deployment workflow
 keywords: ''

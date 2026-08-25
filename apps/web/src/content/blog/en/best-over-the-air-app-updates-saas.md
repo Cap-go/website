@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-22T21:45:38.000Z
-updated_at: 2026-08-22T22:02:35.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /capgo_banner.png
 head_image_alt: Capacitor OTA update security and platform fit review
 keywords: ''

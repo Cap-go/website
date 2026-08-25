@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-16T08:21:18.437Z
-updated_at: 2026-07-30T23:40:43.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/what-is-edge-network.webp
 head_image_alt: '''What Is Edge Network: A 2026 Guide to Faster Apps'' Capgo blog illustration'
 keywords: 'what is edge network, edge network, edge computing, cdn vs edge, low latency'

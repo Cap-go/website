@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-21T06:51:25.623Z
-updated_at: 2026-07-30T23:40:43.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/cross-platform-messaging-apps.webp
 head_image_alt: 10 Best Cross Platform Messaging Apps for 2026 Capgo blog illustration
 keywords: >-

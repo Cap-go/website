@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-06T07:14:58.916Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/application-release-notes.webp
 head_image_alt: '''Application Release Notes: A Complete Guide for 2026'' Capgo blog illustration'
 keywords: >-

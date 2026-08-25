@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-24T09:52:54.713Z
-updated_at: 2026-07-24T09:55:11.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/60aba5c6-0767-41fe-81df-0c675421bc7d/developer-experience-mobile-teams.jpg'
 head_image_alt: 'Developer Experience: The 2026 Guide to Faster Mobile Teams'
 keywords: 'developer experience, DX metrics, Capacitor, live updates, mobile CI/CD'

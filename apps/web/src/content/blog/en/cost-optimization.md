@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-12T10:03:56.072Z
-updated_at: 2026-08-12T10:06:07.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/84b93626-fd27-44cd-8a4d-cfb29b690ee1/cost-optimization-mobile-teams.jpg'
 head_image_alt: 'Cost Optimization: Key Strategies for Mobile Teams in 2026'
 keywords: 'cost optimization, mobile devops, Capacitor updates, release costs, FinOps mobile'

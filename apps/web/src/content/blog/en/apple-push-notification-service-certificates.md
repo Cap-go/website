@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-22T09:44:19.530Z
-updated_at: 2026-08-22T09:46:47.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/4d4a5cf8-925c-4588-9878-cdd6a8765cf6/apple-push-notification-service-certificates-title-card.jpg'
 head_image_alt: How to Manage Apple Push Notification Service Certificates
 keywords: 'apple push notifications, APNs certificates, iOS push, Capacitor push, mobile dev'

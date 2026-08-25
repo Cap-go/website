@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-15T09:40:07.249Z
-updated_at: 2026-08-15T09:42:18.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/855a9d51-33bd-46c7-8a79-1202539ea3b3/app-health-check-javascript-guide.jpg'
 head_image_alt: 'App Health Check: The 2026 Playbook for JavaScript Apps'
 keywords: 'app health check, capacitor, electron, live updates, ci monitoring'

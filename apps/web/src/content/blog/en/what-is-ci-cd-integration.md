@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-29T09:16:25.910Z
-updated_at: 2026-07-29T09:18:35.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/677bc8e2-34c4-40ad-ba42-a826460baade/what-is-ci-cd-integration-text-graphic.jpg'
 head_image_alt: 'What Is CI CD Integration: A Guide to Faster Releases'
 keywords: 'ci cd integration, ci cd pipeline, cicd tools, live updates, capacitor'

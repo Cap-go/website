@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-05T08:20:11.919Z
-updated_at: 2026-08-05T08:22:27.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/383f30b8-36c2-49fb-ac59-8531c4030f24/quality-assurance-process-mobile-releases.jpg'
 head_image_alt: 'Quality Assurance Process: Safer Mobile Releases'
 keywords: 'quality assurance process, mobile app testing, CI/CD pipeline, Capacitor updates, release management'
