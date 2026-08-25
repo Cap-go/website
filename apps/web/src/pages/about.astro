@@ -5,6 +5,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
 import { createLdJsonGraph, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { pluginCountLabel } from '@/config/plugins'
+import { CAPGO_POSTAL_ADDRESS } from '../../../shared/agentDiscovery'
 import type { Thing } from 'schema-dts'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.about_capgo({}, { locale: Astro.locals.locale })].join(' | ')
@@ -30,10 +31,15 @@ const enhancedOrg: Thing = {
   },
   sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
   description: config.blog_description,
+  legalName: 'Digital Shift OÜ',
+  email: 'support@capgo.app',
+  address: CAPGO_POSTAL_ADDRESS,
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'technical support',
     email: 'support@capgo.app',
+    url: `${config.baseUrl}/contact/`,
+    availableLanguage: ['English'],
   },
   founder: founder,
   foundingDate: '2022-12-01',
@@ -200,18 +206,18 @@ const timeline = [
           <div class="mt-8 flex flex-col gap-3">
             <HumanSupport tone="light" size="sm" align="start" />
             <div class="flex flex-col gap-3 sm:flex-row">
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              {m.start_now({}, { locale: Astro.locals.locale })}
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
-              class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              Read the docs
-            </a>
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                {m.start_now({}, { locale: Astro.locals.locale })}
+              </a>
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
+                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                Read the docs
+              </a>
             </div>
           </div>
         </div>
@@ -345,18 +351,18 @@ const timeline = [
           <div class="mt-8 flex flex-col gap-3">
             <HumanSupport tone="light" size="sm" align="start" />
             <div class="flex flex-col gap-3 sm:flex-row">
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              {m.start_now({}, { locale: Astro.locals.locale })}
-            </a>
-            <a
-              href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
-              class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              Read the full story
-            </a>
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                {m.start_now({}, { locale: Astro.locals.locale })}
+              </a>
+              <a
+                href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
+                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                Read the full story
+              </a>
             </div>
           </div>
         </div>

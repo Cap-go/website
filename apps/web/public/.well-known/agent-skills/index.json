@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "Use Capgo's public API docs and API-key authentication model to manage organizations, apps, channels, devices, bundles, statistics, and API keys.",
       "url": "/.well-known/agent-skills/capgo-public-api/SKILL.md",
-      "digest": "sha256:f416f263f297768ab6559ea258492547b97204e2b3212b401b9a60dbb988c4f2"
+      "digest": "sha256:90a17bf3e302532a455fdfff86ce156b6fb0c15be4e807f034a5d664bb9fc712"
     },
     {
       "name": "capgo-mobile-signing-tools",
@@ -20,14 +20,14 @@
       "type": "skill-md",
       "description": "Run the local Capgo CLI MCP server with bunx so agents can manage live updates, channels, bundles, stats, apps, and native builds.",
       "url": "/.well-known/agent-skills/capgo-cli-mcp/SKILL.md",
-      "digest": "sha256:e1c0aaa429f632690f6d8485b77a827518014a1b4b589c307b16695c78508756"
+      "digest": "sha256:d96a03315dbbd254c2e700c3077a1a4cb4380916f85c83fe6c7d4b44e5a2b839"
     },
     {
       "name": "capgo-site-routing",
       "type": "skill-md",
       "description": "Route developers to the right Capgo landing pages for pricing, native builds, signing tools, API docs, AI skills, and enterprise workflows.",
       "url": "/.well-known/agent-skills/capgo-site-routing/SKILL.md",
-      "digest": "sha256:4ee6bbca584fe7e15c96a003ef2181bbd660a5c1e47f3c5e810cfc9cee14771e"
+      "digest": "sha256:129f7f428b4ed19c4a8df187e46e6d6fe9fcae67b16b1d7d9614077a43b564dd"
     }
   ]
 }

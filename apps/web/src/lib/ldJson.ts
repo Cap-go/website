@@ -15,6 +15,7 @@ import type {
   WebSite,
   WithContext,
 } from 'schema-dts'
+import { CAPGO_POSTAL_ADDRESS } from '../../../shared/agentDiscovery'
 
 // Re-export schema-dts types for external use
 export type { BreadcrumbList, FAQPage, Graph, ItemList, NewsArticle, Organization, Person, Product, Service, SoftwareApplication, Thing, WebPage, WebSite, WithContext }
@@ -53,6 +54,8 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
     '@type': 'Organization',
     '@id': `${config.baseUrl}/#organization`,
     name: 'Capgo',
+    legalName: 'Digital Shift OÜ',
+    alternateName: ['Capgo.app', 'Capgo Live Updates'],
     url: config.baseUrl,
     logo: {
       '@type': 'ImageObject',
@@ -63,10 +66,14 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
     },
     sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
     description: config.blog_description,
+    email: 'support@capgo.app',
+    address: CAPGO_POSTAL_ADDRESS,
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'technical support',
       email: 'support@capgo.app',
+      url: `${config.baseUrl}/contact/`,
+      availableLanguage: ['English'],
     },
   }
 }

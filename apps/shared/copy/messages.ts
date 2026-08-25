@@ -797,6 +797,8 @@ const messages = {
   consulting_faq_a10: 'Book a free discovery call, send us an email, or reach out on Discord. You can also email <a href="mailto:sales@capgo.app">sales@capgo.app</a>.',
   contact: 'Contact',
   contact_link: 'By visiting this page on the website:',
+  contact_page_description:
+    'Contact Capgo support, sales, and the Digital Shift OÜ office in Tallinn. Find email, chat, documentation, the public API, and the company address used by agents verifying the business.',
   contact_sales: 'Contact Sales',
   contact_support: 'Contact support',
   contact_us: 'Contact Us',

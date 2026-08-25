@@ -1,6 +1,17 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import {
+  LLMS_TXT_PATHS,
+  MCP_ENDPOINT_PATHS,
+  MCP_MANIFEST_PATHS,
+  OPENAPI_ALIAS_PATHS,
+  OPENAPI_ASSET_PATH,
+  markdownNotFoundResponse,
+  prefersMarkdown,
+  withLlmsWhenToUse,
+} from '../../../shared/agentDiscovery'
 import { resolveLegacyPathRedirect } from '../../../shared/legacyPathRedirects'
 import { handleToolApiRequest } from '../lib/tools/api'
+import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
 
@@ -165,7 +176,12 @@ type LinkDefinition = {
   type?: string
 }
 
-const HOMEPAGE_LINK_HEADERS: LinkDefinition[] = [{ href: '/docs/public-api/', rel: 'service-doc', type: 'text/html' }]
+const HOMEPAGE_LINK_HEADERS: LinkDefinition[] = [
+  { href: '/docs/public-api/', rel: 'service-doc', type: 'text/html' },
+  { href: '/openapi.json', rel: 'service-desc', type: 'application/openapi+json' },
+  { href: '/.well-known/mcp.json', rel: 'describedby', type: 'application/json' },
+  { href: '/llms.txt', rel: 'describedby', type: 'text/plain' },
+]
 
 const GLOBAL_CSS_PATH = '/_astro/global.css'
 const LEGACY_GLOBAL_CSS_PATH_PATTERN = /^\/_astro\/global\.[A-Za-z0-9_-]+\.css$/
@@ -326,6 +342,8 @@ function shouldServeBrandedNotFound(pathname: string): boolean {
 }
 
 async function brandedNotFoundResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  if (prefersMarkdown(request)) return markdownNotFoundResponse()
+
   const { localePrefix } = splitLocalePath(pathname)
   const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
   if (!(notFound.ok || notFound.status === 404)) return null
@@ -341,6 +359,7 @@ async function brandedNotFoundResponse(request: Request, env: Env, pathname: str
 
   const headers = new Headers(notFound.headers)
   headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.set('Vary', 'Accept')
   headers.delete('Content-Length')
   return new Response(body, {
     status: 404,
@@ -383,9 +402,42 @@ async function notFoundLegacyRedirect(request: Request, env: Env, pathname: stri
   return null
 }
 
+async function openApiAliasResponse(request: Request, env: Env): Promise<Response> {
+  const asset = await env.ASSETS.fetch(new Request(new URL(OPENAPI_ASSET_PATH, request.url), request))
+  const headers = new Headers(asset.headers)
+  headers.set('Content-Type', 'application/openapi+json; charset=utf-8')
+  headers.set('Access-Control-Allow-Origin', '*')
+  headers.set('Access-Control-Allow-Methods', 'GET, HEAD')
+  headers.set('Cache-Control', 'public, max-age=3600')
+  return new Response(request.method === 'HEAD' ? null : asset.body, {
+    status: asset.status,
+    statusText: asset.statusText,
+    headers,
+  })
+}
+
+async function llmsTxtResponse(request: Request, env: Env): Promise<Response | null> {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return null
+  const asset = await env.ASSETS.fetch(request)
+  if (!asset.ok) return null
+  if (request.method === 'HEAD') return asset
+  const body = withLlmsWhenToUse(await asset.text())
+  const headers = new Headers(asset.headers)
+  headers.set('Content-Type', 'text/plain; charset=utf-8')
+  headers.set('Cache-Control', 'public, max-age=3600')
+  return new Response(body, { status: 200, headers })
+}
+
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const pathname = new URL(request.url).pathname
+    if (MCP_ENDPOINT_PATHS.has(pathname)) return trackAICrawler(request, await handleMcpRequest(request), ctx)
+    if (MCP_MANIFEST_PATHS.has(pathname)) return trackAICrawler(request, handleMcpManifestRequest(request), ctx)
+    if (OPENAPI_ALIAS_PATHS.has(pathname)) return trackAICrawler(request, await openApiAliasResponse(request, env), ctx)
+    if (LLMS_TXT_PATHS.has(pathname)) {
+      const llmsResponse = await llmsTxtResponse(request, env)
+      if (llmsResponse) return trackAICrawler(request, llmsResponse, ctx)
+    }
     const staticRedirect = staticLegacyRedirect(request, pathname)
     if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)
     const toolRouteResponse = await handleToolApiRequest(

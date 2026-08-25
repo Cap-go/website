@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { LLMS_TXT_PATHS, markdownNotFoundResponse, prefersMarkdown, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
 
 interface Env {
   ASSETS: {
@@ -246,23 +247,34 @@ export default {
     // Kept in code so CF never classifies later static _redirects as dynamic.
     if (pathname.startsWith('/docs/plugin/')) {
       const rest = pathname.slice('/docs/plugin/'.length)
-      return trackAICrawler(
-        request,
-        Response.redirect(new URL(`/docs/plugins/updater/${rest}${url.search}`, request.url).toString(), 301),
-        ctx,
-      )
+      return trackAICrawler(request, Response.redirect(new URL(`/docs/plugins/updater/${rest}${url.search}`, request.url).toString(), 301), ctx)
+    }
+    if (LLMS_TXT_PATHS.has(pathname) && (request.method === 'GET' || request.method === 'HEAD')) {
+      const llms = await env.ASSETS.fetch(request)
+      if (llms.ok) {
+        if (request.method === 'HEAD') return trackAICrawler(request, llms, ctx)
+        const body = withLlmsWhenToUse(await llms.text())
+        const headers = new Headers(llms.headers)
+        headers.set('Content-Type', 'text/plain; charset=utf-8')
+        return trackAICrawler(request, new Response(body, { status: 200, headers }), ctx)
+      }
     }
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
+    if (response.status === 404 && prefersMarkdown(request)) {
+      return trackAICrawler(request, markdownNotFoundResponse(), ctx)
+    }
     if (response.status === 404 && shouldServeBrandedNotFound(pathname)) {
       const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
       if (notFound.ok || notFound.status === 404) {
+        const headers = new Headers(notFound.headers)
+        headers.set('Vary', 'Accept')
         return trackAICrawler(
           request,
           new Response(request.method === 'HEAD' ? null : notFound.body, {
             status: 404,
             statusText: 'Not Found',
-            headers: notFound.headers,
+            headers,
           }),
           ctx,
         )

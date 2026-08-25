@@ -9,6 +9,7 @@ const description = m.page_not_found_description({}, { locale })
 const homeHref = getRelativeLocaleUrl(locale, '/')
 const docsHref = getRelativeLocaleUrl(locale, 'docs')
 const pluginsHref = getRelativeLocaleUrl(locale, 'plugins')
+const contactHref = getRelativeLocaleUrl(locale, 'contact')
 ---
 
 <Layout content={{ title, description, robots: 'noindex, follow' }}>
@@ -31,7 +32,20 @@ const pluginsHref = getRelativeLocaleUrl(locale, 'plugins')
         <a href={pluginsHref} class="rounded-md px-5 py-2.5 text-sm font-semibold text-gray-200 ring-1 ring-white/15 hover:bg-white/5">
           {m.plugins({}, { locale })}
         </a>
+        <a href={contactHref} class="rounded-md px-5 py-2.5 text-sm font-semibold text-gray-200 ring-1 ring-white/15 hover:bg-white/5">
+          {m.contact({}, { locale })}
+        </a>
       </div>
+      <nav class="mt-12 text-left text-sm leading-7 text-gray-300" aria-label="Agent recovery links">
+        <p class="font-semibold text-white">If you are an agent, continue from:</p>
+        <ul class="mt-3 list-disc space-y-1 pl-5">
+          <li><a class="text-blue-300 underline" href="/llms.txt">llms.txt</a></li>
+          <li><a class="text-blue-300 underline" href="/openapi.json">openapi.json</a></li>
+          <li><a class="text-blue-300 underline" href="/sitemap-index.xml">sitemap-index.xml</a></li>
+          <li><a class="text-blue-300 underline" href="/docs/">Documentation index</a></li>
+          <li><a class="text-blue-300 underline" href="/.well-known/mcp.json">MCP manifest</a></li>
+        </ul>
+      </nav>
     </div>
   </section>
 </Layout>
