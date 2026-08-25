@@ -1,31 +1,37 @@
 ---
 name: capgo-cli-mcp
-description: Run the local Capgo CLI MCP server with bunx so agents can manage live updates, channels, bundles, stats, apps, and native builds.
+description: Use the remote Capgo Streamable HTTP MCP server for docs discovery, or run the local Capgo CLI MCP server with npx to manage live updates, channels, bundles, stats, apps, and native builds.
 ---
 
 # Capgo CLI MCP
 
-Use this skill when an agent needs direct Capgo operations instead of only reading docs.
+Use this skill when an agent needs Capgo operations instead of only reading HTML docs.
 
-## Start the server
+## Remote Streamable HTTP server
 
-```bash
-bunx @capgo/cli@7.93.1 mcp
+```text
+https://capgo.app/mcp
 ```
 
-## Authentication
+Manifest: https://capgo.app/.well-known/mcp.json
 
-Authenticate with a Capgo API key before starting the server or configure the key in the MCP client runtime.
+The remote server is unauthenticated and exposes discovery tools: when to use Capgo, OpenAPI location, and docs links.
+
+## Local authenticated server
 
 ```bash
-bunx @capgo/cli@7.93.1 login
+npx @capgo/cli@latest mcp
 ```
 
-API keys are available from:
+Authenticate with a Capgo API key before starting the local server:
 
-- https://console.capgo.app/dashboard/apikeys/
+```bash
+npx @capgo/cli@latest login
+```
 
-## What the server exposes
+API keys: https://console.capgo.app/settings/organization/api-keys
+
+## What the local server exposes
 
 - App management
 - Bundle uploads and cleanup
@@ -37,6 +43,7 @@ API keys are available from:
 
 ## Working rules
 
-- Treat the Capgo MCP server as a local `stdio` server, not a remote HTTP endpoint.
-- Prefer `bunx` in Capgo environments.
+- Use `https://capgo.app/mcp` for docs, OpenAPI, and when-to-use questions.
+- Use the local `npx @capgo/cli@latest mcp` stdio server for authenticated account mutations.
+- Prefer `npx @capgo/cli@latest` in customer-facing command examples.
 - Use the published Capgo API docs when you need field-level details the MCP tool description does not include.

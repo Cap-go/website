@@ -15,6 +15,7 @@ import type {
   WebSite,
   WithContext,
 } from 'schema-dts'
+import { CAPGO_LEGAL_NAME, CAPGO_POSTAL_ADDRESS } from '../../../shared/agentDiscovery'
 
 // Re-export schema-dts types for external use
 export type { BreadcrumbList, FAQPage, Graph, ItemList, NewsArticle, Organization, Person, Product, Service, SoftwareApplication, Thing, WebPage, WebSite, WithContext }
@@ -53,6 +54,8 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
     '@type': 'Organization',
     '@id': `${config.baseUrl}/#organization`,
     name: 'Capgo',
+    legalName: CAPGO_LEGAL_NAME,
+    alternateName: ['Capgo.app', 'Capgo Live Updates'],
     url: config.baseUrl,
     logo: {
       '@type': 'ImageObject',
@@ -63,12 +66,38 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
     },
     sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
     description: config.blog_description,
+    email: 'support@capgo.app',
+    address: CAPGO_POSTAL_ADDRESS,
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'technical support',
       email: 'support@capgo.app',
+      url: `${config.baseUrl}/contact/`,
+      availableLanguage: ['English'],
     },
   }
+}
+
+export function createAboutOrganization(config: RuntimeConfig['public'], founder: Person): Thing {
+  return Object.assign(createCapgoOrganization(config), {
+    founder,
+    foundingDate: '2022-12-01',
+    numberOfEmployees: {
+      '@type': 'QuantitativeValue',
+      minValue: 1,
+      maxValue: 10,
+    },
+    location: {
+      '@type': 'Place',
+      name: 'Madeira, Portugal',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '32.6669',
+        longitude: '-16.9241',
+      },
+    },
+    knowsAbout: ['Capacitor Development', 'Mobile App Updates', 'Over-the-Air Updates', 'JavaScript', 'TypeScript', 'iOS Development', 'Android Development'],
+  }) as unknown as Thing
 }
 
 /**
@@ -331,6 +360,7 @@ export function createWebSiteLdJson(
   options?: {
     hasSearchAction?: boolean
     searchUrl?: string
+    inLanguage?: string
   },
 ): WebSite {
   const schema: WebSite = {
@@ -339,7 +369,7 @@ export function createWebSiteLdJson(
     url: config.baseUrl,
     name: config.brand,
     description: config.blog_description,
-    inLanguage: 'en',
+    inLanguage: options?.inLanguage || 'en',
   }
 
   if (options?.hasSearchAction && options.searchUrl) {

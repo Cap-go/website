@@ -23,11 +23,11 @@ const locale = Astro.locals.locale
   <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
     <!-- Header -->
     <div class="mx-auto mb-16 max-w-2xl text-center">
-      <h2 class="text-sm leading-7 font-semibold tracking-wide text-[#44BCFF] uppercase">{m.problem_solution_badge({}, { locale })}</h2>
-      <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-5xl">
+      <p class="text-sm leading-7 font-semibold tracking-wide text-[#44BCFF] uppercase">{m.problem_solution_badge({}, { locale })}</p>
+      <h2 class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-5xl">
         {m.problem_solution_title({}, { locale })}<br />
         <span class="underline decoration-[#44BCFF] underline-offset-4">{m.problem_solution_velocity({}, { locale })}</span>
-      </p>
+      </h2>
       <p class="mt-6 text-lg leading-8 text-gray-400">
         {m.problem_solution_subtitle({}, { locale })}
       </p>

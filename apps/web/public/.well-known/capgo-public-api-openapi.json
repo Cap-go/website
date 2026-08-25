@@ -3,7 +3,7 @@
   "info": {
     "title": "Capgo Public API",
     "summary": "REST API for managing Capgo organizations, apps, live update channels, bundles, devices, analytics, and API keys.",
-    "description": "Use this API to automate Capgo Cloud instead of clicking through the dashboard. Authenticate every request by sending a raw Capgo API key in the `authorization` header. Do not prepend `Bearer` unless the published Capgo docs change. Standard accounts are limited to 100 requests per minute and enterprise accounts are limited to 1000 requests per minute. Capgo's public API currently uses API-key authentication rather than OAuth or OIDC discovery metadata.",
+    "description": "Use this API to automate Capgo Cloud instead of clicking through the dashboard. Authenticate every request by sending a Capgo API key in the `x-api-key` header. The legacy `authorization` header (raw key, no Bearer prefix) is still accepted. Standard accounts are limited to 100 requests per minute and enterprise accounts are limited to 1000 requests per minute. Capgo's public API currently uses API-key authentication rather than OAuth or OIDC discovery metadata.",
     "version": "1.0.0"
   },
   "servers": [
@@ -58,7 +58,9 @@
   "paths": {
     "/organization/": {
       "get": {
-        "tags": ["organizations"],
+        "tags": [
+          "organizations"
+        ],
         "operationId": "getOrganizations",
         "summary": "List accessible organizations or fetch one organization by `orgId`.",
         "parameters": [
@@ -101,10 +103,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "List organizations the API key can access, or fetch one organization when `orgId` is provided. Use this to resolve the org scope before creating apps or inviting members."
       },
       "post": {
-        "tags": ["organizations"],
+        "tags": [
+          "organizations"
+        ],
         "operationId": "createOrganization",
         "summary": "Create a new organization.",
         "requestBody": {
@@ -143,10 +148,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Create a new organization owned by the authenticated account. Requires a name and returns a status payload when the organization is stored."
       },
       "put": {
-        "tags": ["organizations"],
+        "tags": [
+          "organizations"
+        ],
         "operationId": "updateOrganization",
         "summary": "Update an organization. Admin access is required.",
         "requestBody": {
@@ -185,10 +193,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Update organization metadata such as name or settings. Admin access on the target organization is required."
       },
       "delete": {
-        "tags": ["organizations"],
+        "tags": [
+          "organizations"
+        ],
         "operationId": "deleteOrganization",
         "summary": "Delete an organization by query parameter.",
         "parameters": [
@@ -224,12 +235,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Permanently delete an organization identified by query parameter. This removes the org and is not reversible."
       }
     },
     "/organization/members/": {
       "get": {
-        "tags": ["members"],
+        "tags": [
+          "members"
+        ],
         "operationId": "listOrganizationMembers",
         "summary": "List members for one organization.",
         "parameters": [
@@ -265,10 +279,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "List members, roles, and invitations for one organization. Pass the organization identifier expected by the members resource."
       },
       "post": {
-        "tags": ["members"],
+        "tags": [
+          "members"
+        ],
         "operationId": "upsertOrganizationMember",
         "summary": "Invite a member or update an existing member role.",
         "requestBody": {
@@ -307,10 +324,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Invite a user to an organization or change an existing member role. Use this instead of separate invite and update endpoints."
       },
       "delete": {
-        "tags": ["members"],
+        "tags": [
+          "members"
+        ],
         "operationId": "deleteOrganizationMember",
         "summary": "Remove a member from an organization.",
         "requestBody": {
@@ -349,12 +369,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Remove a member from an organization so they lose dashboard and API access scoped through that membership."
       }
     },
     "/app/": {
       "get": {
-        "tags": ["apps"],
+        "tags": [
+          "apps"
+        ],
         "operationId": "listApps",
         "summary": "List apps visible to the API key.",
         "parameters": [
@@ -396,10 +419,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "List Capacitor apps visible to the API key, optionally filtered by organization. Use this to discover `app_id` values for later channel, bundle, and device calls."
       },
       "post": {
-        "tags": ["apps"],
+        "tags": [
+          "apps"
+        ],
         "operationId": "createApp",
         "summary": "Create a new Capgo app.",
         "requestBody": {
@@ -438,12 +464,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Register a new Capgo app under an organization. The `app_id` you send becomes the stable identifier used by the updater plugin and later API routes."
       }
     },
     "/app/{appId}": {
       "get": {
-        "tags": ["apps"],
+        "tags": [
+          "apps"
+        ],
         "operationId": "getApp",
         "summary": "Fetch one app by app identifier.",
         "parameters": [
@@ -474,10 +503,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Fetch one app by `appId`, including settings needed to confirm the app exists before uploading bundles or changing channels."
       },
       "put": {
-        "tags": ["apps"],
+        "tags": [
+          "apps"
+        ],
         "operationId": "updateApp",
         "summary": "Update one app by app identifier.",
         "parameters": [
@@ -521,10 +553,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Update app settings such as name or configuration for a single `appId`. Does not upload a new live-update bundle."
       },
       "delete": {
-        "tags": ["apps"],
+        "tags": [
+          "apps"
+        ],
         "operationId": "deleteApp",
         "summary": "Delete one app by app identifier.",
         "parameters": [
@@ -555,12 +590,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Delete one app and its associated Capgo resources. Use with caution; this is not a channel rollback."
       }
     },
     "/apikey/": {
       "get": {
-        "tags": ["api-keys"],
+        "tags": [
+          "api-keys"
+        ],
         "operationId": "listApiKeys",
         "summary": "List API keys available to the authenticated account.",
         "responses": {
@@ -586,10 +624,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "List API keys available to the authenticated account so an agent can see existing key names without revealing secret material."
       },
       "post": {
-        "tags": ["api-keys"],
+        "tags": [
+          "api-keys"
+        ],
         "operationId": "createApiKey",
         "summary": "Create a new API key.",
         "requestBody": {
@@ -628,12 +669,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Create a new API key with a selected permission mode (`read`, `upload`, `write`, or `all`). The secret is returned once at creation time."
       }
     },
     "/apikey/{id}/": {
       "delete": {
-        "tags": ["api-keys"],
+        "tags": [
+          "api-keys"
+        ],
         "operationId": "deleteApiKey",
         "summary": "Delete an API key by numeric identifier.",
         "parameters": [
@@ -669,12 +713,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Revoke an API key by numeric identifier. After deletion, requests using that key receive 401."
       }
     },
     "/channel/": {
       "get": {
-        "tags": ["channels"],
+        "tags": [
+          "channels"
+        ],
         "operationId": "listChannels",
         "summary": "List channels for one app.",
         "parameters": [
@@ -721,10 +768,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "List live-update channels for one app, including the current bundle assignment and rollout flags."
       },
       "post": {
-        "tags": ["channels"],
+        "tags": [
+          "channels"
+        ],
         "operationId": "upsertChannel",
         "summary": "Create or update a channel configuration.",
         "requestBody": {
@@ -763,10 +813,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Create or update a channel configuration: default bundle, public/private access, disable auto-update, and rollout policy."
       },
       "delete": {
-        "tags": ["channels"],
+        "tags": [
+          "channels"
+        ],
         "operationId": "deleteChannel",
         "summary": "Delete one channel.",
         "requestBody": {
@@ -805,12 +858,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Delete one channel from an app. Devices on that channel fall back according to app defaults after deletion."
       }
     },
     "/device/": {
       "get": {
-        "tags": ["devices"],
+        "tags": [
+          "devices"
+        ],
         "operationId": "getDevices",
         "summary": "List devices for one app or fetch one device by `device_id`.",
         "parameters": [
@@ -872,10 +928,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "List devices for one app or fetch a single device by `device_id`, including the current bundle and channel override."
       },
       "post": {
-        "tags": ["devices"],
+        "tags": [
+          "devices"
+        ],
         "operationId": "linkDevice",
         "summary": "Link a device to a channel or bundle override.",
         "requestBody": {
@@ -914,10 +973,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Assign a device to a specific channel or bundle override so that device stops following the default channel."
       },
       "delete": {
-        "tags": ["devices"],
+        "tags": [
+          "devices"
+        ],
         "operationId": "deleteDeviceOverride",
         "summary": "Remove a device-specific override so the device falls back to channel defaults.",
         "requestBody": {
@@ -956,12 +1018,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Remove a device-specific channel or bundle override so the device follows the app default channel again."
       }
     },
     "/bundle/": {
       "get": {
-        "tags": ["bundles"],
+        "tags": [
+          "bundles"
+        ],
         "operationId": "listBundles",
         "summary": "List bundles for one app.",
         "parameters": [
@@ -1000,10 +1065,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "List uploaded live-update bundles for one app, including versions, checksums, and metadata."
       },
       "post": {
-        "tags": ["bundles"],
+        "tags": [
+          "bundles"
+        ],
         "operationId": "createBundle",
         "summary": "Register a new bundle using an externally hosted zip URL and checksum.",
         "requestBody": {
@@ -1042,10 +1110,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Register a new bundle from an externally hosted zip URL plus checksum. This does not by itself make the bundle live on a channel."
       },
       "put": {
-        "tags": ["bundles"],
+        "tags": [
+          "bundles"
+        ],
         "operationId": "setBundleChannel",
         "summary": "Attach a bundle to a channel.",
         "requestBody": {
@@ -1084,10 +1155,13 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Attach an existing bundle to a channel so devices on that channel download it on the next update check."
       },
       "delete": {
-        "tags": ["bundles"],
+        "tags": [
+          "bundles"
+        ],
         "operationId": "deleteBundle",
         "summary": "Delete one bundle or all bundles for an app.",
         "requestBody": {
@@ -1126,12 +1200,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Delete one bundle or all bundles for an app. Bundles still assigned to a channel should be unassigned first."
       }
     },
     "/bundle/metadata": {
       "post": {
-        "tags": ["bundles"],
+        "tags": [
+          "bundles"
+        ],
         "operationId": "updateBundleMetadata",
         "summary": "Update bundle metadata such as release link or comment.",
         "requestBody": {
@@ -1170,12 +1247,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Update bundle metadata such as an external release link or comment without changing the zip bytes."
       }
     },
     "/statistics/app/{appId}/": {
       "get": {
-        "tags": ["statistics"],
+        "tags": [
+          "statistics"
+        ],
         "operationId": "getAppStatistics",
         "summary": "Get time-series statistics for one app.",
         "parameters": [
@@ -1218,12 +1298,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Get time-series MAU, bandwidth, or storage statistics for one app. Use query parameters documented on the path for the range."
       }
     },
     "/statistics/app/{appId}/bundle_usage": {
       "get": {
-        "tags": ["statistics"],
+        "tags": [
+          "statistics"
+        ],
         "operationId": "getAppBundleUsage",
         "summary": "Get bundle usage distribution for one app.",
         "parameters": [
@@ -1263,12 +1346,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Get bundle usage distribution for one app as labels and datasets suitable for charts."
       }
     },
     "/statistics/org/{orgId}/": {
       "get": {
-        "tags": ["statistics"],
+        "tags": [
+          "statistics"
+        ],
         "operationId": "getOrganizationStatistics",
         "summary": "Get organization-level time-series statistics.",
         "parameters": [
@@ -1327,12 +1413,15 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Get organization-level time-series statistics across apps the API key can access in that org."
       }
     },
     "/statistics/user/": {
       "get": {
-        "tags": ["statistics"],
+        "tags": [
+          "statistics"
+        ],
         "operationId": "getUserStatistics",
         "summary": "Get aggregated statistics across organizations visible to the API key.",
         "parameters": [
@@ -1372,7 +1461,8 @@
           "500": {
             "$ref": "#/components/responses/InternalError"
           }
-        }
+        },
+        "description": "Get aggregated statistics across organizations visible to the API key, useful for account-wide dashboards."
       }
     }
   },
@@ -1381,8 +1471,14 @@
       "CapgoApiKeyAuth": {
         "type": "apiKey",
         "in": "header",
+        "name": "x-api-key",
+        "description": "Send the raw Capgo API key in the `x-api-key` header. Generate or rotate keys at https://console.capgo.app/settings/organization/api-keys."
+      },
+      "CapgoLegacyAuthorization": {
+        "type": "apiKey",
+        "in": "header",
         "name": "authorization",
-        "description": "Send the raw Capgo API key in the `authorization` header. Generate or rotate keys at https://console.capgo.app/dashboard/apikeys/."
+        "description": "Legacy raw API key in the `authorization` header without a Bearer prefix. Prefer `x-api-key`."
       }
     },
     "parameters": {
@@ -1506,7 +1602,9 @@
             "type": "string"
           }
         },
-        "required": ["status"],
+        "required": [
+          "status"
+        ],
         "additionalProperties": true
       },
       "SuccessResponse": {
@@ -1516,7 +1614,9 @@
             "type": "boolean"
           }
         },
-        "required": ["success"],
+        "required": [
+          "success"
+        ],
         "additionalProperties": true
       },
       "ErrorResponse": {
@@ -1529,7 +1629,9 @@
             "type": "string"
           }
         },
-        "required": ["error"],
+        "required": [
+          "error"
+        ],
         "additionalProperties": true
       },
       "Organization": {
@@ -1550,7 +1652,10 @@
             "format": "date-time"
           },
           "logo": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "uri"
           },
           "management_email": {
@@ -1558,10 +1663,16 @@
             "format": "email"
           },
           "customer_id": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
-        "required": ["id", "name"]
+        "required": [
+          "id",
+          "name"
+        ]
       },
       "OrganizationEnvelope": {
         "type": "object",
@@ -1570,7 +1681,9 @@
             "$ref": "#/components/schemas/Organization"
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "OrganizationListEnvelope": {
         "type": "object",
@@ -1582,7 +1695,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "OrganizationCreate": {
         "type": "object",
@@ -1592,7 +1707,9 @@
             "type": "string"
           }
         },
-        "required": ["name"]
+        "required": [
+          "name"
+        ]
       },
       "OrganizationUpdate": {
         "type": "object",
@@ -1613,7 +1730,9 @@
             "format": "email"
           }
         },
-        "required": ["orgId"]
+        "required": [
+          "orgId"
+        ]
       },
       "Member": {
         "type": "object",
@@ -1626,14 +1745,21 @@
             "format": "email"
           },
           "image_url": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "uri"
           },
           "role": {
             "type": "string"
           }
         },
-        "required": ["uid", "email", "role"]
+        "required": [
+          "uid",
+          "email",
+          "role"
+        ]
       },
       "MemberListEnvelope": {
         "type": "object",
@@ -1645,7 +1771,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "MemberCreate": {
         "type": "object",
@@ -1660,10 +1788,20 @@
           },
           "role": {
             "type": "string",
-            "enum": ["read", "upload", "write", "admin", "super_admin"]
+            "enum": [
+              "read",
+              "upload",
+              "write",
+              "admin",
+              "super_admin"
+            ]
           }
         },
-        "required": ["orgId", "email", "role"]
+        "required": [
+          "orgId",
+          "email",
+          "role"
+        ]
       },
       "MemberDelete": {
         "type": "object",
@@ -1677,7 +1815,10 @@
             "format": "email"
           }
         },
-        "required": ["orgId", "email"]
+        "required": [
+          "orgId",
+          "email"
+        ]
       },
       "App": {
         "type": "object",
@@ -1686,7 +1827,10 @@
             "type": "string"
           },
           "name": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "owner_org": {
             "type": "string"
@@ -1695,25 +1839,39 @@
             "type": "string"
           },
           "icon_url": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "uri"
           },
           "last_version": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "retention": {
             "type": "integer"
           },
           "created_at": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time"
           },
           "updated_at": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time"
           }
         },
-        "required": ["app_id"]
+        "required": [
+          "app_id"
+        ]
       },
       "AppEnvelope": {
         "type": "object",
@@ -1722,7 +1880,9 @@
             "$ref": "#/components/schemas/App"
           }
         },
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "additionalProperties": true
       },
       "AppListEnvelope": {
@@ -1735,7 +1895,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "AppCreate": {
         "type": "object",
@@ -1755,7 +1917,11 @@
             "type": "string"
           }
         },
-        "required": ["app_id", "name", "owner_org"]
+        "required": [
+          "app_id",
+          "name",
+          "owner_org"
+        ]
       },
       "AppUpdate": {
         "type": "object",
@@ -1781,25 +1947,42 @@
             "type": "integer"
           },
           "key": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "mode": {
             "type": "string",
-            "enum": ["read", "write", "upload", "all"]
+            "enum": [
+              "read",
+              "write",
+              "upload",
+              "all"
+            ]
           },
           "name": {
             "type": "string"
           },
           "created_at": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time"
           },
           "updated_at": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time"
           },
           "expires_at": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time"
           },
           "limited_to_apps": {
@@ -1815,7 +1998,11 @@
             }
           }
         },
-        "required": ["id", "mode", "name"]
+        "required": [
+          "id",
+          "mode",
+          "name"
+        ]
       },
       "ApiKeyListEnvelope": {
         "type": "object",
@@ -1827,7 +2014,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "ApiKeyCreateEnvelope": {
         "type": "object",
@@ -1836,7 +2025,9 @@
             "$ref": "#/components/schemas/ApiKey"
           }
         },
-        "required": ["apikey"]
+        "required": [
+          "apikey"
+        ]
       },
       "ApiKeyCreate": {
         "type": "object",
@@ -1847,7 +2038,12 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["read", "write", "upload", "all"]
+            "enum": [
+              "read",
+              "write",
+              "upload",
+              "all"
+            ]
           },
           "limited_to_apps": {
             "type": "array",
@@ -1869,7 +2065,10 @@
             "format": "date-time"
           }
         },
-        "required": ["name", "mode"]
+        "required": [
+          "name",
+          "mode"
+        ]
       },
       "ChannelVersion": {
         "type": "object",
@@ -1881,7 +2080,10 @@
             "type": "string"
           }
         },
-        "required": ["id", "name"]
+        "required": [
+          "id",
+          "name"
+        ]
       },
       "Channel": {
         "type": "object",
@@ -1905,7 +2107,10 @@
             "type": "boolean"
           },
           "disableAutoUpdate": {
-            "type": ["string", "boolean"]
+            "type": [
+              "string",
+              "boolean"
+            ]
           },
           "allow_emulator": {
             "type": "boolean"
@@ -1922,7 +2127,11 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "name", "app_id"]
+        "required": [
+          "id",
+          "name",
+          "app_id"
+        ]
       },
       "ChannelListEnvelope": {
         "type": "object",
@@ -1934,7 +2143,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "ChannelSet": {
         "type": "object",
@@ -1957,7 +2168,12 @@
           },
           "disableAutoUpdate": {
             "type": "string",
-            "enum": ["major", "minor", "version_number", "none"]
+            "enum": [
+              "major",
+              "minor",
+              "version_number",
+              "none"
+            ]
           },
           "ios": {
             "type": "boolean"
@@ -1978,7 +2194,10 @@
             "type": "boolean"
           }
         },
-        "required": ["app_id", "channel"]
+        "required": [
+          "app_id",
+          "channel"
+        ]
       },
       "ChannelDelete": {
         "type": "object",
@@ -1991,7 +2210,10 @@
             "type": "string"
           }
         },
-        "required": ["app_id", "channel"]
+        "required": [
+          "app_id",
+          "channel"
+        ]
       },
       "Device": {
         "type": "object",
@@ -2000,32 +2222,57 @@
             "type": "string"
           },
           "custom_id": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "version": {
-            "type": ["integer", "null"]
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "version_name": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "channel": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "app_id": {
             "type": "string"
           },
           "platform": {
             "type": "string",
-            "enum": ["ios", "android", "electron"]
+            "enum": [
+              "ios",
+              "android",
+              "electron"
+            ]
           },
           "plugin_version": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "os_version": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "version_build": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "is_prod": {
             "type": "boolean"
@@ -2034,14 +2281,21 @@
             "type": "boolean"
           },
           "key_id": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "updated_at": {
             "type": "string",
             "format": "date-time"
           }
         },
-        "required": ["device_id", "app_id", "platform"]
+        "required": [
+          "device_id",
+          "app_id",
+          "platform"
+        ]
       },
       "DeviceEnvelope": {
         "$ref": "#/components/schemas/Device"
@@ -2062,7 +2316,9 @@
             "type": "boolean"
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "DeviceLink": {
         "type": "object",
@@ -2081,7 +2337,10 @@
             "type": "string"
           }
         },
-        "required": ["app_id", "device_id"]
+        "required": [
+          "app_id",
+          "device_id"
+        ]
       },
       "DeviceDelete": {
         "type": "object",
@@ -2094,7 +2353,10 @@
             "type": "string"
           }
         },
-        "required": ["app_id", "device_id"]
+        "required": [
+          "app_id",
+          "device_id"
+        ]
       },
       "Bundle": {
         "type": "object",
@@ -2109,31 +2371,50 @@
             "type": "string"
           },
           "checksum": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "minUpdateVersion": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "storage_provider": {
             "type": "string"
           },
           "external_url": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "uri"
           },
           "deleted": {
             "type": "boolean"
           },
           "created_at": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time"
           },
           "updated_at": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time"
           }
         },
-        "required": ["id", "app_id", "name"]
+        "required": [
+          "id",
+          "app_id",
+          "name"
+        ]
       },
       "BundleListEnvelope": {
         "type": "object",
@@ -2145,7 +2426,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "BundleCreate": {
         "type": "object",
@@ -2165,7 +2448,12 @@
             "type": "string"
           }
         },
-        "required": ["app_id", "version", "external_url", "checksum"]
+        "required": [
+          "app_id",
+          "version",
+          "external_url",
+          "checksum"
+        ]
       },
       "BundleDelete": {
         "type": "object",
@@ -2178,7 +2466,9 @@
             "type": "string"
           }
         },
-        "required": ["app_id"]
+        "required": [
+          "app_id"
+        ]
       },
       "BundleMetadataUpdate": {
         "type": "object",
@@ -2198,7 +2488,10 @@
             "type": "string"
           }
         },
-        "required": ["app_id", "version_id"]
+        "required": [
+          "app_id",
+          "version_id"
+        ]
       },
       "BundleChannelSet": {
         "type": "object",
@@ -2214,7 +2507,11 @@
             "type": "integer"
           }
         },
-        "required": ["app_id", "version_id", "channel_id"]
+        "required": [
+          "app_id",
+          "version_id",
+          "channel_id"
+        ]
       },
       "StatisticsPoint": {
         "type": "object",
@@ -2233,7 +2530,12 @@
             "type": "integer"
           }
         },
-        "required": ["date", "mau", "storage", "bandwidth"]
+        "required": [
+          "date",
+          "mau",
+          "storage",
+          "bandwidth"
+        ]
       },
       "BundleUsageDataset": {
         "type": "object",
@@ -2248,7 +2550,10 @@
             }
           }
         },
-        "required": ["label", "data"]
+        "required": [
+          "label",
+          "data"
+        ]
       },
       "BundleUsage": {
         "type": "object",
@@ -2266,7 +2571,10 @@
             }
           }
         },
-        "required": ["labels", "datasets"]
+        "required": [
+          "labels",
+          "datasets"
+        ]
       }
     }
   }

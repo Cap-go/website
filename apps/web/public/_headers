@@ -1,9 +1,12 @@
 /
   Link: </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"
+  Link: </openapi.json>; rel="service-desc"; type="application/openapi+json"
   Link: </.well-known/capgo-public-api-openapi.json>; rel="service-desc"; type="application/openapi+json"
   Link: </.well-known/capgo-tools-openapi.json>; rel="service-desc"; type="application/openapi+json"
   Link: </docs/public-api/>; rel="service-doc"; type="text/html"
   Link: </tools/>; rel="service-doc"; type="text/html"
+  Link: </.well-known/mcp.json>; rel="describedby"; type="application/json"
+  Link: </llms.txt>; rel="describedby"; type="text/plain"
 
 /assets/*
   cache-control: max-age=31536000

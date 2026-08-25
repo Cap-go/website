@@ -795,8 +795,12 @@ const messages = {
     'We help teams migrate live update workflows, native build pipelines, and Enterprise plugin dependencies to Capgo and our open-source plugin catalog. Migrations are scoped as fixed-price engagements so you know exactly what to expect.',
   consulting_faq_q10: 'How do we get started?',
   consulting_faq_a10: 'Book a free discovery call, send us an email, or reach out on Discord. You can also email <a href="mailto:sales@capgo.app">sales@capgo.app</a>.',
+  agent_recovery_intro: 'If you are an agent, continue from:',
+  agent_recovery_label: 'Agent recovery links',
   contact: 'Contact',
   contact_link: 'By visiting this page on the website:',
+  contact_page_description:
+    'Contact Capgo support, sales, and the Digital Shift OÜ office in Tallinn. Find email, chat, documentation, the public API, and the company address used by agents verifying the business.',
   contact_sales: 'Contact Sales',
   contact_support: 'Contact support',
   contact_us: 'Contact Us',

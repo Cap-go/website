@@ -145,6 +145,7 @@ const navigation: Record<string, NavigationItem[]> = {
   ],
   company: [
     { name: m.about({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'about') },
+    { name: m.contact({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'contact') },
     { name: m.enterprise_title({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise') },
     { name: m.imprint({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'imprint') },
     { name: m.jobs({}, { locale: Astro.locals.locale }), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },

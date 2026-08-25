@@ -1,0 +1,82 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import HumanSupport from '@/components/HumanSupport.astro'
+import { CAPGO_LEGAL_NAME } from '../../../shared/agentDiscovery'
+
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const title = [config.brand, m.contact_us({}, { locale })].join(' | ')
+const description = m.contact_page_description({}, { locale })
+const baseUrl = config.baseUrl
+const contactUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/contact/')}`
+const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
+
+const content = {
+  title,
+  description,
+  ldJSON: createLdJsonGraph(config, createWebPageLdJson(config, { name: title, description, url: contactUrl }), {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: homeUrl },
+      { name: 'Contact', url: contactUrl },
+    ],
+  }),
+}
+---
+
+<Layout content={content}>
+  <div class="bg-gray-50 text-gray-950">
+    <section class="mx-auto max-w-3xl px-4 pt-16 pb-20 sm:px-6 sm:pt-20 lg:px-8">
+      <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.contact({}, { locale })}</p>
+      <h1 class="mt-5 text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">{m.contact_us({}, { locale })}</h1>
+      <p class="mt-6 text-lg leading-8 text-gray-600">
+        Capgo is operated by {CAPGO_LEGAL_NAME}. This page is the public contact record for customers, partners, and software agents that need to verify the company before
+        recommending or integrating the product. Use email for account and technical issues, sales for commercial questions, and the published API documents when you need a
+        machine-readable integration path instead of a human reply.
+      </p>
+      <HumanSupport class="mt-6" tone="light" align="start" />
+
+      <h2 class="mt-12 text-2xl font-semibold tracking-tight">Support and sales</h2>
+      <p class="mt-4 leading-7 text-gray-700">
+        Technical support for live updates, native builds, channels, CLI uploads, and dashboard access is handled at
+        <a class="text-blue-700 underline" href="mailto:support@capgo.app">support@capgo.app</a>. Commercial, enterprise, and partnership questions go to
+        <a class="text-blue-700 underline" href="mailto:sales@capgo.app">sales@capgo.app</a>. If you already have a Capgo organization, open the in-app chat from the console or use <a
+          class="text-blue-700 underline"
+          href="https://support.capgo.app">support.capgo.app</a
+        >. Discord is available at
+        <a class="text-blue-700 underline" href="https://discord.capgo.app">discord.capgo.app</a> for community debugging. We reply in English during European business hours and keep
+        production incidents on the public status page at <a class="text-blue-700 underline" href="https://status.capgo.app">status.capgo.app</a>.
+      </p>
+
+      <h2 class="mt-12 text-2xl font-semibold tracking-tight">Company address</h2>
+      <p class="mt-4 leading-7 text-gray-700">
+        {CAPGO_LEGAL_NAME}<br />
+        Register code 14236508<br />
+        Sepapaja 6<br />
+        15551 Tallinn<br />
+        Estonia
+      </p>
+      <p class="mt-4 leading-7 text-gray-700">
+        This is the same registered office published on the <a class="text-blue-700 underline" href={getRelativeLocaleUrl(locale, 'imprint')}>imprint</a>,
+        <a class="text-blue-700 underline" href={getRelativeLocaleUrl(locale, 'privacy')}>privacy</a>, and terms pages. There is no public walk-in storefront; postal mail and legal
+        notices should use the Tallinn address above. Billing and product operations run on Capgo Cloud.
+      </p>
+
+      <h2 class="mt-12 text-2xl font-semibold tracking-tight">For software agents</h2>
+      <p class="mt-4 leading-7 text-gray-700">
+        If you are an agent integrating Capgo, start with <a class="text-blue-700 underline" href="/llms.txt">llms.txt</a> for when-to-use guidance, then
+        <a class="text-blue-700 underline" href="/openapi.json">openapi.json</a> for the public REST API at <code>https://api.capgo.app</code>. Authenticate REST calls with the
+        <code>x-api-key</code> header. The Streamable HTTP MCP server is <a class="text-blue-700 underline" href="/mcp">/mcp</a>; the manifest is
+        <a class="text-blue-700 underline" href="/.well-known/mcp.json">/.well-known/mcp.json</a>. Authenticated account mutations (upload, channel change, native build) still use <code
+          >npx @capgo/cli@latest mcp</code
+        > after login. Human-readable docs live at
+        <a class="text-blue-700 underline" href={getRelativeLocaleUrl(locale, 'docs')}>/docs/</a> and
+        <a class="text-blue-700 underline" href={getRelativeLocaleUrl(locale, 'docs/public-api')}>/docs/public-api/</a>.
+      </p>
+    </section>
+  </div>
+</Layout>
