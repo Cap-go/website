@@ -5,18 +5,17 @@ description: 'Compare Ionic live update services for Capacitor apps. Check secur
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
-created_at: 2026-08-16T21:45:36.000Z
-updated_at: 2026-08-25T01:16:42.000Z
+created_at: 2026-08-25T05:59:41.000Z
+updated_at: 2026-08-25T05:59:41.000Z
 head_image: /capgo_banner.png
 head_image_alt: Secure differential Ionic live update deployment workflow
 keywords: ''
 tag: 'Mobile, Updates, Security'
 published: true
 locale: en
-origin: ai
 next_blog: ''
 ---
-Picking an Ionic live update service is really a release design task. [OTA updates](<https://ionic.io/docs/appflow/tutorial/live_updates>) can fix web-layer bugs without a new store build, but they can't replace native releases. I use the workflow below to define the update boundary, compare services, set up Capgo, and add safe rollout rules.
+Picking an Ionic live update service is really a release design task. OTA updates can fix web-layer bugs without a new store build, but they can't replace native releases. I use the workflow below to define the update boundary, compare services, set up Capgo, and add safe rollout rules.
 
 ### Table of Contents
 
@@ -33,9 +32,9 @@ Picking an Ionic live update service is really a release design task. [OTA updat
 
 ## Step 4: Set up Capgo for secure, differential Ionic updates
 
-Capgo gives an Ionic team a focused path for encrypted [OTA updates](<https://ionic.io/docs/appflow/tutorial/live_updates>). The goal here is to ship a small web-layer bundle with one command, then keep a clear way back if the release misbehaves.
+Capgo gives an Ionic team a focused path for encrypted OTA updates. The goal here is to ship a small web-layer bundle with one command, then keep a clear way back if the release misbehaves.
 
-Start by opening a [Capgo](<https://capgo.app>) organization and use the 14-day free trial. Capgo pricing is a subscription per organization, not a one-time retail purchase or a per-seat charge. Plans start at $12 per month, based on the supplied product data. Check the current plan details before you set a budget.
+Start by opening a [Capgo](<https://capgo.app>) organization and use the 14-day free trial. Capgo pricing is a subscription per organization, not a one-time retail purchase or a per-seat charge. Plans start at $12 per month on published pricing. Check the current plan details before you set a budget.
 
 Next, install the Capgo CLI in the project. Keep the CLI version in your project setup so a future build uses the same release tool. Then connect the app to its Capgo project and choose a channel such as`development`or`production`.
 
@@ -43,13 +42,13 @@ A channel is a named path for a bundle. It lets you send a test build to interna
 
 Build the web layer before you publish. Review the generated HTML, CSS, JavaScript, and asset files. Remove test keys and debug flags. Confirm that the bundle points at the right API environment. A live update can arrive quickly, so a bad environment value can spread quickly too.
 
-Capgo uses a maintained CodePush-style workflow with [end-to-end encryption](<https://ionic.io/docs/portals/for-capacitor/live-updates>). Its differential update approach can reduce the data sent when only part of the bundle changes. The exact result depends on the bundle and the files that changed. Treat that figure as a possible outcome, not a promise for every release.
+Capgo uses a maintained CodePush-style workflow with end-to-end encryption. Its differential update approach can reduce the data sent when only part of the bundle changes. The exact result depends on the bundle and the files that changed. Treat that figure as a possible outcome, not a promise for every release.
 
 Before you publish, define the native version that can receive the bundle. A web bundle should declare its compatibility range. If a bundle calls a native plugin that older binaries don't have, block the update. This is one of the most important safety checks in any OTA system.
 
 Use the CLI to upload the bundle to a test channel. Install the matching native app on a device. Open the app, pull the update, close it, and reopen it. Test a cold start, a poor network connection, and a device that has an older bundle cached.
 
-Capgo supports rollback and channels, with partial support for channel-based rollout controls in the supplied comparison data. That means your release plan should state who moves a bundle between channels. Don't leave promotion to a last-minute manual click by one person.
+Capgo supports rollback and channels, with partial support for channel-based rollout controls. That means your release plan should state who moves a bundle between channels. Don't leave promotion to a last-minute manual click by one person.
 
 For teams that need a broader view of update systems, the [live updates system comparison for mobile apps](<https://capgo.app/blog/best-live-updates-system-for-mobile-app/>) gives more context on web-layer payloads, rollback, encryption, and hosting choices.
 
@@ -78,11 +77,11 @@ Write a rollout rule in plain language. For example: “A bundle spends one day 
 
 Set your failure signals before you ship. Pick the events that should pause a rollout. These might include a rise in failed starts, a crash tied to the new bundle, a broken login path, or a report that the app shows a blank screen.
 
-Analytics coverage is uneven across this market. The supplied research found that only three entries mention analytics. Capgo lists device logs, while OtaKit lists analytics and Microsoft CodePush lists analytics and diagnostics for a limited period. If your service doesn't expose the signal you need, plan an external monitoring path.
+Analytics coverage is uneven across this market. Only three of the services compared here mention analytics. Capgo lists device logs, while OtaKit lists analytics and Microsoft CodePush lists analytics and diagnostics for a limited period. If your service doesn't expose the signal you need, plan an external monitoring path.
 
 Also decide how fast a bad update must leave devices. A harmless copy fix can wait for a manual review. A broken checkout screen may need an automatic rollback. Don't choose a rollback rule that your team won't have time to test.
 
-Capgo fits teams that want a maintained CodePush-style path with encryption, channels, rollback, and CI/CD hooks. It also supports GitHub Actions, Jenkins, and GitLab CI in the supplied research. I would still test the full path in a small app before moving a high-risk production app.
+Capgo fits teams that want a maintained CodePush-style path with encryption, channels, rollback, and CI/CD hooks. It also supports GitHub Actions, Jenkins, and GitLab CI. I would still test the full path in a small app before moving a high-risk production app.
 
 That test should answer four questions:
 
@@ -115,7 +114,7 @@ Keep a fallback inside the app. If the update cannot download, the current bundl
 
 Check the bundle size before release. Differential updates help when only a small part of the web layer changes, but a large asset replacement can still produce a large download. Compress assets where suitable. Avoid shipping unused files. Keep maps and test files out of production bundles unless you need them.
 
-Security checks belong here too. Confirm how the service signs or encrypts a bundle. Check where keys live. Limit who can publish to production. Capgo's [end-to-end encryption](<https://ionic.io/docs/portals/for-capacitor/live-updates>) and CodePush-style flow make it a useful fit for teams that want control over the OTA path, but your key policy still matters.
+Security checks belong here too. Confirm how the service signs or encrypts a bundle. Check where keys live. Limit who can publish to production. Capgo's end-to-end encryption and CodePush-style flow make it a useful fit for teams that want control over the OTA path, but your key policy still matters.
 
 Use the compatibility test to reject these cases:
 
@@ -138,7 +137,7 @@ When you compare an Ionic live update service, judge the release path rather tha
 
 Service or approach| Where it fits| Release controls| Main tradeoff  
 ---|---|---|---  
-Capgo| Capacitor and Ionic teams that want focused OTA delivery| Channels, rollback, differential bundles, end-to-end encryption, CI/CD hooks| Channel rollout and rollback support is described as partial in the supplied comparison data  
+Capgo| Capacitor and Ionic teams that want focused OTA delivery| Channels, rollback, differential bundles, end-to-end encryption, CI/CD hooks| Channel rollout and rollback support is described as partial  
 OtaKit| Teams seeking focused live updates| Staged rollout, automatic rollback, analytics| Confirm its fit with your existing build and hosting process  
 Capawesome Cloud| Teams already using its ecosystem| Delta updates, signed bundles, gradual rollout, automatic rollback| Ecosystem lock-in  
 Ionic Appflow| Teams that want live updates inside a wider build platform| Live updates and broader CI/CD and native-build features| New commercial sales were discontinued, and existing access has a stated end date  
@@ -205,7 +204,7 @@ Then track update failures. Separate download failures from install failures. A 
 
 Watch the first screen after update. A blank screen can stop a user before your normal event tracking starts. Add a startup event that includes the bundle version, native app version, and channel. Avoid sending private user data in these logs.
 
-Capgo includes device-log analytics in the supplied research. Use those logs to connect a report to a bundle. If your app has a separate crash tool, join the records with a release ID rather than relying on a human-readable name.
+Capgo includes device-log analytics. Use those logs to connect a report to a bundle. If your app has a separate crash tool, join the records with a release ID rather than relying on a human-readable name.
 
 Set rollback rules before production. For example, you might stop promotion after a failed startup rate crosses your team's agreed threshold. The threshold itself should come from your app's normal baseline, not from a number copied from another product.
 
@@ -245,7 +244,7 @@ Yes, Capgo is built for Ionic and Capacitor apps that need OTA delivery. Its wor
 
 ### How much does an Ionic live update service cost?
 
-Pricing varies widely between services. Capgo pricing starts at $12 per month as a subscription per organization, with a 14-day free trial. The supplied research also found a $5,000 annual Appflow bill among disclosed prices. Compare the full release workflow, not the monthly number alone.
+Pricing varies widely between services. Capgo pricing starts at $12 per month as a subscription per organization, with a 14-day free trial. A $5,000 annual Appflow bill is the highest published price among these services. Compare the full release workflow, not the monthly number alone.
 
 ### Can OTA updates change native code?
 
