@@ -13,6 +13,7 @@ keywords: Capacitor, mobile updates, iOS, Android, patch management, app deploym
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

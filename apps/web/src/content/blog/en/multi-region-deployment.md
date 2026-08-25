@@ -13,6 +13,7 @@ keywords: 'multi region deployment, cloud architecture, high availability, disas
 tag: 'Mobile, Technology, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your app is doing well enough that architecture has stopped being an academic topic. Support tickets from Asia mention slow screens. A regional cloud incident forced everyone into the same war room. Product wants faster mobile rollout confidence because a bad backend deploy now lands at the same time as a new app build, and nobody can tell whether the problem is API latency, a stale client, or a failed regional dependency.

@@ -13,6 +13,7 @@ keywords: Apple privacy rules, Capacitor apps, data transparency, user consent, 
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -15,6 +15,7 @@ keywords: 'unit tests javascript, javascript testing, jest, capacitorjs, electro
 tag: 'Mobile, Tutorial, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two situations right now. Either your JavaScript project has almost no tests and every refactor feels risky, or you already have tests and half of them are slow, brittle, and oddly hard to trust.

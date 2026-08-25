@@ -13,6 +13,7 @@ keywords: 'failure analysis techniques, root cause analysis, software reliabilit
 tag: 'Development, Mobile'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A critical update just shipped. Instead of a clean rollout, support lights up with crash reports, failed launches, and users stuck on mismatched bundle versions. Someone triggers a rollback, someone else starts digging through logs, and everyone asks the same question: what broke?

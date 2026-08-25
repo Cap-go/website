@@ -13,6 +13,7 @@ keywords: Capacitor, OTA updates, server setup, mobile app, security, deployment
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

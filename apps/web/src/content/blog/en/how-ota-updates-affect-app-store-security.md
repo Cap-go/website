@@ -13,6 +13,7 @@ keywords: OTA updates, app security, app store compliance, encryption, vulnerabi
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

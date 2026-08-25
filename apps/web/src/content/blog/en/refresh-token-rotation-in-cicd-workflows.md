@@ -13,6 +13,7 @@ keywords: token rotation, CI/CD security, refresh tokens, credential management,
 tag: Development, Security, Technology
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

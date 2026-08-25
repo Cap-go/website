@@ -13,6 +13,7 @@ keywords: 'app risk assessment, mobile security, application security, risk mana
 tag: 'Mobile, Security, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your release train is moving, QA signed off, and a “small” web-layer fix needs to go out before morning. Someone patches a form validation bug, updates a dependency, and ships. A day later, support starts seeing odd account behavior. Security traces it back to the hotfix path, not the big feature everyone was worried about.

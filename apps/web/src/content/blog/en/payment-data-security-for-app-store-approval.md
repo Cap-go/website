@@ -13,6 +13,7 @@ keywords: payment data security, app store approval, end-to-end encryption, comp
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

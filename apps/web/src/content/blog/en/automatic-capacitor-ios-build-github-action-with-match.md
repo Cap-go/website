@@ -15,6 +15,7 @@ keywords: Fastlane, CI/CD, iOS, automatic build, automatic release, mobile app u
 tag: CI/CD
 published: true
 locale: en
+origin: ai
 next_blog: automatic-capacitor-android-build-github-action
 ---
 

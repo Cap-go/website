@@ -13,6 +13,7 @@ keywords: Capacitor, Native Bridge, cross-platform development, web technologies
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

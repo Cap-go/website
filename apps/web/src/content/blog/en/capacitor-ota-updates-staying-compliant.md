@@ -13,6 +13,7 @@ keywords: OTA updates, Capacitor, app compliance, mobile updates, app store guid
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

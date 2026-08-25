@@ -13,6 +13,7 @@ keywords: animation performance, Capacitor apps, mobile development, hardware ac
 tag: Development, Mobile, Technology
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

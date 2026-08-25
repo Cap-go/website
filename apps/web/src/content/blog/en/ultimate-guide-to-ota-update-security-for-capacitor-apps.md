@@ -13,6 +13,7 @@ keywords: OTA updates, security, encryption, mobile apps, compliance, data prote
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

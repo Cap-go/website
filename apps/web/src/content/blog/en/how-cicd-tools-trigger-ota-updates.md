@@ -13,6 +13,7 @@ keywords: CI/CD, OTA updates, automation, app deployment, security, Capgo, Capac
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

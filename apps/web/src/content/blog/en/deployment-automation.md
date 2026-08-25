@@ -13,6 +13,7 @@ keywords: 'deployment automation, CI/CD pipeline, release automation, mobile app
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Friday's hotfix looked harmless. Someone patched a customer-facing bug, SSH'd into a server, copied files by hand, and told the team it would be fine until Monday. By Sunday night, the rollback plan was a Slack thread, the logs were split across machines, and nobody could say with confidence which version was live.

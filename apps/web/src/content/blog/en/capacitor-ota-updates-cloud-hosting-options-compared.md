@@ -13,6 +13,7 @@ keywords: Capacitor, OTA updates, cloud hosting, AWS, Google Cloud, Azure, Capgo
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

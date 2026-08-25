@@ -16,6 +16,7 @@ keywords: 'what is edge network, edge network, edge computing, cdn vs edge, low 
 tag: 'Mobile, Technology, Alternatives'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your mobile app is working fine in your local testing. Users in London open it and everything feels snappy. Users in Tokyo open the same version and complain that startup is sluggish, updates take too long, and some content feels delayed. You didn't change the app for one region and not the other. The difference is distance.

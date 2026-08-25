@@ -13,6 +13,7 @@ keywords: OTA updates, beta testing, compliance, app store policies, encryption,
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

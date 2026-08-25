@@ -13,6 +13,7 @@ keywords: biometric authentication, Capacitor, mobile security, fingerprint, fac
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

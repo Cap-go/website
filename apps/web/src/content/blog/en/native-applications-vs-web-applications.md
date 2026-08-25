@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Technology, Alternatives'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in the same spot many teams hit at the start of a mobile project. Product wants fast launch. Engineering wants a stack that won't become a maintenance trap. Security wants control. Operations wants a way to fix production issues without waiting on a store review. Everyone asks the old question: should we build native or web?

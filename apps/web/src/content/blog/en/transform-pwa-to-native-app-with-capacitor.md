@@ -16,6 +16,7 @@ keywords: PWA, Capacitor, native mobile app, iOS, Android, web-to-app migration,
 tag: Tutorial
 published: true
 locale: en
+origin: ai
 next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
 ---
 

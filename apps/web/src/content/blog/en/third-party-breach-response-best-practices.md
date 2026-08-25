@@ -13,6 +13,7 @@ keywords: third-party breaches, data breach response, vendor management, securit
 tag: Security, Technology, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: Capacitor plugins, rollback mechanisms, version control, update stabil
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

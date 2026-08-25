@@ -13,6 +13,7 @@ keywords: OTA updates, Capacitor, Capgo, mobile app updates, documentation, app 
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

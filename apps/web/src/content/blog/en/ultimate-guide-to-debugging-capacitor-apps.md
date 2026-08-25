@@ -13,6 +13,7 @@ keywords: Capacitor, debugging, mobile apps, performance optimization, native to
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

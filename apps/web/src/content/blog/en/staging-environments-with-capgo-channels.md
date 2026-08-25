@@ -15,6 +15,7 @@ keywords: mobile app environments, staging, Capgo channels, TestFlight, Capacito
 tag: Tutorial
 published: true
 locale: en
+origin: ai
 next_blog: staging-ota-updates-best-practices
 ---
 

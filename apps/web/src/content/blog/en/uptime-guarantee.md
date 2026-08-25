@@ -13,6 +13,7 @@ keywords: 'uptime guarantee, SLA, mobile apps, CapacitorJS, service level'
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A 99.9% uptime guarantee still allows about 8.76 hours of downtime a year, while 99.99% allows only 52.56 minutes. That promise only matters if you know the measurement window, the downtime formula, and the exclusions, because the headline percentage alone doesn't tell you what your users will experience.

@@ -13,6 +13,7 @@ keywords: 'sentry react native, react native monitoring, error tracking, mobile 
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've got a React Native app working locally, QA has signed off, and production is close. Then the obvious question lands: what happens when it breaks on a user's device?

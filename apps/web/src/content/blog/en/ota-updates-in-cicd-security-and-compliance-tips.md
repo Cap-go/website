@@ -13,6 +13,7 @@ keywords: OTA updates, CI/CD, security, compliance, encryption, app deployment, 
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: custom event tracking, analytics, app performance, developer tools, re
 tag: Development, Mobile, Technology
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

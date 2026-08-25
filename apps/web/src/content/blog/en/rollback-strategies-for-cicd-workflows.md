@@ -13,6 +13,7 @@ keywords: CI/CD, rollback strategies, app updates, mobile development, security,
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

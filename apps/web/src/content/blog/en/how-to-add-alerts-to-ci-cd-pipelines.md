@@ -13,6 +13,7 @@ keywords: CI/CD, alerts, monitoring, DevOps, integration, performance, security,
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -15,6 +15,7 @@ keywords: 'what is continuous deployment, ci/cd, capacitorjs, electronjs, devops
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Continuous deployment means **every code change that passes predefined automated quality gates goes straight to production without a manual release trigger**. Even now, only **45% of organizations automate release to production**, which is why teams that can do this safely still stand out.

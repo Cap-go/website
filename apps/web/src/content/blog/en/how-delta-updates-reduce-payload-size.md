@@ -13,6 +13,7 @@ keywords: delta updates, mobile apps, differential patching, app performance, ba
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: Capacitor, live updates, version conflicts, app performance, error tra
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

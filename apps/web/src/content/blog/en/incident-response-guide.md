@@ -13,6 +13,7 @@ keywords: 'incident response guide, live updates, CapacitorJS, rollback strategy
 tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Friday night is when the bad bundles always seem to land. A JavaScript update looks fine in staging, then iOS starts crashing on launch, Android users hit a blank screen, and the team realizes the only “fix” left in the old world is waiting on store review while support phones keep ringing.

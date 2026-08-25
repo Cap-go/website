@@ -13,6 +13,7 @@ keywords: AAR files, Capacitor plugins, Android development, mobile integration,
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

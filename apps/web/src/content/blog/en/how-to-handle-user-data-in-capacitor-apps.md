@@ -13,6 +13,7 @@ keywords: user data, secure storage, data protection, GDPR, CCPA, data retention
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

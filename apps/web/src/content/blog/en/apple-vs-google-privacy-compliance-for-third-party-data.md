@@ -13,6 +13,7 @@ keywords: privacy compliance, third-party data, App Tracking Transparency, Priva
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

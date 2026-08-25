@@ -13,6 +13,7 @@ keywords: OTA updates, CI/CD security, cryptographic signing, end-to-end encrypt
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

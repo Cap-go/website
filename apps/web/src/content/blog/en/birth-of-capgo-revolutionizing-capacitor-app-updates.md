@@ -18,6 +18,7 @@ keywords: >-
 tag: Development
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

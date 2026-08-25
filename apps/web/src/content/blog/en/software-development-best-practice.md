@@ -13,6 +13,7 @@ keywords: 'software development best practice, capacitorjs, ci/cd pipeline, mobi
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your team is probably living this already. The web layer moves fast, your native shells move slower, product wants fixes today, and every release decision feels like a trade between speed and blast radius. If you ship with Capacitor, Ionic, or Electron, the pressure is even sharper because users expect native reliability while your team works with web-style iteration.

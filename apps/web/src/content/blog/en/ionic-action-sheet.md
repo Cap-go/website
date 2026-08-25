@@ -15,6 +15,7 @@ keywords: 'ionic action sheet, ionic components, capacitorjs, ionic angular, ion
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two situations right now. Either you need a clean way to show a few contextual actions without stuffing your screen with extra buttons, or you already shipped an ionic action sheet and discovered that the easy demo version isn't the same thing as a production-ready implementation.

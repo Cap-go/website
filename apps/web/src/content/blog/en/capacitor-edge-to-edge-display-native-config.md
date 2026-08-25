@@ -13,6 +13,7 @@ keywords: Capacitor, edge-to-edge, Android 15, adjustMarginsForEdgeToEdge, mobil
 tag: Development, Mobile, Configuration
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

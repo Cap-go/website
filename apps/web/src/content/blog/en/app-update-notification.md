@@ -15,6 +15,7 @@ keywords: 'app update notification, capacitorjs, electronjs, capgo, live updates
 tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You shipped a hotfix on Friday. By Monday, support is still hearing from users who never got it, beta testers are stuck on a stale bundle, and one enterprise client wants to know exactly which version their field team is running. That's the moment it becomes clear an **app update notification** isn't a modal. It's an operating system for release control.

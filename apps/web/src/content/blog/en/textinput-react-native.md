@@ -13,6 +13,7 @@ keywords: 'textinput react native, react native, react native forms, mobile deve
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably here because a field that should've been simple isn't simple anymore. The keyboard covers the input. iOS renders text differently than Android. Clearing a controlled field doesn't always clear what the user sees. A basic login form turns into a debugging session.

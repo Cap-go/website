@@ -13,6 +13,7 @@ keywords: Capacitor, pipeline security, OTA updates, access control, encryption,
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: app store metadata, app optimization, keywords, visuals, localization,
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

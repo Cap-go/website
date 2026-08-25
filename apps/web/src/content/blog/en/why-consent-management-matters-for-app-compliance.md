@@ -13,6 +13,7 @@ keywords: consent management, GDPR, CCPA, app compliance, user privacy, data pro
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

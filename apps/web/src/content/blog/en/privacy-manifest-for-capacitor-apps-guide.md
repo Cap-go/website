@@ -13,6 +13,7 @@ keywords: Privacy Manifest, Capacitor, App Store compliance, user data protectio
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

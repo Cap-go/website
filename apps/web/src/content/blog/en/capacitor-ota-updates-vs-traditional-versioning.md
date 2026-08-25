@@ -13,6 +13,7 @@ keywords: OTA updates, traditional updates, Capacitor, mobile app development, a
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: Capacitor revenue, in-app purchases, subscriptions, mobile app monetiz
 tag: Mobile, IAP, Monetization
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

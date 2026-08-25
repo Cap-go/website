@@ -13,6 +13,7 @@ keywords: Capacitor plugins, mobile development, cross-platform apps, native fea
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You usually notice a DevEx problem in the middle of a release. CI is backed up, signing only works on one laptop, a hotfix is blocked by app store review, and support cannot tell whether users are hitting an old bundle, a bad rollout, or a runtime bug. Sprint metrics rarely catch that early. The team feels it first.

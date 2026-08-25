@@ -13,6 +13,7 @@ keywords: 'incident response, cybersecurity, NIST 800-61, Capacitor live updates
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Incident response is the formal discipline of detecting, containing, and recovering from security or reliability incidents quickly. In IBM's 2021 analysis, organizations with a tested incident response team averaged a breach cost of **$3.25 million**, compared with **$5.71 million** for organizations with neither capability, a difference of **54.9%**.

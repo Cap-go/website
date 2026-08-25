@@ -13,6 +13,7 @@ keywords: 'mobile development hybrid, cross-platform apps, capacitorjs, ionic fr
 tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two situations right now. Your team needs to ship on iOS and Android without hiring two separate native squads, or you already launched a hybrid app and you're discovering that the actual work starts after the first release.

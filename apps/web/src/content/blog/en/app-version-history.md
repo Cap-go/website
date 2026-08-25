@@ -13,6 +13,7 @@ keywords: 'app version history, mobile CI/CD, live updates, release management, 
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A release goes out late in the day. Support wakes up to crash complaints, login failures, or a checkout flow that suddenly stops working. Engineering asks the obvious question first: what changed? Then the room gets quiet.

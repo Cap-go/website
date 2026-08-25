@@ -15,6 +15,7 @@ keywords: 'app quality assurance, mobile qa, software testing, ci/cd, capacitorj
 tag: 'Mobile, Tutorial, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You push a release late on Friday because the change looks small. Login still works in staging. The build passed. By Saturday morning, support tickets are piling up because one payment path breaks on a subset of devices, analytics shows a drop in conversion, and engineering is trying to reconstruct what changed under time pressure.

@@ -16,6 +16,7 @@ keywords: Open Source, Capgo, philosophy, mobile app development, live updates, 
 tag: Open Source
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

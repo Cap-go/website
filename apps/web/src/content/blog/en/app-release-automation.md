@@ -13,6 +13,7 @@ keywords: 'app release automation, mobile CI/CD, live updates, Capacitor deploym
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Most advice about **app release automation** starts with the same prescription: add more tools, automate more steps, and releases will become faster. That advice misses the expensive part of mobile delivery. A pipeline can compile, test, sign, and upload a build while engineers still lose hours coordinating approvals, checking dashboards, preparing notes, and deciding whether a production fix can wait for store review.

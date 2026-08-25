@@ -13,6 +13,7 @@ keywords: session management, app security, iOS, Android, compliance, encryption
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: 'cost optimization, mobile devops, Capacitor updates, release costs, F
 tag: 'Mobile, CI/CD, Best Practices'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Most cost optimization advice starts in the wrong place. It tells teams to trim cloud bills after the fact, as if the expensive part of shipping software only lives in servers and storage. Mobile teams know the significant drain is often in the release path itself, where every oversized bundle, review delay, rollback, and support fire turns into cash burned on work that should've been preventable.

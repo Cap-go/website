@@ -13,6 +13,7 @@ keywords: organization system, capgo, mobile app development, software engineeri
 tag: Story
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: 'enterprise app management, mobile app deployment, app lifecycle manag
 tag: 'Mobile, Security, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your mobile team has just found three production apps owned by different business units, each with its own release process, update schedule, and support contact. One team deploys through an app store, another distributes internal builds through device management, and a third ships web assets from a separate pipeline. Nobody has a complete inventory, and a security review is asking which versions are active on managed devices.

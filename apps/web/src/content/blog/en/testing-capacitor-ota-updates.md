@@ -13,6 +13,7 @@ keywords: OTA updates, Capacitor, testing, Capgo, mobile app deployment, securit
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

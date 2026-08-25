@@ -13,6 +13,7 @@ keywords: OTA updates, key management, encryption, app security, update delivery
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

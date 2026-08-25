@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You rotate your phone to test a screen, and the layout either adapts cleanly or falls apart. Text reflows, buttons jump, a modal suddenly covers the wrong area, or your video player behaves exactly as expected. That small moment is where **portrait orientation** stops being a design term and becomes a product decision.

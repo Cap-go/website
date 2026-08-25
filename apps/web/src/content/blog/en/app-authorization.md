@@ -13,6 +13,7 @@ keywords: 'app authorization, oauth 2.0, capacitorjs, security, access control'
 tag: 'Mobile, Security, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably dealing with this already. The app login works, users can sign in with Google, Microsoft, or email, and the API accepts a token. Then the core questions begin. Can this user see invoices from another account? Should the desktop app cache an access token locally? How do you handle consent in a Capacitor build without leaking state across the webview and native layer?

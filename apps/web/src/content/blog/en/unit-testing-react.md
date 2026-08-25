@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Tutorial, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You push a small UI change before lunch. It looks harmless. A button label changes, a conditional render gets simplified, and a helper hook picks up one new branch. The pull request is clean, review is quick, and the deploy goes out.

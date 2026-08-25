@@ -13,6 +13,7 @@ keywords: Capacitor, mobile apps, plugin development, iOS, Android, JavaScript, 
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

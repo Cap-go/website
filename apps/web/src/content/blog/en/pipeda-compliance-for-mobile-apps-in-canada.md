@@ -13,6 +13,7 @@ keywords: PIPEDA, mobile app compliance, data privacy, user consent, data protec
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

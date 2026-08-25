@@ -17,6 +17,7 @@ keywords: Capacitor, Capgo, AI mobile apps, LLM apps, live updates, OTA updates,
 tag: Development, Mobile, Technology
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

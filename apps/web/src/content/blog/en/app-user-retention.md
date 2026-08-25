@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, Capacitor, Product'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 About **26% of users return on day 1**, and only **7% are still active after 30 days** according to [Adjust's retention benchmarks](https://www.adjust.com/resources/guides/user-retention/). That reframes app user retention immediately. The main problem usually isn't long-term loyalty. It's that most users decide very quickly whether your app deserves space on their phone.

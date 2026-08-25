@@ -13,6 +13,7 @@ keywords: CCPA, user data requests, compliance, privacy rights, data access, dat
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

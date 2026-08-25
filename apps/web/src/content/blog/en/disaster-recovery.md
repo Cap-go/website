@@ -13,6 +13,7 @@ keywords: 'disaster recovery, mobile apps, desktop apps, runbooks, backup strate
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your app is fine at 9:12 a.m., then a routine release lands, sign-in starts failing, and support inboxes fill up before breakfast. That's the moment organizations realize disaster recovery isn't a storage problem, it's a product problem, because users don't care which layer broke, they care that the app stopped working. In downtime terms, that gets expensive fast, and a 2026 industry summary says **100% of surveyed organizations** reported financial losses from downtime events in 2025, with outages costing about **$33,333 per minute** and some large enterprises facing around **$1 million per hour** in downtime costs ([Invenio IT's disaster recovery statistics summary](https://invenioit.com/continuity/disaster-recovery-statistics/)).

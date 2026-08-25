@@ -13,6 +13,7 @@ keywords: 'app cohort analysis, mobile retention, user analytics, churn metrics,
 tag: 'Mobile, Product'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Only **25.3% of mobile app users return on Day 1**, and average retention falls to **5.7% by Day 30** across 31 app categories worldwide, according to [mobile app retention benchmarks from Business of Apps](https://www.businessofapps.com/guide/mobile-app-retention/). That curve doesn't tell you whether the problem is poor acquisition, a confusing onboarding flow, or weak product value. **App cohort analysis does.**

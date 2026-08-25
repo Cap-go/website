@@ -13,6 +13,7 @@ keywords: OTA updates, app store restrictions, mobile development, app deploymen
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

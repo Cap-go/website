@@ -13,6 +13,7 @@ keywords: OTA updates, app development, mobile updates, app store compliance, CI
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

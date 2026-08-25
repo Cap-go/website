@@ -23,10 +23,10 @@ const blog = defineCollection({
       keywords: z.string().optional(),
       tag: z.string(),
       published: z.boolean().optional(),
+      /** Team editorial posts (`human`) show writer/reviewer/editor credits; pipeline posts (`ai`) keep the author byline. */
+      origin: z.enum(['human', 'ai']).default('ai'),
       locale: localeSchema,
       next_blog: z.string().optional().nullable(),
-      /** When `ai`, the article page keeps the single-author byline. Defaults to human editorial credits. */
-      origin: z.enum(['human', 'ai']).optional(),
     })
     .transform((data) => ({
       ...data,

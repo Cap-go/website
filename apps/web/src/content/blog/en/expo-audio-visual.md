@@ -13,6 +13,7 @@ keywords: 'expo audio visual, trade show av, event planning, av production, live
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 The booth looks ready until the show opens. Then one screen starts flickering, the lapel mic drops every few sentences, the demo video has no audio on one side, and your team burns the first hour apologizing instead of selling.

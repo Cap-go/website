@@ -13,6 +13,7 @@ keywords: Capacitor, Android, native bridge, JavaScript, mobile development, app
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

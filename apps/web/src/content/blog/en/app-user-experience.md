@@ -19,6 +19,7 @@ keywords: >-
 tag: 'Mobile, Capacitor, Product'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You can ship a cross-platform app that passes QA, clears store review, and still disappoint users in the first five minutes. The login works. Navigation technically works. The API returns data. Yet reviews say the app feels slow, awkward, or unreliable.

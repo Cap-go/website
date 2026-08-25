@@ -13,6 +13,7 @@ keywords: OTA updates, resource allocation, disaster recovery, security, scalabi
 tag: Security, Technology, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

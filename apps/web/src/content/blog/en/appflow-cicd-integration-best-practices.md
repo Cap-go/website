@@ -13,6 +13,7 @@ keywords: CI/CD, mobile app development, Appflow, Capgo, OTA updates, build auto
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

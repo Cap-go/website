@@ -13,6 +13,7 @@ keywords: Capacitor, code sharing, mobile development, testing, deployment, secu
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

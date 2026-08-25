@@ -13,6 +13,7 @@ keywords: Capgo, OTA updates, Capacitor, app development, update scheduling, mob
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: OTA updates, user consent, app security, compliance, mobile updates, d
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

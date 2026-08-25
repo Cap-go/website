@@ -13,6 +13,7 @@ keywords: OTA updates, security, encryption, file verification, access control, 
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

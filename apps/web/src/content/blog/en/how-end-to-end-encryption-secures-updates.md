@@ -13,6 +13,7 @@ keywords: end-to-end encryption, OTA updates, app security, data protection, use
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: Capacitor, dependency management, mobile development, plugins, automat
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

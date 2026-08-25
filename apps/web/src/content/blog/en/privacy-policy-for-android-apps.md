@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Security, Android'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're often closest to release when the privacy policy problem shows up. The build is green. QA signed off. The Play Console checklist looks almost done. Then someone asks a simple question that turns into a blocker: what exactly does this app collect, which SDKs receive it, where is that disclosed, and does the in-app flow match the listing?

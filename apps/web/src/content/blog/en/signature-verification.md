@@ -13,6 +13,7 @@ keywords: 'signature verification, code signing, app security, Capacitor updates
 tag: 'Mobile, Updates, Security'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your update pipeline is green, the bundle is available at the edge, and devices are checking for it. Then someone notices a suspicious change in the generated JavaScript. A compromised build runner, stolen developer credential, or altered artifact may have slipped a malicious payload into the release after testing finished. Without **signature verification**, the client has no reliable way to distinguish the bundle your team built from one an attacker modified in transit or at the delivery layer.

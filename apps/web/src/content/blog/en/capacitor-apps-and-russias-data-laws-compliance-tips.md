@@ -13,6 +13,7 @@ keywords: Russia data laws, data localization, Capacitor app compliance, privacy
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

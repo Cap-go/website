@@ -13,6 +13,7 @@ keywords: rollback management, app updates, automated rollbacks, error recovery,
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

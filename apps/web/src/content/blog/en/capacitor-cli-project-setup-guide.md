@@ -13,6 +13,7 @@ keywords: Capacitor, CLI, mobile apps, iOS, Android, project setup, live updates
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

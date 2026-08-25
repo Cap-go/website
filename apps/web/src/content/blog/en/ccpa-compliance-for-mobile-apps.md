@@ -13,6 +13,7 @@ keywords: CCPA compliance, mobile apps, personal data protection, user rights, d
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

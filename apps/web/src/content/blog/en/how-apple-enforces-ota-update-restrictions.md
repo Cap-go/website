@@ -13,6 +13,7 @@ keywords: OTA updates, security, privacy, Apple, MDM, developer guidelines, devi
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: hotfix deployment, Capgo, app updates, CI/CD tools, mobile development
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

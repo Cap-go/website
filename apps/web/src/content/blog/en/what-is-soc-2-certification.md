@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Security, Product'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your largest prospect is ready to move. Security review starts, procurement sends the questionnaire, and one item stops the deal cold: “Please provide your SOC 2 report.”

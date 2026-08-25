@@ -13,6 +13,7 @@ keywords: Capacitor, plugin development, developer forums, troubleshooting, comm
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

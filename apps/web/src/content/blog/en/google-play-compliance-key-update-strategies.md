@@ -13,6 +13,7 @@ keywords: Google Play compliance, app updates, data privacy, content policies, a
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

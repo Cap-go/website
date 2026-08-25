@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're usually ready for the Expo development client at the exact moment Expo Go starts lying to you.

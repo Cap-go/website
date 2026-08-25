@@ -13,6 +13,7 @@ keywords: OTA updates, Capacitor, Appflow, mobile development, deployment soluti
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

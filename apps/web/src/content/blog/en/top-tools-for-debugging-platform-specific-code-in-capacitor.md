@@ -13,6 +13,7 @@ keywords: Capacitor, debugging tools, platform-specific code, VS Code, Android S
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

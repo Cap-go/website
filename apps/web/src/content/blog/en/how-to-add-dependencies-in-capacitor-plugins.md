@@ -13,6 +13,7 @@ keywords: Capacitor, plugin dependencies, iOS, Android, JavaScript, CocoaPods, G
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

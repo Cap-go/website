@@ -15,6 +15,7 @@ keywords: Microsoft, App Center, mobile app development, live updates, OTA updat
 tag: Alternatives
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Microsoft recently announced that they will be [discontinuing support for apps running on Apache Cordova](https://devblogs.microsoft.com/appcenter/announcing-apache-cordova-retirement/) in their cloud product, App Center. This has prompted businesses and teams using App Center to seek alternatives, and I am thrilled to say that the [Capgo](https://capgo.app/) platform is a fantastic option for those looking for full support for Capacitor apps.

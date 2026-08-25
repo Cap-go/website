@@ -13,6 +13,7 @@ keywords: 'what is gdpr compliance, gdpr for developers, data privacy, mobile ap
 tag: 'Mobile, Security, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're in sprint planning, and someone says, “We need to make the app GDPR compliant.”

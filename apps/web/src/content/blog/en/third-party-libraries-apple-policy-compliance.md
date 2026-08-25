@@ -13,6 +13,7 @@ keywords: Apple App Store, compliance, third-party libraries, privacy manifests,
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

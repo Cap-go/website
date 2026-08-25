@@ -13,6 +13,7 @@ keywords: OTA updates, iOS updates, Android updates, mobile app development, sec
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: Firebase, Crashlytics, mobile apps, Capacitor, app development, crash 
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

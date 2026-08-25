@@ -13,6 +13,7 @@ keywords: 'client id google, google oauth, google cloud console, api credentials
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably here because Google Sign-In should have been a quick integration, and instead you're staring at a credentials screen wondering why one app type gives you a client secret and another doesn't. That confusion is normal, especially if you're building with Capacitor, Ionic, Electron, or a mixed web and native stack.

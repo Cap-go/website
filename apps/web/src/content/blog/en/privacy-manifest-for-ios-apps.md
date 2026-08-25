@@ -13,6 +13,7 @@ keywords: Privacy Manifest, iOS apps, data privacy, Apple guidelines, app compli
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -13,6 +13,7 @@ keywords: Capacitor, CLI, app updates, mobile development, iOS, Android, migrati
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

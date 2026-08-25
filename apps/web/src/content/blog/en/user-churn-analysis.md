@@ -13,6 +13,7 @@ keywords: 'user churn analysis, churn rate, retention metrics, cohort analysis, 
 tag: 'Mobile, Product, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You know the feeling. The dashboard looks fine in the morning, the release went out on time, and by the end of the month someone in the retention meeting is asking why active users have gone soft for three straight cycles. At that point, the team isn't dealing with a churn problem, it's dealing with a detection problem.

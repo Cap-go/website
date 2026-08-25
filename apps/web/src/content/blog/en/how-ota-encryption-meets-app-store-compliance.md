@@ -13,6 +13,7 @@ keywords: OTA encryption, app store compliance, app updates security, AES-256, T
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

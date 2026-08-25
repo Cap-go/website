@@ -13,6 +13,7 @@ keywords: token revocation, Capacitor apps, security, OAuth 2.0, user data prote
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

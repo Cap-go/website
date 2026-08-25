@@ -13,6 +13,7 @@ keywords: real-time updates, user segmentation, app engagement, feature testing,
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

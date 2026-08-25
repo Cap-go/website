@@ -20,6 +20,7 @@ keywords: >-
 tag: 'Mobile, Security, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You push a release late at night, glance at your alerts, and notice a credential that never should've left a private repo. Maybe it was a database password. Maybe it was a cloud access key with broader permissions than anyone intended. Either way, the problem isn't just that someone could log in. The problem is that database security continues to be treated like a login problem when it's really a storage lifecycle problem.
