@@ -135,12 +135,12 @@ function mediaQuality(accept: string, typePattern: RegExp): { q: number; index: 
     for (const param of params) {
       const trimmed = param.trim()
       if (!/^q=/i.test(trimmed)) continue
-      const match = trimmed.match(/^q=([0-9.]+)$/i)
-      if (!match) {
+      const raw = trimmed.slice(trimmed.indexOf('=') + 1)
+      if (!/^(?:0(?:\.[0-9]{0,3})?|1(?:\.0{0,3})?)$/.test(raw)) {
         q = Number.NaN
         break
       }
-      q = Number(match[1])
+      q = Number(raw)
     }
     if (Number.isNaN(q) || q < 0 || q > 1) continue
     if (!best || q > best.q || (q === best.q && index < best.index)) {
