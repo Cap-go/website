@@ -167,7 +167,6 @@ const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
 const TRANSLATION_CACHE_VERSION = '2026-08-13-message-context-fr-elision-length-translate-no-unquoted-cjk-v1'
 const TRANSLATION_LENGTH_MAX_RATIO = 1.3
 const TRANSLATION_LENGTH_MIN_RATIO = 0.7
-const COMPACT_TRANSLATION_LOCALES = new Set<Locale>(['ja', 'ko', 'zh'])
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
@@ -194,6 +193,8 @@ const LANGUAGE_NAMES: Record<Locale, string> = {
   ko: 'Korean',
   zh: 'Simplified Chinese',
 }
+
+const COMPACT_TRANSLATION_TARGETS = new Set<string>(['ja', 'ko', 'zh', LANGUAGE_NAMES.ja, LANGUAGE_NAMES.ko, LANGUAGE_NAMES.zh])
 
 const LANGUAGE_FLAG_ENTITIES: Record<string, string> = {
   de: '&#127465;&#127466;',
@@ -765,41 +766,60 @@ function collectQuotedAttributes(tag: string): AttributeMatch[] {
     while (quoteIndex < tag.length && isWhitespace(tag[quoteIndex])) quoteIndex += 1
 
     const quote = tag[quoteIndex]
-    if (nameStart === nameEnd || (quote !== '"' && quote !== "'")) {
+    if (nameStart === nameEnd) {
       index = equalsIndex + 1
       continue
     }
 
-    const valueStart = quoteIndex + 1
-    const valueEnd = tag.indexOf(quote, valueStart)
-    if (valueEnd === -1) break
+    const attributeName = tag.slice(nameStart, nameEnd)
+
+    if (quote === '"' || quote === "'") {
+      const valueStart = quoteIndex + 1
+      const valueEnd = tag.indexOf(quote, valueStart)
+      if (valueEnd === -1) break
+
+      attributes.push({
+        name: attributeName,
+        quote,
+        value: tag.slice(valueStart, valueEnd),
+        start: nameStart,
+        valueStart,
+        valueEnd,
+        end: valueEnd + 1,
+      })
+      index = valueEnd + 1
+      continue
+    }
+
+    const valueStart = quoteIndex
+    let valueEnd = valueStart
+    while (valueEnd < tag.length && !isWhitespace(tag[valueEnd]) && tag[valueEnd] !== '>' && tag[valueEnd] !== '/') {
+      valueEnd += 1
+    }
+    if (valueEnd === valueStart) {
+      index = equalsIndex + 1
+      continue
+    }
 
     attributes.push({
-      name: tag.slice(nameStart, nameEnd),
-      quote,
+      name: attributeName,
+      quote: '',
       value: tag.slice(valueStart, valueEnd),
       start: nameStart,
       valueStart,
       valueEnd,
-      end: valueEnd + 1,
+      end: valueEnd,
     })
-    index = valueEnd + 1
+    index = valueEnd
   }
 
   return attributes
 }
 
-function readUnquotedAttributeValue(tag: string, attrName: string): string | null {
-  const normalizedAttr = attrName.toLowerCase()
-  const pattern = new RegExp(`\\b${normalizedAttr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*=\\s*([^\\s>/"']+)`, 'i')
-  const match = pattern.exec(tag)
-  return match?.[1] ?? null
-}
-
 function readAttributeValue(tag: string, attrName: string): string | null {
   const normalizedAttr = attrName.toLowerCase()
   const attribute = collectQuotedAttributes(tag).find((item) => item.name.toLowerCase() === normalizedAttr)
-  return attribute?.value ?? readUnquotedAttributeValue(tag, normalizedAttr)
+  return attribute?.value ?? null
 }
 
 function isSupportedLanguagePath(value: string): boolean {
@@ -1559,7 +1579,7 @@ function translationLengthViolation(source: string, translated: string, targetLa
   const translatedLen = translated.length
   if (sourceLen < 12) return translatedLen > sourceLen + 8
   if (translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO) return true
-  if (COMPACT_TRANSLATION_LOCALES.has(targetLanguage as Locale)) return false
+  if (COMPACT_TRANSLATION_TARGETS.has(targetLanguage)) return false
   return translatedLen < sourceLen * TRANSLATION_LENGTH_MIN_RATIO
 }
 

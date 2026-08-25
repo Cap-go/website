@@ -250,8 +250,23 @@ assert(
   'Length guard flagged a valid shorter Japanese translation',
 )
 assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '全デバイスへ安全に配信', 'Japanese'),
+  'Length guard flagged a valid shorter Japanese translation for production language name',
+)
+assert(
   !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '모든 기기에 안전하게 배포', 'ko'),
   'Length guard flagged a valid shorter Korean translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '모든 기기에 안전하게 배포', 'Korean'),
+  'Length guard flagged a valid shorter Korean translation for production language name',
+)
+
+const quotedAttrFalsePositiveHtml = `<!doctype html><html><body><div data-note="translate=no"><p>Translate this paragraph.</p></div></body></html>`
+const quotedAttrFalsePositiveParsed = __translationWorkerTest.collectSegments(quotedAttrFalsePositiveHtml)
+assert(
+  quotedAttrFalsePositiveParsed.segments.some((segment) => segment.inBody && segment.text.includes('Translate this paragraph')),
+  'Parser skipped translatable text after translate=no substring inside quoted attribute value',
 )
 assert(
   __translationWorkerTest.guardTranslatedBatchLengths(
