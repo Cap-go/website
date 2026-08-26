@@ -169,7 +169,14 @@ function parseOptionalDate(value: unknown): string | undefined {
 function parseCommaSeparated(value: unknown): string[] {
   if (typeof value !== 'string' || !value.trim()) return []
 
-  return [...new Set(value.split(',').map((item) => item.trim().toLowerCase()).filter(Boolean))]
+  return [
+    ...new Set(
+      value
+        .split(',')
+        .map((item) => item.trim().toLowerCase())
+        .filter(Boolean),
+    ),
+  ]
 }
 
 function pageUrl(siteUrl: string, path: string): string {
@@ -197,7 +204,9 @@ export function findRelatedBlogPosts(post: BlogPost, posts: readonly BlogPost[],
       score: candidate.tags.filter((tag) => tagSet.has(tag)).length,
     }))
     .filter(({ score }) => score > 0)
-    .toSorted((left, right) => right.score - left.score || right.candidate.createdAt.localeCompare(left.candidate.createdAt) || left.candidate.slug.localeCompare(right.candidate.slug))
+    .toSorted(
+      (left, right) => right.score - left.score || right.candidate.createdAt.localeCompare(left.candidate.createdAt) || left.candidate.slug.localeCompare(right.candidate.slug),
+    )
     .slice(0, limit)
     .map(({ candidate }) => candidate)
 }
@@ -250,10 +259,12 @@ function readBlogPost(filePath: string, siteUrl: string): BlogPost | undefined {
 }
 
 export function loadAllBlogPosts(siteUrl = DEFAULT_SITE_URL): BlogPost[] {
-  return sortPosts(allBlogFiles().flatMap((filePath) => {
-    const post = readBlogPost(filePath, siteUrl)
-    return post ? [post] : []
-  }))
+  return sortPosts(
+    allBlogFiles().flatMap((filePath) => {
+      const post = readBlogPost(filePath, siteUrl)
+      return post ? [post] : []
+    }),
+  )
 }
 
 function sortPosts(posts: BlogPost[]): BlogPost[] {
