@@ -258,7 +258,7 @@ export function createPodcastRssOptions(siteUrl: string, episodes: readonly Podc
     trailingSlash: true,
     xmlns: {
       atom: 'http://www.w3.org/2005/Atom',
-      itunes: 'http://www.itunes.com/dtds/podcast-1.0.dtd',
+      itunes: 'http://www.itunes.com/dtds/podcast-1.0.dtd', // NOSONAR S5332 - iTunes RSS namespace URI is defined as http
     },
   }
 }

@@ -155,7 +155,11 @@ function isInsideDirectory(directory: string, candidate: string): boolean {
 }
 
 function parseDate(value: unknown): string {
-  const date = value instanceof Date ? value : new Date(typeof value === 'string' ? value : 0)
+  let date: Date
+  if (value instanceof Date) date = value
+  else if (typeof value === 'string') date = new Date(value)
+  else date = new Date(0)
+
   return Number.isNaN(date.getTime()) ? new Date(0).toISOString() : date.toISOString()
 }
 
@@ -451,8 +455,9 @@ export class HttpAutoContentClient implements AutoContentClient {
     }
 
     if (!response.ok) {
-      const message = isRecord(payload) ? asString(payload.message) || asString(payload.error) : undefined
-      throw new Error(`AutoContent ${method} ${path} failed (${response.status})${message ? `: ${message}` : ''}`)
+      const baseMessage = `AutoContent ${method} ${path} failed (${response.status})`
+      const detail = isRecord(payload) ? asString(payload.message) || asString(payload.error) : undefined
+      throw new Error(detail ? `${baseMessage}: ${detail}` : baseMessage)
     }
 
     return payload as T
@@ -611,30 +616,50 @@ export async function publishCandidates(
   }
 }
 
+function readCliOptionValue(argument: string, args: string[], index: number): { nextIndex: number; value: string } {
+  if (argument.includes('=')) return { nextIndex: index, value: argument.slice(argument.indexOf('=') + 1) }
+  return { nextIndex: index + 1, value: args[index + 1] ?? '' }
+}
+
+function applyCliArgument(options: PodcastGenerationOptions, args: string[], index: number): number {
+  const argument = args[index]
+  const { nextIndex, value } = readCliOptionValue(argument, args, index)
+
+  if (argument === '--backfill' || argument.startsWith('--backfill=')) {
+    options.backfill = true
+    return index
+  }
+  if (argument === '--dry-run' || argument.startsWith('--dry-run=')) {
+    options.dryRun = true
+    return index
+  }
+  if (argument === '--slug' || argument.startsWith('--slug=')) {
+    if (!value) throw new Error('--slug requires a value.')
+    options.slug = value
+    return nextIndex
+  }
+  if (argument === '--changed-files' || argument.startsWith('--changed-files=')) {
+    if (!value) throw new Error('--changed-files requires a value.')
+    options.changedFilesPath = resolve(PROJECT_ROOT, value)
+    return nextIndex
+  }
+  if (argument === '--limit' || argument.startsWith('--limit=')) {
+    options.limit = parsePositiveInteger(value, '--limit')
+    return nextIndex
+  }
+  if (argument === '--help' || argument === '-h') {
+    console.log('Usage: bun run blogs:generate_podcast -- --backfill|--changed-files <path>|--slug <slug> [--limit <count>] [--dry-run]')
+    process.exit(0)
+  }
+
+  throw new Error(`Unknown argument: ${argument}`)
+}
+
 function parseArguments(args: string[]): PodcastGenerationOptions {
   const options: PodcastGenerationOptions = { backfill: false, dryRun: false, limit: DEFAULT_LIMIT }
 
-  for (let index = 0; index < args.length; index += 1) {
-    const argument = args[index]
-    const value = argument.includes('=') ? argument.slice(argument.indexOf('=') + 1) : args[index + 1]
-
-    if (argument === '--backfill') options.backfill = true
-    else if (argument === '--dry-run') options.dryRun = true
-    else if (argument === '--slug' || argument.startsWith('--slug=')) {
-      if (!value) throw new Error('--slug requires a value.')
-      options.slug = value
-      if (argument === '--slug') index += 1
-    } else if (argument === '--changed-files' || argument.startsWith('--changed-files=')) {
-      if (!value) throw new Error('--changed-files requires a value.')
-      options.changedFilesPath = resolve(PROJECT_ROOT, value)
-      if (argument === '--changed-files') index += 1
-    } else if (argument === '--limit' || argument.startsWith('--limit=')) {
-      options.limit = parsePositiveInteger(value, '--limit')
-      if (argument === '--limit') index += 1
-    } else if (argument === '--help' || argument === '-h') {
-      console.log('Usage: bun run blogs:generate_podcast -- --backfill|--changed-files <path>|--slug <slug> [--limit <count>] [--dry-run]')
-      process.exit(0)
-    } else throw new Error(`Unknown argument: ${argument}`)
+  for (let index = 0; index < args.length;) {
+    index = applyCliArgument(options, args, index) + 1
   }
 
   return options
@@ -673,8 +698,10 @@ export async function runPodcastGeneration(options: PodcastGenerationOptions, en
 }
 
 if (import.meta.main) {
-  runPodcastGeneration(parseArguments(process.argv.slice(2))).catch((error: unknown) => {
+  try {
+    await runPodcastGeneration(parseArguments(process.argv.slice(2)))
+  } catch (error: unknown) {
     console.error(error instanceof Error ? error.message : error)
     process.exitCode = 1
-  })
+  }
 }
