@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-26T09:23:20.135Z
-updated_at: 2026-08-26T09:23:21.627Z
+updated_at: 2026-08-26T09:25:55.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/a3f6651d-24e2-4f74-a2b7-a0d0623c2b39/app-infrastructure-js-teams.jpg'
 head_image_alt: App Infrastructure Explained for Cross-Platform JS Teams
 keywords: 'app infrastructure, capacitor, live updates, electron, ci/cd'
