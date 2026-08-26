@@ -35,8 +35,17 @@ function execGit(args) {
       encoding: 'utf8',
       maxBuffer: 16 * 1024 * 1024,
     }).trim()
-  } catch {
-    return ''
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    throw new Error(`git ${args.join(' ')} failed: ${message}`, { cause: error })
+  }
+}
+
+function assertGitRepositoryReady() {
+  execGit(['rev-parse', '--git-dir'])
+
+  if (execGit(['rev-parse', '--is-shallow-repository']) === 'true') {
+    throw new Error('Shallow clone detected. Run `git fetch --unshallow` before backfilling origins.')
   }
 }
 
@@ -60,7 +69,7 @@ function parseGitLog(output) {
 }
 
 function getAddsForPath(path, { follow = false, all = false } = {}) {
-  const args = ['log', '--diff-filter=A', '--format=%H|%ai|%an|%ae|%s']
+  const args = ['log', '--diff-filter=A', '--format=%H|%aI|%an|%ae|%s']
   if (all) args.push('--all')
   if (follow) args.push('--follow')
   args.push('--', path)
@@ -187,6 +196,8 @@ function upsertOrigin(frontmatterBlock, origin) {
 
   return `${frontmatterBlock}\norigin: ${origin}`
 }
+
+assertGitRepositoryReady()
 
 const files = readdirSync(BLOG_DIR).filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
 const counts = { human: 0, ai: 0, updated: 0 }
