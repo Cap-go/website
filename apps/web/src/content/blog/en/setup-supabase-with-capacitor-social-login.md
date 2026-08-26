@@ -14,7 +14,7 @@ keywords: Supabase, Capacitor, social login, authentication, Google, Apple, Face
 tag: Tutorial
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

@@ -13,7 +13,7 @@ keywords: CodePush alternative, App Center replacement, Capacitor CodePush alter
 tag: Alternatives, Migration, Updates
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: appcenter-migration
 ---
 

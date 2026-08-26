@@ -13,7 +13,7 @@ keywords: Capacitor live update tools, best Capacitor OTA updates, Capgo, Capawe
 tag: Development, Mobile, Updates
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: best-codepush-alternatives-for-capacitor-ionic-cordova
 ---
 

@@ -15,7 +15,7 @@ keywords: mobile app development, live updates, OTA updates, continuous integrat
 tag: Tutorial
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: how-to-send-specific-version-to-users
 ---
 

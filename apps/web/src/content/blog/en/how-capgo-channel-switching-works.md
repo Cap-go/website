@@ -13,7 +13,7 @@ keywords: channels, channel surfing, OTA updates, capacitor, capgo, live updates
 tag: Tutorial
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

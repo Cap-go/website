@@ -13,7 +13,7 @@ keywords: app store review, in-app purchases, iOS review, Android review, subscr
 tag: Mobile, IAP, App Store, Google Play
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

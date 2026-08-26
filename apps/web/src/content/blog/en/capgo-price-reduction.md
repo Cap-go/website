@@ -13,7 +13,7 @@ keywords: capgo, price reduction, live updates, mobile app development, capacito
 tag: News
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

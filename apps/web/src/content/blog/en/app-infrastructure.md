@@ -13,6 +13,7 @@ keywords: 'app infrastructure, capacitor, live updates, electron, ci/cd'
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've shipped a polished Capacitor app. The React screens are stable, the Electron desktop build works, and early adoption is climbing. Then the first serious incident arrives. It isn't a problem in the component code. Users are loading a stale JavaScript bundle, an Electron update has left some installations unusable, or a critical fix is waiting through an App Store review process while support handles the fallout.

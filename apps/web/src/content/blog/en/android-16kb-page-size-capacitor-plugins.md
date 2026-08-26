@@ -13,7 +13,7 @@ keywords: Capacitor, Android 16KB page size, plugins, troubleshooting, app crash
 tag: Development, Mobile, Capacitor
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

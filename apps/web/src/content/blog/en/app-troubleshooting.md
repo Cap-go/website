@@ -13,6 +13,7 @@ keywords: 'app troubleshooting, CapacitorJS, live updates, mobile debugging, Ele
 tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Thursday evening, your CapacitorJS shopping app starts showing blank dashboards for Android 14 users. iOS customers are browsing normally. Electron desktop users haven't reported anything. The on-call engineer assumes a WebView regression, opens Android Studio, and spends hours comparing rendering behavior across devices. The eventual cause isn't a rendering bug at all. A staging API key reached production after a CDN cache invalidation failed to reach mobile clients.

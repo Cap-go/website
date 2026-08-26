@@ -13,7 +13,7 @@ keywords: mobile app security, live updates, data integrity, OTA updates, encryp
 tag: Development, Mobile, Updates
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

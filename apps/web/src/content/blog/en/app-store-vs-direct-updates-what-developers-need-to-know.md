@@ -13,7 +13,7 @@ keywords: App Store updates, OTA updates, mobile app development, update strateg
 tag: Development, Mobile, Updates
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

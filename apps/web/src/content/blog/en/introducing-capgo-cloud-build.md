@@ -15,7 +15,7 @@ keywords: cloud build, native build, capacitor, iOS build, Android build, CI/CD,
 tag: Product
 published: true
 locale: en
-origin: ai
+origin: human
 ---
 
 We're excited to announce **Capgo Cloud Build** - a new way to build your Capacitor apps for iOS and Android directly in the cloud, without the need for local development environments or CI/CD infrastructure.

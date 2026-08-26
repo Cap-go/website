@@ -13,7 +13,7 @@ keywords: 'open source updater, Capacitor live updates, Electron auto update, OT
 tag: 'Mobile, Updates, Security'
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 Open source now sits in the center of commercial software, not at the edges. A 2024 Synopsys and Open Source Security and Risk Analysis summary found that **96%** of commercial codebases contained open source software, and **77%** of the code in those codebases was open source, while the Linux Foundation's 2022 study put typical open source content at roughly **70% to 90%** of a software codebase ([Intel's overview of open source consumption](https://www.intel.com/content/www/us/en/developer/articles/guide/the-careful-consumption-of-open-source-software.html)). If your product ships to phones, desktops, or devices, an **open source updater** isn't a convenience feature. It's part of the delivery system that keeps those dependencies, bundles, and runtime assets safe enough to run in production.

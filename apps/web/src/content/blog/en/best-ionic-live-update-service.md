@@ -13,6 +13,7 @@ keywords: ''
 tag: 'Mobile, Updates, Security'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Picking an Ionic live update service is really a release design task. OTA updates can fix web-layer bugs without a new store build, but they can't replace native releases. I use the workflow below to define the update boundary, compare services, set up Capgo, and add safe rollout rules.
