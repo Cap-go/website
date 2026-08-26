@@ -164,7 +164,9 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-08-12-message-context-fr-elision-v1'
+const TRANSLATION_CACHE_VERSION = '2026-08-13-message-context-fr-elision-length-translate-no-unquoted-cjk-v1'
+const TRANSLATION_LENGTH_MAX_RATIO = 1.3
+const TRANSLATION_LENGTH_MIN_RATIO = 0.7
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
@@ -179,7 +181,7 @@ const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
 const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
 const AI_OUTPUT_PREVIEW_CHARS = 240
 const TRANSLATION_TEST_ROUTE_PREFIX = '/__translation-test__'
-const PROTECTED_TRANSLATION_TOKENS = ['Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
+const PROTECTED_TRANSLATION_TOKENS = ['Live Update', 'Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -191,6 +193,8 @@ const LANGUAGE_NAMES: Record<Locale, string> = {
   ko: 'Korean',
   zh: 'Simplified Chinese',
 }
+
+const COMPACT_TRANSLATION_TARGETS = new Set<string>(['ja', 'ko', 'zh', LANGUAGE_NAMES.ja, LANGUAGE_NAMES.ko, LANGUAGE_NAMES.zh])
 
 const LANGUAGE_FLAG_ENTITIES: Record<string, string> = {
   de: '&#127465;&#127466;',
@@ -762,25 +766,54 @@ function collectQuotedAttributes(tag: string): AttributeMatch[] {
     while (quoteIndex < tag.length && isWhitespace(tag[quoteIndex])) quoteIndex += 1
 
     const quote = tag[quoteIndex]
-    if (nameStart === nameEnd || (quote !== '"' && quote !== "'")) {
+    if (nameStart === nameEnd) {
       index = equalsIndex + 1
       continue
     }
 
-    const valueStart = quoteIndex + 1
-    const valueEnd = tag.indexOf(quote, valueStart)
-    if (valueEnd === -1) break
+    const attributeName = tag.slice(nameStart, nameEnd)
+
+    if (quote === '"' || quote === "'") {
+      const valueStart = quoteIndex + 1
+      const valueEnd = tag.indexOf(quote, valueStart)
+      if (valueEnd === -1) break
+
+      attributes.push({
+        name: attributeName,
+        quote,
+        value: tag.slice(valueStart, valueEnd),
+        start: nameStart,
+        valueStart,
+        valueEnd,
+        end: valueEnd + 1,
+      })
+      index = valueEnd + 1
+      continue
+    }
+
+    const valueStart = quoteIndex
+    let valueEnd = valueStart
+    while (valueEnd < tag.length) {
+      const char = tag[valueEnd]
+      if (isWhitespace(char) || char === '>') break
+      if (char === '/' && tag[valueEnd + 1] === '>') break
+      valueEnd += 1
+    }
+    if (valueEnd === valueStart) {
+      index = equalsIndex + 1
+      continue
+    }
 
     attributes.push({
-      name: tag.slice(nameStart, nameEnd),
-      quote,
+      name: attributeName,
+      quote: '',
       value: tag.slice(valueStart, valueEnd),
       start: nameStart,
       valueStart,
       valueEnd,
-      end: valueEnd + 1,
+      end: valueEnd,
     })
-    index = valueEnd + 1
+    index = valueEnd
   }
 
   return attributes
@@ -807,8 +840,20 @@ function languageSelectorTargetLocale(tag: string): string | null {
   return isSupportedLanguagePath(idLocale) ? idLocale : null
 }
 
+function hasNoTranslateClass(className: string | null): boolean {
+  if (!className) return false
+  return className
+    .split(/\s+/)
+    .filter(Boolean)
+    .some((item) => item.toLowerCase() === 'notranslate')
+}
+
 function shouldSkipElementText(tag: string, tagName: string): boolean {
   if (SKIP_TEXT_TAGS.has(tagName)) return true
+
+  const translate = readAttributeValue(tag, 'translate')
+  if (translate?.trim().toLowerCase() === 'no') return true
+  if (hasNoTranslateClass(readAttributeValue(tag, 'class'))) return true
 
   const id = readAttributeValue(tag, 'id')
   if (id && (LANGUAGE_SELECTOR_SKIP_IDS.has(id) || id.startsWith('language_'))) return true
@@ -849,9 +894,11 @@ function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText
   for (const attribute of collectQuotedAttributes(tag)) {
     if (!shouldTranslateAttribute(tag, tagName, attribute.name, attribute.value)) continue
 
+    const outputQuote = attribute.quote || '"'
     parts.push(tag.slice(lastIndex, attribute.start), tag.slice(attribute.start, attribute.valueStart))
-    addSegment(parts, segments, attribute.value, 'attribute', inBody, attribute.quote)
-    parts.push(attribute.quote)
+    if (!attribute.quote) parts.push(outputQuote)
+    addSegment(parts, segments, attribute.value, 'attribute', inBody, outputQuote)
+    parts.push(outputQuote)
     lastIndex = attribute.end
     matched = true
   }
@@ -1278,14 +1325,19 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
     }
 
     const tagName = tagNameOf(tag)
+    const skipElement = Boolean(tagName && !isClosingTag(tag) && shouldSkipElementText(tag, tagName))
 
-    appendTag(parts, segments, tag, false, insideBody)
+    if (skipElement) {
+      parts.push(tag)
+    } else {
+      appendTag(parts, segments, tag, false, insideBody)
+    }
 
     if (tagName === 'body' && isClosingTag(tag)) {
       insideBody = false
     }
 
-    if (tagName && !isClosingTag(tag) && !isSelfClosingTag(tag, tagName) && shouldSkipElementText(tag, tagName)) {
+    if (tagName && !isClosingTag(tag) && !isSelfClosingTag(tag, tagName) && skipElement) {
       skipStack.push(tagName)
     }
 
@@ -1522,6 +1574,28 @@ function shouldCheckUnchangedTranslation(value: string): boolean {
   return true
 }
 
+function shouldEnforceTranslationLength(source: string): boolean {
+  return source.trim().length > 0
+}
+
+function translationLengthViolation(source: string, translated: string, targetLanguage = ''): boolean {
+  if (!shouldEnforceTranslationLength(source)) return false
+  const sourceLen = source.length
+  const translatedLen = translated.length
+  if (sourceLen < 12) return translatedLen > sourceLen + 8
+  if (translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO) return true
+  if (COMPACT_TRANSLATION_TARGETS.has(targetLanguage)) return false
+  return translatedLen < sourceLen * TRANSLATION_LENGTH_MIN_RATIO
+}
+
+function guardTranslationLength(source: string, translated: string, targetLanguage = ''): string {
+  return translationLengthViolation(source, translated, targetLanguage) ? source : translated
+}
+
+function guardTranslatedBatchLengths(batch: string[], translated: string[], targetLanguage = ''): string[] {
+  return batch.map((source, index) => guardTranslationLength(source, translated[index] ?? source, targetLanguage))
+}
+
 function assertTranslatedBatch(targetLanguage: string, batch: string[], translated: string[]): void {
   const candidates = batch
     .map((source, index) => ({
@@ -1650,6 +1724,10 @@ function translationGrammarSystemHint(): string {
   return 'Prefer natural native phrasing over literal calques. Apply correct target-language grammar and morphology. For French, always elide singular articles before a vowel (l’attente, not la attente). Do not elide before aspirate h (la haute, le héros).'
 }
 
+function translationLengthSystemHint(): string {
+  return 'Keep each translation about the same length as the source (similar character count, roughly within ±30%). Do not expand short UI labels, buttons, nav items, table headers, or headings into longer sentences. Over-long translations break Capgo page layouts and UI spacing.'
+}
+
 /** Fix unelided French le/la before a vowel (e.g. "la attente" → "l’attente").
  * Vowels only — aspirate-h words (haute, héros, haricot…) must keep le/la. */
 function applyFrenchArticleElision(text: string): string {
@@ -1691,8 +1769,9 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
               translationContextSystemHint(),
               translationGrammarSystemHint(),
+              translationLengthSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
-              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
+              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
               `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${batch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
               attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON object matching the schema.' : '',
@@ -1733,7 +1812,20 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           return polishTranslatedText(targetLanguage, result.text)
         })
         assertTranslatedBatch(targetLanguage, batch, restored)
-        return restored
+        const guarded = guardTranslatedBatchLengths(batch, restored, targetLanguage).map((text, index) => {
+          if (text === batch[index] && translationLengthViolation(batch[index], restored[index], targetLanguage)) {
+            console.warn('Translation kept source after length bound violation', {
+              targetLanguage,
+              index,
+              sourceLength: batch[index].length,
+              translatedLength: restored[index].length,
+              sourcePreview: aiPayloadPreview(batch[index]),
+              outputPreview: aiPayloadPreview(restored[index]),
+            })
+          }
+          return text
+        })
+        return guarded
       }
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
@@ -1787,8 +1879,9 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               translationContextSystemHint(),
               translationGrammarSystemHint(),
+              translationLengthSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
-              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
+              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
               'Return only the translated text. Do not return JSON, Markdown, labels, explanations, quotes around the whole answer, or extra lines.',
             ].join(' '),
@@ -1808,8 +1901,16 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
 
       payload = extractAiPayload(result)
       const translated = plainTranslationFromUnknown(payload)
-      if (translated) return polishTranslatedText(targetLanguage, protectedText.restore(translated))
-      lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
+      if (translated) {
+        const restored = polishTranslatedText(targetLanguage, protectedText.restore(translated))
+        if (translationLengthViolation(text, restored, targetLanguage)) {
+          lastError = new Error(`Translation length out of bounds for ${targetLanguage}: ${restored.length} chars vs source ${text.length}`)
+        } else {
+          return restored
+        }
+      } else {
+        lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
+      }
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
     }
@@ -1832,6 +1933,15 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
     return text
   }
 
+  if (lastError?.message.includes('length out of bounds')) {
+    console.warn('Single-text translation kept source after length bound violation', {
+      targetLanguage,
+      error: lastError.message,
+      sourcePreview: aiPayloadPreview(text),
+    })
+    return text
+  }
+
   throw new Error(`Single-text translation failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
@@ -1840,7 +1950,6 @@ async function translateBatchIndividually(env: Env, targetLanguage: string, batc
   for (const text of batch) {
     translated.push(await translateSingleText(env, targetLanguage, text, pagePath))
   }
-  assertTranslatedBatch(targetLanguage, batch, translated)
   return translated
 }
 
@@ -3105,11 +3214,14 @@ export const __translationWorkerTest = {
   cacheKeyFor,
   sourceCheckKeyFor,
   collectSegments,
+  guardTranslationLength,
+  guardTranslatedBatchLengths,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
   rewriteMetadataAndLinks,
   resolveTranslationContexts,
   syncExecutableScriptsFromEnglish,
+  translationLengthViolation,
 }
 
 export default {

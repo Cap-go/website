@@ -166,6 +166,8 @@ const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('fr-elision'), 'Cache version was not bumped for French elision polish')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('length-translate-no'), 'Cache version was not bumped for length + translate=no support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('unquoted-cjk'), 'Cache version was not bumped for unquoted attrs + CJK length support')
 assert(
   __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === 'Évitez l\u2019attente. Livrez la correction.',
   'French elision did not fix "la attente"',
@@ -182,6 +184,122 @@ assert(__translationWorkerTest.polishTranslatedText('French', 'Évitez la attent
 assert(__translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.', 'Non-French polish path should leave text unchanged')
 const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Skip the wait. Ship the fix.'])[0]
 assert(typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('hotfix'), 'Missing marketing context override for live update hero headline')
+
+const noTranslateHtml = `<!doctype html>
+<html lang="en">
+  <body>
+    <h1>Live Update delivery data</h1>
+    <p>Translate this chrome copy.</p>
+    <tbody translate="no"><tr><td>United States</td><td title="A long failure explanation that must stay intact">Download failure (46%)</td></tr></tbody>
+    <div class="notranslate"><p>Keep metrics English</p></div>
+    <p>Translate the trailing chrome too.</p>
+  </body>
+</html>`
+const noTranslateParsed = __translationWorkerTest.collectSegments(noTranslateHtml)
+const noTranslateBody = noTranslateParsed.segments.filter((segment) => segment.inBody).map((segment) => segment.text)
+assert(
+  noTranslateBody.some((text) => text.includes('Translate this chrome copy')),
+  'Parser skipped normal body copy near translate=no',
+)
+assert(
+  noTranslateBody.some((text) => text.includes('Translate the trailing chrome too')),
+  'Parser did not resume after translate=no',
+)
+assert(
+  noTranslateBody.every((text) => !text.includes('United States') && !text.includes('Download failure') && !text.includes('Keep metrics English')),
+  'Parser collected text from translate=no / notranslate regions',
+)
+assert(
+  noTranslateParsed.parts.some((part) => typeof part === 'string' && part.includes('United States') && part.includes('Download failure (46%)')),
+  'Parser did not preserve translate=no markup as raw HTML',
+)
+const noTranslateRaw = noTranslateParsed.parts.filter((part): part is string => typeof part === 'string').join('')
+assert(
+  noTranslateRaw.includes('class="notranslate"') && noTranslateRaw.includes('<p>Keep metrics English</p>') && noTranslateRaw.includes('</div>'),
+  'Parser did not preserve notranslate fragment as raw HTML',
+)
+
+const skipAttrHtml = `<!doctype html><html><body><section translate="no" title="Metric region label"><p>99%</p></section></body></html>`
+const skipAttrParsed = __translationWorkerTest.collectSegments(skipAttrHtml)
+assert(
+  !skipAttrParsed.segments.some((segment) => segment.mode === 'attribute' && segment.text.includes('Metric region label')),
+  'Parser collected translatable attributes from translate=no element',
+)
+
+const unquotedSkipHtml = `<!doctype html><html><body><section translate=no class=notranslate><p>Keep KPI English</p></section><p>Translate this chrome.</p></body></html>`
+const unquotedSkipParsed = __translationWorkerTest.collectSegments(unquotedSkipHtml)
+const unquotedSkipBody = unquotedSkipParsed.segments.filter((segment) => segment.inBody).map((segment) => segment.text)
+assert(
+  unquotedSkipBody.some((text) => text.includes('Translate this chrome')),
+  'Parser did not resume after unquoted translate=no',
+)
+assert(
+  unquotedSkipBody.every((text) => !text.includes('Keep KPI English')),
+  'Parser collected text from unquoted translate=no / notranslate regions',
+)
+
+assert(
+  __translationWorkerTest.translationLengthViolation(
+    'Deploy updates safely to every device',
+    'Deploy updates safely to every device with detailed guidance for all supported environments and release channels',
+  ),
+  'Length guard did not flag an overlong translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '全デバイスへ安全に配信', 'ja'),
+  'Length guard flagged a valid shorter Japanese translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '全デバイスへ安全に配信', 'Japanese'),
+  'Length guard flagged a valid shorter Japanese translation for production language name',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '모든 기기에 안전하게 배포', 'ko'),
+  'Length guard flagged a valid shorter Korean translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '모든 기기에 안전하게 배포', 'Korean'),
+  'Length guard flagged a valid shorter Korean translation for production language name',
+)
+
+const quotedAttrFalsePositiveHtml = `<!doctype html><html><body><div data-note="translate=no"><p>Translate this paragraph.</p></div></body></html>`
+const quotedAttrFalsePositiveParsed = __translationWorkerTest.collectSegments(quotedAttrFalsePositiveHtml)
+assert(
+  quotedAttrFalsePositiveParsed.segments.some((segment) => segment.inBody && segment.text.includes('Translate this paragraph')),
+  'Parser skipped translatable text after translate=no substring inside quoted attribute value',
+)
+
+const unquotedHrefHtml = `<!doctype html><html><body><a href=/pricing/ tier>Plans</a></body></html>`
+const unquotedHrefParsed = __translationWorkerTest.collectSegments(unquotedHrefHtml)
+assert(
+  unquotedHrefParsed.parts.some((part) => typeof part === 'string' && part.includes('href=/pricing/')),
+  'Unquoted attribute scanner truncated / inside attribute values',
+)
+
+const unquotedTitleHtml = `<!doctype html><html><body><section title=Overview><p>99%</p></section></body></html>`
+const unquotedTitleParsed = __translationWorkerTest.collectSegments(unquotedTitleHtml)
+const unquotedTitleSegmentIndex = unquotedTitleParsed.segments.findIndex((segment) => segment.mode === 'attribute' && segment.text === 'Overview')
+assert(unquotedTitleSegmentIndex >= 0, 'Parser did not collect unquoted translatable title attribute')
+const unquotedTitleRendered = __translationWorkerTest.renderTranslatedHtml(
+  unquotedTitleParsed.parts,
+  unquotedTitleParsed.segments,
+  unquotedTitleParsed.segments.map((segment, index) => (index === unquotedTitleSegmentIndex ? 'Vue d\u2019ensemble' : segment.text)),
+)
+assert(
+  unquotedTitleRendered.includes('title="Vue d\u2019ensemble"'),
+  'Rendered translation of unquoted attribute must quote values containing spaces',
+)
+assert(
+  __translationWorkerTest.guardTranslatedBatchLengths(
+    ['Deploy updates safely to every device'],
+    ['Deploy updates safely to every device with detailed guidance for all supported environments and release channels'],
+  )[0] === 'Deploy updates safely to every device',
+  'Batch length guard did not fall back to source for overlong translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', 'Déployez les mises à jour en toute sécurité'),
+  'Length guard flagged a reasonably sized translation',
+)
 
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
   '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',
@@ -355,15 +473,17 @@ try {
           assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
         }
 
+        const translateText = (text: string) => {
+          if (text.includes('Read our guides')) return 'Leggi le guide'
+          if (text.includes('Docs title')) return 'Titolo doc'
+          if (text === 'About') return 'Chi siamo'
+          return 'IT ' + text
+        }
+
         const sourceTexts = payload.items.map((item) => item.text)
         return {
           response: JSON.stringify({
-            translations: sourceTexts.map((text) => {
-              if (text.includes('Read our guides')) return 'Leggi le nostre guide'
-              if (text.includes('Docs title')) return 'Titolo documentazione'
-              if (text === 'About') return 'Chi siamo'
-              return 'IT ' + text
-            }),
+            translations: sourceTexts.map((text) => translateText(text)),
           }),
         }
       },
@@ -428,7 +548,7 @@ try {
 
   assert(translatedResponse.status === 200, 'A completed cache-miss translation was not served successfully')
   assert(translatedResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A completed cache-miss translation was not cached')
-  assert(translatedHtml.includes('Leggi le nostre guide'), 'A completed cache-miss translation did not contain the translated document')
+  assert(translatedHtml.includes('Leggi le guide'), 'A completed cache-miss translation did not contain the translated document')
   assert(translatedHtml.includes('Chi siamo'), 'A completed cache-miss translation did not keep context-backed About copy')
 
   const staleBlogUrl = new URL('https://capgo.app/de/blog/capacitor-app-initialization-step-by-step-guide/')

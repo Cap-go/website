@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
-import { resolveLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
+import { jsonForInlineScript, resolveLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
@@ -56,7 +56,9 @@ function formatPct(value: number | null) {
 <Layout content={content}>
   <link slot="head" rel="preconnect" href={apiOrigin} crossorigin="anonymous" />
   <link slot="head" rel="dns-prefetch" href={apiOrigin} />
-  <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} data-initial-metrics={JSON.stringify(metrics)} aria-busy="false">
+  {/* Keep bootstrap metrics out of attributes so the edge translator cannot mangle JSON / inflate SSR tables. */}
+  <script type="application/json" id="capgo-live-update-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
+  <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="false">
     <section class="data-hero">
       <div class="data-shell">
         <p class="data-eyebrow"><span aria-hidden="true"></span> Our data</p>
@@ -65,7 +67,7 @@ function formatPct(value: number | null) {
           Last 30 days of Capgo install success. Each rate uses app, device, and UTC-day outcomes — overall and by country, platform, and updater version. We publish failures too,
           with plain-language explanations from our docs.
         </p>
-        <p class="data-updated" data-updated aria-live="polite">{updatedLabel}</p>
+        <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
       </div>
     </section>
 
@@ -80,15 +82,17 @@ function formatPct(value: number | null) {
         </div>
 
         <div class="data-kpis" aria-label="Reliability summary">
-          <div><p>Success rate</p><strong data-kpi="success-rate">{Math.ceil(metrics.success_rate)}%</strong></div>
+          <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
+          <div><p>Success rate</p><strong data-kpi="success-rate" translate="no">{Math.ceil(metrics.success_rate)}%</strong></div>
           <div><p>Window</p><strong>30 days</strong></div>
           <div><p>Scope</p><strong>All apps</strong></div>
         </div>
 
+        <p class="data-sr-only" data-daily-status aria-live="polite"></p>
         <div class="data-chart-skeleton" data-daily-skeleton aria-hidden="true">
           <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
         </div>
-        <div class="data-chart" data-daily-chart aria-label="Daily install success chart" hidden>
+        <div class="data-chart" data-daily-chart aria-label="Daily install success chart" hidden translate="no">
           <div class="data-chart-scale" aria-hidden="true"><span>100%</span><span>50%</span><span>0%</span></div>
           <div class="data-bars" data-daily-bars role="list" aria-label="Daily install success rates"></div>
           <div class="data-axis"><span data-daily-start></span><span data-daily-end></span></div>
@@ -106,6 +110,7 @@ function formatPct(value: number | null) {
           </div>
           <p>Share of active devices, success rate, and leading failure by country. Success uses app/device/UTC-day outcomes.</p>
         </div>
+        <p class="data-sr-only" data-countries-status aria-live="polite"></p>
         <div class="data-table-wrap">
           <table class="data-table" data-countries-table>
             <thead>
@@ -116,7 +121,7 @@ function formatPct(value: number | null) {
                 <th scope="col">Top failure</th>
               </tr>
             </thead>
-            <tbody data-countries>
+            <tbody data-countries translate="no">
               {
                 metrics.countries.map((item) => {
                   const failure = item.top_failure ? getFailureReasonInfo(item.top_failure.reason) : null
@@ -149,6 +154,7 @@ function formatPct(value: number | null) {
           </div>
           <p>Share of active devices, success rate, and leading failure by platform. Success uses app/device/UTC-day outcomes.</p>
         </div>
+        <p class="data-sr-only" data-platforms-status aria-live="polite"></p>
         <div class="data-table-wrap">
           <table class="data-table" data-platforms-table>
             <thead>
@@ -159,7 +165,7 @@ function formatPct(value: number | null) {
                 <th scope="col">Top failure</th>
               </tr>
             </thead>
-            <tbody data-platforms>
+            <tbody data-platforms translate="no">
               {
                 metrics.platforms.map((item) => {
                   const failure = item.top_failure ? getFailureReasonInfo(item.top_failure.reason) : null
@@ -188,7 +194,8 @@ function formatPct(value: number | null) {
         <div>
           <p class="data-eyebrow">Failures</p>
           <h2 id="failures-title">Top failure reasons</h2>
-          <p class="data-copy" data-failures-lead>{topFailureLead}</p>
+          <p class="data-sr-only" data-failures-status aria-live="polite"></p>
+          <p class="data-copy" data-failures-lead translate="no">{topFailureLead}</p>
           <p class="data-copy data-copy-secondary">
             Many failures are normal on real devices — flaky networks, intentional channel policies, and automatic rollbacks all show up here. We keep the list public so you can
             trust the numbers.
@@ -197,7 +204,7 @@ function formatPct(value: number | null) {
             Code meanings follow our <a class="data-inline-link" href="/docs/webapp/logs/">logs docs</a>.
           </p>
         </div>
-        <ol class="data-failures" data-failures aria-live="polite">
+        <ol class="data-failures" data-failures aria-live="polite" translate="no">
           {
             metrics.failures.length
               ? metrics.failures.map((item, index) => {
@@ -231,6 +238,7 @@ function formatPct(value: number | null) {
           </div>
           <p>Share of active devices, success rate, and leading failure by updater version. Success uses app/device/UTC-day outcomes.</p>
         </div>
+        <p class="data-sr-only" data-versions-status aria-live="polite"></p>
         <div class="data-table-wrap">
           <table class="data-table" data-versions-table>
             <thead>
@@ -241,7 +249,7 @@ function formatPct(value: number | null) {
                 <th scope="col">Top failure</th>
               </tr>
             </thead>
-            <tbody data-versions>
+            <tbody data-versions translate="no">
               {
                 metrics.updater_versions.map((item) => {
                   const failure = item.top_failure ? getFailureReasonInfo(item.top_failure.reason) : null
@@ -276,6 +284,8 @@ function formatPct(value: number | null) {
     const endpoint = page?.dataset.metricsEndpoint
     const updated = page?.querySelector<HTMLElement>('[data-updated]')
     const successRateKpi = page?.querySelector<HTMLElement>('[data-kpi="success-rate"]')
+    const kpiStatus = page?.querySelector<HTMLElement>('[data-kpi-status]')
+    const dailyStatus = page?.querySelector<HTMLElement>('[data-daily-status]')
     const dailyChart = page?.querySelector<HTMLElement>('[data-daily-chart]')
     const dailySkeleton = page?.querySelector<HTMLElement>('[data-daily-skeleton]')
     const dailyBars = page?.querySelector<HTMLElement>('[data-daily-bars]')
@@ -284,12 +294,16 @@ function formatPct(value: number | null) {
     const dailyEmpty = page?.querySelector<HTMLElement>('[data-daily-empty]')
     const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
     const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
+    const failuresStatus = page?.querySelector<HTMLElement>('[data-failures-status]')
     const countriesBody = page?.querySelector<HTMLElement>('[data-countries]')
     const countriesEmpty = page?.querySelector<HTMLElement>('[data-countries-empty]')
+    const countriesStatus = page?.querySelector<HTMLElement>('[data-countries-status]')
     const platformsBody = page?.querySelector<HTMLElement>('[data-platforms]')
     const platformsEmpty = page?.querySelector<HTMLElement>('[data-platforms-empty]')
+    const platformsStatus = page?.querySelector<HTMLElement>('[data-platforms-status]')
     const versionsBody = page?.querySelector<HTMLElement>('[data-versions]')
     const versionEmpty = page?.querySelector<HTMLElement>('[data-version-empty]')
+    const versionsStatus = page?.querySelector<HTMLElement>('[data-versions-status]')
     const styleScopeAttributes = page?.getAttributeNames().filter((attribute) => attribute.startsWith('data-astro-cid-')) ?? []
 
     const countryNames = typeof Intl !== 'undefined' && 'DisplayNames' in Intl ? new Intl.DisplayNames(['en'], { type: 'region' }) : null
@@ -323,9 +337,11 @@ function formatPct(value: number | null) {
     function renderBreakdownRows(
       body: HTMLElement | null | undefined,
       empty: HTMLElement | null | undefined,
+      status: HTMLElement | null | undefined,
       rows: LiveUpdateMetrics['countries'],
       kind: 'country' | 'platform' | 'version',
       emptyText: string,
+      statusLabel: string,
     ) {
       if (!body) return
       body.replaceChildren()
@@ -356,6 +372,9 @@ function formatPct(value: number | null) {
         empty.hidden = rows.length > 0
         empty.textContent = emptyText
       }
+      if (status) {
+        status.textContent = rows.length ? `${statusLabel} updated with ${rows.length} rows` : emptyText
+      }
     }
 
     function renderDaily(metrics: LiveUpdateMetrics) {
@@ -381,6 +400,9 @@ function formatPct(value: number | null) {
       dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
       dailyStart.textContent = metrics.daily[0]?.date ?? ''
       dailyEnd.textContent = metrics.daily.at(-1)?.date ?? ''
+      if (dailyStatus) {
+        dailyStatus.textContent = metrics.daily.length ? `Daily install success chart updated with ${metrics.daily.length} days of data` : 'Daily install success chart unavailable'
+      }
     }
 
     function renderFailures(metrics: LiveUpdateMetrics) {
@@ -394,6 +416,9 @@ function formatPct(value: number | null) {
         } else {
           failuresLead.textContent = 'Normalized categories across all apps.'
         }
+      }
+      if (failuresStatus) {
+        failuresStatus.textContent = metrics.failures.length ? `Top failure reasons updated with ${metrics.failures.length} categories` : 'No failures in this window'
       }
       for (const [index, item] of metrics.failures.entries()) {
         const info = getFailureReasonInfo(item.reason)
@@ -422,11 +447,12 @@ function formatPct(value: number | null) {
 
     function renderMetrics(metrics: LiveUpdateMetrics) {
       if (successRateKpi) successRateKpi.textContent = formatPct(metrics.success_rate)
+      if (kpiStatus) kpiStatus.textContent = `Success rate updated to ${formatPct(metrics.success_rate)}`
       renderDaily(metrics)
       renderFailures(metrics)
-      renderBreakdownRows(countriesBody, countriesEmpty, metrics.countries, 'country', 'Country breakdown is temporarily unavailable.')
-      renderBreakdownRows(platformsBody, platformsEmpty, metrics.platforms, 'platform', 'Platform breakdown is temporarily unavailable.')
-      renderBreakdownRows(versionsBody, versionEmpty, metrics.updater_versions, 'version', 'Updater breakdown is temporarily unavailable.')
+      renderBreakdownRows(countriesBody, countriesEmpty, countriesStatus, metrics.countries, 'country', 'Country breakdown is temporarily unavailable.', 'Country breakdown')
+      renderBreakdownRows(platformsBody, platformsEmpty, platformsStatus, metrics.platforms, 'platform', 'Platform breakdown is temporarily unavailable.', 'Platform breakdown')
+      renderBreakdownRows(versionsBody, versionEmpty, versionsStatus, metrics.updater_versions, 'version', 'Updater breakdown is temporarily unavailable.', 'Updater versions')
       if (updated) {
         const timestamp = new Date(metrics.updated_at)
         updated.textContent = Number.isNaN(timestamp.getTime())
@@ -445,9 +471,12 @@ function formatPct(value: number | null) {
       }
       if (failuresList) failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
       if (failuresLead) failuresLead.textContent = 'Failure data is temporarily unavailable.'
-      renderBreakdownRows(countriesBody, countriesEmpty, [], 'country', 'Country breakdown is temporarily unavailable.')
-      renderBreakdownRows(platformsBody, platformsEmpty, [], 'platform', 'Platform breakdown is temporarily unavailable.')
-      renderBreakdownRows(versionsBody, versionEmpty, [], 'version', 'Updater breakdown is temporarily unavailable.')
+      if (failuresStatus) failuresStatus.textContent = 'Failure data is temporarily unavailable.'
+      if (kpiStatus) kpiStatus.textContent = 'Success rate unavailable'
+      if (dailyStatus) dailyStatus.textContent = 'Daily install success chart unavailable'
+      renderBreakdownRows(countriesBody, countriesEmpty, countriesStatus, [], 'country', 'Country breakdown is temporarily unavailable.', 'Country breakdown')
+      renderBreakdownRows(platformsBody, platformsEmpty, platformsStatus, [], 'platform', 'Platform breakdown is temporarily unavailable.', 'Platform breakdown')
+      renderBreakdownRows(versionsBody, versionEmpty, versionsStatus, [], 'version', 'Updater breakdown is temporarily unavailable.', 'Updater versions')
     }
 
     const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v3'
@@ -480,7 +509,7 @@ function formatPct(value: number | null) {
 
     function readBootstrapMetrics(): LiveUpdateMetrics | null {
       try {
-        const raw = page?.dataset.initialMetrics
+        const raw = document.getElementById('capgo-live-update-metrics-bootstrap')?.textContent?.trim()
         if (!raw) return null
         return normalizeLiveUpdateMetrics(JSON.parse(raw))
       } catch {
