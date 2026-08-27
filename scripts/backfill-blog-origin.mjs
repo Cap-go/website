@@ -9,7 +9,7 @@
  */
 import { execFileSync } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join, relative } from 'node:path'
+import { isAbsolute, join, relative } from 'node:path'
 
 const REPO_ROOT = join(import.meta.dirname, '..')
 const BLOG_DIR = join(REPO_ROOT, 'apps/web/src/content/blog/en')
@@ -28,9 +28,17 @@ const AUTOMATION_IMPORT_MESSAGES = [
 const OUTRANK_ATTRIBUTION =
   /(?:Prepared with|Written with)\s+\[(?:Outrank (?:app|tool))\]\(https:\/\/outrank\.so\)/i
 
-const TRUSTED_GIT_BINARIES = ['/usr/bin/git', '/usr/local/bin/git']
+const TRUSTED_GIT_BINARIES = ['/usr/bin/git', '/usr/local/bin/git', '/opt/homebrew/bin/git']
 
 function resolveTrustedGitBinary() {
+  const override = process.env.GIT_BINARY_PATH
+  if (override) {
+    if (!isAbsolute(override) || !existsSync(override)) {
+      throw new Error(`GIT_BINARY_PATH must be an existing absolute path: ${override}`)
+    }
+    return override
+  }
+
   for (const gitPath of TRUSTED_GIT_BINARIES) {
     if (existsSync(gitPath)) {
       return gitPath
