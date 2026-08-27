@@ -76,7 +76,7 @@ jobs:
             ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-docs-
 
-      - run: bun install --frozen-lockfile
+      - run: bun install --frozen-lockfile --ignore-scripts
       - run: cd apps/docs && bun run check
       - run: bun run build:docs
         env:

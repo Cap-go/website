@@ -167,7 +167,8 @@ async function main() {
     const batchResults = await Promise.all(
       batch.map(async (name) => {
         const count = await fetchDownloads(name, cachedDownloads[name])
-        console.log(`  ${name}: ${count.toLocaleString()} downloads/month`)
+        const safeCount = Number(count)
+        console.log(`  ${name}: ${Number.isFinite(safeCount) ? safeCount.toLocaleString() : '0'} downloads/month`)
         return { name, count }
       }),
     )

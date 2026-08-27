@@ -4,7 +4,7 @@
  * Usage: bun run generate:social-images
  */
 import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { accessSync, existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, resolve } from 'node:path'
 
@@ -435,20 +435,33 @@ function renderSvg(image: SocialImage) {
 </svg>`
 }
 
-function commandExists(command: string) {
-  return spawnSync('/bin/sh', ['-lc', `command -v ${command}`], { stdio: 'ignore' }).status === 0
+const RSVG_CONVERT_CANDIDATES = ['/usr/bin/rsvg-convert', '/usr/local/bin/rsvg-convert', '/opt/homebrew/bin/rsvg-convert']
+const MAGICK_CANDIDATES = ['/usr/bin/magick', '/usr/local/bin/magick', '/opt/homebrew/bin/magick']
+
+function resolveBinary(candidates: string[]) {
+  for (const candidate of candidates) {
+    try {
+      accessSync(candidate)
+      return candidate
+    } catch {
+      // try next candidate
+    }
+  }
+  return null
 }
 
 function renderPng(svgPath: string, output: string) {
   mkdirSync(dirname(output), { recursive: true })
 
-  if (commandExists('rsvg-convert')) {
-    const result = spawnSync('rsvg-convert', ['-w', String(width), '-h', String(height), '-f', 'png', '-o', output, svgPath], { stdio: 'inherit' })
+  const rsvgConvert = resolveBinary(RSVG_CONVERT_CANDIDATES)
+  if (rsvgConvert) {
+    const result = spawnSync(rsvgConvert, ['-w', String(width), '-h', String(height), '-f', 'png', '-o', output, svgPath], { stdio: 'inherit' })
     if (result.status === 0) return
   }
 
-  if (commandExists('magick')) {
-    const result = spawnSync('magick', [svgPath, '-resize', `${width}x${height}!`, output], { stdio: 'inherit' })
+  const magick = resolveBinary(MAGICK_CANDIDATES)
+  if (magick) {
+    const result = spawnSync(magick, [svgPath, '-resize', `${width}x${height}!`, output], { stdio: 'inherit' })
     if (result.status === 0) return
   }
 

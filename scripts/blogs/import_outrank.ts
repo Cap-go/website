@@ -34,8 +34,16 @@ interface OutrankPayload {
 
 const SUPPORTED_OUTRANK_EVENT_TYPES = new Set(['publish_articles', 'update_article'])
 
-function readJson(path: string): unknown {
-  return JSON.parse(readFileSync(path, 'utf8'))
+function readJson(filePath: string): unknown {
+  const resolvedPath = resolve(filePath)
+  const workspaceRoot = resolve(process.cwd())
+  if (resolvedPath !== workspaceRoot && !resolvedPath.startsWith(`${workspaceRoot}${sep}`)) {
+    throw new Error(`Refusing to read path outside workspace: ${filePath}`)
+  }
+  if (!existsSync(resolvedPath)) {
+    throw new Error(`Payload file not found: ${filePath}`)
+  }
+  return JSON.parse(readFileSync(resolvedPath, 'utf8'))
 }
 
 function payloadFromGithubEvent(event: any): OutrankPayload {

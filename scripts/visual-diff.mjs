@@ -473,22 +473,29 @@ if (!args.command || args.command === 'help' || args.command === '--help') {
 const config = await loadConfig(args.configPath)
 
 try {
-  if (args.command === 'capture') {
-    if (!args.label || !['before', 'after'].includes(args.label)) {
-      console.error('Usage: bun run visual-diff:capture:before|after')
-      process.exit(1)
+  const command = args.command
+  switch (command) {
+    case 'capture': {
+      if (!args.label || !CAPTURE_LABELS.has(args.label)) {
+        console.error('Usage: bun run visual-diff:capture:before|after')
+        process.exit(1)
+      }
+      await capture(args.label, config, args)
+      break
     }
-    await capture(args.label, config, args)
-  } else if (args.command === 'compare') {
-    const ok = await compare(config, args)
-    process.exit(ok ? 0 : 1)
-  } else if (args.command === 'report') {
-    await report(config)
-  } else if (args.command === 'install') {
-    await installBrowsers()
-  } else {
-    printHelp()
-    process.exit(1)
+    case 'compare': {
+      const ok = await compare(config, args)
+      process.exit(ok ? 0 : 1)
+    }
+    case 'report':
+      await report(config)
+      break
+    case 'install':
+      await installBrowsers()
+      break
+    default:
+      printHelp()
+      process.exit(1)
   }
 } catch (error) {
   console.error(error instanceof Error ? error.message : String(error))

@@ -217,7 +217,8 @@ ${batch
     const data = await response.json()
 
     if (data.errors?.length) {
-      console.warn(`GitHub GraphQL returned ${data.errors.length} error(s) for stats batch ${Math.floor(i / batchSize) + 1}`)
+      const errorCount = Array.isArray(data.errors) ? data.errors.length : 0
+      console.warn(`GitHub GraphQL returned ${errorCount} error(s) for stats batch ${Math.floor(i / batchSize) + 1}`)
     }
 
     for (let index = 0; index < batch.length; index++) {
