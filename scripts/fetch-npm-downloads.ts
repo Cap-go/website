@@ -102,7 +102,8 @@ const fetchDownloads = async (packageName: string, cachedDownloads?: number): Pr
       }
 
       const data = await response.json()
-      return data.downloads ?? 0
+      const safeCount = Number(data.downloads)
+      return Number.isFinite(safeCount) ? safeCount : 0
     } catch (error) {
       if (error instanceof Error && error.message.includes('Timeout')) {
         throw error
@@ -167,8 +168,7 @@ async function main() {
     const batchResults = await Promise.all(
       batch.map(async (name) => {
         const count = await fetchDownloads(name, cachedDownloads[name])
-        const safeCount = Number(count)
-        console.log(`  ${name}: ${Number.isFinite(safeCount) ? safeCount.toLocaleString() : '0'} downloads/month`)
+        console.log(`  ${name}: ${count.toLocaleString()} downloads/month`)
         return { name, count }
       }),
     )

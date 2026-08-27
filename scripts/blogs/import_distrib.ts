@@ -40,7 +40,12 @@ const SUPPORTED_DISTRIB_EVENT_TYPES = new Set(['publish_articles', 'update_artic
 function readJson(filePath: string): unknown {
   const resolvedPath = resolve(filePath)
   const workspaceRoot = resolve(process.cwd())
-  if (resolvedPath !== workspaceRoot && !resolvedPath.startsWith(`${workspaceRoot}${sep}`)) {
+  const runnerTemp = process.env.RUNNER_TEMP
+  const trustedRunnerTempPath = runnerTemp ? resolve(runnerTemp, 'distrib-payload.json') : null
+  const isWorkspacePath = resolvedPath === workspaceRoot || resolvedPath.startsWith(`${workspaceRoot}${sep}`)
+  const isTrustedRunnerTempPath = trustedRunnerTempPath !== null && resolvedPath === trustedRunnerTempPath
+
+  if (!isWorkspacePath && !isTrustedRunnerTempPath) {
     throw new Error(`Refusing to read path outside workspace: ${filePath}`)
   }
   if (!existsSync(resolvedPath)) {

@@ -26,5 +26,7 @@ jobs:
           node-version: 24.x
       - name: Checkout Repository
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          persist-credentials: false
       - name: Check for Typos
         uses: crate-ci/typos@631208b7aac2daa8b707f55e7331f9112b0e062d
