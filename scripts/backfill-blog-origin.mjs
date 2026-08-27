@@ -8,7 +8,7 @@
  * Run: bun run scripts/backfill-blog-origin.mjs
  */
 import { execFileSync } from 'node:child_process'
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, relative } from 'node:path'
 
 const REPO_ROOT = join(import.meta.dirname, '..')
@@ -28,9 +28,23 @@ const AUTOMATION_IMPORT_MESSAGES = [
 const OUTRANK_ATTRIBUTION =
   /(?:Prepared with|Written with)\s+\[(?:Outrank (?:app|tool))\]\(https:\/\/outrank\.so\)/i
 
+const TRUSTED_GIT_BINARIES = ['/usr/bin/git', '/usr/local/bin/git']
+
+function resolveTrustedGitBinary() {
+  for (const gitPath of TRUSTED_GIT_BINARIES) {
+    if (existsSync(gitPath)) {
+      return gitPath
+    }
+  }
+
+  throw new Error(`No trusted git binary found. Expected one of: ${TRUSTED_GIT_BINARIES.join(', ')}`)
+}
+
+const GIT_BINARY = resolveTrustedGitBinary()
+
 function execGit(args) {
   try {
-    return execFileSync('git', args, {
+    return execFileSync(GIT_BINARY, args, {
       cwd: REPO_ROOT,
       encoding: 'utf8',
       maxBuffer: 16 * 1024 * 1024,
