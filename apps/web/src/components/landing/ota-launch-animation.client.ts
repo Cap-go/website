@@ -4,80 +4,42 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 /** Show the completed OTA update state without animation (reduced-motion path). */
 function setFinalState(root: HTMLElement) {
-  root.classList.add('is-complete')
+  const staged = root.querySelector('[data-ota-staged-bundle]')
+  const status = root.querySelector('[data-ota-status]')
+  const icon = root.querySelector('[data-ota-app-icon]')
+  const stack = root.querySelector('[data-ota-bundle-stack]')
 
-  const bundle = root.querySelector('[data-ota-bundle]')
-  const progress = root.querySelector('[data-ota-progress]')
-  const screenOld = root.querySelector('[data-ota-screen-old]')
-  const screenNew = root.querySelector('[data-ota-screen-new]')
-  const badge = root.querySelector('[data-ota-badge]')
-  const pathActive = root.querySelector('[data-ota-path-active]')
-  const ripples = root.querySelectorAll('[data-ota-ripple-1], [data-ota-ripple-2], [data-ota-ripple-3]')
+  staged?.setAttribute('opacity', '0')
+  status?.setAttribute('opacity', '0')
+  icon?.setAttribute('opacity', '1')
+  stack?.setAttribute('opacity', '1')
 
-  bundle?.setAttribute('opacity', '0')
-  progress?.setAttribute('opacity', '0')
-  screenOld?.setAttribute('opacity', '0')
-  screenNew?.setAttribute('opacity', '1')
-  badge?.setAttribute('opacity', '1')
-  pathActive?.setAttribute('stroke-dashoffset', '0')
-  ripples.forEach((ripple, index) => {
-    ripple.setAttribute('opacity', String([0.35, 0.22, 0.12][index] ?? 0.2))
-  })
+  if (staged instanceof SVGElement) staged.style.transform = ''
+  if (stack instanceof SVGElement) stack.style.transform = ''
 }
 
 /** Build the GSAP timeline for bundle transfer, download, and apply-on-launch. */
 function buildTimeline(root: HTMLElement) {
-  const bundle = root.querySelector('[data-ota-bundle]')
-  const progressGroup = root.querySelector('[data-ota-progress]')
-  const progress = root.querySelector('[data-ota-progress-fill]')
-  const screenOld = root.querySelector('[data-ota-screen-old]')
-  const screenNew = root.querySelector('[data-ota-screen-new]')
-  const badge = root.querySelector('[data-ota-badge]')
-  const pathActive = root.querySelector('[data-ota-path-active]')
-  const ripples = [root.querySelector('[data-ota-ripple-1]'), root.querySelector('[data-ota-ripple-2]'), root.querySelector('[data-ota-ripple-3]')]
-  const flash = root.querySelector('[data-ota-flash]')
+  const staged = root.querySelector('[data-ota-staged-bundle]')
+  const status = root.querySelector('[data-ota-status]')
+  const icon = root.querySelector('[data-ota-app-icon]')
+  const stack = root.querySelector('[data-ota-bundle-stack]')
 
-  if (!bundle || !progress || !progressGroup || !screenOld || !screenNew || !badge || !pathActive || !flash) return null
+  if (!staged || !status || !icon || !stack) return null
 
-  const pathLength = (pathActive as SVGPathElement).getTotalLength()
-  gsap.set(pathActive, { strokeDasharray: pathLength, strokeDashoffset: pathLength })
-  gsap.set(bundle, { opacity: 0, y: 0 })
-  gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' })
-  gsap.set(screenNew, { opacity: 0 })
-  gsap.set(badge, { opacity: 0, y: 6 })
-  gsap.set(flash, { opacity: 0 })
-  ripples.forEach((ripple, index) => {
-    if (!ripple) return
-    gsap.set(ripple, { opacity: 0, scale: 0.55 + index * 0.08, transformOrigin: 'center center' })
-  })
+  gsap.set(staged, { y: -14, opacity: 0 })
+  gsap.set(status, { opacity: 0 })
+  gsap.set(stack, { opacity: 1, y: 0 })
+  gsap.set(icon, { opacity: 1 })
 
-  const timeline = gsap.timeline({ paused: true, defaults: { ease: 'power2.out' } })
+  const timeline = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' } })
 
   timeline
-    .to(bundle, { opacity: 1, duration: 0.35 }, 0.2)
-    .to(bundle, { y: 34, duration: 1.4, ease: 'power1.inOut' }, 0.45)
-    .to(pathActive, { strokeDashoffset: 0, duration: 1.4, ease: 'power1.inOut' }, 0.45)
-    .to(progress, { scaleX: 1, duration: 0.9, ease: 'power1.inOut' }, 1.55)
-    .to(bundle, { opacity: 0, duration: 0.2 }, 1.85)
-    .to(flash, { opacity: 0.55, duration: 0.12, yoyo: true, repeat: 1 }, 2.05)
-    .to(screenOld, { opacity: 0, duration: 0.25 }, 2.1)
-    .to(screenNew, { opacity: 1, duration: 0.35 }, 2.2)
-    .to(
-      ripples,
-      {
-        opacity: (index) => [0.35, 0.22, 0.12][index] ?? 0.2,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power2.out',
-      },
-      2.35,
-    )
-    .to(badge, { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(1.6)' }, 2.65)
-    .add(() => {
-      root.classList.add('is-complete')
-      progressGroup.setAttribute('opacity', '0')
-    })
+    .to(staged, { y: 0, opacity: 0.3, duration: 1.15 }, 0.45)
+    .to(status, { opacity: 1, duration: 0.5 }, 0.95)
+    .to({}, { duration: 1.1 })
+    .to(staged, { opacity: 0, duration: 0.55 }, 3.2)
+    .to(status, { opacity: 0, duration: 0.4 }, 3.2)
 
   return timeline
 }
@@ -98,18 +60,13 @@ export function setupOtaLaunchAnimations() {
 
     let hasPlayed = false
 
-    const play = () => {
-      root.classList.remove('is-complete')
-      root.querySelector('[data-ota-progress]')?.removeAttribute('opacity')
-      timeline.restart()
-    }
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasPlayed) {
             hasPlayed = true
-            play()
+            timeline.play()
+            observer.disconnect()
           }
         })
       },
@@ -117,10 +74,6 @@ export function setupOtaLaunchAnimations() {
     )
 
     observer.observe(root)
-
-    root.querySelector('[data-ota-replay]')?.addEventListener('click', () => {
-      play()
-    })
   })
 }
 
