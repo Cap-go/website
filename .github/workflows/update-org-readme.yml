@@ -11,6 +11,9 @@ on:
       - 'apps/web/src/data/npm-downloads.json'
       - 'scripts/generate-plugins-readme.ts'
 
+permissions:
+  contents: read
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
