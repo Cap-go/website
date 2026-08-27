@@ -17,7 +17,7 @@ keywords: >-
 tag: Alternatives
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

@@ -16,7 +16,7 @@ keywords: Next.js 15, Capacitor 8, convert web app to mobile, iOS, Android, mobi
 tag: Tutorial
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 

@@ -15,7 +15,7 @@ keywords: SvelteKit, Capacitor, mobile app development, live updates, OTA update
 tag: Tutorial
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: updating-your-capacitor-apps-seamlessly-with-capacitor-updater
 ---
 

@@ -16,7 +16,7 @@ keywords: Windows, iOS, Capacitor, Capgo Build, cloud build, TestFlight, App Sto
 tag: Tutorial
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

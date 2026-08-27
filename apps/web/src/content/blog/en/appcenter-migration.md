@@ -15,7 +15,7 @@ keywords: App Center, migration, live updates, OTA updates, continuous integrati
 tag: Migration
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: automatic-build-and-release-with-github-actions
 ---
 ## Migration Summary

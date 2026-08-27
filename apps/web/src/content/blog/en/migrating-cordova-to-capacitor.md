@@ -15,7 +15,7 @@ keywords: Cordova, Capacitor, migration, mobile app development, live updates, O
 tag: Migration
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: ''
 ---
 

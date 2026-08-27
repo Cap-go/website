@@ -15,7 +15,7 @@ keywords: Apple App Store, Google Play, Capacitor, Capgo, OTA updates, live upda
 tag: Tutorial
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: app-store-vs-direct-updates-what-developers-need-to-know
 ---
 

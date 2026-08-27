@@ -15,7 +15,7 @@ keywords: Lovable, Lovable.dev, Capgo, GitHub Actions, live updates, OTA, CI/CD,
 tag: CI/CD
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: automatic-build-and-release-with-github-actions
 ---
 

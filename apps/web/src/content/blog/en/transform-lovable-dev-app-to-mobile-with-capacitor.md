@@ -15,7 +15,7 @@ keywords: Lovable, Lovable.dev, Capacitor, mobile app development, React, Vite, 
 tag: Tutorial
 published: true
 locale: en
-origin: ai
+origin: human
 next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
 ---
 
