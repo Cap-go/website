@@ -422,7 +422,7 @@ function renderSvg(image: BlogImage) {
   <rect width="${width}" height="${height}" fill="url(#dots)"/>
   <rect width="${width}" height="${height}" fill="url(#glow)"/>
   <rect x="${accentBandX}" y="0" width="${width - accentBandX}" height="${height}" fill="${image.accent}" opacity="0.05"/>
-  ${logoTile(padX, padY, logoSize, image.accent)}
+  ${logoTile(padX, padY, logoSize, image.accent, 'blog')}
   ${textLine('Capgo blog', padX + logoSize + 20, padY + 34, { size: 20, color: brand.dusk, weight: 800, hanging: true })}
   ${textLine(image.eyebrow.toUpperCase(), padX, eyebrowY, { size: eyebrowSize, color: image.accent, weight: 900, hanging: true })}
   ${titleSvg}
