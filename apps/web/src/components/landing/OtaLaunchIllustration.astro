@@ -1,0 +1,113 @@
+---
+
+---
+
+<div
+  class="ota-launch-illustration relative mx-auto h-64 w-full max-w-[240px]"
+  data-ota-launch
+  role="img"
+  aria-label="Animation: a signed bundle travels from Capgo to the device, downloads in the background, and applies on the next app launch"
+>
+  <p class="sr-only">
+    A web bundle is published on Capgo, downloaded to the device in the background, then applied when the user opens the app again — no app store review required.
+  </p>
+
+  <svg viewBox="0 0 240 288" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full w-full" aria-hidden="true">
+    <defs>
+      <linearGradient id="ota-bundle-gradient" x1="120" y1="8" x2="120" y2="52" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#9492FB"></stop>
+        <stop offset="1" stop-color="#3B82F6"></stop>
+      </linearGradient>
+      <clipPath id="ota-phone-screen-clip">
+        <rect x="72" y="98" width="96" height="150" rx="8"></rect>
+      </clipPath>
+    </defs>
+
+    <!-- Server / Capgo -->
+    <g data-ota-server>
+      <rect x="78" y="10" width="84" height="42" rx="10" class="fill-[#252525] stroke-[#333333]" stroke-width="1"></rect>
+      <text x="120" y="28" text-anchor="middle" class="fill-[#9CA3AF] text-[9px] font-medium">Capgo</text>
+      <text x="120" y="42" text-anchor="middle" class="fill-white text-[10px] font-semibold">bundle v1.0.1</text>
+    </g>
+
+    <!-- Transfer path -->
+    <path id="ota-transfer-path" d="M120 54 C120 74 120 74 120 88" stroke="#333333" stroke-width="2" stroke-dasharray="4 4"></path>
+    <path data-ota-path-active d="M120 54 C120 74 120 74 120 88" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" fill="none"></path>
+
+    <!-- Moving bundle -->
+    <g data-ota-bundle transform="translate(120 54)">
+      <rect x="-14" y="-12" width="28" height="24" rx="5" fill="url(#ota-bundle-gradient)"></rect>
+      <path d="M-6 -2 H6 M-6 4 H6 M-6 10 H2" stroke="white" stroke-width="1.5" stroke-linecap="round"></path>
+    </g>
+
+    <!-- Phone -->
+    <g data-ota-phone>
+      <rect x="60" y="82" width="120" height="196" rx="18" class="fill-[#1D1D1E] stroke-[#333333]" stroke-width="1.5"></rect>
+      <rect x="98" y="92" width="44" height="6" rx="3" class="fill-[#333333]"></rect>
+
+      <g clip-path="url(#ota-phone-screen-clip)">
+        <rect x="72" y="98" width="96" height="150" class="fill-[#111111]"></rect>
+
+        <!-- Old screen -->
+        <g data-ota-screen-old>
+          <rect x="82" y="112" width="56" height="8" rx="2" class="fill-[#3f3f46]"></rect>
+          <rect x="82" y="128" width="76" height="6" rx="2" class="fill-[#52525b]"></rect>
+          <rect x="82" y="140" width="68" height="6" rx="2" class="fill-[#52525b]"></rect>
+          <rect x="82" y="160" width="76" height="34" rx="6" class="fill-red-500/20 stroke-red-500/40" stroke-width="1"></rect>
+          <text x="120" y="182" text-anchor="middle" class="fill-red-400 font-mono text-[9px]">v1.0.0 · bug</text>
+        </g>
+
+        <!-- New screen -->
+        <g data-ota-screen-new opacity="0">
+          <rect x="82" y="112" width="56" height="8" rx="2" class="fill-[#3f3f46]"></rect>
+          <rect x="82" y="128" width="76" height="6" rx="2" class="fill-[#52525b]"></rect>
+          <rect x="82" y="140" width="68" height="6" rx="2" class="fill-[#52525b]"></rect>
+          <rect x="82" y="160" width="76" height="34" rx="6" class="fill-green-500/15 stroke-green-500/35" stroke-width="1"></rect>
+          <text x="120" y="182" text-anchor="middle" class="fill-green-400 font-mono text-[9px]">v1.0.1 · fixed</text>
+        </g>
+
+        <!-- Download progress -->
+        <g data-ota-progress transform="translate(82 206)">
+          <rect width="76" height="8" rx="4" class="fill-[#27272a]"></rect>
+          <rect data-ota-progress-fill width="76" height="8" rx="4" class="fill-[#3B82F6]"></rect>
+        </g>
+
+        <rect data-ota-flash x="72" y="98" width="96" height="150" class="fill-white" opacity="0"></rect>
+      </g>
+    </g>
+
+    <!-- Ripples -->
+    <ellipse data-ota-ripple-3 cx="120" cy="248" rx="88" ry="18" class="fill-[#3B82F6]"></ellipse>
+    <ellipse data-ota-ripple-2 cx="120" cy="248" rx="68" ry="14" class="fill-[#3B82F6]"></ellipse>
+    <ellipse data-ota-ripple-1 cx="120" cy="248" rx="48" ry="10" class="fill-[#3B82F6]"></ellipse>
+
+    <!-- Applied badge -->
+    <g data-ota-badge opacity="0">
+      <rect x="62" y="262" width="116" height="22" rx="11" class="fill-[#1e3a5f] stroke-[#3B82F6]/50" stroke-width="1"></rect>
+      <text x="120" y="276" text-anchor="middle" class="fill-[#93c5fd] text-[9px] font-semibold">Applied on next launch</text>
+    </g>
+  </svg>
+
+  <button
+    type="button"
+    data-ota-replay
+    class="absolute right-0 bottom-0 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-[#252525] text-sm text-gray-400 opacity-0 transition hover:border-blue-500/40 hover:text-blue-300 focus:ring-2 focus:ring-blue-500/40 focus:outline-none [.is-complete_&]:opacity-100"
+    aria-label="Replay update animation"
+  >
+    ↻
+  </button>
+</div>
+
+<script>
+  import { setupOtaLaunchAnimations } from './ota-launch-animation.client.ts'
+
+  setupOtaLaunchAnimations()
+</script>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .ota-launch-illustration [data-ota-replay] {
+      display: none;
+    }
+  }
+</style>
