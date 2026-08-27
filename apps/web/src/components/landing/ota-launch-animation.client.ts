@@ -96,6 +96,8 @@ export function setupOtaLaunchAnimations() {
     let hasPlayed = false
 
     const play = () => {
+      root.classList.remove('is-complete')
+      root.querySelector('[data-ota-progress]')?.removeAttribute('opacity')
       timeline.restart()
     }
 
@@ -114,7 +116,6 @@ export function setupOtaLaunchAnimations() {
     observer.observe(root)
 
     root.querySelector('[data-ota-replay]')?.addEventListener('click', () => {
-      root.classList.remove('is-complete')
       play()
     })
   })
