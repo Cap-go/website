@@ -2,6 +2,7 @@ import gsap from 'gsap'
 
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+/** Show the completed OTA update state without animation (reduced-motion path). */
 function setFinalState(root: HTMLElement) {
   root.classList.add('is-complete')
 
@@ -24,6 +25,7 @@ function setFinalState(root: HTMLElement) {
   })
 }
 
+/** Build the GSAP timeline for bundle transfer, download, and apply-on-launch. */
 function buildTimeline(root: HTMLElement) {
   const bundle = root.querySelector('[data-ota-bundle]')
   const progressGroup = root.querySelector('[data-ota-progress]')
@@ -80,6 +82,7 @@ function buildTimeline(root: HTMLElement) {
   return timeline
 }
 
+/** Initialize viewport-triggered OTA launch animations and replay controls. */
 export function setupOtaLaunchAnimations() {
   document.querySelectorAll<HTMLElement>('[data-ota-launch]').forEach((root) => {
     if (root.dataset.otaReady === 'true') return
