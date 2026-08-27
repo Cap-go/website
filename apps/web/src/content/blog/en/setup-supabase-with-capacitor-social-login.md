@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-27T00:00:00.000Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /supabase_social_login.webp
 head_image_alt: "'Setup Supabase Authentication with Capacitor Social Login Plugin' Capgo blog illustration"
 keywords: Supabase, Capacitor, social login, authentication, Google, Apple, Facebook, mobile app development, OAuth

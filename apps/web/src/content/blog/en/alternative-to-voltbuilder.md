@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-09-09T00:00:00.000Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /voltbuilder_alt.webp
 head_image_alt: "Alternative to Voltbuilder Capgo blog illustration"
 keywords: Voltbuilder, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

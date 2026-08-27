@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /enable-ios-developer-mode-ios16.webp
 head_image_alt: "How to Enable Developer Mode on iOS 16 for App Testing Capgo blog illustration"
 keywords: iOS, Developer Mode, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

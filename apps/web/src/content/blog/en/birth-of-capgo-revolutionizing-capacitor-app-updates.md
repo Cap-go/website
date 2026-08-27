@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /capgo-birth-story.webp
 head_image_alt: How a GitHub Issue Evolved into a business Capgo blog illustration
 keywords: >-
