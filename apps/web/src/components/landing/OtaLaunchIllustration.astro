@@ -5,14 +5,17 @@
 <div
   class="ota-launch-illustration relative mx-auto h-64 w-full max-w-[240px]"
   data-ota-launch
-  role="img"
-  aria-label="Animation: a signed bundle travels from Capgo to the device, downloads in the background, and applies on the next app launch"
 >
-  <p class="sr-only">
-    A web bundle is published on Capgo, downloaded to the device in the background, then applied when the user opens the app again — no app store review required.
-  </p>
+  <div
+    role="img"
+    aria-label="Animation: a signed bundle travels from Capgo to the device, downloads in the background, and applies on the next app launch"
+    class="h-full w-full"
+  >
+    <p class="sr-only">
+      A web bundle is published on Capgo, downloaded to the device in the background, then applied when the user opens the app again — no app store review required.
+    </p>
 
-  <svg viewBox="0 0 240 288" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full w-full" aria-hidden="true">
+    <svg viewBox="0 0 240 288" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-full w-full" aria-hidden="true">
     <defs>
       <linearGradient id="ota-bundle-gradient" x1="120" y1="8" x2="120" y2="52" gradientUnits="userSpaceOnUse">
         <stop stop-color="#9492FB"></stop>
@@ -86,7 +89,8 @@
       <rect x="62" y="262" width="116" height="22" rx="11" class="fill-[#1e3a5f] stroke-[#3B82F6]/50" stroke-width="1"></rect>
       <text x="120" y="276" text-anchor="middle" class="fill-[#93c5fd] text-[9px] font-semibold">Applied on next launch</text>
     </g>
-  </svg>
+    </svg>
+  </div>
 
   <button
     type="button"
