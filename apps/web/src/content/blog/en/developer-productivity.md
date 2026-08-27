@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-27T10:30:56.593Z
-updated_at: 2026-08-27T10:30:58.172Z
+updated_at: 2026-08-27T10:33:48.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/05ffa599-550e-4580-b0f4-0d8635cbcd47/developer-productivity-doodles.jpg'
 head_image_alt: 'Developer Productivity: Metrics, Tactics, and Tools That'
 keywords: 'developer productivity, DORA metrics, engineering metrics, CI/CD workflow, mobile development'
