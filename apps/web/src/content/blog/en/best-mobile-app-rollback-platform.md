@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-26T02:49:49.000Z
-updated_at: 2026-08-26T02:49:49.000Z
+updated_at: 2026-08-28T21:47:40.000Z
 head_image: /capgo_banner.png
 head_image_alt: Mobile app rollback platform with staged release channels
 keywords: ''
