@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-28T08:12:28.362Z
-updated_at: 2026-08-28T08:12:29.987Z
+updated_at: 2026-08-28T08:14:56.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/bfe3e8e0-be8a-405d-9ff2-1971a404bcca/release-velocity-sketches.jpg'
 head_image_alt: 'Release Velocity: How to Measure and Improve It'
 keywords: 'release velocity, DORA metrics, deployment frequency, Capacitor updates, mobile DevOps'
