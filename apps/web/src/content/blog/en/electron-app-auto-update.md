@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-29T09:01:52.619Z
-updated_at: 2026-08-29T09:01:53.916Z
+updated_at: 2026-08-29T09:04:28.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/8b049858-401f-480d-9e87-6d3a3cc11be1/electron-app-auto-update-title-slide.jpg'
 head_image_alt: 'Electron App Auto Update: A Practical 2026 Guide'
 keywords: 'electron auto update, electron updater, electron-builder, electron updates, electron live update'
