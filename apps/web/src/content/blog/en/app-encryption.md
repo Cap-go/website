@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-30T09:55:02.806Z
-updated_at: 2026-08-30T09:55:04.554Z
+updated_at: 2026-08-30T09:57:17.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/308b6d1c-d564-4226-80f1-dce298aec064/app-encryption-security-illustration.jpg'
 head_image_alt: App Encryption Explained for Mobile and Cross-Platform Teams
 keywords: 'app encryption, mobile security, key management, Capacitor, data protection'
