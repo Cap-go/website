@@ -105,6 +105,7 @@ type Segment = {
   mode: 'text' | 'attribute'
   inBody: boolean
   quote?: string
+  anchorPath?: string
 }
 
 type HtmlPart = string | { segmentIndex: number }
@@ -164,7 +165,13 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-08-13-message-context-fr-elision-length-translate-no-unquoted-cjk-v1'
+const TRANSLATION_CACHE_VERSION = '2026-08-31-nav-guard-dedupe-batch-v1'
+const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
+const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
+  '/pricing/': new Set(['Pricing']),
+  '/blog/': new Set(['Blog']),
+  '/enterprise/': new Set(['Enterprise']),
+}
 const TRANSLATION_LENGTH_MAX_RATIO = 1.3
 const TRANSLATION_LENGTH_MIN_RATIO = 0.7
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
@@ -698,7 +705,35 @@ function splitLongCoreText(value: string): string[] {
   return chunks
 }
 
-function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: Segment['mode'], inBody: boolean, quote?: string): void {
+function normalizeNavAnchorPath(href: string): string | null {
+  const trimmed = href.trim()
+  if (!trimmed || trimmed.startsWith('#') || /^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return null
+
+  let pathOnly = trimmed
+  if (trimmed.startsWith('//')) {
+    try {
+      pathOnly = new URL(`https:${trimmed}`).pathname
+    } catch {
+      return null
+    }
+  } else if (trimmed.startsWith('/')) {
+    pathOnly = trimmed.split(/[?#]/)[0] ?? trimmed
+  } else {
+    return null
+  }
+
+  const withoutLocale = pathOnly.replace(/^\/(?:de|es|fr|id|it|ja|ko|zh)(?=\/)/, '') || '/'
+  const normalized = withoutLocale.endsWith('/') ? withoutLocale : `${withoutLocale}/`
+  return (NAV_GUARD_PATHS as readonly string[]).includes(normalized) ? normalized : null
+}
+
+function isNavGuardSegment(segment: Segment): boolean {
+  if (!segment.anchorPath) return false
+  const expected = NAV_PATH_EXPECTED_SOURCES[segment.anchorPath as (typeof NAV_GUARD_PATHS)[number]]
+  return Boolean(expected?.has(segment.text))
+}
+
+function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: Segment['mode'], inBody: boolean, quote?: string, anchorPath?: string): void {
   if (!hasAsciiLetter(text)) {
     parts.push(text)
     return
@@ -723,6 +758,7 @@ function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: 
         mode,
         inBody,
         quote,
+        anchorPath,
       }) - 1
     parts.push({ segmentIndex })
   }
@@ -881,7 +917,7 @@ function shouldTranslateAttribute(tag: string, tagName: string, attrName: string
   return TRANSLATABLE_ATTRIBUTES.has(normalizedAttr)
 }
 
-function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText: boolean, inBody: boolean): void {
+function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText: boolean, inBody: boolean, anchorPath?: string): void {
   const tagName = tagNameOf(tag)
   if (!tagName || skipText || isClosingTag(tag)) {
     parts.push(tag)
@@ -897,7 +933,7 @@ function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText
     const outputQuote = attribute.quote || '"'
     parts.push(tag.slice(lastIndex, attribute.start), tag.slice(attribute.start, attribute.valueStart))
     if (!attribute.quote) parts.push(outputQuote)
-    addSegment(parts, segments, attribute.value, 'attribute', inBody, outputQuote)
+    addSegment(parts, segments, attribute.value, 'attribute', inBody, outputQuote, anchorPath)
     parts.push(outputQuote)
     lastIndex = attribute.end
     matched = true
@@ -1295,8 +1331,11 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
   const parts: HtmlPart[] = []
   const segments: Segment[] = []
   const skipStack: string[] = []
+  const anchorStack: string[] = []
   let insideBody = false
   let lastIndex = 0
+
+  const currentAnchorPath = (): string | undefined => anchorStack[anchorStack.length - 1]
 
   while (lastIndex < html.length) {
     const skippedTagName = skipStack[skipStack.length - 1]
@@ -1321,16 +1360,26 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
     const text = html.slice(lastIndex, nextTag.index)
 
     if (text) {
-      addSegment(parts, segments, text, 'text', insideBody)
+      addSegment(parts, segments, text, 'text', insideBody, undefined, currentAnchorPath())
     }
 
     const tagName = tagNameOf(tag)
     const skipElement = Boolean(tagName && !isClosingTag(tag) && shouldSkipElementText(tag, tagName))
 
+    if (tagName === 'a' && !isClosingTag(tag)) {
+      const href = readAttributeValue(tag, 'href')
+      const normalized = href ? normalizeNavAnchorPath(href) : null
+      if (normalized) anchorStack.push(normalized)
+    }
+
     if (skipElement) {
       parts.push(tag)
     } else {
-      appendTag(parts, segments, tag, false, insideBody)
+      appendTag(parts, segments, tag, false, insideBody, currentAnchorPath())
+    }
+
+    if (tagName === 'a' && isClosingTag(tag)) {
+      if (anchorStack.length > 0) anchorStack.pop()
     }
 
     if (tagName === 'body' && isClosingTag(tag)) {
@@ -1351,7 +1400,7 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
   const tail = html.slice(lastIndex)
   if (tail) {
     if (skipStack.length > 0) parts.push(tail)
-    else addSegment(parts, segments, tail, 'text', insideBody)
+    else addSegment(parts, segments, tail, 'text', insideBody, undefined, currentAnchorPath())
   }
 
   return { parts, segments }
@@ -1362,19 +1411,168 @@ function buildBatches(segments: Segment[]): string[][] {
   let currentBatch: string[] = []
   let currentLength = 0
 
+  const flushCurrentBatch = (): void => {
+    if (currentBatch.length === 0) return
+    batches.push(currentBatch)
+    currentBatch = []
+    currentLength = 0
+  }
+
   for (const segment of segments) {
+    if (isNavGuardSegment(segment)) {
+      flushCurrentBatch()
+      batches.push([segment.text])
+      continue
+    }
+
     const nextLength = currentLength + segment.text.length
     if (currentBatch.length > 0 && (nextLength > MAX_BATCH_CHARS || currentBatch.length >= MAX_BATCH_ITEMS)) {
-      batches.push(currentBatch)
-      currentBatch = []
-      currentLength = 0
+      flushCurrentBatch()
     }
     currentBatch.push(segment.text)
     currentLength += segment.text.length
   }
 
-  if (currentBatch.length > 0) batches.push(currentBatch)
+  flushCurrentBatch()
   return batches
+}
+
+function dedupeBatchForTranslation(batch: string[]): { uniqueBatch: string[]; expandIndexes: number[] } {
+  const uniqueBatch: string[] = []
+  const sourceToUniqueIndex = new Map<string, number>()
+  const expandIndexes: number[] = []
+
+  for (const text of batch) {
+    let uniqueIndex = sourceToUniqueIndex.get(text)
+    if (uniqueIndex === undefined) {
+      uniqueIndex = uniqueBatch.length
+      sourceToUniqueIndex.set(text, uniqueIndex)
+      uniqueBatch.push(text)
+    }
+    expandIndexes.push(uniqueIndex)
+  }
+
+  return { uniqueBatch, expandIndexes }
+}
+
+function expandDedupedBatchTranslations(uniqueTranslated: string[], expandIndexes: number[]): string[] {
+  return expandIndexes.map((index) => uniqueTranslated[index] ?? '')
+}
+
+function addRenderedNavLabel(links: Map<string, Set<string>>, path: string, label: string): void {
+  const normalized = normalizedTranslationValue(label)
+  if (!normalized) return
+  const labels = links.get(path) ?? new Set<string>()
+  labels.add(normalized)
+  links.set(path, labels)
+}
+
+function collectRenderedNavLinks(html: string): Map<string, Set<string>> {
+  const links = new Map<string, Set<string>>()
+  const pattern = /<a\b[^>]*\bhref=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi
+  let match: RegExpExecArray | null
+
+  while ((match = pattern.exec(html)) !== null) {
+    const fullTag = match[0]
+    const href = match[1]
+    const normalizedPath = normalizeNavAnchorPath(href)
+    if (!normalizedPath) continue
+
+    const text = normalizedTranslationValue(match[2].replace(/<[^>]+>/g, ''))
+    if (text) addRenderedNavLabel(links, normalizedPath, text)
+
+    const openingTag = fullTag.slice(0, fullTag.indexOf('>') + 1)
+    const ariaMatch = /\baria-label=["']([^"']+)["']/i.exec(openingTag)
+    if (ariaMatch?.[1]) addRenderedNavLabel(links, normalizedPath, ariaMatch[1])
+  }
+
+  return links
+}
+
+function renderedNavLabelSetsOverlap(left: Set<string>, right: Set<string>): boolean {
+  for (const label of left) {
+    if (right.has(label)) return true
+  }
+  return false
+}
+
+function renderedNavLabelSetsEqual(left: Set<string>, right: Set<string>): boolean {
+  if (left.size !== right.size) return false
+  for (const label of left) {
+    if (!right.has(label)) return false
+  }
+  return true
+}
+
+function assertNavSegmentTranslationGuard(segments: Segment[], translations: string[]): void {
+  const translatedByPathSource = new Map<string, string>()
+
+  for (let index = 0; index < segments.length; index += 1) {
+    const segment = segments[index]
+    if (!isNavGuardSegment(segment) || !segment.anchorPath) continue
+
+    const key = `${segment.anchorPath}\0${segment.text}`
+    const translated = normalizedTranslationValue(translations[index] ?? '')
+    const existing = translatedByPathSource.get(key)
+    if (existing && existing !== translated) {
+      throw new Error(`Inconsistent nav translation for ${segment.anchorPath} "${segment.text}"`)
+    }
+    translatedByPathSource.set(key, translated)
+  }
+
+  const entries = [...translatedByPathSource.entries()]
+  for (let left = 0; left < entries.length; left += 1) {
+    for (let right = left + 1; right < entries.length; right += 1) {
+      const [leftKey, leftTranslation] = entries[left]
+      const [rightKey, rightTranslation] = entries[right]
+      const leftSource = leftKey.split('\0')[1] ?? ''
+      const rightSource = rightKey.split('\0')[1] ?? ''
+      if (leftSource === rightSource) continue
+      if (leftTranslation === rightTranslation) {
+        throw new Error(`Nav translation guard collapsed distinct labels "${leftSource}" and "${rightSource}" to "${leftTranslation}"`)
+      }
+    }
+  }
+}
+
+function assertRenderedNavLinkIntegrity(sourceHtml: string, translatedHtml: string): void {
+  const sourceLinks = collectRenderedNavLinks(sourceHtml)
+  const translatedLinks = collectRenderedNavLinks(translatedHtml)
+  if (sourceLinks.size === 0 || translatedLinks.size === 0) return
+
+  for (const path of NAV_GUARD_PATHS) {
+    const sourceLabels = sourceLinks.get(path)
+    if (!sourceLabels?.size) continue
+    const translatedLabels = translatedLinks.get(path)
+    if (!translatedLabels?.size) continue
+
+    for (const otherPath of NAV_GUARD_PATHS) {
+      if (otherPath === path) continue
+      const otherSourceLabels = sourceLinks.get(otherPath)
+      if (!otherSourceLabels?.size) continue
+      if (renderedNavLabelSetsEqual(sourceLabels, otherSourceLabels)) continue
+
+      const otherTranslatedLabels = translatedLinks.get(otherPath)
+      if (!otherTranslatedLabels?.size) continue
+      if (!renderedNavLabelSetsOverlap(translatedLabels, otherTranslatedLabels)) continue
+
+      throw new Error(`Rendered nav labels for ${path} and ${otherPath} share the same translated text`)
+    }
+  }
+}
+
+function navGuardSegmentIndexes(segments: Segment[]): number[] {
+  const indexes: number[] = []
+  for (let index = 0; index < segments.length; index += 1) {
+    if (isNavGuardSegment(segments[index])) indexes.push(index)
+  }
+  return indexes
+}
+
+async function retranslateNavGuardSegments(env: Env, targetLanguage: string, segments: Segment[], translations: string[], pagePath: string): Promise<void> {
+  for (const index of navGuardSegmentIndexes(segments)) {
+    translations[index] = await translateSingleText(env, targetLanguage, segments[index].text, pagePath)
+  }
 }
 
 function recordOf(value: unknown): Record<string, unknown> | null {
@@ -1742,8 +1940,9 @@ function polishTranslatedText(targetLanguage: string, text: string): string {
 async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
-  const protectedBatch = batch.map((text) => protectTranslationTokens(text))
-  const contexts = resolveTranslationContexts(batch)
+  const { uniqueBatch, expandIndexes } = dedupeBatchForTranslation(batch)
+  const protectedBatch = uniqueBatch.map((text) => protectTranslationTokens(text))
+  const contexts = resolveTranslationContexts(uniqueBatch)
 
   for (let attempt = 1; attempt <= TRANSLATION_MODEL_ATTEMPTS; attempt += 1) {
     let payload: unknown = ''
@@ -1758,7 +1957,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
         max_tokens: 8192,
         response_format: {
           type: 'json_schema',
-          json_schema: translationBatchJsonSchema(batch.length),
+          json_schema: translationBatchJsonSchema(uniqueBatch.length),
         },
         messages: [
           {
@@ -1773,7 +1972,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
-              `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${batch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
+              `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${uniqueBatch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
               attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON object matching the schema.' : '',
             ]
               .filter(Boolean)
@@ -1795,8 +1994,8 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
       const translated = parseTranslationArray(payload)
       if (!translated) {
         lastError = new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
-      } else if (translated.length !== batch.length) {
-        lastError = new Error(`Translation model returned ${translated.length} strings for ${batch.length} ${targetLanguage} strings`)
+      } else if (translated.length !== uniqueBatch.length) {
+        lastError = new Error(`Translation model returned ${translated.length} strings for ${uniqueBatch.length} ${targetLanguage} strings`)
       } else {
         const restored = translated.map((text, index) => {
           const result = protectedBatch[index].restoreOrSource(text)
@@ -1805,27 +2004,27 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               targetLanguage,
               index,
               missingTokens: result.missingTokens,
-              sourcePreview: aiPayloadPreview(batch[index]),
+              sourcePreview: aiPayloadPreview(uniqueBatch[index]),
               outputPreview: aiPayloadPreview(text),
             })
           }
           return polishTranslatedText(targetLanguage, result.text)
         })
-        assertTranslatedBatch(targetLanguage, batch, restored)
-        const guarded = guardTranslatedBatchLengths(batch, restored, targetLanguage).map((text, index) => {
-          if (text === batch[index] && translationLengthViolation(batch[index], restored[index], targetLanguage)) {
+        assertTranslatedBatch(targetLanguage, uniqueBatch, restored)
+        const guarded = guardTranslatedBatchLengths(uniqueBatch, restored, targetLanguage).map((text, index) => {
+          if (text === uniqueBatch[index] && translationLengthViolation(uniqueBatch[index], restored[index], targetLanguage)) {
             console.warn('Translation kept source after length bound violation', {
               targetLanguage,
               index,
-              sourceLength: batch[index].length,
+              sourceLength: uniqueBatch[index].length,
               translatedLength: restored[index].length,
-              sourcePreview: aiPayloadPreview(batch[index]),
+              sourcePreview: aiPayloadPreview(uniqueBatch[index]),
               outputPreview: aiPayloadPreview(restored[index]),
             })
           }
           return text
         })
-        return guarded
+        return expandDedupedBatchTranslations(guarded, expandIndexes)
       }
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
@@ -1836,6 +2035,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
       attempt,
       maxAttempts: TRANSLATION_MODEL_ATTEMPTS,
       batchSize: batch.length,
+      uniqueBatchSize: uniqueBatch.length,
       error: lastError.message,
       outputPreview: aiPayloadPreview(payload),
     })
@@ -2632,7 +2832,21 @@ async function refreshCacheIncrementally(
   }
   assertTranslatedBody(LANGUAGE_NAMES[locale], segments, translations)
 
+  const targetLanguage = LANGUAGE_NAMES[locale]
+  try {
+    assertNavSegmentTranslationGuard(segments, translations)
+  } catch (error) {
+    console.warn('Nav translation guard failed; retranslating guarded header links individually', {
+      pathname: requestUrl.pathname,
+      locale,
+      error: errorMessage(error),
+    })
+    await retranslateNavGuardSegments(env, targetLanguage, segments, translations, requestUrl.pathname)
+    assertNavSegmentTranslationGuard(segments, translations)
+  }
+
   const translatedHtml = renderTranslatedHtml(parts, segments, translations)
+  assertRenderedNavLinkIntegrity(source.sourceHtml, translatedHtml)
   const response = createTranslatedHtmlResponse(source.originResponse, translatedHtml, requestUrl, locale)
   if (response.ok && isHtmlResponse(response)) {
     const cachedResponse = toCachedResponse(response.clone(), sourceHash)
@@ -3209,13 +3423,19 @@ export const __translationWorkerTest = {
   TRANSLATION_CACHE_VERSION,
   applyFrenchArticleElision,
   polishTranslatedText,
+  assertNavSegmentTranslationGuard,
+  assertRenderedNavLinkIntegrity,
   bodyTranslationStats,
   buildBatches,
   cacheKeyFor,
   sourceCheckKeyFor,
+  collectRenderedNavLinks,
   collectSegments,
+  dedupeBatchForTranslation,
+  expandDedupedBatchTranslations,
   guardTranslationLength,
   guardTranslatedBatchLengths,
+  isNavGuardSegment,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
   rewriteMetadataAndLinks,
