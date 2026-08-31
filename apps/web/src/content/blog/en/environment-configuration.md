@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-31T07:43:39.494Z
-updated_at: 2026-08-31T07:43:40.825Z
+updated_at: 2026-08-31T07:46:00.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/e098a551-a3f7-44ac-8040-3cc6fd2f59d2/environment-configuration-modern-apps.jpg'
 head_image_alt: Environment Configuration for Modern Apps
 keywords: 'environment configuration, 12-factor app, secret management, Capacitor config, CI/CD deployment'
