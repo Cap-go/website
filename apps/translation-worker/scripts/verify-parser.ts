@@ -164,7 +164,7 @@ const supportContext = __translationWorkerTest.resolveTranslationContexts(['Supp
 assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('word-count-constraint-v1'), 'Cache version was not bumped for word count constraint support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('word-count-retry-v1'), 'Cache version was not bumped for word count retry support')
 
 assert(__translationWorkerTest.translationWordCount('Ship mobile updates instantly') === 4, 'Word count did not count a short English headline')
 assert(__translationWorkerTest.translationWordCount('Évitez l\u2019attente de l\u2019App Store.') === 5, 'Word count did not count elided French words')
@@ -196,9 +196,21 @@ assert(
   'Word count guard should not apply to compact CJK targets',
 )
 assert(
+  __translationWorkerTest.guardTranslationLength('Ship mobile updates instantly', 'Déployez des mises à jour mobiles', 'French') === 'Déployez des mises à jour mobiles',
+  'Length guard keeps valid short headline translations instead of falling back to English',
+)
+assert(
   __translationWorkerTest.guardTranslationLength('Ship mobile updates instantly', 'Déployez des mises à jour mobiles instantanément aux utilisateurs partout', 'French') ===
     'Ship mobile updates instantly',
-  'Translation guard did not fall back to source for word-count violations',
+  'Length guard still falls back to English for character-length violations',
+)
+assert(
+  __translationWorkerTest.pickShortestWordCountCandidate('Ship mobile updates instantly', [
+    'Déployez des mises à jour mobiles instantanément aux utilisateurs partout',
+    'Déployez des mises à jour mobiles',
+    'Déployez des mises à jour mobiles instantanément',
+  ]) === 'Déployez des mises à jour mobiles',
+  'Shortest word-count candidate was not selected after retries',
 )
 assert(
   __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === 'Évitez l\u2019attente. Livrez la correction.',
