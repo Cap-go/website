@@ -2,18 +2,20 @@
 slug: comparing-ci-cd-platforms-for-capacitor-apps
 title: Best CI/CD Platforms for Capacitor Apps in 2026
 description: >-
-  Compare GitHub Actions, Bitrise, Codemagic, and Appflow for Capacitor apps.
-  Keep your CI. Add Capgo for native builds, live updates, and device testing.
+  Compare GitHub Actions, Bitrise, Codemagic, Appflow, and Capawesome Cloud CI
+  for Capacitor apps. Keep your CI. Add Capgo for native builds, live updates,
+  and device testing.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-09-01T00:00:00.000Z
-updated_at: 2026-09-01T14:10:00.000Z
+updated_at: 2026-09-01T18:00:00.000Z
 head_image: /blog-images/comparing-ci-cd-platforms-for-capacitor-apps.png
-head_image_alt: Best CI/CD Platforms for Capacitor Apps in 2026 Capgo blog illustration
+head_image_alt: Keep your CI. Add Capgo. Native builds, live updates, and device tests.
 keywords: >-
   Capacitor CI/CD, GitHub Actions Capacitor, Bitrise, Codemagic, Ionic Appflow,
-  Capgo, live updates, native builds, mobile testing
+  Capawesome Cloud, Capawesome CI, Capgo, live updates, native builds, mobile
+  testing
 tag: CI/CD, Mobile, Updates
 published: true
 locale: en
@@ -27,7 +29,8 @@ faq:
       Android builds, live updates, and installable device tests. Bitrise and
       Codemagic can replace native builds if you do not need live updates.
       Appflow still works for existing customers through December 31, 2027, but
-      it is not a greenfield choice.
+      it is not a greenfield choice. Capawesome Cloud covers OTA and native
+      builds, but as a replacement CI with a closed backend.
   - question: Should I replace GitHub Actions with a mobile CI platform?
     answer: >-
       Usually no. GitHub Actions and GitLab CI are strong at pull-request
@@ -53,6 +56,15 @@ faq:
       February 11, 2025, and existing Appflow access continues through December
       31, 2027. New Capacitor projects should keep their CI and add Capgo
       rather than start on a platform with a shutdown date.
+  - question: How does Capawesome Cloud CI compare to Capgo?
+    answer: >-
+      Capawesome Cloud is an all-in-one Capacitor CI. You connect git, leave
+      GitHub Actions, and run native builds plus live updates inside their cloud.
+      That is vendor lock-in. Capgo is open source, plugs into the CI you already
+      have, and has kept the same $12/month paid entry since launch. Capawesome
+      has already reshuffled pricing more than once, including Native Builds
+      from $9/month at launch and a May 2026 Platform SKU from $19/month with
+      Business at $499/month.
 ---
 
 The shortlist for Capacitor CI/CD has shrunk. Microsoft App Center’s build and distribute services retired on March 31, 2025. Ionic Appflow is in a multi-year wind-down. GitHub Actions, GitLab CI, Bitrise, and Codemagic are still here, and they are still good at the jobs they were designed for.
@@ -73,6 +85,7 @@ That leaves the platforms teams actually run:
 - **GitHub Actions** and **GitLab CI**: general-purpose CI. Excellent on Linux. Expensive and unfinished on native mobile.
 - **Bitrise** and **Codemagic**: mobile CI specialists. Strong signing and store submit. No managed Capacitor live updates.
 - **Capgo**: Capacitor-native live updates, cloud native builds, and installable device previews, called from the CI you already have.
+- **Capawesome Cloud**: Capacitor-native live updates and native builds sold as a replacement CI. You connect git and leave GitHub Actions. Closed backend, full vendor lock-in, and a pricing history that has already moved more than once.
 
 The useful question in 2026 is not “which CI should replace GitHub Actions?” It is “what should GitHub Actions call when a Capacitor app needs a binary, an OTA bundle, or a phone install?”
 
@@ -100,18 +113,20 @@ That is not a device farm. If you need emulator matrices or Firebase Test Lab, k
 
 ## Feature matrix
 
-| Feature | Capgo | Your CI (GitHub Actions, GitLab) | Bitrise / Codemagic | Ionic Appflow |
-| --- | --- | --- | --- | --- |
-| Capacitor support | First-class | DIY | Generic mobile CI | First-class (legacy) |
-| Native iOS and Android builds | Yes, from a Linux CI job | DIY on macOS runners | Yes | Yes |
-| Managed signing | Yes | Secrets only | Yes | Yes |
-| Managed live updates | Yes | DIY | No | Yes |
-| PR / device testing | Channels, QR installs, Capgo app | Not built in | Distribute a binary | Store tracks |
-| Store publishing | Yes | DIY via Fastlane | Yes | Yes |
-| Replaces your CI? | No, it plugs in | It *is* your CI | Usually yes | Yes |
-| Long-term status | Active | Active | Active | EOL 2027-12-31 |
+| Feature | Capgo | Your CI (GitHub Actions, GitLab) | Bitrise / Codemagic | Capawesome Cloud | Ionic Appflow |
+| --- | --- | --- | --- | --- | --- |
+| Capacitor support | First-class | DIY | Generic mobile CI | First-class | First-class (legacy) |
+| Native iOS and Android builds | Yes, from a Linux CI job | DIY on macOS runners | Yes | Yes, inside their CI | Yes |
+| Managed signing | Yes | Secrets only | Yes | Yes | Yes |
+| Managed live updates | Yes | DIY | No | Yes | Yes |
+| PR / device testing | Channels, QR installs, Capgo app | Not built in | Distribute a binary | Git-connected builds | Store tracks |
+| Store publishing | Yes | DIY via Fastlane | Yes | Yes | Yes |
+| Replaces your CI? | No, it plugs in | It *is* your CI | Usually yes | Yes | Yes |
+| Open source | Plugin and backend | N/A | No | Plugin/CLI; closed backend | No |
+| Self-host | Yes | Yes | No | Partial (bundles only) | No |
+| Long-term status | Active | Active | Active | Active | EOL 2027-12-31 |
 
-Three things stand out. Only Capgo and Appflow bundle managed live updates with native builds, and Appflow is winding down. Only Capgo is designed to **keep** GitHub Actions or GitLab CI instead of replacing them. Bitrise and Codemagic can own the native binary, but you still assemble OTA and device previews yourself.
+Three things stand out. Capgo, Capawesome Cloud, and Appflow bundle managed live updates with native builds, and Appflow is winding down. Only Capgo is designed to **keep** GitHub Actions or GitLab CI instead of replacing them. Capawesome Cloud is the other Capacitor-native option, but it is a replacement CI with a closed backend. Bitrise and Codemagic can own the native binary, but you still assemble OTA and device previews yourself.
 
 ## The platforms in detail
 
@@ -133,7 +148,35 @@ You do not move lint and unit tests off GitHub Actions. You add two CLI calls af
   run: npx @capgo/cli@latest build request com.example.app --platform ios --build-mode release
 ```
 
-Paid plans start at $12/month billed yearly and include live updates plus native build time (about 15 builds/month, with extra minutes billed through credits). See [pricing](/pricing/), [CI/CD with Capgo Build](/ci_cd/), and the [GitHub Actions build guide](/docs/builder/github-actions/).
+Paid plans start at $12/month billed yearly and include live updates plus native build time (about 15 builds/month, with extra minutes billed through credits). That entry price has not been raised since launch. See [pricing](/pricing/), [CI/CD with Capgo Build](/ci_cd/), and the [GitHub Actions build guide](/docs/builder/github-actions/).
+
+The updater plugin and the backend are open source (MIT/MPL-2.0). You can audit them, fork them, or [self-host](/docs/plugins/updater/self-hosted/getting-started/). Paid Capgo Cloud is optional infrastructure, not a trap.
+
+### Capawesome Cloud
+
+Capawesome Cloud CI — Native Builds plus Live Updates, now sold as Capawesome Platform — is the other Capacitor-native option that bundles OTA with cloud iOS and Android builds. The product pitch is the opposite of Capgo: **replace** GitHub Actions and GitLab instead of plugging into them.
+
+Their Native Builds launch post is explicit. No third-party CI/CD. Connect GitHub, GitLab, Bitbucket, or Azure DevOps. Put the pipeline in `capawesome.config.json`. Run it inside Capawesome Cloud. You can trigger a build from a CLI, but the intended workflow is vendor-hosted CI. Git integration, signing, build minutes, live updates, and store submit all sit behind one closed backend. The plugin and CLI are open source. The backend is not. Self-hosting is partial at best: you can host bundles; metadata stays in Capawesome Cloud.
+
+That is full vendor lock-in. Leaving later means moving the updater, the build config, the git connection, and the release metadata. Capgo keeps those pieces in your repo and your CI. The open-source updater and backend are the exit.
+
+Pricing history is the other split. Capgo’s paid entry has been **$12/month** billed yearly since launch. It has never been raised. Capawesome has already changed the commercial shape more than once:
+
+- Native Builds launch: from **$9/month** for 1,000 live updates and 200 build minutes. Business was **$299/month**.
+- May 2026 Platform relaunch: Live Updates moved off MAU onto per-update counting, then **back to MAU** after customers complained. The full Platform SKU (builds, live updates, and publishing) starts at **$19/month**. Business is **$499/month**.
+- Current public pricing still splits Live Updates (from **$9/month**) from the full Platform (from **$19/month**).
+
+A cheaper sticker that keeps moving is not the same as a fair price that stays put. If you want Capacitor live updates and native builds without giving up your CI, Capgo is the fit. If you already standardized on Capawesome plugins and want their git-connected CI, read [Capgo vs Capawesome Cloud](/capwesome/) and the [migration guide](/docs/upgrade/from-capawesome-to-capgo/).
+
+| Compared | Capgo | Capawesome Cloud |
+| --- | --- | --- |
+| CI model | Add-on to GitHub Actions / GitLab | Replacement CI (`capawesome.config.json`) |
+| Open source | Plugin and backend | Plugin/CLI; closed backend |
+| Self-host | Yes | Bundles only; metadata stays in their cloud |
+| Paid entry | $12/month yearly, never raised | $9 live-updates / $19 platform after multiple reshuffles |
+| Business list price | Usage-based credits | $299 at Native Builds launch, $499 after Platform relaunch |
+
+Sources: [Capawesome Native Builds announcement](https://capawesome.io/blog/announcing-capawesome-cloud-native-builds/), [Capawesome Platform announcement](https://capawesome.io/blog/announcing-capawesome-platform/), [Capawesome pricing](https://capawesome.io/pricing/).
 
 ### GitHub Actions
 
@@ -219,9 +262,11 @@ Repeat the last step with `--platform android` for Play, or use a matrix like th
 
 ## Choosing the right setup
 
-There is no universal winner. These five situations cover most Capacitor teams.
+There is no universal winner. These situations cover most Capacitor teams.
 
 **You already use GitHub Actions or GitLab CI.** Keep them. Add Capgo for live updates, native builds, and PR previews. This is the default 2026 answer.
+
+**You are looking at Capawesome Cloud.** They want the git connection, the YAML replacement, and the release metadata. That is convenient until you want to leave. Capgo keeps your CI, is fully open source, and has not raised the $12 entry price. See [Capgo vs Capawesome Cloud](/capwesome/).
 
 **You are still on Appflow.** You have until December 31, 2027. Waiting concentrates the migration. Move live updates and native builds to Capgo, and put PR automation back on GitHub Actions if Appflow was also your CI.
 
@@ -229,13 +274,13 @@ There is no universal winner. These five situations cover most Capacitor teams.
 
 **macOS minutes are taking over the GitHub bill.** Do not move lint and unit tests off GitHub. Move native builds to Capgo so iOS no longer runs on hosted Macs in Actions. Keep the PR status checks where they are.
 
-**You are starting a Capacitor app in 2026.** Skip Appflow and App Center. Start with GitHub Actions for CI. Add Capgo on day one for OTA, cloud builds, and device previews. You can add Bitrise or Codemagic later if you have a specific runner or step-library reason. Most teams never need that extra platform.
+**You are starting a Capacitor app in 2026.** Skip Appflow and App Center. Start with GitHub Actions for CI. Add Capgo on day one for OTA, cloud builds, and device previews. You can add Bitrise or Codemagic later if you have a specific runner or step-library reason. Most teams never need that extra platform. Skip Capawesome Cloud unless you already want their plugin catalog enough to accept a replacement CI.
 
 ## FAQ
 
 ### What is the best CI/CD platform for Capacitor apps?
 
-Keep the CI you already use for lint, unit tests, and web builds. Add Capgo for signed native iOS and Android builds, live updates, and installable device tests. Bitrise and Codemagic can replace native builds if you do not need live updates. Appflow remains available to existing customers through December 31, 2027, but it is not a greenfield choice.
+Keep the CI you already use for lint, unit tests, and web builds. Add Capgo for signed native iOS and Android builds, live updates, and installable device tests. Bitrise and Codemagic can replace native builds if you do not need live updates. Capawesome Cloud covers OTA and native builds, but as a replacement CI with a closed backend. Appflow remains available to existing customers through December 31, 2027, but it is not a greenfield choice.
 
 ### Should I replace GitHub Actions with a mobile CI platform?
 
@@ -253,10 +298,14 @@ Capgo turns pull requests into installable previews on dedicated channels, share
 
 Only if you are already a customer. Ionic closed new commercial sales on February 11, 2025, and existing Appflow access continues through December 31, 2027. New Capacitor projects should keep their CI and add Capgo rather than start on a platform with a shutdown date.
 
+### How does Capawesome Cloud CI compare to Capgo?
+
+Capawesome Cloud is an all-in-one Capacitor CI: connect git, leave GitHub Actions, and run native builds plus live updates inside their cloud. That is vendor lock-in. Capgo is open source (plugin and backend), plugs into the CI you already have, and has kept the same $12/month paid entry since launch. Capawesome has already reshuffled pricing more than once, including Native Builds from $9/month at launch and a May 2026 Platform SKU from $19/month with Business at $499/month, up from $299.
+
 ## Conclusion
 
-The 2026 Capacitor shortlist is smaller than it looks: two retired or retiring all-in-one platforms, two mobile CI generalists with no OTA, and one general-purpose runner you already have. The team that ships fastest is not the team that rebuilds CI on a new vendor. It is the team that keeps GitHub Actions or GitLab CI, then adds a Capacitor layer for the jobs that CI still does badly.
+The 2026 Capacitor shortlist is smaller than it looks: two retired or retiring all-in-one platforms, two mobile CI generalists with no OTA, one git-connected Capacitor CI that replaces your pipeline, and one general-purpose runner you already have. The team that ships fastest is not the team that rebuilds CI on a new vendor. It is the team that keeps GitHub Actions or GitLab CI, then adds a Capacitor layer for the jobs that CI still does badly.
 
-That layer is Capgo: **native builds**, **live updates**, and **device testing**, triggered from the pipeline you already run.
+That layer is Capgo: **native builds**, **live updates**, and **device testing**, triggered from the pipeline you already run. Open source. Fair pricing that has not been raised. Not a closed replacement CI.
 
 [Create a Capgo account](/register/), then follow [CI/CD integration](/docs/getting-started/cicd-integration/) or [Capgo Build from GitHub Actions](/docs/builder/github-actions/). If you want the product view first, start with [Native Builds](/native-build/), [Live Updates](/live-update/), and [PR previews](/solutions/pr-preview/).
