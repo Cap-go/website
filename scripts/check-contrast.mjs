@@ -141,33 +141,35 @@ async function assertProductHeroCtaCanary(page) {
   console.log(`ok  product-hero CTA canary (${ratio.toFixed(2)}:1)`)
 }
 
-async function scanRoute(page, route) {
-  const issues = []
-  const axe = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze()
-  for (const violation of axe.violations) {
-    for (const node of violation.nodes) {
-      const selector = node.target?.[0] || ''
-      if (!isInteractiveTarget(selector, node.html || '')) continue
-      const ratio = ratioFromNode(node)
-      if (ratio == null || ratio >= GHOST_RATIO) continue
-      issues.push({
+function ghostIssuesFromAxe(results) {
+  return results.violations.flatMap((violation) => violation.nodes).flatMap((node) => {
+    const selector = node.target?.[0] || ''
+    const ratio = ratioFromNode(node)
+    if (!isInteractiveTarget(selector, node.html || '') || ratio == null || ratio >= GHOST_RATIO) {
+      return []
+    }
+    return [
+      {
         selector,
         text: (node.html || '').replace(/\s+/g, ' ').slice(0, 120),
         ratio,
-      })
-    }
-  }
+      },
+    ]
+  })
+}
 
-  if (route === '/pricing/') {
-    const samples = await contrastSamples(page, PRICING_CTA)
-    if (samples.length === 0) {
-      issues.push({ selector: PRICING_CTA, text: 'pricing plan CTAs missing from built page', ratio: 0 })
-    }
-    for (const sample of samples) {
-      if (sample.ratio < CTA_RATIO) issues.push(sample)
-    }
+async function pricingCtaIssues(page) {
+  const samples = await contrastSamples(page, PRICING_CTA)
+  if (samples.length === 0) {
+    return [{ selector: PRICING_CTA, text: 'pricing plan CTAs missing from built page', ratio: 0 }]
   }
+  return samples.filter((sample) => sample.ratio < CTA_RATIO)
+}
 
+async function scanRoute(page, route) {
+  const axe = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze()
+  const issues = ghostIssuesFromAxe(axe)
+  if (route === '/pricing/') issues.push(...(await pricingCtaIssues(page)))
   return issues
 }
 
