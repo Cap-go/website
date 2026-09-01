@@ -266,7 +266,7 @@ jobs:
           APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
 ```
 
-Repeat the last step with `--platform android` for Play, or use a matrix like the [GitHub Actions build guide](/docs/builder/github-actions/). Signing secrets and store keys stay in GitHub and are passed as environment variables on the build request, matching that guide. Capgo does not need to become your source of truth for git. Full examples live in the [builder GitHub Actions docs](/docs/builder/github-actions/) and [CI/CD integration](/docs/getting-started/cicd-integration/).
+The sketch is iOS-only. Android needs `ANDROID_KEYSTORE_FILE`, `KEYSTORE_KEY_ALIAS`, `KEYSTORE_KEY_PASSWORD`, `KEYSTORE_STORE_PASSWORD`, and `PLAY_CONFIG_JSON`. Do not copy the iOS `env` block and change only `--platform`. Use the matrix in the [GitHub Actions build guide](/docs/builder/github-actions/). Signing secrets stay in GitHub and are passed as environment variables on the build request. Capgo does not need to become your source of truth for git. Full examples live in the [builder GitHub Actions docs](/docs/builder/github-actions/) and [CI/CD integration](/docs/getting-started/cicd-integration/).
 
 ## Choosing the right setup
 
