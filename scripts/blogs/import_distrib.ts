@@ -1,15 +1,26 @@
 import matter from 'gray-matter'
-import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join, resolve, sep } from 'node:path'
-import { commonReplacements } from '../commonReplacements'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { normalizeBlogTags } from '../../apps/web/src/constants/blogTags'
+import {
+  assertInsideDirectory,
+  DEFAULT_AUTHOR,
+  DEFAULT_AUTHOR_IMAGE_URL,
+  DEFAULT_AUTHOR_URL,
+  DEFAULT_BLOG_DIR,
+  DEFAULT_HEAD_IMAGE,
+  firstText,
+  frontmatterString,
+  normalizeHeadImage,
+  normalizeMarkdown,
+  readTrustedImportJson,
+  toDate,
+  toSlug,
+  writeGithubOutput,
+} from './importArticleShared'
 
-const DEFAULT_BLOG_DIR = 'apps/web/src/content/blog/en'
-const DEFAULT_AUTHOR = 'Martin Donadieu'
-const DEFAULT_AUTHOR_IMAGE_URL = 'https://avatars.githubusercontent.com/u/4084527?v=4'
-const DEFAULT_AUTHOR_URL = 'https://github.com/riderx'
-const DEFAULT_HEAD_IMAGE = '/capgo_banner.png'
 const IMPORTED_FILES_PATH = '.distrib-imported-files'
+const TRUSTED_RUNNER_TEMP_PAYLOAD = 'distrib-payload.json'
 
 interface DistribArticle {
   id?: string
@@ -37,8 +48,8 @@ interface DistribPayload {
 
 const SUPPORTED_DISTRIB_EVENT_TYPES = new Set(['publish_articles', 'update_articles'])
 
-function readJson(path: string): unknown {
-  return JSON.parse(readFileSync(path, 'utf8'))
+function readJson(filePath: string): unknown {
+  return readTrustedImportJson(filePath, TRUSTED_RUNNER_TEMP_PAYLOAD)
 }
 
 function payloadFromGithubEvent(event: any): DistribPayload {
@@ -59,24 +70,6 @@ function loadPayload(): DistribPayload {
   return payloadFromGithubEvent(readJson(process.env.GITHUB_EVENT_PATH))
 }
 
-function toSlug(value: string): string {
-  return value
-    .trim()
-    .toLowerCase()
-    .replace(/['"]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
-function assertInsideDirectory(directory: string, filePath: string): void {
-  const resolvedDirectory = resolve(directory)
-  const resolvedFilePath = resolve(filePath)
-
-  if (resolvedFilePath !== resolvedDirectory && !resolvedFilePath.startsWith(`${resolvedDirectory}${sep}`)) {
-    throw new Error(`Refusing to write outside blog directory: ${filePath}`)
-  }
-}
-
 function isSupportedEventType(eventType: string | undefined): boolean {
   return typeof eventType === 'string' && SUPPORTED_DISTRIB_EVENT_TYPES.has(eventType)
 }
@@ -86,67 +79,9 @@ function payloadArticles(payload: DistribPayload): DistribArticle[] {
   return []
 }
 
-function frontmatterString(frontmatter: Record<string, unknown>, key: string): string {
-  const value = frontmatter[key]
-  return typeof value === 'string' ? value : ''
-}
-
-function toDate(value: Date | string | undefined, fallback: Date): Date {
-  const date = value ? new Date(value) : new Date(fallback)
-  if (Number.isNaN(date.getTime())) return new Date(fallback)
-  return date
-}
-
-function firstText(content: string, maxLength = 155): string {
-  const text = content
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/[#*_`[\]()]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-
-  if (text.length <= maxLength) return text
-  return `${text.slice(0, maxLength).replace(/\s+\S*$/, '')}...`
-}
-
-function removeLeadingFrontmatter(content: string): string {
-  return content.replace(/^\s*---\n[\s\S]*?\n---\n+/, '')
-}
-
-function removeDuplicateTitle(content: string, title: string): string {
-  const escapedTitle = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  return content.replace(new RegExp(`^\\s*#\\s+${escapedTitle}\\s*\\n+`, 'i'), '')
-}
-
-function normalizeMarkdown(content: string, title: string): string {
-  const normalized = removeDuplicateTitle(removeLeadingFrontmatter(content.replace(/\r\n?/g, '\n')), title)
-    .replace(/https:\/\/capgo\.app\/(de|en|es|fr|id|it|ja|ko)\/(.*?)\//g, 'https://capgo.app/$2/')
-    .trim()
-
-  return `${commonReplacements(normalized)}\n`
-}
-
-function normalizeHeadImage(imageUrl: string | undefined): string {
-  if (!imageUrl) return DEFAULT_HEAD_IMAGE
-
-  const imagePath = imageUrl.split(/[?#]/)[0]?.toLowerCase() || ''
-  if (imagePath.endsWith('.webp')) return DEFAULT_HEAD_IMAGE
-
-  return imageUrl
-}
-
 function isPublished(status: string | undefined): boolean {
   if (!status) return true
   return status.trim().toLowerCase() === 'published'
-}
-
-function writeGithubOutput(files: string[], articleCount: number): void {
-  if (!process.env.GITHUB_OUTPUT) return
-
-  appendFileSync(process.env.GITHUB_OUTPUT, `article_count=${articleCount}\n`)
-  appendFileSync(process.env.GITHUB_OUTPUT, 'files<<EOF\n')
-  appendFileSync(process.env.GITHUB_OUTPUT, `${files.join('\n')}\n`)
-  appendFileSync(process.env.GITHUB_OUTPUT, 'EOF\n')
 }
 
 function writeArticle(article: DistribArticle, payloadTimestamp: Date, blogDirectory: string): string {

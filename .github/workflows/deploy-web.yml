@@ -112,7 +112,7 @@ jobs:
             ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-web-
 
-      - run: bun install --frozen-lockfile
+      - run: bun install --frozen-lockfile --ignore-scripts
       - name: Fetch latest global stats
         run: |
           GITHUB_STATS_REFRESH=true bun run fetch:stars

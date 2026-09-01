@@ -90,9 +90,9 @@ async function main() {
   await Bun.write(OUTPUT_PATH, `${JSON.stringify(live, null, 2)}\n`)
 
   console.log(`Saved website stats to ${OUTPUT_PATH}`)
-  console.log(`  apps: ${live.apps.toLocaleString()}`)
-  console.log(`  updates: ${live.updates.toLocaleString()}`)
-  console.log(`  stars: ${live.stars.toLocaleString()}`)
+  console.log(`  apps: ${Number(live.apps).toLocaleString()}`)
+  console.log(`  updates: ${Number(live.updates).toLocaleString()}`)
+  console.log(`  stars: ${Number(live.stars).toLocaleString()}`)
 }
 
 main().catch((error) => {

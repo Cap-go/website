@@ -52,7 +52,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bun-
 
-      - run: bun install --frozen-lockfile
+      - run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Write manual payload
         if: github.event_name == 'workflow_dispatch'

@@ -39,7 +39,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bun-
 
-      - run: bun install --frozen-lockfile
+      - run: bun install --frozen-lockfile --ignore-scripts
       - run: bun run ci:verify:distrib
 
       - name: Write Worker secrets
@@ -59,7 +59,7 @@ jobs:
 
           await Bun.write(process.env.DISTRIB_SECRETS_FILE, JSON.stringify(secrets))'
 
-      - run: cd apps/distrib-worker && bunx wrangler deploy --secrets-file "$DISTRIB_SECRETS_FILE"
+      - run: cd apps/distrib-worker && bunx wrangler@4.126.0 deploy --secrets-file "$DISTRIB_SECRETS_FILE"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

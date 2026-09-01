@@ -232,7 +232,7 @@ function collectUsages(): Map<string, string[]> {
   }
 
   for (const root of roots) walk(root)
-  return new Map([...usages.entries()].map(([key, set]) => [key, [...set].sort()]))
+  return new Map([...usages.entries()].map(([key, set]) => [key, [...set].sort((a, b) => a.localeCompare(b))]))
 }
 
 function usageHint(files: string[] | undefined): string {
@@ -378,7 +378,7 @@ function writeDataFile(messages: MessageMap, contexts: Record<string, string>): 
   ]
 
   for (const [text, contextSet] of entries) {
-    const merged = [...contextSet].sort().join(' | ')
+    const merged = [...contextSet].sort((a, b) => a.localeCompare(b)).join(' | ')
     lines.push(`  '${escapeTsString(text)}': '${escapeTsString(merged)}',`)
   }
 

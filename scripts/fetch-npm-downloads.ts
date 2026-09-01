@@ -102,7 +102,8 @@ const fetchDownloads = async (packageName: string, cachedDownloads?: number): Pr
       }
 
       const data = await response.json()
-      return data.downloads ?? 0
+      const safeCount = Number(data.downloads)
+      return Number.isFinite(safeCount) ? safeCount : 0
     } catch (error) {
       if (error instanceof Error && error.message.includes('Timeout')) {
         throw error

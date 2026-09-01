@@ -4,9 +4,10 @@
  * Usage: bun run generate:social-images
  */
 import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { accessSync, existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, resolve } from 'node:path'
+import { logoTile, textLine, wrapText } from './imageSvgShared'
 
 const width = 2400
 const height = 1260
@@ -199,64 +200,6 @@ const images: SocialImage[] = [
   },
 ]
 
-const logoOuterPath =
-  'M264.2 265.3 17 512.5 264.5 760 512 1007.5 759.5 760 1007 512.5 759.8 265.3C623.8 129.3 512.3 18 512 18c-.3 0-111.8 111.3-247.8 247.3zm438.5 55.9C807.4 425.9 893 511.9 893 512.5c0 .5-85.7 86.7-190.5 191.5L512 894.5l-191-191-191-191 190.7-190.7c105-105 191-190.8 191.3-190.8.3 0 86.1 85.6 190.7 190.2z'
-const logoInnerPath =
-  'M440.8 347c-12.6 12.6-22.8 23.3-22.8 23.7 0 .5 53 53.7 117.8 118.4l117.7 117.7 23.2-23.3 23.1-23.2-47.4-47.4-47.4-47.4 47.5-47.5 47.5-47.5-23.3-23.3-23.2-23.2-47.5 47.5-47.5 47.5-47.5-47.4-47.5-47.5-22.7 22.9zM347 441.2 324.5 464l47.3 47.3 47.2 47.2-47.4 47.7-47.3 47.6 23 23 23 23 47.5-47.5 47.5-47.5 47.3 47.3c26 26 47.5 47.1 47.8 46.9 6.6-6.3 45.6-45.5 45.6-45.9 0-1.2-234.5-235.1-235.5-234.9-.6 0-11.1 10.4-23.5 23z'
-
-function escapeText(value: string) {
-  return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
-}
-
-function wrapText(value: string, maxChars: number) {
-  const lines: string[] = []
-  let current = ''
-
-  for (const word of value.split(' ')) {
-    const next = current ? `${current} ${word}` : word
-    if (next.length > maxChars && current) {
-      lines.push(current)
-      current = word
-    } else {
-      current = next
-    }
-  }
-
-  if (current) lines.push(current)
-  return lines
-}
-
-function textLine(
-  text: string,
-  x: number,
-  y: number,
-  options: {
-    size: number
-    color: string
-    weight?: number
-    anchor?: 'start' | 'middle'
-    opacity?: number
-    hanging?: boolean
-  },
-) {
-  const baseline = options.hanging ? ' dominant-baseline="hanging"' : ''
-  return `<text x="${x}" y="${y}"${baseline} text-anchor="${options.anchor ?? 'start'}" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="${options.size}" font-weight="${options.weight ?? 500}" fill="${options.color}" opacity="${options.opacity ?? 1}">${escapeText(text)}</text>`
-}
-
-function logoTile(x: number, y: number, size: number, accent: string) {
-  const scale = (size * 0.62) / 1024
-  const offset = size * 0.19
-
-  return `
-    <rect x="${x + 10}" y="${y + 14}" width="${size}" height="${size}" rx="42" fill="#0f172a" opacity="0.16"/>
-    <rect x="${x}" y="${y}" width="${size}" height="${size}" rx="42" fill="#0f172a"/>
-    <rect x="${x + 8}" y="${y + 8}" width="${size - 16}" height="${size - 16}" rx="36" fill="${accent}" opacity="0.12"/>
-    <g transform="translate(${x + offset} ${y + offset}) scale(${scale})">
-      <path fill="#ffffff" d="${logoOuterPath}"/>
-      <path fill="#ffffff" d="${logoInnerPath}"/>
-    </g>`
-}
-
 function chips(items: string[], y: number, accent: string) {
   const gap = 24
   const widths = items.map((item) => 42 + item.length * 20)
@@ -435,20 +378,33 @@ function renderSvg(image: SocialImage) {
 </svg>`
 }
 
-function commandExists(command: string) {
-  return spawnSync('/bin/sh', ['-lc', `command -v ${command}`], { stdio: 'ignore' }).status === 0
+const RSVG_CONVERT_CANDIDATES = ['/usr/bin/rsvg-convert', '/usr/local/bin/rsvg-convert', '/opt/homebrew/bin/rsvg-convert']
+const MAGICK_CANDIDATES = ['/usr/bin/magick', '/usr/local/bin/magick', '/opt/homebrew/bin/magick']
+
+function resolveBinary(candidates: string[]) {
+  for (const candidate of candidates) {
+    try {
+      accessSync(candidate)
+      return candidate
+    } catch {
+      // try next candidate
+    }
+  }
+  return null
 }
 
 function renderPng(svgPath: string, output: string) {
   mkdirSync(dirname(output), { recursive: true })
 
-  if (commandExists('rsvg-convert')) {
-    const result = spawnSync('rsvg-convert', ['-w', String(width), '-h', String(height), '-f', 'png', '-o', output, svgPath], { stdio: 'inherit' })
+  const rsvgConvert = resolveBinary(RSVG_CONVERT_CANDIDATES)
+  if (rsvgConvert) {
+    const result = spawnSync(rsvgConvert, ['-w', String(width), '-h', String(height), '-f', 'png', '-o', output, svgPath], { stdio: 'inherit' })
     if (result.status === 0) return
   }
 
-  if (commandExists('magick')) {
-    const result = spawnSync('magick', [svgPath, '-resize', `${width}x${height}!`, output], { stdio: 'inherit' })
+  const magick = resolveBinary(MAGICK_CANDIDATES)
+  if (magick) {
+    const result = spawnSync(magick, [svgPath, '-resize', `${width}x${height}!`, output], { stdio: 'inherit' })
     if (result.status === 0) return
   }
 

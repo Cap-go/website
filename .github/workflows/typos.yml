@@ -21,10 +21,12 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 24.x
       - name: Checkout Repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          persist-credentials: false
       - name: Check for Typos
-        uses: crate-ci/typos@v1.47.2
+        uses: crate-ci/typos@631208b7aac2daa8b707f55e7331f9112b0e062d

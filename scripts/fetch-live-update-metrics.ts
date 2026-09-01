@@ -65,7 +65,10 @@ async function main() {
   console.log(`Saved live-update metrics to ${OUTPUT_PATH}`)
   console.log(`  success_rate: ${metrics.success_rate}%`)
   console.log(`  failures: ${metrics.failures.length}`)
-  console.log(`  updated_at: ${metrics.updated_at}`)
+  const updatedAt = metrics.updated_at
+  if (typeof updatedAt === 'string' && /^\d{4}-\d{2}-\d{2}T[\d:.+-]+Z?$/.test(updatedAt)) {
+    console.log(`  updated_at: ${updatedAt}`)
+  }
 }
 
 main().catch((error) => {
