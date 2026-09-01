@@ -186,7 +186,7 @@ assert(
 assert(
   !__translationWorkerTest.translationWordCountViolation(
     'Deploy fixes and features without waiting for app store review delays while keeping your release pipeline fast and reliable for every user across all platforms.',
-    'Déployez des correctifs et des fonctionnalités sans attendre les délais de révision de l\u2019App Store tout en gardant votre pipeline de publication rapide et fiable pour chaque utilisateur sur toutes les plateformes.',
+    'Déployez des correctifs et des fonctionnalités sans attendre les délais de révision de l\u2019App Store tout en gardant votre pipeline de publication rapide et fiable pour chaque utilisateur dans toutes les plateformes.',
     'French',
   ),
   'Word count guard should not apply to long body copy',
