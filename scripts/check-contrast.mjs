@@ -1,9 +1,8 @@
 #!/usr/bin/env bun
 /**
- * Post-build WCAG contrast gate for interactive controls.
- *
- * Serves apps/web/dist and fails when buttons/links are unreadable
- * after CSS is applied (the class of bug that hid pricing CTAs).
+ * Post-build contrast gate. Serves apps/web/dist and fails when interactive
+ * controls are unreadable after CSS is applied (the class of bug that hid
+ * pricing CTAs), plus a CSS canary for product-hero dark buttons on white cards.
  *
  *   bun run build:web && bun run contrast:check
  */
@@ -20,8 +19,8 @@ const ROOT = path.resolve(__dirname, '..')
 const CONFIG_PATH = path.join(ROOT, 'visual-diff.config.json')
 const PORT = 4175
 const CTA_RATIO = 4.5
-const UNREADABLE_RATIO = 3
-const PRICING_CTA = '[data-plan] a[role="button"]'
+const GHOST_RATIO = 2
+const PRICING_CTA = '[data-plan] a[aria-label^="Start"]'
 
 function isPathWithinRoot(filePath, rootDir) {
   const resolvedFile = path.resolve(filePath)
@@ -120,77 +119,109 @@ function formatIssue(route, issue) {
   return `${route}  ${ratio}  ${issue.text || issue.selector}`
 }
 
+const MEASURE_CONTRAST = `(function() {
+  function parseColor(color) {
+    if (!color || color === 'transparent') return null
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return null
+    ctx.fillStyle = '#000'
+    ctx.fillStyle = color
+    const normalized = ctx.fillStyle
+    const hex = /^#([0-9a-f]{6})$/i.exec(normalized)
+    if (hex) {
+      const value = Number.parseInt(hex[1], 16)
+      return { r: (value >> 16) & 255, g: (value >> 8) & 255, b: value & 255, a: 1 }
+    }
+    const match = normalized.match(/rgba?\\(([^)]+)\\)/)
+    if (!match) return null
+    const parts = match[1].split(',').map((part) => Number.parseFloat(part.trim()))
+    const [r, g, b, a] = parts
+    if (Number.isNaN(r) || (a ?? 1) === 0) return null
+    return { r, g, b, a: a ?? 1 }
+  }
+  function channel(value) {
+    const scaled = value / 255
+    return scaled <= 0.03928 ? scaled / 12.92 : ((scaled + 0.055) / 1.055) ** 2.4
+  }
+  function luminance({ r, g, b }) {
+    return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
+  }
+  function blend(fg, bg) {
+    const alpha = fg.a
+    return {
+      r: fg.r * alpha + bg.r * (1 - alpha),
+      g: fg.g * alpha + bg.g * (1 - alpha),
+      b: fg.b * alpha + bg.b * (1 - alpha),
+      a: 1,
+    }
+  }
+  function contrast(fg, bg) {
+    const [hi, lo] = [luminance(fg), luminance(bg)].sort((a, b) => b - a)
+    return (hi + 0.05) / (lo + 0.05)
+  }
+  function backgroundOf(el) {
+    let node = el
+    while (node && node !== document.documentElement) {
+      const parsed = parseColor(getComputedStyle(node).backgroundColor)
+      if (parsed) {
+        if (parsed.a >= 0.99) return { r: parsed.r, g: parsed.g, b: parsed.b, a: 1 }
+        const parent = node.parentElement ? backgroundOf(node.parentElement) : { r: 255, g: 255, b: 255, a: 1 }
+        return blend(parsed, parent)
+      }
+      node = node.parentElement
+    }
+    return { r: 255, g: 255, b: 255, a: 1 }
+  }
+  return function measure(el) {
+    const fg = parseColor(getComputedStyle(el).color)
+    const bg = backgroundOf(el)
+    if (!fg) return 0
+    return contrast(fg.a < 1 ? blend(fg, bg) : fg, bg)
+  }
+})()`
+
+async function contrastRatioFor(page, selector) {
+  return page.evaluate(
+    ({ sel, measureSrc }) => {
+      const measure = eval(measureSrc)
+      const el = document.querySelector(sel)
+      return el ? measure(el) : 0
+    },
+    { sel: selector, measureSrc: MEASURE_CONTRAST },
+  )
+}
+
 async function pricingCtaIssues(page) {
   return page.evaluate(
-    ({ selector, minRatio }) => {
-      function parseRgb(color) {
-        if (!color || color === 'transparent') return null
-        const match = color.match(/rgba?\(([^)]+)\)/)
-        if (!match) return null
-        const parts = match[1].split(',').map((part) => Number.parseFloat(part.trim()))
-        const [r, g, b, a] = parts
-        if (Number.isNaN(r)) return null
-        if ((a ?? 1) === 0) return null
-        return { r, g, b, a: a ?? 1 }
-      }
-
-      function channel(value) {
-        const scaled = value / 255
-        return scaled <= 0.03928 ? scaled / 12.92 : ((scaled + 0.055) / 1.055) ** 2.4
-      }
-
-      function luminance({ r, g, b }) {
-        return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
-      }
-
-      function blend(fg, bg) {
-        const alpha = fg.a
-        return {
-          r: fg.r * alpha + bg.r * (1 - alpha),
-          g: fg.g * alpha + bg.g * (1 - alpha),
-          b: fg.b * alpha + bg.b * (1 - alpha),
-          a: 1,
-        }
-      }
-
-      function contrast(fg, bg) {
-        const [hi, lo] = [luminance(fg), luminance(bg)].sort((a, b) => b - a)
-        return (hi + 0.05) / (lo + 0.05)
-      }
-
-      function backgroundOf(el) {
-        let node = el
-        while (node && node !== document.documentElement) {
-          const parsed = parseRgb(getComputedStyle(node).backgroundColor)
-          if (parsed) {
-            if (parsed.a >= 0.99) return { r: parsed.r, g: parsed.g, b: parsed.b, a: 1 }
-            const parent = node.parentElement ? backgroundOf(node.parentElement) : { r: 255, g: 255, b: 255, a: 1 }
-            return blend(parsed, parent)
-          }
-          node = node.parentElement
-        }
-        return { r: 255, g: 255, b: 255, a: 1 }
-      }
-
+    ({ selector, minRatio, measureSrc }) => {
+      const measure = eval(measureSrc)
       return [...document.querySelectorAll(selector)]
-        .map((el) => {
-          const style = getComputedStyle(el)
-          const fg = parseRgb(style.color)
-          const bg = backgroundOf(el)
-          if (!fg) {
-            return { text: (el.textContent || '').trim().slice(0, 80), ratio: 0, selector }
-          }
-          const blended = fg.a < 1 ? blend(fg, bg) : fg
-          return {
-            text: (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
-            ratio: contrast(blended, bg),
-            selector,
-          }
-        })
+        .map((el) => ({
+          text: (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
+          ratio: measure(el),
+          selector,
+        }))
         .filter((issue) => issue.ratio < minRatio)
     },
-    { selector: PRICING_CTA, minRatio: CTA_RATIO },
+    { selector: PRICING_CTA, minRatio: CTA_RATIO, measureSrc: MEASURE_CONTRAST },
   )
+}
+
+async function assertProductHeroCtaCanary(page) {
+  await page.setContent(`<!doctype html>
+    <div class="product-hero">
+      <div style="background:#fff;padding:24px">
+        <a class="bg-gray-950" href="#" role="button" id="pricing-cta-canary">14-day unlimited free trial</a>
+      </div>
+    </div>`)
+  await page.addStyleTag({ path: path.join(ROOT, 'apps/web/src/styles/product-surface.css') })
+  await page.addStyleTag({ content: '#pricing-cta-canary { color: #fff; display: flex; min-height: 44px; }' })
+  const ratio = await contrastRatioFor(page, '#pricing-cta-canary')
+  if (ratio < CTA_RATIO) {
+    throw new Error(`product-hero dark CTA canary contrast is ${ratio.toFixed(2)}:1 (need ${CTA_RATIO}:1). Dark buttons on white cards are unreadable again.`)
+  }
+  console.log(`ok  product-hero CTA canary (${ratio.toFixed(2)}:1)`)
 }
 
 async function scanRoute(page, route) {
@@ -201,10 +232,7 @@ async function scanRoute(page, route) {
       const selector = node.target?.[0] || ''
       if (!isInteractiveTarget(selector, node.html || '')) continue
       const ratio = ratioFromNode(node)
-      if (ratio != null && ratio >= UNREADABLE_RATIO && !/role=["']button["']/i.test(node.html || '') && !/^<button/i.test(node.html || '')) {
-        continue
-      }
-      if (ratio != null && ratio >= CTA_RATIO) continue
+      if (ratio == null || ratio >= GHOST_RATIO) continue
       issues.push({
         selector,
         text: (node.html || '').replace(/\s+/g, ' ').slice(0, 120),
@@ -240,7 +268,9 @@ async function main() {
   const failures = []
 
   try {
-    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
+    const context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
+    const page = await context.newPage()
+    await assertProductHeroCtaCanary(page)
     for (const route of suite.routes) {
       const url = `http://127.0.0.1:${PORT}${route}`
       await page.goto(url, { waitUntil: 'load', timeout: 120000 })
