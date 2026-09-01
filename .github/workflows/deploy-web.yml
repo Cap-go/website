@@ -121,6 +121,8 @@ jobs:
             ${{ runner.os }}-playwright-
 
       - run: bun install --frozen-lockfile
+      - name: Install Playwright Chromium
+        run: bunx playwright install chromium
       - name: Fetch latest global stats
         run: |
           GITHUB_STATS_REFRESH=true bun run fetch:stars

@@ -55,6 +55,13 @@ export async function startStaticServer(distDir, port) {
     }
   })
 
-  await new Promise((resolve) => server.listen(port, '127.0.0.1', resolve))
+  await new Promise((resolve, reject) => {
+    const onError = (error) => reject(error)
+    server.once('error', onError)
+    server.listen(port, '127.0.0.1', () => {
+      server.off('error', onError)
+      resolve()
+    })
+  })
   return server
 }

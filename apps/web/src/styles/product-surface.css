@@ -194,7 +194,7 @@ body:has(:is(.lu, .nb, .cli, .ma, .sk, .product-hero, .hero-wash, main.data-page
   --tw-ring-color: rgb(96 165 250 / 0.45);
 }
 
-.product-hero :is(.bg-gray-800, .bg-gray-900, .bg-slate-800, .bg-slate-900, .bg-gray-950, .bg-slate-950):not(a, button) {
+.product-hero :is(.bg-gray-800, .bg-gray-900, .bg-slate-800, .bg-slate-900, .bg-gray-950, .bg-slate-950):not(a.bg-gray-950, button.bg-gray-950) {
   background-color: rgba(255, 255, 255, 0.03);
 }
 

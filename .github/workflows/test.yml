@@ -147,6 +147,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-playwright-
       - run: bun install --frozen-lockfile
+      - name: Install Playwright Chromium
+        run: bunx playwright install chromium
       - run: bun run ci:verify:web
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
