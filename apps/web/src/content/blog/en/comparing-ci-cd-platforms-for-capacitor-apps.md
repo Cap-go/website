@@ -150,7 +150,7 @@ You do not move lint and unit tests off GitHub Actions. You add two CLI calls af
 
 Paid plans start at $12/month billed yearly and include live updates plus native build time (about 15 builds/month, with extra minutes billed through credits). That entry price has not been raised since launch. See [pricing](/pricing/), [CI/CD with Capgo Build](/ci_cd/), and the [GitHub Actions build guide](/docs/builder/github-actions/).
 
-The updater plugin and the backend are open source (MIT/MPL-2.0). You can audit them, fork them, or [self-host](/docs/plugins/updater/self-hosted/getting-started/). Paid Capgo Cloud is optional infrastructure, not a trap.
+The updater plugin is open source (MPL-2.0) and the backend is open source (AGPL-3.0). You can audit them, fork them, or [self-host](/docs/plugins/updater/self-hosted/getting-started/). Paid Capgo Cloud is optional infrastructure, not a trap.
 
 ### Capawesome Cloud
 
@@ -233,6 +233,7 @@ on:
   pull_request:
   push:
     branches: [main]
+    tags: ['v*']
 
 jobs:
   web:
@@ -247,7 +248,7 @@ jobs:
       - run: npm test
       - run: npm run build
       - name: Upload live update
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npx @capgo/cli@latest bundle upload --channel production
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
@@ -256,9 +257,16 @@ jobs:
         run: npx @capgo/cli@latest build request com.example.app --platform ios --build-mode release
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          CAPGO_IOS_PROVISIONING_MAP_BASE64: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP_BASE64 }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
 ```
 
-Repeat the last step with `--platform android` for Play, or use a matrix like the [GitHub Actions build guide](/docs/builder/github-actions/). Signing secrets and store keys stay in GitHub. Capgo does not need to become your source of truth for git. Full examples live in the [builder GitHub Actions docs](/docs/builder/github-actions/) and [CI/CD integration](/docs/getting-started/cicd-integration/).
+Repeat the last step with `--platform android` for Play, or use a matrix like the [GitHub Actions build guide](/docs/builder/github-actions/). Signing secrets and store keys stay in GitHub and are passed as environment variables on the build request, matching that guide. Capgo does not need to become your source of truth for git. Full examples live in the [builder GitHub Actions docs](/docs/builder/github-actions/) and [CI/CD integration](/docs/getting-started/cicd-integration/).
 
 ## Choosing the right setup
 
