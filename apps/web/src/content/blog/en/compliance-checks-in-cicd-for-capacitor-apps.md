@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-24T02:36:18.433Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /blog-images/compliance-checks-in-cicd-for-capacitor-apps.webp
 head_image_alt: "Compliance Checks in CI/CD for Capacitor Apps Capgo blog illustration"
 keywords: CI/CD, compliance checks, Capacitor apps, mobile security, automated testing
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

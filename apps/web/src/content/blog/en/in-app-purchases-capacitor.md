@@ -8,13 +8,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-19T00:00:00.000Z
-updated_at: 2026-06-23T21:13:09.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /revenuecat_iap.webp
 head_image_alt: "in app purchases for capacitor Capgo blog illustration"
 keywords: Capacitor, in-app purchases, RevenueCat, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

@@ -4,6 +4,10 @@
       "anchor": "https://api.capgo.app/",
       "service-desc": [
         {
+          "href": "https://capgo.app/openapi.json",
+          "type": "application/openapi+json"
+        },
+        {
           "href": "https://capgo.app/.well-known/capgo-public-api-openapi.json",
           "type": "application/openapi+json"
         }

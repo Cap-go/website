@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-26T03:19:04.753Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/version-tagging-in-capacitor-apps.webp
 head_image_alt: "Version Tagging in Capacitor Apps Capgo blog illustration"
 keywords: Capacitor, version tagging, semantic versioning, app updates, mobile development
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

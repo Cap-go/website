@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-24T09:01:20.136Z
-updated_at: 2026-06-24T09:04:38.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/9c8e3801-1bfc-4121-a1f0-db92114a3b39/how-to-delete-icon-instructional-guide.jpg'
 head_image_alt: 'How to Delete Icon: The Complete 2026 Guide'
 keywords: 'how to delete icon, remove icon, desktop shortcut, capacitor assets, app development'
 tag: 'Mobile, Tutorial, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably here because “delete icon” should be simple, but it isn't. On one device, it means removing a desktop shortcut. On another, it means hiding an app without uninstalling it. In a Capacitor or Electron app, it can mean changing source code, rebuilding, and dealing with stale caches that keep showing an icon you already removed.

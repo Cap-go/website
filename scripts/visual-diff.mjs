@@ -13,23 +13,15 @@
  * Override routes for a focused PR:
  *   bun run visual-diff:capture:before -- --suite web --routes /,/pricing/
  */
-import { spawn, spawnSync } from 'node:child_process'
+import { spawnSync } from 'node:child_process'
 import { accessSync } from 'node:fs'
-import { access, mkdir, readdir, readFile, rm, stat } from 'node:fs/promises'
-import { createServer } from 'node:http'
+import { mkdir, readdir, readFile, rm, stat } from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const ROOT = path.resolve(__dirname, '..')
+import { isPathWithinRoot, pathExists, ROOT, startStaticServer } from './lib/static-preview.mjs'
 const DEFAULT_CONFIG_PATH = path.join(ROOT, 'visual-diff.config.json')
 const CAPTURE_LABELS = new Set(['before', 'after'])
-const COMPARE_CANDIDATES = [
-  '/opt/homebrew/bin/compare',
-  '/usr/local/bin/compare',
-  '/usr/bin/compare',
-]
+const COMPARE_CANDIDATES = ['/opt/homebrew/bin/compare', '/usr/local/bin/compare', '/usr/bin/compare']
 
 function resolveCompareBinary() {
   for (const candidate of COMPARE_CANDIDATES) {
@@ -41,18 +33,8 @@ function resolveCompareBinary() {
     }
   }
 
-  throw new Error(
-    'ImageMagick compare not found. Install ImageMagick (brew install imagemagick) before running visual diff compare.',
-  )
+  throw new Error('ImageMagick compare not found. Install ImageMagick (brew install imagemagick) before running visual diff compare.')
 }
-
-function isPathWithinRoot(filePath, rootDir) {
-  const resolvedFile = path.resolve(filePath)
-  const resolvedRoot = path.resolve(rootDir)
-  const relative = path.relative(resolvedRoot, resolvedFile)
-  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative))
-}
-
 
 function parseArgs(argv) {
   const args = {
@@ -76,7 +58,10 @@ function parseArgs(argv) {
       continue
     }
     if (arg === '--routes') {
-      args.routes = argv[++i].split(',').map((route) => route.trim()).filter(Boolean)
+      args.routes = argv[++i]
+        .split(',')
+        .map((route) => route.trim())
+        .filter(Boolean)
       continue
     }
     if (arg === '--strict') {
@@ -96,20 +81,6 @@ async function loadConfig(configPath) {
   return JSON.parse(raw)
 }
 
-function contentType(filePath) {
-  if (filePath.endsWith('.html')) return 'text/html; charset=utf-8'
-  if (filePath.endsWith('.css')) return 'text/css; charset=utf-8'
-  if (filePath.endsWith('.js')) return 'text/javascript; charset=utf-8'
-  if (filePath.endsWith('.webp')) return 'image/webp'
-  if (filePath.endsWith('.png')) return 'image/png'
-  if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) return 'image/jpeg'
-  if (filePath.endsWith('.svg')) return 'image/svg+xml'
-  if (filePath.endsWith('.woff2')) return 'font/woff2'
-  if (filePath.endsWith('.woff')) return 'font/woff'
-  if (filePath.endsWith('.json')) return 'application/json'
-  return 'application/octet-stream'
-}
-
 function routeSlug(route) {
   return route.replaceAll('/', '_').replace(/^_/, '') || 'home'
 }
@@ -120,15 +91,6 @@ function screenshotName(route, viewportName, suiteName) {
 
 async function ensureDir(dir) {
   await mkdir(dir, { recursive: true })
-}
-
-async function pathExists(target) {
-  try {
-    await access(target)
-    return true
-  } catch {
-    return false
-  }
 }
 
 async function assertDistReady(distDir) {
@@ -152,30 +114,6 @@ function resolveSuites(config, args) {
   }
 
   return suites
-}
-
-async function startStaticServer(distDir, port) {
-  const absoluteDist = path.join(ROOT, distDir)
-  const server = createServer(async (req, res) => {
-    try {
-      const url = new URL(req.url || '/', `http://127.0.0.1:${port}`)
-      let pathname = decodeURIComponent(url.pathname)
-      if (pathname.endsWith('/')) pathname += 'index.html'
-      const filePath = path.resolve(absoluteDist, `.${pathname}`)
-      if (!isPathWithinRoot(filePath, absoluteDist)) {
-        res.writeHead(403).end('Forbidden')
-        return
-      }
-      const data = await readFile(filePath)
-      res.writeHead(200, { 'Content-Type': contentType(filePath) })
-      res.end(data)
-    } catch {
-      res.writeHead(404).end('Not found')
-    }
-  })
-
-  await new Promise((resolve) => server.listen(port, '127.0.0.1', resolve))
-  return server
 }
 
 async function captureSuite({ label, suite, config, outputDir }) {
@@ -208,9 +146,7 @@ async function captureSuite({ label, suite, config, outputDir }) {
         await page.screenshot({ path: outPath, fullPage: true })
         const fileSize = (await stat(outPath)).size
         if (fileSize < config.capture.minScreenshotBytes) {
-          throw new Error(
-            `[${label}] Screenshot for ${suite.name}${route} (${viewport.name}) is only ${fileSize} bytes. Page likely did not render.`,
-          )
+          throw new Error(`[${label}] Screenshot for ${suite.name}${route} (${viewport.name}) is only ${fileSize} bytes. Page likely did not render.`)
         }
 
         const capture = {
@@ -388,25 +324,12 @@ function renderMarkdownReport(report) {
 
   for (const row of report.results) {
     const { suite, route, viewport } = parseScreenshotName(row.file)
-    const statusLabel =
-      row.status === 'identical'
-        ? 'identical'
-        : row.status === 'minor'
-          ? 'minor'
-          : row.status === 'changed'
-            ? 'changed'
-            : row.status
+    const statusLabel = row.status === 'identical' ? 'identical' : row.status === 'minor' ? 'minor' : row.status === 'changed' ? 'changed' : row.status
     const diff = row.diffPixels == null ? '—' : String(Math.round(row.diffPixels))
     lines.push(`| ${statusLabel} | ${suite} | ${route} | ${viewport} | ${diff} |`)
   }
 
-  lines.push(
-    '',
-    '**Summary:**',
-    `- identical: ${report.summary.identical}`,
-    `- minor: ${report.summary.minor}`,
-    `- changed: ${report.summary.changed}`,
-  )
+  lines.push('', '**Summary:**', `- identical: ${report.summary.identical}`, `- minor: ${report.summary.minor}`, `- changed: ${report.summary.changed}`)
 
   if (report.summary.changed > 0 || report.summary.minor > 0) {
     lines.push('', 'Diff images are in `.visual-diff/diff/` (local only, gitignored).')

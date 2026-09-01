@@ -1,26 +1,73 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
+import { jsonForInlineScript, resolveLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
+const metrics = await resolveLiveUpdateMetrics(config.public.baseApiUrl)
+const apiOrigin = new URL(config.public.baseApiUrl).origin
 const title = 'Capgo Live Update data | Platform insights'
-const description = 'Live Update success by country, platform, and updater version. Rates use app, device, and UTC-day outcomes over the last 30 days.'
+const description =
+  'Live Update success by country, platform, and updater version. Rates use app, device, and UTC-day outcomes over the last 30 days — including honest failure reasons.'
 const content = {
   title,
   description,
   image: `${config.public.baseUrl}/social/capgo-live-update.png`,
   ldJSON: createLdJsonGraph(config.public, createWebPageLdJson(config.public, { name: title, description, url: Astro.url.href }), { includeOrganization: true }),
 }
+
+const updatedLabel = (() => {
+  const timestamp = new Date(metrics.updated_at)
+  return Number.isNaN(timestamp.getTime())
+    ? 'Updated moments ago'
+    : `Updated ${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(timestamp)} UTC`
+})()
+
+const topFailure = metrics.failures[0]
+const topFailureInfo = topFailure ? getFailureReasonInfo(topFailure.reason) : null
+const topFailureLead = topFailureInfo
+  ? `${topFailureInfo.label} accounts for ${Math.ceil(topFailure.share)}% of failures in this window.`
+  : 'Normalized categories across all apps.'
+
+const countryNames = typeof Intl !== 'undefined' && 'DisplayNames' in Intl ? new Intl.DisplayNames(['en'], { type: 'region' }) : null
+
+function labelForKey(kind: 'country' | 'platform' | 'version', key: string) {
+  if (kind === 'platform') {
+    if (key === 'ios') return 'iOS'
+    if (key === 'android') return 'Android'
+    if (key === 'electron') return 'Electron'
+  }
+  if (kind === 'country') {
+    try {
+      return countryNames?.of(key.toUpperCase()) ?? key.toUpperCase()
+    } catch {
+      return key.toUpperCase()
+    }
+  }
+  return key
+}
+
+function formatPct(value: number | null) {
+  return value === null ? '—' : `${Math.ceil(value)}%`
+}
 ---
 
 <Layout content={content}>
-  <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="true">
+  <link slot="head" rel="preconnect" href={apiOrigin} crossorigin="anonymous" />
+  <link slot="head" rel="dns-prefetch" href={apiOrigin} />
+  {/* Keep bootstrap metrics out of attributes so the edge translator cannot mangle JSON / inflate SSR tables. */}
+  <script type="application/json" id="capgo-live-update-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
+  <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="false">
     <section class="data-hero">
       <div class="data-shell">
         <p class="data-eyebrow"><span aria-hidden="true"></span> Our data</p>
         <h1>Live Update delivery data</h1>
-        <p class="data-summary">Last 30 days of Capgo install success. Each rate uses app, device, and UTC-day outcomes — overall and by country, platform, and updater version.</p>
-        <p class="data-updated" data-updated aria-live="polite"><span class="data-spinner" aria-hidden="true"></span> Loading delivery data…</p>
+        <p class="data-summary">
+          Last 30 days of Capgo install success. Each rate uses app, device, and UTC-day outcomes — overall and by country, platform, and updater version. We publish failures too,
+          with plain-language explanations from our docs.
+        </p>
+        <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
       </div>
     </section>
 
@@ -35,15 +82,17 @@ const content = {
         </div>
 
         <div class="data-kpis" aria-label="Reliability summary">
-          <div><p>Success rate</p><strong data-kpi="success-rate">—</strong></div>
+          <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
+          <div><p>Success rate</p><strong data-kpi="success-rate" translate="no">{Math.ceil(metrics.success_rate)}%</strong></div>
           <div><p>Window</p><strong>30 days</strong></div>
           <div><p>Scope</p><strong>All apps</strong></div>
         </div>
 
-        <div class="data-loading data-chart-skeleton" aria-hidden="true">
+        <p class="data-sr-only" data-daily-status aria-live="polite"></p>
+        <div class="data-chart-skeleton" data-daily-skeleton aria-hidden="true">
           <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
         </div>
-        <div class="data-chart" data-daily-chart aria-label="Daily install success chart" hidden>
+        <div class="data-chart" data-daily-chart aria-label="Daily install success chart" hidden translate="no">
           <div class="data-chart-scale" aria-hidden="true"><span>100%</span><span>50%</span><span>0%</span></div>
           <div class="data-bars" data-daily-bars role="list" aria-label="Daily install success rates"></div>
           <div class="data-axis"><span data-daily-start></span><span data-daily-end></span></div>
@@ -61,6 +110,7 @@ const content = {
           </div>
           <p>Share of active devices, success rate, and leading failure by country. Success uses app/device/UTC-day outcomes.</p>
         </div>
+        <p class="data-sr-only" data-countries-status aria-live="polite"></p>
         <div class="data-table-wrap">
           <table class="data-table" data-countries-table>
             <thead>
@@ -71,12 +121,27 @@ const content = {
                 <th scope="col">Top failure</th>
               </tr>
             </thead>
-            <tbody data-countries>
-              <tr class="data-loading"><td colspan="4"><span class="data-list-skeleton" aria-hidden="true"></span></td></tr>
+            <tbody data-countries translate="no">
+              {
+                metrics.countries.map((item) => {
+                  const failure = item.top_failure ? getFailureReasonInfo(item.top_failure.reason) : null
+                  const tone = item.success_rate === null ? undefined : item.success_rate >= 85 ? 'good' : item.success_rate >= 70 ? 'ok' : 'poor'
+                  return (
+                    <tr>
+                      <th scope="row">{labelForKey('country', item.key)}</th>
+                      <td>{formatPct(item.share)}</td>
+                      <td data-tone={tone}>{formatPct(item.success_rate)}</td>
+                      <td title={failure?.explanation}>{failure ? `${failure.label} (${Math.ceil(item.top_failure!.share)}%)` : '—'}</td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>
-        <p class="data-empty" data-countries-empty aria-live="polite" hidden></p>
+        <p class="data-empty" data-countries-empty aria-live="polite" hidden={metrics.countries.length > 0}>
+          {metrics.countries.length ? '' : 'Country breakdown is temporarily unavailable.'}
+        </p>
       </div>
     </section>
 
@@ -89,6 +154,7 @@ const content = {
           </div>
           <p>Share of active devices, success rate, and leading failure by platform. Success uses app/device/UTC-day outcomes.</p>
         </div>
+        <p class="data-sr-only" data-platforms-status aria-live="polite"></p>
         <div class="data-table-wrap">
           <table class="data-table" data-platforms-table>
             <thead>
@@ -99,12 +165,27 @@ const content = {
                 <th scope="col">Top failure</th>
               </tr>
             </thead>
-            <tbody data-platforms>
-              <tr class="data-loading"><td colspan="4"><span class="data-list-skeleton" aria-hidden="true"></span></td></tr>
+            <tbody data-platforms translate="no">
+              {
+                metrics.platforms.map((item) => {
+                  const failure = item.top_failure ? getFailureReasonInfo(item.top_failure.reason) : null
+                  const tone = item.success_rate === null ? undefined : item.success_rate >= 85 ? 'good' : item.success_rate >= 70 ? 'ok' : 'poor'
+                  return (
+                    <tr>
+                      <th scope="row">{labelForKey('platform', item.key)}</th>
+                      <td>{formatPct(item.share)}</td>
+                      <td data-tone={tone}>{formatPct(item.success_rate)}</td>
+                      <td title={failure?.explanation}>{failure ? `${failure.label} (${Math.ceil(item.top_failure!.share)}%)` : '—'}</td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>
-        <p class="data-empty" data-platforms-empty aria-live="polite" hidden></p>
+        <p class="data-empty" data-platforms-empty aria-live="polite" hidden={metrics.platforms.length > 0}>
+          {metrics.platforms.length ? '' : 'Platform breakdown is temporarily unavailable.'}
+        </p>
       </div>
     </section>
 
@@ -113,12 +194,37 @@ const content = {
         <div>
           <p class="data-eyebrow">Failures</p>
           <h2 id="failures-title">Top failure reasons</h2>
-          <p class="data-copy">Normalized categories across all apps.</p>
+          <p class="data-sr-only" data-failures-status aria-live="polite"></p>
+          <p class="data-copy" data-failures-lead translate="no">{topFailureLead}</p>
+          <p class="data-copy data-copy-secondary">
+            Many failures are normal on real devices — flaky networks, intentional channel policies, and automatic rollbacks all show up here. We keep the list public so you can
+            trust the numbers.
+          </p>
+          <p class="data-copy data-copy-secondary">
+            Code meanings follow our <a class="data-inline-link" href="/docs/webapp/logs/">logs docs</a>.
+          </p>
         </div>
-        <ol class="data-failures" data-failures aria-live="polite">
-          <li class="data-loading data-list-skeleton" aria-hidden="true"><span></span><div></div><b></b></li>
-          <li class="data-loading data-list-skeleton" aria-hidden="true"><span></span><div></div><b></b></li>
-          <li class="data-loading data-list-skeleton" aria-hidden="true"><span></span><div></div><b></b></li>
+        <ol class="data-failures" data-failures aria-live="polite" translate="no">
+          {
+            metrics.failures.length
+              ? metrics.failures.map((item, index) => {
+                  const info = getFailureReasonInfo(item.reason)
+                  return (
+                    <li>
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <div class="data-failure-copy">
+                        <strong>{info.label}</strong>
+                        <p>{info.explanation}</p>
+                      </div>
+                      <b>{Math.ceil(item.share)}%</b>
+                      <i aria-hidden="true">
+                        <em style={`--share: ${item.share}%`} />
+                      </i>
+                    </li>
+                  )
+                })
+              : [<li class="data-empty">No failures in this window.</li>]
+          }
         </ol>
       </div>
     </section>
@@ -132,6 +238,7 @@ const content = {
           </div>
           <p>Share of active devices, success rate, and leading failure by updater version. Success uses app/device/UTC-day outcomes.</p>
         </div>
+        <p class="data-sr-only" data-versions-status aria-live="polite"></p>
         <div class="data-table-wrap">
           <table class="data-table" data-versions-table>
             <thead>
@@ -142,83 +249,69 @@ const content = {
                 <th scope="col">Top failure</th>
               </tr>
             </thead>
-            <tbody data-versions>
-              <tr class="data-loading"><td colspan="4"><span class="data-list-skeleton" aria-hidden="true"></span></td></tr>
+            <tbody data-versions translate="no">
+              {
+                metrics.updater_versions.map((item) => {
+                  const failure = item.top_failure ? getFailureReasonInfo(item.top_failure.reason) : null
+                  const tone = item.success_rate === null ? undefined : item.success_rate >= 85 ? 'good' : item.success_rate >= 70 ? 'ok' : 'poor'
+                  return (
+                    <tr>
+                      <th scope="row">{labelForKey('version', item.key)}</th>
+                      <td>{formatPct(item.share)}</td>
+                      <td data-tone={tone}>{formatPct(item.success_rate)}</td>
+                      <td title={failure?.explanation}>{failure ? `${failure.label} (${Math.ceil(item.top_failure!.share)}%)` : '—'}</td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>
-        <p class="data-empty" data-version-empty aria-live="polite" hidden></p>
+        <p class="data-empty" data-version-empty aria-live="polite" hidden={metrics.updater_versions.length > 0}>
+          {metrics.updater_versions.length ? '' : 'Updater breakdown is temporarily unavailable.'}
+        </p>
       </div>
     </section>
   </main>
 </Layout>
 
 <script>
-  type DailyMetric = { date: string; success_rate: number }
-  type FailureMetric = { reason: string; share: number }
-  type BreakdownMetric = {
-    key: string
-    share: number
-    success_rate: number | null
-    top_failure: { reason: string; share: number } | null
-  }
-  type Metrics = {
-    success_rate: number
-    updated_at: string
-    daily: DailyMetric[]
-    failures: FailureMetric[]
-    platforms: BreakdownMetric[]
-    countries: BreakdownMetric[]
-    updater_versions: BreakdownMetric[]
-  }
+  import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
+  import { normalizeLiveUpdateMetrics, type LiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 
   function boot() {
     const page = document.querySelector<HTMLElement>('.data-page')
     const endpoint = page?.dataset.metricsEndpoint
     const updated = page?.querySelector<HTMLElement>('[data-updated]')
     const successRateKpi = page?.querySelector<HTMLElement>('[data-kpi="success-rate"]')
+    const kpiStatus = page?.querySelector<HTMLElement>('[data-kpi-status]')
+    const dailyStatus = page?.querySelector<HTMLElement>('[data-daily-status]')
     const dailyChart = page?.querySelector<HTMLElement>('[data-daily-chart]')
+    const dailySkeleton = page?.querySelector<HTMLElement>('[data-daily-skeleton]')
     const dailyBars = page?.querySelector<HTMLElement>('[data-daily-bars]')
     const dailyStart = page?.querySelector<HTMLElement>('[data-daily-start]')
     const dailyEnd = page?.querySelector<HTMLElement>('[data-daily-end]')
     const dailyEmpty = page?.querySelector<HTMLElement>('[data-daily-empty]')
     const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
+    const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
+    const failuresStatus = page?.querySelector<HTMLElement>('[data-failures-status]')
     const countriesBody = page?.querySelector<HTMLElement>('[data-countries]')
     const countriesEmpty = page?.querySelector<HTMLElement>('[data-countries-empty]')
+    const countriesStatus = page?.querySelector<HTMLElement>('[data-countries-status]')
     const platformsBody = page?.querySelector<HTMLElement>('[data-platforms]')
     const platformsEmpty = page?.querySelector<HTMLElement>('[data-platforms-empty]')
+    const platformsStatus = page?.querySelector<HTMLElement>('[data-platforms-status]')
     const versionsBody = page?.querySelector<HTMLElement>('[data-versions]')
     const versionEmpty = page?.querySelector<HTMLElement>('[data-version-empty]')
+    const versionsStatus = page?.querySelector<HTMLElement>('[data-versions-status]')
     const styleScopeAttributes = page?.getAttributeNames().filter((attribute) => attribute.startsWith('data-astro-cid-')) ?? []
 
     const countryNames = typeof Intl !== 'undefined' && 'DisplayNames' in Intl ? new Intl.DisplayNames(['en'], { type: 'region' }) : null
-
-    function isRecord(value: unknown): value is Record<string, unknown> {
-      return typeof value === 'object' && value !== null && !Array.isArray(value)
-    }
-
-    function percentage(value: unknown) {
-      const number = typeof value === 'number' ? value : Number(value)
-      return Number.isFinite(number) ? Math.max(0, Math.min(100, number)) : 0
-    }
-
-    function nullablePercentage(value: unknown) {
-      if (value === null || value === undefined || value === '') return null
-      const number = typeof value === 'number' ? value : Number(value)
-      return Number.isFinite(number) ? Math.max(0, Math.min(100, number)) : null
-    }
 
     function createScopedElement<K extends keyof HTMLElementTagNameMap>(tag: K) {
       const element = document.createElement(tag)
       for (const attribute of styleScopeAttributes) element.setAttribute(attribute, '')
       return element
-    }
-
-    function readableReason(reason: string) {
-      return reason
-        .replaceAll('_', ' ')
-        .replace(/([a-z])([A-Z])/g, '$1 $2')
-        .replace(/\b\w/g, (char) => char.toUpperCase())
     }
 
     function labelForKey(kind: 'country' | 'platform' | 'version', key: string) {
@@ -237,100 +330,6 @@ const content = {
       return key
     }
 
-    function normalizeBreakdown(value: unknown): BreakdownMetric | null {
-      if (!isRecord(value) || typeof value.key !== 'string' || !value.key) return null
-      const top = isRecord(value.top_failure)
-        ? {
-            reason: typeof value.top_failure.reason === 'string' ? value.top_failure.reason : '',
-            share: percentage(value.top_failure.share),
-          }
-        : null
-      return {
-        key: value.key,
-        share: percentage(value.share),
-        success_rate: nullablePercentage(value.success_rate),
-        top_failure: top && top.reason ? top : null,
-      }
-    }
-
-    function normalizeMetrics(value: unknown): Metrics | null {
-      if (!isRecord(value) || typeof value.updated_at !== 'string' || !Array.isArray(value.daily) || !Array.isArray(value.failures)) {
-        return null
-      }
-
-      const daily = value.daily
-        .map((item) => {
-          if (!isRecord(item) || typeof item.date !== 'string') return null
-          return { date: item.date, success_rate: percentage(item.success_rate) }
-        })
-        .filter((item): item is DailyMetric => item !== null)
-
-      const failures = value.failures
-        .map((item) => {
-          if (!isRecord(item) || typeof item.reason !== 'string') return null
-          return { reason: item.reason, share: percentage(item.share) }
-        })
-        .filter((item): item is FailureMetric => item !== null)
-
-      let platforms: BreakdownMetric[] = []
-      if (Array.isArray(value.platforms)) {
-        platforms = value.platforms.map(normalizeBreakdown).filter((item): item is BreakdownMetric => item !== null)
-      } else if (isRecord(value.platforms)) {
-        const legacyPlatforms = value.platforms
-        platforms = (['ios', 'android', 'electron'] as const)
-          .map((key) => ({
-            key,
-            share: percentage(legacyPlatforms[key]),
-            success_rate: null,
-            top_failure: null,
-          }))
-          .filter((item) => item.share > 0)
-      }
-
-      const countries = Array.isArray(value.countries) ? value.countries.map(normalizeBreakdown).filter((item): item is BreakdownMetric => item !== null) : []
-
-      let updater_versions: BreakdownMetric[] = []
-      if (Array.isArray(value.updater_versions)) {
-        const breakdowns = value.updater_versions.map(normalizeBreakdown).filter((item): item is BreakdownMetric => item !== null)
-
-        if (breakdowns.length > 0) {
-          updater_versions = breakdowns
-        } else {
-          const legacyRows = value.updater_versions
-            .map((item) => {
-              if (!isRecord(item) || typeof item.date !== 'string' || typeof item.version !== 'string') return null
-              return { date: item.date, version: item.version, share: percentage(item.share) }
-            })
-            .filter((item): item is { date: string; version: string; share: number } => item !== null)
-          const dayCount = new Set(legacyRows.map((item) => item.date)).size
-          const totals = new Map<string, number>()
-          for (const item of legacyRows) {
-            totals.set(item.version, (totals.get(item.version) ?? 0) + item.share)
-          }
-          // Legacy payloads report a percentage per day; average it across the reporting window.
-          updater_versions = [...totals]
-            .map(([key, share]) => ({
-              key,
-              share: dayCount ? share / dayCount : 0,
-              success_rate: null,
-              top_failure: null,
-            }))
-            .sort((a, b) => b.share - a.share)
-            .slice(0, 10)
-        }
-      }
-
-      return {
-        success_rate: percentage(value.success_rate),
-        updated_at: value.updated_at,
-        daily,
-        failures,
-        platforms,
-        countries,
-        updater_versions,
-      }
-    }
-
     function formatPct(value: number | null) {
       return value === null ? '—' : `${Math.ceil(value)}%`
     }
@@ -338,9 +337,11 @@ const content = {
     function renderBreakdownRows(
       body: HTMLElement | null | undefined,
       empty: HTMLElement | null | undefined,
-      rows: BreakdownMetric[],
+      status: HTMLElement | null | undefined,
+      rows: LiveUpdateMetrics['countries'],
       kind: 'country' | 'platform' | 'version',
       emptyText: string,
+      statusLabel: string,
     ) {
       if (!body) return
       body.replaceChildren()
@@ -357,7 +358,13 @@ const content = {
           success.dataset.tone = item.success_rate >= 85 ? 'good' : item.success_rate >= 70 ? 'ok' : 'poor'
         }
         const failure = createScopedElement('td')
-        failure.textContent = item.top_failure ? `${readableReason(item.top_failure.reason)} (${Math.ceil(item.top_failure.share)}%)` : '—'
+        if (item.top_failure) {
+          const info = getFailureReasonInfo(item.top_failure.reason)
+          failure.textContent = `${info.label} (${Math.ceil(item.top_failure.share)}%)`
+          failure.title = info.explanation
+        } else {
+          failure.textContent = '—'
+        }
         tr.append(name, usage, success, failure)
         body.append(tr)
       }
@@ -365,9 +372,12 @@ const content = {
         empty.hidden = rows.length > 0
         empty.textContent = emptyText
       }
+      if (status) {
+        status.textContent = rows.length ? `${statusLabel} updated with ${rows.length} rows` : emptyText
+      }
     }
 
-    function renderDaily(metrics: Metrics) {
+    function renderDaily(metrics: LiveUpdateMetrics) {
       if (!dailyChart || !dailyBars || !dailyStart || !dailyEnd || !dailyEmpty) return
       dailyBars.replaceChildren()
       for (const item of metrics.daily) {
@@ -385,21 +395,43 @@ const content = {
         dailyBars.append(bar)
       }
       dailyChart.hidden = metrics.daily.length === 0
+      if (dailySkeleton) dailySkeleton.hidden = metrics.daily.length > 0
       dailyEmpty.hidden = metrics.daily.length > 0
       dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
       dailyStart.textContent = metrics.daily[0]?.date ?? ''
       dailyEnd.textContent = metrics.daily.at(-1)?.date ?? ''
+      if (dailyStatus) {
+        dailyStatus.textContent = metrics.daily.length ? `Daily install success chart updated with ${metrics.daily.length} days of data` : 'Daily install success chart unavailable'
+      }
     }
 
-    function renderFailures(metrics: Metrics) {
+    function renderFailures(metrics: LiveUpdateMetrics) {
       if (!failuresList) return
       failuresList.replaceChildren()
+      const lead = metrics.failures[0]
+      if (failuresLead) {
+        if (lead) {
+          const info = getFailureReasonInfo(lead.reason)
+          failuresLead.textContent = `${info.label} accounts for ${Math.ceil(lead.share)}% of failures in this window.`
+        } else {
+          failuresLead.textContent = 'Normalized categories across all apps.'
+        }
+      }
+      if (failuresStatus) {
+        failuresStatus.textContent = metrics.failures.length ? `Top failure reasons updated with ${metrics.failures.length} categories` : 'No failures in this window'
+      }
       for (const [index, item] of metrics.failures.entries()) {
+        const info = getFailureReasonInfo(item.reason)
         const row = createScopedElement('li')
         const rank = createScopedElement('span')
         rank.textContent = String(index + 1).padStart(2, '0')
+        const copy = createScopedElement('div')
+        copy.className = 'data-failure-copy'
         const reason = createScopedElement('strong')
-        reason.textContent = readableReason(item.reason)
+        reason.textContent = info.label
+        const explanation = createScopedElement('p')
+        explanation.textContent = info.explanation
+        copy.append(reason, explanation)
         const share = createScopedElement('b')
         share.textContent = formatPct(item.share)
         const track = createScopedElement('i')
@@ -407,19 +439,20 @@ const content = {
         const fill = createScopedElement('em')
         fill.style.setProperty('--share', `${item.share}%`)
         track.append(fill)
-        row.append(rank, reason, share, track)
+        row.append(rank, copy, share, track)
         failuresList.append(row)
       }
       if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
     }
 
-    function renderMetrics(metrics: Metrics) {
+    function renderMetrics(metrics: LiveUpdateMetrics) {
       if (successRateKpi) successRateKpi.textContent = formatPct(metrics.success_rate)
+      if (kpiStatus) kpiStatus.textContent = `Success rate updated to ${formatPct(metrics.success_rate)}`
       renderDaily(metrics)
       renderFailures(metrics)
-      renderBreakdownRows(countriesBody, countriesEmpty, metrics.countries, 'country', 'Country breakdown is temporarily unavailable.')
-      renderBreakdownRows(platformsBody, platformsEmpty, metrics.platforms, 'platform', 'Platform breakdown is temporarily unavailable.')
-      renderBreakdownRows(versionsBody, versionEmpty, metrics.updater_versions, 'version', 'Updater breakdown is temporarily unavailable.')
+      renderBreakdownRows(countriesBody, countriesEmpty, countriesStatus, metrics.countries, 'country', 'Country breakdown is temporarily unavailable.', 'Country breakdown')
+      renderBreakdownRows(platformsBody, platformsEmpty, platformsStatus, metrics.platforms, 'platform', 'Platform breakdown is temporarily unavailable.', 'Platform breakdown')
+      renderBreakdownRows(versionsBody, versionEmpty, versionsStatus, metrics.updater_versions, 'version', 'Updater breakdown is temporarily unavailable.', 'Updater versions')
       if (updated) {
         const timestamp = new Date(metrics.updated_at)
         updated.textContent = Number.isNaN(timestamp.getTime())
@@ -431,26 +464,36 @@ const content = {
     function renderUnavailable() {
       if (updated) updated.textContent = 'Delivery data is temporarily unavailable. Check back shortly.'
       if (dailyChart) dailyChart.hidden = true
+      if (dailySkeleton) dailySkeleton.hidden = true
       if (dailyEmpty) {
         dailyEmpty.hidden = false
         dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
       }
       if (failuresList) failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
-      renderBreakdownRows(countriesBody, countriesEmpty, [], 'country', 'Country breakdown is temporarily unavailable.')
-      renderBreakdownRows(platformsBody, platformsEmpty, [], 'platform', 'Platform breakdown is temporarily unavailable.')
-      renderBreakdownRows(versionsBody, versionEmpty, [], 'version', 'Updater breakdown is temporarily unavailable.')
+      if (failuresLead) failuresLead.textContent = 'Failure data is temporarily unavailable.'
+      if (failuresStatus) failuresStatus.textContent = 'Failure data is temporarily unavailable.'
+      if (kpiStatus) kpiStatus.textContent = 'Success rate unavailable'
+      if (dailyStatus) dailyStatus.textContent = 'Daily install success chart unavailable'
+      renderBreakdownRows(countriesBody, countriesEmpty, countriesStatus, [], 'country', 'Country breakdown is temporarily unavailable.', 'Country breakdown')
+      renderBreakdownRows(platformsBody, platformsEmpty, platformsStatus, [], 'platform', 'Platform breakdown is temporarily unavailable.', 'Platform breakdown')
+      renderBreakdownRows(versionsBody, versionEmpty, versionsStatus, [], 'version', 'Updater breakdown is temporarily unavailable.', 'Updater versions')
     }
 
-    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v2'
-    const METRICS_CACHE_TTL_MS = 5 * 60 * 1000
+    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v3'
+    const METRICS_CACHE_FRESH_MS = 5 * 60 * 1000
+    const METRICS_CACHE_STALE_MS = 24 * 60 * 60 * 1000
 
-    function readCachedMetrics(): Metrics | null {
+    function readCachedMetrics(): { metrics: LiveUpdateMetrics; fresh: boolean } | null {
       try {
-        const raw = sessionStorage.getItem(METRICS_CACHE_KEY)
+        const raw = localStorage.getItem(METRICS_CACHE_KEY)
         if (!raw) return null
         const parsed = JSON.parse(raw) as { savedAt?: unknown; payload?: unknown }
-        if (typeof parsed.savedAt !== 'number' || Date.now() - parsed.savedAt > METRICS_CACHE_TTL_MS) return null
-        return normalizeMetrics(parsed.payload)
+        if (typeof parsed.savedAt !== 'number') return null
+        const age = Date.now() - parsed.savedAt
+        if (age > METRICS_CACHE_STALE_MS) return null
+        const metrics = normalizeLiveUpdateMetrics(parsed.payload)
+        if (!metrics) return null
+        return { metrics, fresh: age <= METRICS_CACHE_FRESH_MS }
       } catch {
         return null
       }
@@ -458,9 +501,19 @@ const content = {
 
     function writeCachedMetrics(payload: unknown) {
       try {
-        sessionStorage.setItem(METRICS_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), payload }))
+        localStorage.setItem(METRICS_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), payload }))
       } catch {
         // Ignore quota / private-mode failures.
+      }
+    }
+
+    function readBootstrapMetrics(): LiveUpdateMetrics | null {
+      try {
+        const raw = document.getElementById('capgo-live-update-metrics-bootstrap')?.textContent?.trim()
+        if (!raw) return null
+        return normalizeLiveUpdateMetrics(JSON.parse(raw))
+      } catch {
+        return null
       }
     }
 
@@ -469,9 +522,13 @@ const content = {
       const controller = new AbortController()
       const timeoutId = window.setTimeout(() => controller.abort(), 10_000)
       try {
-        const response = await fetch(endpoint, { headers: { Accept: 'application/json' }, signal: controller.signal })
+        const response = await fetch(endpoint, {
+          headers: { Accept: 'application/json' },
+          signal: controller.signal,
+          cache: 'default',
+        })
         const payload = response.ok ? await response.json() : null
-        const metrics = normalizeMetrics(payload)
+        const metrics = normalizeLiveUpdateMetrics(payload)
         if (!metrics) throw new Error('Invalid metrics response')
         writeCachedMetrics(payload)
         return metrics
@@ -481,16 +538,28 @@ const content = {
     }
 
     async function loadMetrics() {
+      const bootstrap = readBootstrapMetrics()
       const cached = readCachedMetrics()
-      if (cached) {
-        renderMetrics(cached)
+      const initial = cached?.metrics ?? bootstrap
+
+      if (initial) {
+        renderMetrics(initial)
         page?.setAttribute('aria-busy', 'false')
       }
+
+      if (cached?.fresh) {
+        // Still refresh quietly in the background so returning visitors stay current.
+        void fetchMetrics()
+          .then((metrics) => renderMetrics(metrics))
+          .catch(() => undefined)
+        return
+      }
+
       try {
         const metrics = await fetchMetrics()
         renderMetrics(metrics)
       } catch {
-        if (!cached) renderUnavailable()
+        if (!initial) renderUnavailable()
       } finally {
         page?.setAttribute('aria-busy', 'false')
       }
@@ -519,7 +588,7 @@ const content = {
     --line: rgb(255 255 255 / 11%);
     --muted: #bdc9da;
     color-scheme: only dark;
-    background: #0b1220;
+    background: transparent;
     color: white;
     overflow: clip;
   }
@@ -532,7 +601,7 @@ const content = {
     padding-block: 72px;
   }
   .data-hero {
-    background: radial-gradient(circle at 76% 8%, rgb(37 99 235 / 20%), transparent 38%), #0b1220;
+    background: transparent;
     border-bottom: 1px solid var(--line);
   }
   .data-eyebrow {
@@ -608,6 +677,20 @@ const content = {
     font-size: 1rem;
     line-height: 1.6;
     text-wrap: pretty;
+  }
+  .data-copy-secondary {
+    margin-top: 16px;
+    color: #91a2ba;
+    font-size: 0.95rem;
+  }
+  .data-inline-link {
+    color: #93c5fd;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .data-inline-link:hover,
+  .data-inline-link:focus-visible {
+    color: #bfdbfe;
   }
   .data-kpis {
     display: grid;
@@ -749,7 +832,7 @@ const content = {
     font-variant-numeric: tabular-nums;
   }
   .data-section-muted {
-    background: rgb(15 23 42 / 72%);
+    background: #1a1a1a;
     border-block: 1px solid var(--line);
   }
   .data-split {
@@ -795,8 +878,8 @@ const content = {
   .data-failures li {
     display: grid;
     grid-template-columns: 34px minmax(0, 1fr) auto;
-    gap: 12px;
-    align-items: center;
+    gap: 8px 12px;
+    align-items: start;
     padding-bottom: 16px;
     border-bottom: 1px solid var(--line);
   }
@@ -804,16 +887,28 @@ const content = {
     color: #6f819b;
     font-size: 0.8rem;
     font-variant-numeric: tabular-nums;
+    padding-top: 3px;
+  }
+  .data-failure-copy {
+    min-width: 0;
   }
   .data-failures strong {
-    min-width: 0;
+    display: block;
     font-size: 1rem;
     font-weight: 600;
+  }
+  .data-failure-copy p {
+    margin: 6px 0 0;
+    color: #91a2ba;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-wrap: pretty;
   }
   .data-failures b {
     color: #d8e1ee;
     font-size: 0.875rem;
     font-variant-numeric: tabular-nums;
+    padding-top: 3px;
   }
   .data-failures i {
     grid-column: 2 / -1;

@@ -122,9 +122,9 @@ const directoryStats = [
 
 const featuredStats = [
   { label: m.ready_to_use_plugins({}, { locale }), value: `${plugins.length}+`, colorClass: 'text-gray-200' },
-  { label: m.downloads_per_month({}, { locale }), value: formatCount(totalDownloads), colorClass: 'text-emerald-400' },
+  { label: m.downloads_per_month({}, { locale }), value: formatCount(totalDownloads), colorClass: 'text-gray-200' },
   { label: m.github_stars({}, { locale }), value: `${formatCount(totalStars)}+`, colorClass: 'text-gray-200' },
-  { label: m.oss_contributors({}, { locale }), value: `${formatCount(communityStats.contributorCount)}+`, colorClass: 'text-cyan-300' },
+  { label: m.oss_contributors({}, { locale }), value: `${formatCount(communityStats.contributorCount)}+`, colorClass: 'text-gray-200' },
   { label: m.versions_shipped({}, { locale }), value: `${formatCount(communityStats.versionCount)}+`, colorClass: 'text-gray-200' },
   { label: m.prs_issues_resolved({}, { locale }), value: `${formatCount(communityStats.resolvedItemCount)}+`, colorClass: 'text-gray-200' },
 ]
@@ -158,7 +158,7 @@ const content = {
 ---
 
 <Layout content={content}>
-  <div class="relative min-h-screen">
+  <div class="product-hero relative min-h-screen">
     <!-- Plugins Directory -->
     <section class="px-6 pt-12 pb-8 lg:px-8 lg:pt-16 lg:pb-8">
       <div class="mx-auto max-w-7xl">
@@ -505,7 +505,7 @@ const content = {
       </div>
     </section>
 
-    <ProductVideoSection variant="gray" youtubeId={productVideos.plugins.youtubeId} title={productVideos.plugins.title} description={productVideos.plugins.description} />
+    <ProductVideoSection variant="dark" youtubeId={productVideos.plugins.youtubeId} title={productVideos.plugins.title} description={productVideos.plugins.description} />
 
     <section class="px-6 py-12 lg:px-8">
       <div class="mx-auto max-w-7xl">

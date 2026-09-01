@@ -8,13 +8,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-23T07:08:33.313Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/rapid-app-dev.webp
 head_image_alt: '''Master Rapid App Dev: Build Apps Faster'' Capgo blog illustration'
 keywords: 'rapid app dev, agile development, low-code, application development, ci/cd'
 tag: 'Mobile, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Teams asking about rapid app dev often aren't dealing with a blank slate. They're dealing with a backlog that keeps growing, a mobile release that missed its window, product requests that changed halfway through implementation, and a support queue full of small fixes that somehow take longer to ship than the original feature.

@@ -8,13 +8,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-29T07:21:33.612Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/unit-tests-javascript.webp
 head_image_alt: '''Unit Tests JavaScript: Comprehensive 2026 Guide'' Capgo blog illustration'
 keywords: 'unit tests javascript, javascript testing, jest, capacitorjs, electronjs'
 tag: 'Mobile, Tutorial, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two situations right now. Either your JavaScript project has almost no tests and every refactor feels risky, or you already have tests and half of them are slow, brittle, and oddly hard to trust.

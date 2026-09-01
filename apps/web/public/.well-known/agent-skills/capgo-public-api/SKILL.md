@@ -11,21 +11,23 @@ Use this skill when the task requires programmatic work with Capgo Cloud instead
 
 - Product site: https://capgo.app
 - API docs: https://capgo.app/docs/public-api/
-- Agent-ready OpenAPI: https://capgo.app/.well-known/capgo-public-api-openapi.json
+- OpenAPI: https://capgo.app/openapi.json
+- Well-known OpenAPI: https://capgo.app/.well-known/openapi.json
+- Canonical OpenAPI copy: https://capgo.app/.well-known/capgo-public-api-openapi.json
 - API base: https://api.capgo.app
 - Status page: https://status.capgo.app/
 
 ## Authentication
 
-Send a raw Capgo API key in the `authorization` header. Do not prepend `Bearer` unless the published API docs change.
+Send a Capgo API key in the `x-api-key` header. The legacy `authorization` header still accepts a raw key with no `Bearer` prefix.
 
 ```bash
-curl -H "authorization: $CAPGO_API_KEY" https://api.capgo.app/organization/
+curl -H "x-api-key: $CAPGO_API_KEY" https://api.capgo.app/organization/
 ```
 
 Create or rotate API keys in the dashboard:
 
-- https://console.capgo.app/dashboard/apikeys/
+- https://console.capgo.app/settings/organization/api-keys
 
 ## Main resource groups
 
@@ -45,3 +47,4 @@ Create or rotate API keys in the dashboard:
 - Standard accounts are limited to 100 requests per minute; enterprise accounts are limited to 1000 requests per minute.
 - Expect endpoint-specific JSON success shapes. Many responses use `data` or `status`, but `/statistics/...` can return top-level arrays and `bundle_usage` returns an object with `labels` and `datasets`, so rely on the OpenAPI before unwrapping. Errors typically include an `error` field when present.
 - Capgo's public API currently uses API-key authentication, not OAuth/OIDC discovery metadata.
+- Every operation has a unique `operationId`, a description, typed parameters, and JSON response schemas suitable for LLM function calling.

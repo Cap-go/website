@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-12T08:43:18.401Z
-updated_at: 2026-06-18T10:44:00.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/how-cicd-tools-trigger-ota-updates.webp
 head_image_alt: "How CI/CD Tools Trigger OTA Updates Capgo blog illustration"
 keywords: CI/CD, OTA updates, automation, app deployment, security, Capgo, Capacitor
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

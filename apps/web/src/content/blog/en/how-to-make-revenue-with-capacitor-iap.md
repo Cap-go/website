@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-05-01T00:00:00.000Z
-updated_at: 2026-06-23T21:25:40.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /native-purchases/revenue-playbook.png
 head_image_alt: "How to Make Revenue With a Capacitor App Capgo blog illustration"
 keywords: Capacitor revenue, in-app purchases, subscriptions, mobile app monetization, paywall, ASO, app revenue, native purchases
 tag: Mobile, IAP, Monetization
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

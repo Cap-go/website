@@ -9,13 +9,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-11T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /react_native_vs_react_capacitor.webp
 head_image_alt: "Comparing React Native vs Capacitor Capgo blog illustration"
 keywords: React Native, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Alternatives
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

@@ -78,8 +78,8 @@
   font-family: var(--lu-font-mono);
 }
 body:has(.lu) {
-  background-color: var(--color-gray-900);
-  background-image: radial-gradient(1200px 560px at 50% -40px, rgba(59, 130, 246, 0.16) 0%, rgba(59, 130, 246, 0.04) 45%, transparent 72%);
+  background-color: #1a1a1a;
+  background-image: radial-gradient(1100px 640px at 50% -80px, rgba(59, 130, 246, 0.22) 0%, transparent 72%), linear-gradient(180deg, #0d1525 0%, #0d1525 58vh, #1a1a1a 100vh);
   background-repeat: no-repeat;
 }
 .lu.bg-ad {
@@ -200,6 +200,7 @@ body:has(.lu) footer > div > div:first-child {
 .lu .hero {
   padding: 96px 0 80px;
   text-align: center;
+  background: transparent;
 }
 @media (max-width: 720px) {
   .lu .hero {

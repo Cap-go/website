@@ -8,6 +8,7 @@ import Affonso from '../components/Affonso.astro'
 import PostHog from '../components/posthog.astro'
 import WebMcpTools from '../components/WebMcpTools.astro'
 import globalStylesHref from '../css/global.css?url'
+import productSurfaceHref from '../styles/product-surface.css?url'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { getCollection } from 'astro:content'
 
@@ -21,10 +22,13 @@ const content = Astro.props.content ?? {}
 const disableThirdPartyScripts = Astro.props.disableThirdPartyScripts ?? false
 const hideChrome = Astro.props.hideChrome ?? false
 const footerBlogCopy = Astro.props.footerBlogCopy
-const defaultFooterBlogSlugs = ['how-live-updates-for-capacitor-work', 'ultimate-guide-to-capacitor-ota-updates', '5-security-best-practices-for-mobile-app-live-updates']
+const defaultFooterBlogSlugs = ['a-brand-new-organization-system', 'capgo-2025-year-in-review', 'capacitor-social-login-release']
 const footerBlogSlugs = (Astro.props.footerBlogSlugs ?? defaultFooterBlogSlugs) as string[]
 const footerBlogEntries = footerBlogSlugs.length
-  ? await getCollection('blog', ({ data }) => data.published !== false && footerBlogSlugs.includes(data.slug) && (data.locale === Astro.locals.locale || data.locale === 'en'))
+  ? await getCollection(
+      'blog',
+      ({ data }) => data.published !== false && data.origin === 'human' && footerBlogSlugs.includes(data.slug) && (data.locale === Astro.locals.locale || data.locale === 'en'),
+    )
   : []
 
 const footerBlogPosts = footerBlogSlugs
@@ -53,7 +57,9 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealMedium.woff" crossorigin />
     <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealBold.woff" crossorigin />
     <link rel="stylesheet" href={globalStylesHref} />
+    <link rel="stylesheet" href={productSurfaceHref} />
     <SEO {...content} />
+    <slot name="head" />
     {enableThirdPartyScripts && <MetaPixel />}
     {enableThirdPartyScripts && <PostHog />}
     {enableThirdPartyScripts && <Affonso />}

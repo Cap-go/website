@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-22T08:09:22.697Z
-updated_at: 2026-06-22T08:12:11.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/ba308f87-6f68-4a15-a46f-3ffc02bcba9e/expo-image-picker-guide.jpg'
 head_image_alt: 'Expo Image Picker: A Complete Guide for 2026'
 keywords: 'expo image picker, react native, expo, mobile development, image upload'
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably at the point where the UI is ready, the profile screen has an “Upload photo” button, and now the easy part suddenly isn't easy. The actual image selection flow touches native permissions, OS-controlled interfaces, different return shapes than many developers expect, and a handful of build-time details that only show up after you ship a real build.

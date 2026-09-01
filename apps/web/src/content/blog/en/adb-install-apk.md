@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-02T09:27:56.807Z
-updated_at: 2026-07-02T09:30:20.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/7605a097-3d24-4730-801e-be555fdef352/adb-install-apk-guide.jpg'
 head_image_alt: 'Adb Install Apk Guide 2026: Sideload Any App'
 keywords: 'adb install apk, android debug bridge, sideload apk, capacitor development, troubleshooting adb'
 tag: 'Mobile, Capacitor, Android'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've got a fresh Android build sitting on disk, the browser version looks fine, and now you need it on a real device. Not after an internal testing upload. Not after Android Studio finishes indexing. Right now.

@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-14T08:08:23.942Z
-updated_at: 2026-07-14T08:10:34.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/efcbbb02-69d1-43e0-aa1d-1021bceda413/infrastructure-planning-app-resilience.jpg'
 head_image_alt: 'Effective Infrastructure Planning: Build Resilient Apps 2026'
 keywords: 'infrastructure planning, mobile app infrastructure, devops, capacity planning, application security'
 tag: 'Mobile, Security, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Launch week goes well in staging. The API is fast, push notifications arrive, QA signs off, and the team finally exhales. Then production traffic hits from a new campaign, mobile clients start retrying requests on unstable networks, image downloads spike in a few regions, and a harmless-looking config mistake turns a partial outage into a support queue fire.

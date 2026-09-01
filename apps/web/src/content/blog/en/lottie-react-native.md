@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-25T09:27:00.852Z
-updated_at: 2026-06-25T09:29:28.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/65847988-3518-4343-87b0-8ae084aa3a99/lottie-react-native-doodle-illustration.jpg'
 head_image_alt: Lottie React Native
 keywords: 'lottie react native, react native animation, expo lottie, mobile animation, react native guide'
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two spots right now. Either you have a designer handing you a Lottie JSON and asking, “Can we get this into the app today?”, or you already wired it up and noticed the animation works in development but starts feeling expensive once real devices, startup time, and release builds enter the picture.

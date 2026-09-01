@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-29T00:00:00.000Z
-updated_at: 2026-06-23T15:58:31.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /apple_appstore.webp
 head_image_alt: "App Store Age Ratings Guide for iOS and Android Capgo blog illustration"
 keywords: age ratings, app store, google play, content ratings, IARC, parental controls, app classification, ios age ratings, android age ratings
 tag: Development, App Store, Best Practices
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

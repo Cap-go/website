@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-15T01:43:16.632Z
-updated_at: 2026-06-18T11:13:52.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/how-to-use-aar-files-in-capacitor-plugins.webp
 head_image_alt: "How to Use AAR Files in Capacitor Plugins Capgo blog illustration"
 keywords: AAR files, Capacitor plugins, Android development, mobile integration, Gradle configuration
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

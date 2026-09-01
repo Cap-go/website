@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-25T07:12:53.642Z
-updated_at: 2026-06-23T21:25:40.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/secure-database-storage.webp
 head_image_alt: >-
   'Secure Database Storage: A Complete Guide for Developers' Capgo blog
@@ -20,6 +20,7 @@ keywords: >-
 tag: 'Mobile, Security, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You push a release late at night, glance at your alerts, and notice a credential that never should've left a private repo. Maybe it was a database password. Maybe it was a cloud access key with broader permissions than anyone intended. Either way, the problem isn't just that someone could log in. The problem is that database security continues to be treated like a login problem when it's really a storage lifecycle problem.

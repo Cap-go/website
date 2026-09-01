@@ -6,7 +6,7 @@ interface Props {
   title: string
   description?: string
   testimonials: ProductTestimonial[]
-  variant?: 'dark' | 'light' | 'native' | 'builder'
+  variant?: 'dark' | 'light' | 'builder'
   maxItems?: number
   accent?: 'green' | 'blue' | 'yellow' | 'cyan'
 }
@@ -21,10 +21,8 @@ const sectionClass = isBuilder
   ? 'section product-proof'
   : variant === 'light'
     ? 'border-y border-slate-200 bg-white text-slate-950'
-    : variant === 'native'
-      ? 'border-y border-white/10 bg-[#070d18] text-white'
-      : 'border-y border-white/10 bg-slate-950 text-white'
-const eyebrowClass = isLight ? 'text-blue-700' : isBuilder ? `eyebrow eyebrow--${accent}` : 'font-mono text-sm font-semibold tracking-wide uppercase text-cyan-300'
+    : 'border-y border-white/10 bg-[#1a1a1a] text-white'
+const eyebrowClass = isLight ? 'text-blue-700' : isBuilder ? `eyebrow eyebrow--${accent}` : 'text-sm font-semibold tracking-wide uppercase text-blue-400'
 const titleClass = isLight ? 'text-slate-950' : isBuilder ? 'h2-section' : 'text-white'
 const descriptionClass = isLight ? 'text-slate-600' : isBuilder ? 'lead' : 'text-slate-300'
 const cardClass = isLight ? 'border-slate-200 bg-slate-50 shadow-sm' : isBuilder ? 'proof-card' : 'border-white/10 bg-white/[0.04] shadow-2xl shadow-black/20'

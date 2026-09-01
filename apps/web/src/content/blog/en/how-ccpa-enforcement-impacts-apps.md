@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-27T16:48:49.867Z
-updated_at: 2026-06-18T10:44:00.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/how-ccpa-enforcement-impacts-apps.webp
 head_image_alt: "How CCPA Enforcement Impacts Apps Capgo blog illustration"
 keywords: CCPA, mobile apps, user data, privacy compliance, data security, consumer rights, data sharing, enforcement
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

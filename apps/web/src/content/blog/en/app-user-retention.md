@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-05T07:40:06.551Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/app-user-retention.webp
 head_image_alt: '''App User Retention: A Guide to Keeping Users Hooked'' Capgo blog illustration'
 keywords: >-
@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, Capacitor, Product'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 About **26% of users return on day 1**, and only **7% are still active after 30 days** according to [Adjust's retention benchmarks](https://www.adjust.com/resources/guides/user-retention/). That reframes app user retention immediately. The main problem usually isn't long-term loyalty. It's that most users decide very quickly whether your app deserves space on their phone.

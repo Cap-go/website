@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-29T03:24:03.406Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/ota-updates-in-cicd-security-and-compliance-tips.webp
 head_image_alt: "\"OTA Updates in CI/CD: Security and Compliance Tips\" Capgo blog illustration"
 keywords: OTA updates, CI/CD, security, compliance, encryption, app deployment, privacy laws, mobile updates
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

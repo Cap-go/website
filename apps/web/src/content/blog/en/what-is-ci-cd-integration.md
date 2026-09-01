@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-29T09:16:25.910Z
-updated_at: 2026-07-29T09:18:35.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/677bc8e2-34c4-40ad-ba42-a826460baade/what-is-ci-cd-integration-text-graphic.jpg'
 head_image_alt: 'What Is CI CD Integration: A Guide to Faster Releases'
 keywords: 'ci cd integration, ci cd pipeline, cicd tools, live updates, capacitor'
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 CI/CD integration is the wiring that connects your code repository to an automated pipeline so every change moves through build, test, and release stages without manual handoffs. By 2024, **83% of developers** were involved in DevOps-related activities, and CI/CD tool use was linked to better delivery performance across deployment frequency, lead time, change failure rate, and time to restore service [according to the Cloud Native Computing Foundation's State of CI/CD Report](https://cd.foundation/state-of-cicd-2024/).

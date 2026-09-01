@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-13T10:09:53.896Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/how-to-implement-feature-flags.webp
 head_image_alt: '''How to Implement Feature Flags: Dev Workflow in 2026'' Capgo blog illustration'
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Updates, Tutorial'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 A risky release usually looks the same. The code passed review, the build succeeded, and the team merged with confidence. Then production traffic hits the new path all at once, support starts seeing errors, and your only rollback option is another deploy under pressure.

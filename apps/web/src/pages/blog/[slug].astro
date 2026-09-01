@@ -1,6 +1,10 @@
 ---
 import Blog from '@/components/Blog.astro'
+import BlogAuthorByline from '@/components/BlogAuthorByline.astro'
+import BlogEditorialByline from '@/components/BlogEditorialByline.astro'
 import GetStarted from '@/components/GetStarted.astro'
+import { HUMAN_EDITORIAL_TEAM } from '@/config/blogEditorialTeam'
+import { isHumanBlogPost } from '@/lib/blogOrigin'
 import { formatTime } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import { createNewsArticleLdJson } from '@/lib/ldJson'
@@ -74,6 +78,7 @@ const alternateVersions = locales.map((locale) => {
 })
 
 const { Content, headings } = await render(entry)
+const showEditorialByline = isHumanBlogPost(entry.data.origin)
 
 const dateModified = entry.data.updated_at
 const datePublished = entry.data.created_at
@@ -134,7 +139,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
 ---
 
 <Layout content={content}>
-  <div class="flex w-full flex-col items-center">
+  <div class="product-hero flex w-full flex-col items-center">
     <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
       <div class="relative z-0 mx-auto pb-12">
         <div class="relative max-w-(--breakpoint-sm)">
@@ -157,21 +162,19 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
             {entry.data.title}
           </h1>
           <p class="mt-4 text-gray-400 sm:text-lg">{entry.data.description}</p>
-          <a class="group mt-6 flex items-center space-x-3 md:hidden" href={entry.data.author_url}>
-            <img
-              width="36"
-              height="36"
-              loading="lazy"
-              decoding="async"
-              alt={entry.data.author}
-              src={entry.data.author_image_url}
-              class="blur-0 rounded-full transition-all group-hover:brightness-90"
-            />
-            <div class="flex flex-col">
-              <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
-              <p class="text-sm text-gray-500">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
-            </div>
-          </a>
+          {
+            showEditorialByline ? (
+              <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="mt-6 md:hidden" />
+            ) : (
+              <BlogAuthorByline
+                author={entry.data.author}
+                authorUrl={entry.data.author_url}
+                authorImageUrl={entry.data.author_image_url}
+                showLabel={false}
+                class="mt-6 md:hidden"
+              />
+            )
+          }
         </div>
       </div>
     </div>
@@ -192,30 +195,19 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
             <Content />
           </article>
         </div>
-        <div class="right-0 hidden px-10 sm:block">
-          <div class="relative flex flex-col gap-y-4 pb-5">
-            <p class="text-sm text-gray-600">{m.written_by({}, { locale: Astro.locals.locale })}</p>
-            <a class="group flex items-center space-x-3" href={entry.data.author_url}>
-              <img
-                width="36"
-                height="36"
-                loading="lazy"
-                decoding="async"
-                alt={entry.data.author}
-                src={entry.data.author_image_url}
-                class="blur-0 rounded-full transition-all group-hover:brightness-90"
-              />
-              <div class="flex flex-col">
-                <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
-                <p class="text-sm text-gray-500">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
-              </div>
-            </a>
-          </div>
+        <div class="right-0 hidden px-10 md:block">
+          {
+            showEditorialByline ? (
+              <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="relative pb-5" />
+            ) : (
+              <BlogAuthorByline author={entry.data.author} authorUrl={entry.data.author_url} authorImageUrl={entry.data.author_image_url} class="relative pb-5" />
+            )
+          }
           {
             headings?.length > 0 && (
               <div id="staticToc" class="sticky top-16 pt-4 pb-8">
                 <div>
-                  <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-500">
+                  <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-400">
                     <svg
                       width="24"
                       height="24"
@@ -236,7 +228,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
                   </p>
                   <div class="mt-4 grid gap-4 border-l border-gray-600">
                     {headings.map((k) => (
-                      <a id={`${k.slug}-link`} class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-500`} href={`#${k.slug}`}>
+                      <a id={`${k.slug}-link`} class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-400`} href={`#${k.slug}`}>
                         {k.text}
                       </a>
                     ))}
@@ -289,6 +281,23 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Heading slugs may start with a digit (e.g. "1-foo"); getElementById avoids invalid CSS selectors.
+    const getTocLink = (headingId: string) => document.getElementById(`${headingId}-link`)
+
+    let currentTocHash = window.location.hash
+    let hashUpdateTimer: ReturnType<typeof setTimeout> | undefined
+
+    const scheduleHashUpdate = (hash: string) => {
+      if (hash === currentTocHash) return
+      if (hashUpdateTimer) clearTimeout(hashUpdateTimer)
+      hashUpdateTimer = setTimeout(() => {
+        hashUpdateTimer = undefined
+        if (hash === currentTocHash) return
+        currentTocHash = hash
+        history.replaceState(null, '', hash)
+      }, 150)
+    }
+
     const observeArticleTitles = () => {
       const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
       let activeHeading = null
@@ -296,7 +305,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
       for (let i = 0; i < headings.length; i++) {
         const heading = headings[i]
         const tmp = heading.getAttribute('id')
-        if (tmp) document.querySelector(`#${tmp}-link`)?.classList.remove('text-white')
+        if (tmp) getTocLink(tmp)?.classList.remove('text-white')
         const rect = heading.getBoundingClientRect()
         if (rect.top <= 50) activeHeading = heading
         else if (rect.top > 50 && activeHeading) break
@@ -305,8 +314,8 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
       if (activeHeading) {
         const tmp = activeHeading.getAttribute('id')
         if (tmp) {
-          document.querySelector(`#${tmp}-link`)?.classList.add('text-white')
-          history.replaceState(null, '', `#${tmp}`)
+          getTocLink(tmp)?.classList.add('text-white')
+          scheduleHashUpdate(`#${tmp}`)
         }
       }
     }

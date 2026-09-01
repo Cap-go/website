@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-11T08:31:14.765Z
-updated_at: 2026-07-11T08:33:16.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/5188e3fb-d385-4088-b0b7-18ddabe8f672/app-risk-assessment-presentation-title.jpg'
 head_image_alt: 'App Risk Assessment: A Practical Guide for Modern Teams'
 keywords: 'app risk assessment, mobile security, application security, risk management, capacitorjs'
 tag: 'Mobile, Security, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your release train is moving, QA signed off, and a “small” web-layer fix needs to go out before morning. Someone patches a form validation bug, updates a dependency, and ships. A day later, support starts seeing odd account behavior. Security traces it back to the hotfix path, not the big feature everyone was worried about.

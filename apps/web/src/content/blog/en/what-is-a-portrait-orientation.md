@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-14T09:50:54.053Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/what-is-a-portrait-orientation.webp
 head_image_alt: '''What Is a Portrait Orientation: Guide for 2026'' Capgo blog illustration'
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You rotate your phone to test a screen, and the layout either adapts cleanly or falls apart. Text reflows, buttons jump, a modal suddenly covers the wrong area, or your video player behaves exactly as expected. That small moment is where **portrait orientation** stops being a design term and becomes a product decision.

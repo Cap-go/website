@@ -26,6 +26,7 @@ const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+  keywords: 'Capgo alternatives, Expo alternative, EAS alternative, Appflow alternative, Capacitor live updates',
   ldJSON,
 }
 ---
@@ -184,6 +185,37 @@ const content = {
 
           <div class="mt-4 text-sm text-gray-400">
             {m.alternatives_appflow_credit({}, { locale })}
+          </div>
+        </div>
+
+        <!-- Expo Application Services -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+          <div class="mb-4 flex items-start justify-between">
+            <div>
+              <h3 class="mb-2 text-2xl font-bold text-gray-100">Expo Application Services (EAS)</h3>
+              <p class="text-sm text-sky-400">{m.alternatives_expo_status({}, { locale })}</p>
+            </div>
+            <a href={getRelativeLocaleUrl(locale, 'expo')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+              {m.alternatives_expo_full_comparison({}, { locale })}
+            </a>
+          </div>
+
+          <div class="mb-4 space-y-3 text-gray-300">
+            <p><strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_expo_reality({}, { locale })}</p>
+
+            <p><strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_expo_when_good({}, { locale })}</p>
+
+            <p><strong class="text-gray-100">{m.alternatives_appflow_why_different_label({}, { locale })}</strong></p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400">
+              <li>{m.alternatives_expo_why_different_li1({}, { locale })}</li>
+              <li>{m.alternatives_expo_why_different_li2({}, { locale })}</li>
+              <li>{m.alternatives_expo_why_different_li3({}, { locale })}</li>
+              <li>{m.alternatives_expo_why_different_li4({}, { locale })}</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 text-sm text-gray-400">
+            {m.alternatives_expo_credit({}, { locale })}
           </div>
         </div>
 

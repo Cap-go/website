@@ -122,6 +122,10 @@ bunx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible
 
 Compatible uploads — and cases where the check can't run (a new channel, or no remote metadata) — pass through unchanged. In an interactive terminal it offers the Capgo Builder native-build flow instead; declining fails. (Can't be combined with `--ignore-metadata-check`.)
 
+<Aside type="tip">
+When you **intentionally** need a bundle that differs from the channel's live native packages (new plugin, Capacitor upgrade, and so on), omit `--fail-on-incompatible` for that baseline upload. Keep the flag on everyday OTA CI. Full channel workflow: [Native + OTA Channel Workflow](/docs/live-updates/native-ota-channel-workflow/).
+</Aside>
+
 **Gate delivery by native version — `metadata` + `--auto-min-update-version`**
 
 When you _do_ ship the native build and the bundle together, put the channel on the `metadata` strategy and upload with `--auto-min-update-version`. Capgo runs the compatibility check on every upload and, when a bundle needs new native code, raises the update floor so devices that haven't installed the matching native build don't receive it:
@@ -143,6 +147,11 @@ See [Version Targeting](/docs/live-updates/version-targeting/) for the full set 
 ## Related
 
 <CardGrid>
+  <a href="/docs/live-updates/native-ota-channel-workflow/">
+    <Card title="Native + OTA Workflow" icon="approve-check-circle">
+      Dev/production channels, when to keep `--fail-on-incompatible`, and how to ship an intentional native baseline.
+    </Card>
+  </a>
   <a href="/docs/builder/ci-ota-or-native/">
     <Card title="Auto OTA or Native" icon="rocket">
       Wire `bundle releaseType` into GitHub Actions or GitLab so CI picks live update vs Capgo Build.

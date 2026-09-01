@@ -1,17 +1,41 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
-const pageTitle = 'Mobile CI/CD with Capgo Build | Capgo'
-const pageDescription = 'Set up Capgo Build in CI/CD to automate signed iOS and Android native builds from GitHub Actions, GitLab CI, Jenkins, and more.'
-const buildDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/getting-started')
-const githubActionsDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/github-actions')
-const credentialsDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/credentials')
-const ciCdDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/getting-started/cicd-integration')
+const locale = Astro.locals.locale
+const pageTitle = 'Capacitor CI/CD with Capgo Build | Capgo'
+const pageDescription = 'Run Capgo Build from GitHub Actions or GitLab CI for signed iOS and Android binaries. The EAS Workflows analog for Capacitor, not React Native.'
+const buildDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/getting-started')
+const githubActionsDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/github-actions')
+const credentialsDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/credentials')
+const ciCdDocsUrl = getRelativeLocaleUrl(locale, 'docs/getting-started/cicd-integration')
+const expoUrl = getRelativeLocaleUrl(locale, 'expo')
+const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: pageTitle,
+  description: pageDescription,
+  url: Astro.url.href,
+  serviceType: 'Mobile CI/CD build service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
 ---
 
-<Layout content={{ title: pageTitle, description: pageDescription, image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-ci-cd.png` }}>
-  <div>
+<Layout
+  content={{
+    title: pageTitle,
+    description: pageDescription,
+    image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-ci-cd.png`,
+    keywords: 'Capacitor CI/CD, EAS Workflows analog, Capgo Build, GitHub Actions iOS Android',
+    ldJSON,
+  }}
+>
+  <div class="hero-wash">
     <!-- Hero Section -->
     <section class="relative overflow-hidden bg-gray-900 py-20 sm:py-24 lg:py-32">
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -898,13 +922,24 @@ npx @capgo/cli@latest build com.example.app --platform android --build-mode rele
     </section>
   </div>
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
+    <h2 class="text-2xl font-semibold text-white">EAS Workflows analog for Capacitor</h2>
+    <p class="mt-4 text-base text-gray-300">
+      EAS Workflows is Expo's hosted CI/CD for React Native. Capgo is the Capacitor path: keep GitHub Actions, GitLab CI, or Jenkins, then call Capgo Build for signed iOS and
+      Android artifacts. Capgo is not a drop-in EAS Workflows runner and does not build Expo projects.
+    </p>
+    <p class="mt-4">
+      <a href={expoUrl} class="font-medium text-emerald-400 hover:underline">Compare Capgo with Expo Application Services</a>
+      {' · '}
+      <a href={nativeBuildUrl} class="font-medium text-emerald-400 hover:underline">Open Capgo Builder</a>
+    </p>
+  </section>
+  <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
     <h2 class="text-2xl font-semibold text-white">Keep going from Capgo CI/CD</h2>
     <p class="mt-4">
       If you are setting up CI/CD for Capacitor releases, connect this page with <a href="/docs/getting-started/cicd-integration/">CI/CD Integration</a> for the baseline,
       <a href="/docs/live-updates/integrations/github-actions/">GitHub Actions</a> for live updates, <a href="/native-build/">Capgo Native Builds</a> for signed binaries,
-      <a href="/solutions/pr-preview/">PR Preview Solution</a> for review builds, and <a href="/blog/common-cicd-bottlenecks-in-ota-pipelines/"
-        >Common CI/CD Bottlenecks in OTA Pipelines</a
-      >
+      <a href="/solutions/pr-preview/">PR Preview Solution</a> for review builds, <a href={expoUrl}>EAS vs Capgo</a> for the Expo Application Services comparison, and
+      <a href="/blog/common-cicd-bottlenecks-in-ota-pipelines/">Common CI/CD Bottlenecks in OTA Pipelines</a>
       for avoiding slow releases.
     </p>
   </section>

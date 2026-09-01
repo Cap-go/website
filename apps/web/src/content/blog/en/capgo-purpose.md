@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-10T00:00:00.000Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/capgo-purpose.webp
 head_image_alt: Purpose of Capgo Capgo blog illustration
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: Solution
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

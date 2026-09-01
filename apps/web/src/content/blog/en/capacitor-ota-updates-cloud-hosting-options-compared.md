@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-17T03:46:56.267Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/capacitor-ota-updates-cloud-hosting-options-compared.webp
 head_image_alt: "\"Capacitor OTA Updates: Cloud Hosting Options Compared\" Capgo blog illustration"
 keywords: Capacitor, OTA updates, cloud hosting, AWS, Google Cloud, Azure, Capgo, mobile app updates, deployment
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

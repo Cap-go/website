@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-24T09:52:54.713Z
-updated_at: 2026-07-24T09:55:11.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/60aba5c6-0767-41fe-81df-0c675421bc7d/developer-experience-mobile-teams.jpg'
 head_image_alt: 'Developer Experience: The 2026 Guide to Faster Mobile Teams'
 keywords: 'developer experience, DX metrics, Capacitor, live updates, mobile CI/CD'
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You already know the pattern. Monday starts with a flaky CI run, someone re-triggers the pipeline, and half the team loses the first hour to waiting. By Wednesday, a copy tweak sits in App Review while support asks why the onboarding message still says the old thing. On Thursday, an Electron renderer bug reaches a customer before anyone notices, and now engineering, support, and product are all in the same thread trying to reconstruct what changed.

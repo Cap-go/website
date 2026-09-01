@@ -6,13 +6,14 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikDhabal'
 created_at: 2023-09-14T00:00:00.000Z
-updated_at: 2026-06-23T19:49:03.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /quasar_capgo.webp
 head_image_alt: "'Creating Mobile Apps with live updates, Quasar and Capacitor.' Capgo blog illustration"
 keywords: Quasar, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 In this tutorial, we will begin with creating a new web app using [Quasar](https://quasar.dev/). Later on, we'll learn how to turn it into a mobile app using Capacitor. If you want to make your app look better on mobile.

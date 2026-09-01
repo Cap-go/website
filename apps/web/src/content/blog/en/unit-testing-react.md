@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-08T08:14:55.865Z
-updated_at: 2026-07-30T23:40:43.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/unit-testing-react.webp
 head_image_alt: '''Unit Testing React: A Practical End-to-End Guide'' Capgo blog illustration'
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Tutorial, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You push a small UI change before lunch. It looks harmless. A button label changes, a conditional render gets simplified, and a helper hook picks up one new branch. The pull request is clean, review is quick, and the deploy goes out.

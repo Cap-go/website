@@ -165,6 +165,7 @@ const teamUrl = 'https://book.capgo.app/demo/'
         </a>
 
         <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight xl:text-7xl">
+          <span class="sr-only">Capgo. </span>
           {m.home_hero_title({}, { locale: Astro.locals.locale })}
           <br />
           <span class="text-azure-500">{m.home_hero_title_line2({}, { locale: Astro.locals.locale })}</span>
@@ -208,7 +209,7 @@ const teamUrl = 'https://book.capgo.app/demo/'
     </div>
   </div>
   <!-- Features Bar -->
-  <div class="bg-linear-to-b from-gray-900 to-[#1a1a1a] py-6 sm:py-16 lg:py-20">
+  <div class="bg-[#1a1a1a] py-6 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Single Horizontal Bar with Features and Stats -->
       <div class="mx-auto max-w-6xl">
@@ -278,7 +279,7 @@ const teamUrl = 'https://book.capgo.app/demo/'
         <!-- Stats Bar -->
         <div class="pt-8">
           <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm">
-            <!-- Trusted by Companies -->
+            <!-- Trusted by Customers -->
             <div class="flex items-center gap-3">
               <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -330,7 +331,7 @@ const teamUrl = 'https://book.capgo.app/demo/'
             </div>
           </div>
         </div>
-        <div class="my-6 flex items-center justify-center gap-8 text-sm text-slate-500">
+        <div class="my-6 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 sm:gap-8">
           <div class="flex flex-col items-center gap-1">
             <img
               loading="lazy"
@@ -341,8 +342,17 @@ const teamUrl = 'https://book.capgo.app/demo/'
             <span class="text-center text-xs font-semibold text-slate-500">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
           </div>
           <div class="flex flex-col items-center gap-1">
-            <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="h-10 w-auto opacity-90 transition-opacity hover:opacity-80" />
-            <span class="text-center text-xs font-semibold text-slate-500">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
+            <img loading="lazy" src="/soc3.svg" alt={m.compliance_soc3({}, { locale: Astro.locals.locale })} class="h-10 w-auto opacity-90 transition-opacity hover:opacity-80" />
+            <span class="text-center text-xs font-semibold text-slate-500">{m.compliance_soc3({}, { locale: Astro.locals.locale })}</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <img
+              loading="lazy"
+              src="/iso27001.svg"
+              alt={m.compliance_iso27001({}, { locale: Astro.locals.locale })}
+              class="h-10 w-auto opacity-90 transition-opacity hover:opacity-80"
+            />
+            <span class="text-center text-xs font-semibold text-slate-500">{m.compliance_iso27001({}, { locale: Astro.locals.locale })}</span>
           </div>
           <div class="flex flex-col items-center gap-1">
             <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="h-10 w-auto opacity-90 transition-opacity hover:opacity-80" />

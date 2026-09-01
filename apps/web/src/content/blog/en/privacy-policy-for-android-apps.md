@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-15T07:07:10.732Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/privacy-policy-for-android-apps.webp
 head_image_alt: '''Privacy Policy for Android Apps: A 2026 Guide'' Capgo blog illustration'
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Security, Android'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're often closest to release when the privacy policy problem shows up. The build is green. QA signed off. The Play Console checklist looks almost done. Then someone asks a simple question that turns into a blocker: what exactly does this app collect, which SDKs receive it, where is that disclosed, and does the in-app flow match the listing?

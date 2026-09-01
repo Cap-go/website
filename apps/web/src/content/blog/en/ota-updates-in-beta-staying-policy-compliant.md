@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-01T02:04:08.266Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/ota-updates-in-beta-staying-policy-compliant.webp
 head_image_alt: "\"OTA Updates in Beta: Staying Policy-Compliant\" Capgo blog illustration"
 keywords: OTA updates, beta testing, compliance, app store policies, encryption, user communication, quality control
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

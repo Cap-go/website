@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-12T09:44:44.975Z
-updated_at: 2026-06-23T21:16:25.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/barcode-scanner-cordova.webp
 head_image_alt: '''Build a Barcode Scanner Cordova App: 2026 Guide'' Capgo blog illustration'
 keywords: >-
@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two situations. Either you've inherited a Cordova app that still matters to the business, or you're keeping a stable hybrid app alive while the team slowly shifts toward newer tooling. Then a product request lands: scan inventory labels, tickets, parcels, or shelf tags with the phone camera.

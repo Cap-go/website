@@ -7,8 +7,10 @@ sidebar:
 
 Devices are individual app installations that report updater metadata to Capgo. Use this API to retrieve that metadata or set and remove a device-specific private-channel override.
 
-:::note[Data retention]
-Device data is retained for **90 days** from the last device activity. A device does not need to install an update to appear: updater and stats check-ins can refresh its metadata.
+:::note[Two 90-day policies]
+**Device inventory:** device records are retained for **90 days** from the last device activity. A device does not need to install an update to appear: updater and stats check-ins can refresh its metadata.
+
+**Channel overrides:** a POST override is removed **90 days after the last override write**, even if the device still checks in. Checking in does not reset that clock. To avoid that cleanup, set `defaultChannel` in Capacitor config (survives reinstall) or call `setChannel()` from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, `setChannel()` is local and is cleared on reinstall, so the app must call it again. Older plugins write a backend override that survives reinstall and is removed by this cleanup. See [Console and API overrides expire after 90 days](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
 :::
 
 ## Device metadata
@@ -23,7 +25,7 @@ When available, `country_code` is the latest valid two-letter ISO 3166-1 country
 
 `https://api.capgo.app/device/`
 
-Set a device-specific override to a **private** channel. To choose a bundle for a device, assign that bundle to the channel; direct per-device bundle overrides are not supported.
+Set a device-specific override to a **private** channel. To choose a bundle for a device, assign that bundle to the channel; direct per-device bundle overrides are not supported. The override expires 90 days after the last write unless you POST it again.
 
 #### Request body
 

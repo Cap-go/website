@@ -150,10 +150,11 @@ If you need to target specific native versions (similar to AppFlow's native vers
 
 ```bash
 # Only deliver to devices on native version 2.0.0 or higher
+# Channel must use metadata strategy: --disable-auto-update metadata
 capgo bundle upload \
   --path dist \
   --channel production \
-  --native-version "2.0.0"
+  --min-update-version "2.0.0"
 
 # Use channels for different major versions
 capgo bundle upload --channel v2  # for app version 2.x

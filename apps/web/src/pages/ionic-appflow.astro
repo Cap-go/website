@@ -25,7 +25,8 @@ const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
 ---
 
 <Layout content={content}>
-  <section class="bg-gray-900 py-16 sm:py-20">
+  <div class="product-hero">
+  <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-6 lg:px-8">
       <!-- Hero -->
       <div class="mb-12 text-center">
@@ -228,7 +229,7 @@ const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
       </div>
 
       <ProductVideoSection
-        variant="gray"
+        variant="dark"
         youtubeId={productVideos.appflowMigration.youtubeId}
         title={productVideos.appflowMigration.title}
         description={productVideos.appflowMigration.description}
@@ -311,7 +312,7 @@ const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
       </div>
 
       <!-- Enterprise Plugins & Paid Help -->
-      <div class="mb-16 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-8">
+      <div class="mb-16 rounded-xl border border-white/10 bg-white/[0.03] p-8">
         <h2 class="mb-4 text-2xl font-bold text-white sm:text-3xl">
           {m.appflow_enterprise_help_title({}, { locale })}
         </h2>
@@ -443,4 +444,5 @@ const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
       </div>
     </div>
   </section>
+  </div>
 </Layout>

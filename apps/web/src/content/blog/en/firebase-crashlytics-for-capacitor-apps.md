@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-21T03:55:39.168Z
-updated_at: 2026-06-23T21:13:09.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/firebase-crashlytics-for-capacitor-apps.webp
 head_image_alt: "Firebase Crashlytics for Capacitor Apps Capgo blog illustration"
 keywords: Firebase, Crashlytics, mobile apps, Capacitor, app development, crash reporting, error tracking
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

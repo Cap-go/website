@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-01T07:11:14.581Z
-updated_at: 2026-07-30T23:40:43.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/web-hook-example.webp
 head_image_alt: >-
   'A Practical Web Hook Example: Secure Implementation Guide' Capgo blog
@@ -20,6 +20,7 @@ keywords: >-
 tag: 'Mobile, Security, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've got a service that needs to react when something happens somewhere else. A payment clears. A customer record changes. A repo gets a push. You could poll an API every minute and waste cycles asking “anything new?” over and over, or you can let the source system call you when the event happens.

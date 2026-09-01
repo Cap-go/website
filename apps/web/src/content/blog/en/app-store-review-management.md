@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-11T09:07:48.209Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/app-store-review-management.webp
 head_image_alt: '''App Store Review Management: A Complete Playbook'' Capgo blog illustration'
 keywords: >-
@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, Updates, App Store'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You push a release to fix a bug that's already annoying users. QA passed. Support is waiting. Then App Review rejects it for something that feels minor, or worse, something the team thought was obvious. A day later, public reviews start sliding because the old issue is still live.

@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-28T08:33:33.427Z
-updated_at: 2026-07-28T08:36:06.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/ff72a356-0c7e-4ba0-8c99-b7da9a18b6fa/continuous-integration-setup-ci-setup.jpg'
 head_image_alt: Continuous Integration Setup for Capacitor and Electron Apps
 keywords: 'continuous integration setup, CapacitorJS CI, Electron CI pipeline, Capgo live updates, GitHub Actions mobile'
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You can usually tell when a hybrid app team has outgrown its build process. Someone is still logging into a Mac, clicking through Xcode, exporting an Android artifact, signing an Electron package by hand, and then trying to remember which branch matches the build that got uploaded. The release works, but only because one or two people know every step by heart, and that stops scaling the minute those people get busy.

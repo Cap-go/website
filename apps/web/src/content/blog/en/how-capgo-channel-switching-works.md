@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-21T00:00:00.000Z
-updated_at: 2026-06-23T15:58:31.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /capgo_channels_surfing.webp
 head_image_alt: "Channel Surfing for Capgo: How to Switch Update Channels at Runtime Capgo blog illustration"
 keywords: channels, channel surfing, OTA updates, capacitor, capgo, live updates, runtime switching, beta testing, QA
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

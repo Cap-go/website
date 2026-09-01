@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-30T06:58:17.170Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/test-flight-android.webp
 head_image_alt: '''Test Flight Android: Alternatives for Beta Testing'' Capgo blog illustration'
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Alternatives, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Apple's TestFlight app does **not** exist for Android. On Android, the closest official equivalent is **Google Play Console testing tracks**, while Apple's own TestFlight model on iOS supports up to **100 internal testers**, **10,000 external testers**, requires review for external builds that can take about **48 hours**, and expires builds after **90 days**.

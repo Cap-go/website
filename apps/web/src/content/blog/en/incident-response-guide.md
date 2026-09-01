@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-02T09:03:08.190Z
-updated_at: 2026-08-02T09:05:23.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/66122667-f2f0-45a4-b8c7-e48c96984986/incident-response-guide-incident-response.jpg'
 head_image_alt: Incident Response Guide for Mobile and Desktop App Teams
 keywords: 'incident response guide, live updates, CapacitorJS, rollback strategy, app incident management'
 tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Friday night is when the bad bundles always seem to land. A JavaScript update looks fine in staging, then iOS starts crashing on launch, Android users hit a blank screen, and the team realizes the only “fix” left in the old world is waiting on store review while support phones keep ringing.

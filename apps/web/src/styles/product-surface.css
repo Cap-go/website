@@ -1,0 +1,387 @@
+/* After-fold product surfaces match the homepage: #1a1a1a, quieter color, less texture.
+   Hero stays on the shared body blue; grey fade starts lower so header and hero share one wash. */
+
+body.bg-gray-900,
+body:has(:is(.lu, .nb, .cli, .ma, .sk, .product-hero, .hero-wash, main.data-page)) {
+  background-color: #1a1a1a;
+  background-image: radial-gradient(1100px 640px at 50% -80px, rgba(59, 130, 246, 0.22) 0%, transparent 72%), linear-gradient(180deg, #0d1525 0%, #0d1525 58vh, #1a1a1a 100vh);
+  background-repeat: no-repeat;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad,
+.product-hero {
+  background: transparent;
+}
+
+.product-hero [class*='bg-linear-to-']:not(.bg-clip-text),
+.product-hero [class*='bg-gradient-to-']:not(.bg-clip-text) {
+  background-image: none;
+}
+
+.product-hero .rounded-3xl[class*='bg-linear-to-'] {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.product-hero .rounded-3xl[class*='bg-linear-to-'] [aria-hidden='true'] {
+  display: none;
+}
+
+.product-hero a.bg-white {
+  color: #111827;
+}
+
+.product-hero a.bg-white:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+/* Inverse of a.bg-white: keep dark trial CTAs solid on white plan cards. */
+.product-hero :is(a, button).bg-gray-950 {
+  background-color: #030712;
+  color: #fff;
+}
+
+.product-hero :is(a, button).bg-gray-950:hover {
+  background-color: #1e2939;
+  color: #fff;
+}
+
+.product-hero .blur-3xl {
+  display: none;
+}
+
+.product-hero > section:first-of-type > .pointer-events-none .animate-pulse.rounded-full {
+  display: none;
+}
+
+.product-hero > section:not(:first-of-type) {
+  background-color: transparent;
+  background-image: none;
+}
+
+/* Unique per-page skins → Capgo blue + charcoal. Keep window traffic lights and clip-text. */
+.product-hero
+  :is(
+    [class*='bg-amber-'],
+    [class*='bg-orange-'],
+    [class*='bg-rose-'],
+    [class*='bg-pink-'],
+    [class*='bg-purple-'],
+    [class*='bg-violet-'],
+    [class*='bg-emerald-'],
+    [class*='bg-green-'],
+    [class*='bg-cyan-'],
+    [class*='bg-teal-'],
+    [class*='bg-sky-'],
+    [class*='bg-red-'],
+    [class*='bg-yellow-']
+  ):not(a, button, .bg-clip-text, .bg-red-500, .bg-yellow-500, .bg-green-500) {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.product-hero
+  :is(a, button):is(
+    [class*='bg-amber-'],
+    [class*='bg-orange-'],
+    [class*='bg-rose-'],
+    [class*='bg-pink-'],
+    [class*='bg-purple-'],
+    [class*='bg-violet-'],
+    [class*='bg-emerald-'],
+    [class*='bg-green-'],
+    [class*='bg-cyan-'],
+    [class*='bg-teal-'],
+    [class*='bg-sky-'],
+    [class*='bg-red-'],
+    [class*='bg-yellow-']
+  ) {
+  background-color: #2563eb;
+  color: #fff;
+  box-shadow: none;
+}
+
+.product-hero
+  :is(a, button):is(
+    [class*='bg-amber-'],
+    [class*='bg-orange-'],
+    [class*='bg-rose-'],
+    [class*='bg-pink-'],
+    [class*='bg-purple-'],
+    [class*='bg-violet-'],
+    [class*='bg-emerald-'],
+    [class*='bg-green-'],
+    [class*='bg-cyan-'],
+    [class*='bg-teal-'],
+    [class*='bg-sky-'],
+    [class*='bg-red-'],
+    [class*='bg-yellow-']
+  ):hover {
+  background-color: #3b82f6;
+}
+
+.product-hero
+  :is(
+    [class*='text-amber-'],
+    [class*='text-orange-'],
+    [class*='text-rose-'],
+    [class*='text-pink-'],
+    [class*='text-purple-'],
+    [class*='text-violet-'],
+    [class*='text-red-'],
+    [class*='text-yellow-']
+  ) {
+  color: #d1d5dc;
+}
+
+.product-hero :is([class*='text-emerald-'], [class*='text-green-'], [class*='text-cyan-'], [class*='text-teal-'], [class*='text-sky-']) {
+  color: #93c5fd;
+}
+
+.product-hero
+  :is(
+    [class*='border-amber-'],
+    [class*='border-orange-'],
+    [class*='border-rose-'],
+    [class*='border-pink-'],
+    [class*='border-purple-'],
+    [class*='border-violet-'],
+    [class*='border-emerald-'],
+    [class*='border-green-'],
+    [class*='border-cyan-'],
+    [class*='border-teal-'],
+    [class*='border-sky-'],
+    [class*='border-red-'],
+    [class*='border-yellow-']
+  ) {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.product-hero
+  :is(
+    [class*='shadow-amber-'],
+    [class*='shadow-orange-'],
+    [class*='shadow-rose-'],
+    [class*='shadow-pink-'],
+    [class*='shadow-purple-'],
+    [class*='shadow-violet-'],
+    [class*='shadow-emerald-'],
+    [class*='shadow-green-'],
+    [class*='shadow-cyan-'],
+    [class*='shadow-teal-'],
+    [class*='shadow-sky-'],
+    [class*='shadow-red-'],
+    [class*='shadow-yellow-']
+  ) {
+  box-shadow: none;
+}
+
+.product-hero
+  :is(
+    [class*='ring-amber-'],
+    [class*='ring-orange-'],
+    [class*='ring-rose-'],
+    [class*='ring-pink-'],
+    [class*='ring-purple-'],
+    [class*='ring-violet-'],
+    [class*='ring-emerald-'],
+    [class*='ring-green-'],
+    [class*='ring-cyan-'],
+    [class*='ring-teal-'],
+    [class*='ring-sky-'],
+    [class*='ring-red-'],
+    [class*='ring-yellow-']
+  ) {
+  --tw-ring-color: rgb(96 165 250 / 0.45);
+}
+
+.product-hero :is(.bg-gray-800, .bg-gray-900, .bg-slate-800, .bg-slate-900, .bg-gray-950, .bg-slate-950):not(a.bg-gray-950, button.bg-gray-950) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.product-hero a:not(.bg-gray-950)[class*='hover:bg-gray-']:hover,
+.product-hero a:not(.bg-gray-950)[class*='hover:bg-slate-']:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .hero {
+  background: transparent;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .section:not(.hero) {
+  background-color: #1a1a1a;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .section:not(.hero).bg-grid::before,
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .section:not(.hero).grain::after {
+  opacity: 0;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .hero.grain::after {
+  opacity: 0.16;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .hero.bg-grid::before {
+  opacity: 0.4;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .btn-primary {
+  box-shadow: none;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .btn-primary:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .hbv-u-rule {
+  height: 2px;
+  box-shadow: none;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .h2-section {
+  font-weight: 700;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .final h2 {
+  font-weight: 700;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .final h2 .name {
+  text-shadow: none;
+}
+
+:is(.lu, .nb, .cli, .ma, .sk).bg-ad .beta-badge .dot {
+  box-shadow: none;
+}
+
+.lu.bg-ad .decision-box,
+.nb.bg-ad .decision-box {
+  border-color: #2a2a2a;
+  background: #202020;
+}
+
+.lu.bg-ad .step-num,
+.nb.bg-ad .step-num {
+  border-color: #2e2e2e;
+  background: #232323;
+  color: #ffffff;
+}
+
+.lu.bg-ad .tile-hero,
+.nb.bg-ad .tile-hero {
+  background: #232323;
+  border-color: #2e2e2e;
+}
+
+.lu.bg-ad .bento .tile:not(.tile-hero):hover,
+.nb.bg-ad .bento .tile:not(.tile-hero):hover {
+  transform: none;
+  border-color: #3a3a3a;
+}
+
+:is(.lu, .nb, .cli).bg-ad table.comp thead th.us {
+  color: #ffffff;
+  background: #232323;
+  border-bottom-color: #3a3a3a;
+}
+
+:is(.lu, .nb, .cli).bg-ad table.comp tbody td.us {
+  background: #202020;
+}
+
+.lu.bg-ad .enterprise-partnership-panel {
+  border-color: #2a2a2a;
+  background: #202020;
+  box-shadow: none;
+  border-radius: 16px;
+}
+
+.lu.bg-ad .enterprise-partnership-check {
+  background: #272727;
+  color: #bfdbfe;
+}
+
+.lu.bg-ad .observe-reading,
+.lu.bg-ad .observe-logs {
+  background: #1a1a1a;
+}
+
+.lu.bg-ad .notification-dashboard-shot,
+.lu.bg-ad .notification-mobile-shot {
+  box-shadow: none;
+}
+
+.sk.bg-ad .hbv-u-gradient {
+  background: none;
+  color: #fff;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+.sk.bg-ad .hero-meta .check {
+  background: none;
+  color: #bfdbfe;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+.sk.bg-ad .hbv-u-rule {
+  background: linear-gradient(90deg, transparent 0%, #60a5fa 20%, #60a5fa 80%, transparent 100%);
+  box-shadow: none;
+}
+
+section.product-video .product-video-frame {
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+section.product-proof .proof-card-wrap {
+  border-radius: 12px;
+}
+
+main.data-page,
+main.data-page .data-hero {
+  background: transparent;
+}
+
+main.data-page .data-section,
+main.data-page .data-section-muted {
+  background: #1a1a1a;
+}
+
+/* Dark bands outside .product-hero still used unique slate/navy fills.
+   Exact classes only: skip /50 washes and full-page canvases such as /register/.
+   Keep `section` and `main > div` as separate rules so :is() does not inflate
+   section specificity past `.product-hero > section:first-of-type`. */
+section:is(.bg-gray-800, .bg-gray-900, .bg-gray-950, .bg-slate-700, .bg-slate-800, .bg-slate-900, .bg-slate-950):not([class*='min-h-screen']) {
+  background-color: #1a1a1a;
+}
+
+main > div:is(.bg-gray-800, .bg-gray-900, .bg-gray-950, .bg-slate-700, .bg-slate-800, .bg-slate-900, .bg-slate-950):not([class*='min-h-screen']) {
+  background-color: #1a1a1a;
+}
+
+section:is([class*='from-slate-9'], [class*='via-slate-9'], [class*='to-slate-9']):not([class*='min-h-screen']) {
+  background-image: none;
+  background-color: #1a1a1a;
+}
+
+.product-hero > section:first-of-type,
+.hero-wash > section:first-of-type {
+  background-color: transparent;
+  background-image: none;
+}
+
+.product-hero > section:first-of-type > .absolute.inset-0,
+.hero-wash > section:first-of-type > .absolute.inset-0 {
+  background-color: transparent;
+}
+
+.hero-wash > section:first-of-type .blur-3xl,
+.hero-wash [class*='blur-['] {
+  display: none;
+}
+
+.hero-wash > [class*='bg-linear-to-']:first-child {
+  background-image: none;
+}

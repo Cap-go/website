@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-08T09:40:39.927Z
-updated_at: 2026-07-08T09:42:51.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/7012b404-b0a5-48af-b84c-07c19b5123a7/hybrid-mobile-applications-title-guide.jpg'
 head_image_alt: 'Hybrid Mobile Applications: A Complete 2026 Guide'
 keywords: 'hybrid mobile applications, capacitorjs, cross-platform development, ionic framework, react native'
 tag: 'Mobile, Capacitor, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your team is probably in a familiar spot. Product wants iOS and Android at the same time. Engineering doesn't want two separate codebases. Support wants fast bug fixes after launch, not another round of store review every time copy, logic, or UI needs to change.

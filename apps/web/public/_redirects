@@ -44,6 +44,18 @@
 /docs/upgrade/encryption-v1-to-v2/ /docs/cli/migrations/encryption/ 302
 /docs/plugins/electron-updater/migration/ /docs/plugins/electron-updater/getting-started/ 302
 /docs/plugins/capacitor-camera-preview/ /docs/plugins/camera-preview/ 302
+/docs/plugins/capacitor-camera-preview/getting-started/ /docs/plugins/camera-preview/getting-started/ 302
+/docs/plugins/capacitor-camera-preview/getting-started /docs/plugins/camera-preview/getting-started/ 302
+/docs/plugins/capacitor-home-indicator/getting-started/ /docs/plugins/home-indicator/getting-started/ 302
+/docs/plugins/capacitor-home-indicator/getting-started /docs/plugins/home-indicator/getting-started/ 302
+/docs/plugins/capacitor-ivs-player/getting-started/ /docs/plugins/ivs-player/getting-started/ 302
+/docs/plugins/capacitor-ivs-player/getting-started /docs/plugins/ivs-player/getting-started/ 302
+/docs/plugins/capacitor-native-audio/getting-started/ /docs/plugins/native-audio/getting-started/ 302
+/docs/plugins/capacitor-native-audio/getting-started /docs/plugins/native-audio/getting-started/ 302
+/docs/plugins/capacitor-native-market/getting-started/ /docs/plugins/native-market/getting-started/ 302
+/docs/plugins/capacitor-native-market/getting-started /docs/plugins/native-market/getting-started/ 302
+/docs/plugins/capacitor-native-purchases/getting-started/ /docs/plugins/native-purchases/getting-started/ 302
+/docs/plugins/capacitor-native-purchases/getting-started /docs/plugins/native-purchases/getting-started/ 302
 /cloud/native-builds/certificates/android/ /docs/builder/android/ 302
 /cloud/native-builds/certificates/ios/ /docs/builder/ios/ 302
 # Legacy blog slug renames (with/without trailing slash + locales)
@@ -238,9 +250,6 @@
 /docs/plugins/updater/self-hosted/contributing.mdx /docs/plugins/updater/local-dev/contributing.mdx 301
 /.well-known/apple-app-site-association /deepLink/apple-app-site-association 200
 /.well-known/assetlinks.json /deepLink/assetlinks.json 200
-/en/* /:splat 301
-/docs/plugin/* /docs/plugins/updater/:splat 301
-
 
 # Legacy backlink recovery
 # Capawesome blog aliases (with/without trailing slash + locales)
@@ -280,6 +289,12 @@
 /ko/blog/capgo-vs-capawesome-comparing-ota-update-plugins/ /ko/capwesome/ 301
 /zh/blog/capgo-vs-capawesome-comparing-ota-update-plugins /zh/capwesome/ 301
 /zh/blog/capgo-vs-capawesome-comparing-ota-update-plugins/ /zh/capwesome/ 301
+
+# Bulk legacy blog slug renames live in apps/shared/legacyPathRedirects.ts
+# (web + translation workers). Do not re-add them here: CF _redirects has a 100 dynamic-rule
+# cap, and any splat earlier in this file makes later rules count as dynamic.
+# /en/* and /docs/plugin/* splats are handled in workers (not in this file).
+
 # Dynamic /blog/category/* and short /plugins/* recovery lives in apps/web/src/worker/index.ts
 /home / 301
 /home/ / 301

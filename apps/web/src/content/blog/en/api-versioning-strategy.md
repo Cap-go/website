@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-04T07:46:12.555Z
-updated_at: 2026-08-04T07:48:19.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/f4d68ff8-3865-4e6b-a68c-b2d99aaaf2f2/api-versioning-strategy-title-slide.jpg'
 head_image_alt: 'API Versioning Strategy: A Complete Decision Guide'
 keywords: 'api versioning, api versioning strategy, semver api, rest api, mobile api'
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You usually don't notice an **API versioning strategy** until a release breaks something that was working yesterday. A mobile app ships, a backend field gets renamed, the store review cycle drags, and support starts seeing the same complaint from users who haven't updated in weeks. That's the moment when “we'll just avoid breaking changes” stops being a plan and starts being an expense.

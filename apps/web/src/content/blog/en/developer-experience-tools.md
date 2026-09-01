@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-16T07:02:18.525Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/developer-experience-tools.webp
 head_image_alt: 10 Top Developer Experience Tools for 2026 Capgo blog illustration
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You usually notice a DevEx problem in the middle of a release. CI is backed up, signing only works on one laptop, a hotfix is blocked by app store review, and support cannot tell whether users are hitting an old bundle, a bad rollout, or a runtime bug. Sprint metrics rarely catch that early. The team feels it first.

@@ -9,13 +9,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-19T06:50:10.784Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/react-feature-flags.webp
 head_image_alt: '''React Feature Flags: A Complete Implementation Guide'' Capgo blog illustration'
 keywords: 'react feature flags, reactjs, feature management, devops, capacitorjs'
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've finished the feature. The pull request is clean. QA says it looks good. And you still don't want to ship it to everyone at once.

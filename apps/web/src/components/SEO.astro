@@ -3,6 +3,7 @@ import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
 import m from '@/copy/messages'
 import { generateAlternateVersions } from '@/lib/alternateVersions'
+import { ensureLdJsonContext } from '@/lib/ldJson'
 
 const rawLocale = (Astro.locals.locale || 'en').toString().toLowerCase()
 // Paraglide message functions use a narrower locale union than the app router.
@@ -188,4 +189,4 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta name="twitter:app:name:googleplay" content={appName} />
 
 <!-- @ts-ignore -->
-<script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ldJSON)} />
+<script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ensureLdJsonContext(ldJSON))} />

@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-06T09:02:15.053Z
-updated_at: 2026-08-06T09:04:35.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/647bcb9f-fc07-4787-8ee1-1f58a9f6a519/redundancy-failover-ci-cd.jpg'
 head_image_alt: Redundancy Failover Explained for Modern CI/CD
 keywords: 'redundancy failover, high availability, CI/CD resilience, mobile updates, Capacitor live updates'
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in the middle of a release when this problem shows up. The build is green, the mobile team is ready to push, and one edge node starts dropping traffic or a backend path gets weird enough to make the rollout unsafe. At that point, having “a backup” isn't the same as having a system that can keep serving users.

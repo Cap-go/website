@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-19T02:09:43.027Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/secure-storage-for-offline-tokens-in-capacitor.webp
 head_image_alt: "Secure Storage for Offline Tokens in Capacitor Capgo blog illustration"
 keywords: offline tokens, secure storage, AES-256 encryption, biometric authentication, token management
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

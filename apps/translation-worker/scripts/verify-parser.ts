@@ -55,6 +55,96 @@ const rendered = __translationWorkerTest.renderTranslatedHtml(parts, segments, t
 assert(rendered.includes('FR: Ship mobile updates instantly to every user'), 'Renderer did not write translated body text')
 assert(rendered.includes('current < total'), 'Renderer changed skipped script content')
 
+const staleTocTranslated = `<!doctype html>
+<html lang="de">
+  <head>
+    <title>App-Initialisierung</title>
+    <script type="application/ld+json" id="seo-schema-graph">{"headline":"App-Initialisierung","inLanguage":"de"}</script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js/v-stale" type="module"></script>
+    <script src="/_astro/page.old1234.js"></script>
+  </head>
+  <body>
+    <h1>App-Initialisierung Schritt für Schritt</h1>
+    <script id="capgo-edge-language-selector-hash">(() => { /* keep worker script */ })();</script>
+    <script type="module">
+      document.addEventListener("DOMContentLoaded",()=>{const l=()=>{const e=document.querySelectorAll("h1,h2,h3");for(const c of e){const i=c.getAttribute("id");i&&document.querySelector(\`#\${i}-link\`)?.classList.remove("text-white")}history.replaceState(null,"",window.location.hash)}});
+    </script>
+    <p>Übersetzter Anleitungstext bleibt erhalten.</p>
+  </body>
+</html>`
+const currentEnglish = `<!doctype html>
+<html lang="en">
+  <head>
+    <title>App initialization</title>
+    <script type="application/ld+json" id="seo-schema-graph">{"headline":"App initialization","inLanguage":"en"}</script>
+    <script src="/_astro/extra.aaa111.js"></script>
+    <script src="/_astro/page.new5678.js"></script>
+  </head>
+  <body>
+    <h1>Capacitor app initialization step by step</h1>
+    <script type="module">
+      document.addEventListener("DOMContentLoaded",()=>{const r=t=>document.getElementById(\`\${t}-link\`);let l=window.location.hash,i;const d=t=>{t!==l&&(i&&clearTimeout(i),i=setTimeout(()=>{history.replaceState(null,"",t)},150))}});
+    </script>
+    <p>Keep the English source article body out of the localized page.</p>
+  </body>
+</html>`
+const syncedFromEnglish = __translationWorkerTest.syncExecutableScriptsFromEnglish(staleTocTranslated, currentEnglish)
+assert(syncedFromEnglish.includes('App-Initialisierung Schritt für Schritt'), 'Script sync wiped translated visible copy')
+assert(syncedFromEnglish.includes('Übersetzter Anleitungstext bleibt erhalten.'), 'Script sync wiped translated body copy')
+assert(syncedFromEnglish.includes('"headline":"App-Initialisierung"'), 'Script sync replaced locale-specific JSON-LD')
+assert(syncedFromEnglish.includes('id="capgo-edge-language-selector-hash"'), 'Script sync dropped the worker-owned language selector script')
+assert(syncedFromEnglish.includes('getElementById(`${t}-link`)'), 'Script sync did not copy the current English TOC helper')
+assert(syncedFromEnglish.includes('setTimeout(') && syncedFromEnglish.includes('150'), 'Script sync did not copy the current English replaceState debounce')
+assert(!syncedFromEnglish.includes('querySelector(`#${i}-link`)'), 'Script sync left the stale digit-leading TOC querySelector')
+assert(syncedFromEnglish.includes('src="/_astro/page.new5678.js"'), 'Script sync did not replace the stale hashed English script src')
+assert(!syncedFromEnglish.includes('src="/_astro/page.old1234.js"'), 'Script sync left the stale hashed English script src')
+assert(syncedFromEnglish.includes('https://static.cloudflareinsights.com/beacon.min.js/v-stale'), 'Script sync removed an unmatched third-party script from the translated page')
+assert(syncedFromEnglish.includes('src="/_astro/extra.aaa111.js"'), 'Script sync dropped a newly added English script')
+const syncedHead = syncedFromEnglish.slice(0, syncedFromEnglish.indexOf('</head>'))
+const syncedHeadSrcs = [...syncedHead.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map((match) => match[1])
+const extraHeadIndex = syncedHeadSrcs.indexOf('/_astro/extra.aaa111.js')
+const pageHeadIndex = syncedHeadSrcs.indexOf('/_astro/page.new5678.js')
+assert(extraHeadIndex >= 0 && pageHeadIndex === extraHeadIndex + 1, 'Script sync did not insert the new English head script immediately before page.new5678.js')
+assert(
+  syncedFromEnglish.includes('https://static.cloudflareinsights.com/beacon.min.js/v-stale') && syncedFromEnglish.includes('src="/_astro/extra.aaa111.js"'),
+  'Script sync replaced an unmatched third-party script with a newly added English script',
+)
+assert(!syncedFromEnglish.includes('Keep the English source article body'), 'Script sync leaked current English visible copy')
+
+const extraTranslatedInline = __translationWorkerTest.syncExecutableScriptsFromEnglish(
+  `<!doctype html><html lang="de"><body><h1>Bleibt Deutsch</h1><script>window.staleExtra=1</script></body></html>`,
+  `<!doctype html><html lang="en"><body><h1>English only</h1></body></html>`,
+)
+assert(extraTranslatedInline.includes('Bleibt Deutsch'), 'Extra-inline fixture wiped translated copy')
+assert(extraTranslatedInline.includes('window.staleExtra=1'), 'Script sync removed an unmatched translated inline script')
+
+const extraEnglishInline = __translationWorkerTest.syncExecutableScriptsFromEnglish(
+  `<!doctype html><html lang="de"><body><h1>Bleibt Deutsch</h1></body></html>`,
+  `<!doctype html><html lang="en"><body><h1>English only</h1><script>window.capgoNewInline=1</script></body></html>`,
+)
+assert(extraEnglishInline.includes('Bleibt Deutsch'), 'Extra English inline fixture wiped translated copy')
+assert(
+  extraEnglishInline.includes('window.capgoNewInline=1') && extraEnglishInline.indexOf('window.capgoNewInline=1') < extraEnglishInline.indexOf('</body>'),
+  'Script sync did not insert an unmatched English inline script before </body>',
+)
+
+const extraBeforeEnglishInline = __translationWorkerTest.syncExecutableScriptsFromEnglish(
+  `<!doctype html><html lang="de"><body><h1>Bleibt Deutsch</h1><script>window.staleExtra=1</script><script type="module">document.querySelector(\`#\${i}-link\`)</script></body></html>`,
+  `<!doctype html><html lang="en"><body><h1>English only</h1><script type="module">document.getElementById(\`\${t}-link\`)</script></body></html>`,
+)
+assert(extraBeforeEnglishInline.includes('Bleibt Deutsch'), 'Preceding inline fixture wiped translated copy')
+assert(extraBeforeEnglishInline.includes('window.staleExtra=1'), 'Script sync replaced an unmatched translated inline that precedes the English TOC script')
+assert(extraBeforeEnglishInline.includes('getElementById(`${t}-link`)'), 'Script sync did not pair the English TOC script past a preceding unmatched inline')
+assert(!extraBeforeEnglishInline.includes('querySelector(`#${i}-link`)'), 'Script sync left the stale TOC script after a preceding unmatched inline')
+
+const sameTypeExtraBeforeEnglishInline = __translationWorkerTest.syncExecutableScriptsFromEnglish(
+  `<!doctype html><html lang="de"><body><h1>Bleibt Deutsch</h1><script>window.staleExtra=1</script><script>document.querySelector(\`#\${i}-link\`)</script></body></html>`,
+  `<!doctype html><html lang="en"><body><h1>English only</h1><script>document.getElementById(\`\${t}-link\`)</script></body></html>`,
+)
+assert(sameTypeExtraBeforeEnglishInline.includes('window.staleExtra=1'), 'Same-type leftover pairing dropped the unmatched translated inline')
+assert(sameTypeExtraBeforeEnglishInline.includes('getElementById(`${t}-link`)'), 'Same-type leftover pairing did not update the matching TOC script')
+assert(!sameTypeExtraBeforeEnglishInline.includes('querySelector(`#${i}-link`)'), 'Same-type leftover pairing left the stale TOC script')
+
 const titleSegmentIndex = segments.findIndex((segment) => segment.text.includes('Capgo - Live Updates for Capacitor Apps'))
 assert(titleSegmentIndex >= 0, 'Parser did not collect the title segment')
 const emptyTitleTranslations = segments.map((segment, index) => (index === titleSegmentIndex ? '' : segment.text))
@@ -62,6 +152,147 @@ const renderedEmptyTitleFallback = __translationWorkerTest.renderTranslatedHtml(
 assert(
   renderedEmptyTitleFallback.includes('<title>Capgo - Live Updates for Capacitor Apps</title>'),
   'Renderer did not preserve the source title when a translated title was empty',
+)
+
+const aboutContext = __translationWorkerTest.resolveTranslationContexts(['About'])[0]
+assert(typeof aboutContext === 'string' && aboutContext.includes('navigation'), 'Missing translation context for About')
+const pricingContext = __translationWorkerTest.resolveTranslationContexts(['Pricing'])[0]
+assert(typeof pricingContext === 'string' && pricingContext.toLowerCase().includes('pricing'), 'Missing translation context for Pricing')
+const updatesContext = __translationWorkerTest.resolveTranslationContexts(['Updates'])[0]
+assert(typeof updatesContext === 'string' && updatesContext.includes('updates_by_month'), 'HTML-split Updates segment did not keep parent pricing calculator context')
+const supportContext = __translationWorkerTest.resolveTranslationContexts(['Support'])[0]
+assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
+const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
+assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('nav-guard-dedupe-batch-v1'), 'Cache version was not bumped for nav guard + batch dedupe support')
+assert(
+  __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === 'Évitez l\u2019attente. Livrez la correction.',
+  'French elision did not fix "la attente"',
+)
+assert(
+  __translationWorkerTest.applyFrenchArticleElision('Évitez la attente de l\u2019App Store.') === 'Évitez l\u2019attente de l\u2019App Store.',
+  'French elision did not fix subtitle "la attente"',
+)
+assert(
+  __translationWorkerTest.applyFrenchArticleElision('la haute disponibilité et le héros') === 'la haute disponibilité et le héros',
+  'French elision must not touch aspirate-h words',
+)
+assert(__translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === 'Évitez l\u2019attente.', 'French polish path did not apply article elision')
+assert(__translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.', 'Non-French polish path should leave text unchanged')
+const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Skip the wait. Ship the fix.'])[0]
+assert(typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('hotfix'), 'Missing marketing context override for live update hero headline')
+
+const noTranslateHtml = `<!doctype html>
+<html lang="en">
+  <body>
+    <h1>Live Update delivery data</h1>
+    <p>Translate this chrome copy.</p>
+    <tbody translate="no"><tr><td>United States</td><td title="A long failure explanation that must stay intact">Download failure (46%)</td></tr></tbody>
+    <div class="notranslate"><p>Keep metrics English</p></div>
+    <p>Translate the trailing chrome too.</p>
+  </body>
+</html>`
+const noTranslateParsed = __translationWorkerTest.collectSegments(noTranslateHtml)
+const noTranslateBody = noTranslateParsed.segments.filter((segment) => segment.inBody).map((segment) => segment.text)
+assert(
+  noTranslateBody.some((text) => text.includes('Translate this chrome copy')),
+  'Parser skipped normal body copy near translate=no',
+)
+assert(
+  noTranslateBody.some((text) => text.includes('Translate the trailing chrome too')),
+  'Parser did not resume after translate=no',
+)
+assert(
+  noTranslateBody.every((text) => !text.includes('United States') && !text.includes('Download failure') && !text.includes('Keep metrics English')),
+  'Parser collected text from translate=no / notranslate regions',
+)
+assert(
+  noTranslateParsed.parts.some((part) => typeof part === 'string' && part.includes('United States') && part.includes('Download failure (46%)')),
+  'Parser did not preserve translate=no markup as raw HTML',
+)
+const noTranslateRaw = noTranslateParsed.parts.filter((part): part is string => typeof part === 'string').join('')
+assert(
+  noTranslateRaw.includes('class="notranslate"') && noTranslateRaw.includes('<p>Keep metrics English</p>') && noTranslateRaw.includes('</div>'),
+  'Parser did not preserve notranslate fragment as raw HTML',
+)
+
+const skipAttrHtml = `<!doctype html><html><body><section translate="no" title="Metric region label"><p>99%</p></section></body></html>`
+const skipAttrParsed = __translationWorkerTest.collectSegments(skipAttrHtml)
+assert(
+  !skipAttrParsed.segments.some((segment) => segment.mode === 'attribute' && segment.text.includes('Metric region label')),
+  'Parser collected translatable attributes from translate=no element',
+)
+
+const unquotedSkipHtml = `<!doctype html><html><body><section translate=no class=notranslate><p>Keep KPI English</p></section><p>Translate this chrome.</p></body></html>`
+const unquotedSkipParsed = __translationWorkerTest.collectSegments(unquotedSkipHtml)
+const unquotedSkipBody = unquotedSkipParsed.segments.filter((segment) => segment.inBody).map((segment) => segment.text)
+assert(
+  unquotedSkipBody.some((text) => text.includes('Translate this chrome')),
+  'Parser did not resume after unquoted translate=no',
+)
+assert(
+  unquotedSkipBody.every((text) => !text.includes('Keep KPI English')),
+  'Parser collected text from unquoted translate=no / notranslate regions',
+)
+
+assert(
+  __translationWorkerTest.translationLengthViolation(
+    'Deploy updates safely to every device',
+    'Deploy updates safely to every device with detailed guidance for all supported environments and release channels',
+  ),
+  'Length guard did not flag an overlong translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '全デバイスへ安全に配信', 'ja'),
+  'Length guard flagged a valid shorter Japanese translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '全デバイスへ安全に配信', 'Japanese'),
+  'Length guard flagged a valid shorter Japanese translation for production language name',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '모든 기기에 안전하게 배포', 'ko'),
+  'Length guard flagged a valid shorter Korean translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', '모든 기기에 안전하게 배포', 'Korean'),
+  'Length guard flagged a valid shorter Korean translation for production language name',
+)
+
+const quotedAttrFalsePositiveHtml = `<!doctype html><html><body><div data-note="translate=no"><p>Translate this paragraph.</p></div></body></html>`
+const quotedAttrFalsePositiveParsed = __translationWorkerTest.collectSegments(quotedAttrFalsePositiveHtml)
+assert(
+  quotedAttrFalsePositiveParsed.segments.some((segment) => segment.inBody && segment.text.includes('Translate this paragraph')),
+  'Parser skipped translatable text after translate=no substring inside quoted attribute value',
+)
+
+const unquotedHrefHtml = `<!doctype html><html><body><a href=/pricing/ tier>Plans</a></body></html>`
+const unquotedHrefParsed = __translationWorkerTest.collectSegments(unquotedHrefHtml)
+assert(
+  unquotedHrefParsed.parts.some((part) => typeof part === 'string' && part.includes('href=/pricing/')),
+  'Unquoted attribute scanner truncated / inside attribute values',
+)
+
+const unquotedTitleHtml = `<!doctype html><html><body><section title=Overview><p>99%</p></section></body></html>`
+const unquotedTitleParsed = __translationWorkerTest.collectSegments(unquotedTitleHtml)
+const unquotedTitleSegmentIndex = unquotedTitleParsed.segments.findIndex((segment) => segment.mode === 'attribute' && segment.text === 'Overview')
+assert(unquotedTitleSegmentIndex >= 0, 'Parser did not collect unquoted translatable title attribute')
+const unquotedTitleRendered = __translationWorkerTest.renderTranslatedHtml(
+  unquotedTitleParsed.parts,
+  unquotedTitleParsed.segments,
+  unquotedTitleParsed.segments.map((segment, index) => (index === unquotedTitleSegmentIndex ? 'Vue d\u2019ensemble' : segment.text)),
+)
+assert(unquotedTitleRendered.includes('title="Vue d\u2019ensemble"'), 'Rendered translation of unquoted attribute must quote values containing spaces')
+assert(
+  __translationWorkerTest.guardTranslatedBatchLengths(
+    ['Deploy updates safely to every device'],
+    ['Deploy updates safely to every device with detailed guidance for all supported environments and release channels'],
+  )[0] === 'Deploy updates safely to every device',
+  'Batch length guard did not fall back to source for overlong translation',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Deploy updates safely to every device', 'Déployez les mises à jour en toute sécurité'),
+  'Length guard flagged a reasonably sized translation',
 )
 
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
@@ -209,19 +440,44 @@ Object.defineProperty(globalThis, 'caches', {
 try {
   const storedTranslations = new Map<string, string>()
   const translationJobs: Array<Record<string, unknown>> = []
-  const sourceHtml = '<!doctype html><html lang="en"><head><title>Docs title</title></head><body><main><h1>Read our guides</h1></main></body></html>'
+  const sourceHtml = '<!doctype html><html lang="en"><head><title>Docs title</title></head><body><main><h1>Read our guides</h1><p>About</p></main></body></html>'
+  let capturedAiPayload: {
+    pagePath?: string
+    texts?: string[]
+    text?: string
+    items?: Array<{ text: string; context?: string }>
+  } | null = null
   const env = {
     AI: {
       run: async (_model: string, input: { messages: Array<{ content: string }> }) => {
         const lastMessage = input.messages[input.messages.length - 1]
-        const payload = JSON.parse(lastMessage?.content ?? '{}') as { texts?: string[] }
+        const payload = JSON.parse(lastMessage?.content ?? '{}') as {
+          pagePath?: string
+          texts?: string[]
+          text?: string
+          items?: Array<{ text: string; context?: string }>
+        }
+        capturedAiPayload = payload
+        assert(Array.isArray(payload.items), 'Translation AI request did not send items[] with context support')
+        assert(typeof payload.pagePath === 'string' && payload.pagePath.length > 0, 'Translation AI request missed pagePath')
+        assert(!payload.texts, 'Translation AI request still used legacy texts[] payload')
+
+        const aboutItem = payload.items.find((item) => item.text === 'About')
+        if (aboutItem) {
+          assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
+        }
+
+        const translateText = (text: string) => {
+          if (text.includes('Read our guides')) return 'Leggi le guide'
+          if (text.includes('Docs title')) return 'Titolo doc'
+          if (text === 'About') return 'Chi siamo'
+          return 'IT ' + text
+        }
+
+        const sourceTexts = payload.items.map((item) => item.text)
         return {
           response: JSON.stringify({
-            translations: (payload.texts ?? []).map((text) => {
-              if (text.includes('Read our guides')) return 'Leggi le nostre guide'
-              if (text.includes('Docs title')) return 'Titolo documentazione'
-              return 'IT ' + text
-            }),
+            translations: sourceTexts.map((text) => translateText(text)),
           }),
         }
       },
@@ -275,11 +531,165 @@ try {
   assert(translationJobs.length === 1, 'A HEAD translation cache miss enqueued a duplicate localized document')
 
   await worker.queue({ messages: [{ body: translationJobs[0] as any }] }, env as any)
+  assert(capturedAiPayload !== null, 'Translation AI mock never received a request payload')
+  assert(Array.isArray(capturedAiPayload.items), 'Queued translation did not send items[]')
+  assert(capturedAiPayload.pagePath === '/it/docs/', 'Queued translation used the wrong pagePath')
+  const aboutItem = capturedAiPayload.items?.find((item) => item.text === 'About')
+  assert(aboutItem?.context?.includes('navigation'), 'Queued translation missed About context')
+
   const translatedResponse = await worker.fetch(request, env as any)
+  const translatedHtml = await translatedResponse.text()
 
   assert(translatedResponse.status === 200, 'A completed cache-miss translation was not served successfully')
   assert(translatedResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A completed cache-miss translation was not cached')
-  assert((await translatedResponse.text()).includes('Leggi le nostre guide'), 'A completed cache-miss translation did not contain the translated document')
+  assert(translatedHtml.includes('Leggi le guide'), 'A completed cache-miss translation did not contain the translated document')
+  assert(translatedHtml.includes('Chi siamo'), 'A completed cache-miss translation did not keep context-backed About copy')
+
+  const staleBlogUrl = new URL('https://capgo.app/de/blog/capacitor-app-initialization-step-by-step-guide/')
+  const staleBlogCacheKey = __translationWorkerTest.cacheKeyFor(staleBlogUrl, 'de')
+  const staleBlogHtml = `<!doctype html>
+<html lang="de">
+  <head>
+    <title>App-Initialisierung</title>
+    <script type="application/ld+json" id="seo-schema-graph">{"headline":"App-Initialisierung"}</script>
+  </head>
+  <body>
+    <h1>App-Initialisierung Schritt für Schritt</h1>
+    <script type="module">document.querySelector(\`#\${i}-link\`);history.replaceState(null,"",window.location.hash);</script>
+    <p>Übersetzter Anleitungstext bleibt erhalten.</p>
+  </body>
+</html>`
+  const currentBlogHtml = `<!doctype html>
+<html lang="en">
+  <head>
+    <title>App initialization</title>
+    <script type="application/ld+json" id="seo-schema-graph">{"headline":"App initialization"}</script>
+  </head>
+  <body>
+    <h1>Capacitor app initialization step by step</h1>
+    <script type="module">const r=t=>document.getElementById(\`\${t}-link\`);setTimeout(()=>history.replaceState(null,"",t),150);</script>
+    <p>English source copy must stay off the localized response.</p>
+  </body>
+</html>`
+  cacheEntries.set(
+    staleBlogCacheKey.url,
+    new Response(staleBlogHtml, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Capgo-Translated-At': String(Date.now() - 48 * 60 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': 'b'.repeat(64),
+      },
+    }),
+  )
+  let blogOriginFetches = 0
+  const blogEnv = {
+    ...env,
+    WEB: {
+      fetch: async () => {
+        blogOriginFetches += 1
+        return new Response(currentBlogHtml, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+      },
+    },
+    DOCS: {
+      fetch: async () => {
+        throw new Error('The blog request unexpectedly used the docs origin')
+      },
+    },
+  }
+  const staleBlogResponse = await worker.fetch(new Request(staleBlogUrl), blogEnv as any)
+  const staleBlogBody = await staleBlogResponse.text()
+  assert(staleBlogResponse.status === 200, 'A stale localized blog was not served successfully')
+  assert(staleBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'STALE', 'A stale localized blog did not report STALE')
+  assert(staleBlogResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A stale localized blog did not sync current English scripts')
+  assert(staleBlogBody.includes('App-Initialisierung Schritt für Schritt'), 'Script sync on STALE wipe translated heading')
+  assert(staleBlogBody.includes('Übersetzter Anleitungstext bleibt erhalten.'), 'Script sync on STALE wipe translated paragraph')
+  assert(staleBlogBody.includes('"headline":"App-Initialisierung"'), 'Script sync on STALE replaced translated JSON-LD')
+  assert(staleBlogBody.includes('getElementById(`${t}-link`)'), 'STALE localized blog did not receive the current English TOC helper')
+  assert(staleBlogBody.includes('150'), 'STALE localized blog did not receive the current English replaceState debounce')
+  assert(!staleBlogBody.includes('querySelector(`#${i}-link`)'), 'STALE localized blog kept the stale TOC querySelector')
+  assert(!staleBlogBody.includes('English source copy must stay off the localized response.'), 'STALE script sync leaked current English copy')
+  const staleBlogHead = await worker.fetch(new Request(staleBlogUrl, { method: 'HEAD' }), blogEnv as any)
+  assert((await staleBlogHead.text()) === '', 'A HEAD stale localized blog returned a body')
+  assert(staleBlogHead.headers.get('X-Capgo-Translation-Cache') === 'STALE', 'A HEAD stale localized blog lost its cache state')
+
+  const freshBlogUrl = new URL('https://capgo.app/de/blog/fresh-hit-script-skip/')
+  cacheEntries.set(
+    __translationWorkerTest.cacheKeyFor(freshBlogUrl, 'de').url,
+    new Response(staleBlogHtml, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Capgo-Translated-At': String(Date.now()),
+        'X-Capgo-Translation-Source-Hash': 'c'.repeat(64),
+      },
+    }),
+  )
+  cacheEntries.set(__translationWorkerTest.sourceCheckKeyFor(freshBlogUrl, 'de').url, new Response('already-checked'))
+  let freshOriginFetches = 0
+  const freshBlogEnv = {
+    ...env,
+    WEB: {
+      fetch: async () => {
+        freshOriginFetches += 1
+        throw new Error('A fresh HIT unexpectedly fetched the English origin')
+      },
+    },
+    DOCS: {
+      fetch: async () => {
+        throw new Error('A fresh HIT unexpectedly used the docs origin')
+      },
+    },
+  }
+  const freshBlogResponse = await worker.fetch(new Request(freshBlogUrl), freshBlogEnv as any)
+  const freshBlogBody = await freshBlogResponse.text()
+  assert(freshBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A fresh localized blog did not report HIT')
+  assert(freshBlogResponse.headers.get('X-Capgo-Translation-Scripts') !== 'synced', 'A fresh HIT synced scripts on the response path')
+  assert(freshBlogBody.includes('querySelector(`#${i}-link`)'), 'A fresh HIT should keep cached scripts inside the source-check window')
+  assert(freshOriginFetches === 0, 'A fresh HIT fetched the English origin on the response path')
+
+  const agedHitUrl = new URL('https://capgo.app/de/blog/aged-hit-script-sync/')
+  cacheEntries.set(
+    __translationWorkerTest.cacheKeyFor(agedHitUrl, 'de').url,
+    new Response(staleBlogHtml, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Capgo-Translated-At': String(Date.now() - 10 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': 'd'.repeat(64),
+      },
+    }),
+  )
+  const fetchesBeforeAgedHit = blogOriginFetches
+  const agedHitResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
+  const agedHitBody = await agedHitResponse.text()
+  assert(agedHitResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A 10-minute HIT did not report HIT')
+  assert(agedHitResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A 10-minute HIT with a source-hash mismatch did not sync scripts')
+  assert(agedHitBody.includes('getElementById(`${t}-link`)'), 'A 10-minute HIT did not receive the current English TOC helper')
+  assert(!agedHitBody.includes('querySelector(`#${i}-link`)'), 'A 10-minute HIT kept the stale TOC querySelector')
+  assert(blogOriginFetches === fetchesBeforeAgedHit + 1, 'A 10-minute HIT loaded the English source more than once')
+  const fetchesAfterAgedHit = blogOriginFetches
+  const agedHitReuseResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
+  assert(agedHitReuseResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A repeated 10-minute HIT lost script sync')
+  assert(blogOriginFetches === fetchesAfterAgedHit, 'A repeated 10-minute HIT did not reuse the cached English source')
+
+  const jsonHitUrl = new URL('https://capgo.app/de/blog/json-hit-skip-script-sync/')
+  cacheEntries.set(__translationWorkerTest.sourceCheckKeyFor(jsonHitUrl, 'de').url, new Response('already-checked'))
+  cacheEntries.set(
+    __translationWorkerTest.cacheKeyFor(jsonHitUrl, 'de').url,
+    new Response('{"ok":true}', {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Capgo-Translated-At': String(Date.now() - 10 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': 'e'.repeat(64),
+      },
+    }),
+  )
+  const fetchesBeforeJsonHit = blogOriginFetches
+  const jsonHitResponse = await worker.fetch(new Request(jsonHitUrl), blogEnv as any)
+  const jsonHitBody = await jsonHitResponse.text()
+  assert(jsonHitResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A cached JSON HIT did not report HIT')
+  assert(jsonHitResponse.headers.get('X-Capgo-Translation-Scripts') !== 'synced', 'A cached JSON HIT entered HTML script sync')
+  assert(jsonHitBody === '{"ok":true}', 'A cached JSON HIT was rewritten as HTML')
+  assert(fetchesBeforeJsonHit === blogOriginFetches, 'A cached JSON HIT fetched the English origin')
+  await new Promise((resolve) => setTimeout(resolve, 25))
 
   const originalConsoleError = console.error
   let enqueueFailureResponse: Response | null = null
@@ -300,6 +710,86 @@ try {
   assert(enqueueFailureResponse.status === 302, 'A failed translation enqueue did not use the safe English fallback')
   assert(enqueueFailureResponse.headers.get('Location') === '/docs/', 'A failed translation enqueue redirected to the wrong English document')
   assert(enqueueFailureResponse.headers.get('X-Capgo-Translation-Fallback') === 'temporary-english-redirect', 'A failed translation enqueue kept retrying without a queued job')
+
+  const headerNavHtml = `<!doctype html><html><body>
+<!-- Enterprise -->
+<a href="/enterprise/" aria-label="Enterprise">Enterprise</a>
+<!-- Pricing -->
+<a href="/pricing/" aria-label="Pricing">Pricing</a>
+<!-- Blog -->
+<a href="/blog/" aria-label="Blog">Blog</a>
+<p>Ship updates to your users without waiting for app store review cycles.</p>
+<p>Deploy fixes and features to every user instantly.</p>
+</body></html>`
+  const headerNavParsed = __translationWorkerTest.collectSegments(headerNavHtml)
+  const navGuardSegments = headerNavParsed.segments.filter((segment) => __translationWorkerTest.isNavGuardSegment(segment))
+  assert(navGuardSegments.length === 6, 'Header nav parser did not collect guarded pricing/blog/enterprise segments')
+  assert(
+    navGuardSegments.every((segment) => segment.anchorPath && segment.text),
+    'Header nav guarded segments missed anchor binding',
+  )
+
+  const navGuardBatches = __translationWorkerTest.buildBatches(headerNavParsed.segments)
+  const guardedTexts = new Set(navGuardSegments.map((segment) => segment.text))
+  assert(
+    navGuardBatches.every((batch) => (batch.length === 1 ? true : batch.every((text) => !guardedTexts.has(text)))),
+    'Header nav guarded segments were not isolated into single-item batches',
+  )
+  assert(
+    navGuardBatches.some((batch) => batch.length > 1),
+    'Header nav fixture did not exercise the shared batching path',
+  )
+
+  const dedupedBatch = __translationWorkerTest.dedupeBatchForTranslation(['Enterprise', 'Pricing', 'Blog', 'Enterprise', 'Pricing', 'Blog'])
+  assert(dedupedBatch.uniqueBatch.length === 3, 'Batch dedupe did not collapse repeated nav labels')
+  assert(
+    __translationWorkerTest.expandDedupedBatchTranslations(['Entreprise', 'Prix', 'Blogue'], dedupedBatch.expandIndexes).join('|') ===
+      'Entreprise|Prix|Blogue|Entreprise|Prix|Blogue',
+    'Batch dedupe did not expand unique translations back to the original order',
+  )
+
+  const correctNavTranslations = headerNavParsed.segments.map((segment) => {
+    if (segment.text === 'Enterprise') return 'Entreprise'
+    if (segment.text === 'Pricing') return 'Prix'
+    if (segment.text === 'Blog') return 'Blogue'
+    return segment.text
+  })
+  __translationWorkerTest.assertNavSegmentTranslationGuard(headerNavParsed.segments, correctNavTranslations)
+  const correctNavRendered = __translationWorkerTest.renderTranslatedHtml(headerNavParsed.parts, headerNavParsed.segments, correctNavTranslations)
+  __translationWorkerTest.assertRenderedNavLinkIntegrity(headerNavHtml, correctNavRendered)
+
+  const swappedNavTranslations = headerNavParsed.segments.map((segment) => {
+    if (segment.text === 'Enterprise') return 'Entreprise'
+    if (segment.text === 'Pricing') return 'Entreprise'
+    if (segment.text === 'Blog') return 'Prix'
+    return segment.text
+  })
+  let navGuardRejected = false
+  try {
+    __translationWorkerTest.assertNavSegmentTranslationGuard(headerNavParsed.segments, swappedNavTranslations)
+  } catch {
+    navGuardRejected = true
+  }
+  assert(navGuardRejected, 'Nav translation guard did not reject collapsed Enterprise/Pricing labels')
+
+  const swappedNavRendered = __translationWorkerTest.renderTranslatedHtml(headerNavParsed.parts, headerNavParsed.segments, swappedNavTranslations)
+  let renderedNavIntegrityRejected = false
+  try {
+    __translationWorkerTest.assertRenderedNavLinkIntegrity(headerNavHtml, swappedNavRendered)
+  } catch {
+    renderedNavIntegrityRejected = true
+  }
+  assert(renderedNavIntegrityRejected, 'Rendered nav integrity check did not reject pricing/blog label overlap')
+
+  const skippedAnchorHtml = `<!doctype html><html><body>
+<a href="/pricing/" translate="no">Pricing</a>
+<p>Pricing</p>
+</body></html>`
+  const skippedAnchorParsed = __translationWorkerTest.collectSegments(skippedAnchorHtml)
+  assert(
+    skippedAnchorParsed.segments.filter((segment) => __translationWorkerTest.isNavGuardSegment(segment)).length === 0,
+    'Skipped anchor text must not bind later body text to the pricing nav path',
+  )
 } finally {
   if (originalCaches) {
     Object.defineProperty(globalThis, 'caches', originalCaches)

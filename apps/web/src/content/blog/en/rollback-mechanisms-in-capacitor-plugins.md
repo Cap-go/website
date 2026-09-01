@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-05T02:56:05.350Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/rollback-mechanisms-in-capacitor-plugins.webp
 head_image_alt: "Rollback Mechanisms in Capacitor Plugins Capgo blog illustration"
 keywords: Capacitor plugins, rollback mechanisms, version control, update stability, monitoring framework
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

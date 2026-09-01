@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-26T07:20:25.523Z
-updated_at: 2026-07-30T23:40:43.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/what-is-soc-2-certification.webp
 head_image_alt: '''What Is SOC 2 Certification: Your 2026 Guide'' Capgo blog illustration'
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Security, Product'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your largest prospect is ready to move. Security review starts, procurement sends the questionnaire, and one item stops the deal cold: “Please provide your SOC 2 report.”

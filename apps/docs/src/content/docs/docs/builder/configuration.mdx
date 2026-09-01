@@ -95,14 +95,16 @@ All three fields are required together. The numeric `APPLE_APP_ID` (found in App
 | CLI Flag | Env Variable | Credential Key | Default | Description |
 |----------|-------------|----------------|---------|-------------|
 | `--play-config-json <json>` | `PLAY_CONFIG_JSON` | `PLAY_CONFIG_JSON` | — | Base64-encoded Google Play service account JSON key |
-| _(env only)_ | `PLAY_STORE_TRACK` | — | `internal` | Google Play release track (`internal`, `alpha`, `beta`, `production`) |
-| _(env only)_ | `PLAY_STORE_RELEASE_STATUS` | — | `draft` | Release status on the chosen track (`draft`, `completed`, `inProgress`, `halted`) |
+| `--android-track <track>` | `PLAY_STORE_TRACK` | `PLAY_STORE_TRACK` | `internal` (or `production` with `--submit-to-store-review`) | Google Play release track (`internal`, `alpha`, `beta`, `production`). Forwarded from CI env / CLI into the build runner. |
+| `--android-release-status <status>` | `PLAY_STORE_RELEASE_STATUS` | `PLAY_STORE_RELEASE_STATUS` | `draft` (or `completed` with `--submit-to-store-review`) | Release status on the chosen track (`draft`, `completed`, `inProgress`, `halted`). Explicit values override the `--submit-to-store-review` default. |
 
 ### Android Build Settings
 
 | CLI Flag | Default | Description |
 |----------|---------|-------------|
 | `--android-flavor <flavor>` | — | Product flavor to build (e.g. `production`). **Required** if your project defines multiple flavors. |
+| `--android-track <track>` | `internal` | Google Play track for this upload. With `--submit-to-store-review` and no track set, Capgo defaults to `production`. |
+| `--android-release-status <status>` | `draft` | Google Play release status. With `--submit-to-store-review` and no status set, Capgo defaults to `completed`. |
 | `--in-app-update-priority <0–5>` | — | Google Play in-app update priority for this release (higher = more urgent). |
 | `--no-playstore-upload` | — | Build and sign, but skip the Play Store upload (requires `--output-upload`). |
 

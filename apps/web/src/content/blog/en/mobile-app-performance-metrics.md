@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-23T09:16:01.880Z
-updated_at: 2026-07-23T09:18:09.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/720cb348-948f-40a3-9418-66956ac9dc29/mobile-app-performance-metrics-title-graphic.jpg'
 head_image_alt: Mastering Mobile App Performance Metrics for 2026
 keywords: 'mobile app performance metrics, app performance, capacitorjs, mobile analytics, user experience'
 tag: 'Mobile, Best Practices, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're staring at a dashboard that looks fine, yet support tickets keep piling up and the App Store reviews say the same thing in different words, **“slow,” “buggy,” “freezes,”** and **“won't load.”** That's the trap with mobile apps, the user only feels the pain, while the team has to turn that feeling into signals they can act on.

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-18T09:04:54.462Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/user-adoption-metrics.webp
 head_image_alt: '''User Adoption Metrics: The Definitive Guide for 2026'' Capgo blog illustration'
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Product, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your dashboard says the launch worked. Signups came in, logins spiked, and the team feels relieved.

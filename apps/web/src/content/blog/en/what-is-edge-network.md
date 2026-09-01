@@ -9,13 +9,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-16T08:21:18.437Z
-updated_at: 2026-07-30T23:40:43.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/what-is-edge-network.webp
 head_image_alt: '''What Is Edge Network: A 2026 Guide to Faster Apps'' Capgo blog illustration'
 keywords: 'what is edge network, edge network, edge computing, cdn vs edge, low latency'
 tag: 'Mobile, Technology, Alternatives'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your mobile app is working fine in your local testing. Users in London open it and everything feels snappy. Users in Tokyo open the same version and complain that startup is sluggish, updates take too long, and some content feels delayed. You didn't change the app for one region and not the other. The difference is distance.

@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-07T07:24:09.210Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/open-source-advantages.webp
 head_image_alt: Open Source Advantages for Modern Software Teams Capgo blog illustration
 keywords: >-
@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, Capacitor, Open Source'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in one of two situations right now. Either your team is choosing between a polished proprietary tool and an open-source stack that looks powerful but harder to operate, or you're already using open source everywhere and need a clearer answer to a tougher question: when does it prove advantageous, and when does it shift responsibilities to your team?

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-03T07:30:28.903Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/expo-development-client.webp
 head_image_alt: Your Guide to the Expo Development Client Capgo blog illustration
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Guides'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're usually ready for the Expo development client at the exact moment Expo Go starts lying to you.

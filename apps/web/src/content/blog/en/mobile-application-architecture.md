@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-25T07:29:20.457Z
-updated_at: 2026-07-25T07:31:39.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/bfbb30ae-b1db-44c1-991a-1aaac4675629/mobile-application-architecture-title-slide.jpg'
 head_image_alt: 'Mobile Application Architecture: A Practical 2026 Guide'
 keywords: 'mobile architecture, app design, MVVM, offline sync, live updates'
 tag: 'Mobile, Updates, Technology'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your team's app is shipping, but every release feels heavier than the last. A hotfix goes out on Monday, then support starts seeing weird behavior on two unrelated screens because the same business rule was copied into three view controllers, one store, and a helper that nobody trusts anymore. That's usually the moment a team lead stops thinking about mobile application architecture as a code style debate and starts seeing it for what it is, a delivery system that shapes cost, speed, and recovery.

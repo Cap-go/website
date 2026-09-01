@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-13T03:37:11.567Z
-updated_at: 2026-06-23T15:58:31.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/5-steps-to-deploy-hotfixes-with-capgo.webp
 head_image_alt: "5 Steps to Deploy Hotfixes with Capgo Capgo blog illustration"
 keywords: hotfix deployment, Capgo, app updates, CI/CD tools, mobile development
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

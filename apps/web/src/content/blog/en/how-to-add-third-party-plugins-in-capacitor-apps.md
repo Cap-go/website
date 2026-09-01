@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-18T14:04:24.780Z
-updated_at: 2026-06-18T11:13:52.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/how-to-add-third-party-plugins-in-capacitor-apps.webp
 head_image_alt: "How to Add Third-Party Plugins in Capacitor Apps Capgo blog illustration"
 keywords: Capacitor, third-party plugins, mobile app development, plugin installation, app updates
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

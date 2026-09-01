@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-13T08:04:34.421Z
-updated_at: 2026-06-18T10:44:00.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/ultimate-guide-to-ota-update-security-for-capacitor-apps.webp
 head_image_alt: "Ultimate Guide to OTA Update Security for Capacitor Apps Capgo blog illustration"
 keywords: OTA updates, security, encryption, mobile apps, compliance, data protection, update integrity, app store rules
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

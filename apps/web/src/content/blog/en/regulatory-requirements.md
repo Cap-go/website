@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-16T09:23:07.982Z
-updated_at: 2026-07-16T09:25:23.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/6c1160e9-d282-43fd-a178-68ef3ca8762d/regulatory-requirements-capacitor-electron.jpg'
 head_image_alt: Capacitor & Electron App Regulatory Requirements
 keywords: 'regulatory requirements, app compliance, capacitorjs, electron js, gdpr compliance'
 tag: 'Mobile, Security, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Your team has a fix ready. QA signed off. Support is waiting because the bug is hurting real users. Then someone from legal, security, or procurement asks a question that stops the release cold: “Can we prove this update is compliant?”

@@ -8,13 +8,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /blog-images/policy-safe-live-updates.webp
 head_image_alt: "How to update Capacitor JS apps without repeat store review Capgo blog illustration"
 keywords: Apple App Store, Google Play, Capacitor, Capgo, OTA updates, live updates, app store review
 tag: Tutorial
 published: true
 locale: en
+origin: human
 next_blog: app-store-vs-direct-updates-what-developers-need-to-know
 ---
 

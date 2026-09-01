@@ -8,13 +8,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /native_app_look.webp
 head_image_alt: "Basic JS and CSS Configurations for a Native App Look Capgo blog illustration"
 keywords: tailwind css, css, mobile design, mobile app development
 tag: Web Development
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

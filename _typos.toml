@@ -1,5 +1,7 @@
 [files]
 extend-exclude = [
+    # Historical localized blog slug keys (intentional foreign-language path aliases)
+    "apps/shared/legacyPathRedirects.ts",
     "public/**/*_tye.png",
     "apps/web/public/**/*_tye.png",
     "apps/docs/public/**/*_tye.png",
@@ -27,6 +29,7 @@ extend-ignore-re = [
 # These are proper names, not typos
 Longe = "Longe"
 Damon = "Damon"
+Synopsys = "Synopsys"
 
 # Acronyms and technical terms
 ASO = "ASO"  # App Store Optimization
@@ -45,6 +48,8 @@ RTO = "RTO"  # Recovery Time Objective
 Sanbox = "Sanbox"  # Legacy copy key kept for runtime compatibility
 framworks = "framworks"  # Legacy copy key kept for runtime compatibility
 youre = "youre"  # Legacy copy key kept for runtime compatibility
+Entreprise = "Entreprise"  # French nav label used in translation-worker regression tests
+Blogue = "Blogue"  # French nav label used in translation-worker regression tests
 
 # OpenSSL command flags
 passin = "passin"  # OpenSSL password input flag

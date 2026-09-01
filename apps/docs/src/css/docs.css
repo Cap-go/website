@@ -15,7 +15,24 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  /* background-color: var(--sl-color-black); */
+}
+
+/* Match landing: navy + blue radial at the top, charcoal after the first screen. */
+:root:not([data-theme='light']) {
+  --sl-color-black: #1a1a1a;
+  --sl-color-bg: #1a1a1a;
+  --page-bg-gradient-dark:
+    radial-gradient(1100px 640px at 50% -80px, rgba(59, 130, 246, 0.22) 0%, transparent 72%), linear-gradient(180deg, #0d1525 0%, #0d1525 58vh, #1a1a1a 100vh);
+}
+
+:root:not([data-theme='light']),
+:root:not([data-theme='light']) body {
+  background-color: #1a1a1a;
+}
+
+:root:not([data-theme='light']) body {
+  background-image: var(--page-bg-gradient-dark);
+  background-repeat: no-repeat;
 }
 
 @theme {
@@ -340,40 +357,9 @@ body,
   object-fit: contain;
 }
 
-/* Main page background with gradient overlay */
 .sl-markdown-content,
 .main-frame {
   position: relative;
-}
-
-/* Background gradient layer for dark mode - scrolls with page */
-:root:not([data-theme='light']) .main-frame::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: 100vh;
-  background: var(--page-bg-gradient-dark);
-  backdrop-filter: blur(80px);
-  -webkit-backdrop-filter: blur(80px);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Background gradient layer for light mode - scrolls with page */
-:root[data-theme='light'] .main-frame::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: 100vh;
-  background: var(--page-bg-gradient-light);
-  backdrop-filter: blur(80px);
-  -webkit-backdrop-filter: blur(80px);
-  pointer-events: none;
-  z-index: -1;
 }
 
 /* Sidebar transparent to show gradient - desktop only to prevent mobile overlay being see-through */
@@ -394,9 +380,16 @@ body,
   }
 }
 
-/* Top navigation bar - solid gray-900 background for both modes */
+/* Header sits on the body wash in dark mode (no navy/charcoal seam). Light mode keeps a solid bar for the light logo. */
 .header {
   background-color: #111827 !important;
+}
+
+:root:not([data-theme='light']) .header {
+  background-color: #0d1525 !important;
+  background-image: radial-gradient(1100px 640px at 50% -80px, rgba(59, 130, 246, 0.22) 0%, transparent 72%) !important;
+  background-repeat: no-repeat !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 .header #language-menu-button {

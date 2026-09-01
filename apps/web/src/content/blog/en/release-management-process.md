@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-30T09:47:06.870Z
-updated_at: 2026-07-30T09:49:33.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/4efc3c37-a5b7-42be-b6fd-b3033c269eb3/release-management-process-title-card.jpg'
 head_image_alt: 'Release Management Process: A Complete Guide'
 keywords: 'release management process, release management, CI/CD release, software deployment, OTA updates'
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Friday afternoon is when release managers earn their coffee. The build passed, the deploy job finished cleanly, and the dashboard says the new version is live. Then support pings the channel because users are still seeing the old behavior on mobile, or only a slice of users got the change because the actual release path sits behind app-store review, feature flags, or an OTA channel nobody outside engineering thinks about until it breaks.

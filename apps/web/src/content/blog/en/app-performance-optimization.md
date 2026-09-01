@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-28T07:24:57.222Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/app-performance-optimization.webp
 head_image_alt: App Performance Optimization for Capacitor & Electron Capgo blog illustration
 keywords: >-
@@ -18,6 +18,7 @@ keywords: >-
 tag: 'Mobile, Best Practices, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You probably know the trigger. A tester says the app feels “janky.” Support forwards a review calling startup slow. Product asks why a simple list scroll stutters on one Android device but looks fine on your iPhone and desktop build. Nothing is fully broken, yet the app feels heavier than it should.

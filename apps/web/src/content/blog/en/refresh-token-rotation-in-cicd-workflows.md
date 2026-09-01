@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-12T04:31:38.871Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/refresh-token-rotation-in-cicd-workflows.webp
 head_image_alt: "Refresh Token Rotation in CI/CD Workflows Capgo blog illustration"
 keywords: token rotation, CI/CD security, refresh tokens, credential management, secure deployments
 tag: Development, Security, Technology
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-14T05:13:56.152Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/biometric-authentication-in-capacitor-apps.webp
 head_image_alt: "Biometric Authentication in Capacitor Apps Capgo blog illustration"
 keywords: biometric authentication, Capacitor, mobile security, fingerprint, facial recognition, app development
 tag: Development, Mobile, Security
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

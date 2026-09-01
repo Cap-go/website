@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-28T08:32:55.674Z
-updated_at: 2026-06-28T08:35:32.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/ce0969bc-bd14-4f02-a7be-0333fbec5563/ionic-app-deployment-guide.jpg'
 head_image_alt: 'Ionic App Deployment: A Complete Guide for 2026'
 keywords: 'ionic app deployment, capacitor deployment, pwa hosting, ci/cd mobile apps, capgo live updates'
 tag: 'Mobile, Updates, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You've finished the app. It runs cleanly in the browser, the UI feels right, and the core flows are stable. Then deployment shows up and turns a straightforward Ionic project into three different release tracks, each with its own tooling, signing rules, review process, and update strategy.

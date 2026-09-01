@@ -2,6 +2,8 @@
 import Blog from '@/components/Blog.astro'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
+import type { BlogOrigin } from '@/lib/blog'
+import { getBlogListingBasePath } from '@/lib/blog'
 import type { CollectionEntry } from 'astro:content'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { slug as slugify } from 'github-slugger'
@@ -10,14 +12,18 @@ const {
   allPosts,
   categorySourcePosts = allPosts,
   currentCategory,
+  listingOrigin = 'human',
 } = Astro.props as {
   allPosts: CollectionEntry<'blog'>[]
   categorySourcePosts?: CollectionEntry<'blog'>[]
   currentCategory?: string
+  listingOrigin?: BlogOrigin
 }
 
 const config = Astro.locals.runtimeConfig
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string } = {}
+const listingBasePath = getBlogListingBasePath(listingOrigin)
+const isArticlesListing = listingOrigin === 'ai'
 
 const posts = [...allPosts].sort((a, b) => (new Date(a.data.created_at) > new Date(b.data.created_at) ? -1 : 1))
 
@@ -32,18 +38,26 @@ categorySourcePosts.forEach((article) =>
 const categories = Array.from(tagCounts.entries()).sort(([a], [b]) => a.localeCompare(b))
 const currentCategorySlug = currentCategory ? slugify(currentCategory) : undefined
 
-if (Astro.locals.runtimeConfig.public.blog_title) content['title'] = Astro.locals.runtimeConfig.public.blog_title
-if (Astro.locals.runtimeConfig.public.blog_keywords) content['keywords'] = Astro.locals.runtimeConfig.public.blog_keywords
-if (Astro.locals.runtimeConfig.public.blog_description) content['description'] = Astro.locals.runtimeConfig.public.blog_description
+if (isArticlesListing) {
+  content.title = m.articles_title({}, { locale: Astro.locals.locale })
+  content.description = m.articles_description({}, { locale: Astro.locals.locale })
+} else {
+  if (Astro.locals.runtimeConfig.public.blog_title) content.title = Astro.locals.runtimeConfig.public.blog_title
+  if (Astro.locals.runtimeConfig.public.blog_keywords) content.keywords = Astro.locals.runtimeConfig.public.blog_keywords
+  if (Astro.locals.runtimeConfig.public.blog_description) content.description = Astro.locals.runtimeConfig.public.blog_description
+}
+
+const pageHeading = isArticlesListing ? m.latest_from_articles({}, { locale: Astro.locals.locale }) : m.latest_from_the_blog({}, { locale: Astro.locals.locale })
+const pageDescription = isArticlesListing ? m.articles_description({}, { locale: Astro.locals.locale }) : config.public.blog_description
 ---
 
 <Layout {content}>
-  <div class="flex w-full flex-col items-center py-8">
+  <div class="product-hero flex w-full flex-col items-center py-8">
     <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
       <header class="max-w-3xl">
-        <h1 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">{m.latest_from_the_blog({}, { locale: Astro.locals.locale })}</h1>
+        <h1 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">{pageHeading}</h1>
         <h2 class="mt-2 text-base leading-relaxed text-gray-50">
-          {config.public.blog_description}
+          {pageDescription}
         </h2>
       </header>
 
@@ -79,13 +93,13 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
               aria-label="Filter articles by category"
               class="h-12 w-full appearance-none rounded-lg border border-gray-700/80 bg-gray-950/70 px-4 pr-10 text-base text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none"
             >
-              <option value={getRelativeLocaleUrl(Astro.locals.locale, `blog`)} selected={!currentCategory}>All articles ({categorySourcePosts.length})</option>
+              <option value={getRelativeLocaleUrl(Astro.locals.locale, listingBasePath)} selected={!currentCategory}>All articles ({categorySourcePosts.length})</option>
               {
                 categories.map(([category, count]) => {
                   const categorySlug = slugify(category)
 
                   return (
-                    <option value={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${categorySlug}`)} selected={categorySlug === currentCategorySlug}>
+                    <option value={getRelativeLocaleUrl(Astro.locals.locale, `${listingBasePath}/category/${categorySlug}`)} selected={categorySlug === currentCategorySlug}>
                       {category} ({count})
                     </option>
                   )
@@ -105,7 +119,7 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
 
           <nav class="mt-4 hidden min-h-0 flex-1 space-y-1 overflow-y-auto rounded-lg border border-gray-800 bg-gray-950/40 p-2 lg:block" aria-label="Blog categories">
             <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, `blog`)}
+              href={getRelativeLocaleUrl(Astro.locals.locale, listingBasePath)}
               class:list={[
                 'flex items-center justify-between gap-3 rounded-md px-3 py-2 text-sm font-semibold focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
                 !currentCategory ? 'bg-blue-500/15 text-white' : 'text-gray-300 hover:bg-gray-900/80 hover:text-white',
@@ -122,7 +136,7 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
 
                 return (
                   <a
-                    href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${categorySlug}`)}
+                    href={getRelativeLocaleUrl(Astro.locals.locale, `${listingBasePath}/category/${categorySlug}`)}
                     class:list={[
                       'flex items-center justify-between gap-3 rounded-md px-3 py-2 text-sm font-semibold focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
                       isActive ? 'bg-blue-500/15 text-white' : 'text-gray-300 hover:bg-gray-900/80 hover:text-white',

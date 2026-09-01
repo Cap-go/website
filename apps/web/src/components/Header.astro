@@ -13,15 +13,11 @@ const locale = Astro.locals.locale
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between">
       <div class="flex shrink-0 items-center">
-        <a
-          href={getRelativeLocaleUrl(Astro.locals.locale)}
-          aria-label={m.capgo_home({}, { locale: Astro.locals.locale })}
-          class="font-prompt flex items-center pr-3 text-4xl font-medium"
-        >
-          <img class="h-18 w-auto py-5 pr-1" loading="eager" height="72" width="260" alt={`${brand} logo`} src="/capgo_logo_header.webp" />
+        <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label={m.capgo_home({}, { locale: Astro.locals.locale })} class="font-prompt flex items-center pr-2 font-medium">
+          <img class="h-8 w-auto pr-1 md:h-9 lg:h-10" loading="eager" height="40" width="144" alt={`${brand} logo`} src="/capgo_logo_header.webp" />
         </a>
       </div>
-      <div class="flex xl:hidden">
+      <div class="flex md:hidden">
         <button
           type="button"
           class="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -35,13 +31,13 @@ const locale = Astro.locals.locale
           </svg>
         </button>
       </div>
-      <div class="hidden xl:flex xl:flex-1 xl:items-center xl:gap-8">
-        <nav class="flex items-center gap-4 2xl:gap-6">
+      <div class="hidden md:flex md:flex-1 md:items-center md:gap-4 lg:gap-6 xl:gap-8">
+        <nav class="flex items-center gap-1 lg:gap-2 xl:gap-4 2xl:gap-6">
           <!-- Docs -->
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
             aria-label={m.docs({}, { locale: Astro.locals.locale })}
-            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
           >
             {m.docs({}, { locale: Astro.locals.locale })}
           </a>
@@ -49,7 +45,7 @@ const locale = Astro.locals.locale
           <div class="group relative">
             <button
               type="button"
-              class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
               aria-label={m.products({}, { locale: Astro.locals.locale })}
             >
               {m.products({}, { locale: Astro.locals.locale })}
@@ -136,7 +132,7 @@ const locale = Astro.locals.locale
           <div class="group relative">
             <button
               type="button"
-              class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
               aria-label={m.solutions({}, { locale: Astro.locals.locale })}
             >
               {m.solutions({}, { locale: Astro.locals.locale })}
@@ -153,9 +149,11 @@ const locale = Astro.locals.locale
               </svg>
             </button>
             <div
-              class="invisible absolute left-0 z-50 w-[720px] pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
+              class="invisible fixed inset-x-4 top-14 z-50 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 xl:absolute xl:inset-x-auto xl:top-auto xl:left-0 xl:w-[720px]"
             >
-              <div class="rounded-xl border border-slate-600/60 bg-slate-800/95 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl">
+              <div
+                class="max-h-[min(36rem,calc(100dvh-5rem))] overflow-y-auto rounded-xl border border-slate-600/60 bg-slate-800/95 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl"
+              >
                 <div class="grid grid-cols-2 gap-4">
                   <div class="space-y-4">
                     <!-- By Team Type Column -->
@@ -421,7 +419,7 @@ const locale = Astro.locals.locale
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
             aria-label={m.enterprise_title({}, { locale: Astro.locals.locale })}
-            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            class="hidden h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none lg:flex xl:px-2"
           >
             {m.enterprise_title({}, { locale: Astro.locals.locale })}
           </a>
@@ -429,7 +427,7 @@ const locale = Astro.locals.locale
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
             aria-label={m.pricing({}, { locale: Astro.locals.locale })}
-            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
           >
             {m.pricing({}, { locale: Astro.locals.locale })}
           </a>
@@ -437,16 +435,16 @@ const locale = Astro.locals.locale
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
             aria-label={m.blog({}, { locale: Astro.locals.locale })}
-            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            class="hidden h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none lg:flex xl:px-2"
           >
             {m.blog({}, { locale: Astro.locals.locale })}
           </a>
         </nav>
-        <div class="ml-auto flex items-center gap-3">
+        <div class="ml-auto flex shrink-0 items-center gap-2 xl:gap-3">
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
             aria-label={m.github_stars({}, { locale: Astro.locals.locale })}
-            class="flex h-10 items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/80 px-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            class="hidden h-10 items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/80 px-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:flex"
           >
             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -462,7 +460,7 @@ const locale = Astro.locals.locale
             aria-label={m.login({}, { locale: Astro.locals.locale })}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
           >
             {m.login({}, { locale: Astro.locals.locale })}
           </a>
@@ -472,7 +470,7 @@ const locale = Astro.locals.locale
             target="_blank"
             rel="noopener noreferrer"
             aria-label={m.request_demo({}, { locale: Astro.locals.locale })}
-            class="font-pj flex h-10 items-center rounded-xl bg-blue-500 px-4 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-colors hover:bg-blue-400 focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
+            class="font-pj flex h-10 items-center rounded-xl bg-blue-500 px-3 text-sm font-semibold whitespace-nowrap text-white shadow-lg shadow-blue-600/25 transition-colors hover:bg-blue-400 focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none xl:px-4"
             role="button"
           >
             {m.request_demo({}, { locale: Astro.locals.locale })}
@@ -483,7 +481,7 @@ const locale = Astro.locals.locale
             target="_blank"
             rel="noopener noreferrer"
             aria-label={m.register({}, { locale: Astro.locals.locale })}
-            class="font-pj flex h-10 items-center rounded-xl border border-slate-600 bg-slate-900/20 px-4 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:outline-none"
+            class="font-pj hidden h-10 items-center rounded-xl border border-slate-600 bg-slate-900/20 px-3 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:border-slate-400 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:outline-none lg:flex xl:px-4"
             role="button"
           >
             {m.register({}, { locale: Astro.locals.locale })}
@@ -504,7 +502,7 @@ const locale = Astro.locals.locale
       </div>
     </div>
   </div>
-  <div id="mobile-menu" class="absolute inset-x-0 top-full z-50 hidden xl:hidden">
+  <div id="mobile-menu" class="absolute inset-x-0 top-full z-50 hidden md:hidden">
     <div class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
       <div class="max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-2xl border border-slate-500/40 bg-slate-800/95 p-3 shadow-2xl shadow-black/45 backdrop-blur-xl">
         <a
@@ -841,8 +839,12 @@ const locale = Astro.locals.locale
   const websitePaidUserCookieName = 'capgo_paid_user'
   let previousHeaderPaidAccess: boolean | undefined
 
-  function hasWebsitePaidUserCookie() {
-    return document.cookie.split(';').some((cookie) => cookie.trim() === `${websitePaidUserCookieName}=1`)
+  function safeHasWebsitePaidUserCookie(): boolean {
+    try {
+      return document.cookie.split(';').some((cookie) => cookie.trim() === `${websitePaidUserCookieName}=1`)
+    } catch {
+      return false
+    }
   }
 
   function announceHeaderAuthLinks(hasPaidAccess: boolean) {
@@ -853,22 +855,34 @@ const locale = Astro.locals.locale
   }
 
   function syncHeaderAuthLinks() {
-    const hasPaidAccess = hasWebsitePaidUserCookie()
-    document.querySelectorAll('[data-guest-auth-link]').forEach((element) => {
-      if (hasPaidAccess) element.setAttribute('hidden', '')
-      else element.removeAttribute('hidden')
-    })
-    document.querySelectorAll('[data-console-auth-link]').forEach((element) => {
-      if (hasPaidAccess) element.removeAttribute('hidden')
-      else element.setAttribute('hidden', '')
-    })
-    announceHeaderAuthLinks(hasPaidAccess)
+    try {
+      const hasPaidAccess = safeHasWebsitePaidUserCookie()
+      document.querySelectorAll('[data-guest-auth-link]').forEach((element) => {
+        if (hasPaidAccess) element.setAttribute('hidden', '')
+        else element.removeAttribute('hidden')
+      })
+      document.querySelectorAll('[data-console-auth-link]').forEach((element) => {
+        if (hasPaidAccess) element.removeAttribute('hidden')
+        else element.setAttribute('hidden', '')
+      })
+      announceHeaderAuthLinks(hasPaidAccess)
+    } catch {
+      // Best-effort: restricted browsing contexts can block cookie/DOM access.
+    }
   }
 
   menuToggle?.addEventListener('click', () => {
     const isOpen = !mobileMenu?.classList.toggle('hidden')
     menuToggle.setAttribute('aria-expanded', String(isOpen))
   })
+
+  const desktopNavQuery = window.matchMedia('(min-width: 768px)')
+  function closeMobileMenuOnDesktop() {
+    if (!desktopNavQuery.matches) return
+    mobileMenu?.classList.add('hidden')
+    menuToggle?.setAttribute('aria-expanded', 'false')
+  }
+  desktopNavQuery.addEventListener('change', closeMobileMenuOnDesktop)
 
   productsToggle?.addEventListener('click', () => {
     const isOpen = !productsSubmenu?.classList.toggle('hidden')

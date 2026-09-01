@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-22T07:24:57.104Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/what-is-automated-testing.webp
 head_image_alt: >-
   'What Is Automated Testing: Automated Testing Explained' Capgo blog
@@ -18,6 +18,7 @@ keywords: 'automated testing, capacitorjs, electron js, mobile testing, ci/cd'
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably dealing with one of two situations right now. Either your team is still running a manual regression pass before every release, clicking through login, checkout, push notifications, settings, and offline recovery while everyone waits. Or you already wrote some tests, but they feel fragile, slow, and disconnected from actual release risks in your CapacitorJS or Electron app.

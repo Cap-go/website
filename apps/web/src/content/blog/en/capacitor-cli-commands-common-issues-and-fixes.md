@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-15T02:27:20.155Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/capacitor-cli-commands-common-issues-and-fixes.webp
 head_image_alt: "\"Capacitor CLI Commands: Common Issues and Fixes\" Capgo blog illustration"
 keywords: Capacitor CLI, plugin errors, build errors, live updates, network issues, development tools
 tag: Development, Mobile, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

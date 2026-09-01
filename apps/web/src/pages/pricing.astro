@@ -10,34 +10,12 @@ import { createLdJsonGraph, createProductLdJson, createFAQPageLdJson } from '@/l
 import type { Database } from '@/services/supabase.types'
 import m from '@/copy/messages'
 import Enterprise from '@/components/enterprise.astro'
+import { planDescriptionToText, planMonthlyPrice } from '@/lib/planCopy'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
 const description = m.pricing_description({}, { locale })
-
-const makeSeoTitle = (primary: string, descriptionText: string) => {
-  const normalizedPrimary = primary.replace(/\s+/g, ' ').trim()
-  const normalizedDescription = descriptionText
-    .replace(/\s+/g, ' ')
-    .trim()
-    .replace(/[.!?]\s*$/, '')
-  const base = `${brand} | ${normalizedPrimary}`
-
-  if (base.length >= 50 && base.length <= 60) return base
-  if (base.length > 60) return base.slice(0, 60).trimEnd()
-
-  const separator = ' - '
-  const available = 60 - base.length - separator.length
-  if (available <= 0) return base
-
-  const snippetRaw = normalizedDescription.slice(0, available)
-  const lastSpace = snippetRaw.lastIndexOf(' ')
-  const snippet = (lastSpace > available * 0.6 ? snippetRaw.slice(0, lastSpace) : snippetRaw).trim().replace(/[,:;\-–—]\s*$/, '')
-
-  return snippet ? `${base}${separator}${snippet}` : base
-}
-
-const title = makeSeoTitle(m.pricing({}, { locale }), description)
+const title = `${brand} | ${m.pricing({}, { locale })} - ${m.pricing_seo_tagline({}, { locale })}`
 
 const content: { title: string; description: string; ldJSON?: any } = { title, description }
 const serviceDisruptionPolicyUrl = `${getRelativeLocaleUrl(locale, 'support-policy')}#service-disruption-and-ending`
@@ -67,12 +45,12 @@ if (plans.length > 0) {
   const planProducts = plans.map((plan) =>
     createProductLdJson(Astro.locals.runtimeConfig.public, {
       name: plan.name,
-      description: plan.description || `Capgo ${plan.name} plan`,
+      description: planDescriptionToText(plan.description, locale) || `Capgo ${plan.name} plan`,
       url: pricingUrl,
       sku: plan.id.toString(),
       offers: [
         {
-          price: plan.price_m?.toString() || '0',
+          price: planMonthlyPrice(plan).toString(),
           priceCurrency: 'USD',
           availability: 'https://schema.org/InStock',
           priceValidUntil: (plan as any).trial_days ? new Date(Date.now() + (plan as any).trial_days * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : undefined,
@@ -135,14 +113,15 @@ if (plans.length > 0) {
 }
 ---
 
-<Layout content={content}
-  ><section class="bg-gray-50 pt-12 sm:pt-16">
+<Layout content={content}>
+  <div class="product-hero">
+  <section class="pt-12 sm:pt-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto mb-6 max-w-4xl text-center sm:mb-8">
-        <h1 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl">
+        <h1 class="font-pj text-3xl font-bold text-white sm:text-4xl xl:text-6xl">
           {m.plans_that_scale_with_your_business({}, { locale: Astro.locals.locale })}
         </h1>
-        <p class="font-pj mx-auto mt-4 max-w-2xl text-base leading-7 font-normal text-gray-600 sm:text-lg">
+        <p class="font-pj mx-auto mt-4 max-w-2xl text-base leading-7 font-normal text-gray-400 sm:text-lg">
           Live Updates, Native Builds, Notifications, Observe, App Store Publishing, plugins, and Automations in one platform.
         </p>
       </div>
@@ -152,21 +131,21 @@ if (plans.length > 0) {
           {plans && plans.length > 0 && <PricingCalculator plans={plans} apiBaseUrl={config.public.baseApiUrl} />}
         </div>
 
-        <fieldset class="grid w-max max-w-xs shrink-0 grid-cols-2 rounded-full bg-gray-100 p-1" aria-label="Billing period">
+        <fieldset class="grid w-max max-w-xs shrink-0 grid-cols-2 rounded-full border border-white/10 bg-white/5 p-1" aria-label="Billing period">
           <legend class="sr-only">Billing period</legend>
           <label
             for="monthly"
-            class="flex min-h-9 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-700 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-600 has-focus-visible:ring-offset-2"
+            class="flex min-h-9 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-300 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-400 has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-[#0d1525]"
           >
             <span>{m.monthly_plan({}, { locale: Astro.locals.locale })}</span>
             <input id="monthly" type="radio" checked={!yearly} name="pricing-plans" class="sr-only" />
           </label>
           <label
             for="yearly"
-            class="flex min-h-9 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-700 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-600 has-focus-visible:ring-offset-2"
+            class="group flex min-h-9 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-300 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-400 has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-[#0d1525]"
           >
             <span>{m.yearly_plan({}, { locale: Astro.locals.locale })}</span>
-            <span class="ml-1 text-blue-700">-20%</span>
+            <span class="ml-1 text-blue-400 group-has-checked:text-blue-700">-20%</span>
             <input id="yearly" type="radio" checked={yearly} name="pricing-plans" class="sr-only" />
           </label>
         </fieldset>
@@ -283,15 +262,15 @@ if (plans.length > 0) {
 
       <div class="pb-24 sm:pb-32">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 class="text-center text-lg/8 font-semibold text-gray-900">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
+          <h2 class="text-center text-lg/8 font-semibold text-white">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
           <div class="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-2xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
             <div class="flex flex-col items-center space-y-2">
               <div class="rounded-2xl bg-gray-100 shadow-sm">
                 <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/nana-logo-transparent.webp" alt="Nana" width="48" height="48" />
               </div>
               <div class="text-center">
-                <p class="text-sm font-medium text-gray-900">Nana</p>
-                <p class="text-xs text-gray-500">2.5M {m.downloads({}, { locale: Astro.locals.locale })}</p>
+                <p class="text-sm font-medium text-white">Nana</p>
+                <p class="text-xs text-gray-400">2.5M {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
@@ -299,8 +278,8 @@ if (plans.length > 0) {
                 <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/snowqueen.webp" alt="Snowqueen" width="48" height="48" />
               </div>
               <div class="text-center">
-                <p class="text-sm font-medium text-gray-900">Snowqueen</p>
-                <p class="text-xs text-gray-500">1.8M {m.downloads({}, { locale: Astro.locals.locale })}</p>
+                <p class="text-sm font-medium text-white">Snowqueen</p>
+                <p class="text-xs text-gray-400">1.8M {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
@@ -308,8 +287,8 @@ if (plans.length > 0) {
                 <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/shelf_app.webp" alt="Shelf" width="48" height="48" />
               </div>
               <div class="text-center">
-                <p class="text-sm font-medium text-gray-900">Shelf</p>
-                <p class="text-xs text-gray-500">950K {m.downloads({}, { locale: Astro.locals.locale })}</p>
+                <p class="text-sm font-medium text-white">Shelf</p>
+                <p class="text-xs text-gray-400">950K {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
@@ -317,8 +296,8 @@ if (plans.length > 0) {
                 <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/suez.webp" alt="Suez" width="48" height="48" />
               </div>
               <div class="text-center">
-                <p class="text-sm font-medium text-gray-900">Suez</p>
-                <p class="text-xs text-gray-500">3.2M {m.downloads({}, { locale: Astro.locals.locale })}</p>
+                <p class="text-sm font-medium text-white">Suez</p>
+                <p class="text-xs text-gray-400">3.2M {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
@@ -326,8 +305,8 @@ if (plans.length > 0) {
                 <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/janitor_app.webp" alt="Janitor" width="48" height="48" />
               </div>
               <div class="text-center">
-                <p class="text-sm font-medium text-gray-900">Janitor</p>
-                <p class="text-xs text-gray-500">750K {m.downloads({}, { locale: Astro.locals.locale })}</p>
+                <p class="text-sm font-medium text-white">Janitor</p>
+                <p class="text-xs text-gray-400">750K {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
           </div>
@@ -336,14 +315,14 @@ if (plans.length > 0) {
       <Enterprise />
       {credits && credits.length > 0 && <CreditPricing credits={credits} />}
 
-      <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-500 md:mt-16">
+      <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-400 md:mt-16">
         {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: Astro.locals.locale })}<br />
         {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: Astro.locals.locale })}
       </p>
 
       <!-- Service disruption policy link -->
       <div class="mt-10 mb-10 text-center">
-        <a href={serviceDisruptionPolicyUrl} class="inline-flex items-center text-sm font-semibold text-blue-600 hover:underline">
+        <a href={serviceDisruptionPolicyUrl} class="inline-flex items-center text-sm font-semibold text-blue-400 hover:underline">
           {m.support_policy_service_disruption_link_text({}, { locale: Astro.locals.locale })}
           <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -399,7 +378,7 @@ if (plans.length > 0) {
   </section>
   <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
     <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Pricing</h2>
-    <p class="mt-4">
+    <p class="mt-4 [&_a]:text-blue-400 [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-2 hover:[&_a]:text-blue-300">
       If you are comparing Capgo plans, connect pricing with <a href="/live-update/">Capgo Live Updates</a> for the main release workflow, <a href="/notifications/"
         >Capgo Notifications</a
       > for native push and update checks, <a href={getRelativeLocaleUrl(Astro.locals.locale, 'observe')}>Capgo Observe</a> for release health, <a href="/native-build/">Capgo Native Builds</a> for signed binaries, <a href="/plugins/">Capgo Plugin Directory</a> for native features, <a
@@ -407,4 +386,5 @@ if (plans.length > 0) {
       > for larger teams, and <a href="/premium-support/">Premium Support</a> for production help.
     </p>
   </section>
+  </div>
 </Layout>

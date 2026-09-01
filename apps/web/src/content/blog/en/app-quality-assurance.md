@@ -8,13 +8,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-27T07:23:02.972Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/app-quality-assurance.webp
 head_image_alt: '''App Quality Assurance: A Practical Guide for 2026'' Capgo blog illustration'
 keywords: 'app quality assurance, mobile qa, software testing, ci/cd, capacitorjs'
 tag: 'Mobile, Tutorial, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You push a release late on Friday because the change looks small. Login still works in staging. The build passed. By Saturday morning, support tickets are piling up because one payment path breaks on a subset of devices, analytics shows a drop in conversion, and engineering is trying to reconstruct what changed under time pressure.

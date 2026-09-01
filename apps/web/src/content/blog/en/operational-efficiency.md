@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-20T13:38:52.443Z
-updated_at: 2026-07-20T13:41:45.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/e8c675a8-49ac-4459-8d07-aa260dc61df3/operational-efficiency-dev-teams.jpg'
 head_image_alt: Operational Efficiency for Software & Mobile Dev Teams
 keywords: 'operational efficiency, software engineering, mobile engineering, efficiency metrics, process improvement'
 tag: 'Mobile, Product'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Software teams often treat inefficiency like background noise. It isn't. According to [global research supported by McKinsey, Bain & Company, PwC, Gartner, and Okta](https://crebos.online/resource-center/the-true-cost-of-operational-inefficiency/), **20–30% of operational expenditure is lost each year** to rework, miscommunication, repetitive tasks, fragmented systems, friction, and misaligned processes.

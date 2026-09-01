@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-25T03:35:36.644Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/rollback-strategies-for-capacitor-live-updates.webp
 head_image_alt: "Rollback Strategies for Capacitor Live Updates Capgo blog illustration"
 keywords: Capacitor, rollback strategies, live updates, app stability, error tracking, update management
 tag: Development, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

@@ -9,13 +9,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-15T08:08:25.848Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/types-of-builds.webp
 head_image_alt: '''Types of Builds Explained: From Local to Production'' Capgo blog illustration'
 keywords: 'types of builds, software builds, ci/cd, app distribution, capacitorjs'
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You open a project and see `build:ios:dev`, `build:android:qa`, `build:staging`, `build:release`, `build:prod`, plus a few shell scripts nobody wants to touch. Then someone says, “Can you make a staging build for the client by end of day?” If you're a mid-level mobile developer, that request often feels annoyingly vague. Which config? Which signing identity? Which backend? Which distribution path?

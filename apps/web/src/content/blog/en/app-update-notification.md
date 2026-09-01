@@ -8,13 +8,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-20T07:08:46.263Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/app-update-notification.webp
 head_image_alt: Effective App Update Notification Strategies Capgo blog illustration
 keywords: 'app update notification, capacitorjs, electronjs, capgo, live updates'
 tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You shipped a hotfix on Friday. By Monday, support is still hearing from users who never got it, beta testers are stuck on a stale bundle, and one enterprise client wants to know exactly which version their field team is running. That's the moment it becomes clear an **app update notification** isn't a modal. It's an operating system for release control.

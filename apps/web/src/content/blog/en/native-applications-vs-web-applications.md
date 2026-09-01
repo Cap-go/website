@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-09T08:28:06.638Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/native-applications-vs-web-applications.webp
 head_image_alt: '''Native Applications vs Web Applications: 2026 Guide'' Capgo blog illustration'
 keywords: >-
@@ -17,6 +17,7 @@ keywords: >-
 tag: 'Mobile, Technology, Alternatives'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You're probably in the same spot many teams hit at the start of a mobile project. Product wants fast launch. Engineering wants a stack that won't become a maintenance trap. Security wants control. Operations wants a way to fix production issues without waiting on a store review. Everyone asks the old question: should we build native or web?

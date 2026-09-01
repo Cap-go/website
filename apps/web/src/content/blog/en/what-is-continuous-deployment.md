@@ -8,13 +8,14 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-02T07:17:10.119Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/what-is-continuous-deployment.webp
 head_image_alt: What Is Continuous Deployment? Your 2026 Guide Capgo blog illustration
 keywords: 'what is continuous deployment, ci/cd, capacitorjs, electronjs, devops'
 tag: 'Mobile, CI/CD, Capacitor'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 Continuous deployment means **every code change that passes predefined automated quality gates goes straight to production without a manual release trigger**. Even now, only **45% of organizations automate release to production**, which is why teams that can do this safely still stand out.

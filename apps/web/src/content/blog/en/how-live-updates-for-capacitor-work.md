@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-18T06:14:25.862Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /blog-images/how-live-updates-for-capacitor-work.webp
 head_image_alt: "'How Live Updates Work in Capgo' Capgo blog illustration"
 keywords: 'Capgo live updates, OTA updates, Capacitor updates, mobile app development, app updates'
 tag: 'Development, Mobile, Updates'
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

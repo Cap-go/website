@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-17T08:37:56.714Z
-updated_at: 2026-06-18T15:35:50.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/yarn-clear-cache.webp
 head_image_alt: >-
   'How to Yarn Clear Cache: A Guide for V1, Berry, and CI/CD' Capgo blog
@@ -17,6 +17,7 @@ keywords: 'yarn clear cache, yarn cache, yarn berry, node.js, ci/cd'
 tag: 'Mobile, Tutorial, CI/CD'
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 You run `yarn install`, and the dependency you just updated still resolves to the old build. Or your laptop installs fine while CI suddenly fails after a harmless lockfile change. Or Docker rebuilds drag on, even though you're “using cache.”

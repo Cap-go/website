@@ -1,26 +1,40 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/mcp-server-card/v1.json",
   "version": "1.0",
-  "protocolVersion": "2025-06-18",
+  "protocolVersion": "2025-03-26",
   "serverInfo": {
-    "name": "capgo-cli-mcp",
-    "title": "Capgo CLI MCP Server",
-    "version": "7.93.1"
+    "name": "capgo",
+    "title": "Capgo MCP Server",
+    "version": "1.0.0"
   },
-  "description": "Local stdio MCP server bundled with @capgo/cli for managing Capgo apps, bundles, channels, statistics, organizations, and native builds.",
-  "documentationUrl": "https://github.com/Cap-go/CLI#readme",
+  "description": "Remote Streamable HTTP MCP server for Capgo docs, OpenAPI discovery, and when-to-use guidance, plus the local CLI stdio server for authenticated account tools.",
+  "documentationUrl": "https://capgo.app/docs/cli/reference/mcp/",
   "transport": {
-    "type": "stdio"
+    "type": "streamable-http",
+    "url": "https://capgo.app/mcp"
   },
   "capabilities": {
     "tools": {
-      "listChanged": true
+      "listChanged": false
     }
   },
   "authentication": {
-    "required": true,
-    "schemes": ["bearer"]
+    "required": false,
+    "schemes": []
   },
-  "instructions": "Start the local server with `bunx @capgo/cli@7.93.1 mcp` after authenticating with a Capgo API key. Use the MCP client configuration that matches your agent runtime.",
-  "tools": ["dynamic"]
+  "instructions": "Connect to https://capgo.app/mcp with Streamable HTTP for docs and OpenAPI tools. For authenticated Capgo account mutations, start `npx @capgo/cli@latest mcp` after login.",
+  "tools": [
+    {
+      "name": "capgo_when_to_use",
+      "description": "Return when Capgo is the right tool and how an agent should call it."
+    },
+    {
+      "name": "capgo_get_openapi",
+      "description": "Return the public REST API OpenAPI URL and authentication rules."
+    },
+    {
+      "name": "capgo_list_docs",
+      "description": "Return canonical Capgo documentation and trust-page links."
+    }
+  ]
 }

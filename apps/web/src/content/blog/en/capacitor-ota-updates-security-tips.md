@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-06T02:16:15.693Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/capacitor-ota-updates-security-tips.webp
 head_image_alt: "\"Capacitor OTA Updates: Security Tips\" Capgo blog illustration"
 keywords: OTA updates, security, encryption, file verification, access control, mobile app updates, data protection
 tag: Mobile, Security, Updates
 published: true
 locale: en
+origin: ai
 next_blog: ''
 ---
 

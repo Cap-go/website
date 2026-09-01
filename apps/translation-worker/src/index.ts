@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
@@ -104,6 +105,7 @@ type Segment = {
   mode: 'text' | 'attribute'
   inBody: boolean
   quote?: string
+  anchorPath?: string
 }
 
 type HtmlPart = string | { segmentIndex: number }
@@ -163,9 +165,20 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-05-10-ahrefs-head-assets-v1'
+const TRANSLATION_CACHE_VERSION = '2026-08-31-nav-guard-dedupe-batch-v1'
+const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
+const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
+  '/pricing/': new Set(['Pricing']),
+  '/blog/': new Set(['Blog']),
+  '/enterprise/': new Set(['Enterprise']),
+}
+const TRANSLATION_LENGTH_MAX_RATIO = 1.3
+const TRANSLATION_LENGTH_MIN_RATIO = 0.7
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
+const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
+const EXECUTABLE_SCRIPT_TYPES = new Set(['', 'module', 'text/javascript', 'application/javascript', 'text/ecmascript', 'application/ecmascript'])
+const WORKER_OWNED_SCRIPT_IDS = new Set(['capgo-edge-language-selector-hash'])
 const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 1_500
 const MAX_BATCH_ITEMS = 12
@@ -175,7 +188,7 @@ const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
 const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
 const AI_OUTPUT_PREVIEW_CHARS = 240
 const TRANSLATION_TEST_ROUTE_PREFIX = '/__translation-test__'
-const PROTECTED_TRANSLATION_TOKENS = ['Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
+const PROTECTED_TRANSLATION_TOKENS = ['Live Update', 'Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -187,6 +200,8 @@ const LANGUAGE_NAMES: Record<Locale, string> = {
   ko: 'Korean',
   zh: 'Simplified Chinese',
 }
+
+const COMPACT_TRANSLATION_TARGETS = new Set<string>(['ja', 'ko', 'zh', LANGUAGE_NAMES.ja, LANGUAGE_NAMES.ko, LANGUAGE_NAMES.zh])
 
 const LANGUAGE_FLAG_ENTITIES: Record<string, string> = {
   de: '&#127465;&#127466;',
@@ -521,6 +536,14 @@ function cacheKeyFor(requestUrl: URL, locale: Locale): Request {
   return new Request(cacheUrl.toString(), { method: 'GET' })
 }
 
+function englishSourceHtmlKeyFor(requestUrl: URL): Request {
+  const cacheUrl = new URL(requestUrl)
+  cacheUrl.pathname = withTrailingSlash(stripLocalePrefix(cacheUrl.pathname))
+  applyNormalizedTranslationSearch(cacheUrl, requestUrl)
+  cacheUrl.searchParams.set('__capgo_translation_english_source', TRANSLATION_CACHE_VERSION)
+  return new Request(cacheUrl.toString(), { method: 'GET' })
+}
+
 function pendingKeyFor(requestUrl: URL, locale: Locale): Request {
   const pendingUrl = new URL(requestUrl)
   pendingUrl.pathname = localizedPath(pendingUrl.pathname, locale)
@@ -682,7 +705,35 @@ function splitLongCoreText(value: string): string[] {
   return chunks
 }
 
-function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: Segment['mode'], inBody: boolean, quote?: string): void {
+function normalizeNavAnchorPath(href: string): string | null {
+  const trimmed = href.trim()
+  if (!trimmed || trimmed.startsWith('#') || /^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return null
+
+  let pathOnly = trimmed
+  if (trimmed.startsWith('//')) {
+    try {
+      pathOnly = new URL(`https:${trimmed}`).pathname
+    } catch {
+      return null
+    }
+  } else if (trimmed.startsWith('/')) {
+    pathOnly = trimmed.split(/[?#]/)[0] ?? trimmed
+  } else {
+    return null
+  }
+
+  const withoutLocale = pathOnly.replace(/^\/(?:de|es|fr|id|it|ja|ko|zh)(?=\/)/, '') || '/'
+  const normalized = withoutLocale.endsWith('/') ? withoutLocale : `${withoutLocale}/`
+  return (NAV_GUARD_PATHS as readonly string[]).includes(normalized) ? normalized : null
+}
+
+function isNavGuardSegment(segment: Segment): boolean {
+  if (!segment.anchorPath) return false
+  const expected = NAV_PATH_EXPECTED_SOURCES[segment.anchorPath as (typeof NAV_GUARD_PATHS)[number]]
+  return Boolean(expected?.has(segment.text))
+}
+
+function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: Segment['mode'], inBody: boolean, quote?: string, anchorPath?: string): void {
   if (!hasAsciiLetter(text)) {
     parts.push(text)
     return
@@ -707,6 +758,7 @@ function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: 
         mode,
         inBody,
         quote,
+        anchorPath,
       }) - 1
     parts.push({ segmentIndex })
   }
@@ -750,25 +802,54 @@ function collectQuotedAttributes(tag: string): AttributeMatch[] {
     while (quoteIndex < tag.length && isWhitespace(tag[quoteIndex])) quoteIndex += 1
 
     const quote = tag[quoteIndex]
-    if (nameStart === nameEnd || (quote !== '"' && quote !== "'")) {
+    if (nameStart === nameEnd) {
       index = equalsIndex + 1
       continue
     }
 
-    const valueStart = quoteIndex + 1
-    const valueEnd = tag.indexOf(quote, valueStart)
-    if (valueEnd === -1) break
+    const attributeName = tag.slice(nameStart, nameEnd)
+
+    if (quote === '"' || quote === "'") {
+      const valueStart = quoteIndex + 1
+      const valueEnd = tag.indexOf(quote, valueStart)
+      if (valueEnd === -1) break
+
+      attributes.push({
+        name: attributeName,
+        quote,
+        value: tag.slice(valueStart, valueEnd),
+        start: nameStart,
+        valueStart,
+        valueEnd,
+        end: valueEnd + 1,
+      })
+      index = valueEnd + 1
+      continue
+    }
+
+    const valueStart = quoteIndex
+    let valueEnd = valueStart
+    while (valueEnd < tag.length) {
+      const char = tag[valueEnd]
+      if (isWhitespace(char) || char === '>') break
+      if (char === '/' && tag[valueEnd + 1] === '>') break
+      valueEnd += 1
+    }
+    if (valueEnd === valueStart) {
+      index = equalsIndex + 1
+      continue
+    }
 
     attributes.push({
-      name: tag.slice(nameStart, nameEnd),
-      quote,
+      name: attributeName,
+      quote: '',
       value: tag.slice(valueStart, valueEnd),
       start: nameStart,
       valueStart,
       valueEnd,
-      end: valueEnd + 1,
+      end: valueEnd,
     })
-    index = valueEnd + 1
+    index = valueEnd
   }
 
   return attributes
@@ -795,8 +876,20 @@ function languageSelectorTargetLocale(tag: string): string | null {
   return isSupportedLanguagePath(idLocale) ? idLocale : null
 }
 
+function hasNoTranslateClass(className: string | null): boolean {
+  if (!className) return false
+  return className
+    .split(/\s+/)
+    .filter(Boolean)
+    .some((item) => item.toLowerCase() === 'notranslate')
+}
+
 function shouldSkipElementText(tag: string, tagName: string): boolean {
   if (SKIP_TEXT_TAGS.has(tagName)) return true
+
+  const translate = readAttributeValue(tag, 'translate')
+  if (translate?.trim().toLowerCase() === 'no') return true
+  if (hasNoTranslateClass(readAttributeValue(tag, 'class'))) return true
 
   const id = readAttributeValue(tag, 'id')
   if (id && (LANGUAGE_SELECTOR_SKIP_IDS.has(id) || id.startsWith('language_'))) return true
@@ -824,7 +917,7 @@ function shouldTranslateAttribute(tag: string, tagName: string, attrName: string
   return TRANSLATABLE_ATTRIBUTES.has(normalizedAttr)
 }
 
-function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText: boolean, inBody: boolean): void {
+function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText: boolean, inBody: boolean, anchorPath?: string): void {
   const tagName = tagNameOf(tag)
   if (!tagName || skipText || isClosingTag(tag)) {
     parts.push(tag)
@@ -837,9 +930,11 @@ function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText
   for (const attribute of collectQuotedAttributes(tag)) {
     if (!shouldTranslateAttribute(tag, tagName, attribute.name, attribute.value)) continue
 
+    const outputQuote = attribute.quote || '"'
     parts.push(tag.slice(lastIndex, attribute.start), tag.slice(attribute.start, attribute.valueStart))
-    addSegment(parts, segments, attribute.value, 'attribute', inBody, attribute.quote)
-    parts.push(attribute.quote)
+    if (!attribute.quote) parts.push(outputQuote)
+    addSegment(parts, segments, attribute.value, 'attribute', inBody, outputQuote, anchorPath)
+    parts.push(outputQuote)
     lastIndex = attribute.end
     matched = true
   }
@@ -947,12 +1042,300 @@ function findClosingTag(html: string, startIndex: number, tagName: string): { in
   return null
 }
 
+type HtmlScript = {
+  start: number
+  end: number
+  outerHtml: string
+  id: string | null
+  src: string | null
+  type: string
+  executable: boolean
+  workerOwned: boolean
+  external: boolean
+}
+
+type ScriptInsertionMode = 'after' | 'before' | 'body'
+type ScriptInsertionGroup = { marker?: string; mode: ScriptInsertionMode; html: string[] }
+
+function normalizeScriptType(type: string | null): string {
+  return (type ?? '').trim().toLowerCase()
+}
+
+function isExecutableScriptType(type: string): boolean {
+  return EXECUTABLE_SCRIPT_TYPES.has(type)
+}
+
+function collectHtmlScripts(html: string): HtmlScript[] {
+  const scripts: HtmlScript[] = []
+  let cursor = 0
+
+  while (cursor < html.length) {
+    const nextTag = findNextHtmlTag(html, cursor)
+    if (!nextTag) break
+
+    if (tagNameOf(nextTag.tag) !== 'script' || isClosingTag(nextTag.tag)) {
+      cursor = nextTag.end
+      continue
+    }
+
+    const type = normalizeScriptType(readAttributeValue(nextTag.tag, 'type'))
+    const id = readAttributeValue(nextTag.tag, 'id')
+    const src = readAttributeValue(nextTag.tag, 'src')
+    let end = nextTag.end
+
+    if (!isSelfClosingTag(nextTag.tag, 'script')) {
+      const closing = findClosingTag(html, nextTag.end, 'script')
+      if (!closing) {
+        cursor = nextTag.end
+        continue
+      }
+      end = closing.end
+    }
+
+    scripts.push({
+      start: nextTag.index,
+      end,
+      outerHtml: html.slice(nextTag.index, end),
+      id,
+      src,
+      type,
+      executable: isExecutableScriptType(type),
+      workerOwned: Boolean(id && WORKER_OWNED_SCRIPT_IDS.has(id)),
+      external: Boolean(src),
+    })
+    cursor = end
+  }
+
+  return scripts
+}
+
+function syncableScripts(html: string): HtmlScript[] {
+  return collectHtmlScripts(html).filter((script) => script.executable && !script.workerOwned)
+}
+
+function normalizeScriptSrc(src: string): string {
+  try {
+    const url = new URL(src, 'https://capgo.app')
+    const pathname = url.pathname.replace(/\/([^/]+)\.[a-z0-9_-]{6,}\.((?:m)?js)$/i, '/$1.$2')
+    return `${url.origin}${pathname}`
+  } catch {
+    return src
+  }
+}
+
+function scriptIdentityKey(script: HtmlScript): string | null {
+  if (script.id) return `id:${script.id}`
+  if (script.src) return `src:${normalizeScriptSrc(script.src)}`
+  return null
+}
+
+function applyHtmlRangeReplacements(html: string, replacements: Array<{ start: number; end: number; value: string }>): string {
+  const ordered = [...replacements].sort((left, right) => right.start - left.start)
+  let rewritten = html
+  for (const replacement of ordered) {
+    rewritten = `${rewritten.slice(0, replacement.start)}${replacement.value}${rewritten.slice(replacement.end)}`
+  }
+  return rewritten
+}
+
+function findPairedScriptAnchor(englishScripts: HtmlScript[], englishIndex: number, paired: (script: HtmlScript) => boolean): { marker: string; mode: 'after' | 'before' } | null {
+  for (let index = englishIndex - 1; index >= 0; index -= 1) {
+    if (paired(englishScripts[index])) return { marker: englishScripts[index].outerHtml, mode: 'after' }
+  }
+  for (let index = englishIndex + 1; index < englishScripts.length; index += 1) {
+    if (paired(englishScripts[index])) return { marker: englishScripts[index].outerHtml, mode: 'before' }
+  }
+  return null
+}
+
+function unusedScriptIndexes(scripts: HtmlScript[], used: Set<number>, include: (script: HtmlScript) => boolean): number[] {
+  const indexes: number[] = []
+  for (const [index, script] of scripts.entries()) {
+    if (!used.has(index) && include(script)) indexes.push(index)
+  }
+  return indexes
+}
+
+function groupScriptIndexesByType(scripts: HtmlScript[], indexes: number[]): Map<string, number[]> {
+  const groups = new Map<string, number[]>()
+  for (const index of indexes) {
+    const type = scripts[index].type
+    const list = groups.get(type)
+    if (list) list.push(index)
+    else groups.set(type, [index])
+  }
+  return groups
+}
+
+function executableScriptBody(script: HtmlScript): string {
+  return script.outerHtml.replace(/^<script\b[^>]*>/i, '').replace(/<\/script>\s*$/i, '')
+}
+
+function scriptTokenOverlap(left: HtmlScript, right: HtmlScript): number {
+  const leftTokens = new Set(executableScriptBody(left).match(/[A-Za-z_$][\w$]{3,}/g) ?? [])
+  const rightTokens = new Set(executableScriptBody(right).match(/[A-Za-z_$][\w$]{3,}/g) ?? [])
+  if (leftTokens.size === 0 || rightTokens.size === 0) return 0
+  let shared = 0
+  for (const token of leftTokens) {
+    if (rightTokens.has(token)) shared += 1
+  }
+  return shared / Math.min(leftTokens.size, rightTokens.size)
+}
+
+function pairInlineScriptsByIndex(translatedGroup: number[], englishGroup: number[], takePair: (translatedIndex: number, englishIndex: number) => void): void {
+  for (let index = 0; index < englishGroup.length; index += 1) {
+    takePair(translatedGroup[index], englishGroup[index])
+  }
+}
+
+function findBestOverlappingInlineIndex(translatedScripts: HtmlScript[], englishScript: HtmlScript, translatedGroup: number[], usedTranslated: Set<number>): number | undefined {
+  let bestIndex: number | undefined
+  let bestScore = 0.3
+  for (const translatedIndex of translatedGroup) {
+    if (usedTranslated.has(translatedIndex)) continue
+    const score = scriptTokenOverlap(translatedScripts[translatedIndex], englishScript)
+    if (score <= bestScore) continue
+    bestScore = score
+    bestIndex = translatedIndex
+  }
+  return bestIndex
+}
+
+function pairInlineScriptsByOverlap(
+  translatedScripts: HtmlScript[],
+  englishScripts: HtmlScript[],
+  translatedGroup: number[],
+  englishGroup: number[],
+  takePair: (translatedIndex: number, englishIndex: number) => void,
+): void {
+  const usedTranslated = new Set<number>()
+  for (const englishIndex of englishGroup) {
+    const bestIndex = findBestOverlappingInlineIndex(translatedScripts, englishScripts[englishIndex], translatedGroup, usedTranslated)
+    if (bestIndex === undefined) continue
+    usedTranslated.add(bestIndex)
+    takePair(bestIndex, englishIndex)
+  }
+}
+
+function pairRemainingInlineScripts(
+  translatedScripts: HtmlScript[],
+  englishScripts: HtmlScript[],
+  translatedUsed: Set<number>,
+  englishUsed: Set<number>,
+  takePair: (translatedIndex: number, englishIndex: number) => void,
+): void {
+  const remainingTranslated = unusedScriptIndexes(translatedScripts, translatedUsed, (script) => !script.external)
+  const remainingEnglish = unusedScriptIndexes(englishScripts, englishUsed, (script) => !script.external)
+  const translatedByType = groupScriptIndexesByType(translatedScripts, remainingTranslated)
+  const englishByType = groupScriptIndexesByType(englishScripts, remainingEnglish)
+
+  for (const [type, englishGroup] of englishByType) {
+    const translatedGroup = translatedByType.get(type) ?? []
+    if (translatedGroup.length === englishGroup.length) {
+      pairInlineScriptsByIndex(translatedGroup, englishGroup, takePair)
+      continue
+    }
+    pairInlineScriptsByOverlap(translatedScripts, englishScripts, translatedGroup, englishGroup, takePair)
+  }
+}
+
+function groupExtraEnglishScripts(extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): ScriptInsertionGroup[] {
+  const paired = (script: HtmlScript): boolean => pairedEnglish.has(script)
+  const groups = new Map<string, ScriptInsertionGroup>()
+
+  for (const extra of extras) {
+    const anchor = findPairedScriptAnchor(englishScripts, englishScripts.indexOf(extra), paired)
+    const key = anchor ? `${anchor.mode}:${anchor.marker}` : 'body'
+    const existing = groups.get(key)
+    if (existing) {
+      existing.html.push(extra.outerHtml)
+      continue
+    }
+    groups.set(key, anchor ? { ...anchor, html: [extra.outerHtml] } : { mode: 'body', html: [extra.outerHtml] })
+  }
+
+  return [...groups.values()]
+}
+
+function applyAnchoredScriptInsertions(html: string, groups: ScriptInsertionGroup[]): string {
+  let rewritten = html
+  const placements: Array<{ index: number; value: string }> = []
+
+  for (const group of groups) {
+    const value = group.html.join('\n')
+    const found = group.marker ? rewritten.indexOf(group.marker) : -1
+    if (!group.marker || found === -1) {
+      rewritten = insertBeforeClosingTag(rewritten, 'body', value)
+      continue
+    }
+    placements.push({
+      index: group.mode === 'after' ? found + group.marker.length : found,
+      value,
+    })
+  }
+
+  placements.sort((left, right) => right.index - left.index)
+  for (const placement of placements) {
+    rewritten = `${rewritten.slice(0, placement.index)}\n${placement.value}${rewritten.slice(placement.index)}`
+  }
+  return rewritten
+}
+
+function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): string {
+  if (extras.length === 0) return html
+  return applyAnchoredScriptInsertions(html, groupExtraEnglishScripts(extras, englishScripts, pairedEnglish))
+}
+
+function syncExecutableScriptsFromEnglish(translatedHtml: string, englishHtml: string): string {
+  const translatedScripts = syncableScripts(translatedHtml)
+  const englishScripts = syncableScripts(englishHtml)
+  const translatedUsed = new Set<number>()
+  const englishUsed = new Set<number>()
+  const pairs: Array<{ translated: HtmlScript; english: HtmlScript }> = []
+
+  const takePair = (translatedIndex: number, englishIndex: number): void => {
+    if (translatedUsed.has(translatedIndex) || englishUsed.has(englishIndex)) return
+    translatedUsed.add(translatedIndex)
+    englishUsed.add(englishIndex)
+    pairs.push({ translated: translatedScripts[translatedIndex], english: englishScripts[englishIndex] })
+  }
+
+  const translatedByKey = new Map<string, number[]>()
+  for (const [index, script] of translatedScripts.entries()) {
+    const key = scriptIdentityKey(script)
+    if (!key) continue
+    const list = translatedByKey.get(key)
+    if (list) list.push(index)
+    else translatedByKey.set(key, [index])
+  }
+
+  for (const [englishIndex, script] of englishScripts.entries()) {
+    const key = scriptIdentityKey(script)
+    if (!key) continue
+    const translatedIndex = translatedByKey.get(key)?.find((index) => !translatedUsed.has(index))
+    if (translatedIndex === undefined) continue
+    takePair(translatedIndex, englishIndex)
+  }
+
+  pairRemainingInlineScripts(translatedScripts, englishScripts, translatedUsed, englishUsed, takePair)
+
+  const replacements = pairs
+    .filter((pair) => pair.translated.outerHtml !== pair.english.outerHtml)
+    .map((pair) => ({ start: pair.translated.start, end: pair.translated.end, value: pair.english.outerHtml }))
+  const rewritten = applyHtmlRangeReplacements(translatedHtml, replacements)
+  const extras = englishScripts.filter((_, index) => !englishUsed.has(index))
+  return insertSyncedEnglishScripts(rewritten, extras, englishScripts, new Set(pairs.map((pair) => pair.english)))
+}
+
 function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[] } {
   const parts: HtmlPart[] = []
   const segments: Segment[] = []
   const skipStack: string[] = []
+  const anchorStack: string[] = []
   let insideBody = false
   let lastIndex = 0
+
+  const currentAnchorPath = (): string | undefined => anchorStack[anchorStack.length - 1]
 
   while (lastIndex < html.length) {
     const skippedTagName = skipStack[skipStack.length - 1]
@@ -977,18 +1360,33 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
     const text = html.slice(lastIndex, nextTag.index)
 
     if (text) {
-      addSegment(parts, segments, text, 'text', insideBody)
+      addSegment(parts, segments, text, 'text', insideBody, undefined, currentAnchorPath())
     }
 
     const tagName = tagNameOf(tag)
+    const skipElement = Boolean(tagName && !isClosingTag(tag) && shouldSkipElementText(tag, tagName))
 
-    appendTag(parts, segments, tag, false, insideBody)
+    if (tagName === 'a' && !isClosingTag(tag) && !skipElement) {
+      const href = readAttributeValue(tag, 'href')
+      const normalized = href ? normalizeNavAnchorPath(href) : null
+      if (normalized) anchorStack.push(normalized)
+    }
+
+    if (skipElement) {
+      parts.push(tag)
+    } else {
+      appendTag(parts, segments, tag, false, insideBody, currentAnchorPath())
+    }
+
+    if (tagName === 'a' && isClosingTag(tag)) {
+      if (anchorStack.length > 0) anchorStack.pop()
+    }
 
     if (tagName === 'body' && isClosingTag(tag)) {
       insideBody = false
     }
 
-    if (tagName && !isClosingTag(tag) && !isSelfClosingTag(tag, tagName) && shouldSkipElementText(tag, tagName)) {
+    if (tagName && !isClosingTag(tag) && !isSelfClosingTag(tag, tagName) && skipElement) {
       skipStack.push(tagName)
     }
 
@@ -1002,7 +1400,7 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
   const tail = html.slice(lastIndex)
   if (tail) {
     if (skipStack.length > 0) parts.push(tail)
-    else addSegment(parts, segments, tail, 'text', insideBody)
+    else addSegment(parts, segments, tail, 'text', insideBody, undefined, currentAnchorPath())
   }
 
   return { parts, segments }
@@ -1013,19 +1411,168 @@ function buildBatches(segments: Segment[]): string[][] {
   let currentBatch: string[] = []
   let currentLength = 0
 
+  const flushCurrentBatch = (): void => {
+    if (currentBatch.length === 0) return
+    batches.push(currentBatch)
+    currentBatch = []
+    currentLength = 0
+  }
+
   for (const segment of segments) {
+    if (isNavGuardSegment(segment)) {
+      flushCurrentBatch()
+      batches.push([segment.text])
+      continue
+    }
+
     const nextLength = currentLength + segment.text.length
     if (currentBatch.length > 0 && (nextLength > MAX_BATCH_CHARS || currentBatch.length >= MAX_BATCH_ITEMS)) {
-      batches.push(currentBatch)
-      currentBatch = []
-      currentLength = 0
+      flushCurrentBatch()
     }
     currentBatch.push(segment.text)
     currentLength += segment.text.length
   }
 
-  if (currentBatch.length > 0) batches.push(currentBatch)
+  flushCurrentBatch()
   return batches
+}
+
+function dedupeBatchForTranslation(batch: string[]): { uniqueBatch: string[]; expandIndexes: number[] } {
+  const uniqueBatch: string[] = []
+  const sourceToUniqueIndex = new Map<string, number>()
+  const expandIndexes: number[] = []
+
+  for (const text of batch) {
+    let uniqueIndex = sourceToUniqueIndex.get(text)
+    if (uniqueIndex === undefined) {
+      uniqueIndex = uniqueBatch.length
+      sourceToUniqueIndex.set(text, uniqueIndex)
+      uniqueBatch.push(text)
+    }
+    expandIndexes.push(uniqueIndex)
+  }
+
+  return { uniqueBatch, expandIndexes }
+}
+
+function expandDedupedBatchTranslations(uniqueTranslated: string[], expandIndexes: number[]): string[] {
+  return expandIndexes.map((index) => uniqueTranslated[index] ?? '')
+}
+
+function addRenderedNavLabel(links: Map<string, Set<string>>, path: string, label: string): void {
+  const normalized = normalizedTranslationValue(label)
+  if (!normalized) return
+  const labels = links.get(path) ?? new Set<string>()
+  labels.add(normalized)
+  links.set(path, labels)
+}
+
+function collectRenderedNavLinks(html: string): Map<string, Set<string>> {
+  const links = new Map<string, Set<string>>()
+  const pattern = /<a\b[^>]*\bhref=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi
+  let match: RegExpExecArray | null
+
+  while ((match = pattern.exec(html)) !== null) {
+    const fullTag = match[0]
+    const href = match[1]
+    const normalizedPath = normalizeNavAnchorPath(href)
+    if (!normalizedPath) continue
+
+    const text = normalizedTranslationValue(match[2].replace(/<[^>]+>/g, ''))
+    if (text) addRenderedNavLabel(links, normalizedPath, text)
+
+    const openingTag = fullTag.slice(0, fullTag.indexOf('>') + 1)
+    const ariaMatch = /\baria-label=["']([^"']+)["']/i.exec(openingTag)
+    if (ariaMatch?.[1]) addRenderedNavLabel(links, normalizedPath, ariaMatch[1])
+  }
+
+  return links
+}
+
+function renderedNavLabelSetsOverlap(left: Set<string>, right: Set<string>): boolean {
+  for (const label of left) {
+    if (right.has(label)) return true
+  }
+  return false
+}
+
+function renderedNavLabelSetsEqual(left: Set<string>, right: Set<string>): boolean {
+  if (left.size !== right.size) return false
+  for (const label of left) {
+    if (!right.has(label)) return false
+  }
+  return true
+}
+
+function assertNavSegmentTranslationGuard(segments: Segment[], translations: string[]): void {
+  const translatedByPathSource = new Map<string, string>()
+
+  for (let index = 0; index < segments.length; index += 1) {
+    const segment = segments[index]
+    if (!isNavGuardSegment(segment) || !segment.anchorPath) continue
+
+    const key = `${segment.anchorPath}\0${segment.text}`
+    const translated = normalizedTranslationValue(translations[index] ?? '')
+    const existing = translatedByPathSource.get(key)
+    if (existing && existing !== translated) {
+      throw new Error(`Inconsistent nav translation for ${segment.anchorPath} "${segment.text}"`)
+    }
+    translatedByPathSource.set(key, translated)
+  }
+
+  const entries = [...translatedByPathSource.entries()]
+  for (let left = 0; left < entries.length; left += 1) {
+    for (let right = left + 1; right < entries.length; right += 1) {
+      const [leftKey, leftTranslation] = entries[left]
+      const [rightKey, rightTranslation] = entries[right]
+      const leftSource = leftKey.split('\0')[1] ?? ''
+      const rightSource = rightKey.split('\0')[1] ?? ''
+      if (leftSource === rightSource) continue
+      if (leftTranslation === rightTranslation) {
+        throw new Error(`Nav translation guard collapsed distinct labels "${leftSource}" and "${rightSource}" to "${leftTranslation}"`)
+      }
+    }
+  }
+}
+
+function navLabelsCollide(sourceLinks: Map<string, Set<string>>, translatedLinks: Map<string, Set<string>>, path: string, otherPath: string): boolean {
+  const sourceLabels = sourceLinks.get(path)
+  const otherSourceLabels = sourceLinks.get(otherPath)
+  if (!sourceLabels?.size || !otherSourceLabels?.size) return false
+  if (renderedNavLabelSetsEqual(sourceLabels, otherSourceLabels)) return false
+
+  const translatedLabels = translatedLinks.get(path)
+  const otherTranslatedLabels = translatedLinks.get(otherPath)
+  if (!translatedLabels?.size || !otherTranslatedLabels?.size) return false
+  return renderedNavLabelSetsOverlap(translatedLabels, otherTranslatedLabels)
+}
+
+function assertRenderedNavLinkIntegrity(sourceHtml: string, translatedHtml: string): void {
+  const sourceLinks = collectRenderedNavLinks(sourceHtml)
+  const translatedLinks = collectRenderedNavLinks(translatedHtml)
+  if (sourceLinks.size === 0 || translatedLinks.size === 0) return
+
+  for (const path of NAV_GUARD_PATHS) {
+    for (const otherPath of NAV_GUARD_PATHS) {
+      if (otherPath === path) continue
+      if (!navLabelsCollide(sourceLinks, translatedLinks, path, otherPath)) continue
+      throw new Error(`Rendered nav labels for ${path} and ${otherPath} share the same translated text`)
+    }
+  }
+}
+
+function navGuardSegmentIndexes(segments: Segment[]): number[] {
+  const indexes: number[] = []
+  for (let index = 0; index < segments.length; index += 1) {
+    if (isNavGuardSegment(segments[index])) indexes.push(index)
+  }
+  return indexes
+}
+
+async function retranslateNavGuardSegments(env: Env, targetLanguage: string, segments: Segment[], translations: string[], pagePath: string): Promise<void> {
+  for (const index of navGuardSegmentIndexes(segments)) {
+    translations[index] = await translateSingleText(env, targetLanguage, segments[index].text, pagePath)
+  }
 }
 
 function recordOf(value: unknown): Record<string, unknown> | null {
@@ -1225,6 +1772,28 @@ function shouldCheckUnchangedTranslation(value: string): boolean {
   return true
 }
 
+function shouldEnforceTranslationLength(source: string): boolean {
+  return source.trim().length > 0
+}
+
+function translationLengthViolation(source: string, translated: string, targetLanguage = ''): boolean {
+  if (!shouldEnforceTranslationLength(source)) return false
+  const sourceLen = source.length
+  const translatedLen = translated.length
+  if (sourceLen < 12) return translatedLen > sourceLen + 8
+  if (translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO) return true
+  if (COMPACT_TRANSLATION_TARGETS.has(targetLanguage)) return false
+  return translatedLen < sourceLen * TRANSLATION_LENGTH_MIN_RATIO
+}
+
+function guardTranslationLength(source: string, translated: string, targetLanguage = ''): string {
+  return translationLengthViolation(source, translated, targetLanguage) ? source : translated
+}
+
+function guardTranslatedBatchLengths(batch: string[], translated: string[], targetLanguage = ''): string[] {
+  return batch.map((source, index) => guardTranslationLength(source, translated[index] ?? source, targetLanguage))
+}
+
 function assertTranslatedBatch(targetLanguage: string, batch: string[], translated: string[]): void {
   const candidates = batch
     .map((source, index) => ({
@@ -1345,20 +1914,50 @@ function translationBatchJsonSchema(batchLength: number): Record<string, unknown
   }
 }
 
-async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+function translationContextSystemHint(): string {
+  return 'When an item includes a "context" field, use that UI/page context to disambiguate short or overloaded English words (for example Home, Support, Channel, Bundle, Update, Open, Free) and keep tone appropriate for that surface.'
+}
+
+function translationGrammarSystemHint(): string {
+  return 'Prefer natural native phrasing over literal calques. Apply correct target-language grammar and morphology. For French, always elide singular articles before a vowel (l’attente, not la attente). Do not elide before aspirate h (la haute, le héros).'
+}
+
+function translationLengthSystemHint(): string {
+  return 'Keep each translation about the same length as the source (similar character count, roughly within ±30%). Do not expand short UI labels, buttons, nav items, table headers, or headings into longer sentences. Over-long translations break Capgo page layouts and UI spacing.'
+}
+
+/** Fix unelided French le/la before a vowel (e.g. "la attente" → "l’attente").
+ * Vowels only — aspirate-h words (haute, héros, haricot…) must keep le/la. */
+function applyFrenchArticleElision(text: string): string {
+  return text.replace(/\b([Ll])([ae])\s+([aeiouàâäæéèêëïîôœùûüAEIOUÀÂÄÆÉÈÊËÏÎÔŒÙÛÜ])/gu, '$1\u2019$3')
+}
+
+function polishTranslatedText(targetLanguage: string, text: string): string {
+  if (targetLanguage === 'French') return applyFrenchArticleElision(text)
+  return text
+}
+
+async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
-  const protectedBatch = batch.map((text) => protectTranslationTokens(text))
+  const { uniqueBatch, expandIndexes } = dedupeBatchForTranslation(batch)
+  const protectedBatch = uniqueBatch.map((text) => protectTranslationTokens(text))
+  const contexts = resolveTranslationContexts(uniqueBatch)
 
   for (let attempt = 1; attempt <= TRANSLATION_MODEL_ATTEMPTS; attempt += 1) {
     let payload: unknown = ''
     try {
+      const items = protectedBatch.map((item, index) => {
+        const context = contexts[index]
+        return context ? { text: item.text, context } : { text: item.text }
+      })
+
       const result = await env.AI.run(model, {
         temperature: 0,
         max_tokens: 8192,
         response_format: {
           type: 'json_schema',
-          json_schema: translationBatchJsonSchema(batch.length),
+          json_schema: translationBatchJsonSchema(uniqueBatch.length),
         },
         messages: [
           {
@@ -1367,10 +1966,13 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'You translate Capgo website copy for the target locale.',
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
+              translationContextSystemHint(),
+              translationGrammarSystemHint(),
+              translationLengthSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
-              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
+              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
-              `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${batch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
+              `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${uniqueBatch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
               attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON object matching the schema.' : '',
             ]
               .filter(Boolean)
@@ -1378,7 +1980,12 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           },
           {
             role: 'user',
-            content: JSON.stringify({ targetLanguage, protectedTokens: PROTECTED_TRANSLATION_TOKENS, texts: protectedBatch.map((item) => item.text) }),
+            content: JSON.stringify({
+              targetLanguage,
+              pagePath: pagePath || undefined,
+              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              items,
+            }),
           },
         ],
       })
@@ -1387,8 +1994,8 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
       const translated = parseTranslationArray(payload)
       if (!translated) {
         lastError = new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
-      } else if (translated.length !== batch.length) {
-        lastError = new Error(`Translation model returned ${translated.length} strings for ${batch.length} ${targetLanguage} strings`)
+      } else if (translated.length !== uniqueBatch.length) {
+        lastError = new Error(`Translation model returned ${translated.length} strings for ${uniqueBatch.length} ${targetLanguage} strings`)
       } else {
         const restored = translated.map((text, index) => {
           const result = protectedBatch[index].restoreOrSource(text)
@@ -1397,14 +2004,27 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               targetLanguage,
               index,
               missingTokens: result.missingTokens,
-              sourcePreview: aiPayloadPreview(batch[index]),
+              sourcePreview: aiPayloadPreview(uniqueBatch[index]),
               outputPreview: aiPayloadPreview(text),
             })
           }
-          return result.text
+          return polishTranslatedText(targetLanguage, result.text)
         })
-        assertTranslatedBatch(targetLanguage, batch, restored)
-        return restored
+        assertTranslatedBatch(targetLanguage, uniqueBatch, restored)
+        const guarded = guardTranslatedBatchLengths(uniqueBatch, restored, targetLanguage).map((text, index) => {
+          if (text === uniqueBatch[index] && translationLengthViolation(uniqueBatch[index], restored[index], targetLanguage)) {
+            console.warn('Translation kept source after length bound violation', {
+              targetLanguage,
+              index,
+              sourceLength: uniqueBatch[index].length,
+              translatedLength: restored[index].length,
+              sourcePreview: aiPayloadPreview(uniqueBatch[index]),
+              outputPreview: aiPayloadPreview(restored[index]),
+            })
+          }
+          return text
+        })
+        return expandDedupedBatchTranslations(guarded, expandIndexes)
       }
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
@@ -1415,6 +2035,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
       attempt,
       maxAttempts: TRANSLATION_MODEL_ATTEMPTS,
       batchSize: batch.length,
+      uniqueBatchSize: uniqueBatch.length,
       error: lastError.message,
       outputPreview: aiPayloadPreview(payload),
     })
@@ -1423,9 +2044,9 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
   throw new Error(`Translation JSON mode failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
-async function translateBatch(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+async function translateBatch(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   try {
-    return await translateBatchWithJsonMode(env, targetLanguage, batch)
+    return await translateBatchWithJsonMode(env, targetLanguage, batch, pagePath)
   } catch (error) {
     const message = errorMessage(error)
     console.warn('Translation batch JSON failed; falling back to single-text translation', {
@@ -1435,13 +2056,14 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
     })
   }
 
-  return await translateBatchIndividually(env, targetLanguage, batch)
+  return await translateBatchIndividually(env, targetLanguage, batch, pagePath)
 }
 
-async function translateSingleText(env: Env, targetLanguage: string, text: string): Promise<string> {
+async function translateSingleText(env: Env, targetLanguage: string, text: string, pagePath = ''): Promise<string> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const protectedText = protectTranslationTokens(text)
+  const context = resolveTranslationContexts([text])[0]
 
   for (let attempt = 1; attempt <= TRANSLATION_SINGLE_TEXT_ATTEMPTS; attempt += 1) {
     let payload: unknown = ''
@@ -1455,23 +2077,40 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
             content: [
               'You translate one Capgo website string for the target locale.',
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
+              translationContextSystemHint(),
+              translationGrammarSystemHint(),
+              translationLengthSystemHint(),
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
-              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
+              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
               'Return only the translated text. Do not return JSON, Markdown, labels, explanations, quotes around the whole answer, or extra lines.',
             ].join(' '),
           },
           {
             role: 'user',
-            content: JSON.stringify({ targetLanguage, protectedTokens: PROTECTED_TRANSLATION_TOKENS, text: protectedText.text }),
+            content: JSON.stringify({
+              targetLanguage,
+              pagePath: pagePath || undefined,
+              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              text: protectedText.text,
+              context: context || undefined,
+            }),
           },
         ],
       })
 
       payload = extractAiPayload(result)
       const translated = plainTranslationFromUnknown(payload)
-      if (translated) return protectedText.restore(translated)
-      lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
+      if (translated) {
+        const restored = polishTranslatedText(targetLanguage, protectedText.restore(translated))
+        if (translationLengthViolation(text, restored, targetLanguage)) {
+          lastError = new Error(`Translation length out of bounds for ${targetLanguage}: ${restored.length} chars vs source ${text.length}`)
+        } else {
+          return restored
+        }
+      } else {
+        lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
+      }
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
     }
@@ -1494,15 +2133,23 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
     return text
   }
 
+  if (lastError?.message.includes('length out of bounds')) {
+    console.warn('Single-text translation kept source after length bound violation', {
+      targetLanguage,
+      error: lastError.message,
+      sourcePreview: aiPayloadPreview(text),
+    })
+    return text
+  }
+
   throw new Error(`Single-text translation failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
-async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   const translated: string[] = []
   for (const text of batch) {
-    translated.push(await translateSingleText(env, targetLanguage, text))
+    translated.push(await translateSingleText(env, targetLanguage, text, pagePath))
   }
-  assertTranslatedBatch(targetLanguage, batch, translated)
   return translated
 }
 
@@ -2140,7 +2787,7 @@ async function refreshCacheIncrementally(
   let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
 
   while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB) {
-    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex])
+    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex], requestUrl.pathname)
     translatedBatches[batchIndex] = translatedBatch
     translatedInThisJob += 1
     batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
@@ -2185,7 +2832,34 @@ async function refreshCacheIncrementally(
   }
   assertTranslatedBody(LANGUAGE_NAMES[locale], segments, translations)
 
-  const translatedHtml = renderTranslatedHtml(parts, segments, translations)
+  const targetLanguage = LANGUAGE_NAMES[locale]
+  try {
+    assertNavSegmentTranslationGuard(segments, translations)
+  } catch (error) {
+    console.warn('Nav translation guard failed; retranslating guarded header links individually', {
+      pathname: requestUrl.pathname,
+      locale,
+      error: errorMessage(error),
+    })
+    await retranslateNavGuardSegments(env, targetLanguage, segments, translations, requestUrl.pathname)
+    assertNavSegmentTranslationGuard(segments, translations)
+  }
+
+  let translatedHtml = renderTranslatedHtml(parts, segments, translations)
+  try {
+    assertRenderedNavLinkIntegrity(source.sourceHtml, translatedHtml)
+  } catch (error) {
+    console.warn('Rendered nav link integrity failed; keeping English nav labels', {
+      pathname: requestUrl.pathname,
+      locale,
+      error: errorMessage(error),
+    })
+    for (const index of navGuardSegmentIndexes(segments)) {
+      translations[index] = segments[index].text
+    }
+    translatedHtml = renderTranslatedHtml(parts, segments, translations)
+    assertRenderedNavLinkIntegrity(source.sourceHtml, translatedHtml)
+  }
   const response = createTranslatedHtmlResponse(source.originResponse, translatedHtml, requestUrl, locale)
   if (response.ok && isHtmlResponse(response)) {
     const cachedResponse = toCachedResponse(response.clone(), sourceHash)
@@ -2254,19 +2928,69 @@ async function checkTranslatedSourceFreshness(env: Env, requestUrl: URL, locale:
     }),
   )
 
-  const renderRequest = new Request(requestUrl.toString(), {
-    method: 'GET',
-    headers: {
-      Accept: 'text/html',
-    },
-  })
-  const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
-  if (source.type !== 'html') return
+  const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
+  if (!englishHtml) return
 
-  const currentSourceHash = await translationSourceHash(locale, source.sourceHtml)
+  const currentSourceHash = await translationSourceHash(locale, englishHtml)
   if (knownSourceHash === currentSourceHash) return
 
   await enqueueTranslation(env, requestUrl, locale, 'stale', priority, currentSourceHash)
+}
+
+async function readCachedEnglishSourceHtml(requestUrl: URL): Promise<string | null> {
+  try {
+    const cached = await caches.default.match(englishSourceHtmlKeyFor(requestUrl))
+    return cached ? await cached.text() : null
+  } catch {
+    return null
+  }
+}
+
+async function writeCachedEnglishSourceHtmlSafely(requestUrl: URL, sourceHtml: string): Promise<void> {
+  try {
+    await caches.default.put(
+      englishSourceHtmlKeyFor(requestUrl),
+      new Response(sourceHtml, {
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': `public, max-age=${TRANSLATION_SOURCE_CHECK_SECONDS}`,
+        },
+      }),
+    )
+  } catch (error) {
+    console.error('Failed to cache current English source HTML', { pathname: requestUrl.pathname, error: errorMessage(error) })
+  }
+}
+
+const inflightEnglishSourceHtml = new Map<string, Promise<string | null>>()
+
+async function loadCurrentEnglishSourceHtml(env: Env, requestUrl: URL, locale: Locale): Promise<string | null> {
+  const cacheKey = englishSourceHtmlKeyFor(requestUrl).url
+  const inflight = inflightEnglishSourceHtml.get(cacheKey)
+  if (inflight) return inflight
+
+  const load = (async () => {
+    const cached = await readCachedEnglishSourceHtml(requestUrl)
+    if (cached) return cached
+
+    const renderRequest = new Request(requestUrl.toString(), {
+      method: 'GET',
+      headers: {
+        Accept: 'text/html',
+      },
+    })
+    const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
+    if (source.type !== 'html') return null
+    await writeCachedEnglishSourceHtmlSafely(requestUrl, source.sourceHtml)
+    return source.sourceHtml
+  })()
+
+  inflightEnglishSourceHtml.set(cacheKey, load)
+  try {
+    return await load
+  } finally {
+    inflightEnglishSourceHtml.delete(cacheKey)
+  }
 }
 
 async function checkTranslatedSourceFreshnessSafely(env: Env, requestUrl: URL, locale: Locale, translatedResponse: Response, priority: boolean): Promise<void> {
@@ -2279,6 +3003,42 @@ async function checkTranslatedSourceFreshnessSafely(env: Env, requestUrl: URL, l
 
 function scheduleTranslatedSourceCheck(ctx: WorkerExecutionContext | undefined, env: Env, requestUrl: URL, locale: Locale, translatedResponse: Response, priority: boolean): void {
   scheduleTranslationBackgroundTask(ctx, checkTranslatedSourceFreshnessSafely(env, new URL(requestUrl), locale, translatedResponse, priority))
+}
+
+async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Locale, translatedResponse: Response, cacheState: 'HIT' | 'STALE', isHead: boolean): Promise<Response> {
+  if (isHead) return withResponseHeaders(translatedResponse, cacheState, true)
+  if (!isHtmlResponse(translatedResponse)) return withResponseHeaders(translatedResponse, cacheState, false)
+
+  const status = translatedResponse.status
+  const statusText = translatedResponse.statusText
+  const responseHeaders = new Headers(translatedResponse.headers)
+  const translatedAt = readTranslatedAt(translatedResponse)
+  const knownSourceHash = readTranslationSourceHash(translatedResponse)
+  const translatedHtml = await translatedResponse.text()
+
+  if (cacheState === 'HIT' && Date.now() - translatedAt < TRANSLATION_SOURCE_CHECK_SECONDS * 1000) {
+    return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, false)
+  }
+
+  try {
+    const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
+    if (englishHtml && knownSourceHash !== (await translationSourceHash(locale, englishHtml))) {
+      let syncedHtml = syncExecutableScriptsFromEnglish(translatedHtml, englishHtml)
+      if (!syncedHtml.includes('capgo-edge-language-selector-hash')) {
+        syncedHtml = insertBeforeClosingTag(syncedHtml, 'body', languageSelectorHashScript())
+      }
+      if (syncedHtml !== translatedHtml) responseHeaders.set(TRANSLATION_SCRIPTS_HEADER, 'synced')
+      return withResponseHeaders(new Response(syncedHtml, { status, statusText, headers: responseHeaders }), cacheState, false)
+    }
+  } catch (error) {
+    console.error('Failed to sync executable scripts from current English source', {
+      pathname: requestUrl.pathname,
+      locale,
+      error: errorMessage(error),
+    })
+  }
+
+  return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, false)
 }
 
 async function processTranslationJob(job: TranslationJob, env: Env): Promise<void> {
@@ -2344,7 +3104,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     } else {
       scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, cachedResponse, priority)
     }
-    return withResponseHeaders(cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
+    return await serveTranslatedCachedPage(env, requestUrl, locale, cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
   const storedResponse = await readStoredTranslatedResponse(env, requestUrl, locale)
@@ -2357,7 +3117,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     } else {
       scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, storedResponse, priority)
     }
-    return withResponseHeaders(storedResponse, isStale ? 'STALE' : 'HIT', isHead)
+    return await serveTranslatedCachedPage(env, requestUrl, locale, storedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
   const enqueued = await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)
@@ -2536,7 +3296,7 @@ async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Reco
 
   const translatedBatchMap = new Map<number, string[]>()
   for (const batchIndex of [...selectedBatchIndexes].sort((left, right) => left - right)) {
-    translatedBatchMap.set(batchIndex, await translateBatchWithJsonMode(env, targetLanguage, batches[batchIndex]))
+    translatedBatchMap.set(batchIndex, await translateBatchWithJsonMode(env, targetLanguage, batches[batchIndex], path))
   }
 
   const sourceTexts = [...translatedBatchMap.keys()].flatMap((batchIndex) => batches[batchIndex])
@@ -2585,11 +3345,12 @@ async function handleTranslationTestRequest(request: Request, env: Env, requestU
     if (requestUrl.pathname !== `${TRANSLATION_TEST_ROUTE_PREFIX}/real-runtime`) return jsonResponse({ ok: false, error: 'Not found' }, 404)
 
     const storage = await probeRuntimeStorage(env, requestUrl)
-    const translations = await translateBatchWithJsonMode(env, 'Spanish', [
-      'Ship updates instantly',
-      'Pricing',
-      'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.',
-    ])
+    const translations = await translateBatchWithJsonMode(
+      env,
+      'Spanish',
+      ['Ship updates instantly', 'Pricing', 'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.'],
+      '/',
+    )
 
     return jsonResponse({
       ok: true,
@@ -2673,12 +3434,27 @@ export class TranslationCoordinator {
 
 export const __translationWorkerTest = {
   TRANSLATION_CACHE_VERSION,
+  applyFrenchArticleElision,
+  polishTranslatedText,
+  assertNavSegmentTranslationGuard,
+  assertRenderedNavLinkIntegrity,
   bodyTranslationStats,
   buildBatches,
+  cacheKeyFor,
+  sourceCheckKeyFor,
+  collectRenderedNavLinks,
   collectSegments,
+  dedupeBatchForTranslation,
+  expandDedupedBatchTranslations,
+  guardTranslationLength,
+  guardTranslatedBatchLengths,
+  isNavGuardSegment,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
   rewriteMetadataAndLinks,
+  resolveTranslationContexts,
+  syncExecutableScriptsFromEnglish,
+  translationLengthViolation,
 }
 
 export default {

@@ -6,13 +6,14 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-08-27T16:41:24.000Z
 head_image: /native-purchases/review-guides/ios-review-hero.webp
 head_image_alt: "How to Pass App Store Review for In-App Purchases in 2025 Capgo blog illustration"
 keywords: app store review, in-app purchases, iOS review, Android review, subscription approval, IAP guidelines, 2025 app review
 tag: Mobile, IAP, App Store, Google Play
 published: true
 locale: en
+origin: human
 next_blog: ''
 ---
 

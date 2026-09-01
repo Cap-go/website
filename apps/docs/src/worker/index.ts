@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { LLMS_TXT_PATHS, markdownNotFoundResponse, prefersMarkdown, stripRewrittenAssetHeaders, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
 
 interface Env {
   ASSETS: {
@@ -62,6 +63,7 @@ const redirectRows: RedirectRow[] = [
   ['/docs/plugins/electron-updater/migration/', '/docs/plugins/electron-updater/getting-started/', 302],
   ['/docs/plugins/updater/auto-update', '/docs/plugins/updater/notify-app-ready/', 302],
   ['/docs/plugins/capacitor-camera-preview/', '/docs/plugins/camera-preview/', 302],
+  ['/docs/plugins/capacitor-camera-preview/getting-started/', '/docs/plugins/camera-preview/getting-started/', 302],
   ['/docs/plugins/ricoh360-camera-plugin', '/docs/plugins/ricoh360-camera/', 301],
   ['/docs/plugins/capacitor-supabase', '/docs/plugins/supabase/', 301],
   ['/docs/plugins/capacitor-supabase/', '/docs/plugins/supabase/', 301],
@@ -79,10 +81,15 @@ const redirectRows: RedirectRow[] = [
   ['/docs/Plugins/ricoh360-camera-plugin/', '/docs/plugins/ricoh360-camera/', 301],
   ['/docs/Plugins/capacitor-ricoh360-camera-plugin/', '/docs/plugins/ricoh360-camera/', 301],
   ['/docs/plugins/capacitor-home-indicator/', '/docs/plugins/home-indicator/', 302],
+  ['/docs/plugins/capacitor-home-indicator/getting-started/', '/docs/plugins/home-indicator/getting-started/', 302],
   ['/docs/plugins/capacitor-ivs-player/', '/docs/plugins/ivs-player/', 302],
+  ['/docs/plugins/capacitor-ivs-player/getting-started/', '/docs/plugins/ivs-player/getting-started/', 302],
   ['/docs/plugins/capacitor-native-audio/', '/docs/plugins/native-audio/', 302],
+  ['/docs/plugins/capacitor-native-audio/getting-started/', '/docs/plugins/native-audio/getting-started/', 302],
   ['/docs/plugins/capacitor-native-market/', '/docs/plugins/native-market/', 302],
+  ['/docs/plugins/capacitor-native-market/getting-started/', '/docs/plugins/native-market/getting-started/', 302],
   ['/docs/plugins/capacitor-native-purchases/', '/docs/plugins/native-purchases/', 302],
+  ['/docs/plugins/capacitor-native-purchases/getting-started/', '/docs/plugins/native-purchases/getting-started/', 302],
   ['/docs/cloud/native-builds/certificates/android/', '/docs/builder/android/', 302],
   ['/docs/cloud/native-builds/certificates/ios/', '/docs/builder/ios/', 302],
   ['/docs/CLI/Referencia/Aplicaci%C3%B3n/', '/docs/cli/reference/app/', 302],
@@ -236,17 +243,39 @@ export default {
       const rest = pathname.replace(/^\/docs\/cli\/cloud-build\/?/, '')
       return trackAICrawler(request, Response.redirect(new URL(`/docs/builder/${rest}${url.search}`, request.url).toString(), 301), ctx)
     }
+    // Former _redirects splat: /docs/plugin/* → /docs/plugins/updater/:splat
+    // Kept in code so CF never classifies later static _redirects as dynamic.
+    if (pathname.startsWith('/docs/plugin/')) {
+      const rest = pathname.slice('/docs/plugin/'.length)
+      return trackAICrawler(request, Response.redirect(new URL(`/docs/plugins/updater/${rest}${url.search}`, request.url).toString(), 301), ctx)
+    }
+    if (LLMS_TXT_PATHS.has(pathname) && (request.method === 'GET' || request.method === 'HEAD')) {
+      const llms = await env.ASSETS.fetch(request)
+      if (llms.status === 200) {
+        if (request.method === 'HEAD') return trackAICrawler(request, llms, ctx)
+        const body = withLlmsWhenToUse(await llms.text())
+        const headers = stripRewrittenAssetHeaders(new Headers(llms.headers))
+        headers.set('Content-Type', 'text/plain; charset=utf-8')
+        return trackAICrawler(request, new Response(body, { status: 200, headers }), ctx)
+      }
+      if (llms.ok) return trackAICrawler(request, llms, ctx)
+    }
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
+    if (response.status === 404 && prefersMarkdown(request)) {
+      return trackAICrawler(request, markdownNotFoundResponse(request), ctx)
+    }
     if (response.status === 404 && shouldServeBrandedNotFound(pathname)) {
       const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
       if (notFound.ok || notFound.status === 404) {
+        const headers = new Headers(notFound.headers)
+        headers.append('Vary', 'Accept')
         return trackAICrawler(
           request,
           new Response(request.method === 'HEAD' ? null : notFound.body, {
             status: 404,
             statusText: 'Not Found',
-            headers: notFound.headers,
+            headers,
           }),
           ctx,
         )
