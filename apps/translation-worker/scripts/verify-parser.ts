@@ -718,6 +718,8 @@ try {
 <a href="/pricing/" aria-label="Pricing">Pricing</a>
 <!-- Blog -->
 <a href="/blog/" aria-label="Blog">Blog</a>
+<p>Ship updates to your users without waiting for app store review cycles.</p>
+<p>Deploy fixes and features to every user instantly.</p>
 </body></html>`
   const headerNavParsed = __translationWorkerTest.collectSegments(headerNavHtml)
   const navGuardSegments = headerNavParsed.segments.filter((segment) => __translationWorkerTest.isNavGuardSegment(segment))
@@ -728,9 +730,14 @@ try {
   )
 
   const navGuardBatches = __translationWorkerTest.buildBatches(headerNavParsed.segments)
+  const guardedTexts = new Set(navGuardSegments.map((segment) => segment.text))
   assert(
-    navGuardBatches.every((batch) => batch.length === 1),
+    navGuardBatches.every((batch) => (batch.length === 1 ? true : batch.every((text) => !guardedTexts.has(text)))),
     'Header nav guarded segments were not isolated into single-item batches',
+  )
+  assert(
+    navGuardBatches.some((batch) => batch.length > 1),
+    'Header nav fixture did not exercise the shared batching path',
   )
 
   const dedupedBatch = __translationWorkerTest.dedupeBatchForTranslation(['Enterprise', 'Pricing', 'Blog', 'Enterprise', 'Pricing', 'Blog'])
@@ -773,6 +780,16 @@ try {
     renderedNavIntegrityRejected = true
   }
   assert(renderedNavIntegrityRejected, 'Rendered nav integrity check did not reject pricing/blog label overlap')
+
+  const skippedAnchorHtml = `<!doctype html><html><body>
+<a href="/pricing/" translate="no">Pricing</a>
+<p>Pricing</p>
+</body></html>`
+  const skippedAnchorParsed = __translationWorkerTest.collectSegments(skippedAnchorHtml)
+  assert(
+    skippedAnchorParsed.segments.filter((segment) => __translationWorkerTest.isNavGuardSegment(segment)).length === 0,
+    'Skipped anchor text must not bind later body text to the pricing nav path',
+  )
 } finally {
   if (originalCaches) {
     Object.defineProperty(globalThis, 'caches', originalCaches)

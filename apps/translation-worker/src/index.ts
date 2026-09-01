@@ -1366,7 +1366,7 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
     const tagName = tagNameOf(tag)
     const skipElement = Boolean(tagName && !isClosingTag(tag) && shouldSkipElementText(tag, tagName))
 
-    if (tagName === 'a' && !isClosingTag(tag)) {
+    if (tagName === 'a' && !isClosingTag(tag) && !skipElement) {
       const href = readAttributeValue(tag, 'href')
       const normalized = href ? normalizeNavAnchorPath(href) : null
       if (normalized) anchorStack.push(normalized)
@@ -1535,27 +1535,27 @@ function assertNavSegmentTranslationGuard(segments: Segment[], translations: str
   }
 }
 
+function navLabelsCollide(sourceLinks: Map<string, Set<string>>, translatedLinks: Map<string, Set<string>>, path: string, otherPath: string): boolean {
+  const sourceLabels = sourceLinks.get(path)
+  const otherSourceLabels = sourceLinks.get(otherPath)
+  if (!sourceLabels?.size || !otherSourceLabels?.size) return false
+  if (renderedNavLabelSetsEqual(sourceLabels, otherSourceLabels)) return false
+
+  const translatedLabels = translatedLinks.get(path)
+  const otherTranslatedLabels = translatedLinks.get(otherPath)
+  if (!translatedLabels?.size || !otherTranslatedLabels?.size) return false
+  return renderedNavLabelSetsOverlap(translatedLabels, otherTranslatedLabels)
+}
+
 function assertRenderedNavLinkIntegrity(sourceHtml: string, translatedHtml: string): void {
   const sourceLinks = collectRenderedNavLinks(sourceHtml)
   const translatedLinks = collectRenderedNavLinks(translatedHtml)
   if (sourceLinks.size === 0 || translatedLinks.size === 0) return
 
   for (const path of NAV_GUARD_PATHS) {
-    const sourceLabels = sourceLinks.get(path)
-    if (!sourceLabels?.size) continue
-    const translatedLabels = translatedLinks.get(path)
-    if (!translatedLabels?.size) continue
-
     for (const otherPath of NAV_GUARD_PATHS) {
       if (otherPath === path) continue
-      const otherSourceLabels = sourceLinks.get(otherPath)
-      if (!otherSourceLabels?.size) continue
-      if (renderedNavLabelSetsEqual(sourceLabels, otherSourceLabels)) continue
-
-      const otherTranslatedLabels = translatedLinks.get(otherPath)
-      if (!otherTranslatedLabels?.size) continue
-      if (!renderedNavLabelSetsOverlap(translatedLabels, otherTranslatedLabels)) continue
-
+      if (!navLabelsCollide(sourceLinks, translatedLinks, path, otherPath)) continue
       throw new Error(`Rendered nav labels for ${path} and ${otherPath} share the same translated text`)
     }
   }
@@ -2845,8 +2845,21 @@ async function refreshCacheIncrementally(
     assertNavSegmentTranslationGuard(segments, translations)
   }
 
-  const translatedHtml = renderTranslatedHtml(parts, segments, translations)
-  assertRenderedNavLinkIntegrity(source.sourceHtml, translatedHtml)
+  let translatedHtml = renderTranslatedHtml(parts, segments, translations)
+  try {
+    assertRenderedNavLinkIntegrity(source.sourceHtml, translatedHtml)
+  } catch (error) {
+    console.warn('Rendered nav link integrity failed; keeping English nav labels', {
+      pathname: requestUrl.pathname,
+      locale,
+      error: errorMessage(error),
+    })
+    for (const index of navGuardSegmentIndexes(segments)) {
+      translations[index] = segments[index].text
+    }
+    translatedHtml = renderTranslatedHtml(parts, segments, translations)
+    assertRenderedNavLinkIntegrity(source.sourceHtml, translatedHtml)
+  }
   const response = createTranslatedHtmlResponse(source.originResponse, translatedHtml, requestUrl, locale)
   if (response.ok && isHtmlResponse(response)) {
     const cachedResponse = toCachedResponse(response.clone(), sourceHash)
