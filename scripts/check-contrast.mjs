@@ -19,7 +19,8 @@ const GHOST_RATIO = 2
 const PRICING_CTA = '[data-plan] a[aria-label^="Start"]'
 
 function installChromium() {
-  const proc = spawnSync('bunx', ['playwright', 'install', 'chromium'], {
+  const playwrightCli = path.join(ROOT, 'node_modules', 'playwright', 'cli.js')
+  const proc = spawnSync(process.execPath, [playwrightCli, 'install', 'chromium'], {
     cwd: ROOT,
     stdio: 'inherit',
   })
