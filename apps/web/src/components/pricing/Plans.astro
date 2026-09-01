@@ -69,14 +69,14 @@ function buildTimeDisplay(buildTimeSeconds: number) {
           ]}
           data-plan={plan.name}
         >
-          <div class="flex min-h-24 items-start justify-between gap-3">
-            <div>
+          <div class="min-h-24">
+            <div class="flex flex-wrap items-center gap-2">
               <h3 class="text-2xl font-semibold tracking-tight text-gray-950">{plan.name}</h3>
-              <p class="mt-3 text-sm leading-6 text-gray-600">{planDescriptionToText(plan.description, Astro.locals.locale)}</p>
+              {plan.name === 'Maker' && (
+                <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
+              )}
             </div>
-            {plan.name === 'Maker' && (
-              <span class="shrink-0 rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
-            )}
+            <p class="mt-3 text-sm leading-6 text-gray-600">{planDescriptionToText(plan.description, Astro.locals.locale)}</p>
           </div>
 
           <div class="mt-6 lg:mt-8">
