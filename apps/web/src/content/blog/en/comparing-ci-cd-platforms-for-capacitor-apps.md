@@ -158,7 +158,7 @@ Capawesome Cloud CI — Native Builds plus Live Updates, now sold as Capawesome 
 
 Their Native Builds launch post is explicit. No third-party CI/CD. Connect GitHub, GitLab, Bitbucket, or Azure DevOps. Put the pipeline in `capawesome.config.json`. Run it inside Capawesome Cloud. You can trigger a build from a CLI, but the intended workflow is vendor-hosted CI. Git integration, signing, build minutes, live updates, and store submit all sit behind one closed backend. The plugin and CLI are open source. The backend is not. Self-hosting is partial at best: you can host bundles; metadata stays in Capawesome Cloud.
 
-That is full vendor lock-in. Leaving later means moving the updater, the build config, the git connection, and the release metadata. Capgo keeps those pieces in your repo and your CI. The open-source updater and backend are the exit.
+That is full vendor lock-in. Leaving later means moving the updater, the build config, the git connection, and the release metadata. Capgo keeps those pieces in your repo and your CI, and its open-source updater and backend are the exit.
 
 Pricing history is the other split. Capgo’s paid entry has been **$12/month** billed yearly since launch. It has never been raised. Capawesome has already changed the commercial shape more than once:
 
