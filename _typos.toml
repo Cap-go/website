@@ -48,6 +48,8 @@ RTO = "RTO"  # Recovery Time Objective
 Sanbox = "Sanbox"  # Legacy copy key kept for runtime compatibility
 framworks = "framworks"  # Legacy copy key kept for runtime compatibility
 youre = "youre"  # Legacy copy key kept for runtime compatibility
+Entreprise = "Entreprise"  # French nav label used in translation-worker regression tests
+Blogue = "Blogue"  # French nav label used in translation-worker regression tests
 
 # OpenSSL command flags
 passin = "passin"  # OpenSSL password input flag

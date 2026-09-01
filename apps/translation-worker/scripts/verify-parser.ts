@@ -164,10 +164,7 @@ const supportContext = __translationWorkerTest.resolveTranslationContexts(['Supp
 assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('message-context'), 'Cache version was not bumped for message context support')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('fr-elision'), 'Cache version was not bumped for French elision polish')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('length-translate-no'), 'Cache version was not bumped for length + translate=no support')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('unquoted-cjk'), 'Cache version was not bumped for unquoted attrs + CJK length support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('nav-guard-dedupe-batch-v1'), 'Cache version was not bumped for nav guard + batch dedupe support')
 assert(
   __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === 'Évitez l\u2019attente. Livrez la correction.',
   'French elision did not fix "la attente"',
@@ -285,10 +282,7 @@ const unquotedTitleRendered = __translationWorkerTest.renderTranslatedHtml(
   unquotedTitleParsed.segments,
   unquotedTitleParsed.segments.map((segment, index) => (index === unquotedTitleSegmentIndex ? 'Vue d\u2019ensemble' : segment.text)),
 )
-assert(
-  unquotedTitleRendered.includes('title="Vue d\u2019ensemble"'),
-  'Rendered translation of unquoted attribute must quote values containing spaces',
-)
+assert(unquotedTitleRendered.includes('title="Vue d\u2019ensemble"'), 'Rendered translation of unquoted attribute must quote values containing spaces')
 assert(
   __translationWorkerTest.guardTranslatedBatchLengths(
     ['Deploy updates safely to every device'],
@@ -716,6 +710,86 @@ try {
   assert(enqueueFailureResponse.status === 302, 'A failed translation enqueue did not use the safe English fallback')
   assert(enqueueFailureResponse.headers.get('Location') === '/docs/', 'A failed translation enqueue redirected to the wrong English document')
   assert(enqueueFailureResponse.headers.get('X-Capgo-Translation-Fallback') === 'temporary-english-redirect', 'A failed translation enqueue kept retrying without a queued job')
+
+  const headerNavHtml = `<!doctype html><html><body>
+<!-- Enterprise -->
+<a href="/enterprise/" aria-label="Enterprise">Enterprise</a>
+<!-- Pricing -->
+<a href="/pricing/" aria-label="Pricing">Pricing</a>
+<!-- Blog -->
+<a href="/blog/" aria-label="Blog">Blog</a>
+<p>Ship updates to your users without waiting for app store review cycles.</p>
+<p>Deploy fixes and features to every user instantly.</p>
+</body></html>`
+  const headerNavParsed = __translationWorkerTest.collectSegments(headerNavHtml)
+  const navGuardSegments = headerNavParsed.segments.filter((segment) => __translationWorkerTest.isNavGuardSegment(segment))
+  assert(navGuardSegments.length === 6, 'Header nav parser did not collect guarded pricing/blog/enterprise segments')
+  assert(
+    navGuardSegments.every((segment) => segment.anchorPath && segment.text),
+    'Header nav guarded segments missed anchor binding',
+  )
+
+  const navGuardBatches = __translationWorkerTest.buildBatches(headerNavParsed.segments)
+  const guardedTexts = new Set(navGuardSegments.map((segment) => segment.text))
+  assert(
+    navGuardBatches.every((batch) => (batch.length === 1 ? true : batch.every((text) => !guardedTexts.has(text)))),
+    'Header nav guarded segments were not isolated into single-item batches',
+  )
+  assert(
+    navGuardBatches.some((batch) => batch.length > 1),
+    'Header nav fixture did not exercise the shared batching path',
+  )
+
+  const dedupedBatch = __translationWorkerTest.dedupeBatchForTranslation(['Enterprise', 'Pricing', 'Blog', 'Enterprise', 'Pricing', 'Blog'])
+  assert(dedupedBatch.uniqueBatch.length === 3, 'Batch dedupe did not collapse repeated nav labels')
+  assert(
+    __translationWorkerTest.expandDedupedBatchTranslations(['Entreprise', 'Prix', 'Blogue'], dedupedBatch.expandIndexes).join('|') ===
+      'Entreprise|Prix|Blogue|Entreprise|Prix|Blogue',
+    'Batch dedupe did not expand unique translations back to the original order',
+  )
+
+  const correctNavTranslations = headerNavParsed.segments.map((segment) => {
+    if (segment.text === 'Enterprise') return 'Entreprise'
+    if (segment.text === 'Pricing') return 'Prix'
+    if (segment.text === 'Blog') return 'Blogue'
+    return segment.text
+  })
+  __translationWorkerTest.assertNavSegmentTranslationGuard(headerNavParsed.segments, correctNavTranslations)
+  const correctNavRendered = __translationWorkerTest.renderTranslatedHtml(headerNavParsed.parts, headerNavParsed.segments, correctNavTranslations)
+  __translationWorkerTest.assertRenderedNavLinkIntegrity(headerNavHtml, correctNavRendered)
+
+  const swappedNavTranslations = headerNavParsed.segments.map((segment) => {
+    if (segment.text === 'Enterprise') return 'Entreprise'
+    if (segment.text === 'Pricing') return 'Entreprise'
+    if (segment.text === 'Blog') return 'Prix'
+    return segment.text
+  })
+  let navGuardRejected = false
+  try {
+    __translationWorkerTest.assertNavSegmentTranslationGuard(headerNavParsed.segments, swappedNavTranslations)
+  } catch {
+    navGuardRejected = true
+  }
+  assert(navGuardRejected, 'Nav translation guard did not reject collapsed Enterprise/Pricing labels')
+
+  const swappedNavRendered = __translationWorkerTest.renderTranslatedHtml(headerNavParsed.parts, headerNavParsed.segments, swappedNavTranslations)
+  let renderedNavIntegrityRejected = false
+  try {
+    __translationWorkerTest.assertRenderedNavLinkIntegrity(headerNavHtml, swappedNavRendered)
+  } catch {
+    renderedNavIntegrityRejected = true
+  }
+  assert(renderedNavIntegrityRejected, 'Rendered nav integrity check did not reject pricing/blog label overlap')
+
+  const skippedAnchorHtml = `<!doctype html><html><body>
+<a href="/pricing/" translate="no">Pricing</a>
+<p>Pricing</p>
+</body></html>`
+  const skippedAnchorParsed = __translationWorkerTest.collectSegments(skippedAnchorHtml)
+  assert(
+    skippedAnchorParsed.segments.filter((segment) => __translationWorkerTest.isNavGuardSegment(segment)).length === 0,
+    'Skipped anchor text must not bind later body text to the pricing nav path',
+  )
 } finally {
   if (originalCaches) {
     Object.defineProperty(globalThis, 'caches', originalCaches)
