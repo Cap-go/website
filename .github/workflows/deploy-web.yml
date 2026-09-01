@@ -112,7 +112,17 @@ jobs:
             ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-web-
 
+      - name: Cache Playwright browsers
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
       - run: bun install --frozen-lockfile
+      - name: Install Playwright Chromium
+        run: node ./node_modules/playwright/cli.js install chromium
       - name: Fetch latest global stats
         run: |
           GITHUB_STATS_REFRESH=true bun run fetch:stars
