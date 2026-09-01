@@ -210,12 +210,12 @@ jobs:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
       - name: Native build on tag-style releases
         if: startsWith(github.ref, 'refs/tags/v')
-        run: npx @capgo/cli@latest build request com.example.app --platform both --build-mode release
+        run: npx @capgo/cli@latest build request com.example.app --platform ios --build-mode release
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 ```
 
-Signing secrets and store keys stay in GitHub. Capgo does not need to become your source of truth for git. Full examples live in the [builder GitHub Actions docs](/docs/builder/github-actions/) and [CI/CD integration](/docs/getting-started/cicd-integration/).
+Repeat the last step with `--platform android` for Play, or use a matrix like the [GitHub Actions build guide](/docs/builder/github-actions/). Signing secrets and store keys stay in GitHub. Capgo does not need to become your source of truth for git. Full examples live in the [builder GitHub Actions docs](/docs/builder/github-actions/) and [CI/CD integration](/docs/getting-started/cicd-integration/).
 
 ## Choosing the right setup
 

@@ -119,7 +119,7 @@ if (entry.data.tag) {
 }
 
 // Create improved ldJSON using helper function
-const articleUrl = getRelativeLocaleUrl(Astro.locals.locale, `/blog/${entry.data.slug}/`)
+const articleUrl = new URL(getRelativeLocaleUrl(Astro.locals.locale, `/blog/${entry.data.slug}/`), Astro.locals.runtimeConfig.public.baseUrl).href
 
 const articleLdJson = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
   title: entry.data.title,
