@@ -164,7 +164,42 @@ const supportContext = __translationWorkerTest.resolveTranslationContexts(['Supp
 assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('nav-guard-dedupe-batch-v1'), 'Cache version was not bumped for nav guard + batch dedupe support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('word-count-constraint-v1'), 'Cache version was not bumped for word count constraint support')
+
+assert(__translationWorkerTest.translationWordCount('Ship mobile updates instantly') === 4, 'Word count did not count a short English headline')
+assert(__translationWorkerTest.translationWordCount('Évitez l\u2019attente de l\u2019App Store.') === 5, 'Word count did not count elided French words')
+assert(
+  __translationWorkerTest.translationWordCount(
+    'Deploy fixes and features without waiting for app store review delays while keeping your release pipeline fast and reliable for every user across all platforms.',
+  ) > 24,
+  'Word count fixture did not exceed the short-copy enforcement ceiling',
+)
+
+assert(
+  __translationWorkerTest.translationWordCountViolation('Ship mobile updates instantly', 'Déployez des mises à jour mobiles instantanément aux utilisateurs partout', 'French'),
+  'Word count guard did not reject an overlong French headline translation',
+)
+assert(
+  !__translationWorkerTest.translationWordCountViolation('Ship mobile updates instantly', 'Déployez des mises à jour mobiles', 'French'),
+  'Word count guard flagged a French headline within the ±3 word window',
+)
+assert(
+  !__translationWorkerTest.translationWordCountViolation(
+    'Deploy fixes and features without waiting for app store review delays while keeping your release pipeline fast and reliable for every user across all platforms.',
+    'Déployez des correctifs et des fonctionnalités sans attendre les délais de révision de l\u2019App Store tout en gardant votre pipeline de publication rapide et fiable pour chaque utilisateur sur toutes les plateformes.',
+    'French',
+  ),
+  'Word count guard should not apply to long body copy',
+)
+assert(
+  !__translationWorkerTest.translationWordCountViolation('Ship mobile updates instantly', '全デバイスへ安全に配信', 'Japanese'),
+  'Word count guard should not apply to compact CJK targets',
+)
+assert(
+  __translationWorkerTest.guardTranslationLength('Ship mobile updates instantly', 'Déployez des mises à jour mobiles instantanément aux utilisateurs partout', 'French') ===
+    'Ship mobile updates instantly',
+  'Translation guard did not fall back to source for word-count violations',
+)
 assert(
   __translationWorkerTest.applyFrenchArticleElision('Évitez la attente. Livrez la correction.') === 'Évitez l\u2019attente. Livrez la correction.',
   'French elision did not fix "la attente"',

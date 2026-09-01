@@ -165,7 +165,7 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-08-31-nav-guard-dedupe-batch-v1'
+const TRANSLATION_CACHE_VERSION = '2026-09-01-word-count-constraint-v1'
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
   '/pricing/': new Set(['Pricing']),
@@ -174,6 +174,8 @@ const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], Readon
 }
 const TRANSLATION_LENGTH_MAX_RATIO = 1.3
 const TRANSLATION_LENGTH_MIN_RATIO = 0.7
+const TRANSLATION_WORD_COUNT_MAX_DELTA = 3
+const TRANSLATION_WORD_COUNT_MAX_SOURCE_WORDS = 24
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
@@ -1776,8 +1778,29 @@ function shouldEnforceTranslationLength(source: string): boolean {
   return source.trim().length > 0
 }
 
+function translationWordCount(value: string): number {
+  const normalized = normalizedTranslationValue(value)
+  if (!normalized) return 0
+  const stripped = normalized.replace(/__CAPGO_KEEP_\d+__/g, ' ')
+  const tokens = stripped.match(/[\p{L}\p{N}][\p{L}\p{N}'\u2019-]*/gu) ?? []
+  return tokens.length
+}
+
+function shouldEnforceTranslationWordCount(source: string): boolean {
+  const count = translationWordCount(source)
+  return count >= 2 && count <= TRANSLATION_WORD_COUNT_MAX_SOURCE_WORDS
+}
+
+function translationWordCountViolation(source: string, translated: string, targetLanguage = ''): boolean {
+  if (!shouldEnforceTranslationWordCount(source)) return false
+  if (COMPACT_TRANSLATION_TARGETS.has(targetLanguage)) return false
+  const delta = Math.abs(translationWordCount(source) - translationWordCount(translated))
+  return delta > TRANSLATION_WORD_COUNT_MAX_DELTA
+}
+
 function translationLengthViolation(source: string, translated: string, targetLanguage = ''): boolean {
   if (!shouldEnforceTranslationLength(source)) return false
+  if (translationWordCountViolation(source, translated, targetLanguage)) return true
   const sourceLen = source.length
   const translatedLen = translated.length
   if (sourceLen < 12) return translatedLen > sourceLen + 8
@@ -1923,7 +1946,7 @@ function translationGrammarSystemHint(): string {
 }
 
 function translationLengthSystemHint(): string {
-  return 'Keep each translation about the same length as the source (similar character count, roughly within ±30%). Do not expand short UI labels, buttons, nav items, table headers, or headings into longer sentences. Over-long translations break Capgo page layouts and UI spacing.'
+  return 'Keep each translation about the same length as the source (similar character count, roughly within ±30%). For headings, titles, buttons, navigation labels, and other short UI copy (about 2–24 source words), keep the translated word count within ±3 words of the source. Do not expand short UI labels, buttons, nav items, table headers, or headings into longer sentences. Over-long translations break Capgo page layouts and UI spacing.'
 }
 
 /** Fix unelided French le/la before a vowel (e.g. "la attente" → "l’attente").
@@ -2104,7 +2127,11 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
       if (translated) {
         const restored = polishTranslatedText(targetLanguage, protectedText.restore(translated))
         if (translationLengthViolation(text, restored, targetLanguage)) {
-          lastError = new Error(`Translation length out of bounds for ${targetLanguage}: ${restored.length} chars vs source ${text.length}`)
+          const sourceWords = translationWordCount(text)
+          const translatedWords = translationWordCount(restored)
+          lastError = translationWordCountViolation(text, restored, targetLanguage)
+            ? new Error(`Translation word count out of bounds for ${targetLanguage}: ${translatedWords} words vs source ${sourceWords}`)
+            : new Error(`Translation length out of bounds for ${targetLanguage}: ${restored.length} chars vs source ${text.length}`)
         } else {
           return restored
         }
@@ -2133,7 +2160,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
     return text
   }
 
-  if (lastError?.message.includes('length out of bounds')) {
+  if (lastError?.message.includes('length out of bounds') || lastError?.message.includes('word count out of bounds')) {
     console.warn('Single-text translation kept source after length bound violation', {
       targetLanguage,
       error: lastError.message,
@@ -3455,6 +3482,8 @@ export const __translationWorkerTest = {
   resolveTranslationContexts,
   syncExecutableScriptsFromEnglish,
   translationLengthViolation,
+  translationWordCount,
+  translationWordCountViolation,
 }
 
 export default {
