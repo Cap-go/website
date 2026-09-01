@@ -105,7 +105,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
   web:
-    name: Web Build + SEO
+    name: Web Build + SEO + Contrast
     needs: changes
     if: needs.changes.outputs.web == 'true'
     runs-on: ubuntu-latest
@@ -139,6 +139,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-web-
+      - name: Cache Playwright browsers
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
       - run: bun install --frozen-lockfile
       - run: bun run ci:verify:web
         env:
