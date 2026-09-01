@@ -32,15 +32,8 @@ const brand = {
   pumpkinSoft: '#ffe8d6',
 }
 
-function resolveBin(name: string, fallback: string) {
-  if (existsSync(fallback)) return fallback
-  const found = spawnSync('sh', ['-c', `command -v ${name}`], { encoding: 'utf8' })
-  const path = found.stdout?.trim()
-  return path || fallback
-}
-
-const rsvgConvert = resolveBin('rsvg-convert', '/opt/homebrew/bin/rsvg-convert')
-const cwebp = resolveBin('cwebp', '/opt/homebrew/bin/cwebp')
+const rsvgConvert = '/opt/homebrew/bin/rsvg-convert'
+const cwebp = '/opt/homebrew/bin/cwebp'
 
 const blogDir = resolve('apps/web/src/content/blog/en')
 const outputDir = resolve('apps/web/public/blog-images')
