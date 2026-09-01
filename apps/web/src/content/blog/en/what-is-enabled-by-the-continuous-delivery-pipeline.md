@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-01T08:07:54.863Z
-updated_at: 2026-09-01T08:07:56.923Z
+updated_at: 2026-09-01T08:10:27.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/ad4e317a-c9e0-4554-8611-2aa26c744504/what-is-enabled-by-the-continuous-delivery-pipeline-continuous-delivery.jpg'
 head_image_alt: What Is Enabled by the Continuous Delivery Pipeline
 keywords: 'continuous delivery, CD pipeline, DevOps automation, software delivery, release engineering'
