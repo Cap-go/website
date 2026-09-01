@@ -8,8 +8,8 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-09-01T00:00:00.000Z
-updated_at: 2026-09-01T00:00:00.000Z
-head_image: /blog-images/comparing-ci-cd-platforms-for-capacitor-apps.webp
+updated_at: 2026-09-01T14:10:00.000Z
+head_image: /blog-images/comparing-ci-cd-platforms-for-capacitor-apps.png
 head_image_alt: Best CI/CD Platforms for Capacitor Apps in 2026 Capgo blog illustration
 keywords: >-
   Capacitor CI/CD, GitHub Actions Capacitor, Bitrise, Codemagic, Ionic Appflow,
@@ -55,7 +55,7 @@ faq:
       rather than start on a platform with a shutdown date.
 ---
 
-The shortlist for Capacitor CI/CD has shrunk. Microsoft App Center is gone. Ionic Appflow is in a multi-year wind-down. GitHub Actions, GitLab CI, Bitrise, and Codemagic are still here, and they are still good at the jobs they were designed for.
+The shortlist for Capacitor CI/CD has shrunk. Microsoft App Center’s build and distribute services retired on March 31, 2025. Ionic Appflow is in a multi-year wind-down. GitHub Actions, GitLab CI, Bitrise, and Codemagic are still here, and they are still good at the jobs they were designed for.
 
 The mistake is treating this as a bake-off where you pick **one** platform and move the entire pipeline onto it. Most Capacitor teams already have CI. What they lack is the three jobs generalist CI still does poorly: **signed native builds**, **live updates**, and **getting the app onto a real phone**.
 
