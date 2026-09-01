@@ -4288,7 +4288,7 @@ const messages = {
   solutions_schedule_demo: 'Schedule a Demo',
   solutions_setup_minutes: '5-minute setup',
   solutions_solo_after1: 'Push updates instantly, no review needed',
-  solutions_solo_after2: 'One command to deploy: bunx @capgo/cli@latest bundle upload',
+  solutions_solo_after2: 'One command to deploy: npx @capgo/cli@latest bundle upload',
   solutions_solo_after3: 'Start free, then $12/month as you grow',
   solutions_solo_after4: 'One-click rollback if something goes wrong',
   solutions_solo_after_title: 'With Capgo',
