@@ -35,13 +35,13 @@ body:has(:is(.lu, .nb, .cli, .ma, .sk, .product-hero, .hero-wash, main.data-page
   color: #111827;
 }
 
-/* Dark fills flatten into the charcoal wash. Keep solid CTAs readable on white cards. */
-.product-hero :is(a, button):is(.bg-gray-800, .bg-gray-900, .bg-slate-800, .bg-slate-900, .bg-gray-950, .bg-slate-950) {
+/* Inverse of a.bg-white: keep dark trial CTAs solid on white plan cards. */
+.product-hero :is(a, button).bg-gray-950 {
   background-color: #030712;
   color: #fff;
 }
 
-.product-hero :is(a, button):is(.bg-gray-800, .bg-gray-900, .bg-slate-800, .bg-slate-900, .bg-gray-950, .bg-slate-950):hover {
+.product-hero :is(a, button).bg-gray-950:hover {
   background-color: #1e2939;
   color: #fff;
 }
@@ -198,8 +198,8 @@ body:has(:is(.lu, .nb, .cli, .ma, .sk, .product-hero, .hero-wash, main.data-page
   background-color: rgba(255, 255, 255, 0.03);
 }
 
-.product-hero a:not(.bg-gray-800, .bg-gray-900, .bg-slate-800, .bg-slate-900, .bg-gray-950, .bg-slate-950)[class*='hover:bg-gray-']:hover,
-.product-hero a:not(.bg-gray-800, .bg-gray-900, .bg-slate-800, .bg-slate-900, .bg-gray-950, .bg-slate-950)[class*='hover:bg-slate-']:hover {
+.product-hero a:not(.bg-gray-950)[class*='hover:bg-gray-']:hover,
+.product-hero a:not(.bg-gray-950)[class*='hover:bg-slate-']:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 

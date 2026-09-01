@@ -8,73 +8,15 @@
  */
 import AxeBuilder from '@axe-core/playwright'
 import { spawnSync } from 'node:child_process'
-import { access, readFile } from 'node:fs/promises'
-import { createServer } from 'node:http'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
+import { ROOT, pathExists, startStaticServer } from './lib/static-preview.mjs'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const ROOT = path.resolve(__dirname, '..')
 const CONFIG_PATH = path.join(ROOT, 'visual-diff.config.json')
 const PORT = 4175
 const CTA_RATIO = 4.5
 const GHOST_RATIO = 2
 const PRICING_CTA = '[data-plan] a[aria-label^="Start"]'
-
-function isPathWithinRoot(filePath, rootDir) {
-  const resolvedFile = path.resolve(filePath)
-  const resolvedRoot = path.resolve(rootDir)
-  const relative = path.relative(resolvedRoot, resolvedFile)
-  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative))
-}
-
-function contentType(filePath) {
-  if (filePath.endsWith('.html')) return 'text/html; charset=utf-8'
-  if (filePath.endsWith('.css')) return 'text/css; charset=utf-8'
-  if (filePath.endsWith('.js')) return 'text/javascript; charset=utf-8'
-  if (filePath.endsWith('.webp')) return 'image/webp'
-  if (filePath.endsWith('.png')) return 'image/png'
-  if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) return 'image/jpeg'
-  if (filePath.endsWith('.svg')) return 'image/svg+xml'
-  if (filePath.endsWith('.woff2')) return 'font/woff2'
-  if (filePath.endsWith('.woff')) return 'font/woff'
-  if (filePath.endsWith('.json')) return 'application/json'
-  return 'application/octet-stream'
-}
-
-async function pathExists(target) {
-  try {
-    await access(target)
-    return true
-  } catch {
-    return false
-  }
-}
-
-async function startStaticServer(distDir, port) {
-  const absoluteDist = path.join(ROOT, distDir)
-  const server = createServer(async (req, res) => {
-    try {
-      const url = new URL(req.url || '/', `http://127.0.0.1:${port}`)
-      let pathname = decodeURIComponent(url.pathname)
-      if (pathname.endsWith('/')) pathname += 'index.html'
-      const filePath = path.resolve(absoluteDist, `.${pathname}`)
-      if (!isPathWithinRoot(filePath, absoluteDist)) {
-        res.writeHead(403).end('Forbidden')
-        return
-      }
-      const data = await readFile(filePath)
-      res.writeHead(200, { 'Content-Type': contentType(filePath) })
-      res.end(data)
-    } catch {
-      res.writeHead(404).end('Not found')
-    }
-  })
-
-  await new Promise((resolve) => server.listen(port, '127.0.0.1', resolve))
-  return server
-}
 
 function installChromium() {
   const playwrightCli = path.join(ROOT, 'node_modules', 'playwright', 'cli.js')
@@ -114,12 +56,7 @@ function ratioFromNode(node) {
   return match ? Number.parseFloat(match[1]) : null
 }
 
-function formatIssue(route, issue) {
-  const ratio = issue.ratio == null ? 'unknown' : `${issue.ratio.toFixed(2)}:1`
-  return `${route}  ${ratio}  ${issue.text || issue.selector}`
-}
-
-const MEASURE_CONTRAST = `(function() {
+function measureContrastInPage(selector) {
   function parseColor(color) {
     if (!color || color === 'transparent') return null
     const canvas = document.createElement('canvas')
@@ -133,7 +70,7 @@ const MEASURE_CONTRAST = `(function() {
       const value = Number.parseInt(hex[1], 16)
       return { r: (value >> 16) & 255, g: (value >> 8) & 255, b: value & 255, a: 1 }
     }
-    const match = normalized.match(/rgba?\\(([^)]+)\\)/)
+    const match = normalized.match(/rgba?\(([^)]+)\)/)
     if (!match) return null
     const parts = match[1].split(',').map((part) => Number.parseFloat(part.trim()))
     const [r, g, b, a] = parts
@@ -157,7 +94,7 @@ const MEASURE_CONTRAST = `(function() {
     }
   }
   function contrast(fg, bg) {
-    const [hi, lo] = [luminance(fg), luminance(bg)].sort((a, b) => b - a)
+    const [hi, lo] = [luminance(fg), luminance(bg)].sort((left, right) => right - left)
     return (hi + 0.05) / (lo + 0.05)
   }
   function backgroundOf(el) {
@@ -173,39 +110,21 @@ const MEASURE_CONTRAST = `(function() {
     }
     return { r: 255, g: 255, b: 255, a: 1 }
   }
-  return function measure(el) {
+
+  return [...document.querySelectorAll(selector)].map((el) => {
     const fg = parseColor(getComputedStyle(el).color)
     const bg = backgroundOf(el)
-    if (!fg) return 0
-    return contrast(fg.a < 1 ? blend(fg, bg) : fg, bg)
-  }
-})()`
-
-async function contrastRatioFor(page, selector) {
-  return page.evaluate(
-    ({ sel, measureSrc }) => {
-      const measure = eval(measureSrc)
-      const el = document.querySelector(sel)
-      return el ? measure(el) : 0
-    },
-    { sel: selector, measureSrc: MEASURE_CONTRAST },
-  )
+    const ratio = fg ? contrast(fg.a < 1 ? blend(fg, bg) : fg, bg) : 0
+    return {
+      text: (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
+      ratio,
+      selector,
+    }
+  })
 }
 
-async function pricingCtaIssues(page) {
-  return page.evaluate(
-    ({ selector, minRatio, measureSrc }) => {
-      const measure = eval(measureSrc)
-      return [...document.querySelectorAll(selector)]
-        .map((el) => ({
-          text: (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
-          ratio: measure(el),
-          selector,
-        }))
-        .filter((issue) => issue.ratio < minRatio)
-    },
-    { selector: PRICING_CTA, minRatio: CTA_RATIO, measureSrc: MEASURE_CONTRAST },
-  )
+async function contrastSamples(page, selector) {
+  return page.evaluate(measureContrastInPage, selector)
 }
 
 async function assertProductHeroCtaCanary(page) {
@@ -217,7 +136,8 @@ async function assertProductHeroCtaCanary(page) {
     </div>`)
   await page.addStyleTag({ path: path.join(ROOT, 'apps/web/src/styles/product-surface.css') })
   await page.addStyleTag({ content: '#pricing-cta-canary { color: #fff; display: flex; min-height: 44px; }' })
-  const ratio = await contrastRatioFor(page, '#pricing-cta-canary')
+  const [sample] = await contrastSamples(page, '#pricing-cta-canary')
+  const ratio = sample?.ratio ?? 0
   if (ratio < CTA_RATIO) {
     throw new Error(`product-hero dark CTA canary contrast is ${ratio.toFixed(2)}:1 (need ${CTA_RATIO}:1). Dark buttons on white cards are unreadable again.`)
   }
@@ -242,19 +162,25 @@ async function scanRoute(page, route) {
   }
 
   if (route === '/pricing/') {
-    const ctas = await page.locator(PRICING_CTA).count()
-    if (ctas === 0) {
+    const samples = await contrastSamples(page, PRICING_CTA)
+    if (samples.length === 0) {
       issues.push({ selector: PRICING_CTA, text: 'pricing plan CTAs missing from built page', ratio: 0 })
-    } else {
-      for (const issue of await pricingCtaIssues(page)) issues.push(issue)
+    }
+    for (const sample of samples) {
+      if (sample.ratio < CTA_RATIO) issues.push(sample)
     }
   }
 
   return issues
 }
 
+function formatIssue(route, issue) {
+  const ratio = issue.ratio == null ? 'unknown' : `${issue.ratio.toFixed(2)}:1`
+  return `${route}  ${ratio}  ${issue.text || issue.selector}`
+}
+
 async function main() {
-  const config = JSON.parse(await readFile(CONFIG_PATH, 'utf8'))
+  const config = JSON.parse(await Bun.file(CONFIG_PATH).text())
   const suite = config.suites.find((item) => item.name === 'web')
   if (!suite) throw new Error('visual-diff.config.json is missing the web suite')
 
@@ -272,8 +198,7 @@ async function main() {
     const page = await context.newPage()
     await assertProductHeroCtaCanary(page)
     for (const route of suite.routes) {
-      const url = `http://127.0.0.1:${PORT}${route}`
-      await page.goto(url, { waitUntil: 'load', timeout: 120000 })
+      await page.goto(`http://127.0.0.1:${PORT}${route}`, { waitUntil: 'load', timeout: 120000 })
       const title = await page.title()
       if (!title || title.toLowerCase().includes('not found')) {
         throw new Error(`Failed to render ${route} (title: "${title}")`)
