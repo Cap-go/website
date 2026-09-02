@@ -152,7 +152,7 @@ cd android
 ./gradlew bundleRelease
 ```
 
-Those Gradle tasks need a `release` signingConfig. Without one, sign the `.aab` in Android Studio before Play upload.
+Without a `release` signingConfig, these tasks still succeed but emit an unsigned `.aab`. Sign it in Android Studio before the Play upload.
 
 Install a **release APK** on a device (`./gradlew assembleRelease`, then the APK under `app/build/outputs/apk/release/`). An `.aab` is a Play upload format, not something you sideload. Exercise native plugins (camera, push, file, billing, auth). R8 bugs do not show up in `npx cap run android` debug sessions.
 
