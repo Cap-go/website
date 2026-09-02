@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-02T11:47:00.000Z
-updated_at: 2026-09-02T11:47:00.000Z
+updated_at: 2026-09-02T15:39:27.000Z
 head_image: /blog-images/google-play-obfuscation-capacitor-android.png
 head_image_alt: "Capgo blog graphic: Fix Google Play obfuscation below 25% in Capacitor apps, with an Android vitals card showing 3% obfuscation and R8 minifyEnabled reaching 25 percent"
 keywords: Google Play obfuscation, Capacitor Android, R8, ProGuard, minifyEnabled, Play Console Android vitals, app optimization threshold, DEX shrinking
