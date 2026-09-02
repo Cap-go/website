@@ -25,7 +25,16 @@ const content = {
     <section class="relative flex min-h-screen items-center justify-center overflow-hidden p-4">
       <div class="relative w-full max-w-4xl">
         <div class="absolute inset-0 -translate-x-4 transform">
-          <svg class="blur-3xl filter" style="filter: blur(64px)" width="100%" height="100%" viewBox="0 0 444 775" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            class="blur-3xl filter"
+            style="filter: blur(64px)"
+            width="100%"
+            height="100%"
+            viewBox="0 0 444 775"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
             <path
               opacity="0.5"
               d="M48.1169 329.705C48.1169 139.089 -73.495 -1.98068e-05 69.9555 -7.266e-06C213.406 5.27484e-06 444 499.666 444 690.282C444 880.898 213.406 690.282 69.9554 690.282C-73.4951 690.282 48.1168 520.321 48.1169 329.705Z"
@@ -116,7 +125,7 @@ const content = {
               href="https://support.capgo.app"
               class="flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -145,8 +154,11 @@ const content = {
           </div>
         </div>
       </div>
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
-        <img class="h-full w-full transform object-cover object-top opacity-20" src="/background-pattern.webp" alt="" />
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden opacity-20"
+        aria-hidden="true"
+        style="background-image: url('/background-pattern.webp'); background-size: cover; background-position: top;"
+      >
       </div>
     </section>
   </div>
