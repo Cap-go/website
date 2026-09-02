@@ -32,8 +32,13 @@ const brand = {
   pumpkinSoft: '#ffe8d6',
 }
 
-const rsvgConvert = '/opt/homebrew/bin/rsvg-convert'
-const cwebp = '/opt/homebrew/bin/cwebp'
+function resolveBinary(name: string, preferred: string) {
+  if (existsSync(preferred)) return preferred
+  return name
+}
+
+const rsvgConvert = resolveBinary('rsvg-convert', '/opt/homebrew/bin/rsvg-convert')
+const cwebp = resolveBinary('cwebp', '/opt/homebrew/bin/cwebp')
 
 const blogDir = resolve('apps/web/src/content/blog/en')
 const outputDir = resolve('apps/web/public/blog-images')
@@ -346,12 +351,7 @@ function renderTerminalPanel(image: BlogImage) {
   const h = panelH
   const side = layout.panelSidePad
   const innerW = w - side * 2
-  const lines = [
-    'capgo build ios --profile release',
-    'capgo upload --channel production',
-    'health check passed',
-    'promote rollout to 25%',
-  ]
+  const lines = ['capgo build ios --profile release', 'capgo upload --channel production', 'health check passed', 'promote rollout to 25%']
 
   const lineMarkup = lines
     .map((line, index) => {
