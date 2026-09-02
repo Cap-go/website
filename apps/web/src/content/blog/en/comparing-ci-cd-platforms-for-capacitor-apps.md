@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-09-01T00:00:00.000Z
-updated_at: 2026-09-01T18:00:00.000Z
+updated_at: 2026-09-02T11:46:14.000Z
 head_image: /blog-images/comparing-ci-cd-platforms-for-capacitor-apps.png
 head_image_alt: Keep your CI. Add Capgo. Native builds, live updates, and device tests.
 keywords: >-
