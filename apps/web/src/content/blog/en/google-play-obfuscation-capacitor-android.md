@@ -154,10 +154,10 @@ cd android
 
 Install a **release APK** on a device (`./gradlew assembleRelease`, then the APK under `app/build/outputs/apk/release/`). An `.aab` is a Play upload format, not something you sideload. Exercise native plugins (camera, push, file, billing, auth). R8 bugs do not show up in `npx cap run android` debug sessions.
 
-After the build, confirm R8 actually ran:
+After the Gradle commands above (you are in `android/`), confirm R8 actually ran:
 
-- `android/app/build/outputs/mapping/release/mapping.txt`
-- `android/app/build/outputs/mapping/release/configuration.txt`
+- `app/build/outputs/mapping/release/mapping.txt`
+- `app/build/outputs/mapping/release/configuration.txt`
 - On the latest patch of AGP 8.10 or higher, `r8.json` inside the App Bundle
 
 If `mapping.txt` is missing, minification did not run. Recheck the `release` build type, product flavors, and that CI is not assembling `debug`.
@@ -187,7 +187,7 @@ Play only **enforces** the 25% floor when DEX is over 10 MB for apps (50 MB for 
 
 R8 is on, but Play (or the local analyzer) still shows a weak score. Broad keep rules are the usual leftover.
 
-1. Open [R8 Configuration Analyzer](https://developer.android.com/topic/performance/app-optimization/r8-configuration-analyzer) if your Android Gradle Plugin is 9.3 or newer — `assembleRelease` then writes `android/app/build/outputs/mapping/release/configanalyzer.html`. On AGP 9.2 and earlier, skip that HTML file and use `mapping.txt`, APK Analyzer, and Play's App bundle explorer instead.
+1. Open [R8 Configuration Analyzer](https://developer.android.com/topic/performance/app-optimization/r8-configuration-analyzer) if your Android Gradle Plugin is 9.3 or newer — `assembleRelease` then writes `app/build/outputs/mapping/release/configanalyzer.html` inside the `android/` module. On AGP 9.2 and earlier, skip that HTML file and use `mapping.txt`, APK Analyzer, and Play's App bundle explorer instead.
 2. Sort keep rules by how much of the app they freeze. Library consumer rules you cannot edit are normal. App-level `-keep class com.foo.** { *; }` is not.
 3. Open the `.aab` in Android Studio APK Analyzer, select the large `.dex` files, and toggle deobfuscated names (needs `mapping.txt`). Packages that stay huge and readable are the packages to stop keeping wholesale.
 4. Update plugins that still reference `proguard-android.txt`. That file blocks optimization on AGP 9 and is a red flag in older plugins.
