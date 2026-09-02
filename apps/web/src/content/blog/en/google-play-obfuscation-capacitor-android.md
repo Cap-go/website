@@ -152,6 +152,8 @@ cd android
 ./gradlew bundleRelease
 ```
 
+Those Gradle tasks need a `release` signingConfig. Without one, sign the `.aab` in Android Studio before Play upload.
+
 Install a **release APK** on a device (`./gradlew assembleRelease`, then the APK under `app/build/outputs/apk/release/`). An `.aab` is a Play upload format, not something you sideload. Exercise native plugins (camera, push, file, billing, auth). R8 bugs do not show up in `npx cap run android` debug sessions.
 
 After the Gradle commands above (you are in `android/`), confirm R8 actually ran:
@@ -160,9 +162,9 @@ After the Gradle commands above (you are in `android/`), confirm R8 actually ran
 - `app/build/outputs/mapping/release/configuration.txt`
 - On the latest patch of AGP 8.10 or higher, `r8.json` inside the App Bundle
 
-Those `release` folders are the default Capacitor variant. With product flavors, swap `release` for the variant you uploaded (`freeRelease`, `paidRelease`, …) in the mapping path and the APK path.
+Those `release` folders are the default Capacitor variant. With product flavors, mapping is under the variant name (`mapping/freeRelease/`). The APK is under `apk/<flavor>/release/` (for example `apk/free/release/`).
 
-If `mapping.txt` is missing, minification did not run. Recheck the `release` build type, product flavors, and that CI is not assembling `debug`.
+If `mapping.txt` is missing, you are in the wrong variant folder, CI assembled `debug`, or R8 ran with `-dontobfuscate`. Recheck `minifyEnabled true` on `release` and that keep rules do not disable obfuscation.
 
 ## Step 5 — Keep crash reports readable
 
