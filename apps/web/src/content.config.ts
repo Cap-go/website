@@ -27,6 +27,14 @@ const blog = defineCollection({
       origin: z.enum(['human', 'ai']).default('ai'),
       locale: localeSchema,
       next_blog: z.string().optional().nullable(),
+      faq: z
+        .array(
+          z.object({
+            question: z.string(),
+            answer: z.string(),
+          }),
+        )
+        .optional(),
     })
     .transform((data) => ({
       ...data,

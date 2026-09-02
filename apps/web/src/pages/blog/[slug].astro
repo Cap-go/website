@@ -7,7 +7,7 @@ import { HUMAN_EDITORIAL_TEAM } from '@/config/blogEditorialTeam'
 import { isHumanBlogPost } from '@/lib/blogOrigin'
 import { formatTime } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
-import { createNewsArticleLdJson } from '@/lib/ldJson'
+import { createFAQPageLdJson, createLdJsonGraph, createNewsArticleLdJson } from '@/lib/ldJson'
 import m from '@/copy/messages'
 import { defaultLocale, locales } from '@/services/locale'
 import type { GetStaticPaths } from 'astro'
@@ -119,9 +119,9 @@ if (entry.data.tag) {
 }
 
 // Create improved ldJSON using helper function
-const articleUrl = getRelativeLocaleUrl(Astro.locals.locale, `/blog/${entry.data.slug}/`)
+const articleUrl = new URL(getRelativeLocaleUrl(Astro.locals.locale, `/blog/${entry.data.slug}/`), Astro.locals.runtimeConfig.public.baseUrl).href
 
-content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
+const articleLdJson = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
   title: entry.data.title,
   description: entry.data.description || '',
   url: articleUrl,
@@ -136,6 +136,18 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
   articleBody: striptags(entry.rendered?.html || ''),
   locale: Astro.locals.locale,
 })
+const faqItems = entry.data.faq
+content['ldJSON'] =
+  faqItems && faqItems.length > 0
+    ? createLdJsonGraph(Astro.locals.runtimeConfig.public, articleLdJson, {
+        additionalEntities: [
+          createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+            url: articleUrl,
+            questions: faqItems,
+          }),
+        ],
+      })
+    : articleLdJson
 ---
 
 <Layout content={content}>

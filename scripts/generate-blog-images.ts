@@ -346,12 +346,7 @@ function renderTerminalPanel(image: BlogImage) {
   const h = panelH
   const side = layout.panelSidePad
   const innerW = w - side * 2
-  const lines = [
-    'capgo build ios --profile release',
-    'capgo upload --channel production',
-    'health check passed',
-    'promote rollout to 25%',
-  ]
+  const lines = ['capgo build ios --profile release', 'capgo upload --channel production', 'health check passed', 'promote rollout to 25%']
 
   const lineMarkup = lines
     .map((line, index) => {
