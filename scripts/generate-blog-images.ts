@@ -3,7 +3,7 @@
  * Usage: bun run generate:blog-images [--slug=<slug>] [--external-only] [--update-frontmatter]
  */
 import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, resolve } from 'node:path'
 
@@ -32,8 +32,17 @@ const brand = {
   pumpkinSoft: '#ffe8d6',
 }
 
-const rsvgConvert = '/opt/homebrew/bin/rsvg-convert'
-const cwebp = '/opt/homebrew/bin/cwebp'
+function resolveBinary(name: string, preferred: string) {
+  try {
+    if (statSync(preferred).isFile()) return preferred
+  } catch {
+    // Missing Homebrew path: fall through to PATH.
+  }
+  return name
+}
+
+const rsvgConvert = resolveBinary('rsvg-convert', '/opt/homebrew/bin/rsvg-convert')
+const cwebp = resolveBinary('cwebp', '/opt/homebrew/bin/cwebp')
 
 const blogDir = resolve('apps/web/src/content/blog/en')
 const outputDir = resolve('apps/web/public/blog-images')
