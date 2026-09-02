@@ -3,7 +3,7 @@
  * Usage: bun run generate:blog-images [--slug=<slug>] [--external-only] [--update-frontmatter]
  */
 import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, resolve } from 'node:path'
 
@@ -33,7 +33,11 @@ const brand = {
 }
 
 function resolveBinary(name: string, preferred: string) {
-  if (existsSync(preferred)) return preferred
+  try {
+    if (statSync(preferred).isFile()) return preferred
+  } catch {
+    // Missing Homebrew path: fall through to PATH.
+  }
   return name
 }
 

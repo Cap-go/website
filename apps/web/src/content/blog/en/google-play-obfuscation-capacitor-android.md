@@ -7,7 +7,7 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-02T11:47:00.000Z
 updated_at: 2026-09-02T11:47:00.000Z
-head_image: /blog-images/google-play-obfuscation-capacitor-android.webp
+head_image: /blog-images/google-play-obfuscation-capacitor-android.png
 head_image_alt: "Fix Google Play Obfuscation Below 25% in Capacitor Apps Capgo blog illustration"
 keywords: Google Play obfuscation, Capacitor Android, R8, ProGuard, minifyEnabled, Play Console Android vitals, app optimization threshold, DEX shrinking
 tag: Development, Android, Google Play
@@ -35,7 +35,7 @@ Google Play inspects the **DEX** in your Android App Bundle: compiled Java and K
 | Optimization | R8 inlines, merges, and rewrites bytecode | Default `proguard-android.txt` includes `-dontoptimize` |
 | Shrinking | Unused classes and methods removed | Resource/code shrinking never turned on |
 
-Play reads `r8.json` when you build with Android Gradle Plugin 8.10 or newer. Otherwise it uses `mapping.txt`, then DEX heuristics. A Capacitor app shipped with minification off has almost no mapping file, so Play sees readable names and reports a few percent obfuscation (often leftover from already-obfuscated library AARs). That matches a **3%** vitals score.
+Play reads `r8.json` when you build with the latest patch of Android Gradle Plugin 8.10 or higher. Otherwise it uses `mapping.txt`, then DEX heuristics. A Capacitor app shipped with minification off has almost no mapping file, so Play sees readable names and reports a few percent obfuscation (often leftover from already-obfuscated library AARs). That matches a **3%** vitals score.
 
 Official policy: [Play Console technical quality requirements](https://support.google.com/googleplay/android-developer/answer/17492799). Implementation detail: [DEX code optimization](https://developer.android.com/topic/performance/vitals/code-optimization) and [enable app optimization with R8](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization).
 
@@ -89,7 +89,7 @@ Three details matter:
 
 1. `minifyEnabled true` is what actually runs R8 (shrink + obfuscate + optimize).
 2. `shrinkResources true` removes unused Android resources. It requires minification.
-3. `proguard-android-optimize.txt` is required for the **optimization** percentage. `proguard-android.txt` ships `-dontoptimize` and will fail AGP 9. See [Capacitor Plugin AGP 9 Build Error Fix](/blog/fix-capacitor-plugin-build-errors-with-agp-9/) if a plugin still references the old file.
+3. For this R8 setup, use `proguard-android-optimize.txt`. `proguard-android.txt` ships `-dontoptimize`, which blocks R8 optimizations and fails AGP 9. Play allows any shrinker; Capacitor apps should use R8 with the optimize defaults. See [Capacitor Plugin AGP 9 Build Error Fix](/blog/fix-capacitor-plugin-build-errors-with-agp-9/) if a plugin still references the old file.
 
 Do not set `minifyEnabled true` on `debug`. Release-only keeps local runs fast and stack traces readable.
 
@@ -152,13 +152,13 @@ cd android
 ./gradlew bundleRelease
 ```
 
-Install a **release** APK or bundle on a device and exercise native plugins (camera, push, file, billing, auth). R8 bugs do not show up in `npx cap run android` debug sessions.
+Install a **release APK** on a device (`./gradlew assembleRelease`, then the APK under `app/build/outputs/apk/release/`). An `.aab` is a Play upload format, not something you sideload. Exercise native plugins (camera, push, file, billing, auth). R8 bugs do not show up in `npx cap run android` debug sessions.
 
 After the build, confirm R8 actually ran:
 
 - `android/app/build/outputs/mapping/release/mapping.txt`
 - `android/app/build/outputs/mapping/release/configuration.txt`
-- On AGP 8.10+, `r8.json` inside the App Bundle
+- On the latest patch of AGP 8.10 or higher, `r8.json` inside the App Bundle
 
 If `mapping.txt` is missing, minification did not run. Recheck the `release` build type, product flavors, and that CI is not assembling `debug`.
 
@@ -187,7 +187,7 @@ Play only **enforces** the 25% floor when DEX is over 10 MB for apps (50 MB for 
 
 R8 is on, but Play (or the local analyzer) still shows a weak score. Broad keep rules are the usual leftover.
 
-1. Open [R8 Configuration Analyzer](https://developer.android.com/topic/performance/app-optimization/r8-configuration-analyzer). After `assembleRelease`, look at `android/app/build/outputs/mapping/release/configanalyzer.html`.
+1. Open [R8 Configuration Analyzer](https://developer.android.com/topic/performance/app-optimization/r8-configuration-analyzer) if your Android Gradle Plugin is 9.3 or newer — `assembleRelease` then writes `android/app/build/outputs/mapping/release/configanalyzer.html`. On AGP 9.2 and earlier, skip that HTML file and use `mapping.txt`, APK Analyzer, and Play's App bundle explorer instead.
 2. Sort keep rules by how much of the app they freeze. Library consumer rules you cannot edit are normal. App-level `-keep class com.foo.** { *; }` is not.
 3. Open the `.aab` in Android Studio APK Analyzer, select the large `.dex` files, and toggle deobfuscated names (needs `mapping.txt`). Packages that stay huge and readable are the packages to stop keeping wholesale.
 4. Update plugins that still reference `proguard-android.txt`. That file blocks optimization on AGP 9 and is a red flag in older plugins.
