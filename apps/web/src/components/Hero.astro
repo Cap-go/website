@@ -11,16 +11,31 @@ const teamUrl = 'https://book.capgo.app/demo/'
 <section>
   <div class="relative overflow-hidden">
     <div class="relative mx-auto max-w-7xl pb-8 md:pb-32 2xl:max-w-[90vw]">
-      <!-- Background Grid of Squares: customer logos only, no empty filler tiles -->
+      <!-- Background Grid of Squares -->
       <div class="pointer-events-none absolute inset-0 flex w-full flex-col justify-start gap-4 blur-sm select-none sm:blur-none">
+        <!-- Row 0 -->
+        <div class="grid w-full grid-cols-12 gap-4 2xl:gap-6">
+          <!-- Left -->
+          <div class="col-start-1 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-20 backdrop-blur-sm 2xl:h-20 2xl:w-20"></div>
+          <div class="col-start-2 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-20 backdrop-blur-sm 2xl:h-20 2xl:w-20"></div>
+          <div class="col-start-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-40 backdrop-blur-sm 2xl:h-20 2xl:w-20"></div>
+          <div class="col-start-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm 2xl:h-20 2xl:w-20"></div>
+          <!-- Right -->
+          <div class="col-start-9 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-70 backdrop-blur-sm 2xl:h-20 2xl:w-20"></div>
+          <div class="col-start-10 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm 2xl:h-20 2xl:w-20"></div>
+          <div class="col-start-11 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-40 backdrop-blur-sm 2xl:h-20 2xl:w-20"></div>
+          <div class="col-start-12 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-20 backdrop-blur-sm 2xl:h-20 2xl:w-20"></div>
+        </div>
         <!-- Row 1 -->
         <div class="grid w-full grid-cols-12 gap-4 2xl:gap-6">
           <div class="col-start-1 flex h-16 w-16 overflow-hidden rounded-2xl bg-[#1a1d24]/30 backdrop-blur-sm 2xl:h-20 2xl:w-20">
             <img src="/logo_cloud/poplin_logo.webp" alt="Poplin" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
+          <!-- Left -->
           <div class="col-start-2 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 backdrop-blur-sm 2xl:h-20 2xl:w-20">
             <img src="/logo_cloud/ajeer_logo.webp" alt="Ajeer" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
+          <!-- Right -->
           <div class="col-start-11 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 backdrop-blur-sm 2xl:h-20 2xl:w-20">
             <img src="/logo_cloud/felix_health_logo.webp" alt="Felix Health" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
@@ -31,6 +46,11 @@ const teamUrl = 'https://book.capgo.app/demo/'
 
         <!-- Row 2 -->
         <div class="grid w-full grid-cols-12 gap-4 2xl:gap-6">
+          <!-- Left -->
+          <div
+            class="col-start-1 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:-translate-x-28"
+          >
+          </div>
           <div
             class="col-start-2 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/80 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:-translate-x-28"
           >
@@ -41,6 +61,8 @@ const teamUrl = 'https://book.capgo.app/demo/'
           >
             <img src="/logo_cloud/seaport_logo.webp" alt="Seaport" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
+
+          <!-- Right -->
           <div
             class="col-start-10 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
           >
@@ -50,6 +72,10 @@ const teamUrl = 'https://book.capgo.app/demo/'
             class="col-start-11 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/80 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
           >
             <img src="/logo_cloud/suez_logo.webp" alt="Suez" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
+          </div>
+          <div
+            class="col-start-12 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
+          >
           </div>
         </div>
 
@@ -80,6 +106,11 @@ const teamUrl = 'https://book.capgo.app/demo/'
 
         <!-- Row 4 -->
         <div class="grid w-full grid-cols-12 gap-4 2xl:gap-6">
+          <!-- Left -->
+          <div
+            class="col-start-1 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:-translate-x-28"
+          >
+          </div>
           <div
             class="col-start-2 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/80 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:-translate-x-28"
           >
@@ -90,6 +121,8 @@ const teamUrl = 'https://book.capgo.app/demo/'
           >
             <img src="/logo_cloud/nana_logo.webp" alt="Nana" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
+
+          <!-- Right -->
           <div
             class="col-start-10 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
           >
@@ -99,6 +132,10 @@ const teamUrl = 'https://book.capgo.app/demo/'
             class="col-start-11 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/80 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
           >
             <img src="/logo_cloud/remnote_logo.webp" alt="RemNote" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
+          </div>
+          <div
+            class="col-start-12 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
+          >
           </div>
         </div>
 
@@ -128,6 +165,15 @@ const teamUrl = 'https://book.capgo.app/demo/'
         </div>
         <!-- Row 6 -->
         <div class="grid w-full grid-cols-12 gap-4 2xl:gap-6">
+          <!-- Left -->
+          <div
+            class="col-start-1 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-40 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:-translate-x-28"
+          >
+          </div>
+          <div
+            class="col-start-2 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:-translate-x-28"
+          >
+          </div>
           <div
             class="col-start-3 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:-translate-x-28"
           >
@@ -138,6 +184,7 @@ const teamUrl = 'https://book.capgo.app/demo/'
           >
             <img src="/logo_cloud/gartner_health_logo.webp" alt="Gartner Health" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
+          <!-- Right -->
           <div
             class="col-start-9 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
           >
@@ -147,6 +194,14 @@ const teamUrl = 'https://book.capgo.app/demo/'
             class="col-start-10 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
           >
             <img src="/logo_cloud/oneclick_logo.webp" alt="OneClick" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
+          </div>
+          <div
+            class="col-start-11 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
+          >
+          </div>
+          <div
+            class="col-start-12 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl bg-[#1a1d24]/30 opacity-40 backdrop-blur-sm 2xl:h-20 2xl:w-20 2xl:translate-x-28"
+          >
           </div>
         </div>
       </div>
@@ -166,12 +221,12 @@ const teamUrl = 'https://book.capgo.app/demo/'
 
         <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight xl:text-7xl">
           <span class="sr-only">Capgo. </span>
-          {m.home_hero_title({}, { locale: Astro.locals.locale })}
+          Everything you need to ship
           <br />
-          <span class="text-azure-500">{m.home_hero_title_line2({}, { locale: Astro.locals.locale })}</span>
+          <span class="text-azure-500">CapacitorJS apps</span>
         </h1>
         <p class="font-inter mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl">
-          {m.home_hero_subtitle({}, { locale: Astro.locals.locale })}
+          Live updates, native builds, channels, rollback, and release automation for CapacitorJS apps.
         </p>
         <div class="mt-10 flex flex-col items-center gap-4">
           <div class="flex flex-col items-center gap-4 sm:flex-row">
