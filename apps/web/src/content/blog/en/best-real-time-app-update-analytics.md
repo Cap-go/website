@@ -5,8 +5,8 @@ description: 'Compare real-time app update analytics tools for Capacitor apps. T
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
-created_at: 2026-09-01T07:22:55.000Z
-updated_at: 2026-09-03T21:47:41.000Z
+created_at: 2026-09-03T21:48:29.000Z
+updated_at: 2026-09-03T22:00:09.000Z
 head_image: /capgo_banner.png
 head_image_alt: Real-time app update analytics dashboard for Capacitor release monitoring
 keywords: ''
