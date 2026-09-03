@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-03T09:11:56.774Z
-updated_at: 2026-09-03T09:11:58.102Z
+updated_at: 2026-09-03T09:14:41.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/367a0684-b30f-4efe-adec-8da2d01af7d4/app-availability-guide-slides.jpg'
 head_image_alt: App Availability Guide for Mobile and Desktop Teams
 keywords: 'app availability, uptime SLA, live updates, Capgo, incident recovery'
