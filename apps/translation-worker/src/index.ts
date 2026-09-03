@@ -165,7 +165,7 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-08-31-nav-guard-dedupe-batch-v1'
+const TRANSLATION_CACHE_VERSION = '2026-09-01-word-count-retry-v1'
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
   '/pricing/': new Set(['Pricing']),
@@ -174,6 +174,10 @@ const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], Readon
 }
 const TRANSLATION_LENGTH_MAX_RATIO = 1.3
 const TRANSLATION_LENGTH_MIN_RATIO = 0.7
+const TRANSLATION_WORD_COUNT_MAX_DELTA = 3
+const TRANSLATION_WORD_COUNT_MAX_SOURCE_WORDS = 24
+const TRANSLATION_WORD_COUNT_RETRIES = 2
+const TRANSLATION_WORD_COUNT_ATTEMPTS = TRANSLATION_WORD_COUNT_RETRIES + 1
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
@@ -1776,7 +1780,27 @@ function shouldEnforceTranslationLength(source: string): boolean {
   return source.trim().length > 0
 }
 
-function translationLengthViolation(source: string, translated: string, targetLanguage = ''): boolean {
+function translationWordCount(value: string): number {
+  const normalized = normalizedTranslationValue(value)
+  if (!normalized) return 0
+  const stripped = normalized.replace(/__CAPGO_KEEP_\d+__/g, ' ')
+  const tokens = stripped.match(/[\p{L}\p{N}][\p{L}\p{N}'\u2019-]*/gu) ?? []
+  return tokens.length
+}
+
+function shouldEnforceTranslationWordCount(source: string): boolean {
+  const count = translationWordCount(source)
+  return count >= 2 && count <= TRANSLATION_WORD_COUNT_MAX_SOURCE_WORDS
+}
+
+function translationWordCountViolation(source: string, translated: string, targetLanguage = ''): boolean {
+  if (!shouldEnforceTranslationWordCount(source)) return false
+  if (COMPACT_TRANSLATION_TARGETS.has(targetLanguage)) return false
+  const delta = Math.abs(translationWordCount(source) - translationWordCount(translated))
+  return delta > TRANSLATION_WORD_COUNT_MAX_DELTA
+}
+
+function translationCharacterLengthViolation(source: string, translated: string, targetLanguage = ''): boolean {
   if (!shouldEnforceTranslationLength(source)) return false
   const sourceLen = source.length
   const translatedLen = translated.length
@@ -1786,8 +1810,36 @@ function translationLengthViolation(source: string, translated: string, targetLa
   return translatedLen < sourceLen * TRANSLATION_LENGTH_MIN_RATIO
 }
 
+function translationLengthViolation(source: string, translated: string, targetLanguage = ''): boolean {
+  return translationCharacterLengthViolation(source, translated, targetLanguage)
+}
+
+function pickShortestWordCountCandidate(source: string, candidates: readonly string[]): string {
+  const unique = [...new Set(candidates.map((candidate) => candidate.trim()).filter(Boolean))]
+  if (unique.length === 0) return source
+
+  const sourceWords = translationWordCount(source)
+  return unique.sort((left, right) => {
+    const leftWords = translationWordCount(left)
+    const rightWords = translationWordCount(right)
+    if (leftWords !== rightWords) return leftWords - rightWords
+
+    const leftDelta = Math.abs(sourceWords - leftWords)
+    const rightDelta = Math.abs(sourceWords - rightWords)
+    if (leftDelta !== rightDelta) return leftDelta - rightDelta
+
+    return left.length - right.length
+  })[0]
+}
+
+function rememberWordCountCandidate(candidates: string[], source: string, translated: string, targetLanguage: string): boolean {
+  if (translationCharacterLengthViolation(source, translated, targetLanguage)) return false
+  candidates.push(translated)
+  return !translationWordCountViolation(source, translated, targetLanguage)
+}
+
 function guardTranslationLength(source: string, translated: string, targetLanguage = ''): string {
-  return translationLengthViolation(source, translated, targetLanguage) ? source : translated
+  return translationCharacterLengthViolation(source, translated, targetLanguage) ? source : translated
 }
 
 function guardTranslatedBatchLengths(batch: string[], translated: string[], targetLanguage = ''): string[] {
@@ -1923,7 +1975,7 @@ function translationGrammarSystemHint(): string {
 }
 
 function translationLengthSystemHint(): string {
-  return 'Keep each translation about the same length as the source (similar character count, roughly within ±30%). Do not expand short UI labels, buttons, nav items, table headers, or headings into longer sentences. Over-long translations break Capgo page layouts and UI spacing.'
+  return 'Keep each translation about the same length as the source (similar character count, roughly within ±30%). For headings, titles, buttons, navigation labels, and other short UI copy (about 2–24 source words), keep the translated word count within ±3 words of the source. Do not expand short UI labels, buttons, nav items, table headers, or headings into longer sentences. Over-long translations break Capgo page layouts and UI spacing.'
 }
 
 /** Fix unelided French le/la before a vowel (e.g. "la attente" → "l’attente").
@@ -2011,19 +2063,11 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           return polishTranslatedText(targetLanguage, result.text)
         })
         assertTranslatedBatch(targetLanguage, uniqueBatch, restored)
-        const guarded = guardTranslatedBatchLengths(uniqueBatch, restored, targetLanguage).map((text, index) => {
-          if (text === uniqueBatch[index] && translationLengthViolation(uniqueBatch[index], restored[index], targetLanguage)) {
-            console.warn('Translation kept source after length bound violation', {
-              targetLanguage,
-              index,
-              sourceLength: uniqueBatch[index].length,
-              translatedLength: restored[index].length,
-              sourcePreview: aiPayloadPreview(uniqueBatch[index]),
-              outputPreview: aiPayloadPreview(restored[index]),
-            })
-          }
-          return text
-        })
+        const guarded = guardTranslatedBatchLengths(uniqueBatch, restored, targetLanguage)
+        for (let index = 0; index < guarded.length; index += 1) {
+          if (!shouldEnforceTranslationWordCount(uniqueBatch[index])) continue
+          guarded[index] = await translateSingleText(env, targetLanguage, uniqueBatch[index], pagePath, guarded[index])
+        }
         return expandDedupedBatchTranslations(guarded, expandIndexes)
       }
     } catch (error) {
@@ -2059,13 +2103,20 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[],
   return await translateBatchIndividually(env, targetLanguage, batch, pagePath)
 }
 
-async function translateSingleText(env: Env, targetLanguage: string, text: string, pagePath = ''): Promise<string> {
+async function translateSingleText(env: Env, targetLanguage: string, text: string, pagePath = '', seedCandidate?: string): Promise<string> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const protectedText = protectTranslationTokens(text)
   const context = resolveTranslationContexts([text])[0]
+  const enforceWordCount = shouldEnforceTranslationWordCount(text)
+  const maxAttempts = enforceWordCount ? TRANSLATION_WORD_COUNT_ATTEMPTS : TRANSLATION_SINGLE_TEXT_ATTEMPTS
+  const wordCountCandidates: string[] = []
 
-  for (let attempt = 1; attempt <= TRANSLATION_SINGLE_TEXT_ATTEMPTS; attempt += 1) {
+  if (seedCandidate && rememberWordCountCandidate(wordCountCandidates, text, seedCandidate, targetLanguage)) {
+    return seedCandidate
+  }
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     let payload: unknown = ''
     try {
       const result = await env.AI.run(model, {
@@ -2083,8 +2134,13 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
+              enforceWordCount && attempt > 1
+                ? 'Your previous translation used too many or too few words for this short UI string. Shorten or tighten the wording while keeping the same meaning.'
+                : '',
               'Return only the translated text. Do not return JSON, Markdown, labels, explanations, quotes around the whole answer, or extra lines.',
-            ].join(' '),
+            ]
+              .filter(Boolean)
+              .join(' '),
           },
           {
             role: 'user',
@@ -2103,10 +2159,27 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
       const translated = plainTranslationFromUnknown(payload)
       if (translated) {
         const restored = polishTranslatedText(targetLanguage, protectedText.restore(translated))
-        if (translationLengthViolation(text, restored, targetLanguage)) {
+        if (translationCharacterLengthViolation(text, restored, targetLanguage)) {
           lastError = new Error(`Translation length out of bounds for ${targetLanguage}: ${restored.length} chars vs source ${text.length}`)
-        } else {
+        } else if (rememberWordCountCandidate(wordCountCandidates, text, restored, targetLanguage)) {
           return restored
+        } else if (enforceWordCount && attempt < maxAttempts) {
+          const sourceWords = translationWordCount(text)
+          const translatedWords = translationWordCount(restored)
+          lastError = new Error(`Translation word count out of bounds for ${targetLanguage}: ${translatedWords} words vs source ${sourceWords}`)
+          console.warn('Word count out of bounds; retrying translation', {
+            targetLanguage,
+            attempt,
+            maxAttempts,
+            sourceWords,
+            translatedWords,
+            sourcePreview: aiPayloadPreview(text),
+            outputPreview: aiPayloadPreview(restored),
+          })
+        } else {
+          const sourceWords = translationWordCount(text)
+          const translatedWords = translationWordCount(restored)
+          lastError = new Error(`Translation word count out of bounds for ${targetLanguage}: ${translatedWords} words vs source ${sourceWords}`)
         }
       } else {
         lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
@@ -2118,10 +2191,23 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
     console.warn('Single-text translation response rejected', {
       targetLanguage,
       attempt,
-      maxAttempts: TRANSLATION_SINGLE_TEXT_ATTEMPTS,
+      maxAttempts,
       error: lastError.message,
       outputPreview: aiPayloadPreview(payload),
     })
+  }
+
+  if (enforceWordCount && wordCountCandidates.length > 0) {
+    const shortest = pickShortestWordCountCandidate(text, wordCountCandidates)
+    console.warn('Word count out of bounds after retries; using shortest candidate', {
+      targetLanguage,
+      sourceWords: translationWordCount(text),
+      candidateCount: wordCountCandidates.length,
+      selectedWords: translationWordCount(shortest),
+      sourcePreview: aiPayloadPreview(text),
+      selectedPreview: aiPayloadPreview(shortest),
+    })
+    return shortest
   }
 
   if (lastError?.message.startsWith('Translation dropped protected token: ')) {
@@ -3455,6 +3541,9 @@ export const __translationWorkerTest = {
   resolveTranslationContexts,
   syncExecutableScriptsFromEnglish,
   translationLengthViolation,
+  translationWordCount,
+  translationWordCountViolation,
+  pickShortestWordCountCandidate,
 }
 
 export default {
