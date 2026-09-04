@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-04T09:45:04.122Z
-updated_at: 2026-09-04T09:45:05.489Z
+updated_at: 2026-09-04T09:48:05.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/ed09cf58-cdf4-44c5-b10c-d016ef40246d/what-is-continuous-delivery-title-slide.jpg'
 head_image_alt: What Is Continuous Delivery and How It Works
 keywords: 'continuous delivery, CI/CD pipeline, mobile app deployment, Capacitor live updates, DevOps metrics'
