@@ -17,6 +17,7 @@ import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { marked } from 'marked'
+import { sanitizeMarkdownHtml } from '@/lib/sanitizeHtml'
 export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPosts: { [k: string]: CollectionEntry<'plugin'>[] } = {}
   await getCollection('plugin', (item) => {
@@ -59,12 +60,12 @@ if (thisTut?.body) tutorialPlugin = thisTut.body
 if (tutorialPlugin.length > 0) {
   const tmp = marked.parse(tutorialPlugin)
   const tutorialHtml = typeof tmp !== 'string' ? await tmp : tmp
-  plugin['tutorial'] = normalizeTutorialHeading(tutorialHtml)
+  plugin['tutorial'] = sanitizeMarkdownHtml(normalizeTutorialHeading(tutorialHtml))
 }
 
 const tmp = marked.parse(`# ${plugin.title}\n\n${plugin.description}`)
-if (typeof tmp !== 'string') plugin['readme'] = await tmp
-else plugin['readme'] = tmp
+const readmeHtml = typeof tmp !== 'string' ? await tmp : tmp
+plugin['readme'] = sanitizeMarkdownHtml(readmeHtml)
 
 const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
 const docsSlug = resolvePluginDocsSlug(plugin, docsSlugs)

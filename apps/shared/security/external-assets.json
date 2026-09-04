@@ -1,0 +1,46 @@
+{
+  "assets": [
+    {
+      "id": "affonso-pixel",
+      "url": "https://aff.capgo.app/r/pixel.js",
+      "integrity": "sha384-F7wtAICU/0JTgB9/lsLMbAoth550sR81qLs14CszTQ7fzxDAtkIN0SeL1WFIUsz4",
+      "crossOrigin": "anonymous"
+    },
+    {
+      "id": "datafast-outbound-links",
+      "url": "https://pls.digitalshift-ee.workers.dev/js/script.outbound-links.js",
+      "integrity": "sha384-ppEqQFy27pZnkESDOdMgexh5auHYvQAQcid8RGSWZdLCZZMmTul/brWlnZ7+m408",
+      "crossOrigin": "anonymous"
+    },
+    {
+      "id": "datafast-events",
+      "url": "https://dtf.capgo.app/js/script.js",
+      "integrity": "sha384-olDc4wM6goryxHiarcaXP+9J2P3RvbBLShLcsoN5D+/e4IY/qvKDS4OSVBlnffDw",
+      "crossOrigin": "anonymous"
+    },
+    {
+      "id": "senja-iframe-resizer",
+      "url": "https://widget.senja.io/js/iframeResizer.min.js",
+      "integrity": "sha384-t5RMa/8qVvu+U8uCWVeUBR4+gtxNoWA0lgEVVYoCFz1hLZHuq516pFYqBrSK7Qcm",
+      "crossOrigin": "anonymous"
+    },
+    {
+      "id": "cloudflare-turnstile",
+      "url": "https://challenges.cloudflare.com/turnstile/v0/api.js",
+      "integrity": "sha384-XI3H7mTO5g+ti9cd4lUNicKDJcHkSjyt/Lvx3yUsqUQEsLqi48cixWVSq5lFW7LJ",
+      "crossOrigin": "anonymous"
+    }
+  ],
+  "sriNotSupported": [
+    {
+      "id": "meta-pixel",
+      "url": "https://connect.facebook.net/en_US/fbevents.js",
+      "reason": "Loaded dynamically by an inline bootstrap snippet in MetaPixel.astro. Restricted via CSP script-src instead."
+    },
+    {
+      "id": "posthog-array",
+      "url": "https://eu-assets.i.posthog.com/static/array.js",
+      "reason": "Loaded dynamically by the inline PostHog bootstrap in posthog.astro. Restricted via CSP script-src instead."
+    }
+  ]
+}

@@ -84,8 +84,7 @@
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
-  X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin
-  Content-Security-Policy: default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://console.capgo.app; script-src 'self' 'unsafe-inline' https://aff.capgo.app https://pls.digitalshift-ee.workers.dev https://dtf.capgo.app https://widget.senja.io https://challenges.cloudflare.com https://connect.facebook.net https://psthg.digitalshift-ee.workers.dev https://eu-assets.i.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.githubusercontent.com https://images.unsplash.com https://ik.imagekit.io https://widget.senja.io https://senja.io https://senja-io.s3.us-west-1.amazonaws.com https://sonarcloud.io https://snyk.io https://www.google-analytics.com https://www.facebook.com; font-src 'self'; connect-src 'self' https://api.capgo.app https://*.supabase.co https://status.capgo.app https://challenges.cloudflare.com https://psthg.digitalshift-ee.workers.dev https://eu.posthog.com https://pls.digitalshift-ee.workers.dev https://dtf.capgo.app https://aff.capgo.app; frame-src 'self' https://www.youtube-nocookie.com https://senja.io https://challenges.cloudflare.com;
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), payment=(), usb=()
   Link: </docs/public-api/>; rel="service-doc"; type="text/html"

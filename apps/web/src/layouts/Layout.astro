@@ -6,6 +6,7 @@ import MetaPixelNoscript from '../components/MetaPixelNoscript.astro'
 import SEO from '../components/SEO.astro'
 import Affonso from '../components/Affonso.astro'
 import PostHog from '../components/posthog.astro'
+import ExternalScript from '../components/ExternalScript.astro'
 import WebMcpTools from '../components/WebMcpTools.astro'
 import globalStylesHref from '../css/global.css?url'
 import productSurfaceHref from '../styles/product-surface.css?url'
@@ -81,27 +82,25 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     </div>
     {
       enableThirdPartyScripts && (
-        <script
-          is:inline
+        <ExternalScript
+          assetId="datafast-outbound-links"
           async="true"
           defer="true"
           data-domain="capgo.app"
-          src="https://pls.digitalshift-ee.workers.dev/js/script.outbound-links.js"
           data-api="https://pls.digitalshift-ee.workers.dev/api/event"
         />
       )
     }
     <WebMcpTools />
-    {enableThirdPartyScripts && <script is:inline type="text/javascript" src="https://widget.senja.io/js/iframeResizer.min.js" />}
+    {enableThirdPartyScripts && <ExternalScript assetId="senja-iframe-resizer" type="text/javascript" />}
     {
       enableThirdPartyScripts && (
-        <script
-          is:inline
-          defer
+        <ExternalScript
+          assetId="datafast-events"
+          defer="true"
           data-website-id="dfid_hu0aLqOvk52g6hykzIZei"
           data-domain="capgo.app"
           data-api-url="https://dtf.capgo.app/api/events"
-          src="https://dtf.capgo.app/js/script.js"
         />
       )
     }
