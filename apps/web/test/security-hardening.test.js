@@ -27,9 +27,21 @@ test('sanitizeMarkdownHtml enforces noopener noreferrer on target=_blank links',
   expect(clean).toBe('<a href="https://capgo.app/" target="_blank" rel="noopener noreferrer">x</a>')
 })
 
+test('sanitizeMarkdownHtml enforces noopener noreferrer on case-variant blank targets', () => {
+  const clean = sanitizeMarkdownHtml('<a href="https://capgo.app/" target="_BLANK" rel="opener">x</a>')
+  expect(clean).toBe('<a href="https://capgo.app/" target="_BLANK" rel="noopener noreferrer">x</a>')
+})
+
 test('sanitizeMarkdownHtml strips unsafe rel values when target is not _blank', () => {
   const clean = sanitizeMarkdownHtml('<a href="https://capgo.app/" rel="opener">x</a>')
   expect(clean).not.toContain('rel=')
+})
+
+test('isSafeRenderableUrl allows image data URLs and rejects other data URLs', () => {
+  expect(isSafeRenderableUrl('data:image/png;base64,abc')).toBe(true)
+  expect(sanitizeRenderableUrl('data:image/png;base64,abc')).toBe('data:image/png;base64,abc')
+  expect(isSafeRenderableUrl('data:text/html,alert(1)')).toBe(false)
+  expect(sanitizeRenderableUrl('data:text/html,alert(1)')).toBeNull()
 })
 
 test('sanitizeRenderableUrl rejects javascript and protocol-relative URLs', () => {

@@ -6,14 +6,18 @@ const MARKDOWN_SANITIZE_OPTIONS: Config = {
   FORBID_ATTR: ['rel'],
 }
 
-const URL_SCHEME_PATTERN = /^(?:https?:|mailto:|tel:|\/|#)/i
+const URL_SCHEME_PATTERN = /^(?:https?:|mailto:|tel:|data:image\/|\/|#)/i
 let blankTargetRelHookConfigured = false
 
 function configureBlankTargetRelHook() {
   if (blankTargetRelHookConfigured) return
 
   DOMPurify.addHook('afterSanitizeAttributes', (node) => {
-    if (node.tagName !== 'A' || node.getAttribute('target') !== '_blank') return
+    if (node.tagName !== 'A') return
+
+    const target = node.getAttribute('target')
+    if (!target || target.toLowerCase() !== '_blank') return
+
     node.setAttribute('rel', 'noopener noreferrer')
   })
 
