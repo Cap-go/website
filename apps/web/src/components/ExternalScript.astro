@@ -1,0 +1,22 @@
+---
+import { getExternalAsset } from '@/config/externalAssets'
+
+interface Props {
+  assetId: string
+  async?: boolean
+  defer?: boolean
+  type?: string
+  [key: string]: string | boolean | undefined
+}
+
+const { assetId, ...rest } = Astro.props
+const asset = getExternalAsset(assetId)
+---
+
+<script
+  is:inline
+  src={asset.url}
+  integrity={asset.integrity}
+  crossorigin={asset.crossOrigin ?? 'anonymous'}
+  {...rest}
+/>
