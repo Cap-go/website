@@ -7,25 +7,34 @@ const MARKDOWN_SANITIZE_OPTIONS: Config = {
 }
 
 const URL_SCHEME_PATTERN = /^(?:https?:|mailto:|tel:|data:image\/|\/|#)/i
-let blankTargetRelHookConfigured = false
+const TARGET_REL_ELEMENTS = new Set(['A', 'AREA', 'FORM'])
+const SAME_DOCUMENT_TARGETS = new Set(['_self', '_parent', '_top'])
+const SAFE_REL_VALUE = 'noopener noreferrer'
+let targetRelHookConfigured = false
 
-function configureBlankTargetRelHook() {
-  if (blankTargetRelHookConfigured) return
+function isBrowsingContextTarget(target: string): boolean {
+  const normalized = target.trim().toLowerCase()
+  if (!normalized) return false
+  return !SAME_DOCUMENT_TARGETS.has(normalized)
+}
+
+function configureTargetRelHook() {
+  if (targetRelHookConfigured) return
 
   DOMPurify.addHook('afterSanitizeAttributes', (node) => {
-    if (node.tagName !== 'A') return
+    if (!TARGET_REL_ELEMENTS.has(node.tagName)) return
 
     const target = node.getAttribute('target')
-    if (!target || target.toLowerCase() !== '_blank') return
+    if (!target || !isBrowsingContextTarget(target)) return
 
-    node.setAttribute('rel', 'noopener noreferrer')
+    node.setAttribute('rel', SAFE_REL_VALUE)
   })
 
-  blankTargetRelHookConfigured = true
+  targetRelHookConfigured = true
 }
 
 export function sanitizeMarkdownHtml(html: string): string {
-  configureBlankTargetRelHook()
+  configureTargetRelHook()
   return String(DOMPurify.sanitize(html, MARKDOWN_SANITIZE_OPTIONS))
 }
 
