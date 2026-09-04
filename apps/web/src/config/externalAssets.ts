@@ -1,4 +1,4 @@
-import registry from '../../../shared/security/external-assets.json'
+import registryJson from '../../../shared/security/external-assets.json'
 
 export type ExternalAsset = {
   id: string
@@ -13,6 +13,12 @@ export type ExternalAssetWithoutSri = {
   reason: string
 }
 
+type ExternalAssetRegistry = {
+  assets: ExternalAsset[]
+  sriNotSupported: ExternalAssetWithoutSri[]
+}
+
+const registry = registryJson as ExternalAssetRegistry
 const assetsById = new Map(registry.assets.map((asset) => [asset.id, asset]))
 
 export function getExternalAsset(id: string): ExternalAsset {

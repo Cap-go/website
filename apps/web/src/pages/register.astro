@@ -19,7 +19,7 @@ const content = {
 }
 ---
 
-{enableCaptcha && <ExternalScript assetId="cloudflare-turnstile" async="true" defer="true" />}
+{enableCaptcha && <ExternalScript assetId="cloudflare-turnstile" async defer />}
 
 <Layout content={content}>
   <div class="hero-wash">
