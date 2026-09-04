@@ -140,6 +140,10 @@ const { class: className, animated = false, ...props } = Astro.props
     fill: #22c55e;
   }
 
+  .rollout-illustration--animated.is-reduced .rollout-prod-label.fill-amber-500 {
+    fill: #22c55e;
+  }
+
   .rollout-illustration--animated.is-reduced .rollout-health,
   .rollout-illustration--animated.is-reduced .rollout-rollback,
   .rollout-illustration--animated.is-reduced .rollout-prod-icon-done {
@@ -217,7 +221,7 @@ const { class: className, animated = false, ...props } = Astro.props
   function finish(root: HTMLElement) {
     root.classList.add('is-complete')
     const label = root.querySelector<SVGElement>('.rollout-prod-label')
-    if (label) label.setAttribute('fill', '#22c55e')
+    if (label) label.classList.replace('fill-amber-500', 'fill-green-500')
 
     const bar = root.querySelector<SVGRectElement>('.rollout-prod-bar')
     if (bar) bar.classList.replace('fill-amber-500', 'fill-green-500')
