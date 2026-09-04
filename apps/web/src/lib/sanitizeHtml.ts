@@ -2,12 +2,26 @@ import DOMPurify, { type Config } from 'isomorphic-dompurify'
 
 const MARKDOWN_SANITIZE_OPTIONS: Config = {
   USE_PROFILES: { html: true },
-  ADD_ATTR: ['target', 'rel'],
+  ADD_ATTR: ['target'],
+  FORBID_ATTR: ['rel'],
 }
 
 const URL_SCHEME_PATTERN = /^(?:https?:|mailto:|tel:|\/|#)/i
+let blankTargetRelHookConfigured = false
+
+function configureBlankTargetRelHook() {
+  if (blankTargetRelHookConfigured) return
+
+  DOMPurify.addHook('afterSanitizeAttributes', (node) => {
+    if (node.tagName !== 'A' || node.getAttribute('target') !== '_blank') return
+    node.setAttribute('rel', 'noopener noreferrer')
+  })
+
+  blankTargetRelHookConfigured = true
+}
 
 export function sanitizeMarkdownHtml(html: string): string {
+  configureBlankTargetRelHook()
   return String(DOMPurify.sanitize(html, MARKDOWN_SANITIZE_OPTIONS))
 }
 

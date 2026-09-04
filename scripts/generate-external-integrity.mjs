@@ -8,6 +8,7 @@ const repoRoot = path.dirname(fileURLToPath(new URL('../package.json', import.me
 const registryPath = path.resolve(repoRoot, 'apps/shared/security/external-assets.json')
 const writeMode = process.argv.includes('--write')
 const checkMode = process.argv.includes('--check') || !writeMode
+const FETCH_TIMEOUT_MS = 15_000
 
 function computeSriSha384(bytes) {
   const digest = createHash('sha384').update(bytes).digest('base64')
@@ -19,6 +20,7 @@ async function fetchAssetBytes(url) {
     headers: {
       'User-Agent': 'capgo-website-integrity-check/1.0',
     },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   })
 
   if (!response.ok) {

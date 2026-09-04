@@ -19,6 +19,17 @@ test('sanitizeMarkdownHtml strips script tags from marked output', () => {
 test('sanitizeMarkdownHtml keeps safe markdown links', () => {
   const clean = sanitizeMarkdownHtml('<p>Read <a href="https://capgo.app/docs/" target="_blank" rel="noopener">docs</a></p>')
   expect(clean).toContain('href="https://capgo.app/docs/"')
+  expect(clean).toContain('rel="noopener noreferrer"')
+})
+
+test('sanitizeMarkdownHtml enforces noopener noreferrer on target=_blank links', () => {
+  const clean = sanitizeMarkdownHtml('<a href="https://capgo.app/" target="_blank" rel="opener">x</a>')
+  expect(clean).toBe('<a href="https://capgo.app/" target="_blank" rel="noopener noreferrer">x</a>')
+})
+
+test('sanitizeMarkdownHtml strips unsafe rel values when target is not _blank', () => {
+  const clean = sanitizeMarkdownHtml('<a href="https://capgo.app/" rel="opener">x</a>')
+  expect(clean).not.toContain('rel=')
 })
 
 test('sanitizeRenderableUrl rejects javascript and protocol-relative URLs', () => {

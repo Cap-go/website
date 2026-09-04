@@ -1,5 +1,4 @@
 ---
-import ExternalScript from '@/components/ExternalScript.astro'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import 'toastify-js/src/toastify.css'
@@ -7,6 +6,7 @@ import 'toastify-js/src/toastify.css'
 const captchaKey = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 const CLOUDFLARE_TURNSTILE_SITE_KEY = captchaKey
 const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
+const turnstileScriptUrl = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
 
 const title = `${Astro.locals.runtimeConfig.public.brand} | ${m.register_title({}, { locale: Astro.locals.locale })}`
 const description = m.register_description
@@ -19,7 +19,7 @@ const content = {
 }
 ---
 
-{enableCaptcha && <ExternalScript assetId="cloudflare-turnstile" async defer />}
+{enableCaptcha && <script is:inline src={turnstileScriptUrl} async defer />}
 
 <Layout content={content}>
   <div class="hero-wash">
