@@ -5,14 +5,21 @@ interface Props {
 }
 
 const { class: className, animated = false, ...props } = Astro.props
-const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
 ---
 
-<div class:list={['rollout-illustration', animated && 'rollout-illustration--animated']} data-rollout-illustration={animated ? 'true' : undefined} data-rollout-uid={uid}>
-  <svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['h-auto w-full drop-shadow-2xl', className]} {...props} aria-hidden="true">
-    <rect x="40" y="40" width="520" height="320" rx="12" class="fill-gray-900 stroke-gray-700" stroke-width="2"></rect>
+<div class:list={['rollout-illustration', animated && 'rollout-illustration--animated']} data-rollout-illustration={animated ? 'true' : undefined}>
+  {
+    animated && (
+      <p class="sr-only" aria-live="polite" aria-atomic="true" data-rollout-status>
+        Progressive rollout illustration ready.
+      </p>
+    )
+  }
 
-    <path d="M100 110 V290" stroke="currentColor" stroke-width="2" stroke-dasharray="8 8" class="text-gray-600 opacity-50"></path>
+  <svg viewBox="0 0 600 440" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['h-auto w-full drop-shadow-2xl', className]} {...props} aria-hidden="true">
+    <rect x="40" y="40" width="520" height="360" rx="12" class="fill-gray-900 stroke-gray-700" stroke-width="2"></rect>
+
+    <path d="M100 110 V300" stroke="currentColor" stroke-width="2" stroke-dasharray="8 8" class="text-gray-600 opacity-50"></path>
 
     <!-- Stage 1: QA -->
     <g transform="translate(80, 80)">
@@ -21,21 +28,21 @@ const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
       <text x="60" y="25" class="fill-gray-300 text-sm font-bold">Internal QA</text>
       <rect x="250" y="15" width="100" height="8" rx="4" class="fill-gray-800"></rect>
       <rect x="250" y="15" width="100" height="8" rx="4" class="fill-green-500"></rect>
-      <text x="370" y="24" class="fill-green-500 font-mono text-xs">100%</text>
+      <text x="360" y="24" class="fill-green-500 font-mono text-xs">100%</text>
     </g>
 
     <!-- Stage 2: Beta -->
-    <g transform="translate(80, 170)">
+    <g transform="translate(80, 165)">
       <circle cx="20" cy="20" r="20" class="fill-gray-800 stroke-blue-500" stroke-width="2"></circle>
       <path d="M12 20l6 6 12-12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"></path>
       <text x="60" y="25" class="fill-gray-300 text-sm font-bold">Beta Users</text>
       <rect x="250" y="15" width="100" height="8" rx="4" class="fill-gray-800"></rect>
       <rect x="250" y="15" width="100" height="8" rx="4" class="fill-blue-500"></rect>
-      <text x="370" y="24" class="fill-blue-500 font-mono text-xs">100%</text>
+      <text x="360" y="24" class="fill-blue-500 font-mono text-xs">100%</text>
     </g>
 
     <!-- Stage 3: Production -->
-    <g transform="translate(80, 260)">
+    <g transform="translate(80, 250)">
       <circle cx="20" cy="20" r="20" class="rollout-prod-icon-pending fill-gray-800 stroke-amber-500" stroke-width="2"></circle>
       <circle cx="20" cy="20" r="8" class="rollout-prod-pulse fill-amber-500"></circle>
       <g class="rollout-prod-icon-done" opacity="0">
@@ -45,19 +52,20 @@ const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
       <text x="60" y="25" class="fill-white text-sm font-bold">Production</text>
       <rect x="250" y="15" width="100" height="8" rx="4" class="fill-gray-800"></rect>
       <rect x="250" y="15" height="8" rx="4" class="rollout-prod-bar fill-amber-500" style={animated ? 'width: 10px' : 'width: 25px'}></rect>
-      <text x="370" y="24" class="rollout-prod-label fill-amber-500 font-mono text-xs">{animated ? '10%' : '25%'}</text>
+      <text x="360" y="24" class="rollout-prod-label fill-amber-500 font-mono text-xs">{animated ? '10%' : '25%'}</text>
     </g>
 
     <!-- Device cohort grid -->
     {
       animated && (
-        <g class="rollout-device-grid" transform="translate(80, 318)">
-          {Array.from({ length: 40 }).map((_, index) => (
+        <g class="rollout-device-grid" transform="translate(80, 332)">
+          {Array.from({ length: 32 }).map((_, index) => (
             <circle
-              cx={(index % 10) * 14 + 6}
-              cy={Math.floor(index / 10) * 14 + 6}
+              cx={(index % 8) * 14 + 6}
+              cy={Math.floor(index / 8) * 14 + 6}
               r="4"
-              class="rollout-device-dot fill-gray-800 stroke-gray-700"
+              class="rollout-device-dot"
+              style="fill:#1f2937;stroke:#374151"
               data-device-index={index}
               stroke-width="1"
             />
@@ -69,12 +77,15 @@ const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
     <!-- Health signal -->
     {
       animated && (
-        <g class="rollout-health" transform="translate(330, 318)" opacity="0">
-          <rect x="0" y="0" width="170" height="34" rx="8" class="fill-green-500/10 stroke-green-500/40" stroke-width="1" />
-          <circle cx="18" cy="17" r="8" class="fill-green-500/20" />
-          <path d="M14 17l3 3 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400" />
-          <text x="34" y="21" class="fill-green-400 text-xs font-semibold">
-            Crash-free · ready to expand
+        <g class="rollout-health" transform="translate(248, 328)" opacity="0">
+          <rect x="0" y="0" width="132" height="40" rx="8" class="fill-green-500/10 stroke-green-500/40" stroke-width="1" />
+          <circle cx="16" cy="20" r="8" class="fill-green-500/20" />
+          <path d="M12 20l3 3 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400" />
+          <text x="32" y="18" class="fill-green-400 text-[10px] font-semibold">
+            Crash-free
+          </text>
+          <text x="32" y="31" class="fill-green-400/90 text-[10px]">
+            Ready to expand
           </text>
         </g>
       )
@@ -83,9 +94,9 @@ const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
     <!-- Rollback ready badge -->
     {
       animated && (
-        <g class="rollout-rollback" transform="translate(430, 52)" opacity="0">
-          <rect x="0" y="0" width="118" height="28" rx="6" class="fill-blue-500/10 stroke-blue-400/30" stroke-width="1" />
-          <text x="12" y="18" class="fill-blue-300 text-xs font-semibold">
+        <g class="rollout-rollback" transform="translate(408, 56)" opacity="0">
+          <rect x="0" y="0" width="108" height="26" rx="6" class="fill-blue-500/10 stroke-blue-400/30" stroke-width="1" />
+          <text x="10" y="17" class="fill-blue-300 text-[10px] font-semibold">
             Rollback ready
           </text>
         </g>
@@ -153,6 +164,19 @@ const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
 
 <script>
   const BAR_MAX = 100
+  const DOT_INACTIVE = { fill: '#1f2937', stroke: '#374151' }
+  const DOT_ACTIVE = { fill: '#f59e0b', stroke: '#fbbf24' }
+  const DOT_COMPLETE = { fill: '#22c55e', stroke: '#4ade80' }
+
+  function setDotColors(dot: SVGCircleElement, colors: { fill: string; stroke: string }) {
+    dot.style.fill = colors.fill
+    dot.style.stroke = colors.stroke
+  }
+
+  function announceStatus(root: HTMLElement, message: string) {
+    const status = root.querySelector<HTMLElement>('[data-rollout-status]')
+    if (status) status.textContent = message
+  }
 
   function setProductionState(root: HTMLElement, percent: number) {
     const bar = root.querySelector<SVGRectElement>('.rollout-prod-bar')
@@ -164,9 +188,7 @@ const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
 
     const activeCount = Math.round((percent / 100) * dots.length)
     dots.forEach((dot, index) => {
-      const active = index < activeCount
-      dot.setAttribute('fill', active ? '#f59e0b' : '#1f2937')
-      dot.setAttribute('stroke', active ? '#fbbf24' : '#374151')
+      setDotColors(dot, index < activeCount ? DOT_ACTIVE : DOT_INACTIVE)
     })
   }
 
@@ -201,12 +223,12 @@ const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
     if (bar) bar.classList.replace('fill-amber-500', 'fill-green-500')
 
     root.querySelectorAll<SVGCircleElement>('.rollout-device-dot').forEach((dot) => {
-      dot.setAttribute('fill', '#22c55e')
-      dot.setAttribute('stroke', '#4ade80')
+      setDotColors(dot, DOT_COMPLETE)
     })
 
     showRollback(root)
     highlightPlay(root, 2)
+    announceStatus(root, 'Production rollout complete at 100 percent. Rollback remains ready.')
   }
 
   function applyReducedState(root: HTMLElement) {
@@ -219,11 +241,11 @@ const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
     if (bar) bar.classList.replace('fill-amber-500', 'fill-green-500')
 
     root.querySelectorAll<SVGCircleElement>('.rollout-device-dot').forEach((dot) => {
-      dot.setAttribute('fill', '#22c55e')
-      dot.setAttribute('stroke', '#4ade80')
+      setDotColors(dot, DOT_COMPLETE)
     })
 
     highlightPlay(root, 2)
+    announceStatus(root, 'Production rollout complete at 100 percent. Crash-free and rollback ready.')
   }
 
   function wait(ms: number) {
@@ -236,16 +258,20 @@ const uid = `rollout-${Math.random().toString(36).slice(2, 9)}`
 
     setProductionState(root, 10)
     highlightPlay(root, 0)
+    announceStatus(root, 'Production rollout started at 10 percent of devices.')
     await wait(900)
 
     showHealth(root)
     highlightPlay(root, 1)
+    announceStatus(root, 'Crash-free health check passed. Ready to expand rollout.')
     await wait(1100)
 
     setProductionState(root, 50)
+    announceStatus(root, 'Production rollout expanded to 50 percent of devices.')
     await wait(700)
 
     setProductionState(root, 100)
+    announceStatus(root, 'Production rollout expanded to 100 percent of devices.')
     await wait(600)
 
     finish(root)
