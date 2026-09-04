@@ -23,12 +23,6 @@
       "url": "https://widget.senja.io/js/iframeResizer.min.js",
       "integrity": "sha384-t5RMa/8qVvu+U8uCWVeUBR4+gtxNoWA0lgEVVYoCFz1hLZHuq516pFYqBrSK7Qcm",
       "crossOrigin": "anonymous"
-    },
-    {
-      "id": "cloudflare-turnstile",
-      "url": "https://challenges.cloudflare.com/turnstile/v0/api.js",
-      "integrity": "sha384-XI3H7mTO5g+ti9cd4lUNicKDJcHkSjyt/Lvx3yUsqUQEsLqi48cixWVSq5lFW7LJ",
-      "crossOrigin": "anonymous"
     }
   ],
   "sriNotSupported": [
@@ -41,6 +35,11 @@
       "id": "posthog-array",
       "url": "https://eu-assets.i.posthog.com/static/array.js",
       "reason": "Loaded dynamically by the inline PostHog bootstrap in posthog.astro. Restricted via CSP script-src instead."
+    },
+    {
+      "id": "cloudflare-turnstile",
+      "url": "https://challenges.cloudflare.com/turnstile/v0/api.js",
+      "reason": "Cloudflare serves Turnstile without a stable byte-for-byte payload suitable for SRI. Loaded without integrity in register.astro and restricted via CSP script-src instead."
     }
   ]
 }
