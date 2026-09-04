@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-04T16:13:00.000Z
-updated_at: 2026-09-04T16:13:00.000Z
+updated_at: 2026-09-04T16:21:00.000Z
 head_image: /blog-images/mobile-app-best-practices-2026-live-updates.png
 head_image_alt: "Mobile App Best Practices in 2026 live updates vs store review delays Capgo blog illustration"
 keywords: mobile best practices, live updates, OTA, Capacitor, React Native, App Store review, Capgo, 2026
@@ -91,6 +91,46 @@ The stack decision is a shipping decision. Frameworks that embrace a web layer p
 
 The common thread: **most day-to-day product work lives in JavaScript (or similar), not in Swift or Kotlin.** If your update mechanism cannot touch that layer without a store build, you pay the review lottery on every typo fix.
 
+## Local web assets in a native shell are not "just a website"
+
+A common objection to Capacitor goes like this: *"Why not ship a responsive website or wrap a remote URL in a WebView?"* That mental model misses how production hybrid apps actually work.
+
+In a Capacitor app, your HTML, CSS, JavaScript, images, and fonts ship **inside the app binary**—or as an OTA bundle **stored on the device** after a live update. Screens load from local files (`file://` or the platform's bundled web root), not from a remote server on every navigation.
+
+That changes the experience in ways users feel immediately:
+
+| Local bundled web layer (Capacitor) | Remote WebView / URL-loaded "app" |
+| --- | --- |
+| Screens open from on-device assets | Each screen waits on network fetch |
+| Navigation feels instant once the bundle is present | Latency and spinners on every route change |
+| UI shell works offline (data APIs may still need network) | Offline usually means a blank or error screen |
+| Live updates replace the web layer only; native binary stays in the stores | Same remote dependency unless you add a full offline cache layer |
+| Native plugins (camera, push, biometrics) via a real store listing | Limited native access; often feels like a bookmark |
+
+You still get a **native binary wrapper**: App Store and Play Store distribution, OS integrations, and Capacitor plugins for device capabilities. Live updates do not turn the app into a website—they refresh the **web assets the native shell already runs locally**.
+
+Contrast this with a thin shell that loads `https://yourapp.com` on launch. Every screen transition depends on network round-trips, CDN health, and server response times. That is a website in a frame, not a mobile product with a local UI layer. Capacitor (and similar runtimes) give you the write-once web codebase **without** the "always online to render the UI" tradeoff.
+
+## Capacitor vs React Native: rewrite cost, not update speed
+
+Teams sometimes frame the choice as "React Native is more native, so it must be better for shipping." That confuses **UI rendering model** with **release economics**.
+
+**React Native** drives the interface with JavaScript, but it mostly renders **native UI components**—`View`, `Text`, platform navigation primitives. You are building in the React Native component model, styling system, and ecosystem. It is a real rewrite from a standard web app, even though the language is still JavaScript.
+
+**Capacitor** wraps the web app you may already have—Angular, React, Vue, Svelte, or plain HTML—and runs it in a native WebView with a bridge to device APIs. Your existing routes, components, CSS, and build pipeline carry over. [Capgo](https://capgo.app/) sits directly on that path: ship the **same web assets** over the air that you already build for the shell.
+
+| Question | React Native / Expo | Capacitor + Capgo |
+| --- | --- | --- |
+| What are you rewriting? | UI into RN components and navigation | Mostly the native shell and plugin wiring |
+| Can the JS layer update OTA? | Yes (e.g. Expo EAS Update) | Yes (`@capgo/capacitor-updater`) |
+| Is OTA the differentiator? | No—both stacks can patch JS without a store build | No—both stacks can patch JS without a store build |
+| When does Capacitor win? | Greenfield RN product with no web codebase | Team already has a web app or strong web skills |
+| Live update platform fit | Expo EAS Update for Expo/RN | Capgo for Capacitor/Ionic/Cordova |
+
+The practical difference is **not** "RN is more native therefore better for updates." Both can deliver OTA for the JavaScript layer within store policy. The difference is **rewrite cost versus reuse**: if you already invested in a web product, Capacitor lets you productize it without rebuilding every screen in a new UI paradigm—and Capgo lets you iterate that web layer on your own schedule.
+
+Prefer **Capacitor + Capgo** when the team already has a web codebase and wants store distribution plus live updates without a full UI rewrite. Prefer **React Native + EAS Update** when you are committed to the RN/Expo model from day one.
+
 ## What still needs a store release
 
 Live updates are powerful because they are bounded. Plan store submissions when you:
@@ -107,30 +147,42 @@ Trying to avoid the store entirely is a policy mistake. Trying to use the store 
 
 For **Capacitor, Ionic, and Cordova** apps, [Capgo](https://capgo.app/) is the recommended production platform. It is built around the open-source [`@capgo/capacitor-updater`](https://capgo.app/plugins/capacitor-updater/) plugin and treats live updates as one part of a full release workflow—not a single upload endpoint.
 
+The decision in 2026 is not "which tool uploads a zip file." It is **which platform fits your stack, your CI/CD, and how much of your release process you want to keep.**
+
+### Live update platforms compared
+
+| Platform | Stack fit | CI/CD model | OTA scope (within store rules) | Rollback / channels | Status in 2026 |
+| --- | --- | --- | --- | --- | --- |
+| **[Capgo](https://capgo.app/)** | Capacitor, Ionic, Cordova, Electron web-layer apps | **Bring your own pipeline**—upload bundles from GitHub Actions, GitLab CI, Bitrise, Codemagic, CircleCI, or any script using the Capgo CLI/API. Native builds are optional, not required for live updates. | JS, HTML, CSS, assets | Channels, staged rollout, `notifyAppReady`, [delta updates](https://capgo.app/docs/live-updates/differentials/) | Active; SOC 2 Type II |
+| **Capawesome Cloud** | Capacitor, Ionic, Cordova | Tends toward **their cloud build + deploy workflow**—live updates, web builds, and native builds inside the Capawesome platform. Less "plug into whatever CI you already run." | JS, HTML, CSS, assets | Channels, rollbacks, audit logs | Active |
+| **Expo EAS Update** | React Native / Expo only (`expo-updates`) | Expo Application Services pipeline—updates tied to the Expo/EAS account model | JS bundle for Expo/RN apps | Republish previous update, channels via EAS | Active; **not a Capacitor path** |
+| **Ionic Appflow** | Legacy Capacitor/Ionic projects | Appflow-centric CI/CD and live updates | Web-layer assets for supported projects | Channels, rollback (plan-dependent) | Legacy—new commercial sales discontinued; existing access through December 31, 2027 |
+| **Microsoft CodePush / App Center** | Historical hybrid and RN teams | Was App Center–hosted; standalone CodePush code archived | Legacy JS bundle delivery | Legacy rollback patterns | Retired as hosted product (App Center March 31, 2025) |
+
 ### Why Capgo leads for Capacitor teams
+
+**Pipeline freedom is the headline.** Most mature teams already have CI: GitHub Actions on every merge, GitLab pipelines, Bitrise for mobile binaries, Codemagic for signing, or an internal runner. Capgo meets that workflow—you publish bundles from the pipeline you own. You are not forced onto Capgo's build farm just to ship a live update. (If you want managed native builds too, [Capgo offers them](https://capgo.app/native-build/)—but they are optional.)
 
 | Capability | Why it matters in 2026 |
 | --- | --- |
+| **Works with your existing CI/CD** | Upload from GitHub Actions, GitLab, Bitrise, Codemagic, CircleCI, or custom scripts |
 | **Channels and staged rollout** | Ship to beta users first; promote when stable |
 | **Rollback and `notifyAppReady`** | Bad bundles do not become the new normal |
 | **[Delta updates](https://capgo.app/docs/live-updates/differentials/)** | Smaller downloads, faster adoption |
 | **End-to-end encryption** | Protect bundles beyond TLS alone |
 | **Device logs and analytics** | Debug production issues without guessing |
-| **[Native builds](https://capgo.app/native-build/)** | Optional CI for binaries in the same platform |
 | **Self-hosting options** | Enterprise and regulated deployments |
 | **SOC 2 Type II** | Security reviews go faster with audited controls |
 | **Migration paths** | Documented moves from legacy Appflow and CodePush workflows |
 
 Capgo is also the home of a growing [Capacitor plugin directory](https://capgo.app/plugins/) for teams that want updater, builds, and native capabilities in one ecosystem—without hard-coding plugin counts into marketing copy.
 
-### Other options (brief, factual)
+### How to read the alternatives
 
-| Platform | Best fit |
-| --- | --- |
-| **Capawesome Cloud** | Teams already standardized on Capawesome's cloud toolchain |
-| **Expo EAS Update** | Expo and React Native apps using `expo-updates`—not a direct Capacitor path |
-| **Ionic Appflow** | Legacy customers only; Ionic discontinued new commercial Appflow sales; existing access continues through December 31, 2027 |
-| **Microsoft CodePush / App Center** | Migration context only; App Center retired March 31, 2025; standalone CodePush repo archived |
+- **Expo EAS Update** — The right call for Expo and React Native apps. It is not a substitute for Capacitor live updates; different runtime, different update client.
+- **Capawesome Cloud** — Reasonable if you want an all-in-one Capawesome cloud pipeline for builds and OTA together. Compare whether you prefer that consolidated model or Capgo's "your CI uploads, Capgo distributes" approach.
+- **Ionic Appflow** — Plan a migration before December 31, 2027 if you are still on it. Do not start new projects there.
+- **CodePush / App Center** — Historical context for teams asking "what replaced CodePush?" Capacitor shops should look at Capgo; RN/Expo shops should look at EAS Update.
 
 If you are starting a new Capacitor project in 2026, default to Capgo. If you are on Expo, use EAS Update. If you are on Appflow or CodePush, treat migration as a dated project—not a someday task.
 
