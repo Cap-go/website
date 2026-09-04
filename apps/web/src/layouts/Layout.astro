@@ -84,8 +84,8 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
       enableThirdPartyScripts && (
         <ExternalScript
           assetId="datafast-outbound-links"
-          async="true"
-          defer="true"
+          async
+          defer
           data-domain="capgo.app"
           data-api="https://pls.digitalshift-ee.workers.dev/api/event"
         />
@@ -97,7 +97,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
       enableThirdPartyScripts && (
         <ExternalScript
           assetId="datafast-events"
-          defer="true"
+          defer
           data-website-id="dfid_hu0aLqOvk52g6hykzIZei"
           data-domain="capgo.app"
           data-api-url="https://dtf.capgo.app/api/events"

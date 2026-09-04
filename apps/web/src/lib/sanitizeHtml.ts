@@ -1,6 +1,6 @@
-import DOMPurify from 'isomorphic-dompurify'
+import DOMPurify, { type Config } from 'isomorphic-dompurify'
 
-const MARKDOWN_SANITIZE_OPTIONS: DOMPurify.Config = {
+const MARKDOWN_SANITIZE_OPTIONS: Config = {
   USE_PROFILES: { html: true },
   ADD_ATTR: ['target', 'rel'],
 }
@@ -8,7 +8,7 @@ const MARKDOWN_SANITIZE_OPTIONS: DOMPurify.Config = {
 const URL_SCHEME_PATTERN = /^(?:https?:|mailto:|tel:|\/|#)/i
 
 export function sanitizeMarkdownHtml(html: string): string {
-  return DOMPurify.sanitize(html, MARKDOWN_SANITIZE_OPTIONS)
+  return String(DOMPurify.sanitize(html, MARKDOWN_SANITIZE_OPTIONS))
 }
 
 export function isSafeRenderableUrl(url: string): boolean {
