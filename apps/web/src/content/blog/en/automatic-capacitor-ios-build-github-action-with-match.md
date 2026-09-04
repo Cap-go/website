@@ -555,7 +555,7 @@ I will improve this blog with your feedbacks, if you have any question or sugges
 
 ### Build on your device
 
-If you still need to build on your device, you need to add them manually to the provisionning.
+If you still need to build on your device, you need to add them manually to the provisioning.
 Connect your device to your mac and open the device menu
 ![find device ios menu](/find_ios_device.webp)
 Then copy your identifier 
