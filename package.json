@@ -71,7 +71,7 @@
     "@astrojs/cloudflare": "14.3.0",
     "@astrojs/mdx": "7.0.8",
     "@astrojs/sitemap": "3.7.4",
-    "@astrojs/starlight": "0.41.3",
+    "@astrojs/starlight": "0.42.0",
     "@astrojs/starlight-docsearch": "0.7.0",
     "@astrojs/starlight-tailwind": "5.0.0",
     "@datafast/ai-crawl": "^1.0.7",
