@@ -6,7 +6,6 @@ import MetaPixelNoscript from '../components/MetaPixelNoscript.astro'
 import SEO from '../components/SEO.astro'
 import Affonso from '../components/Affonso.astro'
 import PostHog from '../components/posthog.astro'
-import WebMcpTools from '../components/WebMcpTools.astro'
 import globalStylesHref from '../css/global.css?url'
 import productSurfaceHref from '../styles/product-surface.css?url'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -63,6 +62,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     {enableThirdPartyScripts && <MetaPixel />}
     {enableThirdPartyScripts && <PostHog />}
     {enableThirdPartyScripts && <Affonso />}
+    <script is:inline src="https://cdn.agentlane.com/v1/snippet.js" data-domain="dom-un0fhr7ntl8g"></script>
   </head>
   <body class="bg-gray-900 text-pretty text-white antialiased">
     {enableThirdPartyScripts && <MetaPixelNoscript />}
@@ -91,7 +91,6 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
         />
       )
     }
-    <WebMcpTools />
     {enableThirdPartyScripts && <script is:inline type="text/javascript" src="https://widget.senja.io/js/iframeResizer.min.js" />}
     {
       enableThirdPartyScripts && (
