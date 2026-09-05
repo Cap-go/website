@@ -6,13 +6,15 @@ import { renameCat, shortNumber } from '@/services/misc'
 import { getRelativeLocaleUrl } from '@/services/links'
 import TeamAvatars from '@/components/TeamAvatars.astro'
 import HumanSupport from '@/components/HumanSupport.astro'
+import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
 
 interface Props {
   solution: SolutionAppExampleKey
   randomize?: boolean
+  animateRollout?: boolean
 }
 
-const { solution, randomize = false } = Astro.props
+const { solution, randomize = false, animateRollout = false } = Astro.props
 const locale = Astro.locals.locale
 const example = solutionAppExamples[solution]
 const copy = (key: MessageKey, values?: MessageValues) => m[key](values, { locale })
@@ -146,9 +148,18 @@ const showExampleCtas = solution === 'enterprise'
               <h3 class="mt-3 text-2xl leading-8 font-semibold tracking-tight text-balance text-white">{copy('solution_app_examples_cta_title')}</h3>
               <p class="mt-4 text-base leading-7 text-pretty text-gray-400">{copy('solution_app_examples_cta_text')}</p>
 
+              {animateRollout && (
+                <div class="solution-app-examples-rollout mt-6 overflow-hidden rounded-lg border border-white/10 bg-[#111]/80 p-2 sm:p-3">
+                  <RolloutIllustration animated class="text-amber-500" />
+                </div>
+              )}
+
               <div class="solution-app-examples-plays mt-6 space-y-3 border-y border-white/10 py-5">
-                {plays.map((play) => (
-                  <div class="grid grid-cols-[auto_1fr] gap-3 text-sm leading-6 text-gray-300">
+                {plays.map((play, index) => (
+                  <div
+                    class="solution-app-examples-play grid grid-cols-[auto_minmax(0,1fr)] gap-3 rounded-md px-1 text-sm leading-6 text-gray-300 transition-colors duration-300"
+                    data-rollout-play={animateRollout ? index : undefined}
+                  >
                     <span class="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/15 text-blue-300 ring-1 ring-blue-400/25">
                       <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path
@@ -158,7 +169,7 @@ const showExampleCtas = solution === 'enterprise'
                         />
                       </svg>
                     </span>
-                    <span>{play}</span>
+                    <span class="min-w-0 text-pretty break-words">{play}</span>
                   </div>
                 ))}
               </div>
@@ -197,3 +208,22 @@ const showExampleCtas = solution === 'enterprise'
     list.removeAttribute('aria-busy')
   }
 </script>
+
+<style>
+  .solution-app-examples-play.is-rollout-active {
+    background: rgb(59 130 246 / 0.08);
+    color: rgb(226 232 240);
+  }
+
+  .solution-app-examples-play.is-rollout-active span:first-child {
+    background: rgb(59 130 246 / 0.28);
+    color: rgb(191 219 254);
+    box-shadow: 0 0 0 1px rgb(96 165 250 / 0.45);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .solution-app-examples-play {
+      transition: none;
+    }
+  }
+</style>
