@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-05T08:00:54.035Z
-updated_at: 2026-09-05T08:00:55.736Z
+updated_at: 2026-09-05T08:03:38.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/8400cb5c-e85b-4154-8829-c1a1bb951ba5/app-security-best-practices-security-tips.jpg'
 head_image_alt: 'App Security Best Practices: 10 Essential Steps'
 keywords: 'app security best practices, mobile app security, Electron security, CapacitorJS security, secure app updates'
