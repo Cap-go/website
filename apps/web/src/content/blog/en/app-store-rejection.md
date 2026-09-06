@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-06T08:28:59.625Z
-updated_at: 2026-09-06T08:29:00.938Z
+updated_at: 2026-09-06T08:31:45.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/b488748b-3df4-43a9-8b0a-bb7ff1acf1a1/app-store-rejection-rejection-guide.jpg'
 head_image_alt: App Store Rejection Fix It Fast and Resubmit
 keywords: 'app store rejection, app store appeal, capacitor app store, app review guidelines, play store rejection'
