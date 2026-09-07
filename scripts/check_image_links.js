@@ -1,8 +1,8 @@
 import fg from 'fast-glob'
 import fs from 'fs/promises'
-import LinkifyIt from 'linkify-it'
+import { LinkifyIt } from 'linkify-it'
 
-const linkify = new LinkifyIt()
+const linkify = new LinkifyIt({ fuzzyLink: true })
 
 async function extractImageUrlsFromDir() {
   const allUrls = []
