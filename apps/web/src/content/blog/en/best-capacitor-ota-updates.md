@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-08-12T06:45:51.000Z
-updated_at: 2026-09-07T05:33:43.000Z
+updated_at: 2026-09-07T05:36:23.000Z
 head_image: /capgo_banner.png
 head_image_alt: 'Editorial illustration for Capacitor OTA Updates: 6 Options'
 keywords: best Capacitor OTA updates
