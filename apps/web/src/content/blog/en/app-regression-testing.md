@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-07T09:06:11.124Z
-updated_at: 2026-09-07T09:06:12.493Z
+updated_at: 2026-09-07T09:09:07.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/617d71c2-f43c-4332-a769-9d7c3e08f9d7/app-regression-testing-testing-strategies.jpg'
 head_image_alt: Master App Regression Testing Strategies for 2026
 keywords: 'app regression testing, mobile regression, CI/CD, CapacitorJS, Electron'
