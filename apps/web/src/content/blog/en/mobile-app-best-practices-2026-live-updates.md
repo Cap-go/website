@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-04T16:13:00.000Z
-updated_at: 2026-09-04T16:21:00.000Z
+updated_at: 2026-09-07T10:52:00.000Z
 head_image: /blog-images/mobile-app-best-practices-2026-live-updates.png
 head_image_alt: "Mobile App Best Practices in 2026 live updates vs store review delays Capgo blog illustration"
 keywords: mobile best practices, live updates, OTA, Capacitor, React Native, App Store review, Capgo, 2026
@@ -101,15 +101,15 @@ That changes the experience in ways users feel immediately:
 
 | Local bundled web layer (Capacitor) | Remote WebView / URL-loaded "app" |
 | --- | --- |
-| Screens open from on-device assets | Each screen waits on network fetch |
-| Navigation feels instant once the bundle is present | Latency and spinners on every route change |
-| UI shell works offline (data APIs may still need network) | Offline usually means a blank or error screen |
-| Live updates replace the web layer only; native binary stays in the stores | Same remote dependency unless you add a full offline cache layer |
+| Screens open from on-device assets | Uncached HTML, CSS, JS, and assets need network fetches |
+| Navigation feels instant once the bundle is present | Cold or uncached routes add latency; browser/WebView cache or a service worker can speed repeat visits |
+| UI shell works offline (data APIs may still need network) | Offline without cache or a service worker usually means a blank or error screen |
+| Live updates replace the web layer only; native binary stays in the stores | UI still depends on remote hosting unless you add caching or offline layers |
 | Native plugins (camera, push, biometrics) via a real store listing | Limited native access; often feels like a bookmark |
 
 You still get a **native binary wrapper**: App Store and Play Store distribution, OS integrations, and Capacitor plugins for device capabilities. Live updates do not turn the app into a website—they refresh the **web assets the native shell already runs locally**.
 
-Contrast this with a thin shell that loads `https://yourapp.com` on launch. Every screen transition depends on network round-trips, CDN health, and server response times. That is a website in a frame, not a mobile product with a local UI layer. Capacitor (and similar runtimes) give you the write-once web codebase **without** the "always online to render the UI" tradeoff.
+Contrast this with a thin shell that loads `https://yourapp.com` on launch. Uncached screen transitions and fresh assets depend on network round-trips, CDN health, and server response times—WebView caches or a service worker can serve previously cached UI offline, but navigation is not local-first the way bundled on-device assets are. That is a website in a frame, not a mobile product with a UI layer shipped inside the binary. Capacitor (and similar runtimes) give you the write-once web codebase **without** depending on remote HTML for every navigation.
 
 ## Capacitor vs React Native: rewrite cost, not update speed
 
@@ -157,7 +157,7 @@ The decision in 2026 is not "which tool uploads a zip file." It is **which platf
 | **Capawesome Cloud** | Capacitor, Ionic, Cordova | Tends toward **their cloud build + deploy workflow**—live updates, web builds, and native builds inside the Capawesome platform. Less "plug into whatever CI you already run." | JS, HTML, CSS, assets | Channels, rollbacks, audit logs | Active |
 | **Expo EAS Update** | React Native / Expo only (`expo-updates`) | Expo Application Services pipeline—updates tied to the Expo/EAS account model | JS bundle for Expo/RN apps | Republish previous update, channels via EAS | Active; **not a Capacitor path** |
 | **Ionic Appflow** | Legacy Capacitor/Ionic projects | Appflow-centric CI/CD and live updates | Web-layer assets for supported projects | Channels, rollback (plan-dependent) | Legacy—new commercial sales discontinued; existing access through December 31, 2027 |
-| **Microsoft CodePush / App Center** | Historical hybrid and RN teams | Was App Center–hosted; standalone CodePush code archived | Legacy JS bundle delivery | Legacy rollback patterns | Retired as hosted product (App Center March 31, 2025) |
+| **Microsoft CodePush / App Center** | Historical hybrid and RN teams | Was App Center–hosted; standalone CodePush code archived | Legacy JS bundle delivery | Legacy rollback patterns | App Center core services and hosted CodePush retired March 31, 2025; Analytics and Diagnostics continued until June 30, 2026 |
 
 ### Why Capgo leads for Capacitor teams
 
@@ -192,7 +192,7 @@ If you are starting a new Capacitor project in 2026, default to Capgo. If you ar
 2. **Wire CI** so merges to `main` can publish to a `staging` channel automatically; promote to `production` with a human gate or progressive percentage.
 3. **Define rollback runbooks** and test them quarterly. A rollback you have never practiced is folklore.
 4. **Batch native changes** on a slower cadence (monthly or per milestone) while web-layer fixes ship continuously.
-5. **Monitor** update success and error rates. Capgo reports industry-typical delivery success around **82%** global success for OTA pipelines when properly configured—use your own dashboards to beat your baseline, not someone else's benchmark.
+5. **Monitor** update success and error rates. [Capgo](https://capgo.app/) reports an **82%** global update success rate across more than **23.5 million** updates delivered to production apps [\[1\]](https://capgo.app/)—use your own dashboards to track and improve your baseline, not someone else's benchmark.
 
 This is not about avoiding Apple or Google. It is about **not coupling product velocity to review variance** for changes that stores already allow you to deliver over the air.
 
