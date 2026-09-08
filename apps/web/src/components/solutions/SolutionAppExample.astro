@@ -28,6 +28,7 @@ const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.catego
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
 const showExampleCtas = solution === 'enterprise'
+const showRolloutIllustration = animateRollout || solution === 'production-updates'
 ---
 
 {
@@ -148,9 +149,9 @@ const showExampleCtas = solution === 'enterprise'
               <h3 class="mt-3 text-2xl leading-8 font-semibold tracking-tight text-balance text-white">{copy('solution_app_examples_cta_title')}</h3>
               <p class="mt-4 text-base leading-7 text-pretty text-gray-400">{copy('solution_app_examples_cta_text')}</p>
 
-              {animateRollout && (
+              {showRolloutIllustration && (
                 <div class="solution-app-examples-rollout mt-6 overflow-hidden rounded-lg border border-white/10 bg-[#111]/80 p-2 sm:p-3">
-                  <RolloutIllustration animated class="text-amber-500" />
+                  <RolloutIllustration animated={animateRollout} class="text-amber-500" />
                 </div>
               )}
 

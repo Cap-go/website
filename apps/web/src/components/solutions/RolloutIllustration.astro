@@ -5,6 +5,13 @@ interface Props {
 }
 
 const { class: className, animated = false, ...props } = Astro.props
+
+const viewBox = animated ? '0 0 600 440' : '0 0 600 400'
+const cardHeight = animated ? 360 : 320
+const connectorEndY = animated ? 300 : 290
+const qaY = 80
+const betaY = animated ? 165 : 170
+const productionY = animated ? 250 : 260
 ---
 
 <div class:list={['rollout-illustration', animated && 'rollout-illustration--animated']} data-rollout-illustration={animated ? 'true' : undefined}>
@@ -16,13 +23,13 @@ const { class: className, animated = false, ...props } = Astro.props
     )
   }
 
-  <svg viewBox="0 0 600 440" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['h-auto w-full drop-shadow-2xl', className]} {...props} aria-hidden="true">
-    <rect x="40" y="40" width="520" height="360" rx="12" class="fill-gray-900 stroke-gray-700" stroke-width="2"></rect>
+  <svg viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['h-auto w-full drop-shadow-2xl', className]} {...props} aria-hidden="true">
+    <rect x="40" y="40" width="520" height={cardHeight} rx="12" class="fill-gray-900 stroke-gray-700" stroke-width="2"></rect>
 
-    <path d="M100 110 V300" stroke="currentColor" stroke-width="2" stroke-dasharray="8 8" class="text-gray-600 opacity-50"></path>
+    <path d={`M100 110 V${connectorEndY}`} stroke="currentColor" stroke-width="2" stroke-dasharray="8 8" class="text-gray-600 opacity-50"></path>
 
     <!-- Stage 1: QA -->
-    <g transform="translate(80, 80)">
+    <g transform={`translate(80, ${qaY})`}>
       <circle cx="20" cy="20" r="20" class="fill-gray-800 stroke-green-500" stroke-width="2"></circle>
       <path d="M12 20l6 6 12-12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"></path>
       <text x="60" y="25" class="fill-gray-300 text-sm font-bold">Internal QA</text>
@@ -32,7 +39,7 @@ const { class: className, animated = false, ...props } = Astro.props
     </g>
 
     <!-- Stage 2: Beta -->
-    <g transform="translate(80, 165)">
+    <g transform={`translate(80, ${betaY})`}>
       <circle cx="20" cy="20" r="20" class="fill-gray-800 stroke-blue-500" stroke-width="2"></circle>
       <path d="M12 20l6 6 12-12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"></path>
       <text x="60" y="25" class="fill-gray-300 text-sm font-bold">Beta Users</text>
@@ -42,7 +49,7 @@ const { class: className, animated = false, ...props } = Astro.props
     </g>
 
     <!-- Stage 3: Production -->
-    <g transform="translate(80, 250)">
+    <g transform={`translate(80, ${productionY})`}>
       <circle cx="20" cy="20" r="20" class="rollout-prod-icon-pending fill-gray-800 stroke-amber-500" stroke-width="2"></circle>
       <circle cx="20" cy="20" r="8" class="rollout-prod-pulse fill-amber-500"></circle>
       <g class="rollout-prod-icon-done" opacity="0">
