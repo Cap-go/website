@@ -217,3 +217,4 @@ if (document.readyState === 'loading') {
 } else {
   setupOtaLaunchAnimations()
 }
+// chore: bump for CodeRabbit HEAD approval
