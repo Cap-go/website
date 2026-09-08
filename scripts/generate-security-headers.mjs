@@ -17,6 +17,7 @@ const targets = [
 const cspLinePrefix = '  Content-Security-Policy: '
 const permissionsPolicyLine =
   "  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), payment=(), usb=()"
+const serviceDocumentLinkLine = '  Link: </docs/public-api/>; rel="service-doc"; type="text/html"'
 const MANAGED_HEADER_PREFIXES = [
   '  X-Content-Type-Options:',
   '  X-Frame-Options:',
@@ -26,7 +27,7 @@ const MANAGED_HEADER_PREFIXES = [
 ]
 
 function isManagedHeader(line) {
-  if (line.startsWith('  Link:')) return true
+  if (line === serviceDocumentLinkLine) return true
   return MANAGED_HEADER_PREFIXES.some((prefix) => line.startsWith(prefix))
 }
 
@@ -53,7 +54,7 @@ function upsertSecurityBlock(content, policy) {
     '  Referrer-Policy: strict-origin',
     `${cspLinePrefix}${policy}`,
     permissionsPolicyLine,
-    '  Link: </docs/public-api/>; rel="service-doc"; type="text/html"',
+    serviceDocumentLinkLine,
   ]
 
   return [...preservedPrefix, ...securityBlock, ...preservedCustomLines, ...preservedSuffix].join('\n')

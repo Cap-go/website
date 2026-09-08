@@ -2,10 +2,22 @@
  * Content-Security-Policy values for Capgo static sites.
  *
  * Regenerate or review when adding third-party scripts, fonts, embeds, or API hosts.
- * Run `bun run security:headers:check` after edits.
+ * Run `bun run security:csp-hashes:write` after builds and `bun run security:headers:check` after edits.
  */
 
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 const joinSources = (...groups) => groups.flat().join(' ')
+
+const hashesPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'csp-script-hashes.json')
+const { web: webScriptHashes = [], docs: docsScriptHashes = [] } = JSON.parse(readFileSync(hashesPath, 'utf8'))
+
+function scriptSrcDirective(hashes, ...sources) {
+  const hashSources = hashes.map((hash) => `'${hash}'`)
+  return joinSources("script-src 'self'", ...hashSources, ...sources) + ';'
+}
 
 const sharedImgSrc = joinSources(
   "'self'",
@@ -43,15 +55,17 @@ export const WEB_CONTENT_SECURITY_POLICY = joinSources(
   "object-src 'none';",
   "frame-ancestors 'none';",
   "form-action 'self' https://console.capgo.app;",
-  "script-src 'self' 'unsafe-inline'",
-  'https://aff.capgo.app',
-  'https://pls.digitalshift-ee.workers.dev',
-  'https://dtf.capgo.app',
-  'https://widget.senja.io',
-  'https://challenges.cloudflare.com',
-  'https://connect.facebook.net',
-  'https://psthg.digitalshift-ee.workers.dev',
-  'https://eu-assets.i.posthog.com;',
+  scriptSrcDirective(
+    webScriptHashes,
+    'https://aff.capgo.app',
+    'https://pls.digitalshift-ee.workers.dev',
+    'https://dtf.capgo.app',
+    'https://widget.senja.io',
+    'https://challenges.cloudflare.com',
+    'https://connect.facebook.net',
+    'https://psthg.digitalshift-ee.workers.dev',
+    'https://eu-assets.i.posthog.com',
+  ),
   "style-src 'self' 'unsafe-inline';",
   `img-src ${sharedImgSrc};`,
   "font-src 'self';",
@@ -77,10 +91,12 @@ export const DOCS_CONTENT_SECURITY_POLICY = joinSources(
   "object-src 'none';",
   "frame-ancestors 'none';",
   "form-action 'self';",
-  "script-src 'self' 'unsafe-inline'",
-  'https://cdn.jsdelivr.net',
-  'https://*.algolia.net',
-  'https://*.algolianet.com;',
+  scriptSrcDirective(
+    docsScriptHashes,
+    'https://cdn.jsdelivr.net',
+    'https://*.algolia.net',
+    'https://*.algolianet.com',
+  ),
   "style-src 'self' 'unsafe-inline'",
   'https://cdn.jsdelivr.net;',
   `img-src ${sharedImgSrc};`,

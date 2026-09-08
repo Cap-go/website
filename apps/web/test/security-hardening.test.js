@@ -101,6 +101,7 @@ test('docs security headers helper applies the shared docs CSP policy', async ()
 test('web _headers uses the shared CSP policy', async () => {
   const headers = await readFile(path.join(repoRoot, 'apps/web/public/_headers'), 'utf8')
   expect(headers).toContain(`Content-Security-Policy: ${WEB_CONTENT_SECURITY_POLICY}`)
+  expect(headers).not.toContain("script-src 'self' 'unsafe-inline'")
   expect(headers).not.toContain("'unsafe-eval'")
   expect(headers).not.toContain('default-src *')
 })

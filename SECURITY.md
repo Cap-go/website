@@ -24,11 +24,14 @@ CSP values live in `apps/shared/security/csp.mjs` and are applied as follows:
 After editing the policy:
 
 ```bash
+bun run build:web
+bun run build:docs
+bun run security:csp-hashes:write
 bun run security:headers:write
 bun run security:headers:check
 ```
 
-Residual gap: inline analytics bootstraps still require `script-src 'unsafe-inline'`. Tightening further would need nonces or moving bootstraps to first-party files.
+Executable inline scripts are allowlisted with SHA-256 hashes in `apps/shared/security/csp-script-hashes.json`, generated from built HTML via `scripts/collect-csp-script-hashes.mjs`. Regenerate the hash file whenever inline script content changes.
 
 ## HTML sanitization
 
