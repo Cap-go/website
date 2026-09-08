@@ -9,12 +9,10 @@ const statusText = m.ota_launch_status_updating({}, { locale })
   class="ota-launch-illustration relative mx-auto h-64 w-full max-w-[239px]"
   data-ota-launch
   data-ota-status-text={statusText}
-  role="img"
-  aria-label={m.ota_launch_illustration_aria_label({}, { locale })}
 >
-  <p class="sr-only">{m.ota_launch_illustration_sr_description({}, { locale })}</p>
-  <span class="sr-only" aria-live="polite" aria-atomic="true" data-ota-live-status></span>
-  <svg width="239" height="288" class="relative top-10" data-ota-svg viewBox="0 0 239 288" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <div role="img" aria-label={m.ota_launch_illustration_aria_label({}, { locale })}>
+    <p class="sr-only">{m.ota_launch_illustration_sr_description({}, { locale })}</p>
+    <svg width="239" height="288" class="relative top-10" data-ota-svg viewBox="0 0 239 288" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <path data-ota-chrome d="M33.1 31.1001C33.1 20.0544 42.0543 11.1001 53.1 11.1001H184.1C195.146 11.1001 204.1 20.0544 204.1 31.1001V212.1H33.1V31.1001Z" fill="url(#ota-paint0)"
     ></path>
     <text
@@ -173,6 +171,8 @@ const statusText = m.ota_launch_status_updating({}, { locale })
       </clipPath>
     </defs>
   </svg>
+  </div>
+  <span class="sr-only" aria-live="polite" aria-atomic="true" data-ota-live-status></span>
 </div>
 
 <script>
