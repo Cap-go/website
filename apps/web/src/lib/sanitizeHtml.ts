@@ -7,12 +7,17 @@ const MARKDOWN_SANITIZE_OPTIONS: Config = {
 }
 
 const URL_SCHEME_PATTERN = /^(?:https?:|mailto:|tel:|data:image\/|\/|#|\?)/i
-const RELATIVE_URL_PATTERN = /^(?:\.\.?\/)*[\w%+.@-]+(?:\/[\w%+.@/-]*)*(?:\?[^:]*)?(?:#.*)?$/i
 const TARGET_REL_ELEMENTS = new Set(['A', 'AREA', 'FORM'])
 const URL_VALIDATED_ELEMENTS = new Set(['A', 'AREA', 'FORM'])
 const SAME_DOCUMENT_TARGETS = new Set(['_self', '_parent', '_top'])
 const SAFE_REL_VALUE = 'noopener noreferrer'
 let targetRelHookConfigured = false
+
+function isRelativeRenderableUrl(url: string): boolean {
+  if (url.startsWith('?')) return !url.slice(1).includes(':')
+  if (url.includes(':')) return false
+  return url.startsWith('./') || url.startsWith('../') || /^[\w%+.@-]/.test(url)
+}
 
 function hasUnsafeUrlPrefix(url: string): boolean {
   return url.startsWith('//') || url.startsWith('/\\')
@@ -67,7 +72,7 @@ export function isSafeRenderableUrl(url: string): boolean {
   if (/^data:/i.test(trimmed) && !/^data:image\//i.test(trimmed)) return false
 
   if (URL_SCHEME_PATTERN.test(trimmed)) return true
-  if (RELATIVE_URL_PATTERN.test(trimmed)) return true
+  if (isRelativeRenderableUrl(trimmed)) return true
 
   return false
 }
