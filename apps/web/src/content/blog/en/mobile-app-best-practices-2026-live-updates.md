@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-04T16:13:00.000Z
-updated_at: 2026-09-08T11:34:00.000Z
+updated_at: 2026-09-08T11:46:00.000Z
 head_image: /blog-images/mobile-app-best-practices-2026-live-updates.png
 head_image_alt: "Mobile App Best Practices in 2026 live updates vs store review delays Capgo blog illustration"
 keywords: mobile best practices, live updates, OTA, Capacitor, React Native, App Store review, Capgo, 2026
@@ -52,9 +52,11 @@ Treat two release trains explicitly:
 | Release type | What changes | Typical channel |
 | --- | --- | --- |
 | **Store / binary** | Native plugins, SDK bumps, permissions, entitlements, new native features | App Store Connect, Google Play Console |
-| **Live / OTA** | JS bundles, styles, templates, remote config, content, most bug fixes | [Capgo](https://capgo.app/), or stack-native OTA for RN/Expo |
+| **Live / OTA** | JS bundles, styles, templates, remote config, content, most bug fixes—**only when compatible with the installed native runtime** | [Capgo](https://capgo.app/) (Capacitor/Ionic/Cordova), or stack-native OTA such as Expo EAS Update with `expo-updates` |
 
 Document which lane each change uses in your PR template. Ambiguity here is how teams accidentally ship policy violations or untested rollbacks.
+
+OTA bundles are not a substitute for a store build when native code changes. **Capgo channels** must target bundles compatible with the native version on device; **Expo EAS Update** requires a matching runtime and `expo-updates` configuration. Any new native plugin, permission, or SDK bump still goes through the stores.
 
 ### 3. Plan rollback before you need it
 
@@ -154,10 +156,10 @@ The decision in 2026 is not "which tool uploads a zip file." It is **which platf
 | Platform | Stack fit | CI/CD model | OTA scope (within store rules) | Rollback / channels | Status in 2026 |
 | --- | --- | --- | --- | --- | --- |
 | **[Capgo](https://capgo.app/)** | Capacitor, Ionic, Cordova, Electron web-layer apps | **Bring your own pipeline**—upload bundles from GitHub Actions, GitLab CI, Bitrise, Codemagic, CircleCI, or any script using the Capgo CLI/API. Native builds are optional, not required for live updates. | JS, HTML, CSS, assets | Channels, staged rollout, `notifyAppReady`, [delta updates](https://capgo.app/docs/live-updates/differentials/) | Active; SOC 2 Type II |
-| **Capawesome Cloud** | Capacitor, Ionic, Cordova | Tends toward **their cloud build + deploy workflow**—live updates, web builds, and native builds inside the Capawesome platform. Less "plug into whatever CI you already run." | JS, HTML, CSS, assets | Channels, rollbacks, audit logs | Active |
+| **Capawesome Cloud** | Capacitor, Ionic, Cordova | **Managed cloud** with CLI/local bundle uploads and CI integrations—Live Updates without requiring Native Builds; optional cloud web/native builds for teams that want them | JS, HTML, CSS, assets | Channels, rollbacks, audit logs | Active |
 | **Expo EAS Update** | React Native / Expo only (`expo-updates`) | Expo Application Services pipeline—updates tied to the Expo/EAS account model | JS bundle for Expo/RN apps | Republish previous update, channels via EAS | Active; **not a Capacitor path** |
 | **Ionic Appflow** | Legacy Capacitor/Ionic projects | Appflow-centric CI/CD and live updates | Web-layer assets for supported projects | Channels, rollback (plan-dependent) | Legacy—new commercial sales discontinued; existing access through December 31, 2027 |
-| **Microsoft CodePush / App Center** | Historical hybrid and RN teams | Was App Center–hosted; standalone CodePush code archived | Legacy JS bundle delivery | Legacy rollback patterns | App Center core services and hosted CodePush retired March 31, 2025; Analytics and Diagnostics continued until June 30, 2026 |
+| **Microsoft CodePush / App Center** | Historical hybrid and RN teams | Was App Center–hosted; standalone CodePush code archived | Legacy JS bundle delivery | Legacy rollback patterns | App Center core services and hosted CodePush retired March 31, 2025; Analytics and Diagnostics continued until March 31, 2027 |
 
 ### Why Capgo leads for Capacitor teams
 
@@ -180,7 +182,7 @@ Capgo is also the home of a growing [Capacitor plugin directory](https://capgo.a
 ### How to read the alternatives
 
 - **Expo EAS Update** — The right call for Expo and React Native apps. It is not a substitute for Capacitor live updates; different runtime, different update client.
-- **Capawesome Cloud** — Reasonable if you want an all-in-one Capawesome cloud pipeline for builds and OTA together. Compare whether you prefer that consolidated model or Capgo's "your CI uploads, Capgo distributes" approach.
+- **Capawesome Cloud** — A managed-cloud option that also supports CLI/local bundle uploads, existing CI hooks, and Live Updates without requiring Native Builds. Optional cloud builds are available if you want them in the same platform.
 - **Ionic Appflow** — Plan a migration before December 31, 2027 if you are still on it. Do not start new projects there.
 - **CodePush / App Center** — Historical context for teams asking "what replaced CodePush?" Capacitor shops should look at Capgo; RN/Expo shops should look at EAS Update.
 
