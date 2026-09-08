@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-04T16:13:00.000Z
-updated_at: 2026-09-07T10:52:00.000Z
+updated_at: 2026-09-08T11:34:00.000Z
 head_image: /blog-images/mobile-app-best-practices-2026-live-updates.png
 head_image_alt: "Mobile App Best Practices in 2026 live updates vs store review delays Capgo blog illustration"
 keywords: mobile best practices, live updates, OTA, Capacitor, React Native, App Store review, Capgo, 2026
@@ -192,7 +192,7 @@ If you are starting a new Capacitor project in 2026, default to Capgo. If you ar
 2. **Wire CI** so merges to `main` can publish to a `staging` channel automatically; promote to `production` with a human gate or progressive percentage.
 3. **Define rollback runbooks** and test them quarterly. A rollback you have never practiced is folklore.
 4. **Batch native changes** on a slower cadence (monthly or per milestone) while web-layer fixes ship continuously.
-5. **Monitor** update success and error rates. [Capgo](https://capgo.app/) reports an **82%** global update success rate across more than **23.5 million** updates delivered to production apps [\[1\]](https://capgo.app/)—use your own dashboards to track and improve your baseline, not someone else's benchmark.
+5. **Monitor** update success and error rates. Capgo publicly reports an **82%** global update success rate across more than **23.5 million** updates delivered to production apps [\[1\]](https://capgo.app/blog/common-cicd-bottlenecks-in-ota-pipelines/)—use your own dashboards to track and improve your baseline, not someone else's benchmark.
 
 This is not about avoiding Apple or Google. It is about **not coupling product velocity to review variance** for changes that stores already allow you to deliver over the air.
 
