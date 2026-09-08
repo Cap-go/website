@@ -19,9 +19,16 @@ type ReleaseData = {
   versionDevices: string
   topError: string
   topErrorShare: string
+  topErrorEvents: string
   errorsInPeriod: string
   affectedDevices: string
   errorTypes: string
+  errorPrimaryCount: string
+  errorSecondaryCount: string
+  errorTertiaryCount: string
+  errorQuaternaryCount: string
+  affectedVersion: string
+  affectedSummary: string
 }
 
 const RELEASES: Record<ObserveReleaseId, ReleaseData> = {
@@ -42,9 +49,16 @@ const RELEASES: Record<ObserveReleaseId, ReleaseData> = {
     versionDevices: '6,980',
     topError: 'WebView JavaScript error',
     topErrorShare: '18.2%',
+    topErrorEvents: '34',
     errorsInPeriod: '184',
     affectedDevices: '37',
     errorTypes: '5',
+    errorPrimaryCount: '34',
+    errorSecondaryCount: '28',
+    errorTertiaryCount: '21',
+    errorQuaternaryCount: '12',
+    affectedVersion: '4.8.0',
+    affectedSummary: '18 events · 5 devices',
   },
   rollout: {
     id: 'rollout',
@@ -63,9 +77,16 @@ const RELEASES: Record<ObserveReleaseId, ReleaseData> = {
     versionDevices: '2,140',
     topError: 'Bundle download failed',
     topErrorShare: '44.6%',
+    topErrorEvents: '82',
     errorsInPeriod: '312',
     affectedDevices: '96',
     errorTypes: '7',
+    errorPrimaryCount: '82',
+    errorSecondaryCount: '44',
+    errorTertiaryCount: '31',
+    errorQuaternaryCount: '18',
+    affectedVersion: '4.8.1',
+    affectedSummary: '55 events · 14 devices',
   },
 }
 
@@ -96,6 +117,7 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
   let autoTimer: ReturnType<typeof setTimeout> | undefined
   let hintTimer: ReturnType<typeof setTimeout> | undefined
   let userInteracted = false
+  let autoAdvanceCancelled = false
 
   function announce(message: string) {
     if (statusEl) statusEl.textContent = message
@@ -171,13 +193,18 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
   }
 
   function scheduleAutoInvestigate() {
-    if (prefersReducedMotion() || userInteracted) return
+    if (prefersReducedMotion() || autoAdvanceCancelled) return
     clearTimeout(autoTimer)
     autoTimer = setTimeout(() => {
-      if (!userInteracted && currentStep === 'observe') {
+      if (!autoAdvanceCancelled && currentStep === 'observe') {
         setStep('investigate')
       }
     }, 4200)
+  }
+
+  function cancelAutoAdvance() {
+    autoAdvanceCancelled = true
+    clearAuto()
   }
 
   function clearAuto() {
@@ -187,7 +214,7 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
 
   for (const button of stepButtons) {
     button.addEventListener('click', () => {
-      clearAuto()
+      cancelAutoAdvance()
       const step = button.dataset.observeStep as ObserveConsoleStep
       setStep(step, true)
       if (step === 'observe') scheduleAutoInvestigate()
@@ -196,34 +223,36 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
 
   for (const button of releaseButtons) {
     button.addEventListener('click', () => {
-      clearAuto()
       applyRelease(button.dataset.observeRelease as ObserveReleaseId, true)
     })
   }
 
   investigateButton?.addEventListener('click', () => {
-    clearAuto()
+    cancelAutoAdvance()
     setStep('investigate', true)
   })
 
   tabObserve?.addEventListener('click', () => {
-    clearAuto()
+    cancelAutoAdvance()
     setStep('observe', true)
   })
 
   tabLogs?.addEventListener('click', () => {
-    clearAuto()
+    cancelAutoAdvance()
     setStep('investigate', true)
   })
 
   root.addEventListener('keydown', (event) => {
     if (!(event.target instanceof HTMLElement) || !root.contains(event.target)) return
+    if (event.target.closest('[data-observe-tab]')) return
     if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return
     event.preventDefault()
-    clearAuto()
+    cancelAutoAdvance()
     const index = STEP_ORDER.indexOf(currentStep)
     const nextIndex = event.key === 'ArrowRight' ? Math.min(index + 1, STEP_ORDER.length - 1) : Math.max(index - 1, 0)
-    setStep(STEP_ORDER[nextIndex], true)
+    const nextStep = STEP_ORDER[nextIndex]
+    setStep(nextStep, true)
+    stepButtons.find((button) => button.dataset.observeStep === nextStep)?.focus()
   })
 
   if (prefersReducedMotion()) {
@@ -251,9 +280,16 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
   )
   observer.observe(root)
 
-  root.addEventListener('pointerdown', () => {
-    userInteracted = true
-    clearAuto()
-    root.classList.remove('is-hinting')
-  })
+  root.addEventListener(
+    'pointerdown',
+    (event) => {
+      const target = event.target
+      if (!(target instanceof HTMLElement)) return
+      if (!target.closest('[data-observe-step], [data-observe-tab]')) return
+      userInteracted = true
+      cancelAutoAdvance()
+      root.classList.remove('is-hinting')
+    },
+    true,
+  )
 }

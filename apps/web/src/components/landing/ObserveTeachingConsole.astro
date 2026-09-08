@@ -63,13 +63,21 @@ const steps = [
       <div class="otc-top">
         <p class="otc-crumb">apps / Demo app / <span data-observe-crumb>Observe</span></p>
         <div class="otc-tabs" role="tablist" aria-label="App views">
-          <button type="button" class="otc-tab" data-observe-tab="observe" role="tab" aria-selected="true">Observe</button>
-          <button type="button" class="otc-tab" data-observe-tab="logs" role="tab" aria-selected="false">Logs</button>
+          <button type="button" class="otc-tab" data-observe-tab="observe" role="tab" id="otc-tab-observe" aria-controls="otc-panel-observe" aria-selected="true">Observe</button>
+          <button type="button" class="otc-tab" data-observe-tab="logs" role="tab" id="otc-tab-logs" aria-controls="otc-panel-logs" aria-selected="false">Logs</button>
         </div>
       </div>
 
       <div class="otc-panels">
-        <section class="otc-panel" data-observe-panel="health" aria-label="Observe health view">
+        <section
+          class="otc-panel"
+          data-observe-panel="health"
+          id="otc-panel-observe"
+          role="tabpanel"
+          tabindex="0"
+          aria-labelledby="otc-tab-observe"
+          aria-label="Observe health view"
+        >
           <header class="otc-panel-head">
             <div>
               <h2 class="otc-title">Observe <span class="otc-beta">BETA</span></h2>
@@ -166,7 +174,7 @@ const steps = [
           </div>
         </section>
 
-        <section class="otc-panel" data-observe-panel="logs" hidden aria-label="Logs Insights view">
+        <section class="otc-panel" data-observe-panel="logs" id="otc-panel-logs" role="tabpanel" tabindex="0" aria-labelledby="otc-tab-logs" hidden aria-label="Logs Insights view">
           <header class="otc-panel-head">
             <div>
               <h2 class="otc-title">Logs Insights</h2>
@@ -182,7 +190,9 @@ const steps = [
 
           <div class="otc-alert" data-observe-alert>
             <p>
-              <strong data-metric="topError">Bundle download failed</strong> is the largest error group with 82 events (<span data-metric="topErrorShare">44.6%</span>).
+              <strong data-metric="topError">Bundle download failed</strong> is the largest error group with <span data-metric="topErrorEvents">82</span> events (<span
+                data-metric="topErrorShare">44.6%</span
+              >).
             </p>
           </div>
 
@@ -205,18 +215,18 @@ const steps = [
             <div class="otc-log-card">
               <p class="otc-block-label">Error categories</p>
               <ul class="otc-error-list">
-                <li><span>Bundle download failed</span><strong>82</strong></li>
-                <li><span>App crash</span><strong>44</strong></li>
-                <li><span>WebView JavaScript error</span><strong>31</strong></li>
-                <li><span>Checksum validation failed</span><strong>18</strong></li>
+                <li><span data-metric="topError">Bundle download failed</span><strong data-metric="errorPrimaryCount">82</strong></li>
+                <li><span>App crash</span><strong data-metric="errorSecondaryCount">44</strong></li>
+                <li><span>WebView JavaScript error</span><strong data-metric="errorTertiaryCount">31</strong></li>
+                <li><span>Checksum validation failed</span><strong data-metric="errorQuaternaryCount">18</strong></li>
               </ul>
             </div>
             <div class="otc-log-card">
               <p class="otc-block-label">Top affected versions</p>
               <div class="otc-affected-row">
-                <span class="otc-affected-version" data-metric="version">4.8.1</span>
-                <span class="otc-affected-action">Bundle download failed</span>
-                <span class="otc-affected-count">55 events · 14 devices</span>
+                <span class="otc-affected-version" data-metric="affectedVersion">4.8.1</span>
+                <span class="otc-affected-action" data-metric="topError">Bundle download failed</span>
+                <span class="otc-affected-count" data-metric="affectedSummary">55 events · 14 devices</span>
               </div>
               <div class="otc-affected-row">
                 <span class="otc-affected-version">4.8.0</span>
@@ -262,15 +272,7 @@ const steps = [
 
 <style>
   .observe-teaching-console {
-    margin: 58px 0 0;
     padding: 0;
-    overflow: hidden;
-    border: 1px solid rgba(191, 219, 254, 0.32);
-    border-radius: 18px;
-    background: #0c1627;
-    box-shadow:
-      0 28px 80px rgba(0, 0, 0, 0.36),
-      0 0 0 8px rgba(147, 197, 253, 0.04);
     color: #0f172a;
     text-align: left;
   }
@@ -658,6 +660,10 @@ const steps = [
     font-size: 10px;
   }
 
+  .otc-version-row[hidden] {
+    display: none;
+  }
+
   .otc-version-row:first-child {
     border-top: 0;
   }
@@ -858,11 +864,6 @@ const steps = [
   }
 
   @media (max-width: 720px) {
-    .observe-teaching-console {
-      margin-top: 40px;
-      border-radius: 12px;
-    }
-
     .otc-steps {
       grid-template-columns: 1fr;
     }
