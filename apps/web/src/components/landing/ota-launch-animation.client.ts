@@ -7,6 +7,10 @@ const BEAT_B_DOWNLOAD = 2.0
 const BEAT_C_RELAUNCH = 1.4
 const PROGRESS_BAR_WIDTH = 141
 
+const BEAT_C_EXIT = BEAT_C_RELAUNCH * 0.34
+const BEAT_C_RETURN = BEAT_C_RELAUNCH * 0.39
+const BEAT_C_RETURN_AT = BEAT_C_RELAUNCH - BEAT_C_RETURN
+
 function queryParts(root: HTMLElement) {
   return {
     chrome: root.querySelectorAll('[data-ota-chrome]'),
@@ -126,7 +130,7 @@ function buildTimeline(root: HTMLElement) {
       {
         y: 64,
         opacity: 0,
-        duration: 0.48,
+        duration: BEAT_C_EXIT,
         ease: 'power2.in',
       },
       'beatC',
@@ -160,10 +164,10 @@ function buildTimeline(root: HTMLElement) {
       {
         y: 0,
         opacity: 1,
-        duration: 0.55,
+        duration: BEAT_C_RETURN,
         ease: 'power2.out',
       },
-      'beatC+=0.9',
+      `beatC+=${BEAT_C_RETURN_AT}`,
     )
     .to(rings, { opacity: 0.72, duration: 0.35 }, 'beatC+=0.95')
 
