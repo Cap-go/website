@@ -76,7 +76,7 @@ async function collectTargetHashes(distDir) {
     const html = await readFile(filePath, 'utf8')
     for (const hash of collectHashesFromHtml(html)) hashes.add(hash)
   }
-  return [...hashes].sort((a, b) => a.localeCompare(b))
+  return [...hashes].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
 }
 
 async function main() {
