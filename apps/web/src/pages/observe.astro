@@ -5,6 +5,7 @@ import m from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
+import ObserveTeachingConsole from '@/components/landing/ObserveTeachingConsole.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -65,19 +66,7 @@ const screenSignals = [
           </ol>
         </div>
 
-        <figure class="observe-dashboard">
-          <picture>
-            <source media="(max-width: 720px)" srcset="/landing-demos/observe-dashboard-mobile.webp" />
-            <img
-              src="/landing-demos/observe-dashboard.webp"
-              alt="Capgo Observe dashboard showing native health, launch timing, WebView timing, version breakdown, and release markers"
-              width="1440"
-              height="1100"
-              loading="eager"
-              decoding="async"
-            />
-          </picture>
-        </figure>
+        <ObserveTeachingConsole />
       </div>
     </section>
 

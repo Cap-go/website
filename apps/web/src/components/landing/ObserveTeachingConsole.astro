@@ -1,0 +1,895 @@
+---
+const releases = [
+  {
+    id: 'stable',
+    version: '4.8.0',
+    channel: 'production',
+    deployed: 'Jan 5, 2026',
+    note: 'Prior stable release',
+  },
+  {
+    id: 'rollout',
+    version: '4.8.1',
+    channel: 'production',
+    deployed: 'Jan 12, 2026',
+    note: 'Latest rollout — select to compare health',
+  },
+]
+
+const steps = [
+  { id: 'deploy', label: 'Deploy', hint: 'Pick the release marker' },
+  { id: 'observe', label: 'Observe', hint: 'Read version health' },
+  { id: 'investigate', label: 'Investigate', hint: 'Open Logs Insights' },
+]
+---
+
+<figure class="observe-dashboard observe-teaching-console" data-observe-console data-step="deploy" data-release="stable">
+  <div class="otc-toolbar">
+    <ol class="otc-steps" role="list" aria-label="Observe workflow">
+      {
+        steps.map((step) => (
+          <li>
+            <button type="button" class="otc-step" data-observe-step={step.id} aria-current={step.id === 'deploy' ? 'step' : 'false'}>
+              <span class="otc-step-num" aria-hidden="true">
+                {step.id === 'deploy' ? '01' : step.id === 'observe' ? '02' : '03'}
+              </span>
+              <span class="otc-step-copy">
+                <strong>{step.label}</strong>
+                <small>{step.hint}</small>
+              </span>
+            </button>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="otc-sr" data-observe-status aria-live="polite">Step 1: Select a release marker to anchor the rollout you just shipped.</p>
+  </div>
+
+  <div class="otc-shell">
+    <aside class="otc-sidebar" aria-hidden="true">
+      <div class="otc-brand">Capgo</div>
+      <div class="otc-org">
+        <span>Demo org</span>
+        <span>Demo app</span>
+      </div>
+      <nav class="otc-nav">
+        <span>Dashboard</span>
+        <span class="is-active">Apps</span>
+        <span>API Keys</span>
+      </nav>
+    </aside>
+
+    <div class="otc-main">
+      <div class="otc-top">
+        <p class="otc-crumb">apps / Demo app / <span data-observe-crumb>Observe</span></p>
+        <div class="otc-tabs" role="tablist" aria-label="App views">
+          <button type="button" class="otc-tab" data-observe-tab="observe" role="tab" aria-selected="true">Observe</button>
+          <button type="button" class="otc-tab" data-observe-tab="logs" role="tab" aria-selected="false">Logs</button>
+        </div>
+      </div>
+
+      <div class="otc-panels">
+        <section class="otc-panel" data-observe-panel="health" aria-label="Observe health view">
+          <header class="otc-panel-head">
+            <div>
+              <h2 class="otc-title">Observe <span class="otc-beta">BETA</span></h2>
+              <p class="otc-sub">Native health, launch timing, and WebView timing for reported versions.</p>
+            </div>
+            <div class="otc-range" aria-hidden="true">
+              <span>1 day</span>
+              <span>3 days</span>
+              <span class="is-active">7 days</span>
+              <span>30 days</span>
+            </div>
+          </header>
+
+          <div class="otc-release-block">
+            <p class="otc-block-label">Release markers</p>
+            <div class="otc-release-list" role="group" aria-label="Release markers">
+              {
+                releases.map((release) => (
+                  <button
+                    type="button"
+                    class:list={['otc-release', release.id === 'stable' && 'is-selected']}
+                    data-observe-release={release.id}
+                    aria-pressed={release.id === 'stable' ? 'true' : 'false'}
+                  >
+                    <span class="otc-release-version">v{release.version}</span>
+                    <span class="otc-release-meta">
+                      <span>{release.channel}</span>
+                      <span>{release.deployed}</span>
+                    </span>
+                    <span class="otc-release-note">{release.note}</span>
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="otc-metrics" aria-label="All versions summary">
+            <article>
+              <p>Tracked devices</p>
+              <strong data-metric="trackedDevices">8,240</strong>
+            </article>
+            <article class="otc-metric-good">
+              <p>Issue-free devices</p>
+              <strong data-metric="issueFree">98.6%</strong>
+            </article>
+            <article>
+              <p>Launch P90</p>
+              <strong data-metric="launchP90">781 ms</strong>
+            </article>
+            <article>
+              <p>WebView P90</p>
+              <strong data-metric="webViewP90">1.2 s</strong>
+            </article>
+            <article class="otc-metric-bad">
+              <p>Native issues</p>
+              <strong data-metric="nativeIssues">326</strong>
+            </article>
+          </div>
+
+          <div class="otc-version-block">
+            <p class="otc-block-label">Version breakdown</p>
+            <div class="otc-version-table" role="table" aria-label="Version health">
+              <div class="otc-version-row otc-version-head" role="row">
+                <span role="columnheader">Version</span>
+                <span role="columnheader">Events</span>
+                <span role="columnheader">Devices</span>
+                <span role="columnheader">Issue-free</span>
+                <span role="columnheader">Launch P90</span>
+                <span role="columnheader">WebView P90</span>
+              </div>
+              <div class="otc-version-row" role="row" data-observe-version-context hidden>
+                <span role="cell">4.8.0</span>
+                <span role="cell">42.1k</span>
+                <span role="cell">6,980</span>
+                <span role="cell">98.9%</span>
+                <span role="cell">760 ms</span>
+                <span role="cell">1.1 s</span>
+              </div>
+              <div class="otc-version-row otc-version-focus" role="row" data-observe-version-row data-release="stable">
+                <span role="cell" data-metric="version">4.8.0</span>
+                <span role="cell" data-metric="versionEvents">42.1k</span>
+                <span role="cell" data-metric="versionDevices">6,980</span>
+                <span role="cell" data-metric="versionIssueFree">98.9%</span>
+                <span role="cell" data-metric="versionLaunchP90">760 ms</span>
+                <span role="cell" data-metric="versionWebViewP90">1.1 s</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="otc-cta-row">
+            <button type="button" class="otc-investigate" data-observe-investigate>
+              Investigate in Logs Insights <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="otc-panel" data-observe-panel="logs" hidden aria-label="Logs Insights view">
+          <header class="otc-panel-head">
+            <div>
+              <h2 class="otc-title">Logs Insights</h2>
+              <p class="otc-sub">Error categories, affected versions, and devices for the selected period.</p>
+            </div>
+            <div class="otc-range" aria-hidden="true">
+              <span>1 day</span>
+              <span>3 days</span>
+              <span class="is-active">7 days</span>
+              <span>30 days</span>
+            </div>
+          </header>
+
+          <div class="otc-alert" data-observe-alert>
+            <p>
+              <strong data-metric="topError">Bundle download failed</strong> is the largest error group with 82 events (<span data-metric="topErrorShare">44.6%</span>).
+            </p>
+          </div>
+
+          <div class="otc-metrics otc-metrics--logs">
+            <article>
+              <p>Errors in period</p>
+              <strong data-metric="errorsInPeriod">312</strong>
+            </article>
+            <article>
+              <p>Affected devices</p>
+              <strong data-metric="affectedDevices">96</strong>
+            </article>
+            <article>
+              <p>Error types</p>
+              <strong data-metric="errorTypes">7</strong>
+            </article>
+          </div>
+
+          <div class="otc-logs-grid">
+            <div class="otc-log-card">
+              <p class="otc-block-label">Error categories</p>
+              <ul class="otc-error-list">
+                <li><span>Bundle download failed</span><strong>82</strong></li>
+                <li><span>App crash</span><strong>44</strong></li>
+                <li><span>WebView JavaScript error</span><strong>31</strong></li>
+                <li><span>Checksum validation failed</span><strong>18</strong></li>
+              </ul>
+            </div>
+            <div class="otc-log-card">
+              <p class="otc-block-label">Top affected versions</p>
+              <div class="otc-affected-row">
+                <span class="otc-affected-version" data-metric="version">4.8.1</span>
+                <span class="otc-affected-action">Bundle download failed</span>
+                <span class="otc-affected-count">55 events · 14 devices</span>
+              </div>
+              <div class="otc-affected-row">
+                <span class="otc-affected-version">4.8.0</span>
+                <span class="otc-affected-action">App crash</span>
+                <span class="otc-affected-count">12 events · 6 devices</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <picture>
+      <source media="(max-width: 720px)" srcset="/landing-demos/observe-dashboard-mobile.webp" />
+      <img
+        src="/landing-demos/observe-dashboard.webp"
+        alt="Capgo Observe dashboard showing native health, launch timing, WebView timing, version breakdown, and release markers"
+        width="1440"
+        height="1100"
+        loading="eager"
+        decoding="async"
+      />
+    </picture>
+  </noscript>
+</figure>
+
+<script>
+  import { setupObserveTeachingConsole } from './observe-teaching-console.client.ts'
+
+  function initObserveConsole() {
+    const root = document.querySelector<HTMLElement>('[data-observe-console]')
+    if (root) setupObserveTeachingConsole(root)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initObserveConsole)
+  } else {
+    initObserveConsole()
+  }
+</script>
+
+<style>
+  .observe-teaching-console {
+    margin: 58px 0 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(191, 219, 254, 0.32);
+    border-radius: 18px;
+    background: #0c1627;
+    box-shadow:
+      0 28px 80px rgba(0, 0, 0, 0.36),
+      0 0 0 8px rgba(147, 197, 253, 0.04);
+    color: #0f172a;
+    text-align: left;
+  }
+
+  .observe-teaching-console noscript img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .otc-toolbar {
+    padding: 14px 16px 0;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(12, 22, 39, 0.92));
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  }
+
+  .otc-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .otc-step {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.55);
+    color: rgba(226, 232, 240, 0.88);
+    text-align: left;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .otc-step:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+  }
+
+  .otc-step.is-active {
+    border-color: rgba(96, 165, 250, 0.65);
+    background: rgba(37, 99, 235, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.2);
+  }
+
+  .otc-step-num {
+    color: #60a5fa;
+    font-family: var(--lu-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .otc-step-copy strong,
+  .otc-step-copy small {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .otc-step-copy strong {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .otc-step-copy small {
+    margin-top: 2px;
+    color: rgba(226, 232, 240, 0.58);
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .otc-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .otc-shell {
+    display: grid;
+    grid-template-columns: 148px minmax(0, 1fr);
+    min-height: 520px;
+    background: #f8fafc;
+  }
+
+  .otc-sidebar {
+    padding: 16px 12px;
+    background: #0f172a;
+    color: rgba(226, 232, 240, 0.82);
+    font-size: 11px;
+  }
+
+  .otc-brand {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .otc-org {
+    display: grid;
+    gap: 2px;
+    margin-top: 14px;
+    padding: 8px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.55);
+    font-size: 10px;
+  }
+
+  .otc-nav {
+    display: grid;
+    gap: 6px;
+    margin-top: 16px;
+  }
+
+  .otc-nav .is-active {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .otc-main {
+    min-width: 0;
+    padding: 14px 16px 16px;
+  }
+
+  .otc-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .otc-crumb {
+    margin: 0;
+    color: #64748b;
+    font-size: 11px;
+  }
+
+  .otc-tabs {
+    display: inline-flex;
+    gap: 4px;
+    padding: 3px;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    background: #fff;
+  }
+
+  .otc-tab {
+    min-height: 32px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .otc-tab.is-active {
+    background: #2563eb;
+    color: #fff;
+  }
+
+  .otc-tab:focus-visible,
+  .otc-release:focus-visible,
+  .otc-investigate:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+  }
+
+  .otc-panel-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .otc-title {
+    margin: 0;
+    color: #0f172a;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .otc-beta {
+    margin-left: 6px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    vertical-align: middle;
+  }
+
+  .otc-sub {
+    margin: 4px 0 0;
+    max-width: 36rem;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .otc-range {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .otc-range span {
+    padding: 4px 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    background: #fff;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .otc-range .is-active {
+    border-color: #2563eb;
+    background: #2563eb;
+    color: #fff;
+  }
+
+  .otc-block-label {
+    margin: 0 0 8px;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .otc-release-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .otc-release {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #fff;
+    text-align: left;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .otc-release.is-selected {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.14);
+  }
+
+  .observe-teaching-console.is-hinting .otc-release[data-observe-release='rollout'] {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+  }
+
+  .otc-release-version {
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .otc-release-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #64748b;
+    font-size: 10px;
+  }
+
+  .otc-release-note {
+    overflow: hidden;
+    color: #475569;
+    font-size: 10px;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .otc-metrics {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .otc-metrics article {
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .otc-metrics p {
+    margin: 0;
+    overflow: hidden;
+    color: #64748b;
+    font-size: 9px;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .otc-metrics strong {
+    display: block;
+    margin-top: 6px;
+    overflow: hidden;
+    color: #0f172a;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 800;
+    line-height: 1.1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 180ms ease;
+  }
+
+  .otc-metric-good strong {
+    color: #15803d;
+  }
+
+  .otc-metric-bad strong {
+    color: #b91c1c;
+  }
+
+  .observe-teaching-console.is-rollout .otc-metric-good strong {
+    color: #b45309;
+  }
+
+  .observe-teaching-console.is-rollout .otc-metric-bad strong {
+    color: #b91c1c;
+  }
+
+  .otc-version-block {
+    margin-top: 12px;
+  }
+
+  .otc-version-table {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .otc-version-row {
+    display: grid;
+    grid-template-columns: 0.9fr repeat(5, minmax(0, 1fr));
+    gap: 6px;
+    align-items: center;
+    padding: 8px 10px;
+    border-top: 1px solid #f1f5f9;
+    font-size: 10px;
+  }
+
+  .otc-version-row:first-child {
+    border-top: 0;
+  }
+
+  .otc-version-head {
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .otc-version-row span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .otc-version-focus {
+    background: rgba(37, 99, 235, 0.06);
+    font-weight: 700;
+  }
+
+  .observe-teaching-console.is-rollout .otc-version-focus {
+    background: rgba(239, 68, 68, 0.08);
+    color: #991b1b;
+  }
+
+  .otc-cta-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+  }
+
+  .otc-investigate {
+    min-height: 40px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 999px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    transition: background-color 180ms ease;
+  }
+
+  .otc-investigate[hidden] {
+    display: none;
+  }
+
+  .otc-alert {
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    background: #fef2f2;
+    color: #7f1d1d;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .otc-alert p {
+    margin: 0;
+  }
+
+  .otc-metrics--logs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .otc-logs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .otc-log-card {
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .otc-error-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .otc-error-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 0;
+    border-top: 1px solid #f1f5f9;
+    font-size: 10px;
+  }
+
+  .otc-error-list li:first-child {
+    border-top: 0;
+  }
+
+  .otc-error-list span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .otc-error-list strong {
+    color: #b91c1c;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .otc-affected-row {
+    display: grid;
+    gap: 2px;
+    padding: 8px 0;
+    border-top: 1px solid #f1f5f9;
+    font-size: 10px;
+  }
+
+  .otc-affected-row:first-of-type {
+    border-top: 0;
+  }
+
+  .otc-affected-version {
+    color: #0f172a;
+    font-weight: 800;
+  }
+
+  .otc-affected-action,
+  .otc-affected-count {
+    overflow: hidden;
+    color: #64748b;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 960px) {
+    .otc-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .otc-sidebar {
+      display: none;
+    }
+
+    .otc-metrics {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .otc-version-row {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .otc-version-head {
+      display: none;
+    }
+
+    .otc-version-row:not(.otc-version-focus) {
+      display: none;
+    }
+
+    .otc-version-focus span::before {
+      display: block;
+      margin-bottom: 2px;
+      color: #64748b;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .otc-version-focus span:nth-child(1)::before {
+      content: 'Version';
+    }
+    .otc-version-focus span:nth-child(2)::before {
+      content: 'Events';
+    }
+    .otc-version-focus span:nth-child(3)::before {
+      content: 'Devices';
+    }
+    .otc-version-focus span:nth-child(4)::before {
+      content: 'Issue-free';
+    }
+    .otc-version-focus span:nth-child(5)::before {
+      content: 'Launch P90';
+    }
+    .otc-version-focus span:nth-child(6)::before {
+      content: 'WebView P90';
+    }
+
+    .otc-logs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .observe-teaching-console {
+      margin-top: 40px;
+      border-radius: 12px;
+    }
+
+    .otc-steps {
+      grid-template-columns: 1fr;
+    }
+
+    .otc-step-copy small {
+      white-space: normal;
+    }
+
+    .otc-main {
+      padding: 12px;
+    }
+
+    .otc-metrics {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .otc-metrics article:nth-child(5) {
+      grid-column: span 2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .otc-step,
+    .otc-release,
+    .otc-metrics strong,
+    .otc-investigate {
+      transition: none;
+    }
+  }
+</style>
