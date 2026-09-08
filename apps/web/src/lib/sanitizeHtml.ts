@@ -14,8 +14,7 @@ const SAFE_REL_VALUE = 'noopener noreferrer'
 let targetRelHookConfigured = false
 
 function isRelativeRenderableUrl(url: string): boolean {
-  if (url.startsWith('?')) return !url.slice(1).includes(':')
-  if (url.includes(':')) return false
+  if (/^[A-Za-z][A-Za-z0-9+.-]*:/.test(url)) return false
   return url.startsWith('./') || url.startsWith('../') || /^[\w%+.@-]/.test(url)
 }
 

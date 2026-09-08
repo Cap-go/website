@@ -83,7 +83,7 @@ test('sanitizeRenderableUrl rejects javascript, protocol-relative, and backslash
 })
 
 test('sanitizeRenderableUrl allows path-relative and query-relative markdown links', () => {
-  for (const href of ['guide', './guide', '../guide', 'guide/setup', '?section=api']) {
+  for (const href of ['guide', './guide', '../guide', 'guide/setup', '?section=api', 'guide?time=12:30']) {
     expect(isSafeRenderableUrl(href)).toBe(true)
     expect(sanitizeRenderableUrl(href)).toBe(href)
   }
