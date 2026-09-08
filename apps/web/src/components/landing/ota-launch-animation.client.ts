@@ -7,9 +7,19 @@ const BEAT_B_DOWNLOAD = 2.0
 const BEAT_C_RELAUNCH = 1.4
 const PROGRESS_BAR_WIDTH = 141
 
-const BEAT_C_EXIT = BEAT_C_RELAUNCH * 0.34
-const BEAT_C_RETURN = BEAT_C_RELAUNCH * 0.39
-const BEAT_C_RETURN_AT = BEAT_C_RELAUNCH - BEAT_C_RETURN
+// Beat C offsets/durations are fractions of BEAT_C_RELAUNCH so the storyboard stays in sync.
+const BEAT_C_EXIT = BEAT_C_RELAUNCH * 0.343
+const BEAT_C_DOWNLOAD_HIDE = BEAT_C_RELAUNCH * 0.143
+const BEAT_C_BLANK_IN_AT = BEAT_C_RELAUNCH * 0.229
+const BEAT_C_BLANK_IN = BEAT_C_RELAUNCH * 0.2
+const BEAT_C_BUNDLE_ABSORB_AT = BEAT_C_RELAUNCH * 0.271
+const BEAT_C_BUNDLE_ABSORB = BEAT_C_RELAUNCH * 0.3
+const BEAT_C_BLANK_OUT_AT = BEAT_C_RELAUNCH * 0.586
+const BEAT_C_BLANK_OUT = BEAT_C_RELAUNCH * 0.229
+const BEAT_C_RETURN_AT = BEAT_C_RELAUNCH * 0.643
+const BEAT_C_RETURN = BEAT_C_RELAUNCH * 0.393
+const BEAT_C_RINGS_AT = BEAT_C_RELAUNCH * 0.679
+const BEAT_C_RINGS = BEAT_C_RELAUNCH * 0.25
 
 function queryParts(root: HTMLElement) {
   return {
@@ -26,18 +36,23 @@ function queryParts(root: HTMLElement) {
   }
 }
 
+function hideDownloadUi(status: Element | null, progress: Element | null, progressFill: Element | null, liveStatus: Element | null) {
+  gsap.set([status, progress], { opacity: 0 })
+  gsap.set(progressFill, { attr: { width: 0 } })
+  if (liveStatus) liveStatus.textContent = ''
+}
+
 /** Show the completed OTA update state without animation (reduced-motion path). */
 function setFinalState(root: HTMLElement) {
-  const { chrome, staged, status, progress, progressFill, launchBlank, stack, rings, appUi } = queryParts(root)
+  const { chrome, staged, status, progress, progressFill, launchBlank, stack, rings, appUi, liveStatus } = queryParts(root)
 
   staged?.setAttribute('opacity', '0')
-  status?.setAttribute('opacity', '0')
-  progress?.setAttribute('opacity', '0')
   launchBlank?.setAttribute('opacity', '0')
-  progressFill?.setAttribute('width', '0')
   stack?.setAttribute('opacity', '1')
   rings?.setAttribute('opacity', '1')
   chrome.forEach((el) => el.setAttribute('opacity', '1'))
+
+  hideDownloadUi(status, progress, progressFill, liveStatus)
 
   for (const el of [staged, progress, launchBlank, stack, rings, status, appUi, ...chrome]) {
     if (el instanceof SVGElement) {
@@ -45,6 +60,8 @@ function setFinalState(root: HTMLElement) {
       gsap.set(el, { clearProps: 'opacity,transform' })
     }
   }
+
+  hideDownloadUi(status, progress, progressFill, liveStatus)
 }
 
 /**
@@ -54,18 +71,7 @@ function setFinalState(root: HTMLElement) {
  * C — App exits, brief launch blank, app returns with update applied.
  */
 function buildTimeline(root: HTMLElement) {
-  const {
-    chrome,
-    appUi,
-    staged,
-    status,
-    progress,
-    progressFill,
-    launchBlank,
-    liveStatus,
-    stack,
-    rings,
-  } = queryParts(root)
+  const { chrome, appUi, staged, status, progress, progressFill, launchBlank, liveStatus, stack, rings } = queryParts(root)
   const statusText = root.dataset.otaStatusText ?? ''
 
   if (!appUi || !staged || !status || !progress || !progressFill || !launchBlank || !stack || !rings || chrome.length === 0) {
@@ -76,9 +82,7 @@ function buildTimeline(root: HTMLElement) {
   gsap.set(appUi, { opacity: 1, y: 0 })
   gsap.set(stack, { opacity: 1, y: 0 })
   gsap.set(rings, { opacity: 0.72 })
-  gsap.set(status, { opacity: 0 })
-  gsap.set(progress, { opacity: 0 })
-  gsap.set(progressFill, { attr: { width: 0 } })
+  hideDownloadUi(status, progress, progressFill, liveStatus)
   gsap.set(launchBlank, { opacity: 0 })
   gsap.set(staged, { opacity: 0, y: 28 })
   if (liveStatus) liveStatus.textContent = ''
@@ -139,25 +143,23 @@ function buildTimeline(root: HTMLElement) {
       [status, progress],
       {
         opacity: 0,
-        duration: 0.2,
-        onComplete: () => {
-          if (liveStatus) liveStatus.textContent = ''
-        },
+        duration: BEAT_C_DOWNLOAD_HIDE,
+        onComplete: () => hideDownloadUi(status, progress, progressFill, liveStatus),
       },
       'beatC',
     )
-    .to(launchBlank, { opacity: 1, duration: 0.28 }, 'beatC+=0.32')
+    .to(launchBlank, { opacity: 1, duration: BEAT_C_BLANK_IN }, `beatC+=${BEAT_C_BLANK_IN_AT}`)
     .to(
       staged,
       {
         y: -34,
         opacity: 0,
-        duration: 0.42,
+        duration: BEAT_C_BUNDLE_ABSORB,
         ease: 'power2.in',
       },
-      'beatC+=0.38',
+      `beatC+=${BEAT_C_BUNDLE_ABSORB_AT}`,
     )
-    .to(launchBlank, { opacity: 0, duration: 0.32 }, 'beatC+=0.82')
+    .to(launchBlank, { opacity: 0, duration: BEAT_C_BLANK_OUT }, `beatC+=${BEAT_C_BLANK_OUT_AT}`)
     .fromTo(
       appUi,
       { y: -40, opacity: 0 },
@@ -166,10 +168,11 @@ function buildTimeline(root: HTMLElement) {
         opacity: 1,
         duration: BEAT_C_RETURN,
         ease: 'power2.out',
+        onComplete: () => hideDownloadUi(status, progress, progressFill, liveStatus),
       },
       `beatC+=${BEAT_C_RETURN_AT}`,
     )
-    .to(rings, { opacity: 0.72, duration: 0.35 }, 'beatC+=0.95')
+    .to(rings, { opacity: 0.72, duration: BEAT_C_RINGS }, `beatC+=${BEAT_C_RINGS_AT}`)
 
   return timeline
 }
