@@ -71,6 +71,10 @@
         "wrangler": "4.126.0",
         "zod": "^4.4.3",
       },
+      "optionalDependencies": {
+        "@bruits/satteri-linux-x64-gnu": "0.10.5",
+        "@bruits/satteri-linux-x64-musl": "0.10.5",
+      },
     },
     "apps/distrib-worker": {
       "name": "@capgo/distrib-worker",
