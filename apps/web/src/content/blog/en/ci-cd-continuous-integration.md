@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-08T10:01:43.793Z
-updated_at: 2026-09-08T10:01:44.900Z
+updated_at: 2026-09-08T10:04:21.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/e95d80dd-269a-4047-bf4d-5a50630abd9b/ci-cd-continuous-integration-text-graphic.jpg'
 head_image_alt: Ci Cd Continuous Integration
 keywords: 'ci cd, continuous integration, mobile devops, capacitor, live updates'
