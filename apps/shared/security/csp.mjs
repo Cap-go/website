@@ -5,14 +5,11 @@
  * Run `bun run security:csp-hashes:write` after builds and `bun run security:headers:check` after edits.
  */
 
-import { readFileSync } from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import scriptHashes from './csp-script-hashes.json' with { type: 'json' }
 
 const joinSources = (...groups) => groups.flat().join(' ')
 
-const hashesPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'csp-script-hashes.json')
-const { web: webScriptHashes = [], docs: docsScriptHashes = [] } = JSON.parse(readFileSync(hashesPath, 'utf8'))
+const { web: webScriptHashes = [], docs: docsScriptHashes = [] } = scriptHashes
 
 function scriptSrcDirective(hashes, ...sources) {
   const hashSources = hashes.map((hash) => `'${hash}'`)
