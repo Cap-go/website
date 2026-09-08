@@ -37,14 +37,18 @@ test('sanitizeMarkdownHtml enforces noopener noreferrer on named browsing-contex
   expect(anchor).toBe('<a href="https://capgo.app/" target="pluginWindow" rel="noopener noreferrer">x</a>')
 
   const area = sanitizeMarkdownHtml(
-    '<area href="https://capgo.app/" target="mapWindow" shape="rect" coords="0,0,10,10" alt="Capgo">',
+    '<area href="https://capgo.app/" target="mapWindow" rel="opener" shape="rect" coords="0,0,10,10" alt="Capgo">',
   )
   expect(area).toContain('target="mapWindow"')
   expect(area).toContain('rel="noopener noreferrer"')
+  expect(area).not.toContain('rel="opener"')
 
-  const form = sanitizeMarkdownHtml('<form action="https://capgo.app/" target="formWindow" method="get"></form>')
+  const form = sanitizeMarkdownHtml(
+    '<form action="https://capgo.app/" target="formWindow" rel="opener" method="get"></form>',
+  )
   expect(form).toContain('target="formWindow"')
   expect(form).toContain('rel="noopener noreferrer"')
+  expect(form).not.toContain('rel="opener"')
 })
 
 test('sanitizeMarkdownHtml does not add rel for same-document targets', () => {
