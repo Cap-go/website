@@ -2,7 +2,6 @@ import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { WEB_CONTENT_SECURITY_POLICY } from '../apps/shared/security/csp.mjs'
 
 const repoRoot = path.dirname(fileURLToPath(new URL('../package.json', import.meta.url)))
 const checkMode = process.argv.includes('--check') || !process.argv.includes('--write')
@@ -10,11 +9,9 @@ const checkMode = process.argv.includes('--check') || !process.argv.includes('--
 const targets = [
   {
     filePath: path.resolve(repoRoot, 'apps/web/public/_headers'),
-    policy: WEB_CONTENT_SECURITY_POLICY,
   },
 ]
 
-const cspLinePrefix = '  Content-Security-Policy: '
 const permissionsPolicyLine =
   "  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), payment=(), usb=()"
 const serviceDocumentLinkLine = '  Link: </docs/public-api/>; rel="service-doc"; type="text/html"'
@@ -31,7 +28,7 @@ function isManagedHeader(line) {
   return MANAGED_HEADER_PREFIXES.some((prefix) => line.startsWith(prefix))
 }
 
-function upsertSecurityBlock(content, policy) {
+function upsertSecurityBlock(content) {
   const lines = content.replace(/\n+$/, '').split('\n')
   const wildcardIndex = lines.indexOf('/*')
 
@@ -52,7 +49,6 @@ function upsertSecurityBlock(content, policy) {
     '  X-Content-Type-Options: nosniff',
     '  X-Frame-Options: DENY',
     '  Referrer-Policy: strict-origin',
-    `${cspLinePrefix}${policy}`,
     permissionsPolicyLine,
     serviceDocumentLinkLine,
   ]
@@ -65,7 +61,7 @@ async function main() {
 
   for (const target of targets) {
     const current = (await readFile(target.filePath, 'utf8')).replace(/\n+$/, '')
-    const next = upsertSecurityBlock(current, target.policy)
+    const next = upsertSecurityBlock(current)
     const relativePath = path.relative(repoRoot, target.filePath)
 
     if (current === next) {

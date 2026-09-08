@@ -82,6 +82,18 @@ test('sanitizeRenderableUrl rejects javascript, protocol-relative, and backslash
   expect(isSafeRenderableUrl('mailto:sales@capgo.app')).toBe(true)
 })
 
+test('sanitizeRenderableUrl allows path-relative and query-relative markdown links', () => {
+  for (const href of ['guide', './guide', '../guide', 'guide/setup', '?section=api']) {
+    expect(isSafeRenderableUrl(href)).toBe(true)
+    expect(sanitizeRenderableUrl(href)).toBe(href)
+  }
+
+  const clean = sanitizeMarkdownHtml('<a href="guide">guide</a><a href="./guide">local</a><a href="?section=api">api</a>')
+  expect(clean).toContain('href="guide"')
+  expect(clean).toContain('href="./guide"')
+  expect(clean).toContain('href="?section=api"')
+})
+
 test('web security headers helper applies the shared web CSP policy', async () => {
   const { withWebSecurityHeaders } = await import('../../../apps/shared/security/responseHeaders.mjs')
   const response = withWebSecurityHeaders(new Response('ok', { status: 200 }))
@@ -98,10 +110,9 @@ test('docs security headers helper applies the shared docs CSP policy', async ()
   expect(response.headers.get('X-Frame-Options')).toBe('DENY')
 })
 
-test('web _headers uses the shared CSP policy', async () => {
+test('web _headers omits CSP because the worker applies it', async () => {
   const headers = await readFile(path.join(repoRoot, 'apps/web/public/_headers'), 'utf8')
-  expect(headers).toContain(`Content-Security-Policy: ${WEB_CONTENT_SECURITY_POLICY}`)
-  expect(headers).not.toMatch(/script-src[^;]*'unsafe-inline'/)
-  expect(headers).not.toContain("'unsafe-eval'")
-  expect(headers).not.toContain('default-src *')
+  expect(headers).not.toContain('Content-Security-Policy:')
+  expect(headers).toContain('X-Frame-Options: DENY')
+  expect(headers).toContain('Referrer-Policy: strict-origin')
 })

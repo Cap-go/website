@@ -6,7 +6,8 @@ const MARKDOWN_SANITIZE_OPTIONS: Config = {
   FORBID_ATTR: ['rel'],
 }
 
-const URL_SCHEME_PATTERN = /^(?:https?:|mailto:|tel:|data:image\/|\/|#)/i
+const URL_SCHEME_PATTERN = /^(?:https?:|mailto:|tel:|data:image\/|\/|#|\?)/i
+const RELATIVE_URL_PATTERN = /^(?:\.\.?\/)*[\w%+.@-]+(?:\/[\w%+.@/-]*)*(?:\?[^:]*)?(?:#.*)?$/i
 const TARGET_REL_ELEMENTS = new Set(['A', 'AREA', 'FORM'])
 const URL_VALIDATED_ELEMENTS = new Set(['A', 'AREA', 'FORM'])
 const SAME_DOCUMENT_TARGETS = new Set(['_self', '_parent', '_top'])
@@ -65,7 +66,10 @@ export function isSafeRenderableUrl(url: string): boolean {
   if (/^javascript:/i.test(trimmed)) return false
   if (/^data:/i.test(trimmed) && !/^data:image\//i.test(trimmed)) return false
 
-  return URL_SCHEME_PATTERN.test(trimmed)
+  if (URL_SCHEME_PATTERN.test(trimmed)) return true
+  if (RELATIVE_URL_PATTERN.test(trimmed)) return true
+
+  return false
 }
 
 export function sanitizeRenderableUrl(url: string): string | null {

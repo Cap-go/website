@@ -24,7 +24,9 @@ async function walkHtmlFiles(dir) {
   try {
     entries = await readdir(dir, { withFileTypes: true })
   } catch (error) {
-    if (error && typeof error === 'object' && error.code === 'ENOENT') return files
+    if (error && typeof error === 'object' && error.code === 'ENOENT') {
+      throw new Error(`Missing build output directory: ${dir}`)
+    }
     throw error
   }
 

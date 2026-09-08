@@ -18,7 +18,7 @@ Scripts loaded by inline bootstraps (Meta Pixel, PostHog) cannot use SRI on the 
 
 CSP values live in `apps/shared/security/csp.mjs` and are applied as follows:
 
-- **Marketing site:** written into `apps/web/public/_headers` (served with static assets).
+- **Marketing site:** injected by `apps/web/src/worker/index.ts` via `apps/shared/security/responseHeaders.mjs`. `apps/web/public/_headers` keeps the other security headers only; Cloudflare rejects CSP lines longer than 2,000 characters in `_headers`.
 - **Docs site:** injected by `apps/docs/src/worker/index.ts` via `apps/shared/security/responseHeaders.mjs` (the docs `public/` tree is gitignored).
 
 After editing the policy:
