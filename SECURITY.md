@@ -8,9 +8,9 @@ Static third-party scripts with fixed URLs are listed in `apps/shared/security/e
 
 When a CDN asset changes:
 
-1. Run `bun run security:integrity:write` to fetch the live bytes and refresh hashes.
+1. Run `bun run security:integrity:write -- --yes` to fetch the live bytes and refresh hashes after reviewing the printed diff.
 2. Review the diff in `external-assets.json`.
-3. Run `bun run security:integrity:check` (also part of `apps/web` `check`) before merging.
+3. Run `bun run security:integrity:check` (CI web job and `security:integrity:check`) before merging.
 
 Scripts loaded by inline bootstraps (Meta Pixel, PostHog) cannot use SRI on the loader itself. Those hosts are allowlisted in CSP instead and documented under `sriNotSupported` in the registry.
 

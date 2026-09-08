@@ -64,11 +64,26 @@ test('isSafeRenderableUrl allows image data URLs and rejects other data URLs', (
   expect(sanitizeRenderableUrl('data:text/html,alert(1)')).toBeNull()
 })
 
-test('sanitizeRenderableUrl rejects javascript and protocol-relative URLs', () => {
+test('sanitizeMarkdownHtml removes unsafe href values during sanitization', () => {
+  const clean = sanitizeMarkdownHtml('<a href="/\\evil.example">x</a><a href="https://capgo.app/">safe</a>')
+  expect(clean).not.toContain('evil.example')
+  expect(clean).toContain('href="https://capgo.app/"')
+})
+
+test('sanitizeRenderableUrl rejects javascript, protocol-relative, and backslash URLs', () => {
   expect(sanitizeRenderableUrl('javascript:alert(1)')).toBeNull()
   expect(sanitizeRenderableUrl('//evil.example')).toBeNull()
+  expect(sanitizeRenderableUrl('/\\evil.example')).toBeNull()
   expect(isSafeRenderableUrl('/plugins/')).toBe(true)
   expect(isSafeRenderableUrl('mailto:sales@capgo.app')).toBe(true)
+})
+
+test('web security headers helper applies the shared web CSP policy', async () => {
+  const { withWebSecurityHeaders } = await import('../../../apps/shared/security/responseHeaders.mjs')
+  const response = withWebSecurityHeaders(new Response('ok', { status: 200 }))
+
+  expect(response.headers.get('Content-Security-Policy')).toBe(WEB_CONTENT_SECURITY_POLICY)
+  expect(response.headers.get('X-Frame-Options')).toBe('DENY')
 })
 
 test('docs security headers helper applies the shared docs CSP policy', async () => {

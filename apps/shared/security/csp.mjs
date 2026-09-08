@@ -12,6 +12,7 @@ const sharedImgSrc = joinSources(
   'data:',
   'blob:',
   'https://*.githubusercontent.com',
+  'https://play-lh.googleusercontent.com',
   'https://images.unsplash.com',
   'https://ik.imagekit.io',
   'https://widget.senja.io',
@@ -21,6 +22,10 @@ const sharedImgSrc = joinSources(
   'https://snyk.io',
   'https://www.google-analytics.com',
   'https://www.facebook.com',
+  'https://assets.seobotai.com',
+  'https://cdnimg.co',
+  'https://mars-images.imgix.net',
+  'https://rebelgrowth.s3.us-east-1.amazonaws.com',
 )
 
 const sharedConnectSrc = joinSources(
@@ -55,9 +60,12 @@ export const WEB_CONTENT_SECURITY_POLICY = joinSources(
   'https://eu.posthog.com',
   'https://pls.digitalshift-ee.workers.dev',
   'https://dtf.capgo.app',
-  'https://aff.capgo.app;',
+  'https://aff.capgo.app',
+  'https://connect.facebook.net',
+  'https://www.facebook.com;',
   "frame-src 'self'",
   'https://www.youtube-nocookie.com',
+  'https://www.youtube.com',
   'https://senja.io',
   'https://challenges.cloudflare.com;',
 )

@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { DOCS_CONTENT_SECURITY_POLICY, WEB_CONTENT_SECURITY_POLICY } from '../apps/shared/security/csp.mjs'
+import { WEB_CONTENT_SECURITY_POLICY } from '../apps/shared/security/csp.mjs'
 
 const repoRoot = path.dirname(fileURLToPath(new URL('../package.json', import.meta.url)))
 const checkMode = process.argv.includes('--check') || !process.argv.includes('--write')
@@ -17,6 +17,18 @@ const targets = [
 const cspLinePrefix = '  Content-Security-Policy: '
 const permissionsPolicyLine =
   "  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), payment=(), usb=()"
+const MANAGED_HEADER_PREFIXES = [
+  '  X-Content-Type-Options:',
+  '  X-Frame-Options:',
+  '  Referrer-Policy:',
+  '  Content-Security-Policy:',
+  '  Permissions-Policy:',
+]
+
+function isManagedHeader(line) {
+  if (line.startsWith('  Link:')) return true
+  return MANAGED_HEADER_PREFIXES.some((prefix) => line.startsWith(prefix))
+}
 
 function upsertSecurityBlock(content, policy) {
   const lines = content.replace(/\n+$/, '').split('\n')
@@ -31,6 +43,9 @@ function upsertSecurityBlock(content, policy) {
 
   const preservedPrefix = lines.slice(0, wildcardIndex + 1)
   const preservedSuffix = lines.slice(blockEnd)
+  const preservedCustomLines = lines
+    .slice(wildcardIndex + 1, blockEnd)
+    .filter((line) => line.trim().length > 0 && !isManagedHeader(line))
 
   const securityBlock = [
     '  X-Content-Type-Options: nosniff',
@@ -41,7 +56,7 @@ function upsertSecurityBlock(content, policy) {
     '  Link: </docs/public-api/>; rel="service-doc"; type="text/html"',
   ]
 
-  return [...preservedPrefix, ...securityBlock, ...preservedSuffix].join('\n')
+  return [...preservedPrefix, ...securityBlock, ...preservedCustomLines, ...preservedSuffix].join('\n')
 }
 
 async function main() {

@@ -147,6 +147,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-playwright-
       - run: bun install --frozen-lockfile
+      - run: bun run security:integrity:check
       - name: Install Playwright Chromium
         run: node ./node_modules/playwright/cli.js install chromium
       - run: bun run ci:verify:web

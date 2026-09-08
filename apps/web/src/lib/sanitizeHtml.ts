@@ -8,9 +8,14 @@ const MARKDOWN_SANITIZE_OPTIONS: Config = {
 
 const URL_SCHEME_PATTERN = /^(?:https?:|mailto:|tel:|data:image\/|\/|#)/i
 const TARGET_REL_ELEMENTS = new Set(['A', 'AREA', 'FORM'])
+const URL_VALIDATED_ELEMENTS = new Set(['A', 'AREA', 'FORM'])
 const SAME_DOCUMENT_TARGETS = new Set(['_self', '_parent', '_top'])
 const SAFE_REL_VALUE = 'noopener noreferrer'
 let targetRelHookConfigured = false
+
+function hasUnsafeUrlPrefix(url: string): boolean {
+  return url.startsWith('//') || url.startsWith('/\\')
+}
 
 function isBrowsingContextTarget(target: string): boolean {
   const normalized = target.trim().toLowerCase()
@@ -18,10 +23,24 @@ function isBrowsingContextTarget(target: string): boolean {
   return !SAME_DOCUMENT_TARGETS.has(normalized)
 }
 
+function sanitizeElementUrlAttribute(node: Element, attributeName: 'href' | 'action') {
+  const value = node.getAttribute(attributeName)
+  if (!value || isSafeRenderableUrl(value)) return
+  node.removeAttribute(attributeName)
+}
+
 function configureTargetRelHook() {
   if (targetRelHookConfigured) return
 
   DOMPurify.addHook('afterSanitizeAttributes', (node) => {
+    if (URL_VALIDATED_ELEMENTS.has(node.tagName)) {
+      if (node.tagName === 'FORM') {
+        sanitizeElementUrlAttribute(node, 'action')
+      } else {
+        sanitizeElementUrlAttribute(node, 'href')
+      }
+    }
+
     if (!TARGET_REL_ELEMENTS.has(node.tagName)) return
 
     const target = node.getAttribute('target')
@@ -42,7 +61,7 @@ export function isSafeRenderableUrl(url: string): boolean {
   const trimmed = url.trim()
   if (!trimmed) return false
 
-  if (trimmed.startsWith('//')) return false
+  if (hasUnsafeUrlPrefix(trimmed)) return false
   if (/^javascript:/i.test(trimmed)) return false
   if (/^data:/i.test(trimmed) && !/^data:image\//i.test(trimmed)) return false
 

@@ -8,6 +8,7 @@ const repoRoot = path.dirname(fileURLToPath(new URL('../package.json', import.me
 const registryPath = path.resolve(repoRoot, 'apps/shared/security/external-assets.json')
 const writeMode = process.argv.includes('--write')
 const checkMode = process.argv.includes('--check') || !writeMode
+const writeConfirmed = process.argv.includes('--yes')
 const FETCH_TIMEOUT_MS = 15_000
 
 function computeSriSha384(bytes) {
@@ -30,10 +31,33 @@ async function fetchAssetBytes(url) {
   return Buffer.from(await response.arrayBuffer())
 }
 
+async function reconcileAsset(asset) {
+  const bytes = await fetchAssetBytes(asset.url)
+  const actualIntegrity = computeSriSha384(bytes)
+
+  if (asset.integrity === actualIntegrity) {
+    return null
+  }
+
+  return {
+    id: asset.id,
+    url: asset.url,
+    expected: asset.integrity ?? '(missing)',
+    actual: actualIntegrity,
+  }
+}
+
+function printMismatches(mismatches) {
+  for (const mismatch of mismatches) {
+    console.error(
+      `Integrity mismatch for ${mismatch.id} (${mismatch.url}): expected ${mismatch.expected}, got ${mismatch.actual}`,
+    )
+  }
+}
+
 async function main() {
   const registry = JSON.parse(await readFile(registryPath, 'utf8'))
   const mismatches = []
-  let updated = false
 
   if (!Array.isArray(registry.assets)) {
     console.error('Invalid external asset registry: "assets" must be an array.')
@@ -48,25 +72,23 @@ async function main() {
       continue
     }
 
-    const bytes = await fetchAssetBytes(asset.url)
-    const actualIntegrity = computeSriSha384(bytes)
+    const mismatch = await reconcileAsset(asset)
+    if (!mismatch) continue
 
-    if (asset.integrity !== actualIntegrity) {
-      mismatches.push({
-        id: asset.id,
-        url: asset.url,
-        expected: asset.integrity ?? '(missing)',
-        actual: actualIntegrity,
-      })
-
-      if (writeMode) {
-        asset.integrity = actualIntegrity
-        updated = true
-      }
+    mismatches.push(mismatch)
+    if (writeMode) {
+      asset.integrity = mismatch.actual
     }
   }
 
-  if (writeMode && updated) {
+  if (writeMode && mismatches.length > 0) {
+    if (!writeConfirmed) {
+      printMismatches(mismatches)
+      console.error('Re-run with --write --yes after reviewing the hash changes above.')
+      process.exitCode = 1
+      return
+    }
+
     await writeFile(registryPath, `${JSON.stringify(registry, null, 2)}\n`, 'utf8')
     console.log(`Updated integrity hashes in ${path.relative(repoRoot, registryPath)}`)
     return
@@ -79,14 +101,10 @@ async function main() {
     return
   }
 
-  for (const mismatch of mismatches) {
-    console.error(
-      `Integrity mismatch for ${mismatch.id} (${mismatch.url}): expected ${mismatch.expected}, got ${mismatch.actual}`,
-    )
-  }
+  printMismatches(mismatches)
 
   if (checkMode) {
-    console.error('Run `bun run security:integrity:write` to refresh hashes after verifying CDN changes.')
+    console.error('Run `bun run security:integrity:write -- --yes` to refresh hashes after verifying CDN changes.')
   }
 
   process.exitCode = 1
