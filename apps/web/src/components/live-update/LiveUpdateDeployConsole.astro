@@ -1,0 +1,183 @@
+---
+import m, { type MessageValues } from '@/copy/messages'
+
+const locale = Astro.locals.locale
+
+function copy(key: string, values: MessageValues = {}) {
+  return m[key](values, { locale })
+}
+
+const consoleCopy = {
+  steps: [copy('live_update_console_step_upload'), copy('live_update_console_step_channel'), copy('live_update_console_step_rollout')] as [string, string, string],
+  status: {
+    uploadIdle: copy('live_update_console_status_upload_idle'),
+    uploadDone: copy('live_update_console_status_upload_done'),
+    channelIdle: copy('live_update_console_status_channel_idle'),
+    channelDone: copy('live_update_console_status_channel_done'),
+    rollout10: copy('live_update_console_status_rollout_10'),
+    rolloutHealth: copy('live_update_console_status_rollout_health'),
+    rolloutDone: copy('live_update_console_status_rollout_done'),
+  },
+  actions: {
+    upload: copy('live_update_console_action_upload'),
+    channel: copy('live_update_console_action_channel'),
+    viewRollout: copy('live_update_console_action_rollout'),
+  },
+  hint: copy('live_update_console_hint'),
+  bundleVersion: copy('live_update_console_bundle_version'),
+  bundleSize: copy('live_update_console_bundle_size'),
+  checksum: copy('live_update_console_checksum'),
+  checksumBadge: copy('live_update_console_checksum_badge'),
+  channelProduction: copy('live_update_console_channel_production'),
+  channelStaging: copy('live_update_console_channel_staging'),
+  fieldBundle: copy('live_update_console_field_bundle'),
+  fieldChecksum: copy('live_update_console_field_checksum'),
+  fieldChannel: copy('live_update_console_field_channel'),
+  fieldRollout: copy('live_update_console_field_rollout'),
+  rolloutLabel: copy('live_update_console_rollout_label'),
+  healthOk: copy('live_update_console_health_ok'),
+  orgName: copy('live_update_console_org_name'),
+  appName: copy('live_update_console_app_name'),
+  tabBundles: copy('live_update_console_tab_bundles'),
+}
+
+const copyJson = JSON.stringify(consoleCopy)
+---
+
+<div class="lu-console-demo" data-lu-console>
+  <div class="lu-console-demo-head">
+    <ol class="lu-console-steps" role="tablist" aria-label={copy('live_update_console_steps_label')}>
+      {
+        consoleCopy.steps.map((label, index) => (
+          <li role="presentation">
+            <button
+              type="button"
+              class="lu-console-step"
+              role="tab"
+              data-console-step={index}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              aria-controls={`lu-console-panel-${index}`}
+              id={`lu-console-tab-${index}`}
+              tabindex={index === 0 ? 0 : -1}
+            >
+              <span class="lu-console-step-num" aria-hidden="true">
+                {index + 1}
+              </span>
+              <span class="lu-console-step-label">{label}</span>
+            </button>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="lu-console-status" data-console-status aria-live="polite">{consoleCopy.status.uploadIdle}</p>
+  </div>
+
+  <div class="lu-console-frame">
+    <div class="lu-console-chrome" aria-hidden="true">
+      <span class="lu-console-dot r"></span>
+      <span class="lu-console-dot y"></span>
+      <span class="lu-console-dot g"></span>
+      <span class="lu-console-chrome-title">{consoleCopy.orgName} · {consoleCopy.appName}</span>
+    </div>
+
+    <div class="lu-console-body">
+      <div class="lu-console-sidebar" aria-hidden="true">
+        <div class="lu-console-logo">Capgo</div>
+        <div class="lu-console-nav-item is-active">{consoleCopy.tabBundles}</div>
+      </div>
+
+      <div class="lu-console-main">
+        <div class="lu-console-panel" data-console-panel="0" id="lu-console-panel-0" role="tabpanel" aria-labelledby="lu-console-tab-0">
+          <dl class="lu-console-fields">
+            <div class="lu-console-field">
+              <dt>{consoleCopy.fieldBundle}</dt>
+              <dd>
+                <span class="lu-console-bundle-version">{consoleCopy.bundleVersion}</span>
+                <span class="lu-console-bundle-size">{consoleCopy.bundleSize}</span>
+              </dd>
+            </div>
+            <div class="lu-console-field">
+              <dt>{consoleCopy.fieldChecksum}</dt>
+              <dd class="lu-console-checksum-row">
+                <code class="lu-console-checksum">{consoleCopy.checksum}</code>
+                <span class="lu-console-badge">{consoleCopy.checksumBadge}</span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="lu-console-panel" data-console-panel="1" id="lu-console-panel-1" role="tabpanel" aria-labelledby="lu-console-tab-1" hidden>
+          <dl class="lu-console-fields">
+            <div class="lu-console-field">
+              <dt>{consoleCopy.fieldBundle}</dt>
+              <dd><span class="lu-console-bundle-version">{consoleCopy.bundleVersion}</span></dd>
+            </div>
+            <div class="lu-console-field lu-console-field--channels">
+              <dt>{consoleCopy.fieldChannel}</dt>
+              <dd class="lu-console-channels">
+                <button type="button" class="lu-console-channel is-selected" data-channel="production" aria-pressed="true">
+                  {consoleCopy.channelProduction}
+                </button>
+                <button type="button" class="lu-console-channel" data-channel="staging" aria-pressed="false">
+                  {consoleCopy.channelStaging}
+                </button>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="lu-console-panel" data-console-panel="2" id="lu-console-panel-2" role="tabpanel" aria-labelledby="lu-console-tab-2" hidden>
+          <dl class="lu-console-fields">
+            <div class="lu-console-field">
+              <dt>{consoleCopy.fieldChannel}</dt>
+              <dd><span class="lu-console-channel-name" data-channel-name>{consoleCopy.channelProduction}</span></dd>
+            </div>
+            <div class="lu-console-field lu-console-field--rollout">
+              <dt>{consoleCopy.fieldRollout}</dt>
+              <dd>
+                <div class="lu-console-rollout">
+                  <div class="lu-console-rollout-track" aria-hidden="true">
+                    <div class="lu-console-rollout-bar" data-rollout-bar style="width: 0%"></div>
+                  </div>
+                  <span class="lu-console-rollout-percent" data-rollout-percent>0%</span>
+                </div>
+                <p class="lu-console-rollout-health" data-rollout-health hidden>
+                  <span class="lu-console-health-dot" aria-hidden="true"></span>
+                  {consoleCopy.healthOk}
+                </p>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lu-console-demo-foot">
+    <button type="button" class="lu-console-action" data-console-action>{consoleCopy.actions.upload}</button>
+    <p class="lu-console-hint">{consoleCopy.hint}</p>
+  </div>
+</div>
+
+<script define:vars={{ copyJson }} is:inline>
+  window.__liveUpdateConsoleCopy = copyJson
+</script>
+
+<script>
+  import { setupLiveUpdateDeployConsole } from './live-update-deploy-console.client.ts'
+
+  function initLiveUpdateConsole() {
+    const copyJson = (window as Window & { __liveUpdateConsoleCopy?: string }).__liveUpdateConsoleCopy
+    if (!copyJson) return
+
+    document.querySelectorAll<HTMLElement>('[data-lu-console]').forEach((root) => {
+      setupLiveUpdateDeployConsole(root, JSON.parse(copyJson))
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLiveUpdateConsole)
+  } else {
+    initLiveUpdateConsole()
+  }
+</script>
