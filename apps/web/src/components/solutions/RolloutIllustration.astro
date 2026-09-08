@@ -248,6 +248,9 @@ const productionY = animated ? 250 : 260
     showHealth(root)
     showRollback(root)
 
+    const label = root.querySelector<SVGElement>('.rollout-prod-label')
+    if (label) label.classList.replace('fill-amber-500', 'fill-green-500')
+
     const bar = root.querySelector<SVGRectElement>('.rollout-prod-bar')
     if (bar) bar.classList.replace('fill-amber-500', 'fill-green-500')
 
