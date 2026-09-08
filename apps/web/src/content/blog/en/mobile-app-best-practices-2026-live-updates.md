@@ -60,7 +60,7 @@ OTA bundles are not a substitute for a store build when native code changes. **C
 
 ### 3. Plan rollback before you need it
 
-Every live update path should answer: *How do we revert in under five minutes?* Channels, staged rollouts, and `notifyAppReady`-style confirmation (so a bad bundle does not stick) are not optional extras—they are production hygiene. [Capgo's rollback and version control docs](https://capgo.app/docs/live-updates/update-behavior/) describe patterns many Capacitor teams already run in production.
+Every live update path should answer: *How do we revert in under five minutes?* Channels, staged rollouts, and calling `notifyAppReady()` from `@capgo/capacitor-updater` on every app launch—before network requests; omission or timeout can trigger automatic bundle rollback—are not optional extras. They are production hygiene. [Capgo's rollback and version control docs](https://capgo.app/docs/live-updates/update-behavior/) describe patterns many Capacitor teams already run in production.
 
 ### 4. Use channels and canaries
 
@@ -81,7 +81,7 @@ Apple's [App Store Review Guidelines](https://developer.apple.com/app-store/revi
 
 ### 6. Secure the update path
 
-Encrypt bundles in transit and at rest where your platform supports it. Capgo documents [end-to-end encrypted live updates](https://capgo.app/docs/live-updates/encryption/) for Capacitor apps. Sign packages, restrict who can publish, and audit deployments—especially if you handle regulated data. Capgo achieved [SOC 2 Type II certification](https://capgo.app/) in 2025 for teams that need enterprise-grade assurance.
+Encrypt bundles in transit and at rest where your platform supports it. Capgo documents [end-to-end encrypted live updates](https://capgo.app/docs/live-updates/encryption/) for Capacitor apps. Sign packages, restrict who can publish, and audit deployments—especially if you handle regulated data. Capgo published a [SOC 2 Type II report](https://capgo.app/) in 2025 for teams that need enterprise-grade assurance.
 
 ## Why live-update-capable stacks win
 
