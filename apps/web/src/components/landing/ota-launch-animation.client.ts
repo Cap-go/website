@@ -7,6 +7,7 @@ function queryParts(root: HTMLElement) {
     chrome: root.querySelectorAll('[data-ota-chrome]'),
     staged: root.querySelector('[data-ota-staged-bundle]'),
     status: root.querySelector('[data-ota-status]'),
+    liveStatus: root.querySelector('[data-ota-live-status]'),
     icon: root.querySelector('[data-ota-app-icon]'),
     stack: root.querySelector('[data-ota-bundle-stack]'),
     rings: root.querySelector('[data-ota-rings]'),
@@ -36,7 +37,8 @@ function setFinalState(root: HTMLElement) {
  * 3. Next launch: the running app leaves and returns; the staged bundle is gone (applied).
  */
 function buildTimeline(root: HTMLElement) {
-  const { chrome, staged, status, icon, stack, rings } = queryParts(root)
+  const { chrome, staged, status, liveStatus, icon, stack, rings } = queryParts(root)
+  const statusText = root.dataset.otaStatusText ?? ''
 
   if (!staged || !status || !icon || !stack || !rings || chrome.length === 0) return null
 
@@ -47,6 +49,7 @@ function buildTimeline(root: HTMLElement) {
   gsap.set(rings, { opacity: 0.72 })
   gsap.set(status, { opacity: 0 })
   gsap.set(staged, { opacity: 0, y: 22 })
+  if (liveStatus) liveStatus.textContent = ''
 
   const timeline = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' } })
 
@@ -55,12 +58,32 @@ function buildTimeline(root: HTMLElement) {
     .to({}, { duration: 0.45 })
     // Beat 2 — bundle arrives in the background; UI stays up
     .to(staged, { y: 0, opacity: 0.32, duration: 1.15, ease: 'power2.out' }, 0.55)
-    .to(status, { opacity: 1, duration: 0.4 }, 0.95)
+    .to(
+      status,
+      {
+        opacity: 1,
+        duration: 0.4,
+        onStart: () => {
+          if (liveStatus && statusText) liveStatus.textContent = statusText
+        },
+      },
+      0.95,
+    )
     .to(rings, { opacity: 1, duration: 0.7 }, 0.7)
     .to({}, { duration: 1.15 })
     // Beat 3 — next launch: running app leaves, staged bundle is applied, same app returns
     .to(appUi, { opacity: 0, y: 10, duration: 0.4, ease: 'power2.in' }, 3.15)
-    .to(status, { opacity: 0, duration: 0.28 }, 3.15)
+    .to(
+      status,
+      {
+        opacity: 0,
+        duration: 0.28,
+        onComplete: () => {
+          if (liveStatus) liveStatus.textContent = ''
+        },
+      },
+      3.15,
+    )
     .to(staged, { y: -28, opacity: 0, duration: 0.5, ease: 'power2.in' }, 3.2)
     .to(rings, { opacity: 0.72, duration: 0.45 }, 3.25)
     .to(appUi, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 3.75)

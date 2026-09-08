@@ -2,20 +2,33 @@
 import m from '@/copy/messages'
 
 const locale = Astro.locals.locale
+const statusText = m.ota_launch_status_updating({}, { locale })
 ---
 
 <div
   class="ota-launch-illustration relative mx-auto h-64 w-full max-w-[239px]"
   data-ota-launch
+  data-ota-status-text={statusText}
   role="img"
-  aria-label="Animation: the app stays open while a signed bundle downloads in the background, then applies on the next launch"
+  aria-label={m.ota_launch_illustration_aria_label({}, { locale })}
 >
-  <p class="sr-only">The app remains usable while Capgo delivers a signed bundle in the background. On the next launch, the same app runs the updated version.</p>
+  <p class="sr-only">{m.ota_launch_illustration_sr_description({}, { locale })}</p>
+  <span class="sr-only" aria-live="polite" aria-atomic="true" data-ota-live-status></span>
   <svg width="239" height="288" class="relative top-10" data-ota-svg viewBox="0 0 239 288" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <path data-ota-chrome d="M33.1 31.1001C33.1 20.0544 42.0543 11.1001 53.1 11.1001H184.1C195.146 11.1001 204.1 20.0544 204.1 31.1001V212.1H33.1V31.1001Z" fill="url(#ota-paint0)"
     ></path>
-    <text data-ota-status opacity="0" x="118.6" y="51" text-anchor="middle" fill="#5D5D5D" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" xml:space="preserve"
-      >{m.ota_launch_status_updating({}, { locale })}</text
+    <text
+      data-ota-status
+      opacity="0"
+      x="118.6"
+      y="51"
+      text-anchor="middle"
+      fill="#5D5D5D"
+      font-family="ui-sans-serif, system-ui, sans-serif"
+      font-size="10"
+      textLength="132"
+      lengthAdjust="spacingAndGlyphs"
+      xml:space="preserve">{statusText}</text
     >
     <path
       data-ota-chrome
