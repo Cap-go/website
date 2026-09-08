@@ -27,8 +27,14 @@ type ReleaseData = {
   errorSecondaryCount: string
   errorTertiaryCount: string
   errorQuaternaryCount: string
+  errorSecondaryLabel: string
+  errorTertiaryLabel: string
+  errorQuaternaryLabel: string
   affectedVersion: string
   affectedSummary: string
+  secondaryAffectedVersion: string
+  secondaryAffectedAction: string
+  secondaryAffectedSummary: string
 }
 
 const RELEASES: Record<ObserveReleaseId, ReleaseData> = {
@@ -57,8 +63,14 @@ const RELEASES: Record<ObserveReleaseId, ReleaseData> = {
     errorSecondaryCount: '28',
     errorTertiaryCount: '21',
     errorQuaternaryCount: '12',
+    errorSecondaryLabel: 'App crash',
+    errorTertiaryLabel: 'Bundle download failed',
+    errorQuaternaryLabel: 'Checksum validation failed',
     affectedVersion: '4.8.0',
     affectedSummary: '18 events · 5 devices',
+    secondaryAffectedVersion: '4.7.9',
+    secondaryAffectedAction: 'Launch timeout',
+    secondaryAffectedSummary: '9 events · 4 devices',
   },
   rollout: {
     id: 'rollout',
@@ -85,8 +97,14 @@ const RELEASES: Record<ObserveReleaseId, ReleaseData> = {
     errorSecondaryCount: '44',
     errorTertiaryCount: '31',
     errorQuaternaryCount: '18',
+    errorSecondaryLabel: 'App crash',
+    errorTertiaryLabel: 'WebView JavaScript error',
+    errorQuaternaryLabel: 'Checksum validation failed',
     affectedVersion: '4.8.1',
     affectedSummary: '55 events · 14 devices',
+    secondaryAffectedVersion: '4.8.0',
+    secondaryAffectedAction: 'App crash',
+    secondaryAffectedSummary: '12 events · 6 devices',
   },
 }
 
@@ -123,7 +141,7 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
     if (statusEl) statusEl.textContent = message
   }
 
-  function setStep(step: ObserveConsoleStep, fromUser = false) {
+  function setStep(step: ObserveConsoleStep, fromUser = false, focusStep = fromUser) {
     if (fromUser) userInteracted = true
     currentStep = step
     root.dataset.step = step
@@ -153,10 +171,13 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
     } else {
       announce(STEP_STATUS[step])
     }
+
+    if (focusStep) {
+      stepButtons.find((button) => button.dataset.observeStep === step)?.focus()
+    }
   }
 
   function applyRelease(releaseId: ObserveReleaseId, fromUser = false) {
-    if (fromUser) userInteracted = true
     selectedRelease = releaseId
     const data = RELEASES[releaseId]
     root.dataset.release = releaseId
@@ -187,8 +208,8 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
     root.classList.toggle('is-rollout', releaseId === 'rollout')
 
     if (fromUser && currentStep === 'deploy') {
-      setStep('observe', true)
       scheduleAutoInvestigate()
+      setStep('observe')
     }
   }
 
@@ -197,7 +218,7 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
     clearTimeout(autoTimer)
     autoTimer = setTimeout(() => {
       if (!autoAdvanceCancelled && currentStep === 'observe') {
-        setStep('investigate')
+        setStep('investigate', false, true)
       }
     }, 4200)
   }
@@ -229,7 +250,7 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
 
   investigateButton?.addEventListener('click', () => {
     cancelAutoAdvance()
-    setStep('investigate', true)
+    setStep('investigate', true, true)
   })
 
   tabObserve?.addEventListener('click', () => {
@@ -239,7 +260,7 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
 
   tabLogs?.addEventListener('click', () => {
     cancelAutoAdvance()
-    setStep('investigate', true)
+    setStep('investigate', true, true)
   })
 
   root.addEventListener('keydown', (event) => {
@@ -251,8 +272,7 @@ export function setupObserveTeachingConsole(root: HTMLElement) {
     const index = STEP_ORDER.indexOf(currentStep)
     const nextIndex = event.key === 'ArrowRight' ? Math.min(index + 1, STEP_ORDER.length - 1) : Math.max(index - 1, 0)
     const nextStep = STEP_ORDER[nextIndex]
-    setStep(nextStep, true)
-    stepButtons.find((button) => button.dataset.observeStep === nextStep)?.focus()
+    setStep(nextStep, true, true)
   })
 
   if (prefersReducedMotion()) {

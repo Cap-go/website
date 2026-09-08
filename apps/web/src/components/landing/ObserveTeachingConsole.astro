@@ -216,9 +216,9 @@ const steps = [
               <p class="otc-block-label">Error categories</p>
               <ul class="otc-error-list">
                 <li><span data-metric="topError">Bundle download failed</span><strong data-metric="errorPrimaryCount">82</strong></li>
-                <li><span>App crash</span><strong data-metric="errorSecondaryCount">44</strong></li>
-                <li><span>WebView JavaScript error</span><strong data-metric="errorTertiaryCount">31</strong></li>
-                <li><span>Checksum validation failed</span><strong data-metric="errorQuaternaryCount">18</strong></li>
+                <li><span data-metric="errorSecondaryLabel">App crash</span><strong data-metric="errorSecondaryCount">44</strong></li>
+                <li><span data-metric="errorTertiaryLabel">WebView JavaScript error</span><strong data-metric="errorTertiaryCount">31</strong></li>
+                <li><span data-metric="errorQuaternaryLabel">Checksum validation failed</span><strong data-metric="errorQuaternaryCount">18</strong></li>
               </ul>
             </div>
             <div class="otc-log-card">
@@ -229,9 +229,9 @@ const steps = [
                 <span class="otc-affected-count" data-metric="affectedSummary">55 events · 14 devices</span>
               </div>
               <div class="otc-affected-row">
-                <span class="otc-affected-version">4.8.0</span>
-                <span class="otc-affected-action">App crash</span>
-                <span class="otc-affected-count">12 events · 6 devices</span>
+                <span class="otc-affected-version" data-metric="secondaryAffectedVersion">4.8.0</span>
+                <span class="otc-affected-action" data-metric="secondaryAffectedAction">App crash</span>
+                <span class="otc-affected-count" data-metric="secondaryAffectedSummary">12 events · 6 devices</span>
               </div>
             </div>
           </div>
@@ -661,6 +661,10 @@ const steps = [
   }
 
   .otc-version-row[hidden] {
+    display: none;
+  }
+
+  .otc-panel[hidden] {
     display: none;
   }
 
