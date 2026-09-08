@@ -5,11 +5,12 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 const BEAT_A_HOLD = 0.7
 const BEAT_B_DOWNLOAD = 2.0
 const BEAT_C_RELAUNCH = 1.4
+const PROGRESS_BAR_WIDTH = 141
 
 function queryParts(root: HTMLElement) {
   return {
     chrome: root.querySelectorAll('[data-ota-chrome]'),
-    appUi: root.querySelectorAll('[data-ota-app-ui]'),
+    appUi: root.querySelector('[data-ota-app-ui]'),
     staged: root.querySelector('[data-ota-staged-bundle]'),
     status: root.querySelector('[data-ota-status]'),
     progress: root.querySelector('[data-ota-progress]'),
@@ -29,12 +30,12 @@ function setFinalState(root: HTMLElement) {
   status?.setAttribute('opacity', '0')
   progress?.setAttribute('opacity', '0')
   launchBlank?.setAttribute('opacity', '0')
-  progressFill?.setAttribute('transform', 'scaleX(0)')
+  progressFill?.setAttribute('width', '0')
   stack?.setAttribute('opacity', '1')
   rings?.setAttribute('opacity', '1')
   chrome.forEach((el) => el.setAttribute('opacity', '1'))
 
-  for (const el of [staged, progress, launchBlank, stack, rings, status, ...appUi, ...chrome]) {
+  for (const el of [staged, progress, launchBlank, stack, rings, status, appUi, ...chrome]) {
     if (el instanceof SVGElement) {
       el.style.transform = ''
       gsap.set(el, { clearProps: 'opacity,transform' })
@@ -63,17 +64,17 @@ function buildTimeline(root: HTMLElement) {
   } = queryParts(root)
   const statusText = root.dataset.otaStatusText ?? ''
 
-  if (!staged || !status || !progress || !progressFill || !launchBlank || !stack || !rings || chrome.length === 0) {
+  if (!appUi || !staged || !status || !progress || !progressFill || !launchBlank || !stack || !rings || chrome.length === 0) {
     return null
   }
 
   gsap.set(chrome, { opacity: 1 })
-  gsap.set(appUi, { opacity: 1, y: 0, scale: 1, transformOrigin: '50% 50%' })
+  gsap.set(appUi, { opacity: 1, y: 0 })
   gsap.set(stack, { opacity: 1, y: 0 })
   gsap.set(rings, { opacity: 0.72 })
   gsap.set(status, { opacity: 0 })
   gsap.set(progress, { opacity: 0 })
-  gsap.set(progressFill, { scaleX: 0, transformOrigin: '0% 50%' })
+  gsap.set(progressFill, { attr: { width: 0 } })
   gsap.set(launchBlank, { opacity: 0 })
   gsap.set(staged, { opacity: 0, y: 28 })
   if (liveStatus) liveStatus.textContent = ''
@@ -86,14 +87,7 @@ function buildTimeline(root: HTMLElement) {
     .addLabel('beatA', 0)
     .to({}, { duration: BEAT_A_HOLD })
     .addLabel('beatB', beatBStart)
-    .to(
-      progress,
-      {
-        opacity: 1,
-        duration: 0.25,
-      },
-      'beatB',
-    )
+    .to(progress, { opacity: 1, duration: 0.25 }, 'beatB')
     .to(
       status,
       {
@@ -118,7 +112,7 @@ function buildTimeline(root: HTMLElement) {
     .to(
       progressFill,
       {
-        scaleX: 1,
+        attr: { width: PROGRESS_BAR_WIDTH },
         duration: 1.55,
         ease: 'none',
       },
@@ -130,12 +124,10 @@ function buildTimeline(root: HTMLElement) {
     .to(
       appUi,
       {
-        y: 58,
+        y: 64,
         opacity: 0,
-        scale: 0.88,
         duration: 0.48,
         ease: 'power2.in',
-        stagger: 0,
       },
       'beatC',
     )
@@ -150,14 +142,7 @@ function buildTimeline(root: HTMLElement) {
       },
       'beatC',
     )
-    .to(
-      launchBlank,
-      {
-        opacity: 1,
-        duration: 0.28,
-      },
-      'beatC+=0.32',
-    )
+    .to(launchBlank, { opacity: 1, duration: 0.28 }, 'beatC+=0.32')
     .to(
       staged,
       {
@@ -168,24 +153,15 @@ function buildTimeline(root: HTMLElement) {
       },
       'beatC+=0.38',
     )
-    .to(
-      launchBlank,
-      {
-        opacity: 0,
-        duration: 0.32,
-      },
-      'beatC+=0.82',
-    )
+    .to(launchBlank, { opacity: 0, duration: 0.32 }, 'beatC+=0.82')
     .fromTo(
       appUi,
-      { y: -36, opacity: 0, scale: 0.9 },
+      { y: -40, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        scale: 1,
         duration: 0.55,
         ease: 'power2.out',
-        stagger: 0,
       },
       'beatC+=0.9',
     )
