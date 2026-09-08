@@ -33,7 +33,7 @@ function isManagedHeader(line) {
 
 function upsertSecurityBlock(content, policy) {
   const lines = content.replace(/\n+$/, '').split('\n')
-  const wildcardIndex = lines.findIndex((line) => line === '/*')
+  const wildcardIndex = lines.indexOf('/*')
 
   if (wildcardIndex === -1) {
     throw new Error('Could not find wildcard /* block in _headers file.')
