@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-04T16:13:00.000Z
-updated_at: 2026-09-08T11:46:00.000Z
+updated_at: 2026-09-08T15:36:04.000Z
 head_image: /blog-images/mobile-app-best-practices-2026-live-updates.png
 head_image_alt: "Mobile App Best Practices in 2026 live updates vs store review delays Capgo blog illustration"
 keywords: mobile best practices, live updates, OTA, Capacitor, React Native, App Store review, Capgo, 2026
