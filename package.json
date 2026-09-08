@@ -67,6 +67,11 @@
     "ci:verify:distrib": "cd apps/distrib-worker && bun run check",
     "deploy:distrib": "cd apps/distrib-worker && bun run deploy"
   },
+  "optionalDependencies": {
+    "@bruits/satteri-linux-x64-gnu": "0.10.5",
+    "@bruits/satteri-linux-x64-musl": "0.10.5"
+  },
+  "optionalDependenciesComment": "Hoist @bruits/satteri-linux-x64-{gnu,musl} for docs prerender CI. Keep these pins in lockstep with satteri resolved via astro -> @astrojs/markdown-satteri -> satteri in bun.lock; bump both together.",
   "dependencies": {
     "@astrojs/cloudflare": "14.3.0",
     "@astrojs/mdx": "7.0.8",
