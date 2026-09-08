@@ -1754,6 +1754,7 @@ const messages = {
   github_stars: 'GitHub Stars',
   npm_monthly: 'npm monthly',
   oss_contributors: 'OSS contributors',
+  ota_launch_status_updating: 'Updating in background...',
   give_pr_a_descriptive_title: 'Give the PR a descriptive title.',
   global_infra_badge_instant: 'INSTANT',
   global_infra_latency_ultra_low: 'Ultra-low latency worldwide',
