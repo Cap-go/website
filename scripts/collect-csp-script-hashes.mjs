@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url'
 const repoRoot = path.dirname(fileURLToPath(new URL('../package.json', import.meta.url)))
 const outputPath = path.resolve(repoRoot, 'apps/shared/security/csp-script-hashes.json')
 const checkMode = process.argv.includes('--check') || !process.argv.includes('--write')
-const suiteArgIndex = process.argv.findIndex((arg) => arg === '--suite')
+const suiteArgIndex = process.argv.indexOf('--suite')
 const suiteFilter = suiteArgIndex === -1 ? null : process.argv[suiteArgIndex + 1]
 
 const targets = [
@@ -76,7 +76,7 @@ async function collectTargetHashes(distDir) {
     const html = await readFile(filePath, 'utf8')
     for (const hash of collectHashesFromHtml(html)) hashes.add(hash)
   }
-  return [...hashes].sort()
+  return [...hashes].sort((a, b) => a.localeCompare(b))
 }
 
 async function main() {
