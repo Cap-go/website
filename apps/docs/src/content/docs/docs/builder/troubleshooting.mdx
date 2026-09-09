@@ -432,7 +432,7 @@ Very large projects may hit the build-time limit (see [Known Limitations](#known
 - Android AAB missing or wrong after switching RC vs production credentials or `--android-flavor`
 - Build finishes suspiciously fast right after changing signing config or product flavor
 
-**Cause:** Capgo restores the **per-app build cache** by default. If RC and production share the same app ID, a restore can reuse compiled output from the previous environment.
+**Cause:** Capgo restores the **per-app build cache** by default (omit `cache_key` for the shared general cache). If RC and production share the same app ID without separate keys, a restore can reuse compiled output from the previous environment.
 
 **Solutions:**
 

@@ -100,7 +100,7 @@ Capgo offers two complementary features for updating your app. Here's when to us
 When you run the build command:
 
 1. **Upload** - The CLI zips only what's needed (native platform folder + native dependencies) and uploads to secure cloud storage
-2. **Build** - Your app compiles on dedicated infrastructure using Fastlane. Repeat builds restore a per-app compilation cache by default; use [`--cache-key`](/docs/builder/configuration/#build-cache) to keep RC and production caches separate
+2. **Build** - Your app compiles on dedicated infrastructure using Fastlane. Repeat builds restore a per-app compilation cache by default (omit `cache_key` for the shared general cache); set [`--cache-key`](/docs/builder/configuration/#build-cache) to partition RC and production, or pass `--no-cache` to disable restore and save
 3. **Sign** - Certificates and keystores are applied (they exist only in memory during the build)
 4. **Submit** - Signed apps are uploaded directly to App Store Connect or Google Play
 5. **Cleanup** - All build artifacts and credentials are automatically deleted
