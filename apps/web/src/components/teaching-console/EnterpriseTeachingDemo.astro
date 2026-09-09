@@ -26,7 +26,7 @@ const steps = [
       { id: 'audit', label: 'Audit' },
     ]}
   >
-    <div class="tc-grid-2">
+    <div class="tc-grid-2" aria-live="polite">
       <div class="tc-card tc-card-pad">
         <h3 class="tc-card-title">Org policy</h3>
         <ul class="tc-list">
@@ -58,38 +58,63 @@ const steps = [
       el.textContent = text
     }
 
-    setupTeachingConsole(root, [
-      {
-        id: 'policy',
-        actionLabel: 'Open org policy',
-        status: 'Review the org release policy before enabling SSO.',
-        enter() {
-          pill('[data-ent-p1]', 'on', true)
-          pill('[data-ent-p2]', 'on', true)
+    const setText = (sel: string, text: string) => {
+      const el = root.querySelector(sel)
+      if (el) el.textContent = text
+    }
+
+    /** Paint cumulative org state so re-entering earlier steps clears later fields. */
+    function paintEnterprise(step: 'policy' | 'sso' | 'roles') {
+      pill('[data-ent-p1]', 'on', true)
+      pill('[data-ent-p2]', 'on', true)
+      if (step === 'policy') {
+        pill('[data-ent-p3]', 'off', false)
+        setText('[data-ent-idp]', 'Not connected')
+        setText('[data-ent-role]', 'Anyone in org')
+        setText('[data-ent-audit]', '—')
+        return
+      }
+      pill('[data-ent-p3]', 'on', true)
+      setText('[data-ent-idp]', 'Okta · SAML · connected')
+      if (step === 'sso') {
+        setText('[data-ent-role]', 'Anyone in org')
+        setText('[data-ent-audit]', '—')
+        return
+      }
+      setText('[data-ent-role]', 'release-manager')
+      setText('[data-ent-audit]', 'Policy enforced · 2m ago')
+    }
+
+    setupTeachingConsole(
+      root,
+      [
+        {
+          id: 'policy',
+          actionLabel: 'Open org policy',
+          status: 'Review the org release policy before enabling SSO.',
+          enter() {
+            paintEnterprise('policy')
+          },
         },
-      },
-      {
-        id: 'sso',
-        actionLabel: 'Connect SSO',
-        status: 'SSO connected — Okta / SAML enforced for console login.',
-        enter(ctx) {
-          pill('[data-ent-p3]', 'on', true)
-          const idp = ctx.query('[data-ent-idp]')
-          if (idp) idp.textContent = 'Okta · SAML · connected'
+        {
+          id: 'sso',
+          actionLabel: 'Connect SSO',
+          status: 'SSO connected — Okta / SAML enforced for console login.',
+          enter() {
+            paintEnterprise('sso')
+          },
         },
-      },
-      {
-        id: 'roles',
-        actionLabel: 'Enforce deploy role',
-        status: 'Only release-managers can ship production channels.',
-        enter(ctx) {
-          const role = ctx.query('[data-ent-role]')
-          const audit = ctx.query('[data-ent-audit]')
-          if (role) role.textContent = 'release-manager'
-          if (audit) audit.textContent = 'Policy enforced · 2m ago'
-          ctx.setActionDisabled(true)
+        {
+          id: 'roles',
+          actionLabel: 'Enforce deploy role',
+          status: 'Only release-managers can ship production channels.',
+          enter(ctx) {
+            paintEnterprise('roles')
+            ctx.setActionDisabled(true)
+          },
         },
-      },
-    ])
+      ],
+      { startWhenVisible: true },
+    )
   })
 </script>

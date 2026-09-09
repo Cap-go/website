@@ -181,20 +181,16 @@ const ranges = ['1 day', '3 days', '7 days', '30 days']
     <div class="tc-main">
       <div class="tc-top">
         <p class="tc-crumb" set:html={breadcrumbs} />
-        <div class="tc-tabs" role="tablist" aria-label="App views">
+        <div class="tc-tabs" aria-hidden="true">
           {
             tabs.map((tab) => (
-              <button
-                type="button"
+              <span
                 class:list={['tc-tab', tab.id === activeTab && 'is-active']}
-                role="tab"
-                aria-selected={tab.id === activeTab ? 'true' : 'false'}
-                tabindex="-1"
                 data-tc-chrome-tab={tab.id}
               >
                 {tab.label}
                 {tab.badge ? <span class="tc-tab-badge">{tab.badge}</span> : null}
-              </button>
+              </span>
             ))
           }
         </div>

@@ -3,8 +3,9 @@ import Layout from '@/layouts/Layout.astro'
 import SecurityTeachingDemo from '@/components/teaching-console/SecurityTeachingDemo.astro'
 import m from '@/copy/messages'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.security_policy({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.read_our_security_policy({}, { locale: Astro.locals.locale })
+const title = `${Astro.locals.runtimeConfig.public.brand} | Capgo Security — sign, attest, and gate releases`
+const description =
+  'Capgo Security: signed bundles, attestation, and trust gates in the Capgo console — plus our vulnerability disclosure policy.'
 
 const content = { title, description }
 ---

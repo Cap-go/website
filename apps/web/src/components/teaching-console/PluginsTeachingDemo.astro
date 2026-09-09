@@ -94,23 +94,44 @@ const steps = [
       }
       if (stepId === 'install') {
         return [
-          `<span class="cmd">$</span> npm i ${plugin.pkg}`,
-          `<span class="cmd">$</span> npx cap sync`,
+          `<span class="cmd">$</span> bun add ${plugin.pkg}`,
+          `<span class="cmd">$</span> bunx cap sync`,
         ]
       }
       return [
-        `<span class="cmd">$</span> npm i ${plugin.pkg} && npx cap sync`,
+        `<span class="cmd">$</span> bun add ${plugin.pkg} && bunx cap sync`,
         `<span class="ok">✓</span> iOS + Android permissions linked`,
         `<span class="ok">✓</span> ${plugin.api}`,
       ]
     }
 
-    function refreshSnippet(ctx: { prefersReducedMotion: boolean; query: (s: string) => HTMLElement | null }, stepId: string) {
-      typeTerminalLines(ctx.query('[data-plugin-term]'), snippetFor(stepId), ctx.prefersReducedMotion)
-      const cap = ctx.query('[data-plugin-cap]')
+    function renderPluginView(
+      opts: {
+        prefersReducedMotion: boolean
+        query: (s: string) => HTMLElement | null
+      },
+      stepId: string,
+    ) {
+      paintSelection()
+      typeTerminalLines(opts.query('[data-plugin-term]'), snippetFor(stepId), opts.prefersReducedMotion)
+      const cap = opts.query('[data-plugin-cap]')
       if (cap) {
         cap.textContent =
           stepId === 'capability' ? PLUGINS[selected].capability : 'Device capability appears after install.'
+      }
+    }
+
+    function syncChromeForStep(stepId: string) {
+      const status = root.querySelector('[data-tc-status]')
+      const action = root.querySelector('[data-tc-action]')
+      if (stepId === 'pick' && status) {
+        status.textContent = `Select ${PLUGINS[selected].label} to preview install + capability.`
+      }
+      if (stepId === 'pick' && action && !action.hasAttribute('disabled')) {
+        action.textContent = `Select ${PLUGINS[selected].label} plugin`
+      }
+      if (stepId === 'capability' && status) {
+        status.textContent = `${PLUGINS[selected].label} ready — ${PLUGINS[selected].api.replace(' available', '')}.`
       }
     }
 
@@ -120,8 +141,7 @@ const steps = [
         actionLabel: 'Select Camera plugin',
         status: 'Select Camera to preview install + capability.',
         enter(ctx) {
-          paintSelection()
-          refreshSnippet(ctx, 'pick')
+          renderPluginView(ctx, 'pick')
           ctx.setActionLabel(`Select ${PLUGINS[selected].label} plugin`)
           ctx.setStatus(`Select ${PLUGINS[selected].label} to preview install + capability.`)
         },
@@ -131,8 +151,7 @@ const steps = [
         actionLabel: 'Copy install snippet',
         status: 'Install snippet ready for your project.',
         enter(ctx) {
-          paintSelection()
-          refreshSnippet(ctx, 'install')
+          renderPluginView(ctx, 'install')
         },
       },
       {
@@ -140,8 +159,7 @@ const steps = [
         actionLabel: 'Open on device',
         status: 'Camera permission granted — photo capture ready.',
         enter(ctx) {
-          paintSelection()
-          refreshSnippet(ctx, 'capability')
+          renderPluginView(ctx, 'capability')
           const plugin = PLUGINS[selected]
           ctx.setStatus(`${plugin.label} ready — ${plugin.api.replace(' available', '')}.`)
           ctx.setActionDisabled(true)
@@ -155,31 +173,11 @@ const steps = [
         const id = btn.getAttribute('data-plugin') as PluginId | null
         if (!id || !PLUGINS[id]) return
         selected = id
-        paintSelection()
         const stepId = root.dataset.tcStep || 'pick'
         const reduced =
           typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
-        typeTerminalLines(
-          root.querySelector<HTMLElement>('[data-plugin-term]'),
-          snippetFor(stepId),
-          reduced,
-        )
-        const cap = root.querySelector('[data-plugin-cap]')
-        if (cap) {
-          cap.textContent =
-            stepId === 'capability' ? PLUGINS[selected].capability : 'Device capability appears after install.'
-        }
-        const status = root.querySelector('[data-tc-status]')
-        const action = root.querySelector('[data-tc-action]')
-        if (stepId === 'pick' && status) {
-          status.textContent = `Select ${PLUGINS[selected].label} to preview install + capability.`
-        }
-        if (stepId === 'pick' && action && !action.hasAttribute('disabled')) {
-          action.textContent = `Select ${PLUGINS[selected].label} plugin`
-        }
-        if (stepId === 'capability' && status) {
-          status.textContent = `${PLUGINS[selected].label} ready — ${PLUGINS[selected].api.replace(' available', '')}.`
-        }
+        renderPluginView({ prefersReducedMotion: reduced, query: (s) => root.querySelector(s) }, stepId)
+        syncChromeForStep(stepId)
       })
     })
   })

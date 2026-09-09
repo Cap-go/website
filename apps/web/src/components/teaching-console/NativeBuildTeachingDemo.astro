@@ -52,77 +52,104 @@ const steps = [
   import { animateProgress, setupTeachingConsole } from './teaching-console.client.ts'
 
   document.querySelectorAll<HTMLElement>('[data-tc-demo="native-build"]').forEach((root) => {
-    setupTeachingConsole(root, [
-      {
-        id: 'queue',
-        actionLabel: 'Queue iOS build',
-        status: 'Queue an iOS release build for com.demo.app.',
-        enter(ctx) {
-          ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="artifact"]').forEach((el) => (el.hidden = true))
-          const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
-          if (ai) ai.hidden = true
-          const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
-          animateProgress(bar, 0, true)
-          const phase = ctx.root.querySelector('[data-nb-phase]')
-          const pct = ctx.root.querySelector('[data-nb-pct]')
-          if (phase) phase.textContent = 'Queued'
-          if (pct) pct.textContent = '0%'
+    let compileTimers: ReturnType<typeof setTimeout>[] = []
+    let compileGen = 0
+
+    function clearCompileTimers() {
+      compileTimers.forEach((id) => clearTimeout(id))
+      compileTimers = []
+      compileGen += 1
+    }
+
+    setupTeachingConsole(
+      root,
+      [
+        {
+          id: 'queue',
+          actionLabel: 'Queue iOS build',
+          status: 'Queue an iOS release build for com.demo.app.',
+          enter(ctx) {
+            clearCompileTimers()
+            ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="artifact"]').forEach((el) => (el.hidden = true))
+            const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
+            if (ai) ai.hidden = true
+            const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
+            animateProgress(bar, 0, true)
+            const phase = ctx.root.querySelector('[data-nb-phase]')
+            const pct = ctx.root.querySelector('[data-nb-pct]')
+            if (phase) phase.textContent = 'Queued'
+            if (pct) pct.textContent = '0%'
+          },
         },
-      },
-      {
-        id: 'compile',
-        actionLabel: 'Watch compile',
-        status: 'Compiling native project in Capgo cloud…',
-        enter(ctx) {
-          const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
-          const phase = ctx.root.querySelector('[data-nb-phase]')
-          const pct = ctx.root.querySelector('[data-nb-pct]')
-          const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
-          const aiCopy = ctx.root.querySelector('[data-nb-ai-copy]')
-          if (ai) ai.hidden = false
-          if (aiCopy)
-            aiCopy.innerHTML =
-              'Codesign tip from Capgo AI: regenerate the profile for <code>com.demo.app</code>, or run <code>capgo build init --platform ios</code> — then re-queue.'
-          if (ctx.prefersReducedMotion) {
-            animateProgress(bar, 100, true)
-            if (phase) phase.textContent = 'Signing'
+        {
+          id: 'compile',
+          actionLabel: 'Watch compile',
+          status: 'Compiling native project in Capgo cloud…',
+          enter(ctx) {
+            clearCompileTimers()
+            const gen = compileGen
+            const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
+            const phase = ctx.root.querySelector('[data-nb-phase]')
+            const pct = ctx.root.querySelector('[data-nb-pct]')
+            const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
+            const aiCopy = ctx.root.querySelector('[data-nb-ai-copy]')
+            if (ai) ai.hidden = false
+            if (aiCopy)
+              aiCopy.innerHTML =
+                'Codesign tip from Capgo AI: regenerate the profile for <code>com.demo.app</code>, or run <code>capgo build init --platform ios</code> — then re-queue.'
+            ctx.registerCancel(clearCompileTimers)
+            if (ctx.prefersReducedMotion) {
+              animateProgress(bar, 100, true)
+              if (phase) phase.textContent = 'Signing'
+              if (pct) pct.textContent = '100%'
+              return
+            }
+            animateProgress(bar, 28, false)
+            if (phase) phase.textContent = 'Resolving pods'
+            if (pct) pct.textContent = '28%'
+            compileTimers.push(
+              setTimeout(() => {
+                if (gen !== compileGen) return
+                animateProgress(bar, 67, false)
+                if (phase) phase.textContent = 'Compiling Swift'
+                if (pct) pct.textContent = '67%'
+              }, 900),
+            )
+            compileTimers.push(
+              setTimeout(() => {
+                if (gen !== compileGen) return
+                animateProgress(bar, 92, false)
+                if (phase) phase.textContent = 'Codesigning'
+                if (pct) pct.textContent = '92%'
+              }, 1800),
+            )
+          },
+          leave() {
+            clearCompileTimers()
+          },
+        },
+        {
+          id: 'artifact',
+          actionLabel: 'Download IPA',
+          status: 'Signed artifact ready — DemoApp-1.0.0-184.ipa',
+          enter(ctx) {
+            clearCompileTimers()
+            ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="artifact"]').forEach((el) => (el.hidden = false))
+            const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
+            const aiCopy = ctx.root.querySelector('[data-nb-ai-copy]')
+            if (ai) ai.hidden = false
+            if (aiCopy) aiCopy.textContent = 'Build healthy — Capgo AI stayed available if codesign or pods had failed.'
+            const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
+            animateProgress(bar, 100, ctx.prefersReducedMotion)
+            const phase = ctx.root.querySelector('[data-nb-phase]')
+            const pct = ctx.root.querySelector('[data-nb-pct]')
+            if (phase) phase.textContent = 'Complete'
             if (pct) pct.textContent = '100%'
-            return
-          }
-          animateProgress(bar, 28, false)
-          if (phase) phase.textContent = 'Resolving pods'
-          if (pct) pct.textContent = '28%'
-          setTimeout(() => {
-            animateProgress(bar, 67, false)
-            if (phase) phase.textContent = 'Compiling Swift'
-            if (pct) pct.textContent = '67%'
-          }, 900)
-          setTimeout(() => {
-            animateProgress(bar, 92, false)
-            if (phase) phase.textContent = 'Codesigning'
-            if (pct) pct.textContent = '92%'
-          }, 1800)
+            ctx.setActionDisabled(true)
+          },
         },
-      },
-      {
-        id: 'artifact',
-        actionLabel: 'Download IPA',
-        status: 'Signed artifact ready — DemoApp-1.0.0-184.ipa',
-        enter(ctx) {
-          ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="artifact"]').forEach((el) => (el.hidden = false))
-          const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
-          const aiCopy = ctx.root.querySelector('[data-nb-ai-copy]')
-          if (ai) ai.hidden = false
-          if (aiCopy) aiCopy.textContent = 'Build healthy — Capgo AI stayed available if codesign or pods had failed.'
-          const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
-          animateProgress(bar, 100, ctx.prefersReducedMotion)
-          const phase = ctx.root.querySelector('[data-nb-phase]')
-          const pct = ctx.root.querySelector('[data-nb-pct]')
-          if (phase) phase.textContent = 'Complete'
-          if (pct) pct.textContent = '100%'
-          ctx.setActionDisabled(true)
-        },
-      },
-    ])
+      ],
+      { startWhenVisible: true },
+    )
   })
 </script>
