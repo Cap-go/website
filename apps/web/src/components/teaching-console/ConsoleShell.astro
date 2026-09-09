@@ -3,6 +3,13 @@ import '@/styles/teaching-console.css'
 
 export type TeachStep = { id: string; label: string; hint: string }
 export type ConsoleTab = { id: string; label: string; badge?: string }
+type NavItem = {
+  label: string
+  paths: string[]
+  stroke?: boolean
+  filled?: boolean
+  external?: boolean
+}
 
 interface Props {
   demoId: string
@@ -50,7 +57,7 @@ const {
   hideFootAction = false,
 } = Astro.props
 
-const nav = [
+const nav: NavItem[] = [
   {
     label: 'Dashboard',
     // Lucide-like bar chart (real console)
@@ -137,8 +144,8 @@ const ranges = ['1 day', '3 days', '7 days', '30 days']
                 class:list={['tc-nav-ico', item.filled && 'is-filled']}
                 viewBox="0 0 24 24"
                 fill={item.filled ? 'currentColor' : 'none'}
-                stroke={item.filled ? 'none' : 'currentColor'}
-                stroke-width={item.filled ? undefined : '1.5'}
+                stroke={item.stroke === false || item.filled ? 'none' : 'currentColor'}
+                stroke-width={item.filled || item.stroke === false ? undefined : '1.5'}
                 aria-hidden="true"
               >
                 {item.paths.map((d) => (

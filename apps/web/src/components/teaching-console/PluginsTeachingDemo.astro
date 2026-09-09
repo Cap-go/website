@@ -29,9 +29,9 @@ const steps = [
       <div class="tc-card tc-card-pad">
         <h3 class="tc-card-title">Plugin catalog</h3>
         <ul class="tc-list">
-          <li><button type="button" class="tc-channel is-selected" data-plugin="camera">Camera</button><span class="tc-pill is-blue">native</span></li>
-          <li><button type="button" class="tc-channel" data-plugin="filesystem">Filesystem</button><span class="tc-pill is-muted">native</span></li>
-          <li><button type="button" class="tc-channel" data-plugin="push">Push Notifications</button><span class="tc-pill is-muted">native</span></li>
+          <li><button type="button" class="tc-channel is-selected" data-plugin="camera" aria-pressed="true">Camera</button><span class="tc-pill is-blue">native</span></li>
+          <li><button type="button" class="tc-channel" data-plugin="filesystem" aria-pressed="false">Filesystem</button><span class="tc-pill is-muted">native</span></li>
+          <li><button type="button" class="tc-channel" data-plugin="push" aria-pressed="false">Push Notifications</button><span class="tc-pill is-muted">native</span></li>
         </ul>
       </div>
       <div class="tc-card tc-card-pad">
@@ -49,24 +49,90 @@ const steps = [
 <script>
   import { setupTeachingConsole, typeTerminalLines } from './teaching-console.client.ts'
 
+  type PluginId = 'camera' | 'filesystem' | 'push'
+
+  const PLUGINS: Record<
+    PluginId,
+    { label: string; pkg: string; capability: string; api: string }
+  > = {
+    camera: {
+      label: 'Camera',
+      pkg: '@capacitor/camera',
+      capability: 'Capability: capture photo / gallery pick on device.',
+      api: 'Camera.getPhoto() available',
+    },
+    filesystem: {
+      label: 'Filesystem',
+      pkg: '@capacitor/filesystem',
+      capability: 'Capability: read / write files in app sandbox.',
+      api: 'Filesystem.readFile() available',
+    },
+    push: {
+      label: 'Push Notifications',
+      pkg: '@capacitor/push-notifications',
+      capability: 'Capability: register for remote push on device.',
+      api: 'PushNotifications.register() available',
+    },
+  }
+
   document.querySelectorAll<HTMLElement>('[data-tc-demo="plugins"]').forEach((root) => {
+    let selected: PluginId = 'camera'
+
+    function paintSelection() {
+      root.querySelectorAll<HTMLButtonElement>('[data-plugin]').forEach((btn) => {
+        const id = btn.getAttribute('data-plugin') as PluginId
+        const on = id === selected
+        btn.classList.toggle('is-selected', on)
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false')
+      })
+    }
+
+    function snippetFor(stepId: string) {
+      const plugin = PLUGINS[selected]
+      if (stepId === 'pick') {
+        return [`<span class="dim">Selected ${plugin.label} — advance to install.</span>`]
+      }
+      if (stepId === 'install') {
+        return [
+          `<span class="cmd">$</span> npm i ${plugin.pkg}`,
+          `<span class="cmd">$</span> npx cap sync`,
+        ]
+      }
+      return [
+        `<span class="cmd">$</span> npm i ${plugin.pkg} && npx cap sync`,
+        `<span class="ok">✓</span> iOS + Android permissions linked`,
+        `<span class="ok">✓</span> ${plugin.api}`,
+      ]
+    }
+
+    function refreshSnippet(ctx: { prefersReducedMotion: boolean; query: (s: string) => HTMLElement | null }, stepId: string) {
+      typeTerminalLines(ctx.query('[data-plugin-term]'), snippetFor(stepId), ctx.prefersReducedMotion)
+      const cap = ctx.query('[data-plugin-cap]')
+      if (cap) {
+        cap.textContent =
+          stepId === 'capability' ? PLUGINS[selected].capability : 'Device capability appears after install.'
+      }
+    }
+
     setupTeachingConsole(root, [
       {
         id: 'pick',
         actionLabel: 'Select Camera plugin',
         status: 'Select Camera to preview install + capability.',
-        enter() {},
+        enter(ctx) {
+          paintSelection()
+          refreshSnippet(ctx, 'pick')
+          ctx.setActionLabel(`Select ${PLUGINS[selected].label} plugin`)
+          ctx.setStatus(`Select ${PLUGINS[selected].label} to preview install + capability.`)
+        },
       },
       {
         id: 'install',
         actionLabel: 'Copy install snippet',
         status: 'Install snippet ready for your project.',
         enter(ctx) {
-          typeTerminalLines(
-            ctx.query('[data-plugin-term]'),
-            ['<span class="cmd">$</span> npm i @capacitor/camera', '<span class="cmd">$</span> npx cap sync'],
-            ctx.prefersReducedMotion,
-          )
+          paintSelection()
+          refreshSnippet(ctx, 'install')
         },
       },
       {
@@ -74,20 +140,47 @@ const steps = [
         actionLabel: 'Open on device',
         status: 'Camera permission granted — photo capture ready.',
         enter(ctx) {
-          typeTerminalLines(
-            ctx.query('[data-plugin-term]'),
-            [
-              '<span class="cmd">$</span> npm i @capacitor/camera && npx cap sync',
-              '<span class="ok">✓</span> iOS + Android permissions linked',
-              '<span class="ok">✓</span> Camera.getPhoto() available',
-            ],
-            ctx.prefersReducedMotion,
-          )
-          const cap = ctx.query('[data-plugin-cap]')
-          if (cap) cap.textContent = 'Capability: capture photo / gallery pick on device.'
+          paintSelection()
+          refreshSnippet(ctx, 'capability')
+          const plugin = PLUGINS[selected]
+          ctx.setStatus(`${plugin.label} ready — ${plugin.api.replace(' available', '')}.`)
           ctx.setActionDisabled(true)
         },
       },
     ])
+
+    root.querySelectorAll<HTMLButtonElement>('[data-plugin]').forEach((btn) => {
+      btn.addEventListener('click', (event) => {
+        event.stopPropagation()
+        const id = btn.getAttribute('data-plugin') as PluginId | null
+        if (!id || !PLUGINS[id]) return
+        selected = id
+        paintSelection()
+        const stepId = root.dataset.tcStep || 'pick'
+        const reduced =
+          typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
+        typeTerminalLines(
+          root.querySelector('[data-plugin-term]'),
+          snippetFor(stepId),
+          reduced,
+        )
+        const cap = root.querySelector('[data-plugin-cap]')
+        if (cap) {
+          cap.textContent =
+            stepId === 'capability' ? PLUGINS[selected].capability : 'Device capability appears after install.'
+        }
+        const status = root.querySelector('[data-tc-status]')
+        const action = root.querySelector('[data-tc-action]')
+        if (stepId === 'pick' && status) {
+          status.textContent = `Select ${PLUGINS[selected].label} to preview install + capability.`
+        }
+        if (stepId === 'pick' && action && !action.hasAttribute('disabled')) {
+          action.textContent = `Select ${PLUGINS[selected].label} plugin`
+        }
+        if (stepId === 'capability' && status) {
+          status.textContent = `${PLUGINS[selected].label} ready — ${PLUGINS[selected].api.replace(' available', '')}.`
+        }
+      })
+    })
   })
 </script>

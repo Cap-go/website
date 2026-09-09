@@ -57,15 +57,40 @@ const steps = [
       el.textContent = text
     }
 
+    /** Render all three row states from the selected step so backward nav stays coherent. */
+    function paintPipeline(step: 'trigger' | 'checks' | 'deploy') {
+      if (step === 'trigger') {
+        setPill('[data-ci-state]', 'Running', 'is-blue')
+        setPill('[data-ci-s1]', 'running', 'is-blue')
+        setPill('[data-ci-s2]', 'pending', 'is-muted')
+        setPill('[data-ci-s3]', 'pending', 'is-muted')
+        return
+      }
+      if (step === 'checks') {
+        setPill('[data-ci-state]', 'Running', 'is-blue')
+        setPill('[data-ci-s1]', 'passed', '')
+        setPill('[data-ci-s2]', 'running', 'is-blue')
+        setPill('[data-ci-s3]', 'pending', 'is-muted')
+        return
+      }
+      setPill('[data-ci-state]', 'Success', '')
+      setPill('[data-ci-s1]', 'passed', '')
+      setPill('[data-ci-s2]', 'passed', '')
+      setPill('[data-ci-s3]', 'passed', '')
+    }
+
     setupTeachingConsole(root, [
       {
         id: 'trigger',
         actionLabel: 'Trigger pipeline',
         status: 'Push to main triggers the Capgo release workflow.',
         enter(ctx) {
-          setPill('[data-ci-state]', 'Running', 'is-blue')
-          setPill('[data-ci-s1]', 'running', 'is-blue')
-          typeTerminalLines(ctx.query('[data-ci-term]'), ['<span class="cmd">$</span> git push origin main', '<span class="ok">✓</span> workflow capgo-release started'], ctx.prefersReducedMotion)
+          paintPipeline('trigger')
+          typeTerminalLines(
+            ctx.query('[data-ci-term]'),
+            ['<span class="cmd">$</span> git push origin main', '<span class="ok">✓</span> workflow capgo-release started'],
+            ctx.prefersReducedMotion,
+          )
         },
       },
       {
@@ -73,11 +98,14 @@ const steps = [
         actionLabel: 'Run checks',
         status: 'Compatibility and unit checks are green.',
         enter(ctx) {
-          setPill('[data-ci-s1]', 'passed', '')
-          setPill('[data-ci-s2]', 'running', 'is-blue')
+          paintPipeline('checks')
           typeTerminalLines(
             ctx.query('[data-ci-term]'),
-            ['<span class="ok">✓</span> bun test', '<span class="ok">✓</span> bundle releaseType — compatible with production', '<span class="dim">Continuing to Capgo deploy…</span>'],
+            [
+              '<span class="ok">✓</span> bun test',
+              '<span class="ok">✓</span> bundle releaseType — compatible with production',
+              '<span class="dim">Continuing to Capgo deploy…</span>',
+            ],
             ctx.prefersReducedMotion,
           )
         },
@@ -87,9 +115,7 @@ const steps = [
         actionLabel: 'Capgo deploy',
         status: 'Capgo deploy step uploaded bundle 1.0.1 to production.',
         enter(ctx) {
-          setPill('[data-ci-s2]', 'passed', '')
-          setPill('[data-ci-s3]', 'passed', '')
-          setPill('[data-ci-state]', 'Success', '')
+          paintPipeline('deploy')
           typeTerminalLines(
             ctx.query('[data-ci-term]'),
             [

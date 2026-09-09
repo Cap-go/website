@@ -26,8 +26,8 @@ const steps = [
         <h3 class="tc-card-title">Release markers</h3>
       </div>
       <div class="tc-channels" role="group" aria-label="Release markers">
-        <button type="button" class="tc-channel" data-observe-release="stable" aria-pressed="true">v4.8.0 · production · Jan 5</button>
-        <button type="button" class="tc-channel is-selected" data-observe-release="rollout" aria-pressed="false">v4.8.1 · production · Jan 12</button>
+        <button type="button" class="tc-channel is-selected" data-observe-release="stable" aria-pressed="true">v4.8.0 · production · Jan 5</button>
+        <button type="button" class="tc-channel" data-observe-release="rollout" aria-pressed="false">v4.8.1 · production · Jan 12</button>
       </div>
     </div>
 
@@ -51,7 +51,9 @@ const steps = [
             <path stroke-linecap="round" d="M12 7v5l3 2" />
           </svg>
         </div>
-        <svg class="tc-chart-svg" viewBox="0 0 360 140" role="img" aria-label="Line chart of launch and WebView timing">
+        <p class="tc-sr-only" id="observe-timing-desc">Launch P90 stays near 0.8–0.9s, Launch P50 near 0.8s, and WebView P90 trends from about 1.1s down toward 1.0s across 7–13 Jul.</p>
+        <svg class="tc-chart-svg" viewBox="0 0 360 140" role="img" aria-labelledby="observe-timing-title" aria-describedby="observe-timing-desc">
+          <title id="observe-timing-title">Line chart of launch and WebView timing</title>
           <g class="tc-chart-grid" stroke="#e2e8f0" stroke-width="1">
             <line x1="36" y1="18" x2="350" y2="18" />
             <line x1="36" y1="48" x2="350" y2="48" />
@@ -118,10 +120,10 @@ const steps = [
             <circle cx="208" cy="97" r="2" /><circle cx="262" cy="96" r="2" /><circle cx="318" cy="95" r="2" />
           </g>
         </svg>
-        <ul class="tc-chart-legend" aria-hidden="true">
-          <li><i class="is-webview"></i>WebView P90</li>
-          <li><i class="is-launch"></i>Launch P90</li>
-          <li><i class="is-p50"></i>Launch P50</li>
+        <ul class="tc-chart-legend">
+          <li><i class="is-webview" aria-hidden="true"></i>WebView P90</li>
+          <li><i class="is-launch" aria-hidden="true"></i>Launch P90</li>
+          <li><i class="is-p50" aria-hidden="true"></i>Launch P50</li>
         </ul>
       </div>
 
@@ -135,7 +137,9 @@ const steps = [
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h3l3-7 4 14 3-7h5" />
           </svg>
         </div>
-        <svg class="tc-chart-svg" viewBox="0 0 360 140" role="img" aria-label="Bar chart of events and issues">
+        <p class="tc-sr-only" id="observe-events-desc">Daily launches near 3.0–3.3k, WebView loads near 2.8–3.0k, and native issues near 200–500 — far below the launch volume on a 0–3.5k axis.</p>
+        <svg class="tc-chart-svg" viewBox="0 0 360 140" role="img" aria-labelledby="observe-events-title" aria-describedby="observe-events-desc">
+          <title id="observe-events-title">Bar chart of events and issues</title>
           <g class="tc-chart-grid" stroke="#e2e8f0" stroke-width="1">
             <line x1="36" y1="18" x2="350" y2="18" />
             <line x1="36" y1="48" x2="350" y2="48" />
@@ -144,9 +148,9 @@ const steps = [
           </g>
           <g class="tc-chart-axis" fill="#94a3b8" font-size="9" font-family="ui-sans-serif, system-ui, sans-serif">
             <text x="2" y="22">3.5k</text>
-            <text x="2" y="52">3.0k</text>
-            <text x="2" y="82">2.5k</text>
-            <text x="2" y="112">2.0k</text>
+            <text x="2" y="52">2.3k</text>
+            <text x="8" y="82">1.2k</text>
+            <text x="14" y="112">0</text>
             <text x="42" y="132">7 Jul</text>
             <text x="97" y="132">8 Jul</text>
             <text x="152" y="132">9 Jul</text>
@@ -154,30 +158,30 @@ const steps = [
             <text x="257" y="132">11 Jul</text>
             <text x="312" y="132">13 Jul</text>
           </g>
-          <!-- grouped bars: launches (blue), webview (teal), issues (red tiny) -->
-          <rect x="48" y="36" width="10" height="72" rx="2" fill="#93c5fd" />
-          <rect x="60" y="53" width="10" height="55" rx="2" fill="#5eead4" />
-          <rect x="72" y="102" width="6" height="6" rx="1.5" fill="#f87171" />
-          <rect x="103" y="40" width="10" height="68" rx="2" fill="#93c5fd" />
-          <rect x="115" y="58" width="10" height="50" rx="2" fill="#5eead4" />
-          <rect x="127" y="103" width="6" height="5" rx="1.5" fill="#f87171" />
-          <rect x="158" y="33" width="10" height="75" rx="2" fill="#93c5fd" />
-          <rect x="170" y="50" width="10" height="58" rx="2" fill="#5eead4" />
-          <rect x="182" y="101" width="6" height="7" rx="1.5" fill="#f87171" />
-          <rect x="213" y="46" width="10" height="62" rx="2" fill="#93c5fd" />
-          <rect x="225" y="60" width="10" height="48" rx="2" fill="#5eead4" />
-          <rect x="237" y="104" width="6" height="4" rx="1.5" fill="#f87171" />
-          <rect x="268" y="38" width="10" height="70" rx="2" fill="#93c5fd" />
-          <rect x="280" y="56" width="10" height="52" rx="2" fill="#5eead4" />
-          <rect x="292" y="100" width="6" height="8" rx="1.5" fill="#f87171" />
-          <rect x="323" y="30" width="10" height="78" rx="2" fill="#93c5fd" />
-          <rect x="335" y="48" width="10" height="60" rx="2" fill="#5eead4" />
-          <rect x="347" y="98" width="6" height="10" rx="1.5" fill="#f87171" />
+          <!-- grouped bars on 0–3.5k axis: launches, webview loads, native issues -->
+          <rect x="48" y="26" width="10" height="82" rx="2" fill="#93c5fd" />
+          <rect x="60" y="33" width="10" height="75" rx="2" fill="#5eead4" />
+          <rect x="72" y="100" width="6" height="8" rx="1.5" fill="#f87171" />
+          <rect x="103" y="27" width="10" height="81" rx="2" fill="#93c5fd" />
+          <rect x="115" y="35" width="10" height="73" rx="2" fill="#5eead4" />
+          <rect x="127" y="101" width="6" height="7" rx="1.5" fill="#f87171" />
+          <rect x="158" y="24" width="10" height="84" rx="2" fill="#93c5fd" />
+          <rect x="170" y="32" width="10" height="76" rx="2" fill="#5eead4" />
+          <rect x="182" y="99" width="6" height="9" rx="1.5" fill="#f87171" />
+          <rect x="213" y="30" width="10" height="78" rx="2" fill="#93c5fd" />
+          <rect x="225" y="36" width="10" height="72" rx="2" fill="#5eead4" />
+          <rect x="237" y="103" width="6" height="5" rx="1.5" fill="#f87171" />
+          <rect x="268" y="27" width="10" height="81" rx="2" fill="#93c5fd" />
+          <rect x="280" y="34" width="10" height="74" rx="2" fill="#5eead4" />
+          <rect x="292" y="98" width="6" height="10" rx="1.5" fill="#f87171" />
+          <rect x="323" y="23" width="10" height="85" rx="2" fill="#93c5fd" />
+          <rect x="335" y="31" width="10" height="77" rx="2" fill="#5eead4" />
+          <rect x="347" y="95" width="6" height="13" rx="1.5" fill="#f87171" />
         </svg>
-        <ul class="tc-chart-legend" aria-hidden="true">
-          <li><i class="is-launches"></i>Launches</li>
-          <li><i class="is-loads"></i>WebView loads</li>
-          <li><i class="is-issues"></i>Native issues</li>
+        <ul class="tc-chart-legend">
+          <li><i class="is-launches" aria-hidden="true"></i>Launches</li>
+          <li><i class="is-loads" aria-hidden="true"></i>WebView loads</li>
+          <li><i class="is-issues" aria-hidden="true"></i>Native issues</li>
         </ul>
       </div>
     </div>
@@ -263,6 +267,42 @@ const steps = [
     })
   }
 
+  const baseline = {
+    tracked: '8,240',
+    issueFree: '98.6%',
+    launch: '781 ms',
+    webview: '1.2 s',
+    native: '326',
+    vIssue: '98.9%',
+    vLaunch: '760 ms',
+    vWeb: '1.1 s',
+    errCount: '82',
+    errShare: '44.6%',
+  }
+
+  function selectRelease(root: HTMLElement, id: string) {
+    root.querySelectorAll<HTMLElement>('[data-observe-release]').forEach((btn) => {
+      const selected = btn.getAttribute('data-observe-release') === id
+      btn.classList.toggle('is-selected', selected)
+      btn.setAttribute('aria-pressed', selected ? 'true' : 'false')
+    })
+    root.querySelectorAll('[data-observe-row]').forEach((row) => {
+      row.classList.toggle('is-focus', row.getAttribute('data-observe-row') === id)
+    })
+    if (id === 'rollout') {
+      applyMetrics(root, rollout)
+    } else {
+      // Restore all-versions summary only; keep per-version row values for 4.8.1.
+      applyMetrics(root, {
+        tracked: baseline.tracked,
+        issueFree: baseline.issueFree,
+        launch: baseline.launch,
+        webview: baseline.webview,
+        native: baseline.native,
+      })
+    }
+  }
+
   document.querySelectorAll<HTMLElement>('[data-tc-demo="observe"]').forEach((root) => {
     setupTeachingConsole(root, [
       {
@@ -271,10 +311,7 @@ const steps = [
         status: 'Step 1: Select the latest release marker to anchor the rollout you just shipped.',
         enter(ctx) {
           showPanels(ctx.root, ['deploy', 'observe'])
-          ctx.root.querySelectorAll('[data-observe-release]').forEach((btn) => {
-            const selected = btn.getAttribute('data-observe-release') === 'stable'
-            btn.classList.toggle('is-selected', selected)
-          })
+          selectRelease(ctx.root, 'stable')
         },
       },
       {
@@ -283,12 +320,7 @@ const steps = [
         status: 'Step 2: Release v4.8.1 on production — issue-free 91.2%, native issues 892.',
         enter(ctx) {
           showPanels(ctx.root, ['deploy', 'observe'])
-          ctx.root.querySelectorAll('[data-observe-release]').forEach((btn) => {
-            const selected = btn.getAttribute('data-observe-release') === 'rollout'
-            btn.classList.toggle('is-selected', selected)
-          })
-          applyMetrics(ctx.root, rollout)
-          ctx.root.querySelector('[data-observe-row="rollout"]')?.classList.add('is-focus')
+          selectRelease(ctx.root, 'rollout')
         },
       },
       {
@@ -297,12 +329,28 @@ const steps = [
         status: 'Step 3: Follow the trend into Logs Insights for errors, versions, and devices.',
         enter(ctx) {
           showPanels(ctx.root, ['investigate'])
-          applyMetrics(ctx.root, rollout)
+          selectRelease(ctx.root, 'rollout')
           const logsTab = ctx.root.querySelector('[data-tc-chrome-tab="logs"]')
           ctx.root.querySelectorAll('[data-tc-chrome-tab]').forEach((tab) => tab.classList.remove('is-active'))
           logsTab?.classList.add('is-active')
         },
       },
     ])
+
+    root.querySelectorAll<HTMLButtonElement>('[data-observe-release]').forEach((btn) => {
+      btn.addEventListener('click', (event) => {
+        event.stopPropagation()
+        const id = btn.getAttribute('data-observe-release')
+        if (!id) return
+        selectRelease(root, id)
+        const status = root.querySelector('[data-tc-status]')
+        if (!status) return
+        if (id === 'rollout') {
+          status.textContent = 'Release v4.8.1 selected — issue-free 91.2%, native issues 892.'
+        } else {
+          status.textContent = 'Release v4.8.0 selected — stable baseline for comparison.'
+        }
+      })
+    })
   })
 </script>

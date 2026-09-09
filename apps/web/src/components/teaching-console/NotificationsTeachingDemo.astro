@@ -20,7 +20,7 @@ const steps = [
     status="Compose a campaign for production devices."
     actionLabel="Compose campaign"
   >
-    <div class="tc-metrics" style="grid-template-columns: repeat(4, minmax(0,1fr))">
+    <div class="tc-metrics tc-metrics--4">
       <article class="tc-metric"><p>Configured platforms</p><strong>2</strong></article>
       <article class="tc-metric"><p>Events in 30 days</p><strong>2,820</strong></article>
       <article class="tc-metric"><p>Campaigns</p><strong data-n-campaigns>1</strong></article>
@@ -52,21 +52,39 @@ const steps = [
 </div>
 
 <script>
-  import { animateProgress, setupTeachingConsole } from './teaching-console.client.ts'
+  import { animateProgress, setupTeachingConsole, type TeachingContext } from './teaching-console.client.ts'
 
   document.querySelectorAll<HTMLElement>('[data-tc-demo="notifications"]').forEach((root) => {
+    let deliveryTimers: ReturnType<typeof setTimeout>[] = []
+    let deliveryGen = 0
+
+    function clearDeliveryTimers() {
+      deliveryTimers.forEach((id) => clearTimeout(id))
+      deliveryTimers = []
+      deliveryGen += 1
+    }
+
+    function resetDelivery(ctx: TeachingContext, healthText = 'Draft', pctText = '0%', width = 0) {
+      const bar = ctx.root.querySelector<HTMLElement>('[data-n-bar]')
+      animateProgress(bar, width, ctx.prefersReducedMotion)
+      const health = ctx.root.querySelector('[data-n-health]')
+      const pct = ctx.root.querySelector('[data-n-pct]')
+      if (health) health.textContent = healthText
+      if (pct) pct.textContent = pctText
+    }
+
     setupTeachingConsole(root, [
       {
         id: 'compose',
         actionLabel: 'Compose campaign',
         status: 'Compose a campaign for production devices.',
         enter(ctx) {
-          const bar = ctx.root.querySelector<HTMLElement>('[data-n-bar]')
-          animateProgress(bar, 0, true)
-          const health = ctx.root.querySelector('[data-n-health]')
-          const pct = ctx.root.querySelector('[data-n-pct]')
-          if (health) health.textContent = 'Draft'
-          if (pct) pct.textContent = '0%'
+          clearDeliveryTimers()
+          const campaigns = ctx.root.querySelector('[data-n-campaigns]')
+          if (campaigns) campaigns.textContent = '1'
+          const devices = ctx.root.querySelector('[data-n-devices]')
+          if (devices) devices.textContent = '1,240'
+          resetDelivery(ctx, 'Draft', '0%', 0)
         },
       },
       {
@@ -74,8 +92,12 @@ const steps = [
         actionLabel: 'Target production',
         status: 'Target production channel — 1,240 devices matched.',
         enter(ctx) {
+          clearDeliveryTimers()
           const devices = ctx.root.querySelector('[data-n-devices]')
           if (devices) devices.textContent = '1,240'
+          const campaigns = ctx.root.querySelector('[data-n-campaigns]')
+          if (campaigns) campaigns.textContent = '1'
+          resetDelivery(ctx, 'Ready', '0%', 0)
         },
       },
       {
@@ -83,11 +105,15 @@ const steps = [
         actionLabel: 'Send campaign',
         status: 'Delivering — opens and update checks streaming in.',
         enter(ctx) {
+          clearDeliveryTimers()
+          const gen = deliveryGen
           const bar = ctx.root.querySelector<HTMLElement>('[data-n-bar]')
           const health = ctx.root.querySelector('[data-n-health]')
           const pct = ctx.root.querySelector('[data-n-pct]')
           const campaigns = ctx.root.querySelector('[data-n-campaigns]')
           if (campaigns) campaigns.textContent = '2'
+          ctx.registerCancel(clearDeliveryTimers)
+
           if (ctx.prefersReducedMotion) {
             animateProgress(bar, 100, true)
             if (health) health.textContent = 'Delivered'
@@ -98,13 +124,19 @@ const steps = [
           animateProgress(bar, 35, false)
           if (health) health.textContent = 'Sending'
           if (pct) pct.textContent = '35%'
-          setTimeout(() => {
-            animateProgress(bar, 100, false)
-            if (health) health.textContent = 'Delivered'
-            if (pct) pct.textContent = '100%'
-            ctx.setStatus('Campaign delivered — 1,186 accepted, 54 deferred.')
-            ctx.setActionDisabled(true)
-          }, 1400)
+          deliveryTimers.push(
+            setTimeout(() => {
+              if (gen !== deliveryGen) return
+              animateProgress(bar, 100, false)
+              if (health) health.textContent = 'Delivered'
+              if (pct) pct.textContent = '100%'
+              ctx.setStatus('Campaign delivered — 1,186 accepted, 54 deferred.')
+              ctx.setActionDisabled(true)
+            }, 1400),
+          )
+        },
+        leave() {
+          clearDeliveryTimers()
         },
       },
     ])

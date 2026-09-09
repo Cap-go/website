@@ -1,6 +1,7 @@
 export type TeachingStepHandler = {
   id: string
   enter: (ctx: TeachingContext) => void
+  leave?: (ctx: TeachingContext) => void
   actionLabel?: string
   status?: string
 }
@@ -13,6 +14,13 @@ export type TeachingContext = {
   prefersReducedMotion: boolean
   query: <T extends Element = HTMLElement>(selector: string) => T | null
   queryAll: <T extends Element = HTMLElement>(selector: string) => T[]
+  registerCancel: (fn: () => void) => void
+}
+
+export type TeachingConsoleOptions = {
+  /** Defer enter(0)/auto-advance until the demo scrolls into view. */
+  startWhenVisible?: boolean
+  visibilityThreshold?: number
 }
 
 const AUTO_MS = 3800
@@ -21,7 +29,14 @@ function prefersReducedMotion() {
   return typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-export function setupTeachingConsole(root: HTMLElement, steps: TeachingStepHandler[]) {
+const terminalRuns = new WeakMap<HTMLElement, number>()
+const cancelFns = new WeakMap<HTMLElement, Set<() => void>>()
+
+export function setupTeachingConsole(
+  root: HTMLElement,
+  steps: TeachingStepHandler[],
+  options: TeachingConsoleOptions = {},
+) {
   if (!steps.length || root.dataset.tcReady === '1') return
   root.dataset.tcReady = '1'
 
@@ -29,11 +44,15 @@ export function setupTeachingConsole(root: HTMLElement, steps: TeachingStepHandl
   const actionBtn = root.querySelector<HTMLButtonElement>('[data-tc-action]')
   const stepButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-tc-step-btn]'))
   const reduced = prefersReducedMotion()
+  const cancels = new Set<() => void>()
+  cancelFns.set(root, cancels)
 
   let index = 0
   let timer: ReturnType<typeof setTimeout> | undefined
   let interrupted = false
   let finished = false
+  let started = false
+  let visibilityObserver: IntersectionObserver | undefined
 
   const ctx: TeachingContext = {
     root,
@@ -49,11 +68,32 @@ export function setupTeachingConsole(root: HTMLElement, steps: TeachingStepHandl
     },
     query: (selector) => root.querySelector(selector),
     queryAll: (selector) => Array.from(root.querySelectorAll(selector)),
+    registerCancel(fn) {
+      cancels.add(fn)
+    },
+  }
+
+  function runCancels() {
+    cancels.forEach((fn) => {
+      try {
+        fn()
+      } catch {
+        /* ignore */
+      }
+    })
+    cancels.clear()
   }
 
   function clearTimer() {
     if (timer) clearTimeout(timer)
     timer = undefined
+  }
+
+  function markStarted() {
+    if (started) return
+    started = true
+    visibilityObserver?.disconnect()
+    visibilityObserver = undefined
   }
 
   function paintStepChrome() {
@@ -68,9 +108,16 @@ export function setupTeachingConsole(root: HTMLElement, steps: TeachingStepHandl
   }
 
   function enter(i: number) {
-    index = Math.max(0, Math.min(i, steps.length - 1))
+    markStarted()
+    const next = Math.max(0, Math.min(i, steps.length - 1))
+    if (next !== index) {
+      steps[index]?.leave?.(ctx)
+      runCancels()
+    }
+    index = next
     const step = steps[index]
     paintStepChrome()
+    ctx.setActionDisabled(false)
     if (step.actionLabel) ctx.setActionLabel(step.actionLabel)
     if (step.status) ctx.setStatus(step.status)
     step.enter(ctx)
@@ -101,6 +148,7 @@ export function setupTeachingConsole(root: HTMLElement, steps: TeachingStepHandl
     button.addEventListener('click', () => {
       interrupted = true
       clearTimer()
+      finished = false
       enter(i)
     })
   })
@@ -109,21 +157,55 @@ export function setupTeachingConsole(root: HTMLElement, steps: TeachingStepHandl
 
   root.addEventListener(
     'pointerdown',
-    () => {
+    (event) => {
+      if (interrupted) return
+      const target = event.target as Element | null
+      // Catalog / channel / marker toggles update local state without killing the teaching flow.
+      if (target?.closest('[data-plugin], [data-lu-channel], [data-observe-release]')) return
       interrupted = true
       clearTimer()
     },
-    { once: true, capture: true },
+    { capture: true },
   )
 
-  if (reduced) {
-    enter(steps.length - 1)
+  function startReducedMotion() {
+    for (let i = 0; i < steps.length; i += 1) {
+      index = i
+      const step = steps[i]
+      if (step.actionLabel) ctx.setActionLabel(step.actionLabel)
+      if (step.status) ctx.setStatus(step.status)
+      step.enter(ctx)
+    }
     finished = true
+    paintStepChrome()
     ctx.setActionDisabled(true)
-    return
   }
 
-  enter(0)
+  function start() {
+    if (started) return
+    markStarted()
+    if (reduced) {
+      startReducedMotion()
+      return
+    }
+    enter(0)
+  }
+
+  if (options.startWhenVisible && typeof IntersectionObserver !== 'undefined') {
+    visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          visibilityObserver?.disconnect()
+          visibilityObserver = undefined
+          start()
+        }
+      },
+      { threshold: options.visibilityThreshold ?? 0.25 },
+    )
+    visibilityObserver.observe(root)
+  } else {
+    start()
+  }
 }
 
 export function animateProgress(el: HTMLElement | null, percent: number, reduced: boolean) {
@@ -139,6 +221,9 @@ export function typeTerminalLines(
   onDone?: () => void,
 ) {
   if (!el) return
+  const runId = (terminalRuns.get(el) ?? 0) + 1
+  terminalRuns.set(el, runId)
+
   if (reduced) {
     el.innerHTML = lines.join('\n')
     onDone?.()
@@ -148,6 +233,7 @@ export function typeTerminalLines(
   let i = 0
   el.innerHTML = ''
   const tick = () => {
+    if (terminalRuns.get(el) !== runId) return
     if (i >= lines.length) {
       onDone?.()
       return

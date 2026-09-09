@@ -49,47 +49,66 @@ const steps = [
 </div>
 
 <script>
-  import { animateProgress, setupTeachingConsole } from './teaching-console.client.ts'
+  import { animateProgress, setupTeachingConsole, type TeachingContext } from './teaching-console.client.ts'
 
   document.querySelectorAll<HTMLElement>('[data-tc-demo="live-update"]').forEach((root) => {
-    let rolloutTimer: ReturnType<typeof setTimeout> | undefined
+    let rolloutTimers: ReturnType<typeof setTimeout>[] = []
+    let rolloutGen = 0
 
-    function runRollout(ctx: { root: HTMLElement; prefersReducedMotion: boolean; setStatus: (t: string) => void; setActionDisabled: (d: boolean) => void }) {
+    function clearRolloutTimers() {
+      rolloutTimers.forEach((id) => clearTimeout(id))
+      rolloutTimers = []
+      rolloutGen += 1
+    }
+
+    function selectedChannel() {
+      const btn = root.querySelector<HTMLElement>('[data-lu-channel].is-selected')
+      return btn?.getAttribute('data-lu-channel') || 'production'
+    }
+
+    function runRollout(ctx: TeachingContext) {
+      clearRolloutTimers()
+      const gen = rolloutGen
+      const channel = selectedChannel()
       const bar = ctx.root.querySelector<HTMLElement>('[data-lu-bar]')
       const pct = ctx.root.querySelector<HTMLElement>('[data-lu-pct]')
       const health = ctx.root.querySelector<HTMLElement>('[data-lu-health]')
-      const show = () => {
-        ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="rollout"]').forEach((el) => {
-          el.hidden = false
-        })
-      }
-      show()
+      ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="rollout"]').forEach((el) => {
+        el.hidden = false
+      })
+      ctx.registerCancel(clearRolloutTimers)
+
       if (ctx.prefersReducedMotion) {
         animateProgress(bar, 100, true)
         if (pct) pct.textContent = '100%'
         if (health) health.textContent = 'Health checks passed'
-        ctx.setStatus('Rollout complete — 100% on production.')
+        ctx.setStatus(`Rollout complete — 100% on ${channel}.`)
         ctx.setActionDisabled(true)
         return
       }
       animateProgress(bar, 10, false)
       if (pct) pct.textContent = '10%'
       if (health) health.textContent = 'Cohort warming'
-      ctx.setStatus('Rolling out to 10% of production devices…')
-      clearTimeout(rolloutTimer)
-      rolloutTimer = setTimeout(() => {
-        if (health) health.textContent = '10% cohort healthy'
-        ctx.setStatus('10% cohort healthy — expanding rollout.')
-        animateProgress(bar, 55, false)
-        if (pct) pct.textContent = '55%'
-      }, 900)
-      setTimeout(() => {
-        animateProgress(bar, 100, false)
-        if (pct) pct.textContent = '100%'
-        if (health) health.textContent = 'Health checks passed'
-        ctx.setStatus('Rollout complete — 100% on production.')
-        ctx.setActionDisabled(true)
-      }, 2200)
+      ctx.setStatus(`Rolling out to 10% of ${channel} devices…`)
+      rolloutTimers.push(
+        setTimeout(() => {
+          if (gen !== rolloutGen) return
+          if (health) health.textContent = '10% cohort healthy'
+          ctx.setStatus(`10% cohort healthy on ${channel} — expanding rollout.`)
+          animateProgress(bar, 55, false)
+          if (pct) pct.textContent = '55%'
+        }, 900),
+      )
+      rolloutTimers.push(
+        setTimeout(() => {
+          if (gen !== rolloutGen) return
+          animateProgress(bar, 100, false)
+          if (pct) pct.textContent = '100%'
+          if (health) health.textContent = 'Health checks passed'
+          ctx.setStatus(`Rollout complete — 100% on ${channel}.`)
+          ctx.setActionDisabled(true)
+        }, 2200),
+      )
     }
 
     setupTeachingConsole(root, [
@@ -98,9 +117,16 @@ const steps = [
         actionLabel: 'Publish bundle',
         status: 'Review bundle details, then publish.',
         enter(ctx) {
+          clearRolloutTimers()
           ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="rollout"]').forEach((el) => {
             el.hidden = true
           })
+          const bar = ctx.root.querySelector<HTMLElement>('[data-lu-bar]')
+          animateProgress(bar, 0, true)
+          const pct = ctx.root.querySelector('[data-lu-pct]')
+          const health = ctx.root.querySelector('[data-lu-health]')
+          if (pct) pct.textContent = '0%'
+          if (health) health.textContent = 'Waiting to start'
         },
       },
       {
@@ -108,8 +134,12 @@ const steps = [
         actionLabel: 'Assign to channel',
         status: 'Pick a channel, then assign this bundle.',
         enter(ctx) {
+          clearRolloutTimers()
           ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="channel"]').forEach((el) => {
             el.hidden = false
+          })
+          ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="rollout"]').forEach((el) => {
+            el.hidden = true
           })
         },
       },
@@ -118,15 +148,24 @@ const steps = [
         actionLabel: 'Watch rollout',
         status: 'Rolling out to 10% of production devices…',
         enter(ctx) {
+          const channel = selectedChannel()
+          ctx.setStatus(`Rolling out to 10% of ${channel} devices…`)
           runRollout(ctx)
+        },
+        leave() {
+          clearRolloutTimers()
         },
       },
     ])
 
     root.querySelectorAll<HTMLButtonElement>('[data-lu-channel]').forEach((btn) => {
       btn.addEventListener('click', () => {
-        root.querySelectorAll('[data-lu-channel]').forEach((el) => el.classList.remove('is-selected'))
+        root.querySelectorAll<HTMLButtonElement>('[data-lu-channel]').forEach((el) => {
+          el.classList.remove('is-selected')
+          el.setAttribute('aria-pressed', 'false')
+        })
         btn.classList.add('is-selected')
+        btn.setAttribute('aria-pressed', 'true')
       })
     })
   })

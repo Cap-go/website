@@ -45,56 +45,66 @@ const steps = [
   import { setupTeachingConsole, typeTerminalLines } from './teaching-console.client.ts'
 
   document.querySelectorAll<HTMLElement>('[data-tc-demo="capgo-cli"]').forEach((root) => {
-    setupTeachingConsole(root, [
-      {
-        id: 'command',
-        actionLabel: 'Run upload',
-        status: 'Run the upload command against production.',
-        enter(ctx) {
-          typeTerminalLines(
-            ctx.query('[data-cli-term]'),
-            ['<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production'],
-            ctx.prefersReducedMotion,
-          )
+    setupTeachingConsole(
+      root,
+      [
+        {
+          id: 'command',
+          actionLabel: 'Run upload',
+          status: 'Run the upload command against production.',
+          enter(ctx) {
+            const result = ctx.query('[data-cli-result]')
+            if (result) result.textContent = 'Waiting'
+            ctx.setActionDisabled(false)
+            typeTerminalLines(
+              ctx.query('[data-cli-term]'),
+              ['<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production'],
+              ctx.prefersReducedMotion,
+            )
+          },
         },
-      },
-      {
-        id: 'output',
-        actionLabel: 'Stream output',
-        status: 'Uploading bundle and verifying compatibility…',
-        enter(ctx) {
-          typeTerminalLines(
-            ctx.query('[data-cli-term]'),
-            [
-              '<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production',
-              '<span class="dim">packing dist/… 2.1 MB</span>',
-              '<span class="ok">✓</span> compatibility check passed',
-              '<span class="dim">uploading…</span>',
-            ],
-            ctx.prefersReducedMotion,
-          )
+        {
+          id: 'output',
+          actionLabel: 'Stream output',
+          status: 'Uploading bundle and verifying compatibility…',
+          enter(ctx) {
+            const result = ctx.query('[data-cli-result]')
+            if (result) result.textContent = 'Waiting'
+            ctx.setActionDisabled(false)
+            typeTerminalLines(
+              ctx.query('[data-cli-term]'),
+              [
+                '<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production',
+                '<span class="dim">packing dist/… 2.1 MB</span>',
+                '<span class="ok">✓</span> compatibility check passed',
+                '<span class="dim">uploading…</span>',
+              ],
+              ctx.prefersReducedMotion,
+            )
+          },
         },
-      },
-      {
-        id: 'done',
-        actionLabel: 'Done',
-        status: 'Bundle 1.0.2 linked to production.',
-        enter(ctx) {
-          typeTerminalLines(
-            ctx.query('[data-cli-term]'),
-            [
-              '<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production',
-              '<span class="ok">✓</span> compatibility check passed',
-              '<span class="ok">✓</span> uploaded 1.0.2',
-              '<span class="ok">✓</span> channel production updated',
-            ],
-            ctx.prefersReducedMotion,
-          )
-          const result = ctx.query('[data-cli-result]')
-          if (result) result.textContent = '1.0.2 on production'
-          ctx.setActionDisabled(true)
+        {
+          id: 'done',
+          actionLabel: 'Done',
+          status: 'Bundle 1.0.2 linked to production.',
+          enter(ctx) {
+            typeTerminalLines(
+              ctx.query('[data-cli-term]'),
+              [
+                '<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production',
+                '<span class="ok">✓</span> compatibility check passed',
+                '<span class="ok">✓</span> uploaded 1.0.2',
+                '<span class="ok">✓</span> channel production updated',
+              ],
+              ctx.prefersReducedMotion,
+            )
+            const result = ctx.query('[data-cli-result]')
+            if (result) result.textContent = '1.0.2 on production'
+            ctx.setActionDisabled(true)
+          },
         },
-      },
-    ])
+      ],
+      { startWhenVisible: true },
+    )
   })
 </script>
