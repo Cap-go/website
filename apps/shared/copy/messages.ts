@@ -3005,6 +3005,9 @@ const messages = {
   security_out_of_scope_9: 'Lack of Secure or HTTP only flag on non-sensitive cookies',
   security_out_of_scope_title: 'Out of scope vulnerabilities:',
   security_policy: 'Security Policy',
+  security_product_seo_title: 'Capgo Security — sign, attest, and gate releases',
+  security_product_seo_description:
+    'Capgo Security: signed bundles, attestation, and trust gates in the Capgo console — plus our vulnerability disclosure policy.',
   security_reporting_guidelines_1: 'Submit your findings through our GitHub Security Advisory:',
   security_reporting_guidelines_2: 'Do provide sufficient information to reproduce the problem, so we will be able to resolve it as quickly as possible.',
   security_reporting_guidelines_3:

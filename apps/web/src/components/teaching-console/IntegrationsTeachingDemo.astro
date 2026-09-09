@@ -57,16 +57,16 @@ const steps = [
         setText('[data-int-provider]', 'GitHub · authorizing…')
         setText('[data-int-hook]', '—')
         setText('[data-int-event]', '—')
-        const term = ctx.query('[data-int-term]')
-        if (term) term.innerHTML = '<span class="dim">No events yet</span>'
+        // Bump typeTerminalLines run id so a still-typing Flow run cannot append after reset.
+        typeTerminalLines(ctx.query('[data-int-term]'), ['<span class="dim">No events yet</span>'], true)
         return
       }
       setText('[data-int-provider]', 'GitHub · connected')
       setText('[data-int-hook]', 'https://api.capgo.app/hooks/gh/demo')
       if (step === 'webhook') {
         setText('[data-int-event]', '—')
-        const term = ctx.query('[data-int-term]')
-        if (term) term.innerHTML = '<span class="dim">No events yet</span>'
+        // Invalidate any in-flight Flow typing before clearing the terminal.
+        typeTerminalLines(ctx.query('[data-int-term]'), ['<span class="dim">No events yet</span>'], true)
         return
       }
       setText('[data-int-event]', 'release.published · v1.0.2')
