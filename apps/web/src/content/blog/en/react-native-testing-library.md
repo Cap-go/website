@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-09T08:22:29.910Z
-updated_at: 2026-09-09T08:22:31.171Z
+updated_at: 2026-09-09T08:25:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/65e1a1bf-4039-4166-878b-a5ea088c9117/react-native-testing-library-illustration.jpg'
 head_image_alt: React Native Testing Library How to Test Apps Right
 keywords: 'react native testing library, react native testing, jest testing, mobile app testing, capacitor testing'
