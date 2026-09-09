@@ -148,6 +148,52 @@ When `--skip-build-number-bump` is set, the build uses whatever version is alrea
 
 **Retention format:** Use human-readable durations like `1h`, `6h`, `2d`, `7d`. Minimum is 1 hour, maximum is 7 days. When set via env var, use seconds (e.g., `3600` for 1 hour).
 
+### Build cache
+
+Capgo saves compiled native artifacts (CocoaPods, Gradle, and related build outputs) **per app** so repeat builds start faster. **Build cache is enabled by default** for each app.
+
+| CLI Flag | API field | Default | Description |
+|----------|-----------|---------|-------------|
+| `--no-cache` | `cache_enabled: false` | cache on | Disable cache for this build: skip restore **and** do not save a new entry |
+| `--cache-key <value>` | `cache_key` | *(omit)* | Partition the cache (for example `prod`, `staging`). Omit for one shared general cache per app |
+
+CLI equivalents: [`build request`](/docs/cli/reference/build/#build-request) accepts `--no-cache` and `--cache-key`.
+
+<Aside type="tip">
+Use different `--cache-key` values when RC and production builds share the same app ID but must not reuse each other's compiled output — for example `--cache-key=prod` and `--cache-key=staging`.
+</Aside>
+
+**CLI examples:**
+
+```bash
+# Default: restore/save the shared per-app cache
+bunx @capgo/cli@latest build request com.example.app --platform android
+
+# Separate caches per environment
+bunx @capgo/cli@latest build request com.example.app --platform android \
+  --cache-key=prod
+
+bunx @capgo/cli@latest build request com.example.app --platform android \
+  --cache-key=staging \
+  --android-flavor staging
+
+# One-off clean build (no restore, no save)
+bunx @capgo/cli@latest build request com.example.app --platform ios --no-cache
+```
+
+**API / webhook payload** (when your integration calls Capgo Build directly):
+
+```json
+{
+  "platform": "android",
+  "cache_key": "prod"
+}
+```
+
+Omit `cache_key` for the shared general cache. Set `cache_key` to partition by environment. Set `"cache_enabled": false` to disable cache for a single request (same as `--no-cache`).
+
+If a build looks successful but the artifact is wrong — or an Android AAB is missing after switching RC vs production — try a dedicated cache key or a one-off `--no-cache` build. See [Troubleshooting: wrong cache restore](/docs/builder/troubleshooting/#build-succeeded-but-artifact-is-wrong-after-an-environment-switch).
+
 ### Authentication
 
 | CLI Flag | Env Variable | Default | Description |

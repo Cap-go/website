@@ -135,6 +135,8 @@ npx @capgo/cli@latest build request com.example.app --platform ios --path .
 | **--no-output-upload** | <code>boolean</code> | Override output upload behavior for this build only (disable). Precedence: CLI > env > saved credentials |
 | **--output-retention** | <code>string</code> | Override output link TTL for this build only (1h to 7d). Examples: 1h, 6h, 2d. Precedence: CLI > env > saved credentials |
 | **--output-record** | <code>string</code> | After a successful build, write a JSON record (jobId, status, outputUrl, qrCodeAscii, qrCodePngPath, finishedAt) to a path. A PNG QR code is also written next to that path with the `.qr.png` suffix. Read fields back with `build last-output`. |
+| **--no-cache** | <code>boolean</code> | Skip build cache restore **and** do not save a new cache entry for this build. Build cache is enabled by default per app. |
+| **--cache-key** | <code>string</code> | Partition the build cache by environment, branch, or Android flavor (for example `prod`, `staging`). Omit for one shared default cache per app. |
 | **--no-skip-build-number-bump** | <code>boolean</code> | Override saved credentials to re-enable automatic build number incrementing for this build only. |
 | **--skip-marketing-version-bump** | <code>boolean</code> | Skip automatic marketing version (CFBundleShortVersionString / versionName) bump when the app is already released. |
 | **--sync-ios-version** | <code>boolean</code> | iOS: sync Xcode MARKETING_VERSION from package.json before uploading the project. |
@@ -150,6 +152,8 @@ npx @capgo/cli@latest build request com.example.app --platform ios --path .
 | **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
 | **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
 | **--verbose** | <code>boolean</code> | Enable verbose output with detailed logging |
+
+**Build cache:** Capgo restores and saves compiled native artifacts (CocoaPods, Gradle, and related outputs) per app by default. Use `--cache-key` to keep RC and production caches separate; use `--no-cache` for a one-off clean build. API integrations can pass `cache_key` or `cache_enabled: false` in the build request payload. See [Build cache](/docs/builder/configuration/#build-cache) and [Troubleshooting: wrong cache restore](/docs/builder/troubleshooting/#build-succeeded-but-artifact-is-wrong-after-an-environment-switch).
 
 ### <a id="build-sync-ios-version"></a> 🔹 **Sync-ios-version**
 

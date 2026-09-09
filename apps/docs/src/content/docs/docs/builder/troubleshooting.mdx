@@ -425,6 +425,41 @@ Very large projects may hit the build-time limit (see [Known Limitations](#known
    - Check Play Console → Testing → Internal testing
    - Processing may take a few minutes
 
+### Build succeeded but artifact is wrong after an environment switch
+
+**Symptoms:**
+- Build status is `success` but the IPA/AAB/APK does not match the branch or flavor you just built
+- Android AAB missing or wrong after switching RC vs production credentials or `--android-flavor`
+- Build finishes suspiciously fast right after changing signing config or product flavor
+
+**Cause:** Capgo restores the **per-app build cache** by default (omit `cache_key` for the shared general cache). If RC and production share the same app ID without separate keys, a restore can reuse compiled output from the previous environment.
+
+**Solutions:**
+
+1. **Use a cache key per environment** (recommended for ongoing RC/PROD pipelines):
+
+   ```bash
+   # Production
+   bunx @capgo/cli@latest build request com.example.app --platform android \
+     --cache-key=prod \
+     --android-flavor production
+
+   # Staging / RC
+   bunx @capgo/cli@latest build request com.example.app --platform android \
+     --cache-key=staging \
+     --android-flavor staging
+   ```
+
+2. **Force one clean build** when debugging:
+
+   ```bash
+   bunx @capgo/cli@latest build request com.example.app --platform android --no-cache
+   ```
+
+3. **In API or webhook integrations**, pass `cache_key` (for example `"prod"`) or set `cache_enabled: false` for a single clean run.
+
+See [Build cache](/docs/builder/configuration/#build-cache) for the full option reference.
+
 ## CI/CD Specific Issues
 
 ### GitHub Actions: "Command not found"
@@ -527,6 +562,7 @@ See the full catalog: [Prescan checks](/docs/builder/prescan/).
 ## Additional Resources
 
 - [Getting Started](/docs/builder/getting-started/) - Initial setup guide
+- [Configuration Options](/docs/builder/configuration/) - CLI flags including [`--cache-key`](/docs/builder/configuration/#build-cache) and `--no-cache`
 - [iOS Builds](/docs/builder/ios/) - iOS-specific configuration
 - [Android Builds](/docs/builder/android/) - Android-specific configuration
 - [Prescan checks](/docs/builder/prescan/) - Full list of pre-build checks and ignore flags

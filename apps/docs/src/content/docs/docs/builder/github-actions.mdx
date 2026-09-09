@@ -427,6 +427,10 @@ By default each release build increments the build number. To pin it to a value 
 
 ### Cache dependencies
 
+<Aside type="note">
+This section is about **GitHub Actions** caching on the CI runner (local `Pods/` and `.gradle` before upload). Capgo also keeps a **cloud build cache** per app on the build runner (enabled by default; omit `cache_key` for the shared general cache). Pass [`--cache-key`](/docs/builder/configuration/#build-cache) to partition RC and production, or `--no-cache` to disable restore and save. See [Troubleshooting: wrong cache restore](/docs/builder/troubleshooting/#build-succeeded-but-artifact-is-wrong-after-an-environment-switch).
+</Aside>
+
 `bun install` is already fast enough that a JS-deps cache rarely pays off, but Capacitor's native dependencies (CocoaPods, Gradle) are worth caching for larger projects:
 
 ```yaml
