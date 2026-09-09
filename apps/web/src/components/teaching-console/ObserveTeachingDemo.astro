@@ -51,9 +51,9 @@ const steps = [
             <path stroke-linecap="round" d="M12 7v5l3 2" />
           </svg>
         </div>
-        <p class="tc-sr-only" id="observe-timing-desc">Launch P90 stays near 0.8–0.9s, Launch P50 near 0.8s, and WebView P90 trends from about 1.1s down toward 1.0s across 7–13 Jul.</p>
-        <svg class="tc-chart-svg" viewBox="0 0 360 140" role="img" aria-labelledby="observe-timing-title" aria-describedby="observe-timing-desc">
-          <title id="observe-timing-title">Line chart of launch and WebView timing</title>
+        <p class="tc-sr-only" id="observe-timing-desc">WebView P90 fluctuates around 1.1–1.3s and trends upward across 7–13 Jul; Launch P90 stays near 0.9–1.0s; Launch P50 stays near 0.8s.</p>
+        <svg class="tc-chart-svg" viewBox="0 0 360 140" aria-hidden="true" focusable="false">
+          <title>Line chart of launch and WebView timing</title>
           <g class="tc-chart-grid" stroke="#e2e8f0" stroke-width="1">
             <line x1="36" y1="18" x2="350" y2="18" />
             <line x1="36" y1="48" x2="350" y2="48" />
@@ -138,8 +138,8 @@ const steps = [
           </svg>
         </div>
         <p class="tc-sr-only" id="observe-events-desc">Daily launches near 3.0–3.3k, WebView loads near 2.8–3.0k, and native issues near 200–500 — far below the launch volume on a 0–3.5k axis.</p>
-        <svg class="tc-chart-svg" viewBox="0 0 360 140" role="img" aria-labelledby="observe-events-title" aria-describedby="observe-events-desc">
-          <title id="observe-events-title">Bar chart of events and issues</title>
+        <svg class="tc-chart-svg" viewBox="0 0 360 140" aria-hidden="true" focusable="false">
+          <title>Bar chart of events and issues</title>
           <g class="tc-chart-grid" stroke="#e2e8f0" stroke-width="1">
             <line x1="36" y1="18" x2="350" y2="18" />
             <line x1="36" y1="48" x2="350" y2="48" />
@@ -194,10 +194,10 @@ const steps = [
           </tr>
         </thead>
         <tbody>
-          <tr data-observe-row="stable">
+          <tr class="is-focus" data-observe-row="stable">
             <td>4.8.0</td><td>42.1k</td><td>6,980</td><td>98.9%</td><td>760 ms</td><td>1.1 s</td>
           </tr>
-          <tr class="is-focus" data-observe-row="rollout">
+          <tr data-observe-row="rollout">
             <td>4.8.1</td><td>18.6k</td><td>2,140</td><td data-m="vIssue">88.4%</td><td data-m="vLaunch">1.4 s</td><td data-m="vWeb">2.1 s</td>
           </tr>
         </tbody>
@@ -273,9 +273,6 @@ const steps = [
     launch: '781 ms',
     webview: '1.2 s',
     native: '326',
-    vIssue: '98.9%',
-    vLaunch: '760 ms',
-    vWeb: '1.1 s',
     errCount: '82',
     errShare: '44.6%',
   }

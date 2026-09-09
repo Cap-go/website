@@ -160,7 +160,7 @@ const steps = [
         const reduced =
           typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
         typeTerminalLines(
-          root.querySelector('[data-plugin-term]'),
+          root.querySelector<HTMLElement>('[data-plugin-term]'),
           snippetFor(stepId),
           reduced,
         )

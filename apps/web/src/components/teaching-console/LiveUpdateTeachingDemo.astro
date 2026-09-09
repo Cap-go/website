@@ -122,7 +122,7 @@ const steps = [
             el.hidden = true
           })
           const bar = ctx.root.querySelector<HTMLElement>('[data-lu-bar]')
-          animateProgress(bar, 0, true)
+          animateProgress(bar, 0, ctx.prefersReducedMotion)
           const pct = ctx.root.querySelector('[data-lu-pct]')
           const health = ctx.root.querySelector('[data-lu-health]')
           if (pct) pct.textContent = '0%'

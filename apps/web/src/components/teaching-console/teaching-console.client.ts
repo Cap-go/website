@@ -30,7 +30,6 @@ function prefersReducedMotion() {
 }
 
 const terminalRuns = new WeakMap<HTMLElement, number>()
-const cancelFns = new WeakMap<HTMLElement, Set<() => void>>()
 
 export function setupTeachingConsole(
   root: HTMLElement,
@@ -45,7 +44,6 @@ export function setupTeachingConsole(
   const stepButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-tc-step-btn]'))
   const reduced = prefersReducedMotion()
   const cancels = new Set<() => void>()
-  cancelFns.set(root, cancels)
 
   let index = 0
   let timer: ReturnType<typeof setTimeout> | undefined
@@ -192,6 +190,8 @@ export function setupTeachingConsole(
   }
 
   if (options.startWhenVisible && typeof IntersectionObserver !== 'undefined') {
+    // Prevent footer action from advancing before enter(0) has run.
+    ctx.setActionDisabled(true)
     visibilityObserver = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
