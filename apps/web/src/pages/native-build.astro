@@ -921,8 +921,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
               </div>
             </div>
             <div class="demo-controls aidebug-controls">
-              <span>Optional. Only runs if you choose Capgo AI.</span>
-              <button class="demo-replay" id="aidebug-replay" type="button">⟲ Replay</button>
+              <span>Optional. Only runs if you choose Capgo AI. Teaching console above covers the interactive build flow — no separate replay.</span>
             </div>
           </div>
 
@@ -7172,8 +7171,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       )
       io.observe(body)
 
-      const replay = document.getElementById('aidebug-replay')
-      if (replay) replay.addEventListener('click', run)
+      // aidebug Replay folded into NativeBuildTeachingDemo (no separate replay control)
     })()
   </script>
 </Layout>

@@ -39,6 +39,149 @@ const steps = [
       <article class="tc-metric is-bad"><p>Native issues</p><strong data-m="native">326</strong></article>
     </div>
 
+    <div data-tc-panel="observe" class="tc-charts" aria-label="Observe charts">
+      <div class="tc-card tc-card-pad tc-chart-card">
+        <div class="tc-card-head">
+          <div>
+            <h3 class="tc-card-title">Launch and WebView timing</h3>
+            <p class="tc-chart-sub">Daily P50 and P90 timing across reported versions.</p>
+          </div>
+          <svg class="tc-chart-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path stroke-linecap="round" d="M12 7v5l3 2" />
+          </svg>
+        </div>
+        <svg class="tc-chart-svg" viewBox="0 0 360 140" role="img" aria-label="Line chart of launch and WebView timing">
+          <g class="tc-chart-grid" stroke="#e2e8f0" stroke-width="1">
+            <line x1="36" y1="18" x2="350" y2="18" />
+            <line x1="36" y1="48" x2="350" y2="48" />
+            <line x1="36" y1="78" x2="350" y2="78" />
+            <line x1="36" y1="108" x2="350" y2="108" />
+          </g>
+          <g class="tc-chart-axis" fill="#94a3b8" font-size="9" font-family="ui-sans-serif, system-ui, sans-serif">
+            <text x="4" y="22">1.4s</text>
+            <text x="4" y="52">1.2s</text>
+            <text x="4" y="82">1.0s</text>
+            <text x="8" y="112">0.8s</text>
+            <text x="40" y="132">7 Jul</text>
+            <text x="95" y="132">8 Jul</text>
+            <text x="150" y="132">9 Jul</text>
+            <text x="200" y="132">10 Jul</text>
+            <text x="255" y="132">11 Jul</text>
+            <text x="310" y="132">13 Jul</text>
+          </g>
+          <!-- WebView P90 area + line (green) -->
+          <path
+            class="tc-chart-area tc-chart-area--webview"
+            d="M48,62 L100,48 L154,55 L208,42 L262,50 L318,38 L318,108 L48,108 Z"
+            fill="rgba(16,185,129,0.12)"
+          />
+          <path
+            class="tc-chart-line tc-chart-line--webview"
+            d="M48,62 L100,48 L154,55 L208,42 L262,50 L318,38"
+            fill="none"
+            stroke="#10b981"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <!-- Launch P90 (red) -->
+          <path
+            class="tc-chart-line tc-chart-line--launch"
+            d="M48,92 L100,88 L154,90 L208,86 L262,84 L318,82"
+            fill="none"
+            stroke="#ef4444"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <!-- Launch P50 (blue) -->
+          <path
+            class="tc-chart-line tc-chart-line--p50"
+            d="M48,100 L100,98 L154,99 L208,97 L262,96 L318,95"
+            fill="none"
+            stroke="#3b82f6"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <g fill="#10b981">
+            <circle cx="48" cy="62" r="2.5" /><circle cx="100" cy="48" r="2.5" /><circle cx="154" cy="55" r="2.5" />
+            <circle cx="208" cy="42" r="2.5" /><circle cx="262" cy="50" r="2.5" /><circle cx="318" cy="38" r="2.5" />
+          </g>
+          <g fill="#ef4444">
+            <circle cx="48" cy="92" r="2.5" /><circle cx="100" cy="88" r="2.5" /><circle cx="154" cy="90" r="2.5" />
+            <circle cx="208" cy="86" r="2.5" /><circle cx="262" cy="84" r="2.5" /><circle cx="318" cy="82" r="2.5" />
+          </g>
+          <g fill="#3b82f6">
+            <circle cx="48" cy="100" r="2" /><circle cx="100" cy="98" r="2" /><circle cx="154" cy="99" r="2" />
+            <circle cx="208" cy="97" r="2" /><circle cx="262" cy="96" r="2" /><circle cx="318" cy="95" r="2" />
+          </g>
+        </svg>
+        <ul class="tc-chart-legend" aria-hidden="true">
+          <li><i class="is-webview"></i>WebView P90</li>
+          <li><i class="is-launch"></i>Launch P90</li>
+          <li><i class="is-p50"></i>Launch P50</li>
+        </ul>
+      </div>
+
+      <div class="tc-card tc-card-pad tc-chart-card">
+        <div class="tc-card-head">
+          <div>
+            <h3 class="tc-card-title">Events and issues</h3>
+            <p class="tc-chart-sub">Daily launches, WebView loads, and native issues.</p>
+          </div>
+          <svg class="tc-chart-ico is-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h3l3-7 4 14 3-7h5" />
+          </svg>
+        </div>
+        <svg class="tc-chart-svg" viewBox="0 0 360 140" role="img" aria-label="Bar chart of events and issues">
+          <g class="tc-chart-grid" stroke="#e2e8f0" stroke-width="1">
+            <line x1="36" y1="18" x2="350" y2="18" />
+            <line x1="36" y1="48" x2="350" y2="48" />
+            <line x1="36" y1="78" x2="350" y2="78" />
+            <line x1="36" y1="108" x2="350" y2="108" />
+          </g>
+          <g class="tc-chart-axis" fill="#94a3b8" font-size="9" font-family="ui-sans-serif, system-ui, sans-serif">
+            <text x="2" y="22">3.5k</text>
+            <text x="2" y="52">3.0k</text>
+            <text x="2" y="82">2.5k</text>
+            <text x="2" y="112">2.0k</text>
+            <text x="42" y="132">7 Jul</text>
+            <text x="97" y="132">8 Jul</text>
+            <text x="152" y="132">9 Jul</text>
+            <text x="202" y="132">10 Jul</text>
+            <text x="257" y="132">11 Jul</text>
+            <text x="312" y="132">13 Jul</text>
+          </g>
+          <!-- grouped bars: launches (blue), webview (teal), issues (red tiny) -->
+          <rect x="48" y="36" width="10" height="72" rx="2" fill="#93c5fd" />
+          <rect x="60" y="53" width="10" height="55" rx="2" fill="#5eead4" />
+          <rect x="72" y="102" width="6" height="6" rx="1.5" fill="#f87171" />
+          <rect x="103" y="40" width="10" height="68" rx="2" fill="#93c5fd" />
+          <rect x="115" y="58" width="10" height="50" rx="2" fill="#5eead4" />
+          <rect x="127" y="103" width="6" height="5" rx="1.5" fill="#f87171" />
+          <rect x="158" y="33" width="10" height="75" rx="2" fill="#93c5fd" />
+          <rect x="170" y="50" width="10" height="58" rx="2" fill="#5eead4" />
+          <rect x="182" y="101" width="6" height="7" rx="1.5" fill="#f87171" />
+          <rect x="213" y="46" width="10" height="62" rx="2" fill="#93c5fd" />
+          <rect x="225" y="60" width="10" height="48" rx="2" fill="#5eead4" />
+          <rect x="237" y="104" width="6" height="4" rx="1.5" fill="#f87171" />
+          <rect x="268" y="38" width="10" height="70" rx="2" fill="#93c5fd" />
+          <rect x="280" y="56" width="10" height="52" rx="2" fill="#5eead4" />
+          <rect x="292" y="100" width="6" height="8" rx="1.5" fill="#f87171" />
+          <rect x="323" y="30" width="10" height="78" rx="2" fill="#93c5fd" />
+          <rect x="335" y="48" width="10" height="60" rx="2" fill="#5eead4" />
+          <rect x="347" y="98" width="6" height="10" rx="1.5" fill="#f87171" />
+        </svg>
+        <ul class="tc-chart-legend" aria-hidden="true">
+          <li><i class="is-launches"></i>Launches</li>
+          <li><i class="is-loads"></i>WebView loads</li>
+          <li><i class="is-issues"></i>Native issues</li>
+        </ul>
+      </div>
+    </div>
+
     <div data-tc-panel="observe" class="tc-card">
       <table class="tc-table" aria-label="Version breakdown">
         <thead>

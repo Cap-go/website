@@ -3,7 +3,7 @@ import ConsoleShell from './ConsoleShell.astro'
 
 const steps = [
   { id: 'queue', label: 'Queue', hint: 'Request a signed build' },
-  { id: 'compile', label: 'Compile', hint: 'Cloud build progress' },
+  { id: 'compile', label: 'Compile', hint: 'Cloud build + AI assist' },
   { id: 'artifact', label: 'Artifact', hint: 'Signed IPA ready' },
 ]
 ---
@@ -15,7 +15,7 @@ const steps = [
     breadcrumbs={'apps / Demo app / Builds / <strong>ios-release-184</strong>'}
     activeTab="builds"
     title="Native build"
-    subtitle="Queue a cloud build, watch compile progress, then download the signed artifact."
+    subtitle="Queue a cloud build, watch compile progress with Capgo AI assist, then download the signed artifact."
     status="Queue an iOS release build for com.demo.app."
     actionLabel="Queue iOS build"
   >
@@ -39,6 +39,12 @@ const steps = [
         </div>
       </dl>
     </div>
+    <div class="tc-ai-card" data-nb-ai hidden>
+      <strong>Capgo AI</strong>
+      <p data-nb-ai-copy>
+        Optional assist while the cloud build runs — same diagnosis surface as Capgo Builder AI debug, without a separate replay control.
+      </p>
+    </div>
   </ConsoleShell>
 </div>
 
@@ -53,6 +59,8 @@ const steps = [
         status: 'Queue an iOS release build for com.demo.app.',
         enter(ctx) {
           ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="artifact"]').forEach((el) => (el.hidden = true))
+          const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
+          if (ai) ai.hidden = true
           const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
           animateProgress(bar, 0, true)
           const phase = ctx.root.querySelector('[data-nb-phase]')
@@ -69,6 +77,12 @@ const steps = [
           const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
           const phase = ctx.root.querySelector('[data-nb-phase]')
           const pct = ctx.root.querySelector('[data-nb-pct]')
+          const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
+          const aiCopy = ctx.root.querySelector('[data-nb-ai-copy]')
+          if (ai) ai.hidden = false
+          if (aiCopy)
+            aiCopy.innerHTML =
+              'Codesign tip from Capgo AI: regenerate the profile for <code>com.demo.app</code>, or run <code>capgo build init --platform ios</code> — then re-queue.'
           if (ctx.prefersReducedMotion) {
             animateProgress(bar, 100, true)
             if (phase) phase.textContent = 'Signing'
@@ -96,6 +110,10 @@ const steps = [
         status: 'Signed artifact ready — DemoApp-1.0.0-184.ipa',
         enter(ctx) {
           ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="artifact"]').forEach((el) => (el.hidden = false))
+          const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
+          const aiCopy = ctx.root.querySelector('[data-nb-ai-copy]')
+          if (ai) ai.hidden = false
+          if (aiCopy) aiCopy.textContent = 'Build healthy — Capgo AI stayed available if codesign or pods had failed.'
           const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
           animateProgress(bar, 100, ctx.prefersReducedMotion)
           const phase = ctx.root.querySelector('[data-nb-phase]')

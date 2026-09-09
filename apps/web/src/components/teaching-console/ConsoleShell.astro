@@ -51,11 +51,39 @@ const {
 } = Astro.props
 
 const nav = [
-  { label: 'Dashboard', path: 'M3 12l9-9 9 9M5 10v10h5v-6h4v6h5V10' },
-  { label: 'Apps', path: 'M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z' },
-  { label: 'API Keys', path: 'M15 7a4 4 0 11-3.2 6.4L4 21l-1-1 7.2-7.2A4 4 0 0115 7zm0 2a2 2 0 100 4 2 2 0 000-4z' },
-  { label: 'Documentation', path: 'M6 3h9l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1zm8 1.5V9h4.5' },
-  { label: 'Discord', path: 'M8 15c1 1 2.5 1.5 4 1.5s3-.5 4-1.5M8.5 10h.01M15.5 10h.01M6 8c1-3 4-4 6-4s5 1 6 4c1 2 1.5 5 .5 7-1.5 1-3.5 2-6.5 2s-5-1-6.5-2c-1-2-.5-5 .5-7z' },
+  {
+    label: 'Dashboard',
+    // Lucide-like bar chart (real console)
+    paths: ['M4 20V10', 'M10 20V4', 'M16 20v-7', 'M22 20H2'],
+    stroke: true,
+  },
+  {
+    label: 'Apps',
+    // Capgo webapp uses the App Store "A" mark for Apps
+    paths: ['M12 3.5L16.8 20h-2.4l-1-3.2H10.6l-1 3.2H7.2L12 3.5z', 'M11.05 14.2h1.9L12 11.1z'],
+    stroke: true,
+  },
+  {
+    label: 'API Keys',
+    // Shield with keyhole
+    paths: ['M12 3l7 3v5c0 4.5-3.1 8.4-7 9.5C8.1 19.4 5 15.5 5 11V6l7-3z', 'M12 11a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm0 0v3.5'],
+    stroke: true,
+  },
+  {
+    label: 'Documentation',
+    paths: ['M7 3.5h7.5L19 8v12.5a1 1 0 01-1 1H7a1 1 0 01-1-1V4.5a1 1 0 011-1z', 'M14 3.5V8h4.5', 'M9 12h6', 'M9 15.5h6'],
+    stroke: true,
+    external: true,
+  },
+  {
+    label: 'Discord',
+    paths: [
+      'M19.3 5.8A16.4 16.4 0 0015.2 4l-.3.6a14.7 14.7 0 00-5.8 0L8.8 4A16.4 16.4 0 004.7 5.8C2.3 9.7 1.7 13.5 2 17.2a16.5 16.5 0 005.1 2.6l1-.9a10.7 10.7 0 01-1.5-.7l.1-.1c1.9.9 4 1.3 6.1 1.3s4.2-.4 6.1-1.3l.1.1c-.5.3-1 .5-1.5.7l1 .9a16.5 16.5 0 005.1-2.6c.4-3.7-.2-7.5-2.6-11.4zM9.5 14.6c-.8 0-1.5-.8-1.5-1.7S8.7 11.2 9.5 11.2s1.5.8 1.5 1.7-.7 1.7-1.5 1.7zm5 0c-.8 0-1.5-.8-1.5-1.7s.7-1.7 1.5-1.7 1.5.8 1.5 1.7-.7 1.7-1.5 1.7z',
+    ],
+    stroke: false,
+    filled: true,
+    external: true,
+  },
 ]
 const ranges = ['1 day', '3 days', '7 days', '30 days']
 ---
@@ -85,7 +113,12 @@ const ranges = ['1 day', '3 days', '7 days', '30 days']
   <div class="tc-shell">
     <aside class="tc-sidebar" aria-hidden="true">
       <div class="tc-brand">
-        <span class="tc-brand-mark">C</span>
+        <span class="tc-brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.5L20.5 7v10L12 21.5 3.5 17V7L12 2.5z" />
+            <path d="M9 9.5l6 5M15 9.5l-6 5" />
+          </svg>
+        </span>
         Capgo
       </div>
       <div class="tc-org">
@@ -100,10 +133,24 @@ const ranges = ['1 day', '3 days', '7 days', '30 days']
         {
           nav.map((item) => (
             <div class:list={['tc-nav-item', item.label === activeNav && 'is-active']}>
-              <svg class="tc-nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d={item.path} />
+              <svg
+                class:list={['tc-nav-ico', item.filled && 'is-filled']}
+                viewBox="0 0 24 24"
+                fill={item.filled ? 'currentColor' : 'none'}
+                stroke={item.filled ? 'none' : 'currentColor'}
+                stroke-width={item.filled ? undefined : '1.5'}
+                aria-hidden="true"
+              >
+                {item.paths.map((d) => (
+                  <path stroke-linecap="round" stroke-linejoin="round" d={d} />
+                ))}
               </svg>
-              {item.label}
+              <span class:list={['tc-nav-label', item.external && 'is-external']}>{item.label}</span>
+              {item.external ? (
+                <svg class="tc-nav-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M10 14L20 4M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" />
+                </svg>
+              ) : null}
             </div>
           ))
         }
