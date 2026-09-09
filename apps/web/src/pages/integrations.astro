@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import IntegrationsTeachingDemo from '@/components/teaching-console/IntegrationsTeachingDemo.astro'
 import { integrations } from '@/config/integrations'
 import m from '@/copy/messages'
 
@@ -36,6 +37,10 @@ const trustedFreelancers = [
         <p class="mx-auto max-w-2xl text-lg text-zinc-300">
           {description}
         </p>
+      </div>
+
+      <div class="mx-auto mt-12 max-w-5xl text-left">
+        <IntegrationsTeachingDemo />
       </div>
 
       <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

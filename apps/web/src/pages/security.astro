@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import SecurityTeachingDemo from '@/components/teaching-console/SecurityTeachingDemo.astro'
 import m from '@/copy/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.security_policy({}, { locale: Astro.locals.locale })].join(' | ')
@@ -9,6 +10,9 @@ const content = { title, description }
 ---
 
 <Layout content={content}>
+  <section class="mx-auto max-w-5xl px-4 pt-12" aria-label="Security teaching console">
+    <SecurityTeachingDemo />
+  </section>
   <div class="prose-sm prose prose-invert m-auto py-8">
     <h1>{m.security_policy({}, { locale: Astro.locals.locale })}</h1>
     <p>

@@ -1,0 +1,112 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'compose', label: 'Compose', hint: 'Draft the campaign' },
+  { id: 'target', label: 'Target', hint: 'Pick channel & devices' },
+  { id: 'deliver', label: 'Deliver', hint: 'Watch delivery progress' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="notifications"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / <strong>notifications</strong>'}
+    activeTab="notifications"
+    title="Notifications"
+    badge="BETA"
+    subtitle="Provider setup, campaigns, and push update controls in one console."
+    status="Compose a campaign for production devices."
+    actionLabel="Compose campaign"
+  >
+    <div class="tc-metrics" style="grid-template-columns: repeat(4, minmax(0,1fr))">
+      <article class="tc-metric"><p>Configured platforms</p><strong>2</strong></article>
+      <article class="tc-metric"><p>Events in 30 days</p><strong>2,820</strong></article>
+      <article class="tc-metric"><p>Campaigns</p><strong data-n-campaigns>1</strong></article>
+      <article class="tc-metric"><p>Devices found</p><strong data-n-devices>1,240</strong></article>
+    </div>
+
+    <div class="tc-grid-2">
+      <div class="tc-card tc-card-pad">
+        <h3 class="tc-card-title">Campaign</h3>
+        <dl class="tc-rows" style="margin:0 -12px">
+          <div class="tc-row"><dt>Title</dt><dd data-n-title>Update available</dd></div>
+          <div class="tc-row"><dt>Body</dt><dd data-n-body>A safer build is ready.</dd></div>
+          <div class="tc-row" data-tc-panel="target"><dt>Channel</dt><dd><span class="tc-pill is-blue">production</span></dd></div>
+        </dl>
+      </div>
+      <div class="tc-card tc-card-pad">
+        <h3 class="tc-card-title">Delivery</h3>
+        <div class="tc-progress" style="margin-top:8px">
+          <div class="tc-progress-track"><div class="tc-progress-bar" data-n-bar style="width:0%"></div></div>
+          <div class="tc-progress-meta"><span data-n-health>Draft</span><span data-n-pct>0%</span></div>
+        </div>
+        <ul class="tc-list" style="margin-top:10px">
+          <li><span>Android push</span><span class="tc-pill">configured</span></li>
+          <li><span>iOS push</span><span class="tc-pill">configured</span></li>
+        </ul>
+      </div>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { animateProgress, setupTeachingConsole } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="notifications"]').forEach((root) => {
+    setupTeachingConsole(root, [
+      {
+        id: 'compose',
+        actionLabel: 'Compose campaign',
+        status: 'Compose a campaign for production devices.',
+        enter(ctx) {
+          const bar = ctx.root.querySelector<HTMLElement>('[data-n-bar]')
+          animateProgress(bar, 0, true)
+          const health = ctx.root.querySelector('[data-n-health]')
+          const pct = ctx.root.querySelector('[data-n-pct]')
+          if (health) health.textContent = 'Draft'
+          if (pct) pct.textContent = '0%'
+        },
+      },
+      {
+        id: 'target',
+        actionLabel: 'Target production',
+        status: 'Target production channel — 1,240 devices matched.',
+        enter(ctx) {
+          const devices = ctx.root.querySelector('[data-n-devices]')
+          if (devices) devices.textContent = '1,240'
+        },
+      },
+      {
+        id: 'deliver',
+        actionLabel: 'Send campaign',
+        status: 'Delivering — opens and update checks streaming in.',
+        enter(ctx) {
+          const bar = ctx.root.querySelector<HTMLElement>('[data-n-bar]')
+          const health = ctx.root.querySelector('[data-n-health]')
+          const pct = ctx.root.querySelector('[data-n-pct]')
+          const campaigns = ctx.root.querySelector('[data-n-campaigns]')
+          if (campaigns) campaigns.textContent = '2'
+          if (ctx.prefersReducedMotion) {
+            animateProgress(bar, 100, true)
+            if (health) health.textContent = 'Delivered'
+            if (pct) pct.textContent = '100%'
+            ctx.setActionDisabled(true)
+            return
+          }
+          animateProgress(bar, 35, false)
+          if (health) health.textContent = 'Sending'
+          if (pct) pct.textContent = '35%'
+          setTimeout(() => {
+            animateProgress(bar, 100, false)
+            if (health) health.textContent = 'Delivered'
+            if (pct) pct.textContent = '100%'
+            ctx.setStatus('Campaign delivered — 1,186 accepted, 54 deferred.')
+            ctx.setActionDisabled(true)
+          }, 1400)
+        },
+      },
+    ])
+  })
+</script>

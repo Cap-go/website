@@ -1,0 +1,107 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'trigger', label: 'Trigger', hint: 'Pipeline on push' },
+  { id: 'checks', label: 'Checks', hint: 'Tests + compat' },
+  { id: 'deploy', label: 'Deploy', hint: 'Capgo upload step' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="ci-cd"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / <strong>CI pipeline</strong>'}
+    activeTab="builds"
+    title="CI / CD"
+    subtitle="Pipeline trigger → checks → Capgo deploy step on every commit."
+    status="Push to main triggers the Capgo release workflow."
+    actionLabel="Trigger pipeline"
+    tabs={[
+      { id: 'dashboard', label: 'Dashboard' },
+      { id: 'bundles', label: 'Bundles' },
+      { id: 'builds', label: 'Builds' },
+      { id: 'logs', label: 'Logs' },
+    ]}
+  >
+    <div class="tc-card tc-card-pad">
+      <div class="tc-card-head">
+        <h3 class="tc-card-title">github/workflows/capgo-release.yml</h3>
+        <span class="tc-pill is-muted" data-ci-state>Idle</span>
+      </div>
+      <ul class="tc-list">
+        <li data-ci-step="trigger"><span>01 · workflow_dispatch / push</span><strong data-ci-s1 class="tc-pill is-muted">pending</strong></li>
+        <li data-ci-step="checks"><span>02 · unit + bundle compatibility</span><strong data-ci-s2 class="tc-pill is-muted">pending</strong></li>
+        <li data-ci-step="deploy"><span>03 · npx @capgo/cli bundle upload</span><strong data-ci-s3 class="tc-pill is-muted">pending</strong></li>
+      </ul>
+      <div class="tc-term" style="margin-top:12px">
+        <div class="tc-term-bar">
+          <span class="tc-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>ci · ubuntu-latest</span>
+        </div>
+        <div class="tc-term-body" data-ci-term aria-live="polite"><span class="dim">Waiting for trigger…</span></div>
+      </div>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { setupTeachingConsole, typeTerminalLines } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="ci-cd"]').forEach((root) => {
+    const setPill = (sel: string, text: string, cls: string) => {
+      const el = root.querySelector(sel)
+      if (!el) return
+      el.className = `tc-pill ${cls}`
+      el.textContent = text
+    }
+
+    setupTeachingConsole(root, [
+      {
+        id: 'trigger',
+        actionLabel: 'Trigger pipeline',
+        status: 'Push to main triggers the Capgo release workflow.',
+        enter(ctx) {
+          setPill('[data-ci-state]', 'Running', 'is-blue')
+          setPill('[data-ci-s1]', 'running', 'is-blue')
+          typeTerminalLines(ctx.query('[data-ci-term]'), ['<span class="cmd">$</span> git push origin main', '<span class="ok">✓</span> workflow capgo-release started'], ctx.prefersReducedMotion)
+        },
+      },
+      {
+        id: 'checks',
+        actionLabel: 'Run checks',
+        status: 'Compatibility and unit checks are green.',
+        enter(ctx) {
+          setPill('[data-ci-s1]', 'passed', '')
+          setPill('[data-ci-s2]', 'running', 'is-blue')
+          typeTerminalLines(
+            ctx.query('[data-ci-term]'),
+            ['<span class="ok">✓</span> bun test', '<span class="ok">✓</span> bundle releaseType — compatible with production', '<span class="dim">Continuing to Capgo deploy…</span>'],
+            ctx.prefersReducedMotion,
+          )
+        },
+      },
+      {
+        id: 'deploy',
+        actionLabel: 'Capgo deploy',
+        status: 'Capgo deploy step uploaded bundle 1.0.1 to production.',
+        enter(ctx) {
+          setPill('[data-ci-s2]', 'passed', '')
+          setPill('[data-ci-s3]', 'passed', '')
+          setPill('[data-ci-state]', 'Success', '')
+          typeTerminalLines(
+            ctx.query('[data-ci-term]'),
+            [
+              '<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production',
+              '<span class="ok">✓</span> uploaded 1.0.1 (2.1 MB)',
+              '<span class="ok">✓</span> linked channel production',
+            ],
+            ctx.prefersReducedMotion,
+          )
+          ctx.setActionDisabled(true)
+        },
+      },
+    ])
+  })
+</script>

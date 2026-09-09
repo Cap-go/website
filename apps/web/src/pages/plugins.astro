@@ -1,5 +1,6 @@
 ---
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import PluginsTeachingDemo from '@/components/teaching-console/PluginsTeachingDemo.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import { productVideos } from '@/config/productVideos'
 import PluginIcon from '@/components/PluginIcon.astro'
@@ -187,6 +188,12 @@ const content = {
     </section>
 
     <!-- Plugins Grid -->
+    <section class="px-6 pb-12 lg:px-8" aria-label="Plugins teaching console">
+      <div class="mx-auto max-w-5xl">
+        <PluginsTeachingDemo />
+      </div>
+    </section>
+
     <section id="plugins" class="pt-4 pb-20">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mb-10 text-center">

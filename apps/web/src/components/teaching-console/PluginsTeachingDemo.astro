@@ -1,0 +1,93 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'pick', label: 'Pick', hint: 'Choose a plugin' },
+  { id: 'install', label: 'Install', hint: 'Copy the snippet' },
+  { id: 'capability', label: 'Capability', hint: 'Device feature live' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="plugins"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / <strong>Plugins</strong>'}
+    activeTab="information"
+    title="Plugins"
+    subtitle="Pick a Capacitor plugin, install the snippet, and unlock the device capability."
+    status="Select Camera to preview install + capability."
+    actionLabel="Select Camera plugin"
+    tabs={[
+      { id: 'dashboard', label: 'Dashboard' },
+      { id: 'information', label: 'Information' },
+      { id: 'bundles', label: 'Bundles' },
+      { id: 'devices', label: 'Devices' },
+    ]}
+  >
+    <div class="tc-grid-2">
+      <div class="tc-card tc-card-pad">
+        <h3 class="tc-card-title">Plugin catalog</h3>
+        <ul class="tc-list">
+          <li><button type="button" class="tc-channel is-selected" data-plugin="camera">Camera</button><span class="tc-pill is-blue">native</span></li>
+          <li><button type="button" class="tc-channel" data-plugin="filesystem">Filesystem</button><span class="tc-pill is-muted">native</span></li>
+          <li><button type="button" class="tc-channel" data-plugin="push">Push Notifications</button><span class="tc-pill is-muted">native</span></li>
+        </ul>
+      </div>
+      <div class="tc-card tc-card-pad">
+        <h3 class="tc-card-title">Install snippet</h3>
+        <div class="tc-term">
+          <div class="tc-term-bar"><span class="tc-term-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>terminal</span></div>
+          <div class="tc-term-body" data-plugin-term aria-live="polite"><span class="dim">Select a plugin…</span></div>
+        </div>
+        <p style="margin:10px 0 0;font-size:12px;color:#64748b" data-plugin-cap>Device capability appears after install.</p>
+      </div>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { setupTeachingConsole, typeTerminalLines } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="plugins"]').forEach((root) => {
+    setupTeachingConsole(root, [
+      {
+        id: 'pick',
+        actionLabel: 'Select Camera plugin',
+        status: 'Select Camera to preview install + capability.',
+        enter() {},
+      },
+      {
+        id: 'install',
+        actionLabel: 'Copy install snippet',
+        status: 'Install snippet ready for your project.',
+        enter(ctx) {
+          typeTerminalLines(
+            ctx.query('[data-plugin-term]'),
+            ['<span class="cmd">$</span> npm i @capacitor/camera', '<span class="cmd">$</span> npx cap sync'],
+            ctx.prefersReducedMotion,
+          )
+        },
+      },
+      {
+        id: 'capability',
+        actionLabel: 'Open on device',
+        status: 'Camera permission granted — photo capture ready.',
+        enter(ctx) {
+          typeTerminalLines(
+            ctx.query('[data-plugin-term]'),
+            [
+              '<span class="cmd">$</span> npm i @capacitor/camera && npx cap sync',
+              '<span class="ok">✓</span> iOS + Android permissions linked',
+              '<span class="ok">✓</span> Camera.getPhoto() available',
+            ],
+            ctx.prefersReducedMotion,
+          )
+          const cap = ctx.query('[data-plugin-cap]')
+          if (cap) cap.textContent = 'Capability: capture photo / gallery pick on device.'
+          ctx.setActionDisabled(true)
+        },
+      },
+    ])
+  })
+</script>

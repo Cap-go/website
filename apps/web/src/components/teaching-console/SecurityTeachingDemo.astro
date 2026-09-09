@@ -1,0 +1,89 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'scan', label: 'Scan', hint: 'Sign & scan bundle' },
+  { id: 'attest', label: 'Attest', hint: 'Verify signature' },
+  { id: 'gate', label: 'Trust gate', hint: 'Allowlist devices' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="security"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / <strong>Security</strong>'}
+    activeTab="information"
+    title="Security controls"
+    subtitle="Scan and sign the bundle, attest integrity, then enforce the trust gate."
+    status="Start a signed scan for the pending production bundle."
+    actionLabel="Scan & sign"
+    tabs={[
+      { id: 'dashboard', label: 'Dashboard' },
+      { id: 'information', label: 'Information' },
+      { id: 'bundles', label: 'Bundles' },
+      { id: 'devices', label: 'Devices' },
+    ]}
+  >
+    <div class="tc-card">
+      <dl class="tc-rows">
+        <div class="tc-row"><dt>Bundle</dt><dd>1.0.1 · production candidate</dd></div>
+        <div class="tc-row"><dt>Signature</dt><dd><span class="tc-pill is-warn" data-sec-sig>unsigned</span></dd></div>
+        <div class="tc-row"><dt>Attestation</dt><dd data-sec-att>Not verified</dd></div>
+        <div class="tc-row"><dt>Trust gate</dt><dd data-sec-gate>Open — no policy</dd></div>
+      </dl>
+    </div>
+    <div class="tc-card tc-card-pad" style="margin-top:10px">
+      <h3 class="tc-card-title">Findings</h3>
+      <ul class="tc-list" data-sec-findings>
+        <li><span>Waiting for scan…</span><strong class="tc-pill is-muted">—</strong></li>
+      </ul>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { setupTeachingConsole } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="security"]').forEach((root) => {
+    setupTeachingConsole(root, [
+      {
+        id: 'scan',
+        actionLabel: 'Scan & sign',
+        status: 'Start a signed scan for the pending production bundle.',
+        enter(ctx) {
+          const findings = ctx.query('[data-sec-findings]')
+          if (findings) findings.innerHTML = '<li><span>Scanning dependencies + secrets…</span><strong class="tc-pill is-blue">running</strong></li>'
+        },
+      },
+      {
+        id: 'attest',
+        actionLabel: 'Verify attestation',
+        status: 'Signature valid — attestation matched Capgo key.',
+        enter(ctx) {
+          const sig = ctx.query('[data-sec-sig]')
+          const att = ctx.query('[data-sec-att]')
+          if (sig) {
+            sig.className = 'tc-pill'
+            sig.textContent = 'signed'
+          }
+          if (att) att.textContent = 'Ed25519 · trusted key · ok'
+          const findings = ctx.query('[data-sec-findings]')
+          if (findings)
+            findings.innerHTML =
+              '<li><span>Hardcoded secrets</span><strong class="tc-pill">0</strong></li><li><span>Manifest integrity</span><strong class="tc-pill">pass</strong></li>'
+        },
+      },
+      {
+        id: 'gate',
+        actionLabel: 'Enforce trust gate',
+        status: 'Trust gate enforced — only attested devices receive the channel.',
+        enter(ctx) {
+          const gate = ctx.query('[data-sec-gate]')
+          if (gate) gate.textContent = 'Enforced · attested devices only'
+          ctx.setActionDisabled(true)
+        },
+      },
+    ])
+  })
+</script>

@@ -1,0 +1,95 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'policy', label: 'Policy', hint: 'Org release policy' },
+  { id: 'sso', label: 'SSO', hint: 'IdP connected' },
+  { id: 'roles', label: 'Roles', hint: 'Gate deploy rights' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="enterprise"
+    steps={steps}
+    breadcrumbs={'org / Demo org / <strong>Access</strong>'}
+    activeTab="access"
+    title="Enterprise access"
+    subtitle="Org policy, SSO, and role gates for production deploys."
+    status="Review the org release policy before enabling SSO."
+    actionLabel="Open org policy"
+    activeNav="Dashboard"
+    tabs={[
+      { id: 'dashboard', label: 'Dashboard' },
+      { id: 'access', label: 'Access' },
+      { id: 'apps', label: 'Apps' },
+      { id: 'audit', label: 'Audit' },
+    ]}
+  >
+    <div class="tc-grid-2">
+      <div class="tc-card tc-card-pad">
+        <h3 class="tc-card-title">Org policy</h3>
+        <ul class="tc-list">
+          <li><span>Require 2 reviewers on production</span><strong class="tc-pill is-muted" data-ent-p1>off</strong></li>
+          <li><span>Block unsigned bundles</span><strong class="tc-pill is-muted" data-ent-p2>off</strong></li>
+          <li><span>SSO required for console</span><strong class="tc-pill is-muted" data-ent-p3>off</strong></li>
+        </ul>
+      </div>
+      <div class="tc-card tc-card-pad">
+        <h3 class="tc-card-title">Role gate</h3>
+        <dl class="tc-rows" style="margin:0 -12px">
+          <div class="tc-row"><dt>IdP</dt><dd data-ent-idp>Not connected</dd></div>
+          <div class="tc-row"><dt>Deploy role</dt><dd data-ent-role>Anyone in org</dd></div>
+          <div class="tc-row"><dt>Last audit</dt><dd data-ent-audit>—</dd></div>
+        </dl>
+      </div>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { setupTeachingConsole } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="enterprise"]').forEach((root) => {
+    const pill = (sel: string, text: string, ok = false) => {
+      const el = root.querySelector(sel)
+      if (!el) return
+      el.className = `tc-pill${ok ? '' : ' is-muted'}`
+      el.textContent = text
+    }
+
+    setupTeachingConsole(root, [
+      {
+        id: 'policy',
+        actionLabel: 'Open org policy',
+        status: 'Review the org release policy before enabling SSO.',
+        enter() {
+          pill('[data-ent-p1]', 'on', true)
+          pill('[data-ent-p2]', 'on', true)
+        },
+      },
+      {
+        id: 'sso',
+        actionLabel: 'Connect SSO',
+        status: 'SSO connected — Okta / SAML enforced for console login.',
+        enter(ctx) {
+          pill('[data-ent-p3]', 'on', true)
+          const idp = ctx.query('[data-ent-idp]')
+          if (idp) idp.textContent = 'Okta · SAML · connected'
+        },
+      },
+      {
+        id: 'roles',
+        actionLabel: 'Enforce deploy role',
+        status: 'Only release-managers can ship production channels.',
+        enter(ctx) {
+          const role = ctx.query('[data-ent-role]')
+          const audit = ctx.query('[data-ent-audit]')
+          if (role) role.textContent = 'release-manager'
+          if (audit) audit.textContent = 'Policy enforced · 2m ago'
+          ctx.setActionDisabled(true)
+        },
+      },
+    ])
+  })
+</script>

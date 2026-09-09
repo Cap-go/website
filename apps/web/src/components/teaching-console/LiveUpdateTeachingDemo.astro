@@ -1,0 +1,133 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'upload', label: 'Upload', hint: 'Publish the bundle' },
+  { id: 'channel', label: 'Channel', hint: 'Assign production' },
+  { id: 'rollout', label: 'Rollout', hint: 'Stage 10% → 100%' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="live-update"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / Bundles / <strong>1.0.0</strong>'}
+    activeTab="bundles"
+    title="Bundle 1.0.0"
+    subtitle="Review checksum, link channels, then stage the rollout."
+    status="Review bundle details, then publish."
+    actionLabel="Publish bundle"
+  >
+    <div class="tc-card">
+      <dl class="tc-rows">
+        <div class="tc-row"><dt>Bundle number / ID</dt><dd>1.0.0 / 3</dd></div>
+        <div class="tc-row"><dt>Created at</dt><dd>2026-05-10 11:26</dd></div>
+        <div class="tc-row">
+          <dt>Checksum</dt>
+          <dd><span class="tc-mono">3885e9a1c2…5ee49</span> <span class="tc-pill">CRC32</span></dd>
+        </div>
+        <div class="tc-row" data-tc-panel="channel">
+          <dt>Channel</dt>
+          <dd class="tc-channels">
+            <button type="button" class="tc-channel is-selected" data-lu-channel="production" aria-pressed="true">production</button>
+            <button type="button" class="tc-channel" data-lu-channel="staging" aria-pressed="false">staging</button>
+          </dd>
+        </div>
+        <div class="tc-row" data-tc-panel="rollout" hidden>
+          <dt>Staged rollout</dt>
+          <dd>
+            <div class="tc-progress">
+              <div class="tc-progress-track" aria-hidden="true"><div class="tc-progress-bar" data-lu-bar style="width:0%"></div></div>
+              <div class="tc-progress-meta"><span data-lu-health>Waiting to start</span><span data-lu-pct>0%</span></div>
+            </div>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { animateProgress, setupTeachingConsole } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="live-update"]').forEach((root) => {
+    let rolloutTimer: ReturnType<typeof setTimeout> | undefined
+
+    function runRollout(ctx: { root: HTMLElement; prefersReducedMotion: boolean; setStatus: (t: string) => void; setActionDisabled: (d: boolean) => void }) {
+      const bar = ctx.root.querySelector<HTMLElement>('[data-lu-bar]')
+      const pct = ctx.root.querySelector<HTMLElement>('[data-lu-pct]')
+      const health = ctx.root.querySelector<HTMLElement>('[data-lu-health]')
+      const show = () => {
+        ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="rollout"]').forEach((el) => {
+          el.hidden = false
+        })
+      }
+      show()
+      if (ctx.prefersReducedMotion) {
+        animateProgress(bar, 100, true)
+        if (pct) pct.textContent = '100%'
+        if (health) health.textContent = 'Health checks passed'
+        ctx.setStatus('Rollout complete — 100% on production.')
+        ctx.setActionDisabled(true)
+        return
+      }
+      animateProgress(bar, 10, false)
+      if (pct) pct.textContent = '10%'
+      if (health) health.textContent = 'Cohort warming'
+      ctx.setStatus('Rolling out to 10% of production devices…')
+      clearTimeout(rolloutTimer)
+      rolloutTimer = setTimeout(() => {
+        if (health) health.textContent = '10% cohort healthy'
+        ctx.setStatus('10% cohort healthy — expanding rollout.')
+        animateProgress(bar, 55, false)
+        if (pct) pct.textContent = '55%'
+      }, 900)
+      setTimeout(() => {
+        animateProgress(bar, 100, false)
+        if (pct) pct.textContent = '100%'
+        if (health) health.textContent = 'Health checks passed'
+        ctx.setStatus('Rollout complete — 100% on production.')
+        ctx.setActionDisabled(true)
+      }, 2200)
+    }
+
+    setupTeachingConsole(root, [
+      {
+        id: 'upload',
+        actionLabel: 'Publish bundle',
+        status: 'Review bundle details, then publish.',
+        enter(ctx) {
+          ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="rollout"]').forEach((el) => {
+            el.hidden = true
+          })
+        },
+      },
+      {
+        id: 'channel',
+        actionLabel: 'Assign to channel',
+        status: 'Pick a channel, then assign this bundle.',
+        enter(ctx) {
+          ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="channel"]').forEach((el) => {
+            el.hidden = false
+          })
+        },
+      },
+      {
+        id: 'rollout',
+        actionLabel: 'Watch rollout',
+        status: 'Rolling out to 10% of production devices…',
+        enter(ctx) {
+          runRollout(ctx)
+        },
+      },
+    ])
+
+    root.querySelectorAll<HTMLButtonElement>('[data-lu-channel]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        root.querySelectorAll('[data-lu-channel]').forEach((el) => el.classList.remove('is-selected'))
+        btn.classList.add('is-selected')
+      })
+    })
+  })
+</script>

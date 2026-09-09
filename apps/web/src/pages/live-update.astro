@@ -9,6 +9,7 @@ import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
+import LiveUpdateTeachingDemo from '@/components/teaching-console/LiveUpdateTeachingDemo.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -402,14 +403,7 @@ const featureTiles = [
           </div>
 
           <div class="guidance-panel">
-            <img
-              src="/landing-demos/live-update-console-demo.webp"
-              alt="Capgo console demo app showing a live-update bundle, release dates, checksum, and linked channels"
-              width="1280"
-              height="720"
-              loading="lazy"
-              decoding="async"
-            />
+            <LiveUpdateTeachingDemo />
             <div class="guidance-cli">
               <p class="guidance-cli-line"><span class="mono">$</span> {m.live_update_guidance_cli_command({}, { locale })}</p>
               <p class="guidance-cli-warn">{m.live_update_guidance_cli_warning({}, { locale })}</p>

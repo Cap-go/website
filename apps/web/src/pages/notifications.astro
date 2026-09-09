@@ -1,5 +1,6 @@
 ---
 import '@/styles/lu-product.css'
+import NotificationsTeachingDemo from '@/components/teaching-console/NotificationsTeachingDemo.astro'
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -316,12 +317,7 @@ provider ready | recipients linked | update check enabled</pre>
           </div>
 
           <div class="guidance-panel">
-            <img
-              src="/landing-demos/native-notifications-dashboard.webp"
-              alt="Capgo notification update check panel with install mode and channel controls"
-              loading="lazy"
-              decoding="async"
-            />
+            <NotificationsTeachingDemo />
             <div class="guidance-cli">
               <p class="guidance-cli-line"><span class="mono">$</span> notification.kind = update_check</p>
               <p class="guidance-cli-warn">channel selected | install mode next</p>

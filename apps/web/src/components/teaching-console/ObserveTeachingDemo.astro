@@ -1,0 +1,165 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'deploy', label: 'Deploy', hint: 'Pick the release marker' },
+  { id: 'observe', label: 'Observe', hint: 'Read version health' },
+  { id: 'investigate', label: 'Investigate', hint: 'Open Logs Insights' },
+]
+---
+
+<figure class="observe-dashboard tc-embed">
+  <ConsoleShell
+    demoId="observe"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / <strong>Observe</strong>'}
+    activeTab="observe"
+    title="Observe"
+    badge="BETA"
+    subtitle="Native health, launch timing, and WebView timing for reported versions."
+    status="Step 1: Select the latest release marker to anchor the rollout you just shipped."
+    actionLabel="Select v4.8.1 rollout"
+    showRange={true}
+  >
+    <div data-tc-panel="deploy" class="tc-card tc-card-pad">
+      <div class="tc-card-head">
+        <h3 class="tc-card-title">Release markers</h3>
+      </div>
+      <div class="tc-channels" role="group" aria-label="Release markers">
+        <button type="button" class="tc-channel" data-observe-release="stable" aria-pressed="true">v4.8.0 · production · Jan 5</button>
+        <button type="button" class="tc-channel is-selected" data-observe-release="rollout" aria-pressed="false">v4.8.1 · production · Jan 12</button>
+      </div>
+    </div>
+
+    <div data-tc-panel="observe" class="tc-metrics" aria-label="All versions summary">
+      <article class="tc-metric"><p>Tracked devices</p><strong data-m="tracked">8,240</strong></article>
+      <article class="tc-metric is-good"><p>Issue-free devices</p><strong data-m="issueFree">98.6%</strong></article>
+      <article class="tc-metric"><p>Launch P90</p><strong data-m="launch">781 ms</strong></article>
+      <article class="tc-metric"><p>WebView P90</p><strong data-m="webview">1.2 s</strong></article>
+      <article class="tc-metric is-bad"><p>Native issues</p><strong data-m="native">326</strong></article>
+    </div>
+
+    <div data-tc-panel="observe" class="tc-card">
+      <table class="tc-table" aria-label="Version breakdown">
+        <thead>
+          <tr>
+            <th>Version</th><th>Events</th><th>Devices</th><th>Issue-free</th><th>Launch P90</th><th>WebView P90</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-observe-row="stable">
+            <td>4.8.0</td><td>42.1k</td><td>6,980</td><td>98.9%</td><td>760 ms</td><td>1.1 s</td>
+          </tr>
+          <tr class="is-focus" data-observe-row="rollout">
+            <td>4.8.1</td><td>18.6k</td><td>2,140</td><td data-m="vIssue">88.4%</td><td data-m="vLaunch">1.4 s</td><td data-m="vWeb">2.1 s</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div data-tc-panel="investigate" hidden>
+      <div class="tc-alert">
+        <strong>Bundle download failed</strong> is the largest error group with <span data-m="errCount">82</span> events (<span data-m="errShare">44.6%</span>).
+      </div>
+      <div class="tc-grid-2" style="margin-top:10px">
+        <div class="tc-card tc-card-pad">
+          <h3 class="tc-card-title">Error categories</h3>
+          <ul class="tc-list">
+            <li><span>Bundle download failed</span><strong>82</strong></li>
+            <li><span>App crash</span><strong>44</strong></li>
+            <li><span>WebView JavaScript error</span><strong>31</strong></li>
+            <li><span>Checksum validation failed</span><strong>18</strong></li>
+          </ul>
+        </div>
+        <div class="tc-card tc-card-pad">
+          <h3 class="tc-card-title">Top affected versions</h3>
+          <ul class="tc-list">
+            <li><span>4.8.1 · Bundle download failed</span><strong>55 · 14 devices</strong></li>
+            <li><span>4.8.0 · App crash</span><strong>12 · 6 devices</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ConsoleShell>
+  <noscript>
+    <picture>
+      <source media="(max-width: 720px)" srcset="/landing-demos/observe-dashboard-mobile.webp" />
+      <img src="/landing-demos/observe-dashboard.webp" alt="Capgo Observe dashboard" width="1440" height="1100" loading="eager" decoding="async" />
+    </picture>
+  </noscript>
+</figure>
+
+<script>
+  import { setupTeachingConsole } from './teaching-console.client.ts'
+
+  const rollout = {
+    tracked: '8,240',
+    issueFree: '91.2%',
+    launch: '1.4 s',
+    webview: '2.1 s',
+    native: '892',
+    vIssue: '88.4%',
+    vLaunch: '1.4 s',
+    vWeb: '2.1 s',
+    errCount: '82',
+    errShare: '44.6%',
+  }
+
+  function applyMetrics(root: HTMLElement, data: Record<string, string>) {
+    for (const [key, value] of Object.entries(data)) {
+      root.querySelectorAll(`[data-m="${key}"]`).forEach((el) => {
+        el.textContent = value
+      })
+    }
+  }
+
+  function showPanels(root: HTMLElement, names: string[]) {
+    root.querySelectorAll<HTMLElement>('[data-tc-panel]').forEach((panel) => {
+      const id = panel.dataset.tcPanel
+      panel.hidden = !id || !names.includes(id)
+    })
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="observe"]').forEach((root) => {
+    setupTeachingConsole(root, [
+      {
+        id: 'deploy',
+        actionLabel: 'Select v4.8.1 rollout',
+        status: 'Step 1: Select the latest release marker to anchor the rollout you just shipped.',
+        enter(ctx) {
+          showPanels(ctx.root, ['deploy', 'observe'])
+          ctx.root.querySelectorAll('[data-observe-release]').forEach((btn) => {
+            const selected = btn.getAttribute('data-observe-release') === 'stable'
+            btn.classList.toggle('is-selected', selected)
+          })
+        },
+      },
+      {
+        id: 'observe',
+        actionLabel: 'Investigate in Logs',
+        status: 'Step 2: Release v4.8.1 on production — issue-free 91.2%, native issues 892.',
+        enter(ctx) {
+          showPanels(ctx.root, ['deploy', 'observe'])
+          ctx.root.querySelectorAll('[data-observe-release]').forEach((btn) => {
+            const selected = btn.getAttribute('data-observe-release') === 'rollout'
+            btn.classList.toggle('is-selected', selected)
+          })
+          applyMetrics(ctx.root, rollout)
+          ctx.root.querySelector('[data-observe-row="rollout"]')?.classList.add('is-focus')
+        },
+      },
+      {
+        id: 'investigate',
+        actionLabel: 'Open device timeline',
+        status: 'Step 3: Follow the trend into Logs Insights for errors, versions, and devices.',
+        enter(ctx) {
+          showPanels(ctx.root, ['investigate'])
+          applyMetrics(ctx.root, rollout)
+          const logsTab = ctx.root.querySelector('[data-tc-chrome-tab="logs"]')
+          ctx.root.querySelectorAll('[data-tc-chrome-tab]').forEach((tab) => tab.classList.remove('is-active'))
+          logsTab?.classList.add('is-active')
+        },
+      },
+    ])
+  })
+</script>

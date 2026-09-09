@@ -1,0 +1,87 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'connect', label: 'Connect', hint: 'Link a provider' },
+  { id: 'webhook', label: 'Webhook', hint: 'Event subscription' },
+  { id: 'flow', label: 'Flow', hint: 'Event delivered' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="integrations"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / <strong>Integrations</strong>'}
+    activeTab="information"
+    title="Integrations"
+    subtitle="Connect a provider, subscribe to webhooks, watch the event flow."
+    status="Connect GitHub to stream release events into Capgo."
+    actionLabel="Connect GitHub"
+    tabs={[
+      { id: 'dashboard', label: 'Dashboard' },
+      { id: 'information', label: 'Information' },
+      { id: 'logs', label: 'Logs' },
+    ]}
+  >
+    <div class="tc-card">
+      <dl class="tc-rows">
+        <div class="tc-row"><dt>Provider</dt><dd data-int-provider>GitHub · not connected</dd></div>
+        <div class="tc-row"><dt>Webhook</dt><dd data-int-hook class="tc-mono">—</dd></div>
+        <div class="tc-row"><dt>Last event</dt><dd data-int-event>—</dd></div>
+      </dl>
+    </div>
+    <div class="tc-term" style="margin-top:10px">
+      <div class="tc-term-bar"><span class="tc-term-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>events</span></div>
+      <div class="tc-term-body" data-int-term aria-live="polite"><span class="dim">No events yet</span></div>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { setupTeachingConsole, typeTerminalLines } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="integrations"]').forEach((root) => {
+    setupTeachingConsole(root, [
+      {
+        id: 'connect',
+        actionLabel: 'Connect GitHub',
+        status: 'Connect GitHub to stream release events into Capgo.',
+        enter(ctx) {
+          const provider = ctx.query('[data-int-provider]')
+          if (provider) provider.textContent = 'GitHub · authorizing…'
+        },
+      },
+      {
+        id: 'webhook',
+        actionLabel: 'Create webhook',
+        status: 'Webhook subscribed for push + release events.',
+        enter(ctx) {
+          const provider = ctx.query('[data-int-provider]')
+          const hook = ctx.query('[data-int-hook]')
+          if (provider) provider.textContent = 'GitHub · connected'
+          if (hook) hook.textContent = 'https://api.capgo.app/hooks/gh/demo'
+        },
+      },
+      {
+        id: 'flow',
+        actionLabel: 'Watch events',
+        status: 'Release event received — Capgo queued channel update.',
+        enter(ctx) {
+          const event = ctx.query('[data-int-event]')
+          if (event) event.textContent = 'release.published · v1.0.2'
+          typeTerminalLines(
+            ctx.query('[data-int-term]'),
+            [
+              '<span class="ok">✓</span> push main@a3f91c2',
+              '<span class="ok">✓</span> release.published v1.0.2',
+              '<span class="ok">✓</span> Capgo deploy job enqueued',
+            ],
+            ctx.prefersReducedMotion,
+          )
+          ctx.setActionDisabled(true)
+        },
+      },
+    ])
+  })
+</script>

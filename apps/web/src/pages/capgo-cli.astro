@@ -1,5 +1,6 @@
 ---
 import '@/styles/cli-product.css'
+import CliTeachingDemo from '@/components/teaching-console/CliTeachingDemo.astro'
 import CommandCode from '@/components/CommandCode.astro'
 import ProductAppExamples from '@/components/ProductAppExamples.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
@@ -182,24 +183,7 @@ const comparisonRows = [
           <p class="rv-one-line">Release checks, guarded uploads, and native builds in one terminal session.</p>
         </div>
 
-        <div class="demo-wrap">
-          <div class="terminal-frame">
-            <div class="terminal-bar">
-              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-              <span class="title" id="demo-term-title">npx @capgo/cli bundle releaseType</span>
-              <div class="demo-tabs">
-                <button id="demo-tab-release" class="demo-tab active" type="button">Release</button>
-                <button id="demo-tab-upload" class="demo-tab" type="button">Upload</button>
-                <button id="demo-tab-build" class="demo-tab" type="button">Build</button>
-              </div>
-            </div>
-            <div class="terminal-body" id="demo-term-body" aria-live="polite"></div>
-          </div>
-          <div class="demo-controls">
-            <span>Animated example — tabs switch the command flow</span>
-            <button class="demo-replay" id="demo-replay" type="button">⟲ Replay</button>
-          </div>
-        </div>
+        <div class="demo-wrap"><CliTeachingDemo /></div>
       </div>
     </section>
 

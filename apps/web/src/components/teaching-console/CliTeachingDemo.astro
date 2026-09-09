@@ -1,0 +1,100 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'command', label: 'Command', hint: 'Run Capgo CLI' },
+  { id: 'output', label: 'Output', hint: 'Live terminal' },
+  { id: 'done', label: 'Shipped', hint: 'Channel updated' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="capgo-cli"
+    steps={steps}
+    breadcrumbs={'local / Demo app / <strong>CLI</strong>'}
+    activeTab="bundles"
+    title="Capgo CLI"
+    subtitle="One command flow: check, upload, and confirm the channel."
+    status="Run the upload command against production."
+    actionLabel="Run upload"
+    hideFootAction={false}
+    tabs={[
+      { id: 'bundles', label: 'Bundles' },
+      { id: 'channels', label: 'Channels' },
+      { id: 'builds', label: 'Builds' },
+    ]}
+  >
+    <div class="tc-term">
+      <div class="tc-term-bar">
+        <span class="tc-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span data-cli-title>npx @capgo/cli@latest bundle upload</span>
+      </div>
+      <div class="tc-term-body" data-cli-term aria-live="polite"><span class="dim">Ready</span></div>
+    </div>
+    <div class="tc-card" style="margin-top:10px">
+      <dl class="tc-rows">
+        <div class="tc-row"><dt>Channel</dt><dd>production</dd></div>
+        <div class="tc-row"><dt>Result</dt><dd data-cli-result>Waiting</dd></div>
+      </dl>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { setupTeachingConsole, typeTerminalLines } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="capgo-cli"]').forEach((root) => {
+    setupTeachingConsole(root, [
+      {
+        id: 'command',
+        actionLabel: 'Run upload',
+        status: 'Run the upload command against production.',
+        enter(ctx) {
+          typeTerminalLines(
+            ctx.query('[data-cli-term]'),
+            ['<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production'],
+            ctx.prefersReducedMotion,
+          )
+        },
+      },
+      {
+        id: 'output',
+        actionLabel: 'Stream output',
+        status: 'Uploading bundle and verifying compatibility…',
+        enter(ctx) {
+          typeTerminalLines(
+            ctx.query('[data-cli-term]'),
+            [
+              '<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production',
+              '<span class="dim">packing dist/… 2.1 MB</span>',
+              '<span class="ok">✓</span> compatibility check passed',
+              '<span class="dim">uploading…</span>',
+            ],
+            ctx.prefersReducedMotion,
+          )
+        },
+      },
+      {
+        id: 'done',
+        actionLabel: 'Done',
+        status: 'Bundle 1.0.2 linked to production.',
+        enter(ctx) {
+          typeTerminalLines(
+            ctx.query('[data-cli-term]'),
+            [
+              '<span class="cmd">$</span> npx @capgo/cli@latest bundle upload --channel production',
+              '<span class="ok">✓</span> compatibility check passed',
+              '<span class="ok">✓</span> uploaded 1.0.2',
+              '<span class="ok">✓</span> channel production updated',
+            ],
+            ctx.prefersReducedMotion,
+          )
+          const result = ctx.query('[data-cli-result]')
+          if (result) result.textContent = '1.0.2 on production'
+          ctx.setActionDisabled(true)
+        },
+      },
+    ])
+  })
+</script>
