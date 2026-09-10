@@ -1,13 +1,13 @@
 ---
+import ExternalScript from './ExternalScript.astro'
 // Affonso affiliate tracking pixel (proxied via aff.capgo.app/r)
 ---
 
-<script
-  is:inline
+<ExternalScript
+  assetId="affonso-pixel"
   async
   defer
-  src="https://aff.capgo.app/r/pixel.js"
   data-affonso="cmrf1otzw000iftgnev91n1xa"
   data-cookie_duration="30"
   data-api-base="https://aff.capgo.app/r"
-></script>
+/>

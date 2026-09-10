@@ -1,5 +1,6 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { LLMS_TXT_PATHS, markdownNotFoundResponse, prefersMarkdown, stripRewrittenAssetHeaders, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
+import { withDocsSecurityHeaders } from '../../../shared/security/responseHeaders.mjs'
 
 interface Env {
   ASSETS: {
@@ -220,10 +221,11 @@ const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
 const SKIP_AI_CRAWLER_TRACKING_HEADER = 'X-Capgo-Skip-AI-Crawler-Tracking'
 
 function trackAICrawler(request: Request, response: Response, ctx?: BackgroundContext): Response {
+  const secured = withDocsSecurityHeaders(response)
   if (request.headers.get(SKIP_AI_CRAWLER_TRACKING_HEADER) !== '1') {
-    trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
+    trackAICrawlerResponse(request, secured, ctx, { websiteId: DATAFAST_WEBSITE_ID })
   }
-  return response
+  return secured
 }
 
 function shouldServeBrandedNotFound(pathname: string): boolean {
