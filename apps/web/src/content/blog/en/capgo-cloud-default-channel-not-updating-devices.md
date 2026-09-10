@@ -5,8 +5,8 @@ description: 'Capgo cloud default channel not updating devices? Check channel as
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
-created_at: 2026-09-08T11:40:12.000Z
-updated_at: 2026-09-10T21:47:52.000Z
+created_at: 2026-09-10T21:48:32.000Z
+updated_at: 2026-09-10T22:00:13.000Z
 head_image: /capgo_banner.png
 head_image_alt: Capacitor app configuration and native runtime compatibility check
 keywords: ''
