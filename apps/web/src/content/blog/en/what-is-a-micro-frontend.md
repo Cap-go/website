@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-10T08:43:45.415Z
-updated_at: 2026-09-10T08:43:47.066Z
+updated_at: 2026-09-10T08:46:28.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/9f23e109-42ba-4324-85b9-507ea19c7c2e/what-is-a-micro-frontend-micro-frontend.jpg'
 head_image_alt: What Is a Micro Frontend and How It Works
 keywords: 'micro frontend, frontend architecture, module federation, Capacitor, live updates'
