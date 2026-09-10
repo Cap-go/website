@@ -1,0 +1,108 @@
+---
+import heroLogoSlotsData from '@/data/hero-logo-slots.json'
+import { formatHeroUsers, type AssignedHeroApp, type HeroLogoSlotsFile } from '@/lib/heroClientApps'
+
+const selectedApps = (heroLogoSlotsData as HeroLogoSlotsFile).apps as AssignedHeroApp[]
+const rowSizes = [12, 12, 10, 10, 8, 6, 4, 2]
+let logoIndex = 0
+const rows = rowSizes.map((size) => {
+  const slice = selectedApps.slice(logoIndex, logoIndex + size)
+  logoIndex += size
+  return slice
+})
+---
+
+<div
+  class="hero-logo-cloud pointer-events-none absolute inset-0 z-0 overflow-hidden"
+  style={`--hero-logo-cols: ${rowSizes[0]}; --hero-logo-rows: ${rowSizes.length}`}
+  aria-hidden="true"
+>
+  <div class="flex h-full flex-col items-center gap-1">
+    {
+      rows.map((row, rowIndex) => (
+        <div class="flex flex-nowrap justify-center gap-1">
+          {row.map((app) => {
+            const usersLabel = formatHeroUsers(app.users)
+            return (
+              <div class="hero-logo-tile relative" data-hero-logo>
+                <img
+                  src={app.icon}
+                  alt=""
+                  width="80"
+                  height="80"
+                  decoding="async"
+                  loading={rowIndex >= 3 ? 'lazy' : 'eager'}
+                  class="hero-logo-img"
+                  onerror="this.closest('[data-hero-logo]')?.replaceChildren()"
+                />
+                {usersLabel && <span class="hero-logo-users">{usersLabel}</span>}
+              </div>
+            )
+          })}
+        </div>
+      ))
+    }
+  </div>
+  <div class="hero-logo-blur"></div>
+</div>
+
+<style>
+  .hero-logo-cloud {
+    container-type: size;
+    --hero-logo-gap: 0.25rem;
+    --hero-logo-size: min(
+      calc((100cqi - (var(--hero-logo-cols) - 1) * var(--hero-logo-gap)) / var(--hero-logo-cols)),
+      calc((100cqb - (var(--hero-logo-rows) - 1) * var(--hero-logo-gap)) / var(--hero-logo-rows))
+    );
+  }
+
+  .hero-logo-tile {
+    width: var(--hero-logo-size);
+    height: var(--hero-logo-size);
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 0.9rem;
+  }
+
+  .hero-logo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .hero-logo-blur {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 48% at 50% 42%, rgb(3 7 18 / 0.55) 0%, transparent 72%);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    mask-image: radial-gradient(ellipse 75% 52% at 50% 42%, black 0%, rgb(0 0 0 / 0.45) 38%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 52% at 50% 42%, black 0%, rgb(0 0 0 / 0.45) 38%, transparent 72%);
+  }
+
+  .hero-logo-users {
+    position: absolute;
+    top: 0.12rem;
+    right: 0.12rem;
+    z-index: 1;
+    border-radius: 999px;
+    background: rgb(4 6 12 / 0.32);
+    padding: 0.08rem 0.22rem;
+    font-size: 0.5rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: rgb(255 255 255 / 0.38);
+    pointer-events: none;
+  }
+
+  @media (max-width: 639px) {
+    .hero-logo-blur {
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+  }
+</style>
