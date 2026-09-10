@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-10T21:48:32.000Z
-updated_at: 2026-09-10T22:00:13.000Z
+updated_at: 2026-09-10T22:02:56.000Z
 head_image: /capgo_banner.png
 head_image_alt: Capacitor app configuration and native runtime compatibility check
 keywords: ''
