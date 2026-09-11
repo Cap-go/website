@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-11T09:53:44.529Z
-updated_at: 2026-09-11T09:53:46.144Z
+updated_at: 2026-09-11T09:56:26.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/be1fe3ae-952b-4fd7-a8db-70b2789f36fd/ios-app-submission-app-approval.jpg'
 head_image_alt: iOS App Submission How to Ship Without Rejection
 keywords: 'ios app submission, app store review, testflight guide, capacitor ios, capgo live updates'
