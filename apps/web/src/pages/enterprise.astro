@@ -10,6 +10,7 @@ import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createProd
 import { numberWithSpaces } from '@/services/misc'
 import { pluginCountLabel } from '@/config/plugins'
 import HumanSupport from '@/components/HumanSupport.astro'
+import EnterpriseTeachingDemo from '@/components/teaching-console/EnterpriseTeachingDemo.astro'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig
@@ -541,6 +542,12 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
             ))
           }
         </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Enterprise teaching console">
+      <div class="shell">
+        <EnterpriseTeachingDemo />
       </div>
     </section>
 

@@ -7,6 +7,9 @@ import type { MessageKey } from './messages'
 export const messageContextOverrides = {
   // Example:
   // updates: 'Pricing calculator metric label for monthly OTA update volume, not a nav item.',
+  // Keep security.astro visible: contact has 4 call sites and the generator samples only 3.
+  contact:
+    'Navigation or form label meaning contact Capgo. Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: site footer, page 404.astro, page security.astro. Message key `contact` (Contact).',
   live_update_hero_headline:
     'Punchy two-clause marketing hero headline. Meaning: skip App Store review delay and ship the hotfix immediately. Keep both clauses short and imperative; prefer natural local marketing phrasing over word-for-word calques.',
   live_update_hero_title:

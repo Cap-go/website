@@ -1,0 +1,116 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'connect', label: 'Connect', hint: 'Link a provider' },
+  { id: 'webhook', label: 'Webhook', hint: 'Event subscription' },
+  { id: 'flow', label: 'Flow', hint: 'Event delivered' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="integrations"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / <strong>Integrations</strong>'}
+    activeTab="information"
+    title="Integrations"
+    subtitle="Connect a provider, subscribe to webhooks, watch the event flow."
+    status="Connect GitHub to stream release events into Capgo."
+    actionLabel="Connect GitHub"
+    tabs={[
+      { id: 'dashboard', label: 'Dashboard' },
+      { id: 'information', label: 'Information' },
+      { id: 'logs', label: 'Logs' },
+    ]}
+  >
+    <div class="tc-card" aria-live="polite">
+      <dl class="tc-rows">
+        <div class="tc-row"><dt>Provider</dt><dd data-int-provider>GitHub · not connected</dd></div>
+        <div class="tc-row"><dt>Webhook</dt><dd data-int-hook class="tc-mono">—</dd></div>
+        <div class="tc-row"><dt>Last event</dt><dd data-int-event>—</dd></div>
+      </dl>
+    </div>
+    <div class="tc-term" style="margin-top:10px">
+      <div class="tc-term-bar"><span class="tc-term-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>events</span></div>
+      <div class="tc-term-body" data-int-term aria-live="polite"><span class="dim">No events yet</span></div>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { setupTeachingConsole, typeTerminalLines } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="integrations"]').forEach((root) => {
+    const setText = (sel: string, text: string) => {
+      const el = root.querySelector(sel)
+      if (el) el.textContent = text
+    }
+
+    /** Paint cumulative integration state so re-entering earlier steps clears later fields. */
+    function paintIntegrations(step: 'connect' | 'webhook' | 'flow', ctx: {
+      prefersReducedMotion: boolean
+      query: (s: string) => HTMLElement | null
+      setActionDisabled: (d: boolean) => void
+    }) {
+      if (step === 'connect') {
+        setText('[data-int-provider]', 'GitHub · authorizing…')
+        setText('[data-int-hook]', '—')
+        setText('[data-int-event]', '—')
+        // Bump typeTerminalLines run id so a still-typing Flow run cannot append after reset.
+        typeTerminalLines(ctx.query('[data-int-term]'), ['<span class="dim">No events yet</span>'], true)
+        return
+      }
+      setText('[data-int-provider]', 'GitHub · connected')
+      setText('[data-int-hook]', 'https://api.capgo.app/hooks/gh/demo')
+      if (step === 'webhook') {
+        setText('[data-int-event]', '—')
+        // Invalidate any in-flight Flow typing before clearing the terminal.
+        typeTerminalLines(ctx.query('[data-int-term]'), ['<span class="dim">No events yet</span>'], true)
+        return
+      }
+      setText('[data-int-event]', 'release.published · v1.0.2')
+      typeTerminalLines(
+        ctx.query('[data-int-term]'),
+        [
+          '<span class="ok">✓</span> push main@a3f91c2',
+          '<span class="ok">✓</span> release.published v1.0.2',
+          '<span class="ok">✓</span> Capgo deploy job enqueued',
+        ],
+        ctx.prefersReducedMotion,
+      )
+      ctx.setActionDisabled(true)
+    }
+
+    setupTeachingConsole(
+      root,
+      [
+        {
+          id: 'connect',
+          actionLabel: 'Connect GitHub',
+          status: 'Connect GitHub to stream release events into Capgo.',
+          enter(ctx) {
+            paintIntegrations('connect', ctx)
+          },
+        },
+        {
+          id: 'webhook',
+          actionLabel: 'Create webhook',
+          status: 'Webhook subscribed for push + release events.',
+          enter(ctx) {
+            paintIntegrations('webhook', ctx)
+          },
+        },
+        {
+          id: 'flow',
+          actionLabel: 'Watch events',
+          status: 'Release event received — Capgo queued channel update.',
+          enter(ctx) {
+            paintIntegrations('flow', ctx)
+          },
+        },
+      ],
+      { startWhenVisible: true },
+    )
+  })
+</script>

@@ -1,0 +1,155 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'queue', label: 'Queue', hint: 'Request a signed build' },
+  { id: 'compile', label: 'Compile', hint: 'Cloud build + AI assist' },
+  { id: 'artifact', label: 'Artifact', hint: 'Signed IPA ready' },
+]
+---
+
+<div class="tc-embed">
+  <ConsoleShell
+    demoId="native-build"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / Builds / <strong>ios-release-184</strong>'}
+    activeTab="builds"
+    title="Native build"
+    subtitle="Queue a cloud build, watch compile progress with Capgo AI assist, then download the signed artifact."
+    status="Queue an iOS release build for com.demo.app."
+    actionLabel="Queue iOS build"
+  >
+    <div class="tc-card">
+      <dl class="tc-rows">
+        <div class="tc-row"><dt>Platform</dt><dd>iOS · release</dd></div>
+        <div class="tc-row"><dt>App ID</dt><dd class="tc-mono">com.demo.app</dd></div>
+        <div class="tc-row"><dt>Commit</dt><dd class="tc-mono">a3f91c2 · main</dd></div>
+        <div class="tc-row" data-tc-panel="compile">
+          <dt>Compile</dt>
+          <dd>
+            <div class="tc-progress">
+              <div class="tc-progress-track"><div class="tc-progress-bar" data-nb-bar style="width:0%"></div></div>
+              <div class="tc-progress-meta" aria-live="polite"><span data-nb-phase>Queued</span><span data-nb-pct>0%</span></div>
+            </div>
+          </dd>
+        </div>
+        <div class="tc-row" data-tc-panel="artifact" hidden>
+          <dt>Artifact</dt>
+          <dd><span class="tc-pill">Signed</span> <span class="tc-mono">DemoApp-1.0.0-184.ipa · 64.2 MB</span></dd>
+        </div>
+      </dl>
+    </div>
+    <div class="tc-ai-card" data-nb-ai hidden>
+      <strong>Capgo AI</strong>
+      <p data-nb-ai-copy aria-live="polite">
+        Optional assist while the cloud build runs — same diagnosis surface as Capgo Builder AI debug, without a separate replay control.
+      </p>
+    </div>
+  </ConsoleShell>
+</div>
+
+<script>
+  import { animateProgress, setupTeachingConsole } from './teaching-console.client.ts'
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="native-build"]').forEach((root) => {
+    let compileTimers: ReturnType<typeof setTimeout>[] = []
+    let compileGen = 0
+
+    function clearCompileTimers() {
+      compileTimers.forEach((id) => clearTimeout(id))
+      compileTimers = []
+      compileGen += 1
+    }
+
+    setupTeachingConsole(
+      root,
+      [
+        {
+          id: 'queue',
+          actionLabel: 'Queue iOS build',
+          status: 'Queue an iOS release build for com.demo.app.',
+          enter(ctx) {
+            clearCompileTimers()
+            ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="artifact"]').forEach((el) => (el.hidden = true))
+            const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
+            if (ai) ai.hidden = true
+            const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
+            animateProgress(bar, 0, true)
+            const phase = ctx.root.querySelector('[data-nb-phase]')
+            const pct = ctx.root.querySelector('[data-nb-pct]')
+            if (phase) phase.textContent = 'Queued'
+            if (pct) pct.textContent = '0%'
+          },
+        },
+        {
+          id: 'compile',
+          actionLabel: 'Watch compile',
+          status: 'Compiling native project in Capgo cloud…',
+          enter(ctx) {
+            clearCompileTimers()
+            const gen = compileGen
+            const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
+            const phase = ctx.root.querySelector('[data-nb-phase]')
+            const pct = ctx.root.querySelector('[data-nb-pct]')
+            const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
+            const aiCopy = ctx.root.querySelector('[data-nb-ai-copy]')
+            if (ai) ai.hidden = false
+            if (aiCopy)
+              aiCopy.innerHTML =
+                'Codesign tip from Capgo AI: regenerate the profile for <code>com.demo.app</code>, or run <code>capgo build init --platform ios</code> — then re-queue.'
+            ctx.registerCancel(clearCompileTimers)
+            if (ctx.prefersReducedMotion) {
+              animateProgress(bar, 100, true)
+              if (phase) phase.textContent = 'Signing'
+              if (pct) pct.textContent = '100%'
+              return
+            }
+            animateProgress(bar, 28, false)
+            if (phase) phase.textContent = 'Resolving pods'
+            if (pct) pct.textContent = '28%'
+            compileTimers.push(
+              setTimeout(() => {
+                if (gen !== compileGen) return
+                animateProgress(bar, 67, false)
+                if (phase) phase.textContent = 'Compiling Swift'
+                if (pct) pct.textContent = '67%'
+              }, 900),
+            )
+            compileTimers.push(
+              setTimeout(() => {
+                if (gen !== compileGen) return
+                animateProgress(bar, 92, false)
+                if (phase) phase.textContent = 'Codesigning'
+                if (pct) pct.textContent = '92%'
+              }, 1800),
+            )
+          },
+          leave() {
+            clearCompileTimers()
+          },
+        },
+        {
+          id: 'artifact',
+          actionLabel: 'Download IPA',
+          status: 'Signed artifact ready — DemoApp-1.0.0-184.ipa',
+          enter(ctx) {
+            clearCompileTimers()
+            ctx.root.querySelectorAll<HTMLElement>('[data-tc-panel="artifact"]').forEach((el) => (el.hidden = false))
+            const ai = ctx.root.querySelector<HTMLElement>('[data-nb-ai]')
+            const aiCopy = ctx.root.querySelector('[data-nb-ai-copy]')
+            if (ai) ai.hidden = false
+            if (aiCopy) aiCopy.textContent = 'Build healthy — Capgo AI stayed available if codesign or pods had failed.'
+            const bar = ctx.root.querySelector<HTMLElement>('[data-nb-bar]')
+            animateProgress(bar, 100, ctx.prefersReducedMotion)
+            const phase = ctx.root.querySelector('[data-nb-phase]')
+            const pct = ctx.root.querySelector('[data-nb-pct]')
+            if (phase) phase.textContent = 'Complete'
+            if (pct) pct.textContent = '100%'
+            ctx.setActionDisabled(true)
+          },
+        },
+      ],
+      { startWhenVisible: true },
+    )
+  })
+</script>

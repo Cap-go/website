@@ -1,16 +1,33 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import SecurityTeachingDemo from '@/components/teaching-console/SecurityTeachingDemo.astro'
 import m from '@/copy/messages'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.security_policy({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.read_our_security_policy({}, { locale: Astro.locals.locale })
+const title = [
+  Astro.locals.runtimeConfig.public.brand,
+  m.security_product_seo_title({}, { locale: Astro.locals.locale }),
+].join(' | ')
+const description = m.security_product_seo_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 ---
 
 <Layout content={content}>
-  <div class="prose-sm prose prose-invert m-auto py-8">
-    <h1>{m.security_policy({}, { locale: Astro.locals.locale })}</h1>
+  <section class="security-product mx-auto max-w-5xl px-4 pt-12 pb-4" aria-labelledby="security-product-heading">
+    <header class="security-product-head">
+      <p class="security-product-eyebrow">Capgo Security</p>
+      <h1 id="security-product-heading" class="security-product-title">Sign, attest, and gate every release in the Capgo console</h1>
+      <p class="security-product-lead">
+        Capgo Security is the product surface for signed bundles, attestation, and trust gates — the same controls your team uses when shipping through Capgo Live Updates.
+      </p>
+    </header>
+    <SecurityTeachingDemo />
+    <p class="security-product-note">
+      Interactive console above · <a href="#security-policy">Vulnerability disclosure policy</a> below
+    </p>
+  </section>
+  <div id="security-policy" class="prose-sm prose prose-invert m-auto py-8">
+    <h2>{m.security_policy({}, { locale: Astro.locals.locale })}</h2>
     <p>
       {m.contact({}, { locale: Astro.locals.locale })}: <a href="https://github.com/Cap-go/capgo/security/advisories/new">https://github.com/Cap-go/capgo/security/advisories/new</a
       ><br />
@@ -90,4 +107,44 @@ const content = { title, description }
     </ul>
     <p>{m.security_closing({}, { locale: Astro.locals.locale })}</p>
   </div>
+
+  <style>
+    .security-product-head {
+      margin-bottom: 1.25rem;
+      max-width: 42rem;
+    }
+    .security-product-eyebrow {
+      margin: 0 0 0.5rem;
+      color: #93c5fd;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .security-product-title {
+      margin: 0;
+      color: #f8fafc;
+      font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      text-wrap: balance;
+    }
+    .security-product-lead {
+      margin: 0.75rem 0 0;
+      color: #cbd5e1;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .security-product-note {
+      margin: 0.85rem 0 0;
+      color: #94a3b8;
+      font-size: 0.8125rem;
+    }
+    .security-product-note a {
+      color: #93c5fd;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  </style>
 </Layout>

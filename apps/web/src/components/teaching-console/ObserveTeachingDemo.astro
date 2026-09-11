@@ -1,0 +1,353 @@
+---
+import ConsoleShell from './ConsoleShell.astro'
+
+const steps = [
+  { id: 'deploy', label: 'Deploy', hint: 'Pick the release marker' },
+  { id: 'observe', label: 'Observe', hint: 'Read version health' },
+  { id: 'investigate', label: 'Investigate', hint: 'Open Logs Insights' },
+]
+---
+
+<figure class="observe-dashboard tc-embed">
+  <ConsoleShell
+    demoId="observe"
+    steps={steps}
+    breadcrumbs={'apps / Demo app / <strong>Observe</strong>'}
+    activeTab="observe"
+    title="Observe"
+    badge="BETA"
+    subtitle="Native health, launch timing, and WebView timing for reported versions."
+    status="Step 1: Select the latest release marker to anchor the rollout you just shipped."
+    actionLabel="Select v4.8.1 rollout"
+    showRange={true}
+  >
+    <div data-tc-panel="deploy" class="tc-card tc-card-pad">
+      <div class="tc-card-head">
+        <h3 class="tc-card-title">Release markers</h3>
+      </div>
+      <div class="tc-channels" role="group" aria-label="Release markers">
+        <button type="button" class="tc-channel is-selected" data-observe-release="stable" aria-pressed="true">v4.8.0 · production · Jan 5</button>
+        <button type="button" class="tc-channel" data-observe-release="rollout" aria-pressed="false">v4.8.1 · production · Jan 12</button>
+      </div>
+    </div>
+
+    <div data-tc-panel="observe" class="tc-metrics" aria-label="All versions summary">
+      <article class="tc-metric"><p>Tracked devices</p><strong data-m="tracked">8,240</strong></article>
+      <article class="tc-metric is-good"><p>Issue-free devices</p><strong data-m="issueFree">98.6%</strong></article>
+      <article class="tc-metric"><p>Launch P90</p><strong data-m="launch">781 ms</strong></article>
+      <article class="tc-metric"><p>WebView P90</p><strong data-m="webview">1.2 s</strong></article>
+      <article class="tc-metric is-bad"><p>Native issues</p><strong data-m="native">326</strong></article>
+    </div>
+
+    <div data-tc-panel="observe" class="tc-charts" aria-label="Observe charts">
+      <div class="tc-card tc-card-pad tc-chart-card">
+        <div class="tc-card-head">
+          <div>
+            <h3 class="tc-card-title">Launch and WebView timing</h3>
+            <p class="tc-chart-sub">Daily P50 and P90 timing across reported versions.</p>
+          </div>
+          <svg class="tc-chart-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path stroke-linecap="round" d="M12 7v5l3 2" />
+          </svg>
+        </div>
+        <p class="tc-sr-only" id="observe-timing-desc">WebView P90 fluctuates around 1.1–1.3s and trends upward across 7–13 Jul; Launch P90 stays near 0.9–1.0s; Launch P50 stays near 0.8s.</p>
+        <svg class="tc-chart-svg" viewBox="0 0 360 140" aria-hidden="true" focusable="false">
+          <title>Line chart of launch and WebView timing</title>
+          <g class="tc-chart-grid" stroke="#e2e8f0" stroke-width="1">
+            <line x1="36" y1="18" x2="350" y2="18" />
+            <line x1="36" y1="48" x2="350" y2="48" />
+            <line x1="36" y1="78" x2="350" y2="78" />
+            <line x1="36" y1="108" x2="350" y2="108" />
+          </g>
+          <g class="tc-chart-axis" fill="#94a3b8" font-size="9" font-family="ui-sans-serif, system-ui, sans-serif">
+            <text x="4" y="22">1.4s</text>
+            <text x="4" y="52">1.2s</text>
+            <text x="4" y="82">1.0s</text>
+            <text x="8" y="112">0.8s</text>
+            <text x="40" y="132">7 Jul</text>
+            <text x="95" y="132">8 Jul</text>
+            <text x="150" y="132">9 Jul</text>
+            <text x="200" y="132">10 Jul</text>
+            <text x="255" y="132">11 Jul</text>
+            <text x="310" y="132">13 Jul</text>
+          </g>
+          <!-- WebView P90 area + line (green) -->
+          <path
+            class="tc-chart-area tc-chart-area--webview"
+            d="M48,62 L100,48 L154,55 L208,42 L262,50 L318,38 L318,108 L48,108 Z"
+            fill="rgba(16,185,129,0.12)"
+          />
+          <path
+            class="tc-chart-line tc-chart-line--webview"
+            d="M48,62 L100,48 L154,55 L208,42 L262,50 L318,38"
+            fill="none"
+            stroke="#10b981"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <!-- Launch P90 (red) -->
+          <path
+            class="tc-chart-line tc-chart-line--launch"
+            d="M48,92 L100,88 L154,90 L208,86 L262,84 L318,82"
+            fill="none"
+            stroke="#ef4444"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <!-- Launch P50 (blue) -->
+          <path
+            class="tc-chart-line tc-chart-line--p50"
+            d="M48,100 L100,98 L154,99 L208,97 L262,96 L318,95"
+            fill="none"
+            stroke="#3b82f6"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <g fill="#10b981">
+            <circle cx="48" cy="62" r="2.5" /><circle cx="100" cy="48" r="2.5" /><circle cx="154" cy="55" r="2.5" />
+            <circle cx="208" cy="42" r="2.5" /><circle cx="262" cy="50" r="2.5" /><circle cx="318" cy="38" r="2.5" />
+          </g>
+          <g fill="#ef4444">
+            <circle cx="48" cy="92" r="2.5" /><circle cx="100" cy="88" r="2.5" /><circle cx="154" cy="90" r="2.5" />
+            <circle cx="208" cy="86" r="2.5" /><circle cx="262" cy="84" r="2.5" /><circle cx="318" cy="82" r="2.5" />
+          </g>
+          <g fill="#3b82f6">
+            <circle cx="48" cy="100" r="2" /><circle cx="100" cy="98" r="2" /><circle cx="154" cy="99" r="2" />
+            <circle cx="208" cy="97" r="2" /><circle cx="262" cy="96" r="2" /><circle cx="318" cy="95" r="2" />
+          </g>
+        </svg>
+        <ul class="tc-chart-legend">
+          <li><i class="is-webview" aria-hidden="true"></i>WebView P90</li>
+          <li><i class="is-launch" aria-hidden="true"></i>Launch P90</li>
+          <li><i class="is-p50" aria-hidden="true"></i>Launch P50</li>
+        </ul>
+      </div>
+
+      <div class="tc-card tc-card-pad tc-chart-card">
+        <div class="tc-card-head">
+          <div>
+            <h3 class="tc-card-title">Events and issues</h3>
+            <p class="tc-chart-sub">Daily launches, WebView loads, and native issues.</p>
+          </div>
+          <svg class="tc-chart-ico is-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h3l3-7 4 14 3-7h5" />
+          </svg>
+        </div>
+        <p class="tc-sr-only" id="observe-events-desc">Daily launches near 3.0–3.3k, WebView loads near 2.8–3.0k, and native issues near 200–500 — far below the launch volume on a 0–3.5k axis.</p>
+        <svg class="tc-chart-svg" viewBox="0 0 360 140" aria-hidden="true" focusable="false">
+          <title>Bar chart of events and issues</title>
+          <g class="tc-chart-grid" stroke="#e2e8f0" stroke-width="1">
+            <line x1="36" y1="18" x2="350" y2="18" />
+            <line x1="36" y1="48" x2="350" y2="48" />
+            <line x1="36" y1="78" x2="350" y2="78" />
+            <line x1="36" y1="108" x2="350" y2="108" />
+          </g>
+          <g class="tc-chart-axis" fill="#94a3b8" font-size="9" font-family="ui-sans-serif, system-ui, sans-serif">
+            <text x="2" y="22">3.5k</text>
+            <text x="2" y="52">2.3k</text>
+            <text x="8" y="82">1.2k</text>
+            <text x="14" y="112">0</text>
+            <text x="42" y="132">7 Jul</text>
+            <text x="97" y="132">8 Jul</text>
+            <text x="152" y="132">9 Jul</text>
+            <text x="202" y="132">10 Jul</text>
+            <text x="257" y="132">11 Jul</text>
+            <text x="312" y="132">13 Jul</text>
+          </g>
+          <!-- grouped bars on 0–3.5k axis: launches, webview loads, native issues -->
+          <rect x="48" y="26" width="10" height="82" rx="2" fill="#93c5fd" />
+          <rect x="60" y="33" width="10" height="75" rx="2" fill="#5eead4" />
+          <rect x="72" y="100" width="6" height="8" rx="1.5" fill="#f87171" />
+          <rect x="103" y="27" width="10" height="81" rx="2" fill="#93c5fd" />
+          <rect x="115" y="35" width="10" height="73" rx="2" fill="#5eead4" />
+          <rect x="127" y="101" width="6" height="7" rx="1.5" fill="#f87171" />
+          <rect x="158" y="24" width="10" height="84" rx="2" fill="#93c5fd" />
+          <rect x="170" y="32" width="10" height="76" rx="2" fill="#5eead4" />
+          <rect x="182" y="99" width="6" height="9" rx="1.5" fill="#f87171" />
+          <rect x="213" y="30" width="10" height="78" rx="2" fill="#93c5fd" />
+          <rect x="225" y="36" width="10" height="72" rx="2" fill="#5eead4" />
+          <rect x="237" y="103" width="6" height="5" rx="1.5" fill="#f87171" />
+          <rect x="268" y="27" width="10" height="81" rx="2" fill="#93c5fd" />
+          <rect x="280" y="34" width="10" height="74" rx="2" fill="#5eead4" />
+          <rect x="292" y="98" width="6" height="10" rx="1.5" fill="#f87171" />
+          <rect x="323" y="23" width="10" height="85" rx="2" fill="#93c5fd" />
+          <rect x="335" y="31" width="10" height="77" rx="2" fill="#5eead4" />
+          <rect x="347" y="95" width="6" height="13" rx="1.5" fill="#f87171" />
+        </svg>
+        <ul class="tc-chart-legend">
+          <li><i class="is-launches" aria-hidden="true"></i>Launches</li>
+          <li><i class="is-loads" aria-hidden="true"></i>WebView loads</li>
+          <li><i class="is-issues" aria-hidden="true"></i>Native issues</li>
+        </ul>
+      </div>
+    </div>
+
+    <div data-tc-panel="observe" class="tc-card">
+      <table class="tc-table" aria-label="Version breakdown">
+        <thead>
+          <tr>
+            <th>Version</th><th>Events</th><th>Devices</th><th>Issue-free</th><th>Launch P90</th><th>WebView P90</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="is-focus" data-observe-row="stable">
+            <td>4.8.0</td><td>42.1k</td><td>6,980</td><td>98.9%</td><td>760 ms</td><td>1.1 s</td>
+          </tr>
+          <tr data-observe-row="rollout">
+            <td>4.8.1</td><td>18.6k</td><td>2,140</td><td data-m="vIssue">88.4%</td><td data-m="vLaunch">1.4 s</td><td data-m="vWeb">2.1 s</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div data-tc-panel="investigate" hidden>
+      <div class="tc-alert">
+        <strong>Bundle download failed</strong> is the largest error group with <span data-m="errCount">82</span> events (<span data-m="errShare">44.6%</span>).
+      </div>
+      <div class="tc-grid-2" style="margin-top:10px">
+        <div class="tc-card tc-card-pad">
+          <h3 class="tc-card-title">Error categories</h3>
+          <ul class="tc-list">
+            <li><span>Bundle download failed</span><strong>82</strong></li>
+            <li><span>App crash</span><strong>44</strong></li>
+            <li><span>WebView JavaScript error</span><strong>31</strong></li>
+            <li><span>Checksum validation failed</span><strong>18</strong></li>
+          </ul>
+        </div>
+        <div class="tc-card tc-card-pad">
+          <h3 class="tc-card-title">Top affected versions</h3>
+          <ul class="tc-list">
+            <li><span>4.8.1 · Bundle download failed</span><strong>55 · 14 devices</strong></li>
+            <li><span>4.8.0 · App crash</span><strong>12 · 6 devices</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ConsoleShell>
+  <noscript>
+    <picture>
+      <source media="(max-width: 720px)" srcset="/landing-demos/observe-dashboard-mobile.webp" />
+      <img src="/landing-demos/observe-dashboard.webp" alt="Capgo Observe dashboard" width="1440" height="1100" loading="eager" decoding="async" />
+    </picture>
+  </noscript>
+</figure>
+
+<script>
+  import { setupTeachingConsole } from './teaching-console.client.ts'
+
+  const rollout = {
+    tracked: '8,240',
+    issueFree: '91.2%',
+    launch: '1.4 s',
+    webview: '2.1 s',
+    native: '892',
+    vIssue: '88.4%',
+    vLaunch: '1.4 s',
+    vWeb: '2.1 s',
+    errCount: '82',
+    errShare: '44.6%',
+  }
+
+  function applyMetrics(root: HTMLElement, data: Record<string, string>) {
+    for (const [key, value] of Object.entries(data)) {
+      root.querySelectorAll(`[data-m="${key}"]`).forEach((el) => {
+        el.textContent = value
+      })
+    }
+  }
+
+  function showPanels(root: HTMLElement, names: string[]) {
+    root.querySelectorAll<HTMLElement>('[data-tc-panel]').forEach((panel) => {
+      const id = panel.dataset.tcPanel
+      panel.hidden = !id || !names.includes(id)
+    })
+  }
+
+  const baseline = {
+    tracked: '8,240',
+    issueFree: '98.6%',
+    launch: '781 ms',
+    webview: '1.2 s',
+    native: '326',
+    errCount: '82',
+    errShare: '44.6%',
+  }
+
+  function selectRelease(root: HTMLElement, id: string) {
+    root.querySelectorAll<HTMLElement>('[data-observe-release]').forEach((btn) => {
+      const selected = btn.getAttribute('data-observe-release') === id
+      btn.classList.toggle('is-selected', selected)
+      btn.setAttribute('aria-pressed', selected ? 'true' : 'false')
+    })
+    root.querySelectorAll('[data-observe-row]').forEach((row) => {
+      row.classList.toggle('is-focus', row.getAttribute('data-observe-row') === id)
+    })
+    if (id === 'rollout') {
+      applyMetrics(root, rollout)
+    } else {
+      // Restore all-versions summary only; keep per-version row values for 4.8.1.
+      applyMetrics(root, {
+        tracked: baseline.tracked,
+        issueFree: baseline.issueFree,
+        launch: baseline.launch,
+        webview: baseline.webview,
+        native: baseline.native,
+      })
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-tc-demo="observe"]').forEach((root) => {
+    setupTeachingConsole(root, [
+      {
+        id: 'deploy',
+        actionLabel: 'Select v4.8.1 rollout',
+        status: 'Step 1: Select the latest release marker to anchor the rollout you just shipped.',
+        enter(ctx) {
+          showPanels(ctx.root, ['deploy', 'observe'])
+          selectRelease(ctx.root, 'stable')
+        },
+      },
+      {
+        id: 'observe',
+        actionLabel: 'Investigate in Logs',
+        status: 'Step 2: Release v4.8.1 on production — issue-free 91.2%, native issues 892.',
+        enter(ctx) {
+          showPanels(ctx.root, ['deploy', 'observe'])
+          selectRelease(ctx.root, 'rollout')
+        },
+      },
+      {
+        id: 'investigate',
+        actionLabel: 'Open device timeline',
+        status: 'Step 3: Follow the trend into Logs Insights for errors, versions, and devices.',
+        enter(ctx) {
+          showPanels(ctx.root, ['investigate'])
+          selectRelease(ctx.root, 'rollout')
+          const logsTab = ctx.root.querySelector('[data-tc-chrome-tab="logs"]')
+          ctx.root.querySelectorAll('[data-tc-chrome-tab]').forEach((tab) => tab.classList.remove('is-active'))
+          logsTab?.classList.add('is-active')
+        },
+      },
+    ])
+
+    root.querySelectorAll<HTMLButtonElement>('[data-observe-release]').forEach((btn) => {
+      btn.addEventListener('click', (event) => {
+        event.stopPropagation()
+        const id = btn.getAttribute('data-observe-release')
+        if (!id) return
+        selectRelease(root, id)
+        const status = root.querySelector('[data-tc-status]')
+        if (!status) return
+        if (id === 'rollout') {
+          status.textContent = 'Release v4.8.1 selected — issue-free 91.2%, native issues 892.'
+        } else {
+          status.textContent = 'Release v4.8.0 selected — stable baseline for comparison.'
+        }
+      })
+    })
+  })
+</script>

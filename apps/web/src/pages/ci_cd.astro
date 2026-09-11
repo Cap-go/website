@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
+import CiCdTeachingDemo from '@/components/teaching-console/CiCdTeachingDemo.astro'
 
 const locale = Astro.locals.locale
 const pageTitle = 'Capacitor CI/CD with Capgo Build | Capgo'
@@ -103,6 +104,12 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
             <span class="text-gray-100">✓</span> Capgo Build • <span class="text-gray-100">✓</span> iOS & Android CI/CD • <span class="text-gray-100">✓</span> GitHub Actions-ready
           </p>
         </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-900 py-12 sm:py-16" aria-label="CI/CD teaching console">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <CiCdTeachingDemo />
       </div>
     </section>
 

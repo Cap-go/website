@@ -11,6 +11,7 @@ import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
+import NativeBuildTeachingDemo from '@/components/teaching-console/NativeBuildTeachingDemo.astro'
 
 type Plan = Database['public']['Tables']['plans']['Row']
 
@@ -329,23 +330,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
           <p class="rv-one-line">{copy('native_build_v2_reveal_line')}</p>
         </div>
 
-        <div class="demo-wrap">
-          <div class="terminal-frame">
-            <div class="terminal-bar">
-              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-              <span class="title" id="demo-term-title">capgo build request --platform ios</span>
-              <div class="demo-tabs">
-                <button id="demo-tab-ios" class="demo-tab active" type="button">iOS</button>
-                <button id="demo-tab-android" class="demo-tab" type="button">Android</button>
-              </div>
-            </div>
-            <div class="terminal-body" id="demo-term-body" aria-live="polite"></div>
-          </div>
-          <div class="demo-controls">
-            <span>{copy('native_build_v2_demo_hint')}</span>
-            <button class="demo-replay" id="demo-replay" type="button">⟲ {copy('native_build_v2_demo_replay')}</button>
-          </div>
-        </div>
+        <div class="demo-wrap"><NativeBuildTeachingDemo /></div>
       </div>
     </section>
 
@@ -936,8 +921,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
               </div>
             </div>
             <div class="demo-controls aidebug-controls">
-              <span>Optional. Only runs if you choose Capgo AI.</span>
-              <button class="demo-replay" id="aidebug-replay" type="button">⟲ Replay</button>
+              <span>Optional. Only runs if you choose Capgo AI. Teaching console above covers the interactive build flow — no separate replay.</span>
             </div>
           </div>
 
@@ -7187,8 +7171,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       )
       io.observe(body)
 
-      const replay = document.getElementById('aidebug-replay')
-      if (replay) replay.addEventListener('click', run)
+      // aidebug Replay folded into NativeBuildTeachingDemo (no separate replay control)
     })()
   </script>
 </Layout>
