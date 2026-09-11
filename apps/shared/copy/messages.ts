@@ -1754,6 +1754,10 @@ const messages = {
   github_stars: 'GitHub Stars',
   npm_monthly: 'npm monthly',
   oss_contributors: 'OSS contributors',
+  ota_launch_illustration_aria_label: 'Animation: the app stays open while a signed bundle downloads in the background, then applies on the next launch',
+  ota_launch_illustration_sr_description:
+    'The app remains usable while Capgo delivers a signed bundle in the background. On the next launch, the same app runs the updated version.',
+  ota_launch_status_updating: 'Updating in background...',
   give_pr_a_descriptive_title: 'Give the PR a descriptive title.',
   global_infra_badge_instant: 'INSTANT',
   global_infra_latency_ultra_low: 'Ultra-low latency worldwide',
