@@ -70,9 +70,9 @@ Choose where the bundle should land:
 
 | Console choice | When to use |
 | --- | --- |
+| **Auto (recommended)** | Default. Same as **Rollout target** when progressive rollout is configured; same as **Replace stable** when it is not. Matches API `target: "auto"` and CLI uploads without `--stable` or `--rollout`. |
 | **Rollout target** | Ship a candidate; stable fallback stays as-is. |
 | **Replace stable** | Intentionally replace production stable (escape hatch). |
-| **Auto** (API default) | Same as **Rollout target** when progressive rollout is configured; same as **Replace stable** when it is not. |
 
 The hint **Auto uses rollout when progressive is configured** applies to API `target: "auto"` and to CLI uploads that do not pass `--stable` or `--rollout`.
 </Aside>
@@ -92,7 +92,8 @@ The hint **Auto uses rollout when progressive is configured** applies to API `ta
 | `bundle upload --channel <name> --rollout <percent>` | Unchanged | **Set**; rollout **enabled** at that percentage | One-step upload + enable. |
 | `bundle upload --channel <name> --stable` | **Replaced** | Unchanged | Escape hatch — intentional stable replace. |
 | `bundle upload` with **no** `--channel` | Unchanged | Unchanged | Register only; link with `channel set` or API. |
-| Console link dialog → **Rollout target** | Unchanged | **Set** | Same as default assign on rollout channels. |
+| Console link dialog → **Auto (recommended)** | Unchanged on rollout channels | **Set** on rollout channels | Default choice. |
+| Console link dialog → **Rollout target** | Unchanged | **Set** | Explicit rollout target. |
 | Console link dialog → **Replace stable** | **Replaced** | Unchanged | Escape hatch. |
 | [PUT `/bundle/`](/docs/public-api/bundles/) with `target: "auto"` | Unchanged on rollout channels | **Set** on rollout channels | API default. |
 | [PUT `/bundle/`](/docs/public-api/bundles/) with `target: "rollout"` | Unchanged | **Set** | Explicit rollout target. |
