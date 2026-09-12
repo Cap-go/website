@@ -23,9 +23,11 @@ Each channel can have two bundle links at the same time:
 ### What happens on each update check
 
 1. The device asks Capgo for an update on its channel.
-2. If a rollout is **enabled**, not paused, and has a target, Capgo checks whether this device is in the rollout cohort.
-3. **In the cohort** → Capgo serves the rollout target.
-4. **Not in the cohort** (or rollout disabled/paused) → Capgo serves the stable bundle.
+2. If the rollout is **disabled**, or there is no target, Capgo serves the **stable bundle**.
+3. If the rollout is **enabled** and **paused**, devices already in the cohort keep the **rollout target**; everyone else receives **stable**.
+4. If the rollout is **enabled** and not paused, Capgo checks whether this device is in the rollout cohort:
+   - **In the cohort** → rollout target.
+   - **Not in the cohort** → stable bundle.
 
 Capgo makes a random decision for each eligible device, then caches it using a hash of the device ID and the rollout ID. That makes the cohort **sticky** for the configured cache duration instead of re-rolling on every update check.
 
