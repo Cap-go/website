@@ -15,6 +15,7 @@ import { Icon as AstroIcon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { marked } from 'marked'
+import { sanitizeMarkdownHtml } from '@/lib/sanitizeHtml'
 
 const locale = Astro.locals.locale ?? defaultLocale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -84,7 +85,7 @@ const plugins = await Promise.all(
     const docsLocale = docsSlug && localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
     return {
       ...item,
-      description: await marked.parse(item.description),
+      description: sanitizeMarkdownHtml(await marked.parse(item.description)),
       categoryLabel: categoryLabelById.get(item.category) ?? 'Plugin',
       docsHref: tutorialHref ?? (docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : item.href),
       hasSiteDocs: hasTutorial || Boolean(docsSlug),

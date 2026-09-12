@@ -1,6 +1,7 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { MCP_ENDPOINT_PATHS, MCP_MANIFEST_PATHS, OPENAPI_ALIAS_PATHS, OPENAPI_ASSET_PATH, markdownNotFoundResponse, prefersMarkdown } from '../../../shared/agentDiscovery'
 import { resolveLegacyPathRedirect } from '../../../shared/legacyPathRedirects'
+import { withWebSecurityHeaders } from '../../../shared/security/responseHeaders.mjs'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
 import { handleReadmeBanner } from './readme-banner'
@@ -216,10 +217,11 @@ const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
 const SKIP_AI_CRAWLER_TRACKING_HEADER = 'X-Capgo-Skip-AI-Crawler-Tracking'
 
 function trackAICrawler(request: Request, response: Response, ctx?: BackgroundContext): Response {
+  const secured = withWebSecurityHeaders(response)
   if (request.headers.get(SKIP_AI_CRAWLER_TRACKING_HEADER) !== '1') {
-    trackAICrawlerResponse(request, response, ctx, { websiteId: DATAFAST_WEBSITE_ID })
+    trackAICrawlerResponse(request, secured, ctx, { websiteId: DATAFAST_WEBSITE_ID })
   }
-  return response
+  return secured
 }
 
 async function handleRouteRequest(request: Request, env: Env, pathname: string, ctx?: BackgroundContext): Promise<Response | null> {
