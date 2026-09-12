@@ -457,6 +457,10 @@ const messages = {
     'User-owned application code or project configuration that Capgo does not own, ship, or control, including files such as capacitor.config.ts, config.capacitor.ts, app source code, and environment-specific settings.',
   bug_bounty_out_of_scope_9:
     'Access to Capgo bundle files or proof that bundle files can be downloaded. Bundle files are public web assets, users are informed of this, and access to them is not considered a data breach.',
+  bug_bounty_out_of_scope_10:
+    'Unauthenticated Capgo plugin/API endpoints that are intentionally public by design — including channel_self set and update/stats endpoints that do not require an API key — are not vulnerabilities. Do not report them as such.',
+  bug_bounty_out_of_scope_11:
+    'Uploader or UI incorrectly labeling encryption for bundles served via external_url is not a Capgo vulnerability (encryption of externally hosted bundles is outside Capgo’s control).',
   bug_bounty_out_of_scope_title: 'Out of Scope',
   bug_bounty_supabase_title: 'Supabase and Third-Party Services',
   bug_bounty_supabase_intro:
@@ -482,10 +486,10 @@ const messages = {
   bug_bounty_supabase_limitations_4:
     'If the issue is in this list but you can show a concrete Supabase-side fix in the provided project or a concrete Capgo-owned security defect, we can consider it in scope.',
   bug_bounty_payment_note:
-    'Capgo is a tiny bootstrapped company, so our bounty amounts are lower than large-company programs. Reports without a clear exploit path are paid up to $30 max. Exploits with real, reproducible impact on Capgo are paid up to $300 max. We accept and review security reports for Capgo plugins, but paid bounties for plugin code are limited to @capgo/capacitor-updater. Other Capgo plugins are free to use and are not part of our paid product offering, so reports for them are reviewed but unpaid. Payments are issued only after we have identified the issue, fixed it, opened a pull request, and you have verified after release that the fix works for you. This process usually takes between 20 and 30 days. Please do not send messages like "to get paid"; payment happens only once the release is live and you\'ve tested and validated the fix.',
+    'Capgo is a tiny bootstrapped company, so our bounty amounts are lower than large-company programs. Reports without a clear exploit path are paid up to $30 max. Exploits with real, reproducible impact on Capgo are paid up to $300 max. We accept and review security reports for Capgo plugins, but paid bounties for plugin code are limited to @capgo/capacitor-updater. Other Capgo plugins are free to use and are not part of our paid product offering, so reports for them are reviewed but unpaid. Payments are issued only after we have identified the issue, released the fix, and you have verified post-release that the fix works for you. Opening or linking a pull request alone does not qualify for payment. This process usually takes a few days to a few weeks depending on severity and release cadence. Please do not send messages like "to get paid"; payment happens only once the release is live and you\'ve tested and validated the fix.',
   bug_bounty_program: 'Bug Bounty Program',
   bug_bounty_repo_landing: 'Capgo Backend & Landing',
-  bug_bounty_repo_landing_desc: 'Main Capgo repository including backend services and landing website',
+  bug_bounty_repo_landing_desc: 'Capgo backend and product repository (capgo.app API, dashboard, and related services)',
   bug_bounty_repo_updater: 'Capacitor Updater Plugin',
   bug_bounty_repo_updater_desc: 'The core Capacitor plugin that handles over-the-air updates on mobile devices',
   bug_bounty_report_security_issue: 'Report Security Issue',
@@ -2984,6 +2988,10 @@ const messages = {
     'User-owned application code or project configuration that Capgo does not own, ship, or control, including files such as capacitor.config.ts, config.capacitor.ts, app source code, and environment-specific settings.',
   security_out_of_scope_14:
     'Access to Capgo bundle files or proof that bundle files can be downloaded. Bundle files are public web assets, users are informed of this, and access to them is not considered a data breach.',
+  security_out_of_scope_15:
+    'Unauthenticated Capgo plugin/API endpoints that are intentionally public by design — including channel_self set and update/stats endpoints that do not require an API key — are not vulnerabilities. Do not report them as such.',
+  security_out_of_scope_16:
+    'Uploader or UI incorrectly labeling encryption for bundles served via external_url is not a Capgo vulnerability (encryption of externally hosted bundles is outside Capgo’s control).',
   security_supabase_limitations_title: 'Known Supabase Auth Limitations',
   security_supabase_limitations_intro:
     'Some findings are repeatedly reported and tied to Supabase Auth behavior. These are only treated as Supabase-side issues when they can be reproduced in a shared Supabase demo project configured like ours and when a Supabase configuration change fixes the behavior without changing Capgo security rules. If the fix requires changing Capgo-owned SQL, RPCs, RLS policies, functions, or app logic, that is a Capgo issue and should be reported to us.',
