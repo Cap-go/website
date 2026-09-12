@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-12T08:08:41.842Z
-updated_at: 2026-09-12T08:08:43.785Z
+updated_at: 2026-09-12T08:11:23.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/5ede9c4a-6031-48d1-b65f-284edf156603/knowledge-sharing-in-teams-hand-drawn.jpg'
 head_image_alt: 'Knowledge Sharing in Teams: A Practical Playbook'
 keywords: 'knowledge sharing, team collaboration, engineering culture, remote teams, documentation'
