@@ -95,7 +95,7 @@ The modal provides:
 3. **Available channels**: List of all channels with their details (ID, visibility, platforms, creation date). Channels marked as "current" indicate where this bundle is already linked. Public channels show a link icon.
 4. **Set bundle to channel**: Confirms the selection and assigns this bundle to the selected channel
 
-**Set bundle to channel:** Assigns this bundle as the active version for a chosen channel. Devices subscribed to that channel will then receive this bundle.
+**Set bundle to channel:** Assigns this bundle to a chosen channel. On channels **without** progressive rollout configured, that becomes the stable bundle for the channel. On channels **with** progressive rollout configured, it becomes the rollout target and leaves stable unchanged. See [Progressive rollouts](/docs/live-updates/progressive-rollouts/#upload-and-assign-bundles) for routing details and how to replace stable explicitly.
 
 To open a channel's dedicated page, click on the channel name link in the Channel row.
 

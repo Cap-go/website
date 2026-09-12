@@ -188,7 +188,7 @@ The channel **Information** tab includes a **Progressive rollout** section. Set 
 
 <figure><img src="/progressive-rollout.webp" alt="Progressive rollout controls in a Capgo channel" /><figcaption>Progressive rollout controls appear at the top of the channel Information tab.</figcaption></figure>
 
-Read [Progressive rollouts](/docs/live-updates/progressive-rollouts/) before enabling one. That guide covers the stable vs rollout-target model, what happens when you upload or assign bundles while a rollout is active (`bundle upload --rollout` vs `--channel` alone), dashboard control effects on existing vs new devices, and a safe monitoring workflow with [Observe](/docs/webapp/observe/) and [Log Insights](/docs/webapp/log-insights/).
+Read [Progressive rollouts](/docs/live-updates/progressive-rollouts/) before enabling one. That guide covers the stable vs rollout-target model, upload routing (on a rollout-configured channel, assigning a bundle sets the **rollout target** and leaves **stable** unchanged; use an explicit stable override when you mean to replace production), dashboard control effects on existing vs new devices, and a safe monitoring workflow with [Observe](/docs/webapp/observe/) and [Log Insights](/docs/webapp/log-insights/).
 
 ## Keep going from Channels
 
