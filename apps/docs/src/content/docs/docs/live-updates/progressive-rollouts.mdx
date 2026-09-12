@@ -7,27 +7,27 @@ sidebar:
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-A progressive rollout keeps a channel's **stable bundle** in place while delivering a separate **rollout target** to a controlled subset of devices. Most production users stay on stable. Only the rollout cohort receives the candidate until you promote it or roll it back.
+A progressive rollout keeps a channel's **stable fallback** in place while delivering a separate **rollout target** to a controlled subset of devices. Most production users stay on stable. Only the rollout cohort receives the candidate until you **Complete rollout** or **Rollback rollout**.
 
-<figure><img src="/progressive-rollout.webp" alt="Progressive rollout controls in a Capgo channel" /><figcaption>Configure the rollout target, percentage, cache duration, and auto-pause policy from a channel's Information tab.</figcaption></figure>
+<figure><img src="/progressive-rollout.webp" alt="Progressive rollout controls in a Capgo channel" /><figcaption>The **Progressive rollout** section on a channel's Information tab shows **Rollout target** and **Stable fallback**, percentage controls, and rollout actions.</figcaption></figure>
 
 ## How progressive rollouts work end to end
 
 Each channel can have two bundle links at the same time:
 
-| Link | What it is | Who receives it |
+| Console label | API / CLI | Who receives it |
 | --- | --- | --- |
-| **Stable bundle** | The channel's normal, production bundle (`version` in the API). | Every device on the channel that is **not** in the rollout cohort. |
-| **Rollout target** | The candidate bundle you are testing (`rolloutVersion` / `rollout_version` in the API). | Only devices Capgo randomly selects into the rollout cohort while the rollout is **enabled** and not paused. |
+| **Stable fallback** | Stable bundle (`version` on [Channels POST](/docs/public-api/channels/)) | Every device on the channel that is **not** in the rollout cohort. |
+| **Rollout target** | Rollout target (`rolloutVersion` / `rollout_version`) | Only devices Capgo randomly selects into the rollout cohort while the rollout is **enabled** and not paused. |
 
 ### What happens on each update check
 
 1. The device asks Capgo for an update on its channel.
-2. If the rollout is **disabled**, or there is no target, Capgo serves the **stable bundle**.
-3. If the rollout is **enabled** and **paused**, devices already in the cohort keep the **rollout target**; everyone else receives **stable**.
+2. If the rollout is **disabled**, or there is no target, Capgo serves the **stable fallback**.
+3. If the rollout is **enabled** and **paused**, devices already in the cohort keep the **rollout target**; everyone else receives **stable fallback**.
 4. If the rollout is **enabled** and not paused, Capgo checks whether this device is in the rollout cohort:
    - **In the cohort** → rollout target.
-   - **Not in the cohort** → stable bundle.
+   - **Not in the cohort** → stable fallback.
 
 Capgo makes a random decision for each eligible device, then caches it using a hash of the device ID and the rollout ID. That makes the cohort **sticky** for the configured cache duration instead of re-rolling on every update check.
 
@@ -37,67 +37,74 @@ The default rollout-decision cache duration is 30 days. After it expires, a devi
 
 ### Enable a rollout
 
-A rollout needs a stable bundle first. In the dashboard, assign the stable bundle before choosing the target. With the [Public Channels API](/docs/public-api/channels/), an existing channel can supply `version` and `rolloutVersion` in the same POST request.
+A rollout needs a stable fallback first. In the dashboard, assign the stable bundle before choosing the rollout target. With the [Public Channels API](/docs/public-api/channels/), an existing channel can supply `version` and `rolloutVersion` in the same POST request.
 
 To start delivery:
 
-1. Set the **rollout target** bundle.
-2. Choose a **percentage** (0–100%, or basis points for finer steps).
-3. **Enable** the rollout.
+1. Set the **Rollout target** (or upload/assign a bundle — see [Upload and assign bundles](#upload-and-assign-bundles)).
+2. Choose a **percentage** and click **Apply percentage**.
+3. Click **Enable rollout**.
 
-Until you enable it, configuring a target and percentage does not change what devices receive.
+Until you enable the rollout, configuring a target and percentage does not change what devices receive.
 
 ### Percentage changes
 
-Capgo preserves existing decisions when it can:
+In the console, edit the percentage and click **Apply percentage** to save it. Capgo preserves existing decisions when it can:
 
 - **Increase a percentage** — devices already selected stay selected; only a random subset of previously unselected devices is added.
-- **Decrease a percentage** — a random subset of the selected cohort returns to the stable bundle.
+- **Decrease a percentage** — a random subset of the selected cohort returns to the stable fallback.
 - **Set the percentage to 0%** — no new devices are selected. Devices already running the enabled rollout target continue to receive that target until you disable, roll back, or change the target.
-- **Pause** — stops new devices from entering while devices already running the enabled target remain on it.
-- **Disable** — stops resolving the rollout target; update checks use the stable bundle.
+- **Pause rollout** — stops new devices from entering while devices already running the enabled target remain on it.
+- **Disable rollout** — stops resolving the rollout target; update checks use the stable fallback.
 
 ## Upload and assign bundles
 
-Capgo routes channel uploads differently depending on whether progressive rollout is configured on that channel. The goal is to let you ship candidates without silently replacing production stable.
+On channels **with** progressive rollout configured, new uploads and bundle links go to the **rollout target** by default. **Stable fallback** stays unchanged unless you explicitly choose to replace it.
+
+<Aside type="note" title="This channel uses progressive rollout">
+When you upload or link a bundle to a rollout-configured channel, the console shows the title **This channel uses progressive rollout** and the banner:
+
+> New uploads and bundle links on this channel go to the rollout target by default. Stable stays unchanged unless you choose to replace it.
+
+Choose where the bundle should land:
+
+| Console choice | When to use |
+| --- | --- |
+| **Rollout target** | Ship a candidate; stable fallback stays as-is. |
+| **Replace stable** | Intentionally replace production stable (escape hatch). |
+| **Auto** (API default) | Same as **Rollout target** when progressive rollout is configured; same as **Replace stable** when it is not. |
+
+The hint **Auto uses rollout when progressive is configured** applies to API `target: "auto"` and to CLI uploads that do not pass `--stable` or `--rollout`.
+</Aside>
 
 ### Default upload routing
 
-| Channel state | `bundle upload --channel <name>` or dashboard assign to channel | Stable bundle | Rollout target |
+| Channel state | Default upload / assign | Stable fallback | Rollout target |
 | --- | --- | --- | --- |
-| **No** progressive rollout configured | Upload or assign goes to the channel | **Set to the upload** | N/A |
-| **Progressive rollout configured** | Upload or assign goes to the channel | **Unchanged** | **Set to the upload** |
+| **No** progressive rollout configured | Lands on the channel | **Set to the upload** | N/A |
+| **Progressive rollout configured** | Lands on the channel | **Unchanged** | **Set to the upload** |
 
-On a rollout-configured channel, assigning a bundle to the channel updates the **rollout target**, not stable. Most users keep receiving stable until you raise the percentage and enable the rollout (or use `--rollout` in one step). This matches the channel model in [Channels](/docs/webapp/channels/): stable and rollout target are separate links.
+### CLI and API paths
 
-<Aside type="tip" title="Explicit stable override">
-When you **do** mean to replace stable, set it explicitly:
-
-- CLI: `channel set <channel> <app> --bundle <version>`
-- API: `version` on [Channels POST](/docs/public-api/channels/)
-- Dashboard: use the control that sets or replaces the channel's stable bundle (exact console label is still being finalized)
-
-Those paths update stable only. They do not retarget the rollout cohort unless you also change the rollout target or enable delivery.
-</Aside>
-
-### All upload and assign paths
-
-| How you ship the bundle | Channel has rollout configured? | Stable bundle | Rollout target | Notes |
-| --- | --- | --- | --- | --- |
-| `bundle upload` with **no** `--channel` | Either | Unchanged | Unchanged | Register a bundle, then link it with `channel set` or the API. |
-| `bundle upload --channel <name>` | **No** | **Set to upload** | N/A | Default channel upload behavior. |
-| `bundle upload --channel <name>` | **Yes** | Unchanged | **Set to upload** | Does not replace stable. |
-| `bundle upload --channel <name> --rollout <percent>` | **Yes** (needs stable already) | Unchanged | **Set to upload**; rollout **enabled** at that percentage | One-step upload + enable. |
-| Dashboard assign bundle to channel (Bundles tab) | **No** | **Set to upload** | N/A | Same routing as `bundle upload --channel`. |
-| Dashboard assign bundle to channel (Bundles tab) | **Yes** | Unchanged | **Set to upload** | Same routing as `bundle upload --channel`. |
-| `channel set --bundle <version>` | Either | **Replaced** | Unchanged | Explicit stable override. |
-| `channel set --rollout-bundle <version>` (+ `--rollout-percentage`, `--rollout-enable`) | Yes | Unchanged | **Set or changed** | Configure target without uploading. |
-| [Channels API](/docs/public-api/channels/) `version` | Either | **Replaced** when set | Unchanged | Explicit stable override. |
-| [Channels API](/docs/public-api/channels/) `rolloutVersion` | Yes | Unchanged | **Set or changed** when set | Programmatic target assignment. |
+| How you ship the bundle | Stable fallback | Rollout target | Notes |
+| --- | --- | --- | --- |
+| `bundle upload --channel <name>` (no extra flags) | Unchanged on rollout channels; **set** when no rollout | **Set** on rollout channels | Matches console default. |
+| `bundle upload --channel <name> --rollout <percent>` | Unchanged | **Set**; rollout **enabled** at that percentage | One-step upload + enable. |
+| `bundle upload --channel <name> --stable` | **Replaced** | Unchanged | Escape hatch — intentional stable replace. |
+| `bundle upload` with **no** `--channel` | Unchanged | Unchanged | Register only; link with `channel set` or API. |
+| Console link dialog → **Rollout target** | Unchanged | **Set** | Same as default assign on rollout channels. |
+| Console link dialog → **Replace stable** | **Replaced** | Unchanged | Escape hatch. |
+| [PUT `/bundle/`](/docs/public-api/bundles/) with `target: "auto"` | Unchanged on rollout channels | **Set** on rollout channels | API default. |
+| [PUT `/bundle/`](/docs/public-api/bundles/) with `target: "rollout"` | Unchanged | **Set** | Explicit rollout target. |
+| [PUT `/bundle/`](/docs/public-api/bundles/) with `target: "stable"` | **Replaced** | Unchanged | Escape hatch. |
+| `channel set --bundle <version>` | **Replaced** | Unchanged | Explicit stable override. |
+| `channel set --rollout-bundle <version>` (+ `--rollout-percentage`, `--rollout-enable`) | Unchanged | **Set or changed** | Configure target without uploading. |
+| [Channels POST](/docs/public-api/channels/) `version` | **Replaced** when set | Unchanged | Explicit stable override. |
+| [Channels POST](/docs/public-api/channels/) `rolloutVersion` | Unchanged | **Set or changed** when set | Programmatic target assignment. |
 
 ### CLI examples
 
-On a rollout-configured channel, upload and assign in one step (lands as rollout target; stable unchanged):
+Default upload on a rollout-configured channel (rollout target; stable unchanged):
 
 ```bash
 npx @capgo/cli@latest bundle upload com.example.app \
@@ -105,7 +112,7 @@ npx @capgo/cli@latest bundle upload com.example.app \
   --channel production
 ```
 
-Upload, set the rollout target, and enable at 5% in one command:
+Upload, set rollout target, and enable at 5%:
 
 ```bash
 npx @capgo/cli@latest bundle upload com.example.app \
@@ -114,7 +121,16 @@ npx @capgo/cli@latest bundle upload com.example.app \
   --rollout 5
 ```
 
-Upload without linking, then configure rollout separately:
+Replace stable explicitly:
+
+```bash
+npx @capgo/cli@latest bundle upload com.example.app \
+  --path ./dist \
+  --channel production \
+  --stable
+```
+
+Upload without linking, then configure rollout:
 
 ```bash
 npx @capgo/cli@latest bundle upload com.example.app --path ./dist -b 1.3.0
@@ -125,19 +141,19 @@ npx @capgo/cli@latest channel set production com.example.app \
   --rollout-enable
 ```
 
-Replace stable explicitly when that is what you intend:
+API assign with explicit target (`auto` | `stable` | `rollout`):
 
 ```bash
-npx @capgo/cli@latest channel set production com.example.app --bundle 1.2.0
-```
-
-Start a rollout for an already-uploaded bundle:
-
-```bash
-npx @capgo/cli@latest channel set production com.example.app \
-  --rollout-bundle 1.3.0 \
-  --rollout-percentage 5 \
-  --rollout-enable
+curl -X PUT \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "com.example.app",
+    "version_id": 456,
+    "channel_id": 789,
+    "target": "rollout"
+  }' \
+  https://api.capgo.app/bundle/
 ```
 
 Increase exposure without reseating devices already selected:
@@ -149,27 +165,26 @@ npx @capgo/cli@latest channel set production com.example.app \
 
 Use `--rollout-percentage-bps` when you need finer steps than whole percents (for example `50` = 0.5%).
 
-See the complete [channel CLI reference](/docs/cli/reference/channel/) and [bundle CLI reference](/docs/cli/reference/bundle/) for every rollout option.
+See the [channel CLI reference](/docs/cli/reference/channel/) and [bundle CLI reference](/docs/cli/reference/bundle/) for every rollout option. Console UX ships in [capgo.app#3313](https://github.com/Cap-go/capgo.app/pull/3313).
 
-## Dashboard controls
+## Progressive rollout section (dashboard)
 
 Open an app → **Channels** → choose the channel → **Information** → **Progressive rollout**.
 
-Exact button labels in the console are still being finalized. The table below uses plain-language names for each control concept. When the UI ships, labels may read **Promote** or **Complete rollout**, **Set target** or **Change target**, and similar — they map to the same behaviors described here.
+The section shows **Rollout target** and **Stable fallback** for the two bundle links. Use **Change rollout target** to pick a different candidate bundle. After editing the percentage, click **Apply percentage** to save it.
 
-| Control (concept) | What it does | Devices already in the cohort | New eligible devices |
+| Control | What it does | Devices already in the cohort | New eligible devices |
 | --- | --- | --- | --- |
-| **Set or change target** | Chooses the candidate bundle (`rolloutVersion`). Changing it starts a new rollout ID and a new cohort. Uploading or assigning a bundle to a rollout-configured channel also sets the target. | Keep the previous target until they check in again and match the new decision rules. | Selected by the new percentage against the new target. |
-| **Percentage** | Controls how many eligible devices may enter the cohort. | Preserved when you increase; a random subset may leave when you decrease. | Added or excluded according to the percentage rules above. |
-| **Decision cache duration** | How long each device's in/out decision is sticky (`rolloutCacheTtlSeconds`). | Unchanged until the cache expires or the rollout ID changes. | Same. |
-| **Enable** | Turns on rollout delivery for the configured target and percentage. | No immediate change until the next update check. | May be selected on the next check. |
-| **Pause** | Stops new devices from entering. | **Stay on the rollout target.** | **Receive stable** on the next check. |
-| **Resume** | Clears the pause. | Unchanged. | May be selected again on the next check. |
-| **Disable** | Stops resolving the rollout target; Capgo uses stable for everyone. | **Move to stable** on the next check. | **Receive stable.** |
-| **Promote / complete** (API: `promoteToStable`; CLI: `--rollout-promote`) | Makes the rollout target the new stable bundle, then clears rollout state. | **Become stable** for everyone. | **Receive the promoted bundle** as stable. |
-| **Roll back** (API: `rollback`; CLI: `--rollout-rollback`) | Clears the target, disables the rollout, resets percentage to 0%, and returns devices to stable. | **Return to stable** on the next check. | **Receive stable.** |
+| **Change rollout target** | Sets `rolloutVersion`. Changing it starts a new rollout ID and a new cohort. Uploading or assigning a bundle to the channel (default) also sets the rollout target. | Keep the previous target until they check in again and match the new decision rules. | Selected by the percentage against the new target. |
+| **Apply percentage** | Saves the percentage you entered. | Preserved when you increase; a random subset may leave when you decrease. | Added or excluded according to the percentage rules above. |
+| **Enable rollout** | Turns on rollout delivery for the configured target and percentage. | No immediate change until the next update check. | May be selected on the next check. |
+| **Pause rollout** | Stops new devices from entering. | **Stay on the rollout target.** | **Receive stable fallback** on the next check. |
+| **Resume rollout** | Clears the pause. | Unchanged. | May be selected again on the next check. |
+| **Disable rollout** | Stops resolving the rollout target; Capgo uses stable fallback for everyone. | **Move to stable fallback** on the next check. | **Receive stable fallback.** |
+| **Complete rollout** (API: `promoteToStable`; CLI: `--rollout-promote`) | Makes the rollout target the new stable fallback, then clears rollout state. Confirmed by **Complete progressive rollout?** — the target becomes stable for everyone, the previous stable fallback is replaced, and the percentage resets. | **Become stable fallback** for everyone. | **Receive the completed bundle** as stable. |
+| **Rollback rollout** (API: `rollback`; CLI: `--rollout-rollback`) | Clears the target, disables the rollout, resets percentage to 0%, and returns devices to stable fallback. | **Return to stable fallback** on the next check. | **Receive stable fallback.** |
 
-Use one terminal action at a time (promote and roll back cannot be combined in a single API call):
+Use one terminal action at a time (**Complete rollout** and **Rollback rollout** cannot be combined in a single API call):
 
 ```bash
 # Stop adding devices while you investigate
@@ -178,14 +193,14 @@ npx @capgo/cli@latest channel set production com.example.app --rollout-pause
 # Allow new devices to enter again
 npx @capgo/cli@latest channel set production com.example.app --rollout-resume
 
-# Make the candidate stable for everyone
+# Complete rollout — candidate becomes stable for everyone
 npx @capgo/cli@latest channel set production com.example.app --rollout-promote
 
-# Discard the candidate and return to stable
+# Rollback rollout — discard candidate and return to stable
 npx @capgo/cli@latest channel set production com.example.app --rollout-rollback
 ```
 
-Keep the target bundle available until you promote it or roll it back. Bundles linked as a stable bundle or rollout target are protected from deletion.
+Keep the rollout target bundle available until you **Complete rollout** or **Rollback rollout**. Bundles linked as stable fallback or rollout target are protected from deletion.
 
 ## Safe workflow
 
@@ -193,18 +208,18 @@ Progressive rollout is designed so you can validate in production without switch
 
 <Steps>
 
-1. **Confirm stable is healthy.** The stable bundle should be the version you are willing to keep serving to most users.
-2. **Upload the candidate** to the rollout-configured channel (`bundle upload --channel <name>` lands as the rollout target and leaves stable alone) or use `--rollout <small-percent>` to enable exposure in the same step.
-3. **Start small** — 1–5% is enough for first signal. Enable auto-pause if you want Capgo to stop exposure when failure rates spike.
-4. **Monitor before you widen.** Use [Observe](/docs/webapp/observe/) for version health, [Log Insights](/docs/webapp/log-insights/) for error patterns, and the channel **History** tab for configuration changes. Compare the rollout target with stable; do not raise the percentage until the cohort looks healthy.
-5. **Increase gradually** — raise the percentage in steps (for example 5% → 25% → 50% → 100%). Capgo keeps devices already in the cohort selected when you increase.
-6. **Promote when confident** — `--rollout-promote` or the promote/complete control makes the candidate stable for everyone and clears rollout state.
-7. **If something is wrong, pause first** — `--rollout-pause` stops new exposure while you investigate. Devices already on the bad build stay on it until you **Roll back** or **Disable**.
+1. **Confirm stable fallback is healthy.** It should be the version you are willing to keep serving to most users.
+2. **Upload the candidate** to the rollout-configured channel (`bundle upload --channel <name>` lands on **Rollout target** and leaves **Stable fallback** alone) or use `--rollout <small-percent>` to enable exposure in the same step.
+3. **Start small** — 1–5% is enough for first signal. Click **Apply percentage**, then **Enable rollout**. Turn on auto-pause if you want Capgo to stop exposure when failure rates spike.
+4. **Monitor before you widen.** Use [Observe](/docs/webapp/observe/) for version health, [Log Insights](/docs/webapp/log-insights/) for error patterns, and the channel **History** tab for configuration changes. Compare rollout target with stable fallback; do not raise the percentage until the cohort looks healthy.
+5. **Increase gradually** — edit the percentage, click **Apply percentage**, and step up (for example 5% → 25% → 50% → 100%). Capgo keeps devices already in the cohort selected when you increase.
+6. **Complete rollout when confident** — confirm **Complete progressive rollout?** so the candidate becomes stable fallback for everyone.
+7. **If something is wrong, Pause rollout first** — stops new exposure while you investigate. Devices already on the bad build stay on it until you **Rollback rollout** or **Disable rollout**.
 
 </Steps>
 
-<Aside type="tip" title="Promote vs roll back">
-**Promote** when the candidate is good and should become production for all devices. **Roll back** when the candidate should be discarded and everyone should return to the previous stable bundle. **Disable** when you want to stop the rollout but keep the same stable bundle without promoting the candidate.
+<Aside type="tip" title="Complete rollout vs Rollback rollout vs Disable rollout">
+**Complete rollout** when the candidate is good and should become stable fallback for all devices. **Rollback rollout** when the candidate should be discarded and everyone should return to the previous stable fallback. **Disable rollout** when you want to stop the rollout but keep the same stable fallback without completing the candidate.
 </Aside>
 
 ## Auto-pause policy
@@ -220,7 +235,7 @@ Auto-pause is disabled by default. Configure these fields in the channel's **Inf
 - **Cooldown** in minutes (default: 60), which prevents repeated actions.
 - **Action**: `pause`, `rollback`, or `notify`.
 
-`pause` stops new rollout exposure, `rollback` clears the target and returns to stable, and `notify` sends a rollout alert without changing rollout delivery.
+`pause` stops new rollout exposure, `rollback` clears the target and returns to stable fallback, and `notify` sends a rollout alert without changing rollout delivery.
 
 ```bash
 npx @capgo/cli@latest channel set production com.example.app \
@@ -236,11 +251,8 @@ npx @capgo/cli@latest channel set production com.example.app \
 
 ## API and dashboard entry points
 
-You can manage the same feature through the [Public Channels API](/docs/public-api/channels/) or the dashboard:
-
-1. Open an app, then **Channels**.
-2. Choose the channel.
-3. Open **Information**.
-4. Use the **Progressive rollout** section to choose the target, percentage, cache duration, and auto-pause policy.
+- **Dashboard:** app → **Channels** → channel → **Information** → **Progressive rollout**
+- **Channels API:** [Public Channels API](/docs/public-api/channels/) for rollout fields, promote, and rollback
+- **Bundle assign API:** [PUT `/bundle/`](/docs/public-api/bundles/) with `target`: `auto`, `stable`, or `rollout`
 
 For general channel routing and device precedence, see [Channels](/docs/live-updates/channels/). For emergency bundle recovery outside a progressive rollout, see [Rolling back a live update](/docs/live-updates/rollbacks/).
