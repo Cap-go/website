@@ -108,7 +108,7 @@ The hint **Auto uses rollout when progressive is configured** applies to API `ta
 Default upload on a rollout-configured channel (rollout target; stable unchanged):
 
 ```bash
-npx @capgo/cli@latest bundle upload com.example.app \
+bunx @capgo/cli@latest bundle upload com.example.app \
   --path ./dist \
   --channel production
 ```
@@ -116,7 +116,7 @@ npx @capgo/cli@latest bundle upload com.example.app \
 Upload, set rollout target, and enable at 5%:
 
 ```bash
-npx @capgo/cli@latest bundle upload com.example.app \
+bunx @capgo/cli@latest bundle upload com.example.app \
   --path ./dist \
   --channel production \
   --rollout 5
@@ -125,7 +125,7 @@ npx @capgo/cli@latest bundle upload com.example.app \
 Replace stable explicitly:
 
 ```bash
-npx @capgo/cli@latest bundle upload com.example.app \
+bunx @capgo/cli@latest bundle upload com.example.app \
   --path ./dist \
   --channel production \
   --stable
@@ -134,9 +134,9 @@ npx @capgo/cli@latest bundle upload com.example.app \
 Upload without linking, then configure rollout:
 
 ```bash
-npx @capgo/cli@latest bundle upload com.example.app --path ./dist -b 1.3.0
+bunx @capgo/cli@latest bundle upload com.example.app --path ./dist -b 1.3.0
 
-npx @capgo/cli@latest channel set production com.example.app \
+bunx @capgo/cli@latest channel set production com.example.app \
   --rollout-bundle 1.3.0 \
   --rollout-percentage 5 \
   --rollout-enable
@@ -160,7 +160,7 @@ curl -X PUT \
 Increase exposure without reseating devices already selected:
 
 ```bash
-npx @capgo/cli@latest channel set production com.example.app \
+bunx @capgo/cli@latest channel set production com.example.app \
   --rollout-percentage 25
 ```
 
@@ -189,16 +189,16 @@ Use one terminal action at a time (**Complete rollout** and **Rollback rollout**
 
 ```bash
 # Stop adding devices while you investigate
-npx @capgo/cli@latest channel set production com.example.app --rollout-pause
+bunx @capgo/cli@latest channel set production com.example.app --rollout-pause
 
 # Allow new devices to enter again
-npx @capgo/cli@latest channel set production com.example.app --rollout-resume
+bunx @capgo/cli@latest channel set production com.example.app --rollout-resume
 
 # Complete rollout — candidate becomes stable for everyone
-npx @capgo/cli@latest channel set production com.example.app --rollout-promote
+bunx @capgo/cli@latest channel set production com.example.app --rollout-promote
 
 # Rollback rollout — discard candidate and return to stable
-npx @capgo/cli@latest channel set production com.example.app --rollout-rollback
+bunx @capgo/cli@latest channel set production com.example.app --rollout-rollback
 ```
 
 Keep the rollout target bundle available until you **Complete rollout** or **Rollback rollout**. Bundles linked as stable fallback or rollout target are protected from deletion.
@@ -239,7 +239,7 @@ Auto-pause is disabled by default. Configure these fields in the channel's **Inf
 `pause` stops new rollout exposure, `rollback` clears the target and returns to stable fallback, and `notify` sends a rollout alert without changing rollout delivery.
 
 ```bash
-npx @capgo/cli@latest channel set production com.example.app \
+bunx @capgo/cli@latest channel set production com.example.app \
   --auto-pause-enabled \
   --auto-pause-failure-rate-bps 500 \
   --auto-pause-window-minutes 60 \
