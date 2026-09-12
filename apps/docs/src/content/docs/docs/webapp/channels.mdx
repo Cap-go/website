@@ -184,11 +184,11 @@ Valid values: `all`, `zip`, `delta`, `zip_from_builtin`, `delta_from_builtin`.
 
 ## Progressive rollouts
 
-The channel **Information** tab includes a **Progressive rollout** section. Set a target bundle, choose the percentage and decision-cache duration, then enable the rollout. From the same section you can pause or resume exposure, promote the target to stable, roll it back, or configure an automatic pause, rollback, or notification when failure signals cross a threshold.
+The channel **Information** tab includes a **Progressive rollout** section with **Rollout target** and **Stable fallback**, **Change rollout target**, **Apply percentage**, and actions **Complete rollout**, **Rollback rollout**, **Enable rollout**, **Disable rollout**, **Pause rollout**, and **Resume rollout**.
 
 <figure><img src="/progressive-rollout.webp" alt="Progressive rollout controls in a Capgo channel" /><figcaption>Progressive rollout controls appear at the top of the channel Information tab.</figcaption></figure>
 
-Read [Progressive rollouts](/docs/live-updates/progressive-rollouts/) before enabling one. It explains sticky cohorts, safe percentage changes, and auto-pause behavior.
+Read [Progressive rollouts](/docs/live-updates/progressive-rollouts/) before enabling one. That guide covers upload routing (**Auto (recommended)** / **Rollout target** / **Replace stable**; CLI `--stable` / API `target: "stable"` to override), the **This channel uses progressive rollout** bundle-link dialog, and a safe workflow with [Observe](/docs/webapp/observe/) and [Log Insights](/docs/webapp/log-insights/).
 
 ## Keep going from Channels
 

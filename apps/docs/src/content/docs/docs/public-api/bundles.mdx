@@ -557,8 +557,15 @@ interface SetChannelBody {
   app_id: string
   version_id: number // bundle (version) id
   channel_id: number
+  target?: "auto" | "stable" | "rollout" // default: auto
 }
 ```
+
+`target` controls where the bundle is linked when the channel has progressive rollout configured:
+
+- `auto` — rollout target when progressive rollout is configured; stable otherwise (default).
+- `rollout` — always set the rollout target; stable fallback unchanged.
+- `stable` — replace stable fallback (escape hatch).
 
 #### Example Request
 
