@@ -19,6 +19,7 @@ import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
 
@@ -108,6 +109,12 @@ const content = {
     <Manifesto />
     <Orgs />
     <AppflowShutdown />
+    <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-600 lg:px-8">
+      <h2 class="text-2xl font-semibold text-gray-950">Keep shipping in 2026</h2>
+      <p class="mt-4 [&_a]:text-blue-600 [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-2 hover:[&_a]:text-blue-500">
+        Store review queues are less predictable this year. Read <a href={getRelativeLocaleUrl(Astro.locals.locale, 'blog/mobile-app-best-practices-2026-live-updates')}>Mobile App Best Practices in 2026: Why Live Updates Win</a> — then <a href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}>register</a> and ship web-layer fixes without waiting on every binary review.
+      </p>
+    </section>
   </div>
 
   <style is:global>
