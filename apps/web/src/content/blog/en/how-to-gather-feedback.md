@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-13T08:03:13.129Z
-updated_at: 2026-09-13T08:03:14.856Z
+updated_at: 2026-09-13T08:05:49.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/c74289a2-aa7f-4e80-97c6-6daee9c6deac/how-to-gather-feedback-app-strategy.jpg'
 head_image_alt: How to Gather Feedback That Actually Moves Your App Forward
 keywords: 'user feedback, app feedback, feedback collection, product research, feedback strategy'
