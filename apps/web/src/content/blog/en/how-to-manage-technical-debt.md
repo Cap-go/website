@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-14T08:28:46.910Z
-updated_at: 2026-09-14T08:28:48.689Z
+updated_at: 2026-09-14T08:31:37.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/d2cb2306-91a1-4e39-9a4c-f2feeb4fd706/how-to-manage-technical-debt-software-development.jpg'
 head_image_alt: How to Manage Technical Debt Without Killing Velocity
 keywords: 'technical debt, code quality, software maintenance, engineering management, refactoring'
