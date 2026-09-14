@@ -106,7 +106,7 @@
     "@astrojs/compiler-rs": "0.4.0",
     "@axe-core/playwright": "^4.13.0",
     "@capgo/seo-checker": "^0.0.13",
-    "@cloudflare/vite-plugin": "1.54.4",
+    "@cloudflare/vite-plugin": "1.54.8",
     "@dotenvx/dotenvx": "^2.4.1",
     "@iconify-json/carbon": "^1.2.24",
     "@iconify-json/heroicons": "1.2.3",
