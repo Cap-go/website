@@ -4,6 +4,12 @@
  * Keep old public paths working so earned backlinks are not lost.
  */
 const LEGACY_PATH_REDIRECTS: Record<string, string> = {
+  '/codepush': '/alternatives/codepush/',
+  '/compare/capgo-vs-capawesome': '/alternatives/capawesome/',
+  '/compare/capgo-vs-appflow': '/alternatives/ionic-appflow/',
+  '/compare/capgo-vs-expo': '/alternatives/expo/',
+  '/compare/capgo-vs-codepush': '/alternatives/codepush/',
+  '/best-ionic-live-update-service': '/best/capacitor-live-updates/',
   '/blog/ai': '/articles/',
   '/blog/ai/': '/articles/',
   '/blog/setup-ci-and-cd-gitlab': '/blog/setup-ci-and-cd-in-gitlab/',

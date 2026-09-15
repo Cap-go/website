@@ -1,4 +1,5 @@
 import { expect, test } from 'bun:test'
+import { prefersMcpMarketingHtml } from '../../shared/agentDiscovery.ts'
 import { callTool, handleMcpManifestRequest, handleMcpRequest, handleRpc, listTools } from '../src/worker/mcp.ts'
 
 test('MCP initialize returns Streamable HTTP protocol metadata', () => {
@@ -31,6 +32,22 @@ test('GET /mcp without SSE is 405 and points at the manifest', async () => {
   expect(response.status).toBe(405)
   const body = await response.json()
   expect(body.error).toContain('/.well-known/mcp.json')
+})
+
+test('prefersMcpMarketingHtml for typical browser Accept', () => {
+  const request = new Request('https://capgo.app/mcp', {
+    method: 'GET',
+    headers: { Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' },
+  })
+  expect(prefersMcpMarketingHtml(request)).toBe(true)
+})
+
+test('prefersMcpMarketingHtml is false for SSE clients', () => {
+  const request = new Request('https://capgo.app/mcp', {
+    method: 'GET',
+    headers: { Accept: 'text/event-stream, application/json' },
+  })
+  expect(prefersMcpMarketingHtml(request)).toBe(false)
 })
 
 test('GET /mcp with text/event-stream returns an SSE stream', async () => {
@@ -82,7 +99,10 @@ test('POST JSON-RPC batch rejects invalid members with -32600', async () => {
     new Request('https://capgo.app/mcp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify([{ jsonrpc: '2.0', id: 1, method: 'ping', params: {} }, { jsonrpc: '2.0', id: 2 }]),
+      body: JSON.stringify([
+        { jsonrpc: '2.0', id: 1, method: 'ping', params: {} },
+        { jsonrpc: '2.0', id: 2 },
+      ]),
     }),
   )
   expect(response.status).toBe(200)

@@ -164,7 +164,7 @@ const content = {
               <h3 class="mb-2 text-2xl font-bold text-gray-100">Ionic Appflow</h3>
               <p class="text-sm text-orange-400">{m.alternatives_appflow_status({}, { locale })}</p>
             </div>
-            <a href={getRelativeLocaleUrl(locale, 'ionic-appflow')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+            <a href={getRelativeLocaleUrl(locale, 'alternatives/ionic-appflow')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
               {m.alternatives_appflow_migration_guide({}, { locale })}
             </a>
           </div>
@@ -195,7 +195,7 @@ const content = {
               <h3 class="mb-2 text-2xl font-bold text-gray-100">Expo Application Services (EAS)</h3>
               <p class="text-sm text-sky-400">{m.alternatives_expo_status({}, { locale })}</p>
             </div>
-            <a href={getRelativeLocaleUrl(locale, 'expo')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+            <a href={getRelativeLocaleUrl(locale, 'alternatives/expo')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
               {m.alternatives_expo_full_comparison({}, { locale })}
             </a>
           </div>
@@ -221,9 +221,14 @@ const content = {
 
         <!-- CodePush -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
-          <div class="mb-4">
-            <h3 class="mb-2 text-2xl font-bold text-gray-100">Microsoft CodePush</h3>
-            <p class="text-sm text-red-400">{m.alternatives_codepush_status({}, { locale })}</p>
+          <div class="mb-4 flex items-start justify-between">
+            <div>
+              <h3 class="mb-2 text-2xl font-bold text-gray-100">Microsoft CodePush</h3>
+              <p class="text-sm text-red-400">{m.alternatives_codepush_status({}, { locale })}</p>
+            </div>
+            <a href={getRelativeLocaleUrl(locale, 'alternatives/codepush')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+              {m.alternatives_hub_codepush_link({}, { locale })}
+            </a>
           </div>
 
           <div class="mb-4 space-y-3 text-gray-300">
@@ -252,7 +257,7 @@ const content = {
               <h3 class="mb-2 text-2xl font-bold text-gray-100">Capawesome Cloud</h3>
               <p class="text-sm text-green-400">{m.alternatives_capawesome_status({}, { locale })}</p>
             </div>
-            <a href={getRelativeLocaleUrl(locale, 'capwesome')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+            <a href={getRelativeLocaleUrl(locale, 'alternatives/capawesome')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
               {m.alternatives_capawesome_full_comparison({}, { locale })}
             </a>
           </div>
@@ -277,6 +282,52 @@ const content = {
             {m.alternatives_capawesome_credit({}, { locale })}
           </div>
         </div>
+
+        <!-- Voltbuilder -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+          <div class="mb-4 flex items-start justify-between">
+            <div>
+              <h3 class="mb-2 text-2xl font-bold text-gray-100">Voltbuilder</h3>
+              <p class="text-sm text-gray-400">{m.voltbuilder_alt_hero_subtitle({}, { locale })}</p>
+            </div>
+            <a href={getRelativeLocaleUrl(locale, 'alternatives/voltbuilder')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+              {m.alternatives_hub_voltbuilder_link({}, { locale })}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guides hub -->
+    <div class="mb-16 grid gap-8 sm:grid-cols-2">
+      <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+        <h3 class="mb-4 text-xl font-bold text-gray-100">{m.alternatives_hub_reviews_title({}, { locale })}</h3>
+        <ul class="space-y-2 text-emerald-400">
+          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'reviews/appflow')}>{m.review_appflow_title({}, { locale })}</a></li>
+          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'reviews/capawesome')}>{m.review_capawesome_title({}, { locale })}</a></li>
+          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'reviews/codepush')}>{m.review_codepush_title({}, { locale })}</a></li>
+        </ul>
+      </div>
+      <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+        <h3 class="mb-4 text-xl font-bold text-gray-100">{m.alternatives_hub_migrate_title({}, { locale })}</h3>
+        <ul class="space-y-2 text-emerald-400">
+          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'migrate/from-appflow')}>{m.migrate_from_appflow_title({}, { locale })}</a></li>
+          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'migrate/from-capawesome')}>{m.migrate_from_capawesome_title({}, { locale })}</a></li>
+          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'migrate/from-codepush')}>{m.migrate_from_codepush_title({}, { locale })}</a></li>
+        </ul>
+      </div>
+      <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+        <h3 class="mb-4 text-xl font-bold text-gray-100">{m.alternatives_hub_best_title({}, { locale })}</h3>
+        <ul class="space-y-2 text-emerald-400">
+          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'best/capacitor-live-updates')}>{m.best_capacitor_live_updates_title({}, { locale })}</a></li>
+          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'best/appflow-alternative')}>{m.best_appflow_alternative_title({}, { locale })}</a></li>
+          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'best/codepush-alternative')}>{m.best_codepush_alternative_title({}, { locale })}</a></li>
+        </ul>
+      </div>
+      <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+        <h3 class="mb-4 text-xl font-bold text-gray-100">{m.alternatives_hub_mcp_link({}, { locale })}</h3>
+        <p class="mb-4 text-sm text-gray-400">{m.mcp_page_hero_subtitle({}, { locale })}</p>
+        <a class="font-medium text-emerald-400 hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'mcp')}>{m.mcp_page_title({}, { locale })}</a>
       </div>
     </div>
 

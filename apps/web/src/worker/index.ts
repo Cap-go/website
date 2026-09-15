@@ -1,5 +1,13 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
-import { MCP_ENDPOINT_PATHS, MCP_MANIFEST_PATHS, OPENAPI_ALIAS_PATHS, OPENAPI_ASSET_PATH, markdownNotFoundResponse, prefersMarkdown } from '../../../shared/agentDiscovery'
+import {
+  MCP_ENDPOINT_PATHS,
+  MCP_MANIFEST_PATHS,
+  OPENAPI_ALIAS_PATHS,
+  OPENAPI_ASSET_PATH,
+  markdownNotFoundResponse,
+  prefersMarkdown,
+  prefersMcpMarketingHtml,
+} from '../../../shared/agentDiscovery'
 import { resolveLegacyPathRedirect } from '../../../shared/legacyPathRedirects'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
@@ -407,8 +415,32 @@ async function openApiAliasResponse(request: Request, env: Env): Promise<Respons
   })
 }
 
+async function mcpMarketingHtmlResponse(request: Request, env: Env): Promise<Response | null> {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return null
+  if (!prefersMcpMarketingHtml(request)) return null
+  const assetUrl = new URL('/mcp/index.html', request.url)
+  const assetRequest = new Request(assetUrl.toString(), {
+    method: request.method,
+    headers: request.headers,
+  })
+  const asset = await env.ASSETS.fetch(assetRequest)
+  if (!asset.ok) return null
+  const headers = new Headers(asset.headers)
+  headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.append('Vary', 'Accept')
+  return new Response(request.method === 'HEAD' ? null : asset.body, {
+    status: asset.status,
+    statusText: asset.statusText,
+    headers,
+  })
+}
+
 async function agentSurfaceResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
-  if (MCP_ENDPOINT_PATHS.has(pathname)) return handleMcpRequest(request)
+  if (MCP_ENDPOINT_PATHS.has(pathname)) {
+    const marketing = await mcpMarketingHtmlResponse(request, env)
+    if (marketing) return marketing
+    return handleMcpRequest(request)
+  }
   if (MCP_MANIFEST_PATHS.has(pathname)) return handleMcpManifestRequest(request)
   if (OPENAPI_ALIAS_PATHS.has(pathname)) return openApiAliasResponse(request, env)
   return null
