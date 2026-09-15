@@ -4,6 +4,12 @@
  * Keep old public paths working so earned backlinks are not lost.
  */
 const LEGACY_PATH_REDIRECTS: Record<string, string> = {
+  '/capwesome': '/alternatives/capawesome/',
+  '/alternatives/capwesome': '/alternatives/capawesome/',
+  '/ionic-appflow': '/alternatives/ionic-appflow/',
+  '/alternatives/appflow': '/alternatives/ionic-appflow/',
+  '/expo': '/alternatives/expo/',
+  '/median': '/alternatives/median/',
   '/blog/ai': '/articles/',
   '/blog/ai/': '/articles/',
   '/blog/setup-ci-and-cd-gitlab': '/blog/setup-ci-and-cd-in-gitlab/',
@@ -14,8 +20,8 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/how-rapido-cloud-manage-semantic-rerlease-with-CapGo-CapacitorUpdater': '/blog/how-I-manage-semantic-release-with-CapGo-CapacitorUpdater/',
   '/blog/introducing-end-A-end-Seguridad-A-Capacitor-updater-with-code-signing': '/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/',
   '/blog/building-a-native-mobile-app-with-nuxt-3-and-capacitor': '/blog/building-a-native-mobile-app-with-nuxt-and-capacitor/',
-  '/blog/alternative-to-capawesome': '/capwesome/',
-  '/blog/capgo-vs-capawesome-comparing-ota-update-plugins': '/capwesome/',
+  '/blog/alternative-to-capawesome': '/alternatives/capawesome/',
+  '/blog/capgo-vs-capawesome-comparing-ota-update-plugins': '/alternatives/capawesome/',
   '/blog/how-to-use-capacitor-with-nextjs': '/blog/nextjs-mobile-app-capacitor-from-scratch/',
   '/blog/gestione-dei-changelog-di-capacitor-guida-completa': '/blog/capacitor-comprehensive-guide/#is-there-enterprise-specific-support-available',
   '/blog/about-open-source': '/blog/open-source/',
@@ -35,7 +41,7 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/aggiornamenti-policy-apple-per-app-capacitor-2025': '/blog/apple-policy-updates-for-capacitor-apps-2025/',
   '/blog/aggiornamento-automatico-con-quasar-e-capacitor': '/blog/quasar-mobile-app-capacitor/',
   '/blog/aggiornamento-da-capacitor-4-a-capacitor-5': '/blog/updating-from-capacitor-4-to-capacitor-5/',
-  '/blog/alternativa-a-capawesome': '/capwesome/',
+  '/blog/alternativa-a-capawesome': '/alternatives/capawesome/',
   '/blog/alternativa-a-expo': '/blog/alternative-to-expo/',
   '/blog/alternativa-a-voltbuilder': '/blog/alternative-to-voltbuilder/',
   '/blog/alternativa-ad-appflow': '/blog/alternative-to-appflow/',

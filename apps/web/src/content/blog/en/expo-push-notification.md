@@ -298,7 +298,7 @@ Later in the workflow, this walkthrough is a helpful visual reference:
 
 <iframe width="100%" style="aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/xYRbYG77M_o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-For teams building release-heavy apps, it also helps to think of token registration as part of the app's operational state, not just part of onboarding. That mindset fits well with broader [Expo app delivery workflows](https://capgo.app/expo/), where app behavior can change frequently and backend state needs to stay synchronized.
+For teams building release-heavy apps, it also helps to think of token registration as part of the app's operational state, not just part of onboarding. That mindset fits well with broader [Expo app delivery workflows](https://capgo.app/alternatives/expo/), where app behavior can change frequently and backend state needs to stay synchronized.
 
 <a id="sending-notifications-from-your-server"></a>
 ## Sending Notifications From Your Server
