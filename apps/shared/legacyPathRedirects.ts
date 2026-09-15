@@ -4,9 +4,12 @@
  * Keep old public paths working so earned backlinks are not lost.
  */
 const LEGACY_PATH_REDIRECTS: Record<string, string> = {
+  // Competitor comparison pages → /alternatives/* (locale prefix applied in web + translation workers)
   '/capwesome': '/alternatives/capawesome/',
+  '/capawesome': '/alternatives/capawesome/',
   '/alternatives/capwesome': '/alternatives/capawesome/',
   '/ionic-appflow': '/alternatives/ionic-appflow/',
+  '/appflow': '/alternatives/ionic-appflow/',
   '/alternatives/appflow': '/alternatives/ionic-appflow/',
   '/expo': '/alternatives/expo/',
   '/median': '/alternatives/median/',

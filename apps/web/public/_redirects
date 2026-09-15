@@ -251,6 +251,24 @@
 /.well-known/apple-app-site-association /deepLink/apple-app-site-association 200
 /.well-known/assetlinks.json /deepLink/assetlinks.json 200
 
+# Competitor comparison page moves (localized paths handled in worker via legacyPathRedirects.ts)
+/capwesome /alternatives/capawesome/ 301
+/capwesome/ /alternatives/capawesome/ 301
+/capawesome /alternatives/capawesome/ 301
+/capawesome/ /alternatives/capawesome/ 301
+/alternatives/capwesome /alternatives/capawesome/ 301
+/alternatives/capwesome/ /alternatives/capawesome/ 301
+/ionic-appflow /alternatives/ionic-appflow/ 301
+/ionic-appflow/ /alternatives/ionic-appflow/ 301
+/appflow /alternatives/ionic-appflow/ 301
+/appflow/ /alternatives/ionic-appflow/ 301
+/alternatives/appflow /alternatives/ionic-appflow/ 301
+/alternatives/appflow/ /alternatives/ionic-appflow/ 301
+/expo /alternatives/expo/ 301
+/expo/ /alternatives/expo/ 301
+/median /alternatives/median/ 301
+/median/ /alternatives/median/ 301
+
 # Legacy backlink recovery
 # Capawesome blog aliases (with/without trailing slash + locales)
 /blog/alternative-to-capawesome /alternatives/capawesome/ 301
