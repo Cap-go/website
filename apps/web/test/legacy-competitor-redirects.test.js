@@ -1,21 +1,15 @@
 import { expect, test } from 'bun:test'
+import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
+import { staticLegacyRedirect } from '../src/worker/index.ts'
 
-const NON_DEFAULT_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh']
-
-/** Mirrors apps/web/src/worker/index.ts splitLocalePath + staticLegacyRedirect target. */
-function localizedLegacyRedirectTarget(pathname) {
-  const segments = pathname.split('/').filter(Boolean)
-  let localePrefix = ''
-  let path = pathname
-  if (segments.length > 0 && NON_DEFAULT_LOCALES.includes(segments[0])) {
-    const rest = segments.slice(1).join('/')
-    localePrefix = `/${segments[0]}`
-    path = rest ? `/${rest}${pathname.endsWith('/') ? '/' : ''}` : '/'
-  }
-  const legacyTarget = resolveLegacyPathRedirect(path)
-  if (!legacyTarget) return null
-  return `${localePrefix}${legacyTarget}`
+function staticLegacyRedirectLocation(url) {
+  const request = new Request(url)
+  const pathname = new URL(url).pathname
+  const response = staticLegacyRedirect(request, pathname)
+  if (!response) return null
+  expect(response.status).toBe(301)
+  return new URL(response.headers.get('Location')).pathname
 }
 
 const COMPETITOR_ALIASES = [
@@ -34,14 +28,32 @@ for (const [from, to] of COMPETITOR_ALIASES) {
     expect(resolveLegacyPathRedirect(from)).toBe(to)
     expect(resolveLegacyPathRedirect(from.replace(/\/$/, ''))).toBe(to)
   })
+
+  test(`staticLegacyRedirect ${from} → ${to}`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
+  })
 }
 
-for (const locale of NON_DEFAULT_LOCALES) {
-  test(`worker-style ${locale}/capwesome/ keeps locale prefix`, () => {
-    expect(localizedLegacyRedirectTarget(`/${locale}/capwesome/`)).toBe(`/${locale}/alternatives/capawesome/`)
+const LOCALIZED_SAMPLES = [
+  ['de', '/capwesome/', '/de/alternatives/capawesome/'],
+  ['fr', '/appflow/', '/fr/alternatives/ionic-appflow/'],
+  ['ja', '/expo/', '/ja/alternatives/expo/'],
+  ['ko', '/median/', '/ko/alternatives/median/'],
+]
+
+for (const [locale, fromPath, expected] of LOCALIZED_SAMPLES) {
+  test(`staticLegacyRedirect /${locale}${fromPath} → ${expected}`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app/${locale}${fromPath}`)).toBe(expected)
+  })
+}
+
+for (const locale of NON_DEFAULT_LOCALE_CODES) {
+  test(`staticLegacyRedirect /${locale}/capwesome/ keeps locale prefix`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app/${locale}/capwesome/`)).toBe(`/${locale}/alternatives/capawesome/`)
   })
 }
 
 test('/eas/ was never a public competitor page (no redirect)', () => {
   expect(resolveLegacyPathRedirect('/eas/')).toBeNull()
+  expect(staticLegacyRedirectLocation('https://capgo.app/eas/')).toBeNull()
 })
