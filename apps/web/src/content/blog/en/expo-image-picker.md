@@ -81,7 +81,7 @@ Start with Expo's version-aware installer:
 npx expo install expo-image-picker
 ```
 
-Use `expo install` instead of `npm install` or `yarn add`. Expo matches the package version to your SDK, which avoids a common class of native compatibility problems. If you are comparing how Expo modules fit into your release process, this [Expo tooling overview](https://capgo.app/expo/) is a useful reference.
+Use `expo install` instead of `npm install` or `yarn add`. Expo matches the package version to your SDK, which avoids a common class of native compatibility problems. If you are comparing how Expo modules fit into your release process, this [Expo tooling overview](https://capgo.app/alternatives/expo/) is a useful reference.
 
 <a id="managed-workflow-setup"></a>
 ### Managed workflow setup

@@ -166,7 +166,7 @@ Pricing history is the other split. Capgo’s paid entry has been **$12/month** 
 - May 2026 Platform relaunch: Live Updates moved off MAU onto per-update counting, then **back to MAU** after customers complained. The full Platform SKU (builds, live updates, and publishing) starts at **$19/month**. Business is **$499/month**.
 - Current public pricing still splits Live Updates (from **$9/month**) from the full Platform (from **$19/month**).
 
-A cheaper sticker that keeps moving is not the same as a fair price that stays put. If you want Capacitor live updates and native builds without giving up your CI, Capgo is the fit. If you already standardized on Capawesome plugins and want their git-connected CI, read [Capgo vs Capawesome Cloud](/capwesome/) and the [migration guide](/docs/upgrade/from-capawesome-to-capgo/).
+A cheaper sticker that keeps moving is not the same as a fair price that stays put. If you want Capacitor live updates and native builds without giving up your CI, Capgo is the fit. If you already standardized on Capawesome plugins and want their git-connected CI, read [Capgo vs Capawesome Cloud](/alternatives/capawesome/) and the [migration guide](/docs/upgrade/from-capawesome-to-capgo/).
 
 | Compared | Capgo | Capawesome Cloud |
 | --- | --- | --- |
@@ -274,7 +274,7 @@ There is no universal winner. These situations cover most Capacitor teams.
 
 **You already use GitHub Actions or GitLab CI.** Keep them. Add Capgo for live updates, native builds, and PR previews. This is the default 2026 answer.
 
-**You are looking at Capawesome Cloud.** They want the git connection, the YAML replacement, and the release metadata. That is convenient until you want to leave. Capgo keeps your CI, is fully open source, and has not raised the $12 entry price. See [Capgo vs Capawesome Cloud](/capwesome/).
+**You are looking at Capawesome Cloud.** They want the git connection, the YAML replacement, and the release metadata. That is convenient until you want to leave. Capgo keeps your CI, is fully open source, and has not raised the $12 entry price. See [Capgo vs Capawesome Cloud](/alternatives/capawesome/).
 
 **You are still on Appflow.** You have until December 31, 2027. Waiting concentrates the migration. Move live updates and native builds to Capgo, and put PR automation back on GitHub Actions if Appflow was also your CI.
 

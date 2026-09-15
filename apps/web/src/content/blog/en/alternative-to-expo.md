@@ -23,7 +23,7 @@ EAS Update lets Expo and React Native teams ship JavaScript fixes without a stor
 
 Capgo does not update Expo apps. If the app is React Native, stay on [EAS Update](https://docs.expo.dev/eas-update/introduction/). If the app is a web codebase you want on iOS and Android, Capgo is the Expo alternative.
 
-The full service-by-service comparison lives on [EAS vs Capgo](/expo/). This post covers the live-update path and the current Capgo stack around it.
+The full service-by-service comparison lives on [EAS vs Capgo](/alternatives/expo/). This post covers the live-update path and the current Capgo stack around it.
 
 ## Capgo vs Expo Application Services
 
@@ -63,4 +63,4 @@ Pick **Capacitor and Capgo** when you already have a web app and want iOS and An
 
 ## Next step
 
-Read the [EAS vs Capgo comparison](/expo/) for architecture, pricing, and FAQs. Or [create a Capgo account](/register/) and ship a Capacitor live update in a few minutes.
+Read the [EAS vs Capgo comparison](/alternatives/expo/) for architecture, pricing, and FAQs. Or [create a Capgo account](/register/) and ship a Capacitor live update in a few minutes.
