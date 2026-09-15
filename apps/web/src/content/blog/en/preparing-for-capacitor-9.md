@@ -22,7 +22,7 @@ next_blog: ''
 
 Capacitor 9 is available on the `next` dist-tag while it moves toward general availability. You do not have to upgrade your app the day the alpha lands, but the [official Capacitor 9 update guide](https://capacitorjs.com/docs/next/updating/9-0) and [plugin update guide](https://capacitorjs.com/docs/next/updating/plugins/9-0) already spell out toolchain floors and API removals that are worth addressing early.
 
-This article is a **preparation** checklist: work you can do on Capacitor 8 (or on a branch) so the eventual `npx cap migrate` pass is boring instead of painful. When you are ready to cut over, follow Ionic’s guides linked above line by line.
+This article is a **preparation** checklist: work you can do on Capacitor 8 (or on a branch) so the eventual `bunx cap migrate` pass is boring instead of painful. When you are ready to cut over, follow Ionic’s guides linked above line by line.
 
 ## Toolchain and platform floors (apps)
 
@@ -65,13 +65,13 @@ You can read diff hunks in the [Updating to 9.0](https://capacitorjs.com/docs/ne
 Capacitor 9 merges live-reload host/port/https flags into a single **`--url`** argument. Instead of:
 
 ```sh
-npx cap run android -l --host 192.168.1.181 --port 5173
+bunx cap run android -l --host 192.168.1.181 --port 5173
 ```
 
 pass the URL your dev server prints:
 
 ```sh
-npx cap run android --url http://192.168.1.181:5173/
+bunx cap run android --url http://192.168.1.181:5173/
 ```
 
 Update scripts and README snippets now so muscle memory does not fight the new CLI after upgrade.
@@ -95,7 +95,7 @@ Safe to do while Cap 8 remains supported:
 - Replace **`@NativePlugin`** with **`@CapacitorPlugin`** and migrate legacy permission / activity-result APIs to `@PermissionCallback` / `@ActivityCallback` patterns (see the [plugin 9.0 guide](https://capacitorjs.com/docs/next/updating/plugins/9-0) table).
 - Remove **`PluginCall.hasOption`**, **`Plugin.getConfigValue`**, old **`CapConfig` constructors and getters**, **`PluginCall.save()` / `isSaved()`**, and other Java removals listed under “Breaking changes in code.”
 - On iOS, stop using the **`CAPBridge`** compatibility class and deprecated **`CAPBridgeProtocol`** helpers; use `ApplicationDelegateProxy`, typed `PluginCall` accessors, and bridge properties from the migration table.
-- Run **`npx @capacitor/plugin-migration-v8-to-v9@latest`** on a branch and keep only the API edits that still compile against Cap 8 peer dependencies until you publish a major for Cap 9.
+- Run **`bunx @capacitor/plugin-migration-v8-to-v9@latest`** on a branch and keep only the API edits that still compile against Cap 8 peer dependencies until you publish a major for Cap 9.
 
 **Do not remove the `Cordova` SPM product from your plugin’s `Package.swift` while you still support Capacitor 8.** Cap 8 projects expect that dependency when your plugin is SPM-based; dropping it early breaks consumers still on 8. Treat **optional Cordova / removing the unconditional `Cordova` product** as a **Capacitor 9-only** release line (or a semver major explicitly documented as Cap 9+), after you stop supporting Cap 8 — as described in the plugin guide, not as prep work on the Cap 8 line.
 
@@ -107,17 +107,18 @@ Capgo delivers **web bundle** updates over the air; the native shell still comes
 
 1. Ship **at least one store build** compiled against Capacitor 9 native projects (iOS and Android). That binary establishes the native baseline Capgo channels target.
 2. Only after that build is in users’ hands should you rely on OTA bundles tested against Cap 9 WebView and plugin behavior.
-3. Keep channel / semver rules aligned so you never push a bundle that assumes Cap 9 APIs to devices still running an older native shell.
+3. Put production channels on the **`metadata`** strategy and upload the matching Cap 9 bundle to each channel with **`--auto-min-update-version`**. For that intentional native baseline upload, **omit `--fail-on-incompatible`** (native packages are supposed to change). Keep **`--fail-on-incompatible`** and **`--auto-min-update-version`** on everyday OTA uploads afterward. See [Native + OTA channel workflow](/docs/live-updates/native-ota-channel-workflow/).
+4. Keep channel and semver rules aligned so you never push a bundle that assumes Cap 9 APIs to devices still running an older native shell.
 
-If you use [Capgo Build](/native-build/) or your own CI, refresh macOS and Linux agents to Node 24+, Xcode 27+, and AGP 9.2.1 / Gradle 9.5.1 **before** the Cap 9 store release so the OTA pipeline matches what users install.
+If you use [Capgo Build](/native-build/) or your own CI, refresh agents **before** the Cap 9 store release so the pipeline matches what users install: **macOS** runners need Node 24+ and **Xcode 27+**; **Linux** runners need Node 24+ and host Android tooling aligned with **AGP 9.2.1 / Gradle 9.5.1** (Xcode is macOS-only).
 
 ## Suggested order of operations
 
-1. **Upgrade tooling** on CI and developer machines to the floors above (still building Cap 8 until you migrate).
+1. **Upgrade installed tooling** on CI hosts and developer machines to the floors above (Node, Xcode, Android Studio, JDK). **Do not** bump the Cap 8 app’s AGP dependency, Gradle wrapper, or other Android project files to Cap 9 values until **`bunx cap migrate`** — those project changes belong to the migration step.
 2. **Fix deprecated native APIs** in app code and plugins (especially custom `AppDelegate` URL handling and Android bridge usage).
 3. **Clean Android Gradle** files and scripts (`gradle.properties`, ProGuard defaults, `--url` in dev scripts).
 4. **Audit Cordova** usage at the app level; do not change plugin SPM Cordova products until Cap 9-only releases.
-5. When Cap 9 is GA (or when you accept `next`), run `npm i -D @capacitor/cli@next` (or `@latest` after release), then **`npx cap migrate`**, and follow [Updating to 9.0](https://capacitorjs.com/docs/next/updating/9-0).
+5. When Cap 9 is GA (or when you accept `next`), run `bun add -d @capacitor/cli@next` (or `@latest` after release), then **`bunx cap migrate`**, and follow [Updating to 9.0](https://capacitorjs.com/docs/next/updating/9-0).
 6. **Publish the Cap 9 native build** to stores, then resume or expand Capgo OTA rollouts on the matching channel.
 
 Capacitor 9 is mostly “pay down deprecations and align with modern Android and Apple toolchains.” Doing that work on Cap 8 keeps your upgrade diff small and your plugins compatible with the teams still shipping 8.x today.
