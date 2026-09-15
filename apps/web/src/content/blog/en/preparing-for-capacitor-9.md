@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-09-14T10:00:00.000Z
-updated_at: 2026-09-14T10:00:00.000Z
+updated_at: 2026-09-15T11:38:07.000Z
 head_image: /blog-images/preparing-for-capacitor-9.webp
 head_image_alt: "Preparing for Capacitor 9: What App and Plugin Teams Can Do Now Capgo blog illustration"
 keywords: Capacitor, Capacitor 9, mobile app development, live updates, OTA updates, Gradle, Xcode, plugin migration
