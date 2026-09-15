@@ -1,0 +1,46 @@
+---
+import ConversionLandingLayout from '@/components/conversion/ConversionLandingLayout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const title = m.best_appflow_alternative_title({}, { locale })
+const description = m.best_appflow_alternative_meta_description({}, { locale })
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = { title, description, ldJSON, image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png` }
+
+const relatedLinks = [
+  { label: m.capflow_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives/ionic-appflow') },
+  { label: m.review_appflow_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'reviews/appflow') },
+  { label: m.migrate_from_appflow_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'migrate/from-appflow') },
+  { label: 'Appflow shutdown alternative (blog)', href: getRelativeLocaleUrl(locale, 'blog/appflow-shutdown-alternative') },
+]
+---
+
+<ConversionLandingLayout
+  locale={locale}
+  content={content}
+  heroTitle={m.best_appflow_alternative_hero_title({}, { locale })}
+  heroSubtitle={m.best_appflow_alternative_hero_subtitle({}, { locale })}
+  sections={[
+    {
+      title: m.best_appflow_alternative_body_title({}, { locale }),
+      paragraphs: [m.best_appflow_alternative_body_p1({}, { locale })],
+      listItems: [m.best_appflow_alternative_body_li1({}, { locale }), m.best_appflow_alternative_body_li2({}, { locale }), m.best_appflow_alternative_body_li3({}, { locale })],
+    },
+  ]}
+  relatedLinks={relatedLinks}
+/>

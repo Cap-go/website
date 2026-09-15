@@ -154,6 +154,19 @@ function mediaQuality(accept: string, typePattern: RegExp): { q: number; index: 
   return best
 }
 
+/** True when a browser-style GET on /mcp should receive the marketing HTML page. */
+export function prefersMcpMarketingHtml(request: Request): boolean {
+  const accept = request.headers.get('Accept') || ''
+  const html = mediaQuality(accept, /^text\/html$/i)
+  if (!html || html.q <= 0) return false
+  const sse = mediaQuality(accept, /^text\/event-stream$/i)
+  if (sse && sse.q > 0 && (sse.q > html.q || (sse.q === html.q && sse.index < html.index))) return false
+  const json = mediaQuality(accept, /^application\/json$/i)
+  if (json && json.q > html.q) return false
+  if (json && json.q === html.q && json.index < html.index) return false
+  return true
+}
+
 export function prefersMarkdown(request: Request): boolean {
   const accept = request.headers.get('Accept') || ''
   const markdown = mediaQuality(accept, /^text\/(?:x-)?markdown$/i)
