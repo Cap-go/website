@@ -435,7 +435,7 @@ async function mcpMarketingHtmlResponse(request: Request, env: Env): Promise<Res
   })
 }
 
-async function agentSurfaceResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+export async function agentSurfaceResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
   if (MCP_ENDPOINT_PATHS.has(pathname)) {
     const marketing = await mcpMarketingHtmlResponse(request, env)
     if (marketing) return marketing

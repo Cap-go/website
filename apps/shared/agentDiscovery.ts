@@ -154,16 +154,60 @@ function mediaQuality(accept: string, typePattern: RegExp): { q: number; index: 
   return best
 }
 
+type AcceptRangeMatch = { q: number; specificity: number; index: number }
+
+/** Best q for a concrete MIME type, honoring subtype and wildcard Accept ranges (RFC 7231). */
+function acceptQualityForMime(accept: string, mime: string): AcceptRangeMatch | null {
+  const normalized = mime.toLowerCase()
+  const slash = normalized.indexOf('/')
+  if (slash === -1) return null
+  const major = normalized.slice(0, slash)
+  let best: AcceptRangeMatch | null = null
+
+  for (const [index, part] of accept.split(',').entries()) {
+    const [rawType, ...params] = part.trim().split(';')
+    const type = rawType.trim().toLowerCase()
+    const q = parseAcceptQuality(params)
+    if (Number.isNaN(q) || q < 0 || q > 1) continue
+
+    let specificity: number | null = null
+    if (type === '*/*') specificity = 0
+    else if (type.endsWith('/*')) {
+      if (major === type.slice(0, -2)) specificity = 1
+    } else if (type === normalized) specificity = 2
+
+    if (specificity === null) continue
+
+    const candidate = { q, specificity, index }
+    if (
+      !best ||
+      candidate.q > best.q ||
+      (candidate.q === best.q && candidate.specificity > best.specificity) ||
+      (candidate.q === best.q && candidate.specificity === best.specificity && candidate.index < best.index)
+    ) {
+      best = candidate
+    }
+  }
+  return best
+}
+
+function htmlBeatsAcceptMatch(html: AcceptRangeMatch, other: AcceptRangeMatch): boolean {
+  if (html.q > other.q) return true
+  if (html.q < other.q) return false
+  if (html.specificity > other.specificity) return true
+  if (html.specificity < other.specificity) return false
+  return html.index < other.index
+}
+
 /** True when a browser-style GET on /mcp should receive the marketing HTML page. */
 export function prefersMcpMarketingHtml(request: Request): boolean {
   const accept = request.headers.get('Accept') || ''
-  const html = mediaQuality(accept, /^text\/html$/i)
+  const html = acceptQualityForMime(accept, 'text/html')
   if (!html || html.q <= 0) return false
-  const sse = mediaQuality(accept, /^text\/event-stream$/i)
-  if (sse && sse.q > 0 && (sse.q > html.q || (sse.q === html.q && sse.index < html.index))) return false
-  const json = mediaQuality(accept, /^application\/json$/i)
-  if (json && json.q > html.q) return false
-  if (json && json.q === html.q && json.index < html.index) return false
+  const json = acceptQualityForMime(accept, 'application/json')
+  if (json && json.q > 0 && !htmlBeatsAcceptMatch(html, json)) return false
+  const sse = acceptQualityForMime(accept, 'text/event-stream')
+  if (sse && sse.q > 0 && !htmlBeatsAcceptMatch(html, sse)) return false
   return true
 }
 

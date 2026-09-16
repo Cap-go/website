@@ -1,6 +1,24 @@
 import { expect, test } from 'bun:test'
 import { prefersMcpMarketingHtml } from '../../shared/agentDiscovery.ts'
+import { agentSurfaceResponse } from '../src/worker/index.ts'
 import { callTool, handleMcpManifestRequest, handleMcpRequest, handleRpc, listTools } from '../src/worker/mcp.ts'
+
+const mockMcpAssetsEnv = {
+  ASSETS: {
+    fetch(input) {
+      const url = new URL(typeof input === 'string' ? input : input.url)
+      if (url.pathname === '/mcp/index.html') {
+        return Promise.resolve(
+          new Response('<!DOCTYPE html><html><head><title>Capgo MCP</title></head><body>MCP marketing</body></html>', {
+            status: 200,
+            headers: { 'Content-Type': 'text/html; charset=utf-8' },
+          }),
+        )
+      }
+      return Promise.resolve(new Response('not found', { status: 404 }))
+    },
+  },
+}
 
 test('MCP initialize returns Streamable HTTP protocol metadata', () => {
   const result = handleRpc({ jsonrpc: '2.0', id: 1, method: 'initialize', params: {} })
@@ -48,6 +66,46 @@ test('prefersMcpMarketingHtml is false for SSE clients', () => {
     headers: { Accept: 'text/event-stream, application/json' },
   })
   expect(prefersMcpMarketingHtml(request)).toBe(false)
+})
+
+test('prefersMcpMarketingHtml is false when */* outranks text/html', () => {
+  const request = new Request('https://capgo.app/mcp', {
+    method: 'GET',
+    headers: { Accept: 'text/html;q=0.5, */*;q=1' },
+  })
+  expect(prefersMcpMarketingHtml(request)).toBe(false)
+})
+
+test('agentSurfaceResponse browser GET serves /mcp/index.html', async () => {
+  const request = new Request('https://capgo.app/mcp', {
+    method: 'GET',
+    headers: { Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' },
+  })
+  const response = await agentSurfaceResponse(request, mockMcpAssetsEnv, '/mcp')
+  expect(response?.status).toBe(200)
+  expect(response?.headers.get('Content-Type')).toContain('text/html')
+  expect(await response?.text()).toContain('MCP marketing')
+})
+
+test('agentSurfaceResponse GET with low-q HTML and */* returns MCP JSON error', async () => {
+  const request = new Request('https://capgo.app/mcp', {
+    method: 'GET',
+    headers: { Accept: 'text/html;q=0.5, */*;q=1' },
+  })
+  const response = await agentSurfaceResponse(request, mockMcpAssetsEnv, '/mcp')
+  expect(response?.status).toBe(405)
+  const body = await response?.json()
+  expect(body.error).toContain('/.well-known/mcp.json')
+})
+
+test('agentSurfaceResponse SSE GET bypasses marketing HTML', async () => {
+  const request = new Request('https://capgo.app/mcp', {
+    method: 'GET',
+    headers: { Accept: 'text/event-stream' },
+  })
+  const response = await agentSurfaceResponse(request, mockMcpAssetsEnv, '/mcp')
+  expect(response?.status).toBe(200)
+  expect(response?.headers.get('Content-Type')).toContain('text/event-stream')
 })
 
 test('GET /mcp with text/event-stream returns an SSE stream', async () => {
