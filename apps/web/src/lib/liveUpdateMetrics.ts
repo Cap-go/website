@@ -10,6 +10,12 @@ export type BreakdownMetric = {
 }
 export type LiveUpdateMetrics = {
   success_rate: number
+  first_try_rate: number | null
+  first_day_rate: number | null
+  first_day_success_rate: number | null
+  rollback_rate: number | null
+  zip_success_rate: number | null
+  delta_success_rate: number | null
   updated_at: string
   daily: DailyMetric[]
   failures: FailureMetric[]
@@ -120,6 +126,12 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
 
   return {
     success_rate: percentage(value.success_rate),
+    first_try_rate: nullablePercentage(value.first_try_rate),
+    first_day_rate: nullablePercentage(value.first_day_rate),
+    first_day_success_rate: nullablePercentage(value.first_day_success_rate),
+    rollback_rate: nullablePercentage(value.rollback_rate),
+    zip_success_rate: nullablePercentage(value.zip_success_rate),
+    delta_success_rate: nullablePercentage(value.delta_success_rate),
     updated_at: value.updated_at,
     daily,
     failures,
