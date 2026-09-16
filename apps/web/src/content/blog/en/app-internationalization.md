@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-16T09:29:18.895Z
-updated_at: 2026-09-16T09:29:20.096Z
+updated_at: 2026-09-16T09:32:07.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/cf004f99-e446-4614-a748-fb8a0141f9c8/app-internationalization-global-guide.jpg'
 head_image_alt: App Internationalization Guide for Global Ready Apps
 keywords: 'app internationalization, app localization, mobile i18n, Capacitor i18n, i18n best practices'
