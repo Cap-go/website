@@ -4,10 +4,7 @@ import { expect, test } from 'bun:test'
 // are invalid CSS selectors and throw DOMException (see PostHog error tracking).
 // Fix: use document.getElementById(`${headingId}-link`) instead.
 
-const POSTHOG_INVALID_SELECTORS = [
-  '#1-continuous-integrationcontinuous-deployment-cicd-link',
-  '#2021-android-guide-firebase-crashlytics---custom-crash--link',
-]
+const POSTHOG_INVALID_SELECTORS = ['#1-continuous-integrationcontinuous-deployment-cicd-link', '#2021-android-guide-firebase-crashlytics---custom-crash--link']
 
 test('posthog-reported blog toc selectors start with a digit after #', () => {
   for (const selector of POSTHOG_INVALID_SELECTORS) {

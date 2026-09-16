@@ -1,0 +1,104 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ConversionRelatedLinks from '@/components/conversion/ConversionRelatedLinks.astro'
+import HumanSupport from '@/components/HumanSupport.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const title = m.codepush_alt_title({}, { locale })
+const description = m.codepush_alt_meta_description({}, { locale })
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+  keywords: 'CodePush alternative, App Center migration, Capacitor live updates, Ionic OTA',
+  ldJSON,
+}
+
+const relatedLinks = [
+  { label: m.review_codepush_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'reviews/codepush') },
+  { label: m.migrate_from_codepush_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'migrate/from-codepush') },
+  { label: m.best_codepush_alternative_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/codepush-alternative') },
+  { label: 'App Center migration (blog)', href: getRelativeLocaleUrl(locale, 'blog/appcenter-migration') },
+  { label: 'CodePush alternatives (blog)', href: getRelativeLocaleUrl(locale, 'blog/best-codepush-alternatives-for-capacitor-ionic-cordova') },
+  { label: m.live_update({}, { locale }), href: getRelativeLocaleUrl(locale, 'live-update') },
+]
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">{m.codepush_alt_hero_title({}, { locale })}</h1>
+        <p class="mx-auto max-w-2xl text-xl text-gray-300">{m.codepush_alt_hero_subtitle({}, { locale })}</p>
+        <p class="mt-4 text-sm text-red-400">{m.alternatives_codepush_status({}, { locale })}</p>
+      </div>
+
+      <div class="mb-8 rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+        <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.codepush_alt_status_title({}, { locale })}</h2>
+        <div class="space-y-4 text-gray-300">
+          <p>{m.codepush_alt_status_p1({}, { locale })}</p>
+          <p>{m.codepush_alt_status_p2({}, { locale })}</p>
+        </div>
+      </div>
+
+      <div class="mb-8 rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+        <p class="mb-3 text-gray-300">
+          <strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong>
+          {m.alternatives_codepush_reality({}, { locale })}
+        </p>
+        <p class="mb-3 text-gray-300">
+          <strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong>
+          {m.alternatives_codepush_when_good({}, { locale })}
+        </p>
+        <p class="text-sm text-gray-400">{m.alternatives_codepush_credit({}, { locale })}</p>
+      </div>
+
+      <div class="mb-8 rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+        <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.codepush_alt_capgo_title({}, { locale })}</h2>
+        <ul class="ml-6 list-disc space-y-2 text-gray-300">
+          <li>{m.codepush_alt_capgo_li1({}, { locale })}</li>
+          <li>{m.codepush_alt_capgo_li2({}, { locale })}</li>
+          <li>{m.codepush_alt_capgo_li3({}, { locale })}</li>
+          <li>{m.alternatives_codepush_why_different_li1({}, { locale })}</li>
+          <li>{m.alternatives_codepush_why_different_li2({}, { locale })}</li>
+        </ul>
+      </div>
+
+      <div class="mb-12 rounded-lg border border-gray-600 bg-gray-800/50 p-8">
+        <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.codepush_alt_migrate_title({}, { locale })}</h2>
+        <p class="text-gray-300">{m.codepush_alt_migrate_p1({}, { locale })}</p>
+        <a
+          href={getRelativeLocaleUrl(locale, 'migrate/from-codepush')}
+          class="mt-6 inline-flex rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-700"
+        >
+          {m.migrate_from_codepush_title({}, { locale })}
+        </a>
+      </div>
+
+      <ConversionRelatedLinks title={m.conversion_related_links_title({}, { locale })} links={relatedLinks} />
+
+      <div class="mt-12 text-center">
+        <HumanSupport class="mb-4" size="sm" />
+        <a href={getRelativeLocaleUrl(locale, 'register')} class="inline-flex rounded-xl bg-emerald-600 px-8 py-4 text-lg font-bold text-white hover:bg-emerald-700">
+          {m.conversion_cta_register({}, { locale })}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
