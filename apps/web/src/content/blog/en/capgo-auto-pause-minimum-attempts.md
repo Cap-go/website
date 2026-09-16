@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-06T09:18:06.000Z
-updated_at: 2026-09-06T09:18:06.000Z
+updated_at: 2026-09-16T21:47:34.000Z
 head_image: /capgo_banner.png
 head_image_alt: Mobile OTA channel auto-pause settings and minimum attempts control
 keywords: ''
