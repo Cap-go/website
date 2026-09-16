@@ -156,7 +156,7 @@ function mediaQuality(accept: string, typePattern: RegExp): { q: number; index: 
 
 type AcceptRangeMatch = { q: number; specificity: number; index: number }
 
-/** Best q for a concrete MIME type, honoring subtype and wildcard Accept ranges (RFC 7231). */
+/** Best q for a concrete MIME type; most-specific matching range wins, then q, then order (RFC 9110). */
 function acceptQualityForMime(accept: string, mime: string): AcceptRangeMatch | null {
   const normalized = mime.toLowerCase()
   const slash = normalized.indexOf('/')
@@ -181,9 +181,9 @@ function acceptQualityForMime(accept: string, mime: string): AcceptRangeMatch | 
     const candidate = { q, specificity, index }
     if (
       !best ||
-      candidate.q > best.q ||
-      (candidate.q === best.q && candidate.specificity > best.specificity) ||
-      (candidate.q === best.q && candidate.specificity === best.specificity && candidate.index < best.index)
+      candidate.specificity > best.specificity ||
+      (candidate.specificity === best.specificity && candidate.q > best.q) ||
+      (candidate.specificity === best.specificity && candidate.q === best.q && candidate.index < best.index)
     ) {
       best = candidate
     }

@@ -76,6 +76,12 @@ test('prefersMcpMarketingHtml is false when */* outranks text/html', () => {
   expect(prefersMcpMarketingHtml(request)).toBe(false)
 })
 
+test('prefersMcpMarketingHtml prefers explicit text/html over */* wildcard', () => {
+  const accept = 'application/json;q=0.5, text/event-stream;q=0.5, text/html;q=0.9, */*;q=1'
+  const request = new Request('https://capgo.app/mcp', { method: 'GET', headers: { Accept: accept } })
+  expect(prefersMcpMarketingHtml(request)).toBe(true)
+})
+
 test('agentSurfaceResponse browser GET serves /mcp/index.html', async () => {
   const request = new Request('https://capgo.app/mcp', {
     method: 'GET',
