@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-17T08:03:36.100Z
-updated_at: 2026-09-17T08:03:38.181Z
+updated_at: 2026-09-17T08:06:32.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/d0514308-19d5-498d-9500-3196ee3fb066/app-state-management-architecture-guide.jpg'
 head_image_alt: 'App State Management: Architecture and Sync Guide'
 keywords: 'app state management, Capacitor state, offline-first sync, mobile architecture, state persistence'
