@@ -118,7 +118,7 @@ Default: `true`
 > When enabled, the plugin hides the splashscreen after updates are applied or when no update is needed.
 > This removes the need to manually listen for appReady events and call SplashScreen.hide().
 
-Available on Android, iOS, and Electron.
+Available on Android and iOS.
 
 Default: `false`
 
@@ -152,7 +152,7 @@ Options:
 - `"always"`: Check on every foreground transition and apply immediately whenever an update is available
 - `"onlyDownload"`: Check and download automatically, emit `updateAvailable`, and never set the next bundle or apply an update automatically
 
-Instant apply modes (`"atInstall"`, `"onLaunch"`, `"always"`) apply while the user is waiting. Upload with `npx @capgo/cli@latest bundle upload --delta` so only changed files download. A full zip upload slows the user experience. These modes require `autoSplashscreen: true` and `@capacitor/splash-screen` with `launchAutoHide: false`.
+Instant apply modes (`"atInstall"`, `"onLaunch"`, `"always"`) apply while the user is waiting. Upload with `npx @capgo/cli@latest bundle upload --delta` so only changed files download. A full zip upload slows the user experience. On Android and iOS these modes require `autoSplashscreen: true` and `@capacitor/splash-screen` with `launchAutoHide: false`.
 
 Available on Android, iOS, and Electron.
 
