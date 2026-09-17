@@ -1,6 +1,7 @@
 import cachedMetrics from '@/data/builder-metrics.json'
-import { jsonForInlineScript } from './liveUpdateMetrics'
 import type { BuilderDailyPlatformMetric, BuilderFailureMetric, BuilderPlatformMetric, PublicBuilderMetrics } from './publicBuilderMetrics'
+
+export { jsonForInlineScript } from './liveUpdateMetrics'
 
 export type BuilderMetrics = PublicBuilderMetrics & { source?: 'api' | 'cache' }
 
@@ -85,5 +86,3 @@ export function getCachedBuilderMetrics(): BuilderMetrics {
 export async function resolveBuilderMetrics(): Promise<BuilderMetrics> {
   return getCachedBuilderMetrics()
 }
-
-export { jsonForInlineScript }

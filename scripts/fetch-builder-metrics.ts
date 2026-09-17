@@ -7,13 +7,13 @@
  */
 
 import { normalizeBuilderMetrics } from '../apps/web/src/lib/builderMetrics'
-import { buildPublicBuilderMetrics, fetchPublicBuilderMetricsFromRpc, type BuilderMetricsSource } from '../apps/web/src/lib/publicBuilderMetrics'
+import { buildPublicBuilderMetrics, fetchPublicBuilderMetricsFromRpc, type BuilderMetricsSource, type PublicBuilderMetrics } from '../apps/web/src/lib/publicBuilderMetrics'
 
 const REFRESH = process.env.BUILDER_METRICS_REFRESH === 'true'
 const OUTPUT_PATH = new URL('../apps/web/src/data/builder-metrics.json', import.meta.url).pathname
 const SOURCE_PATH = new URL('./builder-metrics-source.json', import.meta.url).pathname
 
-const readCached = async () => {
+async function readCached() {
   try {
     const file = Bun.file(OUTPUT_PATH)
     if (!(await file.exists())) return null
@@ -25,61 +25,57 @@ const readCached = async () => {
   }
 }
 
-async function fromSourceFile(): Promise<ReturnType<typeof buildPublicBuilderMetrics>> {
+async function fromSourceFile(): Promise<PublicBuilderMetrics> {
   const source = await Bun.file(SOURCE_PATH).json() as BuilderMetricsSource
   return buildPublicBuilderMetrics(source)
 }
 
-async function main() {
-  const cached = await readCached()
+function safeRate(value: number) {
+  return Number.isFinite(value) ? value.toFixed(1) : 'n/a'
+}
+
+function safeSeconds(value: number | null) {
+  return value === null || !Number.isFinite(value) ? 'n/a' : value.toFixed(1)
+}
+
+async function loadPayload(cached: unknown): Promise<PublicBuilderMetrics> {
   const supabaseUrl = (process.env.VITE_SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL || 'https://xvwzpoazmxkqosrdewyv.supabase.co').trim()
   const anonKey = (process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || '').trim()
+  if (!REFRESH || !anonKey) {
+    if (REFRESH) console.warn('BUILDER_METRICS_REFRESH set but VITE_SUPABASE_ANON_KEY missing. Using local source.')
+    return await fromSourceFile()
+  }
 
-  let payload
-  if (REFRESH && anonKey) {
-    try {
-      console.log('Querying get_public_builder_metrics...')
-      payload = await fetchPublicBuilderMetricsFromRpc({ supabaseUrl, anonKey })
-    }
-    catch (error) {
-      if (cached) {
-        console.warn('Builder RPC failed. Computing from local source instead.', error)
-        payload = await fromSourceFile()
-      }
-      else {
-        throw error
-      }
-    }
+  try {
+    console.log('Querying get_public_builder_metrics...')
+    return await fetchPublicBuilderMetricsFromRpc({ supabaseUrl, anonKey })
+  }
+  catch (error) {
+    if (!cached) throw error
+    console.warn('Builder RPC failed. Computing from local source instead.', error)
+    return await fromSourceFile()
+  }
+}
+
+const cached = await readCached()
+const payload = await loadPayload(cached)
+const metrics = normalizeBuilderMetrics(payload)
+if (!metrics) {
+  if (cached) {
+    console.warn('Builder metrics payload invalid. Keeping existing cache.')
   }
   else {
-    if (REFRESH && !anonKey) {
-      console.warn('BUILDER_METRICS_REFRESH set but VITE_SUPABASE_ANON_KEY missing. Using local source.')
-    }
-    payload = await fromSourceFile()
-  }
-
-  const metrics = normalizeBuilderMetrics(payload)
-  if (!metrics) {
-    if (cached) {
-      console.warn('Builder metrics payload invalid. Keeping existing cache.')
-      return
-    }
     throw new Error('Could not normalize builder metrics and no cache exists.')
   }
-
+}
+else {
   const json = JSON.stringify(metrics, null, 2)
   if (/"successes"\s*:|"builds_total"|"build_count"/.test(json)) {
     throw new Error('Refusing to write builder metrics that include raw build counts.')
   }
 
   await Bun.write(OUTPUT_PATH, `${json}\n`)
-  console.log(`Saved builder metrics to ${OUTPUT_PATH}`)
-  console.log(`  success_rate: ${metrics.success_rate}%`)
-  console.log(`  process: ${metrics.avg_process_seconds}s`)
-  console.log(`  updated_at: ${metrics.updated_at}`)
+  console.log('Saved builder metrics')
+  console.log(`  success_rate: ${safeRate(metrics.success_rate)}%`)
+  console.log(`  process: ${safeSeconds(metrics.avg_process_seconds)}s`)
 }
-
-main().catch((error) => {
-  console.error(error)
-  process.exit(1)
-})

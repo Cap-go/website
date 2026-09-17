@@ -190,7 +190,7 @@ export function buildPublicBuilderMetrics(source: BuilderMetricsSource): PublicB
     daily_platforms: buildDailyPlatforms(source.daily),
     failures: rollupFailures(source.failures),
     platforms: platforms
-      .sort((a, b) => b.outcomes - a.outcomes || a.key.localeCompare(b.key))
+      .toSorted((a, b) => b.outcomes - a.outcomes || a.key.localeCompare(b.key))
       .map(({ key, outcomes, success_rate, avg_process_seconds, avg_queue_seconds, top_failure }) => ({
         key,
         share: shareFromParts(outcomes, outcomeTotal),
