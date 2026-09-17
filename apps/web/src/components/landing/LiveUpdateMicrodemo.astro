@@ -498,6 +498,7 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   let busy = false
   let cueTimer: number | null = null
+  let activeEndingAnim: gsap.core.Animation | null = null
 
   const root = document.getElementById('capgo-microdemo')
   if (!root) {
@@ -560,6 +561,7 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
 
     function showChoices() {
       el.choices.classList.add('is-visible')
+      el.choiceStore.focus()
     }
 
     function updateCueLabel() {
@@ -582,8 +584,12 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
       }
     }
 
-    function resetToIdle() {
+    function resetToIdle(focusCue = false) {
       busy = false
+      if (activeEndingAnim) {
+        activeEndingAnim.kill()
+        activeEndingAnim = null
+      }
       gsap.killTweensOf([el.packet, el.crashBurst, el.character, el.sheepishLine])
       gsap.set(el.packet, { opacity: 0, x: 0, y: 0, scale: 1, rotation: 0 })
       gsap.set(el.crashBurst, { opacity: 0, scale: 0.5 })
@@ -596,6 +602,9 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
       setNarration('Tap the cue to ship a bad build.')
       announce('')
       startCueCycle()
+      if (focusCue) {
+        el.cue.focus()
+      }
     }
 
     function flyPacketThenCrash() {
@@ -680,6 +689,7 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
         el.endingStore.classList.add('is-visible')
         setNarration('Still broken in the wild.')
         busy = false
+        el.restartStore.focus()
       }
 
       if (reduceMotion) {
@@ -687,7 +697,7 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
         return
       }
 
-      gsap.fromTo(
+      activeEndingAnim = gsap.fromTo(
         el.endingStore,
         { opacity: 0, y: 8 },
         {
@@ -697,8 +707,10 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
           ease: 'power2.out',
           onStart: () => {
             el.endingStore.classList.add('is-visible')
+            el.restartStore.focus()
           },
           onComplete: () => {
+            activeEndingAnim = null
             setNarration('Still broken in the wild.')
             busy = false
           },
@@ -715,12 +727,14 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
       track('choice_capgo')
 
       const showSuccess = () => {
+        activeEndingAnim = null
         setPhone('ok')
         setFace('sheepish')
         el.sheepishLine.textContent = '\u201Coh, my phone was\u2026\u201D'
         el.endingCapgo.classList.add('is-visible')
         setNarration('Works again. No store wait.')
         busy = false
+        el.registerCta.focus()
       }
 
       if (reduceMotion) {
@@ -734,6 +748,7 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
       setPhone('crash')
       gsap.set(el.packet, { opacity: 1, x: -30, y: -160, scale: 1, rotation: 0 })
       const tl = gsap.timeline({ onComplete: showSuccess })
+      activeEndingAnim = tl
       tl.to(el.packet, {
         x: 48,
         y: 10,
@@ -755,6 +770,7 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
           ease: 'power2.out',
           onStart: () => {
             el.endingCapgo.classList.add('is-visible')
+            el.registerCta.focus()
           },
         },
       )
@@ -769,11 +785,11 @@ const registerUrl = getRelativeLocaleUrl(Astro.locals.locale, 'register')
     el.choiceCapgo.addEventListener('click', playCapgoEnding)
     el.restartStore.addEventListener('click', () => {
       track('restart')
-      resetToIdle()
+      resetToIdle(true)
     })
     el.restartCapgo.addEventListener('click', () => {
       track('restart')
-      resetToIdle()
+      resetToIdle(true)
     })
     el.registerCta.addEventListener('click', () => {
       track('cta_click')
