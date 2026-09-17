@@ -2,6 +2,7 @@ import cachedMetrics from '@/data/live-update-metrics.json'
 import { LIVE_UPDATE_METRICS_PATH } from './publicLiveUpdateMetrics'
 
 export type DailyMetric = { date: string; success_rate: number }
+export type DailyPlatformMetric = { date: string; ios: number | null; android: number | null }
 export type FailureMetric = { reason: string; share: number }
 export type BreakdownMetric = {
   key: string
@@ -19,6 +20,7 @@ export type LiveUpdateMetrics = {
   delta_success_rate: number | null
   updated_at: string
   daily: DailyMetric[]
+  daily_platforms: DailyPlatformMetric[]
   failures: FailureMetric[]
   platforms: BreakdownMetric[]
   countries: BreakdownMetric[]
@@ -70,6 +72,15 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
       return { date: item.date, success_rate: percentage(item.success_rate) }
     })
     .filter((item): item is DailyMetric => item !== null)
+
+  const daily_platforms = Array.isArray(value.daily_platforms)
+    ? value.daily_platforms
+        .map((item) => {
+          if (!isRecord(item) || typeof item.date !== 'string') return null
+          return { date: item.date, ios: nullablePercentage(item.ios), android: nullablePercentage(item.android) }
+        })
+        .filter((item): item is DailyPlatformMetric => item !== null)
+    : []
 
   const failures = value.failures
     .map((item) => {
@@ -135,6 +146,7 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
     delta_success_rate: nullablePercentage(value.delta_success_rate),
     updated_at: value.updated_at,
     daily,
+    daily_platforms,
     failures,
     platforms,
     countries,
@@ -143,7 +155,7 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
 }
 
 export function getCachedLiveUpdateMetrics(): LiveUpdateMetrics {
-  return { ...FALLBACK, source: 'cache' }
+  return { ...(normalizeLiveUpdateMetrics(FALLBACK) ?? { ...FALLBACK, daily_platforms: [] }), source: 'cache' }
 }
 
 export async function fetchLiveUpdateMetrics(endpoint = LIVE_UPDATE_METRICS_PATH): Promise<LiveUpdateMetrics | null> {

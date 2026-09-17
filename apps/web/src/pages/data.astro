@@ -7,13 +7,13 @@ import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
 const metrics = await resolveLiveUpdateMetrics()
-const title = 'Capgo Live Update data | Platform insights'
+const title = 'Capgo Live Update status | Delivery trends'
 const description =
-  'Live Update success by country, platform, and updater version. First-try, first-day, rollback, and zip vs delta rates use the same app, device, and UTC-day outcomes over the last 30 days.'
+  'Global Live Update success trends for iOS and Android. Rates use the last 30 days of app, device, and UTC-day outcomes — not live queue counts and not realtime.'
 const content = {
   title,
   description,
-  image: `${config.public.baseUrl}/social/capgo-live-update.png`,
+  image: `${config.public.baseUrl}/landing-demos/live-update-status.webp`,
   ldJSON: createLdJsonGraph(config.public, createWebPageLdJson(config.public, { name: title, description, url: Astro.url.href }), { includeOrganization: true }),
 }
 
@@ -51,6 +51,61 @@ function labelForKey(kind: 'country' | 'platform' | 'version', key: string) {
 function formatPct(value: number | null) {
   return value === null ? '—' : `${Math.ceil(value)}%`
 }
+
+function formatRate(value: number | null) {
+  return value === null ? '—' : `${Number(value.toFixed(1))}%`
+}
+
+function failureRate(success: number | null) {
+  return success === null ? null : Number((100 - success).toFixed(1))
+}
+
+function platformOf(key: 'ios' | 'android') {
+  return metrics.platforms.find((item) => item.key === key) ?? { key, share: 0, success_rate: null, top_failure: null }
+}
+
+function sparkTone(rate: number | null) {
+  if (rate === null) return 'empty'
+  return rate >= 70 ? 'good' : 'poor'
+}
+
+function sliceDays<T extends { date: string }>(rows: T[], days: number) {
+  return rows.slice(Math.max(0, rows.length - days))
+}
+
+function chartScale(rows: typeof metrics.daily_platforms) {
+  const values = rows.flatMap((row) => [row.ios, row.android]).filter((value): value is number => value !== null)
+  if (!values.length) return { min: 0, max: 100 }
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+  const pad = Math.max(3, (max - min) * 0.25)
+  return { min: Math.max(0, Number((min - pad).toFixed(1))), max: Math.min(100, Number((max + pad).toFixed(1))) }
+}
+
+function chartPoints(rows: typeof metrics.daily_platforms, key: 'ios' | 'android', scale: { min: number, max: number }, width = 800, height = 260) {
+  const pad = { l: 44, r: 16, t: 16, b: 28 }
+  const innerW = width - pad.l - pad.r
+  const innerH = height - pad.t - pad.b
+  const span = Math.max(scale.max - scale.min, 1)
+  return rows
+    .map((row, index) => {
+      const rate = row[key]
+      if (rate === null) return null
+      const x = pad.l + (rows.length <= 1 ? innerW / 2 : (index / (rows.length - 1)) * innerW)
+      const y = pad.t + (1 - (rate - scale.min) / span) * innerH
+      return `${x.toFixed(1)},${y.toFixed(1)}`
+    })
+    .filter((point): point is string => point !== null)
+    .join(' ')
+}
+
+const ios = platformOf('ios')
+const android = platformOf('android')
+const chartRows = sliceDays(metrics.daily_platforms, 30)
+const chartRange = chartScale(chartRows)
+const iosChart = chartPoints(chartRows, 'ios', chartRange)
+const androidChart = chartPoints(chartRows, 'android', chartRange)
+const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
 ---
 
 <Layout content={content}>
@@ -59,71 +114,170 @@ function formatPct(value: number | null) {
   <main class="data-page" data-metrics-endpoint={LIVE_UPDATE_METRICS_PATH} aria-busy="false">
     <section class="data-hero">
       <div class="data-shell">
-        <p class="data-eyebrow"><span aria-hidden="true"></span> Our data</p>
-        <h1>Live Update delivery data</h1>
+        <div class="data-title-row">
+          <h1>Live Updates</h1>
+          <p class="data-badge" data-status-badge><span aria-hidden="true"></span> Operational</p>
+        </div>
         <p class="data-summary">
-          Last 30 days of Capgo install success. Each rate uses app, device, and UTC-day outcomes — overall, first try, first day of a release, rollback, zip vs delta, and by country,
-          platform, and updater version. We publish failures too, with plain-language explanations from our docs.
+          Global install success for the last 30 days. Each rate is one app, device, and UTC day — not a live queue, and not a build count.
         </p>
         <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
+        <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
+        <div class="data-kpis" aria-label="Global reliability">
+          <div><p>Success</p><strong data-kpi="success-rate" translate="no">{formatRate(metrics.success_rate)}</strong></div>
+          <div><p>First try</p><strong data-kpi="first-try" translate="no">{formatRate(metrics.first_try_rate)}</strong></div>
+          <div><p>Rollback</p><strong data-kpi="rollback" translate="no">{formatRate(metrics.rollback_rate)}</strong></div>
+          <div><p>Window</p><strong>30 days</strong></div>
+        </div>
       </div>
     </section>
 
-    <section class="data-section" aria-labelledby="reliability-title">
+    <section class="data-section" aria-labelledby="platforms-title">
       <div class="data-shell">
         <div class="data-heading">
           <div>
-            <p class="data-eyebrow">Success rate</p>
-            <h2 id="reliability-title">Daily install success</h2>
+            <p class="data-eyebrow">Platforms</p>
+            <h2 id="platforms-title">iOS and Android</h2>
           </div>
-          <p>Each outcome is one app, device, and UTC day. If that combination eventually installs, it counts as success. First try means that day had a set and no failure. First-day rates use the first UTC day we see each bundle.</p>
+          <p>Success and failure over the last 30 days. The sparkline is one tick per UTC day — green at 70% or better.</p>
         </div>
-
-        <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
-        <div class="data-kpis" aria-label="Reliability summary">
-          <div><p>Success rate</p><strong data-kpi="success-rate" translate="no">{formatPct(metrics.success_rate)}</strong></div>
-          <div><p>First try</p><strong data-kpi="first-try" translate="no">{formatPct(metrics.first_try_rate)}</strong></div>
-          <div><p>First-day success</p><strong data-kpi="first-day-success" translate="no">{formatPct(metrics.first_day_success_rate)}</strong></div>
-          <div><p>First-day installs</p><strong data-kpi="first-day-share" translate="no">{formatPct(metrics.first_day_rate)}</strong></div>
-          <div><p>Rollback</p><strong data-kpi="rollback" translate="no">{formatPct(metrics.rollback_rate)}</strong></div>
-          <div><p>Window</p><strong>30 days</strong></div>
+        <p class="data-sr-only" data-platforms-status aria-live="polite"></p>
+        <div class="data-cards">
+          <article class="data-card" data-platform-card="ios">
+            <h3>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.7c0-2.4 2-3.4 2.1-3.5-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9s-1.9-.9-3.2-.8c-1.6.1-3.1.9-4 2.4-1.7 2.9-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2-.1 1.6-.8 3.1-.8s1.8.8 3.2.7c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.5-3.9zM14.3 5.9c.6-.8 1.1-1.9.9-3-1 .1-2.2.7-2.9 1.5-.6.7-1.2 1.8-.9 2.9 1.1.1 2.2-.5 2.9-1.4z"/></svg>
+              iOS
+            </h3>
+            <div class="data-card-stats">
+              <div>
+                <p>Success</p>
+                <strong data-kpi="ios-success" translate="no">{formatRate(ios.success_rate)}</strong>
+                <small>Last 30 days</small>
+              </div>
+              <div>
+                <p>Failure</p>
+                <strong data-kpi="ios-failure" data-tone="poor" translate="no">{formatRate(failureRate(ios.success_rate))}</strong>
+                <small data-top-failure="ios">{ios.top_failure ? `${getFailureReasonInfo(ios.top_failure.reason).label}` : 'No leading failure'}</small>
+              </div>
+            </div>
+            <div class="data-spark" data-spark="ios" role="img" aria-label="iOS daily success">
+              {metrics.daily_platforms.map((row) => (
+                <i data-tone={sparkTone(row.ios)} title={`${row.date}: ${formatRate(row.ios)}`}></i>
+              ))}
+            </div>
+          </article>
+          <article class="data-card" data-platform-card="android">
+            <h3>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.6 9.5h.1c.8 0 1.4.6 1.4 1.4v6.4c0 .8-.6 1.4-1.4 1.4h-.1v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2H10.2v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2h-.1c-.8 0-1.4-.6-1.4-1.4v-6.4c0-.8.6-1.4 1.4-1.4h10.3zM7.4 4.8l.8 1.4c1.1-.6 2.4-.9 3.8-.9s2.7.3 3.8.9l.8-1.4c.2-.4.7-.5 1.1-.3.4.2.5.7.3 1.1l-.7 1.3C18.6 8 19.5 9.6 19.5 11.4H4.5c0-1.8.9-3.4 2.3-4.5l-.7-1.3c-.2-.4-.1-.9.3-1.1.4-.2.9-.1 1.1.3zM9 12.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+              Android
+            </h3>
+            <div class="data-card-stats">
+              <div>
+                <p>Success</p>
+                <strong data-kpi="android-success" translate="no">{formatRate(android.success_rate)}</strong>
+                <small>Last 30 days</small>
+              </div>
+              <div>
+                <p>Failure</p>
+                <strong data-kpi="android-failure" data-tone="poor" translate="no">{formatRate(failureRate(android.success_rate))}</strong>
+                <small data-top-failure="android">{android.top_failure ? `${getFailureReasonInfo(android.top_failure.reason).label}` : 'No leading failure'}</small>
+              </div>
+            </div>
+            <div class="data-spark" data-spark="android" role="img" aria-label="Android daily success">
+              {metrics.daily_platforms.map((row) => (
+                <i data-tone={sparkTone(row.android)} title={`${row.date}: ${formatRate(row.android)}`}></i>
+              ))}
+            </div>
+          </article>
         </div>
-
-        <p class="data-sr-only" data-daily-status aria-live="polite"></p>
-        <div class="data-chart-skeleton" data-daily-skeleton aria-hidden="true">
-          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-        </div>
-        <div class="data-chart" data-daily-chart aria-label="Daily install success chart" hidden translate="no">
-          <div class="data-chart-scale" aria-hidden="true"><span>100%</span><span>50%</span><span>0%</span></div>
-          <div class="data-bars" data-daily-bars role="list" aria-label="Daily install success rates"></div>
-          <div class="data-axis"><span data-daily-start></span><span data-daily-end></span></div>
-        </div>
-        <p class="data-empty" data-daily-empty aria-live="polite" hidden></p>
+        <p class="data-empty" data-platforms-empty aria-live="polite" hidden={metrics.platforms.some((item) => item.key === 'ios' || item.key === 'android')}>
+          {metrics.platforms.length ? '' : 'Platform breakdown is temporarily unavailable.'}
+        </p>
       </div>
     </section>
 
-    <section class="data-section data-section-muted" aria-labelledby="packages-title">
+    <section class="data-section data-section-muted" aria-labelledby="trend-title">
+      <div class="data-shell">
+        <div class="data-heading">
+          <div>
+            <p class="data-eyebrow">Trend</p>
+            <h2 id="trend-title">Install success over time</h2>
+          </div>
+          <p>Daily success for iOS and Android. 7D and 30D read from the same 30-day window — this chart is not a live feed.</p>
+        </div>
+        <p class="data-sr-only" data-daily-status aria-live="polite"></p>
+        <div class="data-trend" data-trend>
+          <div class="data-trend-head">
+            <p>Install success</p>
+            <div class="data-periods" role="tablist" aria-label="Trend window">
+              <button type="button" data-period="7">7D</button>
+              <button type="button" data-period="30" aria-selected="true">30D</button>
+            </div>
+          </div>
+          <div class="data-chart-skeleton" data-daily-skeleton aria-hidden="true" hidden={chartRows.length > 0}>
+            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+          </div>
+          <svg class="data-trend-svg" data-trend-svg viewBox="0 0 800 260" role="img" aria-label="iOS and Android install success" hidden={chartRows.length === 0} translate="no">
+            <line x1="44" y1="16" x2="784" y2="16"></line>
+            <line x1="44" y1="124" x2="784" y2="124"></line>
+            <line x1="44" y1="232" x2="784" y2="232"></line>
+            <text data-trend-max x="0" y="20">{formatRate(chartRange.max)}</text>
+            <text data-trend-mid x="0" y="128">{formatRate(chartMid)}</text>
+            <text data-trend-min x="0" y="236">{formatRate(chartRange.min)}</text>
+            <polyline data-trend-line="ios" points={iosChart}></polyline>
+            <polyline data-trend-line="android" points={androidChart}></polyline>
+            <text data-trend-start x="44" y="256">{chartRows[0]?.date ?? ''}</text>
+            <text data-trend-end x="784" y="256" text-anchor="end">{chartRows.at(-1)?.date ?? ''}</text>
+          </svg>
+          <div class="data-legend">
+            <span data-legend="ios">iOS</span>
+            <span data-legend="android">Android</span>
+          </div>
+        </div>
+        <p class="data-empty" data-daily-empty aria-live="polite" hidden={chartRows.length > 0}></p>
+      </div>
+    </section>
+
+    <section class="data-section" aria-labelledby="packages-title">
       <div class="data-shell">
         <div class="data-heading">
           <div>
             <p class="data-eyebrow">Package type</p>
-            <h2 id="packages-title">Zip vs delta success</h2>
+            <h2 id="packages-title">Zip vs delta</h2>
           </div>
-          <p>Device-day download success. Zip is a full bundle. Delta is a manifest of changed files. A day that completes counts as success; a day with only a package-specific failure counts as fail.</p>
+          <p>Download success for the last 30 days. Zip is a full bundle. Delta is a manifest of changed files. No volume counts.</p>
         </div>
         <p class="data-sr-only" data-packages-status aria-live="polite"></p>
-        <dl class="data-packages" data-packages>
-          <div>
-            <dt>Zip</dt>
-            <dd data-kpi="zip-success" translate="no">{formatPct(metrics.zip_success_rate)}</dd>
-            <div><span style={`--share: ${metrics.zip_success_rate ?? 0}%`}></span></div>
-          </div>
-          <div>
-            <dt>Delta</dt>
-            <dd data-kpi="delta-success" translate="no">{formatPct(metrics.delta_success_rate)}</dd>
-            <div><span style={`--share: ${metrics.delta_success_rate ?? 0}%`}></span></div>
-          </div>
-        </dl>
+        <div class="data-cards" data-packages>
+          <article class="data-card">
+            <h3>Zip</h3>
+            <div class="data-card-stats">
+              <div>
+                <p>Success</p>
+                <strong data-kpi="zip-success" translate="no">{formatRate(metrics.zip_success_rate)}</strong>
+                <small>Last 30 days</small>
+              </div>
+              <div>
+                <p>Failure</p>
+                <strong data-kpi="zip-failure" data-tone="poor" translate="no">{formatRate(failureRate(metrics.zip_success_rate))}</strong>
+              </div>
+            </div>
+          </article>
+          <article class="data-card">
+            <h3>Delta</h3>
+            <div class="data-card-stats">
+              <div>
+                <p>Success</p>
+                <strong data-kpi="delta-success" translate="no">{formatRate(metrics.delta_success_rate)}</strong>
+                <small>Last 30 days</small>
+              </div>
+              <div>
+                <p>Failure</p>
+                <strong data-kpi="delta-failure" data-tone="poor" translate="no">{formatRate(failureRate(metrics.delta_success_rate))}</strong>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -171,16 +325,16 @@ function formatPct(value: number | null) {
       </div>
     </section>
 
-    <section class="data-section data-section-muted" aria-labelledby="platforms-title">
+    <section class="data-section data-section-muted" aria-labelledby="share-title">
       <div class="data-shell">
         <div class="data-heading">
           <div>
-            <p class="data-eyebrow">Platforms</p>
-            <h2 id="platforms-title">Success by device type</h2>
+            <p class="data-eyebrow">Global share</p>
+            <h2 id="share-title">Usage by device type</h2>
           </div>
           <p>Share of active devices, success rate, and leading failure by platform. Success uses app/device/UTC-day outcomes.</p>
         </div>
-        <p class="data-sr-only" data-platforms-status aria-live="polite"></p>
+        <p class="data-sr-only" data-share-status aria-live="polite"></p>
         <div class="data-table-wrap">
           <table class="data-table" data-platforms-table>
             <thead>
@@ -209,7 +363,7 @@ function formatPct(value: number | null) {
             </tbody>
           </table>
         </div>
-        <p class="data-empty" data-platforms-empty aria-live="polite" hidden={metrics.platforms.length > 0}>
+        <p class="data-empty" data-share-empty aria-live="polite" hidden={metrics.platforms.length > 0}>
           {metrics.platforms.length ? '' : 'Platform breakdown is temporarily unavailable.'}
         </p>
       </div>
@@ -311,20 +465,34 @@ function formatPct(value: number | null) {
     const updated = page?.querySelector<HTMLElement>('[data-updated]')
     const successRateKpi = page?.querySelector<HTMLElement>('[data-kpi="success-rate"]')
     const firstTryKpi = page?.querySelector<HTMLElement>('[data-kpi="first-try"]')
-    const firstDaySuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="first-day-success"]')
-    const firstDayShareKpi = page?.querySelector<HTMLElement>('[data-kpi="first-day-share"]')
     const rollbackKpi = page?.querySelector<HTMLElement>('[data-kpi="rollback"]')
+    const iosSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="ios-success"]')
+    const iosFailureKpi = page?.querySelector<HTMLElement>('[data-kpi="ios-failure"]')
+    const androidSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="android-success"]')
+    const androidFailureKpi = page?.querySelector<HTMLElement>('[data-kpi="android-failure"]')
     const zipSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="zip-success"]')
+    const zipFailureKpi = page?.querySelector<HTMLElement>('[data-kpi="zip-failure"]')
     const deltaSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="delta-success"]')
+    const deltaFailureKpi = page?.querySelector<HTMLElement>('[data-kpi="delta-failure"]')
     const packagesStatus = page?.querySelector<HTMLElement>('[data-packages-status]')
     const kpiStatus = page?.querySelector<HTMLElement>('[data-kpi-status]')
     const dailyStatus = page?.querySelector<HTMLElement>('[data-daily-status]')
-    const dailyChart = page?.querySelector<HTMLElement>('[data-daily-chart]')
     const dailySkeleton = page?.querySelector<HTMLElement>('[data-daily-skeleton]')
-    const dailyBars = page?.querySelector<HTMLElement>('[data-daily-bars]')
-    const dailyStart = page?.querySelector<HTMLElement>('[data-daily-start]')
-    const dailyEnd = page?.querySelector<HTMLElement>('[data-daily-end]')
     const dailyEmpty = page?.querySelector<HTMLElement>('[data-daily-empty]')
+    const trendSvg = page?.querySelector<SVGElement>('[data-trend-svg]')
+    const trendIos = page?.querySelector<SVGPolylineElement>('[data-trend-line="ios"]')
+    const trendAndroid = page?.querySelector<SVGPolylineElement>('[data-trend-line="android"]')
+    const trendStart = page?.querySelector<SVGTextElement>('[data-trend-start]')
+    const trendEnd = page?.querySelector<SVGTextElement>('[data-trend-end]')
+    const trendMax = page?.querySelector<SVGTextElement>('[data-trend-max]')
+    const trendMid = page?.querySelector<SVGTextElement>('[data-trend-mid]')
+    const trendMin = page?.querySelector<SVGTextElement>('[data-trend-min]')
+    const periodButtons = page?.querySelectorAll<HTMLButtonElement>('[data-period]')
+    const iosSpark = page?.querySelector<HTMLElement>('[data-spark="ios"]')
+    const androidSpark = page?.querySelector<HTMLElement>('[data-spark="android"]')
+    const iosTopFailure = page?.querySelector<HTMLElement>('[data-top-failure="ios"]')
+    const androidTopFailure = page?.querySelector<HTMLElement>('[data-top-failure="android"]')
+    const statusBadge = page?.querySelector<HTMLElement>('[data-status-badge]')
     const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
     const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
     const failuresStatus = page?.querySelector<HTMLElement>('[data-failures-status]')
@@ -334,9 +502,13 @@ function formatPct(value: number | null) {
     const platformsBody = page?.querySelector<HTMLElement>('[data-platforms]')
     const platformsEmpty = page?.querySelector<HTMLElement>('[data-platforms-empty]')
     const platformsStatus = page?.querySelector<HTMLElement>('[data-platforms-status]')
+    const shareEmpty = page?.querySelector<HTMLElement>('[data-share-empty]')
+    const shareStatus = page?.querySelector<HTMLElement>('[data-share-status]')
     const versionsBody = page?.querySelector<HTMLElement>('[data-versions]')
     const versionEmpty = page?.querySelector<HTMLElement>('[data-version-empty]')
     const versionsStatus = page?.querySelector<HTMLElement>('[data-versions-status]')
+    let periodDays = 30
+    let latestMetrics: LiveUpdateMetrics | null = null
     const styleScopeAttributes = page?.getAttributeNames().filter((attribute) => attribute.startsWith('data-astro-cid-')) ?? []
 
     const countryNames = typeof Intl !== 'undefined' && 'DisplayNames' in Intl ? new Intl.DisplayNames(['en'], { type: 'region' }) : null
@@ -365,6 +537,49 @@ function formatPct(value: number | null) {
 
     function formatPct(value: number | null) {
       return value === null ? '—' : `${Math.ceil(value)}%`
+    }
+
+    function formatRate(value: number | null) {
+      return value === null ? '—' : `${Number(value.toFixed(1))}%`
+    }
+
+    function failureRate(success: number | null) {
+      return success === null ? null : Number((100 - success).toFixed(1))
+    }
+
+    function sparkTone(rate: number | null) {
+      if (rate === null) return 'empty'
+      return rate >= 70 ? 'good' : 'poor'
+    }
+
+    function platformOf(metrics: LiveUpdateMetrics, key: 'ios' | 'android') {
+      return metrics.platforms.find((item) => item.key === key) ?? { key, share: 0, success_rate: null, top_failure: null }
+    }
+
+    function chartScale(rows: LiveUpdateMetrics['daily_platforms']) {
+      const values = rows.flatMap((row) => [row.ios, row.android]).filter((value): value is number => value !== null)
+      if (!values.length) return { min: 0, max: 100 }
+      const min = Math.min(...values)
+      const max = Math.max(...values)
+      const pad = Math.max(3, (max - min) * 0.25)
+      return { min: Math.max(0, Number((min - pad).toFixed(1))), max: Math.min(100, Number((max + pad).toFixed(1))) }
+    }
+
+    function chartPoints(rows: LiveUpdateMetrics['daily_platforms'], key: 'ios' | 'android', scale: { min: number, max: number }, width = 800, height = 260) {
+      const pad = { l: 44, r: 16, t: 16, b: 28 }
+      const innerW = width - pad.l - pad.r
+      const innerH = height - pad.t - pad.b
+      const span = Math.max(scale.max - scale.min, 1)
+      return rows
+        .map((row, index) => {
+          const rate = row[key]
+          if (rate === null) return null
+          const x = pad.l + (rows.length <= 1 ? innerW / 2 : (index / (rows.length - 1)) * innerW)
+          const y = pad.t + (1 - (rate - scale.min) / span) * innerH
+          return `${x.toFixed(1)},${y.toFixed(1)}`
+        })
+        .filter((point): point is string => point !== null)
+        .join(' ')
     }
 
     function renderBreakdownRows(
@@ -410,31 +625,55 @@ function formatPct(value: number | null) {
       }
     }
 
-    function renderDaily(metrics: LiveUpdateMetrics) {
-      if (!dailyChart || !dailyBars || !dailyStart || !dailyEnd || !dailyEmpty) return
-      dailyBars.replaceChildren()
-      for (const item of metrics.daily) {
-        const bar = createScopedElement('div')
-        const label = `${item.date}: ${formatPct(item.success_rate)} install success`
-        bar.className = 'data-bar'
-        bar.dataset.tooltip = label
-        bar.title = label
-        bar.tabIndex = 0
-        bar.setAttribute('role', 'listitem')
-        bar.setAttribute('aria-label', label)
-        const fill = createScopedElement('span')
-        fill.style.setProperty('--success-rate', `${item.success_rate}%`)
-        bar.append(fill)
-        dailyBars.append(bar)
+    function renderSpark(target: HTMLElement | null | undefined, rows: LiveUpdateMetrics['daily_platforms'], key: 'ios' | 'android') {
+      if (!target) return
+      target.replaceChildren()
+      for (const row of rows) {
+        const tick = createScopedElement('i')
+        tick.dataset.tone = sparkTone(row[key])
+        tick.title = `${row.date}: ${formatRate(row[key])}`
+        target.append(tick)
       }
-      dailyChart.hidden = metrics.daily.length === 0
-      if (dailySkeleton) dailySkeleton.hidden = metrics.daily.length > 0
-      dailyEmpty.hidden = metrics.daily.length > 0
-      dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
-      dailyStart.textContent = metrics.daily[0]?.date ?? ''
-      dailyEnd.textContent = metrics.daily.at(-1)?.date ?? ''
+    }
+
+    function renderTrend(metrics: LiveUpdateMetrics) {
+      const rows = metrics.daily_platforms.slice(Math.max(0, metrics.daily_platforms.length - periodDays))
+      const scale = chartScale(rows)
+      if (trendIos) trendIos.setAttribute('points', chartPoints(rows, 'ios', scale))
+      if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(rows, 'android', scale))
+      if (trendMax) trendMax.textContent = formatRate(scale.max)
+      if (trendMid) trendMid.textContent = formatRate(Number(((scale.min + scale.max) / 2).toFixed(1)))
+      if (trendMin) trendMin.textContent = formatRate(scale.min)
+      if (trendStart) trendStart.textContent = rows[0]?.date ?? ''
+      if (trendEnd) trendEnd.textContent = rows.at(-1)?.date ?? ''
+      if (trendSvg) trendSvg.toggleAttribute('hidden', rows.length === 0)
+      if (dailySkeleton) dailySkeleton.hidden = rows.length > 0
+      if (dailyEmpty) {
+        dailyEmpty.hidden = rows.length > 0
+        dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
+      }
       if (dailyStatus) {
-        dailyStatus.textContent = metrics.daily.length ? `Daily install success chart updated with ${metrics.daily.length} days of data` : 'Daily install success chart unavailable'
+        dailyStatus.textContent = rows.length ? `Install success trend updated with ${rows.length} days` : 'Install success trend unavailable'
+      }
+    }
+
+    function renderPlatformCards(metrics: LiveUpdateMetrics) {
+      const ios = platformOf(metrics, 'ios')
+      const android = platformOf(metrics, 'android')
+      if (iosSuccessKpi) iosSuccessKpi.textContent = formatRate(ios.success_rate)
+      if (iosFailureKpi) iosFailureKpi.textContent = formatRate(failureRate(ios.success_rate))
+      if (androidSuccessKpi) androidSuccessKpi.textContent = formatRate(android.success_rate)
+      if (androidFailureKpi) androidFailureKpi.textContent = formatRate(failureRate(android.success_rate))
+      if (iosTopFailure) iosTopFailure.textContent = ios.top_failure ? getFailureReasonInfo(ios.top_failure.reason).label : 'No leading failure'
+      if (androidTopFailure) androidTopFailure.textContent = android.top_failure ? getFailureReasonInfo(android.top_failure.reason).label : 'No leading failure'
+      renderSpark(iosSpark, metrics.daily_platforms, 'ios')
+      renderSpark(androidSpark, metrics.daily_platforms, 'android')
+      if (platformsEmpty) {
+        platformsEmpty.hidden = Boolean(ios.success_rate !== null || android.success_rate !== null || metrics.daily_platforms.length)
+        platformsEmpty.textContent = 'Platform breakdown is temporarily unavailable.'
+      }
+      if (platformsStatus) {
+        platformsStatus.textContent = `iOS ${formatRate(ios.success_rate)}, Android ${formatRate(android.success_rate)}`
       }
     }
 
@@ -478,29 +717,25 @@ function formatPct(value: number | null) {
       if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
     }
 
-    function setPackageBar(kpi: HTMLElement | null | undefined, rate: number | null) {
-      const track = kpi?.parentElement?.querySelector<HTMLElement>('span')
-      if (track) track.style.setProperty('--share', `${rate ?? 0}%`)
-    }
-
     function renderMetrics(metrics: LiveUpdateMetrics) {
-      if (successRateKpi) successRateKpi.textContent = formatPct(metrics.success_rate)
-      if (firstTryKpi) firstTryKpi.textContent = formatPct(metrics.first_try_rate)
-      if (firstDaySuccessKpi) firstDaySuccessKpi.textContent = formatPct(metrics.first_day_success_rate)
-      if (firstDayShareKpi) firstDayShareKpi.textContent = formatPct(metrics.first_day_rate)
-      if (rollbackKpi) rollbackKpi.textContent = formatPct(metrics.rollback_rate)
-      if (zipSuccessKpi) zipSuccessKpi.textContent = formatPct(metrics.zip_success_rate)
-      if (deltaSuccessKpi) deltaSuccessKpi.textContent = formatPct(metrics.delta_success_rate)
-      setPackageBar(zipSuccessKpi, metrics.zip_success_rate)
-      setPackageBar(deltaSuccessKpi, metrics.delta_success_rate)
+      latestMetrics = metrics
+      if (successRateKpi) successRateKpi.textContent = formatRate(metrics.success_rate)
+      if (firstTryKpi) firstTryKpi.textContent = formatRate(metrics.first_try_rate)
+      if (rollbackKpi) rollbackKpi.textContent = formatRate(metrics.rollback_rate)
+      if (zipSuccessKpi) zipSuccessKpi.textContent = formatRate(metrics.zip_success_rate)
+      if (zipFailureKpi) zipFailureKpi.textContent = formatRate(failureRate(metrics.zip_success_rate))
+      if (deltaSuccessKpi) deltaSuccessKpi.textContent = formatRate(metrics.delta_success_rate)
+      if (deltaFailureKpi) deltaFailureKpi.textContent = formatRate(failureRate(metrics.delta_success_rate))
       if (packagesStatus) {
-        packagesStatus.textContent = `Zip success ${formatPct(metrics.zip_success_rate)}, delta success ${formatPct(metrics.delta_success_rate)}`
+        packagesStatus.textContent = `Zip success ${formatRate(metrics.zip_success_rate)}, delta success ${formatRate(metrics.delta_success_rate)}`
       }
-      if (kpiStatus) kpiStatus.textContent = `Success rate updated to ${formatPct(metrics.success_rate)}`
-      renderDaily(metrics)
+      if (kpiStatus) kpiStatus.textContent = `Success rate updated to ${formatRate(metrics.success_rate)}`
+      if (statusBadge) statusBadge.lastChild && (statusBadge.lastChild.textContent = ' Operational')
+      renderPlatformCards(metrics)
+      renderTrend(metrics)
       renderFailures(metrics)
       renderBreakdownRows(countriesBody, countriesEmpty, countriesStatus, metrics.countries, 'country', 'Country breakdown is temporarily unavailable.', 'Country breakdown')
-      renderBreakdownRows(platformsBody, platformsEmpty, platformsStatus, metrics.platforms, 'platform', 'Platform breakdown is temporarily unavailable.', 'Platform breakdown')
+      renderBreakdownRows(platformsBody, shareEmpty, shareStatus, metrics.platforms, 'platform', 'Platform breakdown is temporarily unavailable.', 'Platform breakdown')
       renderBreakdownRows(versionsBody, versionEmpty, versionsStatus, metrics.updater_versions, 'version', 'Updater breakdown is temporarily unavailable.', 'Updater versions')
       if (updated) {
         const timestamp = new Date(metrics.updated_at)
@@ -511,8 +746,10 @@ function formatPct(value: number | null) {
     }
 
     function renderUnavailable() {
+      latestMetrics = null
       if (updated) updated.textContent = 'Delivery data is temporarily unavailable. Check back shortly.'
-      if (dailyChart) dailyChart.hidden = true
+      if (statusBadge) statusBadge.lastChild && (statusBadge.lastChild.textContent = ' Unavailable')
+      if (trendSvg) trendSvg.setAttribute('hidden', '')
       if (dailySkeleton) dailySkeleton.hidden = true
       if (dailyEmpty) {
         dailyEmpty.hidden = false
@@ -522,22 +759,31 @@ function formatPct(value: number | null) {
       if (failuresLead) failuresLead.textContent = 'Failure data is temporarily unavailable.'
       if (failuresStatus) failuresStatus.textContent = 'Failure data is temporarily unavailable.'
       if (kpiStatus) kpiStatus.textContent = 'Success rate unavailable'
+      if (successRateKpi) successRateKpi.textContent = '—'
       if (firstTryKpi) firstTryKpi.textContent = '—'
-      if (firstDaySuccessKpi) firstDaySuccessKpi.textContent = '—'
-      if (firstDayShareKpi) firstDayShareKpi.textContent = '—'
       if (rollbackKpi) rollbackKpi.textContent = '—'
+      if (iosSuccessKpi) iosSuccessKpi.textContent = '—'
+      if (iosFailureKpi) iosFailureKpi.textContent = '—'
+      if (androidSuccessKpi) androidSuccessKpi.textContent = '—'
+      if (androidFailureKpi) androidFailureKpi.textContent = '—'
       if (zipSuccessKpi) zipSuccessKpi.textContent = '—'
+      if (zipFailureKpi) zipFailureKpi.textContent = '—'
       if (deltaSuccessKpi) deltaSuccessKpi.textContent = '—'
-      setPackageBar(zipSuccessKpi, null)
-      setPackageBar(deltaSuccessKpi, null)
+      if (deltaFailureKpi) deltaFailureKpi.textContent = '—'
+      if (iosSpark) iosSpark.replaceChildren()
+      if (androidSpark) androidSpark.replaceChildren()
       if (packagesStatus) packagesStatus.textContent = 'Zip vs delta success unavailable'
-      if (dailyStatus) dailyStatus.textContent = 'Daily install success chart unavailable'
+      if (dailyStatus) dailyStatus.textContent = 'Install success trend unavailable'
+      if (platformsEmpty) {
+        platformsEmpty.hidden = false
+        platformsEmpty.textContent = 'Platform breakdown is temporarily unavailable.'
+      }
       renderBreakdownRows(countriesBody, countriesEmpty, countriesStatus, [], 'country', 'Country breakdown is temporarily unavailable.', 'Country breakdown')
-      renderBreakdownRows(platformsBody, platformsEmpty, platformsStatus, [], 'platform', 'Platform breakdown is temporarily unavailable.', 'Platform breakdown')
+      renderBreakdownRows(platformsBody, shareEmpty, shareStatus, [], 'platform', 'Platform breakdown is temporarily unavailable.', 'Platform breakdown')
       renderBreakdownRows(versionsBody, versionEmpty, versionsStatus, [], 'version', 'Updater breakdown is temporarily unavailable.', 'Updater versions')
     }
 
-    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v4'
+    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v5'
     const METRICS_CACHE_FRESH_MS = 5 * 60 * 1000
     const METRICS_CACHE_STALE_MS = 24 * 60 * 60 * 1000
 
@@ -621,6 +867,16 @@ function formatPct(value: number | null) {
       } finally {
         page?.setAttribute('aria-busy', 'false')
       }
+    }
+
+    for (const button of periodButtons) {
+      button.addEventListener('click', () => {
+        const next = Number(button.dataset.period)
+        if (!Number.isFinite(next)) return
+        periodDays = next
+        for (const item of periodButtons) item.ariaSelected = item === button ? 'true' : 'false'
+        if (latestMetrics) renderTrend(latestMetrics)
+      })
     }
 
     void loadMetrics()
@@ -710,6 +966,188 @@ function formatPct(value: number | null) {
     color: #91a2ba;
     font-size: 0.875rem;
   }
+  .data-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+  .data-badge {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0;
+    padding: 6px 12px;
+    border: 1px solid rgb(52 211 153 / 28%);
+    border-radius: 999px;
+    background: rgb(52 211 153 / 8%);
+    color: #86efac;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .data-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #34d399;
+    box-shadow: 0 0 0 4px rgb(52 211 153 / 12%);
+  }
+  .data-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .data-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgb(255 255 255 / 3%);
+  }
+  .data-card h3 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 0 0 20px;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .data-card h3 svg {
+    width: 18px;
+    height: 18px;
+  }
+  .data-card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .data-card-stats p {
+    margin: 0 0 6px;
+    color: #91a2ba;
+    font-size: 0.8rem;
+  }
+  .data-card-stats strong {
+    display: block;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.04em;
+  }
+  .data-card-stats strong[data-tone='poor'] {
+    color: #f0a0a0;
+  }
+  .data-card-stats small {
+    display: block;
+    margin-top: 6px;
+    color: #6f819b;
+    font-size: 0.75rem;
+  }
+  .data-spark {
+    display: flex;
+    gap: 3px;
+    align-items: end;
+    height: 28px;
+  }
+  .data-spark i {
+    flex: 1;
+    height: 100%;
+    border-radius: 2px;
+    background: #34d399;
+  }
+  .data-spark i[data-tone='poor'] {
+    background: #f87171;
+  }
+  .data-spark i[data-tone='empty'] {
+    background: rgb(255 255 255 / 12%);
+  }
+  .data-trend {
+    padding: 20px 20px 12px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgb(255 255 255 / 3%);
+  }
+  .data-trend-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .data-trend-head p {
+    margin: 0;
+    color: #d8e1ee;
+    font-size: 0.95rem;
+  }
+  .data-periods {
+    display: flex;
+    gap: 6px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .data-periods button {
+    min-width: 52px;
+    padding: 6px 12px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #91a2ba;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .data-periods button[aria-selected='true'] {
+    background: white;
+    color: #111827;
+  }
+  .data-trend-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .data-trend-svg line {
+    stroke: rgb(255 255 255 / 10%);
+    stroke-width: 1;
+  }
+  .data-trend-svg text {
+    fill: #6f819b;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+  }
+  .data-trend-svg polyline {
+    fill: none;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .data-trend-svg polyline[data-trend-line='ios'] {
+    stroke: #60a5fa;
+  }
+  .data-trend-svg polyline[data-trend-line='android'] {
+    stroke: #34d399;
+  }
+  .data-legend {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    padding: 8px 0 4px;
+    color: #91a2ba;
+    font-size: 0.8rem;
+  }
+  .data-legend span::before {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+    border-radius: 999px;
+    background: #60a5fa;
+    content: '';
+  }
+  .data-legend span[data-legend='android']::before {
+    background: #34d399;
+  }
   .data-spinner {
     width: 14px;
     height: 14px;
@@ -752,19 +1190,16 @@ function formatPct(value: number | null) {
   }
   .data-kpis {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 36px 0 0;
     border-block: 1px solid var(--line);
   }
   .data-kpis div {
     min-width: 0;
     padding: 20px 24px;
   }
-  .data-kpis > div:not(:nth-child(3n + 1)) {
+  .data-kpis > div:not(:first-child) {
     border-left: 1px solid var(--line);
-  }
-  .data-kpis > div:nth-child(n + 4) {
-    border-top: 1px solid var(--line);
   }
   .data-kpis p {
     margin: 0 0 8px;
@@ -1119,21 +1554,21 @@ function formatPct(value: number | null) {
     }
     .data-heading,
     .data-split,
-    .data-packages {
+    .data-packages,
+    .data-cards {
       grid-template-columns: 1fr;
       gap: 24px;
     }
     .data-kpis {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
     }
     .data-kpis div {
       padding: 16px 0;
     }
-    .data-kpis > div:not(:nth-child(3n + 1)),
-    .data-kpis > div:nth-child(n + 4) {
+    .data-kpis > div:nth-child(2n + 1) {
       border-left: 0;
     }
-    .data-kpis > div + div {
+    .data-kpis > div:nth-child(n + 3) {
       border-top: 1px solid var(--line);
     }
     .data-bars,

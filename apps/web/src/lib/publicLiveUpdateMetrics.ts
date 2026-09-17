@@ -8,6 +8,12 @@ export type PublicBreakdownMetric = {
   top_failure: { reason: string, share: number } | null
 }
 
+export type PublicDailyPlatformMetric = {
+  date: string
+  ios: number | null
+  android: number | null
+}
+
 export type PublicLiveUpdateMetrics = {
   success_rate: number
   first_try_rate: number | null
@@ -19,6 +25,7 @@ export type PublicLiveUpdateMetrics = {
   period_days: number
   updated_at: string
   daily: Array<{ date: string, success_rate: number }>
+  daily_platforms: PublicDailyPlatformMetric[]
   failures: Array<{ reason: string, share: number }>
   platforms: PublicBreakdownMetric[]
   countries: PublicBreakdownMetric[]
@@ -147,6 +154,20 @@ function buildBreakdownMetrics(
     }))
 }
 
+function buildDailyPlatforms(rows: Array<{ date: string, key: string, successes: number, failures: number }>): PublicDailyPlatformMetric[] {
+  const byDate = new Map<string, PublicDailyPlatformMetric>()
+  for (const row of rows) {
+    const date = String(row.date || '').trim()
+    const key = String(row.key || '').trim()
+    if (!date || (key !== 'ios' && key !== 'android'))
+      continue
+    const current = byDate.get(date) ?? { date, ios: null, android: null }
+    current[key] = rateFromOutcomes(Number(row.successes) || 0, Number(row.failures) || 0)
+    byDate.set(date, current)
+  }
+  return [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date))
+}
+
 export function buildPublicLiveUpdateQueries(referenceDate = new Date()) {
   const end = new Date(Date.UTC(referenceDate.getUTCFullYear(), referenceDate.getUTCMonth(), referenceDate.getUTCDate()))
   const start = new Date(end)
@@ -164,6 +185,7 @@ export function buildPublicLiveUpdateQueries(referenceDate = new Date()) {
     package: `SELECT sum(if(zip_ok = 1, 1, 0)) AS zip_successes, sum(if(zip_ok = 0 AND zip_fail = 1, 1, 0)) AS zip_failures, sum(if(delta_ok = 1, 1, 0)) AS delta_successes, sum(if(delta_ok = 0 AND delta_fail = 1, 1, 0)) AS delta_failures FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, max(if(blob2 = 'download_zip_complete', 1, 0)) AS zip_ok, max(if(blob2 IN (${zipFailActions}), 1, 0)) AS zip_fail, max(if(blob2 = 'download_manifest_complete', 1, 0)) AS delta_ok, max(if(blob2 IN (${deltaFailActions}), 1, 0)) AS delta_fail FROM app_log WHERE ${window} AND blob2 IN ('download_zip_complete', 'download_manifest_complete', ${zipFailActions}, ${deltaFailActions}) GROUP BY date, app_id, device_id)`,
     failures: `SELECT action, count() AS devices FROM (SELECT ${day} AS date, blob2 AS action, index1 AS app_id, blob1 AS device_id FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, action, app_id, device_id) GROUP BY action`,
     platformsShare: `SELECT platform, count() AS devices FROM (SELECT double1 AS platform, index1 AS app_id, blob1 AS device_id FROM device_usage WHERE ${window} AND double1 IN (0.0, 1.0, 2.0) GROUP BY platform, app_id, device_id) GROUP BY platform`,
+    platformsDaily: `SELECT date, platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${outcomeBase}) WHERE platform IN ('ios', 'android') GROUP BY date, platform`,
     platformsOutcome: `SELECT platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${outcomeBase}) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform`,
     platformsFailure: `SELECT platform AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob5, timestamp) AS platform FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, app_id, device_id, action) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform, action`,
     countriesShare: `SELECT country AS key, count() AS devices FROM (SELECT index1 AS app_id, blob1 AS device_id, argMax(blob10, timestamp) AS country FROM device_info WHERE ${window} AND blob10 != '' GROUP BY app_id, device_id) WHERE country != '' GROUP BY country`,
@@ -206,6 +228,7 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     packageRows,
     failureRows,
     platformShareRows,
+    platformDailyRows,
     platformOutcomeRows,
     platformFailureRows,
     countryShareRows,
@@ -220,6 +243,7 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     runQuery<{ zip_successes: number, zip_failures: number, delta_successes: number, delta_failures: number }>(auth, queries.package),
     runQuery<{ action: string, devices: number }>(auth, queries.failures),
     runQuery<{ platform: number, devices: number }>(auth, queries.platformsShare),
+    runQuery<{ date: string, key: string, successes: number, failures: number }>(auth, queries.platformsDaily),
     runQuery<{ key: string, successes: number, failures: number }>(auth, queries.platformsOutcome),
     runQuery<{ key: string, action: string, devices: number }>(auth, queries.platformsFailure),
     runQuery<{ key: string, devices: number }>(auth, queries.countriesShare),
@@ -269,6 +293,7 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     period_days: 30,
     updated_at: now.toISOString(),
     daily,
+    daily_platforms: buildDailyPlatforms(platformDailyRows),
     failures,
     platforms: buildBreakdownMetrics(platformShareMapped, platformOutcomeRows, platformFailureRows, 3),
     countries: buildBreakdownMetrics(countryShareRows, countryOutcomeRows, countryFailureRows, PUBLIC_TOP_COUNTRIES),
