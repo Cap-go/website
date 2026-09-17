@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro'
 import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
 import Orgs from '@/components/Orgs.astro'
 import ProblemSolution from '@/components/ProblemSolution.astro'
+import LiveUpdateMicrodemo from '@/components/landing/LiveUpdateMicrodemo.astro'
 import Testimonials from '@/components/Testimonials.astro'
 import SharedNumbers from '@/components/SharedNumbers.astro'
 import Hero from '@/components/Hero.astro'
@@ -95,6 +96,7 @@ const content = {
     <Hero />
     <!-- <CompaniesLogo /> -->
     <ProblemSolution />
+    <LiveUpdateMicrodemo />
     <HowItWorks />
     <SolutionAppExample solution="production-updates" randomize />
     <MonitoringFeatures />
