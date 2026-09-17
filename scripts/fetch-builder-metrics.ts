@@ -30,14 +30,6 @@ async function fromSourceFile(): Promise<PublicBuilderMetrics> {
   return buildPublicBuilderMetrics(source)
 }
 
-function safeRate(value: number) {
-  return Number.isFinite(value) ? value.toFixed(1) : 'n/a'
-}
-
-function safeSeconds(value: number | null) {
-  return value === null || !Number.isFinite(value) ? 'n/a' : value.toFixed(1)
-}
-
 async function loadPayload(cached: unknown): Promise<PublicBuilderMetrics> {
   const supabaseUrl = (process.env.VITE_SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL || 'https://xvwzpoazmxkqosrdewyv.supabase.co').trim()
   const anonKey = (process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || '').trim()
@@ -76,6 +68,4 @@ else {
 
   await Bun.write(OUTPUT_PATH, `${json}\n`)
   console.log('Saved builder metrics')
-  console.log(`  success_rate: ${safeRate(metrics.success_rate)}%`)
-  console.log(`  process: ${safeSeconds(metrics.avg_process_seconds)}s`)
 }
