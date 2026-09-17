@@ -217,7 +217,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
           <div class="data-chart-skeleton" data-daily-skeleton aria-hidden="true" hidden={chartRows.length > 0}>
             <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
           </div>
-          <svg class="data-trend-svg" data-trend-svg viewBox="0 0 800 260" role="img" aria-label="iOS and Android install success" translate="no">
+          <div translate="no">
+          <svg class="data-trend-svg" data-trend-svg viewBox="0 0 800 260" role="img" aria-label="iOS and Android install success">
             <line x1="44" y1="16" x2="784" y2="16"></line>
             <line x1="44" y1="124" x2="784" y2="124"></line>
             <line x1="44" y1="232" x2="784" y2="232"></line>
@@ -229,6 +230,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
             <text data-trend-start x="44" y="256">{chartRows[0]?.date ?? ''}</text>
             <text data-trend-end x="784" y="256" text-anchor="end">{chartRows.at(-1)?.date ?? ''}</text>
           </svg>
+          </div>
           <div class="data-legend">
             <span data-legend="ios">iOS</span>
             <span data-legend="android">Android</span>
