@@ -239,12 +239,12 @@ async function regenerateBanner(request: Request, cacheKey: Request): Promise<Re
   return response
 }
 
-function regenerateBannerSafely(request: Request, cacheKey: Request): Promise<void> {
-  return regenerateBanner(request, cacheKey)
-    .then(() => undefined)
-    .catch((error) => {
-      console.error('Failed to refresh README banner cache:', error)
-    })
+async function regenerateBannerSafely(request: Request, cacheKey: Request): Promise<void> {
+  try {
+    await regenerateBanner(request, cacheKey)
+  } catch (error) {
+    console.error('Failed to refresh README banner cache:', error)
+  }
 }
 
 export async function handleReadmeBanner(request: Request, ctx?: BackgroundContext): Promise<Response> {
