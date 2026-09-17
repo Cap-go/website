@@ -3,6 +3,7 @@ import { MCP_ENDPOINT_PATHS, MCP_MANIFEST_PATHS, OPENAPI_ALIAS_PATHS, OPENAPI_AS
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
+import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
 
@@ -11,6 +12,8 @@ interface Env {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
   PERSONAL_ACCESS_TOKEN?: string
+  CF_ACCOUNT_ANALYTICS_ID?: string
+  CF_ANALYTICS_TOKEN?: string
   IOS_UDID_PROFILE_SIGNING_CERT_PEM?: string
   IOS_UDID_PROFILE_SIGNING_KEY_PEM?: string
   IOS_UDID_PROFILE_SIGNING_CHAIN_PEM?: string
@@ -189,6 +192,15 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   '/readme-banner.svg': {
     methods: ['GET', 'HEAD'],
     handle: async (request, _env, ctx) => await handleReadmeBanner(request, ctx),
+  },
+  [LIVE_UPDATE_METRICS_PATH]: {
+    methods: ['GET', 'HEAD'],
+    handle: async (request, env) => {
+      const response = await handleLiveUpdateMetrics(request, env)
+      if (request.method === 'HEAD')
+        return new Response(null, { status: response.status, headers: response.headers })
+      return response
+    },
   },
 }
 

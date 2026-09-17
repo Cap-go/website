@@ -1,4 +1,5 @@
 import cachedMetrics from '@/data/live-update-metrics.json'
+import { LIVE_UPDATE_METRICS_PATH } from './publicLiveUpdateMetrics'
 
 export type DailyMetric = { date: string; success_rate: number }
 export type FailureMetric = { reason: string; share: number }
@@ -145,9 +146,9 @@ export function getCachedLiveUpdateMetrics(): LiveUpdateMetrics {
   return { ...FALLBACK, source: 'cache' }
 }
 
-export async function fetchLiveUpdateMetrics(baseApiUrl: string): Promise<LiveUpdateMetrics | null> {
+export async function fetchLiveUpdateMetrics(endpoint = LIVE_UPDATE_METRICS_PATH): Promise<LiveUpdateMetrics | null> {
   try {
-    const response = await fetch(`${baseApiUrl.replace(/\/$/, '')}/private/website_stats/live_updates`, {
+    const response = await fetch(endpoint, {
       headers: { Accept: 'application/json' },
     })
     if (!response.ok) return null
@@ -158,9 +159,8 @@ export async function fetchLiveUpdateMetrics(baseApiUrl: string): Promise<LiveUp
   }
 }
 
-export async function resolveLiveUpdateMetrics(baseApiUrl: string): Promise<LiveUpdateMetrics> {
-  const live = await fetchLiveUpdateMetrics(baseApiUrl)
-  return live ?? getCachedLiveUpdateMetrics()
+export async function resolveLiveUpdateMetrics(): Promise<LiveUpdateMetrics> {
+  return getCachedLiveUpdateMetrics()
 }
 
 /** JSON safe to embed inside <script> via set:html (blocks </script> breakouts). */

@@ -2,11 +2,11 @@
 import Layout from '@/layouts/Layout.astro'
 import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
 import { jsonForInlineScript, resolveLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
+import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
-const metrics = await resolveLiveUpdateMetrics(config.public.baseApiUrl)
-const apiOrigin = new URL(config.public.baseApiUrl).origin
+const metrics = await resolveLiveUpdateMetrics()
 const title = 'Capgo Live Update data | Platform insights'
 const description =
   'Live Update success by country, platform, and updater version. First-try, first-day, rollback, and zip vs delta rates use the same app, device, and UTC-day outcomes over the last 30 days.'
@@ -54,11 +54,9 @@ function formatPct(value: number | null) {
 ---
 
 <Layout content={content}>
-  <link slot="head" rel="preconnect" href={apiOrigin} crossorigin="anonymous" />
-  <link slot="head" rel="dns-prefetch" href={apiOrigin} />
   {/* Keep bootstrap metrics out of attributes so the edge translator cannot mangle JSON / inflate SSR tables. */}
   <script type="application/json" id="capgo-live-update-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
-  <main class="data-page" data-metrics-endpoint={`${config.public.baseApiUrl}/private/website_stats/live_updates`} aria-busy="false">
+  <main class="data-page" data-metrics-endpoint={LIVE_UPDATE_METRICS_PATH} aria-busy="false">
     <section class="data-hero">
       <div class="data-shell">
         <p class="data-eyebrow"><span aria-hidden="true"></span> Our data</p>
