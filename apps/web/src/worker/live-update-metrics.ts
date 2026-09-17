@@ -14,8 +14,13 @@ const CACHE_HEADERS = {
   'Cache-Control': `public, max-age=${LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS}, s-maxage=${LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS}, stale-while-revalidate=600`,
 }
 
+function workerCache(): Cache | undefined {
+  const store = caches as CacheStorage & { default?: Cache }
+  return store.default
+}
+
 export async function handleLiveUpdateMetrics(request: Request, env: LiveUpdateMetricsEnv): Promise<Response> {
-  const cache = typeof caches !== 'undefined' ? caches.default : undefined
+  const cache = workerCache()
   const cacheKey = new Request(new URL(LIVE_UPDATE_METRICS_PATH, request.url), { method: 'GET' })
   const cached = cache ? await cache.match(cacheKey) : undefined
   if (cached)
