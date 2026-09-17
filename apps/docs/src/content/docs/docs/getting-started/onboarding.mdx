@@ -189,8 +189,9 @@ After installation, you'll be asked:
 **If you select Yes:**
 - Updates will be configured to apply immediately when the app is backgrounded and reopened
 - `autoUpdate: 'always'` and `autoSplashscreen: true` will be added to your config
+- `@capacitor/splash-screen` will be installed if missing, with `launchAutoHide: false`
 - Your `capacitor.config.ts` will be updated automatically
-- **Delta updates** will be automatically enabled - this sends only the files that changed between updates instead of the full bundle, making updates much faster
+- **Delta updates** will be automatically enabled. Instant apply (`always`, `atInstall`, `onLaunch`) should keep using `npx @capgo/cli@latest bundle upload --delta` so only changed files download and the user is not left waiting on a full zip
 
 **If you select No:**
 - Updates will use standard behavior (download in background, apply on next restart)
