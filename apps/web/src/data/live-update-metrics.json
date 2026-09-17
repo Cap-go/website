@@ -2,6 +2,12 @@
   "period_days": 30,
   "updated_at": "2026-08-11T06:50:23.257Z",
   "success_rate": 67.6,
+  "first_try_rate": null,
+  "first_day_rate": null,
+  "first_day_success_rate": null,
+  "rollback_rate": null,
+  "zip_success_rate": null,
+  "delta_success_rate": null,
   "daily": [
     {
       "date": "2026-07-12",

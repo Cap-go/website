@@ -9,7 +9,7 @@ const metrics = await resolveLiveUpdateMetrics(config.public.baseApiUrl)
 const apiOrigin = new URL(config.public.baseApiUrl).origin
 const title = 'Capgo Live Update data | Platform insights'
 const description =
-  'Live Update success by country, platform, and updater version. Rates use app, device, and UTC-day outcomes over the last 30 days — including honest failure reasons.'
+  'Live Update success by country, platform, and updater version. First-try, first-day, rollback, and zip vs delta rates use the same app, device, and UTC-day outcomes over the last 30 days.'
 const content = {
   title,
   description,
@@ -64,8 +64,8 @@ function formatPct(value: number | null) {
         <p class="data-eyebrow"><span aria-hidden="true"></span> Our data</p>
         <h1>Live Update delivery data</h1>
         <p class="data-summary">
-          Last 30 days of Capgo install success. Each rate uses app, device, and UTC-day outcomes — overall and by country, platform, and updater version. We publish failures too,
-          with plain-language explanations from our docs.
+          Last 30 days of Capgo install success. Each rate uses app, device, and UTC-day outcomes — overall, first try, first day of a release, rollback, zip vs delta, and by country,
+          platform, and updater version. We publish failures too, with plain-language explanations from our docs.
         </p>
         <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
       </div>
@@ -78,14 +78,17 @@ function formatPct(value: number | null) {
             <p class="data-eyebrow">Success rate</p>
             <h2 id="reliability-title">Daily install success</h2>
           </div>
-          <p>Each outcome is one app, device, and UTC day. If that combination eventually installs, it counts as success.</p>
+          <p>Each outcome is one app, device, and UTC day. If that combination eventually installs, it counts as success. First try means that day had a set and no failure. First-day rates use the first UTC day we see each bundle.</p>
         </div>
 
+        <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
         <div class="data-kpis" aria-label="Reliability summary">
-          <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
-          <div><p>Success rate</p><strong data-kpi="success-rate" translate="no">{Math.ceil(metrics.success_rate)}%</strong></div>
+          <div><p>Success rate</p><strong data-kpi="success-rate" translate="no">{formatPct(metrics.success_rate)}</strong></div>
+          <div><p>First try</p><strong data-kpi="first-try" translate="no">{formatPct(metrics.first_try_rate)}</strong></div>
+          <div><p>First-day success</p><strong data-kpi="first-day-success" translate="no">{formatPct(metrics.first_day_success_rate)}</strong></div>
+          <div><p>First-day installs</p><strong data-kpi="first-day-share" translate="no">{formatPct(metrics.first_day_rate)}</strong></div>
+          <div><p>Rollback</p><strong data-kpi="rollback" translate="no">{formatPct(metrics.rollback_rate)}</strong></div>
           <div><p>Window</p><strong>30 days</strong></div>
-          <div><p>Scope</p><strong>All apps</strong></div>
         </div>
 
         <p class="data-sr-only" data-daily-status aria-live="polite"></p>
@@ -101,7 +104,32 @@ function formatPct(value: number | null) {
       </div>
     </section>
 
-    <section class="data-section data-section-muted" aria-labelledby="countries-title">
+    <section class="data-section data-section-muted" aria-labelledby="packages-title">
+      <div class="data-shell">
+        <div class="data-heading">
+          <div>
+            <p class="data-eyebrow">Package type</p>
+            <h2 id="packages-title">Zip vs delta success</h2>
+          </div>
+          <p>Device-day download success. Zip is a full bundle. Delta is a manifest of changed files. A day that completes counts as success; a day with only a package-specific failure counts as fail.</p>
+        </div>
+        <p class="data-sr-only" data-packages-status aria-live="polite"></p>
+        <dl class="data-packages" data-packages>
+          <div>
+            <dt>Zip</dt>
+            <dd data-kpi="zip-success" translate="no">{formatPct(metrics.zip_success_rate)}</dd>
+            <div><span style={`--share: ${metrics.zip_success_rate ?? 0}%`}></span></div>
+          </div>
+          <div>
+            <dt>Delta</dt>
+            <dd data-kpi="delta-success" translate="no">{formatPct(metrics.delta_success_rate)}</dd>
+            <div><span style={`--share: ${metrics.delta_success_rate ?? 0}%`}></span></div>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="data-section" aria-labelledby="countries-title">
       <div class="data-shell">
         <div class="data-heading">
           <div>
@@ -145,7 +173,7 @@ function formatPct(value: number | null) {
       </div>
     </section>
 
-    <section class="data-section" aria-labelledby="platforms-title">
+    <section class="data-section data-section-muted" aria-labelledby="platforms-title">
       <div class="data-shell">
         <div class="data-heading">
           <div>
@@ -189,7 +217,7 @@ function formatPct(value: number | null) {
       </div>
     </section>
 
-    <section class="data-section data-section-muted" aria-labelledby="failures-title">
+    <section class="data-section" aria-labelledby="failures-title">
       <div class="data-shell data-split">
         <div>
           <p class="data-eyebrow">Failures</p>
@@ -229,7 +257,7 @@ function formatPct(value: number | null) {
       </div>
     </section>
 
-    <section class="data-section" aria-labelledby="versions-title">
+    <section class="data-section data-section-muted" aria-labelledby="versions-title">
       <div class="data-shell">
         <div class="data-heading">
           <div>
@@ -284,6 +312,13 @@ function formatPct(value: number | null) {
     const endpoint = page?.dataset.metricsEndpoint
     const updated = page?.querySelector<HTMLElement>('[data-updated]')
     const successRateKpi = page?.querySelector<HTMLElement>('[data-kpi="success-rate"]')
+    const firstTryKpi = page?.querySelector<HTMLElement>('[data-kpi="first-try"]')
+    const firstDaySuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="first-day-success"]')
+    const firstDayShareKpi = page?.querySelector<HTMLElement>('[data-kpi="first-day-share"]')
+    const rollbackKpi = page?.querySelector<HTMLElement>('[data-kpi="rollback"]')
+    const zipSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="zip-success"]')
+    const deltaSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="delta-success"]')
+    const packagesStatus = page?.querySelector<HTMLElement>('[data-packages-status]')
     const kpiStatus = page?.querySelector<HTMLElement>('[data-kpi-status]')
     const dailyStatus = page?.querySelector<HTMLElement>('[data-daily-status]')
     const dailyChart = page?.querySelector<HTMLElement>('[data-daily-chart]')
@@ -445,8 +480,24 @@ function formatPct(value: number | null) {
       if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
     }
 
+    function setPackageBar(kpi: HTMLElement | null | undefined, rate: number | null) {
+      const track = kpi?.parentElement?.querySelector<HTMLElement>('span')
+      if (track) track.style.setProperty('--share', `${rate ?? 0}%`)
+    }
+
     function renderMetrics(metrics: LiveUpdateMetrics) {
       if (successRateKpi) successRateKpi.textContent = formatPct(metrics.success_rate)
+      if (firstTryKpi) firstTryKpi.textContent = formatPct(metrics.first_try_rate)
+      if (firstDaySuccessKpi) firstDaySuccessKpi.textContent = formatPct(metrics.first_day_success_rate)
+      if (firstDayShareKpi) firstDayShareKpi.textContent = formatPct(metrics.first_day_rate)
+      if (rollbackKpi) rollbackKpi.textContent = formatPct(metrics.rollback_rate)
+      if (zipSuccessKpi) zipSuccessKpi.textContent = formatPct(metrics.zip_success_rate)
+      if (deltaSuccessKpi) deltaSuccessKpi.textContent = formatPct(metrics.delta_success_rate)
+      setPackageBar(zipSuccessKpi, metrics.zip_success_rate)
+      setPackageBar(deltaSuccessKpi, metrics.delta_success_rate)
+      if (packagesStatus) {
+        packagesStatus.textContent = `Zip success ${formatPct(metrics.zip_success_rate)}, delta success ${formatPct(metrics.delta_success_rate)}`
+      }
       if (kpiStatus) kpiStatus.textContent = `Success rate updated to ${formatPct(metrics.success_rate)}`
       renderDaily(metrics)
       renderFailures(metrics)
@@ -473,13 +524,22 @@ function formatPct(value: number | null) {
       if (failuresLead) failuresLead.textContent = 'Failure data is temporarily unavailable.'
       if (failuresStatus) failuresStatus.textContent = 'Failure data is temporarily unavailable.'
       if (kpiStatus) kpiStatus.textContent = 'Success rate unavailable'
+      if (firstTryKpi) firstTryKpi.textContent = '—'
+      if (firstDaySuccessKpi) firstDaySuccessKpi.textContent = '—'
+      if (firstDayShareKpi) firstDayShareKpi.textContent = '—'
+      if (rollbackKpi) rollbackKpi.textContent = '—'
+      if (zipSuccessKpi) zipSuccessKpi.textContent = '—'
+      if (deltaSuccessKpi) deltaSuccessKpi.textContent = '—'
+      setPackageBar(zipSuccessKpi, null)
+      setPackageBar(deltaSuccessKpi, null)
+      if (packagesStatus) packagesStatus.textContent = 'Zip vs delta success unavailable'
       if (dailyStatus) dailyStatus.textContent = 'Daily install success chart unavailable'
       renderBreakdownRows(countriesBody, countriesEmpty, countriesStatus, [], 'country', 'Country breakdown is temporarily unavailable.', 'Country breakdown')
       renderBreakdownRows(platformsBody, platformsEmpty, platformsStatus, [], 'platform', 'Platform breakdown is temporarily unavailable.', 'Platform breakdown')
       renderBreakdownRows(versionsBody, versionEmpty, versionsStatus, [], 'version', 'Updater breakdown is temporarily unavailable.', 'Updater versions')
     }
 
-    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v3'
+    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v4'
     const METRICS_CACHE_FRESH_MS = 5 * 60 * 1000
     const METRICS_CACHE_STALE_MS = 24 * 60 * 60 * 1000
 
@@ -702,8 +762,11 @@ function formatPct(value: number | null) {
     min-width: 0;
     padding: 20px 24px;
   }
-  .data-kpis div + div {
+  .data-kpis > div:not(:nth-child(3n + 1)) {
     border-left: 1px solid var(--line);
+  }
+  .data-kpis > div:nth-child(n + 4) {
+    border-top: 1px solid var(--line);
   }
   .data-kpis p {
     margin: 0 0 8px;
@@ -838,6 +901,40 @@ function formatPct(value: number | null) {
   .data-split {
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     align-items: start;
+  }
+  .data-packages {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+    margin: 0;
+    padding-bottom: 8px;
+  }
+  .data-packages dt {
+    color: #d8e1ee;
+    font-size: 1rem;
+  }
+  .data-packages dd {
+    margin: 8px 0 12px;
+    color: white;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .data-packages > div > div {
+    height: 10px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: rgb(255 255 255 / 16%);
+  }
+  .data-packages > div > div span {
+    display: block;
+    width: var(--share, 0%);
+    height: 100%;
+    border-radius: inherit;
+    background: #60a5fa;
+  }
+  .data-packages > div:last-child > div span {
+    background: #34d399;
   }
   .data-platforms {
     display: grid;
@@ -1023,7 +1120,8 @@ function formatPct(value: number | null) {
       padding-block: 52px;
     }
     .data-heading,
-    .data-split {
+    .data-split,
+    .data-packages {
       grid-template-columns: 1fr;
       gap: 24px;
     }
@@ -1033,9 +1131,12 @@ function formatPct(value: number | null) {
     .data-kpis div {
       padding: 16px 0;
     }
-    .data-kpis div + div {
-      border-top: 1px solid var(--line);
+    .data-kpis > div:not(:nth-child(3n + 1)),
+    .data-kpis > div:nth-child(n + 4) {
       border-left: 0;
+    }
+    .data-kpis > div + div {
+      border-top: 1px solid var(--line);
     }
     .data-bars,
     .data-version-chart,
