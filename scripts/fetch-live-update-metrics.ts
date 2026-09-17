@@ -48,7 +48,17 @@ async function main() {
   }
 
   console.log('Querying Cloudflare Analytics Engine for live-update metrics...')
-  const payload = await getPublicLiveUpdateMetrics({ accountId, token })
+  let payload
+  try {
+    payload = await getPublicLiveUpdateMetrics({ accountId, token })
+  }
+  catch (error) {
+    if (cached) {
+      console.warn('Analytics Engine query failed. Keeping existing cache.', error)
+      return
+    }
+    throw error
+  }
   const metrics = normalizeLiveUpdateMetrics(payload)
   if (!metrics) {
     if (cached) {

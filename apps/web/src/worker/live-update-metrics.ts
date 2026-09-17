@@ -38,7 +38,7 @@ export async function handleLiveUpdateMetrics(request: Request, env: LiveUpdateM
   try {
     const metrics = await getPublicLiveUpdateMetrics({ accountId, token })
     const response = new Response(JSON.stringify(metrics), { status: 200, headers: CACHE_HEADERS })
-    cache?.put(cacheKey, response.clone())
+    await cache?.put(cacheKey, response.clone())
     return response
   }
   catch (error) {

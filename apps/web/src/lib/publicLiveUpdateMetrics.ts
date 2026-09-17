@@ -184,6 +184,7 @@ async function runQuery<T>(auth: AnalyticsAuth, query: string): Promise<T[]> {
       'Content-Type': 'text/plain; charset=utf-8',
     },
     body: query,
+    signal: AbortSignal.timeout(20_000),
   })
   if (!response.ok) {
     const preview = (await response.text()).replace(/\s+/g, ' ').trim().slice(0, 300)
