@@ -1,6 +1,6 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { MCP_ENDPOINT_PATHS, MCP_MANIFEST_PATHS, OPENAPI_ALIAS_PATHS, OPENAPI_ASSET_PATH, markdownNotFoundResponse, prefersMarkdown } from '../../../shared/agentDiscovery'
-import { resolveLegacyPathRedirect } from '../../../shared/legacyPathRedirects'
+import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
 import { handleReadmeBanner } from './readme-banner'
@@ -250,20 +250,6 @@ function withLinkHeaders(response: Response, links: LinkDefinition[]): Response 
   })
 }
 
-const NON_DEFAULT_LOCALES = new Set(['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'])
-
-function splitLocalePath(pathname: string): { localePrefix: string; path: string } {
-  const segments = pathname.split('/').filter(Boolean)
-  if (segments.length > 0 && NON_DEFAULT_LOCALES.has(segments[0])) {
-    const rest = segments.slice(1).join('/')
-    return {
-      localePrefix: `/${segments[0]}`,
-      path: rest ? `/${rest}${pathname.endsWith('/') ? '/' : ''}` : '/',
-    }
-  }
-  return { localePrefix: '', path: pathname }
-}
-
 function redirectToPath(request: Request, pathname: string, status = 301): Response {
   const url = new URL(request.url)
   const hashIndex = pathname.indexOf('#')
@@ -292,7 +278,7 @@ const PLUGIN_DOCS_REDIRECTS: Record<string, string> = {
   sheets: '/docs/plugins/sheets/',
 }
 
-function staticLegacyRedirect(request: Request, pathname: string): Response | null {
+export function staticLegacyRedirect(request: Request, pathname: string): Response | null {
   // Former _redirects splat: /en/* → /:splat (must stay out of _redirects; CF dynamic-rule cap)
   if (pathname === '/en' || pathname === '/en/') {
     return redirectToPath(request, '/')
@@ -319,9 +305,9 @@ function staticLegacyRedirect(request: Request, pathname: string): Response | nu
       return redirectToPath(request, `${localePrefix}${docsPath}`)
     }
   }
-  const legacyTarget = resolveLegacyPathRedirect(path)
-  if (legacyTarget) {
-    return redirectToPath(request, `${localePrefix}${legacyTarget}`)
+  const localizedLegacyTarget = resolveLocalizedLegacyRedirectPath(pathname)
+  if (localizedLegacyTarget) {
+    return redirectToPath(request, localizedLegacyTarget)
   }
   return null
 }
