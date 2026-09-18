@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-18T08:49:19.990Z
-updated_at: 2026-09-18T08:49:22.388Z
+updated_at: 2026-09-18T08:51:57.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/77d67f1b-ce5a-4c9b-b78a-a3743e1f40ae/app-behavior-tracking-guide.jpg'
 head_image_alt: 'App Behavior Tracking: A Practical Guide for 2026'
 keywords: 'app behavior tracking, mobile analytics, event tracking, observability, privacy compliance'
