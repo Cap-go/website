@@ -1,4 +1,6 @@
 export const BUILDER_METRICS_PATH = '/builder-metrics.json'
+export const BUILDER_METRICS_CACHE_TTL_SECONDS = 300
+export const PUBLIC_BUILDER_SUPABASE_URL = 'https://xvwzpoazmxkqosrdewyv.supabase.co'
 
 export type BuilderPlatformKey = 'ios' | 'android'
 
@@ -217,6 +219,7 @@ export async function fetchPublicBuilderMetricsFromRpc(options: {
       'Content-Type': 'application/json',
     },
     body: '{}',
+    signal: AbortSignal.timeout(20_000),
   })
   if (!response.ok) {
     throw new Error(`get_public_builder_metrics failed: ${response.status}`)

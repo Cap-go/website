@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test'
-import { buildPublicBuilderMetrics, classifyBuilderFailure } from '../src/lib/publicBuilderMetrics.ts'
+import { buildPublicBuilderMetrics, classifyBuilderFailure, fetchPublicBuilderMetricsFromRpc } from '../src/lib/publicBuilderMetrics.ts'
 
 const source = {
   updated_at: '2026-09-17T12:00:00.000Z',
@@ -43,4 +43,19 @@ test('buildPublicBuilderMetrics emits rates and minutes, never raw counts', () =
   ])
   expect(JSON.stringify(metrics)).not.toContain('"successes"')
   expect(JSON.stringify(metrics)).not.toContain('builds_total')
+})
+
+test('fetchPublicBuilderMetricsFromRpc posts to the public RPC', async () => {
+  const payload = { success_rate: 80, updated_at: '2026-09-19T12:00:00.000Z', daily_platforms: [], failures: [], platforms: [] }
+  const metrics = await fetchPublicBuilderMetricsFromRpc({
+    supabaseUrl: 'https://example.supabase.co',
+    anonKey: 'anon',
+    fetch: async (url, init) => {
+      expect(String(url)).toBe('https://example.supabase.co/rest/v1/rpc/get_public_builder_metrics')
+      expect(init?.method).toBe('POST')
+      expect(init?.headers?.apikey).toBe('anon')
+      return new Response(JSON.stringify(payload), { headers: { 'content-type': 'application/json' } })
+    },
+  })
+  expect(metrics.success_rate).toBe(80)
 })

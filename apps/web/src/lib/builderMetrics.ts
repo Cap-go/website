@@ -1,11 +1,8 @@
-import cachedMetrics from '@/data/builder-metrics.json'
 import type { BuilderDailyPlatformMetric, BuilderFailureMetric, BuilderPlatformMetric, PublicBuilderMetrics } from './publicBuilderMetrics'
 
 export { jsonForInlineScript } from './liveUpdateMetrics'
 
 export type BuilderMetrics = PublicBuilderMetrics & { source?: 'api' | 'cache' }
-
-const FALLBACK = cachedMetrics as BuilderMetrics
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -46,8 +43,21 @@ function normalizePlatform(value: unknown): BuilderPlatformMetric | null {
   }
 }
 
+export function emptyBuilderMetrics(): BuilderMetrics {
+  return {
+    success_rate: 0,
+    avg_process_seconds: null,
+    avg_queue_seconds: null,
+    period_days: 30,
+    updated_at: '',
+    daily_platforms: [],
+    failures: [],
+    platforms: [],
+  }
+}
+
 export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
-  if (!isRecord(value) || typeof value.updated_at !== 'string' || !Array.isArray(value.daily_platforms) || !Array.isArray(value.failures) || !Array.isArray(value.platforms)) {
+  if (!isRecord(value) || typeof value.updated_at !== 'string' || !value.updated_at || !Array.isArray(value.daily_platforms) || !Array.isArray(value.failures) || !Array.isArray(value.platforms)) {
     return null
   }
 
@@ -79,10 +89,6 @@ export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
   }
 }
 
-export function getCachedBuilderMetrics(): BuilderMetrics {
-  return { ...(normalizeBuilderMetrics(FALLBACK) ?? FALLBACK), source: 'cache' }
-}
-
 export async function resolveBuilderMetrics(): Promise<BuilderMetrics> {
-  return getCachedBuilderMetrics()
+  return emptyBuilderMetrics()
 }

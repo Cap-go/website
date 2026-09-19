@@ -3,51 +3,26 @@ import {
   LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS,
   LIVE_UPDATE_METRICS_PATH,
 } from '../lib/publicLiveUpdateMetrics'
+import { cachedJsonResponse, unavailableJson } from './cached-json'
 
 export interface LiveUpdateMetricsEnv {
   CF_ACCOUNT_ANALYTICS_ID?: string
   CF_ANALYTICS_TOKEN?: string
 }
 
-const CACHE_HEADERS = {
-  'Content-Type': 'application/json',
-  'Cache-Control': `public, max-age=${LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS}, s-maxage=${LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS}, stale-while-revalidate=600`,
-}
-
-function workerCache(): Cache | undefined {
-  const store = caches as CacheStorage & { default?: Cache }
-  return store.default
-}
-
 export async function handleLiveUpdateMetrics(request: Request, env: LiveUpdateMetricsEnv): Promise<Response> {
-  const cache = workerCache()
-  const cacheKey = new Request(new URL(LIVE_UPDATE_METRICS_PATH, request.url), { method: 'GET' })
-  const cached = cache ? await cache.match(cacheKey) : undefined
-  if (cached)
-    return cached
-
   const accountId = env.CF_ACCOUNT_ANALYTICS_ID?.trim()
   const token = env.CF_ANALYTICS_TOKEN?.trim()
-  if (!accountId || !token) {
-    return new Response(JSON.stringify({ error: 'Live update metrics are temporarily unavailable' }), {
-      status: 503,
-      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-    })
-  }
+  if (!accountId || !token)
+    return unavailableJson('Live update metrics are temporarily unavailable')
 
-  try {
-    const metrics = await getPublicLiveUpdateMetrics({ accountId, token })
-    const response = new Response(JSON.stringify(metrics), { status: 200, headers: CACHE_HEADERS })
-    await cache?.put(cacheKey, response.clone())
-    return response
-  }
-  catch (error) {
-    console.error('Live update metrics query failed', error)
-    return new Response(JSON.stringify({ error: 'Live update metrics are temporarily unavailable' }), {
-      status: 503,
-      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-    })
-  }
+  return cachedJsonResponse(
+    request,
+    LIVE_UPDATE_METRICS_PATH,
+    LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS,
+    () => getPublicLiveUpdateMetrics({ accountId, token }),
+    'Live update metrics are temporarily unavailable',
+  )
 }
 
 export { LIVE_UPDATE_METRICS_PATH }
