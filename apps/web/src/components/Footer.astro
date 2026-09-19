@@ -54,6 +54,7 @@ const navigation: Record<string, NavigationItem[]> = {
     { name: 'Notifications', href: getRelativeLocaleUrl(Astro.locals.locale, 'notifications') },
     { name: 'Observe', href: getRelativeLocaleUrl(Astro.locals.locale, 'observe') },
     { name: m.native_build({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'native-build') },
+    { name: 'Builder status', href: getRelativeLocaleUrl(Astro.locals.locale, 'build-status') },
     { name: m.app_mobile({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile') },
     { name: m.plugins({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'plugins') },
     { name: m.integrations_badge({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'integrations') },
