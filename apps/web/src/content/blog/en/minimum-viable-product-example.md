@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-19T09:59:07.454Z
-updated_at: 2026-09-19T09:59:08.815Z
+updated_at: 2026-09-19T10:01:36.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/efac243a-4900-4c0c-a586-5a5662c92cc1/minimum-viable-product-example-mvp-examples.jpg'
 head_image_alt: 7 Minimum Viable Product Examples to Learn From
 keywords: 'minimum viable product example, MVP case studies, MVP examples, product validation, lean startup'
