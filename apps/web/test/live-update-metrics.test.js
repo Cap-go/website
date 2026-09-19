@@ -30,6 +30,24 @@ test('normalizeLiveUpdateMetrics keeps new reliability rates', () => {
   expect(metrics?.delta_success_rate).toBe(91.5)
 })
 
+test('normalizeLiveUpdateMetrics keeps daily platform rates', () => {
+  const metrics = normalizeLiveUpdateMetrics({
+    ...base,
+    platforms: [],
+    countries: [],
+    updater_versions: [],
+    daily_platforms: [
+      { date: '2026-09-15', ios: 88.4, android: 71.2 },
+      { date: '2026-09-16', ios: null, android: 64 },
+    ],
+  })
+
+  expect(metrics?.daily_platforms).toEqual([
+    { date: '2026-09-15', ios: 88.4, android: 71.2 },
+    { date: '2026-09-16', ios: null, android: 64 },
+  ])
+})
+
 test('normalizeLiveUpdateMetrics treats missing new rates as null', () => {
   const metrics = normalizeLiveUpdateMetrics({
     ...base,
@@ -44,4 +62,5 @@ test('normalizeLiveUpdateMetrics treats missing new rates as null', () => {
   expect(metrics?.rollback_rate).toBeNull()
   expect(metrics?.zip_success_rate).toBeNull()
   expect(metrics?.delta_success_rate).toBeNull()
+  expect(metrics?.daily_platforms).toEqual([])
 })
