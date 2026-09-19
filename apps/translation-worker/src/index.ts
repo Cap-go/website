@@ -256,6 +256,7 @@ const STATIC_PREFIXES = [
   '/llms',
   '/status.json',
   '/sponsors.json',
+  '/live-update-metrics.json',
 ]
 const IGNORED_TRANSLATION_QUERY_KEYS = new Set([
   '_branch_match_id',

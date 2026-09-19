@@ -13,6 +13,9 @@
     "run_worker_first": true,
   },
   "workers_dev": false,
+  "vars": {
+    "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0"
+  },
   "routes": [
     {
       "pattern": "capgo.app",
@@ -21,6 +24,9 @@
   ],
   "env": {
     "development": {
+      "vars": {
+        "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0"
+      },
       "routes": [
         {
           "pattern": "development.capgo.app",
