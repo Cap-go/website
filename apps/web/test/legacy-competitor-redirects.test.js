@@ -53,6 +53,11 @@ for (const locale of NON_DEFAULT_LOCALE_CODES) {
   })
 }
 
+test('staticLegacyRedirect /build-status/ → /builder-data/', () => {
+  expect(staticLegacyRedirectLocation('https://capgo.app/build-status/')).toBe('/builder-data/')
+  expect(staticLegacyRedirectLocation('https://capgo.app/fr/build-status')).toBe('/fr/builder-data/')
+})
+
 test('/eas/ was never a public competitor page (no redirect)', () => {
   expect(resolveLegacyPathRedirect('/eas/')).toBeNull()
   expect(staticLegacyRedirectLocation('https://capgo.app/eas/')).toBeNull()

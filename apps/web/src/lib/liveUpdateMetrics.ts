@@ -1,4 +1,3 @@
-import cachedMetrics from '@/data/live-update-metrics.json'
 import { LIVE_UPDATE_METRICS_PATH } from './publicLiveUpdateMetrics'
 
 export type DailyMetric = { date: string; success_rate: number }
@@ -28,7 +27,24 @@ export type LiveUpdateMetrics = {
   source?: 'api' | 'cache'
 }
 
-const FALLBACK = cachedMetrics as LiveUpdateMetrics
+export function emptyLiveUpdateMetrics(): LiveUpdateMetrics {
+  return {
+    success_rate: 0,
+    first_try_rate: null,
+    first_day_rate: null,
+    first_day_success_rate: null,
+    rollback_rate: null,
+    zip_success_rate: null,
+    delta_success_rate: null,
+    updated_at: '',
+    daily: [],
+    daily_platforms: [],
+    failures: [],
+    platforms: [],
+    countries: [],
+    updater_versions: [],
+  }
+}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -155,7 +171,7 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
 }
 
 export function getCachedLiveUpdateMetrics(): LiveUpdateMetrics {
-  return { ...(normalizeLiveUpdateMetrics(FALLBACK) ?? { ...FALLBACK, daily_platforms: [] }), source: 'cache' }
+  return emptyLiveUpdateMetrics()
 }
 
 export async function fetchLiveUpdateMetrics(endpoint = LIVE_UPDATE_METRICS_PATH): Promise<LiveUpdateMetrics | null> {

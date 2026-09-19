@@ -1,13 +1,14 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
-import { jsonForInlineScript, resolveBuilderMetrics } from '@/lib/builderMetrics'
+import { resolveBuilderMetrics } from '@/lib/builderMetrics'
+import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
 const metrics = await resolveBuilderMetrics()
-const title = 'Capgo Native Build status | Builder trends'
+const title = 'Capgo Native Build data | Builder trends'
 const description =
   'Global native iOS and Android build success, processing time, and failure mix for the last 30 days. Rates and minutes only — not queue counts and not realtime.'
 const content = {
@@ -17,12 +18,15 @@ const content = {
   ldJSON: createLdJsonGraph(config.public, createWebPageLdJson(config.public, { name: title, description, url: Astro.url.href }), { includeOrganization: true }),
 }
 
-const updatedLabel = (() => {
-  const timestamp = new Date(metrics.updated_at)
-  return Number.isNaN(timestamp.getTime())
-    ? 'Updated moments ago'
-    : `Updated ${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(timestamp)} UTC`
-})()
+const pending = !metrics.updated_at
+const updatedLabel = pending
+  ? 'Loading latest rates…'
+  : (() => {
+      const timestamp = new Date(metrics.updated_at)
+      return Number.isNaN(timestamp.getTime())
+        ? 'Updated moments ago'
+        : `Updated ${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(timestamp)} UTC`
+    })()
 
 const topFailure = metrics.failures[0]
 const topFailureInfo = topFailure ? getBuilderFailureInfo(topFailure.reason) : null
@@ -31,7 +35,8 @@ const topFailureLead = topFailureInfo
   : 'Normalized categories across all apps.'
 
 function formatRate(value: number | null) {
-  return value === null ? '—' : `${Number(value.toFixed(1))}%`
+  if (pending || value === null) return '—'
+  return `${Number(value.toFixed(1))}%`
 }
 
 function failureRate(success: number | null) {
@@ -39,7 +44,7 @@ function failureRate(success: number | null) {
 }
 
 function formatDuration(seconds: number | null) {
-  if (seconds === null) return '—'
+  if (pending || seconds === null) return '—'
   if (seconds < 90) return `${Math.round(seconds)}s`
   return `${(seconds / 60).toFixed(1)} min`
 }
@@ -53,11 +58,6 @@ function platformOf(key: 'ios' | 'android') {
     avg_queue_seconds: null,
     top_failure: null,
   }
-}
-
-function sparkTone(rate: number | null) {
-  if (rate === null) return 'empty'
-  return rate >= 70 ? 'good' : 'poor'
 }
 
 function sliceDays<T extends { date: string }>(rows: T[], days: number) {
@@ -104,8 +104,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
 ---
 
 <Layout content={content}>
-  <script type="application/json" id="capgo-builder-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
-  <main class="data-page" aria-busy="false">
+  <main class="data-page" data-metrics-endpoint={BUILDER_METRICS_PATH} aria-busy="true">
     <section class="data-hero">
       <div class="data-shell">
         <div class="data-title-row">
@@ -136,7 +135,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           <p>Success and failure over the last 30 days. The sparkline is one tick per UTC day — green at 70% or better.</p>
         </div>
         <div class="data-cards">
-          <article class="data-card">
+          <article class="data-card" data-platform-card="ios">
             <h3>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.7c0-2.4 2-3.4 2.1-3.5-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9s-1.9-.9-3.2-.8c-1.6.1-3.1.9-4 2.4-1.7 2.9-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2-.1 1.6-.8 3.1-.8s1.8.8 3.2.7c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.5-3.9zM14.3 5.9c.6-.8 1.1-1.9.9-3-1 .1-2.2.7-2.9 1.5-.6.7-1.2 1.8-.9 2.9 1.1.1 2.2-.5 2.9-1.4z"/></svg>
               iOS
@@ -144,22 +143,18 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
             <div class="data-card-stats">
               <div>
                 <p>Success</p>
-                <strong translate="no">{formatRate(ios.success_rate)}</strong>
-                <small>{formatDuration(ios.avg_process_seconds)} avg process</small>
+                <strong data-kpi="ios-success" translate="no">{formatRate(ios.success_rate)}</strong>
+                <small data-process="ios">{formatDuration(ios.avg_process_seconds)} avg process</small>
               </div>
               <div>
                 <p>Failure</p>
-                <strong data-tone="poor" translate="no">{formatRate(failureRate(ios.success_rate))}</strong>
-                <small>{ios.top_failure ? getBuilderFailureInfo(ios.top_failure.reason).label : 'No leading failure'}</small>
+                <strong data-kpi="ios-failure" data-tone="poor" translate="no">{formatRate(failureRate(ios.success_rate))}</strong>
+                <small data-top-failure="ios">{ios.top_failure ? getBuilderFailureInfo(ios.top_failure.reason).label : 'No leading failure'}</small>
               </div>
             </div>
-            <div class="data-spark" role="img" aria-label="iOS daily success">
-              {metrics.daily_platforms.map((row) => (
-                <i data-tone={sparkTone(row.ios)} title={`${row.date}: ${formatRate(row.ios)}`}></i>
-              ))}
-            </div>
+            <div class="data-spark" data-spark="ios" role="img" aria-label="iOS daily success"></div>
           </article>
-          <article class="data-card">
+          <article class="data-card" data-platform-card="android">
             <h3>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.6 9.5h.1c.8 0 1.4.6 1.4 1.4v6.4c0 .8-.6 1.4-1.4 1.4h-.1v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2H10.2v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2h-.1c-.8 0-1.4-.6-1.4-1.4v-6.4c0-.8.6-1.4 1.4-1.4h10.3zM7.4 4.8l.8 1.4c1.1-.6 2.4-.9 3.8-.9s2.7.3 3.8.9l.8-1.4c.2-.4.7-.5 1.1-.3.4.2.5.7.3 1.1l-.7 1.3C18.6 8 19.5 9.6 19.5 11.4H4.5c0-1.8.9-3.4 2.3-4.5l-.7-1.3c-.2-.4-.1-.9.3-1.1.4-.2.9-.1 1.1.3zM9 12.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
               Android
@@ -167,20 +162,16 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
             <div class="data-card-stats">
               <div>
                 <p>Success</p>
-                <strong translate="no">{formatRate(android.success_rate)}</strong>
-                <small>{formatDuration(android.avg_process_seconds)} avg process</small>
+                <strong data-kpi="android-success" translate="no">{formatRate(android.success_rate)}</strong>
+                <small data-process="android">{formatDuration(android.avg_process_seconds)} avg process</small>
               </div>
               <div>
                 <p>Failure</p>
-                <strong data-tone="poor" translate="no">{formatRate(failureRate(android.success_rate))}</strong>
-                <small>{android.top_failure ? getBuilderFailureInfo(android.top_failure.reason).label : 'No leading failure'}</small>
+                <strong data-kpi="android-failure" data-tone="poor" translate="no">{formatRate(failureRate(android.success_rate))}</strong>
+                <small data-top-failure="android">{android.top_failure ? getBuilderFailureInfo(android.top_failure.reason).label : 'No leading failure'}</small>
               </div>
             </div>
-            <div class="data-spark" role="img" aria-label="Android daily success">
-              {metrics.daily_platforms.map((row) => (
-                <i data-tone={sparkTone(row.android)} title={`${row.date}: ${formatRate(row.android)}`}></i>
-              ))}
-            </div>
+            <div class="data-spark" data-spark="android" role="img" aria-label="Android daily success"></div>
           </article>
         </div>
       </div>
@@ -239,36 +230,17 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         <div>
           <p class="data-eyebrow">Failures</p>
           <h2 id="failures-title">Top failure reasons</h2>
-          <p class="data-copy" translate="no">{topFailureLead}</p>
+          <p class="data-copy" data-failures-lead translate="no">{topFailureLead}</p>
           <p class="data-copy data-copy-secondary">
             Script errors come from the app repo. Timeouts, host failures, and missing runners are builder-side. Shares only — no job counts.
           </p>
           <p class="data-copy data-copy-secondary">
             Need signed binaries? See <a class="data-inline-link" href={nativeBuildHref}>Native Builds</a>.
-            Live Update install rates live on <a class="data-inline-link" href={liveUpdateHref}>Live Update status</a>.
+            Live Update install rates live on <a class="data-inline-link" href={liveUpdateHref}>Live Update data</a>.
           </p>
         </div>
-        <ol class="data-failures" translate="no">
-          {
-            metrics.failures.length
-              ? metrics.failures.map((item, index) => {
-                  const info = getBuilderFailureInfo(item.reason)
-                  return (
-                    <li>
-                      <span>{String(index + 1).padStart(2, '0')}</span>
-                      <div class="data-failure-copy">
-                        <strong>{info.label}</strong>
-                        <p>{info.explanation}</p>
-                      </div>
-                      <b>{Math.ceil(item.share)}%</b>
-                      <i aria-hidden="true">
-                        <em style={`--share: ${item.share}%`} />
-                      </i>
-                    </li>
-                  )
-                })
-              : [<li class="data-empty">No failures in this window.</li>]
-          }
+        <ol class="data-failures" data-failures translate="no">
+          <li class="data-empty">Loading failure mix…</li>
         </ol>
       </div>
     </section>
@@ -276,10 +248,27 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
 </Layout>
 
 <script>
+  import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
   import { normalizeBuilderMetrics, type BuilderMetrics } from '@/lib/builderMetrics'
 
   function boot() {
     const page = document.querySelector<HTMLElement>('.data-page')
+    const endpoint = page?.dataset.metricsEndpoint
+    const updated = page?.querySelector<HTMLElement>('[data-updated]')
+    const statusBadge = page?.querySelector<HTMLElement>('[data-status-badge]')
+    const successRateKpi = page?.querySelector<HTMLElement>('[data-kpi="success-rate"]')
+    const processKpi = page?.querySelector<HTMLElement>('[data-kpi="process"]')
+    const queueKpi = page?.querySelector<HTMLElement>('[data-kpi="queue"]')
+    const iosSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="ios-success"]')
+    const iosFailureKpi = page?.querySelector<HTMLElement>('[data-kpi="ios-failure"]')
+    const androidSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="android-success"]')
+    const androidFailureKpi = page?.querySelector<HTMLElement>('[data-kpi="android-failure"]')
+    const iosProcess = page?.querySelector<HTMLElement>('[data-process="ios"]')
+    const androidProcess = page?.querySelector<HTMLElement>('[data-process="android"]')
+    const iosTopFailure = page?.querySelector<HTMLElement>('[data-top-failure="ios"]')
+    const androidTopFailure = page?.querySelector<HTMLElement>('[data-top-failure="android"]')
+    const iosSpark = page?.querySelector<HTMLElement>('[data-spark="ios"]')
+    const androidSpark = page?.querySelector<HTMLElement>('[data-spark="android"]')
     const trendLabel = page?.querySelector<HTMLElement>('[data-trend-label]')
     const trendSvg = page?.querySelector<SVGElement>('[data-trend-svg]')
     const trendIos = page?.querySelector<SVGPolylineElement>('[data-trend-line="ios"]')
@@ -289,10 +278,23 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     const trendMax = page?.querySelector<SVGTextElement>('[data-trend-max]')
     const trendMid = page?.querySelector<SVGTextElement>('[data-trend-mid]')
     const trendMin = page?.querySelector<SVGTextElement>('[data-trend-min]')
+    const dailySkeleton = page?.querySelector<HTMLElement>('.data-chart-skeleton')
+    const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
+    const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
     const periodButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-period]') ?? [])]
     const metricButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-metric]') ?? [])]
+    const styleScopeAttributes = [...(page?.attributes ?? [])]
+      .map(attribute => attribute.name)
+      .filter(name => name.startsWith('data-astro-cid-'))
     let periodDays = 30
     let metric: 'rate' | 'duration' = 'rate'
+    let latestMetrics: BuilderMetrics | null = null
+
+    function createScopedElement<K extends keyof HTMLElementTagNameMap>(tag: K) {
+      const element = document.createElement(tag)
+      for (const attribute of styleScopeAttributes) element.setAttribute(attribute, '')
+      return element
+    }
 
     function formatRate(value: number | null) {
       return value === null ? '—' : `${Number(value.toFixed(1))}%`
@@ -302,6 +304,30 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (seconds === null) return '—'
       if (seconds < 90) return `${Math.round(seconds)}s`
       return `${(seconds / 60).toFixed(1)} min`
+    }
+
+    function failureRate(success: number | null) {
+      return success === null ? null : Number((100 - success).toFixed(1))
+    }
+
+    function sparkTone(rate: number | null) {
+      if (rate === null) return 'empty'
+      return rate >= 70 ? 'good' : 'poor'
+    }
+
+    function sparkTip(date: string, rate: number | null) {
+      return `${date}: ${formatRate(rate)}`
+    }
+
+    function platformOf(metrics: BuilderMetrics, key: 'ios' | 'android') {
+      return metrics.platforms.find(item => item.key === key) ?? {
+        key,
+        share: 0,
+        success_rate: null,
+        avg_process_seconds: null,
+        avg_queue_seconds: null,
+        top_failure: null,
+      }
     }
 
     function sliceDays<T extends { date: string }>(rows: T[], days: number) {
@@ -319,7 +345,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       return { min: Math.max(0, Number((min - pad).toFixed(1))), max: Number((max + pad).toFixed(1)) }
     }
 
-    function chartPoints(values: Array<number | null>, scale: { min: number; max: number }, width = 800, height = 260) {
+    function chartPoints(values: Array<number | null>, scale: { min: number, max: number }, width = 800, height = 260) {
       const pad = { l: 44, r: 16, t: 16, b: 28 }
       const innerW = width - pad.l - pad.r
       const innerH = height - pad.t - pad.b
@@ -339,15 +365,30 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       return metric === 'rate' ? formatRate(value) : formatDuration(value)
     }
 
+    function renderSpark(target: HTMLElement | null | undefined, rows: BuilderMetrics['daily_platforms'], key: 'ios' | 'android') {
+      if (!target) return
+      target.replaceChildren()
+      for (const row of rows) {
+        const tick = createScopedElement('i')
+        tick.dataset.tone = sparkTone(row[key])
+        tick.dataset.tip = sparkTip(row.date, row[key])
+        target.append(tick)
+      }
+    }
+
     function renderTrend(metrics: BuilderMetrics) {
       const rows = sliceDays(metrics.daily_platforms, periodDays)
-      const iosValues = rows.map((row) => (metric === 'rate' ? row.ios : row.ios_process_seconds))
-      const androidValues = rows.map((row) => (metric === 'rate' ? row.android : row.android_process_seconds))
+      const iosValues = rows.map(row => (metric === 'rate' ? row.ios : row.ios_process_seconds))
+      const androidValues = rows.map(row => (metric === 'rate' ? row.android : row.android_process_seconds))
       const values = [...iosValues, ...androidValues].filter((value): value is number => value !== null)
       const scale = chartScale(values, metric === 'rate' ? 'rate' : 'duration')
       const mid = Number(((scale.min + scale.max) / 2).toFixed(1))
       if (trendLabel) trendLabel.textContent = metric === 'rate' ? 'Build success' : 'Processing time'
-      if (trendSvg) trendSvg.setAttribute('aria-label', metric === 'rate' ? 'iOS and Android build success' : 'iOS and Android processing time')
+      if (trendSvg) {
+        trendSvg.style.display = rows.length ? '' : 'none'
+        trendSvg.setAttribute('aria-label', metric === 'rate' ? 'iOS and Android build success' : 'iOS and Android processing time')
+      }
+      if (dailySkeleton) dailySkeleton.hidden = rows.length > 0
       if (trendIos) trendIos.setAttribute('points', chartPoints(iosValues, scale))
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(androidValues, scale))
       if (trendMax) trendMax.textContent = formatTick(scale.max)
@@ -357,18 +398,121 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (trendEnd) trendEnd.textContent = rows.at(-1)?.date ?? ''
     }
 
-    function readBootstrap(): BuilderMetrics | null {
-      try {
-        const raw = document.getElementById('capgo-builder-metrics-bootstrap')?.textContent?.trim()
-        if (!raw) return null
-        return normalizeBuilderMetrics(JSON.parse(raw))
-      } catch {
-        return null
+    function renderFailures(metrics: BuilderMetrics) {
+      if (!failuresList) return
+      failuresList.replaceChildren()
+      const lead = metrics.failures[0]
+      if (failuresLead) {
+        if (lead) {
+          const info = getBuilderFailureInfo(lead.reason)
+          failuresLead.textContent = `${info.label} accounts for ${Math.ceil(lead.share)}% of failed jobs in this window.`
+        }
+        else {
+          failuresLead.textContent = 'Normalized categories across all apps.'
+        }
+      }
+      for (const [index, item] of metrics.failures.entries()) {
+        const info = getBuilderFailureInfo(item.reason)
+        const row = createScopedElement('li')
+        const rank = createScopedElement('span')
+        rank.textContent = String(index + 1).padStart(2, '0')
+        const copy = createScopedElement('div')
+        copy.className = 'data-failure-copy'
+        const reason = createScopedElement('strong')
+        reason.textContent = info.label
+        const explanation = createScopedElement('p')
+        explanation.textContent = info.explanation
+        copy.append(reason, explanation)
+        const share = createScopedElement('b')
+        share.textContent = `${Math.ceil(item.share)}%`
+        const track = createScopedElement('i')
+        track.setAttribute('aria-hidden', 'true')
+        const fill = createScopedElement('em')
+        fill.style.setProperty('--share', `${item.share}%`)
+        track.append(fill)
+        row.append(rank, copy, share, track)
+        failuresList.append(row)
+      }
+      if (!metrics.failures.length)
+        failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
+    }
+
+    function renderMetrics(metrics: BuilderMetrics) {
+      latestMetrics = metrics
+      const ios = platformOf(metrics, 'ios')
+      const android = platformOf(metrics, 'android')
+      if (successRateKpi) successRateKpi.textContent = formatRate(metrics.success_rate)
+      if (processKpi) processKpi.textContent = formatDuration(metrics.avg_process_seconds)
+      if (queueKpi) queueKpi.textContent = formatDuration(metrics.avg_queue_seconds)
+      if (iosSuccessKpi) iosSuccessKpi.textContent = formatRate(ios.success_rate)
+      if (iosFailureKpi) iosFailureKpi.textContent = formatRate(failureRate(ios.success_rate))
+      if (androidSuccessKpi) androidSuccessKpi.textContent = formatRate(android.success_rate)
+      if (androidFailureKpi) androidFailureKpi.textContent = formatRate(failureRate(android.success_rate))
+      if (iosProcess) iosProcess.textContent = `${formatDuration(ios.avg_process_seconds)} avg process`
+      if (androidProcess) androidProcess.textContent = `${formatDuration(android.avg_process_seconds)} avg process`
+      if (iosTopFailure) iosTopFailure.textContent = ios.top_failure ? getBuilderFailureInfo(ios.top_failure.reason).label : 'No leading failure'
+      if (androidTopFailure) androidTopFailure.textContent = android.top_failure ? getBuilderFailureInfo(android.top_failure.reason).label : 'No leading failure'
+      if (statusBadge?.lastChild) statusBadge.lastChild.textContent = ' Operational'
+      renderSpark(iosSpark, metrics.daily_platforms, 'ios')
+      renderSpark(androidSpark, metrics.daily_platforms, 'android')
+      renderTrend(metrics)
+      renderFailures(metrics)
+      if (updated) {
+        const timestamp = new Date(metrics.updated_at)
+        updated.textContent = Number.isNaN(timestamp.getTime())
+          ? 'Updated moments ago'
+          : `Updated ${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(timestamp)} UTC`
       }
     }
 
-    const metrics = readBootstrap()
-    if (metrics) renderTrend(metrics)
+    function renderUnavailable() {
+      latestMetrics = null
+      if (updated) updated.textContent = 'Builder data is temporarily unavailable. Check back shortly.'
+      if (statusBadge?.lastChild) statusBadge.lastChild.textContent = ' Unavailable'
+      if (successRateKpi) successRateKpi.textContent = '—'
+      if (processKpi) processKpi.textContent = '—'
+      if (queueKpi) queueKpi.textContent = '—'
+      if (iosSuccessKpi) iosSuccessKpi.textContent = '—'
+      if (iosFailureKpi) iosFailureKpi.textContent = '—'
+      if (androidSuccessKpi) androidSuccessKpi.textContent = '—'
+      if (androidFailureKpi) androidFailureKpi.textContent = '—'
+      if (iosSpark) iosSpark.replaceChildren()
+      if (androidSpark) androidSpark.replaceChildren()
+      if (trendSvg) trendSvg.style.display = 'none'
+      if (failuresLead) failuresLead.textContent = 'Failure data is temporarily unavailable.'
+      if (failuresList) failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
+    }
+
+    async function fetchMetrics() {
+      if (!endpoint) throw new Error('Missing metrics endpoint')
+      const controller = new AbortController()
+      const timeoutId = window.setTimeout(() => controller.abort(), 10_000)
+      try {
+        const response = await fetch(endpoint, {
+          headers: { Accept: 'application/json' },
+          signal: controller.signal,
+          cache: 'default',
+        })
+        const metrics = normalizeBuilderMetrics(response.ok ? await response.json() : null)
+        if (!metrics) throw new Error('Invalid metrics response')
+        return metrics
+      }
+      finally {
+        window.clearTimeout(timeoutId)
+      }
+    }
+
+    async function loadMetrics() {
+      try {
+        renderMetrics(await fetchMetrics())
+      }
+      catch {
+        renderUnavailable()
+      }
+      finally {
+        page?.setAttribute('aria-busy', 'false')
+      }
+    }
 
     for (const button of periodButtons) {
       button.addEventListener('click', () => {
@@ -376,7 +520,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         if (!Number.isFinite(next)) return
         periodDays = next
         for (const item of periodButtons) item.ariaSelected = item === button ? 'true' : 'false'
-        if (metrics) renderTrend(metrics)
+        if (latestMetrics) renderTrend(latestMetrics)
       })
     }
 
@@ -386,9 +530,11 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         if (next !== 'rate' && next !== 'duration') return
         metric = next
         for (const item of metricButtons) item.ariaSelected = item === button ? 'true' : 'false'
-        if (metrics) renderTrend(metrics)
+        if (latestMetrics) renderTrend(latestMetrics)
       })
     }
+
+    void loadMetrics()
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true })
@@ -549,8 +695,10 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     gap: 3px;
     align-items: end;
     height: 28px;
+    overflow: visible;
   }
   .data-spark i {
+    position: relative;
     flex: 1;
     height: 100%;
     border-radius: 2px;
@@ -561,6 +709,40 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
   }
   .data-spark i[data-tone='empty'] {
     background: rgb(255 255 255 / 12%);
+  }
+  .data-spark i[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    z-index: 2;
+    padding: 6px 10px;
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: 999px;
+    background: #121820;
+    color: #f3f6fb;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+  .data-spark i:first-child[data-tip]::after {
+    left: 0;
+    transform: none;
+  }
+  .data-spark i:last-child[data-tip]::after {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+  .data-spark i[data-tip]:hover::after,
+  .data-spark i[data-tip]:focus-visible::after {
+    opacity: 1;
   }
   .data-trend {
     padding: 20px 20px 12px;
