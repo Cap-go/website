@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-20T07:50:42.664Z
-updated_at: 2026-09-20T07:50:45.794Z
+updated_at: 2026-09-20T07:53:14.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/234040f0-f831-44ea-8c22-895ed1d3b424/api-in-typescript-title-slide.jpg'
 head_image_alt: API in TypeScript How to Build a Production Ready Typed API
 keywords: 'api in typescript, typescript api tutorial, typed api development, typescript backend guide, api validation typescript'
