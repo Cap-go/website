@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-21T08:02:58.881Z
-updated_at: 2026-09-21T08:03:00.371Z
+updated_at: 2026-09-21T08:05:48.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/809b7284-bf60-4205-b5bf-48f05d077233/cloud-app-performance-mobile-illustration.jpg'
 head_image_alt: Cloud App Performance Explained for Modern Mobile Teams
 keywords: 'cloud app performance, mobile performance, CDN edge, observability, app optimization'
