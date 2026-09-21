@@ -73,7 +73,7 @@
   },
   "optionalDependenciesComment": "Hoist @bruits/satteri-linux-x64-{gnu,musl} for docs prerender CI. Keep these pins in lockstep with satteri resolved via astro -> @astrojs/markdown-satteri -> satteri in bun.lock; bump both together.",
   "dependencies": {
-    "@astrojs/cloudflare": "14.3.1",
+    "@astrojs/cloudflare": "14.3.2",
     "@astrojs/mdx": "7.0.8",
     "@astrojs/sitemap": "3.7.4",
     "@astrojs/starlight": "0.42.0",
@@ -84,7 +84,7 @@
     "@supabase/supabase-js": "^2.110.2",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.2",
-    "astro": "7.3.2",
+    "astro": "7.3.3",
     "astro-icon": "1.1.5",
     "bowser": "^2.14.1",
     "github-slugger": "^2.0.0",
