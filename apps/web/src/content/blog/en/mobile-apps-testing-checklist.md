@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-22T08:49:55.986Z
-updated_at: 2026-09-22T08:49:57.803Z
+updated_at: 2026-09-22T08:54:38.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/49041a0f-cfd3-43ea-a122-0b4d13d47569/mobile-apps-testing-checklist-testing-guide.jpg'
 head_image_alt: 'Mobile Apps Testing Checklist: 10 Essential Steps'
 keywords: 'mobile apps testing checklist, mobile app testing, Capacitor testing, Ionic testing, CI/CD testing'
