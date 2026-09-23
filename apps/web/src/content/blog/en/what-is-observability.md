@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-23T07:16:53.929Z
-updated_at: 2026-09-23T07:16:56.084Z
+updated_at: 2026-09-23T07:19:10.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/3a5a21ee-c768-4723-9c6b-9e0fb87c496d/what-is-observability-system-analysis.jpg'
 head_image_alt: What Is Observability and Why Your App Needs It
 keywords: 'what is observability, observability vs monitoring, observability pillars, mobile observability, Capgo observability'
