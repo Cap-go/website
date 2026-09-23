@@ -79,5 +79,6 @@ test('getPublicLiveUpdateMetrics weights daily rates and skips first-day', async
     { date: '2026-09-15', ios: 90, android: 6.7 },
     { date: '2026-09-16', ios: 93.3, android: 80 },
   ])
+  expect(metrics.daily_platforms_sparkline).toEqual(metrics.daily_platforms)
   expect(metrics.period_days).toBe(30)
 })

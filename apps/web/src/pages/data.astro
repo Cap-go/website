@@ -4,7 +4,7 @@ import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
 import { emptyLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
-import { formatTrendTooltip, sliceTrendRows, TREND_RANGE_OPTIONS, trendHitLeftPercent, trendHitWidthPercent } from '@/lib/metricsTrendChart'
+import { formatTrendTooltip, sliceSparklineRows, sliceTrendRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
 
 const config = Astro.locals.runtimeConfig
 const metrics = emptyLiveUpdateMetrics()
@@ -117,6 +117,7 @@ function chartPoints(rows: typeof metrics.daily_platforms, key: 'ios' | 'android
 
 const ios = platformOf('ios')
 const android = platformOf('android')
+const sparklineRows = metrics.daily_platforms_sparkline.length ? metrics.daily_platforms_sparkline : sliceSparklineRows(metrics.daily_platforms)
 const chartRows = sliceTrendRows(metrics.daily_platforms, '1m')
 const chartRange = chartScale(chartRows)
 const iosChart = chartPoints(chartRows, 'ios', chartRange)
@@ -178,7 +179,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
               </div>
             </div>
             <div class="data-spark" data-spark="ios" role="img" aria-label="iOS daily success">
-              {metrics.daily_platforms.map((row) => <i data-tone={sparkTone(row.ios)} data-tip={sparkTip(row.date, row.ios)} />)}
+              {sparklineRows.map((row) => <i data-tone={sparkTone(row.ios)} data-tip={sparkTip(row.date, row.ios)} />)}
             </div>
           </article>
           <article class="data-card" data-platform-card="android">
@@ -204,7 +205,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
               </div>
             </div>
             <div class="data-spark" data-spark="android" role="img" aria-label="Android daily success">
-              {metrics.daily_platforms.map((row) => <i data-tone={sparkTone(row.android)} data-tip={sparkTip(row.date, row.android)} />)}
+              {sparklineRows.map((row) => <i data-tone={sparkTone(row.android)} data-tip={sparkTip(row.date, row.android)} />)}
             </div>
           </article>
         </div>
@@ -228,10 +229,11 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
         <div class="data-trend" data-trend>
           <div class="data-trend-head">
             <p>Install success</p>
-            <div class="data-trend-range" role="tablist" aria-label="Trend window">
+            <p class="data-sr-only" id="trend-window-label">Trend window</p>
+            <div class="data-periods" role="group" aria-labelledby="trend-window-label">
               {
                 TREND_RANGE_OPTIONS.map((option) => (
-                  <button type="button" data-trend-range={option.key} aria-selected={option.key === '1m' ? 'true' : 'false'}>
+                  <button type="button" data-trend-range={option.key} aria-pressed={option.key === '1m' ? 'true' : 'false'}>
                     {option.label}
                   </button>
                 ))
@@ -254,23 +256,16 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
               <text data-trend-start x="44" y="256">{chartRows[0]?.date ?? ''}</text>
               <text data-trend-end x="784" y="256" text-anchor="end">{chartRows.at(-1)?.date ?? ''}</text>
             </svg>
-            <div class="data-trend-hits" data-trend-hits style={`--hit-width: ${trendHitWidthPercent(chartRows.length)}%`} hidden={chartRows.length === 0}>
-              {
-                chartRows.map((row, index) => {
-                  const hitLeft = trendHitLeftPercent(index, chartRows.length)
-                  const hitWidth = trendHitWidthPercent(chartRows.length)
-                  const tooltip = trendTip(row.date, row.ios, row.android)
-                  return (
-                    <button
-                      type="button"
-                      class="data-trend-hit"
-                      style={`left: ${hitLeft}%; --hit-left: ${hitLeft}%; --hit-half-width: ${hitWidth / 2}%`}
-                      data-tooltip={tooltip}
-                      aria-label={tooltip}
-                    />
-                  )
-                })
-              }
+            <div
+              class="data-trend-overlay"
+              data-trend-overlay
+              tabindex="0"
+              role="group"
+              aria-label="Install success trend values. Move pointer across the chart or use arrow keys."
+              hidden={chartRows.length === 0}
+            >
+              <span class="data-trend-guide" data-trend-guide hidden aria-hidden="true"></span>
+              <span class="data-trend-tooltip" data-trend-tooltip hidden></span>
             </div>
           </div>
           <div class="data-legend">
@@ -504,7 +499,14 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
 <script>
   import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
   import { normalizeLiveUpdateMetrics, type LiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
-  import { formatTrendTooltip, sliceTrendRows, trendHitLeftPercent, trendHitWidthPercent, type TrendRangeKey } from '@/lib/metricsTrendChart'
+  import {
+    formatTrendTooltip,
+    sliceSparklineRows,
+    sliceTrendRows,
+    trendHitLeftPercent,
+    trendNearestIndex,
+    type TrendRangeKey,
+  } from '@/lib/metricsTrendChart'
 
   function boot() {
     const page = document.querySelector<HTMLElement>('.data-page')
@@ -534,7 +536,9 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     const trendMax = page?.querySelector<SVGTextElement>('[data-trend-max]')
     const trendMid = page?.querySelector<SVGTextElement>('[data-trend-mid]')
     const trendMin = page?.querySelector<SVGTextElement>('[data-trend-min]')
-    const trendHits = page?.querySelector<HTMLElement>('[data-trend-hits]')
+    const trendOverlay = page?.querySelector<HTMLElement>('[data-trend-overlay]')
+    const trendTooltip = page?.querySelector<HTMLElement>('[data-trend-tooltip]')
+    const trendGuide = page?.querySelector<HTMLElement>('[data-trend-guide]')
     const trendStatus = page?.querySelector<HTMLElement>('[data-trend-status]')
     const trendRangeButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-trend-range]') ?? [])]
     const iosSpark = page?.querySelector<HTMLElement>('[data-spark="ios"]')
@@ -609,36 +613,70 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       return formatTrendTooltip(date, ios, android, formatRate)
     }
 
-    function renderTrendHits(rows: LiveUpdateMetrics['daily_platforms']) {
-      if (!trendHits) return
-      trendHits.replaceChildren()
-      if (!rows.length) {
-        trendHits.hidden = true
+    let trendRows: LiveUpdateMetrics['daily_platforms'] = []
+    let trendFocusIndex = -1
+
+    function sparklineRows(metrics: LiveUpdateMetrics) {
+      return metrics.daily_platforms_sparkline.length ? metrics.daily_platforms_sparkline : sliceSparklineRows(metrics.daily_platforms)
+    }
+
+    function clampTrendTooltip(leftPercent: number) {
+      return Math.max(8, Math.min(92, leftPercent))
+    }
+
+    function showTrendPoint(index: number) {
+      if (!trendOverlay || !trendTooltip) return
+      const row = trendRows[index]
+      if (!row) {
+        trendTooltip.hidden = true
+        if (trendGuide) trendGuide.hidden = true
+        if (trendStatus) trendStatus.textContent = ''
         return
       }
-      trendHits.hidden = false
-      const hitWidth = trendHitWidthPercent(rows.length)
-      trendHits.style.setProperty('--hit-width', `${hitWidth}%`)
-      for (const [index, row] of rows.entries()) {
-        const hitLeft = trendHitLeftPercent(index, rows.length)
-        const tooltip = trendTip(row.date, row.ios, row.android)
-        const hit = createScopedElement('button')
-        hit.type = 'button'
-        hit.className = 'data-trend-hit'
-        hit.style.left = `${hitLeft}%`
-        hit.style.setProperty('--hit-left', `${hitLeft}%`)
-        hit.style.setProperty('--hit-half-width', `${hitWidth / 2}%`)
-        hit.dataset.tooltip = tooltip
-        hit.setAttribute('aria-label', tooltip)
-        hit.addEventListener('focus', () => {
-          if (trendStatus) trendStatus.textContent = tooltip
-        })
-        hit.addEventListener('pointerenter', () => {
-          if (trendStatus) trendStatus.textContent = tooltip
-        })
-        trendHits.append(hit)
+      const tooltip = trendTip(row.date, row.ios, row.android)
+      const left = clampTrendTooltip(trendHitLeftPercent(index, trendRows.length))
+      trendFocusIndex = index
+      trendTooltip.textContent = tooltip
+      trendTooltip.hidden = false
+      trendTooltip.style.left = `${left}%`
+      if (trendGuide) {
+        trendGuide.hidden = false
+        trendGuide.style.left = `${left}%`
       }
+      if (trendStatus) trendStatus.textContent = tooltip
+      trendOverlay.setAttribute('aria-label', tooltip)
     }
+
+    function bindTrendOverlay() {
+      if (!trendOverlay) return
+      trendOverlay.addEventListener('pointermove', (event) => {
+        if (!trendRows.length) return
+        const rect = trendOverlay.getBoundingClientRect()
+        const index = trendNearestIndex(event.clientX, rect.left, rect.width, trendRows.length)
+        showTrendPoint(index)
+      })
+      trendOverlay.addEventListener('pointerleave', () => {
+        trendFocusIndex = -1
+        if (trendTooltip) trendTooltip.hidden = true
+        if (trendGuide) trendGuide.hidden = true
+        if (trendStatus) trendStatus.textContent = ''
+        trendOverlay.setAttribute('aria-label', 'Install success trend values. Move pointer across the chart or use arrow keys.')
+      })
+      trendOverlay.addEventListener('keydown', (event) => {
+        if (!trendRows.length) return
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Home' && event.key !== 'End') return
+        event.preventDefault()
+        const next =
+          event.key === 'Home'
+            ? 0
+            : event.key === 'End'
+              ? trendRows.length - 1
+              : Math.max(0, Math.min(trendRows.length - 1, (trendFocusIndex < 0 ? 0 : trendFocusIndex) + (event.key === 'ArrowRight' ? 1 : -1)))
+        showTrendPoint(next)
+      })
+    }
+
+    bindTrendOverlay()
 
     function platformOf(metrics: LiveUpdateMetrics, key: 'ios' | 'android') {
       return metrics.platforms.find((item) => item.key === key) ?? { key, share: 0, success_rate: null, top_failure: null }
@@ -743,7 +781,12 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       if (dailyStatus) {
         dailyStatus.textContent = rows.length ? `Install success trend updated with ${rows.length} days` : 'Install success trend unavailable'
       }
-      renderTrendHits(rows)
+      trendRows = rows
+      if (trendOverlay) trendOverlay.hidden = rows.length === 0
+      if (!rows.length) {
+        if (trendTooltip) trendTooltip.hidden = true
+        if (trendGuide) trendGuide.hidden = true
+      }
     }
 
     function renderPlatformCards(metrics: LiveUpdateMetrics) {
@@ -755,8 +798,9 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       if (androidFailureKpi) androidFailureKpi.textContent = formatRate(failureRate(android.success_rate))
       if (iosTopFailure) iosTopFailure.textContent = ios.top_failure ? getFailureReasonInfo(ios.top_failure.reason).label : 'No leading failure'
       if (androidTopFailure) androidTopFailure.textContent = android.top_failure ? getFailureReasonInfo(android.top_failure.reason).label : 'No leading failure'
-      renderSpark(iosSpark, metrics.daily_platforms, 'ios')
-      renderSpark(androidSpark, metrics.daily_platforms, 'android')
+      const sparkRows = sparklineRows(metrics)
+      renderSpark(iosSpark, sparkRows, 'ios')
+      renderSpark(androidSpark, sparkRows, 'android')
       if (platformsEmpty) {
         platformsEmpty.hidden = Boolean(ios.success_rate !== null || android.success_rate !== null || metrics.daily_platforms.length)
         platformsEmpty.textContent = 'Platform breakdown is temporarily unavailable.'
@@ -958,7 +1002,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
         const next = button.dataset.trendRange
         if (next !== '1d' && next !== '1w' && next !== '1m' && next !== '3m') return
         trendRange = next
-        for (const item of trendRangeButtons) item.ariaSelected = item === button ? 'true' : 'false'
+        for (const item of trendRangeButtons) item.setAttribute('aria-pressed', item === button ? 'true' : 'false')
         if (latestMetrics) renderTrend(latestMetrics)
       })
     }
@@ -1207,32 +1251,30 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
   .data-trend-plot {
     position: relative;
   }
-  .data-trend-hits {
+  .data-trend-overlay {
     position: absolute;
     inset: 0 0 10.769%;
-    pointer-events: none;
-  }
-  .data-trend-hit {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: var(--hit-width, 3%);
-    padding: 0;
     border: 0;
     background: transparent;
-    transform: translateX(-50%);
     cursor: crosshair;
-    pointer-events: auto;
   }
-  .data-trend-hit:focus-visible {
+  .data-trend-overlay:focus-visible {
     outline: 2px solid #93c5fd;
     outline-offset: -2px;
   }
-  .data-trend-hit::after {
+  .data-trend-guide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgb(147 197 253 / 45%);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .data-trend-tooltip {
     position: absolute;
     z-index: 2;
     top: 10px;
-    left: 50%;
     width: max-content;
     max-width: min(280px, 80vw);
     padding: 7px 9px;
@@ -1241,37 +1283,10 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     background: #111c2e;
     box-shadow: 0 8px 24px rgb(0 0 0 / 28%);
     color: #f8fafc;
-    content: attr(data-tooltip);
     font-size: 0.75rem;
     line-height: 1.3;
-    opacity: 0;
+    transform: translateX(-50%);
     pointer-events: none;
-    transform: translate(-50%, 4px);
-    transition:
-      opacity 120ms ease,
-      transform 120ms ease;
-  }
-  .data-trend-hit:hover::after,
-  .data-trend-hit:focus-visible::after {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-  .data-trend-hit:first-child::after {
-    left: calc(var(--hit-half-width) - var(--hit-left));
-    transform: translate(0, 4px);
-  }
-  .data-trend-hit:first-child:hover::after,
-  .data-trend-hit:first-child:focus-visible::after {
-    transform: translate(0, 0);
-  }
-  .data-trend-hit:last-child::after {
-    right: calc(var(--hit-left) + var(--hit-half-width) - 100%);
-    left: auto;
-    transform: translate(0, 4px);
-  }
-  .data-trend-hit:last-child:hover::after,
-  .data-trend-hit:last-child:focus-visible::after {
-    transform: translate(0, 0);
   }
   .data-trend-head {
     display: flex;
@@ -1286,44 +1301,30 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     color: #d8e1ee;
     font-size: 0.95rem;
   }
-  .data-trend-range {
-    display: inline-flex;
-    align-items: stretch;
+  .data-periods {
+    display: flex;
+    gap: 6px;
     padding: 4px;
-    border: 0;
-    border-radius: 9999px;
-    background: #f3f4f6;
+    border: 1px solid var(--line);
+    border-radius: 999px;
   }
-  .data-trend-range button {
-    flex: 1 1 0;
-    min-width: 3.25rem;
-    padding: 0.375rem 0.875rem;
+  .data-periods button {
+    min-width: 52px;
+    padding: 6px 12px;
     border: 0;
-    border-radius: 9999px;
+    border-radius: 999px;
     background: transparent;
-    color: #6b7280;
+    color: #91a2ba;
     font: inherit;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    cursor: pointer;
-    transition:
-      background 120ms ease,
-      color 120ms ease,
-      box-shadow 120ms ease;
-  }
-  .data-trend-range button:hover:not([aria-selected='true']) {
-    color: #374151;
-  }
-  .data-trend-range button[aria-selected='true'] {
-    background: #fff;
-    color: #111827;
+    font-size: 0.8rem;
     font-weight: 600;
-    box-shadow:
-      0 1px 2px rgb(15 23 42 / 6%),
-      0 1px 3px rgb(15 23 42 / 10%);
+    cursor: pointer;
   }
-  .data-trend-range button:focus-visible {
+  .data-periods button[aria-pressed='true'] {
+    background: white;
+    color: #111827;
+  }
+  .data-periods button:focus-visible {
     outline: 2px solid #93c5fd;
     outline-offset: 2px;
   }

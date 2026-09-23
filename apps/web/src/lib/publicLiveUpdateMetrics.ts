@@ -1,4 +1,4 @@
-import { TREND_HISTORY_DAYS } from './metricsTrendChart'
+import { sliceSparklineRows, TREND_HISTORY_DAYS } from './metricsTrendChart'
 
 export const LIVE_UPDATE_METRICS_PATH = '/live-update-metrics.json'
 export const LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS = 300
@@ -29,6 +29,7 @@ export type PublicLiveUpdateMetrics = {
   updated_at: string
   daily: Array<{ date: string; success_rate: number }>
   daily_platforms: PublicDailyPlatformMetric[]
+  daily_platforms_sparkline: PublicDailyPlatformMetric[]
   failures: Array<{ reason: string; share: number }>
   platforms: PublicBreakdownMetric[]
   countries: PublicBreakdownMetric[]
@@ -285,6 +286,9 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     })
     .filter((row) => row.key)
 
+  const daily_platforms = buildDailyPlatforms(platformDailyRows)
+  const daily_platforms_sparkline = sliceSparklineRows(daily_platforms, now)
+
   return {
     success_rate: totalOutcomes ? roundPublicPercent((totalSuccesses / totalOutcomes) * 100) : 0,
     first_try_rate: rateFromParts(totalFirstTries, totalSuccesses),
@@ -297,7 +301,8 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     period_days: LIVE_UPDATE_KPI_WINDOW_DAYS,
     updated_at: now.toISOString(),
     daily,
-    daily_platforms: buildDailyPlatforms(platformDailyRows),
+    daily_platforms,
+    daily_platforms_sparkline,
     failures,
     platforms: buildBreakdownMetrics(platformShareMapped, platformOutcomeRows, platformFailureRows, 3),
     countries: buildBreakdownMetrics(countryShareRows, countryOutcomeRows, countryFailureRows, PUBLIC_TOP_COUNTRIES),

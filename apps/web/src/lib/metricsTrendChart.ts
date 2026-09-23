@@ -5,6 +5,7 @@ export const TREND_CHART = {
 } as const
 
 export const TREND_HISTORY_DAYS = 90
+export const SPARKLINE_WINDOW_DAYS = 30
 
 export type TrendRangeKey = '1d' | '1w' | '1m' | '3m'
 
@@ -19,9 +20,39 @@ export function trendRangeDays(key: TrendRangeKey) {
   return TREND_RANGE_OPTIONS.find((option) => option.key === key)?.days ?? 30
 }
 
-export function sliceTrendRows<T extends { date: string }>(rows: T[], key: TrendRangeKey) {
+export function parseTrendUtcDate(date: string): Date | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date.trim())
+  if (!match) return null
+  return new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])))
+}
+
+function utcDayStart(date: Date) {
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()))
+}
+
+export function trendWindowEndUtc(rows: Array<{ date: string }>, referenceDate?: Date) {
+  if (referenceDate) return utcDayStart(referenceDate)
+  const last = rows.at(-1)?.date
+  const parsed = last ? parseTrendUtcDate(last) : null
+  return parsed ? utcDayStart(parsed) : utcDayStart(new Date())
+}
+
+export function sliceTrendRows<T extends { date: string }>(rows: T[], key: TrendRangeKey, referenceDate?: Date) {
+  if (!rows.length) return rows
   const days = trendRangeDays(key)
-  return rows.slice(Math.max(0, rows.length - days))
+  const end = trendWindowEndUtc(rows, referenceDate)
+  const start = new Date(end)
+  start.setUTCDate(start.getUTCDate() - (days - 1))
+  return rows.filter((row) => {
+    const parsed = parseTrendUtcDate(row.date)
+    if (!parsed) return false
+    const day = utcDayStart(parsed)
+    return day >= start && day <= end
+  })
+}
+
+export function sliceSparklineRows<T extends { date: string }>(rows: T[], referenceDate?: Date) {
+  return sliceTrendRows(rows, '1m', referenceDate)
 }
 
 export function trendHitLeftPercent(index: number, count: number, width = TREND_CHART.width) {
@@ -31,12 +62,15 @@ export function trendHitLeftPercent(index: number, count: number, width = TREND_
   return (x / width) * 100
 }
 
-export function trendHitWidthPercent(count: number, width = TREND_CHART.width) {
+export function trendNearestIndex(clientX: number, plotLeft: number, plotWidth: number, count: number) {
+  if (count <= 0) return -1
+  if (count === 1) return 0
   const pad = TREND_CHART.pad
-  const innerW = width - pad.l - pad.r
-  if (count <= 1) return (innerW / width) * 100
-  const segment = innerW / (count - 1)
-  return Math.min(100, Math.max(2.5, (segment / width) * 100 * 1.15))
+  const innerW = plotWidth * ((TREND_CHART.width - pad.l - pad.r) / TREND_CHART.width)
+  const left = plotWidth * (pad.l / TREND_CHART.width)
+  const x = clientX - plotLeft - left
+  const ratio = Math.max(0, Math.min(1, x / innerW))
+  return Math.round(ratio * (count - 1))
 }
 
 export function formatTrendTooltip(date: string, ios: number | null, android: number | null, formatValue: (value: number | null) => string) {
