@@ -127,9 +127,14 @@ jobs:
         run: |
           GITHUB_STATS_REFRESH=true bun run fetch:stars
           WEBSITE_STATS_REFRESH=true bun run fetch:website-stats
+          LIVE_UPDATE_METRICS_REFRESH=true bun run fetch:live-update-metrics
+          BUILDER_METRICS_REFRESH=true bun run fetch:builder-metrics
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
+          CF_ACCOUNT_ANALYTICS_ID: ${{ secrets.CF_ACCOUNT_ANALYTICS_ID }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - run: cd apps/web && bun run check
       - run: bun run clean:build-cache
       - run: bun run build:web

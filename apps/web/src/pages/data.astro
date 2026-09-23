@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
-import { resolveLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
+import { jsonForInlineScript, resolveLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
@@ -119,7 +119,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
 
 <Layout content={content}>
   {/* Keep bootstrap metrics out of attributes so the edge translator cannot mangle JSON / inflate SSR tables. */}
-  <main class="data-page" data-metrics-endpoint={LIVE_UPDATE_METRICS_PATH} aria-busy="true">
+  <script type="application/json" id="capgo-live-update-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
+  <main class="data-page" data-metrics-endpoint={LIVE_UPDATE_METRICS_PATH} aria-busy={pending ? 'true' : 'false'}>
     <section class="data-hero">
       <div class="data-shell">
         <div class="data-title-row">
@@ -413,7 +414,9 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
                     </li>
                   )
                 })
-              : [<li class="data-empty">No failures in this window.</li>]
+              : pending
+                ? [<li class="data-empty">Loading failure mix…</li>]
+                : [<li class="data-empty">No failures in this window.</li>]
           }
         </ol>
       </div>
@@ -797,7 +800,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       renderBreakdownRows(versionsBody, versionEmpty, versionsStatus, [], 'version', 'Updater breakdown is temporarily unavailable.', 'Updater versions')
     }
 
-    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v5'
+    const METRICS_CACHE_KEY = 'capgo-live-update-metrics-v6'
     const METRICS_CACHE_FRESH_MS = 5 * 60 * 1000
     const METRICS_CACHE_STALE_MS = 24 * 60 * 60 * 1000
 

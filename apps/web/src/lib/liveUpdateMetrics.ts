@@ -1,4 +1,7 @@
+import cachedMetrics from '@/data/live-update-metrics.json'
 import { LIVE_UPDATE_METRICS_PATH } from './publicLiveUpdateMetrics'
+
+const FALLBACK = cachedMetrics as LiveUpdateMetrics
 
 export type DailyMetric = { date: string; success_rate: number }
 export type DailyPlatformMetric = { date: string; ios: number | null; android: number | null }
@@ -171,7 +174,7 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
 }
 
 export function getCachedLiveUpdateMetrics(): LiveUpdateMetrics {
-  return emptyLiveUpdateMetrics()
+  return { ...(normalizeLiveUpdateMetrics(FALLBACK) ?? { ...FALLBACK, daily_platforms: [] }), source: 'cache' }
 }
 
 export async function fetchLiveUpdateMetrics(endpoint = LIVE_UPDATE_METRICS_PATH): Promise<LiveUpdateMetrics | null> {
