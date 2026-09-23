@@ -1,11 +1,6 @@
-import cachedMetrics from '@/data/builder-metrics.json'
 import type { BuilderDailyPlatformMetric, BuilderFailureMetric, BuilderPlatformMetric, PublicBuilderMetrics } from './publicBuilderMetrics'
 
-export { jsonForInlineScript } from './liveUpdateMetrics'
-
 export type BuilderMetrics = PublicBuilderMetrics & { source?: 'api' | 'cache' }
-
-const FALLBACK = cachedMetrics as BuilderMetrics
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -90,12 +85,4 @@ export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
     failures,
     platforms,
   }
-}
-
-export function getCachedBuilderMetrics(): BuilderMetrics {
-  return { ...(normalizeBuilderMetrics(FALLBACK) ?? FALLBACK), source: 'cache' }
-}
-
-export async function resolveBuilderMetrics(): Promise<BuilderMetrics> {
-  return getCachedBuilderMetrics()
 }

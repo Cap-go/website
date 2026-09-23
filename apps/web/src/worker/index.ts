@@ -5,6 +5,7 @@ import { handleToolApiRequest } from '../lib/tools/api'
 import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
 import { handleBuilderMetrics, BUILDER_METRICS_PATH } from './builder-metrics'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
+import { handleMtaStsRequest } from './mta-sts'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
 
@@ -429,6 +430,8 @@ async function agentSurfaceResponse(request: Request, env: Env, pathname: string
 
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
+    const mtaStsResponse = handleMtaStsRequest(request)
+    if (mtaStsResponse) return mtaStsResponse
     const pathname = new URL(request.url).pathname
     const agentSurface = await agentSurfaceResponse(request, env, pathname)
     if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
