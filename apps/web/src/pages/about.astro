@@ -28,6 +28,19 @@ const observeUrl = getRelativeLocaleUrl(locale, '/observe/')
 const nativeBuildUrl = getRelativeLocaleUrl(locale, '/native-build/')
 const complianceDocsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates/compliance/')
 
+function isValidPlanRow(plan: unknown): plan is Database['public']['Tables']['plans']['Row'] {
+  if (!plan || typeof plan !== 'object') return false
+  const row = plan as Record<string, unknown>
+  return (
+    typeof row.name === 'string' &&
+    row.name.trim().length > 0 &&
+    typeof row.price_m === 'number' &&
+    Number.isFinite(row.price_m) &&
+    typeof row.price_y === 'number' &&
+    Number.isFinite(row.price_y)
+  )
+}
+
 let plansAll: Database['public']['Tables']['plans']['Row'][] = []
 try {
   const response = await fetch(`${Astro.locals.runtimeConfig.public.baseApiUrl}/private/plans`, {
@@ -36,7 +49,7 @@ try {
   if (response.ok) {
     const payload = await response.json()
     if (Array.isArray(payload)) {
-      plansAll = payload as Database['public']['Tables']['plans']['Row'][]
+      plansAll = payload.filter(isValidPlanRow)
     }
   }
 } catch {
@@ -100,7 +113,11 @@ const teamMembers = [
 const companyStats = [
   { value: 'Dec 2022', label: 'Founded', detail: 'Started as a self-funded maker project' },
   { value: pluginCountLabel, label: 'Plugins', detail: 'Maintained for the Capacitor ecosystem' },
-  { value: '50M+', label: 'End users', detail: 'Served through apps using Capgo' },
+  {
+    value: m.companies_logo_stat_devices_value({}, { locale }),
+    label: m.companies_logo_stat_devices_label({}, { locale }),
+    detail: m.about_stat_devices_detail({}, { locale }),
+  },
   { value: `${teamMembers.length}`, label: 'Core team', detail: 'Product, native, support, and delivery' },
 ]
 
@@ -172,6 +189,10 @@ const keyFacts = [
   { term: m.about_facts_company_name({}, { locale }), detail: m.about_facts_company_name_value({}, { locale }) },
   { term: m.about_facts_type({}, { locale }), detail: m.about_facts_type_value({}, { locale }) },
   { term: m.about_facts_founded({}, { locale }), detail: m.about_facts_founded_value({}, { locale }) },
+  {
+    term: m.about_facts_live_updates_since({}, { locale }),
+    detail: m.about_facts_live_updates_since_value({}, { locale }),
+  },
   { term: m.about_facts_founder({}, { locale }), detail: m.about_facts_founder_value({}, { locale }) },
   { term: m.about_facts_headquarters({}, { locale }), detail: m.about_facts_headquarters_value({}, { locale }) },
   { term: m.about_facts_website({}, { locale }), detail: 'https://capgo.app', href: 'https://capgo.app' },
@@ -184,7 +205,7 @@ const keyFacts = [
     detail: m.about_facts_communication_value({}, { locale }),
     href: contactUrl,
   },
-  { term: m.about_facts_end_users({}, { locale }), detail: m.about_facts_end_users_value({}, { locale }) },
+  { term: m.about_facts_devices_tracked({}, { locale }), detail: m.about_facts_devices_tracked_value({}, { locale }) },
   { term: m.about_facts_plugins({}, { locale }), detail: `${pluginCountLabel} for the Capacitor ecosystem` },
   { term: m.about_facts_competitors({}, { locale }), detail: m.about_facts_competitors_value({}, { locale }) },
   { term: m.about_facts_social({}, { locale }), detail: socialLinks.map((link) => link.label).join(', ') },
@@ -477,7 +498,7 @@ const content = {
                   href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
                   class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
                 >
-                  Read the full story
+                  {m.about_read_full_story({}, { locale })}
                 </a>
               </div>
             </div>
@@ -496,7 +517,7 @@ const content = {
         {
           howItWorksSteps.map((step, index) => (
             <li class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-              <p class="text-sm font-semibold text-blue-700">Step {index + 1}</p>
+              <p class="text-sm font-semibold text-blue-700">{m.about_how_step_label({ step: index + 1 }, { locale })}</p>
               <h3 class="mt-3 text-lg font-semibold text-gray-950">{step.title}</h3>
               <p class="mt-3 text-sm leading-6 text-gray-600">{step.body}</p>
             </li>
@@ -574,8 +595,8 @@ const content = {
       </div>
 
       <p class="mt-8 text-sm leading-6 text-gray-600">
-        For store compliance details, see the
-        <a href={complianceDocsUrl} class="font-semibold text-blue-700 hover:text-blue-800">live updates compliance docs</a>.
+        {m.about_faq_compliance_prefix({}, { locale })}
+        <a href={complianceDocsUrl} class="font-semibold text-blue-700 hover:text-blue-800">{m.about_faq_compliance_link({}, { locale })}</a>.
       </p>
     </section>
   </main>
