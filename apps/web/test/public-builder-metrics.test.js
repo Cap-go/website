@@ -53,6 +53,7 @@ test('fetchPublicBuilderMetricsFromRpc posts to the public RPC', async () => {
     fetch: async (url, init) => {
       expect(String(url)).toBe('https://example.supabase.co/rest/v1/rpc/get_public_builder_metrics')
       expect(init?.method).toBe('POST')
+      expect(init?.body).toBe(JSON.stringify({ trend_history_days: 90 }))
       expect(init?.headers?.apikey).toBe('anon')
       return new Response(JSON.stringify(payload), { headers: { 'content-type': 'application/json' } })
     },

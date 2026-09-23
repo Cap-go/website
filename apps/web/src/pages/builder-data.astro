@@ -4,6 +4,7 @@ import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
 import { emptyBuilderMetrics } from '@/lib/builderMetrics'
 import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { formatTrendTooltip, sliceSparklineRows, sliceTrendRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
@@ -52,14 +53,16 @@ function formatDuration(seconds: number | null) {
 }
 
 function platformOf(key: 'ios' | 'android') {
-  return metrics.platforms.find((item) => item.key === key) ?? {
-    key,
-    share: 0,
-    success_rate: null,
-    avg_process_seconds: null,
-    avg_queue_seconds: null,
-    top_failure: null,
-  }
+  return (
+    metrics.platforms.find((item) => item.key === key) ?? {
+      key,
+      share: 0,
+      success_rate: null,
+      avg_process_seconds: null,
+      avg_queue_seconds: null,
+      top_failure: null,
+    }
+  )
 }
 
 function sliceDays<T extends { date: string }>(rows: T[], days: number) {
@@ -95,12 +98,23 @@ function chartPoints(values: Array<number | null>, scale: { min: number; max: nu
 
 const ios = platformOf('ios')
 const android = platformOf('android')
-const chartRows = sliceDays(metrics.daily_platforms, 30)
+const chartRows = sliceTrendRows(metrics.daily_platforms, '1m')
 const rateValues = chartRows.flatMap((row) => [row.ios, row.android]).filter((value): value is number => value !== null)
 const chartRange = chartScale(rateValues, 'rate')
-const iosChart = chartPoints(chartRows.map((row) => row.ios), chartRange)
-const androidChart = chartPoints(chartRows.map((row) => row.android), chartRange)
+const iosChart = chartPoints(
+  chartRows.map((row) => row.ios),
+  chartRange,
+)
+const androidChart = chartPoints(
+  chartRows.map((row) => row.android),
+  chartRange,
+)
 const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
+
+function trendTip(date: string, ios: number | null, android: number | null) {
+  return formatTrendTooltip(date, ios, android, formatRate)
+}
+
 const liveUpdateHref = getRelativeLocaleUrl(Astro.locals.locale, 'data')
 const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build')
 ---
@@ -113,9 +127,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           <h1>Native Builds</h1>
           <p class="data-badge" data-status-badge data-tone={pending ? 'loading' : 'operational'}><span aria-hidden="true"></span> {pending ? 'Loading' : 'Operational'}</p>
         </div>
-        <p class="data-summary">
-          Global iOS and Android builder success for the last 30 days. Each rate is finished jobs only — not a live queue, and not a build count.
-        </p>
+        <p class="data-summary">Global iOS and Android builder success for the last 30 days. Each rate is finished jobs only — not a live queue, and not a build count.</p>
         <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
         <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
         <div class="data-kpis" aria-label="Global builder reliability">
@@ -139,7 +151,12 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         <div class="data-cards">
           <article class="data-card" data-platform-card="ios">
             <h3>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.7c0-2.4 2-3.4 2.1-3.5-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9s-1.9-.9-3.2-.8c-1.6.1-3.1.9-4 2.4-1.7 2.9-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2-.1 1.6-.8 3.1-.8s1.8.8 3.2.7c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.5-3.9zM14.3 5.9c.6-.8 1.1-1.9.9-3-1 .1-2.2.7-2.9 1.5-.6.7-1.2 1.8-.9 2.9 1.1.1 2.2-.5 2.9-1.4z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path
+                  fill="currentColor"
+                  d="M16.4 12.7c0-2.4 2-3.4 2.1-3.5-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9s-1.9-.9-3.2-.8c-1.6.1-3.1.9-4 2.4-1.7 2.9-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2-.1 1.6-.8 3.1-.8s1.8.8 3.2.7c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.5-3.9zM14.3 5.9c.6-.8 1.1-1.9.9-3-1 .1-2.2.7-2.9 1.5-.6.7-1.2 1.8-.9 2.9 1.1.1 2.2-.5 2.9-1.4z"
+                ></path></svg
+              >
               iOS
             </h3>
             <div class="data-card-stats">
@@ -158,7 +175,12 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           </article>
           <article class="data-card" data-platform-card="android">
             <h3>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.6 9.5h.1c.8 0 1.4.6 1.4 1.4v6.4c0 .8-.6 1.4-1.4 1.4h-.1v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2H10.2v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2h-.1c-.8 0-1.4-.6-1.4-1.4v-6.4c0-.8.6-1.4 1.4-1.4h10.3zM7.4 4.8l.8 1.4c1.1-.6 2.4-.9 3.8-.9s2.7.3 3.8.9l.8-1.4c.2-.4.7-.5 1.1-.3.4.2.5.7.3 1.1l-.7 1.3C18.6 8 19.5 9.6 19.5 11.4H4.5c0-1.8.9-3.4 2.3-4.5l-.7-1.3c-.2-.4-.1-.9.3-1.1.4-.2.9-.1 1.1.3zM9 12.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path
+                  fill="currentColor"
+                  d="M17.6 9.5h.1c.8 0 1.4.6 1.4 1.4v6.4c0 .8-.6 1.4-1.4 1.4h-.1v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2H10.2v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2h-.1c-.8 0-1.4-.6-1.4-1.4v-6.4c0-.8.6-1.4 1.4-1.4h10.3zM7.4 4.8l.8 1.4c1.1-.6 2.4-.9 3.8-.9s2.7.3 3.8.9l.8-1.4c.2-.4.7-.5 1.1-.3.4.2.5.7.3 1.1l-.7 1.3C18.6 8 19.5 9.6 19.5 11.4H4.5c0-1.8.9-3.4 2.3-4.5l-.7-1.3c-.2-.4-.1-.9.3-1.1.4-.2.9-.1 1.1.3zM9 12.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+                ></path></svg
+              >
               Android
             </h3>
             <div class="data-card-stats">
@@ -186,8 +208,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
             <p class="data-eyebrow">Trend</p>
             <h2 id="trend-title">Builder success over time</h2>
           </div>
-          <p>Daily iOS and Android rates, plus average processing time. 7D and 30D read from the same 30-day window — this chart is not a live feed.</p>
+          <p>Daily iOS and Android rates, plus average processing time. Use 1D, 1W, 1M, or 3M to change the chart window — this chart is not a live feed.</p>
         </div>
+        <p class="data-sr-only" data-trend-status aria-live="polite"></p>
         <div class="data-trend" data-trend>
           <div class="data-trend-head">
             <p data-trend-label>Build success</p>
@@ -196,16 +219,22 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
                 <button type="button" data-metric="rate" aria-selected="true">Success</button>
                 <button type="button" data-metric="duration">Process</button>
               </div>
-              <div class="data-periods" role="tablist" aria-label="Trend window">
-                <button type="button" data-period="7">7D</button>
-                <button type="button" data-period="30" aria-selected="true">30D</button>
+              <p class="data-sr-only" id="trend-window-label">Trend window</p>
+              <div class="data-periods" role="group" aria-labelledby="trend-window-label">
+                {
+                  TREND_RANGE_OPTIONS.map((option) => (
+                    <button type="button" data-trend-range={option.key} aria-pressed={option.key === '1m' ? 'true' : 'false'}>
+                      {option.label}
+                    </button>
+                  ))
+                }
               </div>
             </div>
           </div>
           <div class="data-chart-skeleton" hidden={chartRows.length > 0}>
             <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
           </div>
-          <div translate="no">
+          <div class="data-trend-plot" translate="no">
             <svg class="data-trend-svg" data-trend-svg viewBox="0 0 800 260" role="img" aria-label="iOS and Android build success">
               <line x1="44" y1="16" x2="784" y2="16"></line>
               <line x1="44" y1="124" x2="784" y2="124"></line>
@@ -215,9 +244,22 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
               <text data-trend-min x="0" y="236">{formatRate(chartRange.min)}</text>
               <polyline data-trend-line="ios" points={iosChart}></polyline>
               <polyline data-trend-line="android" points={androidChart}></polyline>
+              <g data-trend-markers="ios"></g>
+              <g data-trend-markers="android"></g>
               <text data-trend-start x="44" y="256">{chartRows[0]?.date ?? ''}</text>
               <text data-trend-end x="784" y="256" text-anchor="end">{chartRows.at(-1)?.date ?? ''}</text>
             </svg>
+            <div
+              class="data-trend-overlay"
+              data-trend-overlay
+              tabindex="0"
+              role="group"
+              aria-label="Builder success trend values. Move pointer across the chart or use arrow keys."
+              hidden={chartRows.length === 0}
+            >
+              <span class="data-trend-guide" data-trend-guide hidden aria-hidden="true"></span>
+              <span class="data-trend-tooltip" data-trend-tooltip hidden></span>
+            </div>
           </div>
           <div class="data-legend">
             <span data-legend="ios">iOS</span>
@@ -237,8 +279,10 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
             Script errors come from the app repo. Timeouts, host failures, and missing runners are builder-side. Shares only — no job counts.
           </p>
           <p class="data-copy data-copy-secondary">
-            Need signed binaries? See <a class="data-inline-link" href={nativeBuildHref}>Native Builds</a>.
-            Live Update install rates live on <a class="data-inline-link" href={liveUpdateHref}>Live Update data</a>.
+            Need signed binaries? See <a class="data-inline-link" href={nativeBuildHref}>Native Builds</a>. Live Update install rates live on <a
+              class="data-inline-link"
+              href={liveUpdateHref}>Live Update data</a
+            >.
           </p>
         </div>
         <ol class="data-failures" data-failures translate="no">
@@ -273,6 +317,15 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
 <script>
   import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
   import { normalizeBuilderMetrics, type BuilderMetrics } from '@/lib/builderMetrics'
+  import {
+    formatTrendTooltip,
+    sliceSparklineRows,
+    sliceTrendRows,
+    TREND_RANGE_OPTIONS,
+    trendHitLeftPercent,
+    trendNearestIndex,
+    type TrendRangeKey,
+  } from '@/lib/metricsTrendChart'
 
   function boot() {
     const page = document.querySelector<HTMLElement>('.data-page')
@@ -297,20 +350,24 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     const trendSvg = page?.querySelector<SVGElement>('[data-trend-svg]')
     const trendIos = page?.querySelector<SVGPolylineElement>('[data-trend-line="ios"]')
     const trendAndroid = page?.querySelector<SVGPolylineElement>('[data-trend-line="android"]')
+    const trendIosMarkers = page?.querySelector<SVGGElement>('[data-trend-markers="ios"]')
+    const trendAndroidMarkers = page?.querySelector<SVGGElement>('[data-trend-markers="android"]')
     const trendStart = page?.querySelector<SVGTextElement>('[data-trend-start]')
     const trendEnd = page?.querySelector<SVGTextElement>('[data-trend-end]')
     const trendMax = page?.querySelector<SVGTextElement>('[data-trend-max]')
     const trendMid = page?.querySelector<SVGTextElement>('[data-trend-mid]')
     const trendMin = page?.querySelector<SVGTextElement>('[data-trend-min]')
+    const trendOverlay = page?.querySelector<HTMLElement>('[data-trend-overlay]')
+    const trendTooltip = page?.querySelector<HTMLElement>('[data-trend-tooltip]')
+    const trendGuide = page?.querySelector<HTMLElement>('[data-trend-guide]')
+    const trendStatus = page?.querySelector<HTMLElement>('[data-trend-status]')
     const dailySkeleton = page?.querySelector<HTMLElement>('.data-chart-skeleton')
     const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
     const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
-    const periodButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-period]') ?? [])]
+    const trendRangeButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-trend-range]') ?? [])]
     const metricButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-metric]') ?? [])]
-    const styleScopeAttributes = [...(page?.attributes ?? [])]
-      .map(attribute => attribute.name)
-      .filter(name => name.startsWith('data-astro-cid-'))
-    let periodDays = 30
+    const styleScopeAttributes = [...(page?.attributes ?? [])].map((attribute) => attribute.name).filter((name) => name.startsWith('data-astro-cid-'))
+    let trendRange: TrendRangeKey = '1m'
     let metric: 'rate' | 'duration' = 'rate'
     let latestMetrics: BuilderMetrics | null = null
 
@@ -343,15 +400,102 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       return `${date}: ${formatRate(rate)}`
     }
 
-    function platformOf(metrics: BuilderMetrics, key: 'ios' | 'android') {
-      return metrics.platforms.find(item => item.key === key) ?? {
-        key,
-        share: 0,
-        success_rate: null,
-        avg_process_seconds: null,
-        avg_queue_seconds: null,
-        top_failure: null,
+    function trendTip(date: string, ios: number | null, android: number | null) {
+      return formatTrendTooltip(date, ios, android, metric === 'rate' ? formatRate : formatDuration)
+    }
+
+    let trendRows: BuilderMetrics['daily_platforms'] = []
+    let trendFocusIndex = -1
+    const trendOverlayLabel = 'Builder success trend values. Move pointer across the chart or use arrow keys.'
+
+    function clampTrendTooltip(leftPercent: number) {
+      return Math.max(8, Math.min(92, leftPercent))
+    }
+
+    function trendStatusAnnounce(rows: BuilderMetrics['daily_platforms']) {
+      const metricLabel = metric === 'rate' ? 'Build success' : 'Processing time'
+      const rangeLabel = TREND_RANGE_OPTIONS.find((option) => option.key === trendRange)?.label ?? trendRange
+      if (!rows.length) return 'Builder trend unavailable'
+      const dates = rows.length === 1 ? rows[0].date : `${rows[0]?.date} to ${rows.at(-1)?.date}`
+      return `${metricLabel} trend updated for ${rangeLabel}: ${rows.length} day${rows.length === 1 ? '' : 's'} (${dates})`
+    }
+
+    function clearTrendSelection(announce = '') {
+      trendFocusIndex = -1
+      if (trendTooltip) trendTooltip.hidden = true
+      if (trendGuide) trendGuide.hidden = true
+      if (trendStatus) trendStatus.textContent = announce
+      if (trendOverlay) trendOverlay.setAttribute('aria-label', trendOverlayLabel)
+    }
+
+    function showTrendPoint(index: number) {
+      if (!trendOverlay || !trendTooltip) return
+      const row = trendRows[index]
+      if (!row) {
+        trendTooltip.hidden = true
+        if (trendGuide) trendGuide.hidden = true
+        if (trendStatus) trendStatus.textContent = ''
+        return
       }
+      const iosValue = metric === 'rate' ? row.ios : row.ios_process_seconds
+      const androidValue = metric === 'rate' ? row.android : row.android_process_seconds
+      const tooltip = trendTip(row.date, iosValue, androidValue)
+      const guideLeft = trendHitLeftPercent(index, trendRows.length)
+      const tooltipLeft = clampTrendTooltip(guideLeft)
+      trendFocusIndex = index
+      trendTooltip.textContent = tooltip
+      trendTooltip.hidden = false
+      trendTooltip.style.left = `${tooltipLeft}%`
+      if (trendGuide) {
+        trendGuide.hidden = false
+        trendGuide.style.left = `${guideLeft}%`
+      }
+      if (trendStatus) trendStatus.textContent = tooltip
+      trendOverlay.setAttribute('aria-label', tooltip)
+    }
+
+    function bindTrendOverlay() {
+      if (!trendOverlay) return
+      trendOverlay.addEventListener('pointermove', (event) => {
+        if (!trendRows.length) return
+        const rect = trendOverlay.getBoundingClientRect()
+        const index = trendNearestIndex(event.clientX, rect.left, rect.width, trendRows.length)
+        showTrendPoint(index)
+      })
+      trendOverlay.addEventListener('pointerleave', () => {
+        trendFocusIndex = -1
+        if (trendTooltip) trendTooltip.hidden = true
+        if (trendGuide) trendGuide.hidden = true
+        if (trendStatus) trendStatus.textContent = ''
+        trendOverlay.setAttribute('aria-label', trendOverlayLabel)
+      })
+      trendOverlay.addEventListener('keydown', (event) => {
+        if (!trendRows.length) return
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Home' && event.key !== 'End') return
+        event.preventDefault()
+        const next =
+          event.key === 'Home'
+            ? 0
+            : event.key === 'End'
+              ? trendRows.length - 1
+              : Math.max(0, Math.min(trendRows.length - 1, (trendFocusIndex < 0 ? 0 : trendFocusIndex) + (event.key === 'ArrowRight' ? 1 : -1)))
+        showTrendPoint(next)
+      })
+    }
+
+    bindTrendOverlay()
+
+    function platformOf(metrics: BuilderMetrics, key: 'ios' | 'android') {
+      return (
+        metrics.platforms.find((item) => item.key === key) ?? {
+          key,
+          share: 0,
+          success_rate: null,
+          avg_process_seconds: null,
+          avg_queue_seconds: null,
+          top_failure: null,
+        }
+      )
     }
 
     function sliceDays<T extends { date: string }>(rows: T[], days: number) {
@@ -369,7 +513,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       return { min: Math.max(0, Number((min - pad).toFixed(1))), max: Number((max + pad).toFixed(1)) }
     }
 
-    function chartPoints(values: Array<number | null>, scale: { min: number, max: number }, width = 800, height = 260) {
+    function chartPoints(values: Array<number | null>, scale: { min: number; max: number }, width = 800, height = 260) {
       const pad = { l: 44, r: 16, t: 16, b: 28 }
       const innerW = width - pad.l - pad.r
       const innerH = height - pad.t - pad.b
@@ -389,6 +533,27 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       return metric === 'rate' ? formatRate(value) : formatDuration(value)
     }
 
+    function renderTrendMarker(
+      group: SVGGElement | null | undefined,
+      values: Array<number | null>,
+      scale: { min: number; max: number },
+      show: boolean,
+      fill: string,
+    ) {
+      if (!group) return
+      group.replaceChildren()
+      if (!show) return
+      const coords = chartPoints(values, scale)
+      if (!coords) return
+      const [cx, cy] = coords.split(',')
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+      circle.setAttribute('cx', cx)
+      circle.setAttribute('cy', cy)
+      circle.setAttribute('r', '5')
+      circle.setAttribute('fill', fill)
+      group.append(circle)
+    }
+
     function renderSpark(target: HTMLElement | null | undefined, rows: BuilderMetrics['daily_platforms'], key: 'ios' | 'android') {
       if (!target) return
       target.replaceChildren()
@@ -401,9 +566,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     }
 
     function renderTrend(metrics: BuilderMetrics) {
-      const rows = sliceDays(metrics.daily_platforms, periodDays)
-      const iosValues = rows.map(row => (metric === 'rate' ? row.ios : row.ios_process_seconds))
-      const androidValues = rows.map(row => (metric === 'rate' ? row.android : row.android_process_seconds))
+      const rows = sliceTrendRows(metrics.daily_platforms, trendRange)
+      const iosValues = rows.map((row) => (metric === 'rate' ? row.ios : row.ios_process_seconds))
+      const androidValues = rows.map((row) => (metric === 'rate' ? row.android : row.android_process_seconds))
       const values = [...iosValues, ...androidValues].filter((value): value is number => value !== null)
       const scale = chartScale(values, metric === 'rate' ? 'rate' : 'duration')
       const mid = Number(((scale.min + scale.max) / 2).toFixed(1))
@@ -415,11 +580,18 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (dailySkeleton) dailySkeleton.hidden = rows.length > 0
       if (trendIos) trendIos.setAttribute('points', chartPoints(iosValues, scale))
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(androidValues, scale))
+      const showIosMarker = iosValues.filter((value): value is number => value !== null).length === 1
+      const showAndroidMarker = androidValues.filter((value): value is number => value !== null).length === 1
+      renderTrendMarker(trendIosMarkers, iosValues, scale, showIosMarker, '#60a5fa')
+      renderTrendMarker(trendAndroidMarkers, androidValues, scale, showAndroidMarker, '#34d399')
       if (trendMax) trendMax.textContent = formatTick(scale.max)
       if (trendMid) trendMid.textContent = formatTick(mid)
       if (trendMin) trendMin.textContent = formatTick(scale.min)
       if (trendStart) trendStart.textContent = rows[0]?.date ?? ''
       if (trendEnd) trendEnd.textContent = rows.at(-1)?.date ?? ''
+      trendRows = rows
+      clearTrendSelection(trendStatusAnnounce(rows))
+      if (trendOverlay) trendOverlay.hidden = rows.length === 0
     }
 
     function renderFailures(metrics: BuilderMetrics) {
@@ -430,8 +602,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         if (lead) {
           const info = getBuilderFailureInfo(lead.reason)
           failuresLead.textContent = `${info.label} accounts for ${Math.ceil(lead.share)}% of failed jobs in this window.`
-        }
-        else {
+        } else {
           failuresLead.textContent = 'Normalized categories across all apps.'
         }
       }
@@ -457,8 +628,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         row.append(rank, copy, share, track)
         failuresList.append(row)
       }
-      if (!metrics.failures.length)
-        failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
+      if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
     }
 
     function renderMetrics(metrics: BuilderMetrics) {
@@ -483,8 +653,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (kpiStatus) {
         kpiStatus.textContent = `Success ${formatRate(metrics.success_rate)}, process ${formatDuration(metrics.avg_process_seconds)}, queue ${formatDuration(metrics.avg_queue_seconds)}`
       }
-      renderSpark(iosSpark, metrics.daily_platforms, 'ios')
-      renderSpark(androidSpark, metrics.daily_platforms, 'android')
+      const sparkRows = sliceSparklineRows(metrics.daily_platforms)
+      renderSpark(iosSpark, sparkRows, 'ios')
+      renderSpark(androidSpark, sparkRows, 'android')
       renderTrend(metrics)
       renderFailures(metrics)
       if (updated) {
@@ -532,8 +703,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         if (!metrics) throw new Error('Invalid metrics response')
         writeCachedMetrics(payload)
         return metrics
-      }
-      finally {
+      } finally {
         window.clearTimeout(timeoutId)
       }
     }
@@ -585,21 +755,19 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       try {
         const metrics = await fetchMetrics()
         renderMetrics(metrics)
-      }
-      catch {
+      } catch {
         if (!initial) renderUnavailable()
-      }
-      finally {
+      } finally {
         page?.setAttribute('aria-busy', 'false')
       }
     }
 
-    for (const button of periodButtons) {
+    for (const button of trendRangeButtons) {
       button.addEventListener('click', () => {
-        const next = Number(button.dataset.period)
-        if (!Number.isFinite(next)) return
-        periodDays = next
-        for (const item of periodButtons) item.ariaSelected = item === button ? 'true' : 'false'
+        const next = button.dataset.trendRange
+        if (next !== '1d' && next !== '1w' && next !== '1m' && next !== '3m') return
+        trendRange = next
+        for (const item of trendRangeButtons) item.setAttribute('aria-pressed', item === button ? 'true' : 'false')
         if (latestMetrics) renderTrend(latestMetrics)
       })
     }
@@ -848,6 +1016,46 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     border-radius: 20px;
     background: rgb(255 255 255 / 3%);
   }
+  .data-trend-plot {
+    position: relative;
+  }
+  .data-trend-overlay {
+    position: absolute;
+    inset: 0 0 10.769%;
+    border: 0;
+    background: transparent;
+    cursor: crosshair;
+  }
+  .data-trend-overlay:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: -2px;
+  }
+  .data-trend-guide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgb(147 197 253 / 45%);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .data-trend-tooltip {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    width: max-content;
+    max-width: min(280px, 80vw);
+    padding: 7px 9px;
+    border: 1px solid rgb(147 197 253 / 24%);
+    border-radius: 6px;
+    background: #111c2e;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 28%);
+    color: #f8fafc;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
   .data-trend-head {
     display: flex;
     flex-wrap: wrap;
@@ -885,9 +1093,14 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     font-weight: 600;
     cursor: pointer;
   }
-  .data-periods button[aria-selected='true'] {
+  .data-periods button[aria-selected='true'],
+  .data-periods button[aria-pressed='true'] {
     background: white;
     color: #111827;
+  }
+  .data-periods button:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
   }
   .data-trend-svg {
     display: block;
@@ -914,6 +1127,12 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
   }
   .data-trend-svg polyline[data-trend-line='android'] {
     stroke: #34d399;
+  }
+  .data-trend-svg g[data-trend-markers='ios'] :global(circle) {
+    fill: #60a5fa;
+  }
+  .data-trend-svg g[data-trend-markers='android'] :global(circle) {
+    fill: #34d399;
   }
   .data-legend {
     display: flex;

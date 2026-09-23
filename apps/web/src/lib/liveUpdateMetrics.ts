@@ -1,3 +1,4 @@
+import { sliceSparklineRows } from './metricsTrendChart'
 import { LIVE_UPDATE_METRICS_PATH } from './publicLiveUpdateMetrics'
 
 export type DailyMetric = { date: string; success_rate: number }
@@ -20,6 +21,7 @@ export type LiveUpdateMetrics = {
   updated_at: string
   daily: DailyMetric[]
   daily_platforms: DailyPlatformMetric[]
+  daily_platforms_sparkline: DailyPlatformMetric[]
   failures: FailureMetric[]
   platforms: BreakdownMetric[]
   countries: BreakdownMetric[]
@@ -39,6 +41,7 @@ export function emptyLiveUpdateMetrics(): LiveUpdateMetrics {
     updated_at: '',
     daily: [],
     daily_platforms: [],
+    daily_platforms_sparkline: [],
     failures: [],
     platforms: [],
     countries: [],
@@ -97,6 +100,15 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
         })
         .filter((item): item is DailyPlatformMetric => item !== null)
     : []
+
+  const daily_platforms_sparkline = Array.isArray(value.daily_platforms_sparkline)
+    ? value.daily_platforms_sparkline
+        .map((item) => {
+          if (!isRecord(item) || typeof item.date !== 'string') return null
+          return { date: item.date, ios: nullablePercentage(item.ios), android: nullablePercentage(item.android) }
+        })
+        .filter((item): item is DailyPlatformMetric => item !== null)
+    : sliceSparklineRows(daily_platforms)
 
   const failures = value.failures
     .map((item) => {
@@ -163,6 +175,7 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
     updated_at: value.updated_at,
     daily,
     daily_platforms,
+    daily_platforms_sparkline,
     failures,
     platforms,
     countries,
