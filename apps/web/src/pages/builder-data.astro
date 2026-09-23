@@ -538,6 +538,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       values: Array<number | null>,
       scale: { min: number; max: number },
       show: boolean,
+      fill: string,
     ) {
       if (!group) return
       group.replaceChildren()
@@ -549,6 +550,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       circle.setAttribute('cx', cx)
       circle.setAttribute('cy', cy)
       circle.setAttribute('r', '5')
+      circle.setAttribute('fill', fill)
       group.append(circle)
     }
 
@@ -580,8 +582,8 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(androidValues, scale))
       const showIosMarker = iosValues.filter((value): value is number => value !== null).length === 1
       const showAndroidMarker = androidValues.filter((value): value is number => value !== null).length === 1
-      renderTrendMarker(trendIosMarkers, iosValues, scale, showIosMarker)
-      renderTrendMarker(trendAndroidMarkers, androidValues, scale, showAndroidMarker)
+      renderTrendMarker(trendIosMarkers, iosValues, scale, showIosMarker, '#60a5fa')
+      renderTrendMarker(trendAndroidMarkers, androidValues, scale, showAndroidMarker, '#34d399')
       if (trendMax) trendMax.textContent = formatTick(scale.max)
       if (trendMid) trendMid.textContent = formatTick(mid)
       if (trendMin) trendMin.textContent = formatTick(scale.min)

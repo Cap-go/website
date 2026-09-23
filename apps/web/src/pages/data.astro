@@ -771,10 +771,11 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       key: 'ios' | 'android',
       scale: { min: number; max: number },
       show: boolean,
+      fill: string,
     ) {
       if (!group) return
       group.replaceChildren()
-      if (!show || !rows.length) return
+      if (!show) return
       const coords = chartPoints(rows, key, scale)
       if (!coords) return
       const [cx, cy] = coords.split(',')
@@ -782,6 +783,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       circle.setAttribute('cx', cx)
       circle.setAttribute('cy', cy)
       circle.setAttribute('r', '5')
+      circle.setAttribute('fill', fill)
       group.append(circle)
     }
 
@@ -803,8 +805,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(rows, 'android', scale))
       const showIosMarker = rows.filter((row) => row.ios !== null).length === 1
       const showAndroidMarker = rows.filter((row) => row.android !== null).length === 1
-      renderTrendMarker(trendIosMarkers, rows, 'ios', scale, showIosMarker)
-      renderTrendMarker(trendAndroidMarkers, rows, 'android', scale, showAndroidMarker)
+      renderTrendMarker(trendIosMarkers, rows, 'ios', scale, showIosMarker, '#60a5fa')
+      renderTrendMarker(trendAndroidMarkers, rows, 'android', scale, showAndroidMarker, '#34d399')
       if (trendMax) trendMax.textContent = formatRate(scale.max)
       if (trendMid) trendMid.textContent = formatRate(Number(((scale.min + scale.max) / 2).toFixed(1)))
       if (trendMin) trendMin.textContent = formatRate(scale.min)
