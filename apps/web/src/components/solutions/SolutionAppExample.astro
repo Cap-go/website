@@ -28,7 +28,7 @@ const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.catego
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
 const showExampleCtas = solution === 'enterprise'
-const showRolloutIllustration = animateRollout || solution === 'production-updates'
+const showRolloutIllustration = animateRollout
 ---
 
 {
