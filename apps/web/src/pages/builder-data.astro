@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
-import { resolveBuilderMetrics } from '@/lib/builderMetrics'
+import { jsonForInlineScript, resolveBuilderMetrics } from '@/lib/builderMetrics'
 import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -104,7 +104,8 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
 ---
 
 <Layout content={content}>
-  <main class="data-page" data-metrics-endpoint={BUILDER_METRICS_PATH} aria-busy="true">
+  <script type="application/json" id="capgo-builder-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
+  <main class="data-page" data-metrics-endpoint={BUILDER_METRICS_PATH} aria-busy={pending ? 'true' : 'false'}>
     <section class="data-hero">
       <div class="data-shell">
         <div class="data-title-row">
@@ -240,7 +241,28 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           </p>
         </div>
         <ol class="data-failures" data-failures translate="no">
-          <li class="data-empty">Loading failure mix…</li>
+          {
+            metrics.failures.length
+              ? metrics.failures.map((item, index) => {
+                  const info = getBuilderFailureInfo(item.reason)
+                  return (
+                    <li>
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <div class="data-failure-copy">
+                        <strong>{info.label}</strong>
+                        <p>{info.explanation}</p>
+                      </div>
+                      <b>{Math.ceil(item.share)}%</b>
+                      <i aria-hidden="true">
+                        <em style={`--share: ${item.share}%`} />
+                      </i>
+                    </li>
+                  )
+                })
+              : pending
+                ? [<li class="data-empty">Loading failure mix…</li>]
+                : [<li class="data-empty">No failures in this window.</li>]
+          }
         </ol>
       </div>
     </section>
@@ -493,8 +515,10 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           signal: controller.signal,
           cache: 'default',
         })
-        const metrics = normalizeBuilderMetrics(response.ok ? await response.json() : null)
+        const payload = response.ok ? await response.json() : null
+        const metrics = normalizeBuilderMetrics(payload)
         if (!metrics) throw new Error('Invalid metrics response')
+        writeCachedMetrics(payload)
         return metrics
       }
       finally {
@@ -502,12 +526,80 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       }
     }
 
-    async function loadMetrics() {
+    const METRICS_CACHE_KEY = 'capgo-builder-metrics-v1'
+    const METRICS_CACHE_FRESH_MS = 5 * 60 * 1000
+    const METRICS_CACHE_STALE_MS = 24 * 60 * 60 * 1000
+
+    function readCachedMetrics(): { metrics: BuilderMetrics; fresh: boolean } | null {
       try {
-        renderMetrics(await fetchMetrics())
+        const raw = localStorage.getItem(METRICS_CACHE_KEY)
+        if (!raw) return null
+        const parsed = JSON.parse(raw) as { savedAt?: unknown; payload?: unknown }
+        if (typeof parsed.savedAt !== 'number') return null
+        const age = Date.now() - parsed.savedAt
+        if (age > METRICS_CACHE_STALE_MS) return null
+        const metrics = normalizeBuilderMetrics(parsed.payload)
+        if (!metrics) return null
+        return { metrics, fresh: age <= METRICS_CACHE_FRESH_MS }
+      } catch {
+        return null
+      }
+    }
+
+    function writeCachedMetrics(payload: unknown) {
+      try {
+        localStorage.setItem(METRICS_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), payload }))
+      } catch {
+        // Ignore quota / private-mode failures.
+      }
+    }
+
+    function readBootstrapMetrics(): BuilderMetrics | null {
+      try {
+        const raw = document.getElementById('capgo-builder-metrics-bootstrap')?.textContent?.trim()
+        if (!raw) return null
+        return normalizeBuilderMetrics(JSON.parse(raw))
+      } catch {
+        return null
+      }
+    }
+
+    function metricsUpdatedAtMs(metrics: BuilderMetrics | null | undefined) {
+      if (!metrics?.updated_at) return 0
+      const ts = Date.parse(metrics.updated_at)
+      return Number.isNaN(ts) ? 0 : ts
+    }
+
+    function pickInitialMetrics(cached: BuilderMetrics | null | undefined, bootstrap: BuilderMetrics | null) {
+      if (cached && bootstrap) {
+        return metricsUpdatedAtMs(cached) >= metricsUpdatedAtMs(bootstrap) ? cached : bootstrap
+      }
+      return cached ?? bootstrap ?? null
+    }
+
+    async function loadMetrics() {
+      const bootstrap = readBootstrapMetrics()
+      const cached = readCachedMetrics()
+      const initial = pickInitialMetrics(cached?.metrics, bootstrap)
+
+      if (initial) {
+        renderMetrics(initial)
+        page?.setAttribute('aria-busy', 'false')
+      }
+
+      if (cached?.fresh) {
+        void fetchMetrics()
+          .then((metrics) => renderMetrics(metrics))
+          .catch(() => undefined)
+        return
+      }
+
+      try {
+        const metrics = await fetchMetrics()
+        renderMetrics(metrics)
       }
       catch {
-        renderUnavailable()
+        if (!initial) renderUnavailable()
       }
       finally {
         page?.setAttribute('aria-busy', 'false')

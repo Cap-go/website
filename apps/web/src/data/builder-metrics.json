@@ -1,0 +1,268 @@
+{
+  "success_rate": 72.3,
+  "avg_process_seconds": 219.8,
+  "avg_queue_seconds": 13.4,
+  "period_days": 30,
+  "updated_at": "2026-09-17T17:50:00.000Z",
+  "daily_platforms": [
+    {
+      "date": "2026-08-18",
+      "ios": 100,
+      "android": 66.7,
+      "ios_process_seconds": 287.28225,
+      "android_process_seconds": 173.63333333333333
+    },
+    {
+      "date": "2026-08-19",
+      "ios": 100,
+      "android": 85.7,
+      "ios_process_seconds": 265.0613888888889,
+      "android_process_seconds": 107.35
+    },
+    {
+      "date": "2026-08-20",
+      "ios": 92,
+      "android": 88.9,
+      "ios_process_seconds": 202.48512,
+      "android_process_seconds": 148.8448888888889
+    },
+    {
+      "date": "2026-08-21",
+      "ios": 95.2,
+      "android": 83.3,
+      "ios_process_seconds": 194.53433333333334,
+      "android_process_seconds": 131.41558333333333
+    },
+    {
+      "date": "2026-08-22",
+      "ios": 75,
+      "android": 66.7,
+      "ios_process_seconds": 188.043125,
+      "android_process_seconds": 99.297
+    },
+    {
+      "date": "2026-08-23",
+      "ios": 89.5,
+      "android": 100,
+      "ios_process_seconds": 212.99547368421054,
+      "android_process_seconds": 116.52366666666667
+    },
+    {
+      "date": "2026-08-24",
+      "ios": 85,
+      "android": 92.3,
+      "ios_process_seconds": 333.45795,
+      "android_process_seconds": 271.14523076923075
+    },
+    {
+      "date": "2026-08-25",
+      "ios": 88.9,
+      "android": 100,
+      "ios_process_seconds": 436.2316666666667,
+      "android_process_seconds": 221.265
+    },
+    {
+      "date": "2026-08-26",
+      "ios": 56.3,
+      "android": 72,
+      "ios_process_seconds": 569.1868125,
+      "android_process_seconds": 332.71636
+    },
+    {
+      "date": "2026-08-27",
+      "ios": 59.4,
+      "android": 83.3,
+      "ios_process_seconds": 264.52865625,
+      "android_process_seconds": 210.16391666666667
+    },
+    {
+      "date": "2026-08-28",
+      "ios": 92.3,
+      "android": 55,
+      "ios_process_seconds": 209.62784615384615,
+      "android_process_seconds": 139.05455
+    },
+    {
+      "date": "2026-08-29",
+      "ios": 100,
+      "android": 33.3,
+      "ios_process_seconds": 165.20776923076923,
+      "android_process_seconds": 81.4565
+    },
+    {
+      "date": "2026-08-30",
+      "ios": 76.9,
+      "android": 60,
+      "ios_process_seconds": 271.0633076923077,
+      "android_process_seconds": 220.759
+    },
+    {
+      "date": "2026-08-31",
+      "ios": 80,
+      "android": 86.7,
+      "ios_process_seconds": 288.620125,
+      "android_process_seconds": 193.76993333333334
+    },
+    {
+      "date": "2026-09-01",
+      "ios": 84.6,
+      "android": 71.4,
+      "ios_process_seconds": 322.0661153846154,
+      "android_process_seconds": 271.25057142857145
+    },
+    {
+      "date": "2026-09-02",
+      "ios": 95.8,
+      "android": 100,
+      "ios_process_seconds": 387.636,
+      "android_process_seconds": 404.9101818181818
+    },
+    {
+      "date": "2026-09-03",
+      "ios": 48.1,
+      "android": 66.7,
+      "ios_process_seconds": 493.47,
+      "android_process_seconds": 375.2589523809524
+    },
+    {
+      "date": "2026-09-04",
+      "ios": 61.5,
+      "android": 64.3,
+      "ios_process_seconds": 169.485375,
+      "android_process_seconds": 113.0857857142857
+    },
+    {
+      "date": "2026-09-05",
+      "ios": 90.3,
+      "android": 100,
+      "ios_process_seconds": 180.2447741935484,
+      "android_process_seconds": 120.81753846153846
+    },
+    {
+      "date": "2026-09-06",
+      "ios": 90.5,
+      "android": 100,
+      "ios_process_seconds": 152.5407619047619,
+      "android_process_seconds": 147.551
+    },
+    {
+      "date": "2026-09-07",
+      "ios": 61.5,
+      "android": 66.7,
+      "ios_process_seconds": 180.84192307692308,
+      "android_process_seconds": 107.48253333333334
+    },
+    {
+      "date": "2026-09-08",
+      "ios": 71.1,
+      "android": 95.5,
+      "ios_process_seconds": 81.36242222222222,
+      "android_process_seconds": 36.2915
+    },
+    {
+      "date": "2026-09-09",
+      "ios": 55.6,
+      "android": 76,
+      "ios_process_seconds": 138.89483333333334,
+      "android_process_seconds": 134.26384
+    },
+    {
+      "date": "2026-09-10",
+      "ios": 82.4,
+      "android": 83.3,
+      "ios_process_seconds": 210.06635294117646,
+      "android_process_seconds": 274.4423888888889
+    },
+    {
+      "date": "2026-09-11",
+      "ios": 29.1,
+      "android": 42.4,
+      "ios_process_seconds": 150.49627272727272,
+      "android_process_seconds": 265.37769696969696
+    },
+    {
+      "date": "2026-09-12",
+      "ios": 23.5,
+      "android": 37.5,
+      "ios_process_seconds": 95.0095588235294,
+      "android_process_seconds": 221.370625
+    },
+    {
+      "date": "2026-09-13",
+      "ios": 58.8,
+      "android": 100,
+      "ios_process_seconds": 150.0599411764706,
+      "android_process_seconds": 201.54
+    },
+    {
+      "date": "2026-09-14",
+      "ios": 77.3,
+      "android": 73.5,
+      "ios_process_seconds": 221.7804090909091,
+      "android_process_seconds": 222.8115294117647
+    },
+    {
+      "date": "2026-09-15",
+      "ios": 67.4,
+      "android": 90.9,
+      "ios_process_seconds": 195.02941860465117,
+      "android_process_seconds": 244.33445454545455
+    },
+    {
+      "date": "2026-09-16",
+      "ios": 79.5,
+      "android": 75,
+      "ios_process_seconds": 194.18561538461537,
+      "android_process_seconds": 254.115625
+    },
+    {
+      "date": "2026-09-17",
+      "ios": 81,
+      "android": 100,
+      "ios_process_seconds": 244.87042857142856,
+      "android_process_seconds": 254.5593
+    }
+  ],
+  "failures": [
+    {
+      "reason": "script_failure",
+      "share": 82.3
+    },
+    {
+      "reason": "timeout",
+      "share": 7.4
+    },
+    {
+      "reason": "runner_system_failure",
+      "share": 6
+    },
+    {
+      "reason": "runner_unavailable",
+      "share": 4.4
+    }
+  ],
+  "platforms": [
+    {
+      "key": "ios",
+      "share": 66.6,
+      "success_rate": 70.7,
+      "avg_process_seconds": 226.7,
+      "avg_queue_seconds": 14.9,
+      "top_failure": {
+        "reason": "script_failure",
+        "share": 77.2
+      }
+    },
+    {
+      "key": "android",
+      "share": 33.4,
+      "success_rate": 75.6,
+      "avg_process_seconds": 206.2,
+      "avg_queue_seconds": 10.5,
+      "top_failure": {
+        "reason": "script_failure",
+        "share": 94.4
+      }
+    }
+  ]
+}
