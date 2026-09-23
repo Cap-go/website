@@ -564,10 +564,23 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       }
     }
 
+    function metricsUpdatedAtMs(metrics: BuilderMetrics | null | undefined) {
+      if (!metrics?.updated_at) return 0
+      const ts = Date.parse(metrics.updated_at)
+      return Number.isNaN(ts) ? 0 : ts
+    }
+
+    function pickInitialMetrics(cached: BuilderMetrics | null | undefined, bootstrap: BuilderMetrics | null) {
+      if (cached && bootstrap) {
+        return metricsUpdatedAtMs(cached) >= metricsUpdatedAtMs(bootstrap) ? cached : bootstrap
+      }
+      return cached ?? bootstrap ?? null
+    }
+
     async function loadMetrics() {
       const bootstrap = readBootstrapMetrics()
       const cached = readCachedMetrics()
-      const initial = cached?.metrics ?? bootstrap
+      const initial = pickInitialMetrics(cached?.metrics, bootstrap)
 
       if (initial) {
         renderMetrics(initial)

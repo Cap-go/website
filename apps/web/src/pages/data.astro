@@ -838,6 +838,19 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       }
     }
 
+    function metricsUpdatedAtMs(metrics: LiveUpdateMetrics | null | undefined) {
+      if (!metrics?.updated_at) return 0
+      const ts = Date.parse(metrics.updated_at)
+      return Number.isNaN(ts) ? 0 : ts
+    }
+
+    function pickInitialMetrics(cached: LiveUpdateMetrics | null | undefined, bootstrap: LiveUpdateMetrics | null) {
+      if (cached && bootstrap) {
+        return metricsUpdatedAtMs(cached) >= metricsUpdatedAtMs(bootstrap) ? cached : bootstrap
+      }
+      return cached ?? bootstrap ?? null
+    }
+
     async function fetchMetrics() {
       if (!endpoint) throw new Error('Missing metrics endpoint')
       const controller = new AbortController()
@@ -861,7 +874,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     async function loadMetrics() {
       const bootstrap = readBootstrapMetrics()
       const cached = readCachedMetrics()
-      const initial = cached?.metrics ?? bootstrap
+      const initial = pickInitialMetrics(cached?.metrics, bootstrap)
 
       if (initial) {
         renderMetrics(initial)
