@@ -15,9 +15,9 @@ export type TrendPlatformRow = {
   android: number | null
 }
 
-export type TrendMetricsRows = {
-  daily_platforms: TrendPlatformRow[]
-  hourly_platforms?: TrendPlatformRow[]
+export type TrendMetricsRows<T extends { date: string } = TrendPlatformRow> = {
+  daily_platforms: T[]
+  hourly_platforms?: T[]
 }
 
 export const TREND_RANGE_OPTIONS: Array<{ key: TrendRangeKey; label: string; days: number }> = [
@@ -81,12 +81,15 @@ export function sliceHourlyTrendRows<T extends { date: string }>(rows: T[], refe
   return rows.filter((row) => row.date.startsWith(lastDay))
 }
 
-export function selectTrendRows(metrics: TrendMetricsRows, key: TrendRangeKey, referenceDate?: Date) {
+export function selectTrendRows<T extends { date: string }>(
+  metrics: TrendMetricsRows<T>,
+  key: TrendRangeKey,
+  referenceDate?: Date,
+): T[] {
   if (key === '1d') {
     const hourly = metrics.hourly_platforms ?? []
     if (hourly.length) return sliceHourlyTrendRows(hourly, referenceDate)
-    const daily = sliceTrendRows(metrics.daily_platforms, '1d', referenceDate)
-    return daily
+    return sliceTrendRows(metrics.daily_platforms, '1d', referenceDate)
   }
   return sliceTrendRows(metrics.daily_platforms, key, referenceDate)
 }

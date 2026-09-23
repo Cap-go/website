@@ -4,7 +4,7 @@ import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
 import { emptyLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
-import { formatTrendAxisLabel, formatTrendTooltip, selectTrendRows, sliceSparklineRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
+import { formatTrendTooltip, selectTrendRows, sliceSparklineRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
 
 const config = Astro.locals.runtimeConfig
 const metrics = emptyLiveUpdateMetrics()

@@ -4,7 +4,7 @@ import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
 import { emptyBuilderMetrics } from '@/lib/builderMetrics'
 import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
-import { formatTrendAxisLabel, formatTrendTooltip, selectTrendRows, sliceSparklineRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
+import { formatTrendTooltip, selectTrendRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
