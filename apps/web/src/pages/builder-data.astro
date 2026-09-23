@@ -209,6 +209,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           </div>
           <p>Daily iOS and Android rates, plus average processing time. 7D and 30D read from the same 30-day window — this chart is not a live feed.</p>
         </div>
+        <p class="data-sr-only" data-trend-status aria-live="polite"></p>
         <div class="data-trend" data-trend>
           <div class="data-trend-head">
             <p data-trend-label>Build success</p>
@@ -241,16 +242,20 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
             </svg>
             <div class="data-trend-hits" data-trend-hits style={`--hit-width: ${trendHitWidthPercent(chartRows.length)}%`} hidden={chartRows.length === 0}>
               {
-                chartRows.map((row, index) => (
-                  <button
-                    type="button"
-                    class="data-trend-hit"
-                    style={`left: ${trendHitLeftPercent(index, chartRows.length)}%`}
-                    data-tooltip={trendTip(row.date, row.ios, row.android)}
-                    tabindex="-1"
-                    aria-hidden="true"
-                  />
-                ))
+                chartRows.map((row, index) => {
+                  const hitLeft = trendHitLeftPercent(index, chartRows.length)
+                  const hitWidth = trendHitWidthPercent(chartRows.length)
+                  const tooltip = trendTip(row.date, row.ios, row.android)
+                  return (
+                    <button
+                      type="button"
+                      class="data-trend-hit"
+                      style={`left: ${hitLeft}%; --hit-left: ${hitLeft}%; --hit-half-width: ${hitWidth / 2}%`}
+                      data-tooltip={tooltip}
+                      aria-label={tooltip}
+                    />
+                  )
+                })
               }
             </div>
           </div>
@@ -340,6 +345,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     const trendMid = page?.querySelector<SVGTextElement>('[data-trend-mid]')
     const trendMin = page?.querySelector<SVGTextElement>('[data-trend-min]')
     const trendHits = page?.querySelector<HTMLElement>('[data-trend-hits]')
+    const trendStatus = page?.querySelector<HTMLElement>('[data-trend-status]')
     const dailySkeleton = page?.querySelector<HTMLElement>('.data-chart-skeleton')
     const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
     const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
@@ -391,17 +397,27 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         return
       }
       trendHits.hidden = false
-      trendHits.style.setProperty('--hit-width', `${trendHitWidthPercent(rows.length)}%`)
+      const hitWidth = trendHitWidthPercent(rows.length)
+      trendHits.style.setProperty('--hit-width', `${hitWidth}%`)
       for (const [index, row] of rows.entries()) {
         const iosValue = metric === 'rate' ? row.ios : row.ios_process_seconds
         const androidValue = metric === 'rate' ? row.android : row.android_process_seconds
+        const hitLeft = trendHitLeftPercent(index, rows.length)
+        const tooltip = trendTip(row.date, iosValue, androidValue)
         const hit = createScopedElement('button')
         hit.type = 'button'
         hit.className = 'data-trend-hit'
-        hit.style.left = `${trendHitLeftPercent(index, rows.length)}%`
-        hit.dataset.tooltip = trendTip(row.date, iosValue, androidValue)
-        hit.tabIndex = -1
-        hit.setAttribute('aria-hidden', 'true')
+        hit.style.left = `${hitLeft}%`
+        hit.style.setProperty('--hit-left', `${hitLeft}%`)
+        hit.style.setProperty('--hit-half-width', `${hitWidth / 2}%`)
+        hit.dataset.tooltip = tooltip
+        hit.setAttribute('aria-label', tooltip)
+        hit.addEventListener('focus', () => {
+          if (trendStatus) trendStatus.textContent = tooltip
+        })
+        hit.addEventListener('pointerenter', () => {
+          if (trendStatus) trendStatus.textContent = tooltip
+        })
         trendHits.append(hit)
       }
     }
@@ -910,7 +926,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
   }
   .data-trend-hits {
     position: absolute;
-    inset: 0 0 28px;
+    inset: 0 0 10.769%;
     pointer-events: none;
   }
   .data-trend-hit {
@@ -924,6 +940,10 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     transform: translateX(-50%);
     cursor: crosshair;
     pointer-events: auto;
+  }
+  .data-trend-hit:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: -2px;
   }
   .data-trend-hit::after {
     position: absolute;
@@ -954,7 +974,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     transform: translate(-50%, 0);
   }
   .data-trend-hit:first-child::after {
-    left: 0;
+    left: calc(var(--hit-half-width) - var(--hit-left));
     transform: translate(0, 4px);
   }
   .data-trend-hit:first-child:hover::after,
@@ -962,7 +982,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     transform: translate(0, 0);
   }
   .data-trend-hit:last-child::after {
-    right: 0;
+    right: calc(var(--hit-left) + var(--hit-half-width) - 100%);
     left: auto;
     transform: translate(0, 4px);
   }
