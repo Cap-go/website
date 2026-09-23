@@ -22,6 +22,14 @@
       "pattern": "capgo.app",
       "custom_domain": true,
     },
+    {
+      "pattern": "mta-sts.capgo.app",
+      "custom_domain": true,
+    },
+    {
+      "pattern": "mta-sts.usecapgo.com",
+      "custom_domain": true,
+    },
   ],
   "env": {
     "development": {
