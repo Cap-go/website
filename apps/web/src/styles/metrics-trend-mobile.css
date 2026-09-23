@@ -5,13 +5,33 @@
   }
 
   .data-trend-head {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 18px;
-    gap: 12px;
+  }
+
+  .data-trend-head > p {
+    flex: 0 0 auto;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 
   .data-trend-controls {
-    width: 100%;
-    gap: 10px;
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 0;
+    width: auto;
+  }
+
+  .data-trend-controls .data-periods {
+    flex: 0 0 auto;
   }
 
   .data-trend-plot {
@@ -19,9 +39,15 @@
     overflow: visible;
   }
 
+  .data-periods {
+    gap: 4px;
+    padding: 3px;
+  }
+
   .data-periods button {
-    min-width: 48px;
-    padding: 7px 10px;
+    min-width: 40px;
+    padding: 6px 8px;
+    font-size: 0.75rem;
   }
 
   .data-trend-svg {
@@ -55,5 +81,14 @@
 
   .data-legend {
     padding-top: 12px;
+  }
+
+  .data-kpis div {
+    padding: 22px 12px 16px;
+  }
+
+  .data-kpis p {
+    margin: 0 0 8px;
+    padding-top: 2px;
   }
 }

@@ -8,6 +8,7 @@ test('normalizeBuilderMetrics keeps rates and process times', () => {
     avg_process_seconds: 219.7,
     avg_queue_seconds: 13.3,
     daily_platforms: [{ date: '2026-09-16', ios: 88.4, android: 71.2, ios_process_seconds: 194.2, android_process_seconds: 254.1 }],
+    hourly_platforms: [{ date: '2026-09-16 10:00', ios: 90, android: 72, ios_process_seconds: 180, android_process_seconds: 240 }],
     failures: [{ reason: 'script_failure', share: 82.3 }],
     platforms: [{ key: 'ios', share: 66.6, success_rate: 70.7, avg_process_seconds: 226.7, avg_queue_seconds: 14.9, top_failure: { reason: 'script_failure', share: 77.2 } }],
   })
@@ -19,10 +20,12 @@ test('normalizeBuilderMetrics keeps rates and process times', () => {
 })
 
 test('normalizeBuilderMetrics rejects payloads without daily platforms', () => {
-  expect(normalizeBuilderMetrics({
-    updated_at: '2026-09-17T12:00:00.000Z',
-    success_rate: 70,
-    failures: [],
-    platforms: [],
-  })).toBeNull()
+  expect(
+    normalizeBuilderMetrics({
+      updated_at: '2026-09-17T12:00:00.000Z',
+      success_rate: 70,
+      failures: [],
+      platforms: [],
+    }),
+  ).toBeNull()
 })

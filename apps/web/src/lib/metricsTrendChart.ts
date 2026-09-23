@@ -9,6 +9,17 @@ export const SPARKLINE_WINDOW_DAYS = 30
 
 export type TrendRangeKey = '1d' | '1w' | '1m' | '3m'
 
+export type TrendPlatformRow = {
+  date: string
+  ios: number | null
+  android: number | null
+}
+
+export type TrendMetricsRows = {
+  daily_platforms: TrendPlatformRow[]
+  hourly_platforms?: TrendPlatformRow[]
+}
+
 export const TREND_RANGE_OPTIONS: Array<{ key: TrendRangeKey; label: string; days: number }> = [
   { key: '1d', label: '1D', days: 1 },
   { key: '1w', label: '1W', days: 7 },
@@ -20,8 +31,15 @@ export function trendRangeDays(key: TrendRangeKey) {
   return TREND_RANGE_OPTIONS.find((option) => option.key === key)?.days ?? 30
 }
 
+export function formatUtcDate(date: Date) {
+  const year = date.getUTCFullYear()
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0')
+  const day = String(date.getUTCDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 export function parseTrendUtcDate(date: string): Date | null {
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date.trim())
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(date.trim())
   if (!match) return null
   return new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])))
 }
@@ -43,16 +61,48 @@ export function sliceTrendRows<T extends { date: string }>(rows: T[], key: Trend
   const end = trendWindowEndUtc(rows, referenceDate)
   const start = new Date(end)
   start.setUTCDate(start.getUTCDate() - (days - 1))
-  return rows.filter((row) => {
+  const filtered = rows.filter((row) => {
     const parsed = parseTrendUtcDate(row.date)
     if (!parsed) return false
     const day = utcDayStart(parsed)
     return day >= start && day <= end
   })
+  if (filtered.length) return filtered
+  return rows.slice(Math.max(0, rows.length - days))
+}
+
+export function sliceHourlyTrendRows<T extends { date: string }>(rows: T[], referenceDate?: Date) {
+  if (!rows.length) return rows
+  const dayKey = formatUtcDate(utcDayStart(referenceDate ?? new Date()))
+  const filtered = rows.filter((row) => row.date.startsWith(dayKey))
+  if (filtered.length) return filtered
+  const lastDay = rows.at(-1)?.date.slice(0, 10)
+  if (!lastDay) return rows
+  return rows.filter((row) => row.date.startsWith(lastDay))
+}
+
+export function selectTrendRows(metrics: TrendMetricsRows, key: TrendRangeKey, referenceDate?: Date) {
+  if (key === '1d') {
+    const hourly = metrics.hourly_platforms ?? []
+    if (hourly.length) return sliceHourlyTrendRows(hourly, referenceDate)
+    const daily = sliceTrendRows(metrics.daily_platforms, '1d', referenceDate)
+    return daily
+  }
+  return sliceTrendRows(metrics.daily_platforms, key, referenceDate)
 }
 
 export function sliceSparklineRows<T extends { date: string }>(rows: T[], referenceDate?: Date) {
   return sliceTrendRows(rows, '1m', referenceDate)
+}
+
+export function formatTrendAxisLabel(date: string, range: TrendRangeKey) {
+  if (!date) return ''
+  if (range === '1d') {
+    const hourMatch = /(?:T| )(\d{2}):00/.exec(date)
+    if (hourMatch) return `${hourMatch[1]}:00`
+    if (/^\d{2}:\d{2}$/.test(date)) return date
+  }
+  return date.slice(0, 10)
 }
 
 export function trendHitLeftPercent(index: number, count: number, width = TREND_CHART.width) {
@@ -74,5 +124,6 @@ export function trendNearestIndex(clientX: number, plotLeft: number, plotWidth: 
 }
 
 export function formatTrendTooltip(date: string, ios: number | null, android: number | null, formatValue: (value: number | null) => string) {
-  return `${date} · iOS ${formatValue(ios)} · Android ${formatValue(android)}`
+  const label = date.length > 10 ? date.replace('T', ' ') : date
+  return `${label} · iOS ${formatValue(ios)} · Android ${formatValue(android)}`
 }

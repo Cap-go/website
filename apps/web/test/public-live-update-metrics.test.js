@@ -7,7 +7,7 @@ function analyticsResponse(data) {
 
 test('buildPublicLiveUpdateQueries stays at one Analytics Engine nest', () => {
   const queries = Object.values(buildPublicLiveUpdateQueries(new Date('2026-09-17T00:00:00.000Z')))
-  expect(queries).toHaveLength(14)
+  expect(queries).toHaveLength(15)
   for (const query of queries) expect(query.split('FROM (').length).toBeLessThanOrEqual(2)
   expect(queries.join('\n')).toContain('GROUP BY date, platform')
   expect(queries.join('\n')).not.toContain('first_day_successes')
@@ -18,6 +18,7 @@ test('buildPublicLiveUpdateQueries keeps KPI windows at 30 days and trend platfo
   const queries = buildPublicLiveUpdateQueries(new Date('2026-09-17T00:00:00.000Z'))
   expect(queries.outcomes).toContain("toDateTime('2026-08-18 00:00:00')")
   expect(queries.platformsDaily).toContain("toDateTime('2026-06-19 00:00:00')")
+  expect(queries.platformsHourly).toContain("INTERVAL '1' HOUR")
 })
 
 test('getPublicLiveUpdateMetrics weights daily rates and skips first-day', async () => {
@@ -43,6 +44,14 @@ test('getPublicLiveUpdateMetrics weights daily rates and skips first-day', async
           { platform: '0', devices: '80' },
           { platform: '1', devices: '20' },
         ])
+      if (query.includes('SELECT date, platform AS key') && query.includes("INTERVAL '1' HOUR")) {
+        return analyticsResponse([
+          { date: '2026-09-17 08:00', key: 'ios', successes: '8', failures: '1' },
+          { date: '2026-09-17 09:00', key: 'ios', successes: '9', failures: '1' },
+          { date: '2026-09-17 08:00', key: 'android', successes: '4', failures: '1' },
+          { date: '2026-09-17 09:00', key: 'android', successes: '5', failures: '1' },
+        ])
+      }
       if (query.includes('SELECT date, platform AS key')) {
         return analyticsResponse([
           { date: '2026-09-15', key: 'ios', successes: '18', failures: '2' },
@@ -63,7 +72,7 @@ test('getPublicLiveUpdateMetrics weights daily rates and skips first-day', async
     },
   })
 
-  expect(queries).toHaveLength(14)
+  expect(queries).toHaveLength(15)
   expect(metrics.success_rate).toBe(73.3)
   expect(metrics.first_try_rate).toBe(82.7)
   expect(metrics.first_day_rate).toBeNull()
@@ -80,5 +89,9 @@ test('getPublicLiveUpdateMetrics weights daily rates and skips first-day', async
     { date: '2026-09-16', ios: 93.3, android: 80 },
   ])
   expect(metrics.daily_platforms_sparkline).toEqual(metrics.daily_platforms)
+  expect(metrics.hourly_platforms).toEqual([
+    { date: '2026-09-17 08:00', ios: 88.9, android: 80 },
+    { date: '2026-09-17 09:00', ios: 90, android: 83.3 },
+  ])
   expect(metrics.period_days).toBe(30)
 })
