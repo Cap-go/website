@@ -253,6 +253,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
               <text data-trend-min x="0" y="236">{formatRate(chartRange.min)}</text>
               <polyline data-trend-line="ios" points={iosChart}></polyline>
               <polyline data-trend-line="android" points={androidChart}></polyline>
+              <g data-trend-markers="ios"></g>
+              <g data-trend-markers="android"></g>
               <text data-trend-start x="44" y="256">{chartRows[0]?.date ?? ''}</text>
               <text data-trend-end x="784" y="256" text-anchor="end">{chartRows.at(-1)?.date ?? ''}</text>
             </svg>
@@ -531,6 +533,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     const trendSvg = page?.querySelector<SVGElement>('[data-trend-svg]')
     const trendIos = page?.querySelector<SVGPolylineElement>('[data-trend-line="ios"]')
     const trendAndroid = page?.querySelector<SVGPolylineElement>('[data-trend-line="android"]')
+    const trendIosMarkers = page?.querySelector<SVGGElement>('[data-trend-markers="ios"]')
+    const trendAndroidMarkers = page?.querySelector<SVGGElement>('[data-trend-markers="android"]')
     const trendStart = page?.querySelector<SVGTextElement>('[data-trend-start]')
     const trendEnd = page?.querySelector<SVGTextElement>('[data-trend-end]')
     const trendMax = page?.querySelector<SVGTextElement>('[data-trend-max]')
@@ -615,6 +619,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
 
     let trendRows: LiveUpdateMetrics['daily_platforms'] = []
     let trendFocusIndex = -1
+    const trendOverlayLabel = 'Install success trend values. Move pointer across the chart or use arrow keys.'
 
     function sparklineRows(metrics: LiveUpdateMetrics) {
       return metrics.daily_platforms_sparkline.length ? metrics.daily_platforms_sparkline : sliceSparklineRows(metrics.daily_platforms)
@@ -622,6 +627,14 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
 
     function clampTrendTooltip(leftPercent: number) {
       return Math.max(8, Math.min(92, leftPercent))
+    }
+
+    function clearTrendSelection() {
+      trendFocusIndex = -1
+      if (trendTooltip) trendTooltip.hidden = true
+      if (trendGuide) trendGuide.hidden = true
+      if (trendStatus) trendStatus.textContent = ''
+      if (trendOverlay) trendOverlay.setAttribute('aria-label', trendOverlayLabel)
     }
 
     function showTrendPoint(index: number) {
@@ -634,14 +647,15 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
         return
       }
       const tooltip = trendTip(row.date, row.ios, row.android)
-      const left = clampTrendTooltip(trendHitLeftPercent(index, trendRows.length))
+      const guideLeft = trendHitLeftPercent(index, trendRows.length)
+      const tooltipLeft = clampTrendTooltip(guideLeft)
       trendFocusIndex = index
       trendTooltip.textContent = tooltip
       trendTooltip.hidden = false
-      trendTooltip.style.left = `${left}%`
+      trendTooltip.style.left = `${tooltipLeft}%`
       if (trendGuide) {
         trendGuide.hidden = false
-        trendGuide.style.left = `${left}%`
+        trendGuide.style.left = `${guideLeft}%`
       }
       if (trendStatus) trendStatus.textContent = tooltip
       trendOverlay.setAttribute('aria-label', tooltip)
@@ -660,7 +674,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
         if (trendTooltip) trendTooltip.hidden = true
         if (trendGuide) trendGuide.hidden = true
         if (trendStatus) trendStatus.textContent = ''
-        trendOverlay.setAttribute('aria-label', 'Install success trend values. Move pointer across the chart or use arrow keys.')
+        trendOverlay.setAttribute('aria-label', trendOverlayLabel)
       })
       trendOverlay.addEventListener('keydown', (event) => {
         if (!trendRows.length) return
@@ -751,6 +765,26 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       }
     }
 
+    function renderTrendMarker(
+      group: SVGGElement | null | undefined,
+      rows: LiveUpdateMetrics['daily_platforms'],
+      key: 'ios' | 'android',
+      scale: { min: number; max: number },
+      show: boolean,
+    ) {
+      if (!group) return
+      group.replaceChildren()
+      if (!show || !rows.length) return
+      const coords = chartPoints(rows, key, scale)
+      if (!coords) return
+      const [cx, cy] = coords.split(',')
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+      circle.setAttribute('cx', cx)
+      circle.setAttribute('cy', cy)
+      circle.setAttribute('r', '5')
+      group.append(circle)
+    }
+
     function renderSpark(target: HTMLElement | null | undefined, rows: LiveUpdateMetrics['daily_platforms'], key: 'ios' | 'android') {
       if (!target) return
       target.replaceChildren()
@@ -767,6 +801,9 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       const scale = chartScale(rows)
       if (trendIos) trendIos.setAttribute('points', chartPoints(rows, 'ios', scale))
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(rows, 'android', scale))
+      const showMarkers = rows.length === 1
+      renderTrendMarker(trendIosMarkers, rows, 'ios', scale, showMarkers)
+      renderTrendMarker(trendAndroidMarkers, rows, 'android', scale, showMarkers)
       if (trendMax) trendMax.textContent = formatRate(scale.max)
       if (trendMid) trendMid.textContent = formatRate(Number(((scale.min + scale.max) / 2).toFixed(1)))
       if (trendMin) trendMin.textContent = formatRate(scale.min)
@@ -782,11 +819,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
         dailyStatus.textContent = rows.length ? `Install success trend updated with ${rows.length} days` : 'Install success trend unavailable'
       }
       trendRows = rows
+      clearTrendSelection()
       if (trendOverlay) trendOverlay.hidden = rows.length === 0
-      if (!rows.length) {
-        if (trendTooltip) trendTooltip.hidden = true
-        if (trendGuide) trendGuide.hidden = true
-      }
     }
 
     function renderPlatformCards(metrics: LiveUpdateMetrics) {
@@ -1353,6 +1387,12 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
   }
   .data-trend-svg polyline[data-trend-line='android'] {
     stroke: #34d399;
+  }
+  .data-trend-svg g[data-trend-markers='ios'] circle {
+    fill: #60a5fa;
+  }
+  .data-trend-svg g[data-trend-markers='android'] circle {
+    fill: #34d399;
   }
   .data-legend {
     display: flex;

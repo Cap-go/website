@@ -244,6 +244,8 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
               <text data-trend-min x="0" y="236">{formatRate(chartRange.min)}</text>
               <polyline data-trend-line="ios" points={iosChart}></polyline>
               <polyline data-trend-line="android" points={androidChart}></polyline>
+              <g data-trend-markers="ios"></g>
+              <g data-trend-markers="android"></g>
               <text data-trend-start x="44" y="256">{chartRows[0]?.date ?? ''}</text>
               <text data-trend-end x="784" y="256" text-anchor="end">{chartRows.at(-1)?.date ?? ''}</text>
             </svg>
@@ -319,6 +321,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     formatTrendTooltip,
     sliceSparklineRows,
     sliceTrendRows,
+    TREND_RANGE_OPTIONS,
     trendHitLeftPercent,
     trendNearestIndex,
     type TrendRangeKey,
@@ -347,6 +350,8 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     const trendSvg = page?.querySelector<SVGElement>('[data-trend-svg]')
     const trendIos = page?.querySelector<SVGPolylineElement>('[data-trend-line="ios"]')
     const trendAndroid = page?.querySelector<SVGPolylineElement>('[data-trend-line="android"]')
+    const trendIosMarkers = page?.querySelector<SVGGElement>('[data-trend-markers="ios"]')
+    const trendAndroidMarkers = page?.querySelector<SVGGElement>('[data-trend-markers="android"]')
     const trendStart = page?.querySelector<SVGTextElement>('[data-trend-start]')
     const trendEnd = page?.querySelector<SVGTextElement>('[data-trend-end]')
     const trendMax = page?.querySelector<SVGTextElement>('[data-trend-max]')
@@ -401,9 +406,26 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
 
     let trendRows: BuilderMetrics['daily_platforms'] = []
     let trendFocusIndex = -1
+    const trendOverlayLabel = 'Builder success trend values. Move pointer across the chart or use arrow keys.'
 
     function clampTrendTooltip(leftPercent: number) {
       return Math.max(8, Math.min(92, leftPercent))
+    }
+
+    function trendStatusAnnounce(rows: BuilderMetrics['daily_platforms']) {
+      const metricLabel = metric === 'rate' ? 'Build success' : 'Processing time'
+      const rangeLabel = TREND_RANGE_OPTIONS.find((option) => option.key === trendRange)?.label ?? trendRange
+      if (!rows.length) return 'Builder trend unavailable'
+      const dates = rows.length === 1 ? rows[0].date : `${rows[0]?.date} to ${rows.at(-1)?.date}`
+      return `${metricLabel} trend updated for ${rangeLabel}: ${rows.length} day${rows.length === 1 ? '' : 's'} (${dates})`
+    }
+
+    function clearTrendSelection(announce = '') {
+      trendFocusIndex = -1
+      if (trendTooltip) trendTooltip.hidden = true
+      if (trendGuide) trendGuide.hidden = true
+      if (trendStatus) trendStatus.textContent = announce
+      if (trendOverlay) trendOverlay.setAttribute('aria-label', trendOverlayLabel)
     }
 
     function showTrendPoint(index: number) {
@@ -418,14 +440,15 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       const iosValue = metric === 'rate' ? row.ios : row.ios_process_seconds
       const androidValue = metric === 'rate' ? row.android : row.android_process_seconds
       const tooltip = trendTip(row.date, iosValue, androidValue)
-      const left = clampTrendTooltip(trendHitLeftPercent(index, trendRows.length))
+      const guideLeft = trendHitLeftPercent(index, trendRows.length)
+      const tooltipLeft = clampTrendTooltip(guideLeft)
       trendFocusIndex = index
       trendTooltip.textContent = tooltip
       trendTooltip.hidden = false
-      trendTooltip.style.left = `${left}%`
+      trendTooltip.style.left = `${tooltipLeft}%`
       if (trendGuide) {
         trendGuide.hidden = false
-        trendGuide.style.left = `${left}%`
+        trendGuide.style.left = `${guideLeft}%`
       }
       if (trendStatus) trendStatus.textContent = tooltip
       trendOverlay.setAttribute('aria-label', tooltip)
@@ -444,7 +467,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         if (trendTooltip) trendTooltip.hidden = true
         if (trendGuide) trendGuide.hidden = true
         if (trendStatus) trendStatus.textContent = ''
-        trendOverlay.setAttribute('aria-label', 'Builder success trend values. Move pointer across the chart or use arrow keys.')
+        trendOverlay.setAttribute('aria-label', trendOverlayLabel)
       })
       trendOverlay.addEventListener('keydown', (event) => {
         if (!trendRows.length) return
@@ -510,6 +533,25 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       return metric === 'rate' ? formatRate(value) : formatDuration(value)
     }
 
+    function renderTrendMarker(
+      group: SVGGElement | null | undefined,
+      value: number | null,
+      scale: { min: number; max: number },
+      show: boolean,
+    ) {
+      if (!group) return
+      group.replaceChildren()
+      if (!show || value === null) return
+      const coords = chartPoints([value], scale)
+      if (!coords) return
+      const [cx, cy] = coords.split(',')
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+      circle.setAttribute('cx', cx)
+      circle.setAttribute('cy', cy)
+      circle.setAttribute('r', '5')
+      group.append(circle)
+    }
+
     function renderSpark(target: HTMLElement | null | undefined, rows: BuilderMetrics['daily_platforms'], key: 'ios' | 'android') {
       if (!target) return
       target.replaceChildren()
@@ -536,17 +578,17 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (dailySkeleton) dailySkeleton.hidden = rows.length > 0
       if (trendIos) trendIos.setAttribute('points', chartPoints(iosValues, scale))
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(androidValues, scale))
+      const showMarkers = rows.length === 1
+      renderTrendMarker(trendIosMarkers, iosValues[0] ?? null, scale, showMarkers)
+      renderTrendMarker(trendAndroidMarkers, androidValues[0] ?? null, scale, showMarkers)
       if (trendMax) trendMax.textContent = formatTick(scale.max)
       if (trendMid) trendMid.textContent = formatTick(mid)
       if (trendMin) trendMin.textContent = formatTick(scale.min)
       if (trendStart) trendStart.textContent = rows[0]?.date ?? ''
       if (trendEnd) trendEnd.textContent = rows.at(-1)?.date ?? ''
       trendRows = rows
+      clearTrendSelection(trendStatusAnnounce(rows))
       if (trendOverlay) trendOverlay.hidden = rows.length === 0
-      if (!rows.length) {
-        if (trendTooltip) trendTooltip.hidden = true
-        if (trendGuide) trendGuide.hidden = true
-      }
     }
 
     function renderFailures(metrics: BuilderMetrics) {
@@ -1082,6 +1124,12 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
   }
   .data-trend-svg polyline[data-trend-line='android'] {
     stroke: #34d399;
+  }
+  .data-trend-svg g[data-trend-markers='ios'] circle {
+    fill: #60a5fa;
+  }
+  .data-trend-svg g[data-trend-markers='android'] circle {
+    fill: #34d399;
   }
   .data-legend {
     display: flex;
