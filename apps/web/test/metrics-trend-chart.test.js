@@ -24,10 +24,11 @@ test('sliceTrendRows falls back to trailing rows when date filter is empty', () 
     return { date, value: index }
   })
 
-  const threeMonth = sliceTrendRows(rows, '3m', new Date('2026-08-30T00:00:00.000Z'))
-  const oneMonth = sliceTrendRows(rows, '1m', new Date('2026-08-30T00:00:00.000Z'))
-  expect(threeMonth.length).toBeGreaterThan(oneMonth.length)
-  expect(oneMonth.length).toBeGreaterThan(20)
+  const lateRef = new Date('2026-01-01T00:00:00.000Z')
+  const threeMonth = sliceTrendRows(rows, '3m', lateRef)
+  const oneMonth = sliceTrendRows(rows, '1m', lateRef)
+  expect(threeMonth).toEqual(rows.slice(-90))
+  expect(oneMonth).toEqual(rows.slice(-30))
 })
 
 test('sliceHourlyTrendRows keeps the current UTC day', () => {

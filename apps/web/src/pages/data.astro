@@ -224,7 +224,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
             <p class="data-eyebrow">Trend</p>
             <h2 id="trend-title">Install success over time</h2>
           </div>
-          <p>Daily success for iOS and Android. Use 1D, 1W, 1M, or 3M to change the chart window. This chart is not a live feed.</p>
+          <p>Hourly or daily iOS and Android success, depending on the selected window. Use 1D, 1W, 1M, or 3M to change the chart range. This chart is not a live feed.</p>
         </div>
         <p class="data-sr-only" data-daily-status aria-live="polite"></p>
         <p class="data-sr-only" data-trend-status aria-live="polite"></p>
@@ -807,7 +807,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     }
 
     function renderTrend(metrics: LiveUpdateMetrics) {
-      const rows = selectTrendRows(metrics, trendRange, trendReferenceDate(metrics))
+      const rows = selectTrendRows(metrics, trendRange, trendRange === '1d' ? trendReferenceDate(metrics) : undefined)
       const scale = chartScale(rows)
       if (trendIos) trendIos.setAttribute('points', chartPoints(rows, 'ios', scale))
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(rows, 'android', scale))
@@ -827,7 +827,10 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
         dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
       }
       if (dailyStatus) {
-        dailyStatus.textContent = rows.length ? `Install success trend updated with ${rows.length} days` : 'Install success trend unavailable'
+        const unit = trendRange === '1d' ? 'hour' : 'day'
+        dailyStatus.textContent = rows.length
+          ? `Install success trend updated with ${rows.length} ${unit}${rows.length === 1 ? '' : 's'}`
+          : 'Install success trend unavailable'
       }
       trendRows = rows
       clearTrendSelection()

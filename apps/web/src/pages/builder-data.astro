@@ -209,7 +209,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
             <p class="data-eyebrow">Trend</p>
             <h2 id="trend-title">Builder success over time</h2>
           </div>
-          <p>Daily iOS and Android rates, plus average processing time. Use 1D, 1W, 1M, or 3M to change the chart window. This chart is not a live feed.</p>
+          <p>Hourly or daily iOS and Android rates, plus average processing time, depending on the selected window. Use 1D, 1W, 1M, or 3M to change the chart range. This chart is not a live feed.</p>
         </div>
         <p class="data-sr-only" data-trend-status aria-live="polite"></p>
         <div class="data-trend" data-trend>
@@ -418,8 +418,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       const metricLabel = metric === 'rate' ? 'Build success' : 'Processing time'
       const rangeLabel = TREND_RANGE_OPTIONS.find((option) => option.key === trendRange)?.label ?? trendRange
       if (!rows.length) return 'Builder trend unavailable'
+      const unit = trendRange === '1d' ? 'hour' : 'day'
       const dates = rows.length === 1 ? rows[0].date : `${rows[0]?.date} to ${rows.at(-1)?.date}`
-      return `${metricLabel} trend updated for ${rangeLabel}: ${rows.length} day${rows.length === 1 ? '' : 's'} (${dates})`
+      return `${metricLabel} trend updated for ${rangeLabel}: ${rows.length} ${unit}${rows.length === 1 ? '' : 's'} (${dates})`
     }
 
     function clearTrendSelection(announce = '') {
@@ -567,7 +568,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     }
 
     function renderTrend(metrics: BuilderMetrics) {
-      const rows = selectTrendRows(metrics, trendRange, trendReferenceDate(metrics))
+      const rows = selectTrendRows(metrics, trendRange, trendRange === '1d' ? trendReferenceDate(metrics) : undefined)
       const iosValues = rows.map((row) => (metric === 'rate' ? row.ios : row.ios_process_seconds))
       const androidValues = rows.map((row) => (metric === 'rate' ? row.android : row.android_process_seconds))
       const values = [...iosValues, ...androidValues].filter((value): value is number => value !== null)
