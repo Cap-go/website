@@ -1,12 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
-import { jsonForInlineScript, resolveLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
+import { emptyLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
-const metrics = await resolveLiveUpdateMetrics()
+const metrics = emptyLiveUpdateMetrics()
 const title = 'Capgo Live Update status | Delivery trends'
 const description =
   'Global Live Update success trends for iOS and Android. Rates use the last 30 days of app, device, and UTC-day outcomes — not live queue counts and not realtime.'
@@ -118,9 +118,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
 ---
 
 <Layout content={content}>
-  {/* Keep bootstrap metrics out of attributes so the edge translator cannot mangle JSON / inflate SSR tables. */}
-  <script type="application/json" id="capgo-live-update-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
-  <main class="data-page" data-metrics-endpoint={LIVE_UPDATE_METRICS_PATH} aria-busy={pending ? 'true' : 'false'}>
+  <main class="data-page" data-metrics-endpoint={LIVE_UPDATE_METRICS_PATH} aria-busy="true">
     <section class="data-hero">
       <div class="data-shell">
         <div class="data-title-row">
@@ -828,29 +826,6 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       }
     }
 
-    function readBootstrapMetrics(): LiveUpdateMetrics | null {
-      try {
-        const raw = document.getElementById('capgo-live-update-metrics-bootstrap')?.textContent?.trim()
-        if (!raw) return null
-        return normalizeLiveUpdateMetrics(JSON.parse(raw))
-      } catch {
-        return null
-      }
-    }
-
-    function metricsUpdatedAtMs(metrics: LiveUpdateMetrics | null | undefined) {
-      if (!metrics?.updated_at) return 0
-      const ts = Date.parse(metrics.updated_at)
-      return Number.isNaN(ts) ? 0 : ts
-    }
-
-    function pickInitialMetrics(cached: LiveUpdateMetrics | null | undefined, bootstrap: LiveUpdateMetrics | null) {
-      if (cached && bootstrap) {
-        return metricsUpdatedAtMs(cached) >= metricsUpdatedAtMs(bootstrap) ? cached : bootstrap
-      }
-      return cached ?? bootstrap ?? null
-    }
-
     async function fetchMetrics() {
       if (!endpoint) throw new Error('Missing metrics endpoint')
       const controller = new AbortController()
@@ -872,9 +847,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     }
 
     async function loadMetrics() {
-      const bootstrap = readBootstrapMetrics()
       const cached = readCachedMetrics()
-      const initial = pickInitialMetrics(cached?.metrics, bootstrap)
+      const initial = cached?.metrics
 
       if (initial) {
         renderMetrics(initial)

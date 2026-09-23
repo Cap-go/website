@@ -127,8 +127,6 @@ jobs:
         run: |
           GITHUB_STATS_REFRESH=true bun run fetch:stars
           WEBSITE_STATS_REFRESH=true bun run fetch:website-stats
-          LIVE_UPDATE_METRICS_REFRESH=true bun run fetch:live-update-metrics
-          BUILDER_METRICS_REFRESH=true bun run fetch:builder-metrics
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}

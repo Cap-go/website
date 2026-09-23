@@ -1,13 +1,13 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
-import { jsonForInlineScript, resolveBuilderMetrics } from '@/lib/builderMetrics'
+import { emptyBuilderMetrics } from '@/lib/builderMetrics'
 import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
-const metrics = await resolveBuilderMetrics()
+const metrics = emptyBuilderMetrics()
 const title = 'Capgo Native Build data | Builder trends'
 const description =
   'Global native iOS and Android build success, processing time, and failure mix for the last 30 days. Rates and minutes only — not queue counts and not realtime.'
@@ -104,8 +104,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
 ---
 
 <Layout content={content}>
-  <script type="application/json" id="capgo-builder-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
-  <main class="data-page" data-metrics-endpoint={BUILDER_METRICS_PATH} aria-busy={pending ? 'true' : 'false'}>
+  <main class="data-page" data-metrics-endpoint={BUILDER_METRICS_PATH} aria-busy="true">
     <section class="data-hero">
       <div class="data-shell">
         <div class="data-title-row">
@@ -554,33 +553,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       }
     }
 
-    function readBootstrapMetrics(): BuilderMetrics | null {
-      try {
-        const raw = document.getElementById('capgo-builder-metrics-bootstrap')?.textContent?.trim()
-        if (!raw) return null
-        return normalizeBuilderMetrics(JSON.parse(raw))
-      } catch {
-        return null
-      }
-    }
-
-    function metricsUpdatedAtMs(metrics: BuilderMetrics | null | undefined) {
-      if (!metrics?.updated_at) return 0
-      const ts = Date.parse(metrics.updated_at)
-      return Number.isNaN(ts) ? 0 : ts
-    }
-
-    function pickInitialMetrics(cached: BuilderMetrics | null | undefined, bootstrap: BuilderMetrics | null) {
-      if (cached && bootstrap) {
-        return metricsUpdatedAtMs(cached) >= metricsUpdatedAtMs(bootstrap) ? cached : bootstrap
-      }
-      return cached ?? bootstrap ?? null
-    }
-
     async function loadMetrics() {
-      const bootstrap = readBootstrapMetrics()
       const cached = readCachedMetrics()
-      const initial = pickInitialMetrics(cached?.metrics, bootstrap)
+      const initial = cached?.metrics
 
       if (initial) {
         renderMetrics(initial)
