@@ -35,13 +35,13 @@ export function buildMtaStsPolicy(domain: keyof typeof MTA_STS_POLICY_ID): strin
 }
 
 export function isMtaStsHost(hostname: string): boolean {
-  return hostname in MTA_STS_HOST_TO_DOMAIN
+  return Object.hasOwn(MTA_STS_HOST_TO_DOMAIN, hostname)
 }
 
 export function handleMtaStsRequest(request: Request): Response | null {
   const url = new URL(request.url)
+  if (!Object.hasOwn(MTA_STS_HOST_TO_DOMAIN, url.hostname)) return null
   const domain = MTA_STS_HOST_TO_DOMAIN[url.hostname]
-  if (!domain) return null
 
   if (url.pathname !== MTA_STS_PATH) {
     return new Response('Not Found', {

@@ -50,6 +50,11 @@ test('isMtaStsHost recognizes configured hosts', () => {
   expect(isMtaStsHost('capgo.app')).toBe(false)
 })
 
+test('isMtaStsHost rejects inherited object property names', () => {
+  expect(isMtaStsHost('constructor')).toBe(false)
+  expect(handleMtaStsRequest(new Request('https://constructor/.well-known/mta-sts.txt'))).toBeNull()
+})
+
 test('mtaStsPolicyId returns stable ids for DNS TXT records', () => {
   expect(mtaStsPolicyId('capgo.app')).toBe('capgo-app-gws-20260923')
   expect(mtaStsPolicyId('usecapgo.com')).toBe('usecapgo-com-cf-20260923')
