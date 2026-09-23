@@ -164,7 +164,7 @@ const supportContext = __translationWorkerTest.resolveTranslationContexts(['Supp
 assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('word-count-retry-v1'), 'Cache version was not bumped for word count retry support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('ssr-metrics-bootstrap-v1'), 'Cache version was not bumped for SSR metrics bootstrap support')
 
 assert(__translationWorkerTest.translationWordCount('Ship mobile updates instantly') === 4, 'Word count did not count a short English headline')
 assert(__translationWorkerTest.translationWordCount('Évitez l\u2019attente de l\u2019App Store.') === 5, 'Word count did not count elided French words')
