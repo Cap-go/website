@@ -1,0 +1,59 @@
+/* Mobile-only spacing for metrics trend charts (data + builder-data). */
+@media (max-width: 720px) {
+  .data-trend {
+    padding: 16px 14px 14px;
+  }
+
+  .data-trend-head {
+    margin-bottom: 18px;
+    gap: 12px;
+  }
+
+  .data-trend-controls {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .data-trend-plot {
+    margin-top: 2px;
+    overflow: visible;
+  }
+
+  .data-periods button {
+    min-width: 48px;
+    padding: 7px 10px;
+  }
+
+  .data-trend-svg {
+    overflow: visible;
+  }
+
+  .data-trend-svg [data-trend-max],
+  .data-trend-svg [data-trend-mid],
+  .data-trend-svg [data-trend-min] {
+    font-size: 9px;
+    text-anchor: end;
+  }
+
+  .data-trend-svg [data-trend-max] {
+    transform: translate(40px, -5px);
+  }
+
+  .data-trend-svg [data-trend-mid] {
+    transform: translate(40px, 0);
+  }
+
+  .data-trend-svg [data-trend-min] {
+    transform: translate(40px, 5px);
+  }
+
+  .data-trend-svg [data-trend-start],
+  .data-trend-svg [data-trend-end] {
+    font-size: 9px;
+    transform: translateY(8px);
+  }
+
+  .data-legend {
+    padding-top: 12px;
+  }
+}

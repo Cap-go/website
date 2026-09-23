@@ -192,7 +192,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
               <div>
                 <p>Failure</p>
                 <strong data-kpi="android-failure" data-tone="poor" translate="no">{formatRate(failureRate(android.success_rate))}</strong>
-                <small data-top-failure="android">{pending ? 'Loading…' : android.top_failure ? getBuilderFailureInfo(android.top_failure.reason).label : 'No leading failure'}</small>
+                <small data-top-failure="android"
+                  >{pending ? 'Loading…' : android.top_failure ? getBuilderFailureInfo(android.top_failure.reason).label : 'No leading failure'}</small
+                >
               </div>
             </div>
             <div class="data-spark" data-spark="android" role="img" aria-label="Android daily success"></div>
@@ -317,15 +319,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
 <script>
   import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
   import { normalizeBuilderMetrics, type BuilderMetrics } from '@/lib/builderMetrics'
-  import {
-    formatTrendTooltip,
-    sliceSparklineRows,
-    sliceTrendRows,
-    TREND_RANGE_OPTIONS,
-    trendHitLeftPercent,
-    trendNearestIndex,
-    type TrendRangeKey,
-  } from '@/lib/metricsTrendChart'
+  import { formatTrendTooltip, sliceSparklineRows, sliceTrendRows, TREND_RANGE_OPTIONS, trendHitLeftPercent, trendNearestIndex, type TrendRangeKey } from '@/lib/metricsTrendChart'
 
   function boot() {
     const page = document.querySelector<HTMLElement>('.data-page')
@@ -533,13 +527,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       return metric === 'rate' ? formatRate(value) : formatDuration(value)
     }
 
-    function renderTrendMarker(
-      group: SVGGElement | null | undefined,
-      values: Array<number | null>,
-      scale: { min: number; max: number },
-      show: boolean,
-      fill: string,
-    ) {
+    function renderTrendMarker(group: SVGGElement | null | undefined, values: Array<number | null>, scale: { min: number; max: number }, show: boolean, fill: string) {
       if (!group) return
       group.replaceChildren()
       if (!show) return
@@ -1325,4 +1313,8 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       font-size: 0.8rem;
     }
   }
+</style>
+
+<style is:global>
+  @import '@/styles/metrics-trend-mobile.css';
 </style>

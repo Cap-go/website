@@ -201,7 +201,9 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
               <div>
                 <p>Failure</p>
                 <strong data-kpi="android-failure" data-tone="poor" translate="no">{formatRate(failureRate(android.success_rate))}</strong>
-                <small data-top-failure="android">{pending ? 'Loading…' : android.top_failure ? `${getFailureReasonInfo(android.top_failure.reason).label}` : 'No leading failure'}</small>
+                <small data-top-failure="android"
+                  >{pending ? 'Loading…' : android.top_failure ? `${getFailureReasonInfo(android.top_failure.reason).label}` : 'No leading failure'}</small
+                >
               </div>
             </div>
             <div class="data-spark" data-spark="android" role="img" aria-label="Android daily success">
@@ -501,14 +503,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
 <script>
   import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
   import { normalizeLiveUpdateMetrics, type LiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
-  import {
-    formatTrendTooltip,
-    sliceSparklineRows,
-    sliceTrendRows,
-    trendHitLeftPercent,
-    trendNearestIndex,
-    type TrendRangeKey,
-  } from '@/lib/metricsTrendChart'
+  import { formatTrendTooltip, sliceSparklineRows, sliceTrendRows, trendHitLeftPercent, trendNearestIndex, type TrendRangeKey } from '@/lib/metricsTrendChart'
 
   function boot() {
     const page = document.querySelector<HTMLElement>('.data-page')
@@ -1889,4 +1884,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
   .data-table td[data-tone='poor'] {
     color: #f0a0a0;
   }
+</style>
+
+<style is:global>
+  @import '@/styles/metrics-trend-mobile.css';
 </style>
