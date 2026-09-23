@@ -535,14 +535,14 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
 
     function renderTrendMarker(
       group: SVGGElement | null | undefined,
-      value: number | null,
+      values: Array<number | null>,
       scale: { min: number; max: number },
       show: boolean,
     ) {
       if (!group) return
       group.replaceChildren()
-      if (!show || value === null) return
-      const coords = chartPoints([value], scale)
+      if (!show) return
+      const coords = chartPoints(values, scale)
       if (!coords) return
       const [cx, cy] = coords.split(',')
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
@@ -578,9 +578,10 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (dailySkeleton) dailySkeleton.hidden = rows.length > 0
       if (trendIos) trendIos.setAttribute('points', chartPoints(iosValues, scale))
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(androidValues, scale))
-      const showMarkers = rows.length === 1
-      renderTrendMarker(trendIosMarkers, iosValues[0] ?? null, scale, showMarkers)
-      renderTrendMarker(trendAndroidMarkers, androidValues[0] ?? null, scale, showMarkers)
+      const showIosMarker = iosValues.filter((value): value is number => value !== null).length === 1
+      const showAndroidMarker = androidValues.filter((value): value is number => value !== null).length === 1
+      renderTrendMarker(trendIosMarkers, iosValues, scale, showIosMarker)
+      renderTrendMarker(trendAndroidMarkers, androidValues, scale, showAndroidMarker)
       if (trendMax) trendMax.textContent = formatTick(scale.max)
       if (trendMid) trendMid.textContent = formatTick(mid)
       if (trendMin) trendMin.textContent = formatTick(scale.min)
@@ -1125,10 +1126,10 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
   .data-trend-svg polyline[data-trend-line='android'] {
     stroke: #34d399;
   }
-  .data-trend-svg g[data-trend-markers='ios'] circle {
+  .data-trend-svg g[data-trend-markers='ios'] :global(circle) {
     fill: #60a5fa;
   }
-  .data-trend-svg g[data-trend-markers='android'] circle {
+  .data-trend-svg g[data-trend-markers='android'] :global(circle) {
     fill: #34d399;
   }
   .data-legend {

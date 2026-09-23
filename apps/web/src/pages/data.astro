@@ -801,9 +801,10 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       const scale = chartScale(rows)
       if (trendIos) trendIos.setAttribute('points', chartPoints(rows, 'ios', scale))
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(rows, 'android', scale))
-      const showMarkers = rows.length === 1
-      renderTrendMarker(trendIosMarkers, rows, 'ios', scale, showMarkers)
-      renderTrendMarker(trendAndroidMarkers, rows, 'android', scale, showMarkers)
+      const showIosMarker = rows.filter((row) => row.ios !== null).length === 1
+      const showAndroidMarker = rows.filter((row) => row.android !== null).length === 1
+      renderTrendMarker(trendIosMarkers, rows, 'ios', scale, showIosMarker)
+      renderTrendMarker(trendAndroidMarkers, rows, 'android', scale, showAndroidMarker)
       if (trendMax) trendMax.textContent = formatRate(scale.max)
       if (trendMid) trendMid.textContent = formatRate(Number(((scale.min + scale.max) / 2).toFixed(1)))
       if (trendMin) trendMin.textContent = formatRate(scale.min)
@@ -1388,10 +1389,10 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
   .data-trend-svg polyline[data-trend-line='android'] {
     stroke: #34d399;
   }
-  .data-trend-svg g[data-trend-markers='ios'] circle {
+  .data-trend-svg g[data-trend-markers='ios'] :global(circle) {
     fill: #60a5fa;
   }
-  .data-trend-svg g[data-trend-markers='android'] circle {
+  .data-trend-svg g[data-trend-markers='android'] :global(circle) {
     fill: #34d399;
   }
   .data-legend {
