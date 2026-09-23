@@ -1,12 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
-import { jsonForInlineScript, resolveLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
+import { emptyLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
-const metrics = await resolveLiveUpdateMetrics()
+const metrics = emptyLiveUpdateMetrics()
 const title = 'Capgo Live Update status | Delivery trends'
 const description =
   'Global Live Update success trends for iOS and Android. Rates use the last 30 days of app, device, and UTC-day outcomes — not live queue counts and not realtime.'
@@ -29,9 +29,11 @@ const updatedLabel = pending
 
 const topFailure = metrics.failures[0]
 const topFailureInfo = topFailure ? getFailureReasonInfo(topFailure.reason) : null
-const topFailureLead = topFailureInfo
-  ? `${topFailureInfo.label} accounts for ${Math.ceil(topFailure.share)}% of failures in this window.`
-  : 'Normalized categories across all apps.'
+const topFailureLead = pending
+  ? 'Loading failure mix…'
+  : topFailureInfo
+    ? `${topFailureInfo.label} accounts for ${Math.ceil(topFailure.share)}% of failures in this window.`
+    : 'Normalized categories across all apps.'
 
 const countryNames = typeof Intl !== 'undefined' && 'DisplayNames' in Intl ? new Intl.DisplayNames(['en'], { type: 'region' }) : null
 
@@ -118,14 +120,12 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
 ---
 
 <Layout content={content}>
-  {/* Keep bootstrap metrics out of attributes so the edge translator cannot mangle JSON / inflate SSR tables. */}
-  <script type="application/json" id="capgo-live-update-metrics-bootstrap" is:inline set:html={jsonForInlineScript(metrics)} />
-  <main class="data-page" data-metrics-endpoint={LIVE_UPDATE_METRICS_PATH} aria-busy={pending ? 'true' : 'false'}>
+  <main class="data-page" data-metrics-endpoint={LIVE_UPDATE_METRICS_PATH} aria-busy="true">
     <section class="data-hero">
       <div class="data-shell">
         <div class="data-title-row">
           <h1>Live Updates</h1>
-          <p class="data-badge" data-status-badge><span aria-hidden="true"></span> Operational</p>
+          <p class="data-badge" data-status-badge data-tone={pending ? 'loading' : 'operational'}><span aria-hidden="true"></span> {pending ? 'Loading' : 'Operational'}</p>
         </div>
         <p class="data-summary">
           Global install success for the last 30 days. Each rate is one app, device, and UTC day — not a live queue, and not a build count.
@@ -166,7 +166,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
               <div>
                 <p>Failure</p>
                 <strong data-kpi="ios-failure" data-tone="poor" translate="no">{formatRate(failureRate(ios.success_rate))}</strong>
-                <small data-top-failure="ios">{ios.top_failure ? `${getFailureReasonInfo(ios.top_failure.reason).label}` : 'No leading failure'}</small>
+                <small data-top-failure="ios">{pending ? 'Loading…' : ios.top_failure ? `${getFailureReasonInfo(ios.top_failure.reason).label}` : 'No leading failure'}</small>
               </div>
             </div>
             <div class="data-spark" data-spark="ios" role="img" aria-label="iOS daily success">
@@ -189,7 +189,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
               <div>
                 <p>Failure</p>
                 <strong data-kpi="android-failure" data-tone="poor" translate="no">{formatRate(failureRate(android.success_rate))}</strong>
-                <small data-top-failure="android">{android.top_failure ? `${getFailureReasonInfo(android.top_failure.reason).label}` : 'No leading failure'}</small>
+                <small data-top-failure="android">{pending ? 'Loading…' : android.top_failure ? `${getFailureReasonInfo(android.top_failure.reason).label}` : 'No leading failure'}</small>
               </div>
             </div>
             <div class="data-spark" data-spark="android" role="img" aria-label="Android daily success">
@@ -199,8 +199,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
             </div>
           </article>
         </div>
-        <p class="data-empty" data-platforms-empty aria-live="polite" hidden={metrics.platforms.some((item) => item.key === 'ios' || item.key === 'android')}>
-          {metrics.platforms.length ? '' : 'Platform breakdown is temporarily unavailable.'}
+        <p class="data-empty" data-platforms-empty aria-live="polite" hidden={!pending && metrics.platforms.some((item) => item.key === 'ios' || item.key === 'android')}>
+          {pending ? 'Loading platform breakdown…' : metrics.platforms.length ? '' : 'Platform breakdown is temporarily unavailable.'}
         </p>
       </div>
     </section>
@@ -245,7 +245,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
             <span data-legend="android">Android</span>
           </div>
         </div>
-        <p class="data-empty" data-daily-empty aria-live="polite" hidden={chartRows.length > 0}></p>
+        <p class="data-empty" data-daily-empty aria-live="polite" hidden={!pending && chartRows.length > 0}>{pending ? 'Loading install success trend…' : ''}</p>
       </div>
     </section>
 
@@ -330,8 +330,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
             </tbody>
           </table>
         </div>
-        <p class="data-empty" data-countries-empty aria-live="polite" hidden={metrics.countries.length > 0}>
-          {metrics.countries.length ? '' : 'Country breakdown is temporarily unavailable.'}
+        <p class="data-empty" data-countries-empty aria-live="polite" hidden={!pending && metrics.countries.length > 0}>
+          {pending ? 'Loading country breakdown…' : metrics.countries.length ? '' : 'Country breakdown is temporarily unavailable.'}
         </p>
       </div>
     </section>
@@ -374,8 +374,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
             </tbody>
           </table>
         </div>
-        <p class="data-empty" data-share-empty aria-live="polite" hidden={metrics.platforms.length > 0}>
-          {metrics.platforms.length ? '' : 'Platform breakdown is temporarily unavailable.'}
+        <p class="data-empty" data-share-empty aria-live="polite" hidden={!pending && metrics.platforms.length > 0}>
+          {pending ? 'Loading platform breakdown…' : metrics.platforms.length ? '' : 'Platform breakdown is temporarily unavailable.'}
         </p>
       </div>
     </section>
@@ -460,8 +460,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
             </tbody>
           </table>
         </div>
-        <p class="data-empty" data-version-empty aria-live="polite" hidden={metrics.updater_versions.length > 0}>
-          {metrics.updater_versions.length ? '' : 'Updater breakdown is temporarily unavailable.'}
+        <p class="data-empty" data-version-empty aria-live="polite" hidden={!pending && metrics.updater_versions.length > 0}>
+          {pending ? 'Loading updater breakdown…' : metrics.updater_versions.length ? '' : 'Updater breakdown is temporarily unavailable.'}
         </p>
       </div>
     </section>
@@ -747,7 +747,10 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
         packagesStatus.textContent = `Zip success ${formatRate(metrics.zip_success_rate)}, delta success ${formatRate(metrics.delta_success_rate)}`
       }
       if (kpiStatus) kpiStatus.textContent = `Success rate updated to ${formatRate(metrics.success_rate)}`
-      if (statusBadge) statusBadge.lastChild && (statusBadge.lastChild.textContent = ' Operational')
+      if (statusBadge) {
+        statusBadge.dataset.tone = 'operational'
+        if (statusBadge.lastChild) statusBadge.lastChild.textContent = ' Operational'
+      }
       renderPlatformCards(metrics)
       renderTrend(metrics)
       renderFailures(metrics)
@@ -765,7 +768,10 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     function renderUnavailable() {
       latestMetrics = null
       if (updated) updated.textContent = 'Delivery data is temporarily unavailable. Check back shortly.'
-      if (statusBadge) statusBadge.lastChild && (statusBadge.lastChild.textContent = ' Unavailable')
+      if (statusBadge) {
+        statusBadge.dataset.tone = 'unavailable'
+        if (statusBadge.lastChild) statusBadge.lastChild.textContent = ' Unavailable'
+      }
       if (trendSvg) trendSvg.style.display = 'none'
       if (dailySkeleton) dailySkeleton.hidden = true
       if (dailyEmpty) {
@@ -828,29 +834,6 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       }
     }
 
-    function readBootstrapMetrics(): LiveUpdateMetrics | null {
-      try {
-        const raw = document.getElementById('capgo-live-update-metrics-bootstrap')?.textContent?.trim()
-        if (!raw) return null
-        return normalizeLiveUpdateMetrics(JSON.parse(raw))
-      } catch {
-        return null
-      }
-    }
-
-    function metricsUpdatedAtMs(metrics: LiveUpdateMetrics | null | undefined) {
-      if (!metrics?.updated_at) return 0
-      const ts = Date.parse(metrics.updated_at)
-      return Number.isNaN(ts) ? 0 : ts
-    }
-
-    function pickInitialMetrics(cached: LiveUpdateMetrics | null | undefined, bootstrap: LiveUpdateMetrics | null) {
-      if (cached && bootstrap) {
-        return metricsUpdatedAtMs(cached) >= metricsUpdatedAtMs(bootstrap) ? cached : bootstrap
-      }
-      return cached ?? bootstrap ?? null
-    }
-
     async function fetchMetrics() {
       if (!endpoint) throw new Error('Missing metrics endpoint')
       const controller = new AbortController()
@@ -872,9 +855,8 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     }
 
     async function loadMetrics() {
-      const bootstrap = readBootstrapMetrics()
       const cached = readCachedMetrics()
-      const initial = pickInitialMetrics(cached?.metrics, bootstrap)
+      const initial = cached?.metrics
 
       if (initial) {
         renderMetrics(initial)
@@ -1021,6 +1003,24 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     border-radius: 999px;
     background: #34d399;
     box-shadow: 0 0 0 4px rgb(52 211 153 / 12%);
+  }
+  .data-badge[data-tone='loading'] {
+    border-color: rgb(147 197 253 / 28%);
+    background: rgb(147 197 253 / 8%);
+    color: #93c5fd;
+  }
+  .data-badge[data-tone='loading'] span {
+    background: #60a5fa;
+    box-shadow: 0 0 0 4px rgb(96 165 250 / 12%);
+  }
+  .data-badge[data-tone='unavailable'] {
+    border-color: rgb(248 113 113 / 28%);
+    background: rgb(248 113 113 / 8%);
+    color: #fca5a5;
+  }
+  .data-badge[data-tone='unavailable'] span {
+    background: #f87171;
+    box-shadow: 0 0 0 4px rgb(248 113 113 / 12%);
   }
   .data-cards {
     display: grid;

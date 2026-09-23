@@ -1,7 +1,4 @@
-import cachedMetrics from '@/data/live-update-metrics.json'
 import { LIVE_UPDATE_METRICS_PATH } from './publicLiveUpdateMetrics'
-
-const FALLBACK = cachedMetrics as LiveUpdateMetrics
 
 export type DailyMetric = { date: string; success_rate: number }
 export type DailyPlatformMetric = { date: string; ios: number | null; android: number | null }
@@ -173,10 +170,6 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
   }
 }
 
-export function getCachedLiveUpdateMetrics(): LiveUpdateMetrics {
-  return { ...(normalizeLiveUpdateMetrics(FALLBACK) ?? { ...FALLBACK, daily_platforms: [] }), source: 'cache' }
-}
-
 export async function fetchLiveUpdateMetrics(endpoint = LIVE_UPDATE_METRICS_PATH): Promise<LiveUpdateMetrics | null> {
   try {
     const response = await fetch(endpoint, {
@@ -188,18 +181,4 @@ export async function fetchLiveUpdateMetrics(endpoint = LIVE_UPDATE_METRICS_PATH
   } catch {
     return null
   }
-}
-
-export async function resolveLiveUpdateMetrics(): Promise<LiveUpdateMetrics> {
-  return getCachedLiveUpdateMetrics()
-}
-
-/** JSON safe to embed inside <script> via set:html (blocks </script> breakouts). */
-export function jsonForInlineScript(value: unknown): string {
-  return JSON.stringify(value)
-    .replaceAll('<', String.raw`\u003c`)
-    .replaceAll('>', String.raw`\u003e`)
-    .replaceAll('&', String.raw`\u0026`)
-    .replaceAll('\u2028', String.raw`\u2028`)
-    .replaceAll('\u2029', String.raw`\u2029`)
 }
