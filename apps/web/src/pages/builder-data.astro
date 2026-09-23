@@ -4,7 +4,7 @@ import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
 import { jsonForInlineScript, resolveBuilderMetrics } from '@/lib/builderMetrics'
 import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
-import { formatTrendTooltip, trendHitLeftPercent, trendHitWidthPercent } from '@/lib/metricsTrendChart'
+import { formatTrendTooltip, sliceTrendRows, TREND_RANGE_OPTIONS, trendHitLeftPercent, trendHitWidthPercent } from '@/lib/metricsTrendChart'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
@@ -96,7 +96,7 @@ function chartPoints(values: Array<number | null>, scale: { min: number; max: nu
 
 const ios = platformOf('ios')
 const android = platformOf('android')
-const chartRows = sliceDays(metrics.daily_platforms, 30)
+const chartRows = sliceTrendRows(metrics.daily_platforms, '1m')
 const rateValues = chartRows.flatMap((row) => [row.ios, row.android]).filter((value): value is number => value !== null)
 const chartRange = chartScale(rateValues, 'rate')
 const iosChart = chartPoints(
@@ -207,7 +207,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
             <p class="data-eyebrow">Trend</p>
             <h2 id="trend-title">Builder success over time</h2>
           </div>
-          <p>Daily iOS and Android rates, plus average processing time. 7D and 30D read from the same 30-day window — this chart is not a live feed.</p>
+          <p>Daily iOS and Android rates, plus average processing time. Use 1D, 1W, 1M, or 3M to change the chart window — this chart is not a live feed.</p>
         </div>
         <p class="data-sr-only" data-trend-status aria-live="polite"></p>
         <div class="data-trend" data-trend>
@@ -218,9 +218,14 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
                 <button type="button" data-metric="rate" aria-selected="true">Success</button>
                 <button type="button" data-metric="duration">Process</button>
               </div>
-              <div class="data-periods" role="tablist" aria-label="Trend window">
-                <button type="button" data-period="7">7D</button>
-                <button type="button" data-period="30" aria-selected="true">30D</button>
+              <div class="data-trend-range" role="tablist" aria-label="Trend window">
+                {
+                  TREND_RANGE_OPTIONS.map((option) => (
+                    <button type="button" data-trend-range={option.key} aria-selected={option.key === '1m' ? 'true' : 'false'}>
+                      {option.label}
+                    </button>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -315,7 +320,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
 <script>
   import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
   import { normalizeBuilderMetrics, type BuilderMetrics } from '@/lib/builderMetrics'
-  import { formatTrendTooltip, trendHitLeftPercent, trendHitWidthPercent } from '@/lib/metricsTrendChart'
+  import { formatTrendTooltip, sliceTrendRows, trendHitLeftPercent, trendHitWidthPercent, type TrendRangeKey } from '@/lib/metricsTrendChart'
 
   function boot() {
     const page = document.querySelector<HTMLElement>('.data-page')
@@ -349,10 +354,10 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     const dailySkeleton = page?.querySelector<HTMLElement>('.data-chart-skeleton')
     const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
     const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
-    const periodButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-period]') ?? [])]
+    const trendRangeButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-trend-range]') ?? [])]
     const metricButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-metric]') ?? [])]
     const styleScopeAttributes = [...(page?.attributes ?? [])].map((attribute) => attribute.name).filter((name) => name.startsWith('data-astro-cid-'))
-    let periodDays = 30
+    let trendRange: TrendRangeKey = '1m'
     let metric: 'rate' | 'duration' = 'rate'
     let latestMetrics: BuilderMetrics | null = null
 
@@ -482,7 +487,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     }
 
     function renderTrend(metrics: BuilderMetrics) {
-      const rows = sliceDays(metrics.daily_platforms, periodDays)
+      const rows = sliceTrendRows(metrics.daily_platforms, trendRange)
       const iosValues = rows.map((row) => (metric === 'rate' ? row.ios : row.ios_process_seconds))
       const androidValues = rows.map((row) => (metric === 'rate' ? row.android : row.android_process_seconds))
       const values = [...iosValues, ...androidValues].filter((value): value is number => value !== null)
@@ -685,12 +690,12 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       }
     }
 
-    for (const button of periodButtons) {
+    for (const button of trendRangeButtons) {
       button.addEventListener('click', () => {
-        const next = Number(button.dataset.period)
-        if (!Number.isFinite(next)) return
-        periodDays = next
-        for (const item of periodButtons) item.ariaSelected = item === button ? 'true' : 'false'
+        const next = button.dataset.trendRange
+        if (next !== '1d' && next !== '1w' && next !== '1m' && next !== '3m') return
+        trendRange = next
+        for (const item of trendRangeButtons) item.ariaSelected = item === button ? 'true' : 'false'
         if (latestMetrics) renderTrend(latestMetrics)
       })
     }
@@ -1030,6 +1035,42 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
   .data-periods button[aria-selected='true'] {
     background: white;
     color: #111827;
+  }
+  .data-trend-range {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid rgb(255 255 255 / 10%);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 8%);
+  }
+  .data-trend-range button {
+    min-width: 44px;
+    padding: 6px 12px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #91a2ba;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background 120ms ease,
+      color 120ms ease,
+      box-shadow 120ms ease;
+  }
+  .data-trend-range button:hover {
+    color: #d8e1ee;
+  }
+  .data-trend-range button[aria-selected='true'] {
+    background: #fff;
+    color: #111827;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 12%);
+  }
+  .data-trend-range button:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
   }
   .data-trend-svg {
     display: block;

@@ -4,7 +4,7 @@ import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
 import { jsonForInlineScript, resolveLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
-import { formatTrendTooltip, trendHitLeftPercent, trendHitWidthPercent } from '@/lib/metricsTrendChart'
+import { formatTrendTooltip, sliceTrendRows, TREND_RANGE_OPTIONS, trendHitLeftPercent, trendHitWidthPercent } from '@/lib/metricsTrendChart'
 
 const config = Astro.locals.runtimeConfig
 const metrics = await resolveLiveUpdateMetrics()
@@ -115,7 +115,7 @@ function chartPoints(rows: typeof metrics.daily_platforms, key: 'ios' | 'android
 
 const ios = platformOf('ios')
 const android = platformOf('android')
-const chartRows = sliceDays(metrics.daily_platforms, 30)
+const chartRows = sliceTrendRows(metrics.daily_platforms, '1m')
 const chartRange = chartScale(chartRows)
 const iosChart = chartPoints(chartRows, 'ios', chartRange)
 const androidChart = chartPoints(chartRows, 'android', chartRange)
@@ -221,16 +221,21 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
             <p class="data-eyebrow">Trend</p>
             <h2 id="trend-title">Install success over time</h2>
           </div>
-          <p>Daily success for iOS and Android. 7D and 30D read from the same 30-day window — this chart is not a live feed.</p>
+          <p>Daily success for iOS and Android. Use 1D, 1W, 1M, or 3M to change the chart window — this chart is not a live feed.</p>
         </div>
         <p class="data-sr-only" data-daily-status aria-live="polite"></p>
         <p class="data-sr-only" data-trend-status aria-live="polite"></p>
         <div class="data-trend" data-trend>
           <div class="data-trend-head">
             <p>Install success</p>
-            <div class="data-periods" role="tablist" aria-label="Trend window">
-              <button type="button" data-period="7">7D</button>
-              <button type="button" data-period="30" aria-selected="true">30D</button>
+            <div class="data-trend-range" role="tablist" aria-label="Trend window">
+              {
+                TREND_RANGE_OPTIONS.map((option) => (
+                  <button type="button" data-trend-range={option.key} aria-selected={option.key === '1m' ? 'true' : 'false'}>
+                    {option.label}
+                  </button>
+                ))
+              }
             </div>
           </div>
           <div class="data-chart-skeleton" data-daily-skeleton aria-hidden="true" hidden={chartRows.length > 0}>
@@ -499,7 +504,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
 <script>
   import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
   import { normalizeLiveUpdateMetrics, type LiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
-  import { formatTrendTooltip, trendHitLeftPercent, trendHitWidthPercent } from '@/lib/metricsTrendChart'
+  import { formatTrendTooltip, sliceTrendRows, trendHitLeftPercent, trendHitWidthPercent, type TrendRangeKey } from '@/lib/metricsTrendChart'
 
   function boot() {
     const page = document.querySelector<HTMLElement>('.data-page')
@@ -531,7 +536,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     const trendMin = page?.querySelector<SVGTextElement>('[data-trend-min]')
     const trendHits = page?.querySelector<HTMLElement>('[data-trend-hits]')
     const trendStatus = page?.querySelector<HTMLElement>('[data-trend-status]')
-    const periodButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-period]') ?? [])]
+    const trendRangeButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-trend-range]') ?? [])]
     const iosSpark = page?.querySelector<HTMLElement>('[data-spark="ios"]')
     const androidSpark = page?.querySelector<HTMLElement>('[data-spark="android"]')
     const iosTopFailure = page?.querySelector<HTMLElement>('[data-top-failure="ios"]')
@@ -551,7 +556,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     const versionsBody = page?.querySelector<HTMLElement>('[data-versions]')
     const versionEmpty = page?.querySelector<HTMLElement>('[data-version-empty]')
     const versionsStatus = page?.querySelector<HTMLElement>('[data-versions-status]')
-    let periodDays = 30
+    let trendRange: TrendRangeKey = '1m'
     let latestMetrics: LiveUpdateMetrics | null = null
     const styleScopeAttributes = page?.getAttributeNames().filter((attribute) => attribute.startsWith('data-astro-cid-')) ?? []
 
@@ -720,7 +725,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     }
 
     function renderTrend(metrics: LiveUpdateMetrics) {
-      const rows = metrics.daily_platforms.slice(Math.max(0, metrics.daily_platforms.length - periodDays))
+      const rows = sliceTrendRows(metrics.daily_platforms, trendRange)
       const scale = chartScale(rows)
       if (trendIos) trendIos.setAttribute('points', chartPoints(rows, 'ios', scale))
       if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(rows, 'android', scale))
@@ -966,12 +971,12 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       }
     }
 
-    for (const button of periodButtons) {
+    for (const button of trendRangeButtons) {
       button.addEventListener('click', () => {
-        const next = Number(button.dataset.period)
-        if (!Number.isFinite(next)) return
-        periodDays = next
-        for (const item of periodButtons) item.ariaSelected = item === button ? 'true' : 'false'
+        const next = button.dataset.trendRange
+        if (next !== '1d' && next !== '1w' && next !== '1m' && next !== '3m') return
+        trendRange = next
+        for (const item of trendRangeButtons) item.ariaSelected = item === button ? 'true' : 'false'
         if (latestMetrics) renderTrend(latestMetrics)
       })
     }
@@ -1281,15 +1286,16 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     color: #d8e1ee;
     font-size: 0.95rem;
   }
-  .data-periods {
-    display: flex;
-    gap: 6px;
-    padding: 4px;
-    border: 1px solid var(--line);
+  .data-trend-range {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid rgb(255 255 255 / 10%);
     border-radius: 999px;
+    background: rgb(255 255 255 / 8%);
   }
-  .data-periods button {
-    min-width: 52px;
+  .data-trend-range button {
+    min-width: 44px;
     padding: 6px 12px;
     border: 0;
     border-radius: 999px;
@@ -1299,10 +1305,22 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
+    transition:
+      background 120ms ease,
+      color 120ms ease,
+      box-shadow 120ms ease;
   }
-  .data-periods button[aria-selected='true'] {
-    background: white;
+  .data-trend-range button:hover {
+    color: #d8e1ee;
+  }
+  .data-trend-range button[aria-selected='true'] {
+    background: #fff;
     color: #111827;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 12%);
+  }
+  .data-trend-range button:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
   }
   .data-trend-svg {
     display: block;

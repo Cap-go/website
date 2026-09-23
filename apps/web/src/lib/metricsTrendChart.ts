@@ -4,6 +4,26 @@ export const TREND_CHART = {
   pad: { l: 44, r: 16, t: 16, b: 28 },
 } as const
 
+export const TREND_HISTORY_DAYS = 90
+
+export type TrendRangeKey = '1d' | '1w' | '1m' | '3m'
+
+export const TREND_RANGE_OPTIONS: Array<{ key: TrendRangeKey; label: string; days: number }> = [
+  { key: '1d', label: '1D', days: 1 },
+  { key: '1w', label: '1W', days: 7 },
+  { key: '1m', label: '1M', days: 30 },
+  { key: '3m', label: '3M', days: 90 },
+]
+
+export function trendRangeDays(key: TrendRangeKey) {
+  return TREND_RANGE_OPTIONS.find((option) => option.key === key)?.days ?? 30
+}
+
+export function sliceTrendRows<T extends { date: string }>(rows: T[], key: TrendRangeKey) {
+  const days = trendRangeDays(key)
+  return rows.slice(Math.max(0, rows.length - days))
+}
+
 export function trendHitLeftPercent(index: number, count: number, width = TREND_CHART.width) {
   const pad = TREND_CHART.pad
   const innerW = width - pad.l - pad.r
