@@ -1,10 +1,24 @@
 import { expect, test } from 'bun:test'
-import { selectTrendRows } from '../src/lib/metricsTrendChart.ts'
+import { readFileSync } from 'node:fs'
+import { buildContiguousDailyPlatformRows, selectTrendRows, TREND_HISTORY_DAYS } from '../src/lib/metricsTrendChart.ts'
 import { buildPublicLiveUpdateQueries, getPublicLiveUpdateMetrics } from '../src/lib/publicLiveUpdateMetrics.ts'
+
+const prodSnapshot = JSON.parse(readFileSync(new URL('./fixtures/live-update-metrics-prod-2026-09-24.json', import.meta.url), 'utf8'))
 
 function analyticsResponse(data) {
   return new Response(JSON.stringify({ data }), { headers: { 'content-type': 'application/json' } })
 }
+
+test('production snapshot zero-fills to 90 UTC days without altering real rates', () => {
+  const now = new Date(prodSnapshot.updated_at)
+  const filled = buildContiguousDailyPlatformRows(prodSnapshot.daily_platforms, now, TREND_HISTORY_DAYS)
+  expect(filled).toHaveLength(90)
+  expect(filled[0]?.date).toBe('2026-06-27')
+  expect(filled.find((row) => row.date === '2026-06-27')).toEqual({ date: '2026-06-27', ios: null, android: null })
+  expect(filled.find((row) => row.date === '2026-07-17')).toEqual(prodSnapshot.daily_platforms[0])
+  expect(selectTrendRows({ daily_platforms: filled }, '3m', now)).toHaveLength(90)
+  expect(selectTrendRows({ daily_platforms: filled }, '1m', now)).toHaveLength(30)
+})
 
 test('buildPublicLiveUpdateQueries stays at one Analytics Engine nest', () => {
   const queries = Object.values(buildPublicLiveUpdateQueries(new Date('2026-09-17T00:00:00.000Z')))
