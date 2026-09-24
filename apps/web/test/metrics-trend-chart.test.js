@@ -31,18 +31,22 @@ test('sliceTrendRows falls back to trailing rows when date filter is empty', () 
   expect(oneMonth).toEqual(rows.slice(-30))
 })
 
-test('sliceHourlyTrendRows keeps the current UTC day', () => {
+test('sliceHourlyTrendRows keeps a rolling 24h window ending at the current UTC hour', () => {
   const rows = [
     { date: '2026-09-22 20:00', ios: 70, android: 60 },
-    { date: '2026-09-23 08:00', ios: 72, android: 61 },
+    { date: '2026-09-22 22:00', ios: 71, android: 61 },
+    { date: '2026-09-23 08:00', ios: 72, android: 62 },
     { date: '2026-09-23 12:00', ios: 74, android: 63 },
     { date: '2026-09-23 18:00', ios: 76, android: 65 },
+    { date: '2026-09-23 21:00', ios: 77, android: 66 },
   ]
 
-  expect(sliceHourlyTrendRows(rows, new Date('2026-09-23T21:00:00.000Z'))).toEqual([
-    { date: '2026-09-23 08:00', ios: 72, android: 61 },
+  expect(sliceHourlyTrendRows(rows, new Date('2026-09-23T21:30:00.000Z'))).toEqual([
+    { date: '2026-09-22 22:00', ios: 71, android: 61 },
+    { date: '2026-09-23 08:00', ios: 72, android: 62 },
     { date: '2026-09-23 12:00', ios: 74, android: 63 },
     { date: '2026-09-23 18:00', ios: 76, android: 65 },
+    { date: '2026-09-23 21:00', ios: 77, android: 66 },
   ])
 })
 

@@ -44,6 +44,12 @@ export function parseTrendUtcDate(date: string): Date | null {
   return new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])))
 }
 
+export function parseHourlyTrendDate(date: string): Date | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})(?:T| )(\d{2}):00/.exec(date.trim())
+  if (!match) return null
+  return new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]), Number(match[4])))
+}
+
 function utcDayStart(date: Date) {
   return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()))
 }
@@ -73,12 +79,19 @@ export function sliceTrendRows<T extends { date: string }>(rows: T[], key: Trend
 
 export function sliceHourlyTrendRows<T extends { date: string }>(rows: T[], referenceDate?: Date) {
   if (!rows.length) return rows
-  const dayKey = formatUtcDate(utcDayStart(referenceDate ?? new Date()))
-  const filtered = rows.filter((row) => row.date.startsWith(dayKey))
+  const ref = referenceDate ?? new Date()
+  const end = new Date(Date.UTC(ref.getUTCFullYear(), ref.getUTCMonth(), ref.getUTCDate(), ref.getUTCHours(), 0, 0, 0))
+  const endExclusive = new Date(end)
+  endExclusive.setUTCHours(endExclusive.getUTCHours() + 1)
+  const start = new Date(endExclusive)
+  start.setUTCHours(start.getUTCHours() - 24)
+  const filtered = rows.filter((row) => {
+    const parsed = parseHourlyTrendDate(row.date)
+    if (!parsed) return false
+    return parsed >= start && parsed < endExclusive
+  })
   if (filtered.length) return filtered
-  const lastDay = rows.at(-1)?.date.slice(0, 10)
-  if (!lastDay) return rows
-  return rows.filter((row) => row.date.startsWith(lastDay))
+  return rows.slice(Math.max(0, rows.length - 24))
 }
 
 export function selectTrendRows<T extends { date: string }>(

@@ -21,6 +21,13 @@ test('buildPublicLiveUpdateQueries keeps KPI windows at 30 days and trend platfo
   expect(queries.platformsHourly).toContain("INTERVAL '1' HOUR")
 })
 
+test('buildPublicLiveUpdateQueries uses a rolling 24h hourly window ending at the next UTC hour', () => {
+  const queries = buildPublicLiveUpdateQueries(new Date('2026-09-17T12:34:56.000Z'))
+  expect(queries.platformsHourly).toContain("toDateTime('2026-09-16 13:00:00')")
+  expect(queries.platformsHourly).toContain("toDateTime('2026-09-17 13:00:00')")
+  expect(queries.platformsHourly).not.toContain("toDateTime('2026-09-17 00:00:00')")
+})
+
 test('getPublicLiveUpdateMetrics weights daily rates and skips first-day', async () => {
   const queries = []
   const metrics = await getPublicLiveUpdateMetrics({

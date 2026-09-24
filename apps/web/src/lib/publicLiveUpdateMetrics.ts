@@ -168,11 +168,12 @@ function buildAnalyticsWindow(referenceDate: Date, days: number) {
   return `timestamp >= toDateTime('${formatDateCF(start)}') AND timestamp < toDateTime('${formatDateCF(end)}')`
 }
 
-function buildUtcDayHourlyWindow(referenceDate: Date) {
-  const start = new Date(Date.UTC(referenceDate.getUTCFullYear(), referenceDate.getUTCMonth(), referenceDate.getUTCDate()))
+function buildRollingHourlyWindow(referenceDate: Date) {
   const end = new Date(referenceDate)
   end.setUTCMinutes(0, 0, 0)
   end.setUTCHours(end.getUTCHours() + 1)
+  const start = new Date(end)
+  start.setUTCHours(start.getUTCHours() - 24)
   return `timestamp >= toDateTime('${formatDateCF(start)}') AND timestamp < toDateTime('${formatDateCF(end)}')`
 }
 
@@ -183,7 +184,7 @@ function buildOutcomeBase(window: string, failureActions: string, day: string) {
 export function buildPublicLiveUpdateQueries(referenceDate = new Date()) {
   const window = buildAnalyticsWindow(referenceDate, LIVE_UPDATE_KPI_WINDOW_DAYS)
   const trendWindow = buildAnalyticsWindow(referenceDate, TREND_HISTORY_DAYS)
-  const hourlyWindow = buildUtcDayHourlyWindow(referenceDate)
+  const hourlyWindow = buildRollingHourlyWindow(referenceDate)
   const failureActions = PUBLIC_FAILURE_ACTIONS.map((action) => `'${action}'`).join(', ')
   const zipFailActions = PUBLIC_ZIP_FAIL_ACTIONS.map((action) => `'${action}'`).join(', ')
   const deltaFailActions = PUBLIC_DELTA_FAIL_ACTIONS.map((action) => `'${action}'`).join(', ')
