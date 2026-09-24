@@ -1,7 +1,6 @@
 export const BUILDER_METRICS_PATH = '/builder-metrics.json'
 export const BUILDER_METRICS_CACHE_TTL_SECONDS = 300
 export const PUBLIC_BUILDER_SUPABASE_URL = 'https://xvwzpoazmxkqosrdewyv.supabase.co'
-export const PUBLIC_BUILDER_SUPABASE_ANON_KEY = 'sb_publishable_T8kEcJpf9PbGYLkArVCLHA_lAE0Hb0T'
 
 export type BuilderPlatformKey = 'ios' | 'android'
 
@@ -206,14 +205,14 @@ export function buildPublicBuilderMetrics(source: BuilderMetricsSource): PublicB
   }
 }
 
-export async function fetchPublicBuilderMetricsFromRpc(options: { supabaseUrl: string; anonKey: string; fetch?: typeof fetch }): Promise<PublicBuilderMetrics> {
+export async function fetchPublicBuilderMetricsFromRpc(options: { supabaseUrl: string; apiKey: string; fetch?: typeof fetch }): Promise<PublicBuilderMetrics> {
   const fetchImpl = options.fetch ?? fetch
   const url = `${options.supabaseUrl.replace(/\/$/, '')}/rest/v1/rpc/get_public_builder_metrics`
   const response = await fetchImpl(url, {
     method: 'POST',
     headers: {
-      apikey: options.anonKey,
-      Authorization: `Bearer ${options.anonKey}`,
+      apikey: options.apiKey,
+      Authorization: `Bearer ${options.apiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({}),
@@ -221,7 +220,7 @@ export async function fetchPublicBuilderMetricsFromRpc(options: { supabaseUrl: s
   })
   if (!response.ok) {
     if (response.status === 401) {
-      throw new Error('get_public_builder_metrics failed: 401 unauthorized (Worker SUPABASE_ANON_KEY must be the publishable key)')
+      throw new Error('get_public_builder_metrics failed: 401 unauthorized (Worker SUPABASE_SERVICE_ROLE_KEY must be the service role key)')
     }
     throw new Error(`get_public_builder_metrics failed: ${response.status}`)
   }
