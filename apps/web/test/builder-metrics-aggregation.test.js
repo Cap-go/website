@@ -1,21 +1,9 @@
 import { expect, test } from 'bun:test'
-import { aggregateBuilderMetricsFromRows, buildContiguousHourlyPlatformRows, buildRollingHourlyBucketKeys } from '../src/lib/builderMetricsAggregation.ts'
+import { aggregateBuilderMetricsFromSqlRollups, buildContiguousHourlyPlatformRows, buildRollingHourlyBucketKeys } from '../src/lib/builderMetricsAggregation.ts'
 import { buildPublicBuilderMetrics } from '../src/lib/publicBuilderMetrics.ts'
 
 const referenceDate = new Date('2026-09-23T21:30:00.000Z')
-
-function row(overrides) {
-  return {
-    platform: 'ios',
-    day: '2026-09-23',
-    hour_bucket: '2026-09-23 12:00',
-    outcome: 'success',
-    process_seconds: 200,
-    queue_seconds: 2,
-    last_error: null,
-    ...overrides,
-  }
-}
+const timeoutMessage = 'Build exceeded configured timeout of 15 minutes'
 
 test('buildRollingHourlyBucketKeys matches the rolling 24h chart window', () => {
   expect(buildRollingHourlyBucketKeys(referenceDate)).toEqual([
@@ -46,20 +34,17 @@ test('buildRollingHourlyBucketKeys matches the rolling 24h chart window', () => 
   ])
 })
 
-test('aggregateBuilderMetricsFromRows rolls up daily and classifies failures', () => {
-  const source = aggregateBuilderMetricsFromRows(
+test('aggregateBuilderMetricsFromSqlRollups rolls up daily and classified failures without leaking raw errors', () => {
+  const source = aggregateBuilderMetricsFromSqlRollups(
     [
-      row({ platform: 'ios', day: '2026-09-16', hour_bucket: '2026-09-16 10:00' }),
-      row({ platform: 'ios', day: '2026-09-16', hour_bucket: '2026-09-16 10:00', outcome: 'failure', last_error: 'Build failed (script_failure)' }),
-      row({
-        platform: 'android',
-        day: '2026-09-16',
-        hour_bucket: '2026-09-16 11:00',
-        platform: 'android',
-        outcome: 'failure',
-        last_error: 'Build exceeded configured timeout of 15 minutes',
-      }),
-      row({ platform: 'android', day: '2026-09-16', hour_bucket: '2026-09-16 11:00', platform: 'android' }),
+      { rollup: 'daily', platform: 'ios', bucket: '2026-09-16', successes: 1, failures: 1, avg_process_seconds: 200, avg_queue_seconds: 2 },
+      { rollup: 'daily', platform: 'android', bucket: '2026-09-16', successes: 1, failures: 1, avg_process_seconds: 200, avg_queue_seconds: 2 },
+      { rollup: 'platform', platform: 'ios', bucket: null, successes: 1, failures: 1, avg_process_seconds: 200, avg_queue_seconds: 2 },
+      { rollup: 'platform', platform: 'android', bucket: null, successes: 1, failures: 1, avg_process_seconds: 200, avg_queue_seconds: 2 },
+      { rollup: 'failure', platform: null, bucket: 'script_failure', successes: 0, failures: 1, avg_process_seconds: null, avg_queue_seconds: null },
+      { rollup: 'failure', platform: null, bucket: 'timeout', successes: 0, failures: 1, avg_process_seconds: null, avg_queue_seconds: null },
+      { rollup: 'platform_failure', platform: 'ios', bucket: 'script_failure', successes: 0, failures: 1, avg_process_seconds: null, avg_queue_seconds: null },
+      { rollup: 'platform_failure', platform: 'android', bucket: 'timeout', successes: 0, failures: 1, avg_process_seconds: null, avg_queue_seconds: null },
     ],
     referenceDate,
   )
@@ -75,13 +60,33 @@ test('aggregateBuilderMetricsFromRows rolls up daily and classifies failures', (
     },
   ])
   expect(metrics.failures.map((item) => item.reason).sort()).toEqual(['script_failure', 'timeout'])
-  expect(JSON.stringify(metrics)).not.toContain('script_failure text')
-  expect(JSON.stringify(metrics)).not.toContain('last_error')
+  const serialized = JSON.stringify(metrics)
+  expect(serialized).not.toContain(timeoutMessage)
+  expect(serialized).not.toContain('Build failed (script_failure)')
+  expect(serialized).not.toContain('last_error')
+})
+
+test('aggregateBuilderMetricsFromSqlRollups skips unknown platforms and empty failure buckets', () => {
+  const source = aggregateBuilderMetricsFromSqlRollups(
+    [
+      { rollup: 'platform', platform: 'electron', bucket: null, successes: 9, failures: 0, avg_process_seconds: 1, avg_queue_seconds: 1 },
+      { rollup: 'daily', platform: 'web', bucket: '2026-09-16', successes: 3, failures: 0, avg_process_seconds: 1, avg_queue_seconds: 1 },
+      { rollup: 'failure', platform: null, bucket: '', successes: 0, failures: 2, avg_process_seconds: null, avg_queue_seconds: null },
+    ],
+    referenceDate,
+  )
+
+  expect(source.platforms).toEqual([])
+  expect(source.daily).toEqual([])
+  expect(source.failures).toEqual([])
 })
 
 test('buildContiguousHourlyPlatformRows fills empty hours with null rates', () => {
-  const source = aggregateBuilderMetricsFromRows(
-    [row({ hour_bucket: '2026-09-23 08:00', day: '2026-09-23' }), row({ hour_bucket: '2026-09-23 12:00', day: '2026-09-23', platform: 'android' })],
+  const source = aggregateBuilderMetricsFromSqlRollups(
+    [
+      { rollup: 'hourly', platform: 'ios', bucket: '2026-09-23 08:00', successes: 1, failures: 0, avg_process_seconds: 200, avg_queue_seconds: 2 },
+      { rollup: 'hourly', platform: 'android', bucket: '2026-09-23 12:00', successes: 1, failures: 0, avg_process_seconds: 190, avg_queue_seconds: 1 },
+    ],
     referenceDate,
   )
 

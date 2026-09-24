@@ -1,5 +1,5 @@
 import { normalizeBuilderMetrics } from '../lib/builderMetrics'
-import { fetchPublicBuilderMetricsFromDatabase } from '../lib/builderMetricsDatabase'
+import * as builderMetricsDatabase from '../lib/builderMetricsDatabase'
 import { BUILDER_METRICS_CACHE_TTL_SECONDS, BUILDER_METRICS_PATH } from '../lib/publicBuilderMetrics'
 import { cachedJsonResponse, unavailableJson } from './cached-json'
 
@@ -16,7 +16,7 @@ export async function handleBuilderMetrics(request: Request, env: BuilderMetrics
     BUILDER_METRICS_PATH,
     BUILDER_METRICS_CACHE_TTL_SECONDS,
     async () => {
-      const payload = await fetchPublicBuilderMetricsFromDatabase({ databaseUrl })
+      const payload = await builderMetricsDatabase.fetchPublicBuilderMetricsFromDatabase({ databaseUrl })
       const metrics = normalizeBuilderMetrics(payload)
       if (!metrics) throw new Error('Invalid builder metrics payload')
       return metrics

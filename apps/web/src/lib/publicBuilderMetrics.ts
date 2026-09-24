@@ -124,7 +124,7 @@ function platformKey(value: string): BuilderPlatformKey | null {
   return null
 }
 
-function buildPlatformTrendRows(rows: BuilderDailyRow[]): BuilderDailyPlatformMetric[] {
+export function buildPlatformTrendRows(rows: BuilderDailyRow[]): BuilderDailyPlatformMetric[] {
   const byDate = new Map<string, BuilderDailyPlatformMetric>()
   for (const row of rows) {
     const key = platformKey(row.platform)

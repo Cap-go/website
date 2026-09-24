@@ -1,6 +1,6 @@
-import type { BuilderDailyPlatformMetric } from './publicBuilderMetrics'
 import {
-  classifyBuilderFailure,
+  buildPlatformTrendRows,
+  type BuilderDailyPlatformMetric,
   type BuilderDailyRow,
   type BuilderFailureRow,
   type BuilderMetricsSource,
@@ -10,68 +10,14 @@ import {
 
 export const BUILDER_METRICS_PERIOD_DAYS = 30
 
-export type RawBuildRequestRow = {
-  platform: string
-  day: string
-  hour_bucket: string
-  outcome: string | null
-  process_seconds: number | null
-  queue_seconds: number | null
-  last_error: string | null
-}
-
-type Outcome = 'success' | 'failure'
-
-type Acc = {
+export type BuilderSqlRollupRow = {
+  rollup: string
+  platform: string | null
+  bucket: string | null
   successes: number
   failures: number
-  processSum: number
-  processCount: number
-  queueSum: number
-  queueCount: number
-}
-
-function emptyAcc(): Acc {
-  return { successes: 0, failures: 0, processSum: 0, processCount: 0, queueSum: 0, queueCount: 0 }
-}
-
-function parseOutcome(value: string | null): Outcome | null {
-  if (value === 'success' || value === 'failure') return value
-  return null
-}
-
-function addToAcc(acc: Acc, outcome: Outcome, processSeconds: number | null, queueSeconds: number | null) {
-  if (outcome === 'success') acc.successes += 1
-  else acc.failures += 1
-  if (processSeconds !== null && Number.isFinite(processSeconds)) {
-    acc.processSum += processSeconds
-    acc.processCount += 1
-  }
-  if (queueSeconds !== null && Number.isFinite(queueSeconds)) {
-    acc.queueSum += queueSeconds
-    acc.queueCount += 1
-  }
-}
-
-function accToDailyRow(platform: string, date: string, acc: Acc): BuilderDailyRow {
-  return {
-    date,
-    platform,
-    successes: acc.successes,
-    failures: acc.failures,
-    avg_process_seconds: acc.processCount ? acc.processSum / acc.processCount : null,
-    avg_queue_seconds: acc.queueCount ? acc.queueSum / acc.queueCount : null,
-  }
-}
-
-function accToPlatformRow(platform: string, acc: Acc): BuilderPlatformRow {
-  return {
-    platform,
-    successes: acc.successes,
-    failures: acc.failures,
-    avg_process_seconds: acc.processCount ? acc.processSum / acc.processCount : null,
-    avg_queue_seconds: acc.queueCount ? acc.queueSum / acc.queueCount : null,
-  }
+  avg_process_seconds: number | null
+  avg_queue_seconds: number | null
 }
 
 export function formatHourBucket(date: Date) {
@@ -96,24 +42,24 @@ export function buildRollingHourlyBucketKeys(referenceDate = new Date()) {
   return buckets
 }
 
-function buildPlatformTrendRows(rows: BuilderDailyRow[]): BuilderDailyPlatformMetric[] {
-  const byDate = new Map<string, BuilderDailyPlatformMetric>()
-  for (const row of rows) {
-    const key = row.platform === 'ios' || row.platform === 'android' ? row.platform : null
-    if (!key || !row.date) continue
-    const current = byDate.get(row.date) ?? {
-      date: row.date,
-      ios: null,
-      android: null,
-      ios_process_seconds: null,
-      android_process_seconds: null,
-    }
-    const total = row.successes + row.failures
-    current[key] = total > 0 ? Number(((row.successes / total) * 100).toFixed(1)) : null
-    current[`${key}_process_seconds`] = row.avg_process_seconds === null || row.avg_process_seconds === undefined ? null : Number(row.avg_process_seconds.toFixed(1))
-    byDate.set(row.date, current)
-  }
-  return [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date))
+export function buildRollingHourlyWindowStart(referenceDate = new Date()) {
+  const end = new Date(Date.UTC(referenceDate.getUTCFullYear(), referenceDate.getUTCMonth(), referenceDate.getUTCDate(), referenceDate.getUTCHours(), 0, 0, 0))
+  const endExclusive = new Date(end)
+  endExclusive.setUTCHours(endExclusive.getUTCHours() + 1)
+  const start = new Date(endExclusive)
+  start.setUTCHours(start.getUTCHours() - 24)
+  return start
+}
+
+function platformKey(value: string | null) {
+  if (value === 'ios' || value === 'android') return value
+  return null
+}
+
+function numberOrNull(value: unknown): number | null {
+  if (value === null || value === undefined || value === '') return null
+  const number = typeof value === 'number' ? value : Number(value)
+  return Number.isFinite(number) ? number : null
 }
 
 export function buildContiguousHourlyPlatformRows(hourlyRows: BuilderDailyRow[], referenceDate = new Date()): BuilderDailyPlatformMetric[] {
@@ -133,60 +79,54 @@ export function buildContiguousHourlyPlatformRows(hourlyRows: BuilderDailyRow[],
   })
 }
 
-export function aggregateBuilderMetricsFromRows(rows: RawBuildRequestRow[], referenceDate = new Date()): BuilderMetricsSource {
-  const platformAcc = new Map<string, Acc>()
-  const dailyAcc = new Map<string, Acc>()
-  const hourlyAcc = new Map<string, Acc>()
-  const failureCounts = new Map<string, number>()
-  const platformFailureCounts = new Map<string, number>()
+export function aggregateBuilderMetricsFromSqlRollups(rows: BuilderSqlRollupRow[], referenceDate = new Date()): BuilderMetricsSource {
+  const platforms: BuilderPlatformRow[] = []
+  const daily: BuilderDailyRow[] = []
+  const hourly: BuilderDailyRow[] = []
+  const failures: BuilderFailureRow[] = []
+  const platformFailures: BuilderPlatformFailureRow[] = []
 
   for (const row of rows) {
-    const outcome = parseOutcome(row.outcome)
-    if (!outcome) continue
-    const platform = row.platform === 'ios' || row.platform === 'android' ? row.platform : null
-    if (!platform) continue
+    const successes = Number(row.successes) || 0
+    const failuresCount = Number(row.failures) || 0
+    const avg_process_seconds = numberOrNull(row.avg_process_seconds)
+    const avg_queue_seconds = numberOrNull(row.avg_queue_seconds)
 
-    const platformKey = platform
-    const platformBucket = platformAcc.get(platformKey) ?? emptyAcc()
-    addToAcc(platformBucket, outcome, row.process_seconds, row.queue_seconds)
-    platformAcc.set(platformKey, platformBucket)
+    if (row.rollup === 'platform') {
+      const platform = platformKey(row.platform)
+      if (!platform) continue
+      platforms.push({ platform, successes, failures: failuresCount, avg_process_seconds, avg_queue_seconds })
+      continue
+    }
 
-    const dayKey = `${row.day}\0${platform}`
-    const dayBucket = dailyAcc.get(dayKey) ?? emptyAcc()
-    addToAcc(dayBucket, outcome, row.process_seconds, row.queue_seconds)
-    dailyAcc.set(dayKey, dayBucket)
+    if (row.rollup === 'daily') {
+      const platform = platformKey(row.platform)
+      if (!platform || !row.bucket) continue
+      daily.push({ date: row.bucket, platform, successes, failures: failuresCount, avg_process_seconds, avg_queue_seconds })
+      continue
+    }
 
-    const hourKey = `${row.hour_bucket}\0${platform}`
-    const hourBucket = hourlyAcc.get(hourKey) ?? emptyAcc()
-    addToAcc(hourBucket, outcome, row.process_seconds, row.queue_seconds)
-    hourlyAcc.set(hourKey, hourBucket)
+    if (row.rollup === 'hourly') {
+      const platform = platformKey(row.platform)
+      if (!platform || !row.bucket) continue
+      hourly.push({ date: row.bucket, platform, successes, failures: failuresCount, avg_process_seconds, avg_queue_seconds })
+      continue
+    }
 
-    if (outcome === 'failure' && row.last_error) {
-      const reason = classifyBuilderFailure(row.last_error)
-      failureCounts.set(reason, (failureCounts.get(reason) ?? 0) + 1)
-      const pfKey = `${platform}\0${reason}`
-      platformFailureCounts.set(pfKey, (platformFailureCounts.get(pfKey) ?? 0) + 1)
+    if (row.rollup === 'failure') {
+      const reason = row.bucket?.trim()
+      if (!reason || failuresCount <= 0) continue
+      failures.push({ reason, failures: failuresCount })
+      continue
+    }
+
+    if (row.rollup === 'platform_failure') {
+      const platform = platformKey(row.platform)
+      const reason = row.bucket?.trim()
+      if (!platform || !reason || failuresCount <= 0) continue
+      platformFailures.push({ platform, reason, failures: failuresCount })
     }
   }
-
-  const platforms: BuilderPlatformRow[] = [...platformAcc.entries()].map(([platform, acc]) => accToPlatformRow(platform, acc))
-  const daily: BuilderDailyRow[] = [...dailyAcc.entries()].map(([key, acc]) => {
-    const [date, platform] = key.split('\0')
-    return accToDailyRow(platform, date, acc)
-  })
-  const hourly: BuilderDailyRow[] = [...hourlyAcc.entries()].map(([key, acc]) => {
-    const [date, platform] = key.split('\0')
-    return accToDailyRow(platform, date, acc)
-  })
-
-  const failures: BuilderFailureRow[] = [...failureCounts.entries()].map(([reason, failures]) => ({
-    reason,
-    failures,
-  }))
-  const platformFailures: BuilderPlatformFailureRow[] = [...platformFailureCounts.entries()].map(([key, failures]) => {
-    const [platform, reason] = key.split('\0')
-    return { platform, reason, failures }
-  })
 
   return {
     updated_at: referenceDate.toISOString(),
