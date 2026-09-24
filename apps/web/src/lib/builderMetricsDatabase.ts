@@ -13,13 +13,13 @@ export type BuilderPgClient = {
   end(): Promise<void>
 }
 
-const BUILDER_METRICS_ROLLUP_SQL = `
+export const BUILDER_METRICS_ROLLUP_SQL = `
   WITH terminal AS (
     SELECT
       br.platform::text AS platform,
       (timezone('utc', br.created_at))::date::text AS day,
       to_char(date_trunc('hour', timezone('utc', br.created_at)), 'YYYY-MM-DD HH24:00') AS hour_bucket,
-      timezone('utc', br.created_at) AS created_at_utc,
+      br.created_at AS created_at,
       CASE
         WHEN br.status IN ('succeeded', 'completed') THEN 'success'
         WHEN br.status IN ('failed', 'cancelled', 'canceled', 'expired') THEN 'failure'
@@ -87,7 +87,7 @@ const BUILDER_METRICS_ROLLUP_SQL = `
     AVG(process_seconds) FILTER (WHERE process_seconds IS NOT NULL),
     AVG(queue_seconds) FILTER (WHERE queue_seconds IS NOT NULL)
   FROM scored
-  WHERE created_at_utc >= $2::timestamptz
+  WHERE created_at >= $2::timestamptz
   GROUP BY platform, hour_bucket
 
   UNION ALL
