@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-24T07:47:01.255Z
-updated_at: 2026-09-24T07:47:02.874Z
+updated_at: 2026-09-24T07:49:30.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/9a9c6ce9-5a7e-487a-b6a4-4c49f0bb2111/mobile-development-tips-mobile-release.jpg'
 head_image_alt: 9 Mobile Development Tips for Reliable Releases
 keywords: 'mobile development tips, mobile app testing, OTA updates, mobile CI/CD, CapacitorJS'
