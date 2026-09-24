@@ -1,12 +1,30 @@
 import { chromium } from 'playwright'
 import { createServer } from 'node:http'
 import { readFile, mkdir } from 'node:fs/promises'
-import { join, extname } from 'node:path'
+import { join, extname, resolve, relative } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const repoRoot = resolve(fileURLToPath(new URL('..', import.meta.url)))
 import { buildContiguousDailyPlatformRows, sliceSparklineRows, TREND_HISTORY_DAYS } from '../apps/web/src/lib/metricsTrendChart.ts'
 
-const dist = '/workspace/apps/web/dist'
-const outDir = '/workspace/.github/pull-request-assets'
-const fixturePath = '/workspace/apps/web/test/fixtures/live-update-metrics-prod-2026-09-24.json'
+const dist = resolve(repoRoot, 'apps/web/dist')
+const outDir = resolve(repoRoot, '.github/pull-request-assets')
+const fixturePath = resolve(repoRoot, 'apps/web/test/fixtures/live-update-metrics-prod-2026-09-24.json')
+
+function resolveDistFile(urlPath) {
+  const pathname = urlPath.split('?')[0] || '/'
+  if (pathname.includes('..') || pathname.includes('\0')) return null
+  const rel =
+    pathname === '/'
+      ? 'index.html'
+      : pathname.endsWith('/')
+        ? `${pathname.slice(1)}index.html`
+        : pathname.replace(/^\//, '')
+  const filePath = resolve(dist, rel)
+  const relToDist = relative(dist, filePath)
+  if (relToDist.startsWith('..') || relToDist.includes('..')) return null
+  return filePath
+}
 
 const raw = JSON.parse(await readFile(fixturePath, 'utf8'))
 const now = new Date(raw.updated_at)
@@ -31,13 +49,18 @@ const mime = {
 }
 
 const server = createServer(async (req, res) => {
-  const path = req.url === '/live-update-metrics.json' ? '/live-update-metrics.json' : req.url?.split('?')[0] || '/'
+  const path = req.url?.split('?')[0] || '/'
   if (path === '/live-update-metrics.json') {
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(metricsJson)
     return
   }
-  const filePath = join(dist, path === '/' ? '/index.html' : path.endsWith('/') ? `${path}index.html` : path)
+  const filePath = resolveDistFile(path)
+  if (!filePath) {
+    res.writeHead(400)
+    res.end('bad path')
+    return
+  }
   try {
     const body = await readFile(filePath)
     res.writeHead(200, { 'Content-Type': mime[extname(filePath)] || 'application/octet-stream' })
