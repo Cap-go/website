@@ -3,6 +3,7 @@ import {
   BUILDER_METRICS_CACHE_TTL_SECONDS,
   BUILDER_METRICS_PATH,
   fetchPublicBuilderMetricsFromRpc,
+  PUBLIC_BUILDER_SUPABASE_ANON_KEY,
   PUBLIC_BUILDER_SUPABASE_URL,
 } from '../lib/publicBuilderMetrics'
 import { cachedJsonResponse, unavailableJson } from './cached-json'
@@ -14,9 +15,9 @@ export interface BuilderMetricsEnv {
 
 export async function handleBuilderMetrics(request: Request, env: BuilderMetricsEnv): Promise<Response> {
   const supabaseUrl = (env.SUPABASE_URL || PUBLIC_BUILDER_SUPABASE_URL).trim()
-  const anonKey = env.SUPABASE_ANON_KEY?.trim()
+  const anonKey = (env.SUPABASE_ANON_KEY?.trim() || PUBLIC_BUILDER_SUPABASE_ANON_KEY).trim()
   if (!anonKey)
-    return unavailableJson('Builder metrics are temporarily unavailable')
+    return unavailableJson('Builder metrics misconfigured')
 
   return cachedJsonResponse(
     request,

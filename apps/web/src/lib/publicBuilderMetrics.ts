@@ -3,6 +3,7 @@ import { TREND_HISTORY_DAYS } from './metricsTrendChart'
 export const BUILDER_METRICS_PATH = '/builder-metrics.json'
 export const BUILDER_METRICS_CACHE_TTL_SECONDS = 300
 export const PUBLIC_BUILDER_SUPABASE_URL = 'https://xvwzpoazmxkqosrdewyv.supabase.co'
+export const PUBLIC_BUILDER_SUPABASE_ANON_KEY = 'sb_publishable_T8kEcJpf9PbGYLkArVCLHA_lAE0Hb0T'
 
 export type BuilderPlatformKey = 'ios' | 'android'
 
@@ -221,6 +222,9 @@ export async function fetchPublicBuilderMetricsFromRpc(options: { supabaseUrl: s
     signal: AbortSignal.timeout(20_000),
   })
   if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('get_public_builder_metrics failed: 401 unauthorized (Worker SUPABASE_ANON_KEY must be the publishable key)')
+    }
     throw new Error(`get_public_builder_metrics failed: ${response.status}`)
   }
   const payload = await response.json()

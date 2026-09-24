@@ -142,6 +142,18 @@ jobs:
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
       - run: bun run build:after
+      - name: Sync Worker SUPABASE_ANON_KEY secret
+        working-directory: apps/web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$VITE_SUPABASE_ANON_KEY" ]; then
+            echo "VITE_SUPABASE_ANON_KEY is empty; cannot sync Worker secret SUPABASE_ANON_KEY"
+            exit 1
+          fi
+          printf '%s' "$VITE_SUPABASE_ANON_KEY" | bunx wrangler secret put SUPABASE_ANON_KEY
       - run: bun run deploy:web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

@@ -86,7 +86,7 @@
     padding-top: 12px;
   }
 
-  .data-page .data-kpis div {
+  .data-page .data-kpis > div {
     padding: 16px 20px;
   }
 
