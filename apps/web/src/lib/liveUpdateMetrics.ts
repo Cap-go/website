@@ -22,6 +22,7 @@ export type LiveUpdateMetrics = {
   daily: DailyMetric[]
   daily_platforms: DailyPlatformMetric[]
   daily_platforms_sparkline: DailyPlatformMetric[]
+  hourly_platforms: DailyPlatformMetric[]
   failures: FailureMetric[]
   platforms: BreakdownMetric[]
   countries: BreakdownMetric[]
@@ -42,6 +43,7 @@ export function emptyLiveUpdateMetrics(): LiveUpdateMetrics {
     daily: [],
     daily_platforms: [],
     daily_platforms_sparkline: [],
+    hourly_platforms: [],
     failures: [],
     platforms: [],
     countries: [],
@@ -110,6 +112,15 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
         .filter((item): item is DailyPlatformMetric => item !== null)
     : sliceSparklineRows(daily_platforms)
 
+  const hourly_platforms = Array.isArray(value.hourly_platforms)
+    ? value.hourly_platforms
+        .map((item) => {
+          if (!isRecord(item) || typeof item.date !== 'string') return null
+          return { date: item.date, ios: nullablePercentage(item.ios), android: nullablePercentage(item.android) }
+        })
+        .filter((item): item is DailyPlatformMetric => item !== null)
+    : []
+
   const failures = value.failures
     .map((item) => {
       if (!isRecord(item) || typeof item.reason !== 'string') return null
@@ -176,6 +187,7 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
     daily,
     daily_platforms,
     daily_platforms_sparkline,
+    hourly_platforms,
     failures,
     platforms,
     countries,

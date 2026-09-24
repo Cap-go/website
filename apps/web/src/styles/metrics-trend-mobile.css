@@ -1,0 +1,97 @@
+/* Mobile-only spacing for metrics trend charts (data + builder-data). */
+@media (max-width: 720px) {
+  .data-page .data-trend {
+    padding: 16px 14px 14px;
+  }
+
+  .data-page .data-trend-head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    margin-bottom: 18px;
+  }
+
+  .data-page .data-trend-head > p {
+    flex: 0 0 auto;
+    margin: 0;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .data-page .data-trend-controls {
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .data-page .data-trend-controls .data-periods {
+    flex: 0 0 auto;
+  }
+
+  .data-page .data-trend-plot {
+    margin-top: 2px;
+    overflow: visible;
+  }
+
+  .data-page .data-periods {
+    gap: 4px;
+    padding: 3px;
+  }
+
+  .data-page .data-periods button {
+    min-width: 40px;
+    min-height: 44px;
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+
+  .data-page .data-trend-svg {
+    overflow: visible;
+  }
+
+  .data-page .data-trend-svg [data-trend-max],
+  .data-page .data-trend-svg [data-trend-mid],
+  .data-page .data-trend-svg [data-trend-min] {
+    font-size: 9px;
+    text-anchor: end;
+  }
+
+  .data-page .data-trend-svg [data-trend-max] {
+    transform: translate(40px, -5px);
+  }
+
+  .data-page .data-trend-svg [data-trend-mid] {
+    transform: translate(40px, 0);
+  }
+
+  .data-page .data-trend-svg [data-trend-min] {
+    transform: translate(40px, 5px);
+  }
+
+  .data-page .data-trend-svg [data-trend-start],
+  .data-page .data-trend-svg [data-trend-end] {
+    font-size: 9px;
+    transform: translateY(8px);
+  }
+
+  .data-page .data-legend {
+    padding-top: 12px;
+  }
+
+  .data-page .data-kpis div {
+    padding: 22px 12px 16px;
+  }
+
+  .data-page .data-kpis p {
+    margin: 0 0 8px;
+    padding-top: 2px;
+  }
+}

@@ -4,14 +4,13 @@ import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
 import { emptyBuilderMetrics } from '@/lib/builderMetrics'
 import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
-import { formatTrendTooltip, sliceSparklineRows, sliceTrendRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
+import { formatTrendTooltip, selectTrendRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
 const metrics = emptyBuilderMetrics()
 const title = 'Capgo Native Build data | Builder trends'
-const description =
-  'Global native iOS and Android build success, processing time, and failure mix for the last 30 days. Rates and minutes only — not queue counts and not realtime.'
+const description = 'Global native iOS and Android build success, processing time, and failure mix for the last 30 days. Rates and minutes only, not queue counts and not realtime.'
 const content = {
   title,
   description,
@@ -98,7 +97,7 @@ function chartPoints(values: Array<number | null>, scale: { min: number; max: nu
 
 const ios = platformOf('ios')
 const android = platformOf('android')
-const chartRows = sliceTrendRows(metrics.daily_platforms, '1m')
+const chartRows = selectTrendRows(metrics, '1m')
 const rateValues = chartRows.flatMap((row) => [row.ios, row.android]).filter((value): value is number => value !== null)
 const chartRange = chartScale(rateValues, 'rate')
 const iosChart = chartPoints(
@@ -127,7 +126,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           <h1>Native Builds</h1>
           <p class="data-badge" data-status-badge data-tone={pending ? 'loading' : 'operational'}><span aria-hidden="true"></span> {pending ? 'Loading' : 'Operational'}</p>
         </div>
-        <p class="data-summary">Global iOS and Android builder success for the last 30 days. Each rate is finished jobs only — not a live queue, and not a build count.</p>
+        <p class="data-summary">Global iOS and Android builder success for the last 30 days. Each rate is finished jobs only, not a live queue, and not a build count.</p>
         <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
         <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
         <div class="data-kpis" aria-label="Global builder reliability">
@@ -146,7 +145,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
             <p class="data-eyebrow">Platforms</p>
             <h2 id="platforms-title">iOS and Android</h2>
           </div>
-          <p>Success and failure over the last 30 days. The sparkline is one tick per UTC day — green at 70% or better.</p>
+          <p>Success and failure over the last 30 days. The sparkline is one tick per UTC day, green at 70% or better.</p>
         </div>
         <div class="data-cards">
           <article class="data-card" data-platform-card="ios">
@@ -192,7 +191,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
               <div>
                 <p>Failure</p>
                 <strong data-kpi="android-failure" data-tone="poor" translate="no">{formatRate(failureRate(android.success_rate))}</strong>
-                <small data-top-failure="android">{pending ? 'Loading…' : android.top_failure ? getBuilderFailureInfo(android.top_failure.reason).label : 'No leading failure'}</small>
+                <small data-top-failure="android"
+                  >{pending ? 'Loading…' : android.top_failure ? getBuilderFailureInfo(android.top_failure.reason).label : 'No leading failure'}</small
+                >
               </div>
             </div>
             <div class="data-spark" data-spark="android" role="img" aria-label="Android daily success"></div>
@@ -208,7 +209,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
             <p class="data-eyebrow">Trend</p>
             <h2 id="trend-title">Builder success over time</h2>
           </div>
-          <p>Daily iOS and Android rates, plus average processing time. Use 1D, 1W, 1M, or 3M to change the chart window — this chart is not a live feed.</p>
+          <p>Hourly or daily iOS and Android rates, plus average processing time, depending on the selected window. Use 1D, 1W, 1M, or 3M to change the chart range. This chart is not a live feed.</p>
         </div>
         <p class="data-sr-only" data-trend-status aria-live="polite"></p>
         <div class="data-trend" data-trend>
@@ -276,7 +277,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           <h2 id="failures-title">Top failure reasons</h2>
           <p class="data-copy" data-failures-lead translate="no">{topFailureLead}</p>
           <p class="data-copy data-copy-secondary">
-            Script errors come from the app repo. Timeouts, host failures, and missing runners are builder-side. Shares only — no job counts.
+            Script errors come from the app repo. Timeouts, host failures, and missing runners are builder-side. Shares only, no job counts.
           </p>
           <p class="data-copy data-copy-secondary">
             Need signed binaries? See <a class="data-inline-link" href={nativeBuildHref}>Native Builds</a>. Live Update install rates live on <a
@@ -318,12 +319,14 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
   import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
   import { normalizeBuilderMetrics, type BuilderMetrics } from '@/lib/builderMetrics'
   import {
+    formatTrendAxisLabel,
     formatTrendTooltip,
+    selectTrendRows,
     sliceSparklineRows,
-    sliceTrendRows,
     TREND_RANGE_OPTIONS,
     trendHitLeftPercent,
     trendNearestIndex,
+    trendRowUnit,
     type TrendRangeKey,
   } from '@/lib/metricsTrendChart'
 
@@ -416,8 +419,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       const metricLabel = metric === 'rate' ? 'Build success' : 'Processing time'
       const rangeLabel = TREND_RANGE_OPTIONS.find((option) => option.key === trendRange)?.label ?? trendRange
       if (!rows.length) return 'Builder trend unavailable'
+      const unit = trendRowUnit(rows, trendRange)
       const dates = rows.length === 1 ? rows[0].date : `${rows[0]?.date} to ${rows.at(-1)?.date}`
-      return `${metricLabel} trend updated for ${rangeLabel}: ${rows.length} day${rows.length === 1 ? '' : 's'} (${dates})`
+      return `${metricLabel} trend updated for ${rangeLabel}: ${rows.length} ${unit}${rows.length === 1 ? '' : 's'} (${dates})`
     }
 
     function clearTrendSelection(announce = '') {
@@ -533,13 +537,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       return metric === 'rate' ? formatRate(value) : formatDuration(value)
     }
 
-    function renderTrendMarker(
-      group: SVGGElement | null | undefined,
-      values: Array<number | null>,
-      scale: { min: number; max: number },
-      show: boolean,
-      fill: string,
-    ) {
+    function renderTrendMarker(group: SVGGElement | null | undefined, values: Array<number | null>, scale: { min: number; max: number }, show: boolean, fill: string) {
       if (!group) return
       group.replaceChildren()
       if (!show) return
@@ -565,8 +563,13 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       }
     }
 
+    function trendReferenceDate(metrics: BuilderMetrics) {
+      const timestamp = new Date(metrics.updated_at)
+      return Number.isNaN(timestamp.getTime()) ? undefined : timestamp
+    }
+
     function renderTrend(metrics: BuilderMetrics) {
-      const rows = sliceTrendRows(metrics.daily_platforms, trendRange)
+      const rows = selectTrendRows(metrics, trendRange, trendRange === '1d' ? trendReferenceDate(metrics) : undefined)
       const iosValues = rows.map((row) => (metric === 'rate' ? row.ios : row.ios_process_seconds))
       const androidValues = rows.map((row) => (metric === 'rate' ? row.android : row.android_process_seconds))
       const values = [...iosValues, ...androidValues].filter((value): value is number => value !== null)
@@ -587,8 +590,8 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (trendMax) trendMax.textContent = formatTick(scale.max)
       if (trendMid) trendMid.textContent = formatTick(mid)
       if (trendMin) trendMin.textContent = formatTick(scale.min)
-      if (trendStart) trendStart.textContent = rows[0]?.date ?? ''
-      if (trendEnd) trendEnd.textContent = rows.at(-1)?.date ?? ''
+      if (trendStart) trendStart.textContent = formatTrendAxisLabel(rows[0]?.date ?? '', trendRange)
+      if (trendEnd) trendEnd.textContent = formatTrendAxisLabel(rows.at(-1)?.date ?? '', trendRange)
       trendRows = rows
       clearTrendSelection(trendStatusAnnounce(rows))
       if (trendOverlay) trendOverlay.hidden = rows.length === 0
@@ -708,7 +711,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       }
     }
 
-    const METRICS_CACHE_KEY = 'capgo-builder-metrics-v1'
+    const METRICS_CACHE_KEY = 'capgo-builder-metrics-v2'
     const METRICS_CACHE_FRESH_MS = 5 * 60 * 1000
     const METRICS_CACHE_STALE_MS = 24 * 60 * 60 * 1000
 
@@ -1325,4 +1328,8 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       font-size: 0.8rem;
     }
   }
+</style>
+
+<style is:global>
+  @import '@/styles/metrics-trend-mobile.css';
 </style>

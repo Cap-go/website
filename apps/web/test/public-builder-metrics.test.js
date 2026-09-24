@@ -38,22 +38,21 @@ test('buildPublicBuilderMetrics emits rates and minutes, never raw counts', () =
     { reason: 'script_failure', share: 75 },
     { reason: 'timeout', share: 25 },
   ])
-  expect(metrics.daily_platforms).toEqual([
-    { date: '2026-09-16', ios: 80, android: 80, ios_process_seconds: 200, android_process_seconds: 150 },
-  ])
+  expect(metrics.daily_platforms).toEqual([{ date: '2026-09-16', ios: 80, android: 80, ios_process_seconds: 200, android_process_seconds: 150 }])
+  expect(metrics.hourly_platforms).toEqual([])
   expect(JSON.stringify(metrics)).not.toContain('"successes"')
   expect(JSON.stringify(metrics)).not.toContain('builds_total')
 })
 
 test('fetchPublicBuilderMetricsFromRpc posts to the public RPC', async () => {
-  const payload = { success_rate: 80, updated_at: '2026-09-19T12:00:00.000Z', daily_platforms: [], failures: [], platforms: [] }
+  const payload = { success_rate: 80, updated_at: '2026-09-19T12:00:00.000Z', daily_platforms: [], hourly_platforms: [], failures: [], platforms: [] }
   const metrics = await fetchPublicBuilderMetricsFromRpc({
     supabaseUrl: 'https://example.supabase.co',
     anonKey: 'anon',
     fetch: async (url, init) => {
       expect(String(url)).toBe('https://example.supabase.co/rest/v1/rpc/get_public_builder_metrics')
       expect(init?.method).toBe('POST')
-      expect(init?.body).toBe(JSON.stringify({ trend_history_days: 90 }))
+      expect(init?.body).toBe(JSON.stringify({ trend_history_days: 90, trend_hourly: true }))
       expect(init?.headers?.apikey).toBe('anon')
       return new Response(JSON.stringify(payload), { headers: { 'content-type': 'application/json' } })
     },

@@ -30,6 +30,7 @@ export type PublicLiveUpdateMetrics = {
   daily: Array<{ date: string; success_rate: number }>
   daily_platforms: PublicDailyPlatformMetric[]
   daily_platforms_sparkline: PublicDailyPlatformMetric[]
+  hourly_platforms: PublicDailyPlatformMetric[]
   failures: Array<{ reason: string; share: number }>
   platforms: PublicBreakdownMetric[]
   countries: PublicBreakdownMetric[]
@@ -167,6 +168,14 @@ function buildAnalyticsWindow(referenceDate: Date, days: number) {
   return `timestamp >= toDateTime('${formatDateCF(start)}') AND timestamp < toDateTime('${formatDateCF(end)}')`
 }
 
+function buildUtcDayHourlyWindow(referenceDate: Date) {
+  const start = new Date(Date.UTC(referenceDate.getUTCFullYear(), referenceDate.getUTCMonth(), referenceDate.getUTCDate()))
+  const end = new Date(referenceDate)
+  end.setUTCMinutes(0, 0, 0)
+  end.setUTCHours(end.getUTCHours() + 1)
+  return `timestamp >= toDateTime('${formatDateCF(start)}') AND timestamp < toDateTime('${formatDateCF(end)}')`
+}
+
 function buildOutcomeBase(window: string, failureActions: string, day: string) {
   return `SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, max(if(blob2 = 'set', 1, 0)) AS succeeded, max(if(blob2 IN (${failureActions}), 1, 0)) AS failed, argMax(blob5, timestamp) AS platform, argMax(blob6, timestamp) AS country, argMax(blob7, timestamp) AS plugin_version FROM app_log WHERE ${window} AND (blob2 = 'set' OR blob2 IN (${failureActions})) GROUP BY date, app_id, device_id`
 }
@@ -174,12 +183,15 @@ function buildOutcomeBase(window: string, failureActions: string, day: string) {
 export function buildPublicLiveUpdateQueries(referenceDate = new Date()) {
   const window = buildAnalyticsWindow(referenceDate, LIVE_UPDATE_KPI_WINDOW_DAYS)
   const trendWindow = buildAnalyticsWindow(referenceDate, TREND_HISTORY_DAYS)
+  const hourlyWindow = buildUtcDayHourlyWindow(referenceDate)
   const failureActions = PUBLIC_FAILURE_ACTIONS.map((action) => `'${action}'`).join(', ')
   const zipFailActions = PUBLIC_ZIP_FAIL_ACTIONS.map((action) => `'${action}'`).join(', ')
   const deltaFailActions = PUBLIC_DELTA_FAIL_ACTIONS.map((action) => `'${action}'`).join(', ')
   const day = `formatDateTime(toStartOfInterval(timestamp, INTERVAL '1' DAY), '%Y-%m-%d')`
+  const hour = `formatDateTime(toStartOfInterval(timestamp, INTERVAL '1' HOUR), '%Y-%m-%d %H:00')`
   const outcomeBase = buildOutcomeBase(window, failureActions, day)
   const trendOutcomeBase = buildOutcomeBase(trendWindow, failureActions, day)
+  const hourlyOutcomeBase = buildOutcomeBase(hourlyWindow, failureActions, hour)
 
   return {
     outcomes: `SELECT date, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures, sum(if(succeeded = 1 AND failed = 0, 1, 0)) AS first_tries FROM (${outcomeBase}) GROUP BY date`,
@@ -188,6 +200,7 @@ export function buildPublicLiveUpdateQueries(referenceDate = new Date()) {
     failures: `SELECT action, count() AS devices FROM (SELECT ${day} AS date, blob2 AS action, index1 AS app_id, blob1 AS device_id FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, action, app_id, device_id) GROUP BY action`,
     platformsShare: `SELECT platform, count() AS devices FROM (SELECT double1 AS platform, index1 AS app_id, blob1 AS device_id FROM device_usage WHERE ${window} AND double1 IN (0.0, 1.0, 2.0) GROUP BY platform, app_id, device_id) GROUP BY platform`,
     platformsDaily: `SELECT date, platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${trendOutcomeBase}) WHERE platform IN ('ios', 'android') GROUP BY date, platform`,
+    platformsHourly: `SELECT date, platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${hourlyOutcomeBase}) WHERE platform IN ('ios', 'android') GROUP BY date, platform`,
     platformsOutcome: `SELECT platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${outcomeBase}) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform`,
     platformsFailure: `SELECT platform AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob5, timestamp) AS platform FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, app_id, device_id, action) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform, action`,
     countriesShare: `SELECT country AS key, count() AS devices FROM (SELECT index1 AS app_id, blob1 AS device_id, argMax(blob10, timestamp) AS country FROM device_info WHERE ${window} AND blob10 != '' GROUP BY app_id, device_id) WHERE country != '' GROUP BY country`,
@@ -230,6 +243,7 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     failureRows,
     platformShareRows,
     platformDailyRows,
+    platformHourlyRows,
     platformOutcomeRows,
     platformFailureRows,
     countryShareRows,
@@ -245,6 +259,7 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     runQuery<{ action: string; devices: number }>(auth, queries.failures),
     runQuery<{ platform: number; devices: number }>(auth, queries.platformsShare),
     runQuery<{ date: string; key: string; successes: number; failures: number }>(auth, queries.platformsDaily),
+    runQuery<{ date: string; key: string; successes: number; failures: number }>(auth, queries.platformsHourly),
     runQuery<{ key: string; successes: number; failures: number }>(auth, queries.platformsOutcome),
     runQuery<{ key: string; action: string; devices: number }>(auth, queries.platformsFailure),
     runQuery<{ key: string; devices: number }>(auth, queries.countriesShare),
@@ -288,6 +303,7 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
 
   const daily_platforms = buildDailyPlatforms(platformDailyRows)
   const daily_platforms_sparkline = sliceSparklineRows(daily_platforms, now)
+  const hourly_platforms = buildDailyPlatforms(platformHourlyRows)
 
   return {
     success_rate: totalOutcomes ? roundPublicPercent((totalSuccesses / totalOutcomes) * 100) : 0,
@@ -303,6 +319,7 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     daily,
     daily_platforms,
     daily_platforms_sparkline,
+    hourly_platforms,
     failures,
     platforms: buildBreakdownMetrics(platformShareMapped, platformOutcomeRows, platformFailureRows, 3),
     countries: buildBreakdownMetrics(countryShareRows, countryOutcomeRows, countryFailureRows, PUBLIC_TOP_COUNTRIES),

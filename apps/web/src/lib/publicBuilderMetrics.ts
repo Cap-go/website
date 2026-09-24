@@ -6,7 +6,7 @@ export const PUBLIC_BUILDER_SUPABASE_URL = 'https://xvwzpoazmxkqosrdewyv.supabas
 
 export type BuilderPlatformKey = 'ios' | 'android'
 
-export type BuilderFailureMetric = { reason: string, share: number }
+export type BuilderFailureMetric = { reason: string; share: number }
 
 export type BuilderPlatformMetric = {
   key: BuilderPlatformKey
@@ -32,6 +32,7 @@ export type PublicBuilderMetrics = {
   period_days: number
   updated_at: string
   daily_platforms: BuilderDailyPlatformMetric[]
+  hourly_platforms: BuilderDailyPlatformMetric[]
   failures: BuilderFailureMetric[]
   platforms: BuilderPlatformMetric[]
 }
@@ -53,6 +54,8 @@ export type BuilderDailyRow = {
   avg_queue_seconds: number | null
 }
 
+export type BuilderHourlyRow = BuilderDailyRow
+
 export type BuilderFailureRow = {
   reason: string
   failures: number
@@ -68,6 +71,7 @@ export type BuilderMetricsSource = {
   updated_at?: string
   platforms: BuilderPlatformRow[]
   daily: BuilderDailyRow[]
+  hourly?: BuilderHourlyRow[]
   failures: BuilderFailureRow[]
   platformFailures: BuilderPlatformFailureRow[]
 }
@@ -109,17 +113,13 @@ function rollupFailures(rows: BuilderFailureRow[]) {
   const total = [...totals.values()].reduce((sum, value) => sum + value, 0)
   return [...totals]
     .map(([reason, failures]) => ({ reason, share: shareFromParts(failures, total), failures }))
-    .filter(item => item.failures > 0)
+    .filter((item) => item.failures > 0)
     .sort((a, b) => b.share - a.share || a.reason.localeCompare(b.reason))
     .map(({ reason, share }) => ({ reason, share }))
 }
 
 function topFailureForPlatform(rows: BuilderPlatformFailureRow[], platform: string) {
-  return rollupFailures(
-    rows
-      .filter(row => row.platform === platform)
-      .map(row => ({ reason: row.reason, failures: row.failures })),
-  )[0] ?? null
+  return rollupFailures(rows.filter((row) => row.platform === platform).map((row) => ({ reason: row.reason, failures: row.failures })))[0] ?? null
 }
 
 function platformKey(value: string): BuilderPlatformKey | null {
@@ -127,7 +127,7 @@ function platformKey(value: string): BuilderPlatformKey | null {
   return null
 }
 
-function buildDailyPlatforms(rows: BuilderDailyRow[]): BuilderDailyPlatformMetric[] {
+function buildPlatformTrendRows(rows: BuilderDailyRow[]): BuilderDailyPlatformMetric[] {
   const byDate = new Map<string, BuilderDailyPlatformMetric>()
   for (const row of rows) {
     const key = platformKey(row.platform)
@@ -191,7 +191,8 @@ export function buildPublicBuilderMetrics(source: BuilderMetricsSource): PublicB
     avg_queue_seconds: queueWeight ? roundPublic(weightedQueue / queueWeight) : null,
     period_days: 30,
     updated_at: source.updated_at ?? new Date().toISOString(),
-    daily_platforms: buildDailyPlatforms(source.daily),
+    daily_platforms: buildPlatformTrendRows(source.daily),
+    hourly_platforms: buildPlatformTrendRows(source.hourly ?? []),
     failures: rollupFailures(source.failures),
     platforms: platforms
       .toSorted((a, b) => b.outcomes - a.outcomes || a.key.localeCompare(b.key))
@@ -206,11 +207,7 @@ export function buildPublicBuilderMetrics(source: BuilderMetricsSource): PublicB
   }
 }
 
-export async function fetchPublicBuilderMetricsFromRpc(options: {
-  supabaseUrl: string
-  anonKey: string
-  fetch?: typeof fetch
-}): Promise<PublicBuilderMetrics> {
+export async function fetchPublicBuilderMetricsFromRpc(options: { supabaseUrl: string; anonKey: string; fetch?: typeof fetch }): Promise<PublicBuilderMetrics> {
   const fetchImpl = options.fetch ?? fetch
   const url = `${options.supabaseUrl.replace(/\/$/, '')}/rest/v1/rpc/get_public_builder_metrics`
   const response = await fetchImpl(url, {
@@ -220,7 +217,7 @@ export async function fetchPublicBuilderMetricsFromRpc(options: {
       Authorization: `Bearer ${options.anonKey}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ trend_history_days: TREND_HISTORY_DAYS }),
+    body: JSON.stringify({ trend_history_days: TREND_HISTORY_DAYS, trend_hourly: true }),
     signal: AbortSignal.timeout(20_000),
   })
   if (!response.ok) {
