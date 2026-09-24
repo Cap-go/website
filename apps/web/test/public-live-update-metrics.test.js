@@ -1,9 +1,24 @@
 import { expect, test } from 'bun:test'
+import { readFileSync } from 'node:fs'
+import { buildContiguousDailyPlatformRows, selectTrendRows, TREND_HISTORY_DAYS } from '../src/lib/metricsTrendChart.ts'
 import { buildPublicLiveUpdateQueries, getPublicLiveUpdateMetrics } from '../src/lib/publicLiveUpdateMetrics.ts'
+
+const prodSnapshot = JSON.parse(readFileSync(new URL('./fixtures/live-update-metrics-prod-2026-09-24.json', import.meta.url), 'utf8'))
 
 function analyticsResponse(data) {
   return new Response(JSON.stringify({ data }), { headers: { 'content-type': 'application/json' } })
 }
+
+test('production snapshot zero-fills to 90 UTC days without altering real rates', () => {
+  const now = new Date(prodSnapshot.updated_at)
+  const filled = buildContiguousDailyPlatformRows(prodSnapshot.daily_platforms, now, TREND_HISTORY_DAYS)
+  expect(filled).toHaveLength(90)
+  expect(filled[0]?.date).toBe('2026-06-27')
+  expect(filled.find((row) => row.date === '2026-06-27')).toEqual({ date: '2026-06-27', ios: null, android: null })
+  expect(filled.find((row) => row.date === '2026-07-17')).toEqual(prodSnapshot.daily_platforms[0])
+  expect(selectTrendRows({ daily_platforms: filled }, '3m', now)).toHaveLength(90)
+  expect(selectTrendRows({ daily_platforms: filled }, '1m', now)).toHaveLength(30)
+})
 
 test('buildPublicLiveUpdateQueries stays at one Analytics Engine nest', () => {
   const queries = Object.values(buildPublicLiveUpdateQueries(new Date('2026-09-17T00:00:00.000Z')))
@@ -91,14 +106,18 @@ test('getPublicLiveUpdateMetrics weights daily rates and skips first-day', async
     { date: '2026-09-15', success_rate: 40 },
     { date: '2026-09-16', success_rate: 90 },
   ])
-  expect(metrics.daily_platforms).toEqual([
-    { date: '2026-09-15', ios: 90, android: 6.7 },
-    { date: '2026-09-16', ios: 93.3, android: 80 },
-  ])
-  expect(metrics.daily_platforms_sparkline).toEqual(metrics.daily_platforms)
+  expect(metrics.daily_platforms).toHaveLength(90)
+  expect(metrics.daily_platforms[0]?.date).toBe('2026-06-20')
+  expect(metrics.daily_platforms.at(-1)?.date).toBe('2026-09-17')
+  expect(metrics.daily_platforms.find((row) => row.date === '2026-09-15')).toEqual({ date: '2026-09-15', ios: 90, android: 6.7 })
+  expect(metrics.daily_platforms.find((row) => row.date === '2026-09-16')).toEqual({ date: '2026-09-16', ios: 93.3, android: 80 })
+  expect(metrics.daily_platforms_sparkline).toHaveLength(30)
+  expect(selectTrendRows({ daily_platforms: metrics.daily_platforms }, '3m', new Date('2026-09-17T12:00:00.000Z'))).toHaveLength(90)
+  expect(selectTrendRows({ daily_platforms: metrics.daily_platforms }, '1m', new Date('2026-09-17T12:00:00.000Z'))).toHaveLength(30)
   expect(metrics.hourly_platforms).toEqual([
     { date: '2026-09-17 08:00', ios: 88.9, android: 80 },
     { date: '2026-09-17 09:00', ios: 90, android: 83.3 },
   ])
   expect(metrics.period_days).toBe(30)
+  expect(metrics.daily_window_days).toBe(90)
 })

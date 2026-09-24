@@ -18,6 +18,8 @@ export type LiveUpdateMetrics = {
   rollback_rate: number | null
   zip_success_rate: number | null
   delta_success_rate: number | null
+  period_days?: number
+  daily_window_days?: number
   updated_at: string
   daily: DailyMetric[]
   daily_platforms: DailyPlatformMetric[]
@@ -183,6 +185,8 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
     rollback_rate: nullablePercentage(value.rollback_rate),
     zip_success_rate: nullablePercentage(value.zip_success_rate),
     delta_success_rate: nullablePercentage(value.delta_success_rate),
+    period_days: typeof value.period_days === 'number' ? value.period_days : 30,
+    daily_window_days: typeof value.daily_window_days === 'number' ? value.daily_window_days : 90,
     updated_at: value.updated_at,
     daily,
     daily_platforms,

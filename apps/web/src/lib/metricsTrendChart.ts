@@ -38,6 +38,25 @@ export function formatUtcDate(date: Date) {
   return `${year}-${month}-${day}`
 }
 
+export function buildRollingDailyBucketKeys(referenceDate = new Date(), days = TREND_HISTORY_DAYS) {
+  const end = new Date(Date.UTC(referenceDate.getUTCFullYear(), referenceDate.getUTCMonth(), referenceDate.getUTCDate()))
+  const keys: string[] = []
+  for (let offset = days - 1; offset >= 0; offset -= 1) {
+    const cursor = new Date(end)
+    cursor.setUTCDate(end.getUTCDate() - offset)
+    keys.push(formatUtcDate(cursor))
+  }
+  return keys
+}
+
+export function buildContiguousDailyPlatformRows<T extends TrendPlatformRow>(rows: T[], referenceDate = new Date(), days = TREND_HISTORY_DAYS): T[] {
+  const byDate = new Map(rows.map((row) => [row.date, row]))
+  return buildRollingDailyBucketKeys(referenceDate, days).map((date) => {
+    const row = byDate.get(date)
+    return row ?? ({ date, ios: null, android: null } as T)
+  })
+}
+
 export function parseTrendUtcDate(date: string): Date | null {
   const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(date.trim())
   if (!match) return null
@@ -94,11 +113,7 @@ export function sliceHourlyTrendRows<T extends { date: string }>(rows: T[], refe
   return []
 }
 
-export function selectTrendRows<T extends { date: string }>(
-  metrics: TrendMetricsRows<T>,
-  key: TrendRangeKey,
-  referenceDate?: Date,
-): T[] {
+export function selectTrendRows<T extends { date: string }>(metrics: TrendMetricsRows<T>, key: TrendRangeKey, referenceDate?: Date): T[] {
   if (key === '1d') {
     const hourly = metrics.hourly_platforms ?? []
     const hourlyRows = sliceHourlyTrendRows(hourly, referenceDate)

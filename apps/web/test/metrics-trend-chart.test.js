@@ -1,5 +1,15 @@
 import { expect, test } from 'bun:test'
-import { formatTrendAxisLabel, selectTrendRows, sliceHourlyTrendRows, sliceSparklineRows, sliceTrendRows, trendNearestIndex, trendRowUnit } from '../src/lib/metricsTrendChart.ts'
+import {
+  buildContiguousDailyPlatformRows,
+  buildRollingDailyBucketKeys,
+  formatTrendAxisLabel,
+  selectTrendRows,
+  sliceHourlyTrendRows,
+  sliceSparklineRows,
+  sliceTrendRows,
+  trendNearestIndex,
+  trendRowUnit,
+} from '../src/lib/metricsTrendChart.ts'
 
 test('sliceTrendRows filters by UTC date boundary and keeps gaps', () => {
   const rows = [
@@ -56,9 +66,7 @@ test('selectTrendRows falls back to daily when hourly rows are outside the rolli
     hourly_platforms: [{ date: '2026-09-20 08:00', ios: 72, android: 61 }],
   }
 
-  expect(selectTrendRows(metrics, '1d', new Date('2026-09-23T21:00:00.000Z'))).toEqual([
-    { date: '2026-09-23', ios: 80, android: 70 },
-  ])
+  expect(selectTrendRows(metrics, '1d', new Date('2026-09-23T21:00:00.000Z'))).toEqual([{ date: '2026-09-23', ios: 80, android: 70 }])
 })
 
 test('selectTrendRows uses hourly rows for 1D', () => {
@@ -73,6 +81,24 @@ test('selectTrendRows uses hourly rows for 1D', () => {
 
   expect(selectTrendRows(metrics, '1d', new Date('2026-09-23T21:00:00.000Z'))).toHaveLength(3)
   expect(selectTrendRows(metrics, '1m', new Date('2026-09-23T21:00:00.000Z'))).toHaveLength(1)
+})
+
+test('buildContiguousDailyPlatformRows fills 90 UTC days for 3M charts', () => {
+  const referenceDate = new Date('2026-09-17T12:00:00.000Z')
+  const rows = buildContiguousDailyPlatformRows(
+    [
+      { date: '2026-09-16', ios: 90, android: 80 },
+      { date: '2026-06-20', ios: 70, android: 60 },
+    ],
+    referenceDate,
+    90,
+  )
+  expect(rows).toHaveLength(90)
+  expect(rows[0]?.date).toBe(buildRollingDailyBucketKeys(referenceDate, 90)[0])
+  expect(rows.at(-1)?.date).toBe('2026-09-17')
+  expect(selectTrendRows({ daily_platforms: rows }, '3m', referenceDate)).toHaveLength(90)
+  expect(selectTrendRows({ daily_platforms: rows }, '1m', referenceDate)).toHaveLength(30)
+  expect(selectTrendRows({ daily_platforms: rows }, '1w', referenceDate)).toHaveLength(7)
 })
 
 test('sliceSparklineRows keeps the last 30 UTC days', () => {
