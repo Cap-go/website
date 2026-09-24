@@ -29,4 +29,4 @@ seo-report.sarif
 .wrangler
 
 # Visual regression artifacts (local only)
-.visual-diff/
+.visual-diff/apps/web/test/fixtures/builder-metrics-d1-seed.sql

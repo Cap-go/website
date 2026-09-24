@@ -35,7 +35,8 @@ for (let dayOffset = 89; dayOffset >= 0; dayOffset -= 1) {
     const builds = 2 + (dayOffset % 3)
     for (let index = 0; index < builds; index += 1) {
       const createdAt = dayMs + (9 + index) * 3_600_000
-      const succeeded = Math.random() < rate
+      const deterministicRoll = ((dayOffset * 17 + index * 31 + (platform === 'ios' ? 1 : 0)) % 100) / 100
+      const succeeded = deterministicRoll < rate
       if (succeeded) {
         insertJob({ status: 'succeeded', createdAt, platform, processMs: 150_000 + index * 20_000 })
       } else {
