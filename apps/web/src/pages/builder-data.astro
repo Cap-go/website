@@ -326,6 +326,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     TREND_RANGE_OPTIONS,
     trendHitLeftPercent,
     trendNearestIndex,
+    trendRowUnit,
     type TrendRangeKey,
   } from '@/lib/metricsTrendChart'
 
@@ -418,7 +419,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       const metricLabel = metric === 'rate' ? 'Build success' : 'Processing time'
       const rangeLabel = TREND_RANGE_OPTIONS.find((option) => option.key === trendRange)?.label ?? trendRange
       if (!rows.length) return 'Builder trend unavailable'
-      const unit = trendRange === '1d' ? 'hour' : 'day'
+      const unit = trendRowUnit(rows, trendRange)
       const dates = rows.length === 1 ? rows[0].date : `${rows[0]?.date} to ${rows.at(-1)?.date}`
       return `${metricLabel} trend updated for ${rangeLabel}: ${rows.length} ${unit}${rows.length === 1 ? '' : 's'} (${dates})`
     }

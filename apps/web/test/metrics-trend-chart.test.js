@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test'
-import { formatTrendAxisLabel, selectTrendRows, sliceHourlyTrendRows, sliceSparklineRows, sliceTrendRows, trendNearestIndex } from '../src/lib/metricsTrendChart.ts'
+import { formatTrendAxisLabel, selectTrendRows, sliceHourlyTrendRows, sliceSparklineRows, sliceTrendRows, trendNearestIndex, trendRowUnit } from '../src/lib/metricsTrendChart.ts'
 
 test('sliceTrendRows filters by UTC date boundary and keeps gaps', () => {
   const rows = [
@@ -71,6 +71,12 @@ test('sliceSparklineRows keeps the last 30 UTC days', () => {
   expect(sparkline).toHaveLength(30)
   expect(sparkline[0]?.date).toBe('2026-03-12')
   expect(sparkline.at(-1)?.date).toBe('2026-04-10')
+})
+
+test('trendRowUnit follows hourly vs daily 1D rows', () => {
+  expect(trendRowUnit([{ date: '2026-09-23 08:00' }], '1d')).toBe('hour')
+  expect(trendRowUnit([{ date: '2026-09-23' }], '1d')).toBe('day')
+  expect(trendRowUnit([{ date: '2026-09-23' }], '1m')).toBe('day')
 })
 
 test('formatTrendAxisLabel shortens hourly labels', () => {

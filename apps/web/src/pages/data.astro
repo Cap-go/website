@@ -510,6 +510,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     sliceSparklineRows,
     trendHitLeftPercent,
     trendNearestIndex,
+    trendRowUnit,
     type TrendRangeKey,
   } from '@/lib/metricsTrendChart'
 
@@ -827,7 +828,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
         dailyEmpty.textContent = 'Success-rate data is temporarily unavailable.'
       }
       if (dailyStatus) {
-        const unit = trendRange === '1d' ? 'hour' : 'day'
+        const unit = trendRowUnit(rows, trendRange)
         dailyStatus.textContent = rows.length
           ? `Install success trend updated with ${rows.length} ${unit}${rows.length === 1 ? '' : 's'}`
           : 'Install success trend unavailable'

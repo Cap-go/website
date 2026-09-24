@@ -98,6 +98,12 @@ export function sliceSparklineRows<T extends { date: string }>(rows: T[], refere
   return sliceTrendRows(rows, '1m', referenceDate)
 }
 
+export function trendRowUnit(rows: Array<{ date: string }>, range: TrendRangeKey) {
+  if (range !== '1d') return 'day'
+  const sample = rows[0]?.date ?? ''
+  return /(?:T| )\d{2}:\d{2}/.test(sample) ? 'hour' : 'day'
+}
+
 export function formatTrendAxisLabel(date: string, range: TrendRangeKey) {
   if (!date) return ''
   if (range === '1d') {
