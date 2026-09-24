@@ -91,7 +91,7 @@ export function sliceHourlyTrendRows<T extends { date: string }>(rows: T[], refe
     return parsed >= start && parsed < endExclusive
   })
   if (filtered.length) return filtered
-  return rows.slice(Math.max(0, rows.length - 24))
+  return []
 }
 
 export function selectTrendRows<T extends { date: string }>(
@@ -101,7 +101,8 @@ export function selectTrendRows<T extends { date: string }>(
 ): T[] {
   if (key === '1d') {
     const hourly = metrics.hourly_platforms ?? []
-    if (hourly.length) return sliceHourlyTrendRows(hourly, referenceDate)
+    const hourlyRows = sliceHourlyTrendRows(hourly, referenceDate)
+    if (hourlyRows.length) return hourlyRows
     return sliceTrendRows(metrics.daily_platforms, '1d', referenceDate)
   }
   return sliceTrendRows(metrics.daily_platforms, key, referenceDate)

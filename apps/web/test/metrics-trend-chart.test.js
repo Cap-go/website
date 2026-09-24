@@ -50,6 +50,17 @@ test('sliceHourlyTrendRows keeps a rolling 24h window ending at the current UTC 
   ])
 })
 
+test('selectTrendRows falls back to daily when hourly rows are outside the rolling window', () => {
+  const metrics = {
+    daily_platforms: [{ date: '2026-09-23', ios: 80, android: 70 }],
+    hourly_platforms: [{ date: '2026-09-20 08:00', ios: 72, android: 61 }],
+  }
+
+  expect(selectTrendRows(metrics, '1d', new Date('2026-09-23T21:00:00.000Z'))).toEqual([
+    { date: '2026-09-23', ios: 80, android: 70 },
+  ])
+})
+
 test('selectTrendRows uses hourly rows for 1D', () => {
   const metrics = {
     daily_platforms: [{ date: '2026-09-23', ios: 80, android: 70 }],
