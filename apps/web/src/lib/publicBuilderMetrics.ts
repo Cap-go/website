@@ -1,5 +1,3 @@
-import { TREND_HISTORY_DAYS } from './metricsTrendChart'
-
 export const BUILDER_METRICS_PATH = '/builder-metrics.json'
 export const BUILDER_METRICS_CACHE_TTL_SECONDS = 300
 export const PUBLIC_BUILDER_SUPABASE_URL = 'https://xvwzpoazmxkqosrdewyv.supabase.co'
@@ -218,7 +216,7 @@ export async function fetchPublicBuilderMetricsFromRpc(options: { supabaseUrl: s
       Authorization: `Bearer ${options.anonKey}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ trend_history_days: TREND_HISTORY_DAYS, trend_hourly: true }),
+    body: JSON.stringify({}),
     signal: AbortSignal.timeout(20_000),
   })
   if (!response.ok) {
