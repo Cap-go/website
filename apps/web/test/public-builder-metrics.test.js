@@ -1,5 +1,6 @@
-import { expect, test } from 'bun:test'
-import { buildPublicBuilderMetrics, classifyBuilderFailure, fetchPublicBuilderMetricsFromRpc } from '../src/lib/publicBuilderMetrics.ts'
+import { expect, spyOn, test } from 'bun:test'
+import * as builderMetricsD1 from '../src/lib/builderMetricsD1.ts'
+import { buildPublicBuilderMetrics, classifyBuilderFailure } from '../src/lib/publicBuilderMetrics.ts'
 import { handleBuilderMetrics } from '../src/worker/builder-metrics.ts'
 
 const source = {
@@ -33,6 +34,7 @@ test('buildPublicBuilderMetrics emits rates and minutes, never raw counts', () =
   const metrics = buildPublicBuilderMetrics(source)
   expect(metrics.success_rate).toBe(73.3)
   expect(metrics.avg_process_seconds).toBe(220)
+  expect(metrics.daily_window_days).toBe(90)
   expect(metrics.platforms[0]).toMatchObject({ key: 'ios', share: 66.7, success_rate: 70 })
   expect(metrics.platforms[1]).toMatchObject({ key: 'android', share: 33.3, success_rate: 80 })
   expect(metrics.failures).toEqual([
@@ -45,36 +47,32 @@ test('buildPublicBuilderMetrics emits rates and minutes, never raw counts', () =
   expect(JSON.stringify(metrics)).not.toContain('builds_total')
 })
 
-test('fetchPublicBuilderMetricsFromRpc posts to the public RPC', async () => {
-  const payload = { success_rate: 80, updated_at: '2026-09-19T12:00:00.000Z', daily_platforms: [], hourly_platforms: [], failures: [], platforms: [] }
-  const metrics = await fetchPublicBuilderMetricsFromRpc({
-    supabaseUrl: 'https://example.supabase.co',
-    apiKey: 'service-role-key',
-    fetch: async (url, init) => {
-      expect(String(url)).toBe('https://example.supabase.co/rest/v1/rpc/get_public_builder_metrics')
-      expect(init?.method).toBe('POST')
-      expect(init?.body).toBe(JSON.stringify({}))
-      expect(init?.headers?.apikey).toBe('service-role-key')
-      expect(init?.headers?.Authorization).toBe('Bearer service-role-key')
-      return new Response(JSON.stringify(payload), { headers: { 'content-type': 'application/json' } })
-    },
-  })
-  expect(metrics.success_rate).toBe(80)
-})
-
-test('fetchPublicBuilderMetricsFromRpc 401 mentions SUPABASE_SERVICE_ROLE_KEY', async () => {
-  await expect(
-    fetchPublicBuilderMetricsFromRpc({
-      supabaseUrl: 'https://example.supabase.co',
-      apiKey: 'invalid',
-      fetch: async () => new Response('', { status: 401 }),
-    }),
-  ).rejects.toThrow('Worker SUPABASE_SERVICE_ROLE_KEY must be the service role key')
-})
-
-test('handleBuilderMetrics returns misconfigured when SUPABASE_SERVICE_ROLE_KEY is missing', async () => {
+test('handleBuilderMetrics returns misconfigured when BUILDER_DB is missing', async () => {
   const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), {})
   expect(response.status).toBe(503)
   const body = await response.json()
   expect(body.error).toBe('Builder metrics misconfigured')
+})
+
+test('handleBuilderMetrics returns unavailable when D1 query fails', async () => {
+  const spy = spyOn(builderMetricsD1, 'fetchPublicBuilderMetricsFromD1').mockImplementation(async () => {
+    throw new Error('D1 unavailable')
+  })
+  const previousCaches = globalThis.caches
+  globalThis.caches = {
+    default: {
+      match: async () => undefined,
+      put: async () => {},
+    },
+  }
+
+  const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), {
+    BUILDER_DB: { prepare: () => ({ bind: () => ({ all: async () => ({ results: [] }) }) }) },
+  })
+
+  globalThis.caches = previousCaches
+  spy.mockRestore()
+  expect(response.status).toBe(503)
+  const body = await response.json()
+  expect(body.error).toBe('Builder metrics are temporarily unavailable')
 })

@@ -1,6 +1,5 @@
 export const BUILDER_METRICS_PATH = '/builder-metrics.json'
 export const BUILDER_METRICS_CACHE_TTL_SECONDS = 300
-export const PUBLIC_BUILDER_SUPABASE_URL = 'https://xvwzpoazmxkqosrdewyv.supabase.co'
 
 export type BuilderPlatformKey = 'ios' | 'android'
 
@@ -28,6 +27,7 @@ export type PublicBuilderMetrics = {
   avg_process_seconds: number | null
   avg_queue_seconds: number | null
   period_days: number
+  daily_window_days: number
   updated_at: string
   daily_platforms: BuilderDailyPlatformMetric[]
   hourly_platforms: BuilderDailyPlatformMetric[]
@@ -125,7 +125,7 @@ function platformKey(value: string): BuilderPlatformKey | null {
   return null
 }
 
-function buildPlatformTrendRows(rows: BuilderDailyRow[]): BuilderDailyPlatformMetric[] {
+export function buildPlatformTrendRows(rows: BuilderDailyRow[]): BuilderDailyPlatformMetric[] {
   const byDate = new Map<string, BuilderDailyPlatformMetric>()
   for (const row of rows) {
     const key = platformKey(row.platform)
@@ -188,6 +188,7 @@ export function buildPublicBuilderMetrics(source: BuilderMetricsSource): PublicB
     avg_process_seconds: processWeight ? roundPublic(weightedProcess / processWeight) : null,
     avg_queue_seconds: queueWeight ? roundPublic(weightedQueue / queueWeight) : null,
     period_days: 30,
+    daily_window_days: 90,
     updated_at: source.updated_at ?? new Date().toISOString(),
     daily_platforms: buildPlatformTrendRows(source.daily),
     hourly_platforms: buildPlatformTrendRows(source.hourly ?? []),
@@ -205,28 +206,3 @@ export function buildPublicBuilderMetrics(source: BuilderMetricsSource): PublicB
   }
 }
 
-export async function fetchPublicBuilderMetricsFromRpc(options: { supabaseUrl: string; apiKey: string; fetch?: typeof fetch }): Promise<PublicBuilderMetrics> {
-  const fetchImpl = options.fetch ?? fetch
-  const url = `${options.supabaseUrl.replace(/\/$/, '')}/rest/v1/rpc/get_public_builder_metrics`
-  const response = await fetchImpl(url, {
-    method: 'POST',
-    headers: {
-      apikey: options.apiKey,
-      Authorization: `Bearer ${options.apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({}),
-    signal: AbortSignal.timeout(20_000),
-  })
-  if (!response.ok) {
-    if (response.status === 401) {
-      throw new Error('get_public_builder_metrics failed: 401 unauthorized (Worker SUPABASE_SERVICE_ROLE_KEY must be the service role key)')
-    }
-    throw new Error(`get_public_builder_metrics failed: ${response.status}`)
-  }
-  const payload = await response.json()
-  if (!payload || typeof payload !== 'object') {
-    throw new Error('get_public_builder_metrics returned an empty payload')
-  }
-  return payload as PublicBuilderMetrics
-}
