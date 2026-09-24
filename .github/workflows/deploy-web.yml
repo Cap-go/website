@@ -142,18 +142,18 @@ jobs:
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
       - run: bun run build:after
-      - name: Sync Worker SUPABASE_SERVICE_ROLE_KEY secret
+      - name: Sync Worker BUILDER_DATABASE_URL secret
         working-directory: apps/web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          BUILDER_DATABASE_URL: ${{ secrets.BUILDER_DATABASE_URL }}
         run: |
-          if [[ -z "$SUPABASE_SERVICE_ROLE_KEY" ]]; then
-            echo "SUPABASE_SERVICE_ROLE_KEY secret is required"
+          if [[ -z "$BUILDER_DATABASE_URL" ]]; then
+            echo "BUILDER_DATABASE_URL secret is required"
             exit 1
           fi
-          printf '%s' "$SUPABASE_SERVICE_ROLE_KEY" | bunx wrangler@4.126.0 secret put SUPABASE_SERVICE_ROLE_KEY
+          printf '%s' "$BUILDER_DATABASE_URL" | bunx wrangler@4.126.0 secret put BUILDER_DATABASE_URL
       - run: bun run deploy:web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

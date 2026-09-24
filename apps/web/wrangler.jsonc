@@ -14,8 +14,7 @@
   },
   "workers_dev": false,
   "vars": {
-    "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
-    "SUPABASE_URL": "https://xvwzpoazmxkqosrdewyv.supabase.co"
+    "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0"
   },
   "routes": [
     {
@@ -34,8 +33,7 @@
   "env": {
     "development": {
       "vars": {
-        "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
-        "SUPABASE_URL": "https://xvwzpoazmxkqosrdewyv.supabase.co"
+        "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0"
       },
       "routes": [
         {

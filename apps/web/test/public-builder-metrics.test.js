@@ -1,5 +1,6 @@
 import { expect, test } from 'bun:test'
-import { buildPublicBuilderMetrics, classifyBuilderFailure, fetchPublicBuilderMetricsFromRpc } from '../src/lib/publicBuilderMetrics.ts'
+import { fetchPublicBuilderMetricsFromDatabase } from '../src/lib/builderMetricsDatabase.ts'
+import { buildPublicBuilderMetrics, classifyBuilderFailure } from '../src/lib/publicBuilderMetrics.ts'
 import { handleBuilderMetrics } from '../src/worker/builder-metrics.ts'
 
 const source = {
@@ -45,34 +46,38 @@ test('buildPublicBuilderMetrics emits rates and minutes, never raw counts', () =
   expect(JSON.stringify(metrics)).not.toContain('builds_total')
 })
 
-test('fetchPublicBuilderMetricsFromRpc posts to the public RPC', async () => {
-  const payload = { success_rate: 80, updated_at: '2026-09-19T12:00:00.000Z', daily_platforms: [], hourly_platforms: [], failures: [], platforms: [] }
-  const metrics = await fetchPublicBuilderMetricsFromRpc({
-    supabaseUrl: 'https://example.supabase.co',
-    apiKey: 'service-role-key',
-    fetch: async (url, init) => {
-      expect(String(url)).toBe('https://example.supabase.co/rest/v1/rpc/get_public_builder_metrics')
-      expect(init?.method).toBe('POST')
-      expect(init?.body).toBe(JSON.stringify({}))
-      expect(init?.headers?.apikey).toBe('service-role-key')
-      expect(init?.headers?.Authorization).toBe('Bearer service-role-key')
-      return new Response(JSON.stringify(payload), { headers: { 'content-type': 'application/json' } })
+test('fetchPublicBuilderMetricsFromDatabase queries build_requests via Postgres client', async () => {
+  const now = new Date('2026-09-23T21:00:00.000Z')
+  let capturedWindow = ''
+  const metrics = await fetchPublicBuilderMetricsFromDatabase({
+    databaseUrl: 'postgres://example',
+    now,
+    client: {
+      async queryBuildRequestRows(windowStartIso) {
+        capturedWindow = windowStartIso
+        return [
+          {
+            platform: 'ios',
+            day: '2026-09-23',
+            hour_bucket: '2026-09-23 20:00',
+            outcome: 'success',
+            process_seconds: 180,
+            queue_seconds: 1,
+            last_error: null,
+          },
+        ]
+      },
+      async end() {},
     },
   })
-  expect(metrics.success_rate).toBe(80)
+
+  expect(capturedWindow).toBe('2026-08-24T21:00:00.000Z')
+  expect(metrics.success_rate).toBe(100)
+  expect(metrics.hourly_platforms).toHaveLength(24)
+  expect(metrics.hourly_platforms.at(-1)?.date).toBe('2026-09-23 21:00')
 })
 
-test('fetchPublicBuilderMetricsFromRpc 401 mentions SUPABASE_SERVICE_ROLE_KEY', async () => {
-  await expect(
-    fetchPublicBuilderMetricsFromRpc({
-      supabaseUrl: 'https://example.supabase.co',
-      apiKey: 'invalid',
-      fetch: async () => new Response('', { status: 401 }),
-    }),
-  ).rejects.toThrow('Worker SUPABASE_SERVICE_ROLE_KEY must be the service role key')
-})
-
-test('handleBuilderMetrics returns misconfigured when SUPABASE_SERVICE_ROLE_KEY is missing', async () => {
+test('handleBuilderMetrics returns misconfigured when BUILDER_DATABASE_URL is missing', async () => {
   const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), {})
   expect(response.status).toBe(503)
   const body = await response.json()
