@@ -1,0 +1,453 @@
+{
+  "source": "capgo_store_apps",
+  "apps": [
+    {
+      "id": "ir.rightel.myrightel",
+      "title": "MyRightel",
+      "icon": "https://play-lh.googleusercontent.com/o2ya4fzawHSMcOdJ2DsPRj1Z5f7_bwKe6BE2IZRBbmVomODSF8nd0Iggfe_Mgfo0Tko",
+      "users": 3986832,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.wnetwork.app",
+      "title": "WXS ONE",
+      "icon": "https://play-lh.googleusercontent.com/_vatDrWF2BJIIi58ziwnlVZayiltaOTpIOV9Blg5p47gXJAjGvscj1N-WIGdz8oBc3r1",
+      "users": 1979,
+      "bucket": "other"
+    },
+    {
+      "id": "com.magroove.app",
+      "title": "Magroove - Music Discovery",
+      "icon": "https://play-lh.googleusercontent.com/AqI1NB8Pr4zqC6QWTqAmkQ5zzljqzW3RP_eZAD_PG8R_vcI0O3FsLM2xs2v721LKX-Q",
+      "users": 739695,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.cozyearth.mobile",
+      "title": "Cozy Earth",
+      "icon": "https://play-lh.googleusercontent.com/j0m58tWR0bfyJc8Z5hyf-22ZdZLS_2B9lnYEzbKNVA0F0vJACNa-vF3DeoRkmRHBnVk",
+      "users": 1823,
+      "bucket": "other"
+    },
+    {
+      "id": "com.nextcare.app",
+      "title": "MyNextcare",
+      "icon": "https://play-lh.googleusercontent.com/-m-py2bxjAXdSIFeO3fWYZZukQh-zlYHl1ULp_YGLNtMbzC2i5_U0aRsN37icQOWmA",
+      "users": 736712,
+      "bucket": "biggest"
+    },
+    {
+      "id": "it.conapo.app",
+      "title": "AgendaVVF",
+      "icon": "https://play-lh.googleusercontent.com/vkitfZ6dHLVZYcr2ufptzuyFMdGZdnGiwEbgW8SmSb5tuO3PzrfTKmqpPh-TnDxVQsO0",
+      "users": 1707,
+      "bucket": "other"
+    },
+    {
+      "id": "com.codmon2",
+      "title": "コドモン - 保育園の連絡をアプリで簡単に",
+      "icon": "https://play-lh.googleusercontent.com/ciiErmz8SsC0Yi2rLBbEPFpkPSbyzTDE93GUwbTPVGC5Gxnzdh8j-5TPj65F5uel2nZg",
+      "users": 668356,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.sally.app",
+      "title": "Sally Resident App",
+      "icon": "https://play-lh.googleusercontent.com/LrmmvT9v_3nsyFQa0qWkCnBRBmnBXogMJDQmrLq4rupeMNl9IWI6LLwFu3FBK1XNsxY",
+      "users": 1322,
+      "bucket": "other"
+    },
+    {
+      "id": "nl.airmiles.app",
+      "title": "Air Miles",
+      "icon": "https://play-lh.googleusercontent.com/PUMpc-s90ETxC0ryOrkwqIDX3CNE69XfLXbGSkQUufCrXCAo4ydOYDD9Rlc8U9LFbVE",
+      "users": 613633,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.uis.carnet",
+      "title": "Carnet UIS",
+      "icon": "https://play-lh.googleusercontent.com/A-1VkqM9bCaY6zujhEvlfb9prwwi1_zkHbX2D9fawXJz5pO5bj3HVTERAY5Kxm6jxcc",
+      "users": 1176,
+      "bucket": "other"
+    },
+    {
+      "id": "com.triangleleft.innawoods",
+      "title": "Innawoods",
+      "icon": "https://play-lh.googleusercontent.com/qB3qnth7SonhuQqbB3gL7MuCrhLgE444wBvYqSQcSNjESRcIi8SogVyr-6tBu2hBbh0",
+      "users": 583944,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.mnolb.topmark",
+      "title": "TopMark FCU",
+      "icon": "https://play-lh.googleusercontent.com/myA4wEgsL-ygGmy8dTqSmHKh6a6zF_58S6B4jYatY4zRx3cxYR2yqreyHsre6uPeA1U",
+      "users": 1052,
+      "bucket": "other"
+    },
+    {
+      "id": "com.incomm.otc",
+      "title": "OTC Network",
+      "icon": "https://play-lh.googleusercontent.com/H0KdU62Fzc1KC4g1iLKt7Kir2BT0Ty8kx-ugN3tGIpReMW7ZDWzt098ChW8bc7TV-ZM",
+      "users": 572846,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.eightysixdegrees.rsaagriapp",
+      "title": "RSAM",
+      "icon": "https://play-lh.googleusercontent.com/mquRcBP9sHjYYDs4jif10umRhBXjNa3TnQXA7nqGfqrosNnzN26hhcWKrTg4Q_Xss8U",
+      "users": 997,
+      "bucket": "other"
+    },
+    {
+      "id": "systems.self.robotsns",
+      "title": "SELF：AIがあなたを理解し、メンタルや生活をサポート",
+      "icon": "https://play-lh.googleusercontent.com/10B7zt5GzePBR7gp_FksMTB4fTvJWY2JhCRpBEo0YxDbn1wn1gSrZkOZQvselKWVjQ",
+      "users": 518007,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.socialcurator.app",
+      "title": "Social Curator",
+      "icon": "https://play-lh.googleusercontent.com/cOoC3dwc9cVHqWozseDkt6nqN49gdN_DjOChysCu5Brd2yKKEXuSgZf8O2OV6iM4iMM",
+      "users": 825,
+      "bucket": "other"
+    },
+    {
+      "id": "com.FourLife",
+      "title": "4Life",
+      "icon": "https://play-lh.googleusercontent.com/RkPQA8RCL6pk17qYNFHZypg-QALcIGfPcQgtFSM4hqzW14RP4q8X1DZ7yddAQeox0g",
+      "users": 459395,
+      "bucket": "biggest"
+    },
+    {
+      "id": "ly.numerik.app",
+      "title": "Numerik",
+      "icon": "https://play-lh.googleusercontent.com/sJMn_xYq5v-lmgfxSvbgnFAy9flxOgBqcccy4gYCkW_X0LIVdt3pNLTlscAcpcR-xW8",
+      "users": 728,
+      "bucket": "other"
+    },
+    {
+      "id": "com.mange.kimambi.app.tz",
+      "title": "Mange Kimambi",
+      "icon": "https://play-lh.googleusercontent.com/yA637wUiRe5nE2SfDR-uWqP-vyASTnWtProYqEM3Io0TJbYxUMMIW9XB7Xql-Y-95zM",
+      "users": 441395,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.gameshovel.windsor",
+      "title": "Windsor - Grand Strategy",
+      "icon": "https://play-lh.googleusercontent.com/06ulNwFk6eUSlBQN7GYMbi_XKDSwaAkyTShkVA2xzwi-KMQEejBs4zobHX8wObIVKeI",
+      "users": 681,
+      "bucket": "other"
+    },
+    {
+      "id": "app.hexanetwork.co",
+      "title": "Hexa Network",
+      "icon": "https://play-lh.googleusercontent.com/fDcK3vjzAVjUsP3JnbT992uTp8nctsFTFr67XeyI2ccus8pJFirM-NZZj8kGWDdM8-8",
+      "users": 429483,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.eightysixdegrees.antellogistics",
+      "title": "Antel Solutions",
+      "icon": "https://play-lh.googleusercontent.com/YH4cjK-Uw_HABiGwhZ723osCyLFwjn5zDKgAv8QOBL8VK4vXumzst4_uzmjauhqh-SY",
+      "users": 586,
+      "bucket": "other"
+    },
+    {
+      "id": "ru.snowqueen.twa",
+      "title": "Снежная Королева",
+      "icon": "https://play-lh.googleusercontent.com/9e2zculYUm_JSTgeNdyc4sag7FBMFNXo0g6FPIp0fOUPzpS3MDUiFz1m_uLFYPl8SYmQ",
+      "users": 411490,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.mocs.app",
+      "title": "MOCS Resident",
+      "icon": "https://play-lh.googleusercontent.com/LHBKrK8YGBkuiVqBldIVeb_aQAxa9V77TWJ3Sa-IQt92LI0MZRqyU-z0XNWGF9oToQ",
+      "users": 582,
+      "bucket": "other"
+    },
+    {
+      "id": "io.ionic.seed2spoon",
+      "title": "Seed to Spoon - Growing Food",
+      "icon": "https://play-lh.googleusercontent.com/KjH1sV4wAgS1uZZLJds4xBDR3JOG9znNuxYdFvSSCR4WjzV67o8e1SuWlJ8up8vnoQ",
+      "users": 339084,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.eightysixdegrees.returnit",
+      "title": "Return It",
+      "icon": "https://play-lh.googleusercontent.com/ybRGCAFV3daphnhqyYPJWn_0SWjJ2bkZv3L_nWKmx-aotNu5E2zSxcgGSUTKA9rMOg",
+      "users": 487,
+      "bucket": "other"
+    },
+    {
+      "id": "com.nianticlabs.campfire",
+      "title": "Niantic Campfire",
+      "icon": "https://play-lh.googleusercontent.com/KhqdW3avC1V1m1D-X66lcCusrjE5yDn4oDg1OihXFvwLrBoeXFb9juRLnewft_lcXw",
+      "users": 316873,
+      "bucket": "biggest"
+    },
+    {
+      "id": "la.finlink",
+      "title": "FinLink",
+      "icon": "https://play-lh.googleusercontent.com/h-p8ieQgAn-xmNvsYjt5QRdgsapGSl7RxJnI0WYmxEFZyeowGomm9wwHmdioLRcCzaY",
+      "users": 450,
+      "bucket": "other"
+    },
+    {
+      "id": "fr.monkeystudio.mybusgeneric",
+      "title": "MyBus",
+      "icon": "https://play-lh.googleusercontent.com/TyknGtnJsRFG86_N6mRIwcRHhJHJ1QQeC_VQpWO3ktgRhfbq53f4Ad9m41_BMZXlCB0",
+      "users": 232257,
+      "bucket": "biggest"
+    },
+    {
+      "id": "io.lincoin.android",
+      "title": "Lincoin Pool",
+      "icon": "https://play-lh.googleusercontent.com/hrsLOLDdHO5EAfwynADoT5PyxK9-n8ac_Asoq5z-M3DqnAhGApZk29c0zCrm9P8NqA",
+      "users": 353,
+      "bucket": "other"
+    },
+    {
+      "id": "com.loveholidays",
+      "title": "loveholidays - My bookings",
+      "icon": "https://play-lh.googleusercontent.com/rfK_vN-cS6Bobgc5O2RNz3duZQvfRpc2U7hPgkxvD4z5JjAq3F97LWsOxa26i6ByskQ",
+      "users": 222315,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.stratadata.app",
+      "title": "SD Community",
+      "icon": "https://play-lh.googleusercontent.com/CEobhO15ptqAs9UKOdOCbqeCDKd-IT8ARaklePkATTR1YCrdrD7rXuOIVNm8dFJY8dzu",
+      "users": 326,
+      "bucket": "other"
+    },
+    {
+      "id": "ch.ticketfrog.eventfrog",
+      "title": "Eventfrog",
+      "icon": "https://play-lh.googleusercontent.com/Dz3F88gHPTmjeLL_rqQOpziNQm1AhBUOSUOyOv43XwhJjY7AP791wW-5OLlHZODkvw",
+      "users": 198083,
+      "bucket": "biggest"
+    },
+    {
+      "id": "io.hococo.app.wl.calum",
+      "title": "CALUM",
+      "icon": "https://play-lh.googleusercontent.com/U7ITieL9jWaAWL0SH4N9_eAoDXRhv37d2PNkuXYmElYnS39BiKkG1DXQNmr9mwHwGi8",
+      "users": 293,
+      "bucket": "other"
+    },
+    {
+      "id": "spain.codere.apuestas",
+      "title": "Codere Apuestas Deportivas ES",
+      "icon": "https://play-lh.googleusercontent.com/xnSLzuPP7IjX6Mb3fhgAXtYORgLi9LklpR7gJVQhfIyPLLTTfX7-Rd7qIxcWYoiYjS0C",
+      "users": 194557,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.patoko.driver",
+      "title": "Patoko Driver",
+      "icon": "https://play-lh.googleusercontent.com/RHDthhU62vQ7CVk-HFjKDgt-Ui3QM8rIA93LkcbyVQYacpBMfD9u1p5Uddao6RvYHA",
+      "users": 278,
+      "bucket": "other"
+    },
+    {
+      "id": "com.app.codmobileloadout2",
+      "title": "Loadout Codmunity",
+      "icon": "https://play-lh.googleusercontent.com/w5sPTH5vS-0dl1I_xDxab92mvc22fXFUUK1tpcJk26USqVOMvafKgW1kKtoy_HsHEvK7",
+      "users": 178258,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.kalder.ram",
+      "title": "Kalder Mobile",
+      "icon": "https://play-lh.googleusercontent.com/2iWtdJ1YjTskmt8O_OF8t0uJCpZnsEgIHefc48zie_7cGknM6WuJ49qhJT324MB2bA",
+      "users": 245,
+      "bucket": "other"
+    },
+    {
+      "id": "co.tapni.app",
+      "title": "Tapni",
+      "icon": "https://play-lh.googleusercontent.com/mrebH40N9BvzZ3f_oTAhLAU_sS7Q3FzYLgpKWlAXwriYfKE-AYBstUcB2CveXsu636OX",
+      "users": 166487,
+      "bucket": "biggest"
+    },
+    {
+      "id": "io.codeu.togethair",
+      "title": "Togethair Poland",
+      "icon": "https://play-lh.googleusercontent.com/1-0Vbq40m4uimwGtFwlirZPnhM5aE1PcTR7WTC36F82ywFQXCb0s3u4mYjJibu6Jjus",
+      "users": 237,
+      "bucket": "other"
+    },
+    {
+      "id": "co.msastro.app",
+      "title": "Ms Astro",
+      "icon": "https://play-lh.googleusercontent.com/TJ2ixLGBbPo2O8KL8EAVwUHZgfJ8fz4s0QLkqFRsC03f7vkFICQeoVEfA2UMnhEcAMg",
+      "users": 142135,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.signaturestrata.app",
+      "title": "Signature Strata",
+      "icon": "https://play-lh.googleusercontent.com/y_-WE070mVu0VmhxC4irdqUSFIa40KJPKKKHu689VGXPLnZnZPuavZRq2ub6gb08E6Q",
+      "users": 219,
+      "bucket": "other"
+    },
+    {
+      "id": "com.tf.ogrencikariyeri",
+      "title": "Öğrenci Kariyeri",
+      "icon": "https://play-lh.googleusercontent.com/ahPfnnDAQVsfGMNssZr5781gcpH4UzSL6Nq7YkPiFuVJxuggWy_2FHnoWbbzkNIIbmj_",
+      "users": 132290,
+      "bucket": "biggest"
+    },
+    {
+      "id": "br.com.duleads.app",
+      "title": "DuLeads",
+      "icon": "https://play-lh.googleusercontent.com/bu76T8yUOtTTQxhWvb0Xhi7P3fK8cfD9wH_1gbkQquCc-svgLdIc1WcKxS35Fn0_80A",
+      "users": 182,
+      "bucket": "other"
+    },
+    {
+      "id": "uk.co.carfinance247.customerapp",
+      "title": "CarFinance 247",
+      "icon": "https://play-lh.googleusercontent.com/ZfQO_Ly1Lez1KQ332d6jc2KYLM1gAxi9A2vTJHQuubk5-gauaXQ_e71oAU7F3L2xIkFL",
+      "users": 130079,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.ebv.app",
+      "title": "East Brunswick Village App",
+      "icon": "https://play-lh.googleusercontent.com/5l2Ys3qoIDh7_ruO88dCnSgFT-T2dhZMDRAnGtJnhSHiqSDXMX_b6fHPmSQrDGLW2LE",
+      "users": 170,
+      "bucket": "other"
+    },
+    {
+      "id": "com.publicsq.app",
+      "title": "PublicSq.",
+      "icon": "https://play-lh.googleusercontent.com/Qh5BzYf8bvg5VkNwK6hR3NK-TBPIwFVyErvPctcpuECekGS-vOLpCscN01tJodSkkA",
+      "users": 129452,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.esmstrata.app",
+      "title": "ESM Strata",
+      "icon": "https://play-lh.googleusercontent.com/NJblBnqAAgVJKBxZ1R-GZqNIy_AzmTKw0NDIoGAbkDHyTWYRISCywRi0BYLZBqxThwE",
+      "users": 160,
+      "bucket": "other"
+    },
+    {
+      "id": "world.tuvis.discount",
+      "title": "TuviS",
+      "icon": "https://play-lh.googleusercontent.com/IYcoPyBMWAQ_aVwkfhIlvsgmDVcJj_3-fs84xYsXvMx6S5JgVuy7Icz8FUgre5i_oz8",
+      "users": 88584,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.colixsystems.android.colix",
+      "title": "Colix",
+      "icon": "https://play-lh.googleusercontent.com/DAQcgVXgSwwSEw78u7cuckw7JGwZPh44MSrvyed9CusacKsHDs0mbYKq45x5sRzVz10",
+      "users": 154,
+      "bucket": "other"
+    },
+    {
+      "id": "no.moller.carcare",
+      "title": "Bilhold",
+      "icon": "https://play-lh.googleusercontent.com/TPiwlHwTX4yNs-UK0XtV3yHNOMcEW0_WSWV3Pr1I5DdsESwxCHLizD_eqsLwzEU5atU",
+      "users": 82538,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.emersonraine.app",
+      "title": "Emerson Raine",
+      "icon": "https://play-lh.googleusercontent.com/6IhmP17jJcu1uBAurTEsUCYhZflNrH43bpzSvuKLks3ocdVlGS9gp57TrbKdtxEzD1Q",
+      "users": 136,
+      "bucket": "other"
+    },
+    {
+      "id": "com.agriland.agriland",
+      "title": "Agriland.ie News",
+      "icon": "https://play-lh.googleusercontent.com/INwDflwuqRY6JngqSYvscDfJuPDoEz1HcO5c9S3lL8fqSI5iS6WaMmM_AzYbB4uu0Zs",
+      "users": 78089,
+      "bucket": "biggest"
+    },
+    {
+      "id": "io.hococo.app.wl.wagner",
+      "title": "Wagner Ejendomme",
+      "icon": "https://play-lh.googleusercontent.com/NTVXQsfL8IVdrfTYCGfrlSMbH5gz5AAl7FSlGFyR47WHTxt7ajfHL0OavPTZVQQi8g",
+      "users": 119,
+      "bucket": "other"
+    },
+    {
+      "id": "com.igliverec.video.recorder.downloader",
+      "title": "GREC - Live Video Recorder",
+      "icon": "https://play-lh.googleusercontent.com/xUNlVjHbtnYJ3wXu2nl1lfdXX3vA852ETB9ptZTZWm7UjiCYbXt2W00PTJ6XqyYZkSQ",
+      "users": 77324,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.herculeshealth.mobile",
+      "title": "Hercules Health",
+      "icon": "https://play-lh.googleusercontent.com/jKk4zHSPSR7L5Gdu6-dtba-fGy64LJkJ2TrySSL1-vXlzhY6_Yni_O_iJPRdv3VR65Y",
+      "users": 106,
+      "bucket": "other"
+    },
+    {
+      "id": "com.pizzahutau",
+      "title": "Pizza Hut Australia",
+      "icon": "https://play-lh.googleusercontent.com/f1yvlM3KkKO1Nq0X_CGThj6W1jy-bXFXnMMLNp3xxd1G5UKtiHAhUPkA2Q8OWfrwCVU",
+      "users": 72270,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.brightduggan.app",
+      "title": "Bright & Duggan",
+      "icon": "https://play-lh.googleusercontent.com/fdTRNw8jD_PBmLjZ5FDAszeAA76Bov3fEU4zD3_bucWLE-tVA-S6tf3YMU2a8jhK0g",
+      "users": 95,
+      "bucket": "other"
+    },
+    {
+      "id": "cz.mallpay",
+      "title": "Skip Pay",
+      "icon": "https://play-lh.googleusercontent.com/rxrpt4q-uKFIvz0Y4H53ibPwK_Nd1R7Cmg-6YhSAHfxcV9ytJbPGr3MX1YC-PesV3Q",
+      "users": 71578,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.chesterandella.app",
+      "title": "Chester & Ella Community",
+      "icon": "https://play-lh.googleusercontent.com/pqP8a7r5nFK4NriKz6tKJCiRhrzHsYyIwSBCx_itmsOSMumxPi0-DgJvgPgHPRbXMFw",
+      "users": 88,
+      "bucket": "other"
+    },
+    {
+      "id": "de.wgvpks.prod",
+      "title": "MeineWGV",
+      "icon": "https://play-lh.googleusercontent.com/4_yKORbck-PeAMNRfQHx9G8gXEkynwn1zcbeTESxJ_ff4oCFDd5IJpCal3sEqhAcijU",
+      "users": 63058,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.eightysixdegrees.galaxy",
+      "title": "Galaxy Mobile",
+      "icon": "https://play-lh.googleusercontent.com/_IvFko0MWpN_STG4pBNoebl38zQc8CyaK0QTNKJJcc4wgmD0iRZrYFBdveaGa8_jYhtI",
+      "users": 75,
+      "bucket": "other"
+    },
+    {
+      "id": "com.kick.mobile",
+      "title": "Kick: Live Streaming",
+      "icon": "https://play-lh.googleusercontent.com/66czInHo_spTFWwLVYntxW8Fa_FHCDRPnd3y0HT14_xz6xb_lqSv005ARvdkJJE2TA",
+      "users": 59775,
+      "bucket": "biggest"
+    },
+    {
+      "id": "com.peetsunbae.app",
+      "title": "수능선배",
+      "icon": "https://play-lh.googleusercontent.com/2mpbiZnO9N0sHWLAohx5YoSW94f4tx67oJ4J3IZcQKbR6Klcsq4RQ7izrFxBwQ6qR5ko",
+      "users": 72,
+      "bucket": "other"
+    }
+  ]
+}
