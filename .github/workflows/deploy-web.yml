@@ -153,7 +153,7 @@ jobs:
             echo "VITE_SUPABASE_ANON_KEY is empty; cannot sync Worker secret SUPABASE_ANON_KEY"
             exit 1
           fi
-          printf '%s' "$VITE_SUPABASE_ANON_KEY" | bunx wrangler secret put SUPABASE_ANON_KEY
+          printf '%s' "$VITE_SUPABASE_ANON_KEY" | bunx wrangler@4.126.0 secret put SUPABASE_ANON_KEY
       - run: bun run deploy:web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
