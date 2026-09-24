@@ -1,5 +1,6 @@
 import { expect, test } from 'bun:test'
 import { buildPublicBuilderMetrics, classifyBuilderFailure, fetchPublicBuilderMetricsFromRpc } from '../src/lib/publicBuilderMetrics.ts'
+import { handleBuilderMetrics } from '../src/worker/builder-metrics.ts'
 
 const source = {
   updated_at: '2026-09-17T12:00:00.000Z',
@@ -48,14 +49,32 @@ test('fetchPublicBuilderMetricsFromRpc posts to the public RPC', async () => {
   const payload = { success_rate: 80, updated_at: '2026-09-19T12:00:00.000Z', daily_platforms: [], hourly_platforms: [], failures: [], platforms: [] }
   const metrics = await fetchPublicBuilderMetricsFromRpc({
     supabaseUrl: 'https://example.supabase.co',
-    anonKey: 'anon',
+    apiKey: 'service-role-key',
     fetch: async (url, init) => {
       expect(String(url)).toBe('https://example.supabase.co/rest/v1/rpc/get_public_builder_metrics')
       expect(init?.method).toBe('POST')
-      expect(init?.body).toBe(JSON.stringify({ trend_history_days: 90, trend_hourly: true }))
-      expect(init?.headers?.apikey).toBe('anon')
+      expect(init?.body).toBe(JSON.stringify({}))
+      expect(init?.headers?.apikey).toBe('service-role-key')
+      expect(init?.headers?.Authorization).toBe('Bearer service-role-key')
       return new Response(JSON.stringify(payload), { headers: { 'content-type': 'application/json' } })
     },
   })
   expect(metrics.success_rate).toBe(80)
+})
+
+test('fetchPublicBuilderMetricsFromRpc 401 mentions SUPABASE_SERVICE_ROLE_KEY', async () => {
+  await expect(
+    fetchPublicBuilderMetricsFromRpc({
+      supabaseUrl: 'https://example.supabase.co',
+      apiKey: 'invalid',
+      fetch: async () => new Response('', { status: 401 }),
+    }),
+  ).rejects.toThrow('Worker SUPABASE_SERVICE_ROLE_KEY must be the service role key')
+})
+
+test('handleBuilderMetrics returns misconfigured when SUPABASE_SERVICE_ROLE_KEY is missing', async () => {
+  const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), {})
+  expect(response.status).toBe(503)
+  const body = await response.json()
+  expect(body.error).toBe('Builder metrics misconfigured')
 })
