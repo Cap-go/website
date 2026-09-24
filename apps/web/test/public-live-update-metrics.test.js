@@ -1,4 +1,5 @@
 import { expect, test } from 'bun:test'
+import { selectTrendRows } from '../src/lib/metricsTrendChart.ts'
 import { buildPublicLiveUpdateQueries, getPublicLiveUpdateMetrics } from '../src/lib/publicLiveUpdateMetrics.ts'
 
 function analyticsResponse(data) {
@@ -91,14 +92,18 @@ test('getPublicLiveUpdateMetrics weights daily rates and skips first-day', async
     { date: '2026-09-15', success_rate: 40 },
     { date: '2026-09-16', success_rate: 90 },
   ])
-  expect(metrics.daily_platforms).toEqual([
-    { date: '2026-09-15', ios: 90, android: 6.7 },
-    { date: '2026-09-16', ios: 93.3, android: 80 },
-  ])
-  expect(metrics.daily_platforms_sparkline).toEqual(metrics.daily_platforms)
+  expect(metrics.daily_platforms).toHaveLength(90)
+  expect(metrics.daily_platforms[0]?.date).toBe('2026-06-20')
+  expect(metrics.daily_platforms.at(-1)?.date).toBe('2026-09-17')
+  expect(metrics.daily_platforms.find((row) => row.date === '2026-09-15')).toEqual({ date: '2026-09-15', ios: 90, android: 6.7 })
+  expect(metrics.daily_platforms.find((row) => row.date === '2026-09-16')).toEqual({ date: '2026-09-16', ios: 93.3, android: 80 })
+  expect(metrics.daily_platforms_sparkline).toHaveLength(30)
+  expect(selectTrendRows({ daily_platforms: metrics.daily_platforms }, '3m', new Date('2026-09-17T12:00:00.000Z'))).toHaveLength(90)
+  expect(selectTrendRows({ daily_platforms: metrics.daily_platforms }, '1m', new Date('2026-09-17T12:00:00.000Z'))).toHaveLength(30)
   expect(metrics.hourly_platforms).toEqual([
     { date: '2026-09-17 08:00', ios: 88.9, android: 80 },
     { date: '2026-09-17 09:00', ios: 90, android: 83.3 },
   ])
   expect(metrics.period_days).toBe(30)
+  expect(metrics.daily_window_days).toBe(90)
 })
