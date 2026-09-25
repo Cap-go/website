@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-25T07:12:45.966Z
-updated_at: 2026-09-25T07:12:47.568Z
+updated_at: 2026-09-25T07:15:54.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/36692915-3a09-4980-ac30-23b86b79acae/customize-web-browser-workflow-guide.jpg'
 head_image_alt: How to Customize Web Browser for a Personal Workflow
 keywords: 'customize web browser, browser customization, browser extensions, browser settings, productivity tips'
