@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210" height="80" viewBox="0 0 210 80" fill="none">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&amp;display=swap');
+      .promo-title-text {
+        font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+      }
+      .promo-brand-text {
+        font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+    </style>
+  </defs>
+
+  <!-- Card Border & Background -->
+  <rect x="0.75" y="0.75" width="208.5" height="78.5" rx="14" fill="#09090B" stroke="#3B82F6" stroke-width="1.5"/>
+  
+  <!-- Ribbon Icon Group (Vertically Centered: Top of circle is 20, bottom of tails is 60, center is 40) -->
+  <g>
+    <!-- Left Ribbon Tail -->
+    <path d="M 27 34 L 18 59 L 27 54 L 32 57 L 32 34 Z" fill="#2563EB" />
+    <!-- Right Ribbon Tail -->
+    <path d="M 49 34 L 58 59 L 49 54 L 44 57 L 44 34 Z" fill="#60A5FA" />
+    
+    <!-- Outer Ring / Circle -->
+    <circle cx="38" cy="36" r="16" fill="#60A5FA" />
+    
+    <!-- Inner Circle -->
+    <circle cx="38" cy="36" r="12" fill="#2563EB" />
+    
+    <!-- Star -->
+    <polygon points="38,28.8 40.35,33.55 45.57,34.31 41.79,38 42.68,43.2 38,40.74 33.32,43.2 34.21,38 30.43,34.31 35.65,33.55" fill="#FFFFFF" />
+  </g>
+
+  <!-- Text Group (Left-aligned to hug the medal and fill the space) -->
+  <text x="72" y="32" fill="#60A5FA" class="promo-title-text">LAUNCHED ON</text>
+  
+  <text x="72" y="57" class="promo-brand-text">
+    <tspan fill="#60A5FA">SaaS</tspan><tspan fill="#FFFFFF">City</tspan><tspan fill="#60A5FA">.io</tspan>
+  </text>
+</svg>
