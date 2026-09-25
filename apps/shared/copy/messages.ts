@@ -17,7 +17,135 @@ const messages = {
   aasa_tester: 'AASA Tester',
   about: 'About',
   about_capgo: 'About Capgo',
-  about_capgo_description: 'Learn about Capgo, the live update solution for Capacitor apps built by Martin Donadieu. Delivering instant OTA updates to mobile apps since 2022.',
+  about_capgo_description:
+    'About Capgo: open-source live updates and native delivery for Capacitor and Ionic teams. Meet the team, see how OTA works, pricing facts, and FAQs for AI search and E-E-A-T.',
+  about_hero_h1: 'Capgo is an open-source live-update and native-delivery platform that ships JS/OTA updates for Capacitor and Ionic teams without waiting on app stores.',
+  about_hero_lead:
+    'Capgo started in December 2022 with one goal: make live updates fast, affordable, and understandable for teams shipping Capacitor apps in production. We stay small, hands-on, and focused on the release path between your code and your users.',
+  about_hero_figure_caption: 'Remote-first, with team offsites in Madeira where planning, support reviews, and product work happen in the same week.',
+  about_what_does_title: 'What Capgo does',
+  about_what_does_intro:
+    'Capgo covers the full path from your web bundle to devices in the field: upload, sign, encrypt, route through channels, deliver OTA, observe health, and recover when something goes wrong.',
+  about_capability_ota_title: 'OTA live updates',
+  about_capability_ota_body:
+    'Push JavaScript, HTML, CSS, and static assets to production apps in minutes instead of waiting on store review. Capgo handles download, install, and activation on native threads so JavaScript crashes do not block recovery.',
+  about_capability_channels_title: 'Release channels',
+  about_capability_channels_body:
+    'Route builds to production, beta, internal, or support tracks with dynamic channels. Roll out gradually, target app versions, and roll back to the last known good bundle when a release misbehaves.',
+  about_capability_security_title: 'Encryption and security',
+  about_capability_security_body:
+    'Bundles are checksummed, signed, and encrypted end-to-end before they reach user devices. The CLI warns about incompatible native changes, and enterprise teams can pair Capgo with SOC 2, DPA, and self-hosted options.',
+  about_capability_cli_title: 'Capgo CLI',
+  about_capability_cli_body:
+    'Upload bundles, manage channels, preview updates, and wire CI/CD from the terminal or GitHub Actions. Pre-flight checks validate bundle size, checksums, and native dependency risks before a bad build ships.',
+  about_capability_native_build_title: 'Native builds',
+  about_capability_native_build_body:
+    'Request iOS and Android native builds from the same platform that delivers your live updates. Plans include native build minutes so Capacitor teams can ship binaries and web bundles without juggling separate vendors.',
+  about_capability_observe_title: 'Observe, logs, and analytics',
+  about_capability_observe_body:
+    'Capgo Observe compares release health, launch timing, and version signals after each rollout. Device logs and Logs Insights help engineering and support trace failures, adoption, and rollback history without digging through native tooling.',
+  about_diff_title: 'What makes Capgo different',
+  about_diff_intro: 'Capgo is built for Capacitor-first teams that want production-grade OTA without enterprise lock-in or abandoned tooling.',
+  about_diff_appflow_title: 'A clear path when Ionic Appflow winds down',
+  about_diff_appflow_body:
+    'Ionic announced they are winding down Appflow. Existing customers can use it until December 31, 2027, but there are no new customers or features. Capgo is actively maintained, bootstrapped, and focused on live updates as the core product.',
+  about_diff_codepush_title: 'Maintained after CodePush and App Center',
+  about_diff_codepush_body:
+    'Microsoft CodePush is in legacy mode for React Native, and the App Center Cordova-Capacitor path is gone. Capgo is built specifically for Capacitor and Ionic, with monthly releases, human support, and an open-source updater plugin teams can inspect.',
+  about_diff_opensource_title: 'Open source you can audit',
+  about_diff_opensource_body:
+    'The updater plugin and much of the Capgo ecosystem are open source. Teams can self-host, read the code, and avoid black-box release pipelines that are hard to validate for security or compliance reviews.',
+  about_diff_pricing_title: 'Month-to-month pricing without long contracts',
+  about_diff_pricing_body:
+    'Paid plans start on a 14-day free trial, then bill monthly or yearly with transparent usage limits. You can cancel anytime and keep access through the current billing period. No multi-year enterprise contract is required to ship OTA updates.',
+  about_diff_support_title: 'Humans on Discord, not ticket queues',
+  about_diff_support_body:
+    'Founders and engineers answer questions in Discord and email. Enterprise customers get dedicated Slack or Teams channels. The same people who build native update behavior also help customers migrate from Appflow and debug production rollouts.',
+  about_who_title: 'Who uses Capgo',
+  about_who_intro: 'Capgo is for teams that ship Capacitor or Ionic apps and need reliable OTA without rebuilding their release stack.',
+  about_who_icp_capacitor: 'Capacitor and Ionic teams shipping JavaScript OTA to iOS and Android production apps',
+  about_who_icp_indie: 'Indie makers and solo developers who want affordable live updates with a short setup path',
+  about_who_icp_agencies: 'Agencies managing multiple client apps that need channels, rollback, and per-app isolation',
+  about_who_icp_midmarket: 'Mid-market product teams replacing slow store-only release cycles with staged rollouts',
+  about_who_icp_appflow: 'Teams migrating off Ionic Appflow before the December 31, 2027 shutdown deadline',
+  about_who_icp_enterprise: 'Enterprise apps that need encryption, auditability, SOC 2, and dedicated support at scale',
+  about_team_title: 'The team behind Capgo',
+  about_team_intro:
+    'Capgo is operated by Digital Shift OÜ and founded by Martin Donadieu in Tallinn, Estonia. The team is intentionally compact: the same people improving native update behavior, product flows, and enterprise onboarding also talk to customers.',
+  about_team_founder_note:
+    'From a solo project to a focused team serving production apps, Capgo has stayed anchored in the same belief: app teams should be able to fix, improve, and recover without waiting on stores.',
+  about_team_connect_title: 'Connect with Capgo',
+  about_team_martin_x: 'Martin on X',
+  about_team_capgo_x: 'Capgo on X',
+  about_team_linkedin: 'Capgo on LinkedIn',
+  about_team_github: 'Capgo on GitHub',
+  about_timeline_title: 'How we got here',
+  about_how_title: 'How Capgo works',
+  about_how_intro:
+    'Most teams are live within a day. Sign up, create an app, connect a channel, upload a bundle, and devices pull the update on the next launch or background check.',
+  about_how_step_signup_title: 'Sign up and create an app',
+  about_how_step_signup_body:
+    'Register at capgo.app, install the Capacitor updater plugin, and link your app ID. The CLI and dashboard walk through API keys, bundle format, and channel defaults.',
+  about_how_step_channel_title: 'Configure a release channel',
+  about_how_step_channel_body:
+    'Point production, beta, or internal users at different channels. Set version guards, rollout rules, and encryption keys so only intended devices receive each bundle.',
+  about_how_step_upload_title: 'Upload and ship your first update',
+  about_how_step_upload_body:
+    'Run capgo bundle upload from CI or your laptop. Capgo validates the bundle, signs it, and publishes to the channel. Most users receive the update within minutes, not days.',
+  about_how_step_support_title: 'Get help from humans',
+  about_how_step_support_body:
+    'Join the Capgo Discord community for setup questions, or email support@capgo.app for account help. Enterprise teams can open a private Slack or Teams channel with the people building the product.',
+  about_facts_title: 'Key facts',
+  about_facts_company_name: 'Company name',
+  about_facts_company_name_value: 'Capgo (legal entity: Digital Shift OÜ)',
+  about_facts_type: 'Type',
+  about_facts_type_value: 'Private software company (bootstrapped SaaS)',
+  about_facts_founded: 'Company founded',
+  about_facts_founded_value: 'December 2022',
+  about_facts_live_updates_since: 'Capacitor live updates since',
+  about_facts_live_updates_since_value: '2020 (independent category work that predates the Capgo company launch in December 2022)',
+  about_facts_founder: 'Founder',
+  about_facts_founder_value: 'Martin Donadieu',
+  about_facts_headquarters: 'Headquarters',
+  about_facts_headquarters_value: 'Sepapaja 6, 15551 Tallinn, Estonia (legal imprint). Remote-first team with offsites in Madeira.',
+  about_facts_website: 'Website',
+  about_facts_core_offering: 'Core offering',
+  about_facts_core_offering_value: 'Live OTA updates and native delivery for Capacitor apps',
+  about_facts_pricing: 'Pricing',
+  about_facts_pricing_fallback: 'Solo, Maker, Team, and Enterprise plans with monthly and yearly billing. See the pricing page for current rates.',
+  about_facts_contract: 'Contract terms',
+  about_facts_contract_value: 'Month-to-month or yearly subscriptions. Cancel anytime; access continues through the current billing period per the public pricing FAQ.',
+  about_facts_services: 'Services',
+  about_facts_services_value: 'Live updates, release channels, end-to-end encryption, Capgo CLI, native builds, Capgo Observe, plugins ecosystem, Discord and email support',
+  about_facts_communication: 'Communication',
+  about_facts_communication_value: 'Discord community, support@capgo.app, and the contact page',
+  about_facts_devices_tracked: 'Devices tracked',
+  about_facts_devices_tracked_value: '50M+ devices tracked through apps using Capgo',
+  about_stat_devices_detail: 'Tracked through apps using Capgo',
+  about_read_full_story: 'Read the full story',
+  about_how_step_label: 'Step {step}',
+  about_faq_compliance_prefix: 'For store compliance details, see the',
+  about_faq_compliance_link: 'live updates compliance docs',
+  about_facts_plugins: 'Plugins maintained',
+  about_facts_competitors: 'Common alternatives',
+  about_facts_competitors_value: 'Ionic Appflow (winding down), retired Microsoft CodePush / App Center Cordova-Capacitor path, and self-hosted-only stacks',
+  about_facts_social: 'Social profiles',
+  about_faq_title: 'Frequently asked questions',
+  about_faq_ota_q: 'What is the difference between OTA updates and app store review?',
+  about_faq_ota_a:
+    'OTA updates change the Capacitor web layer (JavaScript, HTML, CSS, and assets) without submitting a new native binary. Store review is still required when you change native code, permissions, plugins, or material app functionality. Capgo helps teams ship web-layer fixes fast while keeping native releases on the normal store path.',
+  about_faq_appflow_q: 'How does Capgo compare to Ionic Appflow?',
+  about_faq_appflow_a:
+    'Ionic is winding down Appflow: existing customers can use it until December 31, 2027, but there are no new customers or features. Capgo is actively developed for Capacitor live updates, with open-source components, month-to-month pricing, and migration guides for teams moving off Appflow.',
+  about_faq_security_q: 'How does Capgo handle security and encryption?',
+  about_faq_security_a:
+    'Bundles are checksummed, signed, and encrypted end-to-end. TLS protects data in transit, and Capgo applies encryption at rest and access controls for operational data. Enterprise customers can review the DPA, sub-processor list, and SOC 2 materials on the trust and security pages.',
+  about_faq_cancel_q: 'Can I cancel or change my plan anytime?',
+  about_faq_cancel_a:
+    'Yes. You can cancel your subscription at any time and keep access through the rest of your billing period. You can also upgrade or downgrade plans; upgrades take effect immediately, while downgrades apply at the end of the current billing cycle.',
+  about_faq_apple_q: 'Does Capgo comply with Apple App Store guideline 2.5.2?',
+  about_faq_apple_a:
+    'Capgo updates only the Capacitor web layer and does not change your native binary, native plugins, permissions, or store metadata. Each app is reviewed on its own merits, so Capgo cannot guarantee approval. Use live updates for web-layer changes within store rules, and ship a normal native release for native capabilities or material functionality changes. Review Apple guideline 2.5.2 and Google Play policies for your app before release.',
   article_credits: 'Article credits',
   access_maintain_enterprise_plugins: 'Access and maintain our enterprise-grade Capacitor plugins with priority support and dedicated maintenance.',
   ach_available_for_enterprise_annual_payments: 'ACH is available only for annual payments from Enterprise plan customers. Contact us for more information.',

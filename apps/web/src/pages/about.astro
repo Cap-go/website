@@ -3,48 +3,67 @@ import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
-import { createLdJsonGraph, createAboutOrganization, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { createFAQPageLdJson, createLdJsonGraph, createAboutOrganization, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { pluginCountLabel } from '@/config/plugins'
+import { planMonthlyPrice, planYearlyPrice } from '@/lib/planCopy'
+import type { Database } from '@/services/supabase.types'
 import type { Thing } from 'schema-dts'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.about_capgo({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.about_capgo_description({}, { locale: Astro.locals.locale })
-
+const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
 
-// Create founder Person schema
-const founder = createPersonLdJson('Martin Donadieu', 'https://x.com/martindonadieu', `${config.baseUrl}/martindonadieu.webp`, 'Founder & CEO')
+const title = [config.brand, m.about_capgo({}, { locale })].join(' | ')
+const description = m.about_capgo_description({}, { locale })
 
-// Create enhanced organization with all properties as a plain object
+const founder = createPersonLdJson('Martin Donadieu', 'https://x.com/martindonadieu', `${config.baseUrl}/martindonadieu.webp`, 'Founder & CEO')
 const enhancedOrg: Thing = createAboutOrganization(config, founder)
 
-// Build absolute URLs for structured data (Schema.org requires absolute URLs)
-const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
-const aboutUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/about/')}`
-const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
+const baseUrl = config.baseUrl
+const aboutUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/about/')}`
+const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
+const pricingUrl = getRelativeLocaleUrl(locale, '/pricing/')
+const contactUrl = getRelativeLocaleUrl(locale, '/contact/')
+const docsUrl = getRelativeLocaleUrl(locale, '/docs/')
+const observeUrl = getRelativeLocaleUrl(locale, '/observe/')
+const nativeBuildUrl = getRelativeLocaleUrl(locale, '/native-build/')
+const complianceDocsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates/compliance/')
 
-// Create about page WebPage schema
-const aboutPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
-  name: title,
-  description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet the team building it.',
-  url: aboutUrl,
-})
-
-// Create comprehensive LD+JSON for about page
-const content = {
-  title,
-  description,
-  image: `${baseUrl}/capgo_about_team.png`,
-  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, aboutPage, {
-    includeOrganization: false, // We're including the enhanced org as mainEntity
-    includeBreadcrumbs: true,
-    breadcrumbs: [
-      { name: 'Home', url: homeUrl },
-      { name: 'About', url: aboutUrl },
-    ],
-    additionalEntities: [enhancedOrg, founder],
-  }),
+function isValidPlanRow(plan: unknown): plan is Database['public']['Tables']['plans']['Row'] {
+  if (!plan || typeof plan !== 'object') return false
+  const row = plan as Record<string, unknown>
+  return (
+    typeof row.name === 'string' &&
+    row.name.trim().length > 0 &&
+    typeof row.price_m === 'number' &&
+    Number.isFinite(row.price_m) &&
+    typeof row.price_y === 'number' &&
+    Number.isFinite(row.price_y)
+  )
 }
+
+let plansAll: Database['public']['Tables']['plans']['Row'][] = []
+try {
+  const response = await fetch(`${Astro.locals.runtimeConfig.public.baseApiUrl}/private/plans`, {
+    signal: AbortSignal.timeout(3000),
+  })
+  if (response.ok) {
+    const payload = await response.json()
+    if (Array.isArray(payload)) {
+      plansAll = payload.filter(isValidPlanRow)
+    }
+  }
+} catch {
+  plansAll = []
+}
+
+const paidPlans = plansAll.filter((plan) => plan.name !== 'Free')
+const pricingParts = paidPlans.map((plan) => {
+  const monthly = planMonthlyPrice(plan)
+  const yearlyPerMonth = Math.round(planYearlyPrice(plan) / 12)
+  const suffix = plan.name === 'Enterprise' ? '+' : ''
+  return `${plan.name}: $${monthly}${suffix}/mo monthly, $${yearlyPerMonth}${suffix}/mo billed yearly`
+})
+const pricingValue = pricingParts.length > 0 ? `${pricingParts.join('; ')}. 14-day free trial.` : m.about_facts_pricing_fallback({}, { locale })
 
 const teamMembers = [
   {
@@ -94,23 +113,102 @@ const teamMembers = [
 const companyStats = [
   { value: 'Dec 2022', label: 'Founded', detail: 'Started as a self-funded maker project' },
   { value: pluginCountLabel, label: 'Plugins', detail: 'Maintained for the Capacitor ecosystem' },
-  { value: '50M+', label: 'End users', detail: 'Served through apps using Capgo' },
+  {
+    value: m.companies_logo_stat_devices_value({}, { locale }),
+    label: m.companies_logo_stat_devices_label({}, { locale }),
+    detail: m.about_stat_devices_detail({}, { locale }),
+  },
   { value: `${teamMembers.length}`, label: 'Core team', detail: 'Product, native, support, and delivery' },
 ]
 
-const principles = [
+const capabilities = [
   {
-    title: 'Self-funded by design',
-    body: 'Capgo is profitable and customer-funded. Product decisions stay tied to reliability, support, and what shipping teams actually need.',
+    title: m.about_capability_ota_title({}, { locale }),
+    body: m.about_capability_ota_body({}, { locale }),
+    href: getRelativeLocaleUrl(locale, '/live-update/'),
   },
   {
-    title: 'Open source foundation',
-    body: 'The platform and plugin ecosystem stay inspectable and portable, so teams are not locked into a black box release pipeline.',
+    title: m.about_capability_channels_title({}, { locale }),
+    body: m.about_capability_channels_body({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/live-updates/channels/'),
   },
   {
-    title: 'Built close to customers',
-    body: 'We run the same update flow for our own apps, support enterprise accounts directly, and keep the feedback loop short.',
+    title: m.about_capability_security_title({}, { locale }),
+    body: m.about_capability_security_body({}, { locale }),
+    href: getRelativeLocaleUrl(locale, '/security/'),
   },
+  {
+    title: m.about_capability_cli_title({}, { locale }),
+    body: m.about_capability_cli_body({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/cli/'),
+  },
+  {
+    title: m.about_capability_native_build_title({}, { locale }),
+    body: m.about_capability_native_build_body({}, { locale }),
+    href: nativeBuildUrl,
+  },
+  {
+    title: m.about_capability_observe_title({}, { locale }),
+    body: m.about_capability_observe_body({}, { locale }),
+    href: observeUrl,
+  },
+]
+
+const differentiators = [
+  { title: m.about_diff_appflow_title({}, { locale }), body: m.about_diff_appflow_body({}, { locale }) },
+  { title: m.about_diff_codepush_title({}, { locale }), body: m.about_diff_codepush_body({}, { locale }) },
+  { title: m.about_diff_opensource_title({}, { locale }), body: m.about_diff_opensource_body({}, { locale }) },
+  { title: m.about_diff_pricing_title({}, { locale }), body: m.about_diff_pricing_body({}, { locale }) },
+  { title: m.about_diff_support_title({}, { locale }), body: m.about_diff_support_body({}, { locale }) },
+]
+
+const icpSegments = [
+  m.about_who_icp_capacitor({}, { locale }),
+  m.about_who_icp_indie({}, { locale }),
+  m.about_who_icp_agencies({}, { locale }),
+  m.about_who_icp_midmarket({}, { locale }),
+  m.about_who_icp_appflow({}, { locale }),
+  m.about_who_icp_enterprise({}, { locale }),
+]
+
+const howItWorksSteps = [
+  { title: m.about_how_step_signup_title({}, { locale }), body: m.about_how_step_signup_body({}, { locale }) },
+  { title: m.about_how_step_channel_title({}, { locale }), body: m.about_how_step_channel_body({}, { locale }) },
+  { title: m.about_how_step_upload_title({}, { locale }), body: m.about_how_step_upload_body({}, { locale }) },
+  { title: m.about_how_step_support_title({}, { locale }), body: m.about_how_step_support_body({}, { locale }) },
+]
+
+const socialLinks = [
+  { label: m.about_team_martin_x({}, { locale }), href: 'https://x.com/martindonadieu' },
+  { label: m.about_team_capgo_x({}, { locale }), href: 'https://x.com/Capgo_app' },
+  { label: m.about_team_linkedin({}, { locale }), href: 'https://www.linkedin.com/company/capgo' },
+  { label: m.about_team_github({}, { locale }), href: 'https://github.com/Cap-go' },
+]
+
+const keyFacts = [
+  { term: m.about_facts_company_name({}, { locale }), detail: m.about_facts_company_name_value({}, { locale }) },
+  { term: m.about_facts_type({}, { locale }), detail: m.about_facts_type_value({}, { locale }) },
+  { term: m.about_facts_founded({}, { locale }), detail: m.about_facts_founded_value({}, { locale }) },
+  {
+    term: m.about_facts_live_updates_since({}, { locale }),
+    detail: m.about_facts_live_updates_since_value({}, { locale }),
+  },
+  { term: m.about_facts_founder({}, { locale }), detail: m.about_facts_founder_value({}, { locale }) },
+  { term: m.about_facts_headquarters({}, { locale }), detail: m.about_facts_headquarters_value({}, { locale }) },
+  { term: m.about_facts_website({}, { locale }), detail: 'https://capgo.app', href: 'https://capgo.app' },
+  { term: m.about_facts_core_offering({}, { locale }), detail: m.about_facts_core_offering_value({}, { locale }) },
+  { term: m.about_facts_pricing({}, { locale }), detail: pricingValue, href: pricingUrl },
+  { term: m.about_facts_contract({}, { locale }), detail: m.about_facts_contract_value({}, { locale }) },
+  { term: m.about_facts_services({}, { locale }), detail: m.about_facts_services_value({}, { locale }) },
+  {
+    term: m.about_facts_communication({}, { locale }),
+    detail: m.about_facts_communication_value({}, { locale }),
+    href: contactUrl,
+  },
+  { term: m.about_facts_devices_tracked({}, { locale }), detail: m.about_facts_devices_tracked_value({}, { locale }) },
+  { term: m.about_facts_plugins({}, { locale }), detail: `${pluginCountLabel} for the Capacitor ecosystem` },
+  { term: m.about_facts_competitors({}, { locale }), detail: m.about_facts_competitors_value({}, { locale }) },
+  { term: m.about_facts_social({}, { locale }), detail: socialLinks.map((link) => link.label).join(', ') },
 ]
 
 const timeline = [
@@ -145,6 +243,40 @@ const timeline = [
     body: 'The focus is still narrow: make app updates faster, safer, and more understandable for teams building mobile apps from web technology.',
   },
 ]
+
+const faqItems = [
+  { question: m.about_faq_ota_q({}, { locale }), answer: m.about_faq_ota_a({}, { locale }) },
+  { question: m.about_faq_appflow_q({}, { locale }), answer: m.about_faq_appflow_a({}, { locale }) },
+  { question: m.about_faq_security_q({}, { locale }), answer: m.about_faq_security_a({}, { locale }) },
+  { question: m.about_faq_cancel_q({}, { locale }), answer: m.about_faq_cancel_a({}, { locale }) },
+  { question: m.about_faq_apple_q({}, { locale }), answer: m.about_faq_apple_a({}, { locale }) },
+]
+
+const aboutFaqLdJson = createFAQPageLdJson(config, {
+  url: aboutUrl,
+  questions: faqItems,
+})
+
+const aboutPage = createWebPageLdJson(config, {
+  name: title,
+  description,
+  url: aboutUrl,
+})
+
+const content = {
+  title,
+  description,
+  image: `${baseUrl}/capgo_about_team.png`,
+  ldJSON: createLdJsonGraph(config, aboutPage, {
+    includeOrganization: false,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: homeUrl },
+      { name: 'About', url: aboutUrl },
+    ],
+    additionalEntities: [enhancedOrg, founder, aboutFaqLdJson],
+  }),
+}
 ---
 
 <Layout content={content}>
@@ -152,26 +284,25 @@ const timeline = [
     <section class="mx-auto max-w-7xl px-4 pt-16 pb-14 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24">
       <div class="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center">
         <div>
-          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">About Capgo</p>
+          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.about_capgo({}, { locale })}</p>
           <h1 class="mt-5 max-w-4xl text-4xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
-            We build the open update infrastructure Capacitor teams can trust.
+            {m.about_hero_h1({}, { locale })}
           </h1>
           <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-            Capgo started in December 2022 with one goal: make live updates fast, affordable, and understandable for teams shipping Capacitor apps in production. We stay small,
-            hands-on, and focused on the release path between your code and your users.
+            {m.about_hero_lead({}, { locale })}
           </p>
 
           <div class="mt-8 flex flex-col gap-3">
             <HumanSupport tone="light" size="sm" align="start" />
             <div class="flex flex-col gap-3 sm:flex-row">
               <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                href={getRelativeLocaleUrl(locale, 'register')}
                 class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
               >
-                {m.start_now({}, { locale: Astro.locals.locale })}
+                {m.start_now({}, { locale })}
               </a>
               <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
+                href={docsUrl}
                 class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
               >
                 Read the docs
@@ -189,13 +320,13 @@ const timeline = [
             height="900"
           />
           <figcaption class="border-t border-gray-200 px-5 py-4 text-sm leading-6 text-gray-600">
-            Remote-first, with team offsites in Madeira where planning, support reviews, and product work happen in the same week.
+            {m.about_hero_figure_caption({}, { locale })}
           </figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="border-y border-gray-200 bg-white py-8">
+    <section class="border-y border-gray-200 bg-white py-8" aria-label="Company stats">
       <div class="mx-auto grid max-w-7xl gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 sm:grid-cols-2 lg:grid-cols-4">
         {
           companyStats.map((stat) => (
@@ -209,38 +340,113 @@ const timeline = [
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8" aria-labelledby="what-capgo-does">
       <div class="max-w-3xl">
-        <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Team</p>
-        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">A small team building close to the product.</h2>
-        <p class="mt-4 text-base leading-7 text-gray-600">
-          Capgo is intentionally compact. The same people improving native update behavior, product flows, and enterprise onboarding also talk to customers and maintain the open
-          source surface area.
-        </p>
+        <h2 id="what-capgo-does" class="text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.about_what_does_title({}, { locale })}</h2>
+        <p class="mt-4 text-base leading-7 text-gray-600">{m.about_what_does_intro({}, { locale })}</p>
       </div>
 
-      <div class="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
         {
-          teamMembers.map((member) => (
-            <article>
-              <div class="aspect-square overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm">
-                <img src={member.image} alt={member.alt} class="h-full w-full object-cover" width="384" height="384" />
-              </div>
-              <h3 class="mt-4 text-base font-semibold text-gray-950">{member.name}</h3>
-              <p class="mt-1 text-sm font-medium text-gray-700">{member.role}</p>
-              <p class="mt-2 text-sm leading-6 text-gray-500">{member.since}</p>
+          capabilities.map((capability) => (
+            <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 class="text-lg font-semibold text-gray-950">
+                <a href={capability.href} class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600">
+                  {capability.title}
+                </a>
+              </h3>
+              <p class="mt-3 text-sm leading-6 text-gray-600">{capability.body}</p>
             </article>
           ))
         }
       </div>
     </section>
 
-    <section class="bg-white py-20">
+    <section class="bg-white py-20" aria-labelledby="what-makes-capgo-different">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div class="max-w-3xl">
+          <h2 id="what-makes-capgo-different" class="text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">
+            {m.about_diff_title({}, { locale })}
+          </h2>
+          <p class="mt-4 text-base leading-7 text-gray-600">{m.about_diff_intro({}, { locale })}</p>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-2">
+          {
+            differentiators.map((item) => (
+              <article class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+                <h3 class="text-lg font-semibold text-gray-950">{item.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-gray-600">{item.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8" aria-labelledby="who-uses-capgo">
+      <div class="max-w-3xl">
+        <h2 id="who-uses-capgo" class="text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.about_who_title({}, { locale })}</h2>
+        <p class="mt-4 text-base leading-7 text-gray-600">{m.about_who_intro({}, { locale })}</p>
+      </div>
+
+      <ul class="mt-10 max-w-3xl space-y-4 text-base leading-7 text-gray-700">
+        {
+          icpSegments.map((segment) => (
+            <li class="flex gap-3">
+              <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600" aria-hidden="true" />
+              <span>{segment}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="bg-white py-20" aria-labelledby="team-behind-capgo">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h2 id="team-behind-capgo" class="text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.about_team_title({}, { locale })}</h2>
+          <p class="mt-4 text-base leading-7 text-gray-600">{m.about_team_intro({}, { locale })}</p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+          {
+            teamMembers.map((member) => (
+              <article>
+                <div class="aspect-square overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm">
+                  <img src={member.image} alt={member.alt} class="h-full w-full object-cover" width="384" height="384" loading="lazy" />
+                </div>
+                <h3 class="mt-4 text-base font-semibold text-gray-950">{member.name}</h3>
+                <p class="mt-1 text-sm font-medium text-gray-700">{member.role}</p>
+                <p class="mt-2 text-sm leading-6 text-gray-500">{member.since}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="mt-14 rounded-2xl border border-gray-200 bg-gray-50 p-8">
+          <h3 class="text-lg font-semibold text-gray-950">{m.about_team_connect_title({}, { locale })}</h3>
+          <ul class="mt-4 flex flex-wrap gap-4">
+            {
+              socialLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-sm font-semibold text-blue-700 hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="mt-16 grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">How we got here</p>
-            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">From solo maker project to production update platform.</h2>
+            <h3 class="text-2xl font-semibold tracking-tight text-gray-950">{m.about_timeline_title({}, { locale })}</h3>
           </div>
 
           <div class="divide-y divide-gray-200 border-y border-gray-200">
@@ -249,7 +455,7 @@ const timeline = [
                 <article class="grid gap-4 py-7 sm:grid-cols-[7rem_1fr]">
                   <p class="text-sm font-semibold text-blue-700">{item.year}</p>
                   <div>
-                    <h3 class="text-lg font-semibold text-gray-950">{item.title}</h3>
+                    <h4 class="text-lg font-semibold text-gray-950">{item.title}</h4>
                     <p class="mt-2 text-base leading-7 text-gray-600">{item.body}</p>
                   </div>
                 </article>
@@ -257,74 +463,141 @@ const timeline = [
             }
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-      <div class="grid gap-6 lg:grid-cols-3">
-        {
-          principles.map((principle) => (
-            <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-700">
-                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.704 5.29a1 1 0 0 1 .006 1.414l-7.25 7.31a1 1 0 0 1-1.42 0l-3.25-3.28a1 1 0 1 1 1.42-1.408l2.54 2.563 6.54-6.592a1 1 0 0 1 1.414-.006Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+        <div class="mt-16 grid overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm lg:grid-cols-[0.9fr_1.1fr]">
+          <img
+            src="/jordan_michael_martin_madeira_waterfall.webp"
+            alt="Capgo team members during a Madeira offsite"
+            class="h-full min-h-80 w-full object-cover"
+            width="2364"
+            height="1330"
+            loading="lazy"
+          />
+          <div class="p-8 sm:p-10 lg:p-12">
+            <blockquote class="text-2xl leading-9 font-semibold tracking-tight text-gray-950">
+              "{m.about_team_founder_note({}, { locale })}"
+            </blockquote>
+            <div class="mt-8 flex items-center gap-4">
+              <img src="/martin-avatar.png" alt="Martin Donadieu" class="h-12 w-12 rounded-full object-cover" width="48" height="48" loading="lazy" />
+              <div>
+                <p class="font-semibold text-gray-950">Martin Donadieu</p>
+                <p class="text-sm text-gray-600">Founder & CEO</p>
               </div>
-              <h3 class="mt-5 text-lg font-semibold text-gray-950">{principle.title}</h3>
-              <p class="mt-3 text-sm leading-6 text-gray-600">{principle.body}</p>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-      <div class="grid overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm lg:grid-cols-[0.9fr_1.1fr]">
-        <img
-          src="/jordan_michael_martin_madeira_waterfall.webp"
-          alt="Capgo team members during a Madeira offsite"
-          class="h-full min-h-80 w-full object-cover"
-          width="2364"
-          height="1330"
-          loading="lazy"
-        />
-        <div class="p-8 sm:p-10 lg:p-12">
-          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Founder note</p>
-          <blockquote class="mt-5 text-2xl leading-9 font-semibold tracking-tight text-gray-950">
-            "From a solo project to a focused team serving production apps, Capgo has stayed anchored in the same belief: app teams should be able to fix, improve, and recover
-            without waiting on stores."
-          </blockquote>
-          <div class="mt-8 flex items-center gap-4">
-            <img src="/martin-avatar.png" alt="Martin Donadieu" class="h-12 w-12 rounded-full object-cover" width="48" height="48" loading="lazy" />
-            <div>
-              <p class="font-semibold text-gray-950">Martin Donadieu</p>
-              <p class="text-sm text-gray-600">Founder & CEO</p>
             </div>
-          </div>
 
-          <div class="mt-8 flex flex-col gap-3">
-            <HumanSupport tone="light" size="sm" align="start" />
-            <div class="flex flex-col gap-3 sm:flex-row">
-              <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-                class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              >
-                {m.start_now({}, { locale: Astro.locals.locale })}
-              </a>
-              <a
-                href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
-                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              >
-                Read the full story
-              </a>
+            <div class="mt-8 flex flex-col gap-3">
+              <HumanSupport tone="light" size="sm" align="start" />
+              <div class="flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={getRelativeLocaleUrl(locale, 'register')}
+                  class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+                >
+                  {m.start_now({}, { locale })}
+                </a>
+                <a
+                  href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
+                  class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+                >
+                  {m.about_read_full_story({}, { locale })}
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8" aria-labelledby="how-capgo-works">
+      <div class="max-w-3xl">
+        <h2 id="how-capgo-works" class="text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.about_how_title({}, { locale })}</h2>
+        <p class="mt-4 text-base leading-7 text-gray-600">{m.about_how_intro({}, { locale })}</p>
+      </div>
+
+      <ol class="mt-12 grid gap-6 lg:grid-cols-2">
+        {
+          howItWorksSteps.map((step, index) => (
+            <li class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <p class="text-sm font-semibold text-blue-700">{m.about_how_step_label({ step: index + 1 }, { locale })}</p>
+              <h3 class="mt-3 text-lg font-semibold text-gray-950">{step.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-gray-600">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="mt-10">
+        <HumanSupport tone="light" size="sm" align="start" />
+      </div>
+    </section>
+
+    <section class="bg-white py-20" aria-labelledby="key-facts">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 id="key-facts" class="text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.about_facts_title({}, { locale })}</h2>
+
+        <div class="mt-10 overflow-hidden rounded-2xl border border-gray-200">
+          <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
+            <tbody class="divide-y divide-gray-200 bg-white">
+              {
+                keyFacts.map((fact) => (
+                  <tr>
+                    <th scope="row" class="w-48 px-6 py-4 align-top font-semibold text-gray-950 sm:w-56">
+                      {fact.term}
+                    </th>
+                    <td class="px-6 py-4 leading-6 text-gray-700">
+                      {fact.href ? (
+                        <a href={fact.href} class="text-blue-700 hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600">
+                          {fact.detail}
+                        </a>
+                      ) : (
+                        fact.detail
+                      )}
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <ul class="mt-6 flex flex-wrap gap-4">
+          {
+            socialLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm font-semibold text-blue-700 hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8" aria-labelledby="about-faq">
+      <div class="max-w-3xl">
+        <h2 id="about-faq" class="text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.about_faq_title({}, { locale })}</h2>
+      </div>
+
+      <div class="mt-10 divide-y divide-gray-200 rounded-2xl border border-gray-200 bg-white">
+        {
+          faqItems.map((item) => (
+            <article class="px-6 py-8 sm:px-8">
+              <h3 class="text-lg font-semibold text-gray-950">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-gray-600">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="mt-8 text-sm leading-6 text-gray-600">
+        {m.about_faq_compliance_prefix({}, { locale })}
+        <a href={complianceDocsUrl} class="font-semibold text-blue-700 hover:text-blue-800">{m.about_faq_compliance_link({}, { locale })}</a>.
+      </p>
     </section>
   </main>
 </Layout>
