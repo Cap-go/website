@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-26T07:52:35.677Z
-updated_at: 2026-09-26T07:52:37.708Z
+updated_at: 2026-09-26T07:54:58.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/2762a774-caf1-4328-9249-9ce41e3df92b/typescript-api-example-code-presentation.jpg'
 head_image_alt: TypeScript API Example for Capacitor and Capgo
 keywords: 'typescript api example, capacitor plugin, capgo integration, typed interface, mobile development'
