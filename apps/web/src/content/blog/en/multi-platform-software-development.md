@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-27T08:03:59.972Z
-updated_at: 2026-09-27T08:04:01.562Z
+updated_at: 2026-09-27T08:06:30.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/45bcb269-75e1-438a-9f1e-023a20380cd5/multi-platform-software-development-tech-devices.jpg'
 head_image_alt: 'Multi Platform Software Development: A Practical Guide'
 keywords: 'multi platform software development, cross platform frameworks, micro frontends, capacitorjs, live updates'
