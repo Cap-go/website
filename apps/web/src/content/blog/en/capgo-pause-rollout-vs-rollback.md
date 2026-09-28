@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-06T09:18:06.000Z
-updated_at: 2026-09-06T09:18:06.000Z
+updated_at: 2026-09-28T21:47:45.000Z
 head_image: /capgo_banner.png
 head_image_alt: Developer deciding whether to pause a Capgo rollout or roll back an app update.
 keywords: ''
