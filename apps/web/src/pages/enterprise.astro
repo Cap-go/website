@@ -10,6 +10,8 @@ import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createProd
 import { numberWithSpaces } from '@/services/misc'
 import { pluginCountLabel } from '@/config/plugins'
 import HumanSupport from '@/components/HumanSupport.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { capgoReviews, toProductReviewLdJson } from '@/config/productTestimonials'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig
@@ -57,12 +59,14 @@ const enterpriseProduct = createProductLdJson(Astro.locals.runtimeConfig.public,
       ? []
       : [
           {
+            name: 'Enterprise',
             price: enterprisePrice.toString(),
             priceCurrency: 'USD',
             availability: 'https://schema.org/InStock',
             priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
           },
         ],
+  reviews: toProductReviewLdJson(capgoReviews),
 })
 
 const enhancedEnterpriseProduct = {
@@ -653,6 +657,14 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </div>
       </div>
     </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      title={m.they_love_capgo({}, { locale })}
+      description={m.From_indie_devs_to({}, { locale })}
+      testimonials={capgoReviews}
+    />
 
     <section class="section bg-grid grain" id="pain">
       <div class="shell">

@@ -87,3 +87,14 @@ export const productTestimonials = {
   plugins: [mikolaj, michael, sergiu],
   ionicEnterprisePlugins: [mikolaj, sergiu],
 } satisfies Record<string, ProductTestimonial[]>
+
+/** Real customer quotes shown on product schema pages (pricing, enterprise). */
+export const capgoReviews = [sergiu, mikolaj, luis]
+
+export function toProductReviewLdJson(testimonials: ProductTestimonial[]) {
+  return testimonials.map((item) => ({
+    author: item.name,
+    reviewBody: item.quote,
+    ratingValue: item.rating,
+  }))
+}
