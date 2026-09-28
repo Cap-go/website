@@ -114,7 +114,7 @@ const messages = {
   all_around_the_globe: 'All around the globe',
   all_lower_tiers_benefits: 'All previous tiers benefits',
   all_systems_normal: 'All systems normal',
-  all_systems_normal_uptime: 'All systems normal: 99% uptime',
+  all_systems_normal_uptime: 'All systems normal: 99.9% uptime',
   already_have_account: 'Already have an account?',
   alternatives: 'Alternatives',
   alternatives_appflow_credit:
@@ -1826,7 +1826,7 @@ const messages = {
   home_network_desc: 'Direct peering worldwide',
   home_revenue_desc: 'Profitable from day one with consistent growth. Our success depends on your success.',
   home_revenue_title: 'Revenue Generating',
-  home_uptime: '99.99% uptime',
+  home_uptime: '99.9% uptime',
   home_users_get_update_desc: 'The app checks Capgo in the background, downloads the bundle, and applies it on next launch with rollback protection.',
   home_worldwide_heading: 'Worldwide',
   hosting: 'Hosting',
@@ -1970,7 +1970,7 @@ const messages = {
   live_update_v2_bento_eyebrow: "What's in the box",
   live_update_v2_bento_title: 'Built for safe OTA updates, not just fast uploads.',
   live_update_v2_bento_lead: 'Native runtime, rollback, validation, and rollout control in one service.',
-  live_update_v2_cta_meta1: '99.99% uptime',
+  live_update_v2_cta_meta1: '99.9% uptime',
   live_update_v2_cta_meta2: 'Worldwide CDN delivery',
   live_update_v2_cta_meta3: '14-day unlimited free trial',
 
