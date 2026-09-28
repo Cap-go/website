@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-28T08:38:02.687Z
-updated_at: 2026-09-28T08:38:04.085Z
+updated_at: 2026-09-28T08:40:31.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/cdc3a271-a1e5-4f54-ba6f-d204c8953993/cross-platform-mobile-app-development-vs-native-mobile-comparison.jpg'
 head_image_alt: Cross Platform Mobile App Development vs Native
 keywords: 'cross platform mobile app development vs native, mobile app architecture, Capacitor vs native, React Native Flutter, mobile development'
