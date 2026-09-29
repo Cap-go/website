@@ -186,6 +186,43 @@ const content = { title, description, ldJSON }
                 </div>
                 <p class="text-sm text-gray-400">{m.solutions_pr_processing_explanation({}, { locale })}</p>
               </div>
+              <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
+                <div class="mb-3 flex items-center gap-4">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20">
+                    <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold text-white">{m.solutions_pr_cost_rebuild_value({}, { locale })}</p>
+                    <p class="text-gray-400">{m.solutions_pr_cost_rebuild_label({}, { locale })}</p>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-400">{m.solutions_pr_cost_rebuild_explanation({}, { locale })}</p>
+              </div>
+              <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
+                <div class="mb-3 flex items-center gap-4">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20">
+                    <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold text-white">{m.solutions_pr_cost_stale_value({}, { locale })}</p>
+                    <p class="text-gray-400">{m.solutions_pr_cost_stale_label({}, { locale })}</p>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-400">{m.solutions_pr_cost_stale_explanation({}, { locale })}</p>
+              </div>
             </div>
           </div>
         </div>
