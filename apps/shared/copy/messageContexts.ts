@@ -202,6 +202,8 @@ export const messageContexts = {
   and: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page trust.astro. Message key `and` (And).',
   app_mobile: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: site footer, site header. Message key `app_mobile` (App Mobile).',
   app_store_compliant: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `app_store_compliant` (App Store Compliant).',
+  app_strip_installs: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component AppLogoStrip.astro. Message key `app_strip_installs` (App Strip Installs).',
+  app_strip_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: component AppLogoStrip.astro. Message key `app_strip_title` (App Strip Title).',
   appflow_credentials_appflow_label: 'Page/area: Appflow comparison / migration marketing copy. Role: UI label. Seen in: page ionic-appflow.astro. Preserve Capgo product/brand and developer terms exactly. Message key `appflow_credentials_appflow_label` (Appflow Credentials Appflow Label).',
   appflow_credentials_appflow_li1: 'Page/area: Appflow comparison / migration marketing copy. Role: Bullet list item. Seen in: page ionic-appflow.astro. Preserve Capgo product/brand and developer terms exactly. Message key `appflow_credentials_appflow_li1` (Appflow Credentials Appflow Li1).',
   appflow_credentials_appflow_li2: 'Page/area: Appflow comparison / migration marketing copy. Role: Bullet list item. Seen in: page ionic-appflow.astro. Message key `appflow_credentials_appflow_li2` (Appflow Credentials Appflow Li2).',

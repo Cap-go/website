@@ -18,6 +18,8 @@ const messages = {
   about: 'About',
   about_capgo: 'About Capgo',
   about_capgo_description: 'Learn about Capgo, the live update solution for Capacitor apps built by Martin Donadieu. Delivering instant OTA updates to mobile apps since 2022.',
+  app_strip_installs: '{count} installs',
+  app_strip_title: 'Used in production by teams shipping these apps',
   article_credits: 'Article credits',
   access_maintain_enterprise_plugins: 'Access and maintain our enterprise-grade Capacitor plugins with priority support and dedicated maintenance.',
   ach_available_for_enterprise_annual_payments: 'ACH is available only for annual payments from Enterprise plan customers. Contact us for more information.',
