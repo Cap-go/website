@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro'
 import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
 import ProblemSolution from '@/components/ProblemSolution.astro'
 import Testimonials from '@/components/Testimonials.astro'
+import WhyCapgo from '@/components/WhyCapgo.astro'
 import SharedNumbers from '@/components/SharedNumbers.astro'
 import Hero from '@/components/Hero.astro'
 import m from '@/copy/messages'
@@ -90,6 +91,7 @@ const content = {
     <HowItWorks />
     <GlobalInfrastructure />
     <SharedNumbers stats={stats} />
+    <WhyCapgo />
     <Testimonials />
     <AppflowShutdown />
     <AskAiSection />

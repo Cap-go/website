@@ -5159,6 +5159,10 @@ const messages = {
   when_down_review:
     "When an application works too slow or gets down (even for a few minutes), it can damage users' satisfaction and decrease the revenue. To avoid such situations, review the code to find areas for improvement.",
   when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: "When it's good to ask for Cordova and CapacitorJS consulting services",
+  why_capgo_eyebrow: 'WHY TEAMS CHOOSE CAPGO',
+  why_capgo_security_title: 'Independently audited security',
+  why_capgo_title: 'Faster fixes, without giving up control',
+  why_capgo_trust_link: 'Visit the Trust Center',
   why_is_it_important: 'Why is it important?',
   why_work: 'Why work',
   with_us: 'with us?',
