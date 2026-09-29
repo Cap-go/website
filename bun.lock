@@ -113,6 +113,7 @@
     "apps/web": {
       "name": "@capgo/web",
       "dependencies": {
+        "@nekuda/webmcp-sdk": "0.7.1",
         "astro-icon": "1.2.0",
         "sharp": "^0.35.4",
       },
@@ -471,6 +472,8 @@
     "@mermaid-js/parser": ["@mermaid-js/parser@2.0.0", "", { "dependencies": { "@chevrotain/types": "~11.1.2" } }, "sha512-K8BeapFUfrfxbRAUQAG5oBOCwo1+bNWzaVnPxTCutkfrTBn6T/j91FIhqxWJ32SUeQ9T3iy1zcmPZ5ROZEvDrg=="],
 
     "@napi-rs/wasm-runtime": ["@napi-rs/wasm-runtime@1.2.4", "", { "dependencies": { "@tybys/wasm-util": "^0.10.3" }, "peerDependencies": { "@emnapi/core": "^1.7.1 || ^2.0.0-alpha.4", "@emnapi/runtime": "^1.7.1 || ^2.0.0-alpha.4" } }, "sha512-AJxoUD2/15ESHbvpcyjU274nsAPLuOtPHCk0vKJM5pj//Fg/B1FXNWjPnXTT9PymCYYiHo4zPj0ZomXBKhoy7g=="],
+
+    "@nekuda/webmcp-sdk": ["@nekuda/webmcp-sdk@0.7.1", "", { "peerDependencies": { "@opentelemetry/api-logs": ">=0.50.0" }, "optionalPeers": ["@opentelemetry/api-logs"] }, "sha512-Mj/a1yTASyF9xQAqQIslphcGzd0rY8MnGQDG/YGCkN7J5PS8JiIYoftKV1sbMIyTXyq5BI0uYWDxE8ep5TdzHA=="],
 
     "@nodable/entities": ["@nodable/entities@3.0.0", "", {}, "sha512-8L9xFeTYKhm49xfIypoe2W5wV1m/3Z58kT+7kR9A8OyFxcPduI4VmxaUMQyKYrRjUoLLSXv6EKKID5Tvj9cUVw=="],
 
