@@ -9,42 +9,10 @@ import PostHog from '../components/posthog.astro'
 import WebMcpTools from '../components/WebMcpTools.astro'
 import globalStylesHref from '../css/global.css?url'
 import productSurfaceHref from '../styles/product-surface.css?url'
-import { getRelativeLocaleUrl } from '@/services/links'
-import { getCollection } from 'astro:content'
-
-type FooterBlogPost = {
-  title: string
-  href: string
-  tag?: string
-}
 
 const content = Astro.props.content ?? {}
 const disableThirdPartyScripts = Astro.props.disableThirdPartyScripts ?? false
 const hideChrome = Astro.props.hideChrome ?? false
-const footerBlogCopy = Astro.props.footerBlogCopy
-const defaultFooterBlogSlugs = ['a-brand-new-organization-system', 'capgo-2025-year-in-review', 'capacitor-social-login-release']
-const footerBlogSlugs = (Astro.props.footerBlogSlugs ?? defaultFooterBlogSlugs) as string[]
-const footerBlogEntries = footerBlogSlugs.length
-  ? await getCollection(
-      'blog',
-      ({ data }) => data.published !== false && data.origin === 'human' && footerBlogSlugs.includes(data.slug) && (data.locale === Astro.locals.locale || data.locale === 'en'),
-    )
-  : []
-
-const footerBlogPosts = footerBlogSlugs
-  .map((slug: string): FooterBlogPost | null => {
-    const entry =
-      footerBlogEntries.find((post) => post.data.slug === slug && post.data.locale === Astro.locals.locale) ??
-      footerBlogEntries.find((post) => post.data.slug === slug && post.data.locale === 'en')
-    if (!entry) return null
-
-    return {
-      title: entry.data.title,
-      href: getRelativeLocaleUrl(entry.data.locale, `blog/${entry.data.slug}`),
-      tag: entry.data.tag?.split(',')[0]?.trim(),
-    }
-  })
-  .filter((post): post is FooterBlogPost => Boolean(post))
 
 const isLocalhost = Astro.url.origin.includes('localhost:')
 const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
@@ -77,7 +45,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
       <main id="main-content">
         <slot />
       </main>
-      {!hideChrome && <Footer blogPosts={footerBlogPosts} blogCopy={footerBlogCopy} />}
+      {!hideChrome && <Footer />}
     </div>
     {
       enableThirdPartyScripts && (
