@@ -1,0 +1,531 @@
+---
+import m from '@/copy/messages'
+
+const locale = Astro.locals.locale
+const beta = new Set([3, 12, 22, 35])
+const rollout = new Set([1, 9, 17, 26, 30, 38])
+const failing = new Set([9, 12, 17, 26, 38])
+const devices = Array.from({ length: 40 }, (_, index) => index)
+const errorBars = [18, 22, 16, 20, 17, 21, 19, 15, 20, 18, 17, 19, 16, 18]
+---
+
+<div class="stage" data-stage aria-hidden="true">
+  <div class="inner">
+    <div class="fleet">
+      <div class="fleet-head">
+        <p class="label">{m.explainer_rollout_devices({}, { locale })} · production</p>
+        <p class="legend">
+          <span><i class="c-stable"></i>2.5.0</span>
+          <span><i class="c-next"></i>2.6.0</span>
+          <span><i class="c-fail"></i>{m.explainer_rollout_failing({}, { locale })}</span>
+          <span><i class="c-fixed"></i>2.6.1</span>
+        </p>
+      </div>
+      <div class="devices">
+        {
+          devices.map((index) => (
+            <span
+              class:list={['dev', { beta: beta.has(index), roll: rollout.has(index), fail: failing.has(index) }]}
+              style={`--i:${index};--row:${Math.floor(index / 8)};--col:${index % 8}`}
+            >
+              <span class="dev-screen" />
+            </span>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="row">
+        <p class="label">{m.explainer_rollout_channel({}, { locale })}</p>
+        <p class="channels"><span class="ch ch-beta">beta</span><span class="ch ch-prod">production</span></p>
+      </div>
+      <div class="version">
+        <span class="v v250">2.5.0</span>
+        <span class="v v260">2.6.0</span>
+        <span class="v v261">2.6.1</span>
+      </div>
+      <div class="row">
+        <p class="label">{m.explainer_rollout_rollout({}, { locale })}</p>
+        <p class="pct"></p>
+      </div>
+      <span class="track"><i></i></span>
+
+      <div class="row errors-row">
+        <p class="label">{m.explainer_rollout_error_rate({}, { locale })}</p>
+        <p class="err"><span class="err-low">0.2%</span><span class="err-high">6.4%</span></p>
+      </div>
+      <div class="bars">
+        {errorBars.map((height, index) => <i style={`--h:${height}%;--i:${index}`} />)}
+      </div>
+      <span class="rollback">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+          ><path d="M3 5h7a3.5 3.5 0 0 1 0 7H6M3 5l2.5-2.5M3 5l2.5 2.5"></path></svg
+        >
+        {m.explainer_rollout_roll_back({}, { locale })} → 2.5.0
+        <span class="cursor"></span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<style>
+  @property --pct {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+  }
+  .stage {
+    container-type: inline-size;
+  }
+  .inner {
+    --stable: #60a5fa;
+    --next: #a78bfa;
+    --fail: #f87171;
+    --fixed: #4ade80;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 17em;
+    align-items: center;
+    gap: 2em;
+    padding: 3em;
+    min-height: 38em;
+    font-size: clamp(9px, 1.45cqw, 14px);
+    color: #e5e7eb;
+    background:
+      radial-gradient(50% 60% at 30% 50%, rgb(96 165 250 / 0.1), transparent 70%),
+      radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.06) 1px, transparent 0) 0 0 / 2em 2em;
+  }
+  .label {
+    font-size: 0.8em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+  .fleet-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6em 1.4em;
+    margin-bottom: 1.4em;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    font:
+      0.8em/1 ui-monospace,
+      monospace;
+    color: #9ca3af;
+  }
+  .legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+  .legend i {
+    width: 0.7em;
+    height: 0.7em;
+    border-radius: 50%;
+  }
+  .c-stable {
+    background: var(--stable);
+  }
+  .c-next {
+    background: var(--next);
+  }
+  .c-fail {
+    background: var(--fail);
+  }
+  .c-fixed {
+    background: var(--fixed);
+  }
+
+  /* Device fleet */
+  .devices {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1em 1.2em;
+  }
+  .dev {
+    --c: var(--stable);
+    --delay: 0s;
+    position: relative;
+    width: 2.4em;
+    aspect-ratio: 9 / 16;
+    justify-self: center;
+    padding: 0.22em;
+    border-radius: 0.55em;
+    background: #25282e;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+  .dev-screen {
+    display: block;
+    height: 100%;
+    border-radius: 0.35em;
+    background: var(--c);
+    box-shadow: 0 0 0.9em color-mix(in srgb, var(--c) 45%, transparent);
+    transition:
+      background 0.4s var(--delay),
+      box-shadow 0.4s var(--delay);
+  }
+  .dev.beta::after {
+    content: '';
+    position: absolute;
+    inset: -0.35em;
+    border-radius: 0.8em;
+    box-shadow: 0 0 0 1.5px var(--next);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .s1:not(.s2) .dev.beta::after {
+    opacity: 1;
+  }
+  .s1 .dev.beta {
+    --c: var(--next);
+    --delay: 0.4s;
+  }
+  .s2 .dev.roll {
+    --c: var(--next);
+    --delay: calc(0.3s + var(--i) * 25ms);
+  }
+  .s3 .dev.fail {
+    --c: var(--fail);
+    --delay: calc(0.4s + var(--i) * 30ms);
+    animation: jolt 0.4s calc(0.5s + var(--i) * 30ms) 2;
+  }
+  .s4 .dev:nth-child(n) {
+    --c: var(--stable);
+    --delay: calc(1s + var(--col) * 70ms);
+  }
+  .s4 .dev:not(.beta, .roll) {
+    --delay: 0s;
+  }
+  .s5 .dev:nth-child(n) {
+    --c: var(--fixed);
+    --delay: calc(0.4s + (var(--row) + var(--col)) * 70ms);
+  }
+  @keyframes jolt {
+    30% {
+      translate: -0.15em 0;
+    }
+    70% {
+      translate: 0.15em 0;
+    }
+  }
+
+  /* Control panel */
+  .panel {
+    display: grid;
+    gap: 0.8em;
+    padding: 1.3em;
+    border-radius: 1.2em;
+    background: #14161b;
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.08),
+      0 1.5em 3em rgb(0 0 0 / 0.35);
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .channels {
+    display: flex;
+    gap: 0.25em;
+    padding: 0.2em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.05);
+  }
+  .ch {
+    padding: 0.2em 0.6em;
+    border-radius: 999px;
+    font:
+      600 0.78em/1.4 ui-monospace,
+      monospace;
+    color: #6b7280;
+    transition:
+      background 0.3s,
+      color 0.3s;
+  }
+  .ch-prod {
+    background: rgb(255 255 255 / 0.1);
+    color: #fff;
+  }
+  .s1:not(.s2) .ch-beta {
+    background: rgb(167 139 250 / 0.25);
+    color: #fff;
+  }
+  .s1:not(.s2) .ch-prod {
+    background: transparent;
+    color: #6b7280;
+  }
+  .version {
+    display: grid;
+    padding: 0.2em 0 0.4em;
+    font:
+      700 2.4em/1 ui-monospace,
+      monospace;
+  }
+  .v {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(0.25em);
+    transition:
+      opacity 0.3s,
+      transform 0.3s;
+  }
+  .v250 {
+    color: var(--stable);
+    opacity: 1;
+    transform: none;
+  }
+  .v260 {
+    color: var(--next);
+  }
+  .v261 {
+    color: var(--fixed);
+  }
+  .s1 .v250 {
+    opacity: 0;
+  }
+  .s1 .v260 {
+    opacity: 1;
+    transform: none;
+  }
+  .s4 .v260 {
+    opacity: 0;
+  }
+  .s4 .v250 {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.9s;
+  }
+  .s5 .v250 {
+    opacity: 0;
+    transition-delay: 0s;
+  }
+  .s5 .v261 {
+    opacity: 1;
+    transform: none;
+  }
+  .pct {
+    --pct: 0;
+    counter-reset: pct var(--pct);
+    font:
+      700 1em/1 ui-monospace,
+      monospace;
+    color: #fff;
+    transition: --pct 0.8s ease;
+  }
+  .pct::after {
+    content: counter(pct) '%';
+  }
+  .track {
+    display: block;
+    height: 0.5em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.08);
+    overflow: hidden;
+  }
+  .track i {
+    display: block;
+    width: var(--fill);
+    height: 100%;
+    border-radius: inherit;
+    background: var(--next);
+    transition: width 0.8s ease;
+  }
+  .panel {
+    --fill: 0%;
+  }
+  .s2 .pct {
+    --pct: 25;
+  }
+  .s2 .panel {
+    --fill: 25%;
+  }
+  .s2 .pct {
+    transition-delay: 0.2s;
+  }
+  .s4 .pct {
+    --pct: 0;
+  }
+  .s4 .panel {
+    --fill: 0%;
+  }
+  .s4 .pct {
+    transition-delay: 0.9s;
+  }
+  .s4 .track i {
+    transition-delay: 0.9s;
+  }
+  .s5 .pct {
+    --pct: 100;
+  }
+  .s5 .panel {
+    --fill: 100%;
+  }
+  .s5 .track i {
+    background: var(--fixed);
+    transition-delay: 0.3s;
+  }
+  .s5 .pct {
+    transition-delay: 0.3s;
+  }
+
+  .errors-row {
+    margin-top: 0.6em;
+  }
+  .err {
+    display: grid;
+    font:
+      700 1em/1 ui-monospace,
+      monospace;
+  }
+  .err span {
+    grid-area: 1 / 1;
+    justify-self: end;
+    transition: opacity 0.3s;
+  }
+  .err-low {
+    color: var(--fixed);
+  }
+  .err-high {
+    color: var(--fail);
+    opacity: 0;
+  }
+  .s3 .err-low {
+    opacity: 0;
+    transition-delay: 0.9s;
+  }
+  .s3 .err-high {
+    opacity: 1;
+    transition-delay: 0.9s;
+  }
+  .s4 .err-low {
+    opacity: 1;
+    transition-delay: 1.6s;
+  }
+  .s4 .err-high {
+    opacity: 0;
+    transition-delay: 1.6s;
+  }
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.25em;
+    height: 4.2em;
+  }
+  .bars i {
+    flex: 1;
+    height: var(--h);
+    border-radius: 0.2em 0.2em 0 0;
+    background: rgb(255 255 255 / 0.18);
+    transition:
+      height 0.5s ease,
+      background 0.5s ease;
+  }
+  .s3 .bars i:nth-child(n + 10) {
+    height: calc(var(--h) * 4.6);
+    background: var(--fail);
+    transition-delay: calc(0.5s + (var(--i) - 9) * 90ms);
+  }
+  .s4 .bars i:nth-child(n + 10) {
+    height: var(--h);
+    background: rgb(255 255 255 / 0.18);
+    transition-delay: calc(1.3s + (var(--i) - 9) * 60ms);
+  }
+
+  .rollback {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    margin-top: 0.4em;
+    padding: 0.7em;
+    border-radius: 0.8em;
+    background: rgb(255 255 255 / 0.06);
+    color: #9ca3af;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition:
+      background 0.3s,
+      color 0.3s,
+      box-shadow 0.3s,
+      transform 0.15s;
+  }
+  .rollback svg {
+    width: 1.1em;
+    height: 1.1em;
+  }
+  .s3 .rollback {
+    background: rgb(248 113 113 / 0.15);
+    color: #fff;
+    box-shadow: inset 0 0 0 1px rgb(248 113 113 / 0.6);
+    transition-delay: 1.4s;
+  }
+  .s4 .rollback {
+    animation: press 0.35s ease 0.55s;
+    background: rgb(255 255 255 / 0.06);
+    color: #9ca3af;
+    box-shadow: none;
+    transition-delay: 1.2s;
+  }
+  @keyframes press {
+    50% {
+      transform: scale(0.95);
+      background: rgb(248 113 113 / 0.35);
+    }
+  }
+  .cursor {
+    position: absolute;
+    right: 1.4em;
+    bottom: -0.8em;
+    width: 1.4em;
+    height: 1.4em;
+    background: #fff;
+    clip-path: polygon(0 0, 0 80%, 25% 60%, 42% 100%, 58% 92%, 42% 55%, 75% 55%);
+    filter: drop-shadow(0 0.1em 0.2em rgb(0 0 0 / 0.5));
+    opacity: 0;
+  }
+  .s4 .cursor {
+    animation: cursor 1.3s ease forwards;
+  }
+  @keyframes cursor {
+    0% {
+      opacity: 0;
+      translate: 2.5em 2em;
+    }
+    30% {
+      opacity: 1;
+    }
+    45%,
+    60% {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+    52% {
+      scale: 0.85;
+    }
+    100% {
+      opacity: 0;
+      translate: 0 0;
+    }
+  }
+
+  @container (max-width: 560px) {
+    .inner {
+      min-height: 0;
+      grid-template-columns: minmax(0, 1fr);
+      padding: 2em 1.5em;
+      font-size: clamp(9px, 2.8cqw, 12px);
+    }
+    .devices {
+      gap: 0.8em;
+    }
+  }
+</style>
