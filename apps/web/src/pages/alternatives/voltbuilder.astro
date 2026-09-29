@@ -1,0 +1,54 @@
+---
+import ConversionLandingLayout from '@/components/conversion/ConversionLandingLayout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const title = m.voltbuilder_alt_title({}, { locale })
+const description = m.voltbuilder_alt_meta_description({}, { locale })
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = {
+  title,
+  description,
+  keywords: 'Voltbuilder alternative, Capacitor live updates, Cordova builds',
+  ldJSON,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+}
+
+const blogUrl = getRelativeLocaleUrl(locale, 'blog/alternative-to-voltbuilder')
+
+const relatedLinks = [
+  { label: m.voltbuilder_alt_blog_cta({}, { locale }), href: blogUrl },
+  { label: m.alternatives({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives') },
+  { label: m.live_update({}, { locale }), href: getRelativeLocaleUrl(locale, 'live-update') },
+  { label: m.native_build({}, { locale }), href: getRelativeLocaleUrl(locale, 'native-build') },
+]
+---
+
+<ConversionLandingLayout
+  locale={locale}
+  content={content}
+  heroTitle={m.voltbuilder_alt_hero_title({}, { locale })}
+  heroSubtitle={m.voltbuilder_alt_hero_subtitle({}, { locale })}
+  sections={[
+    {
+      title: m.voltbuilder_alt_scope_title({}, { locale }),
+      paragraphs: [m.voltbuilder_alt_scope_p1({}, { locale }), m.voltbuilder_alt_scope_p2({}, { locale })],
+      htmlParagraphs: [`<a class="text-emerald-400 underline" href="${blogUrl}">${m.voltbuilder_alt_blog_cta({}, { locale })}</a>`],
+    },
+  ]}
+  relatedLinks={relatedLinks}
+/>

@@ -1,0 +1,68 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import CommandCode from '@/components/CommandCode.astro'
+import ConversionRelatedLinks from '@/components/conversion/ConversionRelatedLinks.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const title = m.mcp_page_title({}, { locale })
+const description = m.mcp_page_meta_description({}, { locale })
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = { title, description, ldJSON, image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png` }
+
+const relatedLinks = [
+  { label: m.mcp_page_links_manifest({}, { locale }), href: '/.well-known/mcp.json' },
+  { label: m.mcp_page_links_docs({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/cli/reference/mcp') },
+  { label: m.mcp_page_links_skills({}, { locale }), href: getRelativeLocaleUrl(locale, 'skills') },
+  { label: m.mcp_page_links_openapi({}, { locale }), href: '/openapi.json' },
+  { label: m.contact({}, { locale }), href: getRelativeLocaleUrl(locale, 'contact') },
+]
+
+const cliMcpCommand = 'npx @capgo/cli@latest mcp'
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">{m.mcp_page_hero_title({}, { locale })}</h1>
+        <p class="mx-auto max-w-2xl text-xl text-gray-300">{m.mcp_page_hero_subtitle({}, { locale })}</p>
+      </div>
+
+      <div class="mb-8 space-y-8">
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
+          <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.mcp_page_public_title({}, { locale })}</h2>
+          <div class="space-y-4 text-gray-300">
+            <p>{m.mcp_page_public_p1({}, { locale })}</p>
+            <p>{m.mcp_page_public_p2({}, { locale })}</p>
+            <p>
+              Endpoint: <code class="rounded bg-gray-950 px-2 py-1 text-emerald-300">POST https://capgo.app/mcp</code>
+            </p>
+          </div>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
+          <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.mcp_page_cli_title({}, { locale })}</h2>
+          <p class="mb-4 text-gray-300">{m.mcp_page_cli_p1({}, { locale })}</p>
+          <CommandCode command={cliMcpCommand} />
+        </div>
+      </div>
+
+      <ConversionRelatedLinks title={m.mcp_page_links_title({}, { locale })} links={relatedLinks} />
+    </div>
+  </section>
+</Layout>

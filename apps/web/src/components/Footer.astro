@@ -94,6 +94,8 @@ const columns: { title: string; links: FooterLink[] }[] = [
       { name: m.expo_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/expo') },
       { name: m.median_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/median') },
       { name: m.capwesome_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/capawesome') },
+      { name: m.alternatives_hub_codepush_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/codepush') },
+      { name: m.footer_mcp_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'mcp') },
       {
         name: m.solutions_cordova_to_capacitor_ai_short({}, { locale: Astro.locals.locale }),
         href: getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor-ai'),

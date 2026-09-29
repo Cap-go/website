@@ -34,11 +34,7 @@ test('ensureLdJsonContext adds schema.org @context to standalone schemas', () =>
 })
 
 test('ensureLdJsonContext preserves existing @context on graph ld+json', () => {
-  const graph = createLdJsonGraph(
-    mockConfig,
-    { '@type': 'WebPage', name: 'Test' },
-    { includeOrganization: true },
-  )
+  const graph = createLdJsonGraph(mockConfig, { '@type': 'WebPage', name: 'Test' }, { includeOrganization: true })
 
   const normalized = ensureLdJsonContext(graph)
   expect(normalized['@context']).toBe('https://schema.org')

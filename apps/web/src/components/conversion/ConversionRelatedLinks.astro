@@ -1,0 +1,30 @@
+---
+export interface ConversionLink {
+  label: string
+  href: string
+  description?: string
+}
+
+interface Props {
+  title: string
+  links: ConversionLink[]
+}
+
+const { title, links } = Astro.props
+---
+
+<div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+  <h2 class="mb-4 text-xl font-semibold text-gray-100">{title}</h2>
+  <ul class="space-y-3">
+    {
+      links.map((link) => (
+        <li>
+          <a href={link.href} class="font-medium text-emerald-400 hover:text-emerald-300">
+            {link.label}
+          </a>
+          {link.description ? <p class="mt-1 text-sm text-gray-400">{link.description}</p> : null}
+        </li>
+      ))
+    }
+  </ul>
+</div>
