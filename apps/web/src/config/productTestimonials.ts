@@ -4,6 +4,8 @@ export type ProductTestimonial = {
   role: string
   avatar: string
   rating: number
+  /** Company or app logo, shown when there is no portrait and next to the role. */
+  logo?: string
 }
 
 export const DEFAULT_TESTIMONIAL_AVATAR = 'https://ik.imagekit.io/senja/tr:f-jpeg/Avatars/avatar_aOgsMJ-eZ.png?ik-sdk-version=javascript-1.4.3&updatedAt=1657796891741'
@@ -45,6 +47,7 @@ const noTone: ProductTestimonial = {
   role: 'Developer, Webincode',
   avatar: defaultAvatar,
   rating: 5,
+  logo: '/testimonial-logos/webincode.png',
 }
 
 const sikafanka: ProductTestimonial = {
@@ -53,6 +56,7 @@ const sikafanka: ProductTestimonial = {
   role: 'Design, radius 5',
   avatar: defaultAvatar,
   rating: 5,
+  logo: '/testimonial-logos/radius5.png',
 }
 
 const mikolaj: ProductTestimonial = {
@@ -61,6 +65,7 @@ const mikolaj: ProductTestimonial = {
   role: 'Principal Mobile Platform Engineer, Tellent',
   avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/cd659df9-70a5-43f5-bbfd-c11f5c6cec7e_avatar.png',
   rating: 5,
+  logo: '/testimonial-logos/tellent.png',
 }
 
 const michael: ProductTestimonial = {
@@ -77,6 +82,7 @@ const sergiu: ProductTestimonial = {
   role: 'Lead Developer, drivolino GmbH',
   avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/98496c09-8f14-45ec-a8fc-21c2f76bf2ca_photo_2024-04-28_17-25-58.jpg',
   rating: 5,
+  logo: '/testimonial-logos/drivolino.png',
 }
 
 export const productTestimonials = {
@@ -86,7 +92,21 @@ export const productTestimonials = {
   mobile: [luis, noTone, kapil],
   plugins: [mikolaj, michael, sergiu],
   ionicEnterprisePlugins: [mikolaj, sergiu],
+  observe: [noTone, nate, sergiu],
+  notifications: [noTone, kapil, luis],
+  skills: [nate, mikolaj, michael],
+  ciCd: [sikafanka, nate, kapil],
+  liveUpdateData: [sergiu, kapil, michael],
+  nativeBuildData: [sikafanka, mikolaj],
 } satisfies Record<string, ProductTestimonial[]>
+
+export const allTestimonials = [luis, nate, kapil, noTone, sikafanka, mikolaj, michael, sergiu]
+
+/** Average star rating across every published customer testimonial above. */
+export const ratingSummary = {
+  average: Number((allTestimonials.reduce((sum, item) => sum + item.rating, 0) / allTestimonials.length).toFixed(1)),
+  count: allTestimonials.length,
+}
 
 /** Real customer quotes shown on product schema pages (pricing, enterprise). */
 export const capgoReviews = [sergiu, mikolaj, luis]

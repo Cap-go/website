@@ -1,10 +1,13 @@
 ---
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
+import ObserveReleaseHealthDemo from '@/components/observe/ObserveReleaseHealthDemo.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -66,17 +69,8 @@ const screenSignals = [
         </div>
 
         <figure class="observe-dashboard">
-          <picture>
-            <source media="(max-width: 720px)" srcset="/landing-demos/observe-dashboard-mobile.webp" />
-            <img
-              src="/landing-demos/observe-dashboard.webp"
-              alt="Capgo Observe dashboard showing native health, launch timing, WebView timing, version breakdown, and release markers"
-              width="1440"
-              height="1100"
-              loading="eager"
-              decoding="async"
-            />
-          </picture>
+          <ObserveReleaseHealthDemo />
+          <figcaption class="sr-only">Capgo Observe dashboard showing native health, launch timing, WebView timing, version breakdown, and release markers</figcaption>
         </figure>
       </div>
     </section>
@@ -169,6 +163,16 @@ const screenSignals = [
       </div>
     </section>
 
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_observe_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_observe_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.observe}
+      maxItems={2}
+    />
+
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">
         <p class="eyebrow eyebrow--blue">Observe every rollout</p>
@@ -183,14 +187,6 @@ const screenSignals = [
         </div>
       </div>
     </section>
-
-    <div class="shell seo-bridge">
-      <h2 class="h2-section">One workflow from rollout to evidence</h2>
-      <p>
-        Pair <a href={liveUpdateUrl}>Capgo Live Updates</a> with <a href={logsDocsUrl}>Logs Insights</a> to move from reported version health to errors, devices, and filtered raw action
-        logs.
-      </p>
-    </div>
   </div>
 </Layout>
 

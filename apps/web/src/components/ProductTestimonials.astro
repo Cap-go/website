@@ -1,5 +1,6 @@
 ---
 import { hasRealAvatar, type ProductTestimonial } from '@/config/productTestimonials'
+import RatingSummary from '@/components/RatingSummary.astro'
 
 interface Props {
   eyebrow?: string
@@ -14,6 +15,14 @@ interface Props {
 const { eyebrow = 'Customer proof', title, description, testimonials, variant = 'dark', maxItems = 3, accent = 'green' } = Astro.props
 
 const visibleTestimonials = testimonials.slice(0, maxItems)
+const initialsOf = (name: string) =>
+  name
+    .replace(/@.*/, '')
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0]?.toUpperCase() ?? '')
+    .join('')
 
 const isLight = variant === 'light'
 const isBuilder = variant === 'builder'
@@ -34,7 +43,9 @@ const starMutedClass = isLight ? 'text-slate-300' : isBuilder ? 'proof-star-mute
 const gridClass = isBuilder
   ? visibleTestimonials.length === 1
     ? 'proof-grid proof-grid--one'
-    : 'proof-grid'
+    : visibleTestimonials.length === 3
+      ? 'proof-grid proof-grid--three'
+      : 'proof-grid'
   : visibleTestimonials.length === 1
     ? 'max-w-3xl'
     : visibleTestimonials.length === 2
@@ -51,6 +62,7 @@ const gridClass = isBuilder
             <div class={eyebrowClass}>{eyebrow}</div>
             <h2 class={titleClass}>{title}</h2>
             {description && <p class={descriptionClass}>{description}</p>}
+            <RatingSummary class="proof-rating" />
           </div>
 
           <div class={gridClass}>
@@ -61,9 +73,11 @@ const gridClass = isBuilder
                   <div class="proof-card-top">
                     {showAvatar ? (
                       <img src={item.avatar} alt="" width="40" height="40" loading="lazy" decoding="async" class="proof-avatar" />
+                    ) : item.logo ? (
+                      <img src={item.logo} alt="" width="40" height="40" loading="lazy" decoding="async" class="proof-avatar proof-logo" />
                     ) : (
                       <span class="proof-mark" aria-hidden="true">
-                        &ldquo;
+                        {initialsOf(item.name)}
                       </span>
                     )}
                     <div class="flex shrink-0 gap-0.5" role="img" aria-label={`${item.rating} out of 5 stars`}>
@@ -94,6 +108,7 @@ const gridClass = isBuilder
             <p class:list={[eyebrowClass]}>{eyebrow}</p>
             <h2 class:list={['mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl', titleClass]}>{title}</h2>
             {description && <p class:list={['mt-5 text-base leading-7 text-pretty', descriptionClass]}>{description}</p>}
+            <RatingSummary class="mt-5" tone={isLight ? 'light' : 'dark'} />
           </div>
 
           <div class:list={['mt-10 grid gap-4', gridClass]}>
@@ -103,7 +118,7 @@ const gridClass = isBuilder
                 <article class:list={['flex min-h-full flex-col rounded-lg border p-5', cardClass]}>
                   <div class="flex items-start justify-between gap-4">
                     <div class="flex min-w-0 items-center gap-3">
-                      {showAvatar && (
+                      {showAvatar ? (
                         <img
                           src={item.avatar}
                           alt={`Portrait of ${item.name}`}
@@ -113,10 +128,33 @@ const gridClass = isBuilder
                           decoding="async"
                           class="h-12 w-12 shrink-0 rounded-lg object-cover outline-1 -outline-offset-1 outline-white/10"
                         />
+                      ) : item.logo ? (
+                        <img
+                          src={item.logo}
+                          alt=""
+                          width="48"
+                          height="48"
+                          loading="lazy"
+                          decoding="async"
+                          class="h-12 w-12 shrink-0 rounded-lg bg-white object-contain outline-1 -outline-offset-1 outline-white/10"
+                        />
+                      ) : (
+                        <span
+                          class:list={[
+                            'flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-sm font-semibold',
+                            isLight ? 'bg-slate-100 text-slate-600' : 'bg-white/[0.06] text-slate-300',
+                          ]}
+                          aria-hidden="true"
+                        >
+                          {initialsOf(item.name)}
+                        </span>
                       )}
                       <div class="min-w-0">
                         <h3 class:list={['text-sm font-semibold', nameClass]}>{item.name}</h3>
-                        <p class:list={['mt-1 text-xs leading-5', roleClass]}>{item.role}</p>
+                        <p class:list={['mt-1 flex items-center gap-1.5 text-xs leading-5', roleClass]}>
+                          {showAvatar && item.logo && <img src={item.logo} alt="" width="14" height="14" loading="lazy" decoding="async" class="h-3.5 w-3.5 rounded-sm" />}
+                          {item.role}
+                        </p>
                       </div>
                     </div>
                     <div class="flex shrink-0 gap-0.5" role="img" aria-label={`${item.rating} out of 5 stars`}>
@@ -142,6 +180,17 @@ const gridClass = isBuilder
 }
 
 <style is:global>
+  .product-proof .proof-logo {
+    background: #fff;
+    object-fit: contain;
+  }
+  .product-proof .proof-mark {
+    font-size: 14px !important;
+    letter-spacing: 0.02em;
+  }
+  .product-proof .proof-rating {
+    margin-top: 16px;
+  }
   .product-proof .proof-grid {
     display: grid;
     gap: 16px;
@@ -154,6 +203,17 @@ const gridClass = isBuilder
     .product-proof .proof-grid--one {
       grid-template-columns: minmax(0, 640px);
       justify-content: center;
+    }
+    .product-proof .proof-grid--three > :first-child {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (min-width: 1024px) {
+    .product-proof .proof-grid--three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .product-proof .proof-grid--three > :first-child {
+      grid-column: auto;
     }
   }
   .product-proof .proof-card-wrap {

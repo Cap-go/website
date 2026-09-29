@@ -1,0 +1,107 @@
+---
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import StackChips from '@/components/StackChips.astro'
+import { productIconPaths as iconPaths } from '@/config/productIcons'
+
+const locale = Astro.locals.locale
+
+const groups = [
+  {
+    label: m.platform_group_ship({}, { locale }),
+    products: [
+      { icon: 'bolt', name: m.platform_live_update_name({}, { locale }), desc: m.platform_live_update_desc({}, { locale }), href: 'live-update' },
+      { icon: 'cube', name: m.platform_native_build_name({}, { locale }), desc: m.platform_native_build_desc({}, { locale }), href: 'native-build' },
+    ],
+  },
+  {
+    label: m.platform_group_operate({}, { locale }),
+    products: [
+      { icon: 'chart-bar', name: m.platform_observe_name({}, { locale }), desc: m.platform_observe_desc({}, { locale }), href: 'observe' },
+      { icon: 'bell', name: m.platform_notifications_name({}, { locale }), desc: m.platform_notifications_desc({}, { locale }), href: 'notifications' },
+    ],
+  },
+  {
+    label: m.platform_group_automate({}, { locale }),
+    products: [
+      { icon: 'command-line', name: m.platform_cli_name({}, { locale }), desc: m.platform_cli_desc({}, { locale }), href: 'capgo-cli' },
+      { icon: 'sparkles', name: m.platform_skills_name({}, { locale }), desc: m.platform_skills_desc({}, { locale }), href: 'skills' },
+      { icon: 'device-phone-mobile', name: m.platform_app_name({}, { locale }), desc: m.platform_app_desc({}, { locale }), href: 'app_mobile' },
+    ],
+  },
+  {
+    label: m.platform_group_extend({}, { locale }),
+    products: [
+      { icon: 'puzzle-piece', name: m.platform_plugins_name({}, { locale }), desc: m.platform_plugins_desc({}, { locale }), href: 'plugins' },
+      {
+        icon: 'shield-check',
+        name: m.platform_ionic_name({}, { locale }),
+        desc: m.platform_ionic_desc({}, { locale }),
+        href: 'ionic-enterprise-plugins',
+      },
+    ],
+  },
+]
+---
+
+<section class="bg-[#1a1a1a] py-24 sm:py-32" aria-labelledby="platform-overview-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.platform_overview_eyebrow({}, { locale })}</p>
+      <h2 id="platform-overview-title" class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+        {m.platform_overview_title({}, { locale })}
+      </h2>
+      <p class="mt-6 text-lg leading-8 text-pretty text-gray-400">{m.platform_overview_subtitle({}, { locale })}</p>
+      <div class="mt-8">
+        <StackChips />
+      </div>
+    </div>
+
+    <div class="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      {
+        groups.map((group) => (
+          <div>
+            <h3 class="font-mono text-xs font-semibold tracking-widest text-gray-500 uppercase">{group.label}</h3>
+            <ul class="mt-4 grid gap-3">
+              {group.products.map((product) => (
+                <li>
+                  <a
+                    href={getRelativeLocaleUrl(locale, product.href)}
+                    class="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-[border-color,background-color] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:border-[#44BCFF]/40 [@media(hover:hover)]:hover:bg-white/[0.06]"
+                  >
+                    <span class="flex items-center gap-3">
+                      <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#44BCFF]/10 text-[#44BCFF] ring-1 ring-[#44BCFF]/20">
+                        <svg
+                          class="h-5 w-5"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          {iconPaths[product.icon].map((d) => (
+                            <path d={d} />
+                          ))}
+                        </svg>
+                      </span>
+                      <span class="text-base font-semibold text-white">{product.name}</span>
+                      <span
+                        class="ml-auto text-gray-600 transition-[color,transform] [@media(hover:hover)]:group-hover:translate-x-0.5 [@media(hover:hover)]:group-hover:text-[#44BCFF]"
+                        aria-hidden="true"
+                      >
+                        →
+                      </span>
+                    </span>
+                    <span class="mt-3 text-sm leading-6 text-gray-400">{product.desc}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

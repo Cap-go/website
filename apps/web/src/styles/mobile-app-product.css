@@ -74,9 +74,6 @@ body:has(.ma) {
 .ma.bg-ad {
   background: transparent;
 }
-body:has(.ma) footer > div > div:first-child {
-  display: none !important;
-}
 .ma .bg-grid::before {
   content: '';
   position: absolute;

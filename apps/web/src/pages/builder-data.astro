@@ -1,4 +1,7 @@
 ---
+import m from '@/copy/messages'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
 import { emptyBuilderMetrics } from '@/lib/builderMetrics'
@@ -312,6 +315,13 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         </ol>
       </div>
     </section>
+    <ProductTestimonials
+      variant="dark"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_data_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_data_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.nativeBuildData}
+    />
   </main>
 </Layout>
 

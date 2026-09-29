@@ -1,0 +1,77 @@
+---
+import m from '@/copy/messages'
+import { ratingSummary } from '@/config/productTestimonials'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+interface Props {
+  tone?: 'dark' | 'light'
+  align?: 'start' | 'center'
+  showReviewsLink?: boolean
+  showCustomers?: boolean
+  class?: string
+}
+
+const { tone = 'dark', align = 'start', showReviewsLink = true, showCustomers = true, class: className } = Astro.props
+const locale = Astro.locals.locale
+const rating = ratingSummary.average.toFixed(1)
+const reviewsUrl = `${getRelativeLocaleUrl(locale)}#testimonials`
+const isLight = tone === 'light'
+---
+
+<div
+  class:list={[
+    'flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm',
+    align === 'center' ? 'justify-center text-center' : 'justify-start',
+    isLight ? 'text-slate-600' : 'text-gray-400',
+    className,
+  ]}
+>
+  <span class="flex items-center gap-2">
+    <span class="flex gap-0.5" role="img" aria-label={m.rating_summary_aria({ rating }, { locale })}>
+      {
+        Array.from({ length: 5 }).map(() => (
+          <svg class:list={['h-4 w-4', isLight ? 'text-amber-500' : 'text-amber-300']} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
+          </svg>
+        ))
+      }
+    </span>
+    <span>
+      <strong class:list={['font-semibold', isLight ? 'text-slate-950' : 'text-white']}>{rating}/5</strong>
+      {m.rating_summary_label({}, { locale })}
+    </span>
+  </span>
+  {
+    showCustomers && (
+      <>
+        <span aria-hidden="true" class={isLight ? 'text-slate-300' : 'text-white/20'}>
+          ·
+        </span>
+        <span>
+          <strong class:list={['font-semibold', isLight ? 'text-slate-950' : 'text-white']}>{m.companies_logo_stat_companies_value({}, { locale })}</strong>
+          {m.rating_summary_customers({}, { locale })}
+        </span>
+      </>
+    )
+  }
+  {
+    showReviewsLink && (
+      <>
+        <span aria-hidden="true" class={isLight ? 'text-slate-300' : 'text-white/20'}>
+          ·
+        </span>
+        <a
+          href={reviewsUrl}
+          class:list={[
+            'font-medium underline! decoration-1 underline-offset-4 transition-colors focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2',
+            isLight
+              ? 'text-blue-700! decoration-blue-700/30 focus-visible:outline-blue-700 [@media(hover:hover)]:hover:text-blue-900!'
+              : 'text-[#44BCFF]! decoration-[#44BCFF]/40 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!',
+          ]}
+        >
+          {m.rating_summary_read_reviews({}, { locale })}
+        </a>
+      </>
+    )
+  }
+</div>

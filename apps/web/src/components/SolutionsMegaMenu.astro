@@ -1,0 +1,553 @@
+---
+import m from '@/copy/messages'
+import { productIconPaths } from '@/config/productIcons'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+
+type Scene = 'teams' | 'industries' | 'workflows' | 'migrations'
+
+interface Category {
+  icon: string
+  scene: Scene
+  name: string
+  tagline: string
+  links: { href: string; name: string; tagline: string }[]
+}
+
+const categories: Category[] = [
+  {
+    icon: 'user-group',
+    scene: 'teams',
+    name: m.solutions_by_team({}, { locale }),
+    tagline: m.solnav_teams_tagline({}, { locale }),
+    links: [
+      { href: 'enterprise', name: m.solutions_enterprise_short({}, { locale }), tagline: m.solnav_enterprise({}, { locale }) },
+      { href: 'solutions/startups', name: m.solutions_startups_short({}, { locale }), tagline: m.solnav_startups({}, { locale }) },
+      { href: 'solutions/solo-developers', name: m.solutions_solo_short({}, { locale }), tagline: m.solnav_solo({}, { locale }) },
+      { href: 'solutions/agencies', name: m.solutions_agencies_short({}, { locale }), tagline: m.solnav_agencies({}, { locale }) },
+    ],
+  },
+  {
+    icon: 'building-office-2',
+    scene: 'industries',
+    name: m.solutions_by_industry({}, { locale }),
+    tagline: m.solnav_industries_tagline({}, { locale }),
+    links: [
+      { href: 'solutions/fintech', name: m.solutions_fintech_short({}, { locale }), tagline: m.solnav_fintech({}, { locale }) },
+      { href: 'solutions/ecommerce', name: m.solutions_ecommerce_short({}, { locale }), tagline: m.solnav_ecommerce({}, { locale }) },
+      { href: 'solutions/healthcare', name: m.solutions_healthcare_short({}, { locale }), tagline: m.solnav_healthcare({}, { locale }) },
+      { href: 'solutions/qsr', name: m.solutions_qsr_short({}, { locale }), tagline: m.solnav_qsr({}, { locale }) },
+    ],
+  },
+  {
+    icon: 'arrows-right-left',
+    scene: 'workflows',
+    name: m.solnav_workflows({}, { locale }),
+    tagline: m.solnav_workflows_tagline({}, { locale }),
+    links: [
+      { href: 'solutions/production-updates', name: m.solutions_production_updates({}, { locale }), tagline: m.solnav_production_updates({}, { locale }) },
+      { href: 'solutions/direct-updates', name: m.solutions_direct_updates({}, { locale }), tagline: m.solnav_direct_updates({}, { locale }) },
+      { href: 'solutions/pr-preview', name: m.solutions_pr_preview({}, { locale }), tagline: m.solnav_pr_preview({}, { locale }) },
+      { href: 'solutions/beta-testing', name: m.solutions_beta_testing({}, { locale }), tagline: m.solnav_beta_testing({}, { locale }) },
+      { href: 'solutions/version-targeting', name: m.solutions_version_targeting({}, { locale }), tagline: m.solnav_version_targeting({}, { locale }) },
+      { href: 'solutions/white-label', name: m.solutions_white_label({}, { locale }), tagline: m.solnav_white_label({}, { locale }) },
+      { href: 'solutions/set-and-forget', name: m.solutions_set_and_forget_short({}, { locale }), tagline: m.solnav_set_and_forget({}, { locale }) },
+    ],
+  },
+  {
+    icon: 'arrow-path',
+    scene: 'migrations',
+    name: m.solnav_migrations({}, { locale }),
+    tagline: m.solnav_migrations_tagline({}, { locale }),
+    links: [
+      { href: 'solutions/build-without-mac', name: m.solutions_build_without_mac_short({}, { locale }), tagline: m.solnav_build_without_mac({}, { locale }) },
+      { href: 'solutions/webapp-to-mobile', name: m.solutions_webapp_to_mobile_short({}, { locale }), tagline: m.solnav_webapp_to_mobile({}, { locale }) },
+      {
+        href: 'solutions/lovable-vibecoding-to-mobile',
+        name: m.solutions_lovable_to_mobile_short({}, { locale }),
+        tagline: m.solnav_lovable_to_mobile({}, { locale }),
+      },
+      {
+        href: 'solutions/cordova-to-capacitor',
+        name: m.solutions_cordova_to_capacitor_short({}, { locale }),
+        tagline: m.solnav_cordova_to_capacitor({}, { locale }),
+      },
+      {
+        href: 'solutions/cordova-to-capacitor-ai',
+        name: m.solutions_cordova_to_capacitor_ai_short({}, { locale }),
+        tagline: m.solnav_cordova_to_capacitor_ai({}, { locale }),
+      },
+      {
+        href: 'solutions/ionic-enterprise-plugins',
+        name: m.solutions_ionic_plugins_short({}, { locale }),
+        tagline: m.solnav_ionic_plugins({}, { locale }),
+      },
+    ],
+  },
+]
+
+const teamNodes: [string, number, string][] = [
+  ['Enterprise', 6, '#44bcff'],
+  ['Startup', 3, '#a78bfa'],
+  ['Solo', 1, '#4ade80'],
+  ['Agency', 4, '#fbbf24'],
+]
+const industryPhones = [
+  ['fintech', '#22c55e'],
+  ['shop', '#f97316'],
+  ['health', '#ef4444'],
+  ['food', '#eab308'],
+]
+const lanes = [
+  ['production', '25%'],
+  ['beta', '100%'],
+  ['pr-142', 'preview'],
+]
+const sources = ['Cordova', 'Web app', 'Lovable', 'Ionic plugins']
+---
+
+<div
+  class="smega grid w-[50rem] grid-cols-[15rem_minmax(0,1fr)] overflow-hidden rounded-2xl border border-slate-600/60 bg-slate-900/95 shadow-2xl shadow-black/50 backdrop-blur-xl"
+  data-smega-menu
+>
+  <ul class="border-r border-white/10 p-1.5" role="tablist" aria-orientation="vertical" aria-label={m.solutions({}, { locale })}>
+    {
+      categories.map((category, index) => (
+        <li role="presentation">
+          <button
+            type="button"
+            role="tab"
+            data-smega-tab={index}
+            aria-selected={index === 0 ? 'true' : 'false'}
+            aria-controls={`smega-panel-${category.scene}`}
+            id={`smega-tab-${category.scene}`}
+            class="smega-tab flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-left transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#44BCFF]"
+          >
+            <span class="smega-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-white/5 text-slate-300 ring-1 ring-white/10 transition-colors">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                {productIconPaths[category.icon].map((d) => (
+                  <path d={d} />
+                ))}
+              </svg>
+            </span>
+            <span class="min-w-0">
+              <span class="block text-[13px] leading-5 font-semibold text-white">{category.name}</span>
+              <span class="block text-xs leading-4 text-slate-400">{category.tagline}</span>
+            </span>
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="relative min-h-[24rem] bg-[#0b1120]">
+    <div class="smega-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    {
+      categories.map((category, index) => (
+        <div
+          class:list={['smega-panel relative', { 'is-active': index === 0 }]}
+          role="tabpanel"
+          id={`smega-panel-${category.scene}`}
+          aria-labelledby={`smega-tab-${category.scene}`}
+          hidden={index !== 0}
+          data-smega-panel={index}
+        >
+          <div class="sm-band relative flex h-36 items-center justify-center overflow-hidden border-b border-white/5" aria-hidden="true">
+            {category.scene === 'teams' && (
+              <div class="flex items-end gap-3">
+                {teamNodes.map(([label, count, color], i) => (
+                  <span class="sm-team" style={`--i:${i};--c:${color}`}>
+                    <span class="sm-avatars">
+                      {Array.from({ length: count }).map((_, j) => (
+                        <i style={`--j:${j}`} />
+                      ))}
+                    </span>
+                    <b>{label}</b>
+                    <em class="sm-mini-ok">✓</em>
+                  </span>
+                ))}
+              </div>
+            )}
+            {category.scene === 'industries' && (
+              <div class="flex items-end gap-4">
+                {industryPhones.map(([kind, color], i) => (
+                  <span class="sm-mini" style={`--i:${i};--c:${color}`}>
+                    <i class="sm-mini-hero" />
+                    <i class="sm-mini-line" />
+                    <i class="sm-mini-line short" />
+                    <em class="sm-mini-tag">{kind}</em>
+                    <em class="sm-mini-ok">✓</em>
+                  </span>
+                ))}
+              </div>
+            )}
+            {category.scene === 'workflows' && (
+              <div class="w-full max-w-[24rem] space-y-2 px-6">
+                {lanes.map(([name, value], i) => (
+                  <div class="sm-lane" style={`--i:${i}`}>
+                    <span class="sm-lane-name">{name}</span>
+                    <span class="sm-lane-track">
+                      <i class="sm-lane-pill">2.6.0</i>
+                    </span>
+                    <span class="sm-lane-val">{value}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {category.scene === 'migrations' && (
+              <div class="flex items-center gap-4">
+                <span class="sm-sources">
+                  {sources.map((source, i) => (
+                    <b style={`--i:${i}`}>{source}</b>
+                  ))}
+                </span>
+                <span class="sm-arrow">→</span>
+                <span class="sm-target">
+                  <b>Capacitor</b>
+                  <small>+ Capgo</small>
+                </span>
+              </div>
+            )}
+          </div>
+
+          <ul class="grid grid-cols-2 gap-1 p-2">
+            {category.links.map((link) => (
+              <li>
+                <a
+                  href={getRelativeLocaleUrl(locale, link.href)}
+                  class="smega-link block rounded-lg px-3 py-2 transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#44BCFF]"
+                >
+                  <span class="block text-[13px] leading-5 font-semibold text-white">{link.name}</span>
+                  <span class="block truncate text-xs leading-4 text-slate-400">{link.tagline}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .smega-tab[aria-selected='true'] {
+    background: rgb(255 255 255 / 0.07);
+  }
+  .smega-tab[aria-selected='true'] .smega-icon {
+    background: rgb(68 188 255 / 0.12);
+    color: #44bcff;
+    box-shadow: inset 0 0 0 1px rgb(68 188 255 / 0.3);
+  }
+  @media (hover: hover) {
+    .smega-tab:hover,
+    .smega-link:hover {
+      background: rgb(255 255 255 / 0.05);
+    }
+  }
+  .smega-backdrop {
+    background:
+      radial-gradient(70% 50% at 60% 0%, rgb(68 188 255 / 0.14), transparent 70%),
+      radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.06) 1px, transparent 0) 0 0 / 18px 18px;
+  }
+
+  /* Loops only run for the visible panel while the menu is open. */
+  .smega-panel :global(*) {
+    animation-play-state: paused;
+  }
+  :global(.group:is(:hover, :focus-within)) .smega-panel.is-active :global(*) {
+    animation-play-state: running;
+  }
+
+  /* Teams: every kind of team gets the same release, one after another */
+  .sm-team {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    width: 88px;
+    padding: 12px 8px 10px;
+    border-radius: 12px;
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 35%, transparent);
+    animation: sm-lift 4s ease infinite both;
+    animation-delay: calc(var(--i) * 0.5s);
+  }
+  .sm-avatars {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+    width: 64px;
+    min-height: 38px;
+    align-content: center;
+  }
+  .sm-avatars i {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--c) calc(55% + var(--j) * 7%), #0b1120);
+    box-shadow: 0 0 0 2px #0b1120;
+  }
+  .sm-team b {
+    font-size: 11px;
+    font-weight: 600;
+    color: #e2e8f0;
+  }
+
+  /* Industries: four mini apps update one after another */
+  .sm-mini {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 5px;
+    width: 58px;
+    height: 88px;
+    padding: 12px 7px 7px;
+    border-radius: 12px;
+    background: #f8fafc;
+    box-shadow:
+      0 0 0 3px #25282e,
+      0 10px 22px rgb(0 0 0 / 0.4);
+    animation: sm-lift 4s ease infinite both;
+    animation-delay: calc(var(--i) * 0.5s);
+  }
+  .sm-mini-hero {
+    height: 26px;
+    border-radius: 6px;
+    background: var(--c);
+  }
+  .sm-mini-line {
+    height: 6px;
+    border-radius: 3px;
+    background: #e2e8f0;
+  }
+  .sm-mini-line.short {
+    width: 60%;
+  }
+  .sm-mini-tag {
+    margin-top: auto;
+    font:
+      600 8.5px/1 ui-monospace,
+      monospace;
+    color: #64748b;
+    font-style: normal;
+  }
+  .sm-mini-ok {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #4ade80;
+    color: #052e16;
+    font-size: 10px;
+    font-weight: 800;
+    font-style: normal;
+    animation: sm-ok 4s ease infinite both;
+    animation-delay: calc(var(--i) * 0.5s);
+  }
+  @keyframes sm-lift {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    12%,
+    30% {
+      translate: 0 -6px;
+    }
+    40% {
+      translate: 0 0;
+    }
+  }
+  @keyframes sm-ok {
+    0%,
+    10% {
+      opacity: 0;
+      scale: 0.4;
+    }
+    18%,
+    88% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Workflows: the same bundle moves through different channels */
+  .sm-lane {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr 3.5rem;
+    align-items: center;
+    gap: 8px;
+    font:
+      11px/1 ui-monospace,
+      monospace;
+  }
+  .sm-lane-name {
+    color: #cbd5e1;
+  }
+  .sm-lane-val {
+    color: #94a3b8;
+    text-align: right;
+  }
+  .sm-lane-track {
+    position: relative;
+    height: 18px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+  .sm-lane-pill {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #a78bfa;
+    color: #1e1030;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    animation: sm-lane 3.6s ease-in-out infinite both;
+    animation-delay: calc(var(--i) * 0.4s);
+  }
+  .sm-lane:nth-child(1) .sm-lane-pill {
+    background: #4ade80;
+    color: #052e16;
+  }
+  .sm-lane:nth-child(3) .sm-lane-pill {
+    background: #44bcff;
+    color: #04121c;
+  }
+  @keyframes sm-lane {
+    0% {
+      left: 2px;
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    60%,
+    88% {
+      left: calc(100% - 44px);
+      opacity: 1;
+    }
+    100% {
+      left: calc(100% - 44px);
+      opacity: 0;
+    }
+  }
+
+  /* Migrations: each source stack converges on Capacitor + Capgo */
+  .sm-sources {
+    position: relative;
+    display: grid;
+    width: 110px;
+    height: 30px;
+  }
+  .sm-sources b {
+    grid-area: 1 / 1;
+    place-self: center end;
+    border-radius: 8px;
+    background: rgb(255 255 255 / 0.07);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+    color: #e2e8f0;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    animation: sm-cycle 6s ease infinite both;
+    animation-delay: calc(var(--i) * 1.5s);
+  }
+  @keyframes sm-cycle {
+    0% {
+      opacity: 0;
+      translate: 0 8px;
+    }
+    5%,
+    20% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    25%,
+    100% {
+      opacity: 0;
+      translate: 16px 0;
+    }
+  }
+  .sm-arrow {
+    color: #44bcff;
+    font-size: 20px;
+    animation: sm-nudge 1.5s ease-in-out infinite;
+  }
+  @keyframes sm-nudge {
+    50% {
+      translate: 4px 0;
+    }
+  }
+  .sm-target {
+    display: grid;
+    border-radius: 12px;
+    padding: 8px 14px;
+    background: linear-gradient(135deg, rgb(68 188 255 / 0.22), rgb(37 99 235 / 0.2));
+    box-shadow: inset 0 0 0 1px rgb(68 188 255 / 0.45);
+  }
+  .sm-target b {
+    color: #fff;
+    font-size: 14px;
+  }
+  .sm-target small {
+    color: #7dd3fc;
+    font:
+      600 11px/1.4 ui-monospace,
+      monospace;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .smega-panel :global(*) {
+      animation: none !important;
+    }
+    .sm-sources b:first-child,
+    .sm-mini-ok {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-smega-menu]').forEach((menu) => {
+    const tabs = Array.from(menu.querySelectorAll<HTMLButtonElement>('[data-smega-tab]'))
+    const panels = Array.from(menu.querySelectorAll<HTMLElement>('[data-smega-panel]'))
+
+    const activate = (index: number) => {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === index))
+      })
+      panels.forEach((panel, i) => {
+        const active = i === index
+        panel.hidden = !active
+        panel.classList.toggle('is-active', active)
+      })
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('pointerenter', () => activate(index))
+      tab.addEventListener('focus', () => activate(index))
+      tab.addEventListener('click', () => activate(index))
+      tab.addEventListener('keydown', (event) => {
+        const next = event.key === 'ArrowDown' ? index + 1 : event.key === 'ArrowUp' ? index - 1 : null
+        if (next === null) return
+        event.preventDefault()
+        const target = (next + tabs.length) % tabs.length
+        tabs[target].focus()
+      })
+    })
+  })
+</script>

@@ -1,0 +1,89 @@
+---
+import { worldMapPins, worldMapSize } from '@/config/worldMap'
+
+const { width, height } = worldMapSize
+---
+
+<div class="hero-map pointer-events-none absolute inset-x-0 top-6 flex justify-center select-none sm:top-10" aria-hidden="true">
+  <div class="hero-map-canvas relative" style={`aspect-ratio: ${width} / ${height}`}>
+    <img src="/world-dots.svg" alt="" width={width * 10} height={height * 10} decoding="async" fetchpriority="low" class="absolute inset-0 h-full w-full opacity-[0.14]" />
+    {
+      worldMapPins.map((pin, index) => (
+        <span class="map-pin" style={`left: ${((pin.x / width) * 100).toFixed(2)}%; top: ${((pin.y / height) * 100).toFixed(2)}%; --i: ${index}`}>
+          <i />
+        </span>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .hero-map-canvas {
+    width: min(1180px, 150vw);
+    mask-image: radial-gradient(ellipse 60% 62% at 50% 48%, #000 45%, transparent 100%);
+  }
+  .map-pin {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  .map-pin::before,
+  .map-pin i {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 999px;
+    translate: -50% -50%;
+  }
+  .map-pin i {
+    width: 5px;
+    height: 5px;
+    background: #44bcff;
+    box-shadow: 0 0 8px rgb(68 188 255 / 0.8);
+    opacity: 0.25;
+    animation: pin-dot 7s ease-in-out infinite both;
+    animation-delay: calc(var(--i) * 0.5s);
+  }
+  .map-pin::before {
+    width: 26px;
+    height: 26px;
+    border: 1.5px solid rgb(68 188 255 / 0.7);
+    opacity: 0;
+    animation: pin-ring 7s ease-out infinite both;
+    animation-delay: calc(var(--i) * 0.5s);
+  }
+  @keyframes pin-dot {
+    0%,
+    100% {
+      opacity: 0.25;
+    }
+    6%,
+    30% {
+      opacity: 1;
+    }
+  }
+  @keyframes pin-ring {
+    0% {
+      opacity: 0;
+      scale: 0.2;
+    }
+    3% {
+      opacity: 0.9;
+    }
+    18%,
+    100% {
+      opacity: 0;
+      scale: 1.4;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .map-pin i,
+    .map-pin::before {
+      animation: none;
+    }
+    .map-pin i {
+      opacity: 0.7;
+    }
+  }
+</style>

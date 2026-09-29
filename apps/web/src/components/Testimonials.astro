@@ -1,5 +1,6 @@
 ---
 import m from '@/copy/messages'
+import RatingSummary from '@/components/RatingSummary.astro'
 ---
 
 <!-- Charcoal surface matches adjacent homepage sections; Senja iframe uses the same fill. -->
@@ -12,6 +13,7 @@ import m from '@/copy/messages'
       <p class="mt-6 mb-2 text-center text-lg whitespace-pre-line text-white/70">
         {m.From_indie_devs_to({}, { locale: Astro.locals.locale })}
       </p>
+      <RatingSummary class="mt-4" align="center" showReviewsLink={false} />
     </div>
   </div>
 
