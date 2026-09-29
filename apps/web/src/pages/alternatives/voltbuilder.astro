@@ -1,54 +1,99 @@
 ---
-import ConversionLandingLayout from '@/components/conversion/ConversionLandingLayout.astro'
-import { getRelativeLocaleUrl } from '@/services/links'
+import ComparisonPage from '@/components/comparison/ComparisonPage.astro'
+import Layout from '@/layouts/Layout.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
 const title = m.voltbuilder_alt_title({}, { locale })
 const description = m.voltbuilder_alt_meta_description({}, { locale })
+const competitor = 'VoltBuilder'
 
-const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
-  name: title,
-  description,
-  url: Astro.url.href,
-  serviceType: 'Software Development Service',
-  areaServed: ['Worldwide'],
-})
-
-const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
-  includeOrganization: true,
-})
+const ldJSON = createLdJsonGraph(
+  config,
+  createServiceLdJson(config, {
+    name: title,
+    description,
+    url: Astro.url.href,
+    serviceType: 'Software Development Service',
+    areaServed: ['Worldwide'],
+  }),
+  { includeOrganization: true },
+)
 
 const content = {
   title,
   description,
   keywords: 'Voltbuilder alternative, Capacitor live updates, Cordova builds',
   ldJSON,
-  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+  image: `${config.baseUrl}/capgo_social.png`,
 }
 
 const blogUrl = getRelativeLocaleUrl(locale, 'blog/alternative-to-voltbuilder')
 
-const relatedLinks = [
+const sources = [
+  { label: m.compare_voltbuilder_source_plans({}, { locale }), href: 'https://volt.build/plan/' },
+  { label: m.compare_voltbuilder_source_home({}, { locale }), href: 'https://volt.build/' },
+  { label: m.compare_voltbuilder_source_docs({}, { locale }), href: 'https://volt.build/docs/all/' },
+  { label: m.compare_voltbuilder_source_appflow({}, { locale }), href: 'https://volt.build/docs/migrating_from_appflow/' },
+  { label: m.compare_voltbuilder_source_news({}, { locale }), href: 'https://volt.build/blog/' },
+]
+
+const rows = {
+  pricing: { text: m.compare_voltbuilder_pricing({}, { locale }), sources: [1] },
+  ota: { text: m.compare_voltbuilder_ota({}, { locale }), sources: [3] },
+  native_builds: { text: m.compare_voltbuilder_native_builds({}, { locale }), sources: [2] },
+  frameworks: { text: m.compare_voltbuilder_frameworks({}, { locale }), sources: [2] },
+  open_source: { text: m.compare_voltbuilder_open_source({}, { locale }), sources: [2] },
+  rollback: { text: m.compare_voltbuilder_rollback({}, { locale }), sources: [3] },
+  support: { text: m.compare_voltbuilder_support({}, { locale }), sources: [4] },
+  company: { text: m.compare_voltbuilder_company({}, { locale }), sources: [5] },
+}
+
+const better = [
+  { title: m.compare_voltbuilder_better_1_title({}, { locale }), text: m.compare_voltbuilder_better_1_text({}, { locale }), sources: [2] },
+  { title: m.compare_voltbuilder_better_2_title({}, { locale }), text: m.compare_voltbuilder_better_2_text({}, { locale }), sources: [2] },
+  { title: m.compare_voltbuilder_better_3_title({}, { locale }), text: m.compare_voltbuilder_better_3_text({}, { locale }), sources: [1] },
+]
+
+const migration = {
+  title: m.compare_voltbuilder_migration_title({}, { locale }),
+  lead: m.compare_voltbuilder_migration_lead({}, { locale }),
+  steps: [
+    { title: m.compare_step_install_title({}, { locale }), html: m.compare_step_install_text({}, { locale }) },
+    { title: m.compare_step_upload_title({}, { locale }), html: m.compare_voltbuilder_step2_text({}, { locale }) },
+    { title: m.compare_step_build_title({}, { locale }), html: m.compare_step_build_text({}, { locale }) },
+  ],
+  links: [
+    { label: m.compare_quickstart_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/getting-started/quickstart/') },
+    { label: m.voltbuilder_alt_blog_cta({}, { locale }), href: blogUrl },
+  ],
+}
+
+const related = [
   { label: m.voltbuilder_alt_blog_cta({}, { locale }), href: blogUrl },
-  { label: m.alternatives({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives') },
   { label: m.live_update({}, { locale }), href: getRelativeLocaleUrl(locale, 'live-update') },
   { label: m.native_build({}, { locale }), href: getRelativeLocaleUrl(locale, 'native-build') },
+  { label: m.alternatives({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives') },
 ]
 ---
 
-<ConversionLandingLayout
-  locale={locale}
-  content={content}
-  heroTitle={m.voltbuilder_alt_hero_title({}, { locale })}
-  heroSubtitle={m.voltbuilder_alt_hero_subtitle({}, { locale })}
-  sections={[
-    {
-      title: m.voltbuilder_alt_scope_title({}, { locale }),
-      paragraphs: [m.voltbuilder_alt_scope_p1({}, { locale }), m.voltbuilder_alt_scope_p2({}, { locale })],
-      htmlParagraphs: [`<a class="text-emerald-400 underline" href="${blogUrl}">${m.voltbuilder_alt_blog_cta({}, { locale })}</a>`],
-    },
-  ]}
-  relatedLinks={relatedLinks}
-/>
+<Layout content={content}>
+  <ComparisonPage
+    competitor={competitor}
+    eyebrow={m.compare_voltbuilder_eyebrow({}, { locale })}
+    heading={m.voltbuilder_alt_hero_title({}, { locale })}
+    lead={m.compare_voltbuilder_lead({}, { locale })}
+    verdict={m.compare_voltbuilder_verdict({}, { locale })}
+    rows={rows}
+    sources={sources}
+    better={better}
+    migration={migration}
+    testimonials={productTestimonials.nativeBuild.concat(productTestimonials.liveUpdate.slice(0, 1))}
+    related={related}
+    secondaryCta={{ label: m.native_build({}, { locale }), href: getRelativeLocaleUrl(locale, 'native-build') }}
+  />
+</Layout>
