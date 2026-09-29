@@ -1,0 +1,365 @@
+---
+import m from '@/copy/messages'
+import { productIconPaths } from '@/config/productIcons'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+
+type Preview =
+  | { kind: 'screen'; src: string; width: number; height: number; url: string }
+  | { kind: 'phone'; src: string; width: number; height: number }
+  | { kind: 'skills' | 'plugins' | 'ionic' }
+
+interface Product {
+  href: string
+  icon: string
+  name: string
+  tagline: string
+  desc: string
+  preview: Preview
+  extra?: { href: string; label: string }
+  groupStart?: boolean
+}
+
+const products: Product[] = [
+  {
+    href: 'live-update',
+    icon: 'bolt',
+    name: m.platform_live_update_name({}, { locale }),
+    tagline: m.menu_live_update_tagline({}, { locale }),
+    desc: m.platform_live_update_desc({}, { locale }),
+    preview: { kind: 'screen', src: '/menu-previews/live-update.webp', width: 1100, height: 619, url: 'console.capgo.app' },
+    extra: { href: 'data', label: m.nav_live_update_data({}, { locale }) },
+  },
+  {
+    href: 'native-build',
+    icon: 'cube',
+    name: m.platform_native_build_name({}, { locale }),
+    tagline: m.menu_native_build_tagline({}, { locale }),
+    desc: m.platform_native_build_desc({}, { locale }),
+    preview: { kind: 'screen', src: '/menu-previews/native-build.webp', width: 1100, height: 733, url: 'capgo.app/native-build' },
+    extra: { href: 'builder-data', label: m.nav_native_build_data({}, { locale }) },
+  },
+  {
+    href: 'observe',
+    icon: 'chart-bar',
+    name: m.platform_observe_name({}, { locale }),
+    tagline: m.menu_observe_tagline({}, { locale }),
+    desc: m.platform_observe_desc({}, { locale }),
+    preview: { kind: 'screen', src: '/menu-previews/observe.webp', width: 1100, height: 682, url: 'console.capgo.app' },
+    groupStart: true,
+  },
+  {
+    href: 'notifications',
+    icon: 'bell',
+    name: m.platform_notifications_name({}, { locale }),
+    tagline: m.menu_notifications_tagline({}, { locale }),
+    desc: m.platform_notifications_desc({}, { locale }),
+    preview: { kind: 'screen', src: '/menu-previews/notifications.webp', width: 1100, height: 619, url: 'console.capgo.app' },
+  },
+  {
+    href: 'capgo-cli',
+    icon: 'command-line',
+    name: m.nav_capgo_cli({}, { locale }),
+    tagline: m.menu_cli_tagline({}, { locale }),
+    desc: m.platform_cli_desc({}, { locale }),
+    preview: { kind: 'screen', src: '/menu-previews/cli.webp', width: 760, height: 428, url: 'capgo.app' },
+    extra: { href: 'ci_cd', label: 'CI/CD' },
+    groupStart: true,
+  },
+  {
+    href: 'skills',
+    icon: 'sparkles',
+    name: m.platform_skills_name({}, { locale }),
+    tagline: m.menu_skills_tagline({}, { locale }),
+    desc: m.platform_skills_desc({}, { locale }),
+    preview: { kind: 'skills' },
+  },
+  {
+    href: 'app_mobile',
+    icon: 'device-phone-mobile',
+    name: m.platform_app_name({}, { locale }),
+    tagline: m.menu_app_tagline({}, { locale }),
+    desc: m.platform_app_desc({}, { locale }),
+    preview: { kind: 'phone', src: '/menu-previews/app-mobile.webp', width: 420, height: 747 },
+  },
+  {
+    href: 'plugins',
+    icon: 'puzzle-piece',
+    name: m.platform_plugins_name({}, { locale }),
+    tagline: m.menu_plugins_tagline({}, { locale }),
+    desc: m.platform_plugins_desc({}, { locale }),
+    preview: { kind: 'plugins' },
+    groupStart: true,
+  },
+  {
+    href: 'ionic-enterprise-plugins',
+    icon: 'shield-check',
+    name: m.solutions_ionic_plugins_short({}, { locale }),
+    tagline: m.menu_ionic_tagline({}, { locale }),
+    desc: m.platform_ionic_desc({}, { locale }),
+    preview: { kind: 'ionic' },
+  },
+]
+
+const pluginChips = [
+  { name: 'Native Biometric', pkg: '@capgo/capacitor-native-biometric', color: '#22c55e' },
+  { name: 'Camera Preview', pkg: '@capgo/camera-preview', color: '#f97316' },
+  { name: 'Notifications', pkg: '@capgo/capacitor-notifications', color: '#3b82f6' },
+  { name: 'Purchases', pkg: '@revenuecat/purchases-capacitor', color: '#ec4899' },
+  { name: 'Uploader', pkg: '@capgo/capacitor-uploader', color: '#a855f7' },
+  { name: 'Native Market', pkg: '@capgo/capacitor-native-market', color: '#eab308' },
+]
+
+const ionicRows = [
+  ['Identity Vault', '@capgo/capacitor-native-biometric'],
+  ['Secure Storage', '@capgo/capacitor-data-storage-sqlite'],
+  ['Auth Connect', '@capgo/capacitor-social-login'],
+  ['Appflow Live Updates', '@capgo/capacitor-updater'],
+]
+---
+
+<div
+  class="mega grid grid-cols-[21rem_minmax(0,1fr)] overflow-hidden rounded-2xl border border-slate-600/60 bg-slate-900/95 shadow-2xl shadow-black/50 backdrop-blur-xl"
+  data-mega-menu
+>
+  <ul class="border-r border-white/10 p-2">
+    {
+      products.map((product, index) => (
+        <li class:list={[{ 'mt-1 border-t border-white/10 pt-1': product.groupStart }]}>
+          <a
+            href={getRelativeLocaleUrl(locale, product.href)}
+            data-mega-item={index}
+            aria-current={index === 0 ? 'true' : undefined}
+            class="mega-item flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#44BCFF]"
+          >
+            <span class="mega-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-colors">
+              <svg
+                class="h-[18px] w-[18px]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                {productIconPaths[product.icon].map((d) => (
+                  <path d={d} />
+                ))}
+              </svg>
+            </span>
+            <span class="min-w-0">
+              <span class="block font-mono text-[12.5px] font-semibold tracking-wider text-white uppercase">{product.name}</span>
+              <span class="block truncate text-[13px] leading-5 text-slate-400">{product.tagline}</span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="relative min-h-[34rem] overflow-hidden bg-[#0b1120]">
+    <div class="mega-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    {
+      products.map((product, index) => (
+        <div class:list={['mega-preview absolute inset-0', { 'is-active': index === 0 }]} data-mega-preview={index} aria-hidden={index === 0 ? undefined : 'true'}>
+          <div class="mega-stage absolute inset-x-8 top-8 bottom-28" aria-hidden="true">
+            {product.preview.kind === 'screen' && (
+              <div class="mega-window absolute top-0 left-0 w-[112%] overflow-hidden rounded-xl bg-white shadow-2xl ring-1 shadow-black/60 ring-white/15">
+                <div class="flex items-center gap-1.5 border-b border-slate-200 bg-slate-100 px-3 py-2">
+                  <i class="h-2 w-2 rounded-full bg-[#ff5f57]" />
+                  <i class="h-2 w-2 rounded-full bg-[#febc2e]" />
+                  <i class="h-2 w-2 rounded-full bg-[#28c840]" />
+                  <span class="ml-3 rounded-md bg-white px-2 py-0.5 font-mono text-[10px] text-slate-500">{product.preview.url}</span>
+                </div>
+                <img data-src={product.preview.src} alt="" width={product.preview.width} height={product.preview.height} decoding="async" class="block h-auto w-full" />
+              </div>
+            )}
+            {product.preview.kind === 'phone' && (
+              <div class="flex h-full items-start justify-center">
+                <div class="mega-phone w-[13rem] rounded-[2rem] bg-slate-800 p-1.5 shadow-2xl ring-1 shadow-black/60 ring-white/15">
+                  <img
+                    data-src={product.preview.src}
+                    alt=""
+                    width={product.preview.width}
+                    height={product.preview.height}
+                    decoding="async"
+                    class="block h-auto w-full rounded-[1.6rem]"
+                  />
+                </div>
+              </div>
+            )}
+            {product.preview.kind === 'skills' && (
+              <div class="mega-window absolute top-0 left-0 w-[104%] overflow-hidden rounded-xl bg-[#0a0b0e] font-mono text-[13px] leading-6 shadow-2xl ring-1 shadow-black/60 ring-white/15">
+                <div class="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
+                  <i class="h-2 w-2 rounded-full bg-[#ff5f57]" />
+                  <i class="h-2 w-2 rounded-full bg-[#febc2e]" />
+                  <i class="h-2 w-2 rounded-full bg-[#28c840]" />
+                  <span class="ml-3 text-[10px] text-slate-500">claude</span>
+                </div>
+                <div class="space-y-1.5 p-5 text-slate-300">
+                  <p>
+                    <span class="text-emerald-400">$</span> npx skills add Cap-go/capgo-skills
+                  </p>
+                  <p class="text-emerald-400">✔ capgo-live-updates · capgo-native-builds · capacitor-plugins …</p>
+                  <p class="pt-3 text-slate-500">&gt; Add live updates to this Capacitor app and ship a beta</p>
+                  <p>
+                    <span class="text-[#44BCFF]">●</span> Installing @capgo/capacitor-updater
+                  </p>
+                  <p>
+                    <span class="text-[#44BCFF]">●</span> Adding notifyAppReady() to src/main.ts
+                  </p>
+                  <p>
+                    <span class="text-[#44BCFF]">●</span> npx @capgo/cli bundle upload --channel beta
+                  </p>
+                  <p class="text-emerald-400">✔ Bundle 1.4.0 live on channel beta</p>
+                </div>
+              </div>
+            )}
+            {product.preview.kind === 'plugins' && (
+              <div class="flex h-full flex-col justify-center">
+                <p class="mb-4 font-mono text-xs font-semibold tracking-widest text-slate-400 uppercase">capgo.app/plugins</p>
+                <div class="grid grid-cols-2 gap-3">
+                  {pluginChips.map((plugin) => (
+                    <div class="flex items-center gap-3 rounded-xl bg-white/[0.06] p-3 ring-1 ring-white/10">
+                      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-sm font-bold text-white" style={`background:${plugin.color}`}>
+                        {plugin.name.slice(0, 1)}
+                      </span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-semibold text-white">{plugin.name}</span>
+                        <span class="block truncate font-mono text-[11px] text-slate-400">{plugin.pkg}</span>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {product.preview.kind === 'ionic' && (
+              <div class="flex h-full flex-col justify-center">
+                <p class="mb-4 grid grid-cols-[1fr_auto_1.4fr] gap-3 px-4 font-mono text-xs font-semibold tracking-widest text-slate-400 uppercase">
+                  <span>Ionic</span>
+                  <span aria-hidden="true" />
+                  <span>Capgo</span>
+                </p>
+                <div class="overflow-hidden rounded-xl bg-white/[0.04] ring-1 ring-white/10">
+                  {ionicRows.map(([from, to]) => (
+                    <div class="grid grid-cols-[1fr_auto_1.4fr] items-center gap-3 border-b border-white/10 px-4 py-3.5 last:border-b-0">
+                      <span class="text-sm text-slate-400 line-through decoration-slate-600">{from}</span>
+                      <span class="text-slate-500">→</span>
+                      <span class="truncate font-mono text-xs text-emerald-300">{to}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/95 to-transparent px-8 pt-16 pb-6">
+            <p class="max-w-md text-sm leading-6 text-slate-300">{product.desc}</p>
+            <div class="flex shrink-0 items-center gap-4 text-sm font-semibold">
+              {product.extra && (
+                <a href={getRelativeLocaleUrl(locale, product.extra.href)} class="text-slate-400 transition-colors hover:text-white">
+                  {product.extra.label}
+                </a>
+              )}
+              <a
+                href={getRelativeLocaleUrl(locale, product.href)}
+               
+                class="inline-flex items-center gap-1.5 rounded-lg bg-[#44BCFF] px-3.5 py-2 text-[#04121c] transition-colors hover:bg-white"
+              >
+                {m.menu_explore({}, { locale })} {product.name} <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .mega-item[aria-current='true'] {
+    background: rgb(255 255 255 / 0.07);
+  }
+  .mega-item[aria-current='true'] .mega-icon {
+    background: rgb(68 188 255 / 0.12);
+    color: #44bcff;
+    box-shadow: inset 0 0 0 1px rgb(68 188 255 / 0.3);
+  }
+  @media (hover: hover) {
+    .mega-item:hover {
+      background: rgb(255 255 255 / 0.05);
+    }
+  }
+  .mega-backdrop {
+    background:
+      radial-gradient(70% 60% at 80% 10%, rgb(68 188 255 / 0.18), transparent 70%),
+      radial-gradient(50% 50% at 0% 100%, rgb(37 99 235 / 0.16), transparent 70%),
+      radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.07) 1px, transparent 0) 0 0 / 22px 22px;
+  }
+  .mega-preview {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.2s ease,
+      visibility 0s linear 0.2s;
+  }
+  .mega-preview.is-active {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity 0.25s ease,
+      visibility 0s;
+  }
+  .mega-stage {
+    transform: translateY(10px);
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .mega-preview.is-active .mega-stage {
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mega-preview,
+    .mega-stage {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-mega-menu]').forEach((menu) => {
+    const items = Array.from(menu.querySelectorAll<HTMLAnchorElement>('[data-mega-item]'))
+    const previews = Array.from(menu.querySelectorAll<HTMLElement>('[data-mega-preview]'))
+    let loaded = false
+
+    // Screenshots only download the first time the menu opens, not on every page load.
+    const loadImages = () => {
+      if (loaded) return
+      loaded = true
+      menu.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((img) => {
+        img.src = img.dataset.src ?? ''
+      })
+    }
+
+    const activate = (index: number) => {
+      items.forEach((item, i) => {
+        if (i === index) item.setAttribute('aria-current', 'true')
+        else item.removeAttribute('aria-current')
+      })
+      previews.forEach((preview, i) => {
+        preview.classList.toggle('is-active', i === index)
+        if (i === index) preview.removeAttribute('aria-hidden')
+        else preview.setAttribute('aria-hidden', 'true')
+      })
+    }
+
+    const trigger = menu.closest('[data-mega-root]') ?? menu
+    trigger.addEventListener('pointerenter', loadImages)
+    trigger.addEventListener('focusin', loadImages)
+    items.forEach((item, index) => {
+      item.addEventListener('pointerenter', () => activate(index))
+      item.addEventListener('focus', () => activate(index))
+    })
+  })
+</script>
