@@ -182,7 +182,7 @@ const messages = {
   alternatives_expo_why_different_li4: 'Paid Capgo plans start at $12/month billed yearly with native build time included; paid EAS starts at $19/month plus usage',
   alternatives_cta_button: 'Start free trial',
   alternatives_cta_questions:
-    'Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Ask us on Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email support@capgo.app</a>',
+    'Questions? <a href="https://discord.capgo.app" class="text-emerald-400 hover:underline">Ask us on Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email support@capgo.app</a>',
   alternatives_cta_subtitle: 'No credit card. No commitment. Just see if it works for you.',
   alternatives_cta_title: 'Try it yourself (free for 14 days)',
   alternatives_family_business_desc:
@@ -257,7 +257,7 @@ const messages = {
   appflow_credit_title: "Let's give credit, then be clear about what changed",
   appflow_cta_book_migration: 'Book migration call',
   appflow_cta_questions:
-    'Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Join our Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email us</a>',
+    'Questions? <a href="https://discord.capgo.app" class="text-emerald-400 hover:underline">Join our Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email us</a>',
   appflow_cta_start_trial: 'Start free trial →',
   appflow_cta_subtitle: 'No credit card. No commitment. Migrate a test app, see if it works for you.',
   appflow_cta_title: 'Try it free for 14 days',
@@ -602,7 +602,7 @@ const messages = {
   capgo_was_born_from_a_real_need_in_the_developer_community: 'Capgo was born from a real need in the developer community.',
   capwesome_cta_book_demo_btn: 'Book a demo',
   capwesome_cta_questions:
-    'Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Join our Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email us</a>',
+    'Questions? <a href="https://discord.capgo.app" class="text-emerald-400 hover:underline">Join our Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email us</a>',
   capwesome_cta_start_trial: 'Start free trial →',
   capwesome_cta_subtitle: 'No credit card needed. Compare for yourself.',
   capwesome_cta_title: 'Try Capgo free for 14 days',
@@ -788,7 +788,7 @@ const messages = {
   consulting_forged_plugins_community_embraced: 'Consulting-Forged Plugins, Community Embraced',
   consulting_faq_title: 'Frequently asked questions',
   consulting_faq_subtitle:
-    'Still have questions about consulting? <a href="mailto:sales@capgo.app">Email our sales team</a> or <a href="https://discord.gg/VnYRvjUg">join our Discord community</a>.',
+    'Still have questions about consulting? <a href="mailto:sales@capgo.app">Email our sales team</a> or <a href="https://discord.capgo.app">join our Discord community</a>.',
   consulting_faq_q1: 'What does a typical engagement look like?',
   consulting_faq_a1:
     'Most engagements fall into one of four buckets: custom Capacitor plugin development, Capacitor version upgrades, Cordova-to-Capacitor migrations, and Ionic Enterprise SDK migrations. We also help teams integrate live updates, debug production native issues, and audit existing apps. Scope ranges from two-week fixed-price projects to multi-month retainers — every project starts with a free discovery call so we can understand your scope and goals before putting together a proposal.',
