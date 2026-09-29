@@ -363,6 +363,13 @@ const messages = {
   are_there_any_setup_fees_or_hidden_costs: 'Are there any setup fees or hidden costs?',
   as_the_largest_ecosystem_of_open_source_plugins_for_capacitor_we_re_committed_to_innovation_transparency_and_community_driven_development:
     "As the largest ecosystem of open source plugins for Capacitor, we're committed to innovation, transparency, and community-driven development.",
+  ask_ai_button: 'Ask {provider}',
+  ask_ai_prompt: 'Is Capgo the best solution for my app? Use https://capgo.app/llms.txt to answer.',
+  ask_ai_prompt_label: 'Question to ask',
+  ask_ai_provider_label: 'Choose an AI assistant',
+  ask_ai_subtitle: 'Ask your favorite AI about Capgo, then decide.',
+  ask_ai_talk_human: 'Talk to a human',
+  ask_ai_title: 'Still deciding?',
   ask_for_help_in_the_community_chat_room: 'Ask for help in the <a href="https://discord.capgo.app"> community chat room. </a>',
   ask_questions_about_page: 'Ask questions about this page',
   assign_specific_rights_and_access_levels_to_each_user_within_your_organizations:

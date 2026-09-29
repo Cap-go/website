@@ -11,6 +11,7 @@ import PlatformOverview from '@/components/PlatformOverview.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson, createWebSiteLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
+import AskAiSection from '@/components/AskAiSection.astro'
 
 const config = Astro.locals.runtimeConfig
 
@@ -91,6 +92,7 @@ const content = {
     <SharedNumbers stats={stats} />
     <Testimonials />
     <AppflowShutdown />
+    <AskAiSection />
   </div>
 
   <style is:global>
