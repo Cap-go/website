@@ -194,7 +194,7 @@ const rows: CompareSection[] = [
         value: () => true,
       },
       {
-        label: 'Updates under 100ms',
+        label: '~50ms update checks',
         value: () => true,
       },
       {
@@ -246,7 +246,7 @@ const rows: CompareSection[] = [
       },
       {
         label: m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale }),
-        value: (plan: Database['public']['Tables']['plans']['Row']) => (included(plan.name, ['Maker', 'Team', 'Enterprise']) ? true : false),
+        value: () => true,
       },
     ],
   },
@@ -358,90 +358,88 @@ const rows: CompareSection[] = [
         <caption class="sr-only">Compare Capgo pricing plans</caption>
         <thead>
           <tr class="border-b border-gray-200 bg-gray-50">
-            <th scope="col" class="sticky left-0 z-20 w-40 bg-gray-50 px-4 py-5 text-xs font-semibold tracking-wide text-gray-500 uppercase sm:w-56 sm:px-5"> Feature </th>
-            {
-              pricing.map((plan) => (
-                <th scope="col" class:list={['min-w-40 px-4 py-5 align-top sm:min-w-44 sm:px-5', plan.name === 'Maker' ? 'bg-blue-50' : 'bg-gray-50']}>
-                  <div class="flex items-center gap-2">
-                    <span class="text-base font-bold text-gray-950">{plan.name}</span>
-                    {plan.name === 'Maker' && (
-                      <span class="rounded-full bg-blue-600 px-2 py-0.5 text-xs font-semibold text-white">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
-                    )}
-                  </div>
-                  <p class="mt-2 text-xs leading-5 font-medium text-gray-600">{priceDisplay(plan)}</p>
-                </th>
-              ))
-            }
+            <th scope="col" class="sticky left-0 z-20 w-40 bg-gray-50 px-4 py-5 text-xs font-semibold tracking-wide text-gray-500 uppercase sm:w-56 sm:px-5">
+              Feature
+            </th>
+            {pricing.map((plan) => (
+              <th scope="col" class:list={['min-w-40 px-4 py-5 align-top sm:min-w-44 sm:px-5', plan.name === 'Maker' ? 'bg-blue-50' : 'bg-gray-50']}>
+                <div class="flex items-center gap-2">
+                  <span class="text-base font-bold text-gray-950">{plan.name}</span>
+                  {plan.name === 'Maker' && (
+                    <span class="rounded-full bg-blue-600 px-2 py-0.5 text-xs font-semibold text-white">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
+                  )}
+                </div>
+                <p class="mt-2 text-xs leading-5 font-medium text-gray-600">{priceDisplay(plan)}</p>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
-          {
-            rows.map((section) => (
-              <>
-                <tr>
-                  <th colspan={pricing.length + 1} scope="colgroup" class="bg-gray-100 px-5 py-3 text-xs font-bold tracking-wide text-gray-700 uppercase">
-                    {section.group}
-                  </th>
-                </tr>
-                {section.items.map((item) => (
-                  <tr class:list={['group', item.emphasis && 'ring-1 ring-blue-200/80 ring-inset']}>
-                    <th
-                      scope="row"
-                      class:list={[
-                        'sticky left-0 z-10 px-4 py-4 font-semibold text-gray-900 sm:px-5',
-                        item.emphasis ? 'border-l-4 border-blue-600 bg-blue-50 group-hover:bg-blue-50' : 'bg-white group-hover:bg-gray-50',
-                      ]}
-                    >
-                      <span class="inline-flex items-center gap-2">
-                        <span>{item.label}</span>
-                        {item.faqHref && (
-                          <a
-                            href={item.faqHref}
-                            class="inline-flex size-5 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-[11px] leading-none font-bold text-gray-500 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-                            aria-label={`Open FAQ for ${item.label}`}
-                          >
-                            ?
-                          </a>
-                        )}
-                      </span>
-                    </th>
-                    {pricing.map((plan) => {
-                      const value = item.value(plan)
-                      return (
-                        <td
-                          class:list={[
-                            'px-4 py-4 text-gray-700 sm:px-5',
-                            item.emphasis ? 'bg-blue-50/70 group-hover:bg-blue-50' : 'group-hover:bg-gray-50',
-                            !item.emphasis && plan.name === 'Maker' ? 'bg-blue-50/50' : !item.emphasis ? 'bg-white' : '',
-                          ]}
+          {rows.map((section) => (
+            <>
+              <tr>
+                <th colspan={pricing.length + 1} scope="colgroup" class="bg-gray-100 px-5 py-3 text-xs font-bold tracking-wide text-gray-700 uppercase">
+                  {section.group}
+                </th>
+              </tr>
+              {section.items.map((item) => (
+                <tr class:list={['group', item.emphasis && 'ring-1 ring-blue-200/80 ring-inset']}>
+                  <th
+                    scope="row"
+                    class:list={[
+                      'sticky left-0 z-10 px-4 py-4 font-semibold text-gray-900 sm:px-5',
+                      item.emphasis ? 'border-l-4 border-blue-600 bg-blue-50 group-hover:bg-blue-50' : 'bg-white group-hover:bg-gray-50',
+                    ]}
+                  >
+                    <span class="inline-flex items-center gap-2">
+                      <span>{item.label}</span>
+                      {item.faqHref && (
+                        <a
+                          href={item.faqHref}
+                          class="inline-flex size-5 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-[11px] leading-none font-bold text-gray-500 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+                          aria-label={`Open FAQ for ${item.label}`}
                         >
-                          {typeof value === 'boolean' ? (
-                            value ? (
-                              <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-blue-700" aria-label="Included">
-                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                              </span>
-                            ) : (
-                              <span class="text-gray-400">—</span>
-                            )
-                          ) : item.href ? (
-                            <a href={item.href} class="font-semibold text-blue-700 underline-offset-4 hover:underline focus:underline focus:outline-none">
-                              {value}
-                            </a>
-                          ) : item.emphasis ? (
-                            <strong class="font-semibold text-blue-950">{value}</strong>
+                          ?
+                        </a>
+                      )}
+                    </span>
+                  </th>
+                  {pricing.map((plan) => {
+                    const value = item.value(plan)
+                    return (
+                      <td
+                        class:list={[
+                          'px-4 py-4 text-gray-700 sm:px-5',
+                          item.emphasis ? 'bg-blue-50/70 group-hover:bg-blue-50' : 'group-hover:bg-gray-50',
+                          !item.emphasis && plan.name === 'Maker' ? 'bg-blue-50/50' : !item.emphasis ? 'bg-white' : '',
+                        ]}
+                      >
+                        {typeof value === 'boolean' ? (
+                          value ? (
+                            <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-blue-700" aria-label="Included">
+                              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                              </svg>
+                            </span>
                           ) : (
-                            value
-                          )}
-                        </td>
-                      )
-                    })}
-                  </tr>
-                ))}
-              </>
-            ))
-          }
+                            <span class="text-gray-400">—</span>
+                          )
+                        ) : item.href ? (
+                          <a href={item.href} class="font-semibold text-blue-700 underline-offset-4 hover:underline focus:underline focus:outline-none">
+                            {value}
+                          </a>
+                        ) : item.emphasis ? (
+                          <strong class="font-semibold text-blue-950">{value}</strong>
+                        ) : (
+                          value
+                        )}
+                      </td>
+                    )
+                  })}
+                </tr>
+              ))}
+            </>
+          ))}
         </tbody>
       </table>
     </div>

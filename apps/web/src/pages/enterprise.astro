@@ -436,12 +436,6 @@ const stats = [
   { value: '1B+', label: m.solutions_enterprise_stat_updates({}, { locale }) },
 ]
 
-const enterpriseTestimonial = {
-  quote: m.solutions_enterprise_testimonial({}, { locale }),
-  author: m.solutions_enterprise_testimonial_author({}, { locale }),
-  role: m.solutions_enterprise_testimonial_role({}, { locale }),
-}
-
 const enterpriseProofNotes = [m.enterprise_proof_note_1({}, { locale }), m.enterprise_proof_note_2({}, { locale }), m.enterprise_proof_note_3({}, { locale })]
 
 const enterprisePainPoints = [
@@ -569,15 +563,6 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </div>
 
         <div class="enterprise-proof-grid">
-          <figure class="enterprise-quote">
-            <p class="enterprise-card-label">{m.enterprise_testimonial_label({}, { locale })}</p>
-            <blockquote>"{enterpriseTestimonial.quote}"</blockquote>
-            <figcaption>
-              <strong>{enterpriseTestimonial.author}</strong>
-              <span>{enterpriseTestimonial.role}</span>
-            </figcaption>
-          </figure>
-
           <ul class="enterprise-check-list enterprise-note-list">
             {
               enterpriseProofNotes.map((note) => (
@@ -1012,7 +997,6 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
 
   /* ---------- Shared card + checklist ---------- */
   .enterprise-product .enterprise-card,
-  .enterprise-product .enterprise-quote,
   .enterprise-product .enterprise-pillar,
   .enterprise-product .enterprise-logo-card,
   .enterprise-product .enterprise-stat,
@@ -1182,35 +1166,18 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
   }
   @media (min-width: 960px) {
     .enterprise-product .enterprise-proof-grid {
-      grid-template-columns: 1.1fr 0.9fr;
-      align-items: center;
-      gap: 48px;
+      grid-template-columns: 1fr;
     }
-  }
-  .enterprise-product .enterprise-quote {
-    padding: 28px;
-  }
-  .enterprise-product .enterprise-quote blockquote {
-    margin: 0;
-    color: rgba(255, 255, 255, 0.88);
-    font-size: clamp(1.25rem, 1.9vw, 1.6rem);
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: 0;
-  }
-  .enterprise-product .enterprise-quote figcaption {
-    display: grid;
-    gap: 2px;
-    margin-top: 20px;
-    color: var(--ent-muted);
-    font-size: 13px;
-  }
-  .enterprise-product .enterprise-quote strong {
-    color: #fff;
   }
   .enterprise-product .enterprise-note-list {
     margin: 0;
     gap: 18px;
+  }
+  @media (min-width: 960px) {
+    .enterprise-product .enterprise-note-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
+    }
   }
 
   /* ---------- Controlled recovery ---------- */
@@ -1801,8 +1768,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
       min-height: 0;
       padding: 22px 14px;
     }
-    .enterprise-product .enterprise-card,
-    .enterprise-product .enterprise-quote {
+    .enterprise-product .enterprise-card {
       padding: 20px;
     }
     .enterprise-product .enterprise-avatar-row span {

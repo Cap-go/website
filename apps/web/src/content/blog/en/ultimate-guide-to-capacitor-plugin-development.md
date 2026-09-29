@@ -355,9 +355,7 @@ For added convenience, Capgo integrates with semantic-release, automating versio
 
 Capgo stands out in the live update space, especially as other solutions phase out. [Microsoft CodePush](http://microsoft.github.io/code-push/docs/getting-started.html) was discontinued in 2024, and [Ionic](https://ionicframework.com/)'s Appflow is set to shut down in 2026, leaving Capgo as a strong alternative.
 
-Pricing is another area where Capgo shines. Developer Jermaine shared their experience:
-
-> "Jumped over to @Capgo after @AppFlow hit us with a $5000 bill for the year to continue. Loving CapoGo so far" [\[23\]](https://capgo.app).
+Pricing is another area where Capgo shines.
 
 Here’s a quick comparison:
 
