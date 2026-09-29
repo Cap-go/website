@@ -102,7 +102,7 @@ const messages = {
   about_faq_title: 'Frequently asked questions',
   about_founder_letter_eyebrow: 'Why I built Capgo',
   about_hero_figure_caption: 'Remote-first, with team offsites in Madeira where planning, support reviews, and product work happen in the same week.',
-  about_hero_h1: 'Capgo is an open-source live-update and native-delivery platform that ships JS/OTA updates for Capacitor and Ionic teams without waiting on app stores.',
+  about_hero_h1: 'Capgo is the open-source live update platform for Capacitor apps.',
   about_hero_lead:
     'Capgo started in 2021 with one goal: make live updates fast, affordable, and understandable for teams shipping Capacitor apps in production. We stay small, hands-on, and focused on the release path between your code and your users.',
   about_how_intro:
@@ -2041,7 +2041,6 @@ const messages = {
   how_it_works_card1_title: 'Install the updater once',
   how_it_works_card2_title: 'Publish a signed web bundle',
   how_it_works_card3_title: 'Update applies on next launch',
-  how_it_works_cta: 'Ship your first update free',
   how_it_works_subtitle: 'Install the open-source Capacitor plugin, upload a secure web bundle to Capgo, and let the app pull the right update automatically.',
   how_it_works_title: 'One command.',
   how_it_works_title_line2: 'Live on next launch.',
@@ -4852,9 +4851,6 @@ const messages = {
     "Capgo not only has incredibly talented engineers, but they also share my passion for project success. Having a <strong class='italic font-bold'>true partner</strong> has been a wonderful experience, and it allows us to move much faster than we could alone.",
   testimonial_consulting_2:
     "I would have <strong class='italic font-bold'>no hesitation in recommending Capgo</strong> to others, to provide a flexible solution to an existing workforce or on a longer-term basis as part of a remote team",
-  testimonial_description: 'Capgo User since 2023',
-  testimonial_highlight: 'users are up to date within minutes.',
-  testimonial_title: 'We rolled out Capgo in production for our user base of +5000!',
   thank_you_for_shopping: 'Thank you for shopping at $1.',
   thanks_to_our_open_source_nature: 'Thanks to our open-source nature',
   that_grows_with_you: 'that grows with you',
