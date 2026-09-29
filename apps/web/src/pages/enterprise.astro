@@ -202,8 +202,6 @@ const content = {
   }),
 }
 
-const enterpriseDecisionPoints = [m.enterprise_decision_point_1({}, { locale }), m.enterprise_decision_point_2({}, { locale }), m.enterprise_decision_point_3({}, { locale })]
-
 const enterpriseMau = `${numberWithSpaces(payg?.mau ?? 1000000)}+`
 const enterpriseBandwidth = `${numberWithSpaces(payg?.bandwidth ?? 5000)}+ GiB/month`
 const enterpriseStorage = `${numberWithSpaces(payg?.storage ?? 100)}+ GiB`
@@ -918,14 +916,6 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </div>
 
         <div class="enterprise-faq-layout">
-          <aside class="enterprise-decision-box" aria-labelledby="enterprise-decision-title">
-            <p class="enterprise-card-label">{m.enterprise_decision_criteria_eyebrow({}, { locale })}</p>
-            <h3 id="enterprise-decision-title">{m.enterprise_decision_questions_title({}, { locale })}</h3>
-            <ol class="enterprise-decision-list">
-              {enterpriseDecisionPoints.map((item) => <li>{item}</li>)}
-            </ol>
-          </aside>
-
           <div class="enterprise-faq-grid">
             {
               enterpriseFaqItems.map((item, index) => (
@@ -1024,7 +1014,6 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
   .enterprise-product .enterprise-card,
   .enterprise-product .enterprise-quote,
   .enterprise-product .enterprise-pillar,
-  .enterprise-product .enterprise-decision-box,
   .enterprise-product .enterprise-logo-card,
   .enterprise-product .enterprise-stat,
   .enterprise-product .enterprise-table-wrap,
@@ -1038,8 +1027,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
     padding: 24px;
   }
   .enterprise-product .enterprise-card h3,
-  .enterprise-product .enterprise-pillar h3,
-  .enterprise-product .enterprise-decision-box h3 {
+  .enterprise-product .enterprise-pillar h3 {
     margin: 0;
     color: #fff;
     font-size: 17px;
@@ -1719,53 +1707,8 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
 
   /* ---------- FAQ ---------- */
   .enterprise-product .enterprise-faq-layout {
-    display: grid;
-    gap: 16px;
-    margin-top: var(--ent-gap);
-  }
-  @media (min-width: 1024px) {
-    .enterprise-product .enterprise-faq-layout {
-      grid-template-columns: 340px minmax(0, 1fr);
-      align-items: start;
-      gap: 24px;
-    }
-    .enterprise-product .enterprise-decision-box {
-      position: sticky;
-      top: 104px;
-    }
-  }
-  .enterprise-product .enterprise-decision-box {
-    padding: 24px;
-  }
-  .enterprise-product .enterprise-decision-list {
-    display: grid;
-    gap: 14px;
-    margin: 18px 0 0;
-    padding: 0;
-    list-style: none;
-    counter-reset: decision;
-  }
-  .enterprise-product .enterprise-decision-list li {
-    display: flex;
-    gap: 12px;
-    color: var(--ent-text);
-    font-size: 14px;
-    line-height: 1.55;
-    counter-increment: decision;
-  }
-  .enterprise-product .enterprise-decision-list li::before {
-    content: counter(decision);
-    display: inline-flex;
-    flex: 0 0 24px;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 8px;
-    background: rgba(96, 165, 250, 0.12);
-    color: var(--relief-blue);
-    font-size: 12px;
-    font-weight: 800;
+    max-width: 820px;
+    margin: var(--ent-gap) auto 0;
   }
   .enterprise-product .enterprise-faq-grid {
     display: grid;
