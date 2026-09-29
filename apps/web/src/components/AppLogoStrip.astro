@@ -1,12 +1,24 @@
 ---
 import m from '@/copy/messages'
 import { customerApps } from '@/config/customerApps'
+import { getTotalStars } from '@/services/github'
 
 const locale = Astro.locals.locale
+const stats = m.app_strip_stats(
+  {
+    teams: m.companies_logo_stat_companies_value({}, { locale }),
+    devices: m.companies_logo_stat_devices_value({}, { locale }),
+    stars: `${Number(getTotalStars()).toLocaleString('en-US')}+`,
+  },
+  { locale },
+)
 ---
 
 <div class="app-strip mx-auto mt-12 w-full max-w-6xl px-4 sm:mt-14" role="group" aria-labelledby="app-strip-title">
-  <p id="app-strip-title" class="text-center text-xs font-semibold tracking-widest text-slate-400 uppercase">{m.app_strip_title({}, { locale })}</p>
+  <p id="app-strip-title" class="text-center">
+    <span class="block text-base font-semibold text-white sm:text-lg">{stats}</span>
+    <span class="mt-1 block text-xs font-semibold tracking-widest text-slate-400 uppercase">{m.app_strip_title({}, { locale })}</span>
+  </p>
   <div class="app-strip-viewport mt-6 overflow-hidden">
     <div class="app-strip-track flex w-max gap-3">
       {

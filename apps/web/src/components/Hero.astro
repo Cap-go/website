@@ -5,9 +5,9 @@ import TeamAvatars from '@/components/TeamAvatars.astro'
 import RatingSummary from '@/components/RatingSummary.astro'
 import AppLogoStrip from '@/components/AppLogoStrip.astro'
 import HeroWorldMap from '@/components/HeroWorldMap.astro'
+import StackChips from '@/components/StackChips.astro'
 import { customerApps } from '@/config/customerApps'
 
-const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
 const nativeBuildUrl = getRelativeLocaleUrl(Astro.locals.locale, 'native-build')
 const teamUrl = 'https://book.capgo.app/demo/'
 const stackApps = customerApps.slice(0, 5)
@@ -52,7 +52,7 @@ const stackApps = customerApps.slice(0, 5)
                 href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
                 class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none active:scale-[0.98]"
               >
-                {m.cta_start_free({}, { locale: Astro.locals.locale })}
+                {m.hero_cta_try_free({}, { locale: Astro.locals.locale })}
               </a>
             </div>
           </div>
@@ -70,7 +70,6 @@ const stackApps = customerApps.slice(0, 5)
               </a>
             </p>
           </div>
-          <p class="font-inter text-sm leading-6 text-gray-400">{ctaSubtext}</p>
           <div class="flex flex-wrap items-center justify-center gap-3">
             <span class="flex -space-x-1.5" aria-hidden="true">
               {
@@ -81,6 +80,7 @@ const stackApps = customerApps.slice(0, 5)
             </span>
             <RatingSummary align="center" showCustomers={false} />
           </div>
+          <StackChips />
         </div>
       </div>
       <AppLogoStrip />
