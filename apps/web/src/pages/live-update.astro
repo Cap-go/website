@@ -503,7 +503,9 @@ const featureTiles = [
           <h2 class="h2-section">{copy('live_update_eas_title')}</h2>
           <p class="lead">{copy('live_update_eas_lead')}</p>
         </div>
-        <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('live_update_eas_cta')}</a>
+        <div style="display: flex; justify-content: center; margin-top: 28px;">
+          <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('live_update_eas_cta')}</a>
+        </div>
       </div>
     </section>
 
@@ -524,15 +526,5 @@ const featureTiles = [
         </div>
       </div>
     </section>
-
-    <div class="shell seo-bridge">
-      <h2 class="h2-section" style="font-size: 1.5rem; margin-bottom: 12px;">Keep going from Capgo Live Updates</h2>
-      <p>
-        Connect this Ionic and Capacitor live update page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
-        <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, <a href={dataUrl}>Live Update delivery data</a>, <a href="/notifications/">Capgo Notifications</a>,
-        <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, <a href="/native-build/">Capgo Native Builds</a>, and <a href={expoUrl}>EAS vs Capgo</a> for the Expo Application
-        Services comparison.
-      </p>
-    </div>
   </div>
 </Layout>
