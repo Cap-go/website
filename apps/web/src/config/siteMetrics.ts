@@ -6,6 +6,6 @@ export const siteMetrics = {
   foundedYear: 2021,
   buildTime: '2–3 min',
   latency: '~50ms',
-  startingPrice: '$14/month',
+  startingPrice: '$12/month billed yearly',
   uptime: '99.9%',
 } as const

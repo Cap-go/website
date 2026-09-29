@@ -25,7 +25,7 @@ const serviceDisruptionPolicyUrl = `${getRelativeLocaleUrl(locale, 'support-poli
 
 const config = Astro.locals.runtimeConfig
 
-let yearly = false
+let yearly = true
 let plansAll: Database['public']['Tables']['plans']['Row'][] = []
 let credits: any[] = []
 

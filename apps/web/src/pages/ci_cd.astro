@@ -50,19 +50,21 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"
+              ></path>
             </svg>
             Stop Manual Native Builds
           </div>
 
           <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            <span class="text-gray-100">Still Building iOS & Android</span><br />
+            <span class="text-gray-100">Still Building iOS & Android</span>
+            <br />
             <span class="text-gray-200"> Apps Manually? </span>
           </h1>
 
           <p class="mx-auto mt-6 max-w-4xl text-xl leading-relaxed text-gray-300">
-            <span class="font-semibold text-gray-100">Hours wasted on manual builds.</span> Different environments causing bugs. Team members waiting for builds. Your productivity suffers
-            with every manual deployment.
+            <span class="font-semibold text-gray-100">Hours wasted on manual builds.</span> Different environments causing bugs. Team members waiting for builds. Your productivity
+            suffers with every manual deployment.
           </p>
 
           <div class="mx-auto mt-8 max-w-3xl">
@@ -82,8 +84,7 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
               <div
                 class="pointer-events-none absolute -inset-4 rounded-xl opacity-65 transition-opacity duration-300 group-hover:opacity-90"
                 style="background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 70%);"
-              >
-              </div>
+              ></div>
               <a
                 href={githubActionsDocsUrl}
                 class="relative inline-flex items-center justify-center rounded-xl border border-red-500 bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
@@ -130,7 +131,8 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"
+                    ></path>
                   </svg>
                 </div>
                 <h3 class="ml-4 text-2xl font-bold text-gray-900">Without CI/CD</h3>
@@ -268,17 +270,13 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
           <div class="flex flex-wrap items-center justify-center gap-8 opacity-60">
             <div class="flex items-center space-x-2">
               <svg aria-hidden="true" focusable="false" class="h-8 w-8 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                ></path>
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
               </svg>
               <span class="font-medium text-gray-700">GitHub Actions</span>
             </div>
             <div class="flex items-center space-x-2">
               <svg aria-hidden="true" focusable="false" class="h-8 w-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.423-.73-.423-.867 0L16.418 9.45H7.582L4.919 1.263c-.135-.423-.73-.423-.867 0L1.388 9.452.046 13.587c-.121.375.014.793.331 1.023L12 23.054l11.623-8.443c.318-.235.453-.653.332-1.024"
-                ></path>
+                <path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.423-.73-.423-.867 0L16.418 9.45H7.582L4.919 1.263c-.135-.423-.73-.423-.867 0L1.388 9.452.046 13.587c-.121.375.014.793.331 1.023L12 23.054l11.623-8.443c.318-.235.453-.653.332-1.024"></path>
               </svg>
               <span class="font-medium text-gray-700">GitLab CI</span>
             </div>
@@ -469,7 +467,8 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                ></path>
               </svg>
             </div>
             <h3 class="mb-4 text-xl font-bold text-gray-900">Multi-Environment Deployment</h3>
@@ -595,7 +594,8 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
         <div class="mx-auto mt-5 grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-3">
           <div class="rounded-xl border border-white/10 bg-white/[0.04] p-4 text-center">
             <p class="text-sm font-medium text-gray-400">Starts at</p>
-            <p class="mt-1 text-3xl font-bold text-white">$14/mo</p>
+            <p class="mt-1 text-3xl font-bold text-white">$12/mo</p>
+            <p class="mt-1 text-xs text-gray-500">billed yearly</p>
           </div>
           <div class="rounded-xl border border-white/10 bg-white/[0.04] p-4 text-center">
             <p class="text-sm font-medium text-gray-400">Included usage</p>
@@ -647,8 +647,7 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
           <div class="rounded-2xl border border-white/10 bg-gray-950 p-6">
             <h3 class="text-2xl font-bold text-white">Core CI Commands</h3>
             <p class="mt-3 text-sm leading-6 text-gray-300">Run setup locally, export the credentials, then let CI call Capgo Build after your project build and Capacitor sync.</p>
-            <pre
-              class="mt-6 overflow-x-auto rounded-xl bg-black p-4 text-sm text-gray-100"><code>npx @capgo/cli@latest build init
+            <pre class="mt-6 overflow-x-auto rounded-xl bg-black p-4 text-sm text-gray-100"><code>npx @capgo/cli@latest build init
 npx @capgo/cli@latest build credentials manage --appId com.example.app
 gh secret set CAPGO_TOKEN --body "your_capgo_api_key_here"
 gh secret set -f .env.capgo.com.example.app
@@ -662,10 +661,18 @@ npx @capgo/cli@latest build request com.example.app --platform android --build-m
           <div class="rounded-2xl border border-white/10 bg-gray-800 p-6">
             <h3 class="text-2xl font-bold text-white">What Goes Into CI Secrets</h3>
             <ul class="mt-6 space-y-4 text-sm leading-6 text-gray-300">
-              <li><span class="font-semibold text-gray-100">Capgo API key:</span> <code>CAPGO_TOKEN</code> with build permissions.</li>
-              <li><span class="font-semibold text-gray-100">iOS signing:</span> certificate, password, provisioning map, App Store Connect key, issuer, and team ID.</li>
-              <li><span class="font-semibold text-gray-100">Android signing:</span> keystore, alias, key passwords, and Play Console service account JSON.</li>
-              <li><span class="font-semibold text-gray-100">Optional artifact output:</span> add output upload flags for QA download links and QR codes.</li>
+              <li>
+                <span class="font-semibold text-gray-100">Capgo API key:</span> <code>CAPGO_TOKEN</code> with build permissions.
+              </li>
+              <li>
+                <span class="font-semibold text-gray-100">iOS signing:</span> certificate, password, provisioning map, App Store Connect key, issuer, and team ID.
+              </li>
+              <li>
+                <span class="font-semibold text-gray-100">Android signing:</span> keystore, alias, key passwords, and Play Console service account JSON.
+              </li>
+              <li>
+                <span class="font-semibold text-gray-100">Optional artifact output:</span> add output upload flags for QA download links and QR codes.
+              </li>
             </ul>
 
             <div class="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col">
@@ -705,9 +712,12 @@ npx @capgo/cli@latest build request com.example.app --platform android --build-m
           <a
             href={expoUrl}
             class="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-            >Compare Capgo with Expo Application Services</a
           >
-          <a href={nativeBuildUrl} class="inline-flex min-h-11 items-center px-3 text-sm font-semibold text-blue-400 hover:text-blue-300">Open Capgo Builder →</a>
+            Compare Capgo with Expo Application Services
+          </a>
+          <a href={nativeBuildUrl} class="inline-flex min-h-11 items-center px-3 text-sm font-semibold text-blue-400 hover:text-blue-300">
+            Open Capgo Builder →
+          </a>
         </div>
       </div>
     </section>
@@ -734,8 +744,7 @@ npx @capgo/cli@latest build request com.example.app --platform android --build-m
               <div
                 class="pointer-events-none absolute -inset-4 rounded-xl opacity-60 transition-opacity duration-300 group-hover:opacity-90"
                 style="background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 70%);"
-              >
-              </div>
+              ></div>
               <a
                 href={githubActionsDocsUrl}
                 class="relative inline-flex items-center justify-center rounded-xl border border-red-500 bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"

@@ -1,6 +1,6 @@
 ---
 import m from '@/copy/messages'
-import { planMonthlyPrice } from '@/lib/planCopy'
+import { planYearlyPrice } from '@/lib/planCopy'
 import type { Database } from '@/services/supabase.types'
 
 type PlanRow = Database['public']['Tables']['plans']['Row']
@@ -39,7 +39,7 @@ const rows = paidPlans
   .map((plan) => ({
     mau: plan.mau,
     capgoPlan: plan.name,
-    capgo: planMonthlyPrice(plan),
+    capgo: Math.round(planYearlyPrice(plan) / 12),
     eas: Math.round(easMonthlyCost(plan.mau)),
   }))
 
