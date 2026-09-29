@@ -3,7 +3,6 @@ import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
-import Manifesto from '@/components/Manifesto.astro'
 import { createFAQPageLdJson, createLdJsonGraph, createAboutOrganization, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { pluginCountLabel } from '@/config/plugins'
 import { planMonthlyPrice, planYearlyPrice } from '@/lib/planCopy'
@@ -387,8 +386,6 @@ const content = {
       </ul>
     </section>
 
-    <Manifesto />
-
     <section class="bg-white py-20" aria-labelledby="team-behind-capgo">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
@@ -461,9 +458,12 @@ const content = {
             loading="lazy"
           />
           <div class="p-8 sm:p-10 lg:p-12">
-            <blockquote class="text-2xl leading-9 font-semibold tracking-tight text-gray-950">
-              "{m.about_team_founder_note({}, { locale })}"
-            </blockquote>
+            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.about_founder_letter_eyebrow({}, { locale })}</p>
+            <div class="mt-5 space-y-4 text-base leading-7 text-gray-700">
+              <p>{m.manifesto_home_for_developers({}, { locale })}</p>
+              <p>{m.manifesto_full_ecosystem({}, { locale })}</p>
+              <p>{m.manifesto_behind_every_movie({}, { locale })}</p>
+            </div>
             <div class="mt-8 flex items-center gap-4">
               <img src="/martin-avatar.png" alt="Martin Donadieu" class="h-12 w-12 rounded-full object-cover" width="48" height="48" loading="lazy" />
               <div>

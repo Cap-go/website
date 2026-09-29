@@ -100,6 +100,7 @@ const messages = {
     'Bundles are checksummed, signed, and encrypted end-to-end. TLS protects data in transit, and Capgo applies encryption at rest and access controls for operational data. Enterprise customers can review the DPA, sub-processor list, and SOC 2 materials on the trust and security pages.',
   about_faq_security_q: 'How does Capgo handle security and encryption?',
   about_faq_title: 'Frequently asked questions',
+  about_founder_letter_eyebrow: 'Why I built Capgo',
   about_hero_figure_caption: 'Remote-first, with team offsites in Madeira where planning, support reviews, and product work happen in the same week.',
   about_hero_h1: 'Capgo is an open-source live-update and native-delivery platform that ships JS/OTA updates for Capacitor and Ionic teams without waiting on app stores.',
   about_hero_lead:
@@ -124,8 +125,6 @@ const messages = {
   about_stat_devices_detail: 'Reached through apps using Capgo',
   about_team_capgo_x: 'Capgo on X',
   about_team_connect_title: 'Connect with Capgo',
-  about_team_founder_note:
-    'From a solo project to a focused team serving production apps, Capgo has stayed anchored in the same belief: app teams should be able to fix, improve, and recover without waiting on stores.',
   about_team_github: 'Capgo on GitHub',
   about_team_intro:
     'Capgo is operated by Digital Shift OÜ and founded by Martin Donadieu in Tallinn, Estonia. The team is intentionally compact: the same people improving native update behavior, product flows, and enterprise onboarding also talk to customers.',
@@ -2466,11 +2465,12 @@ const messages = {
   manage_your_releases: 'Manage your releases',
   managed_solutions: 'Managed Solutions',
   mandatory_mfa_integration: 'Mandatory MFA and integration with enterprise identity providers for secure access control',
-  manifesto_behind_every_movie: 'Native plugin and binary changes still go through App Store and Play review. I answer questions on Discord.',
+  manifesto_behind_every_movie:
+    'We are bootstrapped and answer to customers, not investors. Native changes still go through the stores. When you get stuck, you talk to me and the team on Discord.',
   manifesto_full_ecosystem:
-    'Install the plugin, upload a signed web bundle, and users get it on next launch. Channels keep beta off production. Rollback is one click when a release is bad.',
+    'So Capgo does one job well: deliver signed web bundles to your users on their next launch, with channels, rollback, and logs around it. The updater plugin is open source, so you can audit exactly what runs in your app.',
   manifesto_home_for_developers:
-    'I built Capgo so Capacitor teams could ship fixes without waiting on stores, and audit the updater that does it. The plugin is open source. The cloud delivers signed web bundles. We have been bootstrapped since 2021.',
+    'I started Capgo in 2021 because shipping a one-line fix to a Capacitor app meant days of store review. Web teams deploy in minutes. Mobile teams deserved the same.',
   massive_cost_reduction: 'Massive cost reduction',
   mau: 'MAU',
   mau_counting_explanation:
@@ -2787,7 +2787,6 @@ const messages = {
   orgs_title_line2: 'for Your Team',
   our_commitment: 'Our Commitment',
   our_dedication: 'Our Dedication',
-  our_manifesto: 'Our Manifesto',
   our_numbers_are_shared_transparently_since_december_2021: 'Our numbers are shared transparently since December 2021.',
   our_story: 'Our Story',
   over: 'Over',
