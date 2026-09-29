@@ -60,85 +60,69 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 
 <section id="plans">
   <div class="grid grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm sm:grid-cols-2 lg:grid-cols-4">
-    {
-      pricing.map((plan) => (
-        <div
-          class:list={[
-            'relative flex flex-col border-b border-gray-200 bg-white p-6 sm:border-r lg:min-h-[580px] lg:border-b-0 lg:p-7',
-            plan.name === 'Maker' ? 'bg-blue-50/40' : '',
-          ]}
-          data-plan={plan.name}
-        >
-          <div class="min-h-24">
-            <div class="flex flex-wrap items-center gap-2">
-              <h3 class="text-2xl font-semibold tracking-tight text-gray-950">{plan.name}</h3>
-              {plan.name === 'Maker' && (
-                <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
-              )}
-            </div>
-            <p class="mt-3 text-sm leading-6 text-gray-600">{planDescriptionToText(plan.description, Astro.locals.locale)}</p>
-          </div>
-
-          <div class="mt-6 lg:mt-8">
-            <div class="flex items-end gap-1">
-              <p class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl" data-price aria-live="polite">
-                {priceDisplay(plan.price_m, plan.price_y, plan.name)}
-              </p>
-              <p class="pb-1 text-xs font-semibold tracking-wide text-gray-500 uppercase">/{m.month({}, { locale: Astro.locals.locale })}</p>
-            </div>
-            <p class="mt-2 min-h-5 text-xs font-medium text-gray-500" data-yearly-price style={yearly ? '' : 'display: none'}>
-              {m.billed_annually_at({}, { locale: Astro.locals.locale })} $<span data-yearly-total>{numberWithSpaces(plan.price_y)}</span>
-            </p>
-            <p class="mt-2 min-h-5 text-xs font-medium text-gray-500" data-monthly-price style={yearly ? 'display: none' : ''}>
-              {m.billed_monthly({}, { locale: Astro.locals.locale })}
-            </p>
-          </div>
-
-          <div class="mt-6 space-y-3">
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Start ${plan.name} free trial`}
-              class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              role="button"
-            >
-              {m.days_free_trial({}, { locale: Astro.locals.locale })}
-            </a>
-            {plan.name === 'Enterprise' && (
-              <a
-                href="https://book.capgo.app/enterprise-inquiry/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Talk to our team"
-                class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-4 py-3 text-sm font-semibold whitespace-nowrap text-gray-900 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-                role="button"
-              >
-                <TeamAvatars />
-                <span>Talk to our team</span>
-              </a>
+    {pricing.map((plan) => (
+      <div
+        class:list={[
+          'relative flex flex-col border-b border-gray-200 bg-white p-6 sm:border-r lg:min-h-[580px] lg:border-b-0 lg:p-7',
+          plan.name === 'Maker' ? 'bg-blue-50/40' : '',
+        ]}
+        data-plan={plan.name}
+      >
+        <div class="min-h-24">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="text-2xl font-semibold tracking-tight text-gray-950">{plan.name}</h3>
+            {plan.name === 'Maker' && (
+              <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
             )}
           </div>
+          <p class="mt-3 text-sm leading-6 text-gray-600">{planDescriptionToText(plan.description, Astro.locals.locale)}</p>
+        </div>
 
-          <div class="mt-10 lg:mt-12">
-            <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Includes:</p>
-            <ul class="mt-5 space-y-4 text-sm leading-6 text-gray-700">
-              {planHighlights(plan).map((highlight) => (
-                <li class="flex items-start gap-3">
-                  <svg
-                    class="mt-1 h-4 w-4 shrink-0 text-gray-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    aria-hidden="true"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
-                  <span>{highlight}</span>
-                </li>
-              ))}
+        <div class="mt-6 lg:mt-8">
+          <div class="flex items-end gap-1">
+            <p class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl" data-price aria-live="polite">
+              {priceDisplay(plan.price_m, plan.price_y, plan.name)}
+            </p>
+            <p class="pb-1 text-xs font-semibold tracking-wide text-gray-500 uppercase">/{m.month({}, { locale: Astro.locals.locale })}</p>
+          </div>
+          <p class="mt-2 min-h-5 text-xs font-medium text-gray-500" data-yearly-price style={yearly ? '' : 'display: none'}>
+            {m.billed_annually_at({}, { locale: Astro.locals.locale })} $<span data-yearly-total>{numberWithSpaces(plan.price_y)}</span>
+          </p>
+          <p class="mt-2 min-h-5 text-xs font-medium text-gray-500" data-monthly-price style={yearly ? 'display: none' : ''}>
+            {m.billed_monthly({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+
+        <div class="mt-6 space-y-3">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Start ${plan.name} free trial`}
+            class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            role="button"
+          >
+            {m.days_free_trial({}, { locale: Astro.locals.locale })}
+          </a>
+          {plan.name === 'Enterprise' && (
+            <a
+              href="https://book.capgo.app/enterprise-inquiry/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Talk to our team"
+              class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-4 py-3 text-sm font-semibold whitespace-nowrap text-gray-900 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              role="button"
+            >
+              <TeamAvatars />
+              <span>Talk to our team</span>
+            </a>
+          )}
+        </div>
+
+        <div class="mt-10 lg:mt-12">
+          <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Includes:</p>
+          <ul class="mt-5 space-y-4 text-sm leading-6 text-gray-700">
+            {planHighlights(plan).map((highlight) => (
               <li class="flex items-start gap-3">
                 <svg
                   class="mt-1 h-4 w-4 shrink-0 text-gray-500"
@@ -151,35 +135,49 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                 >
                   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
-                <span class="inline-flex items-center gap-1.5">
-                  {m.home_hero_human_support({}, { locale: Astro.locals.locale })}
-                  <img
-                    src="/martin-avatar.png"
-                    alt=""
-                    width="20"
-                    height="20"
-                    class="h-5 w-5 rounded-full object-cover ring-1 ring-gray-200"
-                    loading="lazy"
-                    decoding="async"
-                    aria-hidden="true"
-                  />
-                </span>
+                <span>{highlight}</span>
               </li>
-            </ul>
-          </div>
-
-          <a
-            href="#compare-plans"
-            class="mt-auto inline-flex min-h-11 items-center gap-2 pt-10 text-sm font-semibold text-gray-600 transition-colors hover:text-blue-700 focus:text-blue-700 focus:outline-none"
-          >
-            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0 5.25-5.25M12 19l-5.25-5.25" />
-            </svg>
-            <span>View all features</span>
-          </a>
+            ))}
+            <li class="flex items-start gap-3">
+              <svg
+                class="mt-1 h-4 w-4 shrink-0 text-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              <span class="inline-flex items-center gap-1.5">
+                {m.home_hero_human_support({}, { locale: Astro.locals.locale })}
+                <img
+                  src="/avatars/martin-96.webp"
+                  alt=""
+                  width="20"
+                  height="20"
+                  class="h-5 w-5 rounded-full object-cover ring-1 ring-gray-200"
+                  loading="lazy"
+                  decoding="async"
+                  aria-hidden="true"
+                />
+              </span>
+            </li>
+          </ul>
         </div>
-      ))
-    }
+
+        <a
+          href="#compare-plans"
+          class="mt-auto inline-flex min-h-11 items-center gap-2 pt-10 text-sm font-semibold text-gray-600 transition-colors hover:text-blue-700 focus:text-blue-700 focus:outline-none"
+        >
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0 5.25-5.25M12 19l-5.25-5.25" />
+          </svg>
+          <span>View all features</span>
+        </a>
+      </div>
+    ))}
   </div>
 </section>
 

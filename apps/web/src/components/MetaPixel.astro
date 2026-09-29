@@ -10,11 +10,18 @@
     n.loaded = !0
     n.version = '2.0'
     n.queue = []
-    t = b.createElement(e)
-    t.async = !0
-    t.src = v
-    s = b.getElementsByTagName(e)[0]
-    s.parentNode.insertBefore(t, s)
+    // Load the pixel after the page is idle so it never competes with first paint; fbq calls queue until then.
+    var load = function () {
+      t = b.createElement(e)
+      t.async = !0
+      t.src = v
+      s = b.getElementsByTagName(e)[0]
+      s.parentNode.insertBefore(t, s)
+    }
+    var idle = function () {
+      'requestIdleCallback' in f ? f.requestIdleCallback(load, { timeout: 4000 }) : setTimeout(load, 2000)
+    }
+    b.readyState === 'complete' ? idle() : f.addEventListener('load', idle, { once: true })
   })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js')
   fbq('init', '1006226328555340')
   fbq('track', 'PageView')
