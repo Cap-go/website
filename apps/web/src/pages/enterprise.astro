@@ -342,7 +342,7 @@ const enterpriseCapgoPluginLabels = [
 ]
 
 const customers = [
-  { name: 'Nana', downloads: '2.5M', logo: '/nana-logo-transparent.webp' },
+  { name: 'Nana', downloads: '2.5M', logo: '/nana-logo-transparent.webp', plate: true },
   { name: 'Snowqueen', downloads: '1.8M', logo: '/snowqueen.webp' },
   { name: 'Shelf', downloads: '950K', logo: '/shelf_app.webp' },
   { name: 'Suez', downloads: '3.2M', logo: '/suez.webp' },
@@ -550,7 +550,15 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
           {
             customers.map((customer) => (
               <div class="enterprise-logo-card">
-                <img src={customer.logo} alt={`${customer.name} logo`} width="40" height="40" loading="lazy" decoding="async" />
+                <img
+                  src={customer.logo}
+                  alt={`${customer.name} logo`}
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                  decoding="async"
+                  class:list={[{ 'rounded-lg bg-slate-200 p-1': customer.plate }]}
+                />
                 <div>
                   <p>{customer.name}</p>
                   <span>

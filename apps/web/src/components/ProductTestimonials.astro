@@ -43,7 +43,9 @@ const starMutedClass = isLight ? 'text-slate-300' : isBuilder ? 'proof-star-mute
 const gridClass = isBuilder
   ? visibleTestimonials.length === 1
     ? 'proof-grid proof-grid--one'
-    : 'proof-grid'
+    : visibleTestimonials.length === 3
+      ? 'proof-grid proof-grid--three'
+      : 'proof-grid'
   : visibleTestimonials.length === 1
     ? 'max-w-3xl'
     : visibleTestimonials.length === 2
@@ -201,6 +203,17 @@ const gridClass = isBuilder
     .product-proof .proof-grid--one {
       grid-template-columns: minmax(0, 640px);
       justify-content: center;
+    }
+    .product-proof .proof-grid--three > :first-child {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (min-width: 1024px) {
+    .product-proof .proof-grid--three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .product-proof .proof-grid--three > :first-child {
+      grid-column: auto;
     }
   }
   .product-proof .proof-card-wrap {
