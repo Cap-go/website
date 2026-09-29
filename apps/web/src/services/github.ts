@@ -32,9 +32,9 @@ export const getNpmDownloads = (packageName: string): number | undefined => {
   return downloadsMap[packageName]
 }
 
-// Get total stars across all plugins
+// Get total stars across unique Cap-go repositories
 export const getTotalStars = (): number => {
-  return Object.values(starsMap).reduce((sum, stars) => sum + stars, 0)
+  return githubStats.totalStars ?? 0
 }
 
 // Get total monthly downloads across all plugins
