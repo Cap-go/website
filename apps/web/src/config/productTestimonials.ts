@@ -100,7 +100,7 @@ export const productTestimonials = {
   nativeBuildData: [sikafanka, mikolaj],
 } satisfies Record<string, ProductTestimonial[]>
 
-const allTestimonials = [luis, nate, kapil, noTone, sikafanka, mikolaj, michael, sergiu]
+export const allTestimonials = [luis, nate, kapil, noTone, sikafanka, mikolaj, michael, sergiu]
 
 /** Average star rating across every published customer testimonial above. */
 export const ratingSummary = {
