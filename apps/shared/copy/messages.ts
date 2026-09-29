@@ -3418,6 +3418,23 @@ const messages = {
   solutions_build_without_mac_workflow4_title: 'Release and keep moving',
   solutions_build_without_mac_workflow_label: 'Workflow',
   solutions_build_without_mac_workflow_title: 'From Capacitor project to signed iOS build',
+  solutions_cost_adoption_explanation:
+    "An approved release still depends on each user's auto-update settings. The broken version stays on devices until people install the new one, and many never do.",
+  solutions_cost_adoption_label: 'Until most users install the fix',
+  solutions_cost_adoption_value: 'Weeks',
+  solutions_cost_damage_explanation: 'Support tickets, 1-star reviews, failed checkouts, and engineers pulled off roadmap work. None of it stops while the fix waits in a queue.',
+  solutions_cost_damage_label: 'The bug stays live, the cost adds up',
+  solutions_cost_damage_value: 'Every hour',
+  solutions_pr_cost_rebuild_explanation:
+    'Without live updates, testers can only try a branch after someone builds, signs, and uploads a new binary. Web-only changes pay the full native build cost.',
+  solutions_pr_cost_rebuild_label: 'Needs its own native build to test',
+  solutions_pr_cost_rebuild_value: 'Every PR',
+  solutions_pr_cost_stale_explanation:
+    'When QA waits on builds, reviews land hours or days after the code was written. Developers switch tasks, branches drift, and merge conflicts grow.',
+  solutions_pr_cost_stale_label: 'Feedback arrives after the context is gone',
+  solutions_pr_cost_stale_value: 'Stale PRs',
+  solutions_review_time_explanation:
+    'Apple and Google review every new binary before it ships. Most reviews finish in a day or two, but rejections, holidays, and resubmissions can stretch that to a week.',
   solutions_webapp_to_mobile_badge: 'AI mobile handoff',
   solutions_webapp_to_mobile_builder_cta: 'Review handoff checklist',
   solutions_webapp_to_mobile_cap1_desc:
@@ -3651,7 +3668,6 @@ const messages = {
   solutions_white_label_workflow_label: 'Release model',
   solutions_white_label_workflow_lead: 'White-label operations become manageable when every tenant has a clear release lane and every lane can be monitored independently.',
   solutions_white_label_workflow_title: 'A release workflow built for many brands',
-  solutions_bug_cost_explanation: 'Often 24–48 hours, sometimes much longer — and users still have to update. During critical bugs, every hour matters.',
   solutions_by_industry: 'By Industry',
   solutions_by_team: 'By Team',
   solutions_by_use_case: 'by use case',
