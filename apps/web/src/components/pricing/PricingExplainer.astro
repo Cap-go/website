@@ -33,7 +33,7 @@ function easMonthlyCost(mau: number) {
   return Math.min(...easPlans.map((plan) => plan.price + Math.max(0, mau - plan.includedMau) * EAS_OVERAGE_PER_MAU))
 }
 
-const paidPlans = plans.filter((plan) => plan.name !== 'Enterprise' && plan.mau > 0).sort((a, b) => a.mau - b.mau)
+const paidPlans = plans.filter((plan) => plan.name !== 'Enterprise' && plan.mau > 0 && planYearlyPrice(plan) > 0).sort((a, b) => a.mau - b.mau)
 const rows = paidPlans
   .filter((plan) => plan.mau <= 200_000)
   .map((plan) => ({
