@@ -5,6 +5,7 @@ import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
+import { allTestimonials } from '@/config/productTestimonials'
 
 const locale = Astro.locals.locale
 const title = m.alternatives_title({}, { locale })
@@ -355,33 +356,16 @@ const content = {
       </h2>
 
       <div class="grid gap-6 sm:grid-cols-2">
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <p class="mb-2 text-gray-300 italic">
-            "{m.alternatives_testimonial_1({}, { locale })}"
-          </p>
-          <p class="text-sm text-gray-400">{m.alternatives_testimonial_1_author({}, { locale })}</p>
-        </div>
-
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <p class="mb-2 text-gray-300 italic">
-            "{m.alternatives_testimonial_2({}, { locale })}"
-          </p>
-          <p class="text-sm text-gray-400">{m.alternatives_testimonial_2_author({}, { locale })}</p>
-        </div>
-
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <p class="mb-2 text-gray-300 italic">
-            "{m.alternatives_testimonial_3({}, { locale })}"
-          </p>
-          <p class="text-sm text-gray-400">{m.alternatives_testimonial_3_author({}, { locale })}</p>
-        </div>
-
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <p class="mb-2 text-gray-300 italic">
-            "{m.alternatives_testimonial_4({}, { locale })}"
-          </p>
-          <p class="text-sm text-gray-400">{m.alternatives_testimonial_4_author({}, { locale })}</p>
-        </div>
+        {
+          allTestimonials.slice(0, 4).map((testimonial) => (
+            <figure class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+              <blockquote class="mb-2 text-gray-300 italic">"{testimonial.quote}"</blockquote>
+              <figcaption class="text-sm text-gray-400">
+                — {testimonial.name}, {testimonial.role}
+              </figcaption>
+            </figure>
+          ))
+        }
       </div>
     </div>
 

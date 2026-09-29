@@ -1,17 +1,9 @@
 ---
 import m from '@/copy/messages'
 import dayjs from 'dayjs'
-import type { WebsiteStatsDisplay } from '@/lib/websiteStats'
-import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
+import { siteMetrics } from '@/config/siteMetrics'
 import { getTotalStars } from '@/services/github'
 
-interface Props {
-  stats?: WebsiteStatsDisplay
-}
-
-const config = Astro.locals.runtimeConfig
-const { stats: statsProp } = Astro.props
-const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.public.baseApiUrl))
 // Same total as the header GitHub badge so both numbers match.
 const totalStars = getTotalStars()
 ---
@@ -75,8 +67,8 @@ const totalStars = getTotalStars()
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
-          <div class="mb-2 text-5xl font-bold text-white">{stats.updates}</div>
-          <div class="mb-1 text-base font-semibold text-white">{m.updates_delivered({}, { locale: Astro.locals.locale })}</div>
+          <div class="mb-2 text-5xl font-bold text-white">{siteMetrics.updatesPerMonth}</div>
+          <div class="mb-1 text-base font-semibold text-white">{m.updates_delivered_per_month({}, { locale: Astro.locals.locale })}</div>
           <div class="text-sm text-gray-400">{m.all_around_the_globe({}, { locale: Astro.locals.locale })}</div>
         </div>
       </div>
@@ -102,7 +94,7 @@ const totalStars = getTotalStars()
               ></path>
             </svg>
           </div>
-          <div class="mb-2 text-5xl font-bold text-white">{stats.apps}</div>
+          <div class="mb-2 text-5xl font-bold text-white">{siteMetrics.apps}</div>
           <div class="mb-1 text-base font-semibold text-white">{m.apps({}, { locale: Astro.locals.locale })}</div>
           <div class="text-sm text-gray-400">{m.using_us_in_production({}, { locale: Astro.locals.locale })}</div>
         </div>
@@ -207,10 +199,10 @@ const totalStars = getTotalStars()
             </div>
             <div>
               <div class="mb-2 text-5xl font-bold text-white">
-                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">44ms</a>
+                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">~50ms</a>
               </div>
               <div class="mb-1 text-sm font-semibold text-white">{m.shared_numbers_api_response({}, { locale: Astro.locals.locale })}</div>
-              <div class="text-xs text-gray-400">{m.home_avg_latency({}, { locale: Astro.locals.locale })}</div>
+              <div class="text-xs text-gray-400">{m.all_around_the_globe({}, { locale: Astro.locals.locale })}</div>
             </div>
           </div>
         </div>
