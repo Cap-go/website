@@ -2,15 +2,88 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const title = `${brand} | ${m.solutions_direct_updates_title({}, { locale })}`
 const description = m.solutions_direct_updates_description({}, { locale })
+
+const links = {
+  updateBehavior: { href: docs('live-updates/update-behavior/'), label: m.solutions_direct_link_update_behavior({}, { locale }) },
+  settings: { href: docs('plugins/updater/settings/'), label: m.solutions_direct_link_settings({}, { locale }) },
+  splash: { href: docs('live-updates/update-behavior/#automatic-splashscreen-handling'), label: m.solutions_direct_link_splash({}, { locale }) },
+  delta: { href: docs('live-updates/differentials/'), label: m.solutions_direct_link_delta({}, { locale }) },
+  notify: { href: docs('plugins/updater/notify-app-ready/'), label: m.solutions_direct_link_notify({}, { locale }) },
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_direct_link_compatibility({}, { locale }) },
+  build: { href: docs('builder/getting-started/'), label: m.solutions_direct_link_build({}, { locale }) },
+}
+
+const howSteps = [
+  {
+    title: m.solutions_direct_how1_title({}, { locale }),
+    body: m.solutions_direct_how1_body({}, { locale }),
+    code: `npm install @capacitor/splash-screen
+npx cap sync
+
+// capacitor.config.ts
+plugins: {
+  CapacitorUpdater: {
+    autoUpdate: 'onLaunch', // or 'atInstall' / 'always'
+    autoSplashscreen: true,
+    keepUrlPathAfterReload: true,
+  },
+  SplashScreen: { launchAutoHide: false },
+}`,
+    href: links.splash.href,
+    linkLabel: links.splash.label,
+  },
+  {
+    title: m.solutions_direct_how2_title({}, { locale }),
+    body: m.solutions_direct_how2_body({}, { locale }),
+    code: `npx @capgo/cli@latest build request --platform ios
+npx @capgo/cli@latest build request --platform android`,
+    href: links.build.href,
+    linkLabel: links.build.label,
+  },
+  {
+    title: m.solutions_direct_how3_title({}, { locale }),
+    body: m.solutions_direct_how3_body({}, { locale }),
+    code: 'npx @capgo/cli@latest bundle upload --channel production --delta',
+    href: links.delta.href,
+    linkLabel: links.delta.label,
+  },
+  {
+    title: m.solutions_direct_how4_title({}, { locale }),
+    body: m.solutions_direct_how4_body({}, { locale }),
+    code: `import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+await CapacitorUpdater.notifyAppReady()`,
+    href: links.notify.href,
+    linkLabel: links.notify.label,
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_direct_faq1_q({}, { locale }), answer: m.solutions_direct_faq1_a({}, { locale }), ...links.updateBehavior },
+  { question: m.solutions_direct_faq2_q({}, { locale }), answer: m.solutions_direct_faq2_a({}, { locale }), ...links.settings },
+  { question: m.solutions_direct_faq3_q({}, { locale }), answer: m.solutions_direct_faq3_a({}, { locale }), ...links.splash },
+  { question: m.solutions_direct_faq4_q({}, { locale }), answer: m.solutions_direct_faq4_a({}, { locale }), ...links.compatibility },
+  {
+    question: m.solutions_direct_faq5_q({}, { locale }),
+    answer: m.solutions_direct_faq5_a({}, { locale }),
+    href: docs('plugins/updater/settings/#directupdate'),
+    label: links.settings.label,
+  },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -22,6 +95,7 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = { title, description, ldJSON }
@@ -41,19 +115,15 @@ const content = { title, description, ldJSON }
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <div class="mb-8 inline-flex items-center rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-200">
-            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg aria-hidden="true" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
             </svg>
             {m.solutions_direct_updates({}, { locale })}
           </div>
 
-          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            {m.solutions_direct_updates_hero_title({}, { locale })}
-          </h1>
+          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{m.solutions_direct_updates_hero_title({}, { locale })}</h1>
 
-          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">
-            {m.solutions_direct_updates_hero_subtitle({}, { locale })}
-          </p>
+          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">{m.solutions_direct_updates_hero_subtitle({}, { locale })}</p>
 
           <HumanSupport class="mt-8" size="sm" />
           <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -76,29 +146,32 @@ const content = { title, description, ldJSON }
           <!-- Trust Badges -->
           <div class="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
             <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                  clip-rule="evenodd"
+                ></path>
               </svg>
               {m.solutions_direct_instant_apply({}, { locale })}
             </div>
             <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                  clip-rule="evenodd"
+                ></path>
               </svg>
               {m.solutions_direct_zero_outdated({}, { locale })}
             </div>
             <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                  clip-rule="evenodd"
+                ></path>
               </svg>
               {m.solutions_direct_sub_second({}, { locale })}
             </div>
@@ -111,14 +184,14 @@ const content = { title, description, ldJSON }
     <section class="bg-gray-800 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto mb-16 max-w-3xl text-center">
-          <h2 class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.solutions_the_problem({}, { locale })}</h2>
-          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_direct_problem_title({}, { locale })}</h3>
+          <p class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.solutions_the_problem({}, { locale })}</p>
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_direct_problem_title({}, { locale })}</h2>
         </div>
 
         <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <!-- Problem Visualization -->
           <div class="rounded-2xl border border-red-500/30 bg-gray-900 p-8">
-            <h4 class="mb-6 text-xl font-bold text-white">{m.solutions_direct_background_problem({}, { locale })}</h4>
+            <h3 class="mb-6 text-xl font-bold text-white">{m.solutions_direct_background_problem({}, { locale })}</h3>
 
             <div class="space-y-6">
               <div class="flex items-start gap-4">
@@ -159,22 +232,23 @@ const content = { title, description, ldJSON }
 
           <!-- Critical Scenarios -->
           <div>
-            <h4 class="mb-6 text-xl font-bold text-white">{m.solutions_direct_when_matters({}, { locale })}</h4>
+            <h3 class="mb-6 text-xl font-bold text-white">{m.solutions_direct_when_matters({}, { locale })}</h3>
 
             <div class="space-y-6">
               <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
                 <div class="mb-3 flex items-center gap-4">
                   <div class="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20">
-                    <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg aria-hidden="true" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      ></path>
                     </svg>
                   </div>
                   <div>
-                    <p class="text-lg font-bold text-white">{m.solutions_direct_scenario1_title({}, { locale })}</p>
+                    <h4 class="text-lg font-bold text-white">{m.solutions_direct_scenario1_title({}, { locale })}</h4>
                     <p class="text-gray-400">{m.solutions_direct_scenario1_desc({}, { locale })}</p>
                   </div>
                 </div>
@@ -183,7 +257,7 @@ const content = { title, description, ldJSON }
               <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
                 <div class="mb-3 flex items-center gap-4">
                   <div class="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/20">
-                    <svg class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg aria-hidden="true" class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -193,7 +267,7 @@ const content = { title, description, ldJSON }
                     </svg>
                   </div>
                   <div>
-                    <p class="text-lg font-bold text-white">{m.solutions_direct_scenario2_title({}, { locale })}</p>
+                    <h4 class="text-lg font-bold text-white">{m.solutions_direct_scenario2_title({}, { locale })}</h4>
                     <p class="text-gray-400">{m.solutions_direct_scenario2_desc({}, { locale })}</p>
                   </div>
                 </div>
@@ -202,7 +276,7 @@ const content = { title, description, ldJSON }
               <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
                 <div class="mb-3 flex items-center gap-4">
                   <div class="flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/20">
-                    <svg class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg aria-hidden="true" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -212,7 +286,7 @@ const content = { title, description, ldJSON }
                     </svg>
                   </div>
                   <div>
-                    <p class="text-lg font-bold text-white">{m.solutions_direct_scenario3_title({}, { locale })}</p>
+                    <h4 class="text-lg font-bold text-white">{m.solutions_direct_scenario3_title({}, { locale })}</h4>
                     <p class="text-gray-400">{m.solutions_direct_scenario3_desc({}, { locale })}</p>
                   </div>
                 </div>
@@ -227,21 +301,21 @@ const content = { title, description, ldJSON }
     <section class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto mb-16 max-w-3xl text-center">
-          <h2 class="mb-4 text-sm font-semibold tracking-wide text-green-400 uppercase">{m.solutions_the_solution({}, { locale })}</h2>
-          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_direct_solution_title({}, { locale })}</h3>
+          <p class="mb-4 text-sm font-semibold tracking-wide text-green-400 uppercase">{m.solutions_the_solution({}, { locale })}</p>
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_direct_solution_title({}, { locale })}</h2>
           <p class="mt-4 text-xl text-gray-400">{m.solutions_direct_solution_subtitle({}, { locale })}</p>
         </div>
 
         <!-- Comparison -->
-        <div class="mb-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div class="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
           <!-- Background Updates -->
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
-            <h4 class="mb-6 flex items-center gap-2 text-lg font-bold text-gray-400">
-              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <h3 class="mb-6 flex items-center gap-2 text-lg font-bold text-gray-400">
+              <svg aria-hidden="true" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
               {m.solutions_direct_background_mode({}, { locale })}
-            </h4>
+            </h3>
             <div class="space-y-4">
               <div class="flex items-center gap-3 text-gray-400">
                 <div class="flex h-6 w-6 items-center justify-center rounded-full bg-gray-700 text-xs">1</div>
@@ -267,12 +341,12 @@ const content = { title, description, ldJSON }
 
           <!-- Direct Updates -->
           <div class="rounded-2xl border border-emerald-500/30 bg-gray-800 p-8">
-            <h4 class="mb-6 flex items-center gap-2 text-lg font-bold text-emerald-400">
-              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <h3 class="mb-6 flex items-center gap-2 text-lg font-bold text-emerald-400">
+              <svg aria-hidden="true" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
               {m.solutions_direct_direct_mode({}, { locale })}
-            </h4>
+            </h3>
             <div class="space-y-4">
               <div class="flex items-center gap-3 text-white">
                 <div class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/30 text-xs text-emerald-400">1</div>
@@ -293,31 +367,23 @@ const content = { title, description, ldJSON }
           </div>
         </div>
 
-        <!-- Code Example -->
-        <div class="mx-auto max-w-3xl">
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6">
-            <div class="mb-4 flex items-center gap-2">
-              <div class="h-3 w-3 rounded-full bg-red-500"></div>
-              <div class="h-3 w-3 rounded-full bg-yellow-500"></div>
-              <div class="h-3 w-3 rounded-full bg-green-500"></div>
-              <span class="ml-2 text-sm text-gray-500">capacitor.config.ts</span>
-            </div>
-            <pre
-              class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500">// Enable Direct Updates - one config change</span>
-CapacitorUpdater: {'{'}
-  <span class="text-emerald-400">autoUpdate</span>: <span class="text-amber-300">'always'</span>, <span class="text-gray-500">// Updates apply immediately on app open</span>
-  <span class="text-emerald-400">autoSplashscreen</span>: <span class="text-amber-300">true</span>, <span class="text-gray-500">// Required for instant apply modes</span>
-{'}'}
-
-<span class="text-gray-500">// That's it. When users open your app:</span>
-<span class="text-gray-500">// 1. Capgo checks for updates</span>
-<span class="text-gray-500">// 2. If available, downloads immediately (use --delta for small updates)</span>
-<span class="text-gray-500">// 3. Applies before your app renders</span>
-<span class="text-gray-500">// Users see the latest version from the first screen.</span></code></pre>
-          </div>
-        </div>
+        <p class="text-center text-sm">
+          <a href={links.updateBehavior.href} class="font-semibold text-emerald-300 hover:text-white hover:underline">
+            {links.updateBehavior.label}
+          </a>
+        </p>
       </div>
     </section>
+
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_direct_how_title({}, { locale })}
+      description={m.solutions_direct_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.updateBehavior, links.settings, links.splash, links.delta, links.notify, links.compatibility]}
+      class="bg-gray-900 border-t border-white/10"
+    />
 
     <!-- Key Benefits -->
     <section class="bg-gray-900 py-20">
@@ -334,7 +400,7 @@ CapacitorUpdater: {'{'}
               <div class="lg:col-span-2">
                 <div class="mb-4 flex items-center gap-3">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/20">
-                    <svg class="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg aria-hidden="true" class="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                   </div>
@@ -343,36 +409,42 @@ CapacitorUpdater: {'{'}
                 <p class="mb-4 text-gray-300">{m.solutions_direct_benefit1_desc({}, { locale })}</p>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_direct_benefit1_point1({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_direct_benefit1_point2({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_direct_benefit1_point3({}, { locale })}
                   </li>
                 </ul>
+                <a href={links.settings.href} class="mt-4 inline-flex text-sm font-semibold text-emerald-300 hover:text-white hover:underline">
+                  {links.settings.label}
+                </a>
               </div>
               <div class="flex flex-col justify-center rounded-xl bg-gray-900 p-6">
-                <p class="mb-2 text-4xl font-bold text-emerald-400">On open</p>
+                <p class="mb-2 text-4xl font-bold text-emerald-400">3</p>
                 <p class="text-gray-400">{m.solutions_direct_benefit1_stat({}, { locale })}</p>
               </div>
             </div>
@@ -384,12 +456,8 @@ CapacitorUpdater: {'{'}
               <div class="lg:col-span-2">
                 <div class="mb-4 flex items-center gap-3">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/20">
-                    <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                     </svg>
                   </div>
                   <h3 class="text-xl font-bold text-white">{m.solutions_direct_benefit2_title({}, { locale })}</h3>
@@ -397,36 +465,42 @@ CapacitorUpdater: {'{'}
                 <p class="mb-4 text-gray-300">{m.solutions_direct_benefit2_desc({}, { locale })}</p>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_direct_benefit2_point1({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_direct_benefit2_point2({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_direct_benefit2_point3({}, { locale })}
                   </li>
                 </ul>
+                <a href={links.splash.href} class="mt-4 inline-flex text-sm font-semibold text-emerald-300 hover:text-white hover:underline">
+                  {links.splash.label}
+                </a>
               </div>
               <div class="flex flex-col justify-center rounded-xl bg-gray-900 p-6">
-                <p class="mb-2 text-4xl font-bold text-red-400">0</p>
+                <p class="mb-2 font-mono text-xl font-bold break-all text-red-400">autoSplashscreen</p>
                 <p class="text-gray-400">{m.solutions_direct_benefit2_stat({}, { locale })}</p>
               </div>
             </div>
@@ -438,8 +512,13 @@ CapacitorUpdater: {'{'}
               <div class="lg:col-span-2">
                 <div class="mb-4 flex items-center gap-3">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
-                    <svg class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    <svg aria-hidden="true" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      ></path>
                     </svg>
                   </div>
                   <h3 class="text-xl font-bold text-white">{m.solutions_direct_benefit3_title({}, { locale })}</h3>
@@ -447,36 +526,42 @@ CapacitorUpdater: {'{'}
                 <p class="mb-4 text-gray-300">{m.solutions_direct_benefit3_desc({}, { locale })}</p>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_direct_benefit3_point1({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_direct_benefit3_point2({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_direct_benefit3_point3({}, { locale })}
                   </li>
                 </ul>
+                <a href={links.delta.href} class="mt-4 inline-flex text-sm font-semibold text-emerald-300 hover:text-white hover:underline">
+                  {links.delta.label}
+                </a>
               </div>
               <div class="flex flex-col justify-center rounded-xl bg-gray-900 p-6">
-                <p class="mb-2 text-4xl font-bold text-blue-400">Day 1</p>
+                <p class="mb-2 font-mono text-3xl font-bold text-blue-400">--delta</p>
                 <p class="text-gray-400">{m.solutions_direct_benefit3_stat({}, { locale })}</p>
               </div>
             </div>
@@ -496,43 +581,52 @@ CapacitorUpdater: {'{'}
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <div class="rounded-xl border border-gray-700 bg-gray-900 p-6 transition-colors hover:border-emerald-500/50">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                ></path>
               </svg>
             </div>
-            <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase1_title({}, { locale })}</h4>
+            <h3 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase1_title({}, { locale })}</h3>
             <p class="text-sm text-gray-400">{m.solutions_direct_usecase1_desc({}, { locale })}</p>
           </div>
 
           <div class="rounded-xl border border-gray-700 bg-gray-900 p-6 transition-colors hover:border-emerald-500/50">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/20">
-              <svg class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+              <svg aria-hidden="true" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
                 ></path>
               </svg>
             </div>
-            <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase2_title({}, { locale })}</h4>
+            <h3 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase2_title({}, { locale })}</h3>
             <p class="text-sm text-gray-400">{m.solutions_direct_usecase2_desc({}, { locale })}</p>
           </div>
 
           <div class="rounded-xl border border-gray-700 bg-gray-900 p-6 transition-colors hover:border-emerald-500/50">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/20">
-              <svg class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              <svg aria-hidden="true" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                 ></path>
               </svg>
             </div>
-            <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase3_title({}, { locale })}</h4>
+            <h3 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase3_title({}, { locale })}</h3>
             <p class="text-sm text-gray-400">{m.solutions_direct_usecase3_desc({}, { locale })}</p>
           </div>
 
           <div class="rounded-xl border border-gray-700 bg-gray-900 p-6 transition-colors hover:border-emerald-500/50">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-amber-500/20">
-              <svg class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -541,13 +635,13 @@ CapacitorUpdater: {'{'}
                 ></path>
               </svg>
             </div>
-            <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase4_title({}, { locale })}</h4>
+            <h3 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase4_title({}, { locale })}</h3>
             <p class="text-sm text-gray-400">{m.solutions_direct_usecase4_desc({}, { locale })}</p>
           </div>
 
           <div class="rounded-xl border border-gray-700 bg-gray-900 p-6 transition-colors hover:border-emerald-500/50">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-green-500/20">
-              <svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -556,17 +650,17 @@ CapacitorUpdater: {'{'}
                 ></path>
               </svg>
             </div>
-            <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase5_title({}, { locale })}</h4>
+            <h3 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase5_title({}, { locale })}</h3>
             <p class="text-sm text-gray-400">{m.solutions_direct_usecase5_desc({}, { locale })}</p>
           </div>
 
           <div class="rounded-xl border border-gray-700 bg-gray-900 p-6 transition-colors hover:border-emerald-500/50">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-cyan-500/20">
-              <svg class="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
-            <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase6_title({}, { locale })}</h4>
+            <h3 class="mb-2 text-lg font-bold text-white">{m.solutions_direct_usecase6_title({}, { locale })}</h3>
             <p class="text-sm text-gray-400">{m.solutions_direct_usecase6_desc({}, { locale })}</p>
           </div>
         </div>
@@ -591,8 +685,8 @@ CapacitorUpdater: {'{'}
             <p class="text-sm text-gray-400">{m.solutions_direct_speed_apply({}, { locale })}</p>
           </div>
           <div class="rounded-xl border border-gray-700 bg-gray-800 p-6 text-center">
-            <div class="mb-2 text-3xl font-bold text-emerald-400">99.9%</div>
-            <p class="text-sm text-gray-400">{m.solutions_direct_speed_uptime({}, { locale })}</p>
+            <div class="mb-2 text-3xl font-bold text-emerald-400">1B+</div>
+            <p class="text-sm text-gray-400">{m.solutions_direct_speed_updates({}, { locale })}</p>
           </div>
         </div>
       </div>
@@ -609,12 +703,13 @@ CapacitorUpdater: {'{'}
         <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           <a href={getRelativeLocaleUrl(locale, 'enterprise')} class="group rounded-xl border border-gray-700 bg-gray-900 p-6 transition-all hover:border-emerald-500/50">
             <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
-              <svg class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                ></path>
               </svg>
             </div>
             <h3 class="font-bold text-white transition-colors group-hover:text-emerald-400">{m.solutions_enterprise_short({}, { locale })}</h3>
@@ -623,7 +718,7 @@ CapacitorUpdater: {'{'}
 
           <a href={getRelativeLocaleUrl(locale, 'solutions/startups')} class="group rounded-xl border border-gray-700 bg-gray-900 p-6 transition-all hover:border-emerald-500/50">
             <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
-              <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
@@ -636,7 +731,7 @@ CapacitorUpdater: {'{'}
             class="group rounded-xl border border-gray-700 bg-gray-900 p-6 transition-all hover:border-emerald-500/50"
           >
             <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20">
-              <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
               </svg>
             </div>
@@ -646,7 +741,7 @@ CapacitorUpdater: {'{'}
 
           <a href={getRelativeLocaleUrl(locale, 'solutions/agencies')} class="group rounded-xl border border-gray-700 bg-gray-900 p-6 transition-all hover:border-emerald-500/50">
             <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/20">
-              <svg class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -662,14 +757,32 @@ CapacitorUpdater: {'{'}
       </div>
     </section>
 
-    <!-- Final CTA -->
-
     <SolutionAppExample solution="direct-updates" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['direct-updates']}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_direct_faq_title({}, { locale })}
+      description={m.solutions_direct_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- Final CTA -->
     <section class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-emerald-600 to-teal-700 px-8 py-16 sm:px-16">
           <div aria-hidden="true" class="absolute inset-0">
-            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+            <svg
+              aria-hidden="true"
+              class="absolute inset-0 h-full w-full"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 1463 360"
+            >
               <path class="text-opacity-40 text-emerald-500" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
               <path class="text-opacity-20 text-teal-400" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
             </svg>
@@ -686,7 +799,7 @@ CapacitorUpdater: {'{'}
                 {m.solutions_start_free_trial({}, { locale })}
               </a>
               <a
-                href={getRelativeLocaleUrl(locale, 'docs/plugins/updater/settings')}
+                href={links.updateBehavior.href}
                 class="rounded-xl border border-white/30 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-white/10"
               >
                 {m.solutions_view_docs({}, { locale })}
