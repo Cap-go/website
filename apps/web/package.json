@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@nekuda/webmcp-sdk": "0.7.1",
     "astro-icon": "1.2.0",
     "sharp": "^0.35.4"
   },
