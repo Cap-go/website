@@ -58,9 +58,16 @@ const scenes = [
     ],
   },
 ]
+
+interface Props {
+  /** Section surface; pages with their own backdrop pass `bg-transparent`. */
+  background?: string
+}
+
+const { background = 'bg-[#1a1a1a]' } = Astro.props
 ---
 
-<section class="bg-[#1a1a1a] py-24 sm:py-32" data-explainers aria-labelledby="explainers-title">
+<section class:list={[background, 'py-24 sm:py-32']} data-explainers aria-labelledby="explainers-title">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.explainer_eyebrow({}, { locale })}</p>

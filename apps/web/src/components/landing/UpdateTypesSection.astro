@@ -2,9 +2,16 @@
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
+
+interface Props {
+  /** Section surface; pages with their own backdrop pass `bg-transparent`. */
+  background?: string
+}
+
+const { background = 'bg-[#1a1a1a]' } = Astro.props
 ---
 
-<section class="bg-[#1a1a1a] py-24 sm:py-32">
+<section class:list={[background, 'py-24 sm:py-32']}>
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <!-- Header -->
     <div class="mx-auto mb-16 max-w-2xl text-center">

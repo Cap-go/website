@@ -1,4 +1,7 @@
 ---
+import m from '@/copy/messages'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
@@ -332,6 +335,16 @@ provider ready | recipients linked | update check enabled</pre>
         </div>
       </div>
     </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_notifications_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_notifications_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.notifications}
+      maxItems={2}
+    />
 
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">

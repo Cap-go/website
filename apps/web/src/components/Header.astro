@@ -6,6 +6,40 @@ import { getTotalStars } from '@/services/github'
 const brand = Astro.locals.runtimeConfig.public.brand
 const totalStars = getTotalStars()
 const locale = Astro.locals.locale
+
+const productMenu = [
+  {
+    label: m.platform_group_ship({}, { locale: Astro.locals.locale }),
+    items: [
+      { href: 'live-update', label: m.platform_live_update_name({}, { locale: Astro.locals.locale }) },
+      { href: 'native-build', label: m.platform_native_build_name({}, { locale: Astro.locals.locale }) },
+    ],
+  },
+  {
+    label: m.platform_group_operate({}, { locale: Astro.locals.locale }),
+    items: [
+      { href: 'observe', label: m.platform_observe_name({}, { locale: Astro.locals.locale }) },
+      { href: 'notifications', label: m.platform_notifications_name({}, { locale: Astro.locals.locale }) },
+      { href: 'data', label: m.nav_live_update_data({}, { locale: Astro.locals.locale }) },
+      { href: 'builder-data', label: m.nav_native_build_data({}, { locale: Astro.locals.locale }) },
+    ],
+  },
+  {
+    label: m.platform_group_automate({}, { locale: Astro.locals.locale }),
+    items: [
+      { href: 'capgo-cli', label: m.nav_capgo_cli({}, { locale: Astro.locals.locale }) },
+      { href: 'skills', label: m.platform_skills_name({}, { locale: Astro.locals.locale }) },
+      { href: 'app_mobile', label: m.platform_app_name({}, { locale: Astro.locals.locale }) },
+    ],
+  },
+  {
+    label: m.platform_group_extend({}, { locale: Astro.locals.locale }),
+    items: [
+      { href: 'plugins', label: m.platform_plugins_name({}, { locale: Astro.locals.locale }) },
+      { href: 'ionic-enterprise-plugins', label: m.solutions_ionic_plugins_short({}, { locale: Astro.locals.locale }) },
+    ],
+  },
+]
 ---
 
 <header class="relative z-50 py-2">
@@ -62,75 +96,24 @@ const locale = Astro.locals.locale
               </svg>
             </button>
             <div
-              class="invisible absolute left-0 z-50 w-64 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
+              class="invisible absolute left-0 z-50 w-[30rem] pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
             >
-              <div class="rounded-xl border border-slate-600/60 bg-slate-800/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl">
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  {m.live_update({}, { locale: Astro.locals.locale })}
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'data')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  Live Update data
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'notifications')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  Notifications
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'observe')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  Observe
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  {m.native_build({}, { locale: Astro.locals.locale })}
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'builder-data')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  Native Build data
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'capgo-cli')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  Capgo CLI + MCP
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'skills')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  Capgo Skills
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  {m.app_mobile({}, { locale: Astro.locals.locale })}
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  {m.plugins({}, { locale: Astro.locals.locale })}
-                </a>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'ionic-enterprise-plugins')}
-                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
-                >
-                  {m.solutions_ionic_plugins_short({}, { locale: Astro.locals.locale })}
-                </a>
+              <div class="grid grid-cols-2 gap-x-2 gap-y-1 rounded-xl border border-slate-600/60 bg-slate-800/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl">
+                {
+                  productMenu.map((group) => (
+                    <div>
+                      <p class="px-3 pt-2 pb-1 font-mono text-[11px] font-semibold tracking-widest text-slate-400 uppercase">{group.label}</p>
+                      {group.items.map((item) => (
+                        <a
+                          href={getRelativeLocaleUrl(Astro.locals.locale, item.href)}
+                          class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -587,66 +570,21 @@ const locale = Astro.locals.locale
             </svg>
           </button>
           <div id="products-submenu" class="mt-1 grid hidden gap-1 rounded-xl border border-slate-400/30 bg-slate-700/70 p-2">
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
-              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
-            >
-              {m.live_update({}, { locale: Astro.locals.locale })}
-            </a>
-            <a href={getRelativeLocaleUrl(Astro.locals.locale, 'data')} class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80">
-              Live Update data
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'notifications')}
-              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
-            >
-              Notifications
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'observe')}
-              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
-            >
-              Observe
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
-              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
-            >
-              {m.native_build({}, { locale: Astro.locals.locale })}
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'builder-data')}
-              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
-            >
-              Native Build data
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'capgo-cli')}
-              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
-            >
-              Capgo CLI + MCP
-            </a>
-            <a href={getRelativeLocaleUrl(Astro.locals.locale, 'skills')} class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80">
-              Capgo Skills
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile')}
-              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
-            >
-              {m.app_mobile({}, { locale: Astro.locals.locale })}
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
-            >
-              {m.plugins({}, { locale: Astro.locals.locale })}
-            </a>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'ionic-enterprise-plugins')}
-              class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
-            >
-              {m.solutions_ionic_plugins_short({}, { locale: Astro.locals.locale })}
-            </a>
+            {
+              productMenu.map((group) => (
+                <>
+                  <p class="px-3 pt-2 font-mono text-[11px] font-semibold tracking-widest text-slate-300 uppercase">{group.label}</p>
+                  {group.items.map((item) => (
+                    <a
+                      href={getRelativeLocaleUrl(Astro.locals.locale, item.href)}
+                      class="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white hover:bg-slate-600/80"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </>
+              ))
+            }
           </div>
         </div>
         <!-- Solutions Section -->

@@ -1,24 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
-import Orgs from '@/components/Orgs.astro'
 import ProblemSolution from '@/components/ProblemSolution.astro'
 import Testimonials from '@/components/Testimonials.astro'
 import SharedNumbers from '@/components/SharedNumbers.astro'
 import Hero from '@/components/Hero.astro'
-import Manifesto from '@/components/Manifesto.astro'
 import m from '@/copy/messages'
-import DeviceLogs from '@/components/landing/DeviceLogs.astro'
 import HowItWorks from '@/components/HowItWorks.astro'
-import ReleaseExplainers from '@/components/explainers/ReleaseExplainers.astro'
+import PlatformOverview from '@/components/PlatformOverview.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
-import MonitoringFeatures from '@/components/landing/MonitoringFeatures.astro'
-import ReleaseIntelligence from '@/components/landing/ReleaseIntelligence.astro'
-import AutomationFeatures from '@/components/landing/AutomationFeatures.astro'
-import BuiltForDevelopers from '@/components/BuiltForDevelopers.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson, createWebSiteLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
-import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -94,22 +86,13 @@ const content = {
 <Layout content={content}>
   <div>
     <Hero />
-    <!-- <CompaniesLogo /> -->
     <ProblemSolution />
+    <PlatformOverview />
     <HowItWorks />
-    <ReleaseExplainers />
     <SolutionAppExample solution="production-updates" randomize />
-    <MonitoringFeatures />
-    <ReleaseIntelligence />
-    <DeviceLogs />
-    <AutomationFeatures />
     <GlobalInfrastructure />
-    <UpdateTypesSection />
-    <BuiltForDevelopers />
     <SharedNumbers stats={stats} />
     <Testimonials />
-    <Manifesto />
-    <Orgs />
     <AppflowShutdown />
     <section class="bg-[#1a1a1a] pb-16 sm:pb-20 lg:pb-24" aria-labelledby="keep-shipping-title">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

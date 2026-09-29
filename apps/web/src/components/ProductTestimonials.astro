@@ -1,5 +1,6 @@
 ---
 import { hasRealAvatar, type ProductTestimonial } from '@/config/productTestimonials'
+import RatingSummary from '@/components/RatingSummary.astro'
 
 interface Props {
   eyebrow?: string
@@ -51,6 +52,7 @@ const gridClass = isBuilder
             <div class={eyebrowClass}>{eyebrow}</div>
             <h2 class={titleClass}>{title}</h2>
             {description && <p class={descriptionClass}>{description}</p>}
+            <RatingSummary class="proof-rating" />
           </div>
 
           <div class={gridClass}>
@@ -94,6 +96,7 @@ const gridClass = isBuilder
             <p class:list={[eyebrowClass]}>{eyebrow}</p>
             <h2 class:list={['mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl', titleClass]}>{title}</h2>
             {description && <p class:list={['mt-5 text-base leading-7 text-pretty', descriptionClass]}>{description}</p>}
+            <RatingSummary class="mt-5" tone={isLight ? 'light' : 'dark'} />
           </div>
 
           <div class:list={['mt-10 grid gap-4', gridClass]}>
@@ -142,6 +145,9 @@ const gridClass = isBuilder
 }
 
 <style is:global>
+  .product-proof .proof-rating {
+    margin-top: 16px;
+  }
   .product-proof .proof-grid {
     display: grid;
     gap: 16px;

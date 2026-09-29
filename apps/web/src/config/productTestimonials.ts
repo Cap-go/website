@@ -86,7 +86,21 @@ export const productTestimonials = {
   mobile: [luis, noTone, kapil],
   plugins: [mikolaj, michael, sergiu],
   ionicEnterprisePlugins: [mikolaj, sergiu],
+  observe: [noTone, nate, sergiu],
+  notifications: [noTone, kapil, luis],
+  skills: [nate, mikolaj, michael],
+  ciCd: [sikafanka, nate, kapil],
+  liveUpdateData: [sergiu, kapil, michael],
+  nativeBuildData: [sikafanka, mikolaj],
 } satisfies Record<string, ProductTestimonial[]>
+
+const allTestimonials = [luis, nate, kapil, noTone, sikafanka, mikolaj, michael, sergiu]
+
+/** Average star rating across every published customer testimonial above. */
+export const ratingSummary = {
+  average: Number((allTestimonials.reduce((sum, item) => sum + item.rating, 0) / allTestimonials.length).toFixed(1)),
+  count: allTestimonials.length,
+}
 
 /** Real customer quotes shown on product schema pages (pricing, enterprise). */
 export const capgoReviews = [sergiu, mikolaj, luis]

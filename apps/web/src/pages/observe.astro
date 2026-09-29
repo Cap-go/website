@@ -1,4 +1,6 @@
 ---
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
@@ -168,6 +170,16 @@ const screenSignals = [
         </figure>
       </div>
     </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_observe_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_observe_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.observe}
+      maxItems={2}
+    />
 
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">

@@ -1,5 +1,7 @@
 ---
 import '@/styles/lu-product.css'
+import ReleaseExplainers from '@/components/explainers/ReleaseExplainers.astro'
+import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import { productVideos } from '@/config/productVideos'
@@ -445,6 +447,9 @@ const featureTiles = [
     </section>
 
     <!-- COMPARISON -->
+    <ReleaseExplainers background="bg-transparent" />
+    <UpdateTypesSection background="bg-transparent" />
+
     <section class="section" id="compare">
       <div class="shell">
         <div class="section-head">

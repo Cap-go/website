@@ -1,4 +1,7 @@
 ---
+import m from '@/copy/messages'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -883,6 +886,14 @@ npx @capgo/cli@latest build com.example.app --platform android --build-mode rele
     </section>
 
     <!-- CTA Section -->
+    <ProductTestimonials
+      variant="light"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_ci_cd_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_ci_cd_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.ciCd}
+    />
+
     <section class="relative overflow-hidden bg-gray-900 py-24 sm:py-32">
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center">

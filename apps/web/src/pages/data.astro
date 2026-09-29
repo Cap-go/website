@@ -1,4 +1,7 @@
 ---
+import m from '@/copy/messages'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import { getFailureReasonInfo } from '@/lib/liveUpdateFailureReasons'
 import { emptyLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
@@ -497,6 +500,13 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
         </p>
       </div>
     </section>
+    <ProductTestimonials
+      variant="dark"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_data_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_data_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.liveUpdateData}
+    />
   </main>
 </Layout>
 

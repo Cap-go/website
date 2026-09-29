@@ -2,6 +2,7 @@
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import TeamAvatars from '@/components/TeamAvatars.astro'
+import RatingSummary from '@/components/RatingSummary.astro'
 
 const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
 const nativeBuildUrl = getRelativeLocaleUrl(Astro.locals.locale, 'native-build')
@@ -259,6 +260,7 @@ const teamUrl = 'https://book.capgo.app/demo/'
             </p>
           </div>
           <p class="font-inter text-sm leading-6 text-gray-400">{ctaSubtext}</p>
+          <RatingSummary align="center" showCustomers={false} />
         </div>
       </div>
     </div>
