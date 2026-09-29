@@ -73,9 +73,6 @@ body:has(.sk) {
 .sk.bg-ad {
   background: transparent;
 }
-body:has(.sk) footer > div > div:first-child {
-  display: none !important;
-}
 .sk .bg-grid::before {
   content: '';
   position: absolute;

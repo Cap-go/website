@@ -85,9 +85,6 @@ body:has(.lu) {
 .lu.bg-ad {
   background: transparent;
 }
-body:has(.lu) footer > div > div:first-child {
-  display: none !important;
-}
 .lu .bg-grid::before {
   content: '';
   position: absolute;

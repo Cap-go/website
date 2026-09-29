@@ -88,9 +88,6 @@ body:has(.cli) {
 .cli.bg-ad {
   background: transparent;
 }
-body:has(.cli) footer > div > div:first-child {
-  display: none !important;
-}
 .cli .bg-grid::before {
   content: '';
   position: absolute;
