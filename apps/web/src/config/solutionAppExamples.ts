@@ -21,6 +21,7 @@ export type SolutionAppExampleKey =
   | 'solo-developers'
   | 'startups'
   | 'version-targeting'
+  | 'webapp-to-mobile'
   | 'white-label'
 
 export interface SolutionAppReference {
@@ -260,6 +261,17 @@ export const solutionAppExamples = {
       { appId: 'com.windyty.android', noteKey: 'solution_app_examples_version_targeting_app_3_note' },
     ],
     playKeys: ['solution_app_examples_version_targeting_play_1', 'solution_app_examples_version_targeting_play_2', 'solution_app_examples_version_targeting_play_3'],
+  },
+  'webapp-to-mobile': {
+    labelKey: 'solution_app_examples_webapp_to_mobile_label',
+    headlineKey: 'solution_app_examples_webapp_to_mobile_headline',
+    useCaseKey: 'solution_app_examples_webapp_to_mobile_use_case',
+    apps: [
+      { appId: 'com.polleverywhere.mobile', noteKey: 'solution_app_examples_webapp_to_mobile_app_1_note' },
+      { appId: 'com.freelancer.android.messenger', noteKey: 'solution_app_examples_webapp_to_mobile_app_2_note' },
+      { appId: 'de.tvspielfilm', noteKey: 'solution_app_examples_webapp_to_mobile_app_3_note' },
+    ],
+    playKeys: ['solution_app_examples_webapp_to_mobile_play_1', 'solution_app_examples_webapp_to_mobile_play_2', 'solution_app_examples_webapp_to_mobile_play_3'],
   },
   'white-label': {
     labelKey: 'solution_app_examples_white_label_label',

@@ -100,6 +100,30 @@ export const productTestimonials = {
   nativeBuildData: [sikafanka, mikolaj],
 } satisfies Record<string, ProductTestimonial[]>
 
+/** Testimonials picked per solution page audience (keys match SolutionAppExampleKey). */
+export const solutionTestimonials = {
+  agencies: [noTone, sergiu, nate],
+  'beta-testing': [nate, noTone, michael],
+  'build-without-mac': [sikafanka, mikolaj],
+  'cordova-to-capacitor': [mikolaj, sergiu, michael],
+  'cordova-to-capacitor-ai': [mikolaj, michael, sergiu],
+  'direct-updates': [kapil, sergiu, luis],
+  ecommerce: [kapil, sergiu, noTone],
+  fintech: [sergiu, noTone, kapil],
+  healthcare: [sergiu, kapil, noTone],
+  'ionic-enterprise-plugins': [mikolaj, sergiu],
+  'lovable-vibecoding-to-mobile': [sikafanka, kapil, luis],
+  'pr-preview': [nate, michael, noTone],
+  'production-updates': [sergiu, kapil, michael],
+  qsr: [kapil, sergiu, noTone],
+  'set-and-forget': [noTone, sergiu, kapil],
+  'solo-developers': [luis, kapil, nate],
+  startups: [kapil, nate, sikafanka],
+  'version-targeting': [noTone, nate, sergiu],
+  'webapp-to-mobile': [sikafanka, kapil, luis],
+  'white-label': [noTone, nate, sergiu],
+} satisfies Record<string, ProductTestimonial[]>
+
 export const allTestimonials = [luis, nate, kapil, noTone, sikafanka, mikolaj, michael, sergiu]
 
 /** Average star rating across every published customer testimonial above. */
