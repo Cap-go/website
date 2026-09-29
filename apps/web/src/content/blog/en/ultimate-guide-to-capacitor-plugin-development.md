@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T06:22:55.260Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-09-29T19:25:52.000Z
 head_image: /blog-images/ultimate-guide-to-capacitor-plugin-development.webp
 head_image_alt: "Ultimate Guide to Capacitor Plugin Development Capgo blog illustration"
 keywords: Capacitor, mobile apps, plugin development, iOS, Android, JavaScript, web technologies, security, performance, testing
