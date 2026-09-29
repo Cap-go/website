@@ -2,15 +2,11 @@
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import TeamAvatars from '@/components/TeamAvatars.astro'
-import RatingSummary from '@/components/RatingSummary.astro'
 import AppLogoStrip from '@/components/AppLogoStrip.astro'
 import HeroWorldMap from '@/components/HeroWorldMap.astro'
-import StackChips from '@/components/StackChips.astro'
-import { customerApps } from '@/config/customerApps'
 
 const nativeBuildUrl = getRelativeLocaleUrl(Astro.locals.locale, 'native-build')
 const teamUrl = 'https://book.capgo.app/demo/'
-const stackApps = customerApps.slice(0, 5)
 ---
 
 <section>
@@ -70,17 +66,6 @@ const stackApps = customerApps.slice(0, 5)
               </a>
             </p>
           </div>
-          <div class="flex flex-wrap items-center justify-center gap-3">
-            <span class="flex -space-x-1.5" aria-hidden="true">
-              {
-                stackApps.map((app) => (
-                  <img src={app.icon} alt="" width="32" height="32" loading="eager" decoding="async" class="h-8 w-8 rounded-[10px] object-cover ring-2 ring-[#0d1525]" />
-                ))
-              }
-            </span>
-            <RatingSummary align="center" showCustomers={false} />
-          </div>
-          <StackChips />
         </div>
       </div>
       <AppLogoStrip />

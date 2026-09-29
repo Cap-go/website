@@ -1,6 +1,7 @@
 ---
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
+import StackChips from '@/components/StackChips.astro'
 import { productIconPaths as iconPaths } from '@/config/productIcons'
 
 const locale = Astro.locals.locale
@@ -51,6 +52,9 @@ const groups = [
         {m.platform_overview_title({}, { locale })}
       </h2>
       <p class="mt-6 text-lg leading-8 text-pretty text-gray-400">{m.platform_overview_subtitle({}, { locale })}</p>
+      <div class="mt-8">
+        <StackChips />
+      </div>
     </div>
 
     <div class="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
