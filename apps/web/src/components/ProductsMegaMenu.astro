@@ -5,18 +5,15 @@ import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 
-type Preview =
-  | { kind: 'screen'; src: string; width: number; height: number; url: string }
-  | { kind: 'phone'; src: string; width: number; height: number }
-  | { kind: 'skills' | 'plugins' | 'ionic' }
+type Scene = 'live-update' | 'native-build' | 'observe' | 'notifications' | 'cli' | 'skills' | 'app' | 'plugins' | 'ionic'
 
 interface Product {
   href: string
   icon: string
+  scene: Scene
   name: string
   tagline: string
   desc: string
-  preview: Preview
   extra?: { href: string; label: string }
   groupStart?: boolean
 }
@@ -25,105 +22,106 @@ const products: Product[] = [
   {
     href: 'live-update',
     icon: 'bolt',
+    scene: 'live-update',
     name: m.platform_live_update_name({}, { locale }),
     tagline: m.menu_live_update_tagline({}, { locale }),
     desc: m.platform_live_update_desc({}, { locale }),
-    preview: { kind: 'screen', src: '/menu-previews/live-update.webp', width: 1100, height: 619, url: 'console.capgo.app' },
     extra: { href: 'data', label: m.nav_live_update_data({}, { locale }) },
   },
   {
     href: 'native-build',
     icon: 'cube',
+    scene: 'native-build',
     name: m.platform_native_build_name({}, { locale }),
     tagline: m.menu_native_build_tagline({}, { locale }),
     desc: m.platform_native_build_desc({}, { locale }),
-    preview: { kind: 'screen', src: '/menu-previews/native-build.webp', width: 1100, height: 733, url: 'capgo.app/native-build' },
     extra: { href: 'builder-data', label: m.nav_native_build_data({}, { locale }) },
   },
   {
     href: 'observe',
     icon: 'chart-bar',
+    scene: 'observe',
     name: m.platform_observe_name({}, { locale }),
     tagline: m.menu_observe_tagline({}, { locale }),
     desc: m.platform_observe_desc({}, { locale }),
-    preview: { kind: 'screen', src: '/menu-previews/observe.webp', width: 1100, height: 682, url: 'console.capgo.app' },
     groupStart: true,
   },
   {
     href: 'notifications',
     icon: 'bell',
+    scene: 'notifications',
     name: m.platform_notifications_name({}, { locale }),
     tagline: m.menu_notifications_tagline({}, { locale }),
     desc: m.platform_notifications_desc({}, { locale }),
-    preview: { kind: 'screen', src: '/menu-previews/notifications.webp', width: 1100, height: 619, url: 'console.capgo.app' },
   },
   {
     href: 'capgo-cli',
     icon: 'command-line',
+    scene: 'cli',
     name: m.nav_capgo_cli({}, { locale }),
     tagline: m.menu_cli_tagline({}, { locale }),
     desc: m.platform_cli_desc({}, { locale }),
-    preview: { kind: 'screen', src: '/menu-previews/cli.webp', width: 760, height: 428, url: 'capgo.app' },
     extra: { href: 'ci_cd', label: 'CI/CD' },
     groupStart: true,
   },
   {
     href: 'skills',
     icon: 'sparkles',
+    scene: 'skills',
     name: m.platform_skills_name({}, { locale }),
     tagline: m.menu_skills_tagline({}, { locale }),
     desc: m.platform_skills_desc({}, { locale }),
-    preview: { kind: 'skills' },
   },
   {
     href: 'app_mobile',
     icon: 'device-phone-mobile',
+    scene: 'app',
     name: m.platform_app_name({}, { locale }),
     tagline: m.menu_app_tagline({}, { locale }),
     desc: m.platform_app_desc({}, { locale }),
-    preview: { kind: 'phone', src: '/menu-previews/app-mobile.webp', width: 420, height: 747 },
   },
   {
     href: 'plugins',
     icon: 'puzzle-piece',
+    scene: 'plugins',
     name: m.platform_plugins_name({}, { locale }),
     tagline: m.menu_plugins_tagline({}, { locale }),
     desc: m.platform_plugins_desc({}, { locale }),
-    preview: { kind: 'plugins' },
     groupStart: true,
   },
   {
     href: 'ionic-enterprise-plugins',
     icon: 'shield-check',
+    scene: 'ionic',
     name: m.solutions_ionic_plugins_short({}, { locale }),
     tagline: m.menu_ionic_tagline({}, { locale }),
     desc: m.platform_ionic_desc({}, { locale }),
-    preview: { kind: 'ionic' },
   },
 ]
 
-const pluginChips = [
-  { name: 'Native Biometric', pkg: '@capgo/capacitor-native-biometric', color: '#22c55e' },
-  { name: 'Camera Preview', pkg: '@capgo/camera-preview', color: '#f97316' },
-  { name: 'Notifications', pkg: '@capgo/capacitor-notifications', color: '#3b82f6' },
-  { name: 'Purchases', pkg: '@revenuecat/purchases-capacitor', color: '#ec4899' },
-  { name: 'Uploader', pkg: '@capgo/capacitor-uploader', color: '#a855f7' },
-  { name: 'Native Market', pkg: '@capgo/capacitor-native-market', color: '#eab308' },
+const pluginTiles = [
+  ['Biometric', '#22c55e'],
+  ['Camera', '#f97316'],
+  ['Push', '#3b82f6'],
+  ['Purchases', '#ec4899'],
+  ['Uploader', '#a855f7'],
+  ['SQLite', '#14b8a6'],
+  ['Social login', '#eab308'],
+  ['Updater', '#44bcff'],
 ]
 
 const ionicRows = [
-  ['Identity Vault', '@capgo/capacitor-native-biometric'],
-  ['Secure Storage', '@capgo/capacitor-data-storage-sqlite'],
-  ['Auth Connect', '@capgo/capacitor-social-login'],
-  ['Appflow Live Updates', '@capgo/capacitor-updater'],
+  ['Identity Vault', 'native-biometric'],
+  ['Secure Storage', 'data-storage-sqlite'],
+  ['Auth Connect', 'social-login'],
 ]
 ---
 
 <div
-  class="mega grid grid-cols-[21rem_minmax(0,1fr)] overflow-hidden rounded-2xl border border-slate-600/60 bg-slate-900/95 shadow-2xl shadow-black/50 backdrop-blur-xl"
+  class="mega grid w-[50rem] grid-cols-[17rem_minmax(0,1fr)] overflow-hidden rounded-2xl border border-slate-600/60 bg-slate-900/95 shadow-2xl shadow-black/50 backdrop-blur-xl"
   data-mega-menu
 >
-  <ul class="border-r border-white/10 p-2">
+  <ul class="border-r border-white/10 p-1.5">
     {
       products.map((product, index) => (
         <li class:list={[{ 'mt-1 border-t border-white/10 pt-1': product.groupStart }]}>
@@ -131,27 +129,18 @@ const ionicRows = [
             href={getRelativeLocaleUrl(locale, product.href)}
             data-mega-item={index}
             aria-current={index === 0 ? 'true' : undefined}
-            class="mega-item flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#44BCFF]"
+            class="mega-item flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#44BCFF]"
           >
-            <span class="mega-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-colors">
-              <svg
-                class="h-[18px] w-[18px]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+            <span class="mega-icon flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white/5 text-slate-300 ring-1 ring-white/10 transition-colors">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 {productIconPaths[product.icon].map((d) => (
                   <path d={d} />
                 ))}
               </svg>
             </span>
             <span class="min-w-0">
-              <span class="block font-mono text-[12.5px] font-semibold tracking-wider text-white uppercase">{product.name}</span>
-              <span class="block truncate text-[13px] leading-5 text-slate-400">{product.tagline}</span>
+              <span class="block text-[13px] leading-5 font-semibold text-white">{product.name}</span>
+              <span class="block truncate text-xs leading-4 text-slate-400">{product.tagline}</span>
             </span>
           </a>
         </li>
@@ -159,105 +148,158 @@ const ionicRows = [
     }
   </ul>
 
-  <div class="relative min-h-[34rem] overflow-hidden bg-[#0b1120]">
+  <div class="relative overflow-hidden bg-[#0b1120]">
     <div class="mega-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>
     {
       products.map((product, index) => (
-        <div class:list={['mega-preview absolute inset-0', { 'is-active': index === 0 }]} data-mega-preview={index} aria-hidden={index === 0 ? undefined : 'true'}>
-          <div class="mega-stage absolute inset-x-8 top-8 bottom-28" aria-hidden="true">
-            {product.preview.kind === 'screen' && (
-              <div class="mega-window absolute top-0 left-0 w-[112%] overflow-hidden rounded-xl bg-white shadow-2xl ring-1 shadow-black/60 ring-white/15">
-                <div class="flex items-center gap-1.5 border-b border-slate-200 bg-slate-100 px-3 py-2">
-                  <i class="h-2 w-2 rounded-full bg-[#ff5f57]" />
-                  <i class="h-2 w-2 rounded-full bg-[#febc2e]" />
-                  <i class="h-2 w-2 rounded-full bg-[#28c840]" />
-                  <span class="ml-3 rounded-md bg-white px-2 py-0.5 font-mono text-[10px] text-slate-500">{product.preview.url}</span>
+        <div class:list={['mega-preview absolute inset-0 flex flex-col', { 'is-active': index === 0 }]} data-mega-preview={index} aria-hidden={index === 0 ? undefined : 'true'}>
+          <div class="mm-stage relative flex flex-1 items-center justify-center px-6 pt-5" aria-hidden="true">
+            {product.scene === 'live-update' && (
+              <div class="mm-lu flex items-center gap-5">
+                <div class="mm-term">
+                  <p>
+                    <span class="text-emerald-400">$</span> capgo bundle upload
+                  </p>
+                  <p class="mm-slot-2 text-emerald-400">✔ 1.0.1 live</p>
                 </div>
-                <img data-src={product.preview.src} alt="" width={product.preview.width} height={product.preview.height} decoding="async" class="block h-auto w-full" />
-              </div>
-            )}
-            {product.preview.kind === 'phone' && (
-              <div class="flex h-full items-start justify-center">
-                <div class="mega-phone w-[13rem] rounded-[2rem] bg-slate-800 p-1.5 shadow-2xl ring-1 shadow-black/60 ring-white/15">
-                  <img
-                    data-src={product.preview.src}
-                    alt=""
-                    width={product.preview.width}
-                    height={product.preview.height}
-                    decoding="async"
-                    class="block h-auto w-full rounded-[1.6rem]"
-                  />
+                <div class="mm-lane">
+                  <span class="mm-packet">1.0.1</span>
+                </div>
+                <div class="mm-phone">
+                  <div class="mm-phone-bar" />
+                  <div class="mm-row w-3/4" />
+                  <div class="mm-row w-1/2" />
+                  <div class="mm-row w-2/3" />
+                  <span class="mm-badge">
+                    <span class="mm-badge-old">v1.0.0</span>
+                    <span class="mm-badge-new">v1.0.1 ✓</span>
+                  </span>
                 </div>
               </div>
             )}
-            {product.preview.kind === 'skills' && (
-              <div class="mega-window absolute top-0 left-0 w-[104%] overflow-hidden rounded-xl bg-[#0a0b0e] font-mono text-[13px] leading-6 shadow-2xl ring-1 shadow-black/60 ring-white/15">
-                <div class="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
-                  <i class="h-2 w-2 rounded-full bg-[#ff5f57]" />
-                  <i class="h-2 w-2 rounded-full bg-[#febc2e]" />
-                  <i class="h-2 w-2 rounded-full bg-[#28c840]" />
-                  <span class="ml-3 text-[10px] text-slate-500">claude</span>
-                </div>
-                <div class="space-y-1.5 p-5 text-slate-300">
-                  <p>
-                    <span class="text-emerald-400">$</span> npx skills add Cap-go/capgo-skills
-                  </p>
-                  <p class="text-emerald-400">✔ capgo-live-updates · capgo-native-builds · capacitor-plugins …</p>
-                  <p class="pt-3 text-slate-500">&gt; Add live updates to this Capacitor app and ship a beta</p>
-                  <p>
-                    <span class="text-[#44BCFF]">●</span> Installing @capgo/capacitor-updater
-                  </p>
-                  <p>
-                    <span class="text-[#44BCFF]">●</span> Adding notifyAppReady() to src/main.ts
-                  </p>
-                  <p>
-                    <span class="text-[#44BCFF]">●</span> npx @capgo/cli bundle upload --channel beta
-                  </p>
-                  <p class="text-emerald-400">✔ Bundle 1.4.0 live on channel beta</p>
-                </div>
+
+            {product.scene === 'native-build' && (
+              <div class="mm-nb w-full max-w-[21rem] space-y-3">
+                {[
+                  ['iOS', '.ipa', 'App Store'],
+                  ['Android', '.aab', 'Play Store'],
+                ].map(([platform, artifact, store], row) => (
+                  <div class="mm-card flex items-center gap-3" style={`--row:${row}`}>
+                    <span class="w-14 text-xs font-semibold text-white">{platform}</span>
+                    <span class="mm-bar flex-1">
+                      <i />
+                    </span>
+                    <span class="mm-chip mm-slot-4">{artifact} ✓</span>
+                    <span class="mm-chip mm-chip-blue mm-slot-5">{store}</span>
+                  </div>
+                ))}
+                <p class="mm-slot-1 text-center font-mono text-[11px] text-slate-400">Cloud Mac · signing vault · no Xcode</p>
               </div>
             )}
-            {product.preview.kind === 'plugins' && (
-              <div class="flex h-full flex-col justify-center">
-                <p class="mb-4 font-mono text-xs font-semibold tracking-widest text-slate-400 uppercase">capgo.app/plugins</p>
-                <div class="grid grid-cols-2 gap-3">
-                  {pluginChips.map((plugin) => (
-                    <div class="flex items-center gap-3 rounded-xl bg-white/[0.06] p-3 ring-1 ring-white/10">
-                      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-sm font-bold text-white" style={`background:${plugin.color}`}>
-                        {plugin.name.slice(0, 1)}
-                      </span>
+
+            {product.scene === 'observe' && (
+              <div class="mm-card w-full max-w-[22rem] p-3">
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="mm-stat">
+                    <b>98.6%</b>
+                    <small>issue-free</small>
+                  </div>
+                  <div class="mm-stat">
+                    <b>781ms</b>
+                    <small>launch p90</small>
+                  </div>
+                  <div class="mm-stat">
+                    <b class="text-emerald-300">2.6.1</b>
+                    <small>latest</small>
+                  </div>
+                </div>
+                <svg class="mt-3 h-20 w-full" viewBox="0 0 300 80">
+                  <path class="mm-grid-line" d="M0 20H300M0 40H300M0 60H300" />
+                  <path class="mm-line" pathLength="1" d="M0 58 L30 54 L60 57 L90 50 L120 52 L150 24 L170 20 L190 46 L220 50 L250 44 L300 40" />
+                  <circle class="mm-alert" cx="160" cy="21" r="4" />
+                </svg>
+                <p class="mm-slot-4 mt-1 font-mono text-[10.5px] text-rose-300">▲ 2.6.0 spike · rolled back · 2.6.1 healthy</p>
+              </div>
+            )}
+
+            {product.scene === 'notifications' && (
+              <div class="mm-lock">
+                <p class="text-center text-2xl font-semibold text-white/90">9:41</p>
+                <div class="mt-3 space-y-2">
+                  {[
+                    ['Order shipped', 'Your package is on the way'],
+                    ['New message', 'Maya replied to your ticket'],
+                    ['Update ready', 'Silent live update applied'],
+                  ].map(([title, body], i) => (
+                    <div class:list={['mm-notif', `mm-slot-${i + 1}`]}>
+                      <span class="mm-notif-icon" />
                       <span class="min-w-0">
-                        <span class="block text-sm font-semibold text-white">{plugin.name}</span>
-                        <span class="block truncate font-mono text-[11px] text-slate-400">{plugin.pkg}</span>
+                        <b>{title}</b>
+                        <small>{body}</small>
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
             )}
-            {product.preview.kind === 'ionic' && (
-              <div class="flex h-full flex-col justify-center">
-                <p class="mb-4 grid grid-cols-[1fr_auto_1.4fr] gap-3 px-4 font-mono text-xs font-semibold tracking-widest text-slate-400 uppercase">
-                  <span>Ionic</span>
-                  <span aria-hidden="true" />
-                  <span>Capgo</span>
+
+            {product.scene === 'cli' && (
+              <div class="mm-term mm-term-lg">
+                <p>
+                  <span class="text-emerald-400">$</span> <span class="mm-type">npx @capgo/cli bundle upload</span>
                 </p>
-                <div class="overflow-hidden rounded-xl bg-white/[0.04] ring-1 ring-white/10">
-                  {ionicRows.map(([from, to]) => (
-                    <div class="grid grid-cols-[1fr_auto_1.4fr] items-center gap-3 border-b border-white/10 px-4 py-3.5 last:border-b-0">
-                      <span class="text-sm text-slate-400 line-through decoration-slate-600">{from}</span>
-                      <span class="text-slate-500">→</span>
-                      <span class="truncate font-mono text-xs text-emerald-300">{to}</span>
-                    </div>
-                  ))}
-                </div>
+                <p class="mm-slot-3 text-slate-400">↳ zipping 16 files · 4.2 MB</p>
+                <p class="mm-slot-4 text-emerald-400">✔ checksum verified</p>
+                <p class="mm-slot-5 text-emerald-400">✔ 1.4.0 live on production</p>
+              </div>
+            )}
+
+            {product.scene === 'skills' && (
+              <div class="w-full max-w-[21rem] space-y-2 text-xs">
+                <p class="mm-bubble mm-slot-1">Add live updates to this app and ship a beta</p>
+                {['Installed @capgo/capacitor-updater', 'Added notifyAppReady()', 'Uploaded 1.4.0 to channel beta'].map((step, i) => (
+                  <p class:list={['mm-step', `mm-slot-${i + 2}`]}>
+                    <span class="text-emerald-400">✔</span> {step}
+                  </p>
+                ))}
+              </div>
+            )}
+
+            {product.scene === 'app' && (
+              <div class="mm-phone mm-phone-scan">
+                <span class="mm-qr" />
+                <span class="mm-scanline" />
+                <span class="mm-toast mm-slot-4">Bundle 1.4.0 loaded ✓</span>
+              </div>
+            )}
+
+            {product.scene === 'plugins' && (
+              <div class="grid w-full max-w-[22rem] grid-cols-4 gap-2">
+                {pluginTiles.map(([name, color], i) => (
+                  <div class="mm-tile" style={`--i:${i}`}>
+                    <span style={`background:${color}`}>{name.slice(0, 1)}</span>
+                    <small>{name}</small>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {product.scene === 'ionic' && (
+              <div class="w-full max-w-[22rem] space-y-2">
+                {ionicRows.map(([from, to], i) => (
+                  <div class="mm-card mm-map flex items-center gap-2 px-3 py-2" style={`--i:${i}`}>
+                    <span class="mm-from text-xs text-slate-300">{from}</span>
+                    <span class="text-slate-500">→</span>
+                    <span class="mm-to truncate font-mono text-[11px] text-emerald-300">{to}</span>
+                  </div>
+                ))}
               </div>
             )}
           </div>
 
-          <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/95 to-transparent px-8 pt-16 pb-6">
-            <p class="max-w-md text-sm leading-6 text-slate-300">{product.desc}</p>
-            <div class="flex shrink-0 items-center gap-4 text-sm font-semibold">
+          <div class="flex items-end justify-between gap-4 border-t border-white/5 px-5 py-3.5">
+            <p class="line-clamp-2 text-xs leading-5 text-slate-400">{product.desc}</p>
+            <div class="flex shrink-0 items-center gap-3 text-xs font-semibold">
               {product.extra && (
                 <a href={getRelativeLocaleUrl(locale, product.extra.href)} class="text-slate-400 transition-colors hover:text-white">
                   {product.extra.label}
@@ -265,10 +307,9 @@ const ionicRows = [
               )}
               <a
                 href={getRelativeLocaleUrl(locale, product.href)}
-               
-                class="inline-flex items-center gap-1.5 rounded-lg bg-[#44BCFF] px-3.5 py-2 text-[#04121c] transition-colors hover:bg-white"
+                class="inline-flex items-center gap-1 rounded-md bg-[#44BCFF] px-2.5 py-1.5 text-[#04121c] transition-colors hover:bg-white"
               >
-                {m.menu_explore({}, { locale })} {product.name} <span aria-hidden="true">→</span>
+                {m.menu_explore({}, { locale })} <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
@@ -294,35 +335,613 @@ const ionicRows = [
   }
   .mega-backdrop {
     background:
-      radial-gradient(70% 60% at 80% 10%, rgb(68 188 255 / 0.18), transparent 70%),
-      radial-gradient(50% 50% at 0% 100%, rgb(37 99 235 / 0.16), transparent 70%),
-      radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.07) 1px, transparent 0) 0 0 / 22px 22px;
+      radial-gradient(70% 70% at 70% 30%, rgb(68 188 255 / 0.14), transparent 70%),
+      radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.06) 1px, transparent 0) 0 0 / 18px 18px;
   }
   .mega-preview {
     opacity: 0;
     visibility: hidden;
     transition:
-      opacity 0.2s ease,
-      visibility 0s linear 0.2s;
+      opacity 0.18s ease,
+      visibility 0s linear 0.18s;
   }
   .mega-preview.is-active {
     opacity: 1;
     visibility: visible;
     transition:
-      opacity 0.25s ease,
+      opacity 0.22s ease,
       visibility 0s;
   }
-  .mega-stage {
-    transform: translateY(10px);
-    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Loops only run for the visible preview while the menu is open. */
+  .mega-preview :global(*) {
+    animation-play-state: paused;
   }
-  .mega-preview.is-active .mega-stage {
-    transform: none;
+  :global(.group:is(:hover, :focus-within)) .mega-preview.is-active :global(*) {
+    animation-play-state: running;
   }
+
+  /* Shared building blocks */
+  .mm-card {
+    border-radius: 12px;
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.09);
+  }
+  .mm-term {
+    border-radius: 10px;
+    background: #05070b;
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.1),
+      0 12px 30px rgb(0 0 0 / 0.4);
+    padding: 10px 12px;
+    font:
+      11px/1.7 ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      monospace;
+    color: #e5e7eb;
+    white-space: nowrap;
+  }
+  .mm-term-lg {
+    width: 100%;
+    max-width: 22rem;
+    padding: 14px 16px;
+    font-size: 12px;
+  }
+  .mm-phone {
+    position: relative;
+    width: 92px;
+    height: 176px;
+    padding: 18px 10px 10px;
+    border-radius: 18px;
+    background: #f8fafc;
+    box-shadow:
+      0 0 0 4px #25282e,
+      0 14px 30px rgb(0 0 0 / 0.45);
+  }
+  .mm-phone-bar {
+    height: 10px;
+    width: 55%;
+    border-radius: 4px;
+    background: #0f172a;
+    margin-bottom: 10px;
+  }
+  .mm-row {
+    height: 18px;
+    border-radius: 6px;
+    background: #e2e8f0;
+    margin-bottom: 7px;
+  }
+  .mm-chip {
+    border-radius: 999px;
+    background: rgb(74 222 128 / 0.14);
+    color: #86efac;
+    padding: 2px 8px;
+    font:
+      600 10.5px/1.6 ui-monospace,
+      monospace;
+    white-space: nowrap;
+  }
+  .mm-chip-blue {
+    background: rgb(68 188 255 / 0.15);
+    color: #7dd3fc;
+  }
+
+  /* Sequenced reveal slots on a shared 5s loop: slot N appears at N×12% and all hide at 92%. */
+  .mm-slot-1,
+  .mm-slot-2,
+  .mm-slot-3,
+  .mm-slot-4,
+  .mm-slot-5 {
+    animation: 5s ease infinite both;
+  }
+  .mm-slot-1 {
+    animation-name: mm-slot-1;
+  }
+  .mm-slot-2 {
+    animation-name: mm-slot-2;
+  }
+  .mm-slot-3 {
+    animation-name: mm-slot-3;
+  }
+  .mm-slot-4 {
+    animation-name: mm-slot-4;
+  }
+  .mm-slot-5 {
+    animation-name: mm-slot-5;
+  }
+  @keyframes mm-slot-1 {
+    0%,
+    6% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    14%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes mm-slot-2 {
+    0%,
+    18% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    26%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes mm-slot-3 {
+    0%,
+    30% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    38%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes mm-slot-4 {
+    0%,
+    44% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    52%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes mm-slot-5 {
+    0%,
+    56% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    64%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Live Updates: bundle flies into the phone, version flips */
+  .mm-lane {
+    position: relative;
+    width: 70px;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.18) 0 5px, transparent 5px 10px);
+  }
+  .mm-packet {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: #44bcff;
+    color: #04121c;
+    font:
+      700 10px/1.6 ui-monospace,
+      monospace;
+    box-shadow: 0 0 14px rgb(68 188 255 / 0.7);
+    animation: mm-fly 5s ease-in-out infinite both;
+  }
+  @keyframes mm-fly {
+    0%,
+    26% {
+      left: -10px;
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    50% {
+      left: calc(100% - 20px);
+      opacity: 1;
+    }
+    56%,
+    100% {
+      left: calc(100% - 20px);
+      opacity: 0;
+    }
+  }
+  .mm-badge {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    translate: -50% 0;
+    display: grid;
+    font:
+      700 10px/1 ui-monospace,
+      monospace;
+    white-space: nowrap;
+  }
+  .mm-badge > span {
+    grid-area: 1 / 1;
+    padding: 4px 7px;
+    border-radius: 999px;
+  }
+  .mm-badge-old {
+    background: #e2e8f0;
+    color: #475569;
+    animation: mm-badge-old 5s infinite both;
+  }
+  .mm-badge-new {
+    background: #dcfce7;
+    color: #15803d;
+    animation: mm-badge-new 5s infinite both;
+  }
+  @keyframes mm-badge-old {
+    0%,
+    54% {
+      opacity: 1;
+    }
+    58%,
+    94% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes mm-badge-new {
+    0%,
+    54% {
+      opacity: 0;
+      scale: 0.8;
+    }
+    60%,
+    94% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Native Build: two build bars fill, artifacts then stores appear */
+  .mm-nb .mm-card {
+    padding: 10px 12px;
+  }
+  .mm-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.1);
+    overflow: hidden;
+  }
+  .mm-bar i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #44bcff;
+    animation: mm-fill 5s ease-in-out infinite both;
+    animation-delay: calc(var(--row) * 0.25s);
+  }
+  @keyframes mm-fill {
+    0%,
+    8% {
+      width: 0;
+    }
+    46%,
+    92% {
+      width: 100%;
+      background: #4ade80;
+    }
+    100% {
+      width: 0;
+    }
+  }
+
+  /* Observe: chart draws, spike marker, recovery note */
+  .mm-stat {
+    border-radius: 8px;
+    background: rgb(255 255 255 / 0.05);
+    padding: 6px 8px;
+  }
+  .mm-stat b {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+  }
+  .mm-stat small {
+    font-size: 10px;
+    color: #94a3b8;
+  }
+  .mm-grid-line {
+    stroke: rgb(255 255 255 / 0.07);
+    stroke-width: 1;
+    fill: none;
+  }
+  .mm-line {
+    fill: none;
+    stroke: #44bcff;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    animation: mm-draw 5s ease infinite both;
+  }
+  @keyframes mm-draw {
+    0% {
+      stroke-dashoffset: 1;
+      opacity: 1;
+    }
+    50%,
+    92% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+  }
+  .mm-alert {
+    fill: #fb7185;
+    transform-origin: 160px 21px;
+    animation: mm-ping 5s ease infinite both;
+  }
+  @keyframes mm-ping {
+    0%,
+    30% {
+      opacity: 0;
+      scale: 0;
+    }
+    36% {
+      opacity: 1;
+      scale: 1.6;
+    }
+    42%,
+    92% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Notifications: lock screen with stacked pushes */
+  .mm-lock {
+    width: 220px;
+    border-radius: 22px;
+    padding: 14px 12px 16px;
+    background: linear-gradient(160deg, #1e3a8a, #0f172a 75%);
+    box-shadow:
+      0 0 0 4px #25282e,
+      0 14px 30px rgb(0 0 0 / 0.45);
+  }
+  .mm-notif {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border-radius: 12px;
+    padding: 7px 9px;
+    background: rgb(255 255 255 / 0.14);
+    backdrop-filter: blur(6px);
+  }
+  .mm-notif b {
+    display: block;
+    font-size: 11px;
+    color: #fff;
+  }
+  .mm-notif small {
+    display: block;
+    font-size: 10px;
+    color: rgb(255 255 255 / 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mm-notif-icon {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    border-radius: 6px;
+    background: conic-gradient(from 45deg, #44bcff, #2563eb, #44bcff);
+  }
+
+  /* CLI: typed command */
+  .mm-type {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    animation: mm-type 5s steps(28, end) infinite both;
+  }
+  @keyframes mm-type {
+    0% {
+      width: 0;
+      opacity: 1;
+    }
+    30%,
+    92% {
+      width: 28ch;
+      opacity: 1;
+    }
+    100% {
+      width: 28ch;
+      opacity: 0;
+    }
+  }
+
+  /* AI Skills: prompt and agent steps */
+  .mm-bubble {
+    margin-left: auto;
+    width: fit-content;
+    max-width: 85%;
+    border-radius: 12px 12px 4px 12px;
+    background: #2563eb;
+    color: #fff;
+    padding: 7px 10px;
+  }
+  .mm-step {
+    border-radius: 8px;
+    background: rgb(255 255 255 / 0.05);
+    color: #e2e8f0;
+    padding: 6px 10px;
+    font-family: ui-monospace, monospace;
+    font-size: 11px;
+  }
+
+  /* Capgo app: QR scan */
+  .mm-phone-scan {
+    background: #05070b;
+    display: grid;
+    place-items: center;
+  }
+  .mm-qr {
+    width: 56px;
+    height: 56px;
+    border-radius: 4px;
+    background:
+      conic-gradient(#fff 25%, transparent 0 50%, #fff 0 75%, transparent 0) 0 0 / 14px 14px,
+      #0f172a;
+    box-shadow: 0 0 0 6px #0f172a;
+    opacity: 0.85;
+  }
+  .mm-scanline {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background: #44bcff;
+    box-shadow: 0 0 10px #44bcff;
+    animation: mm-scan 5s ease-in-out infinite both;
+  }
+  @keyframes mm-scan {
+    0% {
+      top: 50px;
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    22% {
+      top: 118px;
+    }
+    36% {
+      top: 50px;
+    }
+    44%,
+    100% {
+      opacity: 0;
+    }
+  }
+  .mm-toast {
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: 10px;
+    border-radius: 8px;
+    background: #dcfce7;
+    color: #15803d;
+    text-align: center;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 5px 4px;
+  }
+
+  /* Plugins: tiles pop in */
+  .mm-tile {
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+    border-radius: 10px;
+    background: rgb(255 255 255 / 0.05);
+    padding: 10px 4px 8px;
+    animation: mm-pop 5s ease infinite both;
+    animation-delay: calc(var(--i) * 0.12s);
+  }
+  .mm-tile span {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .mm-tile small {
+    font-size: 10px;
+    color: #cbd5e1;
+    white-space: nowrap;
+  }
+  @keyframes mm-pop {
+    0% {
+      opacity: 0;
+      scale: 0.85;
+    }
+    10%,
+    90% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Ionic: closed plugin crossed out, Capgo package appears */
+  .mm-map .mm-from {
+    background: linear-gradient(currentColor, currentColor) 0 55% / 0 1px no-repeat;
+    animation: mm-strike 5s ease infinite both;
+    animation-delay: calc(var(--i) * 0.35s);
+  }
+  .mm-map .mm-to {
+    animation: mm-slot-2 5s ease infinite both;
+    animation-delay: calc(var(--i) * 0.35s);
+  }
+  @keyframes mm-strike {
+    0%,
+    10% {
+      background-size: 0 1px;
+      opacity: 1;
+    }
+    24%,
+    90% {
+      background-size: 100% 1px;
+      opacity: 0.55;
+    }
+    100% {
+      background-size: 0 1px;
+      opacity: 1;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .mega-preview,
-    .mega-stage {
-      transition: none;
+    .mega-preview :global(*) {
+      animation: none !important;
+    }
+    .mm-bar i {
+      width: 100%;
+    }
+    .mm-badge-old {
+      opacity: 0;
+    }
+    .mm-map .mm-from {
+      background-size: 100% 1px;
     }
   }
 </style>
@@ -331,16 +950,6 @@ const ionicRows = [
   document.querySelectorAll<HTMLElement>('[data-mega-menu]').forEach((menu) => {
     const items = Array.from(menu.querySelectorAll<HTMLAnchorElement>('[data-mega-item]'))
     const previews = Array.from(menu.querySelectorAll<HTMLElement>('[data-mega-preview]'))
-    let loaded = false
-
-    // Screenshots only download the first time the menu opens, not on every page load.
-    const loadImages = () => {
-      if (loaded) return
-      loaded = true
-      menu.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((img) => {
-        img.src = img.dataset.src ?? ''
-      })
-    }
 
     const activate = (index: number) => {
       items.forEach((item, i) => {
@@ -348,15 +957,18 @@ const ionicRows = [
         else item.removeAttribute('aria-current')
       })
       previews.forEach((preview, i) => {
-        preview.classList.toggle('is-active', i === index)
-        if (i === index) preview.removeAttribute('aria-hidden')
-        else preview.setAttribute('aria-hidden', 'true')
+        const active = i === index
+        preview.classList.toggle('is-active', active)
+        if (active) {
+          preview.removeAttribute('aria-hidden')
+          // Restart the loop so each preview starts from its first frame.
+          preview.getAnimations({ subtree: true }).forEach((animation) => {
+            animation.currentTime = 0
+          })
+        } else preview.setAttribute('aria-hidden', 'true')
       })
     }
 
-    const trigger = menu.closest('[data-mega-root]') ?? menu
-    trigger.addEventListener('pointerenter', loadImages)
-    trigger.addEventListener('focusin', loadImages)
     items.forEach((item, index) => {
       item.addEventListener('pointerenter', () => activate(index))
       item.addEventListener('focus', () => activate(index))
