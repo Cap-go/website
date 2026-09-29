@@ -18,6 +18,19 @@ const messages = {
   about: 'About',
   about_capgo: 'About Capgo',
   about_capgo_description: 'Learn about Capgo, the live update solution for Capacitor apps built by Martin Donadieu. Delivering instant OTA updates to mobile apps since 2021.',
+  agent_ready_cli_desc: 'Every release action is a command. Script it in CI or let an agent run it.',
+  agent_ready_cli_title: 'CLI',
+  agent_ready_cta: 'Explore AI tooling',
+  agent_ready_eyebrow: 'AI-ready',
+  agent_ready_llms_desc: 'The full Capgo docs in one file, ready to paste into any model.',
+  agent_ready_llms_title: 'llms.txt',
+  agent_ready_mcp_desc: 'Tools for apps, bundles, channels, stats, and native builds, ready for any MCP client.',
+  agent_ready_mcp_title: 'MCP server',
+  agent_ready_skills_desc: 'Teach your agent the right way to add live updates, builds, and Capgo plugins.',
+  agent_ready_skills_title: 'Agent Skills',
+  agent_ready_subtitle:
+    'Claude Code, Cursor, Codex, or any agent can set up Capgo, upload bundles, manage channels, and request native builds. Every action is one command or one tool call.',
+  agent_ready_title: 'Building blocks for agentic workflows',
   app_strip_installs: '{count} installs',
   app_strip_stats: '{teams} teams. {devices} devices. {stars} GitHub stars.',
   app_strip_title: 'Trusted in production by:',
@@ -2102,7 +2115,7 @@ const messages = {
   live_update_decision_3: 'Your team needs compliance-friendly control: signed bundles, rollback, auditability, and a self-hosting path.',
   live_update_decision_title: 'Choose live updates when these statements are true',
   live_update_cta_subtitle: 'Start automatic in 5 minutes. Switch to manual control when your release strategy needs it.',
-  live_update_cta_title: 'Ready for the Most Complete Capacitor Live Update System?',
+  live_update_cta_title: 'Ship your next fix today.',
   live_update_delta_command: 'Upload with delta updates enabled',
   live_update_delta_desc:
     'Traditional updates download the entire bundle every time. With delta updates, devices only download the files that actually changed - saving 50-90% bandwidth.',
@@ -4611,7 +4624,7 @@ const messages = {
   store_policy_google_label: 'Google Play Device and Network Abuse policy',
   store_policy_incident_body:
     "Our splash screen auto-hide feature linked at runtime to the separate splash screen plugin. Apple's review flagged that dynamic linking as a dynamic code concern. It was unrelated to OTA updates, and we removed the dynamic link from the plugin.",
-  store_policy_incident_label: 'The one time Apple flagged us',
+  store_policy_incident_label: 'Has Apple ever flagged Capgo?',
   store_policy_lead:
     'Not for using live updates. Both stores let apps download interpreted code like JavaScript, HTML, and CSS, as long as each update stays within the app you submitted for review.',
   store_policy_note: 'Review decisions always belong to Apple and Google, so no vendor can promise approval. Capgo keeps you on the side of the policies they publish.',

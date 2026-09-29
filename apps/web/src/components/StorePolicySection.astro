@@ -53,18 +53,20 @@ const rules = [
           <p class="text-sm leading-6 text-gray-300">{m.store_policy_record_body({ apps: siteMetrics.apps }, { locale })}</p>
         </div>
 
-        <div class="mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-          <p class="flex items-center gap-2 text-sm font-semibold text-white">
-            <svg class="h-4 w-4 text-amber-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <details class="group/incident mt-4 rounded-2xl border border-white/10 bg-white/[0.03]">
+          <summary
+            class="flex cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-6 py-4 text-sm font-medium text-gray-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [&::-webkit-details-marker]:hidden [@media(hover:hover)]:hover:text-white"
+          >
+            {m.store_policy_incident_label({}, { locale })}
+            <svg class="h-4 w-4 shrink-0 text-gray-500 transition-transform group-open/incident:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path
                 fill-rule="evenodd"
-                d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 6a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 6Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
                 clip-rule="evenodd"></path>
             </svg>
-            {m.store_policy_incident_label({}, { locale })}
-          </p>
-          <p class="mt-2 text-sm leading-6 text-gray-400">{m.store_policy_incident_body({}, { locale })}</p>
-        </div>
+          </summary>
+          <p class="px-6 pb-5 text-sm leading-6 text-gray-400">{m.store_policy_incident_body({}, { locale })}</p>
+        </details>
       </div>
 
       <div class="grid content-start gap-4">

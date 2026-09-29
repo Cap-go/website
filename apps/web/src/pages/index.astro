@@ -13,6 +13,7 @@ import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import AskAiSection from '@/components/AskAiSection.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
 
 const config = Astro.locals.runtimeConfig
 
@@ -81,6 +82,7 @@ const content = {
     <Hero />
     <ProblemSolution />
     <PlatformOverview />
+    <AgentReadySection />
     <HowItWorks />
     <StorePolicySection />
     <GlobalInfrastructure />
