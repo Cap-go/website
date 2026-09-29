@@ -29,12 +29,12 @@ const teamUrl = 'https://book.capgo.app/demo/'
 
         <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-[1.08] xl:text-[5.25rem]">
           <span class="sr-only">Capgo. </span>
-          <span class="lg:whitespace-nowrap">Everything you need to ship</span>
+          <span class="lg:whitespace-nowrap">{m.hero_title_line1({}, { locale: Astro.locals.locale })}</span>
           <br />
-          <span class="text-azure-500">CapacitorJS apps</span>
+          <span class="text-azure-500">{m.hero_title_line2({}, { locale: Astro.locals.locale })}</span>
         </h1>
         <p class="font-inter mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl">
-          Live updates, native builds, channels, rollback, and release automation for CapacitorJS apps.
+          {m.hero_subtitle_v2({}, { locale: Astro.locals.locale })}
         </p>
         <div class="mt-10 flex flex-col items-center gap-4">
           <div class="flex flex-col items-center gap-4 sm:flex-row">
