@@ -22,8 +22,6 @@ const appExamples = example.apps.map((appReference) => ({
   note: copy(appReference.noteKey),
 }))
 const plays = example.playKeys.map((playKey) => copy(playKey))
-const toTitleCase = (value: string) => value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
-const categories = [...new Set(appExamples.map(({ app }) => toTitleCase(renameCat(app.category))).filter(Boolean))].slice(0, 3).join(', ')
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
 const showExampleCtas = solution === 'enterprise'
@@ -117,22 +115,6 @@ const showExampleCtas = solution === 'enterprise'
                     </dd>
                   </div>
                 </dl>
-
-                <a
-                  href={app.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="solution-app-example-link mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[#44BCFF] transition-colors hover:text-white focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
-                >
-                  <span>{copy('solution_app_examples_view_listing')}</span>
-                  <svg class="h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path
-                      fill-rule="evenodd"
-                      d="M5.22 14.78a.75.75 0 0 1 0-1.06L12.94 6H8.75a.75.75 0 0 1 0-1.5h6a.75.75 0 0 1 .75.75v6a.75.75 0 0 1-1.5 0V7.06l-7.72 7.72a.75.75 0 0 1-1.06 0Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
               </article>
             ))}
           </div>
@@ -171,11 +153,6 @@ const showExampleCtas = solution === 'enterprise'
               </a>
             </div>
           </aside>
-
-          <p class="mt-4 text-xs leading-5 text-gray-500">
-            {copy('solution_app_examples_source')}: {copy('solution_app_examples_public_store_dataset')} · {copy('solution_app_examples_store_categories')}: {categories}.{' '}
-            {copy('solution_app_examples_disclaimer')}
-          </p>
         </div>
       </div>
     </section>

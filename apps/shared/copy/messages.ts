@@ -5505,7 +5505,7 @@ const messages = {
   native_build_v2_cta_meta1: 'No credit card to start',
   native_build_v2_cta_meta2: '14-day free trial',
   native_build_v2_cta_meta3: 'Cancel anytime',
-  solution_app_examples_eyebrow: 'Apps built with Capacitor',
+  solution_app_examples_eyebrow: 'Other apps built with Capacitor',
   solution_app_examples_example_type: 'App type',
   solution_app_examples_store_categories: 'Store categories',
   solution_app_examples_source: 'Source',
