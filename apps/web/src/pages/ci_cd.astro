@@ -441,12 +441,12 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
             <div class="mt-1 text-sm text-gray-600">Manual Steps Required</div>
           </div>
           <div class="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm">
-            <div class="text-3xl font-bold text-gray-900">100%</div>
-            <div class="mt-1 text-sm text-gray-600">Build Success Rate</div>
+            <div class="text-3xl font-bold text-gray-900">iOS + Android</div>
+            <div class="mt-1 text-sm text-gray-600">From One Workflow</div>
           </div>
           <div class="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm">
-            <div class="text-3xl font-bold text-gray-900">5 min</div>
-            <div class="mt-1 text-sm text-gray-600">Average Build Time</div>
+            <div class="text-3xl font-bold text-gray-900">2–3 min</div>
+            <div class="mt-1 text-sm text-gray-600">Typical Build Time</div>
           </div>
         </div>
       </div>
@@ -595,7 +595,7 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
         <div class="mx-auto mt-5 grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-3">
           <div class="rounded-xl border border-white/10 bg-white/[0.04] p-4 text-center">
             <p class="text-sm font-medium text-gray-400">Starts at</p>
-            <p class="mt-1 text-3xl font-bold text-white">$12/mo</p>
+            <p class="mt-1 text-3xl font-bold text-white">$14/mo</p>
           </div>
           <div class="rounded-xl border border-white/10 bg-white/[0.04] p-4 text-center">
             <p class="text-sm font-medium text-gray-400">Included usage</p>
@@ -656,7 +656,7 @@ gh secret set -f .env.capgo.com.example.app
 npm ci
 npm run build
 npx cap sync
-npx @capgo/cli@latest build com.example.app --platform android --build-mode release</code></pre>
+npx @capgo/cli@latest build request com.example.app --platform android --build-mode release</code></pre>
           </div>
 
           <div class="rounded-2xl border border-white/10 bg-gray-800 p-6">

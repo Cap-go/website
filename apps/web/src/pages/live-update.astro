@@ -11,6 +11,7 @@ import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
+import StorePolicySection from '@/components/StorePolicySection.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -412,6 +413,7 @@ const featureTiles = [
 
     <ReleaseExplainers background="bg-transparent" />
     <UpdateTypesSection background="bg-transparent" />
+    <StorePolicySection background="bg-transparent" />
 
     <section class="section" id="compare">
       <div class="shell">

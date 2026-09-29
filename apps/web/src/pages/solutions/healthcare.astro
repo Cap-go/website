@@ -244,8 +244,7 @@ npx @capgo/cli bundle upload --channel internal-qa
 <span class="text-gray-500"># After QA approval, promote to production</span>
 npx @capgo/cli channel set production --bundle 2.4.1
 
-<span class="text-cyan-400">✔</span> Audit log: bundle promoted by admin@hospital.org
-<span class="text-cyan-400">✔</span> All devices receive update on next app open</code></pre>
+<span class="text-cyan-400">✔</span> Devices on production receive the update on next app open</code></pre>
             </div>
           </div>
 
@@ -314,10 +313,10 @@ npx @capgo/cli channel set production --bundle 2.4.1
             <div class="rounded-xl bg-gray-900 p-4">
               <pre
                 class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># Bundle encrypted before upload</span>
-npx @capgo/cli bundle upload --key private.pem
+npx @capgo/cli bundle upload --key-v2
 
 <span class="text-purple-400">🔐</span> Bundle encrypted with your private key
-<span class="text-purple-400">🔐</span> Only devices with matching key can decrypt
+<span class="text-purple-400">🔐</span> Only your app, with the matching public key, can decrypt
 <span class="text-purple-400">🔐</span> Capgo servers never see unencrypted code</code></pre>
             </div>
           </div>
@@ -385,12 +384,9 @@ npx @capgo/cli bundle upload --key private.pem
             <div class="rounded-xl bg-gray-800 p-4">
               <pre
                 class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># Every bundle links to exact source code</span>
-npx @capgo/cli bundle upload
-
-<span class="text-blue-400">📎</span> Commit: <span class="text-green-400">a1b2c3d</span>
-<span class="text-blue-400">📎</span> Branch: main
-<span class="text-blue-400">📎</span> Author: dev@hospital.org
-<span class="text-blue-400">📎</span> Message: "Fix dosage rounding for pediatric patients"
+npx @capgo/cli bundle upload \
+  --comment "Fix dosage rounding ($(git rev-parse --short HEAD))" \
+  --link "https://github.com/your-org/your-app/commit/$(git rev-parse HEAD)"
 
 <span class="text-gray-500"># Auditors can trace any bundle to its source</span></code></pre>
             </div>
@@ -418,8 +414,7 @@ const info = await CapacitorUpdater.current()
 
 <span class="text-gray-500">// Display in app settings</span>
 console.log(info.bundle.version)  <span class="text-gray-500">// "2.4.1"</span>
-console.log(info.bundle.message)  <span class="text-gray-500">// "HIPAA audit passed"</span>
-console.log(info.bundle.url)      <span class="text-gray-500">// Link to commit</span></code></pre>
+console.log(info.native)          <span class="text-gray-500">// Native app version</span></code></pre>
             </div>
           </div>
         </div>
