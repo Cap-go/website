@@ -44,31 +44,19 @@ const productMenu = [
 ]
 ---
 
-<header class="relative z-50 py-2">
+<header class="sticky top-0 z-50 py-3">
   <span id="header-auth-live" class="sr-only" aria-live="polite" aria-atomic="true"></span>
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between">
-      <div class="flex shrink-0 items-center">
-        <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label={m.capgo_home({}, { locale: Astro.locals.locale })} class="font-prompt flex items-center pr-2 font-medium">
-          <img class="h-8 w-auto pr-1 md:h-9 lg:h-10" loading="eager" height="40" width="144" alt={`${brand} logo`} src="/capgo_logo_header.webp" />
-        </a>
-      </div>
-      <div class="flex md:hidden">
-        <button
-          type="button"
-          class="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          aria-label={m.expand_menu({}, { locale: Astro.locals.locale })}
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-          id="menu-toggle"
+    <div class="relative flex items-center justify-between gap-3 md:justify-center">
+      <div class="header-pill relative flex min-w-0 items-center rounded-2xl border border-white/10 bg-[#101216]/80 py-1.5 pr-1.5 pl-3 shadow-lg shadow-black/30 backdrop-blur-xl">
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale)}
+          aria-label={m.capgo_home({}, { locale: Astro.locals.locale })}
+          class="font-prompt flex shrink-0 items-center pr-2 font-medium md:pr-3"
         >
-          <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="hidden md:flex md:flex-1 md:items-center md:gap-4 lg:gap-6 xl:gap-8">
-        <nav class="flex items-center gap-1 lg:gap-2 xl:gap-4 2xl:gap-6">
+          <img class="h-7 w-auto pr-1 lg:h-8" loading="eager" height="40" width="144" alt={`${brand} logo`} src="/capgo_logo_header.webp" />
+        </a>
+        <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">
           <!-- Docs -->
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
@@ -153,11 +141,13 @@ const productMenu = [
             {m.blog({}, { locale: Astro.locals.locale })}
           </a>
         </nav>
-        <div class="ml-auto flex shrink-0 items-center gap-2 xl:gap-3">
+      </div>
+      <div class="hidden shrink-0 items-center gap-2 md:flex">
+        <div class="flex items-center rounded-2xl border border-white/10 bg-[#101216]/80 p-1 shadow-lg shadow-black/30 backdrop-blur-xl">
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
             aria-label={m.github_stars({}, { locale: Astro.locals.locale })}
-            class="hidden h-10 items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/80 px-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:flex"
+            class="hidden h-10 items-center gap-2 rounded-xl px-3 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none xl:flex"
           >
             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -173,7 +163,7 @@ const productMenu = [
             aria-label={m.login({}, { locale: Astro.locals.locale })}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
+            class="flex h-10 items-center rounded-xl px-3 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
           >
             {m.login({}, { locale: Astro.locals.locale })}
           </a>
@@ -183,35 +173,49 @@ const productMenu = [
             target="_blank"
             rel="noopener noreferrer"
             aria-label={m.request_demo({}, { locale: Astro.locals.locale })}
-            class="font-pj flex h-10 items-center rounded-xl bg-blue-500 px-3 text-sm font-semibold whitespace-nowrap text-white shadow-lg shadow-blue-600/25 transition-colors hover:bg-blue-400 focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none xl:px-4"
+            class="flex h-10 items-center rounded-xl px-3 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
             role="button"
           >
             {m.request_demo({}, { locale: Astro.locals.locale })}
           </a>
-          <a
-            data-guest-auth-link
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={m.register({}, { locale: Astro.locals.locale })}
-            class="font-pj hidden h-10 items-center rounded-xl border border-slate-600 bg-slate-900/20 px-3 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:border-slate-400 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:outline-none lg:flex xl:px-4"
-            role="button"
-          >
-            {m.register({}, { locale: Astro.locals.locale })}
-          </a>
-          <a
-            data-console-auth-link
-            hidden
-            href="https://console.capgo.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={m.console({}, { locale: Astro.locals.locale })}
-            class="font-pj flex h-10 items-center rounded-xl border border-slate-600 bg-slate-900/20 px-4 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:outline-none"
-            role="button"
-          >
-            {m.console({}, { locale: Astro.locals.locale })}
-          </a>
         </div>
+        <a
+          data-guest-auth-link
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={m.register({}, { locale: Astro.locals.locale })}
+          class="font-pj flex h-11 items-center rounded-2xl bg-white px-4 text-sm font-semibold whitespace-nowrap text-gray-950 shadow-lg shadow-black/30 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
+          role="button"
+        >
+          {m.register({}, { locale: Astro.locals.locale })}
+        </a>
+        <a
+          data-console-auth-link
+          hidden
+          href="https://console.capgo.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={m.console({}, { locale: Astro.locals.locale })}
+          class="font-pj flex h-11 items-center rounded-2xl bg-white px-4 text-sm font-semibold whitespace-nowrap text-gray-950 shadow-lg shadow-black/30 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
+          role="button"
+        >
+          {m.console({}, { locale: Astro.locals.locale })}
+        </a>
+      </div>
+      <div class="flex md:hidden">
+        <button
+          type="button"
+          class="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-[#101216]/80 text-white shadow-lg shadow-black/30 backdrop-blur-xl transition-colors hover:bg-white/10 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          aria-label={m.expand_menu({}, { locale: Astro.locals.locale })}
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          id="menu-toggle"
+        >
+          <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
