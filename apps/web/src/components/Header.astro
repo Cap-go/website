@@ -161,9 +161,7 @@ const mobileSolutions = [
 
 const mobileLinks = [
   { href: 'docs', label: m.docs({}, { locale: Astro.locals.locale }) },
-  { href: 'enterprise', label: m.enterprise_title({}, { locale: Astro.locals.locale }) },
   { href: 'pricing', label: m.pricing({}, { locale: Astro.locals.locale }) },
-  { href: 'blog', label: m.blog({}, { locale: Astro.locals.locale }) },
 ]
 ---
 
@@ -240,13 +238,6 @@ const mobileLinks = [
               <SolutionsMegaMenu />
             </div>
           </div>
-          <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
-            aria-label={m.enterprise_title({}, { locale: Astro.locals.locale })}
-            class="hidden h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none lg:flex xl:px-2"
-          >
-            {m.enterprise_title({}, { locale: Astro.locals.locale })}
-          </a>
           <!-- Pricing -->
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
@@ -254,14 +245,6 @@ const mobileLinks = [
             class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
           >
             {m.pricing({}, { locale: Astro.locals.locale })}
-          </a>
-          <!-- Blog -->
-          <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
-            aria-label={m.blog({}, { locale: Astro.locals.locale })}
-            class="hidden h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none lg:flex xl:px-2"
-          >
-            {m.blog({}, { locale: Astro.locals.locale })}
           </a>
           <span class="mx-1 h-5 w-px bg-white/10" aria-hidden="true"></span>
           <a
