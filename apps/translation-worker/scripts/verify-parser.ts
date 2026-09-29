@@ -164,7 +164,7 @@ const supportContext = __translationWorkerTest.resolveTranslationContexts(['Supp
 assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('ssr-metrics-bootstrap-v1'), 'Cache version was not bumped for SSR metrics bootstrap support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('short-ui-length-defer-v1'), 'Cache version was not bumped for short UI length guard deferral')
 
 assert(__translationWorkerTest.translationWordCount('Ship mobile updates instantly') === 4, 'Word count did not count a short English headline')
 assert(__translationWorkerTest.translationWordCount('Évitez l\u2019attente de l\u2019App Store.') === 5, 'Word count did not count elided French words')
@@ -201,8 +201,20 @@ assert(
 )
 assert(
   __translationWorkerTest.guardTranslationLength('Ship mobile updates instantly', 'Déployez des mises à jour mobiles instantanément aux utilisateurs partout', 'French') ===
+    'Déployez des mises à jour mobiles instantanément aux utilisateurs partout',
+  'Length guard defers overlong short UI copy to word-count enforcement',
+)
+assert(
+  __translationWorkerTest.translationWordCountViolation(
     'Ship mobile updates instantly',
-  'Length guard still falls back to English for character-length violations',
+    'Déployez des mises à jour mobiles instantanément aux utilisateurs partout',
+    'French',
+  ),
+  'Word count guard still rejects overlong short UI copy',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Ship updates instantly', 'Envía actualizaciones al instante', 'Spanish'),
+  'Character length guard rejected valid short Spanish headline translation used by deploy probe',
 )
 assert(
   __translationWorkerTest.pickShortestWordCountCandidate('Ship mobile updates instantly', [
