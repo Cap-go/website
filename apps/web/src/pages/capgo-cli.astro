@@ -30,34 +30,6 @@ const docsUrl = getRelativeLocaleUrl(locale, 'docs/cli')
 
 const heroMeta = ['MCP tools for AI agents', 'OTA or native release checks', 'Signed builds from the same terminal']
 
-const capabilities = [
-  {
-    title: 'MCP server for AI-assisted release work',
-    description:
-      'Start the CLI MCP server so agents can list and manage apps, upload bundles, manage channels, check compatibility, request native builds, run diagnostics, and generate encryption keys.',
-  },
-  {
-    title: 'Safe live-update uploads',
-    description: 'Upload bundles with compatibility gates, delta updates, encryption, metadata, cleanup, and QR preview links for quick test passes.',
-  },
-  {
-    title: 'OTA or native build decision support',
-    description:
-      'Run compatibility or release-type commands before production. When native dependencies change, the CLI points you toward a native build instead of a risky live update.',
-  },
-  {
-    title: 'Native build requests from the same terminal',
-    description: 'Request cloud builds for iOS or Android, keep output links and QR records for automation, and avoid parking signing credentials permanently on Capgo.',
-  },
-  {
-    title: 'Device and simulator loops',
-    description: 'Initialize the app, run it on physical devices or simulators, and keep the native verification step near the release command.',
-  },
-  {
-    title: 'App, channel, and bundle operations',
-    description: 'Use CLI and MCP commands to add apps, update channels, inspect bundles, clean old releases, probe delivery, and read account or organization state.',
-  },
-]
 
 const commands = [
   {
@@ -260,38 +232,6 @@ const comparisonRows = [
     </section>
   </div>
 
-  <section class="bg-[#1a1a1a] py-16 sm:py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
-        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">What the CLI gives your team</p>
-        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Release automation for CapacitorJS apps with a native safety check built in</h2>
-        <p class="mt-5 text-base leading-7 text-pretty text-slate-300">
-          The CLI is the path from local Capacitor project to production release. It sets up the app, verifies what can ship OTA, and keeps native build work available when
-          dependencies require it.
-        </p>
-      </div>
-
-      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {
-          capabilities.map((capability) => (
-            <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
-              <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-200 ring-1 ring-cyan-300/25">
-                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold tracking-tight text-white">{capability.title}</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-300">{capability.description}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
 
   <ProductVideoSection youtubeId={productVideos.cli.youtubeId} title={productVideos.cli.title} description={productVideos.cli.description} />
 

@@ -298,90 +298,8 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
       </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="bg-gray-900 py-16 sm:py-20 lg:py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mb-16 text-center">
-          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
-            From Code to App Stores <span class="text-green-400">Automatically</span>
-          </h2>
-          <p class="mx-auto mt-4 max-w-3xl text-lg text-gray-300">
-            <span class="text-gray-100">Stop manual builds</span> and certificate management. Here's how CI/CD transforms your workflow:
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
-          <!-- Step 1 -->
-          <div class="text-center">
-            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-700/40 ring-2 ring-white/15">
-              <span class="text-2xl font-bold text-gray-100">1</span>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-white">Prepare Build Credentials</h3>
-            <p class="text-gray-300">
-              Run Capgo Build locally once, then export your iOS and Android signing credentials as CI secrets.
-              <span class="font-semibold text-gray-100">Your pipeline gets the credentials it needs without committing them to git.</span>
-            </p>
-            <div class="mt-4 text-sm text-gray-100">✓ Credentials stay in your CI secret store</div>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="text-center">
-            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-700/40 ring-2 ring-white/15">
-              <span class="text-2xl font-bold text-gray-100">2</span>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-white">Push Code, Trigger Capgo Build</h3>
-            <p class="text-gray-300">
-              GitHub Actions, GitLab CI, Jenkins, or any runner can call the Capgo CLI after your web build and Capacitor sync.
-              <span class="font-semibold text-gray-100">No Mac runner is required for iOS builds.</span>
-            </p>
-            <div class="mt-4 text-sm text-gray-100">✓ Repeatable builds from the same workflow</div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="text-center">
-            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-700/40 ring-2 ring-white/15">
-              <span class="text-2xl font-bold text-gray-100">3</span>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-white">Download or Submit Artifacts</h3>
-            <p class="text-gray-300">
-              Use debug builds for testing, upload artifacts for QA, or let release builds submit to TestFlight and Play Store.
-              <span class="font-semibold text-gray-100">Your CI/CD workflow controls when each path runs.</span>
-            </p>
-            <div class="mt-4 text-sm text-gray-100">✓ Same CLI for manual and release workflows</div>
-          </div>
-        </div>
-
-        <!-- Urgency CTA -->
-        <div class="mt-16 text-center">
-          <div class="mx-auto max-w-2xl rounded-2xl border border-gray-700 bg-gray-800/50 p-8 backdrop-blur-sm">
-            <h3 class="mb-4 text-2xl font-bold text-white">How much time are you wasting on manual builds?</h3>
-            <p class="mb-6 text-gray-300">
-              Every manual build is hours of developer time lost. Inconsistent environments cause bugs that take days to debug.
-              <span class="font-semibold text-gray-100">Your team's productivity is suffering.</span>
-            </p>
-            <div class="group relative inline-flex">
-              <div
-                class="pointer-events-none absolute -inset-4 rounded-xl opacity-60 transition-all duration-300 group-hover:-inset-5 group-hover:opacity-85"
-                style="background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 70%);"
-              >
-              </div>
-              <a
-                href={githubActionsDocsUrl}
-                class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
-              >
-                Open GitHub Actions Guide
-                <svg aria-hidden="true" focusable="false" class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Build Progress Visualization Section -->
-    <section class="bg-gray-50 py-16 sm:py-20 lg:py-24">
+    <section class="border-t border-gray-200 bg-gray-50 py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-16 text-center">
           <h2 class="text-3xl leading-tight font-bold text-gray-900 sm:text-4xl">Watch Your Apps Build Automatically</h2>
@@ -529,116 +447,6 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
           <div class="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm">
             <div class="text-3xl font-bold text-gray-900">5 min</div>
             <div class="mt-1 text-sm text-gray-600">Average Build Time</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="bg-gray-900 py-16 sm:py-20 lg:py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mb-16 text-center">
-          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">Why Automate with CI/CD?</h2>
-          <p class="mx-auto mt-4 max-w-3xl text-lg text-gray-300">Transform your mobile deployment workflow with these powerful benefits</p>
-        </div>
-
-        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <!-- Faster Deployments -->
-          <div class="group relative">
-            <div class="absolute inset-0 rounded-2xl bg-gray-800/40 blur-xl transition-all duration-300 group-hover:bg-gray-700/60"></div>
-            <div class="relative rounded-2xl border border-gray-600/40 bg-gray-800/80 p-8 backdrop-blur-sm">
-              <div class="mb-6 flex items-center">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
-                  <svg aria-hidden="true" focusable="false" class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                  </svg>
-                </div>
-                <h3 class="ml-4 text-xl font-bold text-white">Automated Native Builds</h3>
-              </div>
-              <p class="mb-4 text-gray-300">Push code and get native iOS and Android builds automatically. No manual Xcode or Android Studio required - builds run in the cloud.</p>
-              <div class="flex items-center text-sm text-gray-100">
-                <svg aria-hidden="true" focusable="false" class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Build iOS apps without owning a Mac
-              </div>
-            </div>
-          </div>
-
-          <!-- Zero Downtime -->
-          <div class="group relative">
-            <div class="absolute inset-0 rounded-2xl bg-gray-800/40 blur-xl transition-all duration-300 group-hover:bg-gray-700/15"></div>
-            <div class="relative rounded-2xl border border-gray-600/40 bg-gray-800/80 p-8 backdrop-blur-sm">
-              <div class="mb-6 flex items-center">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
-                  <svg aria-hidden="true" focusable="false" class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </div>
-                <h3 class="ml-4 text-xl font-bold text-white">Zero Downtime Updates</h3>
-              </div>
-              <p class="mb-4 text-gray-300">Updates happen in the background while your app is running. Users never experience interruptions or forced updates.</p>
-              <div class="flex items-center text-sm text-gray-100">
-                <svg aria-hidden="true" focusable="false" class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Seamless background installation
-              </div>
-            </div>
-          </div>
-
-          <!-- Automated Testing -->
-          <div class="group relative">
-            <div class="absolute inset-0 rounded-2xl bg-gray-800/40 blur-xl transition-all duration-300 group-hover:bg-gray-700/60"></div>
-            <div class="relative rounded-2xl border border-gray-600/40 bg-gray-800/80 p-8 backdrop-blur-sm">
-              <div class="mb-6 flex items-center">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
-                  <svg aria-hidden="true" focusable="false" class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-                  </svg>
-                </div>
-                <h3 class="ml-4 text-xl font-bold text-white">Automated Quality Gates</h3>
-              </div>
-              <p class="mb-4 text-gray-300">Only deploy when tests pass. Integrate with your existing test suites and quality checks for bulletproof releases.</p>
-              <div class="flex items-center text-sm text-gray-100">
-                <svg aria-hidden="true" focusable="false" class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Deploy only when tests pass
-              </div>
-            </div>
-          </div>
-
-          <!-- Rollback Safety -->
-          <div class="group relative">
-            <div class="absolute inset-0 rounded-2xl bg-gray-800/40 blur-xl transition-all duration-300 group-hover:bg-gray-700/50"></div>
-            <div class="relative rounded-2xl border border-red-500/20 bg-gray-800/80 p-8 backdrop-blur-sm">
-              <div class="mb-6 flex items-center">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
-                  <svg aria-hidden="true" focusable="false" class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                  </svg>
-                </div>
-                <h3 class="ml-4 text-xl font-bold text-white">Instant Rollback Safety</h3>
-              </div>
-              <p class="mb-4 text-gray-300">
-                Build artifacts are automatically versioned and stored. Revert to any previous build instantly if issues are discovered after deployment.
-              </p>
-              <div class="flex items-center text-sm text-gray-100">
-                <svg aria-hidden="true" focusable="false" class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Complete build history and artifact storage
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -885,6 +693,25 @@ npx @capgo/cli@latest build com.example.app --platform android --build-mode rele
       </div>
     </section>
 
+    <section class="border-t border-white/10 bg-gray-900 py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-6 text-center lg:px-8">
+        <p class="text-sm font-semibold tracking-wide text-blue-400 uppercase">Coming from Expo?</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">The EAS Workflows equivalent for Capacitor</h2>
+        <p class="mt-5 text-base leading-7 text-gray-400">
+          EAS Workflows is Expo's hosted CI/CD for React Native. Capgo is the Capacitor path: keep GitHub Actions, GitLab CI, or Jenkins, then call Capgo Build for signed iOS and
+          Android artifacts. Capgo is not a drop-in EAS Workflows runner and does not build Expo projects.
+        </p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a
+            href={expoUrl}
+            class="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            >Compare Capgo with Expo Application Services</a
+          >
+          <a href={nativeBuildUrl} class="inline-flex min-h-11 items-center px-3 text-sm font-semibold text-blue-400 hover:text-blue-300">Open Capgo Builder →</a>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA Section -->
     <ProductTestimonials
       variant="light"
@@ -932,18 +759,6 @@ npx @capgo/cli@latest build com.example.app --platform android --build-mode rele
       </div>
     </section>
   </div>
-  <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
-    <h2 class="text-2xl font-semibold text-white">EAS Workflows analog for Capacitor</h2>
-    <p class="mt-4 text-base text-gray-300">
-      EAS Workflows is Expo's hosted CI/CD for React Native. Capgo is the Capacitor path: keep GitHub Actions, GitLab CI, or Jenkins, then call Capgo Build for signed iOS and
-      Android artifacts. Capgo is not a drop-in EAS Workflows runner and does not build Expo projects.
-    </p>
-    <p class="mt-4">
-      <a href={expoUrl} class="font-medium text-emerald-400 hover:underline">Compare Capgo with Expo Application Services</a>
-      {' · '}
-      <a href={nativeBuildUrl} class="font-medium text-emerald-400 hover:underline">Open Capgo Builder</a>
-    </p>
-  </section>
 </Layout>
 
 <style>

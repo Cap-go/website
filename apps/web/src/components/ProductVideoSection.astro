@@ -65,7 +65,7 @@ const isLight = variant === 'light'
 
         <div
           class:list={[
-            'mx-auto mt-10 max-w-5xl overflow-hidden rounded-xl border bg-black shadow-2xl lg:mx-0',
+            'mx-auto mt-10 max-w-3xl overflow-hidden rounded-xl border bg-black shadow-2xl lg:mx-0',
             isLight ? 'border-slate-200 shadow-slate-200/40' : 'border-white/10',
           ]}
         >
@@ -88,7 +88,8 @@ const isLight = variant === 'light'
 
 <style is:global>
   .product-video .product-video-frame {
-    margin-top: 40px;
+    max-width: 760px;
+    margin: 40px auto 0;
     overflow: hidden;
     border-radius: 18px;
     border: 1px solid rgba(255, 255, 255, 0.1);

@@ -153,21 +153,6 @@ const comparisonRows = [
 
 const guidanceChecks = [m.live_update_guidance_check1({}, { locale }), m.live_update_guidance_check2({}, { locale }), m.live_update_guidance_check3({}, { locale })]
 
-const steps = [
-  {
-    title: m.live_update_step1_title({}, { locale }),
-    text: m.live_update_step1_desc({}, { locale }),
-  },
-  {
-    title: m.live_update_step2_title({}, { locale }),
-    text: m.live_update_step2_desc({}, { locale }),
-  },
-  {
-    title: m.live_update_step3_title({}, { locale }),
-    text: m.live_update_step3_desc({}, { locale }),
-  },
-]
-
 const platformCards = [
   {
     title: m.live_update_platform_capacitor_title({}, { locale }),
@@ -424,29 +409,7 @@ const featureTiles = [
     </section>
 
     <!-- HOW IT WORKS -->
-    <section class="section" id="how">
-      <div class="shell">
-        <div class="section-head section-head--narrow">
-          <div class="eyebrow eyebrow--blue">{copy('live_update_v2_how_eyebrow')}</div>
-          <h2 class="h2-section">{m.live_update_how_it_works_title({}, { locale })}</h2>
-          <p class="lead">{m.live_update_how_it_works_subtitle({}, { locale })}</p>
-        </div>
 
-        <div class="steps-grid">
-          {
-            steps.map((step, index) => (
-              <article class="step-card">
-                <div class="step-num">{index + 1}</div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- COMPARISON -->
     <ReleaseExplainers background="bg-transparent" />
     <UpdateTypesSection background="bg-transparent" />
 

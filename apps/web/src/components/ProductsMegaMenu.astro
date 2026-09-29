@@ -347,7 +347,8 @@ const ionicRows = [
   }
   .mega-preview.is-active {
     opacity: 1;
-    visibility: visible;
+    /* inherit, not visible: a visible child of the hidden dropdown would still catch hover and open the menu */
+    visibility: inherit;
     transition:
       opacity 0.22s ease,
       visibility 0s;
