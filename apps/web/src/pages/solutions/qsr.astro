@@ -102,10 +102,6 @@ const content = { title, description, ldJSON }
               <p>{m.solutions_qsr_nightmare_para2({}, { locale })}</p>
               <p class="font-medium text-red-300">{m.solutions_qsr_nightmare_para3({}, { locale })}</p>
             </div>
-            <div class="mt-6 rounded-xl border border-red-500/30 bg-red-500/10 p-4">
-              <p class="text-2xl font-bold text-red-300">$50,000+</p>
-              <p class="text-sm text-gray-400">{m.solutions_qsr_nightmare_cost({}, { locale })}</p>
-            </div>
           </div>
 
           <!-- Pain Points -->
@@ -333,8 +329,8 @@ const content = { title, description, ldJSON }
 npm run build
 npx @capgo/cli bundle upload --channel production
 
-<span class="text-orange-400">✔</span> Bundle uploaded in 45 seconds
-<span class="text-orange-400">✔</span> 2.3M users updated within 4 hours
+<span class="text-orange-400">✔</span> Bundle uploaded
+<span class="text-orange-400">✔</span> Devices on the production channel get it on next launch
 <span class="text-orange-400">✔</span> No app store submission required</code></pre>
               </div>
             </div>
@@ -346,13 +342,13 @@ npx @capgo/cli bundle upload --channel production
               <div class="order-2 rounded-xl bg-gray-800 p-6 lg:order-1">
                 <pre
                   class="overflow-x-auto text-sm text-gray-300"><code>🍔 Your Restaurant Group
-├── 🌮 Brand: TacoFiesta      <span class="text-green-400">v3.2.1</span>  ✓ 450K users
-├── 🍕 Brand: PizzaPalace     <span class="text-green-400">v3.2.1</span>  ✓ 820K users
-├── 🍗 Brand: ChickenKing     <span class="text-green-400">v3.2.1</span>  ✓ 380K users
-└── 🥤 Brand: DrinksDirect    <span class="text-green-400">v3.2.1</span>  ✓ 150K users
+├── 🌮 Brand: TacoFiesta      <span class="text-green-400">v3.2.1</span>  ✓ production
+├── 🍕 Brand: PizzaPalace     <span class="text-green-400">v3.2.1</span>  ✓ production
+├── 🍗 Brand: ChickenKing     <span class="text-green-400">v3.2.1</span>  ✓ production
+└── 🥤 Brand: DrinksDirect    <span class="text-green-400">v3.2.1</span>  ✓ production
 
-<span class="text-gray-500"># Deploy to all brands at once</span>
-npx @capgo/cli bundle upload --channel production</code></pre>
+<span class="text-gray-500"># Ship each brand app from the same codebase</span>
+npx @capgo/cli bundle upload com.yourgroup.tacofiesta --channel production</code></pre>
               </div>
               <div class="order-1 lg:order-2">
                 <div class="mb-6 flex items-center gap-3">
@@ -433,15 +429,13 @@ npx @capgo/cli bundle upload --channel production</code></pre>
               </div>
               <div class="rounded-xl bg-gray-800 p-6">
                 <pre
-                  class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># Test new menu in Texas first</span>
-npx @capgo/cli bundle upload --channel texas-pilot
+                  class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># Test new menu on a Texas pilot channel first</span>
+npx @capgo/cli bundle upload --bundle 1.4.0 --channel texas-pilot
 
-<span class="text-green-400">✔</span> 15,000 Texas users updated
-<span class="text-green-400">✔</span> Monitoring for 24 hours...
-<span class="text-green-400">✔</span> No crashes detected
+<span class="text-green-400">✔</span> Bundle uploaded to texas-pilot
 
-<span class="text-gray-500"># Roll out nationwide</span>
-npx @capgo/cli bundle upload --channel production</code></pre>
+<span class="text-gray-500"># Watch the pilot, then roll out nationwide</span>
+npx @capgo/cli channel set production --bundle 1.4.0</code></pre>
               </div>
             </div>
           </div>
@@ -473,7 +467,8 @@ jobs:
         run: |
           npm ci
           npm run build
-          npx @capgo/cli bundle upload \\
+          npx @capgo/cli bundle upload \
+            --apikey {'${{ secrets.CAPGO_TOKEN }}'} \
             --channel production</code></pre>
               </div>
               <div class="order-1 lg:order-2">
@@ -526,7 +521,7 @@ jobs:
             <p class="mt-2 text-gray-400">{m.solutions_qsr_stat1({}, { locale })}</p>
           </div>
           <div class="text-center">
-            <p class="text-4xl font-bold text-orange-400 lg:text-5xl">95%</p>
+            <p class="text-4xl font-bold text-orange-400 lg:text-5xl">~50ms</p>
             <p class="mt-2 text-gray-400">{m.solutions_qsr_stat2({}, { locale })}</p>
           </div>
           <div class="text-center">

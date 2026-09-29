@@ -235,15 +235,16 @@ const content = { title, description, ldJSON }
               class="overflow-x-auto text-sm text-gray-300"><code>import {'{'} CapacitorUpdater {'}'} from '@capgo/capacitor-updater'
 
 <span class="text-gray-500">// Get available channels</span>
-const channels = await CapacitorUpdater.getChannels()
+const {'{'} channels {'}'} = await CapacitorUpdater.listChannels()
 
 <span class="text-gray-500">// Switch to a different channel</span>
 async function switchChannel(channelName: string) {'{'}
   await CapacitorUpdater.setChannel({'{'}
-    channel: channelName
+    channel: channelName,
+    triggerAutoUpdate: true,
   {'}'})
 
-  <span class="text-gray-500">// Download will start automatically</span>
+  <span class="text-gray-500">// Download starts automatically</span>
   <span class="text-gray-500">// App reloads when ready</span>
 {'}'}
 
