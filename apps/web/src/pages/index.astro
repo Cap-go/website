@@ -11,7 +11,6 @@ import PlatformOverview from '@/components/PlatformOverview.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson, createWebSiteLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
-import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 
 const config = Astro.locals.runtimeConfig
 
@@ -88,7 +87,6 @@ const content = {
     <ProblemSolution />
     <PlatformOverview />
     <HowItWorks />
-    <SolutionAppExample solution="production-updates" randomize />
     <GlobalInfrastructure />
     <SharedNumbers stats={stats} />
     <Testimonials />
