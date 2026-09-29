@@ -4,6 +4,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import TeamAvatars from '@/components/TeamAvatars.astro'
 import RatingSummary from '@/components/RatingSummary.astro'
 import AppLogoStrip from '@/components/AppLogoStrip.astro'
+import HeroWorldMap from '@/components/HeroWorldMap.astro'
 import { customerApps } from '@/config/customerApps'
 
 const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
@@ -15,6 +16,7 @@ const stackApps = customerApps.slice(0, 5)
 <section>
   <div class="relative overflow-hidden">
     <div class="relative mx-auto max-w-7xl pb-8 md:pb-32 2xl:max-w-[90vw]">
+      <HeroWorldMap />
       <div class="relative z-10 mx-auto max-w-4xl px-4 pt-4 text-center sm:px-6 sm:pt-6 lg:px-0 lg:pt-8 xl:pt-10 2xl:pt-20">
         <a
           id="hero-whatsnew-pill"
