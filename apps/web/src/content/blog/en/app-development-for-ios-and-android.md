@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-29T09:12:39.667Z
-updated_at: 2026-09-29T09:12:41.269Z
+updated_at: 2026-09-29T09:15:18.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/1c4791d8-8aae-4c0c-bac9-3dc30fe2d7fb/app-development-for-ios-and-android-mobile-phones.jpg'
 head_image_alt: 'App Development for iOS and Android: 2026 Guide'
 keywords: 'app development for ios and android, cross-platform apps, capacitor js, mobile CI/CD, live updates'
