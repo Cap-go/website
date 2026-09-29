@@ -8,9 +8,12 @@ import {
   prefersMarkdown,
   prefersMcpMarketingHtml,
 } from '../../../shared/agentDiscovery'
-import { resolveLegacyPathRedirect } from '../../../shared/legacyPathRedirects'
+import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
+import { handleBuilderMetrics, BUILDER_METRICS_PATH } from './builder-metrics'
+import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
+import { handleMtaStsRequest } from './mta-sts'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
 
@@ -19,6 +22,9 @@ interface Env {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
   PERSONAL_ACCESS_TOKEN?: string
+  CF_ACCOUNT_ANALYTICS_ID?: string
+  CF_ANALYTICS_TOKEN?: string
+  BUILDER_DB?: import('../lib/builderMetricsD1').BuilderD1Database
   IOS_UDID_PROFILE_SIGNING_CERT_PEM?: string
   IOS_UDID_PROFILE_SIGNING_KEY_PEM?: string
   IOS_UDID_PROFILE_SIGNING_CHAIN_PEM?: string
@@ -198,6 +204,24 @@ const routeDefinitions: Record<string, RouteDefinition> = {
     methods: ['GET', 'HEAD'],
     handle: async (request, _env, ctx) => await handleReadmeBanner(request, ctx),
   },
+  [LIVE_UPDATE_METRICS_PATH]: {
+    methods: ['GET', 'HEAD'],
+    handle: async (request, env) => {
+      const response = await handleLiveUpdateMetrics(request, env)
+      if (request.method === 'HEAD')
+        return new Response(null, { status: response.status, headers: response.headers })
+      return response
+    },
+  },
+  [BUILDER_METRICS_PATH]: {
+    methods: ['GET', 'HEAD'],
+    handle: async (request, env) => {
+      const response = await handleBuilderMetrics(request, env)
+      if (request.method === 'HEAD')
+        return new Response(null, { status: response.status, headers: response.headers })
+      return response
+    },
+  },
 }
 
 function isGlobalCssPath(pathname: string): boolean {
@@ -258,20 +282,6 @@ function withLinkHeaders(response: Response, links: LinkDefinition[]): Response 
   })
 }
 
-const NON_DEFAULT_LOCALES = new Set(['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'])
-
-function splitLocalePath(pathname: string): { localePrefix: string; path: string } {
-  const segments = pathname.split('/').filter(Boolean)
-  if (segments.length > 0 && NON_DEFAULT_LOCALES.has(segments[0])) {
-    const rest = segments.slice(1).join('/')
-    return {
-      localePrefix: `/${segments[0]}`,
-      path: rest ? `/${rest}${pathname.endsWith('/') ? '/' : ''}` : '/',
-    }
-  }
-  return { localePrefix: '', path: pathname }
-}
-
 function redirectToPath(request: Request, pathname: string, status = 301): Response {
   const url = new URL(request.url)
   const hashIndex = pathname.indexOf('#')
@@ -300,7 +310,7 @@ const PLUGIN_DOCS_REDIRECTS: Record<string, string> = {
   sheets: '/docs/plugins/sheets/',
 }
 
-function staticLegacyRedirect(request: Request, pathname: string): Response | null {
+export function staticLegacyRedirect(request: Request, pathname: string): Response | null {
   // Former _redirects splat: /en/* → /:splat (must stay out of _redirects; CF dynamic-rule cap)
   if (pathname === '/en' || pathname === '/en/') {
     return redirectToPath(request, '/')
@@ -316,6 +326,9 @@ function staticLegacyRedirect(request: Request, pathname: string): Response | nu
   if (path === '/terms' || path === '/terms/') {
     return redirectToPath(request, `${localePrefix}/tos/`)
   }
+  if (path === '/build-status' || path === '/build-status/') {
+    return redirectToPath(request, `${localePrefix}/builder-data/`)
+  }
   if (path === '/app/apikeys' || path === '/app/apikeys/') {
     const search = new URL(request.url).search
     return redirectToAbsolute(`https://console.capgo.app/apikeys${search}`)
@@ -327,9 +340,9 @@ function staticLegacyRedirect(request: Request, pathname: string): Response | nu
       return redirectToPath(request, `${localePrefix}${docsPath}`)
     }
   }
-  const legacyTarget = resolveLegacyPathRedirect(path)
-  if (legacyTarget) {
-    return redirectToPath(request, `${localePrefix}${legacyTarget}`)
+  const localizedLegacyTarget = resolveLocalizedLegacyRedirectPath(pathname)
+  if (localizedLegacyTarget) {
+    return redirectToPath(request, localizedLegacyTarget)
   }
   return null
 }
@@ -448,6 +461,8 @@ export async function agentSurfaceResponse(request: Request, env: Env, pathname:
 
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
+    const mtaStsResponse = handleMtaStsRequest(request)
+    if (mtaStsResponse) return mtaStsResponse
     const pathname = new URL(request.url).pathname
     const agentSurface = await agentSurfaceResponse(request, env, pathname)
     if (agentSurface) return trackAICrawler(request, agentSurface, ctx)

@@ -1,0 +1,427 @@
+---
+/**
+ * Governed rollout explainer: a signed release moves through approval and staged
+ * channels, a crash signal triggers an automatic rollback, and every step lands
+ * in the audit log. The markup renders the final state so no-JS and
+ * prefers-reduced-motion visitors see the full story statically.
+ */
+interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+
+const stages = [
+  { id: 'qa', label: 'Internal QA', detail: 'Channel' },
+  { id: 'beta', label: 'Beta users', detail: 'Cohort' },
+  { id: 'prod', label: '10% production', detail: 'Gradual rollout' },
+]
+
+const logLines = [
+  { step: 1, text: 'Bundle 4.2.1 signed', tone: 'neutral' },
+  { step: 2, text: 'Approved by release owner', tone: 'neutral' },
+  { step: 3, text: 'Assigned to internal QA channel', tone: 'neutral' },
+  { step: 4, text: 'Expanded to beta users', tone: 'neutral' },
+  { step: 5, text: 'Rolled out to 10% of production', tone: 'neutral' },
+  { step: 6, text: 'Crash signal detected on 4.2.1', tone: 'error' },
+  { step: 7, text: 'Automatic rollback, 4.2.0 live again', tone: 'success' },
+]
+---
+
+<figure class:list={['gr', className]} data-governed-rollout data-step="7">
+  <figcaption class="sr-only">
+    Illustration of a governed rollout: a signed bundle is approved, assigned to an internal QA channel, expanded to beta users, then rolled out to 10% of production. A crash
+    signal triggers an automatic rollback to the previous bundle, and every step is recorded in the audit log.
+  </figcaption>
+
+  <div class="gr-visual" aria-hidden="true">
+    <div class="gr-flow">
+      <div class="gr-head">
+        <div class="gr-release">
+          <span class="gr-kicker">Release</span>
+          <span class="gr-version">4.2.1</span>
+        </div>
+        <span class="gr-status" data-tone="success" data-gr-status>Rolled back</span>
+      </div>
+
+      <div class="gr-track">
+        <span class="gr-line"><span class="gr-fill" data-gr-fill style="width: 50%"></span></span>
+        <ol class="gr-stages">
+          {
+            stages.map((stage) => (
+              <li class="gr-stage" data-stage={stage.id} data-state={stage.id === 'prod' ? 'reverted' : 'done'}>
+                <span class="gr-dot" />
+                <span class="gr-stage-label">{stage.label}</span>
+                <span class="gr-stage-detail">{stage.detail}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+
+    <div class="gr-log">
+      <p class="gr-log-title">Audit log</p>
+      <ol class="gr-log-list">
+        {
+          logLines.map((line) => (
+            <li class="gr-log-line" data-log-step={line.step} data-tone={line.tone} data-visible="true">
+              <span class="gr-log-index">{String(line.step).padStart(2, '0')}</span>
+              <span class="gr-log-marker" />
+              <span class="gr-log-text">{line.text}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</figure>
+
+<script>
+  type StageState = 'idle' | 'active' | 'done' | 'error' | 'reverted'
+  type Frame = {
+    status: string
+    tone: 'neutral' | 'active' | 'error' | 'success'
+    fill: number
+    stages: [StageState, StageState, StageState]
+    hold: number
+  }
+
+  const frames: Frame[] = [
+    { status: 'Draft', tone: 'neutral', fill: 0, stages: ['idle', 'idle', 'idle'], hold: 900 },
+    { status: 'Signed', tone: 'neutral', fill: 0, stages: ['idle', 'idle', 'idle'], hold: 1300 },
+    { status: 'Approved', tone: 'active', fill: 0, stages: ['idle', 'idle', 'idle'], hold: 1300 },
+    { status: 'Rolling out', tone: 'active', fill: 0, stages: ['active', 'idle', 'idle'], hold: 1500 },
+    { status: 'Rolling out', tone: 'active', fill: 50, stages: ['done', 'active', 'idle'], hold: 1500 },
+    { status: 'Rolling out', tone: 'active', fill: 100, stages: ['done', 'done', 'active'], hold: 1800 },
+    { status: 'Crash signal', tone: 'error', fill: 100, stages: ['done', 'done', 'error'], hold: 1600 },
+    { status: 'Rolled back', tone: 'success', fill: 50, stages: ['done', 'done', 'reverted'], hold: 3600 },
+  ]
+
+  function render(root: HTMLElement, step: number) {
+    const frame = frames[step]
+    root.dataset.step = String(step)
+    const status = root.querySelector<HTMLElement>('[data-gr-status]')
+    if (status) {
+      status.textContent = frame.status
+      status.dataset.tone = frame.tone
+    }
+    const fill = root.querySelector<HTMLElement>('[data-gr-fill]')
+    if (fill) fill.style.width = `${frame.fill}%`
+    root.querySelectorAll<HTMLElement>('[data-stage]').forEach((stage, index) => {
+      stage.dataset.state = frame.stages[index]
+    })
+    root.querySelectorAll<HTMLElement>('[data-log-step]').forEach((line) => {
+      line.dataset.visible = String(Number(line.dataset.logStep) <= step)
+    })
+  }
+
+  function setup(root: HTMLElement) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    let step = frames.length - 1
+    let timer: number | undefined
+    let visible = false
+
+    const stop = () => {
+      if (timer !== undefined) window.clearTimeout(timer)
+      timer = undefined
+    }
+    const tick = () => {
+      timer = window.setTimeout(() => {
+        step = (step + 1) % frames.length
+        render(root, step)
+        tick()
+      }, frames[step].hold)
+    }
+    const start = () => {
+      if (reduceMotion.matches || !visible || timer !== undefined) return
+      tick()
+    }
+
+    reduceMotion.addEventListener('change', () => {
+      if (reduceMotion.matches) {
+        stop()
+        step = frames.length - 1
+        render(root, step)
+      } else {
+        start()
+      }
+    })
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting
+        if (visible) {
+          if (!reduceMotion.matches && step === frames.length - 1 && timer === undefined) {
+            step = 0
+            render(root, step)
+          }
+          start()
+        } else {
+          stop()
+        }
+      },
+      { threshold: 0.35 },
+    )
+    observer.observe(root)
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-governed-rollout]').forEach(setup)
+</script>
+
+<style>
+  .gr {
+    margin: 0;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(2, 6, 23, 0.45);
+    padding: 24px;
+  }
+  .gr-visual {
+    display: grid;
+    gap: 28px;
+  }
+  .gr-flow {
+    display: grid;
+    align-content: center;
+    gap: 36px;
+  }
+  .gr-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .gr-release {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .gr-kicker {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .gr-version {
+    color: #fff;
+    font-family: var(--lu-font-mono);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .gr-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    font-weight: 700;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+  }
+  .gr-status[data-tone='active'] {
+    border-color: rgba(96, 165, 250, 0.4);
+    background: rgba(96, 165, 250, 0.1);
+    color: #bfdbfe;
+  }
+  .gr-status[data-tone='error'] {
+    border-color: rgba(248, 113, 113, 0.45);
+    background: rgba(248, 113, 113, 0.1);
+    color: #fca5a5;
+  }
+  .gr-status[data-tone='success'] {
+    border-color: rgba(74, 222, 128, 0.4);
+    background: rgba(74, 222, 128, 0.08);
+    color: #86efac;
+  }
+
+  /* Stage track */
+  .gr-track {
+    position: relative;
+  }
+  .gr-line {
+    position: absolute;
+    top: 7px;
+    right: calc(100% / 6);
+    left: calc(100% / 6);
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .gr-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--relief-blue);
+    transition: width 0.7s ease;
+  }
+  .gr-stages {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .gr-stage {
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+    text-align: center;
+  }
+  .gr-dot {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 8px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: #0b1220;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  .gr-stage-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+  }
+  .gr-stage-detail {
+    color: rgba(255, 255, 255, 0.38);
+    font-size: 11px;
+  }
+  .gr-stage[data-state='active'] .gr-dot {
+    border-color: var(--relief-blue);
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.18);
+  }
+  .gr-stage[data-state='done'] .gr-dot {
+    border-color: var(--relief-blue);
+    background: var(--relief-blue);
+  }
+  .gr-stage[data-state='active'] .gr-stage-label,
+  .gr-stage[data-state='done'] .gr-stage-label {
+    color: #fff;
+  }
+  .gr-stage[data-state='error'] .gr-dot {
+    border-color: #f87171;
+    background: #f87171;
+    box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.18);
+  }
+  .gr-stage[data-state='error'] .gr-stage-label {
+    color: #fca5a5;
+  }
+  .gr-stage[data-state='reverted'] .gr-dot {
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+  .gr-stage[data-state='reverted'] .gr-stage-label {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: line-through;
+    text-decoration-color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* Audit log */
+  .gr-log {
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .gr-log-title {
+    margin: 0 0 12px;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .gr-log-list {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--lu-font-mono);
+    font-size: 12.5px;
+  }
+  .gr-log-line {
+    display: grid;
+    grid-template-columns: 22px 8px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 10px;
+    min-height: 22px;
+    color: rgba(255, 255, 255, 0.72);
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
+  .gr-log-line[data-visible='false'] {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  .gr-log-index {
+    color: rgba(255, 255, 255, 0.3);
+  }
+  .gr-log-marker {
+    align-self: center;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--relief-blue);
+  }
+  .gr-log-line[data-tone='error'] {
+    color: #fca5a5;
+  }
+  .gr-log-line[data-tone='error'] .gr-log-marker {
+    background: #f87171;
+  }
+  .gr-log-line[data-tone='success'] {
+    color: #86efac;
+  }
+  .gr-log-line[data-tone='success'] .gr-log-marker {
+    background: #4ade80;
+  }
+  .gr-log-text {
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .gr {
+      padding: 32px;
+    }
+  }
+  @media (min-width: 960px) {
+    .gr-visual {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 40px;
+    }
+    .gr-log {
+      padding-top: 0;
+      padding-left: 40px;
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  }
+  @media (max-width: 420px) {
+    .gr-stage-detail {
+      display: none;
+    }
+    .gr-stage-label {
+      font-size: 12px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gr-fill,
+    .gr-dot,
+    .gr-status,
+    .gr-stage-label,
+    .gr-log-line {
+      transition: none;
+    }
+  }
+</style>

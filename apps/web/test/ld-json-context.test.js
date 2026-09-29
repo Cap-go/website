@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test'
-import { createLdJsonGraph, createNewsArticleLdJson, ensureLdJsonContext } from '../src/lib/ldJson.ts'
+import { createLdJsonGraph, createNewsArticleLdJson, createProductLdJson, ensureLdJsonContext } from '../src/lib/ldJson.ts'
 
 const mockConfig = {
   brand: 'Capgo',
@@ -47,4 +47,58 @@ test('serialized blog ld+json includes @context', () => {
 
   expect(json).toContain('"@context":"https://schema.org"')
   expect(json).toContain('"@type":"NewsArticle"')
+})
+
+test('createProductLdJson adds review and aggregateRating from customer reviews', () => {
+  const product = createProductLdJson(mockConfig, {
+    name: 'Capgo',
+    description: 'Live updates for Capacitor apps',
+    url: 'https://capgo.app/pricing/',
+    sku: 'capgo',
+    offers: [
+      {
+        name: 'Solo',
+        price: '14',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+    ],
+    reviews: [
+      { author: 'Sergiu S', reviewBody: 'The updater plugin transformed how we ship.', ratingValue: 5 },
+      { author: 'Mikołaj Wilczek', reviewBody: 'Plugins were a great entry point.', ratingValue: 5 },
+    ],
+  })
+
+  expect(product.review).toHaveLength(2)
+  expect(product.review[0]).toMatchObject({
+    '@type': 'Review',
+    reviewBody: 'The updater plugin transformed how we ship.',
+    author: { '@type': 'Person', name: 'Sergiu S' },
+    reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5, worstRating: 1 },
+  })
+  expect(product.aggregateRating).toMatchObject({
+    '@type': 'AggregateRating',
+    ratingValue: 5,
+    reviewCount: 2,
+    bestRating: 5,
+    worstRating: 1,
+  })
+})
+
+test('createProductLdJson omits review fields when no reviews are provided', () => {
+  const product = createProductLdJson(mockConfig, {
+    name: 'Capgo',
+    description: 'Live updates for Capacitor apps',
+    url: 'https://capgo.app/pricing/',
+    offers: [
+      {
+        price: '14',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+    ],
+  })
+
+  expect(product.review).toBeUndefined()
+  expect(product.aggregateRating).toBeUndefined()
 })

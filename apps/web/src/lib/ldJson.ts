@@ -1,5 +1,6 @@
 import type { RuntimeConfig } from '@/config/app'
 import type {
+  AggregateRating,
   BreadcrumbList,
   FAQPage,
   Graph,
@@ -8,6 +9,7 @@ import type {
   Organization,
   Person,
   Product,
+  Review,
   Service,
   SoftwareApplication,
   Thing,
@@ -18,7 +20,43 @@ import type {
 import { CAPGO_LEGAL_NAME, CAPGO_POSTAL_ADDRESS } from '../../../shared/agentDiscovery'
 
 // Re-export schema-dts types for external use
-export type { BreadcrumbList, FAQPage, Graph, ItemList, NewsArticle, Organization, Person, Product, Service, SoftwareApplication, Thing, WebPage, WebSite, WithContext }
+export type { BreadcrumbList, FAQPage, Graph, ItemList, NewsArticle, Organization, Person, Product, Review, Service, SoftwareApplication, Thing, WebPage, WebSite, WithContext }
+
+export type ProductReviewInput = {
+  author: string
+  reviewBody: string
+  ratingValue: number
+}
+
+function createReviewsLdJson(reviews: ProductReviewInput[]): Review[] {
+  return reviews.map((review) => ({
+    '@type': 'Review' as const,
+    reviewBody: review.reviewBody,
+    author: {
+      '@type': 'Person' as const,
+      name: review.author,
+    },
+    reviewRating: {
+      '@type': 'Rating' as const,
+      ratingValue: review.ratingValue,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  }))
+}
+
+function createAggregateRatingLdJson(reviews: ProductReviewInput[]): AggregateRating {
+  const reviewCount = reviews.length
+  const ratingValue = Number((reviews.reduce((sum, review) => sum + review.ratingValue, 0) / reviewCount).toFixed(1))
+
+  return {
+    '@type': 'AggregateRating' as const,
+    ratingValue,
+    reviewCount,
+    bestRating: 5,
+    worstRating: 1,
+  }
+}
 
 // Type for standalone schemas with @context
 export type LdJsonType = WithContext<Organization | Person | NewsArticle | WebPage | SoftwareApplication | Product | Service | FAQPage | WebSite | ItemList | BreadcrumbList>
@@ -234,6 +272,7 @@ export function createProductLdJson(
     sku?: string
     brand?: string
     offers: {
+      name?: string
       price: string
       priceCurrency: string
       availability: string
@@ -243,6 +282,7 @@ export function createProductLdJson(
       ratingValue: number
       reviewCount: number
     }
+    reviews?: ProductReviewInput[]
   },
 ): Product {
   const product: Product = {
@@ -258,6 +298,7 @@ export function createProductLdJson(
     },
     offers: options.offers.map((offer) => ({
       '@type': 'Offer' as const,
+      ...(offer.name ? { name: offer.name } : {}),
       price: offer.price,
       priceCurrency: offer.priceCurrency,
       availability: offer.availability as 'https://schema.org/InStock' | 'https://schema.org/OutOfStock',
@@ -266,12 +307,19 @@ export function createProductLdJson(
   }
 
   if (options.sku) product.sku = options.sku
+  if (options.reviews?.length) {
+    product.review = createReviewsLdJson(options.reviews)
+  }
   if (options.aggregateRating) {
     product.aggregateRating = {
       '@type': 'AggregateRating',
       ratingValue: options.aggregateRating.ratingValue,
       reviewCount: options.aggregateRating.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
     }
+  } else if (options.reviews?.length) {
+    product.aggregateRating = createAggregateRatingLdJson(options.reviews)
   }
 
   return product

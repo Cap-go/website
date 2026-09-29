@@ -3,6 +3,7 @@ import m from '@/copy/messages'
 import dayjs from 'dayjs'
 import type { WebsiteStatsDisplay } from '@/lib/websiteStats'
 import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
+import { getTotalStars } from '@/services/github'
 
 interface Props {
   stats?: WebsiteStatsDisplay
@@ -11,6 +12,8 @@ interface Props {
 const config = Astro.locals.runtimeConfig
 const { stats: statsProp } = Astro.props
 const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.public.baseApiUrl))
+// Same total as the header GitHub badge so both numbers match.
+const totalStars = getTotalStars()
 ---
 
 <section class="relative overflow-hidden bg-[#1a1a1a] py-24 sm:py-32">
@@ -129,8 +132,8 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
             </svg>
           </div>
           <div class="mb-2 text-5xl font-bold text-white">
-            <a href="https://github.com/Cap-go/capacitor-updater" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
-              {stats.stars}
+            <a href="https://github.com/Cap-go" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
+              {totalStars}+
             </a>
           </div>
           <div class="mb-1 text-base font-semibold text-white">{m.stars_in_github({}, { locale: Astro.locals.locale })}</div>
@@ -204,7 +207,7 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
             </div>
             <div>
               <div class="mb-2 text-5xl font-bold text-white">
-                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">57ms</a>
+                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">44ms</a>
               </div>
               <div class="mb-1 text-sm font-semibold text-white">{m.shared_numbers_api_response({}, { locale: Astro.locals.locale })}</div>
               <div class="text-xs text-gray-400">{m.home_avg_latency({}, { locale: Astro.locals.locale })}</div>

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-23T08:26:36.407Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-09-17T13:36:23.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/dae89c53-9e9e-43c0-b2e0-ac2d1e922f96/expo-push-notification-guide-2026.jpg'
 head_image_alt: Master Expo Push Notification Guide 2026
 keywords: 'expo push notification, react native, expo, mobile development, push notifications'
@@ -298,7 +298,7 @@ Later in the workflow, this walkthrough is a helpful visual reference:
 
 <iframe width="100%" style="aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/xYRbYG77M_o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-For teams building release-heavy apps, it also helps to think of token registration as part of the app's operational state, not just part of onboarding. That mindset fits well with broader [Expo app delivery workflows](https://capgo.app/expo/), where app behavior can change frequently and backend state needs to stay synchronized.
+For teams building release-heavy apps, it also helps to think of token registration as part of the app's operational state, not just part of onboarding. That mindset fits well with broader [Expo app delivery workflows](https://capgo.app/alternatives/expo/), where app behavior can change frequently and backend state needs to stay synchronized.
 
 <a id="sending-notifications-from-your-server"></a>
 ## Sending Notifications From Your Server

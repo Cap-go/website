@@ -15,7 +15,7 @@ const solutionStoreAppRows = [
   [
     'gov.fema.mobile.android',
     'FEMA',
-    'https://play-lh.googleusercontent.com/okrUGchhgopCmYQ-wqWQ_fIjP7ZfklGjIYMPMrVHGCi1CRcr6qsztHfADDU0IGqDM',
+    'https://play-lh.googleusercontent.com/SpHNsTxIGUOZN2rghOEcJFCHc2vOFMI6GqiIp6zfSEvi-1sGRRPm0tTRDa9oGFgfPjW99VrpCTF2b_Ua2Yi8744',
     'https://play.google.com/store/apps/details?id=gov.fema.mobile.android',
     'WEATHER',
     1649325,

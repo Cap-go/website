@@ -95,22 +95,16 @@ Note that the `kill` condition currently triggers the update after the first kil
 
 For critical updates or apps with very simple state, you may want to apply an update as soon as it's downloaded, without waiting for a background or kill event. Capgo supports this via the `autoUpdate` policy in your Capacitor config.
 
-<Aside type="tip" title="Recommended: Use Delta (Manifest) Updates with Instant Apply">
-When using an instant apply mode, we **strongly recommend** enabling [Delta (manifest) Updates](/docs/live-updates/differentials/) to minimize download times and improve the user experience. Delta (manifest) updates only download changed files instead of the entire bundle, which is especially important when updates are applied immediately while users are actively using your app.
+<Aside type="caution" title="Required for instant apply: --delta, autoSplashscreen, and SplashScreen">
+`"atInstall"`, `"onLaunch"`, and `"always"` apply the update while the user is waiting. Use [Delta (manifest) updates](/docs/live-updates/differentials/) so only changed files download. A full zip upload slows the user experience.
 
-**Why this matters for instant apply modes:**
-- **Faster updates**: Smaller downloads mean updates complete quickly, reducing the time users see loading screens
-- **Better mobile experience**: Users on cellular networks or slower connections won't face long wait times
-- **Lower bandwidth usage**: Only changed files are downloaded, saving data for both you and your users
+These modes also require `@capacitor/splash-screen` and `autoSplashscreen: true` with `SplashScreen.launchAutoHide: false`. Without the splash plugin, the user can see a flicker or a stale UI while the update applies.
 
 When `autoUpdate` is set to `"atInstall"`, `"onLaunch"`, or `"always"` in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading. Legacy `directUpdate` config is still detected. Use `--no-delta` to force a full bundle upload.
 
-To enable Delta (manifest) updates, simply use the `--delta` flag when uploading bundles:
 ```shell
 npx @capgo/cli@latest bundle upload --delta
 ```
-
-Learn more in the [Delta (manifest) Updates documentation](/docs/live-updates/differentials/).
 </Aside>
 
 `autoUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code. It supports these values:
@@ -137,7 +131,7 @@ const config: CapacitorConfig = {
       keepUrlPathAfterReload: true,
     },
     SplashScreen: {
-      launchAutoHide: false, // Required when using instant apply with autoSplashscreen
+      launchAutoHide: false, // Required for instant apply with autoSplashscreen
     },
   },
 };
@@ -154,7 +148,7 @@ With `autoUpdate: 'always'`, Capgo checks on every foreground transition and imm
 Note that because `autoUpdate` is a native configuration, instant apply modes require some additional handling in your JavaScript code.
 
 <Aside type="caution">
-When using an instant apply mode with `autoSplashscreen`, you must set `launchAutoHide: false` in the SplashScreen configuration (as shown above) to prevent the splash screen from hiding automatically. This ensures you have full control over when the splash screen is hidden after the update process completes.
+Instant apply modes require `@capacitor/splash-screen` and `autoSplashscreen: true`. Set `launchAutoHide: false` in the SplashScreen configuration (as shown above) so the splash screen stays visible until the update finishes.
 </Aside>
 
 ## Downloading Automatically Without Applying
@@ -175,7 +169,7 @@ In this mode, the plugin emits `updateAvailable` after a bundle is downloaded. Y
 
 ## Automatic Splashscreen Handling
 
-To make instant apply modes easier to use, Capgo provides an `autoSplashscreen` option that automatically handles hiding the splashscreen for you (available since version 7.6.0):
+Instant apply modes (`"atInstall"`, `"onLaunch"`, `"always"`) require `autoSplashscreen` and `@capacitor/splash-screen` (available since version 7.6.0). Install the plugin, then keep the splash visible until Capgo hides it:
 
 ```typescript
 const config: CapacitorConfig = {
@@ -197,38 +191,35 @@ When `autoSplashscreen` is enabled:
 - The plugin automatically hides the splashscreen when no update is needed
 - You don't need to manually listen for `appReady` events or call `SplashScreen.hide()`
 
-### Manual Splashscreen Handling
+### Extra work after the splash hides
 
-If you prefer manual control or need custom logic, you can disable `autoSplashscreen` and handle it yourself:
+Keep `autoSplashscreen: true`. If you need extra logic after the update is ready, listen for `appReady` as well. Do not skip the splash plugin or `autoSplashscreen` for this:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
-import { SplashScreen } from '@capacitor/splash-screen';
 
 CapacitorUpdater.addListener('appReady', () => {
-  // Hide splash screen
-  SplashScreen.hide();
+  // Update is applied. autoSplashscreen already hid the splash.
 });
 
 CapacitorUpdater.notifyAppReady();
 ```
 
-The `appReady` event fires once the app has finished initializing and applying any pending updates. This is the point at which it's safe to show your app's UI, as it ensures the user will see the latest version.
+The `appReady` event fires once the app has finished initializing and applying any pending updates.
 
-In addition to handling the `appReady` event, we recommend setting the `keepUrlPathAfterReload` configuration option to `true` when using an instant apply mode. This preserves the current URL path when the app is reloaded due to an update, helping maintain the user's location in the app and reducing disorientation.
-
-If you don't handle the `appReady` event and set `keepUrlPathAfterReload` when using an instant apply mode, the user may briefly see a stale version of the app, be taken back to the initial route, or see a flicker as the update is applied.
+Set `keepUrlPathAfterReload` to `true` when using an instant apply mode. This preserves the current URL path when the app is reloaded due to an update.
 
 Using an instant apply mode can be useful for delivering critical bug fixes or security patches, but it comes with some tradeoffs:
 
-- The user may see a brief flicker or loading state as the update is applied if you don't properly handle the splashscreen (either with `autoSplashscreen` or manual `appReady` event handling).
+- The user may see a brief flicker or loading state as the update is applied if `@capacitor/splash-screen` is missing or `autoSplashscreen` is not enabled.
 - If the update modifies the app state or UI, the user may see a disruptive change in the middle of a session.
 - The user's location in the app may be lost if `keepUrlPathAfterReload` is not set, potentially disorienting them.
 - You'll need to carefully handle saving and restoring state to ensure a smooth transition.
 
 If you do enable instant apply, we recommend:
 
-- Using `autoSplashscreen: true` for the simplest setup, or manually handling the `appReady` event if you need custom logic.
+- Uploading with `npx @capgo/cli@latest bundle upload --delta` so the download does not slow the user experience.
+- Installing `@capacitor/splash-screen` and setting `autoSplashscreen: true` with `launchAutoHide: false`.
 - Setting `keepUrlPathAfterReload` to `true` to preserve the user's location in the app.
 - Saving and restoring the app state as needed to avoid losing user progress.
 - Thoroughly testing your app's update behavior to ensure there are no jarring transitions, lost state, or disorienting location changes.

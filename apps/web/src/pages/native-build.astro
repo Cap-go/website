@@ -124,18 +124,9 @@ const content = {
   ldJSON,
 }
 
-const nativeBuildFooterBlogSlugs = [
-  'transform-lovable-dev-app-to-mobile-with-capacitor',
-  'transform-base44-app-to-mobile-with-capacitor',
-  'build-ios-app-from-windows-capacitor-capgo-build',
-]
-const nativeBuildFooterBlogCopy = {
-  description: copy('footer_blog_builder_description'),
-}
-
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
-const expoUrl = getRelativeLocaleUrl(locale, 'expo')
+const expoUrl = getRelativeLocaleUrl(locale, 'alternatives/expo')
 
 const heroMeta = [copy('native_build_v2_meta_ios'), copy('native_build_v2_meta_android'), copy('native_build_v2_meta_nosdk'), copy('native_build_v2_meta_speed')]
 
@@ -272,10 +263,10 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
 }
 ---
 
-<Layout content={content} footerBlogSlugs={nativeBuildFooterBlogSlugs} footerBlogCopy={nativeBuildFooterBlogCopy}>
+<Layout content={content}>
   <div class="nb bg-ad">
     <!-- ============================================ HERO ============================================ -->
-    <section class="section hero bg-grid grain" id="top">
+    <section class="section hero" id="top">
       <div class="shell">
         <div class="beta-badge">
           <span class="dot"></span>
@@ -322,7 +313,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
     </section>
 
     <!-- ============================================ REVEAL + DEMO ============================================ -->
-    <section class="section bg-grid grain" id="how">
+    <section class="section" id="how">
       <div class="shell">
         <div class="rv-one">
           <div class="rv-one-mark">Capgo Builder</div>
@@ -351,7 +342,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
 
     <ProductVideoSection
       variant="builder"
-      accent="green"
+      accent="blue"
       youtubeId={productVideos.nativeBuild.youtubeId}
       title={productVideos.nativeBuild.title}
       description={productVideos.nativeBuild.description}
@@ -360,6 +351,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
     <!-- ============================================ PROOF ============================================ -->
     <ProductTestimonials
       variant="builder"
+      accent="blue"
       eyebrow={copy('native_build_v2_proof_eyebrow')}
       title={copy('native_build_v2_proof_title')}
       description={copy('native_build_v2_proof_lead')}
@@ -505,7 +497,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     </section>
 
     <!-- ============================================ QR SHARE ============================================ -->
-    <section class="section bg-grid grain" id="share">
+    <section class="section" id="share">
       <div class="shell">
         <div class="section-head section-head--wide">
           <div class="eyebrow eyebrow--green">{copy('native_build_v2_share_eyebrow')}</div>
@@ -896,7 +888,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           <h2 class="h2-section">{copy('native_build_v2_eas_title')}</h2>
           <p class="lead">{copy('native_build_v2_eas_lead')}</p>
         </div>
-        <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('native_build_v2_eas_cta')}</a>
+        <div style="display: flex; justify-content: center; margin-top: 28px;">
+          <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('native_build_v2_eas_cta')}</a>
+        </div>
       </div>
     </section>
 
@@ -1079,7 +1073,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     </section>
 
     <!-- ============================================ FINAL CTA ============================================ -->
-    <section class="section final bg-grid grain" id="cta">
+    <section class="section final" id="cta">
       <div class="shell">
         <h2>
           <span class="name">Capgo Builder</span><br />
@@ -1147,30 +1141,27 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
 
     .nb {
       /* ---- tokens ---- */
-      --bg-deep: #080e1a;
-      --bg-mid: #0d1525;
-      --bg-near: #1a2a4a;
-      --grid-line: rgba(96, 165, 250, 0.06);
-      --relief-green: #4ade80;
-      --relief-green-glow: rgba(74, 222, 128, 0.4);
-      --accent-cyan: #22d3ee;
-      --accent-yellow: #facc15;
-      --accent-green: #4ade80;
-      --accent-purple: #a78bfa;
-      --accent-orange: #fb923c;
-      --accent-pink: #f472b6;
-      --accent-sky: #38bdf8;
-      --accent-violet: #818cf8;
       --terminal-bg: #0a0d14;
       --terminal-fg: #c8d4e6;
       --terminal-dim: #5a6a82;
       --terminal-cmd: #93a4bd;
       --terminal-flag: #93a4bd;
-      --terminal-val: #4ade80;
+      --terminal-val: #93c5fd;
       --terminal-kw: #60a5fa;
       --terminal-err: #f87171;
       --cap-blue-600: #2563eb;
       --cap-blue-700: #1d4ed8;
+      /* Restrained system: one accent (blue) + neutrals.
+         Green only for literal success, red only for literal errors. */
+      --nb-accent: #60a5fa;
+      --nb-accent-strong: #93c5fd;
+      --nb-accent-bg: rgba(96, 165, 250, 0.08);
+      --nb-accent-line: rgba(96, 165, 250, 0.3);
+      --nb-ok: #4ade80;
+      --nb-card-bg: rgba(255, 255, 255, 0.035);
+      --nb-card-border: rgba(255, 255, 255, 0.09);
+      --nb-card-border-hover: rgba(255, 255, 255, 0.18);
+      --nb-radius: 16px;
       --nb-font-display: 'Airbnb Cereal', ui-sans-serif, system-ui, -apple-system, sans-serif;
       --nb-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
@@ -1197,8 +1188,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .mono {
       font-family: var(--nb-font-mono);
     }
-    .nb .accent-green {
-      color: var(--relief-green);
+    /* Headline accent phrases: quiet emphasis, not a second colour. */
+    .nb .accent-green,
+    .nb .accent-violet {
+      color: rgba(255, 255, 255, 0.55);
     }
 
     /* ---- page background ----
@@ -1213,44 +1206,18 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       background: transparent;
     }
 
-    /* On this page, hide the footer "Power your Capacitor apps…" plugins banner
-     (first block inside the footer container: tagline + Install Plugin CTA). */
-    body:has(.nb) footer > div > div:first-child {
-      display: none !important;
-    }
-    .nb .bg-grid::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-      background-size: 96px 96px;
-      mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
-      pointer-events: none;
-    }
-    .nb .grain {
-      position: relative;
-    }
-    .nb .grain::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.7  0 0 0 0 0.8  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-      pointer-events: none;
-      mix-blend-mode: overlay;
-      opacity: 0.5;
-    }
-
     /* ---- type ---- */
     .nb .eyebrow {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.45);
+      color: var(--nb-accent);
     }
-    .nb .eyebrow--green {
-      color: var(--relief-green);
+    .nb .eyebrow--green,
+    .nb .eyebrow--violet,
+    .nb .eyebrow--blue {
+      color: var(--nb-accent);
     }
     .nb .h2-section {
       font-weight: 800;
@@ -1320,12 +1287,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .btn-primary {
       background: var(--cap-blue-600);
       color: #fff;
-      box-shadow: 0 0 36px rgba(37, 99, 235, 0.42);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
     .nb .btn-primary:hover {
       background: var(--cap-blue-700);
-      box-shadow: 0 0 50px rgba(37, 99, 235, 0.55);
-      transform: translateY(-1px);
     }
     .nb .btn-ghost {
       background: rgba(255, 255, 255, 0.04);
@@ -1354,9 +1319,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       padding: 6px 12px;
       font-size: 12px;
       font-weight: 600;
-      background: rgba(74, 222, 128, 0.08);
-      border: 1px solid rgba(74, 222, 128, 0.3);
-      color: var(--relief-green);
+      background: var(--nb-accent-bg);
+      border: 1px solid var(--nb-accent-line);
+      color: var(--nb-accent-strong);
       border-radius: 999px;
       margin-bottom: 28px;
       letter-spacing: 0.04em;
@@ -1365,8 +1330,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--relief-green);
-      box-shadow: 0 0 10px var(--relief-green);
+      background: var(--nb-accent);
     }
     .nb .hero-banner {
       margin: 22px 0 18px;
@@ -1390,12 +1354,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .hbv-u-rule {
       display: block;
-      height: 4px;
+      height: 1px;
       width: 100%;
-      margin-top: 14px;
-      background: linear-gradient(90deg, transparent 0%, var(--relief-green) 20%, var(--relief-green) 80%, transparent 100%);
-      box-shadow: 0 0 24px var(--relief-green-glow);
-      border-radius: 2px;
+      margin-top: 16px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.16) 20%, rgba(255, 255, 255, 0.16) 80%, transparent 100%);
     }
     .nb .hero-banner-tag {
       font-family: var(--nb-font-mono);
@@ -1444,7 +1406,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       gap: 6px;
     }
     .nb .hero-meta .check {
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .hero-strip {
       margin: 56px auto 0;
@@ -1459,9 +1421,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       }
     }
     .nb .hero-strip-cell {
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 14px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: 12px;
       padding: 14px 16px;
       text-align: center;
     }
@@ -1486,14 +1448,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
     }
     .nb .terminal-bar {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: 10px 14px;
-      background: linear-gradient(to bottom, #0e1320, #0a0d14);
+      background: #0d1119;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
     .nb .terminal-bar .dot {
@@ -1501,14 +1463,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       height: 11px;
       border-radius: 50%;
     }
-    .nb .terminal-bar .dot.r {
-      background: #ef4444;
-    }
-    .nb .terminal-bar .dot.y {
-      background: #f59e0b;
-    }
+    .nb .terminal-bar .dot.r,
+    .nb .terminal-bar .dot.y,
     .nb .terminal-bar .dot.g {
-      background: #22c55e;
+      background: rgba(255, 255, 255, 0.14);
     }
     .nb .terminal-bar .title {
       margin-left: 12px;
@@ -1550,7 +1508,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: #facc15;
     }
     .nb .terminal-body .ok {
-      color: var(--relief-green);
+      color: var(--nb-ok);
     }
     .nb .terminal-body .ghost {
       opacity: 0.55;
@@ -1581,12 +1539,12 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       text-align: center;
     }
     .nb .rv-one-mark {
-      font-family: var(--nb-font-mono);
-      font-size: 12px;
-      letter-spacing: 0.3em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--relief-green);
-      margin-bottom: 28px;
+      color: var(--nb-accent);
+      margin-bottom: 20px;
     }
     .nb .rv-one-line {
       font-size: clamp(1.6rem, 4.2vw, 2.9rem);
@@ -1649,9 +1607,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border-color: rgba(255, 255, 255, 0.25);
     }
     .nb .demo-tab.active {
-      background: rgba(74, 222, 128, 0.12);
-      color: var(--relief-green);
-      border-color: rgba(74, 222, 128, 0.4);
+      background: var(--nb-accent-bg);
+      color: var(--nb-accent-strong);
+      border-color: var(--nb-accent-line);
     }
 
     /* ---- bento ---- */
@@ -1675,9 +1633,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .tile {
       position: relative;
       padding: 22px;
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 18px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       overflow: hidden;
       cursor: pointer;
       transition:
@@ -1686,9 +1644,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         background 0.2s;
     }
     .nb .tile:hover {
-      border-color: rgba(255, 255, 255, 0.18);
-      transform: translateY(-2px);
-      background: rgba(26, 29, 36, 0.75);
+      border-color: var(--nb-card-border-hover);
     }
     .nb .tile::before {
       content: '';
@@ -1740,7 +1696,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       display: block;
     }
     .nb .tile.open {
-      background: rgba(26, 29, 36, 0.85);
+      background: rgba(255, 255, 255, 0.05);
     }
     .nb .tile .more code,
     .nb .tile-hero .ascii {
@@ -1748,8 +1704,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .tile .more code {
       font-size: 12px;
-      background: rgba(74, 222, 128, 0.08);
-      color: var(--relief-green);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
       padding: 1px 5px;
       border-radius: 4px;
     }
@@ -1760,12 +1716,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       flex-direction: column;
       justify-content: space-between;
       cursor: default;
-      background: radial-gradient(ellipse at 30% 20%, rgba(74, 222, 128, 0.18) 0%, transparent 60%), rgba(26, 29, 36, 0.85);
-      border: 1px solid rgba(74, 222, 128, 0.3);
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
     }
     .nb .tile-hero::before {
-      background: var(--relief-green);
-      height: 3px;
+      display: none;
     }
     .nb .tile-hero:hover {
       transform: none;
@@ -1777,7 +1732,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       line-height: 1.05;
     }
     .nb .tile-hero .ttl .name {
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .tile-hero-sub-ttl {
       color: rgba(255, 255, 255, 0.85);
@@ -1790,7 +1745,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .tile-hero .ascii {
       font-size: 11px;
-      color: rgba(74, 222, 128, 0.55);
+      color: rgba(255, 255, 255, 0.45);
       white-space: pre;
       line-height: 1.2;
       margin: 14px 0 0;
@@ -1816,48 +1771,23 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
 
     /* ---- bento tile icons ---- */
     .nb .bento .tile {
-      --tile-c: var(--relief-green);
+      --tile-c: var(--nb-accent);
     }
     .nb .bento .tile .icon svg {
       width: 20px;
       height: 20px;
     }
 
-    /* ---- SPOTLIGHT — the bento's style ----
-     Calm monochrome tiles that light up with a green glow tracking the
-     cursor, plus a lift + green accent on hover. The hero tile keeps its
-     own green fill. */
-    .nb .bento .tile:not(.tile-hero) {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.11);
-    }
+    /* ---- bento: calm monochrome tiles, blue only on interaction ---- */
     .nb .bento .tile:not(.tile-hero)::before {
       opacity: 0;
     }
-    .nb .bento .tile::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      pointer-events: none;
-      background: radial-gradient(240px 200px at var(--mx, 50%) var(--my, -20%), rgba(74, 222, 128, 0.07), transparent 72%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .nb .bento .tile:hover::after {
-      opacity: 1;
-    }
-    /* No glow once a tile is expanded */
-    .nb .bento .tile.open::after {
-      opacity: 0 !important;
-    }
     .nb .bento .tile:not(.tile-hero):hover {
-      border-color: rgba(74, 222, 128, 0.26);
-      transform: translateY(-3px);
+      border-color: var(--nb-card-border-hover);
     }
     .nb .bento .tile.open:not(.tile-hero) {
-      border-color: rgba(74, 222, 128, 0.22);
-      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--nb-accent-line);
+      background: rgba(255, 255, 255, 0.05);
     }
     .nb .bento .tile .icon {
       color: rgba(255, 255, 255, 0.5);
@@ -1869,15 +1799,15 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         border-color 0.25s;
     }
     .nb .bento .tile:hover .icon {
-      color: var(--relief-green);
-      border-color: rgba(74, 222, 128, 0.3);
-      background: rgba(74, 222, 128, 0.1);
+      color: var(--nb-accent);
+      border-color: var(--nb-accent-line);
+      background: var(--nb-accent-bg);
     }
     .nb .bento .tile .ttl-accent {
       color: #fff;
     }
     .nb .bento .tile:hover .ttl-accent {
-      color: var(--relief-green);
+      color: #fff;
     }
 
     /* ---- QR share / direct distribution ---- */
@@ -1894,11 +1824,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .share-stage {
       margin-top: 48px;
       position: relative;
-      border: 1px solid rgba(96, 165, 250, 0.14);
-      border-radius: 24px;
-      background:
-        radial-gradient(600px 220px at 70% 20%, rgba(74, 222, 128, 0.1), transparent 60%), radial-gradient(500px 200px at 20% 80%, rgba(59, 130, 246, 0.12), transparent 55%),
-        linear-gradient(180deg, rgba(13, 21, 37, 0.9), rgba(8, 14, 26, 0.95));
+      border: 1px solid var(--nb-card-border);
+      border-radius: 20px;
+      background: var(--nb-card-bg);
       padding: 36px 28px 32px;
       overflow: hidden;
     }
@@ -1925,7 +1853,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         inset: 0 0 auto 0;
         width: 100%;
         height: 42%;
-        background: linear-gradient(180deg, transparent, var(--relief-green), transparent);
+        background: linear-gradient(180deg, transparent, var(--nb-accent), transparent);
         animation-name: sharePulseY;
       }
       @keyframes sharePulseY {
@@ -1953,19 +1881,18 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border-radius: 14px;
       display: grid;
       place-items: center;
-      color: #93c5fd;
-      background: rgba(59, 130, 246, 0.12);
-      border: 1px solid rgba(96, 165, 250, 0.22);
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .nb .share-node-icon svg {
       width: 24px;
       height: 24px;
     }
     .nb .share-node--build .share-node-icon {
-      color: var(--relief-green);
-      background: rgba(74, 222, 128, 0.12);
-      border-color: rgba(74, 222, 128, 0.28);
-      box-shadow: 0 0 28px rgba(74, 222, 128, 0.12);
+      color: var(--nb-accent);
+      background: var(--nb-accent-bg);
+      border-color: var(--nb-accent-line);
     }
     .nb .share-node-label {
       font-size: 14px;
@@ -1991,8 +1918,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       inset: 0 auto 0 0;
       width: 42%;
       border-radius: inherit;
-      background: linear-gradient(90deg, transparent, var(--relief-green), transparent);
-      animation: sharePulse 2.4s ease-in-out infinite;
+      background: linear-gradient(90deg, transparent, var(--nb-accent), transparent);
+      animation: sharePulse 3.2s ease-in-out infinite;
     }
     .nb .share-connector:nth-of-type(2) span {
       animation-delay: 0.35s;
@@ -2022,9 +1949,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       padding: 10px;
       position: relative;
       overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(74, 222, 128, 0.35),
-        0 18px 40px rgba(74, 222, 128, 0.18);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
     }
     .nb .share-qr-grid {
       display: grid;
@@ -2072,24 +1997,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       background: #0b1220;
     }
     .nb .share-qr-scan {
-      position: absolute;
-      left: 8px;
-      right: 8px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #22c55e, transparent);
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
-      animation: shareScan 2.8s ease-in-out infinite;
-    }
-    @keyframes shareScan {
-      0%,
-      100% {
-        top: 12%;
-        opacity: 0.35;
-      }
-      50% {
-        top: 82%;
-        opacity: 1;
-      }
+      display: none;
     }
     .nb .share-ttl {
       display: inline-flex;
@@ -2100,9 +2008,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: rgba(74, 222, 128, 0.95);
-      background: rgba(74, 222, 128, 0.1);
-      border: 1px solid rgba(74, 222, 128, 0.22);
+      color: rgba(255, 255, 255, 0.62);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .nb .share-phone {
       width: 72px;
@@ -2110,9 +2018,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       margin: 0 auto 12px;
       border-radius: 16px;
       border: 2px solid rgba(148, 163, 184, 0.45);
-      background: #0a1220;
+      background: #0e1117;
       padding: 8px 6px 6px;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
     }
     .nb .share-phone-notch {
       width: 28px;
@@ -2124,7 +2031,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .share-phone-screen {
       height: calc(100% - 12px);
       border-radius: 10px;
-      background: linear-gradient(160deg, rgba(74, 222, 128, 0.18), rgba(37, 99, 235, 0.18));
+      background: rgba(255, 255, 255, 0.05);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -2138,22 +2045,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: rgba(74, 222, 128, 0.2);
-      color: var(--relief-green);
+      background: rgba(74, 222, 128, 0.14);
+      color: var(--nb-ok);
       font-size: 14px;
       font-weight: 800;
-      animation: shareCheck 2.6s ease-in-out infinite;
-    }
-    @keyframes shareCheck {
-      0%,
-      100% {
-        transform: scale(0.92);
-        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.25);
-      }
-      50% {
-        transform: scale(1);
-        box-shadow: 0 0 0 8px rgba(74, 222, 128, 0);
-      }
     }
     .nb .share-phone-text {
       font-size: 9px;
@@ -2175,19 +2070,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       }
     }
     .nb .share-vs-col {
-      border-radius: 18px;
+      border-radius: var(--nb-radius);
       padding: 22px 22px 18px;
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      background: rgba(15, 23, 42, 0.55);
-    }
-    .nb .share-vs-col--old {
-      border-color: rgba(248, 113, 113, 0.22);
-      background: linear-gradient(180deg, rgba(127, 29, 29, 0.18), rgba(15, 23, 42, 0.4));
+      border: 1px solid var(--nb-card-border);
+      background: var(--nb-card-bg);
     }
     .nb .share-vs-col--new {
-      border-color: rgba(74, 222, 128, 0.28);
-      background: linear-gradient(180deg, rgba(20, 83, 45, 0.28), rgba(15, 23, 42, 0.45));
-      box-shadow: 0 0 40px rgba(74, 222, 128, 0.06);
+      border-color: var(--nb-accent-line);
+      background: var(--nb-accent-bg);
     }
     .nb .share-vs-label {
       font-size: 11px;
@@ -2197,10 +2087,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       margin-bottom: 14px;
     }
     .nb .share-vs-col--old .share-vs-label {
-      color: #fca5a5;
+      color: rgba(255, 255, 255, 0.55);
     }
     .nb .share-vs-col--new .share-vs-label {
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .share-vs-col ul {
       list-style: none;
@@ -2222,11 +2112,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       left: 0;
       top: 0;
       font-weight: 800;
-      color: #f87171;
+      color: rgba(255, 255, 255, 0.35);
     }
     .nb .share-vs-col--new li::before {
       content: '✓';
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .share-steps {
       list-style: none;
@@ -2246,9 +2136,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       gap: 14px;
       align-items: flex-start;
       padding: 18px 18px 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(96, 165, 250, 0.12);
-      background: rgba(15, 23, 42, 0.45);
+      border-radius: var(--nb-radius);
+      border: 1px solid var(--nb-card-border);
+      background: var(--nb-card-bg);
     }
     .nb .share-step-num {
       flex: none;
@@ -2258,10 +2148,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       display: grid;
       place-items: center;
       font-size: 13px;
-      font-weight: 800;
-      color: #0b1220;
-      background: var(--relief-green);
-      box-shadow: 0 0 18px rgba(74, 222, 128, 0.35);
+      font-weight: 700;
+      color: var(--nb-accent-strong);
+      background: var(--nb-accent-bg);
+      border: 1px solid var(--nb-accent-line);
     }
     .nb .share-steps h3 {
       margin: 2px 0 6px;
@@ -2288,10 +2178,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       padding: 6px 12px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 700;
-      color: var(--relief-green);
-      border: 1px solid rgba(74, 222, 128, 0.28);
-      background: rgba(74, 222, 128, 0.08);
+      font-weight: 600;
+      color: var(--nb-accent-strong);
+      border: 1px solid var(--nb-accent-line);
+      background: var(--nb-accent-bg);
     }
     .nb .share-foot p {
       margin: 0;
@@ -2322,9 +2212,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       background: var(--terminal-bg);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
-      box-shadow:
-        0 0 0 1px rgba(74, 222, 128, 0.06),
-        0 0 40px rgba(74, 222, 128, 0.06);
     }
     .nb .onboarding-cmd {
       font-family: var(--nb-font-mono);
@@ -2333,7 +2220,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       letter-spacing: 0.01em;
     }
     .nb .onboarding-cmd .ocm-prompt {
-      color: var(--relief-green);
+      color: var(--terminal-dim);
       margin-right: 8px;
     }
     .nb .onboarding-cmd .ocm-pkg {
@@ -2343,7 +2230,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.55);
     }
     .nb .onboarding-cmd .ocm-val {
-      color: var(--accent-cyan);
+      color: var(--nb-accent-strong);
       transition: color 0.2s;
     }
     .nb .onboarding-platform-toggle {
@@ -2372,8 +2259,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: #fff;
     }
     .nb .onboarding-platform-toggle .opt.active {
-      background: var(--relief-green);
-      color: #08160d;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
     }
     @media (max-width: 600px) {
       .nb .onboarding-cmd {
@@ -2388,8 +2275,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       grid-template-columns: 280px 1fr;
       gap: 24px;
       margin-top: 40px;
-      background: rgba(26, 29, 36, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
       border-radius: 20px;
       padding: 24px;
     }
@@ -2426,7 +2313,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       display: none;
     }
     .nb .wizard-step.active {
-      background: rgba(74, 222, 128, 0.08);
+      background: rgba(255, 255, 255, 0.05);
       color: #fff;
     }
     .nb .wizard-step .num {
@@ -2443,14 +2330,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       font-family: var(--nb-font-mono);
     }
     .nb .wizard-step.active .num {
-      background: var(--relief-green);
-      color: #08160d;
-      border-color: var(--relief-green);
+      background: var(--nb-accent);
+      color: #0b1220;
+      border-color: var(--nb-accent);
     }
     .nb .wizard-step.done .num {
-      background: rgba(74, 222, 128, 0.15);
-      color: var(--relief-green);
-      border-color: rgba(74, 222, 128, 0.4);
+      background: var(--nb-accent-bg);
+      color: var(--nb-accent-strong);
+      border-color: var(--nb-accent-line);
     }
     .nb .wizard-step .lbl {
       font-size: 14px;
@@ -2477,7 +2364,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       margin: 0 0 10px;
       font-size: 13px;
       font-weight: 700;
-      color: var(--relief-green);
+      color: var(--nb-accent);
       text-transform: uppercase;
       letter-spacing: 0.12em;
       font-family: var(--nb-font-display);
@@ -2502,7 +2389,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-kw);
     }
     .nb .wizard-stage .ok {
-      color: var(--relief-green);
+      color: var(--nb-ok);
     }
     .nb .wizard-stage .lock {
       color: #facc15;
@@ -2965,7 +2852,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       place-items: center;
       font-family: var(--nb-font-mono);
       font-size: 11px;
-      color: var(--relief-green);
+      color: var(--nb-ok);
     }
     .nb .dock-ico.folder {
       background: linear-gradient(#6fd2ff, #3a9bd8);
@@ -4531,15 +4418,15 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       font-weight: 600;
     }
     .nb .wizard-before-after .b {
-      background: rgba(248, 113, 113, 0.1);
-      color: #fca5a5;
-      border: 1px solid rgba(248, 113, 113, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       text-decoration: line-through;
     }
     .nb .wizard-before-after .a {
-      background: rgba(74, 222, 128, 0.1);
-      color: var(--relief-green);
-      border: 1px solid rgba(74, 222, 128, 0.3);
+      background: var(--nb-accent-bg);
+      color: var(--nb-accent-strong);
+      border: 1px solid var(--nb-accent-line);
     }
     .nb .wizard-before-after .ba-arrow {
       color: rgba(255, 255, 255, 0.45);
@@ -4561,31 +4448,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .trust-cell {
       position: relative;
       padding: 22px;
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       overflow: hidden;
-      transition:
-        border-color 0.25s,
-        transform 0.25s,
-        box-shadow 0.25s;
-    }
-    .nb .trust-cell:hover {
-      border-color: rgba(74, 222, 128, 0.3);
-      transform: translateY(-2px);
-      box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.32),
-        0 0 0 1px rgba(74, 222, 128, 0.08);
-    }
-    .nb .trust-cell::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      pointer-events: none;
-      /* Static corner glow — no longer follows the cursor. */
-      background: radial-gradient(170px 130px at 18% 0%, rgba(74, 222, 128, 0.12), transparent 70%);
-      opacity: 1;
     }
     .nb .trust-icon {
       width: 40px;
@@ -4594,35 +4460,21 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       align-items: center;
       justify-content: center;
       border-radius: 10px;
-      background: rgba(74, 222, 128, 0.08);
-      color: var(--relief-green);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.75);
       margin-bottom: 14px;
-      border: 1px solid rgba(74, 222, 128, 0.18);
-      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.28);
-      transition: box-shadow 0.4s ease;
-    }
-    .nb .trust-cell .trust-icon {
-      animation: nbTrustIconPulse 3.6s ease-in-out infinite;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .nb .trust-icon svg {
       width: 22px;
       height: 22px;
-    }
-    @keyframes nbTrustIconPulse {
-      0%,
-      100% {
-        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.2);
-      }
-      50% {
-        box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
-      }
     }
     .nb .trust-cell .lbl {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--relief-green);
+      color: var(--nb-accent);
       margin-bottom: 8px;
     }
     .nb .trust-cell h3 {
@@ -4647,53 +4499,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.55);
       letter-spacing: 0.04em;
     }
-    .nb .trust-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--relief-green);
-      box-shadow: 0 0 6px var(--relief-green);
-      flex-shrink: 0;
-    }
-    .nb .trust-cell .trust-dot--ok {
-      animation: nbTrustBlink 2.4s ease-in-out infinite;
-    }
-    @keyframes nbTrustBlink {
-      0%,
-      92%,
-      100% {
-        opacity: 1;
-      }
-      95% {
-        opacity: 0.25;
-      }
-    }
+    /* Static status markers — no decorative pulsing. */
+    .nb .trust-dot,
     .nb .trust-pulse {
-      width: 10px;
-      height: 10px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: var(--relief-green);
-      position: relative;
+      background: var(--nb-accent);
       flex-shrink: 0;
-      box-shadow: 0 0 8px var(--relief-green);
-    }
-    .nb .trust-cell .trust-pulse::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 1px solid var(--relief-green);
-      animation: nbTrustRing 1.8s ease-out infinite;
-    }
-    @keyframes nbTrustRing {
-      0% {
-        transform: scale(1);
-        opacity: 0.7;
-      }
-      100% {
-        transform: scale(2.6);
-        opacity: 0;
-      }
     }
     .nb .trust-stream {
       display: inline-flex;
@@ -4704,72 +4517,34 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .trust-stream span {
       display: inline-block;
       width: 3px;
-      height: 12px;
-      background: var(--relief-green);
+      height: 10px;
+      background: var(--nb-accent);
       border-radius: 1px;
-      opacity: 0.4;
+      opacity: 0.35;
     }
-    .nb .trust-cell .trust-stream span {
-      animation: nbTrustBars 1.4s ease-in-out infinite;
+    .nb .trust-stream span:nth-child(2) {
+      opacity: 0.55;
     }
-    .nb .trust-cell .trust-stream span:nth-child(1) {
-      animation-delay: 0s;
+    .nb .trust-stream span:nth-child(3) {
+      opacity: 0.75;
     }
-    .nb .trust-cell .trust-stream span:nth-child(2) {
-      animation-delay: 0.15s;
-    }
-    .nb .trust-cell .trust-stream span:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-    .nb .trust-cell .trust-stream span:nth-child(4) {
-      animation-delay: 0.45s;
-    }
-    @keyframes nbTrustBars {
-      0%,
-      100% {
-        opacity: 0.25;
-        transform: scaleY(0.5);
-      }
-      50% {
-        opacity: 1;
-        transform: scaleY(1);
-      }
+    .nb .trust-stream span:nth-child(4) {
+      opacity: 1;
     }
     .nb .trust-decay {
-      width: 10px;
-      height: 10px;
+      width: 7px;
+      height: 7px;
       border-radius: 2px;
-      background: var(--relief-green);
+      background: var(--nb-accent);
       flex-shrink: 0;
-      box-shadow: 0 0 6px var(--relief-green);
-    }
-    .nb .trust-cell .trust-decay {
-      animation: nbTrustDecay 2.2s ease-in-out infinite;
-    }
-    @keyframes nbTrustDecay {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-        border-radius: 2px;
-      }
-      60% {
-        transform: scale(0.4);
-        opacity: 0.3;
-        border-radius: 50%;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-        border-radius: 2px;
-      }
     }
 
     /* ---- comparison ---- */
     .nb .comp-wrap {
       margin-top: 36px;
       overflow-x: auto;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       background: rgba(255, 255, 255, 0.02);
     }
     .nb table.comp {
@@ -4798,12 +4573,12 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     /* Capgo column — clearly the highlighted one */
     .nb table.comp thead th.us {
-      color: var(--relief-green);
-      background: rgba(74, 222, 128, 0.1);
-      border-bottom-color: rgba(74, 222, 128, 0.4);
+      color: var(--nb-accent);
+      background: rgba(96, 165, 250, 0.06);
+      border-bottom-color: var(--nb-accent-line);
     }
     .nb table.comp tbody td.us {
-      background: rgba(74, 222, 128, 0.06);
+      background: rgba(96, 165, 250, 0.04);
     }
     .nb table.comp-prose {
       min-width: 880px;
@@ -4845,7 +4620,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.85);
     }
     .nb table.comp-prose .hook {
-      color: var(--relief-green);
+      color: #fff;
       font-weight: 700;
     }
     @media (max-width: 720px) {
@@ -4926,7 +4701,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       position: absolute;
       left: 0;
       top: 1px;
-      color: var(--relief-green);
+      color: var(--nb-accent);
       font-weight: 700;
     }
     .nb .aidebug-points h3 {
@@ -4961,16 +4736,16 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .tier {
       padding: 24px;
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
     .nb .tier.pop {
-      border-color: rgba(74, 222, 128, 0.4);
-      background: rgba(26, 29, 36, 0.85);
+      border-color: rgba(96, 165, 250, 0.45);
+      background: rgba(255, 255, 255, 0.05);
     }
     .nb .tier .name {
       font-size: 13px;
@@ -4980,7 +4755,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       text-transform: uppercase;
     }
     .nb .tier.pop .name {
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .tier .price {
       font-size: 36px;
@@ -5025,24 +4800,24 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .tier li::before {
       content: '✓';
-      color: var(--relief-green);
+      color: var(--nb-accent);
       font-weight: 700;
     }
     .nb .pricing-fineprint {
       margin-top: 24px;
       padding: 16px 20px;
-      background: rgba(96, 165, 250, 0.05);
-      border: 1px solid rgba(96, 165, 250, 0.25);
-      border-radius: 14px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: 12px;
       font-size: 13px;
       line-height: 1.6;
       color: rgba(255, 255, 255, 0.7);
     }
     .nb .pricing-fineprint b {
-      color: var(--accent-sky);
+      color: #fff;
     }
     .nb .pricing-fineprint a {
-      color: var(--accent-sky);
+      color: var(--nb-accent);
       text-decoration: underline;
     }
 
@@ -5050,9 +4825,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .build-calc {
       margin-top: 18px;
       padding: 24px;
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
     }
     .nb .build-calc-head {
       font-size: 15px;
@@ -5062,7 +4837,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .build-calc-range {
       width: 100%;
-      accent-color: var(--relief-green);
+      accent-color: var(--nb-accent);
       cursor: pointer;
     }
     .nb .build-calc-readout {
@@ -5072,7 +4847,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.6);
     }
     .nb .build-calc-readout span {
-      color: var(--relief-green);
+      color: #fff;
       font-weight: 700;
     }
     .nb .build-calc-results {
@@ -5101,10 +4876,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       width: 100%;
       height: 100%;
     }
-    /* Android keeps its actual brand green */
-    .nb .build-calc-results .bc-res:last-child .bc-ico {
-      color: var(--relief-green);
-    }
     .nb .bc-num {
       font-size: 34px;
       font-weight: 900;
@@ -5127,7 +4898,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.6);
     }
     .nb .build-calc-price span {
-      color: var(--relief-green);
+      color: #fff;
       font-weight: 700;
       font-size: 18px;
     }
@@ -5170,7 +4941,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .faq details[open] summary .plus {
       transform: rotate(45deg);
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .faq .ans {
       margin-top: 12px;
@@ -5184,8 +4955,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .faq-doc-link {
       display: inline-block;
       margin-top: 10px;
-      color: var(--relief-green);
-      font-weight: 700;
+      color: var(--nb-accent);
+      font-weight: 600;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
@@ -5193,7 +4964,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: #fff;
     }
     .nb .faq-doc-link:focus-visible {
-      outline: 2px solid var(--relief-green);
+      outline: 2px solid var(--nb-accent);
       outline-offset: 4px;
     }
 
@@ -5209,8 +4980,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       margin: 0 0 8px;
     }
     .nb .final h2 .name {
-      color: var(--relief-green);
-      text-shadow: 0 0 40px var(--relief-green-glow);
+      color: var(--nb-accent);
     }
     .nb .final p.tagline {
       font-size: clamp(1.1rem, 1.6vw, 1.4rem);
@@ -5240,21 +5010,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         animation: none;
         opacity: 1;
       }
-      .nb .trust-cell .trust-icon,
-      .nb .trust-dot--ok,
-      .nb .trust-pulse::after,
-      .nb .trust-stream span,
-      .nb .trust-decay {
-        animation: none !important;
-      }
     }
     /* ---- ask AI / MCP section ---- */
-    .nb .eyebrow--violet {
-      color: var(--accent-violet);
-    }
-    .nb .accent-violet {
-      color: var(--accent-violet);
-    }
     .nb .mcp-grid {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
@@ -5269,9 +5026,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       }
     }
     .nb .mcp-card {
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       padding: 26px 26px 28px;
     }
     .nb .mcp-step {
@@ -5291,9 +5048,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       display: grid;
       place-items: center;
       font-size: 13px;
-      background: rgba(129, 140, 248, 0.16);
-      color: var(--accent-violet);
-      border: 1px solid rgba(129, 140, 248, 0.3);
+      background: var(--nb-accent-bg);
+      color: var(--nb-accent-strong);
+      border: 1px solid var(--nb-accent-line);
     }
     .nb .mcp-editors {
       display: flex;
@@ -5322,8 +5079,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .mcp-ed.is-active {
       color: #fff;
-      background: rgba(129, 140, 248, 0.16);
-      border-color: rgba(129, 140, 248, 0.55);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
     }
     .nb .mcp-ed-i {
       width: 15px;
@@ -5392,7 +5149,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border-color: rgba(255, 255, 255, 0.3);
     }
     .nb .mcp-copy.copied {
-      color: var(--relief-green);
+      color: var(--nb-ok);
       border-color: rgba(74, 222, 128, 0.45);
     }
     .nb .mcp-code-pre {
@@ -5409,7 +5166,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       align-items: center;
       gap: 10px;
       background: var(--terminal-bg);
-      border: 1px solid rgba(129, 140, 248, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 13px 14px;
       margin-bottom: 18px;
@@ -5418,9 +5175,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       flex: 0 0 auto;
       font-family: var(--nb-font-mono);
       font-size: 11px;
-      color: #bcd0ff;
-      background: rgba(129, 140, 248, 0.16);
-      border: 1px solid rgba(129, 140, 248, 0.3);
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 6px;
       padding: 3px 8px;
     }
@@ -5452,7 +5209,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       position: absolute;
       left: 0;
       top: 0;
-      color: var(--relief-green);
+      color: var(--nb-accent);
       font-weight: 700;
     }
     .nb .mcp-ask-note {
@@ -5836,22 +5593,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           }
         })
         tile.tabIndex = 0
-      })
-    })()
-
-    // ----------------------------------------------------------------
-    // BENTO PALETTE — preview switcher (remove once a palette is chosen)
-    // ----------------------------------------------------------------
-    ;(function bentoSpotlight() {
-      const bento = document.getElementById('bento')
-      if (!bento) return
-      // Green glow follows the cursor across each tile.
-      bento.querySelectorAll<HTMLElement>('.tile').forEach((tile) => {
-        tile.addEventListener('pointermove', (e: PointerEvent) => {
-          const r = tile.getBoundingClientRect()
-          tile.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%')
-          tile.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%')
-        })
       })
     })()
 

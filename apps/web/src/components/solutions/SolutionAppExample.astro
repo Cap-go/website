@@ -22,7 +22,6 @@ const appExamples = example.apps.map((appReference) => ({
   note: copy(appReference.noteKey),
 }))
 const plays = example.playKeys.map((playKey) => copy(playKey))
-const categories = [...new Set(appExamples.map(({ app }) => renameCat(app.category)).filter(Boolean))].slice(0, 3).join(', ')
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
 const showExampleCtas = solution === 'enterprise'
@@ -32,103 +31,20 @@ const showExampleCtas = solution === 'enterprise'
   appExamples.length > 0 && (
     <section id="real-app-examples" data-solution-app-examples={solution} class="solution-app-examples border-y border-white/10 bg-[#1a1a1a] py-14 sm:py-16 lg:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="solution-app-examples-header mb-8 grid gap-6 lg:mb-10 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-end">
-          <div>
-            <p class="text-sm font-semibold tracking-wide text-[#44BCFF] uppercase">{copy('solution_app_examples_eyebrow')}</p>
-            <h2 class="mt-4 max-w-2xl text-3xl leading-tight font-semibold tracking-tight text-balance text-white sm:text-4xl">{copy(example.headlineKey)}</h2>
-            <p class="mt-4 max-w-3xl text-base leading-7 text-pretty text-gray-400 sm:text-lg">{copy(example.useCaseKey)}</p>
-            {showExampleCtas && (
-              <div class="solution-app-examples-actions mt-6 flex flex-col gap-3">
-                <HumanSupport size="sm" align="start" />
-                <div class="flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={registerUrl}
-                    class="solution-app-examples-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
-                  >
-                    {copy('solutions_get_started')}
-                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path
-                        fill-rule="evenodd"
-                        d="M5.22 14.78a.75.75 0 0 1 0-1.06L12.94 6H8.75a.75.75 0 0 1 0-1.5h6a.75.75 0 0 1 .75.75v6a.75.75 0 0 1-1.5 0V7.06l-7.72 7.72a.75.75 0 0 1-1.06 0Z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    href={talkToTeamUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={copy('solutions_talk_to_team')}
-                    class="solution-app-examples-secondary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white px-5 py-3 text-sm font-bold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
-                  >
-                    <TeamAvatars />
-                    <span>{copy('solutions_talk_to_team')}</span>
-                  </a>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <dl class="solution-app-examples-meta grid grid-cols-1 overflow-hidden rounded-lg border border-white/10 bg-white/[0.03] text-center sm:grid-cols-3">
-            <div class="border-b border-white/10 p-4 sm:border-r sm:border-b-0">
-              <dt class="font-mono text-[0.68rem] font-semibold tracking-wide text-gray-400 uppercase">{copy('solution_app_examples_example_type')}</dt>
-              <dd class="mt-2 text-sm font-semibold text-white">{copy(example.labelKey)}</dd>
-            </div>
-            <div class="border-b border-white/10 p-4 sm:border-r sm:border-b-0">
-              <dt class="font-mono text-[0.68rem] font-semibold tracking-wide text-gray-400 uppercase">{copy('solution_app_examples_store_categories')}</dt>
-              <dd class="mt-2 text-sm font-semibold text-pretty text-white">{categories}</dd>
-            </div>
-            <div class="p-4">
-              <dt class="font-mono text-[0.68rem] font-semibold tracking-wide text-gray-400 uppercase">{copy('solution_app_examples_source')}</dt>
-              <dd class="mt-2 text-sm font-semibold text-white">{copy('solution_app_examples_public_store_dataset')}</dd>
-            </div>
-          </dl>
-        </div>
-
-        <div class="solution-app-examples-body grid gap-5 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start">
-          <div
-            class="solution-app-examples-list order-1 space-y-3 lg:order-1"
-            data-randomize-app-examples={randomize ? 'true' : undefined}
-            aria-live={randomize ? 'polite' : undefined}
-            aria-atomic={randomize ? 'true' : undefined}
-          >
-            {appExamples.map(({ app, note }) => (
-              <article class="solution-app-example-card group rounded-lg border border-white/10 bg-white/[0.03] p-4 transition-colors duration-200 hover:border-blue-400/30 hover:bg-white/[0.05]">
-                <div class="grid gap-4 sm:grid-cols-[auto_minmax(0,1fr)_9.5rem] sm:items-start">
-                  <img
-                    class="h-14 w-14 shrink-0 rounded-lg object-cover outline-1 -outline-offset-1 outline-white/10"
-                    src={app.icon}
-                    alt={copy('solution_app_examples_icon_alt', { title: app.title })}
-                    width="56"
-                    height="56"
-                    loading="lazy"
-                    decoding="async"
-                  />
-
-                  <div class="min-w-0">
-                    <p class="truncate text-xs font-semibold tracking-wide text-blue-400 uppercase">{renameCat(app.category)}</p>
-                    <h3 class="mt-1 text-base leading-6 font-semibold tracking-tight break-words text-white">{app.title}</h3>
-                    <p class="mt-2 text-sm leading-6 text-pretty text-gray-400">{note}</p>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-2 text-sm sm:grid-cols-1">
-                    <span class="rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 font-medium text-gray-300">
-                      {copy('solution_app_examples_installs', { count: shortNumber(app.installs) })}
-                    </span>
-                    <span class="rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 font-medium text-gray-300">
-                      {copy('solution_app_examples_rating', { score: app.score.toFixed(1) })}
-                    </span>
-                  </div>
-                </div>
-
+        <div class="solution-app-examples-header max-w-3xl">
+          <p class="text-sm font-semibold tracking-wide text-[#44BCFF] uppercase">{copy('solution_app_examples_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-semibold tracking-tight text-balance text-white sm:text-5xl">{copy(example.headlineKey)}</h2>
+          <p class="mt-5 text-base leading-7 text-pretty text-gray-400 sm:text-lg">{copy(example.useCaseKey)}</p>
+          {showExampleCtas && (
+            <div class="solution-app-examples-actions mt-6 flex flex-col gap-3">
+              <HumanSupport size="sm" align="start" />
+              <div class="flex flex-col gap-3 sm:flex-row">
                 <a
-                  href={app.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="solution-app-example-link mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold text-blue-400 transition-colors hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400 sm:w-fit sm:px-4"
+                  href={registerUrl}
+                  class="solution-app-examples-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
                 >
-                  <span>{copy('solution_app_examples_view_listing')}</span>
-                  <svg class="h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  {copy('solutions_get_started')}
+                  <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path
                       fill-rule="evenodd"
                       d="M5.22 14.78a.75.75 0 0 1 0-1.06L12.94 6H8.75a.75.75 0 0 1 0-1.5h6a.75.75 0 0 1 .75.75v6a.75.75 0 0 1-1.5 0V7.06l-7.72 7.72a.75.75 0 0 1-1.06 0Z"
@@ -136,43 +52,105 @@ const showExampleCtas = solution === 'enterprise'
                     />
                   </svg>
                 </a>
+                <a
+                  href={talkToTeamUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={copy('solutions_talk_to_team')}
+                  class="solution-app-examples-secondary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white px-5 py-3 text-sm font-bold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
+                >
+                  <TeamAvatars />
+                  <span>{copy('solutions_talk_to_team')}</span>
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div class="solution-app-examples-body mt-12">
+          <div
+            class="solution-app-examples-list grid gap-4 md:grid-cols-3"
+            data-randomize-app-examples={randomize ? 'true' : undefined}
+            aria-live={randomize ? 'polite' : undefined}
+            aria-atomic={randomize ? 'true' : undefined}
+          >
+            {appExamples.map(({ app, note }) => (
+              <article class="solution-app-example-card group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6 transition-[border-color,transform] duration-200 hover:border-[#44BCFF]/40 motion-safe:hover:-translate-y-0.5">
+                <div class="flex items-start justify-between gap-4">
+                  <img
+                    class="h-16 w-16 shrink-0 rounded-2xl object-cover shadow-lg shadow-black/40 outline-1 -outline-offset-1 outline-white/10"
+                    src={app.icon}
+                    alt={copy('solution_app_examples_icon_alt', { title: app.title })}
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="rounded-full bg-white/[0.06] px-2.5 py-1 text-[11px] font-semibold tracking-wide text-gray-300 uppercase ring-1 ring-white/10">
+                    {renameCat(app.category)}
+                  </span>
+                </div>
+
+                <h3 class="mt-5 text-lg leading-6 font-semibold tracking-tight break-words text-white">{app.title}</h3>
+                <p class="mt-2 flex-1 text-sm leading-6 text-pretty text-gray-400">{note}</p>
+
+                <dl class="mt-6 grid grid-cols-2 border-t border-white/10 pt-5">
+                  <div>
+                    <dt class="sr-only">{copy('solution_app_examples_installs_label')}</dt>
+                    <dd class="text-2xl font-semibold tracking-tight text-white">{shortNumber(app.installs)}</dd>
+                    <dd class="mt-1 text-xs text-gray-500" aria-hidden="true">
+                      {copy('solution_app_examples_installs_label')}
+                    </dd>
+                  </div>
+                  <div class="border-l border-white/10 pl-5">
+                    <dt class="sr-only">{copy('solution_app_examples_rating_label')}</dt>
+                    <dd class="flex items-center gap-1.5 text-2xl font-semibold tracking-tight text-white">
+                      {app.score.toFixed(1)}
+                      <svg class="h-5 w-5 text-amber-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
+                      </svg>
+                    </dd>
+                    <dd class="mt-1 text-xs text-gray-500" aria-hidden="true">
+                      {copy('solution_app_examples_rating_label')}
+                    </dd>
+                  </div>
+                </dl>
               </article>
             ))}
           </div>
 
-          <aside id="app-examples-cta" class="solution-app-examples-cta order-2 flex flex-col justify-between rounded-lg border border-white/10 bg-white/[0.03] p-6 lg:order-2">
+          <aside
+            id="app-examples-cta"
+            class="solution-app-examples-cta mt-6 grid gap-8 overflow-hidden rounded-2xl border border-[#44BCFF]/20 bg-[radial-gradient(80%_120%_at_0%_0%,rgb(68_188_255/0.12),transparent_60%)] p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center"
+          >
             <div>
               <p class="font-mono text-xs font-semibold tracking-wide text-[#44BCFF] uppercase">{copy('solution_app_examples_cta_kicker')}</p>
               <h3 class="mt-3 text-2xl leading-8 font-semibold tracking-tight text-balance text-white">{copy('solution_app_examples_cta_title')}</h3>
-              <p class="mt-4 text-base leading-7 text-pretty text-gray-400">{copy('solution_app_examples_cta_text')}</p>
-
-              <div class="solution-app-examples-plays mt-6 space-y-3 border-y border-white/10 py-5">
+              <p class="mt-3 max-w-2xl text-base leading-7 text-pretty text-gray-400">{copy('solution_app_examples_cta_text')}</p>
+              <ul class="solution-app-examples-plays mt-5 flex flex-wrap gap-x-6 gap-y-2">
                 {plays.map((play) => (
-                  <div class="grid grid-cols-[auto_1fr] gap-3 text-sm leading-6 text-gray-300">
-                    <span class="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/15 text-blue-300 ring-1 ring-blue-400/25">
-                      <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path
-                          fill-rule="evenodd"
-                          d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                    <span>{play}</span>
-                  </div>
+                  <li class="flex items-center gap-2 text-sm text-gray-300">
+                    <svg class="h-4 w-4 shrink-0 text-[#44BCFF]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    {play}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
-            <div class="mt-6 flex flex-col gap-3">
+            <div class="flex flex-col items-start gap-3 lg:items-center">
               <HumanSupport size="sm" align="start" />
               <a
                 href={getRelativeLocaleUrl(locale, 'register')}
-                class="solution-app-examples-cta-link inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
+                class="solution-app-examples-cta-link inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
               >
                 {copy('solution_app_examples_cta_button')}
               </a>
-              <p class="mt-1 text-xs leading-5 text-slate-400">{copy('solution_app_examples_disclaimer')}</p>
             </div>
           </aside>
         </div>

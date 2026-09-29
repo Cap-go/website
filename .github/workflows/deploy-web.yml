@@ -127,9 +127,12 @@ jobs:
         run: |
           GITHUB_STATS_REFRESH=true bun run fetch:stars
           WEBSITE_STATS_REFRESH=true bun run fetch:website-stats
-          LIVE_UPDATE_METRICS_REFRESH=true bun run fetch:live-update-metrics
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
+          CF_ACCOUNT_ANALYTICS_ID: ${{ secrets.CF_ACCOUNT_ANALYTICS_ID }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - run: cd apps/web && bun run check
       - run: bun run clean:build-cache
       - run: bun run build:web
@@ -139,6 +142,14 @@ jobs:
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
       - run: bun run build:after
+      - name: Remove legacy builder-metrics Worker secrets
+        working-directory: apps/web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          bunx wrangler@4.126.0 secret delete SUPABASE_SERVICE_ROLE_KEY || true
+          bunx wrangler@4.126.0 secret delete BUILDER_DATABASE_URL || true
       - run: bun run deploy:web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

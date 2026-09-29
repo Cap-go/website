@@ -1,4 +1,7 @@
 ---
+import m from '@/copy/messages'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import '@/styles/skills-product.css'
 import Layout from '@/layouts/Layout.astro'
 import CommandCode from '@/components/CommandCode.astro'
@@ -635,6 +638,14 @@ const skillCount = skills.length
     </section>
 
     <!-- Footer Note -->
+    <ProductTestimonials
+      variant="dark"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_skills_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_skills_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.skills}
+    />
+
     <section class="border-t border-white/10 py-8">
       <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
         <p class="text-sm text-gray-500">

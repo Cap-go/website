@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-22T08:09:22.697Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-09-17T13:36:23.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/ba308f87-6f68-4a15-a46f-3ffc02bcba9e/expo-image-picker-guide.jpg'
 head_image_alt: 'Expo Image Picker: A Complete Guide for 2026'
 keywords: 'expo image picker, react native, expo, mobile development, image upload'
@@ -81,7 +81,7 @@ Start with Expo's version-aware installer:
 npx expo install expo-image-picker
 ```
 
-Use `expo install` instead of `npm install` or `yarn add`. Expo matches the package version to your SDK, which avoids a common class of native compatibility problems. If you are comparing how Expo modules fit into your release process, this [Expo tooling overview](https://capgo.app/expo/) is a useful reference.
+Use `expo install` instead of `npm install` or `yarn add`. Expo matches the package version to your SDK, which avoids a common class of native compatibility problems. If you are comparing how Expo modules fit into your release process, this [Expo tooling overview](https://capgo.app/alternatives/expo/) is a useful reference.
 
 <a id="managed-workflow-setup"></a>
 ### Managed workflow setup

@@ -114,13 +114,11 @@ Default: `true`
 
 ## `autoSplashscreen`
 
-> Automatically handle splashscreen hiding when using instant apply modes. When enabled, the plugin will automatically hide the splashscreen after updates are applied or when no update is needed.
+> Required when using instant apply modes (`"atInstall"`, `"onLaunch"`, or `"always"`), including the deprecated `directUpdate` values. Install `@capacitor/splash-screen` and set `launchAutoHide: false`.
+> When enabled, the plugin hides the splashscreen after updates are applied or when no update is needed.
 > This removes the need to manually listen for appReady events and call SplashScreen.hide().
-> Only works when `autoUpdate` is set to `"atInstall"`, `"onLaunch"`, or `"always"`. Legacy `directUpdate` values are still supported for backward compatibility.
-> Requires the @capacitor/splash-screen plugin to be installed and configured with launchAutoHide: false.
-> Requires Auto Update to be enabled.
 
-Available on Android, iOS, and Electron.
+Available on Android and iOS.
 
 Default: `false`
 
@@ -131,6 +129,9 @@ Default: `false`
     "CapacitorUpdater": {
       "autoUpdate": "atInstall",
       "autoSplashscreen": true
+    },
+    "SplashScreen": {
+      "launchAutoHide": false
     }
   }
 }
@@ -150,6 +151,8 @@ Options:
 - `"onLaunch"`: Apply immediately only when the app is brought to the foreground from a killed state (cold start). After that first check, fall back to `"atBackground"` behavior
 - `"always"`: Check on every foreground transition and apply immediately whenever an update is available
 - `"onlyDownload"`: Check and download automatically, emit `updateAvailable`, and never set the next bundle or apply an update automatically
+
+Instant apply modes (`"atInstall"`, `"onLaunch"`, `"always"`) apply while the user is waiting. Upload with `npx @capgo/cli@latest bundle upload --delta` so only changed files download. A full zip upload slows the user experience. On Android and iOS these modes require `autoSplashscreen: true` and `@capacitor/splash-screen` with `launchAutoHide: false`.
 
 Available on Android, iOS, and Electron.
 
@@ -209,6 +212,7 @@ Default: `undefined`
 
 > Deprecated. Use `autoUpdate` string modes instead: `"atInstall"`, `"onLaunch"`, or `"always"`.
 > This option remains supported for existing apps.
+> Instant apply should be uploaded with `--delta` so the update does not slow the user experience. These modes require `autoSplashscreen: true` and `@capacitor/splash-screen` with `launchAutoHide: false`.
 
 Options:
 - `false`: Never do direct updates

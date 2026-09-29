@@ -85,9 +85,6 @@ body:has(.lu) {
 .lu.bg-ad {
   background: transparent;
 }
-body:has(.lu) footer > div > div:first-child {
-  display: none !important;
-}
 .lu .bg-grid::before {
   content: '';
   position: absolute;
@@ -581,11 +578,17 @@ body:has(.lu) footer > div > div:first-child {
   text-align: center;
   padding: 110px 0;
 }
+.lu .final > .shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .lu .final h2 {
   font-weight: 900;
   letter-spacing: -0.03em;
   font-size: clamp(2.2rem, 5vw, 4rem);
-  margin: 0 0 8px;
+  line-height: 1.05;
+  margin: 0 0 16px;
 }
 .lu .final h2 .name {
   color: var(--relief-blue);

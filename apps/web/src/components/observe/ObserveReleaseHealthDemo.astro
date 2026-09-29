@@ -1,0 +1,1512 @@
+---
+/**
+ * Decorative, looping illustration of the Observe release-health workflow:
+ * deploy 2.6.0 -> launch/WebView P90 and native issues spike -> the 2.6.0 row
+ * is flagged -> drill into Logs Insights (errors, devices, action logs) ->
+ * 2.6.1 ships and the signals recover. Pure CSS; one shared timeline.
+ * Mock labels are intentionally hard-coded English (decorative, aria-hidden).
+ */
+
+const W = 400
+const H = 160
+const MAX_MS = 2000
+const days = ['2 Jul', '3 Jul', '4 Jul', '5 Jul', '6 Jul', '7 Jul', '8 Jul', '9 Jul', '10 Jul', '11 Jul', '12 Jul', '13 Jul']
+const launchP90 = [772, 790, 768, 784, 776, 781, 1180, 1410, 1330, 905, 792, 776]
+const webviewP90 = [1160, 1190, 1172, 1198, 1180, 1176, 1540, 1720, 1660, 1290, 1196, 1182]
+const launches = [74, 78, 72, 80, 76, 79, 81, 77, 79, 78, 80, 76]
+const issues = [3, 4, 3, 4, 3, 4, 30, 44, 38, 12, 5, 4]
+
+const pt = (value: number, index: number) => [((index + 0.5) / days.length) * W, H - (value / MAX_MS) * H] as const
+
+function smoothPath(values: number[]) {
+  const points = values.map(pt)
+  let d = `M${points[0][0].toFixed(1)},${points[0][1].toFixed(1)}`
+  for (let i = 0; i < points.length - 1; i++) {
+    const p1 = points[i]
+    const p2 = points[i + 1]
+    const dx = (p2[0] - p1[0]) / 2.4
+    const c1 = [p1[0] + dx, p1[1]]
+    const c2 = [p2[0] - dx, p2[1]]
+    d += ` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`
+  }
+  return d
+}
+
+const launchPath = smoothPath(launchP90)
+const webviewPath = smoothPath(webviewP90)
+const launchArea = `${launchPath} L${W - W / days.length / 2},${H} L${W / days.length / 2},${H} Z`
+const [spikeX, spikeY] = pt(launchP90[7], 7)
+const spike = { left: (spikeX / W) * 100, top: (spikeY / H) * 100 }
+
+const kpis = [
+  { label: 'Tracked devices', values: ['8,240', '8,240', '8,240'], tone: ['', '', ''], cls: 'kpi-devices' },
+  { label: 'Issue-free devices', values: ['99.1%', '94.3%', '98.8%'], tone: ['good', 'bad', 'good'], cls: '' },
+  { label: 'Launch P90', values: ['781 ms', '1.4 s', '790 ms'], tone: ['', 'bad', ''], cls: '' },
+  { label: 'WebView P90', values: ['1.2 s', '1.7 s', '1.2 s'], tone: ['', 'bad', ''], cls: '' },
+  { label: 'Native issues', values: ['41', '612', '638'], tone: ['bad', 'bad', 'bad'], cls: '' },
+]
+
+const logLines = [
+  ['14:02:11', 'update_fail', 'network_timeout'],
+  ['14:02:09', 'update_fail', 'network_timeout'],
+  ['14:01:57', 'download_fail', 'checksum'],
+]
+---
+
+<div class="ohd" data-ohd aria-hidden="true">
+  <div class="ohd-app">
+    <aside class="ohd-side">
+      <p class="ohd-brand"><span class="ohd-logo"></span>Capgo</p>
+      <p class="ohd-org"><span>DO</span><b>Demo org<small>Demo app</small></b></p>
+      <p class="ohd-side-label">Pages</p>
+      <ul>
+        <li>Dashboard</li>
+        <li class="is-active">Apps</li>
+        <li>API Keys</li>
+        <li>Documentation</li>
+      </ul>
+    </aside>
+
+    <div class="ohd-main">
+      <div class="ohd-top">
+        <p class="ohd-crumbs">apps <i>/</i> Demo app <i>/</i> <b>Observe</b></p>
+        <ul class="ohd-tabs">
+          <li>Dashboard</li>
+          <li class="is-active">Observe <em>Beta</em></li>
+          <li>Bundles</li>
+          <li>Channels</li>
+          <li>Devices</li>
+          <li class="ohd-tab-logs">Logs</li>
+        </ul>
+      </div>
+
+      <div class="ohd-body">
+        <div class="ohd-head">
+          <div>
+            <p class="ohd-title">Observe <em>Beta</em></p>
+            <p class="ohd-sub">All reported app versions · Last 12 days</p>
+          </div>
+          <ol class="ohd-steps">
+            <li class="st-deploy">Deploy</li>
+            <li class="st-observe">Observe</li>
+            <li class="st-investigate">Investigate</li>
+          </ol>
+        </div>
+
+        <div class="ohd-kpis">
+          {
+            kpis.map((kpi) => (
+              <div class:list={['ohd-kpi', kpi.cls]}>
+                <p class="ohd-kpi-label">{kpi.label}</p>
+                <p class="ohd-swap">
+                  {kpi.values.map((value, index) => (
+                    <span class:list={[`s${index}`, kpi.tone[index]]}>{value}</span>
+                  ))}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="ohd-charts">
+          <div class="ohd-card ohd-chart">
+            <p class="ohd-card-title">Launch and WebView timing</p>
+            <p class="ohd-legend"><span class="lg-launch">Launch P90</span><span class="lg-webview">WebView P90</span></p>
+            <div class="ohd-plot">
+              <span class="ohd-y" style="top:0%">2 s</span>
+              <span class="ohd-y" style="top:50%">1 s</span>
+              <span class="ohd-y" style="top:100%">0</span>
+              <div class="ohd-grid"></div>
+              <div class="ohd-reveal ohd-reveal--line">
+                <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="ohd-area" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0" stop-color="#2563eb" stop-opacity="0.16"></stop>
+                      <stop offset="1" stop-color="#2563eb" stop-opacity="0"></stop>
+                    </linearGradient>
+                  </defs>
+                  <path d={launchArea} fill="url(#ohd-area)"></path>
+                  <path class="ln-webview" d={webviewPath} fill="none" vector-effect="non-scaling-stroke"></path>
+                  <path class="ln-launch" d={launchPath} fill="none" vector-effect="non-scaling-stroke"></path>
+                </svg>
+              </div>
+              <span class="ohd-marker mk-a"><b>2.6.0 · production</b></span>
+              <span class="ohd-marker mk-b"><b>2.6.1</b></span>
+              <span class="ohd-spike" style={`left:${spike.left.toFixed(2)}%;top:${spike.top.toFixed(2)}%`}>
+                <i></i><b>Launch P90 1.4 s</b>
+              </span>
+            </div>
+            <p class="ohd-x">{days.map((day, index) => <span class:list={{ skip: index % 3 !== 0 }}>{day}</span>)}</p>
+          </div>
+
+          <div class="ohd-card ohd-chart ohd-events">
+            <p class="ohd-card-title">Events and issues</p>
+            <p class="ohd-legend"><span class="lg-launches">Launches</span><span class="lg-issues">Native issues</span></p>
+            <div class="ohd-plot">
+              <div class="ohd-grid"></div>
+              <div class="ohd-reveal ohd-bars">
+                {
+                  days.map((_, index) => (
+                    <span class="ohd-day">
+                      <i class="b-launch" style={`height:${launches[index]}%`} />
+                      <i class="b-issue" style={`height:${issues[index]}%`} />
+                    </span>
+                  ))
+                }
+              </div>
+              <span class="ohd-marker mk-a"><b>2.6.0</b></span>
+              <span class="ohd-marker mk-b"><b>2.6.1</b></span>
+            </div>
+            <p class="ohd-x">{days.map((day, index) => <span class:list={{ skip: index % 3 !== 0 }}>{day}</span>)}</p>
+          </div>
+        </div>
+
+        <div class="ohd-card ohd-table">
+          <p class="ohd-card-title">Version breakdown</p>
+          <div class="ohd-tr ohd-th">
+            <span>Version</span><span class="c-ch">Channel</span><span class="c-dev">Devices</span><span>Issue-free</span><span>Launch P90</span><span class="c-wv"
+              >WebView P90</span
+            >
+          </div>
+          <div class="ohd-tr r-261">
+            <span><b>2.6.1</b></span><span class="c-ch">production</span><span class="c-dev">2,114</span><span class="good">99.2%</span><span>776 ms</span><span class="c-wv"
+              >1.2 s</span
+            >
+          </div>
+          <div class="ohd-tr r-260">
+            <span><b>2.6.0</b><em class="ohd-flag">Needs attention</em></span><span class="c-ch">production</span><span class="c-dev">3,480</span><span class="ohd-swap"
+              ><span class="s0 good">99.0%</span><span class="s1 bad">92.4%</span></span
+            ><span class="ohd-swap"><span class="s0">779 ms</span><span class="s1 bad">1.4 s</span></span><span class="c-wv ohd-swap"
+              ><span class="s0">1.2 s</span><span class="s1 bad">1.7 s</span></span
+            >
+            <span class="ohd-cursor"><svg viewBox="0 0 16 20"><path d="M1 1v15l4-3.6 2.7 6 2.6-1.2-2.7-5.8H13z"></path></svg></span>
+          </div>
+          <div class="ohd-tr">
+            <span><b>2.5.4</b></span><span class="c-ch">production</span><span class="c-dev">4,760</span><span class="good">99.1%</span><span>768 ms</span><span class="c-wv"
+              >1.2 s</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="ohd-drawer">
+        <div class="ohd-drawer-head">
+          <p><span class="ohd-drawer-label">Logs Insights</span><b>2.6.0 · production</b></p>
+          <span class="ohd-x-close"></span>
+        </div>
+        <p class="ohd-sec">Errors by category</p>
+        <div class="ohd-cat"><span>network_timeout</span><i style="--w:72%"></i><b>412</b></div>
+        <div class="ohd-cat"><span>checksum</span><i style="--w:22%"></i><b>126</b></div>
+        <p class="ohd-sec">Affected devices</p>
+        <ul class="ohd-devices">
+          <li><span>iPhone 13 · iOS 17.4</span><b>184</b></li>
+          <li><span>Pixel 7 · Android 14</span><b>131</b></li>
+          <li><span>Galaxy S22 · Android 13</span><b>97</b></li>
+        </ul>
+        <p class="ohd-sec">Action logs</p>
+        <ul class="ohd-logs">
+          {
+            logLines.map(([time, action, detail], index) => (
+              <li style={`--n:${index}`}>
+                <span>{time}</span>
+                <b>{action}</b> · {detail}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="ohd-open">Open filtered action logs <span>→</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Pause the loop while the illustration is off-screen.
+  document.querySelectorAll<HTMLElement>('[data-ohd]').forEach((el) => {
+    if (!('IntersectionObserver' in window)) return
+    new IntersectionObserver(([entry]) => el.classList.toggle('is-paused', !entry.isIntersecting)).observe(el)
+  })
+</script>
+
+<style>
+  .ohd {
+    --cycle: 20s;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --faint: #94a3b8;
+    --line: #e2e8f0;
+    --card: #fff;
+    --canvas: #f1f5fb;
+    --blue: #2563eb;
+    --teal: #0d9488;
+    --sky: #93c5fd;
+    --bad: #e11d48;
+    --good: #059669;
+    container-type: inline-size;
+    font-family: inherit;
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  .ohd *,
+  .ohd *::before,
+  .ohd *::after {
+    animation-duration: var(--cycle);
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+
+  .ohd.is-paused *,
+  .ohd.is-paused *::before,
+  .ohd.is-paused *::after {
+    animation-play-state: paused;
+  }
+
+  .ohd p,
+  .ohd ul,
+  .ohd ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ohd-app {
+    display: grid;
+    grid-template-columns: 13.5em minmax(0, 1fr);
+    font-size: clamp(9px, 1.02cqw, 13px);
+    color: var(--ink);
+  }
+
+  /* Sidebar */
+  .ohd-side {
+    padding: 1.8em 1.2em;
+    color: rgba(226, 232, 240, 0.8);
+    font-size: 1.05em;
+  }
+
+  .ohd-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    color: #fff;
+    font-size: 1.35em;
+    font-weight: 700;
+  }
+
+  .ohd-logo {
+    width: 1em;
+    height: 1em;
+    border: 2px solid #fff;
+    border-radius: 0.2em;
+    transform: rotate(45deg) scale(0.8);
+  }
+
+  .ohd-org {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-top: 1.6em !important;
+    padding: 0.7em;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.6em;
+  }
+
+  .ohd-org > span {
+    display: grid;
+    place-items: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+
+  .ohd-org b {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .ohd-org small {
+    display: block;
+    color: rgba(226, 232, 240, 0.6);
+    font-weight: 400;
+    font-size: 0.85em;
+  }
+
+  .ohd-side-label {
+    margin: 2em 0 0.8em !important;
+    color: rgba(226, 232, 240, 0.45);
+    font-size: 0.75em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .ohd-side li {
+    padding: 0.65em 0.8em;
+    border-radius: 0.5em;
+  }
+
+  .ohd-side li.is-active {
+    background: rgba(96, 165, 250, 0.14);
+    color: #93c5fd;
+  }
+
+  /* Main console */
+  .ohd-main {
+    position: relative;
+    overflow: hidden;
+    margin: 0.8em 0.8em 0.8em 0;
+    border-radius: 0.9em;
+    background: var(--canvas);
+    animation-name: ohd-cycle;
+  }
+
+  .ohd-top {
+    padding: 1.2em 2em 0;
+    border-bottom: 1px solid var(--line);
+    background: #f8fafc;
+  }
+
+  .ohd-crumbs {
+    color: var(--muted);
+  }
+
+  .ohd-crumbs i {
+    margin: 0 0.4em;
+    font-style: normal;
+    color: var(--faint);
+  }
+
+  .ohd-crumbs b {
+    color: var(--ink);
+  }
+
+  .ohd-tabs {
+    display: flex;
+    gap: 0.4em;
+    margin-top: 0.9em !important;
+    color: var(--muted);
+  }
+
+  .ohd-tabs li {
+    padding: 0.55em 0.9em 0.7em;
+    border-bottom: 2px solid transparent;
+  }
+
+  .ohd-tabs li.is-active {
+    border-color: var(--blue);
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  .ohd-tab-logs {
+    animation-name: ohd-tab-logs;
+  }
+
+  .ohd em {
+    margin-left: 0.4em;
+    padding: 0.1em 0.45em;
+    border: 1px solid #bfdbfe;
+    border-radius: 0.3em;
+    background: #eff6ff;
+    color: var(--blue);
+    font-size: 0.7em;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    vertical-align: 0.15em;
+  }
+
+  .ohd-body {
+    padding: 1.5em 2em 1.8em;
+  }
+
+  .ohd-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1em;
+  }
+
+  .ohd-title {
+    font-size: 1.55em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .ohd-sub {
+    margin-top: 0.3em !important;
+    color: var(--muted);
+  }
+
+  .ohd-steps {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 0.55em;
+    background: var(--card);
+  }
+
+  .ohd-steps li {
+    padding: 0.55em 1em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .ohd-steps li + li {
+    border-left: 1px solid var(--line);
+  }
+
+  .st-deploy {
+    animation-name: ohd-st-deploy;
+  }
+
+  .st-observe {
+    animation-name: ohd-st-observe;
+  }
+
+  .st-investigate {
+    animation-name: ohd-st-investigate;
+  }
+
+  /* KPIs */
+  .ohd-kpis {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1em;
+    margin-top: 1.4em;
+  }
+
+  .ohd-kpi,
+  .ohd-card {
+    border: 1px solid var(--line);
+    border-radius: 0.7em;
+    background: var(--card);
+  }
+
+  .ohd-kpi {
+    padding: 1em 1.2em;
+  }
+
+  .ohd-kpi-label {
+    color: var(--muted);
+  }
+
+  .ohd-kpi .ohd-swap {
+    margin-top: 0.35em;
+    font-size: 1.75em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ohd-swap {
+    display: grid;
+  }
+
+  .ohd-swap > span {
+    grid-area: 1 / 1;
+  }
+
+  .ohd-kpi .s0 {
+    animation-name: ohd-k0;
+  }
+
+  .ohd-kpi .s1 {
+    animation-name: ohd-k1;
+  }
+
+  .ohd-kpi .s2 {
+    animation-name: ohd-k2;
+  }
+
+  .ohd .good {
+    color: var(--good);
+  }
+
+  .ohd .bad {
+    color: var(--bad);
+  }
+
+  /* Charts */
+  .ohd-charts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1em;
+    margin-top: 1em;
+  }
+
+  .ohd-card {
+    padding: 1.1em 1.3em 1em;
+  }
+
+  .ohd-card-title {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+
+  .ohd-legend {
+    display: flex;
+    gap: 1.1em;
+    margin-top: 0.4em !important;
+    color: var(--muted);
+    font-size: 0.9em;
+  }
+
+  .ohd-legend span::before {
+    content: '';
+    display: inline-block;
+    width: 1.2em;
+    height: 0.55em;
+    margin-right: 0.45em;
+    border-radius: 0.2em;
+    background: currentColor;
+    vertical-align: 0.05em;
+  }
+
+  .lg-launch::before {
+    color: var(--blue);
+  }
+
+  .lg-webview::before {
+    color: var(--teal);
+  }
+
+  .lg-launches::before {
+    color: var(--sky);
+  }
+
+  .lg-issues::before {
+    color: var(--bad);
+  }
+
+  .ohd-plot {
+    position: relative;
+    height: 12em;
+    margin: 2.2em 0 0 2.4em;
+  }
+
+  .ohd-events .ohd-plot {
+    margin-left: 0;
+  }
+
+  .ohd-y {
+    position: absolute;
+    right: calc(100% + 0.6em);
+    color: var(--faint);
+    font-size: 0.8em;
+    white-space: nowrap;
+    transform: translateY(-50%);
+  }
+
+  .ohd-grid {
+    position: absolute;
+    inset: 0;
+    border-bottom: 1px solid #cbd5e1;
+    background: linear-gradient(#eef2f7 1px, transparent 1px) 0 0 / 100% 25%;
+  }
+
+  .ohd-reveal {
+    position: absolute;
+    inset: 0;
+    animation-name: ohd-reveal;
+    animation-timing-function: linear;
+  }
+
+  .ohd-reveal--line {
+    animation-name: ohd-reveal-line;
+  }
+
+  .ohd-reveal svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .ln-launch,
+  .ln-webview {
+    stroke-width: 2.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ln-launch {
+    stroke: var(--blue);
+  }
+
+  .ln-webview {
+    stroke: var(--teal);
+  }
+
+  .ohd-bars {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .ohd-day {
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.2em;
+    height: 100%;
+  }
+
+  .ohd-day i {
+    width: 32%;
+    max-width: 1.2em;
+    border-radius: 0.2em 0.2em 0 0;
+  }
+
+  .b-launch {
+    background: var(--sky);
+  }
+
+  .b-issue {
+    background: var(--bad);
+  }
+
+  .ohd-x {
+    display: flex;
+    margin: 0.6em 0 0 2.4em !important;
+    color: var(--faint);
+    font-size: 0.8em;
+  }
+
+  .ohd-events .ohd-x {
+    margin-left: 0 !important;
+  }
+
+  .ohd-x span {
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .ohd-x .skip {
+    visibility: hidden;
+  }
+
+  /* Release markers */
+  .ohd-marker {
+    position: absolute;
+    top: -1.2em;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    border-left: 1.5px dashed #475569;
+    animation-name: ohd-mark-a;
+  }
+
+  .ohd-marker.mk-b {
+    left: 75%;
+    border-left-color: var(--good);
+    animation-name: ohd-mark-b;
+  }
+
+  .ohd-marker b {
+    position: absolute;
+    top: -0.8em;
+    left: 0;
+    padding: 0.2em 0.55em;
+    border-radius: 99px;
+    background: #1e293b;
+    color: #fff;
+    font-size: 0.8em;
+    font-weight: 600;
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+  }
+
+  .mk-b b {
+    background: var(--good);
+  }
+
+  .ohd-marker::after {
+    content: '';
+    position: absolute;
+    bottom: -0.3em;
+    left: -0.35em;
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 99px;
+    background: #1e293b;
+  }
+
+  .mk-b::after {
+    background: var(--good);
+  }
+
+  .ohd-spike {
+    position: absolute;
+    animation-name: ohd-spike;
+  }
+
+  .ohd-spike i {
+    position: absolute;
+    width: 0.7em;
+    height: 0.7em;
+    border: 2px solid var(--bad);
+    border-radius: 99px;
+    background: #fff;
+    transform: translate(-50%, -50%);
+  }
+
+  .ohd-spike b {
+    position: absolute;
+    bottom: 0.9em;
+    left: 0.6em;
+    padding: 0.25em 0.55em;
+    border: 1px solid #fecdd3;
+    border-radius: 0.35em;
+    background: #fff1f2;
+    color: var(--bad);
+    font-size: 0.8em;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Version table */
+  .ohd-table {
+    position: relative;
+    /* Room for the 2.6.1 row so the figure never changes height mid-loop. */
+    min-height: 15.5em;
+    margin-top: 1em;
+  }
+
+  .ohd-tr {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 0.8fr 0.9fr 0.9fr 0.9fr;
+    align-items: center;
+    gap: 1em;
+    padding: 0 0.9em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ohd-tr > span {
+    padding: 0.7em 0;
+  }
+
+  .ohd-th {
+    margin-top: 0.6em;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .ohd-tr:not(.ohd-th) + .ohd-tr {
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .r-261 {
+    overflow: hidden;
+    animation-name: ohd-row-new;
+  }
+
+  .r-260 {
+    position: relative;
+    border-radius: 0.5em;
+    animation-name: ohd-row-flag;
+  }
+
+  .r-260 .s0 {
+    animation-name: ohd-t0;
+  }
+
+  .r-260 .s1 {
+    animation-name: ohd-t1;
+  }
+
+  .ohd-flag {
+    border-color: #fecdd3 !important;
+    background: #fff1f2 !important;
+    color: var(--bad) !important;
+    white-space: nowrap;
+    animation-name: ohd-flag;
+  }
+
+  .ohd-cursor {
+    position: absolute;
+    top: 55%;
+    right: 3em;
+    width: 1.3em;
+    padding: 0 !important;
+    animation-name: ohd-cursor;
+  }
+
+  .ohd-cursor svg {
+    display: block;
+    fill: var(--ink);
+    stroke: #fff;
+    stroke-width: 1.3;
+    filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.25));
+  }
+
+  .ohd-cursor::before {
+    content: '';
+    position: absolute;
+    top: -0.8em;
+    left: -0.8em;
+    width: 1.6em;
+    height: 1.6em;
+    border: 2px solid var(--blue);
+    border-radius: 99px;
+    opacity: 0;
+    animation-name: ohd-click;
+  }
+
+  /* Logs Insights drawer */
+  .ohd-drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 36%;
+    padding: 1.6em 1.6em;
+    border-left: 1px solid var(--line);
+    background: #fff;
+    box-shadow: -18px 0 40px rgba(15, 23, 42, 0.12);
+    animation-name: ohd-drawer;
+  }
+
+  .ohd-drawer-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .ohd-drawer-head b {
+    display: block;
+    margin-top: 0.3em;
+    font-size: 1.3em;
+    font-weight: 700;
+  }
+
+  .ohd-drawer-label {
+    color: var(--blue);
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ohd-x-close {
+    position: relative;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.3em;
+  }
+
+  .ohd-x-close::before,
+  .ohd-x-close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--faint);
+    transform: rotate(45deg);
+  }
+
+  .ohd-x-close::after {
+    transform: rotate(-45deg);
+  }
+
+  .ohd-sec {
+    margin: 1.3em 0 0.6em !important;
+    color: var(--muted);
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ohd-cat {
+    display: grid;
+    grid-template-columns: 8.5em 1fr 2.4em;
+    align-items: center;
+    gap: 0.7em;
+    padding: 0.3em 0;
+    font-family: var(--lu-font-mono, ui-monospace, monospace);
+    font-size: 0.92em;
+  }
+
+  .ohd-cat i {
+    height: 0.6em;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--bad) var(--w), #f1f5f9 var(--w));
+  }
+
+  .ohd-cat b,
+  .ohd-devices b {
+    text-align: right;
+    font-weight: 600;
+  }
+
+  .ohd-devices li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .ohd-logs {
+    overflow: hidden;
+    border-radius: 0.5em;
+    background: #0f172a;
+    padding: 0.7em 0.9em !important;
+    color: #cbd5e1;
+    font-family: var(--lu-font-mono, ui-monospace, monospace);
+    font-size: 0.85em;
+  }
+
+  .ohd-logs li {
+    padding: 0.2em 0;
+    white-space: nowrap;
+    animation-name: ohd-log;
+    animation-delay: calc(var(--n) * 0.35s);
+  }
+
+  .ohd .ohd-open {
+    display: inline-block;
+    margin-top: 1.1em;
+    padding: 0.55em 0.9em;
+    border: 1px solid #bfdbfe;
+    border-radius: 0.5em;
+    background: #eff6ff;
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  .ohd-logs span {
+    margin-right: 0.7em;
+    color: #64748b;
+  }
+
+  .ohd-logs b {
+    color: #fda4af;
+    font-weight: 600;
+  }
+
+  /* ---------- Timeline (shared 20s cycle) ----------
+     0-15   baseline data arrives
+     15-22  2.6.0 released (marker drops)          step: Deploy
+     22-38  P90 + native issues spike              step: Observe
+     38-50  2.6.0 row flagged, cursor clicks it
+     50-72  Logs Insights drawer: errors, devices   step: Investigate
+     72-80  2.6.1 released                          step: Deploy
+     80-92  recovery                                step: Observe
+     96-100 fade + reset                                          */
+
+  @keyframes ohd-cycle {
+    0% {
+      opacity: 0;
+    }
+    2%,
+    96% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes ohd-reveal {
+    0%,
+    2% {
+      clip-path: inset(-20% 100% -2% 0);
+    }
+    15%,
+    24% {
+      clip-path: inset(-20% 50% -2% 0);
+    }
+    38%,
+    78% {
+      clip-path: inset(-20% 25% -2% 0);
+    }
+    92%,
+    100% {
+      clip-path: inset(-20% 0 -2% 0);
+    }
+  }
+
+  /* Line points sit at slot centers: day 6 = 45.8%, day 9 = 70.8%. */
+  @keyframes ohd-reveal-line {
+    0%,
+    2% {
+      clip-path: inset(-20% 100% -2% 0);
+    }
+    15%,
+    24% {
+      clip-path: inset(-20% 54% -2% 0);
+    }
+    38%,
+    78% {
+      clip-path: inset(-20% 29% -2% 0);
+    }
+    92%,
+    100% {
+      clip-path: inset(-20% 0 -2% 0);
+    }
+  }
+
+  @keyframes ohd-mark-a {
+    0%,
+    15% {
+      opacity: 0;
+      transform: translateY(-1.4em);
+    }
+    18%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes ohd-mark-b {
+    0%,
+    74% {
+      opacity: 0;
+      transform: translateY(-1.4em);
+    }
+    77%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes ohd-spike {
+    0%,
+    31% {
+      opacity: 0;
+      transform: translateY(0.4em);
+    }
+    33%,
+    78% {
+      opacity: 1;
+      transform: none;
+    }
+    81%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes ohd-k0 {
+    0%,
+    27% {
+      opacity: 1;
+      transform: none;
+    }
+    29%,
+    100% {
+      opacity: 0;
+      transform: translateY(-0.4em);
+    }
+  }
+
+  @keyframes ohd-k1 {
+    0%,
+    27% {
+      opacity: 0;
+      transform: translateY(0.4em);
+    }
+    29%,
+    84% {
+      opacity: 1;
+      transform: none;
+    }
+    86%,
+    100% {
+      opacity: 0;
+      transform: translateY(-0.4em);
+    }
+  }
+
+  @keyframes ohd-k2 {
+    0%,
+    84% {
+      opacity: 0;
+      transform: translateY(0.4em);
+    }
+    86%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes ohd-t0 {
+    0%,
+    38% {
+      opacity: 1;
+      transform: none;
+    }
+    40%,
+    100% {
+      opacity: 0;
+      transform: translateY(-0.5em);
+    }
+  }
+
+  @keyframes ohd-t1 {
+    0%,
+    38% {
+      opacity: 0;
+      transform: translateY(0.5em);
+    }
+    40%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes ohd-row-flag {
+    0%,
+    38% {
+      background: transparent;
+      box-shadow: inset 3px 0 0 transparent;
+    }
+    40%,
+    47% {
+      background: #fff1f2;
+      box-shadow: inset 3px 0 0 var(--bad);
+    }
+    50%,
+    72% {
+      background: #ffe4e6;
+      box-shadow:
+        inset 3px 0 0 var(--bad),
+        0 0 0 1px #fecdd3;
+    }
+    76%,
+    100% {
+      background: #fff1f2;
+      box-shadow: inset 3px 0 0 var(--bad);
+    }
+  }
+
+  @keyframes ohd-flag {
+    0%,
+    39% {
+      opacity: 0;
+    }
+    41%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes ohd-row-new {
+    0%,
+    79% {
+      max-height: 0;
+      opacity: 0;
+    }
+    82% {
+      max-height: 3em;
+      opacity: 0;
+    }
+    85%,
+    100% {
+      max-height: 3em;
+      opacity: 1;
+    }
+  }
+
+  @keyframes ohd-cursor {
+    0%,
+    41% {
+      opacity: 0;
+      transform: translate(-14em, 5em);
+    }
+    43% {
+      opacity: 1;
+      transform: translate(-14em, 5em);
+    }
+    48% {
+      opacity: 1;
+      transform: none;
+      animation-timing-function: ease-in-out;
+    }
+    49% {
+      transform: scale(0.85);
+    }
+    50%,
+    53% {
+      opacity: 1;
+      transform: none;
+    }
+    55%,
+    100% {
+      opacity: 0;
+      transform: none;
+    }
+  }
+
+  @keyframes ohd-click {
+    0%,
+    48.5% {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+    49% {
+      opacity: 1;
+      transform: scale(0.6);
+    }
+    52%,
+    100% {
+      opacity: 0;
+      transform: scale(1.6);
+    }
+  }
+
+  @keyframes ohd-drawer {
+    0%,
+    50% {
+      transform: translateX(104%);
+      box-shadow: none;
+    }
+    54%,
+    72% {
+      transform: none;
+    }
+    76%,
+    100% {
+      transform: translateX(104%);
+      box-shadow: none;
+    }
+  }
+
+  @keyframes ohd-log {
+    0%,
+    56% {
+      opacity: 0;
+      transform: translateY(0.5em);
+    }
+    58%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes ohd-tab-logs {
+    0%,
+    50% {
+      color: var(--muted);
+      border-color: transparent;
+    }
+    52%,
+    72% {
+      color: var(--ink);
+      border-color: #93c5fd;
+    }
+    75%,
+    100% {
+      color: var(--muted);
+      border-color: transparent;
+    }
+  }
+
+  @keyframes ohd-st-deploy {
+    0%,
+    14%,
+    23%,
+    72%,
+    82%,
+    100% {
+      background: transparent;
+      color: var(--muted);
+    }
+    15%,
+    22%,
+    73%,
+    81% {
+      background: #1e293b;
+      color: #fff;
+    }
+  }
+
+  @keyframes ohd-st-observe {
+    0%,
+    14%,
+    23%,
+    49%,
+    82%,
+    100% {
+      background: #eff6ff;
+      color: var(--blue);
+    }
+    15%,
+    22%,
+    50%,
+    81% {
+      background: transparent;
+      color: var(--muted);
+    }
+  }
+
+  @keyframes ohd-st-investigate {
+    0%,
+    49%,
+    73%,
+    100% {
+      background: transparent;
+      color: var(--muted);
+    }
+    50%,
+    72% {
+      background: #fff1f2;
+      color: var(--bad);
+    }
+  }
+
+  /* ---------- Compact layout (phones, narrow cards) ---------- */
+  @container (max-width: 720px) {
+    .ohd-app {
+      grid-template-columns: minmax(0, 1fr);
+      font-size: clamp(10px, 2.9cqw, 13px);
+    }
+
+    .ohd-side,
+    .ohd-tabs,
+    .ohd-kpi.kpi-devices,
+    .c-ch,
+    .c-dev,
+    .c-wv {
+      display: none;
+    }
+
+    .ohd-main {
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .ohd-top {
+      padding: 1em 1.2em;
+    }
+
+    .ohd-body {
+      padding: 1.2em 1.2em 1.4em;
+    }
+
+    .ohd-head {
+      flex-direction: column;
+      gap: 0.9em;
+    }
+
+    .ohd-kpis {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7em;
+    }
+
+    .ohd-kpi .ohd-swap {
+      font-size: 1.5em;
+    }
+
+    .ohd-charts {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.7em;
+    }
+
+    .ohd-plot {
+      height: 8.5em;
+    }
+
+    .ohd-events {
+      display: none;
+    }
+
+    .ohd-tr {
+      grid-template-columns: 1.7fr 1fr 1fr;
+    }
+
+    .ohd-plot {
+      margin-top: 2.9em;
+    }
+
+    .ohd-drawer {
+      top: auto;
+      width: auto;
+      left: 0;
+      height: 62%;
+      border-top: 1px solid var(--line);
+      border-left: 0;
+      border-radius: 1em 1em 0 0;
+      box-shadow: 0 -18px 40px rgba(15, 23, 42, 0.14);
+      animation-name: ohd-sheet;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ohd-drawer {
+        display: none;
+      }
+    }
+
+    @keyframes ohd-sheet {
+      0%,
+      50% {
+        transform: translateY(104%);
+        box-shadow: none;
+      }
+      54%,
+      72% {
+        transform: none;
+      }
+      76%,
+      100% {
+        transform: translateY(104%);
+        box-shadow: none;
+      }
+    }
+  }
+
+  /* ---------- Reduced motion: static, meaningful end state ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .ohd *,
+    .ohd *::before,
+    .ohd *::after {
+      animation: none !important;
+    }
+
+    .ohd-kpi .s0,
+    .ohd-kpi .s2,
+    .r-260 .s0,
+    .ohd-cursor,
+    .ohd-cursor::before,
+    .mk-b,
+    .r-261 {
+      display: none;
+    }
+
+    .r-260 {
+      background: #ffe4e6;
+      box-shadow:
+        inset 3px 0 0 var(--bad),
+        0 0 0 1px #fecdd3;
+    }
+
+    .st-investigate {
+      background: #fff1f2;
+      color: var(--bad);
+    }
+
+    .ohd-reveal {
+      clip-path: inset(-20% 25% -2% 0);
+    }
+
+    .ohd-reveal--line {
+      clip-path: inset(-20% 29% -2% 0);
+    }
+  }
+</style>

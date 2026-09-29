@@ -1,5 +1,7 @@
 ---
 import '@/styles/lu-product.css'
+import ReleaseExplainers from '@/components/explainers/ReleaseExplainers.astro'
+import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import { productVideos } from '@/config/productVideos'
@@ -22,7 +24,7 @@ const description = m.live_update_description({}, { locale })
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const docsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates')
 const dataUrl = getRelativeLocaleUrl(locale, 'data')
-const expoUrl = getRelativeLocaleUrl(locale, 'expo')
+const expoUrl = getRelativeLocaleUrl(locale, 'alternatives/expo')
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -150,21 +152,6 @@ const comparisonRows = [
 ]
 
 const guidanceChecks = [m.live_update_guidance_check1({}, { locale }), m.live_update_guidance_check2({}, { locale }), m.live_update_guidance_check3({}, { locale })]
-
-const steps = [
-  {
-    title: m.live_update_step1_title({}, { locale }),
-    text: m.live_update_step1_desc({}, { locale }),
-  },
-  {
-    title: m.live_update_step2_title({}, { locale }),
-    text: m.live_update_step2_desc({}, { locale }),
-  },
-  {
-    title: m.live_update_step3_title({}, { locale }),
-    text: m.live_update_step3_desc({}, { locale }),
-  },
-]
 
 const platformCards = [
   {
@@ -422,29 +409,10 @@ const featureTiles = [
     </section>
 
     <!-- HOW IT WORKS -->
-    <section class="section" id="how">
-      <div class="shell">
-        <div class="section-head section-head--narrow">
-          <div class="eyebrow eyebrow--blue">{copy('live_update_v2_how_eyebrow')}</div>
-          <h2 class="h2-section">{m.live_update_how_it_works_title({}, { locale })}</h2>
-          <p class="lead">{m.live_update_how_it_works_subtitle({}, { locale })}</p>
-        </div>
 
-        <div class="steps-grid">
-          {
-            steps.map((step, index) => (
-              <article class="step-card">
-                <div class="step-num">{index + 1}</div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    <ReleaseExplainers background="bg-transparent" />
+    <UpdateTypesSection background="bg-transparent" />
 
-    <!-- COMPARISON -->
     <section class="section" id="compare">
       <div class="shell">
         <div class="section-head">
@@ -498,7 +466,9 @@ const featureTiles = [
           <h2 class="h2-section">{copy('live_update_eas_title')}</h2>
           <p class="lead">{copy('live_update_eas_lead')}</p>
         </div>
-        <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('live_update_eas_cta')}</a>
+        <div style="display: flex; justify-content: center; margin-top: 28px;">
+          <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('live_update_eas_cta')}</a>
+        </div>
       </div>
     </section>
 
@@ -519,15 +489,5 @@ const featureTiles = [
         </div>
       </div>
     </section>
-
-    <div class="shell seo-bridge">
-      <h2 class="h2-section" style="font-size: 1.5rem; margin-bottom: 12px;">Keep going from Capgo Live Updates</h2>
-      <p>
-        Connect this Ionic and Capacitor live update page with <a href="/docs/live-updates/channels/">Channels</a>, <a href="/docs/live-updates/rollbacks/">Rollbacks</a>,
-        <a href="/docs/live-updates/update-behavior/">Update Behavior</a>, <a href={dataUrl}>Live Update delivery data</a>, <a href="/notifications/">Capgo Notifications</a>,
-        <a href="/plugins/capacitor-updater/">Capacitor Updater</a>, <a href="/native-build/">Capgo Native Builds</a>, and <a href={expoUrl}>EAS vs Capgo</a> for the Expo Application
-        Services comparison.
-      </p>
-    </div>
   </div>
 </Layout>

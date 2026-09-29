@@ -1,9 +1,13 @@
 ---
+import m from '@/copy/messages'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
+import NotificationsStory from '@/components/notifications/NotificationsStory.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -176,29 +180,13 @@ const guidanceChecks = [
           }
         </div>
 
-        <div class="notification-showcase" aria-label="Capgo notification dashboard previews">
-          <figure class="notification-dashboard-shot">
-            <img
-              src="/landing-demos/native-notifications-dashboard.webp"
-              alt="Capgo notification dashboard showing provider setup, campaigns, and push update controls"
-              width="1280"
-              height="720"
-              loading="eager"
-              decoding="async"
-            />
-            <figcaption>Provider setup, broadcasts, API sends, and push update controls in one console.</figcaption>
-          </figure>
-          <figure class="notification-mobile-shot">
-            <img
-              src="/landing-demos/native-notifications-mobile.webp"
-              alt="Mobile view of the Capgo notification console"
-              width="390"
-              height="900"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>Usable on mobile during release work.</figcaption>
-          </figure>
+        <div class="notification-story">
+          <p class="sr-only">
+            Animated illustration: a Capgo console card composes an alert for the external ID user_8421, sends it, and the push lands on an iPhone lock screen and an Android home
+            screen. Delivered and opened counts tick up and the app badge moves from 2 to 3. The card then switches to a silent update check for the production channel, and both
+            devices download bundle 1.4.1 to install on next launch.
+          </p>
+          <NotificationsStory />
         </div>
       </div>
     </section>
@@ -263,7 +251,7 @@ const guidanceChecks = [
           <p class="lead">Capgo handles the surfaces that usually become one-off glue code around push, user targeting, and update nudges.</p>
         </div>
 
-        <div class="bento">
+        <div class="bento bento--even">
           <div class="tile tile-hero" aria-label="Capgo Notifications">
             <div>
               <div class="ttl">
@@ -333,6 +321,16 @@ provider ready | recipients linked | update check enabled</pre>
       </div>
     </section>
 
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_notifications_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_notifications_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.notifications}
+      maxItems={2}
+    />
+
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">
         <h2>
@@ -349,14 +347,24 @@ provider ready | recipients linked | update check enabled</pre>
         </div>
       </div>
     </section>
-
-    <div class="shell seo-bridge">
-      <h2 class="h2-section" style="font-size: 1.5rem; margin-bottom: 12px;">Keep going from Capgo Notifications</h2>
-      <p>
-        Connect native notifications with <a href="/live-update/">Capgo Live Updates</a>, <a href="/pricing/">Capgo Pricing</a>, <a href="/plugins/capacitor-notifications/"
-          >Capacitor Notifications</a
-        >, <a href="/docs/live-updates/channels/">Channels</a>, and <a href="/docs/live-updates/update-behavior/">Update Behavior</a> when you plan progressive deployments.
-      </p>
-    </div>
   </div>
 </Layout>
+
+<style>
+  .notification-story {
+    margin-top: 46px;
+  }
+
+  @media (min-width: 981px) {
+    .bento--even > .tile:nth-last-child(-n + 2) {
+      grid-column: span 2;
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .notification-story {
+      margin-top: 34px;
+    }
+  }
+</style>

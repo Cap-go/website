@@ -165,7 +165,7 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-09-01-word-count-retry-v1'
+const TRANSLATION_CACHE_VERSION = '2026-09-23-short-ui-length-defer-v1'
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
   '/pricing/': new Set(['Pricing']),
@@ -256,6 +256,8 @@ const STATIC_PREFIXES = [
   '/llms',
   '/status.json',
   '/sponsors.json',
+  '/live-update-metrics.json',
+  '/builder-metrics.json',
 ]
 const IGNORED_TRANSLATION_QUERY_KEYS = new Set([
   '_branch_match_id',
@@ -1805,7 +1807,8 @@ function translationCharacterLengthViolation(source: string, translated: string,
   const sourceLen = source.length
   const translatedLen = translated.length
   if (sourceLen < 12) return translatedLen > sourceLen + 8
-  if (translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO) return true
+  const deferMaxLengthToWordCount = shouldEnforceTranslationWordCount(source) && sourceLen <= 32
+  if (!deferMaxLengthToWordCount && translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO) return true
   if (COMPACT_TRANSLATION_TARGETS.has(targetLanguage)) return false
   return translatedLen < sourceLen * TRANSLATION_LENGTH_MIN_RATIO
 }
@@ -2112,7 +2115,11 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
   const maxAttempts = enforceWordCount ? TRANSLATION_WORD_COUNT_ATTEMPTS : TRANSLATION_SINGLE_TEXT_ATTEMPTS
   const wordCountCandidates: string[] = []
 
-  if (seedCandidate && rememberWordCountCandidate(wordCountCandidates, text, seedCandidate, targetLanguage)) {
+  if (
+    seedCandidate &&
+    normalizedTranslationValue(seedCandidate) !== normalizedTranslationValue(text) &&
+    rememberWordCountCandidate(wordCountCandidates, text, seedCandidate, targetLanguage)
+  ) {
     return seedCandidate
   }
 
