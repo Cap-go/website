@@ -148,7 +148,7 @@ const messages = {
   alternatives_capawesome_diff_focus:
     '<strong>Focus:</strong> Live updates is our core business, with automatic setup and advanced manual flows; for them it is a side offering to paid plugins',
   alternatives_capawesome_diff_pricing: '<strong>Pricing:</strong> Both affordable - we start at $12/month, they start at €9/month',
-  alternatives_capawesome_diff_scale: "<strong>Scale:</strong> We serve 1B+ updates/month, 50M+ devices (they don't publish stats yet)",
+  alternatives_capawesome_diff_scale: "<strong>Scale:</strong> We serve 1B+ updates/month, 90M+ devices (they don't publish stats yet)",
   alternatives_capawesome_diff_security:
     "<strong>Security & Transparency:</strong> We're 100% open source with public audits and self-audit capability; they're 0% open on backend with no public audits",
   alternatives_capawesome_diff_support: "<strong>Support:</strong> Both provide human support (we're both small teams!)",
@@ -278,7 +278,7 @@ const messages = {
     "We do cloud native builds! We just don't do the full CI/CD automation pipeline. You can trigger builds through our CLI or API, but we're not trying to replace your GitHub Actions/GitLab CI workflow - we integrate with it.",
   appflow_faq_a3: 'Probably a lot. Appflow starts at $499/month. We start at $12/month and scale with usage (roughly $0.001 per MAU). Most migrations save 80-95% on update costs.',
   appflow_faq_a4:
-    'We serve 1B+ updates/month across 50M+ devices. 99.9%+ uptime. Check real-time stats at <a href="https://status.capgo.app/history" class="text-blue-300 underline hover:text-blue-200">status.capgo.app</a>',
+    'We serve 1B+ updates/month across 90M+ devices. 99.9%+ uptime. Check real-time stats at <a href="https://status.capgo.app/history" class="text-blue-300 underline hover:text-blue-200">status.capgo.app</a>',
   appflow_faq_q1: 'Do I need to change my CI/CD setup?',
   appflow_faq_q2: 'What about native builds?',
   appflow_faq_q3: 'Will this save money?',
@@ -621,7 +621,7 @@ const messages = {
   capwesome_diff_channels_title: 'Dynamic Channel Assignment',
   capwesome_diff_experience_capawesome: '<strong class="text-white">Capawesome:</strong> Live updates launched in 2024. Very new to this space. Still proving scale 90+.',
   capwesome_diff_experience_capgo:
-    '<strong class="text-white">Capgo:</strong> Started in 2020. Serving <strong class="text-emerald-400">1B+ updates/month</strong> across <strong class="text-emerald-400">50M+ devices</strong>. Battle-tested at scale for 4+ years.',
+    '<strong class="text-white">Capgo:</strong> Started in 2020. Serving <strong class="text-emerald-400">1B+ updates/month</strong> across <strong class="text-emerald-400">90M+ devices</strong>. Battle-tested at scale for 4+ years.',
   capwesome_diff_experience_note: "We've been doing this much longer. 4+ years of production experience vs less than a year.",
   capwesome_diff_experience_title: 'Experience & Scale',
   capwesome_diff_logs_capawesome:
@@ -694,7 +694,7 @@ const messages = {
   capwesome_quick_facts_capawesome_li8: '❌ No self-hosting',
   capwesome_quick_facts_capgo_li1: '✅ Started 2020',
   capwesome_quick_facts_capgo_li2: '✅ 1B+ updates/month',
-  capwesome_quick_facts_capgo_li3: '✅ 50M+ devices',
+  capwesome_quick_facts_capgo_li3: '✅ 90M+ devices',
   capwesome_quick_facts_capgo_li4: '✅ $12/month start',
   capwesome_quick_facts_capgo_li5: '✅ 100% open source (plugin + backend)',
   capwesome_quick_facts_capgo_li6: '✅ Family business, bootstrapped',
@@ -755,7 +755,7 @@ const messages = {
   companies_logo_stat_companies_label: 'Customers',
   companies_logo_stat_companies_value: '9,400+',
   companies_logo_stat_devices_label: 'Devices tracked',
-  companies_logo_stat_devices_value: '50M+',
+  companies_logo_stat_devices_value: '90M+',
   companies_logo_stat_uptime_label: 'Uptime',
   companies_logo_stat_uptime_value: '99.9%',
   company: 'Company',
@@ -2250,7 +2250,7 @@ const messages = {
   live_update_proof_card2_desc:
     'Use the automatic path to install and ship in 5 minutes, or switch to manual and half-manual flows for custom rollout, support, QA, and per-user scenarios.',
   live_update_proof_card2_title: 'Automatic or manual',
-  live_update_proof_card3_desc: '1B+ updates per month, 50M+ devices, dynamic channels, device logs, delta updates, encryption, self-hosting, and native recovery.',
+  live_update_proof_card3_desc: '1B+ updates per month, 90M+ devices, dynamic channels, device logs, delta updates, encryption, self-hosting, and native recovery.',
   live_update_proof_card3_title: 'Most complete at scale',
   live_update_proof_card4_desc: 'The CLI checks native dependencies, required files, bundle integrity, duplicate versions, and hub compatibility before updates reach users.',
   live_update_proof_card4_title: 'Safety before deploy',
