@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
 import ProblemSolution from '@/components/ProblemSolution.astro'
 import Testimonials from '@/components/Testimonials.astro'
 import WhyCapgo from '@/components/WhyCapgo.astro'
@@ -13,11 +12,10 @@ import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson, createWebSiteLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import AskAiSection from '@/components/AskAiSection.astro'
+import StorePolicySection from '@/components/StorePolicySection.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
 
 const config = Astro.locals.runtimeConfig
-
-const rawStats = await resolveWebsiteStats(config.public.baseApiUrl)
-const stats = formatWebsiteStats(rawStats)
 
 // Create comprehensive homepage content definition
 const title = `${config.public.brand} - ${m.instant_updates_for_capacitor({}, { locale: Astro.locals.locale })}`
@@ -41,12 +39,8 @@ const capgoSoftware = createSoftwareApplicationLdJson(config.public, {
   applicationCategory: 'DeveloperApplication',
   operatingSystem: 'Web, iOS, Android, Cordova, Electron',
   softwareVersion: '1.0',
-  aggregateRating: {
-    ratingValue: 4.8,
-    reviewCount: rawStats.apps,
-  },
   offers: {
-    price: '0',
+    price: '14',
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
   },
@@ -88,9 +82,11 @@ const content = {
     <Hero />
     <ProblemSolution />
     <PlatformOverview />
+    <AgentReadySection />
     <HowItWorks />
+    <StorePolicySection />
     <GlobalInfrastructure />
-    <SharedNumbers stats={stats} />
+    <SharedNumbers />
     <WhyCapgo />
     <Testimonials />
     <AppflowShutdown />

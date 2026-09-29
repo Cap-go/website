@@ -306,82 +306,14 @@ const content = { title, description, ldJSON }
               class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500">// Enable Direct Updates - one config change</span>
 CapacitorUpdater: {'{'}
   <span class="text-emerald-400">autoUpdate</span>: <span class="text-amber-300">'always'</span>, <span class="text-gray-500">// Updates apply immediately on app open</span>
+  <span class="text-emerald-400">autoSplashscreen</span>: <span class="text-amber-300">true</span>, <span class="text-gray-500">// Required for instant apply modes</span>
 {'}'}
 
 <span class="text-gray-500">// That's it. When users open your app:</span>
-<span class="text-gray-500">// 1. Capgo checks for updates (~50ms)</span>
-<span class="text-gray-500">// 2. If available, downloads immediately (~200-500ms)</span>
+<span class="text-gray-500">// 1. Capgo checks for updates</span>
+<span class="text-gray-500">// 2. If available, downloads immediately (use --delta for small updates)</span>
 <span class="text-gray-500">// 3. Applies before your app renders</span>
-<span class="text-gray-500">// Users always see the latest version. Zero exceptions.</span></code></pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Real Business Scenario -->
-    <section class="bg-gray-800 py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto mb-16 max-w-3xl text-center">
-          <h2 class="mb-4 text-sm font-semibold tracking-wide text-emerald-400 uppercase">{m.solutions_real_world({}, { locale })}</h2>
-          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_direct_scenario_title({}, { locale })}</h3>
-        </div>
-
-        <div class="mx-auto max-w-5xl rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-12">
-          <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            <!-- The Story -->
-            <div>
-              <div class="mb-6 flex items-center gap-3">
-                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20">
-                  <svg class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="text-xl font-bold text-white">{m.solutions_direct_case_company({}, { locale })}</h4>
-                  <p class="text-gray-400">{m.solutions_direct_case_industry({}, { locale })}</p>
-                </div>
-              </div>
-
-              <div class="space-y-6 text-gray-300">
-                <p>{m.solutions_direct_case_para1({}, { locale })}</p>
-                <p>{m.solutions_direct_case_para2({}, { locale })}</p>
-                <p>{m.solutions_direct_case_para3({}, { locale })}</p>
-              </div>
-            </div>
-
-            <!-- The Results -->
-            <div class="rounded-xl bg-gray-800 p-6">
-              <h4 class="mb-6 text-lg font-bold text-white">{m.solutions_direct_case_results({}, { locale })}</h4>
-
-              <div class="space-y-4">
-                <div class="flex items-center justify-between rounded-lg bg-gray-900 p-4">
-                  <span class="text-gray-400">{m.solutions_direct_case_metric1_label({}, { locale })}</span>
-                  <span class="text-2xl font-bold text-emerald-400">{m.solutions_direct_case_metric1_value({}, { locale })}</span>
-                </div>
-                <div class="flex items-center justify-between rounded-lg bg-gray-900 p-4">
-                  <span class="text-gray-400">{m.solutions_direct_case_metric2_label({}, { locale })}</span>
-                  <span class="text-2xl font-bold text-emerald-400">{m.solutions_direct_case_metric2_value({}, { locale })}</span>
-                </div>
-                <div class="flex items-center justify-between rounded-lg bg-gray-900 p-4">
-                  <span class="text-gray-400">{m.solutions_direct_case_metric3_label({}, { locale })}</span>
-                  <span class="text-2xl font-bold text-emerald-400">{m.solutions_direct_case_metric3_value({}, { locale })}</span>
-                </div>
-                <div class="flex items-center justify-between rounded-lg bg-gray-900 p-4">
-                  <span class="text-gray-400">{m.solutions_direct_case_metric4_label({}, { locale })}</span>
-                  <span class="text-2xl font-bold text-emerald-400">{m.solutions_direct_case_metric4_value({}, { locale })}</span>
-                </div>
-              </div>
-
-              <div class="mt-6 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4">
-                <p class="text-sm text-emerald-300 italic">"{m.solutions_direct_case_quote({}, { locale })}"</p>
-                <p class="mt-2 text-sm text-gray-400">— {m.solutions_direct_case_quote_author({}, { locale })}</p>
-              </div>
-            </div>
+<span class="text-gray-500">// Users see the latest version from the first screen.</span></code></pre>
           </div>
         </div>
       </div>
@@ -440,7 +372,7 @@ CapacitorUpdater: {'{'}
                 </ul>
               </div>
               <div class="flex flex-col justify-center rounded-xl bg-gray-900 p-6">
-                <p class="mb-2 text-4xl font-bold text-emerald-400">100%</p>
+                <p class="mb-2 text-4xl font-bold text-emerald-400">On open</p>
                 <p class="text-gray-400">{m.solutions_direct_benefit1_stat({}, { locale })}</p>
               </div>
             </div>
@@ -544,7 +476,7 @@ CapacitorUpdater: {'{'}
                 </ul>
               </div>
               <div class="flex flex-col justify-center rounded-xl bg-gray-900 p-6">
-                <p class="mb-2 text-4xl font-bold text-blue-400">+34%</p>
+                <p class="mb-2 text-4xl font-bold text-blue-400">Day 1</p>
                 <p class="text-gray-400">{m.solutions_direct_benefit3_stat({}, { locale })}</p>
               </div>
             </div>
@@ -649,17 +581,13 @@ CapacitorUpdater: {'{'}
           <p class="mt-4 text-xl text-gray-400">{m.solutions_direct_speed_subtitle({}, { locale })}</p>
         </div>
 
-        <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div class="rounded-xl border border-gray-700 bg-gray-800 p-6 text-center">
-            <div class="mb-2 text-3xl font-bold text-emerald-400">&lt;50ms</div>
-            <p class="text-sm text-gray-400">{m.solutions_direct_speed_check({}, { locale })}</p>
-          </div>
-          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6 text-center">
-            <div class="mb-2 text-3xl font-bold text-emerald-400">&lt;500ms</div>
+            <div class="mb-2 text-3xl font-bold text-emerald-400">~50ms</div>
             <p class="text-sm text-gray-400">{m.solutions_direct_speed_download({}, { locale })}</p>
           </div>
           <div class="rounded-xl border border-gray-700 bg-gray-800 p-6 text-center">
-            <div class="mb-2 text-3xl font-bold text-emerald-400">&lt;1s</div>
+            <div class="mb-2 text-3xl font-bold text-emerald-400">Delta</div>
             <p class="text-sm text-gray-400">{m.solutions_direct_speed_apply({}, { locale })}</p>
           </div>
           <div class="rounded-xl border border-gray-700 bg-gray-800 p-6 text-center">
