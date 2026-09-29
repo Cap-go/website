@@ -1044,7 +1044,7 @@ const messages = {
   pricing_calculator_per_year: '/yr',
   pricing_calculator_close: 'Close calculator',
   pricing_calculator_billing_period: 'Billing period',
-  cta_start_free: 'Get started for free',
+  cta_start_free: 'Try free for 14 days',
   cta_start_migration: 'Start your migration',
   custom: 'Custom',
   custom_domain: 'Custom Domain',

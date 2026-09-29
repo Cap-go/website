@@ -148,11 +148,11 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       <HumanSupport size="sm" />
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="rounded-md bg-[#44BCFF] px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-[#3a9fd6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
+        class="rounded-md bg-blue-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
       >
         {m.cta_start_free({}, { locale: Astro.locals.locale })}
       </a>
-      <p class="text-sm text-gray-500">{ctaSubtext}</p>
+      <p class="text-sm text-gray-400">{ctaSubtext}</p>
     </div>
   </div>
 </section>
