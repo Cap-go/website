@@ -231,10 +231,6 @@ Pricing is a major factor in choosing an OTA update solution, especially for lon
 
 \*Capgo plans start at $12/month ($144/year) and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app/).
 
-Jermaine shared his experience:
-
-> "Jumped over to @Capgo after @AppFlow hit us with a $5000 bill for the year to continue. Loving Capgo so far" [\[1\]](https://capgo.app/)
-
 For organizations focused on cost efficiency, Capgo's lower monthly charges and [self-hosting option](https://capgo.app/blog/self-hosted-capgo/) can lead to significant savings over time.
 
 LeVar Berry also shared his perspective:

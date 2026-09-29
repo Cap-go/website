@@ -1489,7 +1489,6 @@ const messages = {
   enterprise_faq_migration_q: 'How do you migrate us from another live-update platform?',
   enterprise_faq_migration_a:
     'We plan the migration with your team, map channels and environments, test rollback behavior, and can run both systems side by side until the cutover is safe.',
-  enterprise_testimonial_label: 'Enterprise testimonial',
   enterprise_proof_note_1: 'One release control plane for live updates, native builds, App Store publishing, plugins, and automation.',
   enterprise_proof_note_2: 'A buying story security, legal, finance, support, and release teams can all approve.',
   enterprise_proof_note_3: 'A practical migration path for teams leaving slow store-only workflows, custom scripts, or Appflow.',
@@ -4197,10 +4196,6 @@ const messages = {
   solutions_enterprise_stat_updates: 'Updates delivered monthly',
   solutions_enterprise_stat_uptime: 'Platform uptime',
   solutions_enterprise_tagline: 'Multi-app, multi-team deployments',
-  solutions_enterprise_testimonial:
-    'We manage 23 apps across 5 teams. Before Capgo, coordinating releases was chaos. Now one engineer handles deployments for the entire portfolio.',
-  solutions_enterprise_testimonial_author: 'James Chen',
-  solutions_enterprise_testimonial_role: 'VP of Engineering, Fortune 500 Retail Company',
   solutions_final_cta_note: '14-day unlimited free trial. No credit card required. Setup takes 5 minutes.',
   solutions_final_cta_subtitle: 'Your users deserve faster fixes. Your team deserves better workflows. Start pushing live updates today.',
   solutions_final_cta_title: 'Stop Waiting for App Store Reviews',
