@@ -126,6 +126,7 @@ jobs:
       - name: Fetch latest global stats
         run: |
           GITHUB_STATS_REFRESH=true bun run fetch:stars
+          bun run fetch:transparency
           WEBSITE_STATS_REFRESH=true bun run fetch:website-stats
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

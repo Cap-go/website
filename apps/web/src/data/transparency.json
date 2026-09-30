@@ -1,0 +1,69 @@
+{
+  "updatedAt": "2026-09-30T01:14:13.051Z",
+  "advisories": {
+    "total": 131,
+    "severities": {
+      "medium": 52,
+      "high": 62,
+      "low": 11,
+      "critical": 6
+    },
+    "repos": [
+      {
+        "repo": "Cap-go/capgo",
+        "total": 128,
+        "severities": {
+          "medium": 51,
+          "high": 60,
+          "low": 11,
+          "critical": 6
+        }
+      },
+      {
+        "repo": "Cap-go/capacitor-updater",
+        "total": 3,
+        "severities": {
+          "high": 2,
+          "medium": 1
+        }
+      },
+      {
+        "repo": "Cap-go/CLI",
+        "total": 0,
+        "severities": {}
+      }
+    ]
+  },
+  "releases": [
+    {
+      "repo": "Cap-go/capacitor-updater",
+      "tag": "8.52.0",
+      "url": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.52.0",
+      "publishedAt": "2026-09-29T23:28:42Z"
+    },
+    {
+      "repo": "Cap-go/capgo",
+      "tag": "capgo-12.312.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-12.312.0",
+      "publishedAt": "2026-09-29T22:56:49Z"
+    },
+    {
+      "repo": "Cap-go/capgo",
+      "tag": "cli-8.68.2",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.68.2",
+      "publishedAt": "2026-09-29T22:46:05Z"
+    },
+    {
+      "repo": "Cap-go/capgo",
+      "tag": "capgo-12.311.3",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-12.311.3",
+      "publishedAt": "2026-09-28T14:48:14Z"
+    },
+    {
+      "repo": "Cap-go/capgo",
+      "tag": "capgo-12.311.2",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-12.311.2",
+      "publishedAt": "2026-09-28T11:38:56Z"
+    }
+  ]
+}
