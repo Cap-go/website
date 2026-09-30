@@ -131,9 +131,9 @@ const config: CapacitorConfig = {
 
 ```bash
 # Create channels for each major version
-npx @capgo/cli channel create production
-npx @capgo/cli channel create v2
-npx @capgo/cli channel create v3
+npx @capgo/cli channel add production
+npx @capgo/cli channel add v2
+npx @capgo/cli channel add v3
 
 # Enable self-assignment so apps can switch channels
 npx @capgo/cli channel set production --self-assign
@@ -179,7 +179,8 @@ Use Capgo's built-in [semantic versioning controls](/semver_tester/) to prevent 
 
 ```bash
 # Create a channel that blocks major version updates
-npx @capgo/cli channel create stable --disable-auto-update major
+npx @capgo/cli channel add stable
+npx @capgo/cli channel set stable --disable-auto-update major
 ```
 
 This configuration means:

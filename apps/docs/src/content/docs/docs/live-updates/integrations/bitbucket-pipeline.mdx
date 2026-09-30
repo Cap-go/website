@@ -84,7 +84,7 @@ pipelines:
             - BRANCH_NAME=$(echo $BITBUCKET_BRANCH | sed 's/[^a-zA-Z0-9-]/-/g')
             - CHANNEL_NAME="feature-$BRANCH_NAME"
             - npm install -g @capgo/cli
-            - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+            - npx @capgo/cli channel add $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
             - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
           artifacts:
             - dist/**
@@ -190,7 +190,7 @@ pipelines:
           script:
             - CHANNEL_NAME="pr-$BITBUCKET_PR_ID"
             - npm install -g @capgo/cli
-            - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+            - npx @capgo/cli channel add $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
             - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
           artifacts:
             - dist/**

@@ -94,7 +94,7 @@ deploy_feature:
   script:
     - npm install -g @capgo/cli
     - CHANNEL_NAME="feature-$(echo $CI_COMMIT_REF_NAME | sed 's/[^a-zA-Z0-9-]/-/g')"
-    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli channel add $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
     - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
   dependencies:
     - build
@@ -189,7 +189,7 @@ deploy_mr:
   script:
     - npm install -g @capgo/cli
     - CHANNEL_NAME="mr-$CI_MERGE_REQUEST_IID"
-    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli channel add $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
     - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
   dependencies:
     - build

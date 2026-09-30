@@ -91,7 +91,7 @@ To set up a channel using Capgo CLI, follow these steps:
 1.  **Initialize the Channel**: Open your terminal and run the following command:
     
     ```bash
-    npx @capgo/cli channel create
+    npx @capgo/cli channel add
     ```
     
 2.  **Set Up Basic Parameters**: Configure the channel with details like name and version:

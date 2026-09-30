@@ -3,7 +3,7 @@ import ComparisonPage from '@/components/comparison/ComparisonPage.astro'
 import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
-import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
@@ -11,6 +11,7 @@ const config = Astro.locals.runtimeConfig.public
 const title = m.capwesome_title({}, { locale })
 const description = m.capwesome_meta_description({}, { locale })
 const competitor = 'Capawesome Cloud'
+const faq = [{ question: m.appflow_faq_q6({}, { locale }), answer: m.appflow_faq_a6({}, { locale }) }]
 
 const ldJSON = createLdJsonGraph(
   config,
@@ -21,7 +22,10 @@ const ldJSON = createLdJsonGraph(
     serviceType: 'Software Development Service',
     areaServed: ['Worldwide'],
   }),
-  { includeOrganization: true },
+  {
+    includeOrganization: true,
+    additionalEntities: [createFAQPageLdJson(config, { url: Astro.url.href, questions: faq })],
+  },
 )
 
 const content = {
@@ -93,6 +97,7 @@ const related = [
     testimonials={productTestimonials.liveUpdate}
     reviewWall
     related={related}
+    faq={faq}
     secondaryCta={{ label: m.compare_migration_docs_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawesome-to-capgo/') }}
   />
 </Layout>

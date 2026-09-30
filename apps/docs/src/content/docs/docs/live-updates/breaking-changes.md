@@ -42,7 +42,7 @@ defaultChannel: 'v3'
 
 ```bash
 # Create channel for version 2.x
-npx @capgo/cli channel create v2
+npx @capgo/cli channel add v2
 ```
 
 ## 2. Update Capacitor Config for Version 2.0.0
@@ -125,7 +125,7 @@ When you release version 3.0.0 with more breaking changes:
 
 ```bash
 # Create channel for version 3.x
-npx @capgo/cli channel create v3
+npx @capgo/cli channel add v3
 ```
 
 ```ts
