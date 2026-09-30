@@ -168,7 +168,7 @@ const messages = {
   alternatives_index_title: 'Capgo compared with each alternative',
   alternatives_sum_appflow_builds: 'Yes, plus store publishing',
   alternatives_sum_appflow_live: 'Capacitor and Cordova',
-  alternatives_sum_appflow_price: 'Not sold to new customers',
+  alternatives_sum_appflow_price: 'From $499/month (no new customers)',
   alternatives_sum_appflow_status: 'Winding down, access ends Dec 31, 2027',
   alternatives_sum_capawesome_builds: 'Yes, on Platform plans',
   alternatives_sum_capawesome_live: 'Capacitor, Ionic, and Cordova',
@@ -325,7 +325,7 @@ const messages = {
   appflow_faq_a2:
     'Yes. Capgo Builder builds and signs iOS and Android binaries in the cloud, typically in 2–3 minutes. Trigger it from the CLI or from your existing CI; Capgo does not replace your CI/CD pipeline.',
   appflow_faq_a3:
-    'Appflow is no longer sold to new customers, so there is no current price to compare. Capgo starts at $12/month billed yearly ($14 billed monthly), with a 14-day free trial and no credit card required.',
+    'Appflow Live Updates started at $499/month and is no longer sold to new customers. Capgo starts at $12/month billed yearly ($14 billed monthly), with a 14-day free trial and no credit card required.',
   appflow_faq_a4: 'Capgo delivers 1B+ updates per month to 90M+ devices. Live status and incident history are public at status.capgo.app.',
   appflow_faq_q1: 'Do I need to change my CI/CD setup?',
   appflow_faq_q2: 'What about native builds?',
@@ -594,7 +594,7 @@ const messages = {
   compare_appflow_native_builds: 'Cloud iOS and Android builds with App Store and Google Play publishing. Apple uploads need an Apple ID and an app-specific password.',
   compare_appflow_open_source: 'Commercial hosted service. Ionic lists Appflow among the paid products it is winding down.',
   compare_appflow_ota: 'Live Updates for Capacitor and Cordova apps.',
-  compare_appflow_pricing: 'Not sold to new customers since February 11, 2025, so there is no public price to compare.',
+  compare_appflow_pricing: 'Live Updates started at $499/month. Not sold to new customers since February 11, 2025.',
   compare_appflow_rollback: 'Live Update channels, and rollback to a previous build on a channel.',
   compare_appflow_source_announcement: "Ionic blog: The future of Ionic's commercial products",
   compare_appflow_source_apple: 'Appflow docs: Apple App Store destination',
@@ -613,7 +613,7 @@ const messages = {
   compare_capawesome_better_2_title: 'Live updates from a git ref',
   compare_capawesome_better_3_text: 'Their store publishing covers TestFlight, Google Play, Huawei AppGallery, and Firebase App Distribution.',
   compare_capawesome_better_3_title: 'More store destinations',
-  compare_capawesome_company: 'Capawesome (Genz IT Solutions GmbH), based in Germany, founded in 2022 by Robin Genz.',
+  compare_capawesome_company: 'Capawesome (Genz IT Solutions GmbH), based in Germany. Live updates launched in 2024.',
   compare_capawesome_eyebrow: 'Capawesome Cloud alternative',
   compare_capawesome_frameworks: 'Capacitor, Ionic, and Cordova.',
   compare_capawesome_lead:
