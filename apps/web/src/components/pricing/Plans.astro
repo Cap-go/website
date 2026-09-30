@@ -58,7 +58,10 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 }
 ---
 
-<section id="plans">
+<section id="plans" aria-labelledby="plans-heading">
+  <h2 id="plans-heading" class="sr-only">
+    {m.pricing_plans_heading({}, { locale: Astro.locals.locale })}
+  </h2>
   <div class="grid grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm sm:grid-cols-2 lg:grid-cols-4">
     {pricing.map((plan) => (
       <div

@@ -183,7 +183,7 @@ const config: CapacitorConfig = {
 export default config
 ```
 
-Consider adding `@capgo/capacitor-updater` early so you can ship OTA updates after launch. See [Capgo Live Updates docs](/docs/live-updates/getting-started/).
+Consider adding `@capgo/capacitor-updater` early so you can ship OTA updates after launch. See [Capgo Live Updates docs](/docs/getting-started/quickstart/).
 
 ## Step 6: Build and Sync
 

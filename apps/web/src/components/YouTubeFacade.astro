@@ -1,0 +1,47 @@
+---
+// Shows the video thumbnail and only loads the YouTube player (about 1 MB of scripts) when the visitor clicks play.
+interface Props {
+  youtubeId: string
+  title: string
+  class?: string
+  iframeClass?: string
+}
+
+const { youtubeId, title, class: className, iframeClass = 'h-full w-full' } = Astro.props
+const src = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1`
+const thumbnail = `https://i.ytimg.com/vi_webp/${youtubeId}/hqdefault.webp`
+---
+
+<div class:list={['yt-facade relative h-full w-full', className]} data-yt-facade data-src={src} data-title={title} data-iframe-class={iframeClass}>
+  <button type="button" class="group absolute inset-0 block h-full w-full cursor-pointer bg-black" aria-label={`Play video: ${title}`}>
+    <img src={thumbnail} alt="" width="480" height="360" loading="lazy" decoding="async" class="h-full w-full object-cover opacity-90" />
+    <span
+      class="absolute top-1/2 left-1/2 flex h-14 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-2xl bg-[#FF0033] shadow-lg transition-transform [@media(hover:hover)]:group-hover:scale-110"
+      aria-hidden="true"
+    >
+      <svg class="ml-1 h-7 w-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.9-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14Z"></path>
+      </svg>
+    </span>
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-yt-facade]').forEach((facade) => {
+    facade.querySelector('button')?.addEventListener(
+      'click',
+      () => {
+        const iframe = document.createElement('iframe')
+        iframe.src = facade.dataset.src ?? ''
+        iframe.title = facade.dataset.title ?? ''
+        iframe.className = facade.dataset.iframeClass ?? 'h-full w-full'
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin'
+        iframe.allowFullscreen = true
+        facade.replaceChildren(iframe)
+        iframe.focus()
+      },
+      { once: true },
+    )
+  })
+</script>

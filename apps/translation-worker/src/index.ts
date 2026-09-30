@@ -172,7 +172,9 @@ const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], Readon
   '/blog/': new Set(['Blog']),
   '/enterprise/': new Set(['Enterprise']),
 }
-const TRANSLATION_LENGTH_MAX_RATIO = 1.3
+// Spanish, French, German, Italian, and Indonesian headings routinely run 30-50% longer than English.
+// Short UI copy has its own word-count guard, so this ratio only limits longer body text.
+const TRANSLATION_LENGTH_MAX_RATIO = 1.5
 const TRANSLATION_LENGTH_MIN_RATIO = 0.7
 const TRANSLATION_WORD_COUNT_MAX_DELTA = 3
 const TRANSLATION_WORD_COUNT_MAX_SOURCE_WORDS = 24
