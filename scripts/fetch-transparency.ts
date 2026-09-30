@@ -1,7 +1,7 @@
 // Fetches the public facts shown in the homepage transparency section:
 // published GitHub security advisories and the latest releases of the core repos.
 // Writes apps/web/src/data/transparency.json; keeps the previous file if GitHub is unreachable.
-import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 
 const OUTPUT_PATH = new URL('../apps/web/src/data/transparency.json', import.meta.url).pathname
 const GITHUB_TOKEN = process.env.PERSONAL_ACCESS_TOKEN ?? process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN
@@ -67,7 +67,10 @@ async function main() {
       advisories: { total: advisories.reduce((sum, repo) => sum + repo.total, 0), severities, repos: advisories },
       releases,
     }
-    writeFileSync(OUTPUT_PATH, `${JSON.stringify(output, null, 2)}\n`)
+    // Write to a temp file then rename, so an interrupted run never leaves a truncated cache.
+    const tmpPath = `${OUTPUT_PATH}.tmp`
+    writeFileSync(tmpPath, `${JSON.stringify(output, null, 2)}\n`)
+    renameSync(tmpPath, OUTPUT_PATH)
     console.log(`Transparency data: ${output.advisories.total} published advisories, ${releases.length} releases.`)
   } catch (error) {
     if (existsSync(OUTPUT_PATH)) {

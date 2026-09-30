@@ -8,7 +8,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 const community = getGitHubCommunityStats()
-const formatCount = (value: number) => value.toLocaleString('en-US')
+const formatCount = (value: number) => value.toLocaleString(locale)
 
 const repoLabels: Record<string, string> = {
   'Cap-go/capgo': m.transparency_repo_capgo({}, { locale }),
@@ -20,7 +20,7 @@ const releases = transparency.releases.map((release) => ({
   version: `v${release.tag.replace(/^[a-z-]+-(?=\d)/i, '')}`,
   url: release.url,
   iso: release.publishedAt,
-  date: new Date(release.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }),
+  date: new Date(release.publishedAt).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }),
 }))
 
 const metricRows = [
