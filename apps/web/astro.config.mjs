@@ -34,5 +34,15 @@ export default defineConfig({
     }),
     mdx(),
   ],
-  vite: viteConfig,
+  vite: {
+    ...viteConfig,
+    server: {
+      ...viteConfig.server,
+      // Dev only: the metrics JSON is served by the production worker, so proxy it for /data, /builder-data, and the homepage.
+      proxy: {
+        '/live-update-metrics.json': { target: 'https://capgo.app', changeOrigin: true },
+        '/builder-metrics.json': { target: 'https://capgo.app', changeOrigin: true },
+      },
+    },
+  },
 })
