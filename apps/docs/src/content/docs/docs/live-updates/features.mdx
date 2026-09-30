@@ -30,7 +30,7 @@ Only download files that have changed between versions, reducing bandwidth usage
 **Key capabilities:**
 - Automatic file-level diffing
 - Checksum-based verification
-- Manifest comparison
+- Delta files comparison
 - Intelligent fallback to full updates when needed
 
 [Learn more about delta updates →](/docs/live-updates/differentials/)
@@ -142,10 +142,10 @@ npx @capgo/cli app debug [appId]
 
 ---
 
-### Bundle Manifest Viewer
-Inspect the complete manifest of any bundle including file list, checksums, and metadata.
+### Bundle Delta Files Viewer
+Inspect the delta files of any bundle including file list, checksums, and metadata.
 
-**Location:** Web Dashboard → App → Bundle → Manifest tab
+**Location:** Web Dashboard → App → Bundle → Delta files tab
 
 **Shows:**
 - File list with checksums

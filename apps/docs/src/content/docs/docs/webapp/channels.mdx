@@ -124,7 +124,7 @@ Fifth is the `Disable auto downgrade under native` setting. If this is true then
 
 Sixth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
 
-Seventh is the `Update package` setting. It chooses whether devices download a full zip, a delta of changed files, or both. See [Update package](#update-package).
+Seventh is the `Download format` setting. It chooses whether devices download a full zip, only the changed delta files, or the best of both. See [Download format](#download-format).
 
 Eighth is `Allow development build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has `prod` set to false will be rejected. This is mostly useful for testing purposes.
 
@@ -154,23 +154,25 @@ Forced mappings and Dashboard/Public API channel overrides are removed **90 days
 
 This is separate from [device inventory retention](/docs/webapp/devices/). Inventory removes devices that have not connected to Capgo for 90 days. Override cleanup removes the mapping even if the device is still active. Full detail: [Console and API overrides expire after 90 days](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
 
-## Update package
+## Download format
 
-Open a channel and stay on the **Information** tab. **Update package** is in the settings list, under Disable auto update.
+Open a channel and stay on the **Information** tab. **Download format** is in the settings list, under Disable auto update.
 
-<figure><img src="/channel-update-package.webp" alt="Update package dropdown on a Capgo channel showing Zip and delta, Zip only, Delta only, Zip only from builtin, and Delta only from builtin" /><figcaption>Update package on the channel Information tab. New channels default to Zip and delta.</figcaption></figure>
+<figure><img src="/channel-update-package.webp" alt="Download format dropdown on a Capgo channel showing Zip + delta, Full zip only, Delta only, Full zip from store build only, and Delta from store build only" /><figcaption>Download format on the channel Information tab. New channels default to Zip + delta.</figcaption></figure>
 
-This setting chooses what Capgo sends when a device on this channel checks for an update. Leave **Zip and delta** unless you need to force one type.
+This setting chooses what Capgo sends when a device on this channel checks for an update. Leave **Zip + delta** unless you need to force one type.
 
 | Label in the console | CLI / API value | What devices download |
 | --- | --- | --- |
-| **Zip and delta** | `all` | A full zip and a delta when both exist. This is the default. |
-| **Zip only** | `zip` | Only the full zip. |
-| **Delta only** | `delta` | Only the changed files. Plugins that cannot apply a delta still receive a zip. |
-| **Zip only from builtin** | `zip_from_builtin` | Zip only while the device is still on the store binary. After the first live update, Capgo serves zip and delta again. |
-| **Delta only from builtin** | `delta_from_builtin` | Delta only while the device is still on the store binary. After the first live update, Capgo serves zip and delta again. |
+| **Zip + delta (default)** | `all` | Each device gets the best package it supports. Devices on a plugin version with Delta support download only the changed delta files when the bundle has them. Only devices on an old plugin version without Delta support, or bundles uploaded without delta files, fall back to the full zip. |
+| **Full zip only** | `zip` | Every device downloads the whole bundle zip, even when delta files exist. |
+| **Delta only** | `delta` | Only the changed delta files. Devices on an old plugin version without Delta support still receive the full zip when the bundle has one. |
+| **Full zip from store build only** | `zip_from_builtin` | Full zip only while the device is still on the store build. After the first live update, Capgo serves zip + delta again. |
+| **Delta from store build only** | `delta_from_builtin` | Delta only while the device is still on the store build. After the first live update, Capgo serves zip + delta again. |
 
-**Builtin** is the web assets shipped inside the App Store or Play Store binary, before any Capgo update. Use a `from builtin` mode when the first update off the store build should be zip-only or delta-only, and later updates can use both.
+With **Zip + delta**, seeing some full zip downloads is expected. They come from devices still running an older native build with a plugin version without Delta support (below `5.10.0`, `6.25.0`, or `7.0.35` for their major version). See [Delta updates](/docs/live-updates/differentials/#which-devices-get-delta-and-which-get-the-full-zip).
+
+The **store build** is the web assets shipped inside the App Store or Play Store binary, before any Capgo update. Use a `from store build only` mode when the first update off the store build should be full zip only or delta only, and later updates can use both.
 
 Capgo will not pair a zip-only channel with a delta-only bundle, or the reverse. The console, CLI, and [Channels API](/docs/public-api/channels/) refuse the save and tell you to upload the missing package or switch the mode.
 
