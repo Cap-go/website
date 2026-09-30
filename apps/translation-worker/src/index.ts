@@ -1575,9 +1575,43 @@ function navGuardSegmentIndexes(segments: Segment[]): number[] {
   return indexes
 }
 
-async function retranslateNavGuardSegments(env: Env, targetLanguage: string, segments: Segment[], translations: string[], pagePath: string): Promise<void> {
-  for (const index of navGuardSegmentIndexes(segments)) {
-    translations[index] = await translateSingleText(env, targetLanguage, segments[index].text, pagePath)
+/**
+ * Make repeated nav labels (header, mobile menu, footer) translate consistently.
+ * Returns how the guard was satisfied. Never throws on nav labels: a failed job is retried forever
+ * and the page keeps serving the 503 English fallback.
+ */
+async function stabilizeNavGuardTranslations(
+  segments: Segment[],
+  translations: string[],
+  translate: (text: string) => Promise<string>,
+): Promise<{ outcome: 'ok' | 'retranslated' | 'english'; error?: string }> {
+  try {
+    assertNavSegmentTranslationGuard(segments, translations)
+    return { outcome: 'ok' }
+  } catch {
+    // Retranslate below.
+  }
+
+  try {
+    // Translate each distinct label once and reuse it; separate model calls can word the same label differently.
+    const translatedByText = new Map<string, string>()
+    for (const index of navGuardSegmentIndexes(segments)) {
+      const text = segments[index].text
+      let translated = translatedByText.get(text)
+      if (translated === undefined) {
+        translated = await translate(text)
+        translatedByText.set(text, translated)
+      }
+      translations[index] = translated
+    }
+    assertNavSegmentTranslationGuard(segments, translations)
+    return { outcome: 'retranslated' }
+  } catch (error) {
+    // Covers both a guard failure and a translation call that rejects (for example after exhausted AI retries).
+    for (const index of navGuardSegmentIndexes(segments)) {
+      translations[index] = segments[index].text
+    }
+    return { outcome: 'english', error: errorMessage(error) }
   }
 }
 
@@ -2926,16 +2960,14 @@ async function refreshCacheIncrementally(
   assertTranslatedBody(LANGUAGE_NAMES[locale], segments, translations)
 
   const targetLanguage = LANGUAGE_NAMES[locale]
-  try {
-    assertNavSegmentTranslationGuard(segments, translations)
-  } catch (error) {
-    console.warn('Nav translation guard failed; retranslating guarded header links individually', {
-      pathname: requestUrl.pathname,
-      locale,
-      error: errorMessage(error),
-    })
-    await retranslateNavGuardSegments(env, targetLanguage, segments, translations, requestUrl.pathname)
-    assertNavSegmentTranslationGuard(segments, translations)
+  const navGuard = await stabilizeNavGuardTranslations(segments, translations, (text) => translateSingleText(env, targetLanguage, text, requestUrl.pathname))
+  if (navGuard.outcome !== 'ok') {
+    console.warn(
+      navGuard.outcome === 'retranslated'
+        ? 'Nav translation guard failed; retranslated guarded header links'
+        : 'Nav translation guard failed after retranslation; keeping English nav labels',
+      { pathname: requestUrl.pathname, locale, error: navGuard.error },
+    )
   }
 
   let translatedHtml = renderTranslatedHtml(parts, segments, translations)
@@ -3530,6 +3562,7 @@ export const __translationWorkerTest = {
   applyFrenchArticleElision,
   polishTranslatedText,
   assertNavSegmentTranslationGuard,
+  stabilizeNavGuardTranslations,
   assertRenderedNavLinkIntegrity,
   bodyTranslationStats,
   buildBatches,

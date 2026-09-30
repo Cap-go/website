@@ -2052,7 +2052,7 @@ const messages = {
   oss_contributors: 'OSS contributors',
   give_pr_a_descriptive_title: 'Give the PR a descriptive title.',
   global_infra_badge_instant: 'INSTANT',
-  global_infra_latency_ultra_low: 'Ultra-low latency worldwide',
+  global_infra_latency_ultra_low: 'Update checks answered at the edge',
   global_infra_performance_badge: 'REAL-TIME PERFORMANCE',
   global_infrastructure: 'Global Infrastructure',
   global_infrastructure_lowercase: 'Global infrastructure',
@@ -2108,7 +2108,7 @@ const messages = {
   home_hero_outcome_recover_desc: 'Push urgent fixes without waiting days for review, then roll back fast if a rollout does not behave as expected.',
   home_hero_outcome_recover_title: 'Recover production faster',
   home_important_update_badge: 'Important Update',
-  home_latency_from_users: 'From 95% of users',
+  home_latency_from_users: 'Typical API response',
   home_locations_active: '300+ Locations Active',
   home_migration_cta_desc:
     "Join thousands of developers who've already moved from expensive, limited live updates to the original independent Capacitor platform built for scale, flexibility, and safety.",
