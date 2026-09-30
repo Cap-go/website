@@ -871,6 +871,19 @@ try {
     'Nav guard English fallback did not restore the source nav labels',
   )
 
+  const rejectingTranslate = async (): Promise<string> => {
+    throw new Error('AI translation exhausted its attempts')
+  }
+  const rejectedTranslations = repeatedNavParsed.segments.map((segment, index) =>
+    segment.text === 'Pricing' ? (index % 2 === 0 ? 'Prix' : 'Tarifs') : segment.text === 'Enterprise' ? 'Entreprise' : segment.text,
+  )
+  const rejectedFallback = await __translationWorkerTest.stabilizeNavGuardTranslations(repeatedNavParsed.segments, rejectedTranslations, rejectingTranslate)
+  assert(rejectedFallback.outcome === 'english', 'Nav guard did not fall back to English labels when retranslation rejected')
+  assert(
+    repeatedNavParsed.segments.every((segment, index) => !segment.anchorPath || rejectedTranslations[index] === segment.text),
+    'Nav guard rejection fallback did not restore the source nav labels',
+  )
+
   const skippedAnchorHtml = `<!doctype html><html><body>
 <a href="/pricing/" translate="no">Pricing</a>
 <p>Pricing</p>

@@ -1592,22 +1592,22 @@ async function stabilizeNavGuardTranslations(
     // Retranslate below.
   }
 
-  // Translate each distinct label once and reuse it; separate model calls can word the same label differently.
-  const translatedByText = new Map<string, string>()
-  for (const index of navGuardSegmentIndexes(segments)) {
-    const text = segments[index].text
-    let translated = translatedByText.get(text)
-    if (translated === undefined) {
-      translated = await translate(text)
-      translatedByText.set(text, translated)
-    }
-    translations[index] = translated
-  }
-
   try {
+    // Translate each distinct label once and reuse it; separate model calls can word the same label differently.
+    const translatedByText = new Map<string, string>()
+    for (const index of navGuardSegmentIndexes(segments)) {
+      const text = segments[index].text
+      let translated = translatedByText.get(text)
+      if (translated === undefined) {
+        translated = await translate(text)
+        translatedByText.set(text, translated)
+      }
+      translations[index] = translated
+    }
     assertNavSegmentTranslationGuard(segments, translations)
     return { outcome: 'retranslated' }
   } catch (error) {
+    // Covers both a guard failure and a translation call that rejects (for example after exhausted AI retries).
     for (const index of navGuardSegmentIndexes(segments)) {
       translations[index] = segments[index].text
     }
