@@ -205,11 +205,7 @@ assert(
   'Length guard defers overlong short UI copy to word-count enforcement',
 )
 assert(
-  __translationWorkerTest.translationWordCountViolation(
-    'Ship mobile updates instantly',
-    'Déployez des mises à jour mobiles instantanément aux utilisateurs partout',
-    'French',
-  ),
+  __translationWorkerTest.translationWordCountViolation('Ship mobile updates instantly', 'Déployez des mises à jour mobiles instantanément aux utilisateurs partout', 'French'),
   'Word count guard still rejects overlong short UI copy',
 )
 assert(
@@ -839,6 +835,41 @@ try {
     renderedNavIntegrityRejected = true
   }
   assert(renderedNavIntegrityRejected, 'Rendered nav integrity check did not reject pricing/blog label overlap')
+
+  // Regression: the same label repeated across header, mobile menu, and footer must not fail the job forever
+  // when separate model calls word it differently.
+  const repeatedNavHtml = `<!doctype html><html><body>
+<a href="/pricing/" aria-label="Pricing">Pricing</a>
+<a href="/enterprise/" aria-label="Enterprise">Enterprise</a>
+<a href="/pricing/" aria-label="Pricing">Pricing</a>
+<a href="/pricing/" aria-label="Pricing">Pricing</a>
+<p>Ship updates to your users without waiting for app store review cycles.</p>
+</body></html>`
+  const repeatedNavParsed = __translationWorkerTest.collectSegments(repeatedNavHtml)
+  const inconsistentRepeated = repeatedNavParsed.segments.map((segment, index) =>
+    segment.text === 'Pricing' ? (index % 2 === 0 ? 'Prix' : 'Tarifs') : segment.text === 'Enterprise' ? 'Entreprise' : segment.text,
+  )
+  let flakyCall = 0
+  const flakyTranslate = async (text: string) => {
+    flakyCall += 1
+    if (text === 'Enterprise') return 'Entreprise'
+    return flakyCall % 2 === 0 ? 'Prix' : 'Tarifs'
+  }
+  const stabilized = await __translationWorkerTest.stabilizeNavGuardTranslations(repeatedNavParsed.segments, inconsistentRepeated, flakyTranslate)
+  assert(stabilized.outcome === 'retranslated', 'Nav guard did not recover repeated labels by translating each label once')
+  const pricingTranslations = new Set(
+    repeatedNavParsed.segments.flatMap((segment, index) => (segment.text === 'Pricing' && segment.anchorPath ? [inconsistentRepeated[index]] : [])),
+  )
+  assert(pricingTranslations.size === 1, 'Repeated Pricing nav labels still translate inconsistently')
+
+  const collapsingTranslate = async () => 'Entreprise'
+  const collapsedTranslations = repeatedNavParsed.segments.map((segment) => (segment.anchorPath ? 'Entreprise' : segment.text))
+  const englishFallback = await __translationWorkerTest.stabilizeNavGuardTranslations(repeatedNavParsed.segments, collapsedTranslations, collapsingTranslate)
+  assert(englishFallback.outcome === 'english', 'Nav guard did not fall back to English labels when retranslation still collapses them')
+  assert(
+    repeatedNavParsed.segments.every((segment, index) => !segment.anchorPath || collapsedTranslations[index] === segment.text),
+    'Nav guard English fallback did not restore the source nav labels',
+  )
 
   const skippedAnchorHtml = `<!doctype html><html><body>
 <a href="/pricing/" translate="no">Pricing</a>
