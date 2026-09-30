@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-30T07:30:58.555Z
-updated_at: 2026-09-30T07:30:59.662Z
+updated_at: 2026-09-30T07:33:35.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/d38bbe1d-16ca-4f70-856a-0e8ef624c177/public-api-json-api-guide.jpg'
 head_image_alt: Capgo Public API JSON Reference Guide
 keywords: 'public api json, CapacitorJS updates, API automation, JSON schema, live updates'
