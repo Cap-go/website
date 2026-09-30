@@ -2,15 +2,89 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const title = `${brand} | ${m.solutions_healthcare_title({}, { locale })}`
 const description = m.solutions_healthcare_description({}, { locale })
+
+const links = {
+  hipaa: { href: docs('live-updates/hipaa-compliance/'), label: m.solutions_healthcare_link_hipaa({}, { locale }) },
+  hipaaPage: { href: getRelativeLocaleUrl(locale, 'hipaa-compliance'), label: m.solutions_healthcare_link_hipaa_page({}, { locale }) },
+  encryption: { href: docs('live-updates/encryption/'), label: m.solutions_healthcare_link_encryption({}, { locale }) },
+  channels: { href: docs('live-updates/channels/'), label: m.solutions_healthcare_link_channels({}, { locale }) },
+  rollouts: { href: docs('live-updates/progressive-rollouts/'), label: m.solutions_healthcare_link_rollouts({}, { locale }) },
+  notify: { href: docs('plugins/updater/notify-app-ready/'), label: m.solutions_healthcare_link_notify({}, { locale }) },
+  dataLocation: { href: docs('live-updates/data-location/'), label: m.solutions_healthcare_link_data_location({}, { locale }) },
+  compliance: { href: docs('live-updates/compliance/'), label: m.solutions_healthcare_link_compliance({}, { locale }) },
+  roles: { href: docs('webapp/organization-roles/'), label: m.solutions_healthcare_link_roles({}, { locale }) },
+  audit: { href: docs('live-updates/features/#audit-logs'), label: m.solutions_healthcare_link_audit({}, { locale }) },
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_healthcare_link_compatibility({}, { locale }) },
+  bundleCli: { href: docs('cli/reference/bundle/'), label: m.solutions_healthcare_link_bundle_cli({}, { locale }) },
+  currentApi: { href: docs('plugins/updater/api/#current'), label: m.solutions_healthcare_link_current_api({}, { locale }) },
+  selfHosted: { href: docs('plugins/updater/self-hosted/getting-started/'), label: m.solutions_healthcare_link_self_hosted({}, { locale }) },
+}
+
+const howSteps = [
+  {
+    title: m.solutions_healthcare_how1_title({}, { locale }),
+    body: m.solutions_healthcare_how1_body({}, { locale }),
+    code: `// capacitor.config.ts
+plugins: {
+  CapacitorUpdater: {
+    updateUrl: 'https://plugin.eu.capgo.app/updates',
+    // use statsUrl: '' to disable hosted statistics
+    statsUrl: 'https://plugin.eu.capgo.app/stats',
+    channelUrl: 'https://plugin.eu.capgo.app/channel_self',
+  },
+}`,
+    href: links.hipaa.href,
+    linkLabel: links.hipaa.label,
+  },
+  {
+    title: m.solutions_healthcare_how2_title({}, { locale }),
+    body: m.solutions_healthcare_how2_body({}, { locale }),
+    code: `npx @capgo/cli@latest key create
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+npx cap sync`,
+    href: links.encryption.href,
+    linkLabel: links.encryption.label,
+  },
+  {
+    title: m.solutions_healthcare_how3_title({}, { locale }),
+    body: m.solutions_healthcare_how3_body({}, { locale }),
+    code: 'npx @capgo/cli@latest bundle upload --channel staging --key-v2',
+    href: links.channels.href,
+    linkLabel: links.channels.label,
+  },
+  {
+    title: m.solutions_healthcare_how4_title({}, { locale }),
+    body: m.solutions_healthcare_how4_body({}, { locale }),
+    code: `npx @capgo/cli@latest bundle upload --channel production --key-v2 --rollout 5
+npx @capgo/cli@latest channel set production --rollout-promote
+# or, if something looks wrong
+npx @capgo/cli@latest channel set production --rollout-rollback`,
+    href: links.rollouts.href,
+    linkLabel: links.rollouts.label,
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_healthcare_faq1_q({}, { locale }), answer: m.solutions_healthcare_faq1_a({}, { locale }), ...links.hipaa },
+  { question: m.solutions_healthcare_faq2_q({}, { locale }), answer: m.solutions_healthcare_faq2_a({}, { locale }), ...links.compliance },
+  { question: m.solutions_healthcare_faq3_q({}, { locale }), answer: m.solutions_healthcare_faq3_a({}, { locale }), ...links.dataLocation },
+  { question: m.solutions_healthcare_faq4_q({}, { locale }), answer: m.solutions_healthcare_faq4_a({}, { locale }), ...links.compatibility },
+  { question: m.solutions_healthcare_faq5_q({}, { locale }), answer: m.solutions_healthcare_faq5_a({}, { locale }), ...links.audit },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -22,6 +96,7 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = { title, description, ldJSON }
@@ -41,23 +116,20 @@ const content = { title, description, ldJSON }
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <div class="mb-8 inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200">
-            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg aria-hidden="true" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              ></path>
             </svg>
             {m.solutions_healthcare_badge({}, { locale })}
           </div>
 
-          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            {m.solutions_healthcare_hero_title({}, { locale })}
-          </h1>
+          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{m.solutions_healthcare_hero_title({}, { locale })}</h1>
 
-          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">
-            {m.solutions_healthcare_hero_subtitle({}, { locale })}
-          </p>
+          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">{m.solutions_healthcare_hero_subtitle({}, { locale })}</p>
 
           <HumanSupport class="mt-8" size="sm" />
           <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -80,29 +152,32 @@ const content = { title, description, ldJSON }
           <!-- Compliance badges -->
           <div class="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
             <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                  clip-rule="evenodd"
+                ></path>
               </svg>
               {m.solutions_healthcare_badge_hipaa({}, { locale })}
             </div>
             <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                  clip-rule="evenodd"
+                ></path>
               </svg>
               {m.solutions_healthcare_badge_soc2({}, { locale })}
             </div>
             <div class="flex items-center gap-2">
-              <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                  clip-rule="evenodd"
+                ></path>
               </svg>
               {m.solutions_healthcare_badge_e2e({}, { locale })}
             </div>
@@ -112,7 +187,7 @@ const content = { title, description, ldJSON }
     </section>
 
     <!-- The Healthcare Reality -->
-    <section class="bg-gray-800 py-20">
+    <section id="reality" class="bg-gray-800 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto mb-16 max-w-3xl text-center">
           <h2 class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.solutions_healthcare_reality_label({}, { locale })}</h2>
@@ -123,12 +198,13 @@ const content = { title, description, ldJSON }
           <!-- Critical Scenario -->
           <div class="rounded-2xl border border-red-500/30 bg-gray-900 p-8">
             <h4 class="mb-6 flex items-center gap-2 text-xl font-bold text-red-400">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                ></path>
               </svg>
               {m.solutions_healthcare_scenario_title({}, { locale })}
             </h4>
@@ -144,7 +220,7 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                 </div>
@@ -158,7 +234,7 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -177,12 +253,13 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    ></path>
                   </svg>
                 </div>
                 <div>
@@ -195,12 +272,13 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                    ></path>
                   </svg>
                 </div>
                 <div>
@@ -215,7 +293,7 @@ const content = { title, description, ldJSON }
     </section>
 
     <!-- How We Solve It -->
-    <section class="bg-gray-900 py-20">
+    <section id="solution" class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto mb-16 max-w-3xl text-center">
           <h2 class="mb-4 text-sm font-semibold tracking-wide text-cyan-400 uppercase">{m.solutions_healthcare_solution_label({}, { locale })}</h2>
@@ -228,23 +306,20 @@ const content = { title, description, ldJSON }
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-cyan-500/20">
-                <svg class="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white">{m.solutions_healthcare_sol1_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_healthcare_sol1_desc({}, { locale })}</p>
-            <div class="rounded-xl bg-gray-900 p-4">
-              <pre
-                class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># Staged rollout with audit logging</span>
-npx @capgo/cli bundle upload --channel internal-qa
-<span class="text-cyan-400">✔</span> Bundle v2.4.1 uploaded
-
-<span class="text-gray-500"># After QA approval, promote to production</span>
-npx @capgo/cli channel set production --bundle 2.4.1
-
-<span class="text-cyan-400">✔</span> Devices on production receive the update on next app open</code></pre>
+            <div class="flex flex-wrap gap-x-6 gap-y-2">
+              <a href={links.channels.href} class="inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+                {links.channels.label}
+              </a>
+              <a href={links.compatibility.href} class="inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+                {links.compatibility.label}
+              </a>
             </div>
           </div>
 
@@ -252,7 +327,7 @@ npx @capgo/cli channel set production --bundle 2.4.1
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-green-500/20">
-                <svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -264,31 +339,37 @@ npx @capgo/cli channel set production --bundle 2.4.1
               <h3 class="text-xl font-bold text-white">{m.solutions_healthcare_sol2_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_healthcare_sol2_desc({}, { locale })}</p>
+            <a href={links.hipaa.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+              {links.hipaa.label}
+            </a>
             <ul class="space-y-2">
               <li class="flex items-center gap-2 text-gray-400">
-                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fill-rule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clip-rule="evenodd"></path>
+                    clip-rule="evenodd"
+                  ></path>
                 </svg>
                 {m.solutions_healthcare_sol2_point1({}, { locale })}
               </li>
               <li class="flex items-center gap-2 text-gray-400">
-                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fill-rule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clip-rule="evenodd"></path>
+                    clip-rule="evenodd"
+                  ></path>
                 </svg>
                 {m.solutions_healthcare_sol2_point2({}, { locale })}
               </li>
               <li class="flex items-center gap-2 text-gray-400">
-                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fill-rule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clip-rule="evenodd"></path>
+                    clip-rule="evenodd"
+                  ></path>
                 </svg>
                 {m.solutions_healthcare_sol2_point3({}, { locale })}
               </li>
@@ -299,33 +380,28 @@ npx @capgo/cli channel set production --bundle 2.4.1
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/20">
-                <svg class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  ></path>
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white">{m.solutions_healthcare_sol3_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_healthcare_sol3_desc({}, { locale })}</p>
-            <div class="rounded-xl bg-gray-900 p-4">
-              <pre
-                class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># Bundle encrypted before upload</span>
-npx @capgo/cli bundle upload --key-v2
-
-<span class="text-purple-400">🔐</span> Bundle encrypted with your private key
-<span class="text-purple-400">🔐</span> Only your app, with the matching public key, can decrypt
-<span class="text-purple-400">🔐</span> Capgo servers never see unencrypted code</code></pre>
-            </div>
+            <a href={links.encryption.href} class="inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+              {links.encryption.label}
+            </a>
           </div>
 
           <!-- Solution 4: Staged Rollouts -->
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-amber-500/20">
-                <svg class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -337,6 +413,14 @@ npx @capgo/cli bundle upload --key-v2
               <h3 class="text-xl font-bold text-white">{m.solutions_healthcare_sol4_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_healthcare_sol4_desc({}, { locale })}</p>
+            <div class="-mt-3 mb-6 flex flex-wrap gap-x-6 gap-y-2">
+              <a href={links.rollouts.href} class="inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+                {links.rollouts.label}
+              </a>
+              <a href={links.notify.href} class="inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+                {links.notify.label}
+              </a>
+            </div>
             <div class="space-y-2 rounded-xl bg-gray-900 p-4">
               <div class="flex items-center justify-between rounded bg-gray-800 p-2">
                 <span class="text-gray-400">{m.solutions_healthcare_sol4_step1({}, { locale })}</span>
@@ -356,8 +440,18 @@ npx @capgo/cli bundle upload --key-v2
       </div>
     </section>
 
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_healthcare_how_title({}, { locale })}
+      description={m.solutions_healthcare_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.hipaa, links.dataLocation, links.compliance, links.encryption, links.rollouts, links.notify, links.roles, links.selfHosted]}
+      class="bg-gray-900 border-t border-white/10"
+    />
+
     <!-- Audit Trail & Traceability -->
-    <section class="bg-gray-800 py-20">
+    <section id="traceability" class="bg-gray-800 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto mb-16 max-w-3xl text-center">
           <h2 class="mb-4 text-sm font-semibold tracking-wide text-cyan-400 uppercase">{m.solutions_healthcare_audit_label({}, { locale })}</h2>
@@ -370,25 +464,31 @@ npx @capgo/cli bundle upload --key-v2
           <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/20">
-                <svg class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                  ></path>
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white">{m.solutions_healthcare_commit_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_healthcare_commit_desc({}, { locale })}</p>
             <div class="rounded-xl bg-gray-800 p-4">
-              <pre
-                class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># Every bundle links to exact source code</span>
+              <pre class="overflow-x-auto text-sm whitespace-pre-wrap text-gray-300 [overflow-wrap:anywhere]"><code><span class="text-gray-500"># Attach the commit to each bundle</span>
 npx @capgo/cli bundle upload \
   --comment "Fix dosage rounding ($(git rev-parse --short HEAD))" \
-  --link "https://github.com/your-org/your-app/commit/$(git rev-parse HEAD)"
-
-<span class="text-gray-500"># Auditors can trace any bundle to its source</span></code></pre>
+  --link "https://github.com/your-org/your-app/commit/$(git rev-parse HEAD)"</code></pre>
+            </div>
+            <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+              <a href={links.bundleCli.href} class="inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+                {links.bundleCli.label}
+              </a>
+              <a href={links.audit.href} class="inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+                {links.audit.label}
+              </a>
             </div>
           </div>
 
@@ -396,25 +496,30 @@ npx @capgo/cli bundle upload \
           <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-green-500/20">
-                <svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  ></path>
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white">{m.solutions_healthcare_inapp_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_healthcare_inapp_desc({}, { locale })}</p>
             <div class="rounded-xl bg-gray-800 p-4">
-              <pre
-                class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500">// Show version info to clinical staff</span>
+              <pre class="overflow-x-auto text-sm whitespace-pre-wrap text-gray-300 [overflow-wrap:anywhere]"><code><span class="text-gray-500">// Show version info to clinical staff</span>
 const info = await CapacitorUpdater.current()
 
 <span class="text-gray-500">// Display in app settings</span>
 console.log(info.bundle.version)  <span class="text-gray-500">// "2.4.1"</span>
 console.log(info.native)          <span class="text-gray-500">// Native app version</span></code></pre>
+            </div>
+            <div class="mt-6">
+              <a href={links.currentApi.href} class="inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+                {links.currentApi.label}
+              </a>
             </div>
           </div>
         </div>
@@ -422,7 +527,7 @@ console.log(info.native)          <span class="text-gray-500">// Native app vers
     </section>
 
     <!-- Trust & Compliance -->
-    <section class="bg-gray-900 py-20">
+    <section id="trust" class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto mb-16 max-w-3xl text-center">
           <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_healthcare_trust_title({}, { locale })}</h2>
@@ -431,7 +536,7 @@ console.log(info.native)          <span class="text-gray-500">// Native app vers
 
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
-            <svg class="mx-auto mb-4 h-16 w-16 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg aria-hidden="true" class="mx-auto mb-4 h-16 w-16 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -441,6 +546,9 @@ console.log(info.native)          <span class="text-gray-500">// Native app vers
             </svg>
             <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_healthcare_cert1_title({}, { locale })}</h4>
             <p class="text-sm text-gray-400">{m.solutions_healthcare_cert1_desc({}, { locale })}</p>
+            <a href={links.hipaaPage.href} class="mt-4 inline-flex text-sm font-semibold text-cyan-400 hover:text-white hover:underline">
+              {links.hipaaPage.label}
+            </a>
           </div>
           <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
             <img src="/soc2.svg" alt="SOC 2" class="mx-auto mb-4 h-16 opacity-80" />
@@ -448,7 +556,7 @@ console.log(info.native)          <span class="text-gray-500">// Native app vers
             <p class="text-sm text-gray-400">{m.solutions_healthcare_cert2_desc({}, { locale })}</p>
           </div>
           <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
-            <svg class="mx-auto mb-4 h-16 w-16 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg aria-hidden="true" class="mx-auto mb-4 h-16 w-16 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
             </svg>
             <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_healthcare_cert3_title({}, { locale })}</h4>
@@ -458,14 +566,32 @@ console.log(info.native)          <span class="text-gray-500">// Native app vers
       </div>
     </section>
 
-    <!-- Final CTA -->
-
     <SolutionAppExample solution="healthcare" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials.healthcare}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_healthcare_faq_title({}, { locale })}
+      description={m.solutions_healthcare_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- Final CTA -->
     <section class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-cyan-600 to-teal-700 px-8 py-16 sm:px-16">
           <div aria-hidden="true" class="absolute inset-0">
-            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+            <svg
+              aria-hidden="true"
+              class="absolute inset-0 h-full w-full"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 1463 360"
+            >
               <path class="text-opacity-40 text-cyan-500" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
               <path class="text-opacity-20 text-teal-400" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
             </svg>

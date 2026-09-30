@@ -2,18 +2,78 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
 import BugFixIllustration from '@/components/solutions/BugFixIllustration.astro'
 import SecurityIllustration from '@/components/solutions/SecurityIllustration.astro'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const title = `${brand} | ${m.solutions_fintech_title({}, { locale })}`
 const description = m.solutions_fintech_description({}, { locale })
+
+const links = {
+  encryption: { href: docs('live-updates/encryption/'), label: m.solutions_fintech_link_encryption({}, { locale }) },
+  channels: { href: docs('live-updates/channels/'), label: m.solutions_fintech_link_channels({}, { locale }) },
+  rollouts: { href: docs('live-updates/progressive-rollouts/'), label: m.solutions_fintech_link_rollouts({}, { locale }) },
+  rollbacks: { href: docs('live-updates/rollbacks/'), label: m.solutions_fintech_link_rollbacks({}, { locale }) },
+  notify: { href: docs('plugins/updater/notify-app-ready/'), label: m.solutions_fintech_link_notify({}, { locale }) },
+  roles: { href: docs('webapp/organization-roles/'), label: m.solutions_fintech_link_roles({}, { locale }) },
+  sso: { href: docs('webapp/enterprise-sso/'), label: m.solutions_fintech_link_sso({}, { locale }) },
+  compliance: { href: docs('live-updates/compliance/'), label: m.solutions_fintech_link_compliance({}, { locale }) },
+  dataLocation: { href: docs('live-updates/data-location/'), label: m.solutions_fintech_link_data_location({}, { locale }) },
+}
+
+const howSteps = [
+  {
+    title: m.solutions_fintech_how1_title({}, { locale }),
+    body: m.solutions_fintech_how1_body({}, { locale }),
+    code: `npx @capgo/cli@latest key create
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+npx cap sync`,
+    href: links.encryption.href,
+    linkLabel: links.encryption.label,
+  },
+  {
+    title: m.solutions_fintech_how2_title({}, { locale }),
+    body: m.solutions_fintech_how2_body({}, { locale }),
+    code: 'npx @capgo/cli@latest bundle upload --channel staging --key-v2',
+    href: links.channels.href,
+    linkLabel: links.channels.label,
+  },
+  {
+    title: m.solutions_fintech_how3_title({}, { locale }),
+    body: m.solutions_fintech_how3_body({}, { locale }),
+    code: 'npx @capgo/cli@latest bundle upload --channel production --key-v2 --rollout 5',
+    href: links.rollouts.href,
+    linkLabel: links.rollouts.label,
+  },
+  {
+    title: m.solutions_fintech_how4_title({}, { locale }),
+    body: m.solutions_fintech_how4_body({}, { locale }),
+    code: `npx @capgo/cli@latest channel set production --rollout-promote
+# or, if something looks wrong
+npx @capgo/cli@latest channel set production --rollout-rollback`,
+    href: links.rollbacks.href,
+    linkLabel: links.rollbacks.label,
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_fintech_faq1_q({}, { locale }), answer: m.solutions_fintech_faq1_a({}, { locale }), ...links.compliance },
+  { question: m.solutions_fintech_faq2_q({}, { locale }), answer: m.solutions_fintech_faq2_a({}, { locale }), ...links.encryption },
+  { question: m.solutions_fintech_faq3_q({}, { locale }), answer: m.solutions_fintech_faq3_a({}, { locale }), ...links.compliance },
+  { question: m.solutions_fintech_faq4_q({}, { locale }), answer: m.solutions_fintech_faq4_a({}, { locale }), ...links.dataLocation },
+  { question: m.solutions_fintech_faq5_q({}, { locale }), answer: m.solutions_fintech_faq5_a({}, { locale }), ...links.roles },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -25,6 +85,7 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = { title, description, ldJSON }
@@ -246,6 +307,7 @@ const content = { title, description, ldJSON }
               <h3 class="text-xl font-bold text-white">{m.solutions_fintech_sol1_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_fintech_sol1_desc({}, { locale })}</p>
+            <a href={links.channels.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-green-400 hover:text-white hover:underline">{links.channels.label}</a>
             <div class="flex items-center justify-center rounded-xl bg-gray-900 p-6">
               <div class="w-full max-w-sm">
                 <BugFixIllustration class="text-green-500" />
@@ -269,6 +331,7 @@ const content = { title, description, ldJSON }
               <h3 class="text-xl font-bold text-white">{m.solutions_fintech_sol2_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_fintech_sol2_desc({}, { locale })}</p>
+            <a href={links.roles.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-green-400 hover:text-white hover:underline">{links.roles.label}</a>
             <ul class="space-y-2">
               <li class="flex items-center gap-2 text-gray-400">
                 <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
@@ -315,6 +378,7 @@ const content = { title, description, ldJSON }
               <h3 class="text-xl font-bold text-white">{m.solutions_fintech_sol3_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_fintech_sol3_desc({}, { locale })}</p>
+            <a href={links.encryption.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-green-400 hover:text-white hover:underline">{links.encryption.label}</a>
             <div class="flex items-center justify-center rounded-xl bg-gray-900 p-6">
               <div class="w-full max-w-sm">
                 <SecurityIllustration class="text-purple-500" />
@@ -333,6 +397,7 @@ const content = { title, description, ldJSON }
               <h3 class="text-xl font-bold text-white">{m.solutions_fintech_sol4_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_fintech_sol4_desc({}, { locale })}</p>
+            <a href={links.notify.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-green-400 hover:text-white hover:underline">{links.notify.label}</a>
             <div class="flex items-center justify-center rounded-xl bg-gray-900 p-6">
               <div class="w-full max-w-sm">
                 <RolloutIllustration class="text-amber-500" />
@@ -342,6 +407,16 @@ const content = { title, description, ldJSON }
         </div>
       </div>
     </section>
+
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_fintech_how_title({}, { locale })}
+      description={m.solutions_fintech_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.encryption, links.rollouts, links.notify, links.roles, links.sso, links.compliance, links.dataLocation]}
+      class="bg-gray-900 border-t border-white/10"
+    />
 
     <!-- Trust & Compliance -->
     <section class="bg-gray-800 py-20">
@@ -398,9 +473,20 @@ const content = { title, description, ldJSON }
       </div>
     </section>
 
-    <!-- Final CTA -->
-
     <SolutionAppExample solution="fintech" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials.fintech}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_fintech_faq_title({}, { locale })}
+      description={m.solutions_fintech_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- Final CTA -->
     <section class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-green-600 to-emerald-700 px-8 py-16 sm:px-16">
