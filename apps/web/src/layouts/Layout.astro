@@ -1,8 +1,6 @@
 ---
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
-import MetaPixel from '../components/MetaPixel.astro'
-import MetaPixelNoscript from '../components/MetaPixelNoscript.astro'
 import SEO from '../components/SEO.astro'
 import Affonso from '../components/Affonso.astro'
 import PostHog from '../components/posthog.astro'
@@ -28,12 +26,10 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <link rel="stylesheet" href={productSurfaceHref} />
     <SEO {...content} />
     <slot name="head" />
-    {enableThirdPartyScripts && <MetaPixel />}
     {enableThirdPartyScripts && <PostHog />}
     {enableThirdPartyScripts && <Affonso />}
   </head>
   <body class="bg-gray-900 text-pretty text-white antialiased">
-    {enableThirdPartyScripts && <MetaPixelNoscript />}
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -47,23 +43,27 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
       </main>
       {!hideChrome && <Footer />}
     </div>
-    {enableThirdPartyScripts && <script
-      is:inline
-      async="true"
-      defer="true"
-      data-domain="capgo.app"
-      src="https://pls.digitalshift-ee.workers.dev/js/script.outbound-links.js"
-      data-api="https://pls.digitalshift-ee.workers.dev/api/event"
-    ></script>}
+    {enableThirdPartyScripts && (
+      <script
+        is:inline
+        async="true"
+        defer="true"
+        data-domain="capgo.app"
+        src="https://pls.digitalshift-ee.workers.dev/js/script.outbound-links.js"
+        data-api="https://pls.digitalshift-ee.workers.dev/api/event"
+      ></script>
+    )}
     <WebMcpTools />
     {enableThirdPartyScripts && <script is:inline type="text/javascript" src="https://widget.senja.io/js/iframeResizer.min.js" defer></script>}
-    {enableThirdPartyScripts && <script
-      is:inline
-      defer
-      data-website-id="dfid_hu0aLqOvk52g6hykzIZei"
-      data-domain="capgo.app"
-      data-api-url="https://dtf.capgo.app/api/events"
-      src="https://dtf.capgo.app/js/script.js"
-    ></script>}
+    {enableThirdPartyScripts && (
+      <script
+        is:inline
+        defer
+        data-website-id="dfid_hu0aLqOvk52g6hykzIZei"
+        data-domain="capgo.app"
+        data-api-url="https://dtf.capgo.app/api/events"
+        src="https://dtf.capgo.app/js/script.js"
+      ></script>
+    )}
   </body>
 </html>
