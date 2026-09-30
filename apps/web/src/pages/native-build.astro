@@ -722,11 +722,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                 ios
               </span>
             </code>
-            <div class="onboarding-platform-toggle" role="tablist" aria-label="Platform">
-              <button class="opt active" data-platform="ios" type="button" role="tab" aria-selected="true">
+            <div class="onboarding-platform-toggle" role="group" aria-label="Platform">
+              <button class="opt active" data-platform="ios" type="button" aria-pressed="true">
                 iOS
               </button>
-              <button class="opt" data-platform="android" type="button" role="tab" aria-selected="false">
+              <button class="opt" data-platform="android" type="button" aria-pressed="false">
                 Android
               </button>
             </div>
@@ -828,9 +828,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
               <span class="mcp-step-n">1</span>
               <span>{copy('native_build_v2_mcp_add_title')}</span>
             </div>
-            <div class="mcp-editors" role="tablist" aria-label="MCP client">
+            <div class="mcp-editors" role="group" aria-label="MCP client">
               {mcpClients.map((c, i) => (
-                <button class:list={['mcp-ed', i === 0 && 'is-active']} data-client={c.id} type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'}>
+                <button class:list={['mcp-ed', i === 0 && 'is-active']} data-client={c.id} type="button" aria-pressed={i === 0 ? 'true' : 'false'}>
                   <Icon name={c.icon} class="mcp-ed-i" />
                   {c.name}
                 </button>
@@ -1328,7 +1328,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       --cap-blue-600: #2563eb;
       --cap-blue-700: #1d4ed8;
       /* Restrained system: one accent (blue) + neutrals.
-           Green only for literal success, red only for literal errors. */
+             Green only for literal success, red only for literal errors. */
       --nb-accent: #60a5fa;
       --nb-accent-strong: #93c5fd;
       --nb-accent-bg: rgba(96, 165, 250, 0.08);
@@ -1658,7 +1658,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-fg);
       white-space: pre-wrap;
       /* Fixed height, tall enough for the full build log, so it never grows/jumps
-         as lines stream in AND never shows a scrollbar. */
+           as lines stream in AND never shows a scrollbar. */
       height: 560px;
       overflow: hidden;
     }
@@ -5410,7 +5410,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           tabs.forEach((t) => {
             const on = t === tab
             t.classList.toggle('is-active', on)
-            t.setAttribute('aria-selected', on ? 'true' : 'false')
+            t.setAttribute('aria-pressed', on ? 'true' : 'false')
           })
           panels.forEach((p) => {
             p.hidden = p.getAttribute('data-client') !== id
@@ -6837,7 +6837,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           toggle.querySelectorAll('.opt').forEach((b) => {
             const active = b.getAttribute('data-platform') === p
             b.classList.toggle('active', active)
-            b.setAttribute('aria-selected', active ? 'true' : 'false')
+            b.setAttribute('aria-pressed', active ? 'true' : 'false')
           })
         }
         if (platformLabel) platformLabel.textContent = p
