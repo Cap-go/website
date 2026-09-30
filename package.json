@@ -14,6 +14,7 @@
     "clean:build-cache": "rm -rf apps/web/dist apps/docs/dist apps/web/.astro apps/docs/.astro apps/web/.wrangler/deploy apps/docs/.wrangler/deploy",
     "repair_sitemap": "bun run scripts/repair_sitemap.tsx",
     "fetch:stars": "bun run scripts/fetch-github-stars.ts",
+    "fetch:transparency": "bun run scripts/fetch-transparency.ts",
     "fetch:downloads": "bun run scripts/fetch-npm-downloads.ts",
     "fetch:website-stats": "bun run scripts/fetch-website-stats.ts",
     "refresh:website-stats": "WEBSITE_STATS_REFRESH=true bun run scripts/fetch-website-stats.ts",
