@@ -1,19 +1,20 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import {
+  markdownNotFoundResponse,
   MCP_ENDPOINT_PATHS,
   MCP_MANIFEST_PATHS,
   OPENAPI_ALIAS_PATHS,
   OPENAPI_ASSET_PATH,
-  markdownNotFoundResponse,
   prefersMarkdown,
   prefersMcpMarketingHtml,
 } from '../../../shared/agentDiscovery'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
-import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
-import { handleBuilderMetrics, BUILDER_METRICS_PATH } from './builder-metrics'
+import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
+import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
 import { handleMtaStsRequest } from './mta-sts'
+import { handlePostHogProxy, isPostHogProxyPath } from './posthog-proxy'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
 
@@ -208,8 +209,7 @@ const routeDefinitions: Record<string, RouteDefinition> = {
     methods: ['GET', 'HEAD'],
     handle: async (request, env) => {
       const response = await handleLiveUpdateMetrics(request, env)
-      if (request.method === 'HEAD')
-        return new Response(null, { status: response.status, headers: response.headers })
+      if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
   },
@@ -217,8 +217,7 @@ const routeDefinitions: Record<string, RouteDefinition> = {
     methods: ['GET', 'HEAD'],
     handle: async (request, env) => {
       const response = await handleBuilderMetrics(request, env)
-      if (request.method === 'HEAD')
-        return new Response(null, { status: response.status, headers: response.headers })
+      if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
   },
@@ -464,6 +463,7 @@ export default {
     const mtaStsResponse = handleMtaStsRequest(request)
     if (mtaStsResponse) return mtaStsResponse
     const pathname = new URL(request.url).pathname
+    if (isPostHogProxyPath(pathname)) return await handlePostHogProxy(request, ctx)
     const agentSurface = await agentSurfaceResponse(request, env, pathname)
     if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
     const staticRedirect = staticLegacyRedirect(request, pathname)
