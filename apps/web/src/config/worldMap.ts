@@ -1,4 +1,5 @@
 // Pin positions in /public/world-dots.svg coordinates (generated once with dotted-map, height 56, diagonal grid).
+// The hero renders /public/world-dots.webp, a raster of that SVG, because painting thousands of SVG dots delayed LCP.
 export const worldMapSize = { width: 112, height: 57 }
 export const worldMapPins: { name: string; x: number; y: number }[] = [
   { name: 'San Francisco', x: 15, y: 19.9 },

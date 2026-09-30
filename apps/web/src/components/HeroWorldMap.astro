@@ -6,14 +6,12 @@ const { width, height } = worldMapSize
 
 <div class="hero-map pointer-events-none absolute inset-x-0 top-6 flex justify-center select-none sm:top-10" aria-hidden="true">
   <div class="hero-map-canvas relative" style={`aspect-ratio: ${width} / ${height}`}>
-    <img src="/world-dots.svg" alt="" width={width * 10} height={height * 10} decoding="async" fetchpriority="low" class="absolute inset-0 h-full w-full opacity-[0.14]" />
-    {
-      worldMapPins.map((pin, index) => (
-        <span class="map-pin" style={`left: ${((pin.x / width) * 100).toFixed(2)}%; top: ${((pin.y / height) * 100).toFixed(2)}%; --i: ${index}`}>
-          <i />
-        </span>
-      ))
-    }
+    <img src="/world-dots.webp" alt="" width="1680" height="855" decoding="async" fetchpriority="high" class="absolute inset-0 h-full w-full opacity-[0.14]" />
+    {worldMapPins.map((pin, index) => (
+      <span class="map-pin" style={`left: ${((pin.x / width) * 100).toFixed(2)}%; top: ${((pin.y / height) * 100).toFixed(2)}%; --i: ${index}`}>
+        <i />
+      </span>
+    ))}
   </div>
 </div>
 

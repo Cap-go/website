@@ -1,421 +1,190 @@
 ---
+import ComparisonPage from '@/components/comparison/ComparisonPage.astro'
 import Layout from '@/layouts/Layout.astro'
-import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import { productVideos } from '@/config/productVideos'
-import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
-import { pluginCountLabel } from '@/config/plugins'
-import HumanSupport from '@/components/HumanSupport.astro'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
 const title = m.capflow_title({}, { locale })
 const description = m.capflow_meta_description({}, { locale })
+const competitor = 'Ionic Appflow'
+
+const faq = [
+  { question: m.appflow_faq_q1({}, { locale }), answer: m.appflow_faq_a1({}, { locale }) },
+  { question: m.appflow_faq_q2({}, { locale }), answer: m.appflow_faq_a2({}, { locale }) },
+  { question: m.appflow_faq_q3({}, { locale }), answer: m.appflow_faq_a3({}, { locale }) },
+  { question: m.appflow_faq_q4({}, { locale }), answer: m.appflow_faq_a4({}, { locale }) },
+  { question: m.appflow_faq_q5({}, { locale }), answer: m.appflow_faq_a5({}, { locale }) },
+  { question: m.appflow_faq_q6({}, { locale }), answer: m.appflow_faq_a6({}, { locale }) },
+]
+
+const ldJSON = createLdJsonGraph(
+  config,
+  createServiceLdJson(config, {
+    name: title,
+    description,
+    url: Astro.url.href,
+    serviceType: 'Software Development Service',
+    areaServed: ['Worldwide'],
+  }),
+  {
+    includeOrganization: true,
+    additionalEntities: [createFAQPageLdJson(config, { url: Astro.url.href, questions: faq })],
+  },
+)
 
 const content = {
   title,
   description,
-  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+  image: `${config.baseUrl}/capgo_social.png`,
+  keywords: 'Ionic Appflow alternative, Appflow shutdown, Appflow migration, Capacitor live updates, Capgo',
+  ldJSON,
 }
 
-const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflow-to-capgo/')
-const enterprisePluginsUrl = getRelativeLocaleUrl(locale, 'ionic-enterprise-plugins')
-const supportUrl = getRelativeLocaleUrl(locale, 'premium-support')
-const migrationServicesUrl = getRelativeLocaleUrl(locale, 'consulting')
-const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
+const sources = [
+  { label: m.compare_appflow_source_announcement({}, { locale }), href: 'https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products' },
+  { label: m.compare_appflow_source_docs({}, { locale }), href: 'https://ionic.io/docs/appflow' },
+  { label: m.compare_appflow_source_apple({}, { locale }), href: 'https://ionic.io/docs/appflow/destinations/apple' },
+  { label: m.compare_appflow_source_channels({}, { locale }), href: 'https://ionic.io/docs/appflow/deploy/channels' },
+]
+
+const rows = {
+  pricing: { text: m.compare_appflow_pricing({}, { locale }), sources: [1] },
+  ota: { text: m.compare_appflow_ota({}, { locale }), sources: [2] },
+  native_builds: { text: m.compare_appflow_native_builds({}, { locale }), sources: [2, 3] },
+  frameworks: { text: m.compare_appflow_frameworks({}, { locale }), sources: [2] },
+  open_source: { text: m.compare_appflow_open_source({}, { locale }), sources: [1] },
+  rollback: { text: m.compare_appflow_rollback({}, { locale }), sources: [4] },
+  support: { text: m.compare_appflow_support({}, { locale }), sources: [1] },
+  company: { text: m.compare_appflow_company({}, { locale }), sources: [1] },
+}
+
+const better = [
+  { title: m.compare_appflow_better_1_title({}, { locale }), text: m.compare_appflow_better_1_text({}, { locale }), sources: [1] },
+  { title: m.compare_appflow_better_2_title({}, { locale }), text: m.compare_appflow_better_2_text({}, { locale }), sources: [2] },
+  { title: m.compare_appflow_better_3_title({}, { locale }), text: m.compare_appflow_better_3_text({}, { locale }), sources: [2] },
+]
+
+const migration = {
+  title: m.appflow_migration_how_title({}, { locale }),
+  lead: m.compare_appflow_migration_lead({}, { locale }),
+  steps: [
+    { title: m.compare_step_install_title({}, { locale }), html: m.appflow_migration_step1({}, { locale }) },
+    { title: m.compare_step_ready_title({}, { locale }), html: m.appflow_migration_step2({}, { locale }) },
+    { title: m.compare_step_upload_title({}, { locale }), html: m.appflow_migration_step3({}, { locale }) },
+  ],
+  links: [
+    { label: m.compare_migration_docs_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflow-to-capgo/') },
+    { label: m.appflow_cta_book_migration({}, { locale }), href: 'https://book.capgo.app/appflow-migration/', external: true },
+  ],
+}
+
+const plugins = [
+  {
+    ionic: 'Ionic Secure Storage',
+    capgo: [
+      { label: 'Fast SQL', href: getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/') },
+      { label: 'Data Storage SQLite', href: getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/') },
+    ],
+    guide: getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-secure-storage/'),
+  },
+  {
+    ionic: 'Ionic Auth Connect',
+    capgo: [{ label: 'Social Login', href: getRelativeLocaleUrl(locale, 'docs/plugins/social-login/') }],
+    guide: getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-auth-connect/'),
+  },
+  {
+    ionic: 'Ionic Identity Vault',
+    capgo: [
+      { label: 'Native Biometric', href: getRelativeLocaleUrl(locale, 'docs/plugins/native-biometric/'), joiner: '+' },
+      { label: 'Fast SQL', href: getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/') },
+      { label: 'Data Storage SQLite', href: getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/') },
+    ],
+    guide: getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-identity-vault/'),
+  },
+  {
+    ionic: 'Ionic Zebra Scanner',
+    capgo: [{ label: 'Zebra DataWedge', href: getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/') }],
+    guide: getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/'),
+  },
+]
+
+const related = [
+  { label: m.migrate_from_appflow_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'migrate/from-appflow') },
+  { label: m.review_appflow_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'reviews/appflow') },
+  { label: m.best_appflow_alternative_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/appflow-alternative') },
+  { label: m.alternatives({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives') },
+]
 ---
 
 <Layout content={content}>
-  <div class="product-hero">
-    <section class="py-16 sm:py-20">
-      <div class="mx-auto max-w-4xl px-6 lg:px-8">
-        <!-- Hero -->
-        <div class="mb-12 text-center">
-          <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            {m.appflow_hero_title({}, { locale })}
-          </h1>
-          <p class="mx-auto max-w-2xl text-xl text-gray-300">
-            {m.appflow_hero_subtitle({}, { locale })}
-          </p>
-        </div>
-
-        <!-- The Elephant in the Room -->
-        <div class="mb-16 rounded-lg border border-gray-600 bg-gray-800/50 p-8">
-          <h2 class="mb-4 text-2xl font-bold text-gray-100">
-            {m.appflow_elephant_title({}, { locale })}
-          </h2>
-          <div class="space-y-4 text-gray-300">
-            <p set:html={m.appflow_elephant_p1({}, { locale })} />
-            <p>
-              {m.appflow_elephant_p2({}, { locale })}
-            </p>
-          </div>
-        </div>
-
-        <!-- Credit Where Due -->
-        <div class="mb-16">
-          <h2 class="mb-6 text-3xl font-bold text-gray-100">
-            {m.appflow_credit_title({}, { locale })}
-          </h2>
-          <div class="space-y-4 text-gray-300">
-            <p set:html={m.appflow_credit_p1({}, { locale })} />
-            <p>
-              {m.appflow_credit_p2({}, { locale })}
-            </p>
-            <p class="text-gray-400">
-              {m.appflow_credit_p3({}, { locale })}
-            </p>
-          </div>
-        </div>
-
-        <!-- What Makes Capgo Different -->
-        <div class="mb-16">
-          <h2 class="mb-8 text-3xl font-bold text-gray-100">
-            {m.appflow_what_different_title({}, { locale })}
-          </h2>
-
-          <div class="space-y-6">
-            <!-- Not Shutting Down -->
-            <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-              <h3 class="mb-3 text-xl font-semibold text-gray-100">
-                {m.appflow_not_shutting_title({}, { locale })}
-              </h3>
-              <p class="mb-2 text-gray-300" set:html={m.appflow_not_shutting_desc({}, { locale })} />
-              <ul class="mb-2 ml-6 list-disc space-y-1 text-sm text-gray-400">
-                <li>{m.appflow_not_shutting_li1({}, { locale })}</li>
-                <li>{m.appflow_not_shutting_li2({}, { locale })}</li>
-              </ul>
-              <p class="text-sm text-gray-400">
-                {m.appflow_not_shutting_note({}, { locale })}
-              </p>
-            </div>
-
-            <!-- Pricing -->
-            <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-              <h3 class="mb-3 text-xl font-semibold text-gray-100">
-                {m.appflow_pricing_title({}, { locale })}
-              </h3>
-              <p class="mb-2 text-gray-300" set:html={m.appflow_pricing_comparison({}, { locale })} />
-              <p class="text-sm text-gray-400">
-                {m.appflow_pricing_note({}, { locale })}
-              </p>
-            </div>
-
-            <!-- App Store Credentials -->
-            <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-              <h3 class="mb-3 text-xl font-semibold text-gray-100">
-                {m.appflow_credentials_title({}, { locale })}
-              </h3>
-              <p class="mb-4 text-gray-300" set:html={m.appflow_credentials_desc({}, { locale })} />
-              <div class="grid gap-6 md:grid-cols-2">
-                <div>
-                  <p class="mb-2 font-medium text-rose-300">{m.appflow_credentials_appflow_label({}, { locale })}</p>
-                  <ul class="ml-6 list-disc space-y-1 text-sm text-gray-400">
-                    <li>{m.appflow_credentials_appflow_li1({}, { locale })}</li>
-                    <li>{m.appflow_credentials_appflow_li2({}, { locale })}</li>
-                    <li>{m.appflow_credentials_appflow_li3({}, { locale })}</li>
-                    <li>{m.appflow_credentials_appflow_li4({}, { locale })}</li>
-                  </ul>
-                </div>
-                <div>
-                  <p class="mb-2 font-medium text-emerald-300">{m.appflow_credentials_capgo_label({}, { locale })}</p>
-                  <ul class="ml-6 list-disc space-y-1 text-sm text-gray-400">
-                    <li set:html={m.appflow_credentials_capgo_li1({}, { locale })} />
-                    <li>{m.appflow_credentials_capgo_li2({}, { locale })}</li>
-                    <li>{m.appflow_credentials_capgo_li3({}, { locale })}</li>
-                    <li set:html={m.appflow_credentials_capgo_li4({}, { locale })} />
-                  </ul>
-                </div>
-              </div>
-              <p class="mt-4 text-sm text-gray-400" set:html={m.appflow_credentials_note({ url: nativeBuildUrl }, { locale })} />
-            </div>
-
-            <!-- Open Source -->
-            <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-              <h3 class="mb-3 text-xl font-semibold text-gray-100">
-                {m.appflow_opensource_title({}, { locale })}
-              </h3>
-              <p class="mb-2 text-gray-300" set:html={m.appflow_opensource_desc({}, { locale })} />
-              <ul class="ml-6 list-disc space-y-1 text-gray-400">
-                <li set:html={m.appflow_opensource_li1({}, { locale })} />
-                <li set:html={m.appflow_opensource_li2({}, { locale })} />
-                <li>{m.appflow_opensource_li3({}, { locale })}</li>
-              </ul>
-              <p class="mt-3 text-sm text-gray-400">
-                {m.appflow_opensource_note({}, { locale })}
-              </p>
-            </div>
-
-            <!-- Experience -->
-            <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-              <h3 class="mb-3 text-xl font-semibold text-gray-100">
-                {m.appflow_experience_title({}, { locale })}
-              </h3>
-              <p class="text-gray-300">
-                {m.appflow_experience_desc({}, { locale })}
-              </p>
-              <p class="mt-2 text-sm text-gray-400" set:html={m.appflow_experience_note({ pluginCountLabel }, { locale })} />
-            </div>
-
-            <!-- Support -->
-            <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-              <h3 class="mb-3 text-xl font-semibold text-gray-100">
-                {m.appflow_support_title({}, { locale })}
-              </h3>
-              <p class="text-gray-300">
-                {m.appflow_support_desc({}, { locale })}
-              </p>
-              <p class="mt-2 text-gray-400">
-                {m.appflow_support_note({}, { locale })}
-              </p>
-            </div>
-
-            <!-- What We Do -->
-            <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-              <h3 class="mb-3 text-xl font-semibold text-gray-100">
-                {m.appflow_focus_title({}, { locale })}
-              </h3>
-              <p class="text-gray-300" set:html={m.appflow_focus_desc({}, { locale })} />
-              <p class="mt-2 text-sm text-gray-400">
-                {m.appflow_focus_note({}, { locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- What We're NOT -->
-        <div class="mb-16 rounded-lg border border-gray-600 bg-gray-800/50 p-8">
-          <h2 class="mb-4 text-2xl font-bold text-gray-100">
-            {m.appflow_not_good_at_title({}, { locale })}
-          </h2>
-          <div class="space-y-3 text-gray-300">
-            <p>
-              <strong class="text-gray-100">{m.appflow_not_good_at_ci_cd_label({}, { locale })}</strong>
-              {m.appflow_not_good_at_ci_cd({}, { locale })}
-            </p>
-            <p>
-              <strong class="text-gray-100">{m.appflow_not_good_at_docs_label({}, { locale })}</strong>
-              {m.appflow_not_good_at_docs({}, { locale })}
-            </p>
-          </div>
-        </div>
-
-        <!-- Migration -->
-        <div class="mb-16">
-          <h2 class="mb-6 text-3xl font-bold text-gray-100">
-            {m.appflow_migration_how_title({}, { locale })}
-          </h2>
-          <div class="space-y-4 text-gray-300">
-            <p set:html={m.appflow_migration_intro({}, { locale })} />
-            <div class="mt-6 rounded-xl bg-gray-800 p-6">
-              <h3 class="mb-3 text-lg font-semibold text-white">{m.appflow_migration_basics_title({}, { locale })}</h3>
-              <ol class="space-y-2 text-gray-300">
-                <li class="flex gap-3">
-                  <span class="font-semibold text-emerald-400">1.</span>
-                  <span set:html={m.appflow_migration_step1({}, { locale })} />
-                </li>
-                <li class="flex gap-3">
-                  <span class="font-semibold text-emerald-400">2.</span>
-                  <span set:html={m.appflow_migration_step2({}, { locale })} />
-                </li>
-                <li class="flex gap-3">
-                  <span class="font-semibold text-emerald-400">3.</span>
-                  <span>{m.appflow_migration_step3({}, { locale })}</span>
-                </li>
-              </ol>
-              <p class="mt-4 text-sm text-emerald-300" set:html={m.appflow_migration_guide_text({ url: migrationGuideUrl }, { locale })} />
-            </div>
-            <p class="text-sm text-gray-400" set:html={m.appflow_migration_stuck({}, { locale })} />
-          </div>
-        </div>
-
-        <ProductVideoSection
-          variant="dark"
-          youtubeId={productVideos.appflowMigration.youtubeId}
-          title={productVideos.appflowMigration.title}
-          description={productVideos.appflowMigration.description}
-        />
-
-        <!-- Enterprise Plugins -->
-        <div class="mb-16">
-          <h2 class="mb-6 text-3xl font-bold text-gray-100">
-            {m.appflow_plugins_title({}, { locale })}
-          </h2>
-          <p class="mb-6 max-w-3xl text-gray-300">
-            {m.appflow_plugins_desc({}, { locale })}
-          </p>
-
-          <div class="overflow-hidden rounded-2xl border border-gray-700 bg-gray-800/50">
-            <table class="w-full text-left text-sm text-gray-300">
-              <thead class="bg-gray-900/70 text-gray-400">
-                <tr>
-                  <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_ionic({}, { locale })}</th>
-                  <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_capgo({}, { locale })}</th>
-                  <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_guide({}, { locale })}</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-700">
-                <tr class="transition hover:bg-gray-800/60">
-                  <td class="px-6 py-4 font-medium text-gray-100">Ionic Secure Storage</td>
-                  <td class="px-6 py-4">
-                    <a href={getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/')} class="text-emerald-300 hover:underline"> Fast SQL </a>
-                    <span class="mx-2 text-gray-500">{m.appflow_plugins_or({}, { locale })}</span>
-                    <a href={getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/')} class="text-emerald-300 hover:underline"> Data Storage SQLite </a>
-                  </td>
-                  <td class="px-6 py-4">
-                    <a href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-secure-storage/')} class="text-blue-300 hover:underline">
-                      {m.appflow_plugins_link_text({}, { locale })}
-                    </a>
-                  </td>
-                </tr>
-                <tr class="transition hover:bg-gray-800/60">
-                  <td class="px-6 py-4 font-medium text-gray-100">Ionic Auth Connect</td>
-                  <td class="px-6 py-4">
-                    <a href={getRelativeLocaleUrl(locale, 'docs/plugins/social-login/')} class="text-emerald-300 hover:underline"> Social Login </a>
-                  </td>
-                  <td class="px-6 py-4">
-                    <a href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-auth-connect/')} class="text-blue-300 hover:underline">
-                      {m.appflow_plugins_link_text({}, { locale })}
-                    </a>
-                  </td>
-                </tr>
-                <tr class="transition hover:bg-gray-800/60">
-                  <td class="px-6 py-4 font-medium text-gray-100">Ionic Identity Vault</td>
-                  <td class="px-6 py-4">
-                    <a href={getRelativeLocaleUrl(locale, 'docs/plugins/native-biometric/')} class="text-emerald-300 hover:underline"> Native Biometric </a>
-                    <span class="mx-2 text-gray-500">+</span>
-                    <a href={getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/')} class="text-emerald-300 hover:underline"> Fast SQL </a>
-                    <span class="mx-2 text-gray-500">{m.appflow_plugins_or({}, { locale })}</span>
-                    <a href={getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/')} class="text-emerald-300 hover:underline"> Data Storage SQLite </a>
-                  </td>
-                  <td class="px-6 py-4">
-                    <a href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-identity-vault/')} class="text-blue-300 hover:underline">
-                      {m.appflow_plugins_link_text({}, { locale })}
-                    </a>
-                  </td>
-                </tr>
-                <tr class="transition hover:bg-gray-800/60">
-                  <td class="px-6 py-4 font-medium text-gray-100">Ionic Zebra Scanner</td>
-                  <td class="px-6 py-4">
-                    <a href={getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/')} class="text-emerald-300 hover:underline"> Zebra DataWedge </a>
-                  </td>
-                  <td class="px-6 py-4">
-                    <a href={getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/')} class="text-blue-300 hover:underline">
-                      {m.appflow_plugins_link_text({}, { locale })}
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p class="mt-4 text-sm text-emerald-200" set:html={m.appflow_plugins_opensource_note({ url: supportUrl }, { locale })} />
-        </div>
-
-        <!-- Enterprise Plugins & Paid Help -->
-        <div class="mb-16 rounded-xl border border-white/10 bg-white/[0.03] p-8">
-          <h2 class="mb-4 text-2xl font-bold text-white sm:text-3xl">
-            {m.appflow_enterprise_help_title({}, { locale })}
-          </h2>
-          <p
-            class="leading-relaxed text-gray-200"
-            set:html={m.appflow_enterprise_help_desc({ pluginsUrl: enterprisePluginsUrl, supportUrl, migrationUrl: migrationServicesUrl }, { locale })}
-          />
-        </div>
-
-        <!-- Testimonials -->
-        <div class="mb-16">
-          <h2 class="mb-8 text-3xl font-bold text-gray-100">
-            {m.appflow_testimonials_title({}, { locale })}
-          </h2>
-          <div class="rounded-xl bg-gray-800 p-6">
-            <h3 class="mb-4 text-lg font-semibold text-white">{m.appflow_testimonials_more({}, { locale })}</h3>
-            <iframe
-              id="wall-of-love-Ngmn41b"
-              src="https://senja.io/p/capgo/Ngmn41b?hideNavigation=true&embed=true"
-              aria-label="Wall of Love"
-              style="border: 0; overflow: hidden;"
-              width="100%"
-              class="min-h-100"></iframe>
-            <script is:inline>
-              document.addEventListener('DOMContentLoaded', function () {
-                if (typeof iFrameResize === 'function') {
-                  iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-Ngmn41b')
-                }
-              })
-            </script>
-          </div>
-        </div>
-
-        <!-- FAQ -->
-        <div class="mb-16">
-          <h2 class="mb-6 text-3xl font-bold text-gray-100">
-            {m.appflow_faq_title({}, { locale })}
-          </h2>
-          <dl class="space-y-6 text-gray-200">
-            <div>
-              <dt class="text-lg font-semibold text-white">{m.appflow_faq_q1({}, { locale })}</dt>
-              <dd class="mt-2 text-gray-300">{m.appflow_faq_a1({}, { locale })}</dd>
-            </div>
-            <div>
-              <dt class="text-lg font-semibold text-white">{m.appflow_faq_q2({}, { locale })}</dt>
-              <dd class="mt-2 text-gray-300">{m.appflow_faq_a2({}, { locale })}</dd>
-            </div>
-            <div>
-              <dt class="text-lg font-semibold text-white">{m.appflow_faq_q3({}, { locale })}</dt>
-              <dd class="mt-2 text-gray-300">{m.appflow_faq_a3({}, { locale })}</dd>
-            </div>
-            <div>
-              <dt class="text-lg font-semibold text-white">{m.appflow_faq_q4({}, { locale })}</dt>
-              <dd class="mt-2 text-gray-300" set:html={m.appflow_faq_a4({}, { locale })} />
-            </div>
-            <div>
-              <dt class="text-lg font-semibold text-white">{m.appflow_faq_q5({}, { locale })}</dt>
-              <dd class="mt-2 text-gray-300">{m.appflow_faq_a5({}, { locale })}</dd>
-            </div>
-          </dl>
-        </div>
-
-        <!-- CTA -->
-        <div class="overflow-hidden rounded-3xl bg-linear-to-r from-[#44BCFF]/10 via-[#FF44EC]/10 to-[#FF675E]/10 p-1 ring-1 ring-white/10">
-          <div class="relative overflow-hidden rounded-[1.45rem] bg-gray-900 px-8 py-12 sm:px-12 sm:py-16">
-            <div class="pointer-events-none absolute -top-24 -left-10 h-48 w-48 rounded-full bg-[#44BCFF]/30 blur-3xl"></div>
-            <div class="pointer-events-none absolute -right-16 -bottom-28 h-56 w-56 rounded-full bg-[#FF44EC]/20 blur-3xl"></div>
-            <div class="relative text-center">
-              <h2 class="mb-4 text-3xl font-bold text-white sm:text-4xl">
-                {m.appflow_cta_title({}, { locale })}
-              </h2>
-              <p class="mx-auto mb-8 max-w-2xl text-gray-300">
-                {m.appflow_cta_subtitle({}, { locale })}
-              </p>
-              <HumanSupport class="mb-4" size="sm" />
-              <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <a
-                  href={getRelativeLocaleUrl(locale, 'register')}
-                  class="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-emerald-700"
-                >
-                  {m.appflow_cta_start_trial({}, { locale })}
-                </a>
-                <a
-                  href="https://book.capgo.app/appflow-migration/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center justify-center rounded-xl bg-white/10 px-8 py-4 text-lg font-semibold text-white ring-1 ring-white/20 hover:bg-white/15"
-                >
-                  {m.appflow_cta_book_migration({}, { locale })}
-                </a>
-              </div>
-              <p class="mt-6 text-sm text-gray-400" set:html={m.appflow_cta_questions({}, { locale })} />
-            </div>
-          </div>
-        </div>
-
-        <!-- Footer Note -->
-        <div class="mt-12 text-center text-sm text-gray-400">
-          <p>
-            {m.appflow_footer_note({}, { locale })}
-          </p>
-        </div>
+  <ComparisonPage
+    competitor={competitor}
+    eyebrow={m.compare_appflow_eyebrow({}, { locale })}
+    heading={m.compare_appflow_h1({}, { locale })}
+    lead={m.compare_appflow_lead({}, { locale })}
+    verdict={m.compare_appflow_verdict({}, { locale })}
+    rows={rows}
+    sources={sources}
+    better={better}
+    migration={migration}
+    faq={faq}
+    testimonials={productTestimonials.liveUpdate}
+    video={productVideos.appflowMigration}
+    reviewWall
+    related={related}
+    secondaryCta={{ label: m.compare_migration_docs_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflow-to-capgo/') }}
+  >
+    <div slot="after-migration" class="cmp-subsection">
+      <div class="section-head section-head--wide cmp-subhead">
+        <h3 class="cmp-h3">{m.appflow_plugins_title({}, { locale })}</h3>
+        <p class="lead">{m.appflow_plugins_desc({}, { locale })}</p>
       </div>
-    </section>
-  </div>
+      <div class="comp-wrap cmp-wrap-scroll">
+        <table class="cmp-simple">
+          <caption class="cmp-caption">{m.appflow_plugins_caption({}, { locale })}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{m.appflow_plugins_col_ionic({}, { locale })}</th>
+              <th scope="col">{m.appflow_plugins_col_capgo({}, { locale })}</th>
+              <th scope="col">{m.appflow_plugins_col_guide({}, { locale })}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {plugins.map((row) => (
+              <tr>
+                <th scope="row">{row.ionic}</th>
+                <td>
+                  {row.capgo.map((plugin, index) => (
+                    <>
+                      {index > 0 && <span> {'joiner' in row.capgo[index - 1] ? '+' : m.appflow_plugins_or({}, { locale })} </span>}
+                      <a href={plugin.href}>{plugin.label}</a>
+                    </>
+                  ))}
+                </td>
+                <td>
+                  <a href={row.guide}>{m.appflow_plugins_link_text({}, { locale })}</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p
+        class="cmp-note"
+        set:html={m.appflow_enterprise_help_desc(
+          {
+            pluginsUrl: getRelativeLocaleUrl(locale, 'ionic-enterprise-plugins'),
+            supportUrl: getRelativeLocaleUrl(locale, 'premium-support'),
+            migrationUrl: getRelativeLocaleUrl(locale, 'consulting'),
+          },
+          { locale },
+        )}
+      />
+    </div>
+  </ComparisonPage>
 </Layout>

@@ -121,34 +121,30 @@ const tradeoffs = [
             </p>
             <p class="mt-4 text-base leading-7 text-slate-700">
               The only stable identifier is a random, app-scoped <code class="rounded bg-slate-100 px-1 py-0.5">device_id</code>. It is not tied to a known user unless your app
-              explicitly sets a <code class="rounded bg-slate-100 px-1 py-0.5">custom_id</code>. Hosted statistics can be fully disabled by setting <code
-                class="rounded bg-slate-100 px-1 py-0.5">statsUrl: ''</code
-              >.
+              explicitly sets a <code class="rounded bg-slate-100 px-1 py-0.5">custom_id</code>. Hosted statistics can be fully disabled by setting{' '}
+              <code class="rounded bg-slate-100 px-1 py-0.5">statsUrl: ''</code>.
             </p>
           </div>
 
           <div class="grid gap-3 sm:grid-cols-2">
-            {
-              telemetryItems.map((item) => (
-                <div class="rounded-lg border border-slate-200 bg-slate-50 p-5">
-                  <p class="text-sm font-semibold text-slate-900">{item}</p>
-                </div>
-              ))
-            }
+            {telemetryItems.map((item) => (
+              <div class="rounded-lg border border-slate-200 bg-slate-50 p-5">
+                <p class="text-sm font-semibold text-slate-900">{item}</p>
+              </div>
+            ))}
             <div class="rounded-lg border border-amber-300 bg-amber-50 p-5 sm:col-span-2">
               <p class="text-sm font-semibold text-amber-950">Do not set a custom ID for HIPAA-sensitive deployments.</p>
               <p class="mt-2 text-sm leading-6 text-amber-900">
-                <code class="rounded bg-amber-100 px-1 py-0.5 text-amber-950">setCustomId</code> can connect updater telemetry to a user, patient, employee, or account record from your
-                own app. Leave it unset when the review requires device-scoped telemetry.
+                <code class="rounded bg-amber-100 px-1 py-0.5 text-amber-950">setCustomId</code> can connect updater telemetry to a user, patient, employee, or account record from
+                your own app. Leave it unset when the review requires device-scoped telemetry.
               </p>
             </div>
             <div class="rounded-lg border border-blue-300 bg-blue-50 p-5 sm:col-span-2">
               <p class="text-sm font-semibold text-blue-950">Need zero hosted statistics?</p>
               <p class="mt-2 text-sm leading-6 text-blue-900">
-                Set <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">statsUrl: ''</code> in the updater config. Capgo Cloud will stop receiving updater statistics; update
-                checks can still use <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">updateUrl</code> and <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950"
-                  >channelUrl</code
-                > if you keep them enabled.
+                Set <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">statsUrl: ''</code> in the updater config. Capgo Cloud will stop receiving updater statistics;
+                update checks can still use <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">updateUrl</code> and{' '}
+                <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">channelUrl</code> if you keep them enabled.
               </p>
             </div>
           </div>
@@ -167,14 +163,12 @@ const tradeoffs = [
         </div>
 
         <div class="mt-10 grid gap-4 md:grid-cols-2">
-          {
-            deploymentOptions.map((option) => (
-              <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
-                <h3 class="text-lg font-bold text-white">{option.label}</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-300">{option.text}</p>
-              </article>
-            ))
-          }
+          {deploymentOptions.map((option) => (
+            <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <h3 class="text-lg font-bold text-white">{option.label}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-300">{option.text}</p>
+            </article>
+          ))}
         </div>
 
         <div class="mt-8 flex flex-wrap gap-3">
@@ -206,7 +200,9 @@ const tradeoffs = [
         </div>
 
         <ul class="grid gap-3">
-          {tradeoffs.map((tradeoff) => <li class="rounded-lg border border-white/10 bg-white/[0.04] p-4 text-sm leading-6 text-slate-200">{tradeoff}</li>)}
+          {tradeoffs.map((tradeoff) => (
+            <li class="rounded-lg border border-white/10 bg-white/[0.04] p-4 text-sm leading-6 text-slate-200">{tradeoff}</li>
+          ))}
         </ul>
       </div>
     </section>
@@ -217,8 +213,9 @@ const tradeoffs = [
           <p class="text-sm font-bold text-blue-700">When review needs more</p>
           <h2 class="mt-3 text-3xl leading-tight font-bold sm:text-4xl">We work with teams toward HIPAA compliance</h2>
           <p class="mt-5 text-base leading-7 text-slate-700">
-            Capgo works with companies going through HIPAA compliance review, including U.S. organizations that use Capgo in HIPAA-compliant programs. If the hosted service, EU
-            data residency, disabled statistics, or self-hosted statistics endpoint is still not enough, we can help you self-host with a licensing model.
+            Capgo works with companies going through HIPAA compliance review, including U.S. organizations that use Capgo in HIPAA-compliant programs. Capgo signs a Business
+            Associate Agreement (BAA) with healthcare customers. If the hosted service, EU data residency, disabled statistics, or self-hosted statistics endpoint is still not
+            enough, we can help you self-host with a licensing model.
           </p>
           <p class="mt-4 text-base leading-7 text-slate-700">
             That path gives your organization control over infrastructure, logs, retention, network boundaries, and review evidence while keeping the Capgo update workflow.

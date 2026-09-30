@@ -122,200 +122,196 @@ const ionicRows = [
   data-mega-menu
 >
   <ul class="border-r border-white/10 p-1.5">
-    {
-      products.map((product, index) => (
-        <li class:list={[{ 'mt-1 border-t border-white/10 pt-1': product.groupStart }]}>
-          <a
-            href={getRelativeLocaleUrl(locale, product.href)}
-            data-mega-item={index}
-            aria-current={index === 0 ? 'true' : undefined}
-            class="mega-item flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#44BCFF]"
-          >
-            <span class="mega-icon flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white/5 text-slate-300 ring-1 ring-white/10 transition-colors">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                {productIconPaths[product.icon].map((d) => (
-                  <path d={d} />
-                ))}
-              </svg>
-            </span>
-            <span class="min-w-0">
-              <span class="block text-[13px] leading-5 font-semibold text-white">{product.name}</span>
-              <span class="block truncate text-xs leading-4 text-slate-400">{product.tagline}</span>
-            </span>
-          </a>
-        </li>
-      ))
-    }
+    {products.map((product, index) => (
+      <li class:list={[{ 'mt-1 border-t border-white/10 pt-1': product.groupStart }]}>
+        <a
+          href={getRelativeLocaleUrl(locale, product.href)}
+          data-mega-item={index}
+          aria-current={index === 0 ? 'true' : undefined}
+          class="mega-item flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#44BCFF]"
+        >
+          <span class="mega-icon flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white/5 text-slate-300 ring-1 ring-white/10 transition-colors">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              {productIconPaths[product.icon].map((d) => (
+                <path d={d} />
+              ))}
+            </svg>
+          </span>
+          <span class="min-w-0">
+            <span class="block text-[13px] leading-5 font-semibold text-white">{product.name}</span>
+            <span class="block truncate text-xs leading-4 text-slate-400">{product.tagline}</span>
+          </span>
+        </a>
+      </li>
+    ))}
   </ul>
 
   <div class="relative overflow-hidden bg-[#0b1120]">
     <div class="mega-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>
-    {
-      products.map((product, index) => (
-        <div class:list={['mega-preview absolute inset-0 flex flex-col', { 'is-active': index === 0 }]} data-mega-preview={index} aria-hidden={index === 0 ? undefined : 'true'}>
-          <div class="mm-stage relative flex flex-1 items-center justify-center px-6 pt-5" aria-hidden="true">
-            {product.scene === 'live-update' && (
-              <div class="mm-lu flex items-center gap-5">
-                <div class="mm-term">
-                  <p>
-                    <span class="text-emerald-400">$</span> capgo bundle upload
-                  </p>
-                  <p class="mm-slot-2 text-emerald-400">✔ 1.0.1 live</p>
-                </div>
-                <div class="mm-lane">
-                  <span class="mm-packet">1.0.1</span>
-                </div>
-                <div class="mm-phone">
-                  <div class="mm-phone-bar" />
-                  <div class="mm-row w-3/4" />
-                  <div class="mm-row w-1/2" />
-                  <div class="mm-row w-2/3" />
-                  <span class="mm-badge">
-                    <span class="mm-badge-old">v1.0.0</span>
-                    <span class="mm-badge-new">v1.0.1 ✓</span>
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {product.scene === 'native-build' && (
-              <div class="mm-nb w-full max-w-[21rem] space-y-3">
-                {[
-                  ['iOS', '.ipa', 'App Store'],
-                  ['Android', '.aab', 'Play Store'],
-                ].map(([platform, artifact, store], row) => (
-                  <div class="mm-card flex items-center gap-3" style={`--row:${row}`}>
-                    <span class="w-14 text-xs font-semibold text-white">{platform}</span>
-                    <span class="mm-bar flex-1">
-                      <i />
-                    </span>
-                    <span class="mm-chip mm-slot-4">{artifact} ✓</span>
-                    <span class="mm-chip mm-chip-blue mm-slot-5">{store}</span>
-                  </div>
-                ))}
-                <p class="mm-slot-1 text-center font-mono text-[11px] text-slate-400">Cloud Mac · signing vault · no Xcode</p>
-              </div>
-            )}
-
-            {product.scene === 'observe' && (
-              <div class="mm-card w-full max-w-[22rem] p-3">
-                <div class="grid grid-cols-3 gap-2">
-                  <div class="mm-stat">
-                    <b>98.6%</b>
-                    <small>issue-free</small>
-                  </div>
-                  <div class="mm-stat">
-                    <b>781ms</b>
-                    <small>launch p90</small>
-                  </div>
-                  <div class="mm-stat">
-                    <b class="text-emerald-300">2.6.1</b>
-                    <small>latest</small>
-                  </div>
-                </div>
-                <svg class="mt-3 h-20 w-full" viewBox="0 0 300 80">
-                  <path class="mm-grid-line" d="M0 20H300M0 40H300M0 60H300" />
-                  <path class="mm-line" pathLength="1" d="M0 58 L30 54 L60 57 L90 50 L120 52 L150 24 L170 20 L190 46 L220 50 L250 44 L300 40" />
-                  <circle class="mm-alert" cx="160" cy="21" r="4" />
-                </svg>
-                <p class="mm-slot-4 mt-1 font-mono text-[10.5px] text-rose-300">▲ 2.6.0 spike · rolled back · 2.6.1 healthy</p>
-              </div>
-            )}
-
-            {product.scene === 'notifications' && (
-              <div class="mm-lock">
-                <p class="text-center text-2xl font-semibold text-white/90">9:41</p>
-                <div class="mt-3 space-y-2">
-                  {[
-                    ['Order shipped', 'Your package is on the way'],
-                    ['New message', 'Maya replied to your ticket'],
-                    ['Update ready', 'Silent live update applied'],
-                  ].map(([title, body], i) => (
-                    <div class:list={['mm-notif', `mm-slot-${i + 1}`]}>
-                      <span class="mm-notif-icon" />
-                      <span class="min-w-0">
-                        <b>{title}</b>
-                        <small>{body}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {product.scene === 'cli' && (
-              <div class="mm-term mm-term-lg">
+    {products.map((product, index) => (
+      <div class:list={['mega-preview absolute inset-0 flex flex-col', { 'is-active': index === 0 }]} data-mega-preview={index} aria-hidden={index === 0 ? undefined : 'true'}>
+        <div class="mm-stage relative flex flex-1 items-center justify-center px-6 pt-5" aria-hidden="true">
+          {product.scene === 'live-update' && (
+            <div class="mm-lu flex items-center gap-5">
+              <div class="mm-term">
                 <p>
-                  <span class="text-emerald-400">$</span> <span class="mm-type">npx @capgo/cli bundle upload</span>
+                  <span class="text-emerald-400">$</span> capgo bundle upload
                 </p>
-                <p class="mm-slot-3 text-slate-400">↳ zipping 16 files · 4.2 MB</p>
-                <p class="mm-slot-4 text-emerald-400">✔ checksum verified</p>
-                <p class="mm-slot-5 text-emerald-400">✔ 1.4.0 live on production</p>
+                <p class="mm-slot-2 text-emerald-400">✔ 1.0.1 live</p>
               </div>
-            )}
-
-            {product.scene === 'skills' && (
-              <div class="w-full max-w-[21rem] space-y-2 text-xs">
-                <p class="mm-bubble mm-slot-1">Add live updates to this app and ship a beta</p>
-                {['Installed @capgo/capacitor-updater', 'Added notifyAppReady()', 'Uploaded 1.4.0 to channel beta'].map((step, i) => (
-                  <p class:list={['mm-step', `mm-slot-${i + 2}`]}>
-                    <span class="text-emerald-400">✔</span> {step}
-                  </p>
-                ))}
+              <div class="mm-lane">
+                <span class="mm-packet">1.0.1</span>
               </div>
-            )}
-
-            {product.scene === 'app' && (
-              <div class="mm-phone mm-phone-scan">
-                <span class="mm-qr" />
-                <span class="mm-scanline" />
-                <span class="mm-toast mm-slot-4">Bundle 1.4.0 loaded ✓</span>
+              <div class="mm-phone">
+                <div class="mm-phone-bar" />
+                <div class="mm-row w-3/4" />
+                <div class="mm-row w-1/2" />
+                <div class="mm-row w-2/3" />
+                <span class="mm-badge">
+                  <span class="mm-badge-old">v1.0.0</span>
+                  <span class="mm-badge-new">v1.0.1 ✓</span>
+                </span>
               </div>
-            )}
-
-            {product.scene === 'plugins' && (
-              <div class="grid w-full max-w-[22rem] grid-cols-4 gap-2">
-                {pluginTiles.map(([name, color], i) => (
-                  <div class="mm-tile" style={`--i:${i}`}>
-                    <span style={`background:${color}`}>{name.slice(0, 1)}</span>
-                    <small>{name}</small>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {product.scene === 'ionic' && (
-              <div class="w-full max-w-[22rem] space-y-2">
-                {ionicRows.map(([from, to], i) => (
-                  <div class="mm-card mm-map flex items-center gap-2 px-3 py-2" style={`--i:${i}`}>
-                    <span class="mm-from text-xs text-slate-300">{from}</span>
-                    <span class="text-slate-500">→</span>
-                    <span class="mm-to truncate font-mono text-[11px] text-emerald-300">{to}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div class="flex items-end justify-between gap-4 border-t border-white/5 px-5 py-3.5">
-            <p class="line-clamp-2 text-xs leading-5 text-slate-400">{product.desc}</p>
-            <div class="flex shrink-0 items-center gap-3 text-xs font-semibold">
-              {product.extra && (
-                <a href={getRelativeLocaleUrl(locale, product.extra.href)} class="text-slate-400 transition-colors hover:text-white">
-                  {product.extra.label}
-                </a>
-              )}
-              <a
-                href={getRelativeLocaleUrl(locale, product.href)}
-                class="inline-flex items-center gap-1 rounded-md bg-[#44BCFF] px-2.5 py-1.5 text-[#04121c] transition-colors hover:bg-white"
-              >
-                {m.menu_explore({}, { locale })} <span aria-hidden="true">→</span>
-              </a>
             </div>
+          )}
+
+          {product.scene === 'native-build' && (
+            <div class="mm-nb w-full max-w-[21rem] space-y-3">
+              {[
+                ['iOS', '.ipa', 'App Store'],
+                ['Android', '.aab', 'Play Store'],
+              ].map(([platform, artifact, store], row) => (
+                <div class="mm-card flex items-center gap-3" style={`--row:${row}`}>
+                  <span class="w-14 text-xs font-semibold text-white">{platform}</span>
+                  <span class="mm-bar flex-1">
+                    <i />
+                  </span>
+                  <span class="mm-chip mm-slot-4">{artifact} ✓</span>
+                  <span class="mm-chip mm-chip-blue mm-slot-5">{store}</span>
+                </div>
+              ))}
+              <p class="mm-slot-1 text-center font-mono text-[11px] text-slate-400">Cloud Mac · signing vault · no Xcode</p>
+            </div>
+          )}
+
+          {product.scene === 'observe' && (
+            <div class="mm-card w-full max-w-[22rem] p-3">
+              <div class="grid grid-cols-3 gap-2">
+                <div class="mm-stat">
+                  <b>98.8%</b>
+                  <small>issue-free</small>
+                </div>
+                <div class="mm-stat">
+                  <b>790ms</b>
+                  <small>launch p90</small>
+                </div>
+                <div class="mm-stat">
+                  <b class="text-emerald-300">2.6.1</b>
+                  <small>latest</small>
+                </div>
+              </div>
+              <svg class="mt-3 h-20 w-full" viewBox="0 0 300 80">
+                <path class="mm-grid-line" d="M0 20H300M0 40H300M0 60H300" />
+                <path class="mm-line" pathLength="1" d="M0 58 L30 54 L60 57 L90 50 L120 52 L150 24 L170 20 L190 46 L220 50 L250 44 L300 40" />
+                <circle class="mm-alert" cx="160" cy="21" r="4" />
+              </svg>
+              <p class="mm-slot-4 mt-1 font-mono text-[10.5px] text-rose-300">Example: 2.6.0 spike · rolled back · 2.6.1 healthy</p>
+            </div>
+          )}
+
+          {product.scene === 'notifications' && (
+            <div class="mm-lock">
+              <p class="text-center text-2xl font-semibold text-white/90">9:41</p>
+              <div class="mt-3 space-y-2">
+                {[
+                  ['Order shipped', 'Your package is on the way'],
+                  ['New message', 'Maya replied to your ticket'],
+                  ['Update ready', 'Silent live update applied'],
+                ].map(([title, body], i) => (
+                  <div class:list={['mm-notif', `mm-slot-${i + 1}`]}>
+                    <span class="mm-notif-icon" />
+                    <span class="min-w-0">
+                      <b>{title}</b>
+                      <small>{body}</small>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {product.scene === 'cli' && (
+            <div class="mm-term mm-term-lg">
+              <p>
+                <span class="text-emerald-400">$</span> <span class="mm-type">npx @capgo/cli bundle upload</span>
+              </p>
+              <p class="mm-slot-3 text-slate-400">↳ zipping 16 files · 4.2 MB</p>
+              <p class="mm-slot-4 text-emerald-400">✔ checksum verified</p>
+              <p class="mm-slot-5 text-emerald-400">✔ 1.4.0 live on production</p>
+            </div>
+          )}
+
+          {product.scene === 'skills' && (
+            <div class="w-full max-w-[21rem] space-y-2 text-xs">
+              <p class="mm-bubble mm-slot-1">Add live updates to this app and ship a beta</p>
+              {['Installed @capgo/capacitor-updater', 'Added notifyAppReady()', 'Uploaded 1.4.0 to channel beta'].map((step, i) => (
+                <p class:list={['mm-step', `mm-slot-${i + 2}`]}>
+                  <span class="text-emerald-400">✔</span> {step}
+                </p>
+              ))}
+            </div>
+          )}
+
+          {product.scene === 'app' && (
+            <div class="mm-phone mm-phone-scan">
+              <span class="mm-qr" />
+              <span class="mm-scanline" />
+              <span class="mm-toast mm-slot-4">Bundle 1.4.0 loaded ✓</span>
+            </div>
+          )}
+
+          {product.scene === 'plugins' && (
+            <div class="grid w-full max-w-[22rem] grid-cols-4 gap-2">
+              {pluginTiles.map(([name, color], i) => (
+                <div class="mm-tile" style={`--i:${i}`}>
+                  <span style={`background:${color}`}>{name.slice(0, 1)}</span>
+                  <small>{name}</small>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {product.scene === 'ionic' && (
+            <div class="w-full max-w-[22rem] space-y-2">
+              {ionicRows.map(([from, to], i) => (
+                <div class="mm-card mm-map flex items-center gap-2 px-3 py-2" style={`--i:${i}`}>
+                  <span class="mm-from text-xs text-slate-300">{from}</span>
+                  <span class="text-slate-500">→</span>
+                  <span class="mm-to truncate font-mono text-[11px] text-emerald-300">{to}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div class="flex items-end justify-between gap-4 border-t border-white/5 px-5 py-3.5">
+          <p class="line-clamp-2 text-xs leading-5 text-slate-400">{product.desc}</p>
+          <div class="flex shrink-0 items-center gap-3 text-xs font-semibold">
+            {product.extra && (
+              <a href={getRelativeLocaleUrl(locale, product.extra.href)} class="text-slate-400 transition-colors hover:text-white">
+                {product.extra.label}
+              </a>
+            )}
+            <a
+              href={getRelativeLocaleUrl(locale, product.href)}
+              class="inline-flex items-center gap-1 rounded-md bg-[#44BCFF] px-2.5 py-1.5 text-[#04121c] transition-colors hover:bg-white"
+            >
+              {m.menu_explore({}, { locale })} <span aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
-      ))
-    }
+      </div>
+    ))}
   </div>
 </div>
 

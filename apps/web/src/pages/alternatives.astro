@@ -1,387 +1,388 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import { getRelativeLocaleUrl } from '@/services/links'
-import m from '@/copy/messages'
-import { pluginCountLabel } from '@/config/plugins'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import '@/styles/lu-product.css'
+import '@/styles/compare-page.css'
+import AppLogoStrip from '@/components/AppLogoStrip.astro'
 import HumanSupport from '@/components/HumanSupport.astro'
-import { allTestimonials } from '@/config/productTestimonials'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import Layout from '@/layouts/Layout.astro'
+import { productTestimonials } from '@/config/productTestimonials'
+import m from '@/copy/messages'
+import { createItemListLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
 const title = m.alternatives_title({}, { locale })
 const description = m.alternatives_meta_description({}, { locale })
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
 
-const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
-  name: title,
-  description: description,
-  url: Astro.url.href,
-  serviceType: 'Software Development Service',
-  areaServed: ['Worldwide'],
-})
+const comparisons = [
+  {
+    name: 'Ionic Appflow',
+    title: m.alternatives_index_card_title({ competitor: 'Ionic Appflow' }, { locale }),
+    status: m.alternatives_sum_appflow_status({}, { locale }),
+    text: m.compare_appflow_verdict({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'alternatives/ionic-appflow'),
+  },
+  {
+    name: 'Capawesome Cloud',
+    title: m.alternatives_index_card_title({ competitor: 'Capawesome Cloud' }, { locale }),
+    status: m.alternatives_sum_capawesome_status({}, { locale }),
+    text: m.compare_capawesome_verdict({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'alternatives/capawesome'),
+  },
+  {
+    name: 'Microsoft CodePush',
+    title: m.alternatives_index_card_title({ competitor: 'Microsoft CodePush' }, { locale }),
+    status: m.alternatives_sum_codepush_status({}, { locale }),
+    text: m.compare_codepush_verdict({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'alternatives/codepush'),
+  },
+  {
+    name: 'Expo Application Services',
+    title: m.alternatives_index_card_title({ competitor: 'Expo (EAS)' }, { locale }),
+    status: m.alternatives_sum_expo_status({}, { locale }),
+    text: m.compare_expo_verdict({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'alternatives/expo'),
+  },
+  {
+    name: 'Median',
+    title: m.alternatives_index_card_title({ competitor: 'Median' }, { locale }),
+    status: m.alternatives_sum_median_status({}, { locale }),
+    text: m.compare_median_verdict({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'alternatives/median'),
+  },
+  {
+    name: 'VoltBuilder',
+    title: m.alternatives_index_card_title({ competitor: 'VoltBuilder' }, { locale }),
+    status: m.alternatives_sum_voltbuilder_status({}, { locale }),
+    text: m.compare_voltbuilder_verdict({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'alternatives/voltbuilder'),
+  },
+]
 
-const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
-  includeOrganization: true,
-})
+const sources = [
+  { label: m.compare_appflow_source_announcement({}, { locale }), href: 'https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products' },
+  { label: m.compare_appflow_source_docs({}, { locale }), href: 'https://ionic.io/docs/appflow' },
+  { label: m.compare_capawesome_source_pricing({}, { locale }), href: 'https://capawesome.io/cloud/pricing/' },
+  { label: m.compare_capawesome_source_cloud({}, { locale }), href: 'https://capawesome.io/cloud/' },
+  { label: m.compare_codepush_source_retirement({}, { locale }), href: 'https://learn.microsoft.com/en-us/appcenter/retirement' },
+  { label: m.compare_codepush_source_server({}, { locale }), href: 'https://github.com/microsoft/code-push-server' },
+  { label: m.compare_expo_source_pricing({}, { locale }), href: 'https://expo.dev/pricing' },
+  { label: m.compare_expo_source_services({}, { locale }), href: 'https://expo.dev/services' },
+  { label: m.compare_median_source_pricing({}, { locale }), href: 'https://median.co/pricing' },
+  { label: m.compare_median_source_updates({}, { locale }), href: 'https://docs.median.co/docs/app-updates' },
+  { label: m.compare_voltbuilder_source_plans({}, { locale }), href: 'https://volt.build/plan/' },
+  { label: m.compare_voltbuilder_source_home({}, { locale }), href: 'https://volt.build/' },
+  { label: m.compare_voltbuilder_source_docs({}, { locale }), href: 'https://volt.build/docs/all/' },
+]
+
+type Cell = { text: string; sources: number[] }
+const cell = (text: string, ...refs: number[]): Cell => ({ text, sources: refs })
+
+const summary: Array<{ name: string; us?: boolean; live: Cell; builds: Cell; price: Cell; status: Cell }> = [
+  {
+    name: 'Capgo',
+    us: true,
+    live: cell(m.alternatives_sum_capgo_live({}, { locale })),
+    builds: cell(m.alternatives_sum_capgo_builds({}, { locale })),
+    price: cell(m.alternatives_sum_capgo_price({}, { locale })),
+    status: cell(m.alternatives_sum_capgo_status({}, { locale })),
+  },
+  {
+    name: 'Ionic Appflow',
+    live: cell(m.alternatives_sum_appflow_live({}, { locale }), 2),
+    builds: cell(m.alternatives_sum_appflow_builds({}, { locale }), 2),
+    price: cell(m.alternatives_sum_appflow_price({}, { locale }), 1),
+    status: cell(m.alternatives_sum_appflow_status({}, { locale }), 1),
+  },
+  {
+    name: 'Capawesome Cloud',
+    live: cell(m.alternatives_sum_capawesome_live({}, { locale }), 4),
+    builds: cell(m.alternatives_sum_capawesome_builds({}, { locale }), 3),
+    price: cell(m.alternatives_sum_capawesome_price({}, { locale }), 3),
+    status: cell(m.alternatives_sum_capawesome_status({}, { locale }), 4),
+  },
+  {
+    name: 'Microsoft CodePush',
+    live: cell(m.alternatives_sum_codepush_live({}, { locale }), 6),
+    builds: cell(m.alternatives_sum_codepush_builds({}, { locale }), 5),
+    price: cell(m.alternatives_sum_codepush_price({}, { locale }), 6),
+    status: cell(m.alternatives_sum_codepush_status({}, { locale }), 5),
+  },
+  {
+    name: 'Expo (EAS)',
+    live: cell(m.alternatives_sum_expo_live({}, { locale }), 8),
+    builds: cell(m.alternatives_sum_expo_builds({}, { locale }), 8),
+    price: cell(m.alternatives_sum_expo_price({}, { locale }), 7),
+    status: cell(m.alternatives_sum_expo_status({}, { locale }), 8),
+  },
+  {
+    name: 'Median',
+    live: cell(m.alternatives_sum_median_live({}, { locale }), 10),
+    builds: cell(m.alternatives_sum_median_builds({}, { locale }), 9),
+    price: cell(m.alternatives_sum_median_price({}, { locale }), 9),
+    status: cell(m.alternatives_sum_median_status({}, { locale }), 9),
+  },
+  {
+    name: 'VoltBuilder',
+    live: cell(m.alternatives_sum_voltbuilder_live({}, { locale }), 13),
+    builds: cell(m.alternatives_sum_voltbuilder_builds({}, { locale }), 12),
+    price: cell(m.alternatives_sum_voltbuilder_price({}, { locale }), 11),
+    status: cell(m.alternatives_sum_voltbuilder_status({}, { locale }), 11),
+  },
+]
+
+const summaryColumns = [
+  m.compare_row_ota({}, { locale }),
+  m.compare_row_native_builds({}, { locale }),
+  m.alternatives_summary_col_price({}, { locale }),
+  m.compare_row_company({}, { locale }),
+]
+
+const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[n - 1]?.label ?? '' }, { locale })
+
+const guides = [
+  {
+    title: m.alternatives_hub_reviews_title({}, { locale }),
+    links: [
+      { label: m.review_appflow_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'reviews/appflow') },
+      { label: m.review_capawesome_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'reviews/capawesome') },
+      { label: m.review_codepush_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'reviews/codepush') },
+    ],
+  },
+  {
+    title: m.alternatives_hub_migrate_title({}, { locale }),
+    links: [
+      { label: m.migrate_from_appflow_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'migrate/from-appflow') },
+      { label: m.migrate_from_capawesome_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'migrate/from-capawesome') },
+      { label: m.migrate_from_codepush_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'migrate/from-codepush') },
+    ],
+  },
+  {
+    title: m.alternatives_hub_best_title({}, { locale }),
+    links: [
+      { label: m.best_capacitor_live_updates_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/capacitor-live-updates') },
+      { label: m.best_appflow_alternative_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/appflow-alternative') },
+      { label: m.best_codepush_alternative_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/codepush-alternative') },
+    ],
+  },
+  {
+    title: m.alternatives_hub_mcp_link({}, { locale }),
+    links: [{ label: m.mcp_page_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'mcp') }],
+  },
+]
+
+const ldJSON = createLdJsonGraph(
+  config,
+  createServiceLdJson(config, {
+    name: title,
+    description,
+    url: Astro.url.href,
+    serviceType: 'Software Development Service',
+    areaServed: ['Worldwide'],
+  }),
+  {
+    includeOrganization: true,
+    additionalEntities: [
+      createItemListLdJson(config, {
+        url: Astro.url.href,
+        name: m.alternatives_index_title({}, { locale }),
+        description,
+        items: comparisons.map((item) => ({
+          name: item.title,
+          url: new URL(item.href, config.baseUrl).href,
+          description: item.text,
+        })),
+      }),
+    ],
+  },
+)
 
 const content = {
   title,
   description,
-  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+  image: `${config.baseUrl}/capgo_social.png`,
   keywords: 'Capgo alternatives, Expo alternative, EAS alternative, Appflow alternative, Capacitor live updates',
   ldJSON,
 }
 ---
 
 <Layout content={content}>
-  <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-    <!-- Hero Section -->
-    <div class="mb-16 text-center">
-      <h1 class="mb-4 text-4xl font-bold tracking-tight text-gray-100 sm:text-5xl">
-        {m.alternatives_hero_title({}, { locale })}
-      </h1>
-      <p class="mx-auto max-w-2xl text-xl text-gray-300">
-        {m.alternatives_hero_subtitle({}, { locale })}
-      </p>
-    </div>
-
-    <!-- Why This Page Exists -->
-    <div class="mb-16 rounded-lg border border-gray-700 bg-gray-800/50 p-8">
-      <h2 class="mb-4 text-2xl font-semibold text-gray-100">
-        {m.alternatives_why_exists_title({}, { locale })}
-      </h2>
-      <div class="space-y-4 text-gray-300">
-        <p>
-          {m.alternatives_why_exists_p1({}, { locale })}
-        </p>
-        <p>
-          {m.alternatives_why_exists_p2({}, { locale })}
-        </p>
-        <p>
-          {m.alternatives_why_exists_p3({}, { locale })}
-        </p>
-      </div>
-    </div>
-
-    <!-- What Makes Us Different -->
-    <div class="mb-16">
-      <h2 class="mb-8 text-3xl font-bold text-gray-100">
-        {m.alternatives_what_different_title({}, { locale })}
-      </h2>
-
-      <div class="space-y-6">
-        <!-- Open & Transparent -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-gray-100">
-            {m.alternatives_open_transparent_title({}, { locale })}
-          </h3>
-          <p class="mb-2 text-gray-300">
-            {m.alternatives_open_transparent_desc({}, { locale })}
-          </p>
-          <ul class="ml-6 list-disc space-y-1 text-gray-400">
-            <li set:html={m.alternatives_open_transparent_li1({}, { locale })} />
-            <li set:html={m.alternatives_open_transparent_li2({}, { locale })} />
-            <li>{m.alternatives_open_transparent_li3({}, { locale })}</li>
-            <li>{m.alternatives_open_transparent_li4({}, { locale })}</li>
-            <li>{m.alternatives_open_transparent_li5({}, { locale })}</li>
-          </ul>
+  <div class="lu bg-ad cmp">
+    <section class="section cmp-hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot" aria-hidden="true"></span>
+          {m.alternatives_hero_eyebrow({}, { locale })}
         </div>
-
-        <!-- Been Doing It -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-gray-100">
-            {m.alternatives_been_doing_title({}, { locale })}
-          </h3>
-          <p class="text-gray-300">
-            {m.alternatives_been_doing_desc({}, { locale })}
-          </p>
-        </div>
-
-        <!-- Biggest Plugin Provider -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-gray-100">
-            {m.alternatives_biggest_plugin_title({}, { locale })}
-          </h3>
-          <p class="mb-2 text-gray-300">
-            {m.alternatives_biggest_plugin_desc({ pluginCountLabel }, { locale })}
-          </p>
-          <p class="text-gray-400">
-            {m.alternatives_biggest_plugin_note({}, { locale })}
-          </p>
-        </div>
-
-        <!-- Family Business -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-gray-100">
-            {m.alternatives_family_business_title({}, { locale })}
-          </h3>
-          <p class="mb-2 text-gray-300">
-            {m.alternatives_family_business_desc({}, { locale })}
-          </p>
-          <ul class="ml-6 list-disc space-y-1 text-gray-400">
-            <li>{m.alternatives_family_business_li1({}, { locale })}</li>
-            <li>{m.alternatives_family_business_li2({}, { locale })}</li>
-          </ul>
-        </div>
-
-        <!-- Bootstrapped & Profitable -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-gray-100">
-            {m.alternatives_bootstrapped_title({}, { locale })}
-          </h3>
-          <p class="mb-2 text-gray-300">
-            {m.alternatives_bootstrapped_desc({}, { locale })}
-          </p>
-          <p class="text-gray-400">
-            {m.alternatives_bootstrapped_note({}, { locale })}
-          </p>
-        </div>
-
-        <!-- Human Support -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-gray-100">
-            {m.alternatives_human_support_title({}, { locale })}
-          </h3>
-          <p class="mb-2 text-gray-300">
-            {m.alternatives_human_support_desc({}, { locale })}
-          </p>
-          <p class="text-gray-400">
-            {m.alternatives_human_support_note({}, { locale })}
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- The Alternatives -->
-    <div class="mb-16">
-      <h2 class="mb-8 text-3xl font-bold text-gray-100">
-        {m.alternatives_other_options_title({}, { locale })}
-      </h2>
-
-      <div class="space-y-8">
-        <!-- Appflow -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
-          <div class="mb-4 flex items-start justify-between">
-            <div>
-              <h3 class="mb-2 text-2xl font-bold text-gray-100">Ionic Appflow</h3>
-              <p class="text-sm text-orange-400">{m.alternatives_appflow_status({}, { locale })}</p>
-            </div>
-            <a href={getRelativeLocaleUrl(locale, 'alternatives/ionic-appflow')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
-              {m.alternatives_appflow_migration_guide({}, { locale })}
+        <h1 class="cmp-h1">{m.alternatives_hero_title({}, { locale })}</h1>
+        <p class="lead">{m.alternatives_hero_subtitle({}, { locale })}</p>
+        <div class="hero-ctas">
+          <HumanSupport size="sm" align="center" />
+          <div class="hero-cta-buttons">
+            <a class="btn btn-lg btn-primary" href={registerUrl}>
+              {m.compare_cta_start_trial({}, { locale })}
+            </a>
+            <a class="btn btn-lg btn-ghost" href="#summary">
+              {m.alternatives_hero_summary_cta({}, { locale })}
             </a>
           </div>
-
-          <div class="mb-4 space-y-3 text-gray-300">
-            <p><strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_appflow_reality({}, { locale })}</p>
-
-            <p><strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_appflow_when_good({}, { locale })}</p>
-
-            <p><strong class="text-gray-100">{m.alternatives_appflow_why_different_label({}, { locale })}</strong></p>
-            <ul class="ml-6 list-disc space-y-1 text-gray-400">
-              <li>{m.alternatives_appflow_why_different_li1({}, { locale })}</li>
-              <li>{m.alternatives_appflow_why_different_li2({}, { locale })}</li>
-              <li>{m.alternatives_appflow_why_different_li3({}, { locale })}</li>
-              <li>{m.alternatives_appflow_why_different_li4({}, { locale })}</li>
-            </ul>
-          </div>
-
-          <div class="mt-4 text-sm text-gray-400">
-            {m.alternatives_appflow_credit({}, { locale })}
-          </div>
+          <p class="hero-cta-note">{m.product_trial_cta_note({}, { locale })}</p>
         </div>
-
-        <!-- Expo Application Services -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
-          <div class="mb-4 flex items-start justify-between">
-            <div>
-              <h3 class="mb-2 text-2xl font-bold text-gray-100">Expo Application Services (EAS)</h3>
-              <p class="text-sm text-sky-400">{m.alternatives_expo_status({}, { locale })}</p>
-            </div>
-            <a href={getRelativeLocaleUrl(locale, 'alternatives/expo')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
-              {m.alternatives_expo_full_comparison({}, { locale })}
-            </a>
-          </div>
-
-          <div class="mb-4 space-y-3 text-gray-300">
-            <p><strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_expo_reality({}, { locale })}</p>
-
-            <p><strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_expo_when_good({}, { locale })}</p>
-
-            <p><strong class="text-gray-100">{m.alternatives_appflow_why_different_label({}, { locale })}</strong></p>
-            <ul class="ml-6 list-disc space-y-1 text-gray-400">
-              <li>{m.alternatives_expo_why_different_li1({}, { locale })}</li>
-              <li>{m.alternatives_expo_why_different_li2({}, { locale })}</li>
-              <li>{m.alternatives_expo_why_different_li3({}, { locale })}</li>
-              <li>{m.alternatives_expo_why_different_li4({}, { locale })}</li>
-            </ul>
-          </div>
-
-          <div class="mt-4 text-sm text-gray-400">
-            {m.alternatives_expo_credit({}, { locale })}
-          </div>
-        </div>
-
-        <!-- CodePush -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
-          <div class="mb-4 flex items-start justify-between">
-            <div>
-              <h3 class="mb-2 text-2xl font-bold text-gray-100">Microsoft CodePush</h3>
-              <p class="text-sm text-red-400">{m.alternatives_codepush_status({}, { locale })}</p>
-            </div>
-            <a href={getRelativeLocaleUrl(locale, 'alternatives/codepush')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
-              {m.alternatives_hub_codepush_link({}, { locale })}
-            </a>
-          </div>
-
-          <div class="mb-4 space-y-3 text-gray-300">
-            <p><strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_codepush_reality({}, { locale })}</p>
-
-            <p><strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_codepush_when_good({}, { locale })}</p>
-
-            <p><strong class="text-gray-100">{m.alternatives_appflow_why_different_label({}, { locale })}</strong></p>
-            <ul class="ml-6 list-disc space-y-1 text-gray-400">
-              <li>{m.alternatives_codepush_why_different_li1({}, { locale })}</li>
-              <li>{m.alternatives_codepush_why_different_li2({}, { locale })}</li>
-              <li>{m.alternatives_codepush_why_different_li3({}, { locale })}</li>
-              <li>{m.alternatives_codepush_why_different_li4({}, { locale })}</li>
-            </ul>
-          </div>
-
-          <div class="mt-4 text-sm text-gray-400">
-            {m.alternatives_codepush_credit({}, { locale })}
-          </div>
-        </div>
-
-        <!-- Capawesome -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
-          <div class="mb-4 flex items-start justify-between">
-            <div>
-              <h3 class="mb-2 text-2xl font-bold text-gray-100">Capawesome Cloud</h3>
-              <p class="text-sm text-green-400">{m.alternatives_capawesome_status({}, { locale })}</p>
-            </div>
-            <a href={getRelativeLocaleUrl(locale, 'alternatives/capawesome')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
-              {m.alternatives_capawesome_full_comparison({}, { locale })}
-            </a>
-          </div>
-
-          <div class="mb-4 space-y-3 text-gray-300">
-            <p><strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_capawesome_reality({}, { locale })}</p>
-
-            <p><strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_capawesome_when_good({}, { locale })}</p>
-
-            <p><strong class="text-gray-100">{m.alternatives_capawesome_differences_label({}, { locale })}</strong></p>
-            <ul class="ml-6 list-disc space-y-1 text-gray-400">
-              <li set:html={m.alternatives_capawesome_diff_experience({}, { locale })} />
-              <li set:html={m.alternatives_capawesome_diff_scale({}, { locale })} />
-              <li set:html={m.alternatives_capawesome_diff_pricing({}, { locale })} />
-              <li set:html={m.alternatives_capawesome_diff_focus({}, { locale })} />
-              <li set:html={m.alternatives_capawesome_diff_security({}, { locale })} />
-              <li set:html={m.alternatives_capawesome_diff_support({}, { locale })} />
-            </ul>
-          </div>
-
-          <div class="mt-4 text-sm text-gray-400">
-            {m.alternatives_capawesome_credit({}, { locale })}
-          </div>
-        </div>
-
-        <!-- Voltbuilder -->
-        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
-          <div class="mb-4 flex items-start justify-between">
-            <div>
-              <h3 class="mb-2 text-2xl font-bold text-gray-100">Voltbuilder</h3>
-              <p class="text-sm text-gray-400">{m.voltbuilder_alt_hero_subtitle({}, { locale })}</p>
-            </div>
-            <a href={getRelativeLocaleUrl(locale, 'alternatives/voltbuilder')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
-              {m.alternatives_hub_voltbuilder_link({}, { locale })}
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Guides hub -->
-    <div class="mb-16 grid gap-8 sm:grid-cols-2">
-      <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-        <h3 class="mb-4 text-xl font-bold text-gray-100">{m.alternatives_hub_reviews_title({}, { locale })}</h3>
-        <ul class="space-y-2 text-emerald-400">
-          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'reviews/appflow')}>{m.review_appflow_title({}, { locale })}</a></li>
-          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'reviews/capawesome')}>{m.review_capawesome_title({}, { locale })}</a></li>
-          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'reviews/codepush')}>{m.review_codepush_title({}, { locale })}</a></li>
+        <ul class="cmp-meta">
+          <li>{m.compare_meta_updates({}, { locale })}</li>
+          <li>{m.compare_meta_apps({}, { locale })}</li>
+          <li>{m.compare_meta_founded({}, { locale })}</li>
         </ul>
       </div>
-      <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-        <h3 class="mb-4 text-xl font-bold text-gray-100">{m.alternatives_hub_migrate_title({}, { locale })}</h3>
-        <ul class="space-y-2 text-emerald-400">
-          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'migrate/from-appflow')}>{m.migrate_from_appflow_title({}, { locale })}</a></li>
-          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'migrate/from-capawesome')}>{m.migrate_from_capawesome_title({}, { locale })}</a></li>
-          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'migrate/from-codepush')}>{m.migrate_from_codepush_title({}, { locale })}</a></li>
+      <AppLogoStrip />
+    </section>
+
+    <section class="section" id="comparisons">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.alternatives_index_eyebrow({}, { locale })}</div>
+          <h2 class="h2-section">{m.alternatives_index_title({}, { locale })}</h2>
+          <p class="lead">{m.alternatives_index_lead({}, { locale })}</p>
+        </div>
+        <div class="cmp-card-grid">
+          {comparisons.map((item) => (
+            <article class="cmp-card">
+              <span class="cmp-card-status">{item.status}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <a class="cmp-card-link" href={item.href} aria-label={m.alternatives_index_link_aria({ competitor: item.name }, { locale })}>
+                {m.alternatives_index_link({}, { locale })} →
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="summary">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.compare_table_eyebrow({}, { locale })}</div>
+          <h2 class="h2-section">{m.alternatives_summary_title({}, { locale })}</h2>
+          <p class="lead">{m.alternatives_summary_lead({}, { locale })}</p>
+        </div>
+        <div class="comp-wrap cmp-wrap-scroll">
+          <table class="cmp-simple cmp-summary">
+            <caption class="cmp-caption">{m.alternatives_summary_caption({}, { locale })}</caption>
+            <thead>
+              <tr>
+                <th scope="col">{m.alternatives_summary_col_product({}, { locale })}</th>
+                {summaryColumns.map((column) => (
+                  <th scope="col">{column}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {summary.map((row) => (
+                <tr class:list={[row.us && 'us']}>
+                  <th scope="row">{row.name}</th>
+                  {[row.live, row.builds, row.price, row.status].map((value, index) => (
+                    <td>
+                      <span class="cmp-cell-label" aria-hidden="true">
+                        {summaryColumns[index]}
+                      </span>
+                      {value.text}
+                      {value.sources.map((n) => (
+                        <a class="cmp-ref" href={`#cmp-src-${n}`} aria-label={refLabel(n)}>
+                          [{n}]
+                        </a>
+                      ))}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div class="cmp-sources" id="sources">
+          <h3>{m.compare_sources_title({}, { locale })}</h3>
+          <p>{m.compare_sources_note({}, { locale })}</p>
+          <ol>
+            {sources.map((source, index) => (
+              <li id={`cmp-src-${index + 1}`}>
+                <a href={source.href} target="_blank" rel="noopener noreferrer">
+                  {source.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="limits">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.compare_better_eyebrow({}, { locale })}</div>
+          <h2 class="h2-section">{m.alternatives_not_good_at_title({}, { locale })}</h2>
+        </div>
+        <div class="cmp-card-grid cmp-card-grid--two">
+          <article class="cmp-card">
+            <h3>{m.alternatives_not_good_at_ci_cd_label({}, { locale })}</h3>
+            <p>{m.alternatives_not_good_at_ci_cd({}, { locale })}</p>
+          </article>
+          <article class="cmp-card">
+            <h3>{m.alternatives_not_good_at_docs_label({}, { locale })}</h3>
+            <p>{m.alternatives_not_good_at_docs({}, { locale })}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.compare_proof_eyebrow({}, { locale })}
+      title={m.compare_proof_title({}, { locale })}
+      description={m.compare_proof_lead({}, { locale })}
+      testimonials={productTestimonials.liveUpdate}
+      maxItems={3}
+    />
+
+    <section class="section" id="guides">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--blue">{m.alternatives_guides_eyebrow({}, { locale })}</div>
+          <h2 class="h2-section">{m.alternatives_guides_title({}, { locale })}</h2>
+        </div>
+        <div class="cmp-card-grid cmp-card-grid--two">
+          {guides.map((group) => (
+            <nav class="cmp-card" aria-label={group.title}>
+              <h3>{group.title}</h3>
+              <ul class="cmp-guide-list">
+                {group.links.map((link) => (
+                  <li>
+                    <a href={link.href}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section final bg-grid grain" id="cta">
+      <div class="shell">
+        <h2>{m.compare_cta_title({}, { locale })}</h2>
+        <p class="tagline">{m.compare_cta_subtitle({}, { locale })}</p>
+        <HumanSupport class="mb-4" size="sm" />
+        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>
+          {m.compare_cta_start_trial({}, { locale })}
+        </a>
+        <ul class="cmp-meta">
+          <li>{m.compare_meta_teams({}, { locale })}</li>
+          <li>{m.compare_meta_devices({}, { locale })}</li>
+          <li>{m.compare_meta_build_time({}, { locale })}</li>
         </ul>
       </div>
-      <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-        <h3 class="mb-4 text-xl font-bold text-gray-100">{m.alternatives_hub_best_title({}, { locale })}</h3>
-        <ul class="space-y-2 text-emerald-400">
-          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'best/capacitor-live-updates')}>{m.best_capacitor_live_updates_title({}, { locale })}</a></li>
-          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'best/appflow-alternative')}>{m.best_appflow_alternative_title({}, { locale })}</a></li>
-          <li><a class="hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'best/codepush-alternative')}>{m.best_codepush_alternative_title({}, { locale })}</a></li>
-        </ul>
-      </div>
-      <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-        <h3 class="mb-4 text-xl font-bold text-gray-100">{m.alternatives_hub_mcp_link({}, { locale })}</h3>
-        <p class="mb-4 text-sm text-gray-400">{m.mcp_page_hero_subtitle({}, { locale })}</p>
-        <a class="font-medium text-emerald-400 hover:text-emerald-300" href={getRelativeLocaleUrl(locale, 'mcp')}>{m.mcp_page_title({}, { locale })}</a>
-      </div>
-    </div>
-
-    <!-- What We're NOT Good At -->
-    <div class="mb-16 rounded-lg border border-gray-600 bg-gray-800/50 p-8">
-      <h2 class="mb-4 text-2xl font-bold text-gray-100">
-        {m.alternatives_not_good_at_title({}, { locale })}
-      </h2>
-      <div class="space-y-3 text-gray-300">
-        <p>
-          <strong class="text-gray-100">{m.alternatives_not_good_at_ci_cd_label({}, { locale })}</strong>
-          {m.alternatives_not_good_at_ci_cd({}, { locale })}
-        </p>
-        <p>
-          <strong class="text-gray-100">{m.alternatives_not_good_at_docs_label({}, { locale })}</strong>
-          {m.alternatives_not_good_at_docs({}, { locale })}
-        </p>
-      </div>
-    </div>
-
-    <!-- Why People Actually Choose Us -->
-    <div class="mb-16">
-      <h2 class="mb-8 text-3xl font-bold text-gray-100">
-        {m.alternatives_why_choose_title({}, { locale })}
-      </h2>
-
-      <div class="grid gap-6 sm:grid-cols-2">
-        {
-          allTestimonials.slice(0, 4).map((testimonial) => (
-            <figure class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-              <blockquote class="mb-2 text-gray-300 italic">"{testimonial.quote}"</blockquote>
-              <figcaption class="text-sm text-gray-400">
-                — {testimonial.name}, {testimonial.role}
-              </figcaption>
-            </figure>
-          ))
-        }
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="text-center">
-      <h2 class="mb-4 text-2xl font-bold text-gray-100">
-        {m.alternatives_cta_title({}, { locale })}
-      </h2>
-      <p class="mb-8 text-gray-300">
-        {m.alternatives_cta_subtitle({}, { locale })}
-      </p>
-      <HumanSupport class="mb-4" size="sm" />
-      <a href={getRelativeLocaleUrl(locale, 'register')} class="inline-block rounded-lg bg-emerald-600 px-8 py-3 text-lg font-medium text-white hover:bg-emerald-700">
-        {m.alternatives_cta_button({}, { locale })}
-      </a>
-      <p class="mt-4 text-sm text-gray-400" set:html={m.alternatives_cta_questions({}, { locale })} />
-    </div>
+    </section>
   </div>
 </Layout>

@@ -2,19 +2,73 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
 import ABTestIllustration from '@/components/solutions/ABTestIllustration.astro'
 import BugFixIllustration from '@/components/solutions/BugFixIllustration.astro'
-import WhiteLabelIllustration from '@/components/solutions/WhiteLabelIllustration.astro'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const title = `${brand} | ${m.solutions_ecommerce_title({}, { locale })}`
 const description = m.solutions_ecommerce_description({}, { locale })
+
+const links = {
+  updateBehavior: { href: docs('live-updates/update-behavior/'), label: m.solutions_ecommerce_link_update_behavior({}, { locale }) },
+  rollouts: { href: docs('live-updates/progressive-rollouts/'), label: m.solutions_ecommerce_link_rollouts({}, { locale }) },
+  rollbacks: { href: docs('live-updates/rollbacks/'), label: m.solutions_ecommerce_link_rollbacks({}, { locale }) },
+  channels: { href: docs('live-updates/channels/'), label: m.solutions_ecommerce_link_channels({}, { locale }) },
+  observe: { href: docs('webapp/observe/'), label: m.solutions_ecommerce_link_observe({}, { locale }) },
+  versionTargeting: { href: docs('live-updates/version-targeting/'), label: m.solutions_ecommerce_link_version_targeting({}, { locale }) },
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_ecommerce_link_compatibility({}, { locale }) },
+  qr: { href: docs('cli/reference/get-qr/'), label: m.solutions_ecommerce_link_qr({}, { locale }) },
+}
+
+const howSteps = [
+  {
+    title: m.solutions_ecommerce_how1_title({}, { locale }),
+    body: m.solutions_ecommerce_how1_body({}, { locale }),
+    code: 'npx @capgo/cli@latest bundle upload --channel staging --qr-preview',
+    href: links.channels.href,
+    linkLabel: links.channels.label,
+  },
+  {
+    title: m.solutions_ecommerce_how2_title({}, { locale }),
+    body: m.solutions_ecommerce_how2_body({}, { locale }),
+    code: 'npx @capgo/cli@latest bundle upload --channel production --delta --rollout 10',
+    href: links.rollouts.href,
+    linkLabel: links.rollouts.label,
+  },
+  {
+    title: m.solutions_ecommerce_how3_title({}, { locale }),
+    body: m.solutions_ecommerce_how3_body({}, { locale }),
+    code: 'npx @capgo/cli@latest channel set production --rollout-promote',
+    href: links.observe.href,
+    linkLabel: links.observe.label,
+  },
+  {
+    title: m.solutions_ecommerce_how4_title({}, { locale }),
+    body: m.solutions_ecommerce_how4_body({}, { locale }),
+    code: 'npx @capgo/cli@latest channel set production --rollout-rollback',
+    href: links.rollbacks.href,
+    linkLabel: links.rollbacks.label,
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_ecommerce_faq1_q({}, { locale }), answer: m.solutions_ecommerce_faq1_a({}, { locale }), ...links.compatibility },
+  { question: m.solutions_ecommerce_faq2_q({}, { locale }), answer: m.solutions_ecommerce_faq2_a({}, { locale }), ...links.rollouts },
+  { question: m.solutions_ecommerce_faq3_q({}, { locale }), answer: m.solutions_ecommerce_faq3_a({}, { locale }), ...links.channels },
+  { question: m.solutions_ecommerce_faq4_q({}, { locale }), answer: m.solutions_ecommerce_faq4_a({}, { locale }), ...links.rollbacks },
+  { question: m.solutions_ecommerce_faq5_q({}, { locale }), answer: m.solutions_ecommerce_faq5_a({}, { locale }), ...links.updateBehavior },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -26,6 +80,7 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = { title, description, ldJSON }
@@ -45,23 +100,20 @@ const content = { title, description, ldJSON }
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <div class="mb-8 inline-flex items-center rounded-full border border-rose-400/40 bg-rose-500/10 px-4 py-2 text-sm font-medium text-rose-200">
-            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg aria-hidden="true" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path>
             </svg>
             {m.solutions_ecommerce_badge({}, { locale })}
           </div>
 
-          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            {m.solutions_ecommerce_hero_title({}, { locale })}
-          </h1>
+          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{m.solutions_ecommerce_hero_title({}, { locale })}</h1>
 
-          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">
-            {m.solutions_ecommerce_hero_subtitle({}, { locale })}
-          </p>
+          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">{m.solutions_ecommerce_hero_subtitle({}, { locale })}</p>
 
           <HumanSupport class="mt-8" size="sm" />
           <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -88,23 +140,24 @@ const content = { title, description, ldJSON }
     <section class="bg-gray-800 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto mb-16 max-w-3xl text-center">
-          <h2 class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.solutions_ecommerce_reality_label({}, { locale })}</h2>
-          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_ecommerce_reality_title({}, { locale })}</h3>
+          <p class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.solutions_ecommerce_reality_label({}, { locale })}</p>
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_ecommerce_reality_title({}, { locale })}</h2>
         </div>
 
         <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
-          <!-- Black Friday Nightmare -->
+          <!-- Store-only path -->
           <div class="rounded-2xl border border-red-500/30 bg-gray-900 p-8">
-            <h4 class="mb-6 flex items-center gap-2 text-xl font-bold text-red-400">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <h3 class="mb-6 flex items-center gap-2 text-xl font-bold text-red-400">
+              <svg aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                ></path>
               </svg>
               {m.solutions_ecommerce_nightmare_title({}, { locale })}
-            </h4>
+            </h3>
             <div class="space-y-4 text-gray-300">
               <p>{m.solutions_ecommerce_nightmare_para1({}, { locale })}</p>
               <p>{m.solutions_ecommerce_nightmare_para2({}, { locale })}</p>
@@ -117,12 +170,12 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                 </div>
                 <div>
-                  <h4 class="mb-1 text-lg font-bold text-white">{m.solutions_ecommerce_pain1_title({}, { locale })}</h4>
+                  <h3 class="mb-1 text-lg font-bold text-white">{m.solutions_ecommerce_pain1_title({}, { locale })}</h3>
                   <p class="text-sm text-gray-400">{m.solutions_ecommerce_pain1_desc({}, { locale })}</p>
                 </div>
               </div>
@@ -131,7 +184,7 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -141,7 +194,7 @@ const content = { title, description, ldJSON }
                   </svg>
                 </div>
                 <div>
-                  <h4 class="mb-1 text-lg font-bold text-white">{m.solutions_ecommerce_pain2_title({}, { locale })}</h4>
+                  <h3 class="mb-1 text-lg font-bold text-white">{m.solutions_ecommerce_pain2_title({}, { locale })}</h3>
                   <p class="text-sm text-gray-400">{m.solutions_ecommerce_pain2_desc({}, { locale })}</p>
                 </div>
               </div>
@@ -150,7 +203,7 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -160,7 +213,7 @@ const content = { title, description, ldJSON }
                   </svg>
                 </div>
                 <div>
-                  <h4 class="mb-1 text-lg font-bold text-white">{m.solutions_ecommerce_pain3_title({}, { locale })}</h4>
+                  <h3 class="mb-1 text-lg font-bold text-white">{m.solutions_ecommerce_pain3_title({}, { locale })}</h3>
                   <p class="text-sm text-gray-400">{m.solutions_ecommerce_pain3_desc({}, { locale })}</p>
                 </div>
               </div>
@@ -169,17 +222,12 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-                    ></path>
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                   </svg>
                 </div>
                 <div>
-                  <h4 class="mb-1 text-lg font-bold text-white">{m.solutions_ecommerce_pain4_title({}, { locale })}</h4>
+                  <h3 class="mb-1 text-lg font-bold text-white">{m.solutions_ecommerce_pain4_title({}, { locale })}</h3>
                   <p class="text-sm text-gray-400">{m.solutions_ecommerce_pain4_desc({}, { locale })}</p>
                 </div>
               </div>
@@ -193,23 +241,26 @@ const content = { title, description, ldJSON }
     <section class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto mb-16 max-w-3xl text-center">
-          <h2 class="mb-4 text-sm font-semibold tracking-wide text-rose-400 uppercase">{m.solutions_ecommerce_solution_label({}, { locale })}</h2>
-          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_ecommerce_solution_title({}, { locale })}</h3>
+          <p class="mb-4 text-sm font-semibold tracking-wide text-rose-400 uppercase">{m.solutions_ecommerce_solution_label({}, { locale })}</p>
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_ecommerce_solution_title({}, { locale })}</h2>
           <p class="mt-4 text-xl text-gray-400">{m.solutions_ecommerce_solution_subtitle({}, { locale })}</p>
         </div>
 
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <!-- Solution 1: Instant Flash Sale Updates -->
+          <!-- Solution 1: Mid-campaign fixes -->
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-rose-500/20">
-                <svg class="h-6 w-6 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white">{m.solutions_ecommerce_sol1_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_ecommerce_sol1_desc({}, { locale })}</p>
+            <a href={links.updateBehavior.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-blue-300 hover:text-white hover:underline">
+              {links.updateBehavior.label}
+            </a>
             <div class="flex items-center justify-center rounded-xl bg-gray-900 p-6">
               <div class="w-full max-w-sm">
                 <RolloutIllustration class="text-rose-500" />
@@ -217,11 +268,11 @@ const content = { title, description, ldJSON }
             </div>
           </div>
 
-          <!-- Solution 2: A/B Test Everything -->
+          <!-- Solution 2: Gradual checkout rollout -->
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/20">
-                <svg class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -233,6 +284,9 @@ const content = { title, description, ldJSON }
               <h3 class="text-xl font-bold text-white">{m.solutions_ecommerce_sol2_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_ecommerce_sol2_desc({}, { locale })}</p>
+            <a href={links.rollouts.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-blue-300 hover:text-white hover:underline">
+              {links.rollouts.label}
+            </a>
             <div class="flex items-center justify-center rounded-xl bg-gray-900 p-6">
               <div class="w-full max-w-sm">
                 <ABTestIllustration class="text-purple-500" />
@@ -240,21 +294,25 @@ const content = { title, description, ldJSON }
             </div>
           </div>
 
-          <!-- Solution 3: Fix Cart Issues Instantly -->
+          <!-- Solution 3: One-step rollback -->
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-amber-500/20">
-                <svg class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  ></path>
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white">{m.solutions_ecommerce_sol3_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_ecommerce_sol3_desc({}, { locale })}</p>
+            <a href={links.rollbacks.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-blue-300 hover:text-white hover:underline">
+              {links.rollbacks.label}
+            </a>
             <div class="flex items-center justify-center rounded-xl bg-gray-900 p-6">
               <div class="w-full max-w-sm">
                 <BugFixIllustration class="text-amber-500" />
@@ -262,36 +320,76 @@ const content = { title, description, ldJSON }
             </div>
           </div>
 
-          <!-- Solution 4: Seasonal Updates -->
+          <!-- Solution 4: Staging -->
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/20">
-                <svg class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                <svg aria-hidden="true" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                   ></path>
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white">{m.solutions_ecommerce_sol4_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_ecommerce_sol4_desc({}, { locale })}</p>
-            <div class="flex items-center justify-center rounded-xl bg-gray-900 p-6">
-              <div class="w-full max-w-sm">
-                <WhiteLabelIllustration class="text-blue-500" />
-              </div>
+            <a href={links.channels.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-blue-300 hover:text-white hover:underline">
+              {links.channels.label}
+            </a>
+            <div class="rounded-xl bg-gray-900 p-6">
+              <pre class="overflow-x-auto text-sm leading-6 whitespace-pre-wrap text-gray-300 [overflow-wrap:anywhere]"><code><span class="text-gray-500"># upload the campaign bundle to staging, print a QR code</span>
+npx @capgo/cli@latest bundle upload --channel staging --qr-preview
+
+<span class="text-gray-500"># after sign-off, ship the same code to production</span>
+npx @capgo/cli@latest bundle upload --channel production --rollout 10</code></pre>
+              <a href={links.qr.href} class="mt-4 inline-flex text-sm font-semibold text-blue-300 hover:text-white hover:underline">
+                {links.qr.label}
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Final CTA -->
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_ecommerce_how_title({}, { locale })}
+      description={m.solutions_ecommerce_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.updateBehavior, links.channels, links.qr, links.rollouts, links.rollbacks, links.versionTargeting, links.compatibility]}
+      class="bg-gray-900 border-t border-white/10"
+    />
 
     <SolutionAppExample solution="ecommerce" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials.ecommerce}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_ecommerce_faq_title({}, { locale })}
+      description={m.solutions_ecommerce_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- Final CTA -->
     <section class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-rose-600 to-pink-700 px-8 py-16 sm:px-16">
           <div aria-hidden="true" class="absolute inset-0">
-            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+            <svg
+              aria-hidden="true"
+              class="absolute inset-0 h-full w-full"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 1463 360"
+            >
               <path class="text-opacity-40 text-rose-500" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
               <path class="text-opacity-20 text-pink-400" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
             </svg>

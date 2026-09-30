@@ -2,17 +2,83 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
 import BugFixIllustration from '@/components/solutions/BugFixIllustration.astro'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const title = `${brand} | ${m.solutions_startups_title({}, { locale })}`
 const description = m.solutions_startups_description({}, { locale })
+
+const links = {
+  liveUpdates: { href: docs('live-updates/'), label: m.solutions_startups_link_live_updates({}, { locale }) },
+  ci: { href: docs('live-updates/integrations/'), label: m.solutions_startups_link_ci({}, { locale }) },
+  rollouts: { href: docs('live-updates/progressive-rollouts/'), label: m.solutions_startups_link_rollouts({}, { locale }) },
+  builder: { href: docs('builder/'), label: m.solutions_startups_link_builder({}, { locale }) },
+  quickstart: { href: docs('getting-started/quickstart/'), label: m.solutions_startups_link_quickstart({}, { locale }) },
+  githubActions: { href: docs('live-updates/integrations/github-actions/'), label: m.solutions_startups_link_github_actions({}, { locale }) },
+  notify: { href: docs('plugins/updater/notify-app-ready/'), label: m.solutions_startups_link_notify({}, { locale }) },
+  rollbacks: { href: docs('live-updates/rollbacks/'), label: m.solutions_startups_link_rollbacks({}, { locale }) },
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_startups_link_compatibility({}, { locale }) },
+  ios: { href: docs('builder/ios/'), label: m.solutions_startups_link_ios({}, { locale }) },
+}
+const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
+
+const howSteps = [
+  {
+    title: m.solutions_startups_how1_title({}, { locale }),
+    body: m.solutions_startups_how1_body({}, { locale }),
+    code: 'npx @capgo/cli@latest init',
+    href: links.quickstart.href,
+    linkLabel: links.quickstart.label,
+  },
+  {
+    title: m.solutions_startups_how2_title({}, { locale }),
+    body: m.solutions_startups_how2_body({}, { locale }),
+    code: `# After your web build, with CAPGO_TOKEN set in CI secrets
+npx @capgo/cli@latest bundle upload --channel production`,
+    href: links.githubActions.href,
+    linkLabel: links.githubActions.label,
+  },
+  {
+    title: m.solutions_startups_how3_title({}, { locale }),
+    body: m.solutions_startups_how3_body({}, { locale }),
+    code: `npx @capgo/cli@latest bundle upload --channel production --rollout 10
+npx @capgo/cli@latest channel set production --rollout-promote`,
+    href: links.rollouts.href,
+    linkLabel: links.rollouts.label,
+  },
+  {
+    title: m.solutions_startups_how4_title({}, { locale }),
+    body: m.solutions_startups_how4_body({}, { locale }),
+    code: `npx @capgo/cli@latest build credentials save --appId com.example.app --platform ios
+npx @capgo/cli@latest build request com.example.app --platform ios`,
+    href: links.builder.href,
+    linkLabel: links.builder.label,
+  },
+]
+
+const faqItems = [
+  {
+    question: m.solutions_startups_faq1_q({}, { locale }),
+    answer: m.solutions_startups_faq1_a({}, { locale }),
+    href: pricingUrl,
+    label: m.solutions_startups_see_pricing({}, { locale }),
+  },
+  { question: m.solutions_startups_faq2_q({}, { locale }), answer: m.solutions_startups_faq2_a({}, { locale }), ...links.ci },
+  { question: m.solutions_startups_faq3_q({}, { locale }), answer: m.solutions_startups_faq3_a({}, { locale }), ...links.compatibility },
+  { question: m.solutions_startups_faq4_q({}, { locale }), answer: m.solutions_startups_faq4_a({}, { locale }), ...links.rollbacks },
+  { question: m.solutions_startups_faq5_q({}, { locale }), answer: m.solutions_startups_faq5_a({}, { locale }), ...links.ios },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -24,6 +90,7 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = { title, description, ldJSON }
@@ -43,7 +110,7 @@ const content = { title, description, ldJSON }
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <div class="mb-8 inline-flex items-center rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-200">
-            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg aria-hidden="true" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
             </svg>
             {m.solutions_startups_badge({}, { locale })}
@@ -62,7 +129,7 @@ const content = { title, description, ldJSON }
               {m.solutions_start_free_trial({}, { locale })}
             </a>
             <a
-              href={getRelativeLocaleUrl(locale, 'pricing')}
+              href={pricingUrl}
               class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
             >
               {m.solutions_startups_see_pricing({}, { locale })}
@@ -71,7 +138,7 @@ const content = { title, description, ldJSON }
 
           <!-- Pricing highlight -->
           <div class="mt-8 inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-2 text-emerald-300">
-            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+            <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -98,7 +165,7 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                 </div>
@@ -112,7 +179,7 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -131,7 +198,7 @@ const content = { title, description, ldJSON }
             <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
               <div class="flex items-start gap-4">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
-                  <svg class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -165,13 +232,16 @@ const content = { title, description, ldJSON }
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-500/20">
-                <svg class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white">{m.solutions_startups_adv1_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_startups_adv1_desc({}, { locale })}</p>
+            <a href={links.liveUpdates.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-emerald-400 hover:text-white hover:underline">
+              {links.liveUpdates.label}
+            </a>
             <div class="flex items-center justify-center rounded-xl bg-gray-900 p-6">
               <div class="w-full max-w-sm">
                 <RolloutIllustration class="text-emerald-500" />
@@ -183,7 +253,7 @@ const content = { title, description, ldJSON }
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/20">
-                <svg class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -196,9 +266,12 @@ const content = { title, description, ldJSON }
               <h3 class="text-xl font-bold text-white">{m.solutions_startups_adv2_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_startups_adv2_desc({}, { locale })}</p>
+            <a href={links.ci.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-emerald-400 hover:text-white hover:underline">
+              {links.ci.label}
+            </a>
             <ul class="space-y-2">
               <li class="flex items-center gap-2 text-gray-400">
-                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fill-rule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -208,7 +281,7 @@ const content = { title, description, ldJSON }
                 {m.solutions_startups_adv2_point1({}, { locale })}
               </li>
               <li class="flex items-center gap-2 text-gray-400">
-                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fill-rule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -218,7 +291,7 @@ const content = { title, description, ldJSON }
                 {m.solutions_startups_adv2_point2({}, { locale })}
               </li>
               <li class="flex items-center gap-2 text-gray-400">
-                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fill-rule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -234,7 +307,7 @@ const content = { title, description, ldJSON }
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-                <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -246,6 +319,9 @@ const content = { title, description, ldJSON }
               <h3 class="text-xl font-bold text-white">{m.solutions_startups_adv3_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_startups_adv3_desc({}, { locale })}</p>
+            <a href={links.rollouts.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-emerald-400 hover:text-white hover:underline">
+              {links.rollouts.label}
+            </a>
             <div class="flex items-center justify-center rounded-xl bg-gray-900 p-6">
               <div class="w-full max-w-sm">
                 <BugFixIllustration class="text-red-500" />
@@ -257,77 +333,89 @@ const content = { title, description, ldJSON }
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex items-center gap-3">
               <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-amber-500/20">
-                <svg class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
+                <svg aria-hidden="true" class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white">{m.solutions_startups_adv4_title({}, { locale })}</h3>
             </div>
             <p class="mb-6 text-gray-300">{m.solutions_startups_adv4_desc({}, { locale })}</p>
-            <div class="space-y-3">
-              <div class="flex items-center justify-between rounded-lg bg-gray-900 p-3">
-                <span class="text-gray-400">{m.solutions_startups_adv4_competitor({}, { locale })}</span>
-                <span class="text-red-400 line-through">$499/mo</span>
-              </div>
-              <div class="flex items-center justify-between rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3">
-                <span class="text-emerald-300">Capgo</span>
-                <span class="font-bold text-emerald-400">
-                  $12/mo <span class="text-xs font-normal text-emerald-300">billed yearly</span>
-                </span>
-              </div>
-            </div>
+            <a href={links.builder.href} class="-mt-3 mb-6 inline-flex text-sm font-semibold text-emerald-400 hover:text-white hover:underline">
+              {links.builder.label}
+            </a>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2 text-gray-400">
+                <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                {m.solutions_startups_adv4_point1({}, { locale })}
+              </li>
+              <li class="flex items-center gap-2 text-gray-400">
+                <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                {m.solutions_startups_adv4_point2({}, { locale })}
+              </li>
+              <li class="flex items-center gap-2 text-gray-400">
+                <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                {m.solutions_startups_adv4_point3({}, { locale })}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Quick Start -->
-    <section class="bg-gray-900 py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto mb-16 max-w-3xl text-center">
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_startups_quickstart_title({}, { locale })}</h2>
-          <p class="mt-4 text-xl text-gray-400">{m.solutions_startups_quickstart_subtitle({}, { locale })}</p>
-        </div>
-
-        <div class="mx-auto max-w-3xl">
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6">
-            <div class="mb-4 flex items-center gap-2">
-              <div class="h-3 w-3 rounded-full bg-red-500"></div>
-              <div class="h-3 w-3 rounded-full bg-yellow-500"></div>
-              <div class="h-3 w-3 rounded-full bg-green-500"></div>
-              <span class="ml-2 text-sm text-gray-500">Terminal</span>
-            </div>
-            <pre class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># Install (30 seconds)</span>
-npm install @capgo/capacitor-updater
-npx cap sync
-
-<span class="text-gray-500"># Configure (add to your main component)</span>
-import {'{ CapacitorUpdater }'} from '@capgo/capacitor-updater'
-CapacitorUpdater.notifyAppReady()
-
-<span class="text-gray-500"># Deploy your first update</span>
-npm run build
-npx @capgo/cli bundle upload
-
-<span class="text-emerald-400">✔</span> Done! Your users will receive updates automatically.</code></pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA -->
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_startups_how_title({}, { locale })}
+      description={m.solutions_startups_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.quickstart, links.githubActions, links.ci, links.rollouts, links.notify, links.builder]}
+      class="bg-gray-900 border-t border-white/10"
+    />
 
     <SolutionAppExample solution="startups" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials.startups}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_startups_faq_title({}, { locale })}
+      description={m.solutions_startups_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- Final CTA -->
     <section class="bg-gray-800 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-emerald-600 to-teal-700 px-8 py-16 sm:px-16">
           <div aria-hidden="true" class="absolute inset-0">
-            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+            <svg
+              aria-hidden="true"
+              class="absolute inset-0 h-full w-full"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 1463 360"
+            >
               <path class="text-opacity-40 text-emerald-500" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
               <path class="text-opacity-20 text-teal-400" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
             </svg>
@@ -343,10 +431,7 @@ npx @capgo/cli bundle upload
               >
                 {m.solutions_start_free_trial({}, { locale })}
               </a>
-              <a
-                href={getRelativeLocaleUrl(locale, 'pricing')}
-                class="rounded-xl border border-white/30 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-white/10"
-              >
+              <a href={pricingUrl} class="rounded-xl border border-white/30 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-white/10">
                 {m.solutions_startups_see_pricing({}, { locale })}
               </a>
             </div>

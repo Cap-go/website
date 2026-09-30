@@ -2,18 +2,73 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import AgencyDashboardIllustration from '@/components/solutions/AgencyDashboardIllustration.astro'
-import WhiteLabelIllustration from '@/components/solutions/WhiteLabelIllustration.astro'
+import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
 import HandoffIllustration from '@/components/solutions/HandoffIllustration.astro'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const title = `${brand} | ${m.solutions_agencies_title({}, { locale })}`
 const description = m.solutions_agencies_description({}, { locale })
+
+const links = {
+  orgs: { href: docs('webapp/organization-system/'), label: m.solutions_agencies_link_orgs({}, { locale }) },
+  roles: { href: docs('webapp/organization-roles/'), label: m.solutions_agencies_link_roles({}, { locale }) },
+  apiKeys: { href: docs('webapp/api-keys/'), label: m.solutions_agencies_link_api_keys({}, { locale }) },
+  channels: { href: docs('live-updates/channels/'), label: m.solutions_agencies_link_channels({}, { locale }) },
+  rollouts: { href: docs('live-updates/progressive-rollouts/'), label: m.solutions_agencies_link_rollouts({}, { locale }) },
+  billing: { href: docs('webapp/payment/'), label: m.solutions_agencies_link_billing({}, { locale }) },
+  transfer: { href: docs('webapp/main-app-page/'), label: m.solutions_agencies_link_transfer({}, { locale }) },
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_agencies_link_compatibility({}, { locale }) },
+}
+
+const howSteps = [
+  {
+    title: m.solutions_agencies_how1_title({}, { locale }),
+    body: m.solutions_agencies_how1_body({}, { locale }),
+    code: 'npx @capgo/cli@latest organization add --name "Client A" --email mobile@client-a.com',
+    href: links.roles.href,
+    linkLabel: links.roles.label,
+  },
+  {
+    title: m.solutions_agencies_how2_title({}, { locale }),
+    body: m.solutions_agencies_how2_body({}, { locale }),
+    code: `# In Client A's pipeline, with Client A's key
+npx @capgo/cli@latest bundle upload --channel staging --apikey "$CAPGO_TOKEN"`,
+    href: links.apiKeys.href,
+    linkLabel: links.apiKeys.label,
+  },
+  {
+    title: m.solutions_agencies_how3_title({}, { locale }),
+    body: m.solutions_agencies_how3_body({}, { locale }),
+    code: 'npx @capgo/cli@latest channel set production com.client-a.app --bundle 1.4.2',
+    href: links.channels.href,
+    linkLabel: links.channels.label,
+  },
+  {
+    title: m.solutions_agencies_how4_title({}, { locale }),
+    body: m.solutions_agencies_how4_body({}, { locale }),
+    href: links.transfer.href,
+    linkLabel: links.transfer.label,
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_agencies_faq1_q({}, { locale }), answer: m.solutions_agencies_faq1_a({}, { locale }), ...links.orgs },
+  { question: m.solutions_agencies_faq2_q({}, { locale }), answer: m.solutions_agencies_faq2_a({}, { locale }), ...links.billing },
+  { question: m.solutions_agencies_faq3_q({}, { locale }), answer: m.solutions_agencies_faq3_a({}, { locale }), ...links.roles },
+  { question: m.solutions_agencies_faq4_q({}, { locale }), answer: m.solutions_agencies_faq4_a({}, { locale }), ...links.transfer },
+  { question: m.solutions_agencies_faq5_q({}, { locale }), answer: m.solutions_agencies_faq5_a({}, { locale }), ...links.compatibility },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -25,6 +80,7 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = { title, description, ldJSON }
@@ -44,23 +100,20 @@ const content = { title, description, ldJSON }
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <div class="mb-8 inline-flex items-center rounded-full border border-amber-400/40 bg-amber-500/10 px-4 py-2 text-sm font-medium text-amber-200">
-            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg aria-hidden="true" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+              ></path>
             </svg>
             {m.solutions_agencies_badge({}, { locale })}
           </div>
 
-          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            {m.solutions_agencies_hero_title({}, { locale })}
-          </h1>
+          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{m.solutions_agencies_hero_title({}, { locale })}</h1>
 
-          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">
-            {m.solutions_agencies_hero_subtitle({}, { locale })}
-          </p>
+          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">{m.solutions_agencies_hero_subtitle({}, { locale })}</p>
 
           <HumanSupport class="mt-8" size="sm" />
           <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -76,7 +129,7 @@ const content = { title, description, ldJSON }
               rel="noopener noreferrer"
               class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
             >
-              {m.solutions_agencies_partner({}, { locale })}
+              {m.solutions_talk_to_team({}, { locale })}
             </a>
           </div>
         </div>
@@ -94,12 +147,13 @@ const content = { title, description, ldJSON }
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                ></path>
               </svg>
             </div>
             <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_agencies_pain1_title({}, { locale })}</h4>
@@ -108,7 +162,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
@@ -118,7 +172,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -133,7 +187,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -148,7 +202,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -163,7 +217,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg aria-hidden="true" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -195,7 +249,7 @@ const content = { title, description, ldJSON }
               <div>
                 <div class="mb-4 flex items-center gap-3">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/20">
-                    <svg class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg aria-hidden="true" class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -207,31 +261,37 @@ const content = { title, description, ldJSON }
                   <h3 class="text-xl font-bold text-white">{m.solutions_agencies_sol1_title({}, { locale })}</h3>
                 </div>
                 <p class="mb-4 text-gray-300">{m.solutions_agencies_sol1_desc({}, { locale })}</p>
+                <a href={links.orgs.href} class="mb-4 inline-flex text-sm font-semibold text-amber-400 hover:text-white hover:underline">
+                  {links.orgs.label}
+                </a>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_agencies_sol1_point1({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_agencies_sol1_point2({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_agencies_sol1_point3({}, { locale })}
                   </li>
@@ -250,13 +310,13 @@ const content = { title, description, ldJSON }
             <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
               <div class="order-2 flex items-center justify-center rounded-xl bg-gray-900 p-6 lg:order-1">
                 <div class="w-full max-w-sm">
-                  <WhiteLabelIllustration class="text-purple-500" />
+                  <RolloutIllustration class="text-purple-500" />
                 </div>
               </div>
               <div class="order-1 lg:order-2">
                 <div class="mb-4 flex items-center gap-3">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
-                    <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg aria-hidden="true" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -268,31 +328,37 @@ const content = { title, description, ldJSON }
                   <h3 class="text-xl font-bold text-white">{m.solutions_agencies_sol2_title({}, { locale })}</h3>
                 </div>
                 <p class="mb-4 text-gray-300">{m.solutions_agencies_sol2_desc({}, { locale })}</p>
+                <a href={links.channels.href} class="mb-4 inline-flex text-sm font-semibold text-amber-400 hover:text-white hover:underline">
+                  {links.channels.label}
+                </a>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_agencies_sol2_point1({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_agencies_sol2_point2({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_agencies_sol2_point3({}, { locale })}
                   </li>
@@ -307,38 +373,44 @@ const content = { title, description, ldJSON }
               <div>
                 <div class="mb-4 flex items-center gap-3">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20">
-                    <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg aria-hidden="true" class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
                     </svg>
                   </div>
                   <h3 class="text-xl font-bold text-white">{m.solutions_agencies_sol3_title({}, { locale })}</h3>
                 </div>
                 <p class="mb-4 text-gray-300">{m.solutions_agencies_sol3_desc({}, { locale })}</p>
+                <a href={links.transfer.href} class="mb-4 inline-flex text-sm font-semibold text-amber-400 hover:text-white hover:underline">
+                  {links.transfer.label}
+                </a>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_agencies_sol3_point1({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_agencies_sol3_point2({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg aria-hidden="true" class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"></path>
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                     {m.solutions_agencies_sol3_point3({}, { locale })}
                   </li>
@@ -355,71 +427,42 @@ const content = { title, description, ldJSON }
       </div>
     </section>
 
-    <!-- Agency Partner Program -->
-    <section class="bg-gray-800 py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto mb-16 max-w-3xl text-center">
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_agencies_partner_title({}, { locale })}</h2>
-          <p class="mt-4 text-xl text-gray-400">{m.solutions_agencies_partner_subtitle({}, { locale })}</p>
-        </div>
-
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
-            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-amber-500/20">
-              <svg class="h-8 w-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-white">{m.solutions_agencies_perk1_title({}, { locale })}</h3>
-            <p class="text-gray-400">{m.solutions_agencies_perk1_desc({}, { locale })}</p>
-          </div>
-
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
-            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-purple-500/20">
-              <svg class="h-8 w-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-white">{m.solutions_agencies_perk2_title({}, { locale })}</h3>
-            <p class="text-gray-400">{m.solutions_agencies_perk2_desc({}, { locale })}</p>
-          </div>
-
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
-            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20">
-              <svg class="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-white">{m.solutions_agencies_perk3_title({}, { locale })}</h3>
-            <p class="text-gray-400">{m.solutions_agencies_perk3_desc({}, { locale })}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA -->
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_agencies_how_title({}, { locale })}
+      description={m.solutions_agencies_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.orgs, links.roles, links.apiKeys, links.channels, links.rollouts, links.billing, links.transfer]}
+      class="bg-gray-800"
+    />
 
     <SolutionAppExample solution="agencies" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials.agencies}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_agencies_faq_title({}, { locale })}
+      description={m.solutions_agencies_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- Final CTA -->
     <section class="bg-gray-900 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-amber-600 to-orange-700 px-8 py-16 sm:px-16">
           <div aria-hidden="true" class="absolute inset-0">
-            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+            <svg
+              aria-hidden="true"
+              class="absolute inset-0 h-full w-full"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 1463 360"
+            >
               <path class="text-opacity-40 text-amber-500" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
               <path class="text-opacity-20 text-orange-400" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
             </svg>
@@ -441,7 +484,7 @@ const content = { title, description, ldJSON }
                 rel="noopener noreferrer"
                 class="rounded-xl border border-white/30 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-white/10"
               >
-                {m.solutions_agencies_partner({}, { locale })}
+                {m.solutions_talk_to_team({}, { locale })}
               </a>
             </div>
             <p class="mt-6 text-sm text-amber-200">{m.solutions_agencies_cta_note({}, { locale })}</p>

@@ -1,0 +1,310 @@
+---
+import '@/styles/lu-product.css'
+import '@/styles/compare-page.css'
+import AppLogoStrip from '@/components/AppLogoStrip.astro'
+import HumanSupport from '@/components/HumanSupport.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import type { ProductTestimonial } from '@/config/productTestimonials'
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+export type ComparisonRowId = 'pricing' | 'ota' | 'native_builds' | 'frameworks' | 'open_source' | 'rollback' | 'support' | 'company'
+
+export interface ComparisonCell {
+  text: string
+  /** 1-based indexes into `sources`. */
+  sources: number[]
+}
+
+export interface ComparisonLink {
+  label: string
+  href: string
+  external?: boolean
+}
+
+interface Props {
+  competitor: string
+  eyebrow: string
+  heading: string
+  lead: string
+  verdict: string
+  rows: Record<ComparisonRowId, ComparisonCell>
+  sources: ComparisonLink[]
+  better: Array<{ title: string; text: string; sources?: number[] }>
+  migration: {
+    title: string
+    lead: string
+    /** Step text may contain inline <code> markup from the message catalog. */
+    steps: Array<{ title: string; html: string }>
+    links: ComparisonLink[]
+  }
+  faq?: Array<{ question: string; answer: string }>
+  testimonials: ProductTestimonial[]
+  video?: { youtubeId: string; title: string; description?: string }
+  reviewWall?: boolean
+  related?: ComparisonLink[]
+  secondaryCta: ComparisonLink
+}
+
+const { competitor, eyebrow, heading, lead, verdict, rows, sources, better, migration, faq = [], testimonials, video, reviewWall = false, related = [], secondaryCta } = Astro.props
+
+const locale = Astro.locals.locale
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
+
+const rowOrder: Array<{ id: ComparisonRowId; label: string; capgo: string }> = [
+  { id: 'pricing', label: m.compare_row_pricing({}, { locale }), capgo: m.compare_capgo_pricing({}, { locale }) },
+  { id: 'ota', label: m.compare_row_ota({}, { locale }), capgo: m.compare_capgo_ota({}, { locale }) },
+  { id: 'native_builds', label: m.compare_row_native_builds({}, { locale }), capgo: m.compare_capgo_native_builds({}, { locale }) },
+  { id: 'frameworks', label: m.compare_row_frameworks({}, { locale }), capgo: m.compare_capgo_frameworks({}, { locale }) },
+  { id: 'open_source', label: m.compare_row_open_source({}, { locale }), capgo: m.compare_capgo_open_source({}, { locale }) },
+  { id: 'rollback', label: m.compare_row_rollback({}, { locale }), capgo: m.compare_capgo_rollback({}, { locale }) },
+  { id: 'support', label: m.compare_row_support({}, { locale }), capgo: m.compare_capgo_support({}, { locale }) },
+  { id: 'company', label: m.compare_row_company({}, { locale }), capgo: m.compare_capgo_company({}, { locale }) },
+]
+
+const heroMeta = [m.compare_meta_updates({}, { locale }), m.compare_meta_apps({}, { locale }), m.compare_meta_founded({}, { locale })]
+const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[n - 1]?.label ?? '' }, { locale })
+---
+
+<div class="lu bg-ad cmp">
+  <section class="section cmp-hero bg-grid grain" id="top">
+    <div class="shell">
+      <div class="beta-badge">
+        <span class="dot" aria-hidden="true"></span>
+        {eyebrow}
+      </div>
+      <h1 class="cmp-h1">{heading}</h1>
+      <p class="lead">{lead}</p>
+      <div class="cmp-verdict">
+        <p>
+          <span class="cmp-verdict-label">{m.compare_verdict_label({}, { locale })}</span>
+          {verdict}
+        </p>
+      </div>
+      <div class="hero-ctas">
+        <HumanSupport size="sm" align="center" />
+        <div class="hero-cta-buttons">
+          <a class="btn btn-lg btn-primary" href={registerUrl}>
+            {m.compare_cta_start_trial({}, { locale })}
+          </a>
+          <a class="btn btn-lg btn-ghost" href={secondaryCta.href} {...(secondaryCta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+            {secondaryCta.label}
+          </a>
+        </div>
+        <p class="hero-cta-note">{m.product_trial_cta_note({}, { locale })}</p>
+      </div>
+      <ul class="cmp-meta">
+        {heroMeta.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+    <AppLogoStrip />
+  </section>
+
+  <section class="section" id="comparison">
+    <div class="shell">
+      <div class="section-head">
+        <div class="eyebrow eyebrow--blue">{m.compare_table_eyebrow({}, { locale })}</div>
+        <h2 class="h2-section">{m.compare_table_title({ competitor }, { locale })}</h2>
+      </div>
+
+      <div class="comp-wrap">
+        <table class="comp comp-prose cmp-table">
+          <caption class="cmp-caption">{m.compare_table_caption({ competitor }, { locale })}</caption>
+          <colgroup>
+            <col class="cmp-col-label" />
+            <col class="cmp-col-val" />
+            <col class="cmp-col-val" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">{m.compare_col_area({}, { locale })}</th>
+              <th scope="col" class="us">
+                Capgo
+              </th>
+              <th scope="col">{competitor}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rowOrder.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td class="us">
+                  <span class="cmp-cell-label" aria-hidden="true">
+                    Capgo
+                  </span>
+                  {row.capgo}
+                </td>
+                <td class="them">
+                  <span class="cmp-cell-label" aria-hidden="true">
+                    {competitor}
+                  </span>
+                  {rows[row.id].text}
+                  {rows[row.id].sources.map((n) => (
+                    <a class="cmp-ref" href={`#cmp-src-${n}`} aria-label={refLabel(n)}>
+                      [{n}]
+                    </a>
+                  ))}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cmp-sources" id="sources">
+        <h3>{m.compare_sources_title({}, { locale })}</h3>
+        <p>{m.compare_sources_note({}, { locale })}</p>
+        <ol>
+          {sources.map((source, index) => (
+            <li id={`cmp-src-${index + 1}`}>
+              <a href={source.href} target="_blank" rel="noopener noreferrer">
+                {source.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <slot name="after-table" />
+    </div>
+  </section>
+
+  <section class="section" id="better-choice">
+    <div class="shell">
+      <div class="section-head section-head--wide">
+        <div class="eyebrow eyebrow--blue">{m.compare_better_eyebrow({}, { locale })}</div>
+        <h2 class="h2-section">{m.compare_better_title({ competitor }, { locale })}</h2>
+        <p class="lead">{m.compare_better_lead({}, { locale })}</p>
+      </div>
+      <div class:list={['cmp-card-grid', better.length === 2 && 'cmp-card-grid--two']}>
+        {better.map((item) => (
+          <article class="cmp-card">
+            <h3>{item.title}</h3>
+            <p>
+              {item.text}
+              {(item.sources ?? []).map((n) => (
+                <a class="cmp-ref" href={`#cmp-src-${n}`} aria-label={refLabel(n)}>
+                  [{n}]
+                </a>
+              ))}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="migration">
+    <div class="shell">
+      <div class="section-head section-head--wide">
+        <div class="eyebrow eyebrow--blue">{m.compare_migration_eyebrow({}, { locale })}</div>
+        <h2 class="h2-section">{migration.title}</h2>
+        <p class="lead">{migration.lead}</p>
+      </div>
+      <ol class="cmp-steps">
+        {migration.steps.map((step) => (
+          <li>
+            <h3>{step.title}</h3>
+            <p set:html={step.html} />
+          </li>
+        ))}
+      </ol>
+      <div class="cmp-actions">
+        {migration.links.map((link, index) => (
+          <a class:list={['btn btn-md', index === 0 ? 'btn-primary' : 'btn-ghost']} href={link.href} {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+            {link.label}
+          </a>
+        ))}
+      </div>
+      <slot name="after-migration" />
+    </div>
+  </section>
+
+  {video && <ProductVideoSection variant="builder" accent="blue" youtubeId={video.youtubeId} title={video.title} description={video.description} />}
+
+  <ProductTestimonials
+    variant="builder"
+    accent="blue"
+    eyebrow={m.compare_proof_eyebrow({}, { locale })}
+    title={m.compare_proof_title({}, { locale })}
+    description={m.compare_proof_lead({}, { locale })}
+    testimonials={testimonials}
+    maxItems={3}
+  />
+
+  {reviewWall && (
+    <section class="section" id="reviews">
+      <div class="shell">
+        <div class="section-head">
+          <h2 class="cmp-h3">{m.compare_reviews_wall_title({}, { locale })}</h2>
+        </div>
+        <div class="cmp-wall">
+          <iframe
+            id="wall-of-love-Ngmn41b"
+            src="https://senja.io/p/capgo/Ngmn41b?hideNavigation=true&embed=true"
+            title={m.compare_reviews_wall_title({}, { locale })}
+            loading="lazy"
+            style="border: 0; overflow: hidden;"
+            width="100%"
+            class="min-h-100"
+          ></iframe>
+        </div>
+        <script is:inline>
+          document.addEventListener('DOMContentLoaded', function () {
+            if (typeof iFrameResize === 'function') {
+              iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-Ngmn41b')
+            }
+          })
+        </script>
+      </div>
+    </section>
+  )}
+
+  {faq.length > 0 && (
+    <section class="section" id="faq">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--blue">{m.compare_faq_eyebrow({}, { locale })}</div>
+          <h2 class="h2-section">{m.compare_faq_title({}, { locale })}</h2>
+        </div>
+        <dl class="cmp-faq">
+          {faq.map((item) => (
+            <div>
+              <dt>{item.question}</dt>
+              <dd>{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  <section class="section final bg-grid grain" id="cta">
+    <div class="shell">
+      <h2>{m.compare_cta_title({}, { locale })}</h2>
+      <p class="tagline">{m.compare_cta_subtitle({}, { locale })}</p>
+      <HumanSupport class="mb-4" size="sm" />
+      <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>
+        {m.compare_cta_start_trial({}, { locale })}
+      </a>
+      <ul class="cmp-meta">
+        <li>{m.compare_meta_teams({}, { locale })}</li>
+        <li>{m.compare_meta_devices({}, { locale })}</li>
+        <li>{m.compare_meta_build_time({}, { locale })}</li>
+      </ul>
+      {related.length > 0 && (
+        <nav aria-label={m.compare_related_title({}, { locale })}>
+          <ul class="cmp-links">
+            {related.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </div>
+  </section>
+</div>

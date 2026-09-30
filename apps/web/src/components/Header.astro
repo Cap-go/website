@@ -175,7 +175,7 @@ const mobileLinks = [
           aria-label={m.capgo_home({}, { locale: Astro.locals.locale })}
           class="font-prompt flex shrink-0 items-center pr-2 font-medium md:pr-3"
         >
-          <img class="h-6 w-auto pr-1 lg:h-7" loading="eager" height="40" width="144" alt={`${brand} logo`} src="/capgo_logo_header.webp" />
+          <img class="h-6 w-auto pr-1 lg:h-7" loading="eager" height="40" width="144" alt={`${brand} logo`} src="/capgo_logo_header_2x.webp" />
         </a>
         <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">
           <!-- Docs -->
@@ -206,9 +206,7 @@ const mobileLinks = [
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div
-              class="invisible absolute top-full left-0 z-50 pt-3 opacity-0 transition-[opacity,visibility] duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 group-hover:delay-100"
-            >
+            <div class="invisible absolute top-full left-0 z-50 pt-3 opacity-0 transition-[opacity,visibility] duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 group-hover:delay-100">
               <ProductsMegaMenu />
             </div>
           </div>
@@ -232,9 +230,7 @@ const mobileLinks = [
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div
-              class="invisible absolute top-full left-0 z-50 pt-3 opacity-0 transition-[opacity,visibility] duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 group-hover:delay-100"
-            >
+            <div class="invisible absolute top-full left-0 z-50 pt-3 opacity-0 transition-[opacity,visibility] duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 group-hover:delay-100">
               <SolutionsMegaMenu />
             </div>
           </div>
@@ -312,44 +308,42 @@ const mobileLinks = [
             class="flex min-h-12 w-full items-center justify-between rounded-xl px-3 text-left text-[15px] font-semibold text-white transition-colors hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
           >
             {m.products({}, { locale: Astro.locals.locale })}
-            <span id="products-chevron" class="inline-flex transition-transform"
-              ><svg class="h-4 w-4 text-slate-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
-                ><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg
-              ></span
-            >
+            <span id="products-chevron" class="inline-flex transition-transform">
+              <svg class="h-4 w-4 text-slate-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
           </button>
           <div id="products-submenu" class="hidden pb-2">
-            {
-              mobileProducts.map((group) => (
-                <div class="px-1 pt-2">
-                  <p class="px-2 pb-1 font-mono text-[10.5px] font-semibold tracking-widest text-slate-500 uppercase">{group.label}</p>
-                  {group.items.map((item) => (
-                    <a href={getRelativeLocaleUrl(Astro.locals.locale, item.href)} class="flex items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-white/5">
-                      <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/5 text-[#44BCFF] ring-1 ring-white/10">
-                        <svg
-                          class="h-4 w-4"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          {productIconPaths[item.icon].map((d) => (
-                            <path d={d} />
-                          ))}
-                        </svg>
-                      </span>
-                      <span class="min-w-0">
-                        <span class="block text-sm font-semibold text-white">{item.name}</span>
-                        <span class="block truncate text-xs text-slate-400">{item.tagline}</span>
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              ))
-            }
+            {mobileProducts.map((group) => (
+              <div class="px-1 pt-2">
+                <p class="px-2 pb-1 font-mono text-[10.5px] font-semibold tracking-widest text-slate-500 uppercase">{group.label}</p>
+                {group.items.map((item) => (
+                  <a href={getRelativeLocaleUrl(Astro.locals.locale, item.href)} class="flex items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-white/5">
+                    <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/5 text-[#44BCFF] ring-1 ring-white/10">
+                      <svg
+                        class="h-4 w-4"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        {productIconPaths[item.icon].map((d) => (
+                          <path d={d} />
+                        ))}
+                      </svg>
+                    </span>
+                    <span class="min-w-0">
+                      <span class="block text-sm font-semibold text-white">{item.name}</span>
+                      <span class="block truncate text-xs text-slate-400">{item.tagline}</span>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            ))}
           </div>
 
           <button
@@ -360,46 +354,42 @@ const mobileLinks = [
             class="flex min-h-12 w-full items-center justify-between rounded-xl px-3 text-left text-[15px] font-semibold text-white transition-colors hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
           >
             {m.solutions({}, { locale: Astro.locals.locale })}
-            <span id="solutions-chevron" class="inline-flex transition-transform"
-              ><svg class="h-4 w-4 text-slate-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
-                ><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg
-              ></span
-            >
+            <span id="solutions-chevron" class="inline-flex transition-transform">
+              <svg class="h-4 w-4 text-slate-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
           </button>
           <div id="solutions-submenu" class="hidden pb-2">
-            {
-              mobileSolutions.map((group) => (
-                <div class="px-1 pt-2">
-                  <p class="px-2 pb-1 font-mono text-[10.5px] font-semibold tracking-widest text-slate-500 uppercase">{group.label}</p>
-                  {group.items.map((item) => (
-                    <a href={getRelativeLocaleUrl(Astro.locals.locale, item.href)} class="block rounded-xl px-2 py-2 transition-colors hover:bg-white/5">
-                      <span class="block text-sm font-semibold text-white">{item.name}</span>
-                      <span class="block truncate text-xs text-slate-400">{item.tagline}</span>
-                    </a>
-                  ))}
-                </div>
-              ))
-            }
+            {mobileSolutions.map((group) => (
+              <div class="px-1 pt-2">
+                <p class="px-2 pb-1 font-mono text-[10.5px] font-semibold tracking-widest text-slate-500 uppercase">{group.label}</p>
+                {group.items.map((item) => (
+                  <a href={getRelativeLocaleUrl(Astro.locals.locale, item.href)} class="block rounded-xl px-2 py-2 transition-colors hover:bg-white/5">
+                    <span class="block text-sm font-semibold text-white">{item.name}</span>
+                    <span class="block truncate text-xs text-slate-400">{item.tagline}</span>
+                  </a>
+                ))}
+              </div>
+            ))}
           </div>
 
           <div class="my-1 border-t border-white/10"></div>
-          {
-            mobileLinks.map((link) => (
-              <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, link.href)}
-                class="flex min-h-12 w-full items-center justify-between rounded-xl px-3 text-left text-[15px] font-semibold text-white transition-colors hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
-              >
-                {link.label}
-                <svg class="h-4 w-4 text-slate-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.21 14.77a.75.75 0 0 1 .02-1.06L11.168 10 7.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </a>
-            ))
-          }
+          {mobileLinks.map((link) => (
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, link.href)}
+              class="flex min-h-12 w-full items-center justify-between rounded-xl px-3 text-left text-[15px] font-semibold text-white transition-colors hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
+            >
+              {link.label}
+              <svg class="h-4 w-4 text-slate-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  d="M7.21 14.77a.75.75 0 0 1 .02-1.06L11.168 10 7.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+          ))}
         </div>
 
         <div class="grid grid-cols-2 gap-2 border-t border-white/10 p-2">

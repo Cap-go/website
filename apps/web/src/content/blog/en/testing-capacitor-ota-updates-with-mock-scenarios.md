@@ -134,8 +134,8 @@ Set up a clear testing workflow by creating separate test channels to keep thing
 
 ```bash
 # Create test channels
-capgo channel create beta-test
-capgo channel create staging-test
+capgo channel add beta-test
+capgo channel add staging-test
 ```
 
 Keep track of each test case with a structured approach:

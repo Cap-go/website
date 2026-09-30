@@ -54,15 +54,14 @@ const rules = [
         </div>
 
         <details class="group/incident mt-4 rounded-2xl border border-white/10 bg-white/[0.03]">
-          <summary
-            class="flex cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-6 py-4 text-sm font-medium text-gray-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [&::-webkit-details-marker]:hidden [@media(hover:hover)]:hover:text-white"
-          >
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-6 py-4 text-sm font-medium text-gray-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [&::-webkit-details-marker]:hidden [@media(hover:hover)]:hover:text-white">
             {m.store_policy_incident_label({}, { locale })}
             <svg class="h-4 w-4 shrink-0 text-gray-500 transition-transform group-open/incident:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path
                 fill-rule="evenodd"
                 d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                clip-rule="evenodd"></path>
+                clip-rule="evenodd"
+              ></path>
             </svg>
           </summary>
           <p class="px-6 pb-5 text-sm leading-6 text-gray-400">{m.store_policy_incident_body({}, { locale })}</p>
@@ -70,53 +69,49 @@ const rules = [
       </div>
 
       <div class="grid content-start gap-4">
-        {
-          policies.map((policy) => (
-            <article class="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <div class="flex items-center gap-3">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] text-white ring-1 ring-white/10">
-                  <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d={policy.icon} />
-                  </svg>
-                </span>
-                <h3 class="text-sm font-semibold text-white">{policy.label}</h3>
-              </div>
-              <p class="mt-4 text-sm leading-6 text-gray-300">{policy.body}</p>
-              <a
-                href={policy.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!"
-              >
-                {m.store_policy_official_link({}, { locale })}
-                <span class="sr-only">: {policy.store}</span>
-                <span aria-hidden="true">↗</span>
-              </a>
-            </article>
-          ))
-        }
+        {policies.map((policy) => (
+          <article class="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] text-white ring-1 ring-white/10">
+                <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d={policy.icon} />
+                </svg>
+              </span>
+              <h3 class="text-sm font-semibold text-white">{policy.label}</h3>
+            </div>
+            <p class="mt-4 text-sm leading-6 text-gray-300">{policy.body}</p>
+            <a
+              href={policy.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!"
+            >
+              {m.store_policy_official_link({}, { locale })}
+              <span class="sr-only">: {policy.store}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+        ))}
 
         <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-          <h3 class="font-mono text-xs font-semibold tracking-widest text-gray-500 uppercase">{m.store_policy_rules_label({}, { locale })}</h3>
+          <h3 class="font-mono text-xs font-semibold tracking-widest text-gray-400 uppercase">{m.store_policy_rules_label({}, { locale })}</h3>
           <ul class="mt-4 grid gap-3">
-            {
-              rules.map((rule) => (
-                <li class="flex gap-3 text-sm leading-6 text-gray-300">
-                  <span
-                    class:list={[
-                      'mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ring-1',
-                      rule.tone === 'ota' ? 'bg-[#44BCFF]/15 text-[#44BCFF] ring-[#44BCFF]/30' : 'bg-amber-300/15 text-amber-300 ring-amber-300/30',
-                    ]}
-                    aria-hidden="true"
-                  >
-                    <span class="h-1.5 w-1.5 rounded-full bg-current" />
-                  </span>
-                  {rule.text}
-                </li>
-              ))
-            }
+            {rules.map((rule) => (
+              <li class="flex gap-3 text-sm leading-6 text-gray-300">
+                <span
+                  class:list={[
+                    'mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ring-1',
+                    rule.tone === 'ota' ? 'bg-[#44BCFF]/15 text-[#44BCFF] ring-[#44BCFF]/30' : 'bg-amber-300/15 text-amber-300 ring-amber-300/30',
+                  ]}
+                  aria-hidden="true"
+                >
+                  <span class="h-1.5 w-1.5 rounded-full bg-current" />
+                </span>
+                {rule.text}
+              </li>
+            ))}
           </ul>
-          <p class="mt-5 border-t border-white/10 pt-4 text-xs leading-5 text-gray-500">{m.store_policy_note({}, { locale })}</p>
+          <p class="mt-5 border-t border-white/10 pt-4 text-xs leading-5 text-gray-400">{m.store_policy_note({}, { locale })}</p>
           <a
             href={faqUrl}
             class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!"

@@ -2,15 +2,133 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const title = `${brand} | ${m.solutions_version_targeting_title({}, { locale })}`
 const description = m.solutions_version_targeting_description({}, { locale })
+
+const links = {
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_version_targeting_link_compatibility({}, { locale }) },
+  versionTargeting: { href: docs('live-updates/version-targeting/'), label: m.solutions_version_targeting_link_version_targeting({}, { locale }) },
+  updateTypes: { href: docs('live-updates/update-types/'), label: m.solutions_version_targeting_link_update_types({}, { locale }) },
+  workflow: { href: docs('live-updates/native-ota-channel-workflow/'), label: m.solutions_version_targeting_link_workflow({}, { locale }) },
+  ci: { href: docs('builder/ci-ota-or-native/'), label: m.solutions_version_targeting_link_ci({}, { locale }) },
+  buildCli: { href: docs('cli/reference/build/'), label: m.solutions_version_targeting_link_build_cli({}, { locale }) },
+  appflow: { href: docs('upgrade/from-appflow-to-capgo/'), label: m.solutions_version_targeting_link_appflow({}, { locale }) },
+  rollbacks: { href: docs('live-updates/rollbacks/'), label: m.solutions_version_targeting_link_rollbacks({}, { locale }) },
+  rollouts: { href: docs('live-updates/progressive-rollouts/'), label: m.solutions_version_targeting_link_rollouts({}, { locale }) },
+}
+
+const features = [
+  {
+    title: m.solutions_version_targeting_feature1_title({}, { locale }),
+    desc: m.solutions_version_targeting_feature1_desc({}, { locale }),
+    link: links.compatibility,
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: m.solutions_version_targeting_feature2_title({}, { locale }),
+    desc: m.solutions_version_targeting_feature2_desc({}, { locale }),
+    link: links.versionTargeting,
+    icon: 'M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z',
+  },
+  {
+    title: m.solutions_version_targeting_feature3_title({}, { locale }),
+    desc: m.solutions_version_targeting_feature3_desc({}, { locale }),
+    link: links.updateTypes,
+    icon: 'M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636',
+  },
+  {
+    title: m.solutions_version_targeting_feature4_title({}, { locale }),
+    desc: m.solutions_version_targeting_feature4_desc({}, { locale }),
+    link: links.versionTargeting,
+    icon: 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
+  },
+]
+
+const appflowSteps = [
+  m.solutions_version_targeting_appflow_step1({}, { locale }),
+  m.solutions_version_targeting_appflow_step2({}, { locale }),
+  m.solutions_version_targeting_appflow_step3({}, { locale }),
+  m.solutions_version_targeting_appflow_step4({}, { locale }),
+]
+
+const mapping = [
+  {
+    native: m.solutions_version_targeting_mapping_native3({}, { locale }),
+    channel: 'v3',
+    status: m.solutions_version_targeting_mapping_active({}, { locale }),
+    badge: 'bg-rose-600',
+    bar: 'bg-rose-500/50',
+  },
+  {
+    native: m.solutions_version_targeting_mapping_native2({}, { locale }),
+    channel: 'v2',
+    status: m.solutions_version_targeting_mapping_fixes({}, { locale }),
+    badge: 'bg-amber-600',
+    bar: 'bg-amber-500/50',
+  },
+  {
+    native: m.solutions_version_targeting_mapping_native1({}, { locale }),
+    channel: 'v1',
+    status: m.solutions_version_targeting_mapping_frozen({}, { locale }),
+    badge: 'bg-gray-600',
+    bar: 'bg-gray-500/50',
+  },
+]
+
+const howSteps = [
+  {
+    title: m.solutions_version_targeting_how1_title({}, { locale }),
+    body: m.solutions_version_targeting_how1_body({}, { locale }),
+    code: 'npx @capgo/cli@latest build needed com.example.app --channel production',
+    href: links.buildCli.href,
+    linkLabel: links.buildCli.label,
+  },
+  {
+    title: m.solutions_version_targeting_how2_title({}, { locale }),
+    body: m.solutions_version_targeting_how2_body({}, { locale }),
+    code: `npx @capgo/cli@latest channel set production com.example.app \\
+  --disable-auto-update metadata`,
+    href: links.versionTargeting.href,
+    linkLabel: links.versionTargeting.label,
+  },
+  {
+    title: m.solutions_version_targeting_how3_title({}, { locale }),
+    body: m.solutions_version_targeting_how3_body({}, { locale }),
+    code: `npx @capgo/cli@latest bundle upload --channel production \\
+  --auto-min-update-version \\
+  --fail-on-incompatible`,
+    href: links.compatibility.href,
+    linkLabel: links.compatibility.label,
+  },
+  {
+    title: m.solutions_version_targeting_how4_title({}, { locale }),
+    body: m.solutions_version_targeting_how4_body({}, { locale }),
+    code: `npx @capgo/cli@latest bundle upload --channel production \\
+  --auto-min-update-version`,
+    href: links.workflow.href,
+    linkLabel: links.workflow.label,
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_version_targeting_faq1_q({}, { locale }), answer: m.solutions_version_targeting_faq1_a({}, { locale }), ...links.versionTargeting },
+  { question: m.solutions_version_targeting_faq2_q({}, { locale }), answer: m.solutions_version_targeting_faq2_a({}, { locale }), ...links.compatibility },
+  { question: m.solutions_version_targeting_faq3_q({}, { locale }), answer: m.solutions_version_targeting_faq3_a({}, { locale }), ...links.ci },
+  { question: m.solutions_version_targeting_faq4_q({}, { locale }), answer: m.solutions_version_targeting_faq4_a({}, { locale }), ...links.appflow },
+  { question: m.solutions_version_targeting_faq5_q({}, { locale }), answer: m.solutions_version_targeting_faq5_a({}, { locale }), ...links.rollbacks },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -22,6 +140,7 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = { title, description, ldJSON }
@@ -31,41 +150,35 @@ const content = { title, description, ldJSON }
   <div class="product-hero">
     <!-- Hero Section -->
     <section class="relative py-16 sm:py-20 lg:py-28">
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
-        {
-          Array.from({ length: 15 }).map((_, i) => (
-            <div
-              id={`${i}`}
-              class="absolute h-2 w-2 animate-pulse rounded-full bg-rose-500 opacity-20"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-              }}
-            />
-          ))
-        }
+      <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        {Array.from({ length: 15 }).map(() => (
+          <div
+            class="absolute h-2 w-2 animate-pulse rounded-full bg-rose-500 opacity-20"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
       </div>
 
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <p class="inline-flex rounded-full border border-rose-400/40 bg-rose-500/10 px-4 py-2 text-sm font-medium text-rose-100">
-            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+              ></path>
             </svg>
             {m.solutions_version_targeting({}, { locale })}
           </p>
-          <h1 class="mt-6 text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            {m.solutions_version_targeting_hero_title({}, { locale })}
-          </h1>
-          <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-gray-300">
-            {m.solutions_version_targeting_hero_subtitle({}, { locale })}
-          </p>
+          <h1 class="mt-6 text-4xl leading-tight font-bold text-balance text-white sm:text-5xl lg:text-6xl">{m.solutions_version_targeting_hero_title({}, { locale })}</h1>
+          <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-pretty text-gray-300">{m.solutions_version_targeting_hero_subtitle({}, { locale })}</p>
 
           <HumanSupport class="mt-8" size="sm" />
           <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -73,10 +186,10 @@ const content = { title, description, ldJSON }
               href={getRelativeLocaleUrl(locale, 'register')}
               class="rounded-xl bg-rose-600 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-rose-700 focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
             >
-              {m.solutions_get_started({}, { locale })}
+              {m.solutions_start_free_trial({}, { locale })}
             </a>
             <a
-              href={getRelativeLocaleUrl(locale, 'docs/live-updates/channels')}
+              href={links.versionTargeting.href}
               class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
             >
               {m.solutions_view_docs({}, { locale })}
@@ -87,236 +200,190 @@ const content = { title, description, ldJSON }
     </section>
 
     <!-- Features Grid -->
-    <section class="bg-gray-800 py-16 sm:py-20">
+    <section id="version-features" class="bg-gray-800 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-rose-500/50">
-            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-rose-500/15 ring-1 ring-rose-300/40">
-              <svg class="h-7 w-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
+          {features.map((feature) => (
+            <div class="flex flex-col rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-rose-500/50">
+              <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-rose-500/15 ring-1 ring-rose-300/40">
+                <svg class="h-7 w-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
+                </svg>
+              </div>
+              <h2 class="mb-3 text-xl font-bold text-white">{feature.title}</h2>
+              <p class="leading-relaxed text-gray-400">{feature.desc}</p>
+              <a
+                href={feature.link.href}
+                class="mt-auto inline-flex pt-5 text-sm font-semibold text-rose-400 hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-400"
+              >
+                {feature.link.label}
+              </a>
             </div>
-            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_feature1_title({}, { locale })}</h3>
-            <p class="leading-relaxed text-gray-400">{m.solutions_version_targeting_feature1_desc({}, { locale })}</p>
-          </div>
-
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-rose-500/50">
-            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-rose-500/15 ring-1 ring-rose-300/40">
-              <svg class="h-7 w-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-              </svg>
-            </div>
-            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_feature2_title({}, { locale })}</h3>
-            <p class="leading-relaxed text-gray-400">{m.solutions_version_targeting_feature2_desc({}, { locale })}</p>
-          </div>
-
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-rose-500/50">
-            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-rose-500/15 ring-1 ring-rose-300/40">
-              <svg class="h-7 w-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-              </svg>
-            </div>
-            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_feature3_title({}, { locale })}</h3>
-            <p class="leading-relaxed text-gray-400">{m.solutions_version_targeting_feature3_desc({}, { locale })}</p>
-          </div>
-
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-rose-500/50">
-            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-rose-500/15 ring-1 ring-rose-300/40">
-              <svg class="h-7 w-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_feature4_title({}, { locale })}</h3>
-            <p class="leading-relaxed text-gray-400">{m.solutions_version_targeting_feature4_desc({}, { locale })}</p>
-          </div>
+          ))}
         </div>
       </div>
     </section>
 
-    <!-- AppFlow Migration -->
-    <section class="bg-gray-900 py-16 sm:py-20">
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_version_targeting_how_title({}, { locale })}
+      description={m.solutions_version_targeting_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.versionTargeting, links.compatibility, links.workflow, links.ci, links.updateTypes, links.rollbacks, links.appflow]}
+      class="bg-gray-900"
+    />
+
+    <!-- Appflow Migration -->
+    <section id="appflow" class="bg-gray-800 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <div class="mb-6 inline-flex rounded-full border border-rose-400/30 bg-rose-500/10 px-3 py-1 text-xs font-semibold tracking-wide text-rose-400 uppercase">
-              AppFlow Migration
-            </div>
+            <p class="mb-6 inline-flex rounded-full border border-rose-400/30 bg-rose-500/10 px-3 py-1 text-xs font-semibold tracking-wide text-rose-400 uppercase">
+              {m.solutions_version_targeting_appflow_badge({}, { locale })}
+            </p>
             <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_version_targeting_appflow_title({}, { locale })}</h2>
             <p class="mt-6 text-lg leading-relaxed text-gray-300">{m.solutions_version_targeting_appflow_desc({}, { locale })}</p>
 
-            <ul class="mt-8 space-y-4">
-              <li class="flex items-start gap-3">
-                <div class="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-rose-500/20 text-sm font-bold text-rose-400">1</div>
-                <span class="text-gray-300">{m.solutions_version_targeting_appflow_step1({}, { locale })}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <div class="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-rose-500/20 text-sm font-bold text-rose-400">2</div>
-                <span class="text-gray-300">{m.solutions_version_targeting_appflow_step2({}, { locale })}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <div class="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-rose-500/20 text-sm font-bold text-rose-400">3</div>
-                <span class="text-gray-300">{m.solutions_version_targeting_appflow_step3({}, { locale })}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <div class="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-rose-500/20 text-sm font-bold text-rose-400">4</div>
-                <span class="text-gray-300">{m.solutions_version_targeting_appflow_step4({}, { locale })}</span>
-              </li>
-            </ul>
+            <ol class="mt-8 space-y-4">
+              {appflowSteps.map((step, index) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-500/20 text-sm font-bold text-rose-400" aria-hidden="true">
+                    {index + 1}
+                  </span>
+                  <span class="text-gray-300">{step}</span>
+                </li>
+              ))}
+            </ol>
+            <a href={links.appflow.href} class="mt-8 inline-flex text-sm font-semibold text-rose-400 hover:text-white hover:underline">
+              {links.appflow.label}
+            </a>
           </div>
 
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6">
+          <div class="min-w-0 rounded-2xl border border-gray-700 bg-gray-900 p-6">
             <div class="mb-4 flex items-center gap-2">
-              <div class="h-3 w-3 rounded-full bg-gray-500"></div>
-              <div class="h-3 w-3 rounded-full bg-gray-500"></div>
-              <div class="h-3 w-3 rounded-full bg-gray-500"></div>
-              <span class="ml-2 text-sm text-gray-500">capacitor.config.ts</span>
+              <div class="h-3 w-3 rounded-full bg-gray-500" aria-hidden="true"></div>
+              <div class="h-3 w-3 rounded-full bg-gray-500" aria-hidden="true"></div>
+              <div class="h-3 w-3 rounded-full bg-gray-500" aria-hidden="true"></div>
+              <span class="ml-2 text-sm text-gray-500">{m.solutions_version_targeting_code_label({}, { locale })}</span>
             </div>
-            <pre
-              class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500">// Set channel based on native version</span>
-import {'{'} CapacitorConfig {'}'} from '@capacitor/cli'
-import {'{'} version {'}'} from './package.json'
+            <pre class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500">// capacitor.config.ts in your 2.x native builds</span>
+plugins: {'{'}
+  CapacitorUpdater: {'{'}
+    <span class="text-rose-400">defaultChannel</span>: 'v2',
+  {'}'},
+{'}'},
 
-const config: CapacitorConfig = {'{'}
-  plugins: {'{'}
-    CapacitorUpdater: {'{'}
-      <span class="text-rose-400">defaultChannel</span>: `native-${'{'}version{'}'}`,
-    {'}'}
-  {'}'}
-{'}'}
+<span class="text-gray-500"># ship a fix to 2.x users only</span>
+npx @capgo/cli@latest bundle upload --channel v2 \
+  --auto-min-update-version
 
-<span class="text-gray-500">// Upload to specific version channels</span>
-<span class="text-gray-500"># Push to all 1.5.x versions</span>
-npx @capgo/cli bundle upload --channel native-1.5.0
-npx @capgo/cli bundle upload --channel native-1.5.1
-npx @capgo/cli bundle upload --channel native-1.5.2
-
-<span class="text-gray-500"># Skip older versions that can't support new features</span>
-<span class="text-gray-500"># native-1.4.x devices stay on their current bundle</span></code></pre>
+<span class="text-gray-500"># 1.x devices stay on their channel's current bundle</span></code></pre>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Common Scenarios -->
-    <section class="bg-gray-800 py-16 sm:py-20">
+    <section id="version-scenarios" class="bg-gray-900 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-16 text-center">
           <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_version_targeting_scenarios_title({}, { locale })}</h2>
         </div>
 
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8">
+          <div class="flex flex-col rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-red-500/15">
-              <svg class="h-7 w-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-7 w-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                ></path>
               </svg>
             </div>
             <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_scenarios_breaking({}, { locale })}</h3>
             <p class="text-gray-400">{m.solutions_version_targeting_scenarios_breaking_desc({}, { locale })}</p>
+            <a href={links.compatibility.href} class="mt-auto inline-flex pt-5 text-sm font-semibold text-rose-400 hover:text-white hover:underline">
+              {links.compatibility.label}
+            </a>
           </div>
 
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8">
+          <div class="flex flex-col rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-amber-500/15">
-              <svg class="h-7 w-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-7 w-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
               </svg>
             </div>
             <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_scenarios_gradual({}, { locale })}</h3>
             <p class="text-gray-400">{m.solutions_version_targeting_scenarios_gradual_desc({}, { locale })}</p>
+            <a href={links.rollouts.href} class="mt-auto inline-flex pt-5 text-sm font-semibold text-rose-400 hover:text-white hover:underline">
+              {links.rollouts.label}
+            </a>
           </div>
 
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8">
+          <div class="flex flex-col rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-gray-500/15">
-              <svg class="h-7 w-7 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-7 w-7 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
             <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_scenarios_sunset({}, { locale })}</h3>
             <p class="text-gray-400">{m.solutions_version_targeting_scenarios_sunset_desc({}, { locale })}</p>
+            <a href={links.versionTargeting.href} class="mt-auto inline-flex pt-5 text-sm font-semibold text-rose-400 hover:text-white hover:underline">
+              {links.versionTargeting.label}
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Visual Diagram -->
-    <section class="bg-gray-900 py-16 sm:py-20">
+    <section id="version-mapping" class="bg-gray-800 py-16 sm:py-20">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div class="mb-12 text-center">
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">Version-to-Channel Mapping</h2>
-          <p class="mt-4 text-lg text-gray-400">Each native version points to its own channel for precise update control</p>
+          <h2 class="text-3xl font-bold text-balance text-white sm:text-4xl">{m.solutions_version_targeting_mapping_title({}, { locale })}</h2>
+          <p class="mt-4 text-lg text-gray-400">{m.solutions_version_targeting_mapping_subtitle({}, { locale })}</p>
         </div>
 
-        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
-          <div class="space-y-6">
-            <!-- Version 2.0 -->
-            <div class="flex items-center gap-4">
-              <div class="w-32 shrink-0">
-                <div class="rounded-lg bg-rose-600 px-4 py-2 text-center text-white">
-                  <div class="text-sm font-medium">Native 2.0</div>
+        <div class="rounded-2xl border border-gray-700 bg-gray-900 p-5 sm:p-8">
+          <ul class="space-y-6">
+            {mapping.map((row) => (
+              <li class="flex items-center gap-3 sm:gap-4">
+                <div class="w-24 shrink-0 sm:w-32">
+                  <div class:list={['rounded-lg px-2 py-2 text-center text-sm font-medium text-white sm:px-4', row.badge]}>{row.native}</div>
                 </div>
-              </div>
-              <div class="h-1 flex-1 bg-rose-500/50"></div>
-              <div class="w-40 shrink-0">
-                <div class="rounded-lg bg-gray-700 px-4 py-2 text-center text-white">
-                  <div class="text-sm font-medium">native-2.0.0</div>
-                  <div class="text-xs text-gray-400">Latest bundle</div>
+                <div class:list={['h-1 min-w-4 flex-1', row.bar]} aria-hidden="true" />
+                <div class="w-32 shrink-0 sm:w-40">
+                  <div class="rounded-lg bg-gray-700 px-2 py-2 text-center text-white sm:px-4">
+                    <div class="font-mono text-sm font-medium">{row.channel}</div>
+                    <div class="text-xs text-gray-300">{row.status}</div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </li>
+            ))}
+          </ul>
 
-            <!-- Version 1.5 -->
-            <div class="flex items-center gap-4">
-              <div class="w-32 shrink-0">
-                <div class="rounded-lg bg-amber-600 px-4 py-2 text-center text-white">
-                  <div class="text-sm font-medium">Native 1.5</div>
-                </div>
-              </div>
-              <div class="h-1 flex-1 bg-amber-500/50"></div>
-              <div class="w-40 shrink-0">
-                <div class="rounded-lg bg-gray-700 px-4 py-2 text-center text-white">
-                  <div class="text-sm font-medium">native-1.5.0</div>
-                  <div class="text-xs text-gray-400">Latest bundle</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Version 1.4 -->
-            <div class="flex items-center gap-4">
-              <div class="w-32 shrink-0">
-                <div class="rounded-lg bg-gray-600 px-4 py-2 text-center text-white">
-                  <div class="text-sm font-medium">Native 1.4</div>
-                </div>
-              </div>
-              <div class="h-1 flex-1 bg-gray-500/50"></div>
-              <div class="w-40 shrink-0">
-                <div class="rounded-lg bg-gray-700 px-4 py-2 text-center text-gray-300">
-                  <div class="text-sm font-medium">native-1.4.0</div>
-                  <div class="text-xs text-gray-500">No new updates</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <p class="mt-8 text-center text-gray-400">Push updates to 2.0 and 1.5 channels only. Users on 1.4 stay stable on their last working bundle.</p>
+          <p class="mt-8 text-center text-gray-400">{m.solutions_version_targeting_mapping_note({}, { locale })}</p>
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
-
     <SolutionAppExample solution="version-targeting" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['version-targeting']}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_version_targeting_faq_title({}, { locale })}
+      description={m.solutions_version_targeting_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- CTA Section -->
     <section class="bg-gray-900 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-rose-600 to-rose-800 px-8 py-16 sm:px-16">
@@ -327,15 +394,15 @@ npx @capgo/cli bundle upload --channel native-1.5.2
             </svg>
           </div>
           <div class="relative text-center">
-            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_version_targeting_cta_title({}, { locale })}</h2>
+            <h2 class="text-3xl font-bold text-balance text-white sm:text-4xl">{m.solutions_version_targeting_cta_title({}, { locale })}</h2>
             <p class="mx-auto mt-4 max-w-2xl text-lg text-rose-100">{m.solutions_version_targeting_cta_subtitle({}, { locale })}</p>
             <HumanSupport class="mt-6" size="sm" />
             <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
                 href={getRelativeLocaleUrl(locale, 'register')}
-                class="rounded-xl bg-white px-8 py-4 text-base font-semibold text-rose-600 transition-all duration-200 hover:bg-gray-100"
+                class="rounded-xl bg-white px-8 py-4 text-base font-semibold text-rose-700 transition-all duration-200 hover:bg-gray-100"
               >
-                {m.solutions_get_started({}, { locale })}
+                {m.solutions_start_free_trial({}, { locale })}
               </a>
               <a
                 href={getRelativeLocaleUrl(locale, 'pricing')}
