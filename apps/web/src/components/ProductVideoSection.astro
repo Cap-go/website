@@ -1,5 +1,6 @@
 ---
 import { productVideoFounder } from '@/config/productVideos'
+import YouTubeFacade from '@/components/YouTubeFacade.astro'
 
 interface Props {
   youtubeId: string
@@ -20,71 +21,47 @@ const {
   variant = 'dark',
   accent = 'blue',
 } = Astro.props
-const src = `https://www.youtube-nocookie.com/embed/${youtubeId}`
 const iframeTitle = `${title} — video message from Martin, Capgo founder`
 const isBuilder = variant === 'builder'
 const isLight = variant === 'light'
 ---
 
-{
-  isBuilder ? (
-    <section class="section product-video" id="product-video">
-      <div class="shell">
-        <div class="section-head section-head--narrow">
-          <div class={`eyebrow eyebrow--${accent}`}>{eyebrow}</div>
-          <h2 class="h2-section">{title}</h2>
-          {description && <p class="lead">{description}</p>}
-          <p class="product-video-attribution">{attribution}</p>
-        </div>
+{isBuilder ? (
+  <section class="section product-video" id="product-video">
+    <div class="shell">
+      <div class="section-head section-head--narrow">
+        <div class={`eyebrow eyebrow--${accent}`}>{eyebrow}</div>
+        <h2 class="h2-section">{title}</h2>
+        {description && <p class="lead">{description}</p>}
+        <p class="product-video-attribution">{attribution}</p>
+      </div>
 
-        <div class="product-video-frame">
-          <iframe
-            src={src}
-            title={iframeTitle}
-            class="product-video-iframe"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          />
+      <div class="product-video-frame">
+        <YouTubeFacade youtubeId={youtubeId} title={iframeTitle} class="product-video-iframe" iframeClass="block h-full w-full border-0" />
+      </div>
+    </div>
+  </section>
+) : (
+  <section
+    id="product-video"
+    class:list={['scroll-mt-20 py-16 sm:py-20', isLight ? 'border-y border-slate-200 bg-white text-slate-950' : 'border-y border-white/10 bg-[#1a1a1a] text-white']}
+  >
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class:list={['text-sm font-semibold tracking-wide uppercase', isLight ? 'text-blue-700' : 'text-blue-400']}>{eyebrow}</p>
+        <h2 class:list={['mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl', isLight ? 'text-slate-950' : 'text-white']}>{title}</h2>
+        {description && <p class:list={['mt-5 text-base leading-7 text-pretty', isLight ? 'text-slate-600' : 'text-gray-400']}>{description}</p>}
+        <p class:list={['mt-4 text-sm', isLight ? 'text-slate-500' : 'text-gray-400']}>{attribution}</p>
+      </div>
+
+      <div class:list={['mx-auto mt-10 max-w-3xl overflow-hidden rounded-xl border bg-black shadow-2xl', isLight ? 'border-slate-200 shadow-slate-200/40' : 'border-white/10']}>
+        <div class="aspect-video w-full">
+          <YouTubeFacade youtubeId={youtubeId} title={iframeTitle} iframeClass="block h-full w-full border-0" />
         </div>
       </div>
-    </section>
-  ) : (
-    <section
-      id="product-video"
-      class:list={['scroll-mt-20 py-16 sm:py-20', isLight ? 'border-y border-slate-200 bg-white text-slate-950' : 'border-y border-white/10 bg-[#1a1a1a] text-white']}
-    >
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-3xl text-center">
-          <p class:list={['text-sm font-semibold tracking-wide uppercase', isLight ? 'text-blue-700' : 'text-blue-400']}>{eyebrow}</p>
-          <h2 class:list={['mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl', isLight ? 'text-slate-950' : 'text-white']}>{title}</h2>
-          {description && <p class:list={['mt-5 text-base leading-7 text-pretty', isLight ? 'text-slate-600' : 'text-gray-400']}>{description}</p>}
-          <p class:list={['mt-4 text-sm', isLight ? 'text-slate-500' : 'text-gray-400']}>{attribution}</p>
-        </div>
-
-        <div
-          class:list={[
-            'mx-auto mt-10 max-w-3xl overflow-hidden rounded-xl border bg-black shadow-2xl',
-            isLight ? 'border-slate-200 shadow-slate-200/40' : 'border-white/10',
-          ]}
-        >
-          <div class="aspect-video w-full">
-            <iframe
-              src={src}
-              title={iframeTitle}
-              class="h-full w-full"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
+    </div>
+  </section>
+)}
 
 <style is:global>
   .product-video .product-video-frame {
@@ -101,7 +78,7 @@ const isLight = variant === 'light'
   .product-video .product-video-attribution {
     margin-top: 16px;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.65);
   }
 
   .product-video .product-video-iframe {

@@ -313,7 +313,7 @@ if (plans.length > 0) {
                 href={getRelativeLocaleUrl(Astro.locals.locale, 'premium-support')}
                 class="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
               >
-                Learn more
+                {m.pricing_premium_support_cta({}, { locale: Astro.locals.locale })}
               </a>
             </div>
           </div>

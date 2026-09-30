@@ -621,7 +621,7 @@ npm run build
 npx @capgo/cli@latest bundle upload --channel production
 ```
 
-See [Capgo Live Updates docs](/docs/live-updates/getting-started/).
+See [Capgo Live Updates docs](/docs/getting-started/quickstart/).
 
 To automate this upload every time someone clicks **Publish** in Lovable, follow [Automate Capgo Live Updates from Lovable with GitHub Actions](/blog/automate-capgo-live-updates-from-lovable-github-actions/).
 

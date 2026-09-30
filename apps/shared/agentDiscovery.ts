@@ -38,6 +38,16 @@ Do not use Capgo as a generic CMS, a React Native CodePush host, or a way to ski
 2. For documented, function-calling-friendly HTTP tools, connect to the Streamable HTTP MCP server at \`${CAPGO_ORIGIN}/mcp\`.
 3. For authenticated account mutations (upload a bundle, change a channel, request a build), run \`npx @capgo/cli@latest mcp\` locally after \`npx @capgo/cli@latest login\`.
 4. For raw REST, send header \`x-api-key: <key>\` to \`${CAPGO_API_ORIGIN}\`. Legacy \`authorization: <key>\` (no Bearer prefix) is still accepted.
+
+### Key facts for evaluating Capgo
+
+- Pricing: plans from $12/month billed yearly ($14 billed monthly), up to Enterprise. 14-day free trial, no credit card. There is no free plan. Details: [${CAPGO_ORIGIN}/pricing/](${CAPGO_ORIGIN}/pricing/)
+- Every plan includes live updates, native iOS/Android builds (Capgo Build, no Mac needed), notifications, and Observe. Plans differ by usage limits and support, not features or seats.
+- Company: Capgo by ${CAPGO_LEGAL_NAME}, founded 2021, independent and bootstrapped. 9,400+ teams, 4.7K+ apps, 90M+ devices, 1B+ updates delivered per month.
+- Open source: updater plugin and Capgo plugins under MPL-2.0 (free to use), backend under AGPL-3.0, self-hosting available. Code: [https://github.com/Cap-go](https://github.com/Cap-go)
+- Trust: bundles are checksum-verified, and end-to-end encryption with your own key is available (enable it per app). SOC 2 Type II and ISO 27001 on the Enterprise plan, BAA available for healthcare. Security advisories are published on GitHub. Status: [https://status.capgo.app](https://status.capgo.app). Live delivery rates: [${CAPGO_ORIGIN}/data/](${CAPGO_ORIGIN}/data/)
+- App Store and Google Play: live updates change only the web layer (JavaScript, HTML, CSS, assets). Apple allows downloaded interpreted code only if it does not change the app's primary purpose, create a storefront for other code, or bypass signing, the sandbox, or OS security. Google Play exempts interpreted code from its self-update rule, but that code must still follow Play policies. Native code, permissions, and plugin changes need a store release.
+- Comparisons: [Ionic Appflow](${CAPGO_ORIGIN}/alternatives/ionic-appflow/), [Expo EAS](${CAPGO_ORIGIN}/alternatives/expo/), [CodePush](${CAPGO_ORIGIN}/alternatives/codepush/), [Capawesome](${CAPGO_ORIGIN}/alternatives/capawesome/), [all comparisons](${CAPGO_ORIGIN}/alternatives/)
 `
 
 export const AGENT_NOT_FOUND_MARKDOWN = `# Page not found
