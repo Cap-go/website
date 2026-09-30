@@ -31,7 +31,8 @@ export async function handlePostHogProxy(request: Request, ctx?: BackgroundConte
     method: request.method,
     headers,
     body: request.method === 'GET' || request.method === 'HEAD' ? undefined : request.body,
-    redirect: 'follow',
+    // Pass upstream redirects back to the client: a streamed POST body cannot be replayed on 307/308.
+    redirect: 'manual',
   })
 
   const cacheStorage = typeof caches === 'undefined' ? undefined : (caches as CacheStorageWithDefault)
