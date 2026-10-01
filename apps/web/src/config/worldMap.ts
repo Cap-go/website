@@ -21,6 +21,7 @@ export const capgoRegions: MapRegion[] = [
 
 // Cities used to name the hovered spot. `region` is the zone the Capgo Cloudflare snippet routes that city's
 // Cloudflare data center (`colo`) to (snippet/index.js coloToZone). Cities whose data center is unmapped are left out.
+// Cities sharing a colo list the colo's home city first; the visitor lookup by colo intentionally resolves to it.
 export const worldMapCities: MapCity[] = [
   { name: 'Seattle', x: 15.5, y: 15.59, lat: 47.61, lng: -122.33, region: 'NA', colo: 'SEA' },
   { name: 'Portland', x: 15, y: 16.45, lat: 45.52, lng: -122.68, region: 'NA', colo: 'PDX' },
@@ -183,5 +184,5 @@ export const worldMapCities: MapCity[] = [
   { name: 'Melbourne', x: 103.5, y: 46.77, lat: -37.81, lng: 144.96, region: 'OC', colo: 'MEL' },
   { name: 'Sydney', x: 105, y: 45.9, lat: -33.87, lng: 151.21, region: 'OC', colo: 'SYD' },
   { name: 'Brisbane', x: 106.5, y: 43.3, lat: -27.47, lng: 153.03, region: 'OC', colo: 'BNE' },
-  { name: 'Auckland', x: 113.5, y: 46.77, lat: -36.85, lng: 174.76, region: 'OC', colo: 'AKL' },
+  { name: 'Auckland', x: 110.5, y: 46.77, lat: -36.85, lng: 174.76, region: 'OC', colo: 'AKL' },
 ]

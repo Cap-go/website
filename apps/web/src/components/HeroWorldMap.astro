@@ -83,7 +83,10 @@ const { width, height } = worldMapSize
     let dpr = 1
     let cssW = 0
     let cssH = 0
-    let visible = true
+    // Animate only when the tab is shown and the hero is on screen.
+    let pageVisible = document.visibilityState === 'visible'
+    let inView = true
+    let visible = pageVisible
     let running = false
     let ready = false
 
@@ -118,7 +121,10 @@ const { width, height } = worldMapSize
         const trace = await (await fetch('/cdn-cgi/trace')).text()
         const colo = /^colo=([A-Z]{3})$/m.exec(trace)?.[1]
         const index = worldMapCities.findIndex((city) => city.colo === colo)
-        if (index >= 0) userCity = index
+        if (index >= 0) {
+          userCity = index
+          kick()
+        }
       } catch {
         // Not behind Cloudflare (local dev): keep the time zone guess.
       }
@@ -471,8 +477,8 @@ const { width, height } = worldMapSize
       }
 
       const busy = !reducedMotion && (visible || ripples.length > 0 || Math.abs(eased.presence - presenceTarget) > 0.005 || Math.hypot(tx - eased.x, ty - eased.y) > 0.5)
-      // Reduced motion still needs frames to expire pings and to fire the idle ping.
-      if ((busy || ping || idleArmed) && visible) kick()
+      // Reduced motion still needs frames to expire pings and to fire the idle ping (only when a visitor city is known).
+      if ((busy || ping || (idleArmed && userCity >= 0)) && visible) kick()
     }
 
     function kick() {
@@ -495,7 +501,7 @@ const { width, height } = worldMapSize
       kick()
     }
 
-    const onDown = (event: PointerEvent) => {
+    const onDown = (event: MouseEvent) => {
       if ((event.target as Element).closest('a, button, input, textarea, select, [role="button"]')) return
       pointer.clientX = event.clientX
       pointer.clientY = event.clientY
@@ -523,16 +529,19 @@ const { width, height } = worldMapSize
       resize()
       new ResizeObserver(resize).observe(canvas)
       new IntersectionObserver(([entry]) => {
-        visible = entry.isIntersecting
+        inView = entry.isIntersecting
+        visible = pageVisible && inView
         kick()
       }).observe(root)
       document.addEventListener('visibilitychange', () => {
-        visible = document.visibilityState === 'visible'
+        pageVisible = document.visibilityState === 'visible'
+        visible = pageVisible && inView
         if (visible) kick()
       })
       hero.addEventListener('pointermove', onMove, { passive: true })
       hero.addEventListener('pointerleave', onLeave, { passive: true })
-      hero.addEventListener('pointerdown', onDown, { passive: true })
+      // `click` instead of `pointerdown`: on touch it only fires for a real tap, not when a scroll starts.
+      hero.addEventListener('click', onDown, { passive: true })
       requestAnimationFrame(() => root.classList.add('is-live'))
     }
 
