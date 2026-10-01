@@ -69,7 +69,7 @@ await map.updateLayout({
 });
 ```
 
-Put interactive controls in HTML with `data-map-overlay` so taps stay on your UI; transparent areas pass gestures to the map.
+Wrap HUD sections with `data-map-overlay` (see getting started) so the overlay CSS enables taps; transparent areas pass gestures to the map.
 
 ## Full Reference
 

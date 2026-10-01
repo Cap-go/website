@@ -72,7 +72,7 @@ await map.addMarker({
 
 ## Background map (`toBack`) with HTML overlay
 
-Set `toBack: true` so MapKit or Google Maps renders **behind** a transparent Capacitor WebView. Touches on transparent areas pass through to the map (pinch, rotate, tilt, pan). Interactive HTML keeps touches in the WebView.
+Set `toBack: true` so MapKit or Google Maps renders **behind** a transparent Capacitor WebView. Touches on transparent areas pass through to the map (pinch, rotate, tilt, pan). Regions that must receive taps need `data-map-overlay` so the README CSS gives them `pointer-events: auto`.
 
 ```typescript
 const map = await NativeMap.create({
@@ -92,7 +92,7 @@ const map = await NativeMap.create({
 await map.updateLayout({ x: 0, y: 0, width: window.innerWidth, height: window.innerHeight });
 ```
 
-Use a root element with class `map-overlay-root` and `data-native-map-overlay-root`. Mark controls that must receive taps with `data-map-overlay` (or use normal interactive elements such as `button` and `a`):
+Use a root element with class `map-overlay-root` and `data-native-map-overlay-root`. Put `data-map-overlay` on each HUD region that should receive taps (for example a `header` or `footer` wrapper). Buttons and links inside that region work because the parent has `pointer-events: auto`:
 
 ```html
 <div class="map-overlay-root" data-native-map-overlay-root>

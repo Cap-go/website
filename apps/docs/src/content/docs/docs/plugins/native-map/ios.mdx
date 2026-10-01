@@ -22,7 +22,7 @@ The native `MKMapView` mounts into the Capacitor WKWebView hierarchy and tracks 
 
 Use a transparent WebView or page background where the map should show through HTML layers above the map container.
 
-In `toBack` mode, mark HUD controls with `data-map-overlay` (or use standard interactive elements). The plugin routes touches to MapKit when the hit target is transparent and not inside an interactive control.
+In `toBack` mode, put `data-map-overlay` on HUD wrappers so the README overlay CSS enables taps. The native touch router sends gestures to the map when the hit target is transparent and not under an interactive element.
 
 ## iOS-only plugin methods
 
