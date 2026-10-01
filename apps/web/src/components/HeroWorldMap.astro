@@ -27,6 +27,7 @@ const { width, height } = worldMapSize
   const BASE_ALPHA = 0.14
   const SPOT_RADIUS = 150
   const LENS_PUSH = 9
+  const SPOT_STRENGTH = 0.45 // hover light stays subtle so routes and waves read clearly
   const CITY_HIT = 3.4 // map units, off land
   const LAND_REACH = 14 // map units, on land
   const TRIP_MS = 1500
@@ -44,7 +45,7 @@ const { width, height } = worldMapSize
   // Round trip over fiber (~200 km/ms) with a 1.5x routing detour, plus a few ms at the edge.
   const estimateMs = (km: number) => Math.max(3, Math.round((2 * km * 1.5) / 200 + 3))
   // Time the regional Worker spends answering the update check (replica query + response), on top of the network.
-  const CAPGO_MS = 30
+  const CAPGO_MS = 60
 
   // Each city goes to the Capgo region its Cloudflare data center is routed to.
   const cityRoute = worldMapCities.map((city) => {
@@ -101,6 +102,7 @@ const { width, height } = worldMapSize
     let hudKey = ''
     let lastActivity = performance.now()
     let idleArmed = true
+    let touchHintUntil = 0
 
     // Visitor's city: the Cloudflare data center they hit (same input Capgo routing uses), else the browser time zone.
     const normalize = (value: string) =>
@@ -170,14 +172,14 @@ const { width, height } = worldMapSize
     const renderHud = (now: number) => {
       const focus = ping ? ping.city : hoverCity
       const done = ping ? pingPhase(now) >= 1 : false
-      const hint = !ping && focus < 0 && pointer.inside && finePointer
+      const hint = !ping && focus < 0 && (finePointer ? pointer.inside : now < touchHintUntil)
       const key = ping ? `${done ? 'done' : 'ping'}:${focus}:${ping.you}` : focus >= 0 ? `hover:${focus}` : hint ? 'hint' : ''
       if (hud && key !== hudKey) {
         hudKey = key
         hud.classList.toggle('is-visible', key !== '')
         if (key) {
           const parts: Node[] = []
-          if (hint) parts.push(el('span', 'map-hud-muted', finePointer ? 'Click anywhere to get an update' : 'Tap anywhere to get an update'))
+          if (hint) parts.push(el('span', 'map-hud-muted', finePointer ? 'Click anywhere to get an update' : 'Tap the map to get an update'))
           else {
             const city = worldMapCities[focus]
             const route = cityRoute[focus]
@@ -185,7 +187,7 @@ const { width, height } = worldMapSize
             if (!ping) parts.push(el('span', 'map-hud-muted', finePointer ? 'click to get an update' : 'tap to get an update'))
             else {
               parts.push(el('span', '', `→ Capgo ${capgoRegions[route.region].name}`))
-              if (!done) parts.push(el('span', 'map-hud-ms is-pending', 'checking for update…'))
+              if (!done) parts.push(el('span', 'map-hud-ms is-pending', 'checking…'))
               else
                 parts.push(
                   el('span', 'map-hud-ms is-done', `~${route.ms} ms`),
@@ -252,6 +254,49 @@ const { width, height } = worldMapSize
       ctx.fill()
     }
 
+    // Active route: a dark casing carves a corridor through the lit dots so the line and packet stay readable.
+    const drawRoute = (a: { x: number; y: number }, b: { x: number; y: number }, head: number, strong: boolean) => {
+      if (!ctx || head <= 0) return
+      const steps = 40
+      const path = () => {
+        ctx.beginPath()
+        for (let s = 0; s <= steps; s++) {
+          const point = arcPoint(a, b, (head * s) / steps)
+          if (s === 0) ctx.moveTo(point.x, point.y)
+          else ctx.lineTo(point.x, point.y)
+        }
+      }
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      path()
+      ctx.strokeStyle = `rgba(6,12,26,${strong ? 0.88 : 0.6})`
+      ctx.lineWidth = Math.max(6, scale * 0.75)
+      ctx.stroke()
+      path()
+      ctx.strokeStyle = strong ? 'rgba(214,240,255,0.95)' : 'rgba(170,222,255,0.55)'
+      ctx.lineWidth = strong ? 1.75 : 1.25
+      ctx.stroke()
+    }
+
+    const drawUpdatePacket = (point: { x: number; y: number }) => {
+      if (!ctx) return
+      const glow = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, 16)
+      glow.addColorStop(0, `rgba(${AZURE[0]},${AZURE[1]},${AZURE[2]},0.55)`)
+      glow.addColorStop(1, 'rgba(68,188,255,0)')
+      ctx.fillStyle = glow
+      ctx.beginPath()
+      ctx.arc(point.x, point.y, 16, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.fillStyle = 'rgba(6,12,26,0.9)'
+      ctx.beginPath()
+      ctx.arc(point.x, point.y, 6.5, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.fillStyle = '#fff'
+      ctx.beginPath()
+      ctx.arc(point.x, point.y, 4, 0, Math.PI * 2)
+      ctx.fill()
+    }
+
     const drawCityMarker = (point: { x: number; y: number }, since: number, now: number) => {
       if (!ctx) return
       const pulse = reducedMotion ? 0.5 : ((now - since) % 1400) / 1400
@@ -297,7 +342,11 @@ const { width, height } = worldMapSize
       }
       if (ping) {
         const doneAt = ping.start + (reducedMotion ? 0 : PING_LEG * 2)
-        if (ping.sticky === 'hover' ? hoverCity !== ping.city : now > doneAt + PING_HOLD) ping = null
+        if (ping.sticky === 'hover' ? hoverCity !== ping.city : now > doneAt + PING_HOLD) {
+          // Touch has no hover, so after the visitor's own update, hint that the map is tappable.
+          if (ping.you && !finePointer) touchHintUntil = now + 5000
+          ping = null
+        }
       }
       // Once per idle period: the visitor's own city gets an update.
       if (!ping && idleArmed && userCity >= 0 && visible && now - lastActivity > IDLE_MS) {
@@ -325,6 +374,8 @@ const { width, height } = worldMapSize
       for (let i = trips.length - 1; i >= 0; i--) if (now - trips[i].start > trips[i].duration * 1.5) trips.splice(i, 1)
 
       const radius = 0.21 * scale
+      // Quieter spotlight while an update travels, so the route stands out.
+      const spotScale = ping && pingPhase(now) < 1 ? 0.15 : SPOT_STRENGTH
       const lit: number[] = []
       ctx.fillStyle = `rgba(255,255,255,${BASE_ALPHA})`
       ctx.beginPath()
@@ -335,7 +386,7 @@ const { width, height } = worldMapSize
         let spot = 0
         if (eased.presence > 0.01 && dist < SPOT_RADIUS) {
           const f = 1 - dist / SPOT_RADIUS
-          spot = f * f * (3 - 2 * f) * eased.presence
+          spot = f * f * (3 - 2 * f) * eased.presence * spotScale
         }
         let wave = 0
         for (const ripple of ripples) {
@@ -394,11 +445,11 @@ const { width, height } = worldMapSize
         const a = px(worldMapCities[ping.city])
         const b = px(capgoRegions[cityRoute[ping.city].region])
         const phase = pingPhase(now)
-        drawArc(a, b, 1, 0, 0.85, 1.6)
+        drawRoute(a, b, 1, true)
         if (phase < 1) {
           const leg = phase < 0.5 ? phase * 2 : 2 - phase * 2
           const t = leg * leg * (3 - 2 * leg)
-          drawPacket(arcPoint(a, b, t), 1)
+          drawUpdatePacket(arcPoint(a, b, t))
         }
         if (phase >= 0.5 && !ping.landed) {
           ping.landed = true
@@ -415,7 +466,7 @@ const { width, height } = worldMapSize
         const a = px(worldMapCities[hoverCity])
         const b = px(capgoRegions[cityRoute[hoverCity].region])
         const grow = reducedMotion ? 1 : Math.min(1, (now - hoverSince) / 450)
-        drawArc(a, b, 1 - Math.pow(1 - grow, 3), 0, 0.35, 1)
+        drawRoute(a, b, 1 - Math.pow(1 - grow, 3), false)
         drawCityMarker(a, hoverSince, now)
       }
 
@@ -492,6 +543,7 @@ const { width, height } = worldMapSize
 
 <style>
   .hero-map-canvas {
+    flex: none;
     width: min(1180px, 150vw);
     mask-image: radial-gradient(ellipse 60% 62% at 50% 48%, #000 45%, transparent 100%);
   }
@@ -568,6 +620,8 @@ const { width, height } = worldMapSize
     align-items: center;
     gap: 8px;
     max-width: calc(100vw - 32px);
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding: 5px 12px;
     border: 1px solid rgb(68 188 255 / 0.25);
     border-radius: 999px;
