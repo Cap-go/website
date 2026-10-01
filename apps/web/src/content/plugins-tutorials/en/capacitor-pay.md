@@ -61,7 +61,7 @@ const result = await Pay.requestPayment({
     supportedNetworks: ['AmEx'],
   },
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ## Full reference

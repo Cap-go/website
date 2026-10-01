@@ -103,7 +103,10 @@ Sets the current screen name.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setCurrentScreen({ screenName: 'screen' });
+await FirebaseAnalytics.setCurrentScreen({
+  screenName: 'screen',
+  screenClassOverride: 'screen-class-override',
+});
 ```
 
 ### `logEvent`

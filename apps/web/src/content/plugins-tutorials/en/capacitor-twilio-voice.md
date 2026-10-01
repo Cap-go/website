@@ -136,7 +136,7 @@ CapacitorTwilioVoice.addListener('callInviteReceived', async (data) => {
 });
 ```
 
-The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-twilio-voice/) for the full contract of each one.
+The table above lists the 12 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-twilio-voice/).
 
 ## Listen to events
 

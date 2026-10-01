@@ -28,7 +28,7 @@ Configure the Crisp SDK with your website ID. Must be called before using any ot
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CapacitorCrisp.configure({ websiteID: 'website-id-123' });
+await CapacitorCrisp.configure({ websiteID: 'YOUR_WEBSITE_ID' });
 ```
 
 ### `openMessenger`
@@ -58,7 +58,7 @@ Set user information for the current session. Updates the user profile visible t
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setUser({
+await CapacitorCrisp.setUser({
   nickname: 'John Doe',
   email: 'john@example.com',
   phone: '+1234567890'

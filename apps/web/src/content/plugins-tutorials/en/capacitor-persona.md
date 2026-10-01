@@ -59,7 +59,7 @@ import { IntuneMAM } from '@capgo/capacitor-intune';
 
 const result = await IntuneMAM.acquireTokenSilent({
   scopes: ['openid'],
-  accountId: 'account-id-123',
+  accountId: 'acquireToken',
 });
 // The result holds sensitive values: use it without logging it.
 ```
@@ -71,7 +71,7 @@ Register a previously authenticated account with Intune and start enrollment.
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.registerAndEnrollAccount({ accountId: 'account-id-123' });
+await IntuneMAM.registerAndEnrollAccount({ accountId: 'acquireToken' });
 ```
 
 ### `loginAndEnrollAccount()`
@@ -105,7 +105,7 @@ import { IntuneMAM } from '@capgo/capacitor-intune';
 await IntuneMAM.deRegisterAndUnenrollAccount({ accountId: 'account-id-123' });
 ```
 
-The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-persona/) for the full contract of each one.
+The table above lists the 12 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-persona/).
 
 ## Listen to events
 

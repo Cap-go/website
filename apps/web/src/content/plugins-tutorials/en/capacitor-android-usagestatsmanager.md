@@ -30,7 +30,7 @@ import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsm
 
 const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
 const now = Date.now();
-const stats = await UsageStatsManager.queryAndAggregateUsageStats({
+const stats = await CapacitorUsageStatsManager.queryAndAggregateUsageStats({
   beginTime: oneDayAgo,
   endTime: now
 });
@@ -47,8 +47,10 @@ Checks if the usage stats permission is granted.
 ```typescript
 import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
 
-const result = await CapacitorUsageStatsManager.isUsageStatsPermissionGranted();
-console.log(result);
+const { granted } = await CapacitorUsageStatsManager.isUsageStatsPermissionGranted();
+if (!granted) {
+  await CapacitorUsageStatsManager.openUsageStatsSettings();
+}
 ```
 
 ### `openUsageStatsSettings`
@@ -68,7 +70,7 @@ Queries all installed packages on the device. Requires the QUERY_ALL_PACKAGES pe
 ```typescript
 import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
 
-const { packages } = await UsageStatsManager.queryAllPackages();
+const { packages } = await CapacitorUsageStatsManager.queryAllPackages();
 packages.forEach(pkg => {
   console.log(`${pkg.appName} (${pkg.packageName}): v${pkg.versionName}`);
 });

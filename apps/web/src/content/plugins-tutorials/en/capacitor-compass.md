@@ -106,7 +106,7 @@ if (status.compass === 'granted') {
 Start monitoring compass accuracy. On Android, this monitors the magnetometer accuracy and emits accuracyChange events. Developers can listen to these events and implement their own UI for calibration prompts. On iOS and Web, this method does nothing as compass accuracy monitoring is not available.
 
 ```typescript
-import { CapgoCompass } from '@capgo/capacitor-compass';
+import { CapgoCompass, CompassAccuracy } from '@capgo/capacitor-compass';
 
 // Start monitoring accuracy
 await CapgoCompass.watchAccuracy();
@@ -120,7 +120,7 @@ CapgoCompass.addListener('accuracyChange', (event) => {
 });
 ```
 
-The table above lists all 8 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-compass/) for the full contract of each one.
+The table above lists the 8 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-compass/).
 
 ## Listen to events
 

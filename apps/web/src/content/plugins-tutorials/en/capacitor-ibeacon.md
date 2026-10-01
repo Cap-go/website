@@ -118,7 +118,7 @@ import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
 await CapacitorIbeacon.stopAdvertising();
 ```
 
-The table above lists all 14 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-ibeacon/) for the full contract of each one.
+The table above lists the 14 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-ibeacon/).
 
 ## Listen to events
 

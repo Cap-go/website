@@ -54,6 +54,7 @@ type PluginMetadata = {
   featureMethods: MethodInfo[]
   referencedTypes: ExportedType[]
   exportedTypes: Map<string, ExportedType>
+  interfaceName: string
   iconSlug?: string
 }
 
@@ -348,14 +349,55 @@ const cleanExample = (value: string, importName: string, packageName: string) =>
   return ['```typescript', `import { ${importName} } from '${packageName}';`, '', trimmed, '```'].join('\n')
 }
 
-const getMethodInfo = (method: ts.MethodSignature | ts.CallSignatureDeclaration, sourceFile: ts.SourceFile, importName: string, packageName: string): MethodInfo => {
+const fixExampleIdentifiers = (example: string, importName: string, interfaceName: string) => {
+  const aliases = new Set([interfaceName, importName.replace(/^(Capacitor|Capgo)/, ''), `${importName}Plugin`, `${importName.replace(/^(Capacitor|Capgo)/, '')}Plugin`].filter((alias) => alias && alias !== importName))
+  let fixed = example
+  for (const alias of aliases) {
+    const declared = new RegExp(`(import[^;]*[{,]\\s*${alias}\\s*[,}]|(const|let|var|class|function)\\s+${alias}\\b)`).test(fixed)
+    if (!declared) fixed = fixed.replaceAll(new RegExp(`(?<![\\w.])${alias}\\.`, 'g'), `${importName}.`)
+  }
+  return fixed
+}
+
+// On hand-edited pages, fix calls to a non-exported alias inside code blocks that import the plugin export.
+const fixPageIdentifiers = (content: string, metadata: PluginMetadata) =>
+  content.replaceAll(/^```(typescript|ts|javascript|js)\n([\s\S]*?)^```/gm, (block: string, _lang: string, code: string) => {
+    if (!new RegExp(`import\\s*\\{[^}]*\\b${metadata.importName}\\b[^}]*\\}\\s*from\\s*['"]${metadata.packageName}['"]`).test(code)) return block
+    const fixed = fixExampleIdentifiers(code, metadata.importName, metadata.interfaceName)
+    return fixed === code ? block : block.replace(code, fixed)
+  })
+
+// JSDoc examples often use an exported enum (`MaxAdContentRating.PG`) without importing it.
+const addMissingEnumImports = (example: string, importName: string, packageName: string, exportedTypes: Map<string, ExportedType>) => {
+  const used = [...new Set([...example.matchAll(/(?<![\w.])([A-Z]\w*)\./g)].map((match) => match[1]))].filter(
+    (name) => name !== importName && exportedTypes.get(name)?.kind === 'enum' && !new RegExp(`import[^;]*\\b${name}\\b`).test(example),
+  )
+  if (used.length === 0) return example
+  const importPattern = new RegExp(`import\\s*\\{([^}]*)\\}\\s*from\\s*(['"])${packageName}\\2;?`)
+  if (!importPattern.test(example)) return example
+  return example.replace(importPattern, (_match, names: string, quote: string) => {
+    const merged = [...names.split(',').map((name) => name.trim()).filter(Boolean), ...used]
+    return `import { ${merged.join(', ')} } from ${quote}${packageName}${quote};`
+  })
+}
+
+const getMethodInfo = (
+  method: ts.MethodSignature | ts.CallSignatureDeclaration,
+  sourceFile: ts.SourceFile,
+  importName: string,
+  packageName: string,
+  interfaceName = '',
+  exportedTypes = new Map<string, ExportedType>(),
+): MethodInfo => {
   const doc = getDocInfo(method)
   const name = 'name' in method && method.name ? method.name.getText(sourceFile) : 'call'
   const signature = method.getText(sourceFile).replace(/;$/, '').trim()
-  // JSDoc examples that call another identifier (e.g. `SimPlugin.x()` when the export is `Sim`) would not compile.
+  // JSDoc examples sometimes call the interface or an old name (`SimPlugin.x()` when the export is `Sim`); point them at the export.
   const example = doc.examples
+    .map((item) => fixExampleIdentifiers(item, importName, interfaceName))
     .filter((item) => item.includes(`${importName}.`))
     .map((item) => cleanExample(item, importName, packageName))
+    .map((item) => item && addMissingEnumImports(item, importName, packageName, exportedTypes))
     .find(Boolean)
   const legacyExample = doc.examples.map((item) => cleanExample(item, importName, packageName)).find(Boolean)
   return {
@@ -542,7 +584,7 @@ const parseMetadata = async (plugin: RegistryPlugin): Promise<PluginMetadata | n
   const importName = /registerPlugin\s*[<(]/.test(registrationSource) ? getImportName(registrationSource, mainInterface.name.text) : wrapperName
   const methods = mainInterface.members
     .filter((member): member is ts.MethodSignature | ts.CallSignatureDeclaration => ts.isMethodSignature(member) || ts.isCallSignatureDeclaration(member))
-    .map((member) => getMethodInfo(member, sourceFile, importName, packageJson.name ?? plugin.name))
+    .map((member) => getMethodInfo(member, sourceFile, importName, packageJson.name ?? plugin.name, mainInterface.name.text, exportedTypes))
 
   const featureMethods = methods.filter((method) => !lifecycleMethods.has(method.name.replaceAll(/['"]/g, '')))
   const referencedTypes = buildReferencedTypes(exportedTypes, methods)
@@ -557,6 +599,7 @@ const parseMetadata = async (plugin: RegistryPlugin): Promise<PluginMetadata | n
     featureMethods: featureMethods.length > 0 ? featureMethods : methods,
     referencedTypes,
     exportedTypes,
+    interfaceName: mainInterface.name.text,
     iconSlug: chooseIconSlug(plugin),
   }
 }
@@ -579,6 +622,8 @@ type ExampleContext = {
   exportedTypes: Map<string, ExportedType>
   valueImports: Set<string>
   typeParameters: Map<string, ts.TypeNode | undefined>
+  // Words of the method name (setVolume -> volume) so setters also show the optional value they set.
+  methodWords?: string[]
 }
 
 type ObjectEntries = Map<string, string>
@@ -624,7 +669,12 @@ const exampleNumber = (nameHint?: string) => {
   if (has('lng', 'lon', 'longitude')) return '2.3522'
   if (has('port')) return '8080'
   if (has('timeout', 'interval', 'duration', 'delay', 'ms', 'millis')) return '1000'
-  if (has('volume', 'opacity', 'alpha', 'ratio', 'brightness', 'level')) return '0.5'
+  if (has('width')) return '1080'
+  if (has('height')) return '1920'
+  if (has('quality')) return '85'
+  if (has('seektime', 'seconds', 'time', 'position')) return '10'
+  if (has('rate', 'speed')) return '1.5'
+  if (has('volume', 'opacity', 'alpha', 'ratio', 'brightness')) return '0.5'
   return '1'
 }
 
@@ -675,6 +725,11 @@ const propertyValue = (member: ts.PropertySignature, context: ExampleContext, de
   const documented = getDocumentedLiteral(member)
   const allowed = literalValues(member.type, context)
   if (documented && (!allowed || allowed.includes(documented))) return documented
+  // Plain `string` options often list their accepted values in prose, e.g. "Player mode ('fullscreen' or 'embedded')".
+  if (member.type?.kind === ts.SyntaxKind.StringKeyword) {
+    const quoted = /['"`]([a-z][\w-]{2,})['"`]/.exec(getDocInfo(member).text)?.[1]
+    if (quoted) return `'${quoted}'`
+  }
   return buildExampleValue(member.type, context, depth + 1, key)
 }
 
@@ -741,8 +796,10 @@ const getMemberEntries = (members: ts.NodeArray<ts.TypeElement>, context: Exampl
   const entries: ObjectEntries = new Map()
   const properties = members.filter((member): member is ts.PropertySignature => ts.isPropertySignature(member) && Boolean(member.name) && !omit.has(member.name.getText().replaceAll(/['"]/g, '')))
   for (const member of properties) {
-    if (member.questionToken) continue
-    entries.set(member.name.getText(), propertyValue(member, context, depth))
+    const key = member.name.getText()
+    const matchesMethod = depth === 0 && (context.methodWords ?? []).some((word) => key.toLowerCase().replaceAll(/['"]/g, '').includes(word))
+    if (member.questionToken && !matchesMethod) continue
+    entries.set(key, propertyValue(member, context, depth))
   }
   // When every option is optional, show the first simple one so the call still demonstrates something useful.
   if (entries.size === 0 && depth === 0) {
@@ -846,13 +903,52 @@ const isVoidReturn = (typeNode?: ts.TypeNode) => {
   return text === 'void' || text === 'Promise<void>' || text === 'Promise<undefined>'
 }
 
-const sensitivePattern = /password|credential|secret|token|jwt|private/i
+const sensitiveFieldPattern = /password|credential|secret|token|jwt|private|phone|email|subscriptionid|imei|serial|apikey/i
+
+// Walks the returned type (aliases, interfaces, nested objects) and checks its field names for data that should
+// never reach a console. Type names are ignored so `IsCredentialsSavedResult { isSaved }` stays loggable.
+const returnsSensitiveData = (typeNode: ts.TypeNode | undefined, context: ExampleContext, depth = 0, seen = new Set<string>()): boolean => {
+  if (!typeNode || depth > 4) return false
+  const fieldNames: string[] = []
+  const references: string[] = []
+  const visit = (node: ts.Node) => {
+    if (ts.isPropertySignature(node) && node.name) fieldNames.push(node.name.getText())
+    if (ts.isTypeReferenceNode(node)) references.push(node.typeName.getText())
+    ts.forEachChild(node, visit)
+  }
+  visit(typeNode)
+  if (ts.isTypeReferenceNode(typeNode)) references.push(typeNode.typeName.getText())
+  if (fieldNames.some((name) => sensitiveFieldPattern.test(name))) return true
+
+  for (const name of references) {
+    if (seen.has(name)) continue
+    seen.add(name)
+    const exported = context.exportedTypes.get(name)
+    if (!exported) continue
+    const nested: string[] = []
+    const visitExported = (node: ts.Node) => {
+      if (ts.isPropertySignature(node) && node.name) {
+        if (sensitiveFieldPattern.test(node.name.getText())) nested.push(node.name.getText())
+        if (node.type && returnsSensitiveData(node.type, context, depth + 1, seen)) nested.push(node.name.getText())
+        return
+      }
+      if (ts.isTypeReferenceNode(node) && returnsSensitiveData(node, context, depth + 1, seen)) nested.push(node.typeName.getText())
+      ts.forEachChild(node, visitExported)
+    }
+    ts.forEachChild(exported.node, visitExported)
+    if (nested.length > 0) return true
+  }
+  return false
+}
 
 const buildFallbackExample = (metadata: PluginMetadata, method: MethodInfo) => {
   const context: ExampleContext = {
     exportedTypes: metadata.exportedTypes,
     valueImports: new Set(),
     typeParameters: new Map((method.source.typeParameters ?? []).map((parameter) => [parameter.name.text, parameter.constraint ?? parameter.default])),
+    methodWords: /^set[A-Z]|^seek|^toggle[A-Z]/.test(method.displayName)
+      ? hintWords(method.displayName).filter((word) => word.length >= 4 && !['set', 'get', 'toggle', 'to'].includes(word))
+      : [],
   }
   const parameters: string[] = []
   for (const parameter of method.source.parameters) {
@@ -870,7 +966,7 @@ const buildFallbackExample = (metadata: PluginMetadata, method: MethodInfo) => {
     body = `const handle = await ${call};\n\n// Later, stop listening:\nawait handle.remove();`
   } else if (isVoidReturn(method.source.type)) {
     body = `await ${call};`
-  } else if (sensitivePattern.test(method.displayName) || sensitivePattern.test(returnText)) {
+  } else if (/^get\w*(key|secret|token|password)/i.test(method.displayName) || returnsSensitiveData(method.source.type, context)) {
     body = `const result = await ${call};\n// The result holds sensitive values: use it without logging it.`
   } else {
     body = `const result = await ${call};\nconsole.log(result);`
@@ -1100,7 +1196,7 @@ ${asApiTable(metadata.featureMethods)}
 ## Examples
 
 ${methodBlocks}
-${remaining > 0 ? `\nThe table above lists all ${metadata.featureMethods.length} methods; check the [GitHub repository](${metadata.plugin.href}) for the full contract of each one.\n` : ''}${
+${remaining > 0 ? `\nThe table above lists the ${metadata.featureMethods.length} core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](${metadata.plugin.href}).\n` : ''}${
     listenerMethod
       ? `
 ## Listen to events
@@ -1135,7 +1231,7 @@ const normalizeForCompare = (content: string) => content.replaceAll('\r\n', '\n'
 // Swap only the exact snippets the previous generator emitted (e.g. `toggle({} as Options)`) for typed examples.
 // Everything else on the page, including hand-written text, stays as it is.
 const refreshGeneratedExamples = (content: string, metadata: PluginMetadata) => {
-  let next = content
+  let next = fixPageIdentifiers(content, metadata)
   for (const method of metadata.methods) {
     const replacement = method.example ?? buildFallbackExample(metadata, method)
     // Old fallback snippets, and JSDoc examples that call an identifier the package doesn't export.

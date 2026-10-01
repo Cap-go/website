@@ -65,7 +65,7 @@ await AdMob.configure({
 Configure ad request settings.
 
 ```typescript
-import { AdMob } from '@capgo/capacitor-admob';
+import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
 
 await AdMob.configRequest({
   maxAdContentRating: MaxAdContentRating.PG,
@@ -109,7 +109,7 @@ import { AdMob } from '@capgo/capacitor-admob';
 await AdMob.adLoad({ id: 1 });
 ```
 
-The table above lists all 10 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-admob/) for the full contract of each one.
+The table above lists the 10 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-admob/).
 
 ## Listen to events
 

@@ -128,7 +128,7 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.seekTo({
   playerId: 'player-id-123',
-  seconds: 1,
+  seconds: 10,
   allowSeekAhead: true,
 });
 console.log(result);
@@ -324,8 +324,8 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.setSize({
   playerId: 'player-id-123',
-  width: 1,
-  height: 1,
+  width: 1080,
+  height: 1920,
 });
 console.log(result);
 ```
@@ -350,7 +350,7 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.setPlaybackRate({
   playerId: 'player-id-123',
-  suggestedRate: 1,
+  suggestedRate: 1.5,
 });
 console.log(result);
 ```

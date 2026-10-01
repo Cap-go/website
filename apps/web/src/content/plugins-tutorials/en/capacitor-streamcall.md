@@ -116,7 +116,7 @@ import { StreamCall } from '@capgo/capacitor-stream-call';
 await StreamCall.setMicrophoneEnabled({ enabled: false });
 ```
 
-The table above lists all 20 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-streamcall/) for the full contract of each one.
+The table above lists the 20 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-streamcall/).
 
 ## Listen to events
 

@@ -137,7 +137,7 @@ import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 await AppsFlyer.updateServerUninstallToken({ token: 'token-123' });
 ```
 
-The table above lists all 44 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-appsflyer/) for the full contract of each one.
+The table above lists the 44 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-appsflyer/).
 
 ## Listen to events
 

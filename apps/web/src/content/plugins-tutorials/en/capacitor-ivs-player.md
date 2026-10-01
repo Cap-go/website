@@ -111,7 +111,7 @@ import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 await CapacitorIvsPlayer.delete();
 ```
 
-The table above lists all 23 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-ivs-player/) for the full contract of each one.
+The table above lists the 23 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-ivs-player/).
 
 ## Listen to events
 

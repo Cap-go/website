@@ -110,7 +110,7 @@ import { CapgoIntercom } from '@capgo/capacitor-intercom';
 await CapgoIntercom.logEvent({ name: 'example' });
 ```
 
-The table above lists all 23 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-intercom/) for the full contract of each one.
+The table above lists the 23 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-intercom/).
 
 ## Listen to events
 

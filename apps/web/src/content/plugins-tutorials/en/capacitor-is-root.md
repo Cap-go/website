@@ -128,7 +128,7 @@ const result = await IsRoot.checkForBusyBoxBinary();
 console.log(result);
 ```
 
-The table above lists all 31 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-is-root/) for the full contract of each one.
+The table above lists the 31 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-is-root/).
 
 ## Full reference
 

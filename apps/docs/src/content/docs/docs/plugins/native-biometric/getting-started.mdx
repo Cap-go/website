@@ -113,7 +113,7 @@ Checks if credentials are already saved for a given server.
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 const result = await NativeBiometric.isCredentialsSaved({ server: 'example.com' });
-// The result holds sensitive values: use it without logging it.
+console.log(result);
 ```
 
 ## Type Reference

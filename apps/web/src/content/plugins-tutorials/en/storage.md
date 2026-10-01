@@ -75,7 +75,7 @@ List files in a directory.
 import { FirebaseStorage } from '@capgo/capacitor-firebase-storage';
 
 const result = await FirebaseStorage.listFiles({ path: 'path/to/file' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `updateMetadata()`
@@ -104,7 +104,7 @@ const result = await FirebaseStorage.downloadFile({ path: 'mountains.png' }, (ev
 console.log(result);
 ```
 
-The table above lists all 8 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/storage) for the full contract of each one.
+The table above lists the 8 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/storage).
 
 ## Full reference
 

@@ -65,7 +65,7 @@ If `storeToFile` was set to `true` when starting the preview, the returned
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-const result = await CameraPreview.capture({ height: 1 });
+const result = await CameraPreview.capture({ height: 1920 });
 console.log(result);
 ```
 
@@ -141,7 +141,7 @@ Checks the current camera (and optionally microphone) permission status without 
 import { CameraPreview } from '@capgo/camera-preview';
 
 const result = await CameraPreview.checkPermissions();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `requestPermissions`
@@ -154,7 +154,7 @@ a platform-specific alert guiding the user to the app settings will be presented
 import { CameraPreview } from '@capgo/camera-preview';
 
 const result = await CameraPreview.requestPermissions();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getHorizontalFov`
@@ -284,7 +284,7 @@ Sets the zoom level of the camera.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setZoom({ level: 0.5 });
+await CameraPreview.setZoom({ level: 1 });
 ```
 
 ### `getFlashMode`
@@ -339,8 +339,8 @@ Sets the preview size and position.
 import { CameraPreview } from '@capgo/camera-preview';
 
 const result = await CameraPreview.setPreviewSize({
-  width: 1,
-  height: 1,
+  width: 1080,
+  height: 1920,
 });
 console.log(result);
 ```

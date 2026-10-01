@@ -129,6 +129,7 @@ const previewQr = getPluginPreviewQr(id)
 // A few packages target other runtimes (Electron, Cordova); Capacitor-only copy and commands are skipped for them.
 const runtime = /electron/i.test(name ?? href) ? 'Electron' : /cordova/i.test(name ?? href) ? 'Cordova' : 'Capacitor'
 const isCapacitor = runtime === 'Capacitor'
+const runtimeArticle = /^[AEIOU]/.test(runtime) ? 'an' : 'a'
 const installCommand = name ? (isCapacitor ? `bun add ${name}\nbunx cap sync` : `bun add ${name}`) : undefined
 const installManagers = name
   ? [
@@ -152,7 +153,7 @@ const platformStatusClass = {
 const packageLabel = name ?? title
 const generatedFaq = [
   {
-    question: `How do I install the ${title} plugin in a ${runtime} app?`,
+    question: `How do I install the ${title} plugin in ${runtimeArticle} ${runtime} app?`,
     answer: !name
       ? `Follow the installation steps in the ${title} README on GitHub.`
       : isCapacitor
@@ -161,7 +162,7 @@ const generatedFaq = [
   },
   {
     question: `Does ${packageLabel} work with React, Vue and Angular?`,
-    answer: `Yes. ${title} is a ${runtime} package, so it works with any web framework that runs inside ${runtime}${isCapacitor ? ', including Ionic' : ''}, React, Vue, Angular, Svelte and plain JavaScript.`,
+    answer: `Yes. ${title} is ${runtimeArticle} ${runtime} package, so it works with any web framework that runs inside ${runtime}${isCapacitor ? ', including Ionic' : ''}, React, Vue, Angular, Svelte and plain JavaScript.`,
   },
   ...(isCapacitor
     ? [

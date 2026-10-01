@@ -35,8 +35,8 @@ Retrieves the value of a specific environment variable by key.
 ```typescript
 import { Env } from '@capgo/capacitor-env';
 
-const result = await Env.getKey({ key: 'key-123' });
-console.log(result);
+const result = await Env.getKey({ key: 'API_URL' });
+console.log(result.value); // 'https://api.example.com'
 ```
 
 ## Full reference

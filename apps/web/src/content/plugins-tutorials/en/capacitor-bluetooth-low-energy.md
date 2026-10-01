@@ -123,7 +123,7 @@ import { BluetoothLowEnergy } from '@capgo/capacitor-bluetooth-low-energy';
 await BluetoothLowEnergy.openAppSettings();
 ```
 
-The table above lists all 36 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-bluetooth-low-energy/) for the full contract of each one.
+The table above lists the 36 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-bluetooth-low-energy/).
 
 ## Listen to events
 

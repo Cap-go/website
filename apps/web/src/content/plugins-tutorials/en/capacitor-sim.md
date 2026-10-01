@@ -37,8 +37,14 @@ Get information from the device's SIM cards.
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 
-const result = await Sim.getSimCards();
-console.log(result);
+const { simCards } = await Sim.getSimCards();
+simCards.forEach((sim, index) => {
+  console.log(`SIM ${index + 1}:`);
+  console.log(`  Carrier: ${sim.carrierName}`);
+  console.log(`  Country: ${sim.isoCountryCode}`);
+  console.log(`  MCC: ${sim.mobileCountryCode}`);
+  console.log(`  MNC: ${sim.mobileNetworkCode}`);
+});
 ```
 
 ### `checkPermissions()`
@@ -48,8 +54,12 @@ Check permission to access SIM card information.
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 
-const result = await Sim.checkPermissions();
-console.log(result);
+const status = await Sim.checkPermissions();
+if (status.readSimCard === 'granted') {
+  console.log('Permission granted');
+} else {
+  console.log('Permission not granted');
+}
 ```
 
 ### `requestPermissions()`
@@ -59,8 +69,11 @@ Request permission to access SIM card information.
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 
-const result = await Sim.requestPermissions();
-console.log(result);
+const status = await Sim.requestPermissions();
+if (status.readSimCard === 'granted') {
+  // Now you can call getSimCards()
+  const simCards = await Sim.getSimCards();
+}
 ```
 
 ## Full reference

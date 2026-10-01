@@ -54,7 +54,7 @@ const result = await AppAttestNative.createAttestation({
   keyId: 'key-id-123',
   challenge: 'challenge',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `createAssertion`
@@ -68,7 +68,7 @@ const result = await AppAttestNative.createAssertion({
   keyId: 'key-id-123',
   payload: 'payload',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ## Full Reference

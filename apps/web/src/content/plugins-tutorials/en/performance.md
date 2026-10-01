@@ -56,7 +56,7 @@ Stops a trace.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.stopTrace({ traceName: 'trace' });
+await FirebasePerformance.stopTrace({ traceName: 'startTrace' });
 ```
 
 ### `incrementMetric()`
@@ -67,7 +67,7 @@ Atomically increments the metric with the given name for the selected trace by t
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 await FirebasePerformance.incrementMetric({
-  traceName: 'trace',
+  traceName: 'startTrace',
   metricName: 'metric',
 });
 ```
@@ -107,7 +107,7 @@ await FirebasePerformance.putAttribute({
 });
 ```
 
-The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/performance) for the full contract of each one.
+The table above lists the 12 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/performance).
 
 ## Full reference
 

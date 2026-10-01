@@ -111,7 +111,7 @@ import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-s
 await CapgoCapacitorDataStorageSqlite.setTable({ table: 'table' });
 ```
 
-The table above lists all 22 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-data-storage-sqlite/) for the full contract of each one.
+The table above lists the 22 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-data-storage-sqlite/).
 
 ## Full reference
 

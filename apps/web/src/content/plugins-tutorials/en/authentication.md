@@ -117,10 +117,10 @@ Finishes the phone number verification process.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.confirmVerificationCode({
-  verificationId: 'verification-id-123',
-  verificationCode: 'verification-code',
+  verificationId: 'phoneCodeSent',
+  verificationCode: 'phoneCodeSent',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `createUserWithEmailAndPassword()`
@@ -158,7 +158,7 @@ const result = await FirebaseAuthentication.fetchSignInMethodsForEmail({ email: 
 console.log(result);
 ```
 
-The table above lists all 59 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/authentication) for the full contract of each one.
+The table above lists the 59 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/authentication).
 
 ## Listen to events
 

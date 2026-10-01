@@ -111,7 +111,7 @@ Captures a picture from the camera.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-const result = await CameraPreview.capture({ height: 1 });
+const result = await CameraPreview.capture({ height: 1920 });
 console.log(result);
 ```
 
@@ -146,7 +146,7 @@ import { CameraPreview } from '@capgo/camera-preview';
 await CameraPreview.stopBarcodeScanner();
 ```
 
-The table above lists all 56 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-camera-preview/) for the full contract of each one.
+The table above lists the 56 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-camera-preview/).
 
 ## Listen to events
 

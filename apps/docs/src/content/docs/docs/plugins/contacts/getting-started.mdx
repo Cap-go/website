@@ -137,7 +137,7 @@ Get a specific contact by ID.
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
 const result = await CapacitorContacts.getContactById({ id: 'id-123' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getContacts`
@@ -148,7 +148,7 @@ Get all contacts from the device.
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
 const result = await CapacitorContacts.getContacts();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getGroupById`
@@ -213,7 +213,7 @@ Pick a single contact using the native contact picker.
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
 const result = await CapacitorContacts.pickContact();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `pickContacts`
@@ -224,7 +224,7 @@ Pick one or more contacts using the native contact picker.
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
 const result = await CapacitorContacts.pickContacts();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `updateContactById`

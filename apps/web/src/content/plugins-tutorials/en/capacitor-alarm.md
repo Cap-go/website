@@ -119,7 +119,7 @@ alarms.forEach(alarm => {
 });
 ```
 
-The table above lists all 7 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-alarm/) for the full contract of each one.
+The table above lists the 7 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-alarm/).
 
 ## Full reference
 

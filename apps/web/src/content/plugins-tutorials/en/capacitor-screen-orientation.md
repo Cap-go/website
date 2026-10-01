@@ -126,7 +126,7 @@ if (status.locked) {
 }
 ```
 
-The table above lists all 13 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-screen-orientation/) for the full contract of each one.
+The table above lists the 13 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-screen-orientation/).
 
 ## Listen to events
 

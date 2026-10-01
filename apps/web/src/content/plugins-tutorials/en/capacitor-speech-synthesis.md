@@ -114,7 +114,7 @@ const { isSpeaking } = await SpeechSynthesis.isSpeaking();
 console.log('Is speaking:', isSpeaking);
 ```
 
-The table above lists all 14 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-speech-synthesis/) for the full contract of each one.
+The table above lists the 14 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-speech-synthesis/).
 
 ## Listen to events
 

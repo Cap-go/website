@@ -63,7 +63,10 @@ Sets the model configuration - iOS: Use "Apple Intelligence" as path for system 
 ```typescript
 import { CapgoLLM } from '@capgo/capacitor-llm';
 
-await CapgoLLM.setModel({ path: 'path/to/file' });
+await CapgoLLM.setModel({
+  path: 'path/to/file',
+  modelType: 'task',
+});
 ```
 
 ## Full Reference

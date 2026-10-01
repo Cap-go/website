@@ -105,7 +105,7 @@ const result = await CapacitorTwilioVideo.setMicrophoneEnabled({ enabled: true }
 console.log(result);
 ```
 
-The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-twilio-video/) for the full contract of each one.
+The table above lists the 12 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-twilio-video/).
 
 ## Listen to events
 

@@ -103,7 +103,7 @@ import { Health } from '@capgo/capacitor-health';
 await Health.openHealthConnectSettings();
 ```
 
-The table above lists all 9 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-health/) for the full contract of each one.
+The table above lists the 9 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-health/).
 
 ## Full reference
 

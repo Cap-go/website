@@ -48,7 +48,7 @@ Get the configuration options for this app.
 import { FirebaseApp } from '@capgo/capacitor-firebase-app';
 
 const result = await FirebaseApp.getOptions();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ## Full reference

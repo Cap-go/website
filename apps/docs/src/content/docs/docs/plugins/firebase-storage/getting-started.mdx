@@ -74,7 +74,7 @@ List files in a directory.
 import { FirebaseStorage } from '@capgo/capacitor-firebase-storage';
 
 const result = await FirebaseStorage.listFiles({ path: 'path/to/file' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `updateMetadata`

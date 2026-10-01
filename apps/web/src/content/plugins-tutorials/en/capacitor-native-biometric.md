@@ -106,7 +106,7 @@ const result = await NativeBiometric.getSecureCredentials({ server: 'example.com
 // The result holds sensitive values: use it without logging it.
 ```
 
-The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-native-biometric/) for the full contract of each one.
+The table above lists the 12 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-native-biometric/).
 
 ## Listen to events
 

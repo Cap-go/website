@@ -108,10 +108,13 @@ Sets the current screen name.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setCurrentScreen({ screenName: 'screen' });
+await FirebaseAnalytics.setCurrentScreen({
+  screenName: 'screen',
+  screenClassOverride: 'screen-class-override',
+});
 ```
 
-The table above lists all 16 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics) for the full contract of each one.
+The table above lists the 16 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics).
 
 ## Full reference
 

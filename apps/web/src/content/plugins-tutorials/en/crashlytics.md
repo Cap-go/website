@@ -102,7 +102,7 @@ const result = await FirebaseCrashlytics.isEnabled();
 console.log(result);
 ```
 
-The table above lists all 10 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/crashlytics) for the full contract of each one.
+The table above lists the 10 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/crashlytics).
 
 ## Full reference
 

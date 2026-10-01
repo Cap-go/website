@@ -36,7 +36,7 @@ import { IntentLauncher } from '@capgo/capacitor-intent-launcher';
 Starts an Android activity for the given action.
 
 ```typescript
-import { IntentLauncher } from '@capgo/capacitor-intent-launcher';
+import { IntentLauncher, ActivityAction } from '@capgo/capacitor-intent-launcher';
 
 // Open location settings
 const result = await IntentLauncher.startActivityAsync({
@@ -55,7 +55,7 @@ const result = await IntentLauncher.startActivityAsync({
 Opens iOS settings screen.
 
 ```typescript
-import { IntentLauncher } from '@capgo/capacitor-intent-launcher';
+import { IntentLauncher, IOSSettings } from '@capgo/capacitor-intent-launcher';
 
 // Open app settings (recommended - officially supported by Apple)
 await IntentLauncher.openIOSSettings({ option: IOSSettings.App });

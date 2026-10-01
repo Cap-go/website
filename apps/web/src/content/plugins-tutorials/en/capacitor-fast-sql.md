@@ -104,7 +104,7 @@ import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
 await CapgoCapacitorFastSql.commitTransaction({ database: 'myapp' });
 ```
 
-The table above lists all 8 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-fast-sql/) for the full contract of each one.
+The table above lists the 8 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-fast-sql/).
 
 ## Full reference
 

@@ -126,7 +126,7 @@ await CapacitorSupabase.signInWithOtp({
 // });
 ```
 
-The table above lists all 16 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-supabase/) for the full contract of each one.
+The table above lists the 16 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-supabase/).
 
 ## Listen to events
 

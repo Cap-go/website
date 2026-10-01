@@ -26,7 +26,7 @@ bunx cap sync
 Show a system dialog to add a Wi-Fi network to the device. On Android SDK 30+, this opens the system Wi-Fi settings with the network pre-filled. On iOS, this connects to the network directly.
 
 ```typescript
-import { CapacitorWifi } from '@capgo/capacitor-wifi';
+import { CapacitorWifi, NetworkSecurityType } from '@capgo/capacitor-wifi';
 
 await CapacitorWifi.addNetwork({
   ssid: 'MyNetwork',

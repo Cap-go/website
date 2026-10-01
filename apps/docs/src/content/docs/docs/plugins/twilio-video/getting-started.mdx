@@ -119,7 +119,7 @@ Return the current room name, media state, and participant count.
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
 const result = await CapacitorTwilioVideo.getCallStatus();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `checkMicrophonePermission`

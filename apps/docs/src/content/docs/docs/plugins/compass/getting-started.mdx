@@ -117,7 +117,7 @@ Developers can listen to these events and implement their own UI for calibration
 On iOS and Web, this method does nothing as compass accuracy monitoring is not available.
 
 ```typescript
-import { CapgoCompass } from '@capgo/capacitor-compass';
+import { CapgoCompass, CompassAccuracy } from '@capgo/capacitor-compass';
 
 // Start monitoring accuracy
 await CapgoCompass.watchAccuracy();
@@ -149,7 +149,7 @@ On Android, returns the current magnetometer sensor accuracy.
 On iOS and Web, always returns CompassAccuracy.UNKNOWN as accuracy monitoring is not available.
 
 ```typescript
-import { CapgoCompass } from '@capgo/capacitor-compass';
+import { CapgoCompass, CompassAccuracy } from '@capgo/capacitor-compass';
 
 const { accuracy } = await CapgoCompass.getAccuracy();
 if (accuracy < CompassAccuracy.MEDIUM) {

@@ -111,7 +111,7 @@ import { CapacitorContacts } from '@capgo/capacitor-contacts';
 await CapacitorContacts.displayContactById({ id: 'id-123' });
 ```
 
-The table above lists all 21 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-contacts/) for the full contract of each one.
+The table above lists the 21 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-contacts/).
 
 ## Full reference
 

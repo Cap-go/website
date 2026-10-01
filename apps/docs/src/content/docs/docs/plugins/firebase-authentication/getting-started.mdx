@@ -65,10 +65,10 @@ Finishes the phone number verification process.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.confirmVerificationCode({
-  verificationId: 'verification-id-123',
-  verificationCode: 'verification-code',
+  verificationId: 'phoneCodeSent',
+  verificationCode: 'phoneCodeSent',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `createUserWithEmailAndPassword`
@@ -115,7 +115,7 @@ Fetches the currently signed-in user.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.getCurrentUser();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getPendingAuthResult`
@@ -128,7 +128,7 @@ Only available for Android.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.getPendingAuthResult();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getIdToken`
@@ -166,7 +166,7 @@ Only available for Web.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.getRedirectResult();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getTenantId`
@@ -188,7 +188,7 @@ Checks if an incoming link is a sign-in with email link suitable for `signInWith
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.isSignInWithEmailLink({ emailLink: 'https://example.com' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithApple`
@@ -202,7 +202,7 @@ The `skipNativeAuth` configuration option has no effect here.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithApple();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithEmailAndPassword`
@@ -236,7 +236,7 @@ const result = await FirebaseAuthentication.linkWithEmailLink({
   email: 'user@example.com',
   emailLink: 'https://example.com',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithFacebook`
@@ -250,7 +250,7 @@ The `skipNativeAuth` configuration option has no effect here.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithFacebook();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithGameCenter`
@@ -266,7 +266,7 @@ Only available for iOS.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithGameCenter();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithGithub`
@@ -280,7 +280,7 @@ The `skipNativeAuth` configuration option has no effect here.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithGithub();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithGoogle`
@@ -294,7 +294,7 @@ The `skipNativeAuth` configuration option has no effect here.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithGoogle();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithMicrosoft`
@@ -308,7 +308,7 @@ The `skipNativeAuth` configuration option has no effect here.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithMicrosoft();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithOpenIdConnect`
@@ -319,7 +319,7 @@ Links the user account with an OpenID Connect provider.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithOpenIdConnect({ providerId: 'provider-id-123' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithPhoneNumber`
@@ -352,7 +352,7 @@ Only available for Android.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithPlayGames();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithTwitter`
@@ -366,7 +366,7 @@ The `skipNativeAuth` configuration option has no effect here.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithTwitter();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithYahoo`
@@ -380,7 +380,7 @@ The `skipNativeAuth` configuration option has no effect here.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.linkWithYahoo();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `reload`
@@ -478,7 +478,7 @@ Signs in as an anonymous user.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInAnonymously();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithApple`
@@ -489,7 +489,7 @@ Starts the Apple sign-in flow.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithApple();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithCustomToken`
@@ -531,7 +531,7 @@ const result = await FirebaseAuthentication.signInWithEmailLink({
   email: 'user@example.com',
   emailLink: 'https://example.com',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithFacebook`
@@ -542,7 +542,7 @@ Starts the Facebook sign-in flow.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithFacebook();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithGameCenter`
@@ -555,7 +555,7 @@ Only available for iOS.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithGameCenter();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithGithub`
@@ -566,7 +566,7 @@ Starts the GitHub sign-in flow.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithGithub();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithGoogle`
@@ -577,7 +577,7 @@ Starts the Google sign-in flow.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithGoogle();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithMicrosoft`
@@ -588,7 +588,7 @@ Starts the Microsoft sign-in flow.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithMicrosoft();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithOpenIdConnect`
@@ -599,7 +599,7 @@ Starts the OpenID Connect sign-in flow.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithOpenIdConnect({ providerId: 'provider-id-123' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithPhoneNumber`
@@ -628,7 +628,7 @@ Only available for Android.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithPlayGames();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithTwitter`
@@ -639,7 +639,7 @@ Starts the Twitter sign-in flow.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithTwitter();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithYahoo`
@@ -650,7 +650,7 @@ Starts the Yahoo sign-in flow.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithYahoo();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signOut`
@@ -671,7 +671,7 @@ Unlinks a provider from a user account.
 import { FirebaseAuthentication, ProviderId } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.unlink({ providerId: ProviderId.APPLE });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `updateEmail`

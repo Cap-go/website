@@ -128,7 +128,7 @@ import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
 await ZebraDataWedge.restoreConfig();
 ```
 
-The table above lists all 35 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-zebra-datawedge/) for the full contract of each one.
+The table above lists the 35 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-zebra-datawedge/).
 
 ## Listen to events
 

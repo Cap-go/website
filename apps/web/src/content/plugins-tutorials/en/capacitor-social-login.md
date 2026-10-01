@@ -42,7 +42,7 @@ const result = await SocialLogin.login({
   provider: 'facebook',
   options: { permissions: ['permission'] },
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `logout`

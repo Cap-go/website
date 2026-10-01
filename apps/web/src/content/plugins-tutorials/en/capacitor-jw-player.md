@@ -107,10 +107,10 @@ Seek to a specific position in the currently playing media.
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.seekTo({ time: 1 });
+await JwPlayer.seekTo({ time: 10 });
 ```
 
-The table above lists all 20 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-jw-player/) for the full contract of each one.
+The table above lists the 20 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-jw-player/).
 
 ## Full reference
 
