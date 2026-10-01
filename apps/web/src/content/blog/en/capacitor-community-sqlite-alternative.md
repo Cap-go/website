@@ -281,8 +281,11 @@ import { FastSQL } from '@capgo/capacitor-fast-sql';
 import { Preferences } from '@capacitor/preferences';
 
 export async function copyRows(name: string, target: { encryptionKey?: string }) {
+  // Record which destination mode was migrated, so a later call with a different target fails loudly
+  const mode = target.encryptionKey ? 'encrypted' : 'plain';
   const done = await Preferences.get({ key: `sqlite-copied:${name}` });
-  if (done.value === '1') return;
+  if (done.value === mode) return;
+  if (done.value) throw new Error(`${name} was already copied as ${done.value}, not ${mode}`);
 
   const sqlite = new SQLiteConnection(CapacitorSQLite);
   const src = await sqlite.createConnection(name, true, 'secret', 1, false);
@@ -317,7 +320,7 @@ export async function copyRows(name: string, target: { encryptionKey?: string })
     });
 
     // Only mark the copy as done once the transaction has committed
-    await Preferences.set({ key: `sqlite-copied:${name}`, value: '1' });
+    await Preferences.set({ key: `sqlite-copied:${name}`, value: mode });
   } finally {
     await sqlite.closeConnection(name, false);
   }

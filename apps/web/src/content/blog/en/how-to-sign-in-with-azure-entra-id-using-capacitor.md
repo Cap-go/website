@@ -255,7 +255,8 @@ export async function getGraphToken() {
       await SocialLogin.refresh({ provider: 'oauth2', options: { providerId: 'azure' } });
     } catch {
       // no session, or the refresh token expired or was revoked
-      await signInWithMicrosoft();
+      const loginResult = await signInWithMicrosoft();
+      if (!loginResult) throw new Error('Sign-in cancelled');
     }
   }
   const { accessToken } = await SocialLogin.getAuthorizationCode({ provider: 'oauth2', providerId: 'azure' });

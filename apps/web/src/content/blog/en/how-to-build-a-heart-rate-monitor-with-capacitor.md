@@ -215,7 +215,13 @@ export async function startHeartRate(onReading: (m: HeartRateMeasurement) => voi
 
   try {
     const device = await scanForSensor(10_000);
-    await connectTo(device.deviceId);
+    try {
+      await connectTo(device.deviceId);
+    } catch (error) {
+      // connect() may have succeeded before a later step failed: release the half-open link
+      await BluetoothLowEnergy.disconnect({ deviceId: device.deviceId }).catch(() => undefined);
+      throw error;
+    }
   } catch (error) {
     // Don't leave listeners behind, or each retry would handle every event again
     await Promise.all(listeners.map((l) => l.remove()));
@@ -247,7 +253,10 @@ function scanForSensor(timeoutMs: number) {
     BluetoothLowEnergy.addListener('deviceScanned', ({ device }) => finish(null, device))
       .then((h) => {
         handle = h;
-        if (settled) void h.remove();
+        if (settled) {
+          void h.remove();
+          return;
+        }
         return BluetoothLowEnergy.startScan({ services: [HEART_RATE_SERVICE] });
       })
       .catch((error) => finish(error instanceof Error ? error : new Error(String(error))));

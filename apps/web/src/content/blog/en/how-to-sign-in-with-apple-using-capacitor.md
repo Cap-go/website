@@ -190,7 +190,8 @@ Apple posts `code`, `id_token`, `state`, and on first login a `user` JSON string
 
 ```typescript
 import { Hono } from 'hono';
-import { SignJWT, importPKCS8 } from 'jose';
+import { SignJWT, importPKCS8, createRemoteJWKSet, jwtVerify } from 'jose';
+import { saveAppleRefreshToken } from './db'; // your own persistence layer
 
 const app = new Hono();
 
@@ -199,6 +200,7 @@ const KEY_ID = process.env.APPLE_KEY_ID!;
 const SERVICE_ID = process.env.APPLE_SERVICE_ID!; // com.example.app.signin
 const PRIVATE_KEY = process.env.APPLE_PRIVATE_KEY!; // contents of the .p8 file
 const APP_REDIRECT = 'com.example.app://apple-login';
+const APPLE_JWKS = createRemoteJWKSet(new URL('https://appleid.apple.com/auth/keys'));
 
 async function appleClientSecret() {
   const key = await importPKCS8(PRIVATE_KEY, 'ES256');
@@ -237,8 +239,15 @@ app.post('/apple/callback', async (c) => {
   }
   const tokens = await res.json();
 
-  // Keep the long-lived refresh token on the server (store it against the user).
+  // Verify the identity token, then keep the long-lived refresh token on the server.
   // Only the short-lived tokens go back to the app in the deep link.
+  const { payload } = await jwtVerify(tokens.id_token, APPLE_JWKS, {
+    issuer: 'https://appleid.apple.com',
+    audience: SERVICE_ID,
+  });
+  if (tokens.refresh_token) {
+    await saveAppleRefreshToken(String(payload.sub), tokens.refresh_token);
+  }
   const params = new URLSearchParams({
     success: 'true',
     access_token: tokens.access_token,

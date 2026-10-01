@@ -241,7 +241,8 @@ export async function getValidAccessToken() {
       await SocialLogin.refresh({ provider: 'oauth2', options: { providerId: 'auth0' } });
     } catch {
       // refresh token expired, revoked or already rotated: sign in again
-      await signInWithAuth0();
+      const loginResult = await signInWithAuth0();
+      if (!loginResult) throw new Error('Sign-in cancelled');
     }
   }
 

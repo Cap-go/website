@@ -129,7 +129,7 @@ async function createWindow() {
   // Only allow https: so a script cannot launch file: or other protocol handlers.
   win.webContents.setWindowOpenHandler(({ url }) => {
     try {
-      if (new URL(url).protocol === 'https:') void shell.openExternal(url);
+      if (new URL(url).protocol === 'https:') void shell.openExternal(url).catch(() => {});
     } catch {
       // invalid URL: ignore
     }
