@@ -33,20 +33,24 @@ bunx cap sync
 
 ## Example Usage
 
-### `requestPermission`
+### `requestPermission` and `display`
 
 ```typescript
 import { RichNotifications } from '@capgo/capacitor-rich-notifications';
 
-// See getting started: /docs/plugins/rich-notifications/getting-started/
-```
+await RichNotifications.requestPermission();
 
-### `display`
+await RichNotifications.createChannel({
+  id: 'messages',
+  name: 'Messages',
+  importance: 'high',
+});
 
-```typescript
-import { RichNotifications } from '@capgo/capacitor-rich-notifications';
-
-// See getting started: /docs/plugins/rich-notifications/getting-started/
+await RichNotifications.display({
+  title: 'Hello',
+  body: 'Tap to open the app',
+  channelId: 'messages',
+});
 ```
 
 ### `schedule`
@@ -54,15 +58,13 @@ import { RichNotifications } from '@capgo/capacitor-rich-notifications';
 ```typescript
 import { RichNotifications } from '@capgo/capacitor-rich-notifications';
 
-// See getting started: /docs/plugins/rich-notifications/getting-started/
-```
-
-### `getInitialNotification`
-
-```typescript
-import { RichNotifications } from '@capgo/capacitor-rich-notifications';
-
-// See getting started: /docs/plugins/rich-notifications/getting-started/
+await RichNotifications.schedule({
+  id: 'reminder-1',
+  title: 'Reminder',
+  body: 'Your appointment starts soon',
+  channelId: 'messages',
+  at: new Date(Date.now() + 60_000).toISOString(),
+});
 ```
 
 ## Full Reference

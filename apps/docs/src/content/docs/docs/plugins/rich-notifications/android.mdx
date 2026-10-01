@@ -12,7 +12,7 @@ Create notification channels with `createChannel` before posting. Use `channelId
 For **exact alarms**, **full-screen intents**, and **foreground service** notifications, add opt-in permissions and the foreground service to your app manifest. From your project root:
 
 ```bash
-bun run scripts/apply-notification-permissions.mjs --project path/to/your-app
+bun ./node_modules/@capgo/capacitor-rich-notifications/scripts/apply-notification-permissions.mjs --project .
 ```
 
 That helper adds `SCHEDULE_EXACT_ALARM`, `USE_FULL_SCREEN_INTENT`, `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_SPECIAL_USE`, and declares `app.capgo.richnotifications.RichForegroundService` with `foregroundServiceType="specialUse"`.

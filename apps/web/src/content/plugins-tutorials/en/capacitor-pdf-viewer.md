@@ -28,15 +28,18 @@ bunx cap sync
 ```typescript
 import { PdfViewer } from '@capgo/capacitor-pdf-viewer';
 
-// See getting started: /docs/plugins/pdf-viewer/getting-started/
-```
+await PdfViewer.addListener('pageChange', ({ page, pageCount }) => {
+  console.log(`Page ${page} of ${pageCount}`);
+});
 
-### `goToPage`
+const { pageCount } = await PdfViewer.open({
+  source: 'https://example.com/manual.pdf',
+  mode: 'fullscreen',
+  scrollMode: 'continuous',
+  page: 1,
+});
 
-```typescript
-import { PdfViewer } from '@capgo/capacitor-pdf-viewer';
-
-// See getting started: /docs/plugins/pdf-viewer/getting-started/
+console.log(`Opened ${pageCount} pages`);
 ```
 
 ### `close`
@@ -44,7 +47,7 @@ import { PdfViewer } from '@capgo/capacitor-pdf-viewer';
 ```typescript
 import { PdfViewer } from '@capgo/capacitor-pdf-viewer';
 
-// See getting started: /docs/plugins/pdf-viewer/getting-started/
+await PdfViewer.close();
 ```
 
 ## Full Reference

@@ -54,6 +54,7 @@ const { pageCount } = await PdfViewer.open({
   page: 1,
 });
 
-await PdfViewer.close();
+console.log(`Opened ${pageCount} pages`);
+// Call PdfViewer.close() when the user dismisses the viewer or you navigate away.
 ```
 

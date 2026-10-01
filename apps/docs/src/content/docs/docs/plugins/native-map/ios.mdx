@@ -26,4 +26,15 @@ In `toBack` mode, mark HUD controls with `data-map-overlay` (or use standard int
 
 ## iOS-only plugin methods
 
-The native iOS bridge also exposes `takeSnapshot`, `searchAutocomplete`, `searchPlaces`, `searchResolve`, `geocode`, and `reverseGeocode`. These are not on the `NativeMap` class wrapper yet. Call them on the Capacitor plugin with `registerPlugin('NativeMap')` from `@capacitor/core` when you need MapKit search or geocoding on iOS.
+The native iOS bridge also exposes `takeSnapshot`, `searchAutocomplete`, `searchPlaces`, `searchResolve`, `geocode`, and `reverseGeocode`. These are not on the `NativeMap` class wrapper yet. Call them on the low-level plugin handle when you need MapKit search or geocoding on iOS:
+
+```typescript
+import { registerPlugin } from '@capacitor/core';
+
+type NativeMapBridge = {
+  takeSnapshot(options: { id: string }): Promise<{ image: string }>;
+  geocode(options: { address: string }): Promise<Record<string, unknown>>;
+};
+
+const NativeMapBridge = registerPlugin<NativeMapBridge>('NativeMap');
+```

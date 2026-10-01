@@ -7,6 +7,8 @@ sidebar:
 
 No custom Info.plist keys are required for standard local notifications. Call `RichNotifications.requestPermission()` before showing notifications.
 
-Register action categories with `registerActions` and reference `categoryId` on each notification. Use `interruptionLevel` for time-sensitive delivery on iOS 15+.
+Register action categories with `registerActions` and reference `categoryId` on each notification. Use `interruptionLevel` for delivery priority on iOS 15+.
+
+`timeSensitive` can break through Focus when the user allows **Time Sensitive Notifications** for your app in Settings. It is not enabled by the API alone.
 
 The `critical` interruption level requires Apple's Critical Alerts entitlement. Without it, use `timeSensitive` or `active`.

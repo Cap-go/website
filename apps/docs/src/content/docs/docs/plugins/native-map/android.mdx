@@ -13,15 +13,21 @@ Android uses the **Google Maps SDK**. Add your API key as manifest metadata in `
     android:value="${GOOGLE_MAPS_API_KEY}" />
 ```
 
-In `android/app/build.gradle`, map the placeholder to an environment variable or local secret:
+Inside `android { defaultConfig { ... } }` in `android/app/build.gradle`, map the placeholder to an environment variable or local secret:
 
 ```gradle
-manifestPlaceholders = [
-    GOOGLE_MAPS_API_KEY: System.getenv("GOOGLE_MAPS_API_KEY") ?: "REPLACE_WITH_YOUR_GOOGLE_MAPS_API_KEY"
-]
+android {
+    defaultConfig {
+        manifestPlaceholders = [
+            GOOGLE_MAPS_API_KEY: System.getenv("GOOGLE_MAPS_API_KEY") ?: "REPLACE_WITH_YOUR_GOOGLE_MAPS_API_KEY"
+        ]
+    }
+}
 ```
 
-Pass the same key to `NativeMap.create({ apiKey })` for consistency with web builds.
+Export `GOOGLE_MAPS_API_KEY` before building, or Gradle injects the fallback string and the Maps SDK fails at runtime.
+
+Enable **Maps SDK for Android** for the key in Google Cloud Console. Pass the same key to `NativeMap.create({ apiKey })` for consistency with web builds.
 
 ## Map behind the WebView
 

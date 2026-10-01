@@ -25,36 +25,17 @@ bunx cap sync
 
 ## Example Usage
 
-### `check`
+### `check` and `request`
 
 ```typescript
 import { Permissions } from '@capgo/capacitor-permissions';
 
-// See getting started: /docs/plugins/permissions/getting-started/
-```
-
-### `request`
-
-```typescript
-import { Permissions } from '@capgo/capacitor-permissions';
-
-// See getting started: /docs/plugins/permissions/getting-started/
-```
-
-### `checkMultiple`
-
-```typescript
-import { Permissions } from '@capgo/capacitor-permissions';
-
-// See getting started: /docs/plugins/permissions/getting-started/
-```
-
-### `requestMultiple`
-
-```typescript
-import { Permissions } from '@capgo/capacitor-permissions';
-
-// See getting started: /docs/plugins/permissions/getting-started/
+export async function ensureCamera(): Promise<boolean> {
+  const { status } = await Permissions.check({ permission: 'camera' });
+  if (status === 'granted') return true;
+  const { status: afterRequest } = await Permissions.request({ permission: 'camera' });
+  return afterRequest === 'granted';
+}
 ```
 
 ### `openSettings`
@@ -62,7 +43,10 @@ import { Permissions } from '@capgo/capacitor-permissions';
 ```typescript
 import { Permissions } from '@capgo/capacitor-permissions';
 
-// See getting started: /docs/plugins/permissions/getting-started/
+const { status } = await Permissions.check({ permission: 'camera' });
+if (status === 'blocked') {
+  await Permissions.openSettings({ type: 'application' });
+}
 ```
 
 ## Full Reference
