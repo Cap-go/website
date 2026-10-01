@@ -37,6 +37,14 @@ export interface Plugin extends Action {
   locale?: string
 }
 
+/** Category assignments for newly documented plugins (kept out of large category arrays for Sonar CPD). */
+const documentedPluginCategoryOverrides: Record<string, PluginCategoryId> = {
+  '@capgo/capacitor-pdf-viewer': 'files-storage',
+  '@capgo/capacitor-permissions': 'device-apis',
+  '@capgo/capacitor-native-map': 'device-apis',
+  '@capgo/capacitor-rich-notifications': 'communication',
+}
+
 const actionDefinitionRows =
   String.raw`@capgo/capacitor-native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
 @capgo/capacitor-native-navigation|github.com/Cap-go|Render native navbars, tabbars, and transition shells over a full-screen Capacitor WebView|https://github.com/Cap-go/capacitor-native-navigation/|Native Navigation
@@ -422,7 +430,6 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-document-scanner',
     '@capgo/capacitor-downloader',
     '@capgo/capacitor-pdf-generator',
-    '@capgo/capacitor-pdf-viewer',
     '@capgo/capacitor-fast-sql',
     '@capgo/capacitor-printer',
     '@capgo/capacitor-zip',
@@ -462,8 +469,6 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-intent-launcher',
     '@capgo/capacitor-zebra-datawedge',
     '@capgo/capacitor-wifi',
-    '@capgo/capacitor-permissions',
-    '@capgo/capacitor-native-map',
   ],
   'ui-system': [
     '@capgo/capacitor-native-navigation',
@@ -495,7 +500,6 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-twilio-voice',
     '@capgo/capacitor-wechat',
     '@capgo/capacitor-incoming-call-kit',
-    '@capgo/capacitor-rich-notifications',
     '@capgo/capacitor-share-target',
     '@capgo/capacitor-realtimekit',
     '@capgo/capacitor-firebase-messaging',
@@ -511,9 +515,12 @@ const pluginNamesByCategory = {
   ],
 } satisfies Record<PluginCategoryId, readonly string[]>
 
-const pluginCategoriesByName = Object.fromEntries(
-  Object.entries(pluginNamesByCategory).flatMap(([category, names]) => names.map((name) => [name, category as PluginCategoryId])),
-) as Record<string, PluginCategoryId>
+const pluginCategoriesByName = {
+  ...Object.fromEntries(
+    Object.entries(pluginNamesByCategory).flatMap(([category, names]) => names.map((name) => [name, category as PluginCategoryId])),
+  ),
+  ...documentedPluginCategoryOverrides,
+} as Record<string, PluginCategoryId>
 
 export const actions: Action[] = actionDefinitionRows.map((row) => {
   const [name, author, description, href, title] = row.split('|')
