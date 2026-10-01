@@ -393,16 +393,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-firebase-crashlytics',
     '@capgo/capacitor-firebase-performance',
   ],
-  commerce: [
-    '@capgo/capacitor-native-market',
-    '@revenuecat/purchases-capacitor',
-    '@capgo/native-purchases',
-    '@capgo/capacitor-admob',
-    '@capgo/capacitor-pay',
-    '@capgo/capacitor-stripe-pay',
-    '@capgo/capacitor-stripe-terminal',
-    '@capgo/capacitor-stripe-identity',
-  ],
+  commerce: ['@capgo/capacitor-native-market', '@revenuecat/purchases-capacitor', '@capgo/native-purchases', '@capgo/capacitor-admob', '@capgo/capacitor-pay', '@capgo/capacitor-stripe-pay', '@capgo/capacitor-stripe-terminal', '@capgo/capacitor-stripe-identity'],
   media: [
     '@capgo/camera-preview',
     '@capgo/capacitor-flash',
