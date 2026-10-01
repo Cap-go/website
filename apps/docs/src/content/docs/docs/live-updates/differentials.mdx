@@ -42,7 +42,7 @@ You can change this per channel with the [Download format](/docs/webapp/channels
 
 ## Delta updates and bandwidth usage
 
-Delta updates also lower your Capgo bandwidth usage. Bandwidth only counts the files a device actually downloads, so with Delta only the changed files count, not the whole bundle. Files already cached at the edge do not count at all. Full zip downloads count the whole zip unless it is served from the edge cache. See [How is bandwidth counted?](/docs/faq/#how-is-bandwidth-counted).
+Delta updates also lower your Capgo bandwidth usage. Bandwidth only counts the files a device actually downloads, so with Delta only the changed files count, not the whole bundle. Files or full zips already cached at the edge do not count, and interrupted downloads resume where they stopped without counting the downloaded part twice. See [How is bandwidth counted?](/docs/faq/#how-is-bandwidth-counted).
 
 ## Enabling Delta Updates
 

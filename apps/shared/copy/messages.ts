@@ -404,7 +404,7 @@ const messages = {
   awesome_capacitor: 'Awesome Capacitor',
   bandwidth: 'Bandwidth',
   bandwidth_explanation:
-    'Bandwidth only counts the files a device actually downloads from Capgo. With Delta updates (upload with --delta), a device downloads only the files that changed since the version it already has, so unchanged files cost nothing. If a requested file is already cached at the edge, that download does not count either. Full zip downloads (bundles uploaded without --delta, or devices on a plugin version without Delta support) count the whole zip unless it is served from the edge cache.',
+    'Bandwidth only counts the bytes a device actually downloads from Capgo. With Delta updates (upload with --delta), a device downloads only the files that changed since the version it already has, so unchanged files cost nothing. Any file or full zip already cached at the edge does not count. If a download is interrupted, it resumes where it stopped, so the part already downloaded is not counted again.',
   bandwidth_gb: 'Bandwidth (GiB)',
   beautiful_native_experience: 'Beautiful native experience',
   become_a_sponsor: 'Become a sponsor',
@@ -1075,7 +1075,7 @@ const messages = {
   pricing_credits_cta_mobile: 'Buy credits instead.',
   pricing_calculator_cta: 'Calculate your price',
   pricing_explainer_bandwidth_body:
-    'Only files a device actually downloads count. With Delta updates, that means only the files that changed, not the whole bundle. Files already cached at the edge do not count at all.',
+    'Only bytes a device actually downloads count. With Delta updates, that means only the changed files. Files or zips already cached at the edge do not count, and interrupted downloads resume without counting twice.',
   pricing_explainer_bandwidth_title: 'How is bandwidth counted?',
   pricing_explainer_build_body: "Time spent compiling your iOS and Android binaries on Capgo's macOS M4 machines. Extra build minutes use credits.",
   pricing_explainer_build_title: 'What are build hours?',
@@ -1559,7 +1559,7 @@ const messages = {
   enterprise_faq_sla_link: 'Read the Enterprise SLA',
   enterprise_faq_replication_q: 'Does regional replication multiply storage or bandwidth?',
   enterprise_faq_replication_a:
-    'No. Each bundle is counted once for storage, regardless of the delivery regions it serves. Bandwidth only counts the files devices download from Capgo: with Delta updates that is only the changed files, and files already cached at the edge do not count.',
+    'No. Each bundle is counted once for storage, regardless of the delivery regions it serves. Bandwidth only counts the bytes devices download from Capgo: with Delta updates that is only the changed files, files or zips already cached at the edge do not count, and interrupted downloads resume without counting twice.',
   enterprise_faq_replication_link: 'Read the pricing and usage FAQ',
   enterprise_faq_flavors_q: 'Should we use channels or separate app IDs for flavors?',
   enterprise_faq_flavors_a:
