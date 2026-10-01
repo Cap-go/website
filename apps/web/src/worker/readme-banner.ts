@@ -1,3 +1,4 @@
+import { capgoMarkSvg } from '../config/capgoMark'
 import { actions, pluginCountLabel, type Action } from '../config/plugins'
 import { README_BANNER_PHONE_PNG } from './readme-banner-assets'
 import type { BackgroundContext } from './types'
@@ -10,9 +11,6 @@ type BannerContext = {
   repo?: string
 }
 
-// Capgo mark (rounded diamond with the capacitor symbol cut out), 1024 viewBox, visible bounds 154..870.
-const CAPGO_MARK_PATH =
-  'M-190-340H190A150 150 0 0 1 340-190V190A150 150 0 0 1 190 340H-190A150 150 0 0 1-340 190V-190A150 150 0 0 1-190-340ZM-160-145A45 45 0 0 1-70-145V145A45 45 0 0 1-160 145V50H-195A45 45 0 0 1-240 5V-5A45 45 0 0 1-195-50H-160ZM160-145A45 45 0 0 0 70-145V145A45 45 0 0 0 160 145V50H195A45 45 0 0 0 240 5V-5A45 45 0 0 0 195-50H160Z'
 const FRESH_SECONDS = 300
 const STALE_SECONDS = 86_400
 const BANNER_WIDTH = 2048
@@ -203,7 +201,7 @@ function renderBannerSvg(context: BannerContext): string {
     </clipPath>
   </defs>
   <rect width="${BANNER_WIDTH}" height="${BANNER_HEIGHT}" fill="#002444"/>
-  <svg x="20" y="20" width="155" height="155" viewBox="124 124 776 776" aria-hidden="true"><path fill="#ffffff" fill-rule="evenodd" transform="translate(512 512) rotate(-45) scale(0.85)" d="${CAPGO_MARK_PATH}"/></svg>
+  ${capgoMarkSvg(26, 26, 143)}
   <g fill="#f8fbff" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" clip-path="url(#copy-safe-area)">
     <text x="198" y="108" font-size="74" font-weight="400">${title}</text>
     <text x="134" y="217" font-size="50" font-weight="400">${detail}</text>

@@ -7,6 +7,7 @@ import { spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, resolve } from 'node:path'
+import { capgoMarkSvg } from '../apps/web/src/config/capgoMark'
 
 const width = 2400
 const height = 1260
@@ -199,13 +200,6 @@ const images: SocialImage[] = [
   },
 ]
 
-// Capgo mark (rounded diamond with the capacitor symbol cut out), drawn in a 1024 viewBox.
-// Its visible bounds are 154..870 on both axes (716 units).
-const logoMarkPath =
-  'M-190-340H190A150 150 0 0 1 340-190V190A150 150 0 0 1 190 340H-190A150 150 0 0 1-340 190V-190A150 150 0 0 1-190-340ZM-160-145A45 45 0 0 1-70-145V145A45 45 0 0 1-160 145V50H-195A45 45 0 0 1-240 5V-5A45 45 0 0 1-195-50H-160ZM160-145A45 45 0 0 0 70-145V145A45 45 0 0 0 160 145V50H195A45 45 0 0 0 240 5V-5A45 45 0 0 0 195-50H160Z'
-const logoMarkTransform = 'translate(512 512) rotate(-45) scale(0.85)'
-const logoMarkBounds = { min: 154, size: 716 }
-
 function escapeText(value: string) {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
 }
@@ -247,16 +241,13 @@ function textLine(
 
 function logoTile(x: number, y: number, size: number, accent: string) {
   const markSize = size * 0.62
-  const scale = markSize / logoMarkBounds.size
-  const offset = (size - markSize) / 2 - logoMarkBounds.min * scale
+  const markOffset = (size - markSize) / 2
 
   return `
     <rect x="${x + 10}" y="${y + 14}" width="${size}" height="${size}" rx="42" fill="#0f172a" opacity="0.16"/>
     <rect x="${x}" y="${y}" width="${size}" height="${size}" rx="42" fill="#0f172a"/>
     <rect x="${x + 8}" y="${y + 8}" width="${size - 16}" height="${size - 16}" rx="36" fill="${accent}" opacity="0.12"/>
-    <g transform="translate(${x + offset} ${y + offset}) scale(${scale})">
-      <path fill="#ffffff" fill-rule="evenodd" transform="${logoMarkTransform}" d="${logoMarkPath}"/>
-    </g>`
+    ${capgoMarkSvg(x + markOffset, y + markOffset, markSize)}`
 }
 
 function chips(items: string[], y: number, accent: string) {
