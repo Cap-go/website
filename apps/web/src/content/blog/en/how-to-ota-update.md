@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-01T07:20:10.078Z
-updated_at: 2026-10-01T07:20:11.378Z
+updated_at: 2026-10-01T07:23:13.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/07d6202f-86e5-4bb6-8078-bcb454a31058/how-to-ota-update-app-updates.jpg'
 head_image_alt: How to OTA Update CapacitorJS Apps the Right Way
 keywords: 'ota update, capacitor, capacitorjs, capgo, mobile ci cd'
