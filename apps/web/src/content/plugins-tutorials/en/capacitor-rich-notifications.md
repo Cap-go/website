@@ -59,11 +59,13 @@ await RichNotifications.display({
 import { RichNotifications } from '@capgo/capacitor-rich-notifications';
 
 await RichNotifications.schedule({
-  id: 'reminder-1',
-  title: 'Reminder',
-  body: 'Your appointment starts soon',
-  channelId: 'messages',
-  at: new Date(Date.now() + 60_000).toISOString(),
+  notification: {
+    id: 'reminder-1',
+    title: 'Reminder',
+    body: 'Your appointment starts soon',
+    channelId: 'messages',
+  },
+  trigger: { type: 'timestamp', timestamp: Date.now() + 60_000 },
 });
 ```
 

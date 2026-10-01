@@ -40,7 +40,8 @@ const map = await NativeMap.create({
 });
 
 map.setOnMapClickListener((e) => console.log(e.latitude, e.longitude));
-await map.destroy();
+
+// In a framework component, call `await map.destroy()` from your teardown/cleanup hook.
 ```
 
 ### Background map with HTML UI

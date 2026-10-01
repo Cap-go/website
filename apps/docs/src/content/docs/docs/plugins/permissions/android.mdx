@@ -12,10 +12,10 @@ The library `AndroidManifest.xml` declares no `<uses-permission>` entries. Add o
 | `camera` | `android.permission.CAMERA` |
 | `microphone`, `speechRecognition` | `android.permission.RECORD_AUDIO` |
 | `photoLibrary`, `mediaImages` | `android.permission.READ_MEDIA_IMAGES`, `android.permission.READ_MEDIA_VISUAL_USER_SELECTED`, `android.permission.READ_EXTERNAL_STORAGE` (legacy) |
-| `locationWhenInUse` | `ACCESS_COARSE_LOCATION`, `ACCESS_FINE_LOCATION` |
-| `locationAlways` | above plus `ACCESS_BACKGROUND_LOCATION` |
-| `notifications` | `POST_NOTIFICATIONS` (Android 13+) |
-| `activityRecognition` | `ACTIVITY_RECOGNITION` |
+| `locationWhenInUse` | `android.permission.ACCESS_COARSE_LOCATION`, `android.permission.ACCESS_FINE_LOCATION` |
+| `locationAlways` | above plus `android.permission.ACCESS_BACKGROUND_LOCATION` |
+| `notifications` | `android.permission.POST_NOTIFICATIONS` (Android 13+) |
+| `activityRecognition` | `android.permission.ACTIVITY_RECOGNITION` |
 
 `reminders` and `appTrackingTransparency` return `unavailable` on Android.
 
