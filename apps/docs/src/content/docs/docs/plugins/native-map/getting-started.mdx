@@ -74,6 +74,8 @@ await map.addMarker({
 
 Set `toBack: true` so MapKit or Google Maps renders **behind** a transparent Capacitor WebView. Touches on transparent areas pass through to the map (pinch, rotate, tilt, pan). Regions that must receive taps need `data-map-overlay` so the README CSS gives them `pointer-events: auto`.
 
+When `toBack` is `true`, `element` is optional in `CreateMapArgs` (the plugin defaults to `document.body`). When `toBack` is `false`, pass `element` as in the embedded example above. `updateLayout`, `show`, and `hide` are on `NativeMap` in the current plugin sources (see the [README overlay section](https://github.com/Cap-go/capacitor-native-map/blob/cursor/capacitor-native-map-v1-82bd/README.md#build-your-own-map-ui)).
+
 ```typescript
 const map = await NativeMap.create({
   id: 'overlay-map',
@@ -90,6 +92,8 @@ const map = await NativeMap.create({
 });
 
 await map.updateLayout({ x: 0, y: 0, width: window.innerWidth, height: window.innerHeight });
+await map.hide();
+await map.show();
 ```
 
 Use a root element with class `map-overlay-root` and `data-native-map-overlay-root`. Put `data-map-overlay` on each HUD region that should receive taps (for example a `header` or `footer` wrapper). Buttons and links inside that region work because the parent has `pointer-events: auto`:
