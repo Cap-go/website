@@ -75,7 +75,8 @@ if (plans.length > 0) {
       },
       {
         question: 'How is bandwidth counted?',
-        answer: 'Capgo bandwidth counts user-device downloads that are not served from the edge cache. Cache-served deliveries do not count against your Capgo bandwidth usage.',
+        answer:
+          'Bandwidth only counts the files a device actually downloads from Capgo. With Delta updates, a device downloads only the files that changed since the version it already has, so unchanged files cost nothing. If a requested file is already cached at the edge, that download does not count either. Full zip downloads count the whole zip unless it is served from the edge cache.',
       },
       {
         question: 'What happens if I reach my MAU limit?',
