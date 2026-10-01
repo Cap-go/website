@@ -5,9 +5,9 @@ import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/
 import { toolCatalog } from '@/lib/tools/catalog'
 import { getRelativeLocaleUrl } from '@/services/links'
 
-const title = 'Free Mobile App Signing Tools | iOS CSR, UDID, and Android Keystore'
+const title = 'Free Mobile App Signing Tools: Keystore, iOS CSR, UDID'
 const description =
-  'Generate an iOS certificate signing request, find an iPhone UDID, and create an Android signing keystore from one place. Built for mobile release and CI workflows.'
+  'Free online tools for mobile developers: generate an Android keystore, create an iOS certificate and .p12 without a Mac, and find an iPhone UDID in seconds.'
 const locale = Astro.locals.locale
 const toAbsoluteLocaleUrl = (path: string) => new URL(getRelativeLocaleUrl(locale, path), Astro.url.origin).toString()
 
@@ -41,22 +41,23 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, {
 const content = {
   title,
   description,
-  keywords: 'ios certificate generator, ios csr generator, android keystore generator, ios udid finder, mobile signing tools, apple developer csr, play store keystore',
+  keywords:
+    'free mobile developer tools, android keystore generator, ios certificate generator, iphone udid finder, ios csr generator, generate android keystore online, ios certificate without mac, app signing tools',
   ldJSON,
 }
 
 const pillars = [
   {
-    title: 'Real outputs',
-    description: 'The tools generate downloadable signing files and device data instead of stopping at a demo interface.',
+    title: 'No install, no sign-up',
+    description: 'Create a keystore or CSR without Android Studio, keytool, or Keychain Access, and find a UDID without a Mac. Everything runs from your browser.',
   },
   {
-    title: 'Release-focused',
-    description: 'Each flow is written for app signing, ad-hoc testing, CI handoff, and cloud build pipelines.',
+    title: 'Real, ready-to-use files',
+    description: 'Download a PKCS#12 keystore, an Apple-ready CSR and private key, or copy a device UDID. Each tool explains exactly where the output goes next.',
   },
   {
-    title: 'Search intent coverage',
-    description: 'The pages answer setup questions, troubleshooting questions, and operational questions around mobile signing.',
+    title: 'Nothing stored',
+    description: 'Signing files and device details are generated on demand and returned straight to you. Keys, passwords, and identifiers are never saved to a database.',
   },
 ]
 ---
@@ -72,10 +73,10 @@ const pillars = [
     <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl">
         <p class="text-sm font-semibold tracking-[0.3em] text-cyan-300 uppercase">Mobile signing toolkit</p>
-        <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Free tools for iOS signing requests, iPhone UDID capture, and Android release keystores</h1>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Free mobile app signing tools for iOS and Android</h1>
         <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-          These tools are designed for teams shipping Capacitor, Ionic, React Native, Flutter, and native mobile apps. Generate the files you need, validate device data quickly,
-          and keep your release process moving without bouncing between desktop utilities.
+          Generate an Android keystore online, create an iOS distribution certificate without a Mac, and find an iPhone UDID in seconds. Built for teams shipping Capacitor,
+          Ionic, React Native, Flutter, and native mobile apps, with step-by-step guides for Gradle, Xcode, fastlane, CI, and cloud builds.
         </p>
 
         <div class="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -98,7 +99,7 @@ const pillars = [
 
   <ToolCatalog
     title="Choose the tool that matches your release bottleneck"
-    intro="Each page includes the utility, setup guidance, FAQ markup, and internal links to the broader signing and build docs."
+    intro="Each tool comes with a step-by-step guide, troubleshooting tips, and an FAQ, so you know exactly what to do with the output."
   />
 
   <section class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">

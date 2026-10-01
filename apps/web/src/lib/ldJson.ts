@@ -4,6 +4,7 @@ import type {
   BreadcrumbList,
   FAQPage,
   Graph,
+  HowTo,
   ItemList,
   NewsArticle,
   Organization,
@@ -20,7 +21,7 @@ import type {
 import { CAPGO_LEGAL_NAME, CAPGO_POSTAL_ADDRESS } from '../../../shared/agentDiscovery'
 
 // Re-export schema-dts types for external use
-export type { BreadcrumbList, FAQPage, Graph, ItemList, NewsArticle, Organization, Person, Product, Review, Service, SoftwareApplication, Thing, WebPage, WebSite, WithContext }
+export type { BreadcrumbList, FAQPage, Graph, HowTo, ItemList, NewsArticle, Organization, Person, Product, Review, Service, SoftwareApplication, Thing, WebPage, WebSite, WithContext }
 
 export type ProductReviewInput = {
   author: string
@@ -378,6 +379,45 @@ export function createFAQPageLdJson(
       },
     })),
   }
+}
+
+/**
+ * Create a HowTo schema for step-by-step tool and setup guides
+ */
+export function createHowToLdJson(
+  _config: RuntimeConfig['public'],
+  options: {
+    url: string
+    name: string
+    description: string
+    totalTime?: string
+    tools?: string[]
+    steps: Array<{
+      name: string
+      text: string
+    }>
+  },
+): HowTo {
+  const howTo: HowTo = {
+    '@type': 'HowTo',
+    '@id': `${options.url}#howto`,
+    name: options.name,
+    description: options.description,
+    step: options.steps.map((step, index) => ({
+      '@type': 'HowToStep' as const,
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      url: `${options.url}#step-${index + 1}`,
+    })),
+  }
+
+  if (options.totalTime) howTo.totalTime = options.totalTime
+  if (options.tools?.length) {
+    howTo.tool = options.tools.map((name) => ({ '@type': 'HowToTool' as const, name }))
+  }
+
+  return howTo
 }
 
 /**

@@ -2,11 +2,14 @@
 import Layout from '@/layouts/Layout.astro'
 import ToolCatalog from '@/components/tools/ToolCatalog.astro'
 import ToolFaq from '@/components/tools/ToolFaq.astro'
-import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import ToolHowTo from '@/components/tools/ToolHowTo.astro'
+import ToolRelatedLinks from '@/components/tools/ToolRelatedLinks.astro'
+import { createFAQPageLdJson, createHowToLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
-const title = 'iOS UDID Finder | Get an iPhone or iPad UDID Without a Mac'
-const description = 'Find an iPhone or iPad UDID directly on the device. Download a lightweight profile, install it in Settings, and view the UDID, model, serial, and iOS version.'
+const title = 'iOS UDID Finder: Find Your iPhone UDID Without a Mac'
+const description =
+  'Free iPhone UDID finder. Get your iPhone or iPad UDID in seconds from Safari, without iTunes, Finder, Xcode, or a Mac, plus model, serial, and iOS version.'
 
 const certificateLink = (import.meta.env.PUBLIC_IOS_UDID_CERTIFICATE_LINK || '').trim()
 const profileDownloadHref = `/api/tools/ios-udid-finder/profile?routeLocale=${encodeURIComponent(Astro.locals.locale)}`
@@ -15,21 +18,142 @@ const faqItems = [
   {
     question: 'What is a UDID?',
     answer:
-      'A UDID is the unique device identifier used for ad-hoc iOS testing and device registration. Teams usually need it when they want to add a tester device to Apple Developer before distributing a build outside the App Store.',
+      'A UDID (Unique Device Identifier) is a permanent identifier Apple assigns to every iPhone, iPad, and iPod touch. Developers register UDIDs in Apple Developer so a device can install development and ad hoc builds. Recent devices use a 25-character format such as 00008110-001A2B3C4D5E6F7G, older ones a 40-character hexadecimal string.',
   },
   {
-    question: 'Do I need a Mac or Xcode to get the UDID?',
+    question: 'How do I find my iPhone UDID without a computer?',
     answer:
-      'No. This tool works on the iPhone or iPad itself. The device installs a lightweight profile and posts the requested identifiers back to the server so the result page can show them.',
+      'Open this page in Safari on the iPhone, tap Download UDID profile, then open Settings, tap Profile Downloaded, and install it. Safari then opens a result page with your UDID and a copy button. No Mac, PC, iTunes, Finder, or Xcode is needed.',
   },
   {
-    question: 'What data is displayed after installation?',
-    answer: 'The result page shows the UDID plus the device name, hardware product identifier, iOS version, serial number, IMEI, and MEID when iOS provides them.',
-  },
-  {
-    question: 'Is the profile signed?',
+    question: 'Why can I not see my UDID in the iPhone Settings app?',
     answer:
-      'The page supports signed mobileconfig delivery when the signing certificate and private key are configured on the server. If those values are not configured, the profile is still generated and delivered without a signing envelope.',
+      'Apple does not show the UDID anywhere in Settings, and since iOS 7 apps cannot read it either. The only on-device way is a profile-service request like this one, which asks iOS to share the UDID with the page you opened.',
+  },
+  {
+    question: 'Why do I need to install a profile?',
+    answer:
+      'The configuration profile is Apple’s standard Profile Service mechanism. It only asks iOS for device attributes (UDID, product, version, serial, IMEI, MEID, device name), sends them back to this site, and then shows them to you. It does not install certificates, change settings, or give remote access to the device.',
+  },
+  {
+    question: 'Is it safe? Is my device data stored?',
+    answer:
+      'Capgo signs the profile and only requests read-only identifiers. The device details are passed to the result page in the redirect link and in a backup cookie that expires after five minutes. When the result page loads, it removes the details from the address bar and clears the cookie. They are not saved to a database or shared with third parties.',
+  },
+  {
+    question: 'How do I remove the profile after getting my UDID?',
+    answer:
+      'The profile only collects identifiers and is not kept as a permanent configuration profile. If it ever shows up, go to Settings, General, VPN & Device Management, tap the Capgo profile, and select Remove Profile.',
+  },
+  {
+    question: 'Do I need a UDID for TestFlight?',
+    answer:
+      'No. TestFlight testers are invited by email or a public link, and no UDID registration is needed. You need the UDID for development builds, ad hoc distribution, and tools that install builds directly on a registered device.',
+  },
+  {
+    question: 'How do I register a UDID in Apple Developer?',
+    answer:
+      'Go to Certificates, Identifiers & Profiles, open Devices, select the plus button, enter a device name and the UDID, and save. Then edit or regenerate your development or ad hoc provisioning profile so it includes the new device, and rebuild the app.',
+  },
+  {
+    question: 'Can I find a UDID on Windows or Mac instead?',
+    answer:
+      'Yes. On a Mac, connect the device, select it in Finder, and click the text under the device name until the UDID appears, or open Xcode, Window, Devices and Simulators. On Windows, the same click trick works in iTunes or the Apple Devices app. This page avoids the cable and computer entirely.',
+  },
+  {
+    question: 'Does it work on iPad and with browsers other than Safari?',
+    answer:
+      'It works on iPhone, iPad, and iPod touch. Use Safari, because iOS only lets Safari hand configuration profiles to the Settings app. Devices managed by an MDM may block profile installation; in that case ask your administrator or use Finder or Xcode.',
+  },
+]
+
+const howToSteps = [
+  {
+    name: 'Open this page in Safari on the device',
+    text: 'Use the physical iPhone or iPad whose UDID you need. Chrome and other iOS browsers cannot pass profiles to Settings, so use Safari.',
+  },
+  {
+    name: 'Download the UDID profile',
+    text: 'Tap Download UDID profile and choose Allow when iOS asks to download a configuration profile.',
+  },
+  {
+    name: 'Install it from Settings',
+    text: 'Open the Settings app, tap Profile Downloaded near the top, select Install, and enter your device passcode to confirm.',
+  },
+  {
+    name: 'Copy your UDID',
+    text: 'Safari opens the result page with the UDID, model, iOS version, and serial number. Tap Copy next to the UDID and send it to your developer.',
+  },
+]
+
+const otherMethods = [
+  {
+    name: 'Finder on macOS',
+    text: 'Connect the device, select it in the Finder sidebar, then click the grey text under the device name until the UDID appears. Right-click to copy.',
+  },
+  {
+    name: 'Xcode',
+    text: 'Open Window, then Devices and Simulators, and select the device. The Identifier field is the UDID.',
+  },
+  {
+    name: 'iTunes or Apple Devices on Windows',
+    text: 'Connect the device, open the device summary, and click the Serial Number label until it switches to UDID.',
+  },
+  {
+    name: 'Apple Configurator',
+    text: 'Select the connected device, open the info view, and copy the ECID and UDID fields.',
+  },
+]
+
+const troubleshooting = [
+  {
+    error: 'Nothing happens after tapping Download UDID profile',
+    fix: 'You are probably in Chrome, Firefox, or an in-app browser. Copy the link, open it in Safari, and try again.',
+  },
+  {
+    error: 'Profile Downloaded is missing in Settings',
+    fix: 'Profiles expire from that screen after about eight minutes. Download the profile again, or look under Settings, General, VPN & Device Management.',
+  },
+  {
+    error: 'Profile installation failed',
+    fix: 'Check that the device is online, then retry. If the device is supervised or managed by an MDM, profile installs may be blocked by policy.',
+  },
+  {
+    error: 'The result page says no device response is available',
+    fix: 'The redirect did not reach this browser (for example, it was opened in another browser) and the five-minute backup cookie has expired or was already cleared. Download and install the profile again from Safari.',
+  },
+]
+
+const relatedLinks = [
+  {
+    title: 'Capgo Cloud Build for iOS',
+    description: 'Build ad hoc and App Store iOS apps in the cloud once your test devices are registered.',
+    path: 'native-build',
+  },
+  {
+    title: 'iOS signing and ad hoc distribution',
+    description: 'Configure certificates, provisioning profiles, and ad hoc mode for Capgo Cloud Build.',
+    path: 'docs/builder/ios',
+  },
+  {
+    title: 'Enable Developer Mode on iOS',
+    description: 'Turn on Developer Mode so registered devices can run development builds.',
+    path: 'blog/enable-ios-developer-mode-ios16',
+  },
+  {
+    title: 'iOS builds with GitHub Actions and match',
+    description: 'Let fastlane match keep certificates and device-aware provisioning profiles in sync.',
+    path: 'blog/automatic-capacitor-ios-build-github-action-with-match',
+  },
+  {
+    title: 'Build an iOS app from Windows',
+    description: 'Ship a Capacitor iOS app without a Mac, from device registration to the App Store.',
+    path: 'blog/build-ios-app-from-windows-capacitor-capgo-build',
+  },
+  {
+    title: 'Types of builds explained',
+    description: 'Understand development, ad hoc, TestFlight, and production builds and when a UDID matters.',
+    path: 'blog/types-of-builds',
   },
 ]
 
@@ -51,6 +175,15 @@ const faqLdJson = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
   questions: faqItems,
 })
 
+const howToLdJson = createHowToLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  name: 'How to find your iPhone or iPad UDID without a Mac',
+  description: 'Get the UDID of an iPhone or iPad directly on the device with Safari and a configuration profile.',
+  totalTime: 'PT1M',
+  tools: ['iPhone or iPad', 'Safari'],
+  steps: howToSteps,
+})
+
 const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description,
@@ -65,22 +198,16 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, softwareAppl
     { name: 'Tools', url: new URL('/tools/', Astro.locals.runtimeConfig.public.baseUrl).toString() },
     { name: 'iOS UDID Finder', url: Astro.url.href },
   ],
-  additionalEntities: [faqLdJson, webPage],
+  additionalEntities: [faqLdJson, howToLdJson, webPage],
 })
 
 const content = {
   title,
   description,
-  keywords: 'ios udid finder, get iphone udid, ipad udid finder, find udid without mac, ios profile service, ad hoc testing udid',
+  keywords:
+    'iphone udid finder, find iphone udid, ios udid finder, get iphone udid, find udid without mac, ipad udid finder, udid without itunes, how to find udid on iphone, register device udid apple developer',
   ldJSON,
 }
-
-const steps = [
-  'Open this page on the physical iPhone or iPad you want to register.',
-  'Download the configuration profile and, if your setup requires it, install the supporting certificate first.',
-  'Go to Settings, tap “Profile Downloaded”, and confirm the installation.',
-  'The device sends its identifiers to the backend and redirects you to the results page automatically.',
-]
 ---
 
 <Layout content={content}>
@@ -95,10 +222,10 @@ const steps = [
       <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <p class="text-sm font-semibold tracking-[0.3em] text-fuchsia-300 uppercase">Tester onboarding</p>
-          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Find an iPhone or iPad UDID without plugging into a Mac</h1>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">iOS UDID Finder: find your iPhone or iPad UDID</h1>
           <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-            This page uses the standard iOS profile-service flow to request the device identifier and send it to the backend. Once installed, the result page shows the UDID and the
-            surrounding device metadata needed for ad-hoc registration.
+            Get your iPhone UDID in under a minute, right on the device. No Mac, PC, cable, iTunes, Finder, or Xcode. Open this page in Safari, install a lightweight profile, and
+            copy the UDID, model, iOS version, and serial number.
           </p>
 
           <div class="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -118,65 +245,131 @@ const steps = [
                 </a>
               ) : (
                 <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
+                  href="#how-to"
                   class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
                 >
-                  See the iOS signing workflow
+                  How it works
                 </a>
               )
             }
           </div>
+          <p class="mt-4 text-sm text-slate-400">Open this page in Safari on the iPhone or iPad you want to register. Free, no account needed.</p>
         </div>
 
         <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
-          <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">How it works</p>
-          <ol class="mt-6 space-y-5 text-sm leading-7 text-slate-300">
-            {
-              steps.map((step, index) => (
-                <li>
-                  <strong class="text-white">{index + 1}.</strong> {step}
-                </li>
-              ))
-            }
-          </ol>
+          <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">What you get</p>
+          <dl class="mt-6 grid grid-cols-2 gap-4 text-sm">
+            <div><dt class="text-xs tracking-[0.2em] text-fuchsia-300 uppercase">UDID</dt><dd class="mt-1 text-white">Device identifier</dd></div>
+            <div><dt class="text-xs tracking-[0.2em] text-fuchsia-300 uppercase">Product</dt><dd class="mt-1 text-white">Model, e.g. iPhone15,2</dd></div>
+            <div><dt class="text-xs tracking-[0.2em] text-fuchsia-300 uppercase">iOS version</dt><dd class="mt-1 text-white">Build number</dd></div>
+            <div><dt class="text-xs tracking-[0.2em] text-fuchsia-300 uppercase">Serial</dt><dd class="mt-1 text-white">Serial number</dd></div>
+            <div><dt class="text-xs tracking-[0.2em] text-fuchsia-300 uppercase">IMEI / MEID</dt><dd class="mt-1 text-white">Cellular devices</dd></div>
+            <div><dt class="text-xs tracking-[0.2em] text-fuchsia-300 uppercase">Device name</dt><dd class="mt-1 text-white">When iOS shares it</dd></div>
+          </dl>
+          <p class="mt-6 text-sm leading-7 text-slate-300">Every value has a one-tap copy button so testers can send it straight to the developer.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <ToolHowTo
+    accent="fuchsia"
+    title="How to find your iPhone UDID without a Mac"
+    intro="Four steps on the device itself. Most people finish in under a minute."
+    steps={howToSteps}
+  />
+
+  <section class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <article class="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Basics</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">What is a UDID and when do you need it?</h2>
+        <div class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
+          <p>
+            The UDID (Unique Device Identifier) is a permanent ID tied to one iPhone or iPad. It does not change after a reset or an iOS update, and Apple hides it from the
+            Settings app and from apps.
+          </p>
+          <p>Developers ask for it when they need to install an app on your device outside the App Store:</p>
+          <ul class="list-disc space-y-2 pl-5">
+            <li>Ad hoc builds shared with testers, clients, or QA.</li>
+            <li>Development builds installed from Xcode or a cloud build service.</li>
+            <li>Provisioning profiles that list the exact devices allowed to run the app.</li>
+          </ul>
+          <p>TestFlight and App Store installs do not need a UDID.</p>
+        </div>
+      </article>
+
+      <article class="rounded-3xl border border-fuchsia-400/20 bg-fuchsia-400/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Security and privacy</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">What the profile does, and does not do</h2>
+        <ul class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
+          <li>It uses Apple’s standard Profile Service flow and only requests read-only identifiers: UDID, product, iOS version, serial, IMEI, MEID, and device name.</li>
+          <li>It does not install certificates, VPNs, or device management, and cannot read your data, apps, photos, or location.</li>
+          <li>The profile is signed by Capgo, and each download carries a unique challenge that the device response must match.</li>
+          <li>Results are handed to your browser through the redirect link and a backup cookie that expires after five minutes. The result page removes the details from the address bar and clears the cookie when it loads. Nothing is saved to a database.</li>
+        </ul>
+      </article>
     </div>
   </section>
 
   <section class="py-16 sm:py-20">
-    <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-8">
-      <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
-        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Install notes</p>
-        <h2 class="mt-3 text-3xl font-bold text-white">Use the profile on the device that needs to be registered</h2>
-        <div class="mt-6 space-y-5 text-sm leading-7 text-slate-300">
-          <p>
-            Open the profile from Safari on the physical iPhone or iPad. iOS will download the configuration profile and expose it in Settings so the user can review and install
-            it. After approval, the device posts the requested attributes to the callback endpoint and the browser is redirected to the results page.
-          </p>
-          <p>
-            This is the quickest path for collecting tester identifiers during ad-hoc or beta distribution setup because it avoids Finder, Apple Configurator, and Xcode on a
-            separate machine.
-          </p>
-          <p>
-            If your device flow depends on an additional trust certificate, publish the certificate at a public HTTPS URL and surface it on this page. A setup runbook for that
-            lives in the repository documentation.
-          </p>
-        </div>
-      </div>
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <article class="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">For developers</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">Register the UDID in Apple Developer</h2>
+        <ol class="mt-6 list-decimal space-y-3 pl-5 text-sm leading-7 text-slate-300">
+          <li>Sign in to Apple Developer and open Certificates, Identifiers &amp; Profiles.</li>
+          <li>Open Devices, select the plus button, and choose the iOS platform.</li>
+          <li>Enter a recognizable device name and paste the UDID, or upload a list of devices as a file.</li>
+          <li>Edit your development or ad hoc provisioning profile, select the new device, and download it again.</li>
+          <li>Rebuild and sign the app with the updated profile, then share the build with the tester.</li>
+        </ol>
+        <p class="mt-6 text-sm leading-7 text-slate-300">
+          Apple allows up to 100 devices of each type per membership year. Need a signing certificate first? Use the
+          <a class="text-fuchsia-200 underline decoration-fuchsia-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'tools/ios-certificate-generator')}>iOS certificate generator</a>.
+        </p>
+      </article>
 
-      <aside class="rounded-3xl border border-fuchsia-400/20 bg-fuchsia-400/5 p-8">
-        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Good to know</p>
-        <ul class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
-          <li>The callback endpoint receives the raw device response and extracts the plist payload on the server.</li>
-          <li>The result page is generated from the backend response so the tester can copy the UDID immediately.</li>
-          <li>When signing credentials are configured, the download endpoint returns a signed mobileconfig envelope.</li>
-        </ul>
-      </aside>
+      <article class="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Alternatives</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">Other ways to find a UDID</h2>
+        <p class="mt-4 text-sm leading-7 text-slate-300">If you already have a computer and a cable at hand, these methods work too.</p>
+        <dl class="mt-6 space-y-5 text-sm leading-7">
+          {
+            otherMethods.map((method) => (
+              <div>
+                <dt class="font-semibold text-white">{method.name}</dt>
+                <dd class="mt-1 text-slate-300">{method.text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </article>
     </div>
   </section>
 
-  <ToolFaq items={faqItems} intro="These are the questions teams usually ask before they send a UDID collection link to testers, QA, or customer devices." />
+  <section id="troubleshooting" class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Troubleshooting</p>
+        <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">UDID profile not working?</h2>
+      </div>
+      <dl class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          troubleshooting.map((item) => (
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <dt class="text-sm font-semibold text-rose-200">{item.error}</dt>
+              <dd class="mt-3 text-sm leading-7 text-slate-300">{item.fix}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <ToolFaq items={faqItems} title="iPhone UDID finder FAQ" intro="Answers about UDIDs, the configuration profile, privacy, and registering test devices with Apple." />
+
+  <ToolRelatedLinks title="iOS testing and distribution guides" links={relatedLinks} />
 
   <ToolCatalog current="ios-udid-finder" />
   </div>
