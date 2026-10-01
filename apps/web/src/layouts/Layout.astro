@@ -19,9 +19,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
 <!doctype html>
 <html lang={Astro.locals.locale.toLowerCase()}>
   <head>
-    <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealLight.woff" crossorigin />
-    <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealMedium.woff" crossorigin />
-    <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealBold.woff" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/satoshi/Satoshi-Variable.woff2" crossorigin />
     <link rel="stylesheet" href={globalStylesHref} />
     <link rel="stylesheet" href={productSurfaceHref} />
     <SEO {...content} />

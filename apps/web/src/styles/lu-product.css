@@ -1,46 +1,4 @@
 /* Live Update — builder design language (blue accent) */
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealLight.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealBook.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealMedium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealBold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealExtraBold.woff') format('woff');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealBlack.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
 .lu {
   /* ---- tokens ---- */
   --bg-deep: #080e1a;
@@ -51,7 +9,7 @@
   --relief-blue-glow: rgba(96, 165, 250, 0.4);
   --cap-blue-600: #2563eb;
   --cap-blue-700: #1d4ed8;
-  --lu-font-display: 'Airbnb Cereal', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --lu-font-display: Satoshi, ui-sans-serif, system-ui, -apple-system, sans-serif;
   --lu-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
   position: relative;
