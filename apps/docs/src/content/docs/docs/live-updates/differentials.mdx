@@ -40,6 +40,10 @@ So it is expected to still see some full zip downloads after you enable Delta. T
 
 You can change this per channel with the [Download format](/docs/webapp/channels/#download-format) setting.
 
+## Delta updates and bandwidth usage
+
+Delta updates also lower your Capgo bandwidth usage. Bandwidth only counts the files a device actually downloads, so with Delta only the changed files count, not the whole bundle. Files or full zips already cached at the edge do not count, and interrupted downloads resume where they stopped without counting the downloaded part twice. See [How is bandwidth counted?](/docs/faq/#how-is-bandwidth-counted).
+
 ## Enabling Delta Updates
 
 To enable Delta updates for your Capgo app, simply use the `--delta` flag when uploading a new version:
