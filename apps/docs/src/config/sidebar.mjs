@@ -192,11 +192,7 @@ const pluginEntries = [
   ['Printer', 'printer'],
   ['Capacitor Patch', 'capacitor-patch'],
   ['RealtimeKit', 'realtimekit'],
-  [
-    'Rich Notifications',
-    'rich-notifications',
-    [linkItem('iOS setup', '/docs/plugins/rich-notifications/ios'), linkItem('Android setup', '/docs/plugins/rich-notifications/android')],
-  ],
+  ['Rich Notifications', 'rich-notifications', [linkItem('iOS setup', '/docs/plugins/rich-notifications/ios'), linkItem('Android setup', '/docs/plugins/rich-notifications/android')]],
   ['reCAPTCHA', 'recaptcha', [linkItem('iOS setup', '/docs/plugins/recaptcha/ios'), linkItem('Android setup', '/docs/plugins/recaptcha/android')]],
   ['Verisoul', 'verisoul', [linkItem('iOS setup', '/docs/plugins/verisoul/ios'), linkItem('Android setup', '/docs/plugins/verisoul/android')]],
   ['Ricoh 360 Camera', 'ricoh360-camera'],

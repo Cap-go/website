@@ -353,14 +353,7 @@ const pluginIconsByName: Record<string, string> = {
 }
 
 const pluginNamesByCategory = {
-  updates: [
-    '@capgo/capacitor-updater',
-    '@capgo/cordova-updater',
-    '@capgo/electron-updater',
-    '@capgo/capacitor-android-inline-install',
-    '@capgo/capacitor-live-reload',
-    '@capgo/capacitor-patch',
-  ],
+  updates: ['@capgo/capacitor-updater', '@capgo/cordova-updater', '@capgo/electron-updater', '@capgo/capacitor-android-inline-install', '@capgo/capacitor-live-reload', '@capgo/capacitor-patch'],
   'auth-security': [
     '@capgo/capacitor-native-biometric',
     '@capgo/capacitor-autofill-save-password',
