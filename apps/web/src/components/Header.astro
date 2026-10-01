@@ -173,9 +173,19 @@ const mobileLinks = [
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale)}
           aria-label={m.capgo_home({}, { locale: Astro.locals.locale })}
-          class="font-prompt flex shrink-0 items-center pr-2 font-medium md:pr-3"
+          class="capgo-logo-link font-prompt flex shrink-0 items-center pr-2 font-medium md:pr-3"
         >
-          <img class="h-6 w-auto pr-1 lg:h-7" loading="eager" height="40" width="144" alt={`${brand} logo`} src="/capgo_logo_header_2x.webp" />
+          <span class="flex items-center pr-1">
+            <svg class="capgo-logo-mark h-6 w-6 shrink-0 text-white lg:h-7 lg:w-7" viewBox="154 154 716 716" aria-hidden="true" focusable="false">
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                transform="translate(512 512) rotate(-45) scale(0.85)"
+                d="M-190-340H190A150 150 0 0 1 340-190V190A150 150 0 0 1 190 340H-190A150 150 0 0 1-340 190V-190A150 150 0 0 1-190-340ZM-160-145A45 45 0 0 1-70-145V145A45 45 0 0 1-160 145V50H-195A45 45 0 0 1-240 5V-5A45 45 0 0 1-195-50H-160ZM160-145A45 45 0 0 0 70-145V145A45 45 0 0 0 160 145V50H195A45 45 0 0 0 240 5V-5A45 45 0 0 0 195-50H160Z"
+              ></path>
+            </svg>
+            <img class="ml-[5px] h-6 w-auto lg:ml-[6px] lg:h-7" loading="eager" height="80" width="188" alt={`${brand} logo`} src="/capgo_logo_header_text_2x.webp" />
+          </span>
         </a>
         <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">
           <!-- Docs -->
@@ -503,3 +513,25 @@ const mobileLinks = [
     if (!document.hidden) syncHeaderAuthLinks()
   })
 </script>
+
+<style>
+  .capgo-logo-mark {
+    transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+  }
+
+  .capgo-logo-link:hover .capgo-logo-mark,
+  .capgo-logo-link:focus-visible .capgo-logo-mark {
+    transform: rotate(90deg) scale(1.06);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .capgo-logo-mark {
+      transition: none;
+    }
+
+    .capgo-logo-link:hover .capgo-logo-mark,
+    .capgo-logo-link:focus-visible .capgo-logo-mark {
+      transform: none;
+    }
+  }
+</style>
