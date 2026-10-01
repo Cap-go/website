@@ -1,0 +1,20 @@
+---
+title: Android setup
+description: "Channels, POST_NOTIFICATIONS, and optional exact alarms for @capgo/capacitor-rich-notifications."
+sidebar:
+  order: 4
+---
+
+The plugin merges `POST_NOTIFICATIONS` into your app (required on Android 13+). Request runtime permission with `requestPermission()`. **Minimum SDK:** 24.
+
+Create notification channels with `createChannel` before posting. Use `channelId` on each notification.
+
+For **exact alarms**, **full-screen intents**, and **foreground service** notifications, add opt-in permissions and the foreground service to your app manifest. From your project root:
+
+```bash
+bun run scripts/apply-notification-permissions.mjs --project path/to/your-app
+```
+
+That helper adds `SCHEDULE_EXACT_ALARM`, `USE_FULL_SCREEN_INTENT`, `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_SPECIAL_USE`, and declares `app.capgo.richnotifications.RichForegroundService` with `foregroundServiceType="specialUse"`.
+
+Use `foregroundService: true` and `fullScreen: true` only when those permissions are present.

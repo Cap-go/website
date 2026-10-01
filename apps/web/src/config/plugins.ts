@@ -40,6 +40,7 @@ export interface Plugin extends Action {
 const actionDefinitionRows =
   String.raw`@capgo/capacitor-native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
 @capgo/capacitor-native-navigation|github.com/Cap-go|Render native navbars, tabbars, and transition shells over a full-screen Capacitor WebView|https://github.com/Cap-go/capacitor-native-navigation/|Native Navigation
+@capgo/capacitor-native-map|github.com/Cap-go|Google Maps on Android, Apple MapKit on iOS, and Google Maps JS on web with one API for markers, camera, and overlays|https://github.com/Cap-go/capacitor-native-map/|Native Map
 @capgo/capacitor-native-loader|github.com/Cap-go|Show native animated loaders, transparent overlays, Lottie assets, and WebView-resizing loading states from JavaScript or native code|https://github.com/Cap-go/capacitor-native-loader/|Native Loader
 @capgo/capacitor-asset-cache|github.com/Cap-go|Cache CDN images and videos in persistent app storage and bind them as local media sources|https://github.com/Cap-go/capacitor-asset-cache/|Asset Cache
 @capgo/capacitor-auto|github.com/Cap-go|Bridge Capacitor apps with CarPlay and Android Auto template surfaces for two-way car communication|https://github.com/Cap-go/capacitor-auto/|Auto
@@ -83,6 +84,7 @@ const actionDefinitionRows =
 @capgo/capacitor-passkey|github.com/Cap-go|Keep browser-style WebAuthn code in Capacitor while native passkey calls and host patching are handled for you|https://github.com/Cap-go/capacitor-passkey/|Passkey
 @capgo/capacitor-jw-player|github.com/Cap-go|Embed JW Player for professional video streaming with ads and analytics support|https://github.com/Cap-go/capacitor-jw-player/|JW Player
 @capgo/capacitor-ricoh360|github.com/Cap-go|Control Ricoh Theta 360-degree cameras for immersive panoramic photography|https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/|Ricoh360 Camera
+@capgo/capacitor-rich-notifications|github.com/Cap-go|Local notifications with Android channels, progress layouts, action buttons, scheduling, and iOS interruption levels|https://github.com/Cap-go/capacitor-rich-notifications/|Rich Notifications
 @capgo/capacitor-admob|github.com/Cap-go|Monetize your app with Google AdMob banner, interstitial, and rewarded ads|https://github.com/Cap-go/capacitor-admob/|AdMob
 @capgo/capacitor-alarm|github.com/Cap-go|Schedule native alarms and notifications even when app is closed|https://github.com/Cap-go/capacitor-alarm/|Alarm
 @capgo/capacitor-android-inline-install|github.com/Cap-go|Install app updates directly within the app without leaving to Play Store|https://github.com/Cap-go/capacitor-android-inline-install/|Android Inline Install
@@ -114,6 +116,8 @@ const actionDefinitionRows =
 @capgo/capacitor-privacy-screen|github.com/Cap-go|Protect app content in Android screenshots and obscure the iOS app switcher snapshot|https://github.com/Cap-go/capacitor-privacy-screen/|Privacy Screen
 @capgo/capacitor-proximity|github.com/Cap-go|Enable native proximity monitoring so your app can react when the device is near a face, hand, or surface|https://github.com/Cap-go/capacitor-proximity/|Proximity
 @capgo/capacitor-pdf-generator|github.com/Cap-go|Create PDF documents from HTML templates for invoices, reports, and receipts|https://github.com/Cap-go/capacitor-pdf-generator/|PDF Generator
+@capgo/capacitor-pdf-viewer|github.com/Cap-go|Embed native PDF viewing on iOS, Android, and web with paths, URLs, base64, inline mode, and password support|https://github.com/Cap-go/capacitor-pdf-viewer/|PDF Viewer
+@capgo/capacitor-permissions|github.com/Cap-go|Check and request runtime permissions on iOS, Android, and web with one PermissionName enum and normalized status codes|https://github.com/Cap-go/capacitor-permissions/|Permissions
 @capgo/capacitor-persistent-account|github.com/Cap-go|Preserve user authentication and account data across app reinstalls and updates|https://github.com/Cap-go/capacitor-persistent-account/|Persistent Account
 @capgo/capacitor-persistent-uuid|github.com/Cap-go|Generate and persist one app-scoped UUID across reinstalls, app updates, and OS updates|https://github.com/Cap-go/capacitor-persistent-uuid/|Persistent UUID
 @capgo/capacitor-photo-library|github.com/Cap-go|Browse, save, and manage photos and videos in device photo library with permissions|https://github.com/Cap-go/capacitor-photo-library/|Photo Library
@@ -194,6 +198,7 @@ const actionDefinitionRows =
 const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-native-market': 'ArchiveBoxArrowDown',
   '@capgo/capacitor-native-navigation': 'DevicePhoneMobile',
+  '@capgo/capacitor-native-map': 'MapPin',
   '@capgo/capacitor-native-loader': 'ArrowPath',
   '@capgo/capacitor-asset-cache': 'ArchiveBoxArrowDown',
   '@capgo/capacitor-auto': 'Truck',
@@ -267,6 +272,9 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-pay': 'CreditCard',
   '@capgo/capacitor-privacy-screen': 'EyeSlash',
   '@capgo/capacitor-pdf-generator': 'DocumentText',
+  '@capgo/capacitor-pdf-viewer': 'DocumentText',
+  '@capgo/capacitor-permissions': 'ShieldCheck',
+  '@capgo/capacitor-rich-notifications': 'Bell',
   '@capgo/capacitor-persistent-account': 'UserCircle',
   '@capgo/capacitor-persistent-uuid': 'FingerPrint',
   '@capgo/capacitor-photo-library': 'Photo',
@@ -345,7 +353,14 @@ const pluginIconsByName: Record<string, string> = {
 }
 
 const pluginNamesByCategory = {
-  updates: ['@capgo/capacitor-updater', '@capgo/cordova-updater', '@capgo/electron-updater', '@capgo/capacitor-android-inline-install', '@capgo/capacitor-live-reload', '@capgo/capacitor-patch'],
+  updates: [
+    '@capgo/capacitor-updater',
+    '@capgo/cordova-updater',
+    '@capgo/electron-updater',
+    '@capgo/capacitor-android-inline-install',
+    '@capgo/capacitor-live-reload',
+    '@capgo/capacitor-patch',
+  ],
   'auth-security': [
     '@capgo/capacitor-native-biometric',
     '@capgo/capacitor-autofill-save-password',
@@ -385,7 +400,16 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-firebase-crashlytics',
     '@capgo/capacitor-firebase-performance',
   ],
-  commerce: ['@capgo/capacitor-native-market', '@revenuecat/purchases-capacitor', '@capgo/native-purchases', '@capgo/capacitor-admob', '@capgo/capacitor-pay', '@capgo/capacitor-stripe-pay', '@capgo/capacitor-stripe-terminal', '@capgo/capacitor-stripe-identity'],
+  commerce: [
+    '@capgo/capacitor-native-market',
+    '@revenuecat/purchases-capacitor',
+    '@capgo/native-purchases',
+    '@capgo/capacitor-admob',
+    '@capgo/capacitor-pay',
+    '@capgo/capacitor-stripe-pay',
+    '@capgo/capacitor-stripe-terminal',
+    '@capgo/capacitor-stripe-identity',
+  ],
   media: [
     '@capgo/camera-preview',
     '@capgo/capacitor-flash',
@@ -414,6 +438,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-document-scanner',
     '@capgo/capacitor-downloader',
     '@capgo/capacitor-pdf-generator',
+    '@capgo/capacitor-pdf-viewer',
     '@capgo/capacitor-fast-sql',
     '@capgo/capacitor-printer',
     '@capgo/capacitor-zip',
@@ -453,6 +478,8 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-intent-launcher',
     '@capgo/capacitor-zebra-datawedge',
     '@capgo/capacitor-wifi',
+    '@capgo/capacitor-permissions',
+    '@capgo/capacitor-native-map',
   ],
   'ui-system': [
     '@capgo/capacitor-native-navigation',
@@ -484,6 +511,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-twilio-voice',
     '@capgo/capacitor-wechat',
     '@capgo/capacitor-incoming-call-kit',
+    '@capgo/capacitor-rich-notifications',
     '@capgo/capacitor-share-target',
     '@capgo/capacitor-realtimekit',
     '@capgo/capacitor-firebase-messaging',

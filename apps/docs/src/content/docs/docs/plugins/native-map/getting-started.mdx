@@ -1,0 +1,74 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-native-map and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-native-map` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-native-map
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { NativeMap } from '@capgo/capacitor-native-map';
+```
+
+## Platform setup
+
+- [iOS setup](/docs/plugins/native-map/ios/) for MapKit and location usage strings.
+- [Android setup](/docs/plugins/native-map/android/) for the Google Maps SDK API key.
+
+Web needs `apiKey` and optionally `config.mapId` for Advanced Markers.
+
+## Usage
+
+```typescript
+import { NativeMap } from '@capgo/capacitor-native-map';
+
+const map = await NativeMap.create({
+  id: 'main-map',
+  element: document.getElementById('map')!,
+  apiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
+  config: {
+    center: { lat: 37.7749, lng: -122.4194 },
+    zoom: 12,
+  },
+});
+
+map.setOnMapClickListener((e) => console.log('click', e.latitude, e.longitude));
+
+await map.addMarker({
+  coordinate: { lat: 37.7749, lng: -122.4194 },
+  title: 'San Francisco',
+});
+
+await map.destroy();
+```
+
+## Map behind your WebView
+
+On **Android**, the plugin adds the `MapView` under the Capacitor WebView and sets the WebView background to transparent so HTML and CSS can sit above the map.
+
+On **iOS**, the map mounts into the WKWebView scroll hierarchy and stays aligned when the bound element resizes or when Ionic pages re-enter.
+
+Make the WebView and page background transparent where you want the map visible. Keep interactive controls in HTML above the map container.
+

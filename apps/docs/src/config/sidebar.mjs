@@ -139,6 +139,7 @@ const pluginEntries = [
   ['Native Loader', 'native-loader'],
   ['Native Market', 'native-market'],
   ['Native Navigation', 'native-navigation'],
+  ['Native Map', 'native-map', [linkItem('iOS setup', '/docs/plugins/native-map/ios'), linkItem('Android setup', '/docs/plugins/native-map/android')]],
   [
     'Network Diagnostics',
     'network-diagnostics',
@@ -179,6 +180,8 @@ const pluginEntries = [
   ['Privacy Screen', 'privacy-screen', [linkItem('iOS behavior', '/docs/plugins/privacy-screen/ios'), linkItem('Android behavior', '/docs/plugins/privacy-screen/android')]],
   ['Proximity', 'proximity'],
   ['PDF Generator', 'pdf-generator'],
+  ['PDF Viewer', 'pdf-viewer', [linkItem('iOS setup', '/docs/plugins/pdf-viewer/ios'), linkItem('Android setup', '/docs/plugins/pdf-viewer/android')]],
+  ['Permissions', 'permissions', [linkItem('iOS setup', '/docs/plugins/permissions/ios'), linkItem('Android setup', '/docs/plugins/permissions/android')]],
   ['Pedometer', 'pedometer'],
   ['Persona', 'persona'],
   ['Intune', 'intune', [linkItem('iOS', '/docs/plugins/intune/ios'), linkItem('Android', '/docs/plugins/intune/android')]],
@@ -189,6 +192,11 @@ const pluginEntries = [
   ['Printer', 'printer'],
   ['Capacitor Patch', 'capacitor-patch'],
   ['RealtimeKit', 'realtimekit'],
+  [
+    'Rich Notifications',
+    'rich-notifications',
+    [linkItem('iOS setup', '/docs/plugins/rich-notifications/ios'), linkItem('Android setup', '/docs/plugins/rich-notifications/android')],
+  ],
   ['reCAPTCHA', 'recaptcha', [linkItem('iOS setup', '/docs/plugins/recaptcha/ios'), linkItem('Android setup', '/docs/plugins/recaptcha/android')]],
   ['Verisoul', 'verisoul', [linkItem('iOS setup', '/docs/plugins/verisoul/ios'), linkItem('Android setup', '/docs/plugins/verisoul/android')]],
   ['Ricoh 360 Camera', 'ricoh360-camera'],

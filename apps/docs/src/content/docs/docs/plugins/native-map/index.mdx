@@ -1,0 +1,56 @@
+---
+title: "@capgo/capacitor-native-map"
+description: "Google Maps on Android, Apple MapKit on iOS, and Google Maps JS on web with one TypeScript API for markers, camera, and overlays."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Google Maps on Android, Apple MapKit on iOS, and Google Maps JS on web with one TypeScript API for markers, camera, and overlays."
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-map/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-native-map/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+@capgo/capacitor-native-map embeds native map views under your HTML. On mobile the map renders behind a transparent WebView so your UI can float above the map. iOS uses MapKit without a Google API key. Android and web use Google Maps with an API key.
+
+## Core Capabilities
+
+- `create` - Create a map bound to a DOM element.
+- `destroy` - Destroy the map instance and release native resources.
+- `setCamera` - Move or animate the map camera.
+- `addMarker` - Add one marker and return its id.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `create` | Create a map bound to a DOM element. |
+| `destroy` | Destroy the map instance and release native resources. |
+| `setCamera` | Move or animate the map camera. |
+| `addMarker` | Add one marker and return its id. |
+| `addMarkers` | Add several markers in one call. |
+| `removeMarker` | Remove one marker by id. |
+| `fitBounds` | Fit the viewport to latitude and longitude bounds. |
+| `enableCurrentLocation` | Show the user location dot when permission allows. |
+| `enableClustering` | Enable marker clustering with an optional minimum cluster size. |
+| `setOnMapClickListener` | Listen for taps on the map surface. |
+| `setOnMarkerClickListener` | Listen for marker taps. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-native-map](https://github.com/Cap-go/capacitor-native-map/).
+
+## Keep going from @capgo/capacitor-native-map
+
+If you are using **@capgo/capacitor-native-map** in your Capacitor app, connect it with [Using @capgo/capacitor-native-map](/plugins/capacitor-native-map/) for the SEO tutorial and related Capgo plugin docs.
