@@ -1,5 +1,5 @@
 ---
-import { worldMapPins, worldMapSize } from '@/config/worldMap'
+import { capgoRegions, worldMapSize } from '@/config/worldMap'
 
 const { width, height } = worldMapSize
 ---
@@ -9,26 +9,46 @@ const { width, height } = worldMapSize
     <!-- Static raster keeps LCP fast; the canvas takes over once the dot data is parsed. -->
     <img src="/world-dots.webp" alt="" width="1680" height="855" decoding="async" fetchpriority="high" class="map-raster absolute inset-0 h-full w-full opacity-[0.14]" />
     <canvas class="map-live absolute inset-0 h-full w-full"></canvas>
-    {worldMapPins.map((pin, index) => (
-      <span class="map-pin" data-pin={index} style={`left: ${((pin.x / width) * 100).toFixed(2)}%; top: ${((pin.y / height) * 100).toFixed(2)}%; --i: ${index}`}>
+    {capgoRegions.map((region, index) => (
+      <span class="map-pin" data-pin={index} style={`left: ${((region.x / width) * 100).toFixed(2)}%; top: ${((region.y / height) * 100).toFixed(2)}%; --i: ${index}`}>
         <i />
-        <span class="map-label">{pin.name}</span>
       </span>
     ))}
   </div>
 </div>
 
 <script>
-  import { worldMapPins, worldMapSize } from '@/config/worldMap'
+  import { capgoRegions, worldMapCities, worldMapSize, type MapPoint } from '@/config/worldMap'
 
   type Ripple = { x: number; y: number; start: number; reach: number; strength: number }
-  type Arc = { from: number; to: number; start: number; duration: number; landed?: boolean }
+  type Trip = { city: number; region: number; start: number; duration: number; landed?: boolean }
 
   const AZURE = [68, 188, 255]
   const BASE_ALPHA = 0.14
   const SPOT_RADIUS = 150
   const LENS_PUSH = 9
-  const PIN_HIT = 46
+  const CITY_HIT = 3.4 // map units
+  const TRIP_MS = 1500
+
+  const toRad = Math.PI / 180
+  const distanceKm = (a: MapPoint, b: MapPoint) => {
+    const dLat = (b.lat - a.lat) * toRad
+    const dLng = (b.lng - a.lng) * toRad
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * toRad) * Math.cos(b.lat * toRad) * Math.sin(dLng / 2) ** 2
+    return 2 * 6371 * Math.asin(Math.sqrt(h))
+  }
+  // Round trip over fiber (~200 km/ms) with a 1.5x routing detour, plus a few ms at the edge.
+  const estimateMs = (km: number) => Math.max(3, Math.round((2 * km * 1.5) / 200 + 3))
+
+  // Each city goes to the Capgo region its Cloudflare data center is routed to.
+  const cityRoute = worldMapCities.map((city) => {
+    const region = Math.max(
+      0,
+      capgoRegions.findIndex((r) => r.code === city.region),
+    )
+    const km = distanceKm(city, capgoRegions[region])
+    return { region, km, ms: estimateMs(km) }
+  })
 
   const root = document.querySelector<HTMLElement>('[data-hero-map]')
   const canvas = root?.querySelector<HTMLCanvasElement>('canvas.map-live')
@@ -40,6 +60,12 @@ const { width, height } = worldMapSize
     const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches
     const pinEls = Array.from(root.querySelectorAll<HTMLElement>('[data-pin]'))
 
+    // The tooltip lives on <body> so it stays above the hero copy instead of under it.
+    const tip = document.createElement('div')
+    tip.className = 'map-tip'
+    tip.setAttribute('aria-hidden', 'true')
+    document.body.append(tip)
+
     let dots = new Float32Array(0)
     let scale = 1
     let dpr = 1
@@ -49,19 +75,14 @@ const { width, height } = worldMapSize
     let running = false
     let ready = false
 
-    // Pointer state: target from events, eased copy used for drawing.
     const pointer = { clientX: 0, clientY: 0, inside: false }
     const eased = { x: 0, y: 0, presence: 0, primed: false }
-    let activePin = -1
+    let activeCity = -1
     let activeSince = 0
-    let activeLinks: number[] = []
-    let touchPinTimer = 0
+    let touchTimer = 0
     const ripples: Ripple[] = []
-    const arcs: Arc[] = []
-    let nextAmbient = 0
-
-    const pinPx = () => worldMapPins.map((pin) => ({ x: pin.x * scale, y: pin.y * scale }))
-    let pins = pinPx()
+    const trips: Trip[] = []
+    let nextTrip = 0
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect()
@@ -71,37 +92,21 @@ const { width, height } = worldMapSize
       canvas.width = Math.round(cssW * dpr)
       canvas.height = Math.round(cssH * dpr)
       scale = cssW / worldMapSize.width
-      pins = pinPx()
       kick()
     }
 
     const localPointer = () => {
       const rect = canvas.getBoundingClientRect()
-      return { x: pointer.clientX - rect.left, y: pointer.clientY - rect.top }
+      return { x: pointer.clientX - rect.left, y: pointer.clientY - rect.top, rect }
     }
 
-    const setActivePin = (index: number, now: number) => {
-      if (index === activePin) return
-      pinEls[activePin]?.classList.remove('is-active')
-      activePin = index
-      activeSince = now
-      activeLinks =
-        index < 0
-          ? []
-          : pins
-              .map((pin, other) => ({ other, d: Math.hypot(pin.x - pins[index].x, pin.y - pins[index].y) }))
-              .filter(({ other }) => other !== index)
-              .sort((a, b) => a.d - b.d)
-              .slice(0, 5)
-              .map(({ other }) => other)
-      pinEls[index]?.classList.add('is-active')
-    }
+    const px = (point: { x: number; y: number }) => ({ x: point.x * scale, y: point.y * scale })
 
-    const nearestPin = (x: number, y: number) => {
+    const nearestCity = (x: number, y: number, hit: number) => {
       let best = -1
-      let bestDist = PIN_HIT
-      pins.forEach((pin, index) => {
-        const d = Math.hypot(pin.x - x, pin.y - y)
+      let bestDist = hit * scale
+      worldMapCities.forEach((city, index) => {
+        const d = Math.hypot(city.x * scale - x, city.y * scale - y)
         if (d < bestDist) {
           best = index
           bestDist = d
@@ -110,20 +115,51 @@ const { width, height } = worldMapSize
       return best
     }
 
+    const setActiveCity = (index: number, now: number) => {
+      if (index === activeCity) return
+      const prevRegion = activeCity >= 0 ? cityRoute[activeCity].region : -1
+      const nextRegion = index >= 0 ? cityRoute[index].region : -1
+      if (prevRegion !== nextRegion) {
+        pinEls[prevRegion]?.classList.remove('is-active')
+        pinEls[nextRegion]?.classList.add('is-active')
+      }
+      activeCity = index
+      activeSince = now
+      if (index < 0) {
+        tip.classList.remove('is-visible')
+        return
+      }
+      const city = worldMapCities[index]
+      const route = cityRoute[index]
+      const region = capgoRegions[route.region]
+      tip.innerHTML = ''
+      const title = document.createElement('strong')
+      title.textContent = city.name
+      const line = document.createElement('span')
+      line.className = 'map-tip-route'
+      line.textContent = `→ Capgo ${region.name}`
+      const ms = document.createElement('span')
+      ms.className = 'map-tip-ms'
+      ms.textContent = `~${route.ms} ms`
+      const note = document.createElement('span')
+      note.className = 'map-tip-note'
+      note.textContent = `${Math.round(route.km).toLocaleString('en-US')} km · est. round trip`
+      tip.append(title, line, ms, note)
+      tip.classList.add('is-visible')
+    }
+
     // Quadratic arc lifted above the straight line, like a flight path.
     const arcPoint = (a: { x: number; y: number }, b: { x: number; y: number }, t: number) => {
       const mx = (a.x + b.x) / 2
-      const my = (a.y + b.y) / 2 - Math.hypot(b.x - a.x, b.y - a.y) * 0.32
+      const my = (a.y + b.y) / 2 - Math.max(18, Math.hypot(b.x - a.x, b.y - a.y) * 0.3)
       const u = 1 - t
       return { x: u * u * a.x + 2 * u * t * mx + t * t * b.x, y: u * u * a.y + 2 * u * t * my + t * t * b.y }
     }
 
-    const drawArc = (from: number, to: number, head: number, tail: number, alpha: number) => {
+    const drawArc = (a: { x: number; y: number }, b: { x: number; y: number }, head: number, tail: number, alpha: number, width = 1.25) => {
       if (!ctx || head <= 0) return
-      const a = pins[from]
-      const b = pins[to]
       const steps = 28
-      ctx.lineWidth = 1.25
+      ctx.lineWidth = width
       ctx.lineCap = 'round'
       let prev = arcPoint(a, b, Math.max(0, tail))
       for (let s = 1; s <= steps; s++) {
@@ -137,46 +173,68 @@ const { width, height } = worldMapSize
         ctx.stroke()
         prev = point
       }
-      if (head < 1) {
-        const glow = ctx.createRadialGradient(prev.x, prev.y, 0, prev.x, prev.y, 8)
-        glow.addColorStop(0, `rgba(255,255,255,${alpha})`)
-        glow.addColorStop(0.35, `rgba(${AZURE[0]},${AZURE[1]},${AZURE[2]},${alpha * 0.6})`)
-        glow.addColorStop(1, 'rgba(68,188,255,0)')
-        ctx.fillStyle = glow
-        ctx.beginPath()
-        ctx.arc(prev.x, prev.y, 8, 0, Math.PI * 2)
-        ctx.fill()
-      }
     }
 
-    const spawnAmbientArc = (now: number) => {
-      const from = Math.floor(Math.random() * pins.length)
-      let to = from
-      while (to === from || Math.abs(worldMapPins[to].x - worldMapPins[from].x) < 18) to = Math.floor(Math.random() * pins.length)
-      arcs.push({ from, to, start: now, duration: 1900 })
+    const drawPacket = (point: { x: number; y: number }, alpha: number) => {
+      if (!ctx) return
+      const glow = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, 8)
+      glow.addColorStop(0, `rgba(255,255,255,${alpha})`)
+      glow.addColorStop(0.35, `rgba(${AZURE[0]},${AZURE[1]},${AZURE[2]},${alpha * 0.6})`)
+      glow.addColorStop(1, 'rgba(68,188,255,0)')
+      ctx.fillStyle = glow
+      ctx.beginPath()
+      ctx.arc(point.x, point.y, 8, 0, Math.PI * 2)
+      ctx.fill()
+    }
+
+    const drawCityMarker = (point: { x: number; y: number }, now: number) => {
+      if (!ctx) return
+      const pulse = reducedMotion ? 0.5 : ((now - activeSince) % 1400) / 1400
+      ctx.strokeStyle = `rgba(255,255,255,${0.8 * (1 - pulse)})`
+      ctx.lineWidth = 1.25
+      ctx.beginPath()
+      ctx.arc(point.x, point.y, 4 + pulse * 12, 0, Math.PI * 2)
+      ctx.stroke()
+      ctx.fillStyle = '#fff'
+      ctx.beginPath()
+      ctx.arc(point.x, point.y, 3, 0, Math.PI * 2)
+      ctx.fill()
+    }
+
+    const spawnTrip = (now: number) => {
+      const city = Math.floor(Math.random() * worldMapCities.length)
+      if (cityRoute[city].km < 600) return
+      trips.push({ city, region: cityRoute[city].region, start: now, duration: TRIP_MS + Math.random() * 500 })
+    }
+
+    const placeTip = (rect: DOMRect) => {
+      if (activeCity < 0) return
+      const city = worldMapCities[activeCity]
+      tip.style.translate = `${Math.round(rect.left + city.x * scale)}px ${Math.round(rect.top + city.y * scale)}px`
     }
 
     const frame = (now: number) => {
       running = false
       if (!ctx || !ready) return
 
-      const target = localPointer()
+      const { x: tx, y: ty, rect } = localPointer()
       const presenceTarget = pointer.inside && finePointer ? 1 : 0
       if (!eased.primed || reducedMotion) {
-        eased.x = target.x
-        eased.y = target.y
+        eased.x = tx
+        eased.y = ty
         eased.primed = true
       } else {
-        eased.x += (target.x - eased.x) * 0.2
-        eased.y += (target.y - eased.y) * 0.2
+        eased.x += (tx - eased.x) * 0.2
+        eased.y += (ty - eased.y) * 0.2
       }
       eased.presence = reducedMotion ? presenceTarget : eased.presence + (presenceTarget - eased.presence) * 0.09
 
-      if (finePointer) setActivePin(pointer.inside ? nearestPin(target.x, target.y) : -1, now)
+      if (finePointer) setActiveCity(pointer.inside ? nearestCity(tx, ty, CITY_HIT) : -1, now)
+      placeTip(rect)
 
-      if (!reducedMotion && visible && now >= nextAmbient) {
-        spawnAmbientArc(now)
-        nextAmbient = now + 2200 + Math.random() * 1600
+      if (!reducedMotion && visible && now >= nextTrip) {
+        spawnTrip(now)
+        nextTrip = now + 900 + Math.random() * 900
       }
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
@@ -191,23 +249,17 @@ const { width, height } = worldMapSize
         ctx.fillRect(0, 0, cssW, cssH)
       }
 
-      // Expire finished ripples and arcs.
       for (let i = ripples.length - 1; i >= 0; i--) if (now - ripples[i].start > 1600) ripples.splice(i, 1)
-      for (let i = arcs.length - 1; i >= 0; i--) {
-        const arc = arcs[i]
-        if (now - arc.start > arc.duration * 1.45) arcs.splice(i, 1)
-      }
+      for (let i = trips.length - 1; i >= 0; i--) if (now - trips[i].start > trips[i].duration * 1.5) trips.splice(i, 1)
 
       const radius = 0.21 * scale
-      const idle: number[] = []
+      const lit: number[] = []
       ctx.fillStyle = `rgba(255,255,255,${BASE_ALPHA})`
       ctx.beginPath()
       for (let i = 0; i < dots.length; i += 2) {
         const x = dots[i] * scale
         const y = dots[i + 1] * scale
-        const dx = x - eased.x
-        const dy = y - eased.y
-        const dist = Math.hypot(dx, dy)
+        const dist = Math.hypot(x - eased.x, y - eased.y)
         let spot = 0
         if (eased.presence > 0.01 && dist < SPOT_RADIUS) {
           const f = 1 - dist / SPOT_RADIUS
@@ -216,9 +268,7 @@ const { width, height } = worldMapSize
         let wave = 0
         for (const ripple of ripples) {
           const age = (now - ripple.start) / 1600
-          const front = age * ripple.reach
-          const rd = Math.hypot(x - ripple.x, y - ripple.y)
-          const band = (rd - front) / 22
+          const band = (Math.hypot(x - ripple.x, y - ripple.y) - age * ripple.reach) / 22
           wave += Math.exp(-band * band) * (1 - age) * ripple.strength
         }
         const energy = Math.min(1, spot + wave)
@@ -226,17 +276,17 @@ const { width, height } = worldMapSize
           ctx.moveTo(x + radius, y)
           ctx.arc(x, y, radius, 0, Math.PI * 2)
         } else {
-          idle.push(i, energy, spot, dist)
+          lit.push(i, energy, spot, dist)
         }
       }
       ctx.fill()
 
       // Lit dots: brighter, bigger, tinted azure, pushed outward like a lens.
-      for (let j = 0; j < idle.length; j += 4) {
-        const i = idle[j]
-        const energy = idle[j + 1]
-        const spot = idle[j + 2]
-        const dist = idle[j + 3]
+      for (let j = 0; j < lit.length; j += 4) {
+        const i = lit[j]
+        const energy = lit[j + 1]
+        const spot = lit[j + 2]
+        const dist = lit[j + 3]
         let x = dots[i] * scale
         let y = dots[i + 1] * scale
         if (!reducedMotion && spot > 0 && dist > 0.5) {
@@ -252,28 +302,36 @@ const { width, height } = worldMapSize
         ctx.fill()
       }
 
-      // Ambient "update shipped" arcs; each landing sends a small pulse.
-      for (const arc of arcs) {
-        const t = (now - arc.start) / arc.duration
-        const head = Math.min(1, t)
-        const eased01 = 1 - Math.pow(1 - head, 3)
-        const fade = t > 1 ? 1 - (t - 1) / 0.45 : 1
-        drawArc(arc.from, arc.to, eased01, eased01 - 0.35, 0.75 * fade)
-        if (t >= 1 && !arc.landed) {
-          arc.landed = true
-          ripples.push({ x: pins[arc.to].x, y: pins[arc.to].y, start: now, reach: 70, strength: 0.6 })
+      // Ambient update checks: a city reaches its Capgo region, which answers with a small pulse.
+      for (const trip of trips) {
+        const t = (now - trip.start) / trip.duration
+        const head = 1 - Math.pow(1 - Math.min(1, t), 3)
+        const fade = t > 1 ? 1 - (t - 1) / 0.5 : 1
+        const a = px(worldMapCities[trip.city])
+        const b = px(capgoRegions[trip.region])
+        drawArc(a, b, head, head - 0.4, 0.6 * fade, 1)
+        if (t < 1) drawPacket(arcPoint(a, b, head), 0.8)
+        if (t >= 1 && !trip.landed) {
+          trip.landed = true
+          ripples.push({ x: b.x, y: b.y, start: now, reach: 60, strength: 0.5 })
         }
       }
 
-      // Hovered city fans out to its nearest neighbours.
-      activeLinks.forEach((index, order) => {
-        const local = reducedMotion ? 1 : Math.min(1, Math.max(0, (now - activeSince - order * 70) / 650))
-        const p = 1 - Math.pow(1 - local, 3)
-        drawArc(activePin, index, p, 0, 0.5)
-      })
+      // Hovered city: solid route to its region with packets looping request → response.
+      if (activeCity >= 0) {
+        const a = px(worldMapCities[activeCity])
+        const b = px(capgoRegions[cityRoute[activeCity].region])
+        const grow = reducedMotion ? 1 : Math.min(1, (now - activeSince) / 450)
+        drawArc(a, b, 1 - Math.pow(1 - grow, 3), 0, 0.85, 1.6)
+        if (!reducedMotion && grow >= 1) {
+          const loop = ((now - activeSince - 450) % 1600) / 1600
+          const t = loop < 0.5 ? loop * 2 : 2 - loop * 2
+          drawPacket(arcPoint(a, b, t), 1)
+        }
+        drawCityMarker(a, now)
+      }
 
-      const busy =
-        !reducedMotion && (visible || ripples.length > 0 || Math.abs(eased.presence - presenceTarget) > 0.005 || Math.hypot(target.x - eased.x, target.y - eased.y) > 0.5)
+      const busy = !reducedMotion && (visible || ripples.length > 0 || Math.abs(eased.presence - presenceTarget) > 0.005 || Math.hypot(tx - eased.x, ty - eased.y) > 0.5)
       if (busy && visible) kick()
     }
 
@@ -301,16 +359,16 @@ const { width, height } = worldMapSize
       pointer.clientY = event.clientY
       const { x, y } = localPointer()
       if (!reducedMotion) ripples.push({ x, y, start: performance.now(), reach: 520, strength: 0.9 })
-      // Touch has no hover: a tap near a city shows its label and arcs for a moment.
+      // Touch has no hover: a tap near a city shows its route for a moment.
       if (!finePointer) {
-        const pin = nearestPin(x, y)
-        if (pin >= 0) {
-          setActivePin(pin, performance.now())
-          clearTimeout(touchPinTimer)
-          touchPinTimer = window.setTimeout(() => {
-            setActivePin(-1, performance.now())
+        const city = nearestCity(x, y, CITY_HIT * 1.6)
+        if (city >= 0) {
+          setActiveCity(city, performance.now())
+          clearTimeout(touchTimer)
+          touchTimer = window.setTimeout(() => {
+            setActiveCity(-1, performance.now())
             kick()
-          }, 2600)
+          }, 3200)
         }
       }
       kick()
@@ -331,7 +389,8 @@ const { width, height } = worldMapSize
       new ResizeObserver(resize).observe(canvas)
       new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting
-        if (visible) kick()
+        if (!visible) setActiveCity(-1, performance.now())
+        kick()
       }).observe(root)
       document.addEventListener('visibilitychange', () => {
         visible = document.visibilityState === 'visible'
@@ -381,16 +440,16 @@ const { width, height } = worldMapSize
     translate: -50% -50%;
   }
   .map-pin i {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     background: #44bcff;
     box-shadow: 0 0 8px rgb(68 188 255 / 0.8);
-    opacity: 0.25;
+    opacity: 0.45;
     transition:
       scale 0.25s ease,
       box-shadow 0.25s ease;
     animation: pin-dot 7s ease-in-out infinite both;
-    animation-delay: calc(var(--i) * 0.5s);
+    animation-delay: calc(var(--i) * 0.7s);
   }
   .map-pin::before {
     width: 26px;
@@ -398,27 +457,7 @@ const { width, height } = worldMapSize
     border: 1.5px solid rgb(68 188 255 / 0.7);
     opacity: 0;
     animation: pin-ring 7s ease-out infinite both;
-    animation-delay: calc(var(--i) * 0.5s);
-  }
-  .map-label {
-    position: absolute;
-    left: 0;
-    bottom: 12px;
-    translate: -50% 4px;
-    padding: 3px 9px;
-    border: 1px solid rgb(68 188 255 / 0.35);
-    border-radius: 999px;
-    background: rgb(8 15 30 / 0.85);
-    backdrop-filter: blur(6px);
-    color: #e2f3ff;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.4;
-    white-space: nowrap;
-    opacity: 0;
-    transition:
-      opacity 0.2s ease,
-      translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation-delay: calc(var(--i) * 0.7s);
   }
   .map-pin.is-active i {
     animation: none;
@@ -431,14 +470,69 @@ const { width, height } = worldMapSize
   .map-pin.is-active::before {
     animation: pin-ring 1.6s ease-out infinite both;
   }
-  .map-pin.is-active .map-label {
+  :global(.map-tip) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 40;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+    align-items: baseline;
+    margin-top: 16px;
+    padding: 8px 12px;
+    border: 1px solid rgb(68 188 255 / 0.35);
+    border-radius: 12px;
+    background: rgb(8 15 30 / 0.88);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+    color: #e2f3ff;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 12px;
+    line-height: 1.35;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, 4px);
+    transition:
+      opacity 0.18s ease,
+      transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  :global(.map-tip.is-visible) {
     opacity: 1;
-    translate: -50% 0;
+    transform: translate(-50%, 0);
+  }
+  :global(.map-tip strong) {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+  :global(.map-tip .map-tip-route) {
+    grid-row: 2;
+    grid-column: 1;
+    color: #9fb4cc;
+  }
+  :global(.map-tip .map-tip-ms) {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: #44bcff;
+  }
+  :global(.map-tip .map-tip-note) {
+    grid-column: 1 / span 2;
+    margin-top: 2px;
+    font-size: 10px;
+    color: #6b7f96;
   }
   @keyframes pin-dot {
     0%,
     100% {
-      opacity: 0.25;
+      opacity: 0.45;
     }
     6%,
     30% {
@@ -466,11 +560,11 @@ const { width, height } = worldMapSize
       animation: none;
     }
     .map-pin i {
-      opacity: 0.7;
+      opacity: 0.8;
     }
     .map-raster,
     .map-live,
-    .map-label {
+    :global(.map-tip) {
       transition: none;
     }
   }
