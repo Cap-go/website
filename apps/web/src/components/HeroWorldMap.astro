@@ -185,14 +185,14 @@ const { width, height } = worldMapSize
         hud.classList.toggle('is-visible', key !== '')
         if (key) {
           const parts: Node[] = []
-          if (hint) parts.push(el('span', 'map-hud-muted', finePointer ? 'Click anywhere to get an update' : 'Tap the map to get an update'))
+          if (hint) parts.push(el('span', 'map-hud-muted map-hud-text', finePointer ? 'Click anywhere to get an update' : 'Tap the map to get an update'))
           else {
             const city = worldMapCities[focus]
             const route = cityRoute[focus]
-            parts.push(el('strong', '', ping?.you ? `You · ${city.name}` : city.name))
+            parts.push(el('strong', 'map-hud-text', ping?.you ? `You · ${city.name}` : city.name))
             if (!ping) parts.push(el('span', 'map-hud-muted', finePointer ? 'click to get an update' : 'tap to get an update'))
             else {
-              parts.push(el('span', '', `→ Capgo ${capgoRegions[route.region].name}`))
+              parts.push(el('span', 'map-hud-text', `→ Capgo ${capgoRegions[route.region].name}`))
               if (!done) parts.push(el('span', 'map-hud-ms is-pending', 'checking…'))
               else
                 parts.push(
@@ -350,7 +350,11 @@ const { width, height } = worldMapSize
         const doneAt = ping.start + (reducedMotion ? 0 : PING_LEG * 2)
         if (ping.sticky === 'hover' ? hoverCity !== ping.city : now > doneAt + PING_HOLD) {
           // Touch has no hover, so after the visitor's own update, hint that the map is tappable.
-          if (ping.you && !finePointer) touchHintUntil = now + 5000
+          if (ping.you && !finePointer) {
+            touchHintUntil = now + 5000
+            // Reduced motion has no running loop, so make sure a frame clears the hint.
+            window.setTimeout(kick, 5050)
+          }
           ping = null
         }
       }
@@ -630,7 +634,6 @@ const { width, height } = worldMapSize
     gap: 8px;
     max-width: calc(100vw - 32px);
     overflow: hidden;
-    text-overflow: ellipsis;
     padding: 5px 12px;
     border: 1px solid rgb(68 188 255 / 0.25);
     border-radius: 999px;
@@ -651,6 +654,16 @@ const { width, height } = worldMapSize
   :global(.map-hud.is-visible) {
     opacity: 1;
     transform: translate(-50%, 0);
+  }
+  :global(.map-hud > *) {
+    flex: none;
+  }
+  /* Names and route text give up space first and truncate; the time stays whole. */
+  :global(.map-hud > .map-hud-text) {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   :global(.map-hud strong) {
     font-weight: 600;
