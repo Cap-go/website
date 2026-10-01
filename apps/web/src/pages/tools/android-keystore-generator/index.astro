@@ -2,31 +2,225 @@
 import Layout from '@/layouts/Layout.astro'
 import ToolCatalog from '@/components/tools/ToolCatalog.astro'
 import ToolFaq from '@/components/tools/ToolFaq.astro'
-import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import ToolCodeBlock from '@/components/tools/ToolCodeBlock.astro'
+import ToolHowTo from '@/components/tools/ToolHowTo.astro'
+import ToolRelatedLinks from '@/components/tools/ToolRelatedLinks.astro'
+import { createFAQPageLdJson, createHowToLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
-const title = 'Android Keystore Generator | Free PKCS#12 Signing Keystore'
-const description = 'Generate an Android signing keystore in PKCS#12 format, choose the alias, and download the certificate summary for Play Store or CI release workflows.'
+const title = 'Android Keystore Generator: Create a Release Keystore Online'
+const description =
+  'Free Android keystore generator. Create a PKCS#12 release keystore online without Android Studio, get SHA-1 and SHA-256 fingerprints, and sign for Google Play.'
 
 const faqItems = [
   {
-    question: 'What file format does this Android keystore generator produce?',
+    question: 'What is an Android keystore?',
     answer:
-      'It produces a PKCS#12 keystore with a single signing identity plus a PEM certificate export. Modern Android tooling accepts PKCS#12, and if you need a classic JKS container later you can convert it with keytool.',
+      'An Android keystore is a password-protected file that holds the private key and certificate used to sign your APK or Android App Bundle. Android and Google Play use that signature to verify that every update comes from the same developer, so the same key must sign all future releases of the app.',
   },
   {
-    question: 'Should the store password and key password be different?',
-    answer: 'This generator uses one password for the PKCS#12 container. In Gradle or CI you can reuse the same value for both the store password and the key password.',
+    question: 'How do I generate an Android keystore online without Android Studio?',
+    answer:
+      'Fill in your name, email, country code, a key alias, a validity period, and a password in the form above, then select Generate keystore. You get a ready-to-use .p12 keystore, a PEM copy of the certificate, and the SHA-1 and SHA-256 fingerprints. No Android Studio, JDK, or keytool install is needed.',
+  },
+  {
+    question: 'What file format does this Android keystore generator produce?',
+    answer:
+      'It produces a PKCS#12 (.p12) keystore with a single RSA 2048-bit signing key and a SHA-256 signed certificate, plus a PEM certificate export. PKCS#12 is the default keystore type since Java 9 and is accepted by Gradle, apksigner, jarsigner, and Google Play. If an older tool needs a JKS file, convert it with keytool -importkeystore.',
+  },
+  {
+    question: 'Is it safe to generate a keystore online? Is my key stored?',
+    answer:
+      'The keystore is generated on demand by a stateless Capgo endpoint over HTTPS and returned straight to your browser. Responses are sent with Cache-Control: no-store, and the private key, password, and files are never written to a database or kept after the response. If your security policy requires keys that never leave your machine, use the equivalent keytool command shown on this page.',
   },
   {
     question: 'Can I use this keystore for Google Play releases?',
     answer:
-      'Yes. It is suitable for release signing, internal testing, and direct distribution. If your app is already enrolled in Play App Signing, keep the original upload key stored securely because Google expects continuity across future releases.',
+      'Yes. Use it as the upload key for a new app enrolled in Play App Signing, or as the app signing key for direct APK distribution. Google Play requires the certificate to be valid until at least 22 October 2033, which the default 25-year validity covers.',
   },
   {
-    question: 'What metadata should I save with the keystore?',
+    question: 'Should the store password and key password be different?',
     answer:
-      'Store the keystore file, alias, password, SHA-1 fingerprint, and SHA-256 fingerprint together in your secure team documentation so future releases are not blocked by missing signing details.',
+      'No. PKCS#12 keystores use one password for the container and the key. In Gradle, the Capacitor CLI, fastlane, or Capgo Cloud Build, enter the same value for both the store password and the key password.',
+  },
+  {
+    question: 'What validity period should I choose?',
+    answer:
+      'Keep the default of 25 years. Google recommends at least 25 years, and Google Play rejects uploads signed with a certificate that expires before 22 October 2033. You cannot extend the validity of an existing key later.',
+  },
+  {
+    question: 'What happens if I lose my keystore or password?',
+    answer:
+      'If your app uses Play App Signing, you can ask Google to reset the upload key from Play Console by generating a new keystore here and uploading its PEM certificate. Without Play App Signing, a lost key means you cannot publish updates to the same app listing, so back up the file, alias, and password in a secret manager.',
+  },
+  {
+    question: 'Do I need this tool for a debug keystore?',
+    answer:
+      'Usually not. The Android SDK creates a debug keystore automatically at ~/.android/debug.keystore with the password android and the alias androiddebugkey. Use this generator for release and upload keys that must stay stable across store releases.',
+  },
+  {
+    question: 'Where do I find the SHA-1 and SHA-256 fingerprints?',
+    answer:
+      'They are shown in the result panel right after generation. Register them with Firebase, Google Sign-In, Google Maps, or Android App Links (assetlinks.json). Note that once Play App Signing re-signs your app, Google services also need the app signing key fingerprint from Play Console.',
+  },
+  {
+    question: 'Does it work for Capacitor, Ionic, React Native, and Flutter apps?',
+    answer:
+      'Yes. A keystore is framework independent. Any Android build that uses Gradle can sign with it, including Capacitor, Ionic, React Native, Flutter, and native Kotlin or Java projects.',
+  },
+]
+
+const howToSteps = [
+  {
+    name: 'Enter the certificate details',
+    text: 'Add your full name, email, and two-letter country code. Organization, unit, city, and state are optional and only appear in the certificate subject.',
+  },
+  {
+    name: 'Choose an alias, validity, and password',
+    text: 'Pick a simple alias such as release or upload, keep the 25-year validity, and set a strong password of at least 8 characters. Write all three down before you continue.',
+  },
+  {
+    name: 'Generate and download the keystore',
+    text: 'Select Generate keystore, then download the .p12 keystore and the PEM certificate. Copy the SHA-1 and SHA-256 fingerprints from the result panel.',
+  },
+  {
+    name: 'Back up the keystore and credentials',
+    text: 'Store the keystore file, alias, and password together in a password manager or secret manager. Never commit the keystore to Git.',
+  },
+  {
+    name: 'Configure signing in your build',
+    text: 'Point Gradle, the Capacitor CLI, fastlane, or Capgo Cloud Build at the keystore with the alias and password, then build a signed release AAB or APK.',
+  },
+  {
+    name: 'Upload the signed app to Google Play',
+    text: 'Upload the signed Android App Bundle in Play Console. With Play App Signing, this keystore becomes your upload key and Google manages the final app signing key.',
+  },
+]
+
+const keytoolCommand = `keytool -genkeypair -v \\
+  -storetype PKCS12 \\
+  -keystore release.p12 \\
+  -alias release \\
+  -keyalg RSA -keysize 2048 \\
+  -validity 9125 \\
+  -dname "CN=Jane Doe, O=Acme Mobile, C=DE"`
+
+const gradleSnippet = `// android/app/build.gradle
+android {
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_STORE_PASSWORD
+            storeType "pkcs12"
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+# ~/.gradle/gradle.properties (keep out of Git)
+RELEASE_STORE_FILE=/path/to/release.p12
+RELEASE_STORE_PASSWORD=your-password
+RELEASE_KEY_ALIAS=release`
+
+const capacitorSnippet = `bunx cap build android \\
+  --keystorepath ./release.p12 \\
+  --keystorepass "your-password" \\
+  --keystorealias release \\
+  --keystorealiaspass "your-password" \\
+  --androidreleasetype AAB`
+
+const capgoSnippet = `bunx @capgo/cli@latest build credentials save \\
+  --platform android \\
+  --keystore ./release.p12 \\
+  --keystore-alias release \\
+  --keystore-key-password "your-password" \\
+  --keystore-store-password "your-password"`
+
+const fastlaneSnippet = `gradle(
+  task: "bundle",
+  build_type: "Release",
+  properties: {
+    "android.injected.signing.store.file" => ENV["RELEASE_STORE_FILE"],
+    "android.injected.signing.store.password" => ENV["RELEASE_STORE_PASSWORD"],
+    "android.injected.signing.key.alias" => ENV["RELEASE_KEY_ALIAS"],
+    "android.injected.signing.key.password" => ENV["RELEASE_STORE_PASSWORD"],
+  }
+)`
+
+const verifySnippet = `# Inspect the keystore, alias, and fingerprints
+keytool -list -v -keystore release.p12 -storetype PKCS12
+
+# Convert to JKS if an older tool requires it
+keytool -importkeystore \\
+  -srckeystore release.p12 -srcstoretype PKCS12 \\
+  -destkeystore release.jks -deststoretype JKS
+
+# Base64-encode the keystore for a CI secret
+base64 -i release.p12 | tr -d '\\n' > release.p12.base64`
+
+const troubleshooting = [
+  {
+    error: 'Keystore was tampered with, or password was incorrect',
+    fix: 'The store password is wrong. Copy it again from your password manager and check for trailing spaces in CI secrets.',
+  },
+  {
+    error: "No key with alias 'release' found in keystore",
+    fix: 'The alias does not match. Run keytool -list on the keystore to see the exact alias, which is case sensitive.',
+  },
+  {
+    error: 'Given final block not properly padded',
+    fix: 'The key password is wrong. With PKCS#12 keystores, the key password must equal the store password.',
+  },
+  {
+    error: 'Invalid keystore format',
+    fix: 'An older Java 8 toolchain is reading a PKCS#12 file as JKS. Set storeType "pkcs12" in Gradle or convert the file to JKS with keytool -importkeystore.',
+  },
+  {
+    error: 'Your Android App Bundle is signed with the wrong key',
+    fix: 'Google Play expects the original upload key. Sign with that key, or request an upload key reset in Play Console using the PEM certificate from a new keystore.',
+  },
+  {
+    error: 'Google Sign-In or Firebase Auth fails only in release builds',
+    fix: 'Add the release SHA-1 and SHA-256 fingerprints to Firebase, and also the Play App Signing key fingerprints from Play Console.',
+  },
+]
+
+const relatedLinks = [
+  {
+    title: 'Capgo Cloud Build for Android',
+    description: 'Build signed Android APKs and AABs in the cloud and upload them to Google Play without a local Android Studio setup.',
+    path: 'native-build',
+  },
+  {
+    title: 'Save Android signing credentials',
+    description: 'Store your keystore, alias, and passwords once and reuse them for every cloud build.',
+    path: 'docs/builder/credentials',
+  },
+  {
+    title: 'Automatic Capacitor Android build with GitHub Actions',
+    description: 'Wire the keystore into a GitHub Actions workflow that signs and ships every release.',
+    path: 'blog/automatic-capacitor-android-build-github-action',
+  },
+  {
+    title: 'How to resolve Android build errors in Capacitor',
+    description: 'Fix Gradle, signing, and dependency errors that block Capacitor Android releases.',
+    path: 'blog/how-to-resolve-android-build-errors-in-capacitor',
+  },
+  {
+    title: 'Google Play compliance: key update strategies',
+    description: 'Plan key rotation and upload key resets without breaking updates for existing users.',
+    path: 'blog/google-play-compliance-key-update-strategies',
+  },
+  {
+    title: 'Install an APK with adb',
+    description: 'Sideload a signed APK on a real device to test the release build before you upload it.',
+    path: 'blog/adb-install-apk',
   },
 ]
 
@@ -54,6 +248,15 @@ const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
   url: Astro.url.href,
 })
 
+const howToLdJson = createHowToLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  name: 'How to generate an Android keystore online',
+  description: 'Create a PKCS#12 Android release keystore, back it up, and use it to sign an app for Google Play.',
+  totalTime: 'PT2M',
+  tools: ['Web browser'],
+  steps: howToSteps,
+})
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, softwareApplication, {
   includeOrganization: true,
   includeBreadcrumbs: true,
@@ -62,13 +265,14 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, softwareAppl
     { name: 'Tools', url: new URL('/tools/', Astro.locals.runtimeConfig.public.baseUrl).toString() },
     { name: 'Android Keystore Generator', url: Astro.url.href },
   ],
-  additionalEntities: [faqLdJson, webPage],
+  additionalEntities: [faqLdJson, howToLdJson, webPage],
 })
 
 const content = {
   title,
   description,
-  keywords: 'android keystore generator, release keystore generator, play store keystore, pkcs12 keystore, android signing key, generate android upload key',
+  keywords:
+    'android keystore generator, generate android keystore online, create keystore online, android keystore generator online, release keystore generator, play store upload key, pkcs12 keystore, android signing key, keystore without android studio, capacitor android keystore',
   ldJSON,
 }
 ---
@@ -85,9 +289,10 @@ const content = {
       <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <p class="text-sm font-semibold tracking-[0.3em] text-emerald-300 uppercase">Android signing</p>
-          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Generate an Android signing keystore and fingerprint summary</h1>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Android Keystore Generator</h1>
           <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-            Create a PKCS#12 signing keystore for release builds, save the alias and fingerprints, and hand the output directly to Gradle, CI, or a cloud build provider.
+            Generate an Android keystore online in seconds, without Android Studio or keytool. Get a PKCS#12 release keystore, the PEM certificate, and the SHA-1 and SHA-256
+            fingerprints, ready for Gradle, Capacitor, fastlane, CI, and Google Play.
           </p>
 
           <div class="mt-8 grid gap-4 sm:grid-cols-3">
@@ -96,8 +301,8 @@ const content = {
               <p class="mt-2 text-sm font-semibold text-white">PKCS#12</p>
             </div>
             <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
-              <p class="text-xs tracking-[0.25em] text-emerald-300 uppercase">Identity</p>
-              <p class="mt-2 text-sm font-semibold text-white">Single release alias</p>
+              <p class="text-xs tracking-[0.25em] text-emerald-300 uppercase">Key</p>
+              <p class="mt-2 text-sm font-semibold text-white">RSA 2048, SHA-256</p>
             </div>
             <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
               <p class="text-xs tracking-[0.25em] text-emerald-300 uppercase">Fingerprints</p>
@@ -113,10 +318,10 @@ const content = {
               Generate keystore now
             </a>
             <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/troubleshooting')}
+              href="#troubleshooting"
               class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-emerald-300/60 hover:bg-white/5"
             >
-              Review signing troubleshooting
+              Fix keystore errors
             </a>
           </div>
         </div>
@@ -291,31 +496,113 @@ const content = {
   </section>
 
   <section class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <article class="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-emerald-300 uppercase">Basics</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">What is an Android keystore?</h2>
+        <div class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
+          <p>
+            An Android keystore is a password-protected file that contains the private key and certificate used to sign your app. Every APK and Android App Bundle must be
+            signed before it can be installed or published, and Android only accepts an update when it is signed with the same key as the version already installed.
+          </p>
+          <p>
+            That makes the keystore one of the most important files in your project. With Play App Signing it acts as your <strong class="text-white">upload key</strong>, which
+            Google checks before re-signing your app. Without Play App Signing it is the <strong class="text-white">app signing key</strong> itself, and losing it means you can
+            no longer update the app.
+          </p>
+          <p>
+            This generator creates a PKCS#12 (.p12) keystore with an RSA 2048-bit key and a SHA-256 certificate, the same output as <code class="text-emerald-200">keytool</code>
+            and the Android Studio signing wizard, with a 25-year default validity that meets Google Play requirements.
+          </p>
+        </div>
+      </article>
+
+      <article class="rounded-3xl border border-emerald-400/20 bg-emerald-400/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-emerald-300 uppercase">Security and privacy</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">How your keystore is generated</h2>
+        <ul class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
+          <li>The keystore is created on demand by a stateless Capgo endpoint over HTTPS and returned directly to your browser as a download.</li>
+          <li>Responses are sent with <code class="text-emerald-200">Cache-Control: no-store</code>. The private key, password, and files are never saved to a database or kept after the response.</li>
+          <li>The keystore is protected with your password using AES-256 encryption inside the PKCS#12 container.</li>
+          <li>No account or sign-up is required, and requests are rate limited to prevent abuse.</li>
+        </ul>
+        <p class="mt-6 text-sm leading-7 text-slate-300">
+          Need a key that never leaves your machine? Run the equivalent <code class="text-emerald-200">keytool</code> command locally. It produces the same kind of keystore.
+        </p>
+        <ToolCodeBlock label="Equivalent keytool command" code={keytoolCommand} />
+      </article>
+    </div>
+  </section>
+
+  <ToolHowTo
+    accent="emerald"
+    title="How to generate an Android keystore online"
+    intro="From an empty form to a signed release on Google Play in six steps. The first three take less than a minute."
+    steps={howToSteps}
+  />
+
+  <section id="use-keystore" class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-6 md:grid-cols-3">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-[0.25em] text-emerald-300 uppercase">Use the output</p>
+        <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">Sign your Android app with the generated keystore</h2>
+        <p class="mt-4 text-base leading-7 text-slate-300">
+          Replace the alias and password with the values you entered above. Because the keystore is PKCS#12, the key password is the same as the store password.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
         <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
-          <h2 class="text-2xl font-bold text-white">Play upload key setup</h2>
-          <p class="mt-4 text-sm leading-7 text-slate-300">
-            Use the generated keystore as your upload key for new apps or for internal testing pipelines that still sign artifacts before store submission.
-          </p>
+          <h3 class="text-xl font-bold text-white">Gradle signing config</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">Works for Capacitor, Ionic, React Native, Flutter, and native projects. Keep passwords in gradle.properties or environment variables.</p>
+          <ToolCodeBlock label="android/app/build.gradle" code={gradleSnippet} />
         </article>
         <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
-          <h2 class="text-2xl font-bold text-white">Fingerprint reuse</h2>
-          <p class="mt-4 text-sm leading-7 text-slate-300">
-            The SHA-1 and SHA-256 values are useful for APIs that require signing identity registration, including Google services and enterprise integrations.
+          <h3 class="text-xl font-bold text-white">Capacitor CLI</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">Build a signed Android App Bundle for a Capacitor app in one command.</p>
+          <ToolCodeBlock label="Capacitor signed build" code={capacitorSnippet} />
+          <h3 class="mt-8 text-xl font-bold text-white">Capgo Cloud Build</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">
+            Save the keystore once and let <a class="text-emerald-200 underline decoration-emerald-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}>Capgo Cloud Build</a> sign and upload every release.
           </p>
+          <ToolCodeBlock label="Capgo CLI" code={capgoSnippet} />
         </article>
         <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
-          <h2 class="text-2xl font-bold text-white">Recoverability</h2>
-          <p class="mt-4 text-sm leading-7 text-slate-300">
-            Store the generated bundle in a team-managed vault. Android signing outages usually happen because the alias or keystore password disappears after the first release.
-          </p>
+          <h3 class="text-xl font-bold text-white">fastlane</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">Inject signing properties into the Gradle action from CI secrets.</p>
+          <ToolCodeBlock label="Fastfile" code={fastlaneSnippet} />
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-xl font-bold text-white">Verify, convert, and store in CI</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">Check the alias and fingerprints, convert to JKS for legacy tools, or encode the file for a CI secret.</p>
+          <ToolCodeBlock label="keytool and base64" code={verifySnippet} />
         </article>
       </div>
     </div>
   </section>
 
-  <ToolFaq items={faqItems} intro="Use this section to validate the container format, password handling, and release assumptions before you wire the keystore into a build job." />
+  <section id="troubleshooting" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-[0.25em] text-emerald-300 uppercase">Troubleshooting</p>
+        <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">Common Android keystore errors and fixes</h2>
+      </div>
+      <dl class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          troubleshooting.map((item) => (
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <dt class="font-mono text-sm font-semibold text-rose-200">{item.error}</dt>
+              <dd class="mt-3 text-sm leading-7 text-slate-300">{item.fix}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <ToolFaq items={faqItems} title="Android keystore generator FAQ" intro="Answers about keystore formats, passwords, validity, Google Play upload keys, and what to do if a key is lost." />
+
+  <ToolRelatedLinks title="Android signing and release guides" links={relatedLinks} />
 
   <ToolCatalog current="android-keystore-generator" />
   </div>
