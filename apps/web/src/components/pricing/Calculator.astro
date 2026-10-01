@@ -277,9 +277,9 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
             'Accept-Encoding': 'gzip, zlib, deflate, zstd, br',
           },
           body: JSON.stringify({
-            mau: mau.toString(),
-            bandwidth: bandwidthBytes.toString(),
-            storage: storageBytes.toString(),
+            mau: Math.round(mau),
+            bandwidth: Math.round(bandwidthBytes),
+            storage: Math.round(storageBytes),
           }),
         })
 

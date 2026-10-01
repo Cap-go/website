@@ -131,8 +131,8 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     return plans.find((plan) => plan.id === selectedPlanId) || recommendPlan(plans, usage, isYearlyBilling())
   }
 
-  async function fetchCreditCost(usage: ReturnType<typeof deriveUsage>) {
-    const payload = usageToCreditPayload(usage)
+  async function fetchCreditCost(usage: ReturnType<typeof deriveUsage>, plan: PricingPlan | null) {
+    const payload = usageToCreditPayload(usage, plan)
 
     const response = await fetch(`${config.apiBaseUrl}/private/credits`, {
       method: 'POST',
@@ -215,7 +215,7 @@ export function setupPricingCalculator(config: PricingCalculatorConfig) {
     debounceTimer = setTimeout(async () => {
       try {
         const yearly = isYearlyBilling()
-        const creditsCostMonthly = await fetchCreditCost(billableUsage)
+        const creditsCostMonthly = await fetchCreditCost(billableUsage, withPlan ? plan : null)
         const creditsCost = getCreditsAmount(creditsCostMonthly, yearly)
         const planCost = withPlan && plan ? getPlanBillingPrice(plan, yearly) : 0
 
