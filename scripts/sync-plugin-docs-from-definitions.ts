@@ -807,7 +807,10 @@ const getMemberEntries = (members: ts.NodeArray<ts.TypeElement>, context: Exampl
   }
   // When every option is optional, show the first simple one so the call still demonstrates something useful.
   if (entries.size === 0 && depth === 0) {
-    const candidates = properties.filter((member) => !isFunctionLike(member.type)).map((member) => [member.name.getText(), propertyValue(member, context, depth)] as const)
+    // Optional flags fall back to their documented default, else `false`: opt-ins (ignoreSilent, showNotification) stay off.
+    const optionalValue = (member: ts.PropertySignature) =>
+      member.type?.kind === ts.SyntaxKind.BooleanKeyword ? (getDocumentedLiteral(member) ?? 'false') : propertyValue(member, context, depth)
+    const candidates = properties.filter((member) => !isFunctionLike(member.type)).map((member) => [member.name.getText(), optionalValue(member)] as const)
     // Small flag/value bags (e.g. consent options) are only meaningful with every field set, so show them all.
     const isSimple = (value: string) => !value.includes('\n') && !value.startsWith('{') && !value.startsWith('[')
     if (candidates.length > 0 && candidates.length <= 5 && candidates.every(([, value]) => isSimple(value))) {

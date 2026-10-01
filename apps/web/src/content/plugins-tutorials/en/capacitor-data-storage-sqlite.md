@@ -59,7 +59,7 @@ import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-s
 await CapgoCapacitorDataStorageSqlite.openStore({
   database: 'database',
   table: 'table',
-  encrypted: true,
+  encrypted: false,
   mode: 'encryption',
   autoVacuum: 'none',
 });
@@ -107,7 +107,7 @@ import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-s
 await CapgoCapacitorDataStorageSqlite.deleteStore({
   database: 'database',
   table: 'table',
-  encrypted: true,
+  encrypted: false,
   mode: 'encryption',
   autoVacuum: 'none',
 });

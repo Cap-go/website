@@ -29,10 +29,10 @@ Configure the audio player.
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.configure({
-  focus: true,
-  background: true,
-  ignoreSilent: true,
-  showNotification: true,
+  focus: false,
+  background: false,
+  ignoreSilent: false,
+  showNotification: false,
   backgroundPlayback: false,
 });
 ```
