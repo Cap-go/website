@@ -6,6 +6,7 @@ import { spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, resolve } from 'node:path'
+import { capgoWordtypeSvg } from '../apps/web/src/config/capgoWordtype'
 import { capgoLogoTileSvg, type LogoTileStyle } from './lib/capgo-logo-tile'
 
 const width = 1536
@@ -421,6 +422,13 @@ function renderThematicPanel(image: BlogImage) {
   }
 }
 
+function blogLabel(x: number, y: number) {
+  // "Capgo" uses the outlined brand wordtype; "blog" stays live text sharing its cap height.
+  const capHeight = 16
+  const wordtype = capgoWordtypeSvg(x, y, capHeight, brand.dusk)
+  return `${wordtype.svg}${textLine('blog', x + wordtype.width + 6, y, { size: 20, color: brand.dusk, weight: 700, hanging: true })}`
+}
+
 function renderSvg(image: BlogImage) {
   const { padX, padY, leftWidth } = layout
   const logoSize = 80
@@ -468,7 +476,7 @@ function renderSvg(image: BlogImage) {
   <rect width="${width}" height="${height}" fill="url(#glow)"/>
   <rect x="${accentBandX}" y="0" width="${width - accentBandX}" height="${height}" fill="${image.accent}" opacity="0.05"/>
   ${capgoLogoTileSvg(padX, padY, logoSize, image.accent, logoTileStyle)}
-  ${textLine('Capgo blog', padX + logoSize + 20, padY + 34, { size: 20, color: brand.dusk, weight: 800, hanging: true })}
+  ${blogLabel(padX + logoSize + 20, padY + 34)}
   ${textLine(image.eyebrow.toUpperCase(), padX, eyebrowY, { size: eyebrowSize, color: image.accent, weight: 900, hanging: true })}
   ${titleSvg}
   ${chips(image.chips, padX, chipsY, leftWidth, image.accent)}

@@ -1272,49 +1272,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
      CAPGO BUILDER — /native-build/ redesign
      All rules scoped under .nb to avoid leaking into Header/Footer.
      ============================================================ */
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealLight.woff') format('woff');
-      font-weight: 300;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealBook.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealMedium.woff') format('woff');
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealBold.woff') format('woff');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealExtraBold.woff') format('woff');
-      font-weight: 800;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealBlack.woff') format('woff');
-      font-weight: 900;
-      font-style: normal;
-      font-display: swap;
-    }
-
     .nb {
       /* ---- tokens ---- */
       --terminal-bg: #0a0d14;
@@ -1328,7 +1285,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       --cap-blue-600: #2563eb;
       --cap-blue-700: #1d4ed8;
       /* Restrained system: one accent (blue) + neutrals.
-             Green only for literal success, red only for literal errors. */
+               Green only for literal success, red only for literal errors. */
       --nb-accent: #60a5fa;
       --nb-accent-strong: #93c5fd;
       --nb-accent-bg: rgba(96, 165, 250, 0.08);
@@ -1338,7 +1295,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       --nb-card-border: rgba(255, 255, 255, 0.09);
       --nb-card-border-hover: rgba(255, 255, 255, 0.18);
       --nb-radius: 16px;
-      --nb-font-display: 'Airbnb Cereal', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --nb-font-display: Satoshi, ui-sans-serif, system-ui, -apple-system, sans-serif;
       --nb-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
       position: relative;
@@ -1658,7 +1615,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-fg);
       white-space: pre-wrap;
       /* Fixed height, tall enough for the full build log, so it never grows/jumps
-           as lines stream in AND never shows a scrollbar. */
+             as lines stream in AND never shows a scrollbar. */
       height: 560px;
       overflow: hidden;
     }
@@ -3087,7 +3044,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       overflow: hidden;
       background: #ececee;
       color: #1d1d1f;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Airbnb Cereal', system-ui, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Satoshi, system-ui, sans-serif;
       font-size: 12px;
       line-height: 1.4;
       box-shadow:
