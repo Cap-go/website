@@ -608,6 +608,7 @@ const exampleString = (nameHint?: string) => {
   if (has('email')) return "'user@example.com'"
   if (has('phone')) return "'+15555550123'"
   if (has('currency')) return "'USD'"
+  if (has('scope')) return "'openid'"
   if (has('locale', 'language', 'lang')) return "'en-US'"
   if (has('country')) return "'US'"
   if (has('path', 'directory', 'folder', 'filename') || (last === 'file' && words.length === 1)) return "'path/to/file'"
@@ -745,8 +746,9 @@ const getMemberEntries = (members: ts.NodeArray<ts.TypeElement>, context: Exampl
   }
   // When every option is optional, show the first simple one so the call still demonstrates something useful.
   if (entries.size === 0 && depth === 0) {
-    const firstOptional = properties.find((member) => !isFunctionLike(member.type))
-    if (firstOptional) entries.set(firstOptional.name.getText(), propertyValue(firstOptional, context, depth))
+    const candidates = properties.filter((member) => !isFunctionLike(member.type)).map((member) => [member.name.getText(), propertyValue(member, context, depth)] as const)
+    const firstOptional = candidates.find(([, value]) => value !== '{}' && value !== '[]') ?? candidates[0]
+    if (firstOptional) entries.set(firstOptional[0], firstOptional[1])
   }
   return entries
 }

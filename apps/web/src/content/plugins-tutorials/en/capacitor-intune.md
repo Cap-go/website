@@ -46,7 +46,7 @@ Present the Microsoft sign-in flow and return an access token plus the account m
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-const result = await IntuneMAM.acquireToken({ scopes: ['scope'] });
+const result = await IntuneMAM.acquireToken({ scopes: ['openid'] });
 // The result holds sensitive values: use it without logging it.
 ```
 
@@ -58,7 +58,7 @@ Acquire a token from the MSAL cache for a previously signed-in user.
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
 const result = await IntuneMAM.acquireTokenSilent({
-  scopes: ['scope'],
+  scopes: ['openid'],
   accountId: 'account-id-123',
 });
 // The result holds sensitive values: use it without logging it.

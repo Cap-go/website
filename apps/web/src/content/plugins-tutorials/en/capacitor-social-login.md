@@ -28,7 +28,7 @@ Initialize the plugin.
 ```typescript
 import { SocialLogin } from '@capgo/capacitor-social-login';
 
-await SocialLogin.initialize({ oauth2: {} });
+await SocialLogin.initialize({ telegram: { botId: '123456789' } });
 ```
 
 ### `login`
