@@ -206,8 +206,8 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   },
   [LIVE_UPDATE_METRICS_PATH]: {
     methods: ['GET', 'HEAD'],
-    handle: async (request, env) => {
-      const response = await handleLiveUpdateMetrics(request, env)
+    handle: async (request, env, ctx) => {
+      const response = await handleLiveUpdateMetrics(request, env, ctx)
       if (request.method === 'HEAD')
         return new Response(null, { status: response.status, headers: response.headers })
       return response
@@ -215,8 +215,8 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   },
   [BUILDER_METRICS_PATH]: {
     methods: ['GET', 'HEAD'],
-    handle: async (request, env) => {
-      const response = await handleBuilderMetrics(request, env)
+    handle: async (request, env, ctx) => {
+      const response = await handleBuilderMetrics(request, env, ctx)
       if (request.method === 'HEAD')
         return new Response(null, { status: response.status, headers: response.headers })
       return response

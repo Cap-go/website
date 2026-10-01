@@ -1,6 +1,7 @@
 // Fetches the public facts shown in the homepage transparency section:
-// published GitHub security advisories and the latest releases of the core repos.
-// Writes apps/web/src/data/transparency.json; keeps the previous file if GitHub is unreachable.
+// published GitHub security advisories, the latest releases of the core repos, and a snapshot
+// of the live delivery metrics so the homepage never renders them empty before the client fetch.
+// Writes apps/web/src/data/transparency.json; keeps previous values when a source is unreachable.
 import { existsSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 
 const OUTPUT_PATH = new URL('../apps/web/src/data/transparency.json', import.meta.url).pathname
@@ -8,6 +9,7 @@ const GITHUB_TOKEN = process.env.PERSONAL_ACCESS_TOKEN ?? process.env.GITHUB_TOK
 const ADVISORY_REPOS = ['Cap-go/capgo', 'Cap-go/capacitor-updater', 'Cap-go/CLI']
 const RELEASE_REPOS = ['Cap-go/capgo', 'Cap-go/CLI', 'Cap-go/capacitor-updater']
 const RELEASE_LIMIT = 5
+const METRICS_ORIGIN = process.env.METRICS_ORIGIN ?? 'https://capgo.app'
 
 const headers: Record<string, string> = {
   Accept: 'application/vnd.github+json',
@@ -16,6 +18,58 @@ const headers: Record<string, string> = {
 }
 
 type Release = { repo: string; tag: string; url: string; publishedAt: string }
+type MetricsSnapshot = {
+  live: { success_rate: number; first_try_rate: number | null; rollback_rate: number | null; updated_at: string; daily: number[] } | null
+  builder: { success_rate: number; updated_at: string } | null
+}
+
+const rate = (value: unknown) => (typeof value === 'number' && Number.isFinite(value) ? value : null)
+
+async function fetchMetricsJson(path: string): Promise<Record<string, unknown> | null> {
+  try {
+    const response = await fetch(`${METRICS_ORIGIN}${path}`, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(60_000) })
+    if (!response.ok) throw new Error(`${response.status} ${path}`)
+    const data = (await response.json()) as Record<string, unknown>
+    return typeof data.updated_at === 'string' && rate(data.success_rate) !== null ? data : null
+  } catch (error) {
+    console.warn(`Could not refresh ${path}: ${(error as Error).message}`)
+    return null
+  }
+}
+
+async function fetchMetricsSnapshot(previous: MetricsSnapshot | undefined): Promise<MetricsSnapshot> {
+  const [live, builder] = await Promise.all([fetchMetricsJson('/live-update-metrics.json'), fetchMetricsJson('/builder-metrics.json')])
+  return {
+    live: live
+      ? {
+          success_rate: rate(live.success_rate) as number,
+          first_try_rate: rate(live.first_try_rate),
+          rollback_rate: rate(live.rollback_rate),
+          updated_at: live.updated_at as string,
+          daily: (Array.isArray(live.daily) ? live.daily : [])
+            .map((day: { success_rate?: unknown }) => rate(day?.success_rate))
+            .filter((value): value is number => value !== null),
+        }
+      : (previous?.live ?? null),
+    builder: builder ? { success_rate: rate(builder.success_rate) as number, updated_at: builder.updated_at as string } : (previous?.builder ?? null),
+  }
+}
+
+function readPrevious(): { metrics?: MetricsSnapshot } | null {
+  if (!existsSync(OUTPUT_PATH)) return null
+  try {
+    return JSON.parse(readFileSync(OUTPUT_PATH, 'utf8'))
+  } catch {
+    return null
+  }
+}
+
+function writeOutput(output: unknown) {
+  // Write to a temp file then rename, so an interrupted run never leaves a truncated cache.
+  const tmpPath = `${OUTPUT_PATH}.tmp`
+  writeFileSync(tmpPath, `${JSON.stringify(output, null, 2)}\n`)
+  renameSync(tmpPath, OUTPUT_PATH)
+}
 
 async function getJson<T>(url: string): Promise<{ data: T; next: string | null }> {
   const response = await fetch(url, { headers })
@@ -50,6 +104,8 @@ async function latestReleases(repo: string): Promise<Release[]> {
 }
 
 async function main() {
+  const previous = readPrevious()
+  const metrics = await fetchMetricsSnapshot(previous?.metrics)
   try {
     const advisories = await Promise.all(ADVISORY_REPOS.map(async (repo) => ({ repo, ...(await countPublishedAdvisories(repo)) })))
     const releases = (await Promise.all(RELEASE_REPOS.map(latestReleases)))
@@ -66,16 +122,14 @@ async function main() {
       updatedAt: new Date().toISOString(),
       advisories: { total: advisories.reduce((sum, repo) => sum + repo.total, 0), severities, repos: advisories },
       releases,
+      metrics,
     }
-    // Write to a temp file then rename, so an interrupted run never leaves a truncated cache.
-    const tmpPath = `${OUTPUT_PATH}.tmp`
-    writeFileSync(tmpPath, `${JSON.stringify(output, null, 2)}\n`)
-    renameSync(tmpPath, OUTPUT_PATH)
+    writeOutput(output)
     console.log(`Transparency data: ${output.advisories.total} published advisories, ${releases.length} releases.`)
   } catch (error) {
-    if (existsSync(OUTPUT_PATH)) {
-      console.warn(`Could not refresh transparency data, keeping the cached file: ${(error as Error).message}`)
-      JSON.parse(readFileSync(OUTPUT_PATH, 'utf8'))
+    if (previous) {
+      console.warn(`Could not refresh GitHub transparency data, keeping the cached values: ${(error as Error).message}`)
+      writeOutput({ ...previous, metrics })
       return
     }
     throw error
