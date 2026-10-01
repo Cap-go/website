@@ -27,8 +27,12 @@ const { width, height } = worldMapSize
   const BASE_ALPHA = 0.14
   const SPOT_RADIUS = 150
   const LENS_PUSH = 9
-  const CITY_HIT = 3.4 // map units
+  const CITY_HIT = 3.4 // map units, off land
+  const LAND_REACH = 14 // map units, on land
   const TRIP_MS = 1500
+  const PING_LEG = 750 // ms each way
+  const PING_HOLD = 4500 // how long a timed ping card stays after the result
+  const IDLE_MS = 4000
 
   const toRad = Math.PI / 180
   const distanceKm = (a: MapPoint, b: MapPoint) => {
@@ -60,11 +64,8 @@ const { width, height } = worldMapSize
     const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches
     const pinEls = Array.from(root.querySelectorAll<HTMLElement>('[data-pin]'))
 
-    // The tooltip lives on <body> so it stays above the hero copy instead of under it.
-    const tip = document.createElement('div')
-    tip.className = 'map-tip'
-    tip.setAttribute('aria-hidden', 'true')
-    document.body.append(tip)
+    // Map text goes to a fixed status line in the hero so it never covers the map or the copy.
+    const hud = hero.querySelector<HTMLElement>('[data-map-hud]')
 
     let dots = new Float32Array(0)
     let scale = 1
@@ -77,12 +78,25 @@ const { width, height } = worldMapSize
 
     const pointer = { clientX: 0, clientY: 0, inside: false }
     const eased = { x: 0, y: 0, presence: 0, primed: false }
-    let activeCity = -1
-    let activeSince = 0
-    let touchTimer = 0
     const ripples: Ripple[] = []
     const trips: Trip[] = []
     let nextTrip = 0
+
+    // Hover only names the city; a click (or tap) pings its Capgo region and reveals the latency.
+    type Ping = { city: number; start: number; you: boolean; sticky: 'hover' | 'timer'; landed?: boolean; returned?: boolean }
+    let hoverCity = -1
+    let hoverSince = 0
+    let ping: Ping | null = null
+    let pinRegion = -1
+    let hudKey = ''
+    let lastActivity = performance.now()
+    let idlePlayed = false
+
+    // Visitor's city from the browser time zone (no permission prompt), used once when the mouse goes idle.
+    const normalize = (value: string) => value.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+    const tzAliases: Record<string, string> = { calcutta: 'kolkata', kiev: 'kyiv', saigon: 'ho chi minh city', 'ho chi minh': 'ho chi minh city', rangoon: 'yangon' }
+    const tzCity = normalize((Intl.DateTimeFormat().resolvedOptions().timeZone || '').split('/').pop()?.replace(/_/g, ' ') ?? '')
+    const userCity = worldMapCities.findIndex((city) => normalize(city.name) === (tzAliases[tzCity] ?? tzCity))
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect()
@@ -102,11 +116,16 @@ const { width, height } = worldMapSize
 
     const px = (point: { x: number; y: number }) => ({ x: point.x * scale, y: point.y * scale })
 
-    const nearestCity = (x: number, y: number, hit: number) => {
+    // Any point on land maps to its nearest city so there are no dead zones; over the ocean only a close city counts.
+    const cityAt = (x: number, y: number, hit = CITY_HIT) => {
+      const ux = x / scale
+      const uy = y / scale
+      let onLand = false
+      for (let i = 0; i < dots.length && !onLand; i += 2) onLand = Math.abs(dots[i] - ux) < 1.1 && Math.abs(dots[i + 1] - uy) < 1.1
       let best = -1
-      let bestDist = hit * scale
+      let bestDist = onLand ? LAND_REACH : hit
       worldMapCities.forEach((city, index) => {
-        const d = Math.hypot(city.x * scale - x, city.y * scale - y)
+        const d = Math.hypot(city.x - ux, city.y - uy)
         if (d < bestDist) {
           best = index
           bestDist = d
@@ -115,37 +134,55 @@ const { width, height } = worldMapSize
       return best
     }
 
-    const setActiveCity = (index: number, now: number) => {
-      if (index === activeCity) return
-      const prevRegion = activeCity >= 0 ? cityRoute[activeCity].region : -1
-      const nextRegion = index >= 0 ? cityRoute[index].region : -1
-      if (prevRegion !== nextRegion) {
-        pinEls[prevRegion]?.classList.remove('is-active')
-        pinEls[nextRegion]?.classList.add('is-active')
+    const pingPhase = (now: number) => (ping ? (reducedMotion ? 1 : Math.min(1, (now - ping.start) / (PING_LEG * 2))) : 0)
+
+    const el = (tag: string, className: string, text: string) => {
+      const node = document.createElement(tag)
+      node.className = className
+      node.textContent = text
+      return node
+    }
+
+    const renderHud = (now: number) => {
+      const focus = ping ? ping.city : hoverCity
+      const done = ping ? pingPhase(now) >= 1 : false
+      const hint = !ping && focus < 0 && pointer.inside && finePointer
+      const key = ping ? `${done ? 'done' : 'ping'}:${focus}:${ping.you}` : focus >= 0 ? `hover:${focus}` : hint ? 'hint' : ''
+      if (hud && key !== hudKey) {
+        hudKey = key
+        hud.classList.toggle('is-visible', key !== '')
+        if (key) {
+          const parts: Node[] = []
+          if (hint) parts.push(el('span', 'map-hud-muted', 'Click any city to ping Capgo'))
+          else {
+            const city = worldMapCities[focus]
+            const route = cityRoute[focus]
+            parts.push(el('strong', '', ping?.you ? `You · ${city.name}` : city.name))
+            if (!ping) parts.push(el('span', 'map-hud-muted', finePointer ? 'click to ping' : 'tap to ping'))
+            else {
+              parts.push(el('span', '', `→ Capgo ${capgoRegions[route.region].name}`))
+              if (!done) parts.push(el('span', 'map-hud-ms is-pending', 'pinging…'))
+              else
+                parts.push(
+                  el('span', 'map-hud-ms is-done', `~${route.ms} ms`),
+                  el('span', 'map-hud-muted map-hud-note', `est. round trip · ${Math.round(route.km).toLocaleString('en-US')} km`),
+                )
+            }
+          }
+          const live = el('span', ping && !done ? 'map-hud-dot is-busy' : 'map-hud-dot', '')
+          hud.replaceChildren(live, ...parts)
+        }
       }
-      activeCity = index
-      activeSince = now
-      if (index < 0) {
-        tip.classList.remove('is-visible')
-        return
+      const region = focus >= 0 ? cityRoute[focus].region : -1
+      if (region !== pinRegion) {
+        pinEls[pinRegion]?.classList.remove('is-active')
+        pinEls[region]?.classList.add('is-active')
+        pinRegion = region
       }
-      const city = worldMapCities[index]
-      const route = cityRoute[index]
-      const region = capgoRegions[route.region]
-      tip.innerHTML = ''
-      const title = document.createElement('strong')
-      title.textContent = city.name
-      const line = document.createElement('span')
-      line.className = 'map-tip-route'
-      line.textContent = `→ Capgo ${region.name}`
-      const ms = document.createElement('span')
-      ms.className = 'map-tip-ms'
-      ms.textContent = `~${route.ms} ms`
-      const note = document.createElement('span')
-      note.className = 'map-tip-note'
-      note.textContent = `${Math.round(route.km).toLocaleString('en-US')} km · est. round trip`
-      tip.append(title, line, ms, note)
-      tip.classList.add('is-visible')
+    }
+
+    const startPing = (city: number, now: number, you: boolean, sticky: Ping['sticky']) => {
+      ping = { city, start: now, you, sticky }
     }
 
     // Quadratic arc lifted above the straight line, like a flight path.
@@ -187,9 +224,9 @@ const { width, height } = worldMapSize
       ctx.fill()
     }
 
-    const drawCityMarker = (point: { x: number; y: number }, now: number) => {
+    const drawCityMarker = (point: { x: number; y: number }, since: number, now: number) => {
       if (!ctx) return
-      const pulse = reducedMotion ? 0.5 : ((now - activeSince) % 1400) / 1400
+      const pulse = reducedMotion ? 0.5 : ((now - since) % 1400) / 1400
       ctx.strokeStyle = `rgba(255,255,255,${0.8 * (1 - pulse)})`
       ctx.lineWidth = 1.25
       ctx.beginPath()
@@ -207,17 +244,11 @@ const { width, height } = worldMapSize
       trips.push({ city, region: cityRoute[city].region, start: now, duration: TRIP_MS + Math.random() * 500 })
     }
 
-    const placeTip = (rect: DOMRect) => {
-      if (activeCity < 0) return
-      const city = worldMapCities[activeCity]
-      tip.style.translate = `${Math.round(rect.left + city.x * scale)}px ${Math.round(rect.top + city.y * scale)}px`
-    }
-
     const frame = (now: number) => {
       running = false
       if (!ctx || !ready) return
 
-      const { x: tx, y: ty, rect } = localPointer()
+      const { x: tx, y: ty } = localPointer()
       const presenceTarget = pointer.inside && finePointer ? 1 : 0
       if (!eased.primed || reducedMotion) {
         eased.x = tx
@@ -229,8 +260,22 @@ const { width, height } = worldMapSize
       }
       eased.presence = reducedMotion ? presenceTarget : eased.presence + (presenceTarget - eased.presence) * 0.09
 
-      if (finePointer) setActiveCity(pointer.inside ? nearestCity(tx, ty, CITY_HIT) : -1, now)
-      placeTip(rect)
+      if (finePointer) {
+        const next = pointer.inside ? cityAt(tx, ty) : -1
+        if (next !== hoverCity) {
+          hoverCity = next
+          hoverSince = now
+        }
+      }
+      if (ping) {
+        const doneAt = ping.start + (reducedMotion ? 0 : PING_LEG * 2)
+        if (ping.sticky === 'hover' ? hoverCity !== ping.city : now > doneAt + PING_HOLD) ping = null
+      }
+      if (!ping && !idlePlayed && userCity >= 0 && visible && now - lastActivity > IDLE_MS) {
+        idlePlayed = true
+        startPing(userCity, now, true, 'timer')
+      }
+      renderHud(now)
 
       if (!reducedMotion && visible && now >= nextTrip) {
         spawnTrip(now)
@@ -317,22 +362,38 @@ const { width, height } = worldMapSize
         }
       }
 
-      // Hovered city: solid route to its region with packets looping request → response.
-      if (activeCity >= 0) {
-        const a = px(worldMapCities[activeCity])
-        const b = px(capgoRegions[cityRoute[activeCity].region])
-        const grow = reducedMotion ? 1 : Math.min(1, (now - activeSince) / 450)
-        drawArc(a, b, 1 - Math.pow(1 - grow, 3), 0, 0.85, 1.6)
-        if (!reducedMotion && grow >= 1) {
-          const loop = ((now - activeSince - 450) % 1600) / 1600
-          const t = loop < 0.5 ? loop * 2 : 2 - loop * 2
+      if (ping) {
+        // Ping: packet flies to the region, region pulses, packet returns, then the card shows the latency.
+        const a = px(worldMapCities[ping.city])
+        const b = px(capgoRegions[cityRoute[ping.city].region])
+        const phase = pingPhase(now)
+        drawArc(a, b, 1, 0, 0.85, 1.6)
+        if (phase < 1) {
+          const leg = phase < 0.5 ? phase * 2 : 2 - phase * 2
+          const t = leg * leg * (3 - 2 * leg)
           drawPacket(arcPoint(a, b, t), 1)
         }
-        drawCityMarker(a, now)
+        if (phase >= 0.5 && !ping.landed) {
+          ping.landed = true
+          if (!reducedMotion) ripples.push({ x: b.x, y: b.y, start: now, reach: 80, strength: 0.8 })
+        }
+        if (phase >= 1 && !ping.returned) {
+          ping.returned = true
+          if (!reducedMotion) ripples.push({ x: a.x, y: a.y, start: now, reach: 60, strength: 0.6 })
+        }
+        drawCityMarker(a, ping.start, now)
+      } else if (hoverCity >= 0) {
+        // Hover: faint route preview only.
+        const a = px(worldMapCities[hoverCity])
+        const b = px(capgoRegions[cityRoute[hoverCity].region])
+        const grow = reducedMotion ? 1 : Math.min(1, (now - hoverSince) / 450)
+        drawArc(a, b, 1 - Math.pow(1 - grow, 3), 0, 0.35, 1)
+        drawCityMarker(a, hoverSince, now)
       }
 
       const busy = !reducedMotion && (visible || ripples.length > 0 || Math.abs(eased.presence - presenceTarget) > 0.005 || Math.hypot(tx - eased.x, ty - eased.y) > 0.5)
-      if (busy && visible) kick()
+      // Reduced motion still needs frames to expire pings and to fire the idle ping.
+      if ((busy || ping || !idlePlayed) && visible) kick()
     }
 
     function kick() {
@@ -345,6 +406,8 @@ const { width, height } = worldMapSize
       pointer.clientX = event.clientX
       pointer.clientY = event.clientY
       pointer.inside = true
+      lastActivity = performance.now()
+      if (ping?.you) ping = null
       kick()
     }
 
@@ -357,20 +420,12 @@ const { width, height } = worldMapSize
       if ((event.target as Element).closest('a, button, input, textarea, select, [role="button"]')) return
       pointer.clientX = event.clientX
       pointer.clientY = event.clientY
+      const now = performance.now()
+      lastActivity = now
       const { x, y } = localPointer()
-      if (!reducedMotion) ripples.push({ x, y, start: performance.now(), reach: 520, strength: 0.9 })
-      // Touch has no hover: a tap near a city shows its route for a moment.
-      if (!finePointer) {
-        const city = nearestCity(x, y, CITY_HIT * 1.6)
-        if (city >= 0) {
-          setActiveCity(city, performance.now())
-          clearTimeout(touchTimer)
-          touchTimer = window.setTimeout(() => {
-            setActiveCity(-1, performance.now())
-            kick()
-          }, 3200)
-        }
-      }
+      const city = cityAt(x, y, finePointer ? CITY_HIT : CITY_HIT * 1.6)
+      if (city >= 0) startPing(city, now, false, finePointer ? 'hover' : 'timer')
+      else if (!reducedMotion) ripples.push({ x, y, start: now, reach: 520, strength: 0.9 })
       kick()
     }
 
@@ -389,7 +444,6 @@ const { width, height } = worldMapSize
       new ResizeObserver(resize).observe(canvas)
       new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting
-        if (!visible) setActiveCity(-1, performance.now())
         kick()
       }).observe(root)
       document.addEventListener('visibilitychange', () => {
@@ -470,64 +524,82 @@ const { width, height } = worldMapSize
   .map-pin.is-active::before {
     animation: pin-ring 1.6s ease-out infinite both;
   }
-  :global(.map-tip) {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 40;
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 10px;
-    align-items: baseline;
-    margin-top: 16px;
-    padding: 8px 12px;
-    border: 1px solid rgb(68 188 255 / 0.35);
-    border-radius: 12px;
-    background: rgb(8 15 30 / 0.88);
+  :global(.map-hud) {
+    position: absolute;
+    left: 50%;
+    top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: calc(100vw - 32px);
+    padding: 5px 12px;
+    border: 1px solid rgb(68 188 255 / 0.25);
+    border-radius: 999px;
+    background: rgb(8 15 30 / 0.7);
     backdrop-filter: blur(8px);
-    box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
     color: #e2f3ff;
     font-family: Inter, system-ui, sans-serif;
     font-size: 12px;
-    line-height: 1.35;
+    line-height: 1.4;
     white-space: nowrap;
     pointer-events: none;
     opacity: 0;
-    transform: translate(-50%, 4px);
+    transform: translate(-50%, -4px);
     transition:
-      opacity 0.18s ease,
+      opacity 0.2s ease,
       transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  :global(.map-tip.is-visible) {
+  :global(.map-hud.is-visible) {
     opacity: 1;
     transform: translate(-50%, 0);
   }
-  :global(.map-tip strong) {
-    grid-column: 1;
-    grid-row: 1;
-    font-size: 13px;
-    font-weight: 700;
+  :global(.map-hud strong) {
+    font-weight: 600;
     color: #fff;
   }
-  :global(.map-tip .map-tip-route) {
-    grid-row: 2;
-    grid-column: 1;
-    color: #9fb4cc;
+  :global(.map-hud .map-hud-muted) {
+    color: #7f93aa;
   }
-  :global(.map-tip .map-tip-ms) {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    align-self: center;
+  :global(.map-hud .map-hud-dot) {
+    width: 6px;
+    height: 6px;
+    flex: none;
+    border-radius: 999px;
+    background: #44bcff;
+    box-shadow: 0 0 6px rgb(68 188 255 / 0.9);
+  }
+  :global(.map-hud .map-hud-dot.is-busy) {
+    animation: hud-pending 0.6s ease-in-out infinite alternate;
+  }
+  :global(.map-hud .map-hud-ms) {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 18px;
     font-weight: 700;
     color: #44bcff;
   }
-  :global(.map-tip .map-tip-note) {
-    grid-column: 1 / span 2;
-    margin-top: 2px;
-    font-size: 10px;
-    color: #6b7f96;
+  :global(.map-hud .map-hud-ms.is-pending) {
+    font-weight: 500;
+    color: #7f93aa;
+    animation: hud-pending 0.9s ease-in-out infinite alternate;
+  }
+  :global(.map-hud .map-hud-ms.is-done) {
+    display: inline-block;
+    animation: hud-pop 0.4s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+  }
+  @media (max-width: 639px) {
+    :global(.map-hud .map-hud-note) {
+      display: none;
+    }
+  }
+  @keyframes hud-pending {
+    to {
+      opacity: 0.35;
+    }
+  }
+  @keyframes hud-pop {
+    from {
+      opacity: 0;
+      scale: 0.6;
+    }
   }
   @keyframes pin-dot {
     0%,
@@ -564,8 +636,12 @@ const { width, height } = worldMapSize
     }
     .map-raster,
     .map-live,
-    :global(.map-tip) {
+    :global(.map-hud) {
       transition: none;
+    }
+    :global(.map-hud .map-hud-ms),
+    :global(.map-hud .map-hud-dot) {
+      animation: none;
     }
   }
 </style>
