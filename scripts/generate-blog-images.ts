@@ -6,7 +6,7 @@ import { spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, resolve } from 'node:path'
-import { capgoMarkSvg } from '../apps/web/src/config/capgoMark'
+import { capgoLogoTileSvg, type LogoTileStyle } from './lib/capgo-logo-tile'
 
 const width = 1536
 const height = 1024
@@ -238,16 +238,7 @@ function textLine(
   return `<text x="${x}" y="${y}"${baseline} text-anchor="${options.anchor ?? 'start'}" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="${options.size}" font-weight="${options.weight ?? 500}" fill="${options.color}" opacity="${options.opacity ?? 1}">${escapeText(text)}</text>`
 }
 
-function logoTile(x: number, y: number, size: number, accent: string) {
-  const markSize = size * 0.62
-  const markOffset = (size - markSize) / 2
-
-  return `
-    <rect x="${x + 8}" y="${y + 10}" width="${size}" height="${size}" rx="30" fill="#0f172a" opacity="0.14"/>
-    <rect x="${x}" y="${y}" width="${size}" height="${size}" rx="30" fill="#0f172a"/>
-    <rect x="${x + 6}" y="${y + 6}" width="${size - 12}" height="${size - 12}" rx="26" fill="${accent}" opacity="0.14"/>
-    ${capgoMarkSvg(x + markOffset, y + markOffset, markSize)}`
-}
+const logoTileStyle: LogoTileStyle = { radius: 30, innerRadius: 26, inset: 6, shadowX: 8, shadowY: 10, shadowOpacity: 0.14, accentOpacity: 0.14 }
 
 function chips(items: string[], x: number, y: number, maxWidth: number, accent: string) {
   const gap = 16
@@ -476,7 +467,7 @@ function renderSvg(image: BlogImage) {
   <rect width="${width}" height="${height}" fill="url(#dots)"/>
   <rect width="${width}" height="${height}" fill="url(#glow)"/>
   <rect x="${accentBandX}" y="0" width="${width - accentBandX}" height="${height}" fill="${image.accent}" opacity="0.05"/>
-  ${logoTile(padX, padY, logoSize, image.accent)}
+  ${capgoLogoTileSvg(padX, padY, logoSize, image.accent, logoTileStyle)}
   ${textLine('Capgo blog', padX + logoSize + 20, padY + 34, { size: 20, color: brand.dusk, weight: 800, hanging: true })}
   ${textLine(image.eyebrow.toUpperCase(), padX, eyebrowY, { size: eyebrowSize, color: image.accent, weight: 900, hanging: true })}
   ${titleSvg}

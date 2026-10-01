@@ -7,7 +7,7 @@ import { spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, resolve } from 'node:path'
-import { capgoMarkSvg } from '../apps/web/src/config/capgoMark'
+import { capgoLogoTileSvg, type LogoTileStyle } from './lib/capgo-logo-tile'
 
 const width = 2400
 const height = 1260
@@ -239,16 +239,7 @@ function textLine(
   return `<text x="${x}" y="${y}"${baseline} text-anchor="${options.anchor ?? 'start'}" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="${options.size}" font-weight="${options.weight ?? 500}" fill="${options.color}" opacity="${options.opacity ?? 1}">${escapeText(text)}</text>`
 }
 
-function logoTile(x: number, y: number, size: number, accent: string) {
-  const markSize = size * 0.62
-  const markOffset = (size - markSize) / 2
-
-  return `
-    <rect x="${x + 10}" y="${y + 14}" width="${size}" height="${size}" rx="42" fill="#0f172a" opacity="0.16"/>
-    <rect x="${x}" y="${y}" width="${size}" height="${size}" rx="42" fill="#0f172a"/>
-    <rect x="${x + 8}" y="${y + 8}" width="${size - 16}" height="${size - 16}" rx="36" fill="${accent}" opacity="0.12"/>
-    ${capgoMarkSvg(x + markOffset, y + markOffset, markSize)}`
-}
+const logoTileStyle: LogoTileStyle = { radius: 42, innerRadius: 36, inset: 8, shadowX: 10, shadowY: 14, shadowOpacity: 0.16, accentOpacity: 0.12 }
 
 function chips(items: string[], y: number, accent: string) {
   const gap = 24
@@ -419,7 +410,7 @@ function renderSvg(image: SocialImage) {
   <rect width="${width}" height="${height}" fill="url(#bg)"/>
   <rect width="${width}" height="${height}" fill="url(#dots)"/>
   <rect width="${width}" height="${height}" fill="url(#glow)"/>
-  ${logoTile(logoX, logoY, logoSize, image.accent)}
+  ${capgoLogoTileSvg(logoX, logoY, logoSize, image.accent, logoTileStyle)}
   ${textLine(image.eyebrow.toUpperCase(), width / 2, eyebrowY, { size: eyebrowSize, color: image.accent, weight: 900, anchor: 'middle', hanging: true })}
   ${titleSvg}
   ${subtitleSvg}
