@@ -808,8 +808,14 @@ const getMemberEntries = (members: ts.NodeArray<ts.TypeElement>, context: Exampl
   // When every option is optional, show the first simple one so the call still demonstrates something useful.
   if (entries.size === 0 && depth === 0) {
     const candidates = properties.filter((member) => !isFunctionLike(member.type)).map((member) => [member.name.getText(), propertyValue(member, context, depth)] as const)
-    const firstOptional = candidates.find(([, value]) => value !== '{}' && value !== '[]') ?? candidates[0]
-    if (firstOptional) entries.set(firstOptional[0], firstOptional[1])
+    // Small flag/value bags (e.g. consent options) are only meaningful with every field set, so show them all.
+    const isSimple = (value: string) => !value.includes('\n') && !value.startsWith('{') && !value.startsWith('[')
+    if (candidates.length > 0 && candidates.length <= 5 && candidates.every(([, value]) => isSimple(value))) {
+      for (const [key, value] of candidates) entries.set(key, value)
+    } else {
+      const firstOptional = candidates.find(([, value]) => value !== '{}' && value !== '[]') ?? candidates[0]
+      if (firstOptional) entries.set(firstOptional[0], firstOptional[1])
+    }
   }
   return entries
 }

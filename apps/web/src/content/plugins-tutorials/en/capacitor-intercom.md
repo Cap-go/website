@@ -57,7 +57,11 @@ Initialize Intercom with API keys at runtime. Use this if you prefer not to conf
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.loadWithKeys({ appId: 'app-id-123' });
+await CapgoIntercom.loadWithKeys({
+  appId: 'app-id-123',
+  apiKeyIOS: 'api-key-ios',
+  apiKeyAndroid: 'api-key-android',
+});
 ```
 
 ### `registerIdentifiedUser()`
@@ -67,7 +71,10 @@ Register a known user with Intercom. At least one of userId or email must be pro
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.registerIdentifiedUser({ userId: 'user-id-123' });
+await CapgoIntercom.registerIdentifiedUser({
+  userId: 'user-id-123',
+  email: 'user@example.com',
+});
 ```
 
 ### `registerUnidentifiedUser()`

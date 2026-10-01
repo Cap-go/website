@@ -531,7 +531,12 @@ If your app doesn't use a CMP compatible with TCF v2.2, use the following method
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setConsentDataV2({ isUserSubjectToGDPR: true });
+await AppsFlyer.setConsentDataV2({
+  isUserSubjectToGDPR: true,
+  hasConsentForDataUsage: true,
+  hasConsentForAdsPersonalization: true,
+  hasConsentForAdStorage: true,
+});
 ```
 
 ### `isSDKStarted`

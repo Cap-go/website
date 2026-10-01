@@ -122,7 +122,10 @@ Captures a single frame from the camera preview stream.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-const result = await CameraPreview.captureSample({ quality: 85 });
+const result = await CameraPreview.captureSample({
+  quality: 85,
+  mirrorFrontCamera: false,
+});
 console.log(result);
 ```
 

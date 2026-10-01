@@ -107,7 +107,10 @@ Set the current time to seek the current video to from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.setCurrentTime({ playerId: 'player-id-123' });
+const result = await VideoPlayer.setCurrentTime({
+  playerId: 'player-id-123',
+  seektime: 10,
+});
 console.log(result);
 ```
 

@@ -70,7 +70,11 @@ Updates position state for the active media session.
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setPositionState({ duration: 1000 });
+await MediaSession.setPositionState({
+  duration: 1000,
+  playbackRate: 1,
+  position: 10,
+});
 ```
 
 ## Full reference

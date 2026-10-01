@@ -56,7 +56,13 @@ Open a store.
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.openStore({ database: 'database' });
+await CapgoCapacitorDataStorageSqlite.openStore({
+  database: 'database',
+  table: 'table',
+  encrypted: true,
+  mode: 'encryption',
+  autoVacuum: 'none',
+});
 ```
 
 ### `closeStore()`
@@ -98,7 +104,13 @@ Delete a store.
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.deleteStore({ database: 'database' });
+await CapgoCapacitorDataStorageSqlite.deleteStore({
+  database: 'database',
+  table: 'table',
+  encrypted: true,
+  mode: 'encryption',
+  autoVacuum: 'none',
+});
 ```
 
 ### `setTable()`

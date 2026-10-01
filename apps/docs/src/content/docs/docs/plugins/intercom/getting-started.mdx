@@ -42,7 +42,11 @@ Use this if you prefer not to configure keys in capacitor.config.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.loadWithKeys({ appId: 'app-id-123' });
+await CapgoIntercom.loadWithKeys({
+  appId: 'app-id-123',
+  apiKeyIOS: 'api-key-ios',
+  apiKeyAndroid: 'api-key-android',
+});
 ```
 
 ### `registerIdentifiedUser`
@@ -53,7 +57,10 @@ At least one of userId or email must be provided.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.registerIdentifiedUser({ userId: 'user-id-123' });
+await CapgoIntercom.registerIdentifiedUser({
+  userId: 'user-id-123',
+  email: 'user@example.com',
+});
 ```
 
 ### `registerUnidentifiedUser`

@@ -701,7 +701,10 @@ Updates a user's profile data.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.updateProfile({ displayName: 'display' });
+await FirebaseAuthentication.updateProfile({
+  displayName: 'display',
+  photoUrl: 'https://example.com',
+});
 ```
 
 ### `useAppLanguage`
