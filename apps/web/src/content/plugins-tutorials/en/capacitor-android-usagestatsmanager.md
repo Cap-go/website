@@ -47,10 +47,8 @@ Checks if the usage stats permission is granted.
 ```typescript
 import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
 
-const { granted } = await UsageStatsManager.isUsageStatsPermissionGranted();
-if (!granted) {
-  await UsageStatsManager.openUsageStatsSettings();
-}
+const result = await CapacitorUsageStatsManager.isUsageStatsPermissionGranted();
+console.log(result);
 ```
 
 ### `openUsageStatsSettings`
@@ -60,7 +58,7 @@ Open the usage stats settings screen. This will open the usage stats settings sc
 ```typescript
 import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
 
-await UsageStatsManager.openUsageStatsSettings();
+await CapacitorUsageStatsManager.openUsageStatsSettings();
 ```
 
 ### `queryAllPackages`

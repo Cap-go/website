@@ -28,7 +28,7 @@ Configure the Crisp SDK with your website ID. Must be called before using any ot
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.configure({ websiteID: 'YOUR_WEBSITE_ID' });
+await CapacitorCrisp.configure({ websiteID: 'website-id-123' });
 ```
 
 ### `openMessenger`

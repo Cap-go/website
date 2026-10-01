@@ -41,7 +41,7 @@ Open a store
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.openStore({});
+await CapgoCapacitorDataStorageSqlite.openStore({ database: 'database' });
 ```
 
 ### `closeStore`
@@ -83,7 +83,7 @@ Delete a store
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.deleteStore({});
+await CapgoCapacitorDataStorageSqlite.deleteStore({ database: 'database' });
 ```
 
 ### `setTable`
@@ -231,7 +231,7 @@ Import a database From a JSON
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-const result = await CapgoCapacitorDataStorageSqlite.importFromJson({});
+const result = await CapgoCapacitorDataStorageSqlite.importFromJson({ jsonstring: 'jsonstring' });
 console.log(result);
 ```
 
@@ -242,7 +242,7 @@ Check the validity of a JSON Object
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-const result = await CapgoCapacitorDataStorageSqlite.isJsonValid({});
+const result = await CapgoCapacitorDataStorageSqlite.isJsonValid({ jsonstring: 'jsonstring' });
 console.log(result);
 ```
 

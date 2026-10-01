@@ -12,7 +12,7 @@ bun add @capgo/capacitor-health
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -54,7 +54,7 @@ Requests read/write access to the provided data types.
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-const result = await Health.requestAuthorization({});
+const result = await Health.requestAuthorization({ read: ['steps'] });
 console.log(result);
 ```
 
@@ -65,7 +65,7 @@ Checks authorization status for the provided data types without prompting the us
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-const result = await Health.checkAuthorization({});
+const result = await Health.checkAuthorization({ read: ['steps'] });
 console.log(result);
 ```
 
@@ -103,7 +103,7 @@ import { Health } from '@capgo/capacitor-health';
 await Health.openHealthConnectSettings();
 ```
 
-The [API reference](/docs/plugins/health/getting-started/) covers the other 3 methods.
+The table above lists all 9 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-health/) for the full contract of each one.
 
 ## Full reference
 

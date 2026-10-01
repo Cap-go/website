@@ -12,7 +12,7 @@ bun add @capgo/capacitor-bluetooth-low-energy
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -123,7 +123,7 @@ import { BluetoothLowEnergy } from '@capgo/capacitor-bluetooth-low-energy';
 await BluetoothLowEnergy.openAppSettings();
 ```
 
-The [API reference](/docs/plugins/bluetooth-low-energy/getting-started/) covers the other 30 methods.
+The table above lists all 36 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-bluetooth-low-energy/) for the full contract of each one.
 
 ## Listen to events
 

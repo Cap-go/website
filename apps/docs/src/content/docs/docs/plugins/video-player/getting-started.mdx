@@ -41,7 +41,7 @@ Initialize a video player
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.initPlayer({});
+const result = await VideoPlayer.initPlayer({ mode: 'mode' });
 console.log(result);
 ```
 
@@ -52,7 +52,7 @@ Return if a given playerId is playing
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.isPlaying({});
+const result = await VideoPlayer.isPlaying({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -63,7 +63,7 @@ Play the current video from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.play({});
+const result = await VideoPlayer.play({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -74,7 +74,7 @@ Pause the current video from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.pause({});
+const result = await VideoPlayer.pause({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -85,7 +85,7 @@ Get the duration of the current video from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.getDuration({});
+const result = await VideoPlayer.getDuration({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -96,7 +96,7 @@ Get the current time of the current video from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.getCurrentTime({});
+const result = await VideoPlayer.getCurrentTime({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -107,7 +107,7 @@ Set the current time to seek the current video to from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.setCurrentTime({});
+const result = await VideoPlayer.setCurrentTime({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -118,7 +118,7 @@ Get the volume of the current video from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.getVolume({});
+const result = await VideoPlayer.getVolume({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -129,7 +129,7 @@ Set the volume of the current video to from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.setVolume({});
+const result = await VideoPlayer.setVolume({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -140,7 +140,7 @@ Get the muted of the current video from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.getMuted({});
+const result = await VideoPlayer.getMuted({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -151,7 +151,7 @@ Set the muted of the current video to from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.setMuted({});
+const result = await VideoPlayer.setMuted({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -162,7 +162,7 @@ Set the rate of the current video from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.setRate({});
+const result = await VideoPlayer.setRate({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -173,7 +173,7 @@ Get the rate of the current video from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.getRate({});
+const result = await VideoPlayer.getRate({ playerId: 'player-id-123' });
 console.log(result);
 ```
 

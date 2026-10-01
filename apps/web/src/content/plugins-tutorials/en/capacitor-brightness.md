@@ -12,7 +12,7 @@ bun add @capgo/capacitor-brightness
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -56,7 +56,7 @@ Set the brightness level of the device's main screen.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setBrightness({ brightness: 1 });
+await CapgoBrightness.setBrightness({ brightness: 0.5 });
 ```
 
 ### `getSystemBrightness()`
@@ -77,7 +77,7 @@ Set the system-wide screen brightness. Requires WRITE_SETTINGS permission on And
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setSystemBrightness({ brightness: 1 });
+await CapgoBrightness.setSystemBrightness({ brightness: 0.5 });
 ```
 
 ### `getSystemBrightnessMode()`
@@ -98,10 +98,10 @@ Set the system brightness mode (automatic or manual). Requires WRITE_SETTINGS pe
 ```typescript
 import { CapgoBrightness, BrightnessMode } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.UNKNOWN });
+await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.AUTOMATIC });
 ```
 
-The [API reference](/docs/plugins/brightness/getting-started/) covers the other 5 methods.
+The table above lists all 11 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-brightness/) for the full contract of each one.
 
 ## Full reference
 

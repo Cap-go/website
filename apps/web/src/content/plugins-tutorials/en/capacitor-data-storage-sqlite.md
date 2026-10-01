@@ -12,7 +12,7 @@ bun add @capgo/capacitor-data-storage-sqlite
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -56,7 +56,7 @@ Open a store.
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.openStore({});
+await CapgoCapacitorDataStorageSqlite.openStore({ database: 'database' });
 ```
 
 ### `closeStore()`
@@ -98,7 +98,7 @@ Delete a store.
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.deleteStore({});
+await CapgoCapacitorDataStorageSqlite.deleteStore({ database: 'database' });
 ```
 
 ### `setTable()`
@@ -111,7 +111,7 @@ import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-s
 await CapgoCapacitorDataStorageSqlite.setTable({ table: 'table' });
 ```
 
-The [API reference](/docs/plugins/data-storage-sqlite/getting-started/) covers the other 16 methods.
+The table above lists all 22 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-data-storage-sqlite/) for the full contract of each one.
 
 ## Full reference
 

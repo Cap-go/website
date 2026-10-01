@@ -12,7 +12,7 @@ bun add @capgo/capacitor-admob
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -109,11 +109,11 @@ import { AdMob } from '@capgo/capacitor-admob';
 await AdMob.adLoad({ id: 1 });
 ```
 
-The [API reference](/docs/plugins/admob/getting-started/) covers the other 4 methods.
+The table above lists all 10 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-admob/) for the full contract of each one.
 
 ## Listen to events
 
-`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `AdMob.removeAllListeners()` to clear every listener.
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts.
 
 ## Full reference
 

@@ -64,7 +64,7 @@ Check whether a valid Twilio token is currently cached on the device.
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
 const result = await CapacitorTwilioVideo.isLoggedIn();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `joinRoom`
@@ -74,7 +74,7 @@ Join a Twilio room and present the plugin's native in-app call overlay.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-const result = await CapacitorTwilioVideo.joinRoom({ roomName: 'example' });
+const result = await CapacitorTwilioVideo.joinRoom({ roomName: 'room' });
 console.log(result);
 ```
 

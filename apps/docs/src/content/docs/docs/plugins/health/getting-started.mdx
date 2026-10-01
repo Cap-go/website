@@ -52,7 +52,7 @@ Requests read/write access to the provided data types.
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-const result = await Health.requestAuthorization({});
+const result = await Health.requestAuthorization({ read: ['steps'] });
 console.log(result);
 ```
 
@@ -63,7 +63,7 @@ Checks authorization status for the provided data types without prompting the us
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-const result = await Health.checkAuthorization({});
+const result = await Health.checkAuthorization({ read: ['steps'] });
 console.log(result);
 ```
 
@@ -131,7 +131,7 @@ Supported on iOS (HealthKit) and Android (Health Connect).
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-const result = await Health.queryWorkouts({});
+const result = await Health.queryWorkouts({ workoutType: 'americanFootball' });
 console.log(result);
 ```
 

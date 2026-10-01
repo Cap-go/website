@@ -12,7 +12,7 @@ bun add @capgo/capacitor-contacts
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -77,12 +77,7 @@ Create a new contact group.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-const result = await CapacitorContacts.createGroup({
-  group: {
-    id: 'id-123',
-    name: 'example',
-  },
-});
+const result = await CapacitorContacts.createGroup({ group: { name: 'example' } });
 console.log(result);
 ```
 
@@ -116,7 +111,7 @@ import { CapacitorContacts } from '@capgo/capacitor-contacts';
 await CapacitorContacts.displayContactById({ id: 'id-123' });
 ```
 
-The [API reference](/docs/plugins/contacts/getting-started/) covers the other 15 methods.
+The table above lists all 21 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-contacts/) for the full contract of each one.
 
 ## Full reference
 

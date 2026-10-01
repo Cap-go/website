@@ -12,7 +12,7 @@ bun add @capgo/capacitor-firebase-authentication
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -134,7 +134,7 @@ const result = await FirebaseAuthentication.createUserWithEmailAndPassword({
   email: 'user@example.com',
   password: 'password',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `deleteUser()`
@@ -158,7 +158,7 @@ const result = await FirebaseAuthentication.fetchSignInMethodsForEmail({ email: 
 console.log(result);
 ```
 
-The [API reference](/docs/plugins/firebase-authentication/getting-started/) covers the other 53 methods.
+The table above lists all 59 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/authentication) for the full contract of each one.
 
 ## Listen to events
 

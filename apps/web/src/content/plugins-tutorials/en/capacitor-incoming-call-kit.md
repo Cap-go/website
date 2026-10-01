@@ -12,7 +12,7 @@ bun add @capgo/capacitor-incoming-call-kit
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -43,7 +43,7 @@ import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
 
 const result = await IncomingCallKit.showIncomingCall({
   callId: 'call-id-123',
-  callerName: 'example',
+  callerName: 'caller',
 });
 console.log(result);
 ```
@@ -103,7 +103,7 @@ const result = await IncomingCallKit.requestPermissions();
 console.log(result);
 ```
 
-The [API reference](/docs/plugins/incoming-call-kit/getting-started/) covers the other 1 method.
+The table above lists all 7 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-incoming-call-kit/) for the full contract of each one.
 
 ## Listen to events
 

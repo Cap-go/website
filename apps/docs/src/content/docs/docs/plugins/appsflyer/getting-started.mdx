@@ -100,7 +100,7 @@ Log an in-app event.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-const result = await AppsFlyer.logEvent({});
+const result = await AppsFlyer.logEvent({ eventName: 'event' });
 console.log(result);
 ```
 
@@ -153,7 +153,7 @@ Registers branded OneLink domains so AppsFlyer can resolve attribution parameter
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setOneLinkCustomDomain({ domains: [] });
+await AppsFlyer.setOneLinkCustomDomain({ domains: ['example.com'] });
 ```
 
 ### `appendParametersToDeepLinkingURL`
@@ -178,7 +178,7 @@ It lets the SDK resolve the wrapped URL so deep linking still works correctly.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setResolveDeepLinkURLs({ urls: [] });
+await AppsFlyer.setResolveDeepLinkURLs({ urls: ['https://example.com'] });
 ```
 
 ### `addPushNotificationDeepLinkPath`
@@ -188,7 +188,7 @@ Configures how the SDK extracts deep link values from push notification payloads
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.addPushNotificationDeepLinkPath({ path: [] });
+await AppsFlyer.addPushNotificationDeepLinkPath({ path: ['path/to/file'] });
 ```
 
 ### `setSharingFilter`
@@ -198,7 +198,7 @@ Stops events from propagating to the specified AppsFlyer partners.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setSharingFilter({ filters: [] });
+await AppsFlyer.setSharingFilter({ filters: ['filter'] });
 ```
 
 ### `setSharingFilterForAllPartners`
@@ -218,7 +218,7 @@ Stops events from propagating to the specified AppsFlyer partners.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setSharingFilterForPartners({ filters: [] });
+await AppsFlyer.setSharingFilterForPartners({ filters: ['filter'] });
 ```
 
 ### `setAdditionalData`
@@ -302,8 +302,8 @@ Set a custom host.
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
 await AppsFlyer.setHost({
-  hostPrefixName: 'example',
-  hostName: 'example.com',
+  hostPrefixName: 'host-prefix',
+  hostName: 'host',
 });
 ```
 
@@ -314,7 +314,7 @@ Allowing your existing users to invite their friends and contacts as new users t
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-const result = await AppsFlyer.generateInviteLink({});
+const result = await AppsFlyer.generateInviteLink({ brandDomain: 'example.com' });
 console.log(result);
 ```
 
@@ -417,7 +417,7 @@ Set the user emails and encrypt them.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-const result = await AppsFlyer.setUserEmails({ emails: [] });
+const result = await AppsFlyer.setUserEmails({ emails: ['user@example.com'] });
 console.log(result);
 ```
 
@@ -429,8 +429,8 @@ Manually log the location of the user
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
 const result = await AppsFlyer.logLocation({
-  latitude: 1,
-  longitude: 1,
+  latitude: 48.8566,
+  longitude: 2.3522,
 });
 console.log(result);
 ```
@@ -531,7 +531,7 @@ If your app doesn't use a CMP compatible with TCF v2.2, use the following method
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setConsentDataV2({});
+await AppsFlyer.setConsentDataV2({ isUserSubjectToGDPR: true });
 ```
 
 ### `isSDKStarted`

@@ -12,7 +12,7 @@ bun add @capgo/capacitor-twilio-video
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -69,7 +69,7 @@ Check whether a valid Twilio token is currently cached on the device.
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
 const result = await CapacitorTwilioVideo.isLoggedIn();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `joinRoom()`
@@ -79,7 +79,7 @@ Join a Twilio room and present the plugin's native in-app call overlay.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-const result = await CapacitorTwilioVideo.joinRoom({ roomName: 'example' });
+const result = await CapacitorTwilioVideo.joinRoom({ roomName: 'room' });
 console.log(result);
 ```
 
@@ -105,7 +105,7 @@ const result = await CapacitorTwilioVideo.setMicrophoneEnabled({ enabled: true }
 console.log(result);
 ```
 
-The [API reference](/docs/plugins/twilio-video/getting-started/) covers the other 6 methods.
+The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-twilio-video/) for the full contract of each one.
 
 ## Listen to events
 

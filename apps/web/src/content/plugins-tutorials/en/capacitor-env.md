@@ -12,7 +12,7 @@ bun add @capgo/capacitor-env
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -35,8 +35,8 @@ Retrieves the value of a specific environment variable by key.
 ```typescript
 import { Env } from '@capgo/capacitor-env';
 
-const result = await EnvPlugin.getKey({ key: 'API_URL' });
-console.log(result.value); // 'https://api.example.com'
+const result = await Env.getKey({ key: 'key-123' });
+console.log(result);
 ```
 
 ## Full reference

@@ -12,7 +12,7 @@ bun add @capgo/capacitor-launch-navigator
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -42,7 +42,7 @@ Navigate to a location using latitude and longitude.
 ```typescript
 import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
 
-await LaunchNavigator.navigate({ destination: [] });
+await LaunchNavigator.navigate({ destination: [48.8566, 2.3522] });
 ```
 
 ### `isAppAvailable()`
@@ -100,7 +100,7 @@ const result = await LaunchNavigator.getAppIcons();
 console.log(result);
 ```
 
-The [API reference](/docs/plugins/launch-navigator/getting-started/) covers the other 2 methods.
+The table above lists all 8 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-launch-navigator/) for the full contract of each one.
 
 ## Full reference
 

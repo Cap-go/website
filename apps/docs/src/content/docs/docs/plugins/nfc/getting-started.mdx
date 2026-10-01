@@ -61,7 +61,16 @@ Writes the provided NDEF records to the last discovered tag.
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.write({ records: [] });
+await CapacitorNfc.write({
+  records: [
+    {
+      tnf: 1,
+      type: [1],
+      id: [1],
+      payload: [1],
+    },
+  ],
+});
 ```
 
 ### `erase`
@@ -91,7 +100,16 @@ Shares an NDEF message with another device via peer-to-peer (Android only).
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.share({ records: [] });
+await CapacitorNfc.share({
+  records: [
+    {
+      tnf: 1,
+      type: [1],
+      id: [1],
+      payload: [1],
+    },
+  ],
+});
 ```
 
 ### `unshare`

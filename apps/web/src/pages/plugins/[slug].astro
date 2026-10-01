@@ -126,7 +126,10 @@ const packageRenameNote = name ? packageRenameNotes[name] : undefined
 const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : getRelativeLocaleUrl(locale, 'docs/plugins/')
 const previewQr = getPluginPreviewQr(id)
 
-const installCommand = name ? `bun add ${name}\nbunx cap sync` : undefined
+// A few packages target other runtimes (Electron, Cordova); Capacitor-only copy and commands are skipped for them.
+const runtime = /electron/i.test(name ?? href) ? 'Electron' : /cordova/i.test(name ?? href) ? 'Cordova' : 'Capacitor'
+const isCapacitor = runtime === 'Capacitor'
+const installCommand = name ? (isCapacitor ? `bun add ${name}\nbunx cap sync` : `bun add ${name}`) : undefined
 const installManagers = name
   ? [
       { label: 'npm', command: `npm install ${name}` },
@@ -149,27 +152,37 @@ const platformStatusClass = {
 const packageLabel = name ?? title
 const generatedFaq = [
   {
-    question: `How do I install the ${title} plugin in a Capacitor app?`,
-    answer: name
-      ? `Run "bun add ${name}" (or "npm install ${name}"), then run "bunx cap sync" so the iOS and Android projects pick up the native code. Import it from "${name}" in your app code.`
-      : `Follow the installation steps in the ${title} README on GitHub, then run "bunx cap sync" to update the native projects.`,
+    question: `How do I install the ${title} plugin in a ${runtime} app?`,
+    answer: !name
+      ? `Follow the installation steps in the ${title} README on GitHub.`
+      : isCapacitor
+        ? `Run "bun add ${name}" (or "npm install ${name}"), then run "bunx cap sync" so the iOS and Android projects pick up the native code. Import it from "${name}" in your app code.`
+        : `Run "bun add ${name}" (or "npm install ${name}"), then follow the ${runtime} setup steps in the guide and the GitHub README.`,
   },
   {
-    question: `Does ${packageLabel} work with Ionic, React, Vue and Angular?`,
-    answer: `Yes. ${title} is a Capacitor plugin, so it works with any web framework that runs inside Capacitor, including Ionic, React, Vue, Angular, Svelte and plain JavaScript.`,
+    question: `Does ${packageLabel} work with React, Vue and Angular?`,
+    answer: `Yes. ${title} is a ${runtime} package, so it works with any web framework that runs inside ${runtime}${isCapacitor ? ', including Ionic' : ''}, React, Vue, Angular, Svelte and plain JavaScript.`,
   },
-  {
-    question: `Which Capacitor version does ${packageLabel} support?`,
-    answer: `Capgo plugins follow Capacitor's major version: use the plugin major version that matches your Capacitor major version (for example plugin v8 with Capacitor 8). The compatibility table in the GitHub README lists the maintained versions.`,
-  },
+  ...(isCapacitor
+    ? [
+        {
+          question: `Which Capacitor version does ${packageLabel} support?`,
+          answer: `Capgo plugins follow Capacitor's major version: use the plugin major version that matches your Capacitor major version (for example plugin v8 with Capacitor 8). The compatibility table in the GitHub README lists the maintained versions.`,
+        },
+      ]
+    : []),
   {
     question: `Is ${packageLabel} free and open source?`,
     answer: `Yes. The source code is public on GitHub at ${href} and the package is free to install from npm. Bug reports and pull requests are welcome.`,
   },
-  {
-    question: `Can I update code that uses ${title} without an App Store review?`,
-    answer: `Installing or upgrading the plugin changes native code, so it needs a new store build. After that, JavaScript, HTML and CSS changes that call the plugin can ship instantly with Capgo live updates.`,
-  },
+  ...(isCapacitor
+    ? [
+        {
+          question: `Can I update code that uses ${title} without an App Store review?`,
+          answer: `Installing or upgrading the plugin changes native code, so it needs a new store build. After that, JavaScript, HTML and CSS changes that call the plugin can ship instantly with Capgo live updates.`,
+        },
+      ]
+    : []),
 ]
 const seenQuestions = new Set<string>()
 const faq = [...(tutorialData?.faq ?? []), ...generatedFaq].filter((item) => {
@@ -195,29 +208,29 @@ const stats = [
 const fitDescription = (base: string): string => {
   const cleaned = base.trim().replace(/\.$/, '')
   const candidates = [
-    `${cleaned}. Install ${packageLabel} for Capacitor iOS and Android, with setup steps, examples and FAQ.`,
+    `${cleaned}. Install ${packageLabel} for ${isCapacitor ? 'Capacitor iOS and Android' : `${runtime} apps`}, with setup steps, examples and FAQ.`,
     `${cleaned}. Install ${packageLabel} with setup steps, code examples and FAQ.`,
     `${cleaned}. Install ${packageLabel} with examples and FAQ.`,
-    `${cleaned}. Capacitor plugin for iOS and Android: install steps, code examples and FAQ.`,
-    `${cleaned}. Capacitor install steps, code examples and FAQ.`,
-    `${cleaned}. Capacitor setup, examples and FAQ.`,
+    `${cleaned}. ${runtime} plugin for ${isCapacitor ? 'iOS and Android' : 'your apps'}: install steps, code examples and FAQ.`,
+    `${cleaned}. ${runtime} install steps, code examples and FAQ.`,
+    `${cleaned}. ${runtime} setup, examples and FAQ.`,
   ]
   return candidates.find((candidate) => candidate.length >= 120 && candidate.length <= 159) ?? candidates.find((candidate) => candidate.length <= 159) ?? `${cleaned}.`
 }
 
 const content: { title?: string; description?: string; keywords?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
-content['title'] = tutorialData?.seoTitle ?? `${title} Capacitor Plugin: Install, Setup & Examples`
+content['title'] = tutorialData?.seoTitle ?? `${title} ${runtime} Plugin: Install, Setup & Examples`
 content['description'] = tutorialData?.seoDescription ?? fitDescription(description)
 content['keywords'] =
   tutorialData?.keywords ??
   [
-    `${title.toLowerCase()} capacitor plugin`,
-    `capacitor ${title.toLowerCase()}`,
-    `ionic ${title.toLowerCase()}`,
+    `${title.toLowerCase()} ${runtime.toLowerCase()} plugin`,
+    `${runtime.toLowerCase()} ${title.toLowerCase()}`,
+    isCapacitor ? `ionic ${title.toLowerCase()}` : undefined,
     name,
     name ? `${name} install` : undefined,
-    `${categoryLabel.toLowerCase()} capacitor plugin`,
+    `${categoryLabel.toLowerCase()} ${runtime.toLowerCase()} plugin`,
   ]
     .filter(Boolean)
     .join(', ')
@@ -233,11 +246,11 @@ const breadcrumbs = [
 ]
 
 const softwareApplication = createSoftwareApplicationLdJson(runtimePublic, {
-  name: `${title} Capacitor plugin`,
+  name: `${title} ${runtime} plugin`,
   description: content['description'],
   url: absolutePluginUrl,
   applicationCategory: 'DeveloperApplication',
-  operatingSystem: platforms.length > 0 ? supportedPlatforms.join(', ') : 'iOS, Android',
+  operatingSystem: platforms.length > 0 ? supportedPlatforms.join(', ') : runtime === 'Electron' ? 'Windows, macOS, Linux' : 'iOS, Android',
   downloadUrl: npmHref,
   offers: { price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
 })
@@ -326,7 +339,7 @@ const secondaryButtonClass =
               {icon && <PluginIcon icon={icon} name={title} className="shrink-0" />}
               <div class="min-w-0">
                 <h1 class="font-pj text-3xl font-bold break-words text-white sm:text-5xl">
-                  {title} <span class="text-gray-400">Capacitor plugin</span>
+                  {title} <span class="text-gray-400">{runtime} plugin</span>
                 </h1>
                 <p class="mt-4 max-w-[52ch] text-base leading-7 text-gray-300 sm:text-lg">
                   {heroDescription}
@@ -366,7 +379,7 @@ const secondaryButtonClass =
                   </div>
                   <div class="flex flex-col gap-1 overflow-x-auto px-4 py-3">
                     <CommandCode command={`bun add ${name}`} class={commandClass} />
-                    <CommandCode command="bunx cap sync" class={commandClass} />
+                    {isCapacitor && <CommandCode command="bunx cap sync" class={commandClass} />}
                   </div>
                   <details class="overflow-x-auto border-t border-white/10 px-4 py-2.5 text-xs text-gray-400">
                     <summary class="cursor-pointer select-none hover:text-gray-200">npm, pnpm or yarn</summary>
@@ -382,16 +395,18 @@ const secondaryButtonClass =
               )
             }
 
-            <dl class:list={['mt-4 grid gap-3', stats.length > 2 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2']}>
+            <ul class:list={['mt-4 grid gap-3', stats.length > 2 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2']} aria-label="Package stats">
               {
                 stats.map((stat) => (
-                  <a href={stat.href} target="_blank" rel="noopener noreferrer" class:list={[cardClass, 'block cursor-pointer p-4 transition hover:border-white/20 hover:bg-white/[0.05]']}>
-                    <dt class="text-xs text-gray-400">{stat.label}</dt>
-                    <dd class="mt-1.5 text-xl font-semibold text-white tabular-nums">{stat.value}</dd>
-                  </a>
+                  <li>
+                    <a href={stat.href} target="_blank" rel="noopener noreferrer" class:list={[cardClass, 'block h-full cursor-pointer p-4 transition hover:border-white/20 hover:bg-white/[0.05]']}>
+                      <span class="block text-xs text-gray-400">{stat.label}</span>
+                      <span class="mt-1.5 block text-xl font-semibold text-white tabular-nums">{stat.value}</span>
+                    </a>
+                  </li>
                 ))
               }
-            </dl>
+            </ul>
           </div>
 
           <aside class="rounded-[1.75rem] border border-white/10 bg-linear-to-b from-white/[0.08] to-white/[0.03] p-6 shadow-[0_24px_80px_rgba(2,6,23,0.45)] backdrop-blur-sm">
@@ -476,7 +491,7 @@ const secondaryButtonClass =
             <article class="min-w-0 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-[0_24px_80px_rgba(2,6,23,0.35)]">
               <div class="border-b border-white/10 px-6 py-5 sm:px-8">
                 <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">Guide</p>
-                <h2 class="mt-2 text-2xl font-semibold text-white sm:text-3xl">How to use {title} in Capacitor</h2>
+                <h2 class="mt-2 text-2xl font-semibold text-white sm:text-3xl">How to use {title} in {runtime}</h2>
                 {previewQr && (
                   <div class="mt-5">
                     <PluginPreviewQrCard preview={previewQr} title={title} compact />
@@ -540,7 +555,7 @@ const secondaryButtonClass =
               <div>
                 <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">{categoryLabel}</p>
                 <h2 id="plugin-related-heading" class="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-                  Related Capacitor plugins
+                  Related plugins
                 </h2>
               </div>
               <a href={getRelativeLocaleUrl(locale, 'plugins')} class="text-sm font-semibold text-blue-300 transition hover:text-blue-200">

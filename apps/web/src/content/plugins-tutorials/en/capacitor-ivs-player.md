@@ -12,7 +12,7 @@ bun add @capgo/capacitor-ivs-player
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -111,7 +111,7 @@ import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 await CapacitorIvsPlayer.delete();
 ```
 
-The [API reference](/docs/plugins/ivs-player/getting-started/) covers the other 17 methods.
+The table above lists all 23 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-ivs-player/) for the full contract of each one.
 
 ## Listen to events
 

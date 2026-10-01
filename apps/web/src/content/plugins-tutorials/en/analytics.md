@@ -12,7 +12,7 @@ bun add @capgo/capacitor-firebase-analytics
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -108,10 +108,10 @@ Sets the current screen name.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setCurrentScreen({ screenName: 'example' });
+await FirebaseAnalytics.setCurrentScreen({ screenName: 'screen' });
 ```
 
-The [API reference](/docs/plugins/firebase-analytics/getting-started/) covers the other 10 methods.
+The table above lists all 16 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics) for the full contract of each one.
 
 ## Full reference
 

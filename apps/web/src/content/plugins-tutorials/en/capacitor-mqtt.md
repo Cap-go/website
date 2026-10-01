@@ -12,7 +12,7 @@ bun add @capgo/capacitor-mqtt
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -40,13 +40,13 @@ import { MqttBridge } from '@capgo/capacitor-mqtt';
 
 const result = await MqttBridge.connect({
   serverURI: 'https://example.com',
-  port: 1,
+  port: 8080,
   clientId: 'client-id-123',
-  username: 'example',
+  username: 'username',
   password: 'password',
   setCleanSession: true,
-  connectionTimeout: 1,
-  keepAliveInterval: 1,
+  connectionTimeout: 1000,
+  keepAliveInterval: 1000,
   setAutomaticReconnect: true,
 });
 console.log(result);
@@ -95,7 +95,7 @@ console.log(result);
 
 ## Listen to events
 
-`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `MqttBridge.removeAllListeners()` to clear every listener.
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts.
 
 ## Full reference
 

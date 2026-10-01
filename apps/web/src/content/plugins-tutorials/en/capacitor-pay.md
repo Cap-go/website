@@ -12,7 +12,7 @@ bun add @capgo/capacitor-pay
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -47,7 +47,20 @@ Presents the native pay sheet for the current platform. Provide the Apple Pay co
 ```typescript
 import { Pay } from '@capgo/capacitor-pay';
 
-const result = await Pay.requestPayment({});
+const result = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant-identifier-123',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    paymentSummaryItems: [
+      {
+        label: 'Hello from Capacitor',
+        amount: 'amount',
+      },
+    ],
+    supportedNetworks: ['AmEx'],
+  },
+});
 console.log(result);
 ```
 

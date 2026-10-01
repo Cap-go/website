@@ -55,7 +55,7 @@ On Android, the brightness only applies to the current activity.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setBrightness({ brightness: 1 });
+await CapgoBrightness.setBrightness({ brightness: 0.5 });
 ```
 
 ### `getSystemBrightness`
@@ -78,7 +78,7 @@ This also changes the brightness mode to MANUAL.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setSystemBrightness({ brightness: 1 });
+await CapgoBrightness.setSystemBrightness({ brightness: 0.5 });
 ```
 
 ### `getSystemBrightnessMode`
@@ -101,7 +101,7 @@ Requires WRITE_SETTINGS permission on Android.
 ```typescript
 import { CapgoBrightness, BrightnessMode } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.UNKNOWN });
+await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.AUTOMATIC });
 ```
 
 ### `isUsingSystemBrightness`

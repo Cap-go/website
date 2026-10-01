@@ -12,7 +12,7 @@ bun add @capgo/capacitor-compass
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -120,7 +120,7 @@ CapgoCompass.addListener('accuracyChange', (event) => {
 });
 ```
 
-The [API reference](/docs/plugins/compass/getting-started/) covers the other 2 methods.
+The table above lists all 8 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-compass/) for the full contract of each one.
 
 ## Listen to events
 

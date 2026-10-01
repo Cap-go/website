@@ -12,7 +12,7 @@ bun add @capgo/capacitor-nfc
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -64,7 +64,16 @@ Writes the provided NDEF records to the last discovered tag.
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.write({ records: [] });
+await CapacitorNfc.write({
+  records: [
+    {
+      tnf: 1,
+      type: [1],
+      id: [1],
+      payload: [1],
+    },
+  ],
+});
 ```
 
 ### `erase()`
@@ -94,14 +103,23 @@ Shares an NDEF message with another device via peer-to-peer (Android only).
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.share({ records: [] });
+await CapacitorNfc.share({
+  records: [
+    {
+      tnf: 1,
+      type: [1],
+      id: [1],
+      payload: [1],
+    },
+  ],
+});
 ```
 
-The [API reference](/docs/plugins/nfc/getting-started/) covers the other 4 methods.
+The table above lists all 10 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-nfc/) for the full contract of each one.
 
 ## Listen to events
 
-`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapacitorNfc.removeAllListeners()` to clear every listener.
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts.
 
 ## Full reference
 

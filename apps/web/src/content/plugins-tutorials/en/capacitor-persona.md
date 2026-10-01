@@ -12,7 +12,7 @@ bun add @capgo/capacitor-intune
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -46,8 +46,8 @@ Present the Microsoft sign-in flow and return an access token plus the account m
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-const result = await IntuneMAM.acquireToken({ scopes: [] });
-console.log(result);
+const result = await IntuneMAM.acquireToken({ scopes: ['scope'] });
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `acquireTokenSilent()`
@@ -58,10 +58,10 @@ Acquire a token from the MSAL cache for a previously signed-in user.
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
 const result = await IntuneMAM.acquireTokenSilent({
-  scopes: [],
+  scopes: ['scope'],
   accountId: 'account-id-123',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `registerAndEnrollAccount()`
@@ -105,7 +105,7 @@ import { IntuneMAM } from '@capgo/capacitor-intune';
 await IntuneMAM.deRegisterAndUnenrollAccount({ accountId: 'account-id-123' });
 ```
 
-The [API reference](/docs/plugins/persona/getting-started/) covers the other 6 methods.
+The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-persona/) for the full contract of each one.
 
 ## Listen to events
 

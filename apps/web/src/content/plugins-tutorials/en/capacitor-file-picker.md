@@ -12,7 +12,7 @@ bun add @capgo/capacitor-file-picker
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -118,7 +118,7 @@ const result = await CapgoFilePicker.convertHeicToJpeg({
 console.log('Converted file:', result.path);
 ```
 
-The [API reference](/docs/plugins/file-picker/getting-started/) covers the other 3 methods.
+The table above lists all 9 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-file-picker/) for the full contract of each one.
 
 ## Listen to events
 

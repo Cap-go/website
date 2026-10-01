@@ -12,7 +12,7 @@ bun add @capgo/capacitor-contentsquare
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -107,7 +107,7 @@ await Contentsquare.sendDynamicVarWithIntValue({
 });
 ```
 
-The [API reference](/docs/plugins/contentsquare/getting-started/) covers the other 5 methods.
+The table above lists all 11 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-contentsquare/) for the full contract of each one.
 
 ## Full reference
 

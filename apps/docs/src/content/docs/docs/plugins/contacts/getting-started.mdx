@@ -63,12 +63,7 @@ Create a new contact group.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-const result = await CapacitorContacts.createGroup({
-  group: {
-    id: 'id-123',
-    name: 'example',
-  },
-});
+const result = await CapacitorContacts.createGroup({ group: { name: 'example' } });
 console.log(result);
 ```
 

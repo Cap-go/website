@@ -12,7 +12,7 @@ bun add @capgo/capacitor-native-biometric
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -68,7 +68,7 @@ Gets the stored credentials for a given server.
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 const result = await NativeBiometric.getCredentials({ server: 'example.com' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `setCredentials()`
@@ -79,7 +79,7 @@ Stores the given credentials for a given server.
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 await NativeBiometric.setCredentials({
-  username: 'example',
+  username: 'username',
   password: 'password',
   server: 'example.com',
 });
@@ -103,14 +103,14 @@ Gets the stored credentials for a given server, requiring biometric authenticati
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 const result = await NativeBiometric.getSecureCredentials({ server: 'example.com' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
-The [API reference](/docs/plugins/native-biometric/getting-started/) covers the other 6 methods.
+The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-native-biometric/) for the full contract of each one.
 
 ## Listen to events
 
-`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `NativeBiometric.removeAllListeners()` to clear every listener.
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts.
 
 ## Full reference
 

@@ -87,7 +87,7 @@ Captures a video
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-const result = await Ricoh360Camera.captureVideo({});
+const result = await Ricoh360Camera.captureVideo({ resolution: '4K' });
 console.log(result);
 ```
 
@@ -98,7 +98,7 @@ Starts live preview
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-const result = await Ricoh360Camera.livePreview({});
+const result = await Ricoh360Camera.livePreview({ displayInFront: true });
 console.log(result);
 ```
 
@@ -120,7 +120,7 @@ Reads camera settings
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-const result = await Ricoh360Camera.readSettings({ options: [] });
+const result = await Ricoh360Camera.readSettings({ options: ['option'] });
 console.log(result);
 ```
 

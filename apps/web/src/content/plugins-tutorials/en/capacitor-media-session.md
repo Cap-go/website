@@ -12,7 +12,7 @@ bun add @capgo/capacitor-media-session
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -38,7 +38,7 @@ Sets metadata of the currently playing media.
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setMetadata({});
+await MediaSession.setMetadata({ album: 'album' });
 ```
 
 ### `setPlaybackState()`
@@ -70,7 +70,7 @@ Updates position state for the active media session.
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setPositionState({});
+await MediaSession.setPositionState({ duration: 1000 });
 ```
 
 ## Full reference

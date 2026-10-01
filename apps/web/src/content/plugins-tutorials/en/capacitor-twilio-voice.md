@@ -12,7 +12,7 @@ bun add @capgo/capacitor-twilio-voice
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -136,7 +136,7 @@ CapacitorTwilioVoice.addListener('callInviteReceived', async (data) => {
 });
 ```
 
-The [API reference](/docs/plugins/twilio-voice/getting-started/) covers the other 6 methods.
+The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-twilio-voice/) for the full contract of each one.
 
 ## Listen to events
 

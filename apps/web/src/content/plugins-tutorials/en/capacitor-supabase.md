@@ -12,7 +12,7 @@ bun add @capgo/capacitor-supabase
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -126,7 +126,7 @@ await CapacitorSupabase.signInWithOtp({
 // });
 ```
 
-The [API reference](/docs/plugins/supabase/getting-started/) covers the other 10 methods.
+The table above lists all 16 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-supabase/) for the full contract of each one.
 
 ## Listen to events
 

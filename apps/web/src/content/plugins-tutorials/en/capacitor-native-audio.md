@@ -28,7 +28,7 @@ Configure the audio player.
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.configure({});
+await NativeAudio.configure({ focus: true });
 ```
 
 ### `preload`

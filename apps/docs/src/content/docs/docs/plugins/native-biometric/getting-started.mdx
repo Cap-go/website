@@ -63,7 +63,7 @@ Gets the stored credentials for a given server.
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 const result = await NativeBiometric.getCredentials({ server: 'example.com' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `setCredentials`
@@ -74,7 +74,7 @@ Stores the given credentials for a given server.
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 await NativeBiometric.setCredentials({
-  username: 'example',
+  username: 'username',
   password: 'password',
   server: 'example.com',
 });
@@ -102,7 +102,7 @@ On Android, BiometricPrompt is shown with a CryptoObject bound to the credential
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 const result = await NativeBiometric.getSecureCredentials({ server: 'example.com' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `isCredentialsSaved`
@@ -113,7 +113,7 @@ Checks if credentials are already saved for a given server.
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 const result = await NativeBiometric.isCredentialsSaved({ server: 'example.com' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ## Type Reference

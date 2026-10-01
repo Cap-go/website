@@ -12,7 +12,7 @@ bun add @capgo/capacitor-autofill-save-password
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -50,7 +50,7 @@ Read a password from the keychain. Requires the developer to setup associated do
 import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 
 const result = await SavePassword.readPassword();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ## Full reference

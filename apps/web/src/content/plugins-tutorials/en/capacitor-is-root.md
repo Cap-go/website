@@ -12,7 +12,7 @@ bun add @capgo/capacitor-is-root
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -128,7 +128,7 @@ const result = await IsRoot.checkForBusyBoxBinary();
 console.log(result);
 ```
 
-The [API reference](/docs/plugins/is-root/getting-started/) covers the other 25 methods.
+The table above lists all 31 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-is-root/) for the full contract of each one.
 
 ## Full reference
 

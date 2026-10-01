@@ -83,7 +83,7 @@ const result = await FirebaseAuthentication.createUserWithEmailAndPassword({
   email: 'user@example.com',
   password: 'password',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `deleteUser`
@@ -139,7 +139,7 @@ Fetches the Firebase Auth ID Token for the currently signed-in user.
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.getIdToken();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getIdTokenResult`
@@ -150,7 +150,7 @@ Returns a deserialized JSON Web Token (JWT) used to identify the user to a Fireb
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.getIdTokenResult();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getRedirectResult`
@@ -219,7 +219,7 @@ const result = await FirebaseAuthentication.linkWithEmailAndPassword({
   email: 'user@example.com',
   password: 'password',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithEmailLink`
@@ -503,7 +503,7 @@ In this case you have to use the `signInWithCustomToken` interface of the Fireba
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
 const result = await FirebaseAuthentication.signInWithCustomToken({ token: 'token-123' });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithEmailAndPassword`
@@ -517,7 +517,7 @@ const result = await FirebaseAuthentication.signInWithEmailAndPassword({
   email: 'user@example.com',
   password: 'password',
 });
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithEmailLink`
@@ -701,7 +701,7 @@ Updates a user's profile data.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.updateProfile({});
+await FirebaseAuthentication.updateProfile({ displayName: 'display' });
 ```
 
 ### `useAppLanguage`

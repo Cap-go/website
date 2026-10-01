@@ -12,7 +12,7 @@ bun add @capgo/capacitor-rudderstack
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -78,7 +78,7 @@ Sends a track call for the provided event name.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.track('example');
+await nativePlugin.track('event');
 ```
 
 ### `screen()`
@@ -88,7 +88,7 @@ Sends a screen call for the provided screen name.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.screen('example');
+await nativePlugin.screen('screen');
 ```
 
 ### `alias()`
@@ -101,7 +101,7 @@ import { nativePlugin } from '@capgo/capacitor-rudderstack';
 await nativePlugin.alias('new-id-123');
 ```
 
-The [API reference](/docs/plugins/rudderstack/getting-started/) covers the other 8 methods.
+The table above lists all 14 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-rudderstack/) for the full contract of each one.
 
 ## Full reference
 

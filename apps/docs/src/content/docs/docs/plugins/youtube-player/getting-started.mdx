@@ -128,7 +128,6 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.seekTo({
   playerId: 'player-id-123',
-  playerId: 'player-id-123',
   seconds: 1,
   allowSeekAhead: true,
 });
@@ -143,7 +142,6 @@ Load and play a video by its YouTube ID.
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.loadVideoById({
-  playerId: 'player-id-123',
   playerId: 'player-id-123',
   options: { videoId: 'video-id-123' },
 });
@@ -160,7 +158,6 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.cueVideoById({
   playerId: 'player-id-123',
-  playerId: 'player-id-123',
   options: { videoId: 'video-id-123' },
 });
 console.log(result);
@@ -175,7 +172,6 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.loadVideoByUrl({
   playerId: 'player-id-123',
-  playerId: 'player-id-123',
   options: { mediaContentUrl: 'https://example.com' },
 });
 console.log(result);
@@ -189,7 +185,6 @@ Cue a video by URL without playing it.
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.cueVideoByUrl({
-  playerId: 'player-id-123',
   playerId: 'player-id-123',
   options: { mediaContentUrl: 'https://example.com' },
 });
@@ -206,7 +201,6 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.cuePlaylist({
   playerId: 'player-id-123',
-  playerId: 'player-id-123',
   playlistOptions: { listType: 'playlist' },
 });
 console.log(result);
@@ -220,7 +214,6 @@ Load and play a playlist.
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.loadPlaylist({
-  playerId: 'player-id-123',
   playerId: 'player-id-123',
   playlistOptions: { listType: 'playlist' },
 });
@@ -257,7 +250,6 @@ Play a specific video in the playlist by index.
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.playVideoAt({
-  playerId: 'player-id-123',
   playerId: 'player-id-123',
   index: 1,
 });
@@ -306,8 +298,7 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.setVolume({
   playerId: 'player-id-123',
-  playerId: 'player-id-123',
-  volume: 1,
+  volume: 0.5,
 });
 console.log(result);
 ```
@@ -332,7 +323,6 @@ Set the player dimensions in pixels.
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.setSize({
-  playerId: 'player-id-123',
   playerId: 'player-id-123',
   width: 1,
   height: 1,
@@ -360,7 +350,6 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.setPlaybackRate({
   playerId: 'player-id-123',
-  playerId: 'player-id-123',
   suggestedRate: 1,
 });
 console.log(result);
@@ -387,7 +376,6 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.setLoop({
   playerId: 'player-id-123',
-  playerId: 'player-id-123',
   loopPlaylists: true,
 });
 console.log(result);
@@ -401,7 +389,6 @@ Enable or disable playlist shuffle.
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.setShuffle({
-  playerId: 'player-id-123',
   playerId: 'player-id-123',
   shufflePlaylist: true,
 });
@@ -463,7 +450,6 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.toggleFullScreen({
   playerId: 'player-id-123',
-  playerId: 'player-id-123',
   isFullScreen: true,
 });
 console.log(result);
@@ -489,7 +475,6 @@ Actual quality may differ based on network conditions.
 import { YoutubePlayer, IPlaybackQuality } from '@capgo/capacitor-youtube-player';
 
 const result = await YoutubePlayer.setPlaybackQuality({
-  playerId: 'player-id-123',
   playerId: 'player-id-123',
   suggestedQuality: IPlaybackQuality.SMALL,
 });
@@ -602,10 +587,9 @@ import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
 await YoutubePlayer.removeEventListener({
   playerId: 'player-id-123',
-  playerId: 'player-id-123',
-  eventName: {},
-  listener: (event) => {,
-  console.log(event);,
+  eventName: 'onReady',
+  listener: (event) => {
+    console.log(event);
   },
 });
 ```

@@ -41,7 +41,7 @@ Starts a trace.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.startTrace({ traceName: 'example' });
+await FirebasePerformance.startTrace({ traceName: 'trace' });
 ```
 
 ### `stopTrace`
@@ -51,7 +51,7 @@ Stops a trace.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.stopTrace({ traceName: 'example' });
+await FirebasePerformance.stopTrace({ traceName: 'trace' });
 ```
 
 ### `incrementMetric`
@@ -62,8 +62,8 @@ Atomically increments the metric with the given name for the selected trace by t
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 await FirebasePerformance.incrementMetric({
-  traceName: 'example',
-  metricName: 'example',
+  traceName: 'trace',
+  metricName: 'metric',
 });
 ```
 
@@ -97,7 +97,7 @@ Sets a custom attribute of a trace to a given value.
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 await FirebasePerformance.putAttribute({
-  traceName: 'example',
+  traceName: 'trace',
   attribute: "experiment",
   value: "A",
 });
@@ -111,7 +111,7 @@ Returns the value of a custom attribute of a trace.
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 const result = await FirebasePerformance.getAttribute({
-  traceName: 'example',
+  traceName: 'trace',
   attribute: 'attribute',
 });
 console.log(result);
@@ -124,7 +124,7 @@ Gets the all the custom attributes of a trace with their values.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-const result = await FirebasePerformance.getAttributes({ traceName: 'example' });
+const result = await FirebasePerformance.getAttributes({ traceName: 'trace' });
 console.log(result);
 ```
 
@@ -136,7 +136,7 @@ Removes a custom attribute from a trace given its name.
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 await FirebasePerformance.removeAttribute({
-  traceName: 'example',
+  traceName: 'trace',
   attribute: 'attribute',
 });
 ```
@@ -149,8 +149,8 @@ Sets the value of a custom metric.
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 await FirebasePerformance.putMetric({
-  traceName: 'example',
-  metricName: 'example',
+  traceName: 'trace',
+  metricName: 'metric',
   num: 1,
 });
 ```
@@ -163,8 +163,8 @@ Get the value of a custom metric by name.
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 const result = await FirebasePerformance.getMetric({
-  traceName: 'example',
-  metricName: 'example',
+  traceName: 'trace',
+  metricName: 'metric',
 });
 console.log(result);
 ```
@@ -179,9 +179,9 @@ Only available on web.
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 await FirebasePerformance.record({
-  traceName: 'example',
+  traceName: 'trace',
   startTime: 1,
-  duration: 1,
+  duration: 1000,
 });
 ```
 

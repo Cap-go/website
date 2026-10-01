@@ -12,7 +12,7 @@ bun add @capgo/capacitor-wechat
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -133,7 +133,7 @@ const { extMsg } = await CapacitorWechat.openMiniProgram({
 });
 ```
 
-The [API reference](/docs/plugins/wechat/getting-started/) covers the other 1 method.
+The table above lists all 7 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-wechat/) for the full contract of each one.
 
 ## Full reference
 

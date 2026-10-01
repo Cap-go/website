@@ -12,7 +12,7 @@ bun add @capgo/capacitor-jw-player
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -110,7 +110,7 @@ import { JwPlayer } from '@capgo/capacitor-jw-player';
 await JwPlayer.seekTo({ time: 1 });
 ```
 
-The [API reference](/docs/plugins/jw-player/getting-started/) covers the other 14 methods.
+The table above lists all 20 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-jw-player/) for the full contract of each one.
 
 ## Full reference
 

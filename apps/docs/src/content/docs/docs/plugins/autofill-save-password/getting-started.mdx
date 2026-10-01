@@ -55,7 +55,7 @@ Read a password from the keychain. Requires the developer to setup associated do
 import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 
 const result = await SavePassword.readPassword();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ## Type Reference

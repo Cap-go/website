@@ -12,7 +12,7 @@ bun add @capgo/capacitor-firebase-performance
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -46,7 +46,7 @@ Starts a trace.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.startTrace({ traceName: 'example' });
+await FirebasePerformance.startTrace({ traceName: 'trace' });
 ```
 
 ### `stopTrace()`
@@ -56,7 +56,7 @@ Stops a trace.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.stopTrace({ traceName: 'example' });
+await FirebasePerformance.stopTrace({ traceName: 'trace' });
 ```
 
 ### `incrementMetric()`
@@ -67,8 +67,8 @@ Atomically increments the metric with the given name for the selected trace by t
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 await FirebasePerformance.incrementMetric({
-  traceName: 'example',
-  metricName: 'example',
+  traceName: 'trace',
+  metricName: 'metric',
 });
 ```
 
@@ -101,13 +101,13 @@ Sets a custom attribute of a trace to a given value.
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 await FirebasePerformance.putAttribute({
-  traceName: 'example',
+  traceName: 'trace',
   attribute: "experiment",
   value: "A",
 });
 ```
 
-The [API reference](/docs/plugins/firebase-performance/getting-started/) covers the other 6 methods.
+The table above lists all 12 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/performance) for the full contract of each one.
 
 ## Full reference
 

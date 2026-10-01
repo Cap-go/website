@@ -12,7 +12,7 @@ bun add @capgo/capacitor-appsflyer
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -103,7 +103,7 @@ Log an in-app event.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-const result = await AppsFlyer.logEvent({});
+const result = await AppsFlyer.logEvent({ eventName: 'event' });
 console.log(result);
 ```
 
@@ -137,11 +137,11 @@ import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 await AppsFlyer.updateServerUninstallToken({ token: 'token-123' });
 ```
 
-The [API reference](/docs/plugins/appsflyer/getting-started/) covers the other 38 methods.
+The table above lists all 44 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-appsflyer/) for the full contract of each one.
 
 ## Listen to events
 
-`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `AppsFlyer.removeAllListeners()` to clear every listener.
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts.
 
 ## Full reference
 

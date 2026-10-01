@@ -12,7 +12,7 @@ bun add @capgo/capacitor-zebra-datawedge
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -70,8 +70,8 @@ See the API reference for the current contract.
 import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
 
 await ZebraDataWedge.cloneProfile({
-  destProfileName: 'path/to/file',
-  sourceProfileName: 'path/to/file',
+  destProfileName: 'dest-profile',
+  sourceProfileName: 'source-profile',
 });
 ```
 
@@ -82,7 +82,7 @@ See the API reference for the current contract.
 ```typescript
 import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
 
-await ZebraDataWedge.createProfile({ profileName: 'path/to/file' });
+await ZebraDataWedge.createProfile({ profileName: 'profile' });
 ```
 
 ### `deleteProfile()`
@@ -92,7 +92,7 @@ See the API reference for the current contract.
 ```typescript
 import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
 
-await ZebraDataWedge.deleteProfile({ profileNames: [] });
+await ZebraDataWedge.deleteProfile({ profileNames: ['profile'] });
 ```
 
 ### `importConfig()`
@@ -113,8 +113,8 @@ See the API reference for the current contract.
 import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
 
 await ZebraDataWedge.renameProfile({
-  currentProfileName: 'path/to/file',
-  newProfileName: 'path/to/file',
+  currentProfileName: 'current-profile',
+  newProfileName: 'new-profile',
 });
 ```
 
@@ -128,11 +128,11 @@ import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
 await ZebraDataWedge.restoreConfig();
 ```
 
-The [API reference](/docs/plugins/zebra-datawedge/getting-started/) covers the other 29 methods.
+The table above lists all 35 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-zebra-datawedge/) for the full contract of each one.
 
 ## Listen to events
 
-`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `ZebraDataWedge.removeAllListeners()` to clear every listener.
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts.
 
 ## Full reference
 

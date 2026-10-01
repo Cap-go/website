@@ -129,7 +129,7 @@ On Android, the settings values are persisted in SharedPreferences.
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.setSettings({});
+await FirebaseRemoteConfig.setSettings({ fetchTimeoutInSeconds: 60 });
 ```
 
 ### `addConfigUpdateListener`

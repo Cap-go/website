@@ -84,7 +84,7 @@ This method also re-enables FCM auto-init.
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
 const result = await FirebaseMessaging.getToken();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `deleteToken`

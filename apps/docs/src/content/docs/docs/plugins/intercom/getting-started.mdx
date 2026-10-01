@@ -42,7 +42,7 @@ Use this if you prefer not to configure keys in capacitor.config.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.loadWithKeys({});
+await CapgoIntercom.loadWithKeys({ appId: 'app-id-123' });
 ```
 
 ### `registerIdentifiedUser`
@@ -53,7 +53,7 @@ At least one of userId or email must be provided.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.registerIdentifiedUser({});
+await CapgoIntercom.registerIdentifiedUser({ userId: 'user-id-123' });
 ```
 
 ### `registerUnidentifiedUser`
@@ -73,7 +73,7 @@ Update user attributes in Intercom.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.updateUser({});
+await CapgoIntercom.updateUser({ userId: 'user-id-123' });
 ```
 
 ### `logout`

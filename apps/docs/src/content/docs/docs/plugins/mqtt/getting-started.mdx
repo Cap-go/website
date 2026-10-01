@@ -43,13 +43,13 @@ import { MqttBridge } from '@capgo/capacitor-mqtt';
 
 const result = await MqttBridge.connect({
   serverURI: 'https://example.com',
-  port: 1,
+  port: 8080,
   clientId: 'client-id-123',
-  username: 'example',
+  username: 'username',
   password: 'password',
   setCleanSession: true,
-  connectionTimeout: 1,
-  keepAliveInterval: 1,
+  connectionTimeout: 1000,
+  keepAliveInterval: 1000,
   setAutomaticReconnect: true,
 });
 console.log(result);

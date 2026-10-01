@@ -12,7 +12,7 @@ bun add @capgo/capacitor-speech-synthesis
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -114,7 +114,7 @@ const { isSpeaking } = await SpeechSynthesis.isSpeaking();
 console.log('Is speaking:', isSpeaking);
 ```
 
-The [API reference](/docs/plugins/speech-synthesis/getting-started/) covers the other 8 methods.
+The table above lists all 14 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-speech-synthesis/) for the full contract of each one.
 
 ## Listen to events
 

@@ -12,7 +12,7 @@ bun add @capgo/capacitor-video-player
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -53,7 +53,7 @@ Initialize a video player.
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.initPlayer({});
+const result = await VideoPlayer.initPlayer({ mode: 'mode' });
 console.log(result);
 ```
 
@@ -64,7 +64,7 @@ Return if a given playerId is playing.
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.isPlaying({});
+const result = await VideoPlayer.isPlaying({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -75,7 +75,7 @@ Play the current video from a given playerId.
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.play({});
+const result = await VideoPlayer.play({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -86,7 +86,7 @@ Pause the current video from a given playerId.
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.pause({});
+const result = await VideoPlayer.pause({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -97,7 +97,7 @@ Get the duration of the current video from a given playerId.
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.getDuration({});
+const result = await VideoPlayer.getDuration({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -108,11 +108,11 @@ Get the current time of the current video from a given playerId.
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.getCurrentTime({});
+const result = await VideoPlayer.getCurrentTime({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
-The [API reference](/docs/plugins/video-player/getting-started/) covers the other 13 methods.
+The table above lists all 19 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-video-player/) for the full contract of each one.
 
 ## Full reference
 

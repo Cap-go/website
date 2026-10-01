@@ -56,7 +56,20 @@ This promise is the completion path on both platforms.
 ```typescript
 import { Pay } from '@capgo/capacitor-pay';
 
-const result = await Pay.requestPayment({});
+const result = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant-identifier-123',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    paymentSummaryItems: [
+      {
+        label: 'Hello from Capacitor',
+        amount: 'amount',
+      },
+    ],
+    supportedNetworks: ['AmEx'],
+  },
+});
 console.log(result);
 ```
 

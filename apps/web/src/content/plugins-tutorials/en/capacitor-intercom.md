@@ -12,7 +12,7 @@ bun add @capgo/capacitor-intercom
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -57,7 +57,7 @@ Initialize Intercom with API keys at runtime. Use this if you prefer not to conf
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.loadWithKeys({});
+await CapgoIntercom.loadWithKeys({ appId: 'app-id-123' });
 ```
 
 ### `registerIdentifiedUser()`
@@ -67,7 +67,7 @@ Register a known user with Intercom. At least one of userId or email must be pro
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.registerIdentifiedUser({});
+await CapgoIntercom.registerIdentifiedUser({ userId: 'user-id-123' });
 ```
 
 ### `registerUnidentifiedUser()`
@@ -87,7 +87,7 @@ Update user attributes in Intercom.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.updateUser({});
+await CapgoIntercom.updateUser({ userId: 'user-id-123' });
 ```
 
 ### `logout()`
@@ -110,7 +110,7 @@ import { CapgoIntercom } from '@capgo/capacitor-intercom';
 await CapgoIntercom.logEvent({ name: 'example' });
 ```
 
-The [API reference](/docs/plugins/intercom/getting-started/) covers the other 17 methods.
+The table above lists all 23 methods; check the [GitHub repository](https://github.com/Cap-go/capacitor-intercom/) for the full contract of each one.
 
 ## Listen to events
 

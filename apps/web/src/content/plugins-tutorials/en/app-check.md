@@ -12,7 +12,7 @@ bun add @capgo/capacitor-firebase-app-check
 bunx cap sync
 ```
 
-`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -38,7 +38,7 @@ Get the current App Check token.
 import { FirebaseAppCheck } from '@capgo/capacitor-firebase-app-check';
 
 const result = await FirebaseAppCheck.getToken();
-console.log(result);
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `initialize()`

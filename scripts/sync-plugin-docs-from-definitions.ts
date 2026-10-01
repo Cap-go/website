@@ -39,6 +39,8 @@ type MethodInfo = {
   summary: string
   description: string
   example?: string
+  // Unfiltered JSDoc example as the previous generator emitted it, used to recognise old pages.
+  legacyExample?: string
   source: ts.MethodSignature | ts.CallSignatureDeclaration
 }
 
@@ -62,7 +64,6 @@ const tutorialRoot = resolve('apps/web/src/content/plugins-tutorials/en')
 const sidebarPath = resolve('apps/docs/src/config/sidebar.mjs')
 const webIconsRoot = resolve('apps/web/public/icons/plugins')
 const mirroredDocSlugs = new Set(['contentsquare', 'live-activities', 'twilio-video', 'widget-kit'])
-const apiBase = 'https://api.github.com'
 const githubToken = process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN ?? ''
 const builtinTypeNames = new Set([
   'Array',
@@ -284,10 +285,10 @@ const fetchGitHubFile = async (plugin: RegistryPlugin, relativePath: string): Pr
         .filter(Boolean)
         .map((segment) => encodeURIComponent(segment))
         .join('/')
-      const url = `${apiBase}/repos/${plugin.owner}/${plugin.repo}/contents/${encodedPath}`
+      // raw.githubusercontent.com serves the default branch without consuming the REST API rate limit.
+      const url = `https://raw.githubusercontent.com/${plugin.owner}/${plugin.repo}/HEAD/${encodedPath}`
       const response = await fetch(url, {
         headers: {
-          Accept: 'application/vnd.github+json',
           'User-Agent': 'capgo-plugin-doc-sync',
           ...(githubToken ? { Authorization: `Bearer ${githubToken}` } : {}),
         },
@@ -295,12 +296,10 @@ const fetchGitHubFile = async (plugin: RegistryPlugin, relativePath: string): Pr
 
       if (response.status === 404) continue
       if (!response.ok) {
-        throw new Error(`GitHub API failed for ${plugin.owner}/${plugin.repo}/${fullPath}: ${response.status} ${response.statusText}`)
+        throw new Error(`GitHub raw fetch failed for ${plugin.owner}/${plugin.repo}/${fullPath}: ${response.status} ${response.statusText}`)
       }
 
-      const data = (await response.json()) as { content?: string; encoding?: string; type?: string }
-      if (data.type !== 'file' || !data.content || data.encoding !== 'base64') return null
-      return Buffer.from(data.content, 'base64').toString('utf8')
+      return await response.text()
     }
 
     return null
@@ -321,7 +320,7 @@ const readDefinitions = async (plugin: RegistryPlugin) => {
 }
 
 const getImportName = (indexSource: string, interfaceName?: string) => {
-  const match = /const\s+(\w+)\s*=\s*registerPlugin/.exec(indexSource)
+  const match = /const\s+(\w+)(?:\s*:\s*[^=]+)?\s*=\s*registerPlugin/.exec(indexSource)
   if (match?.[1]) return match[1]
   if (!interfaceName) return 'Plugin'
   return interfaceName.replace(/Plugin$/, '')
@@ -353,7 +352,12 @@ const getMethodInfo = (method: ts.MethodSignature | ts.CallSignatureDeclaration,
   const doc = getDocInfo(method)
   const name = 'name' in method && method.name ? method.name.getText(sourceFile) : 'call'
   const signature = method.getText(sourceFile).replace(/;$/, '').trim()
-  const example = doc.examples.map((item) => cleanExample(item, importName, packageName)).find(Boolean)
+  // JSDoc examples that call another identifier (e.g. `SimPlugin.x()` when the export is `Sim`) would not compile.
+  const example = doc.examples
+    .filter((item) => item.includes(`${importName}.`))
+    .map((item) => cleanExample(item, importName, packageName))
+    .find(Boolean)
+  const legacyExample = doc.examples.map((item) => cleanExample(item, importName, packageName)).find(Boolean)
   return {
     name,
     displayName: name,
@@ -361,6 +365,7 @@ const getMethodInfo = (method: ts.MethodSignature | ts.CallSignatureDeclaration,
     summary: doc.summary,
     description: doc.text.trim(),
     example,
+    legacyExample,
     source: method,
   }
 }
@@ -503,6 +508,25 @@ const parseMetadata = async (plugin: RegistryPlugin): Promise<PluginMetadata | n
   ])
 
   if (!packageSource || !indexSource || !definitionsSource) return null
+  // The registered plugin can live in a sibling module that index.ts re-exports (e.g. `export { SocialLogin } from './social-login'`).
+  let registrationSource = indexSource
+  let wrappedRegistration = false
+  if (!/registerPlugin\s*[<(]/.test(indexSource)) {
+    const siblings = [...indexSource.matchAll(/from\s+['"](\.\/[^'"]+)['"]/g)].map((match) => match[1])
+    for (const sibling of siblings) {
+      const base = `src/${sibling.slice(2).replace(/\.(js|ts)$/, '')}`
+      const source = (await fetchGitHubFile(plugin, `${base}.ts`)) ?? (await fetchGitHubFile(plugin, `${base}/index.ts`))
+      const registered = source && /const\s+(\w+)(?:\s*:\s*[^=]+)?\s*=\s*registerPlugin/.exec(source)?.[1]
+      if (registered && new RegExp(`\\b${registered}\\b`).test(indexSource)) {
+        registrationSource = source
+        break
+      }
+      // A thin wrapper around a privately registered plugin keeps the interface name minus "Plugin" (SocialLoginPlugin -> SocialLogin).
+      if (registered) wrappedRegistration = true
+    }
+  }
+  // Packages that wrap the native plugin in a custom JS API (e.g. `export { toast }`) can't be described from definitions.ts.
+  if (!/registerPlugin\s*[<(]/.test(registrationSource) && !wrappedRegistration) return null
 
   const packageJson = JSON.parse(packageSource) as { name?: string; description?: string }
   const sourceFile = ts.createSourceFile('definitions.ts', definitionsSource, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
@@ -513,7 +537,9 @@ const parseMetadata = async (plugin: RegistryPlugin): Promise<PluginMetadata | n
 
   if (!mainInterface) return null
 
-  const importName = getImportName(indexSource, mainInterface.name.text)
+  const wrapperName = mainInterface.name.text.replace(/Plugin$/, '')
+  if (!/registerPlugin\s*[<(]/.test(registrationSource) && !new RegExp(`export\\s*\\{[^}]*\\b${wrapperName}\\b`).test(indexSource)) return null
+  const importName = /registerPlugin\s*[<(]/.test(registrationSource) ? getImportName(registrationSource, mainInterface.name.text) : wrapperName
   const methods = mainInterface.members
     .filter((member): member is ts.MethodSignature | ts.CallSignatureDeclaration => ts.isMethodSignature(member) || ts.isCallSignatureDeclaration(member))
     .map((member) => getMethodInfo(member, sourceFile, importName, packageJson.name ?? plugin.name))
@@ -552,7 +578,10 @@ const asApiTable = (methods: MethodInfo[]) =>
 type ExampleContext = {
   exportedTypes: Map<string, ExportedType>
   valueImports: Set<string>
+  typeParameters: Map<string, ts.TypeNode | undefined>
 }
+
+type ObjectEntries = Map<string, string>
 
 const toKebabCase = (value: string) =>
   value
@@ -561,6 +590,8 @@ const toKebabCase = (value: string) =>
     .replaceAll(/^-+|-+$/g, '')
     .toLowerCase()
 
+const hintWords = (nameHint?: string) => toKebabCase(nameHint ?? '').split('-').filter(Boolean)
+
 const indentLines = (value: string, indent: string) =>
   value
     .split('\n')
@@ -568,20 +599,32 @@ const indentLines = (value: string, indent: string) =>
     .join('\n')
 
 const exampleString = (nameHint?: string) => {
-  const raw = nameHint ?? ''
-  const hint = raw.toLowerCase()
-  if (/(^id|Id|ID|identifier|Token|token|Key|^key)$/.test(raw)) return `'${toKebabCase(raw || 'example')}-123'`
-  if (/(url|uri|href|link|endpoint|origin)$/.test(hint)) return "'https://example.com'"
-  if (/(server|host|domain)(name)?$/.test(hint)) return "'example.com'"
-  if (hint.includes('email')) return "'user@example.com'"
-  if (hint.includes('phone')) return "'+15555550123'"
-  if (hint.includes('currency')) return "'USD'"
-  if (/locale|language/.test(hint)) return "'en-US'"
-  if (hint.includes('country')) return "'US'"
-  if (/path|file|directory|folder/.test(hint)) return "'path/to/file'"
-  if (/title|message|body|text|description|label|content/.test(hint)) return "'Hello from Capacitor'"
-  if (hint.includes('name')) return "'example'"
-  return raw ? `'${toKebabCase(raw)}'` : "'value'"
+  const words = hintWords(nameHint)
+  const last = words.at(-1) ?? ''
+  const has = (...candidates: string[]) => candidates.some((candidate) => words.includes(candidate))
+  if (['id', 'identifier', 'token', 'key'].includes(last)) return `'${toKebabCase(nameHint ?? 'example')}-123'`
+  if (['url', 'uri', 'href', 'link', 'endpoint', 'origin'].includes(last)) return "'https://example.com'"
+  if (['server', 'host', 'domain', 'hostname'].includes(last)) return "'example.com'"
+  if (has('email')) return "'user@example.com'"
+  if (has('phone')) return "'+15555550123'"
+  if (has('currency')) return "'USD'"
+  if (has('locale', 'language', 'lang')) return "'en-US'"
+  if (has('country')) return "'US'"
+  if (has('path', 'directory', 'folder', 'filename') || (last === 'file' && words.length === 1)) return "'path/to/file'"
+  if (has('title', 'message', 'body', 'text', 'description', 'label', 'content')) return "'Hello from Capacitor'"
+  if (last === 'name') return `'${words.length > 1 ? toKebabCase(words.slice(0, -1).join('-')) : 'example'}'`
+  return nameHint ? `'${toKebabCase(nameHint)}'` : "'value'"
+}
+
+const exampleNumber = (nameHint?: string) => {
+  const words = hintWords(nameHint)
+  const has = (...candidates: string[]) => candidates.some((candidate) => words.includes(candidate))
+  if (has('lat', 'latitude')) return '48.8566'
+  if (has('lng', 'lon', 'longitude')) return '2.3522'
+  if (has('port')) return '8080'
+  if (has('timeout', 'interval', 'duration', 'delay', 'ms', 'millis')) return '1000'
+  if (has('volume', 'opacity', 'alpha', 'ratio', 'brightness', 'level')) return '0.5'
+  return '1'
 }
 
 // A JSDoc @example or @default value is reused when it is a single-line literal.
@@ -603,28 +646,134 @@ const getDocumentedLiteral = (node: ts.Node) => {
   return undefined
 }
 
-const buildObjectExample = (members: ts.NodeArray<ts.TypeElement>, context: ExampleContext, depth: number): string => {
-  const entries: string[] = []
-  for (const member of members) {
-    if (!ts.isPropertySignature(member) || member.questionToken || !member.name) continue
-    const key = member.name.getText()
-    const value = getDocumentedLiteral(member) ?? buildExampleValue(member.type, context, depth + 1, key.replaceAll(/['"]/g, ''))
-    entries.push(`${key}: ${value}`)
-  }
-
-  if (entries.length === 0) return '{}'
-  if (entries.length === 1 && !entries[0].includes('\n') && entries[0].length <= 60) return `{ ${entries[0]} }`
-  return ['{', ...entries.map((entry) => `  ${indentLines(entry, '  ')},`), '}'].join('\n')
+const renderObject = (entries: ObjectEntries) => {
+  const rendered = [...entries].map(([key, value]) => `${key}: ${value}`)
+  if (rendered.length === 0) return '{}'
+  if (rendered.length === 1 && !rendered[0].includes('\n') && rendered[0].length <= 60) return `{ ${rendered[0]} }`
+  return ['{', ...rendered.map((entry) => `  ${indentLines(entry, '  ')},`), '}'].join('\n')
 }
 
+const literalValues = (typeNode: ts.TypeNode | undefined, context: ExampleContext, depth = 0): string[] | undefined => {
+  if (!typeNode || depth > 4) return undefined
+  if (ts.isLiteralTypeNode(typeNode)) return [typeNode.literal.getText()]
+  if (ts.isUnionTypeNode(typeNode)) {
+    const values = typeNode.types.map((member) => literalValues(member, context, depth + 1))
+    return values.every(Boolean) ? values.flat() as string[] : undefined
+  }
+  if (ts.isTypeReferenceNode(typeNode)) {
+    const exported = context.exportedTypes.get(typeNode.typeName.getText())
+    if (exported && ts.isTypeAliasDeclaration(exported.node)) return literalValues(exported.node.type, context, depth + 1)
+  }
+  return undefined
+}
+
+const isFunctionLike = (typeNode?: ts.TypeNode) => Boolean(typeNode && ts.isFunctionTypeNode(typeNode))
+
+const propertyValue = (member: ts.PropertySignature, context: ExampleContext, depth: number) => {
+  const key = member.name.getText().replaceAll(/['"]/g, '')
+  const documented = getDocumentedLiteral(member)
+  const allowed = literalValues(member.type, context)
+  if (documented && (!allowed || allowed.includes(documented))) return documented
+  return buildExampleValue(member.type, context, depth + 1, key)
+}
+
+// Returns the properties an example should pass for an object-like type, or undefined when the type is not an object.
+const getObjectEntries = (typeNode: ts.TypeNode | undefined, context: ExampleContext, depth: number, omit = new Set<string>()): ObjectEntries | undefined => {
+  if (!typeNode || depth > 4) return undefined
+  if (ts.isParenthesizedTypeNode(typeNode)) return getObjectEntries(typeNode.type, context, depth, omit)
+  if (ts.isTypeLiteralNode(typeNode)) return getMemberEntries(typeNode.members, context, depth, omit)
+  if (ts.isIntersectionTypeNode(typeNode)) {
+    const merged: ObjectEntries = new Map()
+    let objectLike = false
+    for (const part of typeNode.types) {
+      const entries = getObjectEntries(part, context, depth, omit)
+      if (!entries) continue
+      objectLike = true
+      for (const [key, value] of entries) merged.set(key, value)
+    }
+    return objectLike ? merged : undefined
+  }
+  if (!ts.isTypeReferenceNode(typeNode)) return undefined
+  return getReferenceEntries(typeNode.typeName.getText(), typeNode.typeArguments ?? [], context, depth, omit)
+}
+
+const getReferenceEntries = (
+  typeName: string,
+  typeArguments: readonly ts.TypeNode[],
+  context: ExampleContext,
+  depth: number,
+  omit: Set<string>,
+): ObjectEntries | undefined => {
+  if (depth > 4) return undefined
+  if (typeName === 'Omit') {
+    const omitted = new Set([...omit, ...(literalValues(typeArguments[1], context) ?? []).map((value) => value.replaceAll(/['"]/g, ''))])
+    return getObjectEntries(typeArguments[0], context, depth, omitted)
+  }
+  if (['Required', 'Readonly', 'Pick', 'Extract', 'Exclude', 'NonNullable'].includes(typeName)) return getObjectEntries(typeArguments[0], context, depth, omit)
+  if (['Partial', 'Record'].includes(typeName)) return new Map()
+
+  const exported = context.exportedTypes.get(typeName.split('.')[0])
+  if (!exported) return undefined
+  if (ts.isInterfaceDeclaration(exported.node)) {
+    const merged: ObjectEntries = new Map()
+    for (const clause of exported.node.heritageClauses ?? []) {
+      for (const inherited of clause.types) {
+        const parent = getReferenceEntries(inherited.expression.getText(), inherited.typeArguments ?? [], context, depth + 1, omit)
+        for (const [key, value] of parent ?? []) merged.set(key, value)
+      }
+    }
+    for (const [key, value] of getMemberEntries(exported.node.members, context, depth, omit)) merged.set(key, value)
+    return merged
+  }
+  if (ts.isTypeAliasDeclaration(exported.node)) {
+    const aliased = exported.node.type
+    if (ts.isUnionTypeNode(aliased)) {
+      const first = aliased.types.find((member) => member.kind !== ts.SyntaxKind.UndefinedKeyword)
+      return getObjectEntries(first, context, depth + 1, omit)
+    }
+    return getObjectEntries(aliased, context, depth + 1, omit)
+  }
+  return undefined
+}
+
+const getMemberEntries = (members: ts.NodeArray<ts.TypeElement>, context: ExampleContext, depth: number, omit: Set<string>): ObjectEntries => {
+  const entries: ObjectEntries = new Map()
+  const properties = members.filter((member): member is ts.PropertySignature => ts.isPropertySignature(member) && Boolean(member.name) && !omit.has(member.name.getText().replaceAll(/['"]/g, '')))
+  for (const member of properties) {
+    if (member.questionToken) continue
+    entries.set(member.name.getText(), propertyValue(member, context, depth))
+  }
+  // When every option is optional, show the first simple one so the call still demonstrates something useful.
+  if (entries.size === 0 && depth === 0) {
+    const firstOptional = properties.find((member) => !isFunctionLike(member.type))
+    if (firstOptional) entries.set(firstOptional.name.getText(), propertyValue(firstOptional, context, depth))
+  }
+  return entries
+}
+
+// Property names of an interface or type literal, used for `keyof X` parameters such as event names.
+const getObjectKeys = (typeNode: ts.TypeNode, context: ExampleContext) => {
+  if (ts.isTypeLiteralNode(typeNode)) return typeNode.members.map((member) => member.name?.getText() ?? '').filter(Boolean)
+  if (!ts.isTypeReferenceNode(typeNode)) return undefined
+  const exported = context.exportedTypes.get(typeNode.typeName.getText())
+  if (exported && ts.isInterfaceDeclaration(exported.node)) return exported.node.members.map((member) => member.name?.getText() ?? '').filter(Boolean)
+  if (exported && ts.isTypeAliasDeclaration(exported.node)) return getObjectKeys(exported.node.type, context)
+  return undefined
+}
+
+const pickEnumMember = (declaration: ts.EnumDeclaration) =>
+  declaration.members.find((member) => !/unknown|none|unspecified|invalid|undefined|default/i.test(member.name.getText())) ?? declaration.members[0]
+
+const singular = (nameHint?: string) => (nameHint && nameHint.endsWith('s') && nameHint.length > 3 ? nameHint.slice(0, -1) : nameHint)
+
 const buildExampleValue = (typeNode: ts.TypeNode | undefined, context: ExampleContext, depth = 0, nameHint?: string): string => {
-  if (!typeNode || depth > 4) return '{}'
+  if (!typeNode || depth > 5) return '{}'
 
   switch (typeNode.kind) {
     case ts.SyntaxKind.StringKeyword:
       return exampleString(nameHint)
     case ts.SyntaxKind.NumberKeyword:
-      return '1'
+      return exampleNumber(nameHint)
     case ts.SyntaxKind.BooleanKeyword:
       return 'true'
     case ts.SyntaxKind.NullKeyword:
@@ -636,19 +785,24 @@ const buildExampleValue = (typeNode: ts.TypeNode | undefined, context: ExampleCo
 
   if (ts.isParenthesizedTypeNode(typeNode)) return buildExampleValue(typeNode.type, context, depth, nameHint)
   if (ts.isLiteralTypeNode(typeNode)) return typeNode.literal.getText()
-  if (ts.isArrayTypeNode(typeNode) || ts.isTupleTypeNode(typeNode)) return '[]'
-  if (ts.isTypeLiteralNode(typeNode)) return buildObjectExample(typeNode.members, context, depth)
-  if (ts.isIntersectionTypeNode(typeNode)) {
-    const objectParts = typeNode.types.map((part) => buildExampleValue(part, context, depth, nameHint)).filter((part) => part.startsWith('{') && part !== '{}')
-    if (objectParts.length === 0) return '{}'
-    const merged = objectParts.flatMap((part) =>
-      part
-        .replace(/^\{\s*|\s*\}$/g, '')
-        .split(/,\n\s*|\n\s*/)
-        .map((entry) => entry.replace(/,$/, '').trim())
-        .filter(Boolean),
-    )
-    return merged.length === 1 ? `{ ${merged[0]} }` : ['{', ...merged.map((entry) => `  ${entry},`), '}'].join('\n')
+  if (ts.isTypeOperatorNode(typeNode) && typeNode.operator === ts.SyntaxKind.KeyOfKeyword) {
+    const keys = [...(getObjectKeys(typeNode.type, context) ?? [])]
+    return keys.length > 0 ? `'${keys[0].replaceAll(/['"]/g, '')}'` : exampleString(nameHint)
+  }
+  if (ts.isTypeReferenceNode(typeNode) && context.typeParameters.has(typeNode.typeName.getText())) {
+    return buildExampleValue(context.typeParameters.get(typeNode.typeName.getText()), context, depth + 1, nameHint)
+  }
+  if (ts.isTupleTypeNode(typeNode)) {
+    const elements = typeNode.elements.map((element) => buildExampleValue(ts.isNamedTupleMember(element) ? element.type : element, context, depth + 1, ts.isNamedTupleMember(element) ? element.name.getText() : nameHint))
+    const words = hintWords(nameHint)
+    if (elements.length === 2 && elements.every((element) => element === '1') && words.some((word) => ['destination', 'start', 'coordinates', 'position', 'location', 'center', 'origin'].includes(word))) return '[48.8566, 2.3522]'
+    return `[${elements.join(', ')}]`
+  }
+  if (ts.isArrayTypeNode(typeNode)) return buildArrayValue(typeNode.elementType, context, depth, nameHint)
+  if (ts.isFunctionTypeNode(typeNode)) {
+    const parameterNames = typeNode.parameters.map((parameter) => parameter.name.getText())
+    if (parameterNames.length === 0) return "() => {\n  console.log('called');\n}"
+    return `(${parameterNames.join(', ')}) => {\n  console.log(${parameterNames[0]});\n}`
   }
   if (ts.isUnionTypeNode(typeNode)) {
     const candidates = typeNode.types.filter(
@@ -656,52 +810,32 @@ const buildExampleValue = (typeNode: ts.TypeNode | undefined, context: ExampleCo
     )
     return buildExampleValue(candidates[0] ?? typeNode.types[0], context, depth, nameHint)
   }
-  if (ts.isFunctionTypeNode(typeNode)) {
-    const parameterNames = typeNode.parameters.map((parameter) => parameter.name.getText())
-    if (parameterNames.length === 0) return "() => {\n  console.log('called');\n}"
-    return `(${parameterNames.join(', ')}) => {\n  console.log(${parameterNames[0]});\n}`
-  }
   if (ts.isTypeReferenceNode(typeNode)) {
     const typeName = typeNode.typeName.getText()
-    if (typeName === 'Array' || typeName === 'ReadonlyArray') return '[]'
-    if (['Record', 'Partial', 'Map', 'Object'].includes(typeName)) return '{}'
+    if (typeName === 'Array' || typeName === 'ReadonlyArray') return buildArrayValue(typeNode.typeArguments?.[0], context, depth, nameHint)
     if (typeName === 'Date') return 'new Date()'
     if (typeName === 'Promise') return buildExampleValue(typeNode.typeArguments?.[0], context, depth, nameHint)
-    if (['Pick', 'Omit', 'Required', 'Readonly', 'Extract', 'Exclude', 'NonNullable'].includes(typeName)) return buildExampleValue(typeNode.typeArguments?.[0], context, depth, nameHint)
-
+    if (['Record', 'Partial', 'Map', 'Object'].includes(typeName)) return '{}'
     const exported = context.exportedTypes.get(typeName.split('.')[0])
-    if (exported?.kind === 'interface' && ts.isInterfaceDeclaration(exported.node)) {
-      const inherited = (exported.node.heritageClauses ?? []).flatMap((clause) => clause.types.map((type) => type.expression.getText()))
-      const inheritedValues = inherited
-        .map((name) => context.exportedTypes.get(name))
-        .filter((item): item is ExportedType => Boolean(item && ts.isInterfaceDeclaration(item.node)))
-        .map((item) => buildObjectExample((item.node as ts.InterfaceDeclaration).members, context, depth))
-        .filter((value) => value !== '{}')
-      const own = buildObjectExample(exported.node.members, context, depth)
-      if (inheritedValues.length === 0) return own
-      const entries = [...inheritedValues, own]
-        .filter((value) => value !== '{}')
-        .flatMap((value) =>
-          value
-            .replace(/^\{\s*|\s*\}$/g, '')
-            .split(/,\n\s*|\n\s*/)
-            .map((entry) => entry.replace(/,$/, '').trim())
-            .filter(Boolean),
-        )
-      return entries.length === 1 ? `{ ${entries[0]} }` : ['{', ...entries.map((entry) => `  ${entry},`), '}'].join('\n')
-    }
-    if (exported?.kind === 'type' && ts.isTypeAliasDeclaration(exported.node)) return buildExampleValue(exported.node.type, context, depth + 1, nameHint)
     if (exported?.kind === 'enum' && ts.isEnumDeclaration(exported.node)) {
-      const firstMember = exported.node.members[0]
-      if (firstMember) {
+      const member = pickEnumMember(exported.node)
+      if (member) {
         context.valueImports.add(exported.name)
-        return `${exported.name}.${firstMember.name.getText()}`
+        return `${exported.name}.${member.name.getText()}`
       }
     }
-    return '{}'
+    if (exported && ts.isTypeAliasDeclaration(exported.node) && !getObjectEntries(typeNode, context, depth)) return buildExampleValue(exported.node.type, context, depth + 1, nameHint)
   }
 
-  return '{}'
+  const entries = getObjectEntries(typeNode, context, depth)
+  return entries ? renderObject(entries) : '{}'
+}
+
+const buildArrayValue = (elementType: ts.TypeNode | undefined, context: ExampleContext, depth: number, nameHint?: string) => {
+  if (!elementType || depth > 3) return '[]'
+  const element = buildExampleValue(elementType, context, depth + 1, singular(nameHint))
+  if (element === '{}' || element === 'undefined') return '[]'
+  return element.includes('\n') ? `[\n  ${indentLines(element, '  ')},\n]` : `[${element}]`
 }
 
 const isVoidReturn = (typeNode?: ts.TypeNode) => {
@@ -710,8 +844,14 @@ const isVoidReturn = (typeNode?: ts.TypeNode) => {
   return text === 'void' || text === 'Promise<void>' || text === 'Promise<undefined>'
 }
 
+const sensitivePattern = /password|credential|secret|token|jwt|private/i
+
 const buildFallbackExample = (metadata: PluginMetadata, method: MethodInfo) => {
-  const context: ExampleContext = { exportedTypes: metadata.exportedTypes, valueImports: new Set() }
+  const context: ExampleContext = {
+    exportedTypes: metadata.exportedTypes,
+    valueImports: new Set(),
+    typeParameters: new Map((method.source.typeParameters ?? []).map((parameter) => [parameter.name.text, parameter.constraint ?? parameter.default])),
+  }
   const parameters: string[] = []
   for (const parameter of method.source.parameters) {
     if (parameter.questionToken || parameter.initializer) break
@@ -728,6 +868,8 @@ const buildFallbackExample = (metadata: PluginMetadata, method: MethodInfo) => {
     body = `const handle = await ${call};\n\n// Later, stop listening:\nawait handle.remove();`
   } else if (isVoidReturn(method.source.type)) {
     body = `await ${call};`
+  } else if (sensitivePattern.test(method.displayName) || sensitivePattern.test(returnText)) {
+    body = `const result = await ${call};\n// The result holds sensitive values: use it without logging it.`
   } else {
     body = `const result = await ${call};\nconsole.log(result);`
   }
@@ -767,7 +909,7 @@ const renderLegacyTutorial = (metadata: PluginMetadata) => {
 
   const methodBlocks = firstMethods
     .map((method) => {
-      const body = method.example ? method.example : buildLegacyFallbackExample(metadata, method)
+      const body = method.legacyExample ? method.legacyExample : buildLegacyFallbackExample(metadata, method)
 
       return `### \`${method.displayName}\`\n\n${method.summary || 'See the upstream definitions for the current contract.'}\n\n${body}`
     })
@@ -882,7 +1024,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 \`\`\`bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 \`\`\`
 
 Then use the following prompt:
@@ -925,6 +1067,7 @@ const renderTutorial = (metadata: PluginMetadata) => {
     .join('\n\n')
   const remaining = metadata.featureMethods.length - exampleMethods.length
   const listenerMethod = metadata.methods.find((method) => method.name === 'addListener')
+  const hasRemoveAll = metadata.methods.some((method) => method.name === 'removeAllListeners')
 
   return `---
 locale: en
@@ -940,7 +1083,7 @@ bun add ${metadata.packageName}
 bunx cap sync
 \`\`\`
 
-\`bunx cap sync\` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
+\`bunx cap sync\` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
 ## Import
 
@@ -955,12 +1098,12 @@ ${asApiTable(metadata.featureMethods)}
 ## Examples
 
 ${methodBlocks}
-${remaining > 0 && docsLink ? `\nThe [API reference](${docsLink}getting-started/) covers the other ${remaining} method${remaining === 1 ? '' : 's'}.\n` : ''}${
+${remaining > 0 ? `\nThe table above lists all ${metadata.featureMethods.length} methods; check the [GitHub repository](${metadata.plugin.href}) for the full contract of each one.\n` : ''}${
     listenerMethod
       ? `
 ## Listen to events
 
-\`addListener\` returns a handle. Call \`handle.remove()\` when the screen unmounts, or \`${metadata.importName}.removeAllListeners()\` to clear every listener.
+\`addListener\` returns a handle. Call \`handle.remove()\` when the screen unmounts${hasRemoveAll ? `, or \`${metadata.importName}.removeAllListeners()\` to clear every listener` : ''}.
 `
       : ''
   }
@@ -992,9 +1135,12 @@ const normalizeForCompare = (content: string) => content.replaceAll('\r\n', '\n'
 const refreshGeneratedExamples = (content: string, metadata: PluginMetadata) => {
   let next = content
   for (const method of metadata.methods) {
-    if (method.example) continue
-    const legacy = buildLegacyFallbackExample(metadata, method)
-    if (next.includes(legacy)) next = next.replaceAll(legacy, buildFallbackExample(metadata, method))
+    const replacement = method.example ?? buildFallbackExample(metadata, method)
+    // Old fallback snippets, and JSDoc examples that call an identifier the package doesn't export.
+    const legacySnippets = [method.legacyExample ? undefined : buildLegacyFallbackExample(metadata, method), method.legacyExample !== method.example ? method.legacyExample : undefined]
+    for (const legacy of legacySnippets) {
+      if (legacy && legacy !== replacement && next.includes(legacy)) next = next.replaceAll(legacy, replacement)
+    }
   }
   return next
 }

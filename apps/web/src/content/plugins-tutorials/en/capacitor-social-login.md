@@ -28,7 +28,7 @@ Initialize the plugin.
 ```typescript
 import { SocialLogin } from '@capgo/capacitor-social-login';
 
-await SocialLogin.initialize({});
+await SocialLogin.initialize({ oauth2: {} });
 ```
 
 ### `login`
@@ -40,7 +40,7 @@ import { SocialLogin } from '@capgo/capacitor-social-login';
 
 const result = await SocialLogin.login({
   provider: 'facebook',
-  options: { permissions: [] },
+  options: { permissions: ['permission'] },
 });
 console.log(result);
 ```

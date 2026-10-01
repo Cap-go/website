@@ -42,7 +42,7 @@ Must be called before using any other methods.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.configure({ websiteID: 'YOUR_WEBSITE_ID' });
+await CapacitorCrisp.configure({ websiteID: 'website-id-123' });
 ```
 
 ### `openMessenger`
@@ -90,9 +90,9 @@ Useful for tracking user actions and behavior.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.pushEvent({
-  name: 'completed_purchase',
-  color: 'green'
+await CapacitorCrisp.pushEvent({
+  name: 'example',
+  color: 'red',
 });
 ```
 
@@ -104,12 +104,7 @@ Associates the user with a company in Crisp.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setCompany({
-  name: 'Acme Corp',
-  url: 'https://acme.com',
-  employment: ['CEO', 'Executive'],
-  geolocation: ['USA', 'San Francisco']
-});
+await CapacitorCrisp.setCompany({ name: 'example' });
 ```
 
 ### `setInt`
@@ -120,7 +115,10 @@ Stores numerical data associated with the user session.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setInt({ key: 'user_level', value: 42 });
+await CapacitorCrisp.setInt({
+  key: 'key-123',
+  value: 1,
+});
 ```
 
 ### `setString`
@@ -131,7 +129,10 @@ Stores text data associated with the user session.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setString({ key: 'subscription_tier', value: 'premium' });
+await CapacitorCrisp.setString({
+  key: 'key-123',
+  value: 'value',
+});
 ```
 
 ### `sendMessage`
@@ -142,7 +143,7 @@ Programmatically send a message as if the user typed it.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.sendMessage({ value: 'Hello, I need help!' });
+await CapacitorCrisp.sendMessage({ value: 'value' });
 ```
 
 ### `setSegment`
@@ -153,7 +154,7 @@ Used to categorize users in the Crisp dashboard.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setSegment({ segment: 'premium-users' });
+await CapacitorCrisp.setSegment({ segment: 'segment' });
 ```
 
 ### `reset`

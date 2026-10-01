@@ -41,7 +41,7 @@ Sets metadata of the currently playing media.
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setMetadata({});
+await MediaSession.setMetadata({ album: 'album' });
 ```
 
 ### `setPlaybackState`
@@ -73,7 +73,7 @@ Updates position state for the active media session.
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setPositionState({});
+await MediaSession.setPositionState({ duration: 1000 });
 ```
 
 ## Type Reference
