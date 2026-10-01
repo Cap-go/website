@@ -43,10 +43,12 @@ export async function ensureCamera(): Promise<boolean> {
 ```typescript
 import { Permissions } from '@capgo/capacitor-permissions';
 
-const { status } = await Permissions.check({ permission: 'camera' });
-if (status === 'blocked') {
-  await Permissions.openSettings({ type: 'application' });
-}
+document.getElementById('camera-settings')?.addEventListener('click', async () => {
+  const { status } = await Permissions.check({ permission: 'camera' });
+  if (status === 'blocked') {
+    await Permissions.openSettings({ type: 'application' });
+  }
+});
 ```
 
 ## Full Reference

@@ -92,7 +92,17 @@ const map = await NativeMap.create({
 await map.updateLayout({ x: 0, y: 0, width: window.innerWidth, height: window.innerHeight });
 ```
 
-Mark controls that must receive taps with `data-map-overlay` (or use normal interactive elements such as `button` and `a`). Wrap overlay UI in a root with `data-native-map-overlay-root` when you use a full-screen HUD:
+Use a root element with class `map-overlay-root` and `data-native-map-overlay-root`. Mark controls that must receive taps with `data-map-overlay` (or use normal interactive elements such as `button` and `a`):
+
+```html
+<div class="map-overlay-root" data-native-map-overlay-root>
+  <header class="hud" data-map-overlay>
+    <button type="button" id="recenter">Recenter</button>
+  </header>
+</div>
+```
+
+Add the page transparency and pointer-event rules from the plugin README:
 
 ```css
 html.native-map-to-back,

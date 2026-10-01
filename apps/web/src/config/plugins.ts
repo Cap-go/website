@@ -206,7 +206,7 @@ const actionDefinitionRows =
 const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-native-market': 'ArchiveBoxArrowDown',
   '@capgo/capacitor-native-navigation': 'DevicePhoneMobile',
-  '@capgo/capacitor-native-map': 'GlobeAmericas',
+  '@capgo/capacitor-native-map': 'MapPin',
   '@capgo/capacitor-native-loader': 'ArrowPath',
   '@capgo/capacitor-asset-cache': 'ArchiveBoxArrowDown',
   '@capgo/capacitor-auto': 'Truck',

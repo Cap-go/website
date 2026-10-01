@@ -54,12 +54,19 @@ const map = await NativeMap.create({
   config: {
     center: { lat: 40.7128, lng: -74.006 },
     zoom: 11,
+    x: 0,
+    y: 0,
     width: window.innerWidth,
     height: window.innerHeight,
   },
 });
 
-await map.updateLayout({ width: window.innerWidth, height: window.innerHeight });
+await map.updateLayout({
+  x: 0,
+  y: 0,
+  width: window.innerWidth,
+  height: window.innerHeight,
+});
 ```
 
 Put interactive controls in HTML with `data-map-overlay` so taps stay on your UI; transparent areas pass gestures to the map.
