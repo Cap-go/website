@@ -4,6 +4,8 @@ PostHog scripts and events load from `https://psthg.capgo.app`, our own domain, 
 
 `psthg.capgo.app` is a **PostHog managed reverse proxy (EU)**: a CNAME to `*.cf-prod-eu-proxy.europehog.com`, set up in PostHog → Settings → Managed reverse proxy. PostHog runs it and handles the TLS certificate. No code or worker of ours is involved.
 
+The CNAME in Cloudflare DNS must stay **DNS only (grey cloud)**. If Cloudflare proxies it (orange cloud), PostHog's proxy and certificate provisioning break. The current record is DNS only: `dig psthg.capgo.app` returns the `europehog.com` CNAME.
+
 The site config is `apps/web/src/components/posthog.astro`, with `api_host: 'https://psthg.capgo.app'` and `ui_host: 'https://eu.posthog.com'`.
 
 Checked on 2026-10-01 through `psthg.capgo.app`, all returning 200:
@@ -20,4 +22,4 @@ Checked on 2026-10-01 through `psthg.capgo.app`, all returning 200:
 
 ## If you change the domain
 
-Create the new managed proxy domain in PostHog, wait until it shows as live, then update `api_host`. Avoid names ad blockers match on, such as `analytics`, `posthog` or `track`.
+Create the new managed proxy domain in PostHog and add its CNAME in Cloudflare as **DNS only (grey cloud)**, because Cloudflare proxies new records by default. Wait until PostHog shows the domain as live, then update `api_host`. Avoid names ad blockers match on, such as `analytics`, `posthog` or `track`.
