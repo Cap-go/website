@@ -5,6 +5,7 @@ import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
 import { getGitHubCommunityStats } from '@/services/github'
 import { getRelativeLocaleUrl } from '@/services/links'
+import { formatMetricPercent, sparklinePaths } from '@/lib/transparencyMetrics'
 
 const locale = Astro.locals.locale
 const community = getGitHubCommunityStats()
@@ -23,12 +24,19 @@ const releases = transparency.releases.map((release) => ({
   date: new Date(release.publishedAt).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }),
 }))
 
+// Build-time snapshot so the card is never empty; the client swaps in fresher values once fetched.
+const snapshot = transparency.metrics ?? { live: null, builder: null }
+const snapshotSparkline = sparklinePaths(snapshot.live?.daily ?? [])
+
 const metricRows = [
   { key: 'success_rate', source: 'live', label: m.transparency_metrics_update_success({}, { locale }) },
   { key: 'first_try_rate', source: 'live', label: m.transparency_metrics_first_try({}, { locale }) },
   { key: 'rollback_rate', source: 'live', label: m.transparency_metrics_rollback({}, { locale }) },
   { key: 'success_rate', source: 'builder', label: m.transparency_metrics_build_success({}, { locale }) },
-]
+].map((row) => {
+  const source = (row.source === 'builder' ? snapshot.builder : snapshot.live) as Record<string, unknown> | null
+  return { ...row, value: formatMetricPercent(source?.[row.key] as number | null | undefined) }
+})
 
 const smallCards = [
   {
@@ -73,6 +81,7 @@ const smallCards = [
   data-builder-endpoint={BUILDER_METRICS_PATH}
   data-updated-template={m.transparency_metrics_updated({}, { locale })}
   data-unavailable={m.transparency_metrics_unavailable({}, { locale })}
+  data-snapshot={JSON.stringify(snapshot)}
 >
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
@@ -95,15 +104,15 @@ const smallCards = [
 
         <div class="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5">
           <svg class="h-16 w-full" viewBox="0 0 300 64" preserveAspectRatio="none" role="img" aria-label={m.transparency_metrics_aria({}, { locale })}>
-            <path data-spark-area d="" fill="rgba(52,211,153,0.12)"></path>
-            <path data-spark-line d="" fill="none" stroke="rgb(52,211,153)" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+            <path data-spark-area d={snapshotSparkline?.area ?? ''} fill="rgba(52,211,153,0.12)"></path>
+            <path data-spark-line d={snapshotSparkline?.line ?? ''}fill="none" stroke="rgb(52,211,153)" stroke-width="2" vector-effect="non-scaling-stroke"></path>
           </svg>
           <dl class="mt-4 divide-y divide-white/10">
             {metricRows.map((row) => (
               <div class="flex items-center justify-between gap-4 py-3">
                 <dt class="text-sm text-gray-400">{row.label}</dt>
                 <dd class="font-mono text-sm font-semibold text-white tabular-nums" data-metric={row.key} data-source={row.source}>
-                  —
+                  {row.value}
                 </dd>
               </div>
             ))}
@@ -189,23 +198,72 @@ const smallCards = [
 </section>
 
 <script>
-  type Metrics = { success_rate?: number; first_try_rate?: number | null; rollback_rate?: number | null; updated_at?: string; daily?: Array<{ success_rate: number }> }
+  import { formatMetricPercent, sparklinePaths } from '@/lib/transparencyMetrics'
 
+  type Metrics = {
+    success_rate?: number
+    first_try_rate?: number | null
+    rollback_rate?: number | null
+    updated_at?: string
+    daily?: Array<{ success_rate: number } | number>
+  }
+  type Snapshot = { live: Metrics | null; builder: Metrics | null }
+
+  const STORAGE_KEY = 'capgo:transparency-metrics'
   const section = document.querySelector<HTMLElement>('[data-transparency]')
+  let current: Snapshot = { live: null, builder: null }
 
   async function loadJson(path: string | undefined): Promise<Metrics | null> {
     if (!path) return null
     try {
       const response = await fetch(path, { headers: { Accept: 'application/json' } })
       if (!response.ok) return null
-      return (await response.json()) as Metrics
+      const data = (await response.json()) as Metrics
+      return typeof data.success_rate === 'number' && typeof data.updated_at === 'string' ? data : null
     } catch {
       return null
     }
   }
 
-  function formatPercent(value: number | null | undefined) {
-    return typeof value === 'number' && Number.isFinite(value) ? `${value.toFixed(1)}%` : '—'
+  function parseSnapshot(raw: string | null | undefined): Snapshot | null {
+    if (!raw) return null
+    try {
+      const value = JSON.parse(raw) as Snapshot | null
+      return value && typeof value === 'object' ? { live: value.live ?? null, builder: value.builder ?? null } : null
+    } catch {
+      return null
+    }
+  }
+
+  function readStored() {
+    try {
+      return parseSnapshot(localStorage.getItem(STORAGE_KEY))
+    } catch {
+      return null
+    }
+  }
+
+  function store(snapshot: Snapshot) {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          live: snapshot.live && { ...snapshot.live, daily: dailyRates(snapshot.live) },
+          builder: snapshot.builder && { success_rate: snapshot.builder.success_rate, updated_at: snapshot.builder.updated_at },
+        }),
+      )
+    } catch {
+      // Storage disabled or full: the build-time snapshot still covers the next visit.
+    }
+  }
+
+  function newest(a: Metrics | null | undefined, b: Metrics | null | undefined) {
+    if (!a || !b) return a ?? b ?? null
+    return (Date.parse(b.updated_at ?? '') || 0) > (Date.parse(a.updated_at ?? '') || 0) ? b : a
+  }
+
+  function dailyRates(metrics: Metrics | null) {
+    return (metrics?.daily ?? []).map((day) => (typeof day === 'number' ? day : day?.success_rate))
   }
 
   function relativeTime(iso: string | undefined) {
@@ -213,37 +271,49 @@ const smallCards = [
     if (Number.isNaN(time)) return ''
     const minutes = Math.max(1, Math.round((Date.now() - time) / 60000))
     const format = new Intl.RelativeTimeFormat(document.documentElement.lang || 'en', { numeric: 'auto' })
-    return minutes < 60 ? format.format(-minutes, 'minute') : format.format(-Math.round(minutes / 60), 'hour')
+    if (minutes < 60) return format.format(-minutes, 'minute')
+    const hours = Math.round(minutes / 60)
+    return hours < 48 ? format.format(-hours, 'hour') : format.format(-Math.round(hours / 24), 'day')
   }
 
-  function drawSparkline(values: number[]) {
-    if (!section || values.length < 2) return
-    const min = Math.min(...values) - 2
-    const max = Math.max(...values) + 2
-    const points = values.map((value, index) => [(index / (values.length - 1)) * 300, 60 - ((value - min) / (max - min || 1)) * 52])
-    const line = points.map(([x, y], index) => `${index === 0 ? 'M' : 'L'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ')
-    section.querySelector('[data-spark-line]')?.setAttribute('d', line)
-    section.querySelector('[data-spark-area]')?.setAttribute('d', `${line} L300 64 L0 64 Z`)
+  function render(snapshot: Snapshot) {
+    if (!section) return
+    current = snapshot
+    const { live, builder } = snapshot
+    section.querySelectorAll<HTMLElement>('[data-metric]').forEach((cell) => {
+      const source = cell.dataset.source === 'builder' ? builder : live
+      cell.textContent = formatMetricPercent(source?.[cell.dataset.metric as keyof Metrics] as number | null | undefined)
+    })
+    const paths = sparklinePaths(dailyRates(live))
+    if (paths) {
+      section.querySelector('[data-spark-line]')?.setAttribute('d', paths.line)
+      section.querySelector('[data-spark-area]')?.setAttribute('d', paths.area)
+    }
+    const status = section.querySelector<HTMLElement>('[data-metrics-status]')
+    const updated = relativeTime(live?.updated_at ?? builder?.updated_at)
+    if (status && updated) status.textContent = (section.dataset.updatedTemplate ?? '{time}').replace('{time}', updated)
   }
 
   async function hydrate() {
     if (!section) return
     const [live, builder] = await Promise.all([loadJson(section.dataset.liveEndpoint), loadJson(section.dataset.builderEndpoint)])
-    const status = section.querySelector<HTMLElement>('[data-metrics-status]')
     if (!live && !builder) {
-      if (status) status.textContent = section.dataset.unavailable ?? ''
+      // Keep the cached values on screen; only report unavailability when there is nothing to show.
+      const status = section.querySelector<HTMLElement>('[data-metrics-status]')
+      if (status && !current.live && !current.builder) status.textContent = section.dataset.unavailable ?? ''
       return
     }
-    section.querySelectorAll<HTMLElement>('[data-metric]').forEach((cell) => {
-      const source = cell.dataset.source === 'builder' ? builder : live
-      cell.textContent = formatPercent(source?.[cell.dataset.metric as keyof Metrics] as number | null | undefined)
-    })
-    drawSparkline((live?.daily ?? []).map((day) => day.success_rate).filter((value) => Number.isFinite(value)))
-    const updated = relativeTime(live?.updated_at ?? builder?.updated_at)
-    if (status && updated) status.textContent = (section.dataset.updatedTemplate ?? '{time}').replace('{time}', updated)
+    const next = { live: newest(current.live, live), builder: newest(current.builder, builder) }
+    render(next)
+    store(next)
   }
 
   if (section) {
+    const embedded = parseSnapshot(section.dataset.snapshot)
+    const stored = readStored()
+    const initial = { live: newest(embedded?.live, stored?.live), builder: newest(embedded?.builder, stored?.builder) }
+    if (initial.live || initial.builder) render(initial)
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
