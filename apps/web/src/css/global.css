@@ -1,27 +1,20 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
+/* Satoshi by Indian Type Foundry (Fontshare), ITF Free Font License: public/fonts/satoshi/FFL.txt */
 @font-face {
-  font-family: AirbnbCerealLight;
-  src: url('/fonts/AirbnbCerealLight.woff') format('woff');
-  font-weight: 300;
+  font-family: Satoshi;
+  src: url('/fonts/satoshi/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: AirbnbCerealMedium;
-  src: url('/fonts/AirbnbCerealMedium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: AirbnbCerealBold;
-  src: url('/fonts/AirbnbCerealBold.woff') format('woff');
-  font-weight: 800;
-  font-style: normal;
+  font-family: Satoshi;
+  src: url('/fonts/satoshi/Satoshi-VariableItalic.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -47,9 +40,9 @@ body,
   --container-7xl: 83rem;
 
   /* Typography tokens used by font-pj/font-prompt/font-inter utilities */
-  --font-pj: AirbnbCerealBold, AirbnbCerealMedium, ui-sans-serif, system-ui, sans-serif;
-  --font-prompt: AirbnbCerealBold, AirbnbCerealMedium, ui-sans-serif, system-ui, sans-serif;
-  --font-inter: AirbnbCerealMedium, ui-sans-serif, system-ui, sans-serif;
+  --font-pj: Satoshi, ui-sans-serif, system-ui, sans-serif;
+  --font-prompt: Satoshi, ui-sans-serif, system-ui, sans-serif;
+  --font-inter: Satoshi, ui-sans-serif, system-ui, sans-serif;
 
   /* Gray colors */
   --color-gray-50: oklch(0.984 0.003 247.858);

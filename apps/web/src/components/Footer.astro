@@ -1,4 +1,6 @@
 ---
+import { CAPGO_MARK_PATH } from '@/config/capgoMark'
+import { CAPGO_LOCKUP_MARK_TRANSFORM, CAPGO_LOCKUP_TEXT_X, CAPGO_LOCKUP_VIEWBOX_ATTR, CAPGO_WORDTYPE_PATH, CAPGO_WORDTYPE_TRANSFORM } from '@/config/capgoWordtype'
 import m from '@/copy/messages'
 import { getLocalizedPath } from '@/services/locale-path'
 import { locales } from '@/services/locale'
@@ -149,7 +151,12 @@ const columns: { title: string; links: FooterLink[] }[] = [
     <div class="grid gap-12 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-10">
       <div>
         <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label={m.capgo_home({}, { locale: Astro.locals.locale })} class="inline-flex">
-          <img src="/capgo_logo_header_2x.webp" alt="Capgo" width="144" height="40" loading="lazy" class="h-9 w-auto" />
+          <svg class="h-9 w-auto text-white" viewBox={CAPGO_LOCKUP_VIEWBOX_ATTR} width="144" height="36" role="img" aria-label="Capgo">
+            <g fill="currentColor">
+              <path fill-rule="evenodd" transform={CAPGO_LOCKUP_MARK_TRANSFORM} d={CAPGO_MARK_PATH}></path>
+              <path transform={`translate(${CAPGO_LOCKUP_TEXT_X} 0) ${CAPGO_WORDTYPE_TRANSFORM}`} d={CAPGO_WORDTYPE_PATH}></path>
+            </g>
+          </svg>
         </a>
         <p class="mt-5 max-w-60 text-[15px] leading-6 text-zinc-400">{m.footer_brand_tagline({}, { locale: Astro.locals.locale })}</p>
         <a
