@@ -75,7 +75,11 @@ Use this method to initialize and start AppsFlyer SDK. This API should be called
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.initSDK({} as AFInit);
+const result = await AppsFlyer.initSDK({
+  devKey: 'dev-key-123',
+  appID: 'app-id-123',
+});
+console.log(result);
 ```
 
 ### `startSDK`
@@ -85,7 +89,8 @@ Use this method to start AppsFlyer SDK, only on manual start mode.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.startSDK();
+const result = await AppsFlyer.startSDK();
+console.log(result);
 ```
 
 ### `logEvent`
@@ -95,7 +100,8 @@ Log an in-app event.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.logEvent({} as AFEvent);
+const result = await AppsFlyer.logEvent({});
+console.log(result);
 ```
 
 ### `setCustomerUserId`
@@ -106,7 +112,7 @@ This ID is available in raw-data reports and in the Postback APIs for cross-refe
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setCustomerUserId({} as AFCuid);
+await AppsFlyer.setCustomerUserId({ cuid: 'cuid' });
 ```
 
 ### `setCurrencyCode`
@@ -116,7 +122,7 @@ Sets the currency used for in-app purchases. Provide a three-character ISO 4217 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setCurrencyCode({} as AFCurrency);
+await AppsFlyer.setCurrencyCode({ currencyCode: 'USD' });
 ```
 
 ### `updateServerUninstallToken`
@@ -127,7 +133,7 @@ Use this to forward uninstall measurement tokens to AppsFlyer.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.updateServerUninstallToken({} as AFUninstall);
+await AppsFlyer.updateServerUninstallToken({ token: 'token-123' });
 ```
 
 ### `setAppInviteOneLink`
@@ -137,7 +143,7 @@ Sets the OneLink ID used as the base link for invite attribution.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setAppInviteOneLink({} as AFOnelinkID);
+await AppsFlyer.setAppInviteOneLink({ onelinkID: 'onelink-id-123' });
 ```
 
 ### `setOneLinkCustomDomain`
@@ -147,7 +153,7 @@ Registers branded OneLink domains so AppsFlyer can resolve attribution parameter
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setOneLinkCustomDomain({} as AFOnelinkDomain);
+await AppsFlyer.setOneLinkCustomDomain({ domains: [] });
 ```
 
 ### `appendParametersToDeepLinkingURL`
@@ -158,7 +164,10 @@ Include at least `pid` and `is_retargeting=true` in the parameters map.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.appendParametersToDeepLinkingURL({} as AFAppendToDeepLink);
+await AppsFlyer.appendParametersToDeepLinkingURL({
+  contains: 'contains',
+  parameters: {},
+});
 ```
 
 ### `setResolveDeepLinkURLs`
@@ -169,7 +178,7 @@ It lets the SDK resolve the wrapped URL so deep linking still works correctly.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setResolveDeepLinkURLs({} as AFUrls);
+await AppsFlyer.setResolveDeepLinkURLs({ urls: [] });
 ```
 
 ### `addPushNotificationDeepLinkPath`
@@ -179,7 +188,7 @@ Configures how the SDK extracts deep link values from push notification payloads
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.addPushNotificationDeepLinkPath({} as AFPath);
+await AppsFlyer.addPushNotificationDeepLinkPath({ path: [] });
 ```
 
 ### `setSharingFilter`
@@ -189,7 +198,7 @@ Stops events from propagating to the specified AppsFlyer partners.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setSharingFilter({} as AFFilters);
+await AppsFlyer.setSharingFilter({ filters: [] });
 ```
 
 ### `setSharingFilterForAllPartners`
@@ -209,7 +218,7 @@ Stops events from propagating to the specified AppsFlyer partners.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setSharingFilterForPartners({} as AFFilters);
+await AppsFlyer.setSharingFilterForPartners({ filters: [] });
 ```
 
 ### `setAdditionalData`
@@ -219,7 +228,7 @@ Sets additional key-value data to send to AppsFlyer.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setAdditionalData({} as AFData);
+await AppsFlyer.setAdditionalData({ additionalData: {} });
 ```
 
 ### `getAppsFlyerUID`
@@ -229,7 +238,8 @@ Get AppsFlyer's unique device ID (created for every new install of an app).
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.getAppsFlyerUID();
+const result = await AppsFlyer.getAppsFlyerUID();
+console.log(result);
 ```
 
 ### `anonymizeUser`
@@ -239,7 +249,7 @@ End User Opt-Out from AppsFlyer analytics (Anonymize user data).
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.anonymizeUser({} as AFAnonymizeUser);
+await AppsFlyer.anonymizeUser({ anonymizeUser: true });
 ```
 
 ### `stop`
@@ -250,7 +260,8 @@ Useful when implementing user opt-in/opt-out.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.stop();
+const result = await AppsFlyer.stop();
+console.log(result);
 ```
 
 ### `disableSKAdNetwork`
@@ -260,7 +271,7 @@ Opt-out of SKAdNetwork
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.disableSKAdNetwork({} as AFDisable);
+await AppsFlyer.disableSKAdNetwork({ shouldDisable: true });
 ```
 
 ### `disableAdvertisingIdentifier`
@@ -270,7 +281,7 @@ Disables collection of various Advertising IDs by the SDK. This includes Apple I
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.disableAdvertisingIdentifier({} as AFDisable);
+await AppsFlyer.disableAdvertisingIdentifier({ shouldDisable: true });
 ```
 
 ### `disableCollectASA`
@@ -280,7 +291,7 @@ Opt-out of Apple Search Ads attributions.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.disableCollectASA({} as AFDisable);
+await AppsFlyer.disableCollectASA({ shouldDisable: true });
 ```
 
 ### `setHost`
@@ -290,7 +301,10 @@ Set a custom host.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setHost({} as AFHost);
+await AppsFlyer.setHost({
+  hostPrefixName: 'example',
+  hostName: 'example.com',
+});
 ```
 
 ### `generateInviteLink`
@@ -300,7 +314,8 @@ Allowing your existing users to invite their friends and contacts as new users t
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.generateInviteLink({} as AFLinkGenerator);
+const result = await AppsFlyer.generateInviteLink({});
+console.log(result);
 ```
 
 ### `validateAndLogInAppPurchaseAndroid`
@@ -310,7 +325,14 @@ API for server verification of in-app purchases. An af_purchase event with the r
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.validateAndLogInAppPurchaseAndroid({} as AFAndroidInAppPurchase);
+const result = await AppsFlyer.validateAndLogInAppPurchaseAndroid({
+  currency: 'USD',
+  publicKey: 'public-key-123',
+  signature: 'signature',
+  purchaseData: 'purchase-data',
+  price: 'price',
+});
+console.log(result);
 ```
 
 ### `validateAndLogInAppPurchaseIos`
@@ -320,7 +342,13 @@ See the source definitions for the current contract.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.validateAndLogInAppPurchaseIos({} as AFIosInAppPurchase);
+const result = await AppsFlyer.validateAndLogInAppPurchaseIos({
+  currency: 'USD',
+  inAppPurchase: 'in-app-purchase',
+  price: 'price',
+  transactionId: 'transaction-id-123',
+});
+console.log(result);
 ```
 
 ### `getSdkVersion`
@@ -330,7 +358,8 @@ Get the AppsFlyer SDK version used in app.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.getSdkVersion();
+const result = await AppsFlyer.getSdkVersion();
+console.log(result);
 ```
 
 ### `enableFacebookDeferredApplinks`
@@ -341,7 +370,8 @@ This API must be invoked before initializing the AppsFlyer SDK in order to funct
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.enableFacebookDeferredApplinks({} as AFFbDAL);
+const result = await AppsFlyer.enableFacebookDeferredApplinks({ enableFacebookDAL: true });
+console.log(result);
 ```
 
 ### `sendPushNotificationData`
@@ -351,7 +381,7 @@ Measure and get data from push-notification campaigns.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.sendPushNotificationData({} as AFPushPayload);
+await AppsFlyer.sendPushNotificationData({ pushPayload: {} });
 ```
 
 ### `setCurrentDeviceLanguage`
@@ -361,7 +391,8 @@ Set the language of the device. The data will be displayed in Raw Data Reports
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setCurrentDeviceLanguage({} as AFLanguage);
+const result = await AppsFlyer.setCurrentDeviceLanguage({ language: 'en-US' });
+console.log(result);
 ```
 
 ### `logCrossPromoteImpression`
@@ -371,7 +402,12 @@ Logs an impression as part of a cross-promotion campaign. Make sure to use the p
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.logCrossPromoteImpression({} as AFPromotion);
+const result = await AppsFlyer.logCrossPromoteImpression({
+  appID: 'app-id-123',
+  campaign: 'campaign',
+  parameters: {},
+});
+console.log(result);
 ```
 
 ### `setUserEmails`
@@ -381,7 +417,8 @@ Set the user emails and encrypt them.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setUserEmails({} as AFEmails);
+const result = await AppsFlyer.setUserEmails({ emails: [] });
+console.log(result);
 ```
 
 ### `logLocation`
@@ -391,7 +428,11 @@ Manually log the location of the user
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.logLocation({} as AFLatLng);
+const result = await AppsFlyer.logLocation({
+  latitude: 1,
+  longitude: 1,
+});
+console.log(result);
 ```
 
 ### `setPhoneNumber`
@@ -401,7 +442,8 @@ Will be sent as an SHA-256 encrypted string.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setPhoneNumber({} as AFPhone);
+const result = await AppsFlyer.setPhoneNumber({ phone: '+15555550123' });
+console.log(result);
 ```
 
 ### `setPartnerData`
@@ -411,7 +453,11 @@ Allows sending custom data for partner integration purposes.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setPartnerData({} as AFPartnerData);
+const result = await AppsFlyer.setPartnerData({
+  data: {},
+  partnerId: 'partner-id-123',
+});
+console.log(result);
 ```
 
 ### `logInvite`
@@ -421,7 +467,11 @@ Use to log a user-invite in-app event (af_invite).
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.logInvite({} as AFLogInvite);
+const result = await AppsFlyer.logInvite({
+  eventParameters: {},
+  channel: 'channel',
+});
+console.log(result);
 ```
 
 ### `setDisableNetworkData`
@@ -431,7 +481,7 @@ Use to opt-out of collecting the network operator name (carrier) and sim operato
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setDisableNetworkData({} as AFDisable);
+await AppsFlyer.setDisableNetworkData({ shouldDisable: true });
 ```
 
 ### `enableTCFDataCollection`
@@ -442,7 +492,7 @@ Flag value will be persisted between app sessions.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.enableTCFDataCollection({} as AFEnableTCFDataCollection);
+await AppsFlyer.enableTCFDataCollection({ shouldEnableTCFDataCollection: true });
 ```
 
 ### `setConsentData`
@@ -453,7 +503,7 @@ If your app doesn't use a CMP compatible with TCF v2.2, use the following method
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setConsentData({} as AFConsentData);
+await AppsFlyer.setConsentData({ data: { isUserSubjectToGDPR: true } });
 ```
 
 ### `logAdRevenue`
@@ -463,9 +513,14 @@ Ad revenue is generated by displaying ads on rewarded videos, offer walls, inter
 You can use this method to log your ad revenue.
 
 ```typescript
-import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+import { AppsFlyer, MediationNetwork } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.logAdRevenue({} as AFAdRevenueData);
+await AppsFlyer.logAdRevenue({
+  monetizationNetwork: 'monetization-network',
+  mediationNetwork: MediationNetwork.IRONSOURCE,
+  currencyIso4217Code: 'USD',
+  revenue: 1,
+});
 ```
 
 ### `setConsentDataV2`
@@ -476,7 +531,7 @@ If your app doesn't use a CMP compatible with TCF v2.2, use the following method
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setConsentDataV2({} as AFConsentOptions);
+await AppsFlyer.setConsentDataV2({});
 ```
 
 ### `isSDKStarted`
@@ -486,7 +541,8 @@ Use this method to check whether the AppsFlyer SDK has already been started in t
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.isSDKStarted();
+const result = await AppsFlyer.isSDKStarted();
+console.log(result);
 ```
 
 ### `isSDKStopped`
@@ -496,7 +552,8 @@ Use this method to check whether the AppsFlyer SDK is currently stopped.
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.isSDKStopped();
+const result = await AppsFlyer.isSDKStopped();
+console.log(result);
 ```
 
 ### `disableAppSetId`
@@ -517,9 +574,16 @@ API for server verification of in-app purchases V2.
 An af_purchase event with the relevant values will be automatically logged if the validation is successful.
 
 ```typescript
-import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+import { AppsFlyer, AFPurchaseType } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.validateAndLogInAppPurchaseV2({} as AFPurchaseDetailsV2);
+const result = await AppsFlyer.validateAndLogInAppPurchaseV2({
+  purchaseDetails: {
+    purchaseType: AFPurchaseType.oneTimePurchase,
+    purchaseToken: 'purchase-token-123',
+    productId: 'product-id-123',
+  },
+});
+console.log(result);
 ```
 
 ## Source Of Truth

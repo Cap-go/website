@@ -12,59 +12,108 @@ bun add @capgo/capacitor-firebase-performance
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `startTrace` - Starts a trace.
-- `stopTrace` - Stops a trace.
-- `incrementMetric` - Atomically increments the metric with the given name for the selected trace by the `incrementBy` value.
-- `setEnabled` - Enables or disables performance monitoring. Will be applied with the next start of the app.
+## Import
 
-## Example Usage
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+```
 
-### `startTrace`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `startTrace` | Starts a trace. |
+| `stopTrace` | Stops a trace. |
+| `incrementMetric` | Atomically increments the metric with the given name for the selected trace by the `incrementBy` value. |
+| `setEnabled` | Enables or disables performance monitoring. Will be applied with the next start of the app. |
+| `isEnabled` | Determines whether performance monitoring is enabled or disabled. |
+| `putAttribute` | Sets a custom attribute of a trace to a given value. |
+| `getAttribute` | Returns the value of a custom attribute of a trace. |
+| `getAttributes` | Gets the all the custom attributes of a trace with their values. |
+| `removeAttribute` | Removes a custom attribute from a trace given its name. |
+| `putMetric` | Sets the value of a custom metric. |
+| `getMetric` | Get the value of a custom metric by name. |
+| `record` | Records a trace given its name and options. |
+
+## Examples
+
+### `startTrace()`
 
 Starts a trace.
 
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.startTrace({} as StartTraceOptions);
+await FirebasePerformance.startTrace({ traceName: 'example' });
 ```
 
-### `stopTrace`
+### `stopTrace()`
 
 Stops a trace.
 
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.stopTrace({} as StopTraceOptions);
+await FirebasePerformance.stopTrace({ traceName: 'example' });
 ```
 
-### `incrementMetric`
+### `incrementMetric()`
 
 Atomically increments the metric with the given name for the selected trace by the `incrementBy` value.
 
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.incrementMetric({} as IncrementMetricOptions);
+await FirebasePerformance.incrementMetric({
+  traceName: 'example',
+  metricName: 'example',
+});
 ```
 
-### `setEnabled`
+### `setEnabled()`
 
 Enables or disables performance monitoring. Will be applied with the next start of the app.
 
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.setEnabled({} as SetEnabledOptions);
+await FirebasePerformance.setEnabled({ enabled: true });
 ```
 
-## Full Reference
+### `isEnabled()`
 
-- GitHub: https://github.com/Cap-go/capacitor-firebase/tree/main/packages/performance
-- Docs: /docs/plugins/firebase-performance/
+Determines whether performance monitoring is enabled or disabled.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+const result = await FirebasePerformance.isEnabled();
+console.log(result);
+```
+
+### `putAttribute()`
+
+Sets a custom attribute of a trace to a given value.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.putAttribute({
+  traceName: 'example',
+  attribute: "experiment",
+  value: "A",
+});
+```
+
+The [API reference](/docs/plugins/firebase-performance/getting-started/) covers the other 6 methods.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/performance)
+- [Documentation](/docs/plugins/firebase-performance/)
+- [API reference](/docs/plugins/firebase-performance/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-firebase-performance
 

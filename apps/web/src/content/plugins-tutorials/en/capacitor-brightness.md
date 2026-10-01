@@ -12,59 +12,102 @@ bun add @capgo/capacitor-brightness
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `getBrightness` - Get the current brightness level of the device's main screen.
-- `setBrightness` - Set the brightness level of the device's main screen.
-- `getSystemBrightness` - Get the system-wide screen brightness.
-- `setSystemBrightness` - Set the system-wide screen brightness. Requires WRITE_SETTINGS permission on Android. This also changes the brightness mode to MANUAL.
+## Import
 
-## Example Usage
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+```
 
-### `getBrightness`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getBrightness` | Get the current brightness level of the device's main screen. |
+| `setBrightness` | Set the brightness level of the device's main screen. |
+| `getSystemBrightness` | Get the system-wide screen brightness. |
+| `setSystemBrightness` | Set the system-wide screen brightness. Requires WRITE_SETTINGS permission on Android. This also changes the brightness mode to MANUAL. |
+| `getSystemBrightnessMode` | Get the current system brightness mode (automatic or manual). Requires WRITE_SETTINGS permission on Android. |
+| `setSystemBrightnessMode` | Set the system brightness mode (automatic or manual). Requires WRITE_SETTINGS permission on Android. |
+| `isUsingSystemBrightness` | Check if the current activity is using the system-wide brightness value. |
+| `restoreSystemBrightness` | Reset the brightness setting of the current activity to use the system-wide value. |
+| `isAvailable` | Check if the Brightness API is available on the current device. |
+| `checkPermissions` | Check user's permissions for accessing system brightness. |
+| `requestPermissions` | Request permissions for accessing system brightness. On Android, this opens the system settings to grant WRITE_SETTINGS permission. |
+
+## Examples
+
+### `getBrightness()`
 
 Get the current brightness level of the device's main screen.
 
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.getBrightness();
+const result = await CapgoBrightness.getBrightness();
+console.log(result);
 ```
 
-### `setBrightness`
+### `setBrightness()`
 
 Set the brightness level of the device's main screen.
 
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setBrightness({} as SetBrightnessOptions);
+await CapgoBrightness.setBrightness({ brightness: 1 });
 ```
 
-### `getSystemBrightness`
+### `getSystemBrightness()`
 
 Get the system-wide screen brightness.
 
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.getSystemBrightness();
+const result = await CapgoBrightness.getSystemBrightness();
+console.log(result);
 ```
 
-### `setSystemBrightness`
+### `setSystemBrightness()`
 
 Set the system-wide screen brightness. Requires WRITE_SETTINGS permission on Android. This also changes the brightness mode to MANUAL.
 
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setSystemBrightness({} as SetBrightnessOptions);
+await CapgoBrightness.setSystemBrightness({ brightness: 1 });
 ```
 
-## Full Reference
+### `getSystemBrightnessMode()`
 
-- GitHub: https://github.com/Cap-go/capacitor-brightness/
-- Docs: /docs/plugins/brightness/
+Get the current system brightness mode (automatic or manual). Requires WRITE_SETTINGS permission on Android.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.getSystemBrightnessMode();
+console.log(result);
+```
+
+### `setSystemBrightnessMode()`
+
+Set the system brightness mode (automatic or manual). Requires WRITE_SETTINGS permission on Android.
+
+```typescript
+import { CapgoBrightness, BrightnessMode } from '@capgo/capacitor-brightness';
+
+await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.UNKNOWN });
+```
+
+The [API reference](/docs/plugins/brightness/getting-started/) covers the other 5 methods.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-brightness/)
+- [Documentation](/docs/plugins/brightness/)
+- [API reference](/docs/plugins/brightness/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-brightness
 

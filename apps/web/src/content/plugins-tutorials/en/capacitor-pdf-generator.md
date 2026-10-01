@@ -12,37 +12,50 @@ bun add @capgo/capacitor-pdf-generator
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `fromURL` - Generates a PDF from the provided URL.
-- `fromData` - Generates a PDF from a raw HTML string.
+## Import
 
-## Example Usage
+```typescript
+import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
+```
 
-### `fromURL`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `fromURL` | Generates a PDF from the provided URL. |
+| `fromData` | Generates a PDF from a raw HTML string. |
+
+## Examples
+
+### `fromURL()`
 
 Generates a PDF from the provided URL.
 
 ```typescript
 import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
 
-await PdfGenerator.fromURL({} as PdfGeneratorFromUrlOptions);
+const result = await PdfGenerator.fromURL({ url: 'https://example.com' });
+console.log(result);
 ```
 
-### `fromData`
+### `fromData()`
 
 Generates a PDF from a raw HTML string.
 
 ```typescript
 import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
 
-await PdfGenerator.fromData({} as PdfGeneratorFromDataOptions);
+const result = await PdfGenerator.fromData({ data: 'data' });
+console.log(result);
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-pdf-generator/
-- Docs: /docs/plugins/pdf-generator/
+- [GitHub repository](https://github.com/Cap-go/capacitor-pdf-generator/)
+- [Documentation](/docs/plugins/pdf-generator/)
+- [API reference](/docs/plugins/pdf-generator/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-pdf-generator
 

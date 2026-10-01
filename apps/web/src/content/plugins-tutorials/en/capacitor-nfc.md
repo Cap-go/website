@@ -12,16 +12,32 @@ bun add @capgo/capacitor-nfc
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `startScanning` - Starts listening for NFC tags.
-- `stopScanning` - Stops the ongoing NFC scanning session.
-- `write` - Writes the provided NDEF records to the last discovered tag.
-- `erase` - Attempts to erase the last discovered tag by writing an empty NDEF message.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+```
 
-### `startScanning`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `startScanning` | Starts listening for NFC tags. |
+| `stopScanning` | Stops the ongoing NFC scanning session. |
+| `write` | Writes the provided NDEF records to the last discovered tag. |
+| `erase` | Attempts to erase the last discovered tag by writing an empty NDEF message. |
+| `makeReadOnly` | Attempts to make the last discovered tag read-only. |
+| `share` | Shares an NDEF message with another device via peer-to-peer (Android only). |
+| `unshare` | Stops sharing previously provided NDEF message (Android only). |
+| `getStatus` | Returns the current NFC adapter status. |
+| `showSettings` | Opens the system settings page where the user can enable NFC. |
+| `isSupported` | Checks whether the device has NFC hardware support. |
+
+## Examples
+
+### `startScanning()`
 
 Starts listening for NFC tags.
 
@@ -31,7 +47,7 @@ import { CapacitorNfc } from '@capgo/capacitor-nfc';
 await CapacitorNfc.startScanning();
 ```
 
-### `stopScanning`
+### `stopScanning()`
 
 Stops the ongoing NFC scanning session.
 
@@ -41,17 +57,17 @@ import { CapacitorNfc } from '@capgo/capacitor-nfc';
 await CapacitorNfc.stopScanning();
 ```
 
-### `write`
+### `write()`
 
 Writes the provided NDEF records to the last discovered tag.
 
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.write({} as WriteTagOptions);
+await CapacitorNfc.write({ records: [] });
 ```
 
-### `erase`
+### `erase()`
 
 Attempts to erase the last discovered tag by writing an empty NDEF message.
 
@@ -61,10 +77,37 @@ import { CapacitorNfc } from '@capgo/capacitor-nfc';
 await CapacitorNfc.erase();
 ```
 
-## Full Reference
+### `makeReadOnly()`
 
-- GitHub: https://github.com/Cap-go/capacitor-nfc/
-- Docs: /docs/plugins/nfc/
+Attempts to make the last discovered tag read-only.
+
+```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
+await CapacitorNfc.makeReadOnly();
+```
+
+### `share()`
+
+Shares an NDEF message with another device via peer-to-peer (Android only).
+
+```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
+await CapacitorNfc.share({ records: [] });
+```
+
+The [API reference](/docs/plugins/nfc/getting-started/) covers the other 4 methods.
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapacitorNfc.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-nfc/)
+- [Documentation](/docs/plugins/nfc/)
+- [API reference](/docs/plugins/nfc/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-nfc
 

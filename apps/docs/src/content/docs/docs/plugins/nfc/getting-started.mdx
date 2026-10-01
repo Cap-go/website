@@ -61,7 +61,7 @@ Writes the provided NDEF records to the last discovered tag.
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.write({} as WriteTagOptions);
+await CapacitorNfc.write({ records: [] });
 ```
 
 ### `erase`
@@ -91,7 +91,7 @@ Shares an NDEF message with another device via peer-to-peer (Android only).
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.share({} as ShareTagOptions);
+await CapacitorNfc.share({ records: [] });
 ```
 
 ### `unshare`
@@ -111,7 +111,8 @@ Returns the current NFC adapter status.
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.getStatus();
+const result = await CapacitorNfc.getStatus();
+console.log(result);
 ```
 
 ### `showSettings`
@@ -138,7 +139,8 @@ app's UI. To check if NFC is currently enabled, use `getStatus()`.
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.isSupported();
+const result = await CapacitorNfc.isSupported();
+console.log(result);
 ```
 
 ## Type Reference

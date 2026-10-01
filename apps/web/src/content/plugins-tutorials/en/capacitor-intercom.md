@@ -12,36 +12,65 @@ bun add @capgo/capacitor-intercom
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `loadWithKeys` - Initialize Intercom with API keys at runtime. Use this if you prefer not to configure keys in capacitor.config.
-- `registerIdentifiedUser` - Register a known user with Intercom. At least one of userId or email must be provided.
-- `registerUnidentifiedUser` - Register an anonymous user with Intercom.
-- `updateUser` - Update user attributes in Intercom.
+## Import
 
-## Example Usage
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+```
 
-### `loadWithKeys`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `loadWithKeys` | Initialize Intercom with API keys at runtime. Use this if you prefer not to configure keys in capacitor.config. |
+| `registerIdentifiedUser` | Register a known user with Intercom. At least one of userId or email must be provided. |
+| `registerUnidentifiedUser` | Register an anonymous user with Intercom. |
+| `updateUser` | Update user attributes in Intercom. |
+| `logout` | Log the user out of Intercom. |
+| `logEvent` | Log a custom event in Intercom. |
+| `displayMessenger` | Open the Intercom messenger. |
+| `displayMessageComposer` | Open the message composer with a pre-filled message. |
+| `displayHelpCenter` | Open the Intercom help center. |
+| `hideMessenger` | Hide the Intercom messenger. |
+| `displayLauncher` | Show the Intercom launcher button. |
+| `hideLauncher` | Hide the Intercom launcher button. |
+| `displayInAppMessages` | Enable in-app messages from Intercom. |
+| `hideInAppMessages` | Disable in-app messages from Intercom. |
+| `displayCarousel` | Display a specific Intercom carousel. |
+| `displayArticle` | Display a specific Intercom article. |
+| `displaySurvey` | Display a specific Intercom survey. |
+| `setUserHash` | Set the HMAC for identity verification. |
+| `setUserJwt` | Set JWT for secure messenger authentication. |
+| `setBottomPadding` | Set the bottom padding for the Intercom messenger UI. |
+| `sendPushTokenToIntercom` | Send a push notification token to Intercom. |
+| `receivePush` | Handle a received Intercom push notification. |
+| `getUnreadConversationCount` | Get the number of unread conversations for the current user. |
+
+## Examples
+
+### `loadWithKeys()`
 
 Initialize Intercom with API keys at runtime. Use this if you prefer not to configure keys in capacitor.config.
 
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.loadWithKeys({} as IntercomLoadOptions);
+await CapgoIntercom.loadWithKeys({});
 ```
 
-### `registerIdentifiedUser`
+### `registerIdentifiedUser()`
 
 Register a known user with Intercom. At least one of userId or email must be provided.
 
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.registerIdentifiedUser({} as IntercomIdentifiedUserOptions);
+await CapgoIntercom.registerIdentifiedUser({});
 ```
 
-### `registerUnidentifiedUser`
+### `registerUnidentifiedUser()`
 
 Register an anonymous user with Intercom.
 
@@ -51,20 +80,47 @@ import { CapgoIntercom } from '@capgo/capacitor-intercom';
 await CapgoIntercom.registerUnidentifiedUser();
 ```
 
-### `updateUser`
+### `updateUser()`
 
 Update user attributes in Intercom.
 
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.updateUser({} as IntercomUserUpdateOptions);
+await CapgoIntercom.updateUser({});
 ```
 
-## Full Reference
+### `logout()`
 
-- GitHub: https://github.com/Cap-go/capacitor-intercom/
-- Docs: /docs/plugins/intercom/
+Log the user out of Intercom.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.logout();
+```
+
+### `logEvent()`
+
+Log a custom event in Intercom.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.logEvent({ name: 'example' });
+```
+
+The [API reference](/docs/plugins/intercom/getting-started/) covers the other 17 methods.
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapgoIntercom.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-intercom/)
+- [Documentation](/docs/plugins/intercom/)
+- [API reference](/docs/plugins/intercom/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-intercom
 

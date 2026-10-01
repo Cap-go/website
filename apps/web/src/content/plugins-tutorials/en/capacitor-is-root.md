@@ -12,16 +12,53 @@ bun add @capgo/capacitor-is-root
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `isRooted` - Performs the default root/jailbreak detection checks.
-- `isRootedWithBusyBox` - Extends the default detection with BusyBox specific checks (Android only).
-- `detectRootManagementApps` - Detects if known root management applications are present (Android only).
-- `detectPotentiallyDangerousApps` - Detects potentially dangerous applications commonly found on rooted devices (Android only).
+## Import
 
-## Example Usage
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+```
 
-### `isRooted`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `isRooted` | Performs the default root/jailbreak detection checks. |
+| `isRootedWithBusyBox` | Extends the default detection with BusyBox specific checks (Android only). |
+| `detectRootManagementApps` | Detects if known root management applications are present (Android only). |
+| `detectPotentiallyDangerousApps` | Detects potentially dangerous applications commonly found on rooted devices (Android only). |
+| `detectTestKeys` | Detects debug/test build tags (Android only). |
+| `checkForBusyBoxBinary` | Checks whether a BusyBox binary exists on the device (Android only). |
+| `checkForSuBinary` | Checks whether a `su` binary is present (Android only). |
+| `checkSuExists` | Detects if the `su` binary can be executed (Android only). |
+| `checkForRWPaths` | Detects world writable system paths (Android only). |
+| `checkForDangerousProps` | Detects dangerous system properties (Android only). |
+| `checkForRootNative` | Executes RootBeer native checks (Android only). |
+| `detectRootCloakingApps` | Detects applications that can hide root (Android only). |
+| `isSelinuxFlagInEnabled` | Checks the SELinux enforcement state (Android only). |
+| `isExistBuildTags` | Detects test build tags on the OS image (Android only). |
+| `doesSuperuserApkExist` | Detects if superuser APKs are installed (Android only). |
+| `isExistSUPath` | Checks for known `su` binary locations (Android only). |
+| `checkDirPermissions` | Detects writable directories that should be protected (Android only). |
+| `checkExecutingCommands` | Executes `which su` style commands to detect root (Android only). |
+| `checkInstalledPackages` | Detects suspicious installed packages (Android only). |
+| `checkforOverTheAirCertificates` | Detects tampered OTA certificates (Android only). |
+| `isRunningOnEmulator` | Detects common emulator fingerprints (Android only). |
+| `simpleCheckEmulator` | Performs a lightweight emulator check (Android only). |
+| `simpleCheckSDKBF86` | Detects x86 emulator fingerprints (Android only). |
+| `simpleCheckQRREFPH` | Detects QC reference phone builds (Android only). |
+| `simpleCheckBuild` | Detects build host anomalies (Android only). |
+| `checkGenymotion` | Detects Genymotion emulator fingerprints (Android only). |
+| `checkGeneric` | Detects generic emulator fingerprints (Android only). |
+| `checkGoogleSDK` | Detects Google SDK emulator fingerprints (Android only). |
+| `togetDeviceInfo` | Returns device information collected during detection. |
+| `isRootedWithEmulator` | Extends the default detection with emulator heuristics (Android only). |
+| `isRootedWithBusyBoxWithEmulator` | Extends the BusyBox detection with emulator heuristics (Android only). |
+
+## Examples
+
+### `isRooted()`
 
 Performs the default root/jailbreak detection checks.
 
@@ -36,40 +73,68 @@ if (result) {
 }
 ```
 
-### `isRootedWithBusyBox`
+### `isRootedWithBusyBox()`
 
 Extends the default detection with BusyBox specific checks (Android only).
 
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.isRootedWithBusyBox();
+const result = await IsRoot.isRootedWithBusyBox();
+console.log(result);
 ```
 
-### `detectRootManagementApps`
+### `detectRootManagementApps()`
 
 Detects if known root management applications are present (Android only).
 
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.detectRootManagementApps();
+const result = await IsRoot.detectRootManagementApps();
+console.log(result);
 ```
 
-### `detectPotentiallyDangerousApps`
+### `detectPotentiallyDangerousApps()`
 
 Detects potentially dangerous applications commonly found on rooted devices (Android only).
 
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.detectPotentiallyDangerousApps();
+const result = await IsRoot.detectPotentiallyDangerousApps();
+console.log(result);
 ```
 
-## Full Reference
+### `detectTestKeys()`
 
-- GitHub: https://github.com/Cap-go/capacitor-is-root/
-- Docs: /docs/plugins/is-root/
+Detects debug/test build tags (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.detectTestKeys();
+console.log(result);
+```
+
+### `checkForBusyBoxBinary()`
+
+Checks whether a BusyBox binary exists on the device (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkForBusyBoxBinary();
+console.log(result);
+```
+
+The [API reference](/docs/plugins/is-root/getting-started/) covers the other 25 methods.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-is-root/)
+- [Documentation](/docs/plugins/is-root/)
+- [API reference](/docs/plugins/is-root/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-is-root
 

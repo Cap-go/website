@@ -12,14 +12,24 @@ bun add @capgo/capacitor-realtimekit
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `initialize` - Initializes the RealtimeKit plugin before using other methods.
-- `startMeeting` - Start a meeting using the built-in UI. Only available on Android and iOS.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+```
 
-### `initialize`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initializes the RealtimeKit plugin before using other methods. |
+| `startMeeting` | Start a meeting using the built-in UI. Only available on Android and iOS. |
+
+## Examples
+
+### `initialize()`
 
 Initializes the RealtimeKit plugin before using other methods.
 
@@ -29,7 +39,7 @@ import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
 await CapacitorRealtimekit.initialize();
 ```
 
-### `startMeeting`
+### `startMeeting()`
 
 Start a meeting using the built-in UI. Only available on Android and iOS.
 
@@ -43,10 +53,11 @@ await CapacitorRealtimekit.startMeeting({
 });
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-realtimekit/
-- Docs: /docs/plugins/realtimekit/
+- [GitHub repository](https://github.com/Cap-go/capacitor-realtimekit/)
+- [Documentation](/docs/plugins/realtimekit/)
+- [API reference](/docs/plugins/realtimekit/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-realtimekit
 

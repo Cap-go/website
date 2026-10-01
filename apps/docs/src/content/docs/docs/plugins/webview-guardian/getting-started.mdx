@@ -41,7 +41,8 @@ Starts observing foreground events and automatically checks the WebView health.
 ```typescript
 import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
 
-await WebviewGuardian.startMonitoring();
+const result = await WebviewGuardian.startMonitoring();
+console.log(result);
 ```
 
 ### `stopMonitoring`
@@ -51,7 +52,8 @@ Stops any automatic foreground monitoring.
 ```typescript
 import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
 
-await WebviewGuardian.stopMonitoring();
+const result = await WebviewGuardian.stopMonitoring();
+console.log(result);
 ```
 
 ### `getState`
@@ -61,7 +63,8 @@ Returns the latest known monitoring state.
 ```typescript
 import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
 
-await WebviewGuardian.getState();
+const result = await WebviewGuardian.getState();
+console.log(result);
 ```
 
 ### `checkNow`
@@ -71,7 +74,8 @@ Forces a WebView health probe immediately.
 ```typescript
 import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
 
-await WebviewGuardian.checkNow();
+const result = await WebviewGuardian.checkNow();
+console.log(result);
 ```
 
 ## Type Reference

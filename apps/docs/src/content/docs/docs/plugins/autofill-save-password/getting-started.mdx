@@ -54,7 +54,8 @@ Read a password from the keychain. Requires the developer to setup associated do
 ```typescript
 import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 
-await SavePassword.readPassword();
+const result = await SavePassword.readPassword();
+console.log(result);
 ```
 
 ## Type Reference

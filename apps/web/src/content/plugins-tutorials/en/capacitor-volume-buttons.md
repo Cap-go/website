@@ -12,15 +12,25 @@ bun add @capgo/capacitor-volume-buttons
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `addListener` - Listen for presses on the hardware volume buttons.
-- `removeAllListeners` - Removes all listeners for this plugin.
-- `getPluginVersion` - Get the native Capacitor plugin version.
+## Import
 
-## Example Usage
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+```
 
-### `addListener`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `addListener` | Listen for presses on the hardware volume buttons. |
+| `removeAllListeners` | Removes all listeners for this plugin. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Examples
+
+### `addListener()`
 
 Listen for presses on the hardware volume buttons.
 
@@ -38,7 +48,7 @@ const listener = await VolumeButtons.addListener(
 await listener.remove();
 ```
 
-### `removeAllListeners`
+### `removeAllListeners()`
 
 Removes all listeners for this plugin.
 
@@ -48,7 +58,7 @@ import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
 await VolumeButtons.removeAllListeners();
 ```
 
-### `getPluginVersion`
+### `getPluginVersion()`
 
 Get the native Capacitor plugin version.
 
@@ -59,10 +69,15 @@ const { version } = await VolumeButtons.getPluginVersion();
 console.log('Plugin version:', version);
 ```
 
-## Full Reference
+## Listen to events
 
-- GitHub: https://github.com/Cap-go/capacitor-volume-buttons/
-- Docs: /docs/plugins/volume-buttons/
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `VolumeButtons.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-volume-buttons/)
+- [Documentation](/docs/plugins/volume-buttons/)
+- [API reference](/docs/plugins/volume-buttons/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-volume-buttons
 

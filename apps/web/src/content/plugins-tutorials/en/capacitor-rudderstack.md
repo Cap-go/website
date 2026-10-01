@@ -12,59 +12,102 @@ bun add @capgo/capacitor-rudderstack
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `initialize` - Initializes the RudderStack client.
-- `identify` - Sends an identify call for the provided user id.
-- `group` - Sends a group call for the provided group id.
-- `track` - Sends a track call for the provided event name.
+## Import
 
-## Example Usage
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+```
 
-### `initialize`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initializes the RudderStack client. |
+| `identify` | Sends an identify call for the provided user id. |
+| `group` | Sends a group call for the provided group id. |
+| `track` | Sends a track call for the provided event name. |
+| `screen` | Sends a screen call for the provided screen name. |
+| `alias` | Aliases the current user to a new identifier. |
+| `reset` | Resets the current RudderStack identity state. |
+| `flush` | Flushes queued events immediately. |
+| `putDeviceToken` | Sets the push token that RudderStack forwards to supported destinations. |
+| `setAdvertisingId` | See the source definitions for current behavior. |
+| `putAdvertisingId` | Sets a custom advertising id value. |
+| `setAnonymousId` | See the source definitions for current behavior. |
+| `putAnonymousId` | Sets a custom anonymous id value. |
+| `optOut` | Toggles RudderStack tracking opt-out. |
+
+## Examples
+
+### `initialize()`
 
 Initializes the RudderStack client.
 
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.initialize('value');
+await nativePlugin.initialize('write-key-123');
 ```
 
-### `identify`
+### `identify()`
 
 Sends an identify call for the provided user id.
 
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.identify('value');
+await nativePlugin.identify('user-id-123');
 ```
 
-### `group`
+### `group()`
 
 Sends a group call for the provided group id.
 
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.group('value');
+await nativePlugin.group('group-id-123');
 ```
 
-### `track`
+### `track()`
 
 Sends a track call for the provided event name.
 
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.track('value');
+await nativePlugin.track('example');
 ```
 
-## Full Reference
+### `screen()`
 
-- GitHub: https://github.com/Cap-go/capacitor-rudderstack/
-- Docs: /docs/plugins/rudderstack/
+Sends a screen call for the provided screen name.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.screen('example');
+```
+
+### `alias()`
+
+Aliases the current user to a new identifier.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.alias('new-id-123');
+```
+
+The [API reference](/docs/plugins/rudderstack/getting-started/) covers the other 8 methods.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-rudderstack/)
+- [Documentation](/docs/plugins/rudderstack/)
+- [API reference](/docs/plugins/rudderstack/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-rudderstack
 

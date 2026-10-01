@@ -12,59 +12,102 @@ bun add @capgo/capacitor-webview-version-checker
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `check` - Runs a version check and returns the latest known status.
-- `startMonitoring` - Enables background monitoring (typically on app resume).
-- `stopMonitoring` - Disables monitoring.
-- `getLastStatus` - Returns the last resolved status, or `null` if no check was run yet.
+## Import
 
-## Example Usage
+```typescript
+import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
+```
 
-### `check`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `check` | Runs a version check and returns the latest known status. |
+| `startMonitoring` | Enables background monitoring (typically on app resume). |
+| `stopMonitoring` | Disables monitoring. |
+| `getLastStatus` | Returns the last resolved status, or `null` if no check was run yet. |
+| `showUpdatePrompt` | Shows a native prompt asking the user to update the WebView. |
+| `openUpdatePage` | Opens the configured update page directly. |
+
+## Examples
+
+### `check()`
 
 Runs a version check and returns the latest known status.
 
 ```typescript
 import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
 
-await WebviewVersionChecker.check();
+const result = await WebviewVersionChecker.check();
+console.log(result);
 ```
 
-### `startMonitoring`
+### `startMonitoring()`
 
 Enables background monitoring (typically on app resume).
 
 ```typescript
 import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
 
-await WebviewVersionChecker.startMonitoring();
+const result = await WebviewVersionChecker.startMonitoring();
+console.log(result);
 ```
 
-### `stopMonitoring`
+### `stopMonitoring()`
 
 Disables monitoring.
 
 ```typescript
 import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
 
-await WebviewVersionChecker.stopMonitoring();
+const result = await WebviewVersionChecker.stopMonitoring();
+console.log(result);
 ```
 
-### `getLastStatus`
+### `getLastStatus()`
 
 Returns the last resolved status, or `null` if no check was run yet.
 
 ```typescript
 import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
 
-await WebviewVersionChecker.getLastStatus();
+const result = await WebviewVersionChecker.getLastStatus();
+console.log(result);
 ```
 
-## Full Reference
+### `showUpdatePrompt()`
 
-- GitHub: https://github.com/Cap-go/capacitor-webview-version-checker/
-- Docs: /docs/plugins/webview-version-checker/
+Shows a native prompt asking the user to update the WebView.
+
+```typescript
+import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
+
+const result = await WebviewVersionChecker.showUpdatePrompt();
+console.log(result);
+```
+
+### `openUpdatePage()`
+
+Opens the configured update page directly.
+
+```typescript
+import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
+
+const result = await WebviewVersionChecker.openUpdatePage();
+console.log(result);
+```
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `WebviewVersionChecker.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-webview-version-checker/)
+- [Documentation](/docs/plugins/webview-version-checker/)
+- [API reference](/docs/plugins/webview-version-checker/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-webview-version-checker
 

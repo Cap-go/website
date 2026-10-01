@@ -12,46 +12,69 @@ bun add @capgo/capacitor-intune
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `acquireToken` - Present the Microsoft sign-in flow and return an access token plus the account metadata.
-- `acquireTokenSilent` - Acquire a token from the MSAL cache for a previously signed-in user.
-- `registerAndEnrollAccount` - Register a previously authenticated account with Intune and start enrollment.
-- `loginAndEnrollAccount` - Ask Intune to authenticate and enroll a user without first requesting an app token.
+## Import
 
-## Example Usage
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+```
 
-### `acquireToken`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `acquireToken` | Present the Microsoft sign-in flow and return an access token plus the account metadata. |
+| `acquireTokenSilent` | Acquire a token from the MSAL cache for a previously signed-in user. |
+| `registerAndEnrollAccount` | Register a previously authenticated account with Intune and start enrollment. |
+| `loginAndEnrollAccount` | Ask Intune to authenticate and enroll a user without first requesting an app token. |
+| `enrolledAccount` | Return the currently enrolled Intune account, if one is available. |
+| `deRegisterAndUnenrollAccount` | Deregister the account from Intune and trigger selective wipe when applicable. |
+| `logoutOfAccount` | Sign the user out of MSAL without unenrolling the Intune account. |
+| `appConfig` | Fetch the remote Intune app configuration for a managed account. |
+| `getPolicy` | Fetch the currently effective Intune app protection policy for a managed account. |
+| `groupName` | Convenience helper that resolves the `GroupName` app configuration value when present. |
+| `sdkVersion` | Return the native Intune and MSAL SDK versions bundled by this plugin. |
+| `displayDiagnosticConsole` | Show the native Intune diagnostics UI. |
+
+## Examples
+
+### `acquireToken()`
 
 Present the Microsoft sign-in flow and return an access token plus the account metadata.
 
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.acquireToken({} as AcquireTokenOptions);
+const result = await IntuneMAM.acquireToken({ scopes: [] });
+console.log(result);
 ```
 
-### `acquireTokenSilent`
+### `acquireTokenSilent()`
 
 Acquire a token from the MSAL cache for a previously signed-in user.
 
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.acquireTokenSilent({} as AcquireTokenSilentOptions);
+const result = await IntuneMAM.acquireTokenSilent({
+  scopes: [],
+  accountId: 'account-id-123',
+});
+console.log(result);
 ```
 
-### `registerAndEnrollAccount`
+### `registerAndEnrollAccount()`
 
 Register a previously authenticated account with Intune and start enrollment.
 
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.registerAndEnrollAccount({} as RegisterAndEnrollAccountOptions);
+await IntuneMAM.registerAndEnrollAccount({ accountId: 'account-id-123' });
 ```
 
-### `loginAndEnrollAccount`
+### `loginAndEnrollAccount()`
 
 Ask Intune to authenticate and enroll a user without first requesting an app token.
 
@@ -61,10 +84,38 @@ import { IntuneMAM } from '@capgo/capacitor-intune';
 await IntuneMAM.loginAndEnrollAccount();
 ```
 
-## Full Reference
+### `enrolledAccount()`
 
-- GitHub: https://github.com/Cap-go/capacitor-intune/
-- Docs: /docs/plugins/intune/
+Return the currently enrolled Intune account, if one is available.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+const result = await IntuneMAM.enrolledAccount();
+console.log(result);
+```
+
+### `deRegisterAndUnenrollAccount()`
+
+Deregister the account from Intune and trigger selective wipe when applicable.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.deRegisterAndUnenrollAccount({ accountId: 'account-id-123' });
+```
+
+The [API reference](/docs/plugins/intune/getting-started/) covers the other 6 methods.
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `IntuneMAM.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-intune/)
+- [Documentation](/docs/plugins/intune/)
+- [API reference](/docs/plugins/intune/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-intune
 

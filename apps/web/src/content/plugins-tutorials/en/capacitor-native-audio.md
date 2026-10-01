@@ -28,7 +28,7 @@ Configure the audio player.
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.configure({} as ConfigureOptions);
+await NativeAudio.configure({});
 ```
 
 ### `preload`
@@ -38,7 +38,10 @@ Load an audio file.
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.preload({} as PreloadOptions);
+await NativeAudio.preload({
+  assetPath: 'path/to/file',
+  assetId: 'asset-id-123',
+});
 ```
 
 ### `playOnce`
@@ -74,7 +77,11 @@ Check if an audio file is preloaded.
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.isPreloaded({} as PreloadOptions);
+const result = await NativeAudio.isPreloaded({
+  assetPath: 'path/to/file',
+  assetId: 'asset-id-123',
+});
+console.log(result);
 ```
 
 ## Full Reference

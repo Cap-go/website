@@ -42,7 +42,8 @@ On iOS this evaluates Apple Pay, on Android it evaluates Google Pay.
 ```typescript
 import { Pay } from '@capgo/capacitor-pay';
 
-await Pay.isPayAvailable();
+const result = await Pay.isPayAvailable();
+console.log(result);
 ```
 
 ### `requestPayment`
@@ -55,7 +56,8 @@ This promise is the completion path on both platforms.
 ```typescript
 import { Pay } from '@capgo/capacitor-pay';
 
-await Pay.requestPayment({} as PayPaymentOptions);
+const result = await Pay.requestPayment({});
+console.log(result);
 ```
 
 ## Type Reference

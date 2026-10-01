@@ -12,36 +12,50 @@ bun add @capgo/capacitor-accelerometer
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `getMeasurement` - Get the most recent accelerometer sample that was recorded by the native layer.
-- `isAvailable` - Check if the current device includes an accelerometer sensor.
-- `startMeasurementUpdates` - Begin streaming accelerometer updates to the JavaScript layer.
-- `stopMeasurementUpdates` - Stop streaming accelerometer updates started via .
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+```
 
-### `getMeasurement`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getMeasurement` | Get the most recent accelerometer sample that was recorded by the native layer. |
+| `isAvailable` | Check if the current device includes an accelerometer sensor. |
+| `startMeasurementUpdates` | Begin streaming accelerometer updates to the JavaScript layer. |
+| `stopMeasurementUpdates` | Stop streaming accelerometer updates started via . |
+| `checkPermissions` | Return the current permission state for accessing motion data. |
+| `requestPermissions` | Request permission to access motion data if supported by the platform. |
+
+## Examples
+
+### `getMeasurement()`
 
 Get the most recent accelerometer sample that was recorded by the native layer.
 
 ```typescript
 import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 
-await CapacitorAccelerometer.getMeasurement();
+const result = await CapacitorAccelerometer.getMeasurement();
+console.log(result);
 ```
 
-### `isAvailable`
+### `isAvailable()`
 
 Check if the current device includes an accelerometer sensor.
 
 ```typescript
 import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 
-await CapacitorAccelerometer.isAvailable();
+const result = await CapacitorAccelerometer.isAvailable();
+console.log(result);
 ```
 
-### `startMeasurementUpdates`
+### `startMeasurementUpdates()`
 
 Begin streaming accelerometer updates to the JavaScript layer.
 
@@ -51,7 +65,7 @@ import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 await CapacitorAccelerometer.startMeasurementUpdates();
 ```
 
-### `stopMeasurementUpdates`
+### `stopMeasurementUpdates()`
 
 Stop streaming accelerometer updates started via .
 
@@ -61,10 +75,37 @@ import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 await CapacitorAccelerometer.stopMeasurementUpdates();
 ```
 
-## Full Reference
+### `checkPermissions()`
 
-- GitHub: https://github.com/Cap-go/capacitor-accelerometer/
-- Docs: /docs/plugins/accelerometer/
+Return the current permission state for accessing motion data.
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+const result = await CapacitorAccelerometer.checkPermissions();
+console.log(result);
+```
+
+### `requestPermissions()`
+
+Request permission to access motion data if supported by the platform.
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+const result = await CapacitorAccelerometer.requestPermissions();
+console.log(result);
+```
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapacitorAccelerometer.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-accelerometer/)
+- [Documentation](/docs/plugins/accelerometer/)
+- [API reference](/docs/plugins/accelerometer/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-accelerometer
 

@@ -12,16 +12,29 @@ bun add @capgo/capacitor-wechat
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `initialize` - Initialize the WeChat SDK with your application credentials.
-- `isInstalled` - Check if WeChat app is installed on the device.
-- `auth` - Authenticate user with WeChat OAuth.
-- `share` - Share content to WeChat.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
+```
 
-### `initialize`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initialize the WeChat SDK with your application credentials. |
+| `isInstalled` | Check if WeChat app is installed on the device. |
+| `auth` | Authenticate user with WeChat OAuth. |
+| `share` | Share content to WeChat. |
+| `sendPaymentRequest` | Send payment request to WeChat Pay. |
+| `openMiniProgram` | Open WeChat mini-program. |
+| `chooseInvoice` | Choose invoice from WeChat. |
+
+## Examples
+
+### `initialize()`
 
 Initialize the WeChat SDK with your application credentials.
 
@@ -34,7 +47,7 @@ await CapacitorWechat.initialize({
 });
 ```
 
-### `isInstalled`
+### `isInstalled()`
 
 Check if WeChat app is installed on the device.
 
@@ -47,7 +60,7 @@ if (installed) {
 }
 ```
 
-### `auth`
+### `auth()`
 
 Authenticate user with WeChat OAuth.
 
@@ -61,7 +74,7 @@ const { code, state } = await CapacitorWechat.auth({
 // Use code to get access token from your server
 ```
 
-### `share`
+### `share()`
 
 Share content to WeChat.
 
@@ -86,10 +99,47 @@ await CapacitorWechat.share({
 });
 ```
 
-## Full Reference
+### `sendPaymentRequest()`
 
-- GitHub: https://github.com/Cap-go/capacitor-wechat/
-- Docs: /docs/plugins/wechat/
+Send payment request to WeChat Pay.
+
+```typescript
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
+
+// Get payment params from your server first
+const paymentParams = await fetchPaymentParamsFromServer();
+
+await CapacitorWechat.sendPaymentRequest({
+  partnerId: paymentParams.partnerId,
+  prepayId: paymentParams.prepayId,
+  nonceStr: paymentParams.nonceStr,
+  timeStamp: paymentParams.timeStamp,
+  package: paymentParams.package,
+  sign: paymentParams.sign
+});
+```
+
+### `openMiniProgram()`
+
+Open WeChat mini-program.
+
+```typescript
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
+
+const { extMsg } = await CapacitorWechat.openMiniProgram({
+  username: 'gh_xxxxxxxxxxxxx',
+  path: 'pages/index/index',
+  type: 0 // 0 = Release, 1 = Test, 2 = Preview
+});
+```
+
+The [API reference](/docs/plugins/wechat/getting-started/) covers the other 1 method.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-wechat/)
+- [Documentation](/docs/plugins/wechat/)
+- [API reference](/docs/plugins/wechat/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-wechat
 

@@ -12,26 +12,38 @@ bun add @capgo/capacitor-document-scanner
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `scanDocument` - Opens the device camera and starts the document scanning experience.
+## Import
 
-## Example Usage
+```typescript
+import { DocumentScanner } from '@capgo/capacitor-document-scanner';
+```
 
-### `scanDocument`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `scanDocument` | Opens the device camera and starts the document scanning experience. |
+
+## Examples
+
+### `scanDocument()`
 
 Opens the device camera and starts the document scanning experience.
 
 ```typescript
 import { DocumentScanner } from '@capgo/capacitor-document-scanner';
 
-await DocumentScanner.scanDocument();
+const result = await DocumentScanner.scanDocument();
+console.log(result);
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-document-scanner/
-- Docs: /docs/plugins/document-scanner/
+- [GitHub repository](https://github.com/Cap-go/capacitor-document-scanner/)
+- [Documentation](/docs/plugins/document-scanner/)
+- [API reference](/docs/plugins/document-scanner/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-document-scanner
 

@@ -43,7 +43,8 @@ Initializes the SDK with camera URL
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.initialize({} as InitializeOptions);
+const result = await Ricoh360Camera.initialize({ url: 'https://example.com' });
+console.log(result);
 ```
 
 ### `getCameraAsset`
@@ -53,7 +54,8 @@ Retrieves a camera asset from a URL and returns it as base64
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.getCameraAsset({} as GetCameraAssetOptions);
+const result = await Ricoh360Camera.getCameraAsset({ url: 'https://example.com' });
+console.log(result);
 ```
 
 ### `listFiles`
@@ -63,7 +65,8 @@ Lists files stored on the camera
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.listFiles();
+const result = await Ricoh360Camera.listFiles();
+console.log(result);
 ```
 
 ### `capturePicture`
@@ -73,7 +76,8 @@ Captures a picture
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.capturePicture();
+const result = await Ricoh360Camera.capturePicture();
+console.log(result);
 ```
 
 ### `captureVideo`
@@ -83,7 +87,8 @@ Captures a video
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.captureVideo({} as VideoCaptureOptions);
+const result = await Ricoh360Camera.captureVideo({});
+console.log(result);
 ```
 
 ### `livePreview`
@@ -93,7 +98,8 @@ Starts live preview
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.livePreview({} as LivePreviewOptions);
+const result = await Ricoh360Camera.livePreview({});
+console.log(result);
 ```
 
 ### `stopLivePreview`
@@ -103,7 +109,8 @@ Stops live preview
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.stopLivePreview();
+const result = await Ricoh360Camera.stopLivePreview();
+console.log(result);
 ```
 
 ### `readSettings`
@@ -113,7 +120,8 @@ Reads camera settings
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.readSettings({} as { options: string[] });
+const result = await Ricoh360Camera.readSettings({ options: [] });
+console.log(result);
 ```
 
 ### `setSettings`
@@ -123,7 +131,8 @@ Sets camera settings
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.setSettings({} as { options: Record<string, any> });
+const result = await Ricoh360Camera.setSettings({ options: {} });
+console.log(result);
 ```
 
 ### `sendCommand`
@@ -133,7 +142,11 @@ Send raw command to camera
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.sendCommand({} as { endpoint: string; payload: Record<string, any> });
+const result = await Ricoh360Camera.sendCommand({
+  endpoint: 'https://example.com',
+  payload: {},
+});
+console.log(result);
 ```
 
 ## Type Reference

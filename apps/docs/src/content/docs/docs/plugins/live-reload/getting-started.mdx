@@ -41,7 +41,8 @@ Store remote dev server settings used for subsequent connections.
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
 
-await LiveReload.configureServer({} as ConfigureServerOptions);
+const result = await LiveReload.configureServer({ url: 'https://example.com' });
+console.log(result);
 ```
 
 ### `connect`
@@ -51,7 +52,8 @@ Establish a WebSocket connection if one is not already active.
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
 
-await LiveReload.connect();
+const result = await LiveReload.connect();
+console.log(result);
 ```
 
 ### `disconnect`
@@ -61,7 +63,8 @@ Close the current WebSocket connection and disable auto reconnect.
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
 
-await LiveReload.disconnect();
+const result = await LiveReload.disconnect();
+console.log(result);
 ```
 
 ### `getStatus`
@@ -71,7 +74,8 @@ Returns the current connection status.
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
 
-await LiveReload.getStatus();
+const result = await LiveReload.getStatus();
+console.log(result);
 ```
 
 ### `reload`
@@ -91,7 +95,7 @@ Reload a single file/module if the runtime supports it (falls back to full reloa
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
 
-await LiveReload.reloadFile({} as FileUpdatePayload);
+await LiveReload.reloadFile({ path: 'path/to/file' });
 ```
 
 ## Type Reference

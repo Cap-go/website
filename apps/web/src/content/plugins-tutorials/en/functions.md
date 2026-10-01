@@ -12,48 +12,63 @@ bun add @capgo/capacitor-firebase-functions
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `callByName` - Call a callable function by name.
-- `callByUrl` - Call a callable function by URL.
-- `useEmulator` - Instrument your app to talk to the Cloud Functions emulator.
+## Import
 
-## Example Usage
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+```
 
-### `callByName`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `callByName` | Call a callable function by name. |
+| `callByUrl` | Call a callable function by URL. |
+| `useEmulator` | Instrument your app to talk to the Cloud Functions emulator. |
+
+## Examples
+
+### `callByName()`
 
 Call a callable function by name.
 
 ```typescript
 import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
 
-await FirebaseFunctions.callByName({} as CallByNameOptions<RequestData>);
+const result = await FirebaseFunctions.callByName({ name: 'myFunction' });
+console.log(result);
 ```
 
-### `callByUrl`
+### `callByUrl()`
 
 Call a callable function by URL.
 
 ```typescript
 import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
 
-await FirebaseFunctions.callByUrl({} as CallByUrlOptions<RequestData>);
+const result = await FirebaseFunctions.callByUrl({
+  url: 'https://us-central1-my-project.cloudfunctions.net/myFunction',
+});
+console.log(result);
 ```
 
-### `useEmulator`
+### `useEmulator()`
 
 Instrument your app to talk to the Cloud Functions emulator.
 
 ```typescript
 import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
 
-await FirebaseFunctions.useEmulator({} as UseEmulatorOptions);
+await FirebaseFunctions.useEmulator({ host: "127.0.0.1" });
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-firebase/tree/main/packages/functions
-- Docs: /docs/plugins/firebase-functions/
+- [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/functions)
+- [Documentation](/docs/plugins/firebase-functions/)
+- [API reference](/docs/plugins/firebase-functions/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-firebase-functions
 

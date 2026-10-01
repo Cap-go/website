@@ -12,75 +12,96 @@ bun add @capgo/capacitor-mqtt
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `connect`
-- `disconnect`
-- `subscribe`
-- `publish`
+## Import
 
-## Example Usage
+```typescript
+import { MqttBridge } from '@capgo/capacitor-mqtt';
+```
 
-### `connect`
+## API at a glance
 
-See the upstream definitions for the current contract.
+| Method | Description |
+| --- | --- |
+| `connect` | See the source definitions for current behavior. |
+| `disconnect` | See the source definitions for current behavior. |
+| `subscribe` | See the source definitions for current behavior. |
+| `publish` | See the source definitions for current behavior. |
+
+## Examples
+
+### `connect()`
+
+See the API reference for the current contract.
 
 ```typescript
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 
-await MqttBridge.connect({} as {
-    serverURI: string;
-    port: number;
-    clientId: string;
-    username: string;
-    password: string;
-    setCleanSession: boolean;
-    connectionTimeout: number;
-    keepAliveInterval: number;
-    setAutomaticReconnect: boolean;
-    setLastWill?: {
-      willTopic: string;
-      willPayload: string;
-      willQoS: number;
-      setRetained: boolean;
-    };
-  });
+const result = await MqttBridge.connect({
+  serverURI: 'https://example.com',
+  port: 1,
+  clientId: 'client-id-123',
+  username: 'example',
+  password: 'password',
+  setCleanSession: true,
+  connectionTimeout: 1,
+  keepAliveInterval: 1,
+  setAutomaticReconnect: true,
+});
+console.log(result);
 ```
 
-### `disconnect`
+### `disconnect()`
 
-See the upstream definitions for the current contract.
+See the API reference for the current contract.
 
 ```typescript
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 
-await MqttBridge.disconnect();
+const result = await MqttBridge.disconnect();
+console.log(result);
 ```
 
-### `subscribe`
+### `subscribe()`
 
-See the upstream definitions for the current contract.
+See the API reference for the current contract.
 
 ```typescript
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 
-await MqttBridge.subscribe({} as { topic: string; qos: number });
+const result = await MqttBridge.subscribe({
+  topic: 'topic',
+  qos: 1,
+});
+console.log(result);
 ```
 
-### `publish`
+### `publish()`
 
-See the upstream definitions for the current contract.
+See the API reference for the current contract.
 
 ```typescript
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 
-await MqttBridge.publish({} as { topic: string; payload: string; qos: number; retained: boolean });
+const result = await MqttBridge.publish({
+  topic: 'topic',
+  payload: 'payload',
+  qos: 1,
+  retained: true,
+});
+console.log(result);
 ```
 
-## Full Reference
+## Listen to events
 
-- GitHub: https://github.com/Cap-go/capacitor-mqtt/
-- Docs: /docs/plugins/mqtt/
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `MqttBridge.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-mqtt/)
+- [Documentation](/docs/plugins/mqtt/)
+- [API reference](/docs/plugins/mqtt/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-mqtt
 

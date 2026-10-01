@@ -12,25 +12,35 @@ bun add @capgo/capacitor-mux-player
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `play` - Launch the native Mux Player in fullscreen and begin playback.
-- `dismiss` - Dismiss the player if it is visible.
-- `isActive` - Returns whether the player is currently being displayed.
+## Import
 
-## Example Usage
+```typescript
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
+```
 
-### `play`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `play` | Launch the native Mux Player in fullscreen and begin playback. |
+| `dismiss` | Dismiss the player if it is visible. |
+| `isActive` | Returns whether the player is currently being displayed. |
+
+## Examples
+
+### `play()`
 
 Launch the native Mux Player in fullscreen and begin playback.
 
 ```typescript
 import { MuxPlayer } from '@capgo/capacitor-mux-player';
 
-await MuxPlayer.play({} as MuxPlayOptions);
+await MuxPlayer.play({ playbackId: 'playback-id-123' });
 ```
 
-### `dismiss`
+### `dismiss()`
 
 Dismiss the player if it is visible.
 
@@ -40,20 +50,26 @@ import { MuxPlayer } from '@capgo/capacitor-mux-player';
 await MuxPlayer.dismiss();
 ```
 
-### `isActive`
+### `isActive()`
 
 Returns whether the player is currently being displayed.
 
 ```typescript
 import { MuxPlayer } from '@capgo/capacitor-mux-player';
 
-await MuxPlayer.isActive();
+const result = await MuxPlayer.isActive();
+console.log(result);
 ```
 
-## Full Reference
+## Listen to events
 
-- GitHub: https://github.com/Cap-go/capacitor-mux-player/
-- Docs: /docs/plugins/mux-player/
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `MuxPlayer.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-mux-player/)
+- [Documentation](/docs/plugins/mux-player/)
+- [API reference](/docs/plugins/mux-player/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-mux-player
 

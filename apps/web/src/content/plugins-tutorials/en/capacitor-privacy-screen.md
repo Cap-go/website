@@ -27,7 +27,8 @@ Enables the privacy screen.
 ```typescript
 import { PrivacyScreen } from '@capgo/capacitor-privacy-screen';
 
-await PrivacyScreen.enable();
+const result = await PrivacyScreen.enable();
+console.log(result);
 ```
 
 ### `disable`
@@ -37,7 +38,8 @@ Disables the privacy screen.
 ```typescript
 import { PrivacyScreen } from '@capgo/capacitor-privacy-screen';
 
-await PrivacyScreen.disable();
+const result = await PrivacyScreen.disable();
+console.log(result);
 ```
 
 ### `isEnabled`
@@ -47,7 +49,8 @@ Returns the current enabled state.
 ```typescript
 import { PrivacyScreen } from '@capgo/capacitor-privacy-screen';
 
-await PrivacyScreen.isEnabled();
+const result = await PrivacyScreen.isEnabled();
+console.log(result);
 ```
 
 ## Full Reference

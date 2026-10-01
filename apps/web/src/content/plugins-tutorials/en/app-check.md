@@ -12,25 +12,36 @@ bun add @capgo/capacitor-firebase-app-check
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `getToken` - Get the current App Check token.
-- `initialize` - Activate App Check for the given app. Can be called only once per app.
-- `setTokenAutoRefreshEnabled` - Set whether the App Check token should be refreshed automatically or not.
+## Import
 
-## Example Usage
+```typescript
+import { FirebaseAppCheck } from '@capgo/capacitor-firebase-app-check';
+```
 
-### `getToken`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getToken` | Get the current App Check token. |
+| `initialize` | Activate App Check for the given app. Can be called only once per app. |
+| `setTokenAutoRefreshEnabled` | Set whether the App Check token should be refreshed automatically or not. |
+
+## Examples
+
+### `getToken()`
 
 Get the current App Check token.
 
 ```typescript
 import { FirebaseAppCheck } from '@capgo/capacitor-firebase-app-check';
 
-await FirebaseAppCheck.getToken();
+const result = await FirebaseAppCheck.getToken();
+console.log(result);
 ```
 
-### `initialize`
+### `initialize()`
 
 Activate App Check for the given app. Can be called only once per app.
 
@@ -40,20 +51,25 @@ import { FirebaseAppCheck } from '@capgo/capacitor-firebase-app-check';
 await FirebaseAppCheck.initialize();
 ```
 
-### `setTokenAutoRefreshEnabled`
+### `setTokenAutoRefreshEnabled()`
 
 Set whether the App Check token should be refreshed automatically or not.
 
 ```typescript
 import { FirebaseAppCheck } from '@capgo/capacitor-firebase-app-check';
 
-await FirebaseAppCheck.setTokenAutoRefreshEnabled({} as SetTokenAutoRefreshEnabledOptions);
+await FirebaseAppCheck.setTokenAutoRefreshEnabled({ enabled: true });
 ```
 
-## Full Reference
+## Listen to events
 
-- GitHub: https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app-check
-- Docs: /docs/plugins/firebase-app-check/
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `FirebaseAppCheck.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app-check)
+- [Documentation](/docs/plugins/firebase-app-check/)
+- [API reference](/docs/plugins/firebase-app-check/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-firebase-app-check
 

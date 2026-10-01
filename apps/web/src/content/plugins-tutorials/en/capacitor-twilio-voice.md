@@ -12,16 +12,34 @@ bun add @capgo/capacitor-twilio-voice
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `login` - Authenticate the user with Twilio Voice using an access token.
-- `logout` - Log out the current user and unregister from Twilio Voice.
-- `isLoggedIn` - Check if the user is currently logged in and has a valid access token.
-- `makeCall` - Initiate an outgoing call to a phone number or client.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorTwilioVoice } from '@capgo/capacitor-twilio-voice';
+```
 
-### `login`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `login` | Authenticate the user with Twilio Voice using an access token. |
+| `logout` | Log out the current user and unregister from Twilio Voice. |
+| `isLoggedIn` | Check if the user is currently logged in and has a valid access token. |
+| `makeCall` | Initiate an outgoing call to a phone number or client. |
+| `acceptCall` | Accept an incoming call. |
+| `rejectCall` | Reject an incoming call. |
+| `endCall` | End an active call. |
+| `muteCall` | Mute or unmute the microphone during an active call. |
+| `setSpeaker` | Enable or disable speakerphone mode. |
+| `getCallStatus` | Get the current status of the active call. |
+| `checkMicrophonePermission` | Check if microphone permission has been granted. |
+| `requestMicrophonePermission` | Request microphone permission from the user. |
+
+## Examples
+
+### `login()`
 
 Authenticate the user with Twilio Voice using an access token.
 
@@ -34,7 +52,7 @@ const result = await CapacitorTwilioVoice.login({
 console.log('Login successful:', result.success);
 ```
 
-### `logout`
+### `logout()`
 
 Log out the current user and unregister from Twilio Voice.
 
@@ -45,7 +63,7 @@ const result = await CapacitorTwilioVoice.logout();
 console.log('Logout successful:', result.success);
 ```
 
-### `isLoggedIn`
+### `isLoggedIn()`
 
 Check if the user is currently logged in and has a valid access token.
 
@@ -60,7 +78,7 @@ if (status.isLoggedIn && status.hasValidToken) {
 }
 ```
 
-### `makeCall`
+### `makeCall()`
 
 Initiate an outgoing call to a phone number or client.
 
@@ -86,10 +104,49 @@ await CapacitorTwilioVoice.makeCall({
 });
 ```
 
-## Full Reference
+### `acceptCall()`
 
-- GitHub: https://github.com/Cap-go/capacitor-twilio-voice/
-- Docs: /docs/plugins/twilio-voice/
+Accept an incoming call.
+
+```typescript
+import { CapacitorTwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+CapacitorTwilioVoice.addListener('callInviteReceived', async (data) => {
+  console.log('Incoming call from:', data.from);
+  const result = await CapacitorTwilioVoice.acceptCall({
+    callSid: data.callSid
+  });
+  console.log('Call accepted:', result.success);
+});
+```
+
+### `rejectCall()`
+
+Reject an incoming call.
+
+```typescript
+import { CapacitorTwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+CapacitorTwilioVoice.addListener('callInviteReceived', async (data) => {
+  if (shouldRejectCall(data.from)) {
+    await CapacitorTwilioVoice.rejectCall({
+      callSid: data.callSid
+    });
+  }
+});
+```
+
+The [API reference](/docs/plugins/twilio-voice/getting-started/) covers the other 6 methods.
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapacitorTwilioVoice.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-twilio-voice/)
+- [Documentation](/docs/plugins/twilio-voice/)
+- [API reference](/docs/plugins/twilio-voice/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-twilio-voice
 

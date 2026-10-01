@@ -12,15 +12,25 @@ bun add @capgo/capacitor-share-target
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `addListener` - Listen for shareReceived event.
-- `removeAllListeners` - Remove all listeners for this plugin.
-- `getPluginVersion` - Get the native Capacitor plugin version.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+```
 
-### `addListener`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `addListener` | Listen for shareReceived event. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Examples
+
+### `addListener()`
 
 Listen for shareReceived event.
 
@@ -39,7 +49,7 @@ const listener = await CapacitorShareTarget.addListener('shareReceived', (event)
 await listener.remove();
 ```
 
-### `removeAllListeners`
+### `removeAllListeners()`
 
 Remove all listeners for this plugin.
 
@@ -49,7 +59,7 @@ import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
 await CapacitorShareTarget.removeAllListeners();
 ```
 
-### `getPluginVersion`
+### `getPluginVersion()`
 
 Get the native Capacitor plugin version.
 
@@ -60,10 +70,15 @@ const { version} = await CapacitorShareTarget.getPluginVersion();
 console.log('Plugin version:', version);
 ```
 
-## Full Reference
+## Listen to events
 
-- GitHub: https://github.com/Cap-go/capacitor-share-target/
-- Docs: /docs/plugins/share-target/
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapacitorShareTarget.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-share-target/)
+- [Documentation](/docs/plugins/share-target/)
+- [API reference](/docs/plugins/share-target/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-share-target
 

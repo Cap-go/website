@@ -48,7 +48,7 @@ Set a unique token ID for the current user session. Used to identify and restore
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CapacitorCrisp.setTokenID({} as { tokenID: string });
+await CapacitorCrisp.setTokenID({ tokenID: 'token-id-123' });
 ```
 
 ### `setUser`

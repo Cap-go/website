@@ -60,7 +60,8 @@ Extends the default detection with BusyBox specific checks (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.isRootedWithBusyBox();
+const result = await IsRoot.isRootedWithBusyBox();
+console.log(result);
 ```
 
 ### `detectRootManagementApps`
@@ -70,7 +71,8 @@ Detects if known root management applications are present (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.detectRootManagementApps();
+const result = await IsRoot.detectRootManagementApps();
+console.log(result);
 ```
 
 ### `detectPotentiallyDangerousApps`
@@ -80,7 +82,8 @@ Detects potentially dangerous applications commonly found on rooted devices (And
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.detectPotentiallyDangerousApps();
+const result = await IsRoot.detectPotentiallyDangerousApps();
+console.log(result);
 ```
 
 ### `detectTestKeys`
@@ -90,7 +93,8 @@ Detects debug/test build tags (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.detectTestKeys();
+const result = await IsRoot.detectTestKeys();
+console.log(result);
 ```
 
 ### `checkForBusyBoxBinary`
@@ -100,7 +104,8 @@ Checks whether a BusyBox binary exists on the device (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkForBusyBoxBinary();
+const result = await IsRoot.checkForBusyBoxBinary();
+console.log(result);
 ```
 
 ### `checkForSuBinary`
@@ -110,7 +115,8 @@ Checks whether a `su` binary is present (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkForSuBinary();
+const result = await IsRoot.checkForSuBinary();
+console.log(result);
 ```
 
 ### `checkSuExists`
@@ -120,7 +126,8 @@ Detects if the `su` binary can be executed (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkSuExists();
+const result = await IsRoot.checkSuExists();
+console.log(result);
 ```
 
 ### `checkForRWPaths`
@@ -130,7 +137,8 @@ Detects world writable system paths (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkForRWPaths();
+const result = await IsRoot.checkForRWPaths();
+console.log(result);
 ```
 
 ### `checkForDangerousProps`
@@ -140,7 +148,8 @@ Detects dangerous system properties (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkForDangerousProps();
+const result = await IsRoot.checkForDangerousProps();
+console.log(result);
 ```
 
 ### `checkForRootNative`
@@ -150,7 +159,8 @@ Executes RootBeer native checks (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkForRootNative();
+const result = await IsRoot.checkForRootNative();
+console.log(result);
 ```
 
 ### `detectRootCloakingApps`
@@ -160,7 +170,8 @@ Detects applications that can hide root (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.detectRootCloakingApps();
+const result = await IsRoot.detectRootCloakingApps();
+console.log(result);
 ```
 
 ### `isSelinuxFlagInEnabled`
@@ -170,7 +181,8 @@ Checks the SELinux enforcement state (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.isSelinuxFlagInEnabled();
+const result = await IsRoot.isSelinuxFlagInEnabled();
+console.log(result);
 ```
 
 ### `isExistBuildTags`
@@ -180,7 +192,8 @@ Detects test build tags on the OS image (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.isExistBuildTags();
+const result = await IsRoot.isExistBuildTags();
+console.log(result);
 ```
 
 ### `doesSuperuserApkExist`
@@ -190,7 +203,8 @@ Detects if superuser APKs are installed (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.doesSuperuserApkExist();
+const result = await IsRoot.doesSuperuserApkExist();
+console.log(result);
 ```
 
 ### `isExistSUPath`
@@ -200,7 +214,8 @@ Checks for known `su` binary locations (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.isExistSUPath();
+const result = await IsRoot.isExistSUPath();
+console.log(result);
 ```
 
 ### `checkDirPermissions`
@@ -210,7 +225,8 @@ Detects writable directories that should be protected (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkDirPermissions();
+const result = await IsRoot.checkDirPermissions();
+console.log(result);
 ```
 
 ### `checkExecutingCommands`
@@ -220,7 +236,8 @@ Executes `which su` style commands to detect root (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkExecutingCommands();
+const result = await IsRoot.checkExecutingCommands();
+console.log(result);
 ```
 
 ### `checkInstalledPackages`
@@ -230,7 +247,8 @@ Detects suspicious installed packages (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkInstalledPackages();
+const result = await IsRoot.checkInstalledPackages();
+console.log(result);
 ```
 
 ### `checkforOverTheAirCertificates`
@@ -240,7 +258,8 @@ Detects tampered OTA certificates (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkforOverTheAirCertificates();
+const result = await IsRoot.checkforOverTheAirCertificates();
+console.log(result);
 ```
 
 ### `isRunningOnEmulator`
@@ -250,7 +269,8 @@ Detects common emulator fingerprints (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.isRunningOnEmulator();
+const result = await IsRoot.isRunningOnEmulator();
+console.log(result);
 ```
 
 ### `simpleCheckEmulator`
@@ -260,7 +280,8 @@ Performs a lightweight emulator check (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.simpleCheckEmulator();
+const result = await IsRoot.simpleCheckEmulator();
+console.log(result);
 ```
 
 ### `simpleCheckSDKBF86`
@@ -270,7 +291,8 @@ Detects x86 emulator fingerprints (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.simpleCheckSDKBF86();
+const result = await IsRoot.simpleCheckSDKBF86();
+console.log(result);
 ```
 
 ### `simpleCheckQRREFPH`
@@ -280,7 +302,8 @@ Detects QC reference phone builds (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.simpleCheckQRREFPH();
+const result = await IsRoot.simpleCheckQRREFPH();
+console.log(result);
 ```
 
 ### `simpleCheckBuild`
@@ -290,7 +313,8 @@ Detects build host anomalies (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.simpleCheckBuild();
+const result = await IsRoot.simpleCheckBuild();
+console.log(result);
 ```
 
 ### `checkGenymotion`
@@ -300,7 +324,8 @@ Detects Genymotion emulator fingerprints (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkGenymotion();
+const result = await IsRoot.checkGenymotion();
+console.log(result);
 ```
 
 ### `checkGeneric`
@@ -310,7 +335,8 @@ Detects generic emulator fingerprints (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkGeneric();
+const result = await IsRoot.checkGeneric();
+console.log(result);
 ```
 
 ### `checkGoogleSDK`
@@ -320,7 +346,8 @@ Detects Google SDK emulator fingerprints (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.checkGoogleSDK();
+const result = await IsRoot.checkGoogleSDK();
+console.log(result);
 ```
 
 ### `togetDeviceInfo`
@@ -345,7 +372,8 @@ Extends the default detection with emulator heuristics (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.isRootedWithEmulator();
+const result = await IsRoot.isRootedWithEmulator();
+console.log(result);
 ```
 
 ### `isRootedWithBusyBoxWithEmulator`
@@ -355,7 +383,8 @@ Extends the BusyBox detection with emulator heuristics (Android only).
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 
-await IsRoot.isRootedWithBusyBoxWithEmulator();
+const result = await IsRoot.isRootedWithBusyBoxWithEmulator();
+console.log(result);
 ```
 
 ## Type Reference

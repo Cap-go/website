@@ -42,7 +42,7 @@ Use this if you prefer not to configure keys in capacitor.config.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.loadWithKeys({} as IntercomLoadOptions);
+await CapgoIntercom.loadWithKeys({});
 ```
 
 ### `registerIdentifiedUser`
@@ -53,7 +53,7 @@ At least one of userId or email must be provided.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.registerIdentifiedUser({} as IntercomIdentifiedUserOptions);
+await CapgoIntercom.registerIdentifiedUser({});
 ```
 
 ### `registerUnidentifiedUser`
@@ -73,7 +73,7 @@ Update user attributes in Intercom.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.updateUser({} as IntercomUserUpdateOptions);
+await CapgoIntercom.updateUser({});
 ```
 
 ### `logout`
@@ -93,7 +93,7 @@ Log a custom event in Intercom.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.logEvent({} as IntercomLogEventOptions);
+await CapgoIntercom.logEvent({ name: 'example' });
 ```
 
 ### `displayMessenger`
@@ -113,7 +113,7 @@ Open the message composer with a pre-filled message.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.displayMessageComposer({} as IntercomMessageComposerOptions);
+await CapgoIntercom.displayMessageComposer({ message: 'Hello from Capacitor' });
 ```
 
 ### `displayHelpCenter`
@@ -183,7 +183,7 @@ Display a specific Intercom carousel.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.displayCarousel({} as IntercomCarouselOptions);
+await CapgoIntercom.displayCarousel({ carouselId: 'carousel-id-123' });
 ```
 
 ### `displayArticle`
@@ -193,7 +193,7 @@ Display a specific Intercom article.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.displayArticle({} as IntercomArticleOptions);
+await CapgoIntercom.displayArticle({ articleId: 'article-id-123' });
 ```
 
 ### `displaySurvey`
@@ -203,7 +203,7 @@ Display a specific Intercom survey.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.displaySurvey({} as IntercomSurveyOptions);
+await CapgoIntercom.displaySurvey({ surveyId: 'survey-id-123' });
 ```
 
 ### `setUserHash`
@@ -213,7 +213,7 @@ Set the HMAC for identity verification.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.setUserHash({} as IntercomUserHashOptions);
+await CapgoIntercom.setUserHash({ hmac: 'hmac' });
 ```
 
 ### `setUserJwt`
@@ -223,7 +223,7 @@ Set JWT for secure messenger authentication.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.setUserJwt({} as IntercomUserJwtOptions);
+await CapgoIntercom.setUserJwt({ jwt: 'jwt' });
 ```
 
 ### `setBottomPadding`
@@ -233,7 +233,7 @@ Set the bottom padding for the Intercom messenger UI.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.setBottomPadding({} as IntercomBottomPaddingOptions);
+await CapgoIntercom.setBottomPadding({ value: 1 });
 ```
 
 ### `sendPushTokenToIntercom`
@@ -243,7 +243,7 @@ Send a push notification token to Intercom.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.sendPushTokenToIntercom({} as IntercomPushTokenOptions);
+await CapgoIntercom.sendPushTokenToIntercom({ value: 'value' });
 ```
 
 ### `receivePush`
@@ -253,7 +253,7 @@ Handle a received Intercom push notification.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.receivePush({} as IntercomPushNotificationData);
+await CapgoIntercom.receivePush({});
 ```
 
 ### `getUnreadConversationCount`
@@ -263,7 +263,8 @@ Get the number of unread conversations for the current user.
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.getUnreadConversationCount();
+const result = await CapgoIntercom.getUnreadConversationCount();
+console.log(result);
 ```
 
 ## Type Reference

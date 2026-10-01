@@ -12,16 +12,30 @@ bun add @capgo/capacitor-fast-sql
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `connect` - Initialize the database connection and start the HTTP server.
-- `disconnect` - Close database connection and stop the HTTP server.
-- `getServerInfo` - Get the HTTP server port and token for direct communication.
-- `execute` - Execute a SQL query via Capacitor bridge (for simple queries). For better performance with large datasets, use the HTTP protocol directly via SQLConnection class.
+## Import
 
-## Example Usage
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+```
 
-### `connect`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `connect` | Initialize the database connection and start the HTTP server. |
+| `disconnect` | Close database connection and stop the HTTP server. |
+| `getServerInfo` | Get the HTTP server port and token for direct communication. |
+| `execute` | Execute a SQL query via Capacitor bridge (for simple queries). For better performance with large datasets, use the HTTP protocol directly via SQLConnection class. |
+| `beginTransaction` | Begin a database transaction. |
+| `commitTransaction` | Commit the current transaction. |
+| `rollbackTransaction` | Rollback the current transaction. |
+| `configureWeb` | Configure web-specific options for the official SQLite Wasm module. |
+
+## Examples
+
+### `connect()`
 
 Initialize the database connection and start the HTTP server.
 
@@ -32,7 +46,7 @@ const conn = await CapgoCapacitorFastSql.connect({ database: 'myapp' });
 console.log('Connected on port:', conn.port);
 ```
 
-### `disconnect`
+### `disconnect()`
 
 Close database connection and stop the HTTP server.
 
@@ -42,7 +56,7 @@ import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
 await CapgoCapacitorFastSql.disconnect({ database: 'myapp' });
 ```
 
-### `getServerInfo`
+### `getServerInfo()`
 
 Get the HTTP server port and token for direct communication.
 
@@ -53,7 +67,7 @@ const info = await CapgoCapacitorFastSql.getServerInfo({ database: 'myapp' });
 console.log('Server port:', info.port);
 ```
 
-### `execute`
+### `execute()`
 
 Execute a SQL query via Capacitor bridge (for simple queries). For better performance with large datasets, use the HTTP protocol directly via SQLConnection class.
 
@@ -68,10 +82,35 @@ const result = await CapgoCapacitorFastSql.execute({
 console.log('Rows:', result.rows);
 ```
 
-## Full Reference
+### `beginTransaction()`
 
-- GitHub: https://github.com/Cap-go/capacitor-fast-sql/
-- Docs: /docs/plugins/fast-sql/
+Begin a database transaction.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+await CapgoCapacitorFastSql.beginTransaction({ database: 'myapp' });
+// Execute multiple operations
+await CapgoCapacitorFastSql.commitTransaction({ database: 'myapp' });
+```
+
+### `commitTransaction()`
+
+Commit the current transaction.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+await CapgoCapacitorFastSql.commitTransaction({ database: 'myapp' });
+```
+
+The [API reference](/docs/plugins/fast-sql/getting-started/) covers the other 2 methods.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-fast-sql/)
+- [Documentation](/docs/plugins/fast-sql/)
+- [API reference](/docs/plugins/fast-sql/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-fast-sql
 

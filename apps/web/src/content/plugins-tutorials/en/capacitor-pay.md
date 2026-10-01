@@ -12,37 +12,50 @@ bun add @capgo/capacitor-pay
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `isPayAvailable` - Checks whether native pay is available on the current platform. On iOS this evaluates Apple Pay, on Android it evaluates Google Pay.
-- `requestPayment` - Presents the native pay sheet for the current platform. Provide the Apple Pay configuration on iOS and the Google Pay configuration on Android.
+## Import
 
-## Example Usage
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+```
 
-### `isPayAvailable`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `isPayAvailable` | Checks whether native pay is available on the current platform. On iOS this evaluates Apple Pay, on Android it evaluates Google Pay. |
+| `requestPayment` | Presents the native pay sheet for the current platform. Provide the Apple Pay configuration on iOS and the Google Pay configuration on Android. |
+
+## Examples
+
+### `isPayAvailable()`
 
 Checks whether native pay is available on the current platform. On iOS this evaluates Apple Pay, on Android it evaluates Google Pay.
 
 ```typescript
 import { Pay } from '@capgo/capacitor-pay';
 
-await Pay.isPayAvailable();
+const result = await Pay.isPayAvailable();
+console.log(result);
 ```
 
-### `requestPayment`
+### `requestPayment()`
 
 Presents the native pay sheet for the current platform. Provide the Apple Pay configuration on iOS and the Google Pay configuration on Android.
 
 ```typescript
 import { Pay } from '@capgo/capacitor-pay';
 
-await Pay.requestPayment({} as PayPaymentOptions);
+const result = await Pay.requestPayment({});
+console.log(result);
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-pay/
-- Docs: /docs/plugins/pay/
+- [GitHub repository](https://github.com/Cap-go/capacitor-pay/)
+- [Documentation](/docs/plugins/pay/)
+- [API reference](/docs/plugins/pay/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-pay
 

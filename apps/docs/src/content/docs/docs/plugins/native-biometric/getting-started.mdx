@@ -41,7 +41,8 @@ Checks if biometric authentication hardware is available.
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
-await NativeBiometric.isAvailable();
+const result = await NativeBiometric.isAvailable();
+console.log(result);
 ```
 
 ### `verifyIdentity`
@@ -61,7 +62,8 @@ Gets the stored credentials for a given server.
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
-await NativeBiometric.getCredentials({} as GetCredentialOptions);
+const result = await NativeBiometric.getCredentials({ server: 'example.com' });
+console.log(result);
 ```
 
 ### `setCredentials`
@@ -71,7 +73,11 @@ Stores the given credentials for a given server.
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
-await NativeBiometric.setCredentials({} as SetCredentialOptions);
+await NativeBiometric.setCredentials({
+  username: 'example',
+  password: 'password',
+  server: 'example.com',
+});
 ```
 
 ### `deleteCredentials`
@@ -81,7 +87,7 @@ Deletes the stored credentials for a given server.
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
-await NativeBiometric.deleteCredentials({} as DeleteCredentialOptions);
+await NativeBiometric.deleteCredentials({ server: 'example.com' });
 ```
 
 ### `getSecureCredentials`
@@ -95,7 +101,8 @@ On Android, BiometricPrompt is shown with a CryptoObject bound to the credential
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
-await NativeBiometric.getSecureCredentials({} as GetSecureCredentialsOptions);
+const result = await NativeBiometric.getSecureCredentials({ server: 'example.com' });
+console.log(result);
 ```
 
 ### `isCredentialsSaved`
@@ -105,7 +112,8 @@ Checks if credentials are already saved for a given server.
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
-await NativeBiometric.isCredentialsSaved({} as IsCredentialsSavedOptions);
+const result = await NativeBiometric.isCredentialsSaved({ server: 'example.com' });
+console.log(result);
 ```
 
 ## Type Reference

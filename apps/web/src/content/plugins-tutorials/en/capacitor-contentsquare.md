@@ -12,18 +12,35 @@ bun add @capgo/capacitor-contentsquare
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `optIn`
-- `optOut`
-- `sendScreenName`
-- `sendTransaction`
+## Import
 
-## Example Usage
+```typescript
+import { Contentsquare } from '@capgo/capacitor-contentsquare';
+```
 
-### `optIn`
+## API at a glance
 
-See the upstream definitions for the current contract.
+| Method | Description |
+| --- | --- |
+| `optIn` | See the source definitions for current behavior. |
+| `optOut` | See the source definitions for current behavior. |
+| `sendScreenName` | See the source definitions for current behavior. |
+| `sendTransaction` | See the source definitions for current behavior. |
+| `sendDynamicVarWithStringValue` | See the source definitions for current behavior. |
+| `sendDynamicVarWithIntValue` | See the source definitions for current behavior. |
+| `onReady` | See the source definitions for current behavior. |
+| `excludeURLForReplay` | See the source definitions for current behavior. |
+| `setPIISelectors` | See the source definitions for current behavior. |
+| `setCapturedElementsSelector` | See the source definitions for current behavior. |
+| `collect` | See the source definitions for current behavior. |
+
+## Examples
+
+### `optIn()`
+
+See the API reference for the current contract.
 
 ```typescript
 import { Contentsquare } from '@capgo/capacitor-contentsquare';
@@ -31,9 +48,9 @@ import { Contentsquare } from '@capgo/capacitor-contentsquare';
 await Contentsquare.optIn();
 ```
 
-### `optOut`
+### `optOut()`
 
-See the upstream definitions for the current contract.
+See the API reference for the current contract.
 
 ```typescript
 import { Contentsquare } from '@capgo/capacitor-contentsquare';
@@ -41,30 +58,62 @@ import { Contentsquare } from '@capgo/capacitor-contentsquare';
 await Contentsquare.optOut();
 ```
 
-### `sendScreenName`
+### `sendScreenName()`
 
-See the upstream definitions for the current contract.
-
-```typescript
-import { Contentsquare } from '@capgo/capacitor-contentsquare';
-
-await Contentsquare.sendScreenName({} as { name: string });
-```
-
-### `sendTransaction`
-
-See the upstream definitions for the current contract.
+See the API reference for the current contract.
 
 ```typescript
 import { Contentsquare } from '@capgo/capacitor-contentsquare';
 
-await Contentsquare.sendTransaction({} as TransactionItem);
+await Contentsquare.sendScreenName({ name: 'example' });
 ```
 
-## Full Reference
+### `sendTransaction()`
 
-- GitHub: https://github.com/Cap-go/capacitor-contentsquare/
-- Docs: /docs/plugins/contentsquare/
+See the API reference for the current contract.
+
+```typescript
+import { Contentsquare, CurrencyCode } from '@capgo/capacitor-contentsquare';
+
+await Contentsquare.sendTransaction({
+  transactionValue: 1,
+  transactionCurrency: CurrencyCode.USD,
+});
+```
+
+### `sendDynamicVarWithStringValue()`
+
+See the API reference for the current contract.
+
+```typescript
+import { Contentsquare } from '@capgo/capacitor-contentsquare';
+
+await Contentsquare.sendDynamicVarWithStringValue({
+  dynVarKey: 'dyn-var-key-123',
+  dynVarValue: 'dyn-var-value',
+});
+```
+
+### `sendDynamicVarWithIntValue()`
+
+See the API reference for the current contract.
+
+```typescript
+import { Contentsquare } from '@capgo/capacitor-contentsquare';
+
+await Contentsquare.sendDynamicVarWithIntValue({
+  dynVarKey: 'dyn-var-key-123',
+  dynVarValue: 'dyn-var-value',
+});
+```
+
+The [API reference](/docs/plugins/contentsquare/getting-started/) covers the other 5 methods.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-contentsquare/)
+- [Documentation](/docs/plugins/contentsquare/)
+- [API reference](/docs/plugins/contentsquare/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-contentsquare
 

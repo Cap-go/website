@@ -12,59 +12,100 @@ bun add @capgo/capacitor-live-reload
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `configureServer` - Store remote dev server settings used for subsequent connections.
-- `connect` - Establish a WebSocket connection if one is not already active.
-- `disconnect` - Close the current WebSocket connection and disable auto reconnect.
-- `getStatus` - Returns the current connection status.
+## Import
 
-## Example Usage
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+```
 
-### `configureServer`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `configureServer` | Store remote dev server settings used for subsequent connections. |
+| `connect` | Establish a WebSocket connection if one is not already active. |
+| `disconnect` | Close the current WebSocket connection and disable auto reconnect. |
+| `getStatus` | Returns the current connection status. |
+| `reload` | Trigger a full reload of the Capacitor WebView. |
+| `reloadFile` | Reload a single file/module if the runtime supports it (falls back to full reload). |
+
+## Examples
+
+### `configureServer()`
 
 Store remote dev server settings used for subsequent connections.
 
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
 
-await LiveReload.configureServer({} as ConfigureServerOptions);
+const result = await LiveReload.configureServer({ url: 'https://example.com' });
+console.log(result);
 ```
 
-### `connect`
+### `connect()`
 
 Establish a WebSocket connection if one is not already active.
 
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
 
-await LiveReload.connect();
+const result = await LiveReload.connect();
+console.log(result);
 ```
 
-### `disconnect`
+### `disconnect()`
 
 Close the current WebSocket connection and disable auto reconnect.
 
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
 
-await LiveReload.disconnect();
+const result = await LiveReload.disconnect();
+console.log(result);
 ```
 
-### `getStatus`
+### `getStatus()`
 
 Returns the current connection status.
 
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
 
-await LiveReload.getStatus();
+const result = await LiveReload.getStatus();
+console.log(result);
 ```
 
-## Full Reference
+### `reload()`
 
-- GitHub: https://github.com/Cap-go/capacitor-live-reload/
-- Docs: /docs/plugins/live-reload/
+Trigger a full reload of the Capacitor WebView.
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+await LiveReload.reload();
+```
+
+### `reloadFile()`
+
+Reload a single file/module if the runtime supports it (falls back to full reload).
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+await LiveReload.reloadFile({ path: 'path/to/file' });
+```
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `LiveReload.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-live-reload/)
+- [Documentation](/docs/plugins/live-reload/)
+- [API reference](/docs/plugins/live-reload/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-live-reload
 

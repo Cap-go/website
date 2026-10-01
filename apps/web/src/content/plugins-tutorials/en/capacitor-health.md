@@ -12,59 +12,104 @@ bun add @capgo/capacitor-health
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `isAvailable` - Returns whether the current platform supports the native health SDK.
-- `requestAuthorization` - Requests read/write access to the provided data types.
-- `checkAuthorization` - Checks authorization status for the provided data types without prompting the user.
-- `readSamples` - Reads samples for the given data type within the specified time frame.
+## Import
 
-## Example Usage
+```typescript
+import { Health } from '@capgo/capacitor-health';
+```
 
-### `isAvailable`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `isAvailable` | Returns whether the current platform supports the native health SDK. |
+| `requestAuthorization` | Requests read/write access to the provided data types. |
+| `checkAuthorization` | Checks authorization status for the provided data types without prompting the user. |
+| `readSamples` | Reads samples for the given data type within the specified time frame. |
+| `saveSample` | Writes a single sample to the native health store. |
+| `openHealthConnectSettings` | Opens the Health Connect settings screen (Android only). On iOS, this method does nothing. |
+| `showPrivacyPolicy` | Shows the app's privacy policy for Health Connect (Android only). On iOS, this method does nothing. |
+| `queryWorkouts` | Queries workout sessions from the native health store. Supported on iOS (HealthKit) and Android (Health Connect). |
+| `queryAggregated` | Queries aggregated health data from the native health store. Aggregates data into time buckets (hour, day, week, month) with operations like sum, average, min, or max. This is more efficient than fetching individual samples for large date ranges. |
+
+## Examples
+
+### `isAvailable()`
 
 Returns whether the current platform supports the native health SDK.
 
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.isAvailable();
+const result = await Health.isAvailable();
+console.log(result);
 ```
 
-### `requestAuthorization`
+### `requestAuthorization()`
 
 Requests read/write access to the provided data types.
 
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.requestAuthorization({} as AuthorizationOptions);
+const result = await Health.requestAuthorization({});
+console.log(result);
 ```
 
-### `checkAuthorization`
+### `checkAuthorization()`
 
 Checks authorization status for the provided data types without prompting the user.
 
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.checkAuthorization({} as AuthorizationOptions);
+const result = await Health.checkAuthorization({});
+console.log(result);
 ```
 
-### `readSamples`
+### `readSamples()`
 
 Reads samples for the given data type within the specified time frame.
 
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.readSamples({} as QueryOptions);
+const result = await Health.readSamples({ dataType: 'steps' });
+console.log(result);
 ```
 
-## Full Reference
+### `saveSample()`
 
-- GitHub: https://github.com/Cap-go/capacitor-health/
-- Docs: /docs/plugins/health/
+Writes a single sample to the native health store.
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.saveSample({
+  dataType: 'steps',
+  value: 1,
+});
+```
+
+### `openHealthConnectSettings()`
+
+Opens the Health Connect settings screen (Android only). On iOS, this method does nothing.
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.openHealthConnectSettings();
+```
+
+The [API reference](/docs/plugins/health/getting-started/) covers the other 3 methods.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-health/)
+- [Documentation](/docs/plugins/health/)
+- [API reference](/docs/plugins/health/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-health
 

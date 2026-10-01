@@ -27,13 +27,13 @@ If you prefer Manual Setup, install the plugin by running the following commands
 1. **Install the package**
 
    ```bash
-   npm install @capgo/capacitor-social-login
+   bun add @capgo/capacitor-social-login
    ```
 
 2. **Sync with native projects**
 
    ```bash
-   npx cap sync
+   bunx cap sync
    ```
 
 3. **Initialize in app startup**
@@ -178,7 +178,7 @@ Provider values mean:
 
 Important details:
 
-- Run `npx cap sync` after changing provider configuration.
+- Run `bunx cap sync` after changing provider configuration.
 - If no provider configuration is supplied, all providers default to `true` for backward compatibility.
 - Disabling a provider with `false` makes it unavailable at runtime, even if that provider only uses system APIs.
 - This configuration only affects iOS and Android; it does not affect Web.

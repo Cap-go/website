@@ -12,15 +12,25 @@ bun add @capgo/capacitor-sim
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `getSimCards` - Get information from the device's SIM cards.
-- `checkPermissions` - Check permission to access SIM card information.
-- `requestPermissions` - Request permission to access SIM card information.
+## Import
 
-## Example Usage
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+```
 
-### `getSimCards`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getSimCards` | Get information from the device's SIM cards. |
+| `checkPermissions` | Check permission to access SIM card information. |
+| `requestPermissions` | Request permission to access SIM card information. |
+
+## Examples
+
+### `getSimCards()`
 
 Get information from the device's SIM cards.
 
@@ -37,7 +47,7 @@ simCards.forEach((sim, index) => {
 });
 ```
 
-### `checkPermissions`
+### `checkPermissions()`
 
 Check permission to access SIM card information.
 
@@ -52,7 +62,7 @@ if (status.readSimCard === 'granted') {
 }
 ```
 
-### `requestPermissions`
+### `requestPermissions()`
 
 Request permission to access SIM card information.
 
@@ -66,10 +76,11 @@ if (status.readSimCard === 'granted') {
 }
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-sim/
-- Docs: /docs/plugins/sim/
+- [GitHub repository](https://github.com/Cap-go/capacitor-sim/)
+- [Documentation](/docs/plugins/sim/)
+- [API reference](/docs/plugins/sim/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-sim
 

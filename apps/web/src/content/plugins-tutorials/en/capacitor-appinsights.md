@@ -12,51 +12,63 @@ bun add @capgo/capacitor-appinsights
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `init` - Initialize the AppInsights SDK.
-- `setUserId` - Set or update the user ID after initialization.
-- `getState` - Get the current state of the SDK.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+```
 
-### `init`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `init` | Initialize the AppInsights SDK. |
+| `setUserId` | Set or update the user ID after initialization. |
+| `getState` | Get the current state of the SDK. |
+
+## Examples
+
+### `init()`
 
 Initialize the AppInsights SDK.
 
 ```typescript
 import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
 
-await CapacitorAppInsights.init({} as {
-    partnerId: string; // Provided by our business unit
-    partnerKey: string; // Provided by our business unit
-  });
+await CapacitorAppInsights.init({
+  partnerId: 'partner-id-123',
+  partnerKey: 'partner-key-123',
+});
 ```
 
-### `setUserId`
+### `setUserId()`
 
 Set or update the user ID after initialization.
 
 ```typescript
 import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
 
-await CapacitorAppInsights.setUserId({} as { userId: string });
+await CapacitorAppInsights.setUserId({ userId: 'user-id-123' });
 ```
 
-### `getState`
+### `getState()`
 
 Get the current state of the SDK.
 
 ```typescript
 import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
 
-await CapacitorAppInsights.getState();
+const result = await CapacitorAppInsights.getState();
+console.log(result);
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-appinsights/
-- Docs: /docs/plugins/appinsights/
+- [GitHub repository](https://github.com/Cap-go/capacitor-appinsights/)
+- [Documentation](/docs/plugins/appinsights/)
+- [API reference](/docs/plugins/appinsights/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-appinsights
 

@@ -41,17 +41,7 @@ Navigate to a location using latitude and longitude
 ```typescript
 import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
 
-await LaunchNavigator.navigate({} as {
-    /**
-     * Destination coordinates [latitude, longitude]
-     */
-    destination: [number, number];
-
-    /**
-     * Optional navigation options
-     */
-    options?: NavigateOptions;
-  });
+await LaunchNavigator.navigate({ destination: [] });
 ```
 
 ### `isAppAvailable`
@@ -59,14 +49,10 @@ await LaunchNavigator.navigate({} as {
 Check if a specific navigation app is available
 
 ```typescript
-import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+import { LaunchNavigator, IOSNavigationApp } from '@capgo/capacitor-launch-navigator';
 
-await LaunchNavigator.isAppAvailable({} as {
-    /**
-     * App identifier to check
-     */
-    app: IOSNavigationApp | AndroidNavigationApp | string;
-  });
+const result = await LaunchNavigator.isAppAvailable({ app: IOSNavigationApp.APPLE_MAPS });
+console.log(result);
 ```
 
 ### `getAvailableApps`
@@ -76,7 +62,8 @@ Get list of available navigation apps on the device
 ```typescript
 import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
 
-await LaunchNavigator.getAvailableApps();
+const result = await LaunchNavigator.getAvailableApps();
+console.log(result);
 ```
 
 ### `getSupportedApps`
@@ -86,7 +73,8 @@ Get list of supported apps for the current platform
 ```typescript
 import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
 
-await LaunchNavigator.getSupportedApps();
+const result = await LaunchNavigator.getSupportedApps();
+console.log(result);
 ```
 
 ### `getDefaultApp`
@@ -96,7 +84,8 @@ Get the name of the default app for navigation
 ```typescript
 import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
 
-await LaunchNavigator.getDefaultApp();
+const result = await LaunchNavigator.getDefaultApp();
+console.log(result);
 ```
 
 ## Type Reference

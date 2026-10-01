@@ -44,7 +44,7 @@ a Rudder options object.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.initialize('value');
+await nativePlugin.initialize('write-key-123');
 ```
 
 ### `identify`
@@ -54,7 +54,7 @@ Sends an identify call for the provided user id.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.identify('value');
+await nativePlugin.identify('user-id-123');
 ```
 
 ### `group`
@@ -64,7 +64,7 @@ Sends a group call for the provided group id.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.group('value');
+await nativePlugin.group('group-id-123');
 ```
 
 ### `track`
@@ -74,7 +74,7 @@ Sends a track call for the provided event name.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.track('value');
+await nativePlugin.track('example');
 ```
 
 ### `screen`
@@ -84,7 +84,7 @@ Sends a screen call for the provided screen name.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.screen('value');
+await nativePlugin.screen('example');
 ```
 
 ### `alias`
@@ -94,7 +94,7 @@ Aliases the current user to a new identifier.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.alias('value');
+await nativePlugin.alias('new-id-123');
 ```
 
 ### `reset`
@@ -124,7 +124,7 @@ Sets the push token that RudderStack forwards to supported destinations.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.putDeviceToken('value');
+await nativePlugin.putDeviceToken('device-token-123');
 ```
 
 ### `setAdvertisingId`
@@ -134,7 +134,7 @@ See the source definitions for the current contract.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.setAdvertisingId('value');
+await nativePlugin.setAdvertisingId('advertising-id-123');
 ```
 
 ### `putAdvertisingId`
@@ -144,7 +144,7 @@ Sets a custom advertising id value.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.putAdvertisingId('value');
+await nativePlugin.putAdvertisingId('advertising-id-123');
 ```
 
 ### `setAnonymousId`
@@ -154,7 +154,7 @@ See the source definitions for the current contract.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.setAnonymousId('value');
+await nativePlugin.setAnonymousId('anonymous-id-123');
 ```
 
 ### `putAnonymousId`
@@ -164,7 +164,7 @@ Sets a custom anonymous id value.
 ```typescript
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-await nativePlugin.putAnonymousId('value');
+await nativePlugin.putAnonymousId('anonymous-id-123');
 ```
 
 ### `optOut`

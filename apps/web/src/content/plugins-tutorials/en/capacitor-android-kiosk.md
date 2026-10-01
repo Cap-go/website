@@ -12,16 +12,28 @@ bun add @capgo/capacitor-android-kiosk
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `isInKioskMode` - Checks if the app is currently running in kiosk mode.
-- `isSetAsLauncher` - Checks if the app is set as the device launcher (home app).
-- `enterKioskMode` - Enters kiosk mode, hiding system UI and blocking hardware buttons. Also starts a foreground keep-alive service so the app is less likely to be killed by the system. The app must be set as the device launcher for this to work effectively.
-- `exitKioskMode` - Exits kiosk mode, restoring normal system UI and hardware button functionality. Also stops the foreground keep-alive service started in enterKioskMode().
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+```
 
-### `isInKioskMode`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `isInKioskMode` | Checks if the app is currently running in kiosk mode. |
+| `isSetAsLauncher` | Checks if the app is set as the device launcher (home app). |
+| `enterKioskMode` | Enters kiosk mode, hiding system UI and blocking hardware buttons. Also starts a foreground keep-alive service so the app is less likely to be killed by the system. The app must be set as the device launcher for this to work effectively. |
+| `exitKioskMode` | Exits kiosk mode, restoring normal system UI and hardware button functionality. Also stops the foreground keep-alive service started in enterKioskMode(). |
+| `setAsLauncher` | Opens the device's home screen settings to allow user to set this app as the launcher. This is required for full kiosk mode functionality. |
+| `setAllowedKeys` | Sets which hardware keys are allowed to function in kiosk mode. By default, all hardware keys are blocked in kiosk mode. |
+
+## Examples
+
+### `isInKioskMode()`
 
 Checks if the app is currently running in kiosk mode.
 
@@ -32,7 +44,7 @@ const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
 console.log('Kiosk mode active:', isInKioskMode);
 ```
 
-### `isSetAsLauncher`
+### `isSetAsLauncher()`
 
 Checks if the app is set as the device launcher (home app).
 
@@ -43,7 +55,7 @@ const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
 console.log('Is launcher:', isLauncher);
 ```
 
-### `enterKioskMode`
+### `enterKioskMode()`
 
 Enters kiosk mode, hiding system UI and blocking hardware buttons. Also starts a foreground keep-alive service so the app is less likely to be killed by the system. The app must be set as the device launcher for this to work effectively.
 
@@ -53,7 +65,7 @@ import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
 await CapacitorAndroidKiosk.enterKioskMode();
 ```
 
-### `exitKioskMode`
+### `exitKioskMode()`
 
 Exits kiosk mode, restoring normal system UI and hardware button functionality. Also stops the foreground keep-alive service started in enterKioskMode().
 
@@ -64,10 +76,39 @@ await CapacitorAndroidKiosk.exitKioskMode();
 console.log('Exited kiosk mode');
 ```
 
-## Full Reference
+### `setAsLauncher()`
 
-- GitHub: https://github.com/Cap-go/capacitor-android-kiosk/
-- Docs: /docs/plugins/android-kiosk/
+Opens the device's home screen settings to allow user to set this app as the launcher. This is required for full kiosk mode functionality.
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+await CapacitorAndroidKiosk.setAsLauncher();
+// User will be prompted to select this app as the home app
+```
+
+### `setAllowedKeys()`
+
+Sets which hardware keys are allowed to function in kiosk mode. By default, all hardware keys are blocked in kiosk mode.
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+// Allow volume keys only
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false
+});
+```
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-android-kiosk/)
+- [Documentation](/docs/plugins/android-kiosk/)
+- [API reference](/docs/plugins/android-kiosk/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-android-kiosk
 

@@ -12,16 +12,32 @@ bun add @capgo/capacitor-admob
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `start` - Initialize and start the AdMob SDK.
-- `configure` - Configure AdMob settings.
-- `configRequest` - Configure ad request settings.
-- `adCreate` - Create a new ad instance.
+## Import
 
-## Example Usage
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+```
 
-### `start`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `start` | Initialize and start the AdMob SDK. |
+| `configure` | Configure AdMob settings. |
+| `configRequest` | Configure ad request settings. |
+| `adCreate` | Create a new ad instance. |
+| `adIsLoaded` | Check if an ad is loaded and ready to be shown. |
+| `adLoad` | Load an ad. |
+| `adShow` | Show a loaded ad. |
+| `adHide` | Hide a currently displayed ad. |
+| `trackingAuthorizationStatus` | Get the current tracking authorization status (iOS only). |
+| `requestTrackingAuthorization` | Request tracking authorization from the user (iOS only). |
+
+## Examples
+
+### `start()`
 
 Initialize and start the AdMob SDK.
 
@@ -31,7 +47,7 @@ import { AdMob } from '@capgo/capacitor-admob';
 await AdMob.start();
 ```
 
-### `configure`
+### `configure()`
 
 Configure AdMob settings.
 
@@ -44,7 +60,7 @@ await AdMob.configure({
 });
 ```
 
-### `configRequest`
+### `configRequest()`
 
 Configure ad request settings.
 
@@ -58,7 +74,7 @@ await AdMob.configRequest({
 });
 ```
 
-### `adCreate`
+### `adCreate()`
 
 Create a new ad instance.
 
@@ -70,10 +86,40 @@ await AdMob.adCreate({
 });
 ```
 
-## Full Reference
+### `adIsLoaded()`
 
-- GitHub: https://github.com/Cap-go/capacitor-admob/
-- Docs: /docs/plugins/admob/
+Check if an ad is loaded and ready to be shown.
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const isLoaded = await AdMob.adIsLoaded({ id: 1 });
+if (isLoaded) {
+  await AdMob.adShow({ id: 1 });
+}
+```
+
+### `adLoad()`
+
+Load an ad.
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+await AdMob.adLoad({ id: 1 });
+```
+
+The [API reference](/docs/plugins/admob/getting-started/) covers the other 4 methods.
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `AdMob.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-admob/)
+- [Documentation](/docs/plugins/admob/)
+- [API reference](/docs/plugins/admob/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-admob
 

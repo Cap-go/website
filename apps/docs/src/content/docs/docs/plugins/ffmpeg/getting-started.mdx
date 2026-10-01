@@ -41,7 +41,8 @@ Return the machine-readable capability matrix for the current platform.
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 
-await CapacitorFFmpeg.getCapabilities();
+const result = await CapacitorFFmpeg.getCapabilities();
+console.log(result);
 ```
 
 ### `reencodeVideo`
@@ -56,7 +57,13 @@ Android and web currently reject with `UNIMPLEMENTED`.
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 
-await CapacitorFFmpeg.reencodeVideo({} as ReencodeVideoOptions);
+const result = await CapacitorFFmpeg.reencodeVideo({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  width: 1,
+  height: 1,
+});
+console.log(result);
 ```
 
 ### `convertImage`
@@ -70,7 +77,12 @@ Web currently rejects with `UNIMPLEMENTED`.
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 
-await CapacitorFFmpeg.convertImage({} as ConvertImageOptions);
+const result = await CapacitorFFmpeg.convertImage({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  format: 'webp',
+});
+console.log(result);
 ```
 
 ### `convertAudio`
@@ -83,7 +95,12 @@ Android and web currently reject with `UNIMPLEMENTED`.
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 
-await CapacitorFFmpeg.convertAudio({} as ConvertAudioOptions);
+const result = await CapacitorFFmpeg.convertAudio({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  format: 'm4a',
+});
+console.log(result);
 ```
 
 ## Type Reference

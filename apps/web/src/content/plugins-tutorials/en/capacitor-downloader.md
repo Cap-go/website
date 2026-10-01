@@ -42,7 +42,7 @@ Pause an active download. Download can be resumed later from the same position.
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 
-await CapacitorDownloader.pause({} as { id: string });
+await CapacitorDownloader.pause({ id: 'id-123' });
 ```
 
 ### `resume`
@@ -52,7 +52,7 @@ Resume a paused download. Continues from where it was paused.
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 
-await CapacitorDownloader.resume({} as { id: string });
+await CapacitorDownloader.resume({ id: 'id-123' });
 ```
 
 ### `stop`
@@ -62,7 +62,7 @@ Stop and cancel a download permanently. Downloaded data will be deleted.
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 
-await CapacitorDownloader.stop({} as { id: string });
+await CapacitorDownloader.stop({ id: 'id-123' });
 ```
 
 ## Full Reference

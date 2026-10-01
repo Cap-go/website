@@ -12,16 +12,36 @@ bun add @capgo/capacitor-speech-synthesis
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `speak` - Speaks the given text with specified options. The utterance is added to the speech queue.
-- `synthesizeToFile` - Synthesizes speech to an audio file (Android/iOS only). Returns the file path where the audio was saved.
-- `cancel` - Cancels all queued utterances and stops current speech.
-- `pause` - Pauses speech immediately.
+## Import
 
-## Example Usage
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+```
 
-### `speak`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `speak` | Speaks the given text with specified options. The utterance is added to the speech queue. |
+| `synthesizeToFile` | Synthesizes speech to an audio file (Android/iOS only). Returns the file path where the audio was saved. |
+| `cancel` | Cancels all queued utterances and stops current speech. |
+| `pause` | Pauses speech immediately. |
+| `resume` | Resumes paused speech. |
+| `isSpeaking` | Checks if speech synthesis is currently speaking. |
+| `isAvailable` | Checks if speech synthesis is available on the device. |
+| `getVoices` | Gets all available voices. |
+| `getLanguages` | Gets all available languages. |
+| `isLanguageAvailable` | Checks if a specific language is available. |
+| `isVoiceAvailable` | Checks if a specific voice is available. |
+| `initialize` | Initializes the speech synthesis engine (iOS optimization). This can reduce latency for the first speech request. |
+| `activateAudioSession` | Activates the audio session with a specific category (iOS only). |
+| `deactivateAudioSession` | Deactivates the audio session (iOS only). |
+
+## Examples
+
+### `speak()`
 
 Speaks the given text with specified options. The utterance is added to the speech queue.
 
@@ -39,7 +59,7 @@ const result = await SpeechSynthesis.speak({
 console.log('Utterance ID:', result.utteranceId);
 ```
 
-### `synthesizeToFile`
+### `synthesizeToFile()`
 
 Synthesizes speech to an audio file (Android/iOS only). Returns the file path where the audio was saved.
 
@@ -53,7 +73,7 @@ const result = await SpeechSynthesis.synthesizeToFile({
 console.log('Audio file saved at:', result.filePath);
 ```
 
-### `cancel`
+### `cancel()`
 
 Cancels all queued utterances and stops current speech.
 
@@ -63,7 +83,7 @@ import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
 await SpeechSynthesis.cancel();
 ```
 
-### `pause`
+### `pause()`
 
 Pauses speech immediately.
 
@@ -73,10 +93,38 @@ import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
 await SpeechSynthesis.pause();
 ```
 
-## Full Reference
+### `resume()`
 
-- GitHub: https://github.com/Cap-go/capacitor-speech-synthesis/
-- Docs: /docs/plugins/speech-synthesis/
+Resumes paused speech.
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+await SpeechSynthesis.resume();
+```
+
+### `isSpeaking()`
+
+Checks if speech synthesis is currently speaking.
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+const { isSpeaking } = await SpeechSynthesis.isSpeaking();
+console.log('Is speaking:', isSpeaking);
+```
+
+The [API reference](/docs/plugins/speech-synthesis/getting-started/) covers the other 8 methods.
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `SpeechSynthesis.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-speech-synthesis/)
+- [Documentation](/docs/plugins/speech-synthesis/)
+- [API reference](/docs/plugins/speech-synthesis/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-speech-synthesis
 

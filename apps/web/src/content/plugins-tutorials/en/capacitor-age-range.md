@@ -12,13 +12,23 @@ bun add @capgo/capacitor-age-range
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `requestAgeRange` - Request the user's age range.
+## Import
 
-## Example Usage
+```typescript
+import { AgeRange } from '@capgo/capacitor-age-range';
+```
 
-### `requestAgeRange`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `requestAgeRange` | Request the user's age range. |
+
+## Examples
+
+### `requestAgeRange()`
 
 Request the user's age range.
 
@@ -31,10 +41,11 @@ if (result.status === 'SHARING') {
 }
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-age-range/
-- Docs: /docs/plugins/age-range/
+- [GitHub repository](https://github.com/Cap-go/capacitor-age-range/)
+- [Documentation](/docs/plugins/age-range/)
+- [API reference](/docs/plugins/age-range/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-age-range
 

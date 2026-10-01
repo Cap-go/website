@@ -12,16 +12,42 @@ bun add @capgo/capacitor-stream-call
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `login` - Login to Stream Video service.
-- `logout` - Logout from Stream Video service.
-- `call` - Initiate a call to another user.
-- `endCall` - End the current call.
+## Import
 
-## Example Usage
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+```
 
-### `login`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `login` | Login to Stream Video service. |
+| `logout` | Logout from Stream Video service. |
+| `call` | Initiate a call to another user. |
+| `endCall` | End the current call. |
+| `joinCall` | Join an existing call. |
+| `setMicrophoneEnabled` | Enable or disable microphone. |
+| `setCameraEnabled` | Enable or disable camera. |
+| `enableBluetooth` | Enable bluetooth audio. |
+| `acceptCall` | Accept an incoming call. |
+| `rejectCall` | Reject an incoming call. |
+| `isCameraEnabled` | Check if camera is enabled. |
+| `getCallStatus` | Get the current call status. |
+| `getRingingCall` | Get the current ringing call. |
+| `toggleViews` | Cycle through the available video layouts. |
+| `setSpeaker` | Set speakerphone on. |
+| `switchCamera` | Switch camera. |
+| `getCallInfo` | Get detailed information about an active call including caller details. |
+| `setDynamicStreamVideoApikey` | Set a dynamic Stream Video API key that overrides the static one. |
+| `getDynamicStreamVideoApikey` | Get the currently set dynamic Stream Video API key. |
+| `getCurrentUser` | Get the current user's information. |
+
+## Examples
+
+### `login()`
 
 Login to Stream Video service.
 
@@ -36,7 +62,7 @@ await StreamCall.login({
 });
 ```
 
-### `logout`
+### `logout()`
 
 Logout from Stream Video service.
 
@@ -46,7 +72,7 @@ import { StreamCall } from '@capgo/capacitor-stream-call';
 await StreamCall.logout();
 ```
 
-### `call`
+### `call()`
 
 Initiate a call to another user.
 
@@ -60,7 +86,7 @@ await StreamCall.call({
 });
 ```
 
-### `endCall`
+### `endCall()`
 
 End the current call.
 
@@ -70,10 +96,37 @@ import { StreamCall } from '@capgo/capacitor-stream-call';
 await StreamCall.endCall();
 ```
 
-## Full Reference
+### `joinCall()`
 
-- GitHub: https://github.com/Cap-go/capacitor-streamcall/
-- Docs: /docs/plugins/streamcall/
+Join an existing call.
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.joinCall({ callId: 'call001', callType: 'default' });
+```
+
+### `setMicrophoneEnabled()`
+
+Enable or disable microphone.
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.setMicrophoneEnabled({ enabled: false });
+```
+
+The [API reference](/docs/plugins/streamcall/getting-started/) covers the other 14 methods.
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `StreamCall.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-streamcall/)
+- [Documentation](/docs/plugins/streamcall/)
+- [API reference](/docs/plugins/streamcall/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-stream-call
 

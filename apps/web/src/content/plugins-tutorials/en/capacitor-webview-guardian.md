@@ -12,59 +12,78 @@ bun add @capgo/capacitor-webview-guardian
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `startMonitoring` - Starts observing foreground events and automatically checks the WebView health.
-- `stopMonitoring` - Stops any automatic foreground monitoring.
-- `getState` - Returns the latest known monitoring state.
-- `checkNow` - Forces a WebView health probe immediately.
+## Import
 
-## Example Usage
+```typescript
+import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
+```
 
-### `startMonitoring`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `startMonitoring` | Starts observing foreground events and automatically checks the WebView health. |
+| `stopMonitoring` | Stops any automatic foreground monitoring. |
+| `getState` | Returns the latest known monitoring state. |
+| `checkNow` | Forces a WebView health probe immediately. |
+
+## Examples
+
+### `startMonitoring()`
 
 Starts observing foreground events and automatically checks the WebView health.
 
 ```typescript
 import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
 
-await WebviewGuardian.startMonitoring();
+const result = await WebviewGuardian.startMonitoring();
+console.log(result);
 ```
 
-### `stopMonitoring`
+### `stopMonitoring()`
 
 Stops any automatic foreground monitoring.
 
 ```typescript
 import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
 
-await WebviewGuardian.stopMonitoring();
+const result = await WebviewGuardian.stopMonitoring();
+console.log(result);
 ```
 
-### `getState`
+### `getState()`
 
 Returns the latest known monitoring state.
 
 ```typescript
 import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
 
-await WebviewGuardian.getState();
+const result = await WebviewGuardian.getState();
+console.log(result);
 ```
 
-### `checkNow`
+### `checkNow()`
 
 Forces a WebView health probe immediately.
 
 ```typescript
 import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
 
-await WebviewGuardian.checkNow();
+const result = await WebviewGuardian.checkNow();
+console.log(result);
 ```
 
-## Full Reference
+## Listen to events
 
-- GitHub: https://github.com/Cap-go/capacitor-webview-guardian/
-- Docs: /docs/plugins/webview-guardian/
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `WebviewGuardian.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-webview-guardian/)
+- [Documentation](/docs/plugins/webview-guardian/)
+- [API reference](/docs/plugins/webview-guardian/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-webview-guardian
 

@@ -12,16 +12,36 @@ bun add @capgo/capacitor-ibeacon
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `startMonitoringForRegion` - Start monitoring for a beacon region. Triggers events when entering/exiting the region.
-- `stopMonitoringForRegion` - Stop monitoring for a beacon region.
-- `startRangingBeaconsInRegion` - Start ranging beacons in a region. Provides continuous distance updates.
-- `stopRangingBeaconsInRegion` - Stop ranging beacons in a region.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+```
 
-### `startMonitoringForRegion`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `startMonitoringForRegion` | Start monitoring for a beacon region. Triggers events when entering/exiting the region. |
+| `stopMonitoringForRegion` | Stop monitoring for a beacon region. |
+| `startRangingBeaconsInRegion` | Start ranging beacons in a region. Provides continuous distance updates. |
+| `stopRangingBeaconsInRegion` | Stop ranging beacons in a region. |
+| `startAdvertising` | Start advertising the device as an iBeacon (iOS only). |
+| `stopAdvertising` | Stop advertising the device as an iBeacon (iOS only). |
+| `requestWhenInUseAuthorization` | Request "When In Use" location authorization (required for ranging/monitoring). |
+| `requestAlwaysAuthorization` | Request "Always" location authorization (required for background monitoring). |
+| `getAuthorizationStatus` | Get current location authorization status. |
+| `isBluetoothEnabled` | Check if Bluetooth is enabled on the device. |
+| `isRangingAvailable` | Check if ranging is available on the device. |
+| `enableARMAFilter` | Enable ARMA filtering for distance calculations (Android only). |
+| `enableBackgroundMode` | Enable or disable background beacon scanning mode (Android only). This enables a foreground service for reliable background beacon detection. Must be called after requesting "Always" location authorization. |
+| `setBackgroundScanPeriod` | Configure background scan periods (Android only). Controls how often and how long the device scans for beacons when in background. |
+
+## Examples
+
+### `startMonitoringForRegion()`
 
 Start monitoring for a beacon region. Triggers events when entering/exiting the region.
 
@@ -34,7 +54,7 @@ await CapacitorIbeacon.startMonitoringForRegion({
 });
 ```
 
-### `stopMonitoringForRegion`
+### `stopMonitoringForRegion()`
 
 Stop monitoring for a beacon region.
 
@@ -47,7 +67,7 @@ await CapacitorIbeacon.stopMonitoringForRegion({
 });
 ```
 
-### `startRangingBeaconsInRegion`
+### `startRangingBeaconsInRegion()`
 
 Start ranging beacons in a region. Provides continuous distance updates.
 
@@ -60,7 +80,7 @@ await CapacitorIbeacon.startRangingBeaconsInRegion({
 });
 ```
 
-### `stopRangingBeaconsInRegion`
+### `stopRangingBeaconsInRegion()`
 
 Stop ranging beacons in a region.
 
@@ -73,10 +93,42 @@ await CapacitorIbeacon.stopRangingBeaconsInRegion({
 });
 ```
 
-## Full Reference
+### `startAdvertising()`
 
-- GitHub: https://github.com/Cap-go/capacitor-ibeacon/
-- Docs: /docs/plugins/ibeacon/
+Start advertising the device as an iBeacon (iOS only).
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+
+await CapacitorIbeacon.startAdvertising({
+  uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+  major: 1,
+  minor: 2,
+  identifier: 'MyBeacon'
+});
+```
+
+### `stopAdvertising()`
+
+Stop advertising the device as an iBeacon (iOS only).
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+
+await CapacitorIbeacon.stopAdvertising();
+```
+
+The [API reference](/docs/plugins/ibeacon/getting-started/) covers the other 8 methods.
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapacitorIbeacon.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-ibeacon/)
+- [Documentation](/docs/plugins/ibeacon/)
+- [API reference](/docs/plugins/ibeacon/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-ibeacon
 

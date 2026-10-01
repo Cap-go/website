@@ -41,7 +41,8 @@ Returns the current authorization status without prompting the user.
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.checkAuthorization();
+const result = await PhotoLibrary.checkAuthorization();
+console.log(result);
 ```
 
 ### `requestAuthorization`
@@ -51,7 +52,8 @@ Requests access to the photo library if needed.
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.requestAuthorization();
+const result = await PhotoLibrary.requestAuthorization();
+console.log(result);
 ```
 
 ### `getAlbums`
@@ -61,7 +63,8 @@ Retrieves the available albums.
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.getAlbums();
+const result = await PhotoLibrary.getAlbums();
+console.log(result);
 ```
 
 ### `getLibrary`
@@ -71,7 +74,8 @@ Retrieves library assets along with URLs that can be displayed in the web view.
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.getLibrary();
+const result = await PhotoLibrary.getLibrary();
+console.log(result);
 ```
 
 ### `getPhotoUrl`
@@ -83,7 +87,8 @@ do not need this method.
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.getPhotoUrl({} as { id: string });
+const result = await PhotoLibrary.getPhotoUrl({ id: 'id-123' });
+console.log(result);
 ```
 
 ### `getThumbnailUrl`
@@ -93,12 +98,8 @@ Retrieves a displayable URL for a resized thumbnail of the asset.
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.getThumbnailUrl({} as {
-    id: string;
-    width?: number;
-    height?: number;
-    quality?: number;
-  });
+const result = await PhotoLibrary.getThumbnailUrl({ id: 'id-123' });
+console.log(result);
 ```
 
 ### `pickMedia`
@@ -109,7 +110,8 @@ The selected files are copied into the application cache and returned with porta
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.pickMedia();
+const result = await PhotoLibrary.pickMedia();
+console.log(result);
 ```
 
 ## Type Reference

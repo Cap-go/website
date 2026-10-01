@@ -12,14 +12,24 @@ bun add @capgo/capacitor-shake
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `addListener` - Listen for shake event on the device.
-- `getPluginVersion` - Get the native Capacitor plugin version.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorShake } from '@capgo/capacitor-shake';
+```
 
-### `addListener`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `addListener` | Listen for shake event on the device. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Examples
+
+### `addListener()`
 
 Listen for shake event on the device.
 
@@ -34,7 +44,7 @@ const listener = await CapacitorShake.addListener('shake', () => {
 await listener.remove();
 ```
 
-### `getPluginVersion`
+### `getPluginVersion()`
 
 Get the native Capacitor plugin version.
 
@@ -45,10 +55,15 @@ const { version } = await CapacitorShake.getPluginVersion();
 console.log('Plugin version:', version);
 ```
 
-## Full Reference
+## Listen to events
 
-- GitHub: https://github.com/Cap-go/capacitor-shake/
-- Docs: /docs/plugins/shake/
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapacitorShake.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-shake/)
+- [Documentation](/docs/plugins/shake/)
+- [API reference](/docs/plugins/shake/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-shake
 

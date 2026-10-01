@@ -12,59 +12,110 @@ bun add @capgo/capacitor-twilio-video
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `login` - Store and validate a Twilio Video access token minted by your backend.
-- `logout` - Clear the cached access token and leave the active room.
-- `isLoggedIn` - Check whether a valid Twilio token is currently cached on the device.
-- `joinRoom` - Join a Twilio room and present the plugin's native in-app call overlay.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+```
 
-### `login`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `login` | Store and validate a Twilio Video access token minted by your backend. |
+| `logout` | Clear the cached access token and leave the active room. |
+| `isLoggedIn` | Check whether a valid Twilio token is currently cached on the device. |
+| `joinRoom` | Join a Twilio room and present the plugin's native in-app call overlay. |
+| `leaveRoom` | Leave the current room if connected. |
+| `setMicrophoneEnabled` | Enable/disable local microphone publishing. |
+| `setCameraEnabled` | Enable/disable local camera publishing. |
+| `getCallStatus` | Return the current room name, media state, and participant count. |
+| `checkMicrophonePermission` | Check microphone permission state. |
+| `requestMicrophonePermission` | Request microphone permission. |
+| `checkCameraPermission` | Check camera permission state. |
+| `requestCameraPermission` | Request camera permission. |
+
+## Examples
+
+### `login()`
 
 Store and validate a Twilio Video access token minted by your backend.
 
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.login({} as { accessToken: string });
+const result = await CapacitorTwilioVideo.login({ accessToken: 'access-token-123' });
+console.log(result);
 ```
 
-### `logout`
+### `logout()`
 
 Clear the cached access token and leave the active room.
 
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.logout();
+const result = await CapacitorTwilioVideo.logout();
+console.log(result);
 ```
 
-### `isLoggedIn`
+### `isLoggedIn()`
 
 Check whether a valid Twilio token is currently cached on the device.
 
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.isLoggedIn();
+const result = await CapacitorTwilioVideo.isLoggedIn();
+console.log(result);
 ```
 
-### `joinRoom`
+### `joinRoom()`
 
 Join a Twilio room and present the plugin's native in-app call overlay.
 
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.joinRoom({} as { roomName: string; enableAudio?: boolean; enableVideo?: boolean });
+const result = await CapacitorTwilioVideo.joinRoom({ roomName: 'example' });
+console.log(result);
 ```
 
-## Full Reference
+### `leaveRoom()`
 
-- GitHub: https://github.com/Cap-go/capacitor-twilio-video/
-- Docs: /docs/plugins/twilio-video/
+Leave the current room if connected.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+const result = await CapacitorTwilioVideo.leaveRoom();
+console.log(result);
+```
+
+### `setMicrophoneEnabled()`
+
+Enable/disable local microphone publishing.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+const result = await CapacitorTwilioVideo.setMicrophoneEnabled({ enabled: true });
+console.log(result);
+```
+
+The [API reference](/docs/plugins/twilio-video/getting-started/) covers the other 6 methods.
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapacitorTwilioVideo.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-twilio-video/)
+- [Documentation](/docs/plugins/twilio-video/)
+- [API reference](/docs/plugins/twilio-video/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-twilio-video
 

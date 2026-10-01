@@ -12,36 +12,50 @@ bun add @capgo/capacitor-barometer
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `getMeasurement` - Get the most recent barometer reading captured by the native layer.
-- `isAvailable` - Check if the current device includes a barometer sensor.
-- `startMeasurementUpdates` - Begin streaming barometer updates to the JavaScript layer.
-- `stopMeasurementUpdates` - Stop the continuous updates started via .
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+```
 
-### `getMeasurement`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getMeasurement` | Get the most recent barometer reading captured by the native layer. |
+| `isAvailable` | Check if the current device includes a barometer sensor. |
+| `startMeasurementUpdates` | Begin streaming barometer updates to the JavaScript layer. |
+| `stopMeasurementUpdates` | Stop the continuous updates started via . |
+| `checkPermissions` | Return the current permission state for accessing barometer data. |
+| `requestPermissions` | Request permission to access barometer data if required by the platform. |
+
+## Examples
+
+### `getMeasurement()`
 
 Get the most recent barometer reading captured by the native layer.
 
 ```typescript
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 
-await CapacitorBarometer.getMeasurement();
+const result = await CapacitorBarometer.getMeasurement();
+console.log(result);
 ```
 
-### `isAvailable`
+### `isAvailable()`
 
 Check if the current device includes a barometer sensor.
 
 ```typescript
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 
-await CapacitorBarometer.isAvailable();
+const result = await CapacitorBarometer.isAvailable();
+console.log(result);
 ```
 
-### `startMeasurementUpdates`
+### `startMeasurementUpdates()`
 
 Begin streaming barometer updates to the JavaScript layer.
 
@@ -51,7 +65,7 @@ import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 await CapacitorBarometer.startMeasurementUpdates();
 ```
 
-### `stopMeasurementUpdates`
+### `stopMeasurementUpdates()`
 
 Stop the continuous updates started via .
 
@@ -61,10 +75,37 @@ import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 await CapacitorBarometer.stopMeasurementUpdates();
 ```
 
-## Full Reference
+### `checkPermissions()`
 
-- GitHub: https://github.com/Cap-go/capacitor-barometer/
-- Docs: /docs/plugins/barometer/
+Return the current permission state for accessing barometer data.
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+const result = await CapacitorBarometer.checkPermissions();
+console.log(result);
+```
+
+### `requestPermissions()`
+
+Request permission to access barometer data if required by the platform.
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+const result = await CapacitorBarometer.requestPermissions();
+console.log(result);
+```
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `CapacitorBarometer.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-barometer/)
+- [Documentation](/docs/plugins/barometer/)
+- [API reference](/docs/plugins/barometer/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-barometer
 

@@ -12,14 +12,24 @@ bun add @capgo/capacitor-app-tracking-transparency
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `getStatus` - Gets the current tracking authorization status without prompting the user.
-- `requestPermission` - Requests user authorization to access app-related data for tracking. Displays the native iOS tracking permission dialog.
+## Import
 
-## Example Usage
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+```
 
-### `getStatus`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getStatus` | Gets the current tracking authorization status without prompting the user. |
+| `requestPermission` | Requests user authorization to access app-related data for tracking. Displays the native iOS tracking permission dialog. |
+
+## Examples
+
+### `getStatus()`
 
 Gets the current tracking authorization status without prompting the user.
 
@@ -32,7 +42,7 @@ if (status === 'authorized') {
 }
 ```
 
-### `requestPermission`
+### `requestPermission()`
 
 Requests user authorization to access app-related data for tracking. Displays the native iOS tracking permission dialog.
 
@@ -56,10 +66,11 @@ switch (status) {
 }
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-app-tracking-transparency/
-- Docs: /docs/plugins/app-tracking-transparency/
+- [GitHub repository](https://github.com/Cap-go/capacitor-app-tracking-transparency/)
+- [Documentation](/docs/plugins/app-tracking-transparency/)
+- [API reference](/docs/plugins/app-tracking-transparency/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-app-tracking-transparency
 

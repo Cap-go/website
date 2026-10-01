@@ -41,7 +41,8 @@ Get the most recent barometer reading captured by the native layer.
 ```typescript
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 
-await CapacitorBarometer.getMeasurement();
+const result = await CapacitorBarometer.getMeasurement();
+console.log(result);
 ```
 
 ### `isAvailable`
@@ -51,7 +52,8 @@ Check if the current device includes a barometer sensor.
 ```typescript
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 
-await CapacitorBarometer.isAvailable();
+const result = await CapacitorBarometer.isAvailable();
+console.log(result);
 ```
 
 ### `startMeasurementUpdates`
@@ -83,7 +85,8 @@ Return the current permission state for accessing barometer data.
 ```typescript
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 
-await CapacitorBarometer.checkPermissions();
+const result = await CapacitorBarometer.checkPermissions();
+console.log(result);
 ```
 
 ### `requestPermissions`
@@ -93,7 +96,8 @@ Request permission to access barometer data if required by the platform.
 ```typescript
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 
-await CapacitorBarometer.requestPermissions();
+const result = await CapacitorBarometer.requestPermissions();
+console.log(result);
 ```
 
 ## Type Reference

@@ -41,7 +41,8 @@ Returns whether the current platform supports the native health SDK.
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.isAvailable();
+const result = await Health.isAvailable();
+console.log(result);
 ```
 
 ### `requestAuthorization`
@@ -51,7 +52,8 @@ Requests read/write access to the provided data types.
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.requestAuthorization({} as AuthorizationOptions);
+const result = await Health.requestAuthorization({});
+console.log(result);
 ```
 
 ### `checkAuthorization`
@@ -61,7 +63,8 @@ Checks authorization status for the provided data types without prompting the us
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.checkAuthorization({} as AuthorizationOptions);
+const result = await Health.checkAuthorization({});
+console.log(result);
 ```
 
 ### `readSamples`
@@ -71,7 +74,8 @@ Reads samples for the given data type within the specified time frame.
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.readSamples({} as QueryOptions);
+const result = await Health.readSamples({ dataType: 'steps' });
+console.log(result);
 ```
 
 ### `saveSample`
@@ -81,7 +85,10 @@ Writes a single sample to the native health store.
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.saveSample({} as WriteSampleOptions);
+await Health.saveSample({
+  dataType: 'steps',
+  value: 1,
+});
 ```
 
 ### `openHealthConnectSettings`
@@ -124,7 +131,8 @@ Supported on iOS (HealthKit) and Android (Health Connect).
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.queryWorkouts({} as QueryWorkoutsOptions);
+const result = await Health.queryWorkouts({});
+console.log(result);
 ```
 
 ### `queryAggregated`
@@ -138,7 +146,8 @@ Supported on iOS (HealthKit) and Android (Health Connect).
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-await Health.queryAggregated({} as QueryAggregatedOptions);
+const result = await Health.queryAggregated({ dataType: 'steps' });
+console.log(result);
 ```
 
 ## Type Reference

@@ -12,59 +12,113 @@ bun add @capgo/capacitor-video-player
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `initPlayer` - Initialize a video player.
-- `isPlaying` - Return if a given playerId is playing.
-- `play` - Play the current video from a given playerId.
-- `pause` - Pause the current video from a given playerId.
+## Import
 
-## Example Usage
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+```
 
-### `initPlayer`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `initPlayer` | Initialize a video player. |
+| `isPlaying` | Return if a given playerId is playing. |
+| `play` | Play the current video from a given playerId. |
+| `pause` | Pause the current video from a given playerId. |
+| `getDuration` | Get the duration of the current video from a given playerId. |
+| `getCurrentTime` | Get the current time of the current video from a given playerId. |
+| `setCurrentTime` | Set the current time to seek the current video to from a given playerId. |
+| `getVolume` | Get the volume of the current video from a given playerId. |
+| `setVolume` | Set the volume of the current video to from a given playerId. |
+| `getMuted` | Get the muted of the current video from a given playerId. |
+| `setMuted` | Set the muted of the current video to from a given playerId. |
+| `setRate` | Set the rate of the current video from a given playerId. |
+| `getRate` | Get the rate of the current video from a given playerId. |
+| `stopAllPlayers` | Stop all players playing. |
+| `showController` | Show controller. |
+| `isControllerIsFullyVisible` | isControllerIsFullyVisible. |
+| `exitPlayer` | Exit player. |
+| `hidePlayer` | Hide the currently presented player UI without stopping playback (native fullscreen). |
+| `showPlayer` | Show again a previously hidden player UI (native fullscreen). |
+
+## Examples
+
+### `initPlayer()`
 
 Initialize a video player.
 
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-await VideoPlayer.initPlayer({} as capVideoPlayerOptions);
+const result = await VideoPlayer.initPlayer({});
+console.log(result);
 ```
 
-### `isPlaying`
+### `isPlaying()`
 
 Return if a given playerId is playing.
 
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-await VideoPlayer.isPlaying({} as capVideoPlayerIdOptions);
+const result = await VideoPlayer.isPlaying({});
+console.log(result);
 ```
 
-### `play`
+### `play()`
 
 Play the current video from a given playerId.
 
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-await VideoPlayer.play({} as capVideoPlayerIdOptions);
+const result = await VideoPlayer.play({});
+console.log(result);
 ```
 
-### `pause`
+### `pause()`
 
 Pause the current video from a given playerId.
 
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-await VideoPlayer.pause({} as capVideoPlayerIdOptions);
+const result = await VideoPlayer.pause({});
+console.log(result);
 ```
 
-## Full Reference
+### `getDuration()`
 
-- GitHub: https://github.com/Cap-go/capacitor-video-player/
-- Docs: /docs/plugins/video-player/
+Get the duration of the current video from a given playerId.
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.getDuration({});
+console.log(result);
+```
+
+### `getCurrentTime()`
+
+Get the current time of the current video from a given playerId.
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.getCurrentTime({});
+console.log(result);
+```
+
+The [API reference](/docs/plugins/video-player/getting-started/) covers the other 13 methods.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-video-player/)
+- [Documentation](/docs/plugins/video-player/)
+- [API reference](/docs/plugins/video-player/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-video-player
 

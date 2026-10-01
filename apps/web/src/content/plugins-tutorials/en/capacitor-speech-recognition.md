@@ -28,7 +28,8 @@ Checks whether the native speech recognition service is usable on the current de
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.available();
+const result = await SpeechRecognition.available();
+console.log(result);
 ```
 
 ### `isOnDeviceRecognitionAvailable`
@@ -38,7 +39,8 @@ Checks whether the platform's newer on-device recognition path is available for 
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.isOnDeviceRecognitionAvailable();
+const result = await SpeechRecognition.isOnDeviceRecognitionAvailable();
+console.log(result);
 ```
 
 ### `start`
@@ -48,7 +50,8 @@ Begins capturing audio and transcribing speech.
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.start();
+const result = await SpeechRecognition.start();
+console.log(result);
 ```
 
 ### `stop`

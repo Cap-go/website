@@ -43,7 +43,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 
-await FirebaseCrashlytics.crash({} as CrashOptions);
+await FirebaseCrashlytics.crash({ message: 'Hello from Capacitor' });
 ```
 
 ### `setCustomKey`
@@ -55,7 +55,11 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 
-await FirebaseCrashlytics.setCustomKey({} as SetCustomKeyOptions);
+await FirebaseCrashlytics.setCustomKey({
+  key: 'key-123',
+  value: 'value',
+  type: 'string',
+});
 ```
 
 ### `setUserId`
@@ -67,7 +71,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 
-await FirebaseCrashlytics.setUserId({} as SetUserIdOptions);
+await FirebaseCrashlytics.setUserId({ userId: 'user-id-123' });
 ```
 
 ### `log`
@@ -79,7 +83,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 
-await FirebaseCrashlytics.log({} as LogOptions);
+await FirebaseCrashlytics.log({ message: 'Hello from Capacitor' });
 ```
 
 ### `setEnabled`
@@ -92,7 +96,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 
-await FirebaseCrashlytics.setEnabled({} as SetEnabledOptions);
+await FirebaseCrashlytics.setEnabled({ enabled: true });
 ```
 
 ### `isEnabled`
@@ -104,7 +108,8 @@ Only available for iOS.
 ```typescript
 import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 
-await FirebaseCrashlytics.isEnabled();
+const result = await FirebaseCrashlytics.isEnabled();
+console.log(result);
 ```
 
 ### `didCrashOnPreviousExecution`
@@ -116,7 +121,8 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 
-await FirebaseCrashlytics.didCrashOnPreviousExecution();
+const result = await FirebaseCrashlytics.didCrashOnPreviousExecution();
+console.log(result);
 ```
 
 ### `sendUnsentReports`
@@ -154,7 +160,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 
-await FirebaseCrashlytics.recordException({} as RecordExceptionOptions);
+await FirebaseCrashlytics.recordException({ message: 'Hello from Capacitor' });
 ```
 
 ## Type Reference

@@ -12,59 +12,112 @@ bun add @capgo/capacitor-data-storage-sqlite
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the native code into your iOS and Android projects. Run it again after every plugin upgrade.
 
-- `openStore` - Open a store.
-- `closeStore` - Close the Store.
-- `isStoreOpen` - Check if the Store is opened.
-- `isStoreExists` - Check if the Store exists.
+## Import
 
-## Example Usage
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+```
 
-### `openStore`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `openStore` | Open a store. |
+| `closeStore` | Close the Store. |
+| `isStoreOpen` | Check if the Store is opened. |
+| `isStoreExists` | Check if the Store exists. |
+| `deleteStore` | Delete a store. |
+| `setTable` | Set or Add a table to an existing store. |
+| `set` | Store a data with given key and value. |
+| `get` | Retrieve a data value for a given data key. |
+| `remove` | Remove a data with given key. |
+| `clear` | Clear the Data Store (delete all keys). |
+| `iskey` | Check if a data key exists. |
+| `keys` | Get the data key list. |
+| `values` | Get the data value list. |
+| `filtervalues` | Get the data value list for filter keys. |
+| `keysvalues` | Get the data key/value pair list. |
+| `isTable` | Check if a table exists. |
+| `tables` | Get the table list for the current store. |
+| `deleteTable` | Delete a table. |
+| `importFromJson` | Import a database From a JSON. |
+| `isJsonValid` | Check the validity of a JSON Object. |
+| `exportToJson` | Export the given database to a JSON Object. |
+| `vacuum` | Rebuild the current SQLite store to reclaim unused disk space. |
+
+## Examples
+
+### `openStore()`
 
 Open a store.
 
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.openStore({} as capOpenStorageOptions);
+await CapgoCapacitorDataStorageSqlite.openStore({});
 ```
 
-### `closeStore`
+### `closeStore()`
 
 Close the Store.
 
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.closeStore({} as capStorageOptions);
+await CapgoCapacitorDataStorageSqlite.closeStore({ database: 'database' });
 ```
 
-### `isStoreOpen`
+### `isStoreOpen()`
 
 Check if the Store is opened.
 
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.isStoreOpen({} as capStorageOptions);
+const result = await CapgoCapacitorDataStorageSqlite.isStoreOpen({ database: 'database' });
+console.log(result);
 ```
 
-### `isStoreExists`
+### `isStoreExists()`
 
 Check if the Store exists.
 
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.isStoreExists({} as capStorageOptions);
+const result = await CapgoCapacitorDataStorageSqlite.isStoreExists({ database: 'database' });
+console.log(result);
 ```
 
-## Full Reference
+### `deleteStore()`
 
-- GitHub: https://github.com/Cap-go/capacitor-data-storage-sqlite/
-- Docs: /docs/plugins/data-storage-sqlite/
+Delete a store.
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.deleteStore({});
+```
+
+### `setTable()`
+
+Set or Add a table to an existing store.
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.setTable({ table: 'table' });
+```
+
+The [API reference](/docs/plugins/data-storage-sqlite/getting-started/) covers the other 16 methods.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-data-storage-sqlite/)
+- [Documentation](/docs/plugins/data-storage-sqlite/)
+- [API reference](/docs/plugins/data-storage-sqlite/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-data-storage-sqlite
 

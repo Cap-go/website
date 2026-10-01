@@ -71,7 +71,8 @@ Get the value for the given key as a boolean.
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.getBoolean({} as GetBooleanOptions);
+const result = await FirebaseRemoteConfig.getBoolean({ key: 'key-123' });
+console.log(result);
 ```
 
 ### `getNumber`
@@ -81,7 +82,8 @@ Get the value for the given key as a number.
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.getNumber({} as GetNumberOptions);
+const result = await FirebaseRemoteConfig.getNumber({ key: 'key-123' });
+console.log(result);
 ```
 
 ### `getString`
@@ -91,7 +93,8 @@ Get the value for the given key as a string.
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.getString({} as GetStringOptions);
+const result = await FirebaseRemoteConfig.getString({ key: 'key-123' });
+console.log(result);
 ```
 
 ### `getInfo`
@@ -101,7 +104,8 @@ Get information about the last fetch operation.
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.getInfo();
+const result = await FirebaseRemoteConfig.getInfo();
+console.log(result);
 ```
 
 ### `setMinimumFetchInterval`
@@ -113,7 +117,7 @@ Only available for Web.
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.setMinimumFetchInterval({} as SetMinimumFetchIntervalOptions);
+await FirebaseRemoteConfig.setMinimumFetchInterval({ minimumFetchIntervalInSeconds: 43200 });
 ```
 
 ### `setSettings`
@@ -125,7 +129,7 @@ On Android, the settings values are persisted in SharedPreferences.
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.setSettings({} as SetSettingsOptions);
+await FirebaseRemoteConfig.setSettings({});
 ```
 
 ### `addConfigUpdateListener`
@@ -137,7 +141,10 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.addConfigUpdateListener({} as AddConfigUpdateListenerOptionsCallback);
+const result = await FirebaseRemoteConfig.addConfigUpdateListener((event, error) => {
+  console.log(event);
+});
+console.log(result);
 ```
 
 ### `removeConfigUpdateListener`
@@ -149,7 +156,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.removeConfigUpdateListener({} as RemoveConfigUpdateListenerOptions);
+await FirebaseRemoteConfig.removeConfigUpdateListener({ id: 'id-123' });
 ```
 
 ## Type Reference

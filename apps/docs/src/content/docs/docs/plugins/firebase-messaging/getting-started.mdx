@@ -43,7 +43,8 @@ On **Android**, this method only needs to be called on Android 13+.
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.checkPermissions();
+const result = await FirebaseMessaging.checkPermissions();
+console.log(result);
 ```
 
 ### `requestPermissions`
@@ -55,7 +56,8 @@ On **Android**, this method only needs to be called on Android 13+.
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.requestPermissions();
+const result = await FirebaseMessaging.requestPermissions();
+console.log(result);
 ```
 
 ### `isSupported`
@@ -67,7 +69,8 @@ Always returns `true` on Android and iOS.
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.isSupported();
+const result = await FirebaseMessaging.isSupported();
+console.log(result);
 ```
 
 ### `getToken`
@@ -80,7 +83,8 @@ This method also re-enables FCM auto-init.
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.getToken();
+const result = await FirebaseMessaging.getToken();
+console.log(result);
 ```
 
 ### `deleteToken`
@@ -105,7 +109,8 @@ On Android, the data field of the FCM notification will NOT be included.
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.getDeliveredNotifications();
+const result = await FirebaseMessaging.getDeliveredNotifications();
+console.log(result);
 ```
 
 ### `removeDeliveredNotifications`
@@ -115,7 +120,7 @@ Remove specific notifications from the notifications screen.
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.removeDeliveredNotifications({} as RemoveDeliveredNotificationsOptions);
+await FirebaseMessaging.removeDeliveredNotifications({ notifications: [] });
 ```
 
 ### `removeAllDeliveredNotifications`
@@ -139,7 +144,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.subscribeToTopic({} as SubscribeToTopicOptions);
+await FirebaseMessaging.subscribeToTopic({ topic: 'topic' });
 ```
 
 ### `unsubscribeFromTopic`
@@ -151,7 +156,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.unsubscribeFromTopic({} as UnsubscribeFromTopicOptions);
+await FirebaseMessaging.unsubscribeFromTopic({ topic: 'topic' });
 ```
 
 ### `createChannel`
@@ -163,7 +168,10 @@ Only available for Android (SDK 26+).
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.createChannel({} as CreateChannelOptions);
+await FirebaseMessaging.createChannel({
+  id: 'id-123',
+  name: 'example',
+});
 ```
 
 ### `deleteChannel`
@@ -175,7 +183,7 @@ Only available for Android (SDK 26+).
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.deleteChannel({} as DeleteChannelOptions);
+await FirebaseMessaging.deleteChannel({ id: 'id-123' });
 ```
 
 ### `listChannels`
@@ -187,7 +195,8 @@ Only available for Android (SDK 26+).
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 
-await FirebaseMessaging.listChannels();
+const result = await FirebaseMessaging.listChannels();
+console.log(result);
 ```
 
 ## Type Reference

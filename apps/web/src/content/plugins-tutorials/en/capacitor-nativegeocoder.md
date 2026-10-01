@@ -26,7 +26,11 @@ Convert latitude and longitude to an address.
 ```typescript
 import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 
-await NativeGeocoder.reverseGeocode({} as ReverseOptions);
+const result = await NativeGeocoder.reverseGeocode({
+  latitude: 1,
+  longitude: 1,
+});
+console.log(result);
 ```
 
 ### `forwardGeocode`
@@ -36,7 +40,8 @@ Convert an address to latitude and longitude.
 ```typescript
 import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 
-await NativeGeocoder.forwardGeocode({} as ForwardOptions);
+const result = await NativeGeocoder.forwardGeocode({ addressString: 'address-string' });
+console.log(result);
 ```
 
 ## Full Reference
