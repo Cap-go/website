@@ -56,7 +56,7 @@ Stops a trace.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.stopTrace({ traceName: 'startTrace' });
+await FirebasePerformance.stopTrace({ traceName: 'trace' });
 ```
 
 ### `incrementMetric()`
@@ -67,7 +67,7 @@ Atomically increments the metric with the given name for the selected trace by t
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
 await FirebasePerformance.incrementMetric({
-  traceName: 'startTrace',
+  traceName: 'trace',
   metricName: 'metric',
 });
 ```

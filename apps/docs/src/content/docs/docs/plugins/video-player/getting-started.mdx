@@ -107,7 +107,7 @@ Set the current time to seek the current video to from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.setCurrentTime({ seektime: 10 });
+const result = await VideoPlayer.setCurrentTime({ playerId: 'player-id-123' });
 console.log(result);
 ```
 
@@ -162,7 +162,7 @@ Set the rate of the current video from a given playerId
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-const result = await VideoPlayer.setRate({ rate: 1.5 });
+const result = await VideoPlayer.setRate({ rate: 1 });
 console.log(result);
 ```
 

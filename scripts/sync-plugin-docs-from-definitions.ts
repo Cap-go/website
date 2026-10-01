@@ -673,7 +673,7 @@ const exampleNumber = (nameHint?: string) => {
   if (has('height')) return '1920'
   if (has('quality')) return '85'
   if (has('seektime', 'seconds', 'time', 'position')) return '10'
-  if (has('rate', 'speed')) return '1.5'
+  if (has('rate', 'speed')) return '1'
   if (has('volume', 'opacity', 'alpha', 'ratio', 'brightness')) return '0.5'
   return '1'
 }
@@ -727,8 +727,9 @@ const propertyValue = (member: ts.PropertySignature, context: ExampleContext, de
   if (documented && (!allowed || allowed.includes(documented))) return documented
   // Plain `string` options often list their accepted values in prose, e.g. "Player mode ('fullscreen' or 'embedded')".
   if (member.type?.kind === ts.SyntaxKind.StringKeyword) {
-    const quoted = /['"`]([a-z][\w-]{2,})['"`]/.exec(getDocInfo(member).text)?.[1]
-    if (quoted) return `'${quoted}'`
+    // Only trust quoted values when the docs list several of them; a single quoted word is usually a reference (`startTrace`).
+    const quoted = [...getDocInfo(member).text.matchAll(/['"`]([a-z][\w-]{2,})['"`]/g)].map((match) => match[1])
+    if (new Set(quoted).size >= 2) return `'${quoted[0]}'`
   }
   return buildExampleValue(member.type, context, depth + 1, key)
 }
@@ -797,7 +798,10 @@ const getMemberEntries = (members: ts.NodeArray<ts.TypeElement>, context: Exampl
   const properties = members.filter((member): member is ts.PropertySignature => ts.isPropertySignature(member) && Boolean(member.name) && !omit.has(member.name.getText().replaceAll(/['"]/g, '')))
   for (const member of properties) {
     const key = member.name.getText()
-    const matchesMethod = depth === 0 && (context.methodWords ?? []).some((word) => key.toLowerCase().replaceAll(/['"]/g, '').includes(word))
+    // Only the field that *is* the setter's value: setVolume -> volume, setPlaybackRate -> playbackRate.
+    const normalizedKey = key.toLowerCase().replaceAll(/['"]/g, '')
+    const methodWords = context.methodWords ?? []
+    const matchesMethod = depth === 0 && methodWords.length > 0 && (normalizedKey === methodWords.join('') || (methodWords.length === 1 && normalizedKey.startsWith(methodWords[0])))
     if (member.questionToken && !matchesMethod) continue
     entries.set(key, propertyValue(member, context, depth))
   }
