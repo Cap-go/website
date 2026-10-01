@@ -12,14 +12,24 @@ bun add @capgo/capacitor-autofill-save-password
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `promptDialog` - Save a password to the keychain.
-- `readPassword` - Read a password from the keychain. Requires the developer to setup associated domain for the app for iOS.
+## Import
 
-## Example Usage
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+```
 
-### `promptDialog`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `promptDialog` | Save a password to the keychain. |
+| `readPassword` | Read a password from the keychain. Requires the developer to setup associated domain for the app for iOS. |
+
+## Examples
+
+### `promptDialog()`
 
 Save a password to the keychain.
 
@@ -32,20 +42,22 @@ await SavePassword.promptDialog({
 });
 ```
 
-### `readPassword`
+### `readPassword()`
 
 Read a password from the keychain. Requires the developer to setup associated domain for the app for iOS.
 
 ```typescript
 import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 
-await SavePassword.readPassword();
+const result = await SavePassword.readPassword();
+// The result holds sensitive values: use it without logging it.
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-autofill-save-password/
-- Docs: /docs/plugins/autofill-save-password/
+- [GitHub repository](https://github.com/Cap-go/capacitor-autofill-save-password/)
+- [Documentation](/docs/plugins/autofill-save-password/)
+- [API reference](/docs/plugins/autofill-save-password/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-autofill-save-password
 

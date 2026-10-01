@@ -12,16 +12,35 @@ bun add @capgo/capacitor-firebase-remote-config
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `activate` - Make the last fetched configuration available to the getters.
-- `fetchAndActivate` - Perform fetch and activate operations.
-- `fetchConfig` - Fetch and cache configuration from the Remote Config service.
-- `getBoolean` - Get the value for the given key as a boolean.
+## Import
 
-## Example Usage
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+```
 
-### `activate`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `activate` | Make the last fetched configuration available to the getters. |
+| `fetchAndActivate` | Perform fetch and activate operations. |
+| `fetchConfig` | Fetch and cache configuration from the Remote Config service. |
+| `getBoolean` | Get the value for the given key as a boolean. |
+| `getNumber` | Get the value for the given key as a number. |
+| `getString` | Get the value for the given key as a string. |
+| `getAll` | Get all the values from the Remote Config service. |
+| `getInfo` | Get information about the last fetch operation. |
+| `setMinimumFetchInterval` | Set the minimum fetch interval. |
+| `setDefaults` | Sets config defaults for parameter keys and values in the default namespace config. |
+| `setSettings` | Set the remote config settings. |
+| `addConfigUpdateListener` | Add a listener for the config update event. |
+| `removeConfigUpdateListener` | Remove a listener for the config update event. |
+
+## Examples
+
+### `activate()`
 
 Make the last fetched configuration available to the getters.
 
@@ -31,7 +50,7 @@ import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 await FirebaseRemoteConfig.activate();
 ```
 
-### `fetchAndActivate`
+### `fetchAndActivate()`
 
 Perform fetch and activate operations.
 
@@ -41,7 +60,7 @@ import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 await FirebaseRemoteConfig.fetchAndActivate();
 ```
 
-### `fetchConfig`
+### `fetchConfig()`
 
 Fetch and cache configuration from the Remote Config service.
 
@@ -51,20 +70,46 @@ import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 await FirebaseRemoteConfig.fetchConfig();
 ```
 
-### `getBoolean`
+### `getBoolean()`
 
 Get the value for the given key as a boolean.
 
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 
-await FirebaseRemoteConfig.getBoolean({} as GetBooleanOptions);
+const result = await FirebaseRemoteConfig.getBoolean({ key: 'key-123' });
+console.log(result);
 ```
 
-## Full Reference
+### `getNumber()`
 
-- GitHub: https://github.com/Cap-go/capacitor-firebase/tree/main/packages/remote-config
-- Docs: /docs/plugins/firebase-remote-config/
+Get the value for the given key as a number.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+const result = await FirebaseRemoteConfig.getNumber({ key: 'key-123' });
+console.log(result);
+```
+
+### `getString()`
+
+Get the value for the given key as a string.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+const result = await FirebaseRemoteConfig.getString({ key: 'key-123' });
+console.log(result);
+```
+
+The table above lists the 13 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/remote-config).
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/remote-config)
+- [Documentation](/docs/plugins/firebase-remote-config/)
+- [API reference](/docs/plugins/firebase-remote-config/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-firebase-remote-config
 

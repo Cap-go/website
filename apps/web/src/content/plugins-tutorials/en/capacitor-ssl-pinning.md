@@ -12,26 +12,38 @@ bun add @capgo/capacitor-ssl-pinning
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `getConfiguration` - Returns the active native configuration visible to the plugin.
+## Import
 
-## Example Usage
+```typescript
+import { SSLPinning } from '@capgo/capacitor-ssl-pinning';
+```
 
-### `getConfiguration`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getConfiguration` | Returns the active native configuration visible to the plugin. |
+
+## Examples
+
+### `getConfiguration()`
 
 Returns the active native configuration visible to the plugin.
 
 ```typescript
 import { SSLPinning } from '@capgo/capacitor-ssl-pinning';
 
-await SSLPinning.getConfiguration();
+const result = await SSLPinning.getConfiguration();
+console.log(result);
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-ssl-pinning/
-- Docs: /docs/plugins/ssl-pinning/
+- [GitHub repository](https://github.com/Cap-go/capacitor-ssl-pinning/)
+- [Documentation](/docs/plugins/ssl-pinning/)
+- [API reference](/docs/plugins/ssl-pinning/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-ssl-pinning
 

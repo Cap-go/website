@@ -39,8 +39,8 @@ The command installs the notification package, saves the Capacitor plugin config
 Manual install:
 
 ```bash
-npm install @capgo/capacitor-notifications @capgo/capacitor-updater
-npx cap sync
+bun add @capgo/capacitor-notifications @capgo/capacitor-updater
+bunx cap sync
 ```
 
 If you are not using silent Capgo update checks, you can omit `@capgo/capacitor-updater`.
@@ -156,7 +156,7 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 Then run:
 
 ```bash
-npx cap sync ios
+bunx cap sync ios
 ```
 
 Use a physical iOS device when testing background notifications. Simulators are useful for UI work but do not represent production background push behavior.
@@ -166,7 +166,7 @@ Use a physical iOS device when testing background notifications. Simulators are 
 Run:
 
 ```bash
-npx cap sync android
+bunx cap sync android
 ```
 
 Then verify:

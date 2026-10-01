@@ -28,7 +28,8 @@ Initializes the SDK with camera URL.
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.initialize({} as InitializeOptions);
+const result = await Ricoh360Camera.initialize({ url: 'https://example.com' });
+console.log(result);
 ```
 
 ### `getCameraAsset`
@@ -38,7 +39,8 @@ Retrieves a camera asset from a URL and returns it as base64.
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.getCameraAsset({} as GetCameraAssetOptions);
+const result = await Ricoh360Camera.getCameraAsset({ url: 'https://example.com' });
+console.log(result);
 ```
 
 ### `listFiles`
@@ -48,7 +50,8 @@ Lists files stored on the camera.
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.listFiles();
+const result = await Ricoh360Camera.listFiles();
+console.log(result);
 ```
 
 ### `capturePicture`
@@ -58,7 +61,8 @@ Captures a picture.
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
 
-await Ricoh360Camera.capturePicture();
+const result = await Ricoh360Camera.capturePicture();
+console.log(result);
 ```
 
 ## Full Reference

@@ -41,7 +41,13 @@ Configure the audio player
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.configure({} as ConfigureOptions);
+await NativeAudio.configure({
+  focus: false,
+  background: false,
+  ignoreSilent: false,
+  showNotification: false,
+  backgroundPlayback: false,
+});
 ```
 
 ### `preload`
@@ -51,7 +57,10 @@ Load an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.preload({} as PreloadOptions);
+await NativeAudio.preload({
+  assetPath: 'path/to/file',
+  assetId: 'asset-id-123',
+});
 ```
 
 ### `playOnce`
@@ -107,7 +116,11 @@ Check if an audio file is preloaded
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.isPreloaded({} as PreloadOptions);
+const result = await NativeAudio.isPreloaded({
+  assetPath: 'path/to/file',
+  assetId: 'asset-id-123',
+});
+console.log(result);
 ```
 
 ### `play`
@@ -117,7 +130,7 @@ Play an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.play({} as AssetPlayOptions);
+await NativeAudio.play({ assetId: 'asset-id-123' });
 ```
 
 ### `pause`
@@ -127,7 +140,7 @@ Pause an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.pause({} as AssetPauseOptions);
+await NativeAudio.pause({ assetId: 'asset-id-123' });
 ```
 
 ### `resume`
@@ -137,7 +150,7 @@ Resume an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.resume({} as AssetResumeOptions);
+await NativeAudio.resume({ assetId: 'asset-id-123' });
 ```
 
 ### `loop`
@@ -147,7 +160,7 @@ Stop an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.loop({} as Assets);
+await NativeAudio.loop({ assetId: 'asset-id-123' });
 ```
 
 ### `stop`
@@ -157,7 +170,7 @@ Stop an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.stop({} as AssetStopOptions);
+await NativeAudio.stop({ assetId: 'asset-id-123' });
 ```
 
 ### `unload`
@@ -167,7 +180,7 @@ Unload an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.unload({} as Assets);
+await NativeAudio.unload({ assetId: 'asset-id-123' });
 ```
 
 ### `setVolume`
@@ -177,7 +190,10 @@ Set the volume of an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.setVolume({} as AssetVolume);
+await NativeAudio.setVolume({
+  assetId: 'asset-id-123',
+  volume: 0.5,
+});
 ```
 
 ### `setRate`
@@ -187,7 +203,10 @@ Set the rate of an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.setRate({} as AssetRate);
+await NativeAudio.setRate({
+  assetId: 'asset-id-123',
+  rate: 1,
+});
 ```
 
 ### `setCurrentTime`
@@ -197,7 +216,10 @@ Set the current time of an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.setCurrentTime({} as AssetSetTime);
+await NativeAudio.setCurrentTime({
+  assetId: 'asset-id-123',
+  time: 10,
+});
 ```
 
 ### `getCurrentTime`
@@ -207,7 +229,8 @@ Get the current time of an audio file
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.getCurrentTime({} as Assets);
+const result = await NativeAudio.getCurrentTime({ assetId: 'asset-id-123' });
+console.log(result);
 ```
 
 ### `getDuration`
@@ -217,7 +240,8 @@ Get the duration of an audio file in seconds
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.getDuration({} as Assets);
+const result = await NativeAudio.getDuration({ assetId: 'asset-id-123' });
+console.log(result);
 ```
 
 ### `isPlaying`
@@ -227,7 +251,8 @@ Check if an audio file is playing
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.isPlaying({} as Assets);
+const result = await NativeAudio.isPlaying({ assetId: 'asset-id-123' });
+console.log(result);
 ```
 
 ### `clearCache`
@@ -247,7 +272,7 @@ Set debug mode logging
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
-await NativeAudio.setDebugMode({} as { enabled: boolean });
+await NativeAudio.setDebugMode({ enabled: true });
 ```
 
 ### `deinitPlugin`

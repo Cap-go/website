@@ -12,36 +12,65 @@ bun add @capgo/capacitor-jw-player
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `initialize` - Initialize the JW Player.
-- `play` - Play a video.
-- `pause` - Pause the currently playing media.
-- `resume` - Resume the currently paused media.
+## Import
 
-## Example Usage
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+```
 
-### `initialize`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initialize the JW Player. |
+| `play` | Play a video. |
+| `pause` | Pause the currently playing media. |
+| `resume` | Resume the currently paused media. |
+| `stop` | Stop the currently playing media. |
+| `seekTo` | Seek to a specific position in the currently playing media. |
+| `setVolume` | Set the volume level. |
+| `getPosition` | Get the current position in the media. |
+| `getState` | Get the current player state. |
+| `setSpeed` | Set the playback speed. |
+| `setPlaylistIndex` | Set the current item in the playlist by index. |
+| `loadPlaylist` | Load a playlist. |
+| `loadPlaylistWithItems` | Load a playlist with items. |
+| `getAudioTracks` | Get available audio tracks. |
+| `getCurrentAudioTrack` | Get the current audio track. |
+| `setCurrentAudioTrack` | Set the current audio track. |
+| `getCaptions` | Get the available captions/subtitles. |
+| `getCurrentCaptions` | Get the current captions/subtitles track. |
+| `setCurrentCaptions` | Set the current captions/subtitles track. |
+| `currentPlaylist` | Get the current playlist. |
+
+## Examples
+
+### `initialize()`
 
 Initialize the JW Player.
 
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.initialize({} as { licenseKey: string; playerUrl?: string });
+await JwPlayer.initialize({ licenseKey: 'license-key-123' });
 ```
 
-### `play`
+### `play()`
 
 Play a video.
 
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.play({} as { mediaUrl: string; mediaType: 'video' | 'playlist'; autostart?: boolean });
+await JwPlayer.play({
+  mediaUrl: 'https://example.com',
+  mediaType: 'video',
+});
 ```
 
-### `pause`
+### `pause()`
 
 Pause the currently playing media.
 
@@ -51,7 +80,7 @@ import { JwPlayer } from '@capgo/capacitor-jw-player';
 await JwPlayer.pause();
 ```
 
-### `resume`
+### `resume()`
 
 Resume the currently paused media.
 
@@ -61,10 +90,33 @@ import { JwPlayer } from '@capgo/capacitor-jw-player';
 await JwPlayer.resume();
 ```
 
-## Full Reference
+### `stop()`
 
-- GitHub: https://github.com/Cap-go/capacitor-jw-player/
-- Docs: /docs/plugins/jw-player/
+Stop the currently playing media.
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.stop();
+```
+
+### `seekTo()`
+
+Seek to a specific position in the currently playing media.
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.seekTo({ time: 10 });
+```
+
+The table above lists the 20 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-jw-player/).
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-jw-player/)
+- [Documentation](/docs/plugins/jw-player/)
+- [API reference](/docs/plugins/jw-player/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-jw-player
 

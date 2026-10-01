@@ -12,15 +12,25 @@ bun add @capgo/capacitor-home-indicator
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `hide` - Hide the home indicator at the bottom of the screen.
-- `show` - Show the home indicator at the bottom of the screen.
-- `isHidden` - Check whether the home indicator is currently hidden.
+## Import
 
-## Example Usage
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+```
 
-### `hide`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `hide` | Hide the home indicator at the bottom of the screen. |
+| `show` | Show the home indicator at the bottom of the screen. |
+| `isHidden` | Check whether the home indicator is currently hidden. |
+
+## Examples
+
+### `hide()`
 
 Hide the home indicator at the bottom of the screen.
 
@@ -30,7 +40,7 @@ import { HomeIndicator } from '@capgo/capacitor-home-indicator';
 await HomeIndicator.hide();
 ```
 
-### `show`
+### `show()`
 
 Show the home indicator at the bottom of the screen.
 
@@ -40,7 +50,7 @@ import { HomeIndicator } from '@capgo/capacitor-home-indicator';
 await HomeIndicator.show();
 ```
 
-### `isHidden`
+### `isHidden()`
 
 Check whether the home indicator is currently hidden.
 
@@ -55,10 +65,11 @@ if (hidden) {
 }
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-home-indicator/
-- Docs: /docs/plugins/home-indicator/
+- [GitHub repository](https://github.com/Cap-go/capacitor-home-indicator/)
+- [Documentation](/docs/plugins/home-indicator/)
+- [API reference](/docs/plugins/home-indicator/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-home-indicator
 

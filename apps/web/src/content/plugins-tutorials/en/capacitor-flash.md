@@ -12,16 +12,27 @@ bun add @capgo/capacitor-flash
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `isAvailable` - Checks if flashlight is available on the device.
-- `switchOn` - Turns the flashlight on.
-- `switchOff` - Turns the flashlight off.
-- `isSwitchedOn` - Checks if the flashlight is currently turned on or off.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+```
 
-### `isAvailable`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `isAvailable` | Checks if flashlight is available on the device. |
+| `switchOn` | Turns the flashlight on. |
+| `switchOff` | Turns the flashlight off. |
+| `isSwitchedOn` | Checks if the flashlight is currently turned on or off. |
+| `toggle` | Toggle the flashlight on or off. |
+
+## Examples
+
+### `isAvailable()`
 
 Checks if flashlight is available on the device.
 
@@ -34,7 +45,7 @@ if (value) {
 }
 ```
 
-### `switchOn`
+### `switchOn()`
 
 Turns the flashlight on.
 
@@ -48,7 +59,7 @@ await CapacitorFlash.switchOn({ intensity: 1.0 });
 await CapacitorFlash.switchOn({ intensity: 0.5 });
 ```
 
-### `switchOff`
+### `switchOff()`
 
 Turns the flashlight off.
 
@@ -58,7 +69,7 @@ import { CapacitorFlash } from '@capgo/capacitor-flash';
 await CapacitorFlash.switchOff();
 ```
 
-### `isSwitchedOn`
+### `isSwitchedOn()`
 
 Checks if the flashlight is currently turned on or off.
 
@@ -69,10 +80,22 @@ const { value } = await CapacitorFlash.isSwitchedOn();
 console.log('Flashlight is on:', value);
 ```
 
-## Full Reference
+### `toggle()`
 
-- GitHub: https://github.com/Cap-go/capacitor-flash/
-- Docs: /docs/plugins/flash/
+Toggle the flashlight on or off.
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+const { value } = await CapacitorFlash.toggle();
+console.log('Flashlight toggled, now on:', value);
+```
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-flash/)
+- [Documentation](/docs/plugins/flash/)
+- [API reference](/docs/plugins/flash/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-flash
 

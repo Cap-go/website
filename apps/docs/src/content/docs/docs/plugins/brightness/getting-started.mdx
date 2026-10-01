@@ -41,7 +41,8 @@ Get the current brightness level of the device's main screen.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.getBrightness();
+const result = await CapgoBrightness.getBrightness();
+console.log(result);
 ```
 
 ### `setBrightness`
@@ -54,7 +55,7 @@ On Android, the brightness only applies to the current activity.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setBrightness({} as SetBrightnessOptions);
+await CapgoBrightness.setBrightness({ brightness: 0.5 });
 ```
 
 ### `getSystemBrightness`
@@ -64,7 +65,8 @@ Get the system-wide screen brightness.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.getSystemBrightness();
+const result = await CapgoBrightness.getSystemBrightness();
+console.log(result);
 ```
 
 ### `setSystemBrightness`
@@ -76,7 +78,7 @@ This also changes the brightness mode to MANUAL.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setSystemBrightness({} as SetBrightnessOptions);
+await CapgoBrightness.setSystemBrightness({ brightness: 0.5 });
 ```
 
 ### `getSystemBrightnessMode`
@@ -87,7 +89,8 @@ Requires WRITE_SETTINGS permission on Android.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.getSystemBrightnessMode();
+const result = await CapgoBrightness.getSystemBrightnessMode();
+console.log(result);
 ```
 
 ### `setSystemBrightnessMode`
@@ -96,9 +99,9 @@ Set the system brightness mode (automatic or manual).
 Requires WRITE_SETTINGS permission on Android.
 
 ```typescript
-import { CapgoBrightness } from '@capgo/capacitor-brightness';
+import { CapgoBrightness, BrightnessMode } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.setSystemBrightnessMode({} as SetBrightnessModeOptions);
+await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.AUTOMATIC });
 ```
 
 ### `isUsingSystemBrightness`
@@ -108,7 +111,8 @@ Check if the current activity is using the system-wide brightness value.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.isUsingSystemBrightness();
+const result = await CapgoBrightness.isUsingSystemBrightness();
+console.log(result);
 ```
 
 ### `restoreSystemBrightness`
@@ -128,7 +132,8 @@ Check if the Brightness API is available on the current device.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.isAvailable();
+const result = await CapgoBrightness.isAvailable();
+console.log(result);
 ```
 
 ### `checkPermissions`
@@ -138,7 +143,8 @@ Check user's permissions for accessing system brightness.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.checkPermissions();
+const result = await CapgoBrightness.checkPermissions();
+console.log(result);
 ```
 
 ### `requestPermissions`
@@ -149,7 +155,8 @@ On Android, this opens the system settings to grant WRITE_SETTINGS permission.
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-await CapgoBrightness.requestPermissions();
+const result = await CapgoBrightness.requestPermissions();
+console.log(result);
 ```
 
 ## Type Reference

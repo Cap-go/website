@@ -12,13 +12,23 @@ bun add @capgo/capacitor-file-compressor
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `compressImage` - Compresses an image file with specified dimensions and quality settings.
+## Import
 
-## Example Usage
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+```
 
-### `compressImage`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `compressImage` | Compresses an image file with specified dimensions and quality settings. |
+
+## Examples
+
+### `compressImage()`
 
 Compresses an image file with specified dimensions and quality settings.
 
@@ -37,10 +47,11 @@ const result = await FileCompressor.compressImage({
 const url = URL.createObjectURL(result.blob);
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-file-compressor/
-- Docs: /docs/plugins/file-compressor/
+- [GitHub repository](https://github.com/Cap-go/capacitor-file-compressor/)
+- [Documentation](/docs/plugins/file-compressor/)
+- [API reference](/docs/plugins/file-compressor/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-file-compressor
 

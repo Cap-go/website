@@ -41,7 +41,7 @@ Sets metadata of the currently playing media.
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setMetadata({} as MetadataOptions);
+await MediaSession.setMetadata({ album: 'album' });
 ```
 
 ### `setPlaybackState`
@@ -51,7 +51,7 @@ Updates the playback state of the media session.
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setPlaybackState({} as PlaybackStateOptions);
+await MediaSession.setPlaybackState({ playbackState: 'none' });
 ```
 
 ### `setActionHandler`
@@ -61,7 +61,9 @@ Registers a handler for a media session action.
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setActionHandler({} as ActionHandlerOptions, {} as ActionHandler | null);
+await MediaSession.setActionHandler({ action: 'play' }, (details) => {
+  console.log(details);
+});
 ```
 
 ### `setPositionState`
@@ -71,7 +73,11 @@ Updates position state for the active media session.
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setPositionState({} as PositionStateOptions);
+await MediaSession.setPositionState({
+  duration: 1000,
+  playbackRate: 1,
+  position: 10,
+});
 ```
 
 ## Type Reference

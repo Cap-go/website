@@ -12,37 +12,50 @@ bun add @capgo/capacitor-firebase-app
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `getName` - Get the name for this app.
-- `getOptions` - Get the configuration options for this app.
+## Import
 
-## Example Usage
+```typescript
+import { FirebaseApp } from '@capgo/capacitor-firebase-app';
+```
 
-### `getName`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getName` | Get the name for this app. |
+| `getOptions` | Get the configuration options for this app. |
+
+## Examples
+
+### `getName()`
 
 Get the name for this app.
 
 ```typescript
 import { FirebaseApp } from '@capgo/capacitor-firebase-app';
 
-await FirebaseApp.getName();
+const result = await FirebaseApp.getName();
+console.log(result);
 ```
 
-### `getOptions`
+### `getOptions()`
 
 Get the configuration options for this app.
 
 ```typescript
 import { FirebaseApp } from '@capgo/capacitor-firebase-app';
 
-await FirebaseApp.getOptions();
+const result = await FirebaseApp.getOptions();
+// The result holds sensitive values: use it without logging it.
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app
-- Docs: /docs/plugins/firebase-app/
+- [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app)
+- [Documentation](/docs/plugins/firebase-app/)
+- [API reference](/docs/plugins/firebase-app/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-firebase-app
 

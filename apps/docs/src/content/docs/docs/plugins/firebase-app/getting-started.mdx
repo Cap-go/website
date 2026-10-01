@@ -41,7 +41,8 @@ Get the name for this app.
 ```typescript
 import { FirebaseApp } from '@capgo/capacitor-firebase-app';
 
-await FirebaseApp.getName();
+const result = await FirebaseApp.getName();
+console.log(result);
 ```
 
 ### `getOptions`
@@ -51,7 +52,8 @@ Get the configuration options for this app.
 ```typescript
 import { FirebaseApp } from '@capgo/capacitor-firebase-app';
 
-await FirebaseApp.getOptions();
+const result = await FirebaseApp.getOptions();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ## Type Reference

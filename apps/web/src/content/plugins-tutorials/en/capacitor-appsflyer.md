@@ -12,59 +12,142 @@ bun add @capgo/capacitor-appsflyer
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `initSDK` - Use this method to initialize and start AppsFlyer SDK. This API should be called as soon as the app launched.
-- `startSDK` - Use this method to start AppsFlyer SDK, only on manual start mode.
-- `logEvent` - Log an in-app event.
-- `setCustomerUserId` - Setting your own customer ID enables you to cross-reference your own unique ID with AppsFlyer's unique ID and other devices' IDs. This ID is available in raw-data reports and in the Postback APIs for cross-referencing with your internal IDs.
+## Import
 
-## Example Usage
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+```
 
-### `initSDK`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `initSDK` | Use this method to initialize and start AppsFlyer SDK. This API should be called as soon as the app launched. |
+| `startSDK` | Use this method to start AppsFlyer SDK, only on manual start mode. |
+| `logEvent` | Log an in-app event. |
+| `setCustomerUserId` | Setting your own customer ID enables you to cross-reference your own unique ID with AppsFlyer's unique ID and other devices' IDs. This ID is available in raw-data reports and in the Postback APIs for cross-referencing with your internal IDs. |
+| `setCurrencyCode` | Sets the currency for in-app purchases. The currency code should be a 3 character ISO 4217 code. |
+| `updateServerUninstallToken` | (Android) Allows to pass GCM/FCM Tokens that where collected by third party plugins to the AppsFlyer server. Can be used for Uninstall log. (iOS) Allows to pass APN Tokens that where collected by third party plugins to the AppsFlyer server. Can be used for log Uninstall. |
+| `setAppInviteOneLink` | Set the OneLink ID that should be used for attributing user-Invite. The link that is generated for the user invite will use this OneLink as the base link. |
+| `setOneLinkCustomDomain` | In order for AppsFlyer SDK to successfully resolve hidden (decoded in shortlink ID) attribution parameters, any domain that is configured as a branded domain in the AppsFlyer Dashboard should be provided to this method. |
+| `appendParametersToDeepLinkingURL` | Enables app owners using App Links for deep linking (without OneLink) to attribute sessions initiated via a domain associated with their app. Call this method before calling start. You must provide the following parameters in the parameters Map: pid is_retargeting must be set to true. |
+| `setResolveDeepLinkURLs` | Advertisers can wrap an AppsFlyer OneLink within another Universal Link. This Universal Link will invoke the app but any deep linking data will not propagate to AppsFlyer. setResolveDeepLinkURLs enables you to configure the SDK to resolve the wrapped OneLink URLs, so that deep linking can occur correctly. |
+| `addPushNotificationDeepLinkPath` | Configures how the SDK extracts deep link values from push notification payloads. |
+| `setSharingFilter` | Stops events from propagating to the specified AppsFlyer partners. |
+| `setSharingFilterForAllPartners` | Stops events from propagating to all AppsFlyer partners. Overwrites setSharingFilter. |
+| `setSharingFilterForPartners` | Stops events from propagating to the specified AppsFlyer partners. |
+| `setAdditionalData` | Set additional data to be sent to AppsFlyer. See. |
+| `getAppsFlyerUID` | Get AppsFlyer's unique device ID (created for every new install of an app). |
+| `anonymizeUser` | End User Opt-Out from AppsFlyer analytics (Anonymize user data). |
+| `stop` | Once this API is invoked, our SDK no longer communicates with our servers and stops functioning. Useful when implementing user opt-in/opt-out. |
+| `disableSKAdNetwork` | Opt-out of SKAdNetwork. |
+| `disableAdvertisingIdentifier` | Disables collection of various Advertising IDs by the SDK. This includes Apple Identity for Advertisers (IDFA), Google Advertising ID (GAID), OAID and Amazon Advertising ID (AAID). |
+| `disableCollectASA` | Opt-out of Apple Search Ads attributions. |
+| `setHost` | Set a custom host. |
+| `generateInviteLink` | Allowing your existing users to invite their friends and contacts as new users to your app. |
+| `validateAndLogInAppPurchaseAndroid` | API for server verification of in-app purchases. An af_purchase event with the relevant values will be automatically logged if the validation is successful. |
+| `validateAndLogInAppPurchaseIos` | See the source definitions for current behavior. |
+| `getSdkVersion` | Get the AppsFlyer SDK version used in app. |
+| `enableFacebookDeferredApplinks` | Enable the collection of Facebook Deferred AppLinks. Requires Facebook SDK and Facebook app on target/client device. This API must be invoked before initializing the AppsFlyer SDK in order to function properly. |
+| `sendPushNotificationData` | Measure and get data from push-notification campaigns. |
+| `setCurrentDeviceLanguage` | Set the language of the device. The data will be displayed in Raw Data Reports. |
+| `logCrossPromoteImpression` | logs an impression as part of a cross-promotion campaign. Make sure to use the promoted App ID as it appears within the AppsFlyer dashboard. |
+| `setUserEmails` | Set the user emails and encrypt them. |
+| `logLocation` | Manually log the location of the user. |
+| `setPhoneNumber` | Will be sent as an SHA-256 encrypted string. |
+| `setPartnerData` | Allows sending custom data for partner integration purposes. |
+| `logInvite` | Use to log a user-invite in-app event (af_invite). |
+| `setDisableNetworkData` | Use to opt-out of collecting the network operator name (carrier) and sim operator name from the device. |
+| `enableTCFDataCollection` | Use to opt-in/out the automatic collection of consent data, for users who use a CMP. Flag value will be persisted between app sessions. |
+| `setConsentData` | Use to set user consent data manualy. if your app doesn't use a CMP compatible with TCF v2.2, use the following method to manualy provide the consent data directly to the SDK. |
+| `logAdRevenue` | By attributing ad revenue, app owners gain the complete view of user LTV and campaign ROI. Ad revenue is generated by displaying ads on rewarded videos, offer walls, interstitials, and banners in an app. You can use this method to log your ad revenue. |
+| `setConsentDataV2` | Use this to set user consent data manualy. if your app doesn't use a CMP compatible with TCF v2.2, use the following method to manualy provide the consent data directly to the SDK. |
+| `isSDKStarted` | Use this method to check whether the AppsFlyer SDK has already been started in the current session. |
+| `isSDKStopped` | Use this method to check whether the AppsFlyer SDK is currently stopped. |
+| `disableAppSetId` | Disables AppSet ID collection. If called before SDK init, App Set ID will not be collected. If called after init, App Set ID will be collected but not sent in request payloads. Android only. |
+| `validateAndLogInAppPurchaseV2` | API for server verification of in-app purchases V2. An af_purchase event with the relevant values will be automatically logged if the validation is successful. |
+
+## Examples
+
+### `initSDK()`
 
 Use this method to initialize and start AppsFlyer SDK. This API should be called as soon as the app launched.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.initSDK({} as AFInit);
+const result = await AppsFlyer.initSDK({
+  devKey: 'dev-key-123',
+  appID: 'app-id-123',
+});
+console.log(result);
 ```
 
-### `startSDK`
+### `startSDK()`
 
 Use this method to start AppsFlyer SDK, only on manual start mode.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.startSDK();
+const result = await AppsFlyer.startSDK();
+console.log(result);
 ```
 
-### `logEvent`
+### `logEvent()`
 
 Log an in-app event.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.logEvent({} as AFEvent);
+const result = await AppsFlyer.logEvent({ eventName: 'event' });
+console.log(result);
 ```
 
-### `setCustomerUserId`
+### `setCustomerUserId()`
 
 Setting your own customer ID enables you to cross-reference your own unique ID with AppsFlyer's unique ID and other devices' IDs. This ID is available in raw-data reports and in the Postback APIs for cross-referencing with your internal IDs.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-await AppsFlyer.setCustomerUserId({} as AFCuid);
+await AppsFlyer.setCustomerUserId({ cuid: 'cuid' });
 ```
 
-## Full Reference
+### `setCurrencyCode()`
 
-- GitHub: https://github.com/Cap-go/capacitor-appsflyer/
-- Docs: /docs/plugins/appsflyer/
+Sets the currency for in-app purchases. The currency code should be a 3 character ISO 4217 code.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setCurrencyCode({ currencyCode: 'USD' });
+```
+
+### `updateServerUninstallToken()`
+
+(Android) Allows to pass GCM/FCM Tokens that where collected by third party plugins to the AppsFlyer server. Can be used for Uninstall log. (iOS) Allows to pass APN Tokens that where collected by third party plugins to the AppsFlyer server. Can be used for log Uninstall.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.updateServerUninstallToken({ token: 'token-123' });
+```
+
+The table above lists the 44 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-appsflyer/).
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-appsflyer/)
+- [Documentation](/docs/plugins/appsflyer/)
+- [API reference](/docs/plugins/appsflyer/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-appsflyer
 

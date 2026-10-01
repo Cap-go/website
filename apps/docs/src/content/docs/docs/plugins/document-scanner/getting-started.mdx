@@ -41,7 +41,8 @@ Opens the device camera and starts the document scanning experience.
 ```typescript
 import { DocumentScanner } from '@capgo/capacitor-document-scanner';
 
-await DocumentScanner.scanDocument();
+const result = await DocumentScanner.scanDocument();
+console.log(result);
 ```
 
 ## Type Reference

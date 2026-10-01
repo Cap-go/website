@@ -214,7 +214,8 @@ Get detailed information about an active call including caller details
 ```typescript
 import { StreamCall } from '@capgo/capacitor-stream-call';
 
-await StreamCall.getCallInfo({} as { callId: string });
+const result = await StreamCall.getCallInfo({ callId: 'call-id-123' });
+console.log(result);
 ```
 
 ### `setDynamicStreamVideoApikey`

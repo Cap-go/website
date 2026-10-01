@@ -12,22 +12,32 @@ bun add @capgo/capacitor-sim
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `getSimCards` - Get information from the device's SIM cards.
-- `checkPermissions` - Check permission to access SIM card information.
-- `requestPermissions` - Request permission to access SIM card information.
+## Import
 
-## Example Usage
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+```
 
-### `getSimCards`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getSimCards` | Get information from the device's SIM cards. |
+| `checkPermissions` | Check permission to access SIM card information. |
+| `requestPermissions` | Request permission to access SIM card information. |
+
+## Examples
+
+### `getSimCards()`
 
 Get information from the device's SIM cards.
 
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 
-const { simCards } = await SimPlugin.getSimCards();
+const { simCards } = await Sim.getSimCards();
 simCards.forEach((sim, index) => {
   console.log(`SIM ${index + 1}:`);
   console.log(`  Carrier: ${sim.carrierName}`);
@@ -37,14 +47,14 @@ simCards.forEach((sim, index) => {
 });
 ```
 
-### `checkPermissions`
+### `checkPermissions()`
 
 Check permission to access SIM card information.
 
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 
-const status = await SimPlugin.checkPermissions();
+const status = await Sim.checkPermissions();
 if (status.readSimCard === 'granted') {
   console.log('Permission granted');
 } else {
@@ -52,24 +62,25 @@ if (status.readSimCard === 'granted') {
 }
 ```
 
-### `requestPermissions`
+### `requestPermissions()`
 
 Request permission to access SIM card information.
 
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 
-const status = await SimPlugin.requestPermissions();
+const status = await Sim.requestPermissions();
 if (status.readSimCard === 'granted') {
   // Now you can call getSimCards()
-  const simCards = await SimPlugin.getSimCards();
+  const simCards = await Sim.getSimCards();
 }
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-sim/
-- Docs: /docs/plugins/sim/
+- [GitHub repository](https://github.com/Cap-go/capacitor-sim/)
+- [Documentation](/docs/plugins/sim/)
+- [API reference](/docs/plugins/sim/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-sim
 

@@ -41,7 +41,7 @@ Applies a verification code sent to the user by email.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.applyActionCode({} as ApplyActionCodeOptions);
+await FirebaseAuthentication.applyActionCode({ oobCode: 'oob-code' });
 ```
 
 ### `confirmPasswordReset`
@@ -51,7 +51,10 @@ Completes the password reset process.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.confirmPasswordReset({} as ConfirmPasswordResetOptions);
+await FirebaseAuthentication.confirmPasswordReset({
+  oobCode: 'oob-code',
+  newPassword: 'new-password',
+});
 ```
 
 ### `confirmVerificationCode`
@@ -61,7 +64,11 @@ Finishes the phone number verification process.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.confirmVerificationCode({} as ConfirmVerificationCodeOptions);
+const result = await FirebaseAuthentication.confirmVerificationCode({
+  verificationId: 'phoneCodeSent',
+  verificationCode: 'phoneCodeSent',
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `createUserWithEmailAndPassword`
@@ -72,7 +79,11 @@ If the new account was created, the user is signed in automatically.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.createUserWithEmailAndPassword({} as CreateUserWithEmailAndPasswordOptions);
+const result = await FirebaseAuthentication.createUserWithEmailAndPassword({
+  email: 'user@example.com',
+  password: 'password',
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `deleteUser`
@@ -92,7 +103,8 @@ Fetches the sign-in methods for an email address.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.fetchSignInMethodsForEmail({} as FetchSignInMethodsForEmailOptions);
+const result = await FirebaseAuthentication.fetchSignInMethodsForEmail({ email: 'user@example.com' });
+console.log(result);
 ```
 
 ### `getCurrentUser`
@@ -102,7 +114,8 @@ Fetches the currently signed-in user.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.getCurrentUser();
+const result = await FirebaseAuthentication.getCurrentUser();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getPendingAuthResult`
@@ -114,7 +127,8 @@ Only available for Android.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.getPendingAuthResult();
+const result = await FirebaseAuthentication.getPendingAuthResult();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getIdToken`
@@ -124,7 +138,8 @@ Fetches the Firebase Auth ID Token for the currently signed-in user.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.getIdToken();
+const result = await FirebaseAuthentication.getIdToken();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getIdTokenResult`
@@ -134,7 +149,8 @@ Returns a deserialized JSON Web Token (JWT) used to identify the user to a Fireb
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.getIdTokenResult();
+const result = await FirebaseAuthentication.getIdTokenResult();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getRedirectResult`
@@ -149,7 +165,8 @@ Only available for Web.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.getRedirectResult();
+const result = await FirebaseAuthentication.getRedirectResult();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getTenantId`
@@ -159,7 +176,8 @@ Get the tenant id.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.getTenantId();
+const result = await FirebaseAuthentication.getTenantId();
+console.log(result);
 ```
 
 ### `isSignInWithEmailLink`
@@ -169,7 +187,8 @@ Checks if an incoming link is a sign-in with email link suitable for `signInWith
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.isSignInWithEmailLink({} as IsSignInWithEmailLinkOptions);
+const result = await FirebaseAuthentication.isSignInWithEmailLink({ emailLink: 'https://example.com' });
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithApple`
@@ -182,7 +201,8 @@ The `skipNativeAuth` configuration option has no effect here.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithApple();
+const result = await FirebaseAuthentication.linkWithApple();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithEmailAndPassword`
@@ -195,7 +215,11 @@ The `skipNativeAuth` configuration option has no effect here.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithEmailAndPassword({} as LinkWithEmailAndPasswordOptions);
+const result = await FirebaseAuthentication.linkWithEmailAndPassword({
+  email: 'user@example.com',
+  password: 'password',
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithEmailLink`
@@ -208,7 +232,11 @@ The `skipNativeAuth` configuration option has no effect here.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithEmailLink({} as LinkWithEmailLinkOptions);
+const result = await FirebaseAuthentication.linkWithEmailLink({
+  email: 'user@example.com',
+  emailLink: 'https://example.com',
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithFacebook`
@@ -221,7 +249,8 @@ The `skipNativeAuth` configuration option has no effect here.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithFacebook();
+const result = await FirebaseAuthentication.linkWithFacebook();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithGameCenter`
@@ -236,7 +265,8 @@ Only available for iOS.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithGameCenter();
+const result = await FirebaseAuthentication.linkWithGameCenter();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithGithub`
@@ -249,7 +279,8 @@ The `skipNativeAuth` configuration option has no effect here.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithGithub();
+const result = await FirebaseAuthentication.linkWithGithub();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithGoogle`
@@ -262,7 +293,8 @@ The `skipNativeAuth` configuration option has no effect here.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithGoogle();
+const result = await FirebaseAuthentication.linkWithGoogle();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithMicrosoft`
@@ -275,7 +307,8 @@ The `skipNativeAuth` configuration option has no effect here.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithMicrosoft();
+const result = await FirebaseAuthentication.linkWithMicrosoft();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithOpenIdConnect`
@@ -285,7 +318,8 @@ Links the user account with an OpenID Connect provider.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithOpenIdConnect({} as LinkWithOpenIdConnectOptions);
+const result = await FirebaseAuthentication.linkWithOpenIdConnect({ providerId: 'provider-id-123' });
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithPhoneNumber`
@@ -302,7 +336,7 @@ Use the `phoneCodeSent` listener to get the verification id.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithPhoneNumber({} as LinkWithPhoneNumberOptions);
+await FirebaseAuthentication.linkWithPhoneNumber({ phoneNumber: "+16505550101" });
 ```
 
 ### `linkWithPlayGames`
@@ -317,7 +351,8 @@ Only available for Android.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithPlayGames();
+const result = await FirebaseAuthentication.linkWithPlayGames();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithTwitter`
@@ -330,7 +365,8 @@ The `skipNativeAuth` configuration option has no effect here.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithTwitter();
+const result = await FirebaseAuthentication.linkWithTwitter();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `linkWithYahoo`
@@ -343,7 +379,8 @@ The `skipNativeAuth` configuration option has no effect here.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.linkWithYahoo();
+const result = await FirebaseAuthentication.linkWithYahoo();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `reload`
@@ -363,7 +400,7 @@ Revokes the given access token. Currently only supports Apple OAuth access token
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.revokeAccessToken({} as RevokeAccessTokenOptions);
+await FirebaseAuthentication.revokeAccessToken({ token: 'token-123' });
 ```
 
 ### `sendEmailVerification`
@@ -383,7 +420,7 @@ Sends a password reset email.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.sendPasswordResetEmail({} as SendPasswordResetEmailOptions);
+await FirebaseAuthentication.sendPasswordResetEmail({ email: 'user@example.com' });
 ```
 
 ### `sendSignInLinkToEmail`
@@ -395,7 +432,10 @@ To complete sign in with the email link, call `signInWithEmailLink` with the ema
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.sendSignInLinkToEmail({} as SendSignInLinkToEmailOptions);
+await FirebaseAuthentication.sendSignInLinkToEmail({
+  email: 'user@example.com',
+  actionCodeSettings: { url: 'https://example.com' },
+});
 ```
 
 ### `setLanguageCode`
@@ -405,7 +445,7 @@ Sets the user-facing language code for auth operations.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.setLanguageCode({} as SetLanguageCodeOptions);
+await FirebaseAuthentication.setLanguageCode({ languageCode: "en-US" });
 ```
 
 ### `setPersistence`
@@ -415,9 +455,9 @@ Sets the type of persistence for the currently saved auth session.
 Only available for Web.
 
 ```typescript
-import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
+import { FirebaseAuthentication, Persistence } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.setPersistence({} as SetPersistenceOptions);
+await FirebaseAuthentication.setPersistence({ persistence: Persistence.IndexedDbLocal });
 ```
 
 ### `setTenantId`
@@ -427,7 +467,7 @@ Sets the tenant id.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.setTenantId({} as SetTenantIdOptions);
+await FirebaseAuthentication.setTenantId({ tenantId: 'tenant-id-123' });
 ```
 
 ### `signInAnonymously`
@@ -437,7 +477,8 @@ Signs in as an anonymous user.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInAnonymously();
+const result = await FirebaseAuthentication.signInAnonymously();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithApple`
@@ -447,7 +488,8 @@ Starts the Apple sign-in flow.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithApple();
+const result = await FirebaseAuthentication.signInWithApple();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithCustomToken`
@@ -460,7 +502,8 @@ In this case you have to use the `signInWithCustomToken` interface of the Fireba
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithCustomToken({} as SignInWithCustomTokenOptions);
+const result = await FirebaseAuthentication.signInWithCustomToken({ token: 'token-123' });
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithEmailAndPassword`
@@ -470,7 +513,11 @@ Starts the sign-in flow using an email and password.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithEmailAndPassword({} as SignInWithEmailAndPasswordOptions);
+const result = await FirebaseAuthentication.signInWithEmailAndPassword({
+  email: 'user@example.com',
+  password: 'password',
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithEmailLink`
@@ -480,7 +527,11 @@ Signs in using an email and sign-in email link.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithEmailLink({} as SignInWithEmailLinkOptions);
+const result = await FirebaseAuthentication.signInWithEmailLink({
+  email: 'user@example.com',
+  emailLink: 'https://example.com',
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithFacebook`
@@ -490,7 +541,8 @@ Starts the Facebook sign-in flow.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithFacebook();
+const result = await FirebaseAuthentication.signInWithFacebook();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithGameCenter`
@@ -502,7 +554,8 @@ Only available for iOS.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithGameCenter();
+const result = await FirebaseAuthentication.signInWithGameCenter();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithGithub`
@@ -512,7 +565,8 @@ Starts the GitHub sign-in flow.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithGithub();
+const result = await FirebaseAuthentication.signInWithGithub();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithGoogle`
@@ -522,7 +576,8 @@ Starts the Google sign-in flow.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithGoogle();
+const result = await FirebaseAuthentication.signInWithGoogle();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithMicrosoft`
@@ -532,7 +587,8 @@ Starts the Microsoft sign-in flow.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithMicrosoft();
+const result = await FirebaseAuthentication.signInWithMicrosoft();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithOpenIdConnect`
@@ -542,7 +598,8 @@ Starts the OpenID Connect sign-in flow.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithOpenIdConnect({} as SignInWithOpenIdConnectOptions);
+const result = await FirebaseAuthentication.signInWithOpenIdConnect({ providerId: 'provider-id-123' });
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithPhoneNumber`
@@ -558,7 +615,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithPhoneNumber({} as SignInWithPhoneNumberOptions);
+await FirebaseAuthentication.signInWithPhoneNumber({ phoneNumber: "+16505550101" });
 ```
 
 ### `signInWithPlayGames`
@@ -570,7 +627,8 @@ Only available for Android.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithPlayGames();
+const result = await FirebaseAuthentication.signInWithPlayGames();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithTwitter`
@@ -580,7 +638,8 @@ Starts the Twitter sign-in flow.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithTwitter();
+const result = await FirebaseAuthentication.signInWithTwitter();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signInWithYahoo`
@@ -590,7 +649,8 @@ Starts the Yahoo sign-in flow.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.signInWithYahoo();
+const result = await FirebaseAuthentication.signInWithYahoo();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `signOut`
@@ -608,9 +668,10 @@ await FirebaseAuthentication.signOut();
 Unlinks a provider from a user account.
 
 ```typescript
-import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
+import { FirebaseAuthentication, ProviderId } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.unlink({} as UnlinkOptions);
+const result = await FirebaseAuthentication.unlink({ providerId: ProviderId.APPLE });
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `updateEmail`
@@ -620,7 +681,7 @@ Updates the email address of the currently signed in user.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.updateEmail({} as UpdateEmailOptions);
+await FirebaseAuthentication.updateEmail({ newEmail: 'user@example.com' });
 ```
 
 ### `updatePassword`
@@ -630,7 +691,7 @@ Updates the password of the currently signed in user.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.updatePassword({} as UpdatePasswordOptions);
+await FirebaseAuthentication.updatePassword({ newPassword: 'new-password' });
 ```
 
 ### `updateProfile`
@@ -640,7 +701,10 @@ Updates a user's profile data.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.updateProfile({} as UpdateProfileOptions);
+await FirebaseAuthentication.updateProfile({
+  displayName: 'display',
+  photoUrl: 'https://example.com',
+});
 ```
 
 ### `useAppLanguage`
@@ -660,7 +724,7 @@ Instrument your app to talk to the Authentication emulator.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.useEmulator({} as UseEmulatorOptions);
+await FirebaseAuthentication.useEmulator({ host: "127.0.0.1" });
 ```
 
 ### `verifyBeforeUpdateEmail`
@@ -670,7 +734,7 @@ Verifies the new email address before updating the email address of the currentl
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.verifyBeforeUpdateEmail({} as VerifyBeforeUpdateEmailOptions);
+await FirebaseAuthentication.verifyBeforeUpdateEmail({ newEmail: 'user@example.com' });
 ```
 
 ### `checkAppTrackingTransparencyPermission`
@@ -682,7 +746,8 @@ Only available on iOS.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.checkAppTrackingTransparencyPermission();
+const result = await FirebaseAuthentication.checkAppTrackingTransparencyPermission();
+console.log(result);
 ```
 
 ### `requestAppTrackingTransparencyPermission`
@@ -696,7 +761,8 @@ Only available on iOS.
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 
-await FirebaseAuthentication.requestAppTrackingTransparencyPermission();
+const result = await FirebaseAuthentication.requestAppTrackingTransparencyPermission();
+console.log(result);
 ```
 
 ## Type Reference

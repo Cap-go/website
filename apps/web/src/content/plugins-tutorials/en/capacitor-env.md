@@ -12,27 +12,38 @@ bun add @capgo/capacitor-env
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `getKey` - Retrieves the value of a specific environment variable by key.
+## Import
 
-## Example Usage
+```typescript
+import { Env } from '@capgo/capacitor-env';
+```
 
-### `getKey`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getKey` | Retrieves the value of a specific environment variable by key. |
+
+## Examples
+
+### `getKey()`
 
 Retrieves the value of a specific environment variable by key.
 
 ```typescript
 import { Env } from '@capgo/capacitor-env';
 
-const result = await EnvPlugin.getKey({ key: 'API_URL' });
+const result = await Env.getKey({ key: 'API_URL' });
 console.log(result.value); // 'https://api.example.com'
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-env/
-- Docs: /docs/plugins/env/
+- [GitHub repository](https://github.com/Cap-go/capacitor-env/)
+- [Documentation](/docs/plugins/env/)
+- [API reference](/docs/plugins/env/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-env
 

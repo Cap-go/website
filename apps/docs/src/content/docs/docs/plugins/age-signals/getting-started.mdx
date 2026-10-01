@@ -43,7 +43,8 @@ Only available on Android devices with Google Play installed.
 ```typescript
 import { AgeSignals } from '@capgo/capacitor-android-age-signals';
 
-await AgeSignals.checkAgeSignals();
+const result = await AgeSignals.checkAgeSignals();
+console.log(result);
 ```
 
 ## Type Reference

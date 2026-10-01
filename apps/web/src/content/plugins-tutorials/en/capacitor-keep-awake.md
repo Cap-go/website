@@ -12,16 +12,26 @@ bun add @capgo/capacitor-keep-awake
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `keepAwake` - Prevent the device from dimming the screen.
-- `allowSleep` - Allow the device to dim the screen (disable keep awake).
-- `isSupported` - Check if the keep awake feature is supported on the current platform.
-- `isKeptAwake` - Check if the device is currently being kept awake.
+## Import
 
-## Example Usage
+```typescript
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
+```
 
-### `keepAwake`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `keepAwake` | Prevent the device from dimming the screen. |
+| `allowSleep` | Allow the device to dim the screen (disable keep awake). |
+| `isSupported` | Check if the keep awake feature is supported on the current platform. |
+| `isKeptAwake` | Check if the device is currently being kept awake. |
+
+## Examples
+
+### `keepAwake()`
 
 Prevent the device from dimming the screen.
 
@@ -32,7 +42,7 @@ await KeepAwake.keepAwake();
 console.log('Screen will stay awake');
 ```
 
-### `allowSleep`
+### `allowSleep()`
 
 Allow the device to dim the screen (disable keep awake).
 
@@ -43,7 +53,7 @@ await KeepAwake.allowSleep();
 console.log('Screen can now dim');
 ```
 
-### `isSupported`
+### `isSupported()`
 
 Check if the keep awake feature is supported on the current platform.
 
@@ -56,7 +66,7 @@ if (isSupported) {
 }
 ```
 
-### `isKeptAwake`
+### `isKeptAwake()`
 
 Check if the device is currently being kept awake.
 
@@ -67,10 +77,11 @@ const { isKeptAwake } = await KeepAwake.isKeptAwake();
 console.log('Is kept awake:', isKeptAwake);
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-keep-awake/
-- Docs: /docs/plugins/keep-awake/
+- [GitHub repository](https://github.com/Cap-go/capacitor-keep-awake/)
+- [Documentation](/docs/plugins/keep-awake/)
+- [API reference](/docs/plugins/keep-awake/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-keep-awake
 

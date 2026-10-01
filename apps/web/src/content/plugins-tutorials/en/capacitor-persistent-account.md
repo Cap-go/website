@@ -12,14 +12,24 @@ bun add @capgo/capacitor-persistent-account
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `readAccount` - Reads the stored account data from persistent storage.
-- `saveAccount` - Saves account data to persistent storage.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorPersistentAccount } from '@capgo/capacitor-persistent-account';
+```
 
-### `readAccount`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `readAccount` | Reads the stored account data from persistent storage. |
+| `saveAccount` | Saves account data to persistent storage. |
+
+## Examples
+
+### `readAccount()`
 
 Reads the stored account data from persistent storage.
 
@@ -34,7 +44,7 @@ if (result.data) {
 }
 ```
 
-### `saveAccount`
+### `saveAccount()`
 
 Saves account data to persistent storage.
 
@@ -50,10 +60,11 @@ await CapacitorPersistentAccount.saveAccount({
 });
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-persistent-account/
-- Docs: /docs/plugins/persistent-account/
+- [GitHub repository](https://github.com/Cap-go/capacitor-persistent-account/)
+- [Documentation](/docs/plugins/persistent-account/)
+- [API reference](/docs/plugins/persistent-account/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-persistent-account
 

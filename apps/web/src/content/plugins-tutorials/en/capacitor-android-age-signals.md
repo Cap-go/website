@@ -12,26 +12,38 @@ bun add @capgo/capacitor-android-age-signals
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `checkAgeSignals` - Request the current Play Age Signals for the active user.
+## Import
 
-## Example Usage
+```typescript
+import { AgeSignals } from '@capgo/capacitor-android-age-signals';
+```
 
-### `checkAgeSignals`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `checkAgeSignals` | Request the current Play Age Signals for the active user. |
+
+## Examples
+
+### `checkAgeSignals()`
 
 Request the current Play Age Signals for the active user.
 
 ```typescript
 import { AgeSignals } from '@capgo/capacitor-android-age-signals';
 
-await AgeSignals.checkAgeSignals();
+const result = await AgeSignals.checkAgeSignals();
+console.log(result);
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-android-age-signals/
-- Docs: /docs/plugins/age-signals/
+- [GitHub repository](https://github.com/Cap-go/capacitor-android-age-signals/)
+- [Documentation](/docs/plugins/age-signals/)
+- [API reference](/docs/plugins/age-signals/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-android-age-signals
 

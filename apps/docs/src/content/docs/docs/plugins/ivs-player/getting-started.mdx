@@ -41,20 +41,7 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.create({} as {
-    url: string;
-    pip?: boolean;
-    title?: string;
-    subtitle?: string;
-    cover?: string;
-    autoPlay?: boolean;
-    toBack?: boolean;
-    x?: number;
-    y?: number;
-    width?: number;
-
-    height?: number;
-  });
+await CapacitorIvsPlayer.create({ url: 'https://example.com' });
 ```
 
 ### `start`
@@ -84,7 +71,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getCastStatus();
+const result = await CapacitorIvsPlayer.getCastStatus();
+console.log(result);
 ```
 
 ### `pause`
@@ -114,7 +102,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getUrl();
+const result = await CapacitorIvsPlayer.getUrl();
+console.log(result);
 ```
 
 ### `getState`
@@ -124,7 +113,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getState();
+const result = await CapacitorIvsPlayer.getState();
+console.log(result);
 ```
 
 ### `setPlayerPosition`
@@ -144,7 +134,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getPlayerPosition();
+const result = await CapacitorIvsPlayer.getPlayerPosition();
+console.log(result);
 ```
 
 ### `setAutoQuality`
@@ -164,7 +155,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getAutoQuality();
+const result = await CapacitorIvsPlayer.getAutoQuality();
+console.log(result);
 ```
 
 ### `setPip`
@@ -184,7 +176,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getPip();
+const result = await CapacitorIvsPlayer.getPip();
+console.log(result);
 ```
 
 ### `setFrame`
@@ -204,7 +197,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getFrame();
+const result = await CapacitorIvsPlayer.getFrame();
+console.log(result);
 ```
 
 ### `setBackgroundState`
@@ -214,7 +208,7 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.setBackgroundState({} as { backgroundState: CapacitorIvsPlayerBackgroundState });
+await CapacitorIvsPlayer.setBackgroundState({ backgroundState: 'PAUSED' });
 ```
 
 ### `getBackgroundState`
@@ -224,7 +218,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getBackgroundState();
+const result = await CapacitorIvsPlayer.getBackgroundState();
+console.log(result);
 ```
 
 ### `setMute`
@@ -244,7 +239,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getMute();
+const result = await CapacitorIvsPlayer.getMute();
+console.log(result);
 ```
 
 ### `setQuality`
@@ -264,7 +260,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getQuality();
+const result = await CapacitorIvsPlayer.getQuality();
+console.log(result);
 ```
 
 ### `getQualities`
@@ -274,7 +271,8 @@ See the source definitions for the current contract.
 ```typescript
 import { CapacitorIvsPlayer } from '@capgo/capacitor-ivs-player';
 
-await CapacitorIvsPlayer.getQualities();
+const result = await CapacitorIvsPlayer.getQualities();
+console.log(result);
 ```
 
 ## Type Reference

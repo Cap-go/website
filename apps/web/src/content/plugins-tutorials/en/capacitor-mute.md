@@ -12,13 +12,23 @@ bun add @capgo/capacitor-mute
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `isMuted` - Check if the device mute switch is enabled.
+## Import
 
-## Example Usage
+```typescript
+import { Mute } from '@capgo/capacitor-mute';
+```
 
-### `isMuted`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `isMuted` | Check if the device mute switch is enabled. |
+
+## Examples
+
+### `isMuted()`
 
 Check if the device mute switch is enabled.
 
@@ -33,10 +43,11 @@ if (value) {
 }
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-mute/
-- Docs: /docs/plugins/mute/
+- [GitHub repository](https://github.com/Cap-go/capacitor-mute/)
+- [Documentation](/docs/plugins/mute/)
+- [API reference](/docs/plugins/mute/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-mute
 

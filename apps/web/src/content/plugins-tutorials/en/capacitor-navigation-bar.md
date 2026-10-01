@@ -24,7 +24,7 @@ bunx cap sync
 Set the navigation bar color and button theme.
 
 ```typescript
-import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+import { NavigationBar, NavigationBarColor } from '@capgo/capacitor-navigation-bar';
 
 // Set to white with dark buttons
 await NavigationBar.setNavigationBarColor({

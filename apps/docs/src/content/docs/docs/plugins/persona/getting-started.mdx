@@ -41,7 +41,8 @@ Present the Microsoft sign-in flow and return an access token plus the account m
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.acquireToken({} as AcquireTokenOptions);
+const result = await IntuneMAM.acquireToken({ scopes: ['openid'] });
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `acquireTokenSilent`
@@ -51,7 +52,11 @@ Acquire a token from the MSAL cache for a previously signed-in user.
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.acquireTokenSilent({} as AcquireTokenSilentOptions);
+const result = await IntuneMAM.acquireTokenSilent({
+  scopes: ['openid'],
+  accountId: 'acquireToken',
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `registerAndEnrollAccount`
@@ -61,7 +66,7 @@ Register a previously authenticated account with Intune and start enrollment.
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.registerAndEnrollAccount({} as RegisterAndEnrollAccountOptions);
+await IntuneMAM.registerAndEnrollAccount({ accountId: 'account-id-123' });
 ```
 
 ### `loginAndEnrollAccount`
@@ -81,7 +86,8 @@ Return the currently enrolled Intune account, if one is available.
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.enrolledAccount();
+const result = await IntuneMAM.enrolledAccount();
+console.log(result);
 ```
 
 ### `deRegisterAndUnenrollAccount`
@@ -91,7 +97,7 @@ Deregister the account from Intune and trigger selective wipe when applicable.
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.deRegisterAndUnenrollAccount({} as IntuneMAMUser);
+await IntuneMAM.deRegisterAndUnenrollAccount({ accountId: 'account-id-123' });
 ```
 
 ### `logoutOfAccount`
@@ -101,7 +107,7 @@ Sign the user out of MSAL without unenrolling the Intune account.
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.logoutOfAccount({} as IntuneMAMUser);
+await IntuneMAM.logoutOfAccount({ accountId: 'account-id-123' });
 ```
 
 ### `appConfig`
@@ -111,7 +117,8 @@ Fetch the remote Intune app configuration for a managed account.
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.appConfig({} as IntuneMAMUser);
+const result = await IntuneMAM.appConfig({ accountId: 'account-id-123' });
+console.log(result);
 ```
 
 ### `getPolicy`
@@ -121,7 +128,8 @@ Fetch the currently effective Intune app protection policy for a managed account
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.getPolicy({} as IntuneMAMUser);
+const result = await IntuneMAM.getPolicy({ accountId: 'account-id-123' });
+console.log(result);
 ```
 
 ### `groupName`
@@ -131,7 +139,8 @@ Convenience helper that resolves the `GroupName` app configuration value when pr
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.groupName({} as IntuneMAMUser);
+const result = await IntuneMAM.groupName({ accountId: 'account-id-123' });
+console.log(result);
 ```
 
 ### `sdkVersion`
@@ -141,7 +150,8 @@ Return the native Intune and MSAL SDK versions bundled by this plugin.
 ```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.sdkVersion();
+const result = await IntuneMAM.sdkVersion();
+console.log(result);
 ```
 
 ### `displayDiagnosticConsole`

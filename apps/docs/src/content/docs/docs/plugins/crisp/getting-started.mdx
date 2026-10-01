@@ -42,7 +42,7 @@ Must be called before using any other methods.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.configure({ websiteID: 'YOUR_WEBSITE_ID' });
+await CapacitorCrisp.configure({ websiteID: 'YOUR_WEBSITE_ID' });
 ```
 
 ### `openMessenger`
@@ -64,7 +64,7 @@ Used to identify and restore previous conversations.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CapacitorCrisp.setTokenID({} as { tokenID: string });
+await CapacitorCrisp.setTokenID({ tokenID: 'token-id-123' });
 ```
 
 ### `setUser`
@@ -75,7 +75,7 @@ Updates the user profile visible to support agents.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setUser({
+await CapacitorCrisp.setUser({
   nickname: 'John Doe',
   email: 'john@example.com',
   phone: '+1234567890'
@@ -90,7 +90,7 @@ Useful for tracking user actions and behavior.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.pushEvent({
+await CapacitorCrisp.pushEvent({
   name: 'completed_purchase',
   color: 'green'
 });
@@ -104,7 +104,7 @@ Associates the user with a company in Crisp.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setCompany({
+await CapacitorCrisp.setCompany({
   name: 'Acme Corp',
   url: 'https://acme.com',
   employment: ['CEO', 'Executive'],
@@ -120,7 +120,7 @@ Stores numerical data associated with the user session.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setInt({ key: 'user_level', value: 42 });
+await CapacitorCrisp.setInt({ key: 'user_level', value: 42 });
 ```
 
 ### `setString`
@@ -131,7 +131,7 @@ Stores text data associated with the user session.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setString({ key: 'subscription_tier', value: 'premium' });
+await CapacitorCrisp.setString({ key: 'subscription_tier', value: 'premium' });
 ```
 
 ### `sendMessage`
@@ -142,7 +142,7 @@ Programmatically send a message as if the user typed it.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.sendMessage({ value: 'Hello, I need help!' });
+await CapacitorCrisp.sendMessage({ value: 'Hello, I need help!' });
 ```
 
 ### `setSegment`
@@ -153,7 +153,7 @@ Used to categorize users in the Crisp dashboard.
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 
-await CrispPlugin.setSegment({ segment: 'premium-users' });
+await CapacitorCrisp.setSegment({ segment: 'premium-users' });
 ```
 
 ### `reset`

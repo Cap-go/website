@@ -41,23 +41,18 @@ See the source definitions for the current contract.
 ```typescript
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 
-await MqttBridge.connect({} as {
-    serverURI: string;
-    port: number;
-    clientId: string;
-    username: string;
-    password: string;
-    setCleanSession: boolean;
-    connectionTimeout: number;
-    keepAliveInterval: number;
-    setAutomaticReconnect: boolean;
-    setLastWill?: {
-      willTopic: string;
-      willPayload: string;
-      willQoS: number;
-      setRetained: boolean;
-    };
-  });
+const result = await MqttBridge.connect({
+  serverURI: 'https://example.com',
+  port: 8080,
+  clientId: 'client-id-123',
+  username: 'username',
+  password: 'password',
+  setCleanSession: true,
+  connectionTimeout: 1000,
+  keepAliveInterval: 1000,
+  setAutomaticReconnect: true,
+});
+console.log(result);
 ```
 
 ### `disconnect`
@@ -67,7 +62,8 @@ See the source definitions for the current contract.
 ```typescript
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 
-await MqttBridge.disconnect();
+const result = await MqttBridge.disconnect();
+console.log(result);
 ```
 
 ### `subscribe`
@@ -77,7 +73,11 @@ See the source definitions for the current contract.
 ```typescript
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 
-await MqttBridge.subscribe({} as { topic: string; qos: number });
+const result = await MqttBridge.subscribe({
+  topic: 'topic',
+  qos: 1,
+});
+console.log(result);
 ```
 
 ### `publish`
@@ -87,7 +87,13 @@ See the source definitions for the current contract.
 ```typescript
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 
-await MqttBridge.publish({} as { topic: string; payload: string; qos: number; retained: boolean });
+const result = await MqttBridge.publish({
+  topic: 'topic',
+  payload: 'payload',
+  qos: 1,
+  retained: true,
+});
+console.log(result);
 ```
 
 ## Type Reference

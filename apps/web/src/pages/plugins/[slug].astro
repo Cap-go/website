@@ -1,14 +1,15 @@
 ---
+import CommandCode from '@/components/CommandCode.astro'
 import PluginIcon from '@/components/PluginIcon.astro'
 import PluginPreviewQrCard from '@/components/PluginPreviewQrCard.astro'
 import { pluginDemosBySlug } from '@/config/pluginDemos'
 import { getPluginPreviewQr } from '@/config/pluginPreviewQrs'
 import type { Plugin } from '@/config/plugins'
-import { actions } from '@/config/plugins'
+import { actions, pluginCategories } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import m from '@/copy/messages'
-import { getPluginsWithStars, getSlug } from '@/services/github'
+import { getPluginRepoStats, getPluginsWithStars, getSlug } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
 import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
 import { Icon as AstroIcon } from 'astro-icon/components'
@@ -40,6 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   })
 }
 
+
 const locale = Astro.locals.locale ?? defaultLocale
 const plugins = getPluginsWithStars(actions)
 const plugin = plugins.find((item) => getSlug(item.href) === Astro.params.slug)
@@ -54,17 +56,45 @@ const normalizeTutorialHeading = (html: string): string => {
   return html.replace(/^(\s*)<h1(\b[^>]*)>([\s\S]*?)<\/h1>/i, '$1<h2$2>$3</h2>')
 }
 
+const stripTags = (html: string): string =>
+  html
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .trim()
+
+const toAnchor = (text: string): string =>
+  text
+    .toLowerCase()
+    .replace(/[`'"@/]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+// Give every h2 a stable id so the "On this page" navigation can link to it.
+const tableOfContents: Array<{ id: string; label: string }> = []
+const addHeadingAnchors = (html: string): string => {
+  const usedIds = new Set<string>()
+  return html.replace(/<h2(\b[^>]*)>([\s\S]*?)<\/h2>/gi, (match, attributes: string, inner: string) => {
+    if (/\bid=/.test(attributes)) return match
+    const label = stripTags(inner)
+    let anchor = toAnchor(label) || 'section'
+    while (usedIds.has(anchor)) anchor = `${anchor}-2`
+    usedIds.add(anchor)
+    tableOfContents.push({ id: anchor, label })
+    return `<h2${attributes} id="${anchor}">${inner}</h2>`
+  })
+}
+
 if (thisTut?.body) tutorialPlugin = thisTut.body
 
 if (tutorialPlugin.length > 0) {
   const tmp = marked.parse(tutorialPlugin)
   const tutorialHtml = typeof tmp !== 'string' ? await tmp : tmp
-  plugin['tutorial'] = normalizeTutorialHeading(tutorialHtml)
+  plugin['tutorial'] = addHeadingAnchors(normalizeTutorialHeading(tutorialHtml))
 }
-
-const tmp = marked.parse(`# ${plugin.title}\n\n${plugin.description}`)
-if (typeof tmp !== 'string') plugin['readme'] = await tmp
-else plugin['readme'] = tmp
 
 const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
 const docsSlug = resolvePluginDocsSlug(plugin, docsSlugs)
@@ -78,8 +108,11 @@ const formatCount = (count?: number): string => {
 }
 
 const { slug: id } = Astro.params
-const { title, description, githubStars, npmDownloads, href, name, tutorial, icon, author } = plugin as Plugin
+const { title, description, githubStars, npmDownloads, href, name, tutorial, icon, category } = plugin as Plugin
 const demoGroup = id ? pluginDemosBySlug[id] : undefined
+const categoryLabel = pluginCategories.find((item) => item.id === category)?.label ?? 'Plugin'
+const repoStats = getPluginRepoStats(href)
+const issuesHref = `${href.replace(/\/$/, '')}/issues`
 
 const npmHref = name ? `https://www.npmjs.com/package/${name}` : `https://www.npmjs.com/search?q=${encodeURIComponent(title)}`
 const packageRenameNotes: Record<string, string> = {
@@ -93,10 +126,22 @@ const packageRenameNote = name ? packageRenameNotes[name] : undefined
 const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : getRelativeLocaleUrl(locale, 'docs/plugins/')
 const previewQr = getPluginPreviewQr(id)
 
+// A few packages target other runtimes (Electron, Cordova); Capacitor-only copy and commands are skipped for them.
+const runtime = /electron/i.test(name ?? href) ? 'Electron' : /cordova/i.test(name ?? href) ? 'Cordova' : 'Capacitor'
+const isCapacitor = runtime === 'Capacitor'
+const runtimeArticle = /^[AEIOU]/.test(runtime) ? 'an' : 'a'
+const installCommand = name ? (isCapacitor ? `bun add ${name}\nbunx cap sync` : `bun add ${name}`) : undefined
+const installManagers = name
+  ? [
+      { label: 'npm', command: `npm install ${name}` },
+      { label: 'pnpm', command: `pnpm add ${name}` },
+      { label: 'yarn', command: `yarn add ${name}` },
+    ]
+  : []
+
 const tutorialData = thisTut?.data
 const heroDescription = tutorialData?.summary ?? description
 const platforms = tutorialData?.platforms ?? []
-const faq = tutorialData?.faq ?? []
 const platformStatusLabel = { supported: 'Supported', partial: 'Limited', unsupported: 'Not supported' } as const
 const platformStatusClass = {
   supported: 'border-emerald-400/25 bg-emerald-400/10 text-emerald-100',
@@ -104,39 +149,124 @@ const platformStatusClass = {
   unsupported: 'border-white/10 bg-white/[0.03] text-gray-400',
 } as const
 
+// Every plugin page gets the same factual FAQ; hand-written tutorial FAQ entries come first.
+const packageLabel = name ?? title
+const generatedFaq = [
+  {
+    question: `How do I install the ${title} plugin in ${runtimeArticle} ${runtime} app?`,
+    answer: !name
+      ? `Follow the installation steps in the ${title} README on GitHub.`
+      : isCapacitor
+        ? `Run "bun add ${name}" (or "npm install ${name}"), then run "bunx cap sync" so the iOS and Android projects pick up the native code. Import it from "${name}" in your app code.`
+        : `Run "bun add ${name}" (or "npm install ${name}"), then follow the ${runtime} setup steps in the guide and the GitHub README.`,
+  },
+  {
+    question: `Does ${packageLabel} work with React, Vue and Angular?`,
+    answer: `Yes. ${title} is ${runtimeArticle} ${runtime} package, so it works with any web framework that runs inside ${runtime}${isCapacitor ? ', including Ionic' : ''}, React, Vue, Angular, Svelte and plain JavaScript.`,
+  },
+  ...(isCapacitor
+    ? [
+        {
+          question: `Which Capacitor version does ${packageLabel} support?`,
+          answer: `Capgo plugins follow Capacitor's major version: use the plugin major version that matches your Capacitor major version (for example plugin v8 with Capacitor 8). The compatibility table in the GitHub README lists the maintained versions.`,
+        },
+      ]
+    : []),
+  {
+    question: `Is ${packageLabel} free and open source?`,
+    answer: `Yes. The source code is public on GitHub at ${href} and the package is free to install from npm. Bug reports and pull requests are welcome.`,
+  },
+  ...(isCapacitor
+    ? [
+        {
+          question: `Can I update code that uses ${title} without an App Store review?`,
+          answer: `Installing or upgrading the plugin changes native code, so it needs a new store build. After that, JavaScript, HTML and CSS changes that call the plugin can ship instantly with Capgo live updates.`,
+        },
+      ]
+    : []),
+]
+const seenQuestions = new Set<string>()
+const faq = [...(tutorialData?.faq ?? []), ...generatedFaq].filter((item) => {
+  const key = item.question.toLowerCase()
+  if (seenQuestions.has(key)) return false
+  seenQuestions.add(key)
+  return true
+})
+
+const relatedPlugins = plugins
+  .filter((item) => item.category === category && item.href !== href && item.title)
+  .sort((left, right) => (right.npmDownloads ?? 0) - (left.npmDownloads ?? 0))
+  .slice(0, 6)
+
+const stats = [
+  { label: `${m.downloads({}, { locale })}/month`, value: formatCount(npmDownloads), href: npmHref },
+  { label: m.github_stars({}, { locale }), value: formatCount(githubStars), href },
+  ...(repoStats?.releases ? [{ label: 'Releases', value: formatCount(repoStats.releases), href: `${href.replace(/\/$/, '')}/releases` }] : []),
+  ...(repoStats?.contributors ? [{ label: 'Contributors', value: formatCount(repoStats.contributors), href: `${href.replace(/\/$/, '')}/graphs/contributors` }] : []),
+]
+
+// SEO.astro pads descriptions under 120 characters and truncates above 159, so pick the richest variant that fits.
+const fitDescription = (base: string): string => {
+  const cleaned = base.trim().replace(/\.$/, '')
+  const candidates = [
+    `${cleaned}. Install ${packageLabel} for ${isCapacitor ? 'Capacitor iOS and Android' : `${runtime} apps`}, with setup steps, examples and FAQ.`,
+    `${cleaned}. Install ${packageLabel} with setup steps, code examples and FAQ.`,
+    `${cleaned}. Install ${packageLabel} with examples and FAQ.`,
+    `${cleaned}. ${runtime} plugin for ${isCapacitor ? 'iOS and Android' : 'your apps'}: install steps, code examples and FAQ.`,
+    `${cleaned}. ${runtime} install steps, code examples and FAQ.`,
+    `${cleaned}. ${runtime} setup, examples and FAQ.`,
+  ]
+  return candidates.find((candidate) => candidate.length >= 120 && candidate.length <= 159) ?? candidates.find((candidate) => candidate.length <= 159) ?? `${cleaned}.`
+}
+
 const content: { title?: string; description?: string; keywords?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
-if (plugin.title) content['title'] = tutorialData?.seoTitle ?? `${plugin.title} Capacitor Plugin: Install, Setup & Examples`
-if (tutorialData?.seoDescription || plugin.description) content['description'] = tutorialData?.seoDescription ?? plugin.description
-if (tutorialData?.keywords) content['keywords'] = tutorialData.keywords
+content['title'] = tutorialData?.seoTitle ?? `${title} ${runtime} Plugin: Install, Setup & Examples`
+content['description'] = tutorialData?.seoDescription ?? fitDescription(description)
+content['keywords'] =
+  tutorialData?.keywords ??
+  [
+    `${title.toLowerCase()} ${runtime.toLowerCase()} plugin`,
+    `${runtime.toLowerCase()} ${title.toLowerCase()}`,
+    isCapacitor ? `ionic ${title.toLowerCase()}` : undefined,
+    name,
+    name ? `${name} install` : undefined,
+    `${categoryLabel.toLowerCase()} ${runtime.toLowerCase()} plugin`,
+  ]
+    .filter(Boolean)
+    .join(', ')
 
 const runtimePublic = Astro.locals.runtimeConfig.public
 const pluginUrl = getRelativeLocaleUrl(locale, `/plugins/${id}`)
 const absolutePluginUrl = new URL(pluginUrl, runtimePublic.baseUrl).toString()
 const supportedPlatforms = platforms.filter((platform) => platform.status !== 'unsupported').map((platform) => platform.name)
+const breadcrumbs = [
+  { name: 'Home', href: getRelativeLocaleUrl(locale, '/') },
+  { name: 'Plugins', href: getRelativeLocaleUrl(locale, 'plugins') },
+  { name: title, href: pluginUrl },
+]
 
 const softwareApplication = createSoftwareApplicationLdJson(runtimePublic, {
-  name: plugin.title,
-  description: tutorialData?.seoDescription ?? plugin.description,
-  url: pluginUrl,
+  name: `${title} ${runtime} plugin`,
+  description: content['description'],
+  url: absolutePluginUrl,
   applicationCategory: 'DeveloperApplication',
-  operatingSystem: platforms.length > 0 ? supportedPlatforms.join(', ') : 'iOS, Android',
-  downloadUrl: plugin.href,
+  operatingSystem: platforms.length > 0 ? supportedPlatforms.join(', ') : runtime === 'Electron' ? 'Windows, macOS, Linux' : 'iOS, Android',
+  downloadUrl: npmHref,
+  offers: { price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
 })
 
-content['ldJSON'] =
-  faq.length > 0
-    ? createLdJsonGraph(runtimePublic, softwareApplication, {
-        includeOrganization: true,
-        includeBreadcrumbs: true,
-        breadcrumbs: [
-          { name: 'Home', url: new URL(getRelativeLocaleUrl(locale, '/'), runtimePublic.baseUrl).toString() },
-          { name: 'Plugins', url: new URL(getRelativeLocaleUrl(locale, 'plugins'), runtimePublic.baseUrl).toString() },
-          { name: plugin.title, url: absolutePluginUrl },
-        ],
-        additionalEntities: [createFAQPageLdJson(runtimePublic, { url: absolutePluginUrl, questions: faq })],
-      })
-    : softwareApplication
+content['ldJSON'] = createLdJsonGraph(runtimePublic, softwareApplication, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: breadcrumbs.map((crumb) => ({ name: crumb.name, url: new URL(crumb.href, runtimePublic.baseUrl).toString() })),
+  additionalEntities: [createFAQPageLdJson(runtimePublic, { url: absolutePluginUrl, questions: faq })],
+})
+
+const commandClass = 'block font-mono text-[13px] leading-6 whitespace-nowrap'
+const cardClass = 'rounded-2xl border border-white/10 bg-white/[0.03]'
+const secondaryButtonClass =
+  'inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400'
 ---
 
 <Layout {content}>
@@ -145,17 +275,29 @@ content['ldJSON'] =
 
     <section class="px-6 pt-10 pb-8 lg:px-8 lg:pt-14">
       <div class="mx-auto max-w-6xl">
-        <a
-          aria-label="Back To Plugins"
-          href={getRelativeLocaleUrl(locale, 'plugins')}
-          class="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-gray-300 transition hover:border-white/20 hover:bg-white/[0.06] hover:text-white"
-        >
-          <span aria-hidden="true" class="text-gray-400">←</span>
-          <span>Back to plugins</span>
-        </a>
+        <nav aria-label="Breadcrumb">
+          <ol class="flex flex-wrap items-center gap-2 text-sm text-gray-400">
+            {
+              breadcrumbs.map((crumb, index) => (
+                <li class="flex items-center gap-2">
+                  {index > 0 && <span aria-hidden="true">/</span>}
+                  {index === breadcrumbs.length - 1 ? (
+                    <span aria-current="page" class="text-gray-200">
+                      {crumb.name}
+                    </span>
+                  ) : (
+                    <a href={crumb.href} class="transition hover:text-white">
+                      {crumb.name}
+                    </a>
+                  )}
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
 
         <div class="mt-8 grid gap-8 lg:grid-cols-[19fr_11fr] lg:items-start">
-          <div>
+          <div class="min-w-0">
             <div class="flex flex-wrap items-center gap-3">
               {
                 name && (
@@ -164,7 +306,7 @@ content['ldJSON'] =
                       href={npmHref}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="cursor-pointer rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-sm text-blue-100 transition hover:border-blue-300/40 hover:bg-blue-400/15"
+                      class="cursor-pointer rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 font-mono text-sm text-blue-100 transition hover:border-blue-300/40 hover:bg-blue-400/15"
                     >
                       {name}
                     </a>
@@ -190,17 +332,15 @@ content['ldJSON'] =
                   </>
                 )
               }
-              <div class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm text-gray-300">
-                {tutorial ? 'Tutorial' : 'Overview'}
-              </div>
-              <div class="max-w-full truncate font-mono text-sm text-gray-500" title={name ?? author}>{name ?? author}</div>
+              <span class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm text-gray-300">{categoryLabel}</span>
+              <span class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-sm text-emerald-100">Open source</span>
             </div>
 
             <div class="mt-6 flex items-start gap-4 sm:gap-5">
               {icon && <PluginIcon icon={icon} name={title} className="shrink-0" />}
               <div class="min-w-0">
-                <h1 class="font-pj text-4xl font-bold text-white sm:text-5xl">
-                  {title}
+                <h1 class="font-pj text-3xl font-bold break-words text-white sm:text-5xl">
+                  {title} <span class="text-gray-400">{runtime} plugin</span>
                 </h1>
                 <p class="mt-4 max-w-[52ch] text-base leading-7 text-gray-300 sm:text-lg">
                   {heroDescription}
@@ -224,30 +364,50 @@ content['ldJSON'] =
               </div>
             </div>
 
-            <div class="mt-8 grid gap-3 sm:grid-cols-2">
-              <a
-                href={npmHref ?? href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="cursor-pointer rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
-              >
-                <p class="text-sm text-gray-400">{m.downloads({}, { locale })}/month</p>
-                <p class="mt-2 text-2xl font-semibold text-white tabular-nums sm:text-xl">
-                  {formatCount(npmDownloads)}
-                </p>
-              </a>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="cursor-pointer rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
-              >
-                <p class="text-sm text-gray-400">{m.github_stars({}, { locale })}</p>
-                <p class="mt-2 text-2xl font-semibold text-white tabular-nums sm:text-xl">
-                  {formatCount(githubStars)}
-                </p>
-              </a>
-            </div>
+            {
+              installCommand && (
+                <div class:list={[cardClass, 'mt-8 overflow-hidden bg-gray-950/70']}>
+                  <div class="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-2.5">
+                    <p class="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase">Install</p>
+                    <button
+                      type="button"
+                      data-plugin-copy={installCommand}
+                      aria-label={`Copy install command for ${name}`}
+                      class="cursor-pointer rounded-md border border-white/10 px-2.5 py-1 text-xs font-semibold text-gray-200 transition hover:border-white/25 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <div class="flex flex-col gap-1 overflow-x-auto px-4 py-3">
+                    <CommandCode command={`bun add ${name}`} class={commandClass} />
+                    {isCapacitor && <CommandCode command="bunx cap sync" class={commandClass} />}
+                  </div>
+                  <details class="overflow-x-auto border-t border-white/10 px-4 py-2.5 text-xs text-gray-400">
+                    <summary class="cursor-pointer select-none hover:text-gray-200">npm, pnpm or yarn</summary>
+                    <ul class="mt-2 flex flex-col gap-1">
+                      {installManagers.map((manager) => (
+                        <li>
+                          <CommandCode command={manager.command} class={commandClass} />
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </div>
+              )
+            }
+
+            <ul class:list={['mt-4 grid gap-3', stats.length > 2 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2']} aria-label="Package stats">
+              {
+                stats.map((stat) => (
+                  <li>
+                    <a href={stat.href} target="_blank" rel="noopener noreferrer" class:list={[cardClass, 'block h-full cursor-pointer p-4 transition hover:border-white/20 hover:bg-white/[0.05]']}>
+                      <span class="block text-xs text-gray-400">{stat.label}</span>
+                      <span class="mt-1.5 block text-xl font-semibold text-white tabular-nums">{stat.value}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
 
           <aside class="rounded-[1.75rem] border border-white/10 bg-linear-to-b from-white/[0.08] to-white/[0.03] p-6 shadow-[0_24px_80px_rgba(2,6,23,0.45)] backdrop-blur-sm">
@@ -260,23 +420,23 @@ content['ldJSON'] =
                 <span>{m.solutions_view_docs({}, { locale })}</span>
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-white" aria-hidden="true" />
               </a>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-              >
+              <a href={href} target="_blank" rel="noopener noreferrer" class={secondaryButtonClass}>
                 <span>{m.view_repo({}, { locale })}</span>
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
               </a>
-              <a
-                href={npmHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-              >
+              <a href={npmHref} target="_blank" rel="noopener noreferrer" class={secondaryButtonClass}>
                 <span>{m.view_npm({}, { locale })}</span>
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
+              </a>
+              <a href={issuesHref} target="_blank" rel="noopener noreferrer" class={secondaryButtonClass}>
+                <span>Report an issue</span>
+                <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
+              </a>
+            </div>
+            <div class="mt-6 border-t border-white/10 pt-5">
+              <p class="text-sm leading-6 text-gray-300">Missing a feature? Capgo builds and maintains custom Capacitor plugins.</p>
+              <a href={getRelativeLocaleUrl(locale, 'consulting')} class="mt-2 inline-flex text-sm font-semibold text-blue-300 transition hover:text-blue-200">
+                Talk to the plugin team →
               </a>
             </div>
           </aside>
@@ -291,7 +451,7 @@ content['ldJSON'] =
             <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">Demo</p>
-                <h2 class="mt-2 text-2xl font-semibold text-white sm:text-3xl">Animated WebP demos</h2>
+                <h2 class="mt-2 text-2xl font-semibold text-white sm:text-3xl">{title} demos</h2>
                 <p class="mt-3 max-w-2xl text-sm leading-6 text-gray-300">{demoGroup.description}</p>
               </div>
               <a
@@ -327,49 +487,144 @@ content['ldJSON'] =
 
     {
       tutorial && (
-        <section class="px-6 pb-16 lg:px-8 lg:pb-24">
-          <div class="mx-auto max-w-6xl">
-            <article class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-[0_24px_80px_rgba(2,6,23,0.35)]">
+        <section class="px-6 pb-16 lg:px-8">
+          <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start">
+            <article class="min-w-0 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-[0_24px_80px_rgba(2,6,23,0.35)]">
               <div class="border-b border-white/10 px-6 py-5 sm:px-8">
                 <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">Guide</p>
-                <h2 class="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-                  {m.tutorial_on({}, { locale })} {title}
-                </h2>
+                <h2 class="mt-2 text-2xl font-semibold text-white sm:text-3xl">How to use {title} in {runtime}</h2>
                 {previewQr && (
                   <div class="mt-5">
                     <PluginPreviewQrCard preview={previewQr} title={title} compact />
                   </div>
                 )}
               </div>
-              <div class="prose prose-invert max-w-none px-6 py-8 sm:px-8 lg:px-10" set:html={tutorial} />
+              <div class="prose prose-invert max-w-none px-6 py-8 sm:px-8 lg:px-10 [&_h2]:scroll-mt-28" set:html={tutorial} />
             </article>
+
+            {tableOfContents.length > 1 && (
+              <nav aria-labelledby="plugin-toc-heading" class="hidden lg:sticky lg:top-28 lg:block">
+                <p id="plugin-toc-heading" class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">
+                  On this page
+                </p>
+                <ol class="mt-4 space-y-2 border-l border-white/10 text-sm">
+                  {tableOfContents.map((entry) => (
+                    <li>
+                      <a href={`#${entry.id}`} class="-ml-px block border-l border-transparent py-0.5 pl-4 text-gray-400 transition hover:border-blue-400 hover:text-white">
+                        {entry.label}
+                      </a>
+                    </li>
+                  ))}
+                  <li>
+                    <a href="#plugin-faq-heading" class="-ml-px block border-l border-transparent py-0.5 pl-4 text-gray-400 transition hover:border-blue-400 hover:text-white">
+                      FAQ
+                    </a>
+                  </li>
+                </ol>
+              </nav>
+            )}
           </div>
         </section>
       )
     }
 
+    <section class="px-6 pb-16 lg:px-8" aria-labelledby="plugin-faq-heading">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">FAQ</p>
+        <h2 id="plugin-faq-heading" class="mt-2 scroll-mt-28 text-2xl font-semibold text-white sm:text-3xl">{title} plugin FAQ</h2>
+        <div class="mt-6 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+          {
+            faq.map((item) => (
+              <details class="group px-6 py-5 sm:px-8">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400">
+                  <span>{item.question}</span>
+                  <AstroIcon name="heroicons:chevron-down" class="size-5 shrink-0 text-gray-400 transition group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <p class="mt-3 text-sm leading-6 text-gray-300">{item.answer}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     {
-      faq.length > 0 && (
-        <section class="px-6 pb-16 lg:px-8 lg:pb-24" aria-labelledby="plugin-faq-heading">
+      relatedPlugins.length > 0 && (
+        <section class="px-6 pb-16 lg:px-8" aria-labelledby="plugin-related-heading">
           <div class="mx-auto max-w-6xl">
-            <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">FAQ</p>
-            <h2 id="plugin-faq-heading" class="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-              {title} plugin FAQ
-            </h2>
-            <div class="mt-6 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-              {faq.map((item) => (
-                <details class="group px-6 py-5 sm:px-8">
-                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400">
-                    <span>{item.question}</span>
-                    <AstroIcon name="heroicons:chevron-down" class="size-5 shrink-0 text-gray-400 transition group-open:rotate-180" aria-hidden="true" />
-                  </summary>
-                  <p class="mt-3 text-sm leading-6 text-gray-300">{item.answer}</p>
-                </details>
-              ))}
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">{categoryLabel}</p>
+                <h2 id="plugin-related-heading" class="mt-2 text-2xl font-semibold text-white sm:text-3xl">
+                  Related plugins
+                </h2>
+              </div>
+              <a href={getRelativeLocaleUrl(locale, 'plugins')} class="text-sm font-semibold text-blue-300 transition hover:text-blue-200">
+                Browse all plugins →
+              </a>
             </div>
+            <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedPlugins.map((related) => (
+                <li>
+                  <a
+                    href={getRelativeLocaleUrl(locale, `plugins/${getSlug(related.href)}`)}
+                    class:list={[cardClass, 'flex h-full cursor-pointer gap-4 p-5 transition hover:border-white/20 hover:bg-white/[0.05]']}
+                  >
+                    {related.icon && <PluginIcon icon={related.icon} name={related.title} className="shrink-0" />}
+                    <span class="min-w-0">
+                      <span class="block font-semibold text-white">{related.title}</span>
+                      <span class="mt-1 line-clamp-2 block text-sm leading-6 text-gray-400">{related.description}</span>
+                      <span class="mt-2 block text-xs text-gray-500 tabular-nums">
+                        {formatCount(related.npmDownloads)} downloads/month
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )
     }
+
+    <section class="px-6 pb-16 lg:px-8 lg:pb-24">
+      <div class="mx-auto flex max-w-6xl flex-col gap-6 rounded-[2rem] border border-blue-400/20 bg-linear-to-r from-blue-600/20 to-cyan-500/10 p-8 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 class="text-xl font-semibold text-white sm:text-2xl">Ship {title} changes without waiting for app review</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-gray-300">
+            Once the plugin is in your store build, Capgo live updates push your JavaScript, HTML and CSS changes to users in minutes.
+          </p>
+        </div>
+        <a
+          href={getRelativeLocaleUrl(locale, 'docs/getting-started/quickstart/')}
+          class="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-gray-950 transition hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+        >
+          Start with Capgo
+        </a>
+      </div>
+    </section>
   </div>
 </Layout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-plugin-copy]').forEach((button) => {
+    let resetTimer: number | undefined
+
+    button.addEventListener('click', async () => {
+      const value = button.dataset.pluginCopy
+      if (!value) return
+
+      try {
+        await navigator.clipboard.writeText(value)
+        button.textContent = 'Copied'
+      } catch {
+        button.textContent = 'Copy failed'
+      }
+
+      if (resetTimer) window.clearTimeout(resetTimer)
+      resetTimer = window.setTimeout(() => {
+        button.textContent = 'Copy'
+      }, 1800)
+    })
+  })
+</script>

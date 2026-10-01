@@ -12,59 +12,112 @@ bun add @capgo/capacitor-firebase-analytics
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `getAppInstanceId` - Retrieves the app instance id.
-- `getSessionId` - Retrieves the current session id (`ga_session_id`).
-- `setConsent` - Sets the user's consent mode.
-- `setUserId` - Sets the user ID property.
+## Import
 
-## Example Usage
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+```
 
-### `getAppInstanceId`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getAppInstanceId` | Retrieves the app instance id. |
+| `getSessionId` | Retrieves the current session id (`ga_session_id`). |
+| `setConsent` | Sets the user's consent mode. |
+| `setUserId` | Sets the user ID property. |
+| `setUserProperty` | Sets a custom user property to a given value. |
+| `setCurrentScreen` | Sets the current screen name. |
+| `logEvent` | Logs an app event. |
+| `setSessionTimeoutDuration` | Sets the duration of inactivity that terminates the current session. |
+| `setEnabled` | Enables/disables automatic data collection. The value does not apply until the next run of the app. |
+| `isEnabled` | Returns whether or not automatic data collection is enabled. |
+| `resetAnalyticsData` | Clears all analytics data for this app from the device. Resets the app instance id. |
+| `logTransaction` | Logs a StoreKit 2 transaction. |
+| `initiateOnDeviceConversionMeasurementWithEmailAddress` | Initiates on-device conversion measurement with an email address. |
+| `initiateOnDeviceConversionMeasurementWithPhoneNumber` | Initiates on-device conversion measurement with a phone number. |
+| `initiateOnDeviceConversionMeasurementWithHashedEmailAddress` | Initiates on-device conversion measurement with a hashed email address. |
+| `initiateOnDeviceConversionMeasurementWithHashedPhoneNumber` | Initiates on-device conversion measurement with a hashed phone number. |
+
+## Examples
+
+### `getAppInstanceId()`
 
 Retrieves the app instance id.
 
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.getAppInstanceId();
+const result = await FirebaseAnalytics.getAppInstanceId();
+console.log(result);
 ```
 
-### `getSessionId`
+### `getSessionId()`
 
 Retrieves the current session id (`ga_session_id`).
 
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.getSessionId();
+const result = await FirebaseAnalytics.getSessionId();
+console.log(result);
 ```
 
-### `setConsent`
+### `setConsent()`
 
 Sets the user's consent mode.
 
 ```typescript
-import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+import { FirebaseAnalytics, ConsentStatus, ConsentType } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setConsent({} as SetConsentOptions);
+await FirebaseAnalytics.setConsent({
+  type: ConsentType.AdPersonalization,
+  status: ConsentStatus.Granted,
+});
 ```
 
-### `setUserId`
+### `setUserId()`
 
 Sets the user ID property.
 
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setUserId({} as SetUserIdOptions);
+await FirebaseAnalytics.setUserId({ userId: 'user-id-123' });
 ```
 
-## Full Reference
+### `setUserProperty()`
 
-- GitHub: https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics
-- Docs: /docs/plugins/firebase-analytics/
+Sets a custom user property to a given value.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setUserProperty({
+  key: 'key-123',
+  value: 'value',
+});
+```
+
+### `setCurrentScreen()`
+
+Sets the current screen name.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setCurrentScreen({ screenName: 'screen' });
+```
+
+The table above lists the 16 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics).
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics)
+- [Documentation](/docs/plugins/firebase-analytics/)
+- [API reference](/docs/plugins/firebase-analytics/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-firebase-analytics
 

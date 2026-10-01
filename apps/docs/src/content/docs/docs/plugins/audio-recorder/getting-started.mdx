@@ -71,7 +71,8 @@ Stop the current recording and persist the recorded audio.
 ```typescript
 import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-await CapacitorAudioRecorder.stopRecording();
+const result = await CapacitorAudioRecorder.stopRecording();
+console.log(result);
 ```
 
 ### `cancelRecording`
@@ -91,7 +92,8 @@ Retrieve the current recording status.
 ```typescript
 import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-await CapacitorAudioRecorder.getRecordingStatus();
+const result = await CapacitorAudioRecorder.getRecordingStatus();
+console.log(result);
 ```
 
 ### `getCurrentAmplitude`
@@ -108,7 +110,8 @@ JS/native bridge.
 ```typescript
 import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-await CapacitorAudioRecorder.getCurrentAmplitude();
+const result = await CapacitorAudioRecorder.getCurrentAmplitude();
+console.log(result);
 ```
 
 ### `checkPermissions`
@@ -118,7 +121,8 @@ Return the current permission state for accessing the microphone.
 ```typescript
 import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-await CapacitorAudioRecorder.checkPermissions();
+const result = await CapacitorAudioRecorder.checkPermissions();
+console.log(result);
 ```
 
 ### `requestPermissions`
@@ -128,7 +132,8 @@ Request permission to access the microphone.
 ```typescript
 import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-await CapacitorAudioRecorder.requestPermissions();
+const result = await CapacitorAudioRecorder.requestPermissions();
+console.log(result);
 ```
 
 ## Type Reference

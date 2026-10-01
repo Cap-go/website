@@ -12,59 +12,108 @@ bun add @capgo/capacitor-incoming-call-kit
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `showIncomingCall` - Displays the native incoming call UI.
-- `endCall` - Ends a specific tracked call.
-- `endAllCalls` - Ends every tracked call.
-- `getActiveCalls` - Returns the currently tracked calls.
+## Import
 
-## Example Usage
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+```
 
-### `showIncomingCall`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `showIncomingCall` | Displays the native incoming call UI. |
+| `endCall` | Ends a specific tracked call. |
+| `endAllCalls` | Ends every tracked call. |
+| `getActiveCalls` | Returns the currently tracked calls. |
+| `checkPermissions` | Returns the current permission state for notifications and full-screen intents. |
+| `requestPermissions` | Requests the notification permission when the platform supports it. |
+| `requestFullScreenIntentPermission` | Opens the Android 14+ full-screen intent settings page when available. |
+
+## Examples
+
+### `showIncomingCall()`
 
 Displays the native incoming call UI.
 
 ```typescript
 import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
 
-await IncomingCallKit.showIncomingCall({} as ShowIncomingCallOptions);
+const result = await IncomingCallKit.showIncomingCall({
+  callId: 'call-id-123',
+  callerName: 'caller',
+});
+console.log(result);
 ```
 
-### `endCall`
+### `endCall()`
 
 Ends a specific tracked call.
 
 ```typescript
 import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
 
-await IncomingCallKit.endCall({} as EndCallOptions);
+const result = await IncomingCallKit.endCall({ callId: 'call-id-123' });
+console.log(result);
 ```
 
-### `endAllCalls`
+### `endAllCalls()`
 
 Ends every tracked call.
 
 ```typescript
 import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
 
-await IncomingCallKit.endAllCalls();
+const result = await IncomingCallKit.endAllCalls();
+console.log(result);
 ```
 
-### `getActiveCalls`
+### `getActiveCalls()`
 
 Returns the currently tracked calls.
 
 ```typescript
 import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
 
-await IncomingCallKit.getActiveCalls();
+const result = await IncomingCallKit.getActiveCalls();
+console.log(result);
 ```
 
-## Full Reference
+### `checkPermissions()`
 
-- GitHub: https://github.com/Cap-go/capacitor-incoming-call-kit/
-- Docs: /docs/plugins/incoming-call-kit/
+Returns the current permission state for notifications and full-screen intents.
+
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+
+const result = await IncomingCallKit.checkPermissions();
+console.log(result);
+```
+
+### `requestPermissions()`
+
+Requests the notification permission when the platform supports it.
+
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+
+const result = await IncomingCallKit.requestPermissions();
+console.log(result);
+```
+
+The table above lists the 7 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-incoming-call-kit/).
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `IncomingCallKit.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-incoming-call-kit/)
+- [Documentation](/docs/plugins/incoming-call-kit/)
+- [API reference](/docs/plugins/incoming-call-kit/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-incoming-call-kit
 

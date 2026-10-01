@@ -12,59 +12,101 @@ bun add @capgo/capacitor-photo-library
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `checkAuthorization` - Returns the current authorization status without prompting the user.
-- `requestAuthorization` - Requests access to the photo library if needed.
-- `getAlbums` - Retrieves the available albums.
-- `getLibrary` - Retrieves library assets along with URLs that can be displayed in the web view.
+## Import
 
-## Example Usage
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+```
 
-### `checkAuthorization`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `checkAuthorization` | Returns the current authorization status without prompting the user. |
+| `requestAuthorization` | Requests access to the photo library if needed. |
+| `getAlbums` | Retrieves the available albums. |
+| `getLibrary` | Retrieves library assets along with URLs that can be displayed in the web view. |
+| `getPhotoUrl` | Retrieves a displayable URL for the full resolution version of the asset. If you already called `getLibrary` with `includeFullResolutionData`, you normally do not need this method. |
+| `getThumbnailUrl` | Retrieves a displayable URL for a resized thumbnail of the asset. |
+| `pickMedia` | Opens the native system picker so the user can select media without granting full photo library access. The selected files are copied into the application cache and returned with portable URLs. |
+
+## Examples
+
+### `checkAuthorization()`
 
 Returns the current authorization status without prompting the user.
 
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.checkAuthorization();
+const result = await PhotoLibrary.checkAuthorization();
+console.log(result);
 ```
 
-### `requestAuthorization`
+### `requestAuthorization()`
 
 Requests access to the photo library if needed.
 
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.requestAuthorization();
+const result = await PhotoLibrary.requestAuthorization();
+console.log(result);
 ```
 
-### `getAlbums`
+### `getAlbums()`
 
 Retrieves the available albums.
 
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.getAlbums();
+const result = await PhotoLibrary.getAlbums();
+console.log(result);
 ```
 
-### `getLibrary`
+### `getLibrary()`
 
 Retrieves library assets along with URLs that can be displayed in the web view.
 
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-await PhotoLibrary.getLibrary();
+const result = await PhotoLibrary.getLibrary();
+console.log(result);
 ```
 
-## Full Reference
+### `getPhotoUrl()`
 
-- GitHub: https://github.com/Cap-go/capacitor-photo-library/
-- Docs: /docs/plugins/photo-library/
+Retrieves a displayable URL for the full resolution version of the asset. If you already called `getLibrary` with `includeFullResolutionData`, you normally do not need this method.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.getPhotoUrl({ id: 'id-123' });
+console.log(result);
+```
+
+### `getThumbnailUrl()`
+
+Retrieves a displayable URL for a resized thumbnail of the asset.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.getThumbnailUrl({ id: 'id-123' });
+console.log(result);
+```
+
+The table above lists the 7 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-photo-library/).
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-photo-library/)
+- [Documentation](/docs/plugins/photo-library/)
+- [API reference](/docs/plugins/photo-library/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-photo-library
 

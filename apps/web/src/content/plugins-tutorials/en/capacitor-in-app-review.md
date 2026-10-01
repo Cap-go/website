@@ -12,13 +12,23 @@ bun add @capgo/capacitor-in-app-review
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `requestReview` - Request an in-app review from the user.
+## Import
 
-## Example Usage
+```typescript
+import { CapgoInAppReview } from '@capgo/capacitor-in-app-review';
+```
 
-### `requestReview`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `requestReview` | Request an in-app review from the user. |
+
+## Examples
+
+### `requestReview()`
 
 Request an in-app review from the user.
 
@@ -29,10 +39,11 @@ import { CapgoInAppReview } from '@capgo/capacitor-in-app-review';
 await CapgoInAppReview.requestReview();
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-in-app-review/
-- Docs: /docs/plugins/in-app-review/
+- [GitHub repository](https://github.com/Cap-go/capacitor-in-app-review/)
+- [Documentation](/docs/plugins/in-app-review/)
+- [API reference](/docs/plugins/in-app-review/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-in-app-review
 

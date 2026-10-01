@@ -62,7 +62,7 @@ await AdMob.configure({
 Configure ad request settings.
 
 ```typescript
-import { AdMob } from '@capgo/capacitor-admob';
+import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
 
 await AdMob.configRequest({
   maxAdContentRating: MaxAdContentRating.PG,
@@ -131,7 +131,7 @@ await AdMob.adHide({ id: 1 });
 Get the current tracking authorization status (iOS only).
 
 ```typescript
-import { AdMob } from '@capgo/capacitor-admob';
+import { AdMob, TrackingAuthorizationStatus } from '@capgo/capacitor-admob';
 
 const { status } = await AdMob.trackingAuthorizationStatus();
 if (status === TrackingAuthorizationStatus.notDetermined) {

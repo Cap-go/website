@@ -36,7 +36,8 @@ Notify the native layer that JavaScript initialized successfully.
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-await CapacitorUpdater.notifyAppReady();
+const result = await CapacitorUpdater.notifyAppReady();
+console.log(result);
 ```
 
 ### `setUpdateUrl`
@@ -46,7 +47,7 @@ Set the update URL for the app dynamically at runtime.
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-await CapacitorUpdater.setUpdateUrl({} as UpdateUrl);
+await CapacitorUpdater.setUpdateUrl({ url: 'https://example.com' });
 ```
 
 ### `setStatsUrl`
@@ -56,7 +57,7 @@ Set the statistics URL for the app dynamically at runtime.
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-await CapacitorUpdater.setStatsUrl({} as StatsUrl);
+await CapacitorUpdater.setStatsUrl({ url: 'https://example.com' });
 ```
 
 ### `setChannelUrl`
@@ -66,7 +67,7 @@ Set the channel URL for the app dynamically at runtime.
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-await CapacitorUpdater.setChannelUrl({} as ChannelUrl);
+await CapacitorUpdater.setChannelUrl({ url: 'https://example.com' });
 ```
 
 ## Full Reference

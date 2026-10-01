@@ -12,13 +12,23 @@ bun add @capgo/capacitor-video-thumbnails
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `getThumbnail` - Generate a thumbnail image from a video file at a specific time position.
+## Import
 
-## Example Usage
+```typescript
+import { CapgoVideoThumbnails } from '@capgo/capacitor-video-thumbnails';
+```
 
-### `getThumbnail`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getThumbnail` | Generate a thumbnail image from a video file at a specific time position. |
+
+## Examples
+
+### `getThumbnail()`
 
 Generate a thumbnail image from a video file at a specific time position.
 
@@ -34,10 +44,11 @@ console.log('Thumbnail URI:', result.uri);
 console.log('Dimensions:', result.width, 'x', result.height);
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-video-thumbnails/
-- Docs: /docs/plugins/video-thumbnails/
+- [GitHub repository](https://github.com/Cap-go/capacitor-video-thumbnails/)
+- [Documentation](/docs/plugins/video-thumbnails/)
+- [API reference](/docs/plugins/video-thumbnails/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-video-thumbnails
 
