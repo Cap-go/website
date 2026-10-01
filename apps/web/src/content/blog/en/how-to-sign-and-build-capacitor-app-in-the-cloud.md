@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /certificates.webp
 head_image_alt: "iOS certificates and Android keystore used to sign a Capacitor app in a cloud build"
 keywords: sign Capacitor app, Capacitor cloud build, Capacitor code signing, iOS certificate CI, Android keystore CI, build Capacitor without Mac, Capgo Build, TestFlight upload Capacitor

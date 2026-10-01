@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /cordova.webp
 head_image_alt: "Apache Cordova app moving through a CI/CD pipeline to the App Store and Google Play"
 keywords: Cordova CI/CD, Cordova build pipeline, Cordova GitHub Actions, Cordova iOS build, Cordova Android AAB, Cordova live updates, App Center Cordova replacement, Cordova to Capacitor

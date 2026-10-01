@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capgo_banner.webp
 head_image_alt: "Capgo banner for a tutorial on building a Wear OS companion app for a Capacitor Android app"
 keywords: Capacitor Wear OS, Wear OS app Capacitor, Ionic Wear OS, Wear OS Data Layer Capacitor, capacitor-watch Android, smartwatch Capacitor app, Kotlin Wear OS companion

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /android-studio-run.webp
 head_image_alt: "Android Studio showing a Capacitor project with app, capacitor-android and Cordova plugin modules and the run button"
 keywords: Capacitor Android troubleshooting, Capacitor Android build error, invalid source release 21, Minimum supported Gradle version, plugin is not implemented Android, Capacitor blank screen Android, ERR_CLEARTEXT_NOT_PERMITTED, Capacitor edge-to-edge

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /social_login_plugin_blog.webp
 head_image_alt: "Sign in with Apple button running in a Capacitor app with the Capgo Social Login plugin"
 keywords: sign in with apple capacitor, capacitor apple login, apple sign in ionic, capacitor social login, apple identity token, sign in with apple android, capacitor 8 authentication

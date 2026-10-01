@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capgo_plugins.webp
 head_image_alt: "Detecting online and offline network status in a Capacitor mobile app"
 keywords: capacitor network status, capacitor network plugin, detect offline capacitor, ionic network status, capacitor networkStatusChange, capacitor internet connection check, capacitor offline mode

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capgo_plugins.webp
 head_image_alt: "Capgo logo for a comparison of key-value storage options in Capacitor"
 keywords: capacitor key value storage, capacitor preferences, sqlite key value store capacitor, capacitor storage, ionic storage alternative, capacitor secure storage

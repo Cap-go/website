@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: "Reading, writing, and sharing files in a Capacitor mobile app"
 keywords: capacitor file handling, capacitor filesystem, capacitor read file, capacitor write file, capacitor file picker, capacitor download file, capacitor upload file, capacitor convertFileSrc, ionic file storage

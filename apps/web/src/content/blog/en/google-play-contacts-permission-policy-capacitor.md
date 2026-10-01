@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /blog-images/privacy-manifest-for-capacitor-apps-guide.webp
 head_image_alt: "Privacy illustration for the Google Play contacts permission policy in Capacitor apps"
 keywords: google play contacts policy 2027, READ_CONTACTS policy, android contact picker capacitor, android 17 contacts permission, capacitor contacts plugin, play console contacts declaration

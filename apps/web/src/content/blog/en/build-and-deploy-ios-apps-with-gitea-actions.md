@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /build_result.webp
 head_image_alt: "Gitea Actions workflow building a signed iOS app for TestFlight"
 keywords: Gitea Actions iOS, Gitea iOS build, act_runner macOS, Gitea TestFlight, Forgejo Actions iOS, Capacitor iOS CI/CD, Capgo Build

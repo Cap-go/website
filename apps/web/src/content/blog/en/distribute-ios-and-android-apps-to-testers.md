@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /testflight_app.webp
 head_image_alt: "TestFlight app on iPhone used to install beta builds"
 keywords: distribute app to testers, testflight, testflight external testers, google play internal testing, internal app sharing, firebase app distribution, ad hoc distribution ios, beta testing android, install apk testers

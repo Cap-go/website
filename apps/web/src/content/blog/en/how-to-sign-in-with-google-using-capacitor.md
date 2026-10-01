@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /social_login_plugin_blog.webp
 head_image_alt: "Google Sign-In account picker inside a Capacitor app using the Capgo Social Login plugin"
 keywords: google sign in capacitor, capacitor google login, ionic google auth, credential manager capacitor, google id token, capacitor social login, 28444 developer console is not set up correctly

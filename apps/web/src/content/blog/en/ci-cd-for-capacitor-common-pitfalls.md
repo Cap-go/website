@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /code_signing_identities.webp
 head_image_alt: "Code signing identities and failing CI steps in a Capacitor pipeline"
 keywords: Capacitor CI/CD pitfalls, Capacitor CI build fails, iOS code signing CI, cap sync CI, Capacitor GitHub Actions errors, Xcode 26 CI, Android versionCode CI, Capacitor build troubleshooting

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /blog-images/how-to-add-geolocation-targeting-to-ota-updates.webp
 head_image_alt: "Map with location boundaries illustrating geofencing in a Capacitor iOS app"
 keywords: geofences not triggering ios, ios geofencing capacitor, region monitoring ios, capacitor geofence, geofence enter exit event, CLCircularRegion

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /blog-images/how-background-tasks-work-in-capacitor.webp
 head_image_alt: "Illustration of an iPhone app running background tasks while tracking location"
 keywords: ios stops background location updates, ios background location capacitor, allowsBackgroundLocationUpdates, pausesLocationUpdatesAutomatically, capacitor background geolocation ios, location updates stop when app in background

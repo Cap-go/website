@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capgo_banner.webp
 head_image_alt: "Capgo banner for a comparison of Electron and Tauri as desktop runtimes for Capacitor apps"
 keywords: Electron vs Tauri, Tauri Capacitor, Electron Capacitor, Capacitor desktop, Tauri vs Electron 2026, desktop app web technologies, Tauri live updates

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /app_info.webp
 head_image_alt: "App information and store listing fields in App Store Connect"
 keywords: app store listing, google play store listing, app store screenshot sizes, google play screenshot size, app store metadata limits, app privacy labels, google play data safety, app store age rating, feature graphic size

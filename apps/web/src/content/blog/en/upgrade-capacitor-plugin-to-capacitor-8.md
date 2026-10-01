@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capgo_plugins.webp
 head_image_alt: "Capgo plugins logo on a dark blue background for the Capacitor 8 plugin upgrade guide"
 keywords: upgrade Capacitor plugin to Capacitor 8, Capacitor plugin migration, plugin-migration-v7-to-v8, Capacitor 8 plugin, Kotlin 2.2 compilerOptions, Package.swift, capacitor-swift-pm 8

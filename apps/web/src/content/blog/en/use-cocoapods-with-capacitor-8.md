@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capacitor-app-spm-migration-guide.jpg
 head_image_alt: "Illustration of a Capacitor iOS project choosing between CocoaPods and Swift Package Manager"
 keywords: CocoaPods Capacitor, Capacitor 8 CocoaPods, cap add ios packagemanager CocoaPods, Podfile Capacitor, pod install error, CocoaPods trunk read-only, SPM vs CocoaPods

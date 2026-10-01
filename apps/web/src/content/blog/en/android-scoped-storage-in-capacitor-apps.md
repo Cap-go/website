@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: "Android scoped storage rules applied to files in a Capacitor app"
 keywords: android scoped storage capacitor, capacitor WRITE_EXTERNAL_STORAGE, capacitor filesystem android 11, MANAGE_EXTERNAL_STORAGE capacitor, capacitor save file to downloads, storage access framework capacitor, READ_MEDIA_IMAGES capacitor

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /apple_appstore.webp
 head_image_alt: "Apple App Store and Google Play developer account setup"
 keywords: apple developer account, google play developer account, create apple developer account, google play console signup, D-U-N-S number, apple developer program cost, google play closed testing 12 testers, developer account organization vs individual

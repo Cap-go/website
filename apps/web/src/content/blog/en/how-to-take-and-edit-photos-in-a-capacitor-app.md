@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capgo_plugins.webp
 head_image_alt: "Taking and editing a photo with the camera inside a Capacitor app"
 keywords: capacitor camera, take photo capacitor, edit photo capacitor, capacitor camera takePhoto, ionic camera, capacitor camera preview, capacitor image crop, capacitor photo upload

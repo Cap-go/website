@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /RBW_XCode_Cloud_building.webp
 head_image_alt: "Comparison of CI/CD platforms building iOS apps on macOS runners"
 keywords: iOS CI/CD platforms, best CI/CD for iOS, iOS build server, Xcode Cloud vs Bitrise, Codemagic vs Bitrise, GitHub Actions iOS, TestFlight automation, Capacitor iOS builds

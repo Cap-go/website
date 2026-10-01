@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /blog-images/capacitor-ai-mobile-apps.webp
 head_image_alt: "Illustration of AI features running inside a Capacitor mobile app"
 keywords: Gemini Nano Capacitor, Gemini Nano Android, on-device AI Capacitor, ML Kit GenAI Prompt API, AICore, Capacitor LLM plugin, Gemma 4 LiteRT-LM, Ionic on-device AI

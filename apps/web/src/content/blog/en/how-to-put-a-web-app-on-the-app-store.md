@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: "Turning a web app into iOS and Android apps with Capacitor"
 keywords: web app to app store, convert web app to mobile app, put web app on app store, web app to ios app, web app to android app, capacitor, publish web app google play, wrap web app native

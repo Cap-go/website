@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-30T01:59:04.033Z
-updated_at: 2026-09-29T19:25:52.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /blog-images/capacitor-vs-appflow-ota-update-solutions-compared.webp
 head_image_alt: "\"Capacitor vs Appflow: OTA Update Solutions Compared\" Capgo blog illustration"
 keywords: OTA updates, Capacitor, Appflow, mobile development, deployment solutions, app security, update management

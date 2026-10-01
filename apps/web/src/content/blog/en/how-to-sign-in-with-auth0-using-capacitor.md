@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /login.webp
 head_image_alt: "Auth0 Universal Login opened from a Capacitor app through the system browser"
 keywords: auth0 capacitor, capacitor auth0 login, ionic auth0, auth0 pkce mobile, auth0 refresh token capacitor, oidc capacitor, capacitor social login oauth2

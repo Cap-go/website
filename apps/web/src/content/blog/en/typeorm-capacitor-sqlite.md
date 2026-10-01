@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T09:00:00.000Z
+updated_at: 2026-10-01T03:59:51.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: "Capacitor logo for a guide on using TypeORM with Capacitor and SQLite"
 keywords: typeorm capacitor, typeorm capacitor sqlite, typeorm ionic, capacitor-community sqlite typeorm, typeorm migrations mobile, typeorm vite decorators
