@@ -120,7 +120,7 @@ const softwareApplication = createSoftwareApplicationLdJson(runtimePublic, {
   description: tutorialData?.seoDescription ?? plugin.description,
   url: pluginUrl,
   applicationCategory: 'DeveloperApplication',
-  operatingSystem: supportedPlatforms.length > 0 ? supportedPlatforms.join(', ') : 'iOS, Android',
+  operatingSystem: platforms.length > 0 ? supportedPlatforms.join(', ') : 'iOS, Android',
   downloadUrl: plugin.href,
 })
 
@@ -360,7 +360,7 @@ content['ldJSON'] =
               {faq.map((item) => (
                 <details class="group px-6 py-5 sm:px-8">
                   <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400">
-                    <h3>{item.question}</h3>
+                    <span>{item.question}</span>
                     <AstroIcon name="heroicons:chevron-down" class="size-5 shrink-0 text-gray-400 transition group-open:rotate-180" aria-hidden="true" />
                   </summary>
                   <p class="mt-3 text-sm leading-6 text-gray-300">{item.answer}</p>

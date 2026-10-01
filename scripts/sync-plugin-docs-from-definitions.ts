@@ -799,7 +799,10 @@ const writeTutorials = (items: Array<PluginMetadata | null>) => {
     if (!metadata) continue
     const tutorialPath = join(tutorialRoot, `${metadata.plugin.tutorialSlug}.md`)
     // Hand-written tutorials opt out of regeneration with `curated: true` in their frontmatter.
-    if (isRegularFile(tutorialPath) && /^---\n[\s\S]*?^curated:\s*true\s*$[\s\S]*?^---/m.test(readFileSync(tutorialPath, 'utf8'))) continue
+    if (isRegularFile(tutorialPath)) {
+      const frontmatter = readFileSync(tutorialPath, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/)?.[1]
+      if (frontmatter && /^curated:\s*['"]?true['"]?\s*(?:#.*)?$/im.test(frontmatter)) continue
+    }
     writeTextFile(tutorialPath, renderTutorial(metadata))
   }
 }
