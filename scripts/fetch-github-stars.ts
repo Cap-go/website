@@ -244,7 +244,8 @@ const isHumanContributor = (item: { login?: string; type?: string }) => {
   return item.type !== 'Bot' && !login.endsWith('[bot]') && !['dependabot', 'renovate-bot', 'github-actions'].includes(login)
 }
 
-const fetchContributorLogins = async (repoRef: RepoRef): Promise<Set<string>> => {
+// Returns null when any page fails, so callers can keep the previous count instead of writing a partial one.
+const fetchContributorLogins = async (repoRef: RepoRef): Promise<Set<string> | null> => {
   const contributors = new Set<string>()
   let page = 1
 
@@ -253,6 +254,7 @@ const fetchContributorLogins = async (repoRef: RepoRef): Promise<Set<string>> =>
       `https://api.github.com/repos/${repoRef.owner}/${repoRef.repo}/contributors?per_page=100&anon=false&page=${page}`,
       `contributors for ${createRepoKey(repoRef)} page ${page}`,
     )
+    if (data === null) return null
     if (!Array.isArray(data) || data.length === 0) break
 
     for (const contributor of data) {
@@ -356,6 +358,7 @@ async function main() {
   } else {
     console.log('Fetching contributor lists...')
     const contributorLogins = new Set<string>()
+    let failedContributorFetches = 0
     const batchSize = Math.max(1, Number.isFinite(CONTRIBUTOR_CONCURRENCY) ? CONTRIBUTOR_CONCURRENCY : 2)
 
     for (let i = 0; i < capgoRepoRefs.length; i += batchSize) {
@@ -369,6 +372,13 @@ async function main() {
 
       for (const { repoRef, logins } of results) {
         const key = createRepoKey(repoRef)
+        if (logins === null) {
+          failedContributorFetches++
+          const previousCount = previousStats?.repositories?.[key]?.contributors
+          contributorsByRepoKey[key] = typeof previousCount === 'number' ? previousCount : 0
+          console.warn(`  ${key}: contributor fetch failed, keeping previous count ${contributorsByRepoKey[key]}`)
+          continue
+        }
         contributorsByRepoKey[key] = logins.size
         for (const login of logins) {
           contributorLogins.add(login)
@@ -382,6 +392,11 @@ async function main() {
     }
 
     contributorCount = contributorLogins.size
+    // The unique total cannot be rebuilt from a partial set of repos, so keep the previous total when any repo failed.
+    if (failedContributorFetches > 0 && typeof previousStats?.contributorCount === 'number') {
+      console.warn(`${failedContributorFetches} contributor fetch(es) failed, keeping previous total ${previousStats.contributorCount}`)
+      contributorCount = Math.max(contributorCount, previousStats.contributorCount)
+    }
   }
 
   const repositories = Object.fromEntries(

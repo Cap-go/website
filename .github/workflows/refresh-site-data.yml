@@ -1,0 +1,97 @@
+name: Refresh site data
+
+# Daily refresh of the JSON snapshots the website build reads (GitHub stars/stats,
+# transparency facts, website stats, npm downloads). Deploys never fetch this data
+# themselves, so a human release is not slowed down by third-party APIs.
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: refresh-site-data
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  refresh:
+    name: Fetch latest site data
+    if: github.repository == 'Cap-go/website'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # contents: write required so git-auto-commit can push updated JSON when data changes.
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          # Needed by git-auto-commit-action to push commits.
+          persist-credentials: true
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.2
+      - name: Cache bun modules
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+      # --ignore-scripts: avoid running dependency lifecycle scripts during CI install.
+      - run: bun install --frozen-lockfile --ignore-scripts
+      # Each fetch keeps the previous values when a source is unreachable, so one
+      # failing source must not block committing the others.
+      - name: Fetch GitHub stars and stats
+        id: stars
+        continue-on-error: true
+        run: GITHUB_STATS_REFRESH=true bun run fetch:stars
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Fetch transparency data
+        id: transparency
+        continue-on-error: true
+        run: bun run fetch:transparency
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Fetch website stats
+        id: website_stats
+        continue-on-error: true
+        run: WEBSITE_STATS_REFRESH=true bun run fetch:website-stats
+      - name: Fetch npm downloads
+        id: downloads
+        continue-on-error: true
+        run: NPM_DOWNLOADS_REFRESH=true bun run fetch:downloads
+      # Fetch timestamps change on every run; skip files where nothing else changed.
+      - name: Drop timestamp-only changes
+        run: |
+          for file in apps/web/src/data/website-stats.json apps/web/src/data/transparency.json; do
+            git diff --quiet -- "$file" && continue
+            if FILE="$file" bun -e '
+              const file = process.env.FILE
+              const strip = (text) => {
+                const { fetchedAt, updatedAt, ...rest } = JSON.parse(text)
+                return JSON.stringify(rest)
+              }
+              const before = await Bun.$`git show HEAD:${file}`.text()
+              process.exit(strip(before) === strip(await Bun.file(file).text()) ? 0 : 1)
+            '; then
+              echo "Only timestamps changed in $file, discarding"
+              git checkout -- "$file"
+            fi
+          done
+      - name: Commit changes if data differs
+        uses: stefanzweifel/git-auto-commit-action@8621497c0c1376e06561dd4e2e3ebae1941d66ea
+        with:
+          commit_message: 'chore: refresh site data snapshots'
+          file_pattern: 'apps/web/src/data/github-stars.json apps/web/src/data/github-stats.json apps/web/src/data/transparency.json apps/web/src/data/website-stats.json apps/web/src/data/npm-downloads.json'
+      # Fetch steps continue on error so partial data still lands; fail the run afterwards so a broken source is visible.
+      - name: Fail if any fetch failed
+        if: steps.stars.outcome == 'failure' || steps.transparency.outcome == 'failure' || steps.website_stats.outcome == 'failure' || steps.downloads.outcome == 'failure'
+        run: |
+          echo "::error::Fetch outcomes: stars=${{ steps.stars.outcome }} transparency=${{ steps.transparency.outcome }} website_stats=${{ steps.website_stats.outcome }} downloads=${{ steps.downloads.outcome }}"
+          exit 1

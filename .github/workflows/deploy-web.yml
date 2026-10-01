@@ -123,17 +123,6 @@ jobs:
       - run: bun install --frozen-lockfile
       - name: Install Playwright Chromium
         run: node ./node_modules/playwright/cli.js install chromium
-      - name: Fetch latest global stats
-        run: |
-          GITHUB_STATS_REFRESH=true bun run fetch:stars
-          bun run fetch:transparency
-          WEBSITE_STATS_REFRESH=true bun run fetch:website-stats
-        env:
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
-          CF_ACCOUNT_ANALYTICS_ID: ${{ secrets.CF_ACCOUNT_ANALYTICS_ID }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - run: cd apps/web && bun run check
       - run: bun run clean:build-cache
       - run: bun run build:web
