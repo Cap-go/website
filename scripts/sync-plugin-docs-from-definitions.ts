@@ -797,7 +797,10 @@ const writeComplexIndexes = (items: Array<PluginMetadata | null>) => {
 const writeTutorials = (items: Array<PluginMetadata | null>) => {
   for (const metadata of items) {
     if (!metadata) continue
-    writeTextFile(join(tutorialRoot, `${metadata.plugin.tutorialSlug}.md`), renderTutorial(metadata))
+    const tutorialPath = join(tutorialRoot, `${metadata.plugin.tutorialSlug}.md`)
+    // Hand-written tutorials opt out of regeneration with `curated: true` in their frontmatter.
+    if (isRegularFile(tutorialPath) && /^---\n[\s\S]*?^curated:\s*true\s*$[\s\S]*?^---/m.test(readFileSync(tutorialPath, 'utf8'))) continue
+    writeTextFile(tutorialPath, renderTutorial(metadata))
   }
 }
 

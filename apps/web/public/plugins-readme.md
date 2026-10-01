@@ -763,7 +763,7 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-textinteraction/">Text Interaction</a></h3>
 <p><code>@capgo/capacitor-textinteraction</code></p>
-<p>Enable advanced text selection, copy-paste, and interaction features in web views</p>
+<p>Turn text selection and the iOS magnifier lens on or off in the Capacitor WebView</p>
 <p>
 <a href="https://www.npmjs.com/package/@capgo/capacitor-textinteraction"><img src="https://img.shields.io/npm/dm/@capgo/capacitor-textinteraction?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-textinteraction/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-textinteraction?style=flat-square&label=stars" alt="GitHub stars"></a>

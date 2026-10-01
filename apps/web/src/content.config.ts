@@ -54,6 +54,29 @@ const plugin = defineCollection({
   schema: z.object({
     published: z.boolean().optional(),
     locale: localeSchema.optional(),
+    // Hand-written tutorials set `curated: true` so the definitions sync script leaves them alone.
+    curated: z.boolean().optional(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+    keywords: z.string().optional(),
+    summary: z.string().optional(),
+    platforms: z
+      .array(
+        z.object({
+          name: z.string(),
+          status: z.enum(['supported', 'partial', 'unsupported']),
+          note: z.string().optional(),
+        }),
+      )
+      .optional(),
+    faq: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        }),
+      )
+      .optional(),
   }),
 })
 
