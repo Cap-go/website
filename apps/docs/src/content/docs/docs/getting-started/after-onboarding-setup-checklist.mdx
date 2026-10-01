@@ -100,9 +100,9 @@ See also [version targeting](/docs/live-updates/version-targeting/) and [bundle 
 
 ## Delta upload
 
-`--delta` uploads a **manifest** so devices download only changed files instead of the full bundle every time. Checksum is always computed automatically. You do not pass a checksum flag.
+`--delta` uploads **delta files** so devices download only changed files instead of the full bundle every time. Checksum is always computed automatically. You do not pass a checksum flag.
 
-### Default: `--delta` (manifest + zip backup)
+### Default: `--delta` (delta files + zip backup)
 
 ```bash
 npx @capgo/cli@latest bundle upload \
@@ -111,7 +111,7 @@ npx @capgo/cli@latest bundle upload \
   --delta
 ```
 
-This is the recommended default for most apps. Capgo stores the manifest **and** keeps the full zip as a backup. Good when storage cost is not your main concern.
+This is the recommended default for most apps. Capgo stores the delta files **and** keeps the full zip as a backup. Devices on an old plugin version without Delta support use the zip. Good when storage cost is not your main concern.
 
 ### Storage saving: `--delta-only`
 
@@ -123,11 +123,11 @@ npx @capgo/cli@latest bundle upload \
   --delta-only
 ```
 
-Use `--delta-only` when you want to **reduce Capgo storage**. Only the delta/manifest files are stored, not the full zip. Choose this for large apps or high upload volume where storage adds up.
+Use `--delta-only` when you want to **reduce Capgo storage**. Only the delta files are stored, not the full zip. Choose this for large apps or high upload volume where storage adds up.
 
-Trade-off: without the zip backup on the server, you rely fully on the manifest path. Skip `--delta-only` unless you actually need the storage savings.
+Trade-off: without the zip backup on the server, you rely fully on delta files, and devices on an old plugin version without Delta support cannot update. Skip `--delta-only` unless you actually need the storage savings.
 
-No extra plugin config is required on the device. The updater reads the manifest and fetches changed files only.
+No extra plugin config is required on the device. The updater reads the list of delta files and fetches changed files only.
 
 <Aside type="tip">
 See [Delta updates](/docs/live-updates/differentials/) for troubleshooting and `directUpdate` behavior.
