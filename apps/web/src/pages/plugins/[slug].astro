@@ -6,7 +6,7 @@ import { getPluginPreviewQr } from '@/config/pluginPreviewQrs'
 import type { Plugin } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
-import { createSoftwareApplicationLdJson } from '@/lib/ldJson'
+import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import m from '@/copy/messages'
 import { getPluginsWithStars, getSlug } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
@@ -93,21 +93,50 @@ const packageRenameNote = name ? packageRenameNotes[name] : undefined
 const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : getRelativeLocaleUrl(locale, 'docs/plugins/')
 const previewQr = getPluginPreviewQr(id)
 
-const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
+const tutorialData = thisTut?.data
+const heroDescription = tutorialData?.summary ?? description
+const platforms = tutorialData?.platforms ?? []
+const faq = tutorialData?.faq ?? []
+const platformStatusLabel = { supported: 'Supported', partial: 'Limited', unsupported: 'Not supported' } as const
+const platformStatusClass = {
+  supported: 'border-emerald-400/25 bg-emerald-400/10 text-emerald-100',
+  partial: 'border-amber-300/25 bg-amber-300/10 text-amber-100',
+  unsupported: 'border-white/10 bg-white/[0.03] text-gray-400',
+} as const
 
-if (plugin.title) content['title'] = `${plugin.title} Capacitor Plugin: Install, Setup & Examples`
-if (plugin.description) content['description'] = plugin.description
+const content: { title?: string; description?: string; keywords?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
+if (plugin.title) content['title'] = tutorialData?.seoTitle ?? `${plugin.title} Capacitor Plugin: Install, Setup & Examples`
+if (tutorialData?.seoDescription || plugin.description) content['description'] = tutorialData?.seoDescription ?? plugin.description
+if (tutorialData?.keywords) content['keywords'] = tutorialData.keywords
+
+const runtimePublic = Astro.locals.runtimeConfig.public
 const pluginUrl = getRelativeLocaleUrl(locale, `/plugins/${id}`)
+const absolutePluginUrl = new URL(pluginUrl, runtimePublic.baseUrl).toString()
+const supportedPlatforms = platforms.filter((platform) => platform.status !== 'unsupported').map((platform) => platform.name)
 
-content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+const softwareApplication = createSoftwareApplicationLdJson(runtimePublic, {
   name: plugin.title,
-  description: plugin.description,
+  description: tutorialData?.seoDescription ?? plugin.description,
   url: pluginUrl,
   applicationCategory: 'DeveloperApplication',
-  operatingSystem: 'iOS, Android',
+  operatingSystem: platforms.length > 0 ? supportedPlatforms.join(', ') : 'iOS, Android',
   downloadUrl: plugin.href,
 })
+
+content['ldJSON'] =
+  faq.length > 0
+    ? createLdJsonGraph(runtimePublic, softwareApplication, {
+        includeOrganization: true,
+        includeBreadcrumbs: true,
+        breadcrumbs: [
+          { name: 'Home', url: new URL(getRelativeLocaleUrl(locale, '/'), runtimePublic.baseUrl).toString() },
+          { name: 'Plugins', url: new URL(getRelativeLocaleUrl(locale, 'plugins'), runtimePublic.baseUrl).toString() },
+          { name: plugin.title, url: absolutePluginUrl },
+        ],
+        additionalEntities: [createFAQPageLdJson(runtimePublic, { url: absolutePluginUrl, questions: faq })],
+      })
+    : softwareApplication
 ---
 
 <Layout {content}>
@@ -174,8 +203,24 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                   {title}
                 </h1>
                 <p class="mt-4 max-w-[52ch] text-base leading-7 text-gray-300 sm:text-lg">
-                  {description}
+                  {heroDescription}
                 </p>
+                {
+                  platforms.length > 0 && (
+                    <ul class="mt-5 flex flex-wrap gap-2" aria-label="Platform support">
+                      {platforms.map((platform) => (
+                        <li class:list={['rounded-full border px-3 py-1 text-sm', platformStatusClass[platform.status]]}>
+                          <span class="font-semibold">{platform.name}</span>
+                          <span class="opacity-80">
+                            {' '}
+                            · {platformStatusLabel[platform.status]}
+                            {platform.note && ` (${platform.note})`}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )
+                }
               </div>
             </div>
 
@@ -298,6 +343,30 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
               </div>
               <div class="prose prose-invert max-w-none px-6 py-8 sm:px-8 lg:px-10" set:html={tutorial} />
             </article>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      faq.length > 0 && (
+        <section class="px-6 pb-16 lg:px-8 lg:pb-24" aria-labelledby="plugin-faq-heading">
+          <div class="mx-auto max-w-6xl">
+            <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">FAQ</p>
+            <h2 id="plugin-faq-heading" class="mt-2 text-2xl font-semibold text-white sm:text-3xl">
+              {title} plugin FAQ
+            </h2>
+            <div class="mt-6 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+              {faq.map((item) => (
+                <details class="group px-6 py-5 sm:px-8">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400">
+                    <span>{item.question}</span>
+                    <AstroIcon name="heroicons:chevron-down" class="size-5 shrink-0 text-gray-400 transition group-open:rotate-180" aria-hidden="true" />
+                  </summary>
+                  <p class="mt-3 text-sm leading-6 text-gray-300">{item.answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
       )

@@ -119,7 +119,7 @@ const actionDefinitionRows =
 @capgo/capacitor-photo-library|github.com/Cap-go|Browse, save, and manage photos and videos in device photo library with permissions|https://github.com/Cap-go/capacitor-photo-library/|Photo Library
 @capgo/capacitor-sim|github.com/Cap-go|Retrieve SIM card information including carrier name, country code, and phone number|https://github.com/Cap-go/capacitor-sim/|SIM
 @capgo/capacitor-speech-recognition|github.com/Cap-go|Natural, low-latency speech recognition with streaming partial results and cross-platform parity|https://github.com/Cap-go/capacitor-speech-recognition/|Speech Recognition
-@capgo/capacitor-textinteraction|github.com/Cap-go|Enable advanced text selection, copy-paste, and interaction features in web views|https://github.com/Cap-go/capacitor-textinteraction/|Text Interaction
+@capgo/capacitor-textinteraction|github.com/Cap-go|Turn text selection and the magnifier lens on or off in the Capacitor WebView on iOS|https://github.com/Cap-go/capacitor-textinteraction/|Text Interaction
 @capgo/capacitor-twilio-video|github.com/Cap-go|Join Twilio Video rooms from Capacitor with native audio, camera, and room lifecycle events|https://github.com/Cap-go/capacitor-twilio-video/|Twilio Video
 @capgo/capacitor-twilio-voice|github.com/Cap-go|Make and receive VoIP calls with Twilio Voice for in-app calling functionality|https://github.com/Cap-go/capacitor-twilio-voice/|Twilio Voice
 @capgo/capacitor-video-player|github.com/Cap-go|Native video playback with subtitles, fullscreen, and comprehensive controls|https://github.com/Cap-go/capacitor-video-player/|Video Player
