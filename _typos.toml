@@ -23,6 +23,8 @@ extend-exclude = [
 extend-ignore-re = [
     # Ignore URLs
     "https?://\\S+",
+    # Cloudflare data center (IATA airport) codes in the hero world map config
+    "colo: '[A-Z]{3}'",
 ]
 
 [default.extend-words]
