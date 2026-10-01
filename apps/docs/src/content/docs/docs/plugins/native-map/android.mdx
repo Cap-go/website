@@ -27,4 +27,6 @@ Pass the same key to `NativeMap.create({ apiKey })` for consistency with web bui
 
 During `create`, the plugin attaches a `MapView` under the Capacitor WebView, calls `bringToFront()` on the WebView, and sets `webView.setBackgroundColor(Color.TRANSPARENT)` so your HTML UI can render above the map.
 
-Size the map with a dedicated container element passed to `NativeMap.create({ element })`. The plugin measures that element and keeps the native map frame in sync on resize and scroll.
+For embedded maps, pass a container element to `NativeMap.create({ element })`. The plugin measures that element and keeps the native map frame in sync on resize and scroll.
+
+For **background mode**, pass `toBack: true` and set `config.x`, `config.y`, `config.width`, and `config.height` (viewport defaults apply when omitted). Call `updateLayout` when the window size or orientation changes so the `MapView` stays aligned with the WebView.

@@ -26,6 +26,8 @@ bun add @capgo/capacitor-native-map
 bunx cap sync
 ```
 
+Requires **Capacitor 8+**. The plugin major version follows Capacitor (package **v8**).
+
 ## Import
 
 ```typescript
@@ -34,12 +36,16 @@ import { NativeMap } from '@capgo/capacitor-native-map';
 
 ## Platform setup
 
+| Platform | Map engine | API key |
+| --- | --- | --- |
+| **iOS** | Apple MapKit | Not required for the map |
+| **Android** | Google Maps SDK | `GOOGLE_MAPS_API_KEY` in the app manifest |
+| **Web** | Google Maps JavaScript API | `apiKey` and optionally `config.mapId` on `create` |
+
 - [iOS setup](/docs/plugins/native-map/ios/) for MapKit and location usage strings.
 - [Android setup](/docs/plugins/native-map/android/) for the Google Maps SDK API key.
 
-Web needs `apiKey` and optionally `config.mapId` for Advanced Markers.
-
-## Usage
+## Embedded map
 
 ```typescript
 import { NativeMap } from '@capgo/capacitor-native-map';
@@ -64,11 +70,49 @@ await map.addMarker({
 await map.destroy();
 ```
 
-## Map behind your WebView
+## Background map (`toBack`) with HTML overlay
 
-On **Android**, the plugin adds the `MapView` under the Capacitor WebView and sets the WebView background to transparent so HTML and CSS can sit above the map.
+Set `toBack: true` so MapKit or Google Maps renders **behind** a transparent Capacitor WebView. Touches on transparent areas pass through to the map (pinch, rotate, tilt, pan). Interactive HTML keeps touches in the WebView.
 
-On **iOS**, the map mounts into the WKWebView scroll hierarchy and stays aligned when the bound element resizes or when Ionic pages re-enter.
+```typescript
+const map = await NativeMap.create({
+  id: 'overlay-map',
+  toBack: true,
+  apiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
+  config: {
+    center: { lat: 37.7749, lng: -122.4194 },
+    zoom: 12,
+    x: 0,
+    y: 0,
+    width: window.innerWidth,
+    height: window.innerHeight,
+  },
+});
 
-Make the WebView and page background transparent where you want the map visible. Keep interactive controls in HTML above the map container.
+await map.updateLayout({ x: 0, y: 0, width: window.innerWidth, height: window.innerHeight });
+```
 
+Mark controls that must receive taps with `data-map-overlay` (or use normal interactive elements such as `button` and `a`). Wrap overlay UI in a root with `data-native-map-overlay-root` when you use a full-screen HUD:
+
+```css
+html.native-map-to-back,
+body.native-map-to-back {
+  background: transparent !important;
+}
+
+:root {
+  --ion-background-color: transparent !important;
+}
+
+.map-overlay-root {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.map-overlay-root [data-map-overlay] {
+  pointer-events: auto;
+}
+```
+
+Use `show()` and `hide()` to toggle the native map without destroying it. Call `updateLayout` when the viewport or safe-area insets change.

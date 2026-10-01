@@ -3,7 +3,7 @@ locale: en
 ---
 # Using @capgo/capacitor-native-map
 
-Google Maps on Android, Apple MapKit on iOS, and Google Maps JS on web with one TypeScript API for markers, camera, and overlays.
+Google Maps on Android, Apple MapKit on iOS, and Google Maps JS on web with one TypeScript API for markers, camera, shapes, clustering, and events.
 
 ## Install
 
@@ -14,51 +14,54 @@ bunx cap sync
 
 ## What This Plugin Exposes
 
-- `create` - Create a map bound to a DOM element.
-- `destroy` - Destroy the map instance and release native resources.
-- `setCamera` - Move or animate the map camera.
-- `addMarker` - Add one marker and return its id.
-- `addMarkers` - Add several markers in one call.
-- `removeMarker` - Remove one marker by id.
-- `fitBounds` - Fit the viewport to latitude and longitude bounds.
-- `enableCurrentLocation` - Show the user location dot when permission allows.
-- `enableClustering` - Enable marker clustering with an optional minimum cluster size.
-- `setOnMapClickListener` - Listen for taps on the map surface.
-- `setOnMarkerClickListener` - Listen for marker taps.
+- `create` — Embedded map in a DOM element, or `toBack: true` for a map behind transparent HTML.
+- `updateLayout` — Resize and reposition the native map (CSS pixels).
+- `setCamera` / `fitBounds` — Camera and viewport control.
+- `addMarker` / `addMarkers` / `removeMarker` — Markers with tap and drag listeners.
+- `enableClustering` — Group dense marker sets.
+- `enableCurrentLocation` — User location dot when permission allows.
+- Overlays — Polygons, polylines, circles, and tile layers (varies by platform).
 
 ## Example Usage
 
-### `create`
+### Embedded map
 
 ```typescript
 import { NativeMap } from '@capgo/capacitor-native-map';
 
-// See getting started: /docs/plugins/native-map/getting-started/
+const map = await NativeMap.create({
+  id: 'main-map',
+  element: document.getElementById('map')!,
+  apiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
+  config: {
+    center: { lat: 37.7749, lng: -122.4194 },
+    zoom: 12,
+  },
+});
+
+map.setOnMapClickListener((e) => console.log(e.latitude, e.longitude));
+await map.destroy();
 ```
 
-### `addMarker`
+### Background map with HTML UI
 
 ```typescript
-import { NativeMap } from '@capgo/capacitor-native-map';
+const map = await NativeMap.create({
+  id: 'stores-map',
+  toBack: true,
+  apiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
+  config: {
+    center: { lat: 40.7128, lng: -74.006 },
+    zoom: 11,
+    width: window.innerWidth,
+    height: window.innerHeight,
+  },
+});
 
-// See getting started: /docs/plugins/native-map/getting-started/
+await map.updateLayout({ width: window.innerWidth, height: window.innerHeight });
 ```
 
-### `setCamera`
-
-```typescript
-import { NativeMap } from '@capgo/capacitor-native-map';
-
-// See getting started: /docs/plugins/native-map/getting-started/
-```
-
-### `destroy`
-
-```typescript
-import { NativeMap } from '@capgo/capacitor-native-map';
-
-// See getting started: /docs/plugins/native-map/getting-started/
-```
+Put interactive controls in HTML with `data-map-overlay` so taps stay on your UI; transparent areas pass gestures to the map.
 
 ## Full Reference
 
