@@ -62,12 +62,23 @@ export function getPlanBillingPrice(plan: PricingPlan, yearly: boolean) {
   return yearly ? plan.price_y : plan.price_m
 }
 
-export function usageToCreditPayload(usage: PricingUsage) {
-  const gibToBytes = (gib: number) => Math.round(gib * 1024 * 1024 * 1024)
+const gibToBytes = (gib: number) => Math.round(gib * 1024 * 1024 * 1024)
 
+// Usage is the billable overage. Credit tiers follow total usage, so with a
+// plan the overage is priced from the plan allowance upward (`included`).
+export function usageToCreditPayload(usage: PricingUsage, plan?: PricingPlan | null) {
   return {
-    mau: Math.round(usage.mau).toString(),
-    bandwidth: gibToBytes(usage.bandwidthGiB).toString(),
-    storage: gibToBytes(usage.storageGiB).toString(),
+    mau: Math.round(usage.mau),
+    bandwidth: gibToBytes(usage.bandwidthGiB),
+    storage: gibToBytes(usage.storageGiB),
+    ...(plan
+      ? {
+          included: {
+            mau: plan.mau,
+            bandwidth: gibToBytes(plan.bandwidth),
+            storage: gibToBytes(plan.storage),
+          },
+        }
+      : {}),
   }
 }
