@@ -4,21 +4,367 @@ import { worldMapPins, worldMapSize } from '@/config/worldMap'
 const { width, height } = worldMapSize
 ---
 
-<div class="hero-map pointer-events-none absolute inset-x-0 top-6 flex justify-center select-none sm:top-10" aria-hidden="true">
+<div class="hero-map pointer-events-none absolute inset-x-0 top-6 flex justify-center select-none sm:top-10" aria-hidden="true" data-hero-map>
   <div class="hero-map-canvas relative" style={`aspect-ratio: ${width} / ${height}`}>
-    <img src="/world-dots.webp" alt="" width="1680" height="855" decoding="async" fetchpriority="high" class="absolute inset-0 h-full w-full opacity-[0.14]" />
+    <!-- Static raster keeps LCP fast; the canvas takes over once the dot data is parsed. -->
+    <img src="/world-dots.webp" alt="" width="1680" height="855" decoding="async" fetchpriority="high" class="map-raster absolute inset-0 h-full w-full opacity-[0.14]" />
+    <canvas class="map-live absolute inset-0 h-full w-full"></canvas>
     {worldMapPins.map((pin, index) => (
-      <span class="map-pin" style={`left: ${((pin.x / width) * 100).toFixed(2)}%; top: ${((pin.y / height) * 100).toFixed(2)}%; --i: ${index}`}>
+      <span class="map-pin" data-pin={index} style={`left: ${((pin.x / width) * 100).toFixed(2)}%; top: ${((pin.y / height) * 100).toFixed(2)}%; --i: ${index}`}>
         <i />
+        <span class="map-label">{pin.name}</span>
       </span>
     ))}
   </div>
 </div>
 
+<script>
+  import { worldMapPins, worldMapSize } from '@/config/worldMap'
+
+  type Ripple = { x: number; y: number; start: number; reach: number; strength: number }
+  type Arc = { from: number; to: number; start: number; duration: number; landed?: boolean }
+
+  const AZURE = [68, 188, 255]
+  const BASE_ALPHA = 0.14
+  const SPOT_RADIUS = 150
+  const LENS_PUSH = 9
+  const PIN_HIT = 46
+
+  const root = document.querySelector<HTMLElement>('[data-hero-map]')
+  const canvas = root?.querySelector<HTMLCanvasElement>('canvas.map-live')
+  const hero = root?.closest('section')
+
+  if (root && canvas && hero) {
+    const ctx = canvas.getContext('2d')
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+    const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches
+    const pinEls = Array.from(root.querySelectorAll<HTMLElement>('[data-pin]'))
+
+    let dots = new Float32Array(0)
+    let scale = 1
+    let dpr = 1
+    let cssW = 0
+    let cssH = 0
+    let visible = true
+    let running = false
+    let ready = false
+
+    // Pointer state: target from events, eased copy used for drawing.
+    const pointer = { clientX: 0, clientY: 0, inside: false }
+    const eased = { x: 0, y: 0, presence: 0, primed: false }
+    let activePin = -1
+    let activeSince = 0
+    let activeLinks: number[] = []
+    let touchPinTimer = 0
+    const ripples: Ripple[] = []
+    const arcs: Arc[] = []
+    let nextAmbient = 0
+
+    const pinPx = () => worldMapPins.map((pin) => ({ x: pin.x * scale, y: pin.y * scale }))
+    let pins = pinPx()
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect()
+      cssW = rect.width
+      cssH = rect.height
+      dpr = Math.min(window.devicePixelRatio || 1, 2)
+      canvas.width = Math.round(cssW * dpr)
+      canvas.height = Math.round(cssH * dpr)
+      scale = cssW / worldMapSize.width
+      pins = pinPx()
+      kick()
+    }
+
+    const localPointer = () => {
+      const rect = canvas.getBoundingClientRect()
+      return { x: pointer.clientX - rect.left, y: pointer.clientY - rect.top }
+    }
+
+    const setActivePin = (index: number, now: number) => {
+      if (index === activePin) return
+      pinEls[activePin]?.classList.remove('is-active')
+      activePin = index
+      activeSince = now
+      activeLinks =
+        index < 0
+          ? []
+          : pins
+              .map((pin, other) => ({ other, d: Math.hypot(pin.x - pins[index].x, pin.y - pins[index].y) }))
+              .filter(({ other }) => other !== index)
+              .sort((a, b) => a.d - b.d)
+              .slice(0, 5)
+              .map(({ other }) => other)
+      pinEls[index]?.classList.add('is-active')
+    }
+
+    const nearestPin = (x: number, y: number) => {
+      let best = -1
+      let bestDist = PIN_HIT
+      pins.forEach((pin, index) => {
+        const d = Math.hypot(pin.x - x, pin.y - y)
+        if (d < bestDist) {
+          best = index
+          bestDist = d
+        }
+      })
+      return best
+    }
+
+    // Quadratic arc lifted above the straight line, like a flight path.
+    const arcPoint = (a: { x: number; y: number }, b: { x: number; y: number }, t: number) => {
+      const mx = (a.x + b.x) / 2
+      const my = (a.y + b.y) / 2 - Math.hypot(b.x - a.x, b.y - a.y) * 0.32
+      const u = 1 - t
+      return { x: u * u * a.x + 2 * u * t * mx + t * t * b.x, y: u * u * a.y + 2 * u * t * my + t * t * b.y }
+    }
+
+    const drawArc = (from: number, to: number, head: number, tail: number, alpha: number) => {
+      if (!ctx || head <= 0) return
+      const a = pins[from]
+      const b = pins[to]
+      const steps = 28
+      ctx.lineWidth = 1.25
+      ctx.lineCap = 'round'
+      let prev = arcPoint(a, b, Math.max(0, tail))
+      for (let s = 1; s <= steps; s++) {
+        const t = tail + ((head - tail) * s) / steps
+        if (t < 0) continue
+        const point = arcPoint(a, b, t)
+        ctx.strokeStyle = `rgba(${AZURE[0]},${AZURE[1]},${AZURE[2]},${(alpha * s) / steps})`
+        ctx.beginPath()
+        ctx.moveTo(prev.x, prev.y)
+        ctx.lineTo(point.x, point.y)
+        ctx.stroke()
+        prev = point
+      }
+      if (head < 1) {
+        const glow = ctx.createRadialGradient(prev.x, prev.y, 0, prev.x, prev.y, 8)
+        glow.addColorStop(0, `rgba(255,255,255,${alpha})`)
+        glow.addColorStop(0.35, `rgba(${AZURE[0]},${AZURE[1]},${AZURE[2]},${alpha * 0.6})`)
+        glow.addColorStop(1, 'rgba(68,188,255,0)')
+        ctx.fillStyle = glow
+        ctx.beginPath()
+        ctx.arc(prev.x, prev.y, 8, 0, Math.PI * 2)
+        ctx.fill()
+      }
+    }
+
+    const spawnAmbientArc = (now: number) => {
+      const from = Math.floor(Math.random() * pins.length)
+      let to = from
+      while (to === from || Math.abs(worldMapPins[to].x - worldMapPins[from].x) < 18) to = Math.floor(Math.random() * pins.length)
+      arcs.push({ from, to, start: now, duration: 1900 })
+    }
+
+    const frame = (now: number) => {
+      running = false
+      if (!ctx || !ready) return
+
+      const target = localPointer()
+      const presenceTarget = pointer.inside && finePointer ? 1 : 0
+      if (!eased.primed || reducedMotion) {
+        eased.x = target.x
+        eased.y = target.y
+        eased.primed = true
+      } else {
+        eased.x += (target.x - eased.x) * 0.2
+        eased.y += (target.y - eased.y) * 0.2
+      }
+      eased.presence = reducedMotion ? presenceTarget : eased.presence + (presenceTarget - eased.presence) * 0.09
+
+      if (finePointer) setActivePin(pointer.inside ? nearestPin(target.x, target.y) : -1, now)
+
+      if (!reducedMotion && visible && now >= nextAmbient) {
+        spawnAmbientArc(now)
+        nextAmbient = now + 2200 + Math.random() * 1600
+      }
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      ctx.clearRect(0, 0, cssW, cssH)
+
+      // Soft light pool under the cursor.
+      if (eased.presence > 0.01) {
+        const pool = ctx.createRadialGradient(eased.x, eased.y, 0, eased.x, eased.y, SPOT_RADIUS * 1.3)
+        pool.addColorStop(0, `rgba(${AZURE[0]},${AZURE[1]},${AZURE[2]},${0.09 * eased.presence})`)
+        pool.addColorStop(1, 'rgba(68,188,255,0)')
+        ctx.fillStyle = pool
+        ctx.fillRect(0, 0, cssW, cssH)
+      }
+
+      // Expire finished ripples and arcs.
+      for (let i = ripples.length - 1; i >= 0; i--) if (now - ripples[i].start > 1600) ripples.splice(i, 1)
+      for (let i = arcs.length - 1; i >= 0; i--) {
+        const arc = arcs[i]
+        if (now - arc.start > arc.duration * 1.45) arcs.splice(i, 1)
+      }
+
+      const radius = 0.21 * scale
+      const idle: number[] = []
+      ctx.fillStyle = `rgba(255,255,255,${BASE_ALPHA})`
+      ctx.beginPath()
+      for (let i = 0; i < dots.length; i += 2) {
+        const x = dots[i] * scale
+        const y = dots[i + 1] * scale
+        const dx = x - eased.x
+        const dy = y - eased.y
+        const dist = Math.hypot(dx, dy)
+        let spot = 0
+        if (eased.presence > 0.01 && dist < SPOT_RADIUS) {
+          const f = 1 - dist / SPOT_RADIUS
+          spot = f * f * (3 - 2 * f) * eased.presence
+        }
+        let wave = 0
+        for (const ripple of ripples) {
+          const age = (now - ripple.start) / 1600
+          const front = age * ripple.reach
+          const rd = Math.hypot(x - ripple.x, y - ripple.y)
+          const band = (rd - front) / 22
+          wave += Math.exp(-band * band) * (1 - age) * ripple.strength
+        }
+        const energy = Math.min(1, spot + wave)
+        if (energy < 0.02) {
+          ctx.moveTo(x + radius, y)
+          ctx.arc(x, y, radius, 0, Math.PI * 2)
+        } else {
+          idle.push(i, energy, spot, dist)
+        }
+      }
+      ctx.fill()
+
+      // Lit dots: brighter, bigger, tinted azure, pushed outward like a lens.
+      for (let j = 0; j < idle.length; j += 4) {
+        const i = idle[j]
+        const energy = idle[j + 1]
+        const spot = idle[j + 2]
+        const dist = idle[j + 3]
+        let x = dots[i] * scale
+        let y = dots[i + 1] * scale
+        if (!reducedMotion && spot > 0 && dist > 0.5) {
+          const push = LENS_PUSH * spot * (dist / SPOT_RADIUS)
+          x += ((x - eased.x) / dist) * push
+          y += ((y - eased.y) / dist) * push
+        }
+        const r = Math.round(255 + (AZURE[0] - 255) * energy)
+        const g = Math.round(255 + (AZURE[1] - 255) * energy)
+        ctx.fillStyle = `rgba(${r},${g},255,${BASE_ALPHA + 0.8 * energy})`
+        ctx.beginPath()
+        ctx.arc(x, y, radius * (1 + 0.9 * energy), 0, Math.PI * 2)
+        ctx.fill()
+      }
+
+      // Ambient "update shipped" arcs; each landing sends a small pulse.
+      for (const arc of arcs) {
+        const t = (now - arc.start) / arc.duration
+        const head = Math.min(1, t)
+        const eased01 = 1 - Math.pow(1 - head, 3)
+        const fade = t > 1 ? 1 - (t - 1) / 0.45 : 1
+        drawArc(arc.from, arc.to, eased01, eased01 - 0.35, 0.75 * fade)
+        if (t >= 1 && !arc.landed) {
+          arc.landed = true
+          ripples.push({ x: pins[arc.to].x, y: pins[arc.to].y, start: now, reach: 70, strength: 0.6 })
+        }
+      }
+
+      // Hovered city fans out to its nearest neighbours.
+      activeLinks.forEach((index, order) => {
+        const local = reducedMotion ? 1 : Math.min(1, Math.max(0, (now - activeSince - order * 70) / 650))
+        const p = 1 - Math.pow(1 - local, 3)
+        drawArc(activePin, index, p, 0, 0.5)
+      })
+
+      const busy =
+        !reducedMotion && (visible || ripples.length > 0 || Math.abs(eased.presence - presenceTarget) > 0.005 || Math.hypot(target.x - eased.x, target.y - eased.y) > 0.5)
+      if (busy && visible) kick()
+    }
+
+    function kick() {
+      if (running || !ready) return
+      running = true
+      requestAnimationFrame(frame)
+    }
+
+    const onMove = (event: PointerEvent) => {
+      pointer.clientX = event.clientX
+      pointer.clientY = event.clientY
+      pointer.inside = true
+      kick()
+    }
+
+    const onLeave = () => {
+      pointer.inside = false
+      kick()
+    }
+
+    const onDown = (event: PointerEvent) => {
+      if ((event.target as Element).closest('a, button, input, textarea, select, [role="button"]')) return
+      pointer.clientX = event.clientX
+      pointer.clientY = event.clientY
+      const { x, y } = localPointer()
+      if (!reducedMotion) ripples.push({ x, y, start: performance.now(), reach: 520, strength: 0.9 })
+      // Touch has no hover: a tap near a city shows its label and arcs for a moment.
+      if (!finePointer) {
+        const pin = nearestPin(x, y)
+        if (pin >= 0) {
+          setActivePin(pin, performance.now())
+          clearTimeout(touchPinTimer)
+          touchPinTimer = window.setTimeout(() => {
+            setActivePin(-1, performance.now())
+            kick()
+          }, 2600)
+        }
+      }
+      kick()
+    }
+
+    const start = async () => {
+      try {
+        const svg = await (await fetch('/world-dots.svg')).text()
+        const coords: number[] = []
+        for (const match of svg.matchAll(/M([\d.]+) ([\d.]+)h0/g)) coords.push(Number(match[1]), Number(match[2]))
+        if (!coords.length) return
+        dots = Float32Array.from(coords)
+      } catch {
+        return
+      }
+      ready = true
+      resize()
+      new ResizeObserver(resize).observe(canvas)
+      new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting
+        if (visible) kick()
+      }).observe(root)
+      document.addEventListener('visibilitychange', () => {
+        visible = document.visibilityState === 'visible'
+        if (visible) kick()
+      })
+      hero.addEventListener('pointermove', onMove, { passive: true })
+      hero.addEventListener('pointerleave', onLeave, { passive: true })
+      hero.addEventListener('pointerdown', onDown, { passive: true })
+      requestAnimationFrame(() => root.classList.add('is-live'))
+    }
+
+    if ('requestIdleCallback' in window) requestIdleCallback(() => start(), { timeout: 1500 })
+    else setTimeout(start, 300)
+  }
+</script>
+
 <style>
   .hero-map-canvas {
     width: min(1180px, 150vw);
     mask-image: radial-gradient(ellipse 60% 62% at 50% 48%, #000 45%, transparent 100%);
+  }
+  .map-raster,
+  .map-live {
+    transition: opacity 0.6s ease;
+  }
+  .map-live {
+    opacity: 0;
+  }
+  .is-live .map-live {
+    opacity: 1;
+  }
+  .is-live .map-raster {
+    opacity: 0;
   }
   .map-pin {
     position: absolute;
@@ -40,6 +386,9 @@ const { width, height } = worldMapSize
     background: #44bcff;
     box-shadow: 0 0 8px rgb(68 188 255 / 0.8);
     opacity: 0.25;
+    transition:
+      scale 0.25s ease,
+      box-shadow 0.25s ease;
     animation: pin-dot 7s ease-in-out infinite both;
     animation-delay: calc(var(--i) * 0.5s);
   }
@@ -50,6 +399,41 @@ const { width, height } = worldMapSize
     opacity: 0;
     animation: pin-ring 7s ease-out infinite both;
     animation-delay: calc(var(--i) * 0.5s);
+  }
+  .map-label {
+    position: absolute;
+    left: 0;
+    bottom: 12px;
+    translate: -50% 4px;
+    padding: 3px 9px;
+    border: 1px solid rgb(68 188 255 / 0.35);
+    border-radius: 999px;
+    background: rgb(8 15 30 / 0.85);
+    backdrop-filter: blur(6px);
+    color: #e2f3ff;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+    opacity: 0;
+    transition:
+      opacity 0.2s ease,
+      translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .map-pin.is-active i {
+    animation: none;
+    opacity: 1;
+    scale: 1.8;
+    box-shadow:
+      0 0 0 4px rgb(68 188 255 / 0.18),
+      0 0 14px rgb(68 188 255 / 0.9);
+  }
+  .map-pin.is-active::before {
+    animation: pin-ring 1.6s ease-out infinite both;
+  }
+  .map-pin.is-active .map-label {
+    opacity: 1;
+    translate: -50% 0;
   }
   @keyframes pin-dot {
     0%,
@@ -77,11 +461,17 @@ const { width, height } = worldMapSize
   }
   @media (prefers-reduced-motion: reduce) {
     .map-pin i,
-    .map-pin::before {
+    .map-pin::before,
+    .map-pin.is-active::before {
       animation: none;
     }
     .map-pin i {
       opacity: 0.7;
+    }
+    .map-raster,
+    .map-live,
+    .map-label {
+      transition: none;
     }
   }
 </style>
