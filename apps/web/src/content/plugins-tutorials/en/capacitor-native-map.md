@@ -14,13 +14,13 @@ bunx cap sync
 
 ## What This Plugin Exposes
 
-- `create` — Embedded map in a DOM element, or `toBack: true` for a map behind transparent HTML.
-- `updateLayout` — Resize and reposition the native map (CSS pixels).
-- `setCamera` / `fitBounds` — Camera and viewport control.
-- `addMarker` / `addMarkers` / `removeMarker` — Markers with tap and drag listeners.
-- `enableClustering` — Group dense marker sets.
-- `enableCurrentLocation` — User location dot when permission allows.
-- Overlays — Polygons, polylines, circles, and tile layers (varies by platform).
+- `create`: embedded map in a DOM element, or `toBack: true` for a map behind transparent HTML.
+- `updateLayout`: resize and reposition the native map (CSS pixels).
+- `setCamera` / `fitBounds`: camera and viewport control.
+- `addMarker` / `addMarkers` / `removeMarker`: markers with tap and drag listeners.
+- `enableClustering`: group dense marker sets.
+- `enableCurrentLocation`: user location dot when permission allows.
+- Overlays: polygons, polylines, circles, and tile layers (varies by platform).
 
 ## Example Usage
 
