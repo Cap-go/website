@@ -130,7 +130,10 @@ export function getDb(): Promise<SQLConnection> {
       });
       await migrate(db);
       return db;
-    })();
+    })().catch((error) => {
+      dbPromise = null; // let the next call retry instead of reusing the failure
+      throw error;
+    });
   }
   return dbPromise;
 }
@@ -138,7 +141,7 @@ export function getDb(): Promise<SQLConnection> {
 
 `walMode` and `performancePresets` are available from plugin version 8.0.49. `performancePresets` also turns on `foreign_keys`, which SQLite leaves off by default, so `ON DELETE CASCADE` actually works.
 
-Call `getDb()` wherever you need the database. The first call opens and migrates, later calls reuse the same promise.
+Call `getDb()` wherever you need the database. The first call opens and migrates, later calls reuse the same promise. If opening or migrating fails, the next call tries again.
 
 ## Schema migrations with PRAGMA user_version
 

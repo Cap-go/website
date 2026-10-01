@@ -200,7 +200,7 @@ If you distribute outside Play (enterprise MDM, sideloaded kiosk devices), it is
 | `@capgo/capacitor-file-sharer` | Uses its own `FileProvider` and MediaStore for `save()`, no config needed |
 | `@capgo/capacitor-downloader` | Downloads into app external storage, then use `save()` to export |
 | `@capgo/capacitor-file-picker` | Picker based, no permission on Android 13+ |
-| `@capgo/capacitor-photo-library` | Full library reading needs `READ_MEDIA_*`, subject to the Play policy above |
+| `@capgo/capacitor-photo-library` | Its manifest adds `READ_MEDIA_*` for full library reading, subject to the Play policy above. `pickMedia()` uses the system picker and needs no permission, so if that is all you use, remove `READ_MEDIA_*` with `tools:node="remove"` |
 
 ## Which directory to use
 

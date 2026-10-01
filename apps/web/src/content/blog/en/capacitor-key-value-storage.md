@@ -258,7 +258,7 @@ Moving from `localStorage` or Preferences to a SQLite store is a one-time copy a
 
 ```typescript
 import { Preferences } from '@capacitor/preferences';
-import { KeyValueStore } from '@capgo/capacitor-fast-sql';
+import { KeyValueStore, type KeyValueValue } from '@capgo/capacitor-fast-sql';
 
 export async function migrateToSqliteStore(): Promise<KeyValueStore> {
   const kv = await KeyValueStore.open({ database: 'app', store: 'settings' });
@@ -268,13 +268,13 @@ export async function migrateToSqliteStore(): Promise<KeyValueStore> {
   for (const key of keys) {
     const { value } = await Preferences.get({ key });
     if (value === null) continue;
-    let parsed: unknown = value;
+    let parsed: KeyValueValue = value;
     try {
-      parsed = JSON.parse(value);
+      parsed = JSON.parse(value) as KeyValueValue;
     } catch {
       // keep plain strings as strings
     }
-    await kv.set(key, parsed as never);
+    await kv.set(key, parsed);
   }
 
   // Also copy from localStorage if older versions used it

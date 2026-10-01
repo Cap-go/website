@@ -143,10 +143,14 @@ export async function ask(
     }),
   ]);
 
+  // If the app is backgrounded mid-answer, neither event may arrive
+  const timeout = setTimeout(() => fail(new Error('Generation timed out')), 60_000);
+
   try {
     await CapgoLLM.sendMessage({ chatId, message });
     return await done;
   } finally {
+    clearTimeout(timeout);
     await Promise.all(handles.map((h) => h.remove()));
   }
 }

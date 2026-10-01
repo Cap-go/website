@@ -147,7 +147,7 @@ openssl pkcs12 -export -inkey ios_distribution.key -in distribution.pem \
 
 The `-legacy` flag matters with OpenSSL 3: without it, the `.p12` uses encryption algorithms that macOS keychain tools reject with an "invalid password" error even when the password is correct.
 
-If you prefer not to install OpenSSL, the [iOS certificate generator](/tools/ios-certificate-generator/) creates the CSR and private key in your browser.
+If you prefer not to install OpenSSL, the [iOS certificate generator](/tools/ios-certificate-generator/) creates the CSR and private key for you. They come from a stateless Capgo endpoint that does not store them, and only its `.cer` to `.p12` converter runs fully in your browser. If your policy requires the key to be generated on your machine, use the OpenSSL commands above.
 
 ### Creating the profile
 

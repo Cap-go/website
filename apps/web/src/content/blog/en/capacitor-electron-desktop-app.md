@@ -125,9 +125,14 @@ async function createWindow() {
 
   win.once('ready-to-show', () => win.show());
 
-  // Open external links in the default browser, never inside the app
+  // Open external links in the default browser, never inside the app.
+  // Only allow https: so a script cannot launch file: or other protocol handlers.
   win.webContents.setWindowOpenHandler(({ url }) => {
-    shell.openExternal(url);
+    try {
+      if (new URL(url).protocol === 'https:') void shell.openExternal(url);
+    } catch {
+      // invalid URL: ignore
+    }
     return { action: 'deny' };
   });
 

@@ -112,7 +112,7 @@ Ad hoc builds install directly on devices you registered in the Apple Developer 
 5. Install it:
    - Drag the `.ipa` onto the device in Finder or **Xcode > Window > Devices and Simulators**.
    - Or host it with an `itms-services` manifest over HTTPS so testers can tap a link. Services like Firebase App Distribution do this for you.
-6. On iOS 16 and later, testers must enable **Developer Mode** (Settings > Privacy & Security). See [how to enable Developer Mode on iOS](/blog/enable-ios-developer-mode-ios16/).
+6. On iOS 16 and later, installing the `.ipa` from a Mac (Xcode or Apple Configurator) requires **Developer Mode** on the device (Settings > Privacy & Security). Installs from an `itms-services` link don't need it. See [how to enable Developer Mode on iOS](/blog/enable-ios-developer-mode-ios16/).
 
 Adding a new tester means registering their UDID, regenerating the profile and rebuilding. Device slots (100 per device family) only reset when your membership year renews, so do not register devices casually.
 
@@ -153,7 +153,7 @@ It is useful for QA of pull request builds because version codes do not need to 
 
 ### Direct APK
 
-Build a signed release APK:
+Build a signed release APK. A new Capacitor project has no `release` signing config, so `assembleRelease` would produce an unsigned APK that won't install. Add a `signingConfigs.release` block (keystore path and passwords, usually read from `key.properties`) to `android/app/build.gradle` and point `buildTypes.release.signingConfig` at it first.
 
 ```bash
 bun run build

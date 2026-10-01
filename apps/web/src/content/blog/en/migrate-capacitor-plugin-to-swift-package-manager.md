@@ -256,13 +256,31 @@ Images, JSON, storyboards and `PrivacyInfo.xcprivacy` must be declared:
     ])
 ```
 
-In code, SPM resources live in `Bundle.module`, while CocoaPods puts them in a resource bundle. Switch with the `SWIFT_PACKAGE` flag, which SwiftPM defines automatically:
+CocoaPods needs the same files declared in the podspec. Put them in a named resource bundle:
+
+```ruby
+s.resource_bundles = {
+  'MyPluginResources' => [
+    'ios/Sources/MyPlugin/Resources/**/*',
+    'ios/Sources/MyPlugin/PrivacyInfo.xcprivacy'
+  ]
+}
+```
+
+In code, SPM resources live in `Bundle.module`, while CocoaPods puts them in that `MyPluginResources.bundle`, next to the plugin class. Switch with the `SWIFT_PACKAGE` flag, which SwiftPM defines automatically:
 
 ```swift
 #if SWIFT_PACKAGE
 let resourceBundle = Bundle.module
 #else
-let resourceBundle = Bundle(for: MyPlugin.self)
+let resourceBundle: Bundle = {
+    let classBundle = Bundle(for: MyPlugin.self)
+    guard let url = classBundle.url(forResource: "MyPluginResources", withExtension: "bundle"),
+          let bundle = Bundle(url: url) else {
+        return classBundle
+    }
+    return bundle
+}()
 #endif
 ```
 

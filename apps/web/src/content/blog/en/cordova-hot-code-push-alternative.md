@@ -19,7 +19,7 @@ faq:
   - question: "Is cordova-hot-code-push still maintained?"
     answer: "No. The nordnet/cordova-hot-code-push repository is archived on GitHub, its last code push was in 2018, and the last npm release is 1.5.3. It was built for older Cordova platforms and WebView setups."
   - question: "What happened to CodePush for Cordova?"
-    answer: "Microsoft archived cordova-plugin-code-push, ended Cordova support in App Center, and retired App Center entirely on March 31, 2025. The CodePush service the plugin talked to is gone."
+    answer: "Microsoft archived cordova-plugin-code-push, ended Cordova support in App Center, and retired the core App Center service, including CodePush, on March 31, 2025. The CodePush service the plugin talked to is gone."
   - question: "Do I need cordova-plugin-ionic-webview for Capgo Cordova live updates?"
     answer: "No, and you should remove it. @capgo/cordova-updater relies on the default Cordova scheme handlers (https://localhost on Android, app://localhost on iOS). The Ionic WebView plugin bypasses them, so downloaded bundles would not load."
   - question: "Is it allowed by Apple and Google to update a Cordova app over the air?"
@@ -40,7 +40,7 @@ Existing installs may still appear to work if you never update Cordova platforms
 
 ### CodePush for Cordova is gone
 
-Microsoft archived `cordova-plugin-code-push`, ended Cordova support in App Center in 2022, and retired App Center on March 31, 2025. The plugin talked to the CodePush service in App Center, so there is no backend left to serve updates. If you moved to self-hosting the CodePush server, you still depend on an archived client plugin.
+Microsoft archived `cordova-plugin-code-push`, ended Cordova support in App Center in 2022, and retired the core App Center service, including build, distribution and CodePush, on March 31, 2025. The plugin talked to the CodePush service in App Center, so there is no backend left to serve updates. If you moved to self-hosting the CodePush server, you still depend on an archived client plugin.
 
 ### Ionic Appflow
 

@@ -199,7 +199,7 @@ export async function startHeartRate(onReading: (m: HeartRateMeasurement) => voi
   const { enabled } = await BluetoothLowEnergy.isEnabled();
   if (!enabled) {
     await BluetoothLowEnergy.openBluetoothSettings();
-    return;
+    throw new Error('Bluetooth is off. Turn it on and tap Connect again.');
   }
 
   listeners.push(
@@ -213,25 +213,44 @@ export async function startHeartRate(onReading: (m: HeartRateMeasurement) => voi
     }),
   );
 
-  const device = await scanForSensor(10_000);
-  await connectTo(device.deviceId);
+  try {
+    const device = await scanForSensor(10_000);
+    await connectTo(device.deviceId);
+  } catch (error) {
+    // Don't leave listeners behind, or each retry would handle every event again
+    await Promise.all(listeners.map((l) => l.remove()));
+    listeners = [];
+    throw error;
+  }
 }
 
 function scanForSensor(timeoutMs: number) {
-  return new Promise<{ deviceId: string; name: string | null }>(async (resolve, reject) => {
-    const timer = setTimeout(async () => {
-      await BluetoothLowEnergy.stopScan();
-      reject(new Error('No heart rate sensor found. Is the strap worn and moist?'));
-    }, timeoutMs);
+  return new Promise<{ deviceId: string; name: string | null }>((resolve, reject) => {
+    let handle: PluginListenerHandle | undefined;
+    let settled = false;
 
-    const handle = await BluetoothLowEnergy.addListener('deviceScanned', async ({ device }) => {
+    const finish = (error: Error | null, device?: { deviceId: string; name: string | null }) => {
+      if (settled) return;
+      settled = true;
       clearTimeout(timer);
-      await handle.remove();
-      await BluetoothLowEnergy.stopScan();
-      resolve(device);
-    });
+      void handle?.remove();
+      void BluetoothLowEnergy.stopScan().catch(() => undefined);
+      if (error) reject(error);
+      else resolve(device!);
+    };
 
-    await BluetoothLowEnergy.startScan({ services: [HEART_RATE_SERVICE] });
+    const timer = setTimeout(
+      () => finish(new Error('No heart rate sensor found. Is the strap worn and moist?')),
+      timeoutMs,
+    );
+
+    BluetoothLowEnergy.addListener('deviceScanned', ({ device }) => finish(null, device))
+      .then((h) => {
+        handle = h;
+        if (settled) void h.remove();
+        return BluetoothLowEnergy.startScan({ services: [HEART_RATE_SERVICE] });
+      })
+      .catch((error) => finish(error instanceof Error ? error : new Error(String(error))));
   });
 }
 
@@ -248,11 +267,12 @@ async function connectTo(deviceId: string) {
 }
 
 async function reconnect(deviceId: string, attempt = 0) {
-  if (attempt > 5) return;
+  // stopHeartRate() clears connectedId, which ends any pending retry chain
+  if (attempt > 5 || connectedId !== deviceId) return;
   try {
     await connectTo(deviceId);
   } catch {
-    setTimeout(() => reconnect(deviceId, attempt + 1), 2000 * (attempt + 1));
+    setTimeout(() => void reconnect(deviceId, attempt + 1), 2000 * (attempt + 1));
   }
 }
 

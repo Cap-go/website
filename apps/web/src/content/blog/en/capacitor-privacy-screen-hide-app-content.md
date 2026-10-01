@@ -151,14 +151,17 @@ A common pattern for banking apps: blur in the switcher, then require Face ID or
 import { App } from '@capacitor/app';
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
-let backgroundedAt = 0;
+// null until the app has really gone to the background
+let backgroundedAt: number | null = null;
 
 App.addListener('appStateChange', async ({ isActive }) => {
   if (!isActive) {
     backgroundedAt = Date.now();
     return;
   }
-  if (Date.now() - backgroundedAt > 60_000) {
+  const away = backgroundedAt === null ? 0 : Date.now() - backgroundedAt;
+  backgroundedAt = null;
+  if (away > 60_000) {
     await NativeBiometric.verifyIdentity({ reason: 'Confirm it is you' });
   }
 });

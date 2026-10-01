@@ -38,7 +38,7 @@ const faqItems = [
   {
     question: 'Is it safe? Is my device data stored?',
     answer:
-      'Capgo signs the profile and only requests read-only identifiers. The device details are passed to the result page in a short-lived cookie that expires after five minutes and is cleared when the page loads. They are not saved to a database or shared with third parties.',
+      'Capgo signs the profile and only requests read-only identifiers. The device details are passed to the result page in the redirect link and in a backup cookie that expires after five minutes. When the result page loads, it removes the details from the address bar and clears the cookie. They are not saved to a database or shared with third parties.',
   },
   {
     question: 'How do I remove the profile after getting my UDID?',
@@ -120,7 +120,7 @@ const troubleshooting = [
   },
   {
     error: 'The result page says no device response is available',
-    fix: 'The five-minute result window has passed or the redirect was opened in another browser. Download and install the profile again from Safari.',
+    fix: 'The redirect did not reach this browser (for example, it was opened in another browser) and the five-minute backup cookie has expired or was already cleared. Download and install the profile again from Safari.',
   },
 ]
 
@@ -306,7 +306,7 @@ const content = {
           <li>It uses Apple’s standard Profile Service flow and only requests read-only identifiers: UDID, product, iOS version, serial, IMEI, MEID, and device name.</li>
           <li>It does not install certificates, VPNs, or device management, and cannot read your data, apps, photos, or location.</li>
           <li>The profile is signed by Capgo, and each download carries a unique challenge that the device response must match.</li>
-          <li>Results are handed to your browser through the result link and a short-lived cookie that expires after five minutes and is cleared when the page loads. Nothing is saved to a database.</li>
+          <li>Results are handed to your browser through the redirect link and a backup cookie that expires after five minutes. The result page removes the details from the address bar and clears the cookie when it loads. Nothing is saved to a database.</li>
         </ul>
       </article>
     </div>

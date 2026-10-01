@@ -222,14 +222,18 @@ SwiftPM unifies traits across the dependency graph. If two packages depend on yo
 
 ### Test every combination
 
+`swift build` on its own builds for the Mac, and a plugin that depends on Capacitor only builds for iOS, so test the traits through a Capacitor test app built for an iOS Simulator. For each combination (no entry for the default traits, `['SQLCipher']`, `['.defaults', 'SQLCipher']` and so on), change `packageTraits` in the test app's config, then sync and build:
+
 ```bash
-swift build                          # default traits
-swift build --traits SQLCipher       # specific traits
-swift build --enable-all-traits
-swift build --disable-default-traits
+bunx cap sync ios
+xcodebuild build \
+  -project ios/App/App.xcodeproj \
+  -scheme App \
+  -destination 'generic/platform=iOS Simulator' \
+  CODE_SIGNING_ALLOWED=NO
 ```
 
-Then test in a Capacitor app with and without the trait in `packageTraits`. Add both builds to CI.
+Add each combination to CI as its own job.
 
 ### Keep CocoaPods users covered
 

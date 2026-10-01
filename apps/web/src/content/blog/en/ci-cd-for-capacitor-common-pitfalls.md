@@ -261,7 +261,7 @@ strategy:
 
 ### Pitfall: wrong artifact type
 
-**Fix:** Google Play needs an AAB (`bundleRelease`), not an APK. iOS needs an App Store export, not a development or ad hoc IPA. Check the export method in your build step.
+**Fix:** Google Play needs an AAB (`bundleRelease`), not an APK. `bundleRelease` still succeeds without a `release` signing config and produces an unsigned AAB that Play rejects, so configure `signingConfigs.release` in `android/app/build.gradle` first. iOS needs an App Store export, not a development or ad hoc IPA. Check the export method in your build step.
 
 ## Stage 6: Live updates
 

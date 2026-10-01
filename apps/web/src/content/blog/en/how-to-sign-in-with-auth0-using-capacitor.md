@@ -237,7 +237,12 @@ export async function getValidAccessToken() {
 
   if (!isLoggedIn) {
     // access token expired: try the stored refresh token
-    await SocialLogin.refresh({ provider: 'oauth2', options: { providerId: 'auth0' } });
+    try {
+      await SocialLogin.refresh({ provider: 'oauth2', options: { providerId: 'auth0' } });
+    } catch {
+      // refresh token expired, revoked or already rotated: sign in again
+      await signInWithAuth0();
+    }
   }
 
   const { accessToken } = await SocialLogin.getAuthorizationCode({
@@ -247,6 +252,8 @@ export async function getValidAccessToken() {
   return accessToken;
 }
 ```
+
+`refresh` rejects when the refresh token is expired or revoked. With rotation on, a refresh token that was already used also fails, so always handle the rejection by sending the user back to sign in.
 
 `refresh` uses the refresh token the plugin saved at login. If you keep the refresh token yourself, call `SocialLogin.refreshToken({ provider: 'oauth2', providerId: 'auth0', refreshToken })`, which returns the full new token response. With rotation on, store the new refresh token every time.
 

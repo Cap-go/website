@@ -108,6 +108,8 @@ export async function openPrivacyOptions() {
 }
 ```
 
+This plugin is the one exception to the order above: its README requires `AdMob.initialize()` before `requestConsentInfo()`, and on iOS the consent form cannot be presented until `initialize()` has run. `initialize()` starts the SDK but does not request ads, so the rule that matters is never to load an ad until `canRequestAds` is true. If you need the SDK to stay stopped until the user has answered, use Option B, where consent runs before `AdMob.start()`.
+
 Check `canRequestAds` before every ad load, not just at startup, because the user can withdraw consent from the privacy options form.
 
 ## Option B: @capgo/capacitor-admob with a native UMP bridge

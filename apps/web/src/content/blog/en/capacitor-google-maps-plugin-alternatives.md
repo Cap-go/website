@@ -199,10 +199,10 @@ await LaunchNavigator.navigate({
 
 ### Geocode without a web service
 
-[`@capgo/nativegeocoder`](/plugins/capacitor-nativegeocoder/) uses the platform geocoders on iOS and Android, which do not need a Google key on device:
+[`@capgo/capacitor-nativegeocoder`](/plugins/capacitor-nativegeocoder/) uses the platform geocoders on iOS and Android, which do not need a Google key on device:
 
 ```ts
-import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 
 const { addresses } = await NativeGeocoder.reverseGeocode({
   latitude: 48.8584,

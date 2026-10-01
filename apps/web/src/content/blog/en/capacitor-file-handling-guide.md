@@ -23,7 +23,7 @@ faq:
   - question: "Is Filesystem.downloadFile deprecated?"
     answer: "Yes. In @capacitor/filesystem 8, downloadFile and its progress listener are deprecated in favor of the @capacitor/file-transfer plugin, which also handles uploads with progress events."
   - question: "Why do large files crash my Capacitor app?"
-    answer: "Reading or writing a large file in one call moves the whole content through the bridge as a base64 string, which can use several times the file size in memory. Use Filesystem.readFileInChunks, native download and upload plugins, or fetch with Capacitor.convertFileSrc so the bytes never pass through the bridge as base64."
+    answer: "Reading or writing a large file in one call moves the whole content through the bridge as a base64 string, which can use several times the file size in memory. Use Filesystem.readFileInChunks to move the file in smaller base64 chunks, or skip base64 entirely with native download and upload plugins or fetch with Capacitor.convertFileSrc."
   - question: "Do I need storage permissions to save files?"
     answer: "Not for your app's own directories (Data, Cache, Library, External). Storage permissions only matter for shared storage on Android 9 and older. On Android 10+, save user-visible files through MediaStore or the system file picker instead."
 ---
@@ -238,6 +238,7 @@ bunx cap sync
 
 ```typescript
 import { FileTransfer } from '@capacitor/file-transfer';
+import { Directory, Filesystem } from '@capacitor/filesystem';
 
 const { uri } = await Filesystem.getUri({ path: 'downloads/report.pdf', directory: Directory.Data });
 

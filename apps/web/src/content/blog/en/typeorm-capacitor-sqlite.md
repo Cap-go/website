@@ -277,9 +277,9 @@ await ds.transaction(async (manager) => {
 });
 ```
 
-Use the `manager` passed to the callback for every query inside the transaction. Calls on `ds` or on a repository obtained outside the callback run outside of it. If the callback throws, TypeORM rolls back.
+Use the `manager` passed to the callback for every query inside the transaction. If the callback throws, TypeORM rolls back.
 
-The driver shares one plugin connection, so keep transactions short and never wait for a network request inside one.
+The Capacitor driver uses a single connection, so there is no isolation between the transaction and other work: a query made through `ds` or another repository while the transaction is open runs on the same connection and is committed or rolled back with it. Don't start unrelated database work until the transaction finishes, keep transactions short, and never wait for a network request inside one.
 
 ## Migrations: generate them with a local sqljs DataSource
 
@@ -366,6 +366,7 @@ cp node_modules/sql.js/dist/sql-wasm.wasm public/assets/
 ```typescript
 // main.ts, before initDatabase()
 import { defineCustomElements as jeepSqlite } from 'jeep-sqlite/loader';
+import { Capacitor } from '@capacitor/core';
 
 if (Capacitor.getPlatform() === 'web') {
   jeepSqlite(window);

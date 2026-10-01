@@ -25,10 +25,10 @@ faq:
   - question: "Will Apple reject an app that uses the audio background mode?"
     answer: "Only if the mode is misused. Apple expects audible content the user started, such as music, podcasts, audiobooks or guided sessions. Playing silent audio to keep the app alive for other work is a common rejection reason under guideline 2.5.4."
   - question: "How do I show play and pause buttons on the lock screen?"
-    answer: "Set metadata and action handlers with @capgo/capacitor-media-session (setMetadata, setPlaybackState, setActionHandler), or enable showNotification in @capgo/native-audio and pass notificationMetadata when you preload a track."
+    answer: "Set metadata and action handlers with @capgo/capacitor-media-session (setMetadata, setPlaybackState, setActionHandler), or enable showNotification in @capgo/capacitor-native-audio and pass notificationMetadata when you preload a track."
 ---
 
-To play audio in the background in Capacitor, you need two native pieces: the `audio` background mode on iOS, and a `mediaPlayback` foreground service on Android. Add lock screen controls through a media session, and your music, podcast or meditation app keeps playing when the user locks the phone or switches apps. This guide shows both setups on Capacitor 8, with `@capgo/native-audio` for native playback and `@capgo/capacitor-media-session` for system controls.
+To play audio in the background in Capacitor, you need two native pieces: the `audio` background mode on iOS, and a `mediaPlayback` foreground service on Android. Add lock screen controls through a media session, and your music, podcast or meditation app keeps playing when the user locks the phone or switches apps. This guide shows both setups on Capacitor 8, with `@capgo/capacitor-native-audio` for native playback and `@capgo/capacitor-media-session` for system controls.
 
 ## Why audio stops in the background
 
@@ -48,10 +48,10 @@ Neither platform gives you background audio by default, and fixing only one side
 
 There are two good architectures:
 
-1. **Native playback with `@capgo/native-audio`**: audio is decoded by AVFoundation on iOS and Media3 ExoPlayer on Android. Best for music players, audiobooks, meditation apps, and anything where the WebView might be throttled. It supports local files, remote URLs, HLS streams, fades, rate, and Now Playing metadata.
+1. **Native playback with `@capgo/capacitor-native-audio`**: audio is decoded by AVFoundation on iOS and Media3 ExoPlayer on Android. Best for music players, audiobooks, meditation apps, and anything where the WebView might be throttled. It supports local files, remote URLs, HLS streams, fades, rate, and Now Playing metadata.
 2. **HTML `<audio>` plus `@capgo/capacitor-media-session`**: keep your existing web player and let the plugin publish metadata and controls to the OS. On Android it also runs the foreground service while the session is playing. Best when you already have a web player or need a single code path for web and native.
 
-| | `@capgo/native-audio` | `<audio>` + media session |
+| | `@capgo/capacitor-native-audio` | `<audio>` + media session |
 | --- | --- | --- |
 | Playback engine | Native | WebView |
 | Web support | Yes (HTML audio fallback) | Yes |
@@ -71,7 +71,7 @@ Open `ios/App/App/Info.plist` and add the background mode. You can also tick "Au
 </array>
 ```
 
-The audio session category matters too. `@capgo/native-audio` sets it for you: with `showNotification: true` it uses `.playback` with the default mode, which interrupts other apps (Spotify pauses) and makes your app the Now Playing app. With `showNotification: false` it uses `.playback` with `mixWithOthers`, which is right for sound effects but does not show lock screen controls. Pick one per app, not per track.
+The audio session category matters too. `@capgo/capacitor-native-audio` sets it for you: with `showNotification: true` it uses `.playback` with the default mode, which interrupts other apps (Spotify pauses) and makes your app the Now Playing app. With `showNotification: false` it uses `.playback` with `mixWithOthers`, which is right for sound effects but does not show lock screen controls. Pick one per app, not per track.
 
 If you play through `<audio>`, WebKit activates the playback session when media starts. Make sure playback is started from a user gesture the first time, or iOS will block it.
 
@@ -110,7 +110,7 @@ The default, starting only during playback, is what most apps want.
 
 ### Option B: start your own foreground service
 
-`@capgo/native-audio` handles playback, focus and the media notification, but it does not create the foreground service. If you use it without the media session plugin, add a small service and a local plugin to your Android project.
+`@capgo/capacitor-native-audio` handles playback, focus and the media notification, but it does not create the foreground service. If you use it without the media session plugin, add a small service and a local plugin to your Android project.
 
 `android/app/src/main/java/com/example/app/PlaybackService.java`:
 
@@ -220,17 +220,17 @@ export const PlaybackService = registerPlugin<PlaybackServicePlugin>('PlaybackSe
 export const isAndroid = Capacitor.getPlatform() === 'android';
 ```
 
-## Play audio natively with @capgo/native-audio
+## Play audio natively with @capgo/capacitor-native-audio
 
 ```bash
-bun add @capgo/native-audio
+bun add @capgo/capacitor-native-audio
 bunx cap sync
 ```
 
 Configure once at startup, then preload and play:
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 import { PlaybackService, isAndroid } from './playback-service';
 
 await NativeAudio.configure({

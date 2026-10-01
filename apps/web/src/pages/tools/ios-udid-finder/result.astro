@@ -174,7 +174,11 @@ const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/builder/
 
   async function loadPayload(): Promise<Record<string, string> | null> {
     const fromQuery = payloadFromQuery()
-    if (fromQuery) return fromQuery
+    if (fromQuery) {
+      // The result endpoint clears the backup cookie, so call it even when the link carried the data.
+      void fetch(UDID_RESULT_ENDPOINT, { credentials: 'same-origin', headers: { Accept: 'application/json' } }).catch(() => undefined)
+      return fromQuery
+    }
 
     try {
       const response = await fetch(UDID_RESULT_ENDPOINT, {

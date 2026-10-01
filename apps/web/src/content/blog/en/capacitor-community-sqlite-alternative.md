@@ -278,40 +278,49 @@ When the source is encrypted with the community plugin's stored secret, the simp
 ```typescript
 import { CapacitorSQLite, SQLiteConnection } from '@capacitor-community/sqlite';
 import { FastSQL } from '@capgo/capacitor-fast-sql';
+import { Preferences } from '@capacitor/preferences';
 
 export async function copyRows(name: string, target: { encryptionKey?: string }) {
+  const done = await Preferences.get({ key: `sqlite-copied:${name}` });
+  if (done.value === '1') return;
+
   const sqlite = new SQLiteConnection(CapacitorSQLite);
   const src = await sqlite.createConnection(name, true, 'secret', 1, false);
   await src.open();
 
-  const dst = await FastSQL.connect({
-    database: name,
-    encrypted: Boolean(target.encryptionKey),
-    encryptionKey: target.encryptionKey,
-  });
+  try {
+    const dst = await FastSQL.connect({
+      database: name,
+      encrypted: Boolean(target.encryptionKey),
+      encryptionKey: target.encryptionKey,
+    });
 
-  const objects = ((await src.query(
-    `SELECT type, name, sql FROM sqlite_master
-     WHERE sql IS NOT NULL AND name NOT LIKE 'sqlite_%'`,
-  )).values ?? []) as { type: string; name: string; sql: string }[];
-  const tables = objects.filter((o) => o.type === 'table');
-  const others = objects.filter((o) => o.type !== 'table');
-  const version = (await src.query('PRAGMA user_version')).values?.[0]?.user_version ?? 0;
+    const objects = ((await src.query(
+      `SELECT type, name, sql FROM sqlite_master
+       WHERE sql IS NOT NULL AND name NOT LIKE 'sqlite_%'`,
+    )).values ?? []) as { type: string; name: string; sql: string }[];
+    const tables = objects.filter((o) => o.type === 'table');
+    const others = objects.filter((o) => o.type !== 'table');
+    const version = (await src.query('PRAGMA user_version')).values?.[0]?.user_version ?? 0;
 
-  await dst.transaction(async (tx) => {
-    for (const t of tables) await tx.execute(t.sql);
-    for (const t of tables) {
-      const rows = (await src.query(`SELECT * FROM "${t.name}"`)).values ?? [];
-      if (!rows.length) continue;
-      const cols = Object.keys(rows[0]);
-      const statement = `INSERT INTO "${t.name}" (${cols.map((c) => `"${c}"`).join(', ')}) VALUES (${cols.map(() => '?').join(', ')})`;
-      await tx.executeBatch(rows.map((r) => ({ statement, params: cols.map((c) => r[c]) })));
-    }
-    for (const o of others) await tx.execute(o.sql);
-    await tx.execute(`PRAGMA user_version = ${Number(version)}`);
-  });
+    await dst.transaction(async (tx) => {
+      for (const t of tables) await tx.execute(t.sql);
+      for (const t of tables) {
+        const rows = (await src.query(`SELECT * FROM "${t.name}"`)).values ?? [];
+        if (!rows.length) continue;
+        const cols = Object.keys(rows[0]);
+        const statement = `INSERT INTO "${t.name}" (${cols.map((c) => `"${c}"`).join(', ')}) VALUES (${cols.map(() => '?').join(', ')})`;
+        await tx.executeBatch(rows.map((r) => ({ statement, params: cols.map((c) => r[c]) })));
+      }
+      for (const o of others) await tx.execute(o.sql);
+      await tx.execute(`PRAGMA user_version = ${Number(version)}`);
+    });
 
-  await sqlite.closeConnection(name, false);
+    // Only mark the copy as done once the transaction has committed
+    await Preferences.set({ key: `sqlite-copied:${name}`, value: '1' });
+  } finally {
+    await sqlite.closeConnection(name, false);
+  }
 }
 ```
 

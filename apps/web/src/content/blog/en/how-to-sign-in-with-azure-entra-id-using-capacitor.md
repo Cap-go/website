@@ -247,9 +247,20 @@ For multitenant apps, the issuer contains each customer's tenant ID. Validate th
 ## Step 7: Refresh and sign out
 
 ```typescript
-// Refresh the Graph token when it expires
-await SocialLogin.refresh({ provider: 'oauth2', options: { providerId: 'azure' } });
-const { accessToken } = await SocialLogin.getAuthorizationCode({ provider: 'oauth2', providerId: 'azure' });
+// Get a valid Graph token, refreshing it when it has expired
+export async function getGraphToken() {
+  const { isLoggedIn } = await SocialLogin.isLoggedIn({ provider: 'oauth2', providerId: 'azure' });
+  if (!isLoggedIn) {
+    try {
+      await SocialLogin.refresh({ provider: 'oauth2', options: { providerId: 'azure' } });
+    } catch {
+      // no session, or the refresh token expired or was revoked
+      await signInWithMicrosoft();
+    }
+  }
+  const { accessToken } = await SocialLogin.getAuthorizationCode({ provider: 'oauth2', providerId: 'azure' });
+  return accessToken;
+}
 
 // Sign out
 await SocialLogin.logout({ provider: 'oauth2', providerId: 'azure' });

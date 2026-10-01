@@ -167,8 +167,8 @@ export async function endShift() {
 
 Two options matter more than they look:
 
-- `backgroundMessage` is what turns on background delivery. Without it, updates are only guaranteed in the foreground on both platforms.
-- `url` sends each point from native code with a `"source": "native"` field in the body. That path does not depend on the WebView, which is what keeps data flowing when Android throttles the WebView or iOS suspends JavaScript.
+- `backgroundMessage` is what turns on background updates, on both platforms. Without it, updates are only guaranteed in the foreground. On Android it is also the text of the foreground service notification.
+- `url` sends each point from native code with a `"source": "native"` field in the body. That path does not depend on the WebView, which is what keeps data flowing when Android throttles the WebView or iOS suspends JavaScript. On Android, setting `url` also makes the service sticky, so points keep reaching your server after the app is swiped away. You need both options for reliable background tracking.
 
 When the access token expires, rotate it without restarting the session:
 

@@ -327,6 +327,6 @@ Finally, automate: build and upload on every tag from GitHub Actions or GitLab C
 
 **Xcode signing errors.** See the error list in [iOS certificates and provisioning profiles explained](/blog/ios-certificates-and-provisioning-profiles-explained/).
 
-**Gradle build fails after upgrading.** Capacitor 8 needs Android Studio Otter (2025.2.1) or newer and JDK 21. See [how to resolve Android build errors in Capacitor](/blog/how-to-resolve-android-build-errors-in-capacitor/).
+**Gradle build fails after upgrading.** Capacitor 8 needs Android Studio Otter (2025.2.1) or newer and JDK 21, as listed in the [Capacitor 8 upgrade guide](/blog/upgrade-capacitor-app-to-capacitor-8/). For other Gradle errors, see [how to resolve Android build errors in Capacitor](/blog/how-to-resolve-android-build-errors-in-capacitor/).
 
 **Google Play upload rejected for target SDK.** Set `targetSdkVersion = 36` in `android/variables.gradle`.

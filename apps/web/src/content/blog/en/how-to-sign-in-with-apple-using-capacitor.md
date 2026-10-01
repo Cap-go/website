@@ -237,17 +237,20 @@ app.post('/apple/callback', async (c) => {
   }
   const tokens = await res.json();
 
+  // Keep the long-lived refresh token on the server (store it against the user).
+  // Only the short-lived tokens go back to the app in the deep link.
   const params = new URLSearchParams({
     success: 'true',
     access_token: tokens.access_token,
     id_token: tokens.id_token,
-    refresh_token: tokens.refresh_token ?? '',
   });
   return c.redirect(`${APP_REDIRECT}?${params}`);
 });
 
 export default app;
 ```
+
+The plugin reads the tokens from the deep link query string, so anything you put there can end up in logs or be read by another app that registers the same custom scheme. Send only the short-lived `access_token` and `id_token`, never the refresh token, verify the `id_token` signature and `nonce` on your server before trusting it, and use a scheme unique to your app (your reverse bundle ID).
 
 The `client_secret` JWT can live up to six months, but generating a short one per request avoids an expiry outage. Keep the `.p8` file in your secret manager, never in the app bundle.
 

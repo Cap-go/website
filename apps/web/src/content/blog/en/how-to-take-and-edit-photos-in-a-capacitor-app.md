@@ -66,7 +66,7 @@ Add these keys to `ios/App/App/Info.plist`. Apple rejects builds with vague stri
 
 ### Android
 
-Capture and gallery picking need no permission. The plugin starts the system camera activity and uses the Android Photo Picker on Android 11+ devices that support it, falling back to `ACTION_OPEN_DOCUMENT` elsewhere. To get the backported picker on older devices with Google Play services, add this inside `<application>` in `AndroidManifest.xml`:
+Capture and gallery picking need no permission. The plugin starts the system camera activity and uses the Android Photo Picker on Android 11+ devices that support it, falling back to `ACTION_OPEN_DOCUMENT` elsewhere. To get the backported picker on older devices with Google Play services, add this inside `<application>` in `AndroidManifest.xml`. The snippet uses the `tools` namespace, so also add `xmlns:tools="http://schemas.android.com/tools"` to the root `<manifest>` element if it is not there yet (a new Capacitor project only declares `xmlns:android`):
 
 ```xml
 <service android:name="com.google.android.gms.metadata.ModuleDependencies"
