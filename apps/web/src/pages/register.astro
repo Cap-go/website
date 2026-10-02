@@ -389,8 +389,20 @@ const content = {
       fetchOptions: { headers: { 'x-captcha-response': getCaptchaId() } },
     }
     // Registration switches accounts; do not retain another user's API cookie.
-    await auth.signOut()
-    const { data: user, error } = await auth.signUp.email(payload)
+    let result: Awaited<ReturnType<typeof auth.signUp.email>>
+    try {
+      const signedOut = await auth.signOut({ disableRedirect: true })
+      if (signedOut.error) throw new Error(signedOut.error.message || 'Unable to clear the previous session')
+      result = await auth.signUp.email(payload)
+    } catch (requestError) {
+      isSubmitting = false
+      submitButton.disabled = false
+      return Toastify({
+        text: requestError instanceof Error ? requestError.message : 'Registration failed. Please try again.',
+        style: { background: '#e7000b' },
+      }).showToast()
+    }
+    const { data: user, error } = result
     if (error) {
       isSubmitting = false
       submitButton.disabled = false
