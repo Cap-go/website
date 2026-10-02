@@ -26,7 +26,7 @@ hero:
 
 - **iOS**: [WatchConnectivity](https://developer.apple.com/documentation/watchconnectivity) with a watchOS target and optional [CapgoWatchSDK](https://github.com/Cap-go/capacitor-watch).
 - **Android**: [Wear OS Data Layer](https://developer.android.com/training/wearables/data/data-layer) (`play-services-wearable`) with a Wear OS module in the same Android project.
-- **Web**: not supported; `getInfo()` returns safe defaults and other methods reject.
+- **Web**: not supported for watch messaging; `getInfo()` and `getPluginVersion()` resolve with safe defaults; messaging methods reject; listeners register but never deliver events
 
 ## Platform support
 
@@ -40,12 +40,12 @@ Capabilities below match the native implementations in [CapgoWatchPlugin.swift](
 | `replyToMessage` | Yes. After `messageReceivedWithReply`. | Yes. Sends on `/capgo/reply/{callbackId}` to the watch node (5 minute pending TTL). | No |
 | `getInfo` | Yes. WatchConnectivity pairing and reachability. | Yes. Connected nodes plus `capgo_watch` capability for watch app install detection. | Returns `isSupported: false` |
 | `getPluginVersion` | Yes | Yes | Returns `{ version: "web" }` |
-| `messageReceived` | Yes | Yes. Incoming `/capgo/message`. | No |
-| `messageReceivedWithReply` | Yes | Yes. Incoming `/capgo/message/withreply`. | No |
-| `applicationContextReceived` | Yes | Yes. Incoming `/capgo/context` DataItem. | No |
-| `userInfoReceived` | Yes | Yes. Incoming `/capgo/userinfo/*` (phone deletes item after delivery). | No |
-| `reachabilityChanged` | Yes | Not emitted on Android | No |
-| `activationStateChanged` | Yes | Not emitted on Android | No |
+| `messageReceived` | Yes | Yes. Incoming `/capgo/message`. | Registers only; no events on web |
+| `messageReceivedWithReply` | Yes | Yes. Incoming `/capgo/message/withreply`. | Registers only; no events on web |
+| `applicationContextReceived` | Yes | Yes. Incoming `/capgo/context` DataItem. | Registers only; no events on web |
+| `userInfoReceived` | Yes | Yes. Incoming `/capgo/userinfo/*` (phone deletes item after delivery). | Registers only; no events on web |
+| `reachabilityChanged` | Yes | Not emitted on Android | Registers only; no events on web |
+| `activationStateChanged` | Yes | Not emitted on Android | Registers only; no events on web |
 
 ### Setup guides
 

@@ -314,7 +314,8 @@ See the [platform support table](/docs/plugins/watch/#platform-support) on the p
 - Watch messaging is not supported in the browser
 - `getInfo()` resolves with `isSupported: false` and other fields at safe defaults
 - `getPluginVersion()` resolves with `{ version: "web" }`
-- `sendMessage`, `updateApplicationContext`, `transferUserInfo`, `replyToMessage`, and listeners reject with an unavailable error
+- `sendMessage`, `updateApplicationContext`, `transferUserInfo`, and `replyToMessage` reject with an unavailable error
+- `addListener` resolves a handle via Capacitor `WebPlugin`, but watch events are unsupported in the browser (callbacks never run)
 
 ## Common Use Cases
 
