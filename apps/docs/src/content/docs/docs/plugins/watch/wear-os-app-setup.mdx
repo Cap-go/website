@@ -108,9 +108,9 @@ Create `wear/src/main/res/values/wear.xml`:
 
 This lets the phone plugin set `isWatchAppInstalled` when it queries capability **`capgo_watch`**.
 
-## Step 4: Wear module manifest
+## Step 4: Wear module manifest and application ID
 
-In `wear/src/main/AndroidManifest.xml`, set the same **`applicationId`** as the phone module in `wear/build.gradle`:
+Use the same **`applicationId`** on the phone app and the wear module. Set it in **`wear/build.gradle`** (and match it in `android/app/build.gradle`):
 
 ```gradle
 android {
@@ -120,7 +120,7 @@ android {
 }
 ```
 
-Example manifest skeleton:
+Example **`wear/src/main/AndroidManifest.xml`** skeleton:
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -151,6 +151,8 @@ Example manifest skeleton:
 
 Create `CapgoWearBridge.kt` in your wear package. It mirrors the paths in `CapgoWatchPlugin.java`.
 
+The phone plugin assigns an opaque `callbackId` for each `/capgo/message/withreply` and sends the reply on `/capgo/reply/{callbackId}`. The watch never sees that ID ahead of time. For concurrent requests, include a **`requestId`** in your JSON payload, echo it from the phone in `replyToMessage`, and key handlers on the watch by that field.
+
 ```kotlin
 package com.example.myapp.wear
 
@@ -169,6 +171,7 @@ import com.google.android.gms.wearable.Wearable
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
 
 class CapgoWearBridge(private val context: Context) :
@@ -223,7 +226,7 @@ class CapgoWearBridge(private val context: Context) :
         }
     }
 
-    private var pendingReplyHandler: ((JSONObject) -> Unit)? = null
+    private val pendingReplyHandlers = ConcurrentHashMap<String, (JSONObject) -> Unit>()
 
     fun sendMessageWithReply(
         data: JSONObject,
@@ -231,17 +234,27 @@ class CapgoWearBridge(private val context: Context) :
         onError: (String) -> Unit = {},
     ) {
         executor.execute {
+            val requestId = UUID.randomUUID().toString()
             try {
                 val nodes = com.google.android.gms.tasks.Tasks.await(nodeClient.connectedNodes)
-                val payload = data.toString().toByteArray(StandardCharsets.UTF_8)
-                pendingReplyHandler = onReply
-                for (node in nodes) {
-                    com.google.android.gms.tasks.Tasks.await(
-                        messageClient.sendMessage(node.id, PATH_MESSAGE_WITH_REPLY, payload),
-                    )
+                if (nodes.isEmpty()) {
+                    onError("No connected phone node")
+                    return@execute
                 }
+                val payloadJson = JSONObject(data.toString()).apply {
+                    put("requestId", requestId)
+                }
+                pendingReplyHandlers[requestId] = onReply
+                val node = nodes.first()
+                com.google.android.gms.tasks.Tasks.await(
+                    messageClient.sendMessage(
+                        node.id,
+                        PATH_MESSAGE_WITH_REPLY,
+                        payloadJson.toString().toByteArray(StandardCharsets.UTF_8),
+                    ),
+                )
             } catch (e: Exception) {
-                pendingReplyHandler = null
+                pendingReplyHandlers.remove(requestId)
                 Log.e(TAG, "sendMessageWithReply failed", e)
                 onError(e.message ?: "sendMessageWithReply failed")
             }
@@ -284,8 +297,10 @@ class CapgoWearBridge(private val context: Context) :
         when {
             path == PATH_MESSAGE -> onMessage?.invoke(json)
             path.startsWith(PATH_REPLY_PREFIX) -> {
-                pendingReplyHandler?.invoke(json)
-                pendingReplyHandler = null
+                val requestId = json.optString("requestId", "")
+                if (requestId.isNotEmpty()) {
+                    pendingReplyHandlers.remove(requestId)?.invoke(json)
+                }
             }
         }
     }
@@ -350,9 +365,10 @@ export async function setupWatchListeners() {
   });
 
   await CapgoWatch.addListener('messageReceivedWithReply', async (event) => {
+    const requestId = event.message.requestId;
     await CapgoWatch.replyToMessage({
       callbackId: event.callbackId,
-      data: { ok: true, echo: event.message },
+      data: { requestId, ok: true, echo: event.message },
     });
   });
 
@@ -415,12 +431,13 @@ On Android, the plugin does **not** emit `reachabilityChanged` or `activationSta
 
 **`isReachable: false` but the watch is paired**
 
-- Wear app not installed on the watch
 - Bluetooth disabled, or watch app not running recently
 - Different `applicationId` or signing keys between modules
+- No Wear OS node currently connected to Google Play services
 
 **`isWatchAppInstalled: false`**
 
+- Wear companion APK not installed on the watch
 - Missing `capgo_watch` entry in `wear.xml`
 - Capability not synced: reinstall the wear APK after changing capabilities
 
@@ -432,6 +449,7 @@ On Android, the plugin does **not** emit `reachabilityChanged` or `activationSta
 **Reply never returns to the watch**
 
 - Phone must call `replyToMessage` with the `callbackId` from `messageReceivedWithReply`
+- Include the same **`requestId`** in the reply JSON if the watch correlates concurrent requests
 - Pending replies expire after **5 minutes** on Android (plugin constant `PENDING_REPLY_TTL_MS`)
 
 ## Next steps
