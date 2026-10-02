@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-02T08:59:43.850Z
-updated_at: 2026-10-02T08:59:45.292Z
+updated_at: 2026-10-02T09:02:33.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/22d99b55-30c3-4cac-af1d-78930e67b10e/public-api-list-api-reference.jpg'
 head_image_alt: 'Capgo Public API List: Complete Developer Reference'
 keywords: 'Capgo, public api list, Capacitor, mobile api, live updates'
