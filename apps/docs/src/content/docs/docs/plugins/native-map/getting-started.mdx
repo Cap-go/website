@@ -1,0 +1,132 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-native-map and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-native-map` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+npm install @capgo/capacitor-native-map
+npx cap sync
+```
+
+Requires **Capacitor 8+**. The plugin major version follows Capacitor (package **v8**).
+
+## Import
+
+```typescript
+import { NativeMap } from '@capgo/capacitor-native-map';
+```
+
+## Platform setup
+
+| Platform | Map engine | API key |
+| --- | --- | --- |
+| **iOS** | Apple MapKit | Not required for the map |
+| **Android** | Google Maps SDK | `GOOGLE_MAPS_API_KEY` in the app manifest |
+| **Web** | Google Maps JavaScript API | `apiKey` and optionally `config.mapId` on `create` |
+
+- [iOS setup](/docs/plugins/native-map/ios/) for MapKit and location usage strings.
+- [Android setup](/docs/plugins/native-map/android/) for the Google Maps SDK API key.
+
+## Embedded map
+
+```typescript
+import { NativeMap } from '@capgo/capacitor-native-map';
+
+const map = await NativeMap.create({
+  id: 'main-map',
+  element: document.getElementById('map')!,
+  apiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
+  config: {
+    center: { lat: 37.7749, lng: -122.4194 },
+    zoom: 12,
+  },
+});
+
+map.setOnMapClickListener((e) => console.log('click', e.latitude, e.longitude));
+
+await map.addMarker({
+  coordinate: { lat: 37.7749, lng: -122.4194 },
+  title: 'San Francisco',
+});
+
+// Call destroy() when leaving the screen or unmounting your map component.
+```
+
+## Background map (`toBack`) with HTML overlay
+
+Set `toBack: true` so MapKit or Google Maps renders **behind** a transparent Capacitor WebView. Touches on transparent areas pass through to the map (pinch, rotate, tilt, pan). Regions that must receive taps need `data-map-overlay` so the README CSS gives them `pointer-events: auto`.
+
+When `toBack` is `true`, `element` is optional in `CreateMapArgs` (the plugin defaults to `document.body`). When `toBack` is `false`, pass `element` as in the embedded example above. `updateLayout`, `show`, and `hide` are on `NativeMap` in the current plugin sources (see the [README overlay section](https://github.com/Cap-go/capacitor-native-map/blob/cursor/capacitor-native-map-v1-82bd/README.md#build-your-own-map-ui)).
+
+```typescript
+const map = await NativeMap.create({
+  id: 'overlay-map',
+  toBack: true,
+  apiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
+  config: {
+    center: { lat: 37.7749, lng: -122.4194 },
+    zoom: 12,
+    x: 0,
+    y: 0,
+    width: window.innerWidth,
+    height: window.innerHeight,
+  },
+});
+
+await map.updateLayout({ x: 0, y: 0, width: window.innerWidth, height: window.innerHeight });
+await map.hide();
+await map.show();
+```
+
+Use a root element with class `map-overlay-root` and `data-native-map-overlay-root`. Put `data-map-overlay` on each HUD region that should receive taps (for example a `header` or `footer` wrapper). Buttons and links inside that region work because the parent has `pointer-events: auto`:
+
+```html
+<div class="map-overlay-root" data-native-map-overlay-root>
+  <header class="hud" data-map-overlay>
+    <button type="button" id="recenter">Recenter</button>
+  </header>
+</div>
+```
+
+Add the page transparency and pointer-event rules from the plugin README:
+
+```css
+html.native-map-to-back,
+body.native-map-to-back {
+  background: transparent !important;
+}
+
+:root {
+  --ion-background-color: transparent !important;
+}
+
+.map-overlay-root {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.map-overlay-root [data-map-overlay] {
+  pointer-events: auto;
+}
+```
+
+Use `show()` and `hide()` to toggle the native map without destroying it. Call `updateLayout` when the viewport or safe-area insets change.

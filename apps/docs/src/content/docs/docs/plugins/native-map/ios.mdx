@@ -1,0 +1,40 @@
+---
+title: iOS setup
+description: "MapKit and location permission setup for @capgo/capacitor-native-map."
+sidebar:
+  order: 3
+---
+
+iOS uses **Apple MapKit**. You do **not** need a Google Maps API key on iOS.
+
+If you call `enableCurrentLocation`, add a location usage string to `ios/App/App/Info.plist`:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We use your location to show you on the map.</string>
+```
+
+The plugin requests location with `keepAlive` so `enableCurrentLocation` can resolve reliably after permission is granted.
+
+## Map behind the WebView
+
+The native `MKMapView` mounts into the Capacitor WKWebView hierarchy and tracks the bound DOM element through `onResize` and `onDisplay`. When Ionic pages re-enter, call paths in the plugin re-mount the map if WebKit rebuilt scroll views.
+
+Use a transparent WebView or page background where the map should show through HTML layers above the map container.
+
+In `toBack` mode, put `data-map-overlay` on HUD wrappers so the README overlay CSS enables taps. The native touch router sends gestures to the map when the hit target is transparent and not under an interactive element.
+
+## iOS-only plugin methods
+
+The native iOS bridge also exposes `takeSnapshot`, `searchAutocomplete`, `searchPlaces`, `searchResolve`, `geocode`, and `reverseGeocode`. These are not on the `NativeMap` class wrapper yet. Call them on the low-level plugin handle when you need MapKit search or geocoding on iOS:
+
+```typescript
+import { registerPlugin } from '@capacitor/core';
+
+type NativeMapBridge = {
+  takeSnapshot(options: { id: string }): Promise<{ image: string }>;
+  geocode(options: { address: string }): Promise<Record<string, unknown>>;
+};
+
+const NativeMapBridge = registerPlugin<NativeMapBridge>('NativeMap');
+```

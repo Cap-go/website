@@ -1,0 +1,58 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-permissions and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-permissions` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+npm install @capgo/capacitor-permissions
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { Permissions } from '@capgo/capacitor-permissions';
+```
+
+## Platform setup
+
+- [iOS setup](/docs/plugins/permissions/ios/) for Info.plist usage strings per `PermissionName`.
+- [Android setup](/docs/plugins/permissions/android/) for `uses-permission` entries and minSdk 24.
+
+## Usage
+
+```typescript
+import { Permissions } from '@capgo/capacitor-permissions';
+
+export async function ensureCamera(): Promise<boolean> {
+  const { status } = await Permissions.check({ permission: 'camera' });
+  if (status === 'granted') return true;
+  const { status: afterRequest } = await Permissions.request({ permission: 'camera' });
+  return afterRequest === 'granted';
+}
+```
+
+When status is `blocked`, send the user to settings:
+
+```typescript
+await Permissions.openSettings({ type: 'application' });
+```
+
