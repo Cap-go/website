@@ -311,9 +311,10 @@ See the [platform support table](/docs/plugins/watch/#platform-support) on the p
 
 ### Web
 
-- Not supported
-- All methods reject with unavailable error (messages mention Apple Watch in web stub strings)
-- `getInfo()` returns `isSupported: false`
+- Watch messaging is not supported in the browser
+- `getInfo()` resolves with `isSupported: false` and other fields at safe defaults
+- `getPluginVersion()` resolves with `{ version: "web" }`
+- `sendMessage`, `updateApplicationContext`, `transferUserInfo`, `replyToMessage`, and listeners reject with an unavailable error
 
 ## Common Use Cases
 

@@ -2,7 +2,7 @@
 title: Creating a Wear OS app
 description: Step-by-step guide to adding a Wear OS companion module to your Capacitor Android project and wiring it to @capgo/capacitor-watch over the Data Layer.
 sidebar:
-  order: 4
+  order: 5
 ---
 
 import { Steps, Aside, FileTree } from '@astrojs/starlight/components';
@@ -173,6 +173,7 @@ import java.nio.charset.StandardCharsets
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class CapgoWearBridge(private val context: Context) :
     MessageClient.OnMessageReceivedListener,
@@ -189,6 +190,7 @@ class CapgoWearBridge(private val context: Context) :
     }
 
     private val executor = Executors.newSingleThreadExecutor()
+    private val timeoutScheduler = Executors.newSingleThreadScheduledExecutor()
     private val messageClient = Wearable.getMessageClient(context)
     private val dataClient = Wearable.getDataClient(context)
     private val nodeClient = Wearable.getNodeClient(context)
@@ -207,6 +209,10 @@ class CapgoWearBridge(private val context: Context) :
     fun stop() {
         messageClient.removeListener(this)
         dataClient.removeListener(this)
+        pendingReplyTimeouts.values.forEach { it.cancel(false) }
+        pendingReplyTimeouts.clear()
+        pendingReplyHandlers.clear()
+        timeoutScheduler.shutdownNow()
     }
 
     fun sendMessage(data: JSONObject, onError: (String) -> Unit = {}) {
@@ -227,6 +233,8 @@ class CapgoWearBridge(private val context: Context) :
     }
 
     private val pendingReplyHandlers = ConcurrentHashMap<String, (JSONObject) -> Unit>()
+    private val pendingReplyTimeouts = ConcurrentHashMap<String, java.util.concurrent.ScheduledFuture<*>>()
+    private val outboundUserInfoPaths = ConcurrentHashMap.newKeySet<String>()
 
     fun sendMessageWithReply(
         data: JSONObject,
@@ -245,6 +253,17 @@ class CapgoWearBridge(private val context: Context) :
                     put("requestId", requestId)
                 }
                 pendingReplyHandlers[requestId] = onReply
+                val timeout = timeoutScheduler.schedule(
+                    {
+                        if (pendingReplyHandlers.remove(requestId) != null) {
+                            pendingReplyTimeouts.remove(requestId)
+                            onError("Reply timed out after 5 minutes")
+                        }
+                    },
+                    5,
+                    TimeUnit.MINUTES,
+                )
+                pendingReplyTimeouts[requestId] = timeout
                 val node = nodes.first()
                 com.google.android.gms.tasks.Tasks.await(
                     messageClient.sendMessage(
@@ -255,6 +274,7 @@ class CapgoWearBridge(private val context: Context) :
                 )
             } catch (e: Exception) {
                 pendingReplyHandlers.remove(requestId)
+                pendingReplyTimeouts.remove(requestId)?.cancel(false)
                 Log.e(TAG, "sendMessageWithReply failed", e)
                 onError(e.message ?: "sendMessageWithReply failed")
             }
@@ -279,6 +299,7 @@ class CapgoWearBridge(private val context: Context) :
         executor.execute {
             try {
                 val path = PATH_USER_INFO_PREFIX + UUID.randomUUID()
+                outboundUserInfoPaths.add(path)
                 val request = PutDataMapRequest.create(path)
                 request.dataMap.putString("payload", userInfo.toString())
                 request.setUrgent()
@@ -292,13 +313,19 @@ class CapgoWearBridge(private val context: Context) :
 
     override fun onMessageReceived(event: MessageEvent) {
         val path = event.path
-        val json = JSONObject(String(event.data, StandardCharsets.UTF_8))
+        val json = try {
+            JSONObject(String(event.data, StandardCharsets.UTF_8))
+        } catch (e: Exception) {
+            Log.w(TAG, "Ignoring non-JSON message on $path", e)
+            return
+        }
 
         when {
             path == PATH_MESSAGE -> onMessage?.invoke(json)
             path.startsWith(PATH_REPLY_PREFIX) -> {
                 val requestId = json.optString("requestId", "")
                 if (requestId.isNotEmpty()) {
+                    pendingReplyTimeouts.remove(requestId)?.cancel(false)
                     pendingReplyHandlers.remove(requestId)?.invoke(json)
                 }
             }
@@ -312,11 +339,19 @@ class CapgoWearBridge(private val context: Context) :
             val path = item.uri.path ?: continue
             val map = DataMapItem.fromDataItem(item).dataMap
             val payload = map.getString("payload", "{}")
-            val json = JSONObject(payload)
+            val json = try {
+                JSONObject(payload)
+            } catch (e: Exception) {
+                Log.w(TAG, "Ignoring non-JSON DataItem on $path", e)
+                continue
+            }
 
             when {
                 path == PATH_CONTEXT -> onContext?.invoke(json)
                 path.startsWith(PATH_USER_INFO_PREFIX) -> {
+                    if (outboundUserInfoPaths.remove(path)) {
+                        continue
+                    }
                     onUserInfo?.invoke(json)
                     dataClient.deleteDataItems(item.uri)
                 }
