@@ -305,6 +305,7 @@ class CapgoWearBridge(private val context: Context) :
                 request.setUrgent()
                 com.google.android.gms.tasks.Tasks.await(dataClient.putDataItem(request.asPutDataRequest()))
             } catch (e: Exception) {
+                outboundUserInfoPaths.remove(path)
                 Log.e(TAG, "transferUserInfo failed", e)
                 onError(e.message ?: "transferUserInfo failed")
             }
