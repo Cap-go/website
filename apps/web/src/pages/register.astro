@@ -378,6 +378,7 @@ const content = {
     submitButton.disabled = true
 
     const registrationDevice = getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)
+    const captchaToken = getCaptchaId()
     const payload = {
       email: email.value,
       password: password.value,
@@ -386,7 +387,7 @@ const content = {
       lastName: lastName.value,
       ...registrationDevice,
       callbackURL: 'https://console.capgo.app/login/',
-      fetchOptions: { headers: { 'x-captcha-response': getCaptchaId() } },
+      fetchOptions: { headers: captchaToken ? { 'x-captcha-response': captchaToken } : {} },
     }
     // Registration switches accounts; do not retain another user's API cookie.
     let result: Awaited<ReturnType<typeof auth.signUp.email>>
