@@ -91,10 +91,13 @@ If you prefer Manual Setup, install the plugin by running the following commands
      // Process the request
      const result = await processWatchRequest(event.message);
 
-     // Send reply back to watch
+     // Send reply back to watch (include requestId for Wear OS correlation)
      await CapgoWatch.replyToMessage({
        callbackId: event.callbackId,
-       data: { result }
+       data: {
+         requestId: event.message.requestId,
+         result,
+       },
      });
    });
    ```

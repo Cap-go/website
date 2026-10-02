@@ -297,8 +297,8 @@ class CapgoWearBridge(private val context: Context) :
 
     fun transferUserInfo(userInfo: JSONObject, onError: (String) -> Unit = {}) {
         executor.execute {
+            val path = PATH_USER_INFO_PREFIX + UUID.randomUUID()
             try {
-                val path = PATH_USER_INFO_PREFIX + UUID.randomUUID()
                 outboundUserInfoPaths.add(path)
                 val request = PutDataMapRequest.create(path)
                 request.dataMap.putString("payload", userInfo.toString())
