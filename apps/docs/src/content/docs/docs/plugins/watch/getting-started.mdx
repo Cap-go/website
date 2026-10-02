@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Learn how to install and configure the Capacitor Watch plugin for bidirectional communication between iPhone and Apple Watch.
+description: Install and configure @capgo/capacitor-watch for Apple Watch (iOS) and Wear OS (Android) bidirectional messaging.
 sidebar:
   order: 2
 ---
@@ -70,7 +70,15 @@ If you prefer Manual Setup, install the plugin by running the following commands
        The plugin automatically activates the WCSession when the plugin loads.
      </TabItem>
      <TabItem label="Android">
-       Apple Watch is only supported on iOS. On Android, all methods will reject with "Apple Watch is only supported on iOS" error. The `getInfo()` method returns `isSupported: false`.
+       **Required Wear OS setup:**
+
+       1. Add a **Wear OS module** to your Android project (same `applicationId` and signing as the phone app).
+       2. Declare the **`capgo_watch`** capability in the wear module (see [Creating a Wear OS app](/docs/plugins/watch/wear-os-app-setup/)).
+       3. Implement Data Layer listeners on the watch using the plugin paths (`/capgo/message`, `/capgo/context`, and others).
+
+       The phone plugin registers Wearable API listeners when it loads. Use `getInfo()` to check connected nodes and whether the watch app is detected.
+
+       Full steps: [Creating a Wear OS app](/docs/plugins/watch/wear-os-app-setup/).
      </TabItem>
    </Tabs>
 
@@ -244,11 +252,11 @@ Reply to a message that requested a response.
 Get watch connectivity status.
 
 **Returns:** `WatchInfo` object with:
-- `isSupported`: boolean - Whether WatchConnectivity is available
-- `isPaired`: boolean - Whether a watch is paired
-- `isWatchAppInstalled`: boolean - Whether watch app is installed
-- `isReachable`: boolean - Whether watch is reachable
-- `activationState`: number - Session state (0/1/2)
+- `isSupported`: boolean - Whether watch APIs are available on this platform
+- `isPaired`: boolean - Apple Watch paired (iOS) or at least one Wear OS node connected (Android)
+- `isWatchAppInstalled`: boolean - Companion watch app installed (iOS) or `capgo_watch` capability detected (Android)
+- `isReachable`: boolean - Whether the watch is reachable for immediate messaging
+- `activationState`: number - Session state (iOS WCSession; Android 2 when a node is connected, 0 otherwise)
 
 #### `getPluginVersion()`
 Get the native plugin version.
@@ -261,8 +269,8 @@ Get the native plugin version.
 | `messageReceivedWithReply` | Message expecting a reply (includes callbackId) |
 | `applicationContextReceived` | Context update from watch |
 | `userInfoReceived` | User info transfer from watch |
-| `reachabilityChanged` | Watch connectivity changed |
-| `activationStateChanged` | Session activation state changed |
+| `reachabilityChanged` | Watch connectivity changed (iOS only) |
+| `activationStateChanged` | Session activation state changed (iOS only) |
 
 ## Communication Patterns
 
@@ -283,20 +291,28 @@ Get the native plugin version.
 
 ## Platform Notes
 
-### iOS
+See the [platform support table](/docs/plugins/watch/#platform-support) on the plugin overview for a method-by-method matrix.
+
+### iOS (Apple Watch)
+
 - Requires iOS 15.0 or later
 - Uses WatchConnectivity framework
 - Session automatically activates on plugin load
 - Supports background delivery for context and user info
+- Emits `reachabilityChanged` and `activationStateChanged`
 
-### Android
-- Not supported (Apple Watch is iOS-only)
-- All methods reject with appropriate error
-- `getInfo()` returns `isSupported: false`
+### Android (Wear OS)
+
+- Requires Google Play services with Wear OS Data Layer (`play-services-wearable`, included with the plugin)
+- Phone and wear APKs must share the **same `applicationId`** and **signing key**
+- Watch app must advertise capability **`capgo_watch`**
+- Does **not** emit `reachabilityChanged` or `activationStateChanged`; poll `getInfo()` when needed
+- Setup guide: [Creating a Wear OS app](/docs/plugins/watch/wear-os-app-setup/)
 
 ### Web
+
 - Not supported
-- All methods reject with unavailable error
+- All methods reject with unavailable error (messages mention Apple Watch in web stub strings)
 - `getInfo()` returns `isSupported: false`
 
 ## Common Use Cases

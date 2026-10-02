@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-watch"
-description: "Capacitor plugin for Apple Watch communication with bidirectional messaging support."
+description: "Capacitor plugin for Apple Watch and Wear OS with bidirectional messaging between phone and watch apps."
 tableOfContents: false
 next: false
 prev: false
@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Apple Watch communication plugin for Capacitor. Provides bidirectional messaging between iPhone and Apple Watch using WatchConnectivity."
+  tagline: "Apple Watch and Wear OS communication for Capacitor. Bidirectional messaging between iPhone and watchOS (WatchConnectivity) or Android phone and Wear OS (Data Layer)."
   actions:
     - text: Get started
       link: /docs/plugins/watch/getting-started/
@@ -22,7 +22,35 @@ hero:
 
 ## Overview
 
-Apple Watch communication plugin for Capacitor. Provides bidirectional messaging between iPhone and Apple Watch using WatchConnectivity.
+`@capgo/capacitor-watch` connects your Capacitor phone app to a companion watch app:
+
+- **iOS**: [WatchConnectivity](https://developer.apple.com/documentation/watchconnectivity) with a watchOS target and optional [CapgoWatchSDK](https://github.com/Cap-go/capacitor-watch).
+- **Android**: [Wear OS Data Layer](https://developer.android.com/training/wearables/data/data-layer) (`play-services-wearable`) with a Wear OS module in the same Android project.
+- **Web**: not supported; `getInfo()` returns safe defaults and other methods reject.
+
+## Platform support
+
+Capabilities below match the native implementations in [CapgoWatchPlugin.swift](https://github.com/Cap-go/capacitor-watch/blob/main/ios/Sources/CapgoWatchPlugin/CapgoWatchPlugin.swift) and [CapgoWatchPlugin.java](https://github.com/Cap-go/capacitor-watch/blob/main/android/src/main/java/app/capgo/capacitor/watch/CapgoWatchPlugin.java).
+
+| Capability | iOS (Apple Watch) | Android (Wear OS) | Web |
+| --- | --- | --- | --- |
+| `sendMessage` | Yes. Requires activated session and `isReachable`. | Yes. Sends on `/capgo/message` to connected nodes. Rejects if no Wear OS node is connected. | No |
+| `updateApplicationContext` | Yes. Latest value only via WatchConnectivity. | Yes. DataItem at `/capgo/context` with JSON in `payload`. | No |
+| `transferUserInfo` | Yes. Queued user-info transfer. | Yes. DataItem at `/capgo/userinfo/{uuid}` with JSON in `payload`. | No |
+| `replyToMessage` | Yes. After `messageReceivedWithReply`. | Yes. Sends on `/capgo/reply/{callbackId}` to the watch node (5 minute pending TTL). | No |
+| `getInfo` | Yes. WatchConnectivity pairing and reachability. | Yes. Connected nodes plus `capgo_watch` capability for watch app install detection. | Returns `isSupported: false` |
+| `getPluginVersion` | Yes | Yes | Returns `{ version: "web" }` |
+| `messageReceived` | Yes | Yes. Incoming `/capgo/message`. | No |
+| `messageReceivedWithReply` | Yes | Yes. Incoming `/capgo/message/withreply`. | No |
+| `applicationContextReceived` | Yes | Yes. Incoming `/capgo/context` DataItem. | No |
+| `userInfoReceived` | Yes | Yes. Incoming `/capgo/userinfo/*` (phone deletes item after delivery). | No |
+| `reachabilityChanged` | Yes | Not emitted on Android | No |
+| `activationStateChanged` | Yes | Not emitted on Android | No |
+
+### Setup guides
+
+- [Creating a watchOS app](/docs/plugins/watch/watch-app-setup/) (Apple Watch + CapgoWatchSDK)
+- [Creating a Wear OS app](/docs/plugins/watch/wear-os-app-setup/) (Wear module + Data Layer paths)
 
 ## Core Capabilities
 
@@ -45,8 +73,8 @@ Apple Watch communication plugin for Capacitor. Provides bidirectional messaging
 | `addListener` | Listen for messages from the watch that require a reply. |
 | `addListener` | Listen for application context updates from the watch. |
 | `addListener` | Listen for user info transfers from the watch. |
-| `addListener` | Listen for watch reachability changes. |
-| `addListener` | Listen for session activation state changes. |
+| `addListener` | Listen for watch reachability changes (iOS only). |
+| `addListener` | Listen for session activation state changes (iOS only). |
 | `removeAllListeners` | Remove all listeners for this plugin. |
 
 ## Source Of Truth

@@ -1,0 +1,446 @@
+---
+title: Creating a Wear OS app
+description: Step-by-step guide to adding a Wear OS companion module to your Capacitor Android project and wiring it to @capgo/capacitor-watch over the Data Layer.
+sidebar:
+  order: 4
+---
+
+import { Steps, Aside, FileTree } from '@astrojs/starlight/components';
+
+This guide walks you through a Wear OS companion app that talks to your Capacitor phone app through the same Data Layer paths as `CapgoWatchPlugin` on Android (`play-services-wearable`).
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- **Android Studio** (latest stable)
+- **An existing Capacitor Android project** (`npx cap add android` if needed)
+- **A physical Wear OS watch paired with the phone** (recommended for end-to-end testing)
+- **The same signing key** for the phone app and the Wear OS module release builds
+
+## How the plugin maps to Wear OS
+
+The phone-side plugin (`CapgoWatchPlugin.java`) uses these Data Layer routes:
+
+| Route | Type | Purpose |
+| --- | --- | --- |
+| `/capgo/message` | Message | One-way messages (phone to watch and watch to phone) |
+| `/capgo/message/withreply` | Message | Watch to phone messages that expect a JS reply via `replyToMessage` |
+| `/capgo/reply/{callbackId}` | Message | Phone reply payload back to the watch |
+| `/capgo/context` | DataItem | Latest application context (`payload` string holds JSON) |
+| `/capgo/userinfo/{uuid}` | DataItem | Queued user info (`payload` string holds JSON) |
+
+The phone detects your watch app with the **`capgo_watch`** capability (`WATCH_APP_CAPABILITY` in the plugin).
+
+## Project structure
+
+After completing this guide, your Android tree will look like this:
+
+<FileTree>
+- android/
+  - app/ (phone module, Capacitor host)
+  - wear/ (new Wear OS module)
+    - src/main/
+      - AndroidManifest.xml
+      - java/.../WearMainActivity.kt
+      - java/.../CapgoWearBridge.kt
+      - res/values/wear.xml
+  - settings.gradle
+</FileTree>
+
+## Step 1: Add a Wear OS module
+
+<Steps>
+1. Open the **`android`** folder in Android Studio (not the repo root).
+
+2. Choose **File → New → New Module...**
+
+3. Select **Wear OS → Empty Wear App** (or **Wear OS App** with Compose if you prefer).
+
+4. Configure the module:
+   - **Module name**: `wear` (or your preferred name)
+   - **Package name**: match your phone app namespace when possible
+   - **Minimum SDK**: align with your project (plugin `minSdk` is 24)
+
+5. Click **Finish** and let Gradle sync.
+</Steps>
+
+<Aside type="caution">
+The phone app and Wear OS app must share the **same `applicationId`** and be signed with the **same release key** for the Data Layer to pair them in production.
+</Aside>
+
+## Step 2: Gradle dependencies
+
+The Capacitor plugin already depends on `com.google.android.gms:play-services-wearable:18.2.0`. Your **wear** module needs the same API.
+
+In `wear/build.gradle` (or `wear/build.gradle.kts`), add:
+
+```gradle
+dependencies {
+    implementation "com.google.android.gms:play-services-wearable:18.2.0"
+    // Your UI dependencies (Compose, etc.)
+}
+```
+
+Sync Gradle after editing.
+
+Ensure `settings.gradle` includes the wear module:
+
+```gradle
+include ':app'
+include ':wear'
+```
+
+Run **`npx cap sync android`** from your Capacitor project when you change native modules, then rebuild in Android Studio.
+
+## Step 3: Declare the `capgo_watch` capability
+
+Create `wear/src/main/res/values/wear.xml`:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="android_wear_capabilities" translatable="false" tools:ignore="UnusedResources">
+        <item>capgo_watch</item>
+    </string-array>
+</resources>
+```
+
+This lets the phone plugin set `isWatchAppInstalled` when it queries capability **`capgo_watch`**.
+
+## Step 4: Wear module manifest
+
+In `wear/src/main/AndroidManifest.xml`, set the same **`applicationId`** as the phone module in `wear/build.gradle`:
+
+```gradle
+android {
+    defaultConfig {
+        applicationId "com.example.myapp" // must match android/app
+    }
+}
+```
+
+Example manifest skeleton:
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault">
+
+        <activity
+            android:name=".WearMainActivity"
+            android:exported="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.DeviceDefault">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+```
+
+## Step 5: Wear-side bridge (Kotlin)
+
+Create `CapgoWearBridge.kt` in your wear package. It mirrors the paths in `CapgoWatchPlugin.java`.
+
+```kotlin
+package com.example.myapp.wear
+
+import android.content.Context
+import android.net.Uri
+import android.util.Log
+import com.google.android.gms.wearable.CapabilityClient
+import com.google.android.gms.wearable.DataClient
+import com.google.android.gms.wearable.DataEvent
+import com.google.android.gms.wearable.DataEventBuffer
+import com.google.android.gms.wearable.DataMapItem
+import com.google.android.gms.wearable.MessageClient
+import com.google.android.gms.wearable.MessageEvent
+import com.google.android.gms.wearable.PutDataMapRequest
+import com.google.android.gms.wearable.Wearable
+import org.json.JSONObject
+import java.nio.charset.StandardCharsets
+import java.util.UUID
+import java.util.concurrent.Executors
+
+class CapgoWearBridge(private val context: Context) :
+    MessageClient.OnMessageReceivedListener,
+    DataClient.OnDataChangedListener {
+
+    companion object {
+        private const val TAG = "CapgoWearBridge"
+        const val CAPABILITY = "capgo_watch"
+        const val PATH_MESSAGE = "/capgo/message"
+        const val PATH_MESSAGE_WITH_REPLY = "/capgo/message/withreply"
+        const val PATH_REPLY_PREFIX = "/capgo/reply/"
+        const val PATH_CONTEXT = "/capgo/context"
+        const val PATH_USER_INFO_PREFIX = "/capgo/userinfo/"
+    }
+
+    private val executor = Executors.newSingleThreadExecutor()
+    private val messageClient = Wearable.getMessageClient(context)
+    private val dataClient = Wearable.getDataClient(context)
+    private val nodeClient = Wearable.getNodeClient(context)
+
+    var onMessage: ((JSONObject) -> Unit)? = null
+    var onContext: ((JSONObject) -> Unit)? = null
+    var onUserInfo: ((JSONObject) -> Unit)? = null
+
+    fun start() {
+        messageClient.addListener(this)
+        dataClient.addListener(this)
+        Wearable.getCapabilityClient(context)
+            .addLocalCapability(CAPABILITY)
+    }
+
+    fun stop() {
+        messageClient.removeListener(this)
+        dataClient.removeListener(this)
+    }
+
+    fun sendMessage(data: JSONObject, onError: (String) -> Unit = {}) {
+        executor.execute {
+            try {
+                val nodes = com.google.android.gms.tasks.Tasks.await(nodeClient.connectedNodes)
+                val payload = data.toString().toByteArray(StandardCharsets.UTF_8)
+                for (node in nodes) {
+                    messageClient.sendMessage(node.id, PATH_MESSAGE, payload).let {
+                        com.google.android.gms.tasks.Tasks.await(it)
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "sendMessage failed", e)
+                onError(e.message ?: "sendMessage failed")
+            }
+        }
+    }
+
+    private var pendingReplyHandler: ((JSONObject) -> Unit)? = null
+
+    fun sendMessageWithReply(
+        data: JSONObject,
+        onReply: (JSONObject) -> Unit,
+        onError: (String) -> Unit = {},
+    ) {
+        executor.execute {
+            try {
+                val nodes = com.google.android.gms.tasks.Tasks.await(nodeClient.connectedNodes)
+                val payload = data.toString().toByteArray(StandardCharsets.UTF_8)
+                pendingReplyHandler = onReply
+                for (node in nodes) {
+                    com.google.android.gms.tasks.Tasks.await(
+                        messageClient.sendMessage(node.id, PATH_MESSAGE_WITH_REPLY, payload),
+                    )
+                }
+            } catch (e: Exception) {
+                pendingReplyHandler = null
+                Log.e(TAG, "sendMessageWithReply failed", e)
+                onError(e.message ?: "sendMessageWithReply failed")
+            }
+        }
+    }
+
+    fun updateApplicationContext(contextData: JSONObject, onError: (String) -> Unit = {}) {
+        executor.execute {
+            try {
+                val request = PutDataMapRequest.create(PATH_CONTEXT)
+                request.dataMap.putString("payload", contextData.toString())
+                request.setUrgent()
+                com.google.android.gms.tasks.Tasks.await(dataClient.putDataItem(request.asPutDataRequest()))
+            } catch (e: Exception) {
+                Log.e(TAG, "updateApplicationContext failed", e)
+                onError(e.message ?: "updateApplicationContext failed")
+            }
+        }
+    }
+
+    fun transferUserInfo(userInfo: JSONObject, onError: (String) -> Unit = {}) {
+        executor.execute {
+            try {
+                val path = PATH_USER_INFO_PREFIX + UUID.randomUUID()
+                val request = PutDataMapRequest.create(path)
+                request.dataMap.putString("payload", userInfo.toString())
+                request.setUrgent()
+                com.google.android.gms.tasks.Tasks.await(dataClient.putDataItem(request.asPutDataRequest()))
+            } catch (e: Exception) {
+                Log.e(TAG, "transferUserInfo failed", e)
+                onError(e.message ?: "transferUserInfo failed")
+            }
+        }
+    }
+
+    override fun onMessageReceived(event: MessageEvent) {
+        val path = event.path
+        val json = JSONObject(String(event.data, StandardCharsets.UTF_8))
+
+        when {
+            path == PATH_MESSAGE -> onMessage?.invoke(json)
+            path.startsWith(PATH_REPLY_PREFIX) -> {
+                pendingReplyHandler?.invoke(json)
+                pendingReplyHandler = null
+            }
+        }
+    }
+
+    override fun onDataChanged(dataEvents: DataEventBuffer) {
+        for (event in dataEvents) {
+            if (event.type != DataEvent.TYPE_CHANGED) continue
+            val item = event.dataItem
+            val path = item.uri.path ?: continue
+            val map = DataMapItem.fromDataItem(item).dataMap
+            val payload = map.getString("payload", "{}")
+            val json = JSONObject(payload)
+
+            when {
+                path == PATH_CONTEXT -> onContext?.invoke(json)
+                path.startsWith(PATH_USER_INFO_PREFIX) -> {
+                    onUserInfo?.invoke(json)
+                    dataClient.deleteDataItems(item.uri)
+                }
+            }
+        }
+    }
+
+}
+```
+
+Wire the bridge in `WearMainActivity.kt`:
+
+```kotlin
+class WearMainActivity : ComponentActivity() {
+    private lateinit var bridge: CapgoWearBridge
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bridge = CapgoWearBridge(applicationContext)
+        bridge.onMessage = { json -> Log.d("Wear", "phone message: $json") }
+        bridge.onContext = { json -> Log.d("Wear", "context: $json") }
+        bridge.onUserInfo = { json -> Log.d("Wear", "userInfo: $json") }
+        bridge.start()
+        setContent { /* your Compose UI */ }
+    }
+
+    override fun onDestroy() {
+        bridge.stop()
+        super.onDestroy()
+    }
+}
+```
+
+Use **`applicationContext`** when constructing clients so listeners survive configuration changes.
+
+## Step 6: Phone-side Capacitor (TypeScript)
+
+Install and sync the plugin on the phone app (same as iOS):
+
+```typescript
+import { CapgoWatch } from '@capgo/capacitor-watch';
+
+export async function setupWatchListeners() {
+  await CapgoWatch.addListener('messageReceived', (event) => {
+    console.log('Wear message:', event.message);
+  });
+
+  await CapgoWatch.addListener('messageReceivedWithReply', async (event) => {
+    await CapgoWatch.replyToMessage({
+      callbackId: event.callbackId,
+      data: { ok: true, echo: event.message },
+    });
+  });
+
+  await CapgoWatch.addListener('applicationContextReceived', (event) => {
+    console.log('Wear context:', event.context);
+  });
+
+  await CapgoWatch.addListener('userInfoReceived', (event) => {
+    console.log('Wear userInfo:', event.userInfo);
+  });
+}
+
+export async function pingWatch() {
+  const info = await CapgoWatch.getInfo();
+  if (!info.isSupported) {
+    console.warn('Wear OS APIs not available on this device');
+    return;
+  }
+  if (!info.isReachable) {
+    console.warn('No connected Wear OS nodes');
+    return;
+  }
+  await CapgoWatch.sendMessage({
+    data: { action: 'ping', at: Date.now() },
+  });
+}
+```
+
+Call `setupWatchListeners()` early in your app bootstrap (for example after `platform.ready()`).
+
+## Step 7: Build, install, and test
+
+<Steps>
+1. Select the **phone `app`** run configuration, install on a physical Android phone.
+
+2. Select the **`wear`** run configuration, install on the paired watch (or a watch emulator linked to the phone emulator).
+
+3. Confirm **`getInfo()`** on the phone:
+   - `isSupported: true` when Google Play services and Wearable API are available
+   - `isReachable: true` when at least one node is connected
+   - `isWatchAppInstalled: true` when the watch advertises **`capgo_watch`**
+
+4. Send **`CapgoWatch.sendMessage`** from the phone and verify `bridge.onMessage` on the watch.
+
+5. Send from the watch with **`sendMessageWithReply`** and confirm **`messageReceivedWithReply`** plus **`replyToMessage`** delivers on `/capgo/reply/{callbackId}`.
+
+6. Test **`updateApplicationContext`** and **`transferUserInfo`** in both directions using the DataItem paths above.
+</Steps>
+
+<Aside type="tip">
+On Android, the plugin does **not** emit `reachabilityChanged` or `activationStateChanged`. Poll `getInfo()` or track connectivity in your own UI when you need live status on Wear OS.
+</Aside>
+
+## Troubleshooting
+
+**`isSupported: false` on a real phone**
+
+- Google Play services missing or outdated
+- Wearable API unavailable on the device
+
+**`isReachable: false` but the watch is paired**
+
+- Wear app not installed on the watch
+- Bluetooth disabled, or watch app not running recently
+- Different `applicationId` or signing keys between modules
+
+**`isWatchAppInstalled: false`**
+
+- Missing `capgo_watch` entry in `wear.xml`
+- Capability not synced: reinstall the wear APK after changing capabilities
+
+**Messages never arrive**
+
+- Path must match exactly (`/capgo/message`, not a custom prefix)
+- Payload must be JSON text in UTF-8 (the plugin uses `JSONObject` / `JSObject` strings)
+
+**Reply never returns to the watch**
+
+- Phone must call `replyToMessage` with the `callbackId` from `messageReceivedWithReply`
+- Pending replies expire after **5 minutes** on Android (plugin constant `PENDING_REPLY_TTL_MS`)
+
+## Next steps
+
+- [Creating a watchOS app](/docs/plugins/watch/watch-app-setup/) for Apple Watch and CapgoWatchSDK
+- [Getting started](/docs/plugins/watch/getting-started/) for shared API and platform notes
+- [Examples](/docs/plugins/watch/examples/) for full app patterns
+- [Plugin source](https://github.com/Cap-go/capacitor-watch/blob/main/android/src/main/java/app/capgo/capacitor/watch/CapgoWatchPlugin.java) for phone-side path constants
+
+## Keep going from Creating a Wear OS app
+
+If you are using **Creating a Wear OS app** to plan native plugin work, connect it with [Using @capgo/capacitor-watch](/plugins/capacitor-watch/) for the native capability in Using @capgo/capacitor-watch, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.
