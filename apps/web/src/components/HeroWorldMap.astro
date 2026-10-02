@@ -34,6 +34,9 @@ const { width, height } = worldMapSize
   const PING_LEG = 750 // ms each way
   const PING_HOLD = 4500 // how long a timed ping card stays after the result
   const IDLE_MS = 4000
+  const TEXT_PAD_X = 10 // px around each line of hero copy kept free of map highlights
+  const TEXT_PAD_Y = 4
+  const TEXT_FEATHER = 18
 
   const toRad = Math.PI / 180
   const distanceKm = (a: MapPoint, b: MapPoint) => {
@@ -138,7 +141,58 @@ const { width, height } = worldMapSize
       canvas.width = Math.round(cssW * dpr)
       canvas.height = Math.round(cssH * dpr)
       scale = cssW / worldMapSize.width
+      measureText()
       kick()
+    }
+
+    // Line boxes of the hero copy in canvas coordinates. Highlights, routes and markers fade out under them so the text stays readable.
+    type Box = { l: number; t: number; r: number; b: number }
+    let textBoxes: Box[] = []
+    const copy = hero.querySelector<HTMLElement>('[data-hero-copy]')
+    const measureText = () => {
+      if (!copy) return
+      const origin = canvas.getBoundingClientRect()
+      const range = document.createRange()
+      const boxes: Box[] = []
+      for (const node of copy.querySelectorAll('h1, p, a')) {
+        if (node.closest('[data-map-hud]')) continue
+        range.selectNodeContents(node)
+        for (const line of range.getClientRects()) {
+          if (!line.width || !line.height) continue
+          boxes.push({
+            l: line.left - origin.left - TEXT_PAD_X,
+            t: line.top - origin.top - TEXT_PAD_Y,
+            r: line.right - origin.left + TEXT_PAD_X,
+            b: line.bottom - origin.top + TEXT_PAD_Y,
+          })
+        }
+      }
+      textBoxes = boxes
+    }
+    // 1 inside a text box, easing to 0 over the feather distance.
+    const textMask = (x: number, y: number) => {
+      let mask = 0
+      for (const box of textBoxes) {
+        const d = Math.hypot(Math.max(box.l - x, 0, x - box.r), Math.max(box.t - y, 0, y - box.b))
+        if (d < TEXT_FEATHER) mask = Math.max(mask, 1 - d / TEXT_FEATHER)
+        if (mask === 1) break
+      }
+      return mask
+    }
+    const eraseUnderText = () => {
+      if (!ctx || !textBoxes.length) return
+      // Offset shadow trick: only the blurred shadow lands on screen, giving soft edges without ctx.filter.
+      const shift = cssW + TEXT_FEATHER * 4
+      ctx.save()
+      ctx.globalCompositeOperation = 'destination-out'
+      ctx.shadowColor = '#000'
+      ctx.shadowBlur = TEXT_FEATHER * dpr
+      ctx.shadowOffsetX = shift * dpr
+      ctx.fillStyle = '#000'
+      ctx.beginPath()
+      for (const box of textBoxes) ctx.rect(box.l - shift, box.t, box.r - box.l, box.b - box.t)
+      ctx.fill()
+      ctx.restore()
     }
 
     const localPointer = () => {
@@ -387,8 +441,7 @@ const { width, height } = worldMapSize
       // Quieter spotlight while an update travels, so the route stands out.
       const spotScale = ping && pingPhase(now) < 1 ? 0.15 : SPOT_STRENGTH
       const lit: number[] = []
-      ctx.fillStyle = `rgba(255,255,255,${BASE_ALPHA})`
-      ctx.beginPath()
+      const base = new Path2D()
       for (let i = 0; i < dots.length; i += 2) {
         const x = dots[i] * scale
         const y = dots[i + 1] * scale
@@ -404,15 +457,19 @@ const { width, height } = worldMapSize
           const band = (Math.hypot(x - ripple.x, y - ripple.y) - age * ripple.reach) / 22
           wave += Math.exp(-band * band) * (1 - age) * ripple.strength
         }
-        const energy = Math.min(1, spot + wave)
+        let energy = Math.min(1, spot + wave)
+        if (energy >= 0.02) {
+          const keep = 1 - textMask(x, y)
+          energy *= keep
+          spot *= keep
+        }
         if (energy < 0.02) {
-          ctx.moveTo(x + radius, y)
-          ctx.arc(x, y, radius, 0, Math.PI * 2)
+          base.moveTo(x + radius, y)
+          base.arc(x, y, radius, 0, Math.PI * 2)
         } else {
           lit.push(i, energy, spot, dist)
         }
       }
-      ctx.fill()
 
       // Lit dots: brighter, bigger, tinted azure, pushed outward like a lens.
       for (let j = 0; j < lit.length; j += 4) {
@@ -480,6 +537,13 @@ const { width, height } = worldMapSize
         drawCityMarker(a, hoverSince, now)
       }
 
+      // Clear highlights, routes and markers under the hero copy, then lay the plain dots underneath everything.
+      eraseUnderText()
+      ctx.globalCompositeOperation = 'destination-over'
+      ctx.fillStyle = `rgba(255,255,255,${BASE_ALPHA})`
+      ctx.fill(base)
+      ctx.globalCompositeOperation = 'source-over'
+
       const busy = !reducedMotion && (visible || ripples.length > 0 || Math.abs(eased.presence - presenceTarget) > 0.005 || Math.hypot(tx - eased.x, ty - eased.y) > 0.5)
       // Reduced motion still needs frames to expire pings and to fire the idle ping (only when a visitor city is known).
       if ((busy || ping || (idleArmed && userCity >= 0)) && visible) kick()
@@ -531,7 +595,11 @@ const { width, height } = worldMapSize
       ready = true
       void locateVisitor()
       resize()
-      new ResizeObserver(resize).observe(canvas)
+      const observer = new ResizeObserver(resize)
+      observer.observe(canvas)
+      // Copy reflows (web fonts, wrapping) move the line boxes without resizing the canvas.
+      if (copy) observer.observe(copy)
+      void document.fonts?.ready.then(resize)
       new IntersectionObserver(([entry]) => {
         inView = entry.isIntersecting
         visible = pageVisible && inView
