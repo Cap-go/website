@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-03T07:32:33.897Z
-updated_at: 2026-10-03T07:32:35.298Z
+updated_at: 2026-10-03T07:35:35.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/720b29d8-0fb5-47a1-95d3-4d077a998fac/corporate-governance-code-governance-illustration.jpg'
 head_image_alt: 'Corporate Governance Code Explained Simply: A 2026 Guide'
 keywords: 'corporate governance code, governance principles, board independence, comply or explain, UK governance code'
