@@ -194,7 +194,7 @@ const actionDefinitionRows =
 @capgo/capacitor-keep-awake|github.com/Cap-go|Prevent device screen from dimming or sleeping for video players, navigation, and presentations|https://github.com/Cap-go/capacitor-keep-awake/|Keep Awake
 @capgo/capacitor-in-app-review|github.com/Cap-go|Prompt users to submit app store ratings and reviews without leaving your app using native iOS and Android APIs|https://github.com/Cap-go/capacitor-in-app-review/|In App Review
 @capgo/capacitor-file-picker|github.com/Cap-go|Pick files, images, videos, and directories with full native support for iOS and Android including HEIC conversion|https://github.com/Cap-go/capacitor-file-picker/|File Picker
-@capgo/capacitor-watch|github.com/Cap-go|Apple Watch communication with bidirectional messaging between iPhone and watchOS apps|https://github.com/Cap-go/capacitor-watch/|Watch
+@capgo/capacitor-watch|github.com/Cap-go|Apple Watch and Wear OS communication with bidirectional messaging between phone and watch apps|https://github.com/Cap-go/capacitor-watch/|Watch
 @capgo/capacitor-widget-kit|github.com/Cap-go|Build WidgetKit and Live Activity surfaces from Capacitor with SVG frames, timers, action hotspots, or full-native widget state sync|https://github.com/Cap-go/capacitor-widget-kit/|Widget Kit
 @capgo/capacitor-brightness|github.com/Cap-go|Control device screen brightness programmatically with support for app-specific and system-wide control|https://github.com/Cap-go/capacitor-brightness/|Brightness
 @capgo/capacitor-light-sensor|github.com/Cap-go|Access the ambient light sensor to measure illuminance levels in lux with real-time updates|https://github.com/Cap-go/capacitor-light-sensor/|Light Sensor
@@ -361,7 +361,14 @@ const pluginIconsByName: Record<string, string> = {
 }
 
 const pluginNamesByCategory = {
-  updates: ['@capgo/capacitor-updater', '@capgo/cordova-updater', '@capgo/electron-updater', '@capgo/capacitor-android-inline-install', '@capgo/capacitor-live-reload', '@capgo/capacitor-patch'],
+  updates: [
+    '@capgo/capacitor-updater',
+    '@capgo/cordova-updater',
+    '@capgo/electron-updater',
+    '@capgo/capacitor-android-inline-install',
+    '@capgo/capacitor-live-reload',
+    '@capgo/capacitor-patch',
+  ],
   'auth-security': [
     '@capgo/capacitor-native-biometric',
     '@capgo/capacitor-autofill-save-password',
@@ -401,7 +408,16 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-firebase-crashlytics',
     '@capgo/capacitor-firebase-performance',
   ],
-  commerce: ['@capgo/capacitor-native-market', '@revenuecat/purchases-capacitor', '@capgo/native-purchases', '@capgo/capacitor-admob', '@capgo/capacitor-pay', '@capgo/capacitor-stripe-pay', '@capgo/capacitor-stripe-terminal', '@capgo/capacitor-stripe-identity'],
+  commerce: [
+    '@capgo/capacitor-native-market',
+    '@revenuecat/purchases-capacitor',
+    '@capgo/native-purchases',
+    '@capgo/capacitor-admob',
+    '@capgo/capacitor-pay',
+    '@capgo/capacitor-stripe-pay',
+    '@capgo/capacitor-stripe-terminal',
+    '@capgo/capacitor-stripe-identity',
+  ],
   media: [
     '@capgo/camera-preview',
     '@capgo/capacitor-flash',

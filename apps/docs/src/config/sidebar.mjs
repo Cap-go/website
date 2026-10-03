@@ -258,7 +258,15 @@ const pluginEntries = [
   ['Video Player', 'video-player'],
   ['Video Thumbnails', 'video-thumbnails'],
   ['Volume Buttons', 'volume-buttons'],
-  ['Watch', 'watch'],
+  [
+    'Watch',
+    'watch',
+    [
+      linkItem('watchOS app setup', '/docs/plugins/watch/watch-app-setup'),
+      linkItem('Wear OS app setup', '/docs/plugins/watch/wear-os-app-setup'),
+      linkItem('Examples', '/docs/plugins/watch/examples'),
+    ],
+  ],
   ['WebView Guardian', 'webview-guardian'],
   ['WebView Crash', 'webview-crash'],
   ['WeChat', 'wechat'],
