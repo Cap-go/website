@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-04T07:16:48.178Z
-updated_at: 2026-10-04T07:16:50.684Z
+updated_at: 2026-10-04T07:19:49.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/f6274597-5468-4890-a528-d98d5d512586/mobile-devops-tools-tech-doodles.jpg'
 head_image_alt: 10 Mobile DevOps Tools for Faster App Releases
 keywords: 'mobile devops tools, mobile CI/CD, CapacitorJS tools, app release automation, mobile testing'
