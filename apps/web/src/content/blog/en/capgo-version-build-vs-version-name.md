@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-06T09:18:06.000Z
-updated_at: 2026-09-06T09:18:06.000Z
+updated_at: 2026-10-04T21:47:43.000Z
 head_image: /capgo_banner.png
 head_image_alt: Diagram of a Capacitor native app baseline and downloaded Capgo bundle.
 keywords: ''
