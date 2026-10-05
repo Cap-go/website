@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T03:59:51.000Z
+updated_at: 2026-10-02T12:00:00.000Z
 head_image: /RBW_XCode_Cloud_building.webp
 head_image_alt: "Comparison of CI/CD platforms building iOS apps on macOS runners"
 keywords: iOS CI/CD platforms, best CI/CD for iOS, iOS build server, Xcode Cloud vs Bitrise, Codemagic vs Bitrise, GitHub Actions iOS, TestFlight automation, Capacitor iOS builds
@@ -124,6 +124,14 @@ Capgo compiles and signs on its Macs, streams logs back to the job, increments t
 
 Limits worth knowing: it only builds Capacitor apps, and a single build has a 10-minute limit. Its main advantage is that no job in your pipeline needs a macOS runner, and the same CLI ships [live updates](/live-update/) for web-only changes so many releases skip the native build entirely.
 
+### Argent Cloud
+
+[Argent Cloud](https://argent.swmansion.com/cloud/) by Software Mansion is not a build service either. It covers the step after the build: running the app on iOS simulators. You get dedicated Apple hardware with isolated, preconfigured iOS simulators and reach them over the network. That lets a Linux CI job, or an AI coding agent running on Linux, drive an iOS simulator without your team building and maintaining its own Mac fleet.
+
+It works with Maestro, Appium, and custom scripts, and with [Argent](https://argent.swmansion.com/), Software Mansion's MCP toolkit that lets agents such as Claude Code, Cursor, and Codex tap through the app, read logs and network requests, and profile it. Pricing is flat: each Runner gives up to 6 parallel simulators on hardware that is not shared with other customers, starting at $299 per month with unlimited simulator time.
+
+Argent Cloud complements a build platform rather than replacing one: keep any of the services above for compiling, signing, and TestFlight uploads, and point your UI tests and agents at Argent Cloud's simulators. Its main advantage is that long test suites and agent sessions no longer consume per-minute macOS time.
+
 ## Ionic Appflow and App Center
 
 Both still show up in search results. App Center is gone. Appflow works for existing customers until December 31, 2027 and accepts no new customers. If you are on either, plan the move now. Migration guides: [App Center migration](/blog/appcenter-migration/) and [Alternative to Appflow](/blog/alternative-to-appflow/).
@@ -139,6 +147,7 @@ Both still show up in search results. App Center is gone. Appflow works for exis
 | Microsoft shop, coming from App Center | Azure DevOps |
 | Capacitor app, want to keep current CI and avoid macOS runners | Capgo Build called from your CI |
 | Capacitor app that ships frequent web changes | Any of the above plus Capgo live updates |
+| UI tests or AI agents need iOS simulators from Linux CI | Any build platform above plus Argent Cloud |
 
 ## Cost: what actually drives the bill
 
@@ -148,6 +157,7 @@ Exact prices change often, so compare the model rather than a number:
 - **Credits and tiers** (Bitrise, CircleCI, Appcircle): predictable monthly spend, but larger machines burn credits faster.
 - **Included hours** (Xcode Cloud): cheap until you exceed the included 25 hours.
 - **Parallel jobs** (Azure DevOps): you pay for concurrency, not minutes.
+- **Flat monthly simulators** (Argent Cloud, for testing): a fixed price per block of reserved simulators, so long test runs do not raise the bill.
 - **Self-hosted Macs**: no per-minute fee, but hardware, electricity, and an engineer's time for Xcode upgrades and keychain issues.
 
 The cheapest iOS build is the one you do not run. For hybrid apps, sending JavaScript-only changes as live updates instead of new binaries usually saves more than switching CI vendors.
