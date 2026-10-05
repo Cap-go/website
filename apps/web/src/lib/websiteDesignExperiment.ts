@@ -6,7 +6,8 @@ export const WEBSITE_DESIGN_INTERNAL_PREFIX = '/website-experiment/control'
 export const WEBSITE_DESIGN_COOKIE = 'capgo_website_design_v1'
 export const WEBSITE_DESIGN_MAX_AGE = 60 * 60 * 24 * 60
 export const WEBSITE_DESIGN_SIGNUP_PATH = '/api/website-design/signup'
-export const LANDING_POSTHOG_TOKEN = 'phc_VwWolDCQHVlAFmRbGjkjV8LTp0xw3SgzJq0D2ZN0lce'
+// Public ingestion project key shared with the site's browser SDK.
+export const LANDING_POSTHOG_PROJECT_KEY = 'phc_VwWolDCQHVlAFmRbGjkjV8LTp0xw3SgzJq0D2ZN0lce'
 const routeSet = new Set(routes)
 
 export type WebsiteDesignVariant = 'control' | 'test'

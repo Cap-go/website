@@ -804,11 +804,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         </div>
 
         <div class="wizard-before-after">
-          <span class="ba b" id="ba-before">
+          <span class="before-after-label b" id="before-after-label-before">
             {copy('native_build_v2_wiz_ios_before')}
           </span>
-          <span class="ba-arrow">→</span>
-          <span class="ba a" id="ba-after">
+          <span class="before-after-label-arrow">→</span>
+          <span class="before-after-label a" id="before-after-label-after">
             {copy('native_build_v2_wiz_ios_after')}
           </span>
         </div>
@@ -1700,7 +1700,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-fg);
       white-space: pre-wrap;
       /* Fixed height, tall enough for the full build log, so it never grows/jumps
-         as lines stream in AND never shows a scrollbar. */
+           as lines stream in AND never shows a scrollbar. */
       height: 560px;
       overflow: hidden;
     }
@@ -4701,7 +4701,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       flex-wrap: wrap;
       font-size: 12px;
     }
-    .nb .wizard-before-after .ba {
+    .nb .wizard-before-after .before-after-label {
       padding: 6px 10px;
       border-radius: 7px;
       font-weight: 600;
@@ -4717,7 +4717,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--relief-green);
       border: 1px solid rgba(74, 222, 128, 0.3);
     }
-    .nb .wizard-before-after .ba-arrow {
+    .nb .wizard-before-after .before-after-label-arrow {
       color: rgba(255, 255, 255, 0.45);
       font-size: 14px;
     }
@@ -6039,8 +6039,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       const stage = document.getElementById('wizard-stage')
       const toggle = document.querySelector('.onboarding-platform-toggle')
       const platformLabel = document.getElementById('ocm-platform')
-      const baBefore = document.getElementById('ba-before')
-      const baAfter = document.getElementById('ba-after')
+      const beforeLabel = document.getElementById('before-after-label-before')
+      const afterLabel = document.getElementById('before-after-label-after')
       if (!wizardEl || !stage) return
 
       type Step = { title: string; lines: string[]; kind?: string }
@@ -7100,8 +7100,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           })
         }
         if (platformLabel) platformLabel.textContent = p
-        if (baBefore) baBefore.textContent = PLATFORMS[p].before
-        if (baAfter) baAfter.textContent = PLATFORMS[p].after
+        if (beforeLabel) beforeLabel.textContent = PLATFORMS[p].before
+        if (afterLabel) afterLabel.textContent = PLATFORMS[p].after
         getSteps().forEach((s, j) => {
           ;(s as HTMLElement).onclick = () => {
             if (autoTimer) {

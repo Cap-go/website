@@ -1,7 +1,7 @@
 import {
   createWebsiteDesignAssignment,
   isWebsiteExperimentBot,
-  LANDING_POSTHOG_TOKEN,
+  LANDING_POSTHOG_PROJECT_KEY,
   readWebsiteDesignAssignment,
   WEBSITE_DESIGN_EXPERIMENT,
   WEBSITE_DESIGN_INTERNAL_PREFIX,
@@ -144,7 +144,7 @@ export async function websiteDesignSignupResponse(request: Request, env: Website
       headers: { 'Content-Type': 'application/json' },
       signal: AbortSignal.timeout(5000),
       body: JSON.stringify({
-        api_key: LANDING_POSTHOG_TOKEN,
+        api_key: LANDING_POSTHOG_PROJECT_KEY,
         event: 'user_signed_up',
         distinct_id: anonymousId,
         uuid: user.id,
