@@ -445,6 +445,7 @@ function createOriginRequest(request: Request, originUrl: URL): Request {
   const headers = new Headers(request.headers)
   headers.set('Accept-Language', DEFAULT_LOCALE)
   headers.set('X-Capgo-Translation-Origin', 'english')
+  headers.set('X-Capgo-Translation-Locale', extractLocale(new URL(request.url).pathname) || DEFAULT_LOCALE)
   headers.set(SKIP_AI_CRAWLER_TRACKING_HEADER, '1')
   headers.delete('If-None-Match')
   headers.delete('If-Modified-Since')
@@ -3389,6 +3390,7 @@ async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Reco
       Accept: 'text/html',
       'Accept-Language': DEFAULT_LOCALE,
       'X-Capgo-Translation-Origin': 'real-page-probe',
+      'X-Capgo-Translation-Locale': locale,
     },
   })
 

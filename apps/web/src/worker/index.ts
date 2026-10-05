@@ -1,23 +1,25 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import {
+  markdownNotFoundResponse,
   MCP_ENDPOINT_PATHS,
   MCP_MANIFEST_PATHS,
   OPENAPI_ALIAS_PATHS,
   OPENAPI_ASSET_PATH,
-  markdownNotFoundResponse,
   prefersMarkdown,
   prefersMcpMarketingHtml,
 } from '../../../shared/agentDiscovery'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
-import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
-import { handleBuilderMetrics, BUILDER_METRICS_PATH } from './builder-metrics'
+import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
+import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
 import { handleMtaStsRequest } from './mta-sts'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
+import { websiteDesignHtmlResponse, websiteDesignSignupResponse } from './website-design-experiment'
 
 interface Env {
+  WEBSITE_DESIGN_EXPERIMENT?: string
   ASSETS: {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
@@ -208,8 +210,7 @@ const routeDefinitions: Record<string, RouteDefinition> = {
     methods: ['GET', 'HEAD'],
     handle: async (request, env, ctx) => {
       const response = await handleLiveUpdateMetrics(request, env, ctx)
-      if (request.method === 'HEAD')
-        return new Response(null, { status: response.status, headers: response.headers })
+      if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
   },
@@ -217,8 +218,7 @@ const routeDefinitions: Record<string, RouteDefinition> = {
     methods: ['GET', 'HEAD'],
     handle: async (request, env, ctx) => {
       const response = await handleBuilderMetrics(request, env, ctx)
-      if (request.method === 'HEAD')
-        return new Response(null, { status: response.status, headers: response.headers })
+      if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
   },
@@ -463,6 +463,8 @@ export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const mtaStsResponse = handleMtaStsRequest(request)
     if (mtaStsResponse) return mtaStsResponse
+    const signupMeasurement = await websiteDesignSignupResponse(request, env, ctx)
+    if (signupMeasurement) return signupMeasurement
     const pathname = new URL(request.url).pathname
     const agentSurface = await agentSurfaceResponse(request, env, pathname)
     if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
@@ -480,6 +482,8 @@ export default {
     if (toolRouteResponse) return trackAICrawler(request, toolRouteResponse, ctx)
     const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
     if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
+    const experimentResponse = await websiteDesignHtmlResponse(request, env)
+    if (experimentResponse) return trackAICrawler(request, experimentResponse, ctx)
     const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
     if (assetResponse.status === 404) {
       const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)

@@ -1,0 +1,322 @@
+---
+import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
+import m from '@/experiments/website-design/legacy/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import HumanSupport from '@/experiments/website-design/legacy/components/HumanSupport.astro'
+import { createLdJsonGraph, createAboutOrganization, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { pluginCountLabel } from '@/config/plugins'
+import type { Thing } from 'schema-dts'
+
+const title = [Astro.locals.runtimeConfig.public.brand, m.about_capgo({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.about_capgo_description({}, { locale: Astro.locals.locale })
+
+const config = Astro.locals.runtimeConfig.public
+
+// Create founder Person schema
+const founder = createPersonLdJson('Martin Donadieu', 'https://x.com/martindonadieu', `${config.baseUrl}/martindonadieu.webp`, 'Founder & CEO')
+
+// Create enhanced organization with all properties as a plain object
+const enhancedOrg: Thing = createAboutOrganization(config, founder)
+
+// Build absolute URLs for structured data (Schema.org requires absolute URLs)
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const aboutUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/about/')}`
+const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
+
+// Create about page WebPage schema
+const aboutPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet the team building it.',
+  url: aboutUrl,
+})
+
+// Create comprehensive LD+JSON for about page
+const content = {
+  title,
+  description,
+  image: `${baseUrl}/capgo_about_team.png`,
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, aboutPage, {
+    includeOrganization: false, // We're including the enhanced org as mainEntity
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: homeUrl },
+      { name: 'About', url: aboutUrl },
+    ],
+    additionalEntities: [enhancedOrg, founder],
+  }),
+}
+
+const teamMembers = [
+  {
+    name: 'Martin Donadieu',
+    role: 'Founder & CEO',
+    since: 'Started Capgo in December 2022',
+    image: '/martin-avatar.png',
+    alt: 'Martin Donadieu',
+  },
+  {
+    name: 'Michael',
+    role: 'Software Engineer',
+    since: 'Native iOS and Android systems',
+    image: '/michael-profile.webp',
+    alt: 'Michael',
+  },
+  {
+    name: 'Jordan',
+    role: 'Full-Stack Engineer',
+    since: 'Product and dashboard experience',
+    image: '/jordan-avatar.jpg',
+    alt: 'Jordan',
+  },
+  {
+    name: 'Valeria',
+    role: 'Project & Success Manager',
+    since: 'Enterprise onboarding and support',
+    image: '/valeria-avatar.jpg',
+    alt: 'Valeria',
+  },
+  {
+    name: 'Marie-Ange',
+    role: 'Accounting',
+    since: 'Part-time, joined 1.5 years ago',
+    image: '/marie-ange-profile.webp',
+    alt: 'Marie-Ange',
+  },
+  {
+    name: 'Adrien',
+    role: 'Mobile Developer',
+    since: 'Capacitor developer experience',
+    image: '/adrien-profile.webp',
+    alt: 'Adrien',
+  },
+]
+
+const companyStats = [
+  { value: 'Dec 2022', label: 'Founded', detail: 'Started as a self-funded maker project' },
+  { value: pluginCountLabel, label: 'Plugins', detail: 'Maintained for the Capacitor ecosystem' },
+  { value: '50M+', label: 'End users', detail: 'Served through apps using Capgo' },
+  { value: `${teamMembers.length}`, label: 'Core team', detail: 'Product, native, support, and delivery' },
+]
+
+const principles = [
+  {
+    title: 'Self-funded by design',
+    body: 'Capgo is profitable and customer-funded. Product decisions stay tied to reliability, support, and what shipping teams actually need.',
+  },
+  {
+    title: 'Open source foundation',
+    body: 'The platform and plugin ecosystem stay inspectable and portable, so teams are not locked into a black box release pipeline.',
+  },
+  {
+    title: 'Built close to customers',
+    body: 'We run the same update flow for our own apps, support enterprise accounts directly, and keep the feedback loop short.',
+  },
+]
+
+const timeline = [
+  {
+    year: '2022',
+    title: 'Capgo starts',
+    body: 'Martin begins building an affordable live update path for Capacitor apps after seeing teams blocked by slow and expensive release tooling.',
+  },
+  {
+    year: '2023',
+    title: 'Native work gets deeper',
+    body: 'Michael joins and pushes the native update layer forward, focusing on smaller updates, faster installation, and better platform behavior.',
+  },
+  {
+    year: '2024',
+    title: 'Back office gets steadier',
+    body: 'Marie-Ange joins part-time to support accounting and keep the operational work around a growing business under control.',
+  },
+  {
+    year: '2025',
+    title: 'The product matures',
+    body: 'Jordan and Valeria help Capgo scale the dashboard, onboarding, and customer success work needed by production apps and larger teams.',
+  },
+  {
+    year: '2026',
+    title: 'Capacitor DX expands',
+    body: 'Adrien joins to help make Capacitor and Capgo feel faster, clearer, and more natural for mobile teams coming from modern developer tooling.',
+  },
+  {
+    year: 'Now',
+    title: 'Infrastructure for Capacitor teams',
+    body: 'The focus is still narrow: make app updates faster, safer, and more understandable for teams building mobile apps from web technology.',
+  },
+]
+---
+
+<Layout content={content}>
+  <div class="bg-gray-50 text-gray-950">
+    <section class="mx-auto max-w-7xl px-4 pt-16 pb-14 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24">
+      <div class="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+        <div>
+          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">About Capgo</p>
+          <h1 class="mt-5 max-w-4xl text-4xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
+            We build the open update infrastructure Capacitor teams can trust.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+            Capgo started in December 2022 with one goal: make live updates fast, affordable, and understandable for teams shipping Capacitor apps in production. We stay small,
+            hands-on, and focused on the release path between your code and your users.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3">
+            <HumanSupport tone="light" size="sm" align="start" />
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                {m.start_now({}, { locale: Astro.locals.locale })}
+              </a>
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
+                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                Read the docs
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <figure class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+          <img
+            src="/capgo_val_michael_martin.webp"
+            alt="Valeria, Michael, and Martin during a Capgo team offsite in Madeira"
+            class="aspect-[16/10] w-full object-cover"
+            width="1600"
+            height="900"
+          />
+          <figcaption class="border-t border-gray-200 px-5 py-4 text-sm leading-6 text-gray-600">
+            Remote-first, with team offsites in Madeira where planning, support reviews, and product work happen in the same week.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="border-y border-gray-200 bg-white py-8">
+      <div class="mx-auto grid max-w-7xl gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 sm:grid-cols-2 lg:grid-cols-4">
+        {companyStats.map((stat) => (
+          <div class="bg-white p-6">
+            <p class="text-3xl font-semibold tracking-tight text-gray-950">{stat.value}</p>
+            <p class="mt-2 text-sm font-semibold text-gray-950">{stat.label}</p>
+            <p class="mt-1 text-sm leading-6 text-gray-600">{stat.detail}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Team</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">A small team building close to the product.</h2>
+        <p class="mt-4 text-base leading-7 text-gray-600">
+          Capgo is intentionally compact. The same people improving native update behavior, product flows, and enterprise onboarding also talk to customers and maintain the open
+          source surface area.
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+        {teamMembers.map((member) => (
+          <article>
+            <div class="aspect-square overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm">
+              <img src={member.image} alt={member.alt} class="h-full w-full object-cover" width="384" height="384" />
+            </div>
+            <h3 class="mt-4 text-base font-semibold text-gray-950">{member.name}</h3>
+            <p class="mt-1 text-sm font-medium text-gray-700">{member.role}</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500">{member.since}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="bg-white py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">How we got here</p>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">From solo maker project to production update platform.</h2>
+          </div>
+
+          <div class="divide-y divide-gray-200 border-y border-gray-200">
+            {timeline.map((item) => (
+              <article class="grid gap-4 py-7 sm:grid-cols-[7rem_1fr]">
+                <p class="text-sm font-semibold text-blue-700">{item.year}</p>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-950">{item.title}</h3>
+                  <p class="mt-2 text-base leading-7 text-gray-600">{item.body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-3">
+        {principles.map((principle) => (
+          <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-700">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.704 5.29a1 1 0 0 1 .006 1.414l-7.25 7.31a1 1 0 0 1-1.42 0l-3.25-3.28a1 1 0 1 1 1.42-1.408l2.54 2.563 6.54-6.592a1 1 0 0 1 1.414-.006Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-gray-950">{principle.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-gray-600">{principle.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+      <div class="grid overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm lg:grid-cols-[0.9fr_1.1fr]">
+        <img
+          src="/jordan_michael_martin_madeira_waterfall.webp"
+          alt="Capgo team members during a Madeira offsite"
+          class="h-full min-h-80 w-full object-cover"
+          width="2364"
+          height="1330"
+          loading="lazy"
+        />
+        <div class="p-8 sm:p-10 lg:p-12">
+          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Founder note</p>
+          <blockquote class="mt-5 text-2xl leading-9 font-semibold tracking-tight text-gray-950">
+            "From a solo project to a focused team serving production apps, Capgo has stayed anchored in the same belief: app teams should be able to fix, improve, and recover
+            without waiting on stores."
+          </blockquote>
+          <div class="mt-8 flex items-center gap-4">
+            <img src="/martin-avatar.png" alt="Martin Donadieu" class="h-12 w-12 rounded-full object-cover" width="48" height="48" loading="lazy" />
+            <div>
+              <p class="font-semibold text-gray-950">Martin Donadieu</p>
+              <p class="text-sm text-gray-600">Founder & CEO</p>
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-col gap-3">
+            <HumanSupport tone="light" size="sm" align="start" />
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                {m.start_now({}, { locale: Astro.locals.locale })}
+              </a>
+              <a
+                href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
+                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              >
+                Read the full story
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
