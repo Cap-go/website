@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-05T07:07:28.253Z
-updated_at: 2026-10-05T07:07:29.982Z
+updated_at: 2026-10-05T07:10:16.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/c3d6aeaa-f9ce-47f7-a4c7-6a65d79900e5/mobile-app-deployment-tools-tech-illustration.jpg'
 head_image_alt: 10 Mobile App Deployment Tools for 2026
 keywords: 'mobile app deployment tools, mobile CI/CD, app release management, OTA app updates, mobile DevOps'
