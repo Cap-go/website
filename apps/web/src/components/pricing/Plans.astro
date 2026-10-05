@@ -5,17 +5,28 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 import TeamAvatars from '@/components/TeamAvatars.astro'
 import { planDescriptionToText } from '@/lib/planCopy'
+import { ENTERPRISE_MAU_STOPS, formatMau, type CreditStep } from '@/lib/enterpriseScale'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]
   yearly: boolean
+  credits?: CreditStep[]
 }
 
-const { pricing, yearly } = Astro.props
+const { pricing, yearly, credits = [] } = Astro.props
+
+// Enterprise MAU slider needs the public MAU credit ladder to quote extra MAU.
+const mauCredits = credits.filter((step) => step.type === 'mau')
+const enterpriseScale = mauCredits.length > 0
+const enterprisePlan = pricing.find((plan) => plan.name === 'Enterprise')
+const enterpriseMauIndex = Math.max(
+  0,
+  ENTERPRISE_MAU_STOPS.findIndex((stop) => stop >= (enterprisePlan?.mau ?? 0)),
+)
 
 function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
   const highlights = [
-    `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' ? '+' : ''} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`,
+    `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' && !enterpriseScale ? '+' : ''} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.bandwidth)}${plan.name === 'Enterprise' ? '+' : ''} GiB/${m.month({}, { locale: Astro.locals.locale })} ${m.of_bandwidth({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB storage`,
     'Native notifications',
@@ -39,9 +50,9 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
 function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
   if (yearly) {
     const price = (yearlyPrice / 12).toFixed(0)
-    return name === 'Enterprise' ? `$${price}+` : `$${price}`
+    return name === 'Enterprise' && !enterpriseScale ? `$${price}+` : `$${price}`
   }
-  return name === 'Enterprise' ? `$${monthlyPrice}+` : `$${monthlyPrice}`
+  return name === 'Enterprise' && !enterpriseScale ? `$${monthlyPrice}+` : `$${monthlyPrice}`
 }
 
 function buildTimeDisplay(buildTimeSeconds: number) {
@@ -70,6 +81,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
           plan.name === 'Maker' ? 'bg-blue-50/40' : '',
         ]}
         data-plan={plan.name}
+        data-enterprise-scale={plan.name === 'Enterprise' && enterpriseScale ? '' : undefined}
       >
         <div class="min-h-24">
           <div class="flex flex-wrap items-center gap-2">
@@ -122,10 +134,38 @@ function buildTimeDisplay(buildTimeSeconds: number) {
           )}
         </div>
 
+        {plan.name === 'Enterprise' && enterpriseScale && (
+          <div class="mt-6 rounded-xl border border-gray-200 bg-gray-50 p-3" data-enterprise-scale-box>
+            <div class="mb-2 flex items-center justify-between gap-2">
+              <label for="enterprise-mau-slider" class="text-xs font-medium text-gray-600">
+                {m.monthly_active_users({}, { locale: Astro.locals.locale })}
+              </label>
+              <span class="text-sm font-bold text-blue-700 notranslate" translate="no" data-enterprise-mau>
+                {formatMau(ENTERPRISE_MAU_STOPS[enterpriseMauIndex])} {m.mau({}, { locale: Astro.locals.locale })}
+              </span>
+            </div>
+            <input
+              id="enterprise-mau-slider"
+              type="range"
+              min="0"
+              max={ENTERPRISE_MAU_STOPS.length - 1}
+              step="1"
+              value={enterpriseMauIndex}
+              class="h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-300 accent-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              aria-valuetext={`${formatMau(ENTERPRISE_MAU_STOPS[enterpriseMauIndex])} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`}
+              data-enterprise-mau-slider
+            />
+            <div class="mt-1 flex justify-between text-[11px] text-gray-500 notranslate" translate="no" aria-hidden="true">
+              <span>{formatMau(ENTERPRISE_MAU_STOPS[0])}</span>
+              <span>{formatMau(ENTERPRISE_MAU_STOPS[ENTERPRISE_MAU_STOPS.length - 1])}+</span>
+            </div>
+          </div>
+        )}
+
         <div class="mt-10 lg:mt-12">
           <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Includes:</p>
           <ul class="mt-5 space-y-4 text-sm leading-6 text-gray-700">
-            {planHighlights(plan).map((highlight) => (
+            {planHighlights(plan).map((highlight, index) => (
               <li class="flex items-start gap-3">
                 <svg
                   class="mt-1 h-4 w-4 shrink-0 text-gray-500"
@@ -138,7 +178,16 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                 >
                   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
-                <span>{highlight}</span>
+                {plan.name === 'Enterprise' && enterpriseScale && index === 0 ? (
+                  <span>
+                    <span class="notranslate" translate="no" data-enterprise-mau-highlight>
+                      {numberWithSpaces(plan.mau)}
+                    </span>{' '}
+                    {m.monthly_active_users({}, { locale: Astro.locals.locale })}
+                  </span>
+                ) : (
+                  <span>{highlight}</span>
+                )}
               </li>
             ))}
             <li class="flex items-start gap-3">
@@ -184,6 +233,19 @@ function buildTimeDisplay(buildTimeSeconds: number) {
   </div>
 </section>
 
+{enterpriseScale && enterprisePlan && (
+  <script
+    id="enterprise-scale-data"
+    type="application/json"
+    set:html={JSON.stringify({
+      steps: mauCredits,
+      includedMau: enterprisePlan.mau,
+      priceMonthly: enterprisePlan.price_m,
+      priceYearly: enterprisePlan.price_y,
+    })}
+  ></script>
+)}
+
 <script is:inline define:vars={{ pricing }}>
   document.addEventListener('DOMContentLoaded', () => {
     const yearlyRadio = document.getElementById('yearly')
@@ -192,6 +254,8 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 
     function updatePrices(isYearly) {
       planElements.forEach((planElement) => {
+        // Enterprise price follows the MAU slider, see the script below.
+        if (planElement.hasAttribute('data-enterprise-scale')) return
         const planName = planElement.getAttribute('data-plan')
         const plan = pricing.find((p) => p.name === planName)
         if (!plan) return
@@ -252,4 +316,57 @@ function buildTimeDisplay(buildTimeSeconds: number) {
     yearlyRadio?.addEventListener('change', () => updatePrices(true))
     monthlyRadio?.addEventListener('change', () => updatePrices(false))
   })
+</script>
+
+<script>
+  import { ENTERPRISE_MAU_STOPS, enterpriseMonthlyCredits, formatMau, formatUsd, type CreditStep } from '@/lib/enterpriseScale'
+
+  function initEnterpriseScale() {
+    const card = document.querySelector<HTMLElement>('[data-enterprise-scale]')
+    const slider = card?.querySelector<HTMLInputElement>('[data-enterprise-mau-slider]')
+    const data = document.getElementById('enterprise-scale-data')?.textContent
+    if (!card || !slider || !data) return
+
+    const { steps, includedMau, priceMonthly, priceYearly } = JSON.parse(data) as {
+      steps: CreditStep[]
+      includedMau: number
+      priceMonthly: number
+      priceYearly: number
+    }
+    const yearlyRadio = document.getElementById('yearly') as HTMLInputElement | null
+    const monthlyRadio = document.getElementById('monthly') as HTMLInputElement | null
+    const query = <T extends HTMLElement>(selector: string) => card.querySelector<T>(selector)
+
+    function update() {
+      const targetMau = ENTERPRISE_MAU_STOPS[Number(slider!.value)] ?? includedMau
+      const isYearly = yearlyRadio?.checked ?? true
+      const base = isYearly ? Math.round(priceYearly / 12) : priceMonthly
+      const credits = enterpriseMonthlyCredits(steps, includedMau, targetMau)
+      const mauLabel = formatMau(targetMau)
+
+      const price = query('[data-price]')
+      if (price) price.textContent = formatUsd(base + credits)
+      const mau = query('[data-enterprise-mau]')
+      if (mau) mau.textContent = `${mauLabel} MAU`
+      const highlight = query('[data-enterprise-mau-highlight]')
+      if (highlight) highlight.textContent = new Intl.NumberFormat('en-US').format(targetMau).replaceAll(',', ' ')
+      slider!.setAttribute('aria-valuetext', `${mauLabel} MAU`)
+
+      const percent = (Number(slider!.value) / (ENTERPRISE_MAU_STOPS.length - 1)) * 100
+      slider!.style.background = `linear-gradient(to right, rgb(37 99 235) ${percent}%, rgb(209 213 219) ${percent}%)`
+
+      const yearlyLine = query('[data-yearly-price]')
+      if (yearlyLine) yearlyLine.style.display = isYearly ? '' : 'none'
+      const monthlyLine = query('[data-monthly-price]')
+      if (monthlyLine) monthlyLine.style.display = isYearly ? 'none' : ''
+    }
+
+    slider.addEventListener('input', update)
+    yearlyRadio?.addEventListener('change', update)
+    monthlyRadio?.addEventListener('change', update)
+    update()
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initEnterpriseScale)
+  else initEnterpriseScale()
 </script>
