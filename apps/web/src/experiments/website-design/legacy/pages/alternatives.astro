@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/experiments/website-design/legacy/copy/messages'
@@ -13,7 +14,7 @@ const description = m.alternatives_meta_description({}, { locale })
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description: description,
-  url: Astro.url.href,
+  url: websiteDesignPublicUrl(Astro.url),
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
 })

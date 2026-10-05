@@ -85,12 +85,7 @@ const showExampleCtas = solution === 'enterprise'
       </div>
 
       <div class="solution-app-examples-body grid gap-5 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start">
-        <div
-          class="solution-app-examples-list order-1 space-y-3 lg:order-1"
-          data-randomize-app-examples={randomize ? 'true' : undefined}
-          aria-live={randomize ? 'polite' : undefined}
-          aria-atomic={randomize ? 'true' : undefined}
-        >
+        <div class="solution-app-examples-list order-1 space-y-3 lg:order-1" data-randomize-app-examples={randomize ? 'true' : undefined}>
           {appExamples.map(({ app, note }) => (
             <article class="solution-app-example-card group rounded-lg border border-white/10 bg-white/[0.03] p-4 transition-colors duration-200 hover:border-blue-400/30 hover:bg-white/[0.05]">
               <div class="grid gap-4 sm:grid-cols-[auto_minmax(0,1fr)_9.5rem] sm:items-start">

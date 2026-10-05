@@ -63,7 +63,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
     <div class="relative mx-auto mt-16 grid w-full max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 md:block">
       <!-- The Map Image -->
       <div class="relative z-0 flex items-center justify-center sm:col-span-2">
-        <img src="/globe_with_orbits.svg" alt="Global Network Map" class="w-full max-w-3xl opacity-90" />
+        <img src="/globe_with_orbits.svg" alt="Global Network Map" class="w-full max-w-3xl opacity-90" loading="lazy" decoding="async" />
       </div>
 
       <!-- Floating White Cards -->
@@ -148,7 +148,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       <HumanSupport size="sm" />
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="rounded-md bg-[#44BCFF] px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-[#3a9fd6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
+        class="rounded-md bg-blue-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
       >
         {m.cta_start_free({}, { locale: Astro.locals.locale })}
       </a>

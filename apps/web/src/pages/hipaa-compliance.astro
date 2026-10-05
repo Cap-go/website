@@ -121,7 +121,7 @@ const tradeoffs = [
             </p>
             <p class="mt-4 text-base leading-7 text-slate-700">
               The only stable identifier is a random, app-scoped <code class="rounded bg-slate-100 px-1 py-0.5">device_id</code>. It is not tied to a known user unless your app
-              explicitly sets a <code class="rounded bg-slate-100 px-1 py-0.5">custom_id</code>. Hosted statistics can be fully disabled by setting{' '}
+              explicitly sets a <code class="rounded bg-slate-100 px-1 py-0.5">custom_id</code>. Dedicated statistics reports can be disabled by setting{' '}
               <code class="rounded bg-slate-100 px-1 py-0.5">statsUrl: ''</code>.
             </p>
           </div>
@@ -140,11 +140,11 @@ const tradeoffs = [
               </p>
             </div>
             <div class="rounded-lg border border-blue-300 bg-blue-50 p-5 sm:col-span-2">
-              <p class="text-sm font-semibold text-blue-950">Need zero hosted statistics?</p>
+              <p class="text-sm font-semibold text-blue-950">Need to disable dedicated statistics reports?</p>
               <p class="mt-2 text-sm leading-6 text-blue-900">
-                Set <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">statsUrl: ''</code> in the updater config. Capgo Cloud will stop receiving updater statistics;
-                update checks can still use <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">updateUrl</code> and{' '}
-                <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">channelUrl</code> if you keep them enabled.
+                Set <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">statsUrl: ''</code> in the updater config. This disables dedicated statistics reports; update checks
+                can still use <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">updateUrl</code> and{' '}
+                <code class="rounded bg-blue-100 px-1 py-0.5 text-blue-950">channelUrl</code> if you keep them enabled. Those requests still send device-scoped data to Capgo.
               </p>
             </div>
           </div>

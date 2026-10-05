@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import CompetitorComparison from '@/experiments/website-design/legacy/components/CompetitorComparison.astro'
 import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
 import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
@@ -6,7 +7,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
-const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+const pageUrl = websiteDesignPublicUrl(Astro.url)
 const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
 const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
 const ciCdUrl = getRelativeLocaleUrl(locale, 'ci_cd')

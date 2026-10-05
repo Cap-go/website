@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/experiments/website-design/legacy/copy/messages'
@@ -12,13 +13,13 @@ const description = m.consulting_description({}, { locale })
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description: description,
-  url: Astro.url.href,
+  url: websiteDesignPublicUrl(Astro.url),
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
 })
 
 const faqSchema = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
-  url: Astro.url.href,
+  url: websiteDesignPublicUrl(Astro.url),
   questions: [
     { question: m.consulting_faq_q1({}, { locale }), answer: m.consulting_faq_a1({}, { locale }) },
     { question: m.consulting_faq_q2({}, { locale }), answer: m.consulting_faq_a2({}, { locale }) },
@@ -31,7 +32,7 @@ const faqSchema = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
     { question: m.consulting_faq_q9({}, { locale }), answer: m.consulting_faq_a9({}, { locale }) },
     {
       question: m.consulting_faq_q10({}, { locale }),
-      answer: 'Book a free discovery call at https://book.capgo.app/consulting-services/, email sales@capgo.app, or reach out on Discord.',
+      answer: m.consulting_faq_a10({}, { locale }),
     },
   ],
 })

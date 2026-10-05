@@ -65,6 +65,7 @@
         properties.website_design_experiment = experiment
         properties.website_design_variant = variant
         properties.website_design_visitor_id = visitor
+        properties.website_design_issued_at = Number(read('website-design-issued-at'))
         properties['$feature/' + experiment] = variant
         ph.register(properties)
         ph.capture('$pageview', { ...properties, website_design_page_exposed: true })

@@ -2,7 +2,7 @@
 const { class: className, ...props } = Astro.props
 ---
 
-<svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['w-full h-auto drop-shadow-2xl', className]} {...props}>
+<svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['w-full h-auto drop-shadow-2xl', className]} {...props} aria-hidden="true" focusable="false">
   <!-- Main Dashboard Window -->
   <rect x="20" y="20" width="560" height="360" rx="12" class="fill-gray-900 stroke-gray-700" stroke-width="2" />
 

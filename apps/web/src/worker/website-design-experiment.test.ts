@@ -10,6 +10,7 @@ import {
   WEBSITE_DESIGN_MAX_AGE,
   WEBSITE_DESIGN_SIGNUP_PATH,
   websiteDesignCookie,
+  websiteDesignPublicUrl,
   websiteDesignRoute,
 } from '../lib/websiteDesignExperiment'
 import { confirmWebsiteDesignSignup, websiteDesignSignupMetadata } from '../lib/websiteDesignExperiment.client'
@@ -34,6 +35,12 @@ const env = {
     },
   },
 }
+
+test('structured data identifies the public URL rather than its private build path', () => {
+  expect(websiteDesignPublicUrl(new URL('https://capgo.app/website-experiment/control/consulting/?preview=1'))).toBe('https://capgo.app/consulting/')
+  expect(websiteDesignPublicUrl(new URL('https://capgo.app/website-experiment/control/'))).toBe('https://capgo.app/')
+  expect(websiteDesignPublicUrl(new URL('https://capgo.app/native-build/'))).toBe('https://capgo.app/native-build/')
+})
 
 describe('browser exposure and signup identity', () => {
   const meta = {
@@ -107,6 +114,14 @@ describe('browser exposure and signup identity', () => {
       expect(confirmations).toHaveLength(1)
       ;(globalThis as any).document = documentStub({})
       expect(websiteDesignSignupMetadata()).toEqual({})
+      ph.has_opted_out_capturing = () => false
+      ;(ph as any).get_property = (key: string) =>
+        ({ website_design_experiment: WEBSITE_DESIGN_EXPERIMENT, website_design_variant: 'control', website_design_visitor_id: oldId, website_design_issued_at: now })[
+          key as 'website_design_issued_at'
+        ]
+      expect(websiteDesignSignupMetadata().website_design_visitor_id).toBe(oldId)
+      confirmWebsiteDesignSignup('fake-session-token')
+      expect(confirmations).toHaveLength(2)
     } finally {
       ;(globalThis as any).window = previous.window
       ;(globalThis as any).document = previous.document

@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
 import m, { type MessageKey, type MessageValues } from '@/experiments/website-design/legacy/copy/messages'
 import SolutionAppExample from '@/experiments/website-design/legacy/components/solutions/SolutionAppExample.astro'
@@ -19,7 +20,7 @@ const description = copy('solutions_build_without_mac_description')
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description,
-  url: Astro.url.href,
+  url: websiteDesignPublicUrl(Astro.url),
   serviceType: 'Cloud iOS build service',
   areaServed: ['Worldwide'],
 })

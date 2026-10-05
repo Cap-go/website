@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
 import m from '@/experiments/website-design/legacy/copy/messages'
 import SolutionAppExample from '@/experiments/website-design/legacy/components/solutions/SolutionAppExample.astro'
@@ -15,7 +16,7 @@ const description = m.solutions_beta_testing_description({}, { locale })
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description: description,
-  url: Astro.url.href,
+  url: websiteDesignPublicUrl(Astro.url),
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
 })
@@ -156,22 +157,30 @@ const content = { title, description, ldJSON }
             </thead>
             <tbody class="divide-y divide-gray-700">
               <tr>
-                <td class="px-6 py-4 text-gray-300">{m.solutions_beta_testing_compare_upload({}, { locale })}</td>
+                <th scope="row" class="px-6 py-4 text-left font-normal text-gray-300">
+                  {m.solutions_beta_testing_compare_upload({}, { locale })}
+                </th>
                 <td class="px-6 py-4 text-center text-gray-500">{m.solutions_beta_testing_compare_upload_tf({}, { locale })}</td>
                 <td class="px-6 py-4 text-center text-amber-400">{m.solutions_beta_testing_compare_upload_capgo({}, { locale })}</td>
               </tr>
               <tr>
-                <td class="px-6 py-4 text-gray-300">{m.solutions_beta_testing_compare_distribution({}, { locale })}</td>
+                <th scope="row" class="px-6 py-4 text-left font-normal text-gray-300">
+                  {m.solutions_beta_testing_compare_distribution({}, { locale })}
+                </th>
                 <td class="px-6 py-4 text-center text-gray-500">{m.solutions_beta_testing_compare_distribution_tf({}, { locale })}</td>
                 <td class="px-6 py-4 text-center text-amber-400">{m.solutions_beta_testing_compare_distribution_capgo({}, { locale })}</td>
               </tr>
               <tr>
-                <td class="px-6 py-4 text-gray-300">{m.solutions_beta_testing_compare_switching({}, { locale })}</td>
+                <th scope="row" class="px-6 py-4 text-left font-normal text-gray-300">
+                  {m.solutions_beta_testing_compare_switching({}, { locale })}
+                </th>
                 <td class="px-6 py-4 text-center text-gray-500">{m.solutions_beta_testing_compare_switching_tf({}, { locale })}</td>
                 <td class="px-6 py-4 text-center text-amber-400">{m.solutions_beta_testing_compare_switching_capgo({}, { locale })}</td>
               </tr>
               <tr>
-                <td class="px-6 py-4 text-gray-300">{m.solutions_beta_testing_compare_feedback({}, { locale })}</td>
+                <th scope="row" class="px-6 py-4 text-left font-normal text-gray-300">
+                  {m.solutions_beta_testing_compare_feedback({}, { locale })}
+                </th>
                 <td class="px-6 py-4 text-center text-gray-500">{m.solutions_beta_testing_compare_feedback_tf({}, { locale })}</td>
                 <td class="px-6 py-4 text-center text-amber-400">{m.solutions_beta_testing_compare_feedback_capgo({}, { locale })}</td>
               </tr>
@@ -229,7 +238,7 @@ const content = { title, description, ldJSON }
             <pre class="overflow-x-auto text-sm text-gray-300"><code>import {'{'} CapacitorUpdater {'}'} from '@capgo/capacitor-updater'
 
 <span class="text-gray-500">// Get available channels</span>
-const channels = await CapacitorUpdater.getChannels()
+const {'{'} channels {'}'} = await CapacitorUpdater.listChannels()
 
 <span class="text-gray-500">// Switch to a different channel</span>
 async function switchChannel(channelName: string) {'{'}

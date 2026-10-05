@@ -2,7 +2,7 @@
 const { class: className, ...props } = Astro.props
 ---
 
-<svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['h-auto w-full drop-shadow-2xl', className]} {...props}>
+<svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['h-auto w-full drop-shadow-2xl', className]} {...props} aria-hidden="true" focusable="false">
   <!-- Shield Background -->
   <path d="M300 40 C300 40 100 90 100 200 C100 320 300 380 300 380 C300 380 500 320 500 200 C500 90 300 40 300 40 Z" class="fill-gray-900 stroke-gray-700" stroke-width="2"></path>
 

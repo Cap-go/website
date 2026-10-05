@@ -1,11 +1,12 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import CompetitorComparison from '@/experiments/website-design/legacy/components/CompetitorComparison.astro'
 import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
 import { createFAQPageLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
-const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+const pageUrl = websiteDesignPublicUrl(Astro.url)
 
 const faq = [
   {

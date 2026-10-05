@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
 import m from '@/experiments/website-design/legacy/copy/messages'
 import SolutionAppExample from '@/experiments/website-design/legacy/components/solutions/SolutionAppExample.astro'
@@ -18,7 +19,7 @@ const description = m.solutions_agencies_description({}, { locale })
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description: description,
-  url: Astro.url.href,
+  url: websiteDesignPublicUrl(Astro.url),
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
 })
@@ -44,7 +45,7 @@ const content = { title, description, ldJSON }
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <div class="mb-8 inline-flex items-center rounded-full border border-amber-400/40 bg-amber-500/10 px-4 py-2 text-sm font-medium text-amber-200">
-            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -91,7 +92,7 @@ const content = { title, description, ldJSON }
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -106,7 +107,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
@@ -116,7 +117,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -131,7 +132,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -146,7 +147,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -161,7 +162,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-xl border border-red-500/20 bg-gray-900 p-6">
             <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -193,7 +194,7 @@ const content = { title, description, ldJSON }
               <div>
                 <div class="mb-4 flex items-center gap-3">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/20">
-                    <svg class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -207,7 +208,7 @@ const content = { title, description, ldJSON }
                 <p class="mb-4 text-gray-300">{m.solutions_agencies_sol1_desc({}, { locale })}</p>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -217,7 +218,7 @@ const content = { title, description, ldJSON }
                     {m.solutions_agencies_sol1_point1({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -227,7 +228,7 @@ const content = { title, description, ldJSON }
                     {m.solutions_agencies_sol1_point2({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -257,7 +258,7 @@ const content = { title, description, ldJSON }
               <div class="order-1 lg:order-2">
                 <div class="mb-4 flex items-center gap-3">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
-                    <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -271,7 +272,7 @@ const content = { title, description, ldJSON }
                 <p class="mb-4 text-gray-300">{m.solutions_agencies_sol2_desc({}, { locale })}</p>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -281,7 +282,7 @@ const content = { title, description, ldJSON }
                     {m.solutions_agencies_sol2_point1({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -291,7 +292,7 @@ const content = { title, description, ldJSON }
                     {m.solutions_agencies_sol2_point2({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -311,7 +312,7 @@ const content = { title, description, ldJSON }
               <div>
                 <div class="mb-4 flex items-center gap-3">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20">
-                    <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
                     </svg>
                   </div>
@@ -320,7 +321,7 @@ const content = { title, description, ldJSON }
                 <p class="mb-4 text-gray-300">{m.solutions_agencies_sol3_desc({}, { locale })}</p>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -330,7 +331,7 @@ const content = { title, description, ldJSON }
                     {m.solutions_agencies_sol3_point1({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -340,7 +341,7 @@ const content = { title, description, ldJSON }
                     {m.solutions_agencies_sol3_point2({}, { locale })}
                   </li>
                   <li class="flex items-start gap-2 text-gray-400">
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
                       <path
                         fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -373,7 +374,7 @@ const content = { title, description, ldJSON }
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
             <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-amber-500/20">
-              <svg class="h-8 w-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-8 w-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -388,7 +389,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
             <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-purple-500/20">
-              <svg class="h-8 w-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-8 w-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -403,7 +404,7 @@ const content = { title, description, ldJSON }
 
           <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
             <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20">
-              <svg class="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -426,7 +427,15 @@ const content = { title, description, ldJSON }
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-amber-600 to-orange-700 px-8 py-16 sm:px-16">
           <div aria-hidden="true" class="absolute inset-0">
-            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+            <svg
+              class="absolute inset-0 h-full w-full"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 1463 360"
+              aria-hidden="true"
+              focusable="false"
+            >
               <path class="text-opacity-40 text-amber-500" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
               <path class="text-opacity-20 text-orange-400" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
             </svg>

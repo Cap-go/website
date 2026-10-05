@@ -2,10 +2,13 @@ import { WEBSITE_DESIGN_EXPERIMENT, WEBSITE_DESIGN_SIGNUP_PATH, type WebsiteDesi
 
 export function getWebsiteDesignContext(): WebsiteDesignAssignment | null {
   const read = (name: string) => document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`)?.content
-  if (read('website-design-experiment') !== WEBSITE_DESIGN_EXPERIMENT) return null
-  const variant = read('website-design-variant')
-  const visitorId = read('website-design-visitor')
-  const issuedAt = Number(read('website-design-issued-at'))
+  // A visitor exposed on an English page can later register on a shared translation.
+  // Recover their prior exposure; never inject browser-specific data into translation caches.
+  const stored = (key: string) => (window as any).posthog?.get_property?.(key)
+  if ((read('website-design-experiment') ?? stored('website_design_experiment')) !== WEBSITE_DESIGN_EXPERIMENT) return null
+  const variant = read('website-design-variant') ?? stored('website_design_variant')
+  const visitorId = read('website-design-visitor') ?? stored('website_design_visitor_id')
+  const issuedAt = Number(read('website-design-issued-at') ?? stored('website_design_issued_at'))
   if (!visitorId || !issuedAt || (variant !== 'control' && variant !== 'test')) return null
   return { visitorId, issuedAt, variant }
 }

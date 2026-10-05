@@ -43,7 +43,7 @@ const locale = Astro.locals.locale
             {m.docs({}, { locale: Astro.locals.locale })}
           </a>
           <!-- Products Dropdown -->
-          <div class="group relative">
+          <div class="group relative" data-legacy-disclosure>
             <button
               type="button"
               class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
@@ -134,7 +134,7 @@ const locale = Astro.locals.locale
             </div>
           </div>
           <!-- Solutions Dropdown -->
-          <div class="group relative">
+          <div class="group relative" data-legacy-disclosure>
             <button
               type="button"
               class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
@@ -849,6 +849,21 @@ const locale = Astro.locals.locale
 </header>
 
 <script>
+  document.querySelectorAll<HTMLElement>('[data-legacy-disclosure]').forEach((group, index) => {
+    const trigger = group.querySelector<HTMLButtonElement>(':scope > button')
+    const popup = group.querySelector<HTMLElement>(':scope > div')
+    if (!trigger || !popup) return
+    popup.id = `legacy-navigation-menu-${index}`
+    trigger.setAttribute('aria-haspopup', 'true')
+    trigger.setAttribute('aria-controls', popup.id)
+    trigger.setAttribute('aria-expanded', 'false')
+    const sync = () => trigger.setAttribute('aria-expanded', String(group.matches(':hover, :focus-within')))
+    group.addEventListener('mouseenter', sync)
+    group.addEventListener('mouseleave', sync)
+    group.addEventListener('focusin', sync)
+    group.addEventListener('focusout', () => setTimeout(sync, 0))
+  })
+
   const menuToggle = document.getElementById('menu-toggle')
   const mobileMenu = document.getElementById('mobile-menu')
   const productsToggle = document.getElementById('products-toggle')

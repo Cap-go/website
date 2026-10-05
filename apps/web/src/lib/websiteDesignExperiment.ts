@@ -10,6 +10,11 @@ export const WEBSITE_DESIGN_SIGNUP_PATH = '/api/website-design/signup'
 export const LANDING_POSTHOG_PROJECT_KEY = 'phc_VwWolDCQHVlAFmRbGjkjV8LTp0xw3SgzJq0D2ZN0lce'
 const routeSet = new Set(routes)
 
+export function websiteDesignPublicUrl(url: URL): string {
+  const pathname = url.pathname.replace(/^\/website-experiment\/control(?=\/|$)/, '') || '/'
+  return new URL(pathname, url.origin).href
+}
+
 export type WebsiteDesignVariant = 'control' | 'test'
 export interface WebsiteDesignAssignment {
   visitorId: string

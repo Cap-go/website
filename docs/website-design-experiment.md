@@ -20,6 +20,13 @@ blog articles, tools and routes without a changed historical counterpart remain
 shared. Translated HTML has a separate shared cache; the translation Worker tags
 its origin requests so that personalized English HTML never enters that cache.
 
+Historical navigation, section presence, card layouts and video presentation remain
+part of the treatment. Sharing the verified testimonial registry does not make the
+two presentations contain identical proof sections. Public links, structured-data
+URLs and accessibility defects found during restoration are corrected. The retained
+historical copies are excluded only from Sonar's duplication calculation; fresh
+routing, signup and analytics code remains subject to all analysis.
+
 ## Assignment and serving
 
 On the first eligible GET, Cloudflare generates a cryptographically random UUID.
@@ -56,6 +63,10 @@ The account UUID provides an idempotent event UUID/insert ID. The verified event
 contains no email, form values or access token. The normal existing client signup
 event remains available, marked `signup_confirmation=client`, and is excluded from
 the experiment's primary metric.
+
+The SDK also persists the exposure context, so a visitor who starts on an English
+marketing page and later registers through a shared translation retains attribution.
+The server still requires the matching cookie and a verified newly created account.
 
 Primary metric: **confirmed account creation within seven days of exposure**.
 Secondary metrics: reaching `/register/` within seven days, and confirmed account

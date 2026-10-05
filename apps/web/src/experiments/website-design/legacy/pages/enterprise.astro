@@ -672,7 +672,13 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
       </div>
     </section>
 
-    <ProductTestimonials variant="builder" accent="blue" title={m.they_love_capgo({}, { locale })} description={m.From_indie_devs_to({}, { locale })} testimonials={capgoReviews} />
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      title={m.they_love_capgo({}, { locale })}
+      description={m.From_indie_devs_to({}, { locale })}
+      testimonials={capgoReviews.filter((item) => item.quote !== enterpriseTestimonial.quote)}
+    />
 
     <section class="section bg-grid grain" id="pain">
       <div class="shell">

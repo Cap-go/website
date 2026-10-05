@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import ProductTestimonials from '@/experiments/website-design/legacy/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
@@ -26,7 +27,7 @@ const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description: description,
-  url: Astro.url.href,
+  url: websiteDesignPublicUrl(Astro.url),
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
 })

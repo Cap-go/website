@@ -337,7 +337,7 @@ const content = {
                 <div
                   class="plugin-card group relative rounded-lg border border-gray-700/80 bg-gray-950/45 p-5 transition-colors duration-200 hover:border-gray-500/70 hover:bg-gray-900/65"
                   data-title={item.title.toLowerCase()}
-                  data-description={item.description.toLowerCase()}
+                  data-description={item.description.replace(/<[^>]*>/g, ' ').toLowerCase()}
                   data-author={item.author.toLowerCase()}
                   data-package={item.name?.toLowerCase() ?? ''}
                   data-category={item.category}
@@ -455,7 +455,7 @@ const content = {
             </svg>
           </a>
           <a
-            href="#custom-development"
+            href={getRelativeLocaleUrl(locale, 'consulting')}
             class="inline-flex items-center rounded-xl border-2 border-blue-300 px-8 py-4 text-lg font-semibold text-blue-200 transition-all duration-200 hover:bg-blue-50 hover:text-blue-900"
           >
             {m.need_something_custom({}, { locale: Astro.locals.locale })}

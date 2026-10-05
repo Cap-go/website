@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import '@/experiments/website-design/legacy/styles/lu-product.css'
 import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
@@ -19,7 +20,7 @@ const pluginUrl = getRelativeLocaleUrl(locale, 'plugins/capacitor-notifications'
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description,
-  url: Astro.url.href,
+  url: websiteDesignPublicUrl(Astro.url),
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
 })

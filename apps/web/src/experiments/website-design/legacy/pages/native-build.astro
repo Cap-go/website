@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import CommandCode from '@/components/CommandCode.astro'
 import ProductTestimonials from '@/experiments/website-design/legacy/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/experiments/website-design/legacy/components/ProductVideoSection.astro'
@@ -107,7 +108,7 @@ const calcTiers = buildCredits.map((credit) => ({
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
   description,
-  url: Astro.url.href,
+  url: websiteDesignPublicUrl(Astro.url),
   serviceType: 'Cloud native mobile app build service',
   areaServed: ['Worldwide'],
 })
@@ -1700,7 +1701,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-fg);
       white-space: pre-wrap;
       /* Fixed height, tall enough for the full build log, so it never grows/jumps
-           as lines stream in AND never shows a scrollbar. */
+                 as lines stream in AND never shows a scrollbar. */
       height: 560px;
       overflow: hidden;
     }
