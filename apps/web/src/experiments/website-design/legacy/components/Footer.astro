@@ -1,5 +1,5 @@
 ---
-import BrandLogo from '@/components/BrandLogo.astro'
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import m from '@/experiments/website-design/legacy/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
 import { getLocalizedPath } from '@/services/locale-path'
@@ -370,7 +370,6 @@ const navigation: Record<string, NavigationItem[]> = {
           <button
             type="button"
             id="language-dropdown-button"
-            aria-haspopup="true"
             aria-expanded="false"
             aria-controls="language-dropdown"
             class="flex items-center text-sm text-zinc-400 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
@@ -386,7 +385,7 @@ const navigation: Record<string, NavigationItem[]> = {
             <div class="py-1">
               {locales.map((item) => (
                 <a
-                  href={getLocalizedPath(item, Astro.url.pathname.replace(/^\/website-experiment\/control/, '') || '/')}
+                  href={getLocalizedPath(item, new URL(websiteDesignPublicUrl(Astro.url)).pathname)}
                   id={`language_${item}`}
                   data-language={item}
                   class="block px-4 py-2 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white"
@@ -415,6 +414,14 @@ const navigation: Record<string, NavigationItem[]> = {
     button.addEventListener('click', () => {
       const hidden = dropdown.classList.toggle('hidden')
       button.setAttribute('aria-expanded', String(!hidden))
+    })
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !dropdown.classList.contains('hidden')) {
+        dropdown.classList.add('hidden')
+        button.setAttribute('aria-expanded', 'false')
+        button.focus()
+      }
     })
 
     document.addEventListener('click', (event) => {

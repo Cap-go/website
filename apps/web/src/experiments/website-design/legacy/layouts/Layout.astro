@@ -1,4 +1,5 @@
 ---
+import { websiteDesignPublicUrl } from '@/lib/websiteDesignExperiment'
 import Footer from '@/experiments/website-design/legacy/components/Footer.astro'
 import Header from '@/experiments/website-design/legacy/components/Header.astro'
 import SEO from '@/components/SEO.astro'
@@ -16,7 +17,7 @@ type FooterBlogPost = {
   tag?: string
 }
 
-const canonicalPath = Astro.url.pathname.replace(/^\/website-experiment\/control/, '') || '/'
+const canonicalPath = new URL(websiteDesignPublicUrl(Astro.url)).pathname
 const canonical = new URL(canonicalPath, Astro.locals.runtimeConfig.public.baseUrl)
 const content = { ...Astro.props.content, canonical, url: canonical, robots: 'noindex, follow', alternateVersions: [] }
 const disableThirdPartyScripts = Astro.props.disableThirdPartyScripts ?? false

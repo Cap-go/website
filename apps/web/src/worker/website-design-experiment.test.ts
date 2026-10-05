@@ -59,6 +59,8 @@ describe('browser exposure and signup identity', () => {
       [meta, 'capgo.app'],
       [{}, 'capgo.app'],
       [meta, 'development.capgo.app'],
+      [{ ...meta, 'website-design-issued-at': '' }, 'capgo.app'],
+      [{ ...meta, 'website-design-issued-at': 'invalid' }, 'capgo.app'],
     ] as const) {
       const registered: any[] = []
       const events: any[] = []
@@ -77,6 +79,7 @@ describe('browser exposure and signup identity', () => {
       expect(events[0][0]).toBe('$pageview')
       if (values === meta && hostname === 'capgo.app') {
         expect(events[0][1].website_design_page_exposed).toBe(true)
+        expect(events[0][1].website_design_issued_at).toBe(now)
         expect(events[0][1][`$feature/${WEBSITE_DESIGN_EXPERIMENT}`]).toBe('control')
         expect(registered[0].website_design_page_exposed).toBeUndefined()
       } else {

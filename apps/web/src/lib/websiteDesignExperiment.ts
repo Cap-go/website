@@ -11,7 +11,8 @@ export const LANDING_POSTHOG_PROJECT_KEY = 'phc_VwWolDCQHVlAFmRbGjkjV8LTp0xw3Sgz
 const routeSet = new Set(routes)
 
 export function websiteDesignPublicUrl(url: URL): string {
-  const pathname = url.pathname.replace(/^\/website-experiment\/control(?=\/|$)/, '') || '/'
+  const internal = url.pathname === WEBSITE_DESIGN_INTERNAL_PREFIX || url.pathname.startsWith(`${WEBSITE_DESIGN_INTERNAL_PREFIX}/`)
+  const pathname = internal ? url.pathname.slice(WEBSITE_DESIGN_INTERNAL_PREFIX.length) || '/' : url.pathname
   return new URL(pathname, url.origin).href
 }
 

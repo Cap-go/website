@@ -854,7 +854,6 @@ const locale = Astro.locals.locale
     const popup = group.querySelector<HTMLElement>(':scope > div')
     if (!trigger || !popup) return
     popup.id = `legacy-navigation-menu-${index}`
-    trigger.setAttribute('aria-haspopup', 'true')
     trigger.setAttribute('aria-controls', popup.id)
     trigger.setAttribute('aria-expanded', 'false')
     const sync = () => trigger.setAttribute('aria-expanded', String(group.matches(':hover, :focus-within')))
