@@ -193,7 +193,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
                     {' '}
                     Fast SQL{' '}
                   </a>
-                  <span class="mx-2 text-gray-500">{m.appflow_plugins_or({}, { locale })}</span>
+                  <span class="mx-2 text-gray-400">{m.appflow_plugins_or({}, { locale })}</span>
                   <a href={getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/')} class="text-blue-400 hover:underline">
                     {' '}
                     Data Storage SQLite{' '}
@@ -279,13 +279,13 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
               <tr class="transition hover:bg-white/5">
                 <td class="px-6 py-4 font-medium text-gray-100">@ionic-enterprise/ssl-pinning</td>
                 <td class="px-6 py-4">
-                  <a href="https://github.com/mchl18/Capacitor-SSL-Pinning" class="text-blue-400 hover:underline" target="_blank" rel="noreferrer">
+                  <a href="https://github.com/Cap-go/capacitor-ssl-pinning/" class="text-blue-400 hover:underline" target="_blank" rel="noreferrer">
                     {' '}
                     capacitor-ssl-pinning{' '}
                   </a>
                 </td>
                 <td class="px-6 py-4">
-                  <a href="https://github.com/mchl18/Capacitor-SSL-Pinning" class="text-blue-300 hover:underline" target="_blank" rel="noreferrer">
+                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/ssl-pinning/')} class="text-blue-300 hover:underline" target="_blank" rel="noreferrer">
                     {m.appflow_plugins_link_text({}, { locale })}
                   </a>
                 </td>

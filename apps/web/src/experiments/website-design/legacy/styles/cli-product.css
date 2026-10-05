@@ -563,7 +563,7 @@ body:has(.cli) footer > div > div:first-child {
   color: rgba(255, 255, 255, 0.45);
   font-family: var(--cli-font-mono);
 }
-.cli table.comp-prose tbody td.label {
+.cli table.comp-prose tbody th.label {
   width: 18%;
   white-space: nowrap;
   font-size: 12px;
@@ -584,7 +584,7 @@ body:has(.cli) footer > div > div:first-child {
   font-weight: 700;
 }
 @media (max-width: 720px) {
-  .cli table.comp-prose tbody td.label {
+  .cli table.comp-prose tbody th.label {
     white-space: normal;
   }
   .cli table.comp-prose {

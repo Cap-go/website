@@ -11,38 +11,51 @@ const locale = Astro.locals.locale
         stroke-dashoffset: 0;
       }
     }
-    .path-initial {
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
-    }
-    .reveal-initial {
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-    .is-visible .animate-draw-1 {
-      animation: draw 0.5s linear forwards;
-    }
-    .is-visible .animate-draw-2 {
-      animation: draw 0.5s linear 0.5s forwards;
-    }
-    .is-visible .animate-draw-3 {
-      animation: draw 0.5s linear 1s forwards;
-    }
-    .is-visible .reveal-delay-1 {
-      transition-delay: 1s;
-      opacity: 1;
-    }
-    .is-visible .reveal-delay-2 {
-      transition-delay: 1.5s;
-      opacity: 1;
+    @media (prefers-reduced-motion: no-preference) {
+      .path-initial {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+      }
+      .reveal-initial {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+      .is-visible .animate-draw-1 {
+        animation: draw 0.5s linear forwards;
+      }
+      .is-visible .animate-draw-2 {
+        animation: draw 0.5s linear 0.5s forwards;
+      }
+      .is-visible .animate-draw-3 {
+        animation: draw 0.5s linear 1s forwards;
+      }
+      .is-visible .reveal-delay-1 {
+        transition-delay: 1s;
+        opacity: 1;
+      }
+      .is-visible .reveal-delay-2 {
+        transition-delay: 1.5s;
+        opacity: 1;
+      }
     }
   </style>
+  <noscript>
+    <style is:inline>
+      .automation-diagram .path-initial {
+        stroke-dashoffset: 0;
+      }
+      .automation-diagram .reveal-initial {
+        opacity: 1;
+      }
+    </style>
+  </noscript>
   <script>
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
           }
         })
       },
@@ -62,7 +75,7 @@ const locale = Astro.locals.locale
 
     <div class="relative overflow-x-auto pb-12">
       <div class="min-w-[800px] px-4">
-        <svg width="1124" height="323" viewBox="0 0 1124 323" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-auto w-full">
+        <svg aria-hidden="true" focusable="false" width="1124" height="323" viewBox="0 0 1124 323" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-auto w-full">
           <defs>
             <mask id="reveal-middle" maskUnits="userSpaceOnUse">
               <rect x="0" y="0" width="1124" height="323" fill="black"></rect>

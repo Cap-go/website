@@ -84,9 +84,12 @@ of noisy percentages; report counts, uncertainty and the actual exposure dates.
 
 ## Preview, launch and rollback
 
-Run `bun run build:web`, then `bun run preview:worker` from `apps/web`.
+From the repository root, run `bun run build:web`, then
+`cd apps/web && bun run preview:worker`.
 At localhost (or `development.capgo.app`), `?website_variant=control` and
 `?website_variant=test` force a visual preview. Production ignores this override.
+Preview defaults to the same random sticky assignment as production, so navigation
+checks exercise the real split. Use the override to review a specific design.
 Preview cannot send verified signup measurement to the production experiment.
 
 The production Worker variable `WEBSITE_DESIGN_EXPERIMENT=website-design-v1`

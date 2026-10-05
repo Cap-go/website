@@ -65,14 +65,8 @@ body,
   --color-gray-950: oklch(0.129 0.042 264.695);
 
   /* Custom Font Sizes */
-  --font-size-tiny: 0.4rem;
 
   /* Custom Animations */
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-float-slow: float-slow 8s ease-in-out infinite;
-  --animate-float-medium: float-medium 6s ease-in-out infinite;
-  --animate-float-fast: float-fast 4s ease-in-out infinite;
-  --animate-fade-in: fadeIn 0.8s ease-out forwards;
 
   /* Custom Breakpoints */
   --breakpoint-tab: 361px;
@@ -200,56 +194,6 @@ body,
 }
 
 /* Custom Keyframes for Animations */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-15px);
-  }
-}
-
-@keyframes float-medium {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes float-fast {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Hide duplicate H1 in blog/prose content - titles are already rendered in page templates */
 .blog.prose > h1:first-child:not(:where(.not-content *)),

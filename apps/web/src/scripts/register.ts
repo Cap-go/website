@@ -99,6 +99,13 @@ form?.addEventListener('submit', async (e) => {
     }).showToast()
   }
 
+  if (!getCaptchaId()) {
+    return Toastify({
+      text: 'Security verification is not ready. Please wait a moment and try again, or refresh the page.',
+      style: { background: '#e7000b' },
+    }).showToast()
+  }
+
   isSubmitting = true
   submitButton.disabled = true
 

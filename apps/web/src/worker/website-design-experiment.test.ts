@@ -130,6 +130,41 @@ describe('browser exposure and signup identity', () => {
   })
 })
 
+test('a slow CAPTCHA cannot send an unverified registration request in either design', async () => {
+  const source = readFileSync(new URL('../scripts/register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  const transpiled = new Bun.Transpiler({ loader: 'ts' }).transformSync(source)
+  let handler: (event: { preventDefault(): void }) => Promise<void> = async () => {}
+  let authCalls = 0
+  const toasts: string[] = []
+  const button = { disabled: false }
+  const values: Record<string, unknown> = {
+    registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
+    email: { value: 'test@example.com' },
+    firstName: { value: 'Test' },
+    lastName: { value: 'Visitor' },
+    password: { value: 'test-password' },
+  }
+  runInNewContext(transpiled, {
+    document: { getElementById: (id: string) => values[id], querySelectorAll: () => [] },
+    getRemoteConfig: () => Promise.resolve({}),
+    isSupabaseConfigured: () => true,
+    useSupabase: () => {
+      authCalls++
+      throw new Error('Auth must not run before CAPTCHA')
+    },
+    Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
+    window: {},
+    navigator: {},
+    setTimeout,
+  })
+  await Promise.resolve()
+  expect(button.disabled).toBe(false)
+  await handler({ preventDefault() {} })
+  expect(authCalls).toBe(0)
+  expect(toasts).toEqual(['Security verification is not ready. Please wait a moment and try again, or refresh the page.'])
+  expect(button.disabled).toBe(false)
+})
+
 describe('persistent equal assignment', () => {
   test('reads and preserves assignment, rejecting malformed, expired and future cookies', () => {
     expect(readWebsiteDesignAssignment(cookie, now)).toEqual(assignment)

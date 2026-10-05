@@ -197,11 +197,11 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
             <div>
               <div class="mb-2 text-5xl font-bold text-white">
                 <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
-                  57ms
+                  ~50ms
                 </a>
               </div>
               <div class="mb-1 text-sm font-semibold text-white">{m.shared_numbers_api_response({}, { locale: Astro.locals.locale })}</div>
-              <div class="text-xs text-gray-400">{m.home_avg_latency({}, { locale: Astro.locals.locale })}</div>
+              <div class="text-xs text-gray-400">{m.all_around_the_globe({}, { locale: Astro.locals.locale })}</div>
             </div>
           </div>
         </div>

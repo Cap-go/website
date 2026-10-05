@@ -40,7 +40,7 @@ const intelligenceCards = [
         <div class="mt-8">
           <a
             href={getRelativeLocaleUrl(locale, 'live-update')}
-            class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-950/40 transition hover:bg-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
+            class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-950/40 transition hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 focus:outline-none"
           >
             {m.learn_more({}, { locale })}
           </a>
@@ -48,7 +48,13 @@ const intelligenceCards = [
       </div>
 
       <div class="overflow-hidden rounded-lg border border-white/10 bg-[#070d18] shadow-2xl shadow-blue-950/30">
-        <img src="/landing-demos/cli-live-update.webp" alt="" loading="lazy" decoding="async" class="block aspect-[16/10] w-full object-cover object-top" />
+        <img
+          src="/landing-demos/cli-live-update.webp"
+          alt="Capgo CLI showing a live update deployment"
+          loading="lazy"
+          decoding="async"
+          class="block aspect-[16/10] w-full object-cover object-top"
+        />
       </div>
     </div>
   </div>

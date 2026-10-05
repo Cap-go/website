@@ -32,7 +32,7 @@ const content = { title, description, ldJSON }
   <div class="product-hero">
     <!-- Hero Section -->
     <section class="relative py-16 sm:py-20 lg:py-28">
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {Array.from({ length: 15 }).map((_, i) => (
           <div
             id={`${i}`}
@@ -243,7 +243,8 @@ const {'{'} channels {'}'} = await CapacitorUpdater.listChannels()
 <span class="text-gray-500">// Switch to a different channel</span>
 async function switchChannel(channelName: string) {'{'}
   await CapacitorUpdater.setChannel({'{'}
-    channel: channelName
+    channel: channelName,
+    triggerAutoUpdate: true
   {'}'})
 
   <span class="text-gray-500">// Download will start automatically</span>

@@ -251,7 +251,9 @@ const comparisonRows = [
             <tbody>
               {comparisonRows.map((row) => (
                 <tr>
-                  <td class="label">{row.label}</td>
+                  <th scope="row" class="label">
+                    {row.label}
+                  </th>
                   <td class="us">
                     <span class="hook">{row.hook}</span> {row.capgo}
                   </td>
@@ -398,19 +400,19 @@ const comparisonRows = [
 
           <dl class="mt-5 grid gap-3 sm:grid-cols-2">
             <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Platform</dt>
+              <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Platform</dt>
               <dd class="mt-1 text-sm font-semibold text-white">iOS</dd>
             </div>
             <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Mode</dt>
+              <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Mode</dt>
               <dd class="mt-1 text-sm font-semibold text-white">release</dd>
             </div>
             <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Output</dt>
+              <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Output</dt>
               <dd class="mt-1 text-sm font-semibold text-white">IPA and install QR</dd>
             </div>
             <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Record</dt>
+              <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Record</dt>
               <dd class="mt-1 font-mono text-sm font-semibold text-cyan-200">.capgo/build.json</dd>
             </div>
           </dl>

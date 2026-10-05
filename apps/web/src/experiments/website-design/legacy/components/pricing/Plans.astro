@@ -58,7 +58,10 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 }
 ---
 
-<section id="plans">
+<section id="plans" aria-labelledby="legacy-plans-heading">
+  <h2 id="legacy-plans-heading" class="sr-only">
+    {m.pricing({}, { locale: Astro.locals.locale })}
+  </h2>
   <div class="grid grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm sm:grid-cols-2 lg:grid-cols-4">
     {pricing.map((plan) => (
       <div
@@ -100,7 +103,6 @@ function buildTimeDisplay(buildTimeSeconds: number) {
             rel="noopener noreferrer"
             aria-label={`Start ${plan.name} free trial`}
             class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            role="button"
           >
             {m.days_free_trial({}, { locale: Astro.locals.locale })}
           </a>
@@ -111,7 +113,6 @@ function buildTimeDisplay(buildTimeSeconds: number) {
               rel="noopener noreferrer"
               aria-label="Talk to our team"
               class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-4 py-3 text-sm font-semibold whitespace-nowrap text-gray-900 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              role="button"
             >
               <TeamAvatars />
               <span>Talk to our team</span>
