@@ -24,7 +24,10 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
 
 const content = { title, description, ldJSON, image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png` }
 
+const hostedMcpDocsUrl = getRelativeLocaleUrl(locale, 'docs/ai/mcp')
+
 const relatedLinks = [
+  { label: m.mcp_page_links_hosted({}, { locale }), href: hostedMcpDocsUrl },
   { label: m.mcp_page_links_manifest({}, { locale }), href: '/.well-known/mcp.json' },
   { label: m.mcp_page_links_docs({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/cli/reference/mcp') },
   { label: m.mcp_page_links_skills({}, { locale }), href: getRelativeLocaleUrl(locale, 'skills') },
@@ -44,6 +47,25 @@ const cliMcpCommand = 'npx @capgo/cli@latest mcp'
       </div>
 
       <div class="mb-8 space-y-8">
+        <div class="rounded-lg border border-emerald-400/30 bg-gray-800/50 p-6 sm:p-8">
+          <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.mcp_page_hosted_title({}, { locale })}</h2>
+          <div class="space-y-4 text-gray-300">
+            <p>{m.mcp_page_hosted_p1({}, { locale })}</p>
+            <p>{m.mcp_page_hosted_p2({}, { locale })}</p>
+            <p>
+              Endpoint: <code class="rounded bg-gray-950 px-2 py-1 text-emerald-300">https://api.capgo.app/mcp</code>
+            </p>
+            <p>
+              <a
+                href={hostedMcpDocsUrl}
+                class="inline-flex items-center rounded-md bg-emerald-400 px-4 py-2 text-sm font-semibold text-gray-950 transition-colors hover:bg-emerald-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+              >
+                {m.mcp_page_hosted_cta({}, { locale })}
+              </a>
+            </p>
+          </div>
+        </div>
+
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
           <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.mcp_page_public_title({}, { locale })}</h2>
           <div class="space-y-4 text-gray-300">
