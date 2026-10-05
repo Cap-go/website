@@ -43,6 +43,7 @@ const documentedPluginCategoryOverrides: Record<string, PluginCategoryId> = {
   '@capgo/capacitor-permissions': 'device-apis',
   '@capgo/capacitor-native-map': 'device-apis',
   '@capgo/capacitor-rich-notifications': 'communication',
+  '@capgo/capacitor-device-integrity': 'auth-security',
 }
 
 const actionDefinitionRows =
@@ -218,7 +219,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-calendar': 'CalendarDays',
   '@capgo/capacitor-date-picker': 'CalendarDays',
   '@capgo/capacitor-device-info': 'CpuChip',
-  '@capgo/capacitor-device-integrity': 'ShieldCheck',
+  '@capgo/capacitor-device-integrity': 'LockClosed',
   '@capgo/capacitor-updater': 'ArrowPath',
   '@capgo/capacitor-notifications': 'Bell',
   '@capgo/electron-updater': 'ArrowPath',
@@ -377,7 +378,6 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-social-login',
     '@capgo/capacitor-passkey',
     '@capgo/capacitor-app-attest',
-    '@capgo/capacitor-device-integrity',
     '@capgo/capacitor-recaptcha',
     '@capgo/capacitor-verisoul',
     '@capgo/capacitor-is-root',

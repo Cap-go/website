@@ -81,7 +81,7 @@ const pluginEntries = [
   ['Data Storage SQLite', 'data-storage-sqlite'],
   ['Date Picker', 'date-picker'],
   ['Device Info', 'device-info'],
-  ['Device Integrity', 'device-integrity'],
+  ['Device Integrity', 'device-integrity'], // @capgo/capacitor-device-integrity
   ['Document Scanner', 'document-scanner'],
   ['Downloader', 'downloader'],
   ['Electron Updater', 'electron-updater'],
@@ -134,7 +134,7 @@ const pluginEntries = [
   ['MQTT', 'mqtt'],
   ['Mock Location Detector', 'mock-location-detector'],
   ['Mute', 'mute'],
-  ['Mux Player', 'mux-player'],
+  ['Mux Player', 'mux-player'], // @capgo/capacitor-mux-player
   ['Native Audio', 'native-audio'],
   ['Native Biometric', 'native-biometric'],
   ['Native Geocoder', 'nativegeocoder'],
