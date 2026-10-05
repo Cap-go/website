@@ -96,7 +96,7 @@ Build and install a native test version, then:
 Changes to `capacitor.config.ts` require a native build. Uploading a JavaScript bundle alone does not apply these settings to existing iOS and Android installs. Users start using the custom domain after installing the new native version.
 </Aside>
 
-Keep the previous endpoints available during migration for users on older native versions. Channels, bundle uploads, and rollbacks continue to use your normal Capgo Console and CLI workflow.
+Older native installs keep using their configured endpoint URLs until users install the new native version. The updater's default hostname is `plugin.capgo.app`, which Capgo manages. If you are migrating from another custom hostname you control, keep its DNS records and service active until those users have migrated. Channels, bundle uploads, and rollbacks continue to use your normal Capgo Console and CLI workflow.
 
 ## Troubleshooting
 
