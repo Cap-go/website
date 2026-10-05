@@ -1,0 +1,489 @@
+---
+import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/experiments/website-design/legacy/copy/messages'
+import { createServiceLdJson, createLdJsonGraph, createFAQPageLdJson } from '@/lib/ldJson'
+import HumanSupport from '@/experiments/website-design/legacy/components/HumanSupport.astro'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | ${m.ps_title({}, { locale })}`
+const description = m.ps_description({}, { locale })
+
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const pageUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'premium-support/')}`
+const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Premium Support - Expert Capacitor Support',
+  description: 'Premium support retainer for Capacitor applications. 4 hours of prepaid expert support monthly for deployment issues, crashes, and native-side problems.',
+  url: pageUrl,
+  serviceType: 'Technical Support Service',
+  areaServed: ['Worldwide'],
+})
+
+const faqSchema = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+  url: pageUrl,
+  questions: [
+    { question: m.ps_faq_q1({}, { locale }), answer: m.ps_faq_a1({}, { locale }) },
+    { question: m.ps_faq_q2({}, { locale }), answer: m.ps_faq_a2({}, { locale }) },
+    { question: m.ps_faq_q3({}, { locale }), answer: m.ps_faq_a3({}, { locale }) },
+    { question: m.ps_faq_q4({}, { locale }), answer: m.ps_faq_a4({}, { locale }) },
+    { question: m.ps_faq_q5({}, { locale }), answer: m.ps_faq_a5({}, { locale }) },
+  ],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: m.home({}, { locale }), url: homeUrl },
+    { name: m.ps_premium_support({}, { locale }), url: pageUrl },
+  ],
+  additionalEntities: [faqSchema],
+})
+
+const content = { title, description, ldJSON }
+
+const supportFeatures = [
+  {
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    title: m.ps_feature_emergency_title({}, { locale }),
+    description: m.ps_feature_emergency_desc({}, { locale }),
+  },
+  {
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    title: m.ps_feature_native_title({}, { locale }),
+    description: m.ps_feature_native_desc({}, { locale }),
+  },
+  {
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+    title: m.ps_feature_time_title({}, { locale }),
+    description: m.ps_feature_time_desc({}, { locale }),
+  },
+  {
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+    title: m.ps_feature_direct_title({}, { locale }),
+    description: m.ps_feature_direct_desc({}, { locale }),
+  },
+]
+
+const helpAreas = [
+  { title: m.ps_help_deployment_title({}, { locale }), desc: m.ps_help_deployment_desc({}, { locale }) },
+  { title: m.ps_help_crashes_title({}, { locale }), desc: m.ps_help_crashes_desc({}, { locale }) },
+  { title: m.ps_help_native_title({}, { locale }), desc: m.ps_help_native_desc({}, { locale }) },
+  { title: m.ps_help_plugin_title({}, { locale }), desc: m.ps_help_plugin_desc({}, { locale }) },
+  { title: m.ps_help_performance_title({}, { locale }), desc: m.ps_help_performance_desc({}, { locale }) },
+  { title: m.ps_help_updates_title({}, { locale }), desc: m.ps_help_updates_desc({}, { locale }) },
+]
+---
+
+<Layout content={content}>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
+        <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl"></div>
+        <div class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-red-500/10 blur-3xl"></div>
+      </div>
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl text-center">
+        <div class="mb-8 inline-flex items-center rounded-full border border-orange-400/40 bg-orange-500/10 px-4 py-2 text-sm font-medium text-orange-200">
+          <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+            ></path>
+          </svg>
+          {m.ps_retainer_badge({}, { locale })}
+        </div>
+
+        <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
+          {m.ps_hero_title_1({}, { locale })}
+          <br />
+          <span class="text-orange-400">{m.ps_hero_title_2({}, { locale })}</span>
+        </h1>
+
+        <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">
+          {m.ps_hero_subtitle({}, { locale })}
+          <br class="hidden sm:block" />
+          <strong class="text-white">{m.ps_hero_subtitle_strong({}, { locale })}</strong>
+        </p>
+
+        <div class="mx-auto mt-10 max-w-2xl rounded-2xl border border-gray-700 bg-gray-800/50 p-8">
+          <div class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
+            <div class="text-center">
+              <div class="text-5xl font-bold text-white">{m.ps_price({}, { locale })}</div>
+              <div class="mt-1 text-gray-400">{m.ps_per_month({}, { locale })}</div>
+            </div>
+            <div class="hidden h-16 w-px bg-gray-600 sm:block"></div>
+            <div class="text-center">
+              <div class="text-5xl font-bold text-orange-400">{m.ps_hours({}, { locale })}</div>
+              <div class="mt-1 text-gray-400">{m.ps_of_expert_support({}, { locale })}</div>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-gray-400">{m.ps_rate_info({}, { locale })}</p>
+        </div>
+
+        <HumanSupport class="mt-8" size="sm" />
+        <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href="https://pay.capgo.app/b/8wM8wNaKHbTMbsIfZg"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-xl bg-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-orange-500/25 transition-all duration-200 hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+          >
+            {m.ps_subscribe_now({}, { locale })}
+            <svg class="ml-2 inline-block h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+          <a
+            href="https://book.capgo.app/premium-support/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
+          >
+            {m.ps_talk_first({}, { locale })}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Problem Section -->
+  <section class="bg-gray-800 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
+        <h2 class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.ps_reality({}, { locale })}</h2>
+        <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_when_things_go_wrong({}, { locale })}</h3>
+        <p class="mt-4 text-xl text-gray-400">{m.ps_you_know_the_feeling({}, { locale })}</p>
+      </div>
+
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="rounded-2xl border border-red-500/20 bg-gray-900 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.ps_problem_crash_title({}, { locale })}</h4>
+          <p class="text-gray-400">{m.ps_problem_crash_desc({}, { locale })}</p>
+        </div>
+
+        <div class="rounded-2xl border border-red-500/20 bg-gray-900 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.ps_problem_blocked_title({}, { locale })}</h4>
+          <p class="text-gray-400">{m.ps_problem_blocked_desc({}, { locale })}</p>
+        </div>
+
+        <div class="rounded-2xl border border-red-500/20 bg-gray-900 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.ps_problem_confused_title({}, { locale })}</h4>
+          <p class="text-gray-400">{m.ps_problem_confused_desc({}, { locale })}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="bg-gray-900 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
+        <h2 class="mb-4 text-sm font-semibold tracking-wide text-green-400 uppercase">{m.ps_solution({}, { locale })}</h2>
+        <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_expert_backup({}, { locale })}</h3>
+        <p class="mt-4 text-xl text-gray-400">{m.ps_expert_backup_desc({}, { locale })}</p>
+      </div>
+
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+        {supportFeatures.map((feature) => (
+          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-colors hover:border-orange-500/50">
+            <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-orange-500/20">
+              <svg class="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
+              </svg>
+            </div>
+            <h4 class="mb-3 text-xl font-bold text-white">{feature.title}</h4>
+            <p class="text-gray-400">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Help With Section -->
+  <section class="bg-gray-800 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_what_we_help({}, { locale })}</h2>
+        <p class="mt-4 text-xl text-gray-400">{m.ps_what_we_help_desc({}, { locale })}</p>
+      </div>
+
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {helpAreas.map((area) => (
+          <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
+            <div class="flex items-start gap-3">
+              <svg class="mt-1 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <div>
+                <h4 class="font-bold text-white">{area.title}</h4>
+                <p class="mt-1 text-sm text-gray-400">{area.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="bg-gray-900 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_how_it_works({}, { locale })}</h2>
+      </div>
+
+      <div class="mx-auto max-w-4xl">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div class="text-center">
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-2xl font-bold text-white">1</div>
+            <h4 class="mb-2 text-xl font-bold text-white">{m.ps_step1_title({}, { locale })}</h4>
+            <p class="text-gray-400">{m.ps_step1_desc({}, { locale })}</p>
+          </div>
+          <div class="text-center">
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-2xl font-bold text-white">2</div>
+            <h4 class="mb-2 text-xl font-bold text-white">{m.ps_step2_title({}, { locale })}</h4>
+            <p class="text-gray-400">{m.ps_step2_desc({}, { locale })}</p>
+          </div>
+          <div class="text-center">
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-2xl font-bold text-white">3</div>
+            <h4 class="mb-2 text-xl font-bold text-white">{m.ps_step3_title({}, { locale })}</h4>
+            <p class="text-gray-400">{m.ps_step3_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Details Section -->
+  <section class="bg-gray-800 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl">
+        <div class="rounded-2xl border border-orange-500/30 bg-gray-900 p-8 lg:p-12">
+          <div class="mb-8 text-center">
+            <h2 class="mb-2 text-3xl font-bold text-white">{m.ps_retainer_badge({}, { locale })}</h2>
+            <p class="text-gray-400">{m.ps_peace_of_mind({}, { locale })}</p>
+          </div>
+
+          <div class="mb-8 flex flex-col items-center justify-center gap-8 md:flex-row">
+            <div class="text-center">
+              <div class="text-6xl font-bold text-white">{m.ps_price({}, { locale })}</div>
+              <div class="text-gray-400">/{m.month({}, { locale })}</div>
+            </div>
+            <div class="hidden h-24 w-px bg-gray-700 md:block"></div>
+            <div class="space-y-3 text-left">
+              <div class="flex items-center gap-2 text-gray-300">
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                {m.ps_benefit_hours({}, { locale })}
+              </div>
+              <div class="flex items-center gap-2 text-gray-300">
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                {m.ps_benefit_priority({}, { locale })}
+              </div>
+              <div class="flex items-center gap-2 text-gray-300">
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                {m.ps_benefit_direct({}, { locale })}
+              </div>
+              <div class="flex items-center gap-2 text-gray-300">
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                {m.ps_benefit_additional({}, { locale })}
+              </div>
+              <div class="flex items-center gap-2 text-gray-300">
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                {m.ps_benefit_cancel({}, { locale })}
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a
+              href="https://pay.capgo.app/b/8wM8wNaKHbTMbsIfZg"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center rounded-xl bg-orange-600 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-orange-500/25 transition-colors hover:bg-orange-700"
+            >
+              {m.ps_subscribe_now({}, { locale })}
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+            <p class="mt-4 text-sm text-gray-500">{m.ps_secure_payment({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="bg-gray-900 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl">
+        <h2 class="mb-12 text-center text-3xl font-bold text-white">{m.ps_faq_title({}, { locale })}</h2>
+
+        <div class="space-y-6">
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q1({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a1({}, { locale })}</p>
+          </div>
+
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q2({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a2({}, { locale })}</p>
+          </div>
+
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q3({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a3({}, { locale })}</p>
+          </div>
+
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q4({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a4({}, { locale })}</p>
+          </div>
+
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q5({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a5({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial / Trust Section -->
+  <section class="bg-gray-800 py-20">
+    <div class="mx-auto max-w-4xl px-4 text-center">
+      <h2 class="mb-8 text-3xl font-bold text-white">{m.ps_trust_title({}, { locale })}</h2>
+      <div class="grid grid-cols-2 items-center justify-center gap-8 opacity-70 md:grid-cols-5">
+        <img class="mx-auto h-10 object-contain grayscale" src="/nana-logo-transparent.webp" alt="Nana" />
+        <img class="mx-auto h-10 object-contain grayscale" src="/snowqueen.webp" alt="Snowqueen" />
+        <img class="mx-auto h-10 object-contain grayscale" src="/shelf_app.webp" alt="Shelf" />
+        <img class="mx-auto h-10 object-contain grayscale" src="/suez.webp" alt="Suez" />
+        <img class="mx-auto h-10 object-contain grayscale" src="/janitor_app.webp" alt="Janitor" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="relative bg-gray-900 py-20">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 -left-40 h-80 w-80 animate-pulse rounded-full bg-orange-500/10 blur-3xl"></div>
+      <div class="absolute -right-40 -bottom-40 h-80 w-80 animate-pulse rounded-full bg-red-500/10 blur-3xl" style="animation-delay: 2s;"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="mb-6 text-4xl font-bold text-white sm:text-5xl">
+          {m.ps_cta_title_1({}, { locale })}
+          <br />
+          <span class="text-orange-400">{m.ps_cta_title_2({}, { locale })}</span>
+        </h2>
+
+        <p class="mx-auto mt-6 mb-10 max-w-2xl text-xl text-gray-300">{m.ps_cta_subtitle({}, { locale })}</p>
+
+        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href="https://pay.capgo.app/b/8wM8wNaKHbTMbsIfZg"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center rounded-xl bg-orange-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-orange-500/25 transition-all duration-200 hover:bg-orange-700"
+          >
+            {m.ps_cta_button({}, { locale })}
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+        </div>
+
+        <p class="mt-6 text-sm text-gray-400">
+          {m.ps_questions({}, { locale })}
+          <a href="https://book.capgo.app/premium-support/" target="_blank" rel="noopener noreferrer" class="text-orange-400 hover:underline">
+            {m.ps_schedule_call({}, { locale })}
+          </a>
+          {m.ps_to_learn_more({}, { locale })}
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
+    <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Premium Support</h2>
+    <p class="mt-4">
+      If you are buying premium support for production releases, connect it with <a href="/docs/live-updates/rollbacks/">Rollbacks</a> for recovery work,{' '}
+      <a href="/docs/webapp/logs/">Web App Logs</a> for diagnosis, <a href="/security-scanner/">Security Scanner</a> for release risk, <a href="/enterprise/">Capgo Enterprise</a>{' '}
+      for governance, and <a href="/live-update/">Capgo Live Updates</a> for the release path support protects.
+    </p>
+  </section>
+</Layout>

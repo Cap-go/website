@@ -1,0 +1,306 @@
+---
+import Layout from '@/experiments/website-design/legacy/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/experiments/website-design/legacy/copy/messages'
+import { pluginCountLabel } from '@/config/plugins'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import HumanSupport from '@/experiments/website-design/legacy/components/HumanSupport.astro'
+
+const locale = Astro.locals.locale
+const title = m.alternatives_title({}, { locale })
+const description = m.alternatives_meta_description({}, { locale })
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description: description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+  keywords: 'Capgo alternatives, Expo alternative, EAS alternative, Appflow alternative, Capacitor live updates',
+  ldJSON,
+}
+---
+
+<Layout content={content}>
+  <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <!-- Hero Section -->
+    <div class="mb-16 text-center">
+      <h1 class="mb-4 text-4xl font-bold tracking-tight text-gray-100 sm:text-5xl">{m.alternatives_hero_title({}, { locale })}</h1>
+      <p class="mx-auto max-w-2xl text-xl text-gray-300">{m.alternatives_hero_subtitle({}, { locale })}</p>
+    </div>
+
+    <!-- Why This Page Exists -->
+    <div class="mb-16 rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+      <h2 class="mb-4 text-2xl font-semibold text-gray-100">{m.alternatives_why_exists_title({}, { locale })}</h2>
+      <div class="space-y-4 text-gray-300">
+        <p>{m.alternatives_why_exists_p1({}, { locale })}</p>
+        <p>{m.alternatives_why_exists_p2({}, { locale })}</p>
+        <p>{m.alternatives_why_exists_p3({}, { locale })}</p>
+      </div>
+    </div>
+
+    <!-- What Makes Us Different -->
+    <div class="mb-16">
+      <h2 class="mb-8 text-3xl font-bold text-gray-100">{m.alternatives_what_different_title({}, { locale })}</h2>
+
+      <div class="space-y-6">
+        <!-- Open & Transparent -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">{m.alternatives_open_transparent_title({}, { locale })}</h3>
+          <p class="mb-2 text-gray-300">{m.alternatives_open_transparent_desc({}, { locale })}</p>
+          <ul class="ml-6 list-disc space-y-1 text-gray-400">
+            <li set:html={m.alternatives_open_transparent_li1({}, { locale })} />
+            <li set:html={m.alternatives_open_transparent_li2({}, { locale })} />
+            <li>{m.alternatives_open_transparent_li3({}, { locale })}</li>
+            <li>{m.alternatives_open_transparent_li4({}, { locale })}</li>
+            <li>{m.alternatives_open_transparent_li5({}, { locale })}</li>
+          </ul>
+        </div>
+
+        <!-- Been Doing It -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">{m.alternatives_been_doing_title({}, { locale })}</h3>
+          <p class="text-gray-300">{m.alternatives_been_doing_desc({}, { locale })}</p>
+        </div>
+
+        <!-- Biggest Plugin Provider -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">{m.alternatives_biggest_plugin_title({}, { locale })}</h3>
+          <p class="mb-2 text-gray-300">{m.alternatives_biggest_plugin_desc({ pluginCountLabel }, { locale })}</p>
+          <p class="text-gray-400">{m.alternatives_biggest_plugin_note({}, { locale })}</p>
+        </div>
+
+        <!-- Family Business -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">{m.alternatives_family_business_title({}, { locale })}</h3>
+          <p class="mb-2 text-gray-300">{m.alternatives_family_business_desc({}, { locale })}</p>
+          <ul class="ml-6 list-disc space-y-1 text-gray-400">
+            <li>{m.alternatives_family_business_li1({}, { locale })}</li>
+            <li>{m.alternatives_family_business_li2({}, { locale })}</li>
+          </ul>
+        </div>
+
+        <!-- Bootstrapped & Profitable -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">{m.alternatives_bootstrapped_title({}, { locale })}</h3>
+          <p class="mb-2 text-gray-300">{m.alternatives_bootstrapped_desc({}, { locale })}</p>
+          <p class="text-gray-400">{m.alternatives_bootstrapped_note({}, { locale })}</p>
+        </div>
+
+        <!-- Human Support -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">{m.alternatives_human_support_title({}, { locale })}</h3>
+          <p class="mb-2 text-gray-300">{m.alternatives_human_support_desc({}, { locale })}</p>
+          <p class="text-gray-400">{m.alternatives_human_support_note({}, { locale })}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Alternatives -->
+    <div class="mb-16">
+      <h2 class="mb-8 text-3xl font-bold text-gray-100">{m.alternatives_other_options_title({}, { locale })}</h2>
+
+      <div class="space-y-8">
+        <!-- Appflow -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+          <div class="mb-4 flex items-start justify-between">
+            <div>
+              <h3 class="mb-2 text-2xl font-bold text-gray-100">Ionic Appflow</h3>
+              <p class="text-sm text-orange-400">{m.alternatives_appflow_status({}, { locale })}</p>
+            </div>
+            <a href={getRelativeLocaleUrl(locale, 'alternatives/ionic-appflow')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+              {m.alternatives_appflow_migration_guide({}, { locale })}
+            </a>
+          </div>
+
+          <div class="mb-4 space-y-3 text-gray-300">
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_appflow_reality({}, { locale })}
+            </p>
+
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_appflow_when_good({}, { locale })}
+            </p>
+
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_why_different_label({}, { locale })}</strong>
+            </p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400">
+              <li>{m.alternatives_appflow_why_different_li1({}, { locale })}</li>
+              <li>{m.alternatives_appflow_why_different_li2({}, { locale })}</li>
+              <li>{m.alternatives_appflow_why_different_li3({}, { locale })}</li>
+              <li>{m.alternatives_appflow_why_different_li4({}, { locale })}</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 text-sm text-gray-400">{m.alternatives_appflow_credit({}, { locale })}</div>
+        </div>
+
+        <!-- Expo Application Services -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+          <div class="mb-4 flex items-start justify-between">
+            <div>
+              <h3 class="mb-2 text-2xl font-bold text-gray-100">Expo Application Services (EAS)</h3>
+              <p class="text-sm text-sky-400">{m.alternatives_expo_status({}, { locale })}</p>
+            </div>
+            <a href={getRelativeLocaleUrl(locale, 'alternatives/expo')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+              {m.alternatives_expo_full_comparison({}, { locale })}
+            </a>
+          </div>
+
+          <div class="mb-4 space-y-3 text-gray-300">
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_expo_reality({}, { locale })}
+            </p>
+
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_expo_when_good({}, { locale })}
+            </p>
+
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_why_different_label({}, { locale })}</strong>
+            </p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400">
+              <li>{m.alternatives_expo_why_different_li1({}, { locale })}</li>
+              <li>{m.alternatives_expo_why_different_li2({}, { locale })}</li>
+              <li>{m.alternatives_expo_why_different_li3({}, { locale })}</li>
+              <li>{m.alternatives_expo_why_different_li4({}, { locale })}</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 text-sm text-gray-400">{m.alternatives_expo_credit({}, { locale })}</div>
+        </div>
+
+        <!-- CodePush -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+          <div class="mb-4">
+            <h3 class="mb-2 text-2xl font-bold text-gray-100">Microsoft CodePush</h3>
+            <p class="text-sm text-red-400">{m.alternatives_codepush_status({}, { locale })}</p>
+          </div>
+
+          <div class="mb-4 space-y-3 text-gray-300">
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_codepush_reality({}, { locale })}
+            </p>
+
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_codepush_when_good({}, { locale })}
+            </p>
+
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_why_different_label({}, { locale })}</strong>
+            </p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400">
+              <li>{m.alternatives_codepush_why_different_li1({}, { locale })}</li>
+              <li>{m.alternatives_codepush_why_different_li2({}, { locale })}</li>
+              <li>{m.alternatives_codepush_why_different_li3({}, { locale })}</li>
+              <li>{m.alternatives_codepush_why_different_li4({}, { locale })}</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 text-sm text-gray-400">{m.alternatives_codepush_credit({}, { locale })}</div>
+        </div>
+
+        <!-- Capawesome -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+          <div class="mb-4 flex items-start justify-between">
+            <div>
+              <h3 class="mb-2 text-2xl font-bold text-gray-100">Capawesome Cloud</h3>
+              <p class="text-sm text-green-400">{m.alternatives_capawesome_status({}, { locale })}</p>
+            </div>
+            <a href={getRelativeLocaleUrl(locale, 'alternatives/capawesome')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+              {m.alternatives_capawesome_full_comparison({}, { locale })}
+            </a>
+          </div>
+
+          <div class="mb-4 space-y-3 text-gray-300">
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_capawesome_reality({}, { locale })}
+            </p>
+
+            <p>
+              <strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_capawesome_when_good({}, { locale })}
+            </p>
+
+            <p>
+              <strong class="text-gray-100">{m.alternatives_capawesome_differences_label({}, { locale })}</strong>
+            </p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400">
+              <li set:html={m.alternatives_capawesome_diff_experience({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_scale({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_pricing({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_focus({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_security({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_support({}, { locale })} />
+            </ul>
+          </div>
+
+          <div class="mt-4 text-sm text-gray-400">{m.alternatives_capawesome_credit({}, { locale })}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What We're NOT Good At -->
+    <div class="mb-16 rounded-lg border border-gray-600 bg-gray-800/50 p-8">
+      <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.alternatives_not_good_at_title({}, { locale })}</h2>
+      <div class="space-y-3 text-gray-300">
+        <p>
+          <strong class="text-gray-100">{m.alternatives_not_good_at_ci_cd_label({}, { locale })}</strong>
+          {m.alternatives_not_good_at_ci_cd({}, { locale })}
+        </p>
+        <p>
+          <strong class="text-gray-100">{m.alternatives_not_good_at_docs_label({}, { locale })}</strong>
+          {m.alternatives_not_good_at_docs({}, { locale })}
+        </p>
+      </div>
+    </div>
+
+    <!-- Why People Actually Choose Us -->
+    <div class="mb-16">
+      <h2 class="mb-8 text-3xl font-bold text-gray-100">{m.alternatives_why_choose_title({}, { locale })}</h2>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <p class="mb-2 text-gray-300 italic">"{m.alternatives_testimonial_1({}, { locale })}"</p>
+          <p class="text-sm text-gray-400">{m.alternatives_testimonial_1_author({}, { locale })}</p>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <p class="mb-2 text-gray-300 italic">"{m.alternatives_testimonial_2({}, { locale })}"</p>
+          <p class="text-sm text-gray-400">{m.alternatives_testimonial_2_author({}, { locale })}</p>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <p class="mb-2 text-gray-300 italic">"{m.alternatives_testimonial_3({}, { locale })}"</p>
+          <p class="text-sm text-gray-400">{m.alternatives_testimonial_3_author({}, { locale })}</p>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <p class="mb-2 text-gray-300 italic">"{m.alternatives_testimonial_4({}, { locale })}"</p>
+          <p class="text-sm text-gray-400">{m.alternatives_testimonial_4_author({}, { locale })}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.alternatives_cta_title({}, { locale })}</h2>
+      <p class="mb-8 text-gray-300">{m.alternatives_cta_subtitle({}, { locale })}</p>
+      <HumanSupport class="mb-4" size="sm" />
+      <a href={getRelativeLocaleUrl(locale, 'register')} class="inline-block rounded-lg bg-emerald-600 px-8 py-3 text-lg font-medium text-white hover:bg-emerald-700">
+        {m.alternatives_cta_button({}, { locale })}
+      </a>
+      <p class="mt-4 text-sm text-gray-400" set:html={m.alternatives_cta_questions({}, { locale })} />
+    </div>
+  </div>
+</Layout>
