@@ -83,7 +83,7 @@
     "@supabase/supabase-js": "^2.117.1",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "7.3.4",
+    "astro": "7.3.5",
     "astro-icon": "1.2.0",
     "bowser": "^2.14.1",
     "github-slugger": "^2.0.0",

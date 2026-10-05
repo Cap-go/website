@@ -10,7 +10,7 @@
     "@astrojs/starlight": "0.42.3",
     "@astrojs/starlight-docsearch": "0.8.0",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "7.3.4",
+    "astro": "7.3.5",
     "astro-icon": "1.2.0",
     "sharp": "^0.35.4",
     "starlight-llms-txt": "0.12.0",
