@@ -1,0 +1,662 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+import { defaultLocale } from '@/services/locale'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+
+const title = `${brand} | Security questionnaire facts`
+const description =
+  'Public security and compliance facts for vendor questionnaires: hosting, encryption, access control, incident response, certifications, and privacy documents, with links to primary sources.'
+
+const pageUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'security-questionnaire/')}`
+
+const webPageLdJson = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: pageUrl,
+})
+
+const content = {
+  title,
+  description,
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, webPageLdJson, {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: `${baseUrl}${getRelativeLocaleUrl(locale, '/')}` },
+      { name: m.trust({}, { locale }), url: `${baseUrl}${getRelativeLocaleUrl(locale, 'trust/')}` },
+      { name: 'Security questionnaire facts', url: pageUrl },
+    ],
+  }),
+}
+
+const toc = [
+  { id: 'overview', label: 'How to use this page' },
+  { id: 'company', label: 'Company and product' },
+  { id: 'hosting', label: 'Hosting and subprocessors' },
+  { id: 'residency', label: 'Data residency and regions' },
+  { id: 'encryption', label: 'Encryption' },
+  { id: 'access', label: 'Authentication and access control' },
+  { id: 'operations', label: 'Logging, monitoring, and incidents' },
+  { id: 'continuity', label: 'Backup, availability, and SLA' },
+  { id: 'vulnerabilities', label: 'Vulnerability management' },
+  { id: 'certifications', label: 'Certifications and evidence' },
+  { id: 'privacy', label: 'Privacy and DPA' },
+  { id: 'hipaa', label: 'HIPAA-sensitive deployments' },
+  { id: 'contacts', label: 'Contacts' },
+  { id: 'gaps', label: 'Topics not stated publicly' },
+]
+
+const doc = (path: string) => getRelativeLocaleUrl(locale, path)
+---
+
+<Layout content={content}>
+  <div class="mx-auto w-full max-w-6xl px-4 py-10 text-slate-100 sm:px-6 sm:py-14 lg:px-8">
+    <div class="max-w-3xl">
+      {locale !== defaultLocale && (
+        <p class="mb-5 rounded-md border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-sm leading-6 text-amber-100">
+          Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source for
+          legal matters.
+        </p>
+      )}
+      <p class="text-sm font-semibold tracking-wide text-cyan-300 uppercase">Trust</p>
+      <h1 class="mt-3 text-4xl font-bold tracking-normal text-white sm:text-5xl">Security questionnaire facts</h1>
+      <p class="mt-5 text-lg leading-8 text-slate-300">
+        Answers for procurement and security reviews, sourced from public Capgo pages and documentation. For SOC 2, ISO 27001, detailed control mappings, and completed
+        questionnaires, use the{' '}
+        <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://trust.capgo.app">
+          trust portal
+        </a>{' '}
+        (request access under NDA). Certification reports are not distributed by email.
+      </p>
+      <p class="mt-4 text-sm leading-6 text-slate-400">Last reviewed against public sources: October 5, 2026.</p>
+    </div>
+
+    <nav class="mt-10 max-w-3xl rounded-md border border-white/10 bg-slate-950/60 p-5" aria-label="On this page">
+      <p class="text-xs font-semibold tracking-wide text-slate-400 uppercase">On this page</p>
+      <ol class="mt-3 columns-1 gap-x-8 text-sm leading-6 text-slate-300 sm:columns-2">
+        {toc.map((item) => (
+          <li class="break-inside-avoid">
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={`#${item.id}`}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    <section class="mt-12 max-w-3xl" id="overview">
+      <h2 class="text-2xl font-semibold text-white">How to use this page</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <p>
+          Each section summarizes what Capgo states publicly. Follow the linked primary sources for wording used in contracts. Items listed under
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="#gaps">
+            Topics not stated publicly
+          </a>{' '}
+          are not answered here.
+        </p>
+        <p>
+          Related pages:{' '}
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('trust/')}>
+            Trust
+          </a>
+          ,
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('security/')}>
+            Security policy
+          </a>
+          ,
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('subprocessors/')}>
+            Subprocessors
+          </a>
+          ,
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('dpa/')}>
+            DPA
+          </a>
+          ,
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('enterprise/')}>
+            Enterprise
+          </a>
+          .
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="company">
+      <h2 class="text-2xl font-semibold text-white">Company and product</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="text-white">Legal entity:</strong> Digital Shift OÜ (register code 14236508), Sepapaja 6, 15551 Tallinn, Estonia.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('imprint/')}>
+              Imprint
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Product:</strong> Live updates (OTA) for Capacitor, Ionic, Cordova, and Electron apps, plus native iOS and Android builds on Capgo Cloud.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('live-update/')}>
+              Live updates
+            </a>
+            ,
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('native-build/')}>
+              Native build
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Open source:</strong> Updater plugin and Capgo plugins under MPL-2.0; backend under AGPL-3.0 with self-hosting available.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://github.com/Cap-go" rel="noreferrer" target="_blank">
+              GitHub
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Deployment options:</strong> Hosted Capgo Cloud, plus Enterprise hosted, dedicated, hybrid, and licensed self-hosted options.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('enterprise/')}>
+              Enterprise
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Governing law:</strong> Estonia per the
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('tos/')}>
+              Terms of Service
+            </a>
+            .
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="hosting">
+      <h2 class="text-2xl font-semibold text-white">Hosting and subprocessors</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <p>
+          The authoritative list of DPA sub-processors, processing locations, and transfer mechanisms is on the
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('subprocessors/')}>
+            subprocessors page
+          </a>{' '}
+          (not the trust portal subprocessors counter). Current DPA sub-processors include:
+        </p>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="text-white">Supabase, Inc.</strong> (London, UK): primary database, authentication, account data, application and bundle metadata, device identifiers.
+          </li>
+          <li>
+            <strong class="text-white">Cloudflare, Inc.</strong> (global, including USA): edge CDN, Workers, Durable Objects, R2, security services, live-update delivery.
+          </li>
+          <li>
+            <strong class="text-white">Google Cloud</strong> (Hong Kong, Tokyo, Sydney, Johannesburg, Milan, Jeddah, Mumbai, Sao Paulo, Columbus): database read replicas and
+            regional infrastructure.
+          </li>
+          <li>
+            <strong class="text-white">GitHub, Inc.</strong> (USA): source hosting when a customer connects GitHub to Capgo build or automation workflows.
+          </li>
+          <li>
+            <strong class="text-white">Scaleway SAS</strong> (Paris, France): native build infrastructure, artifacts, and workflow data.
+          </li>
+        </ul>
+        <p>
+          Capgo also uses controller-side services for its own business (examples listed on the subprocessors page include Stripe, Bento, PostHog, CodeRabbit, and SonarCloud).
+          Apple and Google are independent controllers for store publishing when customers use their own developer accounts.
+        </p>
+        <p>
+          The{' '}
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('trust/')}>
+            Trust page
+          </a>{' '}
+          states that Cloudflare, Supabase, and isolated CI pipelines enforce MFA, secret management, and safeguarded environments, and that critical vendors maintain SOC 2
+          attestation reviewed annually.
+        </p>
+        <p class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3 text-sm leading-6 text-slate-400">
+          For hosting questions, prefer the subprocessors list over older imprint hosting lines that may not reflect current vendors.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="residency">
+      <h2 class="text-2xl font-semibold text-white">Data residency and regions</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <p>{m.enterprise_faq_data_a({}, { locale })}</p>
+        <p>
+          <strong class="text-white">EU plugin data path (opt-in):</strong> Set <code class="text-cyan-100">updateUrl</code>, <code class="text-cyan-100">statsUrl</code>, and
+          <code class="text-cyan-100">channelUrl</code> to the EU host (for example <code class="text-cyan-100">https://plugin.eu.capgo.app/</code>). All three must be set together
+          so related live-update data is stored in Europe.
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/data-location/')}>
+            Data location documentation
+          </a>
+          .
+        </p>
+        <p>
+          <strong class="text-white">Account and console data:</strong> Public documentation describes the EU option for the plugin data path. A separate EU-only option for account
+          or console data is not documented publicly (see{' '}
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="#gaps">
+            gaps
+          </a>
+          ).
+        </p>
+        <p>
+          <strong class="text-white">Strict residency:</strong> Licensed self-hosting provides control over infrastructure, logs, retention, and network boundaries.
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('hipaa-compliance/')}>
+            HIPAA-sensitive deployment options
+          </a>
+          .
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="encryption">
+      <h2 class="text-2xl font-semibold text-white">Encryption</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="text-white">In transit:</strong> HTTPS/TLS for data transmission.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/compliance/')}>
+              Compliance documentation
+            </a>
+            ,
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('dpa/')}>
+              DPA
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">At rest:</strong> Encryption at rest for platform data where applicable, per compliance documentation and DPA security measures.
+          </li>
+          <li>
+            <strong class="text-white">Optional bundle encryption (customer keys):</strong> End-to-end bundle encryption with customer-managed keys (RSA-4096 and AES-256-GCM in
+            Encryption V2).
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/encryption/')}>
+              Encryption documentation
+            </a>
+            . Protects against disclosure by Capgo, storage providers, and CDNs; does not make shipped web assets impossible to reverse engineer.
+          </li>
+          <li>
+            <strong class="text-white">Integrity:</strong> Bundles are checksum-verified; optional per-app encryption with your own key.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/compliance/')}>
+              Compliance documentation
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">API keys:</strong> Secure API keys are hashed; the raw key value is not stored on Capgo servers.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/webapp/organization-security/')}>
+              Organization security documentation
+            </a>
+            .
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="access">
+      <h2 class="text-2xl font-semibold text-white">Authentication and access control</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <h3 class="text-lg font-semibold text-white">Customer controls</h3>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="text-white">SSO (SAML 2.0):</strong> Enterprise plans; domain verification via DNS TXT; optional enforce SSO; new SSO users provisioned with the read
+            role.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/webapp/enterprise-sso/')}>
+              Enterprise SSO documentation
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">MFA:</strong> Organization super admins can require 2FA for all members; members without 2FA are blocked from the web dashboard and CLI.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/webapp/organization-security/')}>
+              Organization security documentation
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Password policy:</strong> Configurable minimum length (6 to 128), uppercase, number, and special character requirements.
+          </li>
+          <li>
+            <strong class="text-white">API keys:</strong> Enforce secure (hashed) keys and optional expiration (1 to 365 days).
+          </li>
+          <li>
+            <strong class="text-white">RBAC:</strong> Organization roles (super admin, admin, billing admin, member) and app roles (admin, developer, uploader, reader) with
+            per-channel overrides.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/features/')}>
+              Features documentation
+            </a>
+            .
+          </li>
+        </ul>
+        <h3 class="text-lg font-semibold text-white">Capgo personnel</h3>
+        <p>
+          Access is limited to authorized personnel who need it for support, abuse prevention, and operational reliability; personnel are trained in GDPR and data privacy per the
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('dpa/')}>
+            DPA
+          </a>
+          .
+        </p>
+        <p>
+          Password and email update flows may depend on Supabase Auth session and re-verification settings.
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('security/')}>
+            Security policy
+          </a>
+          .
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="operations">
+      <h2 class="text-2xl font-semibold text-white">Logging, monitoring, and incidents</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="text-white">Customer audit logs:</strong> Audit trail for logins, permission changes, bundles, channels, and organization changes.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/features/')}>
+              Features documentation
+            </a>
+            . Enterprise includes audit logs, 90-day org statistics, and 90-day device logs per the Enterprise page.
+          </li>
+          <li>
+            <strong class="text-white">Monitoring:</strong> Dedicated runbooks, 24/7 monitoring, and founder-led incident response playbooks per the
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('trust/')}>
+              Trust page
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Status:</strong> Public uptime and incidents at
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://status.capgo.app" rel="noreferrer" target="_blank">
+              status.capgo.app
+            </a>
+            (referenced in the{' '}
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('support-policy/')}>
+              support policy
+            </a>
+            ).
+          </li>
+          <li>
+            <strong class="text-white">Personal data breach notice (processor):</strong> Notify customers without undue delay, not later than 48 hours after becoming aware, by
+            email with periodic updates, per the{' '}
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('dpa/')}>
+              DPA
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Updater fail-safe:</strong> If the update service does not respond within 3 seconds, the plugin cancels the request and opens the app
+            normally per the{' '}
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('support-policy/')}>
+              support policy
+            </a>
+            .
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="continuity">
+      <h2 class="text-2xl font-semibold text-white">Backup, availability, and SLA</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            Backups, redundancies, encryption, and access controls per{' '}
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('dpa/')}>
+              DPA
+            </a>{' '}
+            security measures.
+          </li>
+          <li>Regional replication and read replicas per Enterprise and subprocessors documentation.</li>
+          <li>
+            <strong class="text-white">Enterprise uptime SLA:</strong> 99.9% monthly with service credits from 10% to 30%.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('sla/')}>
+              SLA
+            </a>
+            .
+          </li>
+        </ul>
+        <p>
+          Backup frequency, retention, RPO, RTO, and DR test cadence are not stated on public marketing pages (see{' '}
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="#gaps">
+            gaps
+          </a>
+          ).
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="vulnerabilities">
+      <h2 class="text-2xl font-semibold text-white">Vulnerability management and disclosure</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="text-white">Code scanning:</strong> SonarCloud and Snyk; critical issues blocked from production per the
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('trust/')}>
+              Trust page
+            </a>{' '}
+            and
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/compliance/')}>
+              compliance documentation
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Pull request review:</strong> CodeRabbit AI review on pull requests per compliance documentation.
+          </li>
+          <li>
+            <strong class="text-white">Penetration testing:</strong> Independent penetration testing per the Trust page. Vendor, date, and report availability are not public; use
+            the trust portal for evidence requests.
+          </li>
+          <li>
+            <strong class="text-white">Disclosure:</strong> Report via
+            <a
+              class="text-cyan-200 underline-offset-4 hover:text-white hover:underline"
+              href="https://github.com/Cap-go/capgo.app/security/advisories/new"
+              rel="noreferrer"
+              target="_blank"
+            >
+              GitHub Security Advisories
+            </a>
+            (also capacitor-updater and CLI per
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://capgo.app/.well-known/security.txt">
+              security.txt
+            </a>
+            ). Response within 7 business days per the{' '}
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('security/')}>
+              security policy
+            </a>
+            . Paid reports via
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('bug-bounty/')}>
+              bug bounty
+            </a>
+            .
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="certifications">
+      <h2 class="text-2xl font-semibold text-white">Certifications and how to request evidence</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <p>Public statements include:</p>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            SOC 2 Type II certification per{' '}
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/compliance/')}>
+              compliance documentation
+            </a>
+            .
+          </li>
+          <li>ISO 27001 certification per compliance documentation.</li>
+          <li>
+            Trust portal badges for SOC 2 Type 1, SOC 2 Type 2, SOC 3, ISO 27001, and GDPR at
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://trust.capgo.app" rel="noreferrer" target="_blank">
+              trust.capgo.app
+            </a>
+            .
+          </li>
+        </ul>
+        <p>
+          <strong class="text-white">How to get reports:</strong> Visit
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://trust.capgo.app" rel="noreferrer" target="_blank">
+            trust.capgo.app
+          </a>
+          , use Request Access for SOC reports, ISO evidence, security questionnaires, and control details under NDA. Do not expect certification PDFs by email.
+        </p>
+        <p>
+          Enterprise security review packets can include a SOC 2 report, DPA template, and architecture notes per the
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('enterprise/')}>
+            Enterprise page
+          </a>
+          , still via the trust portal process for formal evidence.
+        </p>
+        <p>Auditor name, audit period, ISO certificate number, and SOC scope are not published on capgo.app (see gaps).</p>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="privacy">
+      <h2 class="text-2xl font-semibold text-white">Privacy and DPA</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="text-white">DPA:</strong> Accepted automatically when using the product; customer is controller, Capgo is processor; SCCs with sub-processors; breach
+            notice and assistance obligations.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('dpa/')}>
+              DPA
+            </a>{' '}
+            (last updated June 10, 2026 on the English page).
+          </li>
+          <li>
+            <strong class="text-white">Signed DPA / NDA:</strong> Available on Enterprise per the Enterprise page.
+          </li>
+          <li>
+            <strong class="text-white">Data collected by the updater:</strong> App ID, versions, platform, app-scoped device ID, bundle, channel, OS, plugin version, request
+            country, IP; no names, emails, or advertising IDs. Device ID is pseudonymous personal data where GDPR applies.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/compliance/')}>
+              Compliance documentation
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Disable stats:</strong> Set <code class="text-cyan-100">statsUrl</code> to an empty string.
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/hipaa-compliance/')}>
+              HIPAA compliance documentation
+            </a>
+            .
+          </li>
+          <li>
+            <strong class="text-white">Retention:</strong> Configurable bundle retention; operational records retained for service operation, security, billing, and support without
+            a fixed public period.
+          </li>
+          <li>
+            <strong class="text-white">No sale of service data:</strong> Stated in the DPA and
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('dp/')}>
+              Data Policy
+            </a>
+            .
+          </li>
+        </ul>
+        <p>
+          Also see{' '}
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('privacy/')}>
+            Privacy Policy
+          </a>{' '}
+          and
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('subprocessors/')}>
+            Subprocessors
+          </a>{' '}
+          (30-day change notice).
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="hipaa">
+      <h2 class="text-2xl font-semibold text-white">HIPAA-sensitive deployments</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <p>
+          Capgo Cloud is <strong class="text-white">not</strong> currently presented as a HIPAA-compliant hosted statistics processor per
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/hipaa-compliance/')}>
+            HIPAA compliance documentation
+          </a>
+          . Enterprise plans can include a Business Associate Agreement (BAA) for healthcare customers per the
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('hipaa-compliance/')}>
+            HIPAA compliance page
+          </a>
+          .
+        </p>
+        <p>Deployment options for stricter reviews include EU endpoints, disabled statistics, self-hosted statistics, and licensed self-hosting (see the HIPAA compliance page).</p>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="contacts">
+      <h2 class="text-2xl font-semibold text-white">Contacts</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="text-white">Security team:</strong>{' '}
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="mailto:security@capgo.app">
+              security@capgo.app
+            </a>
+          </li>
+          <li>
+            <strong class="text-white">Trust portal (questionnaires and certification evidence):</strong>
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://trust.capgo.app" rel="noreferrer" target="_blank">
+              trust.capgo.app
+            </a>
+          </li>
+          <li>
+            <strong class="text-white">Vulnerability reports:</strong>
+            <a
+              class="text-cyan-200 underline-offset-4 hover:text-white hover:underline"
+              href="https://github.com/Cap-go/capgo.app/security/advisories/new"
+              rel="noreferrer"
+              target="_blank"
+            >
+              GitHub Security Advisory
+            </a>
+          </li>
+          <li>
+            <strong class="text-white">Support:</strong>{' '}
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="mailto:support@capgo.app">
+              support@capgo.app
+            </a>{' '}
+            from your registered account email per the
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('support-policy/')}>
+              support policy
+            </a>
+          </li>
+          <li>
+            <strong class="text-white">Enterprise support SLA:</strong> P1 within 1 hour 24/7/365; P2 within 2 business hours; P3 within 1 business day; P4 within 2 business days
+            per the
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('sla/')}>
+              SLA
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl" id="gaps">
+      <h2 class="text-2xl font-semibold text-white">Topics not stated publicly</h2>
+      <p class="mt-4 text-base leading-8 text-slate-300">
+        The following are commonly asked in questionnaires but are not answered on public Capgo pages. Request details through the trust portal or security@capgo.app.
+      </p>
+      <ul class="mt-4 list-disc space-y-2 pl-5 text-base leading-8 text-slate-300">
+        <li>SOC 2 auditor, report period, and scope; ISO 27001 certificate number, certification body, and expiry</li>
+        <li>Penetration test vendor, date, frequency, and summary letter</li>
+        <li>Backup frequency, retention, RPO, RTO, and disaster recovery test dates</li>
+        <li>Platform log retention, SIEM or alerting tooling, and incident response exercise cadence</li>
+        <li>TLS minimum version, cipher suites, and platform key management rotation details</li>
+        <li>SCIM, session timeout, and account lockout settings</li>
+        <li>Employee background check scope, security training frequency, and endpoint management details</li>
+        <li>Internal privileged access review cadence</li>
+        <li>Data Protection Officer or EU representative contact</li>
+        <li>Specific customer data deletion timeline after contract termination</li>
+        <li>Cyber insurance coverage</li>
+        <li>Patch SLAs by severity</li>
+        <li>PCI DSS, FedRAMP, CSA STAR, or TISAX certifications (not claimed publicly)</li>
+      </ul>
+    </section>
+  </div>
+</Layout>
