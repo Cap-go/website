@@ -38,6 +38,17 @@ export interface Plugin extends Action {
 }
 
 /** Category assignments for newly documented plugins (kept out of large category arrays for Sonar CPD). */
+/** Maps legacy category-array npm keys to the published package names used on plugin cards. */
+const pluginCategoryPackageAliases: Record<string, string> = {
+  '@capgo/capacitor-audiosession': '@capgo/capacitor-audio-session',
+  '@capgo/capacitor-background-geolocation': '@capgo/background-geolocation',
+  '@capgo/capacitor-streamcall': '@capgo/capacitor-stream-call',
+  '@capgo/home-indicator': '@capgo/capacitor-home-indicator',
+  '@capgo/ivs-player': '@capgo/capacitor-ivs-player',
+}
+
+const resolvePluginCategoryPackageName = (name: string) => pluginCategoryPackageAliases[name] ?? name
+
 const documentedPluginCategoryOverrides: Record<string, PluginCategoryId> = {
   '@capgo/capacitor-pdf-viewer': 'files-storage',
   '@capgo/capacitor-permissions': 'device-apis',
@@ -426,10 +437,10 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-flash',
     '@capgo/capacitor-screen-recorder',
     '@capgo/capacitor-native-audio',
-    '@capgo/capacitor-ivs-player',
+    '@capgo/ivs-player',
     '@capgo/capacitor-jw-player',
     '@capgo/capacitor-ricoh360',
-    '@capgo/capacitor-audio-session',
+    '@capgo/capacitor-audiosession',
     '@capgo/capacitor-ffmpeg',
     '@capgo/capacitor-media-session',
     '@capgo/capacitor-mux-player',
@@ -496,18 +507,24 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-sheets',
     '@capgo/capacitor-inappbrowser',
     '@capgo/capacitor-navigation-bar',
-    '@capgo/capacitor-home-indicator',
+    '@capgo/home-indicator',
     '@capgo/capacitor-textinteraction',
     '@capgo/capacitor-pretty-toast',
     '@capgo/capacitor-live-activities',
     '@capgo/capacitor-widget-kit',
   ],
-  location: ['@capgo/capacitor-nativegeocoder', '@capgo/background-geolocation', '@capgo/capacitor-launch-navigator', '@capgo/capacitor-ibeacon', '@capgo/capacitor-compass'],
+  location: [
+    '@capgo/capacitor-nativegeocoder',
+    '@capgo/capacitor-background-geolocation',
+    '@capgo/capacitor-launch-navigator',
+    '@capgo/capacitor-ibeacon',
+    '@capgo/capacitor-compass',
+  ],
   communication: [
     '@capgo/capacitor-crisp',
     '@capgo/capacitor-intercom',
     '@capgo/capacitor-mqtt',
-    '@capgo/capacitor-stream-call',
+    '@capgo/capacitor-streamcall',
     '@capgo/capacitor-android-sms-retriever',
     '@capgo/capacitor-twilio-video',
     '@capgo/capacitor-twilio-voice',
@@ -529,7 +546,11 @@ const pluginNamesByCategory = {
 } satisfies Record<PluginCategoryId, readonly string[]>
 
 const pluginCategoriesByName = {
-  ...Object.fromEntries(Object.entries(pluginNamesByCategory).flatMap(([category, names]) => names.map((name) => [name, category as PluginCategoryId]))),
+  ...Object.fromEntries(
+    Object.entries(pluginNamesByCategory).flatMap(([category, names]) =>
+      names.map((name) => [resolvePluginCategoryPackageName(name), category as PluginCategoryId]),
+    ),
+  ),
   ...documentedPluginCategoryOverrides,
 } as Record<string, PluginCategoryId>
 
