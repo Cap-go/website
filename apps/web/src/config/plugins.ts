@@ -59,6 +59,7 @@ const actionDefinitionRows =
 @capgo/capacitor-calendar|github.com/Cap-go|Manage native calendar events on iOS and Android, with iOS Reminders support|https://github.com/Cap-go/capacitor-calendar/|Calendar
 @capgo/capacitor-date-picker|github.com/Cap-go|Native date, time, date-time, year-month, and range picker for iOS, Android, and Web|https://github.com/Cap-go/capacitor-date-picker/|Date Picker
 @capgo/capacitor-device-info|github.com/Cap-go|Read CPU, memory, GPU, storage, thermal state, and onboard sensor metrics from Capacitor apps|https://github.com/Cap-go/capacitor-device-info/|Device Info
+@capgo/capacitor-device-integrity|github.com/Cap-go|Device integrity and fraud signals with Widevine, Play Integrity, App Attest, and DeviceCheck|https://github.com/Cap-go/capacitor-device-integrity/|Device Integrity
 @capgo/capacitor-updater|github.com/Cap-go|Deploy Ionic and Capacitor live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
 @capgo/capacitor-notifications|github.com/Cap-go|Send native iOS and Android push notifications from Capgo with user lookup, badges, stats, and silent update checks|https://github.com/Cap-go/capgo/tree/main/packages/capacitor-notifications/|Notifications
 @capgo/electron-updater|github.com/Cap-go|OTA live updates for Electron apps with the same API surface as capacitor-updater|https://github.com/Cap-go/electron-updater/|Electron Updater
@@ -81,12 +82,12 @@ const actionDefinitionRows =
 @capgo/capacitor-native-audio|github.com/Cap-go|Play short audio files with low latency using native audio engine for games and apps|https://github.com/Cap-go/capacitor-native-audio/|Native Audio
 @capgo/capacitor-shake|github.com/Cap-go|Detect shake gestures on device for triggering actions like undo or feedback|https://github.com/Cap-go/capacitor-shake/|Shake
 @capgo/capacitor-navigation-bar|github.com/Cap-go|Customize Android navigation bar color and visibility for immersive UI experiences|https://github.com/Cap-go/capacitor-navigation-bar/|Navigation Bar
-@capgo/ivs-player|github.com/Cap-go|Stream ultra-low latency live video using Amazon Interactive Video Service (IVS)|https://github.com/Cap-go/capacitor-ivs-player/|IVS Player
-@capgo/home-indicator|github.com/Cap-go|Hide or show iOS home indicator for fullscreen and immersive app experiences|https://github.com/Cap-go/capacitor-home-indicator/|Indicator
+@capgo/capacitor-ivs-player|github.com/Cap-go|Stream ultra-low latency live video using Amazon Interactive Video Service (IVS)|https://github.com/Cap-go/capacitor-ivs-player/|IVS Player
+@capgo/capacitor-home-indicator|github.com/Cap-go|Hide or show iOS home indicator for fullscreen and immersive app experiences|https://github.com/Cap-go/capacitor-home-indicator/|Indicator
 @capgo/native-purchases|github.com/Cap-go|Implement native in-app purchases, subscriptions, and iOS StoreKit commitment billing plans with a simple API|https://github.com/Cap-go/capacitor-native-purchases/|Native Purchases
 @capgo/capacitor-data-storage-sqlite|github.com/Cap-go|Store data locally using SQLite database with simple key-value API and encryption support|https://github.com/Cap-go/capacitor-data-storage-sqlite/|Data Storage
 @capgo/capacitor-android-usagestatsmanager|github.com/Cap-go|Access Android usage statistics to track app usage time and screen time analytics|https://github.com/Cap-go/capacitor-android-usagestatsmanager/|Usage Stats Manager
-@capgo/capacitor-streamcall|github.com/Cap-go|Integrate video calling and live streaming with Stream SDK for real-time communication|https://github.com/Cap-go/capacitor-streamcall/|Streamcall
+@capgo/capacitor-stream-call|github.com/Cap-go|Integrate video calling and live streaming with Stream SDK for real-time communication|https://github.com/Cap-go/capacitor-streamcall/|Streamcall
 @capgo/capacitor-autofill-save-password|github.com/Cap-go|Prompt users to save passwords to device autofill for seamless login experience|https://github.com/Cap-go/capacitor-autofill-save-password/|Autofill Save Password
 @capgo/capacitor-social-login|github.com/Cap-go|Authenticate users with Google, Facebook, and Apple Sign-In for easy social login|https://github.com/Cap-go/capacitor-social-login/|Social Login
 @capgo/capacitor-passkey|github.com/Cap-go|Keep browser-style WebAuthn code in Capacitor while native passkey calls and host patching are handled for you|https://github.com/Cap-go/capacitor-passkey/|Passkey
@@ -102,8 +103,8 @@ const actionDefinitionRows =
 @capgo/capacitor-app-attest|github.com/Cap-go|Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard|https://github.com/Cap-go/capacitor-app-attest/|App Attest
 @capgo/capacitor-recaptcha|github.com/Cap-go|Generate Web reCAPTCHA or reCAPTCHA Enterprise tokens plus native Enterprise mobile tokens|https://github.com/Cap-go/capacitor-recaptcha/|reCAPTCHA
 @capgo/capacitor-verisoul|github.com/Cap-go|Collect Verisoul native fraud-prevention sessions from Capacitor apps on iOS and Android|https://github.com/Cap-go/capacitor-verisoul/|Verisoul
-@capgo/capacitor-audiosession|github.com/Cap-go|Configure iOS audio session for background playback, mixing, and routing control|https://github.com/Cap-go/capacitor-audiosession/|Audio Session
-@capgo/capacitor-background-geolocation|github.com/Cap-go|Accurate background location tracking with native iOS and Android geofencing plus transition webhooks|https://github.com/Cap-go/capacitor-background-geolocation/|Background Geolocation
+@capgo/capacitor-audio-session|github.com/Cap-go|Configure iOS audio session for background playback, mixing, and routing control|https://github.com/Cap-go/capacitor-audiosession/|Audio Session
+@capgo/background-geolocation|github.com/Cap-go|Accurate background location tracking with native iOS and Android geofencing plus transition webhooks|https://github.com/Cap-go/capacitor-background-geolocation/|Background Geolocation
 @capgo/capacitor-background-task|github.com/Cap-go|Schedule periodic background fetch tasks on iOS and Android with Expo-style task registration|https://github.com/Cap-go/capacitor-background-task/|Background Task
 @capgo/capacitor-document-scanner|github.com/Cap-go|Scan documents with auto edge detection, perspective correction, and PDF export|https://github.com/Cap-go/capacitor-document-scanner/|Document Scanner
 @capgo/capacitor-downloader|github.com/Cap-go|Download large files in background with progress tracking and pause/resume support|https://github.com/Cap-go/capacitor-downloader/|Downloader
@@ -217,6 +218,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-calendar': 'CalendarDays',
   '@capgo/capacitor-date-picker': 'CalendarDays',
   '@capgo/capacitor-device-info': 'CpuChip',
+  '@capgo/capacitor-device-integrity': 'ShieldCheck',
   '@capgo/capacitor-updater': 'ArrowPath',
   '@capgo/capacitor-notifications': 'Bell',
   '@capgo/electron-updater': 'ArrowPath',
@@ -239,12 +241,12 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-native-audio': 'SpeakerWave',
   '@capgo/capacitor-shake': 'DevicePhoneMobile',
   '@capgo/capacitor-navigation-bar': 'Bars3',
-  '@capgo/ivs-player': 'PlayCircle',
-  '@capgo/home-indicator': 'Home',
+  '@capgo/capacitor-ivs-player': 'PlayCircle',
+  '@capgo/capacitor-home-indicator': 'Home',
   '@capgo/native-purchases': 'CurrencyDollar',
   '@capgo/capacitor-data-storage-sqlite': 'CircleStack',
   '@capgo/capacitor-android-usagestatsmanager': 'ChartBar',
-  '@capgo/capacitor-streamcall': 'VideoCamera',
+  '@capgo/capacitor-stream-call': 'VideoCamera',
   '@capgo/capacitor-autofill-save-password': 'UserCircle',
   '@capgo/capacitor-social-login': 'UserCircle',
   '@capgo/capacitor-passkey': 'Key',
@@ -259,8 +261,8 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-app-attest': 'ShieldCheck',
   '@capgo/capacitor-recaptcha': 'ShieldCheck',
   '@capgo/capacitor-verisoul': 'ShieldCheck',
-  '@capgo/capacitor-audiosession': 'SpeakerWave',
-  '@capgo/capacitor-background-geolocation': 'MapPin',
+  '@capgo/capacitor-audio-session': 'SpeakerWave',
+  '@capgo/background-geolocation': 'MapPin',
   '@capgo/capacitor-background-task': 'Clock',
   '@capgo/capacitor-document-scanner': 'Document',
   '@capgo/capacitor-downloader': 'CloudArrowDown',
@@ -361,13 +363,21 @@ const pluginIconsByName: Record<string, string> = {
 }
 
 const pluginNamesByCategory = {
-  updates: ['@capgo/capacitor-updater', '@capgo/cordova-updater', '@capgo/electron-updater', '@capgo/capacitor-android-inline-install', '@capgo/capacitor-live-reload', '@capgo/capacitor-patch'],
+  updates: [
+    '@capgo/capacitor-updater',
+    '@capgo/cordova-updater',
+    '@capgo/electron-updater',
+    '@capgo/capacitor-android-inline-install',
+    '@capgo/capacitor-live-reload',
+    '@capgo/capacitor-patch',
+  ],
   'auth-security': [
     '@capgo/capacitor-native-biometric',
     '@capgo/capacitor-autofill-save-password',
     '@capgo/capacitor-social-login',
     '@capgo/capacitor-passkey',
     '@capgo/capacitor-app-attest',
+    '@capgo/capacitor-device-integrity',
     '@capgo/capacitor-recaptcha',
     '@capgo/capacitor-verisoul',
     '@capgo/capacitor-is-root',
@@ -401,16 +411,25 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-firebase-crashlytics',
     '@capgo/capacitor-firebase-performance',
   ],
-  commerce: ['@capgo/capacitor-native-market', '@revenuecat/purchases-capacitor', '@capgo/native-purchases', '@capgo/capacitor-admob', '@capgo/capacitor-pay', '@capgo/capacitor-stripe-pay', '@capgo/capacitor-stripe-terminal', '@capgo/capacitor-stripe-identity'],
+  commerce: [
+    '@capgo/capacitor-native-market',
+    '@revenuecat/purchases-capacitor',
+    '@capgo/native-purchases',
+    '@capgo/capacitor-admob',
+    '@capgo/capacitor-pay',
+    '@capgo/capacitor-stripe-pay',
+    '@capgo/capacitor-stripe-terminal',
+    '@capgo/capacitor-stripe-identity',
+  ],
   media: [
     '@capgo/camera-preview',
     '@capgo/capacitor-flash',
     '@capgo/capacitor-screen-recorder',
     '@capgo/capacitor-native-audio',
-    '@capgo/ivs-player',
+    '@capgo/capacitor-ivs-player',
     '@capgo/capacitor-jw-player',
     '@capgo/capacitor-ricoh360',
-    '@capgo/capacitor-audiosession',
+    '@capgo/capacitor-audio-session',
     '@capgo/capacitor-ffmpeg',
     '@capgo/capacitor-media-session',
     '@capgo/capacitor-mux-player',
@@ -477,24 +496,18 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-sheets',
     '@capgo/capacitor-inappbrowser',
     '@capgo/capacitor-navigation-bar',
-    '@capgo/home-indicator',
+    '@capgo/capacitor-home-indicator',
     '@capgo/capacitor-textinteraction',
     '@capgo/capacitor-pretty-toast',
     '@capgo/capacitor-live-activities',
     '@capgo/capacitor-widget-kit',
   ],
-  location: [
-    '@capgo/capacitor-nativegeocoder',
-    '@capgo/capacitor-background-geolocation',
-    '@capgo/capacitor-launch-navigator',
-    '@capgo/capacitor-ibeacon',
-    '@capgo/capacitor-compass',
-  ],
+  location: ['@capgo/capacitor-nativegeocoder', '@capgo/background-geolocation', '@capgo/capacitor-launch-navigator', '@capgo/capacitor-ibeacon', '@capgo/capacitor-compass'],
   communication: [
     '@capgo/capacitor-crisp',
     '@capgo/capacitor-intercom',
     '@capgo/capacitor-mqtt',
-    '@capgo/capacitor-streamcall',
+    '@capgo/capacitor-stream-call',
     '@capgo/capacitor-android-sms-retriever',
     '@capgo/capacitor-twilio-video',
     '@capgo/capacitor-twilio-voice',
@@ -516,9 +529,7 @@ const pluginNamesByCategory = {
 } satisfies Record<PluginCategoryId, readonly string[]>
 
 const pluginCategoriesByName = {
-  ...Object.fromEntries(
-    Object.entries(pluginNamesByCategory).flatMap(([category, names]) => names.map((name) => [name, category as PluginCategoryId])),
-  ),
+  ...Object.fromEntries(Object.entries(pluginNamesByCategory).flatMap(([category, names]) => names.map((name) => [name, category as PluginCategoryId]))),
   ...documentedPluginCategoryOverrides,
 } as Record<string, PluginCategoryId>
 

@@ -1,0 +1,71 @@
+---
+title: "@capgo/capacitor-device-integrity"
+description: "Device integrity and fraud signals with Widevine, Play Integrity, App Attest, and DeviceCheck."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Native integrity signals for fraud and abuse detection in Capacitor apps."
+  actions:
+    - text: Get started
+      link: /docs/plugins/device-integrity/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-device-integrity/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-device-integrity` exposes native integrity capabilities for Capacitor:
+
+- Android: Widevine DRM fingerprint and Play Integrity Standard attestation
+- iOS: Apple App Attest and DeviceCheck
+- Web: reports unsupported capabilities (no native signals)
+
+## Core Capabilities
+
+- `getCapabilities` - Returns which integrity features are available on the current platform.
+- `getWidevineFingerprint` - Returns an Android Widevine-derived device fingerprint.
+- `prepareAttestation` - Prepares App Attest or Play Integrity state and returns a key or provider handle.
+- `createAttestation` - Creates a registration attestation token bound to a backend challenge.
+- `createAssertion` - Creates a request assertion token bound to a backend payload.
+- `getDeviceCheckToken` - Creates an iOS DeviceCheck token for server-side fraud lookups.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getCapabilities` | Returns Widevine, App Attest, DeviceCheck, and Play Integrity support on this device. |
+| `getWidevineFingerprint` | Android only. Returns salted SHA-256 fingerprint and optional Widevine metadata. |
+| `prepareAttestation` | Prepares native attestation and returns `keyId` plus `format`. |
+| `createAttestation` | Creates a registration token for a backend-issued `challenge`. |
+| `createAssertion` | Creates an assertion token for a backend-issued `payload`. |
+| `getDeviceCheckToken` | iOS only. Returns a base64 DeviceCheck token. |
+
+## Configuration
+
+Android Play Integrity can use a global Cloud project number in `capacitor.config.ts`:
+
+```ts
+plugins: {
+  DeviceIntegrity: {
+    cloudProjectNumber: '123456789012',
+  },
+},
+```
+
+You can also pass `cloudProjectNumber` to `prepareAttestation`, `createAttestation`, and `createAssertion`.
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-device-integrity](https://github.com/Cap-go/capacitor-device-integrity/).
+
+## Keep going from @capgo/capacitor-device-integrity
+
+If you are using **@capgo/capacitor-device-integrity** to plan security and compliance, connect it with [Using @capgo/capacitor-device-integrity](/plugins/capacitor-device-integrity/) for the native capability in Using @capgo/capacitor-device-integrity, [Using @capgo/capacitor-app-attest](/plugins/capacitor-app-attest/) for related attestation flows, [@capgo/capacitor-app-attest](/docs/plugins/app-attest/) for implementation detail, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, and [Capgo Security](/security/) for the product workflow in Capgo Security.
