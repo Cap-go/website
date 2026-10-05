@@ -1,0 +1,110 @@
+---
+title: Custom Domain
+description: "Set up a custom domain for Capgo Live Updates, configure DNS and HTTPS with support, and point your Capacitor updater at your own hostname."
+sidebar:
+  order: 12
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Use your own hostname, such as `updates.example.com`, for your app's Live Updates API requests while Capgo continues to manage your channels, bundles, and rollouts.
+
+Custom domains are available on the [Enterprise plan](/pricing/). Setup requires coordination with Capgo support; there is no self-service custom domain setting in the Console.
+
+## 1. Request your custom domain
+
+Contact your Enterprise support contact or email [support@capgo.app](mailto:support@capgo.app) with:
+
+- Your Capgo organization and the app IDs that will use the domain.
+- The hostname you want to use, for example `updates.example.com`.
+- Your DNS provider and confirmation that you can edit records for that hostname.
+- Any regional routing or [data residency requirements](/docs/live-updates/data-location/).
+- Whether you need a custom hostname for update API requests, bundle downloads, or both.
+
+Capgo support coordinates hostname provisioning and provides the DNS records and endpoint URLs for your setup.
+
+<Aside type="caution">
+A DNS record alone does not activate a custom domain. Capgo must provision routing and HTTPS for your hostname before your app can use it. Wait for support to confirm that setup is complete before changing production configuration.
+</Aside>
+
+## 2. Configure DNS and verify HTTPS
+
+In your DNS provider, add the records supplied by Capgo support. Copy the record type, name, target, and any verification records exactly. If your DNS provider offers a proxy option, confirm the required setting with support.
+
+Use the supplied target rather than assuming a CNAME to `plugin.capgo.app` is sufficient. Keep the DNS records in place while the domain is in use.
+
+After DNS has propagated, ask support to confirm that the hostname is active and its HTTPS certificate is valid. You can inspect DNS and check TLS connectivity with:
+
+```shell
+dig updates.example.com
+curl -v https://updates.example.com/updates
+```
+
+Replace `updates.example.com` with your provisioned hostname. The `curl` command checks DNS, TLS, and HTTP connectivity; a GET request to `/updates` is not a valid update check and may return an API error. Verify the actual update flow with a native test build in step 4.
+
+## 3. Configure the updater
+
+Once support confirms your endpoint URLs, set all three in `capacitor.config.ts`. For a hostname provisioned with the standard Capgo API paths, use:
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'My App',
+  webDir: 'dist',
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'atBackground',
+      updateUrl: 'https://updates.example.com/updates',
+      statsUrl: 'https://updates.example.com/stats',
+      channelUrl: 'https://updates.example.com/channel_self',
+    },
+  },
+};
+
+export default config;
+```
+
+Replace the example URLs with the exact URLs confirmed by support. Keep your existing app settings and other plugin options.
+
+| Setting | Purpose |
+| --- | --- |
+| `updateUrl` | Checks for an available bundle. |
+| `statsUrl` | Reports update statistics. |
+| `channelUrl` | Handles device channel operations. |
+
+<Aside type="note">
+These settings change the update API endpoints. Bundle downloads use the URLs returned by the update server, so changing these settings does not automatically give bundle downloads a custom domain. Confirm download hostname requirements separately with support.
+</Aside>
+
+## 4. Sync, test, and release
+
+Sync the configuration into your native projects:
+
+```shell
+npx cap sync
+```
+
+Build and install a native test version, then:
+
+1. Upload a test bundle to a [test channel](/docs/live-updates/channels/) using your normal Capgo workflow.
+2. Check native device logs to verify that update requests reach your custom hostname and the bundle downloads and installs successfully.
+3. Confirm that update statistics appear in the Console and test channel operations if your app uses them.
+4. Release a new native app version through your usual store distribution process.
+
+<Aside type="caution">
+Changes to `capacitor.config.ts` require a native build. Uploading a JavaScript bundle alone does not apply these settings to existing iOS and Android installs. Users start using the custom domain after installing the new native version.
+</Aside>
+
+Keep the previous endpoints available during migration for users on older native versions. Channels, bundle uploads, and rollbacks continue to use your normal Capgo Console and CLI workflow.
+
+## Troubleshooting
+
+- **DNS does not resolve:** check the record name and target against the values provided by support, and check propagation with your DNS provider.
+- **HTTPS fails:** ask support to check hostname activation and certificate provisioning before releasing the native build.
+- **Requests still use `plugin.capgo.app`:** confirm all three URLs, run `npx cap sync`, rebuild, and install the new native version.
+- **Bundle downloads use another hostname:** the update response supplies the download URL. Ask support about custom bundle delivery, or see [Custom Storage](/docs/live-updates/custom-storage/) if you want to manage bundle storage yourself.
+- **Updates fail despite valid HTTPS:** share the app ID, channel, native version, request timestamp, and native logs with [Capgo support](/docs/getting-help/).
+
+See [Updater Settings](/docs/plugins/updater/settings/) for the complete configuration reference and [Data Location](/docs/live-updates/data-location/) for regional endpoint requirements.
