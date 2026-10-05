@@ -195,12 +195,21 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
             regional infrastructure.
           </li>
           <li>
-            <strong class="text-white">GitHub, Inc.</strong> (USA): source hosting when a customer connects GitHub to Capgo build or automation workflows.
-          </li>
-          <li>
             <strong class="text-white">Scaleway SAS</strong> (Paris, France): native build infrastructure, artifacts, and workflow data.
           </li>
         </ul>
+        <p>
+          <strong class="text-white">Customer CI is not a Capgo DPA sub-processor:</strong> Capgo does not link customer GitHub repositories or pull source from them. Typical
+          automation uses customer CI (for example GitHub Actions) with a Capgo API token to upload bundles or submit native build requests.
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/integrations/github-actions/')}>
+            GitHub Actions integration
+          </a>
+          ,
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/getting-started/cicd-integration/')}>
+            CI/CD integration
+          </a>
+          .
+        </p>
         <p>
           Capgo also uses controller-side services for its own business (examples listed on the subprocessors page include Stripe, Bento, PostHog, CodeRabbit, and SonarCloud).
           Apple and Google are independent controllers for store publishing when customers use their own developer accounts.
