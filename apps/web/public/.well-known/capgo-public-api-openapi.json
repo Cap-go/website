@@ -1028,7 +1028,7 @@
           "bundles"
         ],
         "operationId": "listBundles",
-        "summary": "List bundles for one app.",
+        "summary": "List or look up bundles for one app.",
         "parameters": [
           {
             "name": "app_id",
@@ -1040,6 +1040,26 @@
           },
           {
             "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "description": "Exact bundle version name (app_versions.name). Returns zero or one bundle in the same response shape as the list.",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "description": "Numeric bundle id (app_versions.id). Returns zero or one bundle in the same response shape as the list.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -1052,6 +1072,9 @@
                 }
               }
             }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -1066,7 +1089,7 @@
             "$ref": "#/components/responses/InternalError"
           }
         },
-        "description": "List uploaded live-update bundles for one app, including versions, checksums, and metadata."
+        "description": "List uploaded live-update bundles for one app, including versions, checksums, and metadata. Optional version or id query parameters return at most one matching bundle for that app. Invalid query parameters return invalid_query."
       },
       "post": {
         "tags": [
