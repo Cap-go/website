@@ -5675,6 +5675,10 @@ export const messageContexts = {
   trust_resource_trust_center_cta: 'Page/area: Trust / security / compliance page. Role: Call-to-action button or link label. Seen in: page trust.astro. Message key `trust_resource_trust_center_cta` (Trust Resource Trust Center CTA).',
   trust_resource_trust_center_description: 'Page/area: Trust / security / compliance page. Role: Supporting description paragraph or meta description. Seen in: page trust.astro. Message key `trust_resource_trust_center_description` (Trust Resource Trust Center Description).',
   trust_resource_trust_center_title: 'Page/area: Trust / security / compliance page. Role: Section or page heading. Seen in: page trust.astro. Message key `trust_resource_trust_center_title` (Trust Resource Trust Center Title).',
+  trust_resource_questionnaire_description:
+    'Page/area: Trust / security / compliance page. Role: Supporting description for the security questionnaire facts resource card. Seen in: page trust.astro. Message key `trust_resource_questionnaire_description`.',
+  trust_resource_questionnaire_cta:
+    'Page/area: Trust / security / compliance page. Role: CTA label for the security questionnaire facts resource card. Seen in: page trust.astro. Message key `trust_resource_questionnaire_cta`.',
   trust_resources_description: 'Page/area: Trust / security / compliance page. Role: Supporting description paragraph or meta description. Seen in: page trust.astro. Preserve Capgo product/brand and developer terms exactly. Message key `trust_resources_description` (Trust Resources Description).',
   trust_resources_title: 'Page/area: Trust / security / compliance page. Role: Section or page heading. Seen in: page trust.astro. Message key `trust_resources_title` (Trust Resources Title).',
   trusted_by_developers_worldwide: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: component companies-logo.astro. Message key `trusted_by_developers_worldwide` (Trusted By Developers Worldwide).',

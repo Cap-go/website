@@ -103,9 +103,9 @@ const trustResources = [
   },
   {
     title: m.security_questionnaires({}, { locale }),
-    description: 'Public facts for vendor security questionnaires, with links to primary sources on capgo.app.',
+    description: m.trust_resource_questionnaire_description({}, { locale }),
     href: getRelativeLocaleUrl(locale, 'security-questionnaire/'),
-    cta: 'Open questionnaire facts',
+    cta: m.trust_resource_questionnaire_cta({}, { locale }),
     external: false,
   },
   {

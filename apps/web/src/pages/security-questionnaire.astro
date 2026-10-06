@@ -4,6 +4,7 @@ import m from '@/copy/messages'
 import { defaultLocale } from '@/services/locale'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { enterpriseQuestionnaireSections } from '@/lib/securityQuestionnaireEnterprise'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -48,6 +49,8 @@ const toc = [
   { id: 'certifications', label: 'Certifications and evidence' },
   { id: 'privacy', label: 'Privacy and DPA' },
   { id: 'hipaa', label: 'HIPAA-sensitive deployments' },
+  { id: 'vendor-qa', label: 'Enterprise questionnaire reference' },
+  ...enterpriseQuestionnaireSections.map((section) => ({ id: section.id, label: section.title })),
   { id: 'contacts', label: 'Contacts' },
   { id: 'gaps', label: 'Topics not stated publicly' },
 ]
@@ -74,7 +77,7 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
         </a>{' '}
         (request access under NDA). Certification reports are not distributed by email.
       </p>
-      <p class="mt-4 text-sm leading-6 text-slate-400">Last reviewed against public sources: October 5, 2026.</p>
+      <p class="mt-4 text-sm leading-6 text-slate-400">Last reviewed: October 6, 2026.</p>
     </div>
 
     <nav class="mt-10 max-w-3xl rounded-md border border-white/10 bg-slate-950/60 p-5" aria-label="On this page">
@@ -94,11 +97,15 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
       <h2 class="text-2xl font-semibold text-white">How to use this page</h2>
       <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
         <p>
-          Each section summarizes what Capgo states publicly. Follow the linked primary sources for wording used in contracts. Items listed under
+          Each section summarizes public Capgo sources plus the{' '}
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="#vendor-qa">
+            enterprise questionnaire reference
+          </a>{' '}
+          below (approved answers for common vendor assessments). Follow linked primary sources for contract wording. Items under{' '}
           <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="#gaps">
             Topics not stated publicly
           </a>{' '}
-          are not answered here.
+          still need the trust portal or security@capgo.app.
         </p>
         <p>
           Related pages:{' '}
@@ -234,8 +241,9 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
         <p>{m.enterprise_faq_data_a({}, { locale })}</p>
         <p>
           <strong class="text-white">EU plugin data path (opt-in):</strong> Set <code class="text-cyan-100">updateUrl</code>, <code class="text-cyan-100">statsUrl</code>, and
-          <code class="text-cyan-100">channelUrl</code> to the EU host (for example <code class="text-cyan-100">https://plugin.eu.capgo.app/</code>). All three must be set together
-          so related live-update data is stored in Europe.
+          <code class="text-cyan-100">channelUrl</code> to the full EU endpoints: <code class="text-cyan-100">https://plugin.eu.capgo.app/updates</code>,{' '}
+          <code class="text-cyan-100">https://plugin.eu.capgo.app/stats</code>, and <code class="text-cyan-100">https://plugin.eu.capgo.app/channel_self</code>. All three must be
+          set together so related live-update data is stored in Europe.
           <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/data-location/')}>
             Data location documentation
           </a>
@@ -426,11 +434,11 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
           </li>
         </ul>
         <p>
-          Backup frequency, retention, RPO, RTO, and DR test cadence are not stated on public marketing pages (see{' '}
-          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="#gaps">
-            gaps
+          Backups are tested periodically for integrity and restorability, with recovery procedures exercised annually (see{' '}
+          <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="#qa-continuity">
+            business continuity
           </a>
-          ).
+          ). Specific RPO and RTO targets are not published on capgo.app.
         </p>
       </div>
     </section>
@@ -456,6 +464,13 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
           <li>
             <strong class="text-white">Penetration testing:</strong> Independent penetration testing per the Trust page. Vendor, date, and report availability are not public; use
             the trust portal for evidence requests.
+          </li>
+          <li>
+            <strong class="text-white">Patching targets:</strong> Critical within 7 days and high within 30 days per our Vulnerability Management Policy (see{' '}
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="#qa-vulnerability">
+              vulnerability management
+            </a>
+            ).
           </li>
           <li>
             <strong class="text-white">Disclosure:</strong> Report via
@@ -491,13 +506,13 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
         <p>Public statements include:</p>
         <ul class="list-disc space-y-2 pl-5">
           <li>
-            SOC 2 Type II certification per{' '}
+            SOC 2 Type 2 completed (Type II) per{' '}
             <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/compliance/')}>
               compliance documentation
             </a>
             .
           </li>
-          <li>ISO 27001 certification per compliance documentation.</li>
+          <li>ISO 27001:2022 certified per compliance documentation and trust portal.</li>
           <li>
             Trust portal badges for SOC 2 Type 1, SOC 2 Type 2, SOC 3, ISO 27001, and GDPR at
             <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://trust.capgo.app" rel="noreferrer" target="_blank">
@@ -520,7 +535,9 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
           </a>
           , still via the trust portal process for formal evidence.
         </p>
-        <p>Auditor name, audit period, ISO certificate number, and SOC scope are not published on capgo.app (see gaps).</p>
+        <p>
+          Full SOC 2 and ISO audit reports, auditor opinions, and detailed scope are available only through the trust portal. Public marketing pages do not reproduce report PDFs.
+        </p>
       </div>
     </section>
 
@@ -540,15 +557,19 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
             <strong class="text-white">Signed DPA / NDA:</strong> Available on Enterprise per the Enterprise page.
           </li>
           <li>
-            <strong class="text-white">Data collected by the updater:</strong> App ID, versions, platform, app-scoped device ID, bundle, channel, OS, plugin version, request
-            country, IP; no names, emails, or advertising IDs. Device ID is pseudonymous personal data where GDPR applies.
+            <strong class="text-white">Data collected by the updater (default):</strong> App ID, versions, platform, app-scoped device ID, bundle, channel, OS, plugin version,
+            request country, and IP. Capgo does not collect names, emails, or advertising IDs by default. Optional <code class="text-cyan-100">custom_id</code> and stats{' '}
+            <code class="text-cyan-100">metadata</code> may contain personal identifiers if your app sends them. HIPAA-minimum deployments should omit those fields and disable{' '}
+            <code class="text-cyan-100">allow_device_custom_id</code>. The device ID is pseudonymous personal data where GDPR applies.
             <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/compliance/')}>
               Compliance documentation
             </a>
             .
           </li>
           <li>
-            <strong class="text-white">Disable stats:</strong> Set <code class="text-cyan-100">statsUrl</code> to an empty string.
+            <strong class="text-white">Disable explicit statistics:</strong> Set <code class="text-cyan-100">statsUrl</code> to an empty string to stop explicit statistics reports.
+            When <code class="text-cyan-100">updateUrl</code> remains enabled, Capgo can still store billing MAU, device inventory, and update-decision records required for live
+            updates and billing.
             <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('docs/live-updates/hipaa-compliance/')}>
               HIPAA compliance documentation
             </a>
@@ -594,9 +615,44 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
           </a>
           .
         </p>
-        <p>Deployment options for stricter reviews include EU endpoints, disabled statistics, self-hosted statistics, and licensed self-hosting (see the HIPAA compliance page).</p>
+        <p>
+          Deployment options for stricter reviews include EU endpoints, disabling explicit statistics (with the limits above), self-hosted statistics, and licensed self-hosting
+          (see the HIPAA compliance page).
+        </p>
       </div>
     </section>
+
+    <section class="mt-12 max-w-3xl" id="vendor-qa">
+      <h2 class="text-2xl font-semibold text-white">Enterprise questionnaire reference</h2>
+      <p class="mt-4 text-base leading-8 text-slate-300">
+        Short question and answer pairs aligned with recent enterprise vendor security assessments. Use them to fill similar questionnaires. For SOC 2 Type 2, ISO 27001:2022, and
+        detailed control evidence, request access at{' '}
+        <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://trust.capgo.app" rel="noreferrer" target="_blank">
+          trust.capgo.app
+        </a>{' '}
+        (NDA signed there). Reports are not emailed.
+      </p>
+      <p class="mt-4 text-sm leading-6 text-slate-400">
+        English is the authoritative language for this reference. Non-English locales show an automatic translation notice at the top of the page.
+      </p>
+    </section>
+
+    {enterpriseQuestionnaireSections.map((section) => (
+      <section class="mt-12 max-w-3xl" id={section.id}>
+        <h2 class="text-2xl font-semibold text-white">{section.title}</h2>
+        <dl class="mt-6 space-y-8">
+          {section.items.map((item) => (
+            <div>
+              <dt class="text-base font-semibold text-white">
+                {item.id ? <span class="text-cyan-300">{item.id}: </span> : null}
+                {item.question}
+              </dt>
+              <dd class="mt-2 text-base leading-8 text-slate-300">{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    ))}
 
     <section class="mt-12 max-w-3xl" id="contacts">
       <h2 class="text-2xl font-semibold text-white">Contacts</h2>
@@ -652,18 +708,14 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
         The following are commonly asked in questionnaires but are not answered on public Capgo pages. Request details through the trust portal or security@capgo.app.
       </p>
       <ul class="mt-4 list-disc space-y-2 pl-5 text-base leading-8 text-slate-300">
-        <li>SOC 2 auditor, report period, and scope; ISO 27001 certificate number, certification body, and expiry</li>
-        <li>Penetration test vendor, date, frequency, and summary letter</li>
-        <li>Backup frequency, retention, RPO, RTO, and disaster recovery test dates</li>
-        <li>Platform log retention, SIEM or alerting tooling, and incident response exercise cadence</li>
+        <li>SOC 2 report period, scope, and auditor letter detail beyond what the trust portal provides</li>
+        <li>Penetration test vendor, date, and summary letter (annual testing is confirmed in the questionnaire reference)</li>
+        <li>Published RPO and RTO numeric targets</li>
+        <li>Exact log retention periods per system beyond the less-than-three-years summary in the questionnaire reference</li>
         <li>TLS minimum version, cipher suites, and platform key management rotation details</li>
-        <li>SCIM, session timeout, and account lockout settings</li>
-        <li>Employee background check scope, security training frequency, and endpoint management details</li>
-        <li>Internal privileged access review cadence</li>
+        <li>SCIM provisioning</li>
         <li>Data Protection Officer or EU representative contact</li>
         <li>Specific customer data deletion timeline after contract termination</li>
-        <li>Cyber insurance coverage</li>
-        <li>Patch SLAs by severity</li>
         <li>PCI DSS, FedRAMP, CSA STAR, or TISAX certifications (not claimed publicly)</li>
       </ul>
     </section>
