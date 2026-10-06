@@ -1068,7 +1068,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BundleListEnvelope"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Bundle"
+                  }
                 }
               }
             }
@@ -2437,20 +2440,6 @@
           "id",
           "app_id",
           "name"
-        ]
-      },
-      "BundleListEnvelope": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Bundle"
-            }
-          }
-        },
-        "required": [
-          "data"
         ]
       },
       "BundleCreate": {
