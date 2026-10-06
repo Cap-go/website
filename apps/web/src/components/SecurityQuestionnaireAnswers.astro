@@ -1,0 +1,29 @@
+---
+import type { SecurityQuestionnaireItem } from '@/lib/securityQuestionnaireEnterprise'
+
+interface Props {
+  items: SecurityQuestionnaireItem[]
+  heading?: string
+}
+
+const { items, heading = 'Vendor questionnaire answers' } = Astro.props
+---
+
+{items.length > 0 && (
+  <div class="mt-8 border-t border-white/10 pt-8">
+    <h3 class="text-lg font-semibold text-white">{heading}</h3>
+    <dl class="mt-6 space-y-8">
+      {items.map((item) => (
+        <div>
+          <dt class="text-base font-semibold text-white">
+            {item.question}
+            {item.id ? (
+              <span class="ml-2 inline-flex rounded bg-cyan-950/80 px-2 py-0.5 text-xs font-medium tracking-wide text-cyan-300 ring-1 ring-cyan-400/30">{item.id}</span>
+            ) : null}
+          </dt>
+          <dd class="mt-2 text-base leading-8 text-slate-300">{item.answer}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+)}
