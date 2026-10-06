@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-06T07:03:54.427Z
-updated_at: 2026-10-06T07:04:02.270Z
+updated_at: 2026-10-06T07:07:02.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/402ef494-5b7d-4de8-b735-b61f4b90f469/roll-back-policy-policy-guide.jpg'
 head_image_alt: 'Roll Back Policy Guide: Protect Apps from Bad Releases'
 keywords: 'roll back policy, release management, mobile apps, deployment, Capacitor'
