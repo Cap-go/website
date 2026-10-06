@@ -5863,6 +5863,8 @@ const messages = {
   trust_resource_trust_center_cta: 'Visit trust portal',
   trust_resource_trust_center_description: 'Access security questionnaires, SOC documentation, and detailed control mappings.',
   trust_resource_trust_center_title: 'Trust portal',
+  trust_resource_questionnaire_description: 'Public facts for vendor security questionnaires, with links to primary sources on capgo.app.',
+  trust_resource_questionnaire_cta: 'Open questionnaire facts',
   trust_resources_description: 'Dig deeper into the policies, controls, and live signals that keep Capgo secure.',
   trust_resources_title: 'Explore trust resources',
   trusted_by_developers_worldwide: 'Trusted by Developers Worldwide',
