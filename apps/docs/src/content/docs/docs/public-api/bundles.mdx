@@ -355,7 +355,7 @@ Retrieve bundle information. Without filters, returns 50 bundles per page. With 
 - `version`: Optional. Exact bundle version name (`app_versions.name`, for example `1.2.3`). Returns a JSON array with zero or one item.
 - `id`: Optional. Numeric bundle id (`app_versions.id`). Returns a JSON array with zero or one item.
 
-Use the same `authorization` header and API key app scoping as the paginated list. Malformed or invalid query values return an `invalid_query` error.
+Use the same `authorization` header and API key app scoping as the paginated list. Values rejected by query-schema validation return an `invalid_query` error.
 
 #### Check whether a version exists (CI)
 

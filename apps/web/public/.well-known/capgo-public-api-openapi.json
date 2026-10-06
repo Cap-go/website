@@ -1092,7 +1092,7 @@
             "$ref": "#/components/responses/InternalError"
           }
         },
-        "description": "List uploaded live-update bundles for one app, including versions, checksums, and metadata. Optional version or id query parameters return at most one matching bundle for that app. Invalid query parameters return invalid_query."
+        "description": "List uploaded live-update bundles for one app, including versions, checksums, and metadata. Optional version or id query parameters return at most one matching bundle for that app. Values rejected by query-schema validation return invalid_query."
       },
       "post": {
         "tags": [
