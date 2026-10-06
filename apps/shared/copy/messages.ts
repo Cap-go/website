@@ -6638,18 +6638,25 @@ const messages = {
   migrate_from_codepush_steps_li2: 'Compare CodePush vs Capgo on the alternative page',
   migrate_from_codepush_steps_li3: 'Register a Capgo account and upload a test bundle',
   mcp_page_title: 'Capgo MCP for AI agents',
-  mcp_page_meta_description: 'Streamable HTTP MCP at /mcp for Capgo docs and OpenAPI tools. Use the CLI MCP server for authenticated account changes.',
+  mcp_page_meta_description: 'Connect AI agents to Capgo: hosted account MCP at api.capgo.app/mcp with OAuth, a public docs MCP at /mcp, and the CLI MCP for uploads and builds.',
   mcp_page_hero_title: 'Model Context Protocol (MCP) on Capgo',
-  mcp_page_hero_subtitle: 'Connect AI agents to Capgo documentation, OpenAPI, and when-to-use guidance — without replacing the CLI MCP server for uploads and builds.',
+  mcp_page_hero_subtitle: 'Connect Claude, ChatGPT, Cursor, and other AI assistants to your Capgo account, to Capgo docs and OpenAPI, and to your project files through the CLI.',
+  mcp_page_hosted_title: 'Hosted account MCP server',
+  mcp_page_hosted_p1:
+    'Paste https://api.capgo.app/mcp into Claude, ChatGPT, Cursor, VS Code, Lovable, or any remote MCP client. Nothing to install: sign in with OAuth and pick which organizations to share, or send a Capgo API key as a bearer token.',
+  mcp_page_hosted_p2:
+    'About 50 tools cover apps, bundles, channels and rollouts, devices, statistics, Observe, native build status and logs, webhooks, and push notifications, with the same permissions and audit logs as the public API.',
+  mcp_page_hosted_cta: 'Hosted MCP setup guide',
   mcp_page_public_title: 'Public Streamable HTTP server',
   mcp_page_public_p1: 'GET /.well-known/mcp.json for the manifest. POST JSON-RPC to /mcp for tools like capgo_when_to_use, capgo_get_openapi, and capgo_list_docs.',
   mcp_page_public_p2:
     'Browsers requesting HTML on /mcp see this page. Clients sending Accept: text/event-stream receive the SSE handshake. API clients should POST with application/json.',
   mcp_page_cli_title: 'Authenticated CLI MCP',
   mcp_page_cli_p1:
-    'Account mutations — bundle upload, channel changes, native builds — run through npx @capgo/cli@latest mcp after login. See /docs/cli/reference/mcp/ and /skills/.',
+    'Bundle uploads, native build requests, doctor, and probe need your project files, so they run through npx @capgo/cli@latest mcp after login. See /docs/cli/reference/mcp/ and /skills/.',
   mcp_page_links_title: 'Documentation',
   mcp_page_links_manifest: 'MCP manifest (/.well-known/mcp.json)',
+  mcp_page_links_hosted: 'Hosted MCP server docs',
   mcp_page_links_docs: 'CLI MCP reference',
   mcp_page_links_skills: 'Capacitor Skills for agents',
   mcp_page_links_openapi: 'OpenAPI spec',
@@ -6659,6 +6666,7 @@ const messages = {
   alternatives_hub_best_title: 'Best-of guides',
   alternatives_hub_mcp_link: 'MCP for AI agents',
   footer_mcp_link: 'MCP server',
+  footer_hosted_mcp_link: 'Hosted MCP server',
 } as const
 
 export function formatMessage(value: string, values: MessageValues = {}): string {

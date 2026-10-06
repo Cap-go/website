@@ -51,6 +51,8 @@ const commands = [
 ]
 
 const mcpInstallCommand = "npx install-mcp 'npx @capgo/cli@latest mcp' --client codex"
+const hostedMcpUrl = 'https://api.capgo.app/mcp'
+const hostedMcpDocsUrl = getRelativeLocaleUrl(locale, 'docs/ai/mcp')
 const mcpTools = ['Apps', 'Bundles', 'Channels', 'Compatibility', 'Native builds', 'Stats', 'Doctor', 'Delivery probe']
 const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.miorange', 'ua.vodafone.myvodafone']
 const comparisonRows = [
@@ -312,6 +314,32 @@ const comparisonRows = [
             <CommandCode command={mcpInstallCommand} />
           </div>
           <p class="mt-4 text-sm leading-6 text-slate-400">Replace <code class="font-mono text-slate-200">codex</code> with the client your team uses.</p>
+        </div>
+
+        <div class="rounded-lg border border-emerald-300/20 bg-slate-900 p-5 shadow-2xl shadow-black/40 sm:p-6">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p class="font-mono text-xs font-semibold tracking-wide text-emerald-300 uppercase">Hosted MCP</p>
+              <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white">Use Capgo from Claude, ChatGPT, or Cursor</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-300">
+                Nothing to install. Paste the URL into any remote MCP client, sign in with OAuth, and manage apps, channels, rollouts, devices, and builds from chat.
+              </p>
+            </div>
+            <button
+              type="button"
+              class="w-fit rounded-md border border-emerald-300/30 px-3 py-1.5 font-mono text-xs font-semibold text-emerald-100 transition-colors hover:bg-emerald-300/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+              data-cli-mcp-copy={hostedMcpUrl}
+              aria-label="Copy hosted MCP URL"
+            >
+              Copy
+            </button>
+          </div>
+
+          <div class="mt-5 rounded-lg bg-slate-950 p-4 font-mono text-sm break-all text-emerald-200 ring-1 ring-white/10">{hostedMcpUrl}</div>
+          <p class="mt-4 text-sm leading-6 text-slate-400">
+            Uploads and native build requests still run through the CLI MCP above.
+            <a href={hostedMcpDocsUrl} class="font-semibold text-emerald-200 underline underline-offset-4 hover:text-white">Read the hosted MCP setup guide</a>
+          </p>
         </div>
 
         <div class="rounded-lg border border-cyan-300/20 bg-slate-900 p-5 shadow-2xl shadow-black/40 sm:p-6">
