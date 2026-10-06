@@ -404,13 +404,13 @@ export const enterpriseQuestionnaireByTopic: Record<SecurityQuestionnaireTopic, 
       id: 'GAI.2',
       question: 'Do you use off-the-shelf generative AI tools that could process customer data?',
       answer:
-        'Capgo uses AI coding assistants only for development on Capgo own source code, not on customer data. The customer-facing AI feature is an opt-in build-log diagnostic on Cloudflare Workers AI, an existing sub-processor. Data is processed per request and is not retained or used for training.',
+        'By default, customer data is not processed by off-the-shelf generative AI tools. Capgo uses AI coding assistants only for development on Capgo own source code, not on customer data. The only customer-facing exception is optional build-log diagnostics: when a customer opts in, those logs are processed per request by Cloudflare Workers AI, a listed sub-processor, with no retention by the AI service and no use for model training.',
     },
     {
       id: 'GAI.3',
       question: 'Is customer data sent outside your environment for AI analysis?',
       answer:
-        'Customer data is not sent to external AI providers for analysis. If a customer opts in to AI-assisted build-log diagnostics, logs are processed per request on Cloudflare Workers AI and are not retained or used for training.',
+        'By default, customer data is not sent to any external AI provider for analysis. The only exception is optional build-log diagnostics: when a customer opts in, those build logs are processed per request by Cloudflare Workers AI (listed on our subprocessors page), with no retention by the AI service and no use for model training.',
     },
     {
       id: 'GAI.10',
@@ -443,7 +443,7 @@ export const enterpriseQuestionnaireByTopic: Record<SecurityQuestionnaireTopic, 
       id: 'GAI.16',
       question: 'How long is customer input retained in the AI system?',
       answer:
-        'Build logs are sent to Cloudflare Workers AI only when a customer opts in. They are processed per request and are not retained by the AI service or used for model training. Build logs themselves follow Capgo standard data retention policy.',
+        'By default, no customer content is sent to the AI service. When a customer opts in to build-log diagnostics, logs are processed per request by Cloudflare Workers AI and are not retained by that service or used for model training. Build logs stored in Capgo systems follow our standard data retention policy.',
     },
   ],
 }

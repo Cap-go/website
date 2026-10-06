@@ -628,12 +628,12 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
     <section class="mt-12 max-w-3xl" id="generative-ai">
       <h2 class="text-2xl font-semibold text-white">Generative AI</h2>
       <p class="mt-4 text-base leading-8 text-slate-300">
-        Capgo uses AI coding assistants for development on Capgo own code only, not on customer data. The customer-facing feature is opt-in build-log diagnostics on Cloudflare
-        Workers AI (see the{' '}
+        By default, Capgo does not send customer data to any AI provider. Internal development may use AI coding assistants on Capgo own source code only. If a customer opts in to
+        build-log diagnostics, those logs are processed per request by Cloudflare Workers AI (see the{' '}
         <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('subprocessors/')}>
           subprocessors page
         </a>
-        ).
+        ), with no retention by the AI service and no training use.
       </p>
       <SecurityQuestionnaireAnswers items={enterpriseQuestionnaireByTopic['generative-ai']} heading="Vendor questionnaire answers" />
     </section>
