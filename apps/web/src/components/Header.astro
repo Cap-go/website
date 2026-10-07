@@ -182,8 +182,6 @@ const mobileLinks = [
             aria-label={m.capgo_home({}, { locale: Astro.locals.locale })}
             class="capgo-logo-link font-prompt flex shrink-0 items-center pr-2 font-medium md:pr-3"
             data-capgo-logo-trigger
-            aria-expanded="false"
-            aria-haspopup="menu"
           >
             <span class="flex items-center pr-1">
               <svg class="capgo-logo-mark h-6 w-6 shrink-0 text-white lg:h-7 lg:w-7" viewBox={CAPGO_MARK_VIEWBOX} aria-hidden="true" focusable="false">
@@ -201,40 +199,6 @@ const mobileLinks = [
               </svg>
             </span>
           </a>
-          <div
-            data-capgo-logo-menu-panel
-            role="menu"
-            aria-label={m.brand_logo_context_menu_label({}, { locale })}
-            hidden
-            class="capgo-logo-context-menu fixed z-[60] min-w-[220px] overflow-hidden rounded-xl border border-white/15 bg-[#101216] py-1 text-sm text-slate-100 shadow-2xl shadow-black/50 ring-1 ring-white/10"
-          >
-            <a
-              role="menuitem"
-              href={brandLogoSvgUrl}
-              download
-              class="block px-4 py-2.5 font-medium text-slate-100 transition hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
-              tabindex="-1"
-            >
-              {m.brand_logo_context_menu_download_svg({}, { locale })}
-            </a>
-            <a
-              role="menuitem"
-              href={brandLogoPngUrl}
-              download
-              class="block px-4 py-2.5 font-medium text-slate-100 transition hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
-              tabindex="-1"
-            >
-              {m.brand_logo_context_menu_download_png({}, { locale })}
-            </a>
-            <a
-              role="menuitem"
-              href={brandPageUrl}
-              class="block border-t border-white/10 px-4 py-2.5 font-medium text-sky-300 transition hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
-              tabindex="-1"
-            >
-              {m.brand_logo_context_menu_all_assets({}, { locale })}
-            </a>
-          </div>
         </div>
         <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">
           <!-- Docs -->
@@ -484,6 +448,41 @@ const mobileLinks = [
       </div>
     </div>
   </div>
+  <div
+    id="capgo-logo-context-menu-panel"
+    data-capgo-logo-menu-panel
+    role="menu"
+    aria-label={m.brand_logo_context_menu_label({}, { locale })}
+    hidden
+    class="capgo-logo-context-menu fixed z-[60] min-w-[220px] overflow-hidden rounded-xl border border-white/15 bg-[#101216] py-1 text-sm text-slate-100 shadow-2xl shadow-black/50 ring-1 ring-white/10"
+  >
+    <a
+      role="menuitem"
+      href={brandLogoSvgUrl}
+      download
+      class="block px-4 py-2.5 font-medium text-slate-100 transition hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+      tabindex="-1"
+    >
+      {m.brand_logo_context_menu_download_svg({}, { locale })}
+    </a>
+    <a
+      role="menuitem"
+      href={brandLogoPngUrl}
+      download
+      class="block px-4 py-2.5 font-medium text-slate-100 transition hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+      tabindex="-1"
+    >
+      {m.brand_logo_context_menu_download_png({}, { locale })}
+    </a>
+    <a
+      role="menuitem"
+      href={brandPageUrl}
+      class="block border-t border-white/10 px-4 py-2.5 font-medium text-sky-300 transition hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+      tabindex="-1"
+    >
+      {m.brand_logo_context_menu_all_assets({}, { locale })}
+    </a>
+  </div>
 </header>
 
 <script>
@@ -563,15 +562,19 @@ const mobileLinks = [
   })
 
   const logoMenuRoots = document.querySelectorAll('[data-capgo-logo-menu]')
+  const logoMenuPanel = document.getElementById('capgo-logo-context-menu-panel')
   const finePointerQuery = window.matchMedia('(pointer: fine)')
 
   function setupLogoContextMenus() {
-    if (!finePointerQuery.matches) return
+    if (!finePointerQuery.matches || !(logoMenuPanel instanceof HTMLElement)) return
 
     logoMenuRoots.forEach((root) => {
       const trigger = root.querySelector('[data-capgo-logo-trigger]')
-      const panel = root.querySelector('[data-capgo-logo-menu-panel]')
-      if (!(trigger instanceof HTMLElement) || !(panel instanceof HTMLElement)) return
+      const panel = logoMenuPanel
+      if (!(trigger instanceof HTMLElement)) return
+
+      trigger.setAttribute('aria-haspopup', 'menu')
+      trigger.setAttribute('aria-expanded', 'false')
 
       const items = () => Array.from(panel.querySelectorAll('[role="menuitem"]')).filter((el) => el instanceof HTMLElement)
 
@@ -636,10 +639,19 @@ const mobileLinks = [
         }
       })
 
+      panel.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('[role="menuitem"]')) closeMenu()
+      })
+
+      panel.addEventListener('focusout', (event) => {
+        const next = event.relatedTarget
+        if (!(next instanceof Node) || !panel.contains(next)) closeMenu()
+      })
+
       document.addEventListener('pointerdown', (event) => {
         if (!open) return
         const target = event.target
-        if (target instanceof Node && (root.contains(target) || panel.contains(target))) return
+        if (target instanceof Node && (trigger.contains(target) || panel.contains(target))) return
         closeMenu()
       })
 

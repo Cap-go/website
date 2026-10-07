@@ -290,11 +290,11 @@ const donts = [
 
   document.querySelectorAll('[data-brand-copy-hex]').forEach((button) => {
     let resetTimer
+    const label = button.querySelector('[data-brand-copy-label]')
+    const original = label?.textContent || button.getAttribute('data-brand-copy-hex') || ''
     button.addEventListener('click', async () => {
       const hex = button.getAttribute('data-brand-copy-hex')
       if (!hex) return
-      const label = button.querySelector('[data-brand-copy-label]')
-      const original = label?.textContent || hex
       try {
         await copyHex(hex)
         if (label) label.textContent = copied
