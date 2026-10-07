@@ -381,7 +381,9 @@ function screenshotDataUri(image: SocialImage, targetWidth: number) {
   const source = resolve('apps/web/public/landing-demos', shot.file)
   const out = resolve(tempDir, `${image.slug}-shot.png`)
   const { x, y, width: w, height: h } = shot.crop
-  const result = spawnSync('magick', [source, '-crop', `${w}x${h}+${x}+${y}`, '+repage', '-resize', `${targetWidth}x`, out], { stdio: 'inherit' })
+  const magick = findTool('magick')
+  if (!magick) throw new Error(`Unable to crop ${source}. Install ImageMagick.`)
+  const result = spawnSync(magick, [source, '-crop', `${w}x${h}+${x}+${y}`, '+repage', '-resize', `${targetWidth}x`, out], { stdio: 'inherit' })
   if (result.status !== 0) throw new Error(`Unable to crop ${source}. Install ImageMagick.`)
   return `data:image/png;base64,${readFileSync(out).toString('base64')}`
 }
@@ -507,20 +509,26 @@ function renderSvg(image: SocialImage) {
 </svg>`
 }
 
-function commandExists(command: string) {
-  return spawnSync('/bin/sh', ['-lc', `command -v ${command}`], { stdio: 'ignore' }).status === 0
+// Image tools are resolved from fixed system directories instead of $PATH, so a writable
+// PATH entry cannot substitute the binary these scripts execute.
+const toolDirs = ['/opt/homebrew/bin', '/usr/local/bin', '/usr/bin', '/bin']
+
+function findTool(command: string) {
+  return toolDirs.map((dir) => resolve(dir, command)).find((candidate) => existsSync(candidate)) ?? null
 }
 
 function renderPng(svgPath: string, output: string) {
   mkdirSync(dirname(output), { recursive: true })
 
-  if (commandExists('rsvg-convert')) {
-    const result = spawnSync('rsvg-convert', ['-w', String(width), '-h', String(height), '-f', 'png', '-o', output, svgPath], { stdio: 'inherit' })
+  const rsvg = findTool('rsvg-convert')
+  if (rsvg) {
+    const result = spawnSync(rsvg, ['-w', String(width), '-h', String(height), '-f', 'png', '-o', output, svgPath], { stdio: 'inherit' })
     if (result.status === 0) return
   }
 
-  if (commandExists('magick')) {
-    const result = spawnSync('magick', [svgPath, '-resize', `${width}x${height}!`, output], { stdio: 'inherit' })
+  const magick = findTool('magick')
+  if (magick) {
+    const result = spawnSync(magick, [svgPath, '-resize', `${width}x${height}!`, output], { stdio: 'inherit' })
     if (result.status === 0) return
   }
 
