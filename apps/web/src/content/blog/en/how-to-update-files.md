@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-07T07:39:24.277Z
-updated_at: 2026-10-07T07:39:25.553Z
+updated_at: 2026-10-07T07:43:09.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/8d65e6b5-3a41-4a7c-93c0-32508d3f7198/how-to-update-files-capacitor-apps.jpg'
 head_image_alt: How to Update Files in Capacitor Apps
 keywords: 'how to update files, Capacitor live updates, Capgo integration, mobile app deployment, Electron updater'
