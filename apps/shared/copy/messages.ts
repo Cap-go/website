@@ -695,7 +695,7 @@ const messages = {
   compare_capawesome_step3_text: 'Replace the Capawesome deploy step in CI with <code>npx @capgo/cli@latest bundle upload</code>.',
   compare_capawesome_support: 'Community chat on every plan. Email support from Professional (Live Updates) or Starter (Platform), and priority support on Business.',
   compare_capawesome_verdict:
-    'Choose Capgo if you ship often and want real statistics from real devices, not network guesses. One plan includes live updates, native build minutes, Observe, and push notifications, and costs less than Capawesome plans that include builds, for more users, at every tier, billed monthly or yearly. Add audit logs on every plan and update checks served from 9 regions. Capawesome suits teams that release a few times a year and want fewer changes to their tooling.',
+    'Choose Capgo if you ship often and want real statistics from real devices, not network guesses. One plan includes live updates, native build minutes, Observe, and push notifications, and costs less than Capawesome plans that include builds, with the same or more users at every tier, billed monthly or yearly. Add audit logs on every plan and update checks served from 9 regions. Capawesome suits teams that release a few times a year and want fewer changes to their tooling.',
   compare_capgo_company: 'Independent and bootstrapped, founded in 2021. 9,400+ teams, 4.7K+ apps, and 90M+ devices. SOC 2 Type II and ISO 27001 on the Enterprise plan.',
   compare_capgo_frameworks:
     'Capacitor apps built with React, Vue, Angular, Svelte, Ionic, or any web framework. Live updates also work for Cordova and Electron. Not for React Native.',
