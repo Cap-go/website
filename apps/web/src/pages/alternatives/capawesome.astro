@@ -48,6 +48,10 @@ const sources = [
   { label: m.compare_capawesome_source_rollouts({}, { locale }), href: 'https://capawesome.io/docs/cloud/live-updates/rollouts/' },
   { label: m.compare_capawesome_source_bundles({}, { locale }), href: 'https://capawesome.io/docs/cloud/live-updates/bundles/' },
   { label: m.compare_capawesome_source_ai({}, { locale }), href: 'https://capawesome.io/docs/ai/mcp/capawesome/' },
+  {
+    label: m.compare_capawesome_source_plugin_code({}, { locale }),
+    href: 'https://github.com/capawesome-team/capacitor-plugins/blob/5fdc1f1ae0eff92710efe21c08978ee23ec253c1/packages/live-update/ios/Plugin/LiveUpdate.swift',
+  },
 ]
 
 const rows = {
@@ -64,6 +68,12 @@ const rows = {
 // What Capgo shows after a release that Capawesome Cloud does not document. Source numbers index `sources`.
 const delta = [
   {
+    label: m.compare_capawesome_delta_source_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_source_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_source_them({}, { locale }),
+    sources: [10, 6],
+  },
+  {
     label: m.compare_capawesome_delta_plan_label({}, { locale }),
     capgo: m.compare_capawesome_delta_plan_capgo({}, { locale }),
     them: m.compare_capawesome_delta_plan_them({}, { locale }),
@@ -79,7 +89,7 @@ const delta = [
     label: m.compare_capawesome_delta_native_label({}, { locale }),
     capgo: m.compare_capawesome_delta_native_capgo({}, { locale }),
     them: m.compare_capawesome_delta_native_them({}, { locale }),
-    sources: [3],
+    sources: [10],
   },
   {
     label: m.compare_capawesome_delta_failures_label({}, { locale }),
@@ -112,9 +122,9 @@ const delta = [
     sources: [1],
   },
   {
-    label: m.compare_capawesome_delta_scale_label({}, { locale }),
-    capgo: m.compare_capawesome_delta_scale_capgo({}, { locale }),
-    them: m.compare_capawesome_delta_scale_them({}, { locale }),
+    label: m.compare_capawesome_delta_price_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_price_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_price_them({}, { locale }),
     sources: [1],
   },
   {
