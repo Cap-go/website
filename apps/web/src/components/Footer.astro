@@ -113,6 +113,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
     title: m.company({}, { locale: Astro.locals.locale }),
     links: [
       { name: m.about({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'about') },
+      { name: m.brand_assets({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'brand') },
       { name: m.contact({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'contact') },
       { name: m.trust({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'trust') },
       { name: m.security_questionnaires({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'security-questionnaire') },

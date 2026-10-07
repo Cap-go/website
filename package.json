@@ -22,6 +22,7 @@
     "refresh:downloads": "NPM_DOWNLOADS_REFRESH=true bun run scripts/fetch-npm-downloads.ts",
     "scrape:distribution-charts": "bun run scripts/scrape-distribution-charts.ts",
     "generate:social-images": "bun run scripts/generate-social-images.ts",
+    "generate:brand-assets": "bun run scripts/generate-brand-assets.ts",
     "just:build": "bun run build",
     "build:web": "cd apps/web && bun run build",
     "build:docs": "cd apps/docs && bun run build",

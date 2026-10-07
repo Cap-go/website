@@ -427,6 +427,8 @@ const messages = {
   book_a_consultation: 'Book a consultation',
   browse_all_plugins: 'Browse All Plugins',
   browse_plugin_library: 'Find the Native Capability You Need',
+  brand_assets: 'Brand assets',
+  brand_meta_description: 'Download official Capgo logos, colors, and typography. Press and partners can grab SVG and PNG lockups, icons, and usage guidelines.',
   bug_bounty: 'Bug Bounty',
   bug_bounty_conduct_intro:
     'We are friendly and we do pay for valid reports, but we cannot work with people who do not respect our time. Please keep communication calm and follow this program.',
