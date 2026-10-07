@@ -9,6 +9,9 @@ import { getRelativeLocaleUrl } from '@/services/links'
 
 const brand = Astro.locals.runtimeConfig.public.brand
 const locale = Astro.locals.locale
+const brandPageUrl = getRelativeLocaleUrl(locale, 'brand/')
+const brandLogoSvgUrl = '/brand/capgo-lockup-white-transparent.svg'
+const brandLogoPngUrl = '/brand/capgo-lockup-white-transparent.png'
 
 const mobileProducts = [
   {
@@ -173,27 +176,30 @@ const mobileLinks = [
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between gap-3 md:justify-center">
       <div class="header-pill relative flex min-w-0 items-center rounded-2xl border border-white/10 bg-[#101216]/80 py-1.5 pr-1.5 pl-3 shadow-lg shadow-black/30 backdrop-blur-xl">
-        <a
-          href={getRelativeLocaleUrl(Astro.locals.locale)}
-          aria-label={m.capgo_home({}, { locale: Astro.locals.locale })}
-          class="capgo-logo-link font-prompt flex shrink-0 items-center pr-2 font-medium md:pr-3"
-        >
-          <span class="flex items-center pr-1">
-            <svg class="capgo-logo-mark h-6 w-6 shrink-0 text-white lg:h-7 lg:w-7" viewBox={CAPGO_MARK_VIEWBOX} aria-hidden="true" focusable="false">
-              <path fill="currentColor" fill-rule="evenodd" transform={CAPGO_MARK_TRANSFORM} d={CAPGO_MARK_PATH}></path>
-            </svg>
-            <svg
-              class="ml-[5.5px] h-6 w-auto overflow-visible text-white lg:ml-[6.5px] lg:h-7"
-              viewBox={CAPGO_WORDTYPE_MARK_ALIGNED_VIEWBOX}
-              width="70"
-              height="24"
-              role="img"
-              aria-label={`${brand} logo`}
-            >
-              <path fill="currentColor" transform={CAPGO_WORDTYPE_TRANSFORM} d={CAPGO_WORDTYPE_PATH}></path>
-            </svg>
-          </span>
-        </a>
+        <div class="relative shrink-0" data-capgo-logo-menu>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale)}
+            aria-label={m.capgo_home({}, { locale: Astro.locals.locale })}
+            class="capgo-logo-link font-prompt flex shrink-0 items-center pr-2 font-medium md:pr-3"
+            data-capgo-logo-trigger
+          >
+            <span class="flex items-center pr-1">
+              <svg class="capgo-logo-mark h-6 w-6 shrink-0 text-white lg:h-7 lg:w-7" viewBox={CAPGO_MARK_VIEWBOX} aria-hidden="true" focusable="false">
+                <path fill="currentColor" fill-rule="evenodd" transform={CAPGO_MARK_TRANSFORM} d={CAPGO_MARK_PATH}></path>
+              </svg>
+              <svg
+                class="ml-[5.5px] h-6 w-auto overflow-visible text-white lg:ml-[6.5px] lg:h-7"
+                viewBox={CAPGO_WORDTYPE_MARK_ALIGNED_VIEWBOX}
+                width="70"
+                height="24"
+                role="img"
+                aria-label={`${brand} logo`}
+              >
+                <path fill="currentColor" transform={CAPGO_WORDTYPE_TRANSFORM} d={CAPGO_WORDTYPE_PATH}></path>
+              </svg>
+            </span>
+          </a>
+        </div>
         <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">
           <!-- Docs -->
           <a
@@ -442,6 +448,41 @@ const mobileLinks = [
       </div>
     </div>
   </div>
+  <div
+    id="capgo-logo-context-menu-panel"
+    data-capgo-logo-menu-panel
+    role="menu"
+    aria-label={m.brand_logo_context_menu_label({}, { locale })}
+    hidden
+    class="capgo-logo-context-menu fixed z-[60] min-w-[220px] overflow-hidden rounded-xl border border-white/15 bg-[#101216] py-1 text-sm text-slate-100 shadow-2xl shadow-black/50 ring-1 ring-white/10"
+  >
+    <a
+      role="menuitem"
+      href={brandLogoSvgUrl}
+      download
+      class="block px-4 py-2.5 font-medium text-slate-100 transition hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+      tabindex="-1"
+    >
+      {m.brand_logo_context_menu_download_svg({}, { locale })}
+    </a>
+    <a
+      role="menuitem"
+      href={brandLogoPngUrl}
+      download
+      class="block px-4 py-2.5 font-medium text-slate-100 transition hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+      tabindex="-1"
+    >
+      {m.brand_logo_context_menu_download_png({}, { locale })}
+    </a>
+    <a
+      role="menuitem"
+      href={brandPageUrl}
+      class="block border-t border-white/10 px-4 py-2.5 font-medium text-sky-300 transition hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+      tabindex="-1"
+    >
+      {m.brand_logo_context_menu_all_assets({}, { locale })}
+    </a>
+  </div>
 </header>
 
 <script>
@@ -519,6 +560,107 @@ const mobileLinks = [
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) syncHeaderAuthLinks()
   })
+
+  const logoMenuRoots = document.querySelectorAll('[data-capgo-logo-menu]')
+  const logoMenuPanel = document.getElementById('capgo-logo-context-menu-panel')
+  const finePointerQuery = window.matchMedia('(pointer: fine)')
+
+  function setupLogoContextMenus() {
+    if (!finePointerQuery.matches || !(logoMenuPanel instanceof HTMLElement)) return
+
+    logoMenuRoots.forEach((root) => {
+      const trigger = root.querySelector('[data-capgo-logo-trigger]')
+      const panel = logoMenuPanel
+      if (!(trigger instanceof HTMLElement)) return
+
+      trigger.setAttribute('aria-haspopup', 'menu')
+      trigger.setAttribute('aria-expanded', 'false')
+
+      const items = () => Array.from(panel.querySelectorAll('[role="menuitem"]')).filter((el) => el instanceof HTMLElement)
+
+      let open = false
+
+      const closeMenu = () => {
+        if (!open) return
+        open = false
+        panel.hidden = true
+        trigger.setAttribute('aria-expanded', 'false')
+        items().forEach((item) => item.setAttribute('tabindex', '-1'))
+      }
+
+      const openMenu = (clientX: number, clientY: number) => {
+        open = true
+        panel.hidden = false
+        trigger.setAttribute('aria-expanded', 'true')
+        const menuWidth = panel.offsetWidth || 220
+        const menuHeight = panel.offsetHeight || 120
+        const padding = 8
+        const left = Math.min(clientX, window.innerWidth - menuWidth - padding)
+        const top = Math.min(clientY, window.innerHeight - menuHeight - padding)
+        panel.style.left = `${Math.max(padding, left)}px`
+        panel.style.top = `${Math.max(padding, top)}px`
+        const first = items()[0]
+        first?.setAttribute('tabindex', '0')
+        first?.focus()
+      }
+
+      trigger.addEventListener('contextmenu', (event) => {
+        event.preventDefault()
+        closeMenu()
+        openMenu(event.clientX, event.clientY)
+      })
+
+      panel.addEventListener('keydown', (event) => {
+        if (!(event instanceof KeyboardEvent)) return
+        const menuItems = items()
+        const currentIndex = menuItems.findIndex((item) => item === document.activeElement)
+
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          closeMenu()
+          trigger.focus()
+          return
+        }
+
+        if (event.key === 'ArrowDown') {
+          event.preventDefault()
+          const next = menuItems[(currentIndex + 1) % menuItems.length]
+          menuItems.forEach((item) => item.setAttribute('tabindex', '-1'))
+          next?.setAttribute('tabindex', '0')
+          next?.focus()
+        }
+
+        if (event.key === 'ArrowUp') {
+          event.preventDefault()
+          const prev = menuItems[(currentIndex - 1 + menuItems.length) % menuItems.length]
+          menuItems.forEach((item) => item.setAttribute('tabindex', '-1'))
+          prev?.setAttribute('tabindex', '0')
+          prev?.focus()
+        }
+      })
+
+      panel.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('[role="menuitem"]')) closeMenu()
+      })
+
+      panel.addEventListener('focusout', (event) => {
+        const next = event.relatedTarget
+        if (!(next instanceof Node) || !panel.contains(next)) closeMenu()
+      })
+
+      document.addEventListener('pointerdown', (event) => {
+        if (!open) return
+        const target = event.target
+        if (target instanceof Node && (trigger.contains(target) || panel.contains(target))) return
+        closeMenu()
+      })
+
+      window.addEventListener('resize', closeMenu)
+      window.addEventListener('scroll', closeMenu, { passive: true })
+    })
+  }
+
+  setupLogoContextMenus()
 </script>
 
 <style>
