@@ -1,0 +1,401 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+import { defaultLocale } from '@/services/locale'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+
+const title = `${brand} | ${m.brand_assets({}, { locale })}`
+const description = m.brand_meta_description({}, { locale })
+const pageUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'brand/')}`
+
+const webPageLdJson = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: pageUrl,
+})
+
+const content = {
+  title,
+  description,
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, webPageLdJson, {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: `${baseUrl}${getRelativeLocaleUrl(locale, '/')}` },
+      { name: m.brand_assets({}, { locale }), url: pageUrl },
+    ],
+  }),
+}
+
+const brandColors = [
+  {
+    name: 'Banner navy',
+    hex: '#002444',
+    note: 'Primary lockup on marketing banners and press headers.',
+    previewClass: 'bg-[#002444]',
+    textClass: 'text-white',
+  },
+  {
+    name: 'Icon navy',
+    hex: '#001827',
+    note: 'App icon tile, favicon, and dark lockups on light backgrounds.',
+    previewClass: 'bg-[#001827]',
+    textClass: 'text-white',
+  },
+  {
+    name: 'Azure accent',
+    hex: '#119eff',
+    note: 'Primary product accent on capgo.app (Tailwind azure-500).',
+    previewClass: 'bg-azure-500',
+    textClass: 'text-slate-950',
+  },
+  {
+    name: 'Pumpkin orange',
+    hex: '#ff7211',
+    note: 'Warm highlight accent (Tailwind pumpkin-orange-500).',
+    previewClass: 'bg-pumpkin-orange-500',
+    textClass: 'text-slate-950',
+  },
+  {
+    name: 'White',
+    hex: '#ffffff',
+    note: 'Logos, wordmarks, and primary text on dark surfaces.',
+    previewClass: 'bg-white ring-1 ring-white/20',
+    textClass: 'text-slate-950',
+  },
+  {
+    name: 'Slate surface',
+    hex: '#020617',
+    note: 'Default dark page background (Tailwind slate-950).',
+    previewClass: 'bg-slate-950',
+    textClass: 'text-white',
+  },
+]
+
+type BrandAsset = {
+  id: string
+  title: string
+  description: string
+  previewBg: string
+  previewPadding?: string
+  previewImg: { src: string; alt: string; class?: string }
+  downloads: { label: string; href: string; format: string }[]
+}
+
+const assets: BrandAsset[] = [
+  {
+    id: 'lockup-navy',
+    title: 'Logo with name on navy',
+    description: 'Primary horizontal lockup for press, partner pages, and dark hero sections.',
+    previewBg: 'bg-[#002444]',
+    previewImg: { src: '/brand/capgo-lockup-white-on-navy.svg', alt: 'Capgo logo on navy background', class: 'h-10 w-auto sm:h-12' },
+    downloads: [
+      { label: 'SVG', href: '/brand/capgo-lockup-white-on-navy.svg', format: 'svg' },
+      { label: 'PNG', href: '/brand/capgo-lockup-white-on-navy.png', format: 'png' },
+      { label: 'Banner PNG', href: '/brand/capgo-banner-navy.png', format: 'png' },
+    ],
+  },
+  {
+    id: 'lockup-transparent',
+    title: 'White logo on transparent',
+    description: 'Use on photography, gradients, or video overlays where you control contrast.',
+    previewBg: 'bg-slate-950 bg-[radial-gradient(circle_at_30%_20%,#1e3a5f,transparent_55%),radial-gradient(circle_at_80%_80%,#0f172a,transparent_50%)]',
+    previewImg: { src: '/brand/capgo-lockup-white-transparent.svg', alt: 'White Capgo logo on transparent background', class: 'h-10 w-auto sm:h-12' },
+    downloads: [
+      { label: 'SVG', href: '/brand/capgo-lockup-white-transparent.svg', format: 'svg' },
+      { label: 'PNG', href: '/brand/capgo-lockup-white-transparent.png', format: 'png' },
+    ],
+  },
+  {
+    id: 'lockup-light',
+    title: 'Navy logo on white',
+    description: 'For light documents, slide decks, and directories that require a dark mark on white.',
+    previewBg: 'bg-white',
+    previewImg: { src: '/brand/capgo-lockup-navy-on-white.svg', alt: 'Navy Capgo logo on white background', class: 'h-10 w-auto sm:h-12' },
+    downloads: [
+      { label: 'SVG', href: '/brand/capgo-lockup-navy-on-white.svg', format: 'svg' },
+      { label: 'PNG', href: '/brand/capgo-lockup-navy-on-white.png', format: 'png' },
+    ],
+  },
+  {
+    id: 'icon',
+    title: 'Icon only',
+    description: 'Square app icon tile and favicon-style mark without the wordmark.',
+    previewBg: 'bg-[#001827]',
+    previewImg: { src: '/brand/capgo-icon-navy.svg', alt: 'Capgo icon on navy tile', class: 'h-16 w-16 sm:h-20 sm:w-20' },
+    downloads: [
+      { label: 'SVG tile', href: '/brand/capgo-icon-navy.svg', format: 'svg' },
+      { label: 'PNG tile', href: '/brand/capgo-icon-navy.png', format: 'png' },
+      { label: 'Site favicon SVG', href: '/logo.svg', format: 'svg' },
+    ],
+  },
+  {
+    id: 'header',
+    title: 'Compact header logo',
+    description: 'Small lockup for navigation bars and tight UI placements.',
+    previewBg: 'bg-[#002444]',
+    previewPadding: 'py-6',
+    previewImg: { src: '/brand/capgo-logo-header.png', alt: 'Compact Capgo header logo', class: 'h-8 w-auto' },
+    downloads: [{ label: 'PNG', href: '/brand/capgo-logo-header.png', format: 'png' }],
+  },
+]
+
+const dos = [
+  'Use official SVG or PNG files from this page.',
+  'Keep clear space around the lockup equal to the height of the Capgo mark.',
+  'Write the product name as Capgo (capital C, lowercase apgo).',
+  'Place the navy lockup on solid navy or dark neutral backgrounds with strong contrast.',
+]
+
+const donts = [
+  'Do not stretch, skew, rotate, or add effects to the logo.',
+  'Do not recolor the mark or wordmark outside the approved palettes.',
+  'Do not place white logos on busy photography without a scrim.',
+  'Do not use outdated capacitor-only marks without the Capgo wordmark for product references.',
+]
+
+const pressBoilerplate =
+  'Capgo is the open platform for Capacitor and Ionic teams to ship live updates, native iOS and Android builds, and release tooling from one control plane. Teams use Capgo to push encrypted over-the-air fixes, manage channels and rollbacks, and compile store-ready binaries without maintaining Mac build farms.'
+
+const toc = [
+  { id: 'downloads', label: 'Logo downloads' },
+  { id: 'colors', label: 'Colors' },
+  { id: 'typography', label: 'Typography' },
+  { id: 'guidelines', label: 'Usage guidelines' },
+  { id: 'press', label: 'Press boilerplate' },
+  { id: 'contact', label: 'Brand contact' },
+]
+---
+
+<Layout content={content}>
+  <div class="mx-auto w-full max-w-6xl px-4 py-10 text-slate-100 sm:px-6 sm:py-14 lg:px-8">
+    <div class="max-w-3xl">
+      {locale !== defaultLocale && (
+        <p class="mb-5 rounded-md border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-sm leading-6 text-amber-100">
+          Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source for
+          legal matters.
+        </p>
+      )}
+      <p class="text-sm font-semibold tracking-wide text-cyan-300 uppercase">{m.company({}, { locale })}</p>
+      <h1 class="mt-3 text-4xl font-bold tracking-normal text-white sm:text-5xl">{m.brand_assets({}, { locale })}</h1>
+      <p class="mt-5 text-lg leading-8 text-slate-300">{description}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          class="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
+          href="/brand/capgo-brand-assets.zip"
+          download
+        >
+          Download all assets (ZIP)
+        </a>
+        <a
+          class="inline-flex items-center justify-center rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white/40"
+          href="#guidelines"
+        >
+          Read usage guidelines
+        </a>
+      </div>
+    </div>
+
+    <nav class="mt-10 max-w-3xl rounded-md border border-white/10 bg-slate-950/60 p-5" aria-label="On this page">
+      <p class="text-xs font-semibold tracking-wide text-slate-400 uppercase">On this page</p>
+      <ol class="mt-3 columns-1 gap-x-8 text-sm leading-6 text-slate-300 sm:columns-2">
+        {toc.map((item) => (
+          <li class="break-inside-avoid">
+            <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={`#${item.id}`}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    <section class="mt-14" id="downloads">
+      <h2 class="text-2xl font-semibold text-white">Logo downloads</h2>
+      <p class="mt-3 max-w-3xl text-base leading-7 text-slate-300">
+        Preview each lockup, then download SVG for crisp scaling or PNG when a raster is required. Files are generated from the same vector paths used in the Capgo website header.
+      </p>
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        {assets.map((asset) => (
+          <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-950/50">
+            <div class:list={['flex min-h-[9rem] items-center justify-center px-6', asset.previewBg, asset.previewPadding ?? 'py-10']}>
+              <img src={asset.previewImg.src} alt={asset.previewImg.alt} class={asset.previewImg.class} width="320" height="80" loading="lazy" decoding="async" />
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="text-lg font-semibold text-white">{asset.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-400">{asset.description}</p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {asset.downloads.map((file) => (
+                  <a
+                    class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:border-cyan-300/40 hover:bg-white/10"
+                    href={file.href}
+                    download
+                  >
+                    <span class="font-mono text-xs uppercase text-cyan-200">{file.format}</span>
+                    <span>{file.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16" id="colors">
+      <h2 class="text-2xl font-semibold text-white">Colors</h2>
+      <p class="mt-3 max-w-3xl text-base leading-7 text-slate-300">
+        Core colors used across capgo.app. Banner navy and icon navy are fixed brand anchors; accents match the live website theme (azure and pumpkin orange families).
+      </p>
+      <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {brandColors.map((color) => (
+          <li class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+            <div class:list={['flex h-20 items-end rounded-xl p-4', color.previewClass]}>
+              <span class:list={['font-mono text-sm font-semibold', color.textClass]}>{color.hex}</span>
+            </div>
+            <p class="mt-4 text-base font-semibold text-white">{color.name}</p>
+            <p class="mt-1 text-sm leading-6 text-slate-400">{color.note}</p>
+            <button
+              type="button"
+              class="mt-4 inline-flex items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-cyan-200 transition hover:border-cyan-300/50 hover:text-white"
+              data-copy-hex={color.hex}
+            >
+              Copy hex
+            </button>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mt-16" id="typography">
+      <h2 class="text-2xl font-semibold text-white">Typography</h2>
+      <p class="mt-3 max-w-3xl text-base leading-7 text-slate-300">
+        Capgo uses Satoshi across the marketing site. The wordmark in logo files is outlined geometry (not live text). For UI and marketing copy, load Satoshi from the bundled
+        variable font files served at <code class="text-cyan-200">/fonts/satoshi/</code>.
+      </p>
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-6">
+          <p class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Display and body</p>
+          <p class="mt-4 font-pj text-4xl font-bold text-white">Satoshi</p>
+          <p class="mt-2 font-pj text-lg text-slate-300">Weights 300 through 900 via Satoshi Variable.</p>
+          <p class="mt-6 font-mono text-xs text-slate-500">font-family: Satoshi, ui-sans-serif, system-ui, sans-serif</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-6">
+          <p class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Monospace in product UI</p>
+          <p class="mt-4 font-mono text-2xl text-white">ui-monospace</p>
+          <p class="mt-2 text-sm leading-6 text-slate-400">Code samples and CLI pages use the Tailwind mono stack bundled with the site.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-16" id="guidelines">
+      <h2 class="text-2xl font-semibold text-white">Usage guidelines</h2>
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-6">
+          <h3 class="text-lg font-semibold text-emerald-200">Do</h3>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-200">
+            {dos.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-rose-400/20 bg-rose-400/5 p-6">
+          <h3 class="text-lg font-semibold text-rose-200">Do not</h3>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-200">
+            {donts.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <dl class="mt-8 grid gap-4 rounded-2xl border border-white/10 bg-slate-950/50 p-6 sm:grid-cols-2">
+        <div>
+          <dt class="text-sm font-semibold text-white">Clear space</dt>
+          <dd class="mt-2 text-sm leading-6 text-slate-400">Keep padding around the lockup at least equal to the mark height on all sides.</dd>
+        </div>
+        <div>
+          <dt class="text-sm font-semibold text-white">Minimum size</dt>
+          <dd class="mt-2 text-sm leading-6 text-slate-400">Do not render the horizontal lockup narrower than 120px wide in print or 96px on screen.</dd>
+        </div>
+        <div>
+          <dt class="text-sm font-semibold text-white">Product name</dt>
+          <dd class="mt-2 text-sm leading-6 text-slate-400">
+            Always write <strong class="text-white">Capgo</strong>. Do not use CAPGO, CapGo, or "Cap Go" in prose.
+          </dd>
+        </div>
+        <div>
+          <dt class="text-sm font-semibold text-white">Icon alone</dt>
+          <dd class="mt-2 text-sm leading-6 text-slate-400">Use the square icon only when space is tight or the wordmark is already present nearby.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="mt-16" id="press">
+      <h2 class="text-2xl font-semibold text-white">Press boilerplate</h2>
+      <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">{pressBoilerplate}</p>
+      <button
+        type="button"
+        class="mt-4 inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300/50 hover:text-white"
+        data-copy-text={pressBoilerplate}
+      >
+        Copy boilerplate
+      </button>
+    </section>
+
+    <section class="mt-16 max-w-3xl" id="contact">
+      <h2 class="text-2xl font-semibold text-white">Brand contact</h2>
+      <p class="mt-4 text-base leading-8 text-slate-300">
+        Questions about logo usage, co-marketing, or directory listings: email{' '}
+        <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="mailto:support@capgo.app">
+          support@capgo.app
+        </a>
+        . For security disclosures, use{' '}
+        <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={getRelativeLocaleUrl(locale, 'security/')}>
+          security@capgo.app
+        </a>
+        .
+      </p>
+    </section>
+  </div>
+
+  <p class="sr-only" aria-live="polite" id="brand-copy-status"></p>
+
+  <script>
+    const status = document.getElementById('brand-copy-status')
+
+    function announce(message: string) {
+      if (status) status.textContent = message
+    }
+
+    async function copyValue(value: string) {
+      if (!navigator.clipboard?.writeText) {
+        announce('Copy is not available in this browser.')
+        return
+      }
+      try {
+        await navigator.clipboard.writeText(value)
+        announce('Copied to clipboard.')
+      } catch {
+        announce('Copy failed.')
+      }
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-hex]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const hex = button.getAttribute('data-copy-hex')
+        if (hex) copyValue(hex)
+      })
+    })
+
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-text]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const text = button.getAttribute('data-copy-text')
+        if (text) copyValue(text)
+      })
+    })
+  </script>
+</Layout>

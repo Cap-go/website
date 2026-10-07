@@ -147,6 +147,7 @@ const navigation: Record<string, NavigationItem[]> = {
   ],
   company: [
     { name: m.about({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'about') },
+    { name: m.brand_assets({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'brand') },
     { name: m.contact({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'contact') },
     { name: m.enterprise_title({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise') },
     { name: m.imprint({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'imprint') },
