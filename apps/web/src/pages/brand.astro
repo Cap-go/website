@@ -1,0 +1,310 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import BrandAssetCard from '@/components/brand/BrandAssetCard.astro'
+import BrandColorRow from '@/components/brand/BrandColorRow.astro'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+
+const title = `${brand} | ${m.brand({}, { locale })}`
+const description = m.brand_meta_description({}, { locale })
+const pageUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'brand/')}`
+
+const webPageLdJson = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: pageUrl,
+})
+
+const content = {
+  title,
+  description,
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, webPageLdJson, {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: `${baseUrl}${getRelativeLocaleUrl(locale, '/')}` },
+      { name: m.brand({}, { locale }), url: pageUrl },
+    ],
+  }),
+}
+
+const assetBase = '/brand'
+
+const brandColors = [
+  {
+    name: 'Banner navy',
+    hex: '#002444',
+    usage: 'Primary marketing backgrounds and horizontal logo lockups.',
+  },
+  {
+    name: 'Icon navy',
+    hex: '#001827',
+    usage: 'App icon background and navy lockups on light surfaces.',
+  },
+  {
+    name: 'Header surface',
+    hex: '#101216',
+    usage: 'Navigation pill and elevated UI panels on the website.',
+  },
+  {
+    name: 'Accent blue',
+    hex: '#119eff',
+    usage: 'Links, focus rings, and primary call-to-action highlights (azure-500).',
+  },
+  {
+    name: 'Focus ring',
+    hex: '#44BCFF',
+    usage: 'Keyboard focus and interactive emphasis on dark surfaces.',
+  },
+  {
+    name: 'Page background',
+    hex: '#111827',
+    usage: 'Default site body background (gray-900).',
+  },
+]
+
+const dos = [m.brand_do_clear_space({}, { locale }), m.brand_do_minimum_size({}, { locale }), m.brand_do_contrast({}, { locale }), m.brand_do_name({}, { locale })]
+
+const donts = [
+  m.brand_dont_stretch({}, { locale }),
+  m.brand_dont_recolor({}, { locale }),
+  m.brand_dont_effects({}, { locale }),
+  m.brand_dont_rotate({}, { locale }),
+  m.brand_dont_busy_bg({}, { locale }),
+]
+---
+
+<Layout content={content}>
+  <div class="hero-wash">
+    <section class="relative overflow-hidden bg-slate-950 py-16 sm:py-20">
+      <div class="absolute inset-0 -z-10 bg-gray-800/40" aria-hidden="true"></div>
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-sm font-semibold tracking-wide text-gray-200 uppercase ring-1 ring-white/20 ring-inset">
+          {m.brand_hero_badge({}, { locale })}
+        </div>
+        <h1 class="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">{m.brand_hero_title({}, { locale })}</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{m.brand_hero_description({}, { locale })}</p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a
+            href={`${assetBase}/capgo-brand-assets.zip`}
+            download
+            class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5 hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:outline-none"
+          >
+            {m.brand_download_all({}, { locale })}
+          </a>
+          <a
+            href="mailto:support@capgo.app"
+            class="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:text-sky-200 focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:outline-none"
+          >
+            {m.brand_contact_cta({}, { locale })}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-100 py-16 sm:py-20" id="logos">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-slate-900">{m.brand_logos_heading({}, { locale })}</h2>
+        <p class="mt-4 max-w-3xl text-lg text-slate-600">{m.brand_logos_intro({}, { locale })}</p>
+        <div class="mt-12 grid gap-8 lg:grid-cols-2">
+          <BrandAssetCard
+            title={m.brand_asset_banner_navy_title({}, { locale })}
+            description={m.brand_asset_banner_navy_desc({}, { locale })}
+            previewClass="bg-[#002444]"
+            downloads={[
+              { href: `${assetBase}/capgo-lockup-navy.svg`, label: m.brand_download_svg({}, { locale }), format: 'svg' },
+              { href: `${assetBase}/capgo-banner-navy.png`, label: m.brand_download_png({}, { locale }), format: 'png' },
+            ]}
+          >
+            <img src={`${assetBase}/capgo-banner-navy.png`} alt="Capgo logo on navy banner" class="max-h-20 w-auto" width="480" height="120" loading="lazy" />
+          </BrandAssetCard>
+
+          <BrandAssetCard
+            title={m.brand_asset_transparent_title({}, { locale })}
+            description={m.brand_asset_transparent_desc({}, { locale })}
+            previewClass="bg-slate-900"
+            downloads={[
+              { href: `${assetBase}/capgo-lockup-white-transparent.svg`, label: m.brand_download_svg({}, { locale }), format: 'svg' },
+              { href: `${assetBase}/capgo-lockup-white-transparent.png`, label: m.brand_download_png({}, { locale }), format: 'png' },
+            ]}
+          >
+            <img
+              src={`${assetBase}/capgo-lockup-white-transparent.png`}
+              alt="White Capgo logo on transparent background"
+              class="max-h-20 w-auto"
+              width="400"
+              height="120"
+              loading="lazy"
+            />
+          </BrandAssetCard>
+
+          <BrandAssetCard
+            title={m.brand_asset_dark_title({}, { locale })}
+            description={m.brand_asset_dark_desc({}, { locale })}
+            previewClass="bg-white"
+            downloads={[{ href: `${assetBase}/capgo-lockup-dark.svg`, label: m.brand_download_svg({}, { locale }), format: 'svg' }]}
+          >
+            <img src={`${assetBase}/capgo-lockup-dark.svg`} alt="Navy Capgo logo for light backgrounds" class="max-h-16 w-auto" width="320" height="80" loading="lazy" />
+          </BrandAssetCard>
+
+          <BrandAssetCard
+            title={m.brand_asset_header_title({}, { locale })}
+            description={m.brand_asset_header_desc({}, { locale })}
+            previewClass="bg-[#101216]"
+            downloads={[{ href: `${assetBase}/capgo-lockup-header-white.png`, label: m.brand_download_png({}, { locale }), format: 'png' }]}
+          >
+            <img src={`${assetBase}/capgo-lockup-header-white.png`} alt="Compact white Capgo header lockup" class="max-h-10 w-auto" width="200" height="40" loading="lazy" />
+          </BrandAssetCard>
+
+          <BrandAssetCard
+            title={m.brand_asset_icon_title({}, { locale })}
+            description={m.brand_asset_icon_desc({}, { locale })}
+            previewClass="bg-slate-200"
+            downloads={[
+              { href: `${assetBase}/capgo-icon.svg`, label: m.brand_download_svg({}, { locale }), format: 'svg' },
+              { href: `${assetBase}/capgo-icon-navy.png`, label: m.brand_download_png({}, { locale }), format: 'png' },
+            ]}
+          >
+            <img src={`${assetBase}/capgo-icon-navy.png`} alt="Capgo icon on navy square" class="h-20 w-20 rounded-2xl" width="160" height="160" loading="lazy" />
+          </BrandAssetCard>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-16 sm:py-20" id="colors">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-slate-900">{m.brand_colors_heading({}, { locale })}</h2>
+        <p class="mt-4 max-w-3xl text-lg text-slate-600">{m.brand_colors_intro({}, { locale })}</p>
+        <div class="mt-10 grid gap-4">
+          {brandColors.map((color) => (
+            <BrandColorRow name={color.name} hex={color.hex} usage={color.usage} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-900 py-16 sm:py-20" id="typography">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-white">{m.brand_typography_heading({}, { locale })}</h2>
+        <div class="mt-10 grid gap-8 lg:grid-cols-2">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+            <p class="font-prompt text-4xl font-black tracking-tight text-white">{m.brand_typography_primary({}, { locale })}</p>
+            <p class="mt-6 text-base leading-7 text-slate-300">{m.brand_typography_weights({}, { locale })}</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+            <p class="text-2xl font-semibold text-white">Capgo ships live updates.</p>
+            <p class="mt-4 text-base leading-7 text-slate-300">{m.brand_typography_body({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-100 py-16 sm:py-20" id="guidelines">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-slate-900">{m.brand_guidelines_heading({}, { locale })}</h2>
+        <p class="mt-4 max-w-3xl text-lg text-slate-600">{m.brand_guidelines_intro({}, { locale })}</p>
+        <div class="mt-10 grid gap-8 md:grid-cols-2">
+          <div class="rounded-3xl border border-emerald-200 bg-white p-8">
+            <h3 class="text-lg font-semibold text-emerald-800">{m.brand_do_heading({}, { locale })}</h3>
+            <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+              {dos.map((item) => (
+                <li class="flex gap-3">
+                  <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-emerald-500" aria-hidden="true"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="rounded-3xl border border-rose-200 bg-white p-8">
+            <h3 class="text-lg font-semibold text-rose-800">{m.brand_dont_heading({}, { locale })}</h3>
+            <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+              {donts.map((item) => (
+                <li class="flex gap-3">
+                  <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-rose-500" aria-hidden="true"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-10 grid gap-8 lg:grid-cols-2">
+          <div class="rounded-3xl border border-slate-200 bg-white p-8">
+            <h3 class="text-lg font-semibold text-slate-900">{m.brand_name_heading({}, { locale })}</h3>
+            <p class="mt-4 text-sm leading-6 text-slate-600">{m.brand_name_rule({}, { locale })}</p>
+          </div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-8">
+            <h3 class="text-lg font-semibold text-slate-900">{m.brand_press_heading({}, { locale })}</h3>
+            <p class="mt-4 text-sm leading-6 text-slate-600">{m.brand_boilerplate({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-950 py-16 sm:py-20" id="contact">
+      <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-white">{m.brand_contact_heading({}, { locale })}</h2>
+        <p class="mt-4 text-lg text-slate-300">{m.brand_contact_desc({}, { locale })}</p>
+        <a
+          href="mailto:support@capgo.app"
+          class="mt-8 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:outline-none"
+        >
+          support@capgo.app
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script define:vars={{ copyFailed: m.brand_copy_failed({}, { locale }), copied: m.brand_copied({}, { locale }) }}>
+  function fallbackCopyText(value) {
+    const helper = document.createElement('textarea')
+    helper.value = value
+    helper.setAttribute('readonly', 'true')
+    helper.style.position = 'absolute'
+    helper.style.opacity = '0'
+    document.body.append(helper)
+    helper.select()
+    const legacyCopy = Reflect.get(document, 'execCommand')
+    const ok = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
+    helper.remove()
+    if (!ok) throw new Error('Copy failed')
+  }
+
+  async function copyHex(value) {
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(value)
+        return
+      } catch {
+        /* fall through */
+      }
+    }
+    fallbackCopyText(value)
+  }
+
+  document.querySelectorAll('[data-brand-copy-hex]').forEach((button) => {
+    let resetTimer
+    button.addEventListener('click', async () => {
+      const hex = button.getAttribute('data-brand-copy-hex')
+      if (!hex) return
+      const label = button.querySelector('[data-brand-copy-label]')
+      const original = label?.textContent || hex
+      try {
+        await copyHex(hex)
+        if (label) label.textContent = copied
+      } catch {
+        if (label) label.textContent = copyFailed
+      }
+      clearTimeout(resetTimer)
+      resetTimer = window.setTimeout(() => {
+        if (label) label.textContent = original
+      }, 2000)
+    })
+  })
+</script>
