@@ -3,14 +3,14 @@
  * Usage: bun run generate:brand-assets
  */
 import { spawnSync } from 'node:child_process'
-import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import sharp from '../apps/web/node_modules/sharp'
 import { BRAND_BANNER_NAVY, BRAND_ICON_NAVY, capgoIconMarkOnlySvg, capgoIconSvg, capgoLockupSvg } from './lib/capgo-lockup-svg'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const OUT_DIR = join(ROOT, 'apps/web/public/brand')
-const UPLOADS = '/home/ubuntu/.cursor/projects/workspace/uploads'
+const PUBLIC = join(ROOT, 'apps/web/public')
 
 type RasterTarget = {
   slug: string
@@ -73,12 +73,11 @@ async function optimizePng(input: string, output: string, maxWidth?: number) {
   await pipeline.png({ compressionLevel: 9, adaptiveFiltering: true, palette: false }).toFile(output)
 }
 
-function copyUpload(name: string, dest: string) {
-  const source = join(UPLOADS, name)
+async function exportWebpAsPng(source: string, dest: string, maxWidth?: number) {
   if (!existsSync(source)) {
-    throw new Error(`Missing upload source: ${source}`)
+    throw new Error(`Missing source asset: ${source}`)
   }
-  copyFileSync(source, dest)
+  await optimizePng(source, dest, maxWidth)
 }
 
 async function main() {
@@ -121,15 +120,11 @@ async function main() {
     console.log(`Generated ${target.pngName}`)
   }
 
-  await optimizePng(join(ROOT, 'apps/web/public/capgo_banner.png'), join(OUT_DIR, 'capgo-banner-navy.png'), 2400)
+  await optimizePng(join(PUBLIC, 'capgo_banner.png'), join(OUT_DIR, 'capgo-banner-navy.png'), 2400)
   console.log('Generated capgo-banner-navy.png')
 
-  copyUpload('capgo_logo_white_transparent_f611.png', join(OUT_DIR, 'capgo-lockup-white-transparent-source.png'))
-  await optimizePng(join(OUT_DIR, 'capgo-lockup-white-transparent-source.png'), join(OUT_DIR, 'capgo-lockup-white-transparent-optimized.png'), 2400)
-  rmSync(join(OUT_DIR, 'capgo-lockup-white-transparent-source.png'))
-
-  copyUpload('capgo_logo_header_white_2fe6.png', join(OUT_DIR, 'capgo-logo-header.png'))
-  copyUpload('capgo_icon_navy_adcc.png', join(OUT_DIR, 'capgo-icon-navy-raster.png'))
+  await exportWebpAsPng(join(PUBLIC, 'capgo_logo_header_2x.webp'), join(OUT_DIR, 'capgo-logo-header.png'), 640)
+  await exportWebpAsPng(join(PUBLIC, 'capgo_logo.webp'), join(OUT_DIR, 'capgo-lockup-white-transparent-optimized.png'), 2400)
 
   const zipPath = join(OUT_DIR, 'capgo-brand-assets.zip')
   if (commandExists('zip')) {
