@@ -7,13 +7,14 @@ import m from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
-import ObserveReleaseHealthDemo from '@/components/observe/ObserveReleaseHealthDemo.astro'
+import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import { getObserveScreens } from '@/config/observeScreens'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
 const title = brand + ' Observe | Version health after a rollout'
 const description =
-  'Compare reported native app health, launch and WebView timing, and version-level signals with release markers for version, channel, and deployment date. Use Logs Insights to investigate errors, versions, and devices.'
+  'Watch each live update land in real time, see which update failures matter, compare native app health by version, catch bundles that need a new native build, and follow any signal down to device logs.'
 const logsDocsUrl = getRelativeLocaleUrl(locale, 'docs/webapp/logs')
 const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
 
@@ -33,10 +34,12 @@ const content = {
 }
 
 const proofPoints = [
-  ['Read release health', 'See issue-free devices, native issues, launch P90, and WebView P90 for the reported versions in one view.'],
-  ['Keep rollout context', 'Use release markers for version, channel, and deployment date as you read the signals.'],
+  ['Catch a bad rollout in minutes', 'Installs, failed attempts, adoption, and success rate update every few minutes for the release that is live right now.'],
+  ['Stop shipping native mismatches', 'Observe flags bundles that need native packages the installed app does not have, before they reach more devices.'],
   ['Follow the evidence in Logs', 'Use grouped failures, affected versions, devices, and action logs to investigate a trend.'],
 ]
+
+const tourScreens = getObserveScreens(['live-release', 'update-health', 'native-health', 'compatibility', 'plugins', 'logs'])
 
 const screenSignals = [
   ['01', 'All versions summary', 'Read issue-free devices, native issues, launch P90, and WebView P90 before narrowing your investigation.'],
@@ -51,7 +54,9 @@ const screenSignals = [
       <div class="shell">
         <div class="observe-hero-grid">
           <div>
-            <p class="observe-kicker"><span aria-hidden="true"></span> Capgo Observe, beta</p>
+            <p class="observe-kicker">
+              <span aria-hidden="true"></span> Capgo Observe, beta
+            </p>
             <h1>Know when a release needs attention.</h1>
             <p class="observe-statement">See what changed after your rollout, compare health by reported version, and move from a bad signal to the devices and logs behind it.</p>
             <div class="observe-actions">
@@ -60,16 +65,33 @@ const screenSignals = [
           </div>
 
           <ol class="observe-rail" aria-label="Release health workflow">
-            <li><span>01</span><div><strong>Deploy</strong><small>Mark the version, channel, and deployment date.</small></div></li>
-            <li><span>02</span><div><strong>Observe</strong><small>Compare reported health before support tickets arrive.</small></div></li>
-            <li><span>03</span><div><strong>Investigate</strong><small>Follow the trend into errors, versions, and devices.</small></div></li>
+            <li>
+              <span>01</span>
+              <div>
+                <strong>Deploy</strong>
+                <small>Mark the version, channel, and deployment date.</small>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <strong>Observe</strong>
+                <small>Compare reported health before support tickets arrive.</small>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <strong>Investigate</strong>
+                <small>Follow the trend into errors, versions, and devices.</small>
+              </div>
+            </li>
           </ol>
         </div>
 
-        <figure class="observe-dashboard">
-          <ObserveReleaseHealthDemo />
-          <figcaption class="sr-only">Capgo Observe dashboard showing native health, launch timing, WebView timing, version breakdown, and release markers</figcaption>
-        </figure>
+        <div class="observe-tour">
+          <ProductScreenTour screens={tourScreens} label="Capgo Observe views" eager />
+        </div>
       </div>
     </section>
 
@@ -82,15 +104,13 @@ const screenSignals = [
         </div>
 
         <div class="observe-proof-grid">
-          {
-            proofPoints.map(([title, text], index) => (
-              <article class="observe-proof-item">
-                <span>0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))
-          }
+          {proofPoints.map(([title, text], index) => (
+            <article class="observe-proof-item">
+              <span>0{index + 1}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -101,23 +121,23 @@ const screenSignals = [
           <p class="eyebrow eyebrow--blue">See the release, not just the metric</p>
           <h2 class="h2-section">Start broad. Narrow fast. Know where to look next.</h2>
           <p class="lead">Read all-version health, compare the versions that diverge, and use the release marker to connect the change to the impact.</p>
-          <a class="observe-link" href={liveUpdateUrl}>Explore Live Updates <span aria-hidden="true">→</span></a>
+          <a class="observe-link" href={liveUpdateUrl}>
+            Explore Live Updates <span aria-hidden="true">→</span>
+          </a>
         </div>
 
         <div class="observe-signal-list">
-          {
-            screenSignals.map(([index, title, text]) => (
-              <article class="observe-signal-item">
-                <span>{index}</span>
-                <div>
-                  <>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </>
-                </div>
-              </article>
-            ))
-          }
+          {screenSignals.map(([index, title, text]) => (
+            <article class="observe-signal-item">
+              <span>{index}</span>
+              <div>
+                <>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -141,18 +161,20 @@ const screenSignals = [
             <p>
               Use Logs Insights to group errors by category, follow the daily trend, and identify affected versions and devices. Then open filtered raw action logs for the details.
             </p>
-            <a class="observe-link" href={logsDocsUrl}>Read the Logs guide <span aria-hidden="true">→</span></a>
+            <a class="observe-link" href={logsDocsUrl}>
+              Read the Logs guide <span aria-hidden="true">→</span>
+            </a>
           </article>
         </div>
 
         <figure class="observe-dashboard observe-insights-dashboard">
           <picture>
-            <source media="(max-width: 720px)" srcset="/landing-demos/logs-insights-dashboard-mobile.webp" />
+            <source media="(max-width: 720px)" srcset="/landing-demos/observe/observe-update-health-mobile.webp" width="430" height="860" />
             <img
-              src="/landing-demos/logs-insights-dashboard.webp"
-              alt="Capgo Logs Insights dashboard showing error categories, daily trends, affected versions, and affected devices"
+              src="/landing-demos/observe/observe-update-health.webp"
+              alt="Capgo Observe update health view showing failure types by cause, a daily failure chart, and the top affected versions and devices"
               width="1440"
-              height="1200"
+              height="900"
               loading="lazy"
               decoding="async"
             />
@@ -174,13 +196,23 @@ const screenSignals = [
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">
         <p class="eyebrow eyebrow--blue">Observe every rollout</p>
-        <h2><span class="name">Ship with proof,</span><br />not just hope.</h2>
+        <h2>
+          <span class="name">Ship with proof,</span>
+          <br />
+          not just hope.
+        </h2>
         <p class="tagline">Put deployment history, release health, and Logs Insights in one release workflow.</p>
         <SignupCta id="observe-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
-          <span><span class="check">+</span> Deployment history</span>
-          <span><span class="check">+</span> Native health</span>
-          <span><span class="check">+</span> Error and device evidence</span>
+          <span>
+            <span class="check">+</span> Deployment history
+          </span>
+          <span>
+            <span class="check">+</span> Native health
+          </span>
+          <span>
+            <span class="check">+</span> Error and device evidence
+          </span>
         </div>
       </div>
     </section>
@@ -333,6 +365,10 @@ const screenSignals = [
     color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
     line-height: 1.45;
+  }
+
+  .observe .observe-tour {
+    margin-top: 58px;
   }
 
   .observe .observe-dashboard {
@@ -488,8 +524,13 @@ const screenSignals = [
       margin-top: 28px;
     }
 
-    .observe .observe-insights-dashboard img {
-      aspect-ratio: 860 / 1100;
+    .observe .observe-tour {
+      margin-top: 40px;
+    }
+
+    .observe .observe-insights-dashboard {
+      max-width: 430px;
+      margin-inline: auto;
     }
 
     .observe .observe-proof {

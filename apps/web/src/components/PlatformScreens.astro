@@ -1,0 +1,29 @@
+---
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import { getObserveScreens } from '@/config/observeScreens'
+
+const locale = Astro.locals.locale
+const observeUrl = getRelativeLocaleUrl(locale, 'observe')
+const screens = getObserveScreens(['live-release', 'update-health', 'native-health', 'compatibility']).map((screen) => ({
+  ...screen,
+  href: observeUrl,
+  linkLabel: m.platform_screens_cta({}, { locale }),
+}))
+---
+
+<section class="bg-[#1a1a1a] pb-24 sm:pb-32" aria-labelledby="platform-screens-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.platform_screens_eyebrow({}, { locale })}</p>
+      <h2 id="platform-screens-title" class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+        {m.platform_screens_title({}, { locale })}
+      </h2>
+      <p class="mt-6 text-lg leading-8 text-pretty text-gray-400">{m.platform_screens_subtitle({}, { locale })}</p>
+    </div>
+    <div class="mt-14">
+      <ProductScreenTour screens={screens} label={m.platform_screens_eyebrow({}, { locale })} />
+    </div>
+  </div>
+</section>

@@ -686,9 +686,7 @@ body:has(.lu) {
 .lu .guidance-panel img {
   display: block;
   width: 100%;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  object-position: top;
+  height: auto;
 }
 .lu .guidance-cli {
   padding: 16px;

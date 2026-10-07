@@ -2913,6 +2913,11 @@ const messages = {
   platform_overview_title: 'One platform for the whole release cycle',
   platform_overview_subtitle: 'Start with live updates. Add native builds, monitoring, and plugins when you need them. One account, one CLI, one dashboard.',
   platform_group_ship: 'Ship',
+  platform_screens_eyebrow: 'Inside the console',
+  platform_screens_title: 'See what happens after every release',
+  platform_screens_subtitle:
+    'These are real Capgo screens. Track a rollout as it lands, see which update failures matter, compare app health by version, and know when a bundle needs a new native build.',
+  platform_screens_cta: 'Explore Capgo Observe',
   platform_group_operate: 'Monitor & reach users',
   platform_group_automate: 'Automate & test',
   platform_group_extend: 'Extend your app',
