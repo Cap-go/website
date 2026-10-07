@@ -1081,7 +1081,7 @@ const messages = {
   pricing_explainer_build_title: 'What are build hours?',
   pricing_explainer_cancel: 'Cancel anytime, access until the period ends',
   pricing_explainer_eyebrow: 'How Capgo pricing works',
-  pricing_explainer_lead: 'Every plan includes Live Updates, Native Builds, Notifications, Observe, plugins, and automations. Plans differ only by usage limits and support.',
+  pricing_explainer_lead: 'Every full Capgo plan includes Live Updates, Native Builds, Notifications, Observe, plugins, and automations. Plans differ only by usage limits and support. Website Live is a separate, simpler plan that only updates your app from your website.',
   pricing_explainer_limit_body:
     'We email you at 50%, 70%, 90%, and 100%. At the limit, new update downloads pause and your app keeps running its current version. Upgrade or add credits whenever you want. We never charge overages without your confirmation.',
   pricing_explainer_limit_title: 'What happens when I hit a limit?',
@@ -6001,7 +6001,7 @@ const messages = {
   website_live_for_title: 'Made for apps that are already websites',
   website_live_h1: 'Deploy your website. Your mobile app updates itself.',
   website_live_how1_body:
-    'Add @capgo/capacitor-updater to your Capacitor project and call notifyAppReady() once the app has loaded. That call tells the updater a new version works.',
+    'Add @capgo/capacitor-updater to your Capacitor project, turn on websiteMode in its config, and call notifyAppReady() once the app has loaded. That call tells the updater a new version works.',
   website_live_how1_title: 'Install the updater plugin',
   website_live_how2_body:
     'Create your app in the Capgo console, choose Website Live, and enter the domain where your site is deployed. You can change the domain later in app settings.',

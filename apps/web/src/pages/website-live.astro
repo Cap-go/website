@@ -34,6 +34,15 @@ const howSteps = [
     code: `npm install @capgo/capacitor-updater
 npx cap sync
 
+// capacitor.config.ts
+plugins: {
+  CapacitorUpdater: {
+    appId: 'com.example.app', // your Capgo app id
+    websiteMode: true,
+    autoUpdate: true,
+  },
+},
+
 // in your app entry, once the UI has loaded
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 CapacitorUpdater.notifyAppReady()`,

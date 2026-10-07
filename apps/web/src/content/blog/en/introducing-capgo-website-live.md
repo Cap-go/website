@@ -45,7 +45,7 @@ So we built something smaller. It's called [Website Live](/website-live/).
 
 Your deployed website becomes the source of truth for the app.
 
-1. You add the `@capgo/capacitor-updater` plugin to your Capacitor project and call `notifyAppReady()` once the app has loaded.
+1. You add the `@capgo/capacitor-updater` plugin to your Capacitor project, set `websiteMode: true` in its Capacitor config, and call `notifyAppReady()` once the app has loaded.
 2. In the Capgo console, you create the app, choose Website Live and enter the domain where the site is deployed.
 3. You ship the native app to the stores once.
 
