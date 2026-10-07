@@ -2,7 +2,14 @@
 import m, { type MessageKey } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 
+interface Props {
+  yearly?: boolean
+}
+
+const { yearly = false } = Astro.props
 const locale = Astro.locals.locale
+const MONTHLY_PRICE = 12
+const YEARLY_PRICE = 120
 const copy = (key: MessageKey) => m[key]({}, { locale })
 const learnUrl = getRelativeLocaleUrl(locale, 'website-live')
 const registerUrl = 'https://console.capgo.app/register/'
@@ -37,10 +44,13 @@ const highlights: MessageKey[] = ['website_live_pricing_unlimited_updates', 'web
 
     <div class="flex flex-col justify-center bg-cyan-50/60 p-6 sm:p-8 lg:min-w-80 lg:p-10">
       <div class="flex items-end gap-1">
-        <span class="text-4xl font-semibold tracking-tight text-gray-950">$12</span>
+        <span class="text-4xl font-semibold tracking-tight text-gray-950" data-website-live-price>${yearly ? YEARLY_PRICE / 12 : MONTHLY_PRICE}</span>
         <span class="pb-1 text-sm font-medium text-gray-600">{copy('website_live_price_per_month')}</span>
       </div>
-      <p class="mt-2 text-xs font-medium text-gray-600">{copy('website_live_price_note')}</p>
+      <p class="mt-2 text-xs font-medium text-gray-600" data-website-live-yearly style={yearly ? '' : 'display: none'}>
+        {m.billed_annually_at({}, { locale })} ${YEARLY_PRICE}
+      </p>
+      <p class="mt-2 text-xs font-medium text-gray-600" data-website-live-monthly style={yearly ? 'display: none' : ''}>{copy('website_live_price_note')}</p>
       <a
         id="pricing-website-live-register"
         href={registerUrl}
@@ -57,3 +67,18 @@ const highlights: MessageKey[] = ['website_live_pricing_unlimited_updates', 'web
     </div>
   </div>
 </section>
+
+<script is:inline define:vars={{ monthlyPrice: MONTHLY_PRICE, yearlyPrice: YEARLY_PRICE }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const price = document.querySelector('[data-website-live-price]')
+    const yearlyNote = document.querySelector('[data-website-live-yearly]')
+    const monthlyNote = document.querySelector('[data-website-live-monthly]')
+    const update = (isYearly) => {
+      if (price) price.textContent = `$${isYearly ? yearlyPrice / 12 : monthlyPrice}`
+      if (yearlyNote) yearlyNote.style.display = isYearly ? '' : 'none'
+      if (monthlyNote) monthlyNote.style.display = isYearly ? 'none' : ''
+    }
+    document.getElementById('yearly')?.addEventListener('change', () => update(true))
+    document.getElementById('monthly')?.addEventListener('change', () => update(false))
+  })
+</script>
