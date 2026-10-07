@@ -70,6 +70,13 @@
   Cache-Control: public, max-age=3600
   Link: </plugins.json>; rel="alternate"; type="application/json"
 
+/pricing.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
+  Link: </pricing/>; rel="alternate"; type="text/html"
+
 /plugins.json
   Content-Type: application/json; charset=utf-8
   Access-Control-Allow-Origin: *
