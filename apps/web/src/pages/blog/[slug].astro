@@ -3,6 +3,7 @@ import Blog from '@/components/Blog.astro'
 import BlogAuthorByline from '@/components/BlogAuthorByline.astro'
 import BlogEditorialByline from '@/components/BlogEditorialByline.astro'
 import GetStarted from '@/components/GetStarted.astro'
+import SignupCta from '@/components/SignupCta.astro'
 import { HUMAN_EDITORIAL_TEAM } from '@/config/blogEditorialTeam'
 import { isHumanBlogPost } from '@/lib/blogOrigin'
 import { formatTime } from '@/config/app'
@@ -216,8 +217,9 @@ content['ldJSON'] =
             )
           }
           {
-            headings?.length > 0 && (
+            headings?.length > 0 ? (
               <div id="staticToc" class="sticky top-16 pt-4 pb-8">
+                <SignupCta id="blog-sidebar-signup-cta" align="start" class="pt-4 pb-8" />
                 <div>
                   <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-400">
                     <svg
@@ -246,6 +248,10 @@ content['ldJSON'] =
                     ))}
                   </div>
                 </div>
+              </div>
+            ) : (
+              <div class="sticky top-16 pt-4 pb-8">
+                <SignupCta id="blog-sidebar-signup-cta" align="start" class="pt-4" />
               </div>
             )
           }

@@ -2,7 +2,7 @@
 import '@/styles/lu-product.css'
 import '@/styles/compare-page.css'
 import AppLogoStrip from '@/components/AppLogoStrip.astro'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
@@ -14,7 +14,6 @@ const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
 const title = m.alternatives_title({}, { locale })
 const description = m.alternatives_meta_description({}, { locale })
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
 
 const comparisons = [
   {
@@ -219,16 +218,7 @@ const content = {
         <h1 class="cmp-h1">{m.alternatives_hero_title({}, { locale })}</h1>
         <p class="lead">{m.alternatives_hero_subtitle({}, { locale })}</p>
         <div class="hero-ctas">
-          <HumanSupport size="sm" align="center" />
-          <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-primary" href={registerUrl}>
-              {m.compare_cta_start_trial({}, { locale })}
-            </a>
-            <a class="btn btn-lg btn-ghost" href="#summary">
-              {m.alternatives_hero_summary_cta({}, { locale })}
-            </a>
-          </div>
-          <p class="hero-cta-note">{m.product_trial_cta_note({}, { locale })}</p>
+          <SignupCta id="alternatives-hero-signup-cta" />
         </div>
         <ul class="cmp-meta">
           <li>{m.compare_meta_updates({}, { locale })}</li>
@@ -373,10 +363,7 @@ const content = {
       <div class="shell">
         <h2>{m.compare_cta_title({}, { locale })}</h2>
         <p class="tagline">{m.compare_cta_subtitle({}, { locale })}</p>
-        <HumanSupport class="mb-4" size="sm" />
-        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>
-          {m.compare_cta_start_trial({}, { locale })}
-        </a>
+        <SignupCta id="alternatives-final-signup-cta" humanSupport />
         <ul class="cmp-meta">
           <li>{m.compare_meta_teams({}, { locale })}</li>
           <li>{m.compare_meta_devices({}, { locale })}</li>

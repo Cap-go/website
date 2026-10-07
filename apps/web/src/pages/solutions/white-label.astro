@@ -9,7 +9,7 @@ import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import WhiteLabelIllustration from '@/components/solutions/WhiteLabelIllustration.astro'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -20,7 +20,6 @@ function copy(key: MessageKey, values: MessageValues = {}) {
 
 const title = brand + ' | ' + copy('solutions_white_label_page_title')
 const description = copy('solutions_white_label_page_description')
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const links = {
@@ -132,21 +131,7 @@ const systemCards: { title: MessageKey; desc: MessageKey; link: { href: string; 
             </p>
             <h1 class="mt-6 max-w-4xl text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{copy('solutions_white_label_page_h1')}</h1>
             <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">{copy('solutions_white_label_page_lead')}</p>
-            <HumanSupport class="mt-6" size="sm" />
-            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
-              <a
-                class="inline-flex min-h-12 items-center justify-center rounded-lg bg-cyan-500 px-6 font-semibold text-white transition-colors hover:bg-cyan-400 focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
-                href={registerUrl}
-              >
-                {copy('solutions_start_free_trial')}
-              </a>
-              <a
-                class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-6 font-semibold text-slate-200 transition-colors hover:bg-white/10 focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
-                href={links.channels.href}
-              >
-                {copy('solutions_view_docs')}
-              </a>
-            </div>
+            <SignupCta align="start" class="mt-8" />
             <div class="mt-10 grid gap-3 sm:grid-cols-3">
               {stats.map((stat) => (
                 <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
@@ -250,23 +235,7 @@ const systemCards: { title: MessageKey; desc: MessageKey; link: { href: string; 
       <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-white sm:text-4xl">{copy('solutions_white_label_page_cta_title')}</h2>
         <p class="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-300">{copy('solutions_white_label_page_cta_subtitle')}</p>
-        <HumanSupport class="mt-6" size="sm" />
-        <div class="mt-4 flex flex-col justify-center gap-3 sm:flex-row">
-          <a
-            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-cyan-500 px-6 font-semibold text-white transition-colors hover:bg-cyan-400 focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none"
-            href={registerUrl}
-          >
-            {copy('solutions_start_free_trial')}
-          </a>
-          <a
-            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-6 font-semibold text-slate-200 transition-colors hover:bg-white/10 focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none"
-            href="https://book.capgo.app/demo/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {copy('solutions_talk_to_team')}
-          </a>
-        </div>
+        <SignupCta humanSupport enterprise class="mt-8" />
       </div>
     </section>
   </div>

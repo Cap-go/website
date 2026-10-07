@@ -1,9 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 import ConversionRelatedLinks from '@/components/conversion/ConversionRelatedLinks.astro'
 import type { ConversionLink } from '@/components/conversion/ConversionRelatedLinks.astro'
-import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 
 export interface ConversionSection {
@@ -67,21 +66,7 @@ const { content, heroTitle, heroSubtitle, sections, relatedLinks, locale } = Ast
       <ConversionRelatedLinks title={m.conversion_related_links_title({}, { locale })} links={relatedLinks} />
 
       <div class="mt-12 rounded-[1.45rem] bg-gray-800/80 px-8 py-10 text-center ring-1 ring-gray-700">
-        <HumanSupport class="mb-4" size="sm" />
-        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href={getRelativeLocaleUrl(locale, 'register')}
-            class="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-emerald-700"
-          >
-            {m.conversion_cta_register({}, { locale })}
-          </a>
-          <a
-            href={getRelativeLocaleUrl(locale, 'alternatives')}
-            class="inline-flex items-center justify-center rounded-xl border border-gray-600 px-8 py-4 text-lg font-semibold text-gray-300 hover:bg-gray-800 hover:text-white"
-          >
-            {m.alternatives({}, { locale })}
-          </a>
-        </div>
+        <SignupCta id="conversion-signup-cta" humanSupport />
       </div>
     </div>
   </section>

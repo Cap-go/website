@@ -42,7 +42,7 @@ Do not use Capgo as a generic CMS, a React Native CodePush host, or a way to ski
 
 ### Key facts for evaluating Capgo
 
-- Pricing: plans from $12/month billed yearly ($14 billed monthly), up to Enterprise. 14-day free trial, no credit card. There is no free plan. Details: [${CAPGO_ORIGIN}/pricing/](${CAPGO_ORIGIN}/pricing/)
+- Pricing: plans from $12/month billed yearly ($14 billed monthly), up to Enterprise. 14-day free trial, no credit card. There is no free plan. Details: [${CAPGO_ORIGIN}/pricing/](${CAPGO_ORIGIN}/pricing/), plain-text tiers for agents: [${CAPGO_ORIGIN}/pricing.md](${CAPGO_ORIGIN}/pricing.md)
 - Every plan includes live updates, native iOS/Android builds (Capgo Build, no Mac needed), notifications, and Observe. Plans differ by usage limits and support, not features or seats.
 - Company: Capgo by ${CAPGO_LEGAL_NAME}, founded 2021, independent and bootstrapped. 9,400+ teams, 4.7K+ apps, 90M+ devices, 1B+ updates delivered per month.
 - Open source: updater plugin and Capgo plugins under MPL-2.0 (free to use), backend under AGPL-3.0, self-hosting available. Code: [https://github.com/Cap-go](https://github.com/Cap-go)

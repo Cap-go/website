@@ -59,7 +59,7 @@ export function setupPricingCalculator({ plans, steps }: PricingCalculatorData) 
 
   function paintRange(range: HTMLInputElement) {
     const percent = (Number(range.value) / Number(range.max || 1)) * 100
-    range.style.background = `linear-gradient(to right, rgb(37 99 235) ${percent}%, rgb(229 231 235) ${percent}%)`
+    range.style.setProperty('--fill', `${percent}%`)
   }
 
   for (const { input, range, stops } of fields) {
