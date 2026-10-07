@@ -14,6 +14,7 @@ import SignupCta from '@/components/SignupCta.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import ProductVideoLoop from '@/components/ProductVideoLoop.astro'
 import { getProductScreens } from '@/config/productScreens'
 
 const locale = Astro.locals.locale
@@ -252,6 +253,11 @@ const featureTiles = [
             </div>
           ))}
         </div>
+        <ProductVideoLoop
+          name="rollout-pause"
+          class="lu-hero-video"
+          label="Capgo console: a progressive rollout serving 4.8.1 to 25% of production devices is paused and resumed from the channel page"
+        />
       </div>
     </section>
 
@@ -413,13 +419,10 @@ const featureTiles = [
           </div>
 
           <div class="guidance-panel">
-            <img
-              src="/landing-demos/observe/observe-compatibility-detail.webp"
-              alt="Capgo Observe compatibility view warning that a new native build is needed because @capacitor/camera changed between bundles on the production channel"
-              width="1600"
-              height="839"
-              loading="lazy"
-              decoding="async"
+            <ProductVideoLoop
+              name="native-diff"
+              class="guidance-video"
+              label="Capgo console: comparing bundle 4.8.2-beta.1 with 4.8.0 flags changed native packages and marks the update as not compatible over the air"
             />
             <div class="guidance-cli">
               <p class="guidance-cli-line">
@@ -525,3 +528,17 @@ const featureTiles = [
     </section>
   </div>
 </Layout>
+
+<style>
+  /* Classes are applied inside ProductVideoLoop, outside this component's scope. */
+  :global(.lu-hero-video) {
+    max-width: 1080px;
+    margin: 56px auto 0;
+  }
+
+  :global(.guidance-video) {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+</style>
