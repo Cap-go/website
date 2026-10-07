@@ -29,10 +29,29 @@ type SocialImage = {
   phoneTitle: string
   phoneRows: string[]
   /** Real console capture under apps/web/public/landing-demos, cropped in image pixels. */
-  screenshot?: { file: string; crop: { x: number; y: number; width: number; height: number } }
+  screenshot?: { file: string; crop: Crop }
 }
 
-const noMock = { chips: [], codeLines: [], cards: [], phoneTitle: '', phoneRows: [] }
+type Crop = { x: number; y: number; width: number; height: number }
+
+/** Card framing a real console capture: the screenshot replaces the subtitle, chips, and drawn mock UI. */
+function screenshotCard(slug: string, eyebrow: string, title: string[], file: string, crop: Crop): SocialImage {
+  return {
+    slug,
+    output: `apps/web/public/social/capgo-${slug}.png`,
+    eyebrow,
+    title,
+    subtitle: '',
+    accent: '#2563eb',
+    accentSoft: '#dbeafe',
+    chips: [],
+    codeLines: [],
+    cards: [],
+    phoneTitle: '',
+    phoneRows: [],
+    screenshot: { file, crop },
+  }
+}
 
 const images: SocialImage[] = [
   {
@@ -208,50 +227,20 @@ const images: SocialImage[] = [
     phoneTitle: 'Release signals',
     phoneRows: ['Build', 'Deploy', 'Alert'],
   },
-  {
-    slug: 'notifications',
-    output: 'apps/web/public/social/capgo-notifications.png',
-    eyebrow: 'Capgo Notifications',
-    title: ['Push campaigns you', 'can actually measure'],
-    subtitle: 'Broadcasts, targeted pushes, and silent update checks, with delivery from queued to opened.',
-    accent: '#2563eb',
-    accentSoft: '#dbeafe',
-    ...noMock,
-    screenshot: { file: 'console/notifications.webp', crop: { x: 400, y: 430, width: 1760, height: 498 } },
-  },
-  {
-    slug: 'enterprise',
-    output: 'apps/web/public/social/capgo-enterprise.png',
-    eyebrow: 'Capgo Enterprise',
-    title: ['Governed releases', 'your security team trusts'],
-    subtitle: 'Org-wide 2FA, scoped roles per app, and an audit trail for every release change.',
-    accent: '#2563eb',
-    accentSoft: '#dbeafe',
-    ...noMock,
-    screenshot: { file: 'console/audit-logs.webp', crop: { x: 400, y: 400, width: 1760, height: 498 } },
-  },
-  {
-    slug: 'capgo-cli',
-    output: 'apps/web/public/social/capgo-cli.png',
-    eyebrow: 'Capgo CLI',
-    title: ['Release from your terminal,', 'CI, or AI agent'],
-    subtitle: 'Scoped API keys with expiry dates, webhooks for every release event, and one command to ship.',
-    accent: '#2563eb',
-    accentSoft: '#dbeafe',
-    ...noMock,
-    screenshot: { file: 'console/api-keys.webp', crop: { x: 400, y: 370, width: 1760, height: 498 } },
-  },
-  {
-    slug: 'vs-capawesome',
-    output: 'apps/web/public/social/capgo-vs-capawesome.png',
-    eyebrow: 'Capgo vs Capawesome',
-    title: ['Real device stats,', 'not network guesses'],
-    subtitle: 'Native app health, failure causes, and rollouts that pause themselves, in one plan.',
-    accent: '#2563eb',
-    accentSoft: '#dbeafe',
-    ...noMock,
-    screenshot: { file: 'observe/observe-native-health.webp', crop: { x: 400, y: 430, width: 1700, height: 480 } },
-  },
+  screenshotCard('notifications', 'Capgo Notifications', ['Push campaigns you', 'can actually measure'], 'console/notifications.webp', {
+    x: 400,
+    y: 430,
+    width: 1760,
+    height: 498,
+  }),
+  screenshotCard('enterprise', 'Capgo Enterprise', ['Governed releases', 'your security team trusts'], 'console/audit-logs.webp', { x: 400, y: 400, width: 1760, height: 498 }),
+  screenshotCard('cli', 'Capgo CLI', ['Release from your terminal,', 'CI, or AI agent'], 'console/api-keys.webp', { x: 400, y: 370, width: 1760, height: 498 }),
+  screenshotCard('vs-capawesome', 'Capgo vs Capawesome', ['Real device stats,', 'not network guesses'], 'observe/observe-native-health.webp', {
+    x: 400,
+    y: 430,
+    width: 1700,
+    height: 480,
+  }),
 ]
 
 function escapeText(value: string) {
