@@ -1,18 +1,58 @@
 ---
-import Default from '@astrojs/starlight/components/PageSidebar.astro'
+// Mirrors Starlight's default PageSidebar, adding a signup CTA under the table of contents.
+import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfContents'
+import TableOfContents from 'virtual:starlight/components/TableOfContents'
 import SignupCta from './SignupCta.astro'
 ---
 
-<Default>
-  <slot />
-</Default>
-<div class="docs-sidebar-cta sl-hidden lg:sl-block">
-  <SignupCta id="docs-sidebar-signup-cta" compact />
+{
+  Astro.locals.starlightRoute.toc && (
+    <div class="lg:sl-hidden">
+      <MobileTableOfContents />
+    </div>
+  )
+}
+<div class="right-sidebar-panel sl-hidden lg:sl-block">
+  <div class="sl-container">
+    {Astro.locals.starlightRoute.toc && <TableOfContents />}
+    <div class:list={['docs-sidebar-cta', Astro.locals.starlightRoute.toc && 'has-toc']}>
+      <SignupCta id="docs-sidebar-signup-cta" compact />
+    </div>
+  </div>
 </div>
 
 <style>
-  .docs-sidebar-cta {
-    padding: 1rem var(--sl-sidebar-pad-x) 1.5rem;
+  .right-sidebar-panel {
+    padding: 1rem var(--sl-sidebar-pad-x);
+  }
+  .sl-container {
+    width: calc(var(--sl-sidebar-width) - 2 * var(--sl-sidebar-pad-x));
+  }
+  .right-sidebar-panel :global(h2) {
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-h5);
+    font-weight: 600;
+    line-height: var(--sl-line-height-headings);
+    margin-bottom: 0.5rem;
+  }
+  .right-sidebar-panel :global(:where(a)) {
+    display: block;
+    font-size: var(--sl-text-xs);
+    text-decoration: none;
+    color: var(--sl-color-gray-3);
+    overflow-wrap: anywhere;
+  }
+  .right-sidebar-panel :global(:where(a):hover) {
+    color: var(--sl-color-white);
+  }
+  .docs-sidebar-cta.has-toc {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
     border-top: 1px solid var(--sl-color-hairline);
+  }
+  @media (min-width: 72rem) {
+    .sl-container {
+      max-width: calc(((100vw - var(--sl-sidebar-width) - 2 * var(--sl-content-pad-x) - 2 * var(--sl-sidebar-pad-x)) * 0.25));
+    }
   }
 </style>

@@ -20,6 +20,12 @@ const avatars = ['/avatars/jordan-96.webp', '/avatars/martin-96.webp', '/avatars
 ---
 
 <div class:list={['docs-signup-cta not-content', compact && 'compact']}>
+  <div class="docs-signup-cta-pitch">
+    <p class="docs-signup-cta-title">
+      {m.hero_title_line1({}, { locale })} <span>{m.hero_title_line2({}, { locale })}</span>
+    </p>
+    <p class="docs-signup-cta-description">{m.hero_subtitle_v2({}, { locale })}</p>
+  </div>
   <a id={id} href="/register/" class="docs-signup-cta-button" aria-describedby={`${id}-note`}>
     {m.hero_cta_try_free({}, { locale })}
   </a>
@@ -56,6 +62,46 @@ const avatars = ['/avatars/jordan-96.webp', '/avatars/martin-96.webp', '/avatars
     align-items: flex-start;
     gap: 0.5rem;
     text-align: left;
+  }
+
+  .docs-signup-cta-pitch {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    max-width: 36rem;
+  }
+
+  .docs-signup-cta-pitch p {
+    margin: 0;
+  }
+
+  .docs-signup-cta-title {
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .docs-signup-cta-title span {
+    color: #44bcff;
+  }
+
+  .docs-signup-cta-description {
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-base);
+    line-height: 1.5;
+  }
+
+  .docs-signup-cta.compact .docs-signup-cta-pitch {
+    margin-bottom: 0.25rem;
+  }
+
+  .docs-signup-cta.compact .docs-signup-cta-title {
+    font-size: var(--sl-text-base);
+  }
+
+  .docs-signup-cta.compact .docs-signup-cta-description {
+    font-size: var(--sl-text-xs);
   }
 
   .docs-signup-cta .docs-signup-cta-button {
