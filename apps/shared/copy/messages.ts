@@ -632,8 +632,10 @@ const messages = {
   compare_capawesome_delta_live_label: 'Live release health',
   compare_capawesome_delta_live_capgo: 'Installs, failed attempts, adoption, and success rate for the release that is live, in 5-minute buckets.',
   compare_capawesome_delta_live_them: 'Active devices and adoption, inferred from update-check requests.',
-  compare_capawesome_delta_price_them: '$19, $49, $149, or $499 a month for 1K, 10K, 50K, or 250K users on Platform plans.',
-  compare_capawesome_delta_price_capgo: '$14, $39, $99, or $249 a month for 2K, 10K, 100K, or 1M users. Build minutes are always included.',
+  compare_capawesome_delta_price_them:
+    '$19, $49, $149, or $499 a month billed monthly (about $16, $41, $124, or $416 billed yearly) for 1K, 10K, 50K, or 250K users on Platform plans.',
+  compare_capawesome_delta_price_capgo:
+    '$14, $39, $99, or $249 a month billed monthly ($12, $33, $83, or $208 billed yearly) for 2K, 10K, 100K, or 1M users. Build minutes are always included.',
   compare_capawesome_delta_price_label: 'Live updates + native builds',
   compare_capawesome_delta_source_them: 'Network requests only. Their plugin calls two endpoints, the channel list and the latest bundle, and reports no device events.',
   compare_capawesome_delta_source_capgo: 'Events sent by the device: downloads, installs, failures, rollbacks, app launches, and crashes.',
@@ -693,7 +695,7 @@ const messages = {
   compare_capawesome_step3_text: 'Replace the Capawesome deploy step in CI with <code>npx @capgo/cli@latest bundle upload</code>.',
   compare_capawesome_support: 'Community chat on every plan. Email support from Professional (Live Updates) or Starter (Platform), and priority support on Business.',
   compare_capawesome_verdict:
-    'Choose Capgo if you ship often and want real statistics from real devices, not network guesses. One plan includes live updates, native build minutes, Observe, and push notifications, and costs less than Capawesome plans that include builds, for more users, at every tier. Add audit logs on every plan and update checks served from 9 regions. Capawesome suits teams that release a few times a year and want fewer changes to their tooling.',
+    'Choose Capgo if you ship often and want real statistics from real devices, not network guesses. One plan includes live updates, native build minutes, Observe, and push notifications, and costs less than Capawesome plans that include builds, for more users, at every tier, billed monthly or yearly. Add audit logs on every plan and update checks served from 9 regions. Capawesome suits teams that release a few times a year and want fewer changes to their tooling.',
   compare_capgo_company: 'Independent and bootstrapped, founded in 2021. 9,400+ teams, 4.7K+ apps, and 90M+ devices. SOC 2 Type II and ISO 27001 on the Enterprise plan.',
   compare_capgo_frameworks:
     'Capacitor apps built with React, Vue, Angular, Svelte, Ionic, or any web framework. Live updates also work for Cordova and Electron. Not for React Native.',
