@@ -1,0 +1,409 @@
+---
+import type { GetStaticPaths } from 'astro'
+import Layout from '@/layouts/Layout.astro'
+import CommandCode from '@/components/CommandCode.astro'
+import ConversionRelatedLinks from '@/components/conversion/ConversionRelatedLinks.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import AgentLogo from '@/components/agents/AgentLogo.astro'
+import { CAPGO_MARK_PATH, CAPGO_MARK_TRANSFORM, CAPGO_MARK_VIEWBOX } from '@/config/capgoMark'
+import m, { type MessageKey, type MessageValues } from '@/copy/messages'
+import { agents, getAgent, type Agent, type ReleaseStage } from '@/data/agents'
+import { createFAQPageLdJson, createHowToLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+export const getStaticPaths: GetStaticPaths = () => agents.map((agent) => ({ params: { slug: agent.slug }, props: { agent } }))
+
+interface Props {
+  agent: Agent
+}
+
+const { agent } = Astro.props
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+
+function copy(key: MessageKey, values: MessageValues = {}) {
+  return m[key]({ agent: agent.name, ...values }, { locale })
+}
+
+const localUrl = (path: string) => (/^https?:\/\//.test(path) || path.startsWith('/.well-known') ? path : getRelativeLocaleUrl(locale, path))
+
+const title = copy('agents_page_title')
+const description = copy('agents_page_meta_description')
+const hubUrl = getRelativeLocaleUrl(locale, 'agents')
+const isBuilder = agent.type === 'app-builder'
+
+const stageLabels: Record<ReleaseStage, MessageKey> = {
+  build: 'agents_page_stage_build',
+  publish: 'agents_page_stage_publish',
+  update: 'agents_page_stage_update',
+  rollback: 'agents_page_stage_rollback',
+  observe: 'agents_page_stage_observe',
+}
+
+const stageColors: Record<ReleaseStage, string> = {
+  build: 'border-sky-400/30 bg-sky-400/10 text-sky-200',
+  publish: 'border-violet-400/30 bg-violet-400/10 text-violet-200',
+  update: 'border-emerald-400/30 bg-emerald-400/10 text-emerald-200',
+  rollback: 'border-amber-400/30 bg-amber-400/10 text-amber-200',
+  observe: 'border-pink-400/30 bg-pink-400/10 text-pink-200',
+}
+
+const typeLabels: Record<Agent['type'], MessageKey> = {
+  cli: 'agents_type_cli',
+  ide: 'agents_type_ide',
+  'app-builder': 'agents_type_app_builder',
+  chat: 'agents_type_chat',
+}
+
+const methodLabels: Record<Agent['methods'][number], MessageKey> = {
+  'hosted-mcp': 'agents_method_hosted_mcp',
+  'local-mcp': 'agents_method_local_mcp',
+  skills: 'agents_method_skills',
+  cli: 'agents_method_cli',
+  export: 'agents_method_export',
+}
+
+const loop = [
+  { stage: 'build' as const, body: copy('agents_page_loop_build_body'), href: 'native-build', label: copy('agents_page_loop_build_link') },
+  { stage: 'publish' as const, body: copy('agents_page_loop_publish_body'), href: 'solutions/build-without-mac', label: copy('agents_page_loop_publish_link') },
+  { stage: 'update' as const, body: copy('agents_page_loop_update_body'), href: 'live-update', label: copy('agents_page_loop_update_link') },
+  { stage: 'observe' as const, body: copy('agents_page_loop_observe_body'), href: 'observe', label: copy('agents_page_loop_observe_link') },
+]
+
+const buildAnswer: Record<Agent['build'], MessageKey> = {
+  local: 'agents_page_faq_build_a_local',
+  remote: 'agents_page_faq_build_a_remote',
+  builder: 'agents_page_faq_build_a_builder',
+}
+
+const keyAnswer: Record<Agent['auth'], MessageKey> = {
+  oauth: 'agents_page_faq_key_a_oauth',
+  mixed: 'agents_page_faq_key_a_mixed',
+  cli: 'agents_page_faq_key_a_cli',
+}
+
+const faqItems = [
+  {
+    question: copy('agents_page_faq_build_q'),
+    answer: agent.buildAnswer ?? copy(buildAnswer[agent.build]),
+    href: getRelativeLocaleUrl(locale, 'docs/builder/getting-started'),
+    linkLabel: copy('agents_page_docs_builder'),
+  },
+  {
+    question: copy('agents_page_faq_key_q'),
+    answer: copy(keyAnswer[agent.auth]),
+    href: getRelativeLocaleUrl(locale, agent.auth === 'oauth' ? 'docs/ai/mcp' : 'docs/webapp/api-keys'),
+    linkLabel: copy(agent.auth === 'oauth' ? 'agents_page_docs_hosted' : 'agents_page_docs_api_keys'),
+  },
+  {
+    question: copy('agents_page_faq_rollback_q'),
+    answer: copy('agents_page_faq_rollback_a'),
+    href: getRelativeLocaleUrl(locale, 'docs/live-updates/rollbacks'),
+    linkLabel: copy('agents_page_docs_live_updates'),
+  },
+  { question: copy('agents_page_faq_store_q'), answer: copy('agents_page_faq_store_a') },
+  ...agent.faqs,
+  { question: copy('agents_page_faq_price_q'), answer: copy('agents_page_faq_price_a'), href: getRelativeLocaleUrl(locale, 'pricing'), linkLabel: m.pricing({}, { locale }) },
+].slice(0, 6)
+
+const docsLinks = [
+  ...(agent.methods.includes('hosted-mcp') ? [{ label: copy('agents_page_docs_hosted'), href: getRelativeLocaleUrl(locale, 'docs/ai/mcp') }] : []),
+  ...(agent.methods.includes('local-mcp') ? [{ label: copy('agents_page_docs_cli_mcp'), href: getRelativeLocaleUrl(locale, 'docs/cli/reference/mcp') }] : []),
+  { label: copy('agents_page_docs_builder'), href: getRelativeLocaleUrl(locale, 'docs/builder/getting-started') },
+  { label: copy('agents_page_docs_live_updates'), href: getRelativeLocaleUrl(locale, 'docs/live-updates') },
+  ...agent.docs.map((link) => ({ label: link.label, href: localUrl(link.href) })),
+]
+
+const relatedLinks = [
+  { label: copy('agents_page_related_mcp'), href: getRelativeLocaleUrl(locale, 'mcp') },
+  { label: copy('agents_page_related_skills'), href: getRelativeLocaleUrl(locale, 'skills') },
+  { label: copy('agents_page_related_cli'), href: getRelativeLocaleUrl(locale, 'capgo-cli') },
+  ...(isBuilder
+    ? [
+        { label: copy('agents_page_related_lovable'), href: getRelativeLocaleUrl(locale, 'solutions/lovable-vibecoding-to-mobile') },
+        { label: copy('agents_page_related_webapp'), href: getRelativeLocaleUrl(locale, 'solutions/webapp-to-mobile') },
+      ]
+    : []),
+  ...agent.related.map((slug) => {
+    const related = getAgent(slug)
+    return { label: m.agents_page_related_agent({ agent: related.name }, { locale }), href: getRelativeLocaleUrl(locale, `agents/${slug}`), description: related.summary }
+  }),
+  { label: copy('agents_page_related_hub'), href: hubUrl },
+]
+
+const pageUrl = Astro.url.href
+const serviceLdJson = createServiceLdJson(config, {
+  name: title,
+  description,
+  url: pageUrl,
+  serviceType: 'Mobile app build, publishing, and live update service for AI agents',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(config, serviceLdJson, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: config.brand, url: `${config.baseUrl}/` },
+    { name: copy('agents_page_breadcrumb_hub'), url: new URL(hubUrl, config.baseUrl).href },
+    { name: agent.name, url: pageUrl },
+  ],
+  additionalEntities: [
+    createHowToLdJson(config, {
+      url: pageUrl,
+      name: copy('agents_page_setup_title'),
+      description: copy('agents_page_setup_subtitle'),
+      steps: agent.setup.map((step) => ({ name: step.title, text: step.body })),
+    }),
+    createFAQPageLdJson(config, { url: pageUrl, questions: faqItems }),
+  ],
+})
+
+const content = {
+  title,
+  description,
+  ldJSON,
+  keywords: [`${agent.name} mobile app`, `${agent.name} app store`, `${agent.name} capacitor`, `${agent.name} MCP`, ...agent.keywords].join(', '),
+}
+---
+
+<Layout content={content}>
+  <div class="agent-page bg-gray-950 text-gray-200">
+    <section class="relative overflow-hidden border-b border-white/10 py-16 sm:py-20">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(68,188,255,0.18),transparent_60%)]" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+        <nav aria-label="Breadcrumb" class="mb-8 flex justify-center text-sm text-gray-400">
+          <ol class="flex items-center gap-2">
+            <li>
+              <a href={hubUrl} class="hover:text-white">
+                {copy('agents_page_breadcrumb_hub')}
+              </a>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" class="text-gray-200">
+              {agent.name}
+            </li>
+          </ol>
+        </nav>
+        <div class="mb-6 flex items-center justify-center gap-4">
+          <AgentLogo agent={agent} size="lg" alt={copy('agents_page_logo_alt')} />
+          <span class="text-2xl text-gray-500" aria-hidden="true">
+            +
+          </span>
+          <span class="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-[#119eff]">
+            <svg class="h-9 w-9 text-white" viewBox={CAPGO_MARK_VIEWBOX} role="img" aria-label="Capgo logo">
+              <path fill="currentColor" fill-rule="evenodd" transform={CAPGO_MARK_TRANSFORM} d={CAPGO_MARK_PATH}></path>
+            </svg>
+          </span>
+        </div>
+        <h1 class="mx-auto max-w-3xl text-4xl font-bold tracking-tight text-balance text-white sm:text-5xl">{copy('agents_page_h1')}</h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-pretty text-gray-300">{copy('agents_page_subtitle')}</p>
+        <ul class="mt-6 flex flex-wrap justify-center gap-2 text-sm">
+          <li class="rounded-full border border-white/15 bg-white/5 px-3 py-1 font-medium text-white">{copy(typeLabels[agent.type])}</li>
+          {agent.methods.map((method) => (
+            <li class="rounded-full border border-[#44BCFF]/30 bg-[#44BCFF]/10 px-3 py-1 font-medium text-sky-100">{copy(methodLabels[method])}</li>
+          ))}
+        </ul>
+        <div class="mt-10">
+          <SignupCta id={`agent-${agent.slug}-hero-signup`} />
+        </div>
+      </div>
+    </section>
+
+    <section id="setup" aria-labelledby="setup-title" class="scroll-mt-20 py-16 sm:py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 id="setup-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          {copy('agents_page_setup_title')}
+        </h2>
+        <p class="mt-3 text-gray-400">{copy('agents_page_setup_subtitle')}</p>
+        <ol class="mt-10 space-y-6">
+          {agent.setup.map((step, index) => (
+            <li id={`step-${index + 1}`} class="rounded-xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+              <p class="text-sm font-semibold tracking-wide text-[#44BCFF] uppercase">{copy('agents_page_step_label', { n: index + 1 })}</p>
+              <h3 class="mt-2 text-xl font-semibold text-white">{step.title}</h3>
+              <p class="mt-2 leading-7 text-gray-300">{step.body}</p>
+              {step.code && (
+                <div class="mt-4 overflow-hidden rounded-lg border border-white/10 bg-black/40">
+                  <div class="flex min-h-10 items-center justify-between gap-3 border-b border-white/10 bg-white/[0.02] px-3 py-2">
+                    <span class="font-mono text-xs font-semibold tracking-wide text-gray-400">{step.code.label}</span>
+                    <button
+                      type="button"
+                      data-agent-copy={step.code.code}
+                      class="relative inline-flex min-h-8 items-center rounded-md px-2 font-mono text-xs font-semibold text-gray-300 transition hover:bg-white/5 hover:text-white focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none"
+                      aria-label={copy('agents_page_copy_label', { label: step.code.label })}
+                    >
+                      <span data-agent-copy-label>{copy('agents_page_copy')}</span>
+                    </button>
+                  </div>
+                  <div class="overflow-x-auto p-4">
+                    {step.code.lang === 'shell' ? (
+                      <div class="space-y-1">
+                        {step.code.code
+                          .split('\n')
+                          .map((line) =>
+                            line.startsWith('#') ? (
+                              <code class="block font-mono text-[13px] leading-6 text-slate-500">{line}</code>
+                            ) : (
+                              <CommandCode command={`$ ${line}`} class="block font-mono text-[13px] leading-6 break-words" />
+                            ),
+                          )}
+                      </div>
+                    ) : (
+                      <pre class="font-mono text-[13px] leading-6 text-slate-200"><code>{step.code.code}</code></pre>
+                    )}
+                  </div>
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section id="prompts" aria-labelledby="prompts-title" class="scroll-mt-20 border-t border-white/10 bg-gray-900 py-16 sm:py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 id="prompts-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          {copy('agents_page_prompts_title')}
+        </h2>
+        <p class="mt-3 text-gray-400">{copy('agents_page_prompts_subtitle')}</p>
+        <ul class="mt-10 grid gap-4 md:grid-cols-2">
+          {agent.prompts.map((prompt) => (
+            <li class="flex flex-col justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-5">
+              <div>
+                <span class:list={['inline-flex rounded-full border px-2.5 py-0.5 text-xs font-semibold', stageColors[prompt.stage]]}>{copy(stageLabels[prompt.stage])}</span>
+                <p class="mt-3 leading-7 text-gray-100">“{prompt.text}”</p>
+              </div>
+              <button
+                type="button"
+                data-agent-copy={prompt.text}
+                class="relative inline-flex min-h-8 w-fit items-center rounded-md border border-white/10 px-3 font-mono text-xs font-semibold text-gray-300 transition hover:bg-white/5 hover:text-white focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none"
+                aria-label={`${copy('agents_page_prompt_copy_label')}: ${prompt.text}`}
+              >
+                <span data-agent-copy-label>{copy('agents_page_copy')}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section id="release-loop" aria-labelledby="loop-title" class="scroll-mt-20 py-16 sm:py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 id="loop-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          {copy('agents_page_loop_title')}
+        </h2>
+        <p class="mt-3 text-gray-400">{copy('agents_page_loop_subtitle')}</p>
+        <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {loop.map((item, index) => (
+            <li class="flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-5">
+              <span class:list={['inline-flex w-fit rounded-full border px-2.5 py-0.5 text-xs font-semibold', stageColors[item.stage]]}>{index + 1}</span>
+              <h3 class="mt-3 text-lg font-semibold text-white">{copy(stageLabels[item.stage])}</h3>
+              <p class="mt-2 flex-1 text-sm leading-6 text-gray-400">{item.body}</p>
+              <a href={getRelativeLocaleUrl(locale, item.href)} class="mt-4 text-sm font-semibold text-[#44BCFF] hover:text-white">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section id="notes" aria-labelledby="notes-title" class="scroll-mt-20 border-t border-white/10 py-16 sm:py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 id="notes-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          {copy('agents_page_notes_title')}
+        </h2>
+        <ul class="mt-8 space-y-4">
+          {agent.notes.map((note) => (
+            <li class="flex gap-3 leading-7 text-gray-300">
+              <svg class="mt-1.5 h-4 w-4 shrink-0 text-[#44BCFF]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>{note}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <SolutionFaq id="faq" eyebrow={copy('agents_page_faq_eyebrow')} title={copy('agents_page_faq_title')} items={faqItems} class="border-t border-white/10 bg-gray-900" />
+
+    <section aria-labelledby="cta-title" class="py-16 sm:py-20">
+      <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+        <h2 id="cta-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          {copy('agents_page_cta_title')}
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-300">{copy('agents_page_cta_body')}</p>
+        <div class="mt-10">
+          <SignupCta id={`agent-${agent.slug}-closing-signup`} humanSupport />
+        </div>
+        <h3 class="mt-12 text-sm font-semibold tracking-wide text-gray-400 uppercase">{copy('agents_page_cta_docs_title')}</h3>
+        <ul class="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm">
+          {docsLinks.map((link) => (
+            <li>
+              <a href={link.href} class="font-medium text-[#44BCFF] hover:text-white">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="pb-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <ConversionRelatedLinks title={copy('agents_page_related_title')} links={relatedLinks} />
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script is:inline define:vars={{ copiedText: m.agents_page_copied({}, { locale }), failedText: m.agents_page_copy_failed({}, { locale }) }}>
+  async function copyText(value) {
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(value)
+        return
+      } catch {
+        // fall through to the textarea fallback
+      }
+    }
+    const helper = document.createElement('textarea')
+    helper.value = value
+    helper.setAttribute('readonly', 'true')
+    helper.style.position = 'absolute'
+    helper.style.opacity = '0'
+    document.body.append(helper)
+    helper.select()
+    const legacyCopy = Reflect.get(document, 'execCommand')
+    const copied = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
+    helper.remove()
+    if (!copied) throw new Error('Copy failed')
+  }
+
+  document.querySelectorAll('[data-agent-copy]').forEach((button) => {
+    let resetTimer
+    button.addEventListener('click', async () => {
+      const value = button.getAttribute('data-agent-copy')
+      const label = button.querySelector('[data-agent-copy-label]')
+      if (!value || !label) return
+      const originalText = label.dataset.original || label.textContent
+      label.dataset.original = originalText
+      try {
+        await copyText(value)
+        label.textContent = copiedText
+      } catch {
+        label.textContent = failedText
+      }
+      window.clearTimeout(resetTimer)
+      resetTimer = window.setTimeout(() => {
+        label.textContent = originalText
+      }, 1600)
+    })
+  })
+</script>

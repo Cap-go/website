@@ -65,6 +65,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
       { name: m.blog({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog') },
       { name: m.articles({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'articles') },
       { name: 'Capacitor Skills', href: getRelativeLocaleUrl(Astro.locals.locale, 'skills') },
+      { name: m.footer_agents_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'agents') },
       { name: m.community({}, { locale: Astro.locals.locale }), href: 'https://discord.capgo.app', external: true },
       { name: m.chat({}, { locale: Astro.locals.locale }), href: 'https://support.capgo.app', external: true },
       { name: 'Premium Support', href: getRelativeLocaleUrl(Astro.locals.locale, 'premium-support') },
