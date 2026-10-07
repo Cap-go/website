@@ -1,0 +1,91 @@
+---
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import TeamAvatars from '@/components/TeamAvatars.astro'
+import HumanSupport from '@/components/HumanSupport.astro'
+
+interface Props {
+  /** Stable id on the signup link, used for analytics autocapture filtering. */
+  id?: string
+  /** Show the "Enterprise needs? Talk to our team" line under the trial note. */
+  enterprise?: boolean
+  /** Show the "human support from Martin" line above the button. */
+  humanSupport?: boolean
+  align?: 'center' | 'start'
+  /** Light backgrounds need dark secondary text. */
+  tone?: 'dark' | 'light'
+  class?: string
+}
+
+const { id, enterprise = false, humanSupport = false, align = 'center', tone = 'dark', class: className = '' } = Astro.props
+const locale = Astro.locals.locale
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
+const teamUrl = 'https://book.capgo.app/demo/'
+const trialNote = `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
+const noteId = id ? `${id}-note` : `signup-cta-note-${Math.random().toString(36).slice(2, 8)}`
+const isLight = tone === 'light'
+---
+
+<div class:list={['signup-cta not-content flex flex-col gap-4', isLight && 'is-light', align === 'start' ? 'items-start text-left' : 'items-center text-center', className]}>
+  {humanSupport && <HumanSupport size="sm" align={align} tone={isLight ? 'light' : 'dark'} />}
+  <div class="group relative inline-flex">
+    <div
+      class="pointer-events-none absolute -inset-4 rounded-xl opacity-70 transition-all duration-1000 group-hover:-inset-5 group-hover:opacity-100 group-hover:duration-200"
+      style="background: radial-gradient(ellipse at center, rgba(68, 188, 255, 0.6) 0%, rgba(68, 188, 255, 0.3) 40%, rgba(68, 188, 255, 0) 70%);"
+      aria-hidden="true"
+    ></div>
+    <a
+      id={id}
+      href={registerUrl}
+      aria-describedby={noteId}
+      class="signup-cta-button font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white no-underline shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none active:scale-[0.98]"
+    >
+      {m.hero_cta_try_free({}, { locale })}
+    </a>
+  </div>
+  <p id={noteId} class:list={['font-inter m-0 text-sm leading-6', isLight ? 'text-gray-600' : 'text-gray-300']}>
+    {trialNote}
+  </p>
+  {enterprise && (
+    <div
+      class:list={[
+        'font-inter flex flex-col items-center gap-3 text-sm sm:flex-row',
+        align === 'start' ? 'sm:justify-start' : 'justify-center',
+        isLight ? 'text-gray-600' : 'text-gray-400',
+      ]}
+    >
+      <TeamAvatars size="lg" border={isLight ? 'border-white' : 'border-gray-950'} shadow loading={false} />
+      <p class="m-0">
+        {m.enterprise_needs_prompt({}, { locale })}{' '}
+        <a
+          href={teamUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="signup-cta-team-link font-semibold no-underline underline-offset-4 transition-colors hover:underline focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:outline-none"
+        >
+          {m.enterprise_talk_to_team({}, { locale })}
+        </a>
+      </p>
+    </div>
+  )}
+</div>
+
+<style>
+  /* Beat page-level resets such as `.lu a { color: inherit }`. */
+  .signup-cta .signup-cta-button {
+    color: #fff;
+    text-decoration: none;
+  }
+  .signup-cta .signup-cta-team-link {
+    color: #fff;
+  }
+  .signup-cta.is-light .signup-cta-team-link {
+    color: #111827;
+  }
+  .signup-cta .signup-cta-team-link:hover {
+    color: #93c5fd;
+  }
+  .signup-cta.is-light .signup-cta-team-link:hover {
+    color: #2563eb;
+  }
+</style>

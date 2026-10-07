@@ -1,9 +1,6 @@
 ---
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from '@/services/links'
-import HumanSupport from '@/components/HumanSupport.astro'
-
-const ctaSubtext = m.no_credit_card_required({}, { locale: Astro.locals.locale })
+import SignupCta from '@/components/SignupCta.astro'
 ---
 
 <section class="bg-[#1a1a1a] pt-24 pb-12 sm:pt-32 sm:pb-16">
@@ -57,15 +54,6 @@ const ctaSubtext = m.no_credit_card_required({}, { locale: Astro.locals.locale }
       </div>
     </div>
 
-    <div class="mt-16 flex flex-col items-center gap-3">
-      <HumanSupport size="sm" />
-      <a
-        href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="rounded-md bg-blue-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
-      >
-        {m.hero_cta_try_free({}, { locale: Astro.locals.locale })}
-      </a>
-      <p class="text-sm text-gray-400">{ctaSubtext}</p>
-    </div>
+    <SignupCta id="how-it-works-signup-cta" class="mt-16" />
   </div>
 </section>

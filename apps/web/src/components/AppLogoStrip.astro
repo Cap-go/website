@@ -14,8 +14,8 @@ const stats = m.app_strip_stats(
 )
 ---
 
-<div class="app-strip mx-auto mt-12 w-full max-w-6xl px-4 sm:mt-14" role="group" aria-labelledby="app-strip-title">
-  <p id="app-strip-title" class="text-center">
+<div class="app-strip mx-auto mt-12 w-full sm:mt-14" role="group" aria-labelledby="app-strip-title">
+  <p id="app-strip-title" class="px-4 text-center">
     <span class="block text-base font-semibold text-white sm:text-lg">{stats}</span>
     <span class="mt-10 block text-xs font-semibold tracking-widest text-slate-400 uppercase">{m.app_strip_title({}, { locale })}</span>
   </p>
@@ -42,7 +42,7 @@ const stats = m.app_strip_stats(
 
 <style>
   .app-strip-viewport {
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
   }
   .app-strip-track {
     animation: app-strip-scroll 50s linear infinite;

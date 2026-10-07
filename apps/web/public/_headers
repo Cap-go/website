@@ -35,6 +35,11 @@
   Access-Control-Expose-Headers: Link, ETag
   Cache-Control: public, max-age=3600
 
+/.well-known/mcp-registry-auth
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
 /.well-known/tool-api-status.json
   Content-Type: application/health+json; charset=utf-8
   Access-Control-Allow-Origin: *
@@ -69,6 +74,13 @@
   Access-Control-Allow-Methods: GET, HEAD
   Cache-Control: public, max-age=3600
   Link: </plugins.json>; rel="alternate"; type="application/json"
+
+/pricing.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
+  Link: </pricing/>; rel="alternate"; type="text/html"
 
 /plugins.json
   Content-Type: application/json; charset=utf-8

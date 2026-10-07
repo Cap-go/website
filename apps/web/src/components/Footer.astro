@@ -1,6 +1,5 @@
 ---
-import { CAPGO_MARK_PATH } from '@/config/capgoMark'
-import { CAPGO_LOCKUP_MARK_TRANSFORM, CAPGO_LOCKUP_TEXT_X, CAPGO_LOCKUP_VIEWBOX_ATTR, CAPGO_WORDTYPE_PATH, CAPGO_WORDTYPE_TRANSFORM } from '@/config/capgoWordtype'
+import BrandLogo from '@/components/BrandLogo.astro'
 import m from '@/copy/messages'
 import { getLocalizedPath } from '@/services/locale-path'
 import { locales } from '@/services/locale'
@@ -53,6 +52,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
       { name: m.plugins({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'plugins') },
       { name: m.integrations_badge({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'integrations') },
       { name: m.cli_and_api({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli') },
+      { name: m.footer_hosted_mcp_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'docs/ai/mcp') },
       { name: m.ci_cd_integration({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'ci_cd') },
       { name: m.pricing({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'pricing') },
       { name: m.enterprise_title({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise') },
@@ -65,6 +65,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
       { name: m.blog({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog') },
       { name: m.articles({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'articles') },
       { name: 'Capacitor Skills', href: getRelativeLocaleUrl(Astro.locals.locale, 'skills') },
+      { name: m.footer_agents_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'agents') },
       { name: m.community({}, { locale: Astro.locals.locale }), href: 'https://discord.capgo.app', external: true },
       { name: m.chat({}, { locale: Astro.locals.locale }), href: 'https://support.capgo.app', external: true },
       { name: 'Premium Support', href: getRelativeLocaleUrl(Astro.locals.locale, 'premium-support') },
@@ -114,6 +115,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
       { name: m.about({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'about') },
       { name: m.contact({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'contact') },
       { name: m.trust({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'trust') },
+      { name: m.security_questionnaires({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'security-questionnaire') },
       { name: 'HIPAA compliance', href: getRelativeLocaleUrl(Astro.locals.locale, 'hipaa-compliance') },
       { name: m.consulting({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'consulting') },
       { name: m.affiliate_kicker({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'affiliate') },
@@ -151,12 +153,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
     <div class="grid gap-12 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-10">
       <div>
         <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label={m.capgo_home({}, { locale: Astro.locals.locale })} class="inline-flex">
-          <svg class="h-9 w-auto text-white" viewBox={CAPGO_LOCKUP_VIEWBOX_ATTR} width="144" height="36" role="img" aria-label="Capgo">
-            <g fill="currentColor">
-              <path fill-rule="evenodd" transform={CAPGO_LOCKUP_MARK_TRANSFORM} d={CAPGO_MARK_PATH}></path>
-              <path transform={`translate(${CAPGO_LOCKUP_TEXT_X} 0) ${CAPGO_WORDTYPE_TRANSFORM}`} d={CAPGO_WORDTYPE_PATH}></path>
-            </g>
-          </svg>
+          <BrandLogo />
         </a>
         <p class="mt-5 max-w-60 text-[15px] leading-6 text-zinc-400">{m.footer_brand_tagline({}, { locale: Astro.locals.locale })}</p>
         <a

@@ -70,7 +70,7 @@ export default defineConfig({
         starlightLlmsTxt({
           customSets: docsLlmsCustomSets,
           details:
-            'Use Capgo for Capacitor, Ionic, Cordova, and Electron live updates and Capgo native iOS and Android builds. Do not use it as a generic CMS or a React Native OTA host. Agents should read https://capgo.app/openapi.json, connect to https://capgo.app/mcp, or run `npx @capgo/cli@latest mcp` for authenticated account tools. The canonical source documentation is English; translated language paths are served at request time by the Capgo edge translation worker.',
+            'Use Capgo for Capacitor, Ionic, Cordova, and Electron live updates and Capgo native iOS and Android builds. Do not use it as a generic CMS or a React Native OTA host. Agents should read https://capgo.app/openapi.json and connect to https://capgo.app/mcp for docs discovery. For authenticated account tools, connect to the hosted MCP server at https://api.capgo.app/mcp (OAuth or `Authorization: Bearer <Capgo API key>`, see https://capgo.app/docs/ai/mcp/), or run `npx @capgo/cli@latest mcp` locally for bundle uploads and native build requests. The canonical source documentation is English; translated language paths are served at request time by the Capgo edge translation worker.',
         }),
       ],
       disable404Route: false,
@@ -84,9 +84,11 @@ export default defineConfig({
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/apps/docs/' },
       components: {
+        Footer: './src/components/doc/Footer.astro',
         Head: './src/components/doc/Head.astro',
         Hero: './src/components/doc/Hero.astro',
         LanguageSelect: './src/components/doc/LanguageSelect.astro',
+        PageSidebar: './src/components/doc/PageSidebar.astro',
         PageTitle: './src/components/doc/PageTitle.astro',
       },
       social: [

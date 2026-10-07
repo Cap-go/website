@@ -8,7 +8,7 @@
       "@/*": ["./src/*"],
       "~public/*": ["./public/*"]
     },
-    "types": ["bun-types"]
+    "types": ["bun"]
   },
   "exclude": ["scripts/**/*", "dist/**/*", ".astro/**/*"]
 }

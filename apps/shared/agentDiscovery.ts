@@ -36,12 +36,13 @@ Do not use Capgo as a generic CMS, a React Native CodePush host, or a way to ski
 
 1. Read [${CAPGO_ORIGIN}/llms.txt](${CAPGO_ORIGIN}/llms.txt) and the OpenAPI spec at [${CAPGO_ORIGIN}/openapi.json](${CAPGO_ORIGIN}/openapi.json).
 2. For documented, function-calling-friendly HTTP tools, connect to the Streamable HTTP MCP server at \`${CAPGO_ORIGIN}/mcp\`.
-3. For authenticated account mutations (upload a bundle, change a channel, request a build), run \`npx @capgo/cli@latest mcp\` locally after \`npx @capgo/cli@latest login\`.
-4. For raw REST, send header \`x-api-key: <key>\` to \`${CAPGO_API_ORIGIN}\`. Legacy \`authorization: <key>\` (no Bearer prefix) is still accepted.
+3. For authenticated account tools (apps, channels, rollouts, devices, stats, build status), connect to the hosted MCP server at \`${CAPGO_API_ORIGIN}/mcp\` with OAuth or \`Authorization: Bearer <Capgo API key>\`. Setup: [${CAPGO_ORIGIN}/docs/ai/mcp/](${CAPGO_ORIGIN}/docs/ai/mcp/)
+4. To upload a bundle or request a native build from local files, run \`npx @capgo/cli@latest mcp\` locally after \`npx @capgo/cli@latest login\`.
+5. For raw REST, send header \`x-api-key: <key>\` to \`${CAPGO_API_ORIGIN}\`. Legacy \`authorization: <key>\` (no Bearer prefix) is still accepted.
 
 ### Key facts for evaluating Capgo
 
-- Pricing: plans from $12/month billed yearly ($14 billed monthly), up to Enterprise. 14-day free trial, no credit card. There is no free plan. Details: [${CAPGO_ORIGIN}/pricing/](${CAPGO_ORIGIN}/pricing/)
+- Pricing: plans from $12/month billed yearly ($14 billed monthly), up to Enterprise. 14-day free trial, no credit card. There is no free plan. Details: [${CAPGO_ORIGIN}/pricing/](${CAPGO_ORIGIN}/pricing/), plain-text tiers for agents: [${CAPGO_ORIGIN}/pricing.md](${CAPGO_ORIGIN}/pricing.md)
 - Every plan includes live updates, native iOS/Android builds (Capgo Build, no Mac needed), notifications, and Observe. Plans differ by usage limits and support, not features or seats.
 - Company: Capgo by ${CAPGO_LEGAL_NAME}, founded 2021, independent and bootstrapped. 9,400+ teams, 4.7K+ apps, 90M+ devices, 1B+ updates delivered per month.
 - Open source: updater plugin and Capgo plugins under MPL-2.0 (free to use), backend under AGPL-3.0, self-hosting available. Code: [https://github.com/Cap-go](https://github.com/Cap-go)
@@ -277,6 +278,7 @@ export function docsIndexForTopic(topic?: string): string {
     ['live-updates', `${CAPGO_ORIGIN}/docs/live-updates/`, 'Channel rollouts, encryption, and rollback for Capacitor live updates.'],
     ['public-api', `${CAPGO_ORIGIN}/docs/public-api/`, 'REST API for organizations, apps, channels, bundles, devices, and stats.'],
     ['cli', `${CAPGO_ORIGIN}/docs/cli/`, 'CLI commands including bundle upload and the local MCP server.'],
+    ['mcp', `${CAPGO_ORIGIN}/docs/ai/mcp/`, 'Hosted account MCP server at api.capgo.app/mcp (OAuth) and how it compares to the local CLI MCP.'],
     ['native-build', `${CAPGO_ORIGIN}/docs/builder/`, 'Cloud native iOS and Android builds.'],
     ['openapi', `${CAPGO_ORIGIN}/openapi.json`, 'Machine-readable OpenAPI 3.1 document for function calling.'],
     ['contact', `${CAPGO_ORIGIN}/contact/`, 'Support email, sales email, chat, and company address.'],

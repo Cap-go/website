@@ -15,7 +15,11 @@ npx @capgo/cli@latest mcp
 This command starts a **local stdio** MCP server that exposes Capgo account tools for AI agents.
 The server is designed for non-interactive, programmatic use after `npx @capgo/cli@latest login`.
 
-A **remote Streamable HTTP** MCP server is also published at [https://capgo.app/mcp](https://capgo.app/mcp) for docs discovery, when-to-use guidance, and OpenAPI location. The remote server does not mutate a Capgo account. The machine-readable manifest is at [https://capgo.app/.well-known/mcp.json](https://capgo.app/.well-known/mcp.json).
+Use this local server when the agent needs files on your machine: uploading a bundle, requesting a native build, or running `doctor` and `probe`.
+
+For everything else, the **[hosted MCP server](/docs/ai/mcp/)** at `https://api.capgo.app/mcp` needs no install. Paste the URL into Claude.ai, ChatGPT, Cursor, VS Code, Lovable, or any remote MCP client and sign in with OAuth (or send `Authorization: Bearer <Capgo API key>`). It covers apps, bundles, channels and rollouts, devices, statistics, Observe, native build status and logs, webhooks, and push notifications. See [Hosted vs local MCP](/docs/ai/mcp/#hosted-vs-local-mcp).
+
+A separate public **docs-discovery** MCP server is published at [https://capgo.app/mcp](https://capgo.app/mcp) for when-to-use guidance and the OpenAPI location. It does not access a Capgo account. The machine-readable manifest is at [https://capgo.app/.well-known/mcp.json](https://capgo.app/.well-known/mcp.json).
 
 Available local tools include:
 

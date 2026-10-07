@@ -10,7 +10,9 @@ import m, { type MessageValues } from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from '@/services/links'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import { getProductScreens } from '@/config/productScreens'
 
 type Plan = Database['public']['Tables']['plans']['Row']
 
@@ -281,16 +283,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         </h1>
         <p class="lead hero-lead">{copy('native_build_v2_hero_lead')}</p>
         <div class="hero-ctas">
-          <HumanSupport class="mb-3" size="sm" align="start" />
-          <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-primary" href={registerUrl}>
-              {copy('native_build_v2_hero_cta')}
-            </a>
-            <a class="btn btn-lg btn-ghost" href="#how">
-              {copy('native_build_v2_hero_secondary')} ↓
-            </a>
-          </div>
-          <p class="hero-cta-note">{copy('product_trial_cta_note')}</p>
+          <SignupCta id="native-build-hero-signup-cta" />
         </div>
         <div class="hero-meta">
           {heroMeta.map((item) => (
@@ -346,6 +339,20 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
               ⟲ {copy('native_build_v2_demo_replay')}
             </button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ CONSOLE ============================================ -->
+    <section class="section" id="console">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow">In the console</div>
+          <h2 class="h2-section">Every build, its status, and the minutes it used</h2>
+          <p class="lead">Builds you request from the CLI or CI show up next to your live updates, with failure reasons and build time per platform.</p>
+        </div>
+        <div style="margin-top: 40px;">
+          <ProductScreenTour screens={getProductScreens(['builds'])} label="Capgo builds" />
         </div>
       </div>
     </section>
@@ -1248,10 +1255,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           {copy('native_build_v2_cta_title')}
         </h2>
         <p class="tagline">{copy('native_build_v2_cta_tagline')}</p>
-        <HumanSupport class="mb-4" size="sm" />
-        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>
-          {copy('native_build_builder_start_trial')} →
-        </a>
+        <SignupCta id="native-build-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
           <span>
             <span class="check">✓</span> {copy('native_build_v2_cta_meta1')}
@@ -1285,7 +1289,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       --cap-blue-600: #2563eb;
       --cap-blue-700: #1d4ed8;
       /* Restrained system: one accent (blue) + neutrals.
-               Green only for literal success, red only for literal errors. */
+                 Green only for literal success, red only for literal errors. */
       --nb-accent: #60a5fa;
       --nb-accent-strong: #93c5fd;
       --nb-accent-bg: rgba(96, 165, 250, 0.08);
@@ -1615,7 +1619,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-fg);
       white-space: pre-wrap;
       /* Fixed height, tall enough for the full build log, so it never grows/jumps
-             as lines stream in AND never shows a scrollbar. */
+               as lines stream in AND never shows a scrollbar. */
       height: 560px;
       overflow: hidden;
     }

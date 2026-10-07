@@ -10,9 +10,11 @@ import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
+import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import { getProductScreens } from '@/config/productScreens'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -23,8 +25,6 @@ function copy(key: string, values: MessageValues = {}) {
 
 const title = `${brand} | Ionic and Capacitor Live Updates`
 const description = m.live_update_description({}, { locale })
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
-const docsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates')
 const dataUrl = getRelativeLocaleUrl(locale, 'data')
 const expoUrl = getRelativeLocaleUrl(locale, 'alternatives/expo')
 
@@ -153,6 +153,14 @@ const comparisonRows = [
   },
 ]
 
+const observeUrl = getRelativeLocaleUrl(locale, 'observe')
+const controlScreens = getProductScreens(['rollout', 'channels', 'bundle-dependencies', 'device-history'])
+const releaseScreens = getProductScreens(['live-release', 'update-health', 'compatibility']).map((screen) => ({
+  ...screen,
+  href: observeUrl,
+  linkLabel: 'Explore Capgo Observe',
+}))
+
 const guidanceChecks = [m.live_update_guidance_check1({}, { locale }), m.live_update_guidance_check2({}, { locale }), m.live_update_guidance_check3({}, { locale })]
 
 const platformCards = [
@@ -226,32 +234,23 @@ const featureTiles = [
         </h1>
         <p class="lead hero-lead">{m.live_update_hero_subtitle({}, { locale })}</p>
         <div class="hero-ctas">
-          <HumanSupport class="mb-3" size="sm" align="start" />
-          <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-primary" href={registerUrl}>{m.live_update_hero_cta({}, { locale })}</a>
-            <a class="btn btn-lg btn-ghost" href={docsUrl}>{m.live_update_view_docs({}, { locale })}</a>
-          </div>
-          <p class="hero-cta-note">{m.product_trial_cta_note({}, { locale })}</p>
+          <SignupCta id="live-update-hero-signup-cta" />
         </div>
         <div class="hero-meta">
-          {
-            heroMeta.map((item) => (
-              <span>
-                <span class="check">✓</span>
-                {item}
-              </span>
-            ))
-          }
+          {heroMeta.map((item) => (
+            <span>
+              <span class="check">✓</span>
+              {item}
+            </span>
+          ))}
         </div>
         <div class="hero-strip">
-          {
-            heroStats.map((item) => (
-              <div class="hero-strip-cell">
-                <p class="v">{item.value}</p>
-                <p class="k">{item.label}</p>
-              </div>
-            ))
-          }
+          {heroStats.map((item) => (
+            <div class="hero-strip-cell">
+              <p class="v">{item.value}</p>
+              <p class="k">{item.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -266,17 +265,15 @@ const featureTiles = [
         </div>
 
         <div class="outcome-grid platform-grid">
-          {
-            platformCards.map((card) => (
-              <article class="outcome-card platform-card">
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
-                <a class="platform-link" href={card.href}>
-                  {card.readMore} →
-                </a>
-              </article>
-            ))
-          }
+          {platformCards.map((card) => (
+            <article class="outcome-card platform-card">
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+              <a class="platform-link" href={card.href}>
+                {card.readMore} →
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -291,21 +288,51 @@ const featureTiles = [
         </div>
 
         <div class="outcome-grid">
-          {
-            outcomeCards.map((card) => (
-              <article class="outcome-card">
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
-              </article>
-            ))
-          }
+          {outcomeCards.map((card) => (
+            <article class="outcome-card">
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          ))}
         </div>
 
         <div class="decision-box">
           <h3>{m.live_update_decision_title({}, { locale })}</h3>
           <ul class="decision-list">
-            {decisionCriteria.map((item) => <li>{item}</li>)}
+            {decisionCriteria.map((item) => (
+              <li>{item}</li>
+            ))}
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLLOUT CONTROL -->
+    <section class="section" id="rollout-control">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">Release control</div>
+          <h2 class="h2-section">Decide who gets each update, and take it back fast</h2>
+          <p class="lead">Channels, progressive rollouts, native dependency checks, and per-device history, all in the console. Real screens from the Capgo demo app.</p>
+        </div>
+        <div style="margin-top: 44px;">
+          <ProductScreenTour screens={controlScreens} label="Capgo release control views" />
+        </div>
+      </div>
+    </section>
+
+    <!-- AFTER RELEASE -->
+    <section class="section bg-grid grain" id="after-release">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">After you ship</div>
+          <h2 class="h2-section">Watch every update land on real devices</h2>
+          <p class="lead">
+            Every live update comes with a release view: installs and failures as they happen, failures grouped by cause, and a warning when a bundle needs a new native build.
+          </p>
+        </div>
+        <div style="margin-top: 44px;">
+          <ProductScreenTour screens={releaseScreens} label="Capgo release monitoring views" />
         </div>
       </div>
     </section>
@@ -342,7 +369,8 @@ const featureTiles = [
           <div class="tile tile-hero" aria-label="Capgo Live Updates">
             <div>
               <div class="ttl">
-                <span class="name">Capgo Live Updates</span><br />
+                <span class="name">Capgo Live Updates</span>
+                <br />
                 <span class="tile-hero-sub-ttl">{m.live_update_feature_native_engine({}, { locale })}</span>
               </div>
               <div class="sub">{m.live_update_feature_native_engine_desc({}, { locale })}</div>
@@ -351,16 +379,14 @@ const featureTiles = [
 ✔ validated · ✔ published · ✔ rolling out</pre>
           </div>
 
-          {
-            featureTiles.map((tile) => (
-              <div class="tile">
-                <h3 class="ttl">
-                  <span class="ttl-accent">{tile.title}</span>
-                </h3>
-                <p class="sub">{tile.sub}</p>
-              </div>
-            ))
-          }
+          {featureTiles.map((tile) => (
+            <div class="tile">
+              <h3 class="ttl">
+                <span class="ttl-accent">{tile.title}</span>
+              </h3>
+              <p class="sub">{tile.sub}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -377,30 +403,28 @@ const featureTiles = [
         <div class="guidance-grid">
           <div>
             <ul class="guidance-checks">
-              {guidanceChecks.map((check) => <li>{check}</li>)}
+              {guidanceChecks.map((check) => (
+                <li>{check}</li>
+              ))}
             </ul>
             <div class="hero-ctas" style="margin-top: 28px; align-items: flex-start;">
-              <HumanSupport class="mb-3" size="sm" align="start" />
-              <div class="hero-cta-buttons">
-                <a class="btn btn-md btn-primary" href={getRelativeLocaleUrl(locale, 'docs/live-updates/compatibility')}>
-                  {m.live_update_guidance_docs_cta({}, { locale })}
-                </a>
-                <a class="btn btn-md btn-ghost" href={registerUrl}>{m.live_update_hero_cta({}, { locale })}</a>
-              </div>
+              <SignupCta id="live-update-guidance-signup-cta" align="start" />
             </div>
           </div>
 
           <div class="guidance-panel">
             <img
-              src="/landing-demos/live-update-console-demo.webp"
-              alt="Capgo console demo app showing a live-update bundle, release dates, checksum, and linked channels"
-              width="1280"
-              height="720"
+              src="/landing-demos/observe/observe-compatibility-detail.webp"
+              alt="Capgo Observe compatibility view warning that a new native build is needed because @capacitor/camera changed between bundles on the production channel"
+              width="1600"
+              height="839"
               loading="lazy"
               decoding="async"
             />
             <div class="guidance-cli">
-              <p class="guidance-cli-line"><span class="mono">$</span> {m.live_update_guidance_cli_command({}, { locale })}</p>
+              <p class="guidance-cli-line">
+                <span class="mono">$</span> {m.live_update_guidance_cli_command({}, { locale })}
+              </p>
               <p class="guidance-cli-warn">{m.live_update_guidance_cli_warning({}, { locale })}</p>
               <p class="guidance-cli-dim">{m.live_update_guidance_cli_package({}, { locale })}</p>
               <p class="guidance-cli-action">{m.live_update_guidance_cli_action({}, { locale })}</p>
@@ -439,18 +463,16 @@ const featureTiles = [
               </tr>
             </thead>
             <tbody>
-              {
-                comparisonRows.map((row) => (
-                  <tr>
-                    <td class="label">{row.label}</td>
-                    <td class="us">
-                      <span class="hook">{row.hook}</span> {row.capgo}
-                    </td>
-                    <td>{row.diy}</td>
-                    <td>{row.capa}</td>
-                  </tr>
-                ))
-              }
+              {comparisonRows.map((row) => (
+                <tr>
+                  <td class="label">{row.label}</td>
+                  <td class="us">
+                    <span class="hook">{row.hook}</span> {row.capgo}
+                  </td>
+                  <td>{row.diy}</td>
+                  <td>{row.capa}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -471,7 +493,9 @@ const featureTiles = [
           <p class="lead">{copy('live_update_eas_lead')}</p>
         </div>
         <div style="display: flex; justify-content: center; margin-top: 28px;">
-          <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('live_update_eas_cta')}</a>
+          <a class="btn btn-md btn-ghost" href={expoUrl}>
+            {copy('live_update_eas_cta')}
+          </a>
         </div>
       </div>
     </section>
@@ -480,16 +504,22 @@ const featureTiles = [
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">
         <h2>
-          <span class="name">Capgo Live Updates</span><br />
+          <span class="name">Capgo Live Updates</span>
+          <br />
           {m.live_update_cta_title({}, { locale })}
         </h2>
         <p class="tagline">{m.live_update_cta_subtitle({}, { locale })}</p>
-        <HumanSupport class="mb-4" size="sm" />
-        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{m.live_update_hero_cta({}, { locale })} →</a>
+        <SignupCta id="live-update-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
-          <span><span class="check">✓</span> {copy('live_update_v2_cta_meta1')}</span>
-          <span><span class="check">✓</span> {copy('live_update_v2_cta_meta2')}</span>
-          <span><span class="check">✓</span> {copy('live_update_v2_cta_meta3')}</span>
+          <span>
+            <span class="check">✓</span> {copy('live_update_v2_cta_meta1')}
+          </span>
+          <span>
+            <span class="check">✓</span> {copy('live_update_v2_cta_meta2')}
+          </span>
+          <span>
+            <span class="check">✓</span> {copy('live_update_v2_cta_meta3')}
+          </span>
         </div>
       </div>
     </section>

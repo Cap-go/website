@@ -1,13 +1,15 @@
 ---
 import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
 import type { Database } from '@/services/supabase.types'
+import type { CreditStep } from '@/lib/pricingCalculator'
 
 interface Props {
   plans: Database['public']['Tables']['plans']['Row'][]
-  apiBaseUrl: string
+  credits: CreditStep[]
 }
 
-const { plans, apiBaseUrl } = Astro.props
+const { plans, credits } = Astro.props
 const locale = Astro.locals.locale
 
 const calculatorPlans = plans
@@ -21,42 +23,21 @@ const calculatorPlans = plans
     price_m: plan.price_m || 0,
     price_y: plan.price_y || 0,
   }))
+  .sort((a, b) => a.price_m - b.price_m)
 
-const plansJson = JSON.stringify(calculatorPlans)
-const copy = {
-  title: m.calculate_your_usage({}, { locale }),
-  description: m.calculate_your_usage_description({}, { locale }),
-  cta: m.pricing_calculator_cta({}, { locale }),
-  configuration: m.your_configuration({}, { locale }),
-  mau: m.monthly_active_users_mau({}, { locale }),
-  updatesPerMonth: m.updates_per_month({}, { locale }),
-  updateSize: m.update_size_mb({}, { locale }),
-  includePlan: m.pricing_calculator_include_plan({}, { locale }),
-  creditsOnly: m.pricing_calculator_credits_only({}, { locale }),
-  recommendedPlan: m.pricing_calculator_recommended_plan({}, { locale }),
-  selectedPlan: m.pricing_calculator_selected_plan({}, { locale }),
-  selectPlan: m.pricing_calculator_select_plan({}, { locale }),
-  yourUsage: m.pricing_calculator_your_usage({}, { locale }),
-  includedInPlan: m.pricing_calculator_included_in_plan({}, { locale }),
-  billableOverage: m.pricing_calculator_billable_overage({}, { locale }),
-  planSubscription: m.pricing_calculator_plan_subscription({}, { locale }),
-  overageCredits: m.pricing_calculator_overage_credits({}, { locale }),
-  estimatedTotal: m.pricing_calculator_estimated_total({}, { locale }),
-  estimatedAnnualTotal: m.pricing_calculator_estimated_annual_total({}, { locale }),
-  annualTotal: m.pricing_calculator_annual_total({}, { locale }),
-  billedAnnuallyAt: m.billed_annually_at({}, { locale }),
-  perMonth: m.pricing_calculator_per_month({}, { locale }),
-  perYear: m.pricing_calculator_per_year({}, { locale }),
-  creditsCost: m.credits_cost({}, { locale }),
-  monthlyTotal: m.monthly_total({}, { locale }),
-  close: m.pricing_calculator_close({}, { locale }),
-  billingPeriod: m.pricing_calculator_billing_period({}, { locale }),
-  monthlyPlan: m.monthly_plan({}, { locale }),
-  yearlyPlan: m.yearly_plan({}, { locale }),
-  bandwidth: m.bandwidth({}, { locale }),
-  storage: m.storage({}, { locale }),
-}
-const copyJson = JSON.stringify(copy)
+const steps = credits
+  .filter((step) => ['mau', 'bandwidth', 'storage'].includes(step.type))
+  .map(({ step_min, step_max, price_per_unit, type, unit_factor }) => ({ step_min, step_max, price_per_unit, type, unit_factor }))
+
+const perMonth = `/${m.month({}, { locale }).toLowerCase()}`
+const inputClass =
+  'h-9 w-28 rounded-lg border border-transparent bg-transparent px-2 text-right text-base text-gray-300 tabular-nums transition-colors hover:border-white/10 focus:border-white/20 focus:bg-white/5 focus:text-white focus:ring-2 focus:ring-blue-500/30 focus:outline-none'
+const sliderClass = 'pricing-calculator-range mt-5 w-full cursor-pointer appearance-none bg-transparent'
+const usageRows = [
+  { key: 'mau', label: m.mau({}, { locale }) },
+  { key: 'bandwidth', label: m.bandwidth({}, { locale }) },
+  { key: 'storage', label: m.pricing_calculator_storage({}, { locale }) },
+]
 ---
 
 <>
@@ -69,9 +50,10 @@ const copyJson = JSON.stringify(copy)
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
-        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+      ></path>
     </svg>
-    {copy.cta}
+    {m.pricing_calculator_cta({}, { locale })}
   </button>
 
   <dialog
@@ -79,17 +61,42 @@ const copyJson = JSON.stringify(copy)
     class="pricing-calculator-modal fixed inset-0 z-[100] m-0 h-dvh max-h-none w-full max-w-none border-0 bg-transparent p-0 backdrop:bg-gray-950/50 open:flex open:items-end open:justify-center sm:open:items-center sm:open:p-4"
     aria-labelledby="pricing-calculator-title"
   >
-    <div class="flex max-h-[92dvh] w-full max-w-3xl flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:max-h-[88dvh] sm:rounded-2xl">
-      <div class="flex items-start justify-between gap-4 border-b border-gray-200 px-5 py-4 sm:px-6">
-        <div>
-          <h2 id="pricing-calculator-title" class="text-xl font-semibold text-gray-950">{copy.title}</h2>
-          <p class="mt-1 text-sm text-gray-600">{copy.description}</p>
+    <div
+      class="flex max-h-[94dvh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-white/10 bg-[#111214] text-white shadow-2xl shadow-black/60 sm:max-h-[90dvh] sm:rounded-3xl"
+    >
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-3 px-5 pt-5 pb-4 sm:px-8 sm:pt-7">
+        <div class="min-w-0 flex-1">
+          <h2 id="pricing-calculator-title" class="flex items-center gap-3 font-mono text-base font-semibold tracking-wider text-white uppercase sm:text-lg">
+            <svg class="h-5 w-5 shrink-0 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="3"></rect>
+              <path stroke-linecap="round" d="M7.5 9h4M9.5 7v4M13.5 16.5h3.5M7.5 16.5l3-3M10.5 16.5l-3-3M16.5 7.5l-3 3"></path>
+            </svg>
+            {m.pricing_calculator_cta({}, { locale })}
+          </h2>
+          <p class="mt-1 text-sm text-gray-400">{m.pricing_calculator_subtitle({}, { locale })}</p>
         </div>
+        <fieldset class="order-last grid w-full shrink-0 grid-cols-2 rounded-full bg-white/5 p-1 ring-1 ring-white/10 sm:order-none sm:w-auto">
+          <legend class="sr-only">{m.pricing_calculator_billing_period({}, { locale })}</legend>
+          <label
+            class="flex min-h-8 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-400 transition hover:text-gray-200 has-checked:bg-white/10 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-blue-500"
+          >
+            <span>{m.monthly_plan({}, { locale })}</span>
+            <input type="radio" name="pricing-calculator-billing" value="monthly" data-pricing-calculator-billing checked class="sr-only" />
+          </label>
+          <label
+            class="group flex min-h-8 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-400 transition hover:text-gray-200 has-checked:bg-white/10 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-blue-500"
+          >
+            <span>{m.yearly_plan({}, { locale })}</span>
+            <span class="ml-1 text-blue-400">-20%</span>
+            <input type="radio" name="pricing-calculator-billing" value="yearly" data-pricing-calculator-billing class="sr-only" />
+          </label>
+        </fieldset>
         <button
           type="button"
           data-pricing-calculator-close
-          class="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-800 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-          aria-label={copy.close}
+          autofocus
+          class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-gray-300 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          aria-label={m.pricing_calculator_close({}, { locale })}
         >
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
@@ -97,179 +104,187 @@ const copyJson = JSON.stringify(copy)
         </button>
       </div>
 
-      <div class="overflow-y-auto px-5 py-5 sm:px-6">
-        <fieldset class="mb-6">
-          <legend class="mb-3 text-sm font-semibold text-gray-900">{copy.configuration}</legend>
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div>
-              <label for="pricing-calculator-mau" class="mb-2 block text-sm font-medium text-gray-700">{copy.mau}</label>
-              <input
-                id="pricing-calculator-mau"
-                data-pricing-calculator-mau
-                type="number"
-                min="0"
-                value="10000"
-                class="min-h-11 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label for="pricing-calculator-updates" class="mb-2 block text-sm font-medium text-gray-700">{copy.updatesPerMonth}</label>
-              <input
-                id="pricing-calculator-updates"
-                data-pricing-calculator-updates
-                type="number"
-                min="0"
-                step="1"
-                value="1"
-                class="min-h-11 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label for="pricing-calculator-size" class="mb-2 block text-sm font-medium text-gray-700">{copy.updateSize}</label>
-              <input
-                id="pricing-calculator-size"
-                data-pricing-calculator-size
-                type="number"
-                min="0"
-                step="0.1"
-                value="4"
-                class="min-h-11 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
-              />
-            </div>
-          </div>
-        </fieldset>
-
-        <fieldset class="mb-6">
-          <legend class="mb-3 text-sm font-semibold text-gray-900">{copy.billingPeriod}</legend>
-          <div class="grid w-full max-w-xs grid-cols-2 rounded-full bg-gray-100 p-1" role="radiogroup" aria-label={copy.billingPeriod}>
-            <label
-              class="flex min-h-9 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-700 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-600 has-focus-visible:ring-offset-2"
-            >
-              <span>{copy.monthlyPlan}</span>
-              <input type="radio" name="pricing-calculator-billing" value="monthly" data-pricing-calculator-billing checked class="sr-only" />
-            </label>
-            <label
-              class="flex min-h-9 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-700 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-600 has-focus-visible:ring-offset-2"
-            >
-              <span>{copy.yearlyPlan}</span>
-              <span class="ml-1 text-blue-700">-20%</span>
-              <input type="radio" name="pricing-calculator-billing" value="yearly" data-pricing-calculator-billing class="sr-only" />
-            </label>
-          </div>
-        </fieldset>
-
-        <fieldset class="mb-6">
-          <legend class="mb-3 text-sm font-semibold text-gray-900">{copy.includePlan}</legend>
-          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <label class="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-gray-200 px-4 py-3 has-checked:border-blue-600 has-checked:bg-blue-50/50">
-              <input
-                type="radio"
-                name="pricing-calculator-mode"
-                value="plan"
-                data-pricing-calculator-mode
-                checked
-                class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
-              />
-              <span class="text-sm font-medium text-gray-900">{copy.includePlan}</span>
-            </label>
-            <label class="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-gray-200 px-4 py-3 has-checked:border-blue-600 has-checked:bg-blue-50/50">
-              <input type="radio" name="pricing-calculator-mode" value="credits" data-pricing-calculator-mode class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600" />
-              <span class="text-sm font-medium text-gray-900">{copy.creditsOnly}</span>
-            </label>
-          </div>
-        </fieldset>
-
-        <div data-pricing-calculator-plan-panel class="mb-6 rounded-xl border border-blue-100 bg-blue-50/40 p-4">
-          <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p data-pricing-calculator-plan-label class="text-xs font-semibold tracking-wide text-blue-700 uppercase">{copy.recommendedPlan}</p>
-              <p data-pricing-calculator-plan-name class="mt-1 text-lg font-semibold text-gray-950">—</p>
-              <p data-pricing-calculator-plan-price class="text-sm text-gray-600">—</p>
-              <p data-pricing-calculator-plan-price-note class="mt-1 hidden text-xs text-gray-500"></p>
-            </div>
-            <div class="w-full sm:max-w-xs">
-              <label for="pricing-calculator-plan-select" class="mb-2 block text-sm font-medium text-gray-700">{copy.selectPlan}</label>
-              <div class="relative">
-                <select
-                  id="pricing-calculator-plan-select"
-                  data-pricing-calculator-plan-select
-                  class="min-h-11 w-full appearance-none rounded-lg border border-gray-300 bg-white py-2 pr-10 pl-3 text-sm text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
-                ></select>
-                <svg
-                  class="pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-gray-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
-                </svg>
+      <div class="min-h-0 flex-1 overflow-y-auto px-5 pb-6 sm:px-8 sm:pb-8">
+        <div class="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:gap-10">
+          <div class="space-y-6">
+            <div class="space-y-3">
+              <div class="rounded-2xl bg-white/[0.04] p-5 sm:p-6">
+                <div class="flex items-center justify-between gap-3">
+                  <label for="pricing-calculator-mau" class="text-base font-semibold text-white">
+                    {m.monthly_active_users_mau({}, { locale })}
+                  </label>
+                  <input id="pricing-calculator-mau" data-pricing-calculator-mau type="number" inputmode="numeric" min="0" step="1" value="10000" class={inputClass} />
+                </div>
+                <input type="range" min="0" step="1" data-pricing-calculator-mau-range class={sliderClass} aria-label={m.monthly_active_users_mau({}, { locale })} />
+                <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_mau_hint({}, { locale })}</p>
+              </div>
+              <div class="rounded-2xl bg-white/[0.04] p-5 sm:p-6">
+                <div class="flex items-center justify-between gap-3">
+                  <label for="pricing-calculator-updates" class="text-base font-semibold text-white">
+                    {m.updates_per_month({}, { locale })}
+                  </label>
+                  <input id="pricing-calculator-updates" data-pricing-calculator-updates type="number" inputmode="numeric" min="0" step="1" value="4" class={inputClass} />
+                </div>
+                <input type="range" min="0" step="1" data-pricing-calculator-updates-range class={sliderClass} aria-label={m.updates_per_month({}, { locale })} />
+                <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_updates_hint({}, { locale })}</p>
+              </div>
+              <div class="rounded-2xl bg-white/[0.04] p-5 sm:p-6">
+                <div class="flex items-center justify-between gap-3">
+                  <label for="pricing-calculator-size" class="text-base font-semibold text-white">
+                    {m.update_size_mb({}, { locale })}
+                  </label>
+                  <input id="pricing-calculator-size" data-pricing-calculator-size type="number" inputmode="decimal" min="0" step="0.1" value="4" class={inputClass} />
+                </div>
+                <input type="range" min="0" step="1" data-pricing-calculator-size-range class={sliderClass} aria-label={m.update_size_mb({}, { locale })} />
+                <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_size_hint({}, { locale })}</p>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="mb-6 overflow-hidden rounded-xl border border-gray-200">
-          <div class="grid grid-cols-4 gap-2 border-b border-gray-200 bg-gray-50 px-3 py-2 text-xs font-semibold text-gray-600 sm:px-4">
-            <span></span>
-            <span>{copy.yourUsage}</span>
-            <span data-pricing-calculator-included-label>{copy.includedInPlan}</span>
-            <span>{copy.billableOverage}</span>
-          </div>
-          <div class="divide-y divide-gray-200 text-sm">
-            <div class="grid grid-cols-4 gap-2 px-3 py-3 sm:px-4">
-              <span class="font-medium text-gray-700">MAU</span>
-              <span data-pricing-calculator-usage-mau class="text-gray-900">—</span>
-              <span data-pricing-calculator-included-mau class="text-gray-900">—</span>
-              <span data-pricing-calculator-overage-mau class="font-medium text-gray-900">—</span>
-            </div>
-            <div class="grid grid-cols-4 gap-2 px-3 py-3 sm:px-4">
-              <span class="font-medium text-gray-700">{copy.bandwidth}</span>
-              <span data-pricing-calculator-usage-bandwidth class="text-gray-900">—</span>
-              <span data-pricing-calculator-included-bandwidth class="text-gray-900">—</span>
-              <span data-pricing-calculator-overage-bandwidth class="font-medium text-gray-900">—</span>
-            </div>
-            <div class="grid grid-cols-4 gap-2 px-3 py-3 sm:px-4">
-              <span class="font-medium text-gray-700">{copy.storage}</span>
-              <span data-pricing-calculator-usage-storage class="text-gray-900">—</span>
-              <span data-pricing-calculator-included-storage class="text-gray-900">—</span>
-              <span data-pricing-calculator-overage-storage class="font-medium text-gray-900">—</span>
-            </div>
-          </div>
-        </div>
+            <fieldset>
+              <legend class="mb-3 font-mono text-xs font-semibold tracking-wider text-gray-400 uppercase">{m.pricing_calculator_choose_plan({}, { locale })}</legend>
+              <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {calculatorPlans.map((plan) => (
+                  <label class="relative flex min-h-16 cursor-pointer flex-col justify-center rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2 transition-colors hover:border-white/20 has-checked:border-blue-500 has-checked:bg-blue-500/10 has-checked:ring-1 has-checked:ring-blue-500 has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
+                    <input type="radio" name="pricing-calculator-plan" value={plan.id} data-pricing-calculator-plan class="sr-only" />
+                    <span class="text-sm font-semibold text-white">{plan.name}</span>
+                    <span class="text-xs text-gray-400 tabular-nums">
+                      <span data-pricing-calculator-plan-price={plan.id}>${plan.price_m}</span>
+                      {perMonth}
+                    </span>
+                    <span
+                      data-pricing-calculator-best-fit={plan.id}
+                      hidden
+                      class="absolute -top-2 right-2 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-semibold text-gray-950"
+                    >
+                      {m.pricing_calculator_best_fit({}, { locale })}
+                    </span>
+                  </label>
+                ))}
+                <label class="relative flex min-h-16 cursor-pointer flex-col justify-center rounded-xl border border-dashed border-white/15 px-3 py-2 transition-colors hover:border-white/25 has-checked:border-blue-500 has-checked:bg-blue-500/10 has-checked:ring-1 has-checked:ring-blue-500 has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
+                  <input type="radio" name="pricing-calculator-plan" value="credits" data-pricing-calculator-plan class="sr-only" />
+                  <span class="text-sm font-semibold text-white">{m.pricing_calculator_credits_only({}, { locale })}</span>
+                  <span class="text-xs text-gray-400">$0{perMonth}</span>
+                </label>
+              </div>
+            </fieldset>
 
-        <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
-            <p data-pricing-calculator-plan-line-label class="text-xs font-medium text-gray-500 uppercase">{copy.planSubscription}</p>
-            <p data-pricing-calculator-plan-line-value class="mt-1 text-2xl font-semibold text-gray-950">—</p>
+            <div class="space-y-2 text-sm text-gray-400" data-pricing-calculator-notes>
+              <p data-pricing-calculator-yearly-note hidden>
+                {m.pricing_calculator_yearly_note({}, { locale })}
+              </p>
+              <p data-pricing-calculator-credits-note hidden>
+                {m.pricing_calculator_credits_only_note({}, { locale })}
+              </p>
+            </div>
           </div>
-          <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
-            <p class="text-xs font-medium text-gray-500 uppercase">{copy.overageCredits}</p>
-            <p data-pricing-calculator-credits-value class="mt-1 text-2xl font-semibold text-gray-950">—</p>
-          </div>
-          <div class="rounded-xl border border-gray-900 bg-gray-900 p-4 text-white">
-            <p data-pricing-calculator-estimated-total-label class="text-xs font-medium text-gray-300 uppercase">{copy.estimatedTotal}</p>
-            <p data-pricing-calculator-total-value class="mt-1 text-2xl font-semibold">—</p>
-            <p data-pricing-calculator-total-period class="mt-1 text-xs text-gray-400">{copy.monthlyTotal}</p>
-          </div>
+
+          <aside
+            class="flex flex-col self-start rounded-2xl border border-white/10 p-6 sm:p-8 md:sticky md:top-0"
+            aria-label={m.pricing_calculator_estimated_total({}, { locale })}
+          >
+            <div aria-live="polite">
+              <p class="font-mono text-xs tracking-wider text-gray-400 uppercase">{m.pricing_calculator_estimated_total({}, { locale })}</p>
+              <p class="mt-2 text-3xl font-semibold tracking-tight text-white" data-pricing-calculator-plan-row>
+                <span data-pricing-calculator-plan-name>—</span>
+              </p>
+              <p class="mt-4 flex items-baseline gap-2">
+                <span class="text-5xl font-semibold tracking-tight text-white tabular-nums" data-pricing-calculator-total>
+                  —
+                </span>
+                <span class="font-mono text-xs tracking-wider text-gray-400 uppercase">{perMonth}</span>
+              </p>
+              <dl class="mt-5 space-y-2 border-t border-white/10 pt-4 text-sm">
+                <div class="flex justify-between gap-3" data-pricing-calculator-plan-row>
+                  <dt class="text-gray-400">
+                    <span data-pricing-calculator-plan-name>—</span>
+                  </dt>
+                  <dd class="font-medium text-gray-200 tabular-nums" data-pricing-calculator-plan-cost>
+                    —
+                  </dd>
+                </div>
+                <div class="flex justify-between gap-3">
+                  <dt class="text-gray-400">{m.pricing_calculator_extra_usage({}, { locale })}</dt>
+                  <dd class="font-medium text-gray-200 tabular-nums" data-pricing-calculator-credits>
+                    —
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <h3 class="mt-7 font-mono text-xs tracking-wider text-gray-400 uppercase">{m.pricing_calculator_usage_vs_plan({}, { locale })}</h3>
+            <ul class="mt-3 space-y-3">
+              {usageRows.map((row) => (
+                <li data-pricing-calculator-usage={row.key} class="flex gap-3">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"></path>
+                  </svg>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-baseline justify-between gap-3 text-sm">
+                      <span class="text-gray-200">{row.label}</span>
+                      <span class="text-gray-300 tabular-nums">
+                        <span data-usage-used>—</span>
+                        <span class="text-gray-500" data-usage-included-wrap>
+                          {' / '}
+                          <span data-usage-included>—</span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
+                      <div data-usage-bar class="h-full rounded-full bg-blue-600 transition-[width] duration-200" style="width: 0%" />
+                    </div>
+                    <p class="mt-1 text-xs text-amber-400" data-usage-over hidden>
+                      <span class="font-semibold tabular-nums" data-usage-over-value /> {m.pricing_calculator_over_plan({}, { locale })}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-8 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#111214] focus:outline-none"
+            >
+              {m.days_free_trial({}, { locale })}
+            </a>
+          </aside>
         </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-4 border-t border-white/10 bg-[#0b0c0e] px-5 py-3 text-white md:hidden" aria-hidden="true">
+        <div>
+          <p class="text-[11px] text-gray-400">
+            <span data-pricing-calculator-plan-name>—</span>
+          </p>
+          <p class="flex items-baseline gap-1.5">
+            <span class="text-2xl font-semibold tabular-nums" data-pricing-calculator-total>
+              —
+            </span>
+            <span class="font-mono text-[10px] tracking-wider text-gray-400 uppercase">{perMonth}</span>
+          </p>
+        </div>
+        <a
+          href={getRelativeLocaleUrl(locale, 'register')}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabindex="-1"
+          class="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-gray-950"
+        >
+          {m.days_free_trial({}, { locale })}
+        </a>
       </div>
     </div>
   </dialog>
 </>
 
-<script define:vars={{ plansJson, apiBaseUrl, copyJson }} is:inline>
-  window.__pricingCalculatorConfig = { plansJson, apiBaseUrl, copyJson }
-</script>
-
+<script id="pricing-calculator-data" type="application/json" set:html={JSON.stringify({ plans: calculatorPlans, steps })}></script>
 <script>
-  import type { PricingCalculatorConfig } from './pricing-calculator.client.ts'
   import { setupPricingCalculator } from './pricing-calculator.client.ts'
 
   function initPricingCalculator() {
-    const config = (window as Window & { __pricingCalculatorConfig?: PricingCalculatorConfig }).__pricingCalculatorConfig
-    if (config) setupPricingCalculator(config)
+    const data = document.getElementById('pricing-calculator-data')?.textContent
+    if (data) setupPricingCalculator(JSON.parse(data))
   }
 
   if (document.readyState === 'loading') {
@@ -281,8 +296,69 @@ const copyJson = JSON.stringify(copy)
 
 <style>
   .pricing-calculator-modal::backdrop {
-    background: rgb(3 7 18 / 0.55);
+    background: rgb(0 0 0 / 0.7);
   }
+  .pricing-calculator-range {
+    --fill: 0%;
+    height: 22px;
+  }
+  .pricing-calculator-range::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(to right, rgb(209 213 219) var(--fill), rgb(255 255 255 / 0.1) var(--fill));
+  }
+  .pricing-calculator-range::-moz-range-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.1);
+  }
+  .pricing-calculator-range::-moz-range-progress {
+    height: 6px;
+    border-radius: 9999px;
+    background: rgb(209 213 219);
+  }
+  .pricing-calculator-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    margin-top: -8px;
+    border-radius: 9999px;
+    border: 2px solid #fff;
+    background: rgb(59 130 246);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.5);
+    transition: transform 120ms ease-out;
+  }
+  .pricing-calculator-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+    border: 2px solid #fff;
+    background: rgb(59 130 246);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.5);
+  }
+  .pricing-calculator-range:active::-webkit-slider-thumb {
+    transform: scale(1.1);
+  }
+  .pricing-calculator-range:focus {
+    outline: none;
+  }
+  .pricing-calculator-range:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px rgb(59 130 246 / 0.45);
+  }
+  .pricing-calculator-range:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 4px rgb(59 130 246 / 0.45);
+  }
+  .pricing-calculator-modal input[type='number']::-webkit-inner-spin-button,
+  .pricing-calculator-modal input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .pricing-calculator-modal input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
   .pricing-calculator-modal:not([open]) {
     display: none;
   }

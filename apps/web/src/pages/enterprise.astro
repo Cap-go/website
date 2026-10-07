@@ -4,12 +4,13 @@ import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
-import TeamAvatars from '@/components/TeamAvatars.astro'
 import type { Database } from '@/services/supabase.types'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import { numberWithSpaces } from '@/services/misc'
 import { pluginCountLabel } from '@/config/plugins'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import { getProductScreens } from '@/config/productScreens'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { capgoReviews, toProductReviewLdJson } from '@/config/productTestimonials'
 import GovernedRollout from '@/components/enterprise/GovernedRollout.astro'
@@ -505,32 +506,17 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </h1>
         <p class="lead hero-lead">{m.enterprise_hero_desc({}, { locale })}</p>
         <div class="hero-ctas">
-          <HumanSupport class="mb-3" size="sm" align="start" />
-          <div class="hero-cta-buttons">
-            <a
-              class="btn btn-lg btn-primary"
-              href="https://book.capgo.app/enterprise-inquiry/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={m.enterprise_talk_to_team({}, { locale })}
-            >
-              <TeamAvatars />
-              <span>{m.enterprise_talk_to_team({}, { locale })}</span>
-            </a>
-            <a class="btn btn-lg btn-ghost" href={getRelativeLocaleUrl(locale, 'pricing')}>{m.view_pricing({}, { locale })}</a>
-          </div>
+          <SignupCta id="enterprise-hero-signup-cta" enterprise />
           <p class="hero-cta-note">{m.enterprise_hero_note({}, { locale })}</p>
         </div>
         <div class="hero-strip enterprise-hero-strip">
-          {
-            heroProofPoints.map((point) => (
-              <div class="hero-strip-cell">
-                <p class="v">{point.value}</p>
-                <p class="k">{point.label}</p>
-                <p class="enterprise-strip-detail">{point.detail}</p>
-              </div>
-            ))
-          }
+          {heroProofPoints.map((point) => (
+            <div class="hero-strip-cell">
+              <p class="v">{point.value}</p>
+              <p class="k">{point.label}</p>
+              <p class="enterprise-strip-detail">{point.detail}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -539,41 +525,37 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
       <div class="shell">
         <p class="eyebrow eyebrow--blue enterprise-proof-caption">{m.trusted_by_the_biggest_capacitor_apps({}, { locale })}</p>
         <div class="enterprise-logo-grid">
-          {
-            customers.map((customer) => (
-              <div class="enterprise-logo-card">
-                <img
-                  src={customer.logo}
-                  alt={`${customer.name} logo`}
-                  width="40"
-                  height="40"
-                  loading="lazy"
-                  decoding="async"
-                  class:list={[{ 'rounded-lg bg-slate-200 p-1': customer.plate }]}
-                />
-                <div>
-                  <p>{customer.name}</p>
-                  <span>
-                    {customer.downloads} {m.downloads({}, { locale })}
-                  </span>
-                </div>
+          {customers.map((customer) => (
+            <div class="enterprise-logo-card">
+              <img
+                src={customer.logo}
+                alt={`${customer.name} logo`}
+                width="40"
+                height="40"
+                loading="lazy"
+                decoding="async"
+                class:list={[{ 'rounded-lg bg-slate-200 p-1': customer.plate }]}
+              />
+              <div>
+                <p>{customer.name}</p>
+                <span>
+                  {customer.downloads} {m.downloads({}, { locale })}
+                </span>
               </div>
-            ))
-          }
+            </div>
+          ))}
         </div>
 
         <div class="enterprise-proof-grid">
           <ul class="enterprise-check-list enterprise-note-list">
-            {
-              enterpriseProofNotes.map((note) => (
-                <li>
-                  <span class="enterprise-check" aria-hidden="true">
-                    ✓
-                  </span>
-                  <span>{note}</span>
-                </li>
-              ))
-            }
+            {enterpriseProofNotes.map((note) => (
+              <li>
+                <span class="enterprise-check" aria-hidden="true">
+                  ✓
+                </span>
+                <span>{note}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -588,15 +570,13 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </div>
 
         <div class="enterprise-card-grid enterprise-card-grid--2">
-          {
-            enterprisePainPoints.map((pain) => (
-              <article class="enterprise-card">
-                <p class="enterprise-card-label">{pain.label}</p>
-                <h3>{pain.title}</h3>
-                <p>{pain.description}</p>
-              </article>
-            ))
-          }
+          {enterprisePainPoints.map((pain) => (
+            <article class="enterprise-card">
+              <p class="enterprise-card-label">{pain.label}</p>
+              <h3>{pain.title}</h3>
+              <p>{pain.description}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -612,23 +592,21 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         <GovernedRollout class="enterprise-rollout" />
 
         <div class="enterprise-card-grid enterprise-card-grid--3 enterprise-pillars">
-          {
-            pillars.map((pillar) => (
-              <article class="enterprise-card enterprise-pillar">
-                <p class="enterprise-card-label">{pillar.eyebrow}</p>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.description}</p>
-                <ul>
-                  {pillar.points.map((point) => (
-                    <li>
-                      <span aria-hidden="true">✓</span>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))
-          }
+          {pillars.map((pillar) => (
+            <article class="enterprise-card enterprise-pillar">
+              <p class="enterprise-card-label">{pillar.eyebrow}</p>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.description}</p>
+              <ul>
+                {pillar.points.map((point) => (
+                  <li>
+                    <span aria-hidden="true">✓</span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
 
         <div class="enterprise-table-wrap" role="table" aria-label={m.enterprise_comparison_title({}, { locale })}>
@@ -637,30 +615,28 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
             <span role="columnheader">{comparisonBeforeLabel}</span>
             <span role="columnheader">{comparisonAfterLabel}</span>
           </div>
-          {
-            enterpriseBeforeAfterRows.map((row) => (
-              <div class="enterprise-table" role="row">
-                <strong role="rowheader" aria-label={`${comparisonUseCaseLabel}: ${row.area}`}>
-                  <span class="enterprise-table-cell-label" aria-hidden="true">
-                    {comparisonUseCaseLabel}
-                  </span>
-                  {row.area}
-                </strong>
-                <p role="cell" aria-label={`${comparisonBeforeLabel}: ${row.before}`}>
-                  <span class="enterprise-table-cell-label" aria-hidden="true">
-                    {comparisonBeforeLabel}
-                  </span>
-                  {row.before}
-                </p>
-                <p class="enterprise-after" role="cell" aria-label={`${comparisonAfterLabel}: ${row.after}`}>
-                  <span class="enterprise-table-cell-label" aria-hidden="true">
-                    {comparisonAfterLabel}
-                  </span>
-                  {row.after}
-                </p>
-              </div>
-            ))
-          }
+          {enterpriseBeforeAfterRows.map((row) => (
+            <div class="enterprise-table" role="row">
+              <strong role="rowheader" aria-label={`${comparisonUseCaseLabel}: ${row.area}`}>
+                <span class="enterprise-table-cell-label" aria-hidden="true">
+                  {comparisonUseCaseLabel}
+                </span>
+                {row.area}
+              </strong>
+              <p role="cell" aria-label={`${comparisonBeforeLabel}: ${row.before}`}>
+                <span class="enterprise-table-cell-label" aria-hidden="true">
+                  {comparisonBeforeLabel}
+                </span>
+                {row.before}
+              </p>
+              <p class="enterprise-after" role="cell" aria-label={`${comparisonAfterLabel}: ${row.after}`}>
+                <span class="enterprise-table-cell-label" aria-hidden="true">
+                  {comparisonAfterLabel}
+                </span>
+                {row.after}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -674,26 +650,22 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </div>
 
         <div class="enterprise-card-grid enterprise-card-grid--3">
-          {
-            enterpriseLevers.map((lever) => (
-              <article class="enterprise-card">
-                <p class="enterprise-metric-value">{lever.metric}</p>
-                <h3>{lever.title}</h3>
-                <p>{lever.description}</p>
-              </article>
-            ))
-          }
+          {enterpriseLevers.map((lever) => (
+            <article class="enterprise-card">
+              <p class="enterprise-metric-value">{lever.metric}</p>
+              <h3>{lever.title}</h3>
+              <p>{lever.description}</p>
+            </article>
+          ))}
         </div>
 
         <div class="enterprise-stat-row" role="group" aria-label={m.global_infrastructure({}, { locale })}>
-          {
-            stats.map((stat) => (
-              <div class="enterprise-stat">
-                <p class="v">{stat.value}</p>
-                <p class="k">{stat.label}</p>
-              </div>
-            ))
-          }
+          {stats.map((stat) => (
+            <div class="enterprise-stat">
+              <p class="v">{stat.value}</p>
+              <p class="k">{stat.label}</p>
+            </div>
+          ))}
         </div>
         <p class="enterprise-stat-note">{m.powered_by_serverless_edge_computing({}, { locale })}</p>
       </div>
@@ -707,20 +679,18 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
             <h2 class="h2-section">{m.enterprise_approval_title({}, { locale })}</h2>
             <p class="lead">{m.enterprise_approval_desc({}, { locale })}</p>
             <ul class="enterprise-check-list">
-              {
-                procurementProofPoints.map((point) => (
-                  <li>
-                    <span class="enterprise-check" aria-hidden="true">
-                      ✓
-                    </span>
-                    <span>
-                      <strong>{point.title}</strong>
-                      <span class="enterprise-check-separator"> - </span>
-                      {point.description}
-                    </span>
-                  </li>
-                ))
-              }
+              {procurementProofPoints.map((point) => (
+                <li>
+                  <span class="enterprise-check" aria-hidden="true">
+                    ✓
+                  </span>
+                  <span>
+                    <strong>{point.title}</strong>
+                    <span class="enterprise-check-separator"> - </span>
+                    {point.description}
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -750,6 +720,19 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
       </div>
     </section>
 
+    <section class="section" id="governance">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">Governance in the product</div>
+          <h2 class="h2-section">The controls your security review asks about</h2>
+          <p class="lead">Org-wide 2FA and password rules, scoped roles per app, and an audit trail for every release change. Real screens from the Capgo console.</p>
+        </div>
+        <div style="margin-top: 44px;">
+          <ProductScreenTour screens={getProductScreens(['security', 'members', 'app-access', 'audit-logs'])} label="Capgo governance views" />
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="partnership">
       <div class="shell">
         <div class="enterprise-panel">
@@ -758,40 +741,28 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
             <h2 class="h2-section">{m.enterprise_partnership_title({}, { locale })}</h2>
             <p class="lead">{m.enterprise_partnership_desc({}, { locale })}</p>
             <ul class="enterprise-check-list">
-              {
-                partnershipProofPoints.map((point) => (
-                  <li>
-                    <span class="enterprise-check" aria-hidden="true">
-                      ✓
-                    </span>
-                    <span>
-                      <strong>{point.title}</strong>
-                      <span class="enterprise-check-separator"> - </span>
-                      {point.description}
-                    </span>
-                  </li>
-                ))
-              }
+              {partnershipProofPoints.map((point) => (
+                <li>
+                  <span class="enterprise-check" aria-hidden="true">
+                    ✓
+                  </span>
+                  <span>
+                    <strong>{point.title}</strong>
+                    <span class="enterprise-check-separator"> - </span>
+                    {point.description}
+                  </span>
+                </li>
+              ))}
             </ul>
-            <div class="enterprise-panel-cta">
-              <HumanSupport size="sm" />
-              <a
-                class="enterprise-text-link"
-                href="https://book.capgo.app/enterprise-inquiry/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={m.enterprise_talk_to_team({}, { locale })}
-              >
-                <span>{m.enterprise_talk_to_team({}, { locale })}</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
+            <SignupCta id="enterprise-partnership-signup-cta" enterprise humanSupport align="start" class="mt-6" />
           </div>
 
           <div class="enterprise-panel-visual enterprise-partnership-visual" role="group" aria-label={m.enterprise_partnership_visual_label({}, { locale })}>
             <p class="enterprise-visual-label">{m.enterprise_partnership_your_team_label({}, { locale })}</p>
             <div class="enterprise-avatar-row" aria-hidden="true">
-              {partnershipYourTeam.map((initial) => <span>{initial}</span>)}
+              {partnershipYourTeam.map((initial) => (
+                <span>{initial}</span>
+              ))}
             </div>
             <div class="enterprise-channel-wrap" aria-hidden="true">
               <span class="enterprise-channel-line"></span>
@@ -799,15 +770,13 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
             </div>
             <p class="enterprise-visual-label enterprise-visual-label--brand">{m.enterprise_partnership_capgo_team_label({}, { locale })}</p>
             <div class="enterprise-team-card-grid">
-              {
-                partnershipCapgoTeam.map((member) => (
-                  <div class="enterprise-team-card">
-                    <img class="enterprise-team-photo" src={member.image} alt={member.name} width="56" height="56" loading="lazy" />
-                    <span class="enterprise-team-name">{member.name}</span>
-                    <span class="enterprise-team-title">{member.title}</span>
-                  </div>
-                ))
-              }
+              {partnershipCapgoTeam.map((member) => (
+                <div class="enterprise-team-card">
+                  <img class="enterprise-team-photo" src={member.image} alt={member.name} width="56" height="56" loading="lazy" />
+                  <span class="enterprise-team-name">{member.name}</span>
+                  <span class="enterprise-team-title">{member.title}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -822,20 +791,18 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
             <h2 class="h2-section">{m.enterprise_plugins_section_title({}, { locale })}</h2>
             <p class="lead">{m.enterprise_plugins_section_desc({ pluginCountLabel }, { locale })}</p>
             <ul class="enterprise-check-list">
-              {
-                enterprisePluginProofPoints.map((point) => (
-                  <li>
-                    <span class="enterprise-check" aria-hidden="true">
-                      ✓
-                    </span>
-                    <span>
-                      <strong>{point.title}</strong>
-                      <span class="enterprise-check-separator"> - </span>
-                      {point.description}
-                    </span>
-                  </li>
-                ))
-              }
+              {enterprisePluginProofPoints.map((point) => (
+                <li>
+                  <span class="enterprise-check" aria-hidden="true">
+                    ✓
+                  </span>
+                  <span>
+                    <strong>{point.title}</strong>
+                    <span class="enterprise-check-separator"> - </span>
+                    {point.description}
+                  </span>
+                </li>
+              ))}
             </ul>
             <div class="enterprise-panel-cta">
               <a class="enterprise-text-link" href={getRelativeLocaleUrl(locale, 'plugins')} aria-label={m.enterprise_plugins_cta({}, { locale })}>
@@ -849,12 +816,16 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
             <div class="enterprise-plugin-map" aria-hidden="true">
               <p class="enterprise-visual-label">{m.enterprise_plugins_visual_before({}, { locale })}</p>
               <div class="enterprise-plugin-chip-row">
-                {enterpriseLegacyPluginLabels.map((label) => <span class="enterprise-plugin-chip enterprise-plugin-chip--legacy">{label}</span>)}
+                {enterpriseLegacyPluginLabels.map((label) => (
+                  <span class="enterprise-plugin-chip enterprise-plugin-chip--legacy">{label}</span>
+                ))}
               </div>
               <span class="enterprise-plugin-arrow">↓</span>
               <p class="enterprise-visual-label enterprise-visual-label--brand">{m.enterprise_plugins_visual_after({}, { locale })}</p>
               <div class="enterprise-plugin-chip-grid">
-                {enterpriseCapgoPluginLabels.map((label) => <span class="enterprise-plugin-chip enterprise-plugin-chip--capgo">{label}</span>)}
+                {enterpriseCapgoPluginLabels.map((label) => (
+                  <span class="enterprise-plugin-chip enterprise-plugin-chip--capgo">{label}</span>
+                ))}
               </div>
             </div>
           </div>
@@ -871,21 +842,19 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </div>
 
         <div class="enterprise-feature-grid">
-          {
-            includedGroups.map((group) => (
-              <article class="enterprise-card enterprise-feature-group">
-                <h3>{group.title}</h3>
-                <ul>
-                  {group.items.map((item) => (
-                    <li>
-                      <span aria-hidden="true">✓</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))
-          }
+          {includedGroups.map((group) => (
+            <article class="enterprise-card enterprise-feature-group">
+              <h3>{group.title}</h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li>
+                    <span aria-hidden="true">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -902,27 +871,25 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
 
         <div class="enterprise-faq-layout">
           <div class="enterprise-faq-grid">
-            {
-              enterpriseFaqItems.map((item, index) => (
-                <details class="enterprise-faq-item" open={index === 0}>
-                  <summary>
-                    <span class="enterprise-faq-index">{String(index + 1).padStart(2, '0')}</span>
-                    <span>{item.question}</span>
-                    <span class="enterprise-faq-plus" aria-hidden="true">
-                      +
-                    </span>
-                  </summary>
-                  <div class="enterprise-faq-answer" aria-live="polite">
-                    <p>{item.answer}</p>
-                    {item.href && item.linkLabel && (
-                      <a class="enterprise-faq-link" href={item.href}>
-                        {item.linkLabel} →
-                      </a>
-                    )}
-                  </div>
-                </details>
-              ))
-            }
+            {enterpriseFaqItems.map((item, index) => (
+              <details class="enterprise-faq-item" open={index === 0}>
+                <summary>
+                  <span class="enterprise-faq-index">{String(index + 1).padStart(2, '0')}</span>
+                  <span>{item.question}</span>
+                  <span class="enterprise-faq-plus" aria-hidden="true">
+                    +
+                  </span>
+                </summary>
+                <div class="enterprise-faq-answer" aria-live="polite">
+                  <p>{item.answer}</p>
+                  {item.href && item.linkLabel && (
+                    <a class="enterprise-faq-link" href={item.href}>
+                      {item.linkLabel} →
+                    </a>
+                  )}
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </div>
@@ -1877,31 +1844,6 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
     color: var(--ent-text);
     font-size: clamp(1rem, 1.4vw, 1.2rem);
     line-height: 1.55;
-  }
-  .enterprise-product #real-app-examples .solution-app-examples-actions a {
-    border-radius: 12px;
-    transition:
-      background-color 0.18s ease,
-      border-color 0.18s ease,
-      color 0.18s ease;
-  }
-  .enterprise-product #real-app-examples .solution-app-examples-primary,
-  .enterprise-product #real-app-examples .solution-app-examples-cta-link {
-    border: 0;
-    background: var(--cap-blue-600);
-    color: #fff;
-    box-shadow: none;
-  }
-  .enterprise-product #real-app-examples .solution-app-examples-primary:hover,
-  .enterprise-product #real-app-examples .solution-app-examples-primary:focus-visible,
-  .enterprise-product #real-app-examples .solution-app-examples-cta-link:hover,
-  .enterprise-product #real-app-examples .solution-app-examples-cta-link:focus-visible {
-    background: var(--cap-blue-700);
-  }
-  .enterprise-product #real-app-examples .solution-app-examples-secondary {
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
   }
   .enterprise-product #real-app-examples .solution-app-examples-meta,
   .enterprise-product #real-app-examples .solution-app-example-card,

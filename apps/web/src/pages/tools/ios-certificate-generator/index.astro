@@ -7,6 +7,7 @@ import ToolHowTo from '@/components/tools/ToolHowTo.astro'
 import ToolRelatedLinks from '@/components/tools/ToolRelatedLinks.astro'
 import { createFAQPageLdJson, createHowToLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
+import SignupCta from '@/components/SignupCta.astro'
 
 const title = 'iOS Certificate Generator: CSR and .p12 Without a Mac'
 const description =
@@ -660,20 +661,7 @@ const benefits = [
           Once the native binary is signed, Capgo live updates can deliver Capacitor web-layer changes over the air—channels, rollback, and any CI/CD you already use.
           Free to try when you are ready to wire OTA into the same release path.
         </p>
-        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-            class="inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-          >
-            Create a Capgo account
-          </a>
-          <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates')}
-            class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/60 hover:bg-white/5"
-          >
-            Read live-update docs
-          </a>
-        </div>
+        <SignupCta id="ios-certificate-generator-signup-cta" align="start" humanSupport class="mt-8" />
       </div>
     </div>
   </section>

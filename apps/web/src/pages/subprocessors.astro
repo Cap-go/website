@@ -30,12 +30,6 @@ const subprocessors = [
     transfer: 'EU Standard Contractual Clauses (SCCs); adequacy decisions where applicable; EU-US DPF/SCCs for US processing',
   },
   {
-    name: 'GitHub, Inc.',
-    purpose: 'Source code hosting and repository access when a customer connects GitHub to Capgo build or automation workflows.',
-    location: 'USA',
-    transfer: 'EU-US Data Privacy Framework (DPF-certified); EU Standard Contractual Clauses (SCCs) as fallback',
-  },
-  {
     name: 'Scaleway SAS',
     purpose: 'Build infrastructure, including macOS build runners, build artifacts, source files needed for native builds, and workflow data.',
     location: 'Paris, France, EU',
@@ -55,12 +49,21 @@ const scopeNotes = [
     body: `Services used by Capgo for its own business purposes, such as payments, email, product analytics, support, error monitoring, or internal code quality. Current examples include ${controllerSideRecipients.join(', ')}.`,
   },
   {
-    title: 'Customer-selected integrations',
-    body: "Third-party services connected by the customer, such as external source control, CI/CD, or webhook destinations, are governed by the customer's relationship with those providers unless Capgo explicitly acts as processor for that integration.",
+    title: 'Customer CI and source control',
+    body: "Customer CI platforms (for example GitHub Actions, GitLab CI, or Bitbucket Pipelines) and source control run in the customer's environment. Capgo does not link customer source repositories or pull source code from GitHub or other hosts on the customer's behalf. Customers call Capgo from CI with API tokens; bundles, native build inputs, and artifacts are submitted through the Capgo CLI or API. Those providers are governed by the customer's relationship with them, not as Capgo DPA sub-processors for repository access.",
+  },
+  {
+    title: 'Other customer-selected integrations',
+    body: "Webhook destinations or other third-party services configured by the customer are governed by the customer's relationship with those providers unless Capgo explicitly acts as processor for that integration.",
   },
 ]
 
 const changeHistory = [
+  {
+    date: '2026-10-05',
+    change:
+      'Removed GitHub, Inc. from the DPA sub-processor list. Capgo does not offer repository linking or pull source from customer GitHub; customer CI submits data to Capgo with API tokens. Clarified customer CI and source control under Not Covered By This List.',
+  },
   {
     date: '2026-06-04',
     change:
@@ -80,14 +83,12 @@ const changeHistory = [
 <Layout content={content}>
   <div class="mx-auto w-full max-w-6xl px-4 py-10 text-slate-100 sm:px-6 sm:py-14 lg:px-8">
     <div class="max-w-3xl">
-      {
-        locale !== defaultLocale && (
-          <p class="mb-5 rounded-md border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-sm leading-6 text-amber-100">
-            Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source
-            for legal matters.
-          </p>
-        )
-      }
+      {locale !== defaultLocale && (
+        <p class="mb-5 rounded-md border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-sm leading-6 text-amber-100">
+          Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source for
+          legal matters.
+        </p>
+      )}
       <p class="text-sm font-semibold tracking-wide text-cyan-300 uppercase">Legal</p>
       <h1 class="mt-3 text-4xl font-bold tracking-normal text-white sm:text-5xl">{m.subprocessors_title({}, { locale })}</h1>
       <p class="mt-5 text-lg leading-8 text-slate-300">
@@ -98,7 +99,7 @@ const changeHistory = [
     <dl class="mt-8 grid gap-3 sm:grid-cols-3">
       <div class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
         <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">{m.last_update({}, { locale })}</dt>
-        <dd class="mt-1 text-base font-semibold text-white">June 4, 2026</dd>
+        <dd class="mt-1 text-base font-semibold text-white">October 5, 2026</dd>
       </div>
       <div class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
         <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Effective Date</dt>
@@ -129,15 +130,13 @@ const changeHistory = [
         <h2 class="text-2xl font-semibold text-white">2. Not Covered By This List</h2>
         <p class="mt-4 text-base leading-8 text-slate-300">These services are not treated as Capgo sub-processors for the DPA list unless Capgo explicitly acts as processor.</p>
       </div>
-      <div class="mt-6 grid gap-4 md:grid-cols-3">
-        {
-          scopeNotes.map((item) => (
-            <article class="rounded-md border border-white/10 bg-slate-950/60 p-5">
-              <h3 class="text-base font-semibold text-white">{item.title}</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-300">{item.body}</p>
-            </article>
-          ))
-        }
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
+        {scopeNotes.map((item) => (
+          <article class="rounded-md border border-white/10 bg-slate-950/60 p-5">
+            <h3 class="text-base font-semibold text-white">{item.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-slate-300">{item.body}</p>
+          </article>
+        ))}
       </div>
     </section>
 
@@ -162,23 +161,29 @@ const changeHistory = [
           <caption class="sr-only">Current sub-processors with processing locations and transfer mechanisms</caption>
           <thead class="bg-white/[0.06] text-xs tracking-wide text-slate-300 uppercase">
             <tr>
-              <th scope="col" class="w-48 px-4 py-3 font-semibold">Name</th>
-              <th scope="col" class="px-4 py-3 font-semibold">Purpose / categories of data processed</th>
-              <th scope="col" class="w-56 px-4 py-3 font-semibold">Processing location</th>
-              <th scope="col" class="w-72 px-4 py-3 font-semibold">Transfer mechanism</th>
+              <th scope="col" class="w-48 px-4 py-3 font-semibold">
+                Name
+              </th>
+              <th scope="col" class="px-4 py-3 font-semibold">
+                Purpose / categories of data processed
+              </th>
+              <th scope="col" class="w-56 px-4 py-3 font-semibold">
+                Processing location
+              </th>
+              <th scope="col" class="w-72 px-4 py-3 font-semibold">
+                Transfer mechanism
+              </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-white/10 bg-slate-950/50 text-slate-300">
-            {
-              subprocessors.map((item) => (
-                <tr class="align-top">
-                  <td class="px-4 py-4 font-semibold text-white">{item.name}</td>
-                  <td class="px-4 py-4 leading-6">{item.purpose}</td>
-                  <td class="px-4 py-4 leading-6">{item.location}</td>
-                  <td class="px-4 py-4 leading-6">{item.transfer}</td>
-                </tr>
-              ))
-            }
+            {subprocessors.map((item) => (
+              <tr class="align-top">
+                <td class="px-4 py-4 font-semibold text-white">{item.name}</td>
+                <td class="px-4 py-4 leading-6">{item.purpose}</td>
+                <td class="px-4 py-4 leading-6">{item.location}</td>
+                <td class="px-4 py-4 leading-6">{item.transfer}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -193,19 +198,21 @@ const changeHistory = [
           <caption class="sr-only">History of changes to the sub-processor list</caption>
           <thead class="bg-white/[0.06] text-xs tracking-wide text-slate-300 uppercase">
             <tr>
-              <th scope="col" class="w-40 px-4 py-3 font-semibold">Date</th>
-              <th scope="col" class="px-4 py-3 font-semibold">Change</th>
+              <th scope="col" class="w-40 px-4 py-3 font-semibold">
+                Date
+              </th>
+              <th scope="col" class="px-4 py-3 font-semibold">
+                Change
+              </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-white/10 bg-slate-950/50 text-slate-300">
-            {
-              changeHistory.map((item) => (
-                <tr class="align-top">
-                  <td class="px-4 py-4 font-semibold text-white">{item.date}</td>
-                  <td class="px-4 py-4 leading-6">{item.change}</td>
-                </tr>
-              ))
-            }
+            {changeHistory.map((item) => (
+              <tr class="align-top">
+                <td class="px-4 py-4 font-semibold text-white">{item.date}</td>
+                <td class="px-4 py-4 leading-6">{item.change}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

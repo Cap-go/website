@@ -2,12 +2,11 @@
 import '@/styles/lu-product.css'
 import '@/styles/compare-page.css'
 import AppLogoStrip from '@/components/AppLogoStrip.astro'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import type { ProductTestimonial } from '@/config/productTestimonials'
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from '@/services/links'
 
 export type ComparisonRowId = 'pricing' | 'ota' | 'native_builds' | 'frameworks' | 'open_source' | 'rollback' | 'support' | 'company'
 
@@ -44,13 +43,12 @@ interface Props {
   video?: { youtubeId: string; title: string; description?: string }
   reviewWall?: boolean
   related?: ComparisonLink[]
-  secondaryCta: ComparisonLink
+  secondaryCta?: ComparisonLink
 }
 
-const { competitor, eyebrow, heading, lead, verdict, rows, sources, better, migration, faq = [], testimonials, video, reviewWall = false, related = [], secondaryCta } = Astro.props
+const { competitor, eyebrow, heading, lead, verdict, rows, sources, better, migration, faq = [], testimonials, video, reviewWall = false, related = [] } = Astro.props
 
 const locale = Astro.locals.locale
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
 
 const rowOrder: Array<{ id: ComparisonRowId; label: string; capgo: string }> = [
   { id: 'pricing', label: m.compare_row_pricing({}, { locale }), capgo: m.compare_capgo_pricing({}, { locale }) },
@@ -83,16 +81,7 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
         </p>
       </div>
       <div class="hero-ctas">
-        <HumanSupport size="sm" align="center" />
-        <div class="hero-cta-buttons">
-          <a class="btn btn-lg btn-primary" href={registerUrl}>
-            {m.compare_cta_start_trial({}, { locale })}
-          </a>
-          <a class="btn btn-lg btn-ghost" href={secondaryCta.href} {...(secondaryCta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-            {secondaryCta.label}
-          </a>
-        </div>
-        <p class="hero-cta-note">{m.product_trial_cta_note({}, { locale })}</p>
+        <SignupCta id="compare-hero-signup-cta" />
       </div>
       <ul class="cmp-meta">
         {heroMeta.map((item) => (
@@ -285,10 +274,7 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
     <div class="shell">
       <h2>{m.compare_cta_title({}, { locale })}</h2>
       <p class="tagline">{m.compare_cta_subtitle({}, { locale })}</p>
-      <HumanSupport class="mb-4" size="sm" />
-      <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>
-        {m.compare_cta_start_trial({}, { locale })}
-      </a>
+      <SignupCta id="compare-final-signup-cta" humanSupport />
       <ul class="cmp-meta">
         <li>{m.compare_meta_teams({}, { locale })}</li>
         <li>{m.compare_meta_devices({}, { locale })}</li>

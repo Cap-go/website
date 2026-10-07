@@ -9,11 +9,12 @@ import Hero from '@/components/Hero.astro'
 import m from '@/copy/messages'
 import HowItWorks from '@/components/HowItWorks.astro'
 import PlatformOverview from '@/components/PlatformOverview.astro'
+import PlatformScreens from '@/components/PlatformScreens.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson, createWebSiteLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import AskAiSection from '@/components/AskAiSection.astro'
-import StorePolicySection from '@/components/StorePolicySection.astro'
+import RiskDebtSection from '@/components/RiskDebtSection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 
 const config = Astro.locals.runtimeConfig
@@ -83,9 +84,10 @@ const content = {
     <Hero />
     <ProblemSolution />
     <PlatformOverview />
+    <PlatformScreens />
     <AgentReadySection />
     <HowItWorks />
-    <StorePolicySection />
+    <RiskDebtSection />
     <GlobalInfrastructure />
     <SharedNumbers />
     <TransparencySection />
