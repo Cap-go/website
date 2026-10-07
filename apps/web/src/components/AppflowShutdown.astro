@@ -2,6 +2,7 @@
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 ---
 
 <!-- Ionic Appflow shutdown notice and migration path, kept to one block -->
@@ -44,13 +45,8 @@ import HumanSupport from '@/components/HumanSupport.astro'
             ))
           }
         </ul>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-            class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-          >
-            {m.cta_start_migration({}, { locale: Astro.locals.locale })}
-          </a>
+        <SignupCta id="appflow-shutdown-signup-cta" align="start" class="mt-8" />
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/upgrade/from-appflow-to-capgo')}
             class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"

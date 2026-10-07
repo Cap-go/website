@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import { createFAQPageLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
@@ -384,18 +385,13 @@ const content = {
             bad releases, channels for staged rollout, maintained plugins for native features, and Capgo Build when a real native binary must be produced. Native-only apps do not
             get that live-update path; every fix waits for a fresh build and store review.
           </p>
-          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <div class="mt-6 flex flex-col items-start gap-6">
+            <SignupCta id="capacitor-app-signup-cta" align="start" />
             <a
               href={getRelativeLocaleUrl(locale, 'native-build')}
               class="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-200"
             >
               Build native apps with Capgo
-            </a>
-            <a
-              href={getRelativeLocaleUrl(locale, 'register')}
-              class="inline-flex items-center justify-center rounded-lg border border-gray-600 px-5 py-3 text-sm font-semibold text-gray-100 transition hover:bg-gray-800"
-            >
-              Start with Capgo
             </a>
           </div>
         </div>

@@ -8,7 +8,7 @@ import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -103,7 +103,6 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
 })
 
 const content = { title, description, ldJSON }
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
 
 const stats: { value: MessageKey; label: MessageKey }[] = [
   { value: 'solutions_lovable_to_mobile_stat1_value', label: 'solutions_lovable_to_mobile_stat1_label' },
@@ -176,14 +175,8 @@ Set up the project so an AI agent can use Capgo's MCP release tools through inst
             </p>
             <h1 class="mt-6 max-w-4xl text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{copy('solutions_lovable_to_mobile_h1')}</h1>
             <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">{copy('solutions_lovable_to_mobile_lead')}</p>
-            <HumanSupport class="mt-6" size="sm" />
-            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
-              <a
-                class="inline-flex min-h-12 items-center justify-center rounded-lg bg-pink-500 px-6 font-semibold text-white transition-colors hover:bg-pink-400 focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
-                href={registerUrl}
-              >
-                {copy('solutions_start_free_trial')}
-              </a>
+            <SignupCta align="start" class="mt-8" />
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
                 class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-6 font-semibold text-slate-200 transition-colors hover:bg-white/10 focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
                 href={tutorialUrl}
@@ -339,14 +332,8 @@ Set up the project so an AI agent can use Capgo's MCP release tools through inst
       <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-white sm:text-4xl">{copy('solutions_lovable_to_mobile_cta_title')}</h2>
         <p class="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-300">{copy('solutions_lovable_to_mobile_cta_subtitle')}</p>
-        <HumanSupport class="mt-6" size="sm" />
-        <div class="mt-4 flex flex-col justify-center gap-3 sm:flex-row">
-          <a
-            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-pink-500 px-6 font-semibold text-white transition-colors hover:bg-pink-400 focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none"
-            href={registerUrl}
-          >
-            {copy('solutions_start_free_trial')}
-          </a>
+        <SignupCta class="mt-8" />
+        <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
           <a
             class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-6 font-semibold text-slate-200 transition-colors hover:bg-white/10 focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none"
             href={tutorialUrl}

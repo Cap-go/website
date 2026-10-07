@@ -5,7 +5,7 @@ import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
 import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
@@ -20,7 +20,6 @@ function copy(key: MessageKey, values: MessageValues = {}) {
 const title = brand + ' | ' + copy('solutions_webapp_to_mobile_title')
 const description = copy('solutions_webapp_to_mobile_description')
 const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
 
 const links = {
   onboarding: { href: docs('getting-started/onboarding/'), label: copy('solutions_webapp_to_mobile_link_onboarding') },
@@ -160,14 +159,8 @@ Inspect the app and return:
             </p>
             <h1 class="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-5xl lg:text-6xl">{copy('solutions_webapp_to_mobile_h1')}</h1>
             <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">{copy('solutions_webapp_to_mobile_lead')}</p>
-            <HumanSupport class="mt-6" size="sm" />
-            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
-              <a
-                class="inline-flex min-h-12 items-center justify-center rounded-lg bg-cyan-500 px-6 font-semibold text-gray-950 transition-colors hover:bg-cyan-300 focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
-                href={registerUrl}
-              >
-                {copy('solutions_start_free_trial')}
-              </a>
+            <SignupCta align="start" class="mt-8" />
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
                 class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-6 font-semibold text-slate-200 transition-colors hover:bg-white/10 focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
                 href="#how-it-works"
@@ -321,23 +314,7 @@ Inspect the app and return:
       <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
         <h2 class="text-3xl font-semibold text-white sm:text-4xl">{copy('solutions_webapp_to_mobile_cta_title')}</h2>
         <p class="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-300">{copy('solutions_webapp_to_mobile_cta_subtitle')}</p>
-        <HumanSupport class="mt-6" size="sm" />
-        <div class="mt-4 flex flex-col justify-center gap-3 sm:flex-row">
-          <a
-            class="inline-flex min-h-12 items-center justify-center rounded-lg bg-cyan-500 px-6 font-semibold text-gray-950 transition-colors hover:bg-cyan-300 focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none"
-            href={registerUrl}
-          >
-            {copy('solutions_start_free_trial')}
-          </a>
-          <a
-            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-6 font-semibold text-slate-200 transition-colors hover:bg-white/10 focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none"
-            href="https://book.capgo.app/demo/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {copy('solutions_talk_to_team')}
-          </a>
-        </div>
+        <SignupCta enterprise class="mt-8" />
       </div>
     </section>
   </div>

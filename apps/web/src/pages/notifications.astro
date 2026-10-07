@@ -7,6 +7,7 @@ import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 import NotificationsStory from '@/components/notifications/NotificationsStory.astro'
 
 const locale = Astro.locals.locale
@@ -15,7 +16,6 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = `${brand} | Native Push Notifications for Capacitor Apps`
 const description =
   'Send native iOS and Android push notifications from Capgo, target users by external ID, track opens and events, update badges, and trigger silent live update checks.'
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
 const pluginUrl = getRelativeLocaleUrl(locale, 'plugins/capacitor-notifications')
@@ -152,9 +152,8 @@ const guidanceChecks = [
           instead of leaving release teams to stitch it together.
         </p>
         <div class="hero-ctas">
-          <HumanSupport class="mb-3" size="sm" align="start" />
+          <SignupCta id="notifications-hero-signup-cta" />
           <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-primary" href={registerUrl}>Start with Capgo</a>
             <a class="btn btn-lg btn-ghost" href={liveUpdateUrl}>See live updates</a>
           </div>
           <p class="hero-cta-note">Native notifications work alongside Capgo Live Updates and channel rollouts.</p>
@@ -338,8 +337,7 @@ provider ready | recipients linked | update check enabled</pre>
           Reach users and move releases forward.
         </h2>
         <p class="tagline">Add native push, badge control, campaign stats, and silent update checks to your Capacitor release workflow.</p>
-        <HumanSupport class="mb-4" size="sm" />
-        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>Start with Capgo</a>
+        <SignupCta id="notifications-final-signup-cta" />
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">+</span> Native iOS and Android push</span>
           <span><span class="check">+</span> Background update checks</span>

@@ -1,0 +1,18 @@
+---
+import Default from '@astrojs/starlight/components/PageSidebar.astro'
+import SignupCta from './SignupCta.astro'
+---
+
+<Default>
+  <slot />
+</Default>
+<div class="docs-sidebar-cta sl-hidden lg:sl-block">
+  <SignupCta id="docs-sidebar-signup-cta" compact />
+</div>
+
+<style>
+  .docs-sidebar-cta {
+    padding: 1rem var(--sl-sidebar-pad-x) 1.5rem;
+    border-top: 1px solid var(--sl-color-hairline);
+  }
+</style>

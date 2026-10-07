@@ -3,9 +3,7 @@ import m, { type MessageKey, type MessageValues } from '@/copy/messages'
 import { solutionAppExamples, type SolutionAppExampleKey } from '@/config/solutionAppExamples'
 import { solutionStoreApps } from '@/config/solutionStoreApps'
 import { renameCat, shortNumber } from '@/services/misc'
-import { getRelativeLocaleUrl } from '@/services/links'
-import TeamAvatars from '@/components/TeamAvatars.astro'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 
 interface Props {
   solution: SolutionAppExampleKey
@@ -22,8 +20,6 @@ const appExamples = example.apps.map((appReference) => ({
   note: copy(appReference.noteKey),
 }))
 const plays = example.playKeys.map((playKey) => copy(playKey))
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
-const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
 const showExampleCtas = solution === 'enterprise'
 ---
 
@@ -35,36 +31,7 @@ const showExampleCtas = solution === 'enterprise'
           <p class="text-sm font-semibold tracking-wide text-[#44BCFF] uppercase">{copy('solution_app_examples_eyebrow')}</p>
           <h2 class="mt-4 text-3xl leading-tight font-semibold tracking-tight text-balance text-white sm:text-5xl">{copy(example.headlineKey)}</h2>
           <p class="mt-5 text-base leading-7 text-pretty text-gray-400 sm:text-lg">{copy(example.useCaseKey)}</p>
-          {showExampleCtas && (
-            <div class="solution-app-examples-actions mt-6 flex flex-col gap-3">
-              <HumanSupport size="sm" align="start" />
-              <div class="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={registerUrl}
-                  class="solution-app-examples-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
-                >
-                  {copy('solutions_get_started')}
-                  <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path
-                      fill-rule="evenodd"
-                      d="M5.22 14.78a.75.75 0 0 1 0-1.06L12.94 6H8.75a.75.75 0 0 1 0-1.5h6a.75.75 0 0 1 .75.75v6a.75.75 0 0 1-1.5 0V7.06l-7.72 7.72a.75.75 0 0 1-1.06 0Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-                <a
-                  href={talkToTeamUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={copy('solutions_talk_to_team')}
-                  class="solution-app-examples-secondary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white px-5 py-3 text-sm font-bold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
-                >
-                  <TeamAvatars />
-                  <span>{copy('solutions_talk_to_team')}</span>
-                </a>
-              </div>
-            </div>
-          )}
+          {showExampleCtas && <SignupCta id="solution-app-examples-signup-cta" enterprise align="start" class="mt-6" />}
         </div>
 
         <div class="solution-app-examples-body mt-12">
@@ -143,15 +110,7 @@ const showExampleCtas = solution === 'enterprise'
               </ul>
             </div>
 
-            <div class="flex flex-col items-start gap-3 lg:items-center">
-              <HumanSupport size="sm" align="start" />
-              <a
-                href={getRelativeLocaleUrl(locale, 'register')}
-                class="solution-app-examples-cta-link inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
-              >
-                {copy('solution_app_examples_cta_button')}
-              </a>
-            </div>
+            <SignupCta id="solution-app-examples-cta-signup" align="start" class="lg:items-center lg:text-center" />
           </aside>
         </div>
       </div>

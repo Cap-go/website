@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { refusalStories, storySubmissionFilePath } from '@/data/appStoreRefusalStories'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 
 const config = Astro.locals.runtimeConfig.public
 const title = 'App Store Refusal Horror Story | Capgo'
@@ -174,14 +174,8 @@ const severityStyles = {
             </p>
           </div>
           <div class="lg:col-span-5">
-            <HumanSupport class="mb-3" size="sm" align="start" />
-            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-              <a
-                href="/register/"
-                class="inline-flex min-h-12 items-center justify-center rounded-md bg-white px-5 text-sm font-black text-zinc-950 transition hover:-translate-y-0.5 hover:bg-red-50 focus:ring-2 focus:ring-red-300 focus:ring-offset-2 focus:ring-offset-zinc-950 focus:outline-none"
-              >
-                Start with Capgo
-              </a>
+            <SignupCta id="horror-story-signup-cta" align="start" />
+            <div class="mt-6 flex">
               <a
                 href="/live-update/"
                 class="inline-flex min-h-12 items-center justify-center rounded-md border border-white/20 px-5 text-sm font-black text-white transition hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 focus:ring-2 focus:ring-red-300 focus:ring-offset-2 focus:ring-offset-zinc-950 focus:outline-none"

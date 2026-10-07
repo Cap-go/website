@@ -6,7 +6,7 @@ import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 import ObserveReleaseHealthDemo from '@/components/observe/ObserveReleaseHealthDemo.astro'
 
 const locale = Astro.locals.locale
@@ -14,7 +14,6 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = brand + ' Observe | Version health after a rollout'
 const description =
   'Compare reported native app health, launch and WebView timing, and version-level signals with release markers for version, channel, and deployment date. Use Logs Insights to investigate errors, versions, and devices.'
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const logsDocsUrl = getRelativeLocaleUrl(locale, 'docs/webapp/logs')
 const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
 
@@ -56,7 +55,7 @@ const screenSignals = [
             <h1>Know when a release needs attention.</h1>
             <p class="observe-statement">See what changed after your rollout, compare health by reported version, and move from a bad signal to the devices and logs behind it.</p>
             <div class="observe-actions">
-              <a class="btn btn-lg btn-primary" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
+              <SignupCta id="observe-hero-signup-cta" align="start" />
               <a class="observe-link" href="#signals">See how Observe works <span aria-hidden="true">↓</span></a>
             </div>
           </div>
@@ -178,8 +177,7 @@ const screenSignals = [
         <p class="eyebrow eyebrow--blue">Observe every rollout</p>
         <h2><span class="name">Ship with proof,</span><br />not just hope.</h2>
         <p class="tagline">Put deployment history, release health, and Logs Insights in one release workflow.</p>
-        <HumanSupport class="mb-4" size="sm" />
-        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{m.cta_start_free({}, { locale })}</a>
+        <SignupCta id="observe-final-signup-cta" />
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">+</span> Deployment history</span>
           <span><span class="check">+</span> Native health</span>
@@ -263,8 +261,8 @@ const screenSignals = [
 
   .observe .observe-actions {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 22px;
     margin-top: 34px;
   }
