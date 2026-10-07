@@ -23,7 +23,6 @@ function copy(key: string, values: MessageValues = {}) {
 
 const title = `${brand} | Ionic and Capacitor Live Updates`
 const description = m.live_update_description({}, { locale })
-const docsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates')
 const dataUrl = getRelativeLocaleUrl(locale, 'data')
 const expoUrl = getRelativeLocaleUrl(locale, 'alternatives/expo')
 
@@ -226,9 +225,6 @@ const featureTiles = [
         <p class="lead hero-lead">{m.live_update_hero_subtitle({}, { locale })}</p>
         <div class="hero-ctas">
           <SignupCta id="live-update-hero-signup-cta" />
-          <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-ghost" href={docsUrl}>{m.live_update_view_docs({}, { locale })}</a>
-          </div>
         </div>
         <div class="hero-meta">
           {
@@ -378,11 +374,6 @@ const featureTiles = [
             </ul>
             <div class="hero-ctas" style="margin-top: 28px; align-items: flex-start;">
               <SignupCta id="live-update-guidance-signup-cta" align="start" />
-              <div class="hero-cta-buttons">
-                <a class="btn btn-md btn-ghost" href={getRelativeLocaleUrl(locale, 'docs/live-updates/compatibility')}>
-                  {m.live_update_guidance_docs_cta({}, { locale })}
-                </a>
-              </div>
             </div>
           </div>
 
@@ -480,7 +471,7 @@ const featureTiles = [
           {m.live_update_cta_title({}, { locale })}
         </h2>
         <p class="tagline">{m.live_update_cta_subtitle({}, { locale })}</p>
-        <SignupCta id="live-update-final-signup-cta" />
+        <SignupCta id="live-update-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">✓</span> {copy('live_update_v2_cta_meta1')}</span>
           <span><span class="check">✓</span> {copy('live_update_v2_cta_meta2')}</span>

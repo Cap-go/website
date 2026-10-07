@@ -1,0 +1,55 @@
+---
+// Copyable prompt that points AI assistants at the plain-text pricing in /pricing.md.
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl.replace(/\/$/, '')
+const pricingMdUrl = `${baseUrl}/pricing.md`
+const prompt = `Read ${pricingMdUrl} to check Capgo pricing, then tell me which plan fits my Capacitor app based on my monthly active users, bandwidth, storage and native builds.`
+---
+
+<div class="ai-pricing-prompt mx-auto mt-12 w-full max-w-2xl text-center">
+  <p class="text-base text-gray-300">Or let your AI assistant compare plans for you:</p>
+  <div class="mt-4 flex items-stretch overflow-hidden rounded-full border border-white/15 bg-white/[0.03] text-left">
+    <code class="min-w-0 flex-1 truncate px-5 py-3.5 font-mono text-sm text-gray-200 sm:px-6" title={prompt}>{prompt}</code>
+    <button
+      type="button"
+      data-ai-pricing-copy
+      data-prompt={prompt}
+      class="flex shrink-0 items-center justify-center border-l border-white/15 px-4 text-gray-300 transition-colors hover:bg-white/5 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none focus-visible:ring-inset sm:px-5"
+      aria-label="Copy prompt"
+    >
+      <svg data-icon-copy class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <rect x="8" y="3" width="8" height="4" rx="1"></rect>
+        <path d="M16 5h1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1"></path>
+      </svg>
+      <svg data-icon-check class="hidden h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+      </svg>
+    </button>
+  </div>
+  <p class="mt-3 text-sm text-gray-400">
+    Reads <a href="/pricing.md" class="font-mono text-blue-300 hover:underline">pricing.md</a>, plain-text pricing for LLMs
+  </p>
+  <p class="sr-only" aria-live="polite" data-ai-pricing-status></p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-ai-pricing-copy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const root = button.closest('.ai-pricing-prompt')
+      const status = root?.querySelector('[data-ai-pricing-status]')
+      try {
+        await navigator.clipboard.writeText(button.dataset.prompt ?? '')
+        button.querySelector('[data-icon-copy]')?.classList.add('hidden')
+        button.querySelector('[data-icon-check]')?.classList.remove('hidden')
+        if (status) status.textContent = 'Prompt copied'
+        ;(window as any).posthog?.capture('pricing_ai_prompt_copy')
+        setTimeout(() => {
+          button.querySelector('[data-icon-copy]')?.classList.remove('hidden')
+          button.querySelector('[data-icon-check]')?.classList.add('hidden')
+          if (status) status.textContent = ''
+        }, 2000)
+      } catch {
+        if (status) status.textContent = 'Copy failed'
+      }
+    })
+  })
+</script>

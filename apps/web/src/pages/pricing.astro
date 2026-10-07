@@ -12,6 +12,7 @@ import type { Database } from '@/services/supabase.types'
 import m from '@/copy/messages'
 import Enterprise from '@/components/enterprise.astro'
 import SignupCta from '@/components/SignupCta.astro'
+import AiPricingPrompt from '@/components/pricing/AiPricingPrompt.astro'
 import { planMonthlyPrice } from '@/lib/planCopy'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { capgoReviews, toProductReviewLdJson } from '@/config/productTestimonials'
@@ -328,7 +329,8 @@ if (plans.length > 0) {
           <h2 id="pricing-final-cta-heading" class="text-3xl leading-tight font-bold text-white sm:text-4xl">
             {m.compare_cta_title({}, { locale })}
           </h2>
-          <SignupCta id="pricing-final-signup-cta" enterprise class="mt-8" />
+          <SignupCta id="pricing-final-signup-cta" enterprise humanSupport class="mt-8" />
+          <AiPricingPrompt />
         </div>
       </section>
     </section>

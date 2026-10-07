@@ -121,14 +121,6 @@ const content = { title, description, ldJSON }
           <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">{m.solutions_startups_hero_subtitle({}, { locale })}</p>
 
           <SignupCta class="mt-10" />
-          <div class="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href={pricingUrl}
-              class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
-            >
-              {m.solutions_startups_see_pricing({}, { locale })}
-            </a>
-          </div>
 
           <!-- Pricing highlight -->
           <div class="mt-8 inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-2 text-emerald-300">
@@ -417,12 +409,7 @@ const content = { title, description, ldJSON }
           <div class="relative text-center">
             <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_startups_cta_title({}, { locale })}</h2>
             <p class="mx-auto mt-4 max-w-2xl text-lg text-emerald-100">{m.solutions_startups_cta_subtitle({}, { locale })}</p>
-            <SignupCta class="mt-8" />
-            <div class="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a href={pricingUrl} class="rounded-xl border border-white/30 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-white/10">
-                {m.solutions_startups_see_pricing({}, { locale })}
-              </a>
-            </div>
+            <SignupCta humanSupport class="mt-8" />
           </div>
         </div>
       </div>

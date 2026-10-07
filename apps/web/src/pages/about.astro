@@ -24,7 +24,6 @@ const aboutUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/about/')}`
 const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
 const pricingUrl = getRelativeLocaleUrl(locale, '/pricing/')
 const contactUrl = getRelativeLocaleUrl(locale, '/contact/')
-const docsUrl = getRelativeLocaleUrl(locale, '/docs/')
 const observeUrl = getRelativeLocaleUrl(locale, '/observe/')
 const nativeBuildUrl = getRelativeLocaleUrl(locale, '/native-build/')
 const complianceDocsUrl = getRelativeLocaleUrl(locale, 'docs/live-updates/compliance/')
@@ -275,14 +274,6 @@ const content = {
 
           <div class="mt-8 flex flex-col items-start gap-6">
             <SignupCta id="about-hero-signup-cta" align="start" tone="light" />
-            <div class="flex flex-col gap-3 sm:flex-row">
-              <a
-                href={docsUrl}
-                class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              >
-                Read the docs
-              </a>
-            </div>
           </div>
         </div>
 
@@ -454,15 +445,7 @@ const content = {
             </div>
 
             <div class="mt-8 flex flex-col items-start gap-6">
-              <SignupCta id="about-founder-signup-cta" align="start" tone="light" />
-              <div class="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="https://capgo.app/blog/birth-of-capgo-revolutionizing-capacitor-app-updates/"
-                  class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-                >
-                  {m.about_read_full_story({}, { locale })}
-                </a>
-              </div>
+              <SignupCta id="about-founder-signup-cta" humanSupport align="start" tone="light" />
             </div>
           </div>
         </div>

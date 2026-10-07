@@ -282,11 +282,6 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         <p class="lead hero-lead">{copy('native_build_v2_hero_lead')}</p>
         <div class="hero-ctas">
           <SignupCta id="native-build-hero-signup-cta" />
-          <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-ghost" href="#how">
-              {copy('native_build_v2_hero_secondary')} ↓
-            </a>
-          </div>
         </div>
         <div class="hero-meta">
           {heroMeta.map((item) => (
@@ -1244,7 +1239,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           {copy('native_build_v2_cta_title')}
         </h2>
         <p class="tagline">{copy('native_build_v2_cta_tagline')}</p>
-        <SignupCta id="native-build-final-signup-cta" />
+        <SignupCta id="native-build-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
           <span>
             <span class="check">✓</span> {copy('native_build_v2_cta_meta1')}

@@ -505,9 +505,6 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         <p class="lead hero-lead">{m.enterprise_hero_desc({}, { locale })}</p>
         <div class="hero-ctas">
           <SignupCta id="enterprise-hero-signup-cta" enterprise />
-          <div class="hero-cta-buttons mt-2">
-            <a class="btn btn-lg btn-ghost" href={getRelativeLocaleUrl(locale, 'pricing')}>{m.view_pricing({}, { locale })}</a>
-          </div>
           <p class="hero-cta-note">{m.enterprise_hero_note({}, { locale })}</p>
         </div>
         <div class="hero-strip enterprise-hero-strip">
@@ -762,7 +759,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
                 ))
               }
             </ul>
-            <SignupCta id="enterprise-partnership-signup-cta" enterprise align="start" class="mt-6" />
+            <SignupCta id="enterprise-partnership-signup-cta" enterprise humanSupport align="start" class="mt-6" />
           </div>
 
           <div class="enterprise-panel-visual enterprise-partnership-visual" role="group" aria-label={m.enterprise_partnership_visual_label({}, { locale })}>

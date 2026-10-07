@@ -1,6 +1,5 @@
 ---
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
 import SignupCta from '@/components/SignupCta.astro'
 ---
@@ -45,21 +44,7 @@ import SignupCta from '@/components/SignupCta.astro'
             ))
           }
         </ul>
-        <SignupCta id="appflow-shutdown-signup-cta" align="start" class="mt-8" />
-        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/upgrade/from-appflow-to-capgo')}
-            class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-          >
-            {m.migration_guide({}, { locale: Astro.locals.locale })}
-          </a>
-          <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'blog/mobile-app-best-practices-2026-live-updates')}
-            class="inline-flex min-h-11 items-center px-2 text-sm font-semibold text-[#44BCFF] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-          >
-            Read 2026 mobile best practices
-          </a>
-        </div>
+        <SignupCta id="appflow-shutdown-signup-cta" humanSupport align="start" class="mt-8" />
       </div>
 
       <div class="flex flex-col items-center justify-center gap-6 bg-white p-8 sm:p-10">

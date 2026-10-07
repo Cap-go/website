@@ -53,11 +53,6 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
           </p>
 
           <SignupCta id="ionic-plugins-hero-signup-cta" enterprise class="mt-10" />
-          <p class="mt-6">
-            <a href={identityVaultMigrationUrl} class="text-sm font-semibold text-blue-400 transition-colors hover:text-blue-300">
-              {m.appflow_plugins_link_text({}, { locale })} →
-            </a>
-          </p>
         </div>
       </div>
     </section>
@@ -470,7 +465,7 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
           <p class="mt-4 text-lg text-gray-400">
             {m.solutions_ionic_plugins_cta_subtitle({}, { locale })}
           </p>
-          <SignupCta id="ionic-plugins-final-signup-cta" enterprise class="mt-8" />
+          <SignupCta id="ionic-plugins-final-signup-cta" enterprise humanSupport class="mt-8" />
         </div>
       </div>
     </section>

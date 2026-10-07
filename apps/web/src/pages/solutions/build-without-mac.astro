@@ -94,7 +94,6 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
 })
 
 const content = { title, description, ldJSON }
-const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
 
 const stats: { value: MessageKey; label: MessageKey }[] = [
   { value: 'solutions_build_without_mac_stat1_value', label: 'solutions_build_without_mac_stat1_label' },
@@ -145,14 +144,6 @@ npx @capgo/cli@latest build request --platform ios
             <h1 class="mt-6 max-w-4xl text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{copy('solutions_build_without_mac_h1')}</h1>
             <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">{copy('solutions_build_without_mac_lead')}</p>
             <SignupCta align="start" class="mt-8" />
-            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-              <a
-                class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-6 font-semibold text-slate-200 transition-colors hover:bg-white/10 focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
-                href={nativeBuildUrl}
-              >
-                {copy('solutions_build_without_mac_secondary_cta')}
-              </a>
-            </div>
             <div class="mt-10 grid gap-3 sm:grid-cols-3">
               {stats.map((stat) => (
                 <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
@@ -293,7 +284,7 @@ npx @capgo/cli@latest build request --platform ios
       <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-white sm:text-4xl">{copy('solutions_build_without_mac_cta_title')}</h2>
         <p class="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-300">{copy('solutions_build_without_mac_cta_subtitle')}</p>
-        <SignupCta enterprise class="mt-8" />
+        <SignupCta enterprise humanSupport class="mt-8" />
       </div>
     </section>
   </div>

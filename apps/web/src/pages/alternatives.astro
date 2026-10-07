@@ -219,11 +219,6 @@ const content = {
         <p class="lead">{m.alternatives_hero_subtitle({}, { locale })}</p>
         <div class="hero-ctas">
           <SignupCta id="alternatives-hero-signup-cta" />
-          <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-ghost" href="#summary">
-              {m.alternatives_hero_summary_cta({}, { locale })}
-            </a>
-          </div>
         </div>
         <ul class="cmp-meta">
           <li>{m.compare_meta_updates({}, { locale })}</li>
@@ -368,7 +363,7 @@ const content = {
       <div class="shell">
         <h2>{m.compare_cta_title({}, { locale })}</h2>
         <p class="tagline">{m.compare_cta_subtitle({}, { locale })}</p>
-        <SignupCta id="alternatives-final-signup-cta" />
+        <SignupCta id="alternatives-final-signup-cta" humanSupport />
         <ul class="cmp-meta">
           <li>{m.compare_meta_teams({}, { locale })}</li>
           <li>{m.compare_meta_devices({}, { locale })}</li>

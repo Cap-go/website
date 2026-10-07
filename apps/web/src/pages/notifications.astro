@@ -16,7 +16,6 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = `${brand} | Native Push Notifications for Capacitor Apps`
 const description =
   'Send native iOS and Android push notifications from Capgo, target users by external ID, track opens and events, update badges, and trigger silent live update checks.'
-const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
 const pluginUrl = getRelativeLocaleUrl(locale, 'plugins/capacitor-notifications')
 
@@ -153,9 +152,6 @@ const guidanceChecks = [
         </p>
         <div class="hero-ctas">
           <SignupCta id="notifications-hero-signup-cta" />
-          <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-ghost" href={liveUpdateUrl}>See live updates</a>
-          </div>
           <p class="hero-cta-note">Native notifications work alongside Capgo Live Updates and channel rollouts.</p>
         </div>
         <div class="hero-meta">
@@ -337,7 +333,7 @@ provider ready | recipients linked | update check enabled</pre>
           Reach users and move releases forward.
         </h2>
         <p class="tagline">Add native push, badge control, campaign stats, and silent update checks to your Capacitor release workflow.</p>
-        <SignupCta id="notifications-final-signup-cta" />
+        <SignupCta id="notifications-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
           <span><span class="check">+</span> Native iOS and Android push</span>
           <span><span class="check">+</span> Background update checks</span>

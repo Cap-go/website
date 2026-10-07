@@ -43,10 +43,10 @@ interface Props {
   video?: { youtubeId: string; title: string; description?: string }
   reviewWall?: boolean
   related?: ComparisonLink[]
-  secondaryCta: ComparisonLink
+  secondaryCta?: ComparisonLink
 }
 
-const { competitor, eyebrow, heading, lead, verdict, rows, sources, better, migration, faq = [], testimonials, video, reviewWall = false, related = [], secondaryCta } = Astro.props
+const { competitor, eyebrow, heading, lead, verdict, rows, sources, better, migration, faq = [], testimonials, video, reviewWall = false, related = [] } = Astro.props
 
 const locale = Astro.locals.locale
 
@@ -82,11 +82,6 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
       </div>
       <div class="hero-ctas">
         <SignupCta id="compare-hero-signup-cta" />
-        <div class="hero-cta-buttons mt-2">
-          <a class="btn btn-lg btn-ghost" href={secondaryCta.href} {...(secondaryCta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-            {secondaryCta.label}
-          </a>
-        </div>
       </div>
       <ul class="cmp-meta">
         {heroMeta.map((item) => (
@@ -279,7 +274,7 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
     <div class="shell">
       <h2>{m.compare_cta_title({}, { locale })}</h2>
       <p class="tagline">{m.compare_cta_subtitle({}, { locale })}</p>
-      <SignupCta id="compare-final-signup-cta" />
+      <SignupCta id="compare-final-signup-cta" humanSupport />
       <ul class="cmp-meta">
         <li>{m.compare_meta_teams({}, { locale })}</li>
         <li>{m.compare_meta_devices({}, { locale })}</li>

@@ -5463,6 +5463,18 @@ const messages = {
     'Storage keeps the retained app bundles and assets needed for rollout, rollback, and deployment history. Historical bundles and Delta assets count toward storage while they are retained. You control unused-bundle retention in your app settings; bundles linked to an active channel or rollout stay protected. Regional replication does not multiply storage: each bundle is counted once, regardless of delivery regions.',
   storage_gb: 'Storage (GiB)',
   storage_what_is_it_used_for: 'What is storage used for and how does it work?',
+  risk_debt_eyebrow: 'Built for production teams',
+  risk_debt_title: 'Reduce risk and technical debt',
+  risk_debt_lead:
+    'Capgo reduces release risk and technical debt by simplifying your mobile stack, automating fragile release workflows, and replacing tribal knowledge with stable defaults, managed infrastructure, and responsive human support.',
+  risk_debt_stack_title: 'One platform instead of glue code',
+  risk_debt_stack_body: 'Live updates, native iOS and Android builds, store publishing, and device logs in one tool, instead of homegrown scripts nobody wants to own.',
+  risk_debt_workflows_title: 'Automated release workflows',
+  risk_debt_workflows_body: 'Upload bundles and request signed native builds from CI with one CLI command. No Mac to maintain, no certificates passed around by hand.',
+  risk_debt_defaults_title: 'Safe defaults out of the box',
+  risk_debt_defaults_body: 'Signed and encrypted bundles, channels for staged rollouts, native compatibility checks, and automatic rollback when an update fails to load.',
+  risk_debt_support_title: 'Engineers who answer',
+  risk_debt_support_body: 'Talk directly to the team that builds Capgo. Real answers from engineers, not a ticket queue.',
   store_policy_apple_body:
     "Apps may download interpreted code if it doesn't change the app's primary purpose, create a storefront for other code or apps, or bypass signing, the sandbox, or other OS security features.",
   store_policy_apple_label: 'Apple Developer Program License Agreement',
