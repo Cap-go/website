@@ -1,0 +1,301 @@
+---
+// Tabbed tour of real Capgo console screenshots (captured from the demo app).
+// Every panel is server-rendered so images and copy stay crawlable; the inline
+// script only toggles which panel is visible.
+import type { ProductScreen } from '@/config/productScreens'
+
+interface Props {
+  screens: ProductScreen[]
+  label: string
+  /** Load the first screenshot eagerly when the tour is above the fold. */
+  eager?: boolean
+}
+
+const { screens, label, eager = false } = Astro.props
+const uid = `tour-${Math.random().toString(36).slice(2, 8)}`
+// A single screen renders as a plain figure: no tab bar, no tab roles.
+const single = screens.length === 1
+---
+
+<div class="screen-tour" data-screen-tour>
+  {!single && (
+    <div class="screen-tour-tabs" role="tablist" aria-label={label}>
+      {screens.map((screen, index) => (
+        <button
+          type="button"
+          role="tab"
+          id={`${uid}-tab-${screen.id}`}
+          aria-controls={`${uid}-panel-${screen.id}`}
+          aria-selected={index === 0 ? 'true' : 'false'}
+          tabindex={index === 0 ? 0 : -1}
+          class="screen-tour-tab"
+          data-tour-tab
+        >
+          <span class="screen-tour-index" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          {screen.label}
+        </button>
+      ))}
+    </div>
+  )}
+
+  {screens.map((screen, index) => (
+    <div
+      role={single ? undefined : 'tabpanel'}
+      id={`${uid}-panel-${screen.id}`}
+      aria-labelledby={single ? undefined : `${uid}-tab-${screen.id}`}
+      class="screen-tour-panel"
+      data-tour-panel
+      hidden={index !== 0}
+    >
+      <div class="screen-tour-copy">
+        <div>
+          <h3>{screen.title}</h3>
+          <p>{screen.text}</p>
+          {screen.href && (
+            <a class="screen-tour-link" href={screen.href}>
+              {screen.linkLabel} <span aria-hidden="true">→</span>
+            </a>
+          )}
+        </div>
+        {screen.points && (
+          <ul>
+            {screen.points.map((point) => (
+              <li>{point}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <figure class="screen-tour-frame">
+        <picture>
+          {screen.mobileImage && <source media="(max-width: 640px)" srcset={screen.mobileImage} width="430" height="860" />}
+          <img
+            src={screen.image}
+            alt={screen.alt}
+            width={screen.width ?? 1440}
+            height={screen.height ?? 900}
+            loading={eager && index === 0 ? 'eager' : 'lazy'}
+            fetchpriority={eager && index === 0 ? 'high' : undefined}
+            decoding="async"
+          />
+        </picture>
+      </figure>
+    </div>
+  ))}
+</div>
+
+<script>
+  function initTour(root: HTMLElement) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-tour-tab]'))
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-tour-panel]'))
+
+    const select = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        const active = i === index
+        tab.setAttribute('aria-selected', String(active))
+        tab.tabIndex = active ? 0 : -1
+        panels[i].hidden = !active
+      })
+      if (focus) tabs[index].focus()
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => select(index))
+      tab.addEventListener('keydown', (event) => {
+        const last = tabs.length - 1
+        const next = { ArrowRight: index === last ? 0 : index + 1, ArrowLeft: index === 0 ? last : index - 1, Home: 0, End: last }[event.key]
+        if (next === undefined) return
+        event.preventDefault()
+        select(next, true)
+      })
+    })
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-screen-tour]').forEach(initTour)
+</script>
+
+<style>
+  .screen-tour {
+    --tour-line: rgba(255, 255, 255, 0.1);
+    --tour-accent: #60a5fa;
+    display: grid;
+    gap: 22px;
+    text-align: left;
+  }
+
+  .screen-tour-tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 5px;
+    border: 1px solid var(--tour-line);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    scrollbar-width: none;
+  }
+
+  .screen-tour-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .screen-tour-tab {
+    display: inline-flex;
+    flex: 1 0 auto;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition-property: background-color, color, box-shadow;
+    transition-duration: 180ms;
+  }
+
+  .screen-tour-index {
+    color: rgba(96, 165, 250, 0.7);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+
+  .screen-tour-tab[aria-selected='true'] {
+    background: rgba(96, 165, 250, 0.14);
+    color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.35);
+  }
+
+  .screen-tour-tab:focus-visible {
+    outline: 2px solid var(--tour-accent);
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) {
+    .screen-tour-tab[aria-selected='false']:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+  }
+
+  .screen-tour-panel {
+    display: grid;
+    gap: 22px;
+  }
+
+  .screen-tour-panel[hidden] {
+    display: none;
+  }
+
+  .screen-tour-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 32px;
+    align-items: start;
+  }
+
+  .screen-tour-copy h3 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .screen-tour-copy p {
+    margin: 10px 0 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 15px;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .screen-tour-copy ul {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .screen-tour-copy li {
+    position: relative;
+    padding-left: 22px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .screen-tour-copy li::before {
+    content: '';
+    position: absolute;
+    top: 0.5em;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #4ade80;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+  }
+
+  .screen-tour-link {
+    display: inline-flex;
+    gap: 8px;
+    margin-top: 14px;
+    color: rgba(191, 219, 254, 0.9);
+    font-size: 14px;
+    font-weight: 700;
+    transition-property: color, transform;
+    transition-duration: 180ms;
+  }
+
+  @media (hover: hover) {
+    .screen-tour-link:hover {
+      color: #fff;
+      transform: translateX(3px);
+    }
+  }
+
+  .screen-tour-frame {
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    background: #111827;
+    box-shadow:
+      0 30px 80px -30px rgba(37, 99, 235, 0.45),
+      0 0 0 6px rgba(255, 255, 255, 0.025);
+  }
+
+  .screen-tour-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 900px) {
+    .screen-tour-copy {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .screen-tour-tab {
+      flex: 0 0 auto;
+      padding: 9px 12px;
+      font-size: 13px;
+    }
+
+    .screen-tour-frame {
+      max-width: 430px;
+      margin-inline: auto;
+      border-radius: 22px;
+    }
+  }
+</style>
