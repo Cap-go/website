@@ -1,0 +1,59 @@
+---
+import m, { type MessageKey } from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const copy = (key: MessageKey) => m[key]({}, { locale })
+const learnUrl = getRelativeLocaleUrl(locale, 'website-live')
+const registerUrl = 'https://console.capgo.app/register/'
+
+const highlights: MessageKey[] = ['website_live_pricing_unlimited_updates', 'website_live_pricing_devices', 'website_live_pricing_no_bandwidth', 'website_live_row_rollback']
+---
+
+<section
+  id="website-live"
+  aria-labelledby="website-live-heading"
+  class="mt-8 scroll-mt-20 overflow-hidden rounded-2xl border border-cyan-300 bg-white shadow-sm ring-1 ring-cyan-100"
+>
+  <div class="grid lg:grid-cols-[1fr_auto]">
+    <div class="border-b border-gray-200 p-6 sm:p-8 lg:border-r lg:border-b-0 lg:p-10">
+      <p class="text-sm font-semibold tracking-wide text-cyan-800 uppercase">{copy('website_live_pricing_eyebrow')}</p>
+      <h2 id="website-live-heading" class="mt-4 text-2xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-3xl">
+        {copy('website_live_pricing_title')}
+      </h2>
+      <p class="mt-4 max-w-2xl text-base leading-7 text-gray-600">{copy('website_live_pricing_body')}</p>
+      <ul class="mt-6 grid gap-3 text-sm leading-6 text-gray-700 sm:grid-cols-2">
+        {highlights.map((key) => (
+          <li class="flex gap-3">
+            <svg class="mt-1 h-4 w-4 shrink-0 text-cyan-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
+            <span>{copy(key)}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-6 text-sm text-gray-600">{copy('website_live_pricing_switch')}</p>
+    </div>
+
+    <div class="flex flex-col justify-center bg-cyan-50/60 p-6 sm:p-8 lg:min-w-80 lg:p-10">
+      <div class="flex items-end gap-1">
+        <span class="text-4xl font-semibold tracking-tight text-gray-950">$12</span>
+        <span class="pb-1 text-sm font-medium text-gray-600">{copy('website_live_price_per_month')}</span>
+      </div>
+      <p class="mt-2 text-xs font-medium text-gray-600">{copy('website_live_price_note')}</p>
+      <a
+        id="pricing-website-live-register"
+        href={registerUrl}
+        class="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+      >
+        {copy('website_live_cta_primary')}
+      </a>
+      <a
+        href={learnUrl}
+        class="mt-3 inline-flex min-h-11 items-center justify-center rounded-full border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-300 hover:bg-gray-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+      >
+        {copy('website_live_pricing_cta_learn')}
+      </a>
+    </div>
+  </div>
+</section>
