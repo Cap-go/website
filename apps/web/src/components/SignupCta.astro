@@ -56,7 +56,7 @@ const isLight = tone === 'light'
     >
       <TeamAvatars size="lg" border={isLight ? 'border-white' : 'border-gray-950'} shadow loading={false} />
       <p class="m-0">
-        Enterprise needs?{' '}
+        {m.enterprise_needs_prompt({}, { locale })}{' '}
         <a
           href={teamUrl}
           target="_blank"

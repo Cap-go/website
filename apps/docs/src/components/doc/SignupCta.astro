@@ -40,7 +40,7 @@ const avatars = ['/avatars/jordan-96.webp', '/avatars/martin-96.webp', '/avatars
         ))}
       </span>
       <p>
-        Enterprise needs?{' '}
+        {m.enterprise_needs_prompt({}, { locale })}{' '}
         <a href="https://book.capgo.app/demo/" target="_blank" rel="noopener noreferrer">
           {m.enterprise_talk_to_team({}, { locale })}
         </a>

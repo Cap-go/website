@@ -1764,6 +1764,7 @@ const messages = {
   enterprise_stripe_payment_options: 'Stripe payment options',
   enterprise_support: 'Enterprise Support',
   enterprise_support_onboarding: 'Support and onboarding',
+  enterprise_needs_prompt: 'Enterprise needs?',
   enterprise_talk_to_team: 'Talk to our team',
   enterprise_title: 'Enterprise',
   enterprise_unlimited_apps_members_teams: 'Unlimited apps, members, and teams',
