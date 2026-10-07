@@ -2,7 +2,7 @@
 // Tabbed tour of real Capgo console screenshots (captured from the demo app).
 // Every panel is server-rendered so images and copy stay crawlable; the inline
 // script only toggles which panel is visible.
-import type { ProductScreen } from '@/config/observeScreens'
+import type { ProductScreen } from '@/config/productScreens'
 
 interface Props {
   screens: ProductScreen[]
@@ -13,31 +13,42 @@ interface Props {
 
 const { screens, label, eager = false } = Astro.props
 const uid = `tour-${Math.random().toString(36).slice(2, 8)}`
+// A single screen renders as a plain figure: no tab bar, no tab roles.
+const single = screens.length === 1
 ---
 
 <div class="screen-tour" data-screen-tour>
-  <div class="screen-tour-tabs" role="tablist" aria-label={label}>
-    {screens.map((screen, index) => (
-      <button
-        type="button"
-        role="tab"
-        id={`${uid}-tab-${screen.id}`}
-        aria-controls={`${uid}-panel-${screen.id}`}
-        aria-selected={index === 0 ? 'true' : 'false'}
-        tabindex={index === 0 ? 0 : -1}
-        class="screen-tour-tab"
-        data-tour-tab
-      >
-        <span class="screen-tour-index" aria-hidden="true">
-          {String(index + 1).padStart(2, '0')}
-        </span>
-        {screen.label}
-      </button>
-    ))}
-  </div>
+  {!single && (
+    <div class="screen-tour-tabs" role="tablist" aria-label={label}>
+      {screens.map((screen, index) => (
+        <button
+          type="button"
+          role="tab"
+          id={`${uid}-tab-${screen.id}`}
+          aria-controls={`${uid}-panel-${screen.id}`}
+          aria-selected={index === 0 ? 'true' : 'false'}
+          tabindex={index === 0 ? 0 : -1}
+          class="screen-tour-tab"
+          data-tour-tab
+        >
+          <span class="screen-tour-index" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          {screen.label}
+        </button>
+      ))}
+    </div>
+  )}
 
   {screens.map((screen, index) => (
-    <div role="tabpanel" id={`${uid}-panel-${screen.id}`} aria-labelledby={`${uid}-tab-${screen.id}`} class="screen-tour-panel" data-tour-panel hidden={index !== 0}>
+    <div
+      role={single ? undefined : 'tabpanel'}
+      id={`${uid}-panel-${screen.id}`}
+      aria-labelledby={single ? undefined : `${uid}-tab-${screen.id}`}
+      class="screen-tour-panel"
+      data-tour-panel
+      hidden={index !== 0}
+    >
       <div class="screen-tour-copy">
         <div>
           <h3>{screen.title}</h3>
@@ -62,8 +73,8 @@ const uid = `tour-${Math.random().toString(36).slice(2, 8)}`
           <img
             src={screen.image}
             alt={screen.alt}
-            width="1440"
-            height="900"
+            width={screen.width ?? 1440}
+            height={screen.height ?? 900}
             loading={eager && index === 0 ? 'eager' : 'lazy'}
             fetchpriority={eager && index === 0 ? 'high' : undefined}
             decoding="async"

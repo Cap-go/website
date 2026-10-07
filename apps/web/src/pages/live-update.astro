@@ -14,7 +14,7 @@ import SignupCta from '@/components/SignupCta.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
-import { getObserveScreens } from '@/config/observeScreens'
+import { getProductScreens } from '@/config/productScreens'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -154,7 +154,8 @@ const comparisonRows = [
 ]
 
 const observeUrl = getRelativeLocaleUrl(locale, 'observe')
-const releaseScreens = getObserveScreens(['live-release', 'update-health', 'compatibility']).map((screen) => ({
+const controlScreens = getProductScreens(['rollout', 'channels', 'bundle-dependencies', 'device-history'])
+const releaseScreens = getProductScreens(['live-release', 'update-health', 'compatibility']).map((screen) => ({
   ...screen,
   href: observeUrl,
   linkLabel: 'Explore Capgo Observe',
@@ -302,6 +303,20 @@ const featureTiles = [
               <li>{item}</li>
             ))}
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLLOUT CONTROL -->
+    <section class="section" id="rollout-control">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">Release control</div>
+          <h2 class="h2-section">Decide who gets each update, and take it back fast</h2>
+          <p class="lead">Channels, progressive rollouts, native dependency checks, and per-device history, all in the console. Real screens from the Capgo demo app.</p>
+        </div>
+        <div style="margin-top: 44px;">
+          <ProductScreenTour screens={controlScreens} label="Capgo release control views" />
         </div>
       </div>
     </section>

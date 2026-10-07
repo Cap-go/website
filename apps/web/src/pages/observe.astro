@@ -8,7 +8,7 @@ import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
-import { getObserveScreens } from '@/config/observeScreens'
+import { getProductScreens } from '@/config/productScreens'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -39,7 +39,7 @@ const proofPoints = [
   ['Follow the evidence in Logs', 'Use grouped failures, affected versions, devices, and action logs to investigate a trend.'],
 ]
 
-const tourScreens = getObserveScreens(['live-release', 'update-health', 'native-health', 'compatibility', 'plugins', 'logs'])
+const tourScreens = getProductScreens(['live-release', 'update-health', 'native-health', 'compatibility', 'plugins', 'logs'])
 
 const screenSignals = [
   ['01', 'All versions summary', 'Read issue-free devices, native issues, launch P90, and WebView P90 before narrowing your investigation.'],

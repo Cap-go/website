@@ -2,14 +2,21 @@
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
-import { getObserveScreens } from '@/config/observeScreens'
+import { getProductScreens } from '@/config/productScreens'
 
 const locale = Astro.locals.locale
-const observeUrl = getRelativeLocaleUrl(locale, 'observe')
-const screens = getObserveScreens(['live-release', 'update-health', 'native-health', 'compatibility']).map((screen) => ({
+// Each tab links to the product page that sells that part of the platform.
+const link = (href: string, label: string) => ({ href: getRelativeLocaleUrl(locale, href), linkLabel: label })
+const screens = getProductScreens(['rollout', 'live-release', 'update-health', 'compatibility', 'builds', 'notifications']).map((screen) => ({
   ...screen,
-  href: observeUrl,
-  linkLabel: m.platform_screens_cta({}, { locale }),
+  ...{
+    rollout: link('live-update', 'Explore Live Updates'),
+    'live-release': link('observe', m.platform_screens_cta({}, { locale })),
+    'update-health': link('observe', m.platform_screens_cta({}, { locale })),
+    compatibility: link('observe', m.platform_screens_cta({}, { locale })),
+    builds: link('native-build', 'Explore Native Build'),
+    notifications: link('notifications', 'Explore Notifications'),
+  }[screen.id],
 }))
 ---
 
