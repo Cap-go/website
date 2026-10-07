@@ -5,7 +5,6 @@ import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
 import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createFAQPageLdJson, createLdJsonGraph, createProductLdJson, createServiceLdJson } from '@/lib/ldJson'
-import { capgoReviews, toProductReviewLdJson } from '@/config/productTestimonials'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
@@ -78,7 +77,6 @@ const productLdJson = createProductLdJson(config, {
     { name: 'Website Live monthly', price: '12', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
     { name: 'Website Live yearly', price: '120', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
   ],
-  reviews: toProductReviewLdJson(capgoReviews),
 })
 
 const ldJSON = createLdJsonGraph(config, serviceLdJson, {

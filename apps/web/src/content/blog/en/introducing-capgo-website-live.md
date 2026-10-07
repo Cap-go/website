@@ -76,7 +76,7 @@ If a website change depends on a new native plugin, you still need to ship a new
 
 ## What about App Store rules?
 
-Website Live downloads HTML, CSS and JavaScript that runs in the WebView, the same thing Capgo live updates have always done. Apple allows downloaded interpreted code when it runs in WebKit and does not change the primary purpose of the app (section 3.3.2 of the Developer Program License Agreement). Guideline 4.2 still applies to every app: it needs to be more than a repackaged website. Our [compliance guide](/docs/live-updates/compliance/) goes into more detail.
+Website Live downloads HTML, CSS and JavaScript that runs in the WebView, the same thing Capgo live updates have always done. Apple allows downloaded interpreted code as long as it does not change the primary purpose of the app, bypass the security of the operating system, or create a store for other code (section 3.3.1(B) of the Developer Program License Agreement). Guideline 4.2 still applies to every app: it needs to be more than a repackaged website. Our [compliance guide](/docs/live-updates/compliance/) goes into more detail.
 
 ## When you need more
 
