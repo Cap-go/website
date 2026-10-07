@@ -2,8 +2,8 @@
  * Generate downloadable Capgo brand assets under apps/web/public/brand/.
  * Usage: bun run generate:brand-assets
  */
-import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { zipSync } from 'fflate'
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import sharp from '../apps/web/node_modules/sharp'
 import { BRAND_BANNER_NAVY, BRAND_ICON_NAVY, capgoIconMarkOnlySvg, capgoIconSvg, capgoLockupSvg } from './lib/capgo-lockup-svg'
@@ -123,15 +123,13 @@ async function main() {
   await exportWebpAsPng(join(PUBLIC, 'capgo_logo.webp'), join(OUT_DIR, 'capgo-lockup-white-transparent-optimized.png'), 2400)
 
   const zipPath = join(OUT_DIR, 'capgo-brand-assets.zip')
-  if (commandExists('zip')) {
-    const files = readdirSync(OUT_DIR).filter((name) => name !== 'capgo-brand-assets.zip' && !name.endsWith('-source.png'))
-    const result = spawnSync('zip', ['-j', zipPath, ...files.map((f) => join(OUT_DIR, f))], { cwd: OUT_DIR, stdio: 'inherit' })
-    if (result.status === 0) {
-      console.log(`Generated ${zipPath}`)
-    }
-  } else {
-    console.warn('zip CLI not found; skipping capgo-brand-assets.zip')
+  const zipEntries = readdirSync(OUT_DIR).filter((name) => name !== 'capgo-brand-assets.zip' && !name.endsWith('-source.png'))
+  const zipPayload: Record<string, Uint8Array> = {}
+  for (const name of zipEntries) {
+    zipPayload[name] = new Uint8Array(readFileSync(join(OUT_DIR, name)))
   }
+  writeFileSync(zipPath, zipSync(zipPayload))
+  console.log(`Generated ${zipPath}`)
 }
 
 main().catch((error) => {

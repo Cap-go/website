@@ -124,6 +124,7 @@
     "faiss-node": "^0.5.1",
     "fast-glob": "^3.3.3",
     "fast-xml-parser": "^5.11.1",
+    "fflate": "^0.8.3",
     "gray-matter": "^4.0.3",
     "js-yaml": "4.3.2",
     "linkify-it": "^6.1.0",
