@@ -47,10 +47,6 @@ const svgAssets: { name: string; body: string }[] = [
   },
 ]
 
-function commandExists(command: string) {
-  return spawnSync('/bin/sh', ['-lc', `command -v ${command}`], { stdio: 'ignore' }).status === 0
-}
-
 async function rasterizeSvg(svg: string, output: string, width: number, height?: number) {
   mkdirSync(dirname(output), { recursive: true })
   const pipeline = sharp(Buffer.from(svg)).png({ compressionLevel: 9, adaptiveFiltering: true })
