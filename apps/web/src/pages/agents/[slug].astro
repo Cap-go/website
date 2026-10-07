@@ -169,9 +169,8 @@ const content = {
 ---
 
 <Layout content={content}>
-  <div class="agent-page bg-gray-950 text-gray-200">
-    <section class="relative overflow-hidden border-b border-white/10 py-16 sm:py-20">
-      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(68,188,255,0.18),transparent_60%)]" aria-hidden="true"></div>
+  <div class="agent-page hero-wash text-gray-200">
+    <section class="relative overflow-hidden bg-gray-900 py-16 sm:py-20">
       <div class="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" class="mb-8 flex justify-center text-sm text-gray-400">
           <ol class="flex items-center gap-2">
@@ -211,7 +210,7 @@ const content = {
       </div>
     </section>
 
-    <section id="setup" aria-labelledby="setup-title" class="scroll-mt-20 py-16 sm:py-20">
+    <section id="setup" aria-labelledby="setup-title" class="bg-gray-900 scroll-mt-20 py-16 sm:py-20">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <h2 id="setup-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           {copy('agents_page_setup_title')}
@@ -288,7 +287,7 @@ const content = {
       </div>
     </section>
 
-    <section id="release-loop" aria-labelledby="loop-title" class="scroll-mt-20 py-16 sm:py-20">
+    <section id="release-loop" aria-labelledby="loop-title" class="bg-gray-900 scroll-mt-20 py-16 sm:py-20">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <h2 id="loop-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           {copy('agents_page_loop_title')}
@@ -309,7 +308,7 @@ const content = {
       </div>
     </section>
 
-    <section id="notes" aria-labelledby="notes-title" class="scroll-mt-20 border-t border-white/10 py-16 sm:py-20">
+    <section id="notes" aria-labelledby="notes-title" class="bg-gray-900 scroll-mt-20 border-t border-white/10 py-16 sm:py-20">
       <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <h2 id="notes-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           {copy('agents_page_notes_title')}
@@ -333,7 +332,7 @@ const content = {
 
     <SolutionFaq id="faq" eyebrow={copy('agents_page_faq_eyebrow')} title={copy('agents_page_faq_title')} items={faqItems} class="border-t border-white/10 bg-gray-900" />
 
-    <section aria-labelledby="cta-title" class="py-16 sm:py-20">
+    <section aria-labelledby="cta-title" class="bg-gray-900 py-16 sm:py-20">
       <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
         <h2 id="cta-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           {copy('agents_page_cta_title')}
@@ -355,7 +354,7 @@ const content = {
       </div>
     </section>
 
-    <section class="pb-20">
+    <section class="bg-gray-900 pb-20">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <ConversionRelatedLinks title={copy('agents_page_related_title')} links={relatedLinks} />
       </div>

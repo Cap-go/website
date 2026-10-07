@@ -109,9 +109,8 @@ const relatedLinks = [
 ---
 
 <Layout content={content}>
-  <div class="bg-gray-950 text-gray-200">
-    <section class="relative overflow-hidden border-b border-white/10 py-16 sm:py-20">
-      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(68,188,255,0.18),transparent_60%)]" aria-hidden="true"></div>
+  <div class="hero-wash text-gray-200">
+    <section class="relative overflow-hidden bg-gray-900 py-16 sm:py-20">
       <div class="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
         <h1 class="text-4xl font-bold tracking-tight text-balance text-white sm:text-5xl">{copy('agents_hub_h1')}</h1>
         <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-pretty text-gray-300">{copy('agents_hub_subtitle')}</p>
@@ -121,7 +120,7 @@ const relatedLinks = [
       </div>
     </section>
 
-    <section id="agents" aria-labelledby="agents-grid-title" class="scroll-mt-20 py-16 sm:py-20">
+    <section id="agents" aria-labelledby="agents-grid-title" class="bg-gray-900 scroll-mt-20 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 id="agents-grid-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           {copy('agents_hub_grid_title')}
@@ -197,7 +196,7 @@ const relatedLinks = [
       </div>
     </section>
 
-    <section aria-labelledby="hub-cta-title" class="py-16 sm:py-20">
+    <section aria-labelledby="hub-cta-title" class="bg-gray-900 py-16 sm:py-20">
       <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
         <h2 id="hub-cta-title" class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           {copy('agents_hub_cta_title')}
@@ -208,7 +207,7 @@ const relatedLinks = [
       </div>
     </section>
 
-    <section class="pb-20">
+    <section class="bg-gray-900 pb-20">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <ConversionRelatedLinks title={copy('agents_page_related_title')} links={relatedLinks} />
       </div>
