@@ -6,6 +6,7 @@ import CreditPricing from '@/components/pricing/CreditPricing.astro'
 import Faq from '@/components/pricing/Faq.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import Plans from '@/components/pricing/Plans.astro'
+import WebsiteLivePlan from '@/components/pricing/WebsiteLivePlan.astro'
 import PricingExplainer from '@/components/pricing/PricingExplainer.astro'
 import { createLdJsonGraph, createProductLdJson, createFAQPageLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
@@ -87,7 +88,7 @@ if (plans.length > 0) {
       {
         question: 'Do all plans include the same features?',
         answer:
-          'Yes for core products. Every plan includes Live Updates, Native Builds, Notifications, Observe, Capgo plugins, and Automations. Capgo does not charge per seat or lock those products behind higher tiers. Plans differ by usage limits and support. Enterprise covers extras that take more of our time, such as SSO, custom domains, compliance paperwork, and dedicated support.',
+          'Yes for core products. Every full Capgo plan includes Live Updates, Native Builds, Notifications, Observe, Capgo plugins, and Automations. Website Live is the exception: it only updates your app from your website, without channels, stats, encryption or Native Builds. Capgo does not charge per seat or lock those products behind higher tiers. Plans differ by usage limits and support. Enterprise covers extras that take more of our time, such as SSO, custom domains, compliance paperwork, and dedicated support.',
       },
       {
         question: 'Can I change my plan at any time?',
@@ -161,6 +162,8 @@ if (plans.length > 0) {
         </div>
 
         {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} credits={credits} />}
+
+        <WebsiteLivePlan yearly={yearly} />
 
         {plans && plans.length > 0 && <PricingExplainer plans={plans} />}
 
