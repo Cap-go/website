@@ -73,7 +73,11 @@ if (attestationSupported) {
     if (!challengeResponse.ok) {
       throw new Error(`Challenge request failed with ${challengeResponse.status}`);
     }
-    const { challenge } = (await challengeResponse.json()) as { challenge: string };
+    const challengeBody = await challengeResponse.json();
+    if (typeof challengeBody.challenge !== 'string' || challengeBody.challenge.length === 0) {
+      throw new Error('Backend response missing challenge');
+    }
+    const challenge = challengeBody.challenge;
 
     const registration = await DeviceIntegrity.createAttestation({
       keyId: prepared.keyId,
@@ -86,7 +90,11 @@ if (attestationSupported) {
     if (!payloadResponse.ok) {
       throw new Error(`Payload request failed with ${payloadResponse.status}`);
     }
-    const { payload } = (await payloadResponse.json()) as { payload: string };
+    const payloadBody = await payloadResponse.json();
+    if (typeof payloadBody.payload !== 'string' || payloadBody.payload.length === 0) {
+      throw new Error('Backend response missing payload');
+    }
+    const payload = payloadBody.payload;
 
     const assertion = await DeviceIntegrity.createAssertion({
       keyId: prepared.keyId,
