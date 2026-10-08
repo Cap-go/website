@@ -5,8 +5,6 @@ import Toastify from 'toastify-js'
 
 const form = document.getElementById('registerForm')
 const email = document.getElementById('email') as HTMLInputElement
-const firstName = document.getElementById('firstName') as HTMLInputElement
-const lastName = document.getElementById('lastName') as HTMLInputElement
 const password = document.getElementById('password') as HTMLInputElement
 const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement
 
@@ -57,13 +55,6 @@ function isValidEmail(email: string): boolean {
   return emailRegex.test(email)
 }
 
-function isValidName(name: string): boolean {
-  // Allow Unicode letters from all languages, spaces, hyphens, and apostrophes
-  // Rejects numbers, URLs, and most special characters while supporting international names
-  const nameRegex = /^[\p{L}\s'-]+$/u
-  return nameRegex.test(name) && name.trim().length > 0
-}
-
 form?.addEventListener('submit', async (e) => {
   e.preventDefault()
   if (isSubmitting || submitButton.disabled) return
@@ -73,26 +64,6 @@ form?.addEventListener('submit', async (e) => {
   if (!isValidEmail(email.value.trim())) {
     return Toastify({
       text: 'Please enter a valid email address',
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-
-  // Validate first name
-  if (!isValidName(firstName.value)) {
-    return Toastify({
-      text: 'First name can only contain letters, spaces, hyphens, and apostrophes',
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-
-  // Validate last name
-  if (!isValidName(lastName.value)) {
-    return Toastify({
-      text: 'Last name can only contain letters, spaces, hyphens, and apostrophes',
       style: {
         background: '#e7000b',
       },
@@ -151,8 +122,6 @@ form?.addEventListener('submit', async (e) => {
     options: {
       captchaToken: getCaptchaId(),
       data: {
-        first_name: firstName.value,
-        last_name: lastName.value,
         ...registrationDevice,
         ...websiteDesignSignupMetadata(),
         ref: new URLSearchParams(window.location.search).get('ref') ?? undefined,
@@ -197,16 +166,12 @@ form?.addEventListener('submit', async (e) => {
     ;(window as any).posthog.capture('user_signed_up', {
       signup_confirmation: 'client',
       email: email.value,
-      first_name: firstName.value,
-      last_name: lastName.value,
     })
   }
   if ((window as any).Affonso?.signup) {
-    const fullName = `${firstName.value} ${lastName.value}`.trim()
     ;(window as any).Affonso.signup({
       email: email.value,
       externalUserId: (user as any)?.user?.id,
-      name: fullName || undefined,
     })
   }
   const consoleUrl = `https://console.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
