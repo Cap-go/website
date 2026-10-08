@@ -56,6 +56,9 @@
     // Cloudflare owns this assignment; avoid a second independent flag evaluation.
     advanced_disable_feature_flags: true,
     loaded: function (ph) {
+      // Attribution for README / docs links (?ref=plugin_xxx): stick to every later event, incl. user_signed_up.
+      const ref = (window.location.search || '').match(/[?&]ref=([^&#]+)/)?.[1]
+      if (ref) ph.register_once({ ref })
       const read = (name) => document.querySelector('meta[name="' + name + '"]')?.content
       const experiment = read('website-design-experiment')
       const variant = read('website-design-variant')

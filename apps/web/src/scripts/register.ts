@@ -155,6 +155,7 @@ form?.addEventListener('submit', async (e) => {
         last_name: lastName.value,
         ...registrationDevice,
         ...websiteDesignSignupMetadata(),
+        ref: new URLSearchParams(window.location.search).get('ref') ?? undefined,
       },
     },
   })
