@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-08T08:37:30.117Z
-updated_at: 2026-10-08T08:37:31.957Z
+updated_at: 2026-10-08T08:40:39.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/71d60611-841e-465a-9450-a17e0872039e/what-is-rollback-software-deployment.jpg'
 head_image_alt: What Is Rollback in Software Deployments
 keywords: 'what is rollback, software deployment, mobile app updates, release management, CapacitorJS'
