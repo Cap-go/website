@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-08T09:30:00.000Z
-updated_at: 2026-10-08T09:30:00.000Z
+updated_at: 2026-10-08T13:30:13.000Z
 head_image: /build_list.webp
 head_image_alt: "Build an iOS App from Linux with Capacitor and Capgo Build Capgo blog illustration"
 keywords: Linux, iOS, Capacitor, Capgo Build, cloud build, TestFlight, Ubuntu iOS build, no Mac, OpenSSL certificate

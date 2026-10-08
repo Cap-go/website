@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-08T09:50:00.000Z
-updated_at: 2026-10-08T09:50:00.000Z
+updated_at: 2026-10-08T13:30:13.000Z
 head_image: /capgo_plugins.webp
 head_image_alt: "Android release build without Android Studio Capgo blog illustration"
 keywords: Android release build, without Android Studio, keytool keystore, gradlew bundleRelease, Capacitor Android, Google Play service account, Capgo Build Android, headless Android build

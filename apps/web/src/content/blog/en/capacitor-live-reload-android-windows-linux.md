@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-08T10:00:00.000Z
-updated_at: 2026-10-08T10:00:00.000Z
+updated_at: 2026-10-08T13:30:13.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: "Capacitor live reload on Android from Windows and Linux Capgo blog illustration"
 keywords: Capacitor live reload, Android live reload, cap run live reload, 10.0.2.2, adb reverse, Windows firewall Vite, Linux ufw, cleartext, hot reload Capacitor

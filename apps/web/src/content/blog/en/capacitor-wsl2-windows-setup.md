@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-08T09:20:00.000Z
-updated_at: 2026-10-08T09:20:00.000Z
+updated_at: 2026-10-08T13:30:13.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: "Capacitor development with WSL2 on Windows Capgo blog illustration"
 keywords: WSL2 Capacitor, WSL Android emulator, adb WSL2, Capacitor Windows Linux, usbipd, mirrored networking, Capgo Build

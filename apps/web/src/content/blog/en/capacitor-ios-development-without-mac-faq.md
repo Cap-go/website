@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-08T10:10:00.000Z
-updated_at: 2026-10-08T10:10:00.000Z
+updated_at: 2026-10-08T13:30:13.000Z
 head_image: /build_list.webp
 head_image_alt: "Capacitor iOS development without a Mac FAQ Capgo blog illustration"
 keywords: Capacitor iOS without Mac, build iOS app on Windows, build iOS app on Linux, iOS without Xcode, TestFlight without Mac, App Store without Mac, Capgo Build, cloud macOS build

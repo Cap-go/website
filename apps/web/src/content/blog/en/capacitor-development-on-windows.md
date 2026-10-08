@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-08T09:10:00.000Z
-updated_at: 2026-10-08T09:10:00.000Z
+updated_at: 2026-10-08T13:30:13.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: "Capacitor Development on Windows setup guide Capgo blog illustration"
 keywords: Capacitor Windows, Windows 11 Capacitor, Android Studio Windows, Capacitor without Mac, iOS from Windows, PowerShell execution policy, Capgo Build

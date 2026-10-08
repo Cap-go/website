@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-08T09:40:00.000Z
-updated_at: 2026-10-08T09:40:00.000Z
+updated_at: 2026-10-08T13:30:13.000Z
 head_image: /build_list.webp
 head_image_alt: "Testing an iOS app without a Mac from Windows or Linux Capgo blog illustration"
 keywords: test iOS app without Mac, iOS Simulator Windows, TestFlight from Windows, TestFlight from Linux, ad hoc IPA, Capacitor iOS testing, Capgo Build
