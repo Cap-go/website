@@ -183,7 +183,7 @@ test('email-only registration preserves signup attribution and the console hando
   const referrals: any[] = []
   const confirmations: string[] = []
   const windowStub = {
-    location: { href: '', search: '?ref=readme-example' },
+    location: { href: '', search: '?ref=initial-example' },
     posthog: { capture: (event: string, properties?: unknown) => captures.push({ event, properties }) },
     Affonso: { signup: (properties: unknown) => referrals.push(properties) },
   }
@@ -210,6 +210,7 @@ test('email-only registration preserves signup attribution and the console hando
     setTimeout: (callback: () => void) => callback(),
   })
   await Promise.resolve()
+  windowStub.location.search = '?ref=readme-example'
   await handler({ preventDefault() {} })
   expect(signupRequests).toEqual([
     {
