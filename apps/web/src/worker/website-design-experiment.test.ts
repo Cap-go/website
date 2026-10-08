@@ -138,7 +138,7 @@ test('a slow CAPTCHA cannot send an unverified registration request in either de
   const transpiled = new Bun.Transpiler({ loader: 'ts' }).transformSync(source)
   for (const captchaEnabled of [true, false]) {
     let handler: (event: { preventDefault(): void }) => Promise<void> = async () => {}
-    let authCalls = 0
+    let registerCalls = 0
     const toasts: string[] = []
     const button = { disabled: false }
     const values: Record<string, unknown> = {
@@ -150,21 +150,27 @@ test('a slow CAPTCHA cannot send an unverified registration request in either de
     }
     runInNewContext(transpiled, {
       document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => (captchaEnabled ? {} : null) },
-      getRemoteConfig: () => Promise.resolve({}),
-      isSupabaseConfigured: () => true,
-      useSupabase: () => {
-        authCalls++
-        throw new Error('Stop the test before any auth IO')
+      getRegistrationDevice: () => ({
+        registration_device_type: 'desktop',
+        registration_os: 'test',
+        registration_browser: 'test',
+      }),
+      registerUser: async () => {
+        registerCalls++
+        throw new Error('Stop the test before any registration IO')
       },
+      getRegisterUserMessage: () => 'Registration failed',
+      RegisterApiError: class RegisterApiError extends Error {},
+      confirmWebsiteDesignSignup: () => {},
       Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
       window: {},
-      navigator: {},
+      navigator: { userAgent: 'test', maxTouchPoints: 0 },
       setTimeout,
     })
     await Promise.resolve()
     expect(button.disabled).toBe(false)
     await handler({ preventDefault() {} })
-    expect(authCalls).toBe(captchaEnabled ? 0 : 1)
+    expect(registerCalls).toBe(captchaEnabled ? 0 : 1)
     if (captchaEnabled) expect(toasts).toEqual(['Security verification is not ready. Please wait a moment and try again, or refresh the page.'])
     else expect(toasts.some((text) => text.includes('Security verification'))).toBe(false)
     if (captchaEnabled) expect(button.disabled).toBe(false)

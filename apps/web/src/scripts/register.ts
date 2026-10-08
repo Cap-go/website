@@ -1,6 +1,6 @@
-import { confirmWebsiteDesignSignup, websiteDesignSignupMetadata } from '@/lib/websiteDesignExperiment.client'
+import { confirmWebsiteDesignSignup } from '@/lib/websiteDesignExperiment.client'
 import { getRegistrationDevice } from '@/services/registration-device'
-import { getRemoteConfig, isSupabaseConfigured, useSupabase } from '@/services/supabase'
+import { getRegisterUserMessage, RegisterApiError, registerUser } from '@/services/registration'
 import Toastify from 'toastify-js'
 
 const form = document.getElementById('registerForm')
@@ -10,39 +10,7 @@ const lastName = document.getElementById('lastName') as HTMLInputElement
 const password = document.getElementById('password') as HTMLInputElement
 const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement
 
-const configReady = getRemoteConfig()
 let isSubmitting = false
-
-if (submitButton) {
-  submitButton.disabled = true
-}
-
-configReady
-  .then((cfg) => {
-    if (isSupabaseConfigured(cfg)) {
-      if (!isSubmitting && submitButton) {
-        submitButton.disabled = false
-      }
-      return
-    }
-    if (!isSubmitting) {
-      showConfigError()
-    }
-  })
-  .catch(() => {
-    if (!isSubmitting) {
-      showConfigError()
-    }
-  })
-
-function showConfigError() {
-  return Toastify({
-    text: 'Unable to load registration service. Please refresh the page and try again.',
-    style: {
-      background: '#e7000b',
-    },
-  }).showToast()
-}
 
 function getCaptchaId() {
   if (!(window as any).turnstile) {
@@ -109,86 +77,35 @@ form?.addEventListener('submit', async (e) => {
   isSubmitting = true
   submitButton.disabled = true
 
-  const cfg = await configReady
-  if (!isSupabaseConfigured(cfg)) {
+  const registrationDevice = getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)
+  let result
+  try {
+    result = await registerUser({
+      email: email.value,
+      password: password.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
+      captchaToken: getCaptchaId(),
+      registrationDeviceType: registrationDevice.registration_device_type,
+      registrationOs: registrationDevice.registration_os,
+      registrationBrowser: registrationDevice.registration_browser,
+    })
+  } catch (error) {
     isSubmitting = false
-    return showConfigError()
+    submitButton.disabled = false
+    console.error('Registration API error', error)
+    ;(window as any).turnstile?.reset?.()
+    const code = error instanceof RegisterApiError ? error.code ?? 'unknown' : 'unknown'
+    ;(window as any).posthog?.capture('website_signup_error', { stage: 'auth', code })
+    return Toastify({
+      text: getRegisterUserMessage(error),
+      style: {
+        background: '#e7000b',
+      },
+    }).showToast()
   }
 
-  let supabase
-  try {
-    supabase = useSupabase()
-  } catch {
-    isSubmitting = false
-    return showConfigError()
-  }
-  const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
-  if (errorDeleted) {
-    console.error(errorDeleted)
-    isSubmitting = false
-    submitButton.disabled = false
-    return Toastify({
-      text: 'Unable to verify account status. Please try again.',
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-  if (!deleted) {
-    isSubmitting = false
-    submitButton.disabled = false
-    return Toastify({
-      text: 'Account is in error, please contact support at support@capgo.app',
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-  const registrationDevice = getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)
-  const { data: user, error } = await supabase.auth.signUp({
-    email: email.value,
-    password: password.value,
-    options: {
-      captchaToken: getCaptchaId(),
-      data: {
-        first_name: firstName.value,
-        last_name: lastName.value,
-        ...registrationDevice,
-        ...websiteDesignSignupMetadata(),
-      },
-    },
-  })
-  if (error) {
-    isSubmitting = false
-    submitButton.disabled = false
-    console.error('Supabase signup error', error)
-    ;(window as any).turnstile?.reset?.()
-    ;(window as any).posthog?.capture('website_signup_error', { stage: 'auth', code: error.code ?? 'unknown' })
-    return Toastify({
-      text: error.message,
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-  if (error || !user) {
-    isSubmitting = false
-    submitButton.disabled = false
-    return
-  }
-  const session = await supabase.auth.getSession()
-  if (session.error) {
-    isSubmitting = false
-    submitButton.disabled = false
-    console.error('Supabase session error', session.error)
-    return Toastify({
-      text: session.error.message,
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-  confirmWebsiteDesignSignup(session.data.session?.access_token)
+  confirmWebsiteDesignSignup(result.session.access_token)
   if ((window as any).datafast) {
     ;(window as any).datafast('signup', { email: email.value })
   }
@@ -200,15 +117,21 @@ form?.addEventListener('submit', async (e) => {
       last_name: lastName.value,
     })
   }
+  if ((window as any).fbq) {
+    ;(window as any).fbq('track', 'CompleteRegistration', {
+      content_name: 'Capgo signup',
+      status: true,
+    })
+  }
   if ((window as any).Affonso?.signup) {
     const fullName = `${firstName.value} ${lastName.value}`.trim()
     ;(window as any).Affonso.signup({
       email: email.value,
-      externalUserId: (user as any)?.user?.id,
+      externalUserId: result.user.id,
       name: fullName || undefined,
     })
   }
-  const consoleUrl = `https://console.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
+  const consoleUrl = `https://console.capgo.app/login/?access_token=${result.session.access_token}&refresh_token=${result.session.refresh_token}&to=/app`
   await new Promise((resolve) => setTimeout(resolve, 400))
   window.location.href = consoleUrl
 })
