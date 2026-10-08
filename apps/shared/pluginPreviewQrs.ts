@@ -34,6 +34,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     channelId: 38920,
     version: '1.0.0',
   },
+  'capacitor-age-range': {
+    appName: 'Age Range Example',
+    appId: 'app.capgo.age.range',
+    channelName: 'production',
+    channelId: 49334,
+    version: '1.0.0',
+  },
   'capacitor-alarm': {
     appName: 'Alarm Example',
     appId: 'app.capgo.alarm',
@@ -53,6 +60,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     appId: 'app.capgo.android.inline.install',
     channelName: 'production',
     channelId: 38838,
+    version: '1.0.0',
+  },
+  'capacitor-android-kiosk': {
+    appName: 'Android Kiosk Example',
+    appId: 'app.capgo.android.kiosk',
+    channelName: 'production',
+    channelId: 49333,
     version: '1.0.0',
   },
   'capacitor-android-sms-retriever': {
@@ -95,6 +109,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     appId: 'app.capgo.audiorecorder',
     channelName: 'production',
     channelId: 38925,
+    version: '1.0.0',
+  },
+  'capacitor-audiosession': {
+    appName: 'Audio Session Example',
+    appId: 'app.capgo.audiosession',
+    channelName: 'production',
+    channelId: 49331,
     version: '1.0.0',
   },
   'capacitor-auto': {
@@ -300,6 +321,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     channelId: 38851,
     version: '1.0.0',
   },
+  'capacitor-in-app-review': {
+    appName: 'In App Review Example',
+    appId: 'app.capgo.in.app.review',
+    channelName: 'production',
+    channelId: 49336,
+    version: '1.0.0',
+  },
   'capacitor-inappbrowser': {
     appName: 'Inappbrowser Example',
     appId: 'app.capgo.inappbrowser',
@@ -326,6 +354,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     appId: 'app.capgo.intentlauncher',
     channelName: 'production',
     channelId: 38904,
+    version: '1.0.0',
+  },
+  'capacitor-intercom': {
+    appName: 'Intercom Example',
+    appId: 'app.capgo.intercom',
+    channelName: 'production',
+    channelId: 49332,
     version: '1.0.0',
   },
   'capacitor-is-root': {
@@ -410,6 +445,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     appId: 'app.capgo.mux.player',
     channelName: 'production',
     channelId: 38898,
+    version: '1.0.0',
+  },
+  'capacitor-native-audio': {
+    appName: 'Native Audio Example',
+    appId: 'app.capgo.nativeaudio',
+    channelName: 'production',
+    channelId: 49335,
     version: '1.0.0',
   },
   'capacitor-native-biometric': {
