@@ -183,7 +183,7 @@ test('email-only registration preserves signup attribution and the console hando
   const referrals: any[] = []
   const confirmations: string[] = []
   const windowStub = {
-    location: { href: '' },
+    location: { href: '', search: '?ref=readme-example' },
     posthog: { capture: (event: string, properties?: unknown) => captures.push({ event, properties }) },
     Affonso: { signup: (properties: unknown) => referrals.push(properties) },
   }
@@ -206,6 +206,7 @@ test('email-only registration preserves signup attribution and the console hando
     }),
     window: windowStub,
     navigator: { userAgent: 'test', maxTouchPoints: 0 },
+    URLSearchParams,
     setTimeout: (callback: () => void) => callback(),
   })
   await Promise.resolve()
@@ -214,7 +215,7 @@ test('email-only registration preserves signup attribution and the console hando
     {
       email: 'signup@example.com',
       password: 'test-password',
-      options: { captchaToken: undefined, data: { registration_device_type: 'desktop', website_design_variant: 'control' } },
+      options: { captchaToken: undefined, data: { registration_device_type: 'desktop', website_design_variant: 'control', ref: 'readme-example' } },
     },
   ])
   expect(confirmations).toEqual(['fake-access'])
