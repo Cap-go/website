@@ -820,7 +820,52 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
   },
 }
 
+// These plugins are not shipped in the Capgo app (Cap-go/capgo.app), so their example
+// bundle loads but every native call fails. Hide their "Test on device" QR card and keep
+// the source entry so the QR can come back once the plugin ships in the Capgo app.
+const pluginsNotInCapgoApp = new Set<string>([
+  'capacitor-admob',
+  'capacitor-alarm',
+  'capacitor-android-usagestatsmanager',
+  'capacitor-appinsights',
+  'capacitor-appsflyer',
+  'capacitor-auto',
+  'capacitor-background-geolocation',
+  'capacitor-bluetooth-low-energy',
+  'capacitor-contacts',
+  'capacitor-contentsquare',
+  'capacitor-device-info',
+  'capacitor-env',
+  'capacitor-facebook-analytics',
+  'capacitor-fast-sql',
+  'capacitor-file',
+  'capacitor-gtm',
+  'capacitor-health',
+  'capacitor-ibeacon',
+  'capacitor-incoming-call-kit',
+  'capacitor-ivs-player',
+  'capacitor-live-reload',
+  'capacitor-native-loader',
+  'capacitor-native-purchases',
+  'capacitor-network-diagnostics',
+  'capacitor-passkey',
+  'capacitor-pay',
+  'capacitor-photo-library',
+  'capacitor-realtimekit',
+  'capacitor-share-target',
+  'capacitor-ssl-pinning',
+  'capacitor-supabase',
+  'capacitor-twilio-voice',
+  'capacitor-verisoul',
+  'capacitor-watch',
+  'capacitor-webview-version-checker',
+  'capacitor-wechat',
+  'capacitor-widget-kit',
+])
+
 export const pluginPreviewQrs = Object.entries(pluginPreviewQrSources).reduce<Record<string, PluginPreviewQr>>((acc, [slug, preview]) => {
+  if (pluginsNotInCapgoApp.has(slug)) return acc
+
   acc[slug] = {
     ...preview,
     webUrl: buildPreviewUrl(preview.appId, preview.channelId),
