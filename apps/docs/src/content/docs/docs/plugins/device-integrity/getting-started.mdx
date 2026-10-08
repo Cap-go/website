@@ -64,28 +64,40 @@ const attestationSupported =
   capabilities.appAttest.supported || capabilities.playIntegrity.supported;
 
 if (attestationSupported) {
-  const prepared = await DeviceIntegrity.prepareAttestation();
+  try {
+    const prepared = await DeviceIntegrity.prepareAttestation();
 
-  const { challenge } = (await fetch(
-    'https://api.example.com/integrity/registration-challenge',
-  ).then((res) => res.json())) as { challenge: string };
+    const challengeResponse = await fetch(
+      'https://api.example.com/integrity/registration-challenge',
+    );
+    if (!challengeResponse.ok) {
+      throw new Error(`Challenge request failed with ${challengeResponse.status}`);
+    }
+    const { challenge } = (await challengeResponse.json()) as { challenge: string };
 
-  const registration = await DeviceIntegrity.createAttestation({
-    keyId: prepared.keyId,
-    challenge,
-  });
+    const registration = await DeviceIntegrity.createAttestation({
+      keyId: prepared.keyId,
+      challenge,
+    });
 
-  const { payload } = (await fetch(
-    'https://api.example.com/integrity/assertion-payload',
-  ).then((res) => res.json())) as { payload: string };
+    const payloadResponse = await fetch(
+      'https://api.example.com/integrity/assertion-payload',
+    );
+    if (!payloadResponse.ok) {
+      throw new Error(`Payload request failed with ${payloadResponse.status}`);
+    }
+    const { payload } = (await payloadResponse.json()) as { payload: string };
 
-  const assertion = await DeviceIntegrity.createAssertion({
-    keyId: prepared.keyId,
-    payload,
-  });
+    const assertion = await DeviceIntegrity.createAssertion({
+      keyId: prepared.keyId,
+      payload,
+    });
 
-  console.log(registration.format, registration.token);
-  console.log(assertion.format, assertion.token);
+    console.log(registration.format, registration.token);
+    console.log(assertion.format, assertion.token);
+  } catch (error) {
+    console.error('Attestation flow failed', error);
+  }
 }
 
 if (capabilities.deviceCheck.supported) {
