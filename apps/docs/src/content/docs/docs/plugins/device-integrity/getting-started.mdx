@@ -1,0 +1,101 @@
+---
+title: Getting Started
+description: Install @capgo/capacitor-device-integrity and use native integrity signals from Capacitor.
+sidebar:
+  order: 2
+---
+
+import { PackageManagers } from 'starlight-package-managers'
+import { Steps } from '@astrojs/starlight/components';
+
+## Installation
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-device-integrity` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-device-integrity" pkgManagers={['bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
+
+3. **Configure platform requirements**
+   - Android: set `plugins.DeviceIntegrity.cloudProjectNumber` for Play Integrity when you use attestation APIs.
+   - iOS: enable the App Attest capability in Xcode for attestation APIs.
+</Steps>
+
+## Why use this plugin
+
+Use one API to collect integrity signals during sign-up, login, or high-risk actions:
+
+- Probe support before calling native APIs (`getCapabilities`)
+- Fingerprint Android devices with Widevine (`getWidevineFingerprint`)
+- Register and assert with App Attest or Play Integrity (`prepareAttestation`, `createAttestation`, `createAssertion`)
+- Request iOS DeviceCheck tokens (`getDeviceCheckToken`)
+
+Client values are not trustworthy until your backend verifies tokens and enforces replay protection.
+
+## Usage
+
+```typescript
+import { DeviceIntegrity } from '@capgo/capacitor-device-integrity';
+
+const capabilities = await DeviceIntegrity.getCapabilities();
+console.log(capabilities.platform, capabilities.playIntegrity.supported);
+
+if (capabilities.widevine.fingerprintAvailable) {
+  const widevine = await DeviceIntegrity.getWidevineFingerprint();
+  console.log(widevine.fingerprint, widevine.securityLevel);
+}
+
+const prepared = await DeviceIntegrity.prepareAttestation();
+
+const registration = await DeviceIntegrity.createAttestation({
+  keyId: prepared.keyId,
+  challenge: 'backend-one-time-registration-challenge',
+});
+
+const assertion = await DeviceIntegrity.createAssertion({
+  keyId: prepared.keyId,
+  payload: 'backend-one-time-request-payload',
+});
+
+console.log(registration.format, registration.token);
+console.log(assertion.format, assertion.token);
+
+if (capabilities.deviceCheck.supported) {
+  const deviceCheck = await DeviceIntegrity.getDeviceCheckToken();
+  console.log(deviceCheck.token);
+}
+```
+
+## Widevine options
+
+`getWidevineFingerprint()` accepts optional fields:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `includeRawId` | `boolean` | When true, includes base64 raw Widevine device ID (sensitive). |
+| `hashSalt` | `string` | Salt for `fingerprint`. Android uses the app package name when omitted. |
+
+## Backend requirement
+
+- Verify App Attest and Play Integrity tokens on your server.
+- Treat Widevine identifiers as sensitive and disclose use in your privacy policy.
+- Do not use Widevine values for advertising or cross-app tracking.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan security and compliance, connect it with [Using @capgo/capacitor-device-integrity](/plugins/capacitor-device-integrity/) for the native capability in Using @capgo/capacitor-device-integrity, [@capgo/capacitor-app-attest](/docs/plugins/app-attest/) for focused App Attest and Play Integrity flows, [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, and [Capgo Security](/security/) for the product workflow in Capgo Security.
