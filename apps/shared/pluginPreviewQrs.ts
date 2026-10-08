@@ -34,6 +34,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     channelId: 38920,
     version: '1.0.0',
   },
+  'capacitor-age-range': {
+    appName: 'Age Range Example',
+    appId: 'app.capgo.age.range',
+    channelName: 'production',
+    channelId: 49334,
+    version: '1.0.0',
+  },
   'capacitor-alarm': {
     appName: 'Alarm Example',
     appId: 'app.capgo.alarm',
@@ -53,6 +60,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     appId: 'app.capgo.android.inline.install',
     channelName: 'production',
     channelId: 38838,
+    version: '1.0.0',
+  },
+  'capacitor-android-kiosk': {
+    appName: 'Android Kiosk Example',
+    appId: 'app.capgo.android.kiosk',
+    channelName: 'production',
+    channelId: 49333,
     version: '1.0.0',
   },
   'capacitor-android-sms-retriever': {
@@ -95,6 +109,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     appId: 'app.capgo.audiorecorder',
     channelName: 'production',
     channelId: 38925,
+    version: '1.0.0',
+  },
+  'capacitor-audiosession': {
+    appName: 'Audio Session Example',
+    appId: 'app.capgo.audiosession',
+    channelName: 'production',
+    channelId: 49331,
     version: '1.0.0',
   },
   'capacitor-auto': {
@@ -300,6 +321,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     channelId: 38851,
     version: '1.0.0',
   },
+  'capacitor-in-app-review': {
+    appName: 'In App Review Example',
+    appId: 'app.capgo.in.app.review',
+    channelName: 'production',
+    channelId: 49336,
+    version: '1.0.0',
+  },
   'capacitor-inappbrowser': {
     appName: 'Inappbrowser Example',
     appId: 'app.capgo.inappbrowser',
@@ -326,6 +354,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     appId: 'app.capgo.intentlauncher',
     channelName: 'production',
     channelId: 38904,
+    version: '1.0.0',
+  },
+  'capacitor-intercom': {
+    appName: 'Intercom Example',
+    appId: 'app.capgo.intercom',
+    channelName: 'production',
+    channelId: 49332,
     version: '1.0.0',
   },
   'capacitor-is-root': {
@@ -410,6 +445,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     appId: 'app.capgo.mux.player',
     channelName: 'production',
     channelId: 38898,
+    version: '1.0.0',
+  },
+  'capacitor-native-audio': {
+    appName: 'Native Audio Example',
+    appId: 'app.capgo.nativeaudio',
+    channelName: 'production',
+    channelId: 49335,
     version: '1.0.0',
   },
   'capacitor-native-biometric': {
@@ -778,7 +820,52 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
   },
 }
 
+// These plugins are not shipped in the Capgo app (Cap-go/capgo.app), so their example
+// bundle loads but every native call fails. Hide their "Test on device" QR card and keep
+// the source entry so the QR can come back once the plugin ships in the Capgo app.
+const pluginsNotInCapgoApp = new Set<string>([
+  'capacitor-admob',
+  'capacitor-alarm',
+  'capacitor-android-usagestatsmanager',
+  'capacitor-appinsights',
+  'capacitor-appsflyer',
+  'capacitor-auto',
+  'capacitor-background-geolocation',
+  'capacitor-bluetooth-low-energy',
+  'capacitor-contacts',
+  'capacitor-contentsquare',
+  'capacitor-device-info',
+  'capacitor-env',
+  'capacitor-facebook-analytics',
+  'capacitor-fast-sql',
+  'capacitor-file',
+  'capacitor-gtm',
+  'capacitor-health',
+  'capacitor-ibeacon',
+  'capacitor-incoming-call-kit',
+  'capacitor-ivs-player',
+  'capacitor-live-reload',
+  'capacitor-native-loader',
+  'capacitor-native-purchases',
+  'capacitor-network-diagnostics',
+  'capacitor-passkey',
+  'capacitor-pay',
+  'capacitor-photo-library',
+  'capacitor-realtimekit',
+  'capacitor-share-target',
+  'capacitor-ssl-pinning',
+  'capacitor-supabase',
+  'capacitor-twilio-voice',
+  'capacitor-verisoul',
+  'capacitor-watch',
+  'capacitor-webview-version-checker',
+  'capacitor-wechat',
+  'capacitor-widget-kit',
+])
+
 export const pluginPreviewQrs = Object.entries(pluginPreviewQrSources).reduce<Record<string, PluginPreviewQr>>((acc, [slug, preview]) => {
+  if (pluginsNotInCapgoApp.has(slug)) return acc
+
   acc[slug] = {
     ...preview,
     webUrl: buildPreviewUrl(preview.appId, preview.channelId),

@@ -8,6 +8,7 @@ import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import ProductVideoLoop from '@/components/ProductVideoLoop.astro'
 import { getProductScreens } from '@/config/productScreens'
 
 const locale = Astro.locals.locale
@@ -167,19 +168,11 @@ const screenSignals = [
           </article>
         </div>
 
-        <figure class="observe-dashboard observe-insights-dashboard">
-          <picture>
-            <source media="(max-width: 720px)" srcset="/landing-demos/observe/observe-update-health-mobile.webp" width="430" height="860" />
-            <img
-              src="/landing-demos/observe/observe-update-health.webp"
-              alt="Capgo Observe update health view showing failure types by cause, a daily failure chart, and the top affected versions and devices"
-              width="1440"
-              height="900"
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
-        </figure>
+        <ProductVideoLoop
+          name="observe-tour"
+          class="observe-insights-video"
+          label="Capgo Observe tour: live release health, update failures by cause, native app health by version, and compatibility events"
+        />
       </div>
     </section>
 
@@ -465,7 +458,8 @@ const screenSignals = [
     margin-top: 20px;
   }
 
-  .observe .observe-insights-dashboard {
+  /* Class is applied inside ProductVideoLoop, outside this component's scope. */
+  .observe :global(.observe-insights-video) {
     margin-top: 32px;
   }
 
@@ -520,17 +514,8 @@ const screenSignals = [
       border-radius: 12px;
     }
 
-    .observe .observe-insights-dashboard {
-      margin-top: 28px;
-    }
-
     .observe .observe-tour {
       margin-top: 40px;
-    }
-
-    .observe .observe-insights-dashboard {
-      max-width: 430px;
-      margin-inline: auto;
     }
 
     .observe .observe-proof {

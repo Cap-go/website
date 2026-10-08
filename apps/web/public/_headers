@@ -35,6 +35,11 @@
   Access-Control-Expose-Headers: Link, ETag
   Cache-Control: public, max-age=3600
 
+/.well-known/mcp-registry-auth
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
 /.well-known/tool-api-status.json
   Content-Type: application/health+json; charset=utf-8
   Access-Control-Allow-Origin: *

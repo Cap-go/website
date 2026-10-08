@@ -81,6 +81,7 @@ const pluginEntries = [
   ['Data Storage SQLite', 'data-storage-sqlite'],
   ['Date Picker', 'date-picker'],
   ['Device Info', 'device-info'],
+  ['Device Integrity', 'device-integrity'], // @capgo/capacitor-device-integrity
   ['Document Scanner', 'document-scanner'],
   ['Downloader', 'downloader'],
   ['Electron Updater', 'electron-updater'],
@@ -133,6 +134,7 @@ const pluginEntries = [
   ['MQTT', 'mqtt'],
   ['Mock Location Detector', 'mock-location-detector'],
   ['Mute', 'mute'],
+  ['Mux Player', 'mux-player'], // @capgo/capacitor-mux-player
   ['Native Audio', 'native-audio'],
   ['Native Biometric', 'native-biometric'],
   ['Native Geocoder', 'nativegeocoder'],
@@ -190,9 +192,12 @@ const pluginEntries = [
   ['Photo Library', 'photo-library'],
   ['Pretty Toast', 'pretty-toast'],
   ['Printer', 'printer'],
-  ['Capacitor Patch', 'capacitor-patch'],
   ['RealtimeKit', 'realtimekit'],
-  ['Rich Notifications', 'rich-notifications', [linkItem('iOS setup', '/docs/plugins/rich-notifications/ios'), linkItem('Android setup', '/docs/plugins/rich-notifications/android')]],
+  [
+    'Rich Notifications',
+    'rich-notifications',
+    [linkItem('iOS setup', '/docs/plugins/rich-notifications/ios'), linkItem('Android setup', '/docs/plugins/rich-notifications/android')],
+  ],
   ['reCAPTCHA', 'recaptcha', [linkItem('iOS setup', '/docs/plugins/recaptcha/ios'), linkItem('Android setup', '/docs/plugins/recaptcha/android')]],
   ['Verisoul', 'verisoul', [linkItem('iOS setup', '/docs/plugins/verisoul/ios'), linkItem('Android setup', '/docs/plugins/verisoul/android')]],
   ['Ricoh 360 Camera', 'ricoh360-camera'],
@@ -258,7 +263,15 @@ const pluginEntries = [
   ['Video Player', 'video-player'],
   ['Video Thumbnails', 'video-thumbnails'],
   ['Volume Buttons', 'volume-buttons'],
-  ['Watch', 'watch'],
+  [
+    'Watch',
+    'watch',
+    [
+      linkItem('watchOS app setup', '/docs/plugins/watch/watch-app-setup'),
+      linkItem('Wear OS app setup', '/docs/plugins/watch/wear-os-app-setup'),
+      linkItem('Examples', '/docs/plugins/watch/examples'),
+    ],
+  ],
   ['WebView Guardian', 'webview-guardian'],
   ['WebView Crash', 'webview-crash'],
   ['WeChat', 'wechat'],
