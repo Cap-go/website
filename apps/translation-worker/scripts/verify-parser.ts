@@ -161,7 +161,7 @@ assert(typeof pricingContext === 'string' && pricingContext.toLowerCase().includ
 const updatesContext = __translationWorkerTest.resolveTranslationContexts(['Updates'])[0]
 assert(typeof updatesContext === 'string' && updatesContext.includes('updates_by_month'), 'HTML-split Updates segment did not keep parent pricing calculator context')
 const supportContext = __translationWorkerTest.resolveTranslationContexts(['Support'])[0]
-assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
+assert(typeof supportContext === 'string' && supportContext.includes('`support`') && supportContext.includes('`compare_row_support`'), 'Duplicate Support text dropped one of its contexts')
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
 assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('short-ui-length-defer-v1'), 'Cache version was not bumped for short UI length guard deferral')

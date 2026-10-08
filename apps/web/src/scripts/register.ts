@@ -1,6 +1,7 @@
+import { useRuntimeConfig } from '@/config/app'
 import { confirmWebsiteDesignSignup, websiteDesignSignupMetadata } from '@/lib/websiteDesignExperiment.client'
 import { getRegistrationDevice } from '@/services/registration-device'
-import { getRemoteConfig, isSupabaseConfigured, useSupabase } from '@/services/supabase'
+import { createAuthClient } from 'better-auth/client'
 import Toastify from 'toastify-js'
 
 const form = document.getElementById('registerForm')
@@ -10,39 +11,11 @@ const lastName = document.getElementById('lastName') as HTMLInputElement
 const password = document.getElementById('password') as HTMLInputElement
 const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement
 
-const configReady = getRemoteConfig()
+const auth = createAuthClient({
+  baseURL: `${useRuntimeConfig().public.baseApiUrl}/auth`,
+  fetchOptions: { credentials: 'include' },
+})
 let isSubmitting = false
-
-if (submitButton) {
-  submitButton.disabled = true
-}
-
-configReady
-  .then((cfg) => {
-    if (isSupabaseConfigured(cfg)) {
-      if (!isSubmitting && submitButton) {
-        submitButton.disabled = false
-      }
-      return
-    }
-    if (!isSubmitting) {
-      showConfigError()
-    }
-  })
-  .catch(() => {
-    if (!isSubmitting) {
-      showConfigError()
-    }
-  })
-
-function showConfigError() {
-  return Toastify({
-    text: 'Unable to load registration service. Please refresh the page and try again.',
-    style: {
-      background: '#e7000b',
-    },
-  }).showToast()
-}
 
 function getCaptchaId() {
   if (!(window as any).turnstile) {
@@ -67,6 +40,7 @@ function isValidName(name: string): boolean {
 form?.addEventListener('submit', async (e) => {
   e.preventDefault()
   if (isSubmitting || submitButton.disabled) return
+
   ;(window as any).posthog?.capture('website_signup_submit')
 
   // Validate email format
@@ -100,70 +74,44 @@ form?.addEventListener('submit', async (e) => {
   }
 
   if (document.querySelector('.cf-turnstile') && !getCaptchaId()) {
-    return Toastify({
-      text: 'Security verification is not ready. Please wait a moment and try again, or refresh the page.',
-      style: { background: '#e7000b' },
-    }).showToast()
+    return Toastify({ text: 'Security verification is not ready. Please wait a moment and try again, or refresh the page.', style: { background: '#e7000b' } }).showToast()
   }
 
   isSubmitting = true
   submitButton.disabled = true
 
-  const cfg = await configReady
-  if (!isSupabaseConfigured(cfg)) {
-    isSubmitting = false
-    return showConfigError()
-  }
-
-  let supabase
-  try {
-    supabase = useSupabase()
-  } catch {
-    isSubmitting = false
-    return showConfigError()
-  }
-  const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
-  if (errorDeleted) {
-    console.error(errorDeleted)
-    isSubmitting = false
-    submitButton.disabled = false
-    return Toastify({
-      text: 'Unable to verify account status. Please try again.',
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-  if (!deleted) {
-    isSubmitting = false
-    submitButton.disabled = false
-    return Toastify({
-      text: 'Account is in error, please contact support at support@capgo.app',
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
   const registrationDevice = getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)
-  const { data: user, error } = await supabase.auth.signUp({
+  const captchaToken = getCaptchaId()
+  const payload = {
     email: email.value,
     password: password.value,
-    options: {
-      captchaToken: getCaptchaId(),
-      data: {
-        first_name: firstName.value,
-        last_name: lastName.value,
-        ...registrationDevice,
-        ...websiteDesignSignupMetadata(),
-      },
-    },
-  })
+    name: `${firstName.value} ${lastName.value}`.trim(),
+    firstName: firstName.value,
+    lastName: lastName.value,
+    ...registrationDevice,
+    ...websiteDesignSignupMetadata(),
+    callbackURL: 'https://console.capgo.app/login/',
+    fetchOptions: { headers: captchaToken ? { 'x-captcha-response': captchaToken } : {} },
+  }
+  // Registration switches accounts; do not retain another user's API cookie.
+  let result: Awaited<ReturnType<typeof auth.signUp.email>>
+  try {
+    const signedOut = await auth.signOut({ disableRedirect: true })
+    if (signedOut.error) throw new Error(signedOut.error.message || 'Unable to clear the previous session')
+    result = await auth.signUp.email(payload)
+  } catch (requestError) {
+    isSubmitting = false
+    submitButton.disabled = false
+    return Toastify({
+      text: requestError instanceof Error ? requestError.message : 'Registration failed. Please try again.',
+      style: { background: '#e7000b' },
+    }).showToast()
+  }
+  const { data: user, error } = result
   if (error) {
     isSubmitting = false
     submitButton.disabled = false
-    console.error('Supabase signup error', error)
-    ;(window as any).turnstile?.reset?.()
-    ;(window as any).posthog?.capture('website_signup_error', { stage: 'auth', code: error.code ?? 'unknown' })
+    console.error('Registration failed', error)
     return Toastify({
       text: error.message,
       style: {
@@ -176,25 +124,12 @@ form?.addEventListener('submit', async (e) => {
     submitButton.disabled = false
     return
   }
-  const session = await supabase.auth.getSession()
-  if (session.error) {
-    isSubmitting = false
-    submitButton.disabled = false
-    console.error('Supabase session error', session.error)
-    return Toastify({
-      text: session.error.message,
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-  confirmWebsiteDesignSignup(session.data.session?.access_token)
+  confirmWebsiteDesignSignup(user.token ? `capgo_session_${user.token}` : undefined)
   if ((window as any).datafast) {
     ;(window as any).datafast('signup', { email: email.value })
   }
   if ((window as any).posthog) {
     ;(window as any).posthog.capture('user_signed_up', {
-      signup_confirmation: 'client',
       email: email.value,
       first_name: firstName.value,
       last_name: lastName.value,
@@ -208,7 +143,8 @@ form?.addEventListener('submit', async (e) => {
       name: fullName || undefined,
     })
   }
-  const consoleUrl = `https://console.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
+  // Both origins use the same API session cookie; keep tokens out of URLs.
+  const consoleUrl = `https://console.capgo.app/login/?registered=${user.token ? 'complete' : 'true'}`
   await new Promise((resolve) => setTimeout(resolve, 400))
   window.location.href = consoleUrl
 })

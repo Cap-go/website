@@ -86,23 +86,6 @@ export async function websiteDesignHtmlResponse(request: Request, env: WebsiteDe
     .transform(response)
 }
 
-interface SupabaseConfig {
-  supaHost: string
-  supaKey: string
-}
-let configCache: { value: SupabaseConfig; expires: number } | undefined
-
-async function signupConfig(fetcher: typeof fetch): Promise<SupabaseConfig> {
-  if (configCache && configCache.expires > Date.now()) return configCache.value
-  const response = await fetcher('https://api.capgo.app/private/config', { signal: AbortSignal.timeout(5000) })
-  if (!response.ok) throw new Error('Signup config unavailable')
-  const value = (await response.json()) as SupabaseConfig
-  const host = new URL(value.supaHost)
-  if (host.protocol !== 'https:' || !value.supaKey || !(/\.supabase\.co$/.test(host.hostname) || host.hostname === 'sb.capgo.app')) throw new Error('Invalid signup config')
-  configCache = { value, expires: Date.now() + 300_000 }
-  return value
-}
-
 export async function websiteDesignSignupResponse(request: Request, env: WebsiteDesignEnv, ctx?: BackgroundContext, fetcher: typeof fetch = fetch): Promise<Response | null> {
   const url = new URL(request.url)
   if (url.pathname !== WEBSITE_DESIGN_SIGNUP_PATH) return null
@@ -113,13 +96,14 @@ export async function websiteDesignSignupResponse(request: Request, env: Website
   const authorization = request.headers.get('authorization')
   if (!assignment || !authorization?.startsWith('Bearer ') || authorization.length > 8192) return json({ error: 'Missing signup context' }, 401)
   try {
-    const config = await signupConfig(fetcher)
-    const verification = await fetcher(`${config.supaHost.replace(/\/$/, '')}/auth/v1/user`, {
-      headers: { Authorization: authorization, apikey: config.supaKey },
+    const verification = await fetcher('https://api.capgo.app/auth/console-session', {
+      headers: { Authorization: authorization },
       signal: AbortSignal.timeout(5000),
     })
     if (!verification.ok) return json({ error: 'Signup not verified' }, 401)
-    const user = (await verification.json()) as { id: string; created_at: string; user_metadata?: Record<string, unknown> }
+    const { session } = (await verification.json()) as { session: { user: { id: string; created_at: string; user_metadata?: Record<string, unknown> } } | null }
+    if (!session) return json({ error: 'Signup not verified' }, 401)
+    const user = session.user
     const metadata = user.user_metadata ?? {}
     const anonymousId = metadata.website_design_anonymous_id
     const created = Date.parse(user.created_at)
@@ -151,7 +135,7 @@ export async function websiteDesignSignupResponse(request: Request, env: Website
         timestamp: user.created_at,
         properties: {
           ...websiteDesignProperties(assignment),
-          signup_confirmation: 'supabase_verified',
+          signup_confirmation: 'console_verified',
           account_id: user.id,
           $host: 'capgo.app',
           $pathname: '/register/',

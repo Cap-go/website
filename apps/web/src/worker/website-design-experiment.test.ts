@@ -152,10 +152,15 @@ test('a slow CAPTCHA cannot send an unverified registration request in either de
       document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => (captchaEnabled ? {} : null) },
       getRemoteConfig: () => Promise.resolve({}),
       isSupabaseConfigured: () => true,
-      useSupabase: () => {
-        authCalls++
-        throw new Error('Stop the test before any auth IO')
-      },
+      useRuntimeConfig: () => ({ public: { baseApiUrl: 'https://api.capgo.app' } }),
+      createAuthClient: () => ({
+        signOut: async () => {
+          authCalls++
+          throw new Error('Stop the test before any auth IO')
+        },
+      }),
+      getRegistrationDevice: () => ({}),
+      websiteDesignSignupMetadata: () => ({}),
       Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
       window: {},
       navigator: {},
@@ -250,7 +255,7 @@ describe('HTML serving and isolation', () => {
   })
 })
 
-describe('Supabase-confirmed signup attribution', () => {
+describe('Console-confirmed signup attribution', () => {
   const user = {
     id: '00000000-0000-4000-8000-000000000001',
     created_at: new Date(now + 1).toISOString(),
@@ -268,7 +273,7 @@ describe('Supabase-confirmed signup attribution', () => {
     (async (input: RequestInfo | URL, init?: RequestInit) => {
       const url = String(input)
       if (url.endsWith('/private/config')) return Response.json({ supaHost: 'https://sb.capgo.app', supaKey: 'public-test-key' })
-      if (url.endsWith('/auth/v1/user')) return Response.json(account, { status: authStatus })
+      if (url.endsWith('/auth/console-session')) return Response.json({ session: { user: account } }, { status: authStatus })
       if (url.includes('eu.i.posthog.com')) {
         captures.push(JSON.parse(String(init?.body)))
         return Response.json({ status: 1 })
@@ -282,7 +287,7 @@ describe('Supabase-confirmed signup attribution', () => {
     const event = captures.at(-1)
     expect(event.event).toBe('user_signed_up')
     expect(event.distinct_id).toBe(user.user_metadata.website_design_anonymous_id)
-    expect(event.properties.signup_confirmation).toBe('supabase_verified')
+    expect(event.properties.signup_confirmation).toBe('console_verified')
     expect(event.properties['$feature/website-design-v1']).toBe('control')
     expect(event.uuid).toBe(user.id)
     expect(event.properties).not.toHaveProperty('email')
