@@ -60,20 +60,33 @@ if (capabilities.widevine.fingerprintAvailable) {
   console.log(widevine.fingerprint, widevine.securityLevel);
 }
 
-const prepared = await DeviceIntegrity.prepareAttestation();
+const attestationSupported =
+  capabilities.appAttest.supported || capabilities.playIntegrity.supported;
 
-const registration = await DeviceIntegrity.createAttestation({
-  keyId: prepared.keyId,
-  challenge: 'backend-one-time-registration-challenge',
-});
+if (attestationSupported) {
+  const prepared = await DeviceIntegrity.prepareAttestation();
 
-const assertion = await DeviceIntegrity.createAssertion({
-  keyId: prepared.keyId,
-  payload: 'backend-one-time-request-payload',
-});
+  const { challenge } = (await fetch(
+    'https://api.example.com/integrity/registration-challenge',
+  ).then((res) => res.json())) as { challenge: string };
 
-console.log(registration.format, registration.token);
-console.log(assertion.format, assertion.token);
+  const registration = await DeviceIntegrity.createAttestation({
+    keyId: prepared.keyId,
+    challenge,
+  });
+
+  const { payload } = (await fetch(
+    'https://api.example.com/integrity/assertion-payload',
+  ).then((res) => res.json())) as { payload: string };
+
+  const assertion = await DeviceIntegrity.createAssertion({
+    keyId: prepared.keyId,
+    payload,
+  });
+
+  console.log(registration.format, registration.token);
+  console.log(assertion.format, assertion.token);
+}
 
 if (capabilities.deviceCheck.supported) {
   const deviceCheck = await DeviceIntegrity.getDeviceCheckToken();
