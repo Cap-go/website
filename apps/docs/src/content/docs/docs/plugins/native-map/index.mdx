@@ -1,0 +1,72 @@
+---
+title: "@capgo/capacitor-native-map"
+description: "Google Maps on Android, Apple MapKit on iOS, and Google Maps JS on web with one TypeScript API for markers, camera, and overlays."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Google Maps on Android, Apple MapKit on iOS, and Google Maps JS on web with one TypeScript API for markers, camera, and overlays."
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-map/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-native-map/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+@capgo/capacitor-native-map gives you one TypeScript API for native map performance on mobile and Google Maps JS on web. Create embedded maps in a DOM container, or use **background mode** (`toBack`) to draw the map behind a transparent WebView and build branded UI in HTML.
+
+## Core Capabilities
+
+- **Lifecycle**: `create`, `destroy`, `show`, `hide`, `updateLayout`, resize sync with Ionic scroll views.
+- **Background mode**: `toBack` compositing with multi-touch passthrough on transparent HTML.
+- **Camera**: `setCamera`, `fitBounds`, `getMapBounds`, min/max zoom, bearing, and tilt.
+- **Markers**: add, update, remove, drag, clustering, and event listeners.
+- **Overlays**: polygons, polylines, circles, and tile overlays (platform-dependent).
+- **Events**: map, marker, shape, cluster, and camera idle/move callbacks.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `create` | Create a map (`CreateMapArgs`: `id`, `config`, optional `element`, `apiKey`, `toBack`, `forceCreate`). |
+| `destroy` | Destroy the map instance and release native resources. |
+| `show` / `hide` | Show or hide the native map without destroying it. |
+| `updateLayout` | Update position and size in CSS pixels (especially in `toBack` mode). |
+| `enableTouch` / `disableTouch` | Toggle whether the map receives gestures. |
+| `setCamera` | Move or animate the map camera. |
+| `getMapType` / `setMapType` | Read or set the map type (`Normal`, `Hybrid`, `Satellite`, `Terrain`, `None`). |
+| `fitBounds` | Fit the viewport to latitude and longitude bounds with optional padding. |
+| `getMapBounds` | Read the current visible bounds. |
+| `setPadding` | Set padding on the visible map region. |
+| `addMarker` / `addMarkers` | Add one or many markers; returns marker ids. |
+| `removeMarker` / `removeMarkers` | Remove markers by id. |
+| `addPolygons` / `removePolygons` | Add or remove polygon overlays. |
+| `addPolylines` / `removePolylines` | Add or remove polylines. |
+| `addCircles` / `removeCircles` | Add or remove circles. |
+| `addTileOverlay` / `removeTileOverlay` | Custom tile layers (Android and web; partial support on iOS). |
+| `enableClustering` / `disableClustering` | Marker clustering with optional minimum cluster size. |
+| `enableCurrentLocation` | Show the user location dot when permission allows. |
+| `enableIndoorMaps` / `enableTrafficLayer` | Toggle indoor maps and traffic (platform-dependent). |
+| `setOnMapClickListener` | Listen for taps on the map surface. |
+| `setOnMarkerClickListener` | Listen for marker taps. |
+| `setOnCameraIdleListener` / `setOnCameraMoveStartedListener` | Camera movement events. |
+| `setOnClusterClickListener` | Cluster tap events. |
+| `setOnPolygonClickListener` / `setOnCircleClickListener` / `setOnPolylineClickListener` | Shape tap events. |
+| `setOnMarkerDragStartListener` / `setOnMarkerDragListener` / `setOnMarkerDragEndListener` | Marker drag events. |
+
+## Source Of Truth
+
+This API reference is generated from the plugin `src/definitions.ts` in the [capacitor-native-map](https://github.com/Cap-go/capacitor-native-map/) repository.
+
+## Keep going from @capgo/capacitor-native-map
+
+If you are using **@capgo/capacitor-native-map** in your Capacitor app, connect it with [Using @capgo/capacitor-native-map](/plugins/capacitor-native-map/) for the SEO tutorial and related Capgo plugin docs.

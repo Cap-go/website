@@ -12,59 +12,91 @@ bun add @capgo/capacitor-ffmpeg
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `getCapabilities` - Return the machine-readable capability matrix for the current platform.
-- `reencodeVideo` - Queue a video re-encode job.
-- `convertImage` - Convert a still image into another format.
-- `convertAudio` - Convert audio into another container or codec.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+```
 
-### `getCapabilities`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `getCapabilities` | Return the machine-readable capability matrix for the current platform. |
+| `reencodeVideo` | Queue a video re-encode job. |
+| `convertImage` | Convert a still image into another format. |
+| `convertAudio` | Convert audio into another container or codec. |
+
+## Examples
+
+### `getCapabilities()`
 
 Return the machine-readable capability matrix for the current platform.
 
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 
-await CapacitorFFmpeg.getCapabilities();
+const result = await CapacitorFFmpeg.getCapabilities();
+console.log(result);
 ```
 
-### `reencodeVideo`
+### `reencodeVideo()`
 
 Queue a video re-encode job.
 
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 
-await CapacitorFFmpeg.reencodeVideo({} as ReencodeVideoOptions);
+const result = await CapacitorFFmpeg.reencodeVideo({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  width: 1080,
+  height: 1920,
+});
+console.log(result);
 ```
 
-### `convertImage`
+### `convertImage()`
 
 Convert a still image into another format.
 
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 
-await CapacitorFFmpeg.convertImage({} as ConvertImageOptions);
+const result = await CapacitorFFmpeg.convertImage({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  format: 'webp',
+});
+console.log(result);
 ```
 
-### `convertAudio`
+### `convertAudio()`
 
 Convert audio into another container or codec.
 
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 
-await CapacitorFFmpeg.convertAudio({} as ConvertAudioOptions);
+const result = await CapacitorFFmpeg.convertAudio({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  format: 'm4a',
+});
+console.log(result);
 ```
 
-## Full Reference
+## Listen to events
 
-- GitHub: https://github.com/Cap-go/capacitor-ffmpeg/
-- Docs: /docs/plugins/ffmpeg/
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-ffmpeg/)
+- [Documentation](/docs/plugins/ffmpeg/)
+- [API reference](/docs/plugins/ffmpeg/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-ffmpeg
 

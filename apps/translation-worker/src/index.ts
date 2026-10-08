@@ -165,14 +165,16 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-09-01-word-count-retry-v1'
+const TRANSLATION_CACHE_VERSION = '2026-09-23-short-ui-length-defer-v1'
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
   '/pricing/': new Set(['Pricing']),
   '/blog/': new Set(['Blog']),
   '/enterprise/': new Set(['Enterprise']),
 }
-const TRANSLATION_LENGTH_MAX_RATIO = 1.3
+// Spanish, French, German, Italian, and Indonesian headings routinely run 30-50% longer than English.
+// Short UI copy has its own word-count guard, so this ratio only limits longer body text.
+const TRANSLATION_LENGTH_MAX_RATIO = 1.5
 const TRANSLATION_LENGTH_MIN_RATIO = 0.7
 const TRANSLATION_WORD_COUNT_MAX_DELTA = 3
 const TRANSLATION_WORD_COUNT_MAX_SOURCE_WORDS = 24
@@ -443,6 +445,7 @@ function createOriginRequest(request: Request, originUrl: URL): Request {
   const headers = new Headers(request.headers)
   headers.set('Accept-Language', DEFAULT_LOCALE)
   headers.set('X-Capgo-Translation-Origin', 'english')
+  headers.set('X-Capgo-Translation-Locale', extractLocale(new URL(request.url).pathname) || DEFAULT_LOCALE)
   headers.set(SKIP_AI_CRAWLER_TRACKING_HEADER, '1')
   headers.delete('If-None-Match')
   headers.delete('If-Modified-Since')
@@ -1575,9 +1578,43 @@ function navGuardSegmentIndexes(segments: Segment[]): number[] {
   return indexes
 }
 
-async function retranslateNavGuardSegments(env: Env, targetLanguage: string, segments: Segment[], translations: string[], pagePath: string): Promise<void> {
-  for (const index of navGuardSegmentIndexes(segments)) {
-    translations[index] = await translateSingleText(env, targetLanguage, segments[index].text, pagePath)
+/**
+ * Make repeated nav labels (header, mobile menu, footer) translate consistently.
+ * Returns how the guard was satisfied. Never throws on nav labels: a failed job is retried forever
+ * and the page keeps serving the 503 English fallback.
+ */
+async function stabilizeNavGuardTranslations(
+  segments: Segment[],
+  translations: string[],
+  translate: (text: string) => Promise<string>,
+): Promise<{ outcome: 'ok' | 'retranslated' | 'english'; error?: string }> {
+  try {
+    assertNavSegmentTranslationGuard(segments, translations)
+    return { outcome: 'ok' }
+  } catch {
+    // Retranslate below.
+  }
+
+  try {
+    // Translate each distinct label once and reuse it; separate model calls can word the same label differently.
+    const translatedByText = new Map<string, string>()
+    for (const index of navGuardSegmentIndexes(segments)) {
+      const text = segments[index].text
+      let translated = translatedByText.get(text)
+      if (translated === undefined) {
+        translated = await translate(text)
+        translatedByText.set(text, translated)
+      }
+      translations[index] = translated
+    }
+    assertNavSegmentTranslationGuard(segments, translations)
+    return { outcome: 'retranslated' }
+  } catch (error) {
+    // Covers both a guard failure and a translation call that rejects (for example after exhausted AI retries).
+    for (const index of navGuardSegmentIndexes(segments)) {
+      translations[index] = segments[index].text
+    }
+    return { outcome: 'english', error: errorMessage(error) }
   }
 }
 
@@ -1807,7 +1844,8 @@ function translationCharacterLengthViolation(source: string, translated: string,
   const sourceLen = source.length
   const translatedLen = translated.length
   if (sourceLen < 12) return translatedLen > sourceLen + 8
-  if (translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO) return true
+  const deferMaxLengthToWordCount = shouldEnforceTranslationWordCount(source) && sourceLen <= 32
+  if (!deferMaxLengthToWordCount && translatedLen > sourceLen * TRANSLATION_LENGTH_MAX_RATIO) return true
   if (COMPACT_TRANSLATION_TARGETS.has(targetLanguage)) return false
   return translatedLen < sourceLen * TRANSLATION_LENGTH_MIN_RATIO
 }
@@ -2114,7 +2152,11 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
   const maxAttempts = enforceWordCount ? TRANSLATION_WORD_COUNT_ATTEMPTS : TRANSLATION_SINGLE_TEXT_ATTEMPTS
   const wordCountCandidates: string[] = []
 
-  if (seedCandidate && rememberWordCountCandidate(wordCountCandidates, text, seedCandidate, targetLanguage)) {
+  if (
+    seedCandidate &&
+    normalizedTranslationValue(seedCandidate) !== normalizedTranslationValue(text) &&
+    rememberWordCountCandidate(wordCountCandidates, text, seedCandidate, targetLanguage)
+  ) {
     return seedCandidate
   }
 
@@ -2921,16 +2963,14 @@ async function refreshCacheIncrementally(
   assertTranslatedBody(LANGUAGE_NAMES[locale], segments, translations)
 
   const targetLanguage = LANGUAGE_NAMES[locale]
-  try {
-    assertNavSegmentTranslationGuard(segments, translations)
-  } catch (error) {
-    console.warn('Nav translation guard failed; retranslating guarded header links individually', {
-      pathname: requestUrl.pathname,
-      locale,
-      error: errorMessage(error),
-    })
-    await retranslateNavGuardSegments(env, targetLanguage, segments, translations, requestUrl.pathname)
-    assertNavSegmentTranslationGuard(segments, translations)
+  const navGuard = await stabilizeNavGuardTranslations(segments, translations, (text) => translateSingleText(env, targetLanguage, text, requestUrl.pathname))
+  if (navGuard.outcome !== 'ok') {
+    console.warn(
+      navGuard.outcome === 'retranslated'
+        ? 'Nav translation guard failed; retranslated guarded header links'
+        : 'Nav translation guard failed after retranslation; keeping English nav labels',
+      { pathname: requestUrl.pathname, locale, error: navGuard.error },
+    )
   }
 
   let translatedHtml = renderTranslatedHtml(parts, segments, translations)
@@ -3350,6 +3390,7 @@ async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Reco
       Accept: 'text/html',
       'Accept-Language': DEFAULT_LOCALE,
       'X-Capgo-Translation-Origin': 'real-page-probe',
+      'X-Capgo-Translation-Locale': locale,
     },
   })
 
@@ -3525,6 +3566,7 @@ export const __translationWorkerTest = {
   applyFrenchArticleElision,
   polishTranslatedText,
   assertNavSegmentTranslationGuard,
+  stabilizeNavGuardTranslations,
   assertRenderedNavLinkIntegrity,
   bodyTranslationStats,
   buildBatches,

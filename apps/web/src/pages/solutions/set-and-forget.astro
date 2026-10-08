@@ -2,34 +2,34 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
-import HumanSupport from '@/components/HumanSupport.astro'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import SignupCta from '@/components/SignupCta.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
 const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const title = `${brand} | ${m.solutions_set_and_forget_title({}, { locale })}`
 const description = m.solutions_set_and_forget_description({}, { locale })
 
-const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
-  name: title,
-  description,
-  url: Astro.url.href,
-  serviceType: 'Enterprise Software Service',
-  areaServed: ['Worldwide'],
-})
-
-const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
-  includeOrganization: true,
-})
-
-const content = {
-  title,
-  description,
-  image: `${baseUrl}/capgo_social.png`,
-  ldJSON,
+const links = {
+  updateBehavior: { href: docs('live-updates/update-behavior/'), label: m.solutions_set_and_forget_link_update_behavior({}, { locale }) },
+  channels: { href: docs('live-updates/channels/'), label: m.solutions_set_and_forget_link_channels({}, { locale }) },
+  notify: { href: docs('plugins/updater/notify-app-ready/'), label: m.solutions_set_and_forget_link_notify({}, { locale }) },
+  logs: { href: docs('webapp/logs/'), label: m.solutions_set_and_forget_link_logs({}, { locale }) },
+  devices: { href: docs('webapp/devices/'), label: m.solutions_set_and_forget_link_devices({}, { locale }) },
+  observe: { href: docs('webapp/observe/'), label: m.solutions_set_and_forget_link_observe({}, { locale }) },
+  rollbacks: { href: docs('live-updates/rollbacks/'), label: m.solutions_set_and_forget_link_rollbacks({}, { locale }) },
+  settings: { href: docs('plugins/updater/settings/'), label: m.solutions_set_and_forget_link_settings({}, { locale }) },
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_set_and_forget_link_compatibility({}, { locale }) },
+  notifications: { href: docs('plugins/notifications/getting-started/'), label: m.solutions_set_and_forget_link_notifications({}, { locale }) },
+  selfHosted: { href: docs('plugins/updater/self-hosted/getting-started/'), label: m.solutions_set_and_forget_link_self_hosted({}, { locale }) },
 }
 
 const proofPoints = [
@@ -47,26 +47,24 @@ const proofPoints = [
   },
 ]
 
-const workflowSteps = [
+const stats = [
   {
-    title: m.solutions_set_and_forget_workflow_1_title({}, { locale }),
-    description: m.solutions_set_and_forget_workflow_1_desc({}, { locale }),
+    label: m.solutions_set_and_forget_stat1_label({}, { locale }),
+    value: m.solutions_set_and_forget_stat1_value({}, { locale }),
+    box: 'border-sky-400/25 bg-sky-400/10',
+    text: 'text-sky-200',
   },
   {
-    title: m.solutions_set_and_forget_workflow_2_title({}, { locale }),
-    description: m.solutions_set_and_forget_workflow_2_desc({}, { locale }),
+    label: m.solutions_set_and_forget_stat2_label({}, { locale }),
+    value: m.solutions_set_and_forget_stat2_value({}, { locale }),
+    box: 'border-emerald-400/25 bg-emerald-400/10',
+    text: 'text-emerald-200',
   },
   {
-    title: m.solutions_set_and_forget_workflow_3_title({}, { locale }),
-    description: m.solutions_set_and_forget_workflow_3_desc({}, { locale }),
-  },
-  {
-    title: m.solutions_set_and_forget_workflow_4_title({}, { locale }),
-    description: m.solutions_set_and_forget_workflow_4_desc({}, { locale }),
-  },
-  {
-    title: m.solutions_set_and_forget_workflow_5_title({}, { locale }),
-    description: m.solutions_set_and_forget_workflow_5_desc({}, { locale }),
+    label: m.solutions_set_and_forget_stat3_label({}, { locale }),
+    value: m.solutions_set_and_forget_stat3_value({}, { locale }),
+    box: 'border-amber-300/25 bg-amber-300/10',
+    text: 'text-amber-100',
   },
 ]
 
@@ -74,18 +72,22 @@ const constraints = [
   {
     title: m.solutions_set_and_forget_constraint_1_title({}, { locale }),
     description: m.solutions_set_and_forget_constraint_1_desc({}, { locale }),
+    link: links.updateBehavior,
   },
   {
     title: m.solutions_set_and_forget_constraint_2_title({}, { locale }),
     description: m.solutions_set_and_forget_constraint_2_desc({}, { locale }),
+    link: links.channels,
   },
   {
     title: m.solutions_set_and_forget_constraint_3_title({}, { locale }),
     description: m.solutions_set_and_forget_constraint_3_desc({}, { locale }),
+    link: links.notify,
   },
   {
     title: m.solutions_set_and_forget_constraint_4_title({}, { locale }),
     description: m.solutions_set_and_forget_constraint_4_desc({}, { locale }),
+    link: links.devices,
   },
 ]
 
@@ -95,6 +97,80 @@ const boundaries = [
   m.solutions_set_and_forget_boundary_3({}, { locale }),
   m.solutions_set_and_forget_boundary_4({}, { locale }),
 ]
+
+const howSteps = [
+  {
+    title: m.solutions_set_and_forget_how1_title({}, { locale }),
+    body: m.solutions_set_and_forget_how1_body({}, { locale }),
+    code: `// capacitor.config.ts
+plugins: {
+  CapacitorUpdater: {
+    defaultChannel: 'site-eu',
+    autoUpdate: 'always',
+    autoSplashscreen: true,
+  },
+},`,
+    href: links.updateBehavior.href,
+    linkLabel: links.updateBehavior.label,
+  },
+  {
+    title: m.solutions_set_and_forget_how2_title({}, { locale }),
+    body: m.solutions_set_and_forget_how2_body({}, { locale }),
+    code: `import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+// once your app has loaded
+CapacitorUpdater.notifyAppReady()`,
+    href: links.notify.href,
+    linkLabel: links.notify.label,
+  },
+  {
+    title: m.solutions_set_and_forget_how3_title({}, { locale }),
+    body: m.solutions_set_and_forget_how3_body({}, { locale }),
+    code: `npx @capgo/cli@latest bundle upload --channel site-eu --delta
+# after the first site checks out
+npx @capgo/cli@latest channel set site-us com.example.app \\
+  --bundle 1.4.2`,
+    href: links.channels.href,
+    linkLabel: links.channels.label,
+  },
+  {
+    title: m.solutions_set_and_forget_how4_title({}, { locale }),
+    body: m.solutions_set_and_forget_how4_body({}, { locale }),
+    code: `# roll site-eu back to the previous bundle
+npx @capgo/cli@latest channel set site-eu com.example.app \\
+  --bundle 1.4.1`,
+    href: links.observe.href,
+    linkLabel: links.observe.label,
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_set_and_forget_faq1_q({}, { locale }), answer: m.solutions_set_and_forget_faq1_a({}, { locale }), ...links.updateBehavior },
+  { question: m.solutions_set_and_forget_faq2_q({}, { locale }), answer: m.solutions_set_and_forget_faq2_a({}, { locale }), ...links.rollbacks },
+  { question: m.solutions_set_and_forget_faq3_q({}, { locale }), answer: m.solutions_set_and_forget_faq3_a({}, { locale }), ...links.notifications },
+  { question: m.solutions_set_and_forget_faq4_q({}, { locale }), answer: m.solutions_set_and_forget_faq4_a({}, { locale }), ...links.compatibility },
+  { question: m.solutions_set_and_forget_faq5_q({}, { locale }), answer: m.solutions_set_and_forget_faq5_a({}, { locale }), ...links.selfHosted },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Enterprise Software Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
+})
+
+const content = {
+  title,
+  description,
+  image: `${baseUrl}/capgo_social.png`,
+  ldJSON,
+}
 ---
 
 <Layout content={content}>
@@ -109,33 +185,16 @@ const boundaries = [
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                ></path>
               </svg>
               {m.solutions_set_and_forget({}, { locale })}
             </p>
-            <h1 class="mt-6 max-w-[13ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-6xl">
+            <h1 class="mt-6 max-w-[16ch] text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-6xl">
               {m.solutions_set_and_forget_hero_title({}, { locale })}
             </h1>
-            <p class="mt-6 max-w-[64ch] text-lg text-pretty text-slate-300 sm:text-xl">
-              {m.solutions_set_and_forget_hero_subtitle({}, { locale })}
-            </p>
-            <HumanSupport class="mt-6" size="sm" />
-            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="https://book.capgo.app/demo/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex min-h-12 items-center justify-center rounded-xl bg-amber-300 px-4 py-3 text-base font-semibold text-slate-950 transition-colors hover:bg-amber-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200"
-              >
-                {m.solutions_set_and_forget_cta_primary({}, { locale })}
-              </a>
-              <a
-                href={getRelativeLocaleUrl(locale, 'docs/live-updates/update-behavior')}
-                class="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-600 px-4 py-3 text-base font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:bg-slate-900 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-300"
-              >
-                {m.solutions_set_and_forget_cta_secondary({}, { locale })}
-              </a>
-            </div>
+            <p class="mt-6 max-w-[64ch] text-lg text-pretty text-slate-300 sm:text-xl">{m.solutions_set_and_forget_hero_subtitle({}, { locale })}</p>
+            <SignupCta align="start" class="mt-8" />
           </div>
 
           <figure class="overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl shadow-slate-950/50">
@@ -149,7 +208,7 @@ const boundaries = [
             </div>
             <img
               src="/channels.webp"
-              alt="Capgo channels dashboard used to manage private enterprise app releases"
+              alt={m.solutions_set_and_forget_image_alt({}, { locale })}
               width="3080"
               height="986"
               loading="eager"
@@ -166,179 +225,116 @@ const boundaries = [
                 <dd class="mt-1 text-slate-100">{m.solutions_set_and_forget_rollout_value({}, { locale })}</dd>
               </div>
               <div class="p-4">
-                <dt class="font-medium text-slate-400">{m.solutions_set_and_forget_update_label({}, { locale })}</dt>
-                <dd class="mt-1 text-slate-100">{m.solutions_set_and_forget_offline_label({}, { locale })}</dd>
+                <dt class="font-medium text-slate-400">{m.solutions_set_and_forget_check_label({}, { locale })}</dt>
+                <dd class="mt-1 text-slate-100">{m.solutions_set_and_forget_check_value({}, { locale })}</dd>
               </div>
             </dl>
           </figure>
         </div>
 
         <dl class="mt-12 grid gap-4 sm:grid-cols-3">
-          {
-            proofPoints.map((item) => (
-              <div class="rounded-2xl border border-slate-800 bg-slate-900 p-5">
-                <dt class="text-lg font-semibold text-white">{item.label}</dt>
-                <dd class="mt-2 text-base text-slate-400">{item.description}</dd>
-              </div>
-            ))
-          }
+          {proofPoints.map((item) => (
+            <div class="rounded-2xl border border-slate-800 bg-slate-900 p-5">
+              <dt class="text-lg font-semibold text-white">{item.label}</dt>
+              <dd class="mt-2 text-base text-slate-400">{item.description}</dd>
+            </div>
+          ))}
         </dl>
       </div>
     </section>
 
-    <section class="bg-slate-900 py-16 sm:py-20">
+    <section id="saf-problem" class="bg-slate-900 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-10 lg:grid-cols-[8fr_9fr] lg:items-center">
           <div>
-            <h2 class="max-w-[18ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-              {m.solutions_set_and_forget_problem_title({}, { locale })}
-            </h2>
-            <p class="mt-5 max-w-[62ch] text-lg text-pretty text-slate-300">
-              {m.solutions_set_and_forget_problem_copy({}, { locale })}
-            </p>
+            <h2 class="max-w-[18ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">{m.solutions_set_and_forget_problem_title({}, { locale })}</h2>
+            <p class="mt-5 max-w-[62ch] text-lg text-pretty text-slate-300">{m.solutions_set_and_forget_problem_copy({}, { locale })}</p>
           </div>
           <dl class="grid gap-4 sm:grid-cols-3">
-            <div class="rounded-2xl border border-sky-400/25 bg-sky-400/10 p-5">
-              <dt class="text-sm font-medium text-sky-200">{m.solutions_set_and_forget_install_label({}, { locale })}</dt>
-              <dd class="mt-3 text-2xl font-semibold tracking-tight text-white">1x</dd>
-            </div>
-            <div class="rounded-2xl border border-emerald-400/25 bg-emerald-400/10 p-5">
-              <dt class="text-sm font-medium text-emerald-200">{m.solutions_set_and_forget_update_label({}, { locale })}</dt>
-              <dd class="mt-3 text-2xl font-semibold tracking-tight text-white">{m.solutions_set_and_forget_ci_label({}, { locale })}</dd>
-            </div>
-            <div class="rounded-2xl border border-amber-300/25 bg-amber-300/10 p-5">
-              <dt class="text-sm font-medium text-amber-100">{m.solutions_set_and_forget_offline_label({}, { locale })}</dt>
-              <dd class="mt-3 text-2xl font-semibold tracking-tight text-white">cached</dd>
-            </div>
+            {stats.map((stat) => (
+              <div class:list={['rounded-2xl border p-5', stat.box]}>
+                <dt class:list={['text-sm font-medium', stat.text]}>{stat.label}</dt>
+                <dd class="mt-3 text-xl font-semibold tracking-tight text-balance text-white">{stat.value}</dd>
+              </div>
+            ))}
           </dl>
         </div>
       </div>
     </section>
 
-    <section class="py-16 sm:py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 class="max-w-[18ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-          {m.solutions_set_and_forget_workflow_title({}, { locale })}
-        </h2>
-        <ol class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-          {
-            workflowSteps.map((step, index) => (
-              <li class="rounded-2xl border border-slate-800 bg-slate-900 p-5">
-                <span class="flex size-10 items-center justify-center rounded-full bg-amber-300 text-sm font-semibold text-slate-950 tabular-nums">{index + 1}</span>
-                <h3 class="mt-5 text-lg font-semibold text-white">{step.title}</h3>
-                <p class="mt-3 text-base text-pretty text-slate-400">{step.description}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section class="bg-slate-900 py-16 sm:py-20">
+    <section id="saf-constraints" class="py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-10 lg:grid-cols-[7fr_10fr]">
           <div>
-            <h2 class="max-w-[19ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-              {m.solutions_set_and_forget_constraints_title({}, { locale })}
-            </h2>
-            <p class="mt-5 max-w-[58ch] text-lg text-pretty text-slate-300">
-              {m.solutions_set_and_forget_implementation_desc({}, { locale })}
-            </p>
+            <h2 class="max-w-[19ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">{m.solutions_set_and_forget_constraints_title({}, { locale })}</h2>
+            <p class="mt-5 max-w-[58ch] text-lg text-pretty text-slate-300">{m.solutions_set_and_forget_implementation_desc({}, { locale })}</p>
           </div>
           <dl class="grid gap-4 sm:grid-cols-2">
-            {
-              constraints.map((item) => (
-                <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
-                  <dt class="text-lg font-semibold text-white">{item.title}</dt>
-                  <dd class="mt-3 text-base text-pretty text-slate-400">{item.description}</dd>
-                </div>
-              ))
-            }
+            {constraints.map((item) => (
+              <div class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                <dt class="text-lg font-semibold text-white">{item.title}</dt>
+                <dd class="mt-3 text-base text-pretty text-slate-400">{item.description}</dd>
+                <dd class="mt-auto pt-4">
+                  <a href={item.link.href} class="text-sm font-semibold text-amber-200 hover:text-white hover:underline">
+                    {item.link.label}
+                  </a>
+                </dd>
+              </div>
+            ))}
           </dl>
         </div>
       </div>
     </section>
 
-    <section class="py-16 sm:py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-8 lg:grid-cols-2">
-          <div>
-            <h2 class="max-w-[18ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-              {m.solutions_set_and_forget_implementation_title({}, { locale })}
-            </h2>
-            <p class="mt-5 max-w-[62ch] text-lg text-pretty text-slate-300">
-              {m.solutions_set_and_forget_implementation_desc({}, { locale })}
-            </p>
-          </div>
-          <div class="grid gap-4">
-            <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900">
-              <div class="border-b border-slate-800 px-5 py-3 text-sm font-medium text-slate-300">{m.solutions_set_and_forget_ci_label({}, { locale })}</div>
-              <pre
-                class="overflow-x-auto p-5 text-sm text-slate-300"><code><span class="text-slate-500"># Build and publish the web layer</span>
-npx @capgo/cli@latest bundle upload --channel site-eu
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_set_and_forget_how_title({}, { locale })}
+      description={m.solutions_set_and_forget_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.updateBehavior, links.settings, links.notify, links.rollbacks, links.logs, links.devices, links.observe, links.notifications]}
+      class="bg-slate-900"
+    />
 
-<span class="text-slate-500"># Promote after the first site validates it</span>
-npx @capgo/cli@latest channel set production com.enterprise.app --latest</code></pre>
-            </div>
-            <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900">
-              <div class="border-b border-slate-800 px-5 py-3 text-sm font-medium text-slate-300">{m.solutions_set_and_forget_config_label({}, { locale })}</div>
-              <pre
-                class="overflow-x-auto p-5 text-sm text-slate-300"><code>const config = {'{'}
-  plugins: {'{'}
-    CapacitorUpdater: {'{'}
-      defaultChannel: 'production',
-      autoUpdate: true,
-    {'}'},
-  {'}'},
-{'}'}</code></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="border-y border-slate-800 bg-slate-900 py-16 sm:py-20">
+    <section id="saf-boundaries" class="border-y border-slate-800 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-10 lg:grid-cols-[7fr_10fr]">
-          <h2 class="max-w-[18ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-            {m.solutions_set_and_forget_boundary_title({}, { locale })}
-          </h2>
+          <h2 class="max-w-[18ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">{m.solutions_set_and_forget_boundary_title({}, { locale })}</h2>
           <ul class="grid gap-4">
-            {
-              boundaries.map((item) => (
-                <li class="flex gap-4 rounded-2xl border border-slate-800 bg-slate-950 p-5 text-base text-pretty text-slate-300">
-                  <svg class="mt-1 size-5 shrink-0 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                  <span>{item}</span>
-                </li>
-              ))
-            }
+            {boundaries.map((item) => (
+              <li class="flex gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-5 text-base text-pretty text-slate-300">
+                <svg class="mt-1 size-5 shrink-0 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
     </section>
 
     <SolutionAppExample solution="set-and-forget" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['set-and-forget']}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_set_and_forget_faq_title({}, { locale })}
+      description={m.solutions_set_and_forget_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
     <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="rounded-2xl border border-amber-300/30 bg-amber-300/10 p-6 sm:p-8 lg:flex lg:items-center lg:justify-between lg:gap-8">
           <div>
-            <h2 class="max-w-[22ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-              {m.solutions_set_and_forget_cta_title({}, { locale })}
-            </h2>
-            <p class="mt-4 max-w-[64ch] text-lg text-pretty text-amber-50/80">
-              {m.solutions_set_and_forget_cta_subtitle({}, { locale })}
-            </p>
+            <h2 class="max-w-[22ch] text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">{m.solutions_set_and_forget_cta_title({}, { locale })}</h2>
+            <p class="mt-4 max-w-[64ch] text-lg text-pretty text-amber-50/80">{m.solutions_set_and_forget_cta_subtitle({}, { locale })}</p>
           </div>
-          <a
-            href="https://book.capgo.app/demo/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl border border-amber-200 px-4 py-3 text-base font-semibold text-amber-50 transition-colors hover:bg-amber-200 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200 lg:mt-0"
-          >
-            {m.solutions_set_and_forget_cta_primary({}, { locale })}
-          </a>
+          <SignupCta humanSupport enterprise align="start" class="mt-8 shrink-0 lg:mt-0" />
         </div>
       </div>
     </section>

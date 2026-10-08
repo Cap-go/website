@@ -12,16 +12,29 @@ bun add @capgo/capacitor-alarm
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `createAlarm` - Create a native OS alarm using the platform clock app. On Android this uses the Alarm Clock intent; on iOS this uses AlarmKit if available (iOS 16+).
-- `openAlarms` - Open the platform's native alarm list UI, if available.
-- `getOSInfo` - Get information about the OS and capabilities.
-- `requestPermissions` - Request relevant permissions for alarm usage on the platform. On Android, may route to settings for exact alarms.
+## Import
 
-## Example Usage
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+```
 
-### `createAlarm`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `createAlarm` | Create a native OS alarm using the platform clock app. On Android this uses the Alarm Clock intent; on iOS this uses AlarmKit if available (iOS 16+). |
+| `openAlarms` | Open the platform's native alarm list UI, if available. |
+| `getOSInfo` | Get information about the OS and capabilities. |
+| `requestPermissions` | Request relevant permissions for alarm usage on the platform. On Android, may route to settings for exact alarms. |
+| `checkPermissions` | Check the current permission state for native alarm access without triggering UI. On iOS this reports AlarmKit readiness; on Android it reports capability details. |
+| `getAlarms` | Get a list of alarms scheduled by this app. On iOS 26+, returns alarms from AlarmKit. On Android, this is not supported as the system does not provide an API to query alarms. |
+| `cancelAlarm` | Cancel a scheduled alarm by its ID. On iOS 26+, removes the alarm from AlarmKit. On Android/web, returns not supported. |
+
+## Examples
+
+### `createAlarm()`
 
 Create a native OS alarm using the platform clock app. On Android this uses the Alarm Clock intent; on iOS this uses AlarmKit if available (iOS 16+).
 
@@ -38,7 +51,7 @@ const result = await CapgoAlarm.createAlarm({
 console.log('Alarm created:', result.success);
 ```
 
-### `openAlarms`
+### `openAlarms()`
 
 Open the platform's native alarm list UI, if available.
 
@@ -51,7 +64,7 @@ if (result.success) {
 }
 ```
 
-### `getOSInfo`
+### `getOSInfo()`
 
 Get information about the OS and capabilities.
 
@@ -66,7 +79,7 @@ if (info.platform === 'android') {
 }
 ```
 
-### `requestPermissions`
+### `requestPermissions()`
 
 Request relevant permissions for alarm usage on the platform. On Android, may route to settings for exact alarms.
 
@@ -81,10 +94,38 @@ if (result.granted) {
 }
 ```
 
-## Full Reference
+### `checkPermissions()`
 
-- GitHub: https://github.com/Cap-go/capacitor-alarm/
-- Docs: /docs/plugins/alarm/
+Check the current permission state for native alarm access without triggering UI. On iOS this reports AlarmKit readiness; on Android it reports capability details.
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const status = await CapgoAlarm.checkPermissions();
+console.log('AlarmKit allowed?', status.details?.alarmKit);
+```
+
+### `getAlarms()`
+
+Get a list of alarms scheduled by this app. On iOS 26+, returns alarms from AlarmKit. On Android, this is not supported as the system does not provide an API to query alarms.
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const { alarms } = await CapgoAlarm.getAlarms();
+console.log('Scheduled alarms:', alarms);
+alarms.forEach(alarm => {
+  console.log(`Alarm ${alarm.id}: ${alarm.hour}:${alarm.minute} - ${alarm.label}`);
+});
+```
+
+The table above lists the 7 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-alarm/).
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-alarm/)
+- [Documentation](/docs/plugins/alarm/)
+- [API reference](/docs/plugins/alarm/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-alarm
 

@@ -41,7 +41,8 @@ Call a callable function by name.
 ```typescript
 import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
 
-await FirebaseFunctions.callByName({} as CallByNameOptions<RequestData>);
+const result = await FirebaseFunctions.callByName({ name: 'myFunction' });
+console.log(result);
 ```
 
 ### `callByUrl`
@@ -51,7 +52,10 @@ Call a callable function by URL.
 ```typescript
 import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
 
-await FirebaseFunctions.callByUrl({} as CallByUrlOptions<RequestData>);
+const result = await FirebaseFunctions.callByUrl({
+  url: 'https://us-central1-my-project.cloudfunctions.net/myFunction',
+});
+console.log(result);
 ```
 
 ### `useEmulator`
@@ -71,7 +75,7 @@ On Android, the cleartext traffic must be allowed. On the Capacitor configuratio
 ```typescript
 import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
 
-await FirebaseFunctions.useEmulator({} as UseEmulatorOptions);
+await FirebaseFunctions.useEmulator({ host: "127.0.0.1" });
 ```
 
 ## Type Reference

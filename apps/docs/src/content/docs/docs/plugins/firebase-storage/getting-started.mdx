@@ -41,7 +41,7 @@ Delete a file.
 ```typescript
 import { FirebaseStorage } from '@capgo/capacitor-firebase-storage';
 
-await FirebaseStorage.deleteFile({} as DeleteFileOptions);
+await FirebaseStorage.deleteFile({ path: 'mountains.png' });
 ```
 
 ### `getDownloadUrl`
@@ -51,7 +51,8 @@ Get the download url for a file.
 ```typescript
 import { FirebaseStorage } from '@capgo/capacitor-firebase-storage';
 
-await FirebaseStorage.getDownloadUrl({} as GetDownloadUrlOptions);
+const result = await FirebaseStorage.getDownloadUrl({ path: 'mountains.png' });
+console.log(result);
 ```
 
 ### `getMetadata`
@@ -61,7 +62,8 @@ Get the metadata for a file.
 ```typescript
 import { FirebaseStorage } from '@capgo/capacitor-firebase-storage';
 
-await FirebaseStorage.getMetadata({} as GetMetadataOptions);
+const result = await FirebaseStorage.getMetadata({ path: 'mountains.png' });
+console.log(result);
 ```
 
 ### `listFiles`
@@ -71,7 +73,8 @@ List files in a directory.
 ```typescript
 import { FirebaseStorage } from '@capgo/capacitor-firebase-storage';
 
-await FirebaseStorage.listFiles({} as ListFilesOptions);
+const result = await FirebaseStorage.listFiles({ path: 'path/to/file' });
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `updateMetadata`
@@ -81,7 +84,10 @@ Update the metadata for a file.
 ```typescript
 import { FirebaseStorage } from '@capgo/capacitor-firebase-storage';
 
-await FirebaseStorage.updateMetadata({} as UpdateMetadataOptions);
+await FirebaseStorage.updateMetadata({
+  path: 'path/to/file',
+  metadata: {},
+});
 ```
 
 ### `uploadFile`
@@ -91,7 +97,10 @@ Upload a file.
 ```typescript
 import { FirebaseStorage } from '@capgo/capacitor-firebase-storage';
 
-await FirebaseStorage.uploadFile({} as UploadFileOptions, {} as UploadFileCallback);
+const result = await FirebaseStorage.uploadFile({ path: 'mountains.png' }, (event, error) => {
+  console.log(event);
+});
+console.log(result);
 ```
 
 ### `useEmulator`
@@ -111,7 +120,7 @@ On Android, the cleartext traffic must be allowed. On the Capacitor configuratio
 ```typescript
 import { FirebaseStorage } from '@capgo/capacitor-firebase-storage';
 
-await FirebaseStorage.useEmulator({} as UseEmulatorOptions);
+await FirebaseStorage.useEmulator({ host: "127.0.0.1" });
 ```
 
 ## Type Reference

@@ -119,7 +119,7 @@ jobs:
           BRANCH_NAME=$(echo "$(Build.SourceBranchName)" | sed 's/[^a-zA-Z0-9-]/-/g')
           CHANNEL_NAME="feature-$BRANCH_NAME"
           npm install -g @capgo/cli
-          npx @capgo/cli channel create $CHANNEL_NAME --apikey $(CAPGO_TOKEN) || true
+          npx @capgo/cli channel add $CHANNEL_NAME --apikey $(CAPGO_TOKEN) || true
           npx @capgo/cli bundle upload --apikey $(CAPGO_TOKEN) --channel $CHANNEL_NAME
         displayName: 'Deploy to Feature Channel'
 ```
@@ -252,7 +252,7 @@ stages:
           - script: |
               CHANNEL_NAME="pr-$(System.PullRequest.PullRequestNumber)"
               npm install -g @capgo/cli
-              npx @capgo/cli channel create $CHANNEL_NAME --apikey $(CAPGO_TOKEN) || true
+              npx @capgo/cli channel add $CHANNEL_NAME --apikey $(CAPGO_TOKEN) || true
               npx @capgo/cli bundle upload --apikey $(CAPGO_TOKEN) --channel $CHANNEL_NAME --path $(Pipeline.Workspace)/app-build
             displayName: 'Deploy to PR Channel'
 

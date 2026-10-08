@@ -1,53 +1,11 @@
 /* Capacitor Skills — builder design language (transitive gradient accent) */
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealLight.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealBook.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealMedium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealBold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealExtraBold.woff') format('woff');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealBlack.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
 .sk {
   --gradient-accent: linear-gradient(90deg, #60a5fa 0%, #22d3ee 50%, #4ade80 100%);
   --gradient-accent-soft: linear-gradient(90deg, rgba(96, 165, 250, 0.55), rgba(34, 211, 238, 0.55), rgba(74, 222, 128, 0.55));
   --grid-line: rgba(96, 165, 250, 0.06);
   --cap-blue-600: #2563eb;
   --cap-blue-700: #1d4ed8;
-  --sk-font-display: 'Airbnb Cereal', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --sk-font-display: Satoshi, ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   position: relative;
   color: #fff;
@@ -72,9 +30,6 @@ body:has(.sk) {
 }
 .sk.bg-ad {
   background: transparent;
-}
-body:has(.sk) footer > div > div:first-child {
-  display: none !important;
 }
 .sk .bg-grid::before {
   content: '';

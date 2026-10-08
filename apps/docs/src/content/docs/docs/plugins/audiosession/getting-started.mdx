@@ -43,7 +43,8 @@ On web and non-iOS platforms, this resolves to an empty array.
 ```typescript
 import { AudioSession } from '@capgo/capacitor-audio-session';
 
-await AudioSession.currentOutputs();
+const result = await AudioSession.currentOutputs();
+console.log(result);
 ```
 
 ### `overrideOutput`
@@ -56,7 +57,8 @@ Use `speaker` to force playback through the built-in speaker, or
 ```typescript
 import { AudioSession } from '@capgo/capacitor-audio-session';
 
-await AudioSession.overrideOutput({} as OutputOverrideType);
+const result = await AudioSession.overrideOutput('default');
+console.log(result);
 ```
 
 ## Type Reference

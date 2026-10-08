@@ -1,22 +1,32 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
-import { MCP_ENDPOINT_PATHS, MCP_MANIFEST_PATHS, OPENAPI_ALIAS_PATHS, OPENAPI_ASSET_PATH, markdownNotFoundResponse, prefersMarkdown } from '../../../shared/agentDiscovery'
+import {
+  markdownNotFoundResponse,
+  MCP_ENDPOINT_PATHS,
+  MCP_MANIFEST_PATHS,
+  OPENAPI_ALIAS_PATHS,
+  OPENAPI_ASSET_PATH,
+  prefersMarkdown,
+  prefersMcpMarketingHtml,
+} from '../../../shared/agentDiscovery'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
-import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
-import { handleBuilderMetrics, BUILDER_METRICS_PATH } from './builder-metrics'
+import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
+import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
+import { handleMtaStsRequest } from './mta-sts'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
+import { websiteDesignHtmlResponse, websiteDesignSignupResponse } from './website-design-experiment'
 
 interface Env {
+  WEBSITE_DESIGN_EXPERIMENT?: string
   ASSETS: {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
   PERSONAL_ACCESS_TOKEN?: string
   CF_ACCOUNT_ANALYTICS_ID?: string
   CF_ANALYTICS_TOKEN?: string
-  SUPABASE_URL?: string
-  SUPABASE_ANON_KEY?: string
+  BUILDER_DB?: import('../lib/builderMetricsD1').BuilderD1Database
   IOS_UDID_PROFILE_SIGNING_CERT_PEM?: string
   IOS_UDID_PROFILE_SIGNING_KEY_PEM?: string
   IOS_UDID_PROFILE_SIGNING_CHAIN_PEM?: string
@@ -198,19 +208,17 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   },
   [LIVE_UPDATE_METRICS_PATH]: {
     methods: ['GET', 'HEAD'],
-    handle: async (request, env) => {
-      const response = await handleLiveUpdateMetrics(request, env)
-      if (request.method === 'HEAD')
-        return new Response(null, { status: response.status, headers: response.headers })
+    handle: async (request, env, ctx) => {
+      const response = await handleLiveUpdateMetrics(request, env, ctx)
+      if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
   },
   [BUILDER_METRICS_PATH]: {
     methods: ['GET', 'HEAD'],
-    handle: async (request, env) => {
-      const response = await handleBuilderMetrics(request, env)
-      if (request.method === 'HEAD')
-        return new Response(null, { status: response.status, headers: response.headers })
+    handle: async (request, env, ctx) => {
+      const response = await handleBuilderMetrics(request, env, ctx)
+      if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
   },
@@ -420,8 +428,32 @@ async function openApiAliasResponse(request: Request, env: Env): Promise<Respons
   })
 }
 
-async function agentSurfaceResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
-  if (MCP_ENDPOINT_PATHS.has(pathname)) return handleMcpRequest(request)
+async function mcpMarketingHtmlResponse(request: Request, env: Env): Promise<Response | null> {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return null
+  if (!prefersMcpMarketingHtml(request)) return null
+  const assetUrl = new URL('/mcp/index.html', request.url)
+  const assetRequest = new Request(assetUrl.toString(), {
+    method: request.method,
+    headers: request.headers,
+  })
+  const asset = await env.ASSETS.fetch(assetRequest)
+  if (!asset.ok) return null
+  const headers = new Headers(asset.headers)
+  headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.append('Vary', 'Accept')
+  return new Response(request.method === 'HEAD' ? null : asset.body, {
+    status: asset.status,
+    statusText: asset.statusText,
+    headers,
+  })
+}
+
+export async function agentSurfaceResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  if (MCP_ENDPOINT_PATHS.has(pathname)) {
+    const marketing = await mcpMarketingHtmlResponse(request, env)
+    if (marketing) return marketing
+    return handleMcpRequest(request)
+  }
   if (MCP_MANIFEST_PATHS.has(pathname)) return handleMcpManifestRequest(request)
   if (OPENAPI_ALIAS_PATHS.has(pathname)) return openApiAliasResponse(request, env)
   return null
@@ -429,6 +461,10 @@ async function agentSurfaceResponse(request: Request, env: Env, pathname: string
 
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
+    const mtaStsResponse = handleMtaStsRequest(request)
+    if (mtaStsResponse) return mtaStsResponse
+    const signupMeasurement = await websiteDesignSignupResponse(request, env, ctx)
+    if (signupMeasurement) return signupMeasurement
     const pathname = new URL(request.url).pathname
     const agentSurface = await agentSurfaceResponse(request, env, pathname)
     if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
@@ -446,6 +482,8 @@ export default {
     if (toolRouteResponse) return trackAICrawler(request, toolRouteResponse, ctx)
     const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
     if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
+    const experimentResponse = await websiteDesignHtmlResponse(request, env)
+    if (experimentResponse) return trackAICrawler(request, experimentResponse, ctx)
     const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
     if (assetResponse.status === 404) {
       const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)

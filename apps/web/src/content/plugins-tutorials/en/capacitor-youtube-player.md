@@ -60,7 +60,8 @@ Destroy a player instance and free resources.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.destroy({} as PlayerIdOptions);
+const result = await YoutubePlayer.destroy({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `stopVideo`
@@ -70,7 +71,8 @@ Stop video playback and cancel loading. Use this sparingly - pauseVideo() is usu
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.stopVideo({} as PlayerIdOptions);
+const result = await YoutubePlayer.stopVideo({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `playVideo`
@@ -80,7 +82,8 @@ Play the currently cued or loaded video. Final player state will be PLAYING (1).
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.playVideo({} as PlayerIdOptions);
+const result = await YoutubePlayer.playVideo({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ## Full Reference

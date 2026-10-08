@@ -27,7 +27,7 @@ We use the term "bundle" to mean a patch that can be applied to a release to upd
 
 Yes:
 
-- **Zero-byte files:** The CLI logs `Ignoring empty file...` and excludes empty files from the Delta manifest. It does not fail the upload, so an empty file can change the resulting bundle without stopping your deployment. Do not include zero-byte files in Delta bundle paths.
+- **Zero-byte files:** The CLI logs `Ignoring empty file...` and excludes empty files from the delta files. It does not fail the upload, so an empty file can change the resulting bundle without stopping your deployment. Do not include zero-byte files in Delta bundle paths.
 - **Paths with spaces:** Delta uploads fail early with a clear error when a bundle path contains a space. Rename files or directories to remove spaces before uploading a Delta update.
 
 See [Delta updates](/docs/live-updates/differentials/) for setup details.
@@ -313,7 +313,18 @@ Storage includes retained historical bundles and their Delta assets across your 
 
 ### Does regional replication multiply storage or bandwidth?[](https://capgo.app/docs/faq/#does-regional-replication-multiply-storage-or-bandwidth "Direct link to Does regional replication multiply storage or bandwidth?")
 
-No. A bundle is counted once for storage, regardless of the regions serving it. Capgo bandwidth is based on device downloads that are not served from the edge cache; cache-served deliveries do not count against Capgo bandwidth usage.
+No. A bundle is counted once for storage, regardless of the regions serving it. Bandwidth is not multiplied by regions either: see [How is bandwidth counted?](#how-is-bandwidth-counted).
+
+### How is bandwidth counted?[](https://capgo.app/docs/faq/#how-is-bandwidth-counted "Direct link to How is bandwidth counted?")
+
+Bandwidth only counts the files a device actually downloads from Capgo:
+
+- **Delta updates:** when you upload with `--delta`, a device downloads only the files that changed since the version it already has. Only those files count. Unchanged files, like large images or fonts, are not downloaded again and cost nothing. See [Delta updates](/docs/live-updates/differentials/).
+- **Edge cache:** if a requested file or full zip is already cached at the edge, that download does not count against your bandwidth. This applies to Delta files and full zips alike.
+- **Resumed downloads:** if a download is interrupted, the device resumes from where it stopped. The part already downloaded is not downloaded or counted again.
+- **Full zip:** bundles uploaded without `--delta`, or devices on a plugin version without Delta support, download the full zip. It counts only when it is not served from the edge cache.
+
+To keep bandwidth low, upload with `--delta` and keep large assets that rarely change in stable file paths.
 
 ### What does the Enterprise SLA include?[](https://capgo.app/docs/faq/#what-does-the-enterprise-sla-include "Direct link to What does the Enterprise SLA include?")
 

@@ -2,6 +2,8 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import 'toastify-js/src/toastify.css'
+import RatingSummary from '@/components/RatingSummary.astro'
+import { allTestimonials, hasRealAvatar } from '@/config/productTestimonials'
 
 const captchaKey = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 const CLOUDFLARE_TURNSTILE_SITE_KEY = captchaKey
@@ -11,6 +13,19 @@ const title = `${Astro.locals.runtimeConfig.public.brand} | ${m.register_title({
 const description = m.register_description
   ? m.register_description({}, { locale: Astro.locals.locale })
   : 'Create your free Capgo account and start deploying live updates to your Capacitor apps in minutes.'
+const benefits = [
+  m.menu_live_update_tagline({}, { locale: Astro.locals.locale }),
+  m.menu_native_build_tagline({}, { locale: Astro.locals.locale }),
+  m.menu_observe_tagline({}, { locale: Astro.locals.locale }),
+]
+const initialsOf = (name: string) =>
+  name
+    .replace(/@.*/, '')
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0]?.toUpperCase() ?? '')
+    .join('')
 const content = {
   title,
   description,
@@ -18,256 +33,274 @@ const content = {
 }
 ---
 
-{enableCaptcha && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />}
+{enableCaptcha && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 
 <Layout content={content}>
   <div class="hero-wash">
-    <section class="relative flex min-h-screen items-center justify-center overflow-hidden p-4">
-      <div class="relative w-full max-w-4xl">
-        <div class="relative z-10 grid overflow-hidden rounded-lg bg-white shadow-xl md:grid-cols-2">
-          <div class="space-y-6 p-6">
-            <div>
-              <h1 class="text-4xl font-bold text-gray-900">{m.register_title({}, { locale: Astro.locals.locale })}</h1>
-              <p class="text-sm text-gray-500">
-                {m.already_have_account({}, { locale: Astro.locals.locale })}
-                <a href="https://console.capgo.app/login/" target="_blank" class="text-gray-200 hover:underline">{m.sign_in({}, { locale: Astro.locals.locale })}</a>
-              </p>
-            </div>
-            <form id="registerForm" class="space-y-4 text-black">
-              <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">{m.email_label({}, { locale: Astro.locals.locale })}</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-gray-500 focus:outline-none"
-                  placeholder={m.email_placeholder({}, { locale: Astro.locals.locale })}
-                />
-              </div>
-              <div class="grid grid-cols-2 gap-4">
-                <div>
-                  <label for="firstName" class="block text-sm font-medium text-gray-700">{m.first_name_label({}, { locale: Astro.locals.locale })}</label>
-                  <input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    required
-                    class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-gray-500 focus:outline-none"
-                    placeholder={m.first_name_placeholder({}, { locale: Astro.locals.locale })}
-                  />
-                </div>
-                <div>
-                  <label for="lastName" class="block text-sm font-medium text-gray-700">{m.last_name_label({}, { locale: Astro.locals.locale })}</label>
-                  <input
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    required
-                    class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-gray-500 focus:outline-none"
-                    placeholder={m.last_name_placeholder({}, { locale: Astro.locals.locale })}
-                  />
-                </div>
-              </div>
-              <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">{m.password_label({}, { locale: Astro.locals.locale })}</label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-gray-500 focus:outline-none"
-                  placeholder={m.password_placeholder({}, { locale: Astro.locals.locale })}
-                />
-              </div>
-              {
-                enableCaptcha && (
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Captcha</label>
-                    <div class="cf-turnstile" data-sitekey={CLOUDFLARE_TURNSTILE_SITE_KEY} data-size="flexible" />
-                  </div>
-                )
-              }
-              <button
-                type="submit"
-                class="flex w-full justify-center rounded-md border border-transparent bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
-              >
-                {m.sign_up_button({}, { locale: Astro.locals.locale })}
-              </button>
-              <p class="mt-2 text-center text-xs text-gray-400" set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })} />
-            </form>
-            <div class="relative">
-              <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-gray-300"></div>
-              </div>
-              <div class="relative flex justify-center text-sm">
-                <span class="bg-white px-2 text-gray-500">{m.need_help({}, { locale: Astro.locals.locale })}</span>
-              </div>
-            </div>
+    <section class="relative overflow-hidden px-4 pt-10 pb-24 sm:pt-16">
+      <div class="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-16">
+        <div class="rounded-3xl border border-white/10 bg-[#101216]/90 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl sm:p-8">
+          <h1 class="text-3xl font-bold tracking-tight text-white">{m.register_title({}, { locale: Astro.locals.locale })}</h1>
+          <p class="mt-2 text-sm text-slate-400">
+            {m.already_have_account({}, { locale: Astro.locals.locale })}
             <a
-              href="https://support.capgo.app"
-              class="flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+              href="https://console.capgo.app/login/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-[#44BCFF] underline-offset-4 hover:text-white hover:underline"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-                ></path>
-              </svg>
-              {m.open_support({}, { locale: Astro.locals.locale })}
+              {m.sign_in({}, { locale: Astro.locals.locale })}
             </a>
-          </div>
-          <div class="flex items-center bg-slate-800 p-4">
-            <blockquote class="text-white">
-              <p class="mb-4 text-2xl font-bold">
-                {m.testimonial_title({}, { locale: Astro.locals.locale })}<br />
-                After update,
-                <span class="rounded-full bg-gray-900 px-2 py-1 text-white">{m.testimonial_highlight({}, { locale: Astro.locals.locale })}</span>
-              </p>
-              <div class="mb-4 flex items-center">
-                <img src="/avatar-male-2.webp" alt="Jermaine, a Capgo customer" class="mr-4 h-12 w-12 rounded-full" />
-                <div>
-                  <cite class="font-bold text-white">Jermaine</cite>
-                  <p class="text-gray-400">{m.testimonial_description({}, { locale: Astro.locals.locale })}</p>
-                </div>
+          </p>
+          <p class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-300">
+            <span class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">{m.days_free_trial({}, { locale: Astro.locals.locale })}</span>
+            <span class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">{m.no_credit_card_required({}, { locale: Astro.locals.locale })}</span>
+          </p>
+
+          <form id="registerForm" class="mt-6 space-y-4">
+            <div>
+              <label for="email" class="block text-sm font-medium text-slate-300">
+                {m.email_label({}, { locale: Astro.locals.locale })}
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                class="mt-1.5 block w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
+                placeholder={m.email_placeholder({}, { locale: Astro.locals.locale })}
+              />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label for="firstName" class="block text-sm font-medium text-slate-300">
+                  {m.first_name_label({}, { locale: Astro.locals.locale })}
+                </label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  autocomplete="given-name"
+                  required
+                  class="mt-1.5 block w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
+                  placeholder={m.first_name_placeholder({}, { locale: Astro.locals.locale })}
+                />
               </div>
-            </blockquote>
+              <div>
+                <label for="lastName" class="block text-sm font-medium text-slate-300">
+                  {m.last_name_label({}, { locale: Astro.locals.locale })}
+                </label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  autocomplete="family-name"
+                  required
+                  class="mt-1.5 block w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
+                  placeholder={m.last_name_placeholder({}, { locale: Astro.locals.locale })}
+                />
+              </div>
+            </div>
+            <div>
+              <label for="password" class="block text-sm font-medium text-slate-300">
+                {m.password_label({}, { locale: Astro.locals.locale })}
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                required
+                class="mt-1.5 block w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
+                placeholder={m.password_placeholder({}, { locale: Astro.locals.locale })}
+              />
+            </div>
+            {enableCaptcha && <div class="cf-turnstile" data-sitekey={CLOUDFLARE_TURNSTILE_SITE_KEY} data-size="flexible" data-theme="dark" />}
+            <button
+              type="submit"
+              class="flex min-h-12 w-full items-center justify-center rounded-xl bg-blue-600 px-4 text-[15px] font-semibold text-white shadow-lg shadow-blue-600/20 transition-colors hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#101216] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {m.sign_up_button({}, { locale: Astro.locals.locale })}
+            </button>
+            <p
+              class="text-center text-xs text-slate-500 [&_a]:text-slate-300 [&_a]:underline [&_a]:underline-offset-2"
+              set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })}
+            />
+          </form>
+
+          <div class="mt-6 flex items-center gap-3 text-xs text-slate-500">
+            <span class="h-px flex-1 bg-white/10"></span>
+            {m.need_help({}, { locale: Astro.locals.locale })}
+            <span class="h-px flex-1 bg-white/10"></span>
+          </div>
+          <a
+            href="https://support.capgo.app"
+            class="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/10 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/5"
+          >
+            {m.open_support({}, { locale: Astro.locals.locale })}
+          </a>
+        </div>
+
+        <div class="text-white">
+          <RatingSummary />
+          <ul class="mt-6 space-y-3">
+            {benefits.map((benefit) => (
+              <li class="flex items-center gap-3 text-base text-slate-200">
+                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#44BCFF]/15 text-[#44BCFF] ring-1 ring-[#44BCFF]/30">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </span>
+                {benefit}
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-10" data-review-carousel aria-roledescription="carousel" aria-label="Customer reviews">
+            <div class="grid">
+              {allTestimonials.map((item, index) => (
+                <figure
+                  class:list={['review-slide flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6 [grid-area:1/1] sm:p-8', { 'is-active': index === 0 }]}
+                  data-review-slide={index}
+                  aria-roledescription="slide"
+                  aria-label={`${index + 1} / ${allTestimonials.length}`}
+                  aria-hidden={index === 0 ? undefined : 'true'}
+                >
+                  <div class="flex gap-0.5 text-amber-300" role="img" aria-label={`${item.rating} out of 5 stars`}>
+                    {Array.from({ length: item.rating }).map(() => (
+                      <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <blockquote class="mt-4 flex-1 text-lg leading-8 text-pretty text-white">&ldquo;{item.quote}&rdquo;</blockquote>
+                  <figcaption class="mt-6 flex items-center gap-3">
+                    {hasRealAvatar(item.avatar) ? (
+                      <img src={item.avatar} alt="" width="44" height="44" loading="lazy" decoding="async" class="h-11 w-11 rounded-full object-cover ring-1 ring-white/15" />
+                    ) : item.logo ? (
+                      <img
+                        src={item.logo}
+                        alt=""
+                        width="44"
+                        height="44"
+                        loading="lazy"
+                        decoding="async"
+                        class="h-11 w-11 rounded-xl bg-white object-contain ring-1 ring-white/15"
+                      />
+                    ) : (
+                      <span
+                        class="flex h-11 w-11 items-center justify-center rounded-full bg-white/[0.06] text-sm font-semibold text-slate-300 ring-1 ring-white/10"
+                        aria-hidden="true"
+                      >
+                        {initialsOf(item.name)}
+                      </span>
+                    )}
+                    <span>
+                      <cite class="block text-sm font-semibold text-white not-italic">{item.name}</cite>
+                      <span class="block text-sm text-slate-400">{item.role}</span>
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+            <div class="mt-4 flex gap-1.5">
+              {allTestimonials.map((item, index) => (
+                <button
+                  type="button"
+                  data-review-dot={index}
+                  aria-label={`Show review from ${item.name}`}
+                  aria-current={index === 0 ? 'true' : undefined}
+                  class="review-dot flex h-6 w-6 items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none"
+                >
+                  <span class="h-1.5 w-1.5 rounded-full bg-white/25 transition-[width,background-color]" />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="pointer-events-none absolute inset-0 overflow-hidden opacity-20"
-        aria-hidden="true"
-        style="background-image: url('/background-pattern.webp'); background-size: cover; background-position: top;"
-      >
       </div>
     </section>
   </div>
 </Layout>
 
+<style>
+  .review-slide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease,
+      visibility 0s linear 0.4s;
+  }
+  .review-slide.is-active {
+    opacity: 1;
+    visibility: inherit;
+    transform: none;
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+  }
+  .review-dot[aria-current='true'] span {
+    width: 1.25rem;
+    background-color: #44bcff;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .review-slide {
+      transition: none;
+    }
+  }
+</style>
+
 <script>
-  import { getRegistrationDevice } from '@/services/registration-device'
-  import { getRegisterUserMessage, registerUser } from '@/services/registration'
-  import Toastify from 'toastify-js'
+  // Rotate customer reviews: random start each visit, pause while hovered or focused.
+  document.querySelectorAll<HTMLElement>('[data-review-carousel]').forEach((carousel) => {
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-review-slide]'))
+    const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-review-dot]'))
+    if (slides.length < 2) return
+    let current = 0
+    let timer = 0
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  const form = document.getElementById('registerForm')
-  const email = document.getElementById('email') as HTMLInputElement
-  const firstName = document.getElementById('firstName') as HTMLInputElement
-  const lastName = document.getElementById('lastName') as HTMLInputElement
-  const password = document.getElementById('password') as HTMLInputElement
-  const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement
-
-  let isSubmitting = false
-
-  function getCaptchaId() {
-    if (!(window as any).turnstile) {
-      return undefined
-    }
-    return (window as any).turnstile.getResponse() as string
-  }
-
-  // Validation functions
-  function isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
-
-  function isValidName(name: string): boolean {
-    // Allow Unicode letters from all languages, spaces, hyphens, and apostrophes
-    // Rejects numbers, URLs, and most special characters while supporting international names
-    const nameRegex = /^[\p{L}\s'-]+$/u
-    return nameRegex.test(name) && name.trim().length > 0
-  }
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault()
-    if (isSubmitting || submitButton.disabled) return
-
-    // Validate email format
-    if (!isValidEmail(email.value.trim())) {
-      return Toastify({
-        text: 'Please enter a valid email address',
-        style: {
-          background: '#e7000b',
-        },
-      }).showToast()
-    }
-
-    // Validate first name
-    if (!isValidName(firstName.value)) {
-      return Toastify({
-        text: 'First name can only contain letters, spaces, hyphens, and apostrophes',
-        style: {
-          background: '#e7000b',
-        },
-      }).showToast()
-    }
-
-    // Validate last name
-    if (!isValidName(lastName.value)) {
-      return Toastify({
-        text: 'Last name can only contain letters, spaces, hyphens, and apostrophes',
-        style: {
-          background: '#e7000b',
-        },
-      }).showToast()
-    }
-
-    isSubmitting = true
-    submitButton.disabled = true
-
-    const registrationDevice = getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)
-    let result
-    try {
-      result = await registerUser({
-        email: email.value,
-        password: password.value,
-        firstName: firstName.value,
-        lastName: lastName.value,
-        captchaToken: getCaptchaId(),
-        registrationDeviceType: registrationDevice.registration_device_type,
-        registrationOs: registrationDevice.registration_os,
-        registrationBrowser: registrationDevice.registration_browser,
+    const show = (index: number) => {
+      current = (index + slides.length) % slides.length
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === current)
+        if (i === current) slide.removeAttribute('aria-hidden')
+        else slide.setAttribute('aria-hidden', 'true')
       })
-    } catch (error) {
-      isSubmitting = false
-      submitButton.disabled = false
-      console.error('Registration API error', error)
-      return Toastify({
-        text: getRegisterUserMessage(error),
-        style: {
-          background: '#e7000b',
-        },
-      }).showToast()
-    }
-    if ((window as any).datafast) {
-      ;(window as any).datafast('signup', { email: email.value })
-    }
-    if ((window as any).fbq) {
-      ;(window as any).fbq('track', 'CompleteRegistration', {
-        content_name: 'Capgo signup',
-        status: true,
+      dots.forEach((dot, i) => {
+        if (i === current) dot.setAttribute('aria-current', 'true')
+        else dot.removeAttribute('aria-current')
       })
     }
-    if ((window as any).posthog) {
-      ;(window as any).posthog.capture('user_signed_up', {
-        email: email.value,
-        first_name: firstName.value,
-        last_name: lastName.value,
-      })
+    const stop = () => window.clearInterval(timer)
+    const start = () => {
+      stop()
+      if (!reduceMotion) timer = window.setInterval(() => show(current + 1), 6000)
     }
-    if ((window as any).Affonso?.signup) {
-      const fullName = `${firstName.value} ${lastName.value}`.trim()
-      ;(window as any).Affonso.signup({
-        email: email.value,
-        externalUserId: result.user.id,
-        name: fullName || undefined,
-      })
-    }
-    const consoleUrl = `https://console.capgo.app/login/?access_token=${result.session.access_token}&refresh_token=${result.session.refresh_token}&to=/app`
-    await new Promise((resolve) => setTimeout(resolve, 400))
-    window.location.href = consoleUrl
+
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', () => {
+        show(i)
+        start()
+      }),
+    )
+    carousel.addEventListener('pointerenter', stop)
+    carousel.addEventListener('pointerleave', start)
+    carousel.addEventListener('focusin', stop)
+    carousel.addEventListener('focusout', start)
+
+    show(Math.floor(Math.random() * slides.length))
+    start()
   })
+</script>
+
+<script>
+  import '@/scripts/register'
 </script>

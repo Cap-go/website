@@ -41,7 +41,7 @@ Initializes Google Tag Manager with the specified container ID.
 ```typescript
 import { GoogleTagManager } from '@capgo/capacitor-gtm';
 
-await GoogleTagManager.initialize({} as { containerId: string; timeout?: number });
+await GoogleTagManager.initialize({ containerId: 'container-id-123' });
 ```
 
 ### `push`
@@ -81,7 +81,8 @@ Searches through the dataLayer for the most recent value of the specified key.
 ```typescript
 import { GoogleTagManager } from '@capgo/capacitor-gtm';
 
-await GoogleTagManager.getValue({} as { key: string });
+const result = await GoogleTagManager.getValue({ key: 'key-123' });
+console.log(result);
 ```
 
 ### `reset`

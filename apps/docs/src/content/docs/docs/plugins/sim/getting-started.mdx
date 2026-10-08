@@ -45,7 +45,7 @@ Requires READ_PHONE_STATE permission on Android.
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 
-const { simCards } = await SimPlugin.getSimCards();
+const { simCards } = await Sim.getSimCards();
 simCards.forEach((sim, index) => {
   console.log(`SIM ${index + 1}:`);
   console.log(`  Carrier: ${sim.carrierName}`);
@@ -67,7 +67,7 @@ On Web, the status is always denied.
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 
-const status = await SimPlugin.checkPermissions();
+const status = await Sim.checkPermissions();
 if (status.readSimCard === 'granted') {
   console.log('Permission granted');
 } else {
@@ -87,10 +87,10 @@ On Web, the status remains denied.
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 
-const status = await SimPlugin.requestPermissions();
+const status = await Sim.requestPermissions();
 if (status.readSimCard === 'granted') {
   // Now you can call getSimCards()
-  const simCards = await SimPlugin.getSimCards();
+  const simCards = await Sim.getSimCards();
 }
 ```
 

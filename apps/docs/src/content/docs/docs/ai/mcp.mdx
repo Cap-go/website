@@ -1,0 +1,192 @@
+---
+title: Hosted MCP server
+description: "Connect Claude, ChatGPT, Cursor, VS Code, and Lovable to your Capgo account with the hosted MCP server at api.capgo.app/mcp. OAuth sign-in, no install."
+sidebar:
+  label: Hosted MCP server
+  order: 1
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Capgo runs a hosted [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server so AI assistants can work with your Capgo account: list apps and bundles, move a channel to a new bundle, pause a rollout, check update health, or read native build logs, all from a chat.
+
+```text
+https://api.capgo.app/mcp
+```
+
+- **Nothing to install.** Paste the URL into your MCP client.
+- **Streamable HTTP, stateless.** It works with any client that supports remote MCP servers.
+- **OAuth 2.1 sign-in.** Clients that support MCP authorization open the Capgo console so you can approve access. Clients without OAuth can send a Capgo API key instead.
+
+<Aside type="note" title="Hosted or local?">
+The hosted server cannot read files on your computer. To upload a bundle, request a native build, or run `doctor` and `probe`, use the [local CLI MCP server](/docs/cli/reference/mcp/) (`npx @capgo/cli@latest mcp`). See [Hosted vs local MCP](#hosted-vs-local-mcp).
+</Aside>
+
+## Connect your client
+
+Clients that support OAuth only need the URL. They discover the Capgo login flow on their own and open the consent page the first time you use the server.
+
+<Tabs>
+<TabItem label="Claude.ai">
+
+1. Open **Settings → Connectors** and choose **Add custom connector**.
+2. Name it `Capgo` and paste `https://api.capgo.app/mcp` as the URL.
+3. Click **Connect** and sign in to Capgo when the consent page opens.
+
+</TabItem>
+<TabItem label="Claude Code">
+
+```bash
+claude mcp add --transport http capgo https://api.capgo.app/mcp
+```
+
+Then run `/mcp` inside Claude Code and pick `capgo` to sign in.
+
+</TabItem>
+<TabItem label="ChatGPT">
+
+1. In ChatGPT settings, open **Apps & Connectors** and turn on **Developer mode** under the advanced settings.
+2. Create a new connector, name it `Capgo`, and paste `https://api.capgo.app/mcp` as the server URL.
+3. Choose OAuth authentication and sign in to Capgo when prompted.
+
+</TabItem>
+<TabItem label="Cursor">
+
+Add the server to `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
+
+```json
+{
+  "mcpServers": {
+    "capgo": {
+      "url": "https://api.capgo.app/mcp"
+    }
+  }
+}
+```
+
+Cursor shows a **Needs login** prompt next to the server. Click it to sign in to Capgo.
+
+</TabItem>
+<TabItem label="VS Code">
+
+Add the server to `.vscode/mcp.json` in your workspace, or run **MCP: Add Server** from the command palette and choose **HTTP**:
+
+```json
+{
+  "servers": {
+    "capgo": {
+      "type": "http",
+      "url": "https://api.capgo.app/mcp"
+    }
+  }
+}
+```
+
+VS Code asks you to sign in to Capgo the first time Copilot Chat uses the server.
+
+</TabItem>
+<TabItem label="Lovable">
+
+1. Open your Lovable connectors settings and add a custom MCP server.
+2. Paste `https://api.capgo.app/mcp` as the server URL.
+3. Choose **OAuth** and sign in to Capgo. If you would rather use a key, choose **API key** and paste a [Capgo API key](/docs/webapp/api-keys/).
+
+</TabItem>
+</Tabs>
+
+Other clients that implement the MCP authorization spec, such as the MCP Inspector, work the same way: give them the URL and follow the sign-in prompt.
+
+### Clients without OAuth (API key)
+
+For n8n, scripts, CI jobs, or any client that cannot run an OAuth flow, send a [Capgo API key](/docs/webapp/api-keys/) as a bearer token:
+
+```http
+Authorization: Bearer <your Capgo API key>
+```
+
+For example, a client config that accepts custom headers:
+
+```json
+{
+  "mcpServers": {
+    "capgo": {
+      "url": "https://api.capgo.app/mcp",
+      "headers": {
+        "Authorization": "Bearer <your Capgo API key>"
+      }
+    }
+  }
+}
+```
+
+Use a key with the smallest role that covers what the assistant needs. See [API key permissions](/docs/public-api/api-keys/).
+
+## Sign-in and access
+
+The hosted server implements OAuth 2.1 with PKCE, following the [MCP authorization specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) (2025-11-25).
+
+1. Your MCP client opens the Capgo console consent page (`console.capgo.app/oauth/authorize`).
+2. You sign in with your Capgo account.
+3. You pick which organizations the client may access.
+4. Capgo creates a dedicated API key named `MCP · <client name>` for that client.
+
+That key expires after at most 90 days. If an organization enforces a shorter API key expiration policy, the stricter limit wins. After it expires, sign in again from your client to reconnect.
+
+### Revoke access
+
+Every connected client has its own `MCP · <client name>` key. To disconnect a client, delete that key on the [API keys page](/docs/webapp/api-keys/) of the Capgo console. The client loses access and has to go through the consent page again to reconnect.
+
+## What the assistant can do
+
+The hosted server exposes about 50 tools:
+
+| Area | What it covers |
+| --- | --- |
+| Account and organizations | Who am I, organizations, members and invitations, audit logs, API keys |
+| Apps | List, create, update, and delete apps |
+| Bundles | List bundles, update metadata, delete, check usage |
+| Channels and rollouts | Create and update channels, set the bundle on a channel, progressive rollouts (pause, promote, roll back), auto-pause |
+| Devices | List and inspect devices, set or remove channel overrides |
+| Statistics and Observe | App, organization, and account statistics, update health from [Observe](/docs/webapp/observe/) |
+| Native builds | Build status, build logs, cancel a build |
+| Webhooks | Create, update, test, and delete webhooks, inspect and retry deliveries |
+| Push notifications | Notification settings, providers, campaigns, sending notifications, stats |
+
+Each tool calls the [Capgo public API](/docs/public-api/) with the key from your session. Permissions (RBAC), rate limits, and audit logs behave exactly as they do for REST API calls with that key.
+
+Tools that delete or overwrite data are annotated as destructive, so MCP clients ask you to confirm before running them.
+
+### Example prompts
+
+- "List my Capgo apps and show the bundle on each production channel."
+- "Pause the rollout on the production channel of `com.example.app`."
+- "Why did my last iOS native build fail? Show me the logs."
+- "Which devices are still on bundle 1.4.2?"
+
+## Hosted vs local MCP
+
+Capgo has two MCP servers. You can use both at the same time.
+
+| | Hosted MCP | Local CLI MCP |
+| --- | --- | --- |
+| Endpoint | `https://api.capgo.app/mcp` | `npx @capgo/cli@latest mcp` (stdio) |
+| Install | Nothing, paste the URL | Runs the Capgo CLI on your machine |
+| Auth | OAuth sign-in, or `Authorization: Bearer <API key>` | `npx @capgo/cli@latest login` |
+| Works in | Claude.ai, ChatGPT, Cursor, VS Code, Lovable, n8n, and other remote MCP clients | Desktop and terminal agents that can start local processes |
+| Account management | Apps, bundles, channels, rollouts, devices, stats, Observe, builds, webhooks, notifications | Apps, bundles, channels, organizations, stats |
+| Upload a bundle from your build folder | No | Yes |
+| Request a native build | No (status, logs, and cancel only) | Yes |
+| `doctor`, `probe`, compatibility checks against your project | No | Yes |
+
+Use the hosted server for everyday account work from any chat app. Add the [local CLI MCP server](/docs/cli/reference/mcp/) when the assistant needs your project files.
+
+<Aside type="tip">
+`https://capgo.app/mcp` is a separate, public docs-discovery MCP server. It helps agents find Capgo documentation and the OpenAPI spec and cannot access an account. For account tools, use `https://api.capgo.app/mcp`.
+</Aside>
+
+## Related
+
+- [CLI MCP server (local)](/docs/cli/reference/mcp/)
+- [API keys in the console](/docs/webapp/api-keys/)
+- [Public API](/docs/public-api/)
+- [Capgo MCP for AI agents](/mcp/)

@@ -41,7 +41,13 @@ Open a store
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.openStore({} as capOpenStorageOptions);
+await CapgoCapacitorDataStorageSqlite.openStore({
+  database: 'database',
+  table: 'table',
+  encrypted: false,
+  mode: 'encryption',
+  autoVacuum: 'none',
+});
 ```
 
 ### `closeStore`
@@ -51,7 +57,7 @@ Close the Store
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.closeStore({} as capStorageOptions);
+await CapgoCapacitorDataStorageSqlite.closeStore({ database: 'database' });
 ```
 
 ### `isStoreOpen`
@@ -61,7 +67,8 @@ Check if the Store is opened
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.isStoreOpen({} as capStorageOptions);
+const result = await CapgoCapacitorDataStorageSqlite.isStoreOpen({ database: 'database' });
+console.log(result);
 ```
 
 ### `isStoreExists`
@@ -71,7 +78,8 @@ Check if the Store exists
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.isStoreExists({} as capStorageOptions);
+const result = await CapgoCapacitorDataStorageSqlite.isStoreExists({ database: 'database' });
+console.log(result);
 ```
 
 ### `deleteStore`
@@ -81,7 +89,13 @@ Delete a store
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.deleteStore({} as capOpenStorageOptions);
+await CapgoCapacitorDataStorageSqlite.deleteStore({
+  database: 'database',
+  table: 'table',
+  encrypted: false,
+  mode: 'encryption',
+  autoVacuum: 'none',
+});
 ```
 
 ### `setTable`
@@ -91,7 +105,7 @@ Set or Add a table to an existing store
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.setTable({} as capTableStorageOptions);
+await CapgoCapacitorDataStorageSqlite.setTable({ table: 'table' });
 ```
 
 ### `set`
@@ -101,7 +115,7 @@ Store a data with given key and value
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.set({} as capDataStorageOptions);
+await CapgoCapacitorDataStorageSqlite.set({ key: 'key-123' });
 ```
 
 ### `get`
@@ -111,7 +125,8 @@ Retrieve a data value for a given data key
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.get({} as capDataStorageOptions);
+const result = await CapgoCapacitorDataStorageSqlite.get({ key: 'key-123' });
+console.log(result);
 ```
 
 ### `remove`
@@ -121,7 +136,7 @@ Remove a data with given key
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.remove({} as capDataStorageOptions);
+await CapgoCapacitorDataStorageSqlite.remove({ key: 'key-123' });
 ```
 
 ### `clear`
@@ -141,7 +156,8 @@ Check if a data key exists
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.iskey({} as capDataStorageOptions);
+const result = await CapgoCapacitorDataStorageSqlite.iskey({ key: 'key-123' });
+console.log(result);
 ```
 
 ### `keys`
@@ -151,7 +167,8 @@ Get the data key list
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.keys();
+const result = await CapgoCapacitorDataStorageSqlite.keys();
+console.log(result);
 ```
 
 ### `values`
@@ -161,7 +178,8 @@ Get the data value list
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.values();
+const result = await CapgoCapacitorDataStorageSqlite.values();
+console.log(result);
 ```
 
 ### `filtervalues`
@@ -171,7 +189,8 @@ Get the data value list for filter keys
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.filtervalues({} as capFilterStorageOptions);
+const result = await CapgoCapacitorDataStorageSqlite.filtervalues({ filter: 'filter' });
+console.log(result);
 ```
 
 ### `keysvalues`
@@ -181,7 +200,8 @@ Get the data key/value pair list
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.keysvalues();
+const result = await CapgoCapacitorDataStorageSqlite.keysvalues();
+console.log(result);
 ```
 
 ### `isTable`
@@ -191,7 +211,8 @@ Check if a table exists
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.isTable({} as capTableStorageOptions);
+const result = await CapgoCapacitorDataStorageSqlite.isTable({ table: 'table' });
+console.log(result);
 ```
 
 ### `tables`
@@ -201,7 +222,8 @@ Get the table list for the current store
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.tables();
+const result = await CapgoCapacitorDataStorageSqlite.tables();
+console.log(result);
 ```
 
 ### `deleteTable`
@@ -211,7 +233,7 @@ Delete a table
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.deleteTable({} as capTableStorageOptions);
+await CapgoCapacitorDataStorageSqlite.deleteTable({ table: 'table' });
 ```
 
 ### `importFromJson`
@@ -221,7 +243,8 @@ Import a database From a JSON
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.importFromJson({} as capStoreImportOptions);
+const result = await CapgoCapacitorDataStorageSqlite.importFromJson({ jsonstring: 'jsonstring' });
+console.log(result);
 ```
 
 ### `isJsonValid`
@@ -231,7 +254,8 @@ Check the validity of a JSON Object
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.isJsonValid({} as capStoreImportOptions);
+const result = await CapgoCapacitorDataStorageSqlite.isJsonValid({ jsonstring: 'jsonstring' });
+console.log(result);
 ```
 
 ### `exportToJson`
@@ -241,7 +265,8 @@ Export the given database to a JSON Object
 ```typescript
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 
-await CapgoCapacitorDataStorageSqlite.exportToJson();
+const result = await CapgoCapacitorDataStorageSqlite.exportToJson();
+console.log(result);
 ```
 
 ## Type Reference

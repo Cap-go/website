@@ -12,26 +12,37 @@ bun add @capgo/capacitor-gtm
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `initialize` - Initializes Google Tag Manager with the specified container ID.
-- `push` - Pushes an event to the Google Tag Manager dataLayer.
-- `setUserProperty` - Sets a user property in the Google Tag Manager dataLayer.
-- `getValue` - Gets a value from the Google Tag Manager dataLayer. Searches through the dataLayer for the most recent value of the specified key.
+## Import
 
-## Example Usage
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+```
 
-### `initialize`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initializes Google Tag Manager with the specified container ID. |
+| `push` | Pushes an event to the Google Tag Manager dataLayer. |
+| `setUserProperty` | Sets a user property in the Google Tag Manager dataLayer. |
+| `getValue` | Gets a value from the Google Tag Manager dataLayer. Searches through the dataLayer for the most recent value of the specified key. |
+| `reset` | Resets the Google Tag Manager instance and clears all data. This will remove all data from the dataLayer and require re-initialization. |
+
+## Examples
+
+### `initialize()`
 
 Initializes Google Tag Manager with the specified container ID.
 
 ```typescript
 import { GoogleTagManager } from '@capgo/capacitor-gtm';
 
-await GoogleTagManager.initialize({} as { containerId: string; timeout?: number });
+await GoogleTagManager.initialize({ containerId: 'container-id-123' });
 ```
 
-### `push`
+### `push()`
 
 Pushes an event to the Google Tag Manager dataLayer.
 
@@ -47,7 +58,7 @@ await GoogleTagManager.push({
 });
 ```
 
-### `setUserProperty`
+### `setUserProperty()`
 
 Sets a user property in the Google Tag Manager dataLayer.
 
@@ -60,20 +71,32 @@ await GoogleTagManager.setUserProperty({
 });
 ```
 
-### `getValue`
+### `getValue()`
 
 Gets a value from the Google Tag Manager dataLayer. Searches through the dataLayer for the most recent value of the specified key.
 
 ```typescript
 import { GoogleTagManager } from '@capgo/capacitor-gtm';
 
-await GoogleTagManager.getValue({} as { key: string });
+const result = await GoogleTagManager.getValue({ key: 'key-123' });
+console.log(result);
 ```
 
-## Full Reference
+### `reset()`
 
-- GitHub: https://github.com/Cap-go/capacitor-gtm/
-- Docs: /docs/plugins/gtm/
+Resets the Google Tag Manager instance and clears all data. This will remove all data from the dataLayer and require re-initialization.
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+await GoogleTagManager.reset();
+```
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-gtm/)
+- [Documentation](/docs/plugins/gtm/)
+- [API reference](/docs/plugins/gtm/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-gtm
 

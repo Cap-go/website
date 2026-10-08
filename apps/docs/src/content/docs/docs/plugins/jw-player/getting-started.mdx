@@ -41,7 +41,7 @@ Initialize the JW Player
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.initialize({} as { licenseKey: string; playerUrl?: string });
+await JwPlayer.initialize({ licenseKey: 'license-key-123' });
 ```
 
 ### `play`
@@ -51,7 +51,10 @@ Play a video
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.play({} as { mediaUrl: string; mediaType: 'video' | 'playlist'; autostart?: boolean });
+await JwPlayer.play({
+  mediaUrl: 'https://example.com',
+  mediaType: 'video',
+});
 ```
 
 ### `pause`
@@ -91,7 +94,7 @@ Seek to a specific position in the currently playing media
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.seekTo({} as { time: number });
+await JwPlayer.seekTo({ time: 10 });
 ```
 
 ### `setVolume`
@@ -101,7 +104,7 @@ Set the volume level
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.setVolume({} as { volume: number });
+await JwPlayer.setVolume({ volume: 0.5 });
 ```
 
 ### `getPosition`
@@ -111,7 +114,8 @@ Get the current position in the media
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.getPosition();
+const result = await JwPlayer.getPosition();
+console.log(result);
 ```
 
 ### `getState`
@@ -121,7 +125,8 @@ Get the current player state
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.getState();
+const result = await JwPlayer.getState();
+console.log(result);
 ```
 
 ### `setSpeed`
@@ -131,7 +136,7 @@ Set the playback speed
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.setSpeed({} as { speed: number });
+await JwPlayer.setSpeed({ speed: 1 });
 ```
 
 ### `setPlaylistIndex`
@@ -141,7 +146,7 @@ Set the current item in the playlist by index
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.setPlaylistIndex({} as { index: number });
+await JwPlayer.setPlaylistIndex({ index: 1 });
 ```
 
 ### `loadPlaylist`
@@ -151,7 +156,7 @@ Load a playlist
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.loadPlaylist({} as { playlistUrl: string });
+await JwPlayer.loadPlaylist({ playlistUrl: 'https://example.com' });
 ```
 
 ### `loadPlaylistWithItems`
@@ -161,7 +166,7 @@ Load a playlist with items
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.loadPlaylistWithItems({} as { playlist: any[] });
+await JwPlayer.loadPlaylistWithItems({ playlist: [] });
 ```
 
 ### `getAudioTracks`
@@ -171,7 +176,8 @@ Get available audio tracks
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.getAudioTracks();
+const result = await JwPlayer.getAudioTracks();
+console.log(result);
 ```
 
 ### `getCurrentAudioTrack`
@@ -181,7 +187,8 @@ Get the current audio track
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.getCurrentAudioTrack();
+const result = await JwPlayer.getCurrentAudioTrack();
+console.log(result);
 ```
 
 ### `setCurrentAudioTrack`
@@ -191,7 +198,7 @@ Set the current audio track
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.setCurrentAudioTrack({} as { index: number });
+await JwPlayer.setCurrentAudioTrack({ index: 1 });
 ```
 
 ### `getCaptions`
@@ -201,7 +208,8 @@ Get the available captions/subtitles
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.getCaptions();
+const result = await JwPlayer.getCaptions();
+console.log(result);
 ```
 
 ### `getCurrentCaptions`
@@ -211,7 +219,8 @@ Get the current captions/subtitles track
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.getCurrentCaptions();
+const result = await JwPlayer.getCurrentCaptions();
+console.log(result);
 ```
 
 ### `setCurrentCaptions`
@@ -221,7 +230,7 @@ Set the current captions/subtitles track
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.setCurrentCaptions({} as { index: number });
+await JwPlayer.setCurrentCaptions({ index: 1 });
 ```
 
 ### `currentPlaylist`
@@ -231,7 +240,8 @@ Get the current playlist
 ```typescript
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-await JwPlayer.currentPlaylist();
+const result = await JwPlayer.currentPlaylist();
+console.log(result);
 ```
 
 ## Source Of Truth

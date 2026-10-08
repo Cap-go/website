@@ -12,15 +12,25 @@ bun add @capgo/capacitor-proximity
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `enable` - Enable proximity monitoring.
-- `disable` - Disable proximity monitoring.
-- `getStatus` - Get the current sensor availability and plugin enabled state.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorProximity } from '@capgo/capacitor-proximity';
+```
 
-### `enable`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `enable` | Enable proximity monitoring. |
+| `disable` | Disable proximity monitoring. |
+| `getStatus` | Get the current sensor availability and plugin enabled state. |
+
+## Examples
+
+### `enable()`
 
 Enable proximity monitoring.
 
@@ -30,7 +40,7 @@ import { CapacitorProximity } from '@capgo/capacitor-proximity';
 await CapacitorProximity.enable();
 ```
 
-### `disable`
+### `disable()`
 
 Disable proximity monitoring.
 
@@ -40,7 +50,7 @@ import { CapacitorProximity } from '@capgo/capacitor-proximity';
 await CapacitorProximity.disable();
 ```
 
-### `getStatus`
+### `getStatus()`
 
 Get the current sensor availability and plugin enabled state.
 
@@ -50,10 +60,11 @@ import { CapacitorProximity } from '@capgo/capacitor-proximity';
 const status = await CapacitorProximity.getStatus();
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-proximity/
-- Docs: /docs/plugins/proximity/
+- [GitHub repository](https://github.com/Cap-go/capacitor-proximity/)
+- [Documentation](/docs/plugins/proximity/)
+- [API reference](/docs/plugins/proximity/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-proximity
 

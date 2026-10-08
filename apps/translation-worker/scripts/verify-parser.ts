@@ -164,7 +164,7 @@ const supportContext = __translationWorkerTest.resolveTranslationContexts(['Supp
 assert(typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('capwesome'), 'Duplicate Support text dropped one of its contexts')
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('word-count-retry-v1'), 'Cache version was not bumped for word count retry support')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('short-ui-length-defer-v1'), 'Cache version was not bumped for short UI length guard deferral')
 
 assert(__translationWorkerTest.translationWordCount('Ship mobile updates instantly') === 4, 'Word count did not count a short English headline')
 assert(__translationWorkerTest.translationWordCount('Évitez l\u2019attente de l\u2019App Store.') === 5, 'Word count did not count elided French words')
@@ -201,8 +201,16 @@ assert(
 )
 assert(
   __translationWorkerTest.guardTranslationLength('Ship mobile updates instantly', 'Déployez des mises à jour mobiles instantanément aux utilisateurs partout', 'French') ===
-    'Ship mobile updates instantly',
-  'Length guard still falls back to English for character-length violations',
+    'Déployez des mises à jour mobiles instantanément aux utilisateurs partout',
+  'Length guard defers overlong short UI copy to word-count enforcement',
+)
+assert(
+  __translationWorkerTest.translationWordCountViolation('Ship mobile updates instantly', 'Déployez des mises à jour mobiles instantanément aux utilisateurs partout', 'French'),
+  'Word count guard still rejects overlong short UI copy',
+)
+assert(
+  !__translationWorkerTest.translationLengthViolation('Ship updates instantly', 'Envía actualizaciones al instante', 'Spanish'),
+  'Character length guard rejected valid short Spanish headline translation used by deploy probe',
 )
 assert(
   __translationWorkerTest.pickShortestWordCountCandidate('Ship mobile updates instantly', [
@@ -827,6 +835,54 @@ try {
     renderedNavIntegrityRejected = true
   }
   assert(renderedNavIntegrityRejected, 'Rendered nav integrity check did not reject pricing/blog label overlap')
+
+  // Regression: the same label repeated across header, mobile menu, and footer must not fail the job forever
+  // when separate model calls word it differently.
+  const repeatedNavHtml = `<!doctype html><html><body>
+<a href="/pricing/" aria-label="Pricing">Pricing</a>
+<a href="/enterprise/" aria-label="Enterprise">Enterprise</a>
+<a href="/pricing/" aria-label="Pricing">Pricing</a>
+<a href="/pricing/" aria-label="Pricing">Pricing</a>
+<p>Ship updates to your users without waiting for app store review cycles.</p>
+</body></html>`
+  const repeatedNavParsed = __translationWorkerTest.collectSegments(repeatedNavHtml)
+  const inconsistentRepeated = repeatedNavParsed.segments.map((segment, index) =>
+    segment.text === 'Pricing' ? (index % 2 === 0 ? 'Prix' : 'Tarifs') : segment.text === 'Enterprise' ? 'Entreprise' : segment.text,
+  )
+  let flakyCall = 0
+  const flakyTranslate = async (text: string) => {
+    flakyCall += 1
+    if (text === 'Enterprise') return 'Entreprise'
+    return flakyCall % 2 === 0 ? 'Prix' : 'Tarifs'
+  }
+  const stabilized = await __translationWorkerTest.stabilizeNavGuardTranslations(repeatedNavParsed.segments, inconsistentRepeated, flakyTranslate)
+  assert(stabilized.outcome === 'retranslated', 'Nav guard did not recover repeated labels by translating each label once')
+  const pricingTranslations = new Set(
+    repeatedNavParsed.segments.flatMap((segment, index) => (segment.text === 'Pricing' && segment.anchorPath ? [inconsistentRepeated[index]] : [])),
+  )
+  assert(pricingTranslations.size === 1, 'Repeated Pricing nav labels still translate inconsistently')
+
+  const collapsingTranslate = async () => 'Entreprise'
+  const collapsedTranslations = repeatedNavParsed.segments.map((segment) => (segment.anchorPath ? 'Entreprise' : segment.text))
+  const englishFallback = await __translationWorkerTest.stabilizeNavGuardTranslations(repeatedNavParsed.segments, collapsedTranslations, collapsingTranslate)
+  assert(englishFallback.outcome === 'english', 'Nav guard did not fall back to English labels when retranslation still collapses them')
+  assert(
+    repeatedNavParsed.segments.every((segment, index) => !segment.anchorPath || collapsedTranslations[index] === segment.text),
+    'Nav guard English fallback did not restore the source nav labels',
+  )
+
+  const rejectingTranslate = async (): Promise<string> => {
+    throw new Error('AI translation exhausted its attempts')
+  }
+  const rejectedTranslations = repeatedNavParsed.segments.map((segment, index) =>
+    segment.text === 'Pricing' ? (index % 2 === 0 ? 'Prix' : 'Tarifs') : segment.text === 'Enterprise' ? 'Entreprise' : segment.text,
+  )
+  const rejectedFallback = await __translationWorkerTest.stabilizeNavGuardTranslations(repeatedNavParsed.segments, rejectedTranslations, rejectingTranslate)
+  assert(rejectedFallback.outcome === 'english', 'Nav guard did not fall back to English labels when retranslation rejected')
+  assert(
+    repeatedNavParsed.segments.every((segment, index) => !segment.anchorPath || rejectedTranslations[index] === segment.text),
+    'Nav guard rejection fallback did not restore the source nav labels',
+  )
 
   const skippedAnchorHtml = `<!doctype html><html><body>
 <a href="/pricing/" translate="no">Pricing</a>

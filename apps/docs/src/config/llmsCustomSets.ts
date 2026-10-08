@@ -1,5 +1,6 @@
 const llmsCustomSetRows = String.raw`Capgo Builder|cloud-based native iOS and Android builds with Capgo Build, CI triggers, and webhooks|docs/builder/**
 Capgo CLI|full reference documentation for capgo CLI to upload and manage your live updates|docs/cli/**|docs/versioning.mdx
+Capgo MCP|hosted and local MCP servers that connect AI assistants like Claude, ChatGPT, and Cursor to a Capgo account|docs/ai/**|docs/cli/reference/mcp.mdx
 Capgo Versioning|how Capgo versions plugins, CLI, console, and LTS backports across Capacitor majors|docs/versioning.mdx
 Plugin Live updates|full reference documentation for plugin live updates for Capacitor, Cordova, and Electron|docs/live-updates/**|docs/plugins/updater/**|docs/plugins/cordova-updater/**|docs/plugins/electron-updater/**|docs/versioning.mdx
 Console Tutorial|step-by-step tutorial to get started with Capgo Console and live updates|docs/webapp/**
@@ -38,6 +39,7 @@ Plugin Crisp|Crisp chat integration plugin|docs/plugins/crisp/**
 Plugin Data Storage SQLite|SQLite data storage plugin for local database|docs/plugins/data-storage-sqlite/**
 Plugin Date Picker|native date, time, date-time, year-month, and range picker plugin for iOS, Android, and Web|docs/plugins/date-picker/**
 Plugin Device Info|CPU, memory, GPU, storage, thermal, and onboard sensor metrics plugin|docs/plugins/device-info/**
+Plugin Device Integrity|device integrity and fraud signals with Widevine, Play Integrity, App Attest, and DeviceCheck|docs/plugins/device-integrity/**
 Plugin Document Scanner|document scanning plugin with OCR capabilities|docs/plugins/document-scanner/**
 Plugin Downloader|file download manager plugin|docs/plugins/downloader/**
 Plugin Env|environment variables plugin|docs/plugins/env/**
@@ -75,6 +77,7 @@ Plugin Mux Player|Mux video player integration plugin|docs/plugins/mux-player/**
 Plugin Native Audio|native audio playback plugin|docs/plugins/native-audio/**
 Plugin Native Biometric|biometric authentication plugin for fingerprint and face ID|docs/plugins/native-biometric/**
 Plugin Native Geocoder|native geocoding plugin for address lookup|docs/plugins/nativegeocoder/**
+Plugin Native Map|cross-platform native maps with Google Maps on Android, MapKit on iOS, and Google Maps JS on web|docs/plugins/native-map/**
 Plugin Native Loader|native animated loaders, transparent overlays, Lottie assets, and WebView resizing for Capacitor apps|docs/plugins/native-loader/**
 Plugin Native Market|app store deep linking plugin|docs/plugins/native-market/**
 Plugin Native Navigation|native navbar, tabbar, and transition shell plugin for Capacitor WebView apps|docs/plugins/native-navigation/**
@@ -88,6 +91,8 @@ Plugin Passkey|browser-style WebAuthn passkey plugin that handles native calls a
 Plugin Privacy Screen|privacy screen plugin for hiding app content in system previews and screenshots|docs/plugins/privacy-screen/**
 Plugin Proximity|native proximity sensor plugin for face, hand, and surface detection|docs/plugins/proximity/**
 Plugin PDF Generator|PDF generation plugin|docs/plugins/pdf-generator/**
+Plugin PDF Viewer|native PDF viewer for iOS, Android, and web|docs/plugins/pdf-viewer/**
+Plugin Permissions|unified runtime permission checks and requests for Capacitor|docs/plugins/permissions/**
 Plugin Pedometer|step counting pedometer plugin|docs/plugins/pedometer/**
 Plugin Persona|Persona identity verification inquiry plugin|docs/plugins/persona/**
 Plugin Intune|Microsoft Intune MAM and MSAL plugin|docs/plugins/intune/**
@@ -96,6 +101,7 @@ Plugin Persistent UUID|persistent app-scoped UUID plugin|docs/plugins/persistent
 Plugin Photo Library|photo library access plugin|docs/plugins/photo-library/**
 Plugin Printer|printing plugin for documents and images|docs/plugins/printer/**
 Plugin RealtimeKit|real-time communication plugin|docs/plugins/realtimekit/**
+Plugin Rich Notifications|local rich notifications with channels, progress, actions, and scheduling|docs/plugins/rich-notifications/**
 Plugin reCAPTCHA|Web reCAPTCHA, Web reCAPTCHA Enterprise, and native Enterprise mobile token plugin|docs/plugins/recaptcha/**
 Plugin Verisoul|native Verisoul fraud-prevention session plugin for Capacitor apps|docs/plugins/verisoul/**
 Plugin Ricoh 360 Camera|Ricoh 360 camera integration plugin|docs/plugins/ricoh360-camera/**

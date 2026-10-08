@@ -1,16 +1,44 @@
 ---
 import m from '@/copy/messages'
 import dayjs from 'dayjs'
-import type { WebsiteStatsDisplay } from '@/lib/websiteStats'
-import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
+import { siteMetrics } from '@/config/siteMetrics'
+import { getTotalStars } from '@/services/github'
 
-interface Props {
-  stats?: WebsiteStatsDisplay
-}
+// Every logo in /public/logo_cloud, split into three rows for the scrolling wall.
+const appLogos = [
+  'kick',
+  'suez',
+  'nana',
+  'pizza_hut',
+  'remnote',
+  'revel',
+  'vella',
+  'irec',
+  'our_living',
+  'shelf',
+  'janitor',
+  'snowqueen',
+  'codere',
+  'poplin',
+  'torchys',
+  'livance',
+  'happypal',
+  'felix_health',
+  'ajeer',
+  'gartner_health',
+  'leaderboard',
+  'marketplace',
+  'nx',
+  'oneclick',
+  'pixiesset',
+  'plataforma',
+  'public_square',
+  'seaport',
+]
+const appLogoRows = [0, 1, 2].map((row) => appLogos.filter((_, index) => index % 3 === row))
 
-const config = Astro.locals.runtimeConfig
-const { stats: statsProp } = Astro.props
-const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.public.baseApiUrl))
+// Same total as the header GitHub badge so both numbers match.
+const totalStars = getTotalStars()
 ---
 
 <section class="relative overflow-hidden bg-[#1a1a1a] py-24 sm:py-32">
@@ -21,7 +49,8 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
       <svg width="100%" height="100%" viewBox="0 0 1198 599" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M1198 599C1198 520.338 1182.51 442.447 1152.4 369.773C1122.3 297.099 1078.18 231.065 1022.56 175.443C966.935 119.821 900.901 75.6987 828.227 45.5962C755.553 15.4936 677.662 -3.43842e-06 599 0C520.338 3.43842e-06 442.447 15.4936 369.773 45.5962C297.099 75.6987 231.065 119.821 175.443 175.443C119.821 231.065 75.6987 297.099 45.5961 369.773C15.4936 442.447 -6.87683e-06 520.338 0 599L599 599H1198Z"
-          fill="url(#paint0_linear_1_23404)"></path>
+          fill="url(#paint0_linear_1_23404)"
+        ></path>
         <defs>
           <linearGradient id="paint0_linear_1_23404" x1="599" y1="-225" x2="599" y2="447" gradientUnits="userSpaceOnUse">
             <stop stop-color="#5273EB"></stop>
@@ -49,20 +78,16 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
         {m.use_capgo({}, { locale: Astro.locals.locale })}
       </h2>
 
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-gray-400">
-        {m.our_numbers_are_shared_transparently_since_december_2021({}, { locale: Astro.locals.locale })}
-      </p>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-gray-400">{m.our_numbers_are_shared_transparently_since_december_2021({}, { locale: Astro.locals.locale })}</p>
     </div>
 
     <!-- Top Row: 3 Cards -->
     <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-3">
       <!-- Updates Delivered -->
-      <div
-        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
-      >
+      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20">
         <!-- Visual Area -->
         <div class="relative mb-6 flex h-44 items-center justify-center">
-          <img src="/planet_updates.svg" alt="World Map Glow" class="absolute inset-0 h-full w-full object-cover opacity-90" />
+          <img src="/planet_updates.webp" alt="" width="850" height="571" loading="lazy" decoding="async" class="absolute inset-0 h-full w-full object-cover opacity-90" />
         </div>
 
         <!-- Content -->
@@ -72,19 +97,25 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
-          <div class="mb-2 text-5xl font-bold text-white">{stats.updates}</div>
-          <div class="mb-1 text-base font-semibold text-white">{m.updates_delivered({}, { locale: Astro.locals.locale })}</div>
+          <div class="mb-2 text-5xl font-bold text-white">{siteMetrics.updatesPerMonth}</div>
+          <div class="mb-1 text-base font-semibold text-white">{m.updates_delivered_per_month({}, { locale: Astro.locals.locale })}</div>
           <div class="text-sm text-gray-400">{m.all_around_the_globe({}, { locale: Astro.locals.locale })}</div>
         </div>
       </div>
 
       <!-- Apps -->
-      <div
-        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
-      >
+      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20">
         <!-- Visual Area -->
-        <div class="relative mb-6 flex h-44 items-center justify-center">
-          <img src="/logo_apps.svg" alt="customers logos" class="h-full w-full object-contain" />
+        <div class="app-wall relative mb-6 flex h-44 flex-col justify-center gap-3 overflow-hidden" aria-hidden="true">
+          {appLogoRows.map((row, rowIndex) => (
+            <div class:list={['app-wall-row flex w-max gap-3', rowIndex % 2 === 1 && 'app-wall-row--reverse']}>
+              {[...row, ...row].map((logo) => (
+                <span class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#2B2D30] ring-1 ring-white/5">
+                  <img src={`/logo_cloud/${logo}_logo.webp`} alt="" class="h-full w-full object-contain p-1.5" loading="lazy" decoding="async" />
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
 
         <!-- Content -->
@@ -99,20 +130,18 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
               ></path>
             </svg>
           </div>
-          <div class="mb-2 text-5xl font-bold text-white">{stats.apps}</div>
+          <div class="mb-2 text-5xl font-bold text-white">{siteMetrics.apps}</div>
           <div class="mb-1 text-base font-semibold text-white">{m.apps({}, { locale: Astro.locals.locale })}</div>
           <div class="text-sm text-gray-400">{m.using_us_in_production({}, { locale: Astro.locals.locale })}</div>
         </div>
       </div>
 
       <!-- GitHub Stars -->
-      <div
-        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
-      >
+      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20">
         <!-- Visual Area -->
         <div class="relative mb-6 flex h-44 items-center justify-center">
           <div class="relative flex h-full w-full items-center justify-center">
-            <img src="/github_glow.svg" alt="GitHub Logo" class="h-full max-h-44 w-auto object-contain" />
+            <img src="/github_glow.svg" alt="" width="283" height="190" loading="lazy" decoding="async" class="h-full max-h-44 w-auto object-contain" />
           </div>
         </div>
 
@@ -129,8 +158,8 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
             </svg>
           </div>
           <div class="mb-2 text-5xl font-bold text-white">
-            <a href="https://github.com/Cap-go/capacitor-updater" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
-              {stats.stars}
+            <a href="https://github.com/Cap-go" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
+              {totalStars}+
             </a>
           </div>
           <div class="mb-1 text-base font-semibold text-white">{m.stars_in_github({}, { locale: Astro.locals.locale })}</div>
@@ -142,9 +171,7 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
     <!-- Bottom Row: 2 Cards -->
     <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
       <!-- Active Users & Success Rate -->
-      <div
-        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
-      >
+      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20">
         <!-- Visual Area -->
         <div class="relative mb-6 flex h-48 items-center justify-center">
           <img src="/updates_nbar.svg" alt="Active Users Chart" class="absolute inset-0 h-full w-full object-cover opacity-90" />
@@ -158,7 +185,8 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="1.5"
-                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+              ></path>
             </svg>
           </div>
           <div class="grid grid-cols-2 gap-12">
@@ -177,9 +205,7 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
       </div>
 
       <!-- Speed & API Response -->
-      <div
-        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
-      >
+      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20">
         <!-- Visual Area -->
         <div class="relative mb-6 flex h-48 items-center justify-center overflow-hidden">
           <div class="relative flex h-full w-full items-center justify-center">
@@ -197,17 +223,21 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
           <div class="grid grid-cols-2 gap-12">
             <div>
               <div class="mb-2 text-5xl font-bold text-white">
-                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">114ms</a>
+                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
+                  114ms
+                </a>
               </div>
               <div class="mb-1 text-sm font-semibold text-white">{m.shared_numbers_speed({}, { locale: Astro.locals.locale })}</div>
               <div class="text-xs text-gray-400">{m.download_time_globally({}, { locale: Astro.locals.locale })}</div>
             </div>
             <div>
               <div class="mb-2 text-5xl font-bold text-white">
-                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">57ms</a>
+                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
+                  ~50ms
+                </a>
               </div>
               <div class="mb-1 text-sm font-semibold text-white">{m.shared_numbers_api_response({}, { locale: Astro.locals.locale })}</div>
-              <div class="text-xs text-gray-400">{m.home_avg_latency({}, { locale: Astro.locals.locale })}</div>
+              <div class="text-xs text-gray-400">{m.all_around_the_globe({}, { locale: Astro.locals.locale })}</div>
             </div>
           </div>
         </div>
@@ -215,3 +245,30 @@ const stats = statsProp ?? formatWebsiteStats(await resolveWebsiteStats(config.p
     </div>
   </div>
 </section>
+
+<style>
+  .app-wall {
+    mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+  }
+
+  .app-wall-row {
+    animation: app-wall-scroll 40s linear infinite;
+  }
+
+  .app-wall-row--reverse {
+    animation-direction: reverse;
+    animation-duration: 48s;
+  }
+
+  @keyframes app-wall-scroll {
+    to {
+      transform: translateX(calc(-50% - 0.375rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .app-wall-row {
+      animation: none;
+    }
+  }
+</style>

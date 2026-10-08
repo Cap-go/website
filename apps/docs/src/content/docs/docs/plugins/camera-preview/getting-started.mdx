@@ -41,7 +41,8 @@ Starts the camera preview.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.start({} as CameraPreviewOptions);
+const result = await CameraPreview.start({ parent: 'parent' });
+console.log(result);
 ```
 
 ### `stop`
@@ -64,7 +65,8 @@ If `storeToFile` was set to `true` when starting the preview, the returned
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.capture({} as CameraPreviewPictureOptions);
+const result = await CameraPreview.capture({ height: 1920 });
+console.log(result);
 ```
 
 ### `captureSample`
@@ -74,7 +76,11 @@ Captures a single frame from the camera preview stream.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.captureSample({} as CameraSampleOptions);
+const result = await CameraPreview.captureSample({
+  quality: 85,
+  mirrorFrontCamera: false,
+});
+console.log(result);
 ```
 
 ### `getSupportedFlashModes`
@@ -84,7 +90,8 @@ Gets the flash modes supported by the active camera.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getSupportedFlashModes();
+const result = await CameraPreview.getSupportedFlashModes();
+console.log(result);
 ```
 
 ### `setAspectRatio`
@@ -104,7 +111,8 @@ Gets the current aspect ratio of the camera preview.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getAspectRatio();
+const result = await CameraPreview.getAspectRatio();
+console.log(result);
 ```
 
 ### `setGridMode`
@@ -114,7 +122,7 @@ Sets the grid mode of the camera preview overlay.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setGridMode({} as { gridMode: GridMode });
+await CameraPreview.setGridMode({ gridMode: 'none' });
 ```
 
 ### `getGridMode`
@@ -124,7 +132,8 @@ Gets the current grid mode of the camera preview overlay.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getGridMode();
+const result = await CameraPreview.getGridMode();
+console.log(result);
 ```
 
 ### `checkPermissions`
@@ -134,7 +143,8 @@ Checks the current camera (and optionally microphone) permission status without 
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.checkPermissions();
+const result = await CameraPreview.checkPermissions();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `requestPermissions`
@@ -146,7 +156,8 @@ a platform-specific alert guiding the user to the app settings will be presented
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.requestPermissions();
+const result = await CameraPreview.requestPermissions();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getHorizontalFov`
@@ -157,7 +168,8 @@ Note: This can be an estimate on some devices.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getHorizontalFov();
+const result = await CameraPreview.getHorizontalFov();
+console.log(result);
 ```
 
 ### `getSupportedPictureSizes`
@@ -167,7 +179,8 @@ Gets the supported picture sizes for all cameras.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getSupportedPictureSizes();
+const result = await CameraPreview.getSupportedPictureSizes();
+console.log(result);
 ```
 
 ### `setFlashMode`
@@ -177,7 +190,7 @@ Sets the flash mode for the active camera.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setFlashMode({} as { flashMode: CameraPreviewFlashMode | string });
+await CameraPreview.setFlashMode({ flashMode: 'off' });
 ```
 
 ### `flip`
@@ -197,7 +210,7 @@ Sets the opacity of the camera preview.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setOpacity({} as CameraOpacityOptions);
+await CameraPreview.setOpacity({ opacity: 1.0 });
 ```
 
 ### `stopRecordVideo`
@@ -207,7 +220,8 @@ Stops an ongoing video recording.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.stopRecordVideo();
+const result = await CameraPreview.stopRecordVideo();
+console.log(result);
 ```
 
 ### `startRecordVideo`
@@ -217,7 +231,7 @@ Starts recording a video.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.startRecordVideo({} as CameraPreviewOptions);
+await CameraPreview.startRecordVideo({ parent: 'parent' });
 ```
 
 ### `isRunning`
@@ -227,7 +241,8 @@ Checks if the camera preview is currently running.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.isRunning();
+const result = await CameraPreview.isRunning();
+console.log(result);
 ```
 
 ### `getAvailableDevices`
@@ -237,7 +252,8 @@ Gets all available camera devices.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getAvailableDevices();
+const result = await CameraPreview.getAvailableDevices();
+console.log(result);
 ```
 
 ### `getZoom`
@@ -247,7 +263,8 @@ Gets the current zoom state, including min/max and current lens info.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getZoom();
+const result = await CameraPreview.getZoom();
+console.log(result);
 ```
 
 ### `getZoomButtonValues`
@@ -259,7 +276,8 @@ Returns zoom button values for quick switching.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getZoomButtonValues();
+const result = await CameraPreview.getZoomButtonValues();
+console.log(result);
 ```
 
 ### `setZoom`
@@ -269,7 +287,7 @@ Sets the zoom level of the camera.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setZoom({} as { level: number; ramp?: boolean; autoFocus?: boolean });
+await CameraPreview.setZoom({ level: 1 });
 ```
 
 ### `getFlashMode`
@@ -279,7 +297,8 @@ Gets the current flash mode.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getFlashMode();
+const result = await CameraPreview.getFlashMode();
+console.log(result);
 ```
 
 ### `setDeviceId`
@@ -289,7 +308,7 @@ Switches the active camera to the one with the specified `deviceId`.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setDeviceId({} as { deviceId: string });
+await CameraPreview.setDeviceId({ deviceId: 'device-id-123' });
 ```
 
 ### `getDeviceId`
@@ -300,7 +319,8 @@ On Android, if a physical-lens request falls back to a logical camera, this retu
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getDeviceId();
+const result = await CameraPreview.getDeviceId();
+console.log(result);
 ```
 
 ### `getPreviewSize`
@@ -310,7 +330,8 @@ Gets the current preview size and position.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getPreviewSize();
+const result = await CameraPreview.getPreviewSize();
+console.log(result);
 ```
 
 ### `setPreviewSize`
@@ -320,7 +341,11 @@ Sets the preview size and position.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setPreviewSize({} as { x?: number; y?: number; width: number; height: number });
+const result = await CameraPreview.setPreviewSize({
+  width: 1080,
+  height: 1920,
+});
+console.log(result);
 ```
 
 ### `setFocus`
@@ -333,7 +358,10 @@ your HTML/JS (e.g., on the overlaying UI), then pass normalized coordinates here
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setFocus({} as { x: number; y: number });
+await CameraPreview.setFocus({
+  x: 1,
+  y: 1,
+});
 ```
 
 ### `deleteFile`
@@ -345,7 +373,8 @@ On web, this is not supported and will throw.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.deleteFile({} as { path: string });
+const result = await CameraPreview.deleteFile({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `getSafeAreaInsets`
@@ -362,7 +391,8 @@ iOS: Values returned in physical pixels, excluding status bar (only pure notch/c
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getSafeAreaInsets();
+const result = await CameraPreview.getSafeAreaInsets();
+console.log(result);
 ```
 
 ### `getOrientation`
@@ -372,7 +402,8 @@ Gets the current device orientation in a cross-platform format.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getOrientation();
+const result = await CameraPreview.getOrientation();
+console.log(result);
 ```
 
 ### `getExposureModes`
@@ -383,7 +414,8 @@ Modes can include: 'locked', 'auto', 'continuous', 'custom'.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getExposureModes();
+const result = await CameraPreview.getExposureModes();
+console.log(result);
 ```
 
 ### `getExposureMode`
@@ -393,7 +425,8 @@ Returns the current exposure mode.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getExposureMode();
+const result = await CameraPreview.getExposureMode();
+console.log(result);
 ```
 
 ### `setExposureMode`
@@ -403,7 +436,7 @@ Sets the exposure mode.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setExposureMode({} as { mode: ExposureMode });
+await CameraPreview.setExposureMode({ mode: 'AUTO' });
 ```
 
 ### `getExposureCompensationRange`
@@ -413,7 +446,8 @@ Returns the exposure compensation (EV bias) supported range.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getExposureCompensationRange();
+const result = await CameraPreview.getExposureCompensationRange();
+console.log(result);
 ```
 
 ### `getExposureCompensation`
@@ -423,7 +457,8 @@ Returns the current exposure compensation (EV bias).
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.getExposureCompensation();
+const result = await CameraPreview.getExposureCompensation();
+console.log(result);
 ```
 
 ### `setExposureCompensation`
@@ -433,7 +468,7 @@ Sets the exposure compensation (EV bias). Value will be clamped to range.
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 
-await CameraPreview.setExposureCompensation({} as { value: number });
+await CameraPreview.setExposureCompensation({ value: 1 });
 ```
 
 ## Type Reference

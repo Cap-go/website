@@ -1,9 +1,14 @@
 ---
+import m from '@/copy/messages'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import NotificationsStory from '@/components/notifications/NotificationsStory.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -11,8 +16,6 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = `${brand} | Native Push Notifications for Capacitor Apps`
 const description =
   'Send native iOS and Android push notifications from Capgo, target users by external ID, track opens and events, update badges, and trigger silent live update checks.'
-const registerUrl = getRelativeLocaleUrl(locale, 'register')
-const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
 const pluginUrl = getRelativeLocaleUrl(locale, 'plugins/capacitor-notifications')
 
@@ -31,7 +34,7 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
 const content = {
   title,
   description,
-  image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-live-update.png`,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-notifications.png`,
   ldJSON,
 }
 
@@ -148,57 +151,33 @@ const guidanceChecks = [
           instead of leaving release teams to stitch it together.
         </p>
         <div class="hero-ctas">
-          <HumanSupport class="mb-3" size="sm" align="start" />
-          <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-primary" href={registerUrl}>Start with Capgo</a>
-            <a class="btn btn-lg btn-ghost" href={liveUpdateUrl}>See live updates</a>
-          </div>
+          <SignupCta id="notifications-hero-signup-cta" />
           <p class="hero-cta-note">Native notifications work alongside Capgo Live Updates and channel rollouts.</p>
         </div>
         <div class="hero-meta">
-          {
-            heroMeta.map((item) => (
-              <span>
-                <span class="check">+</span>
-                {item}
-              </span>
-            ))
-          }
+          {heroMeta.map((item) => (
+            <span>
+              <span class="check">+</span>
+              {item}
+            </span>
+          ))}
         </div>
         <div class="hero-strip">
-          {
-            heroStats.map((item) => (
-              <div class="hero-strip-cell">
-                <p class="v">{item.value}</p>
-                <p class="k">{item.label}</p>
-              </div>
-            ))
-          }
+          {heroStats.map((item) => (
+            <div class="hero-strip-cell">
+              <p class="v">{item.value}</p>
+              <p class="k">{item.label}</p>
+            </div>
+          ))}
         </div>
 
-        <div class="notification-showcase" aria-label="Capgo notification dashboard previews">
-          <figure class="notification-dashboard-shot">
-            <img
-              src="/landing-demos/native-notifications-dashboard.webp"
-              alt="Capgo notification dashboard showing provider setup, campaigns, and push update controls"
-              width="1280"
-              height="720"
-              loading="eager"
-              decoding="async"
-            />
-            <figcaption>Provider setup, broadcasts, API sends, and push update controls in one console.</figcaption>
-          </figure>
-          <figure class="notification-mobile-shot">
-            <img
-              src="/landing-demos/native-notifications-mobile.webp"
-              alt="Mobile view of the Capgo notification console"
-              width="390"
-              height="900"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>Usable on mobile during release work.</figcaption>
-          </figure>
+        <div class="notification-story">
+          <p class="sr-only">
+            Animated illustration: a Capgo console card composes an alert for the external ID user_8421, sends it, and the push lands on an iPhone lock screen and an Android home
+            screen. Delivered and opened counts tick up and the app badge moves from 2 to 3. The card then switches to a silent update check for the production channel, and both
+            devices download bundle 1.4.1 to install on next launch.
+          </p>
+          <NotificationsStory />
         </div>
       </div>
     </section>
@@ -212,14 +191,12 @@ const guidanceChecks = [
         </div>
 
         <div class="outcome-grid">
-          {
-            outcomeCards.map((card) => (
-              <article class="outcome-card">
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
-              </article>
-            ))
-          }
+          {outcomeCards.map((card) => (
+            <article class="outcome-card">
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          ))}
         </div>
 
         <div class="decision-box">
@@ -242,15 +219,13 @@ const guidanceChecks = [
         </div>
 
         <div class="steps-grid">
-          {
-            workflowSteps.map((step, index) => (
-              <article class="step-card">
-                <div class="step-num">{index + 1}</div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </article>
-            ))
-          }
+          {workflowSteps.map((step, index) => (
+            <article class="step-card">
+              <div class="step-num">{index + 1}</div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -263,11 +238,12 @@ const guidanceChecks = [
           <p class="lead">Capgo handles the surfaces that usually become one-off glue code around push, user targeting, and update nudges.</p>
         </div>
 
-        <div class="bento">
+        <div class="bento bento--even">
           <div class="tile tile-hero" aria-label="Capgo Notifications">
             <div>
               <div class="ttl">
-                <span class="name">Capgo Notifications</span><br />
+                <span class="name">Capgo Notifications</span>
+                <br />
                 <span class="tile-hero-sub-ttl">Native push for release teams</span>
               </div>
               <div class="sub">Ship alert, background, badge, and update-check campaigns from the same product console your team already uses for Capgo releases.</div>
@@ -276,16 +252,14 @@ const guidanceChecks = [
 provider ready | recipients linked | update check enabled</pre>
           </div>
 
-          {
-            featureTiles.map((tile) => (
-              <div class="tile">
-                <h3 class="ttl">
-                  <span class="ttl-accent">{tile.title}</span>
-                </h3>
-                <p class="sub">{tile.sub}</p>
-              </div>
-            ))
-          }
+          {featureTiles.map((tile) => (
+            <div class="tile">
+              <h3 class="ttl">
+                <span class="ttl-accent">{tile.title}</span>
+              </h3>
+              <p class="sub">{tile.sub}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -304,26 +278,36 @@ provider ready | recipients linked | update check enabled</pre>
         <div class="guidance-grid">
           <div>
             <ul class="guidance-checks">
-              {guidanceChecks.map((check) => <li>{check}</li>)}
+              {guidanceChecks.map((check) => (
+                <li>{check}</li>
+              ))}
             </ul>
             <div class="hero-ctas" style="margin-top: 28px; align-items: flex-start;">
               <HumanSupport class="mb-3" size="sm" align="start" />
               <div class="hero-cta-buttons">
-                <a class="btn btn-md btn-primary" href={pricingUrl}>Compare plans</a>
-                <a class="btn btn-md btn-ghost" href={pluginUrl}>View plugin page</a>
+                <a class="btn btn-md btn-primary" href={pricingUrl}>
+                  Compare plans
+                </a>
+                <a class="btn btn-md btn-ghost" href={pluginUrl}>
+                  View plugin page
+                </a>
               </div>
             </div>
           </div>
 
           <div class="guidance-panel">
             <img
-              src="/landing-demos/native-notifications-dashboard.webp"
-              alt="Capgo notification update check panel with install mode and channel controls"
+              src="/landing-demos/console/notifications-push-update.webp"
+              alt="Capgo notifications console with iOS and Android push configured and push-triggered updates enabled for the production channel, installing on next launch"
+              width="1360"
+              height="740"
               loading="lazy"
               decoding="async"
             />
             <div class="guidance-cli">
-              <p class="guidance-cli-line"><span class="mono">$</span> notification.kind = update_check</p>
+              <p class="guidance-cli-line">
+                <span class="mono">$</span> notification.kind = update_check
+              </p>
               <p class="guidance-cli-warn">channel selected | install mode next</p>
               <p class="guidance-cli-dim">progressive rollout still controls eligible devices</p>
               <p class="guidance-cli-action">devices check, download, and queue the bundle</p>
@@ -333,30 +317,56 @@ provider ready | recipients linked | update check enabled</pre>
       </div>
     </section>
 
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_notifications_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_notifications_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.notifications}
+      maxItems={2}
+    />
+
     <section class="section final bg-grid grain" id="cta">
       <div class="shell">
         <h2>
-          <span class="name">Capgo Notifications</span><br />
+          <span class="name">Capgo Notifications</span>
+          <br />
           Reach users and move releases forward.
         </h2>
         <p class="tagline">Add native push, badge control, campaign stats, and silent update checks to your Capacitor release workflow.</p>
-        <HumanSupport class="mb-4" size="sm" />
-        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>Start with Capgo</a>
+        <SignupCta id="notifications-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
-          <span><span class="check">+</span> Native iOS and Android push</span>
-          <span><span class="check">+</span> Background update checks</span>
-          <span><span class="check">+</span> Campaign stats</span>
+          <span>
+            <span class="check">+</span> Native iOS and Android push
+          </span>
+          <span>
+            <span class="check">+</span> Background update checks
+          </span>
+          <span>
+            <span class="check">+</span> Campaign stats
+          </span>
         </div>
       </div>
     </section>
-
-    <div class="shell seo-bridge">
-      <h2 class="h2-section" style="font-size: 1.5rem; margin-bottom: 12px;">Keep going from Capgo Notifications</h2>
-      <p>
-        Connect native notifications with <a href="/live-update/">Capgo Live Updates</a>, <a href="/pricing/">Capgo Pricing</a>, <a href="/plugins/capacitor-notifications/"
-          >Capacitor Notifications</a
-        >, <a href="/docs/live-updates/channels/">Channels</a>, and <a href="/docs/live-updates/update-behavior/">Update Behavior</a> when you plan progressive deployments.
-      </p>
-    </div>
   </div>
 </Layout>
+
+<style>
+  .notification-story {
+    margin-top: 46px;
+  }
+
+  @media (min-width: 981px) {
+    .bento--even > .tile:nth-last-child(-n + 2) {
+      grid-column: span 2;
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .notification-story {
+      margin-top: 34px;
+    }
+  }
+</style>

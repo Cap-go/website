@@ -28,7 +28,8 @@ Creates a new chat session.
 ```typescript
 import { CapgoLLM } from '@capgo/capacitor-llm';
 
-await CapgoLLM.createChat();
+const result = await CapgoLLM.createChat();
+console.log(result);
 ```
 
 ### `sendMessage`
@@ -38,7 +39,10 @@ Sends a message to the AI in a specific chat session.
 ```typescript
 import { CapgoLLM } from '@capgo/capacitor-llm';
 
-await CapgoLLM.sendMessage({} as { chatId: string; message: string });
+await CapgoLLM.sendMessage({
+  chatId: 'chat-id-123',
+  message: 'Hello from Capacitor',
+});
 ```
 
 ### `getReadiness`
@@ -48,7 +52,8 @@ Gets the readiness status of the LLM.
 ```typescript
 import { CapgoLLM } from '@capgo/capacitor-llm';
 
-await CapgoLLM.getReadiness();
+const result = await CapgoLLM.getReadiness();
+console.log(result);
 ```
 
 ### `setModel`
@@ -58,7 +63,10 @@ Sets the model configuration - iOS: Use "Apple Intelligence" as path for system 
 ```typescript
 import { CapgoLLM } from '@capgo/capacitor-llm';
 
-await CapgoLLM.setModel({} as ModelOptions);
+await CapgoLLM.setModel({
+  path: 'path/to/file',
+  modelType: 'task',
+});
 ```
 
 ## Full Reference

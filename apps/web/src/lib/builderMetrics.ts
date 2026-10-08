@@ -1,7 +1,5 @@
 import type { BuilderDailyPlatformMetric, BuilderFailureMetric, BuilderPlatformMetric, PublicBuilderMetrics } from './publicBuilderMetrics'
 
-export { jsonForInlineScript } from './liveUpdateMetrics'
-
 export type BuilderMetrics = PublicBuilderMetrics & { source?: 'api' | 'cache' }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -43,25 +41,9 @@ function normalizePlatform(value: unknown): BuilderPlatformMetric | null {
   }
 }
 
-export function emptyBuilderMetrics(): BuilderMetrics {
-  return {
-    success_rate: 0,
-    avg_process_seconds: null,
-    avg_queue_seconds: null,
-    period_days: 30,
-    updated_at: '',
-    daily_platforms: [],
-    failures: [],
-    platforms: [],
-  }
-}
-
-export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
-  if (!isRecord(value) || typeof value.updated_at !== 'string' || !value.updated_at || !Array.isArray(value.daily_platforms) || !Array.isArray(value.failures) || !Array.isArray(value.platforms)) {
-    return null
-  }
-
-  const daily_platforms = value.daily_platforms
+function normalizePlatformTrendRows(value: unknown) {
+  if (!Array.isArray(value)) return []
+  return value
     .map((item) => {
       if (!isRecord(item) || typeof item.date !== 'string') return null
       return {
@@ -73,6 +55,37 @@ export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
       }
     })
     .filter((item): item is BuilderDailyPlatformMetric => item !== null)
+}
+
+export function emptyBuilderMetrics(): BuilderMetrics {
+  return {
+    success_rate: 0,
+    avg_process_seconds: null,
+    avg_queue_seconds: null,
+    period_days: 30,
+    daily_window_days: 90,
+    updated_at: '',
+    daily_platforms: [],
+    hourly_platforms: [],
+    failures: [],
+    platforms: [],
+  }
+}
+
+export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
+  if (
+    !isRecord(value) ||
+    typeof value.updated_at !== 'string' ||
+    !value.updated_at ||
+    !Array.isArray(value.daily_platforms) ||
+    !Array.isArray(value.failures) ||
+    !Array.isArray(value.platforms)
+  ) {
+    return null
+  }
+
+  const daily_platforms = normalizePlatformTrendRows(value.daily_platforms)
+  const hourly_platforms = normalizePlatformTrendRows(value.hourly_platforms)
 
   const failures = value.failures.map(normalizeFailure).filter((item): item is BuilderFailureMetric => item !== null)
   const platforms = value.platforms.map(normalizePlatform).filter((item): item is BuilderPlatformMetric => item !== null)
@@ -82,13 +95,11 @@ export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
     avg_process_seconds: nullableNumber(value.avg_process_seconds),
     avg_queue_seconds: nullableNumber(value.avg_queue_seconds),
     period_days: 30,
+    daily_window_days: typeof value.daily_window_days === 'number' ? value.daily_window_days : 90,
     updated_at: value.updated_at,
     daily_platforms,
+    hourly_platforms,
     failures,
     platforms,
   }
-}
-
-export async function resolveBuilderMetrics(): Promise<BuilderMetrics> {
-  return emptyBuilderMetrics()
 }

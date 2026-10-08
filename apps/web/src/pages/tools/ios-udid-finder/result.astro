@@ -31,6 +31,12 @@ const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/builder/
 
         <div class="mt-8 flex flex-col gap-4 sm:flex-row">
           <a
+            id="result-email"
+            class="hidden items-center justify-center rounded-2xl border border-fuchsia-300/40 px-6 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
+          >
+            Email these details
+          </a>
+          <a
             href={toolHref}
             class="inline-flex items-center justify-center rounded-2xl bg-fuchsia-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-fuchsia-300"
           >
@@ -43,6 +49,9 @@ const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/builder/
             Continue to iOS signing docs
           </a>
         </div>
+        <p class="mt-8 text-xs leading-6 text-slate-400">
+          The profile only collects these identifiers. If it appears in Settings, General, VPN &amp; Device Management, you can remove it there at any time.
+        </p>
       </div>
     </div>
   </section>
@@ -64,6 +73,15 @@ const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/builder/
   const description = document.querySelector<HTMLElement>('#result-description')
   const rowsRoot = document.querySelector<HTMLElement>('#result-rows')
   const emptyState = document.querySelector<HTMLElement>('#result-empty')
+  const emailLink = document.querySelector<HTMLAnchorElement>('#result-email')
+
+  function updateEmailLink(rows: ReadonlyArray<readonly [string, string]>): void {
+    if (!emailLink) return
+    const body = rows.map(([label, value]) => `${label}: ${value}`).join('\n')
+    emailLink.href = `mailto:?subject=${encodeURIComponent('My iOS device UDID')}&body=${encodeURIComponent(body)}`
+    emailLink.classList.remove('hidden')
+    emailLink.classList.add('inline-flex')
+  }
 
   function announceCopyStatus(message: string): void {
     if (statusRegion) {
@@ -113,6 +131,7 @@ const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/builder/
       description.textContent = 'The backend received the device payload successfully. Copy the values you need for Apple Developer or your tester registry below.'
       emptyState.classList.add('hidden')
       rows.forEach(([label, value]) => rowsRoot.append(buildRow(label, value)))
+      updateEmailLink(rows)
       bindCopyButtons()
       return
     }
@@ -155,7 +174,11 @@ const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/builder/
 
   async function loadPayload(): Promise<Record<string, string> | null> {
     const fromQuery = payloadFromQuery()
-    if (fromQuery) return fromQuery
+    if (fromQuery) {
+      // The result endpoint clears the backup cookie, so call it even when the link carried the data.
+      void fetch(UDID_RESULT_ENDPOINT, { credentials: 'same-origin', headers: { Accept: 'application/json' } }).catch(() => undefined)
+      return fromQuery
+    }
 
     try {
       const response = await fetch(UDID_RESULT_ENDPOINT, {

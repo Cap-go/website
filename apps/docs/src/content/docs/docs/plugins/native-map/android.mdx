@@ -1,0 +1,38 @@
+---
+title: Android setup
+description: "Google Maps SDK API key and compositing for @capgo/capacitor-native-map."
+sidebar:
+  order: 4
+---
+
+Android uses the **Google Maps SDK**. Add your API key as manifest metadata in `android/app/src/main/AndroidManifest.xml` inside `<application>`:
+
+```xml
+<meta-data
+    android:name="com.google.android.geo.API_KEY"
+    android:value="${GOOGLE_MAPS_API_KEY}" />
+```
+
+Inside `android { defaultConfig { ... } }` in `android/app/build.gradle`, map the placeholder to an environment variable or local secret:
+
+```gradle
+android {
+    defaultConfig {
+        manifestPlaceholders = [
+            GOOGLE_MAPS_API_KEY: System.getenv("GOOGLE_MAPS_API_KEY") ?: "REPLACE_WITH_YOUR_GOOGLE_MAPS_API_KEY"
+        ]
+    }
+}
+```
+
+Export `GOOGLE_MAPS_API_KEY` before building, or Gradle injects the fallback string and the Maps SDK fails at runtime.
+
+Enable **Maps SDK for Android** for the key in Google Cloud Console. Pass the same key to `NativeMap.create({ apiKey })` for consistency with web builds.
+
+## Map behind the WebView
+
+During `create`, the plugin attaches a `MapView` under the Capacitor WebView, calls `bringToFront()` on the WebView, and sets `webView.setBackgroundColor(Color.TRANSPARENT)` so your HTML UI can render above the map.
+
+For embedded maps, pass a container element to `NativeMap.create({ element })`. The plugin measures that element and keeps the native map frame in sync on resize and scroll.
+
+For **background mode**, pass `toBack: true` and set `config.x`, `config.y`, `config.width`, and `config.height` (viewport defaults apply when omitted). Call `updateLayout` when the window size or orientation changes so the `MapView` stays aligned with the WebView.

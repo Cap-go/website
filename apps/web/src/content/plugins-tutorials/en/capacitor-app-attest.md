@@ -28,7 +28,8 @@ Checks whether native attestation is available on this device.
 ```typescript
 import { AppAttestNative } from '@capgo/capacitor-app-attest';
 
-await AppAttestNative.isSupported();
+const result = await AppAttestNative.isSupported();
+console.log(result);
 ```
 
 ### `prepare`
@@ -38,7 +39,8 @@ Prepares attestation state and returns the key handle used for later calls.
 ```typescript
 import { AppAttestNative } from '@capgo/capacitor-app-attest';
 
-await AppAttestNative.prepare();
+const result = await AppAttestNative.prepare();
+console.log(result);
 ```
 
 ### `createAttestation`
@@ -48,7 +50,11 @@ Creates a registration attestation token bound to a backend-issued challenge.
 ```typescript
 import { AppAttestNative } from '@capgo/capacitor-app-attest';
 
-await AppAttestNative.createAttestation({} as CreateAttestationOptions);
+const result = await AppAttestNative.createAttestation({
+  keyId: 'key-id-123',
+  challenge: 'challenge',
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `createAssertion`
@@ -58,7 +64,11 @@ Creates a request assertion token bound to a request payload.
 ```typescript
 import { AppAttestNative } from '@capgo/capacitor-app-attest';
 
-await AppAttestNative.createAssertion({} as CreateAssertionOptions);
+const result = await AppAttestNative.createAssertion({
+  keyId: 'key-id-123',
+  payload: 'payload',
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ## Full Reference

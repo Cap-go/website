@@ -41,7 +41,7 @@ Starts a trace.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.startTrace({} as StartTraceOptions);
+await FirebasePerformance.startTrace({ traceName: 'trace' });
 ```
 
 ### `stopTrace`
@@ -51,7 +51,7 @@ Stops a trace.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.stopTrace({} as StopTraceOptions);
+await FirebasePerformance.stopTrace({ traceName: 'trace' });
 ```
 
 ### `incrementMetric`
@@ -61,7 +61,10 @@ Atomically increments the metric with the given name for the selected trace by t
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.incrementMetric({} as IncrementMetricOptions);
+await FirebasePerformance.incrementMetric({
+  traceName: 'trace',
+  metricName: 'metric',
+});
 ```
 
 ### `setEnabled`
@@ -72,7 +75,7 @@ Will be applied with the next start of the app.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.setEnabled({} as SetEnabledOptions);
+await FirebasePerformance.setEnabled({ enabled: true });
 ```
 
 ### `isEnabled`
@@ -82,7 +85,8 @@ Determines whether performance monitoring is enabled or disabled.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.isEnabled();
+const result = await FirebasePerformance.isEnabled();
+console.log(result);
 ```
 
 ### `putAttribute`
@@ -92,7 +96,11 @@ Sets a custom attribute of a trace to a given value.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.putAttribute({} as PutAttributeOptions);
+await FirebasePerformance.putAttribute({
+  traceName: 'trace',
+  attribute: "experiment",
+  value: "A",
+});
 ```
 
 ### `getAttribute`
@@ -102,7 +110,11 @@ Returns the value of a custom attribute of a trace.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.getAttribute({} as GetAttributeOptions);
+const result = await FirebasePerformance.getAttribute({
+  traceName: 'trace',
+  attribute: 'attribute',
+});
+console.log(result);
 ```
 
 ### `getAttributes`
@@ -112,7 +124,8 @@ Gets the all the custom attributes of a trace with their values.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.getAttributes({} as GetAttributesOptions);
+const result = await FirebasePerformance.getAttributes({ traceName: 'trace' });
+console.log(result);
 ```
 
 ### `removeAttribute`
@@ -122,7 +135,10 @@ Removes a custom attribute from a trace given its name.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.removeAttribute({} as RemoveAttributeOptions);
+await FirebasePerformance.removeAttribute({
+  traceName: 'trace',
+  attribute: 'attribute',
+});
 ```
 
 ### `putMetric`
@@ -132,7 +148,11 @@ Sets the value of a custom metric.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.putMetric({} as PutMetricOptions);
+await FirebasePerformance.putMetric({
+  traceName: 'trace',
+  metricName: 'metric',
+  num: 1,
+});
 ```
 
 ### `getMetric`
@@ -142,7 +162,11 @@ Get the value of a custom metric by name.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.getMetric({} as GetMetricOptions);
+const result = await FirebasePerformance.getMetric({
+  traceName: 'trace',
+  metricName: 'metric',
+});
+console.log(result);
 ```
 
 ### `record`
@@ -154,7 +178,11 @@ Only available on web.
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 
-await FirebasePerformance.record({} as RecordOptions);
+await FirebasePerformance.record({
+  traceName: 'trace',
+  startTime: 10,
+  duration: 1000,
+});
 ```
 
 ## Type Reference

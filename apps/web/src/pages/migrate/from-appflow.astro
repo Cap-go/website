@@ -1,0 +1,49 @@
+---
+import ConversionLandingLayout from '@/components/conversion/ConversionLandingLayout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const title = m.migrate_from_appflow_title({}, { locale })
+const description = m.migrate_from_appflow_meta_description({}, { locale })
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = { title, description, ldJSON, image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png` }
+
+const docsUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflow-to-capgo')
+
+const relatedLinks = [
+  { label: m.capflow_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives/ionic-appflow') },
+  { label: m.review_appflow_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'reviews/appflow') },
+  { label: 'Official upgrade guide', href: docsUrl },
+  { label: m.best_appflow_alternative_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/appflow-alternative') },
+]
+---
+
+<ConversionLandingLayout
+  locale={locale}
+  content={content}
+  heroTitle={m.migrate_from_appflow_hero_title({}, { locale })}
+  heroSubtitle={m.migrate_from_appflow_hero_subtitle({}, { locale })}
+  sections={[
+    {
+      title: m.migrate_from_appflow_steps_title({}, { locale }),
+      paragraphs: [m.migrate_from_appflow_steps_p1({}, { locale })],
+      listItems: [m.migrate_from_appflow_steps_li1({}, { locale }), m.migrate_from_appflow_steps_li2({}, { locale }), m.migrate_from_appflow_steps_li3({}, { locale })],
+      htmlParagraphs: [`<a class="text-emerald-400 underline" href="${docsUrl}">${m.documentation({}, { locale })} — from-appflow-to-capgo</a>`],
+    },
+  ]}
+  relatedLinks={relatedLinks}
+/>

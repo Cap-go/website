@@ -12,14 +12,24 @@ bun add @capgo/capacitor-zip
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `zip` - Compress a file or directory to create a ZIP archive.
-- `unzip` - Extract a ZIP archive to a specified destination directory.
+## Import
 
-## Example Usage
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+```
 
-### `zip`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `zip` | Compress a file or directory to create a ZIP archive. |
+| `unzip` | Extract a ZIP archive to a specified destination directory. |
+
+## Examples
+
+### `zip()`
 
 Compress a file or directory to create a ZIP archive.
 
@@ -33,7 +43,7 @@ await CapacitorZip.zip({
 });
 ```
 
-### `unzip`
+### `unzip()`
 
 Extract a ZIP archive to a specified destination directory.
 
@@ -47,10 +57,11 @@ await CapacitorZip.unzip({
 });
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-zip/
-- Docs: /docs/plugins/zip/
+- [GitHub repository](https://github.com/Cap-go/capacitor-zip/)
+- [Documentation](/docs/plugins/zip/)
+- [API reference](/docs/plugins/zip/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-zip
 

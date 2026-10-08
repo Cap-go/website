@@ -2,15 +2,159 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
-const title = `${brand} | ${m.solutions_ionic_plugins_title({}, { locale })}`
-const description = m.solutions_ionic_plugins_description({}, { locale })
+const title = `${brand} | ${m.solutions_ionic_enterprise_plugins_title({}, { locale })}`
+const description = m.solutions_ionic_enterprise_plugins_description({}, { locale })
+const talkToTeamUrl = 'https://book.capgo.app/enterprise-inquiry/'
+
+const links = {
+  identityVault: { href: docs('upgrade/from-ionic-identity-vault/'), label: m.solutions_ionic_enterprise_plugins_link_identity_vault({}, { locale }) },
+  authConnect: { href: docs('upgrade/from-ionic-auth-connect/'), label: m.solutions_ionic_enterprise_plugins_link_auth_connect({}, { locale }) },
+  secureStorage: { href: docs('upgrade/from-ionic-secure-storage/'), label: m.solutions_ionic_enterprise_plugins_link_secure_storage({}, { locale }) },
+  appflow: { href: docs('upgrade/from-appflow-to-capgo/'), label: m.solutions_ionic_enterprise_plugins_link_appflow({}, { locale }) },
+  nativeBiometric: { href: docs('plugins/native-biometric/'), label: m.solutions_ionic_enterprise_plugins_link_native_biometric({}, { locale }) },
+  socialLogin: { href: docs('plugins/social-login/'), label: m.solutions_ionic_enterprise_plugins_link_social_login({}, { locale }) },
+  dataStorage: { href: docs('plugins/data-storage-sqlite/'), label: m.solutions_ionic_enterprise_plugins_link_data_storage({}, { locale }) },
+  fastSql: { href: docs('plugins/fast-sql/'), label: m.solutions_ionic_enterprise_plugins_link_fast_sql({}, { locale }) },
+  plugins: { href: getRelativeLocaleUrl(locale, 'plugins'), label: m.solutions_ionic_enterprise_plugins_link_plugins({}, { locale }) },
+  pricing: { href: getRelativeLocaleUrl(locale, 'pricing'), label: m.solutions_ionic_enterprise_plugins_link_pricing({}, { locale }) },
+  consulting: { href: getRelativeLocaleUrl(locale, 'consulting'), label: m.solutions_ionic_enterprise_plugins_link_consulting({}, { locale }) },
+}
+
+const pluginRows = [
+  {
+    ionic: 'Ionic Identity Vault',
+    replacements: [{ href: links.nativeBiometric.href, label: 'Native Biometric' }],
+    guide: links.identityVault.href,
+  },
+  {
+    ionic: 'Ionic Auth Connect',
+    replacements: [{ href: links.socialLogin.href, label: 'Social Login' }],
+    guide: links.authConnect.href,
+  },
+  {
+    ionic: 'Ionic Secure Storage',
+    replacements: [
+      { href: links.dataStorage.href, label: 'Data Storage SQLite' },
+      { href: links.fastSql.href, label: 'Fast SQL' },
+    ],
+    guide: links.secureStorage.href,
+  },
+  {
+    ionic: 'Ionic Intune',
+    replacements: [{ href: docs('plugins/intune/'), label: 'Intune' }],
+    guide: docs('plugins/intune/getting-started/'),
+  },
+  {
+    ionic: 'Ionic Payments',
+    replacements: [{ href: docs('plugins/pay/'), label: '@capgo/capacitor-pay' }],
+    guide: docs('plugins/pay/getting-started/'),
+  },
+  {
+    ionic: 'Ionic Zebra Scanner',
+    replacements: [{ href: docs('plugins/zebra-datawedge/'), label: 'Zebra DataWedge' }],
+    guide: docs('plugins/zebra-datawedge/getting-started/'),
+  },
+  {
+    ionic: '@ionic-enterprise/ssl-pinning',
+    replacements: [{ href: docs('plugins/ssl-pinning/'), label: '@capgo/capacitor-ssl-pinning' }],
+    guide: docs('plugins/ssl-pinning/getting-started/'),
+  },
+]
+
+const facts = [
+  m.solutions_ionic_enterprise_plugins_fact1({}, { locale }),
+  m.solutions_ionic_enterprise_plugins_fact2({}, { locale }),
+  m.solutions_ionic_enterprise_plugins_fact3({}, { locale }),
+]
+
+const notes = [
+  {
+    title: m.solutions_ionic_enterprise_plugins_note1_title({}, { locale }),
+    desc: m.solutions_ionic_enterprise_plugins_note1_desc({}, { locale }),
+    link: links.identityVault,
+  },
+  {
+    title: m.solutions_ionic_enterprise_plugins_note2_title({}, { locale }),
+    desc: m.solutions_ionic_enterprise_plugins_note2_desc({}, { locale }),
+    link: links.authConnect,
+  },
+  {
+    title: m.solutions_ionic_enterprise_plugins_note3_title({}, { locale }),
+    desc: m.solutions_ionic_enterprise_plugins_note3_desc({}, { locale }),
+    link: links.secureStorage,
+  },
+]
+
+const supportCards = [
+  {
+    title: m.solutions_ionic_enterprise_plugins_support1_title({}, { locale }),
+    desc: m.solutions_ionic_enterprise_plugins_support1_desc({}, { locale }),
+    link: links.pricing,
+  },
+  {
+    title: m.solutions_ionic_enterprise_plugins_support2_title({}, { locale }),
+    desc: m.solutions_ionic_enterprise_plugins_support2_desc({}, { locale }),
+    link: links.consulting,
+  },
+  {
+    title: m.solutions_ionic_enterprise_plugins_support3_title({}, { locale }),
+    desc: m.solutions_ionic_enterprise_plugins_support3_desc({}, { locale }),
+    link: links.appflow,
+  },
+]
+
+const howSteps = [
+  {
+    title: m.solutions_ionic_enterprise_plugins_how1_title({}, { locale }),
+    body: m.solutions_ionic_enterprise_plugins_how1_body({}, { locale }),
+    code: 'grep "@ionic-enterprise" package.json',
+    href: '#plugin-migration',
+    linkLabel: m.solutions_ionic_enterprise_plugins_cta_guides({}, { locale }),
+  },
+  {
+    title: m.solutions_ionic_enterprise_plugins_how2_title({}, { locale }),
+    body: m.solutions_ionic_enterprise_plugins_how2_body({}, { locale }),
+    code: `npm install @capgo/capacitor-native-biometric
+npx cap sync`,
+    href: links.nativeBiometric.href,
+    linkLabel: links.nativeBiometric.label,
+  },
+  {
+    title: m.solutions_ionic_enterprise_plugins_how3_title({}, { locale }),
+    body: m.solutions_ionic_enterprise_plugins_how3_body({}, { locale }),
+    href: links.secureStorage.href,
+    linkLabel: links.secureStorage.label,
+  },
+  {
+    title: m.solutions_ionic_enterprise_plugins_how4_title({}, { locale }),
+    body: m.solutions_ionic_enterprise_plugins_how4_body({}, { locale }),
+    code: `npm uninstall @ionic-enterprise/identity-vault
+npx cap sync`,
+    href: links.appflow.href,
+    linkLabel: links.appflow.label,
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_ionic_enterprise_plugins_faq1_q({}, { locale }), answer: m.solutions_ionic_enterprise_plugins_faq1_a({}, { locale }), ...links.plugins },
+  { question: m.solutions_ionic_enterprise_plugins_faq2_q({}, { locale }), answer: m.solutions_ionic_enterprise_plugins_faq2_a({}, { locale }), ...links.identityVault },
+  { question: m.solutions_ionic_enterprise_plugins_faq3_q({}, { locale }), answer: m.solutions_ionic_enterprise_plugins_faq3_a({}, { locale }), ...links.secureStorage },
+  { question: m.solutions_ionic_enterprise_plugins_faq4_q({}, { locale }), answer: m.solutions_ionic_enterprise_plugins_faq4_a({}, { locale }), ...links.appflow },
+  { question: m.solutions_ionic_enterprise_plugins_faq5_q({}, { locale }), answer: m.solutions_ionic_enterprise_plugins_faq5_a({}, { locale }), ...links.consulting },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -22,6 +166,7 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = { title, description, ldJSON }
@@ -34,206 +179,170 @@ const content = { title, description, ldJSON }
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <p class="inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-gray-200">
-            {m.solutions_ionic_plugins_badge({}, { locale })}
+            {m.solutions_ionic_enterprise_plugins_badge({}, { locale })}
           </p>
-          <h1 class="mt-6 text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            {m.solutions_ionic_plugins_hero_title({}, { locale })}
-          </h1>
-          <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-gray-300">
-            {m.solutions_ionic_plugins_hero_subtitle({}, { locale })}
-          </p>
+          <h1 class="mt-6 text-4xl leading-tight font-bold text-balance text-white sm:text-5xl lg:text-6xl">{m.solutions_ionic_enterprise_plugins_hero_title({}, { locale })}</h1>
+          <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-gray-300">{m.solutions_ionic_enterprise_plugins_hero_subtitle({}, { locale })}</p>
 
           <HumanSupport class="mt-8" size="sm" />
           <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href={getRelativeLocaleUrl(locale, 'register')}
+              href="#plugin-migration"
               class="rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-blue-500 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
             >
-              {m.solutions_get_started({}, { locale })}
+              {m.solutions_ionic_enterprise_plugins_cta_guides({}, { locale })}
             </a>
             <a
-              href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-secure-storage/')}
+              href={talkToTeamUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               class="rounded-xl border border-white/15 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-white/5 hover:text-white"
             >
-              {m.solutions_view_docs({}, { locale })}
+              {m.solutions_talk_to_team({}, { locale })}
             </a>
           </div>
+
+          <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-gray-400">
+            {facts.map((fact) => (
+              <li class="flex items-center gap-2">
+                <svg aria-hidden="true" class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                {fact}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- Plugin Table -->
-    <section id="plugin-migration" class="py-16 sm:py-20">
+    <section id="plugin-migration" class="scroll-mt-20 py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">
-            {m.solutions_ionic_plugins_section_title({}, { locale })}
-          </h2>
-          <p class="mt-4 text-lg text-gray-300">
-            {m.solutions_ionic_plugins_section_desc({}, { locale })}
-          </p>
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_ionic_enterprise_plugins_table_title({}, { locale })}</h2>
+          <p class="mt-4 text-lg text-gray-300">{m.solutions_ionic_enterprise_plugins_table_desc({}, { locale })}</p>
         </div>
 
-        <div class="mt-10 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
-          <table class="w-full text-left text-sm text-gray-300">
+        <div class="mt-10 overflow-x-auto rounded-xl border border-white/10 bg-white/[0.02]">
+          <table class="w-full min-w-[36rem] text-left text-sm text-gray-300">
             <thead class="bg-white/[0.04] text-gray-400">
               <tr>
-                <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_ionic({}, { locale })}</th>
-                <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_capgo({}, { locale })}</th>
-                <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_guide({}, { locale })}</th>
+                <th scope="col" class="px-6 py-4 font-semibold">
+                  {m.appflow_plugins_col_ionic({}, { locale })}
+                </th>
+                <th scope="col" class="px-6 py-4 font-semibold">
+                  {m.appflow_plugins_col_capgo({}, { locale })}
+                </th>
+                <th scope="col" class="px-6 py-4 font-semibold">
+                  {m.appflow_plugins_col_guide({}, { locale })}
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-700">
-              <tr class="transition hover:bg-white/5">
-                <td class="px-6 py-4 font-medium text-gray-100">Ionic Secure Storage</td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/')} class="text-blue-400 hover:underline"> Fast SQL </a>
-                  <span class="mx-2 text-gray-500">{m.appflow_plugins_or({}, { locale })}</span>
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/')} class="text-blue-400 hover:underline"> Data Storage SQLite </a>
-                </td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-secure-storage/')} class="text-blue-300 hover:underline">
-                    {m.appflow_plugins_link_text({}, { locale })}
-                  </a>
-                </td>
-              </tr>
-              <tr class="transition hover:bg-white/5">
-                <td class="px-6 py-4 font-medium text-gray-100">Ionic Auth Connect</td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/social-login/')} class="text-blue-400 hover:underline"> Social Login </a>
-                </td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-auth-connect/')} class="text-blue-300 hover:underline">
-                    {m.appflow_plugins_link_text({}, { locale })}
-                  </a>
-                </td>
-              </tr>
-              <tr class="transition hover:bg-white/5">
-                <td class="px-6 py-4 font-medium text-gray-100">Ionic Identity Vault</td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/native-biometric/')} class="text-blue-400 hover:underline"> Native Biometric </a>
-                  <span class="mx-2 text-gray-500">+</span>
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/')} class="text-blue-400 hover:underline"> Fast SQL </a>
-                  <span class="mx-2 text-gray-500">{m.appflow_plugins_or({}, { locale })}</span>
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/')} class="text-blue-400 hover:underline"> Data Storage SQLite </a>
-                </td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-identity-vault/')} class="text-blue-300 hover:underline">
-                    {m.appflow_plugins_link_text({}, { locale })}
-                  </a>
-                </td>
-              </tr>
-              <tr class="transition hover:bg-white/5">
-                <td class="px-6 py-4 font-medium text-gray-100">Ionic Intune</td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/intune/')} class="text-blue-400 hover:underline"> Intune </a>
-                </td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/intune/getting-started/')} class="text-blue-300 hover:underline">
-                    {m.appflow_plugins_link_text({}, { locale })}
-                  </a>
-                </td>
-              </tr>
-              <tr class="transition hover:bg-white/5">
-                <td class="px-6 py-4 font-medium text-gray-100">Ionic Payments</td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/pay/')} class="text-blue-400 hover:underline"> @capgo/capacitor-pay </a>
-                </td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/pay/getting-started/')} class="text-blue-300 hover:underline">
-                    {m.appflow_plugins_link_text({}, { locale })}
-                  </a>
-                </td>
-              </tr>
-              <tr class="transition hover:bg-white/5">
-                <td class="px-6 py-4 font-medium text-gray-100">Ionic Zebra Scanner</td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/')} class="text-blue-400 hover:underline"> Zebra DataWedge </a>
-                </td>
-                <td class="px-6 py-4">
-                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/')} class="text-blue-300 hover:underline">
-                    {m.appflow_plugins_link_text({}, { locale })}
-                  </a>
-                </td>
-              </tr>
-              <tr class="transition hover:bg-white/5">
-                <td class="px-6 py-4 font-medium text-gray-100">@ionic-enterprise/ssl-pinning</td>
-                <td class="px-6 py-4">
-                  <a href="https://github.com/mchl18/Capacitor-SSL-Pinning" class="text-blue-400 hover:underline" target="_blank" rel="noreferrer"> capacitor-ssl-pinning </a>
-                </td>
-                <td class="px-6 py-4">
-                  <a href="https://github.com/mchl18/Capacitor-SSL-Pinning" class="text-blue-300 hover:underline" target="_blank" rel="noreferrer">
-                    {m.appflow_plugins_link_text({}, { locale })}
-                  </a>
-                </td>
-              </tr>
+              {pluginRows.map((row) => (
+                <tr class="transition hover:bg-white/5">
+                  <th scope="row" class="px-6 py-4 font-medium text-gray-100">
+                    {row.ionic}
+                  </th>
+                  <td class="px-6 py-4">
+                    {row.replacements.map((replacement, index) => (
+                      <>
+                        {index > 0 && <span class="mx-2 text-gray-500">{m.appflow_plugins_or({}, { locale })}</span>}
+                        <a href={replacement.href} class="text-blue-400 hover:underline">
+                          {replacement.label}
+                        </a>
+                      </>
+                    ))}
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href={row.guide} class="text-blue-300 hover:underline" aria-label={`${m.appflow_plugins_link_text({}, { locale })}: ${row.ionic}`}>
+                      {m.appflow_plugins_link_text({}, { locale })}
+                    </a>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- Migration Steps -->
-    <section class="py-16 sm:py-20">
+    <!-- Before you switch -->
+    <section id="before-you-switch" class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl">
-          {m.solutions_ionic_plugins_steps_title({}, { locale })}
-        </h2>
+        <p class="text-sm font-semibold tracking-wide text-blue-400 uppercase">{m.solutions_ionic_enterprise_plugins_notes_label({}, { locale })}</p>
+        <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">{m.solutions_ionic_enterprise_plugins_notes_title({}, { locale })}</h2>
         <div class="mt-10 grid gap-6 md:grid-cols-3">
-          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] font-semibold text-white">1</div>
-            <p class="text-gray-300">{m.solutions_ionic_plugins_step1({}, { locale })}</p>
-          </div>
-          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] font-semibold text-white">2</div>
-            <p class="text-gray-300">{m.solutions_ionic_plugins_step2({}, { locale })}</p>
-          </div>
-          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] font-semibold text-white">3</div>
-            <p class="text-gray-300">{m.solutions_ionic_plugins_step3({}, { locale })}</p>
-          </div>
+          {notes.map((note) => (
+            <div class="flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-6">
+              <h3 class="text-lg font-semibold text-white">{note.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-gray-300">{note.desc}</p>
+              <a href={note.link.href} class="mt-auto inline-flex pt-5 text-sm font-semibold text-blue-300 hover:text-white hover:underline">
+                {note.link.label}
+              </a>
+            </div>
+          ))}
         </div>
       </div>
     </section>
+
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_ionic_enterprise_plugins_how_title({}, { locale })}
+      description={m.solutions_ionic_enterprise_plugins_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.identityVault, links.authConnect, links.secureStorage, links.appflow, links.nativeBiometric, links.socialLogin, links.dataStorage, links.fastSql]}
+      class="border-y border-white/10 bg-transparent"
+    />
+
+    <!-- Support -->
+    <section id="support" class="py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <p class="text-sm font-semibold tracking-wide text-blue-400 uppercase">{m.solutions_ionic_enterprise_plugins_support_label({}, { locale })}</p>
+        <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">{m.solutions_ionic_enterprise_plugins_support_title({}, { locale })}</h2>
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {supportCards.map((card) => (
+            <div class="flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-6">
+              <h3 class="text-lg font-semibold text-white">{card.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-gray-300">{card.desc}</p>
+              <a href={card.link.href} class="mt-auto inline-flex pt-5 text-sm font-semibold text-blue-300 hover:text-white hover:underline">
+                {card.link.label}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <SolutionAppExample solution="ionic-enterprise-plugins" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['ionic-enterprise-plugins']}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_ionic_enterprise_plugins_faq_title({}, { locale })}
+      description={m.solutions_ionic_enterprise_plugins_faq_desc({}, { locale })}
+      items={faqItems}
+      class="bg-transparent"
+    />
 
     <!-- CTA -->
     <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="rounded-xl border border-white/10 bg-white/[0.03] p-10 text-center">
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">
-            {m.solutions_ionic_plugins_cta_title({}, { locale })}
-          </h2>
-          <p class="mt-4 text-lg text-gray-400">
-            {m.solutions_ionic_plugins_cta_subtitle({}, { locale })}
-          </p>
-          <HumanSupport class="mt-6" size="sm" />
-          <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href={getRelativeLocaleUrl(locale, 'register')}
-              class="rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-blue-500"
-            >
-              {m.solutions_start_free_trial({}, { locale })}
-            </a>
-            <a
-              href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-secure-storage/')}
-              class="rounded-xl border border-white/15 px-8 py-4 text-base font-semibold text-gray-200 transition-all duration-200 hover:bg-white/5"
-            >
-              {m.solutions_view_docs({}, { locale })}
-            </a>
-          </div>
+        <div class="rounded-xl border border-white/10 bg-white/[0.03] p-8 text-center sm:p-10">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_ionic_enterprise_plugins_cta_title({}, { locale })}</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-400">{m.solutions_ionic_enterprise_plugins_cta_subtitle({}, { locale })}</p>
+          <SignupCta humanSupport enterprise class="mt-8" />
         </div>
       </div>
     </section>
   </div>
-
-  <SolutionAppExample solution="ionic-enterprise-plugins" />
-  <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
-    <h2 class="text-2xl font-semibold text-white">Keep going from Ionic Enterprise Plugin Solution</h2>
-    <p class="mt-4">
-      If you are using this solution to replace Ionic enterprise plugins, connect it with <a href="/ionic-enterprise-plugins/">Ionic Enterprise Plugin Alternatives</a> for the product
-      page, <a href="/plugins/">Capgo Plugin Directory</a> for available bridges, <a href="/docs/plugins/">Plugin Docs</a> for implementation, <a href="/consulting/"
-        >Capgo Consulting</a
-      > for missing native features, and <a href="/enterprise/">Capgo Enterprise</a> for supported migration work.
-    </p>
-  </section>
 </Layout>

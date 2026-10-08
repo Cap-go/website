@@ -130,7 +130,7 @@ Channels have several options that control who can receive updates and how updat
 - Allow emulator devices: Permit updates to emulators/simulators (useful for testing). CLI: `--emulator` / `--no-emulator`.
 - Allow physical devices: Permit updates to real phones and tablets. Leave this on for production channels. CLI: `--device` / `--no-device`.
 - Allow device self-assignment: Lets the app switch to this channel at runtime using `setChannel`. If disabled, `setChannel` will fail for this channel. CLI: `--self-assign` / `--no-self-assign`.
-- Update package: Choose whether devices download a full zip, a delta of changed files, or both (`all`, `zip`, `delta`, `zip_from_builtin`, `delta_from_builtin`). See [Update package](/docs/webapp/channels/#update-package) for the console dropdown and when each mode is useful.
+- Download format: Choose whether devices download a full zip, only the changed delta files, or the best of both (`all`, `zip`, `delta`, `zip_from_builtin`, `delta_from_builtin`). See [Download format](/docs/webapp/channels/#download-format) for the console dropdown and when each mode is useful.
 
 ### Progressive rollouts
 

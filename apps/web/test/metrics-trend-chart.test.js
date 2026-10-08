@@ -1,0 +1,132 @@
+import { expect, test } from 'bun:test'
+import {
+  buildContiguousDailyPlatformRows,
+  buildRollingDailyBucketKeys,
+  formatTrendAxisLabel,
+  selectTrendRows,
+  sliceHourlyTrendRows,
+  sliceSparklineRows,
+  sliceTrendRows,
+  trendNearestIndex,
+  trendRowUnit,
+} from '../src/lib/metricsTrendChart.ts'
+
+test('sliceTrendRows filters by UTC date boundary and keeps gaps', () => {
+  const rows = [
+    { date: '2026-09-01', value: 1 },
+    { date: '2026-09-03', value: 2 },
+    { date: '2026-09-05', value: 3 },
+    { date: '2026-09-10', value: 4 },
+  ]
+
+  expect(sliceTrendRows(rows, '1d', new Date('2026-09-10T15:00:00.000Z'))).toEqual([{ date: '2026-09-10', value: 4 }])
+  expect(sliceTrendRows(rows, '1w', new Date('2026-09-10T00:00:00.000Z'))).toEqual([
+    { date: '2026-09-05', value: 3 },
+    { date: '2026-09-10', value: 4 },
+  ])
+  expect(sliceTrendRows(rows, '1m', new Date('2026-09-10T00:00:00.000Z'))).toEqual(rows)
+})
+
+test('sliceTrendRows falls back to trailing rows when date filter is empty', () => {
+  const rows = Array.from({ length: 90 }, (_, index) => {
+    const day = new Date(Date.UTC(2026, 5, 1 + index))
+    const date = `${day.getUTCFullYear()}-${String(day.getUTCMonth() + 1).padStart(2, '0')}-${String(day.getUTCDate()).padStart(2, '0')}`
+    return { date, value: index }
+  })
+
+  const lateRef = new Date('2026-01-01T00:00:00.000Z')
+  const threeMonth = sliceTrendRows(rows, '3m', lateRef)
+  const oneMonth = sliceTrendRows(rows, '1m', lateRef)
+  expect(threeMonth).toEqual(rows.slice(-90))
+  expect(oneMonth).toEqual(rows.slice(-30))
+})
+
+test('sliceHourlyTrendRows keeps a rolling 24h window ending at the current UTC hour', () => {
+  const rows = [
+    { date: '2026-09-22 20:00', ios: 70, android: 60 },
+    { date: '2026-09-22 22:00', ios: 71, android: 61 },
+    { date: '2026-09-23 08:00', ios: 72, android: 62 },
+    { date: '2026-09-23 12:00', ios: 74, android: 63 },
+    { date: '2026-09-23 18:00', ios: 76, android: 65 },
+    { date: '2026-09-23 21:00', ios: 77, android: 66 },
+  ]
+
+  expect(sliceHourlyTrendRows(rows, new Date('2026-09-23T21:30:00.000Z'))).toEqual([
+    { date: '2026-09-22 22:00', ios: 71, android: 61 },
+    { date: '2026-09-23 08:00', ios: 72, android: 62 },
+    { date: '2026-09-23 12:00', ios: 74, android: 63 },
+    { date: '2026-09-23 18:00', ios: 76, android: 65 },
+    { date: '2026-09-23 21:00', ios: 77, android: 66 },
+  ])
+})
+
+test('selectTrendRows falls back to daily when hourly rows are outside the rolling window', () => {
+  const metrics = {
+    daily_platforms: [{ date: '2026-09-23', ios: 80, android: 70 }],
+    hourly_platforms: [{ date: '2026-09-20 08:00', ios: 72, android: 61 }],
+  }
+
+  expect(selectTrendRows(metrics, '1d', new Date('2026-09-23T21:00:00.000Z'))).toEqual([{ date: '2026-09-23', ios: 80, android: 70 }])
+})
+
+test('selectTrendRows uses hourly rows for 1D', () => {
+  const metrics = {
+    daily_platforms: [{ date: '2026-09-23', ios: 80, android: 70 }],
+    hourly_platforms: [
+      { date: '2026-09-23 08:00', ios: 72, android: 61 },
+      { date: '2026-09-23 12:00', ios: 74, android: 63 },
+      { date: '2026-09-23 18:00', ios: 76, android: 65 },
+    ],
+  }
+
+  expect(selectTrendRows(metrics, '1d', new Date('2026-09-23T21:00:00.000Z'))).toHaveLength(3)
+  expect(selectTrendRows(metrics, '1m', new Date('2026-09-23T21:00:00.000Z'))).toHaveLength(1)
+})
+
+test('buildContiguousDailyPlatformRows fills 90 UTC days for 3M charts', () => {
+  const referenceDate = new Date('2026-09-17T12:00:00.000Z')
+  const rows = buildContiguousDailyPlatformRows(
+    [
+      { date: '2026-09-16', ios: 90, android: 80 },
+      { date: '2026-06-20', ios: 70, android: 60 },
+    ],
+    referenceDate,
+    90,
+  )
+  expect(rows).toHaveLength(90)
+  expect(rows[0]?.date).toBe(buildRollingDailyBucketKeys(referenceDate, 90)[0])
+  expect(rows.at(-1)?.date).toBe('2026-09-17')
+  expect(selectTrendRows({ daily_platforms: rows }, '3m', referenceDate)).toHaveLength(90)
+  expect(selectTrendRows({ daily_platforms: rows }, '1m', referenceDate)).toHaveLength(30)
+  expect(selectTrendRows({ daily_platforms: rows }, '1w', referenceDate)).toHaveLength(7)
+})
+
+test('sliceSparklineRows keeps the last 30 UTC days', () => {
+  const rows = Array.from({ length: 100 }, (_, index) => {
+    const day = new Date(Date.UTC(2026, 0, 1 + index))
+    const date = `${day.getUTCFullYear()}-${String(day.getUTCMonth() + 1).padStart(2, '0')}-${String(day.getUTCDate()).padStart(2, '0')}`
+    return { date, value: index }
+  })
+
+  const sparkline = sliceSparklineRows(rows, new Date('2026-04-10T00:00:00.000Z'))
+  expect(sparkline).toHaveLength(30)
+  expect(sparkline[0]?.date).toBe('2026-03-12')
+  expect(sparkline.at(-1)?.date).toBe('2026-04-10')
+})
+
+test('trendRowUnit follows hourly vs daily 1D rows', () => {
+  expect(trendRowUnit([{ date: '2026-09-23 08:00' }], '1d')).toBe('hour')
+  expect(trendRowUnit([{ date: '2026-09-23' }], '1d')).toBe('day')
+  expect(trendRowUnit([{ date: '2026-09-23' }], '1m')).toBe('day')
+})
+
+test('formatTrendAxisLabel shortens hourly labels', () => {
+  expect(formatTrendAxisLabel('2026-09-23 08:00', '1d')).toBe('08:00')
+  expect(formatTrendAxisLabel('2026-09-23', '1m')).toBe('2026-09-23')
+})
+
+test('trendNearestIndex maps pointer position to the nearest day', () => {
+  expect(trendNearestIndex(44, 0, 800, 5)).toBe(0)
+  expect(trendNearestIndex(784, 0, 800, 5)).toBe(4)
+  expect(trendNearestIndex(414, 0, 800, 5)).toBe(2)
+})

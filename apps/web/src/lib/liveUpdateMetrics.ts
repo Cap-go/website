@@ -1,3 +1,4 @@
+import { sliceSparklineRows } from './metricsTrendChart'
 import { LIVE_UPDATE_METRICS_PATH } from './publicLiveUpdateMetrics'
 
 export type DailyMetric = { date: string; success_rate: number }
@@ -17,9 +18,13 @@ export type LiveUpdateMetrics = {
   rollback_rate: number | null
   zip_success_rate: number | null
   delta_success_rate: number | null
+  period_days?: number
+  daily_window_days?: number
   updated_at: string
   daily: DailyMetric[]
   daily_platforms: DailyPlatformMetric[]
+  daily_platforms_sparkline: DailyPlatformMetric[]
+  hourly_platforms: DailyPlatformMetric[]
   failures: FailureMetric[]
   platforms: BreakdownMetric[]
   countries: BreakdownMetric[]
@@ -39,6 +44,8 @@ export function emptyLiveUpdateMetrics(): LiveUpdateMetrics {
     updated_at: '',
     daily: [],
     daily_platforms: [],
+    daily_platforms_sparkline: [],
+    hourly_platforms: [],
     failures: [],
     platforms: [],
     countries: [],
@@ -91,6 +98,24 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
 
   const daily_platforms = Array.isArray(value.daily_platforms)
     ? value.daily_platforms
+        .map((item) => {
+          if (!isRecord(item) || typeof item.date !== 'string') return null
+          return { date: item.date, ios: nullablePercentage(item.ios), android: nullablePercentage(item.android) }
+        })
+        .filter((item): item is DailyPlatformMetric => item !== null)
+    : []
+
+  const daily_platforms_sparkline = Array.isArray(value.daily_platforms_sparkline)
+    ? value.daily_platforms_sparkline
+        .map((item) => {
+          if (!isRecord(item) || typeof item.date !== 'string') return null
+          return { date: item.date, ios: nullablePercentage(item.ios), android: nullablePercentage(item.android) }
+        })
+        .filter((item): item is DailyPlatformMetric => item !== null)
+    : sliceSparklineRows(daily_platforms)
+
+  const hourly_platforms = Array.isArray(value.hourly_platforms)
+    ? value.hourly_platforms
         .map((item) => {
           if (!isRecord(item) || typeof item.date !== 'string') return null
           return { date: item.date, ios: nullablePercentage(item.ios), android: nullablePercentage(item.android) }
@@ -160,18 +185,18 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
     rollback_rate: nullablePercentage(value.rollback_rate),
     zip_success_rate: nullablePercentage(value.zip_success_rate),
     delta_success_rate: nullablePercentage(value.delta_success_rate),
+    period_days: typeof value.period_days === 'number' ? value.period_days : 30,
+    daily_window_days: typeof value.daily_window_days === 'number' ? value.daily_window_days : 90,
     updated_at: value.updated_at,
     daily,
     daily_platforms,
+    daily_platforms_sparkline,
+    hourly_platforms,
     failures,
     platforms,
     countries,
     updater_versions,
   }
-}
-
-export function getCachedLiveUpdateMetrics(): LiveUpdateMetrics {
-  return emptyLiveUpdateMetrics()
 }
 
 export async function fetchLiveUpdateMetrics(endpoint = LIVE_UPDATE_METRICS_PATH): Promise<LiveUpdateMetrics | null> {
@@ -185,18 +210,4 @@ export async function fetchLiveUpdateMetrics(endpoint = LIVE_UPDATE_METRICS_PATH
   } catch {
     return null
   }
-}
-
-export async function resolveLiveUpdateMetrics(): Promise<LiveUpdateMetrics> {
-  return getCachedLiveUpdateMetrics()
-}
-
-/** JSON safe to embed inside <script> via set:html (blocks </script> breakouts). */
-export function jsonForInlineScript(value: unknown): string {
-  return JSON.stringify(value)
-    .replaceAll('<', String.raw`\u003c`)
-    .replaceAll('>', String.raw`\u003e`)
-    .replaceAll('&', String.raw`\u0026`)
-    .replaceAll('\u2028', String.raw`\u2028`)
-    .replaceAll('\u2029', String.raw`\u2029`)
 }

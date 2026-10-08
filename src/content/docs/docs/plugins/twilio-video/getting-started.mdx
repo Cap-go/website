@@ -41,7 +41,8 @@ Store and validate a Twilio Video access token minted by your backend.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.login({} as { accessToken: string });
+const result = await CapacitorTwilioVideo.login({ accessToken: 'access-token-123' });
+console.log(result);
 ```
 
 ### `logout`
@@ -51,7 +52,8 @@ Clear the cached access token and leave the active room.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.logout();
+const result = await CapacitorTwilioVideo.logout();
+console.log(result);
 ```
 
 ### `isLoggedIn`
@@ -61,7 +63,8 @@ Check whether a valid Twilio token is currently cached on the device.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.isLoggedIn();
+const result = await CapacitorTwilioVideo.isLoggedIn();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `joinRoom`
@@ -71,7 +74,8 @@ Join a Twilio room and present the plugin's native in-app call overlay.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.joinRoom({} as { roomName: string; enableAudio?: boolean; enableVideo?: boolean });
+const result = await CapacitorTwilioVideo.joinRoom({ roomName: 'room' });
+console.log(result);
 ```
 
 ### `leaveRoom`
@@ -81,7 +85,8 @@ Leave the current room if connected.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.leaveRoom();
+const result = await CapacitorTwilioVideo.leaveRoom();
+console.log(result);
 ```
 
 ### `setMicrophoneEnabled`
@@ -91,7 +96,8 @@ Enable/disable local microphone publishing.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.setMicrophoneEnabled({} as { enabled: boolean });
+const result = await CapacitorTwilioVideo.setMicrophoneEnabled({ enabled: true });
+console.log(result);
 ```
 
 ### `setCameraEnabled`
@@ -101,7 +107,8 @@ Enable/disable local camera publishing.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.setCameraEnabled({} as { enabled: boolean });
+const result = await CapacitorTwilioVideo.setCameraEnabled({ enabled: true });
+console.log(result);
 ```
 
 ### `getCallStatus`
@@ -111,7 +118,8 @@ Return the current room name, media state, and participant count.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.getCallStatus();
+const result = await CapacitorTwilioVideo.getCallStatus();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `checkMicrophonePermission`
@@ -121,7 +129,8 @@ Check microphone permission state.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.checkMicrophonePermission();
+const result = await CapacitorTwilioVideo.checkMicrophonePermission();
+console.log(result);
 ```
 
 ### `requestMicrophonePermission`
@@ -131,7 +140,8 @@ Request microphone permission.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.requestMicrophonePermission();
+const result = await CapacitorTwilioVideo.requestMicrophonePermission();
+console.log(result);
 ```
 
 ### `checkCameraPermission`
@@ -141,7 +151,8 @@ Check camera permission state.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.checkCameraPermission();
+const result = await CapacitorTwilioVideo.checkCameraPermission();
+console.log(result);
 ```
 
 ### `requestCameraPermission`
@@ -151,7 +162,8 @@ Request camera permission.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.requestCameraPermission();
+const result = await CapacitorTwilioVideo.requestCameraPermission();
+console.log(result);
 ```
 
 ## Source Of Truth

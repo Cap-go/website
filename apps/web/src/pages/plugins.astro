@@ -168,20 +168,59 @@ const content = {
             {plugins.length}+ {m.plugins({}, { locale: Astro.locals.locale })}
           </div>
 
-          <h1 class="font-pj text-3xl font-bold text-white sm:text-4xl md:text-5xl">
-            {m.plugins_directory({}, { locale })}
-          </h1>
+          <h1 class="font-pj text-3xl font-bold text-white sm:text-4xl md:text-5xl">{m.plugins_directory({}, { locale })}</h1>
           <p class="mt-4 max-w-2xl text-gray-300">{m.plugins_directory_description({}, { locale })}</p>
         </div>
         <div class="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-gray-800 bg-gray-800/80 text-gray-300 sm:grid-cols-3 lg:grid-cols-6">
-          {
-            directoryStats.map((stat) => (
-              <div class="min-h-24 bg-gray-950/70 px-4 py-4">
-                <span class="block text-2xl font-semibold text-white tabular-nums">{stat.value}</span>
-                <span class="mt-1 block text-sm leading-snug text-gray-400">{stat.label}</span>
-              </div>
-            ))
-          }
+          {directoryStats.map((stat) => (
+            <div class="min-h-24 bg-gray-950/70 px-4 py-4">
+              <span class="block text-2xl font-semibold text-white tabular-nums">{stat.value}</span>
+              <span class="mt-1 block text-sm leading-snug text-gray-400">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          <div class="flex gap-4 rounded-lg border border-gray-800 bg-gray-950/70 p-5">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/20" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+              </svg>
+            </span>
+            <div>
+              <h2 class="text-base font-semibold text-white">{m.plugins_license_title({}, { locale })}</h2>
+              <p class="mt-1 text-sm leading-6 text-gray-400">{m.plugins_license_body({}, { locale })}</p>
+              <a
+                href="https://github.com/Cap-go"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-2 inline-flex items-center gap-1 text-sm font-medium text-emerald-300! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300 [@media(hover:hover)]:hover:text-white!"
+              >
+                {m.plugins_license_cta({}, { locale })} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+          <div class="flex gap-4 rounded-lg border border-gray-800 bg-gray-950/70 p-5">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-400/10 text-blue-300 ring-1 ring-blue-400/20" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+            </span>
+            <div>
+              <h2 class="text-base font-semibold text-white">{m.plugins_priority_title({}, { locale })}</h2>
+              <p class="mt-1 text-sm leading-6 text-gray-400">{m.plugins_priority_body({}, { locale })}</p>
+              <a
+                href={getRelativeLocaleUrl(locale, 'pricing')}
+                class="mt-2 inline-flex items-center gap-1 text-sm font-medium text-blue-300! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300 [@media(hover:hover)]:hover:text-white!"
+              >
+                {m.plugins_priority_cta({}, { locale })} <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -191,15 +230,11 @@ const content = {
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mb-10 text-center">
           <h2 class="font-pj mb-6 text-4xl font-bold text-white">{m.browse_plugin_library({}, { locale: Astro.locals.locale })}</h2>
-          <p class="mx-auto max-w-2xl text-xl text-gray-300">
-            {m.discover_ready_plugins({}, { locale: Astro.locals.locale })}
-          </p>
+          <p class="mx-auto max-w-2xl text-xl text-gray-300">{m.discover_ready_plugins({}, { locale: Astro.locals.locale })}</p>
         </div>
 
         <div class="grid gap-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start">
-          <aside
-            class="sticky top-0 z-20 rounded-lg border border-gray-800/80 bg-gray-900/95 p-2 backdrop-blur-sm lg:top-24 lg:flex lg:max-h-[calc(100vh-7rem)] lg:flex-col lg:overflow-hidden lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none"
-          >
+          <aside class="sticky top-0 z-20 rounded-lg border border-gray-800/80 bg-gray-900/95 p-2 backdrop-blur-sm lg:top-24 lg:flex lg:max-h-[calc(100vh-7rem)] lg:flex-col lg:overflow-hidden lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
             <div class="relative">
               <input
                 type="search"
@@ -221,20 +256,20 @@ const content = {
             </div>
 
             <div class="relative mt-4 lg:hidden">
-              <label for="plugin-category-select" class="sr-only">Filter plugins by category</label>
+              <label for="plugin-category-select" class="sr-only">
+                Filter plugins by category
+              </label>
               <select
                 id="plugin-category-select"
                 name="plugin-category-select"
                 aria-label="Filter plugins by category"
                 class="h-12 w-full appearance-none rounded-lg border border-gray-700/80 bg-gray-950/70 px-4 pr-10 text-base text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none"
               >
-                {
-                  categoryFilterOptions.map((category) => (
-                    <option value={category.id}>
-                      {category.label} ({category.count})
-                    </option>
-                  ))
-                }
+                {categoryFilterOptions.map((category) => (
+                  <option value={category.id}>
+                    {category.label} ({category.count})
+                  </option>
+                ))}
               </select>
               <svg
                 aria-hidden="true"
@@ -252,24 +287,22 @@ const content = {
               role="group"
               aria-label="Filter plugins by category"
             >
-              {
-                categoryFilterOptions.map((category) => (
-                  <button
-                    type="button"
-                    class:list={[
-                      'flex w-full items-center justify-between gap-3 rounded-md px-3 py-2 text-left text-sm font-semibold focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
-                      category.id === 'all' ? 'bg-blue-500/15 text-white' : 'text-gray-300 hover:bg-gray-900/80 hover:text-white',
-                    ]}
-                    data-category-filter
-                    data-category={category.id}
-                    data-category-label={category.label}
-                    aria-pressed={category.id === 'all' ? 'true' : 'false'}
-                  >
-                    <span>{category.label}</span>
-                    <span class="text-xs text-gray-400 tabular-nums">{category.count}</span>
-                  </button>
-                ))
-              }
+              {categoryFilterOptions.map((category) => (
+                <button
+                  type="button"
+                  class:list={[
+                    'flex w-full items-center justify-between gap-3 rounded-md px-3 py-2 text-left text-sm font-semibold focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
+                    category.id === 'all' ? 'bg-blue-500/15 text-white' : 'text-gray-300 hover:bg-gray-900/80 hover:text-white',
+                  ]}
+                  data-category-filter
+                  data-category={category.id}
+                  data-category-label={category.label}
+                  aria-pressed={category.id === 'all' ? 'true' : 'false'}
+                >
+                  <span>{category.label}</span>
+                  <span class="text-xs text-gray-400 tabular-nums">{category.count}</span>
+                </button>
+              ))}
             </div>
           </aside>
 
@@ -294,9 +327,7 @@ const content = {
                       {defaultSortOption.label}
                     </span>
                   </span>
-                  <span
-                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/5 text-slate-300 group-hover:border-blue-300/30 group-hover:text-white"
-                  >
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/5 text-slate-300 group-hover:border-blue-300/30 group-hover:text-white">
                     <svg id="plugin-sort-chevron" aria-hidden="true" class="h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
@@ -309,118 +340,114 @@ const content = {
                 >
                   <div class="px-3 py-2 text-xs font-medium text-slate-400">{m.choose_an_order({}, { locale })}</div>
                   <div class="mt-1 space-y-1">
-                    {
-                      sortOptions.map((option) => (
-                        <button
-                          type="button"
-                          class:list={[
-                            'flex w-full items-center justify-between rounded-md border px-3 py-2.5 text-left focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
-                            option.value === defaultSortOption.value
-                              ? 'border-blue-400/40 bg-blue-500/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
-                              : 'border-transparent text-slate-200 hover:border-white/10 hover:bg-white/5 hover:text-white',
-                          ]}
-                          data-sort-option
-                          data-sort-value={option.value}
-                          data-sort-label={option.label}
-                          aria-pressed={option.value === defaultSortOption.value ? 'true' : 'false'}
+                    {sortOptions.map((option) => (
+                      <button
+                        type="button"
+                        class:list={[
+                          'flex w-full items-center justify-between rounded-md border px-3 py-2.5 text-left focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
+                          option.value === defaultSortOption.value
+                            ? 'border-blue-400/40 bg-blue-500/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                            : 'border-transparent text-slate-200 hover:border-white/10 hover:bg-white/5 hover:text-white',
+                        ]}
+                        data-sort-option
+                        data-sort-value={option.value}
+                        data-sort-label={option.label}
+                        aria-pressed={option.value === defaultSortOption.value ? 'true' : 'false'}
+                      >
+                        <span class="min-w-0">
+                          <span class="block text-sm font-semibold">{option.label}</span>
+                          <span class="mt-1 block text-xs text-slate-400">{option.description}</span>
+                        </span>
+                        <svg
+                          aria-hidden="true"
+                          class:list={['h-5 w-5 shrink-0 text-blue-300', option.value === defaultSortOption.value ? 'opacity-100' : 'opacity-0']}
+                          data-sort-check
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
-                          <span class="min-w-0">
-                            <span class="block text-sm font-semibold">{option.label}</span>
-                            <span class="mt-1 block text-xs text-slate-400">{option.description}</span>
-                          </span>
-                          <svg
-                            aria-hidden="true"
-                            class:list={['h-5 w-5 shrink-0 text-blue-300', option.value === defaultSortOption.value ? 'opacity-100' : 'opacity-0']}
-                            data-sort-check
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </button>
-                      ))
-                    }
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
 
             <div id="plugins-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {
-                plugins.map((item) => (
-                  <div
-                    class="plugin-card group relative rounded-lg border border-gray-700/80 bg-gray-950/45 p-5 transition-colors duration-200 hover:border-gray-500/70 hover:bg-gray-900/65"
-                    data-title={item.title.toLowerCase()}
-                    data-description={item.description.toLowerCase()}
-                    data-author={item.author.toLowerCase()}
-                    data-package={item.name?.toLowerCase() ?? ''}
-                    data-category={item.category}
-                    data-category-label={item.categoryLabel.toLowerCase()}
-                    data-downloads={item.npmDownloads ?? 0}
-                    data-stars={item.githubStars ?? 0}
-                  >
-                    <div class="relative">
-                      <div class="mb-4 flex items-start justify-between gap-3 text-sm font-semibold">
-                        {item.icon && <PluginIcon icon={item.icon} name={item.title} className="shrink-0" />}
-                        <span class="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-blue-200">{item.categoryLabel}</span>
-                      </div>
-                      <h3 class="font-pj mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
-                      <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
-                      <div class="mb-4 flex items-center justify-between gap-3">
-                        <span class="min-w-0 truncate font-mono text-xs text-gray-500" title={item.name ?? item.author}>
-                          {item.name ?? item.author}
-                        </span>
-                        <div class="flex shrink-0 gap-3">
-                          {item.npmDownloads !== undefined && (
-                            <span class="inline-flex items-center text-sm text-gray-200">
-                              <svg class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                              </svg>
-                              {formatCount(item.npmDownloads)}/m
-                            </span>
-                          )}
+              {plugins.map((item) => (
+                <div
+                  class="plugin-card group relative rounded-lg border border-gray-700/80 bg-gray-950/45 p-5 transition-colors duration-200 hover:border-gray-500/70 hover:bg-gray-900/65"
+                  data-title={item.title.toLowerCase()}
+                  data-description={item.description.toLowerCase()}
+                  data-author={item.author.toLowerCase()}
+                  data-package={item.name?.toLowerCase() ?? ''}
+                  data-category={item.category}
+                  data-category-label={item.categoryLabel.toLowerCase()}
+                  data-downloads={item.npmDownloads ?? 0}
+                  data-stars={item.githubStars ?? 0}
+                >
+                  <div class="relative">
+                    <div class="mb-4 flex items-start justify-between gap-3 text-sm font-semibold">
+                      {item.icon && <PluginIcon icon={item.icon} name={item.title} className="shrink-0" />}
+                      <span class="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-blue-200">{item.categoryLabel}</span>
+                    </div>
+                    <h3 class="font-pj mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
+                    <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
+                    <div class="mb-4 flex items-center justify-between gap-3">
+                      <span class="min-w-0 truncate font-mono text-xs text-gray-500" title={item.name ?? item.author}>
+                        {item.name ?? item.author}
+                      </span>
+                      <div class="flex shrink-0 gap-3">
+                        {item.npmDownloads !== undefined && (
                           <span class="inline-flex items-center text-sm text-gray-200">
-                            <svg class="mr-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            <svg class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
-                            {formatCount(item.githubStars ?? 0)}
+                            {formatCount(item.npmDownloads)}/m
                           </span>
-                        </div>
-                      </div>
-                      <div class="flex gap-2">
-                        {item.hasSiteDocs ? (
-                          <a
-                            href={item.docsHref}
-                            class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
-                          >
-                            Documentation
-                          </a>
-                        ) : (
-                          <a
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
-                          >
-                            Docs
-                            <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
-                          </a>
                         )}
+                        <span class="inline-flex items-center text-sm text-gray-200">
+                          <svg class="mr-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                          {formatCount(item.githubStars ?? 0)}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="flex gap-2">
+                      {item.hasSiteDocs ? (
+                        <a
+                          href={item.docsHref}
+                          class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
+                        >
+                          Documentation
+                        </a>
+                      ) : (
                         <a
                           href={item.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="inline-flex items-center justify-center rounded-lg border border-gray-600 bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-700"
+                          class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
                         >
-                          GitHub
+                          Docs
                           <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
                         </a>
-                      </div>
+                      )}
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center rounded-lg border border-gray-600 bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-700"
+                      >
+                        GitHub
+                        <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
+                      </a>
                     </div>
                   </div>
-                ))
-              }
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -442,13 +469,9 @@ const content = {
           {plugins.length}+ {m.plugins({}, { locale: Astro.locals.locale })} available
         </div>
 
-        <h2 class="font-pj pb-6 text-5xl font-bold text-white md:text-7xl">
-          {m.supercharge_your_app({}, { locale: Astro.locals.locale })}
-        </h2>
+        <h2 class="font-pj pb-6 text-5xl font-bold text-white md:text-7xl">{m.supercharge_your_app({}, { locale: Astro.locals.locale })}</h2>
 
-        <p class="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-300 md:text-2xl">
-          {m.powerful_app_plugins_description({}, { locale: Astro.locals.locale })}
-        </p>
+        <p class="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-300 md:text-2xl">{m.powerful_app_plugins_description({}, { locale: Astro.locals.locale })}</p>
 
         <div class="mb-16 flex flex-col justify-center gap-4 sm:flex-row">
           <a
@@ -467,9 +490,7 @@ const content = {
             class="inline-flex items-center rounded-xl border-2 border-gray-600 px-8 py-4 text-lg font-semibold text-white transition-all duration-200 hover:bg-white hover:text-gray-900"
           >
             <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-              ></path>
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
             </svg>
             GitHub
             <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -493,14 +514,12 @@ const content = {
     <section class="border-y border-gray-800 py-16">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="grid grid-cols-2 gap-8 text-center md:grid-cols-3 xl:grid-cols-6">
-          {
-            featuredStats.map((stat) => (
-              <div>
-                <div class:list={['mb-2 text-3xl font-bold md:text-4xl', stat.colorClass]}>{stat.value}</div>
-                <div class="text-gray-400">{stat.label}</div>
-              </div>
-            ))
-          }
+          {featuredStats.map((stat) => (
+            <div>
+              <div class:list={['mb-2 text-3xl font-bold md:text-4xl', stat.colorClass]}>{stat.value}</div>
+              <div class="text-gray-400">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -514,9 +533,7 @@ const content = {
           <!-- GitHub Link -->
           <div class="rounded-2xl border border-gray-700 bg-white/5 p-8 text-center backdrop-blur-sm">
             <svg class="mx-auto mb-4 h-12 w-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-              ></path>
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
             </svg>
             <h3 class="font-pj mb-2 text-2xl font-bold text-white">{m.plugins_more_plugins_title({}, { locale })}</h3>
             <p class="mb-6 text-gray-300">{m.plugins_more_plugins_description({}, { locale })}</p>
@@ -527,9 +544,7 @@ const content = {
               class="inline-flex items-center rounded-xl border border-gray-600 bg-gray-800 px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-700"
             >
               <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                ></path>
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
               </svg>
               {m.plugins_more_plugins_cta({}, { locale })}
               <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -809,13 +824,4 @@ const content = {
       syncCategorySelection(currentCategory)
     })
   </script>
-  <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-300 lg:px-8">
-    <h2 class="text-2xl font-semibold text-white">Keep going from Capgo Plugin Directory</h2>
-    <p class="mt-4">
-      If you are choosing a Capacitor plugin from this directory, connect it with <a href="/docs/plugins/">Plugin Docs</a> for setup, <a href="/docs/contributing/adding-plugins/"
-        >Adding or Updating Plugins</a
-      > for contribution rules, <a href="/ionic-enterprise-plugins/">Ionic Enterprise Plugin Alternatives</a> for migration choices, <a href="/native-build/">Capgo Native Builds</a
-      > for native release changes, and <a href="/blog/capacitor-plugins-what-you-need-to-know/">Capacitor Plugins: What You Need to Know</a> for the bigger plugin strategy.
-    </p>
-  </section>
 </Layout>

@@ -1,5 +1,7 @@
-import { expect, test } from 'bun:test'
-import { buildPublicBuilderMetrics, classifyBuilderFailure, fetchPublicBuilderMetricsFromRpc } from '../src/lib/publicBuilderMetrics.ts'
+import { expect, spyOn, test } from 'bun:test'
+import * as builderMetricsD1 from '../src/lib/builderMetricsD1.ts'
+import { buildPublicBuilderMetrics, classifyBuilderFailure } from '../src/lib/publicBuilderMetrics.ts'
+import { handleBuilderMetrics } from '../src/worker/builder-metrics.ts'
 
 const source = {
   updated_at: '2026-09-17T12:00:00.000Z',
@@ -32,30 +34,45 @@ test('buildPublicBuilderMetrics emits rates and minutes, never raw counts', () =
   const metrics = buildPublicBuilderMetrics(source)
   expect(metrics.success_rate).toBe(73.3)
   expect(metrics.avg_process_seconds).toBe(220)
+  expect(metrics.daily_window_days).toBe(90)
   expect(metrics.platforms[0]).toMatchObject({ key: 'ios', share: 66.7, success_rate: 70 })
   expect(metrics.platforms[1]).toMatchObject({ key: 'android', share: 33.3, success_rate: 80 })
   expect(metrics.failures).toEqual([
     { reason: 'script_failure', share: 75 },
     { reason: 'timeout', share: 25 },
   ])
-  expect(metrics.daily_platforms).toEqual([
-    { date: '2026-09-16', ios: 80, android: 80, ios_process_seconds: 200, android_process_seconds: 150 },
-  ])
+  expect(metrics.daily_platforms).toEqual([{ date: '2026-09-16', ios: 80, android: 80, ios_process_seconds: 200, android_process_seconds: 150 }])
+  expect(metrics.hourly_platforms).toEqual([])
   expect(JSON.stringify(metrics)).not.toContain('"successes"')
   expect(JSON.stringify(metrics)).not.toContain('builds_total')
 })
 
-test('fetchPublicBuilderMetricsFromRpc posts to the public RPC', async () => {
-  const payload = { success_rate: 80, updated_at: '2026-09-19T12:00:00.000Z', daily_platforms: [], failures: [], platforms: [] }
-  const metrics = await fetchPublicBuilderMetricsFromRpc({
-    supabaseUrl: 'https://example.supabase.co',
-    anonKey: 'anon',
-    fetch: async (url, init) => {
-      expect(String(url)).toBe('https://example.supabase.co/rest/v1/rpc/get_public_builder_metrics')
-      expect(init?.method).toBe('POST')
-      expect(init?.headers?.apikey).toBe('anon')
-      return new Response(JSON.stringify(payload), { headers: { 'content-type': 'application/json' } })
-    },
+test('handleBuilderMetrics returns misconfigured when BUILDER_DB is missing', async () => {
+  const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), {})
+  expect(response.status).toBe(503)
+  const body = await response.json()
+  expect(body.error).toBe('Builder metrics misconfigured')
+})
+
+test('handleBuilderMetrics returns unavailable when D1 query fails', async () => {
+  const spy = spyOn(builderMetricsD1, 'fetchPublicBuilderMetricsFromD1').mockImplementation(async () => {
+    throw new Error('D1 unavailable')
   })
-  expect(metrics.success_rate).toBe(80)
+  const previousCaches = globalThis.caches
+  globalThis.caches = {
+    default: {
+      match: async () => undefined,
+      put: async () => {},
+    },
+  }
+
+  const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), {
+    BUILDER_DB: { prepare: () => ({ bind: () => ({ all: async () => ({ results: [] }) }) }) },
+  })
+
+  globalThis.caches = previousCaches
+  spy.mockRestore()
+  expect(response.status).toBe(503)
+  const body = await response.json()
+  expect(body.error).toBe('Builder metrics are temporarily unavailable')
 })

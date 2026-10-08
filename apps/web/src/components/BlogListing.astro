@@ -1,5 +1,6 @@
 ---
 import Blog from '@/components/Blog.astro'
+import SignupCta from '@/components/SignupCta.astro'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import type { BlogOrigin } from '@/lib/blog'
@@ -166,6 +167,13 @@ const pageDescription = isArticlesListing ? m.articles_description({}, { locale:
           <p id="blog-empty-state" class="hidden rounded-lg border border-gray-800 bg-gray-950/40 px-5 py-6 text-gray-300">No articles match your search.</p>
         </main>
       </div>
+      <section aria-labelledby="blog-listing-cta-heading" class="mt-16 rounded-3xl border border-gray-800 px-6 py-12 text-center sm:px-12">
+        <h2 id="blog-listing-cta-heading" class="text-2xl font-semibold text-white sm:text-3xl">
+          {m.instant_updates_for_capacitor_apps({}, { locale: Astro.locals.locale })}
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-gray-300 sm:text-lg">{m.instant_updates_for_capacitor_apps_description({}, { locale: Astro.locals.locale })}</p>
+        <SignupCta id="blog-listing-signup-cta" humanSupport class="mt-8" />
+      </section>
     </div>
   </div>
   <script>

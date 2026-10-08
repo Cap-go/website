@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-06-24T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-09-30T18:14:17.000Z
 head_image: /base44-capacitor.webp
 head_image_alt: "Base44 to Native Mobile Apps with Capacitor Capgo blog illustration"
 keywords: Base44, Capacitor, mobile app development, React, export project, native mobile apps, Capgo Builder, vibe coding
@@ -183,7 +183,7 @@ const config: CapacitorConfig = {
 export default config
 ```
 
-Consider adding `@capgo/capacitor-updater` early so you can ship OTA updates after launch. See [Capgo Live Updates docs](/docs/live-updates/getting-started/).
+Consider adding `@capgo/capacitor-updater` early so you can ship OTA updates after launch. See [Capgo Live Updates docs](/docs/getting-started/quickstart/).
 
 ## Step 6: Build and Sync
 

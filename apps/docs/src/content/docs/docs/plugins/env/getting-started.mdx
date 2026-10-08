@@ -45,7 +45,7 @@ before they can be accessed at runtime.
 ```typescript
 import { Env } from '@capgo/capacitor-env';
 
-const result = await EnvPlugin.getKey({ key: 'API_URL' });
+const result = await Env.getKey({ key: 'API_URL' });
 console.log(result.value); // 'https://api.example.com'
 ```
 

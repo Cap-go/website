@@ -28,7 +28,7 @@ Initialize the plugin.
 ```typescript
 import { SocialLogin } from '@capgo/capacitor-social-login';
 
-await SocialLogin.initialize({} as InitializeOptions);
+await SocialLogin.initialize({ telegram: { botId: '123456789' } });
 ```
 
 ### `login`
@@ -38,7 +38,11 @@ Login with the selected provider.
 ```typescript
 import { SocialLogin } from '@capgo/capacitor-social-login';
 
-await SocialLogin.login({} as Extract<LoginOptions, { provider: T }>);
+const result = await SocialLogin.login({
+  provider: 'facebook',
+  options: { permissions: ['permission'] },
+});
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `logout`
@@ -61,7 +65,8 @@ IsLoggedIn.
 ```typescript
 import { SocialLogin } from '@capgo/capacitor-social-login';
 
-await SocialLogin.isLoggedIn({} as isLoggedInOptions);
+const result = await SocialLogin.isLoggedIn({ provider: 'apple' });
+console.log(result);
 ```
 
 ## Full Reference

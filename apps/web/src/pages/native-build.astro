@@ -10,7 +10,9 @@ import m, { type MessageValues } from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from '@/services/links'
-import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import { getProductScreens } from '@/config/productScreens'
 
 type Plan = Database['public']['Tables']['plans']['Row']
 
@@ -122,15 +124,6 @@ const content = {
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-native-build.png`,
   keywords: 'Capgo Builder, EAS Build analog, EAS Submit analog, Capacitor cloud build, Capgo',
   ldJSON,
-}
-
-const nativeBuildFooterBlogSlugs = [
-  'transform-lovable-dev-app-to-mobile-with-capacitor',
-  'transform-base44-app-to-mobile-with-capacitor',
-  'build-ios-app-from-windows-capacitor-capgo-build',
-]
-const nativeBuildFooterBlogCopy = {
-  description: copy('footer_blog_builder_description'),
 }
 
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
@@ -272,10 +265,10 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
 }
 ---
 
-<Layout content={content} footerBlogSlugs={nativeBuildFooterBlogSlugs} footerBlogCopy={nativeBuildFooterBlogCopy}>
+<Layout content={content}>
   <div class="nb bg-ad">
     <!-- ============================================ HERO ============================================ -->
-    <section class="section hero bg-grid grain" id="top">
+    <section class="section hero" id="top">
       <div class="shell">
         <div class="beta-badge">
           <span class="dot"></span>
@@ -290,39 +283,30 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         </h1>
         <p class="lead hero-lead">{copy('native_build_v2_hero_lead')}</p>
         <div class="hero-ctas">
-          <HumanSupport class="mb-3" size="sm" align="start" />
-          <div class="hero-cta-buttons">
-            <a class="btn btn-lg btn-primary" href={registerUrl}>{copy('native_build_v2_hero_cta')}</a>
-            <a class="btn btn-lg btn-ghost" href="#how">{copy('native_build_v2_hero_secondary')} ↓</a>
-          </div>
-          <p class="hero-cta-note">{copy('product_trial_cta_note')}</p>
+          <SignupCta id="native-build-hero-signup-cta" />
         </div>
         <div class="hero-meta">
-          {
-            heroMeta.map((item) => (
-              <span>
-                <span class="check">✓</span>
-                {item}
-              </span>
-            ))
-          }
+          {heroMeta.map((item) => (
+            <span>
+              <span class="check">✓</span>
+              {item}
+            </span>
+          ))}
         </div>
 
         <div class="hero-strip" aria-hidden="true">
-          {
-            heroStrip.map((cell) => (
-              <div class="hero-strip-cell">
-                <div class="k">{cell.k}</div>
-                <div class="v">{cell.v}</div>
-              </div>
-            ))
-          }
+          {heroStrip.map((cell) => (
+            <div class="hero-strip-cell">
+              <div class="k">{cell.k}</div>
+              <div class="v">{cell.v}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
     <!-- ============================================ REVEAL + DEMO ============================================ -->
-    <section class="section bg-grid grain" id="how">
+    <section class="section" id="how">
       <div class="shell">
         <div class="rv-one">
           <div class="rv-one-mark">Capgo Builder</div>
@@ -332,26 +316,50 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         <div class="demo-wrap">
           <div class="terminal-frame">
             <div class="terminal-bar">
-              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-              <span class="title" id="demo-term-title">capgo build request --platform ios</span>
+              <span class="dot r"></span>
+              <span class="dot y"></span>
+              <span class="dot g"></span>
+              <span class="title" id="demo-term-title">
+                capgo build request --platform ios
+              </span>
               <div class="demo-tabs">
-                <button id="demo-tab-ios" class="demo-tab active" type="button">iOS</button>
-                <button id="demo-tab-android" class="demo-tab" type="button">Android</button>
+                <button id="demo-tab-ios" class="demo-tab active" type="button">
+                  iOS
+                </button>
+                <button id="demo-tab-android" class="demo-tab" type="button">
+                  Android
+                </button>
               </div>
             </div>
             <div class="terminal-body" id="demo-term-body" aria-live="polite"></div>
           </div>
           <div class="demo-controls">
             <span>{copy('native_build_v2_demo_hint')}</span>
-            <button class="demo-replay" id="demo-replay" type="button">⟲ {copy('native_build_v2_demo_replay')}</button>
+            <button class="demo-replay" id="demo-replay" type="button">
+              ⟲ {copy('native_build_v2_demo_replay')}
+            </button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ CONSOLE ============================================ -->
+    <section class="section" id="console">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow">In the console</div>
+          <h2 class="h2-section">Every build, its status, and the minutes it used</h2>
+          <p class="lead">Builds you request from the CLI or CI show up next to your live updates, with failure reasons and build time per platform.</p>
+        </div>
+        <div style="margin-top: 40px;">
+          <ProductScreenTour screens={getProductScreens(['builds'])} label="Capgo builds" />
         </div>
       </div>
     </section>
 
     <ProductVideoSection
       variant="builder"
-      accent="green"
+      accent="blue"
       youtubeId={productVideos.nativeBuild.youtubeId}
       title={productVideos.nativeBuild.title}
       description={productVideos.nativeBuild.description}
@@ -360,6 +368,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
     <!-- ============================================ PROOF ============================================ -->
     <ProductTestimonials
       variant="builder"
+      accent="blue"
       eyebrow={copy('native_build_v2_proof_eyebrow')}
       title={copy('native_build_v2_proof_title')}
       description={copy('native_build_v2_proof_lead')}
@@ -380,7 +389,8 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
           <div class="tile tile-hero" data-accent="green" aria-label="Capgo Builder">
             <div>
               <div class="ttl">
-                <span class="name">Capgo Builder</span><br />
+                <span class="name">Capgo Builder</span>
+                <br />
                 <span class="tile-hero-sub-ttl">{copy('native_build_v2_tile_hero_title')}</span>
               </div>
               <div class="sub">{copy('native_build_v2_tile_hero_sub')}</div>
@@ -390,37 +400,46 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           </div>
 
           <div class="tile" data-expandable data-accent="cyan">
-            <span class="icon"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                ><path d="M6 8l4 4-4 4"></path><path d="M13 16h5"></path></svg
-              ></span
-            >
-            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_cli_title')}</span></h3>
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 8l4 4-4 4"></path>
+                <path d="M13 16h5"></path>
+              </svg>
+            </span>
+            <h3 class="ttl">
+              <span class="ttl-accent">{copy('native_build_v2_tile_cli_title')}</span>
+            </h3>
             <p class="sub">{copy('native_build_v2_tile_cli_sub')}</p>
             <div class="more">
-              <code class="mono">capgo build request --platform ios</code> archives, signs and uploads to TestFlight. <code class="mono">--platform android</code> assembles, signs with
-              your keystore and uploads to Play. One CLI, identical UX.
+              <code class="mono">capgo build request --platform ios</code> archives, signs and uploads to TestFlight. <code class="mono">--platform android</code> assembles, signs
+              with your keystore and uploads to Play. One CLI, identical UX.
             </div>
           </div>
 
           <div class="tile" data-expandable data-accent="yellow">
-            <span class="icon"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                ><rect x="7" y="7" width="10" height="10" rx="1.5"></rect><path d="M10 7V4M14 7V4M10 20v-3M14 20v-3M7 10H4M7 14H4M20 10h-3M20 14h-3"></path></svg
-              ></span
-            >
-            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_hw_title')}</span></h3>
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="7" y="7" width="10" height="10" rx="1.5"></rect>
+                <path d="M10 7V4M14 7V4M10 20v-3M14 20v-3M7 10H4M7 14H4M20 10h-3M20 14h-3"></path>
+              </svg>
+            </span>
+            <h3 class="ttl">
+              <span class="ttl-accent">{copy('native_build_v2_tile_hw_title')}</span>
+            </h3>
             <p class="sub">{copy('native_build_v2_tile_hw_sub')}</p>
             <div class="more">iOS and Android jobs run on M4 Mac runners with fast Xcode, Gradle, and Fastlane. You don't pick the runner; we do, by platform flag.</div>
           </div>
 
           <div class="tile" data-expandable data-accent="green">
-            <span class="icon"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                ><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg
-              ></span
-            >
-            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_sec_title')}</span></h3>
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+              </svg>
+            </span>
+            <h3 class="ttl">
+              <span class="ttl-accent">{copy('native_build_v2_tile_sec_title')}</span>
+            </h3>
             <p class="sub">{copy('native_build_v2_tile_sec_sub')}</p>
             <div class="more">
               Credentials live locally at <code class="mono">~/.capgo-credentials/credentials.json</code>, are sent only to ephemeral build envs over HTTPS, and are wiped the
@@ -429,12 +448,16 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           </div>
 
           <div class="tile" data-expandable data-accent="purple">
-            <span class="icon"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                ><path d="M12 16V5"></path><path d="M8 9l4-4 4 4"></path><path d="M5 19h14"></path></svg
-              ></span
-            >
-            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_asc_title')}</span></h3>
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 16V5"></path>
+                <path d="M8 9l4-4 4 4"></path>
+                <path d="M5 19h14"></path>
+              </svg>
+            </span>
+            <h3 class="ttl">
+              <span class="ttl-accent">{copy('native_build_v2_tile_asc_title')}</span>
+            </h3>
             <p class="sub">{copy('native_build_v2_tile_asc_sub')}</p>
             <div class="more">
               Default <code class="mono">app_store</code> distribution uploads to App Store Connect / TestFlight via Fastlane; Android goes to Play. Prefer a Capgo QR instead? Use
@@ -444,26 +467,31 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           </div>
 
           <div class="tile" data-expandable data-accent="orange">
-            <span class="icon"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                ><path d="M3 12h3l2.5-7 5 14 2.5-7H21"></path></svg
-              ></span
-            >
-            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_logs_title')}</span></h3>
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 12h3l2.5-7 5 14 2.5-7H21"></path>
+              </svg>
+            </span>
+            <h3 class="ttl">
+              <span class="ttl-accent">{copy('native_build_v2_tile_logs_title')}</span>
+            </h3>
             <p class="sub">{copy('native_build_v2_tile_logs_sub')}</p>
             <div class="more">
-              Logs stream over WebSocket with heartbeat + ack. A <code class="mono">qr_download_link</code> message renders a scannable QR + URL for APK / IPA downloads — share it from
-              CI to customers without TestFlight or Play.
+              Logs stream over WebSocket with heartbeat + ack. A <code class="mono">qr_download_link</code> message renders a scannable QR + URL for APK / IPA downloads — share it
+              from CI to customers without TestFlight or Play.
             </div>
           </div>
 
           <div class="tile" data-expandable data-accent="pink">
-            <span class="icon"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                ><path d="M12 3l9 5-9 5-9-5z"></path><path d="M3 13l9 5 9-5"></path></svg
-              ></span
-            >
-            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_flavors_title')}</span></h3>
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3l9 5-9 5-9-5z"></path>
+                <path d="M3 13l9 5 9-5"></path>
+              </svg>
+            </span>
+            <h3 class="ttl">
+              <span class="ttl-accent">{copy('native_build_v2_tile_flavors_title')}</span>
+            </h3>
             <p class="sub">{copy('native_build_v2_tile_flavors_sub')}</p>
             <div class="more">
               <code class="mono">--android-flavor production</code> for any flavor your <code class="mono">build.gradle</code> declares. We auto-detect Cordova plugins from
@@ -472,27 +500,37 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           </div>
 
           <div class="tile" data-expandable data-accent="sky">
-            <span class="icon"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                ><circle cx="12" cy="14" r="7"></circle><path d="M12 14V10"></path><path d="M9.5 3h5"></path><path d="M18.5 8l1.4-1.4"></path></svg
-              ></span
-            >
-            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_setup_title')}</span></h3>
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="14" r="7"></circle>
+                <path d="M12 14V10"></path>
+                <path d="M9.5 3h5"></path>
+                <path d="M18.5 8l1.4-1.4"></path>
+              </svg>
+            </span>
+            <h3 class="ttl">
+              <span class="ttl-accent">{copy('native_build_v2_tile_setup_title')}</span>
+            </h3>
             <p class="sub">{copy('native_build_v2_tile_setup_sub')}</p>
             <div class="more">
-              <code class="mono">bunx @capgo/cli@latest build init --platform ios|android</code> launches a wizard. iOS: drop a <code class="mono">.p8</code> → CSR, certificate, P12,
-              bundle ID, provisioning profiles, all auto. Android: one OAuth click → Play Console project, service account, keystore, all auto. Resumable, Ctrl-C-safe, runs the same
-              in CI.
+              <code class="mono">bunx @capgo/cli@latest build init --platform ios|android</code> launches a wizard. iOS: drop a <code class="mono">.p8</code> → CSR, certificate,
+              P12, bundle ID, provisioning profiles, all auto. Android: one OAuth click → Play Console project, service account, keystore, all auto. Resumable, Ctrl-C-safe, runs
+              the same in CI.
             </div>
           </div>
 
           <div class="tile" data-expandable data-accent="violet">
-            <span class="icon"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                ><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8"></path><path d="M20 4v4h-4"></path><path d="M20 12a8 8 0 0 1-13.7 5.6L4 16"></path><path d="M4 20v-4h4"></path></svg
-              ></span
-            >
-            <h3 class="ttl"><span class="ttl-accent">{copy('native_build_v2_tile_ci_title')}</span></h3>
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 12a8 8 0 0 1 13.7-5.6L20 8"></path>
+                <path d="M20 4v4h-4"></path>
+                <path d="M20 12a8 8 0 0 1-13.7 5.6L4 16"></path>
+                <path d="M4 20v-4h4"></path>
+              </svg>
+            </span>
+            <h3 class="ttl">
+              <span class="ttl-accent">{copy('native_build_v2_tile_ci_title')}</span>
+            </h3>
             <p class="sub">{copy('native_build_v2_tile_ci_sub')}</p>
             <div class="more">
               Single command, environment-variable-driven. No TTY, no prompts. Drop it into your existing pipeline and the same wizard-generated credentials work non-interactively.
@@ -505,7 +543,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     </section>
 
     <!-- ============================================ QR SHARE ============================================ -->
-    <section class="section bg-grid grain" id="share">
+    <section class="section" id="share">
       <div class="shell">
         <div class="section-head section-head--wide">
           <div class="eyebrow eyebrow--green">{copy('native_build_v2_share_eyebrow')}</div>
@@ -520,34 +558,83 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           <div class="share-flow">
             <div class="share-node share-node--ci">
               <div class="share-node-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
-                  ><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><rect x="4" y="7" width="16" height="14" rx="2"></rect><path d="M9 12h6M9 16h4"></path></svg
-                >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  <rect x="4" y="7" width="16" height="14" rx="2"></rect>
+                  <path d="M9 12h6M9 16h4"></path>
+                </svg>
               </div>
               <div class="share-node-label">{copy('native_build_v2_share_flow_ci')}</div>
               <div class="share-node-sub">{copy('native_build_v2_share_flow_ci_sub')}</div>
             </div>
-            <div class="share-connector"><span></span></div>
+            <div class="share-connector">
+              <span></span>
+            </div>
             <div class="share-node share-node--build">
               <div class="share-node-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
-                  ><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"></path><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"></path></svg
-                >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"></path>
+                  <path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"></path>
+                </svg>
               </div>
               <div class="share-node-label">{copy('native_build_v2_share_flow_build')}</div>
               <div class="share-node-sub">{copy('native_build_v2_share_flow_build_sub')}</div>
             </div>
-            <div class="share-connector"><span></span></div>
+            <div class="share-connector">
+              <span></span>
+            </div>
             <div class="share-node share-node--qr">
               <div class="share-qr">
                 <div class="share-qr-grid">
-                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
                 </div>
                 <div class="share-qr-scan"></div>
               </div>
@@ -555,7 +642,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
               <div class="share-node-sub">{copy('native_build_v2_share_flow_qr_sub')}</div>
               <div class="share-ttl">{copy('native_build_v2_share_ttl')}</div>
             </div>
-            <div class="share-connector"><span></span></div>
+            <div class="share-connector">
+              <span></span>
+            </div>
             <div class="share-node share-node--user">
               <div class="share-phone">
                 <div class="share-phone-notch"></div>
@@ -616,7 +705,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         <div class="share-foot">
           <span class="share-badge">{copy('native_build_v2_share_badge')}</span>
           <p>{copy('native_build_v2_share_note')}</p>
-          <a class="share-docs" href={docsShareUrl}>{copy('native_build_v2_share_docs')} →</a>
+          <a class="share-docs" href={docsShareUrl}>
+            {copy('native_build_v2_share_docs')} →
+          </a>
         </div>
       </div>
     </section>
@@ -627,65 +718,102 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         <div class="section-head section-head--wide">
           <div class="eyebrow eyebrow--green">{copy('native_build_v2_wiz_eyebrow')}</div>
           <h2 class="h2-section">
-            {copy('native_build_v2_wiz_title_prefix')}<span class="accent-green">{copy('native_build_v2_wiz_title_time')}.</span>
+            {copy('native_build_v2_wiz_title_prefix')}
+            <span class="accent-green">{copy('native_build_v2_wiz_title_time')}.</span>
           </h2>
           <p class="lead">{copy('native_build_v2_wiz_lead')}</p>
           <div class="onboarding-cmd-row">
-            <code class="onboarding-cmd"
-              ><span class="ocm-prompt">$</span> bunx <span class="ocm-pkg">@capgo/cli@latest</span> build init <span class="ocm-flag">--platform</span>
-              <span class="ocm-val" id="ocm-platform">ios</span></code
-            >
-            <div class="onboarding-platform-toggle" role="tablist" aria-label="Platform">
-              <button class="opt active" data-platform="ios" type="button" role="tab" aria-selected="true">iOS</button>
-              <button class="opt" data-platform="android" type="button" role="tab" aria-selected="false">Android</button>
+            <code class="onboarding-cmd">
+              <span class="ocm-prompt">$</span> bunx <span class="ocm-pkg">@capgo/cli@latest</span> build init <span class="ocm-flag">--platform</span>
+              <span class="ocm-val" id="ocm-platform">
+                ios
+              </span>
+            </code>
+            <div class="onboarding-platform-toggle" role="group" aria-label="Platform">
+              <button class="opt active" data-platform="ios" type="button" aria-pressed="true">
+                iOS
+              </button>
+              <button class="opt" data-platform="android" type="button" aria-pressed="false">
+                Android
+              </button>
             </div>
           </div>
         </div>
 
         <div class="wizard" id="wizard" data-platform="ios">
-          <div class="wizard-steps" role="tablist">
-            <button class="wizard-step active" data-platform="ios" type="button"
-              ><span class="num">1</span><span><span class="lbl">{copy('native_build_v2_wiz_ios_s1_l')}</span><span class="dsc">{copy('native_build_v2_wiz_ios_s1_d')}</span></span
-              ></button
-            >
-            <button class="wizard-step" data-platform="ios" type="button"
-              ><span class="num">2</span><span><span class="lbl">{copy('native_build_v2_wiz_ios_s2_l')}</span><span class="dsc">{copy('native_build_v2_wiz_ios_s2_d')}</span></span
-              ></button
-            >
-            <button class="wizard-step" data-platform="ios" type="button"
-              ><span class="num">3</span><span><span class="lbl">{copy('native_build_v2_wiz_ios_s3_l')}</span><span class="dsc">{copy('native_build_v2_wiz_ios_s3_d')}</span></span
-              ></button
-            >
-            <button class="wizard-step" data-platform="ios" type="button"
-              ><span class="num">4</span><span><span class="lbl">{copy('native_build_v2_wiz_ios_s4_l')}</span><span class="dsc">{copy('native_build_v2_wiz_ios_s4_d')}</span></span
-              ></button
-            >
-            <button class="wizard-step active" data-platform="android" type="button" hidden
-              ><span class="num">1</span><span><span class="lbl">{copy('native_build_v2_wiz_and_s1_l')}</span><span class="dsc">{copy('native_build_v2_wiz_and_s1_d')}</span></span
-              ></button
-            >
-            <button class="wizard-step" data-platform="android" type="button" hidden
-              ><span class="num">2</span><span><span class="lbl">{copy('native_build_v2_wiz_and_s2_l')}</span><span class="dsc">{copy('native_build_v2_wiz_and_s2_d')}</span></span
-              ></button
-            >
-            <button class="wizard-step" data-platform="android" type="button" hidden
-              ><span class="num">3</span><span><span class="lbl">{copy('native_build_v2_wiz_and_s3_l')}</span><span class="dsc">{copy('native_build_v2_wiz_and_s3_d')}</span></span
-              ></button
-            >
-            <button class="wizard-step" data-platform="android" type="button" hidden
-              ><span class="num">4</span><span><span class="lbl">{copy('native_build_v2_wiz_and_s4_l')}</span><span class="dsc">{copy('native_build_v2_wiz_and_s4_d')}</span></span
-              ></button
-            >
+          <div class="wizard-steps" role="group" aria-label="Setup steps">
+            <button class="wizard-step active" data-platform="ios" type="button">
+              <span class="num">1</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_ios_s1_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_ios_s1_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="ios" type="button">
+              <span class="num">2</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_ios_s2_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_ios_s2_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="ios" type="button">
+              <span class="num">3</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_ios_s3_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_ios_s3_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="ios" type="button">
+              <span class="num">4</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_ios_s4_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_ios_s4_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step active" data-platform="android" type="button" hidden>
+              <span class="num">1</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_and_s1_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_and_s1_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="android" type="button" hidden>
+              <span class="num">2</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_and_s2_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_and_s2_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="android" type="button" hidden>
+              <span class="num">3</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_and_s3_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_and_s3_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="android" type="button" hidden>
+              <span class="num">4</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_and_s4_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_and_s4_d')}</span>
+              </span>
+            </button>
           </div>
           <div class="wizard-stage" id="wizard-stage"></div>
         </div>
 
         <div class="wizard-before-after">
-          <span class="ba b" id="ba-before">{copy('native_build_v2_wiz_ios_before')}</span>
+          <span class="ba b" id="ba-before">
+            {copy('native_build_v2_wiz_ios_before')}
+          </span>
           <span class="ba-arrow">→</span>
-          <span class="ba a" id="ba-after">{copy('native_build_v2_wiz_ios_after')}</span>
+          <span class="ba a" id="ba-after">
+            {copy('native_build_v2_wiz_ios_after')}
+          </span>
         </div>
-        <p class="wizard-macos-note" style="margin-top:18px;text-align:center;font-size:13px;opacity:.55">{copy('native_build_v2_wiz_macos_note')}</p>
+        <p class="wizard-macos-note" style="margin-top:18px;text-align:center;font-size:13px;opacity:.55">
+          {copy('native_build_v2_wiz_macos_note')}
+        </p>
       </div>
     </section>
 
@@ -695,50 +823,53 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         <div class="section-head section-head--wide">
           <div class="eyebrow eyebrow--violet">{copy('native_build_v2_mcp_eyebrow')}</div>
           <h2 class="h2-section">
-            {copy('native_build_v2_mcp_title_prefix')}<span class="accent-violet">{copy('native_build_v2_mcp_title_accent')}</span>
+            {copy('native_build_v2_mcp_title_prefix')}
+            <span class="accent-violet">{copy('native_build_v2_mcp_title_accent')}</span>
           </h2>
           <p class="lead">{copy('native_build_v2_mcp_lead')}</p>
         </div>
 
         <div class="mcp-grid">
           <div class="mcp-card">
-            <div class="mcp-step"><span class="mcp-step-n">1</span><span>{copy('native_build_v2_mcp_add_title')}</span></div>
-            <div class="mcp-editors" role="tablist" aria-label="MCP client">
-              {
-                mcpClients.map((c, i) => (
-                  <button class:list={['mcp-ed', i === 0 && 'is-active']} data-client={c.id} type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'}>
-                    <Icon name={c.icon} class="mcp-ed-i" />
-                    {c.name}
-                  </button>
-                ))
-              }
+            <div class="mcp-step">
+              <span class="mcp-step-n">1</span>
+              <span>{copy('native_build_v2_mcp_add_title')}</span>
+            </div>
+            <div class="mcp-editors" role="group" aria-label="MCP client">
+              {mcpClients.map((c, i) => (
+                <button class:list={['mcp-ed', i === 0 && 'is-active']} data-client={c.id} type="button" aria-pressed={i === 0 ? 'true' : 'false'}>
+                  <Icon name={c.icon} class="mcp-ed-i" />
+                  {c.name}
+                </button>
+              ))}
               <span class="mcp-ed mcp-ed--more">{copy('native_build_v2_mcp_editors_more')}</span>
             </div>
             <div class="mcp-configs">
-              {
-                mcpClients.map((c, i) => (
-                  <div class="mcp-config-panel" data-client={c.id} hidden={i !== 0}>
-                    <div class="mcp-code">
-                      <div class="mcp-code-head">
-                        <span class="mcp-code-label">
-                          {c.name} <span class="mcp-code-sep">·</span> <span class="mcp-code-path">{c.label}</span>
-                        </span>
-                        <button class="mcp-copy" type="button" data-copy={c.code} data-copied={copy('native_build_v2_mcp_copied')}>
-                          {copy('native_build_v2_mcp_copy')}
-                        </button>
-                      </div>
-                      <pre class="mcp-code-pre">
+              {mcpClients.map((c, i) => (
+                <div class="mcp-config-panel" data-client={c.id} hidden={i !== 0}>
+                  <div class="mcp-code">
+                    <div class="mcp-code-head">
+                      <span class="mcp-code-label">
+                        {c.name} <span class="mcp-code-sep">·</span> <span class="mcp-code-path">{c.label}</span>
+                      </span>
+                      <button class="mcp-copy" type="button" data-copy={c.code} data-copied={copy('native_build_v2_mcp_copied')}>
+                        {copy('native_build_v2_mcp_copy')}
+                      </button>
+                    </div>
+                    <pre class="mcp-code-pre">
                         <CommandCode command={c.code} />
                       </pre>
-                    </div>
                   </div>
-                ))
-              }
+                </div>
+              ))}
             </div>
           </div>
 
           <div class="mcp-card">
-            <div class="mcp-step"><span class="mcp-step-n">2</span><span>{copy('native_build_v2_mcp_ask_title')}</span></div>
+            <div class="mcp-step">
+              <span class="mcp-step-n">2</span>
+              <span>{copy('native_build_v2_mcp_ask_title')}</span>
+            </div>
             <div class="mcp-ask">
               <span class="mcp-ask-who">you</span>
               <span class="mcp-ask-text">{copy('native_build_v2_mcp_ask_prompt')}</span>
@@ -747,8 +878,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                 type="button"
                 data-copy={copy('native_build_v2_mcp_ask_prompt')}
                 data-copied={copy('native_build_v2_mcp_copied')}
-                aria-label={copy('native_build_v2_mcp_copy')}>⧉</button
+                aria-label={copy('native_build_v2_mcp_copy')}
               >
+                ⧉
+              </button>
             </div>
             <ul class="mcp-chk">
               <li>{copy('native_build_v2_mcp_chk_1')}</li>
@@ -818,7 +951,12 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             <h3>{copy('native_build_v2_trust_logs_h')}</h3>
             <p>{copy('native_build_v2_trust_logs_p')}</p>
             <div class="trust-status trust-status--stream" aria-hidden="true">
-              <span class="trust-stream"><span></span><span></span><span></span><span></span></span>
+              <span class="trust-stream">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
               <span>{copy('native_build_v2_trust_logs_s')}</span>
             </div>
           </div>
@@ -865,18 +1003,16 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
               </tr>
             </thead>
             <tbody>
-              {
-                comparisonRows.map((row) => (
-                  <tr>
-                    <td class="label">{row.label}</td>
-                    <td class="us">
-                      <span class="hook">{row.hook}</span> {row.capgo}
-                    </td>
-                    <td>{row.diy}</td>
-                    <td>{row.capa}</td>
-                  </tr>
-                ))
-              }
+              {comparisonRows.map((row) => (
+                <tr>
+                  <td class="label">{row.label}</td>
+                  <td class="us">
+                    <span class="hook">{row.hook}</span> {row.capgo}
+                  </td>
+                  <td>{row.diy}</td>
+                  <td>{row.capa}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -896,7 +1032,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           <h2 class="h2-section">{copy('native_build_v2_eas_title')}</h2>
           <p class="lead">{copy('native_build_v2_eas_lead')}</p>
         </div>
-        <a class="btn btn-md btn-ghost" href={expoUrl}>{copy('native_build_v2_eas_cta')}</a>
+        <div style="display: flex; justify-content: center; margin-top: 28px;">
+          <a class="btn btn-md btn-ghost" href={expoUrl}>
+            {copy('native_build_v2_eas_cta')}
+          </a>
+        </div>
       </div>
     </section>
 
@@ -913,31 +1053,63 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           <div class="aidebug-termcol">
             <div class="terminal-frame aidebug-term">
               <div class="terminal-bar">
-                <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                <span class="dot r"></span>
+                <span class="dot y"></span>
+                <span class="dot g"></span>
                 <span class="title">capgo build request --platform ios</span>
               </div>
               <div class="terminal-body aidebug-body" aria-label="Example of an AI-assisted build failure diagnosis">
-                <span class="row"
-                  ><span class="pain-prompt">$ </span><span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span></span
-                >
-                <span class="row"><span class="dim">[CapApp]</span> Creating App.xcarchive</span>
-                <span class="row"><span class="err">✖ Archive failed: Command CodeSign failed with a nonzero exit code</span></span>
-                <span class="row"><span class="err">&nbsp;&nbsp;error: No profile matching 'com.acme.app' found for team ABC123</span></span>
-                <span class="row ai-head"><span class="kw">?</span> Choose AI analysis <span class="ghost">(optional)</span></span>
-                <span class="row" data-menu-selected><span class="ok">✔</span> <span class="val">Capgo AI</span></span>
-                <span class="row menu-extra"><span class="dim">&nbsp;&nbsp;Local AI · write the prompt to a file</span></span>
-                <span class="row menu-extra" data-collapse><span class="dim">&nbsp;&nbsp;Skip</span></span>
-                <span class="row ai-head" data-ai-spin><span class="ok">✔</span> <span class="ghost">Capgo AI finished</span></span>
-                <span class="row"><span class="ok">◆ Likely cause</span></span>
-                <span class="row"><span class="ghost">Your App Store provisioning profile doesn't include the bundle ID com.acme.app.</span></span>
-                <span class="row ai-head"><span class="ok">◆ Fix</span></span>
-                <span class="row"><span class="ghost">Regenerate the profile for that bundle ID, or run </span><span class="cmd">capgo build init --platform ios</span></span>
-                <span class="row"><span class="ghost">to recreate certificate + profile automatically, then re-run the build.</span></span>
+                <span class="row">
+                  <span class="pain-prompt">$ </span>
+                  <span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span>
+                </span>
+                <span class="row">
+                  <span class="dim">[CapApp]</span> Creating App.xcarchive
+                </span>
+                <span class="row">
+                  <span class="err">✖ Archive failed: Command CodeSign failed with a nonzero exit code</span>
+                </span>
+                <span class="row">
+                  <span class="err">&nbsp;&nbsp;error: No profile matching 'com.acme.app' found for team ABC123</span>
+                </span>
+                <span class="row ai-head">
+                  <span class="kw">?</span> Choose AI analysis <span class="ghost">(optional)</span>
+                </span>
+                <span class="row" data-menu-selected>
+                  <span class="ok">✔</span> <span class="val">Capgo AI</span>
+                </span>
+                <span class="row menu-extra">
+                  <span class="dim">&nbsp;&nbsp;Local AI · write the prompt to a file</span>
+                </span>
+                <span class="row menu-extra" data-collapse>
+                  <span class="dim">&nbsp;&nbsp;Skip</span>
+                </span>
+                <span class="row ai-head" data-ai-spin>
+                  <span class="ok">✔</span> <span class="ghost">Capgo AI finished</span>
+                </span>
+                <span class="row">
+                  <span class="ok">◆ Likely cause</span>
+                </span>
+                <span class="row">
+                  <span class="ghost">Your App Store provisioning profile doesn't include the bundle ID com.acme.app.</span>
+                </span>
+                <span class="row ai-head">
+                  <span class="ok">◆ Fix</span>
+                </span>
+                <span class="row">
+                  <span class="ghost">Regenerate the profile for that bundle ID, or run </span>
+                  <span class="cmd">capgo build init --platform ios</span>
+                </span>
+                <span class="row">
+                  <span class="ghost">to recreate certificate + profile automatically, then re-run the build.</span>
+                </span>
               </div>
             </div>
             <div class="demo-controls aidebug-controls">
               <span>Optional. Only runs if you choose Capgo AI.</span>
-              <button class="demo-replay" id="aidebug-replay" type="button">⟲ Replay</button>
+              <button class="demo-replay" id="aidebug-replay" type="button">
+                ⟲ Replay
+              </button>
             </div>
           </div>
 
@@ -960,93 +1132,91 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     </section>
 
     <!-- ============================================ PRICING (live plans) ============================================ -->
-    {
-      plans.length > 0 && (
-        <section class="section" id="pricing">
-          <div class="shell">
-            <div class="section-head">
-              <div class="eyebrow">{copy('native_build_builder_pricing_eyebrow')}</div>
-              <h2 class="h2-section">{copy('native_build_builder_pricing_title')}</h2>
-              <p class="lead">{copy('native_build_builder_pricing_text')}</p>
-            </div>
-
-            <div class="pricing-grid">
-              {plans.map((plan) => (
-                <div class:list={['tier', { pop: plan.name === 'Maker' }]}>
-                  <div>
-                    <div class="name">{plan.name === 'Maker' ? `${plan.name} · ${copy('most_popular')}` : plan.name}</div>
-                    <div class="price">
-                      {annualMonthlyPrice(plan)}
-                      <small> / mo</small>
-                    </div>
-                  </div>
-                  <p class="what">{planDescription(plan)}</p>
-                  <p class="tier-billing">{yearlyBilling(plan)}</p>
-                  <p class="tier-billing">{monthlyPrice(plan)}</p>
-                  <a class:list={['btn btn-md', plan.name === 'Maker' ? 'btn-primary' : 'btn-ghost']} href={registerUrl}>
-                    {copy('native_build_builder_plan_trial')}
-                  </a>
-                  <ul>
-                    <li>{buildTimeDisplay(plan.build_time_unit, plan.name)}</li>
-                    <li>{copy('native_build_v2_plan_ota')}</li>
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            <div class="build-calc" aria-label="Build minutes calculator" data-tiers={JSON.stringify(calcTiers)}>
-              <div class="build-calc-head">{copy('native_build_v2_calc_title')}</div>
-              <input class="build-calc-range" type="range" min="30" max="600" step="10" value="60" id="bc-range" aria-label={copy('native_build_v2_calc_minutes')} />
-              <div class="build-calc-readout">
-                <span id="bc-min">60</span> {copy('native_build_v2_calc_minutes')}
-              </div>
-              <div class="build-calc-results">
-                <div class="bc-res">
-                  <span class="bc-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M16.36 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.74-1.78-3.33-1.8-1.42-.14-2.77.83-3.49.83-.72 0-1.83-.81-3-.79-1.55.02-2.98.9-3.78 2.29-1.61 2.8-.41 6.95 1.16 9.23.77 1.11 1.69 2.36 2.89 2.31 1.16-.05 1.6-.75 3-.75s1.79.75 3.01.72c1.24-.02 2.03-1.13 2.79-2.25.88-1.29 1.24-2.54 1.26-2.6-.03-.01-2.41-.92-2.43-3.66zM14.04 5.5c.64-.78 1.07-1.86.95-2.94-.92.04-2.04.61-2.7 1.39-.59.69-1.11 1.79-.97 2.85 1.03.08 2.08-.52 2.72-1.3z" />
-                    </svg>
-                  </span>
-                  <div>
-                    <>
-                      <span class="bc-num" id="bc-ios">
-                        12
-                      </span>
-                      <span class="bc-lbl">{copy('native_build_v2_calc_ios')}</span>
-                    </>
-                  </div>
-                </div>
-                <div class="bc-res">
-                  <span class="bc-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M17.6 9.48l1.84-3.18a.4.4 0 0 0-.69-.4l-1.86 3.23a11.43 11.43 0 0 0-8.78 0L6.25 5.9a.4.4 0 1 0-.69.4L7.4 9.48A10.78 10.78 0 0 0 2 18h20a10.78 10.78 0 0 0-5.4-8.52zM7 15.25a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm10 0a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" />
-                    </svg>
-                  </span>
-                  <div>
-                    <>
-                      <span class="bc-num" id="bc-and">
-                        24
-                      </span>
-                      <span class="bc-lbl">{copy('native_build_v2_calc_android')}</span>
-                    </>
-                  </div>
-                </div>
-              </div>
-              {calcTiers.length > 0 && (
-                <div class="build-calc-price">
-                  ≈ <span id="bc-price">$10</span> {copy('native_build_v2_calc_price_label')}
-                </div>
-              )}
-              <p class="build-calc-note">{copy('native_build_v2_calc_note')}</p>
-            </div>
-
-            <p class="pricing-fineprint">
-              {copy('native_build_v2_pricing_fine')} <a href={pricingUrl}>capgo.app/pricing</a>.
-            </p>
+    {plans.length > 0 && (
+      <section class="section" id="pricing">
+        <div class="shell">
+          <div class="section-head">
+            <div class="eyebrow">{copy('native_build_builder_pricing_eyebrow')}</div>
+            <h2 class="h2-section">{copy('native_build_builder_pricing_title')}</h2>
+            <p class="lead">{copy('native_build_builder_pricing_text')}</p>
           </div>
-        </section>
-      )
-    }
+
+          <div class="pricing-grid">
+            {plans.map((plan) => (
+              <div class:list={['tier', { pop: plan.name === 'Maker' }]}>
+                <div>
+                  <div class="name">{plan.name === 'Maker' ? `${plan.name} · ${copy('most_popular')}` : plan.name}</div>
+                  <div class="price">
+                    {annualMonthlyPrice(plan)}
+                    <small> / mo</small>
+                  </div>
+                </div>
+                <p class="what">{planDescription(plan)}</p>
+                <p class="tier-billing">{yearlyBilling(plan)}</p>
+                <p class="tier-billing">{monthlyPrice(plan)}</p>
+                <a class:list={['btn btn-md', plan.name === 'Maker' ? 'btn-primary' : 'btn-ghost']} href={registerUrl}>
+                  {copy('native_build_builder_plan_trial')}
+                </a>
+                <ul>
+                  <li>{buildTimeDisplay(plan.build_time_unit, plan.name)}</li>
+                  <li>{copy('native_build_v2_plan_ota')}</li>
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div class="build-calc" aria-label="Build minutes calculator" data-tiers={JSON.stringify(calcTiers)}>
+            <div class="build-calc-head">{copy('native_build_v2_calc_title')}</div>
+            <input class="build-calc-range" type="range" min="30" max="600" step="10" value="60" id="bc-range" aria-label={copy('native_build_v2_calc_minutes')} />
+            <div class="build-calc-readout">
+              <span id="bc-min">60</span> {copy('native_build_v2_calc_minutes')}
+            </div>
+            <div class="build-calc-results">
+              <div class="bc-res">
+                <span class="bc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16.36 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.74-1.78-3.33-1.8-1.42-.14-2.77.83-3.49.83-.72 0-1.83-.81-3-.79-1.55.02-2.98.9-3.78 2.29-1.61 2.8-.41 6.95 1.16 9.23.77 1.11 1.69 2.36 2.89 2.31 1.16-.05 1.6-.75 3-.75s1.79.75 3.01.72c1.24-.02 2.03-1.13 2.79-2.25.88-1.29 1.24-2.54 1.26-2.6-.03-.01-2.41-.92-2.43-3.66zM14.04 5.5c.64-.78 1.07-1.86.95-2.94-.92.04-2.04.61-2.7 1.39-.59.69-1.11 1.79-.97 2.85 1.03.08 2.08-.52 2.72-1.3z" />
+                  </svg>
+                </span>
+                <div>
+                  <>
+                    <span class="bc-num" id="bc-ios">
+                      12
+                    </span>
+                    <span class="bc-lbl">{copy('native_build_v2_calc_ios')}</span>
+                  </>
+                </div>
+              </div>
+              <div class="bc-res">
+                <span class="bc-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.6 9.48l1.84-3.18a.4.4 0 0 0-.69-.4l-1.86 3.23a11.43 11.43 0 0 0-8.78 0L6.25 5.9a.4.4 0 1 0-.69.4L7.4 9.48A10.78 10.78 0 0 0 2 18h20a10.78 10.78 0 0 0-5.4-8.52zM7 15.25a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm10 0a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" />
+                  </svg>
+                </span>
+                <div>
+                  <>
+                    <span class="bc-num" id="bc-and">
+                      24
+                    </span>
+                    <span class="bc-lbl">{copy('native_build_v2_calc_android')}</span>
+                  </>
+                </div>
+              </div>
+            </div>
+            {calcTiers.length > 0 && (
+              <div class="build-calc-price">
+                ≈ <span id="bc-price">$10</span> {copy('native_build_v2_calc_price_label')}
+              </div>
+            )}
+            <p class="build-calc-note">{copy('native_build_v2_calc_note')}</p>
+          </div>
+
+          <p class="pricing-fineprint">
+            {copy('native_build_v2_pricing_fine')} <a href={pricingUrl}>capgo.app/pricing</a>.
+          </p>
+        </div>
+      </section>
+    )}
     <!-- ============================================ FAQ ============================================ -->
     <section class="section" id="faq">
       <div class="shell">
@@ -1056,42 +1226,46 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         </div>
 
         <div class="faq">
-          {
-            faqs.map((item) => (
-              <details>
-                <summary>
-                  {item.q}
-                  <span class="plus">+</span>
-                </summary>
-                <div class="ans" aria-live="polite">
-                  <p>{item.a}</p>
-                  {item.href && item.linkLabel && (
-                    <a class="faq-doc-link" href={item.href}>
-                      {item.linkLabel} →
-                    </a>
-                  )}
-                </div>
-              </details>
-            ))
-          }
+          {faqs.map((item) => (
+            <details>
+              <summary>
+                {item.q}
+                <span class="plus">+</span>
+              </summary>
+              <div class="ans" aria-live="polite">
+                <p>{item.a}</p>
+                {item.href && item.linkLabel && (
+                  <a class="faq-doc-link" href={item.href}>
+                    {item.linkLabel} →
+                  </a>
+                )}
+              </div>
+            </details>
+          ))}
         </div>
       </div>
     </section>
 
     <!-- ============================================ FINAL CTA ============================================ -->
-    <section class="section final bg-grid grain" id="cta">
+    <section class="section final" id="cta">
       <div class="shell">
         <h2>
-          <span class="name">Capgo Builder</span><br />
+          <span class="name">Capgo Builder</span>
+          <br />
           {copy('native_build_v2_cta_title')}
         </h2>
         <p class="tagline">{copy('native_build_v2_cta_tagline')}</p>
-        <HumanSupport class="mb-4" size="sm" />
-        <a class="btn btn-lg btn-primary btn-cta" href={registerUrl}>{copy('native_build_builder_start_trial')} →</a>
+        <SignupCta id="native-build-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
-          <span><span class="check">✓</span> {copy('native_build_v2_cta_meta1')}</span>
-          <span><span class="check">✓</span> {copy('native_build_v2_cta_meta2')}</span>
-          <span><span class="check">✓</span> {copy('native_build_v2_cta_meta3')}</span>
+          <span>
+            <span class="check">✓</span> {copy('native_build_v2_cta_meta1')}
+          </span>
+          <span>
+            <span class="check">✓</span> {copy('native_build_v2_cta_meta2')}
+          </span>
+          <span>
+            <span class="check">✓</span> {copy('native_build_v2_cta_meta3')}
+          </span>
         </div>
       </div>
     </section>
@@ -1102,76 +1276,30 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
      CAPGO BUILDER — /native-build/ redesign
      All rules scoped under .nb to avoid leaking into Header/Footer.
      ============================================================ */
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealLight.woff') format('woff');
-      font-weight: 300;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealBook.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealMedium.woff') format('woff');
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealBold.woff') format('woff');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealExtraBold.woff') format('woff');
-      font-weight: 800;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Airbnb Cereal';
-      src: url('/fonts/AirbnbCerealBlack.woff') format('woff');
-      font-weight: 900;
-      font-style: normal;
-      font-display: swap;
-    }
-
     .nb {
       /* ---- tokens ---- */
-      --bg-deep: #080e1a;
-      --bg-mid: #0d1525;
-      --bg-near: #1a2a4a;
-      --grid-line: rgba(96, 165, 250, 0.06);
-      --relief-green: #4ade80;
-      --relief-green-glow: rgba(74, 222, 128, 0.4);
-      --accent-cyan: #22d3ee;
-      --accent-yellow: #facc15;
-      --accent-green: #4ade80;
-      --accent-purple: #a78bfa;
-      --accent-orange: #fb923c;
-      --accent-pink: #f472b6;
-      --accent-sky: #38bdf8;
-      --accent-violet: #818cf8;
       --terminal-bg: #0a0d14;
       --terminal-fg: #c8d4e6;
       --terminal-dim: #5a6a82;
       --terminal-cmd: #93a4bd;
       --terminal-flag: #93a4bd;
-      --terminal-val: #4ade80;
+      --terminal-val: #93c5fd;
       --terminal-kw: #60a5fa;
       --terminal-err: #f87171;
       --cap-blue-600: #2563eb;
       --cap-blue-700: #1d4ed8;
-      --nb-font-display: 'Airbnb Cereal', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      /* Restrained system: one accent (blue) + neutrals.
+                 Green only for literal success, red only for literal errors. */
+      --nb-accent: #60a5fa;
+      --nb-accent-strong: #93c5fd;
+      --nb-accent-bg: rgba(96, 165, 250, 0.08);
+      --nb-accent-line: rgba(96, 165, 250, 0.3);
+      --nb-ok: #4ade80;
+      --nb-card-bg: rgba(255, 255, 255, 0.035);
+      --nb-card-border: rgba(255, 255, 255, 0.09);
+      --nb-card-border-hover: rgba(255, 255, 255, 0.18);
+      --nb-radius: 16px;
+      --nb-font-display: Satoshi, ui-sans-serif, system-ui, -apple-system, sans-serif;
       --nb-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
       position: relative;
@@ -1197,8 +1325,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .mono {
       font-family: var(--nb-font-mono);
     }
-    .nb .accent-green {
-      color: var(--relief-green);
+    /* Headline accent phrases: quiet emphasis, not a second colour. */
+    .nb .accent-green,
+    .nb .accent-violet {
+      color: rgba(255, 255, 255, 0.55);
     }
 
     /* ---- page background ----
@@ -1213,44 +1343,18 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       background: transparent;
     }
 
-    /* On this page, hide the footer "Power your Capacitor apps…" plugins banner
-     (first block inside the footer container: tagline + Install Plugin CTA). */
-    body:has(.nb) footer > div > div:first-child {
-      display: none !important;
-    }
-    .nb .bg-grid::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-      background-size: 96px 96px;
-      mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 0%, transparent 75%);
-      pointer-events: none;
-    }
-    .nb .grain {
-      position: relative;
-    }
-    .nb .grain::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.7  0 0 0 0 0.8  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-      pointer-events: none;
-      mix-blend-mode: overlay;
-      opacity: 0.5;
-    }
-
     /* ---- type ---- */
     .nb .eyebrow {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.45);
+      color: var(--nb-accent);
     }
-    .nb .eyebrow--green {
-      color: var(--relief-green);
+    .nb .eyebrow--green,
+    .nb .eyebrow--violet,
+    .nb .eyebrow--blue {
+      color: var(--nb-accent);
     }
     .nb .h2-section {
       font-weight: 800;
@@ -1320,12 +1424,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .btn-primary {
       background: var(--cap-blue-600);
       color: #fff;
-      box-shadow: 0 0 36px rgba(37, 99, 235, 0.42);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
     .nb .btn-primary:hover {
       background: var(--cap-blue-700);
-      box-shadow: 0 0 50px rgba(37, 99, 235, 0.55);
-      transform: translateY(-1px);
     }
     .nb .btn-ghost {
       background: rgba(255, 255, 255, 0.04);
@@ -1354,9 +1456,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       padding: 6px 12px;
       font-size: 12px;
       font-weight: 600;
-      background: rgba(74, 222, 128, 0.08);
-      border: 1px solid rgba(74, 222, 128, 0.3);
-      color: var(--relief-green);
+      background: var(--nb-accent-bg);
+      border: 1px solid var(--nb-accent-line);
+      color: var(--nb-accent-strong);
       border-radius: 999px;
       margin-bottom: 28px;
       letter-spacing: 0.04em;
@@ -1365,8 +1467,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--relief-green);
-      box-shadow: 0 0 10px var(--relief-green);
+      background: var(--nb-accent);
     }
     .nb .hero-banner {
       margin: 22px 0 18px;
@@ -1390,12 +1491,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .hbv-u-rule {
       display: block;
-      height: 4px;
+      height: 1px;
       width: 100%;
-      margin-top: 14px;
-      background: linear-gradient(90deg, transparent 0%, var(--relief-green) 20%, var(--relief-green) 80%, transparent 100%);
-      box-shadow: 0 0 24px var(--relief-green-glow);
-      border-radius: 2px;
+      margin-top: 16px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.16) 20%, rgba(255, 255, 255, 0.16) 80%, transparent 100%);
     }
     .nb .hero-banner-tag {
       font-family: var(--nb-font-mono);
@@ -1444,7 +1543,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       gap: 6px;
     }
     .nb .hero-meta .check {
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .hero-strip {
       margin: 56px auto 0;
@@ -1459,9 +1558,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       }
     }
     .nb .hero-strip-cell {
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 14px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: 12px;
       padding: 14px 16px;
       text-align: center;
     }
@@ -1486,14 +1585,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
     }
     .nb .terminal-bar {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: 10px 14px;
-      background: linear-gradient(to bottom, #0e1320, #0a0d14);
+      background: #0d1119;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
     .nb .terminal-bar .dot {
@@ -1501,20 +1600,16 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       height: 11px;
       border-radius: 50%;
     }
-    .nb .terminal-bar .dot.r {
-      background: #ef4444;
-    }
-    .nb .terminal-bar .dot.y {
-      background: #f59e0b;
-    }
+    .nb .terminal-bar .dot.r,
+    .nb .terminal-bar .dot.y,
     .nb .terminal-bar .dot.g {
-      background: #22c55e;
+      background: rgba(255, 255, 255, 0.14);
     }
     .nb .terminal-bar .title {
       margin-left: 12px;
       font-family: var(--nb-font-mono);
       font-size: 12px;
-      color: #6b7a91;
+      color: #94a3b8;
     }
     .nb .terminal-body {
       font-family: var(--nb-font-mono);
@@ -1524,7 +1619,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-fg);
       white-space: pre-wrap;
       /* Fixed height, tall enough for the full build log, so it never grows/jumps
-       as lines stream in AND never shows a scrollbar. */
+               as lines stream in AND never shows a scrollbar. */
       height: 560px;
       overflow: hidden;
     }
@@ -1550,7 +1645,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: #facc15;
     }
     .nb .terminal-body .ok {
-      color: var(--relief-green);
+      color: var(--nb-ok);
     }
     .nb .terminal-body .ghost {
       opacity: 0.55;
@@ -1581,12 +1676,12 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       text-align: center;
     }
     .nb .rv-one-mark {
-      font-family: var(--nb-font-mono);
-      font-size: 12px;
-      letter-spacing: 0.3em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--relief-green);
-      margin-bottom: 28px;
+      color: var(--nb-accent);
+      margin-bottom: 20px;
     }
     .nb .rv-one-line {
       font-size: clamp(1.6rem, 4.2vw, 2.9rem);
@@ -1649,9 +1744,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border-color: rgba(255, 255, 255, 0.25);
     }
     .nb .demo-tab.active {
-      background: rgba(74, 222, 128, 0.12);
-      color: var(--relief-green);
-      border-color: rgba(74, 222, 128, 0.4);
+      background: var(--nb-accent-bg);
+      color: var(--nb-accent-strong);
+      border-color: var(--nb-accent-line);
     }
 
     /* ---- bento ---- */
@@ -1675,9 +1770,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .tile {
       position: relative;
       padding: 22px;
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 18px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       overflow: hidden;
       cursor: pointer;
       transition:
@@ -1686,9 +1781,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         background 0.2s;
     }
     .nb .tile:hover {
-      border-color: rgba(255, 255, 255, 0.18);
-      transform: translateY(-2px);
-      background: rgba(26, 29, 36, 0.75);
+      border-color: var(--nb-card-border-hover);
     }
     .nb .tile::before {
       content: '';
@@ -1740,7 +1833,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       display: block;
     }
     .nb .tile.open {
-      background: rgba(26, 29, 36, 0.85);
+      background: rgba(255, 255, 255, 0.05);
     }
     .nb .tile .more code,
     .nb .tile-hero .ascii {
@@ -1748,8 +1841,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .tile .more code {
       font-size: 12px;
-      background: rgba(74, 222, 128, 0.08);
-      color: var(--relief-green);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
       padding: 1px 5px;
       border-radius: 4px;
     }
@@ -1760,12 +1853,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       flex-direction: column;
       justify-content: space-between;
       cursor: default;
-      background: radial-gradient(ellipse at 30% 20%, rgba(74, 222, 128, 0.18) 0%, transparent 60%), rgba(26, 29, 36, 0.85);
-      border: 1px solid rgba(74, 222, 128, 0.3);
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
     }
     .nb .tile-hero::before {
-      background: var(--relief-green);
-      height: 3px;
+      display: none;
     }
     .nb .tile-hero:hover {
       transform: none;
@@ -1777,7 +1869,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       line-height: 1.05;
     }
     .nb .tile-hero .ttl .name {
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .tile-hero-sub-ttl {
       color: rgba(255, 255, 255, 0.85);
@@ -1790,7 +1882,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .tile-hero .ascii {
       font-size: 11px;
-      color: rgba(74, 222, 128, 0.55);
+      color: rgba(255, 255, 255, 0.45);
       white-space: pre;
       line-height: 1.2;
       margin: 14px 0 0;
@@ -1816,48 +1908,23 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
 
     /* ---- bento tile icons ---- */
     .nb .bento .tile {
-      --tile-c: var(--relief-green);
+      --tile-c: var(--nb-accent);
     }
     .nb .bento .tile .icon svg {
       width: 20px;
       height: 20px;
     }
 
-    /* ---- SPOTLIGHT — the bento's style ----
-     Calm monochrome tiles that light up with a green glow tracking the
-     cursor, plus a lift + green accent on hover. The hero tile keeps its
-     own green fill. */
-    .nb .bento .tile:not(.tile-hero) {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.11);
-    }
+    /* ---- bento: calm monochrome tiles, blue only on interaction ---- */
     .nb .bento .tile:not(.tile-hero)::before {
       opacity: 0;
     }
-    .nb .bento .tile::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      pointer-events: none;
-      background: radial-gradient(240px 200px at var(--mx, 50%) var(--my, -20%), rgba(74, 222, 128, 0.07), transparent 72%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .nb .bento .tile:hover::after {
-      opacity: 1;
-    }
-    /* No glow once a tile is expanded */
-    .nb .bento .tile.open::after {
-      opacity: 0 !important;
-    }
     .nb .bento .tile:not(.tile-hero):hover {
-      border-color: rgba(74, 222, 128, 0.26);
-      transform: translateY(-3px);
+      border-color: var(--nb-card-border-hover);
     }
     .nb .bento .tile.open:not(.tile-hero) {
-      border-color: rgba(74, 222, 128, 0.22);
-      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--nb-accent-line);
+      background: rgba(255, 255, 255, 0.05);
     }
     .nb .bento .tile .icon {
       color: rgba(255, 255, 255, 0.5);
@@ -1869,15 +1936,15 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         border-color 0.25s;
     }
     .nb .bento .tile:hover .icon {
-      color: var(--relief-green);
-      border-color: rgba(74, 222, 128, 0.3);
-      background: rgba(74, 222, 128, 0.1);
+      color: var(--nb-accent);
+      border-color: var(--nb-accent-line);
+      background: var(--nb-accent-bg);
     }
     .nb .bento .tile .ttl-accent {
       color: #fff;
     }
     .nb .bento .tile:hover .ttl-accent {
-      color: var(--relief-green);
+      color: #fff;
     }
 
     /* ---- QR share / direct distribution ---- */
@@ -1894,11 +1961,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .share-stage {
       margin-top: 48px;
       position: relative;
-      border: 1px solid rgba(96, 165, 250, 0.14);
-      border-radius: 24px;
-      background:
-        radial-gradient(600px 220px at 70% 20%, rgba(74, 222, 128, 0.1), transparent 60%), radial-gradient(500px 200px at 20% 80%, rgba(59, 130, 246, 0.12), transparent 55%),
-        linear-gradient(180deg, rgba(13, 21, 37, 0.9), rgba(8, 14, 26, 0.95));
+      border: 1px solid var(--nb-card-border);
+      border-radius: 20px;
+      background: var(--nb-card-bg);
       padding: 36px 28px 32px;
       overflow: hidden;
     }
@@ -1925,7 +1990,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         inset: 0 0 auto 0;
         width: 100%;
         height: 42%;
-        background: linear-gradient(180deg, transparent, var(--relief-green), transparent);
+        background: linear-gradient(180deg, transparent, var(--nb-accent), transparent);
         animation-name: sharePulseY;
       }
       @keyframes sharePulseY {
@@ -1953,19 +2018,18 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border-radius: 14px;
       display: grid;
       place-items: center;
-      color: #93c5fd;
-      background: rgba(59, 130, 246, 0.12);
-      border: 1px solid rgba(96, 165, 250, 0.22);
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .nb .share-node-icon svg {
       width: 24px;
       height: 24px;
     }
     .nb .share-node--build .share-node-icon {
-      color: var(--relief-green);
-      background: rgba(74, 222, 128, 0.12);
-      border-color: rgba(74, 222, 128, 0.28);
-      box-shadow: 0 0 28px rgba(74, 222, 128, 0.12);
+      color: var(--nb-accent);
+      background: var(--nb-accent-bg);
+      border-color: var(--nb-accent-line);
     }
     .nb .share-node-label {
       font-size: 14px;
@@ -1991,8 +2055,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       inset: 0 auto 0 0;
       width: 42%;
       border-radius: inherit;
-      background: linear-gradient(90deg, transparent, var(--relief-green), transparent);
-      animation: sharePulse 2.4s ease-in-out infinite;
+      background: linear-gradient(90deg, transparent, var(--nb-accent), transparent);
+      animation: sharePulse 3.2s ease-in-out infinite;
     }
     .nb .share-connector:nth-of-type(2) span {
       animation-delay: 0.35s;
@@ -2022,9 +2086,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       padding: 10px;
       position: relative;
       overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(74, 222, 128, 0.35),
-        0 18px 40px rgba(74, 222, 128, 0.18);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
     }
     .nb .share-qr-grid {
       display: grid;
@@ -2072,24 +2134,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       background: #0b1220;
     }
     .nb .share-qr-scan {
-      position: absolute;
-      left: 8px;
-      right: 8px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #22c55e, transparent);
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
-      animation: shareScan 2.8s ease-in-out infinite;
-    }
-    @keyframes shareScan {
-      0%,
-      100% {
-        top: 12%;
-        opacity: 0.35;
-      }
-      50% {
-        top: 82%;
-        opacity: 1;
-      }
+      display: none;
     }
     .nb .share-ttl {
       display: inline-flex;
@@ -2100,9 +2145,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: rgba(74, 222, 128, 0.95);
-      background: rgba(74, 222, 128, 0.1);
-      border: 1px solid rgba(74, 222, 128, 0.22);
+      color: rgba(255, 255, 255, 0.62);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .nb .share-phone {
       width: 72px;
@@ -2110,9 +2155,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       margin: 0 auto 12px;
       border-radius: 16px;
       border: 2px solid rgba(148, 163, 184, 0.45);
-      background: #0a1220;
+      background: #0e1117;
       padding: 8px 6px 6px;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
     }
     .nb .share-phone-notch {
       width: 28px;
@@ -2124,7 +2168,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .share-phone-screen {
       height: calc(100% - 12px);
       border-radius: 10px;
-      background: linear-gradient(160deg, rgba(74, 222, 128, 0.18), rgba(37, 99, 235, 0.18));
+      background: rgba(255, 255, 255, 0.05);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -2138,22 +2182,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: rgba(74, 222, 128, 0.2);
-      color: var(--relief-green);
+      background: rgba(74, 222, 128, 0.14);
+      color: var(--nb-ok);
       font-size: 14px;
       font-weight: 800;
-      animation: shareCheck 2.6s ease-in-out infinite;
-    }
-    @keyframes shareCheck {
-      0%,
-      100% {
-        transform: scale(0.92);
-        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.25);
-      }
-      50% {
-        transform: scale(1);
-        box-shadow: 0 0 0 8px rgba(74, 222, 128, 0);
-      }
     }
     .nb .share-phone-text {
       font-size: 9px;
@@ -2175,19 +2207,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       }
     }
     .nb .share-vs-col {
-      border-radius: 18px;
+      border-radius: var(--nb-radius);
       padding: 22px 22px 18px;
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      background: rgba(15, 23, 42, 0.55);
-    }
-    .nb .share-vs-col--old {
-      border-color: rgba(248, 113, 113, 0.22);
-      background: linear-gradient(180deg, rgba(127, 29, 29, 0.18), rgba(15, 23, 42, 0.4));
+      border: 1px solid var(--nb-card-border);
+      background: var(--nb-card-bg);
     }
     .nb .share-vs-col--new {
-      border-color: rgba(74, 222, 128, 0.28);
-      background: linear-gradient(180deg, rgba(20, 83, 45, 0.28), rgba(15, 23, 42, 0.45));
-      box-shadow: 0 0 40px rgba(74, 222, 128, 0.06);
+      border-color: var(--nb-accent-line);
+      background: var(--nb-accent-bg);
     }
     .nb .share-vs-label {
       font-size: 11px;
@@ -2197,10 +2224,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       margin-bottom: 14px;
     }
     .nb .share-vs-col--old .share-vs-label {
-      color: #fca5a5;
+      color: rgba(255, 255, 255, 0.55);
     }
     .nb .share-vs-col--new .share-vs-label {
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .share-vs-col ul {
       list-style: none;
@@ -2222,11 +2249,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       left: 0;
       top: 0;
       font-weight: 800;
-      color: #f87171;
+      color: rgba(255, 255, 255, 0.35);
     }
     .nb .share-vs-col--new li::before {
       content: '✓';
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .share-steps {
       list-style: none;
@@ -2246,9 +2273,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       gap: 14px;
       align-items: flex-start;
       padding: 18px 18px 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(96, 165, 250, 0.12);
-      background: rgba(15, 23, 42, 0.45);
+      border-radius: var(--nb-radius);
+      border: 1px solid var(--nb-card-border);
+      background: var(--nb-card-bg);
     }
     .nb .share-step-num {
       flex: none;
@@ -2258,10 +2285,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       display: grid;
       place-items: center;
       font-size: 13px;
-      font-weight: 800;
-      color: #0b1220;
-      background: var(--relief-green);
-      box-shadow: 0 0 18px rgba(74, 222, 128, 0.35);
+      font-weight: 700;
+      color: var(--nb-accent-strong);
+      background: var(--nb-accent-bg);
+      border: 1px solid var(--nb-accent-line);
     }
     .nb .share-steps h3 {
       margin: 2px 0 6px;
@@ -2288,10 +2315,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       padding: 6px 12px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 700;
-      color: var(--relief-green);
-      border: 1px solid rgba(74, 222, 128, 0.28);
-      background: rgba(74, 222, 128, 0.08);
+      font-weight: 600;
+      color: var(--nb-accent-strong);
+      border: 1px solid var(--nb-accent-line);
+      background: var(--nb-accent-bg);
     }
     .nb .share-foot p {
       margin: 0;
@@ -2322,9 +2349,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       background: var(--terminal-bg);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
-      box-shadow:
-        0 0 0 1px rgba(74, 222, 128, 0.06),
-        0 0 40px rgba(74, 222, 128, 0.06);
     }
     .nb .onboarding-cmd {
       font-family: var(--nb-font-mono);
@@ -2333,7 +2357,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       letter-spacing: 0.01em;
     }
     .nb .onboarding-cmd .ocm-prompt {
-      color: var(--relief-green);
+      color: var(--terminal-dim);
       margin-right: 8px;
     }
     .nb .onboarding-cmd .ocm-pkg {
@@ -2343,7 +2367,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.55);
     }
     .nb .onboarding-cmd .ocm-val {
-      color: var(--accent-cyan);
+      color: var(--nb-accent-strong);
       transition: color 0.2s;
     }
     .nb .onboarding-platform-toggle {
@@ -2372,8 +2396,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: #fff;
     }
     .nb .onboarding-platform-toggle .opt.active {
-      background: var(--relief-green);
-      color: #08160d;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
     }
     @media (max-width: 600px) {
       .nb .onboarding-cmd {
@@ -2388,8 +2412,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       grid-template-columns: 280px 1fr;
       gap: 24px;
       margin-top: 40px;
-      background: rgba(26, 29, 36, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
       border-radius: 20px;
       padding: 24px;
     }
@@ -2426,7 +2450,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       display: none;
     }
     .nb .wizard-step.active {
-      background: rgba(74, 222, 128, 0.08);
+      background: rgba(255, 255, 255, 0.05);
       color: #fff;
     }
     .nb .wizard-step .num {
@@ -2443,14 +2467,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       font-family: var(--nb-font-mono);
     }
     .nb .wizard-step.active .num {
-      background: var(--relief-green);
-      color: #08160d;
-      border-color: var(--relief-green);
+      background: var(--nb-accent);
+      color: #0b1220;
+      border-color: var(--nb-accent);
     }
     .nb .wizard-step.done .num {
-      background: rgba(74, 222, 128, 0.15);
-      color: var(--relief-green);
-      border-color: rgba(74, 222, 128, 0.4);
+      background: var(--nb-accent-bg);
+      color: var(--nb-accent-strong);
+      border-color: var(--nb-accent-line);
     }
     .nb .wizard-step .lbl {
       font-size: 14px;
@@ -2473,11 +2497,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       line-height: 1.65;
       color: var(--terminal-fg);
     }
-    .nb .wizard-stage h4 {
+    .nb .wizard-stage h3 {
       margin: 0 0 10px;
       font-size: 13px;
       font-weight: 700;
-      color: var(--relief-green);
+      color: var(--nb-accent);
       text-transform: uppercase;
       letter-spacing: 0.12em;
       font-family: var(--nb-font-display);
@@ -2502,7 +2526,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-kw);
     }
     .nb .wizard-stage .ok {
-      color: var(--relief-green);
+      color: var(--nb-ok);
     }
     .nb .wizard-stage .lock {
       color: #facc15;
@@ -2965,7 +2989,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       place-items: center;
       font-family: var(--nb-font-mono);
       font-size: 11px;
-      color: var(--relief-green);
+      color: var(--nb-ok);
     }
     .nb .dock-ico.folder {
       background: linear-gradient(#6fd2ff, #3a9bd8);
@@ -3024,7 +3048,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       overflow: hidden;
       background: #ececee;
       color: #1d1d1f;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Airbnb Cereal', system-ui, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Satoshi, system-ui, sans-serif;
       font-size: 12px;
       line-height: 1.4;
       box-shadow:
@@ -4531,15 +4555,15 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       font-weight: 600;
     }
     .nb .wizard-before-after .b {
-      background: rgba(248, 113, 113, 0.1);
-      color: #fca5a5;
-      border: 1px solid rgba(248, 113, 113, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       text-decoration: line-through;
     }
     .nb .wizard-before-after .a {
-      background: rgba(74, 222, 128, 0.1);
-      color: var(--relief-green);
-      border: 1px solid rgba(74, 222, 128, 0.3);
+      background: var(--nb-accent-bg);
+      color: var(--nb-accent-strong);
+      border: 1px solid var(--nb-accent-line);
     }
     .nb .wizard-before-after .ba-arrow {
       color: rgba(255, 255, 255, 0.45);
@@ -4561,31 +4585,10 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .trust-cell {
       position: relative;
       padding: 22px;
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       overflow: hidden;
-      transition:
-        border-color 0.25s,
-        transform 0.25s,
-        box-shadow 0.25s;
-    }
-    .nb .trust-cell:hover {
-      border-color: rgba(74, 222, 128, 0.3);
-      transform: translateY(-2px);
-      box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.32),
-        0 0 0 1px rgba(74, 222, 128, 0.08);
-    }
-    .nb .trust-cell::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      pointer-events: none;
-      /* Static corner glow — no longer follows the cursor. */
-      background: radial-gradient(170px 130px at 18% 0%, rgba(74, 222, 128, 0.12), transparent 70%);
-      opacity: 1;
     }
     .nb .trust-icon {
       width: 40px;
@@ -4594,35 +4597,21 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       align-items: center;
       justify-content: center;
       border-radius: 10px;
-      background: rgba(74, 222, 128, 0.08);
-      color: var(--relief-green);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.75);
       margin-bottom: 14px;
-      border: 1px solid rgba(74, 222, 128, 0.18);
-      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.28);
-      transition: box-shadow 0.4s ease;
-    }
-    .nb .trust-cell .trust-icon {
-      animation: nbTrustIconPulse 3.6s ease-in-out infinite;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .nb .trust-icon svg {
       width: 22px;
       height: 22px;
-    }
-    @keyframes nbTrustIconPulse {
-      0%,
-      100% {
-        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.2);
-      }
-      50% {
-        box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
-      }
     }
     .nb .trust-cell .lbl {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--relief-green);
+      color: var(--nb-accent);
       margin-bottom: 8px;
     }
     .nb .trust-cell h3 {
@@ -4647,53 +4636,14 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.55);
       letter-spacing: 0.04em;
     }
-    .nb .trust-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--relief-green);
-      box-shadow: 0 0 6px var(--relief-green);
-      flex-shrink: 0;
-    }
-    .nb .trust-cell .trust-dot--ok {
-      animation: nbTrustBlink 2.4s ease-in-out infinite;
-    }
-    @keyframes nbTrustBlink {
-      0%,
-      92%,
-      100% {
-        opacity: 1;
-      }
-      95% {
-        opacity: 0.25;
-      }
-    }
+    /* Static status markers — no decorative pulsing. */
+    .nb .trust-dot,
     .nb .trust-pulse {
-      width: 10px;
-      height: 10px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: var(--relief-green);
-      position: relative;
+      background: var(--nb-accent);
       flex-shrink: 0;
-      box-shadow: 0 0 8px var(--relief-green);
-    }
-    .nb .trust-cell .trust-pulse::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 1px solid var(--relief-green);
-      animation: nbTrustRing 1.8s ease-out infinite;
-    }
-    @keyframes nbTrustRing {
-      0% {
-        transform: scale(1);
-        opacity: 0.7;
-      }
-      100% {
-        transform: scale(2.6);
-        opacity: 0;
-      }
     }
     .nb .trust-stream {
       display: inline-flex;
@@ -4704,72 +4654,34 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .trust-stream span {
       display: inline-block;
       width: 3px;
-      height: 12px;
-      background: var(--relief-green);
+      height: 10px;
+      background: var(--nb-accent);
       border-radius: 1px;
-      opacity: 0.4;
+      opacity: 0.35;
     }
-    .nb .trust-cell .trust-stream span {
-      animation: nbTrustBars 1.4s ease-in-out infinite;
+    .nb .trust-stream span:nth-child(2) {
+      opacity: 0.55;
     }
-    .nb .trust-cell .trust-stream span:nth-child(1) {
-      animation-delay: 0s;
+    .nb .trust-stream span:nth-child(3) {
+      opacity: 0.75;
     }
-    .nb .trust-cell .trust-stream span:nth-child(2) {
-      animation-delay: 0.15s;
-    }
-    .nb .trust-cell .trust-stream span:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-    .nb .trust-cell .trust-stream span:nth-child(4) {
-      animation-delay: 0.45s;
-    }
-    @keyframes nbTrustBars {
-      0%,
-      100% {
-        opacity: 0.25;
-        transform: scaleY(0.5);
-      }
-      50% {
-        opacity: 1;
-        transform: scaleY(1);
-      }
+    .nb .trust-stream span:nth-child(4) {
+      opacity: 1;
     }
     .nb .trust-decay {
-      width: 10px;
-      height: 10px;
+      width: 7px;
+      height: 7px;
       border-radius: 2px;
-      background: var(--relief-green);
+      background: var(--nb-accent);
       flex-shrink: 0;
-      box-shadow: 0 0 6px var(--relief-green);
-    }
-    .nb .trust-cell .trust-decay {
-      animation: nbTrustDecay 2.2s ease-in-out infinite;
-    }
-    @keyframes nbTrustDecay {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-        border-radius: 2px;
-      }
-      60% {
-        transform: scale(0.4);
-        opacity: 0.3;
-        border-radius: 50%;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-        border-radius: 2px;
-      }
     }
 
     /* ---- comparison ---- */
     .nb .comp-wrap {
       margin-top: 36px;
       overflow-x: auto;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       background: rgba(255, 255, 255, 0.02);
     }
     .nb table.comp {
@@ -4798,12 +4710,12 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     /* Capgo column — clearly the highlighted one */
     .nb table.comp thead th.us {
-      color: var(--relief-green);
-      background: rgba(74, 222, 128, 0.1);
-      border-bottom-color: rgba(74, 222, 128, 0.4);
+      color: var(--nb-accent);
+      background: rgba(96, 165, 250, 0.06);
+      border-bottom-color: var(--nb-accent-line);
     }
     .nb table.comp tbody td.us {
-      background: rgba(74, 222, 128, 0.06);
+      background: rgba(96, 165, 250, 0.04);
     }
     .nb table.comp-prose {
       min-width: 880px;
@@ -4845,7 +4757,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.85);
     }
     .nb table.comp-prose .hook {
-      color: var(--relief-green);
+      color: #fff;
       font-weight: 700;
     }
     @media (max-width: 720px) {
@@ -4926,7 +4838,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       position: absolute;
       left: 0;
       top: 1px;
-      color: var(--relief-green);
+      color: var(--nb-accent);
       font-weight: 700;
     }
     .nb .aidebug-points h3 {
@@ -4961,16 +4873,16 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .tier {
       padding: 24px;
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
     .nb .tier.pop {
-      border-color: rgba(74, 222, 128, 0.4);
-      background: rgba(26, 29, 36, 0.85);
+      border-color: rgba(96, 165, 250, 0.45);
+      background: rgba(255, 255, 255, 0.05);
     }
     .nb .tier .name {
       font-size: 13px;
@@ -4980,7 +4892,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       text-transform: uppercase;
     }
     .nb .tier.pop .name {
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .tier .price {
       font-size: 36px;
@@ -5025,24 +4937,24 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .tier li::before {
       content: '✓';
-      color: var(--relief-green);
+      color: var(--nb-accent);
       font-weight: 700;
     }
     .nb .pricing-fineprint {
       margin-top: 24px;
       padding: 16px 20px;
-      background: rgba(96, 165, 250, 0.05);
-      border: 1px solid rgba(96, 165, 250, 0.25);
-      border-radius: 14px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: 12px;
       font-size: 13px;
       line-height: 1.6;
       color: rgba(255, 255, 255, 0.7);
     }
     .nb .pricing-fineprint b {
-      color: var(--accent-sky);
+      color: #fff;
     }
     .nb .pricing-fineprint a {
-      color: var(--accent-sky);
+      color: var(--nb-accent);
       text-decoration: underline;
     }
 
@@ -5050,9 +4962,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .build-calc {
       margin-top: 18px;
       padding: 24px;
-      background: rgba(26, 29, 36, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
     }
     .nb .build-calc-head {
       font-size: 15px;
@@ -5062,7 +4974,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .build-calc-range {
       width: 100%;
-      accent-color: var(--relief-green);
+      accent-color: var(--nb-accent);
       cursor: pointer;
     }
     .nb .build-calc-readout {
@@ -5072,7 +4984,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.6);
     }
     .nb .build-calc-readout span {
-      color: var(--relief-green);
+      color: #fff;
       font-weight: 700;
     }
     .nb .build-calc-results {
@@ -5101,10 +5013,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       width: 100%;
       height: 100%;
     }
-    /* Android keeps its actual brand green */
-    .nb .build-calc-results .bc-res:last-child .bc-ico {
-      color: var(--relief-green);
-    }
     .nb .bc-num {
       font-size: 34px;
       font-weight: 900;
@@ -5127,7 +5035,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.6);
     }
     .nb .build-calc-price span {
-      color: var(--relief-green);
+      color: #fff;
       font-weight: 700;
       font-size: 18px;
     }
@@ -5170,7 +5078,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .faq details[open] summary .plus {
       transform: rotate(45deg);
-      color: var(--relief-green);
+      color: var(--nb-accent);
     }
     .nb .faq .ans {
       margin-top: 12px;
@@ -5184,8 +5092,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     .nb .faq-doc-link {
       display: inline-block;
       margin-top: 10px;
-      color: var(--relief-green);
-      font-weight: 700;
+      color: var(--nb-accent);
+      font-weight: 600;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
@@ -5193,7 +5101,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: #fff;
     }
     .nb .faq-doc-link:focus-visible {
-      outline: 2px solid var(--relief-green);
+      outline: 2px solid var(--nb-accent);
       outline-offset: 4px;
     }
 
@@ -5209,8 +5117,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       margin: 0 0 8px;
     }
     .nb .final h2 .name {
-      color: var(--relief-green);
-      text-shadow: 0 0 40px var(--relief-green-glow);
+      color: var(--nb-accent);
     }
     .nb .final p.tagline {
       font-size: clamp(1.1rem, 1.6vw, 1.4rem);
@@ -5240,21 +5147,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         animation: none;
         opacity: 1;
       }
-      .nb .trust-cell .trust-icon,
-      .nb .trust-dot--ok,
-      .nb .trust-pulse::after,
-      .nb .trust-stream span,
-      .nb .trust-decay {
-        animation: none !important;
-      }
     }
     /* ---- ask AI / MCP section ---- */
-    .nb .eyebrow--violet {
-      color: var(--accent-violet);
-    }
-    .nb .accent-violet {
-      color: var(--accent-violet);
-    }
     .nb .mcp-grid {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
@@ -5269,9 +5163,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       }
     }
     .nb .mcp-card {
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      background: var(--nb-card-bg);
+      border: 1px solid var(--nb-card-border);
+      border-radius: var(--nb-radius);
       padding: 26px 26px 28px;
     }
     .nb .mcp-step {
@@ -5291,9 +5185,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       display: grid;
       place-items: center;
       font-size: 13px;
-      background: rgba(129, 140, 248, 0.16);
-      color: var(--accent-violet);
-      border: 1px solid rgba(129, 140, 248, 0.3);
+      background: var(--nb-accent-bg);
+      color: var(--nb-accent-strong);
+      border: 1px solid var(--nb-accent-line);
     }
     .nb .mcp-editors {
       display: flex;
@@ -5322,8 +5216,8 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .mcp-ed.is-active {
       color: #fff;
-      background: rgba(129, 140, 248, 0.16);
-      border-color: rgba(129, 140, 248, 0.55);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
     }
     .nb .mcp-ed-i {
       width: 15px;
@@ -5392,7 +5286,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       border-color: rgba(255, 255, 255, 0.3);
     }
     .nb .mcp-copy.copied {
-      color: var(--relief-green);
+      color: var(--nb-ok);
       border-color: rgba(74, 222, 128, 0.45);
     }
     .nb .mcp-code-pre {
@@ -5409,7 +5303,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       align-items: center;
       gap: 10px;
       background: var(--terminal-bg);
-      border: 1px solid rgba(129, 140, 248, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 13px 14px;
       margin-bottom: 18px;
@@ -5418,9 +5312,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       flex: 0 0 auto;
       font-family: var(--nb-font-mono);
       font-size: 11px;
-      color: #bcd0ff;
-      background: rgba(129, 140, 248, 0.16);
-      border: 1px solid rgba(129, 140, 248, 0.3);
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 6px;
       padding: 3px 8px;
     }
@@ -5452,7 +5346,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       position: absolute;
       left: 0;
       top: 0;
-      color: var(--relief-green);
+      color: var(--nb-accent);
       font-weight: 700;
     }
     .nb .mcp-ask-note {
@@ -5477,7 +5371,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           tabs.forEach((t) => {
             const on = t === tab
             t.classList.toggle('is-active', on)
-            t.setAttribute('aria-selected', on ? 'true' : 'false')
+            t.setAttribute('aria-pressed', on ? 'true' : 'false')
           })
           panels.forEach((p) => {
             p.hidden = p.getAttribute('data-client') !== id
@@ -5836,22 +5730,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           }
         })
         tile.tabIndex = 0
-      })
-    })()
-
-    // ----------------------------------------------------------------
-    // BENTO PALETTE — preview switcher (remove once a palette is chosen)
-    // ----------------------------------------------------------------
-    ;(function bentoSpotlight() {
-      const bento = document.getElementById('bento')
-      if (!bento) return
-      // Green glow follows the cursor across each tile.
-      bento.querySelectorAll<HTMLElement>('.tile').forEach((tile) => {
-        tile.addEventListener('pointermove', (e: PointerEvent) => {
-          const r = tile.getBoundingClientRect()
-          tile.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%')
-          tile.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%')
-        })
       })
     })()
 
@@ -6860,7 +6738,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           ascIntro = null
         }
         const total = PLATFORMS[currentPlatform].content.length
-        const head = `<h4>Step ${i + 1} / ${total}: ${c.title}</h4>`
+        const head = `<h3>Step ${i + 1} / ${total}: ${c.title}</h3>`
         const guided = guidedFor(c)
         if (guided) {
           // Drive the real onboarding the way the CLI actually feels: type the
@@ -6920,7 +6798,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           toggle.querySelectorAll('.opt').forEach((b) => {
             const active = b.getAttribute('data-platform') === p
             b.classList.toggle('active', active)
-            b.setAttribute('aria-selected', active ? 'true' : 'false')
+            b.setAttribute('aria-pressed', active ? 'true' : 'false')
           })
         }
         if (platformLabel) platformLabel.textContent = p
@@ -6969,7 +6847,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         const c = PLATFORMS[currentPlatform].content[i]
         if (!c) return
         const total = PLATFORMS[currentPlatform].content.length
-        const h4 = stage!.querySelector('h4')
+        const h4 = stage!.querySelector('h3')
         if (h4) h4.textContent = `Step ${i + 1} / ${total}: ${c.title}`
         const body = stage!.querySelector<HTMLElement>('.term-body')
         if (body) {

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-28T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-09-30T18:14:17.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: "Convert your Lovable app to iOS and Android with Capacitor Capgo blog illustration"
 keywords: Lovable, Lovable.dev, Capacitor, mobile app development, React, Vite, export project, native mobile apps, Capgo Builder, live updates, vibe coding, Cursor
@@ -621,7 +621,7 @@ npm run build
 npx @capgo/cli@latest bundle upload --channel production
 ```
 
-See [Capgo Live Updates docs](/docs/live-updates/getting-started/).
+See [Capgo Live Updates docs](/docs/getting-started/quickstart/).
 
 To automate this upload every time someone clicks **Publish** in Lovable, follow [Automate Capgo Live Updates from Lovable with GitHub Actions](/blog/automate-capgo-live-updates-from-lovable-github-actions/).
 

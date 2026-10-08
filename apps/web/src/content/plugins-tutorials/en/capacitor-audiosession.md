@@ -12,37 +12,54 @@ bun add @capgo/capacitor-audio-session
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `currentOutputs` - Get the current active audio output routes.
-- `overrideOutput` - Override the current audio output route.
+## Import
 
-## Example Usage
+```typescript
+import { AudioSession } from '@capgo/capacitor-audio-session';
+```
 
-### `currentOutputs`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `currentOutputs` | Get the current active audio output routes. |
+| `overrideOutput` | Override the current audio output route. |
+
+## Examples
+
+### `currentOutputs()`
 
 Get the current active audio output routes.
 
 ```typescript
 import { AudioSession } from '@capgo/capacitor-audio-session';
 
-await AudioSession.currentOutputs();
+const result = await AudioSession.currentOutputs();
+console.log(result);
 ```
 
-### `overrideOutput`
+### `overrideOutput()`
 
 Override the current audio output route.
 
 ```typescript
 import { AudioSession } from '@capgo/capacitor-audio-session';
 
-await AudioSession.overrideOutput({} as OutputOverrideType);
+const result = await AudioSession.overrideOutput('default');
+console.log(result);
 ```
 
-## Full Reference
+## Listen to events
 
-- GitHub: https://github.com/Cap-go/capacitor-audiosession/
-- Docs: /docs/plugins/audiosession/
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-audiosession/)
+- [Documentation](/docs/plugins/audiosession/)
+- [API reference](/docs/plugins/audiosession/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-audio-session
 

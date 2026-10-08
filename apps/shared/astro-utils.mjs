@@ -56,7 +56,9 @@ export function buildPluginIcons(configPath) {
     const configSource = readFileSync(configPath, 'utf8')
     const iconMatches = [...configSource.matchAll(/icon:\s*'([^']+)'/g), ...configSource.matchAll(/'[^']+':\s*'([^']+)'/g)]
     const iconNames = iconMatches.map(([, iconName]) => toHeroiconName(iconName))
-    return [...new Set(['arrow-up-right-solid', 'information-circle-solid', 'question-mark-circle-solid', ...iconNames])].sort((left, right) => left.localeCompare(right))
+    return [...new Set(['arrow-up-right-solid', 'chevron-down', 'information-circle-solid', 'question-mark-circle-solid', ...iconNames])].sort((left, right) =>
+      left.localeCompare(right),
+    )
   } catch (error) {
     throw new Error(`Failed to read plugin config at ${configPath}. This build depends on apps/web/src/config/plugins.ts being present.`, { cause: error })
   }

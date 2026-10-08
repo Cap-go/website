@@ -39,9 +39,10 @@ import { CapacitorFile } from '@capgo/capacitor-file';
 Request a file system.
 
 ```typescript
-import { CapacitorFile } from '@capgo/capacitor-file';
+import { CapacitorFile, FileSystemType } from '@capgo/capacitor-file';
 
-await CapacitorFile.requestFileSystem({} as RequestFileSystemOptions);
+const result = await CapacitorFile.requestFileSystem({ type: FileSystemType.TEMPORARY });
+console.log(result);
 ```
 
 ### `resolveLocalFileSystemURL`
@@ -51,7 +52,8 @@ Resolve a file URL to an entry.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.resolveLocalFileSystemURL({} as ResolveURLOptions);
+const result = await CapacitorFile.resolveLocalFileSystemURL({ url: 'https://example.com' });
+console.log(result);
 ```
 
 ### `getFile`
@@ -61,7 +63,8 @@ Get a file entry.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.getFile({} as GetFileOptions);
+const result = await CapacitorFile.getFile({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `getDirectory`
@@ -71,7 +74,8 @@ Get a directory entry.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.getDirectory({} as GetDirectoryOptions);
+const result = await CapacitorFile.getDirectory({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `readFile`
@@ -81,7 +85,8 @@ Read a file as text or base64.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.readFile({} as ReadFileOptions);
+const result = await CapacitorFile.readFile({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `readAsDataURL`
@@ -91,7 +96,8 @@ Read a file as a data URL (base64 with MIME type prefix).
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.readAsDataURL({} as ReadFileOptions);
+const result = await CapacitorFile.readAsDataURL({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `writeFile`
@@ -101,7 +107,11 @@ Write data to a file.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.writeFile({} as WriteFileOptions);
+const result = await CapacitorFile.writeFile({
+  path: 'path/to/file',
+  data: 'data',
+});
+console.log(result);
 ```
 
 ### `appendFile`
@@ -111,7 +121,11 @@ Append data to a file.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.appendFile({} as WriteFileOptions);
+const result = await CapacitorFile.appendFile({
+  path: 'path/to/file',
+  data: 'data',
+});
+console.log(result);
 ```
 
 ### `deleteFile`
@@ -121,7 +135,7 @@ Delete a file.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.deleteFile({} as DeleteFileOptions);
+await CapacitorFile.deleteFile({ path: 'path/to/file' });
 ```
 
 ### `mkdir`
@@ -131,7 +145,7 @@ Create a directory.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.mkdir({} as MkdirOptions);
+await CapacitorFile.mkdir({ path: 'path/to/file' });
 ```
 
 ### `rmdir`
@@ -141,7 +155,7 @@ Delete a directory.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.rmdir({} as DeleteDirectoryOptions);
+await CapacitorFile.rmdir({ path: 'path/to/file' });
 ```
 
 ### `readdir`
@@ -151,7 +165,8 @@ Read directory contents.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.readdir({} as ReaddirOptions);
+const result = await CapacitorFile.readdir({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `stat`
@@ -161,7 +176,8 @@ Get metadata about a file or directory.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.stat({} as StatOptions);
+const result = await CapacitorFile.stat({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `getMetadata`
@@ -172,7 +188,8 @@ Alias for stat().
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.getMetadata({} as StatOptions);
+const result = await CapacitorFile.getMetadata({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `rename`
@@ -182,7 +199,10 @@ Rename or move a file or directory.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.rename({} as RenameOptions);
+await CapacitorFile.rename({
+  from: 'from',
+  to: 'to',
+});
 ```
 
 ### `move`
@@ -193,7 +213,10 @@ Alias for rename().
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.move({} as RenameOptions);
+await CapacitorFile.move({
+  from: 'from',
+  to: 'to',
+});
 ```
 
 ### `copy`
@@ -203,7 +226,11 @@ Copy a file or directory.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.copy({} as CopyOptions);
+const result = await CapacitorFile.copy({
+  from: 'from',
+  to: 'to',
+});
+console.log(result);
 ```
 
 ### `exists`
@@ -213,7 +240,8 @@ Check if a file or directory exists.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.exists({} as ExistsOptions);
+const result = await CapacitorFile.exists({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `getUri`
@@ -223,7 +251,8 @@ Get the URI for a file.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.getUri({} as GetUriOptions);
+const result = await CapacitorFile.getUri({ path: 'path/to/file' });
+console.log(result);
 ```
 
 ### `truncate`
@@ -233,7 +262,7 @@ Truncate a file to a specified size.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.truncate({} as TruncateOptions);
+await CapacitorFile.truncate({ path: 'path/to/file' });
 ```
 
 ### `getDirectories`
@@ -243,7 +272,8 @@ Get all known file system directories.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.getDirectories();
+const result = await CapacitorFile.getDirectories();
+console.log(result);
 ```
 
 ### `getFreeDiskSpace`
@@ -253,7 +283,8 @@ Get the free disk space in bytes.
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.getFreeDiskSpace();
+const result = await CapacitorFile.getFreeDiskSpace();
+console.log(result);
 ```
 
 ### `checkPermissions`
@@ -265,7 +296,8 @@ On iOS and web, this always returns 'granted' as no special permissions are need
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.checkPermissions();
+const result = await CapacitorFile.checkPermissions();
+console.log(result);
 ```
 
 ### `requestPermissions`
@@ -278,7 +310,8 @@ On iOS and web, this always returns 'granted' as no special permissions are need
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 
-await CapacitorFile.requestPermissions();
+const result = await CapacitorFile.requestPermissions();
+console.log(result);
 ```
 
 ## Type Reference

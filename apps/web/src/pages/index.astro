@@ -1,30 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { formatWebsiteStats, resolveWebsiteStats } from '@/lib/websiteStats'
-import Orgs from '@/components/Orgs.astro'
 import ProblemSolution from '@/components/ProblemSolution.astro'
 import Testimonials from '@/components/Testimonials.astro'
+import WhyCapgo from '@/components/WhyCapgo.astro'
 import SharedNumbers from '@/components/SharedNumbers.astro'
+import TransparencySection from '@/components/TransparencySection.astro'
 import Hero from '@/components/Hero.astro'
-import Manifesto from '@/components/Manifesto.astro'
 import m from '@/copy/messages'
-import DeviceLogs from '@/components/landing/DeviceLogs.astro'
 import HowItWorks from '@/components/HowItWorks.astro'
+import PlatformOverview from '@/components/PlatformOverview.astro'
+import PlatformScreens from '@/components/PlatformScreens.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
-import MonitoringFeatures from '@/components/landing/MonitoringFeatures.astro'
-import ReleaseIntelligence from '@/components/landing/ReleaseIntelligence.astro'
-import AutomationFeatures from '@/components/landing/AutomationFeatures.astro'
-import BuiltForDevelopers from '@/components/BuiltForDevelopers.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson, createWebSiteLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
-import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
-import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
-import { getRelativeLocaleUrl } from '@/services/links'
+import AskAiSection from '@/components/AskAiSection.astro'
+import RiskDebtSection from '@/components/RiskDebtSection.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
 
 const config = Astro.locals.runtimeConfig
-
-const rawStats = await resolveWebsiteStats(config.public.baseApiUrl)
-const stats = formatWebsiteStats(rawStats)
 
 // Create comprehensive homepage content definition
 const title = `${config.public.brand} - ${m.instant_updates_for_capacitor({}, { locale: Astro.locals.locale })}`
@@ -48,12 +41,8 @@ const capgoSoftware = createSoftwareApplicationLdJson(config.public, {
   applicationCategory: 'DeveloperApplication',
   operatingSystem: 'Web, iOS, Android, Cordova, Electron',
   softwareVersion: '1.0',
-  aggregateRating: {
-    ratingValue: 4.8,
-    reviewCount: rawStats.apps,
-  },
   offers: {
-    price: '0',
+    price: '12',
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
   },
@@ -93,28 +82,19 @@ const content = {
 <Layout content={content}>
   <div>
     <Hero />
-    <!-- <CompaniesLogo /> -->
     <ProblemSolution />
+    <PlatformOverview />
+    <PlatformScreens />
+    <AgentReadySection />
     <HowItWorks />
-    <SolutionAppExample solution="production-updates" randomize />
-    <MonitoringFeatures />
-    <ReleaseIntelligence />
-    <DeviceLogs />
-    <AutomationFeatures />
+    <RiskDebtSection />
     <GlobalInfrastructure />
-    <UpdateTypesSection />
-    <BuiltForDevelopers />
-    <SharedNumbers stats={stats} />
+    <SharedNumbers />
+    <TransparencySection />
+    <WhyCapgo />
     <Testimonials />
-    <Manifesto />
-    <Orgs />
     <AppflowShutdown />
-    <section class="mx-auto max-w-5xl px-6 py-10 text-sm leading-6 text-gray-600 lg:px-8">
-      <h2 class="text-2xl font-semibold text-gray-950">Keep shipping in 2026</h2>
-      <p class="mt-4 [&_a]:text-blue-600 [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-2 hover:[&_a]:text-blue-500">
-        Store review queues are less predictable this year. Read <a href={getRelativeLocaleUrl(Astro.locals.locale, 'blog/mobile-app-best-practices-2026-live-updates')}>Mobile App Best Practices in 2026: Why Live Updates Win</a> — then <a href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}>register</a> and ship web-layer fixes without waiting on every binary review.
-      </p>
-    </section>
+    <AskAiSection />
   </div>
 
   <style is:global>

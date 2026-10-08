@@ -41,7 +41,7 @@ Launch the native Mux Player in fullscreen and begin playback.
 ```typescript
 import { MuxPlayer } from '@capgo/capacitor-mux-player';
 
-await MuxPlayer.play({} as MuxPlayOptions);
+await MuxPlayer.play({ playbackId: 'playback-id-123' });
 ```
 
 ### `dismiss`
@@ -61,7 +61,8 @@ Returns whether the player is currently being displayed.
 ```typescript
 import { MuxPlayer } from '@capgo/capacitor-mux-player';
 
-await MuxPlayer.isActive();
+const result = await MuxPlayer.isActive();
+console.log(result);
 ```
 
 ## Type Reference

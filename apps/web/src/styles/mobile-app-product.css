@@ -1,53 +1,11 @@
 /* Capgo mobile app — builder design language (cyan accent) */
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealLight.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealBook.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealMedium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealBold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealExtraBold.woff') format('woff');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Airbnb Cereal';
-  src: url('/fonts/AirbnbCerealBlack.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
 .ma {
   --grid-line: rgba(34, 211, 238, 0.06);
   --relief-cyan: #22d3ee;
   --relief-cyan-glow: rgba(34, 211, 238, 0.4);
   --cap-blue-600: #2563eb;
   --cap-blue-700: #1d4ed8;
-  --ma-font-display: 'Airbnb Cereal', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --ma-font-display: Satoshi, ui-sans-serif, system-ui, -apple-system, sans-serif;
   --ma-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
   position: relative;
@@ -73,9 +31,6 @@ body:has(.ma) {
 }
 .ma.bg-ad {
   background: transparent;
-}
-body:has(.ma) footer > div > div:first-child {
-  display: none !important;
 }
 .ma .bg-grid::before {
   content: '';

@@ -12,16 +12,27 @@ bun add @capgo/capacitor-light-sensor
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `isAvailable` - Check if the light sensor is available on the current device. You should always check sensor availability before attempting to use it.
-- `start` - Start listening to light sensor updates. This will begin sensor measurements at the specified interval. Use `addListener` to receive the sensor data.
-- `stop` - Stop listening to light sensor updates. This will stop the sensor and conserve battery.
-- `checkPermissions` - Check the current permission status for high sampling rate sensors. On Android 12+, the HIGH_SAMPLING_RATE_SENSORS permission is required for sensor update intervals below 200ms.
+## Import
 
-## Example Usage
+```typescript
+import { LightSensor } from '@capgo/capacitor-light-sensor';
+```
 
-### `isAvailable`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `isAvailable` | Check if the light sensor is available on the current device. You should always check sensor availability before attempting to use it. |
+| `start` | Start listening to light sensor updates. This will begin sensor measurements at the specified interval. Use `addListener` to receive the sensor data. |
+| `stop` | Stop listening to light sensor updates. This will stop the sensor and conserve battery. |
+| `checkPermissions` | Check the current permission status for high sampling rate sensors. On Android 12+, the HIGH_SAMPLING_RATE_SENSORS permission is required for sensor update intervals below 200ms. |
+| `requestPermissions` | Request permission for high sampling rate sensors. On Android 12+, this requests the HIGH_SAMPLING_RATE_SENSORS permission. |
+
+## Examples
+
+### `isAvailable()`
 
 Check if the light sensor is available on the current device. You should always check sensor availability before attempting to use it.
 
@@ -31,7 +42,7 @@ import { LightSensor } from '@capgo/capacitor-light-sensor';
 const { available } = await LightSensor.isAvailable();
 ```
 
-### `start`
+### `start()`
 
 Start listening to light sensor updates. This will begin sensor measurements at the specified interval. Use `addListener` to receive the sensor data.
 
@@ -41,7 +52,7 @@ import { LightSensor } from '@capgo/capacitor-light-sensor';
 await LightSensor.start({ updateInterval: 500 });
 ```
 
-### `stop`
+### `stop()`
 
 Stop listening to light sensor updates. This will stop the sensor and conserve battery.
 
@@ -51,7 +62,7 @@ import { LightSensor } from '@capgo/capacitor-light-sensor';
 await LightSensor.stop();
 ```
 
-### `checkPermissions`
+### `checkPermissions()`
 
 Check the current permission status for high sampling rate sensors. On Android 12+, the HIGH_SAMPLING_RATE_SENSORS permission is required for sensor update intervals below 200ms.
 
@@ -61,10 +72,25 @@ import { LightSensor } from '@capgo/capacitor-light-sensor';
 const status = await LightSensor.checkPermissions();
 ```
 
-## Full Reference
+### `requestPermissions()`
 
-- GitHub: https://github.com/Cap-go/capacitor-light-sensor/
-- Docs: /docs/plugins/light-sensor/
+Request permission for high sampling rate sensors. On Android 12+, this requests the HIGH_SAMPLING_RATE_SENSORS permission.
+
+```typescript
+import { LightSensor } from '@capgo/capacitor-light-sensor';
+
+const status = await LightSensor.requestPermissions();
+```
+
+## Listen to events
+
+`addListener` returns a handle. Call `handle.remove()` when the screen unmounts, or `LightSensor.removeAllListeners()` to clear every listener.
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-light-sensor/)
+- [Documentation](/docs/plugins/light-sensor/)
+- [API reference](/docs/plugins/light-sensor/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-light-sensor
 

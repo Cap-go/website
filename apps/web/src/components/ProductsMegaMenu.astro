@@ -1,0 +1,975 @@
+---
+import m from '@/copy/messages'
+import { productIconPaths } from '@/config/productIcons'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+
+type Scene = 'live-update' | 'native-build' | 'observe' | 'notifications' | 'cli' | 'skills' | 'app' | 'plugins' | 'ionic'
+
+interface Product {
+  href: string
+  icon: string
+  scene: Scene
+  name: string
+  tagline: string
+  desc: string
+  extra?: { href: string; label: string }
+  groupStart?: boolean
+}
+
+const products: Product[] = [
+  {
+    href: 'live-update',
+    icon: 'bolt',
+    scene: 'live-update',
+    name: m.platform_live_update_name({}, { locale }),
+    tagline: m.menu_live_update_tagline({}, { locale }),
+    desc: m.platform_live_update_desc({}, { locale }),
+    extra: { href: 'data', label: m.nav_live_update_data({}, { locale }) },
+  },
+  {
+    href: 'native-build',
+    icon: 'cube',
+    scene: 'native-build',
+    name: m.platform_native_build_name({}, { locale }),
+    tagline: m.menu_native_build_tagline({}, { locale }),
+    desc: m.platform_native_build_desc({}, { locale }),
+    extra: { href: 'builder-data', label: m.nav_native_build_data({}, { locale }) },
+  },
+  {
+    href: 'observe',
+    icon: 'chart-bar',
+    scene: 'observe',
+    name: m.platform_observe_name({}, { locale }),
+    tagline: m.menu_observe_tagline({}, { locale }),
+    desc: m.platform_observe_desc({}, { locale }),
+    groupStart: true,
+  },
+  {
+    href: 'notifications',
+    icon: 'bell',
+    scene: 'notifications',
+    name: m.platform_notifications_name({}, { locale }),
+    tagline: m.menu_notifications_tagline({}, { locale }),
+    desc: m.platform_notifications_desc({}, { locale }),
+  },
+  {
+    href: 'capgo-cli',
+    icon: 'command-line',
+    scene: 'cli',
+    name: m.nav_capgo_cli({}, { locale }),
+    tagline: m.menu_cli_tagline({}, { locale }),
+    desc: m.platform_cli_desc({}, { locale }),
+    extra: { href: 'ci_cd', label: 'CI/CD' },
+    groupStart: true,
+  },
+  {
+    href: 'skills',
+    icon: 'sparkles',
+    scene: 'skills',
+    name: m.platform_skills_name({}, { locale }),
+    tagline: m.menu_skills_tagline({}, { locale }),
+    desc: m.platform_skills_desc({}, { locale }),
+    extra: { href: 'agents', label: m.nav_ai_agents({}, { locale }) },
+  },
+  {
+    href: 'app_mobile',
+    icon: 'device-phone-mobile',
+    scene: 'app',
+    name: m.platform_app_name({}, { locale }),
+    tagline: m.menu_app_tagline({}, { locale }),
+    desc: m.platform_app_desc({}, { locale }),
+  },
+  {
+    href: 'plugins',
+    icon: 'puzzle-piece',
+    scene: 'plugins',
+    name: m.platform_plugins_name({}, { locale }),
+    tagline: m.menu_plugins_tagline({}, { locale }),
+    desc: m.platform_plugins_desc({}, { locale }),
+    groupStart: true,
+  },
+  {
+    href: 'ionic-enterprise-plugins',
+    icon: 'shield-check',
+    scene: 'ionic',
+    name: m.solutions_ionic_plugins_short({}, { locale }),
+    tagline: m.menu_ionic_tagline({}, { locale }),
+    desc: m.platform_ionic_desc({}, { locale }),
+  },
+]
+
+const pluginTiles = [
+  ['Biometric', '#22c55e'],
+  ['Camera', '#f97316'],
+  ['Push', '#3b82f6'],
+  ['Purchases', '#ec4899'],
+  ['Uploader', '#a855f7'],
+  ['SQLite', '#14b8a6'],
+  ['Social login', '#eab308'],
+  ['Updater', '#44bcff'],
+]
+
+const ionicRows = [
+  ['Identity Vault', 'native-biometric'],
+  ['Secure Storage', 'data-storage-sqlite'],
+  ['Auth Connect', 'social-login'],
+]
+---
+
+<div
+  class="mega grid w-[50rem] grid-cols-[17rem_minmax(0,1fr)] overflow-hidden rounded-2xl border border-slate-600/60 bg-slate-900/95 shadow-2xl shadow-black/50 backdrop-blur-xl"
+  data-mega-menu
+>
+  <ul class="border-r border-white/10 p-1.5">
+    {products.map((product, index) => (
+      <li class:list={[{ 'mt-1 border-t border-white/10 pt-1': product.groupStart }]}>
+        <a
+          href={getRelativeLocaleUrl(locale, product.href)}
+          data-mega-item={index}
+          aria-current={index === 0 ? 'true' : undefined}
+          class="mega-item flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#44BCFF]"
+        >
+          <span class="mega-icon flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white/5 text-slate-300 ring-1 ring-white/10 transition-colors">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              {productIconPaths[product.icon].map((d) => (
+                <path d={d} />
+              ))}
+            </svg>
+          </span>
+          <span class="min-w-0">
+            <span class="block text-[13px] leading-5 font-semibold text-white">{product.name}</span>
+            <span class="block truncate text-xs leading-4 text-slate-400">{product.tagline}</span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <div class="relative overflow-hidden bg-[#0b1120]">
+    <div class="mega-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    {products.map((product, index) => (
+      <div class:list={['mega-preview absolute inset-0 flex flex-col', { 'is-active': index === 0 }]} data-mega-preview={index} aria-hidden={index === 0 ? undefined : 'true'}>
+        <div class="mm-stage relative flex flex-1 items-center justify-center px-6 pt-5" aria-hidden="true">
+          {product.scene === 'live-update' && (
+            <div class="mm-lu flex items-center gap-5">
+              <div class="mm-term">
+                <p>
+                  <span class="text-emerald-400">$</span> capgo bundle upload
+                </p>
+                <p class="mm-slot-2 text-emerald-400">✔ 1.0.1 live</p>
+              </div>
+              <div class="mm-lane">
+                <span class="mm-packet">1.0.1</span>
+              </div>
+              <div class="mm-phone">
+                <div class="mm-phone-bar" />
+                <div class="mm-row w-3/4" />
+                <div class="mm-row w-1/2" />
+                <div class="mm-row w-2/3" />
+                <span class="mm-badge">
+                  <span class="mm-badge-old">v1.0.0</span>
+                  <span class="mm-badge-new">v1.0.1 ✓</span>
+                </span>
+              </div>
+            </div>
+          )}
+
+          {product.scene === 'native-build' && (
+            <div class="mm-nb w-full max-w-[21rem] space-y-3">
+              {[
+                ['iOS', '.ipa', 'App Store'],
+                ['Android', '.aab', 'Play Store'],
+              ].map(([platform, artifact, store], row) => (
+                <div class="mm-card flex items-center gap-3" style={`--row:${row}`}>
+                  <span class="w-14 text-xs font-semibold text-white">{platform}</span>
+                  <span class="mm-bar flex-1">
+                    <i />
+                  </span>
+                  <span class="mm-chip mm-slot-4">{artifact} ✓</span>
+                  <span class="mm-chip mm-chip-blue mm-slot-5">{store}</span>
+                </div>
+              ))}
+              <p class="mm-slot-1 text-center font-mono text-[11px] text-slate-400">Cloud Mac · signing vault · no Xcode</p>
+            </div>
+          )}
+
+          {product.scene === 'observe' && (
+            <div class="mm-card w-full max-w-[22rem] p-3">
+              <div class="grid grid-cols-3 gap-2">
+                <div class="mm-stat">
+                  <b>98.8%</b>
+                  <small>issue-free</small>
+                </div>
+                <div class="mm-stat">
+                  <b>790ms</b>
+                  <small>launch p90</small>
+                </div>
+                <div class="mm-stat">
+                  <b class="text-emerald-300">2.6.1</b>
+                  <small>latest</small>
+                </div>
+              </div>
+              <svg class="mt-3 h-20 w-full" viewBox="0 0 300 80">
+                <path class="mm-grid-line" d="M0 20H300M0 40H300M0 60H300" />
+                <path class="mm-line" pathLength="1" d="M0 58 L30 54 L60 57 L90 50 L120 52 L150 24 L170 20 L190 46 L220 50 L250 44 L300 40" />
+                <circle class="mm-alert" cx="160" cy="21" r="4" />
+              </svg>
+              <p class="mm-slot-4 mt-1 font-mono text-[10.5px] text-rose-300">Example: 2.6.0 spike · rolled back · 2.6.1 healthy</p>
+            </div>
+          )}
+
+          {product.scene === 'notifications' && (
+            <div class="mm-lock">
+              <p class="text-center text-2xl font-semibold text-white/90">9:41</p>
+              <div class="mt-3 space-y-2">
+                {[
+                  ['Order shipped', 'Your package is on the way'],
+                  ['New message', 'Maya replied to your ticket'],
+                  ['Update ready', 'Silent live update applied'],
+                ].map(([title, body], i) => (
+                  <div class:list={['mm-notif', `mm-slot-${i + 1}`]}>
+                    <span class="mm-notif-icon" />
+                    <span class="min-w-0">
+                      <b>{title}</b>
+                      <small>{body}</small>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {product.scene === 'cli' && (
+            <div class="mm-term mm-term-lg">
+              <p>
+                <span class="text-emerald-400">$</span> <span class="mm-type">npx @capgo/cli bundle upload</span>
+              </p>
+              <p class="mm-slot-3 text-slate-400">↳ zipping 16 files · 4.2 MB</p>
+              <p class="mm-slot-4 text-emerald-400">✔ checksum verified</p>
+              <p class="mm-slot-5 text-emerald-400">✔ 1.4.0 live on production</p>
+            </div>
+          )}
+
+          {product.scene === 'skills' && (
+            <div class="w-full max-w-[21rem] space-y-2 text-xs">
+              <p class="mm-bubble mm-slot-1">Add live updates to this app and ship a beta</p>
+              {['Installed @capgo/capacitor-updater', 'Added notifyAppReady()', 'Uploaded 1.4.0 to channel beta'].map((step, i) => (
+                <p class:list={['mm-step', `mm-slot-${i + 2}`]}>
+                  <span class="text-emerald-400">✔</span> {step}
+                </p>
+              ))}
+            </div>
+          )}
+
+          {product.scene === 'app' && (
+            <div class="mm-phone mm-phone-scan">
+              <span class="mm-qr" />
+              <span class="mm-scanline" />
+              <span class="mm-toast mm-slot-4">Bundle 1.4.0 loaded ✓</span>
+            </div>
+          )}
+
+          {product.scene === 'plugins' && (
+            <div class="grid w-full max-w-[22rem] grid-cols-4 gap-2">
+              {pluginTiles.map(([name, color], i) => (
+                <div class="mm-tile" style={`--i:${i}`}>
+                  <span style={`background:${color}`}>{name.slice(0, 1)}</span>
+                  <small>{name}</small>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {product.scene === 'ionic' && (
+            <div class="w-full max-w-[22rem] space-y-2">
+              {ionicRows.map(([from, to], i) => (
+                <div class="mm-card mm-map flex items-center gap-2 px-3 py-2" style={`--i:${i}`}>
+                  <span class="mm-from text-xs text-slate-300">{from}</span>
+                  <span class="text-slate-500">→</span>
+                  <span class="mm-to truncate font-mono text-[11px] text-emerald-300">{to}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div class="flex items-end justify-between gap-4 border-t border-white/5 px-5 py-3.5">
+          <p class="line-clamp-2 text-xs leading-5 text-slate-400">{product.desc}</p>
+          <div class="flex shrink-0 items-center gap-3 text-xs font-semibold">
+            {product.extra && (
+              <a href={getRelativeLocaleUrl(locale, product.extra.href)} class="text-slate-400 transition-colors hover:text-white">
+                {product.extra.label}
+              </a>
+            )}
+            <a
+              href={getRelativeLocaleUrl(locale, product.href)}
+              class="inline-flex items-center gap-1 rounded-md bg-[#44BCFF] px-2.5 py-1.5 text-[#04121c] transition-colors hover:bg-white"
+            >
+              {m.menu_explore({}, { locale })} <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .mega-item[aria-current='true'] {
+    background: rgb(255 255 255 / 0.07);
+  }
+  .mega-item[aria-current='true'] .mega-icon {
+    background: rgb(68 188 255 / 0.12);
+    color: #44bcff;
+    box-shadow: inset 0 0 0 1px rgb(68 188 255 / 0.3);
+  }
+  @media (hover: hover) {
+    .mega-item:hover {
+      background: rgb(255 255 255 / 0.05);
+    }
+  }
+  .mega-backdrop {
+    background:
+      radial-gradient(70% 70% at 70% 30%, rgb(68 188 255 / 0.14), transparent 70%),
+      radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.06) 1px, transparent 0) 0 0 / 18px 18px;
+  }
+  .mega-preview {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.18s ease,
+      visibility 0s linear 0.18s;
+  }
+  .mega-preview.is-active {
+    opacity: 1;
+    /* inherit, not visible: a visible child of the hidden dropdown would still catch hover and open the menu */
+    visibility: inherit;
+    transition:
+      opacity 0.22s ease,
+      visibility 0s;
+  }
+
+  /* Loops only run for the visible preview while the menu is open. */
+  .mega-preview :global(*) {
+    animation-play-state: paused;
+  }
+  :global(.group:is(:hover, :focus-within)) .mega-preview.is-active :global(*) {
+    animation-play-state: running;
+  }
+
+  /* Shared building blocks */
+  .mm-card {
+    border-radius: 12px;
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.09);
+  }
+  .mm-term {
+    border-radius: 10px;
+    background: #05070b;
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.1),
+      0 12px 30px rgb(0 0 0 / 0.4);
+    padding: 10px 12px;
+    font:
+      11px/1.7 ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      monospace;
+    color: #e5e7eb;
+    white-space: nowrap;
+  }
+  .mm-term-lg {
+    width: 100%;
+    max-width: 22rem;
+    padding: 14px 16px;
+    font-size: 12px;
+  }
+  .mm-phone {
+    position: relative;
+    width: 92px;
+    height: 176px;
+    padding: 18px 10px 10px;
+    border-radius: 18px;
+    background: #f8fafc;
+    box-shadow:
+      0 0 0 4px #25282e,
+      0 14px 30px rgb(0 0 0 / 0.45);
+  }
+  .mm-phone-bar {
+    height: 10px;
+    width: 55%;
+    border-radius: 4px;
+    background: #0f172a;
+    margin-bottom: 10px;
+  }
+  .mm-row {
+    height: 18px;
+    border-radius: 6px;
+    background: #e2e8f0;
+    margin-bottom: 7px;
+  }
+  .mm-chip {
+    border-radius: 999px;
+    background: rgb(74 222 128 / 0.14);
+    color: #86efac;
+    padding: 2px 8px;
+    font:
+      600 10.5px/1.6 ui-monospace,
+      monospace;
+    white-space: nowrap;
+  }
+  .mm-chip-blue {
+    background: rgb(68 188 255 / 0.15);
+    color: #7dd3fc;
+  }
+
+  /* Sequenced reveal slots on a shared 5s loop: slot N appears at N×12% and all hide at 92%. */
+  .mm-slot-1,
+  .mm-slot-2,
+  .mm-slot-3,
+  .mm-slot-4,
+  .mm-slot-5 {
+    animation: 5s ease infinite both;
+  }
+  .mm-slot-1 {
+    animation-name: mm-slot-1;
+  }
+  .mm-slot-2 {
+    animation-name: mm-slot-2;
+  }
+  .mm-slot-3 {
+    animation-name: mm-slot-3;
+  }
+  .mm-slot-4 {
+    animation-name: mm-slot-4;
+  }
+  .mm-slot-5 {
+    animation-name: mm-slot-5;
+  }
+  @keyframes mm-slot-1 {
+    0%,
+    6% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    14%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes mm-slot-2 {
+    0%,
+    18% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    26%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes mm-slot-3 {
+    0%,
+    30% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    38%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes mm-slot-4 {
+    0%,
+    44% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    52%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes mm-slot-5 {
+    0%,
+    56% {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    64%,
+    90% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Live Updates: bundle flies into the phone, version flips */
+  .mm-lane {
+    position: relative;
+    width: 70px;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.18) 0 5px, transparent 5px 10px);
+  }
+  .mm-packet {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: #44bcff;
+    color: #04121c;
+    font:
+      700 10px/1.6 ui-monospace,
+      monospace;
+    box-shadow: 0 0 14px rgb(68 188 255 / 0.7);
+    animation: mm-fly 5s ease-in-out infinite both;
+  }
+  @keyframes mm-fly {
+    0%,
+    26% {
+      left: -10px;
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    50% {
+      left: calc(100% - 20px);
+      opacity: 1;
+    }
+    56%,
+    100% {
+      left: calc(100% - 20px);
+      opacity: 0;
+    }
+  }
+  .mm-badge {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    translate: -50% 0;
+    display: grid;
+    font:
+      700 10px/1 ui-monospace,
+      monospace;
+    white-space: nowrap;
+  }
+  .mm-badge > span {
+    grid-area: 1 / 1;
+    padding: 4px 7px;
+    border-radius: 999px;
+  }
+  .mm-badge-old {
+    background: #e2e8f0;
+    color: #475569;
+    animation: mm-badge-old 5s infinite both;
+  }
+  .mm-badge-new {
+    background: #dcfce7;
+    color: #15803d;
+    animation: mm-badge-new 5s infinite both;
+  }
+  @keyframes mm-badge-old {
+    0%,
+    54% {
+      opacity: 1;
+    }
+    58%,
+    94% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes mm-badge-new {
+    0%,
+    54% {
+      opacity: 0;
+      scale: 0.8;
+    }
+    60%,
+    94% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Native Build: two build bars fill, artifacts then stores appear */
+  .mm-nb .mm-card {
+    padding: 10px 12px;
+  }
+  .mm-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.1);
+    overflow: hidden;
+  }
+  .mm-bar i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #44bcff;
+    animation: mm-fill 5s ease-in-out infinite both;
+    animation-delay: calc(var(--row) * 0.25s);
+  }
+  @keyframes mm-fill {
+    0%,
+    8% {
+      width: 0;
+    }
+    46%,
+    92% {
+      width: 100%;
+      background: #4ade80;
+    }
+    100% {
+      width: 0;
+    }
+  }
+
+  /* Observe: chart draws, spike marker, recovery note */
+  .mm-stat {
+    border-radius: 8px;
+    background: rgb(255 255 255 / 0.05);
+    padding: 6px 8px;
+  }
+  .mm-stat b {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+  }
+  .mm-stat small {
+    font-size: 10px;
+    color: #94a3b8;
+  }
+  .mm-grid-line {
+    stroke: rgb(255 255 255 / 0.07);
+    stroke-width: 1;
+    fill: none;
+  }
+  .mm-line {
+    fill: none;
+    stroke: #44bcff;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    animation: mm-draw 5s ease infinite both;
+  }
+  @keyframes mm-draw {
+    0% {
+      stroke-dashoffset: 1;
+      opacity: 1;
+    }
+    50%,
+    92% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+  }
+  .mm-alert {
+    fill: #fb7185;
+    transform-origin: 160px 21px;
+    animation: mm-ping 5s ease infinite both;
+  }
+  @keyframes mm-ping {
+    0%,
+    30% {
+      opacity: 0;
+      scale: 0;
+    }
+    36% {
+      opacity: 1;
+      scale: 1.6;
+    }
+    42%,
+    92% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Notifications: lock screen with stacked pushes */
+  .mm-lock {
+    width: 220px;
+    border-radius: 22px;
+    padding: 14px 12px 16px;
+    background: linear-gradient(160deg, #1e3a8a, #0f172a 75%);
+    box-shadow:
+      0 0 0 4px #25282e,
+      0 14px 30px rgb(0 0 0 / 0.45);
+  }
+  .mm-notif {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border-radius: 12px;
+    padding: 7px 9px;
+    background: rgb(255 255 255 / 0.14);
+    backdrop-filter: blur(6px);
+  }
+  .mm-notif b {
+    display: block;
+    font-size: 11px;
+    color: #fff;
+  }
+  .mm-notif small {
+    display: block;
+    font-size: 10px;
+    color: rgb(255 255 255 / 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mm-notif-icon {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    border-radius: 6px;
+    background: conic-gradient(from 45deg, #44bcff, #2563eb, #44bcff);
+  }
+
+  /* CLI: typed command */
+  .mm-type {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    animation: mm-type 5s steps(28, end) infinite both;
+  }
+  @keyframes mm-type {
+    0% {
+      width: 0;
+      opacity: 1;
+    }
+    30%,
+    92% {
+      width: 28ch;
+      opacity: 1;
+    }
+    100% {
+      width: 28ch;
+      opacity: 0;
+    }
+  }
+
+  /* AI Skills: prompt and agent steps */
+  .mm-bubble {
+    margin-left: auto;
+    width: fit-content;
+    max-width: 85%;
+    border-radius: 12px 12px 4px 12px;
+    background: #2563eb;
+    color: #fff;
+    padding: 7px 10px;
+  }
+  .mm-step {
+    border-radius: 8px;
+    background: rgb(255 255 255 / 0.05);
+    color: #e2e8f0;
+    padding: 6px 10px;
+    font-family: ui-monospace, monospace;
+    font-size: 11px;
+  }
+
+  /* Capgo app: QR scan */
+  .mm-phone-scan {
+    background: #05070b;
+    display: grid;
+    place-items: center;
+  }
+  .mm-qr {
+    width: 56px;
+    height: 56px;
+    border-radius: 4px;
+    background:
+      conic-gradient(#fff 25%, transparent 0 50%, #fff 0 75%, transparent 0) 0 0 / 14px 14px,
+      #0f172a;
+    box-shadow: 0 0 0 6px #0f172a;
+    opacity: 0.85;
+  }
+  .mm-scanline {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background: #44bcff;
+    box-shadow: 0 0 10px #44bcff;
+    animation: mm-scan 5s ease-in-out infinite both;
+  }
+  @keyframes mm-scan {
+    0% {
+      top: 50px;
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    22% {
+      top: 118px;
+    }
+    36% {
+      top: 50px;
+    }
+    44%,
+    100% {
+      opacity: 0;
+    }
+  }
+  .mm-toast {
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: 10px;
+    border-radius: 8px;
+    background: #dcfce7;
+    color: #15803d;
+    text-align: center;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 5px 4px;
+  }
+
+  /* Plugins: tiles pop in */
+  .mm-tile {
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+    border-radius: 10px;
+    background: rgb(255 255 255 / 0.05);
+    padding: 10px 4px 8px;
+    animation: mm-pop 5s ease infinite both;
+    animation-delay: calc(var(--i) * 0.12s);
+  }
+  .mm-tile span {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .mm-tile small {
+    font-size: 10px;
+    color: #cbd5e1;
+    white-space: nowrap;
+  }
+  @keyframes mm-pop {
+    0% {
+      opacity: 0;
+      scale: 0.85;
+    }
+    10%,
+    90% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Ionic: closed plugin crossed out, Capgo package appears */
+  .mm-map .mm-from {
+    background: linear-gradient(currentColor, currentColor) 0 55% / 0 1px no-repeat;
+    animation: mm-strike 5s ease infinite both;
+    animation-delay: calc(var(--i) * 0.35s);
+  }
+  .mm-map .mm-to {
+    animation: mm-slot-2 5s ease infinite both;
+    animation-delay: calc(var(--i) * 0.35s);
+  }
+  @keyframes mm-strike {
+    0%,
+    10% {
+      background-size: 0 1px;
+      opacity: 1;
+    }
+    24%,
+    90% {
+      background-size: 100% 1px;
+      opacity: 0.55;
+    }
+    100% {
+      background-size: 0 1px;
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mega-preview :global(*) {
+      animation: none !important;
+    }
+    .mm-bar i {
+      width: 100%;
+    }
+    .mm-badge-old {
+      opacity: 0;
+    }
+    .mm-map .mm-from {
+      background-size: 100% 1px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-mega-menu]').forEach((menu) => {
+    const items = Array.from(menu.querySelectorAll<HTMLAnchorElement>('[data-mega-item]'))
+    const previews = Array.from(menu.querySelectorAll<HTMLElement>('[data-mega-preview]'))
+
+    const activate = (index: number) => {
+      items.forEach((item, i) => {
+        if (i === index) item.setAttribute('aria-current', 'true')
+        else item.removeAttribute('aria-current')
+      })
+      previews.forEach((preview, i) => {
+        const active = i === index
+        preview.classList.toggle('is-active', active)
+        if (active) {
+          preview.removeAttribute('aria-hidden')
+          // Restart the loop so each preview starts from its first frame.
+          preview.getAnimations({ subtree: true }).forEach((animation) => {
+            animation.currentTime = 0
+          })
+        } else preview.setAttribute('aria-hidden', 'true')
+      })
+    }
+
+    items.forEach((item, index) => {
+      item.addEventListener('pointerenter', () => activate(index))
+      item.addEventListener('focus', () => activate(index))
+    })
+  })
+</script>

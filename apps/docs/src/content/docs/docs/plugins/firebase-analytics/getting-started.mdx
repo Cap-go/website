@@ -43,7 +43,8 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.getAppInstanceId();
+const result = await FirebaseAnalytics.getAppInstanceId();
+console.log(result);
 ```
 
 ### `getSessionId`
@@ -55,7 +56,8 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.getSessionId();
+const result = await FirebaseAnalytics.getSessionId();
+console.log(result);
 ```
 
 ### `setConsent`
@@ -63,9 +65,12 @@ await FirebaseAnalytics.getSessionId();
 Sets the user's consent mode.
 
 ```typescript
-import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+import { FirebaseAnalytics, ConsentStatus, ConsentType } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setConsent({} as SetConsentOptions);
+await FirebaseAnalytics.setConsent({
+  type: ConsentType.AdPersonalization,
+  status: ConsentStatus.Granted,
+});
 ```
 
 ### `setUserId`
@@ -75,7 +80,7 @@ Sets the user ID property.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setUserId({} as SetUserIdOptions);
+await FirebaseAnalytics.setUserId({ userId: 'user-id-123' });
 ```
 
 ### `setUserProperty`
@@ -85,7 +90,10 @@ Sets a custom user property to a given value.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setUserProperty({} as SetUserPropertyOptions);
+await FirebaseAnalytics.setUserProperty({
+  key: 'key-123',
+  value: 'value',
+});
 ```
 
 ### `setCurrentScreen`
@@ -95,7 +103,7 @@ Sets the current screen name.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setCurrentScreen({} as SetCurrentScreenOptions);
+await FirebaseAnalytics.setCurrentScreen({ screenName: 'screen' });
 ```
 
 ### `logEvent`
@@ -105,7 +113,7 @@ Logs an app event.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.logEvent({} as LogEventOptions);
+await FirebaseAnalytics.logEvent({ name: 'example' });
 ```
 
 ### `setSessionTimeoutDuration`
@@ -117,7 +125,7 @@ Only available for Android and iOS.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setSessionTimeoutDuration({} as SetSessionTimeoutDurationOptions);
+await FirebaseAnalytics.setSessionTimeoutDuration({ duration: 1800 });
 ```
 
 ### `setEnabled`
@@ -128,7 +136,7 @@ The value does not apply until the next run of the app.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.setEnabled({} as SetEnabledOptions);
+await FirebaseAnalytics.setEnabled({ enabled: true });
 ```
 
 ### `isEnabled`
@@ -140,7 +148,8 @@ Only available for Web.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.isEnabled();
+const result = await FirebaseAnalytics.isEnabled();
+console.log(result);
 ```
 
 ### `resetAnalyticsData`
@@ -165,7 +174,7 @@ Only available for iOS.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithEmailAddress({} as InitiateOnDeviceConversionMeasurementWithEmailAddressOptions);
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithEmailAddress({ emailAddress: 'user@example.com' });
 ```
 
 ### `initiateOnDeviceConversionMeasurementWithPhoneNumber`
@@ -177,7 +186,7 @@ Only available for iOS.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithPhoneNumber({} as InitiateOnDeviceConversionMeasurementWithPhoneNumberOptions);
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithPhoneNumber({ phoneNumber: '+15555550123' });
 ```
 
 ### `initiateOnDeviceConversionMeasurementWithHashedEmailAddress`
@@ -189,7 +198,7 @@ Only available for iOS.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithHashedEmailAddress({} as InitiateOnDeviceConversionMeasurementWithHashedEmailAddressOptions);
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithHashedEmailAddress({ emailAddressToHash: 'user@example.com' });
 ```
 
 ### `initiateOnDeviceConversionMeasurementWithHashedPhoneNumber`
@@ -201,7 +210,7 @@ Only available for iOS.
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 
-await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithHashedPhoneNumber({} as InitiateOnDeviceConversionMeasurementWithHashedPhoneNumberOptions);
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithHashedPhoneNumber({ phoneNumberToHash: '+15555550123' });
 ```
 
 ## Type Reference

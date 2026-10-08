@@ -41,7 +41,8 @@ Checks whether the native speech recognition service is usable on the current de
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.available();
+const result = await SpeechRecognition.available();
+console.log(result);
 ```
 
 ### `isOnDeviceRecognitionAvailable`
@@ -61,7 +62,8 @@ Android: [SpeechRecognizer](https://developer.android.com/reference/android/spee
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.isOnDeviceRecognitionAvailable();
+const result = await SpeechRecognition.isOnDeviceRecognitionAvailable();
+console.log(result);
 ```
 
 ### `start`
@@ -78,7 +80,8 @@ Pass `useOnDeviceRecognition: true` only after checking
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.start();
+const result = await SpeechRecognition.start();
+console.log(result);
 ```
 
 ### `stop`
@@ -113,7 +116,8 @@ Gets the last cached partial transcription result.
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.getLastPartialResult();
+const result = await SpeechRecognition.getLastPartialResult();
+console.log(result);
 ```
 
 ### `setPTTState`
@@ -125,7 +129,7 @@ Use this together with `continuousPTT` or with a custom hold-to-talk flow.
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.setPTTState({} as PTTStateOptions);
+await SpeechRecognition.setPTTState({ held: true });
 ```
 
 ### `getSupportedLanguages`
@@ -137,7 +141,8 @@ Android 13+ devices no longer expose this list; in that case `languages` is empt
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.getSupportedLanguages();
+const result = await SpeechRecognition.getSupportedLanguages();
+console.log(result);
 ```
 
 ### `isListening`
@@ -147,7 +152,8 @@ Returns whether the plugin is actively listening for speech.
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.isListening();
+const result = await SpeechRecognition.isListening();
+console.log(result);
 ```
 
 ### `checkPermissions`
@@ -157,7 +163,8 @@ Gets the current permission state.
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.checkPermissions();
+const result = await SpeechRecognition.checkPermissions();
+console.log(result);
 ```
 
 ### `requestPermissions`
@@ -167,7 +174,8 @@ Requests the microphone + speech recognition permissions.
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 
-await SpeechRecognition.requestPermissions();
+const result = await SpeechRecognition.requestPermissions();
+console.log(result);
 ```
 
 ## Type Reference

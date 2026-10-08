@@ -91,7 +91,7 @@ How the **bundle is transferred** to the device.
 | Type | Description | When to Use |
 |------|-------------|-------------|
 | **Full bundle** | Entire JS bundle is downloaded | First install, large changes, or when delta is unavailable |
-| **Delta (manifest)** | Only changed files are downloaded | Most updates; faster and bandwidth-friendly |
+| **Delta** | Only changed files are downloaded | Most updates; faster and bandwidth-friendly |
 
 ```bash
 # Full bundle (default)
@@ -112,13 +112,13 @@ When using instant apply modes (`atInstall`, `onLaunch`, or `always`), enable [D
 | **Apply timing** | `off`, `atBackground`, `atInstall`, `onLaunch`, `always`, `onlyDownload` |
 | **Delay conditions** | `date`, `background`, `nativeVersion`, `kill` |
 | **Version blocking** | `none`, `major`, `minor`, `patch`, `metadata` |
-| **Delivery** | Full bundle, Delta (manifest) |
+| **Delivery** | Full bundle, Delta |
 
 ## Related
 
 - [Update Behavior](/docs/live-updates/update-behavior/) — Configure apply timing and delays
 - [Version Targeting](/docs/live-updates/version-targeting/) — Channel-based version routing
-- [Delta (manifest) Updates](/docs/live-updates/differentials/) — Enable partial downloads
+- [Delta Updates](/docs/live-updates/differentials/) — Download only changed files
 - [Channels](/docs/live-updates/channels/) — Channel configuration and precedence
 
 ## Keep going from Update Types

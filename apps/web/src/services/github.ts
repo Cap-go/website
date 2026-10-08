@@ -22,6 +22,7 @@ const githubStats = githubStatsData as Partial<{
   mergedPullRequestCount: number
   resolvedItemCount: number
   totalStars: number
+  repositories: Record<string, Partial<{ stars: number; contributors: number; versionTags: number; releases: number; closedIssues: number; mergedPullRequests: number }>>
 }>
 
 export const getGitHubStars = (url: string): number | undefined => {
@@ -32,9 +33,9 @@ export const getNpmDownloads = (packageName: string): number | undefined => {
   return downloadsMap[packageName]
 }
 
-// Get total stars across all plugins
+// Get total stars across unique Cap-go repositories
 export const getTotalStars = (): number => {
-  return Object.values(starsMap).reduce((sum, stars) => sum + stars, 0)
+  return githubStats.totalStars ?? 0
 }
 
 // Get total monthly downloads across all plugins
@@ -53,6 +54,15 @@ export const getGitHubCommunityStats = () => ({
   resolvedItemCount: githubStats.resolvedItemCount ?? 0,
   totalStars: githubStats.totalStars ?? 0,
 })
+
+// Per-repository GitHub stats for a plugin, keyed by its GitHub URL
+export const getPluginRepoStats = (url: string) => {
+  const match = url.match(/github\.com\/([^/]+\/[^/]+)/i)
+  if (!match) return undefined
+  const key = match[1].toLowerCase()
+  const entry = Object.entries(githubStats.repositories ?? {}).find(([repo]) => repo.toLowerCase() === key)
+  return entry?.[1]
+}
 
 // Enrich plugins with GitHub stars and npm downloads from pre-fetched data
 export const getPluginsWithStars = (plugins: Action[]): Plugin[] => {

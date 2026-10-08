@@ -41,10 +41,10 @@ Initialize the AppInsights SDK
 ```typescript
 import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
 
-await CapacitorAppInsights.init({} as {
-    partnerId: string; // Provided by our business unit
-    partnerKey: string; // Provided by our business unit
-  });
+await CapacitorAppInsights.init({
+  partnerId: 'partner-id-123',
+  partnerKey: 'partner-key-123',
+});
 ```
 
 ### `setUserId`
@@ -54,7 +54,7 @@ Set or update the user ID after initialization
 ```typescript
 import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
 
-await CapacitorAppInsights.setUserId({} as { userId: string });
+await CapacitorAppInsights.setUserId({ userId: 'user-id-123' });
 ```
 
 ### `getState`
@@ -64,7 +64,8 @@ Get the current state of the SDK
 ```typescript
 import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
 
-await CapacitorAppInsights.getState();
+const result = await CapacitorAppInsights.getState();
+console.log(result);
 ```
 
 ## Type Reference

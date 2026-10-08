@@ -43,7 +43,7 @@ import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsm
 
 const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
 const now = Date.now();
-const stats = await UsageStatsManager.queryAndAggregateUsageStats({
+const stats = await CapacitorUsageStatsManager.queryAndAggregateUsageStats({
   beginTime: oneDayAgo,
   endTime: now
 });
@@ -60,9 +60,9 @@ Checks if the usage stats permission is granted.
 ```typescript
 import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
 
-const { granted } = await UsageStatsManager.isUsageStatsPermissionGranted();
+const { granted } = await CapacitorUsageStatsManager.isUsageStatsPermissionGranted();
 if (!granted) {
-  await UsageStatsManager.openUsageStatsSettings();
+  await CapacitorUsageStatsManager.openUsageStatsSettings();
 }
 ```
 
@@ -75,7 +75,7 @@ This will always open the settings screen, even if the permission is already gra
 ```typescript
 import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
 
-await UsageStatsManager.openUsageStatsSettings();
+await CapacitorUsageStatsManager.openUsageStatsSettings();
 ```
 
 ### `queryAllPackages`
@@ -86,7 +86,7 @@ Requires the QUERY_ALL_PACKAGES permission.
 ```typescript
 import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
 
-const { packages } = await UsageStatsManager.queryAllPackages();
+const { packages } = await CapacitorUsageStatsManager.queryAllPackages();
 packages.forEach(pkg => {
   console.log(`${pkg.appName} (${pkg.packageName}): v${pkg.versionName}`);
 });

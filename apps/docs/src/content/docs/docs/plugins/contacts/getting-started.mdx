@@ -41,7 +41,8 @@ Count the total number of contacts on the device.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.countContacts();
+const result = await CapacitorContacts.countContacts();
+console.log(result);
 ```
 
 ### `createContact`
@@ -51,7 +52,8 @@ Create a new contact programmatically.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.createContact({} as CreateContactOptions);
+const result = await CapacitorContacts.createContact({ contact: {} });
+console.log(result);
 ```
 
 ### `createGroup`
@@ -61,7 +63,8 @@ Create a new contact group.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.createGroup({} as CreateGroupOptions);
+const result = await CapacitorContacts.createGroup({ group: { name: 'example' } });
+console.log(result);
 ```
 
 ### `deleteContactById`
@@ -71,7 +74,7 @@ Delete a contact by ID.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.deleteContactById({} as DeleteContactByIdOptions);
+await CapacitorContacts.deleteContactById({ id: 'id-123' });
 ```
 
 ### `deleteGroupById`
@@ -81,7 +84,7 @@ Delete a group by ID.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.deleteGroupById({} as DeleteGroupByIdOptions);
+await CapacitorContacts.deleteGroupById({ id: 'id-123' });
 ```
 
 ### `displayContactById`
@@ -91,7 +94,7 @@ Display a contact using the native contact viewer.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.displayContactById({} as DisplayContactByIdOptions);
+await CapacitorContacts.displayContactById({ id: 'id-123' });
 ```
 
 ### `displayCreateContact`
@@ -101,7 +104,8 @@ Display the native create contact UI.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.displayCreateContact();
+const result = await CapacitorContacts.displayCreateContact();
+console.log(result);
 ```
 
 ### `displayUpdateContactById`
@@ -111,7 +115,7 @@ Display the native update contact UI for a specific contact.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.displayUpdateContactById({} as DisplayUpdateContactByIdOptions);
+await CapacitorContacts.displayUpdateContactById({ id: 'id-123' });
 ```
 
 ### `getAccounts`
@@ -121,7 +125,8 @@ Get all accounts available on the device.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.getAccounts();
+const result = await CapacitorContacts.getAccounts();
+console.log(result);
 ```
 
 ### `getContactById`
@@ -131,7 +136,8 @@ Get a specific contact by ID.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.getContactById({} as GetContactByIdOptions);
+const result = await CapacitorContacts.getContactById({ id: 'id-123' });
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getContacts`
@@ -141,7 +147,8 @@ Get all contacts from the device.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.getContacts();
+const result = await CapacitorContacts.getContacts();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `getGroupById`
@@ -151,7 +158,8 @@ Get a specific group by ID.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.getGroupById({} as GetGroupByIdOptions);
+const result = await CapacitorContacts.getGroupById({ id: 'id-123' });
+console.log(result);
 ```
 
 ### `getGroups`
@@ -161,7 +169,8 @@ Get all contact groups.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.getGroups();
+const result = await CapacitorContacts.getGroups();
+console.log(result);
 ```
 
 ### `isAvailable`
@@ -171,7 +180,8 @@ Check if contacts are available on the device.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.isAvailable();
+const result = await CapacitorContacts.isAvailable();
+console.log(result);
 ```
 
 ### `isSupported`
@@ -181,7 +191,8 @@ Check if the plugin is supported on the current platform.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.isSupported();
+const result = await CapacitorContacts.isSupported();
+console.log(result);
 ```
 
 ### `openSettings`
@@ -201,7 +212,8 @@ Pick a single contact using the native contact picker.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.pickContact();
+const result = await CapacitorContacts.pickContact();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `pickContacts`
@@ -211,7 +223,8 @@ Pick one or more contacts using the native contact picker.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.pickContacts();
+const result = await CapacitorContacts.pickContacts();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `updateContactById`
@@ -221,7 +234,10 @@ Update an existing contact by ID.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.updateContactById({} as UpdateContactByIdOptions);
+await CapacitorContacts.updateContactById({
+  id: 'id-123',
+  contact: {},
+});
 ```
 
 ### `checkPermissions`
@@ -231,7 +247,8 @@ Check the current permission status for contacts.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.checkPermissions();
+const result = await CapacitorContacts.checkPermissions();
+console.log(result);
 ```
 
 ### `requestPermissions`
@@ -241,7 +258,8 @@ Request permissions to access contacts.
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-await CapacitorContacts.requestPermissions();
+const result = await CapacitorContacts.requestPermissions();
+console.log(result);
 ```
 
 ## Type Reference

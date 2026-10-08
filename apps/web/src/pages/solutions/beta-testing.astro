@@ -2,15 +2,120 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
-import HumanSupport from '@/components/HumanSupport.astro'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import SignupCta from '@/components/SignupCta.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
 
 const title = `${brand} | ${m.solutions_beta_testing_title({}, { locale })}`
 const description = m.solutions_beta_testing_description({}, { locale })
+
+const links = {
+  channels: { href: docs('live-updates/channels/'), label: m.solutions_beta_testing_link_channels({}, { locale }) },
+  setChannel: { href: docs('plugins/updater/api/'), label: m.solutions_beta_testing_link_set_channel({}, { locale }) },
+  devices: { href: docs('webapp/devices/'), label: m.solutions_beta_testing_link_devices({}, { locale }) },
+  qr: { href: docs('cli/reference/get-qr/'), label: m.solutions_beta_testing_link_qr({}, { locale }) },
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_beta_testing_link_compatibility({}, { locale }) },
+  notify: { href: docs('plugins/updater/notify-app-ready/'), label: m.solutions_beta_testing_link_notify({}, { locale }) },
+  nativeTesting: { href: docs('live-updates/testing-native-builds-without-live-updates/'), label: m.solutions_beta_testing_link_native_testing({}, { locale }) },
+  updateBehavior: { href: docs('live-updates/update-behavior/'), label: m.solutions_beta_testing_link_update_behavior({}, { locale }) },
+}
+
+const features = [
+  { title: m.solutions_beta_testing_feature1_title({}, { locale }), desc: m.solutions_beta_testing_feature1_desc({}, { locale }), link: links.setChannel },
+  { title: m.solutions_beta_testing_feature2_title({}, { locale }), desc: m.solutions_beta_testing_feature2_desc({}, { locale }), link: links.devices },
+  { title: m.solutions_beta_testing_feature3_title({}, { locale }), desc: m.solutions_beta_testing_feature3_desc({}, { locale }), link: links.qr },
+  { title: m.solutions_beta_testing_feature4_title({}, { locale }), desc: m.solutions_beta_testing_feature4_desc({}, { locale }), link: links.compatibility },
+]
+
+const featureIcons = [
+  'M4 6h16M4 10h16M4 14h16M4 18h16',
+  'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
+  'M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z',
+  'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+]
+
+const compareRows = [
+  {
+    label: m.solutions_beta_testing_compare_upload({}, { locale }),
+    tf: m.solutions_beta_testing_compare_upload_tf({}, { locale }),
+    capgo: m.solutions_beta_testing_compare_upload_capgo({}, { locale }),
+  },
+  {
+    label: m.solutions_beta_testing_compare_distribution({}, { locale }),
+    tf: m.solutions_beta_testing_compare_distribution_tf({}, { locale }),
+    capgo: m.solutions_beta_testing_compare_distribution_capgo({}, { locale }),
+  },
+  {
+    label: m.solutions_beta_testing_compare_switching({}, { locale }),
+    tf: m.solutions_beta_testing_compare_switching_tf({}, { locale }),
+    capgo: m.solutions_beta_testing_compare_switching_capgo({}, { locale }),
+  },
+  {
+    label: m.solutions_beta_testing_compare_native({}, { locale }),
+    tf: m.solutions_beta_testing_compare_native_tf({}, { locale }),
+    capgo: m.solutions_beta_testing_compare_native_capgo({}, { locale }),
+  },
+]
+
+const howSteps = [
+  {
+    title: m.solutions_beta_testing_how1_title({}, { locale }),
+    body: m.solutions_beta_testing_how1_body({}, { locale }),
+    code: 'npx @capgo/cli@latest channel add beta com.example.app --self-assign',
+    href: links.channels.href,
+    linkLabel: links.channels.label,
+  },
+  {
+    title: m.solutions_beta_testing_how2_title({}, { locale }),
+    body: m.solutions_beta_testing_how2_body({}, { locale }),
+    code: `import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+// Join beta and check for its bundle now
+await CapacitorUpdater.setChannel({ channel: 'beta', triggerAutoUpdate: true })
+
+// Leave beta and go back to the default channel
+await CapacitorUpdater.unsetChannel({ triggerAutoUpdate: true })`,
+    href: links.setChannel.href,
+    linkLabel: links.setChannel.label,
+  },
+  {
+    title: m.solutions_beta_testing_how3_title({}, { locale }),
+    body: m.solutions_beta_testing_how3_body({}, { locale }),
+    code: `# once
+npx @capgo/cli@latest app set com.example.app --preview
+# every change
+npx @capgo/cli@latest bundle upload --channel beta --qr-preview`,
+    href: links.qr.href,
+    linkLabel: links.qr.label,
+  },
+  {
+    title: m.solutions_beta_testing_how4_title({}, { locale }),
+    body: m.solutions_beta_testing_how4_body({}, { locale }),
+    code: `npx @capgo/cli@latest channel set production com.example.app \\
+  --bundle 1.4.2
+# or roll it out to 10% of production first
+npx @capgo/cli@latest channel set production com.example.app \\
+  --rollout-bundle 1.4.2 --rollout-percentage 10 --rollout-enable`,
+    href: docs('live-updates/progressive-rollouts/'),
+    linkLabel: m.solutions_beta_testing_link_rollouts({}, { locale }),
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_beta_testing_faq1_q({}, { locale }), answer: m.solutions_beta_testing_faq1_a({}, { locale }), ...links.compatibility },
+  { question: m.solutions_beta_testing_faq2_q({}, { locale }), answer: m.solutions_beta_testing_faq2_a({}, { locale }), ...links.setChannel },
+  { question: m.solutions_beta_testing_faq3_q({}, { locale }), answer: m.solutions_beta_testing_faq3_a({}, { locale }), ...links.devices },
+  { question: m.solutions_beta_testing_faq4_q({}, { locale }), answer: m.solutions_beta_testing_faq4_a({}, { locale }), ...links.nativeTesting },
+  { question: m.solutions_beta_testing_faq5_q({}, { locale }), answer: m.solutions_beta_testing_faq5_a({}, { locale }), ...links.notify },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -22,6 +127,7 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = { title, description, ldJSON }
@@ -31,27 +137,24 @@ const content = { title, description, ldJSON }
   <div class="product-hero">
     <!-- Hero Section -->
     <section class="relative py-16 sm:py-20 lg:py-28">
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
-        {
-          Array.from({ length: 15 }).map((_, i) => (
-            <div
-              id={`${i}`}
-              class="absolute h-2 w-2 animate-pulse rounded-full bg-amber-500 opacity-20"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-              }}
-            />
-          ))
-        }
+      <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        {Array.from({ length: 15 }).map(() => (
+          <div
+            class="absolute h-2 w-2 animate-pulse rounded-full bg-amber-500 opacity-20"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
       </div>
 
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <p class="inline-flex rounded-full border border-amber-400/40 bg-amber-500/10 px-4 py-2 text-sm font-medium text-amber-100">
-            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -61,206 +164,113 @@ const content = { title, description, ldJSON }
             </svg>
             {m.solutions_beta_testing({}, { locale })}
           </p>
-          <h1 class="mt-6 text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            {m.solutions_beta_testing_hero_title({}, { locale })}
-          </h1>
-          <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-gray-300">
-            {m.solutions_beta_testing_hero_subtitle({}, { locale })}
-          </p>
+          <h1 class="mt-6 text-4xl leading-tight font-bold text-balance text-white sm:text-5xl lg:text-6xl">{m.solutions_beta_testing_hero_title({}, { locale })}</h1>
+          <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-pretty text-gray-300">{m.solutions_beta_testing_hero_subtitle({}, { locale })}</p>
 
-          <HumanSupport class="mt-8" size="sm" />
-          <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href={getRelativeLocaleUrl(locale, 'register')}
-              class="rounded-xl bg-amber-600 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-amber-700 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-            >
-              {m.solutions_get_started({}, { locale })}
-            </a>
-            <a
-              href={getRelativeLocaleUrl(locale, 'docs/plugins/updater/api/')}
-              class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
-            >
-              {m.solutions_view_docs({}, { locale })}
-            </a>
-          </div>
+          <SignupCta class="mt-10" />
         </div>
       </div>
     </section>
 
     <!-- Features Grid -->
-    <section class="bg-gray-800 py-16 sm:py-20">
+    <section id="beta-features" class="bg-gray-800 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-amber-500/50">
-            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-amber-500/15 ring-1 ring-amber-300/40">
-              <svg class="h-7 w-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-              </svg>
+          {features.map((feature, index) => (
+            <div class="flex flex-col rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-amber-500/50">
+              <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-amber-500/15 ring-1 ring-amber-300/40">
+                <svg class="h-7 w-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={featureIcons[index]} />
+                </svg>
+              </div>
+              <h2 class="mb-3 text-xl font-bold text-white">{feature.title}</h2>
+              <p class="leading-relaxed text-gray-400">{feature.desc}</p>
+              <a
+                href={feature.link.href}
+                class="mt-auto inline-flex pt-5 text-sm font-semibold text-amber-400 hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400"
+              >
+                {feature.link.label}
+              </a>
             </div>
-            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_beta_testing_feature1_title({}, { locale })}</h3>
-            <p class="leading-relaxed text-gray-400">{m.solutions_beta_testing_feature1_desc({}, { locale })}</p>
-          </div>
-
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-amber-500/50">
-            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-amber-500/15 ring-1 ring-amber-300/40">
-              <svg class="h-7 w-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
-              </svg>
-            </div>
-            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_beta_testing_feature2_title({}, { locale })}</h3>
-            <p class="leading-relaxed text-gray-400">{m.solutions_beta_testing_feature2_desc({}, { locale })}</p>
-          </div>
-
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-amber-500/50">
-            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-amber-500/15 ring-1 ring-amber-300/40">
-              <svg class="h-7 w-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_beta_testing_feature3_title({}, { locale })}</h3>
-            <p class="leading-relaxed text-gray-400">{m.solutions_beta_testing_feature3_desc({}, { locale })}</p>
-          </div>
-
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 transition-all duration-300 hover:border-amber-500/50">
-            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-amber-500/15 ring-1 ring-amber-300/40">
-              <svg class="h-7 w-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-            </div>
-            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_beta_testing_feature4_title({}, { locale })}</h3>
-            <p class="leading-relaxed text-gray-400">{m.solutions_beta_testing_feature4_desc({}, { locale })}</p>
-          </div>
+          ))}
         </div>
       </div>
     </section>
 
     <!-- Comparison Table -->
-    <section class="bg-gray-900 py-16 sm:py-20">
+    <section id="beta-compare" class="bg-gray-900 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mb-16 text-center">
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_beta_testing_compare_title({}, { locale })}</h2>
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-bold text-balance text-white sm:text-4xl">{m.solutions_beta_testing_compare_title({}, { locale })}</h2>
         </div>
 
-        <div class="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-gray-700 bg-gray-800">
-          <table class="w-full">
+        <ul class="mx-auto max-w-4xl space-y-4 sm:hidden">
+          {compareRows.map((row) => (
+            <li class="rounded-2xl border border-gray-700 bg-gray-800 p-5">
+              <h3 class="text-base font-semibold text-white">{row.label}</h3>
+              <dl class="mt-3 space-y-3 text-sm">
+                <div>
+                  <dt class="font-medium text-gray-400">{m.solutions_beta_testing_compare_testflight({}, { locale })}</dt>
+                  <dd class="mt-1 text-gray-300">{row.tf}</dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-amber-400">{m.solutions_beta_testing_compare_capgo({}, { locale })}</dt>
+                  <dd class="mt-1 text-amber-100">{row.capgo}</dd>
+                </div>
+              </dl>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mx-auto hidden max-w-4xl overflow-hidden rounded-2xl border border-gray-700 bg-gray-800 sm:block">
+          <table class="w-full text-base">
             <thead>
               <tr class="border-b border-gray-700">
-                <th class="px-6 py-4 text-left text-gray-300"></th>
-                <th class="px-6 py-4 text-center text-gray-400">{m.solutions_beta_testing_compare_testflight({}, { locale })}</th>
-                <th class="px-6 py-4 text-center text-amber-400">{m.solutions_beta_testing_compare_capgo({}, { locale })}</th>
+                <th scope="col" class="px-6 py-4 text-left text-gray-300">
+                  <span class="sr-only">{m.solutions_beta_testing_compare_task({}, { locale })}</span>
+                </th>
+                <th scope="col" class="px-6 py-4 text-left text-gray-400">
+                  {m.solutions_beta_testing_compare_testflight({}, { locale })}
+                </th>
+                <th scope="col" class="px-6 py-4 text-left text-amber-400">
+                  {m.solutions_beta_testing_compare_capgo({}, { locale })}
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-700">
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{m.solutions_beta_testing_compare_upload({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-gray-500">{m.solutions_beta_testing_compare_upload_tf({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-amber-400">{m.solutions_beta_testing_compare_upload_capgo({}, { locale })}</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{m.solutions_beta_testing_compare_distribution({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-gray-500">{m.solutions_beta_testing_compare_distribution_tf({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-amber-400">{m.solutions_beta_testing_compare_distribution_capgo({}, { locale })}</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{m.solutions_beta_testing_compare_switching({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-gray-500">{m.solutions_beta_testing_compare_switching_tf({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-amber-400">{m.solutions_beta_testing_compare_switching_capgo({}, { locale })}</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{m.solutions_beta_testing_compare_feedback({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-gray-500">{m.solutions_beta_testing_compare_feedback_tf({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-amber-400">{m.solutions_beta_testing_compare_feedback_capgo({}, { locale })}</td>
-              </tr>
+              {compareRows.map((row) => (
+                <tr>
+                  <th scope="row" class="px-6 py-4 text-left font-medium text-gray-200">
+                    {row.label}
+                  </th>
+                  <td class="px-6 py-4 text-gray-400">{row.tf}</td>
+                  <td class="px-6 py-4 text-amber-200">{row.capgo}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
+        <p class="mx-auto mt-6 max-w-3xl text-center text-sm text-pretty text-gray-400">
+          {m.solutions_beta_testing_compare_note({}, { locale })}
+          <a href={links.compatibility.href} class="ml-1 font-semibold text-amber-400 hover:text-white hover:underline">
+            {links.compatibility.label}
+          </a>
+        </p>
       </div>
     </section>
 
-    <!-- Code Example -->
-    <section class="bg-gray-800 py-16 sm:py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <h2 class="text-3xl font-bold text-white sm:text-4xl">Build an In-App Channel Selector</h2>
-            <p class="mt-6 text-lg leading-relaxed text-gray-300">
-              Give your testers the power to switch between builds directly in your app. A simple UI lists available channels - testers tap to switch and the new build downloads
-              immediately.
-            </p>
-            <ul class="mt-8 space-y-4">
-              <li class="flex items-center gap-3">
-                <svg class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-300">List all available channels with one API call</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-300">Switch channels programmatically</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-300">Download happens automatically</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-300">App reloads with the new build</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-6">
-            <div class="mb-4 flex items-center gap-2">
-              <div class="h-3 w-3 rounded-full bg-gray-500"></div>
-              <div class="h-3 w-3 rounded-full bg-gray-500"></div>
-              <div class="h-3 w-3 rounded-full bg-gray-500"></div>
-              <span class="ml-2 text-sm text-gray-500">ChannelSelector.tsx</span>
-            </div>
-            <pre
-              class="overflow-x-auto text-sm text-gray-300"><code>import {'{'} CapacitorUpdater {'}'} from '@capgo/capacitor-updater'
-
-<span class="text-gray-500">// Get available channels</span>
-const channels = await CapacitorUpdater.getChannels()
-
-<span class="text-gray-500">// Switch to a different channel</span>
-async function switchChannel(channelName: string) {'{'}
-  await CapacitorUpdater.setChannel({'{'}
-    channel: channelName
-  {'}'})
-
-  <span class="text-gray-500">// Download will start automatically</span>
-  <span class="text-gray-500">// App reloads when ready</span>
-{'}'}
-
-<span class="text-gray-500">// Handle deep link to auto-switch</span>
-App.addListener('appUrlOpen', async (data) => {'{'}
-  const channel = extractChannel(data.url)
-  if (channel) {'{'}
-    await switchChannel(channel)
-  {'}'}
-{'}'})</code></pre>
-          </div>
-        </div>
-      </div>
-    </section>
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_beta_testing_how_title({}, { locale })}
+      description={m.solutions_beta_testing_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.channels, links.setChannel, links.devices, links.qr, links.updateBehavior, links.nativeTesting, links.notify]}
+      class="bg-gray-800"
+    />
 
     <!-- Use Cases -->
-    <section class="bg-gray-900 py-16 sm:py-20">
+    <section id="beta-use-cases" class="bg-gray-900 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-16 text-center">
           <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_beta_testing_usecases_title({}, { locale })}</h2>
@@ -269,7 +279,7 @@ App.addListener('appUrlOpen', async (data) => {'{'}
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-500/15">
-              <svg class="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -284,7 +294,7 @@ App.addListener('appUrlOpen', async (data) => {'{'}
 
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-purple-500/15">
-              <svg class="h-7 w-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-7 w-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -299,7 +309,7 @@ App.addListener('appUrlOpen', async (data) => {'{'}
 
           <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
             <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-500/15">
-              <svg class="h-7 w-7 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-7 w-7 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -315,9 +325,20 @@ App.addListener('appUrlOpen', async (data) => {'{'}
       </div>
     </section>
 
-    <!-- CTA Section -->
-
     <SolutionAppExample solution="beta-testing" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['beta-testing']}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_beta_testing_faq_title({}, { locale })}
+      description={m.solutions_beta_testing_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- CTA Section -->
     <section class="bg-gray-900 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-amber-600 to-amber-800 px-8 py-16 sm:px-16">
@@ -330,21 +351,7 @@ App.addListener('appUrlOpen', async (data) => {'{'}
           <div class="relative text-center">
             <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_beta_testing_cta_title({}, { locale })}</h2>
             <p class="mx-auto mt-4 max-w-2xl text-lg text-amber-100">{m.solutions_beta_testing_cta_subtitle({}, { locale })}</p>
-            <HumanSupport class="mt-6" size="sm" />
-            <div class="mt-4 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a
-                href={getRelativeLocaleUrl(locale, 'register')}
-                class="rounded-xl bg-white px-8 py-4 text-base font-semibold text-amber-600 transition-all duration-200 hover:bg-gray-100"
-              >
-                {m.solutions_get_started({}, { locale })}
-              </a>
-              <a
-                href={getRelativeLocaleUrl(locale, 'pricing')}
-                class="rounded-xl border border-white/30 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-white/10"
-              >
-                {m.pricing({}, { locale })}
-              </a>
-            </div>
+            <SignupCta humanSupport class="mt-8" />
           </div>
         </div>
       </div>

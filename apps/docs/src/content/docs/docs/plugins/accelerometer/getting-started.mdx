@@ -41,7 +41,8 @@ Get the most recent accelerometer sample that was recorded by the native layer.
 ```typescript
 import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 
-await CapacitorAccelerometer.getMeasurement();
+const result = await CapacitorAccelerometer.getMeasurement();
+console.log(result);
 ```
 
 ### `isAvailable`
@@ -51,7 +52,8 @@ Check if the current device includes an accelerometer sensor.
 ```typescript
 import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 
-await CapacitorAccelerometer.isAvailable();
+const result = await CapacitorAccelerometer.isAvailable();
+console.log(result);
 ```
 
 ### `startMeasurementUpdates`
@@ -85,7 +87,8 @@ On platforms without explicit permissions this resolves to `granted`.
 ```typescript
 import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 
-await CapacitorAccelerometer.checkPermissions();
+const result = await CapacitorAccelerometer.checkPermissions();
+console.log(result);
 ```
 
 ### `requestPermissions`
@@ -95,7 +98,8 @@ Request permission to access motion data if supported by the platform.
 ```typescript
 import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 
-await CapacitorAccelerometer.requestPermissions();
+const result = await CapacitorAccelerometer.requestPermissions();
+console.log(result);
 ```
 
 ## Type Reference

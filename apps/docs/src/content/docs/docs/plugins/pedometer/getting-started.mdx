@@ -41,7 +41,8 @@ Get pedometer measurements for a specified time range.
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 
-await CapacitorPedometer.getMeasurement();
+const result = await CapacitorPedometer.getMeasurement();
+console.log(result);
 ```
 
 ### `isAvailable`
@@ -51,7 +52,8 @@ Check which pedometer features are available on this device.
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 
-await CapacitorPedometer.isAvailable();
+const result = await CapacitorPedometer.isAvailable();
+console.log(result);
 ```
 
 ### `startMeasurementUpdates`
@@ -86,7 +88,8 @@ On **iOS**, this checks the motion usage permission.
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 
-await CapacitorPedometer.checkPermissions();
+const result = await CapacitorPedometer.checkPermissions();
+console.log(result);
 ```
 
 ### `requestPermissions`
@@ -99,7 +102,8 @@ On **iOS**, this requests motion usage permission.
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 
-await CapacitorPedometer.requestPermissions();
+const result = await CapacitorPedometer.requestPermissions();
+console.log(result);
 ```
 
 ## Type Reference

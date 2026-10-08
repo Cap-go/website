@@ -41,7 +41,8 @@ Returns the active native configuration visible to the plugin.
 ```typescript
 import { SSLPinning } from '@capgo/capacitor-ssl-pinning';
 
-await SSLPinning.getConfiguration();
+const result = await SSLPinning.getConfiguration();
+console.log(result);
 ```
 
 ## Type Reference

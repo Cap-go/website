@@ -12,13 +12,23 @@ bun add @capgo/capacitor-android-inline-install
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
-- `startInlineInstall` - Start an inline install flow using the Google Play overlay.
+## Import
 
-## Example Usage
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+```
 
-### `startInlineInstall`
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `startInlineInstall` | Start an inline install flow using the Google Play overlay. |
+
+## Examples
+
+### `startInlineInstall()`
 
 Start an inline install flow using the Google Play overlay.
 
@@ -40,10 +50,11 @@ if (result.started) {
 }
 ```
 
-## Full Reference
+## Full reference
 
-- GitHub: https://github.com/Cap-go/capacitor-android-inline-install/
-- Docs: /docs/plugins/android-inline-install/
+- [GitHub repository](https://github.com/Cap-go/capacitor-android-inline-install/)
+- [Documentation](/docs/plugins/android-inline-install/)
+- [API reference](/docs/plugins/android-inline-install/getting-started/)
 
 ## Keep going from Using @capgo/capacitor-android-inline-install
 

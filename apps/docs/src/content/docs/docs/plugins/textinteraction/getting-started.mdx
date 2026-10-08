@@ -46,7 +46,8 @@ iOS only.
 ```typescript
 import { TextInteraction } from '@capgo/capacitor-textinteraction';
 
-await TextInteraction.toggle({} as TextInteractionOptions);
+const result = await TextInteraction.toggle({ enabled: true });
+console.log(result);
 ```
 
 ## Type Reference

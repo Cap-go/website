@@ -41,7 +41,8 @@ Get the current App Check token.
 ```typescript
 import { FirebaseAppCheck } from '@capgo/capacitor-firebase-app-check';
 
-await FirebaseAppCheck.getToken();
+const result = await FirebaseAppCheck.getToken();
+// The result holds sensitive values: use it without logging it.
 ```
 
 ### `initialize`
@@ -62,7 +63,7 @@ Set whether the App Check token should be refreshed automatically or not.
 ```typescript
 import { FirebaseAppCheck } from '@capgo/capacitor-firebase-app-check';
 
-await FirebaseAppCheck.setTokenAutoRefreshEnabled({} as SetTokenAutoRefreshEnabledOptions);
+await FirebaseAppCheck.setTokenAutoRefreshEnabled({ enabled: true });
 ```
 
 ## Type Reference

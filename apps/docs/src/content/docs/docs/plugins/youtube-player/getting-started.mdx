@@ -78,7 +78,8 @@ Destroy a player instance and free resources.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.destroy({} as PlayerIdOptions);
+const result = await YoutubePlayer.destroy({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `stopVideo`
@@ -89,7 +90,8 @@ Use this sparingly - pauseVideo() is usually preferred.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.stopVideo({} as PlayerIdOptions);
+const result = await YoutubePlayer.stopVideo({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `playVideo`
@@ -100,7 +102,8 @@ Final player state will be PLAYING (1).
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.playVideo({} as PlayerIdOptions);
+const result = await YoutubePlayer.playVideo({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `pauseVideo`
@@ -111,7 +114,8 @@ Final player state will be PAUSED (2), unless already ENDED (0).
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.pauseVideo({} as PlayerIdOptions);
+const result = await YoutubePlayer.pauseVideo({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `seekTo`
@@ -122,7 +126,12 @@ If player is paused, it remains paused. If playing, continues playing.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.seekTo({} as SeekToOptions);
+const result = await YoutubePlayer.seekTo({
+  playerId: 'player-id-123',
+  seconds: 10,
+  allowSeekAhead: true,
+});
+console.log(result);
 ```
 
 ### `loadVideoById`
@@ -132,7 +141,11 @@ Load and play a video by its YouTube ID.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.loadVideoById({} as VideoByIdMethodOptions);
+const result = await YoutubePlayer.loadVideoById({
+  playerId: 'player-id-123',
+  options: { videoId: 'video-id-123' },
+});
+console.log(result);
 ```
 
 ### `cueVideoById`
@@ -143,7 +156,11 @@ Loads thumbnail and prepares player, but doesn't request video until playVideo()
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.cueVideoById({} as VideoByIdMethodOptions);
+const result = await YoutubePlayer.cueVideoById({
+  playerId: 'player-id-123',
+  options: { videoId: 'video-id-123' },
+});
+console.log(result);
 ```
 
 ### `loadVideoByUrl`
@@ -153,7 +170,11 @@ Load and play a video by its full URL.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.loadVideoByUrl({} as VideoByUrlMethodOptions);
+const result = await YoutubePlayer.loadVideoByUrl({
+  playerId: 'player-id-123',
+  options: { mediaContentUrl: 'https://example.com' },
+});
+console.log(result);
 ```
 
 ### `cueVideoByUrl`
@@ -163,7 +184,11 @@ Cue a video by URL without playing it.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.cueVideoByUrl({} as VideoByUrlMethodOptions);
+const result = await YoutubePlayer.cueVideoByUrl({
+  playerId: 'player-id-123',
+  options: { mediaContentUrl: 'https://example.com' },
+});
+console.log(result);
 ```
 
 ### `cuePlaylist`
@@ -174,7 +199,11 @@ Loads playlist and prepares first video.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.cuePlaylist({} as PlaylistMethodOptions);
+const result = await YoutubePlayer.cuePlaylist({
+  playerId: 'player-id-123',
+  playlistOptions: { listType: 'playlist' },
+});
+console.log(result);
 ```
 
 ### `loadPlaylist`
@@ -184,7 +213,11 @@ Load and play a playlist.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.loadPlaylist({} as PlaylistMethodOptions);
+const result = await YoutubePlayer.loadPlaylist({
+  playerId: 'player-id-123',
+  playlistOptions: { listType: 'playlist' },
+});
+console.log(result);
 ```
 
 ### `nextVideo`
@@ -194,7 +227,8 @@ Play the next video in the playlist.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.nextVideo({} as PlayerIdOptions);
+const result = await YoutubePlayer.nextVideo({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `previousVideo`
@@ -204,7 +238,8 @@ Play the previous video in the playlist.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.previousVideo({} as PlayerIdOptions);
+const result = await YoutubePlayer.previousVideo({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `playVideoAt`
@@ -214,7 +249,11 @@ Play a specific video in the playlist by index.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.playVideoAt({} as PlayVideoAtOptions);
+const result = await YoutubePlayer.playVideoAt({
+  playerId: 'player-id-123',
+  index: 1,
+});
+console.log(result);
 ```
 
 ### `mute`
@@ -224,7 +263,8 @@ Mute the player audio.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.mute({} as PlayerIdOptions);
+const result = await YoutubePlayer.mute({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `unMute`
@@ -234,7 +274,8 @@ Unmute the player audio.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.unMute({} as PlayerIdOptions);
+const result = await YoutubePlayer.unMute({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `isMuted`
@@ -244,7 +285,8 @@ Check if the player is currently muted.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.isMuted({} as PlayerIdOptions);
+const result = await YoutubePlayer.isMuted({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `setVolume`
@@ -254,7 +296,11 @@ Set the player volume level.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.setVolume({} as SetVolumeOptions);
+const result = await YoutubePlayer.setVolume({
+  playerId: 'player-id-123',
+  volume: 0.5,
+});
+console.log(result);
 ```
 
 ### `getVolume`
@@ -265,7 +311,8 @@ Returns volume even if player is muted.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getVolume({} as PlayerIdOptions);
+const result = await YoutubePlayer.getVolume({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `setSize`
@@ -275,7 +322,12 @@ Set the player dimensions in pixels.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.setSize({} as SetSizeOptions);
+const result = await YoutubePlayer.setSize({
+  playerId: 'player-id-123',
+  width: 1080,
+  height: 1920,
+});
+console.log(result);
 ```
 
 ### `getPlaybackRate`
@@ -285,7 +337,8 @@ Get the current playback rate.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getPlaybackRate({} as PlayerIdOptions);
+const result = await YoutubePlayer.getPlaybackRate({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `setPlaybackRate`
@@ -295,7 +348,11 @@ Set the playback speed.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.setPlaybackRate({} as SetPlaybackRateOptions);
+const result = await YoutubePlayer.setPlaybackRate({
+  playerId: 'player-id-123',
+  suggestedRate: 1,
+});
+console.log(result);
 ```
 
 ### `getAvailablePlaybackRates`
@@ -305,7 +362,8 @@ Get list of available playback rates for current video.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getAvailablePlaybackRates({} as PlayerIdOptions);
+const result = await YoutubePlayer.getAvailablePlaybackRates({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `setLoop`
@@ -316,7 +374,11 @@ When enabled, playlist will restart from beginning after last video.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.setLoop({} as SetLoopOptions);
+const result = await YoutubePlayer.setLoop({
+  playerId: 'player-id-123',
+  loopPlaylists: true,
+});
+console.log(result);
 ```
 
 ### `setShuffle`
@@ -326,7 +388,11 @@ Enable or disable playlist shuffle.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.setShuffle({} as SetShuffleOptions);
+const result = await YoutubePlayer.setShuffle({
+  playerId: 'player-id-123',
+  shufflePlaylist: true,
+});
+console.log(result);
 ```
 
 ### `getVideoLoadedFraction`
@@ -337,7 +403,8 @@ More reliable than deprecated getVideoBytesLoaded/getVideoBytesTotal.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getVideoLoadedFraction({} as PlayerIdOptions);
+const result = await YoutubePlayer.getVideoLoadedFraction({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `getPlayerState`
@@ -347,7 +414,8 @@ Get the current state of the player.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getPlayerState({} as PlayerIdOptions);
+const result = await YoutubePlayer.getPlayerState({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `getAllPlayersEventsState`
@@ -358,7 +426,8 @@ Useful for tracking multiple player instances.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getAllPlayersEventsState();
+const result = await YoutubePlayer.getAllPlayersEventsState();
+console.log(result);
 ```
 
 ### `getCurrentTime`
@@ -368,7 +437,8 @@ Get the current playback position in seconds.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getCurrentTime({} as PlayerIdOptions);
+const result = await YoutubePlayer.getCurrentTime({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `toggleFullScreen`
@@ -378,7 +448,11 @@ Toggle fullscreen mode on or off.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.toggleFullScreen({} as ToggleFullScreenOptions);
+const result = await YoutubePlayer.toggleFullScreen({
+  playerId: 'player-id-123',
+  isFullScreen: true,
+});
+console.log(result);
 ```
 
 ### `getPlaybackQuality`
@@ -388,7 +462,8 @@ Get the current playback quality.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getPlaybackQuality({} as PlayerIdOptions);
+const result = await YoutubePlayer.getPlaybackQuality({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `setPlaybackQuality`
@@ -397,9 +472,13 @@ Set the suggested playback quality.
 Actual quality may differ based on network conditions.
 
 ```typescript
-import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+import { YoutubePlayer, IPlaybackQuality } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.setPlaybackQuality({} as SetPlaybackQualityOptions);
+const result = await YoutubePlayer.setPlaybackQuality({
+  playerId: 'player-id-123',
+  suggestedQuality: IPlaybackQuality.SMALL,
+});
+console.log(result);
 ```
 
 ### `getAvailableQualityLevels`
@@ -409,7 +488,8 @@ Get list of available quality levels for current video.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getAvailableQualityLevels({} as PlayerIdOptions);
+const result = await YoutubePlayer.getAvailableQualityLevels({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `getDuration`
@@ -419,7 +499,8 @@ Get the duration of the current video in seconds.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getDuration({} as PlayerIdOptions);
+const result = await YoutubePlayer.getDuration({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `getVideoUrl`
@@ -429,7 +510,8 @@ Get the YouTube.com URL for the current video.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getVideoUrl({} as PlayerIdOptions);
+const result = await YoutubePlayer.getVideoUrl({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `getVideoEmbedCode`
@@ -440,7 +522,8 @@ Returns HTML iframe embed code.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getVideoEmbedCode({} as PlayerIdOptions);
+const result = await YoutubePlayer.getVideoEmbedCode({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `getPlaylist`
@@ -450,7 +533,8 @@ Get array of video IDs in the current playlist.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getPlaylist({} as PlayerIdOptions);
+const result = await YoutubePlayer.getPlaylist({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `getPlaylistIndex`
@@ -460,7 +544,8 @@ Get the index of the currently playing video in the playlist.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getPlaylistIndex({} as PlayerIdOptions);
+const result = await YoutubePlayer.getPlaylistIndex({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `getIframe`
@@ -471,7 +556,8 @@ Web platform only.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.getIframe({} as PlayerIdOptions);
+const result = await YoutubePlayer.getIframe({ playerId: 'player-id-123' });
+console.log(result);
 ```
 
 ### `addEventListener`
@@ -499,7 +585,13 @@ Web platform only.
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-await YoutubePlayer.removeEventListener({} as PlayerEventListenerOptions<TEvent>);
+await YoutubePlayer.removeEventListener({
+  playerId: 'player-id-123',
+  eventName: 'onReady',
+  listener: (event) => {
+    console.log(event);
+  },
+});
 ```
 
 ## Type Reference
