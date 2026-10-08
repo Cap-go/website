@@ -6027,7 +6027,7 @@ const messages = {
   website_live_pricing_no_bandwidth: 'No bandwidth billing',
   website_live_pricing_switch: 'Need more later? Switch to a full plan from your app settings.',
   website_live_pricing_unlimited_updates: 'Unlimited updates',
-  website_live_pricing_title: 'Update your app from your own website for $12/month',
+  website_live_pricing_title: 'Update your app straight from your own website',
   website_live_requirement_body:
     'Your website must be a static client build, the same files Capacitor packages into the app. A Vite build output or a static export works. Server-rendered pages, like Next.js server routes, do not.',
   website_live_requirement_title: 'One requirement',
