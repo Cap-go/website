@@ -53,36 +53,27 @@
     defaults: '2025-11-30',
     person_profiles: 'always',
     capture_pageview: false,
-    // Cloudflare owns this assignment; avoid a second independent flag evaluation.
+    // The Cloudflare version split owns assignment; avoid a second independent flag evaluation.
     advanced_disable_feature_flags: true,
     loaded: function (ph) {
       // Attribution for README / docs links (?ref=plugin_xxx): stick to every later event, incl. user_signed_up.
       const ref = (window.location.search || '').match(/[?&]ref=([^&#]+)/)?.[1]
       if (ref) ph.register_once({ ref })
+      // Branch A/B test (docs/abtest.md): the Worker version that served this page tags it.
       const read = (name) => document.querySelector('meta[name="' + name + '"]')?.content
-      const experiment = read('website-design-experiment')
-      const variant = read('website-design-variant')
-      const visitor = read('website-design-visitor')
-      const issuedAt = Number(read('website-design-issued-at'))
-      const properties = {}
-      if (
-        window.location.hostname === 'capgo.app' &&
-        experiment === 'website-design-v1' &&
-        visitor &&
-        Number.isFinite(issuedAt) &&
-        issuedAt > 0 &&
-        (variant === 'control' || variant === 'test')
-      ) {
-        properties.website_design_experiment = experiment
-        properties.website_design_variant = variant
-        properties.website_design_visitor_id = visitor
-        properties.website_design_issued_at = issuedAt
-        properties['$feature/' + experiment] = variant
-        ph.register(properties)
-        ph.capture('$pageview', { ...properties, website_design_page_exposed: true })
-        return
+      const flag = read('capgo-ab-flag')
+      const variant = read('capgo-ab-variant')
+      if (flag && variant) {
+        ph.register({ ['$feature/' + flag]: variant })
+        const exposedKey = 'capgo_ab_exposed:' + flag + ':' + variant
+        let exposed = false
+        try {
+          exposed = sessionStorage.getItem(exposedKey) === '1'
+          sessionStorage.setItem(exposedKey, '1')
+        } catch {}
+        if (!exposed) ph.capture('$feature_flag_called', { $feature_flag: flag, $feature_flag_response: variant })
       }
-      ph.capture('$pageview', properties)
+      ph.capture('$pageview')
     },
   })
 </script>
