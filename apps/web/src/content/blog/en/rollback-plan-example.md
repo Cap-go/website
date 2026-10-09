@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-09T08:14:22.292Z
-updated_at: 2026-10-09T08:14:23.988Z
+updated_at: 2026-10-09T08:17:49.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/a4907269-9ae8-44f7-8a4b-3b93e36ebe9a/rollback-plan-example-capacitor-apps.jpg'
 head_image_alt: 'Rollback Plan Example: 7 Playbooks for Capacitor Apps'
 keywords: 'rollback plan example, Capacitor rollback, Electron app updates, live update rollback, mobile app rollback'
