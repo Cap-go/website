@@ -3,6 +3,7 @@ import m from '@/copy/messages'
 import transparency from '@/data/transparency.json'
 import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
+import { GITHUB_RELEASES_PATH } from '@/lib/publicGithubReleases'
 import { getGitHubCommunityStats } from '@/services/github'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { formatMetricPercent, sparklinePaths } from '@/lib/transparencyMetrics'
@@ -16,6 +17,7 @@ const repoLabels: Record<string, string> = {
   'Cap-go/CLI': m.transparency_repo_cli({}, { locale }),
   'Cap-go/capacitor-updater': m.transparency_repo_updater({}, { locale }),
 }
+// Build-time snapshot; the client replaces it with the worker's daily-cached GitHub feed.
 const releases = transparency.releases.map((release) => ({
   label: release.tag.startsWith('cli-') ? repoLabels['Cap-go/CLI'] : (repoLabels[release.repo] ?? release.repo),
   version: `v${release.tag.replace(/^[a-z-]+-(?=\d)/i, '')}`,
@@ -79,6 +81,9 @@ const smallCards = [
   data-transparency
   data-live-endpoint={LIVE_UPDATE_METRICS_PATH}
   data-builder-endpoint={BUILDER_METRICS_PATH}
+  data-releases-endpoint={GITHUB_RELEASES_PATH}
+  data-release-labels={JSON.stringify(repoLabels)}
+  data-locale={locale}
   data-updated-template={m.transparency_metrics_updated({}, { locale })}
   data-unavailable={m.transparency_metrics_unavailable({}, { locale })}
   data-snapshot={JSON.stringify(snapshot)}
@@ -133,7 +138,7 @@ const smallCards = [
 
       <article class="flex flex-col rounded-3xl border border-white/10 bg-linear-to-b from-[#44BCFF]/[0.07] to-white/[0.02] p-6 sm:p-8">
         <h3 class="text-xl font-semibold text-white sm:text-2xl">{m.transparency_shipped_title({}, { locale })}</h3>
-        <ol class="mt-6 flex-1 rounded-2xl border border-white/10 bg-black/20 p-5">
+        <ol class="mt-6 flex-1 rounded-2xl border border-white/10 bg-black/20 p-5" data-releases>
           {releases.map((release, index) => (
             <li class:list={['relative flex gap-4 pb-5 pl-5', index === releases.length - 1 && 'pb-0']}>
               <span class="absolute top-1.5 left-0 h-2 w-2 rounded-full bg-[#44BCFF]" aria-hidden="true" />
@@ -208,6 +213,7 @@ const smallCards = [
     daily?: Array<{ success_rate: number } | number>
   }
   type Snapshot = { live: Metrics | null; builder: Metrics | null }
+  type Release = { repo: string; tag: string; url: string; publishedAt: string }
 
   const STORAGE_KEY = 'capgo:transparency-metrics'
   const section = document.querySelector<HTMLElement>('[data-transparency]')
@@ -294,8 +300,70 @@ const smallCards = [
     if (status && updated) status.textContent = (section.dataset.updatedTemplate ?? '{time}').replace('{time}', updated)
   }
 
+  function renderReleases(releases: Release[]) {
+    const list = section?.querySelector<HTMLOListElement>('[data-releases]')
+    if (!section || !list || !releases.length) return
+    let labels: Record<string, string> = {}
+    try {
+      labels = JSON.parse(section.dataset.releaseLabels ?? '{}')
+    } catch {
+      labels = {}
+    }
+    const lang = section.dataset.locale || document.documentElement.lang || 'en'
+    const linkClass = list.querySelector('a')?.className ?? ''
+    list.replaceChildren(
+      ...releases.map((release, index) => {
+        const last = index === releases.length - 1
+        const item = document.createElement('li')
+        item.className = `relative flex gap-4 pl-5 ${last ? 'pb-0' : 'pb-5'}`
+        const dot = document.createElement('span')
+        dot.className = 'absolute top-1.5 left-0 h-2 w-2 rounded-full bg-[#44BCFF]'
+        dot.setAttribute('aria-hidden', 'true')
+        item.append(dot)
+        if (!last) {
+          const line = document.createElement('span')
+          line.className = 'absolute top-4 bottom-0 left-[3px] w-px bg-white/10'
+          line.setAttribute('aria-hidden', 'true')
+          item.append(line)
+        }
+        const body = document.createElement('div')
+        body.className = 'min-w-0'
+        const meta = document.createElement('p')
+        meta.className = 'text-xs text-gray-400'
+        const time = document.createElement('time')
+        time.dateTime = release.publishedAt
+        time.textContent = new Date(release.publishedAt).toLocaleDateString(lang, { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+        const label = release.tag.startsWith('cli-') ? labels['Cap-go/CLI'] : labels[release.repo]
+        meta.append(`${label ?? release.repo} · `, time)
+        const link = document.createElement('a')
+        link.href = release.url
+        link.target = '_blank'
+        link.rel = 'noopener noreferrer'
+        link.className = linkClass
+        link.textContent = `v${release.tag.replace(/^[a-z-]+-(?=\d)/i, '')}`
+        body.append(meta, link)
+        item.append(body)
+        return item
+      }),
+    )
+  }
+
+  async function hydrateReleases() {
+    const path = section?.dataset.releasesEndpoint
+    if (!path) return
+    try {
+      const response = await fetch(path, { headers: { Accept: 'application/json' } })
+      if (!response.ok) return
+      const data = (await response.json()) as { releases?: Release[] }
+      if (Array.isArray(data.releases)) renderReleases(data.releases.filter((release) => release && typeof release.tag === 'string' && typeof release.url === 'string' && typeof release.publishedAt === 'string'))
+    } catch {
+      // Keep the build-time snapshot when the feed is unreachable.
+    }
+  }
+
   async function hydrate() {
     if (!section) return
+    hydrateReleases()
     const [live, builder] = await Promise.all([loadJson(section.dataset.liveEndpoint), loadJson(section.dataset.builderEndpoint)])
     if (!live && !builder) {
       // Keep the cached values on screen; only report unavailability when there is nothing to show.

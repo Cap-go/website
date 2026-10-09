@@ -61,7 +61,7 @@ const totalStars = getTotalStars()
     </div>
     <!-- Fade to bottom -->
   </div>
-  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
     <!-- Header Section -->
     <div class="mb-20 text-center">
       <div class="mb-6 flex items-center justify-center gap-2 text-sm font-medium tracking-wider text-blue-400">
@@ -189,16 +189,14 @@ const totalStars = getTotalStars()
               ></path>
             </svg>
           </div>
-          <div class="grid grid-cols-2 gap-12">
+          <div class="grid grid-cols-2 gap-6 sm:gap-12">
             <div>
-              <div class="mb-2 text-5xl font-bold text-white">95%</div>
-              <div class="mb-1 text-sm font-semibold text-white">{m.active_users_up_to_date({}, { locale: Astro.locals.locale })}</div>
-              <div class="text-xs text-gray-400">{m.shared_numbers_uptodate_24h({}, { locale: Astro.locals.locale })}</div>
+              <div class="mb-2 text-4xl font-bold text-white sm:text-5xl">95%</div>
+              <div class="text-sm font-semibold text-white">{m.active_users_up_to_date({}, { locale: Astro.locals.locale })}</div>
             </div>
             <div>
-              <div class="mb-2 text-5xl font-bold text-white">82%</div>
-              <div class="mb-1 text-sm font-semibold text-white">{m.worldwide_success_rate({}, { locale: Astro.locals.locale })}</div>
-              <div class="text-xs text-gray-400">{m.shared_numbers_success_rate_desc({}, { locale: Astro.locals.locale })}</div>
+              <div class="mb-2 text-4xl font-bold text-white sm:text-5xl">82%</div>
+              <div class="text-sm font-semibold text-white">{m.worldwide_success_rate({}, { locale: Astro.locals.locale })}</div>
             </div>
           </div>
         </div>
@@ -220,9 +218,9 @@ const totalStars = getTotalStars()
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
-          <div class="grid grid-cols-2 gap-12">
+          <div class="grid grid-cols-2 gap-6 sm:gap-12">
             <div>
-              <div class="mb-2 text-5xl font-bold text-white">
+              <div class="mb-2 text-4xl font-bold text-white sm:text-5xl">
                 <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
                   114ms
                 </a>
@@ -231,7 +229,7 @@ const totalStars = getTotalStars()
               <div class="text-xs text-gray-400">{m.download_time_globally({}, { locale: Astro.locals.locale })}</div>
             </div>
             <div>
-              <div class="mb-2 text-5xl font-bold text-white">
+              <div class="mb-2 text-4xl font-bold text-white sm:text-5xl">
                 <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
                   ~50ms
                 </a>

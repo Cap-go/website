@@ -11,6 +11,7 @@ import {
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
+import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
 import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
 import { handleMtaStsRequest } from './mta-sts'
@@ -218,6 +219,14 @@ const routeDefinitions: Record<string, RouteDefinition> = {
     methods: ['GET', 'HEAD'],
     handle: async (request, env, ctx) => {
       const response = await handleBuilderMetrics(request, env, ctx)
+      if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
+      return response
+    },
+  },
+  [GITHUB_RELEASES_PATH]: {
+    methods: ['GET', 'HEAD'],
+    handle: async (request, env, ctx) => {
+      const response = await handleGithubReleases(request, env, ctx)
       if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
