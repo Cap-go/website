@@ -21,7 +21,6 @@
     },
   ],
   "vars": {
-    "WEBSITE_DESIGN_EXPERIMENT": "website-design-v1",
     "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
   },
   "routes": [
@@ -48,8 +47,7 @@
         },
       ],
       "vars": {
-        "WEBSITE_DESIGN_EXPERIMENT": "website-design-v1",
-        "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
+            "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
       },
       "routes": [
         {

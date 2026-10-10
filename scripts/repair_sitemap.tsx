@@ -51,7 +51,7 @@ function isAllowedSitemapUrl(item: SitemapUrl): boolean {
   const url = new URL(item.loc)
   const pathname = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`
   const basePath = stripLocalePath(pathname)
-  return !basePath.startsWith('/website-experiment/') && !EXCLUDED_SITEMAP_PATHS.has(basePath) && !REDIRECTED_SITEMAP_PATHS.has(basePath)
+  return !EXCLUDED_SITEMAP_PATHS.has(basePath) && !REDIRECTED_SITEMAP_PATHS.has(basePath)
 }
 
 function expandLocalizedUrls(urls: SitemapUrl[]): SitemapUrl[] {

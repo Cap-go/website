@@ -64,7 +64,6 @@ export function buildSharedIntegrations({ pluginIcons, pageLastModDates }) {
       priority: 0.7,
       lastmod: new Date(),
       serialize(item) {
-        if (new URL(item.url).pathname.startsWith('/website-experiment/')) return undefined
         return withSitemapLastMod(item, pageLastModDates)
       },
     }),
