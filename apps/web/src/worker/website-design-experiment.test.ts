@@ -144,8 +144,6 @@ test('a slow CAPTCHA cannot send an unverified registration request in either de
     const values: Record<string, unknown> = {
       registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
       email: { value: 'test@example.com' },
-      firstName: { value: 'Test' },
-      lastName: { value: 'Visitor' },
       password: { value: 'test-password' },
     }
     runInNewContext(transpiled, {
@@ -169,6 +167,62 @@ test('a slow CAPTCHA cannot send an unverified registration request in either de
     else expect(toasts.some((text) => text.includes('Security verification'))).toBe(false)
     if (captchaEnabled) expect(button.disabled).toBe(false)
   }
+})
+
+test('email-only registration preserves signup attribution and the console handoff', async () => {
+  const source = readFileSync(new URL('../scripts/register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  let handler: (event: { preventDefault(): void }) => Promise<void> = async () => {}
+  const button = { disabled: false }
+  const values: Record<string, unknown> = {
+    registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
+    email: { value: 'signup@example.com' },
+    password: { value: 'test-password' },
+  }
+  const signupRequests: any[] = []
+  const captures: any[] = []
+  const referrals: any[] = []
+  const confirmations: string[] = []
+  const windowStub = {
+    location: { href: '', search: '?ref=initial-example' },
+    posthog: { capture: (event: string, properties?: unknown) => captures.push({ event, properties }) },
+    Affonso: { signup: (properties: unknown) => referrals.push(properties) },
+  }
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelector: () => null },
+    getRemoteConfig: () => Promise.resolve({}),
+    isSupabaseConfigured: () => true,
+    getRegistrationDevice: () => ({ registration_device_type: 'desktop' }),
+    websiteDesignSignupMetadata: () => ({ website_design_variant: 'control' }),
+    confirmWebsiteDesignSignup: (token: string) => confirmations.push(token),
+    useSupabase: () => ({
+      rpc: async () => ({ data: true, error: null }),
+      auth: {
+        signUp: async (request: unknown) => {
+          signupRequests.push(request)
+          return { data: { user: { id: 'fake-user-id' } }, error: null }
+        },
+        getSession: async () => ({ data: { session: { access_token: 'fake-access', refresh_token: 'fake-refresh' } }, error: null }),
+      },
+    }),
+    window: windowStub,
+    navigator: { userAgent: 'test', maxTouchPoints: 0 },
+    URLSearchParams,
+    setTimeout: (callback: () => void) => callback(),
+  })
+  await Promise.resolve()
+  windowStub.location.search = '?ref=readme-example'
+  await handler({ preventDefault() {} })
+  expect(signupRequests).toEqual([
+    {
+      email: 'signup@example.com',
+      password: 'test-password',
+      options: { captchaToken: undefined, data: { registration_device_type: 'desktop', website_design_variant: 'control', ref: 'readme-example' } },
+    },
+  ])
+  expect(confirmations).toEqual(['fake-access'])
+  expect(captures.map(({ event }) => event)).toEqual(['website_signup_submit', 'user_signed_up'])
+  expect(referrals).toEqual([{ email: 'signup@example.com', externalUserId: 'fake-user-id' }])
+  expect(windowStub.location.href).toBe('https://console.capgo.app/login/?access_token=fake-access&refresh_token=fake-refresh&to=/app')
 })
 
 describe('persistent equal assignment', () => {
