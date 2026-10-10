@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-18T23:11:48.000Z
-updated_at: 2026-09-18T23:11:48.000Z
+updated_at: 2026-10-10T21:48:18.000Z
 head_image: /capgo_banner.png
 head_image_alt: 'Ionic app release channels mapped for development, QA, beta, and production.'
 keywords: ''
