@@ -1070,7 +1070,7 @@ const messages = {
   compliance_iso27001: 'ISO 27001 Certified',
   custom_contract_faq_question: 'Can I get a custom contract, MSA, or vendor questionnaire?',
   custom_contract_faq_answer:
-    'Yes, on any plan. Self-serve plans run on our standard Terms of Service and DPA by default. If your procurement team needs more, the Procurement add-on (from US$5,000/year, available on every plan, included in Enterprise) covers custom MSAs and redlines, DPA and SCC review, security questionnaires, invoice or PO billing, and vendor onboarding portals. We do not carry cyber or E&O insurance on any plan: bundles are end-to-end encrypted with your keys, served from your domain, and the whole stack is open source so you can self-host at any time.',
+    'Yes, on any plan. Self-serve plans run on our standard Terms of Service and DPA by default. If your procurement team needs more, the Procurement add-on (from US$2,500/year, prepaid, available on every plan, included in Enterprise) covers invoice or PO billing, vendor onboarding portals and security questionnaires, and at the higher level custom MSAs and redlines, DPA and SCC review and reports under NDA. The add-on is paid upfront for the year before any paperwork starts. We do not carry cyber or E&O insurance on any plan: bundles are end-to-end encrypted with your keys, served from your domain, and the whole stack is open source so you can self-host at any time.',
   compliance_soc3: 'SOC 3 Compliant',
   compliant_with_apple_and_android_requirements: 'Update JavaScript and assets while native code still goes through normal store review.',
   conditions_for_returns: 'Conditions for Returns',
