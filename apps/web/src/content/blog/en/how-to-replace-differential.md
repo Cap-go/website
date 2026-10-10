@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-10T07:19:46.364Z
-updated_at: 2026-10-10T07:19:49.542Z
+updated_at: 2026-10-10T07:22:23.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/1096d1e1-7b19-4ed8-af6e-dec3b9bdd645/how-to-replace-differential-capacitor-guide.jpg'
 head_image_alt: 'How to Replace Differential Updater: The Capacitor Guide'
 keywords: 'how to replace differential, Capacitor live updates, Capgo migration, Capacitor JS tutorial, hybrid app deployment'
