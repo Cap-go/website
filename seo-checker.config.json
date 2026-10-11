@@ -139,7 +139,12 @@
     "severityOverrides": {},
     "thresholdOverrides": {}
   },
-  "exclusions": [],
+  "exclusions": [
+    {
+      "fingerprint": "SEO01165::https://capgo.app/sitemap-docs-index.xml",
+      "reason": "Docs sitemap is served by the separate docs worker, not apps/web/dist"
+    }
+  ],
   "failOn": ["error", "warning"],
   "maxIssues": 0,
   "outputFormat": "console"
