@@ -447,6 +447,8 @@ function createOriginRequest(request: Request, originUrl: URL): Request {
   headers.set('X-Capgo-Translation-Origin', 'english')
   headers.set('X-Capgo-Translation-Locale', extractLocale(new URL(request.url).pathname) || DEFAULT_LOCALE)
   headers.set(SKIP_AI_CRAWLER_TRACKING_HEADER, '1')
+  // Shared translation cache: pin every origin fetch to one web version during a branch A/B test.
+  headers.set('Cloudflare-Workers-Version-Key', 'translation-origin')
   headers.delete('If-None-Match')
   headers.delete('If-Modified-Since')
 

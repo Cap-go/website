@@ -10,6 +10,7 @@ import {
 } from '../../../shared/agentDiscovery'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
+import { withAbTest } from './abtest'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
@@ -17,10 +18,10 @@ import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
 import { handleMtaStsRequest } from './mta-sts'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
-import { websiteDesignHtmlResponse, websiteDesignSignupResponse } from './website-design-experiment'
 
 interface Env {
-  WEBSITE_DESIGN_EXPERIMENT?: string
+  AB_FLAG?: string
+  AB_VARIANT?: string
   ASSETS: {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
@@ -468,44 +469,44 @@ export async function agentSurfaceResponse(request: Request, env: Env, pathname:
   return null
 }
 
+async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
+  const mtaStsResponse = handleMtaStsRequest(request)
+  if (mtaStsResponse) return mtaStsResponse
+  const pathname = new URL(request.url).pathname
+  const agentSurface = await agentSurfaceResponse(request, env, pathname)
+  if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
+  const staticRedirect = staticLegacyRedirect(request, pathname)
+  if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)
+  const toolRouteResponse = await handleToolApiRequest(
+    request,
+    {
+      IOS_UDID_PROFILE_SIGNING_CERT_PEM: env.IOS_UDID_PROFILE_SIGNING_CERT_PEM,
+      IOS_UDID_PROFILE_SIGNING_KEY_PEM: env.IOS_UDID_PROFILE_SIGNING_KEY_PEM,
+      IOS_UDID_PROFILE_SIGNING_CHAIN_PEM: env.IOS_UDID_PROFILE_SIGNING_CHAIN_PEM,
+    },
+    pathname,
+  )
+  if (toolRouteResponse) return trackAICrawler(request, toolRouteResponse, ctx)
+  const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
+  if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
+  const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
+  if (assetResponse.status === 404) {
+    const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
+    if (legacyRedirect) return trackAICrawler(request, legacyRedirect, ctx)
+    if (shouldServeBrandedNotFound(pathname)) {
+      const brandedNotFound = await brandedNotFoundResponse(request, env, pathname)
+      if (brandedNotFound) return trackAICrawler(request, brandedNotFound, ctx)
+    }
+  }
+  if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
+  if (pathname === '/' || pathname === '/index.html') {
+    return trackAICrawler(request, withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS), ctx)
+  }
+  return trackAICrawler(request, assetResponse, ctx)
+}
+
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
-    const mtaStsResponse = handleMtaStsRequest(request)
-    if (mtaStsResponse) return mtaStsResponse
-    const signupMeasurement = await websiteDesignSignupResponse(request, env, ctx)
-    if (signupMeasurement) return signupMeasurement
-    const pathname = new URL(request.url).pathname
-    const agentSurface = await agentSurfaceResponse(request, env, pathname)
-    if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
-    const staticRedirect = staticLegacyRedirect(request, pathname)
-    if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)
-    const toolRouteResponse = await handleToolApiRequest(
-      request,
-      {
-        IOS_UDID_PROFILE_SIGNING_CERT_PEM: env.IOS_UDID_PROFILE_SIGNING_CERT_PEM,
-        IOS_UDID_PROFILE_SIGNING_KEY_PEM: env.IOS_UDID_PROFILE_SIGNING_KEY_PEM,
-        IOS_UDID_PROFILE_SIGNING_CHAIN_PEM: env.IOS_UDID_PROFILE_SIGNING_CHAIN_PEM,
-      },
-      pathname,
-    )
-    if (toolRouteResponse) return trackAICrawler(request, toolRouteResponse, ctx)
-    const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
-    if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
-    const experimentResponse = await websiteDesignHtmlResponse(request, env)
-    if (experimentResponse) return trackAICrawler(request, experimentResponse, ctx)
-    const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
-    if (assetResponse.status === 404) {
-      const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
-      if (legacyRedirect) return trackAICrawler(request, legacyRedirect, ctx)
-      if (shouldServeBrandedNotFound(pathname)) {
-        const brandedNotFound = await brandedNotFoundResponse(request, env, pathname)
-        if (brandedNotFound) return trackAICrawler(request, brandedNotFound, ctx)
-      }
-    }
-    if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
-    if (pathname === '/' || pathname === '/index.html') {
-      return trackAICrawler(request, withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS), ctx)
-    }
-    return trackAICrawler(request, assetResponse, ctx)
+    return withAbTest(request, await handleRequest(request, env, ctx), env)
   },
 }
