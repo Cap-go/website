@@ -12,7 +12,7 @@ interface SitemapUrl {
 }
 
 const HOSTNAME = 'https://capgo.app'
-const EXCLUDED_SITEMAP_PATHS = new Set(['/tools/ios-udid-finder/result/'])
+const EXCLUDED_SITEMAP_PATHS = new Set(['/tools/ios-udid-finder/result/', '/autobrowse/run/', '/autobrowse/open/'])
 
 // Paths that public/_redirects sends elsewhere must not be listed: a sitemap should only contain final 200 URLs.
 function loadRedirectedPaths(): Set<string> {

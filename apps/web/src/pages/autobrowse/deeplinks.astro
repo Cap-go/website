@@ -1,0 +1,323 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import AppStoreButton from '@/components/autobrowse/AppStoreButton.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { AUTOBROWSE_APP_STORE_URL, AUTOBROWSE_MAX_PROMPT_LENGTH } from '@/config/autobrowse'
+
+const locale = Astro.locals.locale
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+
+const title = 'Auto Browse deep links: start AI browser tasks from a link'
+const description = 'Open Auto Browse from any link, QR code, shortcut or ChatGPT answer. Use autobrowse:// or capgo.app/autobrowse/run links to prefill a page and an agent task.'
+
+const pageUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'autobrowse/deeplinks/')}`
+const overviewUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'autobrowse/')}`
+
+const content = {
+  title,
+  description,
+  keywords: 'auto browse deep link, autobrowse url scheme, ai browser deep link, universal link ios, chatgpt browser agent link, shortcuts browser automation',
+  image: `${baseUrl}/capgo_social.png`,
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, createWebPageLdJson(Astro.locals.runtimeConfig.public, { name: title, description, url: pageUrl }), {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: `${baseUrl}${getRelativeLocaleUrl(locale, '/')}` },
+      { name: 'Auto Browse', url: overviewUrl },
+      { name: 'Deep links', url: pageUrl },
+    ],
+    additionalEntities: [
+      createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+        name: 'Auto Browse',
+        description: 'A mobile web browser for iPhone with a built-in AI agent that runs on your ChatGPT plan.',
+        url: overviewUrl,
+        applicationCategory: 'BrowserApplication',
+        operatingSystem: 'iOS',
+        downloadUrl: AUTOBROWSE_APP_STORE_URL,
+      }),
+    ],
+  }),
+}
+
+function runLink(params: Record<string, string>) {
+  return `https://capgo.app/autobrowse/run?${new URLSearchParams(params).toString()}`
+}
+
+const priceExample = runLink({ prompt: 'Compare the price of AirPods Pro 2 on Amazon, Best Buy and Walmart and tell me the cheapest' })
+const summarizeExample = runLink({ prompt: 'Summarize this page in 5 bullets', url: 'https://en.wikipedia.org/wiki/Web_browser' })
+const openExample = `https://capgo.app/autobrowse/open?${new URLSearchParams({ url: 'https://capgo.app/' }).toString()}`
+const schemeExample = `autobrowse://run?${new URLSearchParams({ prompt: 'Summarize this page in 5 bullets', url: 'https://en.wikipedia.org/wiki/Web_browser' }).toString()}`
+
+const jsSnippet = `const prompt = 'Summarize this page in 5 bullets'
+const url = 'https://en.wikipedia.org/wiki/Web_browser'
+const link = 'https://capgo.app/autobrowse/run?' + new URLSearchParams({ prompt, url })
+// https://capgo.app/autobrowse/run?prompt=Summarize+this+page+in+5+bullets&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FWeb_browser`
+
+const gptInstructions = `When the user wants something done on a website, end your answer with a link
+that opens the task in Auto Browse:
+https://capgo.app/autobrowse/run?prompt=<URL-encoded task>&url=<URL-encoded https start page>
+Always URL-encode both values. Never put passwords or personal data in the link.`
+
+const params = [
+  {
+    name: 'prompt',
+    required: 'run: yes, unless url is set. open: ignored.',
+    value: `URL-encoded text, up to ${AUTOBROWSE_MAX_PROMPT_LENGTH} characters. Longer prompts are cut.`,
+  },
+  {
+    name: 'url',
+    required: 'open: yes. run: optional.',
+    value: 'URL-encoded page to load first. Only https:// URLs are accepted; anything else is ignored.',
+  },
+  {
+    name: 'tab',
+    required: 'Optional',
+    value: 'new (default) opens a new tab. current reuses the tab you are looking at.',
+  },
+]
+
+const codeClass = 'block overflow-x-auto rounded-lg bg-gray-950 p-4 font-mono text-[13px] leading-6 whitespace-pre text-emerald-200'
+const inlineCode = 'rounded bg-gray-950 px-1.5 py-0.5 font-mono text-[0.9em] text-emerald-300'
+const cardClass = 'rounded-lg border border-gray-700 bg-gray-800/50 p-6 sm:p-8'
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <nav aria-label="Breadcrumb" class="mb-6 text-sm text-gray-400">
+        <a href={getRelativeLocaleUrl(locale, 'autobrowse/')} class="text-emerald-400 hover:text-emerald-300">
+          Auto Browse
+        </a>
+        <span aria-hidden="true"> / </span>
+        <span>Deep links</span>
+      </nav>
+
+      <header class="mb-12">
+        <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Auto Browse deep links</h1>
+        <p class="text-xl text-gray-300">
+          Start a task in Auto Browse from a link. A link can open a page, prefill what the agent should do, or both. Use it in a web page, an email, a QR code, the Shortcuts app,
+          or a ChatGPT answer.
+        </p>
+        <div class="mt-8">
+          <AppStoreButton />
+        </div>
+      </header>
+
+      <div class="space-y-8">
+        <section class={cardClass} aria-labelledby="formats">
+          <h2 id="formats" class="mb-4 text-2xl font-bold text-gray-100">
+            Link formats
+          </h2>
+          <p class="mb-4 text-gray-300">There are two actions and two ways to write each link. Both forms take the same parameters.</p>
+          <ul class="mb-6 list-disc space-y-2 pl-6 text-gray-300">
+            <li>
+              <strong class="text-white">run</strong> opens a tab, loads the page if you give one, and prefills the agent task.
+            </li>
+            <li>
+              <strong class="text-white">open</strong> just opens the page in a new tab.
+            </li>
+          </ul>
+          <h3 class="mb-2 text-lg font-semibold text-gray-100">Universal links (recommended)</h3>
+          <p class="mb-3 text-gray-300">
+            These are normal https links. If Auto Browse is installed on the iPhone, iOS opens the app. If not, the browser shows a page with the task and a link to the App Store.
+          </p>
+          <code class={codeClass}>{`https://capgo.app/autobrowse/run?prompt=<text>&url=<https URL>\nhttps://capgo.app/autobrowse/open?url=<https URL>`}</code>
+          <h3 class="mt-6 mb-2 text-lg font-semibold text-gray-100">Custom scheme</h3>
+          <p class="mb-3 text-gray-300">These only work when the app is installed. Use them in Shortcuts or in apps where you know Auto Browse is present.</p>
+          <code class={codeClass}>{`autobrowse://run?prompt=<text>&url=<https URL>\nautobrowse://open?url=<https URL>`}</code>
+        </section>
+
+        <section class={cardClass} aria-labelledby="parameters">
+          <h2 id="parameters" class="mb-4 text-2xl font-bold text-gray-100">
+            Parameters
+          </h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-gray-300">
+              <caption class="sr-only">Auto Browse deep link query parameters</caption>
+              <thead class="border-b border-gray-700 text-gray-100">
+                <tr>
+                  <th scope="col" class="py-2 pr-4 font-semibold">
+                    Parameter
+                  </th>
+                  <th scope="col" class="py-2 pr-4 font-semibold">
+                    Required
+                  </th>
+                  <th scope="col" class="py-2 font-semibold">
+                    Value
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {params.map((param) => (
+                  <tr class="border-b border-gray-800 align-top">
+                    <th scope="row" class="py-3 pr-4 font-normal">
+                      <code class={inlineCode}>{param.name}</code>
+                    </th>
+                    <td class="py-3 pr-4">{param.required}</td>
+                    <td class="py-3">{param.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-4 text-gray-300">
+            A <code class={inlineCode}>run</code> link needs at least a <code class={inlineCode}>prompt</code> or a <code class={inlineCode}>url</code>. An
+            <code class={inlineCode}>open</code> link needs a <code class={inlineCode}>url</code>.
+          </p>
+        </section>
+
+        <section class={cardClass} aria-labelledby="behavior">
+          <h2 id="behavior" class="mb-4 text-2xl font-bold text-gray-100">
+            What happens when someone taps a link
+          </h2>
+          <ol class="list-decimal space-y-2 pl-6 text-gray-300">
+            <li>
+              Auto Browse opens a new tab (or the current one with <code class={inlineCode}>tab=current</code>).
+            </li>
+            <li>
+              If the link has a <code class={inlineCode}>url</code>, the page loads.
+            </li>
+            <li>
+              The <code class={inlineCode}>prompt</code> appears in the tab's chat with a "Start this task?" card.
+            </li>
+            <li>The task starts when the user taps Start. That is the only tap needed.</li>
+          </ol>
+          <p class="mt-4 text-gray-300">
+            If the user is not signed in with ChatGPT yet, Auto Browse asks them to sign in first, then shows the task. An <code class={inlineCode}>open</code>
+            link only opens the page and never prefills a task.
+          </p>
+          <div class="mt-6 rounded-lg border border-amber-400/30 bg-amber-400/10 p-4 text-sm text-amber-100">
+            <h3 class="mb-1 font-semibold text-amber-50">Links never run on their own</h3>
+            <p>
+              The agent acts in the user's own browser, where they may be logged in to email, shopping or bank accounts. So a link can only prepare a task. The user always reads it
+              and taps Start. Do not put passwords, card numbers or other secrets in a link.
+            </p>
+          </div>
+        </section>
+
+        <section class={cardClass} aria-labelledby="examples">
+          <h2 id="examples" class="mb-4 text-2xl font-bold text-gray-100">
+            Examples
+          </h2>
+
+          <h3 class="mb-2 text-lg font-semibold text-gray-100">Compare prices</h3>
+          <p class="mb-3 text-gray-300">A task with no start page. The agent picks where to go.</p>
+          <code class={codeClass}>{priceExample}</code>
+          <p class="mt-3">
+            <a href={priceExample} class="font-medium text-emerald-400 hover:text-emerald-300">
+              Try the price comparison link
+            </a>
+          </p>
+
+          <h3 class="mt-8 mb-2 text-lg font-semibold text-gray-100">Summarize a page</h3>
+          <p class="mb-3 text-gray-300">Load a page, then ask the agent to summarize it.</p>
+          <code class={codeClass}>{summarizeExample}</code>
+          <p class="mt-3">
+            <a href={summarizeExample} class="font-medium text-emerald-400 hover:text-emerald-300">
+              Try the summary link
+            </a>
+          </p>
+          <p class="mt-3 text-gray-300">The same task with the custom scheme:</p>
+          <code class={`${codeClass} mt-3`}>{schemeExample}</code>
+
+          <h3 class="mt-8 mb-2 text-lg font-semibold text-gray-100">Open a page only</h3>
+          <p class="mb-3 text-gray-300">No task, just a new tab with this page.</p>
+          <code class={codeClass}>{openExample}</code>
+          <p class="mt-3">
+            <a href={openExample} class="font-medium text-emerald-400 hover:text-emerald-300">
+              Try the open link
+            </a>
+          </p>
+        </section>
+
+        <section class={cardClass} aria-labelledby="encoding">
+          <h2 id="encoding" class="mb-4 text-2xl font-bold text-gray-100">
+            URL-encode the values
+          </h2>
+          <p class="mb-4 text-gray-300">
+            <code class={inlineCode}>prompt</code> and <code class={inlineCode}>url</code> must be URL-encoded, or characters like
+            <code class={inlineCode}>&amp;</code>, <code class={inlineCode}>?</code> and <code class={inlineCode}>#</code> break the link.
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-gray-300">
+              <caption class="sr-only">URL encoding examples</caption>
+              <thead class="border-b border-gray-700 text-gray-100">
+                <tr>
+                  <th scope="col" class="py-2 pr-4 font-semibold">
+                    Raw value
+                  </th>
+                  <th scope="col" class="py-2 font-semibold">
+                    Encoded
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-gray-800">
+                  <td class="py-3 pr-4">
+                    <code class={inlineCode}>Summarize this page in 5 bullets</code>
+                  </td>
+                  <td class="py-3">
+                    <code class={inlineCode}>Summarize%20this%20page%20in%205%20bullets</code>
+                  </td>
+                </tr>
+                <tr class="border-b border-gray-800">
+                  <td class="py-3 pr-4">
+                    <code class={inlineCode}>Find flights Paris &amp; Lisbon?</code>
+                  </td>
+                  <td class="py-3">
+                    <code class={inlineCode}>Find%20flights%20Paris%20%26%20Lisbon%3F</code>
+                  </td>
+                </tr>
+                <tr class="border-b border-gray-800">
+                  <td class="py-3 pr-4">
+                    <code class={inlineCode}>https://example.com/a?b=1</code>
+                  </td>
+                  <td class="py-3">
+                    <code class={inlineCode}>https%3A%2F%2Fexample.com%2Fa%3Fb%3D1</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="my-4 text-gray-300">
+            Spaces can be <code class={inlineCode}>%20</code> or <code class={inlineCode}>+</code>. In JavaScript, let
+            <code class={inlineCode}>URLSearchParams</code> do it:
+          </p>
+          <code class={codeClass}>{jsSnippet}</code>
+        </section>
+
+        <section class={cardClass} aria-labelledby="where">
+          <h2 id="where" class="mb-4 text-2xl font-bold text-gray-100">
+            Where to use these links
+          </h2>
+          <ul class="list-disc space-y-3 pl-6 text-gray-300">
+            <li>
+              <strong class="text-white">ChatGPT and other assistants.</strong> Any assistant that writes links can hand off a task. For example, add this to a custom GPT's
+              instructions:
+              <code class={`${codeClass} mt-3`}>{gptInstructions}</code>
+            </li>
+            <li>
+              <strong class="text-white">Shortcuts app.</strong> Use the "Open URLs" action with an <code class={inlineCode}>autobrowse://</code> or
+              <code class={inlineCode}>https://capgo.app/autobrowse/</code> link. Build the prompt from "Ask for Input" and "URL Encode".
+            </li>
+            <li>
+              <strong class="text-white">QR codes.</strong> Print a universal link on a poster, menu or product box. Scanning it opens the task.
+            </li>
+            <li>
+              <strong class="text-white">Emails and web pages.</strong> Use a normal link. People without the app see the task and an App Store button.
+            </li>
+          </ul>
+        </section>
+
+        <section class="rounded-lg border border-emerald-400/30 bg-gray-800/50 p-6 text-center sm:p-8" aria-labelledby="get-app">
+          <h2 id="get-app" class="mb-3 text-2xl font-bold text-gray-100">
+            Get Auto Browse on the App Store
+          </h2>
+          <p class="mb-6 text-gray-300">A web browser for iPhone with an AI agent in every tab. It runs on your ChatGPT plan.</p>
+          <AppStoreButton label="Download Auto Browse" />
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>

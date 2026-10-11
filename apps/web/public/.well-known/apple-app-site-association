@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["UVTJ336J2D.app.capgo.browser"],
+        "components": [
+          { "/": "/autobrowse/run*", "comment": "Auto Browse: start an agent task" },
+          { "/": "/autobrowse/open*", "comment": "Auto Browse: open a page" }
+        ]
+      }
+    ]
+  }
+}

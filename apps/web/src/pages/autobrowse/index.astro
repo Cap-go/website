@@ -1,0 +1,84 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import AppStoreButton from '@/components/autobrowse/AppStoreButton.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createSoftwareApplicationLdJson } from '@/lib/ldJson'
+import { AUTOBROWSE_APP_STORE_URL } from '@/config/autobrowse'
+
+const locale = Astro.locals.locale
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+
+const title = 'Auto Browse: the iPhone web browser with an AI agent'
+const description = 'Auto Browse is a mobile web browser by Capgo with an AI agent in every tab. Sign in with ChatGPT and let the agent browse, compare and fill in pages for you.'
+
+const pageUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'autobrowse/')}`
+const deeplinksHref = getRelativeLocaleUrl(locale, 'autobrowse/deeplinks/')
+
+const content = {
+  title,
+  description,
+  keywords: 'auto browse, ai browser iphone, chatgpt browser agent, mobile ai web browser, browser automation ios',
+  image: `${baseUrl}/capgo_social.png`,
+  ldJSON: createLdJsonGraph(
+    Astro.locals.runtimeConfig.public,
+    createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+      name: 'Auto Browse',
+      description,
+      url: pageUrl,
+      applicationCategory: 'BrowserApplication',
+      operatingSystem: 'iOS',
+      downloadUrl: AUTOBROWSE_APP_STORE_URL,
+    }),
+    {
+      includeOrganization: true,
+      includeBreadcrumbs: true,
+      breadcrumbs: [
+        { name: 'Home', url: `${baseUrl}${getRelativeLocaleUrl(locale, '/')}` },
+        { name: 'Auto Browse', url: pageUrl },
+      ],
+    },
+  ),
+}
+
+const features = [
+  { title: 'An agent in every tab', text: 'Each tab has its own page and its own chat. Ask the agent to do something on the page you are looking at.' },
+  { title: 'Runs on your ChatGPT plan', text: 'Sign in with ChatGPT. There is no extra AI subscription to buy.' },
+  { title: 'You stay in control', text: 'The agent works in your own browser. Tasks from links always wait for you to tap Start.' },
+]
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <header class="mb-12 text-center">
+        <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Auto Browse</h1>
+        <p class="mx-auto max-w-2xl text-xl text-gray-300">A web browser for iPhone with a built-in AI agent that runs on your ChatGPT plan.</p>
+        <div class="mt-8 flex justify-center">
+          <AppStoreButton />
+        </div>
+      </header>
+
+      <ul class="grid gap-6 sm:grid-cols-3">
+        {features.map((feature) => (
+          <li class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h2 class="mb-2 text-lg font-semibold text-gray-100">{feature.title}</h2>
+            <p class="text-gray-300">{feature.text}</p>
+          </li>
+        ))}
+      </ul>
+
+      <section class="mt-12 rounded-lg border border-emerald-400/30 bg-gray-800/50 p-6 sm:p-8" aria-labelledby="deeplinks">
+        <h2 id="deeplinks" class="mb-3 text-2xl font-bold text-gray-100">
+          Start tasks from a link
+        </h2>
+        <p class="mb-4 text-gray-300">
+          Links like <code class="rounded bg-gray-950 px-1.5 py-0.5 font-mono text-emerald-300">https://capgo.app/autobrowse/run?prompt=…</code> open Auto Browse with a task ready
+          to go. Use them in ChatGPT answers, Shortcuts, QR codes and emails.
+        </p>
+        <a href={deeplinksHref} class="font-medium text-emerald-400 hover:text-emerald-300">
+          Read the Auto Browse deep link guide
+        </a>
+      </section>
+    </div>
+  </section>
+</Layout>
