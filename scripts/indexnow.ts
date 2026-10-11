@@ -28,7 +28,9 @@ async function collectUrls(sitemapUrl: string, seen = new Set<string>()): Promis
     const children = matchAll(xml, 'sitemap')
       .map((block) => matchAll(block, 'loc')[0])
       .filter(Boolean)
-    return (await Promise.all(children.map((child) => collectUrls(child, seen)))).flat()
+    const results = await Promise.allSettled(children.map((child) => collectUrls(child, seen)))
+    for (const r of results) if (r.status === 'rejected') console.warn(`Skipping sitemap: ${r.reason}`)
+    return results.flatMap((r) => (r.status === 'fulfilled' ? r.value : []))
   }
   return matchAll(xml, 'url').map((block) => {
     const lastmod = matchAll(block, 'lastmod')[0]
