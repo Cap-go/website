@@ -5,7 +5,16 @@ import SignupCta from '@/components/SignupCta.astro'
 const featureGroups = [
   {
     title: m.security_and_compliance(),
-    items: [m.single_sign_on_sso(), m.advanced_access_levels(), m.extended_security(), m.enterprise_security_automations(), m.soc2_compliance_short(), m.compliance_iso27001()],
+    items: [
+      m.single_sign_on_sso(),
+      m.advanced_access_levels(),
+      m.extended_security(),
+      m.enterprise_security_automations(),
+      m.soc2_compliance_short(),
+      m.compliance_iso27001(),
+      m.custom_contracts_msa(),
+      m.security_questionnaires_audits(),
+    ],
   },
   {
     title: m.integration_and_api(),
@@ -13,7 +22,13 @@ const featureGroups = [
   },
   {
     title: m.infrastructure_and_support(),
-    items: [m.deploy_on_cloud_providers(), m.per_country_hosting_gdpr(), m.self_hosted_storage_options(), m.priority_support_dedicated_sla()],
+    items: [
+      m.deploy_on_cloud_providers(),
+      m.per_country_hosting_gdpr(),
+      m.self_hosted_storage_options(),
+      m.priority_support_dedicated_sla(),
+      m.invoice_po_billing_vendor_onboarding(),
+    ],
   },
 ]
 
