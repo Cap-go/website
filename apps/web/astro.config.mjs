@@ -31,6 +31,8 @@ export default defineConfig({
     ...buildSharedIntegrations({
       pluginIcons,
       pageLastModDates,
+      // Docs are built and deployed by apps/docs; list their sitemap so crawlers find them from the main index.
+      customSitemaps: [`https://${SITE_DOMAIN}/sitemap-docs-0.xml`],
     }),
     mdx(),
   ],

@@ -18,6 +18,7 @@
     { "pattern": "capgo.app/llms-full.txt", "zone_name": "capgo.app" },
     { "pattern": "capgo.app/docs*", "zone_name": "capgo.app" },
     { "pattern": "capgo.app/_docs*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/sitemap-docs*", "zone_name": "capgo.app" },
   ],
   "env": {
     "development": {
@@ -26,6 +27,7 @@
         { "pattern": "development.capgo.app/llms-full.txt", "zone_name": "capgo.app" },
         { "pattern": "development.capgo.app/docs*", "zone_name": "capgo.app" },
         { "pattern": "development.capgo.app/_docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/sitemap-docs*", "zone_name": "capgo.app" },
       ],
     },
   },

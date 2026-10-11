@@ -56,6 +56,8 @@ export default defineConfig({
     ...buildSharedIntegrations({
       pluginIcons,
       pageLastModDates,
+      // The docs worker only owns /docs*, so its sitemap needs a distinct name served via a dedicated route.
+      sitemapFilenameBase: 'sitemap-docs',
     }),
     starlight({
       title: 'Capgo',
