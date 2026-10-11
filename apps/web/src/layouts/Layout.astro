@@ -23,6 +23,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <link rel="stylesheet" href={globalStylesHref} />
     <link rel="stylesheet" href={productSurfaceHref} />
     <SEO {...content} />
+    <meta name="naver-site-verification" content="e6891f007259d77b20bd76a17d11404d83755855" />
     <slot name="head" />
     {enableThirdPartyScripts && <PostHog />}
     {enableThirdPartyScripts && <Affonso />}
