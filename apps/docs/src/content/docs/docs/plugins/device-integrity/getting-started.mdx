@@ -60,20 +60,53 @@ if (capabilities.widevine.fingerprintAvailable) {
   console.log(widevine.fingerprint, widevine.securityLevel);
 }
 
-const prepared = await DeviceIntegrity.prepareAttestation();
+const attestationSupported =
+  capabilities.appAttest.supported || capabilities.playIntegrity.supported;
 
-const registration = await DeviceIntegrity.createAttestation({
-  keyId: prepared.keyId,
-  challenge: 'backend-one-time-registration-challenge',
-});
+if (attestationSupported) {
+  try {
+    const prepared = await DeviceIntegrity.prepareAttestation();
 
-const assertion = await DeviceIntegrity.createAssertion({
-  keyId: prepared.keyId,
-  payload: 'backend-one-time-request-payload',
-});
+    const challengeResponse = await fetch(
+      'https://api.example.com/integrity/registration-challenge',
+    );
+    if (!challengeResponse.ok) {
+      throw new Error(`Challenge request failed with ${challengeResponse.status}`);
+    }
+    const challengeBody = await challengeResponse.json();
+    if (typeof challengeBody.challenge !== 'string' || challengeBody.challenge.length === 0) {
+      throw new Error('Backend response missing challenge');
+    }
+    const challenge = challengeBody.challenge;
 
-console.log(registration.format, registration.token);
-console.log(assertion.format, assertion.token);
+    const registration = await DeviceIntegrity.createAttestation({
+      keyId: prepared.keyId,
+      challenge,
+    });
+
+    const payloadResponse = await fetch(
+      'https://api.example.com/integrity/assertion-payload',
+    );
+    if (!payloadResponse.ok) {
+      throw new Error(`Payload request failed with ${payloadResponse.status}`);
+    }
+    const payloadBody = await payloadResponse.json();
+    if (typeof payloadBody.payload !== 'string' || payloadBody.payload.length === 0) {
+      throw new Error('Backend response missing payload');
+    }
+    const payload = payloadBody.payload;
+
+    const assertion = await DeviceIntegrity.createAssertion({
+      keyId: prepared.keyId,
+      payload,
+    });
+
+    console.log(registration.format, registration.token);
+    console.log(assertion.format, assertion.token);
+  } catch (error) {
+    console.error('Attestation flow failed', error);
+  }
+}
 
 if (capabilities.deviceCheck.supported) {
   const deviceCheck = await DeviceIntegrity.getDeviceCheckToken();

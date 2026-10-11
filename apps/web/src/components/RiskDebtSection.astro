@@ -31,13 +31,13 @@ const pillars = [
 <section class="bg-[#1a1a1a] py-20 sm:py-24" aria-labelledby="risk-debt-title">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-      <div>
+      <div class="text-center lg:text-left">
         <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.risk_debt_eyebrow({}, { locale })}</p>
         <h2 id="risk-debt-title" class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
           {m.risk_debt_title({}, { locale })}
         </h2>
-        <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">{m.risk_debt_lead({}, { locale })}</p>
-        <SignupCta id="risk-debt-signup-cta" align="start" enterprise class="mt-10" />
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-pretty text-gray-300 lg:mx-0">{m.risk_debt_lead({}, { locale })}</p>
+        <SignupCta id="risk-debt-signup-cta" enterprise class="mt-10 lg:items-start lg:text-left" />
       </div>
 
       <div class="grid content-start gap-4 sm:grid-cols-2">

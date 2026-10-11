@@ -1,4 +1,3 @@
-import { confirmWebsiteDesignSignup, websiteDesignSignupMetadata } from '@/lib/websiteDesignExperiment.client'
 import { getRegistrationDevice } from '@/services/registration-device'
 import { getRemoteConfig, isSupabaseConfigured, useSupabase } from '@/services/supabase'
 import Toastify from 'toastify-js'
@@ -123,7 +122,6 @@ form?.addEventListener('submit', async (e) => {
       captchaToken: getCaptchaId(),
       data: {
         ...registrationDevice,
-        ...websiteDesignSignupMetadata(),
         ref: new URLSearchParams(window.location.search).get('ref') ?? undefined,
       },
     },
@@ -158,7 +156,6 @@ form?.addEventListener('submit', async (e) => {
       },
     }).showToast()
   }
-  confirmWebsiteDesignSignup(session.data.session?.access_token)
   if ((window as any).datafast) {
     ;(window as any).datafast('signup', { email: email.value })
   }

@@ -42,7 +42,7 @@ const initialHref = providers[0].url + encodeURIComponent(defaultPrompt)
 ---
 
 <section class="bg-[#1a1a1a] py-24 sm:py-32" aria-labelledby="ask-ai-title" data-ask-ai>
-  <div class="mx-auto max-w-3xl px-4 text-center sm:px-6">
+  <div class="mx-auto max-w-3xl px-6 text-center">
     <h2 id="ask-ai-title" class="text-4xl font-bold tracking-tight text-white sm:text-5xl">{m.ask_ai_title({}, { locale })}</h2>
     <p class="mt-4 text-lg text-slate-400">{m.ask_ai_subtitle({}, { locale })}</p>
 
@@ -51,11 +51,11 @@ const initialHref = providers[0].url + encodeURIComponent(defaultPrompt)
       <textarea
         id="ask-ai-prompt"
         rows="2"
-        class="block w-full resize-none border-0 bg-transparent px-2 py-1 text-lg leading-7 text-white placeholder-slate-500 focus:ring-0 focus:outline-none"
+        class="ask-ai-textarea block w-full resize-none border-0 bg-transparent px-2 py-1 text-lg leading-7 text-white placeholder-slate-500 focus:ring-0 focus:outline-none"
         data-ask-ai-prompt>{defaultPrompt}</textarea
       >
-      <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-1" role="radiogroup" aria-label={m.ask_ai_provider_label({}, { locale })}>
+      <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex items-center justify-center gap-1 sm:justify-start" role="radiogroup" aria-label={m.ask_ai_provider_label({}, { locale })}>
           {
             providers.map((provider, index) => (
               <button
@@ -81,7 +81,7 @@ const initialHref = providers[0].url + encodeURIComponent(defaultPrompt)
           target="_blank"
           rel="noopener noreferrer"
           data-ask-ai-submit
-          class="inline-flex min-h-11 items-center gap-3 rounded-xl bg-white py-1.5 pr-1.5 pl-4 text-[15px] font-semibold text-gray-950 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#101216] focus-visible:outline-none"
+          class="inline-flex min-h-11 w-full items-center justify-between gap-3 rounded-xl bg-white py-1.5 pr-1.5 pl-4 sm:w-auto sm:justify-start text-[15px] font-semibold text-gray-950 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#101216] focus-visible:outline-none"
         >
           <span data-ask-ai-label>{m.ask_ai_button({ provider: providers[0].name }, { locale })}</span>
           <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-950 text-white" aria-hidden="true">
@@ -109,6 +109,11 @@ const initialHref = providers[0].url + encodeURIComponent(defaultPrompt)
 </section>
 
 <style>
+  .ask-ai-textarea {
+    field-sizing: content;
+    min-height: 3.5rem;
+  }
+
   .ask-ai-provider[aria-checked='true'] {
     background: rgb(255 255 255 / 0.08);
     color: #fff;
@@ -126,7 +131,13 @@ const initialHref = providers[0].url + encodeURIComponent(defaultPrompt)
     const labelTemplate = label.textContent?.replace(providers[0]?.dataset.name ?? '', '{provider}') ?? '{provider}'
     let active = providers[0]
 
+    const autosize = () => {
+      // Fallback for browsers without `field-sizing: content`: never clip the default question.
+      prompt.style.height = 'auto'
+      prompt.style.height = `${prompt.scrollHeight}px`
+    }
     const update = () => {
+      autosize()
       submit.href = (active?.dataset.url ?? '') + encodeURIComponent(prompt.value.trim())
       label.textContent = labelTemplate.replace('{provider}', active?.dataset.name ?? '')
     }
@@ -148,5 +159,6 @@ const initialHref = providers[0].url + encodeURIComponent(defaultPrompt)
       })
     })
     prompt.addEventListener('input', update)
+    autosize()
   })
 </script>

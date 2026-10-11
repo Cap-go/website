@@ -52,7 +52,7 @@ export function buildSharedAstroBaseConfig({ siteDomain, defaultLocale, cpuCount
   return baseConfig
 }
 
-export function buildSharedIntegrations({ pluginIcons, pageLastModDates }) {
+export function buildSharedIntegrations({ pluginIcons, pageLastModDates, sitemapFilenameBase = 'sitemap', customSitemaps = [] }) {
   return [
     icon({
       include: {
@@ -60,11 +60,12 @@ export function buildSharedIntegrations({ pluginIcons, pageLastModDates }) {
       },
     }),
     sitemap({
+      filenameBase: sitemapFilenameBase,
+      customSitemaps,
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
       serialize(item) {
-        if (new URL(item.url).pathname.startsWith('/website-experiment/')) return undefined
         return withSitemapLastMod(item, pageLastModDates)
       },
     }),
