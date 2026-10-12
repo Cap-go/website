@@ -57,10 +57,14 @@ let docsGitLastModifiedCache: Map<string, string> | null = null
 function loadDocsGitLastModifiedMap(): Map<string, string> {
   if (docsGitLastModifiedCache) return docsGitLastModifiedCache
   const map = new Map<string, string>()
-  const result = spawnSync('git', ['log', '--format=%cI', '--name-only', '--', 'apps/docs/src/content/docs/docs'], {
+  if (!GIT_BINARY) {
+    docsGitLastModifiedCache = map
+    return map
+  }
+  const result = spawnSync(GIT_BINARY, ['log', '--format=%cI', '--name-only', '--', 'apps/docs/src/content/docs/docs'], {
     cwd: resolveRepoRoot(),
     encoding: 'utf8',
-    env: GIT_COMMAND_ENV,
+    env: { LANG: 'C.UTF-8' },
   })
   if (result.status === 0 && result.stdout) {
     let currentDate: string | null = null
@@ -85,10 +89,7 @@ const CHANGELOG_RELEASE_LIMIT = 40
 const GITHUB_CONCURRENCY = 8
 const GITHUB_RELEASE_TIMEOUT_MS = 8_000
 const PLUGIN_RELEASE_FETCH_BUDGET_MS = 90_000
-const GIT_COMMAND_ENV = {
-  PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-  LANG: 'C.UTF-8',
-}
+const GIT_BINARY = ['/usr/bin/git', '/usr/local/bin/git'].find((candidate) => existsSync(candidate)) ?? null
 
 function escapeXml(value: string): string {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;')
