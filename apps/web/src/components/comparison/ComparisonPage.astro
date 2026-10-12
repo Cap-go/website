@@ -44,9 +44,30 @@ interface Props {
   reviewWall?: boolean
   related?: ComparisonLink[]
   secondaryCta?: ComparisonLink
+  /** Overrides the default Capgo column text for rows that need competitor-specific framing. */
+  capgoRows?: Partial<Record<ComparisonRowId, string>>
+  /** Ranked list of alternatives shown after the hero. Capgo is always listed first. */
+  ranking?: Array<{ name: string; text: string; href: string; external?: boolean }>
 }
 
-const { competitor, eyebrow, heading, lead, verdict, rows, sources, better, migration, faq = [], testimonials, video, reviewWall = false, related = [] } = Astro.props
+const {
+  competitor,
+  eyebrow,
+  heading,
+  lead,
+  verdict,
+  rows,
+  sources,
+  better,
+  migration,
+  faq = [],
+  testimonials,
+  video,
+  reviewWall = false,
+  related = [],
+  capgoRows = {},
+  ranking = [],
+} = Astro.props
 
 const locale = Astro.locals.locale
 
@@ -92,6 +113,47 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
     <AppLogoStrip />
   </section>
 
+  {ranking.length > 0 && (
+    <section class="section" id="ranking">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.compare_rank_eyebrow({}, { locale })}</div>
+          <h2 class="h2-section">{m.compare_rank_title({ count: ranking.length + 1, competitor }, { locale })}</h2>
+          <p class="lead">{m.compare_rank_lead({ competitor }, { locale })}</p>
+        </div>
+        <ol class="cmp-rank">
+          <li class="us">
+            <div>
+              <h3>
+                Capgo <span class="cmp-rank-pick">{m.compare_rank_pick({}, { locale })}</span>
+              </h3>
+              <p>{m.compare_rank_capgo_text({}, { locale })}</p>
+            </div>
+            <a class="cmp-card-link" href="#comparison">
+              {m.compare_rank_capgo_link({ competitor }, { locale })} →
+            </a>
+          </li>
+          {ranking.map((item) => (
+            <li>
+              <div>
+                <h3>{item.name}</h3>
+                <p>{item.text}</p>
+              </div>
+              <a
+                class="cmp-card-link"
+                href={item.href}
+                aria-label={m.compare_rank_link_aria({ name: item.name }, { locale })}
+                {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {m.compare_rank_link({}, { locale })} →
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
   <section class="section" id="comparison">
     <div class="shell">
       <div class="section-head">
@@ -124,7 +186,7 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
                   <span class="cmp-cell-label" aria-hidden="true">
                     Capgo
                   </span>
-                  {row.capgo}
+                  {capgoRows[row.id] ?? row.capgo}
                 </td>
                 <td class="them">
                   <span class="cmp-cell-label" aria-hidden="true">

@@ -158,6 +158,11 @@ const messages = {
   agent_ready_title: 'Building blocks for agentic workflows',
   alternatives_guides_eyebrow: 'More reading',
   alternatives_guides_title: 'Reviews, migration guides, and best-of lists',
+  alternatives_category_ci_cd: 'Mobile CI/CD and build services',
+  alternatives_category_framework: 'Frameworks and tech stacks',
+  alternatives_category_lead: 'Side-by-side comparisons with sources, honest trade-offs, and a migration path for each tool.',
+  alternatives_category_live_updates: 'Live update and code push services',
+  alternatives_category_web_to_app: 'Web-to-app builders',
   alternatives_hero_eyebrow: 'Capgo alternatives',
   alternatives_hero_summary_cta: 'See the summary table',
   alternatives_index_card_title: 'Capgo vs {competitor}',
@@ -308,7 +313,7 @@ const messages = {
   alternatives_hero_subtitle:
     'Side-by-side comparisons with Ionic Appflow, Capawesome, Microsoft CodePush, Expo EAS, Median, and VoltBuilder. Every competitor fact links to the vendor page it came from.',
   alternatives_hero_title: 'Capgo alternatives: honest comparisons for Capacitor teams',
-  alternatives_meta_description: 'Compare Capacitor live updates with Appflow, Expo EAS, and CodePush. OTA, rollback, channels, CI/CD, and migration paths in one place.',
+  alternatives_meta_description: 'Compare Capgo with Appflow, Expo, CodePush, React Native, Flutter, Despia, Shorebird, Codemagic and more: OTA updates, builds, pricing, and migrations.',
   alternatives_not_good_at_ci_cd:
     "Unlike Appflow's bundled approach, we give you flexibility. Use our Cloud Build for native iOS/Android builds, or integrate with your own CI/CD (GitHub Actions, GitLab CI, etc). Your choice - both work great.",
   alternatives_not_good_at_ci_cd_label: 'All-in-one CI/CD',
@@ -937,6 +942,16 @@ const messages = {
   compare_quickstart_cta: 'Read the quickstart',
   compare_related_title: 'Related comparisons and guides',
   compare_reviews_wall_title: 'More reviews from Capgo customers',
+  compare_rank_capgo_link: 'Capgo vs {competitor}',
+  compare_rank_capgo_text:
+    'Capacitor plus Capgo: one web codebase for iOS, Android, and web, live updates that skip store review, and cloud native builds in 2–3 minutes. Open source, from $12/month.',
+  compare_rank_eyebrow: 'Top picks',
+  compare_rank_lead:
+    'Ranked for teams that want to ship mobile apps fast, fix production bugs without waiting on store review, and keep full control of their code.',
+  compare_rank_link: 'Learn more',
+  compare_rank_link_aria: 'Learn more about {name}',
+  compare_rank_pick: 'Our pick',
+  compare_rank_title: 'The {count} best {competitor} alternatives in 2026',
   compare_row_company: 'Company status',
   compare_row_frameworks: 'Framework support',
   compare_row_native_builds: 'Native builds',
