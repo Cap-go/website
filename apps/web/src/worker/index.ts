@@ -226,8 +226,8 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   },
   [GITHUB_RELEASES_PATH]: {
     methods: ['GET', 'HEAD'],
-    handle: async (request, _env, ctx) => {
-      const response = await handleGithubReleases(request, ctx)
+    handle: async (request, env, ctx) => {
+      const response = await handleGithubReleases(request, env, ctx)
       if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
