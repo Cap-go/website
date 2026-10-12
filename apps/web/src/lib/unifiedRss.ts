@@ -189,6 +189,11 @@ export function listPluginReleaseRepos(): string[] {
   return [...repos].sort((left, right) => left.localeCompare(right))
 }
 
+function parseGithubReleaseRows(data: unknown): GithubReleaseRow[] {
+  if (!Array.isArray(data)) return []
+  return data.filter((row): row is GithubReleaseRow => typeof row === 'object' && row !== null && !Array.isArray(row))
+}
+
 async function fetchGithubReleases(
   repo: string,
   perPage: number,
@@ -207,8 +212,8 @@ async function fetchGithubReleases(
       signal: AbortSignal.timeout(GITHUB_RELEASE_TIMEOUT_MS),
     })
     if (response.status === 403 || response.status === 429 || !response.ok) return null
-    const data = (await response.json()) as GithubReleaseRow[]
-    return Array.isArray(data) ? data : null
+    const data = await response.json()
+    return parseGithubReleaseRows(data)
   } catch {
     return null
   }
