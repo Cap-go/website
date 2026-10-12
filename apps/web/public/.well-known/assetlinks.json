@@ -1,10 +1,13 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "app.capgo.browser",
       "sha256_cert_fingerprints": [
+        "2D:51:F6:37:12:8F:D9:3A:A8:C6:2A:46:E4:E3:C0:0B:A5:F3:67:B3:68:E0:5E:2A:F3:82:29:3A:47:F8:C7:CF",
         "97:2F:9F:36:45:D2:16:A5:17:BA:DC:BC:06:C4:86:C7:14:1B:D7:CA:E1:E0:13:DA:2D:FA:D3:8F:41:62:10:97"
       ]
     }
