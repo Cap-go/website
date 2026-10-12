@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.capgo.browser",
+      "sha256_cert_fingerprints": [
+        "97:2F:9F:36:45:D2:16:A5:17:BA:DC:BC:06:C4:86:C7:14:1B:D7:CA:E1:E0:13:DA:2D:FA:D3:8F:41:62:10:97"
+      ]
+    }
+  }
+]
