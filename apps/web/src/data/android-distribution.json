@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2025-11-30T22:00:00.000Z",
+  "updatedAt": "2025-12-01T00:00:00.000Z",
   "source": "Composables Android Distribution Chart",
   "sourceUrl": "https://composables.com/android-distribution-chart",
-  "fetchedAt": "2026-07-28T17:30:25.635Z",
+  "fetchedAt": "2026-10-12T07:29:41.763Z",
   "apiDistribution": [
     {
       "version": "Android 5 (Lollipop)",
