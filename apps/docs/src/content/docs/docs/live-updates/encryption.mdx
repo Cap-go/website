@@ -33,6 +33,51 @@ Encryption is particularly important for:
 
 </Aside>
 
+<h2 id="security-model">Security model</h2>
+
+### Confidentiality with respect to Capgo
+
+Your RSA private key is generated and kept on your machine. The Capgo CLI never transmits your private key, and Capgo does not store it. Capgo also does not store your full RSA public key: uploads include only a short `key_id` (the first 20 characters of the PEM body) so channels can match the key pair you used.
+
+Encrypted full bundles are stored and delivered as **AES-128-CBC ciphertext**. Capgo services, CDN, object storage, and anyone on the delivery path who sees only the hosted artifacts cannot read your JavaScript, HTML, or assets without your private key.
+
+### Maximum confidentiality from Capgo
+
+Default encryption already keeps bundle **contents** confidential in Capgo storage and in transit. If you also want to reduce what Capgo could learn by linking your update channel to a particular store binary, use the following guide.
+
+**Use a dedicated Capgo app ID.** Set `plugins.CapacitorUpdater.appId` (your Capgo `app_id`) to a value that is **not** the same as your iOS bundle ID or Android application ID. Store and MDM builds embed your RSA public key in `capacitor.config`. When the Capgo `app_id` matches the store package name, it is easier to associate the Capgo app with a published binary that contains that public key. A separate Capgo app ID avoids that direct link.
+
+**Capgo Builder and the public key.** Capgo Builder uploads zip your project with `capacitor.config` (and the native tree), including `plugins.CapacitorUpdater.publicKey` after `key save`. To keep the public key out of Builder uploads:
+
+- Build native apps locally or in your own CI when confidentiality from Capgo matters, and avoid uploading those trees through Capgo Builder while the public key is in config, **or**
+- Add the public key with `key save` only after any Builder uploads that must not expose the key have already completed, **or**
+- If you rely on Capgo Builder for native builds, treat the workflow as providing strong **integrity** (signed checksums) but do **not** assume confidentiality from Capgo once the public key has been included in a Builder upload.
+
+**Encrypt delta uploads.** Delta (partial) file bodies are plaintext unless you use `@capgo/capacitor-updater` **6.14.4 or newer** (partial encryption is auto-enabled for encrypted uploads on supported updater versions) or pass **`--encrypt-partial`** on `bundle upload`. Even with partial encryption, **file names** listed in delta manifests are not encrypted; only per-file hashes are RSA-wrapped.
+
+### Integrity
+
+After decryption, the updater computes **SHA-256** over the bundle and compares it to the checksum recovered from the RSA-wrapped signature. On mismatch, the bundle is removed and never activated:
+
+- **Android** checks the checksum after decryption and **before** unzipping the archive.
+- **iOS** decrypts and unzips first, then verifies the checksum **before** the bundle can be set active.
+
+When a public key is configured, checksums that are missing or not properly RSA-signed are rejected.
+
+### Key handling
+
+For each full zip upload, the CLI generates a fresh random **AES-128** session key and **16-byte IV**, encrypts the bundle with **AES-128-CBC**, and encrypts the session key with your **RSA-2048** private key using **PKCS#1 v1.5 type 1** padding. Devices recover the AES key with the RSA public key embedded in the app. Keys and IVs are not reused across separate CLI bundle uploads. Within one delta upload, all encrypted partial files share that upload's session key and IV.
+
+The public key used for decryption is embedded in your shipped app. Plaintext bundle content is available on devices that run your app through the same decrypt path the updater uses, comparable to other assets in the app package.
+
+### Failures and reporting
+
+Decryption and checksum failures are reported as stats events (`download_fail`, `checksum_fail`, `decrypt_fail`) to the Capgo stats endpoint or your [self-hosted stats handler](/docs/plugins/updater/self-hosted/handling-stats/). Stats are sent from the device; nothing is reported back to third-party bundle hosts based on decrypt success or failure. Each attempt is usually a device-initiated full download, so padding-oracle style probing is impractical, and modified plaintext still fails the signed checksum.
+
+### Future hardening
+
+A future major release may add a versioned format with **AES-GCM** and **RSA-PSS** over the hash as defense in depth alongside today's design. That would be an incremental hardening step, not an emergency security fix for the current format.
+
 ## How Encryption Works
 
 Capgo uses a hybrid encryption approach that combines RSA and AES encryption for optimal security and performance:
