@@ -17,15 +17,16 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
     }
     runInNewContext(transpiled, {
       document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => (captchaEnabled ? {} : null) },
-      getRemoteConfig: () => Promise.resolve({}),
-      isSupabaseConfigured: () => true,
-      useSupabase: () => {
+      registerUser: async () => {
         authCalls++
         throw new Error('Stop the test before any auth IO')
       },
+      RegisterApiError: Error,
+      getRegistrationDevice: () => ({}),
       Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
-      window: {},
+      window: { location: { search: '' } },
       navigator: {},
+      URLSearchParams,
       setTimeout,
     })
     await Promise.resolve()
@@ -57,22 +58,16 @@ test('registration without profile names preserves referral attribution and the 
   }
   runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
     document: { getElementById: (id: string) => values[id], querySelector: () => null },
-    getRemoteConfig: () => Promise.resolve({}),
-    isSupabaseConfigured: () => true,
     getRegistrationDevice: () => ({ registration_device_type: 'desktop' }),
-    useSupabase: () => ({
-      rpc: async () => ({ data: true, error: null }),
-      auth: {
-        signUp: async (request: unknown) => {
-          signupRequests.push(request)
-          return { data: { user: { id: 'fake-user-id' } }, error: null }
-        },
-        getSession: async () => ({ data: { session: { access_token: 'fake-access', refresh_token: 'fake-refresh' } }, error: null }),
-      },
-    }),
+    registerUser: async (request: unknown) => {
+      signupRequests.push(request)
+      return { user: { id: 'fake-user-id' }, session: { access_token: 'fake-access', refresh_token: 'fake-refresh' } }
+    },
+    RegisterApiError: Error,
     window: windowStub,
     navigator: { userAgent: 'test', maxTouchPoints: 0 },
     URLSearchParams,
+    URL,
     setTimeout: (callback: () => void) => callback(),
   })
   await Promise.resolve()
@@ -82,10 +77,55 @@ test('registration without profile names preserves referral attribution and the 
     {
       email: 'signup@example.com',
       password: 'test-password',
-      options: { captchaToken: undefined, data: { registration_device_type: 'desktop', ref: 'readme-example' } },
+      captcha_token: undefined,
+      registration_device_type: 'desktop',
+      ref: 'readme-example',
     },
   ])
   expect(captures.map(({ event }) => event)).toEqual(['website_signup_submit', 'user_signed_up'])
   expect(referrals).toEqual([{ email: 'signup@example.com', externalUserId: 'fake-user-id' }])
-  expect(windowStub.location.href).toBe('https://console.capgo.app/login/?access_token=fake-access&refresh_token=fake-refresh&to=/app')
+  const redirect = new URL(windowStub.location.href)
+  expect(redirect.origin).toBe('https://console.capgo.app')
+  expect(redirect.searchParams.get('access_token')).toBe('fake-access')
+  expect(redirect.searchParams.get('refresh_token')).toBe('fake-refresh')
+  expect(redirect.searchParams.get('to')).toBe('/app')
+})
+
+test('a failed API request restores signup for retry without reporting success', async () => {
+  const source = readFileSync(new URL('./register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  let handler: (event: { preventDefault(): void }) => Promise<void> = async () => {}
+  const button = { disabled: false }
+  const captures: string[] = []
+  let resets = 0
+  let calls = 0
+  const windowStub = {
+    location: { href: '', search: '' },
+    turnstile: { getResponse: () => 'captcha', reset: () => resets++ },
+    posthog: { capture: (event: string) => captures.push(event) },
+  }
+  const values: Record<string, unknown> = {
+    registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
+    email: { value: 'signup@example.com' },
+    password: { value: 'Password123!' },
+  }
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelector: () => ({}) },
+    registerUser: async () => {
+      calls++
+      throw new TypeError('Network unavailable')
+    },
+    RegisterApiError: class extends Error {},
+    getRegistrationDevice: () => ({}),
+    Toastify: () => ({ showToast() {} }),
+    window: windowStub,
+    navigator: {},
+    URLSearchParams,
+  })
+  await handler({ preventDefault() {} })
+  expect(button.disabled).toBe(false)
+  expect(resets).toBe(1)
+  expect(windowStub.location.href).toBe('')
+  expect(captures).toEqual(['website_signup_submit', 'website_signup_error'])
+  await handler({ preventDefault() {} })
+  expect(calls).toBe(2)
 })
