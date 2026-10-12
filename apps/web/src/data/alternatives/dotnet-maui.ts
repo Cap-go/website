@@ -112,11 +112,11 @@ export const dotnetMaui: AlternativeCompetitor = {
     steps: [
       {
         title: 'Add Capacitor to your web app',
-        html: 'In your web project, run <code>bun add @capacitor/core @capacitor/cli</code> and <code>bunx cap init</code>, then <code>bunx cap add ios</code> and <code>bunx cap add android</code>.',
+        html: 'In your web project, run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code> and <code>bunx cap init</code>, then <code>bunx cap add ios</code> and <code>bunx cap add android</code>.',
       },
       {
         title: 'Replace MAUI device APIs with plugins',
-        html: 'Map MAUI cross-platform APIs such as secure storage, file picking, or geolocation to Capacitor plugins like <code>@capacitor/preferences</code> and <code>@capacitor/geolocation</code>.',
+        html: 'Map MAUI cross-platform APIs to Capacitor plugins: <code>@capacitor/preferences</code> for plain settings, <code>@capgo/capacitor-native-biometric</code> for credentials in the iOS Keychain and Android Keystore, and <code>@capacitor/geolocation</code> for location.',
       },
       {
         title: 'Turn on live updates and cloud builds',

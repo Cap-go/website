@@ -117,7 +117,7 @@ export const kotlinMultiplatform: AlternativeCompetitor = {
       },
       {
         title: 'Add Capacitor and keep native code in plugins',
-        html: 'Run <code>bun add @capacitor/core @capacitor/cli</code>, then <code>bunx cap init</code>, <code>bunx cap add ios</code>, and <code>bunx cap add android</code>. Wrap Kotlin or Swift modules you still need as Capacitor plugins.',
+        html: 'Run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code>, then <code>bunx cap init</code>, <code>bunx cap add ios</code>, and <code>bunx cap add android</code>. Wrap Kotlin or Swift modules you still need as Capacitor plugins.',
       },
       {
         title: 'Install Capgo',

@@ -112,7 +112,7 @@ export const flutterflow: AlternativeCompetitor = {
     steps: [
       {
         title: 'Build the app in a web framework',
-        html: 'Recreate your screens in React, Vue, Angular, or Svelte, then add Capacitor with <code>bun add @capacitor/core @capacitor/cli</code> and <code>bunx cap init</code>.',
+        html: 'Recreate your screens in React, Vue, Angular, or Svelte, then add Capacitor with <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code> and <code>bunx cap init</code>.',
       },
       {
         title: 'Add the native platforms',

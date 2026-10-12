@@ -83,7 +83,7 @@ export const mobiloud: AlternativeCompetitor = {
     steps: [
       {
         title: 'Create a Capacitor app around your site',
-        html: 'In your web project run <code>bun add @capacitor/core @capacitor/cli</code> and <code>bunx cap init</code>, using the same bundle ID as your current store listing.',
+        html: 'In your web project run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code> and <code>bunx cap init</code>, using the same bundle ID as your current store listing.',
       },
       {
         title: 'Add native features with plugins',

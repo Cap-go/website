@@ -83,7 +83,7 @@ export const appmysite: AlternativeCompetitor = {
     steps: [
       {
         title: 'Prepare a web app and add Capacitor',
-        html: 'In your web project run <code>bun add @capacitor/core @capacitor/cli</code> and <code>bunx cap init</code> with your existing bundle ID.',
+        html: 'In your web project run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code> and <code>bunx cap init</code> with your existing bundle ID.',
       },
       {
         title: 'Add platforms and plugins',

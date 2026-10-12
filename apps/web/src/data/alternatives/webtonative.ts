@@ -83,7 +83,7 @@ export const webtonative: AlternativeCompetitor = {
     steps: [
       {
         title: 'Add Capacitor',
-        html: 'Run <code>bun add @capacitor/core @capacitor/cli</code> and <code>bunx cap init</code>, then <code>bunx cap add ios</code> and <code>bunx cap add android</code>.',
+        html: 'Run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code> and <code>bunx cap init</code>, then <code>bunx cap add ios</code> and <code>bunx cap add android</code>.',
       },
       {
         title: 'Replace WTN calls with plugins',

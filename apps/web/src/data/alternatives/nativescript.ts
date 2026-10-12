@@ -113,7 +113,7 @@ export const nativescript: AlternativeCompetitor = {
       },
       {
         title: 'Add Capacitor',
-        html: 'Run <code>bun add @capacitor/core @capacitor/cli</code>, then <code>bunx cap init</code>, <code>bunx cap add ios</code>, and <code>bunx cap add android</code>. Replace direct native API calls with Capacitor plugins.',
+        html: 'Run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code>, then <code>bunx cap init</code>, <code>bunx cap add ios</code>, and <code>bunx cap add android</code>. Replace direct native API calls with Capacitor plugins.',
       },
       {
         title: 'Install Capgo',

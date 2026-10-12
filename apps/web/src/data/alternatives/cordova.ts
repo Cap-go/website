@@ -111,7 +111,7 @@ export const cordova: AlternativeCompetitor = {
     steps: [
       {
         title: 'Add Capacitor to the project',
-        html: 'Run <code>bun add @capacitor/core @capacitor/cli</code> and <code>bunx cap init</code> with the app id from <code>config.xml</code>, build your web app, then <code>bunx cap add ios</code> and <code>bunx cap add android</code>.',
+        html: 'Run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code> and <code>bunx cap init</code> with the app id from <code>config.xml</code>, build your web app, then <code>bunx cap add ios</code> and <code>bunx cap add android</code>.',
       },
       {
         title: 'Move plugins over',

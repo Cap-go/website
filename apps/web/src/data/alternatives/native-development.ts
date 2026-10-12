@@ -112,7 +112,7 @@ export const nativeDevelopment: AlternativeCompetitor = {
     steps: [
       {
         title: 'Wrap your web app',
-        html: 'Run <code>bun add @capacitor/core @capacitor/cli</code> and <code>bunx cap init</code> with your existing bundle id, then <code>bunx cap add ios</code> and <code>bunx cap add android</code>.',
+        html: 'Run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code> and <code>bunx cap init</code> with your existing bundle id, then <code>bunx cap add ios</code> and <code>bunx cap add android</code>.',
       },
       {
         title: 'Keep the native code that matters',

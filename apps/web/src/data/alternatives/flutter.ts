@@ -113,7 +113,7 @@ export const flutter: AlternativeCompetitor = {
       },
       {
         title: 'Add Capacitor',
-        html: 'Run <code>bun add @capacitor/core @capacitor/cli</code>, then <code>bunx cap init</code> and <code>bunx cap add ios</code> and <code>bunx cap add android</code>. Swap Flutter plugins for Capacitor plugins.',
+        html: 'Run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code>, then <code>bunx cap init</code> and <code>bunx cap add ios</code> and <code>bunx cap add android</code>. Swap Flutter plugins for Capacitor plugins.',
       },
       {
         title: 'Install Capgo',

@@ -89,7 +89,7 @@ export const pwabuilder: AlternativeCompetitor = {
     steps: [
       {
         title: 'Add Capacitor to your PWA',
-        html: 'Run <code>bun add @capacitor/core @capacitor/cli</code>, then <code>bunx cap init</code>, <code>bunx cap add ios</code>, and <code>bunx cap add android</code>.',
+        html: 'Run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code>, then <code>bunx cap init</code>, <code>bunx cap add ios</code>, and <code>bunx cap add android</code>.',
       },
       {
         title: 'Add native plugins',

@@ -83,7 +83,7 @@ export const natively: AlternativeCompetitor = {
     steps: [
       {
         title: 'Add Capacitor',
-        html: 'In your web project run <code>bun add @capacitor/core @capacitor/cli</code>, <code>bunx cap init</code>, <code>bunx cap add ios</code>, and <code>bunx cap add android</code>.',
+        html: 'In your web project run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code>, <code>bunx cap init</code>, <code>bunx cap add ios</code>, and <code>bunx cap add android</code>.',
       },
       {
         title: 'Replace Natively SDK calls',

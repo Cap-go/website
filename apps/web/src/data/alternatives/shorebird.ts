@@ -104,7 +104,7 @@ export const shorebird: AlternativeCompetitor = {
     steps: [
       {
         title: 'Add Capacitor to your web app',
-        html: 'In your React, Vue, Angular, or Svelte project, run <code>bun add @capacitor/core @capacitor/cli</code> and <code>bunx cap init</code>.',
+        html: 'In your React, Vue, Angular, or Svelte project, run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code> and <code>bunx cap init</code>.',
       },
       {
         title: 'Add the native platforms',

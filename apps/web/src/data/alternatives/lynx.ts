@@ -112,7 +112,7 @@ export const lynx: AlternativeCompetitor = {
     steps: [
       {
         title: 'Create or reuse a web app',
-        html: 'Port ReactLynx views to React DOM, or use your existing web app, then run <code>bun add @capacitor/core @capacitor/cli</code> and <code>bunx cap init</code>.',
+        html: 'Port ReactLynx views to React DOM, or use your existing web app, then run <code>bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android</code> and <code>bunx cap init</code>.',
       },
       {
         title: 'Add the native platforms',
