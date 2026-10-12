@@ -13,7 +13,7 @@ const community = getGitHubCommunityStats()
 const formatCount = (value: number) => value.toLocaleString(locale)
 
 const repoLabels: Record<string, string> = {
-  'Cap-go/capgo': m.transparency_repo_capgo({}, { locale }),
+  'Cap-go/capgo.app': m.transparency_repo_capgo({}, { locale }),
   'Cap-go/CLI': m.transparency_repo_cli({}, { locale }),
   'Cap-go/capacitor-updater': m.transparency_repo_updater({}, { locale }),
 }
@@ -160,7 +160,7 @@ const smallCards = [
           ))}
         </ol>
         <a
-          href="https://github.com/Cap-go/capgo/releases"
+          href="https://github.com/Cap-go/capgo.app/releases"
           target="_blank"
           rel="noopener noreferrer"
           class="mt-4 self-end text-xs font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!"

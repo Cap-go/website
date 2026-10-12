@@ -7,7 +7,7 @@ import { existsSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 const OUTPUT_PATH = new URL('../apps/web/src/data/transparency.json', import.meta.url).pathname
 const GITHUB_TOKEN = process.env.PERSONAL_ACCESS_TOKEN ?? process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN
 const ADVISORY_REPOS = ['Cap-go/capgo', 'Cap-go/capacitor-updater', 'Cap-go/CLI']
-const RELEASE_REPOS = ['Cap-go/capgo', 'Cap-go/CLI', 'Cap-go/capacitor-updater']
+const RELEASE_REPOS = ['Cap-go/capgo.app', 'Cap-go/capacitor-updater']
 const RELEASE_LIMIT = 5
 const METRICS_ORIGIN = process.env.METRICS_ORIGIN ?? 'https://capgo.app'
 

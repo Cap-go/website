@@ -1,7 +1,8 @@
 export const GITHUB_RELEASES_PATH = '/github-releases.json'
 // GitHub releases change a few times a day at most; one refresh per day is enough for the homepage.
 export const GITHUB_RELEASES_CACHE_TTL_SECONDS = 24 * 60 * 60
-export const GITHUB_RELEASE_REPOS = ['Cap-go/capgo', 'Cap-go/CLI', 'Cap-go/capacitor-updater'] as const
+// Cap-go/capgo.app hosts both the platform (capgo-*) and CLI (cli-*) releases since the monorepo merge.
+export const GITHUB_RELEASE_REPOS = ['Cap-go/capgo.app', 'Cap-go/capacitor-updater'] as const
 export const GITHUB_RELEASE_LIMIT = 5
 
 export type PublicGithubRelease = {

@@ -15,6 +15,8 @@ on:
       - 'apps/shared/**'
       - 'scripts/**'
       - 'configs.json'
+      - 'seo-checker.config.json'
+      - 'seo-checker.exclusions.json'
       - 'package.json'
       - 'bun.lock'
       - '.github/workflows/deploy-web.yml'
@@ -46,7 +48,7 @@ jobs:
       - if: steps.cert.outputs.renew == 'true'
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
         with:
-          bun-version: 1.4.2
+          bun-version: 1.4.3
       - name: Issue or renew UDID signing cert
         if: steps.cert.outputs.renew == 'true'
         env:
@@ -146,7 +148,7 @@ jobs:
       # v2
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
         with:
-          bun-version: 1.4.2
+          bun-version: 1.4.3
 
       - name: Cache bun modules
         uses: actions/cache@v5
@@ -188,15 +190,19 @@ jobs:
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
       - run: bun run build:after
-      - name: Remove legacy builder-metrics Worker secrets
+      # Secrets persist across deploys and uploaded versions, so they are only synced on regular deploys.
+      - name: Sync Worker secrets
         if: needs.plan.outputs.abtest != 'true'
         working-directory: apps/web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           bunx wrangler@4.126.0 secret delete SUPABASE_SERVICE_ROLE_KEY || true
           bunx wrangler@4.126.0 secret delete BUILDER_DATABASE_URL || true
+          # Authenticated GitHub calls for /github-releases.json and sponsors; Cloudflare IPs are rate-limited without it.
+          printf '%s' "$PERSONAL_ACCESS_TOKEN" | bunx wrangler@4.126.0 secret put PERSONAL_ACCESS_TOKEN
       - run: bun run deploy:web
         if: needs.plan.outputs.abtest != 'true'
         env:
@@ -239,7 +245,7 @@ jobs:
       # v2
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
         with:
-          bun-version: 1.4.2
+          bun-version: 1.4.3
       - uses: actions/download-artifact@v4
         with:
           pattern: version-*

@@ -5,7 +5,7 @@ test('normalizeGithubReleases drops drafts and prereleases, sorts newest first, 
   const releases = normalizeGithubReleases(
     [
       {
-        repo: 'Cap-go/capgo',
+        repo: 'Cap-go/capgo.app',
         data: [
           { tag_name: 'capgo-1.0.0', html_url: 'https://x/1', published_at: '2026-10-01T00:00:00Z' },
           { tag_name: 'capgo-0.9.0', html_url: 'https://x/0', published_at: '2026-09-01T00:00:00Z', draft: true },
@@ -13,7 +13,7 @@ test('normalizeGithubReleases drops drafts and prereleases, sorts newest first, 
         ],
       },
       {
-        repo: 'Cap-go/CLI',
+        repo: 'Cap-go/capacitor-updater',
         data: [
           { tag_name: 'cli-2.0.0', html_url: 'https://x/2', published_at: '2026-10-05T00:00:00Z' },
           { tag_name: 'cli-1.9.0', html_url: 'https://x/19', published_at: null },
