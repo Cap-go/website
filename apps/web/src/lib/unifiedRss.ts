@@ -1,5 +1,6 @@
 import { actions } from '@/config/plugins'
 import matter from 'gray-matter'
+import { spawnSync } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -42,11 +43,52 @@ function resolveDocsContentRoot(): string {
 }
 
 const DOCS_CONTENT_ROOT = resolveDocsContentRoot()
+
+function resolveRepoRoot(): string {
+  const cwd = process.cwd()
+  if (existsSync(join(cwd, 'apps/docs'))) return cwd
+  if (existsSync(join(cwd, '../docs'))) return join(cwd, '..', '..')
+  const sourceLibDir = fileURLToPath(new URL('.', import.meta.url))
+  return join(sourceLibDir, '..', '..', '..')
+}
+
+let docsGitLastModifiedCache: Map<string, string> | null = null
+
+function loadDocsGitLastModifiedMap(): Map<string, string> {
+  if (docsGitLastModifiedCache) return docsGitLastModifiedCache
+  const map = new Map<string, string>()
+  const result = spawnSync('git', ['log', '--format=%cI', '--name-only', '--', 'apps/docs/src/content/docs/docs'], {
+    cwd: resolveRepoRoot(),
+    encoding: 'utf8',
+    env: GIT_COMMAND_ENV,
+  })
+  if (result.status === 0 && result.stdout) {
+    let currentDate: string | null = null
+    for (const line of result.stdout.split('\n')) {
+      const trimmed = line.trim()
+      if (!trimmed) continue
+      if (/^\d{4}-\d{2}-\d{2}T/.test(trimmed)) {
+        currentDate = trimmed
+        continue
+      }
+      if (!currentDate || map.has(trimmed)) continue
+      map.set(trimmed, currentDate)
+    }
+  }
+  docsGitLastModifiedCache = map
+  return map
+}
 const CHANGELOG_REPO = 'Cap-go/capgo.app'
 const GITHUB_TOKEN = process.env.PERSONAL_ACCESS_TOKEN ?? process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN ?? ''
-const PLUGIN_RELEASES_PER_REPO = 1
+const PLUGIN_RELEASES_PER_REPO = 5
 const CHANGELOG_RELEASE_LIMIT = 40
-const GITHUB_CONCURRENCY = 6
+const GITHUB_CONCURRENCY = 8
+const GITHUB_RELEASE_TIMEOUT_MS = 8_000
+const PLUGIN_RELEASE_FETCH_BUDGET_MS = 90_000
+const GIT_COMMAND_ENV = {
+  PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+  LANG: 'C.UTF-8',
+}
 
 function escapeXml(value: string): string {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;')
@@ -99,6 +141,12 @@ function resolveDocDate(filePath: string, frontmatter: Record<string, unknown>):
     const parsed = new Date(lastUpdated)
     if (!Number.isNaN(parsed.getTime())) return parsed
   }
+  const relativePath = relative(resolveRepoRoot(), filePath).replaceAll('\\', '/')
+  const gitIso = loadDocsGitLastModifiedMap().get(relativePath)
+  if (gitIso) {
+    const parsed = new Date(gitIso)
+    if (!Number.isNaN(parsed.getTime())) return parsed
+  }
   return statSync(filePath).mtime
 }
 
@@ -140,7 +188,13 @@ export function listPluginReleaseRepos(): string[] {
   return [...repos].sort((left, right) => left.localeCompare(right))
 }
 
-async function fetchGithubReleases(repo: string, perPage: number, fetchImpl: typeof fetch): Promise<GithubReleaseRow[] | null> {
+async function fetchGithubReleases(
+  repo: string,
+  perPage: number,
+  fetchImpl: typeof fetch,
+  deadlineMs = Number.POSITIVE_INFINITY,
+): Promise<GithubReleaseRow[] | null> {
+  if (Date.now() >= deadlineMs) return null
   const headers: Record<string, string> = {
     Accept: 'application/vnd.github+json',
     'User-Agent': 'capgo-website-rss',
@@ -149,7 +203,7 @@ async function fetchGithubReleases(repo: string, perPage: number, fetchImpl: typ
   try {
     const response = await fetchImpl(`https://api.github.com/repos/${repo}/releases?per_page=${perPage}`, {
       headers,
-      signal: AbortSignal.timeout(20_000),
+      signal: AbortSignal.timeout(GITHUB_RELEASE_TIMEOUT_MS),
     })
     if (response.status === 403 || response.status === 429 || !response.ok) return null
     const data = (await response.json()) as GithubReleaseRow[]
@@ -159,15 +213,34 @@ async function fetchGithubReleases(repo: string, perPage: number, fetchImpl: typ
   }
 }
 
-async function mapWithConcurrency<T, R>(items: T[], concurrency: number, mapper: (item: T) => Promise<R>): Promise<R[]> {
-  const results: R[] = new Array(items.length)
-  for (let start = 0; start < items.length; start += concurrency) {
-    const chunk = items.slice(start, start + concurrency)
-    const chunkResults = await Promise.all(chunk.map((item) => mapper(item)))
-    chunkResults.forEach((result, offset) => {
-      results[start + offset] = result
-    })
+function firstStableReleaseItem(repo: string, rows: GithubReleaseRow[] | null): UnifiedRssItem[] {
+  if (!rows) return []
+  for (const row of rows) {
+    const item = githubReleaseToItem('release', repo, row)
+    if (item) return [item]
   }
+  return []
+}
+
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  concurrency: number,
+  mapper: (item: T) => Promise<R>,
+  deadlineMs = Number.POSITIVE_INFINITY,
+): Promise<R[]> {
+  const results: R[] = new Array(items.length)
+  let nextIndex = 0
+
+  async function worker() {
+    while (nextIndex < items.length) {
+      if (Date.now() >= deadlineMs) return
+      const current = nextIndex
+      nextIndex += 1
+      results[current] = await mapper(items[current])
+    }
+  }
+
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, () => worker()))
   return results
 }
 
@@ -199,11 +272,13 @@ export async function collectGithubReleaseRssItems(fetchImpl: typeof fetch = fet
   }
 
   const pluginRepos = listPluginReleaseRepos()
-  const pluginRows = await mapWithConcurrency(pluginRepos, GITHUB_CONCURRENCY, async (repo) => {
-    const rows = await fetchGithubReleases(repo, PLUGIN_RELEASES_PER_REPO, fetchImpl)
-    if (!rows) return [] as UnifiedRssItem[]
-    return rows.map((row) => githubReleaseToItem('release', repo, row)).filter((item): item is UnifiedRssItem => item !== null)
-  })
+  const pluginFetchDeadline = Date.now() + PLUGIN_RELEASE_FETCH_BUDGET_MS
+  const pluginRows = await mapWithConcurrency(
+    pluginRepos,
+    GITHUB_CONCURRENCY,
+    async (repo) => firstStableReleaseItem(repo, await fetchGithubReleases(repo, PLUGIN_RELEASES_PER_REPO, fetchImpl, pluginFetchDeadline)),
+    pluginFetchDeadline,
+  )
 
   for (const repoItems of pluginRows) items.push(...repoItems)
   return items
