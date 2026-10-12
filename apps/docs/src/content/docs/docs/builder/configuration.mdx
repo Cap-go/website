@@ -76,6 +76,21 @@ All three fields are required together. The numeric `APPLE_APP_ID` (found in App
 | `--ios-scheme <scheme>` | `CAPGO_IOS_SCHEME` | `CAPGO_IOS_SCHEME` | `App` | Xcode scheme to build |
 | `--ios-target <target>` | `CAPGO_IOS_TARGET` | `CAPGO_IOS_TARGET` | `App` | Xcode target for reading build settings |
 | `--ios-distribution <mode>` | `CAPGO_IOS_DISTRIBUTION` | `CAPGO_IOS_DISTRIBUTION` | `app_store` | Distribution mode: `app_store` or `ad_hoc` |
+| `--xcode-version <version>` | `CAPGO_IOS_XCODE_VERSION` | `CAPGO_IOS_XCODE_VERSION` | any | Build with this Xcode version, e.g. `26`, `26.0.1` or `27`. A major version accepts any minor. The build fails fast and lists the available versions when none matches. |
+
+### Xcode 27
+
+Build with Xcode 27 (iOS 27 SDK) with `--xcode-version 27`:
+
+```bash
+npx @capgo/cli@latest build request --platform ios --xcode-version 27
+```
+
+Apps built with the iOS 27 SDK must adopt the UIScene lifecycle: without a `UIApplicationSceneManifest` in `Info.plist` and a scene delegate, iOS 27 stops the app at launch. Capgo blocks these builds before they start (prescan check `ios/plist-scene-lifecycle-xcode27`). Add a `SceneDelegate` and a `UIApplicationSceneManifest` to `ios/App/App/Info.plist`, or keep building with `--xcode-version 26` until you do. See Apple's [scene lifecycle guide](https://developer.apple.com/documentation/uikit/specifying-the-scenes-your-app-supports).
+
+### CocoaPods end of support (December 2026)
+
+Capgo Build stops building iOS projects that use CocoaPods in December 2026. Migrate your project to Swift Package Manager before then: see the [Capacitor SPM guide](https://capacitorjs.com/docs/ios/spm). Until then, CocoaPods builds keep working; the CLI prints a warning and Capgo emails your organization admins a reminder.
 
 ---
 
@@ -231,6 +246,7 @@ APP_STORE_CONNECT_TEAM_ID="TEAM123456"
 # Optional iOS settings
 CAPGO_IOS_SCHEME="App"
 CAPGO_IOS_TARGET="App"
+CAPGO_IOS_XCODE_VERSION="27"
 ```
 
 ### Android
