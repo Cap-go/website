@@ -1,0 +1,57 @@
+---
+import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORAGE_KEY } from '@/lib/attribution'
+---
+
+<!-- First-touch capture runs synchronously so attribution survives fast navigation to /register. -->
+<script
+  is:inline
+  define:vars={{
+    cookieName: ATTRIBUTION_COOKIE_NAME,
+    storageKey: ATTRIBUTION_STORAGE_KEY,
+    maxAge: ATTRIBUTION_MAX_AGE_SECONDS,
+  }}
+>
+  ;(function () {
+    try {
+      var hasCookie = document.cookie.indexOf(cookieName + '=') !== -1
+      var hasStorage = false
+      try {
+        hasStorage = !!localStorage.getItem(storageKey)
+      } catch (e) {}
+      if (hasCookie || hasStorage) return
+
+      var params = new URLSearchParams(location.search)
+      var ref = params.get('ref')
+      var utmSource = params.get('utm_source')
+      var utmMedium = params.get('utm_medium')
+      var utmCampaign = params.get('utm_campaign')
+      if (!ref && !utmSource && !utmMedium && !utmCampaign) return
+
+      var data = {}
+      if (ref) data.ref = ref
+      if (utmSource) data.utm_source = utmSource
+      if (utmMedium) data.utm_medium = utmMedium
+      if (utmCampaign) data.utm_campaign = utmCampaign
+
+      var json = JSON.stringify(data)
+      var domain = location.hostname.endsWith('capgo.app') ? '; domain=.capgo.app' : ''
+      var secure = location.protocol === 'https:' ? '; secure' : ''
+      document.cookie = cookieName + '=' + encodeURIComponent(json) + '; path=/; max-age=' + maxAge + '; samesite=lax' + domain + secure
+      try {
+        localStorage.setItem(storageKey, json)
+      } catch (e2) {}
+    } catch (e3) {}
+  })()
+</script>
+
+<script>
+  import { captureFirstTouchFromLocation, readStoredAttribution, startAttributionLinkDecoration, toPostHogAttributionProps } from '@/lib/attribution'
+
+  captureFirstTouchFromLocation()
+  startAttributionLinkDecoration()
+
+  window.__capgoGetAttributionPostHogProps = () => {
+    const stored = readStoredAttribution()
+    return stored ? toPostHogAttributionProps(stored) : {}
+  }
+</script>

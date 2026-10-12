@@ -7,3 +7,7 @@ declare namespace App {
     runtimeConfig: import('./config/app').RuntimeConfig
   }
 }
+
+interface Window {
+  __capgoGetAttributionPostHogProps?: () => Record<string, string>
+}

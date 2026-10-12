@@ -56,9 +56,33 @@
     // The Cloudflare version split owns assignment; avoid a second independent flag evaluation.
     advanced_disable_feature_flags: true,
     loaded: function (ph) {
-      // Attribution for README / docs links (?ref=plugin_xxx): stick to every later event, incl. user_signed_up.
-      const ref = (window.location.search || '').match(/[?&]ref=([^&#]+)/)?.[1]
-      if (ref) ph.register_once({ ref })
+      function readAttributionPropsFromCookie() {
+        try {
+          var match = document.cookie.match(/(?:^|; )capgo_attribution=([^;]*)/)
+          if (!match) return {}
+          var data = JSON.parse(decodeURIComponent(match[1]))
+          var props = {}
+          if (data.ref) {
+            props.signup_ref = data.ref
+            if (typeof data.ref === 'string' && data.ref.indexOf('plugin_') === 0) {
+              props.signup_plugin = data.ref.slice('plugin_'.length)
+            }
+          }
+          if (data.utm_source) props.first_utm_source = data.utm_source
+          if (data.utm_medium) props.first_utm_medium = data.utm_medium
+          if (data.utm_campaign) props.first_utm_campaign = data.utm_campaign
+          return props
+        } catch (e) {
+          return {}
+        }
+      }
+      const attributionProps = typeof window.__capgoGetAttributionPostHogProps === 'function' ? window.__capgoGetAttributionPostHogProps() : readAttributionPropsFromCookie()
+      if (attributionProps && Object.keys(attributionProps).length) {
+        ph.register_once(attributionProps)
+        if (ph.people && typeof ph.people.set_once === 'function') {
+          ph.people.set_once(attributionProps)
+        }
+      }
       // Branch A/B test (docs/abtest.md): the Worker version that served this page tags it.
       const read = (name) => document.querySelector('meta[name="' + name + '"]')?.content
       const flag = read('capgo-ab-flag')
