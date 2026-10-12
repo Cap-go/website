@@ -168,7 +168,6 @@ const mobileSolutions = [
 const mobileLinks = [
   { href: 'docs', label: m.docs({}, { locale: Astro.locals.locale }) },
   { href: 'pricing', label: m.pricing({}, { locale: Astro.locals.locale }) },
-  { href: 'feed.xml', label: 'RSS', absolute: true },
 ]
 ---
 
@@ -265,13 +264,6 @@ const mobileLinks = [
             class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
           >
             {m.pricing({}, { locale: Astro.locals.locale })}
-          </a>
-          <a
-            href="/feed.xml"
-            aria-label="Capgo RSS feed"
-            class="flex h-10 items-center rounded-lg px-1.5 text-sm font-semibold whitespace-nowrap text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none xl:px-2"
-          >
-            RSS
           </a>
           <span class="mx-1 h-5 w-px bg-white/10" aria-hidden="true"></span>
           <a
@@ -408,7 +400,7 @@ const mobileLinks = [
           <div class="my-1 border-t border-white/10"></div>
           {mobileLinks.map((link) => (
             <a
-              href={link.absolute ? `/${link.href.replace(/^\//, '')}` : getRelativeLocaleUrl(Astro.locals.locale, link.href)}
+              href={getRelativeLocaleUrl(Astro.locals.locale, link.href)}
               class="flex min-h-12 w-full items-center justify-between rounded-xl px-3 text-left text-[15px] font-semibold text-white transition-colors hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
             >
               {link.label}
