@@ -1,7 +1,7 @@
 import { actions } from '@/config/plugins'
 import matter from 'gray-matter'
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
-import { join } from 'node:path'
+import { join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 export const UNIFIED_RSS_ITEM_CAP = 200
