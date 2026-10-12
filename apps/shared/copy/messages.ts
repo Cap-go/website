@@ -992,7 +992,7 @@ const messages = {
   compare_voltbuilder_verdict: 'Choose VoltBuilder if you only need store builds. Choose Capgo if you want native builds plus live updates, channels, and rollback after release.',
   expo_nav_label: 'EAS vs Capgo',
   footer_best_live_updates_link: 'Best Capacitor live update tools',
-  footer_brand_tagline: 'Live updates, native builds, and release tooling for Capacitor apps.',
+  footer_brand_tagline: 'AI-ready platform to build, ship, and live-update Capacitor apps.',
   footer_col_resources: 'Resources',
   footer_col_tools: 'Free tools',
   footer_language_label: 'Change language',
