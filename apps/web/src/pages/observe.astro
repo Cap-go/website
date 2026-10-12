@@ -7,15 +7,15 @@ import m from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import ProductVideoLoop from '@/components/ProductVideoLoop.astro'
 import { getProductScreens } from '@/config/productScreens'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
-const title = brand + ' Observe | Version health after a rollout'
-const description =
-  'Watch each live update land in real time, see which update failures matter, compare native app health by version, catch bundles that need a new native build, and follow any signal down to device logs.'
+const title = brand + ' Observe | Version health after a rollout, for teams and AI agents'
+const description = 'Watch each live update land, see which failures matter, compare app health by version, and ask your AI agent through MCP which release to roll back.'
 const logsDocsUrl = getRelativeLocaleUrl(locale, 'docs/webapp/logs')
 const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
 
@@ -175,6 +175,15 @@ const screenSignals = [
         />
       </div>
     </section>
+
+    <AgentReadySection
+      background="bg-transparent"
+      headingId="agent-ready-observe-title"
+      eyebrow={m.agent_ready_observe_eyebrow({}, { locale })}
+      title={m.agent_ready_observe_title({}, { locale })}
+      subtitle={m.agent_ready_observe_subtitle({}, { locale })}
+      prompts={[m.agent_ready_observe_prompt_1({}, { locale }), m.agent_ready_observe_prompt_2({}, { locale }), m.agent_ready_observe_prompt_3({}, { locale })]}
+    />
 
     <ProductTestimonials
       variant="builder"

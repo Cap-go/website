@@ -253,6 +253,7 @@ const softwareApplication = createSoftwareApplicationLdJson(runtimePublic, {
   applicationCategory: 'DeveloperApplication',
   operatingSystem: platforms.length > 0 ? supportedPlatforms.join(', ') : runtime === 'Electron' ? 'Windows, macOS, Linux' : 'iOS, Android',
   downloadUrl: npmHref,
+  featureList: [m.plugin_ai_feature({}, { locale })],
   offers: { price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
 })
 
@@ -264,6 +265,8 @@ content['ldJSON'] = createLdJsonGraph(runtimePublic, softwareApplication, {
 })
 
 const commandClass = 'block font-mono text-[13px] leading-6 whitespace-nowrap'
+const skillsInstallCommand = 'npx skills add Cap-go/capgo-skills'
+const agentPrompt = name ? m.plugin_ai_prompt({ package: name }, { locale }) : undefined
 const cardClass = 'rounded-2xl border border-white/10 bg-white/[0.03]'
 const secondaryButtonClass =
   'inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400'
@@ -433,6 +436,34 @@ const secondaryButtonClass =
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
               </a>
             </div>
+            {
+              agentPrompt && (
+                <div class="mt-6 border-t border-white/10 pt-5">
+                  <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">{m.plugin_ai_eyebrow({}, { locale })}</p>
+                  <p class="mt-3 text-sm leading-6 text-gray-300">{m.plugin_ai_body({}, { locale })}</p>
+                  <div class="mt-3 flex items-center justify-between gap-2 overflow-x-auto rounded-lg border border-white/10 bg-gray-950/70 px-3 py-2">
+                    <CommandCode command={skillsInstallCommand} class="block font-mono text-xs leading-6 whitespace-nowrap" />
+                    <button
+                      type="button"
+                      data-plugin-copy={skillsInstallCommand}
+                      aria-label="Copy Agent Skills install command"
+                      class="shrink-0 cursor-pointer rounded-md border border-white/10 px-2 py-0.5 text-xs font-semibold text-gray-200 transition hover:border-white/25 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <p class="mt-2 flex items-start gap-2 rounded-lg border border-white/10 bg-black/30 px-3 py-2 font-mono text-xs leading-5 text-gray-200">
+                    <span class="shrink-0 rounded border border-blue-300/20 bg-blue-400/10 px-1.5 text-[10px] font-semibold text-blue-200" aria-hidden="true">
+                      you
+                    </span>
+                    <span class="break-words">{agentPrompt}</span>
+                  </p>
+                  <a href={getRelativeLocaleUrl(locale, 'agents')} class="mt-3 inline-flex text-sm font-semibold text-blue-300 transition hover:text-blue-200">
+                    {m.plugin_ai_link({}, { locale })} →
+                  </a>
+                </div>
+              )
+            }
             <div class="mt-6 border-t border-white/10 pt-5">
               <p class="text-sm leading-6 text-gray-300">Missing a feature? Capgo builds and maintains custom Capacitor plugins.</p>
               <a href={getRelativeLocaleUrl(locale, 'consulting')} class="mt-2 inline-flex text-sm font-semibold text-blue-300 transition hover:text-blue-200">

@@ -24,7 +24,7 @@ function copy(key: string, values: MessageValues = {}) {
   return m[key](values, { locale })
 }
 
-const title = `${brand} | Ionic and Capacitor Live Updates`
+const title = `${brand} | ${m.live_update_seo_title({}, { locale })}`
 const description = m.live_update_description({}, { locale })
 const dataUrl = getRelativeLocaleUrl(locale, 'data')
 const expoUrl = getRelativeLocaleUrl(locale, 'alternatives/expo')
@@ -442,7 +442,14 @@ const featureTiles = [
     <ReleaseExplainers background="bg-transparent" />
     <UpdateTypesSection background="bg-transparent" />
     <StorePolicySection background="bg-transparent" />
-    <AgentReadySection background="bg-transparent" />
+    <AgentReadySection
+      background="bg-transparent"
+      headingId="agent-ready-live-update-title"
+      eyebrow={m.agent_ready_live_update_eyebrow({}, { locale })}
+      title={m.agent_ready_live_update_title({}, { locale })}
+      subtitle={m.agent_ready_live_update_subtitle({}, { locale })}
+      prompts={[m.agent_ready_live_update_prompt_1({}, { locale }), m.agent_ready_live_update_prompt_2({}, { locale }), m.agent_ready_live_update_prompt_3({}, { locale })]}
+    />
 
     <section class="section" id="compare">
       <div class="shell">

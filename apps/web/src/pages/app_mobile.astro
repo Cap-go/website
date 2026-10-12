@@ -9,10 +9,13 @@ import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SignupCta from '@/components/SignupCta.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
+
+const locale = Astro.locals.locale
 
 const title = 'Capgo mobile app | Preview builds and manage live updates on the go'
 const description =
-  'Use the Capgo mobile app to preview bundles on real devices, share QR previews with teams or users, follow native build status, and manage release work from your phone.'
+  'Use the Capgo mobile app to preview bundles on real devices, share QR previews, follow native builds, and check the releases your AI agent shipped.'
 const content = {
   title,
   description,
@@ -254,6 +257,14 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
       </div>
     </div>
   </section>
+
+  <AgentReadySection
+    headingId="agent-ready-mobile-app-title"
+    eyebrow={m.agent_ready_mobile_app_eyebrow({}, { locale })}
+    title={m.agent_ready_mobile_app_title({}, { locale })}
+    subtitle={m.agent_ready_mobile_app_subtitle({}, { locale })}
+    prompts={[m.agent_ready_mobile_app_prompt_1({}, { locale }), m.agent_ready_mobile_app_prompt_2({}, { locale }), m.agent_ready_mobile_app_prompt_3({}, { locale })]}
+  />
 
   <ProductAppExamples
     title="Capacitor apps prove the release loop at real scale"
