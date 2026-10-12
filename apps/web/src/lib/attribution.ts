@@ -164,17 +164,23 @@ export function mergeFirstTouch(existing: CapgoAttribution | null, incoming: Cap
   return hasAttributionValues(incoming) ? incoming : existing
 }
 
-export function isRegisterOrConsoleLink(href: string): boolean {
+function isCapgoMarketingHost(hostname: string): boolean {
+  return hostname === 'capgo.app' || hostname === 'www.capgo.app' || hostname === 'localhost' || hostname.endsWith('.localhost')
+}
+
+export function isRegisterOrConsoleLink(href: string, baseUrl = 'https://capgo.app/'): boolean {
   if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
     return false
   }
-  const lower = href.toLowerCase()
-  if (lower.includes('console.capgo.app')) return true
   try {
-    const url = new URL(href, 'https://capgo.app')
-    return /\/register(\/|$|\?)/.test(url.pathname)
+    const url = new URL(href, baseUrl)
+    if (url.hostname === 'console.capgo.app') return true
+    if (isCapgoMarketingHost(url.hostname)) {
+      return /\/register(\/|$)/.test(url.pathname)
+    }
+    return false
   } catch {
-    return /\/register(\/|$|\?)/.test(href)
+    return false
   }
 }
 
@@ -189,25 +195,45 @@ export function attributionLinkParams(data: CapgoAttribution): Record<string, st
   return params
 }
 
-export function appendAttributionToUrl(href: string, data: CapgoAttribution, baseOrigin = 'https://capgo.app'): string {
-  if (!hasAttributionValues(data) || !isRegisterOrConsoleLink(href)) {
+function formatDecoratedHref(href: string, resolved: URL, baseUrl: string): string {
+  if (href.startsWith('http://') || href.startsWith('https://')) {
+    return resolved.toString()
+  }
+  if (href.startsWith('//')) {
+    return `//${resolved.host}${resolved.pathname}${resolved.search}${resolved.hash}`
+  }
+  if (href.startsWith('/')) {
+    return `${resolved.pathname}${resolved.search}${resolved.hash}`
+  }
+
+  const base = new URL(baseUrl)
+  if (resolved.origin !== base.origin) {
+    return `${resolved.pathname}${resolved.search}${resolved.hash}`
+  }
+
+  const basePath = base.pathname.endsWith('/') ? base.pathname : `${base.pathname}/`
+  let relativePath = resolved.pathname
+  if (relativePath.startsWith(basePath)) {
+    relativePath = relativePath.slice(basePath.length)
+  } else if (relativePath.startsWith(base.pathname)) {
+    relativePath = relativePath.slice(base.pathname.length).replace(/^\//, '')
+  }
+  return `${relativePath}${resolved.search}${resolved.hash}`
+}
+
+export function appendAttributionToUrl(href: string, data: CapgoAttribution, baseUrl = 'https://capgo.app/'): string {
+  if (!hasAttributionValues(data) || !isRegisterOrConsoleLink(href, baseUrl)) {
     return href
   }
 
-  const url = new URL(href, baseOrigin)
+  const resolved = new URL(href, baseUrl)
   for (const [key, value] of Object.entries(attributionLinkParams(data))) {
-    if (value && !url.searchParams.has(key)) {
-      url.searchParams.set(key, value)
+    if (value && !resolved.searchParams.has(key)) {
+      resolved.searchParams.set(key, value)
     }
   }
 
-  if (href.startsWith('http://') || href.startsWith('https://')) {
-    return url.toString()
-  }
-  if (href.startsWith('//')) {
-    return `//${url.host}${url.pathname}${url.search}${url.hash}`
-  }
-  return `${url.pathname}${url.search}${url.hash}`
+  return formatDecoratedHref(href, resolved, baseUrl)
 }
 
 function readCookieValue(name: string): string | null {
@@ -217,7 +243,11 @@ function readCookieValue(name: string): string | null {
   for (const part of parts) {
     const trimmed = part.trim()
     if (trimmed.startsWith(prefix)) {
-      return decodeURIComponent(trimmed.slice(prefix.length))
+      try {
+        return decodeURIComponent(trimmed.slice(prefix.length))
+      } catch {
+        return null
+      }
     }
   }
   return null
@@ -275,9 +305,9 @@ export function getSignupRefForRegistration(): string | undefined {
 }
 
 export function getSignupAttributionForEvents(): Record<string, string> {
+  if (typeof window === 'undefined') return {}
   const stored = readStoredAttribution()
-  if (!stored) return {}
-  const props = toPostHogAttributionProps(stored)
+  const props = stored ? toPostHogAttributionProps(stored) : toPostHogAttributionProps(parseAttributionFromSearch(window.location.search))
   const events: Record<string, string> = {}
   if (props.signup_ref) events.signup_ref = props.signup_ref
   if (props.signup_plugin) events.signup_plugin = props.signup_plugin
@@ -296,7 +326,7 @@ export function decorateAttributionLinks(root: ParentNode = document): void {
     const el = anchor as HTMLAnchorElement
     const href = el.getAttribute('href')
     if (!href || !isRegisterOrConsoleLink(href)) return
-    const next = appendAttributionToUrl(href, data!, window.location.origin)
+    const next = appendAttributionToUrl(href, data!, window.location.href)
     if (next !== href) {
       el.setAttribute('href', next)
     }

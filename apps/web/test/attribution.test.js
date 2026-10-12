@@ -99,9 +99,16 @@ test('deserializeAttribution ignores unknown keys', () => {
 
 test('isRegisterOrConsoleLink matches register and console urls', () => {
   expect(isRegisterOrConsoleLink('/register/')).toBe(true)
-  expect(isRegisterOrConsoleLink('/de/register/')).toBe(true)
+  expect(isRegisterOrConsoleLink('/de/register/', 'https://capgo.app/de/pricing/')).toBe(true)
   expect(isRegisterOrConsoleLink('https://console.capgo.app/login/')).toBe(true)
   expect(isRegisterOrConsoleLink('/pricing/')).toBe(false)
+  expect(isRegisterOrConsoleLink('https://other.example/register/')).toBe(false)
+  expect(isRegisterOrConsoleLink('https://console.capgo.app.other.example/login/')).toBe(false)
+})
+
+test('appendAttributionToUrl preserves locale-relative register links', () => {
+  const data = { ref: 'plugin_a' }
+  expect(appendAttributionToUrl('register/', data, 'https://capgo.app/de/pricing/')).toBe('register/?ref=plugin_a&signup_source=plugin_a')
 })
 
 test('appendAttributionToUrl adds missing params without overwriting', () => {

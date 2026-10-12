@@ -165,7 +165,8 @@ assert(
   typeof supportContext === 'string' &&
     supportContext.includes('support') &&
     supportContext.includes('compare_row_support') &&
-    supportContext.includes('support_title'),
+    supportContext.includes('support_title') &&
+    supportContext.includes('solutions_ionic_enterprise_plugins_support_label'),
   'Duplicate Support text dropped one of its contexts',
 )
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]

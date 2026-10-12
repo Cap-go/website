@@ -85,11 +85,25 @@
         var compact = segments.join('/')
         return compact ? 'other:' + compact : 'other'
       }
-      function readAttributionPropsFromCookie() {
+      function readAttributionStorageJson() {
         try {
           var match = document.cookie.match(/(?:^|; )capgo_attribution=([^;]*)/)
-          if (!match) return {}
-          var data = JSON.parse(decodeURIComponent(match[1]))
+          if (match) {
+            try {
+              return JSON.parse(decodeURIComponent(match[1]))
+            } catch (e) {}
+          }
+        } catch (e) {}
+        try {
+          var stored = localStorage.getItem('capgo_attribution')
+          if (stored) return JSON.parse(stored)
+        } catch (e2) {}
+        return null
+      }
+      function readAttributionPropsFromCookie() {
+        try {
+          var data = readAttributionStorageJson()
+          if (!data) return {}
           var props = {}
           if (data.ref) {
             props.signup_ref = data.ref
