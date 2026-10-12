@@ -47,7 +47,7 @@ export const codemagic: AlternativeCompetitor = {
       sources: [3, 5],
     },
     support: {
-      text: 'Community support on the free plan. Enterprise adds priority support, SSO, and signed SLAs, NDAs, and DPAs.',
+      text: 'Community support on the free plan. Enterprise adds priority support, SSO, and signed SLAs, non-disclosure agreements, and DPAs.',
       sources: [1],
     },
     company: {
