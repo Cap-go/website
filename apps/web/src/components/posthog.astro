@@ -56,6 +56,35 @@
     // The Cloudflare version split owns assignment; avoid a second independent flag evaluation.
     advanced_disable_feature_flags: true,
     loaded: function (ph) {
+      function signupSourceFromAttribution(data) {
+        if (data.ref) return data.ref
+        var path = data.first_touch_path
+        var type = data.first_touch_type
+        if (!path || !type) return undefined
+        var segments = path.split('/').filter(Boolean)
+        if (type === 'home') return 'home'
+        if (type === 'pricing') return 'pricing'
+        if (type === 'blog') {
+          var blogSlug = segments[segments.indexOf('blog') + 1]
+          return blogSlug ? 'blog:' + blogSlug : 'blog'
+        }
+        if (type === 'docs') {
+          var docsIndex = segments.indexOf('docs')
+          var section = docsIndex >= 0 ? segments.slice(docsIndex + 1).join('/') : ''
+          return section ? 'docs:' + section : 'docs'
+        }
+        if (type === 'plugin') {
+          var pluginSlug = segments[segments.indexOf('plugins') + 1]
+          return pluginSlug ? 'plugin:' + pluginSlug : 'plugin'
+        }
+        if (type === 'solutions') {
+          var solutionsIndex = segments.indexOf('solutions')
+          var rest = solutionsIndex >= 0 ? segments.slice(solutionsIndex + 1).join('/') : ''
+          return rest ? 'solutions:' + rest : 'solutions'
+        }
+        var compact = segments.join('/')
+        return compact ? 'other:' + compact : 'other'
+      }
       function readAttributionPropsFromCookie() {
         try {
           var match = document.cookie.match(/(?:^|; )capgo_attribution=([^;]*)/)
@@ -71,6 +100,10 @@
           if (data.utm_source) props.first_utm_source = data.utm_source
           if (data.utm_medium) props.first_utm_medium = data.utm_medium
           if (data.utm_campaign) props.first_utm_campaign = data.utm_campaign
+          if (data.first_touch_type) props.first_touch_type = data.first_touch_type
+          if (data.first_touch_path) props.first_touch_path = data.first_touch_path
+          var signupSource = signupSourceFromAttribution(data)
+          if (signupSource) props.signup_source = signupSource
           return props
         } catch (e) {
           return {}
