@@ -1,8 +1,7 @@
 import { actions } from '@/config/plugins'
 import matter from 'gray-matter'
-import { execFileSync } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
-import { join, relative } from 'node:path'
+import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 export const UNIFIED_RSS_ITEM_CAP = 200
@@ -29,35 +28,25 @@ type GithubReleaseRow = {
   body?: string | null
 }
 
-function resolveMonorepoPaths(): { repoRoot: string; docsRoot: string } {
+function resolveDocsContentRoot(): string {
   const cwd = process.cwd()
   const fromWorkspace = join(cwd, 'apps/docs/src/content/docs/docs')
-  if (existsSync(fromWorkspace)) {
-    return { repoRoot: cwd, docsRoot: fromWorkspace }
-  }
+  if (existsSync(fromWorkspace)) return fromWorkspace
   const fromWebApp = join(cwd, '../docs/src/content/docs/docs')
-  if (existsSync(fromWebApp)) {
-    return { repoRoot: join(cwd, '..', '..'), docsRoot: fromWebApp }
-  }
+  if (existsSync(fromWebApp)) return fromWebApp
   const sourceLibDir = fileURLToPath(new URL('.', import.meta.url))
   const webRoot = join(sourceLibDir, '..', '..')
   const docsRoot = join(webRoot, '..', 'docs/src/content/docs/docs')
-  if (existsSync(docsRoot)) {
-    return { repoRoot: join(webRoot, '..'), docsRoot }
-  }
+  if (existsSync(docsRoot)) return docsRoot
   throw new Error('Could not locate apps/docs content for the unified RSS feed')
 }
 
-const { repoRoot: REPO_ROOT, docsRoot: DOCS_CONTENT_ROOT } = resolveMonorepoPaths()
+const DOCS_CONTENT_ROOT = resolveDocsContentRoot()
 const CHANGELOG_REPO = 'Cap-go/capgo.app'
 const GITHUB_TOKEN = process.env.PERSONAL_ACCESS_TOKEN ?? process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN ?? ''
 const PLUGIN_RELEASES_PER_REPO = 1
 const CHANGELOG_RELEASE_LIMIT = 40
 const GITHUB_CONCURRENCY = 6
-const SAFE_PROCESS_ENV = {
-  ...process.env,
-  PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-}
 
 function escapeXml(value: string): string {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;')
@@ -104,46 +93,10 @@ function listDocFiles(dir: string, files: string[] = []): string[] {
   return files
 }
 
-let docsGitLastModifiedCache: Map<string, string> | null = null
-
-function loadDocsGitLastModifiedMap(): Map<string, string> {
-  if (docsGitLastModifiedCache) return docsGitLastModifiedCache
-  const map = new Map<string, string>()
-  try {
-    const output = execFileSync('git', ['log', '--format=%cI', '--name-only', '--', 'apps/docs/src/content/docs/docs'], {
-      cwd: REPO_ROOT,
-      encoding: 'utf8',
-      env: SAFE_PROCESS_ENV,
-      stdio: ['ignore', 'pipe', 'ignore'],
-    })
-    let currentDate: string | null = null
-    for (const line of output.split('\n')) {
-      const trimmed = line.trim()
-      if (!trimmed) continue
-      if (/^\d{4}-\d{2}-\d{2}T/.test(trimmed)) {
-        currentDate = trimmed
-        continue
-      }
-      if (!currentDate || map.has(trimmed)) continue
-      map.set(trimmed, currentDate)
-    }
-  } catch {
-    // Git history is optional; file mtimes still provide a fallback.
-  }
-  docsGitLastModifiedCache = map
-  return map
-}
-
 function resolveDocDate(filePath: string, frontmatter: Record<string, unknown>): Date {
   const lastUpdated = frontmatter.lastUpdated
   if (typeof lastUpdated === 'string' || typeof lastUpdated === 'number' || lastUpdated instanceof Date) {
     const parsed = new Date(lastUpdated)
-    if (!Number.isNaN(parsed.getTime())) return parsed
-  }
-  const relativePath = relative(REPO_ROOT, filePath).replaceAll('\\', '/')
-  const gitIso = loadDocsGitLastModifiedMap().get(relativePath)
-  if (gitIso) {
-    const parsed = new Date(gitIso)
     if (!Number.isNaN(parsed.getTime())) return parsed
   }
   return statSync(filePath).mtime
