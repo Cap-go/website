@@ -1,3 +1,4 @@
+import { getSignupAttributionForEvents, getSignupRefForRegistration } from '@/lib/attribution'
 import { getRegistrationDevice } from '@/services/registration-device'
 import { getRemoteConfig, isSupabaseConfigured, useSupabase } from '@/services/supabase'
 import Toastify from 'toastify-js'
@@ -153,7 +154,7 @@ form?.addEventListener('submit', async (e) => {
         first_name: firstName.value,
         last_name: lastName.value,
         ...registrationDevice,
-        ref: new URLSearchParams(window.location.search).get('ref') ?? undefined,
+        ref: getSignupRefForRegistration(),
       },
     },
   })
@@ -196,6 +197,7 @@ form?.addEventListener('submit', async (e) => {
       email: email.value,
       first_name: firstName.value,
       last_name: lastName.value,
+      ...getSignupAttributionForEvents(),
     })
   }
   if ((window as any).Affonso?.signup) {

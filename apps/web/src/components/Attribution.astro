@@ -1,0 +1,77 @@
+---
+import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORAGE_KEY } from '@/lib/attribution'
+---
+
+<!-- First-touch capture runs synchronously so attribution survives fast navigation to /register. -->
+<script
+  is:inline
+  define:vars={{
+    cookieName: ATTRIBUTION_COOKIE_NAME,
+    storageKey: ATTRIBUTION_STORAGE_KEY,
+    maxAge: ATTRIBUTION_MAX_AGE_SECONDS,
+  }}
+>
+  ;(function () {
+    try {
+      var hasCookie = document.cookie.indexOf(cookieName + '=') !== -1
+      var hasStorage = false
+      try {
+        hasStorage = !!localStorage.getItem(storageKey)
+      } catch (e) {}
+      if (hasCookie || hasStorage) return
+
+      var locales = { de: 1, es: 1, fr: 1, id: 1, it: 1, ja: 1, ko: 1, zh: 1 }
+      var segments = location.pathname.split('/').filter(Boolean)
+      var path = location.pathname
+      if (segments.length && locales[segments[0]]) {
+        var rest = segments.slice(1)
+        path = rest.length ? '/' + rest.join('/') + (location.pathname.endsWith('/') ? '/' : '') : '/'
+      }
+      if (!path) path = '/'
+
+      var lower = path.toLowerCase()
+      var touchType = 'other'
+      if (lower === '/' || lower === '') touchType = 'home'
+      else if (lower === '/pricing' || lower.indexOf('/pricing/') === 0) touchType = 'pricing'
+      else if (lower === '/blog' || lower.indexOf('/blog/') === 0) touchType = 'blog'
+      else if (lower === '/docs' || lower.indexOf('/docs/') === 0) touchType = 'docs'
+      else if (lower === '/plugins' || lower.indexOf('/plugins/') === 0) touchType = 'plugin'
+      else if (lower === '/solutions' || lower.indexOf('/solutions/') === 0) touchType = 'solutions'
+
+      var params = new URLSearchParams(location.search)
+      var ref = params.get('ref')
+      var utmSource = params.get('utm_source')
+      var utmMedium = params.get('utm_medium')
+      var utmCampaign = params.get('utm_campaign')
+
+      var data = {
+        first_touch_type: touchType,
+        first_touch_path: path,
+      }
+      if (ref) data.ref = ref
+      if (utmSource) data.utm_source = utmSource
+      if (utmMedium) data.utm_medium = utmMedium
+      if (utmCampaign) data.utm_campaign = utmCampaign
+
+      var json = JSON.stringify(data)
+      var domain = location.hostname.endsWith('capgo.app') ? '; domain=.capgo.app' : ''
+      var secure = location.protocol === 'https:' ? '; secure' : ''
+      document.cookie = cookieName + '=' + encodeURIComponent(json) + '; path=/; max-age=' + maxAge + '; samesite=lax' + domain + secure
+      try {
+        localStorage.setItem(storageKey, json)
+      } catch (e2) {}
+    } catch (e3) {}
+  })()
+</script>
+
+<script>
+  import { captureFirstTouchFromLocation, readStoredAttribution, startAttributionLinkDecoration, toPostHogAttributionProps } from '@/lib/attribution'
+
+  captureFirstTouchFromLocation()
+  startAttributionLinkDecoration()
+
+  window.__capgoGetAttributionPostHogProps = () => {
+    const stored = readStoredAttribution()
+    return stored ? toPostHogAttributionProps(stored) : {}
+  }
+</script>

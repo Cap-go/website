@@ -162,7 +162,11 @@ const updatesContext = __translationWorkerTest.resolveTranslationContexts(['Upda
 assert(typeof updatesContext === 'string' && updatesContext.includes('updates_by_month'), 'HTML-split Updates segment did not keep parent pricing calculator context')
 const supportContext = __translationWorkerTest.resolveTranslationContexts(['Support'])[0]
 assert(
-  typeof supportContext === 'string' && supportContext.includes('support') && supportContext.includes('compare_row_support'),
+  typeof supportContext === 'string' &&
+    supportContext.includes('support') &&
+    supportContext.includes('compare_row_support') &&
+    supportContext.includes('support_title') &&
+    supportContext.includes('solutions_ionic_enterprise_plugins_support_label'),
   'Duplicate Support text dropped one of its contexts',
 )
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
