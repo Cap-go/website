@@ -214,6 +214,8 @@ export function createSoftwareApplicationLdJson(
     url: string
     image?: string
     applicationCategory: string
+    applicationSubCategory?: string
+    featureList?: string[]
     operatingSystem?: string
     softwareVersion?: string
     downloadUrl?: string
@@ -238,6 +240,8 @@ export function createSoftwareApplicationLdJson(
     applicationCategory: options.applicationCategory,
   }
 
+  if (options.applicationSubCategory) app.applicationSubCategory = options.applicationSubCategory
+  if (options.featureList?.length) app.featureList = options.featureList
   if (options.operatingSystem) app.operatingSystem = options.operatingSystem
   if (options.softwareVersion) app.softwareVersion = options.softwareVersion
   if (options.downloadUrl) app.downloadUrl = options.downloadUrl
