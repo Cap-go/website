@@ -221,7 +221,19 @@ Very large projects may hit the build-time limit (see [Known Limitations](#known
    - Check in App Store Connect
    - Generate new key if needed
 
+### App crashes at launch on iOS 27
+
+**Symptoms:**
+- The app built with Xcode 27 closes immediately on iOS 27 (TestFlight or device)
+- The crash report shows `_UIApplicationEvaluateRuntimeIssueForNoSceneLifecycleAdoption`
+
+**Solution:** apps built with the iOS 27 SDK must adopt the UIScene lifecycle. Add a `SceneDelegate` and a `UIApplicationSceneManifest` to `ios/App/App/Info.plist`, or build with `--xcode-version 26`. Capgo now blocks these builds before they start (prescan check `ios/plist-scene-lifecycle-xcode27`).
+
 ### "Pod install failed"
+
+<Aside type="caution">
+Capgo Build stops building CocoaPods projects in December 2026. Migrate to Swift Package Manager: see the [Capacitor SPM guide](https://capacitorjs.com/docs/ios/spm).
+</Aside>
 
 **Symptoms:**
 - Build fails during CocoaPods installation
