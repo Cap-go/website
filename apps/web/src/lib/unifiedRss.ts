@@ -54,17 +54,21 @@ const GITHUB_TOKEN = process.env.PERSONAL_ACCESS_TOKEN ?? process.env.GITHUB_TOK
 const PLUGIN_RELEASES_PER_REPO = 1
 const CHANGELOG_RELEASE_LIMIT = 40
 const GITHUB_CONCURRENCY = 6
+const SAFE_PROCESS_ENV = {
+  ...process.env,
+  PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+}
 
 function escapeXml(value: string): string {
-  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
+  return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;')
 }
 
 function stripMarkdown(value: string): string {
   return value
     .replace(/```[\s\S]*?```/g, ' ')
     .replace(/`[^`]*`/g, ' ')
-    .replace(/!\[[^\]]*]\([^)]*\)/g, ' ')
-    .replace(/\[[^\]]*]\([^)]*\)/g, ' ')
+    .replace(/!\[[^[\]]*]\([^()]*\)/g, ' ')
+    .replace(/\[[^[\]]*]\([^()]*\)/g, ' ')
     .replace(/[#>*_~|-]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim()
@@ -109,6 +113,7 @@ function loadDocsGitLastModifiedMap(): Map<string, string> {
     const output = execFileSync('git', ['log', '--format=%cI', '--name-only', '--', 'apps/docs/src/content/docs/docs'], {
       cwd: REPO_ROOT,
       encoding: 'utf8',
+      env: SAFE_PROCESS_ENV,
       stdio: ['ignore', 'pipe', 'ignore'],
     })
     let currentDate: string | null = null
@@ -170,8 +175,9 @@ export function collectDocsRssItems(): UnifiedRssItem[] {
 
 export function listPluginReleaseRepos(): string[] {
   const repos = new Set<string>()
+  const pluginRepoPattern = /^https:\/\/github\.com\/Cap-go\/([^/?#]+)/i
   for (const action of actions) {
-    const match = action.href.match(/^https:\/\/github\.com\/Cap-go\/([^/?#]+)/i)
+    const match = pluginRepoPattern.exec(action.href)
     if (!match) continue
     const repoName = match[1].replace(/\.git$/i, '').replace(/\/$/, '')
     if (repoName === 'capacitor-updater' || repoName.startsWith('capacitor-')) {
@@ -201,17 +207,14 @@ async function fetchGithubReleases(repo: string, perPage: number, fetchImpl: typ
 }
 
 async function mapWithConcurrency<T, R>(items: T[], concurrency: number, mapper: (item: T) => Promise<R>): Promise<R[]> {
-  const results: R[] = []
-  let index = 0
-  async function worker() {
-    while (index < items.length) {
-      const current = index
-      index += 1
-      results[current] = await mapper(items[current])
-    }
+  const results: R[] = new Array(items.length)
+  for (let start = 0; start < items.length; start += concurrency) {
+    const chunk = items.slice(start, start + concurrency)
+    const chunkResults = await Promise.all(chunk.map((item) => mapper(item)))
+    chunkResults.forEach((result, offset) => {
+      results[start + offset] = result
+    })
   }
-  const workers = Array.from({ length: Math.min(concurrency, items.length) }, () => worker())
-  await Promise.all(workers)
   return results
 }
 
