@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { integrations } from '@/config/integrations'
 import m from '@/copy/messages'
+import AgentReadySection from '@/components/AgentReadySection.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -57,6 +58,16 @@ const trustedFreelancers = [
           ))
         }
       </div>
+
+      <AgentReadySection
+        background="bg-transparent"
+        headingId="agent-ready-integrations-title"
+        eyebrow={m.agent_ready_integrations_eyebrow({}, { locale })}
+        title={m.agent_ready_integrations_title({}, { locale })}
+        subtitle={m.agent_ready_integrations_subtitle({}, { locale })}
+        prompts={[m.agent_ready_integrations_prompt_1({}, { locale }), m.agent_ready_integrations_prompt_2({}, { locale })]}
+        showAgents
+      />
 
       <section class="mt-16 text-left" aria-labelledby="freelance-partners-heading">
         <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">

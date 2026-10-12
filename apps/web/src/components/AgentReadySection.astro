@@ -5,10 +5,28 @@ import { getRelativeLocaleUrl } from '@/services/links'
 
 interface Props {
   background?: string
+  /** Unique heading id when the section appears next to another agent block. */
+  headingId?: string
+  eyebrow?: string
+  title?: string
+  subtitle?: string
+  /** Example prompts relevant to the page's product, shown as "you" chat lines. */
+  prompts?: string[]
+  /** Show links to the per-agent setup guides under /agents/<slug>. */
+  showAgents?: boolean
 }
 
-const { background = 'bg-[#1a1a1a]' } = Astro.props
+const { background = 'bg-[#1a1a1a]', headingId = 'agent-ready-title', eyebrow, title, subtitle, prompts = [], showAgents = false } = Astro.props
 const locale = Astro.locals.locale
+
+const agentGuides = [
+  { name: 'Claude Code', slug: 'claude-code' },
+  { name: 'Codex', slug: 'codex' },
+  { name: 'Cursor', slug: 'cursor' },
+  { name: 'GitHub Copilot', slug: 'github-copilot' },
+  { name: 'Gemini CLI', slug: 'gemini-cli' },
+  { name: 'Windsurf', slug: 'windsurf' },
+]
 
 const tools = [
   {
@@ -42,17 +60,35 @@ const tools = [
 ]
 ---
 
-<section class:list={[background, 'py-24 sm:py-32']} aria-labelledby="agent-ready-title">
+<section class:list={[background, 'py-24 sm:py-32']} aria-labelledby={headingId}>
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.agent_ready_eyebrow({}, { locale })}</p>
-      <h2 id="agent-ready-title" class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
-        {m.agent_ready_title({}, { locale })}
+      <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{eyebrow ?? m.agent_ready_eyebrow({}, { locale })}</p>
+      <h2 id={headingId} class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+        {title ?? m.agent_ready_title({}, { locale })}
       </h2>
-      <p class="mt-6 text-lg leading-8 text-pretty text-gray-400">{m.agent_ready_subtitle({}, { locale })}</p>
+      <p class="mt-6 text-lg leading-8 text-pretty text-gray-400">{subtitle ?? m.agent_ready_subtitle({}, { locale })}</p>
     </div>
 
-    <ul class="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      prompts.length > 0 && (
+        <div class="mx-auto mt-12 max-w-3xl">
+          <p class="text-center font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase">{m.agent_ready_prompts_label({}, { locale })}</p>
+          <ul class="mt-4 grid gap-3">
+            {prompts.map((prompt) => (
+              <li class="flex items-start gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-left">
+                <span class="mt-0.5 shrink-0 rounded-md border border-[#44BCFF]/20 bg-[#44BCFF]/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-[#44BCFF]" aria-hidden="true">
+                  you
+                </span>
+                <span class="font-mono text-sm leading-6 text-pretty text-gray-200">{prompt}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    <ul class:list={['grid gap-4 sm:grid-cols-2 lg:grid-cols-4', prompts.length > 0 ? 'mt-12' : 'mt-16']}>
       {
         tools.map((tool) => (
           <li>
@@ -88,6 +124,26 @@ const tools = [
         ))
       }
     </ul>
+
+    {
+      showAgents && (
+        <div class="mt-10 text-center">
+          <p class="font-mono text-xs font-semibold tracking-wide text-gray-500 uppercase">{m.agent_ready_agents_label({}, { locale })}</p>
+          <ul class="mt-4 flex flex-wrap justify-center gap-2">
+            {agentGuides.map((agent) => (
+              <li>
+                <a
+                  href={getRelativeLocaleUrl(locale, `agents/${agent.slug}`)}
+                  class="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm text-gray-200 transition-[border-color,color] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:border-[#44BCFF]/40 [@media(hover:hover)]:hover:text-white"
+                >
+                  {agent.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
 
     <div class="mt-10 text-center">
       <a

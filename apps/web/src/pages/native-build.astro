@@ -80,8 +80,7 @@ const mcpClients = [
   code: `${mcpInstallBaseCommand} --client ${client.client}`,
 }))
 
-const builderTitle = copy('native_build_builder_title')
-const title = `${brand} | ${builderTitle}`
+const title = `${brand} | ${copy('native_build_seo_title')}`
 const description = copy('native_build_builder_description')
 
 let plansAll: Plan[] = []
@@ -889,6 +888,21 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
               <li>{copy('native_build_v2_mcp_chk_3')}</li>
             </ul>
             <p class="mcp-ask-note">{copy('native_build_v2_mcp_ask_note')}</p>
+            <p class="mcp-more-title">{copy('native_build_v2_mcp_more_title')}</p>
+            <ul class="mcp-more">
+              {[1, 2, 3].map((n) => (
+                <li>
+                  <span class="mcp-ask-who" aria-hidden="true">
+                    you
+                  </span>
+                  <span class="mcp-more-text">{copy(`native_build_v2_mcp_more_prompt_${n}`)}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="mcp-skills">
+              {copy('native_build_v2_mcp_skills_note')} <code>npx skills add Cap-go/capgo-skills</code>{' '}
+              <a href={getRelativeLocaleUrl(locale, 'skills')}>{copy('agent_ready_cta')} →</a>
+            </p>
           </div>
         </div>
       </div>
@@ -5354,6 +5368,53 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: rgba(255, 255, 255, 0.45);
       line-height: 1.5;
       margin: 0;
+    }
+    .nb .mcp-more-title {
+      margin: 22px 0 10px;
+      font-family: var(--nb-font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    .nb .mcp-more {
+      display: grid;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nb .mcp-more li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--terminal-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 9px 12px;
+    }
+    .nb .mcp-more-text {
+      font-family: var(--nb-font-mono);
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .nb .mcp-skills {
+      margin: 16px 0 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.55);
+    }
+    .nb .mcp-skills code {
+      font-family: var(--nb-font-mono);
+      color: #fff;
+      white-space: nowrap;
+    }
+    .nb .mcp-skills a {
+      color: var(--nb-accent);
+      font-weight: 600;
+      white-space: nowrap;
     }
   </style>
 

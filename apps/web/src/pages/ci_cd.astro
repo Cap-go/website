@@ -1,14 +1,15 @@
 ---
 import m from '@/copy/messages'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
-const pageTitle = 'Capacitor CI/CD with Capgo Build | Capgo'
-const pageDescription = 'Run Capgo Build from GitHub Actions or GitLab CI for signed iOS and Android binaries. The EAS Workflows analog for Capacitor, not React Native.'
+const pageTitle = 'Capacitor CI/CD with Capgo Build and AI Agents | Capgo'
+const pageDescription = 'Run Capgo Build from GitHub Actions, GitLab CI, or your AI agent for signed iOS and Android binaries. The EAS Workflows analog for Capacitor.'
 const buildDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/getting-started')
 const githubActionsDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/github-actions')
 const credentialsDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/credentials')
@@ -34,7 +35,7 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
     title: pageTitle,
     description: pageDescription,
     image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-ci-cd.png`,
-    keywords: 'Capacitor CI/CD, EAS Workflows analog, Capgo Build, GitHub Actions iOS Android',
+    keywords: 'Capacitor CI/CD, EAS Workflows analog, Capgo Build, GitHub Actions iOS Android, AI agent CI/CD, Capgo MCP',
     ldJSON,
   }}
 >
@@ -699,6 +700,15 @@ npx @capgo/cli@latest build request com.example.app --platform android --build-m
         </div>
       </div>
     </section>
+
+    <AgentReadySection
+      background="border-t border-white/10 bg-gray-900"
+      headingId="agent-ready-ci-cd-title"
+      eyebrow={m.agent_ready_ci_cd_eyebrow({}, { locale })}
+      title={m.agent_ready_ci_cd_title({}, { locale })}
+      subtitle={m.agent_ready_ci_cd_subtitle({}, { locale })}
+      prompts={[m.agent_ready_ci_cd_prompt_1({}, { locale }), m.agent_ready_ci_cd_prompt_2({}, { locale }), m.agent_ready_ci_cd_prompt_3({}, { locale })]}
+    />
 
     <section class="border-t border-white/10 bg-gray-900 py-16 sm:py-20">
       <div class="mx-auto max-w-3xl px-6 text-center lg:px-8">
