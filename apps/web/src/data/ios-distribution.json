@@ -1,61 +1,61 @@
 {
-  "updatedAt": "2026-08-11T00:00:00.000Z",
+  "updatedAt": "2026-10-12T00:00:00.000Z",
   "source": "iOS Ref",
   "sourceUrl": "https://iosref.com/ios-usage",
-  "fetchedAt": "2026-10-12T07:29:41.777Z",
+  "fetchedAt": "2026-10-13T07:18:47.299Z",
   "data": [
     {
       "version": "iOS 27",
       "released": "2026",
-      "cumulativeUsage": 0.5,
+      "cumulativeUsage": 4.4,
       "lastIosFor": "—"
     },
     {
       "version": "iOS 26",
       "released": "2025",
-      "cumulativeUsage": 73.7,
+      "cumulativeUsage": 76.8,
       "lastIosFor": "—"
     },
     {
       "version": "iOS 18",
       "released": "2024",
-      "cumulativeUsage": 90.4,
+      "cumulativeUsage": 93.1,
       "lastIosFor": "iPhone XS / XS Max , iPhone XR"
     },
     {
       "version": "iOS 17",
       "released": "2023",
-      "cumulativeUsage": 93,
+      "cumulativeUsage": 95.2,
       "lastIosFor": "—"
     },
     {
       "version": "iOS 16",
       "released": "2022",
-      "cumulativeUsage": 96.2,
+      "cumulativeUsage": 97.8,
       "lastIosFor": "iPhone X , iPhone 8 / 8 Plus"
     },
     {
       "version": "iOS 15",
       "released": "2021",
-      "cumulativeUsage": 98.2,
+      "cumulativeUsage": 99.3,
       "lastIosFor": "iPhone 7 / 7 Plus ,iPhone SE (gen 1) , iPhone 6s / 6s Plus"
     },
     {
       "version": "iOS 14",
       "released": "2020",
-      "cumulativeUsage": 98.3,
+      "cumulativeUsage": 99.4,
       "lastIosFor": "—"
     },
     {
       "version": "iOS 13",
       "released": "2019",
-      "cumulativeUsage": 98.3,
+      "cumulativeUsage": 99.4,
       "lastIosFor": ""
     },
     {
       "version": "iOS 12",
       "released": "2018",
-      "cumulativeUsage": 98.7,
+      "cumulativeUsage": 99.7,
       "lastIosFor": "iPhone 6 / 6 Plus , iPhone 5s"
     },
     {
