@@ -13,20 +13,35 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
 >
   ;(function () {
     try {
+      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign']
+
       function readStoredJson() {
+        var cookieData = null
+        var storageData = null
         try {
           var match = document.cookie.match(new RegExp('(?:^|; )' + cookieName + '=([^;]*)'))
           if (match) {
             try {
-              return JSON.parse(decodeURIComponent(match[1]))
+              cookieData = JSON.parse(decodeURIComponent(match[1]))
             } catch (e) {}
           }
         } catch (e2) {}
         try {
           var stored = localStorage.getItem(storageKey)
-          if (stored) return JSON.parse(stored)
+          if (stored) storageData = JSON.parse(stored)
         } catch (e3) {}
-        return null
+        if (!cookieData && !storageData) return null
+        return { cookie: cookieData, storage: storageData }
+      }
+
+      function pickTracked(source) {
+        var out = {}
+        if (!source || typeof source !== 'object') return out
+        for (var ti = 0; ti < tracked.length; ti++) {
+          var tk = tracked[ti]
+          if (source[tk]) out[tk] = source[tk]
+        }
+        return out
       }
 
       function classifyTouchType(path) {
@@ -66,16 +81,17 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (utmMedium) incoming.utm_medium = utmMedium
       if (utmCampaign) incoming.utm_campaign = utmCampaign
 
-      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign']
-      var existing = readStoredJson()
-      var data = {}
-      if (existing && typeof existing === 'object') {
-        for (var ti = 0; ti < tracked.length; ti++) {
-          var tk = tracked[ti]
-          if (existing[tk]) data[tk] = existing[tk]
-        }
+      var stores = readStoredJson()
+      var data = pickTracked(stores && stores.cookie)
+      var storageFields = pickTracked(stores && stores.storage)
+      for (var sk in storageFields) {
+        if (!data[sk]) data[sk] = storageFields[sk]
       }
       var hasPair = data.first_touch_type && data.first_touch_path
+      if (hasPair && data.first_touch_type === 'other') {
+        var expected = classifyTouchType(data.first_touch_path)
+        if (expected === 'console' || expected === 'cli') data.first_touch_type = expected
+      }
       if (hasPair) {
         // keep stored pair
       } else if (data.first_touch_path) {

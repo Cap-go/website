@@ -189,11 +189,22 @@ export function pickTrackedAttributionFields(record: Record<string, unknown> | C
   return data
 }
 
+export function reconcileLegacyFirstTouchPair(data: CapgoAttribution): CapgoAttribution {
+  if (!data.first_touch_path || data.first_touch_type !== 'other') return data
+  const normalized = normalizeFirstTouchPath(data.first_touch_path)
+  const expected = classifyFirstTouchType(normalized)
+  if (expected === 'console' || expected === 'cli') {
+    return { ...data, first_touch_type: expected, first_touch_path: normalized }
+  }
+  return data
+}
+
 function resolveFirstTouchPair(existing: CapgoAttribution, incoming: CapgoAttribution): Pick<CapgoAttribution, 'first_touch_type' | 'first_touch_path'> {
   if (hasFirstTouch(existing)) {
+    const reconciled = reconcileLegacyFirstTouchPair(existing)
     return {
-      first_touch_type: existing.first_touch_type,
-      first_touch_path: existing.first_touch_path,
+      first_touch_type: reconciled.first_touch_type,
+      first_touch_path: reconciled.first_touch_path,
     }
   }
   if (existing.first_touch_path) {
@@ -322,12 +333,14 @@ function writeAttributionCookie(json: string): void {
 export function readStoredAttribution(): CapgoAttribution | null {
   if (typeof window === 'undefined') return null
   const fromCookie = deserializeAttribution(readCookieValue(ATTRIBUTION_COOKIE_NAME))
-  if (fromCookie) return fromCookie
+  let fromStorage: CapgoAttribution | null = null
   try {
-    return deserializeAttribution(localStorage.getItem(ATTRIBUTION_STORAGE_KEY))
+    fromStorage = deserializeAttribution(localStorage.getItem(ATTRIBUTION_STORAGE_KEY))
   } catch {
-    return null
+    fromStorage = null
   }
+  const merged = mergeAttribution(mergeAttribution(null, fromCookie ?? {}), fromStorage ?? {})
+  return hasAttributionValues(merged) ? merged : null
 }
 
 export function persistAttribution(data: CapgoAttribution): void {
