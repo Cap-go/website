@@ -7,6 +7,7 @@ import {
   deserializeAttribution,
   isRegisterOrConsoleLink,
   mergeFirstTouch,
+  mergeStoredAttributionSlices,
   normalizeFirstTouchPath,
   parseAttributionFromSearch,
   signupPluginFromRef,
@@ -22,10 +23,35 @@ test('parseAttributionFromSearch reads ref and utm params', () => {
   })
 })
 
-test('mergeFirstTouch keeps existing attribution', () => {
+test('mergeStoredAttributionSlices keeps localStorage first touch when cookie only has ref', () => {
+  expect(mergeStoredAttributionSlices({ ref: 'plugin_foo' }, { first_touch_type: 'plugin', first_touch_path: '/plugins/foo/' })).toEqual({
+    ref: 'plugin_foo',
+    first_touch_type: 'plugin',
+    first_touch_path: '/plugins/foo/',
+  })
+})
+
+test('mergeStoredAttributionSlices reclassifies legacy login other pairs', () => {
+  expect(mergeStoredAttributionSlices({ first_touch_type: 'other', first_touch_path: '/login/' }, null)).toEqual({
+    first_touch_type: 'console',
+    first_touch_path: '/login/',
+  })
+})
+
+test('mergeFirstTouch backfills first touch without overwriting ref', () => {
   const existing = { ref: 'plugin_first' }
-  const fromUrl = { ref: 'plugin_second', utm_source: 'x' }
-  expect(mergeFirstTouch(existing, fromUrl)).toEqual(existing)
+  const fromUrl = {
+    ref: 'plugin_second',
+    utm_source: 'x',
+    first_touch_type: 'plugin',
+    first_touch_path: '/plugins/foo/',
+  }
+  expect(mergeFirstTouch(existing, fromUrl)).toEqual({
+    ref: 'plugin_first',
+    utm_source: 'x',
+    first_touch_type: 'plugin',
+    first_touch_path: '/plugins/foo/',
+  })
 })
 
 test('classifyFirstTouchType maps marketing paths', () => {
@@ -55,14 +81,17 @@ test('signupPluginFromRef strips plugin_ prefix', () => {
   expect(signupPluginFromRef('newsletter')).toBeUndefined()
 })
 
-test('deriveSignupSource prefers ref then internal page labels', () => {
+test('deriveSignupSource prefers ref then utm then internal page labels', () => {
   expect(deriveSignupSource({ ref: 'plugin_foo' })).toBe('plugin_foo')
+  expect(deriveSignupSource({ utm_source: 'newsletter', first_touch_type: 'home', first_touch_path: '/' })).toBe('newsletter')
   expect(
     deriveSignupSource({
       first_touch_type: 'blog',
       first_touch_path: '/blog/live-updates/',
     }),
   ).toBe('blog:live-updates')
+  expect(deriveSignupSource({ first_touch_type: 'console', first_touch_path: '/login/' })).toBe('console')
+  expect(deriveSignupSource({ first_touch_type: 'cli', first_touch_path: '/login-cli/' })).toBe('cli')
   expect(
     deriveSignupSource({
       first_touch_type: 'docs',

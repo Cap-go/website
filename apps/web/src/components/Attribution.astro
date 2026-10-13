@@ -13,12 +13,50 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
 >
   ;(function () {
     try {
-      var hasCookie = document.cookie.indexOf(cookieName + '=') !== -1
-      var hasStorage = false
-      try {
-        hasStorage = !!localStorage.getItem(storageKey)
-      } catch (e) {}
-      if (hasCookie || hasStorage) return
+      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign']
+
+      function readStoredJson() {
+        var cookieData = null
+        var storageData = null
+        try {
+          var match = document.cookie.match(new RegExp('(?:^|; )' + cookieName + '=([^;]*)'))
+          if (match) {
+            try {
+              cookieData = JSON.parse(decodeURIComponent(match[1]))
+            } catch (e) {}
+          }
+        } catch (e2) {}
+        try {
+          var stored = localStorage.getItem(storageKey)
+          if (stored) storageData = JSON.parse(stored)
+        } catch (e3) {}
+        if (!cookieData && !storageData) return null
+        return { cookie: cookieData, storage: storageData }
+      }
+
+      function pickTracked(source) {
+        var out = {}
+        if (!source || typeof source !== 'object') return out
+        for (var ti = 0; ti < tracked.length; ti++) {
+          var tk = tracked[ti]
+          if (source[tk]) out[tk] = source[tk]
+        }
+        return out
+      }
+
+      function classifyTouchType(path) {
+        var lower = path.toLowerCase()
+        if (lower === '/' || lower === '') return 'home'
+        if (lower === '/pricing' || lower.indexOf('/pricing/') === 0) return 'pricing'
+        if (lower === '/blog' || lower.indexOf('/blog/') === 0) return 'blog'
+        if (lower === '/docs' || lower.indexOf('/docs/') === 0) return 'docs'
+        if (lower === '/plugins' || lower.indexOf('/plugins/') === 0) return 'plugin'
+        if (lower === '/solutions' || lower.indexOf('/solutions/') === 0) return 'solutions'
+        if (lower === '/login-cli' || lower.indexOf('/login-cli/') === 0) return 'cli'
+        if (lower === '/login' || lower.indexOf('/login/') === 0) return 'console'
+        if (lower === '/register' || lower.indexOf('/register/') === 0) return 'console'
+        return 'other'
+      }
 
       var locales = { de: 1, es: 1, fr: 1, id: 1, it: 1, ja: 1, ko: 1, zh: 1 }
       var segments = location.pathname.split('/').filter(Boolean)
@@ -29,29 +67,64 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       }
       if (!path) path = '/'
 
-      var lower = path.toLowerCase()
-      var touchType = 'other'
-      if (lower === '/' || lower === '') touchType = 'home'
-      else if (lower === '/pricing' || lower.indexOf('/pricing/') === 0) touchType = 'pricing'
-      else if (lower === '/blog' || lower.indexOf('/blog/') === 0) touchType = 'blog'
-      else if (lower === '/docs' || lower.indexOf('/docs/') === 0) touchType = 'docs'
-      else if (lower === '/plugins' || lower.indexOf('/plugins/') === 0) touchType = 'plugin'
-      else if (lower === '/solutions' || lower.indexOf('/solutions/') === 0) touchType = 'solutions'
-
       var params = new URLSearchParams(location.search)
+      var incoming = {
+        first_touch_type: classifyTouchType(path),
+        first_touch_path: path,
+      }
       var ref = params.get('ref')
       var utmSource = params.get('utm_source')
       var utmMedium = params.get('utm_medium')
       var utmCampaign = params.get('utm_campaign')
+      if (ref) incoming.ref = ref
+      if (utmSource) incoming.utm_source = utmSource
+      if (utmMedium) incoming.utm_medium = utmMedium
+      if (utmCampaign) incoming.utm_campaign = utmCampaign
 
-      var data = {
-        first_touch_type: touchType,
-        first_touch_path: path,
+      var stores = readStoredJson()
+      var cookieFields = pickTracked(stores && stores.cookie)
+      var storageFields = pickTracked(stores && stores.storage)
+      var data = {}
+      for (var ci = 0; ci < tracked.length; ci++) {
+        var ck = tracked[ci]
+        if (ck === 'first_touch_type' || ck === 'first_touch_path') continue
+        if (cookieFields[ck]) data[ck] = cookieFields[ck]
+        else if (storageFields[ck]) data[ck] = storageFields[ck]
       }
-      if (ref) data.ref = ref
-      if (utmSource) data.utm_source = utmSource
-      if (utmMedium) data.utm_medium = utmMedium
-      if (utmCampaign) data.utm_campaign = utmCampaign
+      var cookiePair =
+        cookieFields.first_touch_type && cookieFields.first_touch_path ? { first_touch_type: cookieFields.first_touch_type, first_touch_path: cookieFields.first_touch_path } : null
+      var storagePair =
+        storageFields.first_touch_type && storageFields.first_touch_path
+          ? { first_touch_type: storageFields.first_touch_type, first_touch_path: storageFields.first_touch_path }
+          : null
+      if (cookiePair) {
+        data.first_touch_type = cookiePair.first_touch_type
+        data.first_touch_path = cookiePair.first_touch_path
+      } else if (storagePair) {
+        data.first_touch_type = storagePair.first_touch_type
+        data.first_touch_path = storagePair.first_touch_path
+      } else if (cookieFields.first_touch_path) {
+        data.first_touch_path = cookieFields.first_touch_path
+        data.first_touch_type = classifyTouchType(cookieFields.first_touch_path)
+      } else if (storageFields.first_touch_path) {
+        data.first_touch_path = storageFields.first_touch_path
+        data.first_touch_type = classifyTouchType(storageFields.first_touch_path)
+      } else if (incoming.first_touch_type && incoming.first_touch_path) {
+        data.first_touch_type = incoming.first_touch_type
+        data.first_touch_path = incoming.first_touch_path
+      }
+      if (data.first_touch_type === 'other' && data.first_touch_path) {
+        var expectedType = classifyTouchType(data.first_touch_path)
+        if (expectedType === 'console' || expectedType === 'cli') data.first_touch_type = expectedType
+      }
+      if (!data.ref && incoming.ref) data.ref = incoming.ref
+      if (!data.utm_source && incoming.utm_source) data.utm_source = incoming.utm_source
+      if (!data.utm_medium && incoming.utm_medium) data.utm_medium = incoming.utm_medium
+      if (!data.utm_campaign && incoming.utm_campaign) data.utm_campaign = incoming.utm_campaign
+
+      if (!data.first_touch_type && !data.first_touch_path && !data.ref && !data.utm_source && !data.utm_medium && !data.utm_campaign) {
+        return
+      }
 
       var json = JSON.stringify(data)
       var domain = location.hostname.endsWith('capgo.app') ? '; domain=.capgo.app' : ''
@@ -59,8 +132,8 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       document.cookie = cookieName + '=' + encodeURIComponent(json) + '; path=/; max-age=' + maxAge + '; samesite=lax' + domain + secure
       try {
         localStorage.setItem(storageKey, json)
-      } catch (e2) {}
-    } catch (e3) {}
+      } catch (e4) {}
+    } catch (e5) {}
   })()
 </script>
 
