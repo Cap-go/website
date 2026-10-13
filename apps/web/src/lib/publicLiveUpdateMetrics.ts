@@ -303,8 +303,11 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     })
     .filter((row) => row.key)
 
-  const daily_platforms = buildContiguousDailyPlatformRows(buildDailyPlatforms(platformDailyRows), now, TREND_HISTORY_DAYS)
-  const daily_platforms_sparkline = sliceSparklineRows(daily_platforms, now)
+  // Daily queries stop at the start of the current UTC day, so the series must end on yesterday.
+  const lastCompleteDay = new Date(now)
+  lastCompleteDay.setUTCDate(lastCompleteDay.getUTCDate() - 1)
+  const daily_platforms = buildContiguousDailyPlatformRows(buildDailyPlatforms(platformDailyRows), lastCompleteDay, TREND_HISTORY_DAYS)
+  const daily_platforms_sparkline = sliceSparklineRows(daily_platforms, lastCompleteDay)
   const hourly_platforms = buildDailyPlatforms(platformHourlyRows)
 
   return {
