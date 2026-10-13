@@ -6,45 +6,46 @@ export const codemagic: AlternativeCompetitor = {
   category: 'ci-cd',
   metaTitle: 'Best Codemagic Alternative in 2026 | Capgo',
   metaDescription:
-    'Compare Codemagic and Capgo for Capacitor apps. Capgo Builder signs iOS and Android builds in the cloud and adds live updates, channels, and rollback.',
-  keywords: 'Codemagic alternative, Codemagic vs Capgo, Capacitor CI/CD, Ionic Capacitor cloud build, mobile CI/CD alternative, Capgo Builder, live updates',
+    'Codemagic vs Capgo for Capacitor: compare Codemagic CI/CD and Codemagic Patch with Capgo hosted live updates, channels, rollback, and cloud native builds.',
+  keywords: 'Codemagic alternative, Codemagic vs Capgo, Codemagic Patch alternative, Codemagic Patch Capacitor, Capacitor CI/CD, Capacitor live updates, Ionic Capacitor cloud build, Capgo Builder',
   eyebrow: 'Codemagic vs Capgo',
   heading: 'Codemagic alternative for Capacitor apps: Capgo',
-  lead: 'Codemagic is a general mobile CI/CD service for Flutter, React Native, native, Ionic, and Unity projects. Capgo is built for Capacitor: Capgo Builder produces signed iOS and Android binaries in the cloud, and the same plan ships live updates so most fixes never wait for a new build.',
+  lead: 'Codemagic is a general mobile CI/CD service for Flutter, React Native, native, Ionic, and Unity projects. In October 2026 it added Codemagic Patch for Capacitor, a self-hosted live update server with an Apache 2.0 SDK and CLI. Capgo is built for Capacitor: hosted live updates with channels and rollback, plus Capgo Builder for signed iOS and Android binaries in the cloud.',
   verdict:
-    'Choose Codemagic if you run several mobile stacks, need custom YAML pipelines with tests and many steps, or build Flutter and React Native apps. Choose Capgo if your app is Capacitor and you want native builds plus live updates, channels, and rollback from one tool, without writing and maintaining a CI pipeline.',
-  status: 'Mobile CI/CD service',
+    'Choose Codemagic if you run several mobile stacks, need custom YAML pipelines with tests and many steps, or want to run your own live update server. Choose Capgo if your app is Capacitor and you want hosted live updates, runtime channels, rollback, and native builds from one tool, without operating a server or maintaining a CI pipeline.',
+  status: 'Mobile CI/CD and OTA updates',
   sources: [
     { label: 'Codemagic pricing', href: 'https://codemagic.io/pricing/' },
     { label: 'Codemagic docs: Ionic Capacitor apps', href: 'https://docs.codemagic.io/yaml-quick-start/building-an-ionic-app/' },
     { label: 'Codemagic CodePush for React Native', href: 'https://codemagic.io/ota' },
     { label: 'Codemagic about us', href: 'https://codemagic.io/about-us/' },
     { label: 'Codemagic docs: CodePush concepts', href: 'https://docs.codemagic.io/rn-codepush/concepts/' },
+    { label: 'Codemagic blog: Codemagic Patch for Capacitor', href: 'https://blog.codemagic.io/codemagic-patch-capacitor-ota-updates/' },
   ],
   rows: {
     pricing: {
-      text: 'Free for individuals with 500 Mac mini M2 minutes per month. Pay as you go at $0.095/minute on M2 after the free 500, $0.114 on M4, $0.045 on Linux and Windows. Fixed annual plans from $3,990/year, Enterprise from $12,000/year.',
-      sources: [1],
+      text: 'Free for individuals with 500 Mac mini M2 minutes per month. Pay as you go at $0.095/minute on M2 after the free 500, $0.114 on M4, $0.045 on Linux and Windows. Fixed annual plans from $3,990/year, Enterprise from $12,000/year. Codemagic Patch for Capacitor is free to self-host up to 1,000,000 monthly active devices. Hosting by Codemagic is sales-led, for companies above one million monthly active users.',
+      sources: [1, 6],
     },
     ota: {
-      text: 'Over-the-air updates are offered for React Native only, through CodePush by Codemagic and Codemagic Patch, priced separately from CI/CD by installs or monthly active users. There is no live update product for Capacitor apps.',
-      sources: [1, 3],
+      text: 'Codemagic Patch ships HTML, CSS, and JavaScript updates to Capacitor apps with differential downloads, install modes, and optional signed releases. It is new (Capacitor SDK and CLI v0.1.0) and you run the server yourself with Docker Compose, PostgreSQL, and S3-compatible storage. Each release targets one exact native version, and iOS and Android need separate apps and deployment keys. React Native apps use CodePush by Codemagic.',
+      sources: [3, 6],
     },
     native_builds: {
       text: 'Core product. You write a codemagic.yaml pipeline that installs dependencies, runs cap sync, signs, and builds with Gradle or Xcode, then publishes to Google Play or App Store Connect. Builds run on Mac mini M2/M4, Linux, or Windows machines.',
       sources: [1, 2],
     },
     frameworks: {
-      text: 'Flutter, React Native, native iOS and Android, Ionic Capacitor, and Unity.',
-      sources: [2, 4],
+      text: 'CI/CD for Flutter, React Native, native iOS and Android, Ionic Capacitor, and Unity. Codemagic Patch supports the two latest Capacitor major versions (7 and 8) and Android minSdkVersion 24 or higher.',
+      sources: [2, 4, 6],
     },
     open_source: {
-      text: 'Proprietary hosted service. Pipelines live in your repository as codemagic.yaml.',
-      sources: [2],
+      text: 'CI/CD is a proprietary hosted service. Codemagic Patch SDKs and CLIs are Apache 2.0. The Patch server uses the Codemagic Server License, free up to 1,000,000 monthly active devices, which converts to Apache 2.0 two years after each release and forbids reselling it as a competing OTA service.',
+      sources: [2, 6],
     },
     rollback: {
-      text: 'No rollback for Capacitor apps beyond shipping a new store build. For React Native CodePush, staged percentage rollouts and rollback are supported.',
-      sources: [3, 5],
+      text: 'Codemagic Patch rolls a release back automatically if the app never reports the new bundle as healthy, and supports staged percentage rollouts with promotion from Staging to Production. There is no runtime channel switching; beta programs need separate builds pointing at a Beta deployment.',
+      sources: [6],
     },
     support: {
       text: 'Community support on the free plan. Enterprise adds priority support, SSO, and signed SLAs, non-disclosure agreements, and DPAs.',
@@ -67,9 +68,9 @@ export const codemagic: AlternativeCompetitor = {
       sources: [1, 2],
     },
     {
-      title: 'You build rarely and want a free tier',
-      text: 'Individuals get 500 free Mac mini M2 minutes per month. Capgo has a 14-day trial but no free plan.',
-      sources: [1],
+      title: 'You want to self-host live updates',
+      text: 'The Codemagic Patch server is free to run on your own infrastructure up to 1,000,000 monthly active devices, with Apache 2.0 SDKs and CLIs.',
+      sources: [6],
     },
   ],
   alternatives: [
@@ -101,11 +102,11 @@ export const codemagic: AlternativeCompetitor = {
   ],
   migration: {
     title: 'Move a Capacitor app from Codemagic to Capgo',
-    lead: 'Your Capacitor project does not change. You replace the codemagic.yaml build and publish steps with Capgo Builder and add live updates on top.',
+    lead: 'Your Capacitor project does not change. You replace the codemagic.yaml build and publish steps with Capgo Builder, and swap the Codemagic Patch plugin for the Capgo updater if you use it.',
     steps: [
       {
         title: 'Install the Capgo updater',
-        html: 'Run <code>bunx @capgo/cli@latest init</code> in your Capacitor project to add the updater plugin and create your app in Capgo.',
+        html: 'Remove <code>@codemagic/capacitor-patch</code> if installed, then run <code>bunx @capgo/cli@latest init</code> in your Capacitor project to add the updater plugin and create your app in Capgo.',
       },
       {
         title: 'Move signing to Capgo Builder',
@@ -124,7 +125,7 @@ export const codemagic: AlternativeCompetitor = {
     },
     {
       question: 'Does Codemagic offer live updates for Capacitor?',
-      answer: 'No. Codemagic over-the-air updates (CodePush by Codemagic and Codemagic Patch) target React Native. Capacitor apps need a service like Capgo for live updates.',
+      answer: 'Yes, since October 2026. Codemagic Patch for Capacitor is a self-hosted server, free up to 1,000,000 monthly active devices, with hosting by Codemagic only for companies above one million monthly active users. Capgo is a hosted service, so you get live updates, channels, and rollback without running a server.',
     },
     {
       question: 'Is Capgo cheaper than Codemagic?',
@@ -136,7 +137,7 @@ export const codemagic: AlternativeCompetitor = {
     },
     {
       question: 'When should I choose Codemagic?',
-      answer: 'Choose Codemagic when you build Flutter, React Native, native, or Unity apps, or need custom multi-step pipelines across several stacks.',
+      answer: 'Choose Codemagic when you build Flutter, React Native, native, or Unity apps, need custom multi-step pipelines across several stacks, or want to self-host your live update server.',
     },
   ],
 }

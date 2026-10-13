@@ -79,7 +79,7 @@ export const appcircle: AlternativeCompetitor = {
     },
     {
       name: 'Codemagic',
-      text: 'Mobile CI/CD with 500 free Mac minutes a month for individuals and a Capacitor quick start. You maintain the YAML pipeline.',
+      text: 'Mobile CI/CD with 500 free Mac minutes a month for individuals and a Capacitor quick start. Codemagic Patch adds self-hosted Capacitor live updates.',
       href: 'alternatives/codemagic',
     },
     {
