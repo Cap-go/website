@@ -225,7 +225,12 @@ export function mergeAttribution(existing: CapgoAttribution | null | undefined, 
   for (const key of ['ref', 'utm_source', 'utm_medium', 'utm_campaign'] as const) {
     if (!merged[key] && incoming[key]) merged[key] = incoming[key]
   }
-  return merged
+  return reconcileLegacyFirstTouchPair(merged)
+}
+
+/** Merge cookie and localStorage slices (cookie ref/utm wins; storage can supply first touch). */
+export function mergeStoredAttributionSlices(cookie: CapgoAttribution | null | undefined, storage: CapgoAttribution | null | undefined): CapgoAttribution {
+  return mergeAttribution(mergeAttribution(null, cookie ?? {}), storage ?? {})
 }
 
 /** @deprecated Use mergeAttribution */
@@ -339,7 +344,7 @@ export function readStoredAttribution(): CapgoAttribution | null {
   } catch {
     fromStorage = null
   }
-  const merged = mergeAttribution(mergeAttribution(null, fromCookie ?? {}), fromStorage ?? {})
+  const merged = mergeStoredAttributionSlices(fromCookie, fromStorage)
   return hasAttributionValues(merged) ? merged : null
 }
 

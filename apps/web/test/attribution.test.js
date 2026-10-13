@@ -7,6 +7,7 @@ import {
   deserializeAttribution,
   isRegisterOrConsoleLink,
   mergeFirstTouch,
+  mergeStoredAttributionSlices,
   normalizeFirstTouchPath,
   parseAttributionFromSearch,
   signupPluginFromRef,
@@ -19,6 +20,21 @@ test('parseAttributionFromSearch reads ref and utm params', () => {
     utm_source: 'github',
     utm_medium: 'readme',
     utm_campaign: 'launch',
+  })
+})
+
+test('mergeStoredAttributionSlices keeps localStorage first touch when cookie only has ref', () => {
+  expect(mergeStoredAttributionSlices({ ref: 'plugin_foo' }, { first_touch_type: 'plugin', first_touch_path: '/plugins/foo/' })).toEqual({
+    ref: 'plugin_foo',
+    first_touch_type: 'plugin',
+    first_touch_path: '/plugins/foo/',
+  })
+})
+
+test('mergeStoredAttributionSlices reclassifies legacy login other pairs', () => {
+  expect(mergeStoredAttributionSlices({ first_touch_type: 'other', first_touch_path: '/login/' }, null)).toEqual({
+    first_touch_type: 'console',
+    first_touch_path: '/login/',
   })
 })
 

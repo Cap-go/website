@@ -82,23 +82,40 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (utmCampaign) incoming.utm_campaign = utmCampaign
 
       var stores = readStoredJson()
-      var data = pickTracked(stores && stores.cookie)
+      var cookieFields = pickTracked(stores && stores.cookie)
       var storageFields = pickTracked(stores && stores.storage)
-      for (var sk in storageFields) {
-        if (!data[sk]) data[sk] = storageFields[sk]
+      var data = {}
+      for (var ci = 0; ci < tracked.length; ci++) {
+        var ck = tracked[ci]
+        if (ck === 'first_touch_type' || ck === 'first_touch_path') continue
+        if (cookieFields[ck]) data[ck] = cookieFields[ck]
+        else if (storageFields[ck]) data[ck] = storageFields[ck]
       }
-      var hasPair = data.first_touch_type && data.first_touch_path
-      if (hasPair && data.first_touch_type === 'other') {
-        var expected = classifyTouchType(data.first_touch_path)
-        if (expected === 'console' || expected === 'cli') data.first_touch_type = expected
-      }
-      if (hasPair) {
-        // keep stored pair
-      } else if (data.first_touch_path) {
-        data.first_touch_type = classifyTouchType(data.first_touch_path)
+      var cookiePair =
+        cookieFields.first_touch_type && cookieFields.first_touch_path ? { first_touch_type: cookieFields.first_touch_type, first_touch_path: cookieFields.first_touch_path } : null
+      var storagePair =
+        storageFields.first_touch_type && storageFields.first_touch_path
+          ? { first_touch_type: storageFields.first_touch_type, first_touch_path: storageFields.first_touch_path }
+          : null
+      if (cookiePair) {
+        data.first_touch_type = cookiePair.first_touch_type
+        data.first_touch_path = cookiePair.first_touch_path
+      } else if (storagePair) {
+        data.first_touch_type = storagePair.first_touch_type
+        data.first_touch_path = storagePair.first_touch_path
+      } else if (cookieFields.first_touch_path) {
+        data.first_touch_path = cookieFields.first_touch_path
+        data.first_touch_type = classifyTouchType(cookieFields.first_touch_path)
+      } else if (storageFields.first_touch_path) {
+        data.first_touch_path = storageFields.first_touch_path
+        data.first_touch_type = classifyTouchType(storageFields.first_touch_path)
       } else if (incoming.first_touch_type && incoming.first_touch_path) {
         data.first_touch_type = incoming.first_touch_type
         data.first_touch_path = incoming.first_touch_path
+      }
+      if (data.first_touch_type === 'other' && data.first_touch_path) {
+        var expectedType = classifyTouchType(data.first_touch_path)
+        if (expectedType === 'console' || expectedType === 'cli') data.first_touch_type = expectedType
       }
       if (!data.ref && incoming.ref) data.ref = incoming.ref
       if (!data.utm_source && incoming.utm_source) data.utm_source = incoming.utm_source
