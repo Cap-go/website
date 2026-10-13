@@ -173,10 +173,44 @@ export function deserializeAttribution(raw: string | null | undefined): CapgoAtt
   }
 }
 
+export function pickTrackedAttributionFields(record: Record<string, unknown> | CapgoAttribution | null | undefined): CapgoAttribution {
+  const data: CapgoAttribution = {}
+  if (!record) return data
+  for (const key of TRACKED_KEYS) {
+    const value = record[key]
+    if (typeof value === 'string' && value.trim()) {
+      if (key === 'first_touch_type') {
+        data.first_touch_type = value.trim() as FirstTouchType
+      } else {
+        data[key] = value.trim()
+      }
+    }
+  }
+  return data
+}
+
+function resolveFirstTouchPair(existing: CapgoAttribution, incoming: CapgoAttribution): Pick<CapgoAttribution, 'first_touch_type' | 'first_touch_path'> {
+  if (hasFirstTouch(existing)) {
+    return {
+      first_touch_type: existing.first_touch_type,
+      first_touch_path: existing.first_touch_path,
+    }
+  }
+  if (existing.first_touch_path) {
+    return parseFirstTouchFromPathname(existing.first_touch_path)
+  }
+  if (hasFirstTouch(incoming)) {
+    return {
+      first_touch_type: incoming.first_touch_type,
+      first_touch_path: incoming.first_touch_path,
+    }
+  }
+  return {}
+}
+
 export function mergeAttribution(existing: CapgoAttribution | null | undefined, incoming: CapgoAttribution): CapgoAttribution {
-  const merged: CapgoAttribution = { ...(existing ?? {}) }
-  if (!merged.first_touch_type && incoming.first_touch_type) merged.first_touch_type = incoming.first_touch_type
-  if (!merged.first_touch_path && incoming.first_touch_path) merged.first_touch_path = incoming.first_touch_path
+  const base = pickTrackedAttributionFields(existing ?? null)
+  const merged: CapgoAttribution = { ...base, ...resolveFirstTouchPair(base, incoming) }
   for (const key of ['ref', 'utm_source', 'utm_medium', 'utm_campaign'] as const) {
     if (!merged[key] && incoming[key]) merged[key] = incoming[key]
   }

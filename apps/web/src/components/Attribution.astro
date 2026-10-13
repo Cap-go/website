@@ -66,10 +66,24 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (utmMedium) incoming.utm_medium = utmMedium
       if (utmCampaign) incoming.utm_campaign = utmCampaign
 
+      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign']
       var existing = readStoredJson()
-      var data = existing && typeof existing === 'object' ? Object.assign({}, existing) : {}
-      if (!data.first_touch_type && incoming.first_touch_type) data.first_touch_type = incoming.first_touch_type
-      if (!data.first_touch_path && incoming.first_touch_path) data.first_touch_path = incoming.first_touch_path
+      var data = {}
+      if (existing && typeof existing === 'object') {
+        for (var ti = 0; ti < tracked.length; ti++) {
+          var tk = tracked[ti]
+          if (existing[tk]) data[tk] = existing[tk]
+        }
+      }
+      var hasPair = data.first_touch_type && data.first_touch_path
+      if (hasPair) {
+        // keep stored pair
+      } else if (data.first_touch_path) {
+        data.first_touch_type = classifyTouchType(data.first_touch_path)
+      } else if (incoming.first_touch_type && incoming.first_touch_path) {
+        data.first_touch_type = incoming.first_touch_type
+        data.first_touch_path = incoming.first_touch_path
+      }
       if (!data.ref && incoming.ref) data.ref = incoming.ref
       if (!data.utm_source && incoming.utm_source) data.utm_source = incoming.utm_source
       if (!data.utm_medium && incoming.utm_medium) data.utm_medium = incoming.utm_medium
