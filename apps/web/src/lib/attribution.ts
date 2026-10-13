@@ -1,6 +1,6 @@
 import { splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 
-export type FirstTouchType = 'blog' | 'docs' | 'plugin' | 'pricing' | 'home' | 'solutions' | 'other'
+export type FirstTouchType = 'blog' | 'docs' | 'plugin' | 'pricing' | 'home' | 'solutions' | 'console' | 'cli' | 'other'
 
 export type CapgoAttribution = {
   ref?: string
@@ -51,6 +51,9 @@ export function classifyFirstTouchType(normalizedPath: string): FirstTouchType {
   if (path === '/docs' || path.startsWith('/docs/')) return 'docs'
   if (path === '/plugins' || path.startsWith('/plugins/')) return 'plugin'
   if (path === '/solutions' || path.startsWith('/solutions/')) return 'solutions'
+  if (path === '/login-cli' || path.startsWith('/login-cli/')) return 'cli'
+  if (path === '/login' || path.startsWith('/login/')) return 'console'
+  if (path === '/register' || path.startsWith('/register/')) return 'console'
   return 'other'
 }
 
@@ -77,9 +80,16 @@ export function signupPluginFromRef(ref?: string): string | undefined {
   return plugin || undefined
 }
 
+export function hasFirstTouch(data: CapgoAttribution | null | undefined): boolean {
+  return Boolean(data?.first_touch_type && data?.first_touch_path)
+}
+
 export function deriveSignupSource(data: CapgoAttribution): string | undefined {
   const ref = data.ref?.trim()
   if (ref) return ref
+
+  const utmSource = data.utm_source?.trim()
+  if (utmSource) return utmSource
 
   const path = data.first_touch_path
   const type = data.first_touch_type
@@ -91,6 +101,10 @@ export function deriveSignupSource(data: CapgoAttribution): string | undefined {
       return 'home'
     case 'pricing':
       return 'pricing'
+    case 'console':
+      return 'console'
+    case 'cli':
+      return 'cli'
     case 'blog': {
       const slug = segments[segments.indexOf('blog') + 1]
       return slug ? `blog:${slug}` : 'blog'
@@ -159,9 +173,20 @@ export function deserializeAttribution(raw: string | null | undefined): CapgoAtt
   }
 }
 
+export function mergeAttribution(existing: CapgoAttribution | null | undefined, incoming: CapgoAttribution): CapgoAttribution {
+  const merged: CapgoAttribution = { ...(existing ?? {}) }
+  if (!merged.first_touch_type && incoming.first_touch_type) merged.first_touch_type = incoming.first_touch_type
+  if (!merged.first_touch_path && incoming.first_touch_path) merged.first_touch_path = incoming.first_touch_path
+  for (const key of ['ref', 'utm_source', 'utm_medium', 'utm_campaign'] as const) {
+    if (!merged[key] && incoming[key]) merged[key] = incoming[key]
+  }
+  return merged
+}
+
+/** @deprecated Use mergeAttribution */
 export function mergeFirstTouch(existing: CapgoAttribution | null, incoming: CapgoAttribution): CapgoAttribution | null {
-  if (hasAttributionValues(existing)) return existing
-  return hasAttributionValues(incoming) ? incoming : existing
+  const merged = mergeAttribution(existing, incoming)
+  return hasAttributionValues(merged) ? merged : existing
 }
 
 function isCapgoMarketingHost(hostname: string): boolean {
@@ -290,11 +315,28 @@ export function captureFirstTouchFromLocation(): CapgoAttribution | null {
   if (typeof window === 'undefined') return null
   const existing = readStoredAttribution()
   const incoming = buildFirstTouchAttribution(window.location.search, window.location.pathname)
-  const merged = mergeFirstTouch(existing, incoming)
-  if (merged && merged !== existing) {
-    persistAttribution(merged)
-  }
-  return merged ?? existing
+  const merged = mergeAttribution(existing, incoming)
+  if (!hasAttributionValues(merged)) return existing
+  const unchanged = existing && JSON.stringify(existing) === JSON.stringify(merged)
+  if (!unchanged) persistAttribution(merged)
+  return merged
+}
+
+export function getSignupUserMetadataForRegistration(): Record<string, string> {
+  if (typeof window === 'undefined') return {}
+  const incoming = buildFirstTouchAttribution(window.location.search, window.location.pathname)
+  const merged = mergeAttribution(readStoredAttribution(), incoming)
+  const props = toPostHogAttributionProps(merged)
+  const metadata: Record<string, string> = {}
+  if (merged.ref) metadata.ref = merged.ref
+  if (props.signup_source) metadata.signup_source = props.signup_source
+  if (props.signup_plugin) metadata.signup_plugin = props.signup_plugin
+  if (props.first_touch_type) metadata.first_touch_type = props.first_touch_type
+  if (props.first_touch_path) metadata.first_touch_path = props.first_touch_path
+  if (props.first_utm_source) metadata.utm_source = props.first_utm_source
+  if (props.first_utm_medium) metadata.utm_medium = props.first_utm_medium
+  if (props.first_utm_campaign) metadata.utm_campaign = props.first_utm_campaign
+  return metadata
 }
 
 export function getSignupRefForRegistration(): string | undefined {
@@ -306,8 +348,9 @@ export function getSignupRefForRegistration(): string | undefined {
 
 export function getSignupAttributionForEvents(): Record<string, string> {
   if (typeof window === 'undefined') return {}
-  const stored = readStoredAttribution()
-  const props = stored ? toPostHogAttributionProps(stored) : toPostHogAttributionProps(parseAttributionFromSearch(window.location.search))
+  const incoming = buildFirstTouchAttribution(window.location.search, window.location.pathname)
+  const merged = mergeAttribution(readStoredAttribution(), incoming)
+  const props = toPostHogAttributionProps(merged)
   const events: Record<string, string> = {}
   if (props.signup_ref) events.signup_ref = props.signup_ref
   if (props.signup_plugin) events.signup_plugin = props.signup_plugin
