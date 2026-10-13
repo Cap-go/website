@@ -6,8 +6,8 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-10T00:00:00.000Z
-updated_at: 2026-10-10T00:00:00.000Z
-head_image: /blog-images/how-to-pass-app-store-review-2026.png
+updated_at: 2026-10-13T00:00:00.000Z
+head_image: /blog-images/how-to-pass-app-store-review-2026.webp
 head_image_alt: "How to pass App Store review in 2026 and avoid rejection Capgo blog illustration"
 keywords: how to pass app store review, pass app store review, app store rejection reasons, app store rejected, guideline 4.2 minimum functionality, guideline 4.3 spam, guideline 4.3(a) design spam, app store review times 2026, app store review taking too long, app store rejection appeal, app store web wrapper, capacitor, live updates
 tag: Development, App Store, Best Practices
@@ -79,7 +79,7 @@ What you want is **one or two native features that the core use case actually ne
 
 | Native feature | Why it reads as "app-like" | Watch out for |
 | --- | --- | --- |
-| **Push notifications** | Timely, user-relevant alerts a website can't deliver as reliably | [4.5.4](https://developer.apple.com/app-store/review/guidelines/#apple-sites-and-services): push must not be required for the app to work; marketing pushes need explicit opt-in |
+| **Push notifications** | Timely, user-relevant alerts on the lock screen without extra steps. Websites only get [Web Push on iOS 16.4+](https://webkit.org/blog/13878/) after the user adds them to the Home Screen and grants permission | [4.5.4](https://developer.apple.com/app-store/review/guidelines/#apple-sites-and-services): push must not be required for the app to work; marketing pushes need explicit opt-in |
 | **Camera / document scanning** | Capturing the real world is a core mobile strength | Clear purpose string; use the system picker when you only need photos ([5.1.1(iii)](https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage)) |
 | **Offline mode with local storage** | The app works on a plane or in a basement | Make sure the reviewer can trigger and see it |
 | **Home screen widgets** | Glanceable value outside the app | [2.5.16](https://developer.apple.com/app-store/review/guidelines/#software-requirements): widgets must relate to your app's content and function |
@@ -112,6 +112,21 @@ The second rule that catches AI-assisted apps is [4.3 (Spam)](https://developer.
 It names categories Apple considers saturated: dating, flashlight, sound effects, wallpaper, simple timers, fortune telling. In those categories Apple says it won't accept new submissions "unless they offer a meaningfully different or improved experience."
 
 Developers also report ["Guideline 4.3(a) - Design - Spam" rejections](https://www.reddit.com/r/iosdev/comments/1tumgdq/apple_rejected_my_app_twice_under_guideline_43a/) saying the app shares a similar binary, metadata, or concept with apps from other developers. If your app was generated from a common prompt or starter template, assume a reviewer has already seen something close to it.
+
+### What happened to us with 4.3 Spam
+
+We hit this rule ourselves at Capgo. We built several apps on top of the same app shell, with the same structure, the same screens, and only the content changing between them. Then we pushed them all to review at the same time.
+
+From Apple's side, that looks exactly like a spam farm: one developer account sending a batch of near-identical binaries into the queue at once. The apps were flagged under 4.3 Spam, and it took a lot more work to get out of that situation than it would have taken to avoid it.
+
+What we do now, and what we recommend:
+
+- **No shared app shell across apps.** If two apps have the same layout, navigation, and screens with different content, Apple sees one app submitted twice. Each app needs its own structure, its own UX, and its own reason to exist. If the content is the only difference, ship one app with that content inside it.
+- **No batch submissions.** Don't push several apps to review at the same time, especially new ones from the same account. Submit one, get it approved, then space out the next ones.
+- **No near-duplicate metadata.** Different apps need different names, descriptions, screenshots, and keywords, not one template with words swapped.
+- **One app per real product.** Variants for different cities, clients, or niches belong in one app with a selector, unless each one is truly a different product.
+
+The [4.3(a)](https://developer.apple.com/app-store/review/guidelines/#spam) wording is direct about this: "Don't create multiple Bundle IDs of the same app," and if you have several versions of an app for specific locations, sports teams, universities, or similar, "consider submitting a single app and provide the variations using in-app purchase." Repeated spam can also put the whole developer account at risk, not just one app.
 
 ### Find your real edge
 
@@ -157,7 +172,7 @@ Most of this comes straight from Apple's ["Before You Submit"](https://developer
 - [ ] **Every permission has a specific purpose string** and a fallback if the user says no (5.1.1(ii), (iv)).
 - [ ] **Account deletion** is available in the app if you allow account creation (5.1.1(v)).
 - [ ] **No login wall** if the app doesn't need accounts (5.1.1(v)).
-- [ ] **IAPs are configured, visible, and working** in sandbox (2.1(b)).
+- [ ] **IAPs are configured, visible, and working** in sandbox (2.1(b)). See [how to pass App Store review with in-app purchases](https://capgo.app/blog/how-to-pass-app-store-review-iap/) for the IAP-specific checks.
 - [ ] **Tested on a real device**, including airplane mode and denied permissions. Crashes are rejected under 2.1(a).
 - [ ] **Support URL and contact info** are real and reachable (1.5).
 - [ ] **Nothing hidden**: no dormant features or remote flags that unlock functionality the reviewer can't see (2.3.1(a)).
@@ -170,6 +185,8 @@ If you're rejected anyway, Apple's [guidelines](https://developer.apple.com/app-
 
 1. **Reply in App Store Connect.** Answer the exact guideline cited, not the general tone of the message. For 4.2 or 4.3, be specific: who the app is for, which native features it has, where to find them, and how it differs from the apps a reviewer might compare it to. A short screen recording of the app helps.
 2. **Submit an appeal** to the App Review Board if you believe the reviewer got it wrong.
+
+For a step-by-step process, see our guide on [how to respond to an App Store rejection](https://capgo.app/blog/app-store-rejection/).
 
 Before you do either, fix the cause if there's a real one. If you're cited under 4.3, changing only the screenshots usually won't help. Narrowing the audience and making the edge visible in the app and the description will.
 
@@ -203,7 +220,9 @@ In practice, live updates are appropriate when you:
 
 - Fix bugs in your JavaScript, HTML or CSS
 - Adjust UI, copy, layout, or content
-- Improve features that already fit the app's advertised purpose
+- Improve existing, reviewed features without changing what they do
+
+New features, or changes to how an existing feature works, should ship in a reviewed binary.
 
 And they're **not** appropriate when you:
 
@@ -212,7 +231,7 @@ And they're **not** appropriate when you:
 - **Do anything deceptive** after the user downloads: hidden features, bait-and-switch behavior, or content the reviewer never saw (2.3.1(a), 5.6).
 - **Change native code**, add plugins, or request new permissions. Those need a new binary.
 
-Inside those limits, a live update tool lets you ship the small changes without waiting on review for each one. That's what [Capgo](https://capgo.app/) does for Capacitor apps: you upload a new web bundle from your CI, devices download it in the background, and you can roll back immediately if something breaks. For more on the policy side, see [Does Apple allow live updates?](https://capgo.app/blog/do-apple-allow-live-updates/).
+Inside those limits, a live update tool lets you ship the small changes without waiting on review for each one. That's what [Capgo](https://capgo.app/) does for Capacitor apps: you upload a new web bundle from your CI, devices download it in the background, and if something breaks you can make the previous bundle active on the channel immediately. Devices pick up the rollback the next time they check for an update. For more on the policy side, see [Does Apple allow live updates?](https://capgo.app/blog/do-apple-allow-live-updates/).
 
 ## FAQ
 
@@ -234,7 +253,7 @@ Give the app one or two native features its core use case needs (push notificati
 
 ### How do I pass guideline 4.3 Spam (or 4.3(a) Design - Spam)?
 
-Show a concrete, verifiable difference from apps already on the store: a specific audience, workflow, or constraint. Put it in the first two lines of your App Store description and in the review notes, and remove leftover template or boilerplate screens. Then reply to App Review with specifics.
+Show a concrete, verifiable difference from apps already on the store: a specific audience, workflow, or constraint. Put it in the first two lines of your App Store description and in the review notes, and remove leftover template or boilerplate screens. Don't reuse the same app shell across several apps, and don't submit several similar apps to review at the same time. Then reply to App Review with specifics.
 
 ### Can I appeal an App Store rejection?
 
@@ -253,6 +272,7 @@ Yes, within limits. DPLA 3.3.1(B) allows downloaded interpreted code (JS, HTML, 
 - **Shrink the audit surface.** Launch with the smallest app that is clearly useful.
 - **Pick one or two native features** that the core use case needs and a reviewer can see in a minute.
 - **Show your edge in the first two lines** of the App Store description and in the review notes.
+- **Never ship several apps from one shell, or submit them in a batch.** That is the fastest way to a 4.3 Spam flag.
 - **Run the checklist** before every submission. Each skipped item can cost you another full wait.
 - **After approval, keep native releases rare and deliberate,** and ship web-layer fixes through compliant live updates.
 
