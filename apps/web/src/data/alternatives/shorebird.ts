@@ -89,7 +89,7 @@ export const shorebird: AlternativeCompetitor = {
     },
     {
       name: 'Codemagic',
-      text: 'CI/CD built with Flutter in mind. Automates builds and store uploads, but does not push code updates.',
+      text: 'CI/CD built with Flutter in mind. Automates builds and store uploads, and offers OTA updates for React Native and Capacitor, not Flutter.',
       href: 'alternatives/codemagic',
     },
     {

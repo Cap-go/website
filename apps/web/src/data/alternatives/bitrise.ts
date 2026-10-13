@@ -74,7 +74,7 @@ export const bitrise: AlternativeCompetitor = {
   alternatives: [
     {
       name: 'Codemagic',
-      text: 'Mobile CI/CD with 500 free Mac minutes a month for individuals and a Capacitor quick start. You still write and maintain the pipeline.',
+      text: 'Mobile CI/CD with 500 free Mac minutes a month for individuals and a Capacitor quick start. Codemagic Patch adds self-hosted Capacitor live updates.',
       href: 'alternatives/codemagic',
     },
     {
