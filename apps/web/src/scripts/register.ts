@@ -1,4 +1,4 @@
-import { getSignupAttributionForEvents, getSignupRefForRegistration, getSignupUserMetadataForRegistration } from '@/lib/attribution'
+import { getSignupAttributionForEvents, getSignupUserMetadataForRegistration } from '@/lib/attribution'
 import { getRegistrationDevice } from '@/services/registration-device'
 import { getRemoteConfig, isSupabaseConfigured, useSupabase } from '@/services/supabase'
 import Toastify from 'toastify-js'
@@ -155,7 +155,6 @@ form?.addEventListener('submit', async (e) => {
         last_name: lastName.value,
         ...registrationDevice,
         ...getSignupUserMetadataForRegistration(),
-        ref: getSignupRefForRegistration(),
       },
     },
   })
