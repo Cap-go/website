@@ -16,7 +16,21 @@ export const appleRejectionStoryBatches = [
   },
 ]
 
-export const appleRejectionStoryTags: AppleRejectionStoryTag[] = ['4-3', '2-1', 'metadata', 'endless-review', 'account-termination', 'login-requirement', 'objectionable-content']
+export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
+  '4-3',
+  '4-2-6',
+  '3-1-2',
+  '5-1-2',
+  '2-1',
+  'metadata',
+  'endless-review',
+  'account-termination',
+  'login-requirement',
+  'login',
+  'objectionable-content',
+  'enrollment-account',
+  'simulated-gambling',
+]
 
 export type { AppleRejectionStory, AppleRejectionStoryTag } from './types'
 export { appleRejectionStoryTagLabels }
