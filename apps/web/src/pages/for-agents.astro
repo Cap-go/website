@@ -1,0 +1,181 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import AudienceSwitch from '@/components/AudienceSwitch.astro'
+import { agents } from '@/data/agents'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const baseUrl = config.baseUrl.replace(/\/$/, '')
+const installUrl = `${baseUrl}/install.md`
+const prompt = `Set up Capgo by reading ${installUrl} and following its instructions.`
+
+const title = 'Capgo for AI agents: install, MCP, CLI and docs in plain text'
+const description =
+  'Plain-text entry point for AI coding agents. Point Claude Code, Codex, Cursor or Copilot at capgo.app/install.md to add live updates and native builds to a Capacitor app.'
+
+const resources = [
+  { key: 'install', value: '/install.md', href: '/install.md' },
+  { key: 'cli', value: 'npx @capgo/cli@latest init <APIKEY>' },
+  { key: 'mcp', value: 'https://api.capgo.app/mcp' },
+  { key: 'mcp-local', value: 'npx @capgo/cli@latest mcp' },
+  { key: 'skills', value: 'npx skills add Cap-go/capgo-skills' },
+  { key: 'index', value: '/llms.txt', href: '/llms.txt' },
+  { key: 'docs', value: '/llms-full.txt', href: '/llms-full.txt' },
+  { key: 'pricing', value: '/pricing.md', href: '/pricing.md' },
+  { key: 'plugins', value: '/plugins.md', href: '/plugins.md' },
+  { key: 'api', value: '/openapi.json', href: '/openapi.json' },
+  { key: 'manifest', value: '/.well-known/mcp.json', href: '/.well-known/mcp.json' },
+]
+
+const content = {
+  title,
+  description,
+  keywords: 'capgo install.md, capgo mcp, capacitor ai agent, claude code capacitor, llms.txt capgo',
+  ldJSON: createLdJsonGraph(config, createWebPageLdJson(config, { name: title, description, url: `${baseUrl}${getRelativeLocaleUrl(locale, 'for-agents')}` }), {
+    includeOrganization: true,
+  }),
+}
+---
+
+<Layout content={content} hideChrome>
+  <link slot="head" rel="alternate" type="text/markdown" href="/install.md" />
+  <div class="min-h-dvh bg-gray-900 font-mono text-white">
+    <div class="mx-auto flex max-w-3xl flex-col gap-16 px-6 py-10 sm:py-16">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <a href={getRelativeLocaleUrl(locale, '')} class="font-pj text-lg font-bold text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none">
+          capgo
+        </a>
+        <AudienceSwitch active="agents" />
+      </div>
+
+      <p class="text-4xl whitespace-nowrap sm:text-6xl" aria-hidden="true">
+        <span class="text-[#44BCFF]">&gt;</span> <span data-typed>@agent</span>
+      </p>
+
+      <section aria-labelledby="prompt-title" class="flex flex-col gap-4">
+        <h1 id="prompt-title" class="text-sm text-slate-400">
+          Capgo for agents. Paste this into your coding agent:
+        </h1>
+        <div class="flex flex-col items-start gap-6 rounded-2xl border border-white/10 bg-black/40 p-6 sm:flex-row sm:p-8">
+          <p id="agent-prompt" class="flex-1 text-base leading-8 break-words text-gray-200 sm:text-lg">
+            {prompt}
+          </p>
+          <button
+            type="button"
+            data-copy={prompt}
+            class="font-pj flex h-11 shrink-0 items-center gap-2 rounded-2xl bg-white px-4 text-sm font-semibold text-gray-950 shadow-lg shadow-black/30 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
+          >
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="9" width="12" height="12" rx="2"></rect>
+              <path d="M5 15V5a2 2 0 0 1 2-2h10"></path>
+            </svg>
+            <span data-copy-label>Copy prompt</span>
+          </button>
+        </div>
+        <p class="sr-only" aria-live="polite" data-copy-status></p>
+      </section>
+
+      <section aria-labelledby="resources-title" class="flex flex-col gap-4">
+        <h2 id="resources-title" class="text-sm text-slate-400">
+          # plain-text resources
+        </h2>
+        <dl class="grid grid-cols-[6rem_1fr] gap-x-4 gap-y-2 text-sm sm:grid-cols-[7rem_1fr] sm:text-base">
+          {resources.map((resource) => (
+            <>
+              <dt class="text-slate-400">{resource.key}</dt>
+              <dd class="break-all text-gray-200">
+                {resource.href ? (
+                  <a href={resource.href} class="inline-block text-[#44BCFF] underline-offset-4 hover:underline">
+                    {resource.value}
+                  </a>
+                ) : (
+                  resource.value
+                )}
+              </dd>
+            </>
+          ))}
+        </dl>
+      </section>
+
+      <section aria-labelledby="agents-title" class="flex flex-col gap-4">
+        <h2 id="agents-title" class="text-sm text-slate-400">
+          # friends with
+        </h2>
+        <p class="text-sm leading-7 sm:text-base">
+          {agents.map((agent, index) => (
+            <>
+              {index > 0 && (
+                <span class="text-slate-500" aria-hidden="true">
+                  {' · '}
+                </span>
+              )}
+              <a href={getRelativeLocaleUrl(locale, `agents/${agent.slug}`)} class="inline-block text-[#44BCFF] underline-offset-4 hover:underline">
+                {agent.name.toLowerCase()}
+              </a>
+            </>
+          ))}
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  [data-typed]::after {
+    content: '|';
+    color: #44bcff;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-typed]::after {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const typed = document.querySelector<HTMLElement>('[data-typed]')
+  const words = ['@agent', 'install capgo', 'ship an update', 'build for ios']
+  if (typed && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let word = 0
+    let length = words[0].length
+    let deleting = true
+    const tick = () => {
+      const current = words[word]
+      length += deleting ? -1 : 1
+      typed.textContent = current.slice(0, length)
+      if (deleting && length === 0) {
+        deleting = false
+        word = (word + 1) % words.length
+        length = 0
+      } else if (!deleting && length === words[word].length) {
+        deleting = true
+        setTimeout(tick, 1800)
+        return
+      }
+      setTimeout(tick, deleting ? 40 : 90)
+    }
+    setTimeout(tick, 1800)
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    const status = document.querySelector<HTMLElement>('[data-copy-status]')
+    button.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(button.dataset.copy ?? '')
+      const label = button.querySelector<HTMLElement>('[data-copy-label]')
+      if (label) label.textContent = 'Copied'
+      if (status) status.textContent = 'Prompt copied'
+      ;(window as any).posthog?.capture('agents_prompt_copy', { location: 'for-agents' })
+      setTimeout(() => {
+        if (label) label.textContent = 'Copy prompt'
+      }, 2000)
+    })
+  })
+</script>
