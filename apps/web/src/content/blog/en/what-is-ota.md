@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-14T07:11:28.530Z
-updated_at: 2026-10-14T07:11:30.074Z
+updated_at: 2026-10-14T07:14:34.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/2813a17d-aafd-4818-9dc0-b2c733f8111f/what-is-ota-updates-guide.jpg'
 head_image_alt: 'What Is OTA Updates: Mobile, Electron, and Capgo Guide'
 keywords: 'ota updates, mobile development, capacitor, capgo, electron app'
