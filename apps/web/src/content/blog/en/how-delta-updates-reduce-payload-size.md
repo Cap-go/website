@@ -1,7 +1,7 @@
 ---
 slug: how-delta-updates-reduce-payload-size
-title: How Delta Updates Reduce Payload Size
-description: Learn how delta updates enhance app performance by minimizing download sizes and improving user experience with quick, reliable updates.
+title: 'Delta Update Explained: Smaller OTA Downloads for Capacitor Apps'
+description: 'What is a delta update? Learn how differential OTA delivery sends only changed bundle files, cuts download size, and speeds up Capacitor live updates.'
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
@@ -9,13 +9,15 @@ created_at: 2025-03-20T03:28:37.844Z
 updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/how-delta-updates-reduce-payload-size.webp
 head_image_alt: "How Delta Updates Reduce Payload Size Capgo blog illustration"
-keywords: delta updates, mobile apps, differential patching, app performance, bandwidth savings
+keywords: delta update, delta updates, differential update, mise à jour delta, OTA updates, Capacitor live updates, bandwidth savings
 tag: Development, Mobile, Updates
 published: true
 locale: en
 origin: ai
 next_blog: ''
 ---
+
+A **delta update** (differential update) sends only the files that changed between two bundle versions instead of downloading the full web archive again. For Capacitor and hybrid apps, that keeps OTA live updates small on cellular networks and helps users adopt fixes faster.
 
 Delta updates make app updates faster and smaller by sending only the changed parts of the app instead of the entire file. Here's how:
 
@@ -30,7 +32,7 @@ Delta updates make app updates faster and smaller by sending only the changed pa
 -   **Automated Tools**: Works with CI/CD systems like [GitHub Actions](https://docs.github.com/actions) and [Jenkins](https://www.jenkins.io/).
 -   **Performance Metrics**: Tracks update success rates, download speeds, and user engagement.
 
-Delta updates are ideal for [Capacitor](https://capacitorjs.com/) apps, enabling quick bug fixes, feature rollouts, and [secure updates](https://capgo.app/docs/live-updates/update-behavior/) while saving bandwidth and time.
+Delta updates are ideal for [Capacitor](https://capacitorjs.com/) apps, enabling quick bug fixes, feature rollouts, and [secure updates](https://capgo.app/docs/live-updates/update-behavior/) while saving bandwidth and time. Pair them with [Capacitor live updates](https://capgo.app/live-update/) channels when you roll out OTA bundles to production.
 
 ## How To Get MORE FPS and Better Performance in Warzone ...
 

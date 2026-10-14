@@ -17,7 +17,7 @@ origin: ai
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjs.com/) live updates let developers push bug fixes and minor changes directly to apps without requiring users to download updates from the [App Store](https://www.apple.com/app-store/). This speeds up deployment by up to **81%**, reduces costs, and improves user experience. However, staying compliant with Apple's strict guidelines is essential to avoid app rejections.
+[Capacitor live updates](https://capgo.app/live-update/) let developers push bug fixes and minor changes directly to apps without requiring users to download updates from the [App Store](https://www.apple.com/app-store/). [Capacitor](https://capacitorjs.com/) teams use OTA delivery for eligible web-layer fixes while native changes still go through review. This speeds up deployment by up to **81%**, reduces costs, and improves user experience. However, staying compliant with Apple's strict guidelines is essential to avoid app rejections.
 
 ### Key Points:
 

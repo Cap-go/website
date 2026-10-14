@@ -241,8 +241,11 @@ assert(
 )
 assert(__translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === 'Évitez l\u2019attente.', 'French polish path did not apply article elision')
 assert(__translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.', 'Non-French polish path should leave text unchanged')
-const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Skip the wait. Ship the fix.'])[0]
-assert(typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('hotfix'), 'Missing marketing context override for live update hero headline')
+const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Capacitor Live Updates (OTA)'])[0]
+assert(
+  typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('capacitor'),
+  'Missing marketing context override for live update hero headline',
+)
 
 const noTranslateHtml = `<!doctype html>
 <html lang="en">
