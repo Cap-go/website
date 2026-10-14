@@ -29,6 +29,14 @@ test('buildPublicLiveUpdateQueries stays at one Analytics Engine nest', () => {
   expect(queries.join('\n')).not.toContain('FROM (SELECT date, app_id, version_name')
 })
 
+test('buildPublicLiveUpdateQueries only counts download_fail when an update was offered that day', () => {
+  const queries = buildPublicLiveUpdateQueries(new Date('2026-09-17T00:00:00.000Z'))
+  for (const query of [queries.outcomes, queries.platformsDaily, queries.platformsOutcome, queries.countriesOutcome, queries.versionsOutcome]) {
+    expect(query).toContain("max(if(blob2 IN ('get', 'download_0', 'download_zip_start', 'download_manifest_start', 'download_complete', 'set_next'), 1, 0)) AS offered")
+    expect(query).toContain('sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures')
+  }
+})
+
 test('buildPublicLiveUpdateQueries keeps KPI windows at 30 days and trend platforms at 90 days', () => {
   const queries = buildPublicLiveUpdateQueries(new Date('2026-09-17T00:00:00.000Z'))
   expect(queries.outcomes).toContain("toDateTime('2026-08-18 00:00:00')")
