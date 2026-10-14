@@ -370,7 +370,8 @@ const messages = {
   alternatives_hero_subtitle:
     'Side-by-side comparisons with Ionic Appflow, Capawesome, Microsoft CodePush, Expo EAS, Median, and VoltBuilder. Every competitor fact links to the vendor page it came from.',
   alternatives_hero_title: 'Capgo alternatives: honest comparisons for Capacitor teams',
-  alternatives_meta_description: 'Compare Capgo with Appflow, Expo, CodePush, React Native, Flutter, Despia, Shorebird, Codemagic and more: OTA updates, builds, pricing, and migrations.',
+  alternatives_meta_description:
+    'Compare Capgo with Appflow, Expo, CodePush, React Native, Flutter, Despia, Shorebird, Codemagic and more: OTA updates, builds, pricing, and migrations.',
   alternatives_not_good_at_ci_cd:
     "Unlike Appflow's bundled approach, we give you flexibility. Use our Cloud Build for native iOS/Android builds, or integrate with your own CI/CD (GitHub Actions, GitLab CI, etc). Your choice - both work great.",
   alternatives_not_good_at_ci_cd_label: 'All-in-one CI/CD',
@@ -693,9 +694,9 @@ const messages = {
     'No. Capgo can send the generated web build folder: HTML, CSS, JavaScript, assets, and pure-JavaScript package changes bundled into that output. Changes to capacitor.config.ts, native plugin configuration, native package installs or upgrades, and anything that must update the iOS or Android project through npx cap sync or npx cap copy require a native app release.',
   capacitor_config_changes_question: 'Can I update capacitor.config.ts changes via Capgo?',
   capacitor_power_approximately_1_of_apps_on_google_play_store: 'Capacitor power approximately $1% of apps on Google Play Store',
-  capflow_meta_description: 'Compare Ionic Appflow and Capgo for Capacitor live updates, OTA deployments, rollback protection, automation, and migration support.',
+  capflow_meta_description: 'Ionic Appflow alternative for Capacitor teams: Capgo live updates, channels, rollback, device logs, and native builds while Appflow winds down.',
   capflow_nav_label: 'Ionic AppFlow vs Capgo',
-  capflow_title: 'Ionic AppFlow vs Capgo',
+  capflow_title: 'Ionic Appflow Alternative | Capgo Live Updates',
   compare_appflow_better_1_text:
     'Ionic keeps Appflow running for existing customers until December 31, 2027. If the app will be retired or rebuilt before then, staying may cost less effort than a migration.',
   compare_appflow_better_1_title: 'Your app ends before 2028',
@@ -708,7 +709,7 @@ const messages = {
   compare_appflow_company: 'Ionic, part of OutSystems since October 2022. No new customers since February 11, 2025; access for existing customers ends December 31, 2027.',
   compare_appflow_eyebrow: 'Ionic Appflow alternative',
   compare_appflow_frameworks: 'Builds for Capacitor, Cordova, React Native, and native iOS and Android. Live Updates only for Capacitor and Cordova.',
-  compare_appflow_h1: 'The Ionic Appflow alternative for Capacitor live updates and native builds',
+  compare_appflow_h1: 'Ionic Appflow alternative for Capacitor live updates',
   compare_appflow_lead:
     'For Capacitor and Cordova teams that use Appflow Live Updates or Native Builds. Ionic stopped selling Appflow to new customers on February 11, 2025, and access for existing customers ends on December 31, 2027.',
   compare_appflow_migration_lead: 'The official guide covers the plugin swap, configuration, and CI changes. Ionic enterprise plugins have direct Capgo replacements listed below.',
@@ -1003,8 +1004,7 @@ const messages = {
   compare_rank_capgo_text:
     'Capacitor plus Capgo: one web codebase for iOS, Android, and web, live updates that skip store review, and cloud native builds in 2–3 minutes. Open source, from $12/month.',
   compare_rank_eyebrow: 'Top picks',
-  compare_rank_lead:
-    'Ranked for teams that want to ship mobile apps fast, fix production bugs without waiting on store review, and keep full control of their code.',
+  compare_rank_lead: 'Ranked for teams that want to ship mobile apps fast, fix production bugs without waiting on store review, and keep full control of their code.',
   compare_rank_link: 'Learn more',
   compare_rank_link_aria: 'Learn more about {name}',
   compare_rank_pick: 'Our pick',
@@ -1085,15 +1085,16 @@ const messages = {
   capgo_usage_explanation:
     'You can exclude development builds and emulators from production update channels. That controls update delivery, not MAU: a build can still count when it contacts Capgo. To keep it out of production usage, build it with live updates disabled and do not call Capgo endpoints. Learn more about this',
   capgo_was_born_from_a_real_need_in_the_developer_community: 'Capgo was born from a real need in the developer community.',
-  capwesome_hero_title: 'Capgo vs Capawesome Cloud',
-  capwesome_meta_description: 'Compare Capawesome and Capgo across performance, features, transparency, and community impact.',
+  capwesome_hero_title: 'Capawesome alternative for Capacitor live updates',
+  capwesome_meta_description:
+    'Capawesome alternative with Capgo: signed OTA bundles, channels, rollback, device logs, and optional end-to-end encryption Capgo cannot read when enabled.',
   capwesome_migration_intro: "If you're on Capawesome and considering Capgo, migration is straightforward. The Capacitor update plugin architecture is similar.",
   capwesome_migration_step1: 'Swap the plugin package',
   capwesome_migration_step2: 'Update config (minor differences)',
   capwesome_migration_step3: 'Update your upload process',
   capwesome_migration_title: 'Thinking of switching?',
   capwesome_nav_label: 'Capawesome vs Capgo',
-  capwesome_title: 'Capawesome vs Capgo',
+  capwesome_title: 'Capawesome Alternative | Capgo for Capacitor OTA',
   carbon_removal: '1% of our revenue goes to carbon removal.',
   centralized_management: 'Centralized Management',
   channel_management: 'Channel management',
@@ -2535,8 +2536,24 @@ const messages = {
   live_update_delta_feature3_desc: 'Just add --partial to your upload command to enable delta updates for your bundle.',
   live_update_delta_feature3_title: 'Enable with One Flag',
   live_update_delta_title: 'Delta Updates',
-  live_update_description: 'Capacitor live updates with channels, rollback, and CLI checks, run by you or your AI agent. The EAS Update analog for web apps, not React Native.',
-  live_update_seo_title: 'Ionic and Capacitor Live Updates with AI Agents',
+  live_update_description:
+    'Capacitor live updates (OTA) ship web-layer fixes to production apps in minutes. Capgo adds channels, rollback, delta downloads, device logs, and CLI safety checks.',
+  live_update_seo_title: 'Capacitor Live Updates (OTA)',
+  live_update_faq_eyebrow: 'FAQ',
+  live_update_faq_title: 'Capacitor live updates (OTA) FAQ',
+  live_update_faq_desc: 'Short answers for teams evaluating over-the-air updates on Capacitor and Ionic apps.',
+  live_update_faq_q1: 'What are Capacitor live updates (OTA)?',
+  live_update_faq_a1:
+    'They replace the web bundle (HTML, CSS, JavaScript, and assets) inside your Capacitor app without a new store binary. Users get fixes after the app checks your release channel and downloads the signed bundle.',
+  live_update_faq_q2: 'Are Capacitor OTA updates allowed on the App Store and Google Play?',
+  live_update_faq_a2:
+    'Yes, for eligible web-layer changes that stay within each store policy. Native plugin changes, permissions, and new executable behavior still need a normal store release.',
+  live_update_faq_q3: 'How is a live update different from submitting a new app version?',
+  live_update_faq_a3:
+    'A store release updates the native shell and goes through review. OTA live updates target the web layer only, so teams can roll out, pause, or roll back a bundle in minutes through channels.',
+  live_update_faq_q4: 'Can Capgo read my update bundles?',
+  live_update_faq_a4:
+    'With end-to-end encryption enabled, bundles are encrypted with your keys before upload. Capgo stores ciphertext and cannot read the contents; only your app can decrypt what you ship.',
   live_update_dynamic_bullet1_prefix: 'Add an in-app “Update Track” menu: list channels and let testers jump from',
   live_update_dynamic_bullet1_suffix: 'in seconds (no reinstall).',
   live_update_dynamic_bullet2: 'Spin up a pull-request channel per feature, route QA or beta users there, then snap them back to prod when approved.',
@@ -2579,10 +2596,11 @@ const messages = {
   live_update_features_title: 'The Complete Live Update System',
   live_update_get_started: 'Get Started',
   live_update_hero_badge: 'Capgo Live Updates',
-  live_update_hero_headline: 'Skip the wait. Ship the fix.',
-  live_update_hero_tagline: 'OTA updates for Ionic and Capacitor apps.',
+  live_update_hero_headline: 'Capacitor Live Updates (OTA)',
+  live_update_hero_tagline: 'Ship web-layer fixes without waiting on store review.',
   live_update_hero_cta: 'Start shipping',
-  live_update_hero_subtitle: 'Push web-layer fixes instantly for Ionic and Capacitor apps. Skip the App Store wait.',
+  live_update_hero_subtitle:
+    'Capacitor live updates (OTA) push JavaScript, HTML, CSS, and asset changes to users in minutes. Capgo handles signed delivery, channels, rollback, and per-device logs so you can fix production safely.',
   live_update_hero_stat_channels_label: 'Canary, beta, support, and production tracks',
   live_update_hero_stat_channels_value: 'Dynamic channels',
   live_update_hero_stat_logs_label: 'Per-device update status and rollback history',
@@ -2597,7 +2615,7 @@ const messages = {
   live_update_hero_stat_latency_value: '~50ms typical',
   live_update_hero_stat_latency_label: 'Ultra-low latency',
   live_update_hero_stat_validation_value: 'CLI safety checks',
-  live_update_hero_title: 'Skip the wait. Ship the fix.',
+  live_update_hero_title: 'Capacitor Live Updates (OTA)',
   live_update_how_it_works_subtitle: 'Automatic when you want speed. Manual when you need control. Safety checks at every step.',
   live_update_how_it_works_title: 'How It Works',
   live_update_logs_bullet1: 'Per-device timelines highlight stalled downloads, checksum issues, or missing notifyAppReady().',
@@ -6760,10 +6778,10 @@ const messages = {
   codepush_alt_migrate_title: 'Leave CodePush / App Center',
   codepush_alt_migrate_p1:
     'Export your release habits, remove CodePush SDK wiring, and point Capacitor builds at Capgo channels. Our migration hub links App Center blog posts and step-by-step docs.',
-  voltbuilder_alt_title: 'Capgo vs Voltbuilder',
+  voltbuilder_alt_title: 'Voltbuilder Alternative | Capgo Live Updates',
   voltbuilder_alt_meta_description:
-    'Voltbuilder builds store-ready Cordova apps in the cloud. Capgo adds Capacitor live updates — compare scope and read the full Voltbuilder alternative post.',
-  voltbuilder_alt_hero_title: 'Capgo vs Voltbuilder',
+    'Voltbuilder alternative for teams that need Cordova or Capacitor cloud builds plus OTA live updates, channels, rollback, and device logs from Capgo.',
+  voltbuilder_alt_hero_title: 'Voltbuilder alternative for Capacitor live updates',
   voltbuilder_alt_blog_cta: 'Read the Voltbuilder alternative blog post',
   review_appflow_title: 'Ionic Appflow review for Capacitor teams',
   review_appflow_meta_description: 'Honest Capgo-voiced overview of Ionic Appflow: who it serves, the wind-down timeline, and where Capgo fits for live updates and native builds.',
