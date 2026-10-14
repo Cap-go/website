@@ -22,7 +22,11 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const description = m.pricing_description({}, { locale })
 const title = `${brand} | ${m.pricing({}, { locale })} - ${m.pricing_seo_tagline({}, { locale })}`
 
-const content: { title: string; description: string; ldJSON?: any } = { title, description }
+const content: { title: string; description: string; ldJSON?: any; markdownAlternate?: string } = {
+  title,
+  description,
+  markdownAlternate: '/pricing.md',
+}
 const serviceDisruptionPolicyUrl = `${getRelativeLocaleUrl(locale, 'support-policy')}#service-disruption-and-ending`
 
 const config = Astro.locals.runtimeConfig

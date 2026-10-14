@@ -28,6 +28,7 @@ const {
   articleSection = null,
   articleTags = null,
   robots = 'index, follow',
+  markdownAlternate = null,
 } = Astro.props
 
 const localeName_to_OGP = {
@@ -124,6 +125,11 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta name="keywords" content={keywords} />
 
 <link rel="canonical" href={canonicalString} />
+{
+  markdownAlternate && (
+    <link rel="alternate" type="text/markdown" href={new URL(markdownAlternate, baseUrl).toString()} />
+  )
+}
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
 <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
