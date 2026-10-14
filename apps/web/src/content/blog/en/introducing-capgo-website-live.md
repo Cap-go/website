@@ -26,7 +26,8 @@ faq:
   - question: What does Website Live not include?
     answer: >-
       Channels, staged or percentage rollouts, update stats and device logs,
-      end-to-end encryption, bundle history and native builds. You can switch
+      end-to-end encryption, bundle history and native builds of your own
+      project. You can switch
       to a full Capgo plan from app settings whenever you need them.
   - question: Does my site need to be static?
     answer: >-

@@ -76,7 +76,7 @@ export const GET: APIRoute = async () => {
     '',
     '## Website Live',
     '',
-    `Capgo Website Live: $12/month or $120/year per organization. The app updates itself straight from your deployed static website (no CLI, no bundle uploads). Unlimited updates and devices, no MAU limit, no bandwidth billing, automatic rollback if a new version fails to start. Not included: channels, staged rollouts, update stats and device logs, end-to-end encryption, bundle history, native builds. Switch to a full plan from app settings at any time. Details: ${baseUrl}/website-live/`,
+    `Capgo Website Live: $12/month or $120/year per organization. The app updates itself straight from your deployed static website (no CLI, no bundle uploads). Unlimited updates and devices, no MAU limit, no bandwidth billing, automatic rollback if a new version fails to start. Capgo builds the iOS and Android store app from its Capacitor template and submits it for review, from the console or the Capgo MCP server (you bring the Apple and Google developer accounts and store keys). Not included: channels, staged rollouts, update stats and device logs, end-to-end encryption, bundle history, native builds of your own project. Switch to a full plan from app settings at any time. Details: ${baseUrl}/website-live/`,
     '',
     '## Pay-as-you-go usage tiers',
     '',
