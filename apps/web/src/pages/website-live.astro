@@ -38,14 +38,14 @@ plugins: {
   },
 },
 
-// main.ts: confirm only once the app has actually rendered.
-// If the new version crashes before this runs, it rolls back.
-import { CapacitorUpdater } from '@capgo/capacitor-updater'
-app.mount('#app')
-CapacitorUpdater.notifyAppReady()`
+// notifyAppReady() runs automatically once the page shows content.
+// A version that never renders is rolled back. To confirm from your own
+// code instead, set websiteAutoNotifyReady: false and call
+// CapacitorUpdater.notifyAppReady() after your app has mounted.`
 
 const mcpCode = `> Publish my Website Live app com.example.app to the App Store
 
+capgo_check_website_live            static build, offline files
 capgo_update_website_live_store     name, version, website
 capgo_set_website_live_icon         one PNG, or the website icon
 capgo_set_website_live_ios_keys     App Store Connect API key

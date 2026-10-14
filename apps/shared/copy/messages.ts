@@ -6256,7 +6256,7 @@ const messages = {
   website_live_for_title: 'Made for apps that are already websites',
   website_live_h1: 'Deploy your website. Your mobile app updates itself.',
   website_live_how1_body:
-    'Create the app in the Capgo console, choose Website Live and enter the address where your site is deployed. Then add one call to your site: notifyAppReady() from @capgo/capacitor-updater, once the page has rendered.',
+    'Create the app in the Capgo console, choose Website Live and enter the address where your site is deployed. Capgo checks that the site is a static build the app can keep offline. No code change is needed in your site.',
   website_live_how1_title: 'Connect your website',
   website_live_how2_body:
     'Set the name shown on the home screen and upload one square image, or use your website icon. Capgo generates every iOS, Android and Google Play icon size from it.',
