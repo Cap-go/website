@@ -4,6 +4,8 @@ export const dotnetMaui: AlternativeCompetitor = {
   slug: 'dotnet-maui',
   name: '.NET MAUI',
   category: 'framework',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best .NET MAUI Alternative in 2026 | Capgo',
   metaDescription:
     'Compare .NET MAUI with Capacitor and Capgo. Reuse your web UI on iOS and Android, ship live updates without store review, and build in the cloud.',

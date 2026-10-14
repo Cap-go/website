@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import { integrations } from '@/config/integrations'
 import m from '@/copy/messages'
 import AgentReadySection from '@/components/AgentReadySection.astro'
+import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -10,7 +11,27 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = `${brand} | ${m.integrations_title({}, { locale })}`
 const description = m.integrations_subtitle({}, { locale })
 
-const content = { title, description, image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-integrations.png` }
+const ldJSON = createLdJsonGraph(
+  Astro.locals.runtimeConfig.public,
+  createWebPageLdJson(Astro.locals.runtimeConfig.public, { name: title, description, url: Astro.url.href, inLanguage: locale }),
+  {
+    includeOrganization: true,
+    additionalEntities: [
+      createItemListLdJson(Astro.locals.runtimeConfig.public, {
+        url: Astro.url.href,
+        name: m.integrations_title({}, { locale }),
+        description,
+        items: integrations.map((item) => ({
+          name: item.name,
+          url: new URL(item.href, Astro.locals.runtimeConfig.public.baseUrl).href,
+          description: item.description,
+        })),
+      }),
+    ],
+  },
+)
+
+const content = { title, description, ldJSON, image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-integrations.png` }
 
 const trustedFreelancers = [
   {

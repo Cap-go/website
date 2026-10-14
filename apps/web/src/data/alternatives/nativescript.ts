@@ -4,6 +4,8 @@ export const nativescript: AlternativeCompetitor = {
   slug: 'nativescript',
   name: 'NativeScript',
   category: 'framework',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best NativeScript Alternative in 2026 | Capgo',
   metaDescription:
     'Compare NativeScript with Capacitor and Capgo. Ship your existing web app to iOS and Android, reuse it on the web, and get live updates and cloud builds.',

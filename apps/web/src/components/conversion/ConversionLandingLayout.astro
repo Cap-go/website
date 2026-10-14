@@ -4,6 +4,7 @@ import SignupCta from '@/components/SignupCta.astro'
 import ConversionRelatedLinks from '@/components/conversion/ConversionRelatedLinks.astro'
 import type { ConversionLink } from '@/components/conversion/ConversionRelatedLinks.astro'
 import m from '@/copy/messages'
+import { formatPageDate } from '@/data/pageDates'
 
 export interface ConversionSection {
   title: string
@@ -25,9 +26,13 @@ interface Props {
   sections: ConversionSection[]
   relatedLinks: ConversionLink[]
   locale: string
+  /** Rendered as a visible FAQ; pass the same list to createFAQPageLdJson. */
+  faq?: Array<{ question: string; answer: string }>
+  /** Last content update, YYYY-MM-DD. */
+  updatedAt?: string
 }
 
-const { content, heroTitle, heroSubtitle, sections, relatedLinks, locale } = Astro.props
+const { content, heroTitle, heroSubtitle, sections, relatedLinks, locale, faq = [], updatedAt } = Astro.props
 ---
 
 <Layout content={content}>
@@ -36,6 +41,11 @@ const { content, heroTitle, heroSubtitle, sections, relatedLinks, locale } = Ast
       <div class="mb-12 text-center">
         <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">{heroTitle}</h1>
         <p class="mx-auto max-w-2xl text-xl text-gray-300">{heroSubtitle}</p>
+        {updatedAt && (
+          <p class="mt-4 text-sm text-gray-400">
+            {m.page_last_updated({}, { locale })} <time datetime={updatedAt}>{formatPageDate(updatedAt, locale)}</time>
+          </p>
+        )}
       </div>
 
       <div class="mb-12 space-y-8">
@@ -62,6 +72,22 @@ const { content, heroTitle, heroSubtitle, sections, relatedLinks, locale } = Ast
           ))
         }
       </div>
+
+      {faq.length > 0 && (
+        <section class="mb-12" aria-labelledby="conversion-faq-title">
+          <h2 id="conversion-faq-title" class="mb-6 text-2xl font-bold text-gray-100">
+            {m.compare_faq_title({}, { locale })}
+          </h2>
+          <dl class="space-y-4">
+            {faq.map((item) => (
+              <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+                <dt class="text-lg font-semibold text-gray-100">{item.question}</dt>
+                <dd class="mt-2 text-gray-300">{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
 
       <ConversionRelatedLinks title={m.conversion_related_links_title({}, { locale })} links={relatedLinks} />
 

@@ -1,10 +1,10 @@
 ---
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
-import { productTestimonials } from '@/config/productTestimonials'
+import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
-import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
@@ -27,11 +27,29 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Observe',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Release health monitoring for Capacitor live updates',
+  operatingSystem: 'iOS, Android',
+  featureList: [
+    'Live release health: installs, failed attempts, adoption, and success rate',
+    'Native compatibility checks before bundles reach more devices',
+    'Version-by-version app health, launch P90, and WebView P90',
+    'Grouped failures and device logs for investigation',
+    'Query release health from AI agents through MCP',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(productTestimonials.observe),
+})
+
 const content = {
   title,
   description,
   image: Astro.locals.runtimeConfig.public.baseUrl + '/social/capgo-observe.png',
-  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, { includeOrganization: true }),
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, { includeOrganization: true, additionalEntities: [softwareLdJson] }),
 }
 
 const proofPoints = [

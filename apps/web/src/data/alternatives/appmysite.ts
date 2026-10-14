@@ -4,6 +4,8 @@ export const appmysite: AlternativeCompetitor = {
   slug: 'appmysite',
   name: 'AppMySite',
   category: 'web-to-app',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best AppMySite Alternative in 2026 | Capgo',
   metaDescription:
     'Compare AppMySite and Capgo. A no-code app builder with WordPress sync vs Capacitor with live updates, rollback, and cloud native builds you own.',

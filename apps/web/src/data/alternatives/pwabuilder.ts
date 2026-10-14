@@ -4,6 +4,8 @@ export const pwabuilder: AlternativeCompetitor = {
   slug: 'pwabuilder',
   name: 'PWABuilder',
   category: 'web-to-app',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best PWABuilder Alternative in 2026 | Capgo',
   metaDescription:
     'Compare PWABuilder and Capgo. Free PWA store packaging from Microsoft vs Capacitor with native plugins, live updates, rollback, and cloud native builds.',

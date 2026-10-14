@@ -4,6 +4,8 @@ export const otakit: AlternativeCompetitor = {
   slug: 'otakit',
   name: 'OtaKit',
   category: 'live-updates',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best OtaKit Alternative in 2026 | Capgo',
   metaDescription:
     'Compare OtaKit and Capgo for Capacitor live updates: pricing, rollback, channels, native builds, open source, and support. See which OTA tool fits your team.',

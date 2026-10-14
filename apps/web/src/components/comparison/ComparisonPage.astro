@@ -7,6 +7,7 @@ import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import type { ProductTestimonial } from '@/config/productTestimonials'
 import m from '@/copy/messages'
+import { formatPageDate } from '@/data/pageDates'
 
 export type ComparisonRowId = 'pricing' | 'ota' | 'native_builds' | 'frameworks' | 'open_source' | 'rollback' | 'support' | 'company'
 
@@ -39,6 +40,8 @@ interface Props {
     links: ComparisonLink[]
   }
   faq?: Array<{ question: string; answer: string }>
+  /** Last content update, YYYY-MM-DD. Shown under the hero so readers and AI search can judge freshness. */
+  updatedAt?: string
   testimonials: ProductTestimonial[]
   video?: { youtubeId: string; title: string; description?: string }
   reviewWall?: boolean
@@ -61,6 +64,7 @@ const {
   better,
   migration,
   faq = [],
+  updatedAt,
   testimonials,
   video,
   reviewWall = false,
@@ -109,6 +113,11 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
           <li>{item}</li>
         ))}
       </ul>
+      {updatedAt && (
+        <p class="cmp-updated">
+          {m.page_last_updated({}, { locale })} <time datetime={updatedAt}>{formatPageDate(updatedAt, locale)}</time>
+        </p>
+      )}
     </div>
     <AppLogoStrip />
   </section>
