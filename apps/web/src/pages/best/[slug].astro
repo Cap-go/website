@@ -1,0 +1,81 @@
+---
+import type { GetStaticPaths } from 'astro'
+import BestShortlistPage from '@/components/best/BestShortlistPage.astro'
+import Layout from '@/layouts/Layout.astro'
+import { bestShortlists } from '@/data/best'
+import type { BestShortlistPage as BestShortlistData } from '@/data/best/types'
+import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createNewsArticleLdJson } from '@/lib/ldJson'
+
+export const getStaticPaths: GetStaticPaths = () => bestShortlists.map((page) => ({ params: { slug: page.slug }, props: { page } }))
+
+interface Props {
+  page: BestShortlistData
+}
+
+const { page } = Astro.props
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+const absolute = (href: string) => (/^https?:\/\//.test(href) ? href : new URL(href, config.baseUrl).href)
+
+// Same text in <title> and <h1>; the brand suffix is only in <title>.
+const heading = `Best ${page.category} in ${page.year}: the buyer's shortlist`
+const title = `${heading} | ${config.brand}`
+const image = absolute(page.imageCtas.final.image)
+const publishedTime = new Date(page.publishedAt).toISOString()
+const modifiedTime = new Date(page.updatedAt).toISOString()
+
+const article = createNewsArticleLdJson(config, {
+  title: heading,
+  description: page.metaDescription,
+  url: pageUrl,
+  image: [image],
+  datePublished: publishedTime,
+  dateModified: modifiedTime,
+  author: page.author.name,
+  authorUrl: page.author.profileUrl,
+  authorImage: page.author.imageUrl,
+  keywords: page.keywords.split(',').map((keyword) => keyword.trim()),
+  articleSection: 'Comparison',
+  articleBody: [page.intro, ...page.keyTakeaways].join(' '),
+  locale,
+})
+if (page.author.sameAs?.length && typeof article.author === 'object' && article.author && '@type' in article.author) {
+  Object.assign(article.author, { sameAs: [page.author.profileUrl, ...page.author.sameAs], jobTitle: page.author.role })
+}
+
+const content = {
+  title,
+  description: page.metaDescription,
+  canonical: pageUrl,
+  url: pageUrl,
+  image,
+  keywords: page.keywords,
+  author: page.author.name,
+  ogType: 'article',
+  articlePublishedTime: publishedTime,
+  articleModifiedTime: modifiedTime,
+  articleSection: 'Comparison',
+  articleTags: page.keywords.split(',').map((keyword) => keyword.trim()),
+  ldJSON: createLdJsonGraph(config, article, {
+    includeOrganization: true,
+    additionalEntities: [
+      createItemListLdJson(config, {
+        url: pageUrl,
+        name: `The Best ${page.category} in ${page.year}`,
+        description: page.listIntro,
+        items: page.products.map((product) => ({
+          name: product.name,
+          url: absolute(product.href),
+          description: `Best for ${product.bestFor}. ${product.bestSuitedFor}`,
+        })),
+      }),
+      createFAQPageLdJson(config, { url: pageUrl, questions: page.faq }),
+    ],
+  }),
+}
+---
+
+<Layout content={content}>
+  <BestShortlistPage page={page} heading={heading} />
+</Layout>

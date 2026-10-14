@@ -6797,15 +6797,6 @@ const messages = {
   review_codepush_capgo_title: 'Capacitor path',
   review_codepush_capgo_p1: 'Capgo is built for Capacitor live updates with signing, channels, and analytics — not a drop-in CodePush SDK replacement.',
   best_capacitor_live_updates_title: 'Best Capacitor live update platform',
-  best_capacitor_live_updates_meta_description: 'Short guide to choosing a Capacitor live update service: channels, rollback, compliance, and links to comparisons.',
-  best_capacitor_live_updates_hero_title: 'Best live updates for Capacitor apps',
-  best_capacitor_live_updates_hero_subtitle: 'Pick a platform that supports channels, rollback, encryption, and store policy — not just upload speed.',
-  best_capacitor_live_updates_body_title: 'What to look for',
-  best_capacitor_live_updates_body_p1:
-    'Capacitor ships a native shell plus a web bundle. Your OTA vendor should target native versions, support staged rollouts, and fail safe when an update breaks.',
-  best_capacitor_live_updates_body_li1: 'Per-channel releases and instant rollback',
-  best_capacitor_live_updates_body_li2: 'Code signing and delta updates',
-  best_capacitor_live_updates_body_li3: 'Analytics on adoption and failures',
   best_ai_tools_capacitor_title: 'Best AI tools to build Capacitor apps',
   best_ai_tools_capacitor_meta_description:
     'The AI tool stack for Capacitor apps: a coding agent plus Capgo skills, MCP, plugins, native builds, store publishing, and live updates for iOS and Android.',
