@@ -49,7 +49,7 @@ Use one Tink-backed pipeline end to end:
 
 1. Build a Tink keyset with [`AndroidKeysetManager`](https://developers.google.com/tink/android-key-management), storing the master key in Android Keystore via an `android-keystore://` URI (see the [`datastore-tink` release notes](https://developer.android.com/jetpack/androidx/releases/datastore)).
 2. Obtain an `Aead` primitive from that keyset.
-3. Add `androidx.datastore:datastore-tink` (available from [DataStore 1.3.0-rc01](https://developer.android.com/jetpack/androidx/releases/datastore#1.3.0-rc01); stable 1.2.x does not ship this artifact), wrap your `Serializer` with [`AeadSerializer`](https://developer.android.com/reference/kotlin/androidx/datastore/tink/AeadSerializer), and pass it to `DataStore`.
+3. Add `androidx.datastore:datastore-tink` (available from [DataStore 1.3.0-rc01](https://developer.android.com/jetpack/androidx/releases/datastore#1.3.0-rc01); stable 1.2.x does not ship this artifact), wrap your `Serializer` with [`AeadSerializer`](https://developer.android.com/reference/kotlin/androidx/datastore/tink/AeadSerializer), and pass it to `DataStore`. When multiple stores share one `Aead` key, give each store unique `associatedData`, such as a stable value derived from its filename.
 
 Google documents this as the supported replacement path for deprecated `androidx.security.crypto` helpers. Do not mix a standalone JCA `SecretKey` with `AeadSerializer`; the serializer expects a Tink `Aead` instance.
 
