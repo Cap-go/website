@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Sign in required lock">
+  <title>Sign in required lock</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="48" cy="56" r="18" fill="#44BCFF" opacity="0.35"/>
+      <rect x="118" y="70" width="84" height="72" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+      <path d="M148 108 C148 96 172 96 172 108 V118 C172 130 148 130 148 118 Z" fill="none" stroke="#44BCFF" stroke-width="2"/>
+      <circle cx="160" cy="104" r="6" fill="#44BCFF"/>
+      <path d="M88 140h144" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="5 5" opacity="0.4"/>
+</svg>

@@ -38,3 +38,6 @@ export type { AppleRejectionStory, AppleRejectionStoryTag } from './types'
 export { appleRejectionStoryTagLabels }
 
 export const appleRejectionStoriesContentPath = 'apps/web/src/data/apple-rejection-stories/stories'
+
+export { getAppleRejectionStoryMedia, appleRejectionStoryMedia } from './storyMedia'
+export type { AppleRejectionStoryMedia } from './storyMedia'
