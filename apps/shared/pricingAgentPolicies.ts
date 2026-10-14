@@ -1,4 +1,4 @@
-/** Plain-text billing policies aligned with the public pricing page FAQ (English). */
+/** Plain-text billing policies aligned with the public pricing page FAQ. English source for agents. */
 export const PRICING_AGENT_POLICY_MARKDOWN = `## Billing and limits
 
 ### Monthly active users (MAU)
