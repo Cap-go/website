@@ -269,6 +269,7 @@ const messages = {
   appflow_faq_q6: "Why is Capawesome Ionic's migration partner and not Capgo?",
   appflow_plugins_caption: 'Ionic enterprise plugins and their Capgo replacements, with migration guides.',
   article_credits: 'Article credits',
+  blog_sidebar_cta_lead: 'Ship live updates to your Capacitor app with Capgo, no App Store review.',
   access_maintain_enterprise_plugins: 'Access and maintain our enterprise-grade Capacitor plugins with priority support and dedicated maintenance.',
   ach_available_for_enterprise_annual_payments: 'ACH is available only for annual payments from Enterprise plan customers. Contact us for more information.',
   active_users_up_to_date: 'of active users receive updates within 24 hours',

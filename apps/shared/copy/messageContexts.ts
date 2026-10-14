@@ -567,6 +567,7 @@ export const messageContexts = {
   blog_role_editor: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component BlogEditorialByline.astro. Message key `blog_role_editor` (Blog Role Editor).',
   blog_role_reviewer: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component BlogEditorialByline.astro. Message key `blog_role_reviewer` (Blog Role Reviewer).',
   blog_role_writer: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component BlogEditorialByline.astro. Message key `blog_role_writer` (Blog Role Writer).',
+  blog_sidebar_cta_lead: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page blog/[slug].astro. Preserve Capgo product/brand and developer terms exactly. Message key `blog_sidebar_cta_lead` (Blog Sidebar CTA Lead).',
   book_a_consultation: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page consulting.astro. Message key `book_a_consultation` (Book A Consultation).',
   brand: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page brand.astro. Message key `brand` (Brand).',
   brand_asset_banner_navy_desc: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page brand.astro. Preserve Capgo product/brand and developer terms exactly. Message key `brand_asset_banner_navy_desc` (Brand Asset Banner Navy Desc).',
