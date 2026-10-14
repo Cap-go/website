@@ -194,7 +194,7 @@ This rating replaces the old 17+ and indicates content suitable only for adults.
 
 ### The App Store Connect age rating questionnaire
 
-Apple’s questionnaire covers four main areas:
+Apple’s questionnaire covers four main areas (in-app controls, capabilities, medical or wellness topics, and content themes). Apple also asks whether your app includes **social media capabilities** (redistribution, amplification, or interaction with user-generated content through a feed or similar discovery). Those answers feed **Time Allowance** grouping for parents and can add a **Social Media** content descriptor on your product page ([age ratings reference](https://developer.apple.com/help/app-store-connect/reference/age-ratings-values-and-definitions/), [social media questionnaire news](https://developer.apple.com/news/?id=tlur8uvi)).
 
 #### 1. In-App Controls
 
@@ -976,10 +976,10 @@ Developers must consider how AI features, including chatbots and assistants, mig
 
 **Example:**
 An AI chatbot app:
-- Must be rated at least 13+
-- Should be 18+ if AI can discuss mature topics
-- Needs robust content filtering
-- Should have reporting mechanisms
+- Rate the app from the **frequency and intensity** of sensitive content the model can surface (violence, sexual themes, profanity, substances, horror, gambling), not from a single example prompt
+- A **13+** or **16+** rating may fit when mature topics are infrequent or mild and match your questionnaire answers
+- Reserve **18+** for cases where AI output can meet Apple’s **18+** descriptors (for example frequent or intense sexual content, prolonged graphic violence, or real-money gambling)
+- Still plan for filtering, testing, and reporting even when the assigned rating is lower
 
 ### Apps with Web Browsing
 
