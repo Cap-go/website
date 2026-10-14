@@ -33,7 +33,8 @@ const fallbackAlt = storyIllustrationAlt(story)
         height={media.height}
         loading="lazy"
         decoding="async"
-        class="aspect-[16/10] w-full object-cover object-top"
+        class="w-full max-h-[min(70vh,960px)] object-contain object-top bg-gray-950"
+        style={`aspect-ratio: ${media.width} / ${media.height}`}
         sizes="(min-width: 1024px) 560px, 100vw"
       />
     ) : (

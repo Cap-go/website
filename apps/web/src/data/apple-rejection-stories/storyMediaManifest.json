@@ -1,0 +1,91 @@
+{
+  "ai-data-sharing-no-consent": {
+    "src": "/apple-rejection-stories/screenshots/ai-data-sharing-no-consent.webp",
+    "alt": "Rejection message asking the app to disclose and get consent before sending personal data to a third party AI service",
+    "width": 552,
+    "height": 1200
+  },
+  "att-rejection-startup-risk-5-1-2": {
+    "src": "/apple-rejection-stories/screenshots/att-rejection-startup-risk-5-1-2.webp",
+    "alt": "Blurred post from a founder describing a tracking transparency rejection",
+    "width": 560,
+    "height": 626
+  },
+  "crowded-category-4-3": null,
+  "enrollment-refused-no-reason": {
+    "src": "/apple-rejection-stories/screenshots/enrollment-refused-no-reason.webp",
+    "alt": "Blurred post from a developer describing a refused developer program enrollment",
+    "width": 560,
+    "height": 320
+  },
+  "fake-documents-pdf-editor": {
+    "src": "/apple-rejection-stories/screenshots/fake-documents-pdf-editor.webp",
+    "alt": "Rejection text saying the app could be used to create fake official documents",
+    "width": 931,
+    "height": 468
+  },
+  "metadata-iap-checkboxes": null,
+  "nine-then-eight-days-review": null,
+  "objectionable-content-resubmit": {
+    "src": "/apple-rejection-stories/screenshots/objectionable-content-resubmit.webp",
+    "alt": "Blurred post with a pending account termination notice for repeated resubmissions",
+    "width": 560,
+    "height": 1009
+  },
+  "portfolio-flagged-4-3": null,
+  "rejected-same-minute-4-3": {
+    "src": "/apple-rejection-stories/screenshots/rejected-same-minute-4-3.webp",
+    "alt": "Spam rejection email listing guideline 4.3 and 4.2.6 questions",
+    "width": 1200,
+    "height": 825
+  },
+  "reviewer-could-not-follow-2-1": null,
+  "same-letter-twice-4-3": null,
+  "seven-questions-2-1": null,
+  "sign-up-required-not-big-app": {
+    "src": "/apple-rejection-stories/screenshots/sign-up-required-not-big-app.webp",
+    "alt": "Blurred post from a developer whose social app was rejected for requiring sign up",
+    "width": 560,
+    "height": 500
+  },
+  "simulated-gambling-staking": {
+    "src": "/apple-rejection-stories/screenshots/simulated-gambling-staking.webp",
+    "alt": "Rejection notice saying simulated gambling apps need an organization account",
+    "width": 1200,
+    "height": 398
+  },
+  "social-login-reviewer-stuck": {
+    "src": "/apple-rejection-stories/screenshots/social-login-reviewer-stuck.webp",
+    "alt": "Review note saying the reviewer could not sign in with Apple or Google",
+    "width": 828,
+    "height": 461
+  },
+  "stalled-queue-then-4-3-wave": {
+    "src": "/apple-rejection-stories/screenshots/stalled-queue-then-4-3-wave.webp",
+    "alt": "App Store Connect list with app names and icons blurred, most marked rejected",
+    "width": 1200,
+    "height": 636
+  },
+  "subscription-price-prominence-3-1-2": {
+    "src": "/apple-rejection-stories/screenshots/subscription-price-prominence-3-1-2.webp",
+    "alt": "Paywall before and after, with the billed amount shown more clearly",
+    "width": 1200,
+    "height": 960
+  },
+  "template-false-positive-4-2-6": null,
+  "terminated-before-first-review": null,
+  "too-many-rejected-versions": null,
+  "twenty-day-reject-loop": null,
+  "two-months-after-one-rejection": {
+    "src": "/apple-rejection-stories/screenshots/two-months-after-one-rejection.webp",
+    "alt": "Blurred post from a developer whose app has been stuck in review for months",
+    "width": 560,
+    "height": 446
+  },
+  "unrelated-apps-rejected-together-4-3": {
+    "src": "/apple-rejection-stories/screenshots/unrelated-apps-rejected-together-4-3.webp",
+    "alt": "Several App Store notifications at the same minute, each saying a version was rejected",
+    "width": 826,
+    "height": 1199
+  }
+}
