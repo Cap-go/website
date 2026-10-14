@@ -143,6 +143,11 @@
     {
       "fingerprint": "SEO01165::https://capgo.app/sitemap-docs-index.xml",
       "reason": "Docs sitemap is served by the separate docs worker, not apps/web/dist"
+    },
+    {
+      "ruleId": "SEO01181",
+      "filePath": "**best/*/index.html",
+      "reason": "Best-of shortlist pages keep the exact 'Best [product] in [year]: the buyer's shortlist | Capgo' title on purpose for AI search"
     }
   ],
   "failOn": ["error", "warning"],
