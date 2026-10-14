@@ -26,7 +26,7 @@ faq:
     answer: Yes. Apple’s November 13, 2025 App Review Guidelines update requires creator apps and apps that serve software not embedded in the binary to let users flag content above the app’s age rating and to restrict that content using verified or declared age.
 ---
 
-**Quick answer:** In 2026, Apple rates apps at **4+, 9+, 13+, 16+, or 18+** from the questionnaire in App Store Connect; Google Play still uses **IARC** for regional ratings. The **January 31, 2026** deadline to answer Apple’s updated questions has passed: complete any missing responses before you submit updates, and revisit answers when content or social features change. Creator and mini app platforms must also follow Apple’s **November 13, 2025** guideline updates on age-appropriate access.
+**Quick answer:** In 2026, Apple rates apps at **4+, 9+, 13+, 16+, or 18+** from the questionnaire in App Store Connect; Google Play still uses **IARC** for regional ratings. The **January 31, 2026** deadline to answer Apple’s updated questions has passed: complete any missing responses before you submit updates, and revisit answers when content or social features change. Creator and mini app platforms must also follow Apple’s [November 13, 2025 App Review Guidelines update](https://developer.apple.com/news/?id=ey6d8onl) on age-appropriate access.
 
 Setting the correct age rating for your mobile app is one of the most critical yet often misunderstood aspects of app store submission. Apple rolled out its expanded rating scale and questionnaire in 2025, and in 2026 those ratings are what customers and parental controls rely on. Google Play still uses the IARC (International Age Rating Coalition) system for regional classifications.
 
