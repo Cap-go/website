@@ -646,6 +646,47 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
   return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
 }
 
+async function temporaryEnglishCrawlerResponse(request: Request, env: Env, requestUrl: URL, isHead = false): Promise<Response> {
+  const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
+  if (isRedirect(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
+  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
+    const sourceHtml = await originResponse.text()
+    const localizedHtml = rewriteMetadataForEnglishCanonical(sourceHtml, requestUrl)
+    const headers = new Headers(originResponse.headers)
+    headers.set('Content-Type', 'text/html; charset=utf-8')
+    headers.set('X-Capgo-Translation-Fallback', 'temporary-english-canonical')
+    headers.delete('Content-Length')
+    return withResponseHeaders(
+      new Response(isHead ? null : localizedHtml, {
+        status: originResponse.status,
+        statusText: originResponse.statusText,
+        headers,
+      }),
+      'BYPASS',
+      isHead,
+    )
+  }
+  if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
+
+  const sourceHtml = await originResponse.text()
+  const localizedHtml = rewriteMetadataForEnglishCanonical(sourceHtml, requestUrl)
+  const headers = new Headers(originResponse.headers)
+  headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.set('X-Capgo-Translation-Fallback', 'temporary-english-canonical')
+  headers.delete('Content-Length')
+  headers.delete('Refresh')
+  headers.delete('Retry-After')
+  return withResponseHeaders(
+    new Response(isHead ? null : localizedHtml, {
+      status: 200,
+      statusText: 'OK',
+      headers,
+    }),
+    'MISS',
+    isHead,
+  )
+}
+
 async function temporaryEnglishRetryResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
@@ -2599,7 +2640,7 @@ function findOpeningTag(html: string, tagName: string): { index: number; end: nu
   return findNamedTag(html, 0, `<${tagName}`)
 }
 
-function updateHtmlLang(html: string, locale: Locale): string {
+function updateHtmlLangAttribute(html: string, lang: string): string {
   const htmlTag = findOpeningTag(html, 'html')
   if (!htmlTag) return html
 
@@ -2607,13 +2648,17 @@ function updateHtmlLang(html: string, locale: Locale): string {
   let updatedTag = htmlTag.tag
 
   if (langAttribute) {
-    updatedTag = `${htmlTag.tag.slice(0, langAttribute.valueStart)}${locale}${htmlTag.tag.slice(langAttribute.valueEnd)}`
+    updatedTag = `${htmlTag.tag.slice(0, langAttribute.valueStart)}${lang}${htmlTag.tag.slice(langAttribute.valueEnd)}`
   } else {
     const insertIndex = htmlTag.tag.endsWith('/>') ? htmlTag.tag.length - 2 : htmlTag.tag.length - 1
-    updatedTag = `${htmlTag.tag.slice(0, insertIndex)} lang="${locale}"${htmlTag.tag.slice(insertIndex)}`
+    updatedTag = `${htmlTag.tag.slice(0, insertIndex)} lang="${lang}"${htmlTag.tag.slice(insertIndex)}`
   }
 
   return `${html.slice(0, htmlTag.index)}${updatedTag}${html.slice(htmlTag.end)}`
+}
+
+function updateHtmlLang(html: string, locale: Locale): string {
+  return updateHtmlLangAttribute(html, locale)
 }
 
 function replaceTagAttributeValue(tag: string, attrName: string, value: string): string | null {
@@ -2766,6 +2811,20 @@ function languageSelectorHashScript(): string {
   });
 })();
 </script>`
+}
+
+function rewriteMetadataForEnglishCanonical(html: string, requestUrl: URL): string {
+  const basePath = stripLocalePrefix(requestUrl.pathname)
+  const englishUrl = localizedAbsoluteUrl(requestUrl, DEFAULT_LOCALE, basePath)
+  let rewritten = updateHtmlLangAttribute(html, DEFAULT_LOCALE)
+
+  rewritten = removeTagsByAttribute(rewritten, 'link', 'rel', 'alternate')
+  rewritten = setLinkRel(rewritten, 'canonical', `<link rel="canonical" href="${escapeHtmlAttribute(englishUrl)}" />`)
+  rewritten = setMetaContent(rewritten, 'property', 'og:url', englishUrl)
+  rewritten = setMetaContent(rewritten, 'property', 'twitter:url', englishUrl)
+  rewritten = setMetaContent(rewritten, 'name', 'twitter:url', englishUrl)
+
+  return rewritten
 }
 
 function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale): string {
@@ -3252,6 +3311,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
 
   const enqueued = await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)
   if (!enqueued) return temporaryEnglishRedirectResponse(requestUrl, isHead)
+  if (isCrawlerRequest(request)) return await temporaryEnglishCrawlerResponse(request, env, requestUrl, isHead)
   return await temporaryEnglishRetryResponse(request, env, requestUrl, locale, isHead)
 }
 
@@ -3583,7 +3643,9 @@ export const __translationWorkerTest = {
   isNavGuardSegment,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
+  isCrawlerRequest,
   rewriteMetadataAndLinks,
+  rewriteMetadataForEnglishCanonical,
   resolveTranslationContexts,
   syncExecutableScriptsFromEnglish,
   translationLengthViolation,

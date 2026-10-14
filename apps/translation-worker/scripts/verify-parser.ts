@@ -407,6 +407,29 @@ assert(localizedLinksHtml.includes('href="/fr/support-policy/"'), 'Link rewrite 
 assert(localizedLinksHtml.includes('href="/fr/docs/cli/"'), 'Link rewrite did not keep CLI docs root links')
 assert(localizedLinksHtml.includes('href="/fr/docs/builder/ios/"'), 'Link rewrite did not canonicalize legacy build docs links')
 assert(localizedLinksHtml.includes('href="/fr/#faq"'), 'Link rewrite did not localize root anchor links')
+
+const pendingEnglishCanonicalHtml = __translationWorkerTest.rewriteMetadataForEnglishCanonical(
+  `<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="canonical" href="https://capgo.app/fr/docs/" />
+    <link rel="alternate" hreflang="fr" href="https://capgo.app/fr/docs/" />
+    <link rel="alternate" hreflang="en" href="https://capgo.app/docs/" />
+    <meta property="og:url" content="https://capgo.app/fr/docs/" />
+  </head>
+  <body><h1>Read our guides</h1></body>
+</html>`,
+  new URL('https://capgo.app/fr/docs/'),
+)
+assert(
+  pendingEnglishCanonicalHtml.includes('rel="canonical" href="https://capgo.app/docs/"'),
+  'Pending English canonical rewrite did not point at the English URL',
+)
+assert(!pendingEnglishCanonicalHtml.includes('hreflang='), 'Pending English canonical rewrite must remove hreflang alternates')
+assert(
+  pendingEnglishCanonicalHtml.includes('property="og:url" content="https://capgo.app/docs/"'),
+  'Pending English canonical rewrite did not update og:url',
+)
 assert(localizedLinksHtml.includes('href="#local"'), 'Link rewrite changed same-page anchors')
 assert(localizedLinksHtml.includes('href="https://github.com/Cap-go/capgo"'), 'Link rewrite changed an external URL')
 assert(localizedLinksHtml.includes('href="mailto:hello@capgo.app"'), 'Link rewrite changed a mail link')
@@ -573,6 +596,28 @@ try {
       },
     },
   }
+  const crawlerRequest = new Request('https://capgo.app/fr/docs/', {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+    },
+  })
+  const crawlerPendingResponse = await worker.fetch(crawlerRequest, env as any)
+  const crawlerPendingHtml = await crawlerPendingResponse.text()
+
+  assert(crawlerPendingResponse.status === 200, 'A crawler translation cache miss must not return a temporary 503')
+  assert(crawlerPendingResponse.headers.get('Retry-After') === null, 'A crawler translation cache miss must not advertise Retry-After')
+  assert(
+    crawlerPendingResponse.headers.get('X-Capgo-Translation-Fallback') === 'temporary-english-canonical',
+    'A crawler translation cache miss did not report the English canonical fallback',
+  )
+  assert(crawlerPendingHtml.includes('Read our guides'), 'A crawler translation cache miss did not keep English source content available')
+  assert(
+    crawlerPendingHtml.includes('rel="canonical" href="https://capgo.app/docs/"'),
+    'A crawler translation cache miss did not point canonical at the English URL',
+  )
+  assert(!crawlerPendingHtml.includes('hreflang="fr"'), 'A crawler translation cache miss must not self-claim the localized hreflang')
+  assert(translationJobs.length === 1, 'A crawler translation cache miss did not enqueue the localized document')
+
   const request = new Request('https://capgo.app/it/docs/')
   const pendingResponse = await worker.fetch(request, env as any)
 
@@ -583,19 +628,19 @@ try {
   assert(pendingResponse.headers.get('X-Capgo-Translation-Cache') === 'MISS', 'A translation cache miss did not report its cache state')
   assert(pendingResponse.headers.get('X-Capgo-Translation-Fallback') === 'temporary-english-retry', 'A translation cache miss did not report the retry fallback')
   assert((await pendingResponse.text()).includes('Read our guides'), 'A translation cache miss did not keep the source document available while it is translated')
-  assert(translationJobs.length === 1, 'A translation cache miss did not enqueue the localized document')
-  assert(translationJobs[0]?.url === 'https://capgo.app/it/docs/', 'The cache-miss job lost the localized URL')
-  assert(translationJobs[0]?.locale === 'it', 'The cache-miss job lost the requested locale')
-  assert(translationJobs[0]?.reason === 'miss', 'The cache-miss job did not identify the cache-miss reason')
+  assert(translationJobs.length === 2, 'A translation cache miss did not enqueue the localized document')
+  assert(translationJobs[1]?.url === 'https://capgo.app/it/docs/', 'The cache-miss job lost the localized URL')
+  assert(translationJobs[1]?.locale === 'it', 'The cache-miss job lost the requested locale')
+  assert(translationJobs[1]?.reason === 'miss', 'The cache-miss job did not identify the cache-miss reason')
 
   const pendingHeadResponse = await worker.fetch(new Request(request.url, { method: 'HEAD' }), env as any)
   assert(pendingHeadResponse.status === 503, 'A HEAD translation cache miss did not match the GET temporary response')
   assert(pendingHeadResponse.headers.get('Location') === null, 'A HEAD translation cache miss redirected visitors away from the localized URL')
   assert(pendingHeadResponse.headers.get('Refresh') === '5', 'A HEAD translation cache miss did not schedule a localized retry')
   assert((await pendingHeadResponse.text()) === '', 'A HEAD translation cache miss returned a response body')
-  assert(translationJobs.length === 1, 'A HEAD translation cache miss enqueued a duplicate localized document')
+  assert(translationJobs.length === 2, 'A HEAD translation cache miss enqueued a duplicate localized document')
 
-  await worker.queue({ messages: [{ body: translationJobs[0] as any }] }, env as any)
+  await worker.queue({ messages: [{ body: translationJobs[1] as any }] }, env as any)
   assert(capturedAiPayload !== null, 'Translation AI mock never received a request payload')
   assert(Array.isArray(capturedAiPayload.items), 'Queued translation did not send items[]')
   assert(capturedAiPayload.pagePath === '/it/docs/', 'Queued translation used the wrong pagePath')
