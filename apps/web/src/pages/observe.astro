@@ -204,7 +204,7 @@ const screenSignals = [
           not just hope.
         </h2>
         <p class="tagline">Put deployment history, release health, and Logs Insights in one release workflow.</p>
-        <SignupCta id="observe-final-signup-cta" humanSupport />
+        <SignupCta lead={m.signup_cta_lead_observe({}, { locale: Astro.locals.locale })} id="observe-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
           <span>
             <span class="check">+</span> Deployment history

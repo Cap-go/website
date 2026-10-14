@@ -203,7 +203,7 @@ const relatedLinks = [
           {copy('agents_hub_cta_title')}
         </h2>
         <div class="mt-10">
-          <SignupCta id="agents-hub-closing-signup" humanSupport />
+          <SignupCta lead={m.signup_cta_lead_agents({}, { locale: Astro.locals.locale })} id="agents-hub-closing-signup" humanSupport />
         </div>
       </div>
     </section>

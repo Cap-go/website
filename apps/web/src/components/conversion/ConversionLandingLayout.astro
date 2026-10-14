@@ -66,7 +66,7 @@ const { content, heroTitle, heroSubtitle, sections, relatedLinks, locale } = Ast
       <ConversionRelatedLinks title={m.conversion_related_links_title({}, { locale })} links={relatedLinks} />
 
       <div class="mt-12 rounded-[1.45rem] bg-gray-800/80 px-8 py-10 text-center ring-1 ring-gray-700">
-        <SignupCta id="conversion-signup-cta" humanSupport />
+        <SignupCta lead={m.signup_cta_lead_conversion({}, { locale: Astro.locals.locale })} id="conversion-signup-cta" humanSupport />
       </div>
     </div>
   </section>
