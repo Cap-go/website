@@ -4,6 +4,8 @@ export const nativeDevelopment: AlternativeCompetitor = {
   slug: 'native-development',
   name: 'Native iOS and Android development',
   category: 'framework',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Native App Development Alternative in 2026 | Capgo',
   metaDescription:
     'Compare native Swift and Kotlin development with Capacitor and Capgo. One web codebase for iOS, Android, and web, plus live updates and cloud builds.',

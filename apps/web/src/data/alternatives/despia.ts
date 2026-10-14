@@ -4,6 +4,8 @@ export const despia: AlternativeCompetitor = {
   slug: 'despia',
   name: 'Despia',
   category: 'web-to-app',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Despia Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Despia and Capgo for shipping a web app to iOS and Android. One-time Despia packs vs open-source Capacitor with live updates, rollback, cloud builds.',

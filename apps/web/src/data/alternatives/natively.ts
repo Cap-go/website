@@ -4,6 +4,8 @@ export const natively: AlternativeCompetitor = {
   slug: 'natively',
   name: 'Natively',
   category: 'web-to-app',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Natively Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Natively (BuildNatively) and Capgo. A no-code website-to-app wrapper vs Capacitor with live updates, rollback, and cloud native builds.',

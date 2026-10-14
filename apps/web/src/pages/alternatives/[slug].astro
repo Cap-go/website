@@ -7,6 +7,7 @@ import m from '@/copy/messages'
 import { alternativeCompetitors } from '@/data/alternatives'
 import type { AlternativeCategory, AlternativeCompetitor } from '@/data/alternatives/types'
 import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { toIsoDate } from '@/data/pageDates'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 export const getStaticPaths: GetStaticPaths = () => alternativeCompetitors.map((competitor) => ({ params: { slug: competitor.slug }, props: { competitor } }))
@@ -73,6 +74,9 @@ const content = {
       name: title,
       description,
       url: pageUrl,
+      datePublished: toIsoDate(competitor.publishedAt),
+      dateModified: toIsoDate(competitor.updatedAt),
+      inLanguage: locale,
     }),
     {
       includeOrganization: true,
@@ -109,6 +113,7 @@ const content = {
     ranking={ranking}
     migration={migration}
     faq={competitor.faq}
+    updatedAt={competitor.updatedAt}
     testimonials={productTestimonials[testimonialsByCategory[competitor.category]]}
     related={related}
     secondaryCta={{ label: m.compare_quickstart_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/getting-started/quickstart/') }}

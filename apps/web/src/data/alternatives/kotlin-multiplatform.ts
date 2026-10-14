@@ -4,6 +4,8 @@ export const kotlinMultiplatform: AlternativeCompetitor = {
   slug: 'kotlin-multiplatform',
   name: 'Kotlin Multiplatform',
   category: 'framework',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Kotlin Multiplatform Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Kotlin Multiplatform and Compose Multiplatform with Capacitor and Capgo. Reuse web code, ship to web and mobile, and push live updates without review.',

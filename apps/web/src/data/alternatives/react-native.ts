@@ -4,6 +4,8 @@ export const reactNative: AlternativeCompetitor = {
   slug: 'react-native',
   name: 'React Native',
   category: 'framework',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best React Native Alternative in 2026 | Capgo',
   metaDescription:
     'Compare React Native with Capacitor and Capgo. Reuse your web app and web skills, ship live updates without CodePush, and build iOS and Android in the cloud.',
