@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Privacy and tracking shield">
+  <title>Privacy and tracking shield</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="270" cy="48" r="20" fill="#44BCFF" opacity="0.35"/>
+      <path d="M160 44 L210 64 V104 C210 132 160 156 160 156 C160 156 110 132 110 104 V64 Z" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+      <circle cx="160" cy="98" r="22" fill="none" stroke="#44BCFF" stroke-width="2"/>
+      <circle cx="160" cy="98" r="8" fill="#44BCFF" opacity="0.5"/>
+</svg>
