@@ -1,0 +1,216 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import {
+  appleRejectionStories,
+  appleRejectionStoryBatches,
+  appleRejectionStoryTagLabels,
+  appleRejectionStoryTags,
+  appleRejectionStoriesContentPath,
+} from '@/data/apple-rejection-stories'
+import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+
+const config = Astro.locals.runtimeConfig.public
+const locale = Astro.locals.locale
+const title = 'Apple App Store Rejection Stories | Capgo'
+const description = 'Anonymized real App Store rejection stories tagged by guideline (4.3, 2.1, metadata, review delays, and more). Lessons only, no names or source links.'
+const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+const githubStoriesUrl = `https://github.com/Cap-go/website/tree/main/${appleRejectionStoriesContentPath}`
+
+const tagStyles: Record<string, string> = {
+  '4-3': 'border-rose-200 bg-rose-50 text-rose-950',
+  '2-1': 'border-sky-200 bg-sky-50 text-sky-950',
+  metadata: 'border-violet-200 bg-violet-50 text-violet-950',
+  'endless-review': 'border-amber-200 bg-amber-50 text-amber-950',
+  'account-termination': 'border-red-300 bg-red-100 text-red-950',
+  'login-requirement': 'border-teal-200 bg-teal-50 text-teal-950',
+}
+
+const itemList = createItemListLdJson(config, {
+  url: pageUrl,
+  name: 'Apple App Store rejection stories',
+  description,
+  items: appleRejectionStories.map((story) => ({
+    name: story.title,
+    description: story.lesson,
+  })),
+})
+
+const webPage = createWebPageLdJson(config, {
+  name: title,
+  description,
+  url: pageUrl,
+})
+
+const content = {
+  title,
+  description,
+  canonical: pageUrl,
+  url: pageUrl,
+  image: `${config.baseUrl}/capgo_social.png`,
+  keywords: 'apple app store rejection, app store review, guideline 4.3, guideline 2.1, app review metadata, app store review time',
+  ldJSON: createLdJsonGraph(config, webPage, {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: getRelativeLocaleUrl(locale, '/') },
+      { name: 'Apple rejection stories', url: getRelativeLocaleUrl(locale, '/apple-rejection-stories/') },
+    ],
+    additionalEntities: [itemList],
+  }),
+}
+
+const batchOne = appleRejectionStoryBatches.find((batch) => batch.id === 'batch-1')
+---
+
+<Layout content={content}>
+  <main id="main-content" class="bg-gray-900 text-white">
+    <section class="border-b border-white/10 bg-gray-950 py-16 sm:py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <p class="text-sm font-semibold tracking-wide text-blue-300 uppercase">Anonymized archive</p>
+        <h1 class="mt-4 text-4xl font-bold text-balance sm:text-5xl">Apple App Store rejection stories</h1>
+        <p class="mt-6 text-lg leading-8 text-gray-300">
+          These are paraphrased from public posts by mobile developers. We removed names, app titles, and links to sources. Each entry keeps the rejection context, what happened
+          next when known, and one lesson. This is not legal advice and not a guarantee of what Apple will do on your next submission.
+        </p>
+        {batchOne && (
+          <p class="mt-4 text-sm text-gray-400">
+            {batchOne.label}: {batchOne.storyCount} stories (published {batchOne.publishedOn}). New batches can be added as separate story files in the repo.
+          </p>
+        )}
+      </div>
+    </section>
+
+    <section class="border-b border-white/10 bg-gray-900 py-10">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-sm font-semibold text-gray-200">Filter by tag</h2>
+        <div class="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter stories by guideline or theme">
+          <button
+            type="button"
+            data-story-filter="all"
+            class="story-filter-btn rounded-full border border-blue-400/50 bg-blue-500/20 px-4 py-2 text-sm font-semibold text-white"
+            aria-pressed="true"
+          >
+            All ({appleRejectionStories.length})
+          </button>
+          {appleRejectionStoryTags.map((tag) => {
+            const count = appleRejectionStories.filter((story) => story.tags.includes(tag)).length
+            return (
+              <button
+                type="button"
+                data-story-filter={tag}
+                class="story-filter-btn rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-gray-200 hover:bg-white/10"
+                aria-pressed="false"
+              >
+                {appleRejectionStoryTagLabels[tag]} ({count})
+              </button>
+            )
+          })}
+        </div>
+        <p id="story-filter-status" class="mt-4 text-sm text-gray-400" aria-live="polite">
+          Showing all {appleRejectionStories.length} stories.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <ol class="space-y-8" id="rejection-stories-list">
+          {appleRejectionStories.map((story) => (
+            <li class="rejection-story-card rounded-2xl border border-white/10 bg-gray-950/80 p-6 sm:p-8" data-story-tags={story.tags.join(' ')}>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold text-gray-200">{story.platform}</span>
+                <span class="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold text-gray-300">{story.guidelineLabel}</span>
+                {story.tags.map((tag) => (
+                  <span class={`rounded-full border px-3 py-1 text-xs font-semibold ${tagStyles[tag] ?? 'border-gray-300 bg-gray-100 text-gray-900'}`}>
+                    {appleRejectionStoryTagLabels[tag]}
+                  </span>
+                ))}
+              </div>
+              <h2 class="mt-4 text-2xl font-bold text-white">{story.title}</h2>
+              <p class="mt-4 text-base leading-7 text-gray-300">{story.body}</p>
+              <p class="mt-3 text-sm text-gray-400">
+                <span class="font-semibold text-gray-300">Resolution:</span> {story.resolution}
+              </p>
+              <div class="mt-5 rounded-xl border border-blue-500/30 bg-blue-950/30 p-4">
+                <p class="text-sm font-semibold text-blue-200">Lesson</p>
+                <p class="mt-2 text-base leading-7 text-gray-100">{story.lesson}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <div class="mt-16 rounded-2xl border border-white/10 bg-gray-950 p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-white">Contribute a future batch</h2>
+          <p class="mt-3 text-base leading-7 text-gray-300">
+            To add stories, drop a new file under <code class="rounded bg-gray-800 px-1.5 py-0.5 text-sm text-gray-100">{appleRejectionStoriesContentPath}</code>
+            following the existing pattern, then open a pull request. Keep submissions anonymized.
+          </p>
+          <a
+            href={githubStoriesUrl}
+            target="_blank"
+            rel="noreferrer"
+            class="mt-5 inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 text-sm font-semibold text-white transition hover:bg-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          >
+            View story files on GitHub
+          </a>
+        </div>
+
+        <aside class="mt-12 rounded-2xl border border-white/10 bg-linear-to-br from-gray-900 to-gray-950 p-6 sm:p-8">
+          <h2 class="text-lg font-bold text-white">When review is slow, shipping does not have to stop entirely</h2>
+          <p class="mt-3 text-base leading-7 text-gray-300">
+            Capgo: push fixes to your Capacitor users in minutes, build signed iOS and Android apps without a Mac, and roll back in one click.
+          </p>
+          <a
+            href={getRelativeLocaleUrl(locale, 'register')}
+            class="mt-5 inline-flex min-h-11 items-center justify-center rounded-lg bg-white px-5 text-sm font-bold text-gray-900 transition hover:bg-gray-100 focus:ring-2 focus:ring-white focus:outline-none"
+          >
+            Get started
+          </a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterButtons = Array.from(document.querySelectorAll('[data-story-filter]')) as HTMLButtonElement[]
+      const cards = Array.from(document.querySelectorAll('.rejection-story-card')) as HTMLElement[]
+      const status = document.getElementById('story-filter-status')
+      const activeClasses = ['border-blue-400/50', 'bg-blue-500/20', 'text-white']
+      const inactiveClasses = ['border-white/15', 'bg-white/5', 'text-gray-200']
+
+      function setButtonState(button: HTMLButtonElement, isActive: boolean) {
+        button.setAttribute('aria-pressed', String(isActive))
+        button.classList.remove(...(isActive ? inactiveClasses : activeClasses))
+        button.classList.add(...(isActive ? activeClasses : inactiveClasses))
+      }
+
+      function applyFilter(tag: string) {
+        let visible = 0
+        cards.forEach((card) => {
+          const tags = (card.dataset.storyTags ?? '').split(' ').filter(Boolean)
+          const show = tag === 'all' || tags.includes(tag)
+          card.classList.toggle('hidden', !show)
+          if (show) visible += 1
+        })
+
+        filterButtons.forEach((button) => {
+          setButtonState(button, button.dataset.storyFilter === tag)
+        })
+
+        if (status) {
+          const label = tag === 'all' ? `Showing all ${visible} stories.` : `Showing ${visible} ${visible === 1 ? 'story' : 'stories'} for this tag.`
+          status.textContent = label
+        }
+      }
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const tag = button.dataset.storyFilter ?? 'all'
+          applyFilter(tag)
+        })
+      })
+    })
+  </script>
+</Layout>
