@@ -19,7 +19,7 @@ faq:
   - question: "Is EncryptedSharedPreferences still recommended for Android tokens?"
     answer: "No. androidx.security.crypto EncryptedSharedPreferences, MasterKey, and MasterKeys are deprecated. Google directs new work to Android Keystore with KeyGenerator and, for structured app data, Jetpack DataStore with the datastore-tink artifact."
   - question: "Where should Capacitor apps store refresh tokens?"
-    answer: "Use platform secure storage, not localStorage or @capacitor/preferences. For small secrets in Capacitor, @capgo/capacitor-native-biometric setData (8.6.0+) encrypts with iOS Keychain or Android Keystore-backed encryption in SharedPreferences. For larger encrypted payloads, use @capgo/capacitor-data-storage-sqlite with encryption enabled or a native module you control."
+    answer: "Use platform secure storage, not localStorage or @capacitor/preferences. For small secrets in Capacitor, @capgo/capacitor-native-biometric setData (8.6.0+) encrypts with iOS Keychain or Android Keystore-backed encryption in SharedPreferences. For larger payloads, @capgo/capacitor-data-storage-sqlite supports SQLCipher, but its default passphrases are public unless you set encryptionSecret and encryptionNewSecret in capacitor.config; never ship production tokens with the defaults."
   - question: "What belongs in token lifecycle design?"
     answer: "Short-lived access tokens, refresh token rotation, HTTPS-only transport, optional certificate pinning, and server-side revocation on logout or device loss."
 ---
@@ -49,7 +49,7 @@ Use one Tink-backed pipeline end to end:
 
 1. Build a Tink keyset with [`AndroidKeysetManager`](https://developers.google.com/tink/android-key-management), storing the master key in Android Keystore via an `android-keystore://` URI (see the [`datastore-tink` release notes](https://developer.android.com/jetpack/androidx/releases/datastore)).
 2. Obtain an `Aead` primitive from that keyset.
-3. Wrap your `Serializer` with [`AeadSerializer`](https://developer.android.com/reference/kotlin/androidx/datastore/tink/AeadSerializer) and pass it to `DataStore`.
+3. Add `androidx.datastore:datastore-tink` (available from [DataStore 1.3.0-rc01](https://developer.android.com/jetpack/androidx/releases/datastore#1.3.0-rc01); stable 1.2.x does not ship this artifact), wrap your `Serializer` with [`AeadSerializer`](https://developer.android.com/reference/kotlin/androidx/datastore/tink/AeadSerializer), and pass it to `DataStore`.
 
 Google documents this as the supported replacement path for deprecated `androidx.security.crypto` helpers. Do not mix a standalone JCA `SecretKey` with `AeadSerializer`; the serializer expects a Tink `Aead` instance.
 

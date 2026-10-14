@@ -17,7 +17,7 @@ origin: ai
 next_blog: ''
 faq:
   - question: "Is a privacy manifest still required for App Store uploads in 2026?"
-    answer: "Yes. Since May 1, 2024, new apps and updates must declare required reason API usage in PrivacyInfo.xcprivacy. Listed third-party SDKs must include their own manifests when a new app ships them or an update adds them; signatures apply when those SDKs are binary dependencies. See Apple's upcoming requirements and third-party SDK requirements pages."
+    answer: "Yes. Since May 1, 2024, uploads must include PrivacyInfo.xcprivacy that declares every required reason API category your app or embedded SDK code actually uses. If you call none of those APIs, you do not add empty placeholder entries. Listed third-party SDKs must include their own manifests when a new app ships them or an update adds them; signatures apply when those SDKs are binary dependencies."
   - question: "What is the difference between ITMS-91053 and ITMS-91061?"
     answer: "ITMS-91053 means your app binary uses a required reason API without a matching declaration in a privacy manifest. ITMS-91061 means a privacy-impacting third-party SDK in your bundle is missing its own PrivacyInfo.xcprivacy. Fix 91053 in your app manifest; fix 91061 by upgrading the SDK, not by copying its practices into your app manifest."
   - question: "Where do I put PrivacyInfo.xcprivacy in a Capacitor iOS project?"
@@ -114,7 +114,7 @@ Practical workflow:
 - Archive and use **Generate Privacy Report** to read the combined picture.
 - Compare the report to your App Store privacy questionnaire answers.
 
-For live update tooling, declare required reason APIs your updater actually uses (for example disk space, file timestamps, or user defaults). Network access is not a required reason API category; document it through your privacy labels and App Store questionnaire instead. Keep [Capgo live update compliance](https://capgo.app/docs/live-updates/compliance/) in mind when you document OTA behavior.
+For live update tooling, declare required reason APIs your updater actually uses (for example disk space, file timestamps, or user defaults). Network access is not a required reason API category. If the updater collects personal data, disclose that data in your App Store privacy labels and questionnaire answers; fetching an update over HTTPS alone does not create a new disclosure category. Keep [Capgo live update compliance](https://capgo.app/docs/live-updates/compliance/) in mind when you document OTA behavior.
 
 ## Add `PrivacyInfo.xcprivacy` in a Capacitor iOS project
 
