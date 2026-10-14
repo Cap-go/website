@@ -30,6 +30,8 @@ export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
   'objectionable-content',
   'enrollment-account',
   'simulated-gambling',
+  'fake-documents',
+  'ai-data-sharing',
 ]
 
 export type { AppleRejectionStory, AppleRejectionStoryTag } from './types'

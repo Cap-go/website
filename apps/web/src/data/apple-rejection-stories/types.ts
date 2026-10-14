@@ -12,6 +12,8 @@ export type AppleRejectionStoryTag =
   | 'objectionable-content'
   | 'enrollment-account'
   | 'simulated-gambling'
+  | 'fake-documents'
+  | 'ai-data-sharing'
 
 export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string> = {
   '4-3': 'Guideline 4.3',
@@ -27,6 +29,8 @@ export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string
   'objectionable-content': 'Objectionable content',
   'enrollment-account': 'Enrollment and account',
   'simulated-gambling': 'Simulated gambling',
+  'fake-documents': 'Fake documents',
+  'ai-data-sharing': 'AI data sharing',
 }
 
 export type AppleRejectionStoryPlatform = 'iOS' | 'Apple Developer Program'
