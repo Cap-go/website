@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-20T03:28:37.844Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-10-14T01:39:31.000Z
 head_image: /blog-images/how-delta-updates-reduce-payload-size.webp
 head_image_alt: "How Delta Updates Reduce Payload Size Capgo blog illustration"
 keywords: delta update, delta updates, differential update, mise à jour delta, OTA updates, Capacitor live updates, bandwidth savings
