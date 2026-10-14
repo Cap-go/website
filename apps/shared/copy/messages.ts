@@ -2945,8 +2945,9 @@ const messages = {
   native_build_builder_credit_price: '{price}/min',
   native_build_builder_cta_text: "Build signed iOS and Android releases from your machine or CI while keeping Capgo's existing site header, docs, and pricing flow.",
   native_build_builder_cta_title: 'Native builds without the pain.',
-  native_build_builder_description: 'Signed iOS and Android Capacitor builds plus store submit, from CI or your AI agent. The EAS Build and EAS Submit analog for web apps.',
-  native_build_seo_title: 'Capgo Builder: Capacitor native builds from CI or AI agents',
+  native_build_builder_description:
+    'Build and sign iOS and Android Capacitor apps from Linux or Windows CI when you have no Mac. One CLI step after cap sync, with optional App Store and Play submit.',
+  native_build_seo_title: 'iOS cloud builds for Capacitor without a Mac',
   native_build_builder_extra_minutes: 'Extra build minutes use prepaid credits.',
   native_build_builder_faq_eyebrow: 'FAQ',
   native_build_builder_faq_live_updates_a:
@@ -6566,6 +6567,10 @@ const messages = {
   native_build_v2_faq_q9: 'Is Capgo Builder an EAS Build alternative?',
   native_build_v2_faq_a9:
     'For Capacitor apps, yes: Capgo Builder compiles, signs, and can submit iOS and Android binaries, which is the EAS Build plus EAS Submit analog. EAS Build stays the path for Expo and React Native apps. Capgo cannot build Expo projects.',
+  native_build_v2_faq_q10: 'Can Google Cloud Build compile iOS apps?',
+  native_build_v2_faq_a10:
+    'No. Google documents Cloud Build workers with Docker on Debian Linux, not macOS. Xcode needs macOS, so teams use a Mac runner, rented Mac hardware, or a managed Capacitor build service after cap sync.',
+  native_build_v2_faq_a10_link: 'Why Linux CI cannot compile iOS alone',
   native_build_v2_eas_eyebrow: 'Coming from Expo?',
   native_build_v2_eas_title: 'The EAS Build and EAS Submit equivalent for Capacitor',
   native_build_v2_eas_lead:

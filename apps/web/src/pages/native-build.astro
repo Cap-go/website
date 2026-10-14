@@ -221,6 +221,12 @@ const faqs = [
     linkLabel: copy('native_build_v2_faq_a8_link'),
   },
   { q: copy('native_build_v2_faq_q9'), a: copy('native_build_v2_faq_a9') },
+  {
+    q: copy('native_build_v2_faq_q10'),
+    a: copy('native_build_v2_faq_a10'),
+    href: `${getRelativeLocaleUrl(locale, 'blog/introducing-capgo-cloud-build/')}#can-you-build-ios-on-linux-ci-without-macos-workers`,
+    linkLabel: copy('native_build_v2_faq_a10_link'),
+  },
 ]
 
 function annualMonthlyPrice(plan: Plan) {
@@ -1303,7 +1309,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       --cap-blue-600: #2563eb;
       --cap-blue-700: #1d4ed8;
       /* Restrained system: one accent (blue) + neutrals.
-                 Green only for literal success, red only for literal errors. */
+                   Green only for literal success, red only for literal errors. */
       --nb-accent: #60a5fa;
       --nb-accent-strong: #93c5fd;
       --nb-accent-bg: rgba(96, 165, 250, 0.08);
@@ -1633,7 +1639,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-fg);
       white-space: pre-wrap;
       /* Fixed height, tall enough for the full build log, so it never grows/jumps
-               as lines stream in AND never shows a scrollbar. */
+                 as lines stream in AND never shows a scrollbar. */
       height: 560px;
       overflow: hidden;
     }
