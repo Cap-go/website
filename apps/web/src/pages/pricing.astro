@@ -22,6 +22,7 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const description = m.pricing_description({}, { locale })
 const title = `${brand} | ${m.pricing({}, { locale })} - ${m.pricing_seo_tagline({}, { locale })}`
 
+// FAQ JSON-LD billing answers are updated in PR #1150; visible FAQ and /pricing.md stay canonical for agents until that lands.
 const content: { title: string; description: string; ldJSON?: any; markdownAlternate?: string } = {
   title,
   description,

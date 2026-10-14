@@ -669,7 +669,10 @@ const benefits = [
 
   <ToolFaq items={faqItems} title="iOS certificate generator FAQ" intro="Answers about CSRs, certificate types, .p12 conversion, Apple Developer accounts, and using certificates in CI or cloud builds." />
 
-  <ToolNativeBuildCta accent="cyan" />
+  <ToolNativeBuildCta
+    accent="cyan"
+    description="Upload the .p12 and provisioning profile you create with this tool, trigger release builds from CI, and ship to TestFlight or the App Store without maintaining your own build farm."
+  />
 
   <ToolRelatedLinks title="iOS signing and release guides" links={relatedLinks} />
 
