@@ -33,7 +33,7 @@ faq:
 | Short-lived access tokens | Limits damage if a token leaks |
 | Refresh token rotation | Invalidates stolen refresh tokens after legitimate use |
 | HTTPS only | Stops casual network interception |
-| Certificate pinning (when justified) | Reduces risk from mis-issued or custom roots; see [OWASP certificate pinning guidance](https://cheatsheetseries.owasp.org/cheatsheets/Certificate_and_Public_Key_Pinning_Cheat_Sheet.html) |
+| Certificate pinning (when justified) | Reduces risk from improperly issued or custom roots; see [OWASP certificate pinning guidance](https://cheatsheetseries.owasp.org/cheatsheets/Certificate_and_Public_Key_Pinning_Cheat_Sheet.html) |
 | No tokens in logs, URLs, or analytics | Tokens in observability tools become breaches |
 | Revocation on logout | Server-side invalidation beats hoping the client deletes data |
 
