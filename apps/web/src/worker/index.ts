@@ -339,6 +339,9 @@ export function staticLegacyRedirect(request: Request, pathname: string): Respon
   if (path === '/build-status' || path === '/build-status/') {
     return redirectToPath(request, `${localePrefix}/builder-data/`)
   }
+  if (path === '/website-live' || path === '/website-live/') {
+    return redirectToPath(request, `${localePrefix}/web2app/`)
+  }
   if (path === '/app/apikeys' || path === '/app/apikeys/') {
     const search = new URL(request.url).search
     return redirectToAbsolute(`https://console.capgo.app/apikeys${search}`)

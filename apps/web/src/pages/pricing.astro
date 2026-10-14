@@ -6,7 +6,7 @@ import CreditPricing from '@/components/pricing/CreditPricing.astro'
 import Faq from '@/components/pricing/Faq.astro'
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from '@/services/links'
 import Plans from '@/components/pricing/Plans.astro'
-import WebsiteLivePlan from '@/components/pricing/WebsiteLivePlan.astro'
+import Web2AppPlan from '@/components/pricing/Web2AppPlan.astro'
 import PricingExplainer from '@/components/pricing/PricingExplainer.astro'
 import { createLdJsonGraph, createProductLdJson, createFAQPageLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
@@ -141,7 +141,7 @@ if (plans.length > 0) {
 
         {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} credits={credits} />}
 
-        <WebsiteLivePlan yearly={yearly} />
+        <Web2AppPlan yearly={yearly} />
 
         {plans && plans.length > 0 && <PricingExplainer plans={plans} />}
 
