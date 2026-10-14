@@ -20,7 +20,7 @@ You're probably at the point where the UI is ready, the profile screen has an â€
 
 That's where Expo Image Picker fits. It's the official Expo library for opening the system UI to choose images and videos from the device library or take a photo with the camera, as described in the [Expo package repository](https://github.com/expo/expo/tree/main/packages/expo-image-picker). In practice, that means you get a reliable bridge into native media input, but not a custom media experience that behaves identically on every device.
 
-This guide is written for the first implementation, not the demo. It focuses on the decisions that matter in production: managed versus bare workflow setup, permission handling that won't surprise you later, safe result parsing, and a practical upload pattern after the user picks a file. If you're working in a custom native setup, it also helps to understand how this differs from an [Expo development client workflow](https://capgo.app/blog/expo-development-client/).
+This guide is written for the first implementation, not the demo. It focuses on the decisions that matter in production: managed versus bare workflow setup, permission handling that won't surprise you later, safe result parsing, and a practical upload pattern after the user picks a file. If you're working in a custom native setup, it also helps to understand how this differs from the [Expo EAS update options Capgo compares on its alternative guide](https://capgo.app/blog/alternative-to-expo/).
 
 <a id="getting-started-with-expo-image-picker"></a>
 
@@ -62,7 +62,7 @@ That mindset helps because the failure modes are rarely in the button that calls
 - **Runtime behavior:** users can deny access, grant limited library access on iOS, or cancel the flow without selecting anything
 - **Result parsing:** the current API returns an `assets` array, so older examples that read `result.uri` directly fail
 
-Workflow choice also changes the setup path. In a managed Expo app, most of the native work lives in app config and requires a rebuild when that config changes. In a bare app, you still get the Expo module API, but you need to verify the underlying iOS and Android project settings more directly. If your team is using a custom client instead of Expo Go, this guide pairs well with Capgo's explanation of [how an Expo development client changes native module testing](https://capgo.app/blog/expo-development-client/).
+Workflow choice also changes the setup path. In a managed Expo app, most of the native work lives in app config and requires a rebuild when that config changes. In a bare app, you still get the Expo module API, but you need to verify the underlying iOS and Android project settings more directly. If your team is using a custom client instead of Expo Go, this guide pairs well with Capgo's [alternative to Expo EAS](https://capgo.app/blog/alternative-to-expo/) for teams that need native module testing beyond Expo Go.
 
 That split matters for the rest of the guide because the happy path is only half the story. A picker implementation is solid when it works in both workflows, handles platform-specific permission quirks without surprising the user, and passes a usable file to your upload layer instead of stopping at a local preview.
 

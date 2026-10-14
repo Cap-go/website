@@ -94,7 +94,7 @@ A lot of Expo push pain starts before the first permission prompt. If your proje
 
 ![A modern laptop on a wooden desk displaying configuration code files for a project setup.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/61588b92-edfb-4964-8e60-54d8a52f1095/expo-push-notification-laptop-setup.jpg)
 
-Start with the right libraries installed and a development environment that matches your build path. If you're working beyond Expo Go, it helps to align your local workflow with a [custom Expo development client setup](https://capgo.app/blog/expo-development-client/), because notification behavior often needs to be validated in a build that mirrors production more closely than a quick sandbox run.
+Start with the right libraries installed and a development environment that matches your build path. If you're working beyond Expo Go, it helps to align your release workflow with [Capgo's Expo EAS alternative guide](https://capgo.app/blog/alternative-to-expo/), because notification behavior often needs to be validated in a build that mirrors production more closely than a quick sandbox run.
 
 <a id="install-the-notification-packages"></a>
 ### Install the notification packages

@@ -316,7 +316,7 @@ Teams often use these terms interchangeably, but they serve different purposes.
 
 **Playbooks** describe how to run the incident. They cover severity declaration, role assignment, communication cadence, escalation paths, and closure rules.
 
-**Runbooks** describe how to perform a specific operational task. Restart this worker. Roll back this service. Disable this feature flag. Verify this queue drains. For mobile, a runbook might cover investigating a bad asset bundle or validating client crash spikes in [Sentry for React Native workflows](https://capgo.app/blog/sentry-react-native/).
+**Runbooks** describe how to perform a specific operational task. Restart this worker. Roll back this service. Disable this feature flag. Verify this queue drains. For mobile, a runbook might cover investigating a bad asset bundle or validating client crash spikes using [app health monitoring](https://capgo.app/blog/app-health-monitoring/).
 
 A simple split works well:
 

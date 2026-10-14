@@ -222,7 +222,7 @@ Logz.io fits teams that want cloud convenience with some budget control. Consump
 
 The limitation is depth. Advanced analytics aren't as broad as some larger suites, and vendor-managed OpenSearch reduces the amount of low-level tuning you can do. Still, for teams that need a practical bridge between ELK familiarity and SaaS simplicity, Logz.io is a sensible pick.
 
-For mobile and hybrid apps, pairing Logz.io with device-level reporting from [Capgo's Sentry React Native guidance](https://capgo.app/blog/sentry-react-native/) can help close the gap between app crashes, update failures, and backend logs.
+For mobile and hybrid apps, pairing Logz.io with device-level reporting from [Capgo's app health monitoring guide](https://capgo.app/blog/app-health-monitoring/) can help close the gap between app crashes, update failures, and backend logs.
 
 <a id="10-solarwinds-papertrail"></a>
 ## 10. SolarWinds Papertrail

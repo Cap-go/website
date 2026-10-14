@@ -187,7 +187,7 @@ If you're comparing vendors or deciding what to combine in your stack, this roun
 
 Context is what turns telemetry into evidence. Every event you care about should carry enough metadata to answer the first round of debugging questions without a follow-up release. That usually means platform, OS, app version, release channel, device characteristics, screen or feature name, and dependency state.
 
-A common trade-off is whether to build most of this yourself or rely on hosted products. Third-party platforms get you faster dashboards and alerting. Custom pipelines give more control over schema, retention, and privacy boundaries. Many teams end up hybrid. They use a commercial error and tracing product, then add focused instrumentation for release events and app-specific workflows. For React Native teams thinking through this stack, [this Sentry setup guide for React Native](https://capgo.app/blog/sentry-react-native/) is a practical example of how one layer fits into a broader telemetry architecture.
+A common trade-off is whether to build most of this yourself or rely on hosted products. Third-party platforms get you faster dashboards and alerting. Custom pipelines give more control over schema, retention, and privacy boundaries. Many teams end up hybrid. They use a commercial error and tracing product, then add focused instrumentation for release events and app-specific workflows. For React Native teams thinking through this stack, a commercial error and tracing product is a practical layer in the broader telemetry architecture outlined here.
 
 The architecture is good when engineers can answer a support question with evidence, not guesswork.
 
