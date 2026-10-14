@@ -2,8 +2,8 @@
 slug: introducing-capgo-cloud-build
 title: Cloud iOS Builds Without a Mac for Capacitor and CI
 description: >-
-  Linux CI like Google Cloud Build cannot run Xcode. See macOS worker alternatives,
-  how Capacitor teams build signed iOS and Android in the cloud, and where Capgo Build fits.
+  Build and sign iOS and Android Capacitor apps from any CI with no Mac needed.
+  One CLI step after cap sync, with optional App Store and Play submit.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
@@ -11,44 +11,26 @@ created_at: 2025-11-19T00:00:00.000Z
 updated_at: 2026-10-14T09:00:00.000Z
 head_image: /blog-images/introducing-capgo-cloud-build.webp
 head_image_alt: Cloud iOS builds without a Mac for Capacitor and CI Capgo blog illustration
-keywords: ios cloud build, cloud build ios, build ios app without mac, Google Cloud Build iOS, macOS worker alternatives, Capacitor cloud build, Capgo Build, android cloud build
+keywords: ios cloud build, cloud build ios, build ios app without mac, Capacitor cloud build, Capgo Build, android cloud build
 tag: Product
 published: true
 locale: en
 origin: human
 faq:
-  - question: Can Google Cloud Build compile and sign iOS apps?
-    answer: No. Google Cloud Build runs each build on a hosted worker. The documented worker images use Docker on Debian Linux, not macOS. Xcode and iOS code signing require macOS, so a standard Cloud Build step cannot produce a store-ready IPA on its own.
-  - question: What can I do if my CI only has Linux workers?
-    answer: You can register or rent a macOS machine for Xcode, use a CI product that offers macOS runners, or call a managed mobile build API from your Linux job after you run cap sync. Your pipeline still owns tests and web builds; only the native compile moves off the Linux worker.
   - question: How does Capgo Build help Capacitor teams?
     answer: After your web build and cap sync, the Capgo CLI uploads the prepared native project, streams compile logs to your terminal, and returns signed iOS and Android binaries or uploads them when you configure App Store Connect and Play credentials.
   - question: What is Capgo?
     answer: Capgo is a release platform for Capacitor apps. Capgo Build handles signed native binaries and store submission. Capgo Live Updates ship JavaScript and asset changes between native releases.
 ---
 
-Search traffic shows many teams land here while looking for **cloud iOS builds** or **Google Cloud Build macOS workers**. This post explains what generic Linux CI can and cannot do for Xcode, then introduces **Capgo Cloud Build** for Capacitor apps. For the product overview and pricing, see [Capgo Native Builds](/native-build/).
-
-## Can you build iOS on Linux CI without macOS workers?
-
-**No.** Compiling and signing an iOS app requires Apple's Xcode toolchain, which only runs on macOS. A job on Google Cloud Build, GitHub Actions `ubuntu-latest`, GitLab shared runners, or any other Linux worker can still lint, test, and build your web bundle, but it cannot produce a signed `.ipa` by itself.
-
-Google documents Cloud Build workers with Docker on Debian Linux in its [release channels documentation](https://cloud.google.com/build/docs/release-channels). Private pools let you pick larger Linux machine types and networking, but they do not add macOS images. That is why queries like "cloud build ios macos worker" show up even when the pipeline is otherwise healthy.
-
-**Practical options when you do not own a Mac:**
-
-1. **Hosted macOS CI runners** from providers that advertise `macos` labels (for example GitHub-hosted macOS runners or macOS-capable CI products).
-2. **A Mac you control**, whether on a desk, in your office, or rented by the hour from a Mac cloud vendor.
-3. **A managed mobile build service** you trigger from Linux CI after `cap sync`, so your existing pipeline stays on cheap workers while native compile runs where Xcode is available.
-
-For Capacitor apps, option 3 is often the smallest change: keep `npm run build`, tests, and `npx cap sync ios` on your current runner, then call [Capgo Build](/native-build/) for the signed iOS and Android binaries and optional store upload. Deeper task lists live in the [Capacitor iOS without a Mac FAQ](/blog/capacitor-ios-development-without-mac-faq/).
+**Capgo Cloud Build** helps Capacitor teams build and sign iOS and Android apps without owning a Mac. Keep your web build, tests, and `npx cap sync` in your existing pipeline, then call [Capgo Build](/native-build/) in one CLI step for signed binaries and optional store submit. For the product overview and pricing, see [Capgo Native Builds](/native-build/). Task-level answers live in the [Capacitor iOS without a Mac FAQ](/blog/capacitor-ios-development-without-mac-faq/).
 
 ## The Problem We're Solving
 
 Building native mobile apps has always been a pain point for web developers. You need:
 
 - **Local Development Tools**: Install and maintain Xcode (30+ GB) and Android Studio on your machine
-- **Mac Hardware**: iOS builds require a Mac, which can be expensive or impossible on Linux/Windows CI runners
+- **Mac Hardware**: iOS builds traditionally require buying and maintaining Mac hardware for every developer and release path
 - **CI/CD Configuration**: Set up complex GitHub Actions or other CI/CD workflows with build caching, credentials management, and more
 - **Dependency Management**: Keep build tools, SDKs, and certificates up to date across environments
 
@@ -312,14 +294,6 @@ We're building Capgo Cloud Build to be the simplest, most developer-friendly way
 Happy building!
 
 ## FAQ
-
-### Can Google Cloud Build compile and sign iOS apps?
-
-No. Google Cloud Build runs each build on a hosted worker. The documented worker images use Docker on Debian Linux, not macOS. Xcode and iOS code signing require macOS, so a standard Cloud Build step cannot produce a store-ready IPA on its own.
-
-### What can I do if my CI only has Linux workers?
-
-You can register or rent a macOS machine for Xcode, use a CI product that offers macOS runners, or call a managed mobile build API from your Linux job after you run cap sync. Your pipeline still owns tests and web builds; only the native compile moves off the Linux worker.
 
 ### How does Capgo Build help Capacitor teams?
 
