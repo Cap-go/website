@@ -19,12 +19,12 @@ faq:
   - question: "Is EncryptedSharedPreferences still recommended for Android tokens?"
     answer: "No. androidx.security.crypto EncryptedSharedPreferences, MasterKey, and MasterKeys are deprecated. Google directs new work to Android Keystore with KeyGenerator and, for structured app data, Jetpack DataStore with the datastore-tink artifact."
   - question: "Where should Capacitor apps store refresh tokens?"
-    answer: "Use platform secure storage, not localStorage or @capacitor/preferences. For small secrets in Capacitor, @capgo/capacitor-native-biometric setData uses Keychain and Keystore. For larger encrypted payloads, use @capgo/capacitor-data-storage-sqlite with encryption enabled or a native module you control."
+    answer: "Use platform secure storage, not localStorage or @capacitor/preferences. For small secrets in Capacitor, @capgo/capacitor-native-biometric setData (8.6.0+) encrypts with iOS Keychain or Android Keystore-backed encryption in SharedPreferences. For larger encrypted payloads, use @capgo/capacitor-data-storage-sqlite with encryption enabled or a native module you control."
   - question: "What belongs in token lifecycle design?"
     answer: "Short-lived access tokens, refresh token rotation, HTTPS-only transport, optional certificate pinning, and server-side revocation on logout or device loss."
 ---
 
-**Store authentication tokens in hardware-backed secure storage, not in WebView localStorage or plain SharedPreferences.** On iOS, use the **Keychain**. On Android, generate and hold keys in **Android Keystore** and encrypt token bytes with **Jetpack DataStore + Tink** (or an equivalent Keystore-backed AEAD layer). **`EncryptedSharedPreferences` is deprecated** in `androidx.security.crypto`; plan migrations now. For [Capacitor](https://capacitorjs.com/) apps, combine transport security (HTTPS, pinning) with native-backed storage plugins instead of duplicating crypto in JavaScript.
+**Store authentication tokens in platform-backed encrypted storage, not in WebView localStorage or plain SharedPreferences.** On iOS, use the **Keychain**. On Android, protect keys with **Android Keystore** (software, TEE, or StrongBox depending on the device) and persist ciphertext with **Jetpack DataStore + Tink**. **`EncryptedSharedPreferences` is deprecated** in `androidx.security.crypto`; plan migrations now. For [Capacitor](https://capacitorjs.com/) apps, combine transport security (HTTPS, pinning) with native-backed storage plugins instead of duplicating crypto in JavaScript.
 
 ## Principles that apply on every platform
 
@@ -45,11 +45,13 @@ Google deprecated the `androidx.security.crypto` helpers, including [`EncryptedS
 
 ### Recommended pattern
 
-1. **Generate a symmetric key in Android Keystore** with `KeyGenerator` and `KeyProperties.PURPOSE_ENCRYPT | DECRYPT`, using GCM or another modern block mode supported by your min SDK.
-2. **Encrypt token strings** with that key before they touch disk.
-3. **Persist ciphertext** with **Jetpack DataStore**, using the [`androidx.datastore:datastore-tink`](https://developer.android.com/jetpack/androidx/releases/datastore) artifact and [`AeadSerializer`](https://developer.android.com/reference/kotlin/androidx/datastore/tink/AeadSerializer) so Tink AEAD wraps your serializer.
+Use one Tink-backed pipeline end to end:
 
-Google's DataStore release notes show wiring a Tink keyset with `AndroidKeysetManager` and a `android-keystore://` master key URI, then passing an `AeadSerializer` into `dataStore(...)`. DataStore also documents migration from legacy EncryptedSharedPreferences via `SharedPreferencesMigration` when you need a gradual cutover.
+1. Build a Tink keyset with [`AndroidKeysetManager`](https://developers.google.com/tink/android-key-management), storing the master key in Android Keystore via an `android-keystore://` URI (see the [`datastore-tink` release notes](https://developer.android.com/jetpack/androidx/releases/datastore)).
+2. Obtain an `Aead` primitive from that keyset.
+3. Wrap your `Serializer` with [`AeadSerializer`](https://developer.android.com/reference/kotlin/androidx/datastore/tink/AeadSerializer) and pass it to `DataStore`.
+
+Google documents this as the supported replacement path for deprecated `androidx.security.crypto` helpers. Do not mix a standalone JCA `SecretKey` with `AeadSerializer`; the serializer expects a Tink `Aead` instance.
 
 ### Keystore options worth knowing
 
@@ -73,25 +75,36 @@ Cap-go does **not** ship a package named "secure storage," but two plugins cover
 
 | Plugin | Best for | Native backing |
 | --- | --- | --- |
-| [@capgo/capacitor-native-biometric](https://capgo.app/plugins/capacitor-native-biometric/) `setData` / `getData` | Small secrets (session tokens, API keys) | iOS Keychain, Android Keystore |
+| [@capgo/capacitor-native-biometric](https://capgo.app/plugins/capacitor-native-biometric/) `setData` / `getSecureData` | Small secrets (session tokens, API keys) | iOS Keychain; Android Keystore-backed encryption in SharedPreferences |
 | [@capgo/capacitor-data-storage-sqlite](https://capgo.app/plugins/capacitor-data-storage-sqlite/) with encryption options | Larger or structured local data | SQLite with optional SQLCipher |
 
 The [key-value storage guide](/blog/capacitor-key-value-storage/) compares Preferences, SQLite stores, and `NativeBiometric.setData` for secrets.
 
-Example pattern for a refresh token string:
+Requires `@capgo/capacitor-native-biometric` **8.6.0 or later** (match the plugin major version to your Capacitor major version). Example with biometric-gated reads:
 
 ```typescript
-import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+import {
+  AccessControl,
+  NativeBiometric,
+} from '@capgo/capacitor-native-biometric';
 
 const TOKEN_KEY = 'auth.refresh_token';
 
 export async function saveRefreshToken(token: string) {
-  await NativeBiometric.setData({ key: TOKEN_KEY, value: token });
+  await NativeBiometric.setData({
+    key: TOKEN_KEY,
+    value: token,
+    accessControl: AccessControl.BIOMETRY_CURRENT_SET,
+  });
 }
 
 export async function loadRefreshToken(): Promise<string | null> {
   try {
-    const { value } = await NativeBiometric.getData({ key: TOKEN_KEY });
+    const { value } = await NativeBiometric.getSecureData({
+      key: TOKEN_KEY,
+      reason: 'Unlock your session',
+      title: 'Authenticate',
+    });
     return value ?? null;
   } catch {
     return null;
@@ -99,7 +112,7 @@ export async function loadRefreshToken(): Promise<string | null> {
 }
 ```
 
-Pair storage with [@capgo/capacitor-native-biometric](https://capgo.app/plugins/capacitor-native-biometric/) authentication APIs when the token should be readable only after biometrics.
+`getData` only returns values stored **without** `accessControl`. For biometric protection, always pair `BIOMETRY_CURRENT_SET` or `BIOMETRY_ANY` with `getSecureData`.
 
 For web builds, never persist production tokens in `localStorage`. Use your backend's web session model instead.
 
@@ -126,7 +139,7 @@ When you ship security fixes to token handling in Capacitor apps, [Capgo live up
 
 1. Inventory which keys hold secrets versus public config.
 2. Implement DataStore + `AeadSerializer` with a Keystore-backed Tink keyset.
-3. Use `SharedPreferencesMigration` to read old encrypted prefs once, write into DataStore, then delete legacy files.
+3. Migrate with `SharedPreferencesMigration` using a producer that opens the legacy **EncryptedSharedPreferences** instance (not plain `SharedPreferences`), then delete legacy files after a successful read.
 4. Ship the native change in a store release; test backup and restore on a physical device.
 5. Remove `androidx.security.crypto` dependencies when nothing references them.
 

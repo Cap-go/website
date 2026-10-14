@@ -17,11 +17,11 @@ origin: ai
 next_blog: ''
 faq:
   - question: "Is a privacy manifest still required for App Store uploads in 2026?"
-    answer: "Yes. Since May 1, 2024, new apps and updates must declare required reason API usage in PrivacyInfo.xcprivacy, and listed third-party SDKs must ship their own manifests and signatures when you add or update them. See Apple's upcoming requirements and third-party SDK requirements pages."
+    answer: "Yes. Since May 1, 2024, new apps and updates must declare required reason API usage in PrivacyInfo.xcprivacy. Listed third-party SDKs must include their own manifests when a new app ships them or an update adds them; signatures apply when those SDKs are binary dependencies. See Apple's upcoming requirements and third-party SDK requirements pages."
   - question: "What is the difference between ITMS-91053 and ITMS-91061?"
     answer: "ITMS-91053 means your app binary uses a required reason API without a matching declaration in a privacy manifest. ITMS-91061 means a privacy-impacting third-party SDK in your bundle is missing its own PrivacyInfo.xcprivacy. Fix 91053 in your app manifest; fix 91061 by upgrading the SDK, not by copying its practices into your app manifest."
   - question: "Where do I put PrivacyInfo.xcprivacy in a Capacitor iOS project?"
-    answer: "Add PrivacyInfo.xcprivacy under ios/App, include it in the App target's Copy Bundle Resources in Xcode, then archive and generate a privacy report to confirm Xcode merged manifests from Capacitor, CocoaPods, and Swift Package Manager dependencies."
+    answer: "Add PrivacyInfo.xcprivacy under ios/App, include it in the App target's Copy Bundle Resources in Xcode, then archive and generate a privacy report. Each target still needs its own manifest; the report aggregates manifests from your app, Capacitor, CocoaPods, and Swift Package Manager dependencies."
 ---
 
 **Apple privacy manifests are mandatory for App Store uploads:** every app needs a `PrivacyInfo.xcprivacy` that describes your app's data collection, tracking domains, and any [required reason APIs](https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api) your code calls. Third-party SDKs on [Apple's required list](https://developer.apple.com/support/third-party-SDK-requirements) must ship their own manifests (and signatures when distributed as binaries). This guide focuses on **2026 compliance and troubleshooting** for [Capacitor](https://capacitorjs.com/) iOS apps: what to declare, how to fix **ITMS-91053** and **ITMS-91061**, and how to validate before you submit.
@@ -52,7 +52,7 @@ As of Apple's [TN3183](https://developer.apple.com/documentation/technotes/tn318
 | `NSPrivacyAccessedAPICategoryUserDefaults` | Settings, plugin state, small persistence |
 | `NSPrivacyAccessedAPICategoryFileTimestamp` | File metadata, caches, update bundles |
 | `NSPrivacyAccessedAPICategoryDiskSpace` | Free-space checks before downloads |
-| `NSPrivacyAccessedAPICategorySystemBootTime` | Timing, session, or fraud signals |
+| `NSPrivacyAccessedAPICategorySystemBootTime` | Elapsed time, timers, or absolute timestamps |
 | `NSPrivacyAccessedAPICategoryActiveKeyboards` | Keyboard extension or input detection |
 
 For each category you use, add one dictionary with `NSPrivacyAccessedAPIType` and `NSPrivacyAccessedAPITypeReasons`. Pick **only** reason codes Apple lists for that category. Wrong codes cause review failures.
@@ -114,7 +114,7 @@ Practical workflow:
 - Archive and use **Generate Privacy Report** to read the combined picture.
 - Compare the report to your App Store privacy questionnaire answers.
 
-For live update tooling, declare APIs your updater actually uses (disk space, file timestamps, user defaults, network). Keep [Capgo live update compliance](https://capgo.app/docs/live-updates/compliance/) in mind when you document OTA behavior.
+For live update tooling, declare required reason APIs your updater actually uses (for example disk space, file timestamps, or user defaults). Network access is not a required reason API category; document it through your privacy labels and App Store questionnaire instead. Keep [Capgo live update compliance](https://capgo.app/docs/live-updates/compliance/) in mind when you document OTA behavior.
 
 ## Add `PrivacyInfo.xcprivacy` in a Capacitor iOS project
 
@@ -128,7 +128,7 @@ For live update tooling, declare APIs your updater actually uses (disk space, fi
 
 If you edit the plist as XML on disk, reopen Xcode so the target membership stays correct.
 
-CocoaPods and SPM dependencies merge their manifests at build time. You do not manually combine SDK plists into one file; Xcode does that when you archive.
+Each app or SDK target keeps its own `PrivacyInfo.xcprivacy`. When you archive, Xcode aggregates those manifests into one privacy report. You do not manually merge dependency plists into your app file.
 
 ## Validation checklist before submit
 

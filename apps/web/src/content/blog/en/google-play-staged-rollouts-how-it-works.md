@@ -46,7 +46,7 @@ Typical flow: **Internal testing** for smoke tests, **Closed testing** for trust
 Google's [Release app updates with staged rollouts](https://support.google.com/googleplay/android-developer/answer/6346149) guide describes the loop:
 
 1. Open **Production**, **Open testing**, or **Closed testing** in Play Console.
-2. Create or edit a release and upload an **Android App Bundle** with a higher `versionCode` than users on that track already have.
+2. Create or edit a release and upload an **Android App Bundle** whose `versionCode` is higher than the release already on that track. Play serves the highest compatible `versionCode` across every track a user is eligible for, so a newer Production build can override a lower testing-track build for the same user.
 3. Set a **rollout percentage** (between 1% and 100%).
 4. Start the rollout.
 5. Monitor Android vitals, crashes, and reviews.
@@ -56,7 +56,7 @@ Google's [Release app updates with staged rollouts](https://support.google.com/g
 Important constraints from Google's documentation:
 
 - Rollout users are chosen by Google; you cannot hand-pick individuals in the console UI.
-- Only one staged rollout configuration applies per track at a time.
+- Finish or discard conflicting draft releases on a track before starting another rollout; Google documents creating a new staged rollout before the previous release reaches 100%.
 - You cannot force users to install immediately; they update when Play delivers the release.
 - Production staged rollouts can target **specific countries or regions**; testing tracks follow the track's tester rules.
 
@@ -66,8 +66,9 @@ The [Google Play Developer API](https://developers.google.com/android-publisher/
 
 | Signal | Where to look |
 | --- | --- |
-| Crash rate | Play Console Android vitals |
-| ANRs | Vitals and pre-launch reports |
+| Crash rate (after users install) | Play Console Android vitals |
+| ANRs (after users install) | Play Console Android vitals |
+| Pre-launch checks (before wide rollout) | Play Console pre-launch report on test devices |
 | User reviews | Store listing feedback for the version |
 | Backend errors | Your API dashboards correlated with version headers |
 
@@ -93,7 +94,7 @@ Use Play staged rollouts when you change native code, permissions, or `targetSdk
 
 ## Rules and requirements reminder
 
-- Each release needs a monotonically increasing **`versionCode`** on the track.
+- Each new bundle needs a higher **`versionCode`** than builds users can already receive on any overlapping track.
 - Apps using Play App Signing must upload signed AABs per [Google Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756).
 - Complete outstanding staged releases or discard drafts before starting conflicting releases on the same track ([Prepare and roll out a release](https://support.google.com/googleplay/android-developer/answer/9859348)).
 
@@ -103,9 +104,9 @@ Use Play staged rollouts when you change native code, permissions, or `targetSdk
 
 No. Internal testing distributes the release to your tester list (up to 100 people). Use Closed, Open, or Production for percentage-based staged rollouts.
 
-### Can open testers see the app on Google Play?
+### How do testers install Internal or Closed builds?
 
-Yes. Open testing surfaces a public opt-in test program. Closed and internal tests rely on invite links unless you promote to open or production.
+Internal testing uses an email list (up to 100 testers). Closed testing supports email lists, Google Groups, or Play Console organization management. Open testing is the only track that surfaces a public opt-in program on your store listing. Testers on internal or closed tracks usually need the Play Store URL you share; they will not find the build by searching unless you use open testing or production.
 
 ### When should Capacitor teams use Capgo instead of raising the Play rollout?
 
