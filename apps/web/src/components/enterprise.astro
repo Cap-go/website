@@ -61,7 +61,7 @@ const stats = [
       <p class="mt-5 max-w-xl text-base leading-7 text-gray-600">{m.enterprise_description()}</p>
 
       <div class="mt-8 flex flex-col gap-6">
-        <SignupCta id="enterprise-details-signup-cta" enterprise align="start" tone="light" />
+        <SignupCta lead={m.signup_cta_lead_enterprise({}, { locale: Astro.locals.locale })} id="enterprise-details-signup-cta" enterprise align="start" tone="light" />
       </div>
 
       <div class="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-gray-600">
