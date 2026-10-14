@@ -4,6 +4,7 @@ import ToolCatalog from '@/components/tools/ToolCatalog.astro'
 import ToolFaq from '@/components/tools/ToolFaq.astro'
 import ToolCodeBlock from '@/components/tools/ToolCodeBlock.astro'
 import ToolHowTo from '@/components/tools/ToolHowTo.astro'
+import ToolNativeBuildCta from '@/components/tools/ToolNativeBuildCta.astro'
 import ToolRelatedLinks from '@/components/tools/ToolRelatedLinks.astro'
 import { createFAQPageLdJson, createHowToLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -166,8 +167,8 @@ const troubleshooting = [
 
 const relatedLinks = [
   {
-    title: 'Capgo Cloud Build for iOS',
-    description: 'Build, sign, and upload iOS apps to TestFlight from any operating system using your .p12 and provisioning profile.',
+    title: 'Build and sign iOS and Android apps in the cloud with Capgo',
+    description: 'Upload your .p12 and provisioning profile, then run signed iOS and Android release builds from CI or the Capgo console.',
     path: 'native-build',
   },
   {
@@ -613,7 +614,7 @@ const benefits = [
         <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
           <h3 class="text-xl font-bold text-white">Capgo Cloud Build</h3>
           <p class="mt-3 text-sm leading-7 text-slate-300">
-            Save the .p12 and provisioning profile once and let <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}>Capgo Cloud Build</a> sign and upload iOS builds, no Mac required.
+            Save the .p12 and provisioning profile once, then <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}>build and sign iOS and Android apps in the cloud with Capgo</a>.
           </p>
           <ToolCodeBlock label="Capgo CLI" code={capgoSnippet} />
         </article>
@@ -658,7 +659,7 @@ const benefits = [
         <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">After signing</p>
         <h2 class="mt-3 text-2xl font-bold text-white sm:text-3xl">Ship web fixes without another store round-trip</h2>
         <p class="mt-4 max-w-3xl text-sm leading-7 text-slate-300">
-          Once the native binary is signed, Capgo live updates can deliver Capacitor web-layer changes over the air—channels, rollback, and any CI/CD you already use.
+          Once the native binary is signed, Capgo live updates can deliver Capacitor web-layer changes over the air: channels, rollback, and any CI/CD you already use.
           Free to try when you are ready to wire OTA into the same release path.
         </p>
         <SignupCta id="ios-certificate-generator-signup-cta" align="start" humanSupport class="mt-8" />
@@ -666,7 +667,9 @@ const benefits = [
     </div>
   </section>
 
-  <ToolFaq items={faqItems} title="iOS certificate generator FAQ" intro="Answers about CSRs, certificate types, .p12 conversion, Apple Developer accounts, and signing iOS apps without a Mac." />
+  <ToolFaq items={faqItems} title="iOS certificate generator FAQ" intro="Answers about CSRs, certificate types, .p12 conversion, Apple Developer accounts, and using certificates in CI or cloud builds." />
+
+  <ToolNativeBuildCta accent="cyan" />
 
   <ToolRelatedLinks title="iOS signing and release guides" links={relatedLinks} />
 

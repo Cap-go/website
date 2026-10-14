@@ -1,5 +1,13 @@
 import { expect, test } from 'bun:test'
-import { AGENT_NOT_FOUND_MARKDOWN, MCP_TOOLS, OPENAPI_ALIAS_PATHS, markdownNotFoundResponse, prefersMarkdown, withLlmsWhenToUse } from '../../shared/agentDiscovery'
+import {
+  AGENT_NOT_FOUND_MARKDOWN,
+  LLMS_WHEN_TO_USE_PATHS,
+  MCP_TOOLS,
+  OPENAPI_ALIAS_PATHS,
+  markdownNotFoundResponse,
+  prefersMarkdown,
+  withLlmsWhenToUse,
+} from '../../shared/agentDiscovery'
 import { createCapgoOrganization } from '../src/lib/ldJson.ts'
 
 test('markdown 404 body points agents at sitemap, llms.txt, openapi, and docs', () => {
@@ -33,12 +41,19 @@ test('markdown 404 HEAD responses have no body', async () => {
   expect(await response.text()).toBe('')
 })
 
+test('when-to-use injector runs for llms.txt and llms-full.txt', () => {
+  expect(LLMS_WHEN_TO_USE_PATHS.has('/llms.txt')).toBe(true)
+  expect(LLMS_WHEN_TO_USE_PATHS.has('/llms-full.txt')).toBe(true)
+})
+
 test('llms.txt injector adds a when-to-use section once', () => {
   const original = '# Capgo\n\n> Docs\n\n## Documentation Sets\n'
   const once = withLlmsWhenToUse(original)
   const twice = withLlmsWhenToUse(once)
   expect(once).toContain('## When to use Capgo')
   expect(once).toContain('npx @capgo/cli@latest mcp')
+  expect(once).toContain('updates are blocked until the billing cycle ends')
+  expect(once).toContain('non-refundable')
   expect(twice).toBe(once)
 })
 

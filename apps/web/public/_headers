@@ -87,6 +87,12 @@
   Cache-Control: public, max-age=3600
   Link: </pricing/>; rel="alternate"; type="text/html"
 
+/pricing/
+  Link: </pricing.md>; rel="alternate"; type="text/markdown"
+
+/plugins/
+  Link: </plugins.md>; rel="alternate"; type="text/markdown"
+
 /plugins.json
   Content-Type: application/json; charset=utf-8
   Access-Control-Allow-Origin: *
