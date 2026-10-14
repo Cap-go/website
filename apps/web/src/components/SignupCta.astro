@@ -29,7 +29,7 @@ const isLight = tone === 'light'
 ---
 
 <div class:list={['signup-cta not-content flex flex-col gap-4', isLight && 'is-light', align === 'start' ? 'items-start text-left' : 'items-center text-center', className]}>
-  {lead && <p class:list={['font-inter m-0 max-w-xs text-sm leading-6', isLight ? 'text-gray-700' : 'text-gray-200']}>{lead}</p>}
+  {lead && <p class:list={['font-inter m-0 max-w-md text-sm leading-6', isLight ? 'text-gray-700' : 'text-gray-200']}>{lead}</p>}
   {humanSupport && <HumanSupport size="sm" align={align} tone={isLight ? 'light' : 'dark'} />}
   <div class="group relative inline-flex">
     <div
