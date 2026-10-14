@@ -1,0 +1,179 @@
+---
+import AppleRejectionStoryCard from '@/components/apple-rejection-stories/AppleRejectionStoryCard.astro'
+import AppleRejectionStoriesCta from '@/components/apple-rejection-stories/AppleRejectionStoriesCta.astro'
+import {
+  appleRejectionStories,
+  appleRejectionStoryTagLabels,
+  appleRejectionStoryTags,
+  appleRejectionStoriesContentPath,
+} from '@/data/apple-rejection-stories'
+import { appleRejectionStoryTagStyles } from '@/data/apple-rejection-stories/tagStyles'
+
+const storyCount = appleRejectionStories.length
+const githubStoriesUrl = `https://github.com/Cap-go/website/tree/main/${appleRejectionStoriesContentPath}`
+
+const filterOptions = [
+  { id: 'all', label: 'All stories', count: storyCount },
+  ...appleRejectionStoryTags.map((tag) => ({
+    id: tag,
+    label: appleRejectionStoryTagLabels[tag],
+    count: appleRejectionStories.filter((story) => story.tags.includes(tag)).length,
+  })),
+]
+
+const storiesBeforeMidCta = appleRejectionStories.slice(0, 3)
+const storiesAfterMidCta = appleRejectionStories.slice(3)
+---
+
+<section id="stories" class="scroll-mt-20 border-t border-white/10 bg-gray-900 py-10 sm:py-12">
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12">
+    <div class="grid gap-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start xl:grid-cols-[17rem_minmax(0,1fr)_16rem]">
+      <aside
+        class="sticky top-0 z-20 rounded-lg border border-gray-800/80 bg-gray-900/95 p-2 backdrop-blur-sm lg:top-24 lg:flex lg:max-h-[calc(100vh-7rem)] lg:flex-col lg:overflow-hidden lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none xl:col-start-1"
+      >
+        <div class="relative lg:hidden">
+          <label for="story-tag-select" class="sr-only">Filter stories by guideline or theme</label>
+          <select
+            id="story-tag-select"
+            name="story-tag-select"
+            aria-label="Filter stories by guideline or theme"
+            class="h-12 w-full appearance-none rounded-lg border border-gray-700/80 bg-gray-950/70 px-4 pr-10 text-base text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none"
+          >
+            {filterOptions.map((option) => (
+              <option value={option.id}>{option.label} ({option.count})</option>
+            ))}
+          </select>
+          <svg
+            aria-hidden="true"
+            class="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-gray-300"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </div>
+
+        <nav
+          class="mt-4 hidden min-h-0 flex-1 space-y-1 overflow-y-auto rounded-lg border border-gray-800 bg-gray-950/40 p-2 lg:block"
+          aria-label="Filter stories by guideline or theme"
+        >
+          {filterOptions.map((option) => (
+            <button
+              type="button"
+              class:list={[
+                'flex w-full items-center justify-between gap-3 rounded-md px-3 py-2 text-left text-sm font-semibold focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
+                option.id === 'all' ? 'bg-blue-500/15 text-white' : 'text-gray-300 hover:bg-gray-900/80 hover:text-white',
+              ]}
+              data-story-filter={option.id}
+              aria-pressed={option.id === 'all' ? 'true' : 'false'}
+            >
+              <span>{option.label}</span>
+              <span class="text-xs text-gray-400 tabular-nums">{option.count}</span>
+            </button>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="min-w-0 xl:col-start-2">
+        <p id="story-filter-status" class="mb-4 min-h-5 text-sm text-gray-400" aria-live="polite" aria-atomic="true">
+          Showing all {storyCount} stories.
+        </p>
+
+        <ol class="grid list-none gap-8 p-0" id="rejection-stories-list">
+          {storiesBeforeMidCta.map((story) => (
+            <AppleRejectionStoryCard story={story} allStories={appleRejectionStories} tagStyles={appleRejectionStoryTagStyles} />
+          ))}
+          <li class="list-none lg:hidden">
+            <AppleRejectionStoriesCta id="apple-rejection-stories-mid-cta" />
+          </li>
+          {storiesAfterMidCta.map((story) => (
+            <AppleRejectionStoryCard story={story} allStories={appleRejectionStories} tagStyles={appleRejectionStoryTagStyles} />
+          ))}
+        </ol>
+
+        <div class="mt-10 hidden lg:block xl:hidden">
+          <AppleRejectionStoriesCta id="apple-rejection-stories-tablet-cta" />
+        </div>
+
+        <div class="mt-12 rounded-2xl border border-white/10 bg-gray-950 p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-white">Contribute a future batch</h2>
+          <p class="mt-3 text-base leading-7 text-gray-300">
+            To add stories, drop a new file under <code class="rounded bg-gray-800 px-1.5 py-0.5 text-sm text-gray-100">{appleRejectionStoriesContentPath}</code>
+            following the existing pattern, then open a pull request. Keep submissions anonymized.
+          </p>
+          <a
+            href={githubStoriesUrl}
+            target="_blank"
+            rel="noreferrer"
+            class="mt-5 inline-flex min-h-11 items-center justify-center rounded-lg border border-white/20 bg-white/5 px-5 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none"
+          >
+            View story files on GitHub
+          </a>
+        </div>
+
+        <p class="mt-10 text-sm leading-6 text-gray-500">
+          This page is not legal advice and does not predict what Apple will do on your next submission.
+        </p>
+      </div>
+
+      <div class="hidden xl:sticky xl:top-24 xl:col-start-3 xl:block xl:self-start">
+        <AppleRejectionStoriesCta id="apple-rejection-stories-sidebar-cta" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = Array.from(document.querySelectorAll('[data-story-filter]')) as HTMLButtonElement[]
+    const tagSelect = document.getElementById('story-tag-select') as HTMLSelectElement | null
+    const cards = Array.from(document.querySelectorAll('.rejection-story-card')) as HTMLElement[]
+    const status = document.getElementById('story-filter-status')
+    const activeCategoryClasses = ['bg-blue-500/15', 'text-white']
+    const inactiveCategoryClasses = ['text-gray-300', 'hover:bg-gray-900/80', 'hover:text-white']
+
+    function setButtonState(button: HTMLButtonElement, isActive: boolean) {
+      button.setAttribute('aria-pressed', String(isActive))
+      activeCategoryClasses.forEach((className) => button.classList.toggle(className, isActive))
+      inactiveCategoryClasses.forEach((className) => button.classList.toggle(className, !isActive))
+    }
+
+    function applyFilter(tag: string) {
+      let visible = 0
+      cards.forEach((card) => {
+        const tags = (card.dataset.storyTags ?? '').split(' ').filter(Boolean)
+        const show = tag === 'all' || tags.includes(tag)
+        card.classList.toggle('hidden', !show)
+        if (show) visible += 1
+      })
+
+      filterButtons.forEach((button) => {
+        setButtonState(button, button.dataset.storyFilter === tag)
+      })
+
+      if (tagSelect && tagSelect.value !== tag) {
+        tagSelect.value = tag
+      }
+
+      if (status) {
+        const label =
+          tag === 'all'
+            ? `Showing all ${visible} stories.`
+            : `Showing ${visible} ${visible === 1 ? 'story' : 'stories'} for this filter.`
+        status.textContent = label
+      }
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const tag = button.dataset.storyFilter ?? 'all'
+        applyFilter(tag)
+      })
+    })
+
+    tagSelect?.addEventListener('change', () => {
+      applyFilter(tagSelect.value || 'all')
+    })
+  })
+</script>

@@ -1,0 +1,22 @@
+---
+import SignupCta from '@/components/SignupCta.astro'
+
+interface Props {
+  id: string
+  class?: string
+}
+
+const { id, class: className = '' } = Astro.props
+
+const capgoCtaCopy =
+  'Capgo: push fixes to your Capacitor users in minutes, build signed iOS and Android apps without a Mac, and roll back in one click.'
+---
+
+<aside
+  class:list={['rounded-lg border border-gray-800 bg-gray-950/40 p-5 sm:p-6', className]}
+  aria-labelledby={`${id}-heading`}
+>
+  <h2 id={`${id}-heading`} class="text-base font-semibold text-white">Ship fixes while review catches up</h2>
+  <p class="mt-3 text-sm leading-6 text-gray-300">{capgoCtaCopy}</p>
+  <SignupCta id={`${id}-signup`} humanSupport align="start" class="mt-5" />
+</aside>

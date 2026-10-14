@@ -4,11 +4,8 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import {
   appleRejectionStories,
   appleRejectionStoryBatches,
-  appleRejectionStoryTagLabels,
-  appleRejectionStoryTags,
-  appleRejectionStoriesContentPath,
 } from '@/data/apple-rejection-stories'
-import AppleRejectionStoryCard from '@/components/apple-rejection-stories/AppleRejectionStoryCard.astro'
+import AppleRejectionStoriesListing from '@/components/apple-rejection-stories/AppleRejectionStoriesListing.astro'
 import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig.public
@@ -18,25 +15,6 @@ const title = 'Apple App Store Rejection Stories | Capgo'
 const description =
   'Anonymized real App Store rejection stories tagged by guideline (4.3, 2.1, metadata, review delays, objectionable content, and more). Lessons only, no names or source links.'
 const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
-const githubStoriesUrl = `https://github.com/Cap-go/website/tree/main/${appleRejectionStoriesContentPath}`
-
-const tagStyles: Record<string, string> = {
-  '4-3': 'border-rose-300/50 bg-rose-500/15 text-rose-100',
-  '4-2-6': 'border-fuchsia-300/50 bg-fuchsia-500/15 text-fuchsia-100',
-  '3-1-2': 'border-lime-300/50 bg-lime-500/15 text-lime-100',
-  '5-1-2': 'border-cyan-300/50 bg-cyan-500/15 text-cyan-100',
-  '2-1': 'border-sky-300/50 bg-sky-500/15 text-sky-100',
-  metadata: 'border-violet-300/50 bg-violet-500/15 text-violet-100',
-  'endless-review': 'border-amber-300/50 bg-amber-500/15 text-amber-100',
-  'account-termination': 'border-red-400/50 bg-red-500/20 text-red-100',
-  'login-requirement': 'border-teal-300/50 bg-teal-500/15 text-teal-100',
-  login: 'border-emerald-300/50 bg-emerald-500/15 text-emerald-100',
-  'objectionable-content': 'border-orange-300/50 bg-orange-500/15 text-orange-100',
-  'enrollment-account': 'border-indigo-300/50 bg-indigo-500/15 text-indigo-100',
-  'simulated-gambling': 'border-yellow-300/50 bg-yellow-500/15 text-yellow-100',
-  'fake-documents': 'border-stone-300/50 bg-stone-500/15 text-stone-100',
-  'ai-data-sharing': 'border-purple-300/50 bg-purple-500/15 text-purple-100',
-}
 
 const itemList = createItemListLdJson(config, {
   url: pageUrl,
@@ -73,8 +51,6 @@ const content = {
 }
 
 const batchOne = appleRejectionStoryBatches.find((batch) => batch.id === 'batch-1')
-const capgoCtaCopy =
-  'Capgo: push fixes to your Capacitor users in minutes, build signed iOS and Android apps without a Mac, and roll back in one click.'
 ---
 
 <Layout content={content}>
@@ -121,119 +97,6 @@ const capgoCtaCopy =
       </section>
     </div>
 
-    <section class="border-b border-white/10 bg-gray-950 py-10" aria-labelledby="story-filters-heading">
-      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <h2 id="story-filters-heading" class="text-sm font-semibold text-gray-200">Filter by guideline or theme</h2>
-        <div class="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter stories by guideline or theme">
-          <button
-            type="button"
-            data-story-filter="all"
-            class="story-filter-btn rounded-full border border-[#44BCFF]/50 bg-[#44BCFF]/20 px-4 py-2 text-sm font-semibold text-white"
-            aria-pressed="true"
-          >
-            All ({storyCount})
-          </button>
-          {appleRejectionStoryTags.map((tag) => {
-            const count = appleRejectionStories.filter((story) => story.tags.includes(tag)).length
-            return (
-              <button
-                type="button"
-                data-story-filter={tag}
-                class="story-filter-btn rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-gray-200 hover:bg-white/10"
-                aria-pressed="false"
-              >
-                {appleRejectionStoryTagLabels[tag]} ({count})
-              </button>
-            )
-          })}
-        </div>
-        <p id="story-filter-status" class="mt-4 text-sm text-gray-400" aria-live="polite">
-          Showing all {storyCount} stories.
-        </p>
-      </div>
-    </section>
-
-    <section id="stories" class="scroll-mt-20 py-16 sm:py-20">
-      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <ol class="grid list-none gap-8 p-0 lg:grid-cols-1" id="rejection-stories-list">
-          {appleRejectionStories.map((story) => (
-            <AppleRejectionStoryCard story={story} allStories={appleRejectionStories} tagStyles={tagStyles} />
-          ))}
-        </ol>
-
-        <section class="mt-16 rounded-2xl border border-white/10 bg-gray-950 p-6 sm:p-8" aria-labelledby="capgo-cta-heading">
-          <h2 id="capgo-cta-heading" class="text-2xl font-bold text-white">Ship fixes while review catches up</h2>
-          <p class="mt-4 text-base leading-7 text-gray-200">{capgoCtaCopy}</p>
-          <a
-            href={getRelativeLocaleUrl(locale, 'register')}
-            class="mt-6 inline-flex min-h-11 items-center justify-center rounded-lg bg-white px-6 text-sm font-bold text-gray-900 transition hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
-          >
-            Get started
-          </a>
-        </section>
-
-        <div class="mt-12 rounded-2xl border border-white/10 bg-gray-950 p-6 sm:p-8">
-          <h2 class="text-xl font-bold text-white">Contribute a future batch</h2>
-          <p class="mt-3 text-base leading-7 text-gray-300">
-            To add stories, drop a new file under <code class="rounded bg-gray-800 px-1.5 py-0.5 text-sm text-gray-100">{appleRejectionStoriesContentPath}</code>
-            following the existing pattern, then open a pull request. Keep submissions anonymized.
-          </p>
-          <a
-            href={githubStoriesUrl}
-            target="_blank"
-            rel="noreferrer"
-            class="mt-5 inline-flex min-h-11 items-center justify-center rounded-lg border border-white/20 bg-white/5 px-5 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none"
-          >
-            View story files on GitHub
-          </a>
-        </div>
-
-        <p class="mt-10 text-sm leading-6 text-gray-500">
-          This page is not legal advice and does not predict what Apple will do on your next submission.
-        </p>
-      </div>
-    </section>
+    <AppleRejectionStoriesListing />
   </main>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const filterButtons = Array.from(document.querySelectorAll('[data-story-filter]')) as HTMLButtonElement[]
-      const cards = Array.from(document.querySelectorAll('.rejection-story-card')) as HTMLElement[]
-      const status = document.getElementById('story-filter-status')
-      const activeClasses = ['border-[#44BCFF]/50', 'bg-[#44BCFF]/20', 'text-white']
-      const inactiveClasses = ['border-white/15', 'bg-white/5', 'text-gray-200']
-
-      function setButtonState(button: HTMLButtonElement, isActive: boolean) {
-        button.setAttribute('aria-pressed', String(isActive))
-        button.classList.remove(...(isActive ? inactiveClasses : activeClasses))
-        button.classList.add(...(isActive ? activeClasses : inactiveClasses))
-      }
-
-      function applyFilter(tag: string) {
-        let visible = 0
-        cards.forEach((card) => {
-          const tags = (card.dataset.storyTags ?? '').split(' ').filter(Boolean)
-          const show = tag === 'all' || tags.includes(tag)
-          card.classList.toggle('hidden', !show)
-          if (show) visible += 1
-        })
-
-        filterButtons.forEach((button) => {
-          setButtonState(button, button.dataset.storyFilter === tag)
-        })
-
-        if (status) {
-          const label = tag === 'all' ? `Showing all ${visible} stories.` : `Showing ${visible} ${visible === 1 ? 'story' : 'stories'} for this tag.`
-          status.textContent = label
-        }
-      }
-
-      filterButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          const tag = button.dataset.storyFilter ?? 'all'
-          applyFilter(tag)
-        })
-      })
-    })
-  </script>
 </Layout>
