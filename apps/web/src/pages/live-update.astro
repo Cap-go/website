@@ -9,7 +9,7 @@ import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
@@ -37,15 +37,23 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const faqItems = [
+  { question: m.live_update_faq_q1({}, { locale }), answer: m.live_update_faq_a1({}, { locale }) },
+  { question: m.live_update_faq_q2({}, { locale }), answer: m.live_update_faq_a2({}, { locale }) },
+  { question: m.live_update_faq_q3({}, { locale }), answer: m.live_update_faq_a3({}, { locale }) },
+  { question: m.live_update_faq_q4({}, { locale }), answer: m.live_update_faq_a4({}, { locale }) },
+]
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-live-update.png`,
-  keywords: 'Capacitor live updates, EAS Update analog, Expo alternative, OTA updates, Capgo',
+  keywords: 'Capacitor live updates, Capacitor OTA, live updates, OTA updates, Ionic Capacitor, Capgo',
   ldJSON,
 }
 
@@ -506,6 +514,33 @@ const featureTiles = [
           <a class="btn btn-md btn-ghost" href={expoUrl}>
             {copy('live_update_eas_cta')}
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="live-update-faq-title">
+      <div class="shell">
+        <div class="section-head section-head--narrow">
+          <div class="eyebrow eyebrow--blue">{m.live_update_faq_eyebrow({}, { locale })}</div>
+          <h2 class="h2-section" id="live-update-faq-title">
+            {m.live_update_faq_title({}, { locale })}
+          </h2>
+          <p class="lead">{m.live_update_faq_desc({}, { locale })}</p>
+        </div>
+        <div class="faq">
+          {faqItems.map((item) => (
+            <details>
+              <summary>
+                {item.question}
+                <span class="plus" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <div class="ans" aria-live="polite">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))}
         </div>
       </div>
     </section>

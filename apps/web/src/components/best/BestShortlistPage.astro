@@ -1,0 +1,837 @@
+---
+// "Best [product] in [year]: the buyer's shortlist" article template. Section order and headings follow a fixed
+// AI-search listicle structure; content comes from src/data/best/*.ts.
+import YouTubeFacade from '@/components/YouTubeFacade.astro'
+import type { BestShortlistLink, BestShortlistPage } from '@/data/best/types'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+interface Props {
+  page: BestShortlistPage
+  /** H1 text, kept identical to the <title> without the brand suffix. */
+  heading: string
+}
+
+const { page, heading } = Astro.props
+const locale = Astro.locals.locale
+
+const isExternal = (href: string) => /^https?:\/\//.test(href)
+const resolveHref = (href: string) => {
+  if (isExternal(href)) return href
+  if (href.startsWith('#')) return `${getRelativeLocaleUrl(locale)}${href}`
+  return getRelativeLocaleUrl(locale, href)
+}
+const linkAttrs = (link: BestShortlistLink) => ({
+  href: resolveHref(link.href),
+  ...(isExternal(link.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+})
+
+const formatDate = (iso: string) => new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(iso))
+const wasUpdated = page.updatedAt !== page.publishedAt
+
+const registerHref = getRelativeLocaleUrl(locale, 'register')
+const demoHref = 'https://book.capgo.app/demo/'
+const top = page.products[0]
+
+const toc = [
+  { id: 'key-takeaways', label: 'Key takeaways' },
+  { id: 'definition', label: `What a ${page.categorySingular} is` },
+  { id: 'methodology', label: 'How we ranked them' },
+  { id: 'shortlist', label: `The best ${page.category}` },
+  { id: 'comparison', label: 'Side-by-side comparison' },
+  { id: 'use-cases', label: 'Which one fits your use case' },
+  { id: 'results', label: 'Results' },
+  { id: 'faq', label: 'FAQ' },
+]
+---
+
+<div class="bsl">
+  <div class="bsl-topbar" data-bsl-topbar aria-hidden="true" inert>
+    <div class="bsl-topbar-inner">
+      <p>
+        <strong>#1 pick: {top.name}.</strong> <span class="bsl-hide-sm">14-day free trial, no credit card.</span>
+      </p>
+      <div class="bsl-topbar-actions">
+        <a class="bsl-btn bsl-btn-ghost bsl-hide-sm" href={demoHref} target="_blank" rel="noopener noreferrer">
+          Book a demo
+        </a>
+        <a class="bsl-btn bsl-btn-primary" id="best-topbar-signup-cta" href={registerHref}>
+          Try {top.name} free
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bsl-grid">
+    <article class="bsl-article">
+      <header class="bsl-head">
+        <a class="bsl-author" href={page.author.profileUrl} target="_blank" rel="noopener noreferrer author">
+          <img src={page.author.imageUrl} alt={`${page.author.name}, ${page.author.role}`} width="56" height="56" loading="eager" decoding="async" />
+          <span>
+            <span class="bsl-author-name">{page.author.name}</span>
+            <span class="bsl-author-role">{page.author.role}</span>
+          </span>
+        </a>
+        <p class="bsl-dates">
+          <span>
+            Published <time datetime={page.publishedAt}>{formatDate(page.publishedAt)}</time>
+          </span>
+          {wasUpdated && (
+            <span>
+              Updated <time datetime={page.updatedAt}>{formatDate(page.updatedAt)}</time>
+            </span>
+          )}
+        </p>
+        <h1>{heading}</h1>
+        <p class="bsl-intro">{page.intro}</p>
+        <p class="bsl-leadmagnet">
+          {page.leadMagnet.text} <a {...linkAttrs(page.leadMagnet)}>{page.leadMagnet.label}</a>
+        </p>
+      </header>
+
+      <section id="key-takeaways" aria-labelledby="key-takeaways-title">
+        <h2 id="key-takeaways-title">Key Takeaways</h2>
+        <ul class="bsl-takeaways">
+          {page.keyTakeaways.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <aside class="bsl-imgcta" aria-label={page.imageCtas.early.title}>
+        <a href={resolveHref(page.imageCtas.early.button.href)} class="bsl-imgcta-media" tabindex="-1" aria-hidden="true">
+          <img
+            src={page.imageCtas.early.image}
+            alt={page.imageCtas.early.alt}
+            width={page.imageCtas.early.width}
+            height={page.imageCtas.early.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <div class="bsl-imgcta-body">
+          <p class="bsl-imgcta-title">{page.imageCtas.early.title}</p>
+          <p>{page.imageCtas.early.text}</p>
+          <a class="bsl-btn bsl-btn-primary" id="best-early-signup-cta" {...linkAttrs(page.imageCtas.early.button)}>
+            {page.imageCtas.early.button.label}
+          </a>
+        </div>
+      </aside>
+
+      <section id="definition" aria-labelledby="definition-title">
+        <h2 id="definition-title">What a {page.categorySingular} actually is (and what it is not)</h2>
+        {page.definition.is.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+        <h3>What it is not</h3>
+        {page.definition.isNot.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </section>
+
+      <figure class="bsl-video">
+        <div class="bsl-video-frame">
+          <YouTubeFacade youtubeId={page.video.youtubeId} title={page.video.title} />
+        </div>
+        <figcaption>{page.video.caption}</figcaption>
+      </figure>
+
+      <section id="methodology" aria-labelledby="methodology-title">
+        <h2 id="methodology-title">How We Ranked These {page.category}</h2>
+        <p>We scored every tool on {page.methodology.length} objective criteria. Each one can be checked on the vendor's public pricing page or documentation.</p>
+        <ol class="bsl-criteria">
+          {page.methodology.map((item) => (
+            <li>
+              <strong>{item.title}.</strong> {item.text}
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="shortlist" aria-labelledby="shortlist-title">
+        <h2 id="shortlist-title">
+          The Best {page.category} in {page.year}
+        </h2>
+        <p>{page.listIntro}</p>
+        {page.products.map((product, index) => (
+          <section class="bsl-product" id={`pick-${index + 1}`} aria-labelledby={`pick-${index + 1}-title`}>
+            <h3 id={`pick-${index + 1}-title`}>
+              {index + 1}. {product.name}, best for {product.bestFor}.
+            </h3>
+            <dl class="bsl-facts">
+              {product.facts.map((fact) => (
+                <div>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+            {product.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+            <p class="bsl-suited">
+              <strong>Best suited for:</strong> {product.bestSuitedFor}
+            </p>
+            <p class="bsl-product-links">
+              <a {...linkAttrs({ label: product.name, href: product.href })}>Visit {product.name}</a>
+              {product.compareLink && <a {...linkAttrs(product.compareLink)}>{product.compareLink.label}</a>}
+              {index === 0 && (
+                <a href={registerHref} id="best-top-pick-signup-cta">
+                  Start a free trial
+                </a>
+              )}
+            </p>
+          </section>
+        ))}
+      </section>
+
+      <section id="comparison" aria-labelledby="comparison-title">
+        <h2 id="comparison-title">Side-by-Side Comparison</h2>
+        <p>{page.comparison.lead}</p>
+        <div class="bsl-table-wrap">
+          <table>
+            <caption>
+              {page.category}compared,{page.year}
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Criteria</th>
+                {page.products.map((product, index) => (
+                  <th scope="col" class:list={[index === 0 && 'is-top']}>
+                    {product.name}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {page.comparison.rows.map((row) => (
+                <tr>
+                  <th scope="row">{row.label}</th>
+                  {row.cells.map((cell, index) => (
+                    <td class:list={[index === 0 && 'is-top']}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="use-cases" aria-labelledby="use-cases-title">
+        <h2 id="use-cases-title">Which {page.categorySingular} fits your use case</h2>
+        <p>{page.useCases.lead}</p>
+        <div class="bsl-table-wrap">
+          <table>
+            <caption>{page.category}mapped to use cases</caption>
+            <thead>
+              <tr>
+                {page.useCases.columns.filter(Boolean).map((column) => (
+                  <th scope="col">{column}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {page.useCases.rows.map((row) => (
+                <tr>{row.map((cell, index) => (index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}</tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="results" aria-labelledby="results-title">
+        <h2 id="results-title">{page.results.title}</h2>
+        <p>{page.results.lead}</p>
+        <ul class="bsl-results">
+          {page.results.items.map((item) => (
+            <li>
+              <p class="bsl-metric">{item.metric}</p>
+              <p>{item.text}</p>
+              <p class="bsl-source">{item.source}</p>
+            </li>
+          ))}
+        </ul>
+        <p>
+          <a {...linkAttrs(page.results.link)}>{page.results.link.label}</a>
+        </p>
+      </section>
+
+      <section id="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">Frequently Asked Questions</h2>
+        <dl class="bsl-faq">
+          {page.faq.map((item) => (
+            <div>
+              <dt>{item.question}</dt>
+              <dd>{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section id="cta" class="bsl-cta" aria-labelledby="cta-title">
+        <h2 id="cta-title">{page.cta.title}</h2>
+        <p>
+          {page.cta.sentences.join(' ')} {page.cta.inlineLink.before}
+          <a {...linkAttrs(page.cta.inlineLink)}>{page.cta.inlineLink.label}</a>
+          {page.cta.inlineLink.after}
+        </p>
+        <p>
+          {page.closing.before}
+          <a {...linkAttrs(page.closing.link)} id="best-closing-signup-cta">
+            {page.closing.link.label}
+          </a>
+          {page.closing.after}
+        </p>
+      </section>
+
+      <nav class="bsl-related" aria-label="Related pages">
+        <p class="bsl-related-title">Related</p>
+        <ul>
+          {page.related.map((link) => (
+            <li>
+              <a {...linkAttrs(link)}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <aside class="bsl-imgcta bsl-imgcta--final" aria-label={page.imageCtas.final.title}>
+        <a href={resolveHref(page.imageCtas.final.button.href)} class="bsl-imgcta-media" tabindex="-1" aria-hidden="true">
+          <img
+            src={page.imageCtas.final.image}
+            alt={page.imageCtas.final.alt}
+            width={page.imageCtas.final.width}
+            height={page.imageCtas.final.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <div class="bsl-imgcta-body">
+          <p class="bsl-imgcta-title">{page.imageCtas.final.title}</p>
+          <p>{page.imageCtas.final.text}</p>
+          <a class="bsl-btn bsl-btn-primary bsl-btn-lg" id="best-final-signup-cta" {...linkAttrs(page.imageCtas.final.button)}>
+            {page.imageCtas.final.button.label}
+          </a>
+        </div>
+      </aside>
+    </article>
+
+    <aside class="bsl-side" aria-label="Quick links">
+      <div class="bsl-side-inner">
+        <nav class="bsl-toc" aria-label="On this page">
+          <p class="bsl-side-title">On this page</p>
+          <ol>
+            {toc.map((item) => (
+              <li>
+                <a href={`#${item.id}`}>{item.label}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+        <div class="bsl-side-cta">
+          <p class="bsl-side-title">Our #1 pick</p>
+          <p class="bsl-side-name">{top.name}</p>
+          <p>Best for {top.bestFor}. 14-day free trial, no credit card.</p>
+          <a class="bsl-btn bsl-btn-primary" id="best-side-signup-cta" href={registerHref}>
+            Try {top.name} free
+          </a>
+          <a class="bsl-btn bsl-btn-ghost" href={demoHref} target="_blank" rel="noopener noreferrer">
+            Book a 15-min demo
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+  // Show the floating top CTA once the reader scrolls past the article header.
+  const bar = document.querySelector<HTMLElement>('[data-bsl-topbar]')
+  const head = document.querySelector<HTMLElement>('.bsl-head')
+  const header = document.querySelector<HTMLElement>('header.sticky')
+  if (bar && head) {
+    const setOffset = () => bar.style.setProperty('--bsl-header-h', `${header?.offsetHeight ?? 0}px`)
+    setOffset()
+    window.addEventListener('resize', setOffset, { passive: true })
+    new IntersectionObserver(([entry]) => {
+      const visible = !entry.isIntersecting && entry.boundingClientRect.top < 0
+      bar.classList.toggle('is-visible', visible)
+      bar.toggleAttribute('inert', !visible)
+      bar.setAttribute('aria-hidden', String(!visible))
+    }).observe(head)
+  }
+</script>
+
+<style>
+  .bsl {
+    --bsl-blue: #2563eb;
+    --bsl-blue-light: #60a5fa;
+    --bsl-border: rgba(255, 255, 255, 0.1);
+    --bsl-muted: rgba(255, 255, 255, 0.65);
+    color: #e5e7eb;
+  }
+  .bsl-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 96px;
+    display: grid;
+    gap: 48px;
+  }
+  @media (min-width: 1100px) {
+    .bsl-grid {
+      grid-template-columns: minmax(0, 1fr) 280px;
+    }
+  }
+  .bsl-article {
+    max-width: 780px;
+    min-width: 0;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .bsl-article :global(a:not(.bsl-btn)) {
+    color: var(--bsl-blue-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .bsl-article section {
+    scroll-margin-top: 140px;
+    margin-top: 56px;
+  }
+  .bsl-article h1 {
+    color: #fff;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 20px 0 20px;
+  }
+  .bsl-article h2 {
+    color: #fff;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.2;
+    font-weight: 800;
+    margin: 0 0 16px;
+  }
+  .bsl-article h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    font-weight: 700;
+    margin: 28px 0 12px;
+  }
+  .bsl-article p {
+    margin: 0 0 16px;
+  }
+  .bsl-author {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+  .bsl-author img {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    border: 2px solid var(--bsl-border);
+  }
+  .bsl-author > span {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+  .bsl-author-name {
+    color: #fff;
+    font-weight: 700;
+  }
+  .bsl-author-role {
+    color: var(--bsl-muted);
+    font-size: 14px;
+  }
+  .bsl-dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin: 12px 0 0 !important;
+    font-size: 14px;
+    color: var(--bsl-muted);
+  }
+  .bsl-intro {
+    font-size: 19px;
+    color: #f3f4f6;
+  }
+  .bsl-leadmagnet {
+    border-left: 3px solid var(--bsl-blue-light);
+    padding: 10px 16px;
+    background: rgba(96, 165, 250, 0.08);
+    border-radius: 0 10px 10px 0;
+    font-size: 16px;
+  }
+  .bsl-takeaways {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .bsl-takeaways li {
+    position: relative;
+    padding: 14px 16px 14px 44px;
+    border: 1px solid var(--bsl-border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .bsl-takeaways li::before {
+    content: '✓';
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    color: var(--bsl-blue-light);
+    font-weight: 800;
+  }
+  .bsl-criteria,
+  .bsl-faq {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .bsl-criteria li {
+    margin-bottom: 10px;
+  }
+  .bsl-criteria strong,
+  .bsl-suited strong {
+    color: #fff;
+  }
+  .bsl-product {
+    margin-top: 40px !important;
+    padding-top: 8px;
+    border-top: 1px solid var(--bsl-border);
+  }
+  .bsl-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin: 0 0 20px;
+  }
+  .bsl-facts div {
+    border: 1px solid var(--bsl-border);
+    border-radius: 10px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .bsl-facts dt {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--bsl-muted);
+  }
+  .bsl-facts dd {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #fff;
+  }
+  .bsl-suited {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+  }
+  .bsl-product-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    font-size: 15px;
+  }
+  .bsl-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--bsl-border);
+    border-radius: 14px;
+    margin-top: 20px;
+  }
+  .bsl table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bsl caption {
+    caption-side: bottom;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--bsl-muted);
+    text-align: left;
+  }
+  .bsl th,
+  .bsl td {
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--bsl-border);
+  }
+  .bsl thead th {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 700;
+  }
+  .bsl tbody th {
+    color: #fff;
+    font-weight: 600;
+  }
+  .bsl .is-top {
+    background: rgba(37, 99, 235, 0.12);
+  }
+  .bsl-results {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .bsl-results li {
+    border: 1px solid var(--bsl-border);
+    border-radius: 14px;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .bsl-results p {
+    margin: 0 0 8px;
+    font-size: 15px;
+  }
+  .bsl-results .bsl-metric {
+    color: var(--bsl-blue-light);
+    font-size: 24px;
+    font-weight: 800;
+  }
+  .bsl-results .bsl-source {
+    color: var(--bsl-muted);
+    font-size: 13px;
+    margin: 0;
+  }
+  .bsl-faq {
+    padding: 0;
+  }
+  .bsl-faq div {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--bsl-border);
+  }
+  .bsl-faq dt {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .bsl-faq dd {
+    margin: 0;
+  }
+  .bsl-cta {
+    padding: 28px;
+    border-radius: 18px;
+    border: 1px solid rgba(96, 165, 250, 0.35);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(255, 255, 255, 0.02));
+  }
+  .bsl-related {
+    margin-top: 40px;
+  }
+  .bsl-related-title,
+  .bsl-side-title {
+    font-size: 12px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--bsl-muted);
+    margin: 0 0 8px !important;
+  }
+  .bsl-related ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+  }
+  .bsl-imgcta {
+    margin-top: 48px;
+    display: grid;
+    gap: 0;
+    border: 1px solid var(--bsl-border);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #0d1525;
+  }
+  @media (min-width: 720px) {
+    .bsl-imgcta {
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+    }
+  }
+  .bsl-imgcta-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .bsl-imgcta-body {
+    padding: 24px;
+  }
+  .bsl-imgcta-body p {
+    font-size: 15px;
+  }
+  .bsl-imgcta .bsl-imgcta-title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .bsl-imgcta--final {
+    margin-top: 32px;
+    border-color: rgba(96, 165, 250, 0.4);
+  }
+  .bsl-video {
+    margin: 48px 0 0;
+  }
+  .bsl-video-frame {
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--bsl-border);
+  }
+  .bsl-video figcaption {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--bsl-muted);
+  }
+  .bsl-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.2;
+    white-space: nowrap;
+    transition:
+      background 0.15s ease,
+      transform 0.15s ease;
+  }
+  .bsl-btn:focus-visible {
+    outline: 2px solid var(--bsl-blue-light);
+    outline-offset: 2px;
+  }
+  .bsl-btn-lg {
+    padding: 14px 24px;
+    font-size: 16px;
+  }
+  .bsl-btn-primary {
+    background: var(--bsl-blue);
+    color: #fff;
+  }
+  .bsl-btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+  .bsl-btn-ghost {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .bsl-btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .bsl-side {
+    display: none;
+  }
+  @media (min-width: 1100px) {
+    .bsl-side {
+      display: block;
+    }
+  }
+  .bsl-side-inner {
+    position: sticky;
+    top: 150px;
+    display: grid;
+    gap: 20px;
+  }
+  .bsl-toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+  }
+  .bsl-toc a {
+    color: var(--bsl-muted);
+  }
+  .bsl-toc a:hover {
+    color: #fff;
+  }
+  .bsl-side-cta {
+    display: grid;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(96, 165, 250, 0.35);
+    background: rgba(37, 99, 235, 0.12);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bsl-side-cta p {
+    margin: 0;
+  }
+  .bsl-side-name {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+  }
+  .bsl-topbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--bsl-header-h, 0px);
+    z-index: 40;
+    transform: translateY(-120%);
+    opacity: 0;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+    background: rgba(8, 14, 26, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--bsl-border);
+  }
+  .bsl-topbar:global(.is-visible) {
+    transform: none;
+    opacity: 1;
+  }
+  .bsl-topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 15px;
+  }
+  .bsl-topbar-inner p {
+    margin: 0;
+  }
+  .bsl-topbar-inner strong {
+    color: #fff;
+  }
+  .bsl-topbar-actions {
+    display: flex;
+    gap: 8px;
+  }
+  @media (max-width: 640px) {
+    .bsl-hide-sm {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bsl-topbar,
+    .bsl-btn {
+      transition: none;
+    }
+  }
+</style>
