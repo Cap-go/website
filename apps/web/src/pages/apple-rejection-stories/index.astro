@@ -13,7 +13,8 @@ import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/
 const config = Astro.locals.runtimeConfig.public
 const locale = Astro.locals.locale
 const title = 'Apple App Store Rejection Stories | Capgo'
-const description = 'Anonymized real App Store rejection stories tagged by guideline (4.3, 2.1, metadata, review delays, and more). Lessons only, no names or source links.'
+const description =
+  'Anonymized real App Store rejection stories tagged by guideline (4.3, 2.1, metadata, review delays, objectionable content, and more). Lessons only, no names or source links.'
 const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
 const githubStoriesUrl = `https://github.com/Cap-go/website/tree/main/${appleRejectionStoriesContentPath}`
 
@@ -24,6 +25,7 @@ const tagStyles: Record<string, string> = {
   'endless-review': 'border-amber-200 bg-amber-50 text-amber-950',
   'account-termination': 'border-red-300 bg-red-100 text-red-950',
   'login-requirement': 'border-teal-200 bg-teal-50 text-teal-950',
+  'objectionable-content': 'border-orange-200 bg-orange-50 text-orange-950',
 }
 
 const itemList = createItemListLdJson(config, {
