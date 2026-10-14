@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-10T00:00:00.000Z
-updated_at: 2026-10-13T00:00:00.000Z
+updated_at: 2026-10-14T00:17:22.000Z
 head_image: /blog-images/how-to-pass-app-store-review-2026.webp
 head_image_alt: "How to pass App Store review in 2026 and avoid rejection Capgo blog illustration"
 keywords: how to pass app store review, pass app store review, app store rejection reasons, app store rejected, guideline 4.2 minimum functionality, guideline 4.3 spam, guideline 4.3(a) design spam, app store review times 2026, app store review taking too long, app store rejection appeal, app store web wrapper, capacitor, live updates
