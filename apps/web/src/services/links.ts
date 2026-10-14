@@ -56,3 +56,10 @@ export function canonicalizeInternalPath(value = ''): string {
 export function getRelativeLocaleUrl(locale: string, path = ''): string {
   return getAstroRelativeLocaleUrl(locale, canonicalizeInternalPath(path))
 }
+
+export function getAbsoluteLocaleUrl(baseUrl: string, locale: string, path = ''): string {
+  const relative = getRelativeLocaleUrl(locale, path)
+  if (/^https?:\/\//i.test(relative)) return relative
+  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`
+  return new URL(relative, normalizedBase).toString()
+}
