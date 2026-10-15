@@ -188,6 +188,7 @@ form?.addEventListener('submit', async (e) => {
       },
     }).showToast()
   }
+  ;(window as any).oaiq?.('measure', 'registration_completed', { type: 'customer_action' })
   if ((window as any).datafast) {
     ;(window as any).datafast('signup', { email: email.value })
   }

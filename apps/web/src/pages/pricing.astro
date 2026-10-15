@@ -15,7 +15,7 @@ import SignupCta from '@/components/SignupCta.astro'
 import AiPricingPrompt from '@/components/pricing/AiPricingPrompt.astro'
 import { planMonthlyPrice, planYearlyPrice } from '@/lib/planCopy'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
-import { capgoReviews } from '@/config/productTestimonials'
+import { capgoReviews, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 import { getPricingFaqLdJsonQuestions } from '@/lib/pricingFaq'
 
 const locale = Astro.locals.locale
@@ -57,6 +57,8 @@ if (plans.length > 0) {
     description: description,
     url: pricingUrl,
     sku: 'capgo',
+    aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+    reviews: toProductReviewLdJson(capgoReviews),
     offers: plans.map((plan) => ({
       name: plan.name,
       price: planMonthlyPrice(plan).toString(),

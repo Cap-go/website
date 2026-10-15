@@ -4,6 +4,8 @@ export const shorebird: AlternativeCompetitor = {
   slug: 'shorebird',
   name: 'Shorebird',
   category: 'live-updates',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-13',
   metaTitle: 'Best Shorebird Alternative in 2026 | Capgo',
   metaDescription:
     'Shorebird vs Capgo: Flutter code push or Capacitor live updates with cloud native builds. Compare pricing, what you can update, rollback, and open source.',

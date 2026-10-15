@@ -4,10 +4,12 @@ import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import { productVideos } from '@/config/productVideos'
 import m from '@/copy/messages'
-import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { pageDates, toIsoDate } from '@/data/pageDates'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
+const dates = pageDates['alternatives/ionic-appflow']
 const config = Astro.locals.runtimeConfig.public
 const title = m.capflow_title({}, { locale })
 const description = m.capflow_meta_description({}, { locale })
@@ -33,7 +35,17 @@ const ldJSON = createLdJsonGraph(
   }),
   {
     includeOrganization: true,
-    additionalEntities: [createFAQPageLdJson(config, { url: Astro.url.href, questions: faq })],
+    additionalEntities: [
+      createWebPageLdJson(config, {
+        name: title,
+        description,
+        url: Astro.url.href,
+        datePublished: toIsoDate(dates.publishedAt),
+        dateModified: toIsoDate(dates.updatedAt),
+        inLanguage: locale,
+      }),
+      createFAQPageLdJson(config, { url: Astro.url.href, questions: faq }),
+    ],
   },
 )
 
@@ -123,6 +135,7 @@ const related = [
 
 <Layout content={content}>
   <ComparisonPage
+    updatedAt={dates.updatedAt}
     competitor={competitor}
     eyebrow={m.compare_appflow_eyebrow({}, { locale })}
     heading={m.compare_appflow_h1({}, { locale })}

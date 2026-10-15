@@ -1,11 +1,18 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.security_policy({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.read_our_security_policy({}, { locale: Astro.locals.locale })
 
-const content = { title, description }
+const ldJSON = createLdJsonGraph(
+  Astro.locals.runtimeConfig.public,
+  createWebPageLdJson(Astro.locals.runtimeConfig.public, { name: title, description, url: Astro.url.href, inLanguage: Astro.locals.locale }),
+  { includeOrganization: true },
+)
+
+const content = { title, description, ldJSON }
 ---
 
 <Layout content={content}>

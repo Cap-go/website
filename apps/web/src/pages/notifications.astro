@@ -1,10 +1,10 @@
 ---
 import m from '@/copy/messages'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
-import { productTestimonials } from '@/config/productTestimonials'
+import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
-import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
 import SignupCta from '@/components/SignupCta.astro'
@@ -27,8 +27,27 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Notifications',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Native push notifications for Capacitor apps',
+  operatingSystem: 'iOS, Android',
+  featureList: [
+    'Native iOS and Android push delivery',
+    'Target users by external ID, tags, and attributes',
+    'Badge updates and open tracking',
+    'Silent push to trigger live update checks',
+    'Broadcasts and API sends',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(productTestimonials.notifications),
+})
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [softwareLdJson],
 })
 
 const content = {

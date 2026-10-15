@@ -4,6 +4,8 @@ export const codemagic: AlternativeCompetitor = {
   slug: 'codemagic',
   name: 'Codemagic',
   category: 'ci-cd',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-13',
   metaTitle: 'Best Codemagic Alternative in 2026 | Capgo',
   metaDescription:
     'Codemagic vs Capgo for Capacitor: compare Codemagic CI/CD and Codemagic Patch with Capgo hosted live updates, channels, rollback, and cloud native builds.',

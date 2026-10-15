@@ -4,6 +4,8 @@ export const flutterflow: AlternativeCompetitor = {
   slug: 'flutterflow',
   name: 'FlutterFlow',
   category: 'framework',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best FlutterFlow Alternative in 2026 | Capgo',
   metaDescription:
     'Compare FlutterFlow with Capacitor and Capgo. Turn your web code into iOS and Android apps, ship live updates without store review, and build in the cloud.',

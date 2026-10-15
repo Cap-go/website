@@ -4,6 +4,8 @@ export const pushy: AlternativeCompetitor = {
   slug: 'pushy',
   name: 'Pushy',
   category: 'live-updates',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Pushy Alternative in 2026 | Capgo',
   metaDescription:
     'Pushy (react-native-update) vs Capgo: React Native hot updates or Capacitor live updates with cloud builds. Compare pricing, diff patches, rollback, support.',

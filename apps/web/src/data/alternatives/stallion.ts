@@ -4,6 +4,8 @@ export const stallion: AlternativeCompetitor = {
   slug: 'stallion',
   name: 'Stallion',
   category: 'live-updates',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Stallion Alternative in 2026 | Capgo',
   metaDescription:
     'Stallion vs Capgo: managed React Native OTA or Capacitor live updates with cloud builds. Compare pricing, patch updates, rollback, open source, and support.',

@@ -1,0 +1,40 @@
+---
+import { getRelativeLocaleUrl } from '@/services/links'
+
+interface Props {
+  active: 'humans' | 'agents'
+  class?: string
+}
+
+const { active, class: className } = Astro.props
+const locale = Astro.locals.locale
+
+const options = [
+  { key: 'humans', label: 'For humans', href: getRelativeLocaleUrl(locale, '') },
+  { key: 'agents', label: 'For agents', href: getRelativeLocaleUrl(locale, 'for-agents') },
+] as const
+---
+
+<nav aria-label="Choose site version" class:list={['font-pj inline-flex rounded-2xl border border-white/10 bg-white/5 p-1 text-sm font-semibold', className]}>
+  {options.map((option) => (
+    <a
+      href={option.href}
+      data-audience-switch={option.key}
+      aria-current={option.key === active ? 'page' : undefined}
+      class:list={[
+        'flex h-9 items-center rounded-xl px-4 whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none',
+        option.key === active ? 'bg-white text-gray-950 shadow-lg shadow-black/30' : 'text-slate-300 hover:bg-white/10 hover:text-white',
+      ]}
+    >
+      {option.label}
+    </a>
+  ))}
+</nav>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('[data-audience-switch]').forEach((link) => {
+    link.addEventListener('click', () => {
+      ;(window as any).posthog?.capture('audience_switch_click', { to: link.dataset.audienceSwitch, from: window.location.pathname })
+    })
+  })
+</script>

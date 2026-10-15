@@ -4,6 +4,8 @@ export const hotUpdater: AlternativeCompetitor = {
   slug: 'hot-updater',
   name: 'Hot Updater',
   category: 'live-updates',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Hot Updater Alternative in 2026 | Capgo',
   metaDescription:
     'Hot Updater vs Capgo: self-hosted React Native OTA or managed Capacitor live updates with cloud builds. Compare cost, rollback, open source, and support.',

@@ -4,6 +4,8 @@ export const lynx: AlternativeCompetitor = {
   slug: 'lynx',
   name: 'Lynx',
   category: 'framework',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Lynx Alternative in 2026 | Capgo',
   metaDescription:
     'Compare ByteDance Lynx with Capacitor and Capgo. Run your existing web app on iOS and Android, ship live updates with rollback, and build in the cloud.',

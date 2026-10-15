@@ -4,6 +4,8 @@ export const cordova: AlternativeCompetitor = {
   slug: 'cordova',
   name: 'Apache Cordova',
   category: 'framework',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Apache Cordova Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Apache Cordova with Capacitor and Capgo. Keep your web code and Cordova plugins, add live updates, rollback, and cloud native builds.',

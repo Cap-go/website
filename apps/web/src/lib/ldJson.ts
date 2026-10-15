@@ -246,6 +246,7 @@ export function createSoftwareApplicationLdJson(
       ratingValue: number
       reviewCount: number
     }
+    reviews?: ProductReviewInput[]
     offers?: {
       price: string
       priceCurrency: string
@@ -268,12 +269,17 @@ export function createSoftwareApplicationLdJson(
   if (options.operatingSystem) app.operatingSystem = options.operatingSystem
   if (options.softwareVersion) app.softwareVersion = options.softwareVersion
   if (options.downloadUrl) app.downloadUrl = options.downloadUrl
+  if (options.reviews?.length) app.review = createReviewsLdJson(options.reviews)
   if (options.aggregateRating) {
     app.aggregateRating = {
       '@type': 'AggregateRating',
       ratingValue: options.aggregateRating.ratingValue,
       reviewCount: options.aggregateRating.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
     }
+  } else if (options.reviews?.length) {
+    app.aggregateRating = createAggregateRatingLdJson(options.reviews)
   }
   if (options.offers) {
     app.offers = {
@@ -472,15 +478,24 @@ export function createWebPageLdJson(
     name: string
     description: string
     url: string
+    datePublished?: string
+    dateModified?: string
+    inLanguage?: string
   },
 ): WebPage {
-  return {
+  const page: WebPage = {
     '@type': 'WebPage',
     '@id': `${options.url}#webpage`,
     name: options.name,
     description: options.description,
     url: options.url,
   }
+
+  if (options.datePublished) page.datePublished = options.datePublished
+  if (options.dateModified) page.dateModified = options.dateModified
+  if (options.inLanguage) page.inLanguage = options.inLanguage
+
+  return page
 }
 
 /**

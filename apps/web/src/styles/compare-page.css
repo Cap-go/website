@@ -72,6 +72,12 @@
   border-radius: 50%;
   background: var(--relief-blue);
 }
+.lu .cmp-updated {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
 .lu .final .cmp-meta {
   margin-top: 24px;
 }

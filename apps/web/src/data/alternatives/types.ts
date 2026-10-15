@@ -26,6 +26,10 @@ export interface AlternativeCompetitor {
   /** Display name, e.g. 'React Native' or 'Despia'. */
   name: string
   category: AlternativeCategory
+  /** First publish date, YYYY-MM-DD. */
+  publishedAt: string
+  /** Last time the facts on the page changed, YYYY-MM-DD. Bump it whenever you edit this file's content. */
+  updatedAt: string
   /** <title>. 30-60 characters, contains "<name> alternative". */
   metaTitle: string
   /** 120-160 characters. */

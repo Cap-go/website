@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Subscription price prominence">
+  <title>Subscription price prominence</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="52" cy="156" r="24" fill="#44BCFF" opacity="0.3"/>
+      <rect x="88" y="48" width="144" height="104" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+      <text x="160" y="110" text-anchor="middle" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="42" font-weight="700">$</text>
+      <rect x="108" y="132" width="104" height="8" rx="4" fill="#9CA3AF" opacity="0.5"/>
+</svg>

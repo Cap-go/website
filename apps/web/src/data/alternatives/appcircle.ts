@@ -4,6 +4,8 @@ export const appcircle: AlternativeCompetitor = {
   slug: 'appcircle',
   name: 'Appcircle',
   category: 'ci-cd',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-13',
   metaTitle: 'Best Appcircle Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Appcircle and Capgo for Capacitor apps. Capgo Builder signs iOS and Android builds in the cloud and adds live updates, with pricing from $12/month.',

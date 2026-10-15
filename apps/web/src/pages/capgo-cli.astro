@@ -7,18 +7,39 @@ import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import { getProductScreens } from '@/config/productScreens'
 import { productVideos } from '@/config/productVideos'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
-import { productTestimonials } from '@/config/productTestimonials'
+import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 
 const title = 'Capgo CLI + MCP | Build, preview, and ship Capacitor apps safely'
 const description = 'Use the Capgo CLI to set up Capacitor apps, ship safe live updates, check compatibility, request native builds, and give AI agents Capgo tools via MCP.'
+const cliLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo CLI',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Command-line tool and MCP server for Capacitor releases',
+  operatingSystem: 'macOS, Linux, Windows',
+  downloadUrl: 'https://www.npmjs.com/package/@capgo/cli',
+  featureList: [
+    'Set up Capacitor live updates with one init command',
+    'Upload live update bundles to channels with native compatibility checks',
+    'Decide whether a release can ship over the air or needs a native build',
+    'Request signed iOS and Android cloud builds',
+    'MCP server that gives AI agents Capgo tools for apps, bundles, channels, builds, and stats',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(productTestimonials.cli),
+})
+
 const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-cli.png`,
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, cliLdJson, { includeOrganization: true }),
 }
 
 const locale = Astro.locals.locale

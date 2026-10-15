@@ -4,6 +4,8 @@ export const mobiloud: AlternativeCompetitor = {
   slug: 'mobiloud',
   name: 'MobiLoud',
   category: 'web-to-app',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best MobiLoud Alternative in 2026 | Capgo',
   metaDescription:
     'Compare MobiLoud and Capgo. A managed ecommerce app service from $1,499/month vs Capacitor with Capgo live updates and cloud builds from $12/month.',

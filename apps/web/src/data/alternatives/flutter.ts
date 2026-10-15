@@ -4,6 +4,8 @@ export const flutter: AlternativeCompetitor = {
   slug: 'flutter',
   name: 'Flutter',
   category: 'framework',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Flutter Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Flutter with Capacitor and Capgo. Keep your web stack instead of Dart, ship one codebase to web and mobile, and push live updates without store review.',

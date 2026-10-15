@@ -6911,6 +6911,91 @@ const messages = {
   migrate_from_codepush_steps_li1: 'Read App Center migration articles on the blog',
   migrate_from_codepush_steps_li2: 'Compare CodePush vs Capgo on the alternative page',
   migrate_from_codepush_steps_li3: 'Register a Capgo account and upload a test bundle',
+  page_last_updated: 'Last updated',
+  review_appflow_faq_q1: 'Is Ionic Appflow shutting down?',
+  review_appflow_faq_a1:
+    'Yes. Ionic is winding down Appflow, including Live Updates. It no longer accepts new customers, no new features are planned, and existing projects can run until December 31, 2027.',
+  review_appflow_faq_q2: 'Can new teams still sign up for Appflow?',
+  review_appflow_faq_a2: 'No. Appflow is closed to new customers, so new Capacitor and Ionic projects need another service for live updates and cloud builds.',
+  review_appflow_faq_q3: 'What replaces Appflow for Capacitor apps?',
+  review_appflow_faq_a3:
+    'Capgo covers the same jobs: channel-based live updates, cloud iOS and Android builds, and store publishing, while you keep GitHub Actions, GitLab CI, or any other CI. Plans start at $12/month billed yearly, with a 14-day free trial.',
+  review_appflow_faq_q4: 'Do I have to rewrite my app to leave Appflow?',
+  review_appflow_faq_a4:
+    'No. Replace the @capacitor/live-updates plugin with @capgo/capacitor-updater, call CapacitorUpdater.notifyAppReady() at startup, and ship one new store build. Your web code stays the same.',
+  review_capawesome_faq_q1: 'What is Capawesome Cloud?',
+  review_capawesome_faq_a1:
+    'A hosted service from Capawesome (Genz IT Solutions GmbH, Germany) for Capacitor live updates, launched in 2024. Platform plans add cloud iOS and Android builds and store publishing.',
+  review_capawesome_faq_q2: 'How much does Capawesome Cloud cost?',
+  review_capawesome_faq_a2:
+    'Live Updates plans run from $9/month (1K MAU) to $249/month (250K MAU). Platform plans with native builds run from $19/month to $499/month. Capgo starts at $12/month billed yearly, with native build time included.',
+  review_capawesome_faq_q3: 'Is Capawesome Cloud open source?',
+  review_capawesome_faq_a3:
+    'The Live Update plugin and CLI are open source under MIT, but the cloud service is hosted by Capawesome and bundle metadata stays there. The Capgo updater is MPL-2.0 and its backend is AGPL-3.0, so you can run the whole stack yourself.',
+  review_capawesome_faq_q4: 'Can I keep Capawesome plugins if I move live updates to Capgo?',
+  review_capawesome_faq_a4:
+    'Yes. The live update plugin is separate from the rest. Remove @capawesome/capacitor-live-update, install @capgo/capacitor-updater, and keep any other Capawesome plugins you use.',
+  review_codepush_faq_q1: 'Is Microsoft CodePush still available?',
+  review_codepush_faq_a1: 'No. Microsoft retired App Center, including hosted CodePush, on March 31, 2025, and archived the standalone CodePush server repository.',
+  review_codepush_faq_q2: 'What should React Native teams use instead of CodePush?',
+  review_codepush_faq_a2: 'EAS Update from Expo, or a self-hosted copy of the archived CodePush server. Capgo does not support React Native.',
+  review_codepush_faq_q3: 'What should Capacitor, Ionic, and Cordova teams use instead of CodePush?',
+  review_codepush_faq_a3:
+    'Capgo. It ships JavaScript, HTML, CSS, and asset changes without store review, with channels, encrypted bundles, automatic rollback, and one-click revert. Plans start at $12/month billed yearly.',
+  review_codepush_faq_q4: 'Is Capgo a drop-in CodePush SDK replacement?',
+  review_codepush_faq_a4:
+    'No. Capgo uses its own Capacitor plugin, @capgo/capacitor-updater. You remove the CodePush SDK and deployment keys, install the Capgo updater, and recreate your deployments as Capgo channels.',
+  migrate_from_appflow_faq_q1: 'What code changes does the Appflow migration need?',
+  migrate_from_appflow_faq_a1:
+    'Uninstall @capacitor/live-updates, install @capgo/capacitor-updater, run cap sync, and call CapacitorUpdater.notifyAppReady() at startup. Capgo runs the sync, download, and reload steps natively, so you can delete that code.',
+  migrate_from_appflow_faq_q2: 'Do I need a new App Store and Google Play release?',
+  migrate_from_appflow_faq_a2:
+    'Yes, once. The updater is a native plugin, so ship one store build that includes Capgo. After that, web changes reach users as live updates. Users on older builds keep pulling from Appflow until they update.',
+  migrate_from_appflow_faq_q3: 'What happens to my Appflow channels and version matching?',
+  migrate_from_appflow_faq_a3:
+    'Recreate your channels in the Capgo dashboard. Capgo version targeting covers Appflow automatic version matching, so each native version only receives compatible bundles.',
+  migrate_from_appflow_faq_q4: 'When do I need to finish the migration?',
+  migrate_from_appflow_faq_a4:
+    'Existing Appflow projects can run until December 31, 2027. Ship the Capgo build well before then so most users have updated when Appflow stops serving bundles.',
+  migrate_from_capawesome_faq_q1: 'What code changes does the Capawesome migration need?',
+  migrate_from_capawesome_faq_a1:
+    'Uninstall @capawesome/capacitor-live-update, install @capgo/capacitor-updater, run cap sync, and call CapacitorUpdater.notifyAppReady() at startup. Channels, bundle cleanup, and rollback are handled by Capgo.',
+  migrate_from_capawesome_faq_q2: 'Which Capacitor versions are supported?',
+  migrate_from_capawesome_faq_a2: 'Capacitor 5 or later. Upgrade older projects first, then switch the live update plugin.',
+  migrate_from_capawesome_faq_q3: 'Do I need a new store release?',
+  migrate_from_capawesome_faq_a3: 'Yes, once. Swapping the live update plugin is a native change. After that build is live, web changes ship through Capgo without store review.',
+  migrate_from_capawesome_faq_q4: 'Can I keep my CI pipeline?',
+  migrate_from_capawesome_faq_a4: 'Yes. Replace the Capawesome upload step with npx @capgo/cli@latest bundle upload. GitHub Actions, GitLab CI, and other pipelines keep working.',
+  migrate_from_codepush_faq_q1: 'Can I move a React Native CodePush app to Capgo?',
+  migrate_from_codepush_faq_a1: 'No. Capgo updates Capacitor, Cordova, and Electron apps. React Native teams should look at EAS Update or self-host the archived CodePush server.',
+  migrate_from_codepush_faq_q2: 'What are the first steps for a Capacitor or Cordova app?',
+  migrate_from_codepush_faq_a2:
+    'Remove the CodePush SDK and its deployment keys, drop the App Center release step from CI, then run npx @capgo/cli@latest init in your project to install the updater and upload a first bundle.',
+  migrate_from_codepush_faq_q3: 'How do CodePush deployments map to Capgo?',
+  migrate_from_codepush_faq_a3:
+    'Recreate Staging and Production as Capgo channels, then upload with npx @capgo/cli@latest bundle upload --channel=production. Channels also support device overrides and progressive rollouts.',
+  migrate_from_codepush_faq_q4: 'How does rollback work in Capgo?',
+  migrate_from_codepush_faq_a4:
+    'If a new bundle never calls CapacitorUpdater.notifyAppReady(), Capgo rolls back to the previous bundle automatically. You can also revert a channel to any earlier bundle in one click.',
+  codepush_alt_faq_q1: 'When did Microsoft CodePush shut down?',
+  codepush_alt_faq_a1: 'Microsoft retired App Center, including hosted CodePush, on March 31, 2025. The standalone server repository is archived.',
+  codepush_alt_faq_q2: 'Is there a free CodePush replacement?',
+  codepush_alt_faq_a2:
+    'The archived CodePush server is free under MIT, but you host, patch, and support it yourself. Capgo has no free plan; it has a 14-day free trial, and its updater (MPL-2.0) and backend (AGPL-3.0) are open source if you want to self-host.',
+  codepush_alt_faq_q3: 'Does Capgo support React Native?',
+  codepush_alt_faq_a3: 'No. Capgo is built for Capacitor, Ionic, Cordova, and Electron apps. React Native teams can use EAS Update instead.',
+  codepush_alt_faq_q4: 'How much does Capgo cost?',
+  codepush_alt_faq_a4: 'From $12/month billed yearly or $14 billed monthly, with a 14-day free trial and no credit card required.',
+  voltbuilder_alt_faq_q1: 'Does VoltBuilder offer live updates?',
+  voltbuilder_alt_faq_a1: 'No. VoltBuilder builds, signs, and uploads binaries. Every change still ships as a new store build.',
+  voltbuilder_alt_faq_q2: 'Can I use VoltBuilder and Capgo together?',
+  voltbuilder_alt_faq_a2:
+    'Yes. Keep VoltBuilder for store builds and add npx @capgo/cli@latest bundle upload after your web build, so web changes reach users without a new store release.',
+  voltbuilder_alt_faq_q3: 'Do I need a Mac to build iOS apps with Capgo?',
+  voltbuilder_alt_faq_a3: 'No. Capgo Builder builds and signs iOS and Android binaries in the cloud, typically in 2–3 minutes, and can upload them to the stores.',
+  voltbuilder_alt_faq_q4: 'How do VoltBuilder and Capgo prices compare?',
+  voltbuilder_alt_faq_a4:
+    'VoltBuilder Indy is $15/month and Pro is $37/month, for builds only. Capgo starts at $12/month billed yearly and includes native build time and live updates.',
   mcp_page_title: 'Capgo MCP for AI agents',
   mcp_page_meta_description: 'Connect AI agents to Capgo: hosted account MCP at api.capgo.app/mcp with OAuth, a public docs MCP at /mcp, and the CLI MCP for uploads and builds.',
   mcp_page_hero_title: 'Model Context Protocol (MCP) on Capgo',

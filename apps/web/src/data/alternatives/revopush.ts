@@ -4,6 +4,8 @@ export const revopush: AlternativeCompetitor = {
   slug: 'revopush',
   name: 'Revopush',
   category: 'live-updates',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best Revopush Alternative in 2026 | Capgo',
   metaDescription:
     'Revopush vs Capgo: CodePush-compatible React Native updates or Capacitor live updates with cloud builds. Compare pricing, rollback, open source, and support.',

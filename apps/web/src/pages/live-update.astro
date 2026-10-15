@@ -5,11 +5,11 @@ import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import { productVideos } from '@/config/productVideos'
-import { productTestimonials } from '@/config/productTestimonials'
+import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
-import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
@@ -37,6 +37,27 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Live Updates',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Over-the-air live updates for Capacitor apps',
+  operatingSystem: 'iOS, Android',
+  featureList: [
+    'Over-the-air JavaScript, HTML, CSS, and asset updates without app store review',
+    'Delta downloads and end-to-end encrypted, signed bundles',
+    'Dynamic channels, device overrides, and progressive rollouts',
+    'Automatic rollback when a bundle fails to start, plus one-click revert',
+    'Version targeting so each native version only receives compatible bundles',
+    'Works with Capacitor, Ionic, Cordova, and Electron apps',
+    'Open-source updater plugin (MPL-2.0) and backend (AGPL-3.0)',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(productTestimonials.liveUpdate),
+  offers: { price: '12', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+})
+
 const faqItems = [
   { question: m.live_update_faq_q1({}, { locale }), answer: m.live_update_faq_a1({}, { locale }) },
   { question: m.live_update_faq_q2({}, { locale }), answer: m.live_update_faq_a2({}, { locale }) },
@@ -46,7 +67,7 @@ const faqItems = [
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
-  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
+  additionalEntities: [softwareLdJson, createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = {

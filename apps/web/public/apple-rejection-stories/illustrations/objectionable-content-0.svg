@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Objectionable content warning">
+  <title>Objectionable content warning</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="56" cy="164" r="16" fill="#44BCFF" opacity="0.35"/>
+      <path d="M160 52 L220 164 H100 Z" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+      <path d="M160 88 V124" stroke="#44BCFF" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="160" cy="136" r="4" fill="#44BCFF" opacity="0.7"/>
+</svg>

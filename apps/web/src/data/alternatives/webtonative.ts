@@ -4,6 +4,8 @@ export const webtonative: AlternativeCompetitor = {
   slug: 'webtonative',
   name: 'WebToNative',
   category: 'web-to-app',
+  publishedAt: '2026-10-12',
+  updatedAt: '2026-10-12',
   metaTitle: 'Best WebToNative Alternative in 2026 | Capgo',
   metaDescription:
     'Compare WebToNative and Capgo. A low-cost website-to-app wrapper vs Capacitor with live updates, rollback, channels, and cloud native builds you own.',

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Simulated gambling coin">
+  <title>Simulated gambling coin</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="48" cy="148" r="22" fill="#44BCFF" opacity="0.25"/>
+      <circle cx="160" cy="104" r="44" fill="#111827" stroke="#44BCFF" stroke-width="3"/>
+      <text x="160" y="118" text-anchor="middle" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="28" font-weight="700">$</text>
+      <circle cx="200" cy="72" r="6" fill="#44BCFF" opacity="0.6"/>
+</svg>
