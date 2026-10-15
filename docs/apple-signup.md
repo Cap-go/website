@@ -1,6 +1,6 @@
 # Website Apple account creation
 
-This website change depends on the shared backend/iOS Apple authentication PR on `Cap-go/capgo.app` (`wolny/shared-apple-auth`, authoritative `docs/apple-auth-api.md`). Deploy that PR's database migration, API and console before enabling this website option. Merging the website PR alone leaves Apple hidden.
+This website change depends on [Cap-go/capgo.app backend/iOS PR #3715](https://github.com/Cap-go/capgo.app/pull/3715) (authoritative `docs/apple-auth-api.md`). Deploy that PR's database migration, API and console before enabling this website option. Merging the website PR alone leaves Apple hidden.
 
 Email remains the first action on `/register/`, including translated routes. Apple appears below it only when `GET https://api.capgo.app/auth/apple/capabilities` returns `web.enabled: true` and includes the exact `https://console.capgo.app/login` callback in `web.redirect_uris`. Failed, malformed, disabled or missing capabilities leave email available. Availability is checked again on click.
 
