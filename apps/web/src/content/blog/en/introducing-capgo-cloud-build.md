@@ -30,7 +30,7 @@ faq:
 Building native mobile apps has always been a pain point for web developers. You need:
 
 - **Local Development Tools**: Install and maintain Xcode (30+ GB) and Android Studio on your machine
-- **Mac Hardware**: iOS builds traditionally require buying and maintaining Mac hardware for every developer and release path
+- **Mac access**: Shipping iOS builds traditionally required Mac access on every developer machine and release path
 - **CI/CD Configuration**: Set up complex GitHub Actions or other CI/CD workflows with build caching, credentials management, and more
 - **Dependency Management**: Keep build tools, SDKs, and certificates up to date across environments
 
@@ -247,7 +247,7 @@ No surprise fees, no minimum commitments. You only pay for what you use.
 
 One important principle of Capgo Cloud Build: **we only build the native parts**.
 
-Your JavaScript, HTML, and CSS stay on your side. We never process, inspect, or store your web code. You're responsible for building your web assets locally (using `npm run build` or your preferred build tool), and we handle the native compilation.
+Your web source code and dependency installation stay on your side. After `cap sync`, the compiled JavaScript, HTML, and CSS in the native project are uploaded and used for the build, then temporary project data is cleaned up. You're responsible for building your web assets locally (using `npm run build` or your preferred build tool), and we handle the native compilation.
 
 This separation is intentional:
 - **Better security** - Your application logic never leaves your control
