@@ -140,6 +140,20 @@ describe('built registration Apple entry', () => {
     }
   }, 30_000)
 
+  test('uses translated status text rendered by the edge worker', async () => {
+    const { page, context } = await fixture()
+    try {
+      await page.evaluate(() => {
+        document.querySelector('[data-apple-status="closed"]')!.textContent = 'La connexion Apple a été fermée.'
+      })
+      await (await openApple(page)).close()
+      await page.waitForFunction(() => !(document.querySelector('#appleSignupButton') as HTMLButtonElement).disabled)
+      expect(await page.locator('#appleSignupError').innerText()).toBe('La connexion Apple a été fermée.')
+    } finally {
+      await context.close()
+    }
+  }, 30_000)
+
   test('a revoked capability closes the popup, shows a clear error and leaves email usable', async () => {
     const { page, context, events, control } = await fixture()
     try {

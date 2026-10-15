@@ -21,6 +21,7 @@ const appleSignup = document.getElementById('appleSignup')
 const appleButton = document.getElementById('appleSignupButton') as HTMLButtonElement | null
 const appleError = document.getElementById('appleSignupError')
 const apiBaseUrl = useRuntimeConfig().public.baseApiUrl
+const appleMessage = (key: string) => document.querySelector<HTMLElement>(`#appleSignupMessages [data-apple-status="${key}"]`)?.textContent?.trim() ?? ''
 
 // This capability is supplied by the shared backend only after provider setup and rollout.
 // Email registration does not wait for this independent check.
@@ -60,7 +61,7 @@ if (appleSignup && appleButton) {
       const completion = readAppleCompletion(event, popup, websiteState)
       if (!completion) return
       // Remove the listener before reporting, so retries/duplicate messages count once.
-      finish('You are signed in. Opening the Capgo console…')
+      finish(appleMessage('success'))
       reportAppleRegistration(window as any, completion, conversionProps)
       window.setTimeout(() => {
         popup.close()
@@ -73,11 +74,11 @@ if (appleSignup && appleButton) {
       if (!(await isAppleSignupAvailable(apiBaseUrl))) {
         appleSignup.hidden = true
         popup?.close()
-        finish('Apple sign-in is unavailable. Please use email or try again later.')
+        finish(appleMessage('unavailable'))
         return
       }
       if (popup?.closed) {
-        finish('Apple sign-in was cancelled. Try again or use email.')
+        finish(appleMessage('cancelled'))
         return
       }
       const metadata = getSignupUserMetadataForRegistration()
@@ -107,16 +108,16 @@ if (appleSignup && appleButton) {
       window.addEventListener('message', onCompletion)
       popup.location.href = consoleUrl
       if (appleError) {
-        appleError.textContent = 'Complete sign-in in the Apple window. You can close it to cancel.'
+        appleError.textContent = appleMessage('window')
         appleError.hidden = false
       }
       poll = window.setInterval(() => {
-        if (popup.closed) finish('Apple sign-in was closed. If you did not finish, try again or use email.')
+        if (popup.closed) finish(appleMessage('closed'))
       }, 500)
-      timeout = window.setTimeout(() => finish('Apple sign-in timed out. Try again or use email.'), 600_000)
+      timeout = window.setTimeout(() => finish(appleMessage('timed_out')), 600_000)
     } catch {
       popup?.close()
-      finish('Unable to open Apple sign-in. Please try again or use email.')
+      finish(appleMessage('open_failed'))
     }
   })
 }

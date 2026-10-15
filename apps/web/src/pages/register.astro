@@ -141,6 +141,16 @@ const content = {
               </button>
             </div>
             <p id="appleSignupError" class="text-sm text-slate-300" role="status" hidden></p>
+            <!-- Text nodes are translated by the edge worker; data attribute values are not. -->
+            <div id="appleSignupMessages" hidden>
+              <span data-apple-status="cancelled">{m.register_apple_cancelled({}, { locale: Astro.locals.locale })}</span>
+              <span data-apple-status="closed">{m.register_apple_closed({}, { locale: Astro.locals.locale })}</span>
+              <span data-apple-status="open_failed">{m.register_apple_open_failed({}, { locale: Astro.locals.locale })}</span>
+              <span data-apple-status="success">{m.register_apple_success({}, { locale: Astro.locals.locale })}</span>
+              <span data-apple-status="timed_out">{m.register_apple_timed_out({}, { locale: Astro.locals.locale })}</span>
+              <span data-apple-status="unavailable">{m.register_apple_unavailable({}, { locale: Astro.locals.locale })}</span>
+              <span data-apple-status="window">{m.register_apple_window({}, { locale: Astro.locals.locale })}</span>
+            </div>
             <p
               class="text-center text-xs text-slate-500 [&_a]:text-slate-300 [&_a]:underline [&_a]:underline-offset-2"
               set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })}
