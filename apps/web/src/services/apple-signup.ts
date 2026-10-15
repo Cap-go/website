@@ -1,4 +1,5 @@
-export const APPLE_CONSOLE_LOGIN_URL = 'https://console.capgo.app/login'
+export const APPLE_CONSOLE_ORIGIN = 'https://console.capgo.app'
+export const APPLE_CONSOLE_LOGIN_URL = `${APPLE_CONSOLE_ORIGIN}/login`
 
 export interface AppleCompletion {
   is_new_user: boolean
@@ -8,7 +9,7 @@ export interface AppleCompletion {
 export function readAppleCompletion(event: MessageEvent, popup: Window, state: string): AppleCompletion | null {
   const data = event.data
   if (
-    event.origin !== new URL(APPLE_CONSOLE_LOGIN_URL).origin ||
+    event.origin !== APPLE_CONSOLE_ORIGIN ||
     event.source !== popup ||
     !state ||
     !data ||

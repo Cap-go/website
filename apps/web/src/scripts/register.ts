@@ -1,6 +1,6 @@
 import { useRuntimeConfig } from '@/config/app'
 import { getSignupAttributionForEvents, getSignupUserMetadataForRegistration } from '@/lib/attribution'
-import { APPLE_CONSOLE_LOGIN_URL, buildAppleSignupUrl, isAppleSignupAvailable, readAppleCompletion } from '@/services/apple-signup'
+import { APPLE_CONSOLE_LOGIN_URL, APPLE_CONSOLE_ORIGIN, buildAppleSignupUrl, isAppleSignupAvailable, readAppleCompletion } from '@/services/apple-signup'
 import { reportAppleRegistration } from '@/services/registration-analytics'
 import { getRegistrationDevice } from '@/services/registration-device'
 import { getRemoteConfig, isSupabaseConfigured, useSupabase } from '@/services/supabase'
@@ -56,7 +56,7 @@ if (appleSignup && appleButton) {
     const variant = document.querySelector<HTMLMetaElement>('meta[name="capgo-ab-variant"]')?.content ?? ''
     const conversionProps = { ...attribution, ...(experiment && variant ? { [`$feature/${experiment}`]: variant } : {}) }
     const onCompletion = (event: MessageEvent) => {
-      if (!popup) return
+      if (!popup || event.origin !== APPLE_CONSOLE_ORIGIN || event.source !== popup) return
       const completion = readAppleCompletion(event, popup, websiteState)
       if (!completion) return
       // Remove the listener before reporting, so retries/duplicate messages count once.
