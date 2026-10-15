@@ -23,12 +23,14 @@ const appleError = document.getElementById('appleSignupError')
 const apiBaseUrl = useRuntimeConfig().public.baseApiUrl
 const appleMessage = (key: string) => document.querySelector<HTMLElement>(`#appleSignupMessages [data-apple-status="${key}"]`)?.textContent?.trim() ?? ''
 
-// This capability is supplied by the shared backend only after provider setup and rollout.
-// Email registration does not wait for this independent check.
+/** Check the rollout independently so email initialization never waits for Apple. */
+async function refreshAppleSignupAvailability() {
+  if (appleSignup && appleButton) appleSignup.hidden = !(await isAppleSignupAvailable(apiBaseUrl))
+}
+
+void refreshAppleSignupAvailability()
+
 if (appleSignup && appleButton) {
-  void isAppleSignupAvailable(apiBaseUrl).then((enabled) => {
-    appleSignup.hidden = !enabled
-  })
   appleButton.addEventListener('click', async () => {
     if (isSubmitting || isAppleStarting) return
     isAppleStarting = true

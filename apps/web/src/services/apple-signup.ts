@@ -6,14 +6,14 @@ export interface AppleCompletion {
   user: { id?: string; email?: string }
 }
 
+/** Accept an analytics receipt only from this attempt's console window and state. */
 export function readAppleCompletion(event: MessageEvent, popup: Window, state: string): AppleCompletion | null {
   const data = event.data
   if (
     event.origin !== APPLE_CONSOLE_ORIGIN ||
     event.source !== popup ||
     !state ||
-    !data ||
-    data.type !== 'capgo:apple-auth-complete' ||
+    data?.type !== 'capgo:apple-auth-complete' ||
     data.state !== state ||
     typeof data.is_new_user !== 'boolean'
   )
@@ -43,9 +43,12 @@ const METADATA_KEYS = [
   'registration_experiment_variant',
 ] as const
 
+/** Fail closed unless the shared backend enables Apple and the exact console callback. */
 export async function isAppleSignupAvailable(apiBaseUrl: string, fetcher: (url: string, init?: RequestInit) => Promise<Response> = fetch): Promise<boolean> {
   try {
-    const response = await fetcher(`${apiBaseUrl.replace(/\/+$/, '')}/auth/apple/capabilities`, {
+    let end = apiBaseUrl.length
+    while (end > 0 && apiBaseUrl[end - 1] === '/') end--
+    const response = await fetcher(`${apiBaseUrl.slice(0, end)}/auth/apple/capabilities`, {
       credentials: 'omit',
       cache: 'no-store',
       signal: AbortSignal.timeout(10_000),
@@ -58,6 +61,7 @@ export async function isAppleSignupAvailable(apiBaseUrl: string, fetcher: (url: 
   }
 }
 
+/** Pass only non-credential signup metadata to the console-owned authorization entry. */
 export function buildAppleSignupUrl(metadata: Record<string, string>, websiteState?: string): string {
   const url = new URL(APPLE_CONSOLE_LOGIN_URL)
   url.searchParams.set('apple_oauth', '1')

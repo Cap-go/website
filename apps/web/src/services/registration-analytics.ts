@@ -7,7 +7,7 @@ interface SignupAnalytics {
   Affonso?: { signup: (properties: Record<string, unknown>) => unknown }
 }
 
-// Optional measurement integrations must never interrupt authentication.
+/** Isolate optional measurement failures so they never interrupt authentication. */
 function measure(action: () => void) {
   try {
     action()
@@ -16,6 +16,7 @@ function measure(action: () => void) {
   }
 }
 
+/** Report signup only when the shared backend confirms a newly created Capgo profile. */
 export function reportAppleRegistration(analytics: SignupAnalytics, completion: AppleCompletion, attribution: Record<string, string>): void {
   if (completion.is_new_user !== true) return
   const { id, email } = completion.user
