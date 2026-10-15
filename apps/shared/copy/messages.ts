@@ -2945,8 +2945,9 @@ const messages = {
   native_build_builder_credit_price: '{price}/min',
   native_build_builder_cta_text: "Build signed iOS and Android releases from your machine or CI while keeping Capgo's existing site header, docs, and pricing flow.",
   native_build_builder_cta_title: 'Native builds without the pain.',
-  native_build_builder_description: 'Signed iOS and Android Capacitor builds plus store submit, from CI or your AI agent. The EAS Build and EAS Submit analog for web apps.',
-  native_build_seo_title: 'Capgo Builder: Capacitor native builds from CI or AI agents',
+  native_build_builder_description:
+    'Build and sign iOS and Android Capacitor apps from any CI when you have no Mac. One CLI step after cap sync, with optional App Store and Play submit.',
+  native_build_seo_title: 'iOS cloud builds for Capacitor without a Mac',
   native_build_builder_extra_minutes: 'Extra build minutes use prepaid credits.',
   native_build_builder_faq_eyebrow: 'FAQ',
   native_build_builder_faq_live_updates_a:
