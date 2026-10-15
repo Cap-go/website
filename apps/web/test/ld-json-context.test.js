@@ -151,3 +151,25 @@ test('createProductLdJson omits review fields when no reviews are provided', () 
   expect(product.review).toBeUndefined()
   expect(product.aggregateRating).toBeUndefined()
 })
+
+test('createProductLdJson resolves relative product, offer, and image URLs', () => {
+  const product = createProductLdJson(mockConfig, {
+    name: 'Capgo',
+    description: 'Live updates for Capacitor apps',
+    url: '/pricing/',
+    image: '/capgo_social.png',
+    offers: [
+      {
+        name: 'Solo',
+        price: '14',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+        url: '/pricing/',
+      },
+    ],
+  })
+
+  expect(product.url).toBe('https://capgo.app/pricing/')
+  expect(product.image).toBe('https://capgo.app/capgo_social.png')
+  expect(product.offers[0].url).toBe('https://capgo.app/pricing/')
+})
