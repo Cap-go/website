@@ -28,7 +28,9 @@ async function refreshAppleSignupAvailability() {
   if (appleSignup && appleButton) appleSignup.hidden = !(await isAppleSignupAvailable(apiBaseUrl))
 }
 
-void refreshAppleSignupAvailability()
+queueMicrotask(() => {
+  void refreshAppleSignupAvailability()
+})
 
 if (appleSignup && appleButton) {
   appleButton.addEventListener('click', async () => {
