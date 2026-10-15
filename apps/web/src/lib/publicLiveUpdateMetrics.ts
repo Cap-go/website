@@ -69,6 +69,8 @@ const PUBLIC_FAILURE_ACTIONS = [
   'blocked_by_server_url',
   'backend_refusal',
 ] as const
+// Events proving an update was offered to the device or a download actually ran that day.
+const PUBLIC_OFFER_ACTIONS = ['get', 'download_0', 'download_zip_start', 'download_manifest_start', 'download_complete', 'set_next'] as const
 const PUBLIC_ZIP_FAIL_ACTIONS = ['unzip_fail', 'download_fail'] as const
 const PUBLIC_DELTA_FAIL_ACTIONS = ['download_manifest_file_fail', 'download_manifest_checksum_fail', 'download_manifest_brotli_fail', 'manifest_path_fail'] as const
 
@@ -178,8 +180,11 @@ function buildRollingHourlyWindow(referenceDate: Date) {
   return `timestamp >= toDateTime('${formatDateCF(start)}') AND timestamp < toDateTime('${formatDateCF(end)}')`
 }
 
+// The plugin also reports failed update checks (network errors, legacy or custom update responses) as download_fail.
+// Those devices never had anything to install, so download_fail only counts when an update was offered that day.
 function buildOutcomeBase(window: string, failureActions: string, day: string) {
-  return `SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, max(if(blob2 = 'set', 1, 0)) AS succeeded, max(if(blob2 IN (${failureActions}), 1, 0)) AS failed, argMax(blob5, timestamp) AS platform, argMax(blob6, timestamp) AS country, argMax(blob7, timestamp) AS plugin_version FROM app_log WHERE ${window} AND (blob2 = 'set' OR blob2 IN (${failureActions})) GROUP BY date, app_id, device_id`
+  const offerActions = PUBLIC_OFFER_ACTIONS.map((action) => `'${action}'`).join(', ')
+  return `SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, max(if(blob2 = 'set', 1, 0)) AS succeeded, max(if(blob2 IN (${failureActions}) AND blob2 != 'download_fail', 1, 0)) AS install_failed, max(if(blob2 = 'download_fail', 1, 0)) AS download_failed, max(if(blob2 IN (${offerActions}), 1, 0)) AS offered, argMax(blob5, timestamp) AS platform, argMax(blob6, timestamp) AS country, argMax(blob7, timestamp) AS plugin_version FROM app_log WHERE ${window} AND (blob2 = 'set' OR blob2 IN (${failureActions}) OR blob2 IN (${offerActions})) GROUP BY date, app_id, device_id`
 }
 
 export function buildPublicLiveUpdateQueries(referenceDate = new Date()) {
@@ -196,20 +201,20 @@ export function buildPublicLiveUpdateQueries(referenceDate = new Date()) {
   const hourlyOutcomeBase = buildOutcomeBase(hourlyWindow, failureActions, hour)
 
   return {
-    outcomes: `SELECT date, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures, sum(if(succeeded = 1 AND failed = 0, 1, 0)) AS first_tries FROM (${outcomeBase}) GROUP BY date`,
+    outcomes: `SELECT date, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures, sum(if(succeeded = 1 AND install_failed = 0 AND download_failed = 0, 1, 0)) AS first_tries FROM (${outcomeBase}) GROUP BY date`,
     rollback: `SELECT sum(has_reset) AS rollbacks, sum(if(has_set + has_reset > 0, 1, 0)) AS outcomes FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, max(if(blob2 = 'reset', 1, 0)) AS has_reset, max(if(blob2 = 'set', 1, 0)) AS has_set FROM app_log WHERE ${window} AND blob2 IN ('set', 'reset') GROUP BY date, app_id, device_id)`,
     package: `SELECT sum(if(zip_ok = 1, 1, 0)) AS zip_successes, sum(if(zip_ok = 0 AND zip_fail = 1, 1, 0)) AS zip_failures, sum(if(delta_ok = 1, 1, 0)) AS delta_successes, sum(if(delta_ok = 0 AND delta_fail = 1, 1, 0)) AS delta_failures FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, max(if(blob2 = 'download_zip_complete', 1, 0)) AS zip_ok, max(if(blob2 IN (${zipFailActions}), 1, 0)) AS zip_fail, max(if(blob2 = 'download_manifest_complete', 1, 0)) AS delta_ok, max(if(blob2 IN (${deltaFailActions}), 1, 0)) AS delta_fail FROM app_log WHERE ${window} AND blob2 IN ('download_zip_complete', 'download_manifest_complete', ${zipFailActions}, ${deltaFailActions}) GROUP BY date, app_id, device_id)`,
     failures: `SELECT action, count() AS devices FROM (SELECT ${day} AS date, blob2 AS action, index1 AS app_id, blob1 AS device_id FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, action, app_id, device_id) GROUP BY action`,
     platformsShare: `SELECT platform, count() AS devices FROM (SELECT double1 AS platform, index1 AS app_id, blob1 AS device_id FROM device_usage WHERE ${window} AND double1 IN (0.0, 1.0, 2.0) GROUP BY platform, app_id, device_id) GROUP BY platform`,
-    platformsDaily: `SELECT date, platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${trendOutcomeBase}) WHERE platform IN ('ios', 'android') GROUP BY date, platform`,
-    platformsHourly: `SELECT date, platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${hourlyOutcomeBase}) WHERE platform IN ('ios', 'android') GROUP BY date, platform`,
-    platformsOutcome: `SELECT platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${outcomeBase}) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform`,
+    platformsDaily: `SELECT date, platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${trendOutcomeBase}) WHERE platform IN ('ios', 'android') GROUP BY date, platform`,
+    platformsHourly: `SELECT date, platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${hourlyOutcomeBase}) WHERE platform IN ('ios', 'android') GROUP BY date, platform`,
+    platformsOutcome: `SELECT platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${outcomeBase}) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform`,
     platformsFailure: `SELECT platform AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob5, timestamp) AS platform FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, app_id, device_id, action) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform, action`,
     countriesShare: `SELECT country AS key, count() AS devices FROM (SELECT index1 AS app_id, blob1 AS device_id, argMax(blob10, timestamp) AS country FROM device_info WHERE ${window} AND blob10 != '' GROUP BY app_id, device_id) WHERE country != '' GROUP BY country`,
-    countriesOutcome: `SELECT country AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${outcomeBase}) WHERE country != '' GROUP BY country`,
+    countriesOutcome: `SELECT country AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${outcomeBase}) WHERE country != '' GROUP BY country`,
     countriesFailure: `SELECT country AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob6, timestamp) AS country FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, app_id, device_id, action) WHERE country != '' GROUP BY country, action`,
     versionsShare: `SELECT version AS key, count() AS devices FROM (SELECT index1 AS app_id, blob1 AS device_id, argMax(blob3, timestamp) AS version FROM device_info WHERE ${window} AND blob3 != '' GROUP BY app_id, device_id) WHERE version != '' GROUP BY version`,
-    versionsOutcome: `SELECT plugin_version AS key, sum(succeeded) AS successes, sum(if(succeeded = 0, failed, 0)) AS failures FROM (${outcomeBase}) WHERE plugin_version != '' GROUP BY plugin_version`,
+    versionsOutcome: `SELECT plugin_version AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${outcomeBase}) WHERE plugin_version != '' GROUP BY plugin_version`,
     versionsFailure: `SELECT plugin_version AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob7, timestamp) AS plugin_version FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, app_id, device_id, action) WHERE plugin_version != '' GROUP BY plugin_version, action`,
   }
 }
@@ -303,8 +308,11 @@ export async function getPublicLiveUpdateMetrics(auth: AnalyticsAuth): Promise<P
     })
     .filter((row) => row.key)
 
-  const daily_platforms = buildContiguousDailyPlatformRows(buildDailyPlatforms(platformDailyRows), now, TREND_HISTORY_DAYS)
-  const daily_platforms_sparkline = sliceSparklineRows(daily_platforms, now)
+  // Daily queries stop at the start of the current UTC day, so the series must end on yesterday.
+  const lastCompleteDay = new Date(now)
+  lastCompleteDay.setUTCDate(lastCompleteDay.getUTCDate() - 1)
+  const daily_platforms = buildContiguousDailyPlatformRows(buildDailyPlatforms(platformDailyRows), lastCompleteDay, TREND_HISTORY_DAYS)
+  const daily_platforms_sparkline = sliceSparklineRows(daily_platforms, lastCompleteDay)
   const hourly_platforms = buildDailyPlatforms(platformHourlyRows)
 
   return {

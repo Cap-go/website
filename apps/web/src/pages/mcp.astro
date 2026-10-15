@@ -4,7 +4,7 @@ import CommandCode from '@/components/CommandCode.astro'
 import ConversionRelatedLinks from '@/components/conversion/ConversionRelatedLinks.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
 const title = m.mcp_page_title({}, { locale })
@@ -18,8 +18,23 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo MCP',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Model Context Protocol servers for Capgo',
+  featureList: [
+    'Hosted account MCP server with OAuth',
+    'Public docs and OpenAPI MCP server over Streamable HTTP',
+    'CLI MCP for bundle uploads and native builds',
+    'Works with Claude, ChatGPT, Cursor, and other MCP clients',
+  ],
+})
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [softwareLdJson],
 })
 
 const content = { title, description, ldJSON, image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png` }
@@ -32,6 +47,7 @@ const relatedLinks = [
   { label: m.mcp_page_links_docs({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/cli/reference/mcp') },
   { label: m.mcp_page_links_skills({}, { locale }), href: getRelativeLocaleUrl(locale, 'skills') },
   { label: m.mcp_page_links_agents({}, { locale }), href: getRelativeLocaleUrl(locale, 'agents') },
+  { label: m.best_ai_tools_capacitor_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/ai-tools-for-capacitor') },
   { label: m.mcp_page_links_openapi({}, { locale }), href: '/openapi.json' },
   { label: m.contact({}, { locale }), href: getRelativeLocaleUrl(locale, 'contact') },
 ]

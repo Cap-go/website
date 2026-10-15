@@ -28,174 +28,173 @@ const content = {
 }
 
 const platformStyles = {
-  'Apple App Store': 'border-red-200 bg-red-50 text-red-950',
-  'Google Play': 'border-emerald-200 bg-emerald-50 text-emerald-950',
+  'Apple App Store': 'border-blue-400/40 bg-blue-500/10 text-blue-200',
+  'Google Play': 'border-emerald-400/40 bg-emerald-500/10 text-emerald-200',
 }
 
 const severityStyles = {
-  Painful: 'border-zinc-300 bg-zinc-100 text-zinc-800',
-  Absurd: 'border-amber-300 bg-amber-100 text-amber-950',
-  Expensive: 'border-orange-300 bg-orange-100 text-orange-950',
-  'Launch blocker': 'border-rose-300 bg-rose-100 text-rose-950',
+  Painful: 'border-gray-500/40 bg-gray-500/10 text-gray-200',
+  Absurd: 'border-amber-400/40 bg-amber-500/10 text-amber-200',
+  Expensive: 'border-orange-400/40 bg-orange-500/10 text-orange-200',
+  'Launch blocker': 'border-red-400/40 bg-red-500/10 text-red-200',
 }
+
+const stats = [
+  { value: String(refusalStories.length), label: 'stories shared' },
+  { value: '2', label: 'stores covered' },
+  { value: '5 max', label: 'images per story' },
+]
 ---
 
-<Layout content={content} hideChrome disableThirdPartyScripts>
-  <div class="min-h-dvh bg-zinc-950 text-white">
-    <section class="relative isolate overflow-hidden">
-      <img src="/app-review-guide.webp" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-30" loading="eager" width="1536" height="1024" />
-      <div class="absolute inset-0 -z-10 bg-zinc-950/80" aria-hidden="true"></div>
-      <div class="mx-auto flex min-h-[620px] max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
-        <nav class="flex items-center justify-between gap-4">
-          <a
-            href="/"
-            class="inline-flex min-h-11 items-center gap-3 rounded-full bg-white/10 px-4 text-sm font-semibold text-white ring-1 ring-white/15 transition hover:bg-white/15 focus:ring-2 focus:ring-red-300 focus:outline-none"
-          >
-            <img src="/capgo.webp" alt="Capgo" class="h-7 w-7 rounded-md" width="28" height="28" />
-            Capgo
-          </a>
-          <a
-            href="#add-story"
-            class="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-bold text-zinc-950 shadow-xl shadow-black/30 transition hover:-translate-y-0.5 hover:bg-red-50 focus:ring-2 focus:ring-red-300 focus:ring-offset-2 focus:ring-offset-zinc-950 focus:outline-none"
-            aria-label="Jump to the GitHub story submission section"
-          >
-            <svg class="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m7-7H5"></path>
+<Layout content={content}>
+  <div class="product-hero">
+    <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+      <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
+          <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-red-500/10 blur-3xl"></div>
+          <div class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl"></div>
+        </div>
+      </div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center">
+          <div class="mb-8 inline-flex items-center rounded-full border border-red-400/40 bg-red-500/10 px-4 py-2 text-sm font-medium text-red-200">
+            <svg aria-hidden="true" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              ></path>
             </svg>
-            Add your story
-          </a>
-        </nav>
+            Community rejection archive
+          </div>
 
-        <div class="grid flex-1 items-end gap-10 py-16 lg:grid-cols-12 lg:py-20">
-          <div class="lg:col-span-8">
-            <p class="inline-flex rounded-full border border-red-300/40 bg-red-500/15 px-4 py-2 text-sm font-bold text-red-100">Community rejection archive</p>
-            <h1 class="mt-6 max-w-5xl text-5xl leading-[1.02] font-black text-balance text-white sm:text-6xl lg:text-7xl">App store refusal horror story</h1>
-            <p class="mt-6 max-w-3xl text-lg leading-8 text-zinc-200 sm:text-xl">
-              The worst Apple App Store and Google Play rejection loops, collected as screenshots and plain text so mobile teams can learn what review queues really cost.
-            </p>
+          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">App store refusal horror story</h1>
+
+          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">
+            The worst Apple App Store and Google Play rejection loops, collected as screenshots and plain text so mobile teams can learn what review queues really cost.
+          </p>
+
+          <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a
+              href="#stories"
+              class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none"
+            >
+              Read the stories
+            </a>
+            <a
+              href="#add-story"
+              class="inline-flex items-center justify-center rounded-xl border border-gray-600 bg-gray-800/60 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:border-gray-500 hover:bg-gray-800 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none"
+            >
+              Add your story
+            </a>
           </div>
-          <div class="lg:col-span-4">
-            <div class="rounded-lg border border-white/15 bg-white/10 p-5 shadow-2xl shadow-black/30 backdrop-blur-md">
-              <p class="text-sm font-semibold text-zinc-300">Submission rule</p>
-              <p class="mt-3 text-2xl font-black text-white">1 to 5 images plus the story text.</p>
-              <p class="mt-3 text-sm leading-6 text-zinc-300">No links inside stories. Use local images only. Keep the refusal painful, specific, and useful.</p>
-            </div>
-          </div>
+
+          <dl class="mx-auto mt-14 grid max-w-3xl grid-cols-3 gap-4">
+            {stats.map((stat) => (
+              <div class="rounded-xl border border-gray-700 bg-gray-800/60 p-5">
+                <dt class="text-sm text-gray-400">{stat.label}</dt>
+                <dd class="mt-1 text-3xl font-bold text-white">{stat.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
 
-    <section class="bg-white py-16 text-zinc-950 sm:py-20">
+    <section id="stories" class="scroll-mt-24 bg-gray-800 py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-4 sm:grid-cols-3">
-          <div class="rounded-lg border border-zinc-200 bg-zinc-50 p-5">
-            <p class="text-4xl font-black">{refusalStories.length}</p>
-            <p class="mt-1 text-sm font-semibold text-zinc-600">stories seeded</p>
-          </div>
-          <div class="rounded-lg border border-zinc-200 bg-zinc-50 p-5">
-            <p class="text-4xl font-black">2</p>
-            <p class="mt-1 text-sm font-semibold text-zinc-600">stores covered</p>
-          </div>
-          <div class="rounded-lg border border-zinc-200 bg-zinc-50 p-5">
-            <p class="text-4xl font-black">5 max</p>
-            <p class="mt-1 text-sm font-semibold text-zinc-600">images per story</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-zinc-100 py-16 text-zinc-950 sm:py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <p class="text-sm font-black tracking-wide text-red-700 uppercase">The archive</p>
-            <h2 class="mt-3 text-3xl font-black text-zinc-950 sm:text-4xl">Rejections that cost more than a bad sprint</h2>
-          </div>
-          <p class="max-w-xl text-base leading-7 text-zinc-700">Each story is text-first, image-backed, and intentionally free of external links so the archive stays readable.</p>
+        <div class="mx-auto mb-16 max-w-3xl text-center">
+          <p class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">The archive</p>
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">Rejections that cost more than a bad sprint</h2>
+          <p class="mt-4 text-xl text-gray-400">Each story is text-first, image-backed, and free of external links so the archive stays readable.</p>
         </div>
 
-        <div class="mt-10 grid gap-6 lg:grid-cols-2">
-          {
-            refusalStories.map((story) => (
-              <article class="overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
-                <div class="grid min-h-full grid-rows-[auto_1fr]">
-                  <div class={`grid gap-2 p-4 ${story.images.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}>
-                    {story.images.slice(0, 5).map((image, index) => (
-                      <figure class={`${index === 0 && story.images.length > 2 ? 'col-span-2' : ''} overflow-hidden rounded-md border border-zinc-200 bg-zinc-100`}>
-                        <img src={image.src} alt={image.alt} class="aspect-[16/10] w-full bg-zinc-50 object-contain" loading="lazy" width="800" height="500" />
-                      </figure>
-                    ))}
-                  </div>
+        <div class="grid gap-8 lg:grid-cols-2">
+          {refusalStories.map((story) => (
+            <article class="flex flex-col overflow-hidden rounded-2xl border border-gray-700 bg-gray-900">
+              <div class={`grid gap-2 p-4 ${story.images.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}>
+                {story.images.slice(0, 5).map((image, index) => (
+                  <figure class={`${index === 0 && story.images.length > 2 ? 'col-span-2' : ''} overflow-hidden rounded-xl border border-gray-700 bg-white`}>
+                    <img src={image.src} alt={image.alt} class="aspect-[16/10] w-full object-contain" loading="lazy" width="800" height="500" />
+                  </figure>
+                ))}
+              </div>
 
-                  <div class="flex flex-col p-6 pt-2">
-                    <div class="flex flex-wrap gap-2">
-                      <span class={`inline-flex min-h-8 items-center rounded-full border px-3 text-xs font-black ${platformStyles[story.platform]}`}>{story.platform}</span>
-                      <span class={`inline-flex min-h-8 items-center rounded-full border px-3 text-xs font-black ${severityStyles[story.severity]}`}>{story.severity}</span>
-                      {story.sharedBy && (
-                        <span class="inline-flex min-h-8 items-center rounded-full border border-zinc-300 bg-white px-3 text-xs font-black text-zinc-800">
-                          Shared by {story.sharedBy}
-                        </span>
-                      )}
-                    </div>
-                    <h3 class="mt-4 text-2xl font-black text-zinc-950">{story.title}</h3>
-                    <blockquote class="mt-4 border-l-4 border-red-600 pl-4 text-base leading-7 font-semibold text-zinc-800">"{story.quote}"</blockquote>
-                    <p class="mt-4 text-base leading-7 text-zinc-700">{story.story}</p>
-                    <dl class="mt-6 grid gap-3 border-t border-zinc-200 pt-5 text-sm sm:grid-cols-3">
-                      <div>
-                        <dt class="font-bold text-zinc-500">App</dt>
-                        <dd class="mt-1 font-semibold text-zinc-950">{story.appType}</dd>
-                      </div>
-                      <div>
-                        <dt class="font-bold text-zinc-500">Delay</dt>
-                        <dd class="mt-1 font-semibold text-zinc-950">{story.delay}</dd>
-                      </div>
-                      <div>
-                        <dt class="font-bold text-zinc-500">Outcome</dt>
-                        <dd class="mt-1 font-semibold text-zinc-950">{story.outcome}</dd>
-                      </div>
-                    </dl>
-                  </div>
+              <div class="flex flex-1 flex-col p-8 pt-4">
+                <div class="flex flex-wrap gap-2">
+                  <span class={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold ${platformStyles[story.platform]}`}>{story.platform}</span>
+                  <span class={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold ${severityStyles[story.severity]}`}>{story.severity}</span>
+                  {story.sharedBy && (
+                    <span class="inline-flex items-center rounded-full border border-gray-600 bg-gray-800 px-3 py-1 text-xs font-semibold text-gray-200">
+                      Shared by {story.sharedBy}
+                    </span>
+                  )}
                 </div>
-              </article>
-            ))
-          }
+                <h3 class="mt-5 text-xl font-bold text-white">{story.title}</h3>
+                <blockquote class="mt-4 border-l-4 border-red-500 pl-4 text-base leading-7 font-medium text-gray-200">"{story.quote}"</blockquote>
+                <p class="mt-4 text-gray-400">{story.story}</p>
+                <dl class="mt-6 grid gap-4 border-t border-gray-700 pt-6 text-sm sm:grid-cols-3">
+                  <div>
+                    <dt class="font-semibold text-gray-500">App</dt>
+                    <dd class="mt-1 text-gray-200">{story.appType}</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-500">Delay</dt>
+                    <dd class="mt-1 text-gray-200">{story.delay}</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-gray-500">Outcome</dt>
+                    <dd class="mt-1 text-gray-200">{story.outcome}</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
 
-    <section class="bg-zinc-950 py-16 sm:py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-10 rounded-lg border border-red-300/20 bg-red-950/25 p-6 shadow-2xl shadow-red-950/30 sm:p-8 lg:grid-cols-12 lg:items-center">
-          <div class="lg:col-span-7">
-            <p class="text-sm font-black tracking-wide text-red-200 uppercase">Avoid the next horror story</p>
-            <h2 class="mt-3 text-3xl font-black text-white sm:text-4xl">Ship urgent fixes with Capgo while the stores take their time.</h2>
-            <p class="mt-4 max-w-3xl text-base leading-7 text-zinc-300">
-              Capgo lets Capacitor teams send live updates, roll back broken releases, and target channels without waiting for a full App Store or Google Play review cycle.
-            </p>
-          </div>
-          <div class="lg:col-span-5">
-            <SignupCta id="horror-story-signup-cta" humanSupport align="start" />
-          </div>
-        </div>
-
-        <div id="add-story" class="mt-8 scroll-mt-8 rounded-lg border border-white/10 bg-white/5 p-6">
-          <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+    <section id="add-story" class="scroll-mt-24 bg-gray-900 py-20">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 sm:p-10">
+          <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 class="text-xl font-black text-white">Add a refusal story</h2>
-              <p class="mt-2 max-w-3xl text-sm leading-6 text-zinc-300">
-                Edit the story data, include one to five local image paths, and open a PR. Keep names anonymized unless you own the story.
+              <p class="mb-3 text-sm font-semibold tracking-wide text-blue-400 uppercase">Share yours</p>
+              <h2 class="text-2xl font-bold text-white sm:text-3xl">Add a refusal story</h2>
+              <p class="mt-4 max-w-xl text-gray-400">
+                Edit the story data, include one to five local image paths, and open a PR. No links inside stories. Keep names anonymized unless you own the story.
               </p>
             </div>
             <a
               href={githubEditUrl}
               target="_blank"
               rel="noreferrer"
-              class="inline-flex min-h-11 items-center justify-center rounded-md bg-red-500 px-5 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-red-400 focus:ring-2 focus:ring-red-300 focus:ring-offset-2 focus:ring-offset-zinc-950 focus:outline-none"
+              class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-gray-600 bg-gray-900 px-6 py-3 font-semibold text-white transition-colors hover:border-gray-500 hover:bg-gray-950 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 focus-visible:outline-none"
             >
+              <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                ></path>
+              </svg>
               Edit on GitHub
             </a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-800 py-20">
+      <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+        <p class="mb-4 text-sm font-semibold tracking-wide text-emerald-400 uppercase">Avoid the next horror story</p>
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">Ship urgent fixes with Capgo while the stores take their time</h2>
+        <p class="mx-auto mt-6 max-w-2xl text-xl text-gray-400">
+          Capgo lets Capacitor teams send live updates, roll back broken releases, and target channels without waiting for a full App Store or Google Play review cycle.
+        </p>
+        <SignupCta id="horror-story-signup-cta" humanSupport class="mt-10" />
       </div>
     </section>
   </div>

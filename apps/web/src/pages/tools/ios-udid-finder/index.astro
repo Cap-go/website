@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import ToolCatalog from '@/components/tools/ToolCatalog.astro'
 import ToolFaq from '@/components/tools/ToolFaq.astro'
 import ToolHowTo from '@/components/tools/ToolHowTo.astro'
+import ToolNativeBuildCta from '@/components/tools/ToolNativeBuildCta.astro'
 import ToolRelatedLinks from '@/components/tools/ToolRelatedLinks.astro'
 import { createFAQPageLdJson, createHowToLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -126,8 +127,8 @@ const troubleshooting = [
 
 const relatedLinks = [
   {
-    title: 'Capgo Cloud Build for iOS',
-    description: 'Build ad hoc and App Store iOS apps in the cloud once your test devices are registered.',
+    title: 'Build and sign iOS and Android apps in the cloud with Capgo',
+    description: 'Register test devices, then run ad hoc, TestFlight, and Play release builds from the same cloud workflow.',
     path: 'native-build',
   },
   {
@@ -368,6 +369,11 @@ const content = {
   </section>
 
   <ToolFaq items={faqItems} title="iPhone UDID finder FAQ" intro="Answers about UDIDs, the configuration profile, privacy, and registering test devices with Apple." />
+
+  <ToolNativeBuildCta
+    accent="fuchsia"
+    description="Add this UDID in Apple Developer, update your provisioning profile, then run ad hoc or TestFlight builds from Capgo Native Build without maintaining your own build farm."
+  />
 
   <ToolRelatedLinks title="iOS testing and distribution guides" links={relatedLinks} />
 

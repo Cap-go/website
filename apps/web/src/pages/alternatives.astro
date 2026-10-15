@@ -7,6 +7,8 @@ import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
+import { alternativeCompetitors } from '@/data/alternatives'
+import type { AlternativeCategory } from '@/data/alternatives/types'
 import { createItemListLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -59,6 +61,29 @@ const comparisons = [
     href: getRelativeLocaleUrl(locale, 'alternatives/voltbuilder'),
   },
 ]
+
+const categoryTitles: Record<AlternativeCategory, string> = {
+  'live-updates': m.alternatives_category_live_updates({}, { locale }),
+  'web-to-app': m.alternatives_category_web_to_app({}, { locale }),
+  framework: m.alternatives_category_framework({}, { locale }),
+  'ci-cd': m.alternatives_category_ci_cd({}, { locale }),
+}
+
+const categoryGroups = (Object.keys(categoryTitles) as AlternativeCategory[])
+  .map((category) => ({
+    id: `alternatives-${category}`,
+    title: categoryTitles[category],
+    items: alternativeCompetitors
+      .filter((item) => item.category === category)
+      .map((item) => ({
+        name: item.name,
+        title: m.alternatives_index_card_title({ competitor: item.name }, { locale }),
+        status: item.status,
+        text: item.verdict,
+        href: getRelativeLocaleUrl(locale, `alternatives/${item.slug}`),
+      })),
+  }))
+  .filter((group) => group.items.length > 0)
 
 const sources = [
   { label: m.compare_appflow_source_announcement({}, { locale }), href: 'https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products' },
@@ -188,7 +213,7 @@ const ldJSON = createLdJsonGraph(
         url: Astro.url.href,
         name: m.alternatives_index_title({}, { locale }),
         description,
-        items: comparisons.map((item) => ({
+        items: [...comparisons, ...categoryGroups.flatMap((group) => group.items)].map((item) => ({
           name: item.title,
           url: new URL(item.href, config.baseUrl).href,
           description: item.text,
@@ -250,6 +275,29 @@ const content = {
         </div>
       </div>
     </section>
+
+    {categoryGroups.map((group) => (
+      <section class="section" id={group.id}>
+        <div class="shell">
+          <div class="section-head section-head--wide">
+            <h2 class="h2-section">{group.title}</h2>
+            <p class="lead">{m.alternatives_category_lead({}, { locale })}</p>
+          </div>
+          <div class="cmp-card-grid">
+            {group.items.map((item) => (
+              <article class="cmp-card">
+                <span class="cmp-card-status">{item.status}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+                <a class="cmp-card-link" href={item.href} aria-label={m.alternatives_index_link_aria({ competitor: item.name }, { locale })}>
+                  {m.alternatives_index_link({}, { locale })} →
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
 
     <section class="section" id="summary">
       <div class="shell">

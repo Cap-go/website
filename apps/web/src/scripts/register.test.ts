@@ -22,6 +22,8 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
         throw new Error('Stop the test before any auth IO')
       },
       RegisterApiError: Error,
+      getSignupUserMetadataForRegistration: () => ({}),
+      getSignupAttributionForEvents: () => ({}),
       getRegistrationDevice: () => ({}),
       Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
       window: { location: { search: '' } },
@@ -51,13 +53,22 @@ test('registration without profile names preserves referral attribution and the 
   const signupRequests: any[] = []
   const captures: any[] = []
   const referrals: any[] = []
+  const adsConversions: unknown[] = []
   const windowStub = {
     location: { href: '', search: '?ref=initial-example' },
     posthog: { capture: (event: string, properties?: unknown) => captures.push({ event, properties }) },
+    oaiq: (...args: unknown[]) => adsConversions.push(args),
     Affonso: { signup: (properties: unknown) => referrals.push(properties) },
   }
   runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
     document: { getElementById: (id: string) => values[id], querySelector: () => null },
+    getSignupUserMetadataForRegistration: () => ({
+      ref: new URLSearchParams(windowStub.location.search).get('ref'),
+      first_touch_type: 'plugin',
+      first_touch_path: '/plugins/example/',
+      signup_source: 'plugin_example',
+    }),
+    getSignupAttributionForEvents: () => ({ signup_source: 'plugin_example' }),
     getRegistrationDevice: () => ({ registration_device_type: 'desktop' }),
     registerUser: async (request: unknown) => {
       signupRequests.push(request)
@@ -80,9 +91,14 @@ test('registration without profile names preserves referral attribution and the 
       captcha_token: undefined,
       registration_device_type: 'desktop',
       ref: 'readme-example',
+      first_touch_type: 'plugin',
+      first_touch_path: '/plugins/example/',
+      signup_source: 'plugin_example',
     },
   ])
   expect(captures.map(({ event }) => event)).toEqual(['website_signup_submit', 'user_signed_up'])
+  expect(adsConversions).toEqual([['measure', 'registration_completed', { type: 'customer_action' }]])
+  expect(captures[1].properties.signup_source).toBe('plugin_example')
   expect(referrals).toEqual([{ email: 'signup@example.com', externalUserId: 'fake-user-id' }])
   const redirect = new URL(windowStub.location.href)
   expect(redirect.origin).toBe('https://console.capgo.app')
@@ -115,6 +131,8 @@ test('a failed API request restores signup for retry without reporting success',
       throw new TypeError('Network unavailable')
     },
     RegisterApiError: class extends Error {},
+    getSignupUserMetadataForRegistration: () => ({}),
+    getSignupAttributionForEvents: () => ({}),
     getRegistrationDevice: () => ({}),
     Toastify: () => ({ showToast() {} }),
     window: windowStub,

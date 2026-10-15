@@ -124,10 +124,34 @@ let markdown = `<!-- AUTO-GENERATED FILE - DO NOT EDIT DIRECTLY -->
 <h1 align="left">Welcome to <a href="https://capgo.app">Capgo</a>!</h1>
 
 <p align="left">
-Capgo is the Expo for Capacitor, providing SDKs, plugins, cloud updates, and native builds for any web framework. Fast on Web, on Native only when needed.
+<strong>Build Capacitor apps with AI, ship updates instantly.</strong>
 </p>
 
+<p align="left">
+Capgo is the AI-ready platform to build, ship, and maintain Capacitor apps: Capacitor skills and MCP servers for AI coding agents (Claude Code, Codex, Cursor, Copilot, Gemini CLI), maintained Capacitor plugins, cloud native iOS/Android builds with App Store and Google Play publishing, live updates with channels and rollback, and release monitoring.
+</p>
+
+- [Capacitor skills for AI agents](https://capgo.app/skills/) ([Cap-go/capgo-skills](https://github.com/Cap-go/capgo-skills))
+- [AI agent setup](https://capgo.app/agents/) and [Capgo MCP](https://capgo.app/docs/ai/mcp/)
+- [Capacitor plugins](https://capgo.app/plugins/)
+- [Cloud native builds](https://capgo.app/native-build/)
+- [Live updates](https://capgo.app/) and the [open-source console, API, and CLI](https://github.com/Cap-go/capgo.app)
+- [AI tools for Capacitor](https://capgo.app/best/ai-tools-for-capacitor/)
+
 [Read the documentation to get started](https://capgo.app/docs/)
+
+## Use with AI coding agents
+
+Install the Capgo Capacitor skills in Claude Code, Codex, Cursor, Copilot, or Gemini CLI:
+
+\`\`\`bash
+npx skills add Cap-go/capgo-skills
+\`\`\`
+
+Then connect the Capgo MCP server so your agent can manage apps, channels, bundles, native builds, and stats:
+
+- Hosted MCP: \`https://api.capgo.app/mcp\` ([docs](https://capgo.app/docs/ai/mcp/))
+- Local MCP: \`npx @capgo/cli@latest mcp\`
 
 ## Community
 

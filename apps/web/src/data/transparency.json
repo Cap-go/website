@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T06:42:03.905Z",
+  "updatedAt": "2026-10-15T06:27:15.652Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -36,78 +36,78 @@
   },
   "releases": [
     {
-      "repo": "Cap-go/capgo.app",
-      "tag": "capgo-16.3.1",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.3.1",
-      "publishedAt": "2026-10-11T17:24:40Z"
+      "repo": "Cap-go/capacitor-updater",
+      "tag": "8.53.0",
+      "url": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.53.0",
+      "publishedAt": "2026-10-14T17:32:57Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-16.3.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.3.0",
-      "publishedAt": "2026-10-11T11:23:15Z"
+      "tag": "cli-8.82.1",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.82.1",
+      "publishedAt": "2026-10-14T15:24:15Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-16.2.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.2.0",
-      "publishedAt": "2026-10-09T22:29:45Z"
+      "tag": "capgo-16.9.1",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.9.1",
+      "publishedAt": "2026-10-14T12:59:13Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "cli-8.77.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.77.0",
-      "publishedAt": "2026-10-09T22:21:25Z"
+      "tag": "capgo-16.9.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.9.0",
+      "publishedAt": "2026-10-14T10:16:48Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "cli-8.76.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.76.0",
-      "publishedAt": "2026-10-09T16:18:42Z"
+      "tag": "capgo-16.8.4",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.8.4",
+      "publishedAt": "2026-10-14T09:22:26Z"
     }
   ],
   "metrics": {
     "live": {
-      "success_rate": 61.3,
+      "success_rate": 81,
       "first_try_rate": 97.9,
-      "rollback_rate": 11.5,
-      "updated_at": "2026-10-12T02:04:24.542Z",
+      "rollback_rate": 12.2,
+      "updated_at": "2026-10-15T01:16:44.444Z",
       "daily": [
-        74,
-        70.7,
-        70.8,
-        71.7,
-        70.3,
-        65.6,
-        71.8,
-        75.3,
-        73,
-        68.4,
-        69.2,
-        64.5,
-        61,
-        72,
-        71.2,
-        69,
-        56.6,
-        52,
-        53,
-        49.4,
-        56.8,
-        59.5,
-        50.8,
-        42.3,
-        56.4,
-        64,
-        60.1,
-        61.7,
-        61.1,
-        44.6
+        83,
+        82.4,
+        81.3,
+        84,
+        86.6,
+        85.7,
+        82.3,
+        81.2,
+        73.9,
+        70.5,
+        79.7,
+        80.6,
+        81.9,
+        78.8,
+        76.5,
+        78.3,
+        80.1,
+        80.3,
+        78.8,
+        75.1,
+        79.1,
+        81.6,
+        84.3,
+        83.1,
+        85.9,
+        83.3,
+        82.9,
+        81.5,
+        84.9,
+        83.5
       ]
     },
     "builder": {
-      "success_rate": 71.4,
-      "updated_at": "2026-10-12T02:04:24.543Z"
+      "success_rate": 73.1,
+      "updated_at": "2026-10-15T01:16:44.453Z"
     }
   }
 }

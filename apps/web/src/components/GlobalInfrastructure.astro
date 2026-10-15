@@ -141,6 +141,6 @@ import SignupCta from '@/components/SignupCta.astro'
       </div>
     </div>
 
-    <SignupCta id="global-infra-signup-cta" humanSupport class="mt-16" />
+    <SignupCta lead={m.signup_cta_lead_global_infra({}, { locale: Astro.locals.locale })} id="global-infra-signup-cta" humanSupport class="mt-16" />
   </div>
 </section>

@@ -14,11 +14,10 @@ const stats = m.app_strip_stats(
 )
 ---
 
-<div class="app-strip mx-auto mt-12 w-full sm:mt-14" role="group" aria-labelledby="app-strip-title">
-  <p id="app-strip-title" class="px-4 text-center">
-    <span class="block text-base font-semibold text-white sm:text-lg">{stats}</span>
-    <span class="mt-10 block text-xs font-semibold tracking-widest text-slate-400 uppercase">{m.app_strip_title({}, { locale })}</span>
-  </p>
+<div class="app-strip mx-auto mt-12 flex w-full flex-col sm:mt-14" role="group" aria-labelledby="app-strip-title">
+  <!-- Small screens show the logos first and the stats below them. -->
+  <p class="order-last mt-8 px-4 text-center text-base font-semibold text-white sm:order-none sm:mt-0 sm:text-lg">{stats}</p>
+  <p id="app-strip-title" class="px-4 text-center text-xs font-semibold tracking-widest text-slate-400 uppercase sm:mt-10">{m.app_strip_title({}, { locale })}</p>
   <div class="app-strip-viewport mt-4 overflow-hidden">
     <div class="app-strip-track flex w-max gap-3">
       {

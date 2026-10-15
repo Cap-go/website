@@ -1,21 +1,21 @@
 ---
 import m from '@/copy/messages'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
-import { productTestimonials } from '@/config/productTestimonials'
+import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
-import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
 import SignupCta from '@/components/SignupCta.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
 import NotificationsStory from '@/components/notifications/NotificationsStory.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
 
 const title = `${brand} | Native Push Notifications for Capacitor Apps`
-const description =
-  'Send native iOS and Android push notifications from Capgo, target users by external ID, track opens and events, update badges, and trigger silent live update checks.'
+const description = 'Send native iOS and Android push from Capgo, target users by external ID, update badges, trigger live update checks, and let your AI agent set it up.'
 const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
 const pluginUrl = getRelativeLocaleUrl(locale, 'plugins/capacitor-notifications')
 
@@ -27,8 +27,27 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Notifications',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Native push notifications for Capacitor apps',
+  operatingSystem: 'iOS, Android',
+  featureList: [
+    'Native iOS and Android push delivery',
+    'Target users by external ID, tags, and attributes',
+    'Badge updates and open tracking',
+    'Silent push to trigger live update checks',
+    'Broadcasts and API sends',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(productTestimonials.notifications),
+})
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [softwareLdJson],
 })
 
 const content = {
@@ -316,6 +335,15 @@ provider ready | recipients linked | update check enabled</pre>
         </div>
       </div>
     </section>
+
+    <AgentReadySection
+      background="bg-transparent"
+      headingId="agent-ready-notifications-title"
+      eyebrow={m.agent_ready_notifications_eyebrow({}, { locale })}
+      title={m.agent_ready_notifications_title({}, { locale })}
+      subtitle={m.agent_ready_notifications_subtitle({}, { locale })}
+      prompts={[m.agent_ready_notifications_prompt_1({}, { locale }), m.agent_ready_notifications_prompt_2({}, { locale }), m.agent_ready_notifications_prompt_3({}, { locale })]}
+    />
 
     <ProductTestimonials
       variant="builder"

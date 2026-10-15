@@ -29,6 +29,14 @@ test('buildPublicLiveUpdateQueries stays at one Analytics Engine nest', () => {
   expect(queries.join('\n')).not.toContain('FROM (SELECT date, app_id, version_name')
 })
 
+test('buildPublicLiveUpdateQueries only counts download_fail when an update was offered that day', () => {
+  const queries = buildPublicLiveUpdateQueries(new Date('2026-09-17T00:00:00.000Z'))
+  for (const query of [queries.outcomes, queries.platformsDaily, queries.platformsOutcome, queries.countriesOutcome, queries.versionsOutcome]) {
+    expect(query).toContain("max(if(blob2 IN ('get', 'download_0', 'download_zip_start', 'download_manifest_start', 'download_complete', 'set_next'), 1, 0)) AS offered")
+    expect(query).toContain('sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures')
+  }
+})
+
 test('buildPublicLiveUpdateQueries keeps KPI windows at 30 days and trend platforms at 90 days', () => {
   const queries = buildPublicLiveUpdateQueries(new Date('2026-09-17T00:00:00.000Z'))
   expect(queries.outcomes).toContain("toDateTime('2026-08-18 00:00:00')")
@@ -107,13 +115,14 @@ test('getPublicLiveUpdateMetrics weights daily rates and skips first-day', async
     { date: '2026-09-16', success_rate: 90 },
   ])
   expect(metrics.daily_platforms).toHaveLength(90)
-  expect(metrics.daily_platforms[0]?.date).toBe('2026-06-20')
-  expect(metrics.daily_platforms.at(-1)?.date).toBe('2026-09-17')
+  expect(metrics.daily_platforms[0]?.date).toBe('2026-06-19')
+  expect(metrics.daily_platforms.at(-1)?.date).toBe('2026-09-16')
   expect(metrics.daily_platforms.find((row) => row.date === '2026-09-15')).toEqual({ date: '2026-09-15', ios: 90, android: 6.7 })
   expect(metrics.daily_platforms.find((row) => row.date === '2026-09-16')).toEqual({ date: '2026-09-16', ios: 93.3, android: 80 })
   expect(metrics.daily_platforms_sparkline).toHaveLength(30)
-  expect(selectTrendRows({ daily_platforms: metrics.daily_platforms }, '3m', new Date('2026-09-17T12:00:00.000Z'))).toHaveLength(90)
-  expect(selectTrendRows({ daily_platforms: metrics.daily_platforms }, '1m', new Date('2026-09-17T12:00:00.000Z'))).toHaveLength(30)
+  expect(metrics.daily_platforms_sparkline.at(-1)).toEqual({ date: '2026-09-16', ios: 93.3, android: 80 })
+  expect(selectTrendRows({ daily_platforms: metrics.daily_platforms }, '3m')).toHaveLength(90)
+  expect(selectTrendRows({ daily_platforms: metrics.daily_platforms }, '1m')).toHaveLength(30)
   expect(metrics.hourly_platforms).toEqual([
     { date: '2026-09-17 08:00', ios: 88.9, android: 80 },
     { date: '2026-09-17 09:00', ios: 90, android: 83.3 },

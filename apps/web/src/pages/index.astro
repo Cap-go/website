@@ -16,6 +16,7 @@ import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import AskAiSection from '@/components/AskAiSection.astro'
 import RiskDebtSection from '@/components/RiskDebtSection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
+import { allTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 
 const config = Astro.locals.runtimeConfig
 
@@ -25,9 +26,9 @@ const description = m.ship_updates_fixes_changes_and_features({}, { locale: Astr
 
 // Create comprehensive LD+JSON for homepage
 const capgoService = createServiceLdJson(config.public, {
-  name: 'Capgo - Live Updates for Ionic, Capacitor, and Cordova Apps',
+  name: 'Capgo - Build Capacitor apps with AI, ship updates instantly',
   description:
-    'Instant over-the-air / CodePush updates for Ionic, Capacitor, Cordova, and Electron applications. Deploy OTA, bug fixes, feature updates, and improvements without release delays.',
+    'Capgo gives developers and AI coding agents Capacitor skills, MCP servers, plugins, native iOS and Android cloud builds, store publishing, live updates, and release monitoring for Capacitor, Ionic, Cordova, and Electron apps.',
   url: config.public.baseUrl,
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
@@ -35,12 +36,25 @@ const capgoService = createServiceLdJson(config.public, {
 
 // Create SoftwareApplication schema for the Capgo platform
 const capgoSoftware = createSoftwareApplicationLdJson(config.public, {
-  name: 'Capgo Live Update Platform',
-  description: 'Professional live update platform for Ionic, Capacitor, and hybrid app teams. Deploy updates instantly to iOS, Android, Cordova, and Electron apps.',
+  name: 'Capgo',
+  description:
+    'AI-ready platform to build, ship, and maintain Capacitor apps. Works with Claude Code, Codex, Cursor, Copilot, and Gemini CLI through Capacitor skills and MCP, with native builds, store publishing, and live updates for iOS and Android.',
   url: config.public.baseUrl,
   applicationCategory: 'DeveloperApplication',
-  operatingSystem: 'Web, iOS, Android, Cordova, Electron',
-  softwareVersion: '1.0',
+  applicationSubCategory: 'AI-assisted Capacitor app development platform',
+  operatingSystem: 'iOS, Android',
+  featureList: [
+    'Capacitor skills for AI coding agents (Claude Code, Codex, Cursor, Copilot, Gemini CLI)',
+    'Hosted and local MCP servers for Capacitor app management',
+    'Maintained Capacitor plugins for native features',
+    'Migration to Capacitor and Capacitor major version upgrades',
+    'Cloud native iOS and Android builds',
+    'App Store and Google Play publishing',
+    'Live updates with channels, staged rollouts, and rollback',
+    'Release health monitoring, device logs, and analytics',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(allTestimonials),
   offers: {
     price: '12',
     priceCurrency: 'USD',
@@ -55,25 +69,6 @@ const content = {
   image: `${config.public.baseUrl}/capgo_social.png`,
   ldJSON: createLdJsonGraph(config.public, capgoService, {
     includeOrganization: true,
-    includeBreadcrumbs: true,
-    breadcrumbs: [
-      {
-        name: 'Home',
-        url: config.public.baseUrl,
-      },
-      {
-        name: 'Platform',
-        url: `${config.public.baseUrl}/app_mobile/`,
-      },
-      {
-        name: 'Pricing',
-        url: `${config.public.baseUrl}/pricing/`,
-      },
-      {
-        name: 'Documentation',
-        url: `${config.public.baseUrl}/docs/`,
-      },
-    ],
     additionalEntities: [capgoSoftware, createWebSiteLdJson(config.public, { inLanguage: Astro.locals.locale })],
   }),
 }
@@ -85,7 +80,7 @@ const content = {
     <ProblemSolution />
     <PlatformOverview />
     <PlatformScreens />
-    <AgentReadySection />
+    <AgentReadySection showAudienceSwitch />
     <HowItWorks />
     <RiskDebtSection />
     <GlobalInfrastructure />

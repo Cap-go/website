@@ -1,21 +1,23 @@
 ---
 slug: what-is-ota-update
-title: What Is Ota Update
-description: 'What is ota update. Learn what an OTA update is, how full and differential updates differ, and what mobile teams must know about security, rollback'
+title: 'OTA Apps Explained: What Is an OTA Update?'
+description: 'OTA apps install over-the-air updates to the web layer without a full store release. Learn what OTA updates mean for mobile apps, security, and Capacitor.'
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-12T07:17:05.992Z
-updated_at: 2026-10-12T07:20:15.000Z
+updated_at: 2026-10-14T01:39:31.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/42a563e9-a17f-44a3-830c-2459efecfd08/what-is-ota-update-text-design.jpg'
 head_image_alt: What Is Ota Update
-keywords: 'ota update, ota updates explained, capacitor live updates, mobile app deployment, ota security'
+keywords: 'ota app, ota apps, ota update, ota updates explained, capacitor live updates, mobile app deployment, ota security'
 tag: 'Mobile, Updates, Security'
 published: true
 locale: en
 next_blog: ''
 ---
-An **OTA update** is a software update delivered over the internet to an already-installed device or app, separate from a full store release. It's the path teams reach for when a JavaScript fix, copy change, CSS tweak, or approved asset update needs to ship now instead of waiting on review.
+An **OTA app** is a mobile app that can apply approved **over-the-air (OTA) updates** after install, usually to the JavaScript, HTML, CSS, and asset layer inside a native shell. An **OTA update** is that delivery: a software change pushed over the internet without replacing the whole store binary.
+
+OTA is the path teams reach for when a JavaScript fix, copy change, CSS tweak, or approved asset update needs to ship now instead of waiting on review.
 
 You've probably lived this already. A broken checkout label, a typo in a production screen, or a styling regression gets fixed in minutes, then sits behind someone else's release queue while customers keep seeing the bug.
 
@@ -42,7 +44,7 @@ You've probably lived this already. A broken checkout label, a typo in a product
 
 A developer ships a small production fix before lunch, then spends the afternoon watching the review status. The code is ready, but the release is not, because the app store has its own approval path and timing. Apple says it reviews apps, updates, bundles, in-app purchases, and in-app events submitted through App Store Connect, with stated targets of **at least 50% under 24 hours** and **90% under 48 hours**. For a team correcting a string, a layout issue, or a non-native asset, that wait can feel like time spent standing outside the door while the fix is already built. [Apple's app review process and timing targets](https://developer.apple.com/distribute/app-review/)
 
-OTA gives you a second delivery lane for eligible application-layer changes. The store still controls the native binary and anything tied to platform permissions or executable behavior. For a Capacitor workflow, read [Capgo's guide to app store vs direct updates](https://capgo.app/blog/app-store-vs-direct-updates-what-developers-need-to-know/) to map exactly which changes belong in each lane.
+OTA gives you a second delivery lane for eligible application-layer changes. The store still controls the native binary and anything tied to platform permissions or executable behavior. For a Capacitor workflow, see [Capacitor live updates](https://capgo.app/live-update/) on Capgo and read [Capgo's guide to app store vs direct updates](https://capgo.app/blog/app-store-vs-direct-updates-what-developers-need-to-know/) to map exactly which changes belong in each lane.
 
 OTA is not a shortcut around review. It is a controlled path for the parts of the app that can change without replacing the native shell. That means the central question is not whether an update is small, but whether it stays inside the boundary that the store and your runtime already allow.
 

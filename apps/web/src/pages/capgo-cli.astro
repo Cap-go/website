@@ -7,19 +7,39 @@ import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import { getProductScreens } from '@/config/productScreens'
 import { productVideos } from '@/config/productVideos'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
-import { productTestimonials } from '@/config/productTestimonials'
+import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 
 const title = 'Capgo CLI + MCP | Build, preview, and ship Capacitor apps safely'
-const description =
-  'Use the Capgo CLI to initialize Capacitor apps, upload safe live updates, check compatibility, request native builds, run devices, and expose Capgo workflows through MCP.'
+const description = 'Use the Capgo CLI to set up Capacitor apps, ship safe live updates, check compatibility, request native builds, and give AI agents Capgo tools via MCP.'
+const cliLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo CLI',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Command-line tool and MCP server for Capacitor releases',
+  operatingSystem: 'macOS, Linux, Windows',
+  downloadUrl: 'https://www.npmjs.com/package/@capgo/cli',
+  featureList: [
+    'Set up Capacitor live updates with one init command',
+    'Upload live update bundles to channels with native compatibility checks',
+    'Decide whether a release can ship over the air or needs a native build',
+    'Request signed iOS and Android cloud builds',
+    'MCP server that gives AI agents Capgo tools for apps, bundles, channels, builds, and stats',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(productTestimonials.cli),
+})
+
 const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-cli.png`,
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, cliLdJson, { includeOrganization: true }),
 }
 
 const locale = Astro.locals.locale
@@ -54,6 +74,8 @@ const commands = [
 const mcpInstallCommand = "npx install-mcp 'npx @capgo/cli@latest mcp' --client codex"
 const hostedMcpUrl = 'https://api.capgo.app/mcp'
 const hostedMcpDocsUrl = getRelativeLocaleUrl(locale, 'docs/ai/mcp')
+const skillsInstallCommand = 'npx skills add Cap-go/capgo-skills'
+const agentPrompts = [copy('cli_ai_prompt_1'), copy('cli_ai_prompt_2'), copy('cli_ai_prompt_3')]
 const mcpTools = ['Apps', 'Bundles', 'Channels', 'Compatibility', 'Native builds', 'Stats', 'Doctor', 'Delivery probe']
 const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.orange.miorange', 'ua.vodafone.myvodafone']
 const comparisonRows = [
@@ -319,6 +341,27 @@ const comparisonRows = [
           {mcpTools.map((tool) => (
             <div class="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-slate-100">{tool}</div>
           ))}
+        </div>
+
+        <div class="mt-10">
+          <p class="font-mono text-xs font-semibold tracking-wide text-cyan-300 uppercase">{copy('cli_ai_prompts_label')}</p>
+          <ul class="mt-4 grid gap-3">
+            {agentPrompts.map((prompt) => (
+              <li class="flex items-start gap-3 rounded-lg border border-white/10 bg-slate-950 px-4 py-3">
+                <span class="mt-0.5 shrink-0 rounded-md border border-cyan-300/20 bg-cyan-400/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-cyan-200" aria-hidden="true">
+                  you
+                </span>
+                <span class="font-mono text-sm leading-6 text-slate-200">{prompt}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-5 text-sm leading-6 text-slate-400">{copy('cli_ai_skills_note')}</p>
+          <div class="mt-3 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10">
+            <CommandCode command={skillsInstallCommand} />
+          </div>
+          <a href={getRelativeLocaleUrl(locale, 'skills')} class="mt-3 inline-flex text-sm font-semibold text-cyan-200 underline underline-offset-4 hover:text-white">
+            {copy('agent_ready_cta')}
+          </a>
         </div>
       </div>
 

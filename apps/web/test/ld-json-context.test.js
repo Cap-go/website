@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test'
-import { createLdJsonGraph, createNewsArticleLdJson, createProductLdJson, ensureLdJsonContext } from '../src/lib/ldJson.ts'
+import { CAPGO_ORGANIZATION_DESCRIPTION, createLdJsonGraph, createNewsArticleLdJson, createProductLdJson, createServiceLdJson, ensureLdJsonContext } from '../src/lib/ldJson.ts'
 
 const mockConfig = {
   brand: 'Capgo',
@@ -83,6 +83,55 @@ test('createProductLdJson adds review and aggregateRating from customer reviews'
     bestRating: 5,
     worstRating: 1,
   })
+})
+
+test('createServiceLdJson references Capgo organization by @id', () => {
+  const service = createServiceLdJson(mockConfig, {
+    name: 'Capgo',
+    description: 'Live updates',
+    url: 'https://capgo.app/',
+    serviceType: 'Software Development Service',
+  })
+
+  expect(service.provider).toEqual({ '@id': 'https://capgo.app/#organization' })
+})
+
+test('createProductLdJson adds monthly and yearly priceSpecification entries', () => {
+  const product = createProductLdJson(mockConfig, {
+    name: 'Capgo',
+    description: 'Live updates for Capacitor apps',
+    url: 'https://capgo.app/pricing/',
+    offers: [
+      {
+        name: 'Solo',
+        price: '14',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+        priceSpecifications: [
+          { price: '14', billingPeriod: 'monthly' },
+          { price: '134', billingPeriod: 'yearly' },
+        ],
+      },
+    ],
+  })
+
+  expect(product.offers[0].priceSpecification).toHaveLength(2)
+  expect(product.offers[0].priceSpecification[0]).toMatchObject({
+    '@type': 'UnitPriceSpecification',
+    price: '14',
+    unitCode: 'MON',
+  })
+  expect(product.offers[0].priceSpecification[1]).toMatchObject({
+    '@type': 'UnitPriceSpecification',
+    price: '134',
+    unitCode: 'ANN',
+  })
+})
+
+test('createCapgoOrganization uses the company description', () => {
+  const graph = createLdJsonGraph(mockConfig, { '@type': 'WebPage', name: 'Test' }, { includeOrganization: true })
+  const organization = graph['@graph'].find((node) => node['@type'] === 'Organization')
+  expect(organization.description).toBe(CAPGO_ORGANIZATION_DESCRIPTION)
 })
 
 test('createProductLdJson omits review fields when no reviews are provided', () => {

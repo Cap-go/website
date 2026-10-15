@@ -5,6 +5,13 @@ export interface RegisterUserInput {
   password: string
   captcha_token?: string
   ref?: string
+  signup_source?: string
+  signup_plugin?: string
+  first_touch_type?: string
+  first_touch_path?: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
   registration_device_type?: string
   registration_os?: string
   registration_browser?: string

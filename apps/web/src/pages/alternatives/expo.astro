@@ -3,10 +3,12 @@ import ComparisonPage from '@/components/comparison/ComparisonPage.astro'
 import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
+import { pageDates, toIsoDate } from '@/data/pageDates'
 import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
+const dates = pageDates['alternatives/expo']
 const config = Astro.locals.runtimeConfig.public
 const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
 const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
@@ -72,6 +74,9 @@ const content = {
       name: metaTitle,
       description: metaDescription,
       url: pageUrl,
+      datePublished: toIsoDate(dates.publishedAt),
+      dateModified: toIsoDate(dates.updatedAt),
+      inLanguage: locale,
     }),
     {
       includeOrganization: true,
@@ -145,6 +150,7 @@ const related = [
 
 <Layout content={content}>
   <ComparisonPage
+    updatedAt={dates.updatedAt}
     competitor={competitor}
     eyebrow={m.compare_expo_eyebrow({}, { locale })}
     heading={m.compare_expo_h1({}, { locale })}

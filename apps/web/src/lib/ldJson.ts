@@ -21,7 +21,24 @@ import type {
 import { CAPGO_LEGAL_NAME, CAPGO_POSTAL_ADDRESS } from '../../../shared/agentDiscovery'
 
 // Re-export schema-dts types for external use
-export type { BreadcrumbList, FAQPage, Graph, HowTo, ItemList, NewsArticle, Organization, Person, Product, Review, Service, SoftwareApplication, Thing, WebPage, WebSite, WithContext }
+export type {
+  BreadcrumbList,
+  FAQPage,
+  Graph,
+  HowTo,
+  ItemList,
+  NewsArticle,
+  Organization,
+  Person,
+  Product,
+  Review,
+  Service,
+  SoftwareApplication,
+  Thing,
+  WebPage,
+  WebSite,
+  WithContext,
+}
 
 export type ProductReviewInput = {
   author: string
@@ -67,6 +84,12 @@ export type GraphItem = Thing
 
 const SCHEMA_ORG_CONTEXT = 'https://schema.org' as const
 
+export const CAPGO_ORGANIZATION_DESCRIPTION = 'Capgo: push fixes to your Capacitor users in minutes, build signed iOS and Android apps without a Mac, and roll back in one click'
+
+export function capgoOrganizationId(baseUrl: string): string {
+  return `${baseUrl}/#organization`
+}
+
 /**
  * Ensure ld+json has schema.org @context before serialization.
  * Handles standalone schemas, @graph bundles, and arrays.
@@ -104,7 +127,7 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
       height: '1024',
     },
     sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
-    description: config.blog_description,
+    description: CAPGO_ORGANIZATION_DESCRIPTION,
     email: 'support@capgo.app',
     address: CAPGO_POSTAL_ADDRESS,
     contactPoint: {
@@ -214,6 +237,8 @@ export function createSoftwareApplicationLdJson(
     url: string
     image?: string
     applicationCategory: string
+    applicationSubCategory?: string
+    featureList?: string[]
     operatingSystem?: string
     softwareVersion?: string
     downloadUrl?: string
@@ -221,6 +246,7 @@ export function createSoftwareApplicationLdJson(
       ratingValue: number
       reviewCount: number
     }
+    reviews?: ProductReviewInput[]
     offers?: {
       price: string
       priceCurrency: string
@@ -238,15 +264,22 @@ export function createSoftwareApplicationLdJson(
     applicationCategory: options.applicationCategory,
   }
 
+  if (options.applicationSubCategory) app.applicationSubCategory = options.applicationSubCategory
+  if (options.featureList?.length) app.featureList = options.featureList
   if (options.operatingSystem) app.operatingSystem = options.operatingSystem
   if (options.softwareVersion) app.softwareVersion = options.softwareVersion
   if (options.downloadUrl) app.downloadUrl = options.downloadUrl
+  if (options.reviews?.length) app.review = createReviewsLdJson(options.reviews)
   if (options.aggregateRating) {
     app.aggregateRating = {
       '@type': 'AggregateRating',
       ratingValue: options.aggregateRating.ratingValue,
       reviewCount: options.aggregateRating.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
     }
+  } else if (options.reviews?.length) {
+    app.aggregateRating = createAggregateRatingLdJson(options.reviews)
   }
   if (options.offers) {
     app.offers = {
@@ -274,10 +307,14 @@ export function createProductLdJson(
     brand?: string
     offers: {
       name?: string
-      price: string
+      price?: string
       priceCurrency: string
       availability: string
       priceValidUntil?: string
+      priceSpecifications?: Array<{
+        price: string
+        billingPeriod: 'monthly' | 'yearly'
+      }>
     }[]
     aggregateRating?: {
       ratingValue: number
@@ -297,14 +334,26 @@ export function createProductLdJson(
       '@type': 'Brand',
       name: options.brand || 'Capgo',
     },
-    offers: options.offers.map((offer) => ({
-      '@type': 'Offer' as const,
-      ...(offer.name ? { name: offer.name } : {}),
-      price: offer.price,
-      priceCurrency: offer.priceCurrency,
-      availability: offer.availability as 'https://schema.org/InStock' | 'https://schema.org/OutOfStock',
-      priceValidUntil: offer.priceValidUntil,
-    })),
+    offers: options.offers.map((offer) => {
+      const priceSpecifications = offer.priceSpecifications?.map((spec) => ({
+        '@type': 'UnitPriceSpecification' as const,
+        price: spec.price,
+        priceCurrency: offer.priceCurrency,
+        ...(spec.billingPeriod === 'monthly' ? { billingDuration: 1, unitCode: 'MON' as const } : { billingDuration: 1, unitCode: 'ANN' as const }),
+      }))
+
+      const primaryPrice = offer.price ?? offer.priceSpecifications?.[0]?.price
+
+      return {
+        '@type': 'Offer' as const,
+        ...(offer.name ? { name: offer.name } : {}),
+        ...(primaryPrice ? { price: primaryPrice } : {}),
+        priceCurrency: offer.priceCurrency,
+        availability: offer.availability as 'https://schema.org/InStock' | 'https://schema.org/OutOfStock',
+        priceValidUntil: offer.priceValidUntil,
+        ...(priceSpecifications?.length ? { priceSpecification: priceSpecifications } : {}),
+      }
+    }),
   }
 
   if (options.sku) product.sku = options.sku
@@ -339,8 +388,6 @@ export function createServiceLdJson(
     areaServed?: string[]
   },
 ): Service {
-  const organization = createCapgoOrganization(config)
-
   return {
     '@type': 'Service',
     '@id': `${options.url}#service`,
@@ -348,7 +395,9 @@ export function createServiceLdJson(
     description: options.description,
     url: options.url,
     serviceType: options.serviceType,
-    provider: organization,
+    provider: {
+      '@id': capgoOrganizationId(config.baseUrl),
+    },
     areaServed: options.areaServed,
   }
 }
@@ -429,15 +478,24 @@ export function createWebPageLdJson(
     name: string
     description: string
     url: string
+    datePublished?: string
+    dateModified?: string
+    inLanguage?: string
   },
 ): WebPage {
-  return {
+  const page: WebPage = {
     '@type': 'WebPage',
     '@id': `${options.url}#webpage`,
     name: options.name,
     description: options.description,
     url: options.url,
   }
+
+  if (options.datePublished) page.datePublished = options.datePublished
+  if (options.dateModified) page.dateModified = options.dateModified
+  if (options.inLanguage) page.inLanguage = options.inLanguage
+
+  return page
 }
 
 /**
@@ -456,7 +514,7 @@ export function createWebSiteLdJson(
     '@id': `${config.baseUrl}/#website`,
     url: config.baseUrl,
     name: config.brand,
-    description: config.blog_description,
+    description: CAPGO_ORGANIZATION_DESCRIPTION,
     inLanguage: options?.inLanguage || 'en',
   }
 
@@ -517,6 +575,7 @@ export function createLdJsonGraph(
     includeOrganization?: boolean
     includeBreadcrumbs?: boolean
     breadcrumbs?: Array<{ name: string; url: string }>
+    breadcrumbId?: string
     additionalEntities?: Thing[]
   },
 ): Graph {
@@ -532,9 +591,10 @@ export function createLdJsonGraph(
 
   // Add breadcrumbs if requested
   if (options?.includeBreadcrumbs && options.breadcrumbs) {
+    const breadcrumbPageUrl = options.breadcrumbId ?? options.breadcrumbs[options.breadcrumbs.length - 1]?.url ?? config.baseUrl
     const breadcrumb: BreadcrumbList = {
       '@type': 'BreadcrumbList',
-      '@id': `${config.baseUrl}/#breadcrumb`,
+      '@id': `${breadcrumbPageUrl}#breadcrumb`,
       itemListElement: options.breadcrumbs.map((crumb, index) => ({
         '@type': 'ListItem' as const,
         position: index + 1,

@@ -1,0 +1,102 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import {
+  appleRejectionStories,
+  appleRejectionStoryBatches,
+} from '@/data/apple-rejection-stories'
+import AppleRejectionStoriesListing from '@/components/apple-rejection-stories/AppleRejectionStoriesListing.astro'
+import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+
+const config = Astro.locals.runtimeConfig.public
+const locale = Astro.locals.locale
+const storyCount = appleRejectionStories.length
+const title = 'Apple App Store Rejection Stories | Capgo'
+const description =
+  'Anonymized real App Store rejection stories tagged by guideline (4.3, 2.1, metadata, review delays, objectionable content, and more). Lessons only, no names or source links.'
+const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+
+const itemList = createItemListLdJson(config, {
+  url: pageUrl,
+  name: 'Apple App Store rejection stories',
+  description,
+  items: appleRejectionStories.map((story) => ({
+    name: story.title,
+    description: story.lesson,
+  })),
+})
+
+const webPage = createWebPageLdJson(config, {
+  name: title,
+  description,
+  url: pageUrl,
+})
+
+const content = {
+  title,
+  description,
+  canonical: pageUrl,
+  url: pageUrl,
+  image: `${config.baseUrl}/capgo_social.png`,
+  keywords: 'apple app store rejection, app store review, guideline 4.3, guideline 2.1, app review metadata, app store review time',
+  ldJSON: createLdJsonGraph(config, webPage, {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: 'Home', url: getRelativeLocaleUrl(locale, '/') },
+      { name: 'Apple rejection stories', url: getRelativeLocaleUrl(locale, '/apple-rejection-stories/') },
+    ],
+    additionalEntities: [itemList],
+  }),
+}
+
+const batchOne = appleRejectionStoryBatches.find((batch) => batch.id === 'batch-1')
+---
+
+<Layout content={content}>
+  <main id="main-content" class="bg-gray-900 text-white">
+    <div class="product-hero border-b border-white/10">
+      <section class="relative overflow-hidden py-16 sm:py-24">
+        <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div class="absolute top-1/3 left-1/4 h-80 w-80 rounded-full bg-[#44BCFF]/10 blur-3xl"></div>
+          <div class="absolute right-1/4 bottom-0 h-72 w-72 rounded-full bg-rose-500/10 blur-3xl"></div>
+        </div>
+
+        <div class="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <p class="text-sm font-semibold tracking-wide text-[#44BCFF] uppercase">Anonymized archive</p>
+          <h1 class="mt-4 text-4xl font-bold text-balance sm:text-5xl lg:text-6xl">What App Store review actually costs teams</h1>
+          <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-300">
+            {storyCount} paraphrased rejection stories from public developer posts. No names, no app titles, no links back to sources. Just context, outcomes when known, and one lesson each.
+          </p>
+          {batchOne && (
+            <p class="mt-4 text-sm text-gray-400">
+              {batchOne.label} · {batchOne.storyCount} stories · updated {batchOne.publishedOn}
+            </p>
+          )}
+          <dl class="mx-auto mt-10 grid max-w-lg grid-cols-1 gap-4 sm:grid-cols-3">
+            <div class="rounded-xl border border-white/10 bg-gray-950/60 p-4">
+              <dt class="text-xs font-semibold tracking-wide text-gray-400 uppercase">Stories</dt>
+              <dd class="mt-1 text-3xl font-bold text-white">{storyCount}</dd>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-gray-950/60 p-4">
+              <dt class="text-xs font-semibold tracking-wide text-gray-400 uppercase">Guidelines</dt>
+              <dd class="mt-1 text-3xl font-bold text-white">15</dd>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-gray-950/60 p-4">
+              <dt class="text-xs font-semibold tracking-wide text-gray-400 uppercase">Batch</dt>
+              <dd class="mt-1 text-3xl font-bold text-white">1</dd>
+            </div>
+          </dl>
+          <a
+            href="#stories"
+            class="mt-10 inline-flex min-h-11 items-center justify-center rounded-xl bg-[#44BCFF] px-8 py-3 text-sm font-bold text-gray-900 transition hover:bg-sky-300 focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
+          >
+            Browse stories
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <AppleRejectionStoriesListing />
+  </main>
+</Layout>

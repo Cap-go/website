@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-12T03:03:33.472Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-10-14T01:39:31.000Z
 head_image: /blog-images/capacitor-live-updates-staying-compliant-with-apple.webp
 head_image_alt: "\"Capacitor Live Updates: Staying Compliant with Apple\" Capgo blog illustration"
 keywords: Capacitor, live updates, app compliance, Apple guidelines, encryption, bug fixes, mobile development
@@ -17,7 +17,7 @@ origin: ai
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjs.com/) live updates let developers push bug fixes and minor changes directly to apps without requiring users to download updates from the [App Store](https://www.apple.com/app-store/). This speeds up deployment by up to **81%**, reduces costs, and improves user experience. However, staying compliant with Apple's strict guidelines is essential to avoid app rejections.
+[Capacitor live updates](https://capgo.app/live-update/) let developers push bug fixes and minor changes directly to apps without requiring users to download updates from the [App Store](https://www.apple.com/app-store/). [Capacitor](https://capacitorjs.com/) teams use OTA delivery for eligible web-layer fixes while native changes still go through review. This speeds up deployment by up to **81%**, reduces costs, and improves user experience. However, staying compliant with Apple's strict guidelines is essential to avoid app rejections.
 
 ### Key Points:
 

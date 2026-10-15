@@ -1,3 +1,4 @@
+import { getSignupAttributionForEvents, getSignupUserMetadataForRegistration } from '@/lib/attribution'
 import { RegisterApiError, registerUser } from '@/services/registration'
 import { getRegistrationDevice } from '@/services/registration-device'
 import Toastify from 'toastify-js'
@@ -54,7 +55,7 @@ form?.addEventListener('submit', async (e) => {
       password: password.value,
       captcha_token: getCaptchaId() || undefined,
       ...getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints),
-      ref: new URLSearchParams(window.location.search).get('ref') || undefined,
+      ...getSignupUserMetadataForRegistration(),
     })
   } catch (error) {
     isSubmitting = false
@@ -68,6 +69,7 @@ form?.addEventListener('submit', async (e) => {
       },
     }).showToast()
   }
+  ;(window as any).oaiq?.('measure', 'registration_completed', { type: 'customer_action' })
   if ((window as any).datafast) {
     ;(window as any).datafast('signup', { email: email.value })
   }
@@ -75,6 +77,7 @@ form?.addEventListener('submit', async (e) => {
     ;(window as any).posthog.capture('user_signed_up', {
       signup_confirmation: 'client',
       email: email.value,
+      ...getSignupAttributionForEvents(),
     })
   }
   if ((window as any).Affonso?.signup) {

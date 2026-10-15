@@ -162,7 +162,11 @@ const updatesContext = __translationWorkerTest.resolveTranslationContexts(['Upda
 assert(typeof updatesContext === 'string' && updatesContext.includes('updates_by_month'), 'HTML-split Updates segment did not keep parent pricing calculator context')
 const supportContext = __translationWorkerTest.resolveTranslationContexts(['Support'])[0]
 assert(
-  typeof supportContext === 'string' && supportContext.includes('Message key `support`') && supportContext.includes('Message key `compare_row_support`'),
+  typeof supportContext === 'string' &&
+    supportContext.includes('support') &&
+    supportContext.includes('compare_row_support') &&
+    supportContext.includes('support_title') &&
+    supportContext.includes('solutions_ionic_enterprise_plugins_support_label'),
   'Duplicate Support text dropped one of its contexts',
 )
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
@@ -237,8 +241,8 @@ assert(
 )
 assert(__translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === 'Évitez l\u2019attente.', 'French polish path did not apply article elision')
 assert(__translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.', 'Non-French polish path should leave text unchanged')
-const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Skip the wait. Ship the fix.'])[0]
-assert(typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('hotfix'), 'Missing marketing context override for live update hero headline')
+const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Capacitor Live Updates (OTA)'])[0]
+assert(typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('capacitor'), 'Missing marketing context override for live update hero headline')
 
 const noTranslateHtml = `<!doctype html>
 <html lang="en">

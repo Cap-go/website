@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -31,7 +32,13 @@ const makeSeoTitle = (primary: string, descriptionText: string) => {
 
 const title = makeSeoTitle(m.trust({}, { locale }), description)
 
-const content = { title, description }
+const ldJSON = createLdJsonGraph(
+  Astro.locals.runtimeConfig.public,
+  createWebPageLdJson(Astro.locals.runtimeConfig.public, { name: title, description, url: Astro.url.href, inLanguage: locale }),
+  { includeOrganization: true },
+)
+
+const content = { title, description, ldJSON }
 
 const heroPoints = [
   m.trust_hero_point_one({}, { locale }),

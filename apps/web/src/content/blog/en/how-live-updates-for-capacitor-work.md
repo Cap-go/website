@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-18T06:14:25.862Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-10-14T01:39:31.000Z
 head_image: /blog-images/how-live-updates-for-capacitor-work.webp
 head_image_alt: "'How Live Updates Work in Capgo' Capgo blog illustration"
 keywords: 'Capgo live updates, OTA updates, Capacitor updates, mobile app development, app updates'
@@ -19,7 +19,7 @@ next_blog: ''
 
 # Understanding Live Updates in Capgo
 
-Live updates are one of the most powerful features in Capacitor apps, allowing real-time updates without app store submissions. Let's dive deep into how Capgo implements this functionality.
+[Capacitor live updates](https://capgo.app/live-update/) (OTA) replace the web bundle inside your app so you can ship JavaScript, HTML, and CSS changes without a new store binary. Live updates are one of the most powerful features in Capacitor apps, allowing real-time updates without app store submissions. Let's dive deep into how Capgo implements this functionality.
 
 ## Core Concepts
 

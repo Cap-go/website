@@ -28,6 +28,7 @@ const {
   articleSection = null,
   articleTags = null,
   robots = 'index, follow',
+  markdownAlternate = null,
 } = Astro.props
 
 const localeName_to_OGP = {
@@ -106,6 +107,7 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title="Capgo" href="https://capgo.app/feed.xml" />
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
@@ -123,6 +125,11 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta name="keywords" content={keywords} />
 
 <link rel="canonical" href={canonicalString} />
+{
+  markdownAlternate && (
+    <link rel="alternate" type="text/markdown" href={new URL(markdownAlternate, baseUrl).toString()} />
+  )
+}
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
 <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
@@ -130,19 +137,15 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <link rel="manifest" href="/site.webmanifest" />
 
 <!-- Hreflang tags for internationalization -->
-{
-  alternateVersions &&
-    alternateVersions.length > 0 &&
-    alternateVersions.map((version: { locale: string; url: string }) => <link rel="alternate" hreflang={version.locale} href={version.url} />)
-}
-{
-  alternateVersions && alternateVersions.length > 0 && (
-    <link rel="alternate" hreflang="x-default" href={alternateVersions.find((v: { locale: string }) => v.locale === 'en')?.url || alternateVersions[0].url} />
-  )
-}
+{alternateVersions &&
+  alternateVersions.length > 0 &&
+  alternateVersions.map((version: { locale: string; url: string }) => <link rel="alternate" hreflang={version.locale} href={version.url} />)}
+{alternateVersions && alternateVersions.length > 0 && (
+  <link rel="alternate" hreflang="x-default" href={alternateVersions.find((v: { locale: string }) => v.locale === 'en')?.url || alternateVersions[0].url} />
+)}
 
 <!-- Primary Meta Tags -->
-<title set:html={titleString} />
+<title set:html={titleString}></title>
 <meta name="title" content={titleString} />
 <meta name="author" content={author} />
 <meta name="description" content={displayDescription} />
@@ -164,14 +167,12 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 {articleSection && <meta property="article:section" content={articleSection} />}
 {articleTags && articleTags.map((tag: string) => <meta property="article:tag" content={tag} />)}
 <meta name="robots" content={robots} />
-{
-  audio && (
-    <>
-      <meta property="og:audio" content={audio} />
-      <meta property="og:audio:type" content="audio/mpeg" />
-    </>
-  )
-}
+{audio && (
+  <>
+    <meta property="og:audio" content={audio} />
+    <meta property="og:audio:type" content="audio/mpeg" />
+  </>
+)}
 <meta property="og:site_name" content={baseDomain()} />
 <meta property="og:description" content={displayDescription} />
 
@@ -189,4 +190,4 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta name="twitter:app:name:googleplay" content={appName} />
 
 <!-- @ts-ignore -->
-<script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ensureLdJsonContext(ldJSON))} />
+<script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ensureLdJsonContext(ldJSON))}></script>

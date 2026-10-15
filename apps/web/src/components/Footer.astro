@@ -100,6 +100,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
       { name: m.alternatives_hub_codepush_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/codepush') },
       { name: m.footer_voltbuilder_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/voltbuilder') },
       { name: m.footer_best_live_updates_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'best/capacitor-live-updates') },
+      { name: m.best_ai_tools_capacitor_title({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'best/ai-tools-for-capacitor') },
       { name: m.footer_migrate_appflow_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'migrate/from-appflow') },
       { name: m.footer_mcp_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'mcp') },
       {
@@ -243,6 +244,9 @@ const columns: { title: string; links: FooterLink[] }[] = [
         </a>
         <a href="/llms-full.txt" class="font-mono text-xs text-zinc-400 transition-colors hover:text-white">
           llms-full.txt
+        </a>
+        <a href="/feed.xml" class="font-mono text-xs text-zinc-400 transition-colors hover:text-white">
+          RSS feed
         </a>
         <a href="/sitemap-index.xml" class="font-mono text-xs text-zinc-400 transition-colors hover:text-white">
           Sitemap

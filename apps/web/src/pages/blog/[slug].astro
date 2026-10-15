@@ -4,7 +4,7 @@ import BlogAuthorByline from '@/components/BlogAuthorByline.astro'
 import BlogEditorialByline from '@/components/BlogEditorialByline.astro'
 import GetStarted from '@/components/GetStarted.astro'
 import SignupCta from '@/components/SignupCta.astro'
-import { HUMAN_EDITORIAL_TEAM } from '@/config/blogEditorialTeam'
+import { HUMAN_EDITORIAL_TEAM, resolveAuthorUrl } from '@/config/blogEditorialTeam'
 import { isHumanBlogPost } from '@/lib/blogOrigin'
 import { formatTime } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
@@ -80,6 +80,7 @@ const alternateVersions = locales.map((locale) => {
 
 const { Content, headings } = await render(entry)
 const showEditorialByline = isHumanBlogPost(entry.data.origin)
+const authorUrl = resolveAuthorUrl(entry.data.author, entry.data.author_url)
 
 const dateModified = entry.data.updated_at
 const datePublished = entry.data.created_at
@@ -130,7 +131,7 @@ const articleLdJson = createNewsArticleLdJson(Astro.locals.runtimeConfig.public,
   datePublished,
   dateModified,
   author: entry.data.author || 'Capgo',
-  authorUrl: entry.data.author_url,
+  authorUrl,
   authorImage: entry.data.author_image_url,
   keywords: entry.data.keywords ? entry.data.keywords.split(',').map((k) => k.trim()) : undefined,
   articleSection: entry.data.tag ? entry.data.tag.split(',')[0]?.trim() : undefined,
@@ -181,7 +182,7 @@ content['ldJSON'] =
             ) : (
               <BlogAuthorByline
                 author={entry.data.author}
-                authorUrl={entry.data.author_url}
+                authorUrl={authorUrl}
                 authorImageUrl={entry.data.author_image_url}
                 showLabel={false}
                 class="mt-6 md:hidden"
@@ -213,13 +214,13 @@ content['ldJSON'] =
             showEditorialByline ? (
               <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="relative pb-5" />
             ) : (
-              <BlogAuthorByline author={entry.data.author} authorUrl={entry.data.author_url} authorImageUrl={entry.data.author_image_url} class="relative pb-5" />
+              <BlogAuthorByline author={entry.data.author} authorUrl={authorUrl} authorImageUrl={entry.data.author_image_url} class="relative pb-5" />
             )
           }
           {
             headings?.length > 0 ? (
               <div id="staticToc" class="sticky top-16 pt-4 pb-8">
-                <SignupCta id="blog-sidebar-signup-cta" align="start" class="pt-4 pb-8" />
+                <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4 pb-8" />
                 <div>
                   <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-400">
                     <svg
@@ -251,7 +252,7 @@ content['ldJSON'] =
               </div>
             ) : (
               <div class="sticky top-16 pt-4 pb-8">
-                <SignupCta id="blog-sidebar-signup-cta" align="start" class="pt-4" />
+                <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4" />
               </div>
             )
           }

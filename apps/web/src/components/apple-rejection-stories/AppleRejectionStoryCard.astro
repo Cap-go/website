@@ -1,0 +1,53 @@
+---
+import type { AppleRejectionStory, AppleRejectionStoryTag } from '@/data/apple-rejection-stories/types'
+import { appleRejectionStoryTagLabels } from '@/data/apple-rejection-stories/types'
+import AppleRejectionStoryVisual from './AppleRejectionStoryVisual.astro'
+
+interface Props {
+  story: AppleRejectionStory
+  allStories: AppleRejectionStory[]
+  tagStyles: Record<string, string>
+}
+
+const { story, allStories, tagStyles } = Astro.props
+
+const primaryTag = story.tags[0] as AppleRejectionStoryTag
+const guidelineBadgeClass = tagStyles[primaryTag] ?? 'border-gray-400 bg-gray-800 text-gray-100'
+---
+
+<li class="rejection-story-card flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-gray-950/90" data-story-tags={story.tags.join(' ')}>
+  <AppleRejectionStoryVisual story={story} allStories={allStories} class="rounded-none border-0 border-b border-white/10" />
+
+  <div class="flex flex-1 flex-col p-6 sm:p-8">
+    <div class="flex flex-wrap items-center gap-2">
+      <span class={`rounded-full border px-3 py-1 text-xs font-bold tracking-wide uppercase ${guidelineBadgeClass}`} title={story.guidelineLabel}>
+        {story.guidelineLabel}
+      </span>
+      <span class="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold text-gray-200">{story.platform}</span>
+      {story.tags.map((tag) => (
+        <span class={`rounded-full border px-3 py-1 text-xs font-semibold ${tagStyles[tag] ?? 'border-gray-300 bg-gray-100 text-gray-900'}`}>
+          {appleRejectionStoryTagLabels[tag]}
+        </span>
+      ))}
+    </div>
+
+    <h2 class="mt-4 text-2xl font-bold text-balance text-white">{story.title}</h2>
+
+    <div class="mt-5 space-y-5">
+      <div>
+        <h3 class="text-xs font-bold tracking-wide text-gray-400 uppercase">What happened</h3>
+        <p class="mt-2 text-base leading-7 text-gray-300">{story.body}</p>
+      </div>
+
+      <div class="rounded-xl border border-white/10 bg-gray-900/80 p-4">
+        <h3 class="text-xs font-bold tracking-wide text-gray-400 uppercase">Resolution</h3>
+        <p class="mt-2 text-sm leading-7 text-gray-200">{story.resolution}</p>
+      </div>
+
+      <div class="rounded-xl border border-[#44BCFF]/40 bg-[#44BCFF]/10 p-4">
+        <h3 class="text-xs font-bold tracking-wide text-[#7DD3FC] uppercase">Lesson</h3>
+        <p class="mt-2 text-base leading-7 text-gray-100">{story.lesson}</p>
+      </div>
+    </div>
+  </div>
+</li>

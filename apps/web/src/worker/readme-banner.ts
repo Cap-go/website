@@ -158,15 +158,17 @@ function truncate(value: string, maxLength: number): string {
   return `${value.slice(0, maxLength - 1).trimEnd()}...`
 }
 
+// The detail line renders at 50px and must end before COPY_SAFE_RIGHT_EDGE, which leaves room for
+// about 58 characters. Keep these short; readme-banner.test.js renders every variant and checks the length.
+const LIVE_UPDATE_DETAIL = `AI skills + MCP, OTA, native builds, ${pluginCountLabel} free plugins:`
+const BUILD_DETAIL = `AI skills + MCP, iOS/Android builds, ${pluginCountLabel} free plugins:`
+
 function buildCopy(context: BannerContext): { title: string; detail: string; cta: string } {
   if (context.plugin) {
     const title = `${context.plugin.title} for Capacitor`
     return {
       title,
-      detail:
-        context.campaign === 'build'
-          ? `Native build, AppStore publishing, ${pluginCountLabel} Free plugins:`
-          : `OTA, Native build, AppStore publishing, ${pluginCountLabel} Free plugins:`,
+      detail: context.campaign === 'build' ? BUILD_DETAIL : LIVE_UPDATE_DETAIL,
       cta: context.campaign === 'build' ? 'Click to try Capgo Build' : 'Click to check out Capgo',
     }
   }
@@ -174,14 +176,14 @@ function buildCopy(context: BannerContext): { title: string; detail: string; cta
   if (context.campaign === 'build') {
     return {
       title: 'Native builds for Capacitor',
-      detail: `Native iOS/Android builds, App Store publishing, ${pluginCountLabel} free plugins:`,
+      detail: BUILD_DETAIL,
       cta: 'Click to try Capgo Build',
     }
   }
 
   return {
-    title: 'Instant updates for Capacitor',
-    detail: `OTA, Native build, AppStore publishing, ${pluginCountLabel} Free plugins:`,
+    title: 'Capacitor live updates with AI',
+    detail: LIVE_UPDATE_DETAIL,
     cta: 'Click to check out Capgo',
   }
 }

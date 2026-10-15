@@ -1,5 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
-import { LLMS_TXT_PATHS, markdownNotFoundResponse, prefersMarkdown, stripRewrittenAssetHeaders, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
+import { LLMS_WHEN_TO_USE_PATHS, markdownNotFoundResponse, prefersMarkdown, stripRewrittenAssetHeaders, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
 
 interface Env {
   ASSETS: {
@@ -249,7 +249,7 @@ export default {
       const rest = pathname.slice('/docs/plugin/'.length)
       return trackAICrawler(request, Response.redirect(new URL(`/docs/plugins/updater/${rest}${url.search}`, request.url).toString(), 301), ctx)
     }
-    if (LLMS_TXT_PATHS.has(pathname) && (request.method === 'GET' || request.method === 'HEAD')) {
+    if (LLMS_WHEN_TO_USE_PATHS.has(pathname) && (request.method === 'GET' || request.method === 'HEAD')) {
       const llms = await env.ASSETS.fetch(request)
       if (llms.status === 200) {
         if (request.method === 'HEAD') return trackAICrawler(request, llms, ctx)

@@ -3,14 +3,23 @@ import ComparisonPage from '@/components/comparison/ComparisonPage.astro'
 import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
-import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { pageDates, toIsoDate } from '@/data/pageDates'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
+const dates = pageDates['alternatives/voltbuilder']
 const config = Astro.locals.runtimeConfig.public
 const title = m.voltbuilder_alt_title({}, { locale })
 const description = m.voltbuilder_alt_meta_description({}, { locale })
 const competitor = 'VoltBuilder'
+
+const faq = [
+  { question: m.voltbuilder_alt_faq_q1({}, { locale }), answer: m.voltbuilder_alt_faq_a1({}, { locale }) },
+  { question: m.voltbuilder_alt_faq_q2({}, { locale }), answer: m.voltbuilder_alt_faq_a2({}, { locale }) },
+  { question: m.voltbuilder_alt_faq_q3({}, { locale }), answer: m.voltbuilder_alt_faq_a3({}, { locale }) },
+  { question: m.voltbuilder_alt_faq_q4({}, { locale }), answer: m.voltbuilder_alt_faq_a4({}, { locale }) },
+]
 
 const ldJSON = createLdJsonGraph(
   config,
@@ -21,7 +30,20 @@ const ldJSON = createLdJsonGraph(
     serviceType: 'Software Development Service',
     areaServed: ['Worldwide'],
   }),
-  { includeOrganization: true },
+  {
+    includeOrganization: true,
+    additionalEntities: [
+      createWebPageLdJson(config, {
+        name: title,
+        description,
+        url: Astro.url.href,
+        datePublished: toIsoDate(dates.publishedAt),
+        dateModified: toIsoDate(dates.updatedAt),
+        inLanguage: locale,
+      }),
+      createFAQPageLdJson(config, { url: Astro.url.href, questions: faq }),
+    ],
+  },
 )
 
 const content = {
@@ -83,6 +105,7 @@ const related = [
 
 <Layout content={content}>
   <ComparisonPage
+    updatedAt={dates.updatedAt}
     competitor={competitor}
     eyebrow={m.compare_voltbuilder_eyebrow({}, { locale })}
     heading={m.voltbuilder_alt_hero_title({}, { locale })}
@@ -93,6 +116,7 @@ const related = [
     better={better}
     migration={migration}
     testimonials={productTestimonials.nativeBuild.concat(productTestimonials.liveUpdate.slice(0, 1))}
+    faq={faq}
     related={related}
     secondaryCta={{ label: m.native_build({}, { locale }), href: getRelativeLocaleUrl(locale, 'native-build') }}
   />

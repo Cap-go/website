@@ -1,0 +1,68 @@
+---
+import ConversionLandingLayout from '@/components/conversion/ConversionLandingLayout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const title = m.best_ai_tools_capacitor_title({}, { locale })
+const description = m.best_ai_tools_capacitor_meta_description({}, { locale })
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = { title, description, ldJSON, image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png` }
+
+const relatedLinks = [
+  { label: m.agents_hub_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'agents') },
+  { label: 'Capacitor skills for AI agents', href: getRelativeLocaleUrl(locale, 'skills') },
+  { label: m.footer_mcp_link({}, { locale }), href: getRelativeLocaleUrl(locale, 'mcp') },
+  { label: m.solutions_webapp_to_mobile_short({}, { locale }), href: getRelativeLocaleUrl(locale, 'solutions/webapp-to-mobile') },
+  { label: m.solutions_cordova_to_capacitor_ai_short({}, { locale }), href: getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor-ai') },
+  { label: m.best_capacitor_live_updates_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/capacitor-live-updates') },
+]
+---
+
+<ConversionLandingLayout
+  locale={locale}
+  content={content}
+  heroTitle={m.best_ai_tools_capacitor_hero_title({}, { locale })}
+  heroSubtitle={m.best_ai_tools_capacitor_hero_subtitle({}, { locale })}
+  sections={[
+    {
+      title: m.best_ai_tools_capacitor_stack_title({}, { locale }),
+      paragraphs: [m.best_ai_tools_capacitor_stack_p1({}, { locale })],
+      listItems: [
+        m.best_ai_tools_capacitor_stack_li1({}, { locale }),
+        m.best_ai_tools_capacitor_stack_li2({}, { locale }),
+        m.best_ai_tools_capacitor_stack_li3({}, { locale }),
+        m.best_ai_tools_capacitor_stack_li4({}, { locale }),
+      ],
+    },
+    {
+      title: m.best_ai_tools_capacitor_lifecycle_title({}, { locale }),
+      paragraphs: [m.best_ai_tools_capacitor_lifecycle_p1({}, { locale })],
+      listItems: [
+        m.best_ai_tools_capacitor_lifecycle_li1({}, { locale }),
+        m.best_ai_tools_capacitor_lifecycle_li2({}, { locale }),
+        m.best_ai_tools_capacitor_lifecycle_li3({}, { locale }),
+        m.best_ai_tools_capacitor_lifecycle_li4({}, { locale }),
+        m.best_ai_tools_capacitor_lifecycle_li5({}, { locale }),
+      ],
+    },
+    {
+      title: m.best_ai_tools_capacitor_setup_title({}, { locale }),
+      paragraphs: [m.best_ai_tools_capacitor_setup_p1({}, { locale })],
+    },
+  ]}
+  relatedLinks={relatedLinks}
+/>

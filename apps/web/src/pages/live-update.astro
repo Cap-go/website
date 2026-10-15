@@ -5,11 +5,11 @@ import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import { productVideos } from '@/config/productVideos'
-import { productTestimonials } from '@/config/productTestimonials'
+import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
@@ -24,7 +24,7 @@ function copy(key: string, values: MessageValues = {}) {
   return m[key](values, { locale })
 }
 
-const title = `${brand} | Ionic and Capacitor Live Updates`
+const title = `${brand} | ${m.live_update_seo_title({}, { locale })}`
 const description = m.live_update_description({}, { locale })
 const dataUrl = getRelativeLocaleUrl(locale, 'data')
 const expoUrl = getRelativeLocaleUrl(locale, 'alternatives/expo')
@@ -37,15 +37,44 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Live Updates',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Over-the-air live updates for Capacitor apps',
+  operatingSystem: 'iOS, Android',
+  featureList: [
+    'Over-the-air JavaScript, HTML, CSS, and asset updates without app store review',
+    'Delta downloads and end-to-end encrypted, signed bundles',
+    'Dynamic channels, device overrides, and progressive rollouts',
+    'Automatic rollback when a bundle fails to start, plus one-click revert',
+    'Version targeting so each native version only receives compatible bundles',
+    'Works with Capacitor, Ionic, Cordova, and Electron apps',
+    'Open-source updater plugin (MPL-2.0) and backend (AGPL-3.0)',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(productTestimonials.liveUpdate),
+  offers: { price: '12', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+})
+
+const faqItems = [
+  { question: m.live_update_faq_q1({}, { locale }), answer: m.live_update_faq_a1({}, { locale }) },
+  { question: m.live_update_faq_q2({}, { locale }), answer: m.live_update_faq_a2({}, { locale }) },
+  { question: m.live_update_faq_q3({}, { locale }), answer: m.live_update_faq_a3({}, { locale }) },
+  { question: m.live_update_faq_q4({}, { locale }), answer: m.live_update_faq_a4({}, { locale }) },
+]
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  additionalEntities: [softwareLdJson, createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
 const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-live-update.png`,
-  keywords: 'Capacitor live updates, EAS Update analog, Expo alternative, OTA updates, Capgo',
+  keywords: 'Capacitor live updates, Capacitor OTA, live updates, OTA updates, Ionic Capacitor, Capgo',
   ldJSON,
 }
 
@@ -442,7 +471,14 @@ const featureTiles = [
     <ReleaseExplainers background="bg-transparent" />
     <UpdateTypesSection background="bg-transparent" />
     <StorePolicySection background="bg-transparent" />
-    <AgentReadySection background="bg-transparent" />
+    <AgentReadySection
+      background="bg-transparent"
+      headingId="agent-ready-live-update-title"
+      eyebrow={m.agent_ready_live_update_eyebrow({}, { locale })}
+      title={m.agent_ready_live_update_title({}, { locale })}
+      subtitle={m.agent_ready_live_update_subtitle({}, { locale })}
+      prompts={[m.agent_ready_live_update_prompt_1({}, { locale }), m.agent_ready_live_update_prompt_2({}, { locale }), m.agent_ready_live_update_prompt_3({}, { locale })]}
+    />
 
     <section class="section" id="compare">
       <div class="shell">
@@ -499,6 +535,33 @@ const featureTiles = [
           <a class="btn btn-md btn-ghost" href={expoUrl}>
             {copy('live_update_eas_cta')}
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="live-update-faq-title">
+      <div class="shell">
+        <div class="section-head section-head--narrow">
+          <div class="eyebrow eyebrow--blue">{m.live_update_faq_eyebrow({}, { locale })}</div>
+          <h2 class="h2-section" id="live-update-faq-title">
+            {m.live_update_faq_title({}, { locale })}
+          </h2>
+          <p class="lead">{m.live_update_faq_desc({}, { locale })}</p>
+        </div>
+        <div class="faq">
+          {faqItems.map((item) => (
+            <details>
+              <summary>
+                {item.question}
+                <span class="plus" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <div class="ans" aria-live="polite">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))}
         </div>
       </div>
     </section>

@@ -102,6 +102,7 @@ const content = {
 const relatedLinks = [
   { label: copy('agents_page_related_mcp'), href: getRelativeLocaleUrl(locale, 'mcp') },
   { label: copy('agents_page_related_skills'), href: getRelativeLocaleUrl(locale, 'skills') },
+  { label: copy('best_ai_tools_capacitor_title'), href: getRelativeLocaleUrl(locale, 'best/ai-tools-for-capacitor') },
   { label: copy('agents_page_related_cli'), href: getRelativeLocaleUrl(locale, 'capgo-cli') },
   { label: copy('agents_page_related_lovable'), href: getRelativeLocaleUrl(locale, 'solutions/lovable-vibecoding-to-mobile') },
   { label: copy('agents_page_related_webapp'), href: getRelativeLocaleUrl(locale, 'solutions/webapp-to-mobile') },
@@ -202,7 +203,7 @@ const relatedLinks = [
           {copy('agents_hub_cta_title')}
         </h2>
         <div class="mt-10">
-          <SignupCta id="agents-hub-closing-signup" humanSupport />
+          <SignupCta lead={m.signup_cta_lead_agents({}, { locale: Astro.locals.locale })} id="agents-hub-closing-signup" humanSupport />
         </div>
       </div>
     </section>

@@ -9,6 +9,7 @@ import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createProd
 import { numberWithSpaces } from '@/services/misc'
 import { pluginCountLabel } from '@/config/plugins'
 import SignupCta from '@/components/SignupCta.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import { getProductScreens } from '@/config/productScreens'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
@@ -36,8 +37,8 @@ try {
 const payg = plansAll.find((p) => p.name === 'Enterprise')
 const enterprisePrice = typeof payg?.price_m === 'number' && Number.isFinite(payg.price_m) ? payg.price_m : undefined
 
-const title = [Astro.locals.runtimeConfig.public.brand, 'Enterprise'].join(' | ')
-const description = 'Enterprise-grade live updates for Capacitor apps. Built for teams that need advanced security, compliance, and dedicated support at scale.'
+const title = [Astro.locals.runtimeConfig.public.brand, 'Enterprise live updates, ready for AI agents'].join(' | ')
+const description = 'Enterprise-grade live updates for Capacitor apps with security, compliance, governed AI agent access through MCP, and dedicated support at scale.'
 
 const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
 const enterpriseUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, 'enterprise/')}`
@@ -45,7 +46,8 @@ const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
 
 const enterpriseService = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: 'Capgo Enterprise - Professional Live Updates',
-  description: 'Enterprise-grade live update platform for Capacitor applications with advanced security, compliance features, and dedicated support for large-scale deployments.',
+  description:
+    'Enterprise-grade live update platform for Capacitor applications with advanced security, compliance features, governed AI agent automation through MCP, and dedicated support for large-scale deployments.',
   url: enterpriseUrl,
   serviceType: 'Enterprise Software Service',
   areaServed: ['Worldwide'],
@@ -732,6 +734,15 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </div>
       </div>
     </section>
+
+    <AgentReadySection
+      background="bg-transparent"
+      headingId="agent-ready-enterprise-title"
+      eyebrow={m.agent_ready_enterprise_eyebrow({}, { locale })}
+      title={m.agent_ready_enterprise_title({}, { locale })}
+      subtitle={m.agent_ready_enterprise_subtitle({}, { locale })}
+      prompts={[m.agent_ready_enterprise_prompt_1({}, { locale }), m.agent_ready_enterprise_prompt_2({}, { locale }), m.agent_ready_enterprise_prompt_3({}, { locale })]}
+    />
 
     <section class="section" id="partnership">
       <div class="shell">

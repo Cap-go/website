@@ -3,6 +3,8 @@ import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import SEO from '../components/SEO.astro'
 import Affonso from '../components/Affonso.astro'
+import Attribution from '../components/Attribution.astro'
+import OpenAIPixel from '../components/OpenAIPixel.astro'
 import PostHog from '../components/posthog.astro'
 import WebMcpTools from '../components/WebMcpTools.astro'
 import globalStylesHref from '../css/global.css?url'
@@ -25,8 +27,10 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <SEO {...content} />
     <meta name="naver-site-verification" content="e6891f007259d77b20bd76a17d11404d83755855" />
     <slot name="head" />
+    <Attribution />
     {enableThirdPartyScripts && <PostHog />}
     {enableThirdPartyScripts && <Affonso />}
+    {enableThirdPartyScripts && <OpenAIPixel />}
   </head>
   <body class="bg-gray-900 text-pretty text-white antialiased">
     <a
