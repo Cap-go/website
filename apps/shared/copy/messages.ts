@@ -3498,6 +3498,8 @@ const messages = {
   real_time_analytics: 'Real-time analytics',
   real_time_statistics: 'Real-Time Statistics',
   register: 'Register',
+  register_apple_button: 'Continue with Apple',
+  register_apple_separator: 'or',
   register_code: 'Register code',
   register_description: 'Create your free Capgo account and start deploying live updates to your Capacitor apps in minutes.',
   register_title: 'Sign up to Capgo',
