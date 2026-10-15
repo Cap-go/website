@@ -274,7 +274,7 @@ A dependable CI job installs from the lockfile, runs the same Jest command used 
 
 CI-only failures need an environment comparison before a component rewrite. Check Node, the package manager, Jest worker settings, timer configuration, and environment variables. Reproduce the same command locally where possible, then reduce the failing test to the smallest interaction that exposes the difference.
 
-Observability covers a different gap. A tool such as [Sentry for React Native](https://capgo.app/blog/sentry-react-native/) supplies production error context that mocked component tests cannot reproduce, including failures tied to real devices and native integrations.
+Observability covers a different gap. [App health monitoring](https://capgo.app/blog/app-health-monitoring/) supplies production error context that mocked component tests cannot reproduce, including failures tied to real devices and native integrations.
 
 Security-sensitive journeys need a second boundary. Use component tests for validation and state transitions, then add device-level coverage for the handoff and native behavior. For one-time-code flows, consult guidance on how to [test SMS verification flows](https://sms-activate.app/blog/platform-integration-testing) when that integration forms part of the journey.
 

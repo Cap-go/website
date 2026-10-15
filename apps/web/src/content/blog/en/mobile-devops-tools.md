@@ -113,7 +113,7 @@ The trade-off is that Appcircle can feel larger than necessary if the team only 
 
 Expo Application Services, or EAS, is the cleanest path for teams already committed to Expo or a modern React Native workflow. It handles hosted builds, signing, and **EAS Update**, which lets teams push JavaScript and asset updates without rebuilding the full app. That integrated flow is why Expo teams often move faster with EAS than they would with a generic CI system plus separate distribution tools.
 
-[EAS Update is closely related to the Expo development-client workflow and becomes especially useful when the team wants a tighter React Native release loop](https://capgo.app/blog/expo-development-client/)
+[EAS Update becomes especially useful when the team wants a tighter React Native release loop and is comparing Expo OTA options](https://capgo.app/blog/alternative-to-expo/)
 
 The strongest use case is a team that wants the whole release path to feel native to the framework. Build, sign, update, and ship all live under one roof, and that reduces the amount of custom integration work. For **React Native** teams that don't need a more general mobile DevOps platform, that simplicity is hard to beat.
 

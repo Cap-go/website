@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-Expo is the right choice when you want fast setup, sane defaults, and fewer native edges. That's also why teams exploring advanced Expo workflows often end up using an [Expo development client for custom native capabilities](https://capgo.app/blog/expo-development-client/) only when the managed path no longer covers the app's needs.
+Expo is the right choice when you want fast setup, sane defaults, and fewer native edges. That's also why teams exploring advanced Expo workflows often compare [Capgo and Expo EAS for live updates](https://capgo.app/blog/alternative-to-expo/) when the managed path no longer covers the app's needs.
 
 <a id="bare-react-native-setup"></a>
 ### Bare React Native setup

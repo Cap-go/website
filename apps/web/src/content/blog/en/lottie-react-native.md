@@ -90,7 +90,7 @@ The install path depends on one decision first: **Expo managed workflow or bare 
 
 If your app lives in Expo and you want the fastest setup, stay on the Expo path unless you know you need custom native work. If you're in a bare app, or you already rely on native modules that need direct control, install it as a normal native dependency and validate both iOS and Android builds immediately.
 
-A lot of teams underestimate how much easier debugging becomes when you keep your setup aligned with the project type. That's also why many teams building custom native integrations move early to an [Expo development client workflow](https://capgo.app/blog/expo-development-client/) instead of waiting until the app gets harder to change.
+A lot of teams underestimate how much easier debugging becomes when you keep your setup aligned with the project type. That's also why many teams building custom native integrations compare [Capgo as an alternative to Expo EAS](https://capgo.app/blog/alternative-to-expo/) early instead of waiting until the app gets harder to change.
 
 <a id="expo-managed-setup"></a>
 ### Expo managed setup

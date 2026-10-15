@@ -34,6 +34,8 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/how-to-use-capacitor-with-nextjs': '/blog/nextjs-mobile-app-capacitor-from-scratch/',
   '/blog/gestione-dei-changelog-di-capacitor-guida-completa': '/blog/capacitor-comprehensive-guide/#is-there-enterprise-specific-support-available',
   '/blog/about-open-source': '/blog/open-source/',
+  '/blog/expo-development-client': '/blog/alternative-to-expo/',
+  '/blog/sentry-react-native': '/blog/app-health-monitoring/',
   '/blog/activar-modo-desarrollador-ios16': '/blog/enable-ios-developer-mode-ios16/',
   '/blog/actualizaciones-en-tiempo-real-con-segmentación-de-usuarios': '/blog/real-time-updates-with-user-segmentation/',
   '/blog/actualizaciones-en-vivo-en-apple': '/blog/do-apple-allow-live-updates/',

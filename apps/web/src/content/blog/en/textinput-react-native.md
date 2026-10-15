@@ -542,7 +542,7 @@ The fix is usually simpler than the debugging path:
 - **Try memoization strategically:** Stabilizing parent renders can reduce the glitch surface.
 - **Use `multiline={true}` only if it matches the field's behavior:** It can work as a patch, but don't add it blindly.
 
-If you want to catch these issues earlier in production debugging, this [guide to using Sentry with React Native](https://capgo.app/blog/sentry-react-native/) is helpful for tightening feedback loops around UI regressions.
+If you want to catch these issues earlier in production debugging, [app health monitoring for mobile and JS apps](https://capgo.app/blog/app-health-monitoring/) is helpful for tightening feedback loops around UI regressions.
 
 <a id="performance-when-many-inputs-re-render"></a>
 ### Performance when many inputs re-render

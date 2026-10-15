@@ -429,7 +429,7 @@ it('asks for confirmation before deleting', () => {
 
 That keeps tests focused on business logic and prevents hangs caused by dialog behavior outside the test environment. It also pushes teams toward a wrapper API, which is useful once web and Android prompt limitations force a custom fallback.
 
-Client-side monitoring helps here too. Teams already tracking interaction failures with [Sentry in React Native apps](https://capgo.app/blog/sentry-react-native/) usually catch more alert-related issues when alert-triggering code paths are wrapped in explicit error handling and logged with enough context to reproduce the flow.
+Client-side monitoring helps here too. Teams already tracking interaction failures with [app health monitoring](https://capgo.app/blog/app-health-monitoring/) usually catch more alert-related issues when alert-triggering code paths are wrapped in explicit error handling and logged with enough context to reproduce the flow.
 
 <a id="a-production-baseline-that-holds-up"></a>
 ### A production baseline that holds up

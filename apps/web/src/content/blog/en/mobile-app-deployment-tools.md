@@ -98,7 +98,7 @@ Website: [Google Play Console](https://play.google.com/console/)
 
 Expo Application Services, usually called EAS, is the cleanest fit for **React Native and Expo-first teams** that want one hosted workflow for builds, submissions, updates, and telemetry. EAS Build and Submit handle store-oriented pipelines, EAS Update delivers OTA JavaScript and asset changes, and EAS Observe surfaces production behavior such as startup and navigation signals. That combination makes it unusually coherent for teams already in the Expo ecosystem.
 
-What I like about EAS is that it reduces the number of moving parts without pretending mobile release work is simple. Expo's own mobile CI/CD comparison notes that mobile pipelines often involve painful YAML sprawl, and EAS aims to compress that complexity into mobile-specific jobs. For teams that want one place to manage build, submit, and update behavior, that's a real operational gain. The [Capgo article on Expo Development Client](https://capgo.app/blog/expo-development-client/) is helpful if you're weighing how OTA fits into an Expo workflow.
+What I like about EAS is that it reduces the number of moving parts without pretending mobile release work is simple. Expo's own mobile CI/CD comparison notes that mobile pipelines often involve painful YAML sprawl, and EAS aims to compress that complexity into mobile-specific jobs. For teams that want one place to manage build, submit, and update behavior, that's a real operational gain. The [Capgo alternative to Expo EAS guide](https://capgo.app/blog/alternative-to-expo/) is helpful if you're weighing how OTA fits into an Expo workflow.
 
 <a id="where-eas-fits-best"></a>
 ### Where EAS fits best
