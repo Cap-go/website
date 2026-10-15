@@ -90,6 +90,12 @@ export function capgoOrganizationId(baseUrl: string): string {
   return `${baseUrl}/#organization`
 }
 
+function resolveLdJsonAbsoluteUrl(baseUrl: string, value: string): string {
+  if (/^https?:\/\//i.test(value)) return value
+  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`
+  return new URL(value, normalizedBase).toString()
+}
+
 /**
  * Ensure ld+json has schema.org @context before serialization.
  * Handles standalone schemas, @graph bundles, and arrays.
@@ -307,6 +313,7 @@ export function createProductLdJson(
     brand?: string
     offers: {
       name?: string
+      url?: string
       price?: string
       priceCurrency: string
       availability: string
@@ -323,13 +330,16 @@ export function createProductLdJson(
     reviews?: ProductReviewInput[]
   },
 ): Product {
+  const productUrl = resolveLdJsonAbsoluteUrl(config.baseUrl, options.url)
+  const productImage = resolveLdJsonAbsoluteUrl(config.baseUrl, options.image || '/capgo_social.png')
+
   const product: Product = {
     '@type': 'Product',
-    '@id': `${options.url}#product`,
+    '@id': `${productUrl}#product`,
     name: options.name,
     description: options.description,
-    url: options.url,
-    image: options.image || `${config.baseUrl}/capgo_social.png`,
+    url: productUrl,
+    image: productImage,
     brand: {
       '@type': 'Brand',
       name: options.brand || 'Capgo',
@@ -344,9 +354,12 @@ export function createProductLdJson(
 
       const primaryPrice = offer.price ?? offer.priceSpecifications?.[0]?.price
 
+      const offerUrl = resolveLdJsonAbsoluteUrl(config.baseUrl, offer.url ?? options.url)
+
       return {
         '@type': 'Offer' as const,
         ...(offer.name ? { name: offer.name } : {}),
+        url: offerUrl,
         ...(primaryPrice ? { price: primaryPrice } : {}),
         priceCurrency: offer.priceCurrency,
         availability: offer.availability as 'https://schema.org/InStock' | 'https://schema.org/OutOfStock',
