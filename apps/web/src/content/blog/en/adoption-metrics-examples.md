@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-15T07:09:39.562Z
-updated_at: 2026-10-15T07:09:42.364Z
+updated_at: 2026-10-15T07:13:17.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/b871a356-f111-491d-8d4f-a28fbb02fa75/adoption-metrics-examples-app-updates.jpg'
 head_image_alt: 'Adoption Metrics Examples: 10 Ways to Track App Updates'
 keywords: 'adoption metrics examples, update adoption rate, app update tracking, rollout monitoring, live update metrics'
