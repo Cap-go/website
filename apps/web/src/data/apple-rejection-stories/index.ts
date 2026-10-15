@@ -11,7 +11,7 @@ export const appleRejectionStoryBatches = [
   {
     id: 'batch-1',
     label: 'Batch 1',
-    publishedOn: '2026-10-14',
+    publishedOn: '2026-10-15',
     storyCount: appleRejectionStories.filter((story) => story.batchId === 'batch-1').length,
   },
 ]
@@ -39,5 +39,5 @@ export { appleRejectionStoryTagLabels }
 
 export const appleRejectionStoriesContentPath = 'apps/web/src/data/apple-rejection-stories/stories'
 
-export { getAppleRejectionStoryMedia, appleRejectionStoryMedia } from './storyMedia'
+export { appleRejectionStoryMedia, getAppleRejectionStoryMedia } from './storyMedia'
 export type { AppleRejectionStoryMedia } from './storyMedia'
