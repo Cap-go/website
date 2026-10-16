@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-18T23:12:11.000Z
-updated_at: 2026-09-18T23:12:11.000Z
+updated_at: 2026-10-16T21:48:30.000Z
 head_image: /capgo_banner.png
 head_image_alt: Developers planning channel-based rollout cohorts for a mobile app
 keywords: ''
