@@ -1,4 +1,5 @@
 {
+  "account-required-for-device-paid-feature-5-1-1": null,
   "ai-data-sharing-no-consent": {
     "src": "/apple-rejection-stories/screenshots/ai-data-sharing-no-consent.webp",
     "alt": "Rejection message asking the app to disclose and get consent before sending personal data to a third party AI service",
