@@ -11,65 +11,89 @@ import HowItWorks from '@/components/HowItWorks.astro'
 import PlatformOverview from '@/components/PlatformOverview.astro'
 import PlatformScreens from '@/components/PlatformScreens.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
-import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson, createWebSiteLdJson } from '@/lib/ldJson'
+import { createHomepageLdJsonGraph, type HomepageLdJsonOffers } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import AskAiSection from '@/components/AskAiSection.astro'
 import RiskDebtSection from '@/components/RiskDebtSection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
-import { allTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
+import { getAbsoluteLocaleUrl } from '@/services/links'
+import { planMonthlyPrice, planYearlyPrice } from '@/lib/planCopy'
+import type { Database } from '@/services/supabase.types'
 
 const config = Astro.locals.runtimeConfig
+const locale = Astro.locals.locale
 
 // Create comprehensive homepage content definition
-const title = `${config.public.brand} - ${m.instant_updates_for_capacitor({}, { locale: Astro.locals.locale })}`
-const description = m.ship_updates_fixes_changes_and_features({}, { locale: Astro.locals.locale })
+const title = `${config.public.brand} - ${m.instant_updates_for_capacitor({}, { locale })}`
+const description = m.ship_updates_fixes_changes_and_features({}, { locale })
+
+const homepageUrl = getAbsoluteLocaleUrl(config.public.baseUrl, locale, '/')
+const pricingUrl = getAbsoluteLocaleUrl(config.public.baseUrl, locale, '/pricing/')
+
+const homepageFeatureList = [
+  'Capacitor skills for AI coding agents (Claude Code, Codex, Cursor, Copilot, Gemini CLI)',
+  'Hosted and local MCP servers for Capacitor app management',
+  'Maintained Capacitor plugins for native features',
+  'Migration to Capacitor and Capacitor major version upgrades',
+  'Cloud native iOS and Android builds',
+  'App Store and Google Play publishing',
+  'Live updates with channels, staged rollouts, and rollback',
+  'Release health monitoring, device logs, and analytics',
+]
+
+let homepageOffers: HomepageLdJsonOffers = {
+  price: '14',
+  priceCurrency: 'USD',
+  availability: 'https://schema.org/InStock',
+  url: pricingUrl,
+  priceSpecifications: [
+    { price: '14', billingPeriod: 'monthly' },
+    { price: '146', billingPeriod: 'yearly' },
+  ],
+}
+
+const plansFetchTimeoutMs = 3000
+
+try {
+  const response = await fetch(`${config.public.baseApiUrl}/private/plans`, {
+    signal: AbortSignal.timeout(plansFetchTimeoutMs),
+  })
+  if (!response.ok) {
+    throw new Error(`Plans request failed with status ${response.status}`)
+  }
+  const plansAll = (await response.json()) as Database['public']['Tables']['plans']['Row'][]
+  const paidPlans = plansAll.filter(
+    (plan) => plan.name !== 'Free' && Number.isFinite(plan.price_m) && Number.isFinite(plan.price_y),
+  )
+  if (paidPlans.length > 0) {
+    const entryPlan = paidPlans.reduce((lowest, plan) => (planMonthlyPrice(plan) < planMonthlyPrice(lowest) ? plan : lowest), paidPlans[0])
+    homepageOffers = {
+      price: planMonthlyPrice(entryPlan).toString(),
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: pricingUrl,
+      priceSpecifications: [
+        { price: planMonthlyPrice(entryPlan).toString(), billingPeriod: 'monthly' },
+        { price: planYearlyPrice(entryPlan).toString(), billingPeriod: 'yearly' },
+      ],
+    }
+  }
+} catch {
+  // Keep fallback offer prices when plan metadata is unavailable at build time.
+}
 
 // Create comprehensive LD+JSON for homepage
-const capgoService = createServiceLdJson(config.public, {
-  name: 'Capgo - Build Capacitor apps with AI, ship updates instantly',
-  description:
-    'Capgo gives developers and AI coding agents Capacitor skills, MCP servers, plugins, native iOS and Android cloud builds, store publishing, live updates, and release monitoring for Capacitor, Ionic, Cordova, and Electron apps.',
-  url: config.public.baseUrl,
-  serviceType: 'Software Development Service',
-  areaServed: ['Worldwide'],
-})
-
-// Create SoftwareApplication schema for the Capgo platform
-const capgoSoftware = createSoftwareApplicationLdJson(config.public, {
-  name: 'Capgo',
-  description:
-    'AI-ready platform to build, ship, and maintain Capacitor apps. Works with Claude Code, Codex, Cursor, Copilot, and Gemini CLI through Capacitor skills and MCP, with native builds, store publishing, and live updates for iOS and Android.',
-  url: config.public.baseUrl,
-  applicationCategory: 'DeveloperApplication',
-  applicationSubCategory: 'AI-assisted Capacitor app development platform',
-  operatingSystem: 'iOS, Android',
-  featureList: [
-    'Capacitor skills for AI coding agents (Claude Code, Codex, Cursor, Copilot, Gemini CLI)',
-    'Hosted and local MCP servers for Capacitor app management',
-    'Maintained Capacitor plugins for native features',
-    'Migration to Capacitor and Capacitor major version upgrades',
-    'Cloud native iOS and Android builds',
-    'App Store and Google Play publishing',
-    'Live updates with channels, staged rollouts, and rollback',
-    'Release health monitoring, device logs, and analytics',
-  ],
-  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
-  reviews: toProductReviewLdJson(allTestimonials),
-  offers: {
-    price: '12',
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
-  },
-})
-
-// Create comprehensive LD+JSON graph for homepage
 const content = {
   title,
   description,
   image: `${config.public.baseUrl}/capgo_social.png`,
-  ldJSON: createLdJsonGraph(config.public, capgoService, {
-    includeOrganization: true,
-    additionalEntities: [capgoSoftware, createWebSiteLdJson(config.public, { inLanguage: Astro.locals.locale })],
+  ldJSON: createHomepageLdJsonGraph(config.public, {
+    description,
+    homepageUrl,
+    inLanguage: locale,
+    applicationSubCategory: m.instant_updates_for_capacitor({}, { locale }),
+    featureList: homepageFeatureList,
+    offers: homepageOffers,
   }),
 }
 ---
