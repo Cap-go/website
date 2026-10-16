@@ -1,4 +1,7 @@
+import { useRuntimeConfig } from '@/config/app'
 import { getSignupAttributionForEvents, getSignupUserMetadataForRegistration } from '@/lib/attribution'
+import { APPLE_CONSOLE_LOGIN_URL, APPLE_CONSOLE_ORIGIN, buildAppleSignupUrl, isAppleSignupAvailable, readAppleCompletion } from '@/services/apple-signup'
+import { reportAppleRegistration } from '@/services/registration-analytics'
 import { getRegistrationDevice } from '@/services/registration-device'
 import { getRemoteConfig, isSupabaseConfigured, useSupabase } from '@/services/supabase'
 import Toastify from 'toastify-js'
@@ -12,6 +15,116 @@ const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonE
 
 const configReady = getRemoteConfig()
 let isSubmitting = false
+let isAppleStarting = false
+let emailServiceReady = false
+const appleSignup = document.getElementById('appleSignup')
+const appleButton = document.getElementById('appleSignupButton') as HTMLButtonElement | null
+const appleError = document.getElementById('appleSignupError')
+const apiBaseUrl = useRuntimeConfig().public.baseApiUrl
+const appleMessage = (key: string) => document.querySelector<HTMLElement>(`#appleSignupMessages [data-apple-status="${key}"]`)?.textContent?.trim() ?? ''
+
+/** Check the rollout independently so email initialization never waits for Apple. */
+async function refreshAppleSignupAvailability() {
+  if (appleSignup && appleButton) appleSignup.hidden = !(await isAppleSignupAvailable(apiBaseUrl))
+}
+
+queueMicrotask(() => {
+  void refreshAppleSignupAvailability()
+})
+
+if (appleSignup && appleButton) {
+  appleButton.addEventListener('click', async () => {
+    if (isSubmitting || isAppleStarting) return
+    isAppleStarting = true
+    appleButton.disabled = true
+    submitButton.disabled = true
+    if (appleError) appleError.hidden = true
+    // Open synchronously during the gesture so browser popup blockers can allow it.
+    const popup = window.open('about:blank', '_blank', 'popup,width=520,height=720')
+    let poll = 0
+    let timeout = 0
+    const finish = (message?: string) => {
+      window.removeEventListener('message', onCompletion)
+      window.clearInterval(poll)
+      window.clearTimeout(timeout)
+      isAppleStarting = false
+      appleButton.disabled = false
+      submitButton.disabled = !emailServiceReady || isSubmitting
+      if (appleError && message) {
+        appleError.textContent = message
+        appleError.hidden = false
+      }
+    }
+    const websiteState = crypto.randomUUID().replaceAll('-', '') + crypto.randomUUID().replaceAll('-', '')
+    const attribution = getSignupAttributionForEvents()
+    const experiment = document.querySelector<HTMLMetaElement>('meta[name="capgo-ab-flag"]')?.content ?? ''
+    const variant = document.querySelector<HTMLMetaElement>('meta[name="capgo-ab-variant"]')?.content ?? ''
+    const conversionProps = { ...attribution, ...(experiment && variant ? { [`$feature/${experiment}`]: variant } : {}) }
+    const onCompletion = (event: MessageEvent) => {
+      if (!popup || event.origin !== APPLE_CONSOLE_ORIGIN || event.source !== popup) return
+      const completion = readAppleCompletion(event, popup, websiteState)
+      if (!completion) return
+      // Remove the listener before reporting, so retries/duplicate messages count once.
+      finish(appleMessage('success'))
+      reportAppleRegistration(window as any, completion, conversionProps)
+      window.setTimeout(() => {
+        popup.close()
+        // The console already owns the session. Its login bootstrap enforces MFA/onboarding.
+        window.location.assign(APPLE_CONSOLE_LOGIN_URL)
+      }, 400)
+    }
+    try {
+      // Recheck so an operator can disable Apple between page load and click.
+      if (!(await isAppleSignupAvailable(apiBaseUrl))) {
+        appleSignup.hidden = true
+        popup?.close()
+        finish(appleMessage('unavailable'))
+        return
+      }
+      if (popup?.closed) {
+        finish(appleMessage('cancelled'))
+        return
+      }
+      const metadata = getSignupUserMetadataForRegistration()
+      const consoleUrl = buildAppleSignupUrl(
+        {
+          ...attribution,
+          ...getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints),
+          first_utm_source: metadata.utm_source ?? '',
+          first_utm_medium: metadata.utm_medium ?? '',
+          first_utm_campaign: metadata.utm_campaign ?? '',
+          registration_experiment: experiment,
+          registration_experiment_variant: variant,
+        },
+        websiteState,
+      )
+      // This event is an authentication intent, including returning users; it is not a conversion.
+      try {
+        ;(window as any).posthog?.capture('website_apple_signin_start', { provider: 'apple', ...attribution })
+      } catch {
+        /* Optional analytics. */
+      }
+      if (!popup) {
+        // Browser-blocked popup: same-tab completion still uses only the shared backend.
+        window.location.assign(consoleUrl)
+        return
+      }
+      window.addEventListener('message', onCompletion)
+      popup.location.href = consoleUrl
+      if (appleError) {
+        appleError.textContent = appleMessage('window')
+        appleError.hidden = false
+      }
+      poll = window.setInterval(() => {
+        if (popup.closed) finish(appleMessage('closed'))
+      }, 500)
+      timeout = window.setTimeout(() => finish(appleMessage('timed_out')), 600_000)
+    } catch {
+      popup?.close()
+      finish(appleMessage('open_failed'))
+    }
+  })
+}
 
 if (submitButton) {
   submitButton.disabled = true
@@ -20,7 +133,8 @@ if (submitButton) {
 configReady
   .then((cfg) => {
     if (isSupabaseConfigured(cfg)) {
-      if (!isSubmitting && submitButton) {
+      emailServiceReady = true
+      if (!isSubmitting && !isAppleStarting && submitButton) {
         submitButton.disabled = false
       }
       return
@@ -66,7 +180,7 @@ function isValidName(name: string): boolean {
 
 form?.addEventListener('submit', async (e) => {
   e.preventDefault()
-  if (isSubmitting || submitButton.disabled) return
+  if (isSubmitting || isAppleStarting || submitButton.disabled) return
   ;(window as any).posthog?.capture('website_signup_submit')
 
   // Validate email format

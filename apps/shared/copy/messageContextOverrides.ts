@@ -5,6 +5,8 @@
 import type { MessageKey } from './messages'
 
 export const messageContextOverrides = {
+  register_apple_button: 'Apple authentication button below email registration. Creates a new Capgo account or signs in a returning user. Keep the Apple brand name.',
+  register_apple_separator: 'Short separator between the email Sign up button and the Continue with Apple alternative on the registration form.',
   // Example:
   // updates: 'Pricing calculator metric label for monthly OTA update volume, not a nav item.',
   live_update_hero_headline:
