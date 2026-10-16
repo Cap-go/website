@@ -41,11 +41,7 @@ export type PricingFaqSection = {
 }
 
 const ALL_PLANS_FEATURES_ANSWER =
-<<<<<<< HEAD
-  'Yes for core products. Every plan includes Live Updates, Native Builds, Notifications, Observe, Capgo plugins, and Automations. We do not charge per seat or lock those products behind higher tiers. Plans differ by usage limits (MAU, bandwidth, storage, build time) and support level. Enterprise adds extras that take more of our time, such as SSO, custom domains, compliance paperwork, and a dedicated channel.'
-=======
   'Yes for core products. Every full Capgo plan includes Live Updates, Native Builds, Notifications, Observe, Capgo plugins, and Automations. Web2App is the exception: it only updates your app from your website, without channels, stats or encryption. We do not charge per seat or lock those products behind higher tiers. Plans differ by usage limits (MAU, bandwidth, storage, build time) and support level. Enterprise adds extras that take more of our time, such as SSO, custom domains, compliance paperwork, and a dedicated channel.'
->>>>>>> 39661ac70 (feat: rename Website Live to Capgo Web2App and redesign its page)
 
 export function pricingFaqItemToPlainAnswer(item: PricingFaqItem): string {
   const parts: string[] = []
