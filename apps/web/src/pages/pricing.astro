@@ -119,7 +119,6 @@ if (plans.length > 0) {
               class="group flex min-h-9 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-300 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-400 has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-[#0d1525]"
             >
               <span>{m.yearly_plan({}, { locale: Astro.locals.locale })}</span>
-              <span class="ml-1 text-blue-400 group-has-checked:text-blue-700">-20%</span>
               <input id="yearly" type="radio" checked={yearly} name="pricing-plans" class="sr-only" />
             </label>
           </fieldset>
@@ -139,7 +138,16 @@ if (plans.length > 0) {
           )}
         </div>
 
-        {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} credits={credits} />}
+        {
+          plans && plans.length > 0 && (
+            <div>
+              <p class="mb-4 text-center text-sm font-medium text-blue-400" data-full-plans-yearly-discount style={yearly ? '' : 'display: none'}>
+                Full Capgo plans save 20% on yearly billing
+              </p>
+              <Plans yearly={yearly} pricing={plans} credits={credits} />
+            </div>
+          )
+        }
 
         <Web2AppPlan yearly={yearly} />
 
@@ -155,7 +163,7 @@ if (plans.length > 0) {
             </h2>
             <p class="mt-4 max-w-3xl text-base leading-7 text-gray-400">
               Send native iOS and Android notifications, update badges, inspect campaign stats, and use silent pushes to ask opted-in devices to download the latest Capgo bundle
-              during a progressive rollout. Included on every plan.
+              during a progressive rollout. Included on every full Capgo plan, not on Web2App.
             </p>
             <dl class="mt-6 grid gap-6 text-sm sm:grid-cols-3">
               <div>

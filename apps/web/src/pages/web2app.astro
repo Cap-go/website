@@ -128,8 +128,20 @@ const productLdJson = createProductLdJson(config, {
   url: Astro.url.href,
   sku: 'capgo-web2app',
   offers: [
-    { name: 'Web2App monthly', price: '12', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
-    { name: 'Web2App yearly', price: '120', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+    {
+      name: 'Web2App monthly',
+      price: '12',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      priceSpecifications: [{ price: '12', billingPeriod: 'monthly' }],
+    },
+    {
+      name: 'Web2App yearly',
+      price: '120',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      priceSpecifications: [{ price: '120', billingPeriod: 'yearly' }],
+    },
   ],
 })
 
