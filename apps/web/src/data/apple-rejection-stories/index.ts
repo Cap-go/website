@@ -11,7 +11,7 @@ export const appleRejectionStoryBatches = [
   {
     id: 'batch-1',
     label: 'Batch 1',
-    publishedOn: '2026-10-15',
+    publishedOn: '2026-10-16',
     storyCount: appleRejectionStories.filter((story) => story.batchId === 'batch-1').length,
   },
 ]
@@ -20,6 +20,7 @@ export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
   '4-3',
   '4-2-6',
   '3-1-2',
+  '5-1-1',
   '5-1-2',
   '2-1',
   'metadata',
