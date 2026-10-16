@@ -38,6 +38,7 @@ export async function registerUser(input: RegisterUserInput, baseApiUrl = useRun
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ...input, email: input.email.trim() }),
     signal: AbortSignal.timeout(30_000),
+    redirect: 'error',
   })
   const data = await response.json().catch(() => null)
   if (!response.ok) {

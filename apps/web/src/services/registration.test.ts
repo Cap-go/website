@@ -49,3 +49,35 @@ test('API errors preserve their code and incomplete success responses cannot red
     }
   }
 })
+
+test('registration rejects redirects without forwarding credentials to their target', async () => {
+  for (const status of [307, 308]) {
+    let targetRequests = 0
+    let registrationRequests = 0
+    const target = Bun.serve({
+      hostname: '127.0.0.1',
+      port: 0,
+      fetch: () => {
+        targetRequests++
+        return Response.json(session)
+      },
+    })
+    const api = Bun.serve({
+      hostname: '127.0.0.1',
+      port: 0,
+      fetch: () => {
+        registrationRequests++
+        return new Response(null, { status, headers: { Location: target.url.toString() } })
+      },
+    })
+    try {
+      const { registerUser } = client(fetch)
+      await expect(registerUser({ email: 'signup@example.com', password: 'Password123!', captcha_token: 'fake-captcha' }, api.url.toString())).rejects.toThrow()
+      expect(registrationRequests).toBe(1)
+      expect(targetRequests).toBe(0)
+    } finally {
+      api.stop(true)
+      target.stop(true)
+    }
+  }
+})
