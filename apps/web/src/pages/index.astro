@@ -52,10 +52,19 @@ let homepageOffers: HomepageLdJsonOffers = {
   ],
 }
 
+const plansFetchTimeoutMs = 3000
+
 try {
-  const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
+  const response = await fetch(`${config.public.baseApiUrl}/private/plans`, {
+    signal: AbortSignal.timeout(plansFetchTimeoutMs),
+  })
+  if (!response.ok) {
+    throw new Error(`Plans request failed with status ${response.status}`)
+  }
   const plansAll = (await response.json()) as Database['public']['Tables']['plans']['Row'][]
-  const paidPlans = plansAll.filter((plan) => plan.name !== 'Free')
+  const paidPlans = plansAll.filter(
+    (plan) => plan.name !== 'Free' && Number.isFinite(plan.price_m) && Number.isFinite(plan.price_y),
+  )
   if (paidPlans.length > 0) {
     const entryPlan = paidPlans.reduce((lowest, plan) => (planMonthlyPrice(plan) < planMonthlyPrice(lowest) ? plan : lowest), paidPlans[0])
     homepageOffers = {
