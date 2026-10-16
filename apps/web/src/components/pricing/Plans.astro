@@ -251,8 +251,10 @@ function buildTimeDisplay(buildTimeSeconds: number) {
     const yearlyRadio = document.getElementById('yearly')
     const monthlyRadio = document.getElementById('monthly')
     const planElements = document.querySelectorAll('[data-plan]')
+    const fullPlansDiscount = document.querySelector('[data-full-plans-yearly-discount]')
 
     function updatePrices(isYearly) {
+      if (fullPlansDiscount) fullPlansDiscount.style.display = isYearly ? '' : 'none'
       planElements.forEach((planElement) => {
         // Enterprise price follows the MAU slider, see the script below.
         if (planElement.hasAttribute('data-enterprise-scale')) return

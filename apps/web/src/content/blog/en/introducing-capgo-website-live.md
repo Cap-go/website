@@ -73,11 +73,11 @@ We would rather say this up front. Web2App leaves out:
 
 There is also one hard requirement. Your website has to be a static client build, the same files Capacitor packages into the app. A Vite build or a static export works. Next.js server pages, or any SSR shell, do not, because there is nothing static to download.
 
-If a website change depends on a new native plugin, you still need to ship a new native build through the stores first. Older installs do not have that plugin, so the new code would fail to start there and roll back.
+If a website change depends on a new native plugin, you still need to ship a new native build through the stores first. Older installs do not have that plugin, so code that calls it can break on those devices. The updater only rolls back when the failure prevents readiness before `notifyAppReady()` runs.
 
 ## What about App Store rules?
 
-Web2App downloads HTML, CSS and JavaScript that runs in the WebView, the same thing Capgo live updates have always done. Apple allows downloaded interpreted code as long as it does not change the primary purpose of the app, bypass the security of the operating system, or create a store for other code (section 3.3.1(B) of the Developer Program License Agreement). Guideline 4.2 still applies to every app: it needs to be more than a repackaged website. Our [compliance guide](/docs/live-updates/compliance/) goes into more detail.
+Web2App downloads HTML, CSS and JavaScript that runs in the WebView, the same thing Capgo live updates have always done. Apple allows downloaded interpreted code as long as it does not change the primary purpose of the app, bypass the security of the operating system, or create a store or storefront for other Applications (section 3.3.1(B) of the Developer Program License Agreement). Guideline 4.2 still applies to every app: it needs to be more than a repackaged website. Our [compliance guide](/docs/live-updates/compliance/) goes into more detail.
 
 ## When you need more
 

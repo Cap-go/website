@@ -77,13 +77,11 @@ const highlights: MessageKey[] = ['website_live_pricing_unlimited_updates', 'web
     const yearlyNote = document.querySelector('[data-web2app-yearly]')
     const monthlyNote = document.querySelector('[data-web2app-monthly]')
     const yearlyDiscount = document.querySelector('[data-web2app-yearly-discount]')
-    const fullPlansDiscount = document.querySelector('[data-full-plans-yearly-discount]')
     const update = (isYearly) => {
       if (price) price.textContent = `$${isYearly ? yearlyPrice / 12 : monthlyPrice}`
       if (yearlyNote) yearlyNote.style.display = isYearly ? '' : 'none'
       if (monthlyNote) monthlyNote.style.display = isYearly ? 'none' : ''
       if (yearlyDiscount) yearlyDiscount.style.display = isYearly ? '' : 'none'
-      if (fullPlansDiscount) fullPlansDiscount.style.display = isYearly ? '' : 'none'
     }
     document.getElementById('yearly')?.addEventListener('change', () => update(true))
     document.getElementById('monthly')?.addEventListener('change', () => update(false))
