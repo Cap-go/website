@@ -1305,6 +1305,7 @@ const messages = {
   pricing_explainer_seats: 'Unlimited members and apps',
   pricing_explainer_title: 'No seats. No surprise bills.',
   pricing_explainer_trial: '14-day trial, no credit card',
+  pricing_full_plans_yearly_savings: 'Full Capgo plans save 20% on yearly billing',
   pricing_pay_as_you_go: 'Pay as you go',
   pricing_credits_cover_usage: 'Use credits pay-as-you-go with no plan, or on top of your plan when you exceed included limits.',
   pricing_calculator_best_fit: 'Best fit',
@@ -6310,6 +6311,7 @@ const messages = {
   website_live_pricing_switch: 'Need more later? Switch to a full plan from your app settings.',
   website_live_pricing_title: 'Turn your website into an iOS and Android app',
   website_live_pricing_unlimited_updates: 'Unlimited updates',
+  website_live_pricing_yearly_savings: 'Save 17% vs paying monthly',
   website_live_publish_desc: 'The same publishing flow runs in both places, so use whichever fits how you work.',
   website_live_publish_eyebrow: 'Store publishing',
   website_live_publish_mcp_body:

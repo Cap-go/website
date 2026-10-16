@@ -142,7 +142,7 @@ if (plans.length > 0) {
           plans && plans.length > 0 && (
             <div>
               <p class="mb-4 text-center text-sm font-medium text-blue-400" data-full-plans-yearly-discount style={yearly ? '' : 'display: none'}>
-                Full Capgo plans save 20% on yearly billing
+                {m.pricing_full_plans_yearly_savings({}, { locale: Astro.locals.locale })}
               </p>
               <Plans yearly={yearly} pricing={plans} credits={credits} />
             </div>
