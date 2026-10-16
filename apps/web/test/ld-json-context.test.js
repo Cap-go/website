@@ -1,5 +1,15 @@
 import { expect, test } from 'bun:test'
-import { CAPGO_ORGANIZATION_DESCRIPTION, createLdJsonGraph, createNewsArticleLdJson, createProductLdJson, createServiceLdJson, ensureLdJsonContext } from '../src/lib/ldJson.ts'
+import {
+  CAPGO_ORGANIZATION_DESCRIPTION,
+  capgoOrganizationId,
+  createHomepageLdJsonGraph,
+  createLdJsonGraph,
+  createNewsArticleLdJson,
+  createProductLdJson,
+  createServiceLdJson,
+  createSoftwareApplicationLdJson,
+  ensureLdJsonContext,
+} from '../src/lib/ldJson.ts'
 
 const mockConfig = {
   brand: 'Capgo',
@@ -150,6 +160,100 @@ test('createProductLdJson omits review fields when no reviews are provided', () 
 
   expect(product.review).toBeUndefined()
   expect(product.aggregateRating).toBeUndefined()
+})
+
+const homepageFeatureList = ['Live updates', 'Native builds']
+
+const homepageOffers = {
+  price: '14',
+  priceCurrency: 'USD',
+  availability: 'https://schema.org/InStock',
+  url: 'https://capgo.app/pricing/',
+  priceSpecifications: [
+    { price: '14', billingPeriod: 'monthly' },
+    { price: '146', billingPeriod: 'yearly' },
+  ],
+}
+
+function expectHomepageGraph(graph, homepageUrl, pricingUrl = 'https://capgo.app/pricing/') {
+  const types = graph['@graph'].map((node) => node['@type'])
+  expect(types).toContain('SoftwareApplication')
+  expect(types).toContain('Organization')
+  expect(types).toContain('WebSite')
+  expect(types).not.toContain('BreadcrumbList')
+  expect(types).not.toContain('Service')
+
+  const organizations = graph['@graph'].filter((node) => node['@type'] === 'Organization')
+  expect(organizations).toHaveLength(1)
+  expect(organizations[0]['@id']).toBe(capgoOrganizationId(mockConfig.baseUrl))
+
+  for (const node of graph['@graph']) {
+    expect(node.aggregateRating).toBeUndefined()
+    expect(node.review).toBeUndefined()
+    expect(node.softwareVersion).toBeUndefined()
+  }
+
+  const software = graph['@graph'].find((node) => node['@type'] === 'SoftwareApplication')
+  expect(software.url).toBe(homepageUrl)
+  expect(software.offers.url).toBe(pricingUrl)
+  expect(software.offers.priceSpecification).toHaveLength(2)
+
+  const website = graph['@graph'].find((node) => node['@type'] === 'WebSite')
+  expect(website.url).toBe(homepageUrl)
+}
+
+test('createHomepageLdJsonGraph matches homepage structured data policy', () => {
+  const graph = createHomepageLdJsonGraph(mockConfig, {
+    description: 'Build Capacitor apps with AI and ship updates instantly.',
+    homepageUrl: 'https://capgo.app/',
+    inLanguage: 'en',
+    applicationSubCategory: 'Build Capacitor apps with AI, ship updates instantly',
+    featureList: homepageFeatureList,
+    offers: homepageOffers,
+  })
+
+  expectHomepageGraph(graph, 'https://capgo.app/')
+})
+
+test('createHomepageLdJsonGraph uses locale homepage URLs for translated homepages', () => {
+  const graph = createHomepageLdJsonGraph(mockConfig, {
+    description: 'Créez des apps Capacitor avec votre agent IA.',
+    homepageUrl: 'https://capgo.app/fr/',
+    inLanguage: 'fr',
+    applicationSubCategory: 'Créez des apps Capacitor avec l’IA',
+    featureList: homepageFeatureList,
+    offers: {
+      ...homepageOffers,
+      url: 'https://capgo.app/fr/pricing/',
+    },
+  })
+
+  expectHomepageGraph(graph, 'https://capgo.app/fr/', 'https://capgo.app/fr/pricing/')
+  const website = graph['@graph'].find((node) => node['@type'] === 'WebSite')
+  expect(website.inLanguage).toBe('fr')
+})
+
+test('createSoftwareApplicationLdJson resolves relative URLs and adds priceSpecification', () => {
+  const app = createSoftwareApplicationLdJson(mockConfig, {
+    name: 'Capgo',
+    description: 'Live updates for Capacitor apps',
+    url: '/',
+    applicationCategory: 'DeveloperApplication',
+    offers: {
+      price: '14',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: '/pricing/',
+      priceSpecifications: [
+        { price: '14', billingPeriod: 'monthly' },
+        { price: '146', billingPeriod: 'yearly' },
+      ],
+    },
+  })
+
+  expect(app.url).toBe('https://capgo.app/')
+  expect(app.offers.url).toBe('https://capgo.app/pricing/')
+  expect(app.offers.priceSpecification[0]).toMatchObject({ unitCode: 'MON', price: '14' })
 })
 
 test('createProductLdJson resolves relative product, offer, and image URLs', () => {

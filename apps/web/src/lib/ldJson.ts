@@ -257,16 +257,24 @@ export function createSoftwareApplicationLdJson(
       price: string
       priceCurrency: string
       availability: string
+      url?: string
+      priceSpecifications?: Array<{
+        price: string
+        billingPeriod: 'monthly' | 'yearly'
+      }>
     }
   },
 ): SoftwareApplication {
+  const appUrl = resolveLdJsonAbsoluteUrl(config.baseUrl, options.url)
+  const appImage = resolveLdJsonAbsoluteUrl(config.baseUrl, options.image || '/capgo_social.png')
+
   const app: SoftwareApplication = {
     '@type': 'SoftwareApplication',
-    '@id': `${options.url}#softwareapplication`,
+    '@id': `${appUrl}#softwareapplication`,
     name: options.name,
     description: options.description,
-    url: options.url,
-    image: options.image || `${config.baseUrl}/capgo_social.png`,
+    url: appUrl,
+    image: appImage,
     applicationCategory: options.applicationCategory,
   }
 
@@ -274,7 +282,7 @@ export function createSoftwareApplicationLdJson(
   if (options.featureList?.length) app.featureList = options.featureList
   if (options.operatingSystem) app.operatingSystem = options.operatingSystem
   if (options.softwareVersion) app.softwareVersion = options.softwareVersion
-  if (options.downloadUrl) app.downloadUrl = options.downloadUrl
+  if (options.downloadUrl) app.downloadUrl = resolveLdJsonAbsoluteUrl(config.baseUrl, options.downloadUrl)
   if (options.reviews?.length) app.review = createReviewsLdJson(options.reviews)
   if (options.aggregateRating) {
     app.aggregateRating = {
@@ -288,11 +296,22 @@ export function createSoftwareApplicationLdJson(
     app.aggregateRating = createAggregateRatingLdJson(options.reviews)
   }
   if (options.offers) {
+    const priceSpecifications = options.offers.priceSpecifications?.map((spec) => ({
+      '@type': 'UnitPriceSpecification' as const,
+      price: spec.price,
+      priceCurrency: options.offers!.priceCurrency,
+      ...(spec.billingPeriod === 'monthly' ? { billingDuration: 1, unitCode: 'MON' as const } : { billingDuration: 1, unitCode: 'ANN' as const }),
+    }))
+
+    const offerUrl = options.offers.url ? resolveLdJsonAbsoluteUrl(config.baseUrl, options.offers.url) : appUrl
+
     app.offers = {
       '@type': 'Offer',
+      url: offerUrl,
       price: options.offers.price,
       priceCurrency: options.offers.priceCurrency,
       availability: options.offers.availability as 'https://schema.org/InStock' | 'https://schema.org/OutOfStock',
+      ...(priceSpecifications?.length ? { priceSpecification: priceSpecifications } : {}),
     }
   }
 
@@ -401,12 +420,14 @@ export function createServiceLdJson(
     areaServed?: string[]
   },
 ): Service {
+  const serviceUrl = resolveLdJsonAbsoluteUrl(config.baseUrl, options.url)
+
   return {
     '@type': 'Service',
-    '@id': `${options.url}#service`,
+    '@id': `${serviceUrl}#service`,
     name: options.name,
     description: options.description,
-    url: options.url,
+    url: serviceUrl,
     serviceType: options.serviceType,
     provider: {
       '@id': capgoOrganizationId(config.baseUrl),
@@ -517,15 +538,18 @@ export function createWebPageLdJson(
 export function createWebSiteLdJson(
   config: RuntimeConfig['public'],
   options?: {
+    url?: string
     hasSearchAction?: boolean
     searchUrl?: string
     inLanguage?: string
   },
 ): WebSite {
+  const siteUrl = resolveLdJsonAbsoluteUrl(config.baseUrl, options?.url ?? config.baseUrl)
+
   const schema: WebSite = {
     '@type': 'WebSite',
-    '@id': `${config.baseUrl}/#website`,
-    url: config.baseUrl,
+    '@id': `${siteUrl}#website`,
+    url: siteUrl,
     name: config.brand,
     description: CAPGO_ORGANIZATION_DESCRIPTION,
     inLanguage: options?.inLanguage || 'en',
@@ -539,6 +563,48 @@ export function createWebSiteLdJson(
   }
 
   return schema
+}
+
+export type HomepageLdJsonOffers = {
+  price: string
+  priceCurrency: string
+  availability: string
+  url: string
+  priceSpecifications: Array<{
+    price: string
+    billingPeriod: 'monthly' | 'yearly'
+  }>
+}
+
+/**
+ * Structured data graph for the marketing homepage (one SoftwareApplication, WebSite, Organization).
+ */
+export function createHomepageLdJsonGraph(
+  config: RuntimeConfig['public'],
+  options: {
+    description: string
+    homepageUrl: string
+    inLanguage: string
+    applicationSubCategory: string
+    featureList: string[]
+    offers: HomepageLdJsonOffers
+  },
+): Graph {
+  const capgoSoftware = createSoftwareApplicationLdJson(config, {
+    name: config.brand,
+    description: options.description,
+    url: options.homepageUrl,
+    applicationCategory: 'DeveloperApplication',
+    applicationSubCategory: options.applicationSubCategory,
+    operatingSystem: 'iOS, Android',
+    featureList: options.featureList,
+    offers: options.offers,
+  })
+
+  return createLdJsonGraph(config, capgoSoftware, {
+    includeOrganization: true,
+    additionalEntities: [createWebSiteLdJson(config, { url: options.homepageUrl, inLanguage: options.inLanguage })],
+  })
 }
 
 /**
