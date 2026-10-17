@@ -6,10 +6,15 @@ import ProductsMegaMenu from '@/components/ProductsMegaMenu.astro'
 import SolutionsMegaMenu from '@/components/SolutionsMegaMenu.astro'
 import { productIconPaths } from '@/config/productIcons'
 import { getRelativeLocaleUrl } from '@/services/links'
+import TeamAvatars from '@/components/TeamAvatars.astro'
 
 const brand = Astro.locals.runtimeConfig.public.brand
 const locale = Astro.locals.locale
 const brandPageUrl = getRelativeLocaleUrl(locale, 'brand/')
+// Enterprise buyers get the sales CTA in the header instead of the self-serve trial.
+const isEnterprisePage = getRelativeLocaleUrl(locale, 'enterprise').replace(/\/$/, '') === Astro.url.pathname.replace(/\/$/, '')
+const navCtaHref = isEnterprisePage ? 'https://book.capgo.app/enterprise-inquiry/' : getRelativeLocaleUrl(locale, 'register')
+const navCtaLabel = isEnterprisePage ? m.enterprise_talk_to_team({}, { locale }) : m.nav_cta_start_free({}, { locale })
 const brandLogoSvgUrl = '/brand/capgo-lockup-white-transparent.svg'
 const brandLogoPngUrl = '/brand/capgo-lockup-white-transparent.png'
 
@@ -281,14 +286,15 @@ const mobileLinks = [
       <div class="hidden shrink-0 items-center md:flex">
         <a
           data-guest-auth-link
-          href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+          href={navCtaHref}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={m.register({}, { locale: Astro.locals.locale })}
-          class="font-pj flex h-11 items-center rounded-2xl bg-white px-4 text-sm font-semibold whitespace-nowrap text-gray-950 shadow-lg shadow-black/30 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
+          aria-label={navCtaLabel}
+          class="font-pj flex h-11 items-center gap-2 rounded-2xl bg-white px-4 text-sm font-semibold whitespace-nowrap text-gray-950 shadow-lg shadow-black/30 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
           role="button"
         >
-          {m.register({}, { locale: Astro.locals.locale })}
+          {isEnterprisePage && <TeamAvatars loading={false} />}
+          {navCtaLabel}
         </a>
         <a
           data-console-auth-link
@@ -427,12 +433,13 @@ const mobileLinks = [
           </a>
           <a
             data-guest-auth-link
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+            href={navCtaHref}
             target="_blank"
             rel="noopener noreferrer"
-            class="font-pj flex min-h-12 items-center justify-center rounded-xl bg-white text-[15px] font-semibold text-gray-950 transition-colors hover:bg-slate-200"
+            class="font-pj flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white text-[15px] font-semibold text-gray-950 transition-colors hover:bg-slate-200"
           >
-            {m.register({}, { locale: Astro.locals.locale })}
+            {isEnterprisePage && <TeamAvatars loading={false} />}
+            {navCtaLabel}
           </a>
           <a
             data-console-auth-link

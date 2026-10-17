@@ -1,6 +1,7 @@
 ---
 import m from '@/copy/messages'
 import { productIconPaths } from '@/config/productIcons'
+import { stackMark } from '@/config/stackMarks'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
@@ -104,7 +105,14 @@ const lanes = [
   ['beta', '100%'],
   ['pr-142', 'preview'],
 ]
-const sources = ['Cordova', 'Web app', 'Lovable', 'Ionic plugins']
+const capacitorMark = stackMark('Capacitor')
+// Each migration source shows its own logo; the web app uses a generic globe.
+const sources = [
+  { name: 'Cordova', mark: stackMark('Cordova') },
+  { name: 'Web app', icon: 'globe' },
+  { name: 'Lovable', icon: 'lovable' },
+  { name: 'Ionic plugins', mark: stackMark('Ionic') },
+]
 ---
 
 <div
@@ -199,12 +207,44 @@ const sources = ['Cordova', 'Web app', 'Lovable', 'Ionic plugins']
               <div class="flex items-center gap-4">
                 <span class="sm-sources">
                   {sources.map((source, i) => (
-                    <b style={`--i:${i}`}>{source}</b>
+                    <b style={`--i:${i}`}>
+                      {source.mark && (
+                        <svg viewBox="0 0 24 24" fill={source.mark.color} aria-hidden="true">
+                          <path d={source.mark.path} />
+                        </svg>
+                      )}
+                      {source.icon === 'globe' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a9 9 0 0 1 7.843 4.582M12 3a9 9 0 0 0-7.843 4.582m15.686 0A11.95 11.95 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.96 8.96 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.9 17.9 0 0 1 12 16.5a17.9 17.9 0 0 1-8.716-2.247m0 0A9 9 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+                        </svg>
+                      )}
+                      {source.icon === 'lovable' && (
+                        <svg viewBox="0 0 180 180" aria-hidden="true">
+                          <defs>
+                            <linearGradient id="sm-lovable" x1="0" y1="0" x2="1" y2="1">
+                              <stop offset="0" stop-color="#ff8a3d" />
+                              <stop offset="0.5" stop-color="#f2547d" />
+                              <stop offset="1" stop-color="#5b6cff" />
+                            </linearGradient>
+                          </defs>
+                          <path
+                            fill="url(#sm-lovable)"
+                            d="M54.6052 0C83.9389 0 107.719 23.8424 107.719 53.2535V73.4931H125.395C154.729 73.4931 178.508 97.3355 178.508 126.747C178.508 156.158 154.729 180 125.395 180H1.4917V53.2535C1.4917 23.8424 25.2714 0 54.6052 0Z"
+                          />
+                        </svg>
+                      )}
+                      {source.name}
+                    </b>
                   ))}
                 </span>
                 <span class="sm-arrow">→</span>
                 <span class="sm-target">
-                  <b>Capacitor</b>
+                  <b>
+                    <svg viewBox="0 0 24 24" fill={capacitorMark.color} aria-hidden="true">
+                      <path d={capacitorMark.path} />
+                    </svg>
+                    Capacitor
+                  </b>
                   <small>+ Capgo</small>
                 </span>
               </div>
@@ -448,7 +488,7 @@ const sources = ['Cordova', 'Web app', 'Lovable', 'Ionic plugins']
   .sm-sources {
     position: relative;
     display: grid;
-    width: 110px;
+    width: 140px;
     height: 30px;
   }
   .sm-sources b {
@@ -462,6 +502,9 @@ const sources = ['Cordova', 'Web app', 'Lovable', 'Ionic plugins']
     font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     opacity: 0;
     animation: sm-cycle 6s ease infinite both;
     animation-delay: calc(var(--i) * 1.5s);
@@ -500,8 +543,17 @@ const sources = ['Cordova', 'Web app', 'Lovable', 'Ionic plugins']
     box-shadow: inset 0 0 0 1px rgb(68 188 255 / 0.45);
   }
   .sm-target b {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     color: #fff;
     font-size: 14px;
+  }
+  .sm-sources svg,
+  .sm-target svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
   }
   .sm-target small {
     color: #7dd3fc;

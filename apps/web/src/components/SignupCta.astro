@@ -16,13 +16,17 @@ interface Props {
   tone?: 'dark' | 'light'
   /** Optional line above the button that says what the trial is for. */
   lead?: string
+  /** `team` swaps the trial button for a single "Talk to our team" button (enterprise pages). */
+  variant?: 'signup' | 'team'
   class?: string
 }
 
-const { id, lead, enterprise = false, humanSupport = false, align = 'center', tone = 'dark', class: className = '' } = Astro.props
+const { id, lead, variant = 'signup', enterprise = false, humanSupport = false, align = 'center', tone = 'dark', class: className = '' } = Astro.props
 const locale = Astro.locals.locale
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const teamUrl = 'https://book.capgo.app/demo/'
+const inquiryUrl = 'https://book.capgo.app/enterprise-inquiry/'
+const isTeam = variant === 'team'
 const trialNote = `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
 const noteId = id ? `${id}-note` : `signup-cta-note-${Math.random().toString(36).slice(2, 8)}`
 const isLight = tone === 'light'
@@ -39,17 +43,22 @@ const isLight = tone === 'light'
     ></div>
     <a
       id={id}
-      href={registerUrl}
-      aria-describedby={noteId}
-      class="signup-cta-button font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white no-underline shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none active:scale-[0.98]"
+      href={isTeam ? inquiryUrl : registerUrl}
+      target={isTeam ? '_blank' : undefined}
+      rel={isTeam ? 'noopener noreferrer' : undefined}
+      aria-describedby={isTeam ? undefined : noteId}
+      class="signup-cta-button font-pj relative z-10 inline-flex items-center justify-center gap-3 rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white no-underline shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none active:scale-[0.98]"
     >
-      {m.hero_cta_try_free({}, { locale })}
+      {isTeam && <TeamAvatars border="border-blue-600" loading={false} />}
+      {isTeam ? m.enterprise_talk_to_team({}, { locale }) : m.hero_cta_try_free({}, { locale })}
     </a>
   </div>
-  <p id={noteId} class:list={['font-inter m-0 text-sm leading-6', isLight ? 'text-gray-600' : 'text-gray-300']}>
-    {trialNote}
-  </p>
-  {enterprise && (
+  {!isTeam && (
+    <p id={noteId} class:list={['font-inter m-0 text-sm leading-6', isLight ? 'text-gray-600' : 'text-gray-300']}>
+      {trialNote}
+    </p>
+  )}
+  {enterprise && !isTeam && (
     <div
       class:list={[
         'font-inter flex flex-col items-center gap-3 text-sm sm:flex-row',
