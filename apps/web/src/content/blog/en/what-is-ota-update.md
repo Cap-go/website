@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-12T07:17:05.992Z
-updated_at: 2026-10-14T01:39:31.000Z
+updated_at: 2026-10-17T09:00:00.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/42a563e9-a17f-44a3-830c-2459efecfd08/what-is-ota-update-text-design.jpg'
 head_image_alt: What Is Ota Update
 keywords: 'ota app, ota apps, ota update, ota updates explained, capacitor live updates, mobile app deployment, ota security'
@@ -64,7 +64,7 @@ The distinction matters because app store review and OTA do different jobs. The 
 
 > **Working rule:** if the change alters executable code, permissions, entitlements, or the app's core purpose, it is not OTA territory.
 
-Apple's App Review Guideline **2.5.2** draws that line clearly. Capacitor and Ionic OTA delivery stays inside the reviewed shell, while the store still controls anything that changes native behavior. The same boundary is why teams using live updates for Capacitor should separate web-layer fixes from changes that require a new binary, as described in [Capacitor live updates and release boundaries](https://capgo.app/blog/how-live-updates-for-capacitor-work/) and [Guideline 2.5.2 and OTA limits for Capacitor and Ionic](https://www.appsonair.com/blogs/ota-updates-or-app-store-releases-the-ultimate-guide-for-mobile-product-teams).
+Apple's App Review Guideline **2.5.2** draws that line clearly. Capacitor and Ionic OTA delivery stays inside the reviewed shell, while the store still controls anything that changes native behavior. For Apple and Google rules in one place, see [OTA apps: App Store and Google Play rules](https://capgo.app/blog/ultimate-guide-to-app-store-compliant-ota-updates/). The same boundary is why teams using live updates for Capacitor should separate web-layer fixes from changes that require a new binary, as described in [Capacitor live updates and release boundaries](https://capgo.app/blog/how-live-updates-for-capacitor-work/) and [Guideline 2.5.2 and OTA limits for Capacitor and Ionic](https://www.appsonair.com/blogs/ota-updates-or-app-store-releases-the-ultimate-guide-for-mobile-product-teams).
 
 <a id="full-packages-differential-patches-and-snapshots"></a>
 ## Full Packages, Differential Patches, and Snapshots
