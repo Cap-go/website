@@ -1,4 +1,5 @@
 export type AppleRejectionStoryTag =
+  | '1-4-2'
   | '4-3'
   | '4-2-6'
   | '3-1-2'
@@ -17,6 +18,7 @@ export type AppleRejectionStoryTag =
   | 'ai-data-sharing'
 
 export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string> = {
+  '1-4-2': 'Guideline 1.4.2',
   '4-3': 'Guideline 4.3',
   '4-2-6': 'Guideline 4.2.6',
   '3-1-2': 'Guideline 3.1.2',
