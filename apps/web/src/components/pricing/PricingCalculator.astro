@@ -87,7 +87,7 @@ const usageRows = [
             class="group flex min-h-8 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-400 transition hover:text-gray-200 has-checked:bg-white/10 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-blue-500"
           >
             <span>{m.yearly_plan({}, { locale })}</span>
-            <span class="ml-1 text-blue-400">-20%</span>
+            <span class="ml-1 text-blue-400">{m.yearly_two_months_free({}, { locale })}</span>
             <input type="radio" name="pricing-calculator-billing" value="yearly" data-pricing-calculator-billing class="sr-only" />
           </label>
         </fieldset>
