@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-12T07:17:05.992Z
-updated_at: 2026-10-17T09:00:00.000Z
+updated_at: 2026-10-17T13:38:45.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/42a563e9-a17f-44a3-830c-2459efecfd08/what-is-ota-update-text-design.jpg'
 head_image_alt: What Is Ota Update
 keywords: 'ota app, ota apps, ota update, ota updates explained, capacitor live updates, mobile app deployment, ota security'

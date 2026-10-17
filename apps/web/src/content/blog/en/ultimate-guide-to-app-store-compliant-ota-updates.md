@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-28T05:46:14.390Z
-updated_at: 2026-10-17T09:00:00.000Z
+updated_at: 2026-10-17T13:38:45.000Z
 head_image: /blog-images/ultimate-guide-to-app-store-compliant-ota-updates.webp
 head_image_alt: "OTA apps and App Store compliance for iOS and Android Capgo blog illustration"
 keywords: ota app, ota apps, ota ios, ios ota, apple ota, app store compliant ota, ota updates iphone, mobile app updates, google play ota
