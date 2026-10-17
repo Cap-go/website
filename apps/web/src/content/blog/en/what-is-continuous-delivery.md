@@ -33,6 +33,7 @@ That gap is where **continuous delivery** matters. It gives teams a repeatable w
   - [Speed without recovery is a trap](#speed-without-recovery-is-a-trap)
   - [Instrument the path end to end](#instrument-the-path-end-to-end)
 - [Continuous Delivery vs Continuous Deployment](#continuous-delivery-vs-continuous-deployment)
+- [Progressive Delivery Patterns](#progressive-delivery-patterns)
 - [Continuous Delivery for Mobile and Cross-Platform Apps](#continuous-delivery-for-mobile-and-cross-platform-apps)
   - [A mobile pipeline needs additional gates](#a-mobile-pipeline-needs-additional-gates)
 - [Balancing Speed and Safety in Regulated Industries](#balancing-speed-and-safety-in-regulated-industries)
@@ -63,7 +64,7 @@ For mobile teams, that distinction is especially important. A native binary may 
 
 > **Practical rule:** If your team can't produce a tested, identifiable release candidate on demand, it hasn't achieved continuous delivery yet.
 
-A useful starting point is the [continuous delivery pipeline overview](https://capgo.app/blog/what-is-enabled-by-the-continuous-delivery-pipeline/). The key question isn't whether your team releases constantly. It's whether the next release is predictable, repeatable, and safe to promote.
+The key question isn't whether your team releases constantly. It's whether the next release is predictable, repeatable, and safe to promote.
 
 <a id="core-components-of-a-continuous-delivery-pipeline"></a>
 ## Core Components of a Continuous Delivery Pipeline
@@ -151,6 +152,14 @@ Current DORA guidance also recommends looking beyond the core flow metrics at **
 
 Capture timestamps and outcomes from commit through build, test, artifact publication, approval, deployment, and recovery. Connect each release to its source revision and environment. For a mobile update, include channel, bundle version, adoption status, failure status, and rollback events.
 
+Pair the four DORA outcomes with leading indicators that surface problems before metrics worsen:
+
+- **Pipeline duration:** Watch for builds or test stages that stretch long enough to encourage bypasses.
+- **Failed-deploy rate:** Separate application defects from infrastructure, configuration, and pipeline failures.
+- **Rollback count:** Treat frequent reversals as a signal to inspect test gaps, rollout design, or change size.
+- **Test flakiness:** Track tests that fail without a meaningful product defect, because noisy gates train teams to ignore failures.
+- **Artifact traceability:** Confirm that the production version maps back to a source revision and its verification evidence.
+
 Teams often discover that the slowest part isn't the compiler or test runner. It's a manual approval queue, an unreliable staging environment, a missing signing step, or a rollback process nobody has rehearsed.
 
 > A healthy pipeline makes failure visible early and recovery boring.
@@ -181,6 +190,19 @@ Research into adoption barriers supports that caution. A 2017 empirical study id
 The choice isn't a maturity contest. It should reflect the failure modes your team can control.
 
 For a more detailed comparison of the two models, see [continuous delivery and continuous deployment](https://capgo.app/blog/what-is-continuous-deployment/). The practical test is simple: if removing the approval gate would expose users before your team could detect and reverse a problem, keep the gate and improve the pipeline first.
+
+<a id="progressive-delivery-patterns"></a>
+## Progressive Delivery Patterns
+
+Staging should not be the only gate before users see a change. Mature teams combine deployment automation with production-side controls that limit blast radius and define promotion rules before traffic expands.
+
+| Pattern | How It Works | Rollback Speed | Best Use Case |
+|---|---|---|---|
+| Canary | Exposes a new version to a limited slice of traffic or infrastructure before broader promotion | Fast when health signals and automated reversal are connected | Infrastructure changes and changes where live behavior needs validation |
+| Blue-green | Switches traffic between two production-like environments | Very fast when routing can be reversed cleanly | Compliance-sensitive cutovers and releases requiring a prepared fallback |
+| Feature flag | Ships code while controlling whether users can access the behavior | Fast for application behavior, provided the flag service remains available | Risky business logic, gradual audience exposure, and launches coordinated with marketing |
+
+A progressive strategy only works when the team defines success before deployment. The pipeline needs health checks, useful telemetry, a promotion rule, and a tested reversal path. Teams often combine patterns, such as a flag for a payment rule and a canary for a platform change. See the [staged rollouts versus full releases comparison](https://capgo.app/blog/staged-rollouts-vs-full-releases-comparison/) for another way to evaluate those choices.
 
 <a id="continuous-delivery-for-mobile-and-cross-platform-apps"></a>
 ## Continuous Delivery for Mobile and Cross-Platform Apps

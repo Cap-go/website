@@ -378,6 +378,7 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/wie-sich-das-chinesische-cybersicherheitsgesetz-auf-app-entwickler-auswirkt': '/blog/how-chinas-cybersecurity-law-impacts-app-developers/',
   '/blog/wie-sich-die-durchsetzung-des-ccpa-auf-apps-auswirkt': '/blog/how-ccpa-enforcement-impacts-apps/',
   '/blog/wie-sich-ota-updates-auf-die-app-store-sicherheit-auswirken': '/blog/how-ota-updates-affect-app-store-security/',
+  '/blog/what-is-enabled-by-the-continuous-delivery-pipeline': '/blog/what-is-continuous-delivery/',
   '/blog/zahlungsdaten-sicherheit-fuer-app-store-genehmigung': '/blog/payment-data-security-for-app-store-approval/',
 }
 
