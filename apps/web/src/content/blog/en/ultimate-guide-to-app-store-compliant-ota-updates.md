@@ -1,23 +1,34 @@
 ---
 slug: ultimate-guide-to-app-store-compliant-ota-updates
-title: Ultimate Guide to App Store-Compliant OTA Updates
-description: Learn how to effectively manage Over-The-Air updates while adhering to App Store guidelines for a better user experience.
+title: "OTA Apps: App Store and Google Play Rules for iOS and Android"
+description: "OTA apps push JavaScript, HTML, and CSS without a new store binary. Learn Apple Guideline 2.5.2, Google Play limits, and how to ship compliant iOS and Android OTA updates."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-28T05:46:14.390Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-10-17T13:38:45.000Z
 head_image: /blog-images/ultimate-guide-to-app-store-compliant-ota-updates.webp
-head_image_alt: "Ultimate Guide to App Store-Compliant OTA Updates Capgo blog illustration"
-keywords: OTA updates, app store compliance, mobile app updates, bug fixes, performance improvements
+head_image_alt: "OTA apps and App Store compliance for iOS and Android Capgo blog illustration"
+keywords: ota app, ota apps, ota ios, ios ota, apple ota, app store compliant ota, ota updates iphone, mobile app updates, google play ota
 tag: Development, Mobile, Updates
 published: true
 locale: en
 origin: ai
 next_blog: ''
+faq:
+  - question: "What is an OTA app?"
+    answer: "An OTA app is a mobile app that can receive over-the-air updates after install, usually to JavaScript, HTML, CSS, and assets inside a native shell. The store binary stays the same while the web layer changes. For definitions and how OTA delivery works in Capacitor, see capgo.app/blog/what-is-ota-update/."
+  - question: "Are OTA updates allowed on iPhone and iOS apps?"
+    answer: "Yes, within limits. Apple App Review Guideline 2.5.2 says apps may not download or execute code that introduces or changes features or functionality. Compliant OTA apps limit over-the-air delivery to interpreted web-layer fixes and content that match the reviewed app, not new native behavior or a different product purpose."
+  - question: "What does Apple OTA policy mean for mobile app updates?"
+    answer: "Apple OTA policy for third-party apps is not the same as iOS system updates. For App Store apps, Guideline 2.5.2 is the main rule: stay inside the reviewed shell, avoid downloadable code that changes features, and submit a new binary when native code, permissions, or entitlements change."
+  - question: "Can OTA apps skip App Store review for every change?"
+    answer: "No. Bug fixes, performance work, and minor web-layer UI tweaks can often ship OTA when they stay inside store rules. Major features, native code changes, and permission changes still need a store submission and review on iOS. On Google Play, native or executable-code changes require a Play submission and review; interpreted-code changes can ship OTA only when they comply with Play policies."
+  - question: "How do Google Play OTA rules compare to iOS?"
+    answer: "Google Play is generally faster and less strict on minor updates, but it still bans bypassing the store for executable changes that belong in a new release. Treat OTA as a web-layer lane on both platforms and keep native changes in the binary release path."
 ---
 
-**Want to update your app quickly without breaking App Store rules?** Over-The-Air (OTA) updates let you fix bugs, improve performance, and enhance user experience - all without waiting for app store approvals. But to stay compliant, you must follow strict guidelines from Apple and Google.
+An **OTA app** delivers **over-the-air (OTA) updates** to the web layer inside a reviewed native shell: JavaScript, HTML, CSS, and assets can change without replacing the whole store binary. On iPhone and iPad, **Apple App Review Guideline 2.5.2** is the line to respect: apps may not download or execute code that introduces or changes features or functionality, so compliant OTA stays limited to interpreted web-layer fixes that match the app Apple reviewed. This guide covers those App Store and Google Play rules end to end. For what OTA means in plain language, read [OTA apps explained](https://capgo.app/blog/what-is-ota-update/). To ship Capacitor live updates with Capgo, see [Capacitor live updates](https://capgo.app/live-update/).
 
 ### Key Takeaways:
 
@@ -313,6 +324,38 @@ As one update notification puts it:
 > "A new update for your device is available!" [\[15\]](https://withintent.com/blog/ota-updates-design/)
 
 Striking the right balance between update frequency and timing can help avoid user frustration while keeping security and performance on track.
+
+## OTA apps and App Store rules FAQ
+
+::: faq
+### What is an OTA app?
+
+An **OTA app** is a mobile app that can receive over-the-air updates after install, usually to JavaScript, HTML, CSS, and assets inside a native shell. The store binary stays the same while the web layer changes. For definitions and how OTA delivery works in Capacitor, see [OTA apps explained](https://capgo.app/blog/what-is-ota-update/).
+:::
+
+::: faq
+### Are OTA updates allowed on iPhone and iOS apps?
+
+Yes, within limits. **Apple App Review Guideline 2.5.2** says apps may not download or execute code that introduces or changes features or functionality. Compliant OTA apps limit over-the-air delivery to interpreted web-layer fixes and content that match the reviewed app, not new native behavior or a different product purpose.
+:::
+
+::: faq
+### What does Apple OTA policy mean for mobile app updates?
+
+Apple OTA policy for third-party apps is not the same as iOS system updates. For App Store apps, **Guideline 2.5.2** is the main rule: stay inside the reviewed shell, avoid downloadable code that changes features, and submit a new binary when native code, permissions, or entitlements change.
+:::
+
+::: faq
+### Can OTA apps skip App Store review for every change?
+
+No. Bug fixes, performance work, and minor web-layer UI tweaks can often ship OTA when they stay inside store rules. Major features, native code changes, and permission changes still need a store submission and review on iOS. On Google Play, native or executable-code changes require a Play submission and review; interpreted-code changes can ship OTA only when they comply with Play policies.
+:::
+
+::: faq
+### How do Google Play OTA rules compare to iOS?
+
+Google Play is generally faster and less strict on minor updates, but it still bans bypassing the store for executable changes that belong in a new release. Treat OTA as a web-layer lane on both platforms and keep native changes in the binary release path.
+:::
 
 ## Conclusion
 

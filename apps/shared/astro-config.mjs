@@ -65,6 +65,7 @@ export function buildSharedIntegrations({ pluginIcons, pageLastModDates, sitemap
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
+      filter: (page) => !page.endsWith('/410/') && !page.endsWith('/410'),
       serialize(item) {
         return withSitemapLastMod(item, pageLastModDates)
       },

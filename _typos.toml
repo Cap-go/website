@@ -2,6 +2,7 @@
 extend-exclude = [
     # Historical localized blog slug keys (intentional foreign-language path aliases)
     "apps/shared/legacyPathRedirects.ts",
+    "apps/web/test/hoffman-conversion-redirects.test.js",
     "public/**/*_tye.png",
     "apps/web/public/**/*_tye.png",
     "apps/docs/public/**/*_tye.png",

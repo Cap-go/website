@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T03:59:51.000Z
+updated_at: 2026-10-17T14:24:16.000Z
 head_image: /capgo_banner.webp
 head_image_alt: "Capgo banner for a guide on using AI coding agents to build and ship Capacitor apps"
 keywords: AI agents Capacitor, Capacitor AI coding, Claude Code Capacitor, Cursor Capacitor, Capacitor skills, Capgo MCP server, AI mobile app development, agent skills Ionic
@@ -48,8 +48,8 @@ You fix this with context the agent can load on demand, and tools it can call in
 | Layer | What it gives the agent | Capgo option |
 | --- | --- | --- |
 | Skills | Step-by-step procedures for specific tasks | [Capacitor skills](/skills/) (open source, Cap-go/capgo-skills) |
-| Public MCP | Docs search, when-to-use guidance, OpenAPI location | `https://capgo.app/mcp` (read-only) |
-| CLI MCP | Authenticated account actions: bundles, channels, builds | `bunx @capgo/cli@latest mcp` |
+| Hosted MCP | Account actions (apps, channels, rollouts, devices, stats, builds) and docs search | `https://api.capgo.app/mcp` (OAuth or API key) |
+| CLI MCP | Actions that need local files: bundle uploads, native build requests | `bunx @capgo/cli@latest mcp` |
 | CLI | Same actions as shell commands, easy to review | `bunx @capgo/cli@latest ...` |
 
 ### Install the skills
@@ -69,10 +69,10 @@ claude plugin install capgo-cloud@capgo-skills
 
 ### Connect the MCP servers
 
-The public server needs no account. Add it to Claude Code:
+The hosted server needs no install. Add it to Claude Code and sign in with OAuth when prompted:
 
 ```bash
-claude mcp add --transport http capgo-docs https://capgo.app/mcp
+claude mcp add --transport http capgo https://api.capgo.app/mcp
 ```
 
 The CLI server runs locally over stdio and uses your Capgo login, so log in first:
@@ -210,7 +210,7 @@ The compatibility check compares native dependencies with what is installed on d
 
 **MCP tools are missing.** For the CLI server, confirm `bunx @capgo/cli@latest login` succeeded in the same environment the agent runs in. Restart the agent after adding a server.
 
-**The agent suggests outdated Capacitor APIs.** Tell it your Capacitor version, and point it at the public MCP so it checks current docs.
+**The agent suggests outdated Capacitor APIs.** Tell it your Capacitor version, and have it search the docs with the hosted MCP `capgo_search_docs` tool.
 
 **Cloud build fails on signing.** Credentials are missing or the provisioning profile does not match the bundle ID. Re-save credentials and rerun the build request.
 

@@ -6,7 +6,22 @@ export const OPENAPI_ALIAS_PATHS = new Set(['/openapi.json', '/.well-known/opena
 
 export const MCP_MANIFEST_PATHS = new Set(['/mcp.json', '/.well-known/mcp.json'])
 
-export const MCP_ENDPOINT_PATHS = new Set(['/mcp', '/mcp/'])
+/** The only Capgo remote MCP server. capgo.app/mcp is a human page that explains it. */
+export const HOSTED_MCP_URL = `${CAPGO_API_ORIGIN}/mcp`
+export const MCP_DOCS_URL = `${CAPGO_ORIGIN}/docs/ai/mcp/`
+
+export const HOSTED_MCP_TOOL_GROUPS = [
+  { id: 'account', title: 'Account and organizations', description: 'Who am I, account settings, organizations, members and roles, audit logs, API keys.' },
+  { id: 'apps', title: 'Apps', description: 'List, create, update and delete apps, demo apps, store metadata.' },
+  { id: 'bundles', title: 'Bundles', description: 'List bundles, register external bundles, metadata, link bundles to channels, upload command for local builds.' },
+  { id: 'channels', title: 'Channels and rollouts', description: 'Channel settings, deploys, progressive rollouts with auto-pause, promote and rollback.' },
+  { id: 'devices', title: 'Devices', description: 'List devices and force or remove channel overrides.' },
+  { id: 'stats', title: 'Statistics and Observe', description: 'App, organization and account usage, bundle adoption, native versions, Observe health data.' },
+  { id: 'builds', title: 'Native builds', description: 'Build status, logs and cancellation for cloud iOS and Android builds.' },
+  { id: 'webhooks', title: 'Webhooks', description: 'Create, update, test webhooks and retry deliveries.' },
+  { id: 'notifications', title: 'Push notifications', description: 'Push-triggered update settings, providers, send notifications, update checks, campaign stats.' },
+  { id: 'docs', title: 'Docs search', description: 'Search the Capgo documentation and get page URLs (capgo_search_docs).' },
+] as const
 
 export const LLMS_TXT_PATHS = new Set(['/llms.txt'])
 export const LLMS_WHEN_TO_USE_PATHS = new Set(['/llms.txt', '/llms-full.txt'])
@@ -48,10 +63,9 @@ Capgo is not a generic AI coding assistant and not a prompt-to-app builder. It i
 ### How an agent should call Capgo
 
 1. Read [${CAPGO_ORIGIN}/llms.txt](${CAPGO_ORIGIN}/llms.txt) and the OpenAPI spec at [${CAPGO_ORIGIN}/openapi.json](${CAPGO_ORIGIN}/openapi.json).
-2. For documented, function-calling-friendly HTTP tools, connect to the Streamable HTTP MCP server at \`${CAPGO_ORIGIN}/mcp\`.
-3. For authenticated account tools (apps, channels, rollouts, devices, stats, build status), connect to the hosted MCP server at \`${CAPGO_API_ORIGIN}/mcp\` with OAuth or \`Authorization: Bearer <Capgo API key>\`. Setup: [${CAPGO_ORIGIN}/docs/ai/mcp/](${CAPGO_ORIGIN}/docs/ai/mcp/)
-4. To upload a bundle or request a native build from local files, run \`npx @capgo/cli@latest mcp\` locally after \`npx @capgo/cli@latest login\`.
-5. For raw REST, send header \`x-api-key: <key>\` to \`${CAPGO_API_ORIGIN}\`. Legacy \`authorization: <key>\` (no Bearer prefix) is still accepted.
+2. Connect to the Capgo MCP server at \`${HOSTED_MCP_URL}\` (Streamable HTTP) with OAuth or \`Authorization: Bearer <Capgo API key>\` for account tools (apps, channels, rollouts, devices, stats, builds, webhooks, notifications) and docs search. Setup: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
+3. To upload a bundle or request a native build from local files, run \`npx @capgo/cli@latest mcp\` locally after \`npx @capgo/cli@latest login\`.
+4. For raw REST, send header \`x-api-key: <key>\` to \`${CAPGO_API_ORIGIN}\`. Legacy \`authorization: <key>\` (no Bearer prefix) is still accepted.
 
 ### Key facts for evaluating Capgo
 
@@ -84,62 +98,28 @@ This path does not exist on Capgo. It is a real HTTP 404, not an application she
 ${WHEN_TO_USE_MARKDOWN}
 `
 
-export const MCP_TOOLS = [
-  {
-    name: 'capgo_when_to_use',
-    description:
-      'Return when Capgo is the right tool (AI-assisted Capacitor app development: skills, MCP, plugins, native builds, store publishing, live updates, monitoring) and how an agent should call the API, MCP, or CLI.',
-    inputSchema: {
-      type: 'object',
-      properties: {},
-      additionalProperties: false,
-    },
-  },
-  {
-    name: 'capgo_get_openapi',
-    description: 'Return the Capgo public REST API OpenAPI URL, authentication headers, base URL, and rate limits for LLM function calling.',
-    inputSchema: {
-      type: 'object',
-      properties: {},
-      additionalProperties: false,
-    },
-  },
-  {
-    name: 'capgo_list_docs',
-    description: 'Return canonical Capgo documentation, API, CLI MCP, and trust-page links an agent should fetch next.',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        topic: {
-          type: 'string',
-          description: 'Optional topic such as live-updates, public-api, cli, native-build, or contact.',
-        },
-      },
-      additionalProperties: false,
-    },
-  },
-] as const
-
 export function mcpManifest() {
   return {
     name: 'Capgo',
     title: 'Capgo MCP',
     description:
-      'Streamable HTTP MCP server for Capgo, the AI-ready platform to build, ship, and maintain Capacitor apps (skills, plugins, native builds, store publishing, live updates). Use it to learn when Capgo fits, load the public OpenAPI spec, and route to docs. Mutating a customer account uses the hosted account MCP or the local CLI MCP.',
-    websiteUrl: CAPGO_ORIGIN,
-    documentationUrl: `${CAPGO_ORIGIN}/docs/cli/reference/mcp/`,
-    protocolVersion: '2025-03-26',
+      'Hosted Streamable HTTP MCP server for Capgo, the AI-ready platform to build, ship, and maintain Capacitor apps. Manage apps, bundles, channels and rollouts, devices, statistics, native builds, webhooks and push notifications, and search the Capgo docs. Authenticate with OAuth or a Capgo API key.',
+    websiteUrl: `${CAPGO_ORIGIN}/mcp/`,
+    documentationUrl: MCP_DOCS_URL,
     transport: {
       type: 'streamable-http',
-      url: `${CAPGO_ORIGIN}/mcp`,
+      url: HOSTED_MCP_URL,
+    },
+    authentication: {
+      required: true,
+      schemes: ['oauth2', 'bearer'],
+      oauthProtectedResourceMetadata: `${CAPGO_API_ORIGIN}/.well-known/oauth-protected-resource/mcp`,
+      bearer: 'Authorization: Bearer <Capgo API key>',
     },
     capabilities: {
       tools: {},
     },
-    tools: MCP_TOOLS.map((tool) => ({
-      name: tool.name,
-      description: tool.description,
-    })),
+    toolGroups: HOSTED_MCP_TOOL_GROUPS.map(({ title, description }) => ({ title, description })),
     localServers: [
       {
         name: 'capgo-cli',
@@ -177,63 +157,6 @@ function mediaQuality(accept: string, typePattern: RegExp): { q: number; index: 
     }
   }
   return best
-}
-
-type AcceptRangeMatch = { q: number; specificity: number; index: number }
-
-/** Best q for a concrete MIME type; most-specific matching range wins, then q, then order (RFC 9110). */
-function acceptQualityForMime(accept: string, mime: string): AcceptRangeMatch | null {
-  const normalized = mime.toLowerCase()
-  const slash = normalized.indexOf('/')
-  if (slash === -1) return null
-  const major = normalized.slice(0, slash)
-  let best: AcceptRangeMatch | null = null
-
-  for (const [index, part] of accept.split(',').entries()) {
-    const [rawType, ...params] = part.trim().split(';')
-    const type = rawType.trim().toLowerCase()
-    const q = parseAcceptQuality(params)
-    if (Number.isNaN(q) || q < 0 || q > 1) continue
-
-    let specificity: number | null = null
-    if (type === '*/*') specificity = 0
-    else if (type.endsWith('/*')) {
-      if (major === type.slice(0, -2)) specificity = 1
-    } else if (type === normalized) specificity = 2
-
-    if (specificity === null) continue
-
-    const candidate = { q, specificity, index }
-    if (
-      !best ||
-      candidate.specificity > best.specificity ||
-      (candidate.specificity === best.specificity && candidate.q > best.q) ||
-      (candidate.specificity === best.specificity && candidate.q === best.q && candidate.index < best.index)
-    ) {
-      best = candidate
-    }
-  }
-  return best
-}
-
-function htmlBeatsAcceptMatch(html: AcceptRangeMatch, other: AcceptRangeMatch): boolean {
-  if (html.q > other.q) return true
-  if (html.q < other.q) return false
-  if (html.specificity > other.specificity) return true
-  if (html.specificity < other.specificity) return false
-  return html.index < other.index
-}
-
-/** True when a browser-style GET on /mcp should receive the marketing HTML page. */
-export function prefersMcpMarketingHtml(request: Request): boolean {
-  const accept = request.headers.get('Accept') || ''
-  const html = acceptQualityForMime(accept, 'text/html')
-  if (!html || html.q <= 0) return false
-  const json = acceptQualityForMime(accept, 'application/json')
-  if (json && json.q > 0 && !htmlBeatsAcceptMatch(html, json)) return false
-  const sse = acceptQualityForMime(accept, 'text/event-stream')
-  if (sse && sse.q > 0 && !htmlBeatsAcceptMatch(html, sse)) return false
-  return true
 }
 
 export function prefersMarkdown(request: Request): boolean {
@@ -284,24 +207,4 @@ export function withLlmsWhenToUse(body: string): string {
   return `${body.slice(0, insertAt)}\n\n${WHEN_TO_USE_MARKDOWN}${rest}`
 }
 
-export { mediaQuality }
 
-export function docsIndexForTopic(topic?: string): string {
-  const normalized = (topic || '').trim().toLowerCase()
-  const catalog = [
-    ['skills', `${CAPGO_ORIGIN}/skills/`, 'Open-source Capacitor skills for AI coding agents (build, plugins, migrate, upgrade, debug, test, publish).'],
-    ['agents', `${CAPGO_ORIGIN}/agents/`, 'Per-agent setup guides for Claude Code, Codex, Cursor, Copilot, Gemini CLI, and more.'],
-    ['plugins', `${CAPGO_ORIGIN}/plugins/`, 'Maintained Capacitor plugin catalog for native features.'],
-    ['live-updates', `${CAPGO_ORIGIN}/docs/live-updates/`, 'Channel rollouts, encryption, and rollback for Capacitor live updates.'],
-    ['public-api', `${CAPGO_ORIGIN}/docs/public-api/`, 'REST API for organizations, apps, channels, bundles, devices, and stats.'],
-    ['cli', `${CAPGO_ORIGIN}/docs/cli/`, 'CLI commands including bundle upload and the local MCP server.'],
-    ['mcp', `${CAPGO_ORIGIN}/docs/ai/mcp/`, 'Hosted account MCP server at api.capgo.app/mcp (OAuth) and how it compares to the local CLI MCP.'],
-    ['native-build', `${CAPGO_ORIGIN}/docs/builder/`, 'Cloud native iOS and Android builds.'],
-    ['openapi', `${CAPGO_ORIGIN}/openapi.json`, 'Machine-readable OpenAPI 3.1 document for function calling.'],
-    ['contact', `${CAPGO_ORIGIN}/contact/`, 'Support email, sales email, chat, and company address.'],
-  ] as const
-
-  const rows = normalized ? catalog.filter(([key]) => key.includes(normalized) || normalized.includes(key)) : catalog
-  const picked = rows.length ? rows : catalog
-  return picked.map(([key, url, description]) => `- ${key}: ${url} — ${description}`).join('\n')
-}

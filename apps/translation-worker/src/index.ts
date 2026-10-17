@@ -1,5 +1,6 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
+import { isGonePath } from '../../shared/gonePaths'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
@@ -3671,6 +3672,13 @@ export default {
 
     if (shouldBypassTranslation(requestUrl.pathname)) {
       return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
+    }
+
+    if (isGonePath(requestUrl.pathname)) {
+      const source = await loadSourceHtml(request, env, requestUrl, locale)
+      if (source.type === 'response') {
+        return trackAICrawler(request, withResponseHeaders(source.response, 'BYPASS', request.method === 'HEAD'), ctx)
+      }
     }
 
     const englishPath = stripLocalePrefix(requestUrl.pathname)

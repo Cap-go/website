@@ -1,57 +1,67 @@
 ---
 import m from '@/copy/messages'
-import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
 import AppLogoStrip from '@/components/AppLogoStrip.astro'
 import HeroWorldMap from '@/components/HeroWorldMap.astro'
-
-const nativeBuildUrl = getRelativeLocaleUrl(Astro.locals.locale, 'native-build')
 ---
 
 <section>
   <div class="relative overflow-hidden">
     <div class="relative mx-auto max-w-7xl pb-8 md:pb-32 2xl:max-w-[90vw]">
       <HeroWorldMap />
-      <div data-hero-copy class="relative z-10 mx-auto max-w-7xl px-4 pt-4 text-center sm:px-6 sm:pt-6 lg:px-0 lg:pt-8 xl:pt-10 2xl:pt-20">
-        <a
-          id="hero-whatsnew-pill"
-          href={nativeBuildUrl}
-          class="font-inter mb-8 inline-flex min-h-8 max-w-full items-center gap-2 rounded-full border border-white/15 bg-white/5 py-1 pr-3 pl-1 text-xs font-medium text-slate-300 transition-colors hover:border-blue-400/40 hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none"
-        >
-          <span class="inline-flex min-h-6 items-center rounded-full bg-white px-2.5 font-semibold text-slate-950">What's new?</span>
-          <span class="hidden sm:inline">Native builds for CapacitorJS apps</span>
-          <span class="sm:hidden">Native builds</span>
-          <svg class="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
-
+      <div data-hero-copy class="relative z-10 mx-auto max-w-7xl px-4 pt-10 text-center sm:px-6 sm:pt-12 lg:px-0 lg:pt-14 xl:pt-16 2xl:pt-24">
         <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-[1.08] xl:text-[5.25rem]">
           <span class="sr-only">Capgo. </span>
           <span class="lg:whitespace-nowrap">{m.hero_title_line1({}, { locale: Astro.locals.locale })}</span>
           <br />
           <span class="text-azure-500">{m.hero_title_line2({}, { locale: Astro.locals.locale })}</span>
         </h1>
-        <p class="font-inter mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl">{m.hero_subtitle_v2({}, { locale: Astro.locals.locale })}</p>
-        <SignupCta id="hero-signup-cta" enterprise class="mt-10" />
-        <!-- Status line for the interactive map; short reserved slot so it floats in the gap above the stats without shifting layout. -->
-        <div class="relative h-6" aria-hidden="true">
-          <div data-map-hud class="map-hud"></div>
-        </div>
+        <p class="font-inter mx-auto mt-6 max-w-3xl text-lg leading-8 text-balance text-gray-400 sm:text-xl">{m.hero_subtitle_v2({}, { locale: Astro.locals.locale })}</p>
+        <SignupCta id="hero-signup-cta" class="mt-10" />
+      </div>
+      <!-- Map status line floats over the map, outside the copy flow. -->
+      <div class="map-hud-slot" aria-hidden="true">
+        <div data-map-hud class="map-hud"></div>
       </div>
       <AppLogoStrip />
     </div>
   </div>
 </section>
 
-<script>
-  // Analytics only — no visual/markup change to the pill itself.
-  // Fires a named PostHog event when the hero "What's new?" pill is clicked.
-  const pill = document.getElementById('hero-whatsnew-pill')
-  pill?.addEventListener('click', () => {
-    ;(window as any).posthog?.capture('home_whatsnew_pill_click', {
-      location: 'hero',
-      destination: 'native-build',
-    })
-  })
-</script>
+<style>
+  /* Anchor box for the map status pill: out of the text flow, floating over the map. */
+  .map-hud-slot {
+    display: none;
+  }
+  /* Small screens have no free space around the copy, so the pill only shows on desktop. */
+  @media (min-width: 1024px) {
+    .map-hud-slot {
+      display: block;
+      position: absolute;
+      z-index: 20;
+      right: 1.5rem;
+      top: 62%;
+      width: 0;
+      height: 0;
+    }
+    .map-hud-slot :global(.map-hud) {
+      left: auto;
+      right: 0;
+      flex-wrap: wrap;
+      row-gap: 2px;
+      /* The slot is 0px wide, so size to content or every item wraps onto its own line. */
+      width: max-content;
+      max-width: 340px;
+      border-radius: 14px;
+      transform: translate(0, -4px);
+    }
+    /* Route timing breakdown drops to its own second line, aligned past the dot. */
+    .map-hud-slot :global(.map-hud .map-hud-note) {
+      flex-basis: 100%;
+      padding-left: 14px;
+    }
+    .map-hud-slot :global(.map-hud.is-visible) {
+      transform: translate(0, 0);
+    }
+  }
+</style>

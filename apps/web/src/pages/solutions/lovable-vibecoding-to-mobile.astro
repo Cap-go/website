@@ -137,7 +137,7 @@ Set up the project so an AI agent can use Capgo's MCP release tools through inst
    - npx @capgo/cli@latest login
    - npx install-mcp 'npx @capgo/cli@latest mcp' --client codex
    Replace codex with cursor, claude-code, gemini-cli, or windsurf if that is the client this project uses.
-2. Read Capgo's public MCP metadata when tool details are needed:
+2. Read Capgo's MCP metadata when tool details are needed (the hosted server is https://api.capgo.app/mcp):
    - https://capgo.app/.well-known/mcp/server-card.json
    - https://capgo.app/.well-known/agent-skills/capgo-cli-mcp/SKILL.md
    If this client supports agent skills, also run: npx skills add Cap-go/capgo-skills
