@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Physical harm and dosage safety">
+  <title>Physical harm and dosage safety</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="268" cy="42" r="18" fill="#44BCFF" opacity="0.32"/>
+  <path d="M160 38 L196 52 V96 C196 124 160 148 160 148 C160 148 124 124 124 96 V52 Z" fill="#111827" stroke="#F472B6" stroke-width="2"/>
+  <path d="M160 68 V108 M140 88 H180" stroke="#F472B6" stroke-width="3" stroke-linecap="round"/>
+  <rect x="88" y="118" width="48" height="56" rx="8" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="100" y="130" width="24" height="8" rx="4" fill="#F472B6" opacity="0.45"/>
+  <rect x="100" y="146" width="24" height="8" rx="4" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="184" y="118" width="48" height="56" rx="8" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <circle cx="208" cy="146" r="14" fill="none" stroke="#F472B6" stroke-width="2"/>
+  <text x="208" y="151" text-anchor="middle" fill="#F472B6" font-family="system-ui,sans-serif" font-size="14" font-weight="700">mg</text>
+</svg>
