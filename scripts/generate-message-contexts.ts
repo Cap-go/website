@@ -259,7 +259,7 @@ function buildContext(key: string, text: string, files: string[] | undefined): s
     return [shortHint, `Page/area: ${page}.`, `Role: ${role}.`, usage, keyHint].filter(Boolean).join(' ')
   }
 
-  const preserve = /Capgo|Capacitor|Appflow|CodePush|OTA|CLI|SDK|API|npm|bun|GitHub|Cloudflare|Supabase|Discord/.test(text)
+  const preserve = /Capgo|Capacitor|Appflow|CodePush|OTA|CLI|SDK|API|npm|bun|GitHub|Cloudflare|Supabase|Discord|Web2App/.test(text)
     ? 'Preserve Capgo product/brand and developer terms exactly.'
     : ''
 

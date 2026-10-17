@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test'
-import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
+import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
 import { staticLegacyRedirect } from '../src/worker/index.ts'
 
 function staticLegacyRedirectLocation(url) {
@@ -56,6 +56,12 @@ for (const locale of NON_DEFAULT_LOCALE_CODES) {
 test('staticLegacyRedirect /build-status/ → /builder-data/', () => {
   expect(staticLegacyRedirectLocation('https://capgo.app/build-status/')).toBe('/builder-data/')
   expect(staticLegacyRedirectLocation('https://capgo.app/fr/build-status')).toBe('/fr/builder-data/')
+})
+
+test('staticLegacyRedirect /website-live/ → /web2app/', () => {
+  expect(staticLegacyRedirectLocation('https://capgo.app/website-live/')).toBe('/web2app/')
+  expect(staticLegacyRedirectLocation('https://capgo.app/website-live')).toBe('/web2app/')
+  expect(staticLegacyRedirectLocation('https://capgo.app/fr/website-live')).toBe('/fr/web2app/')
 })
 
 test('staticLegacyRedirect /blog/uptime-guarantee/ → /sla/', () => {
