@@ -38,6 +38,7 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/sentry-react-native': '/blog/app-health-monitoring/',
   '/blog/what-is-soc-2-certification': '/security-questionnaire/',
   '/blog/how-chinas-cybersecurity-law-impacts-app-developers': '/blog/checklist-for-cybersecurity-compliance-in-china/',
+  '/blog/uptime-guarantee': '/sla/',
   '/blog/activar-modo-desarrollador-ios16': '/blog/enable-ios-developer-mode-ios16/',
   '/blog/actualizaciones-en-tiempo-real-con-segmentación-de-usuarios': '/blog/real-time-updates-with-user-segmentation/',
   '/blog/actualizaciones-en-vivo-en-apple': '/blog/do-apple-allow-live-updates/',

@@ -11,6 +11,7 @@ const REDIRECTS = [
   ['/blog/what-is-soc-2-certification/', '/security-questionnaire/'],
   ['/blog/how-chinas-cybersecurity-law-impacts-app-developers/', '/blog/checklist-for-cybersecurity-compliance-in-china/'],
   ['/blog/wie-sich-das-chinesische-cybersicherheitsgesetz-auf-app-entwickler-auswirkt/', '/blog/checklist-for-cybersecurity-compliance-in-china/'],
+  ['/blog/uptime-guarantee/', '/sla/'],
   ['/codepush/', '/alternatives/codepush/'],
   ['/compare/capgo-vs-capawesome/', '/alternatives/capawesome/'],
   ['/compare/capgo-vs-appflow/', '/alternatives/ionic-appflow/'],
