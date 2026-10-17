@@ -1,4 +1,5 @@
 ---
+import { getPlans } from '@/lib/siteData'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -41,20 +42,7 @@ function isValidPlanRow(plan: unknown): plan is Database['public']['Tables']['pl
   )
 }
 
-let plansAll: Database['public']['Tables']['plans']['Row'][] = []
-try {
-  const response = await fetch(`${Astro.locals.runtimeConfig.public.baseApiUrl}/private/plans`, {
-    signal: AbortSignal.timeout(3000),
-  })
-  if (response.ok) {
-    const payload = await response.json()
-    if (Array.isArray(payload)) {
-      plansAll = payload.filter(isValidPlanRow)
-    }
-  }
-} catch {
-  plansAll = []
-}
+const plansAll = getPlans().filter(isValidPlanRow)
 
 const paidPlans = plansAll.filter((plan) => plan.name !== 'Free')
 const pricingParts = paidPlans.map((plan) => {

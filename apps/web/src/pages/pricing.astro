@@ -1,4 +1,5 @@
 ---
+import { getCredits, getPlans } from '@/lib/siteData'
 import Layout from '@/layouts/Layout.astro'
 import PricingCalculator from '@/components/pricing/PricingCalculator.astro'
 import ComparePlans from '@/components/pricing/ComparePlans.astro'
@@ -8,7 +9,6 @@ import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from '@/services/links'
 import Plans from '@/components/pricing/Plans.astro'
 import PricingExplainer from '@/components/pricing/PricingExplainer.astro'
 import { createLdJsonGraph, createProductLdJson, createFAQPageLdJson } from '@/lib/ldJson'
-import type { Database } from '@/services/supabase.types'
 import m from '@/copy/messages'
 import Enterprise from '@/components/enterprise.astro'
 import SignupCta from '@/components/SignupCta.astro'
@@ -33,16 +33,8 @@ const serviceDisruptionPolicyUrl = `${getRelativeLocaleUrl(locale, 'support-poli
 const config = Astro.locals.runtimeConfig
 
 let yearly = true
-let plansAll: Database['public']['Tables']['plans']['Row'][] = []
-let credits: any[] = []
-
-// Fetch plans data
-const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
-plansAll = await response.json()
-
-// Fetch credits data
-const creditsResponse = await fetch(`${config.public.baseApiUrl}/private/credits`)
-credits = await creditsResponse.json()
+const plansAll = getPlans()
+const credits = getCredits()
 
 // Filter plans
 const plans = plansAll.length ? plansAll.filter((p) => p.name !== 'Free') : []

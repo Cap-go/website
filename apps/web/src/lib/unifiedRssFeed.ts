@@ -1,5 +1,6 @@
 import { filterBlogPosts } from '@/lib/blog'
-import { buildRssXml, collectDocsRssItems, collectGithubReleaseRssItems, mergeUnifiedRssItems, SITE_ORIGIN, type UnifiedRssItem } from '@/lib/unifiedRss'
+import { getGithubReleaseRssItems } from '@/lib/siteData'
+import { buildRssXml, collectDocsRssItems, mergeUnifiedRssItems, SITE_ORIGIN, type UnifiedRssItem } from '@/lib/unifiedRss'
 import { getCollection } from 'astro:content'
 
 function truncateDescription(value: string, maxLength = 500): string {
@@ -25,9 +26,8 @@ export async function collectBlogRssItems(): Promise<UnifiedRssItem[]> {
   })
 }
 
-export async function buildUnifiedRssFeed(options: { fetchImpl?: typeof fetch } = {}): Promise<string> {
-  const fetchImpl = options.fetchImpl ?? fetch
-  const [blog, docs, releases] = await Promise.all([collectBlogRssItems(), Promise.resolve(collectDocsRssItems()), collectGithubReleaseRssItems(fetchImpl)])
-  const items = mergeUnifiedRssItems([...blog, ...docs, ...releases])
+// GitHub releases come from the nightly snapshot (scripts/fetch-build-data.ts) so the build never calls the GitHub API.
+export async function buildUnifiedRssFeed(): Promise<string> {
+  const items = mergeUnifiedRssItems([...(await collectBlogRssItems()), ...collectDocsRssItems(), ...getGithubReleaseRssItems()])
   return buildRssXml(items)
 }

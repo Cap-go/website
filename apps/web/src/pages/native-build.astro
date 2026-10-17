@@ -1,4 +1,5 @@
 ---
+import { getCredits, getPlans } from '@/lib/siteData'
 import CommandCode from '@/components/CommandCode.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
@@ -83,17 +84,8 @@ const mcpClients = [
 const title = `${brand} | ${copy('native_build_seo_title')}`
 const description = copy('native_build_builder_description')
 
-let plansAll: Plan[] = []
-let credits: Credit[] = []
-
-try {
-  const [plansResponse, creditsResponse] = await Promise.all([fetch(`${config.public.baseApiUrl}/private/plans`), fetch(`${config.public.baseApiUrl}/private/credits`)])
-
-  plansAll = plansResponse.ok ? await plansResponse.json() : []
-  credits = creditsResponse.ok ? await creditsResponse.json() : []
-} catch (error) {
-  console.warn('Unable to load Capgo Builder pricing data', error)
-}
+const plansAll: Plan[] = getPlans()
+const credits: Credit[] = getCredits<Credit>()
 
 const plans = plansAll.filter((plan) => plan.name !== 'Free')
 const buildCredits = credits.filter((credit) => credit.type === 'build_time').sort((a, b) => a.step_min - b.step_min)
