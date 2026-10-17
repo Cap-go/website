@@ -1,5 +1,6 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import {
+  markdownGoneResponse,
   markdownNotFoundResponse,
   MCP_ENDPOINT_PATHS,
   MCP_MANIFEST_PATHS,
@@ -8,6 +9,7 @@ import {
   prefersMarkdown,
   prefersMcpMarketingHtml,
 } from '../../../shared/agentDiscovery'
+import { isGonePath } from '../../../shared/gonePaths'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { withAbTest } from './abtest'
@@ -363,6 +365,35 @@ function shouldServeBrandedNotFound(pathname: string): boolean {
   return true
 }
 
+async function brandedGoneResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  if (!isGonePath(pathname) || !shouldServeBrandedNotFound(pathname)) return null
+  if (prefersMarkdown(request)) return markdownGoneResponse(request)
+
+  const { localePrefix } = splitLocalePath(pathname)
+  const gone = await env.ASSETS.fetch(new URL('/410/', request.url))
+  if (!(gone.ok || gone.status === 404)) return null
+
+  const isHead = request.method === 'HEAD'
+  let body = isHead ? null : await gone.text()
+  if (!isHead && localePrefix && typeof body === 'string') {
+    body = body
+      .replaceAll('href="/"', `href="${localePrefix}/"`)
+      .replaceAll('href="/docs/"', `href="${localePrefix}/docs/"`)
+      .replaceAll('href="/blog/"', `href="${localePrefix}/blog/"`)
+      .replaceAll('href="/plugins/"', `href="${localePrefix}/plugins/"`)
+  }
+
+  const headers = new Headers(gone.headers)
+  headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.append('Vary', 'Accept')
+  headers.delete('Content-Length')
+  return new Response(body, {
+    status: 410,
+    statusText: 'Gone',
+    headers,
+  })
+}
+
 async function brandedNotFoundResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
   if (prefersMarkdown(request)) return markdownNotFoundResponse(request)
 
@@ -477,6 +508,8 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
   if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
   const staticRedirect = staticLegacyRedirect(request, pathname)
   if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)
+  const goneResponse = await brandedGoneResponse(request, env, pathname)
+  if (goneResponse) return trackAICrawler(request, goneResponse, ctx)
   const toolRouteResponse = await handleToolApiRequest(
     request,
     {

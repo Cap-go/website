@@ -84,6 +84,24 @@ This path does not exist on Capgo. It is a real HTTP 404, not an application she
 ${WHEN_TO_USE_MARKDOWN}
 `
 
+export const AGENT_GONE_MARKDOWN = `# Page removed
+
+This path was permanently removed from Capgo. It is a real HTTP 410 Gone, not an application shell.
+
+## Where to look next
+
+- [Home](${CAPGO_ORIGIN}/)
+- [Documentation index](${CAPGO_ORIGIN}/docs/)
+- [Blog](${CAPGO_ORIGIN}/blog/)
+- [OpenAPI spec](${CAPGO_ORIGIN}/openapi.json)
+- [llms.txt](${CAPGO_ORIGIN}/llms.txt)
+- [Sitemap](${CAPGO_ORIGIN}/sitemap-index.xml)
+- [MCP manifest](${CAPGO_ORIGIN}/.well-known/mcp.json)
+- [Contact](${CAPGO_ORIGIN}/contact/)
+
+${WHEN_TO_USE_MARKDOWN}
+`
+
 export const MCP_TOOLS = [
   {
     name: 'capgo_when_to_use',
@@ -255,6 +273,19 @@ export function markdownNotFoundResponse(request?: Request): Response {
   return new Response(request?.method === 'HEAD' ? null : AGENT_NOT_FOUND_MARKDOWN, {
     status: 404,
     statusText: 'Not Found',
+    headers: {
+      'Content-Type': 'text/markdown; charset=utf-8',
+      Vary: 'Accept',
+      'Cache-Control': 'no-store',
+      'X-Robots-Tag': 'noindex',
+    },
+  })
+}
+
+export function markdownGoneResponse(request?: Request): Response {
+  return new Response(request?.method === 'HEAD' ? null : AGENT_GONE_MARKDOWN, {
+    status: 410,
+    statusText: 'Gone',
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
       Vary: 'Accept',
