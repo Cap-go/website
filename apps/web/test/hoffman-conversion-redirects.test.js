@@ -12,6 +12,7 @@ const REDIRECTS = [
   ['/blog/how-chinas-cybersecurity-law-impacts-app-developers/', '/blog/checklist-for-cybersecurity-compliance-in-china/'],
   ['/blog/wie-sich-das-chinesische-cybersicherheitsgesetz-auf-app-entwickler-auswirkt/', '/blog/checklist-for-cybersecurity-compliance-in-china/'],
   ['/blog/uptime-guarantee/', '/sla/'],
+  ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
   ['/codepush/', '/alternatives/codepush/'],
   ['/compare/capgo-vs-capawesome/', '/alternatives/capawesome/'],
   ['/compare/capgo-vs-appflow/', '/alternatives/ionic-appflow/'],
