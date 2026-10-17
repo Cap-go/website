@@ -1,21 +1,22 @@
 ---
 name: capgo-cli-mcp
-description: Use the remote Capgo Streamable HTTP MCP server for docs discovery, or run the local Capgo CLI MCP server with npx to manage live updates, channels, bundles, stats, apps, and native builds.
+description: Connect to the hosted Capgo MCP server at api.capgo.app/mcp to manage apps, channels, rollouts, devices, stats, builds, webhooks, notifications and search the docs, or run the local Capgo CLI MCP server with npx for bundle uploads and native build requests.
 ---
 
 # Capgo CLI MCP
 
 Use this skill when an agent needs Capgo operations instead of only reading HTML docs.
 
-## Remote Streamable HTTP server
+## Hosted Streamable HTTP server
 
 ```text
-https://capgo.app/mcp
+https://api.capgo.app/mcp
 ```
 
 Manifest: https://capgo.app/.well-known/mcp.json
+Setup guide: https://capgo.app/docs/ai/mcp/
 
-The remote server is unauthenticated and exposes discovery tools: when to use Capgo, OpenAPI location, and docs links.
+Sign in with OAuth when the client connects, or send `Authorization: Bearer <Capgo API key>`. It exposes account and organization settings, apps, bundles, channels and progressive rollouts, devices, statistics and Observe, native build status and logs, webhooks, push notifications, and `capgo_search_docs` for documentation.
 
 ## Local authenticated server
 
@@ -43,7 +44,7 @@ API keys: https://console.capgo.app/settings/organization/api-keys
 
 ## Working rules
 
-- Use `https://capgo.app/mcp` for docs, OpenAPI, and when-to-use questions.
-- Use the local `npx @capgo/cli@latest mcp` stdio server for authenticated account mutations.
+- Use the hosted `https://api.capgo.app/mcp` server for account actions and docs search.
+- Use the local `npx @capgo/cli@latest mcp` stdio server when the agent needs local files: bundle uploads and native build requests.
 - Prefer `npx @capgo/cli@latest` in customer-facing command examples.
 - Use the published Capgo API docs when you need field-level details the MCP tool description does not include.

@@ -1,17 +1,18 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/mcp-server-card/v1.json",
   "version": "1.0",
-  "protocolVersion": "2025-03-26",
+  "protocolVersion": "2025-11-25",
   "serverInfo": {
     "name": "capgo",
     "title": "Capgo MCP Server",
     "version": "1.0.0"
   },
-  "description": "Remote Streamable HTTP MCP server for Capgo docs, OpenAPI discovery, and when-to-use guidance, plus the local CLI stdio server for authenticated account tools.",
-  "documentationUrl": "https://capgo.app/docs/cli/reference/mcp/",
+  "description": "Hosted Streamable HTTP MCP server for Capgo: manage apps, bundles, channels and progressive rollouts, devices, statistics and Observe, native builds, webhooks and push notifications, and search the Capgo docs.",
+  "documentationUrl": "https://capgo.app/docs/ai/mcp/",
+  "websiteUrl": "https://capgo.app/mcp/",
   "transport": {
     "type": "streamable-http",
-    "url": "https://capgo.app/mcp"
+    "url": "https://api.capgo.app/mcp"
   },
   "capabilities": {
     "tools": {
@@ -19,22 +20,9 @@
     }
   },
   "authentication": {
-    "required": false,
-    "schemes": []
+    "required": true,
+    "schemes": ["oauth2", "bearer"],
+    "oauthProtectedResourceMetadata": "https://api.capgo.app/.well-known/oauth-protected-resource/mcp"
   },
-  "instructions": "Connect to https://capgo.app/mcp with Streamable HTTP for docs and OpenAPI tools. For authenticated Capgo account mutations, start `npx @capgo/cli@latest mcp` after login.",
-  "tools": [
-    {
-      "name": "capgo_when_to_use",
-      "description": "Return when Capgo is the right tool and how an agent should call it."
-    },
-    {
-      "name": "capgo_get_openapi",
-      "description": "Return the public REST API OpenAPI URL and authentication rules."
-    },
-    {
-      "name": "capgo_list_docs",
-      "description": "Return canonical Capgo documentation and trust-page links."
-    }
-  ]
+  "instructions": "Connect to https://api.capgo.app/mcp with Streamable HTTP. Sign in with OAuth, or send `Authorization: Bearer <Capgo API key>`. Start with capgo_whoami and capgo_list_apps, and use capgo_search_docs for documentation. To upload local bundle files or request native builds, run `npx @capgo/cli@latest mcp` after login."
 }

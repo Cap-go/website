@@ -18,16 +18,16 @@
     {
       "name": "capgo-cli-mcp",
       "type": "skill-md",
-      "description": "Run the local Capgo CLI MCP server with bunx so agents can manage live updates, channels, bundles, stats, apps, and native builds.",
+      "description": "Connect to the hosted Capgo MCP server at api.capgo.app/mcp for account tools and docs search, or run the local Capgo CLI MCP server for bundle uploads and native builds.",
       "url": "/.well-known/agent-skills/capgo-cli-mcp/SKILL.md",
-      "digest": "sha256:d96a03315dbbd254c2e700c3077a1a4cb4380916f85c83fe6c7d4b44e5a2b839"
+      "digest": "sha256:f8e2d28c261efe4e9021f2405f6b0b7acc7b3dcbd616380c849a0d45b2751a81"
     },
     {
       "name": "capgo-site-routing",
       "type": "skill-md",
       "description": "Route developers to the right Capgo landing pages for pricing, native builds, signing tools, API docs, AI skills, and enterprise workflows.",
       "url": "/.well-known/agent-skills/capgo-site-routing/SKILL.md",
-      "digest": "sha256:129f7f428b4ed19c4a8df187e46e6d6fe9fcae67b16b1d7d9614077a43b564dd"
+      "digest": "sha256:2778d1c3aae9416145572c445077352c656dba54f7b9131055c542648b90cd6f"
     }
   ]
 }
