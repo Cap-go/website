@@ -6221,6 +6221,7 @@ const messages = {
   worldwide_success_rate: 'worldwide success rate',
   written_by: 'Written by',
   yearly_plan: 'Yearly Plan',
+  yearly_two_months_free: '2 months free',
   you_definition:
     '<strong>You</strong> means the individual accessing the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.',
   you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it:
