@@ -4,6 +4,7 @@ import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
 const REDIRECTS = [
   ['/blog/expo-development-client/', '/blog/alternative-to-expo/'],
   ['/blog/sentry-react-native/', '/blog/app-health-monitoring/'],
+  ['/blog/uptime-guarantee/', '/sla/'],
   ['/codepush/', '/alternatives/codepush/'],
   ['/compare/capgo-vs-capawesome/', '/alternatives/capawesome/'],
   ['/compare/capgo-vs-appflow/', '/alternatives/ionic-appflow/'],
