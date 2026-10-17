@@ -1305,7 +1305,7 @@ const messages = {
   pricing_explainer_seats: 'Unlimited members and apps',
   pricing_explainer_title: 'No seats. No surprise bills.',
   pricing_explainer_trial: '14-day trial, no credit card',
-  pricing_full_plans_yearly_savings: 'Full Capgo plans save 20% on yearly billing',
+  pricing_full_plans_yearly_savings: 'Full Capgo plans: 2 months free with yearly billing',
   pricing_pay_as_you_go: 'Pay as you go',
   pricing_credits_cover_usage: 'Use credits pay-as-you-go with no plan, or on top of your plan when you exceed included limits.',
   pricing_calculator_best_fit: 'Best fit',
