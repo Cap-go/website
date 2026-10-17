@@ -130,6 +130,10 @@ If you edit the plist as XML on disk, reopen Xcode so the target membership stay
 
 Each app or SDK target keeps its own `PrivacyInfo.xcprivacy`. When you archive, Xcode aggregates those manifests into one privacy report. You do not manually merge dependency plists into your app file.
 
+For a **custom Capacitor plugin** shipped as its own iOS framework, add `PrivacyInfo.xcprivacy` under that plugin's `ios/Plugin/` folder (or equivalent) and list it in the plugin target's **Copy Bundle Resources**, not only in the app target.
+
+When `NSPrivacyTracking` is true or you embed ad or analytics SDKs, align the manifest with App Store privacy labels and show the App Tracking Transparency prompt when iOS requires it. [@capgo/capacitor-app-tracking-transparency](/plugins/capacitor-app-tracking-transparency/) covers the ATT flow for Capacitor apps.
+
 ## Validation checklist before submit
 
 - App target includes `PrivacyInfo.xcprivacy` in **Copy Bundle Resources**.

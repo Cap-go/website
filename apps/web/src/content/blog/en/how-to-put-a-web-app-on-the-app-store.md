@@ -184,7 +184,7 @@ Write specific reasons. "This app needs the camera" gets rejected.
 
 On Android, plugins add most permissions to the manifest themselves. Remove permissions you do not use; Google asks you to justify sensitive ones.
 
-Also add a **privacy manifest** (`PrivacyInfo.xcprivacy`) if your code uses required-reason APIs. See the [privacy manifest guide for Capacitor](/blog/privacy-manifest-for-capacitor-apps-guide/).
+Also add a **privacy manifest** (`PrivacyInfo.xcprivacy`) if your code uses required-reason APIs. See the [privacy manifest guide for iOS apps](/blog/privacy-manifest-for-ios-apps/).
 
 ## Step 6: Set up signing
 

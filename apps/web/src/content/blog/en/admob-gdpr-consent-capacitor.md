@@ -364,7 +364,7 @@ if (status === TrackingAuthorizationStatus.notDetermined) {
 }
 ```
 
-Capgo also has a standalone [App Tracking Transparency plugin](/plugins/capacitor-app-tracking-transparency/) if you need ATT for other SDKs. Do not forget to declare tracking in your privacy manifest and App Store privacy labels, see our [privacy manifest guide](/blog/privacy-manifest-for-capacitor-apps-guide/).
+Capgo also has a standalone [App Tracking Transparency plugin](/plugins/capacitor-app-tracking-transparency/) if you need ATT for other SDKs. Do not forget to declare tracking in your privacy manifest and App Store privacy labels, see our [privacy manifest guide](/blog/privacy-manifest-for-ios-apps/).
 
 ## Step 5: test with debug geography
 
