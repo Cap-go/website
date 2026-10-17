@@ -65,7 +65,7 @@ That difference matters when you're shipping across hybrid stacks. A Capacitor a
 
 > Security problems often start as product decisions. A risk assessment catches them before they become engineering clean-up.
 
-It also helps with governance. If your buyers ask about controls, or your compliance team wants evidence for vendor reviews, your process needs to show more than “we ran a scan.” That's one reason teams tightening audit readiness often align app security work with broader control programs like [SOC 2 certification requirements](https://capgo.app/blog/what-is-soc-2-certification/).
+It also helps with governance. If your buyers ask about controls, or your compliance team wants evidence for vendor reviews, your process needs to show more than “we ran a scan.” That's one reason teams tightening audit readiness often align app security work with broader control programs like [SOC 2 certification requirements](https://capgo.app/security-questionnaire/).
 
 <a id="what-good-teams-do-instead"></a>
 ### What good teams do instead

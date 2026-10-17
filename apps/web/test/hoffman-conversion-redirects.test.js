@@ -8,6 +8,7 @@ const REDIRECTS = [
     '/blog/what-is-enabled-by-the-continuous-delivery-pipeline/',
     '/blog/what-is-continuous-delivery/',
   ],
+  ['/blog/what-is-soc-2-certification/', '/security-questionnaire/'],
   ['/codepush/', '/alternatives/codepush/'],
   ['/compare/capgo-vs-capawesome/', '/alternatives/capawesome/'],
   ['/compare/capgo-vs-appflow/', '/alternatives/ionic-appflow/'],
