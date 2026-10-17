@@ -23,7 +23,7 @@ faq:
   - question: "What does Apple OTA policy mean for mobile app updates?"
     answer: "Apple OTA policy for third-party apps is not the same as iOS system updates. For App Store apps, Guideline 2.5.2 is the main rule: stay inside the reviewed shell, avoid downloadable code that changes features, and submit a new binary when native code, permissions, or entitlements change."
   - question: "Can OTA apps skip App Store review for every change?"
-    answer: "No. Bug fixes, performance work, and minor web-layer UI tweaks can often ship OTA when they stay inside store rules. Major features, native code changes, and permission changes still need a store submission and review on iOS and on Google Play."
+    answer: "No. Bug fixes, performance work, and minor web-layer UI tweaks can often ship OTA when they stay inside store rules. Major features, native code changes, and permission changes still need a store submission and review on iOS. On Google Play, native or executable-code changes require a Play submission and review; interpreted-code changes can ship OTA only when they comply with Play policies."
   - question: "How do Google Play OTA rules compare to iOS?"
     answer: "Google Play is generally faster and less strict on minor updates, but it still bans bypassing the store for executable changes that belong in a new release. Treat OTA as a web-layer lane on both platforms and keep native changes in the binary release path."
 ---
@@ -348,7 +348,7 @@ Apple OTA policy for third-party apps is not the same as iOS system updates. For
 ::: faq
 ### Can OTA apps skip App Store review for every change?
 
-No. Bug fixes, performance work, and minor web-layer UI tweaks can often ship OTA when they stay inside store rules. Major features, native code changes, and permission changes still need a store submission and review on iOS and on Google Play.
+No. Bug fixes, performance work, and minor web-layer UI tweaks can often ship OTA when they stay inside store rules. Major features, native code changes, and permission changes still need a store submission and review on iOS. On Google Play, native or executable-code changes require a Play submission and review; interpreted-code changes can ship OTA only when they comply with Play policies.
 :::
 
 ::: faq
