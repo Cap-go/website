@@ -4,6 +4,12 @@ import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
 const REDIRECTS = [
   ['/blog/expo-development-client/', '/blog/alternative-to-expo/'],
   ['/blog/sentry-react-native/', '/blog/app-health-monitoring/'],
+  ['/blog/understanding-apples-privacy-manifest/', '/blog/privacy-manifest-for-ios-apps/'],
+  [
+    '/blog/comprendiendo-el-manifiesto-de-privacidad-de-apple/',
+    '/blog/privacy-manifest-for-ios-apps/',
+  ],
+  ['/blog/das-datenschutzmanifest-von-apple-verstehen/', '/blog/privacy-manifest-for-ios-apps/'],
   ['/codepush/', '/alternatives/codepush/'],
   ['/compare/capgo-vs-capawesome/', '/alternatives/capawesome/'],
   ['/compare/capgo-vs-appflow/', '/alternatives/ionic-appflow/'],
