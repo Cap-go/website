@@ -257,7 +257,7 @@ strategy:
 
 **Symptom:** email from Apple about missing required reason API declarations (ITMS-91053).
 
-**Fix:** add a `PrivacyInfo.xcprivacy` to the app target and update plugins that ship their own. See the [privacy manifest guide for Capacitor apps](/blog/privacy-manifest-for-capacitor-apps-guide/).
+**Fix:** add a `PrivacyInfo.xcprivacy` to the app target and update plugins that ship their own. See the [privacy manifest guide for iOS apps](/blog/privacy-manifest-for-ios-apps/).
 
 ### Pitfall: wrong artifact type
 

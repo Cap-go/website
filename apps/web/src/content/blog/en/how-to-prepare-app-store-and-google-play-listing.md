@@ -145,7 +145,7 @@ In App Store Connect, open the app and go to **App Privacy**. You answer:
 
 "Tracking" has a narrow meaning: linking data from your app with data from other companies' apps or websites for advertising, or sharing it with data brokers. If you track, you also need the App Tracking Transparency prompt.
 
-The labels must match your **privacy manifest** (`PrivacyInfo.xcprivacy`) and those of the SDKs you include. See our [privacy manifest guide for Capacitor apps](/blog/privacy-manifest-for-capacitor-apps-guide/).
+The labels must match your **privacy manifest** (`PrivacyInfo.xcprivacy`) and those of the SDKs you include. See our [privacy manifest guide for iOS apps](/blog/privacy-manifest-for-ios-apps/).
 
 You can update App Privacy answers at any time without a new build.
 
