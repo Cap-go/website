@@ -58,6 +58,15 @@ test('staticLegacyRedirect /build-status/ → /builder-data/', () => {
   expect(staticLegacyRedirectLocation('https://capgo.app/fr/build-status')).toBe('/fr/builder-data/')
 })
 
+test('staticLegacyRedirect removed portrait orientation blog → screen orientation docs', () => {
+  expect(staticLegacyRedirectLocation('https://capgo.app/blog/what-is-a-portrait-orientation/')).toBe(
+    '/docs/plugins/screen-orientation/',
+  )
+  expect(staticLegacyRedirectLocation('https://capgo.app/de/blog/what-is-a-portrait-orientation/')).toBe(
+    '/de/docs/plugins/screen-orientation/',
+  )
+})
+
 test('/eas/ was never a public competitor page (no redirect)', () => {
   expect(resolveLegacyPathRedirect('/eas/')).toBeNull()
   expect(staticLegacyRedirectLocation('https://capgo.app/eas/')).toBeNull()
