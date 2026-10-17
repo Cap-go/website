@@ -173,7 +173,7 @@ The most common failure is **scope drift**. A policy can be technically correct 
 
 Central enforcement also changes the design question. The organization must decide which choices are mandatory, which are recommended, and which remain personal. Locking every visual preference can create resistance, while leaving security-sensitive controls to manual setup creates inconsistency. A sensible policy standardizes the settings that protect access and reduce support work, then leaves harmless appearance choices to the user.
 
-For teams that distribute browser-based experiences inside cross-platform products, [enterprise app management practices](https://capgo.app/blog/enterprise-app-management/) provide a useful parallel: define ownership, target groups carefully, and make rollback part of the release plan rather than an emergency reaction.
+For teams that distribute browser-based experiences inside cross-platform products, strong enterprise release discipline provides a useful parallel: define ownership, target groups carefully, and make rollback part of the release plan rather than an emergency reaction.
 
 <a id="troubleshooting-common-customization-issues"></a>
 ## Troubleshooting Common Customization Issues
