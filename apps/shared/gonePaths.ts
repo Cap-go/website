@@ -1,6 +1,22 @@
 import { splitLocalePath } from './localizedLegacyPathRedirect'
 
-/** Public paths that intentionally return HTTP 410 Gone (locale prefix stripped before lookup). */
+/**
+ * Permanently removed public URLs (HTTP 410 Gone).
+ *
+ * How to retire a page in a follow-up PR:
+ * 1. Delete its English content source (and any static assets only used by that page).
+ * 2. Add one entry to `GONE_PATHS` below: the canonical path without a locale prefix,
+ *    without a trailing slash (e.g. `/blog/my-old-slug`).
+ * 3. Remove or repoint internal links and legacy redirects that target the URL.
+ *
+ * Matching: `isGonePath()` strips an optional locale prefix (`/de`, `/fr`, …) via
+ * `splitLocalePath`, then compares the normalized path to this set. Trailing slashes
+ * on the request are ignored.
+ *
+ * Runtime: the web worker serves the branded shell from `/410/index.html` with status
+ * 410. The translation worker bypasses cached translations for gone paths and localizes
+ * the same 410 HTML for non-English locales.
+ */
 const GONE_PATHS = new Set<string>(['/blog/what-is-a-micro-frontend'])
 
 function decodePathnameForLookup(pathname: string): string {
