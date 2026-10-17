@@ -9,6 +9,7 @@ import {
   prefersMarkdown,
   prefersMcpMarketingHtml,
 } from '../../../shared/agentDiscovery'
+import m from '../../../shared/copy/messages'
 import { isGonePath } from '../../../shared/gonePaths'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
@@ -365,22 +366,55 @@ function shouldServeBrandedNotFound(pathname: string): boolean {
   return true
 }
 
+function minimalGoneHtmlResponse(request: Request, localePrefix: string): Response {
+  const title = m.page_gone_title()
+  const description = m.page_gone_description()
+  const homeHref = localePrefix ? `${localePrefix}/` : '/'
+  const body = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>${title}</title><meta name="description" content="${description}"><meta name="robots" content="noindex, follow"></head><body><main><h1>${title}</h1><p>${description}</p><p><a href="${homeHref}">${m.go_back_home()}</a></p></main></body></html>`
+  return new Response(request.method === 'HEAD' ? null : body, {
+    status: 410,
+    statusText: 'Gone',
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      Vary: 'Accept',
+      'Cache-Control': 'no-store',
+    },
+  })
+}
+
+function localizeBrandedGoneHtml(body: string, localePrefix: string): string {
+  const title = m.page_gone_title()
+  const description = m.page_gone_description()
+  return body
+    .replace(/<title>[^<]*<\/title>/i, `<title>${title}</title>`)
+    .replace(/<meta\s+name="description"\s+content="[^"]*"/i, `<meta name="description" content="${description}"`)
+    .replaceAll('href="/"', `href="${localePrefix}/"`)
+    .replaceAll('href="/docs/"', `href="${localePrefix}/docs/"`)
+    .replaceAll('href="/blog/"', `href="${localePrefix}/blog/"`)
+    .replaceAll('href="/plugins/"', `href="${localePrefix}/plugins/"`)
+    .replaceAll('href="/contact/"', `href="${localePrefix}/contact/"`)
+}
+
 async function brandedGoneResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
   if (!isGonePath(pathname) || !shouldServeBrandedNotFound(pathname)) return null
   if (prefersMarkdown(request)) return markdownGoneResponse(request)
 
   const { localePrefix } = splitLocalePath(pathname)
-  const gone = await env.ASSETS.fetch(new URL('/410/', request.url))
-  if (!(gone.ok || gone.status === 404)) return null
+  const assetCandidates = localePrefix ? [`${localePrefix}/410/`, '/410/'] : ['/410/']
+  let gone: Response | null = null
+  for (const assetPath of assetCandidates) {
+    const candidate = await env.ASSETS.fetch(new URL(assetPath, request.url))
+    if (candidate.ok) {
+      gone = candidate
+      break
+    }
+  }
+  if (!gone?.ok) return minimalGoneHtmlResponse(request, localePrefix)
 
   const isHead = request.method === 'HEAD'
   let body = isHead ? null : await gone.text()
   if (!isHead && localePrefix && typeof body === 'string') {
-    body = body
-      .replaceAll('href="/"', `href="${localePrefix}/"`)
-      .replaceAll('href="/docs/"', `href="${localePrefix}/docs/"`)
-      .replaceAll('href="/blog/"', `href="${localePrefix}/blog/"`)
-      .replaceAll('href="/plugins/"', `href="${localePrefix}/plugins/"`)
+    body = localizeBrandedGoneHtml(body, localePrefix)
   }
 
   const headers = new Headers(gone.headers)
