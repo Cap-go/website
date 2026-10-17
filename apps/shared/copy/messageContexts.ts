@@ -3175,6 +3175,8 @@ export const messageContexts = {
   our_story: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `our_story` (Our Story).',
   over: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro. Message key `over` (Over).',
   page_last_updated: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component comparison/ComparisonPage.astro, component conversion/ConversionLandingLayout.astro. Message key `page_last_updated` (Page Last Updated).',
+  page_gone_description: 'Page/area: Capgo marketing website. Role: Supporting description paragraph or meta description. Seen in: page 410.astro. Message key `page_gone_description` (Page Gone Description).',
+  page_gone_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page 410.astro. Message key `page_gone_title` (Page Gone Title).',
   page_not_found_description: 'Page/area: Capgo marketing website. Role: Supporting description paragraph or meta description. Seen in: page 404.astro. Message key `page_not_found_description` (Page Not Found Description).',
   page_not_found_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page 404.astro. Message key `page_not_found_title` (Page Not Found Title).',
   password_label: 'Page/area: Capgo marketing website. Role: UI label. Seen in: page register.astro. Message key `password_label` (Password Label).',

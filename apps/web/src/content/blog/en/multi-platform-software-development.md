@@ -165,7 +165,7 @@ This structure changes the unit of delivery. A cart fix doesn't need to wait for
 
 A similar pattern works on mobile, although the mechanics differ. A Capacitor or native shell can organize feature modules, a super-app can load mini-app bundles, and platform channels can defer loading until the user needs a capability. The goal is the same, keep independent product surfaces from becoming one release-shaped bottleneck.
 
-Micro-frontends are not free decomposition. Distributed state becomes harder to reason about, shared design systems require governance, and stitching modules together can add runtime work during startup. Teams also need clear contracts for authentication, navigation, error handling, telemetry, and data ownership. The [micro-frontend pattern](https://capgo.app/blog/what-is-a-micro-frontend/) is most useful when independent teams or release cadences justify those coordination costs.
+Micro-frontends are not free decomposition. Distributed state becomes harder to reason about, shared design systems require governance, and stitching modules together can add runtime work during startup. Teams also need clear contracts for authentication, navigation, error handling, telemetry, and data ownership. The [micro-frontend pattern](https://martinfowler.com/articles/micro-frontends.html) is most useful when independent teams or release cadences justify those coordination costs.
 
 <a id="how-to-match-architecture-to-your-team-and-app"></a>
 ## How to Match Architecture to Your Team and App

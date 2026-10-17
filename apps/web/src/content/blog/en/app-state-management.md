@@ -62,7 +62,7 @@ A global store still has a defined role. Session identity, permissions, app-leve
 
 > **Practical rule:** If a value can be reconstructed from the server, the URL, or the current component, keep it out of global state unless a specific workflow requires otherwise.
 
-This boundary also supports independently owned modules. Teams splitting a product into deployable areas can apply the ownership principles used in [micro-frontend architecture](https://capgo.app/blog/what-is-a-micro-frontend/), rather than building one dependency graph across the application. In a Capacitor or Electron codebase, a hybrid model works better: remote data uses cache and synchronization rules, UI values remain local, and durable workflow state gets explicit persistence. That separation limits competing writers and makes recovery after reloads, suspended processes, or offline periods easier to reason about.
+This boundary also supports independently owned modules. Teams splitting a product into deployable areas can apply the ownership principles used in [micro-frontend architecture](https://martinfowler.com/articles/micro-frontends.html), rather than building one dependency graph across the application. In a Capacitor or Electron codebase, a hybrid model works better: remote data uses cache and synchronization rules, UI values remain local, and durable workflow state gets explicit persistence. That separation limits competing writers and makes recovery after reloads, suspended processes, or offline periods easier to reason about.
 
 <a id="architectural-patterns-for-cross-platform-apps"></a>
 ## Architectural Patterns for Cross-Platform Apps
