@@ -3120,6 +3120,8 @@ const messages = {
   our_numbers_are_shared_transparently_since_december_2021: 'Our numbers are shared transparently since December 2021.',
   our_story: 'Our Story',
   over: 'Over',
+  page_gone_description: 'This page was permanently removed from capgo.app.',
+  page_gone_title: 'Page Removed - Error 410',
   page_not_found_description: 'Please check the URL in the address bar and try again.',
   page_not_found_title: 'Page Not Found - Error 404',
   password_label: 'Password',
