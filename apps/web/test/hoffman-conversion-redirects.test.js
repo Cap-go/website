@@ -4,6 +4,8 @@ import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
 const REDIRECTS = [
   ['/blog/expo-development-client/', '/blog/alternative-to-expo/'],
   ['/blog/sentry-react-native/', '/blog/app-health-monitoring/'],
+  ['/blog/how-chinas-cybersecurity-law-impacts-app-developers/', '/blog/checklist-for-cybersecurity-compliance-in-china/'],
+  ['/blog/wie-sich-das-chinesische-cybersicherheitsgesetz-auf-app-entwickler-auswirkt/', '/blog/checklist-for-cybersecurity-compliance-in-china/'],
   ['/codepush/', '/alternatives/codepush/'],
   ['/compare/capgo-vs-capawesome/', '/alternatives/capawesome/'],
   ['/compare/capgo-vs-appflow/', '/alternatives/ionic-appflow/'],
