@@ -18,7 +18,7 @@ import RiskDebtSection from '@/components/RiskDebtSection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 import { getAbsoluteLocaleUrl } from '@/services/links'
 import { planMonthlyPrice, planYearlyPrice } from '@/lib/planCopy'
-import type { Database } from '@/services/supabase.types'
+import { getPlans } from '@/lib/siteData'
 
 const config = Astro.locals.runtimeConfig
 const locale = Astro.locals.locale
@@ -52,34 +52,21 @@ let homepageOffers: HomepageLdJsonOffers = {
   ],
 }
 
-const plansFetchTimeoutMs = 3000
-
-try {
-  const response = await fetch(`${config.public.baseApiUrl}/private/plans`, {
-    signal: AbortSignal.timeout(plansFetchTimeoutMs),
-  })
-  if (!response.ok) {
-    throw new Error(`Plans request failed with status ${response.status}`)
+const paidPlans = getPlans().filter(
+  (plan) => plan.name !== 'Free' && Number.isFinite(plan.price_m) && Number.isFinite(plan.price_y),
+)
+if (paidPlans.length > 0) {
+  const entryPlan = paidPlans.reduce((lowest, plan) => (planMonthlyPrice(plan) < planMonthlyPrice(lowest) ? plan : lowest), paidPlans[0])
+  homepageOffers = {
+    price: planMonthlyPrice(entryPlan).toString(),
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: pricingUrl,
+    priceSpecifications: [
+      { price: planMonthlyPrice(entryPlan).toString(), billingPeriod: 'monthly' },
+      { price: planYearlyPrice(entryPlan).toString(), billingPeriod: 'yearly' },
+    ],
   }
-  const plansAll = (await response.json()) as Database['public']['Tables']['plans']['Row'][]
-  const paidPlans = plansAll.filter(
-    (plan) => plan.name !== 'Free' && Number.isFinite(plan.price_m) && Number.isFinite(plan.price_y),
-  )
-  if (paidPlans.length > 0) {
-    const entryPlan = paidPlans.reduce((lowest, plan) => (planMonthlyPrice(plan) < planMonthlyPrice(lowest) ? plan : lowest), paidPlans[0])
-    homepageOffers = {
-      price: planMonthlyPrice(entryPlan).toString(),
-      priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock',
-      url: pricingUrl,
-      priceSpecifications: [
-        { price: planMonthlyPrice(entryPlan).toString(), billingPeriod: 'monthly' },
-        { price: planYearlyPrice(entryPlan).toString(), billingPeriod: 'yearly' },
-      ],
-    }
-  }
-} catch {
-  // Keep fallback offer prices when plan metadata is unavailable at build time.
 }
 
 // Create comprehensive LD+JSON for homepage
