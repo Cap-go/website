@@ -309,7 +309,7 @@ Use availability targets to define rollout stages, not just customer promises.
 
 Those downtime budgets come from simple monthly math. They also shrink in practice once you account for the entire delivery chain. Your origin may be healthy while DNS, edge propagation, or a bad channel rule still prevents devices from getting the intended release.
 
-If you need a concrete example of how an update platform frames this operationally, review an [uptime guarantee for release delivery](https://capgo.app/blog/uptime-guarantee/) and compare it against your own incident assumptions.
+If you need a concrete example of how an update platform frames this operationally, review the [Capgo service level agreement](https://capgo.app/sla/) and compare it against your own incident assumptions.
 
 <a id="error-budgets-are-where-product-and-reliability-finally-meet"></a>
 ### Error budgets are where product and reliability finally meet

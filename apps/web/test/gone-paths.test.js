@@ -1,20 +1,33 @@
 import { expect, test } from 'bun:test'
 import { isGonePath } from '../../shared/gonePaths.ts'
 
-const GONE = '/blog/what-is-a-micro-frontend/'
+const GONE_PATHS = [
+  '/blog/enterprise-app-management/',
+  '/blog/how-to-delete-icon/',
+  '/blog/native-base-picker/',
+  '/blog/react-native-alert/',
+  '/blog/what-is-a-micro-frontend/',
+]
 
-test('isGonePath matches English blog URL', () => {
-  expect(isGonePath(GONE)).toBe(true)
-  expect(isGonePath(GONE.replace(/\/$/, ''))).toBe(true)
-})
+for (const gone of GONE_PATHS) {
+  test(`isGonePath matches English blog URL ${gone}`, () => {
+    expect(isGonePath(gone)).toBe(true)
+    expect(isGonePath(gone.replace(/\/$/, ''))).toBe(true)
+  })
 
-test('isGonePath matches locale-prefixed blog URL', () => {
-  for (const locale of ['de', 'fr', 'es', 'ja']) {
-    expect(isGonePath(`/${locale}${GONE}`)).toBe(true)
-  }
-})
+  test(`isGonePath matches locale-prefixed blog URL ${gone}`, () => {
+    for (const locale of ['de', 'fr', 'es', 'ja']) {
+      expect(isGonePath(`/${locale}${gone}`)).toBe(true)
+    }
+  })
+}
 
 test('isGonePath does not match unrelated paths', () => {
   expect(isGonePath('/blog/capacitor-comprehensive-guide/')).toBe(false)
   expect(isGonePath('/blog/what-is-a-micro-frontend-extra/')).toBe(false)
+  expect(isGonePath('/blog/enterprise-app-management-extra/')).toBe(false)
+  expect(isGonePath('/blog/how-to-delete-icons/')).toBe(false)
+  expect(isGonePath('/blog/native-base-picker-v2/')).toBe(false)
+  expect(isGonePath('/blog/react-native-alerts/')).toBe(false)
+  expect(isGonePath('/blog/')).toBe(false)
 })

@@ -262,7 +262,7 @@ The compressor accepts HEIC input from iPhones, so the same call converts HEIC t
 With `includeMetadata: true`, `metadata.exif` contains the EXIF block of the photo. Photos from the camera roll can include GPS coordinates. Two rules keep you out of trouble:
 
 1. Strip location before uploading photos that become public (profile pictures, marketplace listings). `@capgo/capacitor-file-compressor` removes EXIF on all platforms as part of compression.
-2. If you need location (field reports, inspections), read it from EXIF before compressing and send it as a separate field. Then disclose it in your App Store privacy label and Play data safety form. See our [privacy manifest guide](/blog/privacy-manifest-for-capacitor-apps-guide/) for the iOS side.
+2. If you need location (field reports, inspections), read it from EXIF before compressing and send it as a separate field. Then disclose it in your App Store privacy label and Play data safety form. See our [privacy manifest guide](/blog/privacy-manifest-for-ios-apps/) for the iOS side.
 
 ## Save to the gallery or app storage
 

@@ -211,7 +211,7 @@ Keep a practical evidence file. It should let the board prove what it did, not r
 - **Induction log:** show that directors received the code and understood their responsibilities.
 - **Control assessment:** retain the basis for conclusions about material internal controls.
 
-A governance code can sit beside security and assurance programmes without becoming the same thing. A company that documents access reviews and control evidence may use a [SOC 2 certification overview](https://capgo.app/blog/what-is-soc-2-certification/) as a separate reference, while keeping the board code focused on oversight, accountability, and decision rights.
+A governance code can sit beside security and assurance programmes without becoming the same thing. A company that documents access reviews and control evidence may use a [SOC 2 certification overview](https://capgo.app/security-questionnaire/) as a separate reference, while keeping the board code focused on oversight, accountability, and decision rights.
 
 <a id="common-pitfalls-and-lessons-from-real-cases"></a>
 ## Common Pitfalls and Lessons From Real Cases
