@@ -17,7 +17,7 @@ import { splitLocalePath } from './localizedLegacyPathRedirect'
  * 410. The translation worker bypasses cached translations for gone paths and localizes
  * the same 410 HTML for non-English locales.
  */
-const GONE_PATHS = new Set<string>(['/blog/what-is-a-micro-frontend'])
+const GONE_PATHS = new Set<string>(['/blog/enterprise-app-management', '/blog/what-is-a-micro-frontend'])
 
 function decodePathnameForLookup(pathname: string): string {
   try {
