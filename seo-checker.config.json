@@ -1,23 +1,7 @@
 {
   "distPath": "./apps/web/dist",
   "baseUrl": "https://capgo.app",
-  "languages": [
-    "en",
-    "fr",
-    "de",
-    "es",
-    "it",
-    "pt",
-    "ja",
-    "ko",
-    "zh",
-    "ru",
-    "nl",
-    "pl",
-    "uk",
-    "id",
-    "ar"
-  ],
+  "languages": ["en", "fr", "de", "es", "it", "pt", "ja", "ko", "zh", "ru", "nl", "pl", "uk", "id", "ar"],
   "defaultLanguage": "en",
   "rules": {
     "disabled": [
@@ -141,8 +125,10 @@
   },
   "exclusions": [
     {
-      "fingerprint": "SEO01165::https://capgo.app/sitemap-docs-index.xml",
-      "reason": "Docs sitemap is served by the separate docs worker, not apps/web/dist"
+      "ruleId": "SEO01165",
+      "filePath": "robots.txt",
+      "elementPattern": "^https://capgo\\.app/sitemap-docs-index\\.xml$",
+      "reason": "This sitemap is served by the separately deployed docs worker and is absent from the web build output."
     },
     {
       "ruleId": "SEO01181",
