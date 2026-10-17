@@ -26,6 +26,12 @@
     "width": 931,
     "height": 468
   },
+  "local-ticket-scanner-4-3-4-2-6": {
+    "src": "/apple-rejection-stories/screenshots/local-ticket-scanner-4-3-4-2-6.webp",
+    "alt": "Rejection message citing guideline 4.3 spam and guideline 4.2.6 app generation services",
+    "width": 942,
+    "height": 1728
+  },
   "metadata-iap-checkboxes": null,
   "nine-then-eight-days-review": null,
   "objectionable-content-resubmit": {
@@ -33,6 +39,12 @@
     "alt": "Blurred post with a pending account termination notice for repeated resubmissions",
     "width": 560,
     "height": 1009
+  },
+  "peptide-dosage-calculators-pulled-1-4-2": {
+    "src": "/apple-rejection-stories/screenshots/peptide-dosage-calculators-pulled-1-4-2.webp",
+    "alt": "Two blurred live apps in App Store Connect, both Ready for Distribution with App Review issues flagged",
+    "width": 1200,
+    "height": 400
   },
   "portfolio-flagged-4-3": null,
   "rejected-same-minute-4-3": {
