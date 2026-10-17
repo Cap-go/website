@@ -1,8 +1,10 @@
 import { expect, test } from 'bun:test'
 import {
   AGENT_NOT_FOUND_MARKDOWN,
+  HOSTED_MCP_TOOL_GROUPS,
+  HOSTED_MCP_URL,
   LLMS_WHEN_TO_USE_PATHS,
-  MCP_TOOLS,
+  WHEN_TO_USE_MARKDOWN,
   OPENAPI_ALIAS_PATHS,
   markdownNotFoundResponse,
   prefersMarkdown,
@@ -62,13 +64,13 @@ test('OpenAPI aliases include the conventional audit paths', () => {
   expect(OPENAPI_ALIAS_PATHS.has('/.well-known/openapi.json')).toBe(true)
 })
 
-test('MCP tools have unique names and descriptions for function calling', () => {
-  const names = MCP_TOOLS.map((tool) => tool.name)
-  expect(new Set(names).size).toBe(names.length)
-  for (const tool of MCP_TOOLS) {
-    expect(tool.description.length).toBeGreaterThan(20)
-    expect(tool.inputSchema.type).toBe('object')
-  }
+test('agent guidance only advertises the hosted MCP server', () => {
+  expect(HOSTED_MCP_URL).toBe('https://api.capgo.app/mcp')
+  expect(WHEN_TO_USE_MARKDOWN).toContain('https://api.capgo.app/mcp')
+  expect(WHEN_TO_USE_MARKDOWN).not.toMatch(/https:\/\/capgo\.app\/mcp/)
+  const ids = HOSTED_MCP_TOOL_GROUPS.map((group) => group.id)
+  expect(new Set(ids).size).toBe(ids.length)
+  expect(ids).toContain('docs')
 })
 
 test('organization schema includes postal address and support contact', () => {

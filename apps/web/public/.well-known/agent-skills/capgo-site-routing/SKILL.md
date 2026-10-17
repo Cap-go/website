@@ -16,7 +16,7 @@ Use this skill when a user lands on Capgo and needs the shortest path to the rig
 - Mobile signing tools: https://capgo.app/tools/
 - Public API docs: https://capgo.app/docs/public-api/
 - OpenAPI: https://capgo.app/openapi.json
-- MCP: https://capgo.app/mcp
+- MCP server: https://api.capgo.app/mcp (explained at https://capgo.app/mcp/)
 - Contact: https://capgo.app/contact/
 - About: https://capgo.app/about/
 - Privacy: https://capgo.app/privacy/
