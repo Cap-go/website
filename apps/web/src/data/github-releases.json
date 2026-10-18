@@ -33,6 +33,14 @@
   },
   {
     "category": "changelog",
+    "title": "capgo.app capgo-18.7.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-18.7.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-18.7.1",
+    "pubDate": "2026-10-17T20:39:57.000Z",
+    "description": "🆕 Changelog Fixed Resolved an issue where URL based OAuth clients were not consistently resolved, preventing CIMD fetch failures on Workers. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 18.7.0...capgo 18.7.1"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-18.7.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-18.7.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-18.7.0",
@@ -310,14 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.82.0",
     "pubDate": "2026-10-13T00:55:00.000Z",
     "description": "🆕 Changelog Added Added a build time warning for CocoaPods based iOS projects about the CocoaPods trunk freeze, helping users anticipate and plan around service disruptions ( 3680). Changed Updated the Supabase schema and regenerated types to stay in sync with the latest API definitions. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.81.0...cli 8.82.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-16.8.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.8.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.8.1",
-    "pubDate": "2026-10-13T17:15:43.000Z",
-    "description": "🆕 Changelog Fixed Resolved organization invitation delivery issues Organization invitations are now sent through Cloudflare, improving reliability and deliverability when inviting team members. Changed Synchronized Supabase schema and generated types Updated the backend schema and corresponding generated types to ensure consistency with the latest data model. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 16.8.0...capgo 16.8.1"
   },
   {
     "category": "release",
@@ -777,10 +777,626 @@
   },
   {
     "category": "release",
+    "title": "capacitor-jw-player 8.0.58",
+    "link": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.58",
+    "guid": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.58",
+    "pubDate": "2026-10-15T03:13:06.000Z",
+    "description": "🆕 Changelog Changed Upgraded internal development tooling to ESLint 10 and TypeScript 6, keeping linting and type checking on current versions. Updated the README to remove the consulting call to action, streamlining project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor jw player/compare/8.0.57...8.0.58"
+  },
+  {
+    "category": "release",
     "title": "capacitor-keep-awake 8.1.20",
     "link": "https://github.com/Cap-go/capacitor-keep-awake/releases/tag/8.1.20",
     "guid": "https://github.com/Cap-go/capacitor-keep-awake/releases/tag/8.1.20",
     "pubDate": "2026-10-15T02:48:08.000Z",
     "description": "🆕 Changelog Changed Upgraded development tooling to ESLint 10 and TypeScript 6 for improved linting, type checking, and long term maintainability. Contributors should update their installed dependencies. Streamlined the README by removing the consulting call to action, making project documentation more focused. 🔗 Full Changelog : https://github.com/Cap go/capacitor keep awake/compare/8.1.19...8.1.20"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-launch-navigator 8.1.3",
+    "link": "https://github.com/Cap-go/capacitor-launch-navigator/releases/tag/8.1.3",
+    "guid": "https://github.com/Cap-go/capacitor-launch-navigator/releases/tag/8.1.3",
+    "pubDate": "2026-10-15T02:23:46.000Z",
+    "description": "🆕 Changelog Changed Updated documentation to improve accuracy and clarity for users. Removed the consulting call to action from the README , keeping project documentation focused on usage and contribution guidance. Migrated development tooling to ESLint 10 and TypeScript 6 , aligning the project with current linting and type checking standards. Contributors should ensure their local setup supports these versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor launch navigator/compar..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-light-sensor 8.1.23",
+    "link": "https://github.com/Cap-go/capacitor-light-sensor/releases/tag/8.1.23",
+    "guid": "https://github.com/Cap-go/capacitor-light-sensor/releases/tag/8.1.23",
+    "pubDate": "2026-10-15T02:27:32.000Z",
+    "description": "🆕 Changelog Changed Updated development tooling to ESLint 10 and TypeScript 6, modernizing the build pipeline and type checking infrastructure. Consumers compiling this package with TypeScript may need TypeScript 6 or later. Removed the consulting call to action from the README, keeping project documentation focused on usage and contribution guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor light sensor/compare/8.1.22...8.1.23"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-live-activities 1.2.5",
+    "link": "https://github.com/Cap-go/capacitor-live-activities/releases/tag/1.2.5",
+    "guid": "https://github.com/Cap-go/capacitor-live-activities/releases/tag/1.2.5",
+    "pubDate": "2026-10-15T02:51:15.000Z",
+    "description": "🆕 Changelog Changed Migrated the development toolchain to ESLint 10 and TypeScript 6, improving static analysis and type checking for contributors. Updated project documentation. Removed Removed the consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor live activities/compare/1.2.4...1.2.5"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-live-reload 8.0.12",
+    "link": "https://github.com/Cap-go/capacitor-live-reload/releases/tag/8.0.12",
+    "guid": "https://github.com/Cap-go/capacitor-live-reload/releases/tag/8.0.12",
+    "pubDate": "2026-10-15T02:11:46.000Z",
+    "description": "🆕 Changelog Changed Updated project documentation for improved clarity and accuracy. Migrated internal development tooling to ESLint 10 and TypeScript 6. This keeps linting and type checking aligned with the latest supported toolchains. No runtime breaking changes are expected; contributors building from source should ensure their toolchain supports these versions. Removed Removed the consulting call to action from the README to keep project documentation focused on usage and contribution. \ud83d..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-llm 8.1.11",
+    "link": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.1.11",
+    "guid": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.1.11",
+    "pubDate": "2026-10-15T02:25:26.000Z",
+    "description": "🆕 Changelog Changed Removed the consulting call to action from the README. Migrated internal development tooling to ESLint 10 and TypeScript 6; contributors should ensure their environments are aligned with these versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor llm/compare/8.1.10...8.1.11"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-media-session 8.1.4",
+    "link": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.4",
+    "guid": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.4",
+    "pubDate": "2026-10-15T02:49:03.000Z",
+    "description": "🆕 Changelog Changed Migrated the project toolchain to ESLint 10 and TypeScript 6 for improved linting and type checking. If your setup depends on the project's ESLint or TypeScript configuration, verify compatibility before upgrading. Removed Removed the consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor media session/compare/8.1.3...8.1.4"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-mock-location-detector 8.0.10",
+    "link": "https://github.com/Cap-go/capacitor-mock-location-detector/releases/tag/8.0.10",
+    "guid": "https://github.com/Cap-go/capacitor-mock-location-detector/releases/tag/8.0.10",
+    "pubDate": "2026-10-15T01:39:00.000Z",
+    "description": "🆕 Changelog Removed Removed the consulting call to action from the project README, streamlining the documentation and reducing promotional content. No functional code changes were made. 🔗 Full Changelog : https://github.com/Cap go/capacitor mock location detector/compare/8.0.9...8.0.10"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-mqtt 8.1.16",
+    "link": "https://github.com/Cap-go/capacitor-mqtt/releases/tag/8.1.16",
+    "guid": "https://github.com/Cap-go/capacitor-mqtt/releases/tag/8.1.16",
+    "pubDate": "2026-10-15T02:43:50.000Z",
+    "description": "🆕 Changelog Changed Upgraded development tooling to ESLint 10 and TypeScript 6, improving linting accuracy, static analysis, and support for newer language features. Migration note: Contributors and downstream projects should verify compatibility with TypeScript 6 and update local tooling or CI environments as needed. Streamlined the README by removing the consulting call to action, keeping documentation focused on project usage and contribution. 🔗 Full Changelog : https://github.com/Cap go..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-mute 8.1.14",
+    "link": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.14",
+    "guid": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.14",
+    "pubDate": "2026-10-15T02:12:32.000Z",
+    "description": "🆕 Changelog Changed Upgraded the development toolchain to ESLint 10 and TypeScript 6 to leverage the latest linting rules and type checking improvements. TypeScript consumers should verify compatibility with TypeScript 6 before updating. Streamlined the README by removing the consulting call to action. 🔗 Full Changelog : https://github.com/Cap go/capacitor mute/compare/8.1.13...8.1.14"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-mux-player 8.1.2",
+    "link": "https://github.com/Cap-go/capacitor-mux-player/releases/tag/8.1.2",
+    "guid": "https://github.com/Cap-go/capacitor-mux-player/releases/tag/8.1.2",
+    "pubDate": "2026-10-15T02:57:58.000Z",
+    "description": "🆕 Changelog Changed Upgraded development dependencies to ESLint 10 and TypeScript 6. If you extend or build against this project's tooling, update your lint and TypeScript configurations accordingly. Removed the consulting call to action from the README to keep project documentation focused on usage. 🔗 Full Changelog : https://github.com/Cap go/capacitor mux player/compare/8.1.1...8.1.2"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-native-audio 8.4.37",
+    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.37",
+    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.37",
+    "pubDate": "2026-10-16T10:46:25.000Z",
+    "description": "🆕 Changelog Fixed Improved artwork image handling on Android by downsampling bitmaps during decoding, reducing memory usage and preventing out of memory crashes when loading large images. 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.4.36...8.4.37"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-native-biometric 8.8.3",
+    "link": "https://github.com/Cap-go/capacitor-native-biometric/releases/tag/8.8.3",
+    "guid": "https://github.com/Cap-go/capacitor-native-biometric/releases/tag/8.8.3",
+    "pubDate": "2026-10-15T02:02:29.000Z",
+    "description": "🆕 Changelog Changed Removed the consulting call to action from the README for a cleaner, less distracting documentation experience. 🔗 Full Changelog : https://github.com/Cap go/capacitor native biometric/compare/8.8.2...8.8.3"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-native-loader 8.1.11",
+    "link": "https://github.com/Cap-go/capacitor-native-loader/releases/tag/8.1.11",
+    "guid": "https://github.com/Cap-go/capacitor-native-loader/releases/tag/8.1.11",
+    "pubDate": "2026-10-15T01:47:17.000Z",
+    "description": "🆕 Changelog Changed Removed the consulting call to action from the README to keep project documentation focused and user relevant. 🔗 Full Changelog : https://github.com/Cap go/capacitor native loader/compare/8.1.10...8.1.11"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-native-market 8.0.53",
+    "link": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.53",
+    "guid": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.53",
+    "pubDate": "2026-10-15T02:56:59.000Z",
+    "description": "🆕 Changelog Changed Migrated development tooling to ESLint 10 and TypeScript 6, bringing in the latest lint rules, improved type checking, and current ecosystem compatibility. Projects consuming this package's TypeScript definitions or lint integrations should upgrade to ESLint 10 and TypeScript 6. Removed the consulting call to action from the README to keep documentation focused on project usage and guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor native market/compare/8.0..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-native-navigation 8.11.0",
+    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.11.0",
+    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.11.0",
+    "pubDate": "2026-10-17T00:12:44.000Z",
+    "description": "🆕 Changelog Added Added optional native pull to refresh support for iOS and Android, giving apps a more platform native refresh experience on supported devices. Changed Updated documentation to reflect the latest features and configuration options. Expanded the example app with dedicated playgrounds for every option and improved list contrast in dark mode. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.10.0...8.11.0"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-native-purchases 8.9.6",
+    "link": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.6",
+    "guid": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.6",
+    "pubDate": "2026-10-15T03:19:58.000Z",
+    "description": "🆕 Changelog Changed Upgraded development tooling to ESLint 10 and TypeScript 6, keeping the project aligned with current ecosystem versions. Contributors may need to update their local development environment. Updated README documentation to remove the consulting call to action. 🔗 Full Changelog : https://github.com/Cap go/capacitor native purchases/compare/8.9.5...8.9.6"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-nativegeocoder 8.0.57",
+    "link": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.57",
+    "guid": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.57",
+    "pubDate": "2026-10-15T03:01:32.000Z",
+    "description": "🆕 Changelog Changed Upgraded development tooling to ESLint 10 and TypeScript 6, ensuring compatibility with the latest linting and type checking standards. If you build from source or rely on TypeScript internals, verify your toolchain supports TypeScript 6 before upgrading. Streamlined the README by removing the consulting call to action, making usage documentation easier to find. 🔗 Full Changelog : https://github.com/Cap go/capacitor nativegeocoder/compare/8.0.56...8.0.57"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-navigation-bar 8.2.16",
+    "link": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.16",
+    "guid": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.16",
+    "pubDate": "2026-10-15T02:39:17.000Z",
+    "description": "🆕 Changelog Changed Updated development tooling to ESLint 10 and TypeScript 6 for improved linting and type checking. Removed the consulting call to action from the README to keep project documentation focused. 🔗 Full Changelog : https://github.com/Cap go/capacitor navigation bar/compare/8.2.15...8.2.16"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-network-diagnostics 8.0.15",
+    "link": "https://github.com/Cap-go/capacitor-network-diagnostics/releases/tag/8.0.15",
+    "guid": "https://github.com/Cap-go/capacitor-network-diagnostics/releases/tag/8.0.15",
+    "pubDate": "2026-10-15T02:25:47.000Z",
+    "description": "🆕 Changelog Changed Updated project documentation Removed the consulting call to action from the README 🔗 Full Changelog : https://github.com/Cap go/capacitor network diagnostics/compare/8.0.14...8.0.15"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-nfc 8.3.3",
+    "link": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.3",
+    "guid": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.3",
+    "pubDate": "2026-10-15T03:11:43.000Z",
+    "description": "🆕 Changelog Changed Migrated internal development tooling to ESLint 10 and TypeScript 6. This is a behind the scenes modernization that improves maintainability and compatibility; no user facing changes are expected. Removed the consulting call to action from the README to keep project documentation focused on usage and contribution. 🔗 Full Changelog : https://github.com/Cap go/capacitor nfc/compare/8.3.2...8.3.3"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-passkey 8.5.7",
+    "link": "https://github.com/Cap-go/capacitor-passkey/releases/tag/8.5.7",
+    "guid": "https://github.com/Cap-go/capacitor-passkey/releases/tag/8.5.7",
+    "pubDate": "2026-10-15T03:17:34.000Z",
+    "description": "🆕 Changelog Changed Migrated the development toolchain to ESLint 10 and TypeScript 6 to take advantage of the latest linting rules and type checking improvements. Contributors and downstream projects may need to align their local tool versions with these releases. Updated project documentation with revised guidance and examples. Removed Removed the consulting call to action from the README to keep project documentation focused on user guidance and library usage. 🔗 Full Changelog : https://g..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-patch v8.3.10",
+    "link": "https://github.com/Cap-go/capacitor-patch/releases/tag/v8.3.10",
+    "guid": "https://github.com/Cap-go/capacitor-patch/releases/tag/v8.3.10",
+    "pubDate": "2026-10-15T01:39:20.000Z",
+    "description": "🆕 Changelog Changed Migrated development dependencies to ESLint 10 and TypeScript 6 for improved linting and type checking support. No runtime changes are expected for consumers. Removed the consulting call to action from the README to streamline project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor patch/compare/v8.3.9...v8.3.10"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-pay 8.2.1",
+    "link": "https://github.com/Cap-go/capacitor-pay/releases/tag/8.2.1",
+    "guid": "https://github.com/Cap-go/capacitor-pay/releases/tag/8.2.1",
+    "pubDate": "2026-10-15T02:44:26.000Z",
+    "description": "🆕 Changelog Changed Updated project documentation. Removed the consulting call to action from the README. Migrated development tooling to ESLint 10 and TypeScript 6. 🔗 Full Changelog : https://github.com/Cap go/capacitor pay/compare/8.2.0...8.2.1"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-pdf-generator 8.0.46",
+    "link": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.46",
+    "guid": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.46",
+    "pubDate": "2026-10-15T03:10:13.000Z",
+    "description": "🆕 Changelog Changed Updated development tooling to ESLint 10 and TypeScript 6, keeping the linting and type checking pipeline current for contributors. Removed the consulting call to action from the README, resulting in cleaner and more focused documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor pdf generator/compare/8.0.45...8.0.46"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-pdf-viewer 8.2.8",
+    "link": "https://github.com/Cap-go/capacitor-pdf-viewer/releases/tag/8.2.8",
+    "guid": "https://github.com/Cap-go/capacitor-pdf-viewer/releases/tag/8.2.8",
+    "pubDate": "2026-10-15T01:58:42.000Z",
+    "description": "🆕 Changelog Changed Updated project documentation. Removed the consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor pdf viewer/compare/8.2.7...8.2.8"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-pedometer 8.0.50",
+    "link": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.50",
+    "guid": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.50",
+    "pubDate": "2026-10-15T03:07:08.000Z",
+    "description": "🆕 Changelog Changed Migrated internal development tooling to ESLint 10 and TypeScript 6. Contributors may need to update their local dependencies. Removed the consulting call to action from the README to streamline project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor pedometer/compare/8.0.49...8.0.50"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-permissions 8.2.8",
+    "link": "https://github.com/Cap-go/capacitor-permissions/releases/tag/8.2.8",
+    "guid": "https://github.com/Cap-go/capacitor-permissions/releases/tag/8.2.8",
+    "pubDate": "2026-10-15T02:10:47.000Z",
+    "description": "🆕 Changelog Changed Removed the consulting CTA from the README to streamline project documentation. Updated documentation for improved accuracy and clarity. 🔗 Full Changelog : https://github.com/Cap go/capacitor permissions/compare/8.2.7...8.2.8"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-persistent-account 8.0.47",
+    "link": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.47",
+    "guid": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.47",
+    "pubDate": "2026-10-15T02:52:34.000Z",
+    "description": "🆕 Changelog Changed Migrated development tooling to ESLint 10 and TypeScript 6. Verify TypeScript compatibility when upgrading. Removed Removed the consulting call to action from project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor persistent account/compare/8.0.46...8.0.47"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-persistent-uuid 8.1.10",
+    "link": "https://github.com/Cap-go/capacitor-persistent-uuid/releases/tag/8.1.10",
+    "guid": "https://github.com/Cap-go/capacitor-persistent-uuid/releases/tag/8.1.10",
+    "pubDate": "2026-10-15T01:39:20.000Z",
+    "description": "🆕 Changelog Changed Removed the consulting services call to action from the README to keep project documentation focused on usage and contribution guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor persistent uuid/compare/8.1.9...8.1.10"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-persona 8.2.2",
+    "link": "https://github.com/Cap-go/capacitor-persona/releases/tag/8.2.2",
+    "guid": "https://github.com/Cap-go/capacitor-persona/releases/tag/8.2.2",
+    "pubDate": "2026-10-15T02:18:51.000Z",
+    "description": "Changelog Changed Migrated the development toolchain to ESLint 10 and TypeScript 6, keeping the project on supported tooling and enabling the latest linting and language features. Contributors may need to update their local environment to remain compatible. Updated project documentation to reflect the latest usage and configuration details. Removed the consulting call to action from the README. Full changelog: https://github.com/Cap go/capacitor persona/compare/8.2.1...8.2.2"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-photo-library 8.0.31",
+    "link": "https://github.com/Cap-go/capacitor-photo-library/releases/tag/8.0.31",
+    "guid": "https://github.com/Cap-go/capacitor-photo-library/releases/tag/8.0.31",
+    "pubDate": "2026-10-15T03:05:55.000Z",
+    "description": "🆕 Changelog Changed Updated development tooling to ESLint 10 and TypeScript 6 for improved linting, type checking, and long term maintainability. Removed the consulting call to action from the README to streamline project documentation and reduce clutter. 🔗 Full Changelog : https://github.com/Cap go/capacitor photo library/compare/8.0.30...8.0.31"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-plus 8.5.3",
+    "link": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.5.3",
+    "guid": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.5.3",
+    "pubDate": "2026-10-12T10:57:58.000Z",
+    "description": "Capacitor+ v8.5.3 Fixed Updated iOS private API usage to be App Store compliant with guideline 2.5.2, reducing the risk of app rejection during review. Installation What is Capacitor+? Capacitor+ is an automated fork of Capacitor that: Syncs daily with upstream Capacitor Runs full CI/CD on all changes Auto publishes verified releases Full Changelog: https://github.com/Cap go/capacitor plus/compare/8.5.2...8.5.3"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-pretty-toast 8.1.27",
+    "link": "https://github.com/Cap-go/capacitor-pretty-toast/releases/tag/8.1.27",
+    "guid": "https://github.com/Cap-go/capacitor-pretty-toast/releases/tag/8.1.27",
+    "pubDate": "2026-10-15T02:54:06.000Z",
+    "description": "🆕 Changelog Changed Upgraded project tooling to ESLint 10 and TypeScript 6, requiring these versions for development and internal type checking. Contributors should update their development environment and installed dev dependencies before building or linting. Removed Removed the consulting call to action from the README, streamlining the project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor pretty toast/compare/8.1.26...8.1.27"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-printer 8.1.8",
+    "link": "https://github.com/Cap-go/capacitor-printer/releases/tag/8.1.8",
+    "guid": "https://github.com/Cap-go/capacitor-printer/releases/tag/8.1.8",
+    "pubDate": "2026-10-15T03:09:39.000Z",
+    "description": "🆕 Changelog Changed Updated development tooling to ESLint 10 and TypeScript 6 . This modernizes the project's build and linting pipeline and improves long term maintainability. No end user facing behavior changes are expected. Removed the consulting call to action from the README, streamlining the project's documentation and keeping the focus on usage instructions and contribution guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor printer/compare/8.1.7...8.1.8"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-privacy-screen 8.3.14",
+    "link": "https://github.com/Cap-go/capacitor-privacy-screen/releases/tag/8.3.14",
+    "guid": "https://github.com/Cap-go/capacitor-privacy-screen/releases/tag/8.3.14",
+    "pubDate": "2026-10-15T02:30:49.000Z",
+    "description": "🆕 Changelog Changed Migrated internal tooling to ESLint 10 and TypeScript 6 for improved linting, type checking accuracy, and long term maintainability. Streamlined project documentation by removing the consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor privacy screen/compare/8.3.13...8.3.14"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-proximity 8.1.16",
+    "link": "https://github.com/Cap-go/capacitor-proximity/releases/tag/8.1.16",
+    "guid": "https://github.com/Cap-go/capacitor-proximity/releases/tag/8.1.16",
+    "pubDate": "2026-10-15T03:11:18.000Z",
+    "description": "🆕 Changelog Changed Upgraded development tooling to ESLint 10 and TypeScript 6. The project's linting and type checking workflows now use the latest major versions, bringing improved rule coverage, better type inference, and closer alignment with the current ecosystem. If your setup extends this project's ESLint configuration or TypeScript settings, verify compatibility with ESLint 10 and TypeScript 6. Streamlined the README by removing the consulting call to action. The documentation now fo..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-realtimekit 8.0.41",
+    "link": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.41",
+    "guid": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.41",
+    "pubDate": "2026-10-15T03:19:23.000Z",
+    "description": "🆕 Changelog Changed Migrated the project's linting and type checking toolchain to ESLint 10 and TypeScript 6, ensuring continued compatibility with the latest supported tooling. No action is required for consumers; contributors should update their local development environment to match the new dependency versions. Updated the README to remove the consulting call to action, streamlining the project documentation for users. 🔗 Full Changelog : https://github.com/Cap go/capacitor realtimekit/co..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-recaptcha 8.1.18",
+    "link": "https://github.com/Cap-go/capacitor-recaptcha/releases/tag/8.1.18",
+    "guid": "https://github.com/Cap-go/capacitor-recaptcha/releases/tag/8.1.18",
+    "pubDate": "2026-10-15T03:00:58.000Z",
+    "description": "🆕 Changelog Changed Upgraded development tooling to ESLint 10 and TypeScript 6 , improving linting accuracy, type checking, and build reliability. Migration note : Contributors and downstream package maintainers should ensure their local toolchain and installed dependencies match the updated requirements. Removed Removed the consulting call to action from the README, streamlining project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor recaptcha/compare/8.1.17...8.1.18"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-rich-notifications 8.2.7",
+    "link": "https://github.com/Cap-go/capacitor-rich-notifications/releases/tag/8.2.7",
+    "guid": "https://github.com/Cap-go/capacitor-rich-notifications/releases/tag/8.2.7",
+    "pubDate": "2026-10-15T01:50:38.000Z",
+    "description": "🆕 Changelog Removed Removed the consulting call to action from the README, streamlining project documentation and reducing promotional content. 🔗 Full Changelog : https://github.com/Cap go/capacitor rich notifications/compare/8.2.6...8.2.7"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-ricoh360-camera-plugin 8.1.2",
+    "link": "https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/releases/tag/8.1.2",
+    "guid": "https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/releases/tag/8.1.2",
+    "pubDate": "2026-10-15T02:43:05.000Z",
+    "description": "🆕 Changelog Changed Updated project documentation. Upgraded internal development tooling to ESLint 10 and TypeScript 6 for improved static analysis and compatibility. Removed Removed the consulting call to action section from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor ricoh360 camera plugin/compare/8.1.1...8.1.2"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-rudderstack 8.1.17",
+    "link": "https://github.com/Cap-go/capacitor-rudderstack/releases/tag/8.1.17",
+    "guid": "https://github.com/Cap-go/capacitor-rudderstack/releases/tag/8.1.17",
+    "pubDate": "2026-10-15T03:14:31.000Z",
+    "description": "🆕 Changelog Changed Upgraded development tooling to ESLint 10 and TypeScript 6, improving linting, type checking, and compatibility with modern toolchains. If you build from source or consume TypeScript declarations, ensure your environment supports TypeScript 6. Updated project documentation. Removed Removed the consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor rudderstack/compare/8.1.16...8.1.17"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-screen-orientation 8.4.3",
+    "link": "https://github.com/Cap-go/capacitor-screen-orientation/releases/tag/8.4.3",
+    "guid": "https://github.com/Cap-go/capacitor-screen-orientation/releases/tag/8.4.3",
+    "pubDate": "2026-10-15T02:33:01.000Z",
+    "description": "🆕 Changelog Changed Upgraded internal development tooling to ESLint 10 and TypeScript 6, improving linting performance and type checking reliability. No consumer facing API changes are expected, but contributors should ensure their local toolchain is compatible. Removed Removed the consulting call to action from the README, making project documentation more focused on usage guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor screen orientation/compare/8.4.2...8.4.3"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-screen-recorder 8.4.3",
+    "link": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.3",
+    "guid": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.3",
+    "pubDate": "2026-10-15T02:46:40.000Z",
+    "description": "🆕 Changelog Changed Migrated internal development tooling to ESLint 10 and TypeScript 6, ensuring compatibility with the latest linting and type checking ecosystem. Removed the consulting call to action from the README to streamline project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor screen recorder/compare/8.4.2...8.4.3"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-shake 8.0.51",
+    "link": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.51",
+    "guid": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.51",
+    "pubDate": "2026-10-15T03:03:39.000Z",
+    "description": "🆕 Changelog Changed Updated the project's linting and type checking toolchain to ESLint 10 and TypeScript 6. This modernizes development tooling and may require compatibility checks if you rely on the project's shared configuration or plugin setup. Streamlined the README by removing the consulting call to action, making project documentation more focused. 🔗 Full Changelog : https://github.com/Cap go/capacitor shake/compare/8.0.50...8.0.51"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-share-target 8.0.62",
+    "link": "https://github.com/Cap-go/capacitor-share-target/releases/tag/8.0.62",
+    "guid": "https://github.com/Cap-go/capacitor-share-target/releases/tag/8.0.62",
+    "pubDate": "2026-10-15T02:57:23.000Z",
+    "description": "🆕 Changelog Changed Migrated internal development tooling to ESLint 10 and TypeScript 6 to keep the build and lint pipeline current. Streamlined the README by removing the consulting call to action. 🔗 Full Changelog : https://github.com/Cap go/capacitor share target/compare/8.0.61...8.0.62"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-sheets v8.2.2",
+    "link": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.2",
+    "guid": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.2",
+    "pubDate": "2026-10-15T01:40:15.000Z",
+    "description": "🆕 Changelog Changed Updated internal development tooling to ESLint 10 and TypeScript 6, modernizing the linting and type checking pipeline. 🔗 Full Changelog : https://github.com/Cap go/capacitor sheets/compare/v8.2.1...v8.2.2"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-sim 8.0.47",
+    "link": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.47",
+    "guid": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.47",
+    "pubDate": "2026-10-15T02:53:45.000Z",
+    "description": "🆕 Changelog Changed Updated internal development tooling to ESLint 10 and TypeScript 6. Removed Removed the consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor sim/compare/8.0.46...8.0.47"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-social-login 8.7.0",
+    "link": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.0",
+    "guid": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.0",
+    "pubDate": "2026-10-17T21:49:51.000Z",
+    "description": "🆕 Changelog Added Added a logout option for Sign in with Apple on iOS that clears the cached Apple name, giving users more control over stored identity information between sign in sessions ( 496). Security Stopped logging sensitive Apple authorization tokens and authorization codes, reducing the risk of accidental credential exposure in logs ( 494). 🔗 Full Changelog : https://github.com/Cap go/capacitor social login/compare/8.6.0...8.7.0"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-speech-recognition 8.4.4",
+    "link": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.4.4",
+    "guid": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.4.4",
+    "pubDate": "2026-10-16T14:39:10.000Z",
+    "description": "🆕 Changelog Fixed Fixed an issue on Android where checking availability could be performed off the main thread, leading to inconsistent behavior or runtime failures. The availability check now runs reliably on the main thread, improving stability when initializing speech recognition. 🔗 Full Changelog : https://github.com/Cap go/capacitor speech recognition/compare/8.4.3...8.4.4"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-speech-synthesis 8.0.27",
+    "link": "https://github.com/Cap-go/capacitor-speech-synthesis/releases/tag/8.0.27",
+    "guid": "https://github.com/Cap-go/capacitor-speech-synthesis/releases/tag/8.0.27",
+    "pubDate": "2026-10-15T03:03:16.000Z",
+    "description": "🆕 Changelog Changed Migrated development tooling to ESLint 10 and TypeScript 6 to align with current ecosystem standards and improve long term maintainability. Contributors may need to update their local toolchain to match these versions. Removed the consulting call to action from the README to streamline documentation and keep the focus on project usage guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor speech synthesis/compare/8.0.26...8.0.27"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-ssl-pinning 8.1.15",
+    "link": "https://github.com/Cap-go/capacitor-ssl-pinning/releases/tag/8.1.15",
+    "guid": "https://github.com/Cap-go/capacitor-ssl-pinning/releases/tag/8.1.15",
+    "pubDate": "2026-10-15T03:00:25.000Z",
+    "description": "🆕 Changelog Changed Upgraded internal development dependencies to ESLint 10 and TypeScript 6. If your project consumes the package's types or build tooling, verify compatibility with your current TypeScript version. Removed the consulting call to action from the README to streamline project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor ssl pinning/compare/8.1.14...8.1.15"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-streamcall 8.0.72",
+    "link": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.72",
+    "guid": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.72",
+    "pubDate": "2026-10-15T02:34:43.000Z",
+    "description": "🆕 Changelog Changed Updated project documentation to provide clearer, more current guidance for users and contributors. Upgraded internal development tooling to ESLint 10 and TypeScript 6 to stay aligned with the latest ecosystem standards. Contributors may need to refresh local dependencies ( or equivalent). Removed Removed the consulting call to action from the README to keep the project page focused on library information. 🔗 Full Changelog : https://github.com/Cap go/capacitor streamcall..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-stripe-identity 8.0.9",
+    "link": "https://github.com/Cap-go/capacitor-stripe-identity/releases/tag/8.0.9",
+    "guid": "https://github.com/Cap-go/capacitor-stripe-identity/releases/tag/8.0.9",
+    "pubDate": "2026-10-12T22:37:37.000Z",
+    "description": "🆕 Changelog Changed Added an AI coding agent callout to the README, helping users understand which AI coding agents are supported or recommended for the project. 🔗 Full Changelog : https://github.com/Cap go/capacitor stripe identity/compare/8.0.8...8.0.9"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-stripe-pay 8.0.11",
+    "link": "https://github.com/Cap-go/capacitor-stripe-pay/releases/tag/8.0.11",
+    "guid": "https://github.com/Cap-go/capacitor-stripe-pay/releases/tag/8.0.11",
+    "pubDate": "2026-10-15T03:21:35.000Z",
+    "description": "🆕 Changelog Changed Migrated development dependencies to ESLint 10 and TypeScript 6, ensuring compatibility with the latest tooling ecosystem and improving static analysis reliability. Updated README documentation to remove the consulting call to action section, streamlining project information for users. 🔗 Full Changelog : https://github.com/Cap go/capacitor stripe pay/compare/8.0.10...8.0.11"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-stripe-terminal 8.0.9",
+    "link": "https://github.com/Cap-go/capacitor-stripe-terminal/releases/tag/8.0.9",
+    "guid": "https://github.com/Cap-go/capacitor-stripe-terminal/releases/tag/8.0.9",
+    "pubDate": "2026-10-15T02:45:27.000Z",
+    "description": "🆕 Changelog Changed Migrated development tooling to ESLint 10 and TypeScript 6 – updates the project's linting and type checking infrastructure to the latest supported major versions. This improves build reliability, catches more issues during development, and keeps the project aligned with current ecosystem standards. If you contribute to or fork this project, ensure your local environment supports ESLint 10 and TypeScript 6. Removed the consulting call to action from the README – streamlin..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-supabase 8.2.7",
+    "link": "https://github.com/Cap-go/capacitor-supabase/releases/tag/8.2.7",
+    "guid": "https://github.com/Cap-go/capacitor-supabase/releases/tag/8.2.7",
+    "pubDate": "2026-10-15T03:13:53.000Z",
+    "description": "🆕 Changelog Changed Migrated development tooling to ESLint 10 and TypeScript 6, adopting the latest supported linting and type checking stacks. Contributors and downstream projects that build from source may need to update their local ESLint and TypeScript installations. Updated the README and documentation, including removal of the consulting call to action, for a cleaner project overview. 🔗 Full Changelog : https://github.com/Cap go/capacitor supabase/compare/8.2.6...8.2.7"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-textinteraction 8.1.4",
+    "link": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.4",
+    "guid": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.4",
+    "pubDate": "2026-10-15T02:58:28.000Z",
+    "description": "🆕 Changelog Changed Migrated the project's internal tooling to ESLint 10 and TypeScript 6, keeping linting and type checking up to date with the latest major releases. If you rely on shared ESLint configs or TypeScript compilation, verify your local versions are compatible. Removed the consulting call to action from the README for a cleaner, project focused documentation experience. 🔗 Full Changelog : https://github.com/Cap go/capacitor textinteraction/compare/8.1.3...8.1.4"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-transitions v8.3.5",
+    "link": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.5",
+    "guid": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.5",
+    "pubDate": "2026-10-15T01:39:28.000Z",
+    "description": "🆕 Changelog Changed Migrated development tooling to ESLint 10 and TypeScript 6 Removed Removed consulting call to action from README 🔗 Full Changelog : https://github.com/Cap go/capacitor transitions/compare/v8.3.4...v8.3.5"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-twilio-voice 8.2.26",
+    "link": "https://github.com/Cap-go/capacitor-twilio-voice/releases/tag/8.2.26",
+    "guid": "https://github.com/Cap-go/capacitor-twilio-voice/releases/tag/8.2.26",
+    "pubDate": "2026-10-15T02:58:40.000Z",
+    "description": "🆕 Changelog Changed Migrated internal tooling to ESLint 10 and TypeScript 6 to improve linting accuracy, type checking, and support for newer TypeScript language features. If you extend or build on this package's tooling, verify compatibility with the updated ESLint and TypeScript versions. Updated documentation for improved clarity and accuracy. Removed Removed the consulting call to action from the README to keep project documentation focused on usage and contribution guidance. 🔗 Full Cha..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-updater 8.53.0",
+    "link": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.53.0",
+    "guid": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.53.0",
+    "pubDate": "2026-10-14T17:32:57.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor updater/compare/8.52.1...8.53.0"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-uploader 8.3.26",
+    "link": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.26",
+    "guid": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.26",
+    "pubDate": "2026-10-15T02:53:26.000Z",
+    "description": "🆕 Changelog Changed Updated README to remove the consulting call to action. Migrated development dependencies to ESLint 10 and TypeScript 6. 🔗 Full Changelog : https://github.com/Cap go/capacitor uploader/compare/8.3.25...8.3.26"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-uwb 8.0.9",
+    "link": "https://github.com/Cap-go/capacitor-uwb/releases/tag/8.0.9",
+    "guid": "https://github.com/Cap-go/capacitor-uwb/releases/tag/8.0.9",
+    "pubDate": "2026-10-15T02:40:22.000Z",
+    "description": "🆕 Changelog Removed Removed the consulting call to action from the README, streamlining project documentation and reducing distractions for users seeking library information. 🔗 Full Changelog : https://github.com/Cap go/capacitor uwb/compare/8.0.8...8.0.9"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-verisoul 8.0.17",
+    "link": "https://github.com/Cap-go/capacitor-verisoul/releases/tag/8.0.17",
+    "guid": "https://github.com/Cap-go/capacitor-verisoul/releases/tag/8.0.17",
+    "pubDate": "2026-10-15T02:50:24.000Z",
+    "description": "🆕 Changelog Changed Removed the consulting call to action from the README, making project documentation cleaner and more focused on the software itself 🔗 Full Changelog : https://github.com/Cap go/capacitor verisoul/compare/8.0.16...8.0.17"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-video-player 8.2.15",
+    "link": "https://github.com/Cap-go/capacitor-video-player/releases/tag/8.2.15",
+    "guid": "https://github.com/Cap-go/capacitor-video-player/releases/tag/8.2.15",
+    "pubDate": "2026-10-16T17:46:24.000Z",
+    "description": "🆕 Changelog Fixed Fixed iOS audio session configuration so audio playback continues smoothly when the app enters background mode or Picture in Picture is active. 🔗 Full Changelog : https://github.com/Cap go/capacitor video player/compare/8.2.14...8.2.15"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-video-thumbnails 8.1.25",
+    "link": "https://github.com/Cap-go/capacitor-video-thumbnails/releases/tag/8.1.25",
+    "guid": "https://github.com/Cap-go/capacitor-video-thumbnails/releases/tag/8.1.25",
+    "pubDate": "2026-10-15T03:15:38.000Z",
+    "description": "🆕 Changelog Changed Updated project documentation for improved clarity and accuracy. Removed the consulting call to action from the README. Migrated development tooling to ESLint 10 and TypeScript 6 for improved linting and type checking support. 🔗 Full Changelog : https://github.com/Cap go/capacitor video thumbnails/compare/8.1.24...8.1.25"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-volume-buttons 8.1.6",
+    "link": "https://github.com/Cap-go/capacitor-volume-buttons/releases/tag/8.1.6",
+    "guid": "https://github.com/Cap-go/capacitor-volume-buttons/releases/tag/8.1.6",
+    "pubDate": "2026-10-15T02:54:56.000Z",
+    "description": "🆕 Changelog Changed Upgraded development tooling to ESLint 10 and TypeScript 6 to stay on supported toolchain versions and benefit from the latest linting and type checking improvements. Migration note: If you extend the project's ESLint configuration or maintain custom rules, review the ESLint 10 and TypeScript 6 migration guides and update your environment accordingly. Removed Removed the consulting call to action from the README to streamline the documentation and keep the focus on projec..."
+  },
+  {
+    "category": "release",
+    "title": "capacitor-watch 8.1.16",
+    "link": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.1.16",
+    "guid": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.1.16",
+    "pubDate": "2026-10-15T03:11:13.000Z",
+    "description": "🆕 Changelog Changed Migrated project tooling to ESLint 10 and TypeScript 6 for continued ecosystem compatibility. Removed Removed consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor watch/compare/8.1.15...8.1.16"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-webview-crash 8.1.13",
+    "link": "https://github.com/Cap-go/capacitor-webview-crash/releases/tag/8.1.13",
+    "guid": "https://github.com/Cap-go/capacitor-webview-crash/releases/tag/8.1.13",
+    "pubDate": "2026-10-15T03:01:32.000Z",
+    "description": "🆕 Changelog Changed Migrated internal development tooling to ESLint 10 and TypeScript 6, modernizing linting and type checking pipelines. Contributors may need to reinstall dependencies after pulling these changes. Removed Removed the consulting call to action from the README, keeping the documentation focused on project usage and guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor webview crash/compare/8.1.12...8.1.13"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-webview-guardian 8.1.3",
+    "link": "https://github.com/Cap-go/capacitor-webview-guardian/releases/tag/8.1.3",
+    "guid": "https://github.com/Cap-go/capacitor-webview-guardian/releases/tag/8.1.3",
+    "pubDate": "2026-10-15T03:03:00.000Z",
+    "description": "🆕 Changelog Changed Upgraded the development toolchain to ESLint 10 and TypeScript 6 for improved linting compatibility and modern type checking support. No action is required for package consumers; contributors building from source should ensure their environment supports these versions. Removed the consulting call to action from the README to keep project documentation focused and concise. 🔗 Full Changelog : https://github.com/Cap go/capacitor webview guardian/compare/8.1.2...8.1.3"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-webview-version-checker 8.2.19",
+    "link": "https://github.com/Cap-go/capacitor-webview-version-checker/releases/tag/8.2.19",
+    "guid": "https://github.com/Cap-go/capacitor-webview-version-checker/releases/tag/8.2.19",
+    "pubDate": "2026-10-15T02:51:37.000Z",
+    "description": "🆕 Changelog Changed Modernized development tooling by upgrading to ESLint 10 and TypeScript 6, improving linting and type checking reliability. Removed the consulting call to action from the README to keep documentation focused on project usage. 🔗 Full Changelog : https://github.com/Cap go/capacitor webview version checker/compare/8.2.18...8.2.19"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-wechat 8.0.53",
+    "link": "https://github.com/Cap-go/capacitor-wechat/releases/tag/8.0.53",
+    "guid": "https://github.com/Cap-go/capacitor-wechat/releases/tag/8.0.53",
+    "pubDate": "2026-10-15T02:49:30.000Z",
+    "description": "🆕 Changelog Changed Migrated internal development tooling to ESLint 10 and TypeScript 6. No runtime behavior changes are expected for end users. Updated README documentation by removing the consulting call to action. 🔗 Full Changelog : https://github.com/Cap go/capacitor wechat/compare/8.0.52...8.0.53"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-widget-kit 8.1.14",
+    "link": "https://github.com/Cap-go/capacitor-widget-kit/releases/tag/8.1.14",
+    "guid": "https://github.com/Cap-go/capacitor-widget-kit/releases/tag/8.1.14",
+    "pubDate": "2026-10-15T02:56:18.000Z",
+    "description": "🆕 Changelog Changed Migrated development tooling to ESLint 10 and TypeScript 6. Updated project documentation for accuracy and clarity. Removed Removed the consulting call to action section from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor widget kit/compare/8.1.13...8.1.14"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-wifi 8.5.9",
+    "link": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.5.9",
+    "guid": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.5.9",
+    "pubDate": "2026-10-15T03:00:58.000Z",
+    "description": "🆕 Changelog Added Changed Upgraded development tooling to ESLint 10 and TypeScript 6, bringing linting and type checking in line with the latest ecosystem standards. Contributors may need to update their local toolchain and address any newly reported issues. Removed Removed the consulting call to action from the README, streamlining the documentation and keeping the focus on project guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor wifi/compare/8.5.8...8.5.9"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-youtube-player 8.3.12",
+    "link": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.12",
+    "guid": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.12",
+    "pubDate": "2026-10-15T03:09:44.000Z",
+    "description": "🆕 Changelog Changed Updated the README to remove the consulting call to action, keeping documentation focused on project information. Upgraded internal development tooling to ESLint 10 and TypeScript 6 for improved compatibility and maintainability. 🔗 Full Changelog : https://github.com/Cap go/capacitor youtube player/compare/8.3.11...8.3.12"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-zebra-datawedge 8.2.1",
+    "link": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.1",
+    "guid": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.1",
+    "pubDate": "2026-10-15T03:23:17.000Z",
+    "description": "🆕 Changelog Changed Migrated development dependencies to ESLint 10 and TypeScript 6, updating the project's linting and type checking toolchain. Removed the consulting call to action from the README to streamline project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor zebra datawedge/compare/8.2.0...8.2.1"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-zip 8.2.1",
+    "link": "https://github.com/Cap-go/capacitor-zip/releases/tag/8.2.1",
+    "guid": "https://github.com/Cap-go/capacitor-zip/releases/tag/8.2.1",
+    "pubDate": "2026-10-16T14:31:44.000Z",
+    "description": "🆕 Changelog Changed Improved and performance by switching to 256 KB buffers and streaming I/O, making archive operations faster and more memory efficient. Hardened archive extraction to block unsafe symlink traversal, reducing the risk of files being written outside the intended destination. Security Added symlink safety checks during decompression to mitigate path traversal vulnerabilities when extracting untrusted archives. 🔗 Full Changelog : https://github.com/Cap go/capacitor zip/compar..."
   }
 ]
