@@ -8,6 +8,7 @@ import {
 } from '../../../shared/agentDiscovery'
 import { isGonePath } from '../../../shared/gonePaths'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
+import { trailingSlashRedirectTarget } from '../../../shared/trailingSlashRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { withAbTest } from './abtest'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
@@ -482,6 +483,10 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
   if (toolRouteResponse) return trackAICrawler(request, toolRouteResponse, ctx)
   const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
   if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
+  const trailingSlashTarget = trailingSlashRedirectTarget(pathname)
+  if (trailingSlashTarget) {
+    return trackAICrawler(request, redirectToPath(request, trailingSlashTarget), ctx)
+  }
   const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
   if (assetResponse.status === 404) {
     const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
