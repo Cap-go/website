@@ -5,6 +5,7 @@ export type AppleRejectionStoryTag =
   | '3-1-2'
   | '5-1-1'
   | '5-1-2'
+  | '5-6-4'
   | '2-1'
   | 'metadata'
   | 'endless-review'
@@ -24,6 +25,7 @@ export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string
   '3-1-2': 'Guideline 3.1.2',
   '5-1-1': 'Guideline 5.1.1',
   '5-1-2': 'Guideline 5.1.2',
+  '5-6-4': 'Guideline 5.6.4',
   '2-1': 'Guideline 2.1',
   metadata: 'Metadata and IAP',
   'endless-review': 'Endless review',

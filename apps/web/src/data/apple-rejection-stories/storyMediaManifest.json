@@ -101,5 +101,17 @@
     "alt": "Several App Store notifications at the same minute, each saying a version was rejected",
     "width": 826,
     "height": 1199
+  },
+  "refund-rate-payouts-frozen-5-6-4": {
+    "src": "/apple-rejection-stories/screenshots/refund-rate-payouts-frozen-5-6-4.webp",
+    "alt": "Apple warning email citing guideline 5.6.4 App Quality, with earnings payments paused and app transfers disabled",
+    "width": 1401,
+    "height": 662
+  },
+  "undeletable-subscription-image-metadata": {
+    "src": "/apple-rejection-stories/screenshots/undeletable-subscription-image-metadata.webp",
+    "alt": "App Store Connect subscription page with a Delete Image dialog showing an error, subscription name and image blurred",
+    "width": 1600,
+    "height": 1110
   }
 }
