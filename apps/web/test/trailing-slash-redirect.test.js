@@ -54,6 +54,19 @@ test('worker upgrades ASSETS 307 trailing-slash redirects to 301', async () => {
   expect(response.headers.get('Location')).toBe('https://capgo.app/pricing/')
 })
 
+test('worker does not duplicate query params when ASSETS Location already includes search', async () => {
+  const env = {
+    ASSETS: {
+      fetch() {
+        return Promise.resolve(response307('/pricing/?utm=1'))
+      },
+    },
+  }
+  const response = await worker.fetch(new Request('https://capgo.app/pricing?utm=1', { method: 'HEAD' }), env)
+  expect(response.status).toBe(301)
+  expect(response.headers.get('Location')).toBe('https://capgo.app/pricing/?utm=1')
+})
+
 test('worker preserves existing slashless _redirects responses', async () => {
   const response = await worker.fetch(new Request('https://capgo.app/self-hosted-capgo', { method: 'HEAD' }), mockAssetsEnv)
   expect(response.status).toBe(302)
