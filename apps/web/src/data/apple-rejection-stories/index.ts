@@ -24,6 +24,8 @@ export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
   '5-1-1',
   '5-1-2',
   '5-6-4',
+  '5-6',
+  '2-5-19',
   '2-1',
   'metadata',
   'endless-review',
