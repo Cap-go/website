@@ -22,7 +22,7 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-ffmpeg
+npm install @capgo/capacitor-ffmpeg
 npx cap sync
 ```
 
@@ -46,14 +46,20 @@ console.log(result);
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 
+const progressListener = await CapacitorFFmpeg.addListener('progress', ({ progress }) => {
+  console.log('Encode progress', progress);
+});
+
 const job = await CapacitorFFmpeg.reencodeVideo({
   inputPath: 'path/to/file',
   outputPath: 'path/to/file',
   width: 1080,
   height: 1920,
 });
-// Returns when the native layer accepts the job; listen for completion events for the finished file.
+// Job acceptance only; wait for progress/completion listeners before using the output file.
 console.log(job);
+
+await progressListener.remove();
 ```
 
 ## Example: convertImage

@@ -56,7 +56,10 @@ if (userGrantedAnalyticsConsent) {
 ```typescript
 import { ContentsquarePlugin, CurrencyCode } from '@capgo/capacitor-contentsquare';
 
-await ContentsquarePlugin.optIn();
+const consentGranted = await requestAnalyticsConsent(); // your CMP / ATT flow
+if (consentGranted) {
+  await ContentsquarePlugin.optIn();
+}
 
 await ContentsquarePlugin.sendScreenName('Home');
 
