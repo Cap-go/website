@@ -37,22 +37,39 @@ import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
-const { isAvailable } = await NativeBiometric.isAvailable();
-if (!isAvailable) {
-  return fallbackToPasscode();
-}
+async function biometricLogin() {
+  const { isAvailable } = await NativeBiometric.isAvailable();
+  if (!isAvailable) {
+    return fallbackToPasscode();
+  }
 
-try {
-  const { username, password } = await NativeBiometric.getSecureCredentials({
-    server: 'https://api.example.com',
-  });
-  await signIn(username, password);
-} catch {
-  return fallbackToPasscode();
+  try {
+    const { username, password } = await NativeBiometric.getSecureCredentials({
+      server: 'https://api.example.com',
+    });
+    await signIn(username, password);
+  } catch {
+    return fallbackToPasscode();
+  }
 }
 ```
 
 Store secrets first with `setCredentials` and `accessControl` when you need biometric protection on read.
+
+## Example: unlock with `verifyIdentity`
+
+`getSecureCredentials()` already prompts when credentials use biometric `accessControl`. Use `verifyIdentity()` for other gated actions, and route cancellation or lockout to your passcode flow.
+
+```typescript
+try {
+  await NativeBiometric.verifyIdentity({
+    reason: 'Unlock your account',
+    title: 'Biometric login',
+  });
+} catch {
+  return fallbackToPasscode();
+}
+```
 
 ## Example: logout clears the vault entry
 
