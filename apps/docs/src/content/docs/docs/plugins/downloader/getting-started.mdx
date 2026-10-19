@@ -32,6 +32,54 @@ bunx cap sync
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 ```
 
+## Quick start
+
+Download to a known folder, listen for progress, and resume after app restarts when supported.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const progressListener = await CapacitorDownloader.addListener('downloadProgress', (event) => {
+  if (event.id === 'offline-pack') {
+    console.log(event.progress);
+  }
+});
+
+const task = await CapacitorDownloader.download({
+  id: 'offline-pack',
+  url: 'https://cdn.example.com/large-pack.zip',
+  destination: 'downloads/offline-pack.zip',
+});
+```
+
+## Example: pause and resume
+
+```typescript
+await CapacitorDownloader.pause({ id: 'offline-pack' });
+await CapacitorDownloader.resume({ id: 'offline-pack' });
+```
+
+## Example: inspect finished file
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { Directory, Filesystem } from '@capacitor/filesystem';
+
+const relativePath = 'downloads/offline-pack.zip';
+const path =
+  Capacitor.getPlatform() === 'ios'
+    ? (await Filesystem.getUri({ directory: Directory.Documents, path: relativePath })).uri
+    : relativePath;
+
+const info = await CapacitorDownloader.getFileInfo({ path });
+```
+
+## Common pitfalls
+
+- **Storage destination**: pick a `destination` your app can read on each platform.
+- **Background**: downloads run on iOS and Android in the background. On Web, `download()` is not implemented; use a browser download flow instead.
+- **Status**: use `checkStatus` while the app process is still alive. On iOS, task IDs are not restored after relaunch.
+
 ## API Overview
 
 ### `download`

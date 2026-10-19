@@ -32,6 +32,62 @@ bunx cap sync
 import { MediaSession } from '@capgo/capacitor-media-session';
 ```
 
+## Quick start
+
+Publish metadata and playback state when your player starts.
+
+```typescript
+import { MediaSession } from '@capgo/capacitor-media-session';
+
+await MediaSession.setMetadata({
+  title: 'Episode 12',
+  artist: 'Capgo Podcast',
+  album: 'Ship faster',
+  artwork: [{ src: 'https://cdn.example.com/artwork.png', sizes: '512x512', type: 'image/png' }],
+});
+
+await MediaSession.setPlaybackState({ playbackState: 'playing' });
+
+await MediaSession.setPositionState({
+  duration: 3600,
+  position: 120,
+  playbackRate: 1,
+});
+```
+
+## Example: handle lock screen controls
+
+```typescript
+await MediaSession.setActionHandler({ action: 'play' }, () => {
+  audio.play();
+});
+
+await MediaSession.setActionHandler({ action: 'pause' }, () => {
+  audio.pause();
+});
+
+await MediaSession.setActionHandler({ action: 'seekto' }, (details) => {
+  if (details.seekTime != null) {
+    audio.currentTime = details.seekTime;
+  }
+});
+```
+
+Pass `null` as the handler to unregister an action.
+
+## Example: pause state when buffering
+
+```typescript
+await MediaSession.setPlaybackState({ playbackState: 'paused' });
+// resume with 'playing' when your buffer is ready
+```
+
+## Common pitfalls
+
+- **Keep position fresh**: call `setPositionState` as playback advances or scrubbing will feel broken on Android.
+- **Artwork URLs**: use HTTPS assets reachable from the device, large images slow down lock screen updates.
+- **Handler lifetime**: register handlers once at player setup, not on every track change.
+
 ## API Overview
 
 ### `setMetadata`
