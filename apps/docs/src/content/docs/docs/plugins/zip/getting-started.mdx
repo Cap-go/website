@@ -32,6 +32,36 @@ bunx cap sync
 import { CapacitorZip } from '@capgo/capacitor-zip';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+
+const listener = await CapacitorZip.addListener('progress', (event) => {
+  updateBar(event.loaded, event.total);
+});
+await CapacitorZip.zip({
+  source: 'file:///data/user/0/.../export/',
+  destination: 'file:///data/user/0/.../export.zip',
+});
+await listener.remove();
+```
+
+## Example: unpack an update bundle
+
+```typescript
+await CapacitorZip.unzip({
+  source: downloadedZipUri,
+  destination: unpackDirUri,
+});
+```
+
+## Common pitfalls
+
+- **Web zip**: `zip()` throws on web, offload compression to native or server.
+- **Android passwords**: AES passwords are Android only today, test archives on device.
+- **URI schemes**: use absolute `file://` paths native code can read.
+
 ## API Overview
 
 ### `zip`

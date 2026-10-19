@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,46 @@ bunx cap sync
 ```typescript
 import { CapacitorWechat } from '@capgo/capacitor-wechat';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
+
+await CapacitorWechat.initialize({
+  appId: 'wx1234567890',
+  universalLink: 'https://example.com/app/'
+});
+```
+
+## Example: isInstalled
+
+```typescript
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
+
+const { installed } = await CapacitorWechat.isInstalled();
+if (installed) {
+  console.log('WeChat is installed');
+}
+```
+
+## Example: auth
+
+```typescript
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
+
+const { code, state } = await CapacitorWechat.auth({
+  scope: 'snsapi_userinfo',
+  state: 'my_state'
+});
+// Use code to get access token from your server
+```
+
+## Common pitfalls
+
+- **Initialize once**: run setup during app bootstrap.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

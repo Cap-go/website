@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Speech Synthesis Plugin for synthesizing speech from text."
+  tagline: "Speak text aloud or export speech to a file with voice, rate, pitch, and language controls."
   actions:
     - text: Get started
       link: /docs/plugins/speech-synthesis/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Speech Synthesis Plugin for synthesizing speech from text.
+`@capgo/capacitor-speech-synthesis` drives the platform text to speech engine for accessibility, language learning, and hands free navigation. Pick a voice, tune rate and pitch, pause or resume long passages, and render audio files on iOS and Android for offline playback.
+
+Call `initialize()` on iOS for faster first speak, and `activateAudioSession()` when you need a specific iOS audio category.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | AVSpeechSynthesizer, audio session helpers |
+| Android | Yes | Android TTS engine |
+| Web | Partial | Browser speech synthesis where available |
 
 ## Core Capabilities
 

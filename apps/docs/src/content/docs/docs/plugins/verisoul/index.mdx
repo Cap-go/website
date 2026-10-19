@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Collect Verisoul fraud-prevention sessions from iOS and Android."
+  tagline: "Collect Verisoul native fraud-prevention sessions from Capacitor apps on iOS and Android"
   actions:
     - text: Get started
       link: /docs/plugins/verisoul/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-verisoul` wraps the Verisoul native iOS and Android SDKs for Capacitor apps. Use it to initialize Verisoul early, collect native device and behavioral signals, retrieve a session ID, and send that session ID to your backend for Verisoul risk assessment.
+Collect Verisoul native fraud-prevention sessions from Capacitor apps on iOS and Android
+
+Start with `configure()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

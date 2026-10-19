@@ -18,6 +18,37 @@ bunx cap sync
 import { StripeTerminal } from '@capgo/capacitor-stripe-terminal';
 ```
 
+## Quick start
+
+```typescript
+import { StripeTerminal } from '@capgo/capacitor-stripe-terminal';
+
+await StripeTerminal.initialize({ isTest: true });
+```
+
+## Example: discoverReaders
+
+```typescript
+import { StripeTerminal, TerminalConnectTypes } from '@capgo/capacitor-stripe-terminal';
+
+const result = await StripeTerminal.discoverReaders({ type: TerminalConnectTypes.Simulated });
+// The result holds sensitive values: use it without logging it.
+```
+
+## Example: setConnectionToken
+
+```typescript
+import { StripeTerminal } from '@capgo/capacitor-stripe-terminal';
+
+await StripeTerminal.setConnectionToken({ token: 'token-123' });
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
 ## Backend requirement
 
 Stripe Terminal requires a secure backend endpoint that creates connection tokens. Pass that URL to `initialize()`.
