@@ -32,6 +32,66 @@ bunx cap sync
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 ```
 
+## Quick start: gate a login with biometrics
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+async function biometricLogin() {
+  const { isAvailable } = await NativeBiometric.isAvailable();
+  if (!isAvailable) {
+    return fallbackToPasscode();
+  }
+
+  try {
+    const { username, password } = await NativeBiometric.getSecureCredentials({
+      server: 'https://api.example.com',
+    });
+    await signIn(username, password);
+  } catch {
+    return fallbackToPasscode();
+  }
+}
+```
+
+Store secrets first with `setCredentials` and `accessControl` when you need biometric protection on read.
+
+## Example: unlock with `verifyIdentity`
+
+`getSecureCredentials()` already prompts when credentials use biometric `accessControl`. Use `verifyIdentity()` for other gated actions, and route cancellation or lockout to your passcode flow.
+
+```typescript
+try {
+  await NativeBiometric.verifyIdentity({
+    reason: 'Unlock your account',
+    title: 'Biometric login',
+  });
+} catch {
+  return fallbackToPasscode();
+}
+```
+
+## Example: logout clears the vault entry
+
+```typescript
+await NativeBiometric.deleteCredentials({ server: 'https://api.example.com' });
+```
+
+## Example: react when biometry enrollment changes
+
+```typescript
+await NativeBiometric.addListener('biometryChange', async () => {
+  const { isAvailable } = await NativeBiometric.isAvailable();
+  if (!isAvailable) showPasscodeUi();
+});
+```
+
+## Common pitfalls
+
+- **`getSecureCredentials` requires prior `accessControl`**: use biometric access flags when saving, or use `getCredentials` without an extra prompt.
+- **User lockout**: handle `BiometricAuthError.USER_LOCKOUT` and `BiometricAuthError.USER_TEMPORARY_LOCKOUT` from `verifyIdentity` with a cooldown UI.
+- **Simulator**: enroll a fingerprint or face in the simulator before testing.
+
 ## API Overview
 
 ### `isAvailable`

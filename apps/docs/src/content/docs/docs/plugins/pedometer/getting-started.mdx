@@ -32,6 +32,34 @@ bunx cap sync
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+await CapacitorPedometer.requestPermissions();
+await CapacitorPedometer.startMeasurementUpdates();
+
+await CapacitorPedometer.addListener('measurement', (event) => {
+  updateStepCount(event.numberOfSteps);
+});
+```
+
+## Example: iOS history query
+
+```typescript
+const sample = await CapacitorPedometer.getMeasurement({
+  startDate: start.toISOString(),
+  endDate: end.toISOString(),
+});
+```
+
+## Common pitfalls
+
+- **Permissions**: motion on iOS, `ACTIVITY_RECOGNITION` on Android.
+- **Web**: not available, hide step UI on web builds.
+- **Stop updates**: call `stopMeasurementUpdates()` to save battery.
+
 ## API Overview
 
 ### `getMeasurement`

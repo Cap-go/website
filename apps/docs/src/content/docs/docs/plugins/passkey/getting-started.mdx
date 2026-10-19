@@ -93,6 +93,24 @@ The hook does not publish your website trust files for you. You still need to ho
 - `https://your-domain/.well-known/apple-app-site-association`
 - `https://your-domain/.well-known/assetlinks.json`
 
+## Example: direct JSON API (no shim)
+
+When your backend already returns WebAuthn JSON, call the plugin methods directly.
+
+```ts
+import { CapacitorPasskey } from '@capgo/capacitor-passkey';
+
+const registration = await CapacitorPasskey.createCredential({
+  publicKey: registrationOptionsFromServer,
+});
+
+const assertion = await CapacitorPasskey.getCredential({
+  publicKey: requestOptionsFromServer,
+});
+```
+
+Use `isSupported()` before showing passkey UI on older devices.
+
 ## Platform guides
 
 <CardGrid>

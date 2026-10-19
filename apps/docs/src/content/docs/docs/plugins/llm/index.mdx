@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-LLM Plugin interface for interacting with on-device language models.
+`@capgo/capacitor-llm` runs **on device** chat models without sending prompts to your server. iOS can use Apple Intelligence or LiteRT bundles. Android targets Gemini Nano where available or LiteRT `.litertlm` models. Web uses Gemma through MediaPipe GenAI (CDN runtime, local model file).
+
+## Platform support
+
+| Platform | Backends |
+| --- | --- |
+| iOS | Apple Intelligence, custom `.litertlm` |
+| Android | Gemini Nano, LiteRT, legacy MediaPipe `.task` fallback |
+| Web | Gemma via `@mediapipe/tasks-genai` |
 
 ## Core Capabilities
 

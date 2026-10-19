@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor plugin for printing documents, HTML, PDFs, images and web views.
+`@capgo/capacitor-printer` opens the native print UI for **HTML, PDF, images, base64 payloads, files, iframes, and the current WebView**. Use it for receipts, boarding passes, reports, and label printing from field apps without leaving Capacitor.
+
+## Platform support
+
+| Platform | APIs |
+| --- | --- |
+| iOS | `UIPrintInteractionController` |
+| Android | `PrintManager` |
+| Web | Browser print dialog (`printBase64` and `printHtml` use blob URLs; `printWebView` prints the page directly) |
+
+Prefer `printFile` for large assets. `printBase64` decodes in memory and can crash on files above about 5 MB (documented on the method).
 
 ## Core Capabilities
 
