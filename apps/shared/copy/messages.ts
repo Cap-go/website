@@ -57,7 +57,7 @@ const messages = {
   about_facts_communication: 'Communication',
   about_facts_communication_value: 'Discord community, support@capgo.app, and the contact page',
   about_facts_company_name: 'Company name',
-  about_facts_company_name_value: 'Capgo (legal entity: Digital Shift OÜ)',
+  about_facts_company_name_value: 'Capgo (legal entities: Digital Shift OÜ, Estonia; CodepushGo, LLC, Delaware, USA)',
   about_facts_competitors: 'Common alternatives',
   about_facts_competitors_value: 'Ionic Appflow (winding down), retired Microsoft CodePush / App Center Cordova-Capacitor path, and self-hosted-only stacks',
   about_facts_contract: 'Contract terms',
@@ -71,7 +71,7 @@ const messages = {
   about_facts_founder: 'Founder',
   about_facts_founder_value: 'Martin Donadieu',
   about_facts_headquarters: 'Headquarters',
-  about_facts_headquarters_value: 'Sepapaja 6, 15551 Tallinn, Estonia (legal imprint). Remote-first team with offsites in Madeira.',
+  about_facts_headquarters_value: 'Sepapaja 6, 15551 Tallinn, Estonia (legal imprint); US entity at 131 Continental Dr, Suite 305, Newark, DE 19713. Remote-first team with offsites in Madeira.',
   about_facts_plugins: 'Plugins maintained',
   about_facts_pricing: 'Pricing',
   about_facts_pricing_fallback: 'Plans from $12/month billed yearly, up to Enterprise. 14-day free trial, no credit card. See the pricing page for current rates.',
@@ -127,7 +127,7 @@ const messages = {
   about_team_connect_title: 'Connect with Capgo',
   about_team_github: 'Capgo on GitHub',
   about_team_intro:
-    'Capgo is operated by Digital Shift OÜ and founded by Martin Donadieu in Tallinn, Estonia. The team is intentionally compact: the same people improving native update behavior, product flows, and enterprise onboarding also talk to customers.',
+    'Capgo is operated by Digital Shift OÜ (Estonia) and its US entity CodepushGo, LLC (Delaware), and was founded by Martin Donadieu in Tallinn, Estonia. The team is intentionally compact: the same people improving native update behavior, product flows, and enterprise onboarding also talk to customers.',
   about_team_linkedin: 'Capgo on LinkedIn',
   about_team_martin_x: 'Martin on X',
   about_team_title: 'The team behind Capgo',
@@ -1152,7 +1152,7 @@ const messages = {
   companies_logo_stat_uptime_value: '99.9%',
   company: 'Company',
   company_definition:
-    '<strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Disclaimer) refers to Digital Shift OU, 6 sepapaja, 15510 Tallinn.',
+    '<strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Disclaimer) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
   company_name: 'Company name',
   company_no_liability:
     'In no event shall the Company be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. The Company reserves the right to make additions, deletions, or modifications to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of the <a href="https://www.termsfeed.com/blog/sample-disclaimer-template/" target="_blank" rel="noopener noreferrer"> Disclaimer Template. </a>',
@@ -1232,7 +1232,7 @@ const messages = {
   copy_page: 'Copy page',
   copy_page_as_markdown: 'Copy page as Markdown for LLMs',
   copy_page_options: 'Copy page options',
-  copyright_notice: 'CAPGO, Digital shift OU. ALL RIGHTS RESERVED.',
+  copyright_notice: 'CAPGO, Digital Shift OÜ and CodepushGo, LLC. ALL RIGHTS RESERVED.',
   copyright_permission:
     'If You wish to use copyrighted material from the Service for your own purposes that go beyond fair use, You must obtain permission from the copyright owner.',
   cordova_and_capacitorjs_expert: 'Cordova & CapacitorJS expert',
@@ -2014,10 +2014,10 @@ const messages = {
   eula_definition_application: "**Application** means the software program provided by the Company downloaded by You through an Application Store's account to a Device, named $1",
   eula_definition_application_store:
     '**Application Store** means the digital distribution service operated and developed by Apple Inc. (Apple App Store) or Google Inc. (Google Play Store) by which the Application has been downloaded to your Device.',
-  eula_definition_company: '**Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Digital shift OU, 6 sepapaja 15510 Tallinn.',
+  eula_definition_company: '**Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
   eula_definition_content:
     '**Content** refers to content such as text, images, or other information that can be posted, uploaded, linked to or otherwise made available by You, regardless of the form of that content.',
-  eula_definition_country: '**Country** refers to: Estonia',
+  eula_definition_country: '**Country** refers to: the State of Delaware, United States, when the Company is CodepushGo, LLC; Estonia when the Company is Digital Shift OÜ',
   eula_definition_device: '**Device** means any device that can access the Application such as a computer, a cellphone or a digital tablet.',
   eula_definition_family_sharing:
     "**Family Sharing / Family Group** permits You to share applications downloaded through the Application Store with other family members by allowing them to view and download each others' eligible Applications to their associated Devices.",
@@ -3225,11 +3225,11 @@ const messages = {
   privacy_definition_application: '**Application** means the software program provided by the Company downloaded by You on any electronic device, named $1',
   privacy_definition_business:
     "**Business**, for the purpose of the CCPA (California Consumer Privacy Act), refers to the Company as the legal entity that collects Consumers' personal information and determines the purposes and means of the processing of Consumers' personal information, or on behalf of which such information is collected and that alone, or jointly with others, determines the purposes and means of the processing of consumers' personal information, that does business in the State of California.",
-  privacy_definition_company: '**Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Digital shift OU, 6 sepapaja 15510 Tallinn.',
+  privacy_definition_company: '**Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
   privacy_definition_company_gdpr: 'For the purpose of the GDPR, the Company is the Data Controller.',
   privacy_definition_consumer:
     '**Consumer**, for the purpose of the CCPA (California Consumer Privacy Act), means a natural person who is a California resident. A resident, as defined in the law, includes (1) every individual who is in the USA for other than a temporary or transitory purpose, and (2) every individual who is domiciled in the USA who is outside the USA for a temporary or transitory purpose.',
-  privacy_definition_country: '**Country** refers to: Estonia',
+  privacy_definition_country: '**Country** refers to: the State of Delaware, United States, when the Company is CodepushGo, LLC; Estonia when the Company is Digital Shift OÜ',
   privacy_definition_data_controller:
     '**Data Controller**, for the purposes of the GDPR (General Data Protection Regulation), refers to the Company as the legal person which alone or jointly with others determines the purposes and means of the processing of Personal Data.',
   privacy_definition_device: '**Device** means any device that can access the Service such as a computer, a cellphone or a digital tablet.',
@@ -5895,8 +5895,8 @@ const messages = {
   tos_definition_application: 'Application means the software program provided by the Company downloaded by You on any electronic device, named $1',
   tos_definition_application_store:
     'Application Store means the digital distribution service operated and developed by Apple Inc. (Apple App Store) or Google Inc. (Google Play Store) in which the Application has been downloaded.',
-  tos_definition_company: 'Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Digital shift OU, Sepapaja 6, 15551 , Tallinn, Estonia.',
-  tos_definition_country: 'Country refers to: Estonia',
+  tos_definition_company: 'Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
+  tos_definition_country: 'Country refers to: the State of Delaware, United States, when the Company is CodepushGo, LLC; Estonia when the Company is Digital Shift OÜ',
   tos_definition_device: 'Device means any device that can access the Service such as a computer, a cellphone or a digital tablet.',
   tos_definition_feedback: 'Feedback means feedback, innovations or suggestions sent by You regarding the attributes, performance or features of our Service.',
   tos_definition_free_trial: 'Free Trial refers to a limited period of time that may be free when purchasing a Subscription.',
