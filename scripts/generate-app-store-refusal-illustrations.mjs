@@ -1,13 +1,13 @@
 /**
  * One-off generator for fallback SVG illustrations (Capgo palette, iconographic).
- * Run: node scripts/generate-apple-rejection-illustrations.mjs
+ * Run: node scripts/generate-app-store-refusal-illustrations.mjs
  */
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const outDir = join(__dirname, '../apps/web/public/apple-rejection-stories/illustrations')
+const outDir = join(__dirname, '../apps/web/public/app-store-refusal-horror-story/illustrations')
 
 const ACCENT = '#44BCFF'
 const INK = '#111827'

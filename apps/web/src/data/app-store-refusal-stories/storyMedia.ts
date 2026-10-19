@@ -3,10 +3,10 @@ import storyMediaManifest from './storyMediaManifest.json'
 /**
  * Redacted source screenshots (WebP) keyed by story id.
  * Null entries in the manifest use SVG fallback illustrations on cards.
- * WebP files live under apps/web/public/apple-rejection-stories/screenshots/
+ * WebP files live under apps/web/public/app-store-refusal-horror-story/screenshots/
  */
 export type AppleRejectionStoryMedia = {
-  /** Path under site root, e.g. /apple-rejection-stories/screenshots/story-id.webp */
+  /** Path under site root, e.g. /app-store-refusal-horror-story/screenshots/story-id.webp */
   src: string
   alt: string
   width: number

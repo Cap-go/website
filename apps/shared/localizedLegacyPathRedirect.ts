@@ -1,3 +1,4 @@
+import { resolveAppleRejectionStoriesPathRedirect } from './appleRejectionStoriesPathRedirect'
 import { resolveLegacyPathRedirect } from './legacyPathRedirects'
 
 export const NON_DEFAULT_LOCALE_CODES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
@@ -20,6 +21,8 @@ export function splitLocalePath(pathname: string): { localePrefix: string; path:
 /** Resolve legacy redirect target with locale prefix re-applied (web worker behavior). */
 export function resolveLocalizedLegacyRedirectPath(pathname: string): string | null {
   const { localePrefix, path } = splitLocalePath(pathname)
+  const appleRejectionTarget = resolveAppleRejectionStoriesPathRedirect(path)
+  if (appleRejectionTarget) return `${localePrefix}${appleRejectionTarget}`
   const legacyTarget = resolveLegacyPathRedirect(path)
   if (!legacyTarget) return null
   return `${localePrefix}${legacyTarget}`

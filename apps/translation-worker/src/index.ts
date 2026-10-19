@@ -1,6 +1,7 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
 import { isGonePath } from '../../shared/gonePaths'
+import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
@@ -362,6 +363,8 @@ function localizedAbsoluteUrl(requestUrl: URL, locale: string, basePath: string)
 }
 
 function rewriteRedirectPath(pathname: string): string {
+  const appleRejectionTarget = resolveAppleRejectionStoriesPathRedirect(pathname)
+  if (appleRejectionTarget) return appleRejectionTarget
   const legacyTarget = resolveLegacyPathRedirect(pathname)
   if (legacyTarget) return legacyTarget
   if (pathname === '/docs/cli/overview' || pathname === '/docs/cli/overview/') return '/docs/cli/'

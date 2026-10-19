@@ -9,6 +9,7 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/capawesome': '/alternatives/capawesome/',
   '/alternatives/capwesome': '/alternatives/capawesome/',
   '/ionic-appflow': '/alternatives/ionic-appflow/',
+  '/apple-rejection-stories': '/app-store-refusal-horror-story/',
   '/appflow': '/alternatives/ionic-appflow/',
   '/alternatives/appflow': '/alternatives/ionic-appflow/',
   '/expo': '/alternatives/expo/',
