@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-firebase-app
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,29 @@ bunx cap sync
 ```typescript
 import { FirebaseApp } from '@capgo/capacitor-firebase-app';
 ```
+
+## Quick start
+
+```typescript
+import { FirebaseApp } from '@capgo/capacitor-firebase-app';
+
+const result = await FirebaseApp.getName();
+console.log(result);
+```
+
+## Example: getOptions
+
+```typescript
+import { FirebaseApp } from '@capgo/capacitor-firebase-app';
+
+const result = await FirebaseApp.getOptions();
+// The result holds sensitive values: use it without logging it.
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

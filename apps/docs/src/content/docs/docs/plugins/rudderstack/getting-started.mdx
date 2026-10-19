@@ -32,6 +32,34 @@ bunx cap sync
 import { nativePlugin } from '@capgo/capacitor-rudderstack';
 ```
 
+## Quick start
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.initialize({
+  writeKey: 'YOUR_WRITE_KEY',
+  dataPlaneUrl: 'https://your.dataplane.rudderstack.com',
+});
+await nativePlugin.identify({ userId: 'user_123', traits: { plan: 'pro' } });
+await nativePlugin.track({ event: 'Signed Up', properties: { source: 'mobile' } });
+```
+
+## Example: screen tracking
+
+```typescript
+await nativePlugin.screen({
+  screen: 'Checkout',
+  properties: { step: 'payment' },
+});
+```
+
+## Common pitfalls
+
+- **Initialize once**: repeated `initialize()` calls can duplicate SDK state, gate behind your app bootstrap.
+- **Flush before background**: call `flush()` when iOS or Android may suspend your process mid upload.
+- **Advertising IDs**: opt in helpers only when your privacy policy covers IDFA or GAID collection.
+
 ## API Overview
 
 ### `initialize`

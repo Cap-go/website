@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-date-picker
-npx cap sync
+bun add @capgo/capacitor-date-picker
+bunx cap sync
 ```
 
 ## Import
@@ -31,6 +31,12 @@ npx cap sync
 ```typescript
 import { DatePicker } from '@capgo/capacitor-date-picker';
 ```
+
+## Common pitfalls
+
+- **Hide between presents**: call `hide()` if users can open another picker while one is visible.
+- **ISO strings**: pass `date`, `min`, and `max` in the documented string format for your `format` option.
+- **Range validation**: `presentRange()` should enforce business rules server side too, users can pick edge dates offline.
 
 ## Pick A Date
 
