@@ -24,7 +24,7 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running:
 
 ```bash
-npm install @capgo/capacitor-asset-cache
+bun add @capgo/capacitor-asset-cache
 npx cap sync
 ```
 
@@ -33,6 +33,19 @@ npx cap sync
 ```typescript
 import { AssetCache } from '@capgo/capacitor-asset-cache';
 ```
+
+## Quick start
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-asset-cache';
+
+await nativePlugin.cancel();
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Configure A CDN
 
