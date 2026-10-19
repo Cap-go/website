@@ -32,6 +32,31 @@ bunx cap sync
 import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 ```
 
+## Quick start
+
+After login succeeds, offer to save credentials the OS can autofill later.
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+await SavePassword.promptDialog({
+  username: email,
+  password,
+});
+```
+
+## Example: read a saved password
+
+```typescript
+const { username, password } = await SavePassword.readPassword();
+```
+
+## Common pitfalls
+
+- **Call timing**: prompt only after the user authenticated successfully, not on every keystroke.
+- **Web**: use the browser password manager instead, this plugin is native only.
+- **iOS credential providers**: behavior on iOS 26.2+ follows the user chosen password manager.
+
 ## API Overview
 
 ### `promptDialog`

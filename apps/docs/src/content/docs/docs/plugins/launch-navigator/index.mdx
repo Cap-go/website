@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Main plugin interface."
+  tagline: "Open Apple Maps, Google Maps, or other navigation apps with coordinates from your Capacitor app."
   actions:
     - text: Get started
       link: /docs/plugins/launch-navigator/getting-started/
@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-Main plugin interface.
+`@capgo/capacitor-launch-navigator` deep links into installed navigation apps with latitude and longitude (no street address strings). Pair with `@capgo/capacitor-nativegeocoder` when users type addresses. Build your own app picker with `getAvailableApps()` and cached icons.
+
+## Platform support
+
+| Platform | Behavior |
+| --- | --- |
+| iOS | MapKit and third party map apps |
+| Android | Intents to installed navigators |
+| Web | Opens a maps URL in the browser |
 
 ## Core Capabilities
 
