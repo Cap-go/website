@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,45 @@ bunx cap sync
 ```typescript
 import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
 ```
+
+## Quick start
+
+```typescript
+import { plugin } from '@capgo/capacitor-firebase-firestore';
+
+const result = await plugin.addDocument({
+  reference: 'users',
+  data: {},
+});
+console.log(result);
+```
+
+## Example: addCollectionGroupSnapshotListener
+
+```typescript
+import { plugin } from '@capgo/capacitor-firebase-firestore';
+
+const result = await plugin.addCollectionGroupSnapshotListener({ reference: 'reference' }, (event, error) => {
+  console.log(event);
+});
+console.log(result);
+```
+
+## Example: addCollectionSnapshotListener
+
+```typescript
+import { plugin } from '@capgo/capacitor-firebase-firestore';
+
+const result = await plugin.addCollectionSnapshotListener({ reference: 'reference' }, (event, error) => {
+  console.log(event);
+});
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

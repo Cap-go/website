@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,39 @@ bunx cap sync
 ```typescript
 import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
 ```
+
+## Quick start
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+const result = await FirebaseFunctions.callByName({ name: 'myFunction' });
+console.log(result);
+```
+
+## Example: callByUrl
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+const result = await FirebaseFunctions.callByUrl({
+  url: 'https://us-central1-my-project.cloudfunctions.net/myFunction',
+});
+console.log(result);
+```
+
+## Example: useEmulator
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+await FirebaseFunctions.useEmulator({ host: "127.0.0.1" });
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

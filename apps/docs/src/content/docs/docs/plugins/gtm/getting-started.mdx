@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,37 @@ bunx cap sync
 ```typescript
 import { GoogleTagManager } from '@capgo/capacitor-gtm';
 ```
+
+## Quick start
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+await GoogleTagManager.push({
+  event: 'purchase',
+  parameters: {
+    value: 99.99,
+    currency: 'USD'
+  }
+});
+```
+
+## Example: setUserProperty
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+await GoogleTagManager.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+```
+
+## Common pitfalls
+
+- **Initialize once**: run setup during app bootstrap.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 
