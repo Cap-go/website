@@ -32,6 +32,38 @@ bunx cap sync
 import { CapgoLLM } from '@capgo/capacitor-llm';
 ```
 
+## Quick start
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+
+const { id: chatId } = await CapgoLLM.createChat();
+await CapgoLLM.sendMessage({ chatId, message: 'Summarize this error log.' });
+```
+
+Listen for `textFromAi`, `aiFinished`, and `generationError` on the chat session as documented in the plugin README.
+
+## Example: readiness before UI
+
+```typescript
+const { readiness } = await CapgoLLM.getReadiness();
+if (readiness !== 'ready') {
+  showModelDownloadScreen();
+}
+```
+
+## Example: download a custom model
+
+```typescript
+await CapgoLLM.downloadModel({ modelUrl: 'https://cdn.example.com/model.litertlm' });
+```
+
+## Common pitfalls
+
+- **Web offline**: MediaPipe GenAI loads from a CDN, cache the runtime and model for offline demos.
+- **Android Gemini Nano**: not on every device, handle fallback models.
+- **Streaming**: attach listeners before `sendMessage` so you do not miss tokens.
+
 ## API Overview
 
 ### `createChat`

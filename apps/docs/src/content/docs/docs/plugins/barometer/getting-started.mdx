@@ -32,6 +32,27 @@ bunx cap sync
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+await CapacitorBarometer.startMeasurementUpdates();
+await CapacitorBarometer.addListener('measurement', (event) => {
+  console.log('hPa', event.pressure);
+});
+```
+
+## Example: single reading
+
+Call `startMeasurementUpdates()` first. `getMeasurement()` returns `0` until the first sensor event arrives.
+
+## Common pitfalls
+
+- **Web**: treat as unavailable, `isAvailable()` is false.
+- **iOS relative altitude**: only meaningful while updates run.
+- **Battery**: call `stopMeasurementUpdates()` when done.
+
 ## API Overview
 
 ### `getMeasurement`

@@ -32,6 +32,27 @@ bunx cap sync
 import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+await CapacitorAccelerometer.startMeasurementUpdates();
+await CapacitorAccelerometer.addListener('measurement', ({ x, y, z }) => {
+  detectShake(x, y, z);
+});
+```
+
+## Example: web permission
+
+On web, request motion access through `requestPermissions()` before expecting non zero samples.
+
+## Common pitfalls
+
+- **Web zeros**: before the first motion event, `getMeasurement()` returns zeros.
+- **Stop streaming**: `stopMeasurementUpdates()` when leaving the screen.
+- **Units**: use the plugin documented axis convention for your game math.
+
 ## API Overview
 
 ### `getMeasurement`

@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-Capacitor plugin contract for working with the device barometer sensor.
+`@capgo/capacitor-barometer` reads atmospheric pressure for weather UX, altitude change estimates on iOS, and sensor demos. Stream live hPa samples or poll the latest value after starting updates.
+
+## Platform support
+
+| Platform | Support |
+| --- | --- |
+| iOS | Core Motion altimeter |
+| Android | `Sensor.TYPE_PRESSURE` |
+| Web | `isAvailable()` is false |
 
 ## Core Capabilities
 
