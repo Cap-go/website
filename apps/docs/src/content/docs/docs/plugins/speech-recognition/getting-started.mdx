@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-speech-recognition
-bunx cap sync
+npm install @capgo/capacitor-speech-recognition
+npx cap sync
 ```
 
 ## Import
@@ -56,7 +56,7 @@ await partialListener.remove();
 
 - **Cleanup**: remove listeners when leaving the screen.
 - **Locales**: use BCP 47 tags matching your UI.
-- **Web**: guard unavailable browsers.
+- **Web**: not supported; use a browser speech API separately if you need Web-only dictation.
 
 ## API Overview
 
