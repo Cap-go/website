@@ -13,5 +13,5 @@ export const story: AppleRejectionStory = {
   resolution:
     'The developer now inspects the strings inside every release archive before uploading. Whether that specific build was later approved was not stated.',
   lesson:
-    'Keep test only code out of release builds at compile time, for example with DEBUG flags, rather than behind a runtime check. Check what actually ships in the archived binary, and list any switch that stays in the App Review notes.',
+    'Keep test-only code out of release builds at compile time, for example with DEBUG flags, rather than behind a runtime check. Check what actually ships in the archived binary, and list any switch that stays in the App Review notes.',
 }
