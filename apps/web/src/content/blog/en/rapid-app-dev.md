@@ -216,7 +216,7 @@ That matters because users don't care whether a bug is in your JavaScript bundle
 
 > The fastest team isn't the one that ships V1 first. It's the one that can safely change production the day after launch.
 
-For Capacitor apps, that usually means thinking beyond app store submissions. Teams increasingly add a live update layer so they can ship JavaScript, CSS, copy, config, and asset changes without waiting on a full store review for every non-native fix. One option in that category is Capgo, which provides live updates, release channels, rollback controls, and deployment visibility for Capacitor apps. If you're mapping the supporting stack around delivery workflows, this roundup of [developer experience tools for app teams](https://capgo.app/blog/developer-experience-tools/) is a practical place to compare what belongs in the pipeline.
+For Capacitor apps, that usually means thinking beyond app store submissions. Teams increasingly add a live update layer so they can ship JavaScript, CSS, copy, config, and asset changes without waiting on a full store review for every non-native fix. One option in that category is Capgo, which provides live updates, release channels, rollback controls, and deployment visibility for Capacitor apps. If you're mapping the supporting stack around delivery workflows, this roundup of [developer experience tools for app teams](https://capgo.app/blog/developer-experience/) is a practical place to compare what belongs in the pipeline.
 
 <a id="measuring-success-and-avoiding-common-pitfalls"></a>
 ## Measuring Success and Avoiding Common Pitfalls

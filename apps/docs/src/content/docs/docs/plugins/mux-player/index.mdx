@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Native Mux Player SDK to play video on IOS and Android."
+  tagline: "Play adaptive bitrate Mux streams in a native player surface from your Capacitor app."
   actions:
     - text: Get started
       link: /docs/plugins/mux-player/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Native Mux Player SDK to play video on IOS and Android.
+Pass a Mux playback ID or signed URL to `play()` and let the native Mux player handle ABR streaming, DRM tokens when required, and dismissal when the user closes the player. Use `isActive()` to avoid opening duplicate player instances.
+
+Typical fits: course video, sports highlights, and any premium video that already lives on Mux.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native Mux player integration |
+| Android | Yes | Native Mux player integration |
+| Web | See repo | Use Mux web player for browser targets |
 
 ## Core Capabilities
 

@@ -8,6 +8,7 @@ import {
 } from '../../../shared/agentDiscovery'
 import { isGonePath } from '../../../shared/gonePaths'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
+import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { withAbTest } from './abtest'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
@@ -296,7 +297,9 @@ function redirectToPath(request: Request, pathname: string, status = 301): Respo
   const hashIndex = pathname.indexOf('#')
   const pathOnly = hashIndex === -1 ? pathname : pathname.slice(0, hashIndex)
   const hash = hashIndex === -1 ? '' : pathname.slice(hashIndex)
-  return Response.redirect(new URL(`${pathOnly}${url.search}${hash}`, request.url).toString(), status)
+  const target = new URL(`${pathOnly}${hash}`, request.url)
+  if (!target.search) target.search = url.search
+  return Response.redirect(target.toString(), status)
 }
 
 async function assetExists(env: Env, request: Request, pathname: string): Promise<boolean> {
@@ -486,6 +489,10 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
   const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
   if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
   const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
+  const permanentTrailingSlashTarget = permanentTrailingSlashLocation(request.url, assetResponse)
+  if (permanentTrailingSlashTarget) {
+    return trackAICrawler(request, redirectToPath(request, permanentTrailingSlashTarget), ctx)
+  }
   if (assetResponse.status === 404) {
     const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
     if (legacyRedirect) return trackAICrawler(request, legacyRedirect, ctx)

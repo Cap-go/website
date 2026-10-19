@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,25 @@ bunx cap sync
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 ```
+
+## Quick start
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.initialize({
+  playerId: 'my-player',
+  videoId: 'dQw4w9WgXcQ',
+  playerSize: { width: 640, height: 360 },
+  privacyEnhanced: true
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Fix YouTube Referer Blocking in the Main WebView
 

@@ -30,6 +30,19 @@ npx cap sync
 
 The package is a no-op until you select patches in your Capacitor config.
 
+## Quick start
+
+```typescript
+bun add @capgo/capacitor-patch
+npx cap sync
+```
+
+## Common pitfalls
+
+- Review version gates before upgrading Capacitor.
+- Install in CI before cap sync.
+- Re-run sync after native edits.
+
 ## Select patch IDs
 
 List all shipped patches:

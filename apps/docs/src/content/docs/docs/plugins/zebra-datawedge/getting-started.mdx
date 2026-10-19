@@ -13,7 +13,7 @@ import { PackageManagers } from 'starlight-package-managers'
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -40,6 +40,39 @@ If you prefer Manual Setup, install the plugin by running the following commands
 4. **Review Android behavior**
    - Read the [Android notes](/docs/plugins/zebra-datawedge/android/) before enabling soft triggers in production.
 </Steps>
+
+## Quick start
+
+```typescript
+import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
+
+await ZebraDataWedge.cloneProfile({
+  destProfileName: 'dest-profile',
+  sourceProfileName: 'source-profile',
+});
+```
+
+## Example: createProfile
+
+```typescript
+import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
+
+await ZebraDataWedge.createProfile({ profileName: 'profile' });
+```
+
+## Example: deleteProfile
+
+```typescript
+import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
+
+await ZebraDataWedge.deleteProfile({ profileNames: ['profile'] });
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Basic setup
 

@@ -1,7 +1,8 @@
 name: Deploy Docs
 
 concurrency:
-  group: deploy-production
+  # Web and docs are separate Workers, so their deploys do not queue behind each other.
+  group: deploy-docs
   cancel-in-progress: false
 
 on:
@@ -22,25 +23,8 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
-  typos:
-    name: Check for Typos
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24.x
-      - name: Checkout Repository
-        # actions/checkout v5
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
-      - name: Check for Typos
-        # v1.44.0
-        uses: crate-ci/typos@631208b7aac2daa8b707f55e7331f9112b0e062d
-
   build:
     runs-on: ubuntu-latest
-    needs: typos
     timeout-minutes: 30
     env:
       NODE_OPTIONS: '--max-old-space-size=16384'
@@ -48,6 +32,9 @@ jobs:
     steps:
       # actions/checkout v5
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      # Typos run inside the build job: a separate job only added runner queue time before the build.
+      # v1.44.0
+      - uses: crate-ci/typos@631208b7aac2daa8b707f55e7331f9112b0e062d
       - uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -55,14 +42,6 @@ jobs:
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
         with:
           bun-version: 1.4.3
-
-      - name: Cache bun modules
-        uses: actions/cache@v5
-        with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
 
       - name: Cache Astro build
         uses: actions/cache@v5

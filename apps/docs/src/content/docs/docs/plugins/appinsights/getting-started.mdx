@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-appinsights
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,39 @@ bunx cap sync
 ```typescript
 import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+await CapacitorAppInsights.init({
+  partnerId: 'partner-id-123',
+  partnerKey: 'partner-key-123',
+});
+```
+
+## Example: setUserId
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+await CapacitorAppInsights.setUserId({ userId: 'user-id-123' });
+```
+
+## Example: getState
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+const result = await CapacitorAppInsights.getState();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

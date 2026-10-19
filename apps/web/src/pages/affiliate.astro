@@ -1,4 +1,5 @@
 ---
+import { getPlans } from '@/lib/siteData'
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
@@ -50,18 +51,7 @@ function parseLivePlans(payload: unknown): AffiliatePlan[] | null {
   return PLAN_ORDER.map((name) => byName.get(name)!)
 }
 
-let plans: AffiliatePlan[] = FALLBACK_PLANS
-try {
-  const response = await fetch(`${config.public.baseApiUrl}/private/plans`, {
-    signal: AbortSignal.timeout(3000),
-  })
-  if (response.ok) {
-    const live = parseLivePlans(await response.json())
-    if (live) plans = live
-  }
-} catch {
-  plans = FALLBACK_PLANS
-}
+const plans: AffiliatePlan[] = parseLivePlans(getPlans()) ?? FALLBACK_PLANS
 
 function usd(value: number) {
   return new Intl.NumberFormat('en-US', {

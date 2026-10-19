@@ -214,7 +214,7 @@ Tool choice should follow architecture, release model, and the people who will m
 
 The strongest automation stack is usually mixed. Unit and integration tests catch most defects cheaply. A narrow E2E layer confirms that critical user paths still work in production-like conditions. Beyond that point, more UI automation often adds cost faster than confidence.
 
-Maintenance discipline matters more than framework preference. Use stable selectors, controlled test data, shared helpers, and clear ownership for broken tests. If the suite degrades every sprint, the problem may sit upstream in branching strategy, environment drift, or poor local workflows. Teams usually improve test reliability after they improve the surrounding [developer experience tools and practices](https://capgo.app/blog/developer-experience-tools/).
+Maintenance discipline matters more than framework preference. Use stable selectors, controlled test data, shared helpers, and clear ownership for broken tests. If the suite degrades every sprint, the problem may sit upstream in branching strategy, environment drift, or poor local workflows. Teams usually improve test reliability after they improve the surrounding [developer experience tools and practices](https://capgo.app/blog/developer-experience/).
 
 Treat automation as part of the full QA lifecycle, not a pre-release checkbox. The same strategy that guards commits should also support post-release confidence through canary checks, rollback validation, and fast reproduction of production bugs. That is how automation helps prevent bad releases without slowing down development.
 

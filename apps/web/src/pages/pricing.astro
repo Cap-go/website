@@ -1,4 +1,5 @@
 ---
+import { getCredits, getPlans } from '@/lib/siteData'
 import Layout from '@/layouts/Layout.astro'
 import PricingCalculator from '@/components/pricing/PricingCalculator.astro'
 import ComparePlans from '@/components/pricing/ComparePlans.astro'
@@ -9,7 +10,6 @@ import Plans from '@/components/pricing/Plans.astro'
 import Web2AppPlan from '@/components/pricing/Web2AppPlan.astro'
 import PricingExplainer from '@/components/pricing/PricingExplainer.astro'
 import { createLdJsonGraph, createProductLdJson, createFAQPageLdJson } from '@/lib/ldJson'
-import type { Database } from '@/services/supabase.types'
 import m from '@/copy/messages'
 import Enterprise from '@/components/enterprise.astro'
 import SignupCta from '@/components/SignupCta.astro'
@@ -34,16 +34,8 @@ const serviceDisruptionPolicyUrl = `${getRelativeLocaleUrl(locale, 'support-poli
 const config = Astro.locals.runtimeConfig
 
 let yearly = true
-let plansAll: Database['public']['Tables']['plans']['Row'][] = []
-let credits: any[] = []
-
-// Fetch plans data
-const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
-plansAll = await response.json()
-
-// Fetch credits data
-const creditsResponse = await fetch(`${config.public.baseApiUrl}/private/credits`)
-credits = await creditsResponse.json()
+const plansAll = getPlans()
+const credits = getCredits()
 
 // Filter plans
 const plans = plansAll.length ? plansAll.filter((p) => p.name !== 'Free') : []
@@ -105,21 +97,21 @@ if (plans.length > 0) {
         <div class="mx-auto mb-5 flex w-full max-w-6xl flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:justify-between">
           <div class="flex shrink-0 justify-center lg:justify-start">{plans && plans.length > 0 && <PricingCalculator plans={plans} credits={credits} />}</div>
 
-          <fieldset class="grid w-max max-w-xs shrink-0 grid-cols-2 rounded-full border border-white/10 bg-white/5 p-1" aria-label="Billing period">
+          <fieldset class="flex w-max shrink-0 rounded-full border border-white/10 bg-white/5 p-1" aria-label="Billing period">
             <legend class="sr-only">Billing period</legend>
             <label
               for="monthly"
-              class="flex min-h-9 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-300 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-400 has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-[#0d1525]"
+              class="flex min-h-9 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold text-gray-300 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-400 has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-[#0d1525]"
             >
               <span>{m.monthly_plan({}, { locale: Astro.locals.locale })}</span>
               <input id="monthly" type="radio" checked={!yearly} name="pricing-plans" class="sr-only" />
             </label>
             <label
               for="yearly"
-              class="group flex min-h-9 cursor-pointer items-center justify-center rounded-full px-3 text-xs font-semibold text-gray-300 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-400 has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-[#0d1525]"
+              class="group flex min-h-9 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold text-gray-300 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-400 has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-[#0d1525]"
             >
               <span>{m.yearly_plan({}, { locale: Astro.locals.locale })}</span>
-              <span class="ml-1 text-blue-400 group-has-checked:text-blue-700">{m.yearly_two_months_free({}, { locale })}</span>
+              <span class="rounded-full bg-blue-500/15 px-1.5 py-0.5 text-[10px] font-bold text-blue-300 group-has-checked:bg-blue-100 group-has-checked:text-blue-700">{m.yearly_two_months_free({}, { locale })}</span>
               <input id="yearly" type="radio" checked={yearly} name="pricing-plans" class="sr-only" />
             </label>
           </fieldset>

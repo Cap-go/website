@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-android-usagestatsmanager
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,62 @@ bunx cap sync
 ```typescript
 import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+const now = Date.now();
+const stats = await CapacitorUsageStatsManager.queryAndAggregateUsageStats({
+  beginTime: oneDayAgo,
+  endTime: now,
+  packageName: 'com.example.app',
+});
+
+for (const [packageName, usageData] of Object.entries(stats)) {
+  console.log(`${packageName}: ${usageData.totalTimeInForeground}ms`);
+}
+```
+
+## Example: queryUsageStats
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const startOfDay = new Date().setHours(0, 0, 0, 0);
+const { stats } = await CapacitorUsageStatsManager.queryUsageStats({
+  intervalType: 0, // INTERVAL_DAILY
+  beginTime: startOfDay,
+  endTime: Date.now(),
+  packageName: 'com.example.app',
+});
+stats.forEach((bucket) => {
+  console.log(`${bucket.packageName}: ${bucket.totalTimeInForeground}ms`);
+});
+```
+
+## Example: queryEvents
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const startOfDay = new Date().setHours(0, 0, 0, 0);
+const { events } = await CapacitorUsageStatsManager.queryEvents({
+  beginTime: startOfDay,
+  endTime: Date.now(),
+  packageName: 'com.example.app',
+});
+events.forEach((event) => {
+  console.log(`${event.packageName} type=${event.eventType} at ${event.timeStamp}`);
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -123,6 +123,79 @@ Before calling `startActivity`, verify that:
 ```typescript
 import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
 ```
+
+## Quick start
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { supported, reason } = await CapgoLiveActivities.areActivitiesSupported();
+if (supported) {
+  console.log('Live Activities are supported!');
+} else {
+  console.log('Not supported:', reason);
+}
+```
+
+## Example: startActivity
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { activityId } = await CapgoLiveActivities.startActivity({
+  layout: {
+    type: 'container',
+    direction: 'horizontal',
+    children: [
+      { type: 'text', content: 'Order #{{orderNumber}}', fontSize: 16, fontWeight: 'bold' },
+      { type: 'text', content: '{{status}}', fontSize: 14, color: '#666666' }
+    ]
+  },
+  dynamicIslandLayout: {
+    expanded: {
+      leading: { type: 'image', source: 'sfSymbol', value: 'box.truck' },
+      trailing: { type: 'text', content: '{{eta}}' },
+      center: { type: 'text', content: '{{status}}' },
+      bottom: { type: 'progress', value: 'progress' }
+    },
+    compactLeading: { type: 'image', source: 'sfSymbol', value: 'box.truck' },
+    compactTrailing: { type: 'text', content: '{{eta}}' },
+    minimal: { type: 'image', source: 'sfSymbol', value: 'box.truck' }
+  },
+  data: {
+    orderNumber: '12345',
+    status: 'On the way',
+    eta: '10 min',
+    progress: 0.6
+  }
+});
+console.log('Started activity:', activityId);
+```
+
+## Example: updateActivity
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+await CapgoLiveActivities.updateActivity({
+  activityId: 'abc123',
+  data: {
+    status: 'Arrived!',
+    eta: 'Now',
+    progress: 1.0
+  },
+  alertConfiguration: {
+    title: 'Delivery Update',
+    body: 'Your order has arrived!'
+  }
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

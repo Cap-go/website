@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Local notifications with Android channels, progress layouts, action buttons, scheduling, and iOS interruption levels."
+  tagline: "Local notifications with Android channels, progress layouts, action buttons, scheduling, and iOS interruption levels"
   actions:
     - text: Get started
       link: /docs/plugins/rich-notifications/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-@capgo/capacitor-rich-notifications shows polished local notifications from your Capacitor app. It does not register for remote push. Use [@capgo/capacitor-notifications](/docs/plugins/notifications/) for Capgo-managed FCM and APNs delivery.
+Local notifications with Android channels, progress layouts, action buttons, scheduling, and iOS interruption levels
+
+Start with `checkPermission()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

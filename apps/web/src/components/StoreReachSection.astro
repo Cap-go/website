@@ -1,0 +1,138 @@
+---
+import m from '@/copy/messages'
+
+interface Props {
+  background?: string
+}
+
+const { background = 'bg-[#1a1a1a]' } = Astro.props
+const locale = Astro.locals.locale
+
+type Tone = 'wait' | 'block' | 'ok'
+
+const storeSteps: { key: string; tone: Tone }[] = [
+  { key: 'review', tone: 'wait' },
+  { key: 'release', tone: 'wait' },
+  { key: 'conditions', tone: 'wait' },
+  { key: 'autooff', tone: 'block' },
+  { key: 'storage', tone: 'block' },
+]
+const liveSteps: { key: string; tone: Tone }[] = [
+  { key: 'publish', tone: 'ok' },
+  { key: 'open', tone: 'ok' },
+  { key: 'delta', tone: 'ok' },
+  { key: 'apply', tone: 'ok' },
+]
+
+const t = (key: string) => m[key]({}, { locale })
+
+const lanes = [
+  {
+    id: 'store',
+    label: t('store_reach_store_label'),
+    summary: t('store_reach_store_summary'),
+    result: t('store_reach_store_result'),
+    steps: storeSteps.map((step) => ({
+      tone: step.tone,
+      title: t(`store_reach_store_step_${step.key}_title`),
+      text: t(`store_reach_store_step_${step.key}_text`),
+      time: t(`store_reach_store_step_${step.key}_time`),
+    })),
+    // Illustrative spread across 24 devices: some update overnight, some are still waiting, some never update on their own.
+    devices: [...Array(14).fill('ok'), ...Array(6).fill('wait'), ...Array(4).fill('block')] as Tone[],
+  },
+  {
+    id: 'live',
+    label: t('store_reach_live_label'),
+    summary: t('store_reach_live_summary'),
+    result: t('store_reach_live_result'),
+    steps: liveSteps.map((step) => ({
+      tone: step.tone,
+      title: t(`store_reach_live_step_${step.key}_title`),
+      text: t(`store_reach_live_step_${step.key}_text`),
+      time: t(`store_reach_live_step_${step.key}_time`),
+    })),
+    devices: Array(24).fill('ok') as Tone[],
+  },
+]
+
+const toneDot: Record<Tone, string> = {
+  ok: 'bg-emerald-400',
+  wait: 'bg-amber-400',
+  block: 'bg-rose-500',
+}
+const toneChip: Record<Tone, string> = {
+  ok: 'bg-emerald-400/10 text-emerald-300 ring-emerald-400/25',
+  wait: 'bg-amber-400/10 text-amber-300 ring-amber-400/25',
+  block: 'bg-rose-500/10 text-rose-300 ring-rose-500/25',
+}
+const legend: { tone: Tone; label: string }[] = [
+  { tone: 'ok', label: t('store_reach_legend_updated') },
+  { tone: 'wait', label: t('store_reach_legend_waiting') },
+  { tone: 'block', label: t('store_reach_legend_blocked') },
+]
+---
+
+<section class:list={[background, 'py-20 sm:py-24']} id="store-vs-live" aria-labelledby="store-reach-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{t('store_reach_eyebrow')}</p>
+      <h2 id="store-reach-title" class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-4xl">
+        {t('store_reach_title')}
+      </h2>
+      <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">{t('store_reach_lead')}</p>
+    </div>
+
+    <div class="mt-14 grid gap-6 lg:grid-cols-2">
+      {lanes.map((lane) => (
+        <article
+          class:list={['flex flex-col rounded-3xl p-6 ring-1 sm:p-8', lane.id === 'live' ? 'bg-emerald-400/[0.04] ring-emerald-400/25' : 'bg-white/[0.03] ring-white/10']}
+          aria-labelledby={`store-reach-${lane.id}-label`}
+        >
+          <header>
+            <h3 id={`store-reach-${lane.id}-label`} class="text-lg font-semibold text-white">
+              {lane.label}
+            </h3>
+            <p class:list={['mt-1 text-sm font-medium', lane.id === 'live' ? 'text-emerald-300' : 'text-amber-300']}>{lane.summary}</p>
+          </header>
+
+          <ol class="relative mt-6 grid gap-5 border-l border-white/10 pl-6">
+            {lane.steps.map((step) => (
+              <li class="relative">
+                <span class:list={['absolute top-1.5 -left-[29px] h-2.5 w-2.5 rounded-full ring-4 ring-[#101216]', toneDot[step.tone]]} aria-hidden="true" />
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <h4 class="text-sm font-semibold text-white">{step.title}</h4>
+                  <span class:list={['rounded-full px-2 py-0.5 font-mono text-[11px] font-semibold ring-1', toneChip[step.tone]]}>{step.time}</span>
+                </div>
+                <p class="mt-1 text-sm leading-6 text-gray-400">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div class="mt-auto pt-8">
+            <div class="rounded-2xl bg-black/30 p-5 ring-1 ring-white/10">
+              <div class="grid grid-cols-12 gap-2" aria-hidden="true">
+                {lane.devices.map((tone) => (
+                  <span class="flex aspect-[9/16] items-end justify-center rounded-[5px] bg-white/[0.04] p-[3px] ring-1 ring-white/15">
+                    <span class:list={['h-full w-full rounded-[3px]', toneDot[tone], tone === 'ok' ? 'opacity-90' : 'opacity-70']} />
+                  </span>
+                ))}
+              </div>
+              <p class:list={['mt-4 text-sm font-semibold', lane.id === 'live' ? 'text-emerald-300' : 'text-white']}>{lane.result}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-400">
+      {legend.map((item) => (
+        <span class="inline-flex items-center gap-2">
+          <span class:list={['h-2.5 w-2.5 rounded-sm', toneDot[item.tone]]} aria-hidden="true" />
+          {item.label}
+        </span>
+      ))}
+      <span class="text-gray-500">{t('store_reach_illustration_note')}</span>
+    </div>
+  </div>
+</section>

@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor Flash Plugin for controlling device flashlight/torch."
+  tagline: "Control the device torch with availability checks, intensity, and toggle helpers."
   actions:
     - text: Get started
       link: /docs/plugins/flash/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor Flash Plugin for controlling device flashlight/torch.
+`@capgo/capacitor-flash` exposes flashlight control for QR scanners, safety tools, and camera companion flows. Check `isAvailable()`, turn the torch on with optional intensity, and read `isSwitchedOn()` before updating UI state.
+
+iOS uses AVFoundation. Android uses Camera2 with intensity on supported API levels. Web uses the camera torch API where mobile browsers allow it.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | AVFoundation torch |
+| Android | Yes | Camera2, intensity on Android 13+ where supported |
+| Web | Partial | Mobile Chrome torch when permitted |
 
 ## Core Capabilities
 

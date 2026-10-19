@@ -262,7 +262,7 @@ CI should catch predictable failures before packaging:
 - **Invalid syntax:** Reject malformed JSON, ICU messages, or resource files.
 - **Locale coverage:** Report which supported locales changed and which still need review.
 
-For CI integration patterns, see the [developer experience tools overview](https://capgo.app/blog/developer-experience-tools/).
+For CI integration patterns, see the [developer experience tools overview](https://capgo.app/blog/developer-experience/).
 
 <a id="live-updates-as-release-engineering"></a>
 ### Live updates as release engineering

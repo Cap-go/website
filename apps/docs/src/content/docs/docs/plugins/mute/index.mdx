@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor Mute Plugin for detecting device mute status."
+  tagline: "Detect hardware mute and ringer state before playing alert sounds in your Capacitor app."
   actions:
     - text: Get started
       link: /docs/plugins/mute/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor Mute Plugin for detecting device mute status.
+Call `isMuted()` before you fire notification sounds or haptics-only feedback. The plugin reads the iOS mute switch through AudioToolbox and Android ringer mode through `AudioManager`, with no extra permissions.
+
+Typical fits: chat apps, games, training apps, and any UI that should show a visual cue when audio would be silent.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Hardware mute switch |
+| Android | Yes | Ringer mode via `AudioManager` |
+| Web | No | API not available in browsers |
 
 ## Core Capabilities
 

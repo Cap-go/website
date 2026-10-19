@@ -183,6 +183,7 @@ const TRANSLATION_WORD_COUNT_RETRIES = 2
 const TRANSLATION_WORD_COUNT_ATTEMPTS = TRANSLATION_WORD_COUNT_RETRIES + 1
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
+const TRANSLATION_META_HEADER = 'X-Capgo-Translation-Meta'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const EXECUTABLE_SCRIPT_TYPES = new Set(['', 'module', 'text/javascript', 'application/javascript', 'text/ecmascript', 'application/ecmascript'])
 const WORKER_OWNED_SCRIPT_IDS = new Set(['capgo-edge-language-selector-hash'])
@@ -1337,6 +1338,125 @@ function applyAnchoredScriptInsertions(html: string, groups: ScriptInsertionGrou
 function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): string {
   if (extras.length === 0) return html
   return applyAnchoredScriptInsertions(html, groupExtraEnglishScripts(extras, englishScripts, pairedEnglish))
+}
+
+function readDocumentTitle(html: string): string | null {
+  const opening = findNamedTag(html, 0, '<title')
+  if (!opening) return null
+  const closing = findClosingTag(html, opening.end, 'title')
+  if (!closing) return null
+  const title = html.slice(opening.end, closing.index).trim()
+  return title.length > 0 ? title : null
+}
+
+function setDocumentTitle(html: string, title: string): string {
+  const opening = findNamedTag(html, 0, '<title')
+  if (!opening) return html
+  const closing = findClosingTag(html, opening.end, 'title')
+  if (!closing) return html
+  return `${html.slice(0, opening.end)}${title}${html.slice(closing.index)}`
+}
+
+type TranslatableMetaField = {
+  keyName: 'name' | 'property'
+  keyValue: string
+  metaKey: string
+}
+
+function collectTranslatableMetaFields(html: string): TranslatableMetaField[] {
+  const fields: TranslatableMetaField[] = []
+  const seenMetaKeys = new Set<string>()
+  let cursor = 0
+
+  while (cursor < html.length) {
+    const nextTag = findNextHtmlTag(html, cursor)
+    if (!nextTag) break
+
+    if (tagNameOf(nextTag.tag) === 'meta') {
+      const metaKey = getMetaKey(nextTag.tag)
+      const content = readAttributeValue(nextTag.tag, 'content')
+      if (metaKey && content && TRANSLATABLE_META.has(metaKey) && !seenMetaKeys.has(metaKey)) {
+        const keyName = readAttributeValue(nextTag.tag, 'name') ? 'name' : 'property'
+        const keyValue = readAttributeValue(nextTag.tag, keyName) ?? metaKey
+        seenMetaKeys.add(metaKey)
+        fields.push({ keyName, keyValue, metaKey })
+      }
+    }
+
+    cursor = nextTag.end
+  }
+
+  return fields
+}
+
+async function syncTranslatableMetaFromEnglish(
+  env: Env,
+  translatedHtml: string,
+  englishHtml: string,
+  locale: Locale,
+  pagePath: string,
+): Promise<{ html: string; changed: boolean }> {
+  const targetLanguage = LANGUAGE_NAMES[locale]
+  const translationCache = new Map<string, string>()
+  let html = translatedHtml
+  let changed = false
+
+  const translateCached = async (text: string): Promise<string> => {
+    const cached = translationCache.get(text)
+    if (cached) return cached
+    const translated = await translateSingleText(env, targetLanguage, text, pagePath)
+    translationCache.set(text, translated)
+    return translated
+  }
+
+  const englishTitle = readDocumentTitle(englishHtml)
+  if (englishTitle) {
+    const translatedTitle = await translateCached(englishTitle)
+    if (translatedTitle && translatedTitle !== readDocumentTitle(html)) {
+      html = setDocumentTitle(html, translatedTitle)
+      changed = true
+    }
+  }
+
+  for (const field of collectTranslatableMetaFields(englishHtml)) {
+    let cursor = 0
+    let sourceContent: string | null = null
+
+    while (cursor < englishHtml.length) {
+      const nextTag = findNextHtmlTag(englishHtml, cursor)
+      if (!nextTag) break
+      if (tagNameOf(nextTag.tag) === 'meta' && getMetaKey(nextTag.tag) === field.metaKey) {
+        sourceContent = readAttributeValue(nextTag.tag, 'content')
+        break
+      }
+      cursor = nextTag.end
+    }
+
+    if (!sourceContent) continue
+
+    const translatedContent = await translateCached(sourceContent)
+    const currentContent = (() => {
+      let metaCursor = 0
+      while (metaCursor < html.length) {
+        const nextTag = findNextHtmlTag(html, metaCursor)
+        if (!nextTag) break
+        if (tagNameOf(nextTag.tag) === 'meta' && getMetaKey(nextTag.tag) === field.metaKey) {
+          return readAttributeValue(nextTag.tag, 'content')
+        }
+        metaCursor = nextTag.end
+      }
+      return null
+    })()
+
+    if (translatedContent && translatedContent !== currentContent) {
+      html = setMetaContent(html, field.keyName, field.keyValue, translatedContent)
+      changed = true
+    }
+  }
+
+  if (changed) html = expandShortMetaDescriptions(html, locale)
+
+  return { html, changed }
 }
 
 function syncExecutableScriptsFromEnglish(translatedHtml: string, englishHtml: string): string {
@@ -3214,6 +3334,17 @@ async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Loca
     const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
     if (englishHtml && knownSourceHash !== (await translationSourceHash(locale, englishHtml))) {
       let syncedHtml = syncExecutableScriptsFromEnglish(translatedHtml, englishHtml)
+      try {
+        const syncedMeta = await syncTranslatableMetaFromEnglish(env, syncedHtml, englishHtml, locale, requestUrl.pathname)
+        syncedHtml = syncedMeta.html
+        if (syncedMeta.changed) responseHeaders.set(TRANSLATION_META_HEADER, 'synced')
+      } catch (error) {
+        console.error('Failed to sync translatable meta from current English source', {
+          pathname: requestUrl.pathname,
+          locale,
+          error: errorMessage(error),
+        })
+      }
       if (!syncedHtml.includes('capgo-edge-language-selector-hash')) {
         syncedHtml = insertBeforeClosingTag(syncedHtml, 'body', languageSelectorHashScript())
       }
@@ -3649,6 +3780,9 @@ export const __translationWorkerTest = {
   rewriteMetadataForEnglishCanonical,
   resolveTranslationContexts,
   syncExecutableScriptsFromEnglish,
+  syncTranslatableMetaFromEnglish,
+  readDocumentTitle,
+  collectTranslatableMetaFields,
   translationLengthViolation,
   translationWordCount,
   translationWordCountViolation,

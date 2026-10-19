@@ -22,7 +22,19 @@ hero:
 
 ## Overview
 
-Capacitor plugin to interact with data from Apple HealthKit and Health Connect.
+`@capgo/capacitor-health` reads and writes user health data through **Apple HealthKit** on iOS and **Health Connect** on Android. Use it for step counts, workouts, sleep stages, vitals, and nutrition style samples without maintaining two separate native SDK integrations in your app layer.
+
+Fitness dashboards, habit apps, clinical adjacent wellness products, and corporate wellness programs commonly start with `requestAuthorization`, then `readSamples` or `saveSample` for the metrics they care about.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | HealthKit authorization and samples |
+| Android | Yes | Health Connect, optional history permission for reads beyond about 30 days |
+| Web | Limited | `isAvailable` reports unsupported native SDKs |
+
+Android only helpers: `openHealthConnectSettings`, `showPrivacyPolicy`.
 
 ## Core Capabilities
 

@@ -1,4 +1,5 @@
 ---
+import { getStoreTop } from '@/lib/siteData'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { renameCat, shortNumber, plausibleStoreShare } from '@/services/misc'
@@ -8,24 +9,9 @@ const description = m.top_capgo_apps({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 
-const config = Astro.locals.runtimeConfig
-
-// Initialize state
-let apps: any[] = []
-let usage = 7.21
 const others = ['top_cordova_app', 'top_react_native_app', 'top_flutter_app', 'top_capacitor_app']
 
-// Fetch data on the server side
-try {
-  const response = await fetch(`${config.public.baseApiUrl}/private/store_top?mode=capgo`)
-  if (response.ok) {
-    const data = await response.json()
-    apps = data.apps
-    usage = data.usage
-  }
-} catch (error) {
-  console.error('Failed to fetch app data:', error)
-}
+const { apps, usage } = getStoreTop('capgo') ?? { apps: [], usage: 7.21 }
 const storeShare = plausibleStoreShare(usage)
 ---
 

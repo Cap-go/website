@@ -18,10 +18,15 @@ import { splitLocalePath } from './localizedLegacyPathRedirect'
  * the same 410 HTML for non-English locales.
  */
 const GONE_PATHS = new Set<string>([
+  '/blog/app-cohort-analysis',
+  '/blog/app-vulnerability-scanning',
+  '/blog/developer-productivity',
   '/blog/enterprise-app-management',
   '/blog/how-to-delete-icon',
   '/blog/native-base-picker',
   '/blog/react-native-alert',
+  '/blog/user-adoption-metrics',
+  '/blog/user-churn-analysis',
   '/blog/what-is-a-micro-frontend',
 ])
 

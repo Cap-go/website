@@ -22,14 +22,22 @@ hero:
 
 ## Overview
 
-Capacitor plugin contract for working with the device barometer sensor.
+`@capgo/capacitor-barometer` reads atmospheric pressure for weather UX, altitude change estimates on iOS, and sensor demos. Stream live hPa samples or poll the latest value after starting updates.
+
+## Platform support
+
+| Platform | Support |
+| --- | --- |
+| iOS | Core Motion altimeter |
+| Android | `Sensor.TYPE_PRESSURE` |
+| Web | `isAvailable()` is false |
 
 ## Core Capabilities
 
 - `getMeasurement` - Get the most recent barometer reading captured by the native layer.
 - `isAvailable` - Check if the current device includes a barometer sensor.
 - `startMeasurementUpdates` - Begin streaming barometer updates to the JavaScript layer.
-- `stopMeasurementUpdates` - Stop the continuous updates started via .
+- `stopMeasurementUpdates` - Stop the continuous updates started via `startMeasurementUpdates`.
 
 ## Public API
 
@@ -38,7 +46,7 @@ Capacitor plugin contract for working with the device barometer sensor.
 | `getMeasurement` | Get the most recent barometer reading captured by the native layer. |
 | `isAvailable` | Check if the current device includes a barometer sensor. |
 | `startMeasurementUpdates` | Begin streaming barometer updates to the JavaScript layer. |
-| `stopMeasurementUpdates` | Stop the continuous updates started via . |
+| `stopMeasurementUpdates` | Stop the continuous updates started via `startMeasurementUpdates`. |
 | `checkPermissions` | Return the current permission state for accessing barometer data. |
 | `requestPermissions` | Request permission to access barometer data if required by the platform. |
 | `addListener` | Listen for pressure updates. |

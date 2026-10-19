@@ -1,3 +1,4 @@
+import { getCredits, getPlans } from '@/lib/siteData'
 import { useRuntimeConfig } from '@/config/app'
 import type { CreditStep } from '@/lib/pricingCalculator'
 import type { Database } from '@/services/supabase.types'
@@ -42,10 +43,8 @@ function renderTiers(credits: CreditStep[], type: string): string {
 export const GET: APIRoute = async () => {
   const config = useRuntimeConfig()
   const baseUrl = config.public.baseUrl.replace(/\/$/, '')
-  const [plansAll, credits]: [Plan[], CreditStep[]] = await Promise.all([
-    fetch(`${config.public.baseApiUrl}/private/plans`).then((response) => response.json()),
-    fetch(`${config.public.baseApiUrl}/private/credits`).then((response) => response.json()),
-  ])
+  const plansAll: Plan[] = getPlans()
+  const credits = getCredits<CreditStep>()
 
   const plans = plansAll.filter((plan) => plan.name !== 'Free').sort((a, b) => (a.price_m ?? 0) - (b.price_m ?? 0))
 

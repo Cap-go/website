@@ -1,10 +1,10 @@
 ---
+import { getPlans } from '@/lib/siteData'
 import '@/styles/lu-product.css'
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
-import type { Database } from '@/services/supabase.types'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import { numberWithSpaces } from '@/services/misc'
 import { pluginCountLabel } from '@/config/plugins'
@@ -17,23 +17,7 @@ import { capgoReviews, toProductReviewLdJson } from '@/config/productTestimonial
 import GovernedRollout from '@/components/enterprise/GovernedRollout.astro'
 
 const locale = Astro.locals.locale
-const config = Astro.locals.runtimeConfig
-const plansFetchTimeoutMs = 3000
-
-let plansAll: Database['public']['Tables']['plans']['Row'][] = []
-try {
-  const response = await fetch(`${config.public.baseApiUrl}/private/plans`, {
-    signal: AbortSignal.timeout(plansFetchTimeoutMs),
-  })
-  if (response.ok) {
-    const payload = await response.json()
-    if (Array.isArray(payload)) {
-      plansAll = payload as Database['public']['Tables']['plans']['Row'][]
-    }
-  }
-} catch {
-  plansAll = []
-}
+const plansAll = getPlans()
 const payg = plansAll.find((p) => p.name === 'Enterprise')
 const enterprisePrice = typeof payg?.price_m === 'number' && Number.isFinite(payg.price_m) ? payg.price_m : undefined
 

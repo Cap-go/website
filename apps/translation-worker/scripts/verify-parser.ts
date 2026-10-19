@@ -242,10 +242,7 @@ assert(
 assert(__translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === 'Évitez l\u2019attente.', 'French polish path did not apply article elision')
 assert(__translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.', 'Non-French polish path should leave text unchanged')
 const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Capacitor Live Updates (OTA)'])[0]
-assert(
-  typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('capacitor'),
-  'Missing marketing context override for live update hero headline',
-)
+assert(typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('capacitor'), 'Missing marketing context override for live update hero headline')
 
 const noTranslateHtml = `<!doctype html>
 <html lang="en">
@@ -421,15 +418,9 @@ const pendingEnglishCanonicalHtml = __translationWorkerTest.rewriteMetadataForEn
 </html>`,
   new URL('https://capgo.app/fr/docs/'),
 )
-assert(
-  pendingEnglishCanonicalHtml.includes('rel="canonical" href="https://capgo.app/docs/"'),
-  'Pending English canonical rewrite did not point at the English URL',
-)
+assert(pendingEnglishCanonicalHtml.includes('rel="canonical" href="https://capgo.app/docs/"'), 'Pending English canonical rewrite did not point at the English URL')
 assert(!pendingEnglishCanonicalHtml.includes('hreflang='), 'Pending English canonical rewrite must remove hreflang alternates')
-assert(
-  pendingEnglishCanonicalHtml.includes('property="og:url" content="https://capgo.app/docs/"'),
-  'Pending English canonical rewrite did not update og:url',
-)
+assert(pendingEnglishCanonicalHtml.includes('property="og:url" content="https://capgo.app/docs/"'), 'Pending English canonical rewrite did not update og:url')
 assert(localizedLinksHtml.includes('href="#local"'), 'Link rewrite changed same-page anchors')
 assert(localizedLinksHtml.includes('href="https://github.com/Cap-go/capgo"'), 'Link rewrite changed an external URL')
 assert(localizedLinksHtml.includes('href="mailto:hello@capgo.app"'), 'Link rewrite changed a mail link')
@@ -546,20 +537,29 @@ try {
           items?: Array<{ text: string; context?: string }>
         }
         capturedAiPayload = payload
-        assert(Array.isArray(payload.items), 'Translation AI request did not send items[] with context support')
-        assert(typeof payload.pagePath === 'string' && payload.pagePath.length > 0, 'Translation AI request missed pagePath')
         assert(!payload.texts, 'Translation AI request still used legacy texts[] payload')
-
-        const aboutItem = payload.items.find((item) => item.text === 'About')
-        if (aboutItem) {
-          assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
-        }
 
         const translateText = (text: string) => {
           if (text.includes('Read our guides')) return 'Leggi le guide'
           if (text.includes('Docs title')) return 'Titolo doc'
           if (text === 'About') return 'Chi siamo'
+          if (text.includes('App initialization step by step guide')) return 'App-Initialisierung Schritt-für-Schritt-Anleitung'
+          if (text.includes('Learn how to initialize an app step by step')) {
+            return 'Neue deutsche Meta-Beschreibung fuer den Initialisierungsworkflow.'
+          }
           return 'IT ' + text
+        }
+
+        if (typeof payload.text === 'string') {
+          return { response: translateText(payload.text) }
+        }
+
+        assert(Array.isArray(payload.items), 'Translation AI request did not send items[] with context support')
+        assert(typeof payload.pagePath === 'string' && payload.pagePath.length > 0, 'Translation AI request missed pagePath')
+
+        const aboutItem = payload.items.find((item) => item.text === 'About')
+        if (aboutItem) {
+          assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
         }
 
         const sourceTexts = payload.items.map((item) => item.text)
@@ -611,10 +611,7 @@ try {
     'A crawler translation cache miss did not report the English canonical fallback',
   )
   assert(crawlerPendingHtml.includes('Read our guides'), 'A crawler translation cache miss did not keep English source content available')
-  assert(
-    crawlerPendingHtml.includes('rel="canonical" href="https://capgo.app/docs/"'),
-    'A crawler translation cache miss did not point canonical at the English URL',
-  )
+  assert(crawlerPendingHtml.includes('rel="canonical" href="https://capgo.app/docs/"'), 'A crawler translation cache miss did not point canonical at the English URL')
   assert(!crawlerPendingHtml.includes('hreflang="fr"'), 'A crawler translation cache miss must not self-claim the localized hreflang')
   assert(translationJobs.length === 1, 'A crawler translation cache miss did not enqueue the localized document')
 
@@ -661,6 +658,7 @@ try {
 <html lang="de">
   <head>
     <title>App-Initialisierung</title>
+    <meta name="description" content="Alte deutsche Beschreibung für App-Initialisierung.">
     <script type="application/ld+json" id="seo-schema-graph">{"headline":"App-Initialisierung"}</script>
   </head>
   <body>
@@ -672,7 +670,8 @@ try {
   const currentBlogHtml = `<!doctype html>
 <html lang="en">
   <head>
-    <title>App initialization</title>
+    <title>App initialization step by step guide</title>
+    <meta name="description" content="Learn how to initialize an app step by step with the latest workflow.">
     <script type="application/ld+json" id="seo-schema-graph">{"headline":"App initialization"}</script>
   </head>
   <body>
@@ -711,6 +710,9 @@ try {
   assert(staleBlogResponse.status === 200, 'A stale localized blog was not served successfully')
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'STALE', 'A stale localized blog did not report STALE')
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A stale localized blog did not sync current English scripts')
+  assert(staleBlogResponse.headers.get('X-Capgo-Translation-Meta') === 'synced', 'A stale localized blog did not sync current English meta')
+  assert(staleBlogBody.includes('App-Initialisierung Schritt-für-Schritt-Anleitung'), 'STALE localized blog did not refresh the translated title')
+  assert(staleBlogBody.includes('Neue deutsche Meta-Beschreibung fuer den Initialisierungsworkflow'), 'STALE localized blog did not refresh the translated meta description')
   assert(staleBlogBody.includes('App-Initialisierung Schritt für Schritt'), 'Script sync on STALE wipe translated heading')
   assert(staleBlogBody.includes('Übersetzter Anleitungstext bleibt erhalten.'), 'Script sync on STALE wipe translated paragraph')
   assert(staleBlogBody.includes('"headline":"App-Initialisierung"'), 'Script sync on STALE replaced translated JSON-LD')

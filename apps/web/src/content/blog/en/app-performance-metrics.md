@@ -358,7 +358,7 @@ Smart alert rules for cross-platform apps usually look like this:
 - **Cohort anomaly alert** when one device class or OS family starts timing out.
 - **Adoption plus failure alert** when a new bundle rolls out and error logs rise in the same cohort.
 
-For teams cleaning up noisy workflows, these [developer experience tools](https://capgo.app/blog/developer-experience-tools/) are relevant because alert quality often depends as much on release discipline as on monitoring itself.
+For teams cleaning up noisy workflows, these [developer experience tools](https://capgo.app/blog/developer-experience/) are relevant because alert quality often depends as much on release discipline as on monitoring itself.
 
 <a id="the-ultimate-workflow-diagnosing-and-fixing-issues-fast"></a>
 ## The Ultimate Workflow Diagnosing and Fixing Issues Fast

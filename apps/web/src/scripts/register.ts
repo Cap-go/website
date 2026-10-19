@@ -64,6 +64,42 @@ function isValidName(name: string): boolean {
   return nameRegex.test(name) && name.trim().length > 0
 }
 
+async function sha256Hex(value: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value))
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('')
+}
+
+// OpenAI pixel name normalization: lowercase, drop whitespace and ASCII punctuation, keep non-ASCII
+function normalizeName(name: string): string {
+  return name.toLowerCase().replace(/[\s!-/:-@[-`{-~]/g, '')
+}
+
+// Send hashed user data to the OpenAI ads pixel before the conversion so it can be matched
+async function trackOpenAIRegistration(userId: string | undefined) {
+  const oaiq = (window as any).oaiq
+  if (!oaiq) return
+  let eventId: string | undefined
+  try {
+    const user: Record<string, string> = {
+      email_sha256: await sha256Hex(email.value.trim().toLowerCase()),
+    }
+    if (userId) {
+      user.external_id_sha256 = await sha256Hex(userId.trim())
+      // event_id reuses the hash so a server-side event can dedupe without exposing the raw ID
+      eventId = `registration_${user.external_id_sha256}`
+    }
+    const first = normalizeName(firstName.value)
+    if (first) user.first_name_sha256 = await sha256Hex(first)
+    const last = normalizeName(lastName.value)
+    if (last) user.last_name_sha256 = await sha256Hex(last)
+    oaiq('init', { user })
+  } catch (error) {
+    console.error('OpenAI pixel user data error', error)
+  }
+  if (eventId) oaiq('measure', 'registration_completed', { type: 'customer_action' }, { event_id: eventId })
+  else oaiq('measure', 'registration_completed', { type: 'customer_action' })
+}
+
 form?.addEventListener('submit', async (e) => {
   e.preventDefault()
   if (isSubmitting || submitButton.disabled) return
@@ -188,7 +224,7 @@ form?.addEventListener('submit', async (e) => {
       },
     }).showToast()
   }
-  ;(window as any).oaiq?.('measure', 'registration_completed', { type: 'customer_action' })
+  await trackOpenAIRegistration((user as any)?.user?.id)
   if ((window as any).datafast) {
     ;(window as any).datafast('signup', { email: email.value })
   }

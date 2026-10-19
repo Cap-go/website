@@ -109,7 +109,8 @@ function stripMarkdown(value: string): string {
 function truncateDescription(value: string, maxLength = 500): string {
   const normalized = stripMarkdown(value)
   if (normalized.length <= maxLength) return normalized
-  return `${normalized.slice(0, maxLength - 3)}...`
+  // Drop a trailing high surrogate so an emoji is never split in half: a lone surrogate breaks Vite's JSON parser.
+  return `${normalized.slice(0, maxLength - 3).replace(/[\uD800-\uDBFF]$/, '')}...`
 }
 
 export function formatRssPubDate(date: Date): string {

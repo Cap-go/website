@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-appsflyer
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -65,6 +65,42 @@ import type {
   AFUrls,
 } from '@capgo/capacitor-appsflyer';
 ```
+
+## Quick start
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.initSDK({
+  devKey: 'dev-key-123',
+  appID: 'app-id-123',
+});
+console.log(result);
+```
+
+## Example: startSDK
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.startSDK();
+console.log(result);
+```
+
+## Example: logEvent
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.logEvent({ eventName: 'event' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 
