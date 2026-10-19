@@ -22,7 +22,7 @@ hero:
 
 ## Overview
 
-Start the retriever, listen for `smsReceived`, and parse OTP hashes your server includes in the SMS body.
+Start the retriever, listen for `smsReceived`, extract the numeric OTP from the SMS body, and verify the trailing 11 character app hash your server appends for the Retriever API.
 
 ## Platform support
 

@@ -34,8 +34,9 @@ Listen for the one-time SMS, extract the OTP, then start the retriever before th
 import { AndroidSmsRetriever } from '@capgo/capacitor-android-sms-retriever';
 
 const smsListener = await AndroidSmsRetriever.addListener('smsReceived', ({ message }) => {
-  const code = message.match(/\b\d{6}\b/)?.[0];
+  const code = message.match(/\b\d{4,8}\b/)?.[0];
   if (code) submitCode(code);
+  // The SMS also ends with your 11-character app hash; validate it separately from the OTP.
 });
 
 await AndroidSmsRetriever.startWatch();

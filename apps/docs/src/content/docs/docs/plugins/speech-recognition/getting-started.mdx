@@ -48,6 +48,7 @@ const partialListener = await SpeechRecognition.addListener('partialResults', ({
 await SpeechRecognition.start({ language: 'en-US', partialResults: true });
 
 // When leaving the screen:
+await SpeechRecognition.stop();
 await partialListener.remove();
 ```
 

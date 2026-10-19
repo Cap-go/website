@@ -40,7 +40,7 @@ Request access, then load contacts with a sensible page size instead of the enti
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
 await CapacitorContacts.requestPermissions();
-const { contacts } = await CapacitorContacts.getContacts();
+const { contacts } = await CapacitorContacts.getContacts({ limit: 50 });
 // Render a subset in UI lists; avoid mounting thousands of rows at once.
 ```
 

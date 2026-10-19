@@ -43,6 +43,11 @@ await MqttBridge.connect({
   serverURI: 'wss://broker.example.com',
   port: 443,
   clientId: 'cap-app-1',
+  username: 'device-user',
+  password: 'device-secret',
+  setCleanSession: true,
+  connectionTimeout: 30,
+  keepAliveInterval: 60,
   setAutomaticReconnect: true,
 });
 await MqttBridge.subscribe({ topic: 'devices/telemetry', qos: 1 });
