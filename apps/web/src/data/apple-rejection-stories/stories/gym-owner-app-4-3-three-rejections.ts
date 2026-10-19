@@ -13,5 +13,5 @@ export const story: AppleRejectionStory = {
   resolution:
     'Still open at the time of posting, with no reply from App Review after the answers were sent.',
   lesson:
-    'Effort and commit count are not what 4.3 measures. If an app is really built for one business, Apple private distribution options such as unlisted or custom app distribution may fit better than a public listing. For a public listing, make what is different from existing apps obvious in the first screens, screenshots, and review notes.',
+    'Effort and commit count are not what 4.3 measures. If an app is really built for one business, an unlisted app can stay out of search while remaining accessible to anyone with its direct link; Custom App distribution restricts availability to specified organizations. Choose the option that matches the required access control. For a public listing, make what is different from existing apps obvious in the first screens, screenshots, and review notes.',
 }
