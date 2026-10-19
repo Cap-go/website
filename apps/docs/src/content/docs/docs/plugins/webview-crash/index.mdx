@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Native WebView crash recovery, manual restart, and scheduled WebView recycling for long-running Capacitor apps."
+  tagline: "Restart crashed WebViews natively and recycle long-running WebViews on a fixed interval"
   actions:
     - text: Get started
       link: /docs/plugins/webview-crash/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-This plugin stores a native marker when the previous Capacitor WebView process dies or is recycled, then exposes that marker to the next JavaScript runtime after the app recovers. It can also restart the WebView from native code after a crash, on a fixed interval, on a cron schedule, or when JavaScript explicitly requests `restartWebView()`, which helps kiosk, POS, dashboard, scanner, and signage apps avoid memory buildup during long sessions.
+Restart crashed WebViews natively and recycle long-running WebViews on a fixed interval
+
+Start with `getPendingCrashInfo()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | Partial | See getting started |
 
 ## Core Capabilities
 

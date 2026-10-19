@@ -13,7 +13,7 @@ import { PackageManagers } from 'starlight-package-managers'
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -35,6 +35,38 @@ If you prefer Manual Setup, install the plugin by running the following commands
    - Read the [iOS notes](/docs/plugins/privacy-screen/ios/) for app switcher behavior.
    - Read the [Android notes](/docs/plugins/privacy-screen/android/) for screenshot and recording behavior.
 </Steps>
+
+## Quick start
+
+```typescript
+import { PrivacyScreen } from '@capgo/capacitor-privacy-screen';
+
+const result = await PrivacyScreen.enable();
+console.log(result);
+```
+
+## Example: disable
+
+```typescript
+import { PrivacyScreen } from '@capgo/capacitor-privacy-screen';
+
+const result = await PrivacyScreen.disable();
+console.log(result);
+```
+
+## Example: isEnabled
+
+```typescript
+import { PrivacyScreen } from '@capgo/capacitor-privacy-screen';
+
+const result = await PrivacyScreen.isEnabled();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Default behavior
 

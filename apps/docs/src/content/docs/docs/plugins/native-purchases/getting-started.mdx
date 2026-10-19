@@ -14,7 +14,7 @@ import { PackageManagers } from 'starlight-package-managers'
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -101,6 +101,61 @@ If you prefer Manual Setup, install the plugin by running the following commands
      </TabItem>
    </Tabs>
 </Steps>
+
+## Quick start
+
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+// capacitor.config.ts
+export default {
+  plugins: {
+    NativePurchases: {
+      autoFinishTransactions: false,
+    },
+  },
+};
+
+// Optional runtime override (affects subsequent native operations)
+await NativePurchases.configure({ autoFinishTransactions: false });
+```
+
+## Example: getAppTransaction
+
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+const { appTransaction } = await NativePurchases.getAppTransaction();
+
+// Check if user downloaded before version 2.0.0 (when subscription was added)
+if (compareVersions(appTransaction.originalAppVersion, '2.0.0') < 0) {
+  // User gets free access - they downloaded before subscriptions
+  grantFreeAccess();
+}
+```
+
+## Example: isEntitledToOldBusinessModel
+
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+// Check if user downloaded before version 2.0.0/build 42 (when subscription was added)
+const result = await NativePurchases.isEntitledToOldBusinessModel({
+  targetVersion: '2.0.0',
+  targetBuildNumber: '42'
+});
+
+if (result.isOlderVersion) {
+  console.log(`User downloaded v${result.originalAppVersion}, granting free access`);
+  grantFreeAccess();
+}
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Purchase service example
 

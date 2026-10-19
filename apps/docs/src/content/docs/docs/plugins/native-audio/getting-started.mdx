@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-native-audio
-npx cap sync
+bun add @capgo/capacitor-native-audio
+bunx cap sync
 ```
 
 ## Import
@@ -31,6 +31,36 @@ npx cap sync
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 ```
+
+## Quick start
+
+```typescript
+import { NativeAudio } from '@capgo/capacitor-native-audio';
+
+// Simple one-shot playback
+await NativeAudio.playOnce({ assetPath: 'audio/notification.mp3' });
+
+// Play and delete the file after completion
+await NativeAudio.playOnce({
+  assetPath: 'file:///path/to/temp/audio.mp3',
+  isUrl: true,
+  deleteAfterPlay: true
+});
+
+// Get the assetId to control playback
+const { assetId } = await NativeAudio.playOnce({
+  assetPath: 'audio/long-track.mp3',
+  autoPlay: true
+});
+// Later, you can stop it manually if needed
+await NativeAudio.stop({ assetId });
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

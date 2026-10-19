@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,38 @@ bunx cap sync
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
 ```
+
+## Quick start
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+const result = await CameraPreview.start({ parent: 'parent' });
+console.log(result);
+```
+
+## Example: stop
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.stop();
+```
+
+## Example: capture
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+const result = await CameraPreview.capture({ height: 1920 });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

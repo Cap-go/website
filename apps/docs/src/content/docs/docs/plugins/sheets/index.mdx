@@ -37,6 +37,14 @@ import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
   </Card>
 </CardGrid>
 
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Web layer | Custom elements inside WKWebView |
+| Android | Web layer | Custom elements inside Android WebView |
+| Web | Yes | Same components for Capacitor web builds |
+
 ## When To Use It
 
 `@capgo/capacitor-sheets` is for Capacitor apps that need high-quality mobile overlays without adopting a specific UI framework. It ships as custom elements, so the core package has no React, Vue, Angular, Svelte, or Solid runtime dependency.

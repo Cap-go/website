@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,48 @@ bunx cap sync
 ```typescript
 import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+
+const result = await CapacitorFFmpeg.getCapabilities();
+console.log(result);
+```
+
+## Example: reencodeVideo
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+
+const result = await CapacitorFFmpeg.reencodeVideo({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  width: 1080,
+  height: 1920,
+});
+console.log(result);
+```
+
+## Example: convertImage
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+
+const result = await CapacitorFFmpeg.convertImage({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  format: 'webp',
+});
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

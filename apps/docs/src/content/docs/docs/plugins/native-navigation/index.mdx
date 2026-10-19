@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Render iOS and Android navigation chrome natively while JavaScript keeps owning routes, content, icons, labels, and bar state.
+  tagline: "Render native navbars, tabbars, and transition shells over a full-screen Capacitor WebView"
   actions:
     - text: Get started
       link: /docs/plugins/native-navigation/getting-started/
@@ -39,6 +39,14 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     Open card, grid, and media-detail routes with shared-element-style native zoom geometry.
   </Card>
 </CardGrid>
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Demo
 

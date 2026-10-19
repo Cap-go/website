@@ -338,7 +338,17 @@ const { contacts } = await CapacitorContacts.getContacts();
     }
 
 
+def _load_extra_batch(num: int, filename: str) -> None:
+    path = Path(__file__).resolve().parent / filename
+    if not path.exists():
+        return
+    ns: dict = {"reg": reg}
+    exec(path.read_text(), ns)  # noqa: S102
+    BATCHES[num] = ns[f"B{num}"]
+
+
 load_batches()
+_load_extra_batch(5, "batch5_fragment.py")
 
 
 def patch_index_file(slug: str, tagline: str, overview: str, table: str) -> None:

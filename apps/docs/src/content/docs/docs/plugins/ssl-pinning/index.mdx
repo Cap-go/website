@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor API for inspecting SSL pinning configuration."
+  tagline: "Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android"
   actions:
     - text: Get started
       link: /docs/plugins/ssl-pinning/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor API for inspecting SSL pinning configuration.
+Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android
+
+Start with `getConfiguration()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

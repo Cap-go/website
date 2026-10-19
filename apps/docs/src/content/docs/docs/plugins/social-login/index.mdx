@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "All social logins in one plugin."
+  tagline: "Authenticate users with Google, Facebook, and Apple Sign-In for easy social login"
   actions:
     - text: Get started
       link: /docs/plugins/social-login/getting-started/
@@ -24,17 +24,17 @@ import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
 
 ## Overview
 
-`@capgo/capacitor-social-login` is the all-in-one social authentication plugin for Web, iOS, and Android.
+Authenticate users with Google, Facebook, and Apple Sign-In for easy social login
 
-It implements:
+Start with `initialize()` and the other core methods listed below.
 
-- Google Sign-In with Android Credential Manager
-- Sign in with Apple, including OAuth on Android
-- Facebook Login with the current Facebook SDK
-- Twitter/X through OAuth 2.0
-- Generic OAuth2 and OIDC providers, including GitHub, Microsoft Entra ID, Auth0, Okta, Keycloak, and other compliant servers
+## Platform support
 
-It is also the Capgo migration path for apps moving from Ionic Appflow Social Login or Ionic Auth Connect.
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Fork and migration notes
 

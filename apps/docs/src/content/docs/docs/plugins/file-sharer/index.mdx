@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Share and save files with native sheets, Android MediaStore, and browser downloads."
+  tagline: "Share and save files from base64 data or local paths across Android, iOS, and Web"
   actions:
     - text: Get started
       link: /docs/plugins/file-sharer/getting-started/
@@ -22,9 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-file-sharer` shares or saves files from base64 data, data URLs, local file paths, `file://` URLs, `content://` URIs, and Capacitor `_capacitor_file_` URLs.
+Share and save files from base64 data or local paths across Android, iOS, and Web
 
-Use it when an app needs to export reports, backups, images, videos, PDFs, ZIP archives, or other generated files without forcing every platform through the same storage path.
+Start with `share()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

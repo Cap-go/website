@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,52 @@ bunx cap sync
 ```typescript
 import { NavigationBar } from '@capgo/capacitor-navigation-bar';
 ```
+
+## Quick start
+
+```typescript
+import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+await NavigationBar.hide();
+```
+
+## Example: show
+
+```typescript
+import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+await NavigationBar.show();
+```
+
+## Example: setNavigationBarColor
+
+```typescript
+import { NavigationBar, NavigationBarColor } from '@capgo/capacitor-navigation-bar';
+
+// Set to white with dark buttons
+await NavigationBar.setNavigationBarColor({
+  color: NavigationBarColor.WHITE,
+  darkButtons: true
+});
+
+// Set to custom color
+await NavigationBar.setNavigationBarColor({
+  color: '#FF5733',
+  darkButtons: false
+});
+
+// Set a custom divider color on Android 9+
+await NavigationBar.setNavigationBarColor({
+  color: NavigationBarColor.WHITE,
+  darkButtons: true,
+  dividerColor: '#D9D9D9'
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

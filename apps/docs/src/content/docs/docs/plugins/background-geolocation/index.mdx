@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Accurate background location tracking, native geofence enter/exit events, and transition webhooks for Capacitor apps."
+  tagline: "Accurate background location tracking with native iOS and Android geofencing plus transition webhooks"
   actions:
     - text: Get started
       link: /docs/plugins/background-geolocation/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Use `@capgo/background-geolocation` when your Capacitor app needs precise location updates in the foreground or background, native circular geofences on iOS and Android, and backend delivery for geofence transitions when the WebView is suspended.
+Accurate background location tracking with native iOS and Android geofencing plus transition webhooks
+
+Start with `start()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Native calendar event management for Capacitor apps, including event prompts, direct event CRUD, calendar listing, and iOS Reminders."
+  tagline: "Manage native calendar events on iOS and Android, with iOS Reminders support"
   actions:
     - text: Get started
       link: /docs/plugins/calendar/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-calendar` gives Capacitor apps direct access to native calendar features. Use it to request calendar permissions, create and modify events, open the system calendar UI, list calendars and events, and manage Reminders on iOS.
+Manage native calendar events on iOS and Android, with iOS Reminders support
+
+Start with `checkPermission()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Demo
 

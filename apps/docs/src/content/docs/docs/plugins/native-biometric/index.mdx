@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Secure credential storage and biometric-gated access for Android and iOS."
+  tagline: "Secure authentication using Face ID, Touch ID, and Android biometric APIs"
   actions:
     - text: Get started
       link: /docs/plugins/native-biometric/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Native Biometric is a secure credential vault for iOS and Android. It stores credentials in the native Keychain or Keystore and can require biometric authentication before sensitive values are returned. It is a direct replacement for Ionic Identity Vault credential-vault flows; your app keeps control of timeout, lifecycle, privacy-screen, and custom-passcode policies.
+Secure authentication using Face ID, Touch ID, and Android biometric APIs
+
+Start with `isAvailable()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

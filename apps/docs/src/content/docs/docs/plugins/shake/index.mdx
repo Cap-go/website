@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor Shake Plugin interface for detecting shake gestures on mobile devices. This plugin allows you to listen for shake events and get plugin version information."
+  tagline: "Detect shake gestures on device for triggering actions like undo or feedback"
   actions:
     - text: Get started
       link: /docs/plugins/shake/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor Shake Plugin interface for detecting shake gestures on mobile devices. This plugin allows you to listen for shake events and get plugin version information.
+Detect shake gestures on device for triggering actions like undo or feedback
+
+Start with `addListener()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

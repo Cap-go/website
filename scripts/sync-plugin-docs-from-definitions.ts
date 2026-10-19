@@ -1427,9 +1427,14 @@ const main = async () => {
   )
 }
 
-try {
-  await main()
-} catch (error) {
-  console.error(error)
-  process.exit(1)
+export { parseMetadata, registryPlugins, buildFallbackExample, readDefinitions }
+export type { PluginMetadata, RegistryPlugin, MethodInfo }
+
+if (import.meta.main) {
+  try {
+    await main()
+  } catch (error) {
+    console.error(error)
+    process.exit(1)
+  }
 }

@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,36 @@ bunx cap sync
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+
+// Compress a directory without password
+await CapacitorZip.zip({
+  source: '/path/to/my-folder',
+  destination: '/path/to/output.zip'
+});
+```
+
+## Example: unzip
+
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+
+// Extract a standard ZIP archive
+await CapacitorZip.unzip({
+  source: '/path/to/archive.zip',
+  destination: '/path/to/extract-folder'
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

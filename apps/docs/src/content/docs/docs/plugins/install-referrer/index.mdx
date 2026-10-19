@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Read Android Play install referrer data and iOS Apple AdServices attribution tokens from Capacitor."
+  tagline: "Read Google Play install referrer data and Apple AdServices attribution from Capacitor"
   actions:
     - text: Get started
       link: /docs/plugins/install-referrer/getting-started/
@@ -22,9 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-install-referrer` exposes install attribution signals through one Capacitor API.
+Read Google Play install referrer data and Apple AdServices attribution from Capacitor
 
-On Android, it reads Google Play Install Referrer details: the raw referrer string, click timestamp, install timestamp, and instant app flag. On iOS, it returns an Apple AdServices attribution token and can optionally call Apple's AdServices attribution endpoint for Apple Search Ads attribution data.
+Start with `getReferrer()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

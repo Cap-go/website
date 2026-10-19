@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,51 @@ bunx cap sync
 ```typescript
 import { CapgoAlarm } from '@capgo/capacitor-alarm';
 ```
+
+## Quick start
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const result = await CapgoAlarm.createAlarm({
+  hour: 7,
+  minute: 30,
+  label: 'Wake up',
+  skipUi: false,
+  vibrate: true
+});
+console.log('Alarm created:', result.success);
+```
+
+## Example: openAlarms
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const result = await CapgoAlarm.openAlarms();
+if (result.success) {
+  console.log('Alarms UI opened');
+}
+```
+
+## Example: getOSInfo
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const info = await CapgoAlarm.getOSInfo();
+console.log('Platform:', info.platform);
+console.log('Supports native alarms:', info.supportsNativeAlarms);
+if (info.platform === 'android') {
+  console.log('Can schedule exact alarms:', info.canScheduleExactAlarms);
+}
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,28 @@ bunx cap sync
 ```typescript
 import { FileCompressor } from '@capgo/capacitor-file-compressor';
 ```
+
+## Quick start
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+
+// Web - Compress from file input
+const fileInput = document.getElementById('file') as HTMLInputElement;
+const file = fileInput.files[0];
+const result = await FileCompressor.compressImage({
+  blob: file,
+  quality: 0.8,
+  width: 1200,
+  mimeType: 'image/jpeg'
+});
+const url = URL.createObjectURL(result.blob);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Cache heavy CDN media in app-owned persistent storage and bind images or videos to local webview URLs.
+  tagline: "Cache CDN images and videos in persistent app storage and bind them as local media sources"
   actions:
     - text: Get started
       link: /docs/plugins/asset-cache/getting-started/
@@ -39,18 +39,17 @@ import { Aside, Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Overview
 
-`@capgo/capacitor-asset-cache` caches large images, videos, and other CDN assets in app-owned persistent storage, then gives the web app a local source URL for display.
+Cache CDN images and videos in persistent app storage and bind them as local media sources
 
-The normal path is:
+Start with `cancel()` and the other core methods listed below.
 
-1. Configure a CDN base URL once, or pass an absolute URL per asset.
-2. Call `AssetCache.bind(element, path)` or `AssetCache.src(path)`.
-3. The plugin fetches or revalidates the remote asset natively.
-4. The element receives a local webview URL only after the local file is ready.
+## Platform support
 
-<Aside type="note">
-  Successful display APIs are local-only. If the plugin cannot create or reuse a local file, `src(...)` and `resolve(...)` reject and `bind(...)` marks the element as `error`.
-</Aside>
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## When To Use It
 

@@ -13,7 +13,7 @@ import { Steps } from '@astrojs/starlight/components';
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -35,6 +35,38 @@ If you prefer Manual Setup, install the plugin by running the following commands
    - Complete [iOS setup](/docs/plugins/app-attest/ios/) for App Attest capability and backend verification flow.
    - Complete [Android setup](/docs/plugins/app-attest/android/) for Play Integrity Standard and backend verification flow.
 </Steps>
+
+## Quick start
+
+```typescript
+import { AppAttestNative } from '@capgo/capacitor-app-attest';
+
+const result = await AppAttestNative.isSupported();
+console.log(result);
+```
+
+## Example: getCapabilities
+
+```typescript
+import { AppAttestNative } from '@capgo/capacitor-app-attest';
+
+const result = await AppAttestNative.getCapabilities();
+console.log(result);
+```
+
+## Example: prepare
+
+```typescript
+import { AppAttestNative } from '@capgo/capacitor-app-attest';
+
+const result = await AppAttestNative.prepare();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Why use this plugin
 

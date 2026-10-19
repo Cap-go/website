@@ -12,7 +12,7 @@ import { Steps } from '@astrojs/starlight/components';
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/cap-go/capacitor-skills --skill capacitor-plugins
+bunx skills add https://github.com/cap-go/capacitor-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -73,6 +73,40 @@ If you prefer Manual Setup, install the plugin by running the following commands
    });
    ```
 </Steps>
+
+## Quick start
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await SocialLogin.initialize({ telegram: { botId: '123456789' } });
+```
+
+## Example: login
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+const result = await SocialLogin.login({
+  provider: 'facebook',
+  options: { permissions: ['permission'] },
+});
+// The result holds sensitive values: use it without logging it.
+```
+
+## Example: logout
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await SocialLogin.logout({ provider: 'apple' });
+```
+
+## Common pitfalls
+
+- **Initialize once**: run setup during app bootstrap.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Core flow examples
 

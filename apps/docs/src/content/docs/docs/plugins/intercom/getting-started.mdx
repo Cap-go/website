@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,43 @@ bunx cap sync
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 ```
+
+## Quick start
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.loadWithKeys({
+  appId: 'app-id-123',
+  apiKeyIOS: 'api-key-ios',
+  apiKeyAndroid: 'api-key-android',
+});
+```
+
+## Example: registerIdentifiedUser
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.registerIdentifiedUser({
+  userId: 'user-id-123',
+  email: 'user@example.com',
+});
+```
+
+## Example: registerUnidentifiedUser
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.registerUnidentifiedUser();
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

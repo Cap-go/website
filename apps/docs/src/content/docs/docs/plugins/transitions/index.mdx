@@ -37,6 +37,14 @@ import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
   </Card>
 </CardGrid>
 
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Web layer | WKWebView transitions |
+| Android | Web layer | WebView transitions |
+| Web | Yes | Same components |
+
 ## When To Use It
 
 `@capgo/capacitor-transitions` is for apps that want Ionic-quality page motion without adopting Ionic's component system. It keeps navigation in your existing web router and animates page elements inside the Capacitor WebView.

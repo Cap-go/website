@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,38 @@ bunx cap sync
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+const result = await CapacitorPedometer.getMeasurement();
+console.log(result);
+```
+
+## Example: isAvailable
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+const result = await CapacitorPedometer.isAvailable();
+console.log(result);
+```
+
+## Example: startMeasurementUpdates
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+await CapacitorPedometer.startMeasurementUpdates();
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

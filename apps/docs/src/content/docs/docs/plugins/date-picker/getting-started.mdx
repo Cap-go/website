@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-date-picker
-npx cap sync
+bun add @capgo/capacitor-date-picker
+bunx cap sync
 ```
 
 ## Import
@@ -31,6 +31,37 @@ npx cap sync
 ```typescript
 import { DatePicker } from '@capgo/capacitor-date-picker';
 ```
+
+## Quick start
+
+```typescript
+import { DatePicker } from '@capgo/capacitor-date-picker';
+
+const result = await DatePicker.present();
+console.log(result);
+```
+
+## Example: presentRange
+
+```typescript
+import { DatePicker } from '@capgo/capacitor-date-picker';
+
+const result = await DatePicker.presentRange();
+console.log(result);
+```
+
+## Example: hide
+
+```typescript
+import { DatePicker } from '@capgo/capacitor-date-picker';
+
+await DatePicker.hide();
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Pick A Date
 

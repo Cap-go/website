@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,53 @@ bunx cap sync
 ```typescript
 import { Uploader } from '@capgo/capacitor-uploader';
 ```
+
+## Quick start
+
+```typescript
+import { Uploader } from '@capgo/capacitor-uploader';
+
+const { id } = await Uploader.startUpload({
+  filePath: 'file:///path/to/file.jpg',
+  serverUrl: 'https://example.com/upload',
+  headers: {
+    'Authorization': 'Bearer token'
+  },
+  method: 'POST',
+  uploadType: 'multipart',
+  fileField: 'photo'
+});
+console.log('Upload started with ID:', id);
+```
+
+## Example: uploadMultipart
+
+```typescript
+import { Uploader } from '@capgo/capacitor-uploader';
+
+const { id } = await Uploader.uploadMultipart({
+  url: 'https://example.com/upload',
+  filePath: 'file:///path/to/file.jpg',
+  fieldName: 'photo',
+  fields: { albumId: '7' },
+  headers: { Authorization: 'Bearer token' },
+});
+console.log('Upload started with ID:', id);
+```
+
+## Example: removeUpload
+
+```typescript
+import { Uploader } from '@capgo/capacitor-uploader';
+
+await Uploader.removeUpload({ id: 'upload-123' });
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

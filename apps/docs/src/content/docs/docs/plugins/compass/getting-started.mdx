@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,48 @@ bunx cap sync
 ```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
 ```
+
+## Quick start
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+const { value } = await CapgoCompass.getCurrentHeading();
+console.log('Compass heading:', value, 'degrees');
+```
+
+## Example: startListening
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// With default throttling (100ms interval, 2° minimum change)
+await CapgoCompass.startListening();
+
+// With custom throttling for high-frequency updates
+await CapgoCompass.startListening({
+  minInterval: 50,      // 50ms between events
+  minHeadingChange: 1.0 // 1° minimum change
+});
+
+CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Heading:', event.value);
+});
+```
+
+## Example: stopListening
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+await CapgoCompass.stopListening();
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

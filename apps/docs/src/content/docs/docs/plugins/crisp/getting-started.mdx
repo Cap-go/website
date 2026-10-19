@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,44 @@ bunx cap sync
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.configure({ websiteID: 'YOUR_WEBSITE_ID' });
+```
+
+## Example: setUser
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.setUser({
+  nickname: 'John Doe',
+  email: 'john@example.com',
+  signature: 'backend-generated-hmac-sha256-hex',
+  phone: '+1234567890'
+});
+```
+
+## Example: pushEvent
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.pushEvent({
+  name: 'completed_purchase',
+  color: 'green'
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Native in-app browser for Capacitor with managed WebViews, native UI layering, private sessions, proxying, downloads, popups, and app messaging."
+  tagline: "Open managed in-app WebViews with native UI layering, private sessions, downloads, proxying, and messaging"
   actions:
     - text: Get started
       link: /docs/plugins/inappbrowser/getting-started/
@@ -22,11 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-inappbrowser` gives Capacitor apps two browser paths: `open()` for the system browser experience and `openWebView()` for a managed native WebView that your app can size, hide, message, script, proxy, and layer with Ionic UI.
+Open managed in-app WebViews with native UI layering, private sessions, downloads, proxying, and messaging
 
-Use it when the page needs more than a simple external browser: OAuth and checkout flows, embedded support portals, payment screens, video calls, document portals, interactive web apps, or any flow where your app needs native controls around live web content.
+Start with `goBack()` and the other core methods listed below.
 
-<span title="Renamed from @capgo/inappbrowser to @capgo/capacitor-inappbrowser.">Package name changed.</span>
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Common Use Cases
 

@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin contract for working with the device accelerometer."
+  tagline: "Read device accelerometer for motion detection and orientation tracking"
   actions:
     - text: Get started
       link: /docs/plugins/accelerometer/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor plugin contract for working with the device accelerometer.
+Read device accelerometer for motion detection and orientation tracking
+
+Start with `getMeasurement()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

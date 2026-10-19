@@ -13,7 +13,7 @@ import { Steps } from '@astrojs/starlight/components';
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -35,6 +35,38 @@ If you prefer Manual Setup, install the plugin by running the following commands
    - Android: set `plugins.DeviceIntegrity.cloudProjectNumber` for Play Integrity when you use attestation APIs.
    - iOS: enable the App Attest capability in Xcode for attestation APIs.
 </Steps>
+
+## Quick start
+
+```typescript
+import { DeviceIntegrity } from '@capgo/capacitor-device-integrity';
+
+const result = await DeviceIntegrity.getCapabilities();
+console.log(result);
+```
+
+## Example: getWidevineFingerprint
+
+```typescript
+import { DeviceIntegrity } from '@capgo/capacitor-device-integrity';
+
+const result = await DeviceIntegrity.getWidevineFingerprint();
+console.log(result);
+```
+
+## Example: prepareAttestation
+
+```typescript
+import { DeviceIntegrity } from '@capgo/capacitor-device-integrity';
+
+const result = await DeviceIntegrity.prepareAttestation();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Why use this plugin
 

@@ -51,6 +51,19 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 </Steps>
 
+## Quick start
+
+```typescript
+import { ElectronUpdater } from '@capgo/electron-updater';
+await ElectronUpdater.notifyAppReady();
+```
+
+## Common pitfalls
+
+- Call notifyAppReady after UI boots.
+- Match Capgo signing in the main process.
+- Set update channels before shipping.
+
 ## Setup
 
 The Electron Updater requires setup in three places: main process, preload script, and renderer process.

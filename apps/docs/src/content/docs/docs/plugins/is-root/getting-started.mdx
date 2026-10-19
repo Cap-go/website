@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,33 @@ bunx cap sync
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
 ```
+
+## Quick start
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const { result } = await IsRoot.isRooted();
+if (result) {
+  console.log('Device is rooted/jailbroken');
+} else {
+  console.log('Device is not rooted/jailbroken');
+}
+```
+
+## Example: togetDeviceInfo
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const deviceInfo = await IsRoot.togetDeviceInfo();
+console.log('Device info:', deviceInfo);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

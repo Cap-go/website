@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-inappbrowser
-npx cap sync
+bun add @capgo/capacitor-inappbrowser
+bunx cap sync
 ```
 
 ## Import
@@ -31,6 +31,39 @@ npx cap sync
 ```typescript
 import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 ```
+
+## Quick start
+
+```typescript
+import { baseInAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+const result = await baseInAppBrowser.goBack();
+console.log(result);
+```
+
+## Example: open
+
+```typescript
+import { baseInAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+const result = await baseInAppBrowser.open({ url: "https://capgo.app" });
+console.log(result);
+```
+
+## Example: clearCookies
+
+```typescript
+import { baseInAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+const result = await baseInAppBrowser.clearCookies({ url: 'https://example.com' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Choose the Browser Mode
 

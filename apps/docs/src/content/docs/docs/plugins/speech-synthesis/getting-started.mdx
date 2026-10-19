@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,48 @@ bunx cap sync
 ```typescript
 import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
 ```
+
+## Quick start
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+const result = await SpeechSynthesis.speak({
+  text: 'Hello, world!',
+  language: 'en-US',
+  rate: 1.0,
+  pitch: 1.0,
+  volume: 1.0,
+  queueStrategy: 'Add'
+});
+console.log('Utterance ID:', result.utteranceId);
+```
+
+## Example: synthesizeToFile
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+const result = await SpeechSynthesis.synthesizeToFile({
+  text: 'Hello, world!',
+  language: 'en-US'
+});
+console.log('Audio file saved at:', result.filePath);
+```
+
+## Example: cancel
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+await SpeechSynthesis.cancel();
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

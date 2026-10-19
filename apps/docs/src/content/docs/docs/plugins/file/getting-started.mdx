@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,39 @@ bunx cap sync
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorFile, FileSystemType } from '@capgo/capacitor-file';
+
+const result = await CapacitorFile.requestFileSystem({ type: FileSystemType.TEMPORARY });
+console.log(result);
+```
+
+## Example: resolveLocalFileSystemURL
+
+```typescript
+import { CapacitorFile } from '@capgo/capacitor-file';
+
+const result = await CapacitorFile.resolveLocalFileSystemURL({ url: 'https://example.com' });
+console.log(result);
+```
+
+## Example: getFile
+
+```typescript
+import { CapacitorFile } from '@capgo/capacitor-file';
+
+const result = await CapacitorFile.getFile({ path: 'path/to/file' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

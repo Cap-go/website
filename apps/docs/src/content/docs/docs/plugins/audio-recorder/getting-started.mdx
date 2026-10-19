@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,36 @@ bunx cap sync
 ```typescript
 import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.startRecording();
+```
+
+## Example: pauseRecording
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.pauseRecording();
+```
+
+## Example: resumeRecording
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.resumeRecording();
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

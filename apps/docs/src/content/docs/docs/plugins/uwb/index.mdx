@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Measure precise distance and direction between UWB-capable devices using native iOS and Android ranging APIs.
+  tagline: "Ultra-Wideband ranging for peer distance and direction on iOS Nearby Interaction and Android Jetpack UWB"
   image:
     file: ~public/icons/plugins/uwb.svg
   actions:
@@ -26,22 +26,17 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Overview
 
-Capacitor plugin for Ultra-Wideband (UWB) ranging on iOS and Android.
+Ultra-Wideband ranging for peer distance and direction on iOS Nearby Interaction and Android Jetpack UWB
 
-<CardGrid stagger>
-  <Card title="iOS Nearby Interaction" icon="device-mobile">
-    Exchange `NIDiscoveryToken` values and run peer sessions with Apple's Nearby Interaction framework.
-  </Card>
-  <Card title="Android Jetpack UWB" icon="setting">
-    Start controller and controlee sessions with `androidx.core.uwb` ranging parameters.
-  </Card>
-  <Card title="Live Ranging Events" icon="rocket">
-    Listen for distance, direction, and session lifecycle updates from JavaScript.
-  </Card>
-  <Card title="Out-of-Band Exchange" icon="puzzle">
-    Bring your own transport for token and parameter exchange, such as BLE, MultipeerConnectivity, or a backend.
-  </Card>
-</CardGrid>
+Start with `isAvailable()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | Partial | See getting started |
 
 ## Core Capabilities
 

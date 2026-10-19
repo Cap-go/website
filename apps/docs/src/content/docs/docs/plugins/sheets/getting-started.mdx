@@ -75,6 +75,20 @@ If you prefer Manual Setup, install the plugin by running the following commands
   There is no native plugin registration step. Run `npx cap sync` only as part of your normal Capacitor workflow when you need to sync web assets or native project changes.
 </Aside>
 
+## Quick start
+
+```typescript
+import '@capgo/capacitor-sheets';
+```
+
+Register the package once, then render a bottom sheet with detents in your page markup.
+
+## Common pitfalls
+
+- **Register components**: import `@capgo/capacitor-sheets` once at bootstrap or elements will not upgrade.
+- **Viewport fit**: missing `viewport-fit=cover` breaks safe area padding on notched phones.
+- **Keyboard**: enable the documented focus scroll prevention when inputs sit inside bottom sheets.
+
 ## Capacitor Safe Areas
 
 Safe areas are enabled by default through `safe-area="auto"`. The sheet viewport reads both browser environment values and Capacitor fallback variables:

@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,38 @@ bunx cap sync
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 ```
+
+## Quick start
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+const result = await NativeBiometric.isAvailable();
+console.log(result);
+```
+
+## Example: verifyIdentity
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+await NativeBiometric.verifyIdentity();
+```
+
+## Example: getCredentials
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+const result = await NativeBiometric.getCredentials({ server: 'example.com' });
+// The result holds sensitive values: use it without logging it.
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 
