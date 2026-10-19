@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-pdf-viewer
-npx cap sync
+bun add @capgo/capacitor-pdf-viewer
+bunx cap sync
 ```
 
 ## Import
@@ -31,6 +31,24 @@ npx cap sync
 ```typescript
 import { PdfViewer } from '@capgo/capacitor-pdf-viewer';
 ```
+
+## Quick start
+
+```typescript
+import { PdfViewer } from '@capgo/capacitor-pdf-viewer';
+
+const result = await PdfViewer.open({
+  source: 'https://example.com/manual.pdf',
+  headers: { Authorization: 'Bearer token' },
+  mode: 'fullscreen',
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Platform setup
 
