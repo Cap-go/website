@@ -13,8 +13,22 @@ const CASES = [
   ['/fr/cli/reference/build/', '/fr/docs/cli/reference/build/'],
 ]
 
+const NULL_CASES = [
+  '/blog/category/foo/extra/',
+  '/capgo/message',
+  '/pricing/-1/',
+  '/fr/cli/overview/',
+  '/blog/dist',
+]
+
 for (const [from, to] of CASES) {
   test(`resolveNotFoundRecoveryRedirect ${from} → ${to}`, () => {
     expect(resolveNotFoundRecoveryRedirect(from)).toBe(to)
+  })
+}
+
+for (const from of NULL_CASES) {
+  test(`resolveNotFoundRecoveryRedirect ${from} → null`, () => {
+    expect(resolveNotFoundRecoveryRedirect(from)).toBeNull()
   })
 }

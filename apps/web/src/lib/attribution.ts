@@ -425,7 +425,9 @@ export function decorateAttributionLinks(root: ParentNode = document): void {
     if (next !== href) {
       el.setAttribute('href', next)
       const rel = (el.getAttribute('rel') ?? '').trim()
-      if (!/\bnofollow\b/i.test(rel)) {
+      const tokens = rel.split(/\s+/).filter(Boolean)
+      const hasNofollow = tokens.some((token) => token.toLowerCase() === 'nofollow')
+      if (!hasNofollow) {
         el.setAttribute('rel', rel ? `${rel} nofollow` : 'nofollow')
       }
     }

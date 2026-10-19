@@ -357,10 +357,6 @@ export function staticLegacyRedirect(request: Request, pathname: string): Respon
   if (localizedLegacyTarget) {
     return redirectToPath(request, localizedLegacyTarget)
   }
-  const recoveryTarget = resolveNotFoundRecoveryRedirect(pathname)
-  if (recoveryTarget) {
-    return redirectToPath(request, recoveryTarget)
-  }
   return null
 }
 

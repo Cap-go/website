@@ -623,9 +623,17 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
   return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
 }
 
-async function temporaryEnglishCrawlerResponse(request: Request, env: Env, requestUrl: URL, isHead = false): Promise<Response> {
+async function temporaryEnglishCrawlerResponse(
+  request: Request,
+  env: Env,
+  requestUrl: URL,
+  locale: Locale,
+  isHead = false,
+): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
-  if (isRedirect(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
+  if (isRedirect(originResponse)) {
+    return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
+  }
   if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
     const sourceHtml = await originResponse.text()
     const localizedHtml = rewriteMetadataForEnglishCanonical(sourceHtml, requestUrl)
@@ -3418,7 +3426,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
 
   const enqueued = await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)
   if (!enqueued) return temporaryEnglishRedirectResponse(requestUrl, isHead)
-  return await temporaryEnglishCrawlerResponse(request, env, requestUrl, isHead)
+  return await temporaryEnglishCrawlerResponse(request, env, requestUrl, locale, isHead)
 }
 
 function jsonResponse(body: unknown, status = 200): Response {

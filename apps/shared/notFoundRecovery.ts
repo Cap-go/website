@@ -56,10 +56,12 @@ export function resolveStaticNotFoundRedirect(pathname: string): string | null {
   return `${localePrefix}${target}`
 }
 
-/** CLI paths without /docs prefix from old links. */
+const LEGACY_CLI_DOCS_PREFIX = '/cli/reference/'
+
+/** Legacy CLI reference paths without the /docs prefix. */
 export function resolveCliDocsRedirect(pathname: string): string | null {
   const { localePrefix, path } = splitLocalePath(pathname)
-  if (!path.startsWith('/cli/')) return null
+  if (!path.startsWith(LEGACY_CLI_DOCS_PREFIX)) return null
   const docsPath = path.endsWith('/') ? path : `${path}/`
   return `${localePrefix}/docs${docsPath}`
 }
