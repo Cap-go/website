@@ -6204,7 +6204,7 @@ const messages = {
   website_live_cta_title: 'Turn your website into an app, then keep deploying',
   website_live_description: 'Capgo Web2App turns your deployed website into iOS and Android apps, submits them for review and updates them on every deploy. $12/month.',
   website_live_faq1_a:
-    'Yes, within the same rules as any Capgo live update. Apple lets apps download interpreted code such as JavaScript as long as it does not change the primary purpose of the app, bypass the security of the operating system, or create a store or storefront for other Applications (section 3.3.1(B) of the Apple Developer Program License Agreement). Web2App only downloads HTML, CSS and JavaScript that runs in the same WebView as your shipped app. Guideline 4.2 is a separate point: Apple expects an app to offer more than a repackaged website, so give it real app value. Each app is reviewed on its own, so nobody can promise approval.',
+    'Yes, within the same rules as any Capgo live update. Apple lets apps download interpreted code such as JavaScript as long as it does not change the primary purpose of the app, bypass the security of the operating system, or create a store or storefront for other Applications (section 3.3.1(B) of the Apple Developer Program License Agreement). Google Play allows JavaScript in a WebView under its executable-code rules, and any interpreted code loaded at runtime must follow Google Play policies. Web2App only downloads HTML, CSS and JavaScript that runs in the same WebView as your shipped app. Guideline 4.2 is a separate point: Apple expects an app to offer more than a repackaged website, so give it real app value. Each app is reviewed on its own, so nobody can promise approval.',
   website_live_faq1_q: 'Is this allowed on the App Store and Google Play?',
   website_live_faq2_a:
     'The updater calls notifyAppReady() automatically once a new version shows content. If that never happens, the app goes back to the version that last worked. Fix the site, deploy again, and devices pick up the fix on their next check.',
@@ -6219,7 +6219,7 @@ const messages = {
     'No. Capgo builds the store app from its own Capacitor template, so you do not need Xcode, Android Studio or a native project. If you already have a Capacitor project, you can add the updater plugin to it instead. Either way, deploying your website is the release.',
   website_live_faq5_q: 'Do I need a native project, the Capgo CLI or a CI step?',
   website_live_faq6_a:
-    'Native code still goes through the stores. If a website change relies on a new native plugin, publish the new native build first. Older installs do not have that plugin, so the new web code would fail to start there and roll back.',
+    'Native code still goes through the stores. If a website change needs a new native plugin, publish the new native build first so new installs get the plugin. Older installs will not have it, so the new web code must feature-detect the plugin or provide a fallback. The updater only rolls back when a version never becomes ready, meaning notifyAppReady() never runs. A crash or missing plugin after that point does not roll back automatically.',
   website_live_faq6_q: 'What if I add a native plugin later?',
   website_live_faq7_a:
     'Yes. Open your app settings in the Capgo console and switch to the full Capgo experience. A guided onboarding sets up CLI uploads, and channels, stats, encryption and bundle history show up again. The domain can be changed from the same settings at any time.',

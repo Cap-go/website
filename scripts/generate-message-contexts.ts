@@ -56,7 +56,8 @@ function extractMessages(source: string): MessageMap {
 }
 
 function humanizeKey(key: string): string {
-  return key
+  const keyForLabel = key.startsWith('website_live_') ? key.replace(/^website_live_/, 'web2app_') : key
+  return keyForLabel
     .replace(/_/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase())
     .replace(/\bSeo\b/g, 'SEO')
@@ -73,6 +74,7 @@ function humanizeKey(key: string): string {
     .replace(/\bSla\b/g, 'SLA')
     .replace(/\bTos\b/g, 'Terms of Service')
     .replace(/\bAup\b/g, 'Acceptable Use Policy')
+    .replace(/\bWeb2app\b/g, 'Web2App')
 }
 
 const PREFIX_CONTEXT: Array<{ test: (key: string) => boolean; label: string }> = [
@@ -81,6 +83,10 @@ const PREFIX_CONTEXT: Array<{ test: (key: string) => boolean; label: string }> =
   { test: (key) => key.startsWith('native_build_'), label: 'Capgo Builder / native cloud build product page' },
   { test: (key) => key.startsWith('native_'), label: 'Native build / Capgo Builder marketing copy' },
   { test: (key) => key.startsWith('live_update_'), label: 'Live updates product page' },
+  {
+    test: (key) => key.startsWith('website_live_'),
+    label: 'Capgo Web2App product page (/web2app/) and Web2App pricing card',
+  },
   { test: (key) => key.startsWith('enterprise_'), label: 'Enterprise product/pricing page' },
   { test: (key) => key.startsWith('alternatives_'), label: 'Capacitor live-update alternatives comparison page' },
   { test: (key) => key.startsWith('appflow_'), label: 'Appflow comparison / migration marketing copy' },

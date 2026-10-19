@@ -34,15 +34,15 @@ bunx cap sync
 // capacitor.config.ts: appId must match the app id in Capgo
 plugins: {
   CapacitorUpdater: {
-    websiteMode: true,
     autoUpdate: true,
   },
 },
 
-// notifyAppReady() runs automatically once the page shows content.
-// A version that never renders is rolled back. To confirm from your own
-// code instead, set websiteAutoNotifyReady: false and call
-// CapacitorUpdater.notifyAppReady() after your app has mounted.`
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+// Call notifyAppReady() once your app has rendered.
+// If a version never becomes ready, the updater rolls back to the last good one.
+CapacitorUpdater.notifyAppReady()`
 
 const mcpCode = `> Publish my Web2App app com.example.app to the App Store
 
@@ -202,27 +202,8 @@ const eyebrow = 'font-mono text-xs font-semibold tracking-[0.14em] text-[#44BCFF
             </h1>
             <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-pretty text-slate-300 lg:mx-0">{copy('website_live_lead')}</p>
 
-            <a
-              id="web2app-hero-register"
-              href={registerUrl}
-              aria-label={copy('website_live_url_aria_label')}
-              class="group mx-auto mt-9 flex w-full max-w-lg items-center gap-2 rounded-full border border-white/20 bg-white/[0.07] p-1.5 text-left transition-colors hover:border-white/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#44BCFF] lg:mx-0"
-            >
-              <span class="flex min-w-0 flex-1 items-center gap-2 px-3 text-[0.95rem]">
-                <svg class="h-4 w-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0c2.5-2.4 3.75-5.4 3.75-9S14.5 5.4 12 3m0 18c-2.5-2.4-3.75-5.4-3.75-9S9.5 5.4 12 3M3.5 9h17M3.5 15h17"
-                  ></path>
-                </svg>
-                <span class="text-slate-400">https://</span>
-                <span class="truncate text-slate-300">{copy('website_live_url_placeholder')}</span>
-              </span>
-              <span class="inline-flex shrink-0 items-center gap-1 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-gray-950 transition-colors group-hover:bg-gray-200">
-                {copy('website_live_url_button')}
-                <span aria-hidden="true">&rarr;</span>
-              </span>
+            <a id="web2app-hero-register" href={registerUrl} class:list={[primaryButton, 'mx-auto mt-9 lg:mx-0']}>
+              {copy('website_live_cta_primary')}
             </a>
 
             <ul class="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-slate-400 lg:justify-start">

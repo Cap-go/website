@@ -5,8 +5,8 @@
 import type { MessageKey } from './messages'
 
 export const messageContextOverrides = {
-  // Example:
-  // updates: 'Pricing calculator metric label for monthly OTA update volume, not a nav item.',
+  // website_live_* keys are Web2App copy; generator PREFIX + web2app_* humanize labels apply to all keys.
+  // Add per-key overrides here only when a specific string needs extra translator guidance.
   live_update_hero_headline:
     'SEO product H1. Keep the product name "Capacitor Live Updates" and the acronym OTA in parentheses. Do not replace OTA with a long translated phrase in the headline.',
   live_update_hero_title: 'Same meaning as live_update_hero_headline: Capacitor Live Updates (OTA). Used as document title context.',
