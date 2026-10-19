@@ -1,0 +1,376 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-app-intents and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-app-intents` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-app-intents
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import {
+  CapgoAppIntents,
+  drainPendingInvocations,
+  useAppIntentsListener,
+} from '@capgo/capacitor-app-intents';
+```
+
+## Handle invocations (cold start safe)
+
+Register a listener before you drain the pending queue so Siri, Shortcuts, Spotlight, and quick actions that fire during WebView startup are not lost.
+
+```typescript
+const handleInvocation = async (invocation) => {
+  console.log(invocation.name, invocation.params, invocation.source);
+};
+
+await useAppIntentsListener(handleInvocation);
+```
+
+`useAppIntentsListener` attaches `appIntentInvoked` and then drains pending items. You can also call `getPendingInvocations()` and `removePendingInvocation()` manually if you prefer explicit control.
+
+## Siri phrases (codegen)
+
+`AppShortcut` phrases and SF Symbol names must be **compile time literals** in Swift. Configure `app-shortcuts.config.json` in your app repo and generate Swift into your iOS **App** target:
+
+```bash
+node node_modules/@capgo/capacitor-app-intents/scripts/generate-app-shortcuts.mjs \
+  --config app-shortcuts.config.json \
+  --output ios/App/App/CapgoGeneratedAppShortcuts.swift
+```
+
+Link the plugin SPM package to the app target so `CapgoDispatchAppIntent` resolves. On Capacitor 8, forward SceneDelegate quick actions and continued Spotlight activities with `CapgoAppIntentsLifecycle` (see the plugin repo `docs/ios-scene-integration.md`).
+
+## capacitor.config
+
+```typescript
+plugins: {
+  CapgoAppIntents: {
+    appGroupId: 'group.your.app',
+    spotlightDomainIdentifier: 'your.app.bundle',
+  },
+},
+```
+
+## API Overview
+
+### `getPendingInvocations`
+
+Return invocations queued before JavaScript was ready.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+const result = await CapgoAppIntents.getPendingInvocations();
+console.log(result);
+```
+
+### `removePendingInvocation`
+
+Remove one pending invocation after your handler processes it.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+await CapgoAppIntents.removePendingInvocation({ id: 'id-123' });
+```
+
+### `setEntityCatalog`
+
+Persist an entity catalog for a given type string.
+
+Powers Siri and Shortcuts entity parameters without new Swift per row.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+await CapgoAppIntents.setEntityCatalog({
+  type: 'type',
+  entries: [
+    {
+      id: 'id-123',
+      title: 'Hello from Capacitor',
+    },
+  ],
+});
+```
+
+### `setHomeScreenShortcutItems`
+
+Replace Home Screen quick actions (UIApplicationShortcutItems).
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+await CapgoAppIntents.setHomeScreenShortcutItems({
+  items: [
+    {
+      type: 'type',
+      title: 'Hello from Capacitor',
+    },
+  ],
+});
+```
+
+### `indexSpotlightEntities`
+
+Index Spotlight items for your app domain.
+
+Uses `CSSearchableItem` on iOS 16 and later. On iOS 18 and later also donates
+`IndexedEntity` values through `indexAppEntities` and `associateAppEntity`.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+await CapgoAppIntents.indexSpotlightEntities({
+  entities: [
+    {
+      id: 'id-123',
+      title: 'Hello from Capacitor',
+      actionName: 'action',
+    },
+  ],
+});
+```
+
+### `removeSpotlightEntities`
+
+Remove Spotlight items by id.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+await CapgoAppIntents.removeSpotlightEntities({ ids: ['ids'] });
+```
+
+### `performAppleSchemaTemplate`
+
+Queue a JavaScript handler for an alpha Apple schema template.
+
+This does not call private Mail or system schema APIs. It only enqueues an
+invocation (for example `appleSchemaMailCreateDraft`) for your app code to handle.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+const result = await CapgoAppIntents.performAppleSchemaTemplate({
+  template: 'mail_create_draft',
+  params: {},
+});
+console.log(result);
+```
+
+## Type Reference
+
+### `AppIntentInvocation`
+A pending App Intent style invocation waiting for JavaScript.
+```typescript
+export interface AppIntentInvocation {
+  /**
+   * Stable id for this queued invocation.
+   *
+   * @since 0.1.0
+   */
+  id: string;
+
+  /**
+   * Handler name your JavaScript listens for.
+   *
+   * @since 0.1.0
+   */
+  name: string;
+
+  /**
+   * Parameters passed from Siri, Shortcuts, Spotlight, or quick actions.
+   *
+   * @since 0.1.0
+   */
+  params: Record<string, unknown>;
+
+  /**
+   * Origin of the invocation.
+   *
+   * @since 0.1.0
+   */
+  source: AppIntentInvocationSource;
+
+  /**
+   * Unix timestamp in milliseconds when the invocation was queued.
+   *
+   * @since 0.1.0
+   */
+  createdAt: number;
+}
+```
+
+### `EntityCatalogEntry`
+One row in a runtime entity catalog used by Siri and Shortcuts parameters.
+```typescript
+export interface EntityCatalogEntry {
+  /**
+   * Unique id within the catalog type.
+   *
+   * @since 0.1.0
+   */
+  id: string;
+
+  /**
+   * Primary label shown in Shortcuts and Siri.
+   *
+   * @since 0.1.0
+   */
+  title: string;
+
+  /**
+   * Optional subtitle.
+   *
+   * @since 0.1.0
+   */
+  subtitle?: string;
+
+  /**
+   * Optional extra metadata forwarded to JavaScript when the entity is chosen.
+   *
+   * @since 0.1.0
+   */
+  metadata?: Record<string, unknown>;
+}
+```
+
+### `HomeScreenShortcutItem`
+Home Screen quick action item.
+```typescript
+export interface HomeScreenShortcutItem {
+  /**
+   * Stable type string delivered to JavaScript.
+   *
+   * @since 0.1.0
+   */
+  type: string;
+
+  /**
+   * Visible title under the icon.
+   *
+   * @since 0.1.0
+   */
+  title: string;
+
+  /**
+   * Optional subtitle.
+   *
+   * @since 0.1.0
+   */
+  subtitle?: string;
+
+  /**
+   * Optional SF Symbol name.
+   *
+   * @since 0.1.0
+   */
+  iconName?: string;
+
+  /**
+   * Optional params merged into the invocation.
+   *
+   * @since 0.1.0
+   */
+  params?: Record<string, unknown>;
+}
+```
+
+### `SpotlightEntity`
+Spotlight searchable entity.
+```typescript
+export interface SpotlightEntity {
+  /**
+   * Unique id within your app domain.
+   *
+   * @since 0.1.0
+   */
+  id: string;
+
+  /**
+   * Title shown in Spotlight.
+   *
+   * @since 0.1.0
+   */
+  title: string;
+
+  /**
+   * Optional description.
+   *
+   * @since 0.1.0
+   */
+  description?: string;
+
+  /**
+   * Optional keywords.
+   *
+   * @since 0.1.0
+   */
+  keywords?: string[];
+
+  /**
+   * Action name delivered when the result is opened.
+   *
+   * @since 0.1.0
+   */
+  actionName: string;
+
+  /**
+   * Optional params merged into the invocation.
+   *
+   * @since 0.1.0
+   */
+  params?: Record<string, unknown>;
+}
+```
+
+### `AppleSchemaTemplate`
+Alpha Apple schema template identifiers shipped by the plugin.
+```typescript
+export type AppleSchemaTemplate = 'mail_create_draft';
+```
+
+### `AppIntentInvokedEvent`
+```typescript
+export interface AppIntentInvokedEvent {
+  /**
+   * The invocation that was just queued or replayed to listeners.
+   *
+   * @since 0.1.0
+   */
+  invocation: AppIntentInvocation;
+}
+```
+
+### `AppIntentInvocationSource`
+Where an invocation originated.
+```typescript
+export type AppIntentInvocationSource = 'app_intent' | 'spotlight' | 'quick_action' | 'apple_schema';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

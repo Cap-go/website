@@ -26,7 +26,7 @@ hero:
 
 On iOS, shared payloads use `notifyListeners(..., retainUntilConsumed: true)` so a share that arrives before your WebView loads is still delivered to the first listener. That is share-specific cold start handling, not a general App Intent queue.
 
-This plugin does **not** create Siri shortcuts, Shortcuts app actions, or outgoing share targets. It is unrelated to [@capgo/capacitor-intent-launcher](/docs/plugins/intent-launcher/) (Android activities and iOS Settings).
+This plugin does **not** create Siri shortcuts or Shortcuts app actions. For those, use [@capgo/capacitor-app-intents](/docs/plugins/app-intents/). It is unrelated to [@capgo/capacitor-intent-launcher](/docs/plugins/intent-launcher/) (Android activities and iOS Settings).
 
 See [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcuts-widgets-and-intents/) for a full comparison with expo-app-intents-style features.
 

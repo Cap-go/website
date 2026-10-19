@@ -113,6 +113,7 @@ const actionDefinitionRows =
 @capgo/capacitor-android-sms-retriever|github.com/Cap-go|Read one app-targeted verification SMS without SMS permissions and request SIM phone number hints on Android|https://github.com/Cap-go/capacitor-android-sms-retriever/|Android SMS Retriever
 @capgo/capacitor-appinsights|github.com/Cap-go|Track app usage, performance metrics, and user behavior with Apptopia AppInsights|https://github.com/Cap-go/capacitor-appinsights/|AppInsights
 @capgo/capacitor-app-attest|github.com/Cap-go|Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard|https://github.com/Cap-go/capacitor-app-attest/|App Attest
+@capgo/capacitor-app-intents|github.com/Cap-go|Ship Siri phrases, Shortcuts, Spotlight, Home Screen quick actions, and App Intents entity catalogs from Capacitor without rebuilding your web layer for every action|https://github.com/Cap-go/capacitor-app-intents/|App Intents
 @capgo/capacitor-recaptcha|github.com/Cap-go|Generate Web reCAPTCHA or reCAPTCHA Enterprise tokens plus native Enterprise mobile tokens|https://github.com/Cap-go/capacitor-recaptcha/|reCAPTCHA
 @capgo/capacitor-verisoul|github.com/Cap-go|Collect Verisoul native fraud-prevention sessions from Capacitor apps on iOS and Android|https://github.com/Cap-go/capacitor-verisoul/|Verisoul
 @capgo/capacitor-audio-session|github.com/Cap-go|Configure iOS audio session for background playback, mixing, and routing control|https://github.com/Cap-go/capacitor-audiosession/|Audio Session
@@ -271,6 +272,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-android-sms-retriever': 'ChatBubbleLeft',
   '@capgo/capacitor-appinsights': 'ChartBar',
   '@capgo/capacitor-app-attest': 'ShieldCheck',
+  '@capgo/capacitor-app-intents': 'Sparkles',
   '@capgo/capacitor-recaptcha': 'ShieldCheck',
   '@capgo/capacitor-verisoul': 'ShieldCheck',
   '@capgo/capacitor-audio-session': 'SpeakerWave',
@@ -512,6 +514,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-pretty-toast',
     '@capgo/capacitor-live-activities',
     '@capgo/capacitor-widget-kit',
+    '@capgo/capacitor-app-intents',
   ],
   location: [
     '@capgo/capacitor-nativegeocoder',
@@ -547,9 +550,7 @@ const pluginNamesByCategory = {
 
 const pluginCategoriesByName = {
   ...Object.fromEntries(
-    Object.entries(pluginNamesByCategory).flatMap(([category, names]) =>
-      names.map((name) => [resolvePluginCategoryPackageName(name), category as PluginCategoryId]),
-    ),
+    Object.entries(pluginNamesByCategory).flatMap(([category, names]) => names.map((name) => [resolvePluginCategoryPackageName(name), category as PluginCategoryId])),
   ),
   ...documentedPluginCategoryOverrides,
 } as Record<string, PluginCategoryId>
