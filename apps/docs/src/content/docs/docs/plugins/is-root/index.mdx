@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-Capacitor Is Root Plugin for detecting rooted (Android) or jailbroken (iOS) devices.
+`@capgo/capacitor-is-root` detects **jailbroken iOS** and **rooted Android** devices before high risk flows (payments, DRM, enterprise data). `isRooted()` is the default cross platform check. Android exposes deeper RootBeer helpers for fraud teams.
+
+## Platform support
+
+| Platform | Notes |
+| --- | --- |
+| iOS | Jailbreak file and sandbox write probes. Simulator always reports not jailbroken. |
+| Android | RootBeer plus extra heuristics. Emulator checks are separate APIs. |
+| Web | Not meaningful |
 
 ## Core Capabilities
 
