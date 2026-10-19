@@ -545,7 +545,7 @@ try {
           if (text === 'About') return 'Chi siamo'
           if (text.includes('App initialization step by step guide')) return 'App-Initialisierung Schritt-für-Schritt-Anleitung'
           if (text.includes('Learn how to initialize an app step by step')) {
-            return 'Erfahren Sie, wie Sie eine App Schritt für Schritt mit dem neuesten Workflow initialisieren.'
+            return 'Neue deutsche Meta-Beschreibung fuer den Initialisierungsworkflow.'
           }
           return 'IT ' + text
         }
@@ -712,7 +712,7 @@ try {
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A stale localized blog did not sync current English scripts')
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Meta') === 'synced', 'A stale localized blog did not sync current English meta')
   assert(staleBlogBody.includes('App-Initialisierung Schritt-für-Schritt-Anleitung'), 'STALE localized blog did not refresh the translated title')
-  assert(staleBlogBody.includes('Erfahren Sie, wie Sie eine App Schritt für Schritt'), 'STALE localized blog did not refresh the translated meta description')
+  assert(staleBlogBody.includes('Neue deutsche Meta-Beschreibung fuer den Initialisierungsworkflow'), 'STALE localized blog did not refresh the translated meta description')
   assert(staleBlogBody.includes('App-Initialisierung Schritt für Schritt'), 'Script sync on STALE wipe translated heading')
   assert(staleBlogBody.includes('Übersetzter Anleitungstext bleibt erhalten.'), 'Script sync on STALE wipe translated paragraph')
   assert(staleBlogBody.includes('"headline":"App-Initialisierung"'), 'Script sync on STALE replaced translated JSON-LD')
