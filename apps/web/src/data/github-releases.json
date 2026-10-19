@@ -821,7 +821,7 @@
     "link": "https://github.com/Cap-go/capacitor-live-reload/releases/tag/8.0.12",
     "guid": "https://github.com/Cap-go/capacitor-live-reload/releases/tag/8.0.12",
     "pubDate": "2026-10-15T02:11:46.000Z",
-    "description": "🆕 Changelog Changed Updated project documentation for improved clarity and accuracy. Migrated internal development tooling to ESLint 10 and TypeScript 6. This keeps linting and type checking aligned with the latest supported toolchains. No runtime breaking changes are expected; contributors building from source should ensure their toolchain supports these versions. Removed Removed the consulting call to action from the README to keep project documentation focused on usage and contribution. \ud83d..."
+    "description": "🆕 Changelog Changed Updated project documentation for improved clarity and accuracy. Migrated internal development tooling to ESLint 10 and TypeScript 6. This keeps linting and type checking aligned with the latest supported toolchains. No runtime breaking changes are expected; contributors building from source should ensure their toolchain supports these versions. Removed Removed the consulting call to action from the README to keep project documentation focused on usage and contribution. ..."
   },
   {
     "category": "release",
