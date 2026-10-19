@@ -29,6 +29,12 @@ hero:
 
 Use SVG templates when your widget can be rendered from resolved SVG strings. Use full-native sessions when the widget needs a custom native UI but still has to start, stop, sync state, or ask the app to complete async work.
 
+## Siri, Shortcuts, and App Intents
+
+Widget Kit is **not** a Siri or Shortcuts bridge. It does cover WidgetKit, ActivityKit template Live Activities, and interactive iOS controls through bundled `LiveActivityIntent` types (`CapgoTemplateActionIntent`, `CompleteSetIntent`) that update stored template state and append to the template **event log** (`listTemplateEvents` / `acknowledgeTemplateEvents`).
+
+It does **not** register custom shortcut phrases, `AppShortcutsProvider`, JavaScript entity catalogs, Spotlight items, or Apple app schemas. For an honest comparison with tools such as [expo-app-intents](https://expo.dev/blog/introducing-expo-app-intents/), see [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcuts-widgets-and-intents/).
+
 ## Demo
 
 <figure>

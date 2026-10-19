@@ -60,6 +60,7 @@ Plugin In App Review|in-app review prompt plugin for app store ratings|docs/plug
 Plugin Incoming Call Kit|native incoming call presentation with iOS CallKit and Android full-screen notifications|docs/plugins/incoming-call-kit/**
 Plugin Install Referrer|install attribution plugin for Google Play Install Referrer and Apple AdServices|docs/plugins/install-referrer/**
 Plugin Intent Launcher|Android intent launcher plugin|docs/plugins/intent-launcher/**
+Plugin system surfaces|Siri, Shortcuts, WidgetKit, Live Activities, and Android intents versus expo-app-intents|docs/plugins/siri-shortcuts-widgets-and-intents.mdx
 Plugin Intercom|Intercom customer messaging and support plugin for native in-app chat|docs/plugins/intercom/**
 Plugin Is Root|root/jailbreak detection plugin|docs/plugins/is-root/**
 Plugin IVS Player|Amazon IVS video player plugin|docs/plugins/ivs-player/**
