@@ -98,7 +98,7 @@ The dimensions interact. Slow validation makes developers hold more state in wor
 
 Happiness is real, but it's too vague to steer an engineering system. A team can say it's “fine” while living with slow builds, brittle environments, and unclear release rules. A happier survey score doesn't tell you whether the feedback loop is healthy or whether the team can change code without carrying a dozen unrelated concerns in their head.
 
-A better DX program combines what people feel with what the system does. That's the point of the more operational framing from [developer experience tools and measurement patterns](https://capgo.app/blog/developer-experience-tools/), where the goal is not vibes, it's actionable friction removal. If you can't tie the signal to a real workflow, you're not measuring DX, you're collecting sentiment.
+A better DX program combines what people feel with what the system does. That's the point of the more operational framing from [developer experience tools and measurement patterns](https://capgo.app/blog/developer-experience/#measuring-developer-experience-without-survey-fatigue), where the goal is not vibes, it's actionable friction removal. If you can't tie the signal to a real workflow, you're not measuring DX, you're collecting sentiment.
 
 > **Practical rule:** if the complaint can't be mapped to a build, a handoff, a test, or a release step, it's probably not specific enough to fix.
 

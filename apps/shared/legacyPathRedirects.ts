@@ -179,6 +179,7 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/das-datenschutzmanifest-von-apple-verstehen': '/blog/privacy-manifest-for-ios-apps/',
   '/blog/das-performance-monitoring-in-capacitor-einrichten': '/blog/set-up-performance-monitoring-in-capacitor/',
   '/blog/das-ultimative-handbuch-für-capacitor-ota-updates': '/blog/ultimate-guide-to-capacitor-ota-updates/',
+  '/blog/developer-experience-tools': '/blog/developer-experience/',
   '/blog/datenschutz-manifest-für-capacitor-apps-leitfaden': '/blog/privacy-manifest-for-ios-apps/',
   '/blog/datenschutzgesetze-der-bundesstaaten-fuer-mobile-apps-vergleich': '/blog/state-privacy-laws-for-mobile-apps-comparison/',
   '/blog/Der ultimative Leitfaden zur OTA-Update-Sicherheit für Capacitor-Apps': '/blog/ultimate-guide-to-ota-update-security-for-capacitor-apps/',

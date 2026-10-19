@@ -2,10 +2,15 @@ import { expect, test } from 'bun:test'
 import { isGonePath } from '../../shared/gonePaths.ts'
 
 const GONE_PATHS = [
+  '/blog/app-cohort-analysis/',
+  '/blog/app-vulnerability-scanning/',
+  '/blog/developer-productivity/',
   '/blog/enterprise-app-management/',
   '/blog/how-to-delete-icon/',
   '/blog/native-base-picker/',
   '/blog/react-native-alert/',
+  '/blog/user-adoption-metrics/',
+  '/blog/user-churn-analysis/',
   '/blog/what-is-a-micro-frontend/',
 ]
 

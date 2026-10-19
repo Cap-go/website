@@ -211,7 +211,7 @@ Isolation tests should start the plugin with only its declared capabilities. End
 
 > **Security principle:** Treat every plugin as a supply-chain component and every lifecycle transition as production code.
 
-The [application vulnerability scanning guidance](https://capgo.app/blog/app-vulnerability-scanning/) is relevant when the plugin boundary becomes part of a broader mobile or desktop security program. Plugin support creates a permanent maintenance obligation. Someone must review dependencies, patch implementations, test contract changes, and remove extensions that no longer meet the product's standards.
+The [application vulnerability scanning guidance](https://capgo.app/blog/how-ota-updates-affect-app-store-security/) is relevant when the plugin boundary becomes part of a broader mobile or desktop security program. Plugin support creates a permanent maintenance obligation. Someone must review dependencies, patch implementations, test contract changes, and remove extensions that no longer meet the product's standards.
 
 <a id="modern-shifts-in-plugin-architecture-for-ai-and-developer-tools"></a>
 ## Modern Shifts in Plugin Architecture for AI and Developer Tools

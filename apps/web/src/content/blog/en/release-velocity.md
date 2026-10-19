@@ -92,7 +92,7 @@ A release-frequency chart without failure and recovery data can reward risky bat
 | Medium | Once every six months to once a month | Track with deployment flow | Track as a stability guardrail | Track recovery speed |
 | Low | Fewer than once every six months | Track with deployment flow | Track as a stability guardrail | Track recovery speed |
 
-Do not create a benchmark for a metric you have not measured. Establish a baseline, segment native and web-layer changes, and check whether faster delivery also brings smaller batches, manageable failures, and quicker recovery. For teams building a broader view of engineering output, this [developer productivity guide](https://capgo.app/blog/developer-productivity/) offers a complementary reference.
+Do not create a benchmark for a metric you have not measured. Establish a baseline, segment native and web-layer changes, and check whether faster delivery also brings smaller batches, manageable failures, and quicker recovery. For teams building a broader view of engineering output, this [developer productivity guide](https://capgo.app/blog/developer-experience/) offers a complementary reference.
 
 <a id="binary-cadence-versus-shipped-experience-frequency"></a>
 ## Binary Cadence Versus Shipped Experience Frequency

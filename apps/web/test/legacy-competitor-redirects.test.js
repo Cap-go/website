@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test'
-import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
+import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
 import { staticLegacyRedirect } from '../src/worker/index.ts'
 
 function staticLegacyRedirectLocation(url) {
@@ -63,13 +63,14 @@ test('staticLegacyRedirect /blog/uptime-guarantee/ → /sla/', () => {
   expect(staticLegacyRedirectLocation('https://capgo.app/de/blog/uptime-guarantee/')).toBe('/de/sla/')
 })
 
+test('staticLegacyRedirect /blog/developer-experience-tools/ → /blog/developer-experience/', () => {
+  expect(staticLegacyRedirectLocation('https://capgo.app/blog/developer-experience-tools/')).toBe('/blog/developer-experience/')
+  expect(staticLegacyRedirectLocation('https://capgo.app/de/blog/developer-experience-tools/')).toBe('/de/blog/developer-experience/')
+})
+
 test('staticLegacyRedirect removed portrait orientation blog → screen orientation docs', () => {
-  expect(staticLegacyRedirectLocation('https://capgo.app/blog/what-is-a-portrait-orientation/')).toBe(
-    '/docs/plugins/screen-orientation/',
-  )
-  expect(staticLegacyRedirectLocation('https://capgo.app/de/blog/what-is-a-portrait-orientation/')).toBe(
-    '/de/docs/plugins/screen-orientation/',
-  )
+  expect(staticLegacyRedirectLocation('https://capgo.app/blog/what-is-a-portrait-orientation/')).toBe('/docs/plugins/screen-orientation/')
+  expect(staticLegacyRedirectLocation('https://capgo.app/de/blog/what-is-a-portrait-orientation/')).toBe('/de/docs/plugins/screen-orientation/')
 })
 
 test('/eas/ was never a public competitor page (no redirect)', () => {

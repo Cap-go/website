@@ -135,7 +135,7 @@ Assign one teammate to ask “why,” not “what.” That question surfaces the
 
 Reserve a weekly doc-writing hour and rotate a doc of the week. Any decision made in a meeting should produce an ADR by Friday, while the discussion is still fresh. Keep the page short enough to scan, then link to deeper implementation detail.
 
-The failure mode is discoverability. A polished page nobody can find has no operational value. Give the wiki keeper responsibility for navigation, search terms, stale-page labels, and deletion. Teams that want to connect documentation habits with broader engineering practice can use this guide to [evaluate developer productivity tools](https://capgo.app/blog/developer-productivity/).
+The failure mode is discoverability. A polished page nobody can find has no operational value. Give the wiki keeper responsibility for navigation, search terms, stale-page labels, and deletion. Teams that want to connect documentation habits with broader engineering practice can use this guide to [evaluate developer productivity tools](https://capgo.app/blog/developer-experience/).
 
 <a id="tool-patterns-and-integrations-that-actually-help"></a>
 ## Tool Patterns and Integrations That Actually Help
@@ -155,7 +155,7 @@ The integration rule is simple: **remove context switching at the moment knowled
 
 Map every tool to one of the five stages. If a tool can't be assigned to Challenge, Capture, Consolidate, Experiment, or Codify, it's decoration. This mapping is more useful than a broad tool inventory because it exposes missing ownership and duplicate storage.
 
-For mobile teams, Capgo provides a shared workspace where teams can coordinate app settings and release activity, with member roles and access controls for collaborative management. That makes it relevant when release context, auditability, and team handoffs need to stay connected to delivery work. Before adding any platform, compare it against your [developer experience tools](https://capgo.app/blog/developer-experience-tools/) and define the knowledge artifact it should produce.
+For mobile teams, Capgo provides a shared workspace where teams can coordinate app settings and release activity, with member roles and access controls for collaborative management. That makes it relevant when release context, auditability, and team handoffs need to stay connected to delivery work. Before adding any platform, compare it against your [developer experience tools](https://capgo.app/blog/developer-experience/) and define the knowledge artifact it should produce.
 
 <a id="measuring-outcomes-without-fooling-yourself"></a>
 ## Measuring Outcomes Without Fooling Yourself
