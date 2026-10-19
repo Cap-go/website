@@ -546,20 +546,29 @@ try {
           items?: Array<{ text: string; context?: string }>
         }
         capturedAiPayload = payload
-        assert(Array.isArray(payload.items), 'Translation AI request did not send items[] with context support')
-        assert(typeof payload.pagePath === 'string' && payload.pagePath.length > 0, 'Translation AI request missed pagePath')
         assert(!payload.texts, 'Translation AI request still used legacy texts[] payload')
-
-        const aboutItem = payload.items.find((item) => item.text === 'About')
-        if (aboutItem) {
-          assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
-        }
 
         const translateText = (text: string) => {
           if (text.includes('Read our guides')) return 'Leggi le guide'
           if (text.includes('Docs title')) return 'Titolo doc'
           if (text === 'About') return 'Chi siamo'
+          if (text.includes('App initialization step by step guide')) return 'App-Initialisierung Schritt-für-Schritt-Anleitung'
+          if (text.includes('Learn how to initialize an app step by step')) {
+            return 'Erfahren Sie, wie Sie eine App Schritt für Schritt mit dem neuesten Workflow initialisieren.'
+          }
           return 'IT ' + text
+        }
+
+        if (typeof payload.text === 'string') {
+          return { response: translateText(payload.text) }
+        }
+
+        assert(Array.isArray(payload.items), 'Translation AI request did not send items[] with context support')
+        assert(typeof payload.pagePath === 'string' && payload.pagePath.length > 0, 'Translation AI request missed pagePath')
+
+        const aboutItem = payload.items.find((item) => item.text === 'About')
+        if (aboutItem) {
+          assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
         }
 
         const sourceTexts = payload.items.map((item) => item.text)
@@ -661,6 +670,7 @@ try {
 <html lang="de">
   <head>
     <title>App-Initialisierung</title>
+    <meta name="description" content="Alte deutsche Beschreibung für App-Initialisierung.">
     <script type="application/ld+json" id="seo-schema-graph">{"headline":"App-Initialisierung"}</script>
   </head>
   <body>
@@ -672,7 +682,8 @@ try {
   const currentBlogHtml = `<!doctype html>
 <html lang="en">
   <head>
-    <title>App initialization</title>
+    <title>App initialization step by step guide</title>
+    <meta name="description" content="Learn how to initialize an app step by step with the latest workflow.">
     <script type="application/ld+json" id="seo-schema-graph">{"headline":"App initialization"}</script>
   </head>
   <body>
@@ -711,6 +722,9 @@ try {
   assert(staleBlogResponse.status === 200, 'A stale localized blog was not served successfully')
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'STALE', 'A stale localized blog did not report STALE')
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A stale localized blog did not sync current English scripts')
+  assert(staleBlogResponse.headers.get('X-Capgo-Translation-Meta') === 'synced', 'A stale localized blog did not sync current English meta')
+  assert(staleBlogBody.includes('App-Initialisierung Schritt-für-Schritt-Anleitung'), 'STALE localized blog did not refresh the translated title')
+  assert(staleBlogBody.includes('Erfahren Sie, wie Sie eine App Schritt für Schritt'), 'STALE localized blog did not refresh the translated meta description')
   assert(staleBlogBody.includes('App-Initialisierung Schritt für Schritt'), 'Script sync on STALE wipe translated heading')
   assert(staleBlogBody.includes('Übersetzter Anleitungstext bleibt erhalten.'), 'Script sync on STALE wipe translated paragraph')
   assert(staleBlogBody.includes('"headline":"App-Initialisierung"'), 'Script sync on STALE replaced translated JSON-LD')
