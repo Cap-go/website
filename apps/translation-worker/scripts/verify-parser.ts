@@ -242,10 +242,7 @@ assert(
 assert(__translationWorkerTest.polishTranslatedText('French', 'Évitez la attente.') === 'Évitez l\u2019attente.', 'French polish path did not apply article elision')
 assert(__translationWorkerTest.polishTranslatedText('Spanish', 'Évitez la attente.') === 'Évitez la attente.', 'Non-French polish path should leave text unchanged')
 const heroHeadlineContext = __translationWorkerTest.resolveTranslationContexts(['Capacitor Live Updates (OTA)'])[0]
-assert(
-  typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('capacitor'),
-  'Missing marketing context override for live update hero headline',
-)
+assert(typeof heroHeadlineContext === 'string' && heroHeadlineContext.toLowerCase().includes('capacitor'), 'Missing marketing context override for live update hero headline')
 
 const noTranslateHtml = `<!doctype html>
 <html lang="en">
@@ -421,15 +418,9 @@ const pendingEnglishCanonicalHtml = __translationWorkerTest.rewriteMetadataForEn
 </html>`,
   new URL('https://capgo.app/fr/docs/'),
 )
-assert(
-  pendingEnglishCanonicalHtml.includes('rel="canonical" href="https://capgo.app/docs/"'),
-  'Pending English canonical rewrite did not point at the English URL',
-)
+assert(pendingEnglishCanonicalHtml.includes('rel="canonical" href="https://capgo.app/docs/"'), 'Pending English canonical rewrite did not point at the English URL')
 assert(!pendingEnglishCanonicalHtml.includes('hreflang='), 'Pending English canonical rewrite must remove hreflang alternates')
-assert(
-  pendingEnglishCanonicalHtml.includes('property="og:url" content="https://capgo.app/docs/"'),
-  'Pending English canonical rewrite did not update og:url',
-)
+assert(pendingEnglishCanonicalHtml.includes('property="og:url" content="https://capgo.app/docs/"'), 'Pending English canonical rewrite did not update og:url')
 assert(localizedLinksHtml.includes('href="#local"'), 'Link rewrite changed same-page anchors')
 assert(localizedLinksHtml.includes('href="https://github.com/Cap-go/capgo"'), 'Link rewrite changed an external URL')
 assert(localizedLinksHtml.includes('href="mailto:hello@capgo.app"'), 'Link rewrite changed a mail link')
@@ -620,10 +611,7 @@ try {
     'A crawler translation cache miss did not report the English canonical fallback',
   )
   assert(crawlerPendingHtml.includes('Read our guides'), 'A crawler translation cache miss did not keep English source content available')
-  assert(
-    crawlerPendingHtml.includes('rel="canonical" href="https://capgo.app/docs/"'),
-    'A crawler translation cache miss did not point canonical at the English URL',
-  )
+  assert(crawlerPendingHtml.includes('rel="canonical" href="https://capgo.app/docs/"'), 'A crawler translation cache miss did not point canonical at the English URL')
   assert(!crawlerPendingHtml.includes('hreflang="fr"'), 'A crawler translation cache miss must not self-claim the localized hreflang')
   assert(translationJobs.length === 1, 'A crawler translation cache miss did not enqueue the localized document')
 
