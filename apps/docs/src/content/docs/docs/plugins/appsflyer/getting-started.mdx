@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-appsflyer
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -99,7 +99,7 @@ console.log(result);
 ## Common pitfalls
 
 - **Listeners**: remove handles when screens unmount.
-- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
 - **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview

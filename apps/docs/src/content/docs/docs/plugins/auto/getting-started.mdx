@@ -13,7 +13,7 @@ import { PackageManagers } from 'starlight-package-managers'
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -119,7 +119,7 @@ await Auto.setState({
 ## Common pitfalls
 
 - **Listeners**: remove handles when screens unmount.
-- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
 - **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 <Aside type="caution" title="Car UIs are policy controlled">
