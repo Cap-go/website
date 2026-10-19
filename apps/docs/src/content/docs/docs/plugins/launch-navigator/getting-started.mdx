@@ -32,6 +32,34 @@ bunx cap sync
 import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
 ```
 
+## Quick start
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: { app: 'google_maps' },
+});
+```
+
+## Example: let the user pick a map app
+
+```typescript
+const { apps } = await LaunchNavigator.getAvailableApps();
+// render chooser UI, then navigate with options.app set to the selection
+```
+
+## Example: geocode first
+
+Use `@capgo/capacitor-nativegeocoder` `forwardGeocode()` to turn an address into `[lat, lng]` before calling `navigate()`.
+
+## Common pitfalls
+
+- **Coordinates only**: street addresses are not accepted by `navigate()`.
+- **Web**: opens an external maps link, not an installed app.
+- **Icons**: cache with `getAppIcons()` and refresh when the user installs a new maps app.
+
 ## API Overview
 
 ### `navigate`

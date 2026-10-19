@@ -32,6 +32,69 @@ bunx cap sync
 import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 ```
 
+## Quick start
+
+Request the microphone, record, then stop and read the native file URI (or web `Blob`).
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+const mic = await CapacitorAudioRecorder.requestPermissions();
+if (mic.recordAudio !== 'granted') {
+  throw new Error('Microphone permission required');
+}
+
+await CapacitorAudioRecorder.startRecording({
+  sampleRate: 44100,
+  bitRate: 128000,
+  resetToPlaybackOnStop: true, // iOS only: restore playback-friendly audio session after stop
+});
+
+const { uri, blob, duration } = await CapacitorAudioRecorder.stopRecording();
+const clipRef = Capacitor.getPlatform() === 'web' ? blob : uri;
+console.log('Saved clip', clipRef, duration);
+```
+
+## Example: voice memo with pause
+
+```typescript
+await CapacitorAudioRecorder.startRecording();
+// user taps pause during a long note
+await CapacitorAudioRecorder.pauseRecording();
+await CapacitorAudioRecorder.resumeRecording();
+const clip = await CapacitorAudioRecorder.stopRecording();
+```
+
+`pauseRecording` is available on Android (API 24+), iOS, and Web.
+
+## Example: live level meter
+
+Poll `getCurrentAmplitude()` on a timer (about 60 to 100 ms) while status is `RECORDING`. Values are normalized `0` to `1`, but the underlying signal differs by platform (peak on Android, average power on iOS, RMS on Web). Apply a small per platform scale if you need visual parity.
+
+```typescript
+const tick = async () => {
+  const { status } = await CapacitorAudioRecorder.getRecordingStatus();
+  if (status !== 'RECORDING') return;
+  const { value } = await CapacitorAudioRecorder.getCurrentAmplitude();
+  updateMeterUi(value);
+};
+```
+
+## Example: discard a take
+
+```typescript
+await CapacitorAudioRecorder.startRecording();
+await CapacitorAudioRecorder.cancelRecording(); // no file persisted
+```
+
+## Common pitfalls
+
+- **Web vs native return shape**: Android and iOS return `uri` from `stopRecording`. Web returns `blob` (and may omit `uri`).
+- **Quiet playback on iOS after recording**: set `resetToPlaybackOnStop: true` in `startRecording` if users play back the clip inside the same session.
+- **Background capture**: the plugin does not enable background audio by itself. On iOS, add the Audio background mode when you need recording while locked.
+- **Do not spam amplitude**: each `getCurrentAmplitude` call crosses the bridge. Use a UI interval, not a tight loop.
+
 ## API Overview
 
 ### `startRecording`
