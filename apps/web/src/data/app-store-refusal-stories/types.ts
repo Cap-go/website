@@ -43,7 +43,7 @@ export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string
   'ai-data-sharing': 'AI data sharing',
 }
 
-export type AppleRejectionStoryPlatform = 'iOS' | 'Apple Developer Program'
+export type AppleRejectionStoryPlatform = 'iOS' | 'Apple Developer Program' | 'Google Play'
 
 export interface AppleRejectionStory {
   id: string

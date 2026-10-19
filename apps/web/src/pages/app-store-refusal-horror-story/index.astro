@@ -4,21 +4,21 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import {
   appleRejectionStories,
   appleRejectionStoryBatches,
-} from '@/data/apple-rejection-stories'
-import AppleRejectionStoriesListing from '@/components/apple-rejection-stories/AppleRejectionStoriesListing.astro'
+} from '@/data/app-store-refusal-stories'
+import AppleRejectionStoriesListing from '@/components/app-store-refusal-stories/AppleRejectionStoriesListing.astro'
 import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig.public
 const locale = Astro.locals.locale
 const storyCount = appleRejectionStories.length
-const title = 'Apple App Store Rejection Stories | Capgo'
+const title = 'App Store Refusal Horror Story | Capgo'
 const description =
-  'Anonymized real App Store rejection stories tagged by guideline (4.3, 2.1, metadata, review delays, objectionable content, and more). Lessons only, no names or source links.'
+  'Anonymized real App Store and Google Play rejection stories tagged by guideline (4.3, 2.1, metadata, review delays, objectionable content, and more). Lessons only, no names or source links.'
 const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
 
 const itemList = createItemListLdJson(config, {
   url: pageUrl,
-  name: 'Apple App Store rejection stories',
+  name: 'App store refusal horror stories',
   description,
   items: appleRejectionStories.map((story) => ({
     name: story.title,
@@ -38,15 +38,14 @@ const content = {
   canonical: pageUrl,
   url: pageUrl,
   image: `${config.baseUrl}/capgo_social.png`,
-  keywords: 'apple app store rejection, app store review, guideline 4.3, guideline 2.1, app review metadata, app store review time',
+  keywords: 'app store rejection, app review, google play rejection, apple app store refusal, capgo',
   ldJSON: createLdJsonGraph(config, webPage, {
     includeOrganization: true,
     includeBreadcrumbs: true,
     breadcrumbs: [
       { name: 'Home', url: getRelativeLocaleUrl(locale, '/') },
-      { name: 'Apple rejection stories', url: getRelativeLocaleUrl(locale, '/apple-rejection-stories/') },
+      { name: 'App store refusal stories', url: getRelativeLocaleUrl(locale, '/app-store-refusal-horror-story/') },
     ],
-    additionalEntities: [itemList],
   }),
 }
 
