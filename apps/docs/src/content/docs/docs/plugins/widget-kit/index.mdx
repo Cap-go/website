@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "WidgetKit and Live Activities for Capacitor apps, with SVG-driven templates or full-native widget state sync."
+  tagline: "Build WidgetKit and Live Activity surfaces from Capacitor with SVG frames, timers, action hotspots, or full-native widget state sync"
   actions:
     - text: Get started
       link: /docs/plugins/widget-kit/getting-started/
@@ -22,12 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-widget-kit` gives a Capacitor app two ways to drive widgets and Live Activities:
+Build WidgetKit and Live Activity surfaces from Capacitor with SVG frames, timers, action hotspots, or full-native widget state sync
 
-- SVG template activities: define WidgetKit surfaces as SVG, switch named frames from taps, run pause/play timers, mutate JSON state, and collect action events in the app.
-- Full-native widget sessions: keep the widget UI fully in Swift/Kotlin/Java while Capacitor owns shared JSON state and app-to-widget or widget-to-app messages.
+Start with `areActivitiesSupported()` and the other core methods listed below.
 
-Use SVG templates when your widget can be rendered from resolved SVG strings. Use full-native sessions when the widget needs a custom native UI but still has to start, stop, sync state, or ask the app to complete async work.
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Demo
 
