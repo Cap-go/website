@@ -3808,7 +3808,15 @@ export default {
     }
 
     if (shouldBypassTranslation(requestUrl.pathname)) {
-      return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
+      const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
+      if (isRedirect(originResponse)) {
+        return trackAICrawler(
+          request,
+          withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', request.method === 'HEAD'),
+          ctx,
+        )
+      }
+      return trackAICrawler(request, originResponse, ctx)
     }
 
     if (isGonePath(requestUrl.pathname)) {

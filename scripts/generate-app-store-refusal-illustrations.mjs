@@ -170,7 +170,7 @@ const maxVariants = {
   '4-2-6': 1,
   '3-1-2': 1,
   '5-1-2': 1,
-  metadata: 1,
+  metadata: 6,
   'login-requirement': 1,
   login: 1,
   'objectionable-content': 1,
