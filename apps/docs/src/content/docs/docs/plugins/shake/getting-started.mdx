@@ -32,6 +32,29 @@ bunx cap sync
 import { CapacitorShake } from '@capgo/capacitor-shake';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorShake } from '@capgo/capacitor-shake';
+
+const listener = await CapacitorShake.addListener('shake', () => {
+  openFeedbackSheet();
+});
+
+// on logout or route leave
+await listener.remove();
+```
+
+## Example: throttle in app code
+
+Shake can fire in bursts. Debounce before opening modals or calling APIs.
+
+## Common pitfalls
+
+- **Web**: there is no shake API in mobile browsers through this plugin.
+- **Listener cleanup**: remove listeners when leaving the screen to avoid duplicate handlers.
+- **Android vs iOS**: sensitivity differs, test on real hardware.
+
 ## API Overview
 
 ### `addListener`

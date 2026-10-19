@@ -32,6 +32,27 @@ bunx cap sync
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+await CapacitorBarometer.startMeasurementUpdates();
+await CapacitorBarometer.addListener('measurement', (event) => {
+  console.log('hPa', event.pressure);
+});
+```
+
+## Example: single reading
+
+Call `startMeasurementUpdates()` first. `getMeasurement()` returns `0` until the first sensor event arrives.
+
+## Common pitfalls
+
+- **Web**: treat as unavailable, `isAvailable()` is false.
+- **iOS relative altitude**: only meaningful while updates run.
+- **Battery**: call `stopMeasurementUpdates()` when done.
+
 ## API Overview
 
 ### `getMeasurement`
@@ -60,7 +81,7 @@ console.log(result);
 
 Begin streaming barometer updates to the JavaScript layer.
 
-Call  with the `measurement` event to receive the updates.
+Call `addListener` with the `measurement` event to receive the updates.
 
 ```typescript
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
@@ -70,7 +91,7 @@ await CapacitorBarometer.startMeasurementUpdates();
 
 ### `stopMeasurementUpdates`
 
-Stop the continuous updates started via .
+Stop the continuous updates started via `startMeasurementUpdates`.
 
 ```typescript
 import { CapacitorBarometer } from '@capgo/capacitor-barometer';
@@ -109,7 +130,7 @@ export type GetMeasurementResult = Measurement;
 ```
 
 ### `IsAvailableResult`
-Result returned by .
+Result returned by `isAvailable`.
 ```typescript
 export interface IsAvailableResult {
   /**
@@ -122,7 +143,7 @@ export interface IsAvailableResult {
 ```
 
 ### `PermissionStatus`
-Permission information returned by and .
+Permission information returned by `checkPermissions` and `requestPermissions`.
 ```typescript
 export interface PermissionStatus {
   /**
@@ -135,7 +156,7 @@ export interface PermissionStatus {
 ```
 
 ### `MeasurementEvent`
-Event payload emitted when is active.
+Event payload emitted when `startMeasurementUpdates` is active.
 ```typescript
 export type MeasurementEvent = Measurement;
 ```
