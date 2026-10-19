@@ -17,6 +17,7 @@ Plugin Android SMS Retriever|Android SMS Retriever and Phone Number Hint plugin 
 Plugin AppInsights|Microsoft Application Insights analytics plugin|docs/plugins/appinsights/**
 Plugin AppsFlyer|AppsFlyer mobile attribution, analytics, and deep linking plugin|docs/plugins/appsflyer/**
 Plugin App Attest|cross-platform app attestation plugin using Apple App Attest and Google Play Integrity Standard|docs/plugins/app-attest/**
+Plugin App Intents|Siri, Shortcuts, Spotlight, quick actions, and App Intents entity catalogs for Capacitor on iOS|docs/plugins/app-intents/**
 Plugin App Tracking Transparency|iOS app tracking transparency permission plugin|docs/plugins/app-tracking-transparency/**
 Plugin Audio Recorder|audio recording plugin for capturing microphone input|docs/plugins/audio-recorder/**
 Plugin Audio Session|iOS audio session configuration plugin|docs/plugins/audiosession/**
@@ -60,6 +61,7 @@ Plugin In App Review|in-app review prompt plugin for app store ratings|docs/plug
 Plugin Incoming Call Kit|native incoming call presentation with iOS CallKit and Android full-screen notifications|docs/plugins/incoming-call-kit/**
 Plugin Install Referrer|install attribution plugin for Google Play Install Referrer and Apple AdServices|docs/plugins/install-referrer/**
 Plugin Intent Launcher|Android intent launcher plugin|docs/plugins/intent-launcher/**
+Plugin system surfaces|Siri, Shortcuts, WidgetKit, Live Activities, and Android intents versus expo-app-intents|docs/plugins/siri-shortcuts-widgets-and-intents.mdx
 Plugin Intercom|Intercom customer messaging and support plugin for native in-app chat|docs/plugins/intercom/**
 Plugin Is Root|root/jailbreak detection plugin|docs/plugins/is-root/**
 Plugin IVS Player|Amazon IVS video player plugin|docs/plugins/ivs-player/**
