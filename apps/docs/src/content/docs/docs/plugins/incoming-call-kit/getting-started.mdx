@@ -13,7 +13,7 @@ import { Steps } from '@astrojs/starlight/components';
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -34,6 +34,42 @@ If you prefer Manual Setup, install the plugin by running the following commands
 3. **Choose your ring source**
    Decide whether the incoming-call event comes from your backend, an SDK such as Twilio or Stream, or a native push path such as FCM or PushKit.
 </Steps>
+
+## Quick start
+
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+
+const result = await IncomingCallKit.showIncomingCall({
+  callId: 'call-id-123',
+  callerName: 'caller',
+});
+console.log(result);
+```
+
+## Example: endCall
+
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+
+const result = await IncomingCallKit.endCall({ callId: 'call-id-123' });
+console.log(result);
+```
+
+## Example: endAllCalls
+
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+
+const result = await IncomingCallKit.endAllCalls();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## How the integration fits together
 
