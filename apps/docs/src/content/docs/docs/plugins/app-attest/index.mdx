@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Unified cross-platform attestation plugin for Capacitor."
+  tagline: "Device attestation with Apple App Attest, Google Play Integrity, and optional Android Widevine signals."
   actions:
     - text: Get started
       link: /docs/plugins/app-attest/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Unified cross-platform attestation plugin for Capacitor.
+Prove that requests come from your genuine app install before trusting sensitive API calls. `prepare()` and `createAttestation()` cover Apple App Attest flows, while Play Integrity Standard and optional Widevine fingerprint methods cover Android. Store key IDs securely with the built-in helpers.
+
+Typical fits: fraud prevention, high value transactions, and anti tamper checks on login or payout endpoints.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | App Attest keys, assertions, DeviceCheck token helper |
+| Android | Yes | Play Integrity Standard, optional Widevine fingerprint |
+| Web | Fallback | Web attestation format when native APIs are unavailable |
 
 ## Core Capabilities
 

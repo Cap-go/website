@@ -18,6 +18,39 @@ bunx cap sync
 import { StripeIdentity } from '@capgo/capacitor-stripe-identity';
 ```
 
+## Quick start
+
+```typescript
+import { StripeIdentity } from '@capgo/capacitor-stripe-identity';
+
+await StripeIdentity.initialize({ publishableKey: 'publishable-key-123' });
+```
+
+## Example: create
+
+```typescript
+import { StripeIdentity } from '@capgo/capacitor-stripe-identity';
+
+await StripeIdentity.create({
+  verificationId: 'verification-id-123',
+  ephemeralKeySecret: 'ephemeral-key-secret',
+});
+```
+
+## Example: present
+
+```typescript
+import { StripeIdentity } from '@capgo/capacitor-stripe-identity';
+
+await StripeIdentity.present();
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
 ## Verification flow
 
 Create a VerificationSession on your backend, then pass the IDs to the plugin:

@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Build Silk-style sheets, drawers, dialogs, toasts, lightboxes, cards, and page overlays in any Capacitor frontend.
+  tagline: Framework agnostic bottom sheets, drawers, dialogs, and overlays tuned for Capacitor WebViews.
   actions:
     - text: Get started
       link: /docs/plugins/sheets/getting-started/
@@ -36,6 +36,14 @@ import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
     Author detents with `em`, `rem`, viewport units, `calc()`, and CSS variables while the default sizing stays `em` based.
   </Card>
 </CardGrid>
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Web layer | Custom elements inside WKWebView |
+| Android | Web layer | Custom elements inside Android WebView |
+| Web | Yes | Same components for Capacitor web builds |
 
 ## When To Use It
 

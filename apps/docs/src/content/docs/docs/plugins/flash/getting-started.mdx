@@ -32,6 +32,33 @@ bunx cap sync
 import { CapacitorFlash } from '@capgo/capacitor-flash';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+const { value: available } = await CapacitorFlash.isAvailable();
+if (!available) {
+  toast('No flashlight on this device');
+  return;
+}
+await CapacitorFlash.switchOn({ intensity: 0.5 });
+```
+
+## Example: QR scanner companion
+
+```typescript
+await CapacitorFlash.switchOn({ intensity: 1 });
+const code = await scanFrame();
+await CapacitorFlash.switchOff();
+```
+
+## Common pitfalls
+
+- **Turn off in finally**: leaving the torch on drains battery and blocks other camera users.
+- **Web permissions**: mobile browsers require camera permission before torch access.
+- **Intensity support**: values above hardware max are clamped, verify with `isSwitchedOn()`.
+
 ## API Overview
 
 ### `isAvailable`

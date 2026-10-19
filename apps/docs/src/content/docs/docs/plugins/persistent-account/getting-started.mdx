@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,38 @@ bunx cap sync
 ```typescript
 import { CapacitorPersistentAccount } from '@capgo/capacitor-persistent-account';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorPersistentAccount } from '@capgo/capacitor-persistent-account';
+
+const result = await CapacitorPersistentAccount.readAccount();
+if (result.data) {
+  console.log('Account data:', result.data);
+} else {
+  console.log('No account data found');
+}
+```
+
+## Example: saveAccount
+
+```typescript
+import { CapacitorPersistentAccount } from '@capgo/capacitor-persistent-account';
+
+await CapacitorPersistentAccount.saveAccount({
+  data: {
+    userId: '12345',
+    username: 'john.doe',
+    email: 'john@example.com'
+  }
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

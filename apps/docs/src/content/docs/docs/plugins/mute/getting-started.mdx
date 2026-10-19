@@ -32,6 +32,29 @@ bunx cap sync
 import { Mute } from '@capgo/capacitor-mute';
 ```
 
+## Quick start
+
+```typescript
+import { Mute } from '@capgo/capacitor-mute';
+
+const { value } = await Mute.isMuted();
+if (value) {
+  showVisualAlert();
+} else {
+  await playNotificationSound();
+}
+```
+
+## Example: gate sounds in a game
+
+Poll mute state when entering a level or when the user returns from Control Center, because the hardware switch can change without an app event.
+
+## Common pitfalls
+
+- **No web support**: guard Capacitor web builds with `Capacitor.getPlatform() === 'web'`.
+- **Not volume**: mute reflects ringer or hardware mute, not media volume sliders.
+- **Android modes**: vibrate only or silent modes still count as muted for alert sounds.
+
 ## API Overview
 
 ### `isMuted`
