@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-Capacitor File Compressor Plugin interface for image compression.
+`@capgo/capacitor-file-compressor` resizes and re-encodes images **on device** before upload. Control max width, height, quality, and output format (JPEG, PNG, WebP, plus HEIF on iOS). EXIF is stripped for privacy.
+
+## Platform support
+
+| Platform | Engine |
+| --- | --- |
+| iOS | ImageIO |
+| Android | `Bitmap` |
+| Web | Canvas |
 
 ## Core Capabilities
 
