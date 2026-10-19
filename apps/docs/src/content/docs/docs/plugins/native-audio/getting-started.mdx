@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-native-audio
-npx cap sync
+bun add @capgo/capacitor-native-audio
+bunx cap sync
 ```
 
 ## Import
@@ -31,6 +31,44 @@ npx cap sync
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 ```
+
+## Quick start
+
+Configure once, preload a clip, and play UI feedback with `playOnce()` for fire and forget sounds.
+
+```typescript
+import { NativeAudio } from '@capgo/capacitor-native-audio';
+
+await NativeAudio.configure({ focus: true, showNotification: false });
+await NativeAudio.playOnce({ assetPath: 'public/sounds/tap.mp3', volume: 0.8 });
+```
+
+## Example: music style session
+
+```typescript
+await NativeAudio.preload({
+  assetId: 'episode-1',
+  assetPath: 'https://cdn.example.com/episode.m3u8',
+  isUrl: true,
+});
+await NativeAudio.play({ assetId: 'episode-1' });
+await NativeAudio.addListener('currentTime', ({ assetId, time }) => updateScrubber(assetId, time));
+```
+
+## Example: release the audio session
+
+When another plugin needs exclusive audio control, stop playback and call `deinitPlugin()` to restore the previous session.
+
+```typescript
+await NativeAudio.stop({ assetId: 'episode-1' });
+await NativeAudio.deinitPlugin();
+```
+
+## Common pitfalls
+
+- **Now Playing vs mixing**: `showNotification: true` on iOS switches to a playback category that interrupts background music.
+- **Background Android**: enable `backgroundPlayback` only after you start the required foreground service and permissions from the README.
+- **Web listeners**: playback state listener events are not emitted on web; guard UI that depends on them.
 
 ## API Overview
 

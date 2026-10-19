@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Native date, time, date-time, year-month, and range pickers for Capacitor apps, with a maintained Web fallback."
+  tagline: "Present native date, time, range, and year month pickers on iOS, Android, and web."
   actions:
     - text: Get started
       link: /docs/plugins/date-picker/getting-started/
@@ -22,9 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-date-picker` gives Capacitor apps a native picker API for dates, times, date-time values, year-month values, and date ranges. It uses `UIDatePicker` on iOS, platform dialogs on Android, and native browser inputs on Web.
+`present()` shows the platform picker for date, time, or combined modes with min, max, and formatting options. `presentRange()` handles booking style start and end selection. Customize iOS wheel or inline styles and Android Material dialogs from one TypeScript API.
 
-This is Capgo's maintained alternative to `@capacitor-community/date-picker`. The difference is maintenance speed: we listen to community reports, fix issues fast, and ship updates instead of leaving long-standing GitHub issues open.
+Typical fits: travel booking, scheduling forms, birth date capture, and filters that need an accessible native control.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | UIDatePicker styles including wheels and inline |
+| Android | Yes | Material date and time pickers |
+| Web | Yes | Fallback picker implementation in the plugin |
 
 ## Demo
 

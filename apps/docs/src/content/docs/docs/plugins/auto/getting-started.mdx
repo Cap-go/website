@@ -76,6 +76,52 @@ If you prefer Manual Setup, install the plugin by running the following commands
    ```
 </Steps>
 
+## Quick start
+
+```typescript
+import { Auto } from '@capgo/capacitor-auto';
+
+const result = await Auto.isAvailable();
+console.log(result);
+```
+
+## Example: setRootTemplate
+
+```typescript
+import { Auto } from '@capgo/capacitor-auto';
+
+await Auto.setRootTemplate({
+  title: 'Hello from Capacitor',
+  sections: [
+    {
+      items: [
+        {
+          id: 'id-123',
+          title: 'Hello from Capacitor',
+        },
+      ],
+    },
+  ],
+});
+```
+
+## Example: setState
+
+```typescript
+import { Auto } from '@capgo/capacitor-auto';
+
+await Auto.setState({
+  key: 'key-123',
+  value: {},
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
 <Aside type="caution" title="Car UIs are policy controlled">
 CarPlay and Android Auto do not allow arbitrary WebView mirroring. Keep car actions short, driver-safe, and aligned with the app category approved by Apple or Google.
 </Aside>

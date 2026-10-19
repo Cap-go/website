@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,52 @@ bunx cap sync
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
 ```
+
+## Quick start
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const { simCards } = await Sim.getSimCards();
+simCards.forEach((sim, index) => {
+  console.log(`SIM ${index + 1}:`);
+  console.log(`  Carrier: ${sim.carrierName}`);
+  console.log(`  Country: ${sim.isoCountryCode}`);
+  console.log(`  MCC: ${sim.mobileCountryCode}`);
+  console.log(`  MNC: ${sim.mobileNetworkCode}`);
+});
+```
+
+## Example: checkPermissions
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const status = await Sim.checkPermissions();
+if (status.readSimCard === 'granted') {
+  console.log('Permission granted');
+} else {
+  console.log('Permission not granted');
+}
+```
+
+## Example: requestPermissions
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const status = await Sim.requestPermissions();
+if (status.readSimCard === 'granted') {
+  // Now you can call getSimCards()
+  const simCards = await Sim.getSimCards();
+}
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

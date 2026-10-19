@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin for native forward and reverse geocoding."
+  tagline: "Forward and reverse geocode with native iOS and Android APIs, plus Google Geocoding on web."
   actions:
     - text: Get started
       link: /docs/plugins/nativegeocoder/getting-started/
@@ -22,9 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor plugin for native forward and reverse geocoding.
+Convert GPS coordinates into postal addresses for display, or turn user typed addresses into map pins. Cap results with `maxResults`, honor locale preferences on native platforms, and supply a Google API key for web forward and reverse lookups.
 
-<span title="Renamed from @capgo/nativegeocoder to @capgo/capacitor-nativegeocoder.">Package name changed.</span>
+Typical fits: delivery apps, store locators, check in flows, and autocomplete backends that need structured address components.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Core Location geocoder |
+| Android | Yes | Android `Geocoder` |
+| Web | Yes | Google Geocoding API with `apiKey` |
 
 ## Core Capabilities
 
