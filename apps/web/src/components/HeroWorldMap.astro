@@ -4,7 +4,11 @@ import { capgoRegions, worldMapSize } from '@/config/worldMap'
 const { width, height } = worldMapSize
 ---
 
-<div class="hero-map pointer-events-none absolute inset-x-0 top-6 flex justify-center select-none sm:top-10" aria-hidden="true" data-hero-map>
+<div
+  class="hero-map pointer-events-none absolute inset-x-0 top-6 flex justify-center select-none sm:top-10 md:top-[calc(50%-11rem)] md:-translate-y-1/2"
+  aria-hidden="true"
+  data-hero-map
+>
   <div class="hero-map-canvas relative" style={`aspect-ratio: ${width} / ${height}`}>
     <!-- Static raster keeps LCP fast; the canvas takes over once the dot data is parsed. -->
     <img src="/world-dots.webp" alt="" width="1680" height="855" decoding="async" fetchpriority="high" class="map-raster absolute inset-0 h-full w-full opacity-[0.14]" />
@@ -625,7 +629,7 @@ const { width, height } = worldMapSize
 <style>
   .hero-map-canvas {
     flex: none;
-    width: min(1180px, 150vw);
+    width: min(max(1180px, 130svh), 150vw, 1800px);
     mask-image: radial-gradient(ellipse 60% 62% at 50% 48%, #000 45%, transparent 100%);
   }
   .map-raster,
