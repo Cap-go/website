@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-firebase-performance
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,38 @@ bunx cap sync
 ```typescript
 import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 ```
+
+## Quick start
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.startTrace({ traceName: 'trace' });
+```
+
+## Example: stopTrace
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.stopTrace({ traceName: 'trace' });
+```
+
+## Example: incrementMetric
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.incrementMetric({
+  traceName: 'trace',
+  metricName: 'metric',
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

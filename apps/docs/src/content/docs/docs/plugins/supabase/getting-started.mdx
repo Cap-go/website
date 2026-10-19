@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -22,9 +22,50 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-supabase
-npx cap sync
+bun add @capgo/capacitor-supabase
+bunx cap sync
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorSupabase } from '@capgo/capacitor-supabase';
+
+await CapacitorSupabase.initialize({
+  supabaseUrl: 'https://xyzcompany.supabase.co',
+  supabaseKey: 'your-anon-key'
+});
+```
+
+## Example: signInWithPassword
+
+```typescript
+import { CapacitorSupabase } from '@capgo/capacitor-supabase';
+
+const { session, user } = await CapacitorSupabase.signInWithPassword({
+  email: 'user@example.com',
+  password: 'password123'
+});
+console.log('JWT:', session?.accessToken);
+```
+
+## Example: signUp
+
+```typescript
+import { CapacitorSupabase } from '@capgo/capacitor-supabase';
+
+const { session, user } = await CapacitorSupabase.signUp({
+  email: 'newuser@example.com',
+  password: 'password123',
+  data: { name: 'John Doe' }
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Android Minimum SDK
 

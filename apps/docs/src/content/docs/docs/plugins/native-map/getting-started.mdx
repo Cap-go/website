@@ -34,6 +34,19 @@ Requires **Capacitor 8+**. The plugin major version follows Capacitor (package *
 import { NativeMap } from '@capgo/capacitor-native-map';
 ```
 
+## Quick start
+
+```typescript
+import { NativeMap } from '@capgo/capacitor-native-map';
+await NativeMap.create({ id: 'map', element: document.getElementById('map')!, config: { center: { lat: 0, lng: 0 }, zoom: 10 } });
+```
+
+## Common pitfalls
+
+- Configure Google Maps API keys on Android and web.
+- Call updateLayout when the container resizes.
+- Destroy maps when leaving screens.
+
 ## Platform setup
 
 | Platform | Map engine | API key |
