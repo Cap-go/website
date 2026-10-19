@@ -32,6 +32,33 @@ bunx cap sync
 import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
 ```
 
+## Quick start
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+await SpeechSynthesis.speak({
+  text: 'Gate B12 is boarding.',
+  language: 'en-US',
+  rate: 1.0,
+});
+```
+
+## Example: export audio on native
+
+```typescript
+const { uri } = await SpeechSynthesis.synthesizeToFile({
+  text: lessonScript,
+  language: 'es-ES',
+});
+```
+
+## Common pitfalls
+
+- **iOS initialize**: call `initialize()` early on iOS to reduce first speak latency.
+- **Audio session**: use `activateAudioSession()` when speech must duck or mix with other audio.
+- **Web voices**: voice lists differ per browser, always fall back to default voice.
+
 ## API Overview
 
 ### `speak`

@@ -32,6 +32,33 @@ npx cap sync
 import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 ```
 
+## Quick start
+
+```typescript
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+const { addresses } = await NativeGeocoder.reverseGeocode({
+  latitude: 48.8566,
+  longitude: 2.3522,
+  maxResults: 1,
+});
+```
+
+## Example: forward geocode an address
+
+```typescript
+const { addresses } = await NativeGeocoder.forwardGeocode({
+  address: '1 Infinite Loop, Cupertino, CA',
+  maxResults: 3,
+});
+```
+
+## Common pitfalls
+
+- **Web API key**: reverse and forward geocoding on web need a Google Geocoding API key in options.
+- **Locale**: set `useLocale` or `defaultLocale` when displaying addresses internationally.
+- **Ambiguous addresses**: raise `maxResults` and let users pick among matches.
+
 ## API Overview
 
 ### `reverseGeocode`

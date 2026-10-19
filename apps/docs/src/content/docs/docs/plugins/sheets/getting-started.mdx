@@ -27,7 +27,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 1. **Install the package**
 
    ```bash
-   npm install @capgo/capacitor-sheets
+   bun add @capgo/capacitor-sheets
    ```
 
 2. **Register the web components**
@@ -72,8 +72,14 @@ If you prefer Manual Setup, install the plugin by running the following commands
 </Steps>
 
 <Aside type="note">
-  There is no native plugin registration step. Run `npx cap sync` only as part of your normal Capacitor workflow when you need to sync web assets or native project changes.
+  There is no native plugin registration step. Run `bunx cap sync` only as part of your normal Capacitor workflow when you need to sync web assets or native project changes.
 </Aside>
+
+## Common pitfalls
+
+- **Register components**: import `@capgo/capacitor-sheets` once at bootstrap or elements will not upgrade.
+- **Viewport fit**: missing `viewport-fit=cover` breaks safe area padding on notched phones.
+- **Keyboard**: enable the documented focus scroll prevention when inputs sit inside bottom sheets.
 
 ## Capacitor Safe Areas
 

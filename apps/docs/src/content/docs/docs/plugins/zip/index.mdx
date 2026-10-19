@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor Zip Plugin for compressing and extracting zip archives."
+  tagline: "Zip and unzip files natively on iOS and Android, with progress events and Android AES archives."
   actions:
     - text: Get started
       link: /docs/plugins/zip/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor Zip Plugin for compressing and extracting zip archives.
+Compress folders for export, unpack downloaded updates, and listen to `progress` events during long archives. Android supports password protected AES zip via zip4j. iOS uses ZIPFoundation. Web supports `unzip()` with per file downloads.
+
+Remember that `zip()` is not available on web, only `unzip()`.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | ZIPFoundation, zip and unzip |
+| Android | Yes | zip4j, AES password support |
+| Web | Partial | Unzip only, files download individually |
 
 ## Core Capabilities
 
