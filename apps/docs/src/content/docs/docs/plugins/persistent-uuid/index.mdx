@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Persistent app UUID for Capacitor."
+  tagline: "Generate and persist one app-scoped UUID across reinstalls, app updates, and OS updates"
   actions:
     - text: Get started
       link: /docs/plugins/persistent-uuid/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-The Persistent UUID plugin creates a random RFC 4122 UUID once and stores it with native persistence. Use it when your app needs a stable, app-scoped identifier that can survive app reinstall flows, Android Studio reinstall cycles, app updates, and device OS updates.
+Generate and persist one app-scoped UUID across reinstalls, app updates, and OS updates
+
+Start with `getId()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 
