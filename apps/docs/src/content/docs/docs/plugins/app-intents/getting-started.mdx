@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -19,11 +19,11 @@ Then use the following prompt:
 Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-app-intents` plugin in my project.
 ```
 
-If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+For a manual setup, install the package and sync the native projects:
 
 ```bash
-bun add @capgo/capacitor-app-intents
-bunx cap sync
+npm install @capgo/capacitor-app-intents
+npx cap sync
 ```
 
 ## Import
