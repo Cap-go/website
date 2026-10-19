@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-19T07:15:24.455Z
-updated_at: 2026-10-19T07:15:26.824Z
+updated_at: 2026-10-19T07:17:55.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/67c03a1f-73be-4348-8388-5a4256585a24/what-is-the-ota-update-mobile-update.jpg'
 head_image_alt: What Is the OTA Update and How Mobile Teams Use It
 keywords: 'OTA update, mobile updates, CapacitorJS, live updates, app deployment'
