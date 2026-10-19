@@ -18,6 +18,39 @@ bunx cap sync
 import { MockLocationDetector } from '@capgo/capacitor-mock-location-detector';
 ```
 
+## Quick start
+
+```typescript
+import { MockLocationDetector } from '@capgo/capacitor-mock-location-detector';
+
+const result = await MockLocationDetector.getCapabilities();
+console.log(result);
+```
+
+## Example: analyze
+
+```typescript
+import { MockLocationDetector } from '@capgo/capacitor-mock-location-detector';
+
+const result = await MockLocationDetector.analyze();
+console.log(result);
+```
+
+## Example: runCheck
+
+```typescript
+import { MockLocationDetector } from '@capgo/capacitor-mock-location-detector';
+
+const result = await MockLocationDetector.runCheck({ check: 'system_mock_flag' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
 ## Recommended Flow
 
 ```typescript

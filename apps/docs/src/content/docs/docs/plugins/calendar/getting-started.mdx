@@ -22,9 +22,39 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-calendar
-npx cap sync
+bun add @capgo/capacitor-calendar
+bunx cap sync
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorCalendar } from '@capgo/capacitor-calendar';
+
+await CapacitorCalendar.requestFullCalendarAccess();
+await CapacitorCalendar.createEvent({
+  title: 'Site visit',
+  startDate: Date.now(),
+  endDate: Date.now() + 60 * 60 * 1000,
+  location: 'Warehouse 4',
+});
+```
+
+## Example: system editor flow
+
+```typescript
+await CapacitorCalendar.createEventWithPrompt({
+  title: 'Team sync',
+  startDate: Date.now() + 86400000,
+  endDate: Date.now() + 90000000,
+});
+```
+
+## Common pitfalls
+
+- **iOS access levels**: pick read only, write only, or full access helpers that match your feature, do not over request.
+- **Reminders are iOS only**: guard Reminders APIs when `Capacitor.getPlatform() === 'ios'`.
+- **Time zones**: pass explicit offsets or UTC milliseconds consistent with your backend.
 
 ## iOS Setup
 

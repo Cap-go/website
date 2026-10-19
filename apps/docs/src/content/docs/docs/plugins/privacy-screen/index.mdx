@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor API for protecting app content from the app switcher preview."
+  tagline: "Block Android screenshots and hide sensitive UI in the iOS app switcher snapshot."
   actions:
     - text: Get started
       link: /docs/plugins/privacy-screen/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor API for protecting app content from the app switcher preview.
+Enable privacy protection by default so support PINs, health data, and internal dashboards do not appear in screenshots, screen recordings, or the iOS task switcher preview. Temporarily `disable()` only for flows that must be capturable, then `enable()` again.
+
+Android can apply secure window flags and dim overlays. iOS obscures content during app switcher snapshots. Web keeps an in memory flag for API parity only.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | App switcher snapshot protection |
+| Android | Yes | Secure surface, screenshot and recording blocking options |
+| Web | API parity | In memory enabled flag only |
 
 ## Core Capabilities
 

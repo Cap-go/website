@@ -36,6 +36,37 @@ If you prefer Manual Setup, install the plugin by running the following commands
    - Complete [Android setup](/docs/plugins/app-attest/android/) for Play Integrity Standard and backend verification flow.
 </Steps>
 
+## Quick start
+
+```typescript
+import { AppAttest } from '@capgo/capacitor-app-attest';
+
+const support = await AppAttest.isSupported();
+if (!support.isSupported) throw new Error('Attestation unavailable');
+
+const prepared = await AppAttest.prepare();
+const attestation = await AppAttest.createAttestation({
+  keyId: prepared.keyId,
+  challenge: serverNonce,
+});
+await sendAttestationToBackend(attestation);
+```
+
+## Example: assert an authenticated request
+
+```typescript
+const assertion = await AppAttest.createAssertion({
+  keyId: storedKeyId,
+  payload: requestHash,
+});
+```
+
+## Common pitfalls
+
+- **Backend verification required**: never trust attestation blobs on device only, validate on your server.
+- **Play Integrity project number**: Android Standard API needs the Google Cloud project number from the README.
+- **Key storage**: use `storeKeyId()` and clear on logout to avoid stale keys.
+
 ## Why use this plugin
 
 This plugin provides one cross-platform API while keeping native platform security:
