@@ -28,14 +28,21 @@ bunx cap sync android
 
 ## Quick start
 
+Listen for the one-time SMS, extract the OTP, then start the retriever before the user requests a code.
+
 ```typescript
 import { AndroidSmsRetriever } from '@capgo/capacitor-android-sms-retriever';
 
-await AndroidSmsRetriever.addListener('smsReceived', ({ message }) => {
+const smsListener = await AndroidSmsRetriever.addListener('smsReceived', ({ message }) => {
   const code = message.match(/\b\d{6}\b/)?.[0];
   if (code) submitCode(code);
 });
+
 await AndroidSmsRetriever.startWatch();
+
+// When the flow completes:
+await smsListener.remove();
+await AndroidSmsRetriever.stopWatch();
 ```
 
 ## Common pitfalls

@@ -34,12 +34,17 @@ import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
 
 ## Quick start
 
+Register a `shareReceived` listener before routing users into screens that consume shared content.
+
 ```typescript
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
 
-await CapacitorShareTarget.addListener('shareReceived', (event) => {
+const shareListener = await CapacitorShareTarget.addListener('shareReceived', (event) => {
   routeSharedPayload(event.title, event.texts, event.files);
 });
+
+// When tearing down the handler:
+await shareListener.remove();
 ```
 
 ## Common pitfalls
