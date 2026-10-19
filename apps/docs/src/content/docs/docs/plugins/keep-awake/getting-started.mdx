@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,40 @@ bunx cap sync
 ```typescript
 import { KeepAwake } from '@capgo/capacitor-keep-awake';
 ```
+
+## Quick start
+
+```typescript
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
+
+await KeepAwake.keepAwake();
+console.log('Screen will stay awake');
+```
+
+## Example: allowSleep
+
+```typescript
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
+
+await KeepAwake.allowSleep();
+console.log('Screen can now dim');
+```
+
+## Example: isSupported
+
+```typescript
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
+
+const { isSupported } = await KeepAwake.isSupported();
+if (isSupported) {
+  console.log('Keep awake is supported');
+}
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

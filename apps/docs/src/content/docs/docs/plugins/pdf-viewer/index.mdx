@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Native PDF viewing on iOS (PDFKit), Android (Pdfium), and web with paths, URLs, base64, and inline mode."
+  tagline: "Embed native PDF viewing on iOS, Android, and web with paths, URLs, base64, inline mode, and password support"
   actions:
     - text: Get started
       link: /docs/plugins/pdf-viewer/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-@capgo/capacitor-pdf-viewer opens PDFs from device paths, HTTPS URLs with custom headers, or base64. You get page navigation, zoom, password-protected documents, fullscreen or inline layout, and load, error, page change, link tap, and close events.
+Embed native PDF viewing on iOS, Android, and web with paths, URLs, base64, inline mode, and password support
+
+Start with `open()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

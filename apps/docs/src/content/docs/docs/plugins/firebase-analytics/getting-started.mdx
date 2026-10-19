@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-firebase-analytics
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,40 @@ bunx cap sync
 ```typescript
 import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
 ```
+
+## Quick start
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+const result = await FirebaseAnalytics.getAppInstanceId();
+console.log(result);
+```
+
+## Example: getSessionId
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+const result = await FirebaseAnalytics.getSessionId();
+console.log(result);
+```
+
+## Example: setConsent
+
+```typescript
+import { FirebaseAnalytics, ConsentStatus, ConsentType } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setConsent({
+  type: ConsentType.AdPersonalization,
+  status: ConsentStatus.Granted,
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 
