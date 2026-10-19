@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-firebase-messaging
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,39 @@ bunx cap sync
 ```typescript
 import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
 ```
+
+## Quick start
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+const result = await FirebaseMessaging.checkPermissions();
+console.log(result);
+```
+
+## Example: requestPermissions
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+const result = await FirebaseMessaging.requestPermissions();
+console.log(result);
+```
+
+## Example: isSupported
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+const result = await FirebaseMessaging.isSupported();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

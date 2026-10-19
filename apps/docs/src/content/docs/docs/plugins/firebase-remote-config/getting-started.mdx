@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-firebase-remote-config
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,35 @@ bunx cap sync
 ```typescript
 import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
 ```
+
+## Quick start
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.activate();
+```
+
+## Example: fetchAndActivate
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.fetchAndActivate();
+```
+
+## Example: fetchConfig
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.fetchConfig();
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 
